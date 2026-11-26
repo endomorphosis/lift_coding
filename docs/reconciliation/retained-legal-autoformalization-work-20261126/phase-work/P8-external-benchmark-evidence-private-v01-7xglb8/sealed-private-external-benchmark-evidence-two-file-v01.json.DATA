@@ -1,0 +1,283 @@
+{
+  "actual_private_fixture_pytest": {
+    "green": {
+      "actual_pytest_exit": 0,
+      "error": 0,
+      "fail": 0,
+      "junit": {
+        "bytes": 2657,
+        "full9": {
+          "st_ctime_ns": "1795573478984352559",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101471",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795573384889643870",
+          "st_nlink": "1",
+          "st_size": "2657",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-evidence-private-v01-7xglb8/green/junit.xml",
+        "sha256": "4f429882af4f870cbb7337e7696587390874a39318c36002d9b7e9c74c975a57"
+      },
+      "pass": 13,
+      "skip": 0,
+      "stdout": {
+        "bytes": 898,
+        "full9": {
+          "st_ctime_ns": "1795573478986352578",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101466",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795573384889643870",
+          "st_nlink": "1",
+          "st_size": "898",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-evidence-private-v01-7xglb8/actual-green.stdout",
+        "sha256": "36140b627af93ef094c72ea6807cc8220671fb2047b51ad8382b4020f35ed6d1"
+      }
+    },
+    "red": {
+      "actual_pytest_exit": 1,
+      "error": 0,
+      "fail": 6,
+      "junit": {
+        "bytes": 7707,
+        "full9": {
+          "st_ctime_ns": "1795573478978352500",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101465",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795573361587790978",
+          "st_nlink": "1",
+          "st_size": "7707",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-evidence-private-v01-7xglb8/red/junit.xml",
+        "sha256": "dc37bc99bc2aca2802fb9494bc2707843aa79a782ee26d332a32db13f69f11b5"
+      },
+      "pass": 7,
+      "skip": 0,
+      "stdout": {
+        "bytes": 5521,
+        "full9": {
+          "st_ctime_ns": "1795573478980352519",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101460",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795573361588184310",
+          "st_nlink": "1",
+          "st_size": "5521",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-evidence-private-v01-7xglb8/actual-red.stdout",
+        "sha256": "ee081fcff7f4b26ac150a1787f2c109b23f188e257f22c3608e048edd5a216d4"
+      }
+    }
+  },
+  "apply_check_whitespace_error_passed_without_application": true,
+  "changes": [
+    "Required candidate IR absence/invalidity contributes zero and blocks that enrolled packet.",
+    "Required decompiler round trip needs an explicit observation through either supported field.",
+    "An empty external benchmark remains unaccepted with zero external-validity score."
+  ],
+  "compatibility": [
+    "Legacy candidate and round-trip aliases preserved.",
+    "Optional absent-reference semantic comparison stays unavailable; legacy numeric placeholder is not a measurement.",
+    "Remaining packet questions, external evaluation-only policies, and fixture bytes are unchanged."
+  ],
+  "current_D": {
+    "clean": true,
+    "head": "9f938e46a507322d2f35b717b0c14de7b9978a43",
+    "tree": "e053a1041e4249b869065c3a00f5be8d91ff2243"
+  },
+  "exact_retained_case_ids": [
+    [
+      "tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark",
+      "test_fixture_loads_versioned_external_expert_packets"
+    ],
+    [
+      "tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark",
+      "test_external_packets_build_external_test_manifest_and_block_training_use"
+    ],
+    [
+      "tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark",
+      "test_external_validity_report_is_separate_from_internal_canary_metrics"
+    ],
+    [
+      "tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark",
+      "test_acceptable_ambiguity_allows_expected_family_alternative"
+    ],
+    [
+      "tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark",
+      "test_missing_external_expectations_fail_packet_without_touching_canary_metrics"
+    ],
+    [
+      "tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark",
+      "test_packet_validation_rejects_training_or_poisoned_external_records"
+    ],
+    [
+      "tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark",
+      "test_reference_ir_requires_candidate_in_fixed_denominator[omitted]"
+    ],
+    [
+      "tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark",
+      "test_reference_ir_requires_candidate_in_fixed_denominator[null]"
+    ],
+    [
+      "tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark",
+      "test_reference_ir_requires_candidate_in_fixed_denominator[empty]"
+    ],
+    [
+      "tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark",
+      "test_reference_ir_requires_candidate_in_fixed_denominator[invalid]"
+    ],
+    [
+      "tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark",
+      "test_legacy_candidate_alias_and_absent_reference_keep_existing_scope"
+    ],
+    [
+      "tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark",
+      "test_required_round_trip_needs_observation"
+    ],
+    [
+      "tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark",
+      "test_empty_external_population_has_no_acceptance"
+    ]
+  ],
+  "files": [
+    {
+      "before": {
+        "bytes": 36598,
+        "full9": {
+          "st_ctime_ns": "1795573478926351988",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101446",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795573331648881472",
+          "st_nlink": "1",
+          "st_size": "36598",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-evidence-private-v01-7xglb8/benchmark-owner.before.py.DATA",
+        "sha256": "d34700a429a6fedb8c4997462f87cb0960dc236bf87db7944cd141f0face269d"
+      },
+      "before_git_blob": "a7f4498dc98e26740a49c3865bc329cd10505f66",
+      "post": {
+        "bytes": 36824,
+        "full9": {
+          "st_ctime_ns": "1795573478938352106",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101462",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795573383181839784",
+          "st_nlink": "1",
+          "st_size": "36824",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-evidence-private-v01-7xglb8/benchmark-owner.after.py.DATA",
+        "sha256": "0700a2faae901ef4e6220c35a2cc9da8bfbff2aa22436a3a3695c792c51e01c3"
+      },
+      "repo_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py"
+    },
+    {
+      "before": {
+        "bytes": 7024,
+        "full9": {
+          "st_ctime_ns": "1795573478960352323",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101445",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795573331646881452",
+          "st_nlink": "1",
+          "st_size": "7024",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-evidence-private-v01-7xglb8/benchmark-test.before.py.DATA",
+        "sha256": "542bb5cb16b571f973cf365307c2bf5e000334d956d60d7b721eff2283a76ab4"
+      },
+      "before_git_blob": "078599a90c5cf003b8252f63ba0a9f04dc81b69a",
+      "post": {
+        "bytes": 10195,
+        "full9": {
+          "st_ctime_ns": "1795573478963352352",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101448",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795573331651881503",
+          "st_nlink": "1",
+          "st_size": "10195",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-evidence-private-v01-7xglb8/benchmark-test.after.py.DATA",
+        "sha256": "3be70b613a6225762573760021a15bca4b50da43c42db3b1054a562a42693972"
+      },
+      "repo_relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py"
+    }
+  ],
+  "patch": {
+    "bytes": 5862,
+    "full9": {
+      "st_ctime_ns": "1795573478990352618",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72101468",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795573433022309145",
+      "st_nlink": "1",
+      "st_size": "5862",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-evidence-private-v01-7xglb8/exact-external-benchmark-two-file-v01.patch",
+    "sha256": "b64097fb13b58b7427e58c5490917d3b09a4c1f6975fea5b77bb25b316f47b1f"
+  },
+  "runner": {
+    "bytes": 2308,
+    "full9": {
+      "st_ctime_ns": "1795573478992352637",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72101458",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795573359817166456",
+      "st_nlink": "1",
+      "st_size": "2308",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-evidence-private-v01-7xglb8/run-benchmark-private.py.DATA",
+    "sha256": "2780fdb795bc96cb16bbdabfe4a303d6dbdd18c4a2cfb8445488ffd5c6830ab6"
+  },
+  "same_exact_fixture": {
+    "bytes": 5763,
+    "full9": {
+      "st_ctime_ns": "1795573478971352431",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72101457",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795573359815166436",
+      "st_nlink": "1",
+      "st_size": "5763",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-evidence-private-v01-7xglb8/isolated/tests/fixtures/legal_ir/external_expert_benchmark.jsonl",
+    "sha256": "fb9a76552e2b938369d93d73a2a25aa76a963101cac96fd487a246bc43c54971"
+  },
+  "schema": "private-P8-external-legal-expert-benchmark-evidence-correction/v1",
+  "scope": {
+    "Source_SDK_or_CI_qualification": false,
+    "actual_PyTorch_DuckDB_Lean_or_subprocess_run_by_tests": false,
+    "canonical_product_installed_or_published": false,
+    "no_statutory_law_acceptance_or_external_expert_identity_verified": true,
+    "proof_obligation_fields_compare_expected_identifiers_without_kernel_verification": true,
+    "training_tuning_or_model_execution": false
+  }
+}

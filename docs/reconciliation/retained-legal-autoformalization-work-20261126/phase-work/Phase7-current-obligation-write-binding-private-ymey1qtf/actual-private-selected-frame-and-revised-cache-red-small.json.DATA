@@ -1,0 +1,64 @@
+{
+  "metadata": "Current receipt successor leaves these under separate review.",
+  "model_fit": false,
+  "new_Lean_or_SQL": false,
+  "no_weights_changed": true,
+  "reported_cases": [
+    {
+      "case": "selected-frame-change-requires-current-feature-input",
+      "different_bounded_feature_input": true,
+      "guard_observation": {
+        "applied": 0,
+        "auxiliary_forwarding_probe": [],
+        "case": "selected-frame-change",
+        "expected_reason": null,
+        "expected_spy_calls": 0,
+        "full_state_after_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+        "full_state_before_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+        "passed": false,
+        "reasons": {
+          "no_bounded_learning_target": 1
+        },
+        "spy": [
+          {
+            "learning_rate": 0.05,
+            "record": "legal-ir-proof-feedback-708a875c58ff8d7d6648839f56fab50b9ed328049a5b560d276deeebad86ccbd",
+            "sample_ir_sha256": "07dcece18db524515e069deef0102d6c250d374349998849486f692197bb3b25"
+          }
+        ]
+      },
+      "passed": false,
+      "sample_digest_collision": true
+    },
+    {
+      "case": "revised-exceptions-require-current-feature-cache",
+      "changed_feature_counts": [
+        191,
+        191
+      ],
+      "cold_changed_from_orig": true,
+      "existing_cache_key_alias": true,
+      "passed": false,
+      "previous_and_current_content_sha": [
+        "4e0a44f512571db172d9a71f4e3111672f9c79179c7cfb4df81612cad8b6b177",
+        "e872a702190f7c99711d68c67cb19a4817627280414964cff5003c8582289b67"
+      ],
+      "warm_equal_to_current_cold": false,
+      "warm_equal_to_orig": true
+    }
+  ],
+  "root_selected_for_fix": false,
+  "scope": "separate actual no-fit boundary demonstration at original private candidate",
+  "sources": [
+    {
+      "bytes": 4893,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/no-fit-revised-feature-identity-v01.py",
+      "sha256": "0fcb28d6a4986aebab2a7b159a4ada99b616194e6069a465d10efa187044ae4a"
+    },
+    {
+      "bytes": 25103,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/revised-feature-red.stdout.json",
+      "sha256": "17371d85ca21b2391ca08a1ebf67b0dc748bd2cea8fbed1d54d49e98f79ecf34"
+    }
+  ]
+}

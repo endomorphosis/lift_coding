@@ -1,0 +1,41 @@
+.............FFFFFFF.                                                    [100%]
+=================================== FAILURES ===================================
+__ test_external_benchmark_rejects_ambiguous_prediction_order[accepted-first] __
+../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:265: in test_external_benchmark_rejects_ambiguous_prediction_order
+    with pytest.raises(LegalIRExternalBenchmarkError, match="duplicate prediction packet ID"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'>
+__ test_external_benchmark_rejects_ambiguous_prediction_order[accepted-last] ___
+../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:265: in test_external_benchmark_rejects_ambiguous_prediction_order
+    with pytest.raises(LegalIRExternalBenchmarkError, match="duplicate prediction packet ID"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'>
+_____ test_external_benchmark_rejects_misbound_keyed_prediction[packet_id] _____
+../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:275: in test_external_benchmark_rejects_misbound_keyed_prediction
+    with pytest.raises(LegalIRExternalBenchmarkError, match="prediction packet ID does not match"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'>
+________ test_external_benchmark_rejects_misbound_keyed_prediction[id] _________
+../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:275: in test_external_benchmark_rejects_misbound_keyed_prediction
+    with pytest.raises(LegalIRExternalBenchmarkError, match="prediction packet ID does not match"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'>
+_____ test_external_benchmark_rejects_conflicting_prediction_aliases[flat] _____
+../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:283: in test_external_benchmark_rejects_conflicting_prediction_aliases
+    with pytest.raises(LegalIRExternalBenchmarkError, match="conflicting prediction packet IDs"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'>
+___ test_external_benchmark_rejects_conflicting_prediction_aliases[sequence] ___
+../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:283: in test_external_benchmark_rejects_conflicting_prediction_aliases
+    with pytest.raises(LegalIRExternalBenchmarkError, match="conflicting prediction packet IDs"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'>
+________ test_external_benchmark_rejects_duplicate_population_identity _________
+../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:292: in test_external_benchmark_rejects_duplicate_population_identity
+    with pytest.raises(LegalIRExternalBenchmarkError, match="duplicate external benchmark packet ID"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'>
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-identity-private-v02-7s7wxq6o/red/junit.xml -
+=========================== short test summary info ============================
+FAILED ../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_ambiguous_prediction_order[accepted-first]
+FAILED ../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_ambiguous_prediction_order[accepted-last]
+FAILED ../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_misbound_keyed_prediction[packet_id]
+FAILED ../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_misbound_keyed_prediction[id]
+FAILED ../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_conflicting_prediction_aliases[flat]
+FAILED ../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_conflicting_prediction_aliases[sequence]
+FAILED ../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_duplicate_population_identity
+7 failed, 14 passed in 1.72s
+{"fixture": "fb9a76552e2b938369d93d73a2a25aa76a963101cac96fd487a246bc43c54971", "guard_events": [], "mode": "red", "overlays": [{"actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-identity-private-v02-7s7wxq6o/benchmark-owner.before.py.DATA", "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark"}], "pytest_exit": 1, "test": "e64e9f8fa947d15ffbd3196eaf4b9a0b4df99492e6f95bdbb167bfe54ae4fb75"}

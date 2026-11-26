@@ -1,0 +1,19 @@
+{
+  "cases": [
+    {
+      "case": "test_prose_reconstruction_reports_complete_typed_structure_and_prose_separately",
+      "passed": true
+    },
+    {
+      "case": "test_retained_7214_modal_scopes_remain_distinct_after_source_withheld_roundtrip",
+      "passed": true
+    }
+  ],
+  "guard_events": [],
+  "overlays": [
+    {
+      "module": "_private_retained_7214_source_withheld_test",
+      "actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P3P6-retained-7214-source-withheld-private-yafP76SH/test.after.py.DATA"
+    }
+  ]
+}

@@ -1,0 +1,357 @@
+CARRIED_OPERATOR_BYTES = 8388608
+CARRIED_OPERATOR_CAPTURES = 2048
+'INERT two-Python-code specialization of the existing Source42 custody and stage owner.'
+import ast,base64,contextlib,hashlib,json,os,re,stat,subprocess,sys,time,traceback,zlib
+from pathlib import Path
+import contextlib
+SEL = None
+PREBOUND_OUTPUT_NAMESPACE = None
+if SEL is None or PREBOUND_OUTPUT_NAMESPACE is None:
+    raise RuntimeError('INERT existing code2 CAS: exact Root Source selection and output namespace required')
+REQ = None
+FIELDS=('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
+f9=lambda s:{k:str(getattr(s,k)) for k in FIELDS}
+H=lambda raw:hashlib.sha256(raw).hexdigest()
+before = None
+spent={'bytes':SEL['bytes']+globals().get('CARRIED_OPERATOR_BYTES',0),'captures':1+globals().get('CARRIED_OPERATOR_CAPTURES',0)}
+report={'schema':'actual-existing-two-Python-code-CAS/v1','inputs':[],'errors':[],'Source_contexts':[],'Source_closed':False,'module_closed':False,'qualification_complete':False,'write_complete':False,'installed':[],'prelaunch_carried':dict(spent)}
+source=None
+cleanup_owned_source42_module=None
+OUT=Path(PREBOUND_OUTPUT_NAMESPACE)
+assert OUT.is_absolute() and not OUT.exists()
+OUT.mkdir(mode=0o700)
+(OUT/'matrices').mkdir(mode=0o700)
+(OUT/'raw').mkdir(mode=0o700)
+(OUT/'beforeimages').mkdir(mode=0o700)
+
+
+def admit(n):
+    if type(n) is not int or n < 0 or spent['bytes']+n > 100663296:
+        raise RuntimeError('selected READ envelope insufficient before read')
+    if before['used']+spent['bytes']+n > before['global_cap'] or before['internal_used']+spent['bytes']+n > before['internal_cap']:
+        raise RuntimeError('shared Source allowance insufficient before read')
+
+def control_read(ref,kind='private_control'):
+    p=Path(ref['path']);a=p.lstat()
+    assert stat.S_ISREG(a.st_mode) and a.st_nlink==1 and a.st_uid==os.getuid()
+    assert a.st_size==ref['bytes'];admit(ref['bytes']+1)
+    fd=os.open(p,os.O_RDONLY|os.O_NOFOLLOW);parts=[];total=0
+    report['inputs'].append({'path':str(p),'kind':kind,'actual_bytes':0});row=report['inputs'][-1]
+    try:
+        assert f9(os.fstat(fd))==f9(a);spent['captures']+=1
+        while total <= ref['bytes']:
+            part=os.read(fd,min(1048576,ref['bytes']+1-total));total+=len(part)
+            spent['bytes']+=len(part);row['actual_bytes']+=len(part)
+            if not part:break
+            parts.append(part)
+        assert f9(a)==f9(os.fstat(fd))==f9(p.lstat())
+    finally:os.close(fd)
+    raw=b''.join(parts);assert len(raw)==ref['bytes']
+    assert 'sha256'not in ref or H(raw)==ref['sha256']
+    return raw
+
+def seal(path,raw):
+    assert type(raw)is bytes
+    p=Path(path);fd=os.open(p,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400)
+    with os.fdopen(fd,'wb')as stream:
+        stream.write(raw);stream.flush();os.fsync(stream.fileno())
+    return {'path':str(p),'bytes':len(raw),'sha256':H(raw)}
+
+def js(path,obj):
+    return seal(path,(json.dumps(obj,sort_keys=True,indent=2)+'\n').encode())
+
+def git(root,*args,allow_nonzero=False):
+    env=dict(os.environ,GIT_OPTIONAL_LOCKS='0',GIT_NO_LAZY_FETCH='1',GIT_TERMINAL_PROMPT='0')
+    admit(262144)
+    p=subprocess.run(['/usr/bin/git','-C',root,*args],env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=20)
+    spent['captures']+=1;spent['bytes']+=len(p.stdout)+len(p.stderr)
+    assert len(p.stdout)+len(p.stderr)<=262144
+    report.setdefault('Git_calls',[]).append({'root':root,'args':args,'returncode':p.returncode,'stdout_bytes':len(p.stdout),'stderr_bytes':len(p.stderr)})
+    if not allow_nonzero and p.returncode:raise RuntimeError(('read-only Git failed',root,args,p.returncode,p.stderr.decode(errors='replace')))
+    return p
+
+def require_exact_status_entries(actual,expected):
+    def entries(raw):
+        assert type(raw) is bytes and (raw==b'' or raw.endswith(b'\0'))
+        values=raw.split(b'\0')[:-1] if raw else []
+        assert all(len(value)>3 and value[2:3]==b' ' and value[:2] in (b' M',b'??') for value in values)
+        assert len(values)==len(set(values))
+        assert len(values)==len({value[3:] for value in values})
+        return values
+    left=entries(actual);right=entries(expected)
+    assert len(left)==len(right) and sorted(left)==sorted(right),(actual,expected)
+
+def root_facts(root,expected):
+    head=git(root,'rev-parse','HEAD').stdout.decode().strip()
+    tree=git(root,'rev-parse','HEAD^{tree}').stdout.decode().strip()
+    assert (head,tree)==(expected['Git_HEAD'],expected['Git_tree'])
+    status=git(root,'status','--porcelain=v1','-z','--untracked-files=normal').stdout
+    cached=git(root,'diff','--cached','--quiet','HEAD','--',allow_nonzero=True).returncode
+    working=git(root,'diff','--quiet','--',allow_nonzero=True).returncode
+    expected_status=''.join(' M '+r['relative_path']+'\0' for r in request['protected_completed_targets']).encode()
+    require_exact_status_entries(status,expected_status)
+    assert cached==0 and working==0
+    return {'HEAD':head,'tree':tree,'index_clean_and_only_exact_prior_owned_delta':True,'status_sha256':H(status),'cached_diff_returncode':cached,'working_diff_returncode':working}
+
+def parents(path):
+    out=[]
+    for p in reversed(Path(path).parents):
+        s=p.lstat();assert stat.S_ISDIR(s.st_mode) and not stat.S_ISLNK(s.st_mode)
+        fd=os.open(p,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
+        try:assert f9(s)==f9(os.fstat(fd))==f9(p.lstat())
+        finally:os.close(fd)
+        out.append({'path':str(p),'full9':f9(s)})
+    return out
+
+def leaf(t):
+    p=Path(t['path']);s=p.lstat();assert stat.S_ISREG(s.st_mode)and s.st_nlink==1
+    assert f9(s)==t['full9']and s.st_size==t['bytes']
+
+
+def checked_read(path,limit,kind):
+    path=Path(path)
+    assert path.is_absolute()
+    allowed=path.is_relative_to(OUT) or any(str(path)==r['path'] for r in request['targets']+request['protected_completed_targets']+request.get('unchanged_fences',[])) or any(str(path)==r['temporary_path'] for r in report.get('staged',[]))
+    assert allowed,('unselected file read',str(path),kind)
+    a=f9(path.lstat());raw=control_read({'path':str(path),'bytes':limit},kind);b=f9(path.lstat())
+    assert a==b
+    return raw,b
+
+
+def exact_agents():
+    absent=[];present=[]
+    for row in request['AGENTS_chain_metadata']:
+        if not row['exists']:
+            assert not os.path.lexists(row['path']),('Applicable AGENTS appeared',row['path']);absent.append(row['path'])
+        else:
+            parents(row['path']);assert f9(Path(row['path']).lstat())==row['full9'];present.append(row['path'])
+    return {'absent':absent,'present':present}
+
+
+def fixed_git_identity():
+    root=request['root'];expected=request['root_expected']
+    head=git(root,'rev-parse','HEAD').stdout.decode().strip()
+    tree=git(root,'rev-parse','HEAD^{tree}').stdout.decode().strip()
+    assert (head,tree)==(expected['Git_HEAD'],expected['Git_tree'])
+    refs=git(root,'for-each-ref','--format=%(refname) %(objectname)').stdout
+    if 'before_refs' in report:assert H(refs)==report['before_refs']['sha256']
+    return {'HEAD':head,'tree':tree,'refs_sha256':H(refs)}
+
+def verify_full_metadata_guard():
+    installed={r['path']:r for r in report['installed']}
+    selected_paths={r['path'] for r in request['targets']}
+    assert len(guard_rows)>=1204 and len({r['path'] for r in guard_rows})==len(guard_rows)
+    for row in guard_rows:
+        path=Path(row['path']);parents(path)
+        expected=installed[row['path']]['full9'] if row['path'] in installed else row['full9']
+        before_stamp=path.lstat();assert stat.S_ISREG(before_stamp.st_mode) and before_stamp.st_nlink==1 and f9(before_stamp)==expected
+        fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW)
+        try:assert f9(os.fstat(fd))==expected==f9(path.lstat())
+        finally:os.close(fd)
+    assert set(installed)<=selected_paths
+
+def acquire_current_sources():
+    stack=contextlib.ExitStack()
+    try:
+        for root,mode in sorted([(request['root'],'write'),(request['additional_A']['root'],'read')]):
+            cm=source.source_lease(root,mode=mode);cm.__enter__();row={'root':root,'mode':mode,'entered':True,'exit_returned':False};report['Source_contexts'].append(row)
+            def close_owned(cm=cm,row=row):
+                result=cm.__exit__(*sys.exc_info())
+                row['exit_returned']=True
+                return result
+            stack.callback(close_owned)
+        return stack
+    except BaseException:
+        stack.close()
+        raise
+
+def verify_before_effect():
+    assert source is not None and any(r['entered'] and not r['exit_returned'] for r in report['Source_contexts'])
+    assert int(selection['launch_not_before_utc_ns'])<=time.time_ns()<int(selection['launch_deadline_utc_ns'])
+    fixed_git_identity();exact_agents();verify_full_metadata_guard()
+    assert root_facts(request['additional_A']['root'],request['additional_A'])==report['additional_A_before']
+    installed={r['path']:r for r in report['installed']}
+    for row in request['targets']:
+        expected=installed[row['path']]['full9'] if row['path'] in installed else row['full9']
+        assert f9(Path(row['path']).lstat())==expected
+    for row in request['Git_aux']+request['protected_completed_targets']:assert f9(Path(row['path']).lstat())==row['full9']
+    expected_status=[(r['relative_path'],' M '+r['relative_path']+'\0') for r in request['protected_completed_targets']]
+    for stage in report['staged']:
+        assert stage['fully_staged'] is True and stage.get('FD_closed') is True and 'FD_close_error' not in stage
+        if stage.get('canonical_replacement_returned'):
+            assert not os.path.lexists(stage['temporary_path']) and stage['target'] in installed
+            rel=str(Path(stage['target']).relative_to(Path(request['root'])))
+            expected_status.append((rel,' M '+rel+'\0'))
+        else:
+            assert f9(Path(stage['temporary_path']).lstat())==stage['stage_full9']
+            rel=str(Path(stage['temporary_path']).relative_to(Path(request['root'])))
+            expected_status.append((rel,'?? '+rel+'\0'))
+    expected_bytes=''.join(value for _,value in sorted(expected_status)).encode()
+    actual=git(request['root'],'status','--porcelain=v1','-z','--untracked-files=normal').stdout
+    require_exact_status_entries(actual,expected_bytes)
+    assert git(request['root'],'diff','--cached','--quiet','HEAD','--',allow_nonzero=True).returncode==0
+    expected_tracked_delta = bool(request['protected_completed_targets'] or installed)
+    assert git(request['root'],'diff','--quiet','--',allow_nonzero=True).returncode==int(expected_tracked_delta)
+
+
+def prepare_python_records(targets, read_private, input_cap, expected_count):
+    assert type(expected_count) is int and 1 <= expected_count <= 2
+    assert type(targets) is list and len(targets) == expected_count
+    assert len({row['path'] for row in targets}) == expected_count
+    prepared = []
+    for row in targets:
+        assert type(row['path']) is str and Path(row['path']).is_absolute() and Path(row['path']).suffix == '.py'
+        assert row['before_private']['bytes'] <= input_cap and row['post_private']['bytes'] <= input_cap
+        before_raw = read_private(row['before_private'], 'authenticated_python_before')
+        post_raw = read_private(row['post_private'], 'authenticated_python_post')
+        assert type(before_raw) is bytes and type(post_raw) is bytes
+        assert len(before_raw) == row['bytes'] == row['before_private']['bytes']
+        assert H(before_raw) == row['before_sha256'] == row['before_private']['sha256']
+        assert len(post_raw) == row['post_private']['bytes'] and H(post_raw) == row['post_private']['sha256']
+        before_tree = ast.parse(before_raw, filename=row['path'])
+        post_tree = ast.parse(post_raw, filename=row['path'])
+        compile(before_tree, row['path'], 'exec', dont_inherit=True)
+        compile(post_tree, row['path'], 'exec', dont_inherit=True)
+        assert before_raw != post_raw
+        prepared.append({'row': row, 'before': before_raw, 'post': post_raw})
+    return prepared
+
+try:
+    selection=json.loads(control_read(SEL,'Root_Source_selection'))
+    assert selection['Root_selected'] is True and selection['request']==REQ
+    assert selection['ledger_before']==before and selection['Source_operation_max_bytes']==100663296
+    assert selection['fresh_output_namespace']==str(OUT)
+    assert int(selection['launch_not_before_utc_ns'])<=time.time_ns()<int(selection['launch_deadline_utc_ns'])
+    request=json.loads(control_read(REQ,'Root_bound_Python_code_request'))
+    assert request['ledger_before']==before and request['Source_envelope']==100663296
+    assert type(request['target_count']) is int and request['target_count']==2
+    assert len(request['targets'])==request['target_count'] and len({r['path'] for r in request['targets']})==request['target_count']
+    assert len(request['unchanged_fences'])==3 and not(set(r['path']for r in request['unchanged_fences'])&set(r['path']for r in request['targets']))
+    guard_rows=json.loads(control_read(request['full_metadata_guard'],'current_full9_metadata_guard'))['rows']
+    known_guard_rows={r['path']:r for r in guard_rows}
+    assert len(known_guard_rows)==len(guard_rows)==1623
+    for guarded in request['targets']+request['unchanged_fences']+request['Git_aux']:
+        if guarded['path'] in known_guard_rows:
+            assert known_guard_rows[guarded['path']]['full9']==guarded['full9']
+        else:
+            record={'path':guarded['path'],'bytes':guarded['bytes'],'full9':guarded['full9']}
+            guard_rows.append(record);known_guard_rows[record['path']]=record
+    assert len(guard_rows)==request['expected_guard_row_count_after_scope_extension']==1623
+    prepared=prepare_python_records(request['targets'],control_read,request['per_document_input_cap'],request['target_count'])
+    report['Python_code_validation']={'exact2_before_post_hashes':True,'all2_parse_compile_without_execution':True,'documentary_validator_used':False,'private_preflight_before_Source_load':True}
+    loader_ref={'path':'/tmp/Reader-Source42-owned-module-loader-fix-private-v01/owned-source42-module-loader.py.DATA','bytes':1104,'sha256':'e4dc161c1553b21ee1dd69521f4f49ad0878122fae2b0d66041c22030a4053c7'}
+    boundary_ref={'path':'/tmp/Reader-parent-matrix-publication-after-Source-IO-private-v03-qp1u81n7/boundary.after.py.DATA','bytes':4208,'sha256':'64c726cde30beb825dacf042c82aaea7d7e653b34c743c664c99f22db3d084ba'}
+    for r in [loader_ref,boundary_ref]:exec(compile(control_read(r),r['path'],'exec'),globals())
+    approved=json.loads(control_read(request['approved_Source42_binding'],'approved_Source42_binding'))
+    assert f9(Path(approved['code_reference']['path']).lstat())==approved['code_reference']['full9']
+    source_raw=control_read(approved['code_reference'],'approved_Source42_code')
+    assert f9(Path(approved['code_reference']['path']).lstat())==approved['code_reference']['full9']
+    assert len(source_raw)==10375 and H(source_raw)=='42e9f07d0d458177079269d9f495f0b70512180c1adc2f7fe0bfdb05518a12f9'
+    frozen={'path':approved['original_module_path']}
+    stage_ns={'__name__':'existing_one_CI_stage','READ_CALLBACK':checked_read,'GUARD_CALLBACK':verify_before_effect}
+    stage_code=control_read(request['stage_helper'],'existing_one_target_stage_helper')
+    exec(compile(stage_code,request['stage_helper']['path'],'exec'),stage_ns,stage_ns)
+    stage_ns['READ_CALLBACK']=checked_read;stage_ns['GUARD_CALLBACK']=verify_before_effect
+    source=load_owned_source42_module(source_raw,frozen['path'])
+    assert str(source.canonical_source_root(request['root']))==request['root']
+    cm=acquire_current_sources()
+    context_row=None
+    try:
+        report['before_root']=root_facts(request['root'],request['root_expected'])
+        report['additional_A_before']=root_facts(request['additional_A']['root'],request['additional_A'])
+        verify_full_metadata_guard()
+        exact_agents()
+        refs=git(request['root'],'for-each-ref','--format=%(refname) %(objectname)').stdout
+        report['before_refs']={'bytes':len(refs),'sha256':H(refs)}
+        for name,expected in [('index',request['Git_aux'][0]),('config',request['Git_aux'][1])]:
+            actual=git(request['root'],'rev-parse','--path-format=absolute','--git-path',name).stdout.decode().strip()
+            assert actual==expected['path']
+            parents(actual)
+            assert f9(Path(actual).lstat())==expected['full9']
+            raw=control_read({'path':actual,'bytes':expected['bytes']},'Git_aux_before')
+            assert H(raw)==expected['sha256']
+            report.setdefault('Git_aux_before',[]).append({'path':actual,'bytes':len(raw),'sha256':H(raw),'full9':expected['full9']})
+        for ar in request['AGENTS_chain_metadata']:
+            if ar['exists']:
+                cached=control_read(ar['reuse_captured_raw'],'retained_AGENTS_raw')
+                rel=str(Path(ar['path']).relative_to(Path(request['root'])))
+                bb=git(request['root'],'ls-tree','-z','HEAD','--',rel).stdout
+                fields=bb.rstrip(b'\0').split(b'\t');assert len(fields)==2 and fields[1].decode()==rel
+                mode,kind,oid=fields[0].decode().split();assert kind=='blob' and oid==ar['expected_Git_blob_oid']
+                assert int(git(request['root'],'cat-file','-s',oid).stdout)==len(cached)
+                assert hashlib.sha1(b'blob '+str(len(cached)).encode()+b'\0'+cached).hexdigest()==oid
+        for protected in request['protected_completed_targets']:
+            parents(protected['path']);actual,stamp=checked_read(protected['path'],protected['bytes'],'protected_prior_post_before')
+            assert stamp==protected['full9'] and H(actual)==protected['sha256']
+        report['unchanged_fences_before']=[]
+        for fence in request['unchanged_fences']:
+            parents(fence['path']);fence_raw,fence_stamp=checked_read(fence['path'],fence['bytes'],'unchanged_fence_before')
+            assert fence_stamp==fence['full9'] and H(fence_raw)==fence['sha256']
+            report['unchanged_fences_before'].append({'path':fence['path'],'bytes':len(fence_raw),'sha256':H(fence_raw),'full9':fence_stamp})
+        selected=[];expected9={}
+        for i,item in enumerate(prepared):
+            t=dict(item['row']);t['root']=request['root']
+            blob=git(request['root'],'ls-tree','-z','HEAD','--',t['relative_path']).stdout
+            bits=blob.rstrip(b'\0').split(b'\t');assert len(bits)==2 and bits[1].decode()==t['relative_path']
+            mode,kind,oid=bits[0].decode().split();assert kind=='blob' and mode=='100644' and oid==t['before_Git_blob_oid']
+            assert int(git(request['root'],'cat-file','-s',oid).stdout)==t['bytes']
+            capture_record={};held={}
+            def seal_before(path,raw):
+                held['before']=raw;r=seal(path,raw)
+                assert control_read(r,'canonical_before_RAW_readback')==raw
+                return r
+            def archive_matrix(label,value):return js(OUT/'matrices'/(str(i)+'-'+label+'.json'),value)
+            before_ref,actual9=capture_one_at_source_IO_end(t,OUT/'raw'/(str(i)+'-before.DATA'),capture_record,parents_fn=parents,leaf_fn=leaf,read_fn=lambda row,kind:checked_read(row['path'],row['bytes'],kind),seal_fn=seal_before,archive_matrix_fn=archive_matrix,caller_uid=os.getuid())
+            actual_before=held.pop('before')
+            assert actual9==t['full9'] and actual_before==item['before'] and H(actual_before)==t['before_sha256']
+            assert hashlib.sha1(b'blob '+str(len(actual_before)).encode()+b'\0'+actual_before).hexdigest()==oid
+            report.setdefault('actual_before_captures',[]).append({'path':t['path'],'capture':capture_record,'raw':before_ref})
+            selected.append({'path':t['path'],'actual_before_body':actual_before,'body':item['post']});expected9[t['path']]=t['full9']
+        stage_ns['stage_and_replace_existing'](selected,expected9,OUT/'beforeimages',report,checked_read)
+        for item in prepared:
+            target=item['row']['path'];installed=next(r for r in report['installed'] if r['path']==target)
+            raw,stamp=checked_read(target,len(item['post']),'canonical_separate_readback')
+            assert raw==item['post'] and stamp==installed['full9']
+            report.setdefault('separate_post_readbacks',[]).append({'path':target,'bytes':len(raw),'sha256':H(raw),'full9':stamp})
+        report['after_root']=fixed_git_identity()
+        report['additional_A_after']=root_facts(request['additional_A']['root'],request['additional_A'])
+        assert report['additional_A_after']==report['additional_A_before']
+        verify_full_metadata_guard()
+        status=git(request['root'],'status','--porcelain=v1','-z','--untracked-files=normal').stdout
+        expected_status=''.join(' M '+r['relative_path']+'\0' for r in request['targets']+request['protected_completed_targets']).encode()
+        require_exact_status_entries(status,expected_status)
+        assert git(request['root'],'diff','--cached','--quiet','HEAD','--',allow_nonzero=True).returncode==0
+        assert git(request['root'],'diff','--quiet','--',allow_nonzero=True).returncode==1
+        report['only_worktree_deltas']=[r['relative_path'] for r in request['targets']]
+        for protected in request['protected_completed_targets']:
+            parents(protected['path']);actual,stamp=checked_read(protected['path'],protected['bytes'],'protected_prior_post_after')
+            assert stamp==protected['full9'] and H(actual)==protected['sha256']
+        report['protected_prior_completed_targets_unchanged']=True
+        report['unchanged_fences_after']=[]
+        for fence in request['unchanged_fences']:
+            parents(fence['path']);fence_raw,fence_stamp=checked_read(fence['path'],fence['bytes'],'unchanged_fence_after')
+            assert fence_stamp==fence['full9'] and H(fence_raw)==fence['sha256']
+            report['unchanged_fences_after'].append({'path':fence['path'],'bytes':len(fence_raw),'sha256':H(fence_raw),'full9':fence_stamp})
+        assert report['unchanged_fences_before']==report['unchanged_fences_after']
+        for expected in report['Git_aux_before']:
+            assert f9(Path(expected['path']).lstat())==expected['full9']
+            raw=control_read({'path':expected['path'],'bytes':expected['bytes']},'Git_aux_after')
+            assert H(raw)==expected['sha256']
+        exact_agents()
+        report['write_complete']=len(report['installed'])==request['target_count'] and not report.get('remaining_own_stages') and not report.get('uncertain_stage_FDs')
+    finally:
+        cm.close()
+    report['Source_closed']=all(r['exit_returned'] for r in report['Source_contexts'])
+except BaseException as error:
+    report['errors'].append({'type':type(error).__name__,'message':str(error),'traceback':traceback.format_exc()})
+finally:
+    report['Source_closed']=bool(report['Source_contexts']) and all(r['exit_returned'] for r in report['Source_contexts'])
+    if source is not None and report['Source_closed']:report['module_closed']=cleanup_owned_source42_module(source)
+    elif source is None:report['module_closed']=True
+    report['actual_IO']=dict(spent)
+    report['ledger_after']={**before,'captures':before['captures']+spent['captures'],'used':before['used']+spent['bytes'],'internal_used':before['internal_used']+spent['bytes']}
+    report['partial_failure_effects']={'canonical_replacements_returned':[r['target'] for r in report.get('staged',[]) if r.get('canonical_replacement_returned')],'installed_readback_complete':report['installed'],'remaining_stages':report.get('remaining_own_stages',[]),'uncertain_FDs':report.get('uncertain_stage_FDs',[]),'automatic_rollback_attempted':False}
+    report['qualification_complete']=report['write_complete'] and report['Source_closed'] and report['module_closed'] and not report['errors']
+    result=js(OUT/'actual-existing-two-Python-code-CAS-receipt.json',report)
+    print(json.dumps({'event':'ACTUAL_EXISTING_PYTHON2_CAS_CLOSED','receipt':result,'write_complete':report['write_complete'],'Source_closed':report['Source_closed'],'module_closed':report['module_closed'],'ledger':report['ledger_after'],'errors':report['errors']},sort_keys=True),flush=True)
+if report['errors']:sys.exit(1)

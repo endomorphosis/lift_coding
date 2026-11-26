@@ -1,0 +1,185 @@
+{
+  "actual_subcheck": {
+    "bytes": 356,
+    "full9": {
+      "st_ctime_ns": "1795573134391823754",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72101439",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795573088879330579",
+      "st_nlink": "1",
+      "st_size": "356",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-Phase8-V4-revocation-replay-private-v01-TS3zxd/actual-current-v3-signed-revocation-preflight.json",
+    "sha256": "acdb2c9daa9e150818f132d473a81d4aff4dc2c7a123049fa9ae631bf01b239d"
+  },
+  "attempts": [
+    {
+      "attempt": "private physical v01",
+      "reason": "guard stopped ctypes standard dynamic loader initialization",
+      "report": {
+        "bytes": 2973,
+        "full9": {
+          "st_ctime_ns": "1795573134395823797",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101405",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795572935640604526",
+          "st_nlink": "1",
+          "st_size": "2973",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-Phase8-V4-revocation-replay-private-v01-TS3zxd/actual-private-v01.stdout",
+        "sha256": "f11026f5b385fbceb9f88d69fc5a316ba612861d4d1b35a0817f8a430a2449ee"
+      },
+      "terminal_exit": 1,
+      "zero_test_assertions": true
+    },
+    {
+      "Parquet_workspace_material_created": true,
+      "attempt": "private physical v02",
+      "cause_not_independently_determined": true,
+      "runner": {
+        "bytes": 3378,
+        "full9": {
+          "st_ctime_ns": "1795573134413823991",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101407",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795572995445291302",
+          "st_nlink": "1",
+          "st_size": "3378",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-Phase8-V4-revocation-replay-private-v01-TS3zxd/run-private-revocation-v02.py.DATA",
+        "sha256": "53e1b2503c52726b7e0a58c2a8404b256bf59729140350357f56e98dbf27593e"
+      },
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795573134403823883",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101410",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795572995446291313",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-Phase8-V4-revocation-replay-private-v01-TS3zxd/actual-private-v02.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795573134399823840",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101409",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795572995446291313",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-Phase8-V4-revocation-replay-private-v01-TS3zxd/actual-private-v02.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "terminal_exit": 137,
+      "zero_reported_test_assertions": true
+    }
+  ],
+  "candidate_assertions": [
+    "with valid re-signed fictional arguments, stale admission report is rejected at V4 current replay",
+    "same mutated request with a fresh internally consistent ineligible admission is rejected before downstream authority",
+    "source artifacts and original fixture remain exact"
+  ],
+  "current_D": {
+    "clean": true,
+    "head": "9f938e46a507322d2f35b717b0c14de7b9978a43",
+    "tree": "e053a1041e4249b869065c3a00f5be8d91ff2243"
+  },
+  "one_append_only_test": {
+    "before": {
+      "bytes": 208493,
+      "full9": {
+        "st_ctime_ns": "1795573134274822497",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72101401",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795572903598228761",
+        "st_nlink": "1",
+        "st_size": "208493",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-Phase8-V4-revocation-replay-private-v01-TS3zxd/test_corpus_release_cli.before.py.DATA",
+      "sha256": "f57ef7f49f1b979c7f75d456bd5c9f9e4eb091a40dd2dcb6c649c468198211bf"
+    },
+    "current_Git_blob": "5800ee664e2c4bb2562da0e43eaef774545669b1",
+    "original_test_bytes_and_definitions_exact": true,
+    "patch": {
+      "bytes": 4026,
+      "full9": {
+        "st_ctime_ns": "1795573134407823926",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72101437",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795573034306262885",
+        "st_nlink": "1",
+        "st_size": "4026",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-Phase8-V4-revocation-replay-private-v01-TS3zxd/exact-existing-V4-test-revoked-reviewer.patch",
+      "sha256": "22fb07c28fe9afff6ea3bf56652a97712544b8196f5b2378465a4279f54838a8"
+    },
+    "path": "tests/unit/logic/autoformal/test_corpus_release_cli.py",
+    "post": {
+      "bytes": 211903,
+      "full9": {
+        "st_ctime_ns": "1795573134287822636",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72101403",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795572903601228797",
+        "st_nlink": "1",
+        "st_size": "211903",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-Phase8-V4-revocation-replay-private-v01-TS3zxd/test_corpus_release_cli.after.py.DATA",
+      "sha256": "65db8d66896bf1a6dd999fb9a262c68e65384642a4267f87c90900aa4d57457f"
+    },
+    "selector": "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_current_replay_refuses_genuinely_revoked_reviewer"
+  },
+  "schema": "private-P2-P8-existing-public-V4-ed25519-revocation-regression/v1",
+  "scope": {
+    "additional_legal_scope_or_external_registry_freshness_proven": false,
+    "canonical_Source_write_or_Git_mutation": false,
+    "current_V3_Fictional_review_signature_and_revocation_subcheck_passed": true,
+    "current_run_selection": null,
+    "new_public_V4_test_qualified": false
+  },
+  "separate_previous_public4": {
+    "bytes": 4708,
+    "full9": {
+      "st_ctime_ns": "1795569482422498811",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72100795",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795569482422498811",
+      "st_nlink": "1",
+      "st_size": "4708",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-Phase8-corpus-CLI-V4-ordinary4-selected-v266-zbj1of7i/Root-Phase8-public-corpus-V4-ordinary4-qualified-Source-resource-closed-small-v266.json",
+    "sha256": "874512580c535887197eb22c743d794a7454237764d8da28f0e98eb9efe7117f"
+  }
+}

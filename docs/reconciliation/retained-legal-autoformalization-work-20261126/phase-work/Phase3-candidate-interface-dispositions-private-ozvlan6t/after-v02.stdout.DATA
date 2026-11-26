@@ -1,0 +1,23 @@
+{
+  "mode": "after",
+  "positive_baseline": "representable",
+  "cases": [
+    {
+      "profile": "mixed",
+      "ast_bytes": 659333,
+      "inventory_request_bytes": 764248,
+      "actual": "unsupported-and-positive-retained",
+      "offered_disposition": "unsupported"
+    },
+    {
+      "profile": "native",
+      "ast_bytes": 1145700,
+      "inventory_request_bytes": 1249189,
+      "actual": "unsupported-and-positive-retained",
+      "offered_disposition": "unsupported"
+    }
+  ],
+  "full_existing_public_owner": true,
+  "model_Lean_or_source_execution": false,
+  "owner_sha256": "ff66f344c9cda788801a9fa2d3ef66afd7046d903a53d2bbf11f8dbfdf847ad2"
+}

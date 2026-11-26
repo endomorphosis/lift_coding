@@ -1,0 +1,282 @@
+{
+  "actual_private_regression": {
+    "final_direct_controls": {
+      "fail": 0,
+      "pass": 12,
+      "report": {
+        "bytes": 2648,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/retry-preservation-v02/actual-retry-green.json",
+        "sha256": "927e8618b9971cf76086142da57eb99945b047d570b31a0426ee60c3f8e9b075"
+      }
+    },
+    "final_isolated_pytest": {
+      "JUnit": {
+        "bytes": 19913,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/retry-preservation-v02/run-retention/junit.xml",
+        "sha256": "d67ee5bab592d9ee349a766ca5f8fecf06ab34129c0867199976ba8b2a890a9d"
+      },
+      "direct_controls_are_subsumed_not_added": true,
+      "error": 0,
+      "fail": 0,
+      "guard_violations": [],
+      "runner": {
+        "bytes": 5184,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/retry-preservation-v02/run_private_retention.v02.py.DATA",
+        "sha256": "992b484842e6325ddb3b15735990bc4499f0a6624336f1c9ceb49c18d9503113"
+      },
+      "scope": "whole legal proof-cache owning file with 12 new cases, four existing Native fixture-loader software controls and five existing migration controls",
+      "skip": 0,
+      "stdout": {
+        "bytes": 1563,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/retry-preservation-v02/actual-retention.stdout",
+        "sha256": "16aa7071d811bfefae252e92d8ee830195e79dd91e22a29e29416538ec887cd8"
+      },
+      "unique_pass": 166
+    },
+    "first_fix_retry_reproduction": {
+      "assertion_fail": 2,
+      "pass": 10,
+      "report": {
+        "bytes": 2812,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/retry-preservation-v02/actual-v01-retry-RED.json",
+        "sha256": "5862e284cca575ec0ec5f5245a61ec0b7a245c75819a0db721a9fdd08e8ca3c8"
+      }
+    },
+    "original_current_base": {
+      "assertion_fail": 10,
+      "pass": 2,
+      "report": {
+        "bytes": 1885,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/actual-red-store-v03.json",
+        "sha256": "df3cf84ad9dd1aedba0866bdc28c9720da013dfaf0c476cc3c270efb3927d9fd"
+      }
+    }
+  },
+  "checkout": {
+    "HEAD": "9f938e46a507322d2f35b717b0c14de7b9978a43",
+    "clean": true,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+    "tree": "e053a1041e4249b869065c3a00f5be8d91ff2243"
+  },
+  "correctness": {
+    "current_aggregated_key_generation": "bound-v2-coherent-coverage/v1",
+    "historical_artifact_and_receipt_wire_unchanged": true,
+    "historical_positive_rows_refused_without_read_or_retry_deletion": true,
+    "per_obligation_expected_declaration_and_proposition_still_exact": true,
+    "result_explicitly_identifies_each_complete_context": true,
+    "same_key_retry_callback_not_invoked_on_historical_authority_refusal": true,
+    "single_receipt_lookup_contract_unchanged": true,
+    "verified_bindings_grouped_by_canonical_shared_context": true
+  },
+  "current_native_fixture_sha256_after_if_adopted": "62c766ae0617d8966bdfc977d227b48f8404acf3fee1279fa20cf26e4a597d46",
+  "files": [
+    {
+      "before": {
+        "bytes": 61410,
+        "full9": {
+          "st_ctime_ns": "1795572247995172413",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101258",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795572120813489385",
+          "st_nlink": "1",
+          "st_size": "61410",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/retry-preservation-v02/proof_cache.before.py.DATA",
+        "sha256": "fc7b97d6873f01e3c8073aaa215b456b1a6bcc83016ba7401ea36abb18351749"
+      },
+      "before_git_blob": "d23eea85c38abc9e047594b0234e2c8396eee23e",
+      "path": "ipfs_datasets_py/logic/legal_ir/proof_cache.py",
+      "post": {
+        "bytes": 62643,
+        "full9": {
+          "st_ctime_ns": "1795572248008172514",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101259",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795572120814454752",
+          "st_nlink": "1",
+          "st_size": "62643",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/retry-preservation-v02/proof_cache.after.py.DATA",
+        "sha256": "9b05a2f890f2df62931273f2448182af8a2d99af73248c5c67ef2ec3d04b0c3c"
+      }
+    },
+    {
+      "before": {
+        "bytes": 92923,
+        "full9": {
+          "st_ctime_ns": "1795572248017172583",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101260",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795572120815731290",
+          "st_nlink": "1",
+          "st_size": "92923",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/retry-preservation-v02/duckdb_proof_migration.before.py.DATA",
+        "sha256": "70b4734ae3a329ac88b5b42602b50495790dafc1b9a8040c0d070ee846238dc5"
+      },
+      "before_git_blob": "b65be9d7d7ab303f62d8a74e449b23e1ed93e03d",
+      "path": "ipfs_datasets_py/logic/common/duckdb_proof_migration.py",
+      "post": {
+        "bytes": 92609,
+        "full9": {
+          "st_ctime_ns": "1795572248020172607",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101261",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795572120816723042",
+          "st_nlink": "1",
+          "st_size": "92609",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/retry-preservation-v02/duckdb_proof_migration.after.py.DATA",
+        "sha256": "a82a23ba02a23c34fe25519a3fef498ec3d6f4e7c2637bf9feb6d6a361c35d74"
+      }
+    },
+    {
+      "before": {
+        "bytes": 108809,
+        "full9": {
+          "st_ctime_ns": "1795572248027172661",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101262",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795572120817654265",
+          "st_nlink": "1",
+          "st_size": "108809",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/retry-preservation-v02/duckdb_proof_store.before.py.DATA",
+        "sha256": "53529c521fbcb40dd2413fbbb709f980d4d15df9e5f694846c603de470b5ada8"
+      },
+      "before_git_blob": "40d1e6097dccfa5f232d0f67acceae9b6570ee09",
+      "path": "ipfs_datasets_py/logic/common/duckdb_proof_store.py",
+      "post": {
+        "bytes": 110348,
+        "full9": {
+          "st_ctime_ns": "1795572248029172676",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101271",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795572146006642079",
+          "st_nlink": "1",
+          "st_size": "110348",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/retry-preservation-v02/duckdb_proof_store.after.py.DATA",
+        "sha256": "f71463279dc8c2b9c261928cb92dcb28472f79fb8da4baa807cfa38ab499a386"
+      }
+    },
+    {
+      "before": {
+        "bytes": 66463,
+        "full9": {
+          "st_ctime_ns": "1795572248036172730",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101264",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795572120820106428",
+          "st_nlink": "1",
+          "st_size": "66463",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/retry-preservation-v02/owning-test.before.py.DATA",
+        "sha256": "efdd956ba61d5f001cf511078bb381ef93abab9cbbce1ff8e130bfbfc6a704a7"
+      },
+      "before_git_blob": "4a33a98fc79f34852be49691e68a01615201ed19",
+      "path": "tests/unit/logic/legal_ir/test_proof_cache.py",
+      "post": {
+        "bytes": 74214,
+        "full9": {
+          "st_ctime_ns": "1795572248039172754",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101268",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795572120838708459",
+          "st_nlink": "1",
+          "st_size": "74214",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/retry-preservation-v02/owning-test.after.py.DATA",
+        "sha256": "62c766ae0617d8966bdfc977d227b48f8404acf3fee1279fa20cf26e4a597d46"
+      }
+    },
+    {
+      "before": {
+        "bytes": 111809,
+        "full9": {
+          "st_ctime_ns": "1795572248046172808",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101265",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795572120821245845",
+          "st_nlink": "1",
+          "st_size": "111809",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/retry-preservation-v02/test_kernel_backends.before.py.DATA",
+        "sha256": "1405d01db7bf3462a46fcc8213b055de7604970a4bfb33a6c51424555b5a973c"
+      },
+      "before_git_blob": "238bda4cc8502210242ee32aa5cd0259a55b9649",
+      "path": "tests/integration/logic/backends/test_kernel_backends.py",
+      "post": {
+        "bytes": 111809,
+        "full9": {
+          "st_ctime_ns": "1795572248049172831",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101272",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795572146006980066",
+          "st_nlink": "1",
+          "st_size": "111809",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/retry-preservation-v02/test_kernel_backends.after.py.DATA",
+        "sha256": "70ee6136d4a1008e5401d3327ff02f4cf40fa160d18c350dd885f7a9d6065339"
+      }
+    }
+  ],
+  "patch": {
+    "bytes": 18662,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/retry-preservation-v02/exact-five-file-code-and-tests-v02.patch",
+    "sha256": "eaa142f43e70dd80402b35929c23ec2cc2360f9a73ce51e34fa37182407d911a"
+  },
+  "product_installed_or_published": false,
+  "saved_prior_setup_refusals": {
+    "fictional_toolchain_constructor_has_no_from_dict": {
+      "credit": 0,
+      "tool_chunk": "339ddc"
+    },
+    "pytest_opened_default_log_outside_private_root": {
+      "credit": 0,
+      "stdout": {
+        "bytes": 3285,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/actual-retention-v01.stdout",
+        "sha256": "a76b9d3e3cb69c7c5805cfb4af2969acae5aa852a645484574e10f9b6a74a4a9"
+      }
+    }
+  },
+  "schema": "existing-P1-legal-proof-cache-coherent-coverage-private-implemented/v2",
+  "scope_limits": {
+    "actual_compiler_or_DuckDB_SQL_run": false,
+    "canonical_Source_or_SDK_selected": false,
+    "fixture_only": "Real Python validators and projections with independently reissued fictional receipts, an observed shadow sink, and in-memory proof storage.",
+    "genuine_statutory_legal_training_or_hosted_CI_authority": false,
+    "private_product_overlays": 3
+  }
+}

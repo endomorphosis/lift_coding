@@ -1,0 +1,43 @@
+{
+  "authority": {
+    "accepted": false,
+    "admitted": false,
+    "context_closed": false,
+    "definition_semantics_encoded": false,
+    "globally_consistent": false,
+    "proof_authority": false,
+    "source_semantics_verified": false,
+    "training_qualified": false
+  },
+  "corpus_occurrence_cid": "baguqeera7273ybyz2jelfqccfwm4drdgk4vpckg4ogygc26igoh4dv3bj3na",
+  "documentary_selector_id": "legal-view-occurrence:sha256:618334fad8e8cf2731d02a71531ad9234fc005dec09fcb2589444aeef2cafd9d",
+  "evaluation_gold_mask": 0,
+  "external_legal_formal_review_pending": true,
+  "graph": {
+    "bytes": 682267,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/complete-from-published-v04/unreviewed-7213-documentary-proposal-graph.json",
+    "sha256": "f5705cd7a94a64f5ffdc36c0d2a02d745775368b96f0cb3980da39e56422be60"
+  },
+  "graph_id": "legal-proposed-graph:sha256:47a0f03bf3bbc82a1847a055efe9bbb24d36c7feb834ce895ac79b83b0c4fe98",
+  "original_draft_formal_source_binding": null,
+  "persisted_graph_external_input_regeneration": {
+    "bytes": 23067,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/validate-persisted-from-published-v05/private-7213-documentary-graph-provenance-owner-closure.json",
+    "sha256": "51d1e4952145b3d0925b30106c9b434a73f30cba57b4b554d9cd957417d212c4"
+  },
+  "prior_construction_and_three_negative_controls": {
+    "bytes": 4265,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/sealed-7213-documentary-proposal-graph-compact.json",
+    "sha256": "217b1f08cad7a4c19cf3cce0ae75c524b23610a271bd4839da3bc5062d34194e"
+  },
+  "published_D": "43414c90daa8ba3c891e2aad635d211ddd5e5133",
+  "regenerated_exactly": true,
+  "schema": "title-10-7213-unreviewed-documentary-proposal-graph-regeneration-compact/v2",
+  "scope": "Existing proposal graph replay against separately retained exact documentary inputs and unreviewed draft.",
+  "structure": {
+    "assertions": 0,
+    "edges": 983,
+    "nodes": 984
+  },
+  "training_mask": 0
+}

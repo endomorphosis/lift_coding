@@ -1,0 +1,39 @@
+............................................F                            [100%]
+=================================== FAILURES ===================================
+_____ test_external_scenario_credit_requires_assignment_outcome_join[True] _____
+
+swap_outcomes = True
+
+    @pytest.mark.parametrize("swap_outcomes", [False, True])
+    def test_external_scenario_credit_requires_assignment_outcome_join(swap_outcomes):
+        from copy import deepcopy
+    
+        original, _ = _packets()
+        payload = original.to_dict(include_digest=False)
+        scenarios = [
+            {"assignment": {"notice": False, "permit": True}, "violates": "po-notice"},
+            {"assignment": {"notice": True, "permit": False}, "violates": "po-permit"},
+        ]
+        payload["reference_ir"]["counterexamples"] = scenarios
+        packet = ExternalLegalExpertBenchmarkPacket.from_mapping(payload)
+        prediction = _prediction(packet)
+        prediction["packet_digest"] = packet.digest
+        candidate = deepcopy(packet.reference_ir)
+        credited = list(reversed(candidate["counterexamples"]))
+        if swap_outcomes:
+            credited[0]["violates"], credited[1]["violates"] = credited[1]["violates"], credited[0]["violates"]
+        candidate["counterexamples"] = credited
+        prediction["candidate_ir"] = candidate
+        result = evaluate_external_legal_expert_benchmark([packet], [prediction])
+        row, = result.packet_results
+        if swap_outcomes:
+>           assert row.accepted is False, row.to_dict()
+E           AssertionError: {'accepted': True, 'block_reasons': [], 'detail': {'acceptable_ambiguity': {'acceptable_family_alternatives': {'tempor...e'], 'missing_required': [], 'predicted': ['deontic', 'temporal', 'provenance'], ...}, ...}, 'minimum_score': 1.0, ...}
+E           assert True is False
+E            +  where True = ExternalBenchmarkPacketResult(packet_id='external-expert-privacy-notice-001', accepted=True, scores={'citations': 1.0,...valence': 1.0, 'proof_obligation_delta_score': 1.0, 'structural_equivalence': 1.0, 'temporal_window_agreement': 1.0}}}).accepted
+
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:526: AssertionError
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-counterexample-assignment-pairing-complete-private-YItN2ffh/current-external-benchmark-private-kgyIK94P/baseline-confcut-tmp/junit.xml -
+=========================== short test summary info ============================
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_scenario_credit_requires_assignment_outcome_join[True]
+1 failed, 44 passed in 0.54s

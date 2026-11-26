@@ -1,0 +1,241 @@
+{
+  "cohort": {
+    "baseline": {
+      "errors": 0,
+      "exit": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-ambiguity-private-v01-x6r17896/baseline.exit",
+        "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+      },
+      "failures": [
+        "test_external_benchmark_obeys_family_ambiguity_policy[disabled-optional-family]",
+        "test_external_benchmark_obeys_family_ambiguity_policy[disabled-family-alternative]"
+      ],
+      "junit": {
+        "bytes": 8523,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-ambiguity-private-v01-x6r17896/baseline-tmp/junit.xml",
+        "sha256": "3db25fdeb0694ce0dbcd6677ce300c52ef759c44e019e2c9d652320bdc39e603"
+      },
+      "pass_count": 32,
+      "rc": 1,
+      "roster": [
+        "test_fixture_loads_versioned_external_expert_packets",
+        "test_external_packets_build_external_test_manifest_and_block_training_use",
+        "test_external_validity_report_is_separate_from_internal_canary_metrics",
+        "test_acceptable_ambiguity_allows_expected_family_alternative",
+        "test_missing_external_expectations_fail_packet_without_touching_canary_metrics",
+        "test_packet_validation_rejects_training_or_poisoned_external_records",
+        "test_reference_ir_requires_candidate_in_fixed_denominator[omitted]",
+        "test_reference_ir_requires_candidate_in_fixed_denominator[null]",
+        "test_reference_ir_requires_candidate_in_fixed_denominator[empty]",
+        "test_reference_ir_requires_candidate_in_fixed_denominator[invalid]",
+        "test_legacy_candidate_alias_and_absent_reference_keep_existing_scope",
+        "test_required_round_trip_needs_observation",
+        "test_empty_external_population_has_no_acceptance",
+        "test_external_benchmark_rejects_ambiguous_prediction_order[accepted-first]",
+        "test_external_benchmark_rejects_ambiguous_prediction_order[accepted-last]",
+        "test_external_benchmark_rejects_misbound_keyed_prediction[packet_id]",
+        "test_external_benchmark_rejects_misbound_keyed_prediction[id]",
+        "test_external_benchmark_rejects_conflicting_prediction_aliases[flat]",
+        "test_external_benchmark_rejects_conflicting_prediction_aliases[sequence]",
+        "test_external_benchmark_rejects_duplicate_population_identity",
+        "test_external_benchmark_predicts_by_each_supported_identity_form",
+        "test_external_benchmark_requires_current_declared_packet_digest",
+        "test_benchmark_packet_intake_refuses_inconsistent_declared_digest[source-document]",
+        "test_benchmark_packet_intake_refuses_inconsistent_declared_digest[source-text]",
+        "test_benchmark_packet_intake_refuses_inconsistent_declared_digest[reference-ir]",
+        "test_benchmark_packet_intake_refuses_inconsistent_declared_digest[null-pin]",
+        "test_benchmark_packet_intake_refuses_inconsistent_declared_digest[wrong-pin]",
+        "test_benchmark_packet_digest_binds_canonical_loaded_revision",
+        "test_external_benchmark_obeys_family_ambiguity_policy[disabled-optional-family]",
+        "test_external_benchmark_obeys_family_ambiguity_policy[disabled-family-alternative]",
+        "test_external_benchmark_obeys_family_ambiguity_policy[enabled-optional-family]",
+        "test_external_benchmark_obeys_family_ambiguity_policy[enabled-family-alternative]",
+        "test_external_benchmark_obeys_family_ambiguity_policy[legacy-implicit-optional-family]",
+        "test_external_benchmark_obeys_family_ambiguity_policy[legacy-implicit-family-alternative]"
+      ],
+      "runtime": {
+        "bytes": 1600,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-ambiguity-private-v01-x6r17896/baseline-tmp/run.json",
+        "sha256": "c83600c61b805605ddb7d550bd492a0a7aee268903ea55aedf6d45a434babe5a"
+      },
+      "skipped": 0,
+      "stdout": {
+        "bytes": 4844,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-ambiguity-private-v01-x6r17896/baseline.stdout",
+        "sha256": "d7f06267b69fda3462f8ef7aa63a35c30a263bad2589eee2d8c27cc9390053f9"
+      }
+    },
+    "candidate": {
+      "errors": 0,
+      "exit": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-ambiguity-private-v01-x6r17896/candidate.exit",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "failures": [],
+      "junit": {
+        "bytes": 4158,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-ambiguity-private-v01-x6r17896/candidate-tmp/junit.xml",
+        "sha256": "40755533f1cceb695d09d9ee442d522a23ba2086d3505d5999f1b8d23c666087"
+      },
+      "pass_count": 34,
+      "rc": 0,
+      "roster": [
+        "test_fixture_loads_versioned_external_expert_packets",
+        "test_external_packets_build_external_test_manifest_and_block_training_use",
+        "test_external_validity_report_is_separate_from_internal_canary_metrics",
+        "test_acceptable_ambiguity_allows_expected_family_alternative",
+        "test_missing_external_expectations_fail_packet_without_touching_canary_metrics",
+        "test_packet_validation_rejects_training_or_poisoned_external_records",
+        "test_reference_ir_requires_candidate_in_fixed_denominator[omitted]",
+        "test_reference_ir_requires_candidate_in_fixed_denominator[null]",
+        "test_reference_ir_requires_candidate_in_fixed_denominator[empty]",
+        "test_reference_ir_requires_candidate_in_fixed_denominator[invalid]",
+        "test_legacy_candidate_alias_and_absent_reference_keep_existing_scope",
+        "test_required_round_trip_needs_observation",
+        "test_empty_external_population_has_no_acceptance",
+        "test_external_benchmark_rejects_ambiguous_prediction_order[accepted-first]",
+        "test_external_benchmark_rejects_ambiguous_prediction_order[accepted-last]",
+        "test_external_benchmark_rejects_misbound_keyed_prediction[packet_id]",
+        "test_external_benchmark_rejects_misbound_keyed_prediction[id]",
+        "test_external_benchmark_rejects_conflicting_prediction_aliases[flat]",
+        "test_external_benchmark_rejects_conflicting_prediction_aliases[sequence]",
+        "test_external_benchmark_rejects_duplicate_population_identity",
+        "test_external_benchmark_predicts_by_each_supported_identity_form",
+        "test_external_benchmark_requires_current_declared_packet_digest",
+        "test_benchmark_packet_intake_refuses_inconsistent_declared_digest[source-document]",
+        "test_benchmark_packet_intake_refuses_inconsistent_declared_digest[source-text]",
+        "test_benchmark_packet_intake_refuses_inconsistent_declared_digest[reference-ir]",
+        "test_benchmark_packet_intake_refuses_inconsistent_declared_digest[null-pin]",
+        "test_benchmark_packet_intake_refuses_inconsistent_declared_digest[wrong-pin]",
+        "test_benchmark_packet_digest_binds_canonical_loaded_revision",
+        "test_external_benchmark_obeys_family_ambiguity_policy[disabled-optional-family]",
+        "test_external_benchmark_obeys_family_ambiguity_policy[disabled-family-alternative]",
+        "test_external_benchmark_obeys_family_ambiguity_policy[enabled-optional-family]",
+        "test_external_benchmark_obeys_family_ambiguity_policy[enabled-family-alternative]",
+        "test_external_benchmark_obeys_family_ambiguity_policy[legacy-implicit-optional-family]",
+        "test_external_benchmark_obeys_family_ambiguity_policy[legacy-implicit-family-alternative]"
+      ],
+      "runtime": {
+        "bytes": 1601,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-ambiguity-private-v01-x6r17896/candidate-tmp/run.json",
+        "sha256": "5a6c00533a035ddbd3ecd9d87232e67c8e2c40f4adeef048e0b456deaf9f0cb2"
+      },
+      "skipped": 0,
+      "stdout": {
+        "bytes": 345,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-ambiguity-private-v01-x6r17896/candidate.stdout",
+        "sha256": "33c9805ed14fb2992567f0d7291bb669395c98022668a235324ba3d910dd3d5f"
+      }
+    },
+    "function_case_counts": {
+      "test_acceptable_ambiguity_allows_expected_family_alternative": 1,
+      "test_benchmark_packet_digest_binds_canonical_loaded_revision": 1,
+      "test_benchmark_packet_intake_refuses_inconsistent_declared_digest": 5,
+      "test_empty_external_population_has_no_acceptance": 1,
+      "test_external_benchmark_obeys_family_ambiguity_policy": 6,
+      "test_external_benchmark_predicts_by_each_supported_identity_form": 1,
+      "test_external_benchmark_rejects_ambiguous_prediction_order": 2,
+      "test_external_benchmark_rejects_conflicting_prediction_aliases": 2,
+      "test_external_benchmark_rejects_duplicate_population_identity": 1,
+      "test_external_benchmark_rejects_misbound_keyed_prediction": 2,
+      "test_external_benchmark_requires_current_declared_packet_digest": 1,
+      "test_external_packets_build_external_test_manifest_and_block_training_use": 1,
+      "test_external_validity_report_is_separate_from_internal_canary_metrics": 1,
+      "test_fixture_loads_versioned_external_expert_packets": 1,
+      "test_legacy_candidate_alias_and_absent_reference_keep_existing_scope": 1,
+      "test_missing_external_expectations_fail_packet_without_touching_canary_metrics": 1,
+      "test_packet_validation_rejects_training_or_poisoned_external_records": 1,
+      "test_reference_ir_requires_candidate_in_fixed_denominator": 4,
+      "test_required_round_trip_needs_observation": 1
+    },
+    "new_cases": 6,
+    "retained_cases": 28,
+    "same_order": true
+  },
+  "effect_scope": {
+    "model_Native_or_network_called": false,
+    "ordinary_project_package_initializer_or_conftest_executed": false,
+    "ordinary_qualification_or_adoption": false,
+    "private_python_owner_body_tests_only": true,
+    "project_git_or_canonical_files_changed": false,
+    "selected_real_project_bodies": 8,
+    "source_sdk_resource_ledger_changed": false,
+    "substantive_legal_or_release_authority": false
+  },
+  "forward_diff": {
+    "bytes": 3226,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-ambiguity-private-v01-x6r17896/changes.patch",
+    "sha256": "69969ed30857d71728423011f657777cc6dafddee92027ee8238c8451bce62e0"
+  },
+  "inputs": {
+    "bytes": 2620,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-ambiguity-private-v01-x6r17896/published-inputs.json",
+    "sha256": "3793c2db6fc9d3f484761e5f7afa193ce686f4f79d6c27f6936d9bfda9b1f9ae"
+  },
+  "inverse_diff": {
+    "bytes": 3226,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-ambiguity-private-v01-x6r17896/inverse.patch",
+    "sha256": "35e2252de578a7e74230891f1a19dba6044f10c0dfb081dc8be887db51bf62b1"
+  },
+  "posts": [
+    {
+      "after": {
+        "bytes": 38377,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-ambiguity-private-v01-x6r17896/candidate/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py",
+        "sha256": "3b102fc0762ff57c34e43d9e2b16413ed6e72140dfe42a129baf33ba1429d43b"
+      },
+      "before": {
+        "bytes": 38313,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-ambiguity-private-v01-x6r17896/baseline/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py",
+        "sha256": "99397ab0476b222e78a74bfb03d69ed85b9518ae9df330c195c6433da5cb5c27"
+      },
+      "before_Git_blob": "5ff7f4e61bc08745fd61b09ec7a858c50cf36283",
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py"
+    },
+    {
+      "after": {
+        "bytes": 18070,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-ambiguity-private-v01-x6r17896/test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py",
+        "sha256": "aed061c96b01096be6342cf3e15e5cc07f113f8934fffd4bef7634233d452646"
+      },
+      "before": {
+        "bytes": 16178,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-ambiguity-private-v01-x6r17896/baseline/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py",
+        "sha256": "aaa5f5ade2fe8b6a12516f87924c6879158f07ed594fc609d4866b66f81e8bb2"
+      },
+      "before_Git_blob": "1fc891c094b1354d1c02716c0e063cb3755d60b1",
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py"
+    }
+  ],
+  "preservation": {
+    "existing_inputs_and_receipts_kept": true,
+    "existing_test_top_level_AST_objects": 28,
+    "fixture_exact": true,
+    "normalized_packet_policy_and_report_fields_preserved": true,
+    "published_test_exact_byte_prefix": 16178,
+    "sole_owner_AST_change": "_family_score",
+    "unchanged_score_policy_fields": [
+      "packet_digest",
+      "citation",
+      "proof_obligations",
+      "decompiler_expectations",
+      "semantic_equivalence"
+    ]
+  },
+  "private_runner": {
+    "bytes": 4211,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-ambiguity-private-v01-x6r17896/run-private.py",
+    "sha256": "ae1820fb2892650f7d6faae74abc4d8e63dbec32495d217ba30f8d2edf2cd06a"
+  },
+  "published_D_input": "bda9f1fb146722e8b116cb0503880fb22e5291a4",
+  "runtime_limits": {
+    "address_space_bytes": 536870912,
+    "affinity_CPU": 1,
+    "cpu_hard_seconds": 31,
+    "cpu_soft_seconds": 30,
+    "outer_per_cohort_timeout_seconds": 40
+  },
+  "schema": "phase8-external-benchmark-explicit-ambiguity-same-owner-private-closeout/v1"
+}

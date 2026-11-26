@@ -1,0 +1,31 @@
+--- a/ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py
++++ b/ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py
+@@ -23,7 +23,6 @@
+ from ...logic.integration.reasoning.legal_ir_proof_feedback import (
+     LegalIRProofFeedbackRecord,
+     ProofFeedbackVersions,
+-    carries_typed_proof_feedback,
+ )
+ from .modal_autoencoder import (
+     AdaptiveModalAutoencoder,
+@@ -298,11 +297,6 @@
+     sample memory disabled by the default evaluator.
+     """
+ 
+-    cohorts = tuple(_feedback_items(value) for value in (
+-        hammer_feedback, leanstral_feedback, proof_feedback, trusted_feedback,
+-    ))
+-    if any(carries_typed_proof_feedback(item) for cohort in cohorts for item in cohort):
+-        raise ValueError("typed proof-feedback ablation requires a matched typed control")
+     cfg = config or ProofFeedbackAblationConfig()
+     train = tuple(train_samples)
+     holdout = tuple(holdout_samples)
+@@ -867,8 +861,6 @@
+     if isinstance(value, LegalIRProofFeedbackRecord):
+         return [value]
+     if isinstance(value, Mapping):
+-        if carries_typed_proof_feedback(value):
+-            return [value]
+         nested: list[Any] = []
+         for key in (
+             "feedback_records",

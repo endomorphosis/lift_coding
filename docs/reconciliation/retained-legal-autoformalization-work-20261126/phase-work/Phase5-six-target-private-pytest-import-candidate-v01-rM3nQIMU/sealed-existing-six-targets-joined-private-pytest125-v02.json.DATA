@@ -1,0 +1,93 @@
+{
+  "closure_only_added_existing_module": {
+    "bytes": 836,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-six-target-private-pytest-import-candidate-v01-rM3nQIMU/closure-only-v02.json",
+    "sha256": "5815044198a7a7b50df315687284293105a9892b8214e3f05a137390349251d7"
+  },
+  "corrected_attempt": {
+    "collect": {
+      "bytes": 14411,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-six-target-private-pytest-import-candidate-v01-rM3nQIMU/collect-v02.stdout.DATA",
+      "sha256": "e62e76fef9642aff4a4a700f271f0d9e5d52025e58b916f12dddb2c2c8cb9aef"
+    },
+    "duplicates": 0,
+    "errors": 0,
+    "exit": 0,
+    "failed": 0,
+    "pass": 125,
+    "raw_JUnit": {
+      "bytes": 25913,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-six-target-private-pytest-import-candidate-v01-rM3nQIMU/private-run-v02.junit.xml",
+      "sha256": "a9d71e617ecccd62331ad4889ff45f0cdcfdabd14d8d522f979ac2c1b1fa3bdf"
+    },
+    "run": {
+      "bytes": 1274,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-six-target-private-pytest-import-candidate-v01-rM3nQIMU/run-v02.stdout.DATA",
+      "sha256": "2aefd705593e90f7e7a78be8cd2c0bec91e6703bc1c54874903823bd2858e8b0"
+    },
+    "skip": 0,
+    "stderr": {
+      "bytes": 0,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-six-target-private-pytest-import-candidate-v01-rM3nQIMU/run-v02.stderr.DATA",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "wall_from_pytest_s": 47.56
+  },
+  "counts_by_test_file": {
+    "test_autoformal_campaign_training_inputs": 10,
+    "test_legal_ir_split_membership": 110,
+    "test_legal_span_consumer_binding": 5
+  },
+  "current_ordinary_qualification": false,
+  "first_attempt_retained": {
+    "collect": {
+      "bytes": 14411,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-six-target-private-pytest-import-candidate-v01-rM3nQIMU/collect.stdout.DATA",
+      "sha256": "f59210cb583e2424f125da7fe67037e6ca42e4c84f5d9fe59029466a2a1acf0f"
+    },
+    "exit": 1,
+    "failed": 1,
+    "first_failure": "Import of metrics owner lazy dependency missing in historical stage.",
+    "pass": 124,
+    "raw_JUnit": {
+      "bytes": 27457,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-six-target-private-pytest-import-candidate-v01-rM3nQIMU/private-run.junit.xml",
+      "sha256": "ba3d7290d2d040fad43fa5be895f35d299b588a7c9c0a8438f62c61f47bd5e9b"
+    },
+    "run": {
+      "bytes": 3073,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-six-target-private-pytest-import-candidate-v01-rM3nQIMU/run.stdout.DATA",
+      "sha256": "91f1e9264e01b7e954440344b8e52d4dde8304029ea97b11fd034beace083932"
+    },
+    "skip": 0,
+    "stderr": {
+      "bytes": 0,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-six-target-private-pytest-import-candidate-v01-rM3nQIMU/run.stderr.DATA",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "fixed_configuration": "Scoped selected pure/fictional software fixtures only. Pytest autoload disabled; plugins from retained pytest.ini. No llm/heavy/network opt-in. One logical CPU for collection and run with 45s and 160s wall bounds. All six code/test bodies and checked controls byte-exact before and after trials.",
+  "no_current_Source_write_Git_publication_Native_model_or_training": true,
+  "physical_125_ordered_roster": {
+    "bytes": 20801,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-six-target-private-pytest-import-candidate-v01-rM3nQIMU/actual-125-ordered-private-pytest-roster-v02.json",
+    "sha256": "522ec175d08c7d14671e980b6bb134403643a6a34c6bae09b4d30e009289a71d"
+  },
+  "schema": "phase5-six-targets-joined-private-pytest-import-125/v2",
+  "scope": "Actual standard Pytest collection and run on a private copy of retained historical support with all six exact candidate files. Existing retained pytest.ini and conftest chain, Python 3.12.3 and Pytest 8.3.4. Full current Source and runtime qualification remains separate.",
+  "selected_nodes": {
+    "bytes": 1415,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-six-target-private-pytest-import-candidate-v01-rM3nQIMU/selectors.txt",
+    "sha256": "f65f34fd0ad6154ae1f92ca1b7801bdef78718490affbbbb59c9e50535e79cbb"
+  },
+  "six_files_exact_candidate": {
+    "bytes": 12532,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-V4-unicode-target-codecs-private-v01-sGkV3nkC/sealed-existing-grouped-split-producer-replay-consumer-six-targets-v01.json",
+    "sha256": "a6e3684238dab142681ee742262be4908d8cbf40db29e9e9d18f79138047d16e"
+  },
+  "stage_refs_and_controls": {
+    "bytes": 4978,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-six-target-private-pytest-import-candidate-v01-rM3nQIMU/private-stage-inputs.json",
+    "sha256": "8762e00184cfcabe048443e9f83aec4a1f0e8ccfe786e62c192800567bcc3e8b"
+  }
+}

@@ -1,0 +1,205 @@
+{
+  "actual_fictional_fixture": {
+    "Git_blob_sha1": "03c13bdb014e25448fbcb4344ba71504b15622b4",
+    "bytes": 5763,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-benchmark-packet-intake-digest-private-v01/isolated/tests/fixtures/legal_ir/external_expert_benchmark.jsonl",
+    "sha256": "fb9a76552e2b938369d93d73a2a25aa76a963101cac96fd487a246bc43c54971"
+  },
+  "added_cases": 6,
+  "behavior": "Mapping and JSONL intake now compare a declared string packet digest with the canonical packet after construction, including normal premise validation. Explicit null/stale/malformed digests fail. Old omitted pins and normalizing canonical aliases stay supported. JSONL reports the stale line.",
+  "exact_forward_and_inverse": true,
+  "existing_guard": {
+    "bytes": 5502,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/run_private_fixture.py.DATA",
+    "sha256": "b3fe749fe409c404a426669781c4807538115fda1127534bbb3c8613853fd42e"
+  },
+  "observed_local_frozen_D": "cacb0e85dbfad57fb1d96f8aa0d8667f6c51b061",
+  "published_datasets_comparison_D": "7c409645b063d990d15b4b267351ed6c7cc5bfba",
+  "remaining_boundary": "A canonical self-pin checks normalized content consistency. It supplies no independent identity/authentication, legal authority, proof or heldout data validity. No canonical adoption, ordinary package qualification, Git writes, models, Lean or rollout-gate execution.",
+  "retained_existing_cases": 22,
+  "roles": {
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py": {
+      "base": {
+        "Git_blob_sha1": "566fcdd4562bb8dc570d0e52b18fccc3172e4224",
+        "bytes": 37952,
+        "git_mode": "100644",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-benchmark-packet-intake-digest-private-v01/benchmark-owner.before.py.DATA",
+        "sha256": "9ad1187907f37120be9929da6967ba3753cb6887696b48c2386e13854c2df000"
+      },
+      "forward": {
+        "bytes": 1225,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-benchmark-packet-intake-digest-private-v01/legal_ir_external_benchmark.py.exact.forward.patch.DATA",
+        "sha256": "02c7217643a2d32daab10149d2f1182ebf3b0ee37b35949516ae1b98874abfef"
+      },
+      "inverse": {
+        "bytes": 1225,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-benchmark-packet-intake-digest-private-v01/legal_ir_external_benchmark.py.exact.inverse.patch.DATA",
+        "sha256": "4d665fa21bb9e70db93e38c0a507e938fbf134fef0d3fbb0b19b5b2ded90d8fc"
+      },
+      "post": {
+        "Git_blob_sha1": "5ff7f4e61bc08745fd61b09ec7a858c50cf36283",
+        "bytes": 38313,
+        "git_mode": "100644",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-benchmark-packet-intake-digest-private-v01/benchmark-owner.after.py.DATA",
+        "sha256": "99397ab0476b222e78a74bfb03d69ed85b9518ae9df330c195c6433da5cb5c27"
+      }
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py": {
+      "base": {
+        "Git_blob_sha1": "906dfa81068aa04759af700d28966862e1686624",
+        "bytes": 13790,
+        "git_mode": "100644",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-benchmark-packet-intake-digest-private-v01/benchmark-test.before.py.DATA",
+        "sha256": "e2bdaca2566fe5c331bcc401781e286d4956a1af474ddebd666a93f2973f641a"
+      },
+      "forward": {
+        "bytes": 2786,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-benchmark-packet-intake-digest-private-v01/test_legal_ir_external_benchmark.py.exact.forward.patch.DATA",
+        "sha256": "e05be35783235336718f910818286a2ede117f837158d312634f7e967eb8328a"
+      },
+      "inverse": {
+        "bytes": 2786,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-benchmark-packet-intake-digest-private-v01/test_legal_ir_external_benchmark.py.exact.inverse.patch.DATA",
+        "sha256": "268dfba600cf8261d8ea175627af9f1ae8d3e5c1fe2884aa6273ee405c587d00"
+      },
+      "post": {
+        "Git_blob_sha1": "1fc891c094b1354d1c02716c0e063cb3755d60b1",
+        "bytes": 16178,
+        "git_mode": "100644",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-benchmark-packet-intake-digest-private-v01/isolated/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py",
+        "sha256": "aaa5f5ade2fe8b6a12516f87924c6879158f07ed594fc609d4866b66f81e8bb2"
+      }
+    }
+  },
+  "runner": {
+    "bytes": 2308,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-benchmark-packet-intake-digest-private-v01/run-benchmark-private.py.DATA",
+    "sha256": "2780fdb795bc96cb16bbdabfe4a303d6dbdd18c4a2cfb8445488ffd5c6830ab6"
+  },
+  "same_actual_28": {
+    "green": {
+      "case_order": [
+        "test_fixture_loads_versioned_external_expert_packets",
+        "test_external_packets_build_external_test_manifest_and_block_training_use",
+        "test_external_validity_report_is_separate_from_internal_canary_metrics",
+        "test_acceptable_ambiguity_allows_expected_family_alternative",
+        "test_missing_external_expectations_fail_packet_without_touching_canary_metrics",
+        "test_packet_validation_rejects_training_or_poisoned_external_records",
+        "test_reference_ir_requires_candidate_in_fixed_denominator[omitted]",
+        "test_reference_ir_requires_candidate_in_fixed_denominator[null]",
+        "test_reference_ir_requires_candidate_in_fixed_denominator[empty]",
+        "test_reference_ir_requires_candidate_in_fixed_denominator[invalid]",
+        "test_legacy_candidate_alias_and_absent_reference_keep_existing_scope",
+        "test_required_round_trip_needs_observation",
+        "test_empty_external_population_has_no_acceptance",
+        "test_external_benchmark_rejects_ambiguous_prediction_order[accepted-first]",
+        "test_external_benchmark_rejects_ambiguous_prediction_order[accepted-last]",
+        "test_external_benchmark_rejects_misbound_keyed_prediction[packet_id]",
+        "test_external_benchmark_rejects_misbound_keyed_prediction[id]",
+        "test_external_benchmark_rejects_conflicting_prediction_aliases[flat]",
+        "test_external_benchmark_rejects_conflicting_prediction_aliases[sequence]",
+        "test_external_benchmark_rejects_duplicate_population_identity",
+        "test_external_benchmark_predicts_by_each_supported_identity_form",
+        "test_external_benchmark_requires_current_declared_packet_digest",
+        "test_benchmark_packet_intake_refuses_inconsistent_declared_digest[source-document]",
+        "test_benchmark_packet_intake_refuses_inconsistent_declared_digest[source-text]",
+        "test_benchmark_packet_intake_refuses_inconsistent_declared_digest[reference-ir]",
+        "test_benchmark_packet_intake_refuses_inconsistent_declared_digest[null-pin]",
+        "test_benchmark_packet_intake_refuses_inconsistent_declared_digest[wrong-pin]",
+        "test_benchmark_packet_digest_binds_canonical_loaded_revision"
+      ],
+      "errors": 0,
+      "exitcode": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-benchmark-packet-intake-digest-private-v01/green.exit",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "failed": [],
+      "guard_denials": [],
+      "passing": 28,
+      "raw_JUnit": {
+        "bytes": 5571,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-benchmark-packet-intake-digest-private-v01/green/junit.xml",
+        "sha256": "6c87f472c8291cff0366371f318ae163d9a084ce1326576eb8ce5c27bdd48ada"
+      },
+      "rc": 0,
+      "skips": 0,
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-benchmark-packet-intake-digest-private-v01/green.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 916,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-benchmark-packet-intake-digest-private-v01/green.stdout",
+        "sha256": "fec6ba4fad8b1bfb49a986324ac68e713b71bc20d032e517b8d3bd8609e62a7c"
+      }
+    },
+    "red": {
+      "case_order": [
+        "test_fixture_loads_versioned_external_expert_packets",
+        "test_external_packets_build_external_test_manifest_and_block_training_use",
+        "test_external_validity_report_is_separate_from_internal_canary_metrics",
+        "test_acceptable_ambiguity_allows_expected_family_alternative",
+        "test_missing_external_expectations_fail_packet_without_touching_canary_metrics",
+        "test_packet_validation_rejects_training_or_poisoned_external_records",
+        "test_reference_ir_requires_candidate_in_fixed_denominator[omitted]",
+        "test_reference_ir_requires_candidate_in_fixed_denominator[null]",
+        "test_reference_ir_requires_candidate_in_fixed_denominator[empty]",
+        "test_reference_ir_requires_candidate_in_fixed_denominator[invalid]",
+        "test_legacy_candidate_alias_and_absent_reference_keep_existing_scope",
+        "test_required_round_trip_needs_observation",
+        "test_empty_external_population_has_no_acceptance",
+        "test_external_benchmark_rejects_ambiguous_prediction_order[accepted-first]",
+        "test_external_benchmark_rejects_ambiguous_prediction_order[accepted-last]",
+        "test_external_benchmark_rejects_misbound_keyed_prediction[packet_id]",
+        "test_external_benchmark_rejects_misbound_keyed_prediction[id]",
+        "test_external_benchmark_rejects_conflicting_prediction_aliases[flat]",
+        "test_external_benchmark_rejects_conflicting_prediction_aliases[sequence]",
+        "test_external_benchmark_rejects_duplicate_population_identity",
+        "test_external_benchmark_predicts_by_each_supported_identity_form",
+        "test_external_benchmark_requires_current_declared_packet_digest",
+        "test_benchmark_packet_intake_refuses_inconsistent_declared_digest[source-document]",
+        "test_benchmark_packet_intake_refuses_inconsistent_declared_digest[source-text]",
+        "test_benchmark_packet_intake_refuses_inconsistent_declared_digest[reference-ir]",
+        "test_benchmark_packet_intake_refuses_inconsistent_declared_digest[null-pin]",
+        "test_benchmark_packet_intake_refuses_inconsistent_declared_digest[wrong-pin]",
+        "test_benchmark_packet_digest_binds_canonical_loaded_revision"
+      ],
+      "errors": 0,
+      "exitcode": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-benchmark-packet-intake-digest-private-v01/red.exit",
+        "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+      },
+      "failed": [
+        "test_benchmark_packet_intake_refuses_inconsistent_declared_digest[source-document]",
+        "test_benchmark_packet_intake_refuses_inconsistent_declared_digest[source-text]",
+        "test_benchmark_packet_intake_refuses_inconsistent_declared_digest[reference-ir]",
+        "test_benchmark_packet_intake_refuses_inconsistent_declared_digest[null-pin]",
+        "test_benchmark_packet_intake_refuses_inconsistent_declared_digest[wrong-pin]",
+        "test_benchmark_packet_digest_binds_canonical_loaded_revision"
+      ],
+      "guard_denials": [],
+      "passing": 22,
+      "raw_JUnit": {
+        "bytes": 9139,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-benchmark-packet-intake-digest-private-v01/red/junit.xml",
+        "sha256": "89778a6016e08cb8537892f4e92b6d203bea196b96a4b97f927c86b22841ac1b"
+      },
+      "rc": 1,
+      "skips": 0,
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-benchmark-packet-intake-digest-private-v01/red.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 5072,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-benchmark-packet-intake-digest-private-v01/red.stdout",
+        "sha256": "2950cab20afe8ed1141eb23948144c15784ea7eeea9e2672bdb03a59fe4f5cd7"
+      }
+    }
+  },
+  "schema": "private-existing-external-benchmark-intake-canonical-digest-two-files/v1"
+}

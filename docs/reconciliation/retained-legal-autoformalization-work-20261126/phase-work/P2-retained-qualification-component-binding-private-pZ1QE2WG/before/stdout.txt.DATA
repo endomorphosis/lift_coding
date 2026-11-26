@@ -1,0 +1,125 @@
+exact reader 62183 eba76bd725c0e83dc4d815b8f8f913dadaf1ab4d4bfd75b8dd4602b763e8b491
+exact selected test 56766 650ab77903764c454b4a069f15e4d954dd290196564cbea6372aec483d6c8eed
+.........................FFF                                             [100%]
+=================================== FAILURES ===================================
+_ test_checked_release_type_capture_requires_the_matching_component_evidence[source_integrity-reviewed_crosswalk] _
+
+dimension = 'source_integrity', role = 'reviewed_crosswalk'
+
+    @pytest.mark.parametrize("dimension,role", [
+        ("source_integrity", "reviewed_crosswalk"),
+        ("representation", "preservation"),
+        ("dependency", "dependency"),
+    ])
+    def test_checked_release_type_capture_requires_the_matching_component_evidence(dimension, role):
+        from ipfs_datasets_py.logic.autoformal import corpus_qualification as qualification
+    
+        case = _checked_release_type_capture_fixture("one")
+        report = deepcopy(case["report"])
+        evidence = report["declared_eligibility_evidence"]
+        components = evidence["component_cids"]
+        original = report["declared_qualification"]
+        dimensions = deepcopy(original["dimensions"])
+        assert dimensions[dimension]["evidence_cids"] == [components[role]]
+        assert components[role] != components["graph"]
+        dimensions[dimension]["evidence_cids"] = [components["graph"]]
+        declared = qualification.prepare_qualification(
+            artifact_cid=evidence["artifact_cid"], profile=report["profile"],
+            theorem_requested=original["theorem_requested"], dimensions=dimensions)
+        eligibility = qualification.derive_eligibility(
+            declared, artifact_cid=evidence["artifact_cid"], profile=report["profile"])
+        assert declared["record_cid"] != original["record_cid"]
+        assert eligibility["views"] == case["report"]["declared_eligibility"]["views"]
+        assert eligibility["views"]["reviewed_graph"]["declared_eligible"] is True
+        assert eligibility["views"]["checked_lean"]["declared_eligible"] is False
+        report.update(declared_qualification=declared, declared_eligibility=eligibility)
+        raw = canonical(report)
+        options = {**case["options"], "checked_release_report_raw": raw,
+                   "expected_checked_release_report_sha256": sha(raw)}
+>       with pytest.raises(ValueError, match=dimension + " evidence differs"):
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+../project/tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py:1010: Failed
+_ test_checked_release_type_capture_requires_the_matching_component_evidence[representation-preservation] _
+
+dimension = 'representation', role = 'preservation'
+
+    @pytest.mark.parametrize("dimension,role", [
+        ("source_integrity", "reviewed_crosswalk"),
+        ("representation", "preservation"),
+        ("dependency", "dependency"),
+    ])
+    def test_checked_release_type_capture_requires_the_matching_component_evidence(dimension, role):
+        from ipfs_datasets_py.logic.autoformal import corpus_qualification as qualification
+    
+        case = _checked_release_type_capture_fixture("one")
+        report = deepcopy(case["report"])
+        evidence = report["declared_eligibility_evidence"]
+        components = evidence["component_cids"]
+        original = report["declared_qualification"]
+        dimensions = deepcopy(original["dimensions"])
+        assert dimensions[dimension]["evidence_cids"] == [components[role]]
+        assert components[role] != components["graph"]
+        dimensions[dimension]["evidence_cids"] = [components["graph"]]
+        declared = qualification.prepare_qualification(
+            artifact_cid=evidence["artifact_cid"], profile=report["profile"],
+            theorem_requested=original["theorem_requested"], dimensions=dimensions)
+        eligibility = qualification.derive_eligibility(
+            declared, artifact_cid=evidence["artifact_cid"], profile=report["profile"])
+        assert declared["record_cid"] != original["record_cid"]
+        assert eligibility["views"] == case["report"]["declared_eligibility"]["views"]
+        assert eligibility["views"]["reviewed_graph"]["declared_eligible"] is True
+        assert eligibility["views"]["checked_lean"]["declared_eligible"] is False
+        report.update(declared_qualification=declared, declared_eligibility=eligibility)
+        raw = canonical(report)
+        options = {**case["options"], "checked_release_report_raw": raw,
+                   "expected_checked_release_report_sha256": sha(raw)}
+>       with pytest.raises(ValueError, match=dimension + " evidence differs"):
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+../project/tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py:1010: Failed
+_ test_checked_release_type_capture_requires_the_matching_component_evidence[dependency-dependency] _
+
+dimension = 'dependency', role = 'dependency'
+
+    @pytest.mark.parametrize("dimension,role", [
+        ("source_integrity", "reviewed_crosswalk"),
+        ("representation", "preservation"),
+        ("dependency", "dependency"),
+    ])
+    def test_checked_release_type_capture_requires_the_matching_component_evidence(dimension, role):
+        from ipfs_datasets_py.logic.autoformal import corpus_qualification as qualification
+    
+        case = _checked_release_type_capture_fixture("one")
+        report = deepcopy(case["report"])
+        evidence = report["declared_eligibility_evidence"]
+        components = evidence["component_cids"]
+        original = report["declared_qualification"]
+        dimensions = deepcopy(original["dimensions"])
+        assert dimensions[dimension]["evidence_cids"] == [components[role]]
+        assert components[role] != components["graph"]
+        dimensions[dimension]["evidence_cids"] = [components["graph"]]
+        declared = qualification.prepare_qualification(
+            artifact_cid=evidence["artifact_cid"], profile=report["profile"],
+            theorem_requested=original["theorem_requested"], dimensions=dimensions)
+        eligibility = qualification.derive_eligibility(
+            declared, artifact_cid=evidence["artifact_cid"], profile=report["profile"])
+        assert declared["record_cid"] != original["record_cid"]
+        assert eligibility["views"] == case["report"]["declared_eligibility"]["views"]
+        assert eligibility["views"]["reviewed_graph"]["declared_eligible"] is True
+        assert eligibility["views"]["checked_lean"]["declared_eligible"] is False
+        report.update(declared_qualification=declared, declared_eligibility=eligibility)
+        raw = canonical(report)
+        options = {**case["options"], "checked_release_report_raw": raw,
+                   "expected_checked_release_report_sha256": sha(raw)}
+>       with pytest.raises(ValueError, match=dimension + " evidence differs"):
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+../project/tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py:1010: Failed
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-retained-qualification-component-binding-private-pZ1QE2WG/before/result.xml -
+=========================== short test summary info ============================
+FAILED ../../../../../../dev::test_checked_release_type_capture_requires_the_matching_component_evidence[source_integrity-reviewed_crosswalk]
+FAILED ../../../../../../dev::test_checked_release_type_capture_requires_the_matching_component_evidence[representation-preservation]
+FAILED ../../../../../../dev::test_checked_release_type_capture_requires_the_matching_component_evidence[dependency-dependency]
+3 failed, 25 passed in 2.00s
+guard events []

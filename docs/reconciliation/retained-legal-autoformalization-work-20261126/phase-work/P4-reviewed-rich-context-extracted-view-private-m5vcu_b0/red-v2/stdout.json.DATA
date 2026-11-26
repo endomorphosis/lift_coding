@@ -1,0 +1,24 @@
+{
+  "version": "v2",
+  "results": [
+    {
+      "case": "shared-extracted-view",
+      "passed": false,
+      "error": "Failed",
+      "detail": "DID NOT RAISE <class 'ValueError'>",
+      "traceback": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-reviewed-rich-context-extracted-view-private-m5vcu_b0/run-existing-evaluator-private-guard.py.DATA\", line 42, in <module>\n    callable_case()\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-reviewed-rich-context-extracted-view-private-m5vcu_b0/run-existing-evaluator-private-guard.py.DATA\", line 37, in <lambda>\n    (\"shared-extracted-view\", lambda: module.test_reviewed_rich_heldout_same_extracted_view_refuses_before_actual_producer(version)),\n                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py\", line 4541, in test_reviewed_rich_heldout_same_extracted_view_refuses_before_actual_producer\n  File \"/home/barberb/lift_coding/.venv/lib/python3.12/site-packages/_pytest/python_api.py\", line 1019, in __exit__\n    fail(self.message)\n  File \"/home/barberb/lift_coding/.venv/lib/python3.12/site-packages/_pytest/outcomes.py\", line 178, in fail\n    raise Failed(msg=reason, pytrace=pytrace)\nFailed: DID NOT RAISE <class 'ValueError'>\n"
+    },
+    {
+      "case": "independent-views",
+      "passed": true
+    }
+  ],
+  "guard_events": [],
+  "overlays": [
+    {
+      "module": "_existing_rich_evaluator_private_cases",
+      "actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-reviewed-rich-context-extracted-view-private-m5vcu_b0/owning-test.after.py.DATA"
+    }
+  ],
+  "test_sha256": "df7736aee87046e3fbbdb835bef2cefa02b542c747b93a91571d0481d63734e0"
+}

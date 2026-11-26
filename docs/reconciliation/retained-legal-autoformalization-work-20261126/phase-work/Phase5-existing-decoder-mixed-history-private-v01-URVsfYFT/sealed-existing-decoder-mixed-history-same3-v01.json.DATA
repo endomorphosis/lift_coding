@@ -1,0 +1,172 @@
+{
+  "candidate_has_no_new_product_delta_since_stage_receipt": true,
+  "deliberate_mutation_not_a_product_candidate": {
+    "full_run": {
+      "exit": 1,
+      "failed": 1,
+      "passed": 2,
+      "stderr": {
+        "bytes": 1162,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-decoder-mixed-history-private-v01-URVsfYFT/mutant-separate-core.stderr.DATA",
+        "sha256": "010d9b9931f5dcd07d26a0d707775617a665dc274e96e9414a95154796321561"
+      },
+      "stdout": {
+        "bytes": 53,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-decoder-mixed-history-private-v01-URVsfYFT/mutant-separate-core.stdout.DATA",
+        "sha256": "56309866a05df99ac099373ea11dbc03809ff52991e0b81374bd764ba44d8b4b"
+      }
+    },
+    "one_condition_change": "Keep native token features for records coming from the other profile during replay, so the old holdout cannot be compared in the current profile.",
+    "owner": {
+      "bytes": 179203,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-decoder-mixed-history-private-v01-URVsfYFT/own-profile-only-mutation.py.DATA",
+      "sha256": "3e959dfe0405b8c5986dd4502b6a112b61abd18d1f2cea65c1011e0da6610e7d"
+    },
+    "stage_owner_inverse_reproduces_exact_candidate": true
+  },
+  "evidence": {
+    "candidate_resealed_control_inputs": {
+      "unicode_near_duplicate": [
+        {
+          "bytes": 11080,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-decoder-mixed-history-private-v01-URVsfYFT/candidate-separate-core/unicode_near_duplicate/legacy-heldout-history.json",
+          "sha256": "135bcaac7d11543f4bb8f05f2a257a07f495a75d89d8911afc9c49c2e2be45e9"
+        },
+        {
+          "bytes": 8897,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-decoder-mixed-history-private-v01-URVsfYFT/candidate-separate-core/unicode_near_duplicate/decoder-mutated-stage.json",
+          "sha256": "3adcddb24bde66b3038083c8594867c53e0d4ace27af960191492aff436c9b00"
+        }
+      ],
+      "unrelated": [
+        {
+          "bytes": 10961,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-decoder-mixed-history-private-v01-URVsfYFT/candidate-separate-core/unrelated/legacy-heldout-history.json",
+          "sha256": "5cc384820f8889c9b5a21df4fdbc212b64b776fa8138b539d4a5dc9eb3dd64a2"
+        },
+        {
+          "bytes": 8832,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-decoder-mixed-history-private-v01-URVsfYFT/candidate-separate-core/unrelated/decoder-mutated-stage.json",
+          "sha256": "cd80d60a7fffb2f0ca62759a854435a2d8388ae1f4cb0f5b8d4fa11e6feace87"
+        }
+      ]
+    },
+    "deliberate_mutation_resealed_control_inputs": {
+      "unicode_near_duplicate": [
+        {
+          "bytes": 11080,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-decoder-mixed-history-private-v01-URVsfYFT/mutant-separate-core/unicode_near_duplicate/legacy-heldout-history.json",
+          "sha256": "135bcaac7d11543f4bb8f05f2a257a07f495a75d89d8911afc9c49c2e2be45e9"
+        },
+        {
+          "bytes": 8879,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-decoder-mixed-history-private-v01-URVsfYFT/mutant-separate-core/unicode_near_duplicate/decoder-mutated-stage.json",
+          "sha256": "b7d97f4de0eae7fba17eb29c2300a4d62e50c2a16e2f735c864a8c4c92c9fe4b"
+        }
+      ],
+      "unrelated": [
+        {
+          "bytes": 10961,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-decoder-mixed-history-private-v01-URVsfYFT/mutant-separate-core/unrelated/legacy-heldout-history.json",
+          "sha256": "5cc384820f8889c9b5a21df4fdbc212b64b776fa8138b539d4a5dc9eb3dd64a2"
+        },
+        {
+          "bytes": 8814,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-decoder-mixed-history-private-v01-URVsfYFT/mutant-separate-core/unrelated/decoder-mutated-stage.json",
+          "sha256": "245635d6b9585a0459f0ff4b6b2d05468b348842280d04201b7674cf4a7a4e46"
+        }
+      ]
+    },
+    "no_historical_holdout": "Original signed fictional decoder row IDs, five source fields, all nine target fields, two encodes per active row, no registry writes or training/backend authority.",
+    "unicode_only_near_duplicate": "Distinct raw source and normalized content hashes. Independently asserted actual legacy Jaccard below configured 0.82 and Unicode overlap at or above it. Exact train query ID and holdout ID in actual near-duplicate guard violation. No encode or registry stage call.",
+    "unrelated_legacy_holdout": "Staged artifact references repinned. Historical text excluded from all encoded wires and held-out ID absent from training IDs."
+  },
+  "first_attempts_retained": {
+    "candidate": {
+      "completed_passes": 2,
+      "exit": 124,
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-decoder-mixed-history-private-v01-URVsfYFT/candidate.stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 25,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-decoder-mixed-history-private-v01-URVsfYFT/candidate.stdout.DATA",
+        "sha256": "b6fa81a25211779187f564538596812d29f33d51f4451a0de5bffe02e7cf0af3"
+      },
+      "uncompleted_cases": 1
+    },
+    "mutant": {
+      "completed_passes": 2,
+      "exit": 124,
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-decoder-mixed-history-private-v01-URVsfYFT/mutant.stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 25,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-decoder-mixed-history-private-v01-URVsfYFT/mutant.stdout.DATA",
+        "sha256": "b6fa81a25211779187f564538596812d29f33d51f4451a0de5bffe02e7cf0af3"
+      },
+      "uncompleted_cases": 1
+    },
+    "why_retried": "Two single-CPU runs shared one logical core for most of the 56-second wall limit. Each exited 124 after two passes. Final runs used separate single-core affinity and 90-second wall time, retaining identical 35-second soft / 40-second hard CPU limits, owner and test bytes."
+  },
+  "frozen_local_D_HEAD_verified": "68e3739ffd64e54016133d3d1e0304c6302da1b1",
+  "full_candidate_run": {
+    "exit": 0,
+    "failed": 0,
+    "passed": 3,
+    "stderr": {
+      "bytes": 0,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-decoder-mixed-history-private-v01-URVsfYFT/candidate-separate-core.stderr.DATA",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stdout": {
+      "bytes": 53,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-decoder-mixed-history-private-v01-URVsfYFT/candidate-separate-core.stdout.DATA",
+      "sha256": "961f348110b9ab909f20e9692dd5a1b63eea3a44f62fea8b424b6066b40bc848"
+    }
+  },
+  "owning_test": {
+    "after": {
+      "bytes": 209312,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-decoder-mixed-history-private-v01-URVsfYFT/test_autoformal_campaign_training_inputs.after.py.DATA",
+      "sha256": "088b4c4b805898f6908bdb45aacc6f971cce191d48b75389b00ea0333f179dd5"
+    },
+    "combined_stage_and_decoder_diff": {
+      "bytes": 8335,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-decoder-mixed-history-private-v01-URVsfYFT/owning-test.diff",
+      "sha256": "f623c3660bbfa3eafeaba9e28c1fecfab1d48730784f532ab766ec71c5eb62e0"
+    },
+    "fragment": {
+      "bytes": 4453,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-decoder-mixed-history-private-v01-URVsfYFT/decoder_replay.fragment.py.DATA",
+      "sha256": "fe3529a311f250932bf8727c1d100f27d04d925b5492581163364ec430cb0e6b"
+    },
+    "new_decoder_cases": 3,
+    "new_decoder_test_functions": 1,
+    "old_141_ASTs_and_stage_append_3_ASTs_preserved": true,
+    "target": "tests/unit/logic/test_autoformal_campaign_training_inputs.py",
+    "target_git_preimage": "877afc441a7bd77e7b39b0727bb6a6ceedbd26ef"
+  },
+  "runner": {
+    "bytes": 3594,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-decoder-mixed-history-private-v01-URVsfYFT/run_cached_decoder_replay.py.DATA",
+    "sha256": "325d000f19ec5c53e08f49ae4a8b49a7e6579cc90e144949675f200f4d6658c6"
+  },
+  "schema": "phase5-existing-public-decoder-replays-mixed-split-history-same3/v1",
+  "scope": "Actual existing reviewed V2 decoder-input API with exact private candidate owners, retained signed fictional fixture, existing byte-only staging registry and existing UTF-8 byte tokenizer with encode-call observation. No fit, model, Native, Source capture, adoption, or ordinary package run.",
+  "separate_stage_receipt": {
+    "bytes": 19659,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-public-stage-unicode-history-private-v01-Xm159RAo/sealed-public-reviewed-cycle-unicode-history-same3-v01.json",
+    "sha256": "08a2a75b518289e6615c55d9b65db30934154c191390610ab57cf317bedd2fa0"
+  },
+  "training_cycle_inputs_candidate": {
+    "bytes": 179170,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-current-training-history-replay-private-v01-7jli35yr/training_cycle_inputs.after.py.DATA",
+    "sha256": "c172218316d2add710f45f3c0cd99f78fbc4a4f70616cfb875eb07930bea1b28"
+  }
+}

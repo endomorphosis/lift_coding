@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-V4-unicode-target-codecs-private-v01-sGkV3nkC/run_cached_mixed_v4.py.DATA", line 74, in <module>
+    function(location, *args)
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-V4-unicode-target-codecs-private-v01-sGkV3nkC/v4_codecs.fragment.py.DATA", line 35, in test_reviewed_mixed_unicode_stage_preserves_exact_targets_in_both_codecs
+    data = _reviewed_mixed_unicode_stage(tmp_path)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-V4-unicode-target-codecs-private-v01-sGkV3nkC/v4_codecs.fragment.py.DATA", line 26, in _reviewed_mixed_unicode_stage
+    artifact = inputs.stage_reviewed_mixed_cycle_inputs_v4(data.registry, **data.options)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-native-t5-selected-head-bound-private-v02/source-stage/ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py", line 686, in stage_reviewed_mixed_cycle_inputs_v4
+    return _stage_reviewed_cycle_inputs(registry, _admission_version="v3", **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-native-t5-selected-head-bound-private-v02/source-stage/ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py", line 882, in _stage_reviewed_cycle_inputs
+    guard_history, records, history_guard = _reviewed_history(
+                                            ^^^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-native-t5-selected-head-bound-private-v02/source-stage/ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py", line 341, in _reviewed_history
+    _reviewed_need(record["split_example"] == frozen.to_dict()
+  File "/tmp/decoder-training-native-t5-selected-head-bound-private-v02/source-stage/ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py", line 183, in _reviewed_need
+    raise ValueError(message)
+ValueError: historical source fingerprint or frozen grouping differs

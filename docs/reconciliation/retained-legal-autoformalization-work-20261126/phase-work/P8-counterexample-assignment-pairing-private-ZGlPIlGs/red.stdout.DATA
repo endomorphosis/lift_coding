@@ -1,0 +1,204 @@
+profile=private-stdlib-owner-and-pytest-fixture selectors= 12
+...............................FFFF                                      [100%]
+=================================== FAILURES ===================================
+_ test_counterexample_scores_bind_assignments_to_reported_outcomes[swapped_outcomes] _
+
+drift = 'swapped_outcomes'
+
+    @pytest.mark.parametrize("drift", [None, "swapped_outcomes", "assignment_value_type", "blank_outcome", "nested_assignment"])
+    def test_counterexample_scores_bind_assignments_to_reported_outcomes(drift):
+        reference, candidate = _reference_ir(), _isomorphic_ir()
+        scenarios = [
+            {"assignment": {"notice": False, "permit": True}, "violates": "po-notice"},
+            {"assignment": {"notice": True, "permit": False}, "violates": "po-permit"},
+        ]
+        reference["counterexamples"] = deepcopy(scenarios)
+        candidate["counterexamples"] = [
+            {"violates": case["violates"], "assignment": dict(reversed(tuple(case["assignment"].items())))}
+            for case in reversed(scenarios)
+        ]
+        if drift == "swapped_outcomes":
+            first, second = candidate["counterexamples"]
+            first["violates"], second["violates"] = second["violates"], first["violates"]
+        elif drift == "assignment_value_type":
+            candidate["counterexamples"][1]["assignment"]["notice"] = "false"
+        elif drift == "blank_outcome":
+            for payload in (reference, candidate):
+                payload["counterexamples"][0]["violates"] = " "
+        elif drift == "nested_assignment":
+            for payload in (reference, candidate):
+                payload["counterexamples"][0]["assignment"]["notice"] = {"observed": False}
+    
+        baseline = {"view_family_metrics": {"deontic": {
+            "reference_ir": reference, "candidate_ir": reference,
+        }}}
+        observation = {"view_family_metrics": {"deontic": {
+            "reference_ir": reference, "candidate_ir": candidate,
+        }}}
+        gate = compare_legal_ir_semantic_equivalence(baseline, observation, families=("deontic",))
+        result = gate.family_results["deontic"].after
+        if drift is None:
+            assert gate.accepted is True
+            assert result.complete is True
+            assert result.scores[COUNTEREXAMPLE_EQUIVALENCE] == 1.0
+        elif drift in {"blank_outcome", "nested_assignment"}:
+            assert COUNTEREXAMPLE_EQUIVALENCE in result.missing_metrics
+            assert COUNTEREXAMPLE_EQUIVALENCE not in result.scores
+            assert gate.accepted is False
+        else:
+>           assert gate.accepted is False, result.to_dict()
+E           AssertionError: {'complete': True, 'detail': {'counterexample_signature_sizes': {'candidate': 4, 'reference': 4}, 'graph_signature_siz..., 'reference': 1, 'symmetric_difference': 0}, ...}, 'evidence_sources': ['computed_ir_pair'], 'family': 'deontic', ...}
+E           assert True is False
+E            +  where True = SemanticEquivalenceComparisonReport(family_results={'deontic': SemanticEquivalenceFamilyComparison(family='deontic', b...gate_id='lir-semantic-equivalence-af7601b272236c44728abe8a', schema_version='legal-ir-semantic-equivalence-metrics-v1').accepted
+
+test_legal_ir_semantic_metrics.py:947: AssertionError
+_ test_counterexample_scores_bind_assignments_to_reported_outcomes[assignment_value_type] _
+
+drift = 'assignment_value_type'
+
+    @pytest.mark.parametrize("drift", [None, "swapped_outcomes", "assignment_value_type", "blank_outcome", "nested_assignment"])
+    def test_counterexample_scores_bind_assignments_to_reported_outcomes(drift):
+        reference, candidate = _reference_ir(), _isomorphic_ir()
+        scenarios = [
+            {"assignment": {"notice": False, "permit": True}, "violates": "po-notice"},
+            {"assignment": {"notice": True, "permit": False}, "violates": "po-permit"},
+        ]
+        reference["counterexamples"] = deepcopy(scenarios)
+        candidate["counterexamples"] = [
+            {"violates": case["violates"], "assignment": dict(reversed(tuple(case["assignment"].items())))}
+            for case in reversed(scenarios)
+        ]
+        if drift == "swapped_outcomes":
+            first, second = candidate["counterexamples"]
+            first["violates"], second["violates"] = second["violates"], first["violates"]
+        elif drift == "assignment_value_type":
+            candidate["counterexamples"][1]["assignment"]["notice"] = "false"
+        elif drift == "blank_outcome":
+            for payload in (reference, candidate):
+                payload["counterexamples"][0]["violates"] = " "
+        elif drift == "nested_assignment":
+            for payload in (reference, candidate):
+                payload["counterexamples"][0]["assignment"]["notice"] = {"observed": False}
+    
+        baseline = {"view_family_metrics": {"deontic": {
+            "reference_ir": reference, "candidate_ir": reference,
+        }}}
+        observation = {"view_family_metrics": {"deontic": {
+            "reference_ir": reference, "candidate_ir": candidate,
+        }}}
+        gate = compare_legal_ir_semantic_equivalence(baseline, observation, families=("deontic",))
+        result = gate.family_results["deontic"].after
+        if drift is None:
+            assert gate.accepted is True
+            assert result.complete is True
+            assert result.scores[COUNTEREXAMPLE_EQUIVALENCE] == 1.0
+        elif drift in {"blank_outcome", "nested_assignment"}:
+            assert COUNTEREXAMPLE_EQUIVALENCE in result.missing_metrics
+            assert COUNTEREXAMPLE_EQUIVALENCE not in result.scores
+            assert gate.accepted is False
+        else:
+>           assert gate.accepted is False, result.to_dict()
+E           AssertionError: {'complete': True, 'detail': {'counterexample_signature_sizes': {'candidate': 4, 'reference': 4}, 'graph_signature_siz..., 'reference': 1, 'symmetric_difference': 0}, ...}, 'evidence_sources': ['computed_ir_pair'], 'family': 'deontic', ...}
+E           assert True is False
+E            +  where True = SemanticEquivalenceComparisonReport(family_results={'deontic': SemanticEquivalenceFamilyComparison(family='deontic', b...gate_id='lir-semantic-equivalence-af7601b272236c44728abe8a', schema_version='legal-ir-semantic-equivalence-metrics-v1').accepted
+
+test_legal_ir_semantic_metrics.py:947: AssertionError
+_ test_counterexample_scores_bind_assignments_to_reported_outcomes[blank_outcome] _
+
+drift = 'blank_outcome'
+
+    @pytest.mark.parametrize("drift", [None, "swapped_outcomes", "assignment_value_type", "blank_outcome", "nested_assignment"])
+    def test_counterexample_scores_bind_assignments_to_reported_outcomes(drift):
+        reference, candidate = _reference_ir(), _isomorphic_ir()
+        scenarios = [
+            {"assignment": {"notice": False, "permit": True}, "violates": "po-notice"},
+            {"assignment": {"notice": True, "permit": False}, "violates": "po-permit"},
+        ]
+        reference["counterexamples"] = deepcopy(scenarios)
+        candidate["counterexamples"] = [
+            {"violates": case["violates"], "assignment": dict(reversed(tuple(case["assignment"].items())))}
+            for case in reversed(scenarios)
+        ]
+        if drift == "swapped_outcomes":
+            first, second = candidate["counterexamples"]
+            first["violates"], second["violates"] = second["violates"], first["violates"]
+        elif drift == "assignment_value_type":
+            candidate["counterexamples"][1]["assignment"]["notice"] = "false"
+        elif drift == "blank_outcome":
+            for payload in (reference, candidate):
+                payload["counterexamples"][0]["violates"] = " "
+        elif drift == "nested_assignment":
+            for payload in (reference, candidate):
+                payload["counterexamples"][0]["assignment"]["notice"] = {"observed": False}
+    
+        baseline = {"view_family_metrics": {"deontic": {
+            "reference_ir": reference, "candidate_ir": reference,
+        }}}
+        observation = {"view_family_metrics": {"deontic": {
+            "reference_ir": reference, "candidate_ir": candidate,
+        }}}
+        gate = compare_legal_ir_semantic_equivalence(baseline, observation, families=("deontic",))
+        result = gate.family_results["deontic"].after
+        if drift is None:
+            assert gate.accepted is True
+            assert result.complete is True
+            assert result.scores[COUNTEREXAMPLE_EQUIVALENCE] == 1.0
+        elif drift in {"blank_outcome", "nested_assignment"}:
+>           assert COUNTEREXAMPLE_EQUIVALENCE in result.missing_metrics
+E           AssertionError: assert 'counterexample_equivalence' in ()
+E            +  where () = SemanticEquivalenceFamilyResult(family='deontic', scores={'structural_equivalence': 0.941176470588, 'obligation_equiva...': 1, 'reference': 1, 'symmetric_difference': 0}, 'temporal_window_signature_sizes': {'candidate': 3, 'reference': 3}}).missing_metrics
+
+test_legal_ir_semantic_metrics.py:943: AssertionError
+_ test_counterexample_scores_bind_assignments_to_reported_outcomes[nested_assignment] _
+
+drift = 'nested_assignment'
+
+    @pytest.mark.parametrize("drift", [None, "swapped_outcomes", "assignment_value_type", "blank_outcome", "nested_assignment"])
+    def test_counterexample_scores_bind_assignments_to_reported_outcomes(drift):
+        reference, candidate = _reference_ir(), _isomorphic_ir()
+        scenarios = [
+            {"assignment": {"notice": False, "permit": True}, "violates": "po-notice"},
+            {"assignment": {"notice": True, "permit": False}, "violates": "po-permit"},
+        ]
+        reference["counterexamples"] = deepcopy(scenarios)
+        candidate["counterexamples"] = [
+            {"violates": case["violates"], "assignment": dict(reversed(tuple(case["assignment"].items())))}
+            for case in reversed(scenarios)
+        ]
+        if drift == "swapped_outcomes":
+            first, second = candidate["counterexamples"]
+            first["violates"], second["violates"] = second["violates"], first["violates"]
+        elif drift == "assignment_value_type":
+            candidate["counterexamples"][1]["assignment"]["notice"] = "false"
+        elif drift == "blank_outcome":
+            for payload in (reference, candidate):
+                payload["counterexamples"][0]["violates"] = " "
+        elif drift == "nested_assignment":
+            for payload in (reference, candidate):
+                payload["counterexamples"][0]["assignment"]["notice"] = {"observed": False}
+    
+        baseline = {"view_family_metrics": {"deontic": {
+            "reference_ir": reference, "candidate_ir": reference,
+        }}}
+        observation = {"view_family_metrics": {"deontic": {
+            "reference_ir": reference, "candidate_ir": candidate,
+        }}}
+        gate = compare_legal_ir_semantic_equivalence(baseline, observation, families=("deontic",))
+        result = gate.family_results["deontic"].after
+        if drift is None:
+            assert gate.accepted is True
+            assert result.complete is True
+            assert result.scores[COUNTEREXAMPLE_EQUIVALENCE] == 1.0
+        elif drift in {"blank_outcome", "nested_assignment"}:
+>           assert COUNTEREXAMPLE_EQUIVALENCE in result.missing_metrics
+E           AssertionError: assert 'counterexample_equivalence' in ('structural_equivalence', 'obligation_equivalence')
+E            +  where ('structural_equivalence', 'obligation_equivalence') = SemanticEquivalenceFamilyResult(family='deontic', scores={'structural_equivalence': 0.942857142857, 'obligation_equiva...': 1, 'reference': 1, 'symmetric_difference': 0}, 'temporal_window_signature_sizes': {'candidate': 3, 'reference': 3}}).missing_metrics
+
+test_legal_ir_semantic_metrics.py:943: AssertionError
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-counterexample-assignment-pairing-private-ZGlPIlGs/red.junit.xml -
+=========================== short test summary info ============================
+FAILED test_legal_ir_semantic_metrics.py::test_counterexample_scores_bind_assignments_to_reported_outcomes[swapped_outcomes]
+FAILED test_legal_ir_semantic_metrics.py::test_counterexample_scores_bind_assignments_to_reported_outcomes[assignment_value_type]
+FAILED test_legal_ir_semantic_metrics.py::test_counterexample_scores_bind_assignments_to_reported_outcomes[blank_outcome]
+FAILED test_legal_ir_semantic_metrics.py::test_counterexample_scores_bind_assignments_to_reported_outcomes[nested_assignment]
+4 failed, 31 passed in 0.24s

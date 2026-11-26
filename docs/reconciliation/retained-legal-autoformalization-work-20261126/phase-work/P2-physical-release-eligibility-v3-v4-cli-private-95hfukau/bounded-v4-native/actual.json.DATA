@@ -1,0 +1,34 @@
+{
+  "actual_pyarrow_loaded": true,
+  "controls": [
+    {
+      "name": "v4-native",
+      "passed": true
+    }
+  ],
+  "guard_events": [],
+  "lightweight_private_scope": true,
+  "overlays": [
+    {
+      "actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/test.after.py.DATA",
+      "module": "tests.unit.logic.autoformal._private_v4_current_revocation"
+    },
+    {
+      "actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/owner.after.py.DATA",
+      "module": "ipfs_datasets_py.logic.autoformal.legal_release_coordinator_v1"
+    }
+  ],
+  "permitted_ctypes_self_handles": [
+    "self_process_handle"
+  ],
+  "physical_fixture_constructed": false,
+  "raw_cli_output": "",
+  "reused_exact_authored_V4_fixture_wire": {
+    "bytes": 1090977,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/before-v4-cli/complete-source-review-v4.wire",
+    "sha256": "84163b067168bcb742dd7b1138967d9063ed3bdbbca3d42e363b7f4b9ec1cde3"
+  },
+  "test_module_origin": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py",
+  "test_source_sha256": "ac7ea179761aae0a0972bd93b4bf5cc30b16fcba79ef6c50f74c8cfa80b14098",
+  "torch_duckdb_loaded": false
+}

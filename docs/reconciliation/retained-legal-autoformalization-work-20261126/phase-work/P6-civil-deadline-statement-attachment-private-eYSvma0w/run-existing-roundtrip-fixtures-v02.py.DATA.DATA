@@ -1,0 +1,123 @@
+"""Run real source-only owners and selected owning tests with local byte overlays."""
+import hashlib
+import importlib.abc
+import inspect
+import json
+import os
+from pathlib import Path
+import resource
+import sys
+import time
+import traceback
+import types
+
+repo, unit, scorer_path, result_path = map(Path, sys.argv[1:5])
+mode = sys.argv[5]
+assert mode in {"red", "green"}
+resource.setrlimit(resource.RLIMIT_AS, (512 * 1024**2, 512 * 1024**2))
+resource.setrlimit(resource.RLIMIT_CPU, (45, 46))
+resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
+os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
+sys.dont_write_bytecode = True
+sys.path.insert(0, str(repo))
+manifest = json.loads((unit / "exact-current-inputs-and-regression.json").read_bytes())
+test_origin = repo / manifest["test_rel"]
+scorer_origin = repo / manifest["scorer_rel"]
+for role, origin in (("test_before", test_origin), ("scorer_before", scorer_origin)):
+    raw = origin.read_bytes()
+    assert manifest[role]["sha256"] == hashlib.sha256(raw).hexdigest()
+
+class BlockUnneededImports(importlib.abc.MetaPathFinder):
+    def find_spec(self, fullname, path=None, target=None):
+        if fullname.split(".", 1)[0] in {"torch", "transformers", "sentence_transformers", "duckdb"}:
+            raise AssertionError("dependency outside this source-only fixture: " + fullname)
+        return None
+
+sys.meta_path.insert(0, BlockUnneededImports())
+external_events = []
+
+def audit(event, args):
+    if (event.startswith(("socket.", "subprocess.")) or event in
+            {"os.posix_spawn", "os.system", "os.exec", "os.fork"}):
+        external_events.append(event)
+        raise AssertionError("external action outside this source-only fixture: " + event)
+
+sys.addaudithook(audit)
+import pytest
+
+def load(name, raw, path):
+    module = types.ModuleType(name)
+    module.__file__ = str(path)
+    sys.modules[name] = module
+    exec(compile(raw, str(path), "exec"), module.__dict__)
+    return module
+
+test_raw = Path(manifest["test_after"]["path"]).read_bytes()
+assert manifest["test_after"]["sha256"] == hashlib.sha256(test_raw).hexdigest()
+test = load("_existing_ir_text_test", test_raw, test_origin)
+scorer_raw = scorer_path.read_bytes()
+scorer_sha = hashlib.sha256(scorer_raw).hexdigest()
+assert mode != "red" or scorer_sha == manifest["scorer_before"]["sha256"]
+test.scorer = load("_private_roundtrip_scorer", scorer_raw, scorer_origin)
+
+new_name = "test_civil_deadline_same_due_date_preserves_statement_attachment"
+predecessor_cases = json.loads((unit / "existing-v335-ordinary44-predecessor-names.json").read_bytes())
+retained_names = tuple(dict.fromkeys(name.split("[", 1)[0] for name in predecessor_cases))
+roster = []
+for name in [*retained_names, new_name]:
+    func = getattr(test, name)
+    marks = [mark for mark in getattr(func, "pytestmark", ()) if mark.name == "parametrize"]
+    assert len(marks) <= 1
+    cases = [({}, None)]
+    if marks:
+        keys, values = marks[0].args
+        keys = tuple(k.strip() for k in keys.split(",")) if isinstance(keys, str) else tuple(keys)
+        cases = []
+        for index, value in enumerate(values):
+            if hasattr(value, "values"):
+                args = value.values
+            elif len(keys) == 1:
+                args = (value,)
+            else:
+                args = value
+            cases.append((dict(zip(keys, args, strict=True)), index))
+    roster.extend((name, options, index) for options, index in cases)
+
+assert len(roster) == 47
+assert [name for name, _, _ in roster[:44]] == [case.split("[", 1)[0] for case in predecessor_cases]
+results = []
+for name, kwargs, index in roster:
+    func = getattr(test, name)
+    result = {"function": name, "params_index": index, "params_repr": repr(kwargs)}
+    start = time.monotonic()
+    with pytest.MonkeyPatch.context() as monkeypatch:
+        if "monkeypatch" in inspect.signature(func).parameters:
+            kwargs["monkeypatch"] = monkeypatch
+        try:
+            func(**kwargs)
+        except Exception:
+            result.update(outcome="failed", traceback=traceback.format_exc())
+        else:
+            result["outcome"] = "passed"
+    result["elapsed_seconds"] = round(time.monotonic() - start, 6)
+    results.append(result)
+roles = ("ipfs_datasets_py.logic.TDFOL.compiler_repairs", "ipfs_datasets_py.logic.legal_ir.extended_contracts",
+         "ipfs_datasets_py.logic.legal_ir.extended_compiler", "ipfs_datasets_py.logic.legal_ir.extended_decompiler")
+origins = {}
+for name in roles:
+    path = Path(sys.modules[name].__file__).resolve(strict=True)
+    data = path.read_bytes()
+    assert path.is_relative_to(repo)
+    origins[name] = {"path": str(path), "size": len(data), "sha256": hashlib.sha256(data).hexdigest()}
+report = {"mode": mode, "results": results, "scorer_origin": str(scorer_origin),
+          "actual_scorer_sha256": scorer_sha, "actual_test_sha256": manifest["test_after"]["sha256"],
+          "role_origins": origins, "external_events": external_events, "torch_imported": "torch" in sys.modules}
+with result_path.open("x", encoding="utf8") as output:
+    json.dump(report, output, sort_keys=True, indent=2)
+    output.write("\n")
+    output.flush()
+    os.fsync(output.fileno())
+result_path.chmod(0o400)
+assert not external_events
+if any(item["outcome"] != "passed" for item in results):
+    sys.exit(1)

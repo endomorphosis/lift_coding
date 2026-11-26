@@ -1,0 +1,77 @@
+from dataclasses import replace
+from pathlib import Path
+from types import ModuleType
+import hashlib
+import json
+import sys
+import traceback
+
+stage = Path(__file__).absolute().parent
+adapter_path = stage / "no-fit-current-obligation-adapter-v01.py"
+adapter_raw = adapter_path.read_bytes()
+assert (len(adapter_raw), hashlib.sha256(adapter_raw).hexdigest()) == (
+    20405, "a84c49de31dd4218043f2f6b9ff1f9ef954291eddde2661b20a580fbbc539bf7",
+)
+adapter = ModuleType("_authentic_current_obligation_probe")
+adapter.__file__ = str(adapter_path)
+sys.modules[adapter.__name__] = adapter
+exec(compile(adapter_raw, str(adapter_path), "exec", dont_inherit=True), adapter.__dict__)
+manifest_path = stage / "no-fit-overlay-v03.manifest.json"
+manifest_pin = (len(manifest_path.read_bytes()), hashlib.sha256(manifest_path.read_bytes()).hexdigest())
+assert manifest_pin == (359, "65d6f989eabcfa2e837ae58b91090e67c27aa353ce071d9f9867cdbca80aa3c3")
+manifest = json.loads(adapter.pinned_file(manifest_path, *manifest_pin))
+
+
+def test_writes(prior):
+    fixture = adapter.import_fixture(prior)
+    sample, _, holdout, versions, _ = adapter.samples_and_legacy_record(fixture)
+    intended, target, *_ = adapter.make_current_target(sample, versions)
+    expected_id = intended.record_id
+    receipt_substitute = replace(intended, record_id="", receipt_ids=("fictional-unrelated-theorem-receipt",))
+    receipt_substitute = replace(receipt_substitute, record_id=receipt_substitute.expected_record_id)
+    reissued = replace(intended, record_id="", semantic_family="fictional-different-verified-family",
+                       evidence_ids=("fictional-unrelated-evidence-retaining-receipt-names",))
+    reissued = replace(reissued, record_id=reissued.expected_record_id)
+
+    records = (("selected-record", intended, True), ("wrong-receipt", receipt_substitute, False),
+               ("same-receipt-name-altered-record", reissued, False))
+    assert len({record.record_id for _,record,_ in records}) == 3
+    assert reissued.receipt_ids == intended.receipt_ids
+    assert receipt_substitute.receipt_ids != intended.receipt_ids
+    assert all(record.obligation_digest == intended.obligation_digest == target.obligation_digest
+               and record.positive and record.eligible_for_training for _,record,_ in records)
+    targets = {target.obligation_id: target}
+    cases = []
+    for label, record, allowed in records:
+        row = adapter.run_trainer(fixture, prior, versions, holdout, label+"-trainer", record,
+                                  sample, int(allowed), targets=targets)
+        row.update(expected_feedback_record_id=expected_id, offered_feedback_record_id=record.record_id,
+                   claimed_receipt_ids=record.receipt_ids)
+        cases.append(row)
+        row = adapter.run_auxiliary(fixture, prior, versions, label+"-auxiliary", record, int(allowed),
+                                    targets=targets, expected_skipped=int(not allowed))
+        row.update(expected_feedback_record_id=expected_id, offered_feedback_record_id=record.record_id,
+                   claimed_receipt_ids=record.receipt_ids)
+        cases.append(row)
+    return {"cases": cases, "same_target_digest": target.obligation_digest,
+            "target_obligation_id": target.obligation_id, "sample_id": sample.sample_id}
+
+
+prior = adapter.load_prior()
+outcome = {}
+code = 2
+try:
+    prior.install_kernel_guards()
+    base = adapter.prepare_loader(prior, manifest)
+    outcome.update(test_writes(prior))
+    assert not prior.denied
+    code = 0 if all(case["passed"] for case in outcome["cases"]) else 1
+except Exception as exc:
+    traceback.print_exc()
+    outcome["refusal"] = repr(exc)
+finally:
+    outcome.update(worker_rc=code, explicit_denials=prior.denied, kernel_guard=prior.guard,
+                   compiled=prior.compiled, project_body_bytes=prior.compiled_total,
+                   no_primary_or_auxiliary_numeric_updates=True, purpose="receipt substitution RED")
+    print(json.dumps(outcome, sort_keys=True))
+raise SystemExit(code)

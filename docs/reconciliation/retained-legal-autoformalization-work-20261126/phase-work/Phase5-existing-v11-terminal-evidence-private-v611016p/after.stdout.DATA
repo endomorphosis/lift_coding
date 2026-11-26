@@ -1,0 +1,135 @@
+{
+  "actual_saved_artifact_parent_validator": true,
+  "cases": [
+    {
+      "agrees": true,
+      "case": "complete",
+      "expected_accepted": true,
+      "observed_accepted": true,
+      "refusal": null
+    },
+    {
+      "agrees": true,
+      "case": "abstained",
+      "expected_accepted": true,
+      "observed_accepted": true,
+      "refusal": null
+    },
+    {
+      "agrees": true,
+      "case": "time-before-forward",
+      "expected_accepted": true,
+      "observed_accepted": true,
+      "refusal": null
+    },
+    {
+      "agrees": true,
+      "case": "token-exhaustion",
+      "expected_accepted": true,
+      "observed_accepted": true,
+      "refusal": null
+    },
+    {
+      "agrees": true,
+      "case": "unexpected-bos",
+      "expected_accepted": true,
+      "observed_accepted": true,
+      "refusal": null
+    },
+    {
+      "agrees": true,
+      "case": "invalid-transport",
+      "expected_accepted": true,
+      "observed_accepted": true,
+      "refusal": null
+    },
+    {
+      "agrees": true,
+      "case": "malformed-body",
+      "expected_accepted": true,
+      "observed_accepted": true,
+      "refusal": null
+    },
+    {
+      "agrees": true,
+      "case": "empty-decoded-body",
+      "expected_accepted": true,
+      "observed_accepted": true,
+      "refusal": null
+    },
+    {
+      "agrees": true,
+      "case": "complete-without-eos",
+      "expected_accepted": false,
+      "observed_accepted": false,
+      "refusal": "v11 complete output requires observed EOS after a generated body"
+    },
+    {
+      "agrees": true,
+      "case": "complete-with-early-eos",
+      "expected_accepted": false,
+      "observed_accepted": false,
+      "refusal": "v11 raw generation tokens or text differ from the saved tokenizer contract"
+    },
+    {
+      "agrees": true,
+      "case": "complete-with-wrong-bos",
+      "expected_accepted": false,
+      "observed_accepted": false,
+      "refusal": "v11 raw generation tokens or text differ from the saved tokenizer contract"
+    },
+    {
+      "agrees": true,
+      "case": "complete-outside-vocab",
+      "expected_accepted": false,
+      "observed_accepted": false,
+      "refusal": "v11 raw generation tokens or text differ from the saved tokenizer contract"
+    },
+    {
+      "agrees": true,
+      "case": "false-abstention",
+      "expected_accepted": false,
+      "observed_accepted": false,
+      "refusal": "v11 abstention requires empty EOS output"
+    },
+    {
+      "agrees": true,
+      "case": "false-incomplete-with-eos",
+      "expected_accepted": false,
+      "observed_accepted": false,
+      "refusal": "v11 incomplete output contradicts the token limit or terminal evidence"
+    },
+    {
+      "agrees": true,
+      "case": "false-token-budget",
+      "expected_accepted": false,
+      "observed_accepted": false,
+      "refusal": "v11 incomplete output contradicts the token limit or terminal evidence"
+    },
+    {
+      "agrees": true,
+      "case": "valid-body-called-invalid",
+      "expected_accepted": false,
+      "observed_accepted": false,
+      "refusal": "v11 invalid body unexpectedly passes strict raw-wire assembly"
+    },
+    {
+      "agrees": true,
+      "case": "missing-tokenizer-receipt",
+      "expected_accepted": false,
+      "observed_accepted": false,
+      "refusal": "v11 generation input receipt differs from the source and token budget"
+    }
+  ],
+  "exact_public_codec": true,
+  "matched": 17,
+  "phase": "after",
+  "project_or_model_runtime_loaded": false,
+  "selected_owner": {
+    "bytes": 89200,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/inference.after.py.DATA",
+    "prospective_blob": "b6a23e81ad5fb38894da764182004397d80c5018",
+    "sha256": "334ccb423da0c0b3de4985f51c541e2ff5966c04055ceaf3fd8ce6388ef08f6b"
+  },
+  "total": 17
+}

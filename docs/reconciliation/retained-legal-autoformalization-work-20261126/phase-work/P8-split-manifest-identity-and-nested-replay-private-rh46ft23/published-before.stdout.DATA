@@ -1,0 +1,109 @@
+........................................................................ [ 54%]
+.............FF..FF.FFFFFFFFF................................            [100%]
+=================================== FAILURES ===================================
+_ test_compiler_replays_nested_external_gate_evidence[nested-only-external_validity] _
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:539: in test_compiler_replays_nested_external_gate_evidence
+    assert decision.accepted is expected_acceptance, decision.failures
+E   AssertionError: ['external_validity_promotion_evidence_missing']
+E   assert False is True
+E    +  where False = RolloutGateResult(accepted=False, failures=['external_validity_promotion_evidence_missing'], warnings=[], metrics={'sc...bbbbbbbbbbbbbbbbbbbbbbbbbbbbb'}}}, 'evidence_complete': True, 'rollback_ready': True, 'promotion_decision': 'blocked'}).accepted
+_ test_compiler_replays_nested_external_gate_evidence[nested-only-external_validity_evidence] _
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:539: in test_compiler_replays_nested_external_gate_evidence
+    assert decision.accepted is expected_acceptance, decision.failures
+E   AssertionError: ['external_validity_promotion_evidence_missing']
+E   assert False is True
+E    +  where False = RolloutGateResult(accepted=False, failures=['external_validity_promotion_evidence_missing'], warnings=[], metrics={'sc...bbbbbbbbbbbbbbbbbbbbbbbbbbbbb'}}}, 'evidence_complete': True, 'rollback_ready': True, 'promotion_decision': 'blocked'}).accepted
+_ test_compiler_replays_nested_external_gate_evidence[conflicting-saved-external_validity] _
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:539: in test_compiler_replays_nested_external_gate_evidence
+    assert decision.accepted is expected_acceptance, decision.failures
+E   AssertionError: []
+E   assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-compi...bbbbbbbbbbbbbbbbbbbbbbbbbbbb'}}}, 'evidence_complete': True, 'rollback_ready': True, 'promotion_decision': 'accepted'}).accepted
+_ test_compiler_replays_nested_external_gate_evidence[conflicting-saved-external_validity_evidence] _
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:539: in test_compiler_replays_nested_external_gate_evidence
+    assert decision.accepted is expected_acceptance, decision.failures
+E   AssertionError: []
+E   assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-compi...bbbbbbbbbbbbbbbbbbbbbbbbbbbb'}}}, 'evidence_complete': True, 'rollback_ready': True, 'promotion_decision': 'accepted'}).accepted
+_______ test_compiler_binds_split_manifest_actually_validated[matching] ________
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:650: in test_compiler_binds_split_manifest_actually_validated
+    assert details["validated_split_manifest_digest"] == actual.digest
+E   KeyError: 'validated_split_manifest_digest'
+_ test_compiler_binds_split_manifest_actually_validated[different-clean-manifest] _
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:641: in test_compiler_binds_split_manifest_actually_validated
+    assert result.accepted is should_pass, result.failures
+E   AssertionError: []
+E   assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-compi...e24d324c67613b69d0f31e1191f9'}}}, 'evidence_complete': True, 'rollback_ready': True, 'promotion_decision': 'accepted'}).accepted
+_ test_compiler_binds_split_manifest_actually_validated[detached-declared-digest] _
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:641: in test_compiler_binds_split_manifest_actually_validated
+    assert result.accepted is should_pass, result.failures
+E   AssertionError: []
+E   assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-compi...e24d324c67613b69d0f31e1191f9'}}}, 'evidence_complete': True, 'rollback_ready': True, 'promotion_decision': 'accepted'}).accepted
+__ test_compiler_binds_split_manifest_actually_validated[no-declared-digest] ___
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:650: in test_compiler_binds_split_manifest_actually_validated
+    assert details["validated_split_manifest_digest"] == actual.digest
+E   KeyError: 'validated_split_manifest_digest'
+_ test_compiler_binds_split_manifest_actually_validated[leak-hidden-by-compact-pass] _
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:641: in test_compiler_binds_split_manifest_actually_validated
+    assert result.accepted is should_pass, result.failures
+E   AssertionError: []
+E   assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-compi...73077a0ce91531177f94e51764bc'}}}, 'evidence_complete': True, 'rollback_ready': True, 'promotion_decision': 'accepted'}).accepted
+__ test_compiler_binds_split_manifest_actually_validated[outer-guard-blocks] ___
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:650: in test_compiler_binds_split_manifest_actually_validated
+    assert details["validated_split_manifest_digest"] == actual.digest
+E   KeyError: 'validated_split_manifest_digest'
+__ test_compiler_binds_split_manifest_actually_validated[nested-guard-blocks] __
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:641: in test_compiler_binds_split_manifest_actually_validated
+    assert result.accepted is should_pass, result.failures
+E   AssertionError: []
+E   assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-compi...e24d324c67613b69d0f31e1191f9'}}}, 'evidence_complete': True, 'rollback_ready': True, 'promotion_decision': 'accepted'}).accepted
+_____ test_compiler_binds_split_manifest_actually_validated[null-manifest] _____
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:641: in test_compiler_binds_split_manifest_actually_validated
+    assert result.accepted is should_pass, result.failures
+E   AssertionError: []
+E   assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-compi...e24d324c67613b69d0f31e1191f9'}}}, 'evidence_complete': True, 'rollback_ready': True, 'promotion_decision': 'accepted'}).accepted
+_ test_compiler_binds_split_manifest_actually_validated[invalid-manifest-schema] _
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:639: in test_compiler_binds_split_manifest_actually_validated
+    result = compiler_system_promotion_gate(evidence)
+../../../repositories/datasets/scripts/ops/legal_ir/hammer_leanstral_rollout_gate.py:2256: in compiler_system_promotion_gate
+    external_result = _compiler_system_external_validity_result(payload, cfg)
+../../../repositories/datasets/scripts/ops/legal_ir/hammer_leanstral_rollout_gate.py:2466: in _compiler_system_external_validity_result
+    replayed.append(external_validity_promotion_gate(packet))
+../../../repositories/datasets/scripts/ops/legal_ir/hammer_leanstral_rollout_gate.py:2138: in external_validity_promotion_gate
+    domain_failures, domain_warnings, domain_details = _external_domain_failures(
+../../../repositories/datasets/scripts/ops/legal_ir/hammer_leanstral_rollout_gate.py:2993: in _external_domain_failures
+    return _leak_free_split_failures(packet)
+../../../repositories/datasets/scripts/ops/legal_ir/hammer_leanstral_rollout_gate.py:3035: in _leak_free_split_failures
+    split_guard = split_guard_from_payload(packet)
+../../../repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py:1245: in split_guard_from_payload
+    return validate_legal_ir_eval_splits(manifest)
+../../../repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py:966: in validate_legal_ir_eval_splits
+    else LegalIRSplitManifest.from_mapping(manifest)
+../../../repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py:725: in from_mapping
+    return cls(
+<string>:11: in __init__
+    ???
+../../../repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py:632: in __post_init__
+    raise ValueError("unsupported LegalIR split schema version")
+E   ValueError: unsupported LegalIR split schema version
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-split-manifest-identity-and-nested-replay-private-rh46ft23/published-before/junit.xml -
+=========================== short test summary info ============================
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_replays_nested_external_gate_evidence[nested-only-external_validity]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_replays_nested_external_gate_evidence[nested-only-external_validity_evidence]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_replays_nested_external_gate_evidence[conflicting-saved-external_validity]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_replays_nested_external_gate_evidence[conflicting-saved-external_validity_evidence]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_binds_split_manifest_actually_validated[matching]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_binds_split_manifest_actually_validated[different-clean-manifest]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_binds_split_manifest_actually_validated[detached-declared-digest]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_binds_split_manifest_actually_validated[no-declared-digest]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_binds_split_manifest_actually_validated[leak-hidden-by-compact-pass]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_binds_split_manifest_actually_validated[outer-guard-blocks]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_binds_split_manifest_actually_validated[nested-guard-blocks]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_binds_split_manifest_actually_validated[null-manifest]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_binds_split_manifest_actually_validated[invalid-manifest-schema]
+13 failed, 120 passed, 2 deselected in 3.55s

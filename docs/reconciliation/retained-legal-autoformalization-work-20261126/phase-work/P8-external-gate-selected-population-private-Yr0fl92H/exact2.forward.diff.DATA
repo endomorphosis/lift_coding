@@ -1,0 +1,181 @@
+--- a/scripts/ops/legal_ir/hammer_leanstral_rollout_gate.py
++++ b/scripts/ops/legal_ir/hammer_leanstral_rollout_gate.py
+@@ -2103,6 +2103,8 @@
+     It does not trust a single headline flag: each evidence domain must expose
+     the schema, status, metrics, and cross-artifact identifiers needed to prove
+     that the candidate was evaluated leak-free and can be rolled back.
++    If supplied independently, expected_external_benchmark binds the report
++    to the selected benchmark digest and ordered packet IDs.
+     """
+ 
+     cfg = config or ExternalValidityPromotionConfig()
+@@ -2138,6 +2140,13 @@
+             packet,
+             cfg,
+         )
++        if domain == "external_benchmark_scores" and "expected_external_benchmark" in payload:
++            population_failures, population_details = _external_benchmark_population_failures(
++                payload["expected_external_benchmark"], packet,
++                packet_results_reconciled=domain_details["packet_results_reconciled"],
++            )
++            domain_failures.extend(population_failures)
++            domain_details.update(population_details)
+         failures.extend(domain_failures)
+         warnings.extend(domain_warnings)
+         domain_entry.update(domain_details)
+@@ -3379,10 +3388,53 @@
+             or accepted == bool(reasons)
+         ):
+             return None
++        detail = row.get("detail")
++        semantic = detail.get("semantic_equivalence") if isinstance(detail, Mapping) else None
++        if accepted and isinstance(semantic, Mapping) and (
++            semantic.get("complete") is False or semantic.get("missing_metrics")
++        ):
++            return None
+         packet_ids.add(packet_id)
+         if not accepted:
+             failed.append(packet_id)
+     return len(packet_ids), len(packet_ids) - len(failed), failed
++
++
++def _external_benchmark_population_failures(
++    expected: Any,
++    packet: Mapping[str, Any],
++    *,
++    packet_results_reconciled: bool,
++) -> tuple[list[str], dict[str, Any]]:
++    details: dict[str, Any] = {"selected_population_reconciled": False}
++    invalid = ["external_benchmark_scores:selected_population_invalid"]
++    if not isinstance(expected, Mapping) or set(expected) != {"benchmark_digest", "packet_ids"}:
++        return invalid, details
++    digest, packet_ids = expected["benchmark_digest"], expected["packet_ids"]
++    if (
++        type(digest) is not str or not _valid_digest_ref(digest)
++        or not isinstance(packet_ids, list) or not packet_ids
++        or any(type(packet_id) is not str or not packet_id.strip() for packet_id in packet_ids)
++        or len(set(packet_ids)) != len(packet_ids)
++    ):
++        return invalid, details
++    expected_digest = _normalized_digest_ref(digest)
++    details.update(expected_benchmark_digest=expected_digest, expected_packet_ids=list(packet_ids))
++    if not packet_results_reconciled:
++        return ["external_benchmark_scores:selected_population_unreconciled"], details
++    external = packet.get("external_validity")
++    if not isinstance(external, Mapping):
++        external = packet
++    reported_digest = packet.get("benchmark_digest")
++    observed_ids = [row["packet_id"] for row in external["packet_results"]]
++    matches = (
++        type(reported_digest) is str and _valid_digest_ref(reported_digest)
++        and _normalized_digest_ref(reported_digest) == expected_digest
++        and observed_ids == packet_ids
++    )
++    details.update(reported_benchmark_digest=reported_digest,
++                   observed_packet_ids=observed_ids, selected_population_reconciled=matches)
++    return ([] if matches else ["external_benchmark_scores:selected_population_mismatch"]), details
+ 
+ 
+ def _external_benchmark_failures(
+--- a/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py
++++ b/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py
+@@ -418,3 +418,99 @@
+     )
+     if hidden_failure:
+         assert "external_benchmark_scores:packet_summary_mismatch" in decision["failures"]
++
++
++@pytest.mark.parametrize("evaluation", ["complete", "subset", "reordered"])
++def test_external_validity_gate_honors_independently_selected_benchmark_population(evaluation):
++    from hashlib import sha256
++
++    from ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark import (
++        evaluate_external_legal_expert_benchmark,
++        load_external_expert_benchmark_packets,
++    )
++
++    selected = load_external_expert_benchmark_packets(
++        ROOT / "tests" / "fixtures" / "legal_ir" / "external_expert_benchmark.jsonl")
++    assert len(selected) == 2
++    digest_payload = json.dumps([packet.digest for packet in selected], separators=(",", ":")).encode()
++    expected = {
++        "benchmark_digest": "sha256:" + sha256(digest_payload).hexdigest(),
++        "packet_ids": [packet.packet_id for packet in selected],
++    }
++    evaluated = selected if evaluation == "complete" else (
++        selected[:1] if evaluation == "subset" else tuple(reversed(selected)))
++    predictions = [{
++        "packet_id": packet.packet_id,
++        "candidate_ir": packet.reference_ir,
++        "predicted_ir_families": list(packet.expected_ir_families),
++        "citations": [citation.citation for citation in packet.citations],
++        "proof_obligation_ids": list(packet.required_proof_obligation_ids),
++        "decompiled_text": packet.decompiler_expectations.expected_reading,
++        "round_trip_success": True,
++    } for packet in evaluated]
++    report = evaluate_external_legal_expert_benchmark(evaluated, predictions).to_dict()
++    assert report["accepted"]
++    assert report["external_validity"]["packet_count"] == len(evaluated)
++    evidence = _complete_evidence()
++    evidence["expected_external_benchmark"] = expected
++    evidence["evidence"]["external_benchmark_scores"] = _bind(report)
++    result = external_validity_promotion_gate(evidence)
++    assert result.accepted is (evaluation == "complete"), result.to_dict()
++    check = result.metrics["evidence_domains"]["external_benchmark_scores"]
++    assert check["packet_results_reconciled"] is True
++    assert check["selected_population_reconciled"] is (evaluation == "complete")
++    if evaluation != "complete":
++        assert "external_benchmark_scores:selected_population_mismatch" in result.failures
++
++
++def test_external_validity_gate_does_not_promote_unmeasured_legacy_ir() -> None:
++    from dataclasses import replace
++
++    from ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark import (
++        evaluate_external_legal_expert_benchmark,
++        load_external_expert_benchmark_packets,
++    )
++
++    packet = load_external_expert_benchmark_packets(
++        ROOT / "tests" / "fixtures" / "legal_ir" / "external_expert_benchmark.jsonl")[0]
++    reference = packet.to_dict()["reference_ir"]
++    reference["rules"][0]["arguments"] = ["agency", "notice"]
++    packet = replace(packet, reference_ir=reference)
++    prediction = {
++        "packet_id": packet.packet_id, "candidate_ir": packet.reference_ir,
++        "predicted_ir_families": list(packet.expected_ir_families),
++        "citations": [citation.citation for citation in packet.citations],
++        "proof_obligation_ids": list(packet.required_proof_obligation_ids),
++        "decompiled_text": packet.decompiler_expectations.expected_reading,
++        "round_trip_success": True,
++    }
++    report = evaluate_external_legal_expert_benchmark([packet], [prediction]).to_dict()
++    diagnostic = report["external_validity"]["packet_results"][0]["detail"]["semantic_equivalence"]
++    assert diagnostic["complete"] is False
++    assert set(diagnostic["missing_metrics"]) == {"structural_equivalence", "obligation_equivalence"}
++    assert set(diagnostic["scores"].values()) == {1.0}
++    evidence = _complete_evidence()
++    evidence["evidence"]["external_benchmark_scores"] = _bind(report)
++    result = external_validity_promotion_gate(evidence)
++    assert not result.accepted, result.to_dict()
++    assert not result.metrics["domain_status"]["external_benchmark_scores"]
++
++
++@pytest.mark.parametrize("case", ["duplicate-expected-identity", "summary-without-rows"])
++def test_external_validity_gate_refuses_unverifiable_selected_benchmark(case):
++    evidence = _complete_evidence()
++    report = _actual_external_benchmark_report()
++    expected = {
++        "benchmark_digest": report["benchmark_digest"],
++        "packet_ids": [row["packet_id"] for row in report["external_validity"]["packet_results"]],
++    }
++    if case == "duplicate-expected-identity":
++        expected["packet_ids"].append(expected["packet_ids"][0])
++        evidence["evidence"]["external_benchmark_scores"] = _bind(report)
++        expected_blocker = "external_benchmark_scores:selected_population_invalid"
++    else:
++        expected_blocker = "external_benchmark_scores:selected_population_unreconciled"
++    evidence["expected_external_benchmark"] = expected
++    result = external_validity_promotion_gate(evidence)
++    assert result.accepted is False, result.to_dict()
++    assert expected_blocker in result.failures

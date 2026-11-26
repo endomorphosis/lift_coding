@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/run_exact7_candidate_inventory_retention.py", line 116, in <module>
+    fn(**args)
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/proposed/test_legal_relational_norm_v1.py", line 1086, in test_candidate_interface_bounds_refuse_before_classification
+    bridge.prepare_candidate_ir_interface_v1(
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py", line 1051, in prepare_candidate_ir_interface_v1
+    records.append(_interface_one(candidate, seen_ids))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py", line 1027, in _interface_one
+    return _classify_relational(codec, payload, payload_raw, payload_text, candidate["payload_sha256"],
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py", line 947, in _classify_relational
+    prepared = prepare_relational_norm_v1(payload_raw, expected_request_sha256=payload_sha)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py", line 302, in prepare_relational_norm_v1
+    ast, signatures, native, snapshots, routes, pins = _owners()
+                                                       ^^^^^^^^^
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py", line 126, in _owners
+    from ..parsers import legacy_modal
+ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.parsers'

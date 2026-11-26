@@ -1,0 +1,158 @@
+{
+  "Source_install": null,
+  "actual_runs": {
+    "after": {
+      "exact_owning": {
+        "bytes": 583,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/owning-after.stdout",
+        "sha256": "0ac868e32627d55c9af04c9e5c6de19a227859273a02665f528ffbb91ba82328"
+      },
+      "exit": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/owning-after.exit",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "independent_public_cases": {
+        "bytes": 655,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/after-v02.stdout",
+        "sha256": "54559b764948c5d19cf0ece391364de54870a49700d27e7e8109c44b98453ce7"
+      },
+      "profiles": [
+        {
+          "actual": "unsupported-and-positive-retained",
+          "ast_bytes": 659333,
+          "inventory_request_bytes": 764248,
+          "offered_disposition": "unsupported",
+          "profile": "mixed"
+        },
+        {
+          "actual": "unsupported-and-positive-retained",
+          "ast_bytes": 1145700,
+          "inventory_request_bytes": 1249189,
+          "offered_disposition": "unsupported",
+          "profile": "native"
+        }
+      ]
+    },
+    "before": {
+      "exact_owning": {
+        "bytes": 644,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/owning-before.stdout",
+        "sha256": "9c5cc399a0507b17142801374933640b68df8a403cf915c34f4c7da68a7e7827"
+      },
+      "exit": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/owning-before.exit",
+        "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+      },
+      "independent_public_cases": {
+        "bytes": 618,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/before-v02.stdout",
+        "sha256": "f483f74470e6a1dcf9e7f0037c288890fe33cf858784aafd38990d2997c5e81f"
+      },
+      "profiles": [
+        {
+          "actual": "raised",
+          "ast_bytes": 659333,
+          "error": "complete JSON byte bound exceeded",
+          "inventory_request_bytes": 764248,
+          "profile": "mixed"
+        },
+        {
+          "actual": "raised",
+          "ast_bytes": 1145700,
+          "error": "complete JSON byte bound exceeded",
+          "inventory_request_bytes": 1249189,
+          "profile": "native"
+        }
+      ]
+    }
+  },
+  "behavior": "Public candidate inventory now hashes complete AST bytes at its own accepted envelope size. Too-large typed or native candidates retain an unsupported row, raw payload, AST hash, ordering, and the existing representable sibling. Actual lowerers and their limits are unchanged.",
+  "candidate_two_paths": [
+    {
+      "after": {
+        "bytes": 61518,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/proposed/legal_relational_norm_v1.py",
+        "sha256": "ff66f344c9cda788801a9fa2d3ef66afd7046d903a53d2bbf11f8dbfdf847ad2"
+      },
+      "after_blob": "7d3609f35c81a071798f37eb79ac310ab62e93ae",
+      "before": {
+        "blob": "c8561f81741dfcc7122d50eb7418c857958863d3",
+        "bytes": 61444,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py",
+        "relative_path": "ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py",
+        "sha256": "e3fb0941e123672f4c280f282b0bce80937dab6cdc56ca607ffd5d3713ae9adf"
+      },
+      "forward": {
+        "bytes": 1416,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/bridge.forward.diff.DATA",
+        "sha256": "4ebb7a0c40732115f0193509fb72d5e1654c0d19cd645de6db94edf919a51f56"
+      },
+      "git_mode": "100644",
+      "inverse": {
+        "bytes": 1416,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/bridge.inverse.diff.DATA",
+        "sha256": "9600009ba1c68916ae28e849ad2c3c15652af19ca9c7465836c7f6f14c2848ea"
+      },
+      "relative_path": "ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py"
+    },
+    {
+      "after": {
+        "bytes": 82687,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/proposed/test_legal_relational_norm_v1.py",
+        "sha256": "d6180c3e711e5d795c9bea3c4a258ed8720e4a9d831f1426fa61b67322d8cbea"
+      },
+      "after_blob": "f3fd84f94af3c9957d2e43e485d4009a05c88d7c",
+      "before": {
+        "blob": "f8fbe28c07a156a8f67e6d6501706d3abe6c206f",
+        "bytes": 78756,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/tests/unit/logic/autoformal/test_legal_relational_norm_v1.py",
+        "relative_path": "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py",
+        "sha256": "b682b68029459bfb66ca6d09e2fb88269705b77cfd0296ca7ee46f8f96b135ef"
+      },
+      "forward": {
+        "bytes": 4251,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/owning_test.forward.diff.DATA",
+        "sha256": "c37acd1e321393963013d82abd2708f6bb2b6fd73e6e9a59ed8b9fd14b5e2cdb"
+      },
+      "git_mode": "100644",
+      "inverse": {
+        "bytes": 4251,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/owning_test.inverse.diff.DATA",
+        "sha256": "31476b03ca5ad6e570935f852b6283e2fcb11bf5ef8e50afa33eb2730b3a4c95"
+      },
+      "relative_path": "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py"
+    }
+  ],
+  "exact_cached_git_inputs": {
+    "bytes": 4589,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/exact-published-profile-inputs.json",
+    "sha256": "eee60b28b3b7cba18b7ce5a73a50fb9a5e3cc625304fa8910a74bca7bc2d94cb"
+  },
+  "initial_current_Git": "bda9f1fb146722e8b116cb0503880fb22e5291a4",
+  "initial_scope_note": "First 1450-arm mixed probe exceeded the separate item-count budget; it was not used as evidence of the codec-byte-bound defect. The final 650-arm authored TypedExpression was below aggregate bytes/items and reproduced the exact smaller codec-byte failure. Native fixture is ordinary serialized AST syntax above its native cap, with no claimed original report or compilation.",
+  "old_test_retained_AST": 98,
+  "ordinary_qualification": null,
+  "owning_selectors": [
+    "test_candidate_inventory_retains_candidate_above_its_codec_limit[mixed_relational]",
+    "test_candidate_inventory_retains_candidate_above_its_codec_limit[native_unary_preservation]"
+  ],
+  "public_runner": {
+    "bytes": 7252,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/run_public_census_v02.py",
+    "sha256": "a306be7ccd44d632463ce7cb22aa2dae44228fd99817f537fbec265d0ac03df5"
+  },
+  "retained_setup_before_cases": {
+    "bytes": 617,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/before.stdout",
+    "sha256": "64e115893fa3cbb87ff3dadb27c0807399ad15a5de2d0e9cbf631fe0e5debc43"
+  },
+  "runner": {
+    "bytes": 4470,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/run_exact_existing_owning_regression.py",
+    "sha256": "f0f4fb06bad3248c7746c0cb35c8d732c565cf91df57bf802577d394c946cb71"
+  },
+  "schema": "private-Phase3-candidate-inventory-preserve-per-codec-refusal/v1",
+  "scope": "Actual checked current profile owners loaded from an exact physical Git projection, with namespace-only parents and restricted one CPU/512 MiB. Actual existing mixed renderer generated Lean text only. No ordinary pytest suite, Lean compilation, Source install, model, legal decision, source review, acceptance, or corpus qualification."
+}

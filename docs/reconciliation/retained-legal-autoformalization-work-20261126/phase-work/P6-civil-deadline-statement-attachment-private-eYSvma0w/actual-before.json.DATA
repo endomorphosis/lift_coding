@@ -1,0 +1,54 @@
+{
+  "actual_scorer_sha256": "06a50571f77db77c5ee25d13d45adfb55ecb1ef19ddb1c89d92cfef7bc522d06",
+  "actual_test_sha256": "5e562e963b8ee3dbcdb206da7627692ca78a9b1b6c95f3770b62adc8fcffcba0",
+  "external_events": [],
+  "mode": "red",
+  "results": [
+    {
+      "elapsed_seconds": 0.089435,
+      "function": "test_civil_deadline_same_due_date_preserves_statement_attachment",
+      "outcome": "passed",
+      "params_index": 0,
+      "params_repr": "{'change': 'none', 'expected_due_dates_exact': True}"
+    },
+    {
+      "elapsed_seconds": 0.000383,
+      "function": "test_civil_deadline_same_due_date_preserves_statement_attachment",
+      "outcome": "passed",
+      "params_index": 1,
+      "params_repr": "{'change': 'different-unit', 'expected_due_dates_exact': True}"
+    },
+    {
+      "elapsed_seconds": 0.000947,
+      "function": "test_civil_deadline_same_due_date_preserves_statement_attachment",
+      "outcome": "failed",
+      "params_index": 2,
+      "params_repr": "{'change': 'different-statement', 'expected_due_dates_exact': False}",
+      "traceback": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P6-civil-deadline-statement-attachment-private-eYSvma0w/run-existing-roundtrip-fixtures.py.DATA\", line 95, in <module>\n    func(**kwargs)\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py\", line 1498, in test_civil_deadline_same_due_date_preserves_statement_attachment\nAssertionError: {'original_utf8_exact': None, 'canonical_prose_exact': False, 'complete_typed_structure_exact': False, 'due_dates_exact': True, 'semantic_equivalence_verified': False, 'source_correspondence_verified': False, 'proof_validity_verified': False}\n"
+    }
+  ],
+  "role_origins": {
+    "ipfs_datasets_py.logic.TDFOL.compiler_repairs": {
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/TDFOL/compiler_repairs.py",
+      "sha256": "248dd9a3c9be8b21fb75799415aa6a72c6d81d7c559ed7579fa3f4a69660b823",
+      "size": 11393
+    },
+    "ipfs_datasets_py.logic.legal_ir.extended_compiler": {
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/legal_ir/extended_compiler.py",
+      "sha256": "1df3a74a711143aef03d08048b06b74b3b2f7d99017e49c831f91493b192316f",
+      "size": 16302
+    },
+    "ipfs_datasets_py.logic.legal_ir.extended_contracts": {
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/legal_ir/extended_contracts.py",
+      "sha256": "9e7f7781b09965cdfefbd7713de66793f559aedd56b76f0734211fbeb0dde4dd",
+      "size": 10358
+    },
+    "ipfs_datasets_py.logic.legal_ir.extended_decompiler": {
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/legal_ir/extended_decompiler.py",
+      "sha256": "f9fa4903ff67cf246ca0df11ead75278329bef5e5185507ac04c87815a1fe357",
+      "size": 18172
+    }
+  },
+  "scorer_origin": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/formalization/autoencoder/ir_legal_text_roundtrip.py",
+  "torch_imported": false
+}

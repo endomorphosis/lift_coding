@@ -1,0 +1,101 @@
+from pathlib import Path
+from types import ModuleType
+import hashlib
+import json
+import sys
+import traceback
+
+
+stage = Path(__file__).absolute().parent
+adapter_path = stage / "no-fit-current-obligation-adapter-v01.py"
+adapter_bytes = adapter_path.read_bytes()
+assert len(adapter_bytes) == 20405
+assert hashlib.sha256(adapter_bytes).hexdigest() == "a84c49de31dd4218043f2f6b9ff1f9ef954291eddde2661b20a580fbbc539bf7"
+adapter = ModuleType("_authentic_three_owner_probe_adapter")
+adapter.__file__ = str(adapter_path)
+sys.modules[adapter.__name__] = adapter
+exec(compile(adapter_bytes, str(adapter_path), "exec"), adapter.__dict__)
+relative = "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py"
+base_oid = "3e08a06029424257f8aa9df72a4a12d29c0d9547"
+
+
+class CloneAttempt(Exception):
+    """Intercept immediately before cloning or updating model state."""
+
+
+def run(prior, overlay):
+    prior.install_kernel_guards()
+    manifest = {"record": ["record.after-v02.DATA", 63093,
+                 "1312c18bca78bc555e9ca7714dd9dcf7509ac92ef30f298fc77b8f67739d2b79"]} if overlay else {}
+    adapter.prepare_loader(prior, manifest)
+    prior.EXPECTED[relative] = base_oid
+    if overlay:
+        path = stage / "ablation.after-v02.DATA"
+        digest = "01dc8c506d30d3348712d1547e46bf801109818aadab77e94c2ded8188f90bbc"
+        raw = adapter.pinned_file(path, 41765, digest)
+        bound_loader = prior.BoundSource
+
+        class AblationOverlay(bound_loader):
+            def get_code(self, fullname):
+                original = super().get_code(fullname)
+                target = Path(self.path).absolute()
+                if target.relative_to(prior.ROOT).as_posix() != relative:
+                    return original
+                assert prior.compiled[relative]["git_blob_sha1"] == base_oid
+                prior.compiled_total += len(raw)
+                assert prior.compiled_total <= prior.MAX_MODULE_BYTES
+                prior.compiled[relative]["overlay_executed"] = dict(path=str(path), bytes=len(raw), sha256=digest)
+                return compile(raw, str(target), "exec", dont_inherit=True)
+
+        prior.BoundSource = AblationOverlay
+
+    fixture = adapter.import_fixture(prior)
+    from ipfs_datasets_py.optimizers.logic_theorem_optimizer import proof_feedback_ablation as owner
+    original, _, holdout, versions, proof = adapter.samples_and_legacy_record(fixture)
+    guidance = fixture._hammer(original.sample_id, "fictional-ordinary-guidance", versions)
+    report = []
+    for label, offered, expected in (
+        ("typed-object", proof, "explicit-typed-refusal"),
+        ("typed-wire", proof.to_dict(), "explicit-typed-refusal"),
+        ("typed-envelope", {"proof_feedback_record": proof, "guidance": guidance}, "explicit-typed-refusal"),
+        ("ordinary-guidance", guidance, "existing-clone-path"),
+    ):
+        called = []
+
+        def stop_before_clone(model):
+            called.append(True)
+            raise CloneAttempt()
+
+        with fixture.pytest.MonkeyPatch.context() as patches:
+            patches.setattr(owner, "_clone_autoencoder", stop_before_clone)
+            try:
+                owner.run_proof_feedback_ablation(None, [original], [holdout],
+                    hammer_feedback=[offered], expected_versions=versions)
+            except CloneAttempt:
+                observed = "existing-clone-path"
+            except ValueError as error:
+                assert str(error) == "typed proof-feedback ablation requires a matched typed control", str(error)
+                observed = "explicit-typed-refusal"
+            else:
+                raise AssertionError("unexpected return from a no-clone probe")
+        assert len(called) == (observed == "existing-clone-path")
+        report.append(dict(case=label, expected=expected, observed=observed, passed=observed == expected))
+    assert not prior.denied
+    return report
+
+
+prior = adapter.load_prior()
+outcome = {}
+code = 2
+try:
+    assert sys.argv[1:] in (["baseline"], ["overlay"])
+    outcome["rows"] = run(prior, sys.argv[1] == "overlay")
+    code = 0 if all(row["passed"] for row in outcome["rows"]) else 1
+except Exception as error:
+    traceback.print_exc()
+    outcome["refusal"] = str(error)
+finally:
+    outcome.update(worker_rc=code, denied=prior.denied, guard=prior.guard, compiled=prior.compiled,
+                   project_body_bytes=prior.compiled_total, clone_calls_intercepted=True, fit=False)
+    print(json.dumps(outcome, sort_keys=True))
+raise SystemExit(code)

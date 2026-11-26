@@ -1,0 +1,361 @@
+{
+  "actual_scorer_sha256": "4bcd94f7a3d780e41419eb7d5af7a8b1377b223e6e7fdfb84aac406c6e3c64ab",
+  "actual_test_sha256": "5e562e963b8ee3dbcdb206da7627692ca78a9b1b6c95f3770b62adc8fcffcba0",
+  "external_events": [],
+  "mode": "green",
+  "results": [
+    {
+      "elapsed_seconds": 0.1693,
+      "function": "test_relational_score_separates_typed_structure_normalized_prose_and_original_bytes",
+      "outcome": "passed",
+      "params_index": null,
+      "params_repr": "{}"
+    },
+    {
+      "elapsed_seconds": 0.02179,
+      "function": "test_relational_score_original_byte_measurement_is_optional_and_same_row_joint",
+      "outcome": "passed",
+      "params_index": null,
+      "params_repr": "{}"
+    },
+    {
+      "elapsed_seconds": 0.002541,
+      "function": "test_relational_score_whole_input_abstentions_remain_in_denominator",
+      "outcome": "passed",
+      "params_index": 0,
+      "params_repr": "{'candidate': ''}"
+    },
+    {
+      "elapsed_seconds": 0.003359,
+      "function": "test_relational_score_whole_input_abstentions_remain_in_denominator",
+      "outcome": "passed",
+      "params_index": 1,
+      "params_repr": "{'candidate': '   '}"
+    },
+    {
+      "elapsed_seconds": 0.002622,
+      "function": "test_relational_score_whole_input_abstentions_remain_in_denominator",
+      "outcome": "passed",
+      "params_index": 2,
+      "params_repr": "{'candidate': 'An officer must serve a person.'}"
+    },
+    {
+      "elapsed_seconds": 0.002768,
+      "function": "test_relational_score_whole_input_abstentions_remain_in_denominator",
+      "outcome": "passed",
+      "params_index": 3,
+      "params_repr": "{'candidate': 'Typed legal rule: tdfol/tdfol_default.\\nTypes: Object.\\nPredicate Serve: server of type Object; addressee of type Object.\\nRule: (for every officer of type Object, (there exists person of type Object such that (it is obligatory that (Serve holds for server: officer of type Object; addressee: person of type Object)))). Further obligations apply.'}"
+    },
+    {
+      "elapsed_seconds": 0.002649,
+      "function": "test_relational_score_whole_input_abstentions_remain_in_denominator",
+      "outcome": "passed",
+      "params_index": 4,
+      "params_repr": "{'candidate': 'Typed legal rule: tdfol/tdfol_default.\\nTypes: Object.\\nPredicate Serve: server of type Object; addressee of type Object.\\nRule: (for every officer of type Object, (there exists person of type Object such that (it is obligatory that (Serve holds for server: officer of type Object; server: person of type Object)))).'}"
+    },
+    {
+      "elapsed_seconds": 0.00728,
+      "function": "test_relational_score_never_passes_original_source_or_reference_to_inverse",
+      "outcome": "passed",
+      "params_index": null,
+      "params_repr": "{}"
+    },
+    {
+      "elapsed_seconds": 0.000427,
+      "function": "test_relational_score_requires_explicit_text_candidate",
+      "outcome": "passed",
+      "params_index": 0,
+      "params_repr": "{'value': None}"
+    },
+    {
+      "elapsed_seconds": 0.00033,
+      "function": "test_relational_score_requires_explicit_text_candidate",
+      "outcome": "passed",
+      "params_index": 1,
+      "params_repr": "{'value': 7}"
+    },
+    {
+      "elapsed_seconds": 0.000325,
+      "function": "test_relational_score_requires_explicit_text_candidate",
+      "outcome": "passed",
+      "params_index": 2,
+      "params_repr": "{'value': True}"
+    },
+    {
+      "elapsed_seconds": 0.000434,
+      "function": "test_relational_score_input_guards_run_before_any_reference_realization",
+      "outcome": "passed",
+      "params_index": 0,
+      "params_repr": "{'fault': 'candidate_surrogate', 'message': 'valid UTF8 candidate and optional original text required'}"
+    },
+    {
+      "elapsed_seconds": 0.000361,
+      "function": "test_relational_score_input_guards_run_before_any_reference_realization",
+      "outcome": "passed",
+      "params_index": 1,
+      "params_repr": "{'fault': 'original_surrogate', 'message': 'valid UTF8 candidate and optional original text required'}"
+    },
+    {
+      "elapsed_seconds": 0.000407,
+      "function": "test_relational_score_input_guards_run_before_any_reference_realization",
+      "outcome": "passed",
+      "params_index": 2,
+      "params_repr": "{'fault': 'original_bool', 'message': 'optional original source text required'}"
+    },
+    {
+      "elapsed_seconds": 0.013917,
+      "function": "test_relational_score_distinguishes_obligation_from_bare_assertion",
+      "outcome": "passed",
+      "params_index": null,
+      "params_repr": "{}"
+    },
+    {
+      "elapsed_seconds": 0.002534,
+      "function": "test_relational_score_abstains_on_ordinary_past_tense_prose",
+      "outcome": "passed",
+      "params_index": null,
+      "params_repr": "{}"
+    },
+    {
+      "elapsed_seconds": 0.000612,
+      "function": "test_civil_deadline_roundtrip_keeps_typed_unit_and_independent_due_date",
+      "outcome": "passed",
+      "params_index": 0,
+      "params_repr": "{'unit': 'calendar_days', 'expected_due_date': '2024-05-26'}"
+    },
+    {
+      "elapsed_seconds": 0.00039,
+      "function": "test_civil_deadline_roundtrip_keeps_typed_unit_and_independent_due_date",
+      "outcome": "passed",
+      "params_index": 1,
+      "params_repr": "{'unit': 'business_days', 'expected_due_date': '2024-05-29'}"
+    },
+    {
+      "elapsed_seconds": 0.0002,
+      "function": "test_civil_deadline_roundtrip_distinguishes_opposite_unit_reference",
+      "outcome": "passed",
+      "params_index": null,
+      "params_repr": "{}"
+    },
+    {
+      "elapsed_seconds": 0.000204,
+      "function": "test_civil_deadline_inverse_receives_only_candidate_prose_and_profile",
+      "outcome": "passed",
+      "params_index": null,
+      "params_repr": "{}"
+    },
+    {
+      "elapsed_seconds": 0.000115,
+      "function": "test_civil_deadline_roundtrip_abstains_on_unsupported_prose",
+      "outcome": "passed",
+      "params_index": null,
+      "params_repr": "{}"
+    },
+    {
+      "elapsed_seconds": 0.000187,
+      "function": "test_civil_deadline_roundtrip_requires_exact_named_anchor_context",
+      "outcome": "passed",
+      "params_index": 0,
+      "params_repr": "{'context_case': 'missing'}"
+    },
+    {
+      "elapsed_seconds": 0.000177,
+      "function": "test_civil_deadline_roundtrip_requires_exact_named_anchor_context",
+      "outcome": "passed",
+      "params_index": 1,
+      "params_repr": "{'context_case': 'different-anchor'}"
+    },
+    {
+      "elapsed_seconds": 0.000176,
+      "function": "test_civil_deadline_roundtrip_requires_covered_business_calendar",
+      "outcome": "passed",
+      "params_index": 0,
+      "params_repr": "{'coverage_case': 'missing-calendar'}"
+    },
+    {
+      "elapsed_seconds": 0.000177,
+      "function": "test_civil_deadline_roundtrip_requires_covered_business_calendar",
+      "outcome": "passed",
+      "params_index": 1,
+      "params_repr": "{'coverage_case': 'before-coverage'}"
+    },
+    {
+      "elapsed_seconds": 0.000189,
+      "function": "test_civil_deadline_roundtrip_requires_covered_business_calendar",
+      "outcome": "passed",
+      "params_index": 2,
+      "params_repr": "{'coverage_case': 'insufficient-workdays'}"
+    },
+    {
+      "elapsed_seconds": 0.000182,
+      "function": "test_effective_date_roundtrip_real_inverse_with_fixed_as_of",
+      "outcome": "passed",
+      "params_index": 0,
+      "params_repr": "{'effective_from': '2030-01-01', 'started': True}"
+    },
+    {
+      "elapsed_seconds": 0.000159,
+      "function": "test_effective_date_roundtrip_real_inverse_with_fixed_as_of",
+      "outcome": "passed",
+      "params_index": 1,
+      "params_repr": "{'effective_from': '2030-04-01', 'started': False}"
+    },
+    {
+      "elapsed_seconds": 0.000147,
+      "function": "test_effective_date_roundtrip_distinguishes_date_and_start_condition",
+      "outcome": "passed",
+      "params_index": 0,
+      "params_repr": "{'cutoff': (2030, 1, 1), 'agreement': False}"
+    },
+    {
+      "elapsed_seconds": 0.00014,
+      "function": "test_effective_date_roundtrip_distinguishes_date_and_start_condition",
+      "outcome": "passed",
+      "params_index": 1,
+      "params_repr": "{'cutoff': (2030, 6, 1), 'agreement': True}"
+    },
+    {
+      "elapsed_seconds": 0.00037,
+      "function": "test_effective_date_roundtrip_keeps_typed_deadline_and_norm_binding",
+      "outcome": "passed",
+      "params_index": null,
+      "params_repr": "{}"
+    },
+    {
+      "elapsed_seconds": 0.000103,
+      "function": "test_effective_date_roundtrip_refuses_unrepresented_applicability",
+      "outcome": "passed",
+      "params_index": 0,
+      "params_repr": "{'text': 'Norm: \"agency\" must \"publish\" \"rule\". Temporal: effective from 2030-02-30.'}"
+    },
+    {
+      "elapsed_seconds": 9.6e-05,
+      "function": "test_effective_date_roundtrip_refuses_unrepresented_applicability",
+      "outcome": "passed",
+      "params_index": 1,
+      "params_repr": "{'text': 'Norm: \"agency\" must \"publish\" \"rule\". Temporal: effective from 20300201.'}"
+    },
+    {
+      "elapsed_seconds": 9.3e-05,
+      "function": "test_effective_date_roundtrip_refuses_unrepresented_applicability",
+      "outcome": "passed",
+      "params_index": 2,
+      "params_repr": "{'text': 'Norm: \"agency\" must \"publish\" \"rule\". Temporal: effective from 2030-02-01T00:00:00Z.'}"
+    },
+    {
+      "elapsed_seconds": 9.5e-05,
+      "function": "test_effective_date_roundtrip_refuses_unrepresented_applicability",
+      "outcome": "passed",
+      "params_index": 3,
+      "params_repr": "{'text': 'Norm: \"agency\" must \"publish\" \"rule\".'}"
+    },
+    {
+      "elapsed_seconds": 0.0001,
+      "function": "test_effective_date_roundtrip_refuses_unrepresented_applicability",
+      "outcome": "passed",
+      "params_index": 4,
+      "params_repr": "{'text': 'Norm: \"agency\" must \"publish\" \"rule\". Temporal: \"effective from 2030-02-01\".'}"
+    },
+    {
+      "elapsed_seconds": 9.8e-05,
+      "function": "test_effective_date_roundtrip_refuses_unrepresented_applicability",
+      "outcome": "passed",
+      "params_index": 5,
+      "params_repr": "{'text': 'Norm: \"agency\" must \"publish\" \"rule\". Temporal: effective from 2030-01-01; effective from 2030-10-01.'}"
+    },
+    {
+      "elapsed_seconds": 8.7e-05,
+      "function": "test_effective_date_roundtrip_refuses_unrepresented_applicability",
+      "outcome": "passed",
+      "params_index": 6,
+      "params_repr": "{'text': 'Definition: \"notice\" means \"a letter\". Temporal: effective from 2030-02-01.'}"
+    },
+    {
+      "elapsed_seconds": 8.7e-05,
+      "function": "test_effective_date_roundtrip_refuses_unrepresented_applicability",
+      "outcome": "passed",
+      "params_index": 7,
+      "params_repr": "{'text': 'Norm: \"agency\" must \"publish\" \"rule\". Temporal: effective from 2030-02-01 when approved.'}"
+    },
+    {
+      "elapsed_seconds": 0.000312,
+      "function": "test_effective_date_wire_is_closed_and_legacy_wires_stay_exact",
+      "outcome": "passed",
+      "params_index": null,
+      "params_repr": "{}"
+    },
+    {
+      "elapsed_seconds": 9.1e-05,
+      "function": "test_effective_date_score_requires_explicit_civil_as_of",
+      "outcome": "passed",
+      "params_index": 0,
+      "params_repr": "{'fault': 'text'}"
+    },
+    {
+      "elapsed_seconds": 4.3e-05,
+      "function": "test_effective_date_score_requires_explicit_civil_as_of",
+      "outcome": "passed",
+      "params_index": 1,
+      "params_repr": "{'fault': 'datetime'}"
+    },
+    {
+      "elapsed_seconds": 3.7e-05,
+      "function": "test_effective_date_score_requires_explicit_civil_as_of",
+      "outcome": "passed",
+      "params_index": 2,
+      "params_repr": "{'fault': 'absent'}"
+    },
+    {
+      "elapsed_seconds": 5.5e-05,
+      "function": "test_effective_date_calendar_type_refuses_duplicates_and_invalid_values",
+      "outcome": "passed",
+      "params_index": null,
+      "params_repr": "{}"
+    },
+    {
+      "elapsed_seconds": 0.000302,
+      "function": "test_civil_deadline_same_due_date_preserves_statement_attachment",
+      "outcome": "passed",
+      "params_index": 0,
+      "params_repr": "{'change': 'none', 'expected_due_dates_exact': True}"
+    },
+    {
+      "elapsed_seconds": 0.000302,
+      "function": "test_civil_deadline_same_due_date_preserves_statement_attachment",
+      "outcome": "passed",
+      "params_index": 1,
+      "params_repr": "{'change': 'different-unit', 'expected_due_dates_exact': True}"
+    },
+    {
+      "elapsed_seconds": 0.000284,
+      "function": "test_civil_deadline_same_due_date_preserves_statement_attachment",
+      "outcome": "passed",
+      "params_index": 2,
+      "params_repr": "{'change': 'different-statement', 'expected_due_dates_exact': False}"
+    }
+  ],
+  "role_origins": {
+    "ipfs_datasets_py.logic.TDFOL.compiler_repairs": {
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/TDFOL/compiler_repairs.py",
+      "sha256": "248dd9a3c9be8b21fb75799415aa6a72c6d81d7c559ed7579fa3f4a69660b823",
+      "size": 11393
+    },
+    "ipfs_datasets_py.logic.legal_ir.extended_compiler": {
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/legal_ir/extended_compiler.py",
+      "sha256": "1df3a74a711143aef03d08048b06b74b3b2f7d99017e49c831f91493b192316f",
+      "size": 16302
+    },
+    "ipfs_datasets_py.logic.legal_ir.extended_contracts": {
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/legal_ir/extended_contracts.py",
+      "sha256": "9e7f7781b09965cdfefbd7713de66793f559aedd56b76f0734211fbeb0dde4dd",
+      "size": 10358
+    },
+    "ipfs_datasets_py.logic.legal_ir.extended_decompiler": {
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/legal_ir/extended_decompiler.py",
+      "sha256": "f9fa4903ff67cf246ca0df11ead75278329bef5e5185507ac04c87815a1fe357",
+      "size": 18172
+    }
+  },
+  "scorer_origin": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/formalization/autoencoder/ir_legal_text_roundtrip.py",
+  "torch_imported": false
+}

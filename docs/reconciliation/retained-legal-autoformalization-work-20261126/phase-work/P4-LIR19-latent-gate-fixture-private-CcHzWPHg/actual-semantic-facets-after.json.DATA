@@ -1,0 +1,201 @@
+{
+  "evaluator_compiled_sha256": "949e4dcbfb3b306d760ebedbf256d79d25441ee6dbe3e3915c63e5304d586413",
+  "evidence_scope": "direct legacy semantic-facet and promotion fixtures",
+  "external_events": [],
+  "results": [
+    {
+      "arguments": "()",
+      "case": "test_raw_ir_pair_scores_semantic_equivalence_beyond_ids_and_order",
+      "elapsed_seconds": 0.002025,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "()",
+      "case": "test_semantic_metrics_detect_obligation_graph_temporal_and_proof_delta",
+      "elapsed_seconds": 0.001369,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "()",
+      "case": "test_explicit_metric_payload_accepts_delta_alias_and_fails_closed_on_missing",
+      "elapsed_seconds": 4.8e-05,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "()",
+      "case": "test_comparison_reports_disagreement_when_ce_cosine_improve_but_semantics_regress",
+      "elapsed_seconds": 0.000214,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "()",
+      "case": "test_raw_family_payload_can_drive_hard_promotion_gate",
+      "elapsed_seconds": 0.002665,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "()",
+      "case": "test_absent_reverse_round_trip_cannot_be_credited_from_structural_agreement",
+      "elapsed_seconds": 0.003808,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "('absent',)",
+      "case": "test_raw_round_trip_requires_both_reported_nonempty_observations",
+      "elapsed_seconds": 0.00119,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "('empty',)",
+      "case": "test_raw_round_trip_requires_both_reported_nonempty_observations",
+      "elapsed_seconds": 0.001176,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "('scalar',)",
+      "case": "test_raw_round_trip_requires_both_reported_nonempty_observations",
+      "elapsed_seconds": 0.001178,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "('false',)",
+      "case": "test_raw_round_trip_requires_both_reported_nonempty_observations",
+      "elapsed_seconds": 0.001161,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "('only_decompiled',)",
+      "case": "test_raw_round_trip_requires_both_reported_nonempty_observations",
+      "elapsed_seconds": 0.001165,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "('only_recompiled',)",
+      "case": "test_raw_round_trip_requires_both_reported_nonempty_observations",
+      "elapsed_seconds": 0.001288,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "('blank_decompiled',)",
+      "case": "test_raw_round_trip_requires_both_reported_nonempty_observations",
+      "elapsed_seconds": 0.00118,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "('blank_recompiled',)",
+      "case": "test_raw_round_trip_requires_both_reported_nonempty_observations",
+      "elapsed_seconds": 0.001185,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "('nested_result',)",
+      "case": "test_raw_round_trip_requires_both_reported_nonempty_observations",
+      "elapsed_seconds": 0.001176,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "('extra_field',)",
+      "case": "test_raw_round_trip_requires_both_reported_nonempty_observations",
+      "elapsed_seconds": 0.001169,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "('ambiguous_source',)",
+      "case": "test_raw_round_trip_requires_both_reported_nonempty_observations",
+      "elapsed_seconds": 0.001166,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "('ambiguous_container',)",
+      "case": "test_raw_round_trip_requires_both_reported_nonempty_observations",
+      "elapsed_seconds": 0.001288,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "('reference',)",
+      "case": "test_one_sided_round_trip_evidence_is_not_a_complete_pair",
+      "elapsed_seconds": 0.001189,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "('candidate',)",
+      "case": "test_one_sided_round_trip_evidence_is_not_a_complete_pair",
+      "elapsed_seconds": 0.001184,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "()",
+      "case": "test_recognized_actor_change_still_blocks_legacy_raw_promotion",
+      "elapsed_seconds": 0.002475,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "('missing_reverse',)",
+      "case": "test_explicit_scores_cannot_launder_uncovered_raw_pair_evidence",
+      "elapsed_seconds": 0.002622,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "('unknown_arguments',)",
+      "case": "test_explicit_scores_cannot_launder_uncovered_raw_pair_evidence",
+      "elapsed_seconds": 0.002707,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "('roundtrip',)",
+      "case": "test_explicit_legacy_observation_aliases_retain_reported_only_scope",
+      "elapsed_seconds": 0.001204,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "('direct',)",
+      "case": "test_explicit_legacy_observation_aliases_retain_reported_only_scope",
+      "elapsed_seconds": 0.001204,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "('field_aliases',)",
+      "case": "test_explicit_legacy_observation_aliases_retain_reported_only_scope",
+      "elapsed_seconds": 0.001176,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "()",
+      "case": "test_explicit_metrics_without_a_raw_pair_keep_the_existing_contract",
+      "elapsed_seconds": 0.000103,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "('actor',)",
+      "case": "test_explicit_perfect_scores_cannot_launder_covered_raw_pair_evidence",
+      "elapsed_seconds": 0.006522,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "('proof_obligation_ids',)",
+      "case": "test_explicit_perfect_scores_cannot_launder_covered_raw_pair_evidence",
+      "elapsed_seconds": 0.006499,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "('missing',)",
+      "case": "test_legacy_round_trip_observations_are_separate_from_ir_facets",
+      "elapsed_seconds": 0.001215,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "('changed-prose',)",
+      "case": "test_legacy_round_trip_observations_are_separate_from_ir_facets",
+      "elapsed_seconds": 0.001191,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "('direct-alias',)",
+      "case": "test_legacy_round_trip_observations_are_separate_from_ir_facets",
+      "elapsed_seconds": 0.001168,
+      "outcome": "passed"
+    }
+  ],
+  "test_sha256": "2425e5ec483c7bd7c357019d808f9f66700d823ab446a03e1d98559178da74a8",
+  "torch_loaded": false
+}

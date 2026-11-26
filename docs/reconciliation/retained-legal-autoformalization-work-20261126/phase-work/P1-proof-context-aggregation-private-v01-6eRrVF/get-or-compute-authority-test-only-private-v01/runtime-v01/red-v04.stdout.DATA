@@ -1,0 +1,17 @@
+FF..                                                                     [100%]
+=================================== FAILURES ===================================
+_ test_cache_compute_leader_respects_requested_theorem_authority[advisory-refused-exact] _
+test_proof_cache.py:1668: in test_cache_compute_leader_respects_requested_theorem_authority
+    assert not result.usable
+E   AssertionError: assert not True
+E    +  where True = VerificationCacheLookup(entry=VerificationCacheEntry(key=VerificationCacheKey(ir_digest='sha256:d8cf5c5eacb724812cbadb...'sha256:cb23a29900322b499c9d47a3262f75e9fe917927a9f0b2ecfe5c10f6f37a8019', single_flight_shared=False, age_seconds=0.0).usable
+_ test_cache_compute_leader_respects_requested_theorem_authority[advisory-refused-unified] _
+test_proof_cache.py:1668: in test_cache_compute_leader_respects_requested_theorem_authority
+    assert not result.usable
+E   AssertionError: assert not True
+E    +  where True = VerificationCacheLookup(entry=VerificationCacheEntry(key=VerificationCacheKey(ir_digest='sha256:d8cf5c5eacb724812cbadb...'sha256:85824cb350b2c2bd8e951f6922cb2c14cd93a82257e526efda44ba2e4217f38f', single_flight_shared=False, age_seconds=1.0).usable
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/red-v04/junit.xml -
+=========================== short test summary info ============================
+FAILED ../../../../../../../../dev::test_cache_compute_leader_respects_requested_theorem_authority[advisory-refused-exact]
+FAILED ../../../../../../../../dev::test_cache_compute_leader_respects_requested_theorem_authority[advisory-refused-unified]
+2 failed, 2 passed in 2.59s

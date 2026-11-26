@@ -1,0 +1,38 @@
+--- a/tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder.py
++++ b/tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder.py
+@@ -13792,35 +13792,3 @@
+         )
+     assert views(sample) == original_views
+     assert views(revised) == revised_views
+-
+-
+-@pytest.mark.parametrize("auto_cuda_flag", (None, "0"), ids=("unset", "disabled"))
+-def test_auto_compute_without_cuda_opt_in_does_not_attempt_torch_import(
+-    monkeypatch, auto_cuda_flag
+-) -> None:
+-    import builtins
+-
+-    flag = "IPFS_DATASETS_MODAL_AUTOENCODER_AUTO_CUDA"
+-    if auto_cuda_flag is None:
+-        monkeypatch.delenv(flag, raising=False)
+-    else:
+-        monkeypatch.setenv(flag, auto_cuda_flag)
+-
+-    original_import = builtins.__import__
+-    torch_imports = []
+-
+-    def track_torch_import(name, *args, **kwargs):
+-        if name.split(".", 1)[0] == "torch":
+-            torch_imports.append(name)
+-            raise ModuleNotFoundError("Torch import blocked by this regression fixture", name=name)
+-        return original_import(name, *args, **kwargs)
+-
+-    with monkeypatch.context() as imports:
+-        imports.setattr(builtins, "__import__", track_torch_import)
+-        autoencoder = AdaptiveModalAutoencoder(compute_device="auto")
+-        metadata = autoencoder.compute_backend_metadata()
+-
+-    assert metadata["autoencoder_compute_backend"] == "python"
+-    assert metadata["autoencoder_compute_device"] == "python"
+-    assert metadata["autoencoder_compute_device_request"] == "auto"
+-    assert torch_imports == []

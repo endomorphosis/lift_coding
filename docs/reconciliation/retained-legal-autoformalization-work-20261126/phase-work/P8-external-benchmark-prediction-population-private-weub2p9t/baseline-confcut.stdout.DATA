@@ -1,0 +1,98 @@
+............................FFFFFF                                       [100%]
+=================================== FAILURES ===================================
+_ test_external_benchmark_refuses_predictions_for_unselected_packets[sequence] _
+
+form = 'sequence'
+
+    @pytest.mark.parametrize("form", ["sequence", "keyed", "flat"])
+    def test_external_benchmark_refuses_predictions_for_unselected_packets(form) -> None:
+        packet, other = _packets()
+        chosen, foreign = _prediction(packet), _prediction(other)
+        assert evaluate_external_legal_expert_benchmark([packet], [chosen]).accepted
+        if form == "sequence":
+            predictions = [chosen, foreign]
+        elif form == "keyed":
+            predictions = {packet.packet_id: chosen, other.packet_id: foreign}
+        else:
+            predictions = foreign
+>       with pytest.raises(LegalIRExternalBenchmarkError, match="outside the selected benchmark population"):
+E       Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'>
+
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:398: Failed
+__ test_external_benchmark_refuses_predictions_for_unselected_packets[keyed] ___
+
+form = 'keyed'
+
+    @pytest.mark.parametrize("form", ["sequence", "keyed", "flat"])
+    def test_external_benchmark_refuses_predictions_for_unselected_packets(form) -> None:
+        packet, other = _packets()
+        chosen, foreign = _prediction(packet), _prediction(other)
+        assert evaluate_external_legal_expert_benchmark([packet], [chosen]).accepted
+        if form == "sequence":
+            predictions = [chosen, foreign]
+        elif form == "keyed":
+            predictions = {packet.packet_id: chosen, other.packet_id: foreign}
+        else:
+            predictions = foreign
+>       with pytest.raises(LegalIRExternalBenchmarkError, match="outside the selected benchmark population"):
+E       Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'>
+
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:398: Failed
+___ test_external_benchmark_refuses_predictions_for_unselected_packets[flat] ___
+
+form = 'flat'
+
+    @pytest.mark.parametrize("form", ["sequence", "keyed", "flat"])
+    def test_external_benchmark_refuses_predictions_for_unselected_packets(form) -> None:
+        packet, other = _packets()
+        chosen, foreign = _prediction(packet), _prediction(other)
+        assert evaluate_external_legal_expert_benchmark([packet], [chosen]).accepted
+        if form == "sequence":
+            predictions = [chosen, foreign]
+        elif form == "keyed":
+            predictions = {packet.packet_id: chosen, other.packet_id: foreign}
+        else:
+            predictions = foreign
+>       with pytest.raises(LegalIRExternalBenchmarkError, match="outside the selected benchmark population"):
+E       Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'>
+
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:398: Failed
+_____ test_external_benchmark_refuses_unbound_sequence_output[malformed0] ______
+
+malformed = {'candidate_ir': {}}
+
+    @pytest.mark.parametrize("malformed", [{"candidate_ir": {}}, None])
+    def test_external_benchmark_refuses_unbound_sequence_output(malformed) -> None:
+        packet = _packets()[0]
+>       with pytest.raises(LegalIRExternalBenchmarkError, match="prediction row requires a packet ID"):
+E       Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'>
+
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:405: Failed
+________ test_external_benchmark_refuses_unbound_sequence_output[None] _________
+
+malformed = None
+
+    @pytest.mark.parametrize("malformed", [{"candidate_ir": {}}, None])
+    def test_external_benchmark_refuses_unbound_sequence_output(malformed) -> None:
+        packet = _packets()[0]
+>       with pytest.raises(LegalIRExternalBenchmarkError, match="prediction row requires a packet ID"):
+E       Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'>
+
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:405: Failed
+___________ test_external_benchmark_refuses_nonmapping_keyed_output ____________
+
+    def test_external_benchmark_refuses_nonmapping_keyed_output() -> None:
+        packet = _packets()[0]
+>       with pytest.raises(LegalIRExternalBenchmarkError, match="keyed prediction must be a mapping"):
+E       Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'>
+
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:411: Failed
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-prediction-population-private-weub2p9t/baseline-confcut-tmp/junit.xml -
+=========================== short test summary info ============================
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_refuses_predictions_for_unselected_packets[sequence]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_refuses_predictions_for_unselected_packets[keyed]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_refuses_predictions_for_unselected_packets[flat]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_refuses_unbound_sequence_output[malformed0]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_refuses_unbound_sequence_output[None]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_refuses_nonmapping_keyed_output
+6 failed, 28 passed in 0.46s

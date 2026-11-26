@@ -1,0 +1,351 @@
+diff --git a/ipfs_datasets_py/logic/legal_ir/proof_cache.py b/ipfs_datasets_py/logic/legal_ir/proof_cache.py
+--- a/ipfs_datasets_py/logic/legal_ir/proof_cache.py
++++ b/ipfs_datasets_py/logic/legal_ir/proof_cache.py
+@@ -580,6 +580,30 @@
+             raise LegalProofIntegrityError("no proved obligation matches the expected reuse context")
+         return matches
+ 
++    def _formal_obligation_coverage(self) -> dict[str, Any]:
++        """Project complete contexts from an already verified bound record."""
++        from ..common.duckdb_proof_store import LEGAL_FORMAL_OBLIGATION_COVERAGE
++
++        required = {obligation.obligation_id for obligation in self.formalization_artifact().proof_obligations}
++        obligation_by_receipt = {receipt.digest: receipt.obligation_id for receipt in self._theorem_receipt_headers()}
++        coverage: dict[bytes, set[str]] = {}
++        for binding in self.proof_bindings:
++            # The declaration and proposition are checked per receipt. All
++            # other context identities must agree for their proofs to combine.
++            context = _json_ready(binding["context"])
++            del context["expected_declaration"], context["expected_proposition"]
++            coverage.setdefault(_canonical_bytes(context), set()).add(
++                obligation_by_receipt[binding["receipt_digest"]]
++            )
++        complete_contexts = [
++            json.loads(context) for context, covered in sorted(coverage.items())
++            if required and required <= covered
++        ]
++        return dict(property=LEGAL_FORMAL_OBLIGATION_COVERAGE,
++                    required_obligation_ids=sorted(required),
++                    complete_proof_contexts=complete_contexts,
++                    source_admission=False, legal_admission=False, corpus_admission=False)
++
+     def verify_integrity(self) -> "LegalProofRecord":
+         """Recompute the full envelope, artifact and all proof bindings."""
+         digest = _sha256_digest(_canonical_bytes(self._identity_payload()))
+@@ -788,10 +812,9 @@
+             # shallow nested mutations must not retain an earlier verified CID.
+             record = LegalProofRecord.from_dict(record.to_dict())
+             envelope_bytes = _canonical_bytes(record.to_dict())
+-            required = sorted(item.obligation_id for item in record.formalization_artifact().proof_obligations)
+             bound = record.schema_version == LEGAL_BOUND_PROOF_RECORD_SCHEMA_VERSION
+-            proved = (bound and bool(required)
+-                      and set(required) <= {item.obligation_id for item in record._theorem_receipt_headers()})
++            scope = record._formal_obligation_coverage() if bound else {}
++            proved = bool(scope.get("complete_proof_contexts"))
+             # Preserve the v1 artifact projection exactly. Only new bound v2
+             # entries add their actual contexts and formal-obligation scope.
+             key_args = dict(
+@@ -803,10 +826,10 @@
+                 ir={"source_id": record.source_id, "source_digest": record.source_digest,
+                     "artifact_cid": record.artifact_cid},
+             )
+-            scope = dict(property="declared_formal_obligation_coverage",
+-                         required_obligation_ids=required, source_admission=False,
+-                         legal_admission=False, corpus_admission=False)
+             if bound:
++                from ..common.duckdb_proof_store import LEGAL_FORMAL_COVERAGE_VERSION
++
++                key_args["backend_version"] = LEGAL_FORMAL_COVERAGE_VERSION
+                 key_args["toolchain"] = {"legal_ir": True, "bound_contexts": [
+                     _json_ready(item["context"]) for item in record.proof_bindings]}
+                 key_args["ir"]["artifact_digest"] = record.artifact_digest
+diff --git a/ipfs_datasets_py/logic/common/duckdb_proof_migration.py b/ipfs_datasets_py/logic/common/duckdb_proof_migration.py
+--- a/ipfs_datasets_py/logic/common/duckdb_proof_migration.py
++++ b/ipfs_datasets_py/logic/common/duckdb_proof_migration.py
+@@ -42,6 +42,7 @@
+ from .duckdb_proof_store import (
+     DuckDBProofStore,
+     DuckDBProofStoreError,
++    LEGAL_FORMAL_COVERAGE_VERSION,
+     ProofOutcomeKind,
+     ProofTrustLevel,
+     UnifiedProofEntry,
+@@ -1795,14 +1796,14 @@
+     proved = False
+     bound_record = None
+     bound_contexts = []
++    formal_scope = {}
+     if schema == "legal-proof-record/v2":
+         try:
+             from ..legal_ir.proof_cache import LegalProofRecord
+ 
+             bound_record = LegalProofRecord.from_dict(payload)
+-            required = {item.obligation_id for item in bound_record.formalization_artifact().proof_obligations}
+-            covered = {item["obligation_id"] for item in bound_record.theorem_receipts}
+-            proved = bool(required) and required <= covered
++            formal_scope = bound_record._formal_obligation_coverage()
++            proved = bool(formal_scope["complete_proof_contexts"])
+             bound_contexts = [item["context"] for item in bound_record.to_dict()["proof_bindings"]]
+         except (TypeError, ValueError, KeyError, AttributeError) as exc:
+             raise ProofMigrationQuarantineError("invalid bound legal proof record") from exc
+@@ -1842,13 +1843,9 @@
+     # PROVED row; every bound v2 key contains its full historical context.
+     if theorem_receipts or bound_record is not None:
+         key_values["policy"]["legal_receipt_binding_policy"] = "bound-record-v2-only"
+-    formal_scope = {}
+     if bound_record is not None:
+-        formal_scope = dict(property="declared_formal_obligation_coverage",
+-                            required_obligation_ids=sorted(required), source_admission=False,
+-                            legal_admission=False, corpus_admission=False)
+         key_values["property_value"].update(formal_scope)
+-        key_values["backend_version"] = "bound-v2"
++        key_values["backend_version"] = LEGAL_FORMAL_COVERAGE_VERSION
+         key_values["solver_identities"]["bound_contexts"] = bound_contexts
+         key_values["toolchain"] = {"bound_contexts": bound_contexts}
+     key = UnifiedProofKey.build(**key_values)
+diff --git a/ipfs_datasets_py/logic/common/duckdb_proof_store.py b/ipfs_datasets_py/logic/common/duckdb_proof_store.py
+--- a/ipfs_datasets_py/logic/common/duckdb_proof_store.py
++++ b/ipfs_datasets_py/logic/common/duckdb_proof_store.py
+@@ -70,6 +70,8 @@
+ UNIFIED_PROOF_KEY_SCHEMA_VERSION: Final = "unified-proof-key/v1"
+ UNIFIED_PROOF_ENTRY_SCHEMA_VERSION: Final = "unified-proof-entry/v1"
+ PROOFS_CATALOG_NAME: Final = "proofs"
++LEGAL_FORMAL_OBLIGATION_COVERAGE: Final = "declared_formal_obligation_coverage"
++LEGAL_FORMAL_COVERAGE_VERSION: Final = "bound-v2-coherent-coverage/v1"
+ SQL_MAX_ENTRY_JSON_BYTES: Final = 8 * 1024 * 1024
+ SQL_MAX_KEY_JSON_BYTES: Final = 64 * 1024
+ SQL_MAX_PREMISES: Final = 4096
+@@ -1632,6 +1634,18 @@
+     def access_statistics_for(
+         self, key: UnifiedProofKey | VerificationCacheKey
+     ) -> AccessStatistics: ...
++
++
++def _unqualified_legal_coverage(entry: UnifiedProofEntry) -> bool:
++    """Keep older whole-artifact rows without granting their proof authority."""
++    return (
++        entry.status is ResultStatus.PROVED
++        and entry.result_payload.get("property") == LEGAL_FORMAL_OBLIGATION_COVERAGE
++        and (
++            entry.key.backend_version != LEGAL_FORMAL_COVERAGE_VERSION
++            or not entry.result_payload.get("complete_proof_contexts")
++        )
++    )
+ 
+ 
+ class DuckDBProofStore:
+@@ -2135,6 +2149,17 @@
+                 hit=False,
+                 usable=False,
+                 reason=CacheLookupReason.TAMPERED,
++                key_digest=key.digest,
++                single_flight_shared=single_flight_shared,
++            )
++        if _unqualified_legal_coverage(entry):
++            self._stats["rejections"] += 1
++            self._access_touch(key.digest, rejection=True, now=now)
++            return VerificationCacheLookup(
++                entry=None,
++                hit=True,
++                usable=False,
++                reason=CacheLookupReason.AUTHORITY_MISMATCH,
+                 key_digest=key.digest,
+                 single_flight_shared=single_flight_shared,
+             )
+@@ -2355,6 +2380,8 @@
+         unified_entry = UnifiedProofEntry.from_dict(
+             unified_entry.to_dict()
+         ).verify_integrity()
++        if _unqualified_legal_coverage(unified_entry):
++            raise DuckDBProofStoreAuthorityError("whole-artifact proof requires one complete current context")
+         current = time.time() if now is None else float(now)
+         with self._lock:
+             if self._connection is not None:
+@@ -2429,7 +2456,10 @@
+             max_trust_level=max_trust_level,
+             now=now,
+         )
+-        if existing.usable:
++        # A withheld historical row is an authority refusal, not a miss.
++        if existing.usable or (
++            existing.reason is CacheLookupReason.AUTHORITY_MISMATCH and existing.entry is None
++        ):
+             return existing
+ 
+         leader = False
+@@ -2442,7 +2472,9 @@
+                 max_trust_level=max_trust_level,
+                 now=now,
+             )
+-            if recheck.usable:
++            if recheck.usable or (
++                recheck.reason is CacheLookupReason.AUTHORITY_MISMATCH and recheck.entry is None
++            ):
+                 return recheck
+             existing_flight = self._flights.get(unified.digest)
+             if existing_flight is None:
+diff --git a/tests/unit/logic/legal_ir/test_proof_cache.py b/tests/unit/logic/legal_ir/test_proof_cache.py
+--- a/tests/unit/logic/legal_ir/test_proof_cache.py
++++ b/tests/unit/logic/legal_ir/test_proof_cache.py
+@@ -1279,3 +1279,149 @@
+     with pytest.raises(LegalProofIntegrityError, match="backend version"):
+         build_legal_proof_binding(artifact, receipt, claim=claim, request=request,
+             attempt=attempt, result=result, context=context)
++
++
++def _second_obligation_binding(artifact, first_binding, variant):
++    from ipfs_datasets_py.logic.backends.kernel.wasm import KernelToolchainBinding
++
++    context = deepcopy(first_binding["context"])
++    context["expected_declaration"] = "second_cache_fixture"
++    if variant == "interpretation":
++        context["interpretation_digest"] = stable_digest({"fictional_interpretation": 2})
++    if variant == "dependency":
++        context["dependency_versions"]["fictional-definition"] = stable_digest({"definition": 2})
++    if variant in {"toolchain", "numeric-toolchain-alias"}:
++        context["toolchain"]["metadata"]["native_resource_profile"]["cpu_slots"] = (
++            True if variant == "numeric-toolchain-alias" else 2
++        )
++    obligation = artifact.proof_obligations[1]
++    old_claim = IRClaim.from_dict(first_binding["claim"])
++    claim = replace(old_claim, claim_id="claim:second-fictional-cache",
++                    statement=obligation.statement, obligations=(obligation,),
++                    metadata={**old_claim.metadata.to_dict(),
++                              "proof_context_digest": stable_digest(context)})
++    old_request = BackendRequest.from_dict(first_binding["request"])
++    request = BackendRequest.for_claim(
++        claim, obligation.obligation_id, request_id="request:second-fictional-cache",
++        requested_backend_id="lean", bounds=old_request.bounds,
++        payload={"lean": "theorem second_cache_fixture : True := by trivial\n",
++                 "expected_declaration": context["expected_declaration"],
++                 "expected_proposition": context["expected_proposition"],
++                 "legal_proof_context": context},
++    )
++    kernel = _fictional_kernel_receipt(
++        request, toolchain=KernelToolchainBinding(**context["toolchain"]),
++    )
++    old_attempt = BackendAttempt.from_dict(first_binding["attempt"])
++    attempt = replace(old_attempt, attempt_id="attempt:second-fictional-cache",
++                      request_digest=request.digest,
++                      output_digest=stable_digest({"authored_kernel_fixture": kernel.to_dict()}))
++    old_result = ProofResult.from_dict(first_binding["result"])
++    result = ProofResult.for_attempt(
++        request, attempt, result_id="result:second-fictional-cache", status=ResultStatus.PROVED,
++        authority=replace(old_result.authority, scope_digest=request.digest,
++                          configuration_digest=stable_digest(context)),
++        payload={"kernel_receipt": kernel.to_dict(), "fixture_only": True},
++    )
++    receipt = ProofReceipt.issue(claim, request, attempt, result,
++                                 receipt_id="receipt:second-fictional-cache", verifier="fictional-test")
++    binding = build_legal_proof_binding(artifact, receipt, claim=claim, request=request,
++                                       attempt=attempt, result=result, context=context)
++    return receipt, binding, context
++
++
++@pytest.mark.parametrize("variant", [
++    "same", "interpretation", "dependency", "toolchain", "numeric-toolchain-alias",
++])
++@pytest.mark.parametrize("projection", ["shadow", "migration"])
++def test_artifact_coverage_requires_one_proof_context(variant, projection):
++    """Fictional receipt chains only, with no prover or database execution."""
++    artifact, first, first_binding, context = _bound_fixture(
++        extra_obligation=True, native_resource_profile={"cpu_slots": 1},
++    )
++    second, second_binding, second_context = _second_obligation_binding(artifact, first_binding, variant)
++    record = LegalProofRecord.build(
++        artifact, profile="fictional-two-proof-contexts", jurisdiction="fictional",
++        theorem_receipts=(first, second), proof_bindings=(second_binding, first_binding),
++    )
++    assert first.obligation_id != second.obligation_id
++    assert context["expected_declaration"] != second_context["expected_declaration"]
++    assert record.theorem_receipt_results(expected_context=context, obligation_id=first.obligation_id) == (first,)
++    assert record.theorem_receipt_results(expected_context=second_context, obligation_id=second.obligation_id) == (second,)
++    before = record.to_dict()
++    complete = variant == "same"
++    if projection == "shadow":
++        spy = _ShadowObservation()
++        cache = LegalProofCache()
++        cache.bind_shadow_repository(spy)
++        assert cache.put(record) is record
++        assert len(spy.writes) == 1
++        row = spy.writes[0]
++        assert row["status"] == ("proved" if complete else "unknown")
++        assert row["kernel_accepted"] is complete
++        assert row["trust_level"] == ("independently_checkable" if complete else "none")
++        assert row["legacy_payload"] == before
++    else:
++        from ipfs_datasets_py.logic.common.duckdb_proof_migration import (
++            ProofCacheFamily, RawLegacyRecord, normalize_legacy_record,
++        )
++        entry = normalize_legacy_record(
++            RawLegacyRecord(record_index=1, line_number=1, payload=before),
++            family=ProofCacheFamily.LEGAL_IR,
++        )
++        assert entry.status.value == ("proved" if complete else "candidate")
++        assert entry.trust_level.value == ("independently_checkable" if complete else "none")
++        assert entry.result_payload["theorem_receipts"] == before["theorem_receipts"]
++        assert entry.result_payload["proof_bindings"] == before["proof_bindings"]
++    assert record.to_dict() == before
++
++
++@pytest.mark.parametrize("legacy_version", ["legacy", "bound-v2"])
++def test_old_aggregate_cache_authority_is_unusable_but_retained(legacy_version):
++    from ipfs_datasets_py.logic.common.duckdb_proof_migration import (
++        ProofCacheFamily, RawLegacyRecord, normalize_legacy_record,
++    )
++    from ipfs_datasets_py.logic.common.duckdb_proof_store import (
++        DuckDBProofStore, DuckDBProofStoreAuthorityError,
++    )
++
++    record, _, _, _, _ = _bound_record()
++    projection = normalize_legacy_record(
++        RawLegacyRecord(record_index=1, line_number=1, payload=record.to_dict()),
++        family=ProofCacheFamily.LEGAL_IR,
++    )
++    current = projection.to_unified_entry(created_at=1.0)
++    store = DuckDBProofStore()
++    assert store.put(current, now=1.0).usable is True
++    assert store.get(current.key, now=2.0) == current
++    legacy_payload = current.result_payload.to_dict()
++    legacy_payload.pop("complete_proof_contexts", None)
++    old = replace(current, key=replace(current.key, backend_version=legacy_version),
++                  result_payload=legacy_payload, entry_digest="")
++    # Seed the exact historical row without going through new write admission.
++    archive = DuckDBProofStore()
++    archive._entries[old.key.digest] = old
++    result = archive.lookup(old.key, now=2.0)
++    assert result.usable is False
++    assert result.entry is None
++    assert result.reason.value == "authority_mismatch"
++    assert archive.get(old.key, now=2.0) is None
++    assert archive._entries[old.key.digest].to_dict() == old.to_dict()
++    with pytest.raises(DuckDBProofStoreAuthorityError):
++        archive.put(old, now=2.0)
++    partial, _, _, _, _ = _bound_record(extra_obligation=True)
++    advisory = normalize_legacy_record(
++        RawLegacyRecord(record_index=2, line_number=2, payload=partial.to_dict()),
++        family=ProofCacheFamily.LEGAL_IR,
++    ).to_unified_entry(created_at=2.0)
++    advisory = replace(advisory, key=old.key, entry_digest="")
++    computed = []
++
++    def compute_advisory():
++        computed.append(True)
++        return advisory
++
++    retry = archive.get_or_compute(old.key, compute_advisory, now=2.0)
++    assert computed == [], "obsolete proof lookup invoked an advisory producer"
++    assert retry.usable is False and retry.reason.value == "authority_mismatch"
++    assert archive._entries[old.key.digest].to_dict() == old.to_dict()
+diff --git a/tests/integration/logic/backends/test_kernel_backends.py b/tests/integration/logic/backends/test_kernel_backends.py
+--- a/tests/integration/logic/backends/test_kernel_backends.py
++++ b/tests/integration/logic/backends/test_kernel_backends.py
+@@ -1186,7 +1186,7 @@
+ # before 51d2c414, then 27ede074ceb68cd91d50eada99b9c6f02216607e22610bc63db4fde69e17fb4c.
+ # Current reviewed constructors explicitly bind the current verifier profile;
+ # negative cache controls changed the complete owner. This pin never follows edits itself.
+-_NATIVE_PROOF_CACHE_FIXTURE_SHA256 = "efdd956ba61d5f001cf511078bb381ef93abab9cbbce1ff8e130bfbfc6a704a7"
++_NATIVE_PROOF_CACHE_FIXTURE_SHA256 = "62c766ae0617d8966bdfc977d227b48f8404acf3fee1279fa20cf26e4a597d46"
+ 
+ 
+ def _load_native_proof_cache_fixture_owner():

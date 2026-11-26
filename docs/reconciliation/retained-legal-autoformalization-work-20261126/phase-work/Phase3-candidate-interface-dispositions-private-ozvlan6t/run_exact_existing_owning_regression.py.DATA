@@ -1,0 +1,93 @@
+"""Exercise the existing candidate inventory over exact no-model source roles."""
+from pathlib import Path
+from dataclasses import replace
+from types import ModuleType
+import ast as python_ast
+import hashlib
+import importlib
+from importlib.util import spec_from_file_location, module_from_spec
+import json
+import os
+import resource
+import sys
+
+resource.setrlimit(resource.RLIMIT_CPU,(50,50))
+resource.setrlimit(resource.RLIMIT_AS,(512*1024**2,)*2)
+os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})
+def guard(event,args):
+    if event.startswith('socket.') or event in {'subprocess.Popen','os.system','os.exec','os.fork'}:
+        raise RuntimeError('candidate inventory attempted to execute external code')
+    if event=='import' and args[0].partition('.')[0] in {'torch','transformers','tokenizers'}:
+        raise RuntimeError('candidate inventory attempted to load a model')
+sys.addaudithook(guard)
+root=Path(__file__).resolve().parent
+mode=sys.argv[1]
+assert mode in {'before','after'}
+manifest=(root/'exact-published-profile-inputs.json').read_bytes()
+assert hashlib.sha256(manifest).hexdigest()=='eee60b28b3b7cba18b7ce5a73a50fb9a5e3cc625304fa8910a74bca7bc2d94cb'
+files=json.loads(manifest)['files']
+projection=root/'projection'
+for ref in files.values():
+    raw=Path(ref['path']).read_bytes()
+    assert (len(raw),hashlib.sha256(raw).hexdigest())==(ref['bytes'],ref['sha256'])
+packages=['ipfs_datasets_py','ipfs_datasets_py.logic','ipfs_datasets_py.logic.families',
+          'ipfs_datasets_py.logic.syntax_core','ipfs_datasets_py.logic.autoformal',
+          'ipfs_datasets_py.logic.formalization','ipfs_datasets_py.logic.formalization.autoencoder']
+for name in packages:
+    module=ModuleType(name)
+    module.__path__=[str(projection/Path(*name.split('.')))]
+    module.__package__=name
+    sys.modules[name]=module
+    if '.' in name:
+        parent,child=name.rsplit('.',1)
+        setattr(sys.modules[parent],child,module)
+from ipfs_datasets_py.logic.syntax_core import ast, signatures
+from ipfs_datasets_py.logic.autoformal import legal_native_ast_preservation as native
+qualified_name='ipfs_datasets_py.logic.autoformal.legal_relational_norm_v1'
+owner=Path(files['bridge']['path'])
+if mode=='after':
+    owner=root/'proposed'/'legal_relational_norm_v1.py'
+    ref=json.loads((root/'expected-proposed-owner.json').read_bytes())
+    raw=owner.read_bytes()
+    assert (len(raw),hashlib.sha256(raw).hexdigest())==(ref['bytes'],ref['sha256'])
+spec=spec_from_file_location(qualified_name,owner)
+bridge=module_from_spec(spec)
+sys.modules[qualified_name]=bridge
+spec.loader.exec_module(bridge)
+
+
+import pytest
+wanted={'Builder','OBJECT','wire','mixed_member_request','interface_row','interface_prepare',
+    'NATIVE_TOOLCHAIN','test_candidate_inventory_retains_candidate_above_its_codec_limit'}
+proposed=root/'proposed/test_legal_relational_norm_v1.py'
+test_source=proposed.read_bytes()
+assert len(test_source)==82687 and hashlib.sha256(test_source).hexdigest()=='d6180c3e711e5d795c9bea3c4a258ed8720e4a9d831f1426fa61b67322d8cbea'
+selected=[]
+for node in python_ast.parse(test_source).body:
+    if isinstance(node,(python_ast.FunctionDef,python_ast.ClassDef)) and node.name in wanted:
+        selected.append(node)
+    elif isinstance(node,python_ast.Assign) and any(isinstance(target,python_ast.Name) and target.id in wanted for target in node.targets):
+        selected.append(node)
+assert len(selected)==len(wanted)
+test={'ast':ast,'signatures':signatures,'bridge':bridge,'json':json,'hashlib':hashlib,'pytest':pytest}
+exec(compile(python_ast.Module(body=selected,type_ignores=[]),str(proposed),'exec'),test)
+name='test_candidate_inventory_retains_candidate_above_its_codec_limit'
+fn=test[name]
+assert len(fn.pytestmark)==1 and fn.pytestmark[0].name=='parametrize'
+arg,cases=fn.pytestmark[0].args
+assert arg=='codec' and len(cases)==2
+results=[]
+for case in cases:
+    try:
+        fn(case)
+    except ValueError as exc:
+        result,reason='error',str(exc)
+    except AssertionError as exc:
+        result,reason='failed',str(exc)
+    else:
+        result,reason='passed',None
+    results.append(dict(node=name+'['+case+']',result=result,reason=reason))
+print(json.dumps(dict(mode=mode,exact_owning_ast=True,actual_profile_owner=True,
+    ordinary_pytest=False,results=results,inference_enabled=False,
+    selected_owner_sha256=hashlib.sha256(owner.read_bytes()).hexdigest()),indent=2))
+sys.exit(0 if all(r['result']=='passed' for r in results) else 1)

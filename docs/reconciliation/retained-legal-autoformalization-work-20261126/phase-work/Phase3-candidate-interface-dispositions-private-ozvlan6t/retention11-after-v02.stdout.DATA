@@ -1,0 +1,65 @@
+{
+  "mode": "after",
+  "exact_owning_ast": true,
+  "actual_profile_owner": true,
+  "ordinary_pytest": false,
+  "results": [
+    {
+      "node": "test_candidate_interface_covers_every_declared_disposition_and_keeps_order",
+      "result": "passed",
+      "reason": null
+    },
+    {
+      "node": "test_unsupported_and_ambiguous_candidates_keep_payloads_without_replacement",
+      "result": "passed",
+      "reason": null
+    },
+    {
+      "node": "test_candidate_order_and_serialization_are_lossless",
+      "result": "passed",
+      "reason": null
+    },
+    {
+      "node": "test_mixed_and_native_codecs_retain_every_disposition",
+      "result": "passed",
+      "reason": null
+    },
+    {
+      "node": "test_ambiguous_reserved_identifier_does_not_call_a_codec",
+      "result": "passed",
+      "reason": null
+    },
+    {
+      "node": "test_candidate_interface_bounds_refuse_before_classification[rows0]",
+      "result": "passed",
+      "reason": null
+    },
+    {
+      "node": "test_candidate_interface_bounds_refuse_before_classification[rows1]",
+      "result": "passed",
+      "reason": null
+    },
+    {
+      "node": "test_candidate_interface_bounds_refuse_before_classification[rows2]",
+      "result": "passed",
+      "reason": null
+    },
+    {
+      "node": "test_retained_7214_candidates_keep_identity_roles_and_binder_order",
+      "result": "passed",
+      "reason": null
+    },
+    {
+      "node": "test_candidate_inventory_retains_candidate_above_its_codec_limit[mixed_relational]",
+      "result": "passed",
+      "reason": null
+    },
+    {
+      "node": "test_candidate_inventory_retains_candidate_above_its_codec_limit[native_unary_preservation]",
+      "result": "passed",
+      "reason": null
+    }
+  ],
+  "held_7214_fixture_source_has_no_admission": true,
+  "selected_owner_sha256": "ff66f344c9cda788801a9fa2d3ef66afd7046d903a53d2bbf11f8dbfdf847ad2"
+}

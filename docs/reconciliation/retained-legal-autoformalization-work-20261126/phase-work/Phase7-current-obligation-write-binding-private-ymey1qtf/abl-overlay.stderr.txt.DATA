@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/no-fit-ablation-atomic-control-v01.py", line 92, in <module>
+    outcome["rows"] = run(prior, sys.argv[1] == "overlay")
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/no-fit-ablation-atomic-control-v01.py", line 27, in run
+    prior.install_kernel_guards()
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-same-id-proof-feedback-no-fit-v01-gA9Exh/guarded_probe.py", line 48, in install_kernel_guards
+    raise RuntimeError("expected one CPU from invoking affinity")
+RuntimeError: expected one CPU from invoking affinity

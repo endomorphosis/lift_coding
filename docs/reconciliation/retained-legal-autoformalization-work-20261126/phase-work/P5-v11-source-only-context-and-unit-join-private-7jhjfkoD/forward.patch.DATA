@@ -1,0 +1,89 @@
+--- a/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_inference.py
++++ b/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_inference.py
+@@ -518,9 +518,18 @@
+                 worker.CheckpointArtifact.from_dict(request["rows_artifact"]), limit=REVIEWED_EVALUATION_OUTPUT_LIMIT))
+             _reviewed_evaluation_measurement_cases(rows, evaluation, generation, request["checkpoint_declarations"])
+             payload = evaluation["compiler_artifact"]["reviewed_source_span_producer_evaluation"]
+-            if (payload.get("declared_compiler_identity") != request["compiler_commit"]
+-                    or worker._digest(inputs._reviewed_wire(payload["producer_arguments"])) != generation["last_call"]["source_arguments_sha256"]):
+-                raise ValueError("v11 evaluation compiler or source arguments differ from the original request")
++            call = generation["last_call"]
++            if any(row.get("unit_id") != emitted["unit_id"]
++                   for row, emitted in zip(rows, call["raw_generation_outputs"], strict=True)):
++                raise ValueError("v11 evaluation reference units differ from the ordered source context")
++            arguments = payload["producer_arguments"]
++            arguments_sha256 = worker._digest(inputs._reviewed_wire(arguments))
++            if (any(argument["context"] != {"permitted": [], "retrieved": []} for argument in arguments)
++                    or call.get("source_arguments_sha256") != arguments_sha256
++                    or call["input_receipt"].get("source_arguments_sha256") != arguments_sha256):
++                raise ValueError("v11 evaluation source-only arguments differ from the request or input receipt")
++            if payload.get("declared_compiler_identity") != request["compiler_commit"]:
++                raise ValueError("v11 evaluation compiler differs from the original request")
+ 
+ 
+ def _read_reviewed_evaluation_request(request_artifact):
+--- a/tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_inference.py
++++ b/tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_inference.py
+@@ -3412,8 +3412,9 @@
+             "source_wire_sha256": worker._digest(wire),
+             "source_token_ids_sha256": worker._digest(inputs._reviewed_wire(tokens))})
+ 
+-    references = [{"id": argument["id"], "source_text": argument["source_text"],
+-        "canonical_ir": reference_target} for argument in arguments]
++    references = [{"id": argument["id"], "unit_id": row["unit_id"],
++        "source_text": argument["source_text"], "canonical_ir": reference_target}
++        for argument, row in zip(arguments, rows, strict=True)]
+     references_raw = worker._json_bytes(references)
+     reference_path = Path(request["source_contexts_artifact"]["path"]).with_name("selected-rows.json")
+     reference_path.write_bytes(references_raw)
+@@ -3869,3 +3870,50 @@
+     assert evaluation_path.read_bytes() == raw
+     for name, before in fixed.items():
+         assert Path(cycle["output_artifacts"][name]["path"]).read_bytes() == before
++
++
++
++@pytest.mark.parametrize("damage", [None, "nonempty-permitted", "nonempty-retrieved",
++    "receipt-arguments", "reference-unit"])
++def test_reviewed_inference_v11_binds_source_only_arguments_and_reference_units(tmp_path, damage):
++    worker, inputs, request, generation, _, save = _reviewed_v11_saved_control(tmp_path, "complete")
++
++    def rewrite(reference, value):
++        raw = worker._json_bytes(value)
++        path = Path(reference["path"])
++        path.write_bytes(raw)
++        reference.update(bytes=len(raw), sha256=worker._digest(raw))
++
++    if damage == "reference-unit":
++        reference = request["rows_artifact"]
++        rows = json.loads(Path(reference["path"]).read_bytes())
++        rows[0]["unit_id"] = "fixture:different-legal-unit"
++        rewrite(reference, rows)
++    cycle = save()
++    descriptors = cycle["output_artifacts"]
++    evaluation = json.loads(Path(descriptors["evaluation"]["path"]).read_bytes())
++    call = generation["last_call"]
++    if damage in {"nonempty-permitted", "nonempty-retrieved"}:
++        field = damage.removeprefix("nonempty-")
++        payload = evaluation["compiler_artifact"]["reviewed_source_span_producer_evaluation"]
++        arguments = payload["producer_arguments"]
++        arguments[0]["context"][field].append("fictional supplied context")
++        digest = worker._digest(inputs._reviewed_wire(arguments))
++        call["source_arguments_sha256"] = digest
++        call["input_receipt"]["source_arguments_sha256"] = digest
++    elif damage == "receipt-arguments":
++        call["input_receipt"]["source_arguments_sha256"] = "f" * 64
++    if damage in {"nonempty-permitted", "nonempty-retrieved", "receipt-arguments"}:
++        rewrite(descriptors["generation"], generation)
++        evaluation["metadata"]["source_generation_observation"] = generation
++        rewrite(descriptors["evaluation"], evaluation)
++    frozen = {key: Path(ref["path"]).read_bytes() for key, ref in descriptors.items()}
++    pinned = {key: Path(request[key]["path"]).read_bytes()
++        for key in ("rows_artifact", "source_contexts_artifact")}
++    if damage is None:
++        inference._check_reviewed_evaluation_outputs(cycle, request)
++    else:
++        with pytest.raises(ValueError, match="v11 evaluation (?:source-only arguments|reference units)"):
++            inference._check_reviewed_evaluation_outputs(cycle, request)
++    assert all(Path(ref["path"]).read_bytes() == frozen[key] for key, ref in descriptors.items())
++    assert all(Path(request[key]["path"]).read_bytes() == data for key, data in pinned.items())

@@ -1,0 +1,54 @@
+--- a/ipfs_datasets_py/logic/backends/cache_protocol.py
++++ b/ipfs_datasets_py/logic/backends/cache_protocol.py
+@@ -1080,13 +1080,22 @@
+                 raise VerificationCacheError(
+                     "producer must return VerificationCacheEntry or TypedBackendResult"
+                 )
++            required = (
++                None
++                if require_result_authority is None
++                else _result_authority(require_result_authority)
++            )
+             stored = self.put(entry, now=now)
+             flight.entry = stored.entry
++            authority_matches = required is None or (
++                stored.entry is not None and stored.entry.result_authority is required
++            )
+             return VerificationCacheLookup(
+                 entry=stored.entry,
+                 hit=False,
+-                usable=True,
+-                reason=CacheLookupReason.STORED,
++                usable=authority_matches,
++                reason=(CacheLookupReason.STORED if authority_matches
++                        else CacheLookupReason.AUTHORITY_MISMATCH),
+                 key_digest=key.digest,
+                 single_flight_shared=False,
+             )
+--- a/ipfs_datasets_py/logic/common/duckdb_proof_store.py
++++ b/ipfs_datasets_py/logic/common/duckdb_proof_store.py
+@@ -2541,13 +2541,22 @@
+                     "producer must return UnifiedProofEntry, "
+                     "VerificationCacheEntry, or TypedBackendResult"
+                 )
++            required = (
++                None
++                if require_result_authority is None
++                else _enum(require_result_authority, ResultAuthority, "require_result_authority")
++            )
+             stored = self.put(entry, now=now)
+             flight.entry = self._entries.get(unified.digest)
++            authority_matches = required is None or (
++                stored.entry is not None and stored.entry.result_authority is required
++            )
+             return VerificationCacheLookup(
+                 entry=stored.entry,
+                 hit=False,
+-                usable=True,
+-                reason=CacheLookupReason.STORED,
++                usable=authority_matches,
++                reason=(CacheLookupReason.STORED if authority_matches
++                        else CacheLookupReason.AUTHORITY_MISMATCH),
+                 key_digest=unified.digest,
+                 age_seconds=stored.age_seconds,
+             )

@@ -1,0 +1,506 @@
+{
+  "distinct": 125,
+  "roster": [
+    {
+      "case": "test_empty_items_preserve_manifest_only_validation[training]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_empty_items_preserve_manifest_only_validation[hparam_selection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_empty_items_preserve_manifest_only_validation[representation_promotion]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_empty_items_preserve_manifest_only_validation[codex_todo_projection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[empty-mapping-training]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[empty-mapping-hparam_selection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[empty-mapping-representation_promotion]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[empty-mapping-codex_todo_projection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[source-text-only-training]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[source-text-only-hparam_selection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[source-text-only-representation_promotion]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[source-text-only-codex_todo_projection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[unmatched-citation-training]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[unmatched-citation-hparam_selection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[unmatched-citation-representation_promotion]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[unmatched-citation-codex_todo_projection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[unmatched-span-training]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[unmatched-span-hparam_selection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[unmatched-span-representation_promotion]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[unmatched-span-codex_todo_projection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[blank-ids-training]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[blank-ids-hparam_selection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[blank-ids-representation_promotion]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[blank-ids-codex_todo_projection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[empty-object-training]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[empty-object-hparam_selection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[empty-object-representation_promotion]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[empty-object-codex_todo_projection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[object-source-text-only-training]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[object-source-text-only-hparam_selection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[object-source-text-only-representation_promotion]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[object-source-text-only-codex_todo_projection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[object-unmatched-citation-training]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[object-unmatched-citation-hparam_selection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[object-unmatched-citation-representation_promotion]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[object-unmatched-citation-codex_todo_projection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[object-blank-ids-unmatched-span-training]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[object-blank-ids-unmatched-span-hparam_selection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[object-blank-ids-unmatched-span-representation_promotion]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_every_unresolved_supplied_item_is_rejected[object-blank-ids-unmatched-span-codex_todo_projection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_mixed_batch_reports_every_invalid_member_in_original_order[training]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_mixed_batch_reports_every_invalid_member_in_original_order[hparam_selection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_mixed_batch_reports_every_invalid_member_in_original_order[representation_promotion]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_mixed_batch_reports_every_invalid_member_in_original_order[codex_todo_projection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_explicit_unknown_id_never_falls_back_to_matching_source[sample_id-training]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_explicit_unknown_id_never_falls_back_to_matching_source[sample_id-hparam_selection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_explicit_unknown_id_never_falls_back_to_matching_source[sample_id-representation_promotion]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_explicit_unknown_id_never_falls_back_to_matching_source[sample_id-codex_todo_projection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_explicit_unknown_id_never_falls_back_to_matching_source[id-training]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_explicit_unknown_id_never_falls_back_to_matching_source[id-hparam_selection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_explicit_unknown_id_never_falls_back_to_matching_source[id-representation_promotion]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_explicit_unknown_id_never_falls_back_to_matching_source[id-codex_todo_projection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_explicit_unknown_id_never_falls_back_to_matching_source[sample_ids-training]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_explicit_unknown_id_never_falls_back_to_matching_source[sample_ids-hparam_selection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_explicit_unknown_id_never_falls_back_to_matching_source[sample_ids-representation_promotion]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_explicit_unknown_id_never_falls_back_to_matching_source[sample_ids-codex_todo_projection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_explicit_unknown_id_never_falls_back_to_matching_source[object-training]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_explicit_unknown_id_never_falls_back_to_matching_source[object-hparam_selection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_explicit_unknown_id_never_falls_back_to_matching_source[object-representation_promotion]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_explicit_unknown_id_never_falls_back_to_matching_source[object-codex_todo_projection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_matching_citation_resolves_all_allowed_members_after_blank_ids[False-training]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_matching_citation_resolves_all_allowed_members_after_blank_ids[False-hparam_selection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_matching_citation_resolves_all_allowed_members_after_blank_ids[False-representation_promotion]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_matching_citation_resolves_all_allowed_members_after_blank_ids[False-codex_todo_projection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_matching_citation_resolves_all_allowed_members_after_blank_ids[True-training]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_matching_citation_resolves_all_allowed_members_after_blank_ids[True-hparam_selection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_matching_citation_resolves_all_allowed_members_after_blank_ids[True-representation_promotion]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_matching_citation_resolves_all_allowed_members_after_blank_ids[True-codex_todo_projection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_matching_span_resolves_without_an_id_or_citation[False-training]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_matching_span_resolves_without_an_id_or_citation[False-hparam_selection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_matching_span_resolves_without_an_id_or_citation[False-representation_promotion]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_matching_span_resolves_without_an_id_or_citation[False-codex_todo_projection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_matching_span_resolves_without_an_id_or_citation[True-training]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_matching_span_resolves_without_an_id_or_citation[True-hparam_selection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_matching_span_resolves_without_an_id_or_citation[True-representation_promotion]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_matching_span_resolves_without_an_id_or_citation[True-codex_todo_projection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_unmatched_citation_can_still_resolve_exact_source_span[training]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_unmatched_citation_can_still_resolve_exact_source_span[hparam_selection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_unmatched_citation_can_still_resolve_exact_source_span[representation_promotion]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_unmatched_citation_can_still_resolve_exact_source_span[codex_todo_projection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_valid_composite_ids_and_repeated_ids_remain_allowed[training]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_valid_composite_ids_and_repeated_ids_remain_allowed[hparam_selection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_valid_composite_ids_and_repeated_ids_remain_allowed[representation_promotion]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_valid_composite_ids_and_repeated_ids_remain_allowed[codex_todo_projection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_codex_projection_accepts_declared_train_and_validation_composite",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_composite_unknown_and_wrong_split_ids_are_deduplicated_per_item[training]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_composite_unknown_and_wrong_split_ids_are_deduplicated_per_item[hparam_selection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_composite_unknown_and_wrong_split_ids_are_deduplicated_per_item[representation_promotion]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_composite_unknown_and_wrong_split_ids_are_deduplicated_per_item[codex_todo_projection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_citation_fallback_keeps_every_wrong_split_diagnostic[training]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_citation_fallback_keeps_every_wrong_split_diagnostic[hparam_selection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_citation_fallback_keeps_every_wrong_split_diagnostic[representation_promotion]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_citation_fallback_keeps_every_wrong_split_diagnostic[codex_todo_projection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_public_operation_wrappers_preserve_unresolved_membership_failure[require_training_split-training]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_public_operation_wrappers_preserve_unresolved_membership_failure[require_hparam_selection_split-hparam_selection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_public_operation_wrappers_preserve_unresolved_membership_failure[require_representation_promotion_split-representation_promotion]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_public_operation_wrappers_preserve_unresolved_membership_failure[require_codex_todo_projection_split-codex_todo_projection]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_assignment_without_example_cannot_authorize_item[manifest-training-train]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_assignment_without_example_cannot_authorize_item[manifest-hparam_selection-validation]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_assignment_without_example_cannot_authorize_item[manifest-representation_promotion-canary]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_assignment_without_example_cannot_authorize_item[manifest-codex_todo_projection-train]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_assignment_without_example_cannot_authorize_item[manifest-heldout_evaluation-holdout]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_assignment_without_example_cannot_authorize_item[mapping-training-train]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_assignment_without_example_cannot_authorize_item[mapping-hparam_selection-validation]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_assignment_without_example_cannot_authorize_item[mapping-representation_promotion-canary]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_assignment_without_example_cannot_authorize_item[mapping-codex_todo_projection-train]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_assignment_without_example_cannot_authorize_item[mapping-heldout_evaluation-holdout]",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_legacy_assignment_only_manifest_retains_manifest_checks_and_diagnostics",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_opt_in_grouped_campaign_keeps_near_duplicate_lineages_together",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_unicode_campaign_groups_japanese_without_linking_unrelated_shared_digits",
+      "module": "test_legal_ir_split_membership"
+    },
+    {
+      "case": "test_reviewed_heldout_replays_explicit_unicode_split_fingerprints",
+      "module": "test_legal_span_consumer_binding"
+    },
+    {
+      "case": "test_reviewed_v3_public_full_nine_field_mixed_targets_reach_same_binding_class[training]",
+      "module": "test_legal_span_consumer_binding"
+    },
+    {
+      "case": "test_reviewed_v3_public_full_nine_field_mixed_targets_reach_same_binding_class[hparam_selection]",
+      "module": "test_legal_span_consumer_binding"
+    },
+    {
+      "case": "test_reviewed_v3_public_full_nine_field_mixed_targets_reach_same_binding_class[heldout_evaluation]",
+      "module": "test_legal_span_consumer_binding"
+    },
+    {
+      "case": "test_reviewed_public_source_ast_signature_admission_reaches_consumer_without_projection",
+      "module": "test_legal_span_consumer_binding"
+    },
+    {
+      "case": "test_reviewed_cycle_preserves_actual_campaign_manifest_and_source_history[default]",
+      "module": "test_autoformal_campaign_training_inputs"
+    },
+    {
+      "case": "test_reviewed_cycle_preserves_actual_campaign_manifest_and_source_history[unicode]",
+      "module": "test_autoformal_campaign_training_inputs"
+    },
+    {
+      "case": "test_reviewed_cycle_rejects_repinned_unicode_history_source_drift_before_staging",
+      "module": "test_autoformal_campaign_training_inputs"
+    },
+    {
+      "case": "test_full_reviewed_decoder_replays_unicode_stage_with_legacy_holdout[none]",
+      "module": "test_autoformal_campaign_training_inputs"
+    },
+    {
+      "case": "test_full_reviewed_decoder_replays_unicode_stage_with_legacy_holdout[unrelated]",
+      "module": "test_autoformal_campaign_training_inputs"
+    },
+    {
+      "case": "test_full_reviewed_decoder_replays_unicode_stage_with_legacy_holdout[unicode_near_duplicate]",
+      "module": "test_autoformal_campaign_training_inputs"
+    },
+    {
+      "case": "test_reviewed_mixed_unicode_stage_preserves_exact_targets_in_both_codecs[full]",
+      "module": "test_autoformal_campaign_training_inputs"
+    },
+    {
+      "case": "test_reviewed_mixed_unicode_stage_preserves_exact_targets_in_both_codecs[digest_omitted]",
+      "module": "test_autoformal_campaign_training_inputs"
+    },
+    {
+      "case": "test_full_reviewed_decoder_preparation_retains_all_nine_fields_without_fitting_or_target_input",
+      "module": "test_autoformal_campaign_training_inputs"
+    },
+    {
+      "case": "test_reviewed_mixed_cycle_v4_preserves_complete_mixed_targets_bytes_and_explicit_custody",
+      "module": "test_autoformal_campaign_training_inputs"
+    }
+  ],
+  "same_order_as_both_JUnits": true
+}

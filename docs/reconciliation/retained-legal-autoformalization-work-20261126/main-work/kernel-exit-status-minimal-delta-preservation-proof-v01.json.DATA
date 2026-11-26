@@ -1,0 +1,16 @@
+{
+  "published_base": "611395777d8365a070c4cba4c29a5cbc6c510f8b",
+  "product_only_change": "4 inserted lines in evaluate_lean_kernel_output, exact builtin integer exit status required before final zero-success return",
+  "inverse_exact": true,
+  "all_other_product_top_level_AST_exact": true,
+  "old_test_111809_byte_prefix_exact": true,
+  "all_old_test_top_level_AST_and_decorators_exact": true,
+  "new_test_functions": [
+    "test_lean_malformed_or_failed_exit_status_cannot_establish_proof",
+    "test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status"
+  ],
+  "new_literal_case_count": 8,
+  "normal_collection_or_run_performed": false,
+  "static_checks_only": true,
+  "this_proof_input_read_bytes": 487711
+}

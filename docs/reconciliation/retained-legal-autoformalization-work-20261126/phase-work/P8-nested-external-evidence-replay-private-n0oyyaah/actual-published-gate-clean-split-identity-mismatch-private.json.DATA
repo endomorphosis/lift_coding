@@ -1,0 +1,64 @@
+{
+  "actual_import_module_paths_and_hashes": {
+    "compiler_gate": {
+      "bytes": 224287,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/scripts/ops/legal_ir/hammer_leanstral_rollout_gate.py",
+      "sha256": "43eba36819cd183cee96fddda113386964b7233a1a7a1750b3f27423f69961f1"
+    },
+    "maintained_split_builder": {
+      "bytes": 61991,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py",
+      "sha256": "e652c79842323fec40f3e5d8f6a23620c9b4ce4a2d1043c597176a13de3f4acd"
+    }
+  },
+  "canonical_or_Source_effect": false,
+  "existing_fictional_fixtures": true,
+  "no_model_native_or_normal_qualification": true,
+  "schema": "private-Phase8-actual-clean-split-identity-mismatch-probe/v1",
+  "trace": {
+    "matched": {
+      "accepted": true,
+      "actual_guard": {
+        "blocked_operations": [],
+        "passed": true,
+        "violations": []
+      },
+      "failures": [],
+      "recorded_final_binding": {
+        "canonical": "sha256:9b672817030258fd127bb6034771ceb0db9f1660baab14d9a69981b0d156d68d",
+        "sources": {
+          "conformance_evidence": "sha256:9b672817030258fd127bb6034771ceb0db9f1660baab14d9a69981b0d156d68d",
+          "evaluation_integrity": "sha256:9b672817030258fd127bb6034771ceb0db9f1660baab14d9a69981b0d156d68d",
+          "evidence_bindings": "sha256:9b672817030258fd127bb6034771ceb0db9f1660baab14d9a69981b0d156d68d",
+          "external_validity_result": "sha256:9b672817030258fd127bb6034771ceb0db9f1660baab14d9a69981b0d156d68d",
+          "rollback_readiness": "sha256:9b672817030258fd127bb6034771ceb0db9f1660baab14d9a69981b0d156d68d",
+          "root": "sha256:9b672817030258fd127bb6034771ceb0db9f1660baab14d9a69981b0d156d68d"
+        }
+      },
+      "selected_manifest_digest": "9b672817030258fd127bb6034771ceb0db9f1660baab14d9a69981b0d156d68d",
+      "supplied_manifest_digest": "9b672817030258fd127bb6034771ceb0db9f1660baab14d9a69981b0d156d68d"
+    },
+    "wrong_clean_manifest": {
+      "accepted": true,
+      "actual_guard": {
+        "blocked_operations": [],
+        "passed": true,
+        "violations": []
+      },
+      "failures": [],
+      "recorded_final_binding": {
+        "canonical": "sha256:9b672817030258fd127bb6034771ceb0db9f1660baab14d9a69981b0d156d68d",
+        "sources": {
+          "conformance_evidence": "sha256:9b672817030258fd127bb6034771ceb0db9f1660baab14d9a69981b0d156d68d",
+          "evaluation_integrity": "sha256:9b672817030258fd127bb6034771ceb0db9f1660baab14d9a69981b0d156d68d",
+          "evidence_bindings": "sha256:9b672817030258fd127bb6034771ceb0db9f1660baab14d9a69981b0d156d68d",
+          "external_validity_result": "sha256:9b672817030258fd127bb6034771ceb0db9f1660baab14d9a69981b0d156d68d",
+          "rollback_readiness": "sha256:9b672817030258fd127bb6034771ceb0db9f1660baab14d9a69981b0d156d68d",
+          "root": "sha256:9b672817030258fd127bb6034771ceb0db9f1660baab14d9a69981b0d156d68d"
+        }
+      },
+      "selected_manifest_digest": "9b672817030258fd127bb6034771ceb0db9f1660baab14d9a69981b0d156d68d",
+      "supplied_manifest_digest": "e976fce89e13810e0958d6bab5bb4baecfca95d39824d3cbab2fbd8260fca028"
+    }
+  }
+}

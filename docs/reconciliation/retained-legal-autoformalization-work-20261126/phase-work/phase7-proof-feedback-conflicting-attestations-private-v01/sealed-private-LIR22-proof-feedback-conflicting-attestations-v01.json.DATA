@@ -1,0 +1,360 @@
+{
+  "canonical_git_observed": "0d71c0d82b2dfc1ed3c7f236009e467e4c201c88",
+  "canonical_write": false,
+  "case_source": "Authored fictional proof/counterexample/contract evidence only",
+  "cohorts": {
+    "baseline": {
+      "case_names": [
+        "test_disagreeing_proof_attestation_flags_cannot_create_training_feedback[counterexample-alias-denies]",
+        "test_disagreeing_proof_attestation_flags_cannot_create_training_feedback[counterexample-explicit-denial]",
+        "test_disagreeing_proof_attestation_flags_cannot_create_training_feedback[contract-alias-denies]",
+        "test_disagreeing_proof_attestation_flags_cannot_create_training_feedback[contract-explicit-denial]",
+        "test_matching_proof_attestation_aliases_keep_canonical_feedback[counterexample-approve]",
+        "test_matching_proof_attestation_aliases_keep_canonical_feedback[counterexample-deny]",
+        "test_matching_proof_attestation_aliases_keep_canonical_feedback[contract-approve]",
+        "test_matching_proof_attestation_aliases_keep_canonical_feedback[contract-deny]"
+      ],
+      "errors": 0,
+      "failed": 4,
+      "failed_names": [
+        "test_disagreeing_proof_attestation_flags_cannot_create_training_feedback[counterexample-alias-denies]",
+        "test_disagreeing_proof_attestation_flags_cannot_create_training_feedback[counterexample-explicit-denial]",
+        "test_disagreeing_proof_attestation_flags_cannot_create_training_feedback[contract-alias-denies]",
+        "test_disagreeing_proof_attestation_flags_cannot_create_training_feedback[contract-explicit-denial]"
+      ],
+      "observed_exit": 1,
+      "passed": 4,
+      "result_xml": {
+        "bytes": 5942,
+        "full9": {
+          "st_ctime_ns": "1795550607772098079",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096246",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795550607772098079",
+          "st_nlink": "1",
+          "st_size": "5942",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-proof-feedback-conflicting-attestations-private-v01/baseline/result.xml",
+        "sha256": "03d2d28b5a60bec4677efff0652bc103067ab9643539df7613856596b5823474"
+      },
+      "skipped": 0,
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795550606811524779",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096242",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795550606811524779",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-proof-feedback-conflicting-attestations-private-v01/baseline/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 4122,
+        "full9": {
+          "st_ctime_ns": "1795550607772098079",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096241",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795550607772098079",
+          "st_nlink": "1",
+          "st_size": "4122",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-proof-feedback-conflicting-attestations-private-v01/baseline/stdout.DATA",
+        "sha256": "f524294bd743db6aadc8b024e28dd415bad6cc94f5fb3d58fdfdac353476cd1d"
+      }
+    },
+    "candidate-retained8-methods": {
+      "case_names": [
+        "test_verified_artifact_types_round_trip_without_witness_values",
+        "test_proof_trust_flags_require_actual_booleans_in_kernel_constructor[attempted-false]",
+        "test_proof_trust_flags_require_actual_booleans_in_kernel_constructor[attempted-true]",
+        "test_proof_trust_flags_require_actual_booleans_in_kernel_constructor[attempted-1]",
+        "test_proof_trust_flags_require_actual_booleans_in_kernel_constructor[verified-false]",
+        "test_proof_trust_flags_require_actual_booleans_in_kernel_constructor[verified-true]",
+        "test_proof_trust_flags_require_actual_booleans_in_kernel_constructor[verified-1]",
+        "test_proof_trust_flags_require_actual_booleans_in_kernel_wire[attempted-false]",
+        "test_proof_trust_flags_require_actual_booleans_in_kernel_wire[attempted-true]",
+        "test_proof_trust_flags_require_actual_booleans_in_kernel_wire[attempted-1]",
+        "test_proof_trust_flags_require_actual_booleans_in_kernel_wire[verified-false]",
+        "test_proof_trust_flags_require_actual_booleans_in_kernel_wire[verified-true]",
+        "test_proof_trust_flags_require_actual_booleans_in_kernel_wire[verified-1]",
+        "test_proof_trust_flags_cannot_promote_string_kernel_receipt_to_positive[false]",
+        "test_proof_trust_flags_cannot_promote_string_kernel_receipt_to_positive[true]",
+        "test_proof_trust_flags_cannot_promote_string_kernel_receipt_to_positive[1]",
+        "test_proof_trust_flags_cannot_admit_untyped_counterexample_attestation[false]",
+        "test_proof_trust_flags_cannot_admit_untyped_counterexample_attestation[true]",
+        "test_proof_trust_flags_cannot_admit_untyped_counterexample_attestation[1]",
+        "test_proof_trust_flags_cannot_admit_untyped_contract_attestation[false]",
+        "test_proof_trust_flags_cannot_admit_untyped_contract_attestation[true]",
+        "test_proof_trust_flags_cannot_admit_untyped_contract_attestation[1]",
+        "test_proof_receipt_revocation_cannot_become_positive_feedback[False-revoked]",
+        "test_proof_receipt_revocation_cannot_become_positive_feedback[False-failed_translation]",
+        "test_proof_receipt_revocation_cannot_become_positive_feedback[False-missing_trust]",
+        "test_proof_receipt_revocation_cannot_become_positive_feedback[True-revoked]",
+        "test_proof_receipt_revocation_cannot_become_positive_feedback[True-failed_translation]",
+        "test_proof_receipt_revocation_cannot_become_positive_feedback[True-missing_trust]",
+        "test_unverified_counterexample_and_leanstral_claim_cannot_become_labels"
+      ],
+      "errors": 0,
+      "failed": 0,
+      "failed_names": [],
+      "observed_exit": 0,
+      "passed": 29,
+      "result_xml": {
+        "bytes": 5449,
+        "full9": {
+          "st_ctime_ns": "1795550957364664135",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096321",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795550957364664135",
+          "st_nlink": "1",
+          "st_size": "5449",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-proof-feedback-conflicting-attestations-private-v01/candidate-retained8-methods/result.xml",
+        "sha256": "0c15093ff54ac342e017ab75c46432862bfa9970b6718e3417498b92e4902104"
+      },
+      "skipped": 0,
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795550956443108081",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096317",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795550956443108081",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-proof-feedback-conflicting-attestations-private-v01/candidate-retained8-methods/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 366,
+        "full9": {
+          "st_ctime_ns": "1795550957364664135",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096314",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795550957364664135",
+          "st_nlink": "1",
+          "st_size": "366",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-proof-feedback-conflicting-attestations-private-v01/candidate-retained8-methods/stdout.DATA",
+        "sha256": "0d69872657bb3c46dba39851cc35067cfa4f00faad2a2e5b382af5017edc4e14"
+      }
+    },
+    "candidate-same8": {
+      "case_names": [
+        "test_disagreeing_proof_attestation_flags_cannot_create_training_feedback[counterexample-alias-denies]",
+        "test_disagreeing_proof_attestation_flags_cannot_create_training_feedback[counterexample-explicit-denial]",
+        "test_disagreeing_proof_attestation_flags_cannot_create_training_feedback[contract-alias-denies]",
+        "test_disagreeing_proof_attestation_flags_cannot_create_training_feedback[contract-explicit-denial]",
+        "test_matching_proof_attestation_aliases_keep_canonical_feedback[counterexample-approve]",
+        "test_matching_proof_attestation_aliases_keep_canonical_feedback[counterexample-deny]",
+        "test_matching_proof_attestation_aliases_keep_canonical_feedback[contract-approve]",
+        "test_matching_proof_attestation_aliases_keep_canonical_feedback[contract-deny]"
+      ],
+      "errors": 0,
+      "failed": 0,
+      "failed_names": [],
+      "observed_exit": 0,
+      "passed": 8,
+      "result_xml": {
+        "bytes": 1778,
+        "full9": {
+          "st_ctime_ns": "1795550956352107369",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096316",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795550956352107369",
+          "st_nlink": "1",
+          "st_size": "1778",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-proof-feedback-conflicting-attestations-private-v01/candidate-same8/result.xml",
+        "sha256": "82d322db99c356e6ec7b3092e5974e1ec733ba841bb26c11d01bb7a547f4025b"
+      },
+      "skipped": 0,
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795550955412100020",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096312",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795550955412100020",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-proof-feedback-conflicting-attestations-private-v01/candidate-same8/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 353,
+        "full9": {
+          "st_ctime_ns": "1795550956352107369",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096311",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795550956352107369",
+          "st_nlink": "1",
+          "st_size": "353",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-proof-feedback-conflicting-attestations-private-v01/candidate-same8/stdout.DATA",
+        "sha256": "949fa93daf1a7a9bca50a3e8fdc9d8b15b80e55f75a649bdde14c879d1b1a5b4"
+      }
+    }
+  },
+  "compatibility_limit": "Previously accepted conflicting raw mappings now refuse. A historical already-serialized canonical record may have discarded conflicting raw aliases; this change cannot establish historical authenticity. Canonical serialization, witness digest and hash rules unchanged.",
+  "current_git_blobs_equal_before_observed": true,
+  "files": [
+    {
+      "before": {
+        "bytes": 59394,
+        "full9": {
+          "st_ctime_ns": "1795550606791460594",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096235",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795550606791460594",
+          "st_nlink": "1",
+          "st_size": "59394",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-proof-feedback-conflicting-attestations-private-v01/owner.before.py.DATA",
+        "sha256": "27e102c61bd93a93202c3f2e10757ebc9506a19bc784719a8ea253c9523849fa"
+      },
+      "candidate": {
+        "bytes": 59538,
+        "full9": {
+          "st_ctime_ns": "1795550939391386280",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096309",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795550939391386280",
+          "st_nlink": "1",
+          "st_size": "59538",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-proof-feedback-conflicting-attestations-private-v01/owner.after.py.DATA",
+        "sha256": "c58df29db75d5200fae7b27ae1297ecc925e8761fb6663a5d70eae2fd55a8e1c"
+      },
+      "repository_relative_path": "ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py"
+    },
+    {
+      "before": {
+        "bytes": 21127,
+        "full9": {
+          "st_ctime_ns": "1795550606794781545",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096236",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795550606794781545",
+          "st_nlink": "1",
+          "st_size": "21127",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-proof-feedback-conflicting-attestations-private-v01/test.before.py.DATA",
+        "sha256": "2d62a2773a2ecfbb54f4663f7ee7cd1cc0a203a94b4dfa1a9cfb114d74cbebfd"
+      },
+      "candidate": {
+        "bytes": 23636,
+        "full9": {
+          "st_ctime_ns": "1795550606805034015",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096238",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795550606805034015",
+          "st_nlink": "1",
+          "st_size": "23636",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-proof-feedback-conflicting-attestations-private-v01/owning-test.after.py.DATA",
+        "sha256": "85806ca14e88f313066eba7c0ca0849f2e2047cb270d00fdf047fd7007654631"
+      },
+      "repository_relative_path": "tests/unit/logic/integration/test_legal_ir_proof_feedback.py"
+    }
+  ],
+  "independent_static_review": "Both call sites and fixture paths confirmed. Canonical wire uses verified only. Counterexample raw-mapping fallback hash can still differ across spellings without an explicit witness. The equality controls pin the same explicit witness.",
+  "input_binding": {
+    "bytes": 3182,
+    "full9": {
+      "st_ctime_ns": "1795550606809150827",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72096240",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795550606809150827",
+      "st_nlink": "1",
+      "st_size": "3182",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-proof-feedback-conflicting-attestations-private-v01/input-bindings.json",
+    "sha256": "487d9f2eaf08863ad54e306ad0594955c32a6a636eb2ed53355176237980a5ca"
+  },
+  "model_or_Lean_run": false,
+  "patch": {
+    "bytes": 3511,
+    "full9": {
+      "st_ctime_ns": "1795550996753305994",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72096322",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795550996753305994",
+      "st_nlink": "1",
+      "st_size": "3511",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-proof-feedback-conflicting-attestations-private-v01/proof-feedback-conflicting-attestations-private-v01.patch",
+    "sha256": "fa959e621e7c7616ec96d694ec1682a1f417bcc8a161d490d9de44fe4e2119f5"
+  },
+  "push": false,
+  "runner": {
+    "bytes": 2733,
+    "full9": {
+      "st_ctime_ns": "1795546560046611044",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72094739",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795546560046611044",
+      "st_nlink": "1",
+      "st_size": "2733",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/invoke-existing-pytest-private-v02.py.DATA",
+    "sha256": "37b0cd50f0ce9d5ef5fd38e29d040211401365253595255b74fa60becba76132"
+  },
+  "schema": "LIR22-existing-proof-feedback-conflicting-attestations-private-engineering/v1",
+  "scope": "Private ordinary Python pytest with the existing bounded project-body fixture. Holds the real record create/from_verified path. No canonical code changes or production, native, reviews or training qualification.",
+  "scope_detail": "Only _attested_boolean product AST changed. Existing owning-test prefix unchanged. Each supplied flag retains strict boolean typing. Distinct supplied values now raise ProofFeedbackTrustError; absent, single and equal signals keep previous decisions.",
+  "source_lease": false
+}

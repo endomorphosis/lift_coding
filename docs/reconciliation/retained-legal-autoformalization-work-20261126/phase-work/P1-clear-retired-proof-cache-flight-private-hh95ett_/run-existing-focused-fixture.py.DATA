@@ -1,0 +1,25 @@
+
+import os,resource,sys
+from pathlib import Path
+scope=Path(sys.argv[1]).resolve(strict=True)
+resource.setrlimit(resource.RLIMIT_AS,(512*1024*1024,)*2)
+resource.setrlimit(resource.RLIMIT_CPU,(50,55))
+os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})
+os.environ['PYTEST_DISABLE_PLUGIN_AUTOLOAD']='1'
+os.environ['IPFS_DATASETS_PY_MINIMAL_IMPORTS']='1'
+def audit(event,args):
+    if event.startswith(('socket.','subprocess.')) or event in ('os.system','os.fork','os.forkpty','os.exec','os.posix_spawn'):
+        raise PermissionError('private focused proof cache fixture disallows process/network effects')
+    if event=='import' and args[0].split('.',1)[0] in ('duckdb','torch','jax','tensorflow','transformers'):
+        raise ImportError('outside memory-only proof cache fixture')
+    if event=='open' and not isinstance(args[0],int):
+        info=args[2] or 0
+        if info&(os.O_WRONLY|os.O_RDWR|os.O_CREAT|os.O_TRUNC|os.O_APPEND):
+            path=Path(args[0]).resolve()
+            if not path.is_relative_to(scope.parent):
+                raise PermissionError(str(path))
+sys.path.insert(0,str(scope))
+sys.addaudithook(audit)
+import pytest
+args=[str(scope/'tests/unit/logic/test_duckdb_proof_store.py'),'-q','--confcutdir='+str(scope),'--rootdir='+str(scope),'-p','no:cacheprovider','--junitxml='+sys.argv[2]]
+raise SystemExit(pytest.main(args))

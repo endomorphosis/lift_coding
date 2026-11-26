@@ -1,0 +1,80 @@
+{
+  "A_provenance": null,
+  "D_provenance": null,
+  "Root_selected": null,
+  "Source_WRITE_claimed": false,
+  "admitted_io_plan_reference": null,
+  "effect_decision_reference": null,
+  "fixture_closure_reference": null,
+  "frozen_Git_candidates": null,
+  "modules": {
+    "ipfs_datasets_py.logic.backends.kernel.lean": {
+      "bytes": 103838,
+      "full9": null,
+      "relative_path": "ipfs_datasets_py/logic/backends/kernel/lean.py",
+      "sha256": "c1050ad1ec067fc7f7c8fea08793e872511fe58029e9b1aa89ec90d2cb288313"
+    },
+    "ipfs_datasets_py.logic.backends.kernel.rocq": {
+      "bytes": 41607,
+      "full9": null,
+      "relative_path": "ipfs_datasets_py/logic/backends/kernel/rocq.py",
+      "sha256": "7fd1b39643190277f00325dac59cf3923b24a3056963713bd7437a364b6a0f9a"
+    },
+    "ipfs_datasets_py.logic.backends.kernel.wasm": {
+      "bytes": 24933,
+      "full9": null,
+      "relative_path": "ipfs_datasets_py/logic/backends/kernel/wasm.py",
+      "sha256": "49cfdbc0108b43d45ab9f567b4153f384985563b075f369b32e37f855252d6cc"
+    },
+    "ipfs_datasets_py.logic.backends.process": {
+      "bytes": 109707,
+      "full9": null,
+      "relative_path": "ipfs_datasets_py/logic/backends/process.py",
+      "sha256": "370ba355be1da87814be4a117d2ce2a1cbc255064958d9ec64ada8e54521a7d7"
+    },
+    "ipfs_datasets_py.logic.backends.resource_admission": {
+      "bytes": 19806,
+      "full9": null,
+      "relative_path": "ipfs_datasets_py/logic/backends/resource_admission.py",
+      "sha256": "fda64e02042355fd0a0a3b75934b3d1c4ccb5efb42f0fe861876275ff8a5e1a8"
+    },
+    "ipfs_datasets_py.logic.backends.results": {
+      "bytes": 27160,
+      "full9": null,
+      "relative_path": "ipfs_datasets_py/logic/backends/results.py",
+      "sha256": "afda793472d3a6ba13f20bee13a992bfce68177388bdf338548157a5aa201458"
+    },
+    "ipfs_datasets_py.logic.families.models": {
+      "bytes": 36277,
+      "full9": null,
+      "relative_path": "ipfs_datasets_py/logic/families/models.py",
+      "sha256": "1a92305ef498812e3757147179907d4ddf4a4518371034fc2363922d5d5fed3f"
+    },
+    "ipfs_datasets_py.logic.ir_core.claims": {
+      "bytes": 16176,
+      "full9": null,
+      "relative_path": "ipfs_datasets_py/logic/ir_core/claims.py",
+      "sha256": "282cdd3a6ba18a90079886337d360bae44da172748faa3ad2715d2071070de3b"
+    },
+    "ipfs_datasets_py.logic.ir_core.protocols": {
+      "bytes": 57414,
+      "full9": null,
+      "relative_path": "ipfs_datasets_py/logic/ir_core/protocols.py",
+      "sha256": "b452a7095a2524f0ea3f4e4f3a395643d3257cd6f42e3c77f8e1817df62f6fed"
+    },
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler": {
+      "bytes": 151350,
+      "full9": null,
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py",
+      "sha256": "7a0dac2d13b4be7775e278054e1a57808f5629d3c58952164b91514e6e2ae2d3"
+    },
+    "tests.integration.logic.backends.test_kernel_backends": {
+      "bytes": 115566,
+      "full9": null,
+      "relative_path": "tests/integration/logic/backends/test_kernel_backends.py",
+      "sha256": "99e00363bbd1ea23d450af0912374fdbf4d30ab3b1802371fb8d237dccbf7da5"
+    }
+  },
+  "projects": null,
+  "source_read_binding_reference": null
+}

@@ -1,0 +1,170 @@
+--- a/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_semantic_metrics.py
++++ b/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_semantic_metrics.py
+@@ -348,6 +348,8 @@
+     structural_right = _structural_signature(candidate)
+     obligations_left = _obligation_signature(reference)
+     obligations_right = _obligation_signature(candidate)
++    counterexamples_left = _counterexample_signature(reference)
++    counterexamples_right = _counterexample_signature(candidate)
+     graph_left = _graph_signature(reference)
+     graph_right = _graph_signature(candidate)
+     temporal_left = _temporal_window_signature(reference)
+@@ -356,8 +358,6 @@
+     decompiler_right, round_trip_right = _legacy_round_trip_observation(candidate_ir)
+     unsupported_left = _legacy_raw_ir_unsupported_paths(reference_ir)
+     unsupported_right = _legacy_raw_ir_unsupported_paths(candidate_ir)
+-    counterexamples_left = _counterexample_signature(reference, unsupported_left)
+-    counterexamples_right = _counterexample_signature(candidate, unsupported_right)
+     proof_left = _proof_obligation_signature(reference)
+     proof_right = _proof_obligation_signature(candidate)
+     proof_delta = float(len(proof_left ^ proof_right))
+@@ -367,6 +367,10 @@
+         OBLIGATION_EQUIVALENCE: _empty_aware_similarity(
+             obligations_left,
+             obligations_right,
++        ),
++        COUNTEREXAMPLE_EQUIVALENCE: _empty_aware_similarity(
++            counterexamples_left,
++            counterexamples_right,
+         ),
+         GRAPH_ISOMORPHISM: _empty_aware_similarity(graph_left, graph_right),
+         TEMPORAL_WINDOW_AGREEMENT: _empty_aware_similarity(
+@@ -376,12 +380,6 @@
+         PROOF_OBLIGATION_DELTA_SCORE: _proof_delta_score(proof_left, proof_right),
+     }
+     missing: set[str] = set()
+-    if counterexamples_left is None or counterexamples_right is None:
+-        missing.add(COUNTEREXAMPLE_EQUIVALENCE)
+-    else:
+-        scores[COUNTEREXAMPLE_EQUIVALENCE] = _empty_aware_similarity(
+-            counterexamples_left, counterexamples_right,
+-        )
+     if decompiler_left and decompiler_right:
+         scores[DECOMPILER_ROUND_TRIP_PRESERVATION] = _set_similarity(
+             decompiler_left, decompiler_right,
+@@ -413,8 +411,8 @@
+                 "authority": "caller_reported_observations_only",
+             },
+             "counterexample_signature_sizes": {
+-                "candidate": None if counterexamples_right is None else len(counterexamples_right),
+-                "reference": None if counterexamples_left is None else len(counterexamples_left),
++                "candidate": len(counterexamples_right),
++                "reference": len(counterexamples_left),
+             },
+             "graph_signature_sizes": {
+                 "candidate": len(graph_right),
+@@ -457,8 +455,6 @@
+             return computed
+         merged = dict(explicit)
+         merged.update(computed.scores)
+-        if COUNTEREXAMPLE_EQUIVALENCE in computed.missing_metrics:
+-            merged.pop(COUNTEREXAMPLE_EQUIVALENCE, None)
+         raw_deltas = _explicit_proof_deltas(source)
+         raw_deltas.update(computed.raw_deltas)
+         return SemanticEquivalenceFamilyResult(
+@@ -894,10 +890,6 @@
+             modes = [item[key] for key in groups[0] if key in item]
+             if len(modes) == 1 and _normalize_scalar(modes[0]) not in _MODALITY_WORDS:
+                 mark(path, "unsupported_modality")
+-        elif context == "counterexample":
+-            outcome = item.get("violates")
+-            if "assignment" not in item or type(outcome) is not str or not outcome.strip():
+-                mark(path, "incomplete_counterexample")
+ 
+     visit(value, "root", "")
+     return tuple(sorted(unsupported))
+@@ -1039,20 +1031,8 @@
+     return frozenset(obligations)
+ 
+ 
+-def _counterexample_signature(
+-    value: Any, unsupported_paths: Sequence[str],
+-) -> frozenset[str] | None:
+-    if any(path.startswith(("/counterexamples:", "/counterexamples/")) for path in unsupported_paths):
+-        return None
+-    if not isinstance(value, Mapping) or "counterexamples" not in value:
+-        return frozenset(_contextual_values(value, ("counterexample", "cex", "witness_model")))
+-    # Keep each reported obligation joined to its typed assignment. Scenario
+-    # order and the insertion order of variables have no scoring significance.
+-    return frozenset(
+-        json.dumps([dict(case["assignment"]), case["violates"]], sort_keys=True,
+-                   ensure_ascii=False, separators=(",", ":"), allow_nan=False)
+-        for case in value["counterexamples"]
+-    )
++def _counterexample_signature(value: Any) -> frozenset[str]:
++    return frozenset(_contextual_values(value, ("counterexample", "cex", "witness_model")))
+ 
+ 
+ def _graph_signature(value: Any) -> frozenset[str]:
+--- a/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py
++++ b/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py
+@@ -901,69 +901,3 @@
+         assert result.complete and result.scores[DECOMPILER_ROUND_TRIP_PRESERVATION] == 1.0
+     else:
+         assert result.complete and result.scores[DECOMPILER_ROUND_TRIP_PRESERVATION] < 1.0
+-
+-
+-@pytest.mark.parametrize("drift", [None, "swapped_outcomes", "assignment_value_type", "blank_outcome", "nested_assignment"])
+-def test_counterexample_scores_bind_assignments_to_reported_outcomes(drift):
+-    reference, candidate = _reference_ir(), _isomorphic_ir()
+-    scenarios = [
+-        {"assignment": {"notice": False, "permit": True}, "violates": "po-notice"},
+-        {"assignment": {"notice": True, "permit": False}, "violates": "po-permit"},
+-    ]
+-    reference["counterexamples"] = deepcopy(scenarios)
+-    candidate["counterexamples"] = [
+-        {"violates": case["violates"], "assignment": dict(reversed(tuple(case["assignment"].items())))}
+-        for case in reversed(scenarios)
+-    ]
+-    if drift == "swapped_outcomes":
+-        first, second = candidate["counterexamples"]
+-        first["violates"], second["violates"] = second["violates"], first["violates"]
+-    elif drift == "assignment_value_type":
+-        candidate["counterexamples"][1]["assignment"]["notice"] = "false"
+-    elif drift == "blank_outcome":
+-        for payload in (reference, candidate):
+-            payload["counterexamples"][0]["violates"] = " "
+-    elif drift == "nested_assignment":
+-        for payload in (reference, candidate):
+-            payload["counterexamples"][0]["assignment"]["notice"] = {"observed": False}
+-
+-    baseline = {"view_family_metrics": {"deontic": {
+-        "reference_ir": reference, "candidate_ir": reference,
+-    }}}
+-    observation = {"view_family_metrics": {"deontic": {
+-        "reference_ir": reference, "candidate_ir": candidate,
+-    }}}
+-    gate = compare_legal_ir_semantic_equivalence(baseline, observation, families=("deontic",))
+-    result = gate.family_results["deontic"].after
+-    if drift is None:
+-        assert gate.accepted is True
+-        assert result.complete is True
+-        assert result.scores[COUNTEREXAMPLE_EQUIVALENCE] == 1.0
+-    elif drift in {"blank_outcome", "nested_assignment"}:
+-        assert COUNTEREXAMPLE_EQUIVALENCE in result.missing_metrics
+-        assert COUNTEREXAMPLE_EQUIVALENCE not in result.scores
+-        assert gate.accepted is False
+-    else:
+-        assert gate.accepted is False, result.to_dict()
+-        assert result.complete is True
+-        assert result.scores[COUNTEREXAMPLE_EQUIVALENCE] < 1.0
+-        assert result.detail["raw_input_coverage"]["canonical_typed_ir_validated"] is False
+-
+-
+-@pytest.mark.parametrize("scenario", [
+-    {"assignment": {"notice": False}, "violates": " "},
+-    {"violates": "po-notice"},
+-])
+-def test_malformed_raw_counterexample_cannot_supply_explicit_credit(scenario):
+-    reference = _reference_ir()
+-    candidate = _isomorphic_ir()
+-    candidate["counterexamples"] = [deepcopy(scenario)]
+-    explicit = _all_semantic_scores()
+-    result = semantic_equivalence_from_metrics({
+-        **explicit, "reference_ir": reference, "candidate_ir": candidate,
+-    }, family="deontic")
+-
+-    assert COUNTEREXAMPLE_EQUIVALENCE not in result.scores
+-    assert COUNTEREXAMPLE_EQUIVALENCE in result.missing_metrics
+-    explicit_only = semantic_equivalence_from_metrics(explicit, family="deontic")
+-    assert explicit_only.scores[COUNTEREXAMPLE_EQUIVALENCE] == 1.0

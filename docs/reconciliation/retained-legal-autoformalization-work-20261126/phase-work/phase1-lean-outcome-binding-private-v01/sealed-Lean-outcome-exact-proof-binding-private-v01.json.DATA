@@ -1,0 +1,1041 @@
+{
+  "changes": "LeanKernelOutcome now binds source/status/result metadata and witness to its own exact receipt/capability. Existing theorem witness encoding is shared by producer and validation.",
+  "compatibility": "Receipt schema/profile and canonical witness/result serialization are unchanged. Manually assembled envelopes with contradictory status or unrelated/missing proof metadata now raise LeanKernelError. No inference of actual Lean process/kernel compliance.",
+  "files": [
+    {
+      "candidate_after": {
+        "bytes": 102257,
+        "full9": {
+          "st_ctime_ns": "1795552332811738392",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097379",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795552332811738392",
+          "st_nlink": "1",
+          "st_size": "102257",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase1-lean-outcome-binding-private-v01/owner.final.py.DATA",
+        "sha256": "6136a233cebce4777b0825d7656d2fe3bab2fd88e8e49b9ffabc7fc58d4cc401"
+      },
+      "published_before": {
+        "bytes": 101439,
+        "full9": {
+          "st_ctime_ns": "1795552223874608152",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097349",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795552223874608152",
+          "st_nlink": "1",
+          "st_size": "101439",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase1-lean-outcome-binding-private-v01/owner.before.py.DATA",
+        "sha256": "260a6abeefe9410fb2f8c3ce25ccf9d37d720af6c9fac3c76f258d9d3eeab5c7"
+      },
+      "relative_path": "ipfs_datasets_py/logic/backends/kernel/lean.py"
+    },
+    {
+      "candidate_after": {
+        "bytes": 110611,
+        "full9": {
+          "st_ctime_ns": "1795552223972408541",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097360",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795552223972408541",
+          "st_nlink": "1",
+          "st_size": "110611",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase1-lean-outcome-binding-private-v01/test.after.py.DATA",
+        "sha256": "63ef44a492d6e939a0a6d1a62abdc745be1c34483cd64ddb35ab391dc2c28e83"
+      },
+      "published_before": {
+        "bytes": 108837,
+        "full9": {
+          "st_ctime_ns": "1795552223906116885",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097355",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795552223906116885",
+          "st_nlink": "1",
+          "st_size": "108837",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase1-lean-outcome-binding-private-v01/test.before.py.DATA",
+        "sha256": "0ad3389fce78ca14a68d1588ea9e3fa59f8bc377bf824f3b81b561b0665bbcb1"
+      },
+      "relative_path": "tests/integration/logic/backends/test_kernel_backends.py"
+    }
+  ],
+  "final_candidate_retention": "Final code removes an extra blank line and adds explicit boolean grouping; AST identical to first green candidate. Both cohorts rerun on final exact bytes.",
+  "fixture_scope": "The real LeanKernelBackend with the existing fictional compiler executor and trusted test identity callback. No compiler, root resource runner or Source lease ran.",
+  "no_Native_or_model": true,
+  "no_canonical_or_Git_mutation": true,
+  "patch": {
+    "bytes": 5601,
+    "full9": {
+      "st_ctime_ns": "1795552368861425568",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72097392",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795552368861425568",
+      "st_nlink": "1",
+      "st_size": "5601",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase1-lean-outcome-binding-private-v01/bind-lean-outcome-to-exact-receipt.patch",
+    "sha256": "c9662df1d686ed2fac9829d96a88d597a444d2d86a443cbd6ba171c15f9ec4dd"
+  },
+  "pre_polish_owner": {
+    "bytes": 102256,
+    "full9": {
+      "st_ctime_ns": "1795552285921373630",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72097366",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795552285921373630",
+      "st_nlink": "1",
+      "st_size": "102256",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase1-lean-outcome-binding-private-v01/owner.after.py.DATA",
+    "sha256": "3656983b722a8b9e2df1970bd5cc0f61a9e04d3e2fee9a331e423a87e0a28a6d"
+  },
+  "private_project_source_bindings": {
+    "bytes": 59597,
+    "full9": {
+      "st_ctime_ns": "1795552223977221609",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72097361",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795552223977221609",
+      "st_nlink": "1",
+      "st_size": "59597",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase1-lean-outcome-binding-private-v01/input-bindings.json",
+    "sha256": "3ae79bb75de556ae803e85bbf89d0614998201ab3192ef0bd046e8ee07b93b4f"
+  },
+  "published_base": "0d71c0d82b2dfc1ed3c7f236009e467e4c201c88",
+  "runner": {
+    "bytes": 2733,
+    "full9": {
+      "st_ctime_ns": "1795546560046611044",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72094739",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795546560046611044",
+      "st_nlink": "1",
+      "st_size": "2733",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/invoke-existing-pytest-private-v02.py.DATA",
+    "sha256": "37b0cd50f0ce9d5ef5fd38e29d040211401365253595255b74fa60becba76132"
+  },
+  "runs": {
+    "baseline": {
+      "argv": {
+        "bytes": 2112,
+        "full9": {
+          "st_ctime_ns": "1795552235653507521",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097363",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795552235653507521",
+          "st_nlink": "1",
+          "st_size": "2112",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase1-lean-outcome-binding-private-v01/baseline/argv.json",
+        "sha256": "72495813d55f59fee5cd33aebb62f5b4c5c3471d21051353c9a6663d5d32d677"
+      },
+      "errors": 0,
+      "exit_code": 1,
+      "failed": 6,
+      "junit": {
+        "bytes": 4163,
+        "full9": {
+          "st_ctime_ns": "1795552236642727239",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097369",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795552236642727239",
+          "st_nlink": "1",
+          "st_size": "4163",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase1-lean-outcome-binding-private-v01/baseline/result.xml",
+        "sha256": "9f1198b081fde47c365dd40b08f445011ccfd4b9b466bf37cbd844601f617803"
+      },
+      "nodes": [
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_rejects_inconsistent_evidence[different-result]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_rejects_inconsistent_evidence[different-source]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_rejects_inconsistent_evidence[contradictory-status]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_rejects_inconsistent_evidence[different-witness-receipt]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_rejects_inconsistent_evidence[different-witness-theorem]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_rejects_inconsistent_evidence[different-capability]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_verified_proof_binds_full_kernel_receipt"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_source_only_compilation_cannot_prove_an_opaque_request_obligation"
+        ]
+      ],
+      "passed": 2,
+      "skipped": 0,
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795552235653507521",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097365",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795552235653507521",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase1-lean-outcome-binding-private-v01/baseline/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 3555,
+        "full9": {
+          "st_ctime_ns": "1795552236643049882",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097364",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795552236643049882",
+          "st_nlink": "1",
+          "st_size": "3555",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase1-lean-outcome-binding-private-v01/baseline/stdout.DATA",
+        "sha256": "00c14995e070f0f9309339359676ab2de5151905df86439dc0e542ea2fa331e9"
+      }
+    },
+    "candidate-existing8-methods": {
+      "argv": {
+        "bytes": 2077,
+        "full9": {
+          "st_ctime_ns": "1795552286817590923",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097374",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795552286817590923",
+          "st_nlink": "1",
+          "st_size": "2077",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase1-lean-outcome-binding-private-v01/candidate-existing8-methods/argv.json",
+        "sha256": "77b724e541ef971b493f91a56a484c42b8b7df96b2b4eb400954851991ae4f7b"
+      },
+      "errors": 0,
+      "exit_code": 0,
+      "failed": 0,
+      "junit": {
+        "bytes": 10925,
+        "full9": {
+          "st_ctime_ns": "1795552287735950191",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097382",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795552287735950191",
+          "st_nlink": "1",
+          "st_size": "10925",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase1-lean-outcome-binding-private-v01/candidate-existing8-methods/result.xml",
+        "sha256": "54b9cdac090e62f088299f990c4d1c862fa4522a965ff82fc61f28bb300afec9"
+      },
+      "nodes": [
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_sorry_is_rejected_and_never_proved"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_sorry_can_explicitly_downgrade_authority"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_unavailable_lean_kernel_never_passes"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_wasm_plane_is_probe_only_and_not_confused_with_native_success"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[missing_guard]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[other_guard]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[original_report]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[identity_missing]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[identity_unchecked]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[changed_version]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[changed_executable]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[changed_executable_sha]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[changed_size]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[changed_stat]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[failed_version]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[stderr_version]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[other_version_command]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[identity_scope]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[unknown_identity_field]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[v2_schema]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_precancelled_request_runs_no_identity_or_proof_callbacks"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[missing_report]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_report_name]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[unapproved_dependency]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[missing_typecheck]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_proposition_digest]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[missing_compiled_source]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_source]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_proof]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_toolchain_policy]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[missing_report_position]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[unknown_field]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[legacy_schema]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[missing_source]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_submitted_source]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_compiled_recipe]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_selected_declaration]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_report_line]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[empty_report_text]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_declaration_report_text]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[hidden_sorry_report_text]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[hidden_dependency_report_text]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[{\"severity\": \"error\", \"data\": \"fictional unsolved goals\"}\\n-stdout]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[{\"severity\": \"error\", \"data\": \"fictional unsolved goals\"}\\n-stderr]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  {\"severity\": \"error\", \"data\": \"fictional type mismatch\"}\\n-stdout]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  {\"severity\": \"error\", \"data\": \"fictional type mismatch\"}\\n-stderr]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[error: fictional unsolved goals\\n-stdout]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[error: fictional unsolved goals\\n-stderr]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[Main.lean:1:0: error: fictional unsolved goals\\n-stdout]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[Main.lean:1:0: error: fictional unsolved goals\\n-stderr]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  \\tMain.lean:12:3: error: fictional unsolved goals\\n-stdout]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  \\tMain.lean:12:3: error: fictional unsolved goals\\n-stderr]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  ERROR: fictional unsolved goals\\n-stdout]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  ERROR: fictional unsolved goals\\n-stderr]"
+        ]
+      ],
+      "passed": 54,
+      "skipped": 0,
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795552286820503397",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097378",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795552286820503397",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase1-lean-outcome-binding-private-v01/candidate-existing8-methods/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 347,
+        "full9": {
+          "st_ctime_ns": "1795552287735950191",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097377",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795552287735950191",
+          "st_nlink": "1",
+          "st_size": "347",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase1-lean-outcome-binding-private-v01/candidate-existing8-methods/stdout.DATA",
+        "sha256": "498454ab050c823a0b7b277a8fa4b03c0714232fce6d47f9aba8a847b394f695"
+      }
+    },
+    "candidate-same8": {
+      "argv": {
+        "bytes": 2120,
+        "full9": {
+          "st_ctime_ns": "1795552285941802775",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097370",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795552285941802775",
+          "st_nlink": "1",
+          "st_size": "2120",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase1-lean-outcome-binding-private-v01/candidate-same8/argv.json",
+        "sha256": "d14ef9402b39d95576d5f310efd4ab9550dc4139021d668ce4c5bb1b7a7fd6f5"
+      },
+      "errors": 0,
+      "exit_code": 0,
+      "failed": 0,
+      "junit": {
+        "bytes": 1559,
+        "full9": {
+          "st_ctime_ns": "1795552286747552658",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097376",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795552286747552658",
+          "st_nlink": "1",
+          "st_size": "1559",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase1-lean-outcome-binding-private-v01/candidate-same8/result.xml",
+        "sha256": "1e3b7ab7ac85450550c04149d868cabd634787871e47e941c29a0936243a8435"
+      },
+      "nodes": [
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_rejects_inconsistent_evidence[different-result]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_rejects_inconsistent_evidence[different-source]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_rejects_inconsistent_evidence[contradictory-status]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_rejects_inconsistent_evidence[different-witness-receipt]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_rejects_inconsistent_evidence[different-witness-theorem]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_rejects_inconsistent_evidence[different-capability]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_verified_proof_binds_full_kernel_receipt"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_source_only_compilation_cannot_prove_an_opaque_request_obligation"
+        ]
+      ],
+      "passed": 8,
+      "skipped": 0,
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795552285944495487",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097372",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795552285944495487",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase1-lean-outcome-binding-private-v01/candidate-same8/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 334,
+        "full9": {
+          "st_ctime_ns": "1795552286747552658",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097371",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795552286747552658",
+          "st_nlink": "1",
+          "st_size": "334",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase1-lean-outcome-binding-private-v01/candidate-same8/stdout.DATA",
+        "sha256": "2ac8d51d1e86c2230f62d640e0fdf177e740577e823ea7574753be3619cc5872"
+      }
+    },
+    "final-existing8-methods": {
+      "argv": {
+        "bytes": 2073,
+        "full9": {
+          "st_ctime_ns": "1795552333712392158",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097387",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795552333712392158",
+          "st_nlink": "1",
+          "st_size": "2073",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase1-lean-outcome-binding-private-v01/final-existing8-methods/argv.json",
+        "sha256": "c18d3632d9472bd84240967b58364c4dd096320d33d82fc1772fa53768bdb023"
+      },
+      "errors": 0,
+      "exit_code": 0,
+      "failed": 0,
+      "junit": {
+        "bytes": 10925,
+        "full9": {
+          "st_ctime_ns": "1795552334619450943",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097395",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795552334619450943",
+          "st_nlink": "1",
+          "st_size": "10925",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase1-lean-outcome-binding-private-v01/final-existing8-methods/result.xml",
+        "sha256": "5e5bafc99d52bc605ca204e06f8162f542cea8cee52d6870e5a3e852c7266d28"
+      },
+      "nodes": [
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_sorry_is_rejected_and_never_proved"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_sorry_can_explicitly_downgrade_authority"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_unavailable_lean_kernel_never_passes"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_wasm_plane_is_probe_only_and_not_confused_with_native_success"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[missing_guard]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[other_guard]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[original_report]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[identity_missing]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[identity_unchecked]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[changed_version]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[changed_executable]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[changed_executable_sha]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[changed_size]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[changed_stat]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[failed_version]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[stderr_version]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[other_version_command]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[identity_scope]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[unknown_identity_field]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[v2_schema]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_precancelled_request_runs_no_identity_or_proof_callbacks"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[missing_report]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_report_name]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[unapproved_dependency]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[missing_typecheck]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_proposition_digest]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[missing_compiled_source]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_source]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_proof]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_toolchain_policy]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[missing_report_position]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[unknown_field]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[legacy_schema]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[missing_source]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_submitted_source]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_compiled_recipe]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_selected_declaration]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_report_line]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[empty_report_text]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_declaration_report_text]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[hidden_sorry_report_text]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[hidden_dependency_report_text]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[{\"severity\": \"error\", \"data\": \"fictional unsolved goals\"}\\n-stdout]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[{\"severity\": \"error\", \"data\": \"fictional unsolved goals\"}\\n-stderr]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  {\"severity\": \"error\", \"data\": \"fictional type mismatch\"}\\n-stdout]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  {\"severity\": \"error\", \"data\": \"fictional type mismatch\"}\\n-stderr]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[error: fictional unsolved goals\\n-stdout]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[error: fictional unsolved goals\\n-stderr]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[Main.lean:1:0: error: fictional unsolved goals\\n-stdout]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[Main.lean:1:0: error: fictional unsolved goals\\n-stderr]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  \\tMain.lean:12:3: error: fictional unsolved goals\\n-stdout]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  \\tMain.lean:12:3: error: fictional unsolved goals\\n-stderr]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  ERROR: fictional unsolved goals\\n-stdout]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  ERROR: fictional unsolved goals\\n-stderr]"
+        ]
+      ],
+      "passed": 54,
+      "skipped": 0,
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795552333714926453",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097391",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795552333714926453",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase1-lean-outcome-binding-private-v01/final-existing8-methods/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 343,
+        "full9": {
+          "st_ctime_ns": "1795552334619450943",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097390",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795552334619450943",
+          "st_nlink": "1",
+          "st_size": "343",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase1-lean-outcome-binding-private-v01/final-existing8-methods/stdout.DATA",
+        "sha256": "7fdf65e82e0edd2add2880b18ae85fe8f3977c819dfcdd9d56f6961e4258d01b"
+      }
+    },
+    "final-same8": {
+      "argv": {
+        "bytes": 2116,
+        "full9": {
+          "st_ctime_ns": "1795552332823353841",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097383",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795552332823353841",
+          "st_nlink": "1",
+          "st_size": "2116",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase1-lean-outcome-binding-private-v01/final-same8/argv.json",
+        "sha256": "2dae76b434e40d7ee72dd839d2d4accf302812b1750687c393d4a1362ab0f143"
+      },
+      "errors": 0,
+      "exit_code": 0,
+      "failed": 0,
+      "junit": {
+        "bytes": 1559,
+        "full9": {
+          "st_ctime_ns": "1795552333628597899",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097389",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795552333628597899",
+          "st_nlink": "1",
+          "st_size": "1559",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase1-lean-outcome-binding-private-v01/final-same8/result.xml",
+        "sha256": "69cdabb891069cb2f55e7f64f1a9b5fbf6f104b2541906fb02e7aa6e8bfd20b2"
+      },
+      "nodes": [
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_rejects_inconsistent_evidence[different-result]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_rejects_inconsistent_evidence[different-source]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_rejects_inconsistent_evidence[contradictory-status]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_rejects_inconsistent_evidence[different-witness-receipt]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_rejects_inconsistent_evidence[different-witness-theorem]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_rejects_inconsistent_evidence[different-capability]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_verified_proof_binds_full_kernel_receipt"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_source_only_compilation_cannot_prove_an_opaque_request_obligation"
+        ]
+      ],
+      "passed": 8,
+      "skipped": 0,
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795552332824918431",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097385",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795552332824918431",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase1-lean-outcome-binding-private-v01/final-same8/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 330,
+        "full9": {
+          "st_ctime_ns": "1795552333628597899",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097384",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795552333628597899",
+          "st_nlink": "1",
+          "st_size": "330",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase1-lean-outcome-binding-private-v01/final-same8/stdout.DATA",
+        "sha256": "8afca9ae555a646ca6f0fe47b77f601ed5354b3618089eb336396472b57d9843"
+      }
+    }
+  },
+  "schema": "actual-Lean-proved-outcome-evidence-binding-private/v1"
+}

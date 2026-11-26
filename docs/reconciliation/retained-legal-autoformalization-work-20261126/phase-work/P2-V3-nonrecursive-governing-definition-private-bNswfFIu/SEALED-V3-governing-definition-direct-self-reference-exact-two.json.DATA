@@ -1,0 +1,221 @@
+{
+  "Git_freeze": null,
+  "Guide570_match_two_targets": {
+    "bytes": 964183,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-retained-qualification-component-binding-private-pZ1QE2WG/existing-Source2-Guide570-INERT-v02/current-1623-metadata-guard-guide570-overlay-INERT.json",
+    "sha256": "1bf24052bf906fd4c33b90cede527b11af3c0faf0534a3e16919479d63ec54d3"
+  },
+  "actual_private_observations": {
+    "green": {
+      "errors": 0,
+      "evidence": {
+        "pytest.log": {
+          "bytes": 0,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-nonrecursive-governing-definition-private-bNswfFIu/green/pytest.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "result.xml": {
+          "bytes": 2967,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-nonrecursive-governing-definition-private-bNswfFIu/green/result.xml",
+          "sha256": "10a2538ab65356dc70d04d8bcd79494016a6b7447282c68225a480b43df81c06"
+        },
+        "run.json": {
+          "bytes": 2404,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-nonrecursive-governing-definition-private-bNswfFIu/green/run.json",
+          "sha256": "e309d7b12c039a014cbf975bfdcd74753c7d836ca24184e9124963d7860195cf"
+        },
+        "stderr.DATA": {
+          "bytes": 0,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-nonrecursive-governing-definition-private-bNswfFIu/green/stderr.DATA",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout.DATA": {
+          "bytes": 343,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-nonrecursive-governing-definition-private-bNswfFIu/green/stdout.DATA",
+          "sha256": "4e98b92439a59a3c8109d5138ed7f04a44040235a31ce671045ae6fa52b4f23b"
+        }
+      },
+      "failed": 0,
+      "failed_nodes": [],
+      "passed": 15,
+      "skipped": 0,
+      "terminal_returncode": 0
+    },
+    "red": {
+      "errors": 0,
+      "evidence": {
+        "pytest.log": {
+          "bytes": 0,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-nonrecursive-governing-definition-private-bNswfFIu/red/pytest.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "result.xml": {
+          "bytes": 3903,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-nonrecursive-governing-definition-private-bNswfFIu/red/result.xml",
+          "sha256": "bd146a05f66e5eec15c9b774a7d40d6a3f563a34a9b86dc44c32029cb72b9634"
+        },
+        "run.json": {
+          "bytes": 2402,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-nonrecursive-governing-definition-private-bNswfFIu/red/run.json",
+          "sha256": "ed21315edb4a6de364c958ed571412ce759973e3ebb7fdf49ec4814d61a912d8"
+        },
+        "stderr.DATA": {
+          "bytes": 0,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-nonrecursive-governing-definition-private-bNswfFIu/red/stderr.DATA",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout.DATA": {
+          "bytes": 1565,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-nonrecursive-governing-definition-private-bNswfFIu/red/stdout.DATA",
+          "sha256": "8a61899acd8bec33d3ba0a3fc909deb3b2f319d5bc9dabd0629ff0ba487018e4"
+        }
+      },
+      "failed": 2,
+      "failed_nodes": [
+        "test_reviewed_v3_requires_nonrecursive_governing_definition[identity]",
+        "test_reviewed_v3_requires_nonrecursive_governing_definition[nested-self-use]"
+      ],
+      "passed": 13,
+      "skipped": 0,
+      "terminal_returncode": 1
+    }
+  },
+  "canonical_adoption": null,
+  "canonical_head_and_tracking_tip": "8ba21fb39f09ae6243e92bfd86533a610e48a094",
+  "canonical_tree": "b56aea600834c51f557a9562813097cf3972d125",
+  "changes": "Existing typed LogicNode walker rejects the defined predicate anywhere on the definition RHS.",
+  "current_private_role_bytes": {
+    "bytes": 33236,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-nonrecursive-governing-definition-private-bNswfFIu/current-exact-private-epoch.json",
+    "sha256": "70418d6c6fc7d902e07b62ebafb6fc9a5b8dfb9b523fd37f01c1a160fd847439"
+  },
+  "files": {
+    "owner": {
+      "after": {
+        "bytes": 35244,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-nonrecursive-governing-definition-private-bNswfFIu/final-owner.py.DATA",
+        "proposed_git_blob": "e0c469ac306dffe2bf190ae6b64ae811f3b83da1",
+        "sha256": "c3431bd2edf1000d36fb23342787a7f0baa0ef4238ece54dadeda499f8bab4a4"
+      },
+      "before": {
+        "bytes": 34912,
+        "canonical_full9": {
+          "st_ctime_ns": "1795715406173534940",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "70042682",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795715405573970361",
+          "st_nlink": "1",
+          "st_size": "34912",
+          "st_uid": "1000"
+        },
+        "git_blob": "66a763ea5d49f4e850100e4dee77e9b35e68b457",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-nonrecursive-governing-definition-private-bNswfFIu/owner_base.py.DATA",
+        "sha256": "30f9e1f2554b030241aeb8ec8ffc1f6c98816eee2732c83e59dbf3c0b36de50e"
+      },
+      "canonical_path": "ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py",
+      "mode": "100644"
+    },
+    "test": {
+      "after": {
+        "bytes": 33990,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-nonrecursive-governing-definition-private-bNswfFIu/final-test.py.DATA",
+        "proposed_git_blob": "0e525237934a93fe8577bb6e723b2b23a22e58e0",
+        "sha256": "4eba425f44555eaea1faa6f66af4dc51b65f0535dcad754dc04128a15c9fcb56"
+      },
+      "before": {
+        "bytes": 31445,
+        "canonical_full9": {
+          "st_ctime_ns": "1795560201472844701",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "70042545",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795560199057530941",
+          "st_nlink": "1",
+          "st_size": "31445",
+          "st_uid": "1000"
+        },
+        "git_blob": "848ed2ce4479399a652d2760c734eacd67d0c040",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-nonrecursive-governing-definition-private-bNswfFIu/test_base.py.DATA",
+        "sha256": "5bc57fed43f80f84c8a61bf2588158c97f150d745165c6ef7d544acc7e3fbe0c"
+      },
+      "canonical_path": "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py",
+      "mode": "100644"
+    }
+  },
+  "forward_patch": {
+    "bytes": 4502,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-nonrecursive-governing-definition-private-bNswfFIu/exact-two.forward.patch.DATA",
+    "sha256": "dd155d2b2dff5b7add4754fed1e842000f4294536827eb713cf10989f68334d3"
+  },
+  "historical_signed_receipts_untouched": true,
+  "inverse_patch": {
+    "bytes": 4502,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-nonrecursive-governing-definition-private-bNswfFIu/exact-two.inverse.patch.DATA",
+    "sha256": "101aa1cdc724235feeab31c692028c8f106c89f64610fa0b8f792b60847aa77d"
+  },
+  "native_qualification": null,
+  "new_cases": 3,
+  "no_new_project_import_roles": true,
+  "not_established": [
+    "mutual definition cycles across definition units",
+    "real independent legal review",
+    "proof authority",
+    "fresh Native receipt or ordinary qualification for the new V3 epoch"
+  ],
+  "ordinary_qualification": null,
+  "profile": {
+    "address_space_bytes": 536870912,
+    "cpu": 1,
+    "launcher": {
+      "bytes": 2711,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-nonrecursive-governing-definition-private-bNswfFIu/launch-reused-private-profile.py",
+      "sha256": "67158f484688d7c568a02a0b22d0303155a5c09e3618072683796b16eab1a76b"
+    },
+    "previous_fixture_runner": {
+      "bytes": 2733,
+      "full9": {
+        "st_ctime_ns": "1795546560046611044",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72094739",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795546560046611044",
+        "st_nlink": "1",
+        "st_size": "2733",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/invoke-existing-pytest-private-v02.py.DATA",
+      "sha256": "37b0cd50f0ce9d5ef5fd38e29d040211401365253595255b74fa60becba76132"
+    },
+    "soft_CPU_s": 55,
+    "wall_s": 60
+  },
+  "publication": null,
+  "retained_cases": 12,
+  "retained_legacy_v2_source_unchanged_in_this_unit": true,
+  "same_ordered_15": [
+    "test_reviewed_v3_requires_nonrecursive_governing_definition[independent]",
+    "test_reviewed_v3_requires_nonrecursive_governing_definition[identity]",
+    "test_reviewed_v3_requires_nonrecursive_governing_definition[nested-self-use]",
+    "test_full_fictional_definition_object_use_and_mixed_use_replay",
+    "test_saved_v2_preparation_signatures_and_assessment_survive_sibling_load",
+    "test_governing_definition_rejects_implication_instead_of_complete_equivalence",
+    "test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-cycle]",
+    "test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-definition-cycle]",
+    "test_reviewed_v3_refuses_cyclic_unit_dependencies[longer-mixed-cycle]",
+    "test_reviewed_v3_preserves_acyclic_overlapping_unit_dependencies",
+    "test_reviewed_v3_cross_reference_version_consistency[shared-forward-conflict]",
+    "test_reviewed_v3_cross_reference_version_consistency[shared-reverse-conflict]",
+    "test_reviewed_v3_cross_reference_version_consistency[shared-equal]",
+    "test_reviewed_v3_cross_reference_version_consistency[distinct-identities]",
+    "test_current_trust_controls_reject_even_genuine_signatures[revoked-key-key_revoked]"
+  ],
+  "schema": "fictional-reviewed-V3-nonrecursive-governing-definition-exact-two/v1",
+  "setup_issue": "Initial prep had reversed configuration hash labels. Corrected from the original config reference before any test.",
+  "v3_owner_new_source_epoch": true,
+  "verified_after": "Both recursive cases are rejected during preparation; independent definition remains eligible under fictional signatures with zero training/gold masks.",
+  "verified_before": "Identity and nested self-use each reached semantic_use_eligible=True under independently verified fictional Ed25519 signatures."
+}

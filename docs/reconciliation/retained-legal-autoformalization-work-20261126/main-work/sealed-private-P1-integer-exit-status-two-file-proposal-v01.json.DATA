@@ -1,0 +1,587 @@
+{
+  "kind": "private_existing_Lean_kernel_exact_integer_exit_status_two_file_proposal",
+  "status": "private_engineering_RED_GREEN_complete_canonical_and_normal_qualification_pending",
+  "objective_phase": "Phase1.1 proof-validation correctness",
+  "gap": "Public evaluate_lean_kernel_output treated boolean False and float0.0 as successful exit code0 because equality permits them; the genuine ToolRunResult dataclass accepts those field values. Later receipt/outcome checks do not type-check this raw field. This proves malformed-result boundary acceptance, not malicious Native compiler reachability.",
+  "canonical_targets": [
+    {
+      "path": "ipfs_datasets_py/logic/backends/kernel/lean.py",
+      "git_mode": "100644",
+      "before_git_blob": "1e1b75b74da8740b5808fb3dd77671eab5673f35",
+      "before": {
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/kernel_lean.published-611395.py.DATA",
+        "bytes": 103060,
+        "sha256": "1b250246f6ecea6a75b75da8a46f77abac1d5a02a5eba4cd2c1ec0e978e4efc9",
+        "full9": {
+          "st_dev": "66306",
+          "st_ino": "72388837",
+          "st_mode": "33024",
+          "st_nlink": "1",
+          "st_uid": "1000",
+          "st_gid": "1000",
+          "st_size": "103060",
+          "st_mtime_ns": "1795680022612371712",
+          "st_ctime_ns": "1795680022612371712"
+        }
+      },
+      "post": {
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/kernel_lean.exact-integer-status.after-v01.py.DATA",
+        "bytes": 103242,
+        "sha256": "4983edfb0928667c64e7fe38d247b4924aae9cb3ff12d59cf24a622100573c90",
+        "full9": {
+          "st_dev": "66306",
+          "st_ino": "72390983",
+          "st_mode": "33024",
+          "st_nlink": "1",
+          "st_uid": "1000",
+          "st_gid": "1000",
+          "st_size": "103242",
+          "st_mtime_ns": "1795680511862383687",
+          "st_ctime_ns": "1795680511862383687"
+        }
+      }
+    },
+    {
+      "path": "tests/integration/logic/backends/test_kernel_backends.py",
+      "git_mode": "100644",
+      "before_git_blob": "e18eec7a0b92a20d02a672559713a0923f3ad7a5",
+      "before": {
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/test_kernel_backends.published-611395.py.DATA",
+        "bytes": 111809,
+        "sha256": "5b57349bce86ec8d308f87802f9dc96195d56da15ec849a705f0b5b2a5ad1549",
+        "full9": {
+          "st_dev": "66306",
+          "st_ino": "72388838",
+          "st_mode": "33024",
+          "st_nlink": "1",
+          "st_uid": "1000",
+          "st_gid": "1000",
+          "st_size": "111809",
+          "st_mtime_ns": "1795680177569995632",
+          "st_ctime_ns": "1795680177569995632"
+        }
+      },
+      "post": {
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/test_kernel_backends.exact-integer-status.after-v02.py.DATA",
+        "bytes": 113326,
+        "sha256": "b211f53efcfa85811667fe69a7f8a12c3b64160f7a94ec86061fe5b702fa04a4",
+        "full9": {
+          "st_dev": "66306",
+          "st_ino": "72390994",
+          "st_mode": "33024",
+          "st_nlink": "1",
+          "st_uid": "1000",
+          "st_gid": "1000",
+          "st_size": "113326",
+          "st_mtime_ns": "1795680633187587171",
+          "st_ctime_ns": "1795680633187587171"
+        }
+      }
+    }
+  ],
+  "references": {
+    "owner_before": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/kernel_lean.published-611395.py.DATA",
+      "bytes": 103060,
+      "sha256": "1b250246f6ecea6a75b75da8a46f77abac1d5a02a5eba4cd2c1ec0e978e4efc9",
+      "full9": {
+        "st_dev": "66306",
+        "st_ino": "72388837",
+        "st_mode": "33024",
+        "st_nlink": "1",
+        "st_uid": "1000",
+        "st_gid": "1000",
+        "st_size": "103060",
+        "st_mtime_ns": "1795680022612371712",
+        "st_ctime_ns": "1795680022612371712"
+      }
+    },
+    "owner_after": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/kernel_lean.exact-integer-status.after-v01.py.DATA",
+      "bytes": 103242,
+      "sha256": "4983edfb0928667c64e7fe38d247b4924aae9cb3ff12d59cf24a622100573c90",
+      "full9": {
+        "st_dev": "66306",
+        "st_ino": "72390983",
+        "st_mode": "33024",
+        "st_nlink": "1",
+        "st_uid": "1000",
+        "st_gid": "1000",
+        "st_size": "103242",
+        "st_mtime_ns": "1795680511862383687",
+        "st_ctime_ns": "1795680511862383687"
+      }
+    },
+    "test_before": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/test_kernel_backends.published-611395.py.DATA",
+      "bytes": 111809,
+      "sha256": "5b57349bce86ec8d308f87802f9dc96195d56da15ec849a705f0b5b2a5ad1549",
+      "full9": {
+        "st_dev": "66306",
+        "st_ino": "72388838",
+        "st_mode": "33024",
+        "st_nlink": "1",
+        "st_uid": "1000",
+        "st_gid": "1000",
+        "st_size": "111809",
+        "st_mtime_ns": "1795680177569995632",
+        "st_ctime_ns": "1795680177569995632"
+      }
+    },
+    "test_after": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/test_kernel_backends.exact-integer-status.after-v02.py.DATA",
+      "bytes": 113326,
+      "sha256": "b211f53efcfa85811667fe69a7f8a12c3b64160f7a94ec86061fe5b702fa04a4",
+      "full9": {
+        "st_dev": "66306",
+        "st_ino": "72390994",
+        "st_mode": "33024",
+        "st_nlink": "1",
+        "st_uid": "1000",
+        "st_gid": "1000",
+        "st_size": "113326",
+        "st_mtime_ns": "1795680633187587171",
+        "st_ctime_ns": "1795680633187587171"
+      }
+    },
+    "test_fragment": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/kernel_exit_status_normal_test_fragment-v02.UNRUN.py.DATA",
+      "bytes": 1517,
+      "sha256": "3955d36d965359c227421a28d0477fba012bc8bcb4d2bcc1e563e8ffb05b51fd",
+      "full9": {
+        "st_dev": "66306",
+        "st_ino": "72390993",
+        "st_mode": "33024",
+        "st_nlink": "1",
+        "st_uid": "1000",
+        "st_gid": "1000",
+        "st_size": "1517",
+        "st_mtime_ns": "1795680633146586766",
+        "st_ctime_ns": "1795680633146586766"
+      }
+    },
+    "owner_forward": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/kernel_lean.exact-integer-status.forward.diff",
+      "bytes": 643,
+      "sha256": "936634fecbc27d190c1b5550787a96ecf9950e00c2cb9efaf3cb4dae417ae77f",
+      "full9": {
+        "st_dev": "66306",
+        "st_ino": "72390984",
+        "st_mode": "33024",
+        "st_nlink": "1",
+        "st_uid": "1000",
+        "st_gid": "1000",
+        "st_size": "643",
+        "st_mtime_ns": "1795680511874383807",
+        "st_ctime_ns": "1795680511874383807"
+      }
+    },
+    "owner_inverse": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/kernel_lean.exact-integer-status.inverse.diff",
+      "bytes": 643,
+      "sha256": "944783f99a6ad994d56b25fa312734bc4c2844516a0db07b2ffb07ad4cc3feb6",
+      "full9": {
+        "st_dev": "66306",
+        "st_ino": "72390985",
+        "st_mode": "33024",
+        "st_nlink": "1",
+        "st_uid": "1000",
+        "st_gid": "1000",
+        "st_size": "643",
+        "st_mtime_ns": "1795680511878383847",
+        "st_ctime_ns": "1795680511878383847"
+      }
+    },
+    "test_forward": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/test_kernel_backends.exact-integer-status.forward.diff",
+      "bytes": 1920,
+      "sha256": "ba6f0801f00ea6e4637ed1aafde088b37b27cbe8b9afb1dda6d2fe95e651b740",
+      "full9": {
+        "st_dev": "66306",
+        "st_ino": "72390995",
+        "st_mode": "33024",
+        "st_nlink": "1",
+        "st_uid": "1000",
+        "st_gid": "1000",
+        "st_size": "1920",
+        "st_mtime_ns": "1795680633193587230",
+        "st_ctime_ns": "1795680633193587230"
+      }
+    },
+    "test_inverse": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/test_kernel_backends.exact-integer-status.inverse.diff",
+      "bytes": 1920,
+      "sha256": "5ee20c6f4a4317764e0fc85f56c4378615897edf69b856d2a59cd5ed7add8849",
+      "full9": {
+        "st_dev": "66306",
+        "st_ino": "72390996",
+        "st_mode": "33024",
+        "st_nlink": "1",
+        "st_uid": "1000",
+        "st_gid": "1000",
+        "st_size": "1920",
+        "st_mtime_ns": "1795680633203587329",
+        "st_ctime_ns": "1795680633203587329"
+      }
+    },
+    "RED6": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/actual-kernel-exit-status-RED-v01.json",
+      "bytes": 9519,
+      "sha256": "f78a4dbca3957ec5fa01e48e385cf1c2e78f1050d2c4bf6f229bf62323f1b07d",
+      "full9": {
+        "st_dev": "66306",
+        "st_ino": "72390981",
+        "st_mode": "33024",
+        "st_nlink": "1",
+        "st_uid": "1000",
+        "st_gid": "1000",
+        "st_size": "9519",
+        "st_mtime_ns": "1795680479803063793",
+        "st_ctime_ns": "1795680479803063793"
+      }
+    },
+    "RED6_assessment": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/actual-kernel-exit-status-RED-assessment-v01.json",
+      "bytes": 451,
+      "sha256": "bd28c3fc4290f30d79ab2c930a32d82303a4e5a6f3ef72e45b383b7d1e90f947",
+      "full9": {
+        "st_dev": "66306",
+        "st_ino": "72390982",
+        "st_mode": "33024",
+        "st_nlink": "1",
+        "st_uid": "1000",
+        "st_gid": "1000",
+        "st_size": "451",
+        "st_mtime_ns": "1795680511809383159",
+        "st_ctime_ns": "1795680511809383159"
+      }
+    },
+    "GREEN6": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/actual-kernel-exit-status-GREEN-v01.json",
+      "bytes": 8431,
+      "sha256": "c3c664f2b029ace51610529e9900da6f771996d7f2c32791168364863a1d8374",
+      "full9": {
+        "st_dev": "66306",
+        "st_ino": "72390987",
+        "st_mode": "33024",
+        "st_nlink": "1",
+        "st_uid": "1000",
+        "st_gid": "1000",
+        "st_size": "8431",
+        "st_mtime_ns": "1795680516250427406",
+        "st_ctime_ns": "1795680516250427406"
+      }
+    },
+    "RED8": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/actual-kernel-exit-status-extended-RED-v02.json",
+      "bytes": 11656,
+      "sha256": "a72578d91a9aa4521a995b55ee38c0c4bd6eac2cfc8d639a021847b16197271c",
+      "full9": {
+        "st_dev": "66306",
+        "st_ino": "72391136",
+        "st_mode": "33024",
+        "st_nlink": "1",
+        "st_uid": "1000",
+        "st_gid": "1000",
+        "st_size": "11656",
+        "st_mtime_ns": "1795680641080665116",
+        "st_ctime_ns": "1795680641080665116"
+      }
+    },
+    "GREEN8": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/actual-kernel-exit-status-extended-GREEN-v02.json",
+      "bytes": 9324,
+      "sha256": "1ac6d5b3c749b79c2f115196f84d09fb7fa69a40323597f9d157226977901a86",
+      "full9": {
+        "st_dev": "66306",
+        "st_ino": "72391137",
+        "st_mode": "33024",
+        "st_nlink": "1",
+        "st_uid": "1000",
+        "st_gid": "1000",
+        "st_size": "9324",
+        "st_mtime_ns": "1795680644647700328",
+        "st_ctime_ns": "1795680644647700328"
+      }
+    },
+    "extended_RED_driver": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/check-existing-kernel-exit-status-private-extended-RED-v02.py",
+      "bytes": 5116,
+      "sha256": "5fde72d9dd642fc8324dbe3b13a26279bbeec2d8b483126b3e76be4bb499f822",
+      "full9": {
+        "st_dev": "66306",
+        "st_ino": "72390997",
+        "st_mode": "33024",
+        "st_nlink": "1",
+        "st_uid": "1000",
+        "st_gid": "1000",
+        "st_size": "5116",
+        "st_mtime_ns": "1795680633207587369",
+        "st_ctime_ns": "1795680633207587369"
+      }
+    },
+    "extended_GREEN_driver": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/check-existing-kernel-exit-status-private-extended-GREEN-v02.py",
+      "bytes": 5134,
+      "sha256": "2dbdf60c3b9e47496ad49abcbd8223a9333c64d5bb4dadb03ed72f427322556f",
+      "full9": {
+        "st_dev": "66306",
+        "st_ino": "72390998",
+        "st_mode": "33024",
+        "st_nlink": "1",
+        "st_uid": "1000",
+        "st_gid": "1000",
+        "st_size": "5134",
+        "st_mtime_ns": "1795680633212587418",
+        "st_ctime_ns": "1795680633212587418"
+      }
+    }
+  },
+  "preservation_proof": {
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/kernel-exit-status-minimal-delta-preservation-proof-v01.json",
+    "bytes": 729,
+    "sha256": "d2346936cce680165f0200d6625efc7c02a702592d4ff6487b8c3f39d41beb85"
+  },
+  "actual_private_results": {
+    "RED6": {
+      "pass": 4,
+      "fail": 2,
+      "input_read_bytes": 350214,
+      "trailing_literal_backslash_n_preserved": false,
+      "results": [
+        {
+          "returncode_type": "bool",
+          "returncode_repr": "False",
+          "status": "FAIL",
+          "exception_type": "AssertionError"
+        },
+        {
+          "returncode_type": "float",
+          "returncode_repr": "0.0",
+          "status": "FAIL",
+          "exception_type": "AssertionError"
+        },
+        {
+          "returncode_type": "bool",
+          "returncode_repr": "True",
+          "status": "PASS"
+        },
+        {
+          "returncode_type": "str",
+          "returncode_repr": "'0'",
+          "status": "PASS"
+        },
+        {
+          "returncode_type": "NoneType",
+          "returncode_repr": "None",
+          "status": "PASS"
+        },
+        {
+          "returncode_type": "int",
+          "returncode_repr": "1",
+          "status": "PASS"
+        }
+      ]
+    },
+    "GREEN6": {
+      "pass": 6,
+      "fail": 0,
+      "input_read_bytes": 350396,
+      "trailing_literal_backslash_n_preserved": false,
+      "results": [
+        {
+          "returncode_type": "bool",
+          "returncode_repr": "False",
+          "status": "PASS"
+        },
+        {
+          "returncode_type": "float",
+          "returncode_repr": "0.0",
+          "status": "PASS"
+        },
+        {
+          "returncode_type": "bool",
+          "returncode_repr": "True",
+          "status": "PASS"
+        },
+        {
+          "returncode_type": "str",
+          "returncode_repr": "'0'",
+          "status": "PASS"
+        },
+        {
+          "returncode_type": "NoneType",
+          "returncode_repr": "None",
+          "status": "PASS"
+        },
+        {
+          "returncode_type": "int",
+          "returncode_repr": "1",
+          "status": "PASS"
+        }
+      ]
+    },
+    "RED8": {
+      "pass": 4,
+      "fail": 4,
+      "input_read_bytes": 351026,
+      "trailing_literal_backslash_n_preserved": false,
+      "results": [
+        {
+          "method": "test_lean_malformed_or_failed_exit_status_cannot_establish_proof",
+          "returncode_type": "bool",
+          "returncode_repr": "False",
+          "status": "FAIL",
+          "exception_type": "AssertionError"
+        },
+        {
+          "method": "test_lean_malformed_or_failed_exit_status_cannot_establish_proof",
+          "returncode_type": "float",
+          "returncode_repr": "0.0",
+          "status": "FAIL",
+          "exception_type": "AssertionError"
+        },
+        {
+          "method": "test_lean_malformed_or_failed_exit_status_cannot_establish_proof",
+          "returncode_type": "bool",
+          "returncode_repr": "True",
+          "status": "PASS"
+        },
+        {
+          "method": "test_lean_malformed_or_failed_exit_status_cannot_establish_proof",
+          "returncode_type": "str",
+          "returncode_repr": "'0'",
+          "status": "PASS"
+        },
+        {
+          "method": "test_lean_malformed_or_failed_exit_status_cannot_establish_proof",
+          "returncode_type": "NoneType",
+          "returncode_repr": "None",
+          "status": "PASS"
+        },
+        {
+          "method": "test_lean_malformed_or_failed_exit_status_cannot_establish_proof",
+          "returncode_type": "int",
+          "returncode_repr": "1",
+          "status": "PASS"
+        },
+        {
+          "method": "test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status",
+          "returncode_type": "bool",
+          "returncode_repr": "False",
+          "status": "FAIL",
+          "exception_type": "AssertionError"
+        },
+        {
+          "method": "test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status",
+          "returncode_type": "float",
+          "returncode_repr": "0.0",
+          "status": "FAIL",
+          "exception_type": "AssertionError"
+        }
+      ]
+    },
+    "GREEN8": {
+      "pass": 8,
+      "fail": 0,
+      "input_read_bytes": 351208,
+      "trailing_literal_backslash_n_preserved": false,
+      "results": [
+        {
+          "method": "test_lean_malformed_or_failed_exit_status_cannot_establish_proof",
+          "returncode_type": "bool",
+          "returncode_repr": "False",
+          "status": "PASS"
+        },
+        {
+          "method": "test_lean_malformed_or_failed_exit_status_cannot_establish_proof",
+          "returncode_type": "float",
+          "returncode_repr": "0.0",
+          "status": "PASS"
+        },
+        {
+          "method": "test_lean_malformed_or_failed_exit_status_cannot_establish_proof",
+          "returncode_type": "bool",
+          "returncode_repr": "True",
+          "status": "PASS"
+        },
+        {
+          "method": "test_lean_malformed_or_failed_exit_status_cannot_establish_proof",
+          "returncode_type": "str",
+          "returncode_repr": "'0'",
+          "status": "PASS"
+        },
+        {
+          "method": "test_lean_malformed_or_failed_exit_status_cannot_establish_proof",
+          "returncode_type": "NoneType",
+          "returncode_repr": "None",
+          "status": "PASS"
+        },
+        {
+          "method": "test_lean_malformed_or_failed_exit_status_cannot_establish_proof",
+          "returncode_type": "int",
+          "returncode_repr": "1",
+          "status": "PASS"
+        },
+        {
+          "method": "test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status",
+          "returncode_type": "bool",
+          "returncode_repr": "False",
+          "status": "PASS"
+        },
+        {
+          "method": "test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status",
+          "returncode_type": "float",
+          "returncode_repr": "0.0",
+          "status": "PASS"
+        }
+      ]
+    }
+  },
+  "counts_scope": "Final8 includes first6, not14 separate tests. They are exact published-owner-AST/canonical-result-class fictional compiler-result engineering cases; no project import/pytest/Native/kernel/process-workload execution. The Python fixture process was actually executed with CPU60s/AS512MiB bounds.",
+  "selected_AST_sources": [
+    {
+      "owner": "logic/backends/process.py",
+      "bytes": 109707,
+      "sha256": "370ba355be1da87814be4a117d2ce2a1cbc255064958d9ec64ada8e54521a7d7",
+      "role": "actual ToolRuntime/ToolRunResult definitions; no runner executed"
+    },
+    {
+      "owner": "logic/backends/kernel/wasm.py",
+      "bytes": 24933,
+      "sha256": "49cfdbc0108b43d45ab9f567b4153f384985563b075f369b32e37f855252d6cc",
+      "role": "actual diagnostic constants and helper definitions"
+    },
+    {
+      "owner": "logic/backends/kernel/lean.py",
+      "bytes": 103060,
+      "sha256": "1b250246f6ecea6a75b75da8a46f77abac1d5a02a5eba4cd2c1ec0e978e4efc9",
+      "role": "actual AxiomReport, parser, evaluator and prerequisite pure definitions"
+    },
+    {
+      "owner": "tests/integration/logic/backends/test_kernel_backends.py",
+      "bytes": 111809,
+      "sha256": "5b57349bce86ec8d308f87802f9dc96195d56da15ec849a705f0b5b2a5ad1549",
+      "role": "actual _lean_output and _axiom_message fixture helpers"
+    }
+  ],
+  "review": {
+    "scope": "private static policy/first6 fragment only",
+    "finding": "Scoped clear. Exact builtin int restriction intentionally also excludes integer subclasses/IntEnum. No full custom-executor compatibility or Native claim. Peer bare diff-filename lookup failed due parent abbreviation, preserved; parent exact diffs/inverse verified separately.",
+    "extra_review_gate_required": false
+  },
+  "compatibility": "Built-in int0 retains prior success path. None/nonzero/invalid statuses remain refused; None diagnostic wording at final gate may differ. Integer subclasses are deliberately not accepted as primitive process exit status.",
+  "next_existing_owner_action": "Root existing Source writer may compare exact preimages, adopt these2 posts and bind existing ordinary controls to the2 functions/8 literal cases. Existing source, namespace, clock, custody and resource policies remain required. No new runner/controller/provider.",
+  "future_actual_Source": null,
+  "future_epoch": null,
+  "future_current_HEAD": null,
+  "future_clock": null,
+  "future_authority": null,
+  "future_normal_result": null,
+  "future_publication": null,
+  "prior_failures_and_costs": "All prior reads/repeats/costs retained. Original RED6 literal-backslash-n private output framing preserved with separate assessment; no test/assertion changed. New RED8/GREEN8 share identical2 test function ASTs and fixture choices, only exact SUT post pin differs. No Source byte cap/reserve/profile reset or grant.",
+  "all_existing_24_tasks_and_126_components_unchanged": true,
+  "canonical_Source_Git_SQL_ledger_or_schema_mutation": false,
+  "Native_model_or_legal_authority_granted": false,
+  "whole_goal_complete": false
+}

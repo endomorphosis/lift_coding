@@ -1,0 +1,55 @@
+{
+  "commit": "e22897d0b8014b6b8bc5289b14e1932bf6e7d650",
+  "files": {
+    "ipfs_datasets_py/logic/hammers/process_lifecycle.py": {
+      "bytes": 38705,
+      "git_blob": "e007c4c68ed0c30823ca863ad03b5b321f61fa46",
+      "sha256": "1a3ceda014515e8fd82d8a821dad26313fdd8761c948c05174d32bed18e90234"
+    },
+    "ipfs_datasets_py/logic/integration/reasoning/hammer.py": {
+      "bytes": 44974,
+      "git_blob": "8ad360a063308e39fa1a4ba095abf79eedce06c3",
+      "sha256": "c7561ac3f4833dddf11a6bb4a2b045fc132f95248a40a144a97b3b3ac44d5fbd"
+    },
+    "ipfs_datasets_py/logic/integration/reasoning/legal_ir_premise_security.py": {
+      "bytes": 29576,
+      "git_blob": "463b73a05d61dd61058c17381d4dae1db8d53fa4",
+      "sha256": "6d5650b7b0e112a16171a43637d80886eff643255b41516ba0ce52d5dc54df06"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py": {
+      "bytes": 61991,
+      "git_blob": "07b499a1263becd7bd5c6d2755dc81c24cbe6f56",
+      "sha256": "e652c79842323fec40f3e5d8f6a23620c9b4ce4a2d1043c597176a13de3f4acd"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py": {
+      "bytes": 38313,
+      "git_blob": "5ff7f4e61bc08745fd61b09ec7a858c50cf36283",
+      "sha256": "99397ab0476b222e78a74bfb03d69ed85b9518ae9df330c195c6433da5cb5c27"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py": {
+      "bytes": 42137,
+      "git_blob": "53d7123051e1a1b9737edeb8928dfe57a579286c",
+      "sha256": "3b6cd3a6fade78fed275a478f010329e5d030a250b914c4b46ab0f0d77b9d5ab"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_semantic_metrics.py": {
+      "bytes": 111564,
+      "git_blob": "3cca5056ffa6939213ee52b6ffe67108f1838c0d",
+      "sha256": "8a62ef6ecb50608a828ad15ca90cd478d5b70168d1ab74802bd0ccee594da388"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/snapshot_evaluator.py": {
+      "bytes": 38995,
+      "git_blob": "a0f72635842cdcb22b333ada6ff782f1fcbfd419",
+      "sha256": "1aa122f14dc52a4a5cb161bc2c40862334f7b216210bfcdb42fd5989b69761e6"
+    },
+    "tests/fixtures/legal_ir/external_expert_benchmark.jsonl": {
+      "bytes": 5763,
+      "git_blob": "03c13bdb014e25448fbcb4344ba71504b15622b4",
+      "sha256": "fb9a76552e2b938369d93d73a2a25aa76a963101cac96fd487a246bc43c54971"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py": {
+      "bytes": 16178,
+      "git_blob": "1fc891c094b1354d1c02716c0e063cb3755d60b1",
+      "sha256": "aaa5f5ade2fe8b6a12516f87924c6879158f07ed594fc609d4866b66f81e8bb2"
+    }
+  }
+}

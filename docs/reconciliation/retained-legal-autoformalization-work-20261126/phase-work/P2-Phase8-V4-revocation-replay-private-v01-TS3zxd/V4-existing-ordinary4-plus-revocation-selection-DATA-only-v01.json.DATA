@@ -1,0 +1,125 @@
+{
+  "execution_or_installation_performed": false,
+  "fresh_git_source_workspace_and_resource_bindings": null,
+  "observed_baseline": {
+    "head": "5cb7aca73e8fc36bc8a1fa9f0cb3c648452967ab",
+    "owning_test_blob": "5800ee664e2c4bb2562da0e43eaef774545669b1",
+    "tree": "824d985501147bb58fc9874137c548a8023c3bb6",
+    "working_file_body_read": false
+  },
+  "previous_private_physical_attempts_remain_unqualified": [
+    1,
+    137
+  ],
+  "private_append_candidate": {
+    "bytes": 7799,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-Phase8-V4-revocation-replay-private-v01-TS3zxd/sealed-private-existing-public-V4-revocation-regression-v01.json",
+    "sha256": "8b12d1fceb7a289e3468f218ade07794801ba420ffb26dfefb88912598824fa3"
+  },
+  "private_append_post": {
+    "bytes": 211903,
+    "full9": {
+      "st_ctime_ns": "1795573134287822636",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72101403",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795572903601228797",
+      "st_nlink": "1",
+      "st_size": "211903",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-Phase8-V4-revocation-replay-private-v01-TS3zxd/test_corpus_release_cli.after.py.DATA",
+    "sha256": "65db8d66896bf1a6dd999fb9a262c68e65384642a4267f87c90900aa4d57457f"
+  },
+  "proposed_extra_case": [
+    "tests.unit.logic.autoformal.test_corpus_release_cli",
+    "test_physical_v4_current_replay_refuses_genuinely_revoked_reviewer"
+  ],
+  "proposed_selection": {
+    "actual_collect_is_roster_and_order_authority": true,
+    "expected_function_case_counts": {
+      "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_actual_explicit_cli_is_source_only": 2,
+      "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_cli_refuses_native_selection": 1,
+      "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_complete_source_use_whole_norm_project_is_independently_replayed": 1,
+      "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_current_replay_refuses_genuinely_revoked_reviewer": 1
+    },
+    "function_count": 4,
+    "function_selectors": [
+      "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_complete_source_use_whole_norm_project_is_independently_replayed",
+      "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_actual_explicit_cli_is_source_only",
+      "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_cli_refuses_native_selection",
+      "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_current_replay_refuses_genuinely_revoked_reviewer"
+    ],
+    "literal_expected_cases": 5,
+    "owning_files": [
+      "tests/unit/logic/autoformal/test_corpus_release_cli.py"
+    ]
+  },
+  "retained_bootstrap_history_only": {
+    "bytes": 46053,
+    "path": "/tmp/Root-Phase8-corpus-CLI-V4-ordinary4-selected-v266-zbj1of7i/Root-selected-bootstrap.py",
+    "sha256": "c8df9b9632d88968e842bff767c12373318f778d2cb78b77b5b9bb1949a6630f"
+  },
+  "retained_existing_operator_history_only": {
+    "bytes": 67193,
+    "path": "/tmp/Root-Phase8-corpus-CLI-V4-ordinary4-selected-v266-zbj1of7i/Root-selected-operator.py",
+    "sha256": "2967afaafc24e4d0c3c5b09ef1fa9b244bc6ed7c6b6457d7345b0ff074d6e1f1"
+  },
+  "retained_ordinary4_JUnit": {
+    "bytes": 905,
+    "path": "/tmp/Root-Phase8-corpus-CLI-V4-ordinary4-selected-v266-zbj1of7i/actual-output/corpus-release-public-v4-ordinary4-run-result0-output1.bin",
+    "sha256": "d6840c19b2cda2bd513e54db113b4bdaf7f683bf3c60a808185fec356b0ddee3"
+  },
+  "retained_ordinary4_qualification": {
+    "bytes": 4708,
+    "path": "/tmp/Root-Phase8-corpus-CLI-V4-ordinary4-selected-v266-zbj1of7i/Root-Phase8-public-corpus-V4-ordinary4-qualified-Source-resource-closed-small-v266.json",
+    "sha256": "874512580c535887197eb22c743d794a7454237764d8da28f0e98eb9efe7117f"
+  },
+  "retained_original_cases": [
+    [
+      "tests.unit.logic.autoformal.test_corpus_release_cli",
+      "test_physical_v4_complete_source_use_whole_norm_project_is_independently_replayed"
+    ],
+    [
+      "tests.unit.logic.autoformal.test_corpus_release_cli",
+      "test_physical_closure_v4_actual_explicit_cli_is_source_only[False]"
+    ],
+    [
+      "tests.unit.logic.autoformal.test_corpus_release_cli",
+      "test_physical_closure_v4_actual_explicit_cli_is_source_only[True]"
+    ],
+    [
+      "tests.unit.logic.autoformal.test_corpus_release_cli",
+      "test_physical_closure_v4_cli_refuses_native_selection"
+    ]
+  ],
+  "retained_rewrite_policy": {
+    "cache_policy": "bypass-read-only-for-selected-owning-test",
+    "required_compile_and_execution_witness": true,
+    "rewrite_policy": "normal-pytest-assertion-rewrite",
+    "schema": "selected-test-normal-pytest-source-AST-code-observation/v1",
+    "selected_test_binding_names": [
+      "tests.unit.logic.autoformal.test_corpus_release_cli"
+    ],
+    "unobserved_or_cached_only_route": "REFUSE"
+  },
+  "retained_visibility_policy": {
+    "early_absence": "record-not-loaded",
+    "force_imports": false,
+    "lazy_owner_names": [
+      "ipfs_datasets_py.logic.autoformal.legal_release_coordinator_v1"
+    ],
+    "run_terminal": "require-loaded-and-compiled",
+    "schema": "phase6-existing-modern-lazy-owner-visibility/v1",
+    "selection_group": "corpus-release-public-v4-ordinary4"
+  },
+  "schema": "private-V4-current-revocation-existing-ordinary-selection/v1",
+  "scope": "Literal rosters only; the genuine collect must establish order and count for a fresh selected run.",
+  "selected_cases_share_physical_fixture": {
+    "fixture": "physical_source_use_whole_norm_control_v2",
+    "new_case": "test_physical_v4_current_replay_refuses_genuinely_revoked_reviewer",
+    "retained_positive": "test_physical_v4_complete_source_use_whole_norm_project_is_independently_replayed"
+  },
+  "selection_and_new_effect_authority": null
+}

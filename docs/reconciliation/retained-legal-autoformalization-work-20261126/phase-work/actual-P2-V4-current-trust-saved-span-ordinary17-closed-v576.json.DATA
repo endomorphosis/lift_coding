@@ -1,0 +1,280 @@
+{
+  "Native_SQL_model_or_statutory_qualification": false,
+  "Source_and_RESOURCE_and_parent_closed": true,
+  "actual_COLLECT_RUN_JUnit_exact_order": [
+    "tests/unit/logic/formalization/autoencoder/test_alignment_relation_mask_handoff.py::test_reviewed_v4_endpoint_current_trust_preserves_signed_inputs[unchanged]",
+    "tests/unit/logic/formalization/autoencoder/test_alignment_relation_mask_handoff.py::test_reviewed_v4_endpoint_current_trust_preserves_signed_inputs[revoked]",
+    "tests/unit/logic/formalization/autoencoder/test_alignment_relation_mask_handoff.py::test_reviewed_v4_endpoint_current_trust_preserves_signed_inputs[partial]",
+    "tests/unit/logic/formalization/autoencoder/test_alignment_relation_mask_handoff.py::test_reviewed_v4_endpoint_current_trust_preserves_signed_inputs[v3]",
+    "tests/unit/logic/formalization/autoencoder/test_alignment_relation_mask_handoff.py::test_reviewed_v4_both_contexts_replay_current_dependencies_independently",
+    "tests/unit/logic/formalization/autoencoder/test_alignment_relation_mask_handoff.py::test_reviewed_v4_current_trust_key_is_not_independent_pair_process_evidence",
+    "tests/unit/logic/formalization/autoencoder/test_alignment_relation_mask_handoff.py::test_reviewed_v4_historical_endpoint_report_map_remains_excluded_with_current_trust",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py::test_reviewed_v4_rich_candidate_replays_actual_signed_masks_before_any_ranking",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py::test_reviewed_v4_endpoint_admission_withdrawal_blocks_saved_masks_and_ranking",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_consumer_binding.py::test_reviewed_v3_current_trust_source_and_resealed_ir_mutations_block_old_ready_binding[revoked]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_consumer_binding.py::test_reviewed_replay_cannot_precede_the_binding_assessment[forward-v2]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_consumer_binding.py::test_reviewed_replay_cannot_precede_the_binding_assessment[forward-v3]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_consumer_binding.py::test_reviewed_replay_cannot_precede_the_binding_assessment[rollback-v2]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_consumer_binding.py::test_reviewed_replay_cannot_precede_the_binding_assessment[rollback-v3]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_consumer_binding.py::test_reviewed_replay_cannot_precede_the_binding_assessment[expired-rollback-v2]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_consumer_binding.py::test_reviewed_replay_cannot_precede_the_binding_assessment[expired-rollback-v3]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_consumer_binding.py::test_reviewed_v3_saved_current_trust_binding_refuses_omitted_trust"
+  ],
+  "actual_report": {
+    "bytes": 899305,
+    "path": "/tmp/Root-existing-V4-current-trust-ordinary17-v576-namespace-retry-u3i20rw9/actual-output/complete-frozen-local-D-Phase2-V4-current-trust-saved-span-ordinary17-existing-owner-report.json",
+    "sha256": "263b8a91240b0566a17f5ce1f14b167d9af5e389f9769fb47135e310e147be6f"
+  },
+  "actual_runtime_binding": {
+    "bytes": 4857,
+    "path": "/tmp/Root-existing-V4-current-trust-ordinary17-v576-namespace-retry-u3i20rw9/actual-V4-current-trust-ordinary17-namespace-retry-binding-v576.json",
+    "sha256": "0aab28537a0b479d652d2995f30abadc44a629e7a28d3822b8d45eb41ecc6bfd"
+  },
+  "conservative_Source_full_charge": {
+    "bytes": 1541,
+    "path": "/tmp/Root-existing-V4-current-trust-ordinary17-v576-namespace-retry-u3i20rw9/Source-only-V4-current-trust-ordinary17-conservative-full-charge.json",
+    "sha256": "d451cba0ec1bf3f248f85f5749206f366ffab94ecc7c53307f595213071f548d"
+  },
+  "controls": {
+    "bytes": 17300,
+    "path": "/tmp/Root-existing-V4-current-trust-ordinary17-v576-namespace-retry-u3i20rw9/READY-existing-R2-ordinary17-namespace-retry-INERT.json",
+    "sha256": "4e53b2e1d0dec083de74fa6955454a220032197e1e79e2cdd99829fa4aa6c7bb"
+  },
+  "counts": {
+    "duplicates": 0,
+    "errors": 0,
+    "failures": 0,
+    "functions": 9,
+    "passed": 17,
+    "skipped": 0,
+    "tests": 17
+  },
+  "current_D_HEAD": "b80c44e65f31b2d3516c99d2fd1f1c0d5872d013",
+  "current_D_tree": "74cc88ef5179db51029d69270b0a9675b77a8404",
+  "current_owner_module_bindings": {
+    "ipfs_datasets_py.logic.autoformal.corpus_source": {
+      "bytes": 16185,
+      "full9": {
+        "st_ctime_ns": "1795421815318119720",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70008139",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795421815318119720",
+        "st_nlink": "1",
+        "st_size": "16185",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/autoformal/corpus_source.py",
+      "sha256": "6e4be77cfc27a750b11aa57bb92baa92617c57d5c4a26316e25563aa715ec257"
+    },
+    "ipfs_datasets_py.logic.autoformal.legal_norm_content_adjudication_v1": {
+      "bytes": 89284,
+      "full9": {
+        "st_ctime_ns": "1795560199683839291",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042533",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795560199045675913",
+        "st_nlink": "1",
+        "st_size": "89284",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/autoformal/legal_norm_content_adjudication_v1.py",
+      "sha256": "fd43ce8ab0263b34ad1f3c37ebceecdf3ea73500584dced589208cf1f831e13e"
+    },
+    "ipfs_datasets_py.logic.autoformal.legal_reviewed_norm_admission_v3": {
+      "bytes": 34912,
+      "full9": {
+        "st_ctime_ns": "1795715406173534940",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042682",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795715405573970361",
+        "st_nlink": "1",
+        "st_size": "34912",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py",
+      "sha256": "30f9e1f2554b030241aeb8ec8ffc1f6c98816eee2732c83e59dbf3c0b36de50e"
+    },
+    "ipfs_datasets_py.logic.formalization.autoencoder.alignment_relation_mask_handoff": {
+      "bytes": 46237,
+      "full9": {
+        "st_ctime_ns": "1795715406726801342",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042683",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795715405577615077",
+        "st_nlink": "1",
+        "st_size": "46237",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_relation_mask_handoff.py",
+      "sha256": "c039572c8a83f8464d9b633b54c569ac170cfcad8f9b7fea55de6ede1c906e01"
+    },
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_eval_splits": {
+      "bytes": 61991,
+      "full9": {
+        "st_ctime_ns": "1795602325429953259",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042558",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795602324156049616",
+        "st_nlink": "1",
+        "st_size": "61991",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py",
+      "sha256": "e652c79842323fec40f3e5d8f6a23620c9b4ce4a2d1043c597176a13de3f4acd"
+    },
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_evaluation_artifacts": {
+      "bytes": 147367,
+      "full9": {
+        "st_ctime_ns": "1795426131697106192",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70008631",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795426131693106127",
+        "st_nlink": "1",
+        "st_size": "147367",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_evaluation_artifacts.py",
+      "sha256": "fe3b8f7dd58532f883918168d9a9ac0e3078fcc9e2ddae3398ec1a71efd4982f"
+    },
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_span_consumer_binding": {
+      "bytes": 59952,
+      "full9": {
+        "st_ctime_ns": "1795715407269543312",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042685",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795715405581724308",
+        "st_nlink": "1",
+        "st_size": "59952",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_consumer_binding.py",
+      "sha256": "4fa7f523e99879e74c3a333b31ece53b6556360df2b2ce9441c0e2f471d08f20"
+    },
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_structured_retrieval": {
+      "bytes": 84401,
+      "full9": {
+        "st_ctime_ns": "1795715407813547467",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042686",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795715405585091806",
+        "st_nlink": "1",
+        "st_size": "84401",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_structured_retrieval.py",
+      "sha256": "fdcf1fae15f6fe9ec4986097b698d0ea535042f5fc047678b4184b647ef215ea"
+    },
+    "tests.unit.logic.formalization.autoencoder.test_alignment_relation_mask_handoff": {
+      "bytes": 79013,
+      "full9": {
+        "st_ctime_ns": "1795715408362551660",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042687",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795715405589245597",
+        "st_nlink": "1",
+        "st_size": "79013",
+        "st_uid": "1000"
+      },
+      "relative_path": "tests/unit/logic/formalization/autoencoder/test_alignment_relation_mask_handoff.py",
+      "sha256": "a7d246b14ed16f92ca31bb19dd934cb326e32a028eabe4cbb62ec0b42335503b"
+    },
+    "tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_evaluation_artifacts": {
+      "bytes": 294426,
+      "full9": {
+        "st_ctime_ns": "1795684464621252733",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042641",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795684464310765173",
+        "st_nlink": "1",
+        "st_size": "294426",
+        "st_uid": "1000"
+      },
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py",
+      "sha256": "0bfc578af7cc9bc43a045a661c2584404b620a4da8ebbb54d3e6377ae7daea86"
+    },
+    "tests.unit.optimizers.logic_theorem_optimizer.test_legal_span_consumer_binding": {
+      "bytes": 75797,
+      "full9": {
+        "st_ctime_ns": "1795715408913555869",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042688",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795715405592837753",
+        "st_nlink": "1",
+        "st_size": "75797",
+        "st_uid": "1000"
+      },
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_consumer_binding.py",
+      "sha256": "f35c64ddaac85802ef2d33f65827d722dc836c741de17d4cb1686e315857b46b"
+    }
+  },
+  "exact_local_freeze": {
+    "bytes": 15879,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-Phase2-V4-current-trust-exact6-local-freeze-v574.json",
+    "sha256": "23daef81eb3149854d9da87f1a35f454d33403f2de73f027321b908eb4ac838c"
+  },
+  "exact_postfreeze_READ7": {
+    "bytes": 14946,
+    "path": "/tmp/P2-V4-current-trust-exact6-freeze-READ7-INERT-azu5nthx/actual-V4-current-trust-six-test-frozen-READ7-closed-v575.json",
+    "sha256": "2be163e23e0e84221cf4bb3a01c4973043e05854cbfb307f13e7f96535225787"
+  },
+  "observed_scope": {
+    "assessment_time_guards_retained": true,
+    "current_trust_veto": true,
+    "fictional_signed_reviews_only": true,
+    "model_or_Native_or_SQL_or_statutory_admission": false,
+    "prior_whole_endpoint_report_exclusions_preserved": true,
+    "saved_binding_trust_omission_refused": true
+  },
+  "original_A_preservation_reference": {
+    "bytes": 2365,
+    "path": "/tmp/Root-Phase6-deadline-attachment-existing-Source2-v446-zQU3p8aH/observed-existing-unpublished-A-worktree-preservation.json",
+    "sha256": "5268c7d30364dae578cf2ee119ceb129546226f87ab6cc018979eb98aa610f24"
+  },
+  "prior_guide566": {
+    "bytes": 14204,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-guide566-four-doc-three-FF-publication-small-v573.json",
+    "sha256": "5ba77f892c1f0985c2eb6ca29fde2735461c24d46bf70c11f05989f7be66eedb"
+  },
+  "raw_junit": {
+    "bytes": 3641,
+    "logical_name": "junit.xml",
+    "path": "/tmp/Root-existing-V4-current-trust-ordinary17-v576-namespace-retry-u3i20rw9/actual-output/Phase2-V4-current-trust-saved-span-ordinary17-run-result0-output1.bin",
+    "sha256": "a0e12b0087964e431134100785fa1279c3900ef0180c7efb263aa39d204861a6"
+  },
+  "recorded_python_compile_observations": {
+    "collect": {
+      "ir_core_protocol_sha256": null,
+      "paths": 50
+    },
+    "run": {
+      "ir_core_protocol_sha256": null,
+      "paths": 113
+    }
+  },
+  "schema": "actual-P2-V4-current-trust-saved-span-ordinary17-closed/v576",
+  "terminal_returncode": 0,
+  "terminal_session": 54021,
+  "unchanged_original_A_preserved": true
+}

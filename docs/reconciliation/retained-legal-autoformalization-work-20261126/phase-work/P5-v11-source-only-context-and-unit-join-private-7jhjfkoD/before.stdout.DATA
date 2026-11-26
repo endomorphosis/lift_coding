@@ -1,0 +1,358 @@
+{
+  "counts": {
+    "error": 0,
+    "failed": 4,
+    "passed": 51
+  },
+  "inference_owner": {
+    "bytes": 92465,
+    "git_blob": "2ca172903507b0b6ea6d93ab5ebee78c469601cc",
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-source-only-context-and-unit-join-private-7jhjfkoD/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_inference.py",
+    "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_inference.py",
+    "sha256": "944e2fd0e0ddd922858941a5b99002ddc205a2e738114eece8dcf7aa5c69ded4"
+  },
+  "mode": "before",
+  "owning_test": {
+    "bytes": 262107,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-source-only-context-and-unit-join-private-7jhjfkoD/owning-test.after.py.DATA",
+    "sha256": "6fb4ed82164788241420504b6d1ad569f100ef24488455857b2cba74b0196511"
+  },
+  "private_one_CPU_512MiB": true,
+  "project_initializers_or_model_loaded": false,
+  "real_existing_readers_and_wire_codec_called": true,
+  "results": [
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved[abstained]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved[incomplete]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved[invalid_no_text]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved[invalid_text]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved[complete]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[raw_hash]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[null_as_empty]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[candidate_rewrite]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[supplied_digest]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[derivation]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[population]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[tokens]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[profile]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[observation]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[loader_schema]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[loader_pair]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[loader_authority]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[source]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[exposure]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[commitment_extra]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_outputs_cover_ordered_source_population[None]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_outputs_cover_ordered_source_population"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_outputs_cover_ordered_source_population[drop_middle]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_outputs_cover_ordered_source_population"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_outputs_cover_ordered_source_population[only_one]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_outputs_cover_ordered_source_population"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_outputs_cover_ordered_source_population[coordinated_reverse]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_outputs_cover_ordered_source_population"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_outputs_cover_ordered_source_population[renamed_id]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_outputs_cover_ordered_source_population"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_outputs_cover_ordered_source_population[renamed_unit]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_outputs_cover_ordered_source_population"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[real-token-exhaustion]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[real-unexpected-bos]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[empty-decoded-body]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[complete-without-eos]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[complete-with-early-eos]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[complete-with-wrong-bos]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[complete-outside-vocab]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[false-abstention]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[false-incomplete-with-eos]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[false-token-budget]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[valid-body-called-invalid]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[missing-tokenizer-receipt]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[receipt-eos-disagrees-with-pinned-config]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[padded-model-vocab]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_evaluation_scores_the_verified_generation[None]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_evaluation_scores_the_verified_generation"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_evaluation_scores_the_verified_generation[empty]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_evaluation_scores_the_verified_generation"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_evaluation_scores_the_verified_generation[checkpoint]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_evaluation_scores_the_verified_generation"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_evaluation_scores_the_verified_generation[references]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_evaluation_scores_the_verified_generation"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_evaluation_scores_the_verified_generation[context]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_evaluation_scores_the_verified_generation"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_evaluation_scores_the_verified_generation[output]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_evaluation_scores_the_verified_generation"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_evaluation_scores_the_verified_generation[observation]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_evaluation_scores_the_verified_generation"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_evaluation_scores_the_verified_generation[commitment]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_evaluation_scores_the_verified_generation"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_evaluation_scores_the_verified_generation[scores]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_evaluation_scores_the_verified_generation"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_evaluation_scores_the_verified_generation[compiler]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_evaluation_scores_the_verified_generation"
+    },
+    {
+      "error": null,
+      "node": "test_reviewed_inference_v11_binds_source_only_arguments_and_reference_units[None]",
+      "status": "passed",
+      "test": "test_reviewed_inference_v11_binds_source_only_arguments_and_reference_units"
+    },
+    {
+      "error": "Failed: DID NOT RAISE <class 'ValueError'>",
+      "node": "test_reviewed_inference_v11_binds_source_only_arguments_and_reference_units[nonempty-permitted]",
+      "status": "failed",
+      "test": "test_reviewed_inference_v11_binds_source_only_arguments_and_reference_units"
+    },
+    {
+      "error": "Failed: DID NOT RAISE <class 'ValueError'>",
+      "node": "test_reviewed_inference_v11_binds_source_only_arguments_and_reference_units[nonempty-retrieved]",
+      "status": "failed",
+      "test": "test_reviewed_inference_v11_binds_source_only_arguments_and_reference_units"
+    },
+    {
+      "error": "Failed: DID NOT RAISE <class 'ValueError'>",
+      "node": "test_reviewed_inference_v11_binds_source_only_arguments_and_reference_units[receipt-arguments]",
+      "status": "failed",
+      "test": "test_reviewed_inference_v11_binds_source_only_arguments_and_reference_units"
+    },
+    {
+      "error": "Failed: DID NOT RAISE <class 'ValueError'>",
+      "node": "test_reviewed_inference_v11_binds_source_only_arguments_and_reference_units[reference-unit]",
+      "status": "failed",
+      "test": "test_reviewed_inference_v11_binds_source_only_arguments_and_reference_units"
+    }
+  ],
+  "schema": "actual-private-Phase5-v11-source-only-owning-55-case-functions/v1",
+  "test_functions_executed_without_normal_collection_or_assertion_rewrite": true,
+  "total": 55
+}

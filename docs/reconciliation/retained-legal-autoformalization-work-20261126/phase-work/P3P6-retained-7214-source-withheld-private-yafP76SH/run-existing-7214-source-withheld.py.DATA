@@ -1,0 +1,79 @@
+"""Read the two retained proposals and exercise the existing source-withheld owners."""
+import hashlib
+import json
+import os
+from pathlib import Path
+import resource
+import sys
+
+repo = Path(sys.argv[1])
+out = Path(sys.argv[2])
+resource.setrlimit(resource.RLIMIT_AS, (512 * 1024**2, 512 * 1024**2))
+resource.setrlimit(resource.RLIMIT_CPU, (30, 30))
+os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
+sys.dont_write_bytecode = True
+sys.path.insert(0, str(repo))
+
+def scope(event, args):
+    if event.startswith(("socket.", "subprocess.", "os.exec", "os.spawn")) or event in {"os.system", "os.fork", "os.posix_spawn"}:
+        raise RuntimeError("external activity outside this fixture")
+    if event == "open" and len(args) > 2 and args[2] & (os.O_WRONLY | os.O_RDWR | os.O_CREAT | os.O_APPEND | os.O_TRUNC):
+        path = Path(args[0]).resolve(strict=False)
+        if not path.is_relative_to(out):
+            raise RuntimeError("fixture write outside its directory")
+    if event == "import" and args[0].partition(".")[0] in {"torch", "transformers", "tokenizers", "duckdb", "pyarrow"}:
+        raise RuntimeError("model or database import outside this fixture")
+
+sys.addaudithook(scope)
+from ipfs_datasets_py.logic.syntax_core import ast
+from ipfs_datasets_py.logic.legal_ir import extended_decompiler as decompiler
+from ipfs_datasets_py.logic.autoformal import legal_relational_reconstruction_v1 as compare
+from ipfs_datasets_py.logic.legal_ir import extended_compiler as compiler
+
+packet = repo / "docs/autoformalization/evidence/legal-ir-title10-7214-pending-compositions-20261024.json"
+source = packet.read_bytes()
+assert len(source) == 662668 and hashlib.sha256(source).hexdigest() == "dd72e2b92ed5a44a77acfb72dd27ca8614250878400db89742c0437438d59dda"
+doc = json.loads(source)
+assert doc["selected_interpretation"] is None and not doc["semantic_coverage_complete"]
+assert doc["training_mask"] == doc["evaluation_gold_mask"] == 0
+assert all(item["source_binding"] is None and item["governing_definition_use"] is None for item in doc["alternatives"])
+
+results = []
+profile = decompiler.RELATIONAL_PROSE_PROFILE
+for index, item in enumerate(doc["alternatives"]):
+    expression = ast.TypedExpression.from_dict(item["typed_expression"])
+    assert expression.to_dict() == item["typed_expression"]
+    row = {"alternate_id": item["alternative_id"], "failure": None}
+    try:
+        report = compare.prepare_relational_prose_reconstruction_v1(
+            expression, argument_roles=item["argument_roles"], profile=profile)
+        assert report["measurements"]["typed_structure_equal"] and report["measurements"]["canonical_prose_fixed_point"]
+        assert report["measurements"]["original_utf8_exact"] is None
+        assert not report["measurements"]["semantic_equivalence_verified"]
+        assert report["original_source_available_to_realizer"] is False
+        assert report["serialized_ast_available_to_inverse"] is False
+        assert report["training_mask"] == report["evaluation_gold_mask"] == 0
+        assert not any(report["authority"].values())
+        name = f"retained-alternative-{index}-source-withheld.json"
+        raw = (json.dumps(report, indent=2, sort_keys=True, ensure_ascii=False) + chr(10)).encode()
+        with (out / name).open("xb") as f:
+            f.write(raw)
+        row["report"] = {"path": str(out / name), "bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()}
+        row["prose_sha256"] = hashlib.sha256(report["normalized_prose"].encode()).hexdigest()
+    except Exception as exc:
+        row["failure"] = f"{type(exc).__name__}: {exc}"
+    results.append(row)
+a,b=doc["alternatives"]
+pair = None
+if all(row["failure"] is None for row in results):
+    pair = compare.compare_relational_prose_structure_v1(
+        ast.TypedExpression.from_dict(a["typed_expression"]), ast.TypedExpression.from_dict(b["typed_expression"]),
+        reference_argument_roles=a["argument_roles"], candidate_argument_roles=b["argument_roles"], profile=profile)
+    assert pair["argument_roles_equal"] and not pair["typed_structure_equal"] and not pair["canonical_prose_equal"]
+pins = {}
+for module in (ast, decompiler, compare, compiler):
+    path = Path(module.__file__).resolve()
+    pins[str(path.relative_to(repo))] = hashlib.sha256(path.read_bytes()).hexdigest()
+print(json.dumps(dict(results=results,pair=pair,source_packet_hash=hashlib.sha256(source).hexdigest(),
+                      role_SHA256=pins,selected_legal_interpretation=None,actual_Lean_runs=0),sort_keys=True,indent=2))
+raise SystemExit(1 if any(row["failure"] for row in results) else 0)

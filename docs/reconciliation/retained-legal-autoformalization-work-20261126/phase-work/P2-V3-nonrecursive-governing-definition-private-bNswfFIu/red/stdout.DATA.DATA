@@ -1,0 +1,15 @@
+.FF............                                                          [100%]
+=================================== FAILURES ===================================
+____ test_reviewed_v3_requires_nonrecursive_governing_definition[identity] _____
+tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py:607: in test_reviewed_v3_requires_nonrecursive_governing_definition
+    pytest.fail(
+E   Failed: Recursive identity passed typed preparation and was assessed as semantic_use_eligible=True under exact fictional signatures.
+_ test_reviewed_v3_requires_nonrecursive_governing_definition[nested-self-use] _
+tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py:607: in test_reviewed_v3_requires_nonrecursive_governing_definition
+    pytest.fail(
+E   Failed: Recursive nested-self-use passed typed preparation and was assessed as semantic_use_eligible=True under exact fictional signatures.
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-nonrecursive-governing-definition-private-bNswfFIu/red/result.xml -
+=========================== short test summary info ============================
+FAILED tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_requires_nonrecursive_governing_definition[identity]
+FAILED tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_requires_nonrecursive_governing_definition[nested-self-use]
+2 failed, 13 passed in 16.09s

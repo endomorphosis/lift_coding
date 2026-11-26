@@ -1,0 +1,33 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.3.4, pluggy-1.6.0
+rootdir: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-six-target-private-pytest-import-candidate-v01-rM3nQIMU/stage
+configfile: pytest.ini
+asyncio: mode=Mode.STRICT
+collected 125 items
+
+tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py . [  0%]
+........................................................................ [ 58%]
+.....................................                                    [ 88%]
+tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_consumer_binding.py . [ 88%]
+....                                                                     [ 92%]
+tests/unit/logic/test_autoformal_campaign_training_inputs.py .......F..  [100%]
+
+=================================== FAILURES ===================================
+_ test_reviewed_mixed_unicode_stage_preserves_exact_targets_in_both_codecs[digest_omitted] _
+tests/unit/logic/test_autoformal_campaign_training_inputs.py:3387: in test_reviewed_mixed_unicode_stage_preserves_exact_targets_in_both_codecs
+    result = inputs.prepare_reviewed_mixed_decoder_digest_omitted_inputs_v1(data.registry, **data.kwargs)
+ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py:2739: in prepare_reviewed_mixed_decoder_digest_omitted_inputs_v1
+    return _prepare_reviewed_decoder_training_inputs(registry, _admission_version="v3",
+ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py:1825: in _prepare_reviewed_decoder_training_inputs
+    wires = _reviewed_decoder_source_target_wires(rows, contexts["rows"], selections, _target_codec=_target_codec)
+ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py:1504: in _reviewed_decoder_source_target_wires
+    target_json = (encode_reviewed_decoder_digest_omitted_target(target, target_codec=_target_codec)
+ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py:2689: in encode_reviewed_decoder_digest_omitted_target
+    value = _reviewed_decoder_canonical_formula_target(canonical_ir)
+ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py:2664: in _reviewed_decoder_canonical_formula_target
+    from ...optimizers.logic_theorem_optimizer.legal_ir_semantic_metrics import (
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_semantic_metrics'
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-six-target-private-pytest-import-candidate-v01-rM3nQIMU/private-run.junit.xml -
+=========================== short test summary info ============================
+FAILED tests/unit/logic/test_autoformal_campaign_training_inputs.py::test_reviewed_mixed_unicode_stage_preserves_exact_targets_in_both_codecs[digest_omitted]
+======================== 1 failed, 124 passed in 46.70s ========================

@@ -1,0 +1,57 @@
+--- a/ipfs_datasets_py/logic/autoformal/legal_corpus_definition_use_preservation_elaboration_native_v2.py
++++ b/ipfs_datasets_py/logic/autoformal/legal_corpus_definition_use_preservation_elaboration_native_v2.py
+@@ -887,6 +887,12 @@
+     eligibility = qualification.validate_eligibility(report.get("declared_eligibility"), declared,
+         artifact_cid=artifact_cid, profile=evidence["profile"])
+     dimensions = declared["dimensions"]
++    for name, role in (
++            ("source_integrity", "reviewed_crosswalk"),
++            ("representation", "preservation"),
++            ("dependency", "dependency")):
++        _need(dimensions[name]["evidence_cids"] == [components[role]],
++              name + " evidence differs from the retained " + role + " component")
+     _need(declared["theorem_requested"] is True
+           and dimensions["native_translation"]["status"] == "not_run"
+           and dimensions["lean_compilation"]["status"] == "not_run"
+--- a/tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py
++++ b/tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py
+@@ -974,3 +974,39 @@
+     with pytest.raises(ValueError, match=error):
+         elaboration_native.read_checked_release_physical_whole_norm_type_capture_v2(
+             changed["request"], changed["files"], changed["stdout"], changed["stderr"], **changed["options"])
++
++
++
++@pytest.mark.parametrize("dimension,role", [
++    ("source_integrity", "reviewed_crosswalk"),
++    ("representation", "preservation"),
++    ("dependency", "dependency"),
++])
++def test_checked_release_type_capture_requires_the_matching_component_evidence(dimension, role):
++    from ipfs_datasets_py.logic.autoformal import corpus_qualification as qualification
++
++    case = _checked_release_type_capture_fixture("one")
++    report = deepcopy(case["report"])
++    evidence = report["declared_eligibility_evidence"]
++    components = evidence["component_cids"]
++    original = report["declared_qualification"]
++    dimensions = deepcopy(original["dimensions"])
++    assert dimensions[dimension]["evidence_cids"] == [components[role]]
++    assert components[role] != components["graph"]
++    dimensions[dimension]["evidence_cids"] = [components["graph"]]
++    declared = qualification.prepare_qualification(
++        artifact_cid=evidence["artifact_cid"], profile=report["profile"],
++        theorem_requested=original["theorem_requested"], dimensions=dimensions)
++    eligibility = qualification.derive_eligibility(
++        declared, artifact_cid=evidence["artifact_cid"], profile=report["profile"])
++    assert declared["record_cid"] != original["record_cid"]
++    assert eligibility["views"] == case["report"]["declared_eligibility"]["views"]
++    assert eligibility["views"]["reviewed_graph"]["declared_eligible"] is True
++    assert eligibility["views"]["checked_lean"]["declared_eligible"] is False
++    report.update(declared_qualification=declared, declared_eligibility=eligibility)
++    raw = canonical(report)
++    options = {**case["options"], "checked_release_report_raw": raw,
++               "expected_checked_release_report_sha256": sha(raw)}
++    with pytest.raises(ValueError, match=dimension + " evidence differs"):
++        elaboration_native.read_checked_release_physical_whole_norm_type_capture_v2(
++            case["request"], case["files"], case["stdout"], case["stderr"], **options)

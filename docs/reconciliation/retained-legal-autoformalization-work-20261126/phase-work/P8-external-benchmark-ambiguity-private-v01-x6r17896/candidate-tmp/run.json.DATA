@@ -1,0 +1,24 @@
+{
+  "elapsed_process_cpu_seconds": 1.5313949999999998,
+  "imported_modules": {
+    "ipfs_datasets_py.logic.hammers.process_lifecycle": "1a3ceda014515e8fd82d8a821dad26313fdd8761c948c05174d32bed18e90234",
+    "ipfs_datasets_py.logic.integration.reasoning.hammer": "c7561ac3f4833dddf11a6bb4a2b045fc132f95248a40a144a97b3b3ac44d5fbd",
+    "ipfs_datasets_py.logic.integration.reasoning.legal_ir_premise_security": "6d5650b7b0e112a16171a43637d80886eff643255b41516ba0ce52d5dc54df06",
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_eval_splits": "e652c79842323fec40f3e5d8f6a23620c9b4ce4a2d1043c597176a13de3f4acd",
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark": "3b102fc0762ff57c34e43d9e2b16413ed6e72140dfe42a129baf33ba1429d43b",
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_family_evaluator": "3b6cd3a6fade78fed275a478f010329e5d030a250b914c4b46ab0f0d77b9d5ab",
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_semantic_metrics": "8a62ef6ecb50608a828ad15ca90cd478d5b70168d1ab74802bd0ccee594da388",
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.snapshot_evaluator": "1aa122f14dc52a4a5cb161bc2c40862334f7b216210bfcdb42fd5989b69761e6"
+  },
+  "namespace_packages_only": [
+    "ipfs_datasets_py",
+    "ipfs_datasets_py.logic",
+    "ipfs_datasets_py.logic.hammers",
+    "ipfs_datasets_py.logic.integration",
+    "ipfs_datasets_py.logic.integration.reasoning",
+    "ipfs_datasets_py.optimizers",
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer"
+  ],
+  "pytest_returncode": 0,
+  "stage": "candidate"
+}

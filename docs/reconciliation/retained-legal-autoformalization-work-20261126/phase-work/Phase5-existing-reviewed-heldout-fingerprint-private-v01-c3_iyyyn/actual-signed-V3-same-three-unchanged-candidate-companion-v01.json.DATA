@@ -1,0 +1,90 @@
+{
+  "candidate_code_or_test_rewritten": false,
+  "historical_V3_owner_and_test_pins": [
+    {
+      "bytes": 29667,
+      "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py",
+      "sha256": "1249dc93b2a6208f152c08f3bab5706acc272fa93663a58f0f87924e80d172be"
+    },
+    {
+      "bytes": 27287,
+      "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py",
+      "sha256": "2952d416d1783751112c67cad5945e0cf5dc9fc6f042f1a3c8476d2d26b6bc91"
+    }
+  ],
+  "original_v2_candidate_and_paired_five": {
+    "bytes": 6012,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-reviewed-heldout-fingerprint-private-v01-c3_iyyyn/sealed-current-reviewed-heldout-fingerprint-two-file-paired5-v01.json",
+    "sha256": "ae66eaec53e2f24851932fcf47e5a81965008519322f631519b2592c214dd684"
+  },
+  "paired_same_three": {
+    "baseline": {
+      "historical_real_fixture": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py",
+      "owner_sha256": "ff8b61f71280f4c5d1d413feab33d5f9498f3cf560755492eafbbb0348d0bc82",
+      "patched_test_entrypoint_refs_only": {
+        "consume": 1,
+        "fixture": 1,
+        "prepare": 3
+      },
+      "process_exit": 1,
+      "results": [
+        {
+          "args": [
+            "heldout_evaluation"
+          ],
+          "case": "test_reviewed_v3_public_full_nine_field_mixed_targets_reach_same_binding_class",
+          "passed": true
+        },
+        {
+          "args": [
+            "v3-to-v2"
+          ],
+          "case": "test_reviewed_v3_explicit_apis_cannot_relabel_other_prepared_contract",
+          "passed": true
+        },
+        {
+          "args": [],
+          "case": "test_reviewed_heldout_replays_explicit_unicode_split_fingerprints",
+          "diagnostic": "DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_span_consumer_binding.SourceSpanConsumerBindingError'>",
+          "error": "Failed",
+          "passed": false
+        }
+      ],
+      "side": "base"
+    },
+    "candidate": {
+      "historical_real_fixture": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py",
+      "owner_sha256": "5bb6c1c1d627d65d7e0d98a00d5f646c7519f0c3a73a21492db1936445ecdd4f",
+      "patched_test_entrypoint_refs_only": {
+        "consume": 1,
+        "fixture": 1,
+        "prepare": 3
+      },
+      "process_exit": 0,
+      "results": [
+        {
+          "args": [
+            "heldout_evaluation"
+          ],
+          "case": "test_reviewed_v3_public_full_nine_field_mixed_targets_reach_same_binding_class",
+          "passed": true
+        },
+        {
+          "args": [
+            "v3-to-v2"
+          ],
+          "case": "test_reviewed_v3_explicit_apis_cannot_relabel_other_prepared_contract",
+          "passed": true
+        },
+        {
+          "args": [],
+          "case": "test_reviewed_heldout_replays_explicit_unicode_split_fingerprints",
+          "passed": true
+        }
+      ],
+      "side": "candidate"
+    }
+  },
+  "schema": "phase5-reviewed-heldout-unicode-signed-V3-private-companion/v1",
+  "scope": "Exact existing assertions rebound only to real signed fictional V3 fixture, public prepare and public consume. Same heldout component and zero masks. Distinct from the V2 five and ordinary V4 qualification. No Source/canonical writes or real admission."
+}

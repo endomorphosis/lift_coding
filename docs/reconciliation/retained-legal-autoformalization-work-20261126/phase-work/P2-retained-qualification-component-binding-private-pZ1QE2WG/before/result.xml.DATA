@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="28" time="2.003" timestamp="2026-11-26T19:18:44.850892+00:00" hostname="spark-b271"><testcase classname="" name="test_checked_release_type_capture_preserves_exact_retained_provenance[one]" time="0.054" /><testcase classname="" name="test_checked_release_type_capture_preserves_exact_retained_provenance[two]" time="0.044" /><testcase classname="" name="test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[foreign-report]" time="0.072" /><testcase classname="" name="test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[foreign-plan]" time="0.056" /><testcase classname="" name="test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[coherent-receipt]" time="0.056" /><testcase classname="" name="test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[coherent-packet]" time="0.056" /><testcase classname="" name="test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[coherent-unit]" time="0.074" /><testcase classname="" name="test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[coherent-review-link]" time="0.039" /><testcase classname="" name="test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[nested-seal]" time="0.021" /><testcase classname="" name="test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[report-pin]" time="0.019" /><testcase classname="" name="test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[preparation-pin]" time="0.042" /><testcase classname="" name="test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[stdout-pin]" time="0.041" /><testcase classname="" name="test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[repinned-alias]" time="0.041" /><testcase classname="" name="test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[repinned-open-type]" time="0.041" /><testcase classname="" name="test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[authority-mask]" time="0.020" /><testcase classname="" name="test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[duplicate-component]" time="0.026" /><testcase classname="" name="test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[changed-component-transport]" time="0.027" /><testcase classname="" name="test_checked_release_type_capture_refuses_malformed_current_review_observation[registry-pin]" time="0.037" /><testcase classname="" name="test_checked_release_type_capture_refuses_malformed_current_review_observation[policy-pin]" time="0.039" /><testcase classname="" name="test_checked_release_type_capture_refuses_malformed_current_review_observation[reviews-pin]" time="0.040" /><testcase classname="" name="test_checked_release_type_capture_refuses_malformed_current_review_observation[caller-observation-pin]" time="0.038" /><testcase classname="" name="test_checked_release_type_capture_refuses_malformed_current_review_observation[assessment-pin]" time="0.038" /><testcase classname="" name="test_checked_release_type_capture_refuses_malformed_current_review_observation[invalidation-pin]" time="0.038" /><testcase classname="" name="test_checked_release_type_capture_refuses_malformed_current_review_observation[utc-format]" time="0.038" /><testcase classname="" name="test_checked_release_type_capture_refuses_malformed_current_review_observation[utc-calendar]" time="0.038" /><testcase classname="" name="test_checked_release_type_capture_requires_the_matching_component_evidence[source_integrity-reviewed_crosswalk]" time="0.050"><failure message="Failed: DID NOT RAISE &lt;class 'ValueError'&gt;">dimension = 'source_integrity', role = 'reviewed_crosswalk'
+
+    @pytest.mark.parametrize("dimension,role", [
+        ("source_integrity", "reviewed_crosswalk"),
+        ("representation", "preservation"),
+        ("dependency", "dependency"),
+    ])
+    def test_checked_release_type_capture_requires_the_matching_component_evidence(dimension, role):
+        from ipfs_datasets_py.logic.autoformal import corpus_qualification as qualification
+    
+        case = _checked_release_type_capture_fixture("one")
+        report = deepcopy(case["report"])
+        evidence = report["declared_eligibility_evidence"]
+        components = evidence["component_cids"]
+        original = report["declared_qualification"]
+        dimensions = deepcopy(original["dimensions"])
+        assert dimensions[dimension]["evidence_cids"] == [components[role]]
+        assert components[role] != components["graph"]
+        dimensions[dimension]["evidence_cids"] = [components["graph"]]
+        declared = qualification.prepare_qualification(
+            artifact_cid=evidence["artifact_cid"], profile=report["profile"],
+            theorem_requested=original["theorem_requested"], dimensions=dimensions)
+        eligibility = qualification.derive_eligibility(
+            declared, artifact_cid=evidence["artifact_cid"], profile=report["profile"])
+        assert declared["record_cid"] != original["record_cid"]
+        assert eligibility["views"] == case["report"]["declared_eligibility"]["views"]
+        assert eligibility["views"]["reviewed_graph"]["declared_eligible"] is True
+        assert eligibility["views"]["checked_lean"]["declared_eligible"] is False
+        report.update(declared_qualification=declared, declared_eligibility=eligibility)
+        raw = canonical(report)
+        options = {**case["options"], "checked_release_report_raw": raw,
+                   "expected_checked_release_report_sha256": sha(raw)}
+&gt;       with pytest.raises(ValueError, match=dimension + " evidence differs"):
+E       Failed: DID NOT RAISE &lt;class 'ValueError'&gt;
+
+../project/tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py:1010: Failed</failure></testcase><testcase classname="" name="test_checked_release_type_capture_requires_the_matching_component_evidence[representation-preservation]" time="0.050"><failure message="Failed: DID NOT RAISE &lt;class 'ValueError'&gt;">dimension = 'representation', role = 'preservation'
+
+    @pytest.mark.parametrize("dimension,role", [
+        ("source_integrity", "reviewed_crosswalk"),
+        ("representation", "preservation"),
+        ("dependency", "dependency"),
+    ])
+    def test_checked_release_type_capture_requires_the_matching_component_evidence(dimension, role):
+        from ipfs_datasets_py.logic.autoformal import corpus_qualification as qualification
+    
+        case = _checked_release_type_capture_fixture("one")
+        report = deepcopy(case["report"])
+        evidence = report["declared_eligibility_evidence"]
+        components = evidence["component_cids"]
+        original = report["declared_qualification"]
+        dimensions = deepcopy(original["dimensions"])
+        assert dimensions[dimension]["evidence_cids"] == [components[role]]
+        assert components[role] != components["graph"]
+        dimensions[dimension]["evidence_cids"] = [components["graph"]]
+        declared = qualification.prepare_qualification(
+            artifact_cid=evidence["artifact_cid"], profile=report["profile"],
+            theorem_requested=original["theorem_requested"], dimensions=dimensions)
+        eligibility = qualification.derive_eligibility(
+            declared, artifact_cid=evidence["artifact_cid"], profile=report["profile"])
+        assert declared["record_cid"] != original["record_cid"]
+        assert eligibility["views"] == case["report"]["declared_eligibility"]["views"]
+        assert eligibility["views"]["reviewed_graph"]["declared_eligible"] is True
+        assert eligibility["views"]["checked_lean"]["declared_eligible"] is False
+        report.update(declared_qualification=declared, declared_eligibility=eligibility)
+        raw = canonical(report)
+        options = {**case["options"], "checked_release_report_raw": raw,
+                   "expected_checked_release_report_sha256": sha(raw)}
+&gt;       with pytest.raises(ValueError, match=dimension + " evidence differs"):
+E       Failed: DID NOT RAISE &lt;class 'ValueError'&gt;
+
+../project/tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py:1010: Failed</failure></testcase><testcase classname="" name="test_checked_release_type_capture_requires_the_matching_component_evidence[dependency-dependency]" time="0.050"><failure message="Failed: DID NOT RAISE &lt;class 'ValueError'&gt;">dimension = 'dependency', role = 'dependency'
+
+    @pytest.mark.parametrize("dimension,role", [
+        ("source_integrity", "reviewed_crosswalk"),
+        ("representation", "preservation"),
+        ("dependency", "dependency"),
+    ])
+    def test_checked_release_type_capture_requires_the_matching_component_evidence(dimension, role):
+        from ipfs_datasets_py.logic.autoformal import corpus_qualification as qualification
+    
+        case = _checked_release_type_capture_fixture("one")
+        report = deepcopy(case["report"])
+        evidence = report["declared_eligibility_evidence"]
+        components = evidence["component_cids"]
+        original = report["declared_qualification"]
+        dimensions = deepcopy(original["dimensions"])
+        assert dimensions[dimension]["evidence_cids"] == [components[role]]
+        assert components[role] != components["graph"]
+        dimensions[dimension]["evidence_cids"] = [components["graph"]]
+        declared = qualification.prepare_qualification(
+            artifact_cid=evidence["artifact_cid"], profile=report["profile"],
+            theorem_requested=original["theorem_requested"], dimensions=dimensions)
+        eligibility = qualification.derive_eligibility(
+            declared, artifact_cid=evidence["artifact_cid"], profile=report["profile"])
+        assert declared["record_cid"] != original["record_cid"]
+        assert eligibility["views"] == case["report"]["declared_eligibility"]["views"]
+        assert eligibility["views"]["reviewed_graph"]["declared_eligible"] is True
+        assert eligibility["views"]["checked_lean"]["declared_eligible"] is False
+        report.update(declared_qualification=declared, declared_eligibility=eligibility)
+        raw = canonical(report)
+        options = {**case["options"], "checked_release_report_raw": raw,
+                   "expected_checked_release_report_sha256": sha(raw)}
+&gt;       with pytest.raises(ValueError, match=dimension + " evidence differs"):
+E       Failed: DID NOT RAISE &lt;class 'ValueError'&gt;
+
+../project/tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py:1010: Failed</failure></testcase></testsuite></testsuites>

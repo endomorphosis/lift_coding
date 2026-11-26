@@ -1,0 +1,234 @@
+{
+  "baseline_git_head": "86a9a0c49e2021ecc98bdd56b000f0c99238342a",
+  "baseline_git_tree": "b3c7bc9a88c642bd9119a432f9d3b44834c95b4b",
+  "canonical_write": false,
+  "fit": false,
+  "green": {
+    "failed": {},
+    "guard": {
+      "denied": [],
+      "overlays": [
+        {
+          "actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-retrieval-depth-abstention-private-xlh6n5h6/legal_ir_semantic_metrics.after.py.DATA",
+          "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_semantic_metrics"
+        }
+      ],
+      "pytest_exit": 0,
+      "scope": "private direct scorer fixtures"
+    },
+    "junit": {
+      "bytes": 4231,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-retrieval-depth-abstention-private-xlh6n5h6/green/junit.xml",
+      "sha256": "5ed11c06b02fbe8dc83bcb99af641a72b3f9211b057e789aa1c7e0739d5b9964"
+    },
+    "passed": 23,
+    "roster": [
+      "test_retrieved_complete_payloads_bind_frozen_rankings_and_separate_local_matches_from_legal_relevance",
+      "test_retrieved_payloads_retain_abstentions_and_absent_counterparts_without_false_recall",
+      "test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[rankings-pin]",
+      "test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[reference-pin]",
+      "test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[candidate-pin]",
+      "test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[missing-query]",
+      "test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[duplicate-query]",
+      "test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[foreign-candidate]",
+      "test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[duplicate-rank]",
+      "test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[mixed-input]",
+      "test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[payload-binding]",
+      "test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[eligible-alias]",
+      "test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[cutoff-alias]",
+      "test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[target-access]",
+      "test_retrieved_payloads_detect_original_input_drift_during_posthoc_scoring",
+      "test_retrieved_payloads_reject_cutoff_configuration_drift_during_scoring[remove]",
+      "test_retrieved_payloads_reject_cutoff_configuration_drift_during_scoring[boolean-alias]",
+      "test_retrieved_payloads_reject_cutoff_configuration_drift_during_scoring[float-alias]",
+      "test_retrieved_payloads_refuse_methods_with_different_eligible_candidate_sets",
+      "test_retrieved_payloads_score_all_abstentions_when_depth_exceeds_the_bank[4]",
+      "test_retrieved_payloads_score_all_abstentions_when_depth_exceeds_the_bank[16]",
+      "test_retrieved_payloads_reject_short_rankings_or_unsupported_depth[4-False-fixed ranking depth or explicit abstention]",
+      "test_retrieved_payloads_reject_short_rankings_or_unsupported_depth[17-True-bounded cutoff configuration and ranking depth]"
+    ],
+    "stderr": {
+      "bytes": 0,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-retrieval-depth-abstention-private-xlh6n5h6/green/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stdout": {
+      "bytes": 788,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-retrieval-depth-abstention-private-xlh6n5h6/green/stdout.txt",
+      "sha256": "51a21a5354c57a2290efb5eab10345ec07297442c85b1b015b9448dcb970c1df"
+    }
+  },
+  "guard_profile": {
+    "bytes": 5502,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/retry-preservation-v02/run_private_fixture.py.DATA",
+    "sha256": "b3fe749fe409c404a426669781c4807538115fda1127534bbb3c8613853fd42e"
+  },
+  "native": false,
+  "old_test_bytes_and_ast_exact": true,
+  "ordinary_qualification": false,
+  "policy": {
+    "cpu": 1,
+    "cpu_seconds": 45,
+    "forbidden": [
+      "model backend imports",
+      "torch",
+      "real SQL",
+      "network",
+      "child process/Lean",
+      "writes outside own private run"
+    ],
+    "memory_MiB": 512,
+    "normal_pytest_ini_or_conftests": false,
+    "wall_alarm_seconds": 60
+  },
+  "previous_larger_bank_compatibility_preserved": true,
+  "producer_contract": {
+    "blob": "c15582df34f21c148d22bf93e07dd59044bb66b4",
+    "entry": "ReviewedLegalJointRetriever.retrieve",
+    "exact_insufficiency": "insufficient_permitted_training_examples",
+    "lines": [
+      864,
+      1020,
+      1033
+    ],
+    "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_joint_retrieval.py",
+    "ranking_bound": [
+      1,
+      16
+    ]
+  },
+  "publication": false,
+  "pytest_config": {
+    "bytes": 9,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-retrieval-depth-abstention-private-xlh6n5h6/pytest-private.ini",
+    "sha256": "8250d20f42b419af40706490ead78aabab9feba93eab09a3f626e3de5256e1f4"
+  },
+  "red": {
+    "failed": {
+      "test_retrieved_payloads_reject_short_rankings_or_unsupported_depth[4-False-fixed ranking depth or explicit abstention]": "AssertionError: Regex pattern did not match.\n Regex: 'fixed ranking depth or explicit abstention'\n Input: 'explicit bounded cutoff configuration and ranking depth required'",
+      "test_retrieved_payloads_score_all_abstentions_when_depth_exceeds_the_bank[16]": "ValueError: explicit bounded cutoff configuration and ranking depth required",
+      "test_retrieved_payloads_score_all_abstentions_when_depth_exceeds_the_bank[4]": "ValueError: explicit bounded cutoff configuration and ranking depth required"
+    },
+    "guard": {
+      "denied": [],
+      "overlays": [],
+      "pytest_exit": 1,
+      "scope": "private direct scorer fixtures"
+    },
+    "junit": {
+      "bytes": 11237,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-retrieval-depth-abstention-private-xlh6n5h6/red-v03/junit.xml",
+      "sha256": "fc74dcbd70d04cd441555eed0b1719ce013416c065e02fbc43bcdca2045cceef"
+    },
+    "passed": 20,
+    "roster": [
+      "test_retrieved_complete_payloads_bind_frozen_rankings_and_separate_local_matches_from_legal_relevance",
+      "test_retrieved_payloads_retain_abstentions_and_absent_counterparts_without_false_recall",
+      "test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[rankings-pin]",
+      "test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[reference-pin]",
+      "test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[candidate-pin]",
+      "test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[missing-query]",
+      "test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[duplicate-query]",
+      "test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[foreign-candidate]",
+      "test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[duplicate-rank]",
+      "test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[mixed-input]",
+      "test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[payload-binding]",
+      "test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[eligible-alias]",
+      "test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[cutoff-alias]",
+      "test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[target-access]",
+      "test_retrieved_payloads_detect_original_input_drift_during_posthoc_scoring",
+      "test_retrieved_payloads_reject_cutoff_configuration_drift_during_scoring[remove]",
+      "test_retrieved_payloads_reject_cutoff_configuration_drift_during_scoring[boolean-alias]",
+      "test_retrieved_payloads_reject_cutoff_configuration_drift_during_scoring[float-alias]",
+      "test_retrieved_payloads_refuse_methods_with_different_eligible_candidate_sets",
+      "test_retrieved_payloads_score_all_abstentions_when_depth_exceeds_the_bank[4]",
+      "test_retrieved_payloads_score_all_abstentions_when_depth_exceeds_the_bank[16]",
+      "test_retrieved_payloads_reject_short_rankings_or_unsupported_depth[4-False-fixed ranking depth or explicit abstention]",
+      "test_retrieved_payloads_reject_short_rankings_or_unsupported_depth[17-True-bounded cutoff configuration and ranking depth]"
+    ],
+    "stderr": {
+      "bytes": 0,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-retrieval-depth-abstention-private-xlh6n5h6/red-v03/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stdout": {
+      "bytes": 7835,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-retrieval-depth-abstention-private-xlh6n5h6/red-v03/stdout.txt",
+      "sha256": "a9479a03e4d8d37c9d584c1d285795762d511c96aa828e0ec28d1a9ab6249179"
+    }
+  },
+  "roles": {
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_semantic_metrics.py": {
+      "before": {
+        "bytes": 111418,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-retrieval-depth-abstention-private-xlh6n5h6/owner.before.py.DATA",
+        "sha256": "b44c482aaf9a96a420c4eb02bb0175cfc99cc14854d02a85347fa3aaf4461c1a"
+      },
+      "git_blob": "762476368dcec6b315d75d15b0c72264e06703cd",
+      "patch": {
+        "bytes": 1043,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-retrieval-depth-abstention-private-xlh6n5h6/legal_ir_semantic_metrics.py.patch.DATA",
+        "sha256": "374af92b1ca76ca06bb6e79c7d2f4dd2d2cf122da892426a3890d51843e9875a"
+      },
+      "post": {
+        "bytes": 111564,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-retrieval-depth-abstention-private-xlh6n5h6/legal_ir_semantic_metrics.after.py.DATA",
+        "sha256": "8a62ef6ecb50608a828ad15ca90cd478d5b70168d1ab74802bd0ccee594da388"
+      }
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py": {
+      "before": {
+        "bytes": 44150,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-retrieval-depth-abstention-private-xlh6n5h6/owning-test.before.py.DATA",
+        "sha256": "b53beed2190160506445074a5334ddc5eb5089027e894dcfef9a34b32d49e987"
+      },
+      "git_blob": "25cf57b4f74bea3c6ac9f463c8e579ff73d072ee",
+      "patch": {
+        "bytes": 2732,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-retrieval-depth-abstention-private-xlh6n5h6/test_legal_ir_semantic_metrics.py.patch.DATA",
+        "sha256": "f720db8b030decc26e78adec1ab071b9d969015c71e40378898f92c698c19e8a"
+      },
+      "post": {
+        "bytes": 46530,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-retrieval-depth-abstention-private-xlh6n5h6/test_legal_ir_semantic_metrics.py",
+        "sha256": "667836209c26614fa5d24562b7e1060462b9428e774f61f39eabd49671903f8d"
+      }
+    }
+  },
+  "runner": {
+    "bytes": 1813,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-retrieval-depth-abstention-private-xlh6n5h6/run-existing-scorer-private-v03.py.DATA",
+    "sha256": "c1caf5e5a094b970d1e4e8d13988ed25251c4c92437234488322472580cacefa"
+  },
+  "schema": "private-existing-posthoc-retrieval-depth-candidate/v1",
+  "scope": "Frozen authored scorer DATA only. Count exact input-custody/structural hits and all-query abstentions at requested cutoff, with fixed-depth successful rows. No producer result, model, release, legal or proof credit.",
+  "setup_refusals": [
+    {
+      "label": "red",
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-retrieval-depth-abstention-private-xlh6n5h6/red/stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 3203,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-retrieval-depth-abstention-private-xlh6n5h6/red/stdout.txt",
+        "sha256": "f7c5c04cf9c4f6a01a8946a4a9aa1d33e937bae654e947c38a3f3b4dc3ad76ae"
+      }
+    },
+    {
+      "label": "red-v02",
+      "stderr": {
+        "bytes": 262,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-retrieval-depth-abstention-private-xlh6n5h6/red-v02/stderr.txt",
+        "sha256": "cc87817318929f3a34bafd64f046303f1cc0d692e1f98bdbfd5c5b64de6d9404"
+      },
+      "stdout": {
+        "bytes": 1371,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-retrieval-depth-abstention-private-xlh6n5h6/red-v02/stdout.txt",
+        "sha256": "b1a4f495ad30b981fe08f059cfb35ccaadae1003bbfb351d7abd8125d7cdfe6e"
+      }
+    }
+  ],
+  "sql": false
+}

@@ -1,0 +1,230 @@
+import hashlib
+import importlib.abc
+import importlib.util
+import json
+import os
+from pathlib import Path
+import resource
+import signal
+import stat
+import sys
+
+out = Path(__file__).resolve().parent
+work = Path(sys.argv[1]).resolve()
+assert work.parent == out
+work.mkdir(mode=0o700, exist_ok=False)
+os.chdir(work)
+os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
+resource.setrlimit(resource.RLIMIT_AS, (512 << 20, 512 << 20))
+resource.setrlimit(resource.RLIMIT_CPU, (45, 45))
+signal.alarm(60)
+sys.dont_write_bytecode = True
+for key in ('HOME', 'XDG_CACHE_HOME', 'TMPDIR'):
+    os.environ[key] = str(work)
+os.environ.update(PYTEST_DISABLE_PLUGIN_AUTOLOAD='1', IPFS_DATASETS_PY_MINIMAL_IMPORTS='1',
+                  IPFS_ACCEL_SKIP_CORE='1', IPFS_ACCEL_AUTO_INSTALL='0',
+                  IPFS_DATASETS_AUTO_INSTALL='0', IPFS_DATASETS_AUTO_INSTALL_TEST_DEPS='0',
+                  HF_HUB_OFFLINE='1', HF_DATASETS_OFFLINE='1', TRANSFORMERS_OFFLINE='1',
+                  IPFS_DATASETS_RUN_NATIVE_LEAN='0')
+for key in ('PYTEST_ADDOPTS', 'PYTEST_PLUGINS'):
+    os.environ.pop(key, None)
+
+publication = Path('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn')
+base = out.parent.parent
+coord = base.parent
+d = publication / 'repositories/datasets'
+a = publication / 'repositories/accelerate'
+cache_root = Path('/tmp/v5-lifecycle-pins-review.FZkDbp')
+prior = Path('/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01')
+archived = {
+    'ipfs_datasets_py': (
+        cache_root/'D', prior/'ipfs_datasets',
+        Path('/tmp/datasets-reviewed-normal16-publication-f70-FUTURE-INERT-20261116-v01'),
+    ),
+    'ipfs_accelerate_py': (cache_root/'A',),
+}
+source_receipt = Path('/tmp/Root-P1-local-coherent-cache-ordinary166-READ1-final-v285-vylkm1fy/actual-output/source-opening.json')
+forbidden_roots = (d, a, publication/'repositories/hallucinate',
+                   publication/'repositories/root', Path('/home/barberb/lift_coding/external'))
+read_fields = ('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
+denied, observed, tried = [], [], []
+byte_count = 0
+byte_limit = int(sys.argv[2])
+assert 0 < byte_limit <= 8 << 20
+blocked = frozenset(('duckdb','_duckdb','torch','transformers','tensorflow','onnxruntime','llama_cpp'))
+writes = os.O_RDWR | os.O_WRONLY | os.O_CREAT | os.O_TRUNC | os.O_APPEND
+mutations = {'os.mkdir','os.remove','os.rmdir','os.rename','os.link','os.symlink',
+             'os.truncate','os.chmod','os.chown','os.utime','shutil.rmtree'}
+
+def deny(event, key):
+    denied.append([event,str(key)])
+    raise PermissionError(f'private fixture operation denied: {event} {key}')
+
+def location(value):
+    if isinstance(value, int):
+        value = os.readlink(f'/proc/self/fd/{value}')
+    return Path(os.path.realpath(os.fsdecode(value)))
+
+def audit(event, args):
+    if event.startswith(('socket.', 'subprocess.', 'os.exec', 'os.spawn', 'os.posix_spawn')) or event in {
+        'os.fork','os.forkpty','os.system','os.kill','os.killpg','ctypes.dlopen',
+    }:
+        deny(event, 'process or network')
+    if event == 'open' and len(args) > 2:
+        if isinstance(args[0], int):
+            if args[2] & writes and not location(args[0]).is_relative_to(work):
+                deny(event, args[0])
+            return
+        resolved = location(args[0])
+        if resolved.name == 'disk-reservations.json' or (resolved.parent == Path('/tmp') and resolved.name.startswith('ipfs-datasets-resource-scheduler-')):
+            deny('live_resource_state_open', resolved)
+        if any(resolved.is_relative_to(root) for root in forbidden_roots):
+            deny('canonical_source_open', resolved)
+        if args[2] & writes and not resolved.is_relative_to(work):
+            deny(event, resolved)
+    if event in mutations:
+        values = args[:2] if event in {'os.rename','os.link','os.symlink'} else args[:1]
+        for value in values:
+            if not location(value).is_relative_to(work):
+                deny(event, value)
+
+def read(path):
+    global byte_count
+    assert path.resolve(strict=True) == path, path
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC)
+    with os.fdopen(fd, 'rb') as f:
+        s = os.fstat(f.fileno())
+        assert stat.S_ISREG(s.st_mode) and s.st_nlink == 1
+        before = tuple(getattr(s, k) for k in read_fields)
+        if byte_count+s.st_size > byte_limit:
+            raise RuntimeError(f'private cached input limit exhausted at {path}')
+        body = f.read(s.st_size+1)
+        byte_count += len(body)
+        assert len(body)==s.st_size and before==tuple(getattr(os.fstat(f.fileno()),k) for k in read_fields)
+    digest = hashlib.sha256(body).hexdigest()
+    tried.append([str(path),len(body),digest])
+    return body,digest
+
+def pinned(path, size, digest):
+    value, actual = read(path)
+    assert len(value)==size and actual==digest, path
+    return value
+
+class BoundLoader(importlib.abc.Loader):
+    def __init__(self, filename, body):
+        self.filename, self.body = str(filename), body
+
+    def exec_module(self, module):
+        exec(compile(self.body, self.filename, 'exec', dont_inherit=True), module.__dict__)
+
+class RefusingLoader(importlib.abc.Loader):
+    def __init__(self, name):
+        self.name = name
+
+    def exec_module(self, module):
+        raise ImportError(f'missing pinned private body for {self.name}')
+
+class BoundFinder(importlib.abc.MetaPathFinder):
+    def __init__(self, records, overlays):
+        self.records, self.overlays = records, overlays
+
+    def find_spec(self, fullname, path=None, target=None):
+        top = fullname.split('.',1)[0]
+        if top in blocked:
+            raise ImportError(f'backend outside private in-memory scope: {fullname}')
+        if top not in archived:
+            return None
+        prefix = fullname.replace('.','/')
+        choices = ((prefix+'/__init__.py', True), (prefix+'.py',False))
+        for relative, pkg in choices:
+            expected = self.records.get(relative)
+            if expected is None:
+                continue
+            for candidate in self.overlays.get(relative, ()) + tuple(r/relative for r in archived[top]):
+                if not candidate.is_file():
+                    continue
+                if candidate.lstat().st_size != expected[0]:
+                    continue
+                body, digest = read(candidate)
+                if digest == expected[1]:
+                    observed.append([fullname,str(candidate),len(body),digest])
+                    return importlib.util.spec_from_file_location(
+                        fullname, candidate, loader=BoundLoader(candidate,body),
+                        **({'submodule_search_locations':[str(candidate.parent)]} if pkg else {}),
+                    )
+            return importlib.util.spec_from_file_location(
+                fullname, work/relative, loader=RefusingLoader(fullname),
+                **({'submodule_search_locations':[]} if pkg else {}),
+            )
+        if any(rel.startswith(prefix+'/') for rel in self.records):
+            spec = importlib.machinery.ModuleSpec(fullname, None, is_package=True)
+            spec.submodule_search_locations = []
+            observed.append([fullname,'prior manifest namespace',0,None])
+            return spec
+        return importlib.util.spec_from_file_location(fullname, work/(prefix+'.py'),
+                loader=RefusingLoader(fullname))
+
+rc = 2
+sys.addaudithook(audit)
+report_path = work/'run-control.json'
+try:
+    metadata = json.loads(pinned(source_receipt,593953,'bc5cb056fd2bf1582db2638cf35dba3294525df0812bc400b29453044a07308a'))
+    assert metadata['Git_HEADS'][str(d)] == '35e56b6b34c5cd363935e5377c1946a1a53e32b1'
+    assert metadata['Git_HEADS'][str(a)] == '88c0d9f82f66aaddbb01344c9f85236e92a5dc88'
+    records = {}
+    for row in metadata['records']:
+        path = Path(row['path'])
+        for root,top in ((d,'ipfs_datasets_py'),(a,'ipfs_accelerate_py')):
+            if path.is_relative_to(root/top) and path.suffix=='.py':
+                relative = path.relative_to(root).as_posix()
+                assert relative not in records
+                records[relative]=(row['bytes'],row['sha256'])
+    past = base/'retry-preservation-v02'
+    explicit = {
+        'ipfs_datasets_py/logic/legal_ir/proof_cache.py': past/'proof_cache.after.py.DATA',
+        'ipfs_datasets_py/logic/common/duckdb_proof_migration.py': past/'duckdb_proof_migration.after.py.DATA',
+        'ipfs_datasets_py/logic/common/duckdb_proof_store.py': past/'duckdb_proof_store.after.py.DATA',
+        'ipfs_datasets_py/logic/backends/cache_protocol.py': Path('/tmp/Root-P1-current-cache-protocol-UNKNOWN-SHA-SourceREAD1-v284-6od7otu5/actual-output/0-cache_protocol.py.UNKNOWN-SHA.API.DATA'),
+        'ipfs_datasets_py/logic/backends/process.py': Path('/tmp/Root-LIR23-fresh18-existing-SourceREAD-actual-v183-huy_olqh/12-process.py.DATA'),
+        'ipfs_datasets_py/logic/backends/resource_admission.py': Path('/tmp/Root-LIR23-fresh18-existing-SourceREAD-actual-v183-huy_olqh/14-resource_admission.py.DATA'),
+        'ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_resources.py': Path('/tmp/Root-LIR23-fresh18-existing-SourceREAD-actual-v183-huy_olqh/07-autoencoder_daemon_resources.py.DATA'),
+        'ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py': Path('/tmp/Root-LIR23-fresh18-existing-SourceREAD-actual-v183-huy_olqh/08-resource_scheduler.py.DATA'),
+        'ipfs_datasets_py/optimizers/logic_theorem_optimizer/runtime_telemetry.py': Path('/tmp/Root-LIR23-fresh18-existing-SourceREAD-actual-v183-huy_olqh/09-runtime_telemetry.py.DATA'),
+        'ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_resource_safety.py': Path('/tmp/Root-LIR23-fresh18-existing-SourceREAD-actual-v183-huy_olqh/10-proof_resource_safety.py.DATA'),
+        'ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_resource_recovery.py': Path('/tmp/Root-LIR23-fresh18-existing-SourceREAD-actual-v183-huy_olqh/15-autoencoder_resource_recovery.py.DATA'),
+        'ipfs_datasets_py/logic/backends/kernel/lean.py': coord/'phase1-lean-outcome-request-fields-private-v01/owner.after.py.DATA',
+    }
+    grant = sys.argv[3:]
+    if grant:
+        patch_map_path = Path(grant[0])
+        assert patch_map_path.parent == out
+        patch_map = json.loads(pinned(patch_map_path,int(grant[1]),grant[2]))
+        assert set(patch_map)=={'ipfs_datasets_py/logic/common/duckdb_proof_store.py',
+                                'ipfs_datasets_py/logic/backends/cache_protocol.py'}
+        for relative,row in patch_map.items():
+            path = Path(row['path'])
+            assert path.parent == out
+            explicit[relative] = path
+            records[relative] = (row['bytes'],row['sha256'])
+    sys.meta_path.insert(0,BoundFinder(records,{k:(v,) for k,v in explicit.items()}))
+    assert not any(name.split('.',1)[0] in archived for name in sys.modules)
+    fixture = pinned(out/'test_proof_cache.ceiling-diagnostic.py.DATA',93508,
+                     'cd92c41e80976e707110855423dd6ae6956206e5a6bfd57556cec93611ac4a9e')
+    assert hashlib.sha256(fixture[:89707]).hexdigest() == 'cec120e6bba53c09554b69cbde32fe34ffdc9ecaa901fb4c3141ecfe34b83c6e'
+    assert hashlib.sha256(fixture[:86879]).hexdigest() == 'e86d6d85c1333dd536ee997bf5a3e09b5f625f11bf399ed140c2504a894ece4e'
+    assert hashlib.sha256(fixture[:84499]).hexdigest() == '239d05de5b08eba8de06b67a74efe109900a6302d73c27d28d450bf2f8061d2f'
+    test = work/'test_proof_cache.py'
+    test.write_bytes(fixture)
+    import pytest
+    import tempfile
+    tempfile.tempdir = str(work)
+    rc = int(pytest.main(['-c','/dev/null','--noconftest','-p','no:cacheprovider',f'--rootdir={work}',
+          '-q','--tb=short',f'--basetemp={work/"tmp"}',f'--junitxml={work/"junit.xml"}',f'--log-file={work/"pytest.log"}',
+          f'{test}::test_diagnostic_cache_producer_retains_caller_ceiling',
+          f'{test}::test_diagnostic_cache_waiter_retains_caller_ceiling']))
+finally:
+    assert not any(name.split('.',1)[0] in blocked for name in sys.modules)
+    report_path.write_text(json.dumps({'exit':rc,'explicit_cached_read_bytes':byte_count,
+            'read_byte_limit':byte_limit,'retained_imports':observed,'attempted_cached_reads':tried,
+            'denied_effects':denied},sort_keys=True,indent=2)+'\n')
+raise SystemExit(rc if not denied else 137)

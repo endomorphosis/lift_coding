@@ -1,0 +1,224 @@
+{
+  "all_state_unchanged": true,
+  "awarded_fit_or_unmocked_proof": false,
+  "candidate": {
+    "bytes": 17166,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/sealed-current-proof-feedback-eight-file-private-candidate.json",
+    "sha256": "8e577d42b53879556bceba4e16328718faf7c435bbfa2603b3bdda22a812746b"
+  },
+  "cases": [
+    {
+      "applied": 0,
+      "auxiliary_forwarding_probe": [],
+      "case": "selected-record-trainer",
+      "claimed_receipt_ids": [
+        "fictional-current-receipt"
+      ],
+      "expected_feedback_record_id": "legal-ir-proof-feedback-708a875c58ff8d7d6648839f56fab50b9ed328049a5b560d276deeebad86ccbd",
+      "expected_reason": null,
+      "expected_spy_calls": 1,
+      "full_state_after_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "full_state_before_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "offered_feedback_record_id": "legal-ir-proof-feedback-708a875c58ff8d7d6648839f56fab50b9ed328049a5b560d276deeebad86ccbd",
+      "passed": true,
+      "reasons": {
+        "no_bounded_learning_target": 1
+      },
+      "spy": [
+        {
+          "learning_rate": 0.05,
+          "record": "legal-ir-proof-feedback-708a875c58ff8d7d6648839f56fab50b9ed328049a5b560d276deeebad86ccbd",
+          "sample_ir_sha256": "07dcece18db524515e069deef0102d6c250d374349998849486f692197bb3b25"
+        }
+      ]
+    },
+    {
+      "case": "selected-record-auxiliary",
+      "claimed_receipt_ids": [
+        "fictional-current-receipt"
+      ],
+      "eligible": 1,
+      "expected_eligible": 1,
+      "expected_feedback_record_id": "legal-ir-proof-feedback-708a875c58ff8d7d6648839f56fab50b9ed328049a5b560d276deeebad86ccbd",
+      "expected_skipped_current_target": 0,
+      "full_state_after_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "full_state_before_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "mode": "zero_learning_rate",
+      "offered_feedback_record_id": "legal-ir-proof-feedback-708a875c58ff8d7d6648839f56fab50b9ed328049a5b560d276deeebad86ccbd",
+      "passed": true,
+      "skipped_current_target": 0,
+      "status": "disabled"
+    },
+    {
+      "applied": 0,
+      "auxiliary_forwarding_probe": [],
+      "case": "wrong-receipt-trainer",
+      "claimed_receipt_ids": [
+        "fictional-unrelated-theorem-receipt"
+      ],
+      "expected_feedback_record_id": "legal-ir-proof-feedback-708a875c58ff8d7d6648839f56fab50b9ed328049a5b560d276deeebad86ccbd",
+      "expected_reason": null,
+      "expected_spy_calls": 0,
+      "full_state_after_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "full_state_before_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "offered_feedback_record_id": "legal-ir-proof-feedback-ea16ce5ad2cd1e95b3c6b73929894611cd2f17f428ace28db3ac9f75bf550197",
+      "passed": false,
+      "reasons": {
+        "no_bounded_learning_target": 1
+      },
+      "spy": [
+        {
+          "learning_rate": 0.05,
+          "record": "legal-ir-proof-feedback-ea16ce5ad2cd1e95b3c6b73929894611cd2f17f428ace28db3ac9f75bf550197",
+          "sample_ir_sha256": "07dcece18db524515e069deef0102d6c250d374349998849486f692197bb3b25"
+        }
+      ]
+    },
+    {
+      "case": "wrong-receipt-auxiliary",
+      "claimed_receipt_ids": [
+        "fictional-unrelated-theorem-receipt"
+      ],
+      "eligible": 1,
+      "expected_eligible": 0,
+      "expected_feedback_record_id": "legal-ir-proof-feedback-708a875c58ff8d7d6648839f56fab50b9ed328049a5b560d276deeebad86ccbd",
+      "expected_skipped_current_target": 1,
+      "full_state_after_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "full_state_before_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "mode": "zero_learning_rate",
+      "offered_feedback_record_id": "legal-ir-proof-feedback-ea16ce5ad2cd1e95b3c6b73929894611cd2f17f428ace28db3ac9f75bf550197",
+      "passed": false,
+      "skipped_current_target": 0,
+      "status": "disabled"
+    },
+    {
+      "applied": 0,
+      "auxiliary_forwarding_probe": [],
+      "case": "same-receipt-name-altered-record-trainer",
+      "claimed_receipt_ids": [
+        "fictional-current-receipt"
+      ],
+      "expected_feedback_record_id": "legal-ir-proof-feedback-708a875c58ff8d7d6648839f56fab50b9ed328049a5b560d276deeebad86ccbd",
+      "expected_reason": null,
+      "expected_spy_calls": 0,
+      "full_state_after_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "full_state_before_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "offered_feedback_record_id": "legal-ir-proof-feedback-e7378571aad51d6c6c4e6d86724bf3257ce69d3fbb9988e771b122aa81bed72c",
+      "passed": false,
+      "reasons": {
+        "no_bounded_learning_target": 1
+      },
+      "spy": [
+        {
+          "learning_rate": 0.05,
+          "record": "legal-ir-proof-feedback-e7378571aad51d6c6c4e6d86724bf3257ce69d3fbb9988e771b122aa81bed72c",
+          "sample_ir_sha256": "07dcece18db524515e069deef0102d6c250d374349998849486f692197bb3b25"
+        }
+      ]
+    },
+    {
+      "case": "same-receipt-name-altered-record-auxiliary",
+      "claimed_receipt_ids": [
+        "fictional-current-receipt"
+      ],
+      "eligible": 1,
+      "expected_eligible": 0,
+      "expected_feedback_record_id": "legal-ir-proof-feedback-708a875c58ff8d7d6648839f56fab50b9ed328049a5b560d276deeebad86ccbd",
+      "expected_skipped_current_target": 1,
+      "full_state_after_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "full_state_before_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "mode": "zero_learning_rate",
+      "offered_feedback_record_id": "legal-ir-proof-feedback-e7378571aad51d6c6c4e6d86724bf3257ce69d3fbb9988e771b122aa81bed72c",
+      "passed": false,
+      "skipped_current_target": 0,
+      "status": "disabled"
+    }
+  ],
+  "compiled_git_join": 100,
+  "exit": {
+    "bytes": 2,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/receipt-substitution-red.exit.txt",
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "explicit_source_and_overlay_bytes": 6776075,
+  "first_private_receipt_serializer_refusal": "Attribute applied belongs to primary rows. Auxiliary zero-updates asserted by guarded adapter and exact state readback.",
+  "guard_denied_events": 0,
+  "head": "31da9dcebec20a351a38eeba37990edd37d6421a",
+  "kernel_guard": {
+    "address_space_bytes": 536870912,
+    "cpu_affinity": [
+      0
+    ],
+    "cpu_seconds": 25,
+    "kernel_probes": [
+      "socket",
+      "clone3",
+      "write-open"
+    ],
+    "landlock_abi": 7,
+    "stdout_stderr_each_max_bytes": 131072,
+    "syscall_denylist": [
+      "socket",
+      "socketpair",
+      "connect",
+      "accept",
+      "accept4",
+      "bind",
+      "listen",
+      "clone",
+      "clone3",
+      "execve",
+      "execveat",
+      "io_uring_setup",
+      "io_uring_enter",
+      "io_uring_register",
+      "pidfd_getfd",
+      "ptrace",
+      "process_vm_writev",
+      "setns",
+      "unshare",
+      "mount",
+      "umount2",
+      "truncate",
+      "ftruncate",
+      "fchmod",
+      "fchmodat",
+      "fchmodat2",
+      "fchown",
+      "fchownat",
+      "utimensat",
+      "setxattr",
+      "lsetxattr",
+      "fsetxattr",
+      "removexattr",
+      "lremovexattr",
+      "fremovexattr"
+    ]
+  },
+  "minimal_design": {
+    "negative_and_history": "Negative evidence keeps its own check. Preserve archive reads. Retained observations and fictional receipts convey no live or legal authority.",
+    "positive_source": "Replay the selected LegalProofRecord against independent current artifact/source, complete interpretation/dependency/assumptions/backend context and exact obligation. Select exactly the independently pinned receipt digest and deterministically project its feedback.",
+    "target_commitment": "Keep independent of expected record ID to avoid digest circularity.",
+    "write_guard": "The current independently verified selection supplies exact expected feedback record ID. Revalidate detached canonical feedback bytes and require exact ID in both mutation paths."
+  },
+  "obligation_id": "lir-obligation-7de63cec01d90c20af5b",
+  "runner": {
+    "bytes": 4030,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/no-fit-exact-feedback-receipt-substitution-v01.py",
+    "sha256": "9ea7cea5142626dd5c8960bfb5a78a5cb69a84ba3a4507e805e1d55c258fbefb"
+  },
+  "same_target_digest": "6dfe54204fb493fe4272262a00023472ce27d73859a2e681190107dff417010d",
+  "schema": "private-proof-feedback-correct-target-foreign-receipt-red/v1",
+  "selected_passes": 2,
+  "stderr": {
+    "bytes": 0,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/receipt-substitution-red.stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 28960,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/receipt-substitution-red.stdout.json",
+    "sha256": "115a2f95275c8af2b1cd183fae39fc69006ecab9c87e53e9088552a982ec4594"
+  },
+  "unexpected_acceptance_failures": 4
+}

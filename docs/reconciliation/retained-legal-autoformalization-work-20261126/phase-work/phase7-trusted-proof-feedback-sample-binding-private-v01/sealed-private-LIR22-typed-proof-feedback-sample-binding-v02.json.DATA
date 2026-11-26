@@ -1,0 +1,399 @@
+{
+  "actual": {
+    "baseline": {
+      "duplicates": 0,
+      "errors": 0,
+      "failure_details": [
+        {
+          "detail": "AssertionError: unbound typed proof feedback reached a weight update\nassert 1 == 0\n +  where 1 = TrustedFeedbackUpdateReport(candidate_count=1, applied_count=1, duplicate_count=0, stale_count=0, untrusted_count=0, m...t_writes_enabled=True, write_to_autoencoder_weights=True, schema_version='legal-ir-trusted-feedback-weight-updates-v1').applied_count",
+          "node": "test_typed_proof_feedback_cannot_update_an_unrelated_training_sample[inner-guidance]"
+        },
+        {
+          "detail": "AssertionError: unbound typed proof feedback reached a weight update\nassert 1 == 0\n +  where 1 = TrustedFeedbackUpdateReport(candidate_count=1, applied_count=1, duplicate_count=0, stale_count=0, untrusted_count=0, m...t_writes_enabled=True, write_to_autoencoder_weights=True, schema_version='legal-ir-trusted-feedback-weight-updates-v1').applied_count",
+          "node": "test_typed_proof_feedback_cannot_update_an_unrelated_training_sample[inner-feedback]"
+        },
+        {
+          "detail": "AssertionError: unbound typed proof feedback reached a weight update\nassert 1 == 0\n +  where 1 = TrustedFeedbackUpdateReport(candidate_count=1, applied_count=1, duplicate_count=0, stale_count=0, untrusted_count=0, m...t_writes_enabled=True, write_to_autoencoder_weights=True, schema_version='legal-ir-trusted-feedback-weight-updates-v1').applied_count",
+          "node": "test_typed_proof_feedback_cannot_update_an_unrelated_training_sample[outer]"
+        },
+        {
+          "detail": "AssertionError: unbound typed proof feedback reached a weight update\nassert 1 == 0\n +  where 1 = TrustedFeedbackUpdateReport(candidate_count=1, applied_count=1, duplicate_count=0, stale_count=0, untrusted_count=0, m...t_writes_enabled=True, write_to_autoencoder_weights=True, schema_version='legal-ir-trusted-feedback-weight-updates-v1').applied_count",
+          "node": "test_typed_proof_feedback_cannot_update_an_unrelated_training_sample[inner-alias]"
+        },
+        {
+          "detail": "AssertionError: unbound typed proof feedback reached a weight update\nassert 1 == 0\n +  where 1 = TrustedFeedbackUpdateReport(candidate_count=1, applied_count=1, duplicate_count=0, stale_count=0, untrusted_count=0, m...t_writes_enabled=True, write_to_autoencoder_weights=True, schema_version='legal-ir-trusted-feedback-weight-updates-v1').applied_count",
+          "node": "test_typed_proof_feedback_cannot_update_an_unrelated_training_sample[wrong-index-value]"
+        }
+      ],
+      "failures": 5,
+      "junit": {
+        "bytes": 6756,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/baseline-v04/result.xml",
+        "sha256": "2f6b1894838d2f2923176036035a385ea51a92daf2b522a476082924226a6114"
+      },
+      "nodes": [
+        "test_typed_proof_feedback_cannot_update_an_unrelated_training_sample[inner-guidance]",
+        "test_typed_proof_feedback_cannot_update_an_unrelated_training_sample[inner-feedback]",
+        "test_typed_proof_feedback_cannot_update_an_unrelated_training_sample[outer]",
+        "test_typed_proof_feedback_cannot_update_an_unrelated_training_sample[inner-alias]",
+        "test_typed_proof_feedback_cannot_update_an_unrelated_training_sample[wrong-index-value]",
+        "test_typed_nested_feedback_matching_envelope_preserves_weight_updates[guidance]",
+        "test_typed_nested_feedback_matching_envelope_preserves_weight_updates[feedback]",
+        "test_content_addressed_proof_feedback_updates_primary_and_auxiliary_heads"
+      ],
+      "passed": 3,
+      "rc": 1,
+      "session": 27757,
+      "skipped": 0,
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/baseline-v04/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 4773,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/baseline-v04/stdout.DATA",
+        "sha256": "fc2078be866f3a40311360cd9514821e54e4fdfe6c6019f74aa4ca8fb4ad1147"
+      },
+      "terminal_chunk": "3504df"
+    },
+    "earlier_candidate_replaced": {
+      "owner": {
+        "bytes": 40629,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/owner.after.py.DATA",
+        "sha256": "68768012dbf5da95a62c0a7143b861be9519c90f83d71bf6c54b096f2a66fa46"
+      },
+      "related48": {
+        "duplicates": 0,
+        "errors": 0,
+        "failure_details": [],
+        "failures": 0,
+        "junit": {
+          "bytes": 10032,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/candidate-related-retention/result.xml",
+          "sha256": "2fc1b7283f6ec3fc2603cf95bd73dd0f257456756da0bc912257ce9cc1b948c0"
+        },
+        "nodes": [
+          "test_all_required_skip_counters_are_explicit_and_weights_are_unchanged",
+          "test_production_enablement_and_passing_ablation_are_both_required",
+          "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[copy-rejected-guidance]",
+          "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[copy-rejected-feedback]",
+          "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[copy-span-rejected-guidance]",
+          "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[copy-span-rejected-feedback]",
+          "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[copied-span-rejected-guidance]",
+          "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[copied-span-rejected-feedback]",
+          "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[copy-guard-failed-guidance]",
+          "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[copy-guard-failed-feedback]",
+          "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[copy-passed-false-guidance]",
+          "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[copy-passed-false-feedback]",
+          "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[penalty-exceeded-guidance]",
+          "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[penalty-exceeded-feedback]",
+          "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[reward-penalty-exceeded-guidance]",
+          "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[reward-penalty-exceeded-feedback]",
+          "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[span-ratio-exceeded-guidance]",
+          "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[span-ratio-exceeded-feedback]",
+          "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[penalty-invalid-guidance]",
+          "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[penalty-invalid-feedback]",
+          "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[penalty-nonfinite-guidance]",
+          "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[penalty-nonfinite-feedback]",
+          "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[copy-reason-guidance]",
+          "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[copy-reason-feedback]",
+          "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[copy-reasons-guidance]",
+          "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[copy-reasons-feedback]",
+          "test_nested_feedback_outer_holdout_prevents_weight_updates[partition-guidance]",
+          "test_nested_feedback_outer_holdout_prevents_weight_updates[partition-feedback]",
+          "test_nested_feedback_outer_holdout_prevents_weight_updates[feedback_partition-guidance]",
+          "test_nested_feedback_outer_holdout_prevents_weight_updates[feedback_partition-feedback]",
+          "test_typed_nested_feedback_outer_rejection_prevents_weight_updates[accepted-guidance]",
+          "test_typed_nested_feedback_outer_rejection_prevents_weight_updates[accepted-feedback]",
+          "test_typed_nested_feedback_outer_rejection_prevents_weight_updates[trusted-guidance]",
+          "test_typed_nested_feedback_outer_rejection_prevents_weight_updates[trusted-feedback]",
+          "test_typed_nested_feedback_outer_view_conflict_prevents_weight_updates[legal_ir_view-guidance]",
+          "test_typed_nested_feedback_outer_view_conflict_prevents_weight_updates[legal_ir_view-feedback]",
+          "test_typed_nested_feedback_outer_view_conflict_prevents_weight_updates[target_component-guidance]",
+          "test_typed_nested_feedback_outer_view_conflict_prevents_weight_updates[target_component-feedback]",
+          "test_typed_nested_feedback_outer_view_conflict_prevents_weight_updates[target_view-guidance]",
+          "test_typed_nested_feedback_outer_view_conflict_prevents_weight_updates[target_view-feedback]",
+          "test_typed_nested_feedback_outer_version_conflict_prevents_weight_updates[proof_feedback_version_fingerprint-guidance]",
+          "test_typed_nested_feedback_outer_version_conflict_prevents_weight_updates[proof_feedback_version_fingerprint-feedback]",
+          "test_typed_nested_feedback_outer_version_conflict_prevents_weight_updates[version_fingerprint-guidance]",
+          "test_typed_nested_feedback_outer_version_conflict_prevents_weight_updates[version_fingerprint-feedback]",
+          "test_typed_nested_feedback_outer_version_conflict_prevents_weight_updates[model_version_fingerprint-guidance]",
+          "test_typed_nested_feedback_outer_version_conflict_prevents_weight_updates[model_version_fingerprint-feedback]",
+          "test_nested_feedback_guard_metadata_never_enters_real_update_payload[guidance]",
+          "test_nested_feedback_guard_metadata_never_enters_real_update_payload[feedback]"
+        ],
+        "passed": 48,
+        "rc": 0,
+        "session": 89815,
+        "skipped": 0,
+        "stderr": {
+          "bytes": 0,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/candidate-related-retention/stderr.DATA",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 364,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/candidate-related-retention/stdout.DATA",
+          "sha256": "fac0f4fe6ef72df54e60cdb2ce4b4d19d1993e7b8b08130cad8ce9c53bb6de1f"
+        },
+        "terminal_chunk": "a53201"
+      },
+      "same8": {
+        "duplicates": 0,
+        "errors": 0,
+        "failure_details": [],
+        "failures": 0,
+        "junit": {
+          "bytes": 1756,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/candidate-same8/result.xml",
+          "sha256": "37a9f911e04634c46f0f010b04c91ff0c2800a98255a1fd90917958d07d7829a"
+        },
+        "nodes": [
+          "test_typed_proof_feedback_cannot_update_an_unrelated_training_sample[inner-guidance]",
+          "test_typed_proof_feedback_cannot_update_an_unrelated_training_sample[inner-feedback]",
+          "test_typed_proof_feedback_cannot_update_an_unrelated_training_sample[outer]",
+          "test_typed_proof_feedback_cannot_update_an_unrelated_training_sample[inner-alias]",
+          "test_typed_proof_feedback_cannot_update_an_unrelated_training_sample[wrong-index-value]",
+          "test_typed_nested_feedback_matching_envelope_preserves_weight_updates[guidance]",
+          "test_typed_nested_feedback_matching_envelope_preserves_weight_updates[feedback]",
+          "test_content_addressed_proof_feedback_updates_primary_and_auxiliary_heads"
+        ],
+        "passed": 8,
+        "rc": 0,
+        "session": 89815,
+        "skipped": 0,
+        "stderr": {
+          "bytes": 0,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/candidate-same8/stderr.DATA",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 351,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/candidate-same8/stdout.DATA",
+          "sha256": "ee859b51333af07152bd1e6ec8856ace5e2effa7dd198dbb87202f5e0d7c24e0"
+        },
+        "terminal_chunk": "a53201"
+      }
+    },
+    "exact_candidate_related48": {
+      "duplicates": 0,
+      "errors": 0,
+      "failure_details": [],
+      "failures": 0,
+      "junit": {
+        "bytes": 10032,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/candidate-related-retention-v02/result.xml",
+        "sha256": "fe6120fbaa6016a8ab9d7013e1f71eec894fe7570907de7ccbc2231d73c4179f"
+      },
+      "nodes": [
+        "test_all_required_skip_counters_are_explicit_and_weights_are_unchanged",
+        "test_production_enablement_and_passing_ablation_are_both_required",
+        "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[copy-rejected-guidance]",
+        "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[copy-rejected-feedback]",
+        "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[copy-span-rejected-guidance]",
+        "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[copy-span-rejected-feedback]",
+        "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[copied-span-rejected-guidance]",
+        "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[copied-span-rejected-feedback]",
+        "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[copy-guard-failed-guidance]",
+        "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[copy-guard-failed-feedback]",
+        "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[copy-passed-false-guidance]",
+        "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[copy-passed-false-feedback]",
+        "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[penalty-exceeded-guidance]",
+        "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[penalty-exceeded-feedback]",
+        "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[reward-penalty-exceeded-guidance]",
+        "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[reward-penalty-exceeded-feedback]",
+        "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[span-ratio-exceeded-guidance]",
+        "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[span-ratio-exceeded-feedback]",
+        "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[penalty-invalid-guidance]",
+        "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[penalty-invalid-feedback]",
+        "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[penalty-nonfinite-guidance]",
+        "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[penalty-nonfinite-feedback]",
+        "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[copy-reason-guidance]",
+        "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[copy-reason-feedback]",
+        "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[copy-reasons-guidance]",
+        "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates[copy-reasons-feedback]",
+        "test_nested_feedback_outer_holdout_prevents_weight_updates[partition-guidance]",
+        "test_nested_feedback_outer_holdout_prevents_weight_updates[partition-feedback]",
+        "test_nested_feedback_outer_holdout_prevents_weight_updates[feedback_partition-guidance]",
+        "test_nested_feedback_outer_holdout_prevents_weight_updates[feedback_partition-feedback]",
+        "test_typed_nested_feedback_outer_rejection_prevents_weight_updates[accepted-guidance]",
+        "test_typed_nested_feedback_outer_rejection_prevents_weight_updates[accepted-feedback]",
+        "test_typed_nested_feedback_outer_rejection_prevents_weight_updates[trusted-guidance]",
+        "test_typed_nested_feedback_outer_rejection_prevents_weight_updates[trusted-feedback]",
+        "test_typed_nested_feedback_outer_view_conflict_prevents_weight_updates[legal_ir_view-guidance]",
+        "test_typed_nested_feedback_outer_view_conflict_prevents_weight_updates[legal_ir_view-feedback]",
+        "test_typed_nested_feedback_outer_view_conflict_prevents_weight_updates[target_component-guidance]",
+        "test_typed_nested_feedback_outer_view_conflict_prevents_weight_updates[target_component-feedback]",
+        "test_typed_nested_feedback_outer_view_conflict_prevents_weight_updates[target_view-guidance]",
+        "test_typed_nested_feedback_outer_view_conflict_prevents_weight_updates[target_view-feedback]",
+        "test_typed_nested_feedback_outer_version_conflict_prevents_weight_updates[proof_feedback_version_fingerprint-guidance]",
+        "test_typed_nested_feedback_outer_version_conflict_prevents_weight_updates[proof_feedback_version_fingerprint-feedback]",
+        "test_typed_nested_feedback_outer_version_conflict_prevents_weight_updates[version_fingerprint-guidance]",
+        "test_typed_nested_feedback_outer_version_conflict_prevents_weight_updates[version_fingerprint-feedback]",
+        "test_typed_nested_feedback_outer_version_conflict_prevents_weight_updates[model_version_fingerprint-guidance]",
+        "test_typed_nested_feedback_outer_version_conflict_prevents_weight_updates[model_version_fingerprint-feedback]",
+        "test_nested_feedback_guard_metadata_never_enters_real_update_payload[guidance]",
+        "test_nested_feedback_guard_metadata_never_enters_real_update_payload[feedback]"
+      ],
+      "passed": 48,
+      "rc": 0,
+      "session": 13162,
+      "skipped": 0,
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/candidate-related-retention-v02/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 368,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/candidate-related-retention-v02/stdout.DATA",
+        "sha256": "537dd710fd9c3715a9bd7a6ab513745d96c797cc009b2ea368e7fb3809ff383d"
+      },
+      "terminal_chunk": "239203"
+    },
+    "exact_candidate_same8": {
+      "duplicates": 0,
+      "errors": 0,
+      "failure_details": [],
+      "failures": 0,
+      "junit": {
+        "bytes": 1756,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/candidate-same8-v02/result.xml",
+        "sha256": "b409af56fb93fb404974f5183299b4876b79d5ee7b726f2109bf818ed23a44e5"
+      },
+      "nodes": [
+        "test_typed_proof_feedback_cannot_update_an_unrelated_training_sample[inner-guidance]",
+        "test_typed_proof_feedback_cannot_update_an_unrelated_training_sample[inner-feedback]",
+        "test_typed_proof_feedback_cannot_update_an_unrelated_training_sample[outer]",
+        "test_typed_proof_feedback_cannot_update_an_unrelated_training_sample[inner-alias]",
+        "test_typed_proof_feedback_cannot_update_an_unrelated_training_sample[wrong-index-value]",
+        "test_typed_nested_feedback_matching_envelope_preserves_weight_updates[guidance]",
+        "test_typed_nested_feedback_matching_envelope_preserves_weight_updates[feedback]",
+        "test_content_addressed_proof_feedback_updates_primary_and_auxiliary_heads"
+      ],
+      "passed": 8,
+      "rc": 0,
+      "session": 13162,
+      "skipped": 0,
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/candidate-same8-v02/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 355,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/candidate-same8-v02/stdout.DATA",
+        "sha256": "68a5df3ae453142bef14a87cb704c859d053b3190e3d8b10db6e405ae98172de"
+      },
+      "terminal_chunk": "239203"
+    }
+  },
+  "base_published_D_commit": "5fae066b5871d3fdf0b63dfbc4339c199ca6ffc1",
+  "compatibility": "Matching direct/nested typed records and legacy untyped envelopes keep existing behavior. Separate sample IDs need a separately verified binding rather than an envelope override; this does not authenticate source bytes, solver/reviewer identities or historical weights.",
+  "existing_task": "LIR-22",
+  "final_private_role_map": {
+    "bytes": 24485,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/existing-private-closure-final-v02.json",
+    "sha256": "0a6c9ce6706313713b950e96e8e60f431740e64d9728278f6e3de756448795db"
+  },
+  "implemented_guard": "Before either head update, bind the selected sample ID, resolved object's declared sample ID and every nonempty participating sample-ID alias in the typed inner/outer envelope to the immutable record's obligation ID. Preserve prior lookup and exception rollback ordering.",
+  "ordinary_Source_qualification": false,
+  "original_run_input": {
+    "bytes": 14612,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/private-trusted-feedback-run-inputs-v01.json",
+    "sha256": "0e67ab526bcfa8cdd35bcf26ecc57f82396f02d7165a79e64ef6b4b995ba21f2"
+  },
+  "prelaunch_metadata_diagnostics": [
+    "2e1d20: exact closure precheck stopped before runner launch",
+    "b6ef82: namespace initializer is absent; no runner launch"
+  ],
+  "published_or_installed": false,
+  "reproduced_issue": "A current typed record can be retargeted by selected feedback aliases or an index value with a different sample identity. The real in-memory modal autoencoder then updates the heads.",
+  "roles": [
+    {
+      "candidate": {
+        "bytes": 40652,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/owner.after.v02.py.DATA",
+        "sha256": "5274253f346efe110c5a69eec161e5dcb51ce858fae5f3275c045528b32273a5"
+      },
+      "current_Git_preimage": {
+        "bytes": 39519,
+        "oid": "2076e5c83eb68e94a6f1f0cee0539d12d69ae3a5",
+        "sha256": "14ce5de524d741db70e1b948864d6cab4c8cca687fca1774a66b72b8fffaabf3"
+      },
+      "diff": {
+        "bytes": 2254,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/trusted_feedback_trainer.py.v02.diff",
+        "sha256": "5fda24db3f7a5b501d51b5d81acab694d97ca7edeadd55a934aaba51765cef35"
+      },
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py"
+    },
+    {
+      "candidate": {
+        "bytes": 37429,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/owning-test.after.py.DATA",
+        "sha256": "9ea38219594c8f5841fec7dbd2ad6da8925147eda44cb0ca9df2cff0fc5a2d7e"
+      },
+      "current_Git_preimage": {
+        "bytes": 35120,
+        "oid": "dce41c5d475c960d22e7d95830747b432dcc71a9",
+        "sha256": "1f069ecee9bf1ebb343e436d1a0f5123c536bc5ef88d47bb82a04b128d64960f"
+      },
+      "diff": {
+        "bytes": 2657,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/test_trusted_feedback_weight_updates.py.v02.diff",
+        "sha256": "7179251975f1f9fc3ecaf16f8ae5df1898aa2c3fe2f2da7dc1ba4578c42c7998"
+      },
+      "relative_path": "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py"
+    }
+  ],
+  "runtime_scope": {
+    "actual_guarded_authored_in_memory_updates": true,
+    "pretrained_or_new_model_fit": false,
+    "statutory_review_or_proof_authority": false,
+    "worker_launch_under_SDK_or_Native_lease": false
+  },
+  "schema": "actual-LIR22-trusted-feedback-sample-binding-private-v02",
+  "setup_refusals": [
+    {
+      "junit": {
+        "bytes": 1700,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/baseline/result.xml",
+        "sha256": "f998879eea84af16992a971673cfc98fc0ac157ba08e0080781f9c122b9ae984"
+      },
+      "stage": "baseline",
+      "stdout": {
+        "bytes": 1866,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/baseline/stdout.DATA",
+        "sha256": "b01152610e5dd8210d7354dfa09c62f705bb93693b538a6ecce69bc2f8625855"
+      }
+    },
+    {
+      "junit": {
+        "bytes": 1852,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/baseline-v02/result.xml",
+        "sha256": "9f00a627555ba22a3da9d7a61846abe548bd5023deaf78c6a38367ad37aae64b"
+      },
+      "stage": "baseline-v02",
+      "stdout": {
+        "bytes": 2016,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/baseline-v02/stdout.DATA",
+        "sha256": "fbf257e63f27e9662ef0ccd17fe67e77c4061c73c6566ecd944413acda591c31"
+      }
+    },
+    {
+      "junit": {
+        "bytes": 2014,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/baseline-v03/result.xml",
+        "sha256": "5a29c67b4c930c525f6e3b319a6b496f100569a4574b4081a1a7a0a8257791d3"
+      },
+      "stage": "baseline-v03",
+      "stdout": {
+        "bytes": 2172,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/baseline-v03/stdout.DATA",
+        "sha256": "49f863a13ca1c6f32e751657d5b3f13efa29ff98154ec2e509ea687bbe1b7118"
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+test_ascii_recomputed_across_unicode_training_history (_current_retained_unicode_history_fixture.UnicodeHistoryControls.test_ascii_recomputed_across_unicode_training_history) ... ok
+test_committed_near_keys_still_block_mixed_profile_history (_current_retained_unicode_history_fixture.UnicodeHistoryControls.test_committed_near_keys_still_block_mixed_profile_history) ... ok
+test_exact_unicode_replays_and_old_guard_refuses (_current_retained_unicode_history_fixture.UnicodeHistoryControls.test_exact_unicode_replays_and_old_guard_refuses) ... ok
+test_mixed_candidate_pairs_share_the_existing_aggregate_bound (_current_retained_unicode_history_fixture.UnicodeHistoryControls.test_mixed_candidate_pairs_share_the_existing_aggregate_bound) ... ok
+test_profile_cannot_change_when_its_fingerprint_happens_to_match (_current_retained_unicode_history_fixture.UnicodeHistoryControls.test_profile_cannot_change_when_its_fingerprint_happens_to_match) ... ok
+test_unicode_recomputed_across_legacy_holdout_keeps_withdrawal (_current_retained_unicode_history_fixture.UnicodeHistoryControls.test_unicode_recomputed_across_legacy_holdout_keeps_withdrawal) ... ok
+test_unknown_or_stale_profile_refused_even_in_empty_manifest (_current_retained_unicode_history_fixture.UnicodeHistoryControls.test_unknown_or_stale_profile_refused_even_in_empty_manifest) ... ok
+test_unmarked_legacy_uses_old_owner_and_matches_exact_guard_result (_current_retained_unicode_history_fixture.UnicodeHistoryControls.test_unmarked_legacy_uses_old_owner_and_matches_exact_guard_result) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.060s
+
+OK

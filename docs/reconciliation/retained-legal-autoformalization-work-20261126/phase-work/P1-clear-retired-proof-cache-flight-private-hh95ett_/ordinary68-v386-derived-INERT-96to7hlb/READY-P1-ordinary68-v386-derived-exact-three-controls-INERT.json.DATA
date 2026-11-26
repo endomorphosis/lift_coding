@@ -1,0 +1,528 @@
+{
+  "schema": "P1-clear-retired-flight-ordinary68-v386-derived-inert-controls/v1",
+  "input_READY": {
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/READY-P1-clear-retired-flight-exact3-no-Native-repin-ordinary68-INERT.json",
+    "bytes": 49463,
+    "sha256": "a441c7b093b56fb354295cbb406f5988f6d0784e70e7c83aed8b4adbb315cf28"
+  },
+  "exact_three_private_candidate": {
+    "bytes": 14081,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/SEALED-private-P1-clear-retired-flight-three-file-red-green.json",
+    "sha256": "1908bb8d90fb2272295fe34e3c941a2e419110d38b1df8218e0d6edb9c69c10d"
+  },
+  "controls": {
+    "operator": {
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/ordinary68-v386-derived-INERT-96to7hlb/P1-ordinary68-operator-v386-derived.INERT.py.DATA",
+      "bytes": 80474,
+      "sha256": "c422449267e80a26ff405f0aafcea88d21ce3bb236a081ae52e54e981e71d448"
+    },
+    "bootstrap": {
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/ordinary68-v386-derived-INERT-96to7hlb/P1-ordinary68-bootstrap-v386-derived.INERT.py.DATA",
+      "bytes": 50710,
+      "sha256": "affeda8390f9bda3905033ad3a894166b054d32f71bc7f3704f2e626532813c0"
+    },
+    "factory": {
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/ordinary68-v386-derived-INERT-96to7hlb/P1-ordinary68-factory-v386-derived.INERT.py.DATA",
+      "bytes": 3342,
+      "sha256": "12e30816622f3e35f2447148fe33c5917c083070ea21321e9d3379dfc7672e8f"
+    }
+  },
+  "inherited_v386_controls": {
+    "operator": {
+      "path": "/tmp/Root-Phase8-existing-exact5-ordinary62-v386-F1FCg2wr/Root-selected-Phase8-existing-ordinary62-operator.py",
+      "bytes": 103360,
+      "sha256": "7b58cffd414794f08a0b87834df2a18d0f5784772d959f77aa34d37253d4e5be"
+    },
+    "bootstrap": {
+      "path": "/tmp/Root-Phase8-existing-exact5-ordinary62-v386-F1FCg2wr/Root-selected-bootstrap.py",
+      "bytes": 68016,
+      "sha256": "b18fbf3e35bac34cc48d453285ba4cdc6ccea29c8101bcb5be108f832d133d80"
+    },
+    "factory": {
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-evidence-compiler-combined-exact5-private-v01/existing-v379-ordinary62-INERT-v5qvtpql/Phase8-factory-v379-derived.INERT.py.DATA",
+      "bytes": 3366,
+      "sha256": "15592e2ad3808ce513ae03db7a4bac72189f819252a6dd6a56c9babb798c78a8"
+    }
+  },
+  "private_forward_diffs": {
+    "operator": {
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/ordinary68-v386-derived-INERT-96to7hlb/operator.forward.patch.DATA",
+      "bytes": 102259,
+      "sha256": "0e31b03154a9f5f51f7592b3545d66341a7769f1f1d80e65335845b3a1c513bf"
+    },
+    "bootstrap": {
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/ordinary68-v386-derived-INERT-96to7hlb/bootstrap.forward.patch.DATA",
+      "bytes": 59133,
+      "sha256": "40e7df3cae117b20f5f1bc797d216c56202e4914d94f155c10ca769976048138"
+    },
+    "factory": {
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/ordinary68-v386-derived-INERT-96to7hlb/factory.forward.patch.DATA",
+      "bytes": 3933,
+      "sha256": "b8585f91c373fec2f9f2169be3219de7cb5f369bf433cbeb60b1cb107e6dc753"
+    }
+  },
+  "existing_shape": {
+    "phase": "frozen-local-D-P1-proof-cache-clear-retired-flight-ordinary68",
+    "group": "P1-proof-cache-clear-retired-flight-ordinary68",
+    "operator_cli": [
+      "READ_binding_path",
+      "READ_binding_bytes",
+      "READ_binding_sha256"
+    ],
+    "D_READ_binding_static_ABI": {
+      "outer_count_key": "outer_epoch_record_count",
+      "outer_epoch_key": "outer_epoch_reference",
+      "protected_index_key": "protected_index_reference",
+      "python_count_key": "python_epoch_record_count",
+      "python_epoch_key": "python_epoch_reference",
+      "required_true_keys": [
+        "Root_selected",
+        "Source_closed",
+        "owned_module_closed"
+      ],
+      "schema": "actual-D27-observed-D-root-initializer-READ-small-closeout/v1"
+    },
+    "bootstrap_inputs": [
+      "bootstrap.py",
+      "source-epoch.json",
+      "request.json"
+    ],
+    "source_epoch_input": "Exact outer epoch bytes with a separately authenticated Python subset",
+    "bootstrap_outputs": {
+      "collect": [
+        "binding.json"
+      ],
+      "run": [
+        "binding.json",
+        "junit.xml"
+      ]
+    },
+    "binding_schema": "frozen-local-D-phase2-bridge27-binding/v1",
+    "selected_test_rewrite_policy": {
+      "schema": "selected-test-normal-pytest-source-AST-code-observation/v1",
+      "cache_policy": "bypass-read-only-for-selected-owning-test",
+      "rewrite_policy": "normal-pytest-assertion-rewrite",
+      "selected_test_binding_names": [
+        "tests.unit.optimizers.logic_theorem_optimizer.test_compiler_system_promotion_gate",
+        "tests.unit.optimizers.logic_theorem_optimizer.test_external_validity_promotion_gate",
+        "tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark"
+      ],
+      "unobserved_or_cached_only_route": "REFUSE",
+      "required_compile_and_execution_witness": true
+    }
+  },
+  "static_test_intent": {
+    "selection": {
+      "function_count": 37,
+      "literal_expected_cases": 68,
+      "function_selectors": [
+        "tests/unit/logic/test_duckdb_proof_store.py::test_interfaces_schema_and_catalog_are_pinned",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_module_import_is_inert_without_duckdb",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_all_authority_dimensions_are_present_and_nonempty",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_authority_dimensions_cover_hammer_and_verification_surfaces",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_hammer_key_projection_retains_authority_dimensions",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_verification_cache_key_lift_retains_all_dimensions",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_kinds_are_closed_and_distinct",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_proof_and_counterexample_entries_are_not_interchangeable",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_unknown_and_error_entries_remain_distinct",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_mismatched_outcome_and_status_rejected",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_entry_integrity_round_trip_and_tamper_rejection",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_unknown_key_fields_fail_closed",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_unknown_entry_fields_fail_closed",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_unsupported_key_schema_fails_closed",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_store_lookup_exact_key_miss_on_dimension_change",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_store_rejects_tampered_in_memory_entry",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_unified_key_must_project_to_matching_verification_key",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_trust_levels_project_from_evidence_authority",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_trust_cannot_exceed_evidence_authority",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_evidence_and_envelope_round_trip",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_envelope_rejects_filesystem_path_authority",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_access_statistics_track_hits_misses_writes",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_store_implements_verification_cache_put_get",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_verification_cache_entry_can_be_put_directly",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_exact_verification_cache_interop_bridge",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_invalidate_and_clear",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_get_or_compute_single_flight_and_store",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_clear_discards_pending_single_flight_result",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_clear_preserves_replacement_flight",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_negative_ttl_expires_unknown_faster_than_proof",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_trust_ceiling_rejects_raise",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_empty_backend_id_rejected",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_premises_digest_changes_with_premise_set",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_advisory_verification_projection_uses_target_status_polarity",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_store_put_retains_advisory_candidate_without_proof_authority"
+      ],
+      "expected_function_case_counts": {
+        "tests/unit/logic/test_duckdb_proof_store.py::test_interfaces_schema_and_catalog_are_pinned": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_module_import_is_inert_without_duckdb": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_all_authority_dimensions_are_present_and_nonempty": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_authority_dimensions_cover_hammer_and_verification_surfaces": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest": 15,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_hammer_key_projection_retains_authority_dimensions": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_verification_cache_key_lift_retains_all_dimensions": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_kinds_are_closed_and_distinct": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct": 13,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_proof_and_counterexample_entries_are_not_interchangeable": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_unknown_and_error_entries_remain_distinct": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_mismatched_outcome_and_status_rejected": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_entry_integrity_round_trip_and_tamper_rejection": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_unknown_key_fields_fail_closed": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_unknown_entry_fields_fail_closed": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_unsupported_key_schema_fails_closed": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_store_lookup_exact_key_miss_on_dimension_change": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_store_rejects_tampered_in_memory_entry": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_unified_key_must_project_to_matching_verification_key": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_trust_levels_project_from_evidence_authority": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_trust_cannot_exceed_evidence_authority": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_evidence_and_envelope_round_trip": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_envelope_rejects_filesystem_path_authority": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_access_statistics_track_hits_misses_writes": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_store_implements_verification_cache_put_get": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_verification_cache_entry_can_be_put_directly": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_exact_verification_cache_interop_bridge": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_invalidate_and_clear": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_get_or_compute_single_flight_and_store": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_clear_discards_pending_single_flight_result": 2,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_clear_preserves_replacement_flight": 4,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_negative_ttl_expires_unknown_faster_than_proof": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_trust_ceiling_rejects_raise": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_empty_backend_id_rejected": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_premises_digest_changes_with_premise_set": 1,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_advisory_verification_projection_uses_target_status_polarity": 2,
+        "tests/unit/logic/test_duckdb_proof_store.py::test_store_put_retains_advisory_candidate_without_proof_authority": 1
+      },
+      "literal_expected_nodeids": [
+        "tests/unit/logic/test_duckdb_proof_store.py::test_interfaces_schema_and_catalog_are_pinned",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_module_import_is_inert_without_duckdb",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_all_authority_dimensions_are_present_and_nonempty",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_authority_dimensions_cover_hammer_and_verification_surfaces",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[ir-override0]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[property_value-override1]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[assumptions-override2]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[selected_premises-override3]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[translator-override4]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[solver_identities-override5]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[toolchain-override6]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[theorem_registry-override7]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[policy-override8]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[resources-override9]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[tree-override10]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[backend_id-override11]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[backend_binary-override12]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[backend_version-override13]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[backend_config-override14]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_hammer_key_projection_retains_authority_dimensions",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_verification_cache_key_lift_retains_all_dimensions",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_kinds_are_closed_and_distinct",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[proved-proof]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[unsatisfiable-proof]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[attested-proof]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[disproved-counterexample]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[satisfiable-counterexample]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[attack_found-counterexample]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[unknown-unknown]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[candidate-unknown]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[error-error]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[timeout-error]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[malformed-error]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[unavailable-error]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[unsupported-error]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_proof_and_counterexample_entries_are_not_interchangeable",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_unknown_and_error_entries_remain_distinct",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_mismatched_outcome_and_status_rejected",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_entry_integrity_round_trip_and_tamper_rejection",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_unknown_key_fields_fail_closed",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_unknown_entry_fields_fail_closed",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_unsupported_key_schema_fails_closed",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_store_lookup_exact_key_miss_on_dimension_change",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_store_rejects_tampered_in_memory_entry",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_unified_key_must_project_to_matching_verification_key",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_trust_levels_project_from_evidence_authority",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_trust_cannot_exceed_evidence_authority",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_evidence_and_envelope_round_trip",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_envelope_rejects_filesystem_path_authority",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_access_statistics_track_hits_misses_writes",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_store_implements_verification_cache_put_get",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_verification_cache_entry_can_be_put_directly",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_exact_verification_cache_interop_bridge",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_invalidate_and_clear",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_get_or_compute_single_flight_and_store",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_clear_discards_pending_single_flight_result[DuckDBProofStore]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_clear_discards_pending_single_flight_result[ExactVerificationCache]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_clear_preserves_replacement_flight[late-success-DuckDBProofStore]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_clear_preserves_replacement_flight[late-success-ExactVerificationCache]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_clear_preserves_replacement_flight[late-error-DuckDBProofStore]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_clear_preserves_replacement_flight[late-error-ExactVerificationCache]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_negative_ttl_expires_unknown_faster_than_proof",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_trust_ceiling_rejects_raise",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_empty_backend_id_rejected",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_premises_digest_changes_with_premise_set",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_advisory_verification_projection_uses_target_status_polarity[candidate-positive]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_advisory_verification_projection_uses_target_status_polarity[unknown-negative]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_store_put_retains_advisory_candidate_without_proof_authority"
+      ],
+      "owning_files": [
+        "tests/unit/logic/test_duckdb_proof_store.py"
+      ]
+    },
+    "ordered_function_case_count_vector": [
+      1,
+      1,
+      1,
+      1,
+      15,
+      1,
+      1,
+      1,
+      13,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      2,
+      4,
+      1,
+      1,
+      1,
+      1,
+      2,
+      1
+    ],
+    "independent_subcohorts": {
+      "retained62": [
+        "tests/unit/logic/test_duckdb_proof_store.py::test_interfaces_schema_and_catalog_are_pinned",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_module_import_is_inert_without_duckdb",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_all_authority_dimensions_are_present_and_nonempty",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_authority_dimensions_cover_hammer_and_verification_surfaces",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[ir-override0]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[property_value-override1]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[assumptions-override2]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[selected_premises-override3]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[translator-override4]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[solver_identities-override5]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[toolchain-override6]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[theorem_registry-override7]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[policy-override8]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[resources-override9]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[tree-override10]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[backend_id-override11]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[backend_binary-override12]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[backend_version-override13]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[backend_config-override14]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_hammer_key_projection_retains_authority_dimensions",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_verification_cache_key_lift_retains_all_dimensions",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_kinds_are_closed_and_distinct",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[proved-proof]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[unsatisfiable-proof]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[attested-proof]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[disproved-counterexample]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[satisfiable-counterexample]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[attack_found-counterexample]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[unknown-unknown]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[candidate-unknown]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[error-error]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[timeout-error]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[malformed-error]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[unavailable-error]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[unsupported-error]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_proof_and_counterexample_entries_are_not_interchangeable",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_unknown_and_error_entries_remain_distinct",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_mismatched_outcome_and_status_rejected",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_entry_integrity_round_trip_and_tamper_rejection",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_unknown_key_fields_fail_closed",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_unknown_entry_fields_fail_closed",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_unsupported_key_schema_fails_closed",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_store_lookup_exact_key_miss_on_dimension_change",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_store_rejects_tampered_in_memory_entry",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_unified_key_must_project_to_matching_verification_key",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_trust_levels_project_from_evidence_authority",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_trust_cannot_exceed_evidence_authority",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_evidence_and_envelope_round_trip",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_envelope_rejects_filesystem_path_authority",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_access_statistics_track_hits_misses_writes",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_store_implements_verification_cache_put_get",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_verification_cache_entry_can_be_put_directly",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_exact_verification_cache_interop_bridge",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_invalidate_and_clear",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_get_or_compute_single_flight_and_store",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_negative_ttl_expires_unknown_faster_than_proof",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_trust_ceiling_rejects_raise",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_empty_backend_id_rejected",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_premises_digest_changes_with_premise_set",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_advisory_verification_projection_uses_target_status_polarity[candidate-positive]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_advisory_verification_projection_uses_target_status_polarity[unknown-negative]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_store_put_retains_advisory_candidate_without_proof_authority"
+      ],
+      "new6": [
+        "tests/unit/logic/test_duckdb_proof_store.py::test_clear_discards_pending_single_flight_result[DuckDBProofStore]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_clear_discards_pending_single_flight_result[ExactVerificationCache]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_clear_preserves_replacement_flight[late-success-DuckDBProofStore]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_clear_preserves_replacement_flight[late-success-ExactVerificationCache]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_clear_preserves_replacement_flight[late-error-DuckDBProofStore]",
+        "tests/unit/logic/test_duckdb_proof_store.py::test_clear_preserves_replacement_flight[late-error-ExactVerificationCache]"
+      ]
+    },
+    "maintained_owner_names": [
+      "ipfs_datasets_py.logic.backends.cache_protocol",
+      "ipfs_datasets_py.logic.common.duckdb_proof_store"
+    ],
+    "selected_test_modules": {
+      "tests/unit/logic/test_duckdb_proof_store.py": "tests.unit.logic.test_duckdb_proof_store"
+    },
+    "required_fixture_closure": [],
+    "ordinary_pytest_ini": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/pytest.ini",
+    "required_normal_conftests": [
+      "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/conftest.py",
+      "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/conftest.py",
+      "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/conftest.py"
+    ],
+    "expected_relative_D_absences": [
+      "tests/unit/logic/__init__.py",
+      "tests/unit/logic/conftest.py"
+    ],
+    "expected_A_validation_runtime_marker_absence": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate/ipfs_accelerate_py/agent_supervisor/validation_runtime.py",
+    "supporting_roles_prior_metadata_only": [
+      "ipfs_datasets_py/__init__.py",
+      "ipfs_datasets_py/logic/__init__.py",
+      "ipfs_datasets_py/logic/backends/results.py",
+      "ipfs_datasets_py/logic/common/__init__.py",
+      "ipfs_datasets_py/logic/common/bounded_cache.py",
+      "ipfs_datasets_py/logic/common/converters.py",
+      "ipfs_datasets_py/logic/common/errors.py",
+      "ipfs_datasets_py/logic/common/feature_detection.py",
+      "ipfs_datasets_py/logic/common/proof_cache.py",
+      "ipfs_datasets_py/logic/common/utility_monitor.py",
+      "ipfs_datasets_py/logic/common/validators.py",
+      "ipfs_datasets_py/logic/families/models.py",
+      "ipfs_datasets_py/logic/ir_core/__init__.py",
+      "ipfs_datasets_py/logic/ir_core/claims.py",
+      "ipfs_datasets_py/logic/ir_core/protocols.py"
+    ],
+    "fresh_READ_intent": {
+      "add_owning_test_row": [
+        "tests/unit/logic/test_duckdb_proof_store.py"
+      ],
+      "conditional_outer_count": 1543,
+      "keep_current_A_provenance": true,
+      "refresh_protected_D_index_row": true,
+      "replace_two_owner_rows": [
+        "ipfs_datasets_py/logic/backends/cache_protocol.py",
+        "ipfs_datasets_py/logic/common/duckdb_proof_store.py"
+      ]
+    },
+    "planned_runtime": {
+      "resource_profile": "Inherited R2 validation CPU1, 4096 MiB resident and one SDK child slot",
+      "test_effect": "In-memory cache operations with worker threads in the ordinary pytest process",
+      "SQL_Native_model_or_cli_descendants_selected": false
+    }
+  },
+  "late_authority_and_live_bindings": {
+    "operator_null_fields": [
+      "ROOT_SELECTION",
+      "ROOT_RUNTIME_SELECTION",
+      "FINAL_OUTPUT_PATH",
+      "FINAL_D_ROOT",
+      "FINAL_D_HEAD",
+      "FINAL_D_TREE",
+      "FINAL_A_ROOT",
+      "FINAL_A_HEAD",
+      "FINAL_A_TREE",
+      "D_READ_BINDING_REFERENCE",
+      "FINAL_BINDING_MANIFEST_REFERENCE",
+      "FINAL_BINDING_MANIFEST",
+      "FINAL_MODULE_BINDINGS",
+      "FINAL_D_PROVENANCE",
+      "FINAL_A_PROVENANCE",
+      "FINAL_SOURCE_PROJECTS",
+      "FINAL_SDK_BINDINGS",
+      "FINAL_RESOURCE_STATE_PATH",
+      "FINAL_EXPECTED_RESOURCE_CONFIG",
+      "FINAL_EXPECTED_CAPACITY",
+      "FINAL_FIXTURE_CLOSURE_REFERENCE",
+      "FINAL_EFFECT_DECISION_REFERENCE",
+      "FINAL_EFFECT_DECISION",
+      "FINAL_ADMITTED_IO_PLAN_REFERENCE",
+      "FINAL_ABSENT_PATHS"
+    ],
+    "bootstrap_null_fields": [
+      "ROOT",
+      "ADDITIONAL_A_ROOT",
+      "EXPECTED_MODULES",
+      "REQUIRED_CANONICAL_CONFTESTS",
+      "PYTEST_INIFILE",
+      "ROOT_RUNTIME_SELECTION",
+      "GIT_CANDIDATE_PROVENANCE",
+      "ADDITIONAL_A_PROVENANCE",
+      "BINDING_MANIFEST_REFERENCE",
+      "SOURCE_READ_BINDING_REFERENCE",
+      "ADMITTED_IO_PLAN_REFERENCE",
+      "EFFECT_DECISION_REFERENCE",
+      "SOURCE_EPOCH_SHA256",
+      "SOURCE_EPOCH_RECORD_COUNT"
+    ],
+    "actual_D_A_Git_Source_and_index": null,
+    "actual_epoch_and_resource_pins": null,
+    "actual_selection_clock_effect_and_IO": null,
+    "actual_output_and_result": null
+  },
+  "static_checks": {
+    "three_controls_compiled_to_code_objects_without_execution": true,
+    "roster_matches_exact_private_owning_test_AST_first_appearance": true,
+    "all_37_function_counts_and_62_plus_6_partition_match_held_READY": true,
+    "unchanged_function_AST": {
+      "operator": [
+        "read_private",
+        "validate_runtime_authority",
+        "metadata_guard",
+        "genuine",
+        "observe_state",
+        "run_phase_with_actual_custody",
+        "retain_json",
+        "retain_bytes",
+        "retain_phase_result",
+        "require_actual_rewrite_witness",
+        "reconcile_junit",
+        "tracked_source_read"
+      ],
+      "bootstrap": [
+        "validate_runtime_authority",
+        "exact",
+        "body_identity",
+        "audit_configuration",
+        "audit_modules",
+        "SelectedTestRewriteObserver",
+        "normalized"
+      ]
+    },
+    "operator_finalizer_control_flow_preserved_with_output_label_rebound": true,
+    "offline_environment_Source42_implementation_and_rewrite_policy_unchanged": true,
+    "no_rollout_only_or_CLI_descendant_assertions_remain": true
+  },
+  "scope": {
+    "inert_private_prep_only": true,
+    "Git_or_Source_mutation": false,
+    "Source_API_called": false,
+    "root_candidate_observed_by_this_composer": false,
+    "tests_imported_or_run": false,
+    "SDK_or_subprocess_fixture_launched": false,
+    "ordinary_SQL_Native_or_model_qualification": false
+  }
+}

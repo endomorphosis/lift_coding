@@ -1,0 +1,125 @@
+{
+  "baseline_files_same_in_both": true,
+  "canonical_installation": false,
+  "contract": "Opt-in expected_external_benchmark binds a separately supplied digest and exact ordered packet IDs. Explicit unmeasured semantic evidence cannot accompany accepted raw benchmark rows.",
+  "current_D": "0ad89e81ffa91e24279ebdd9d675c47c781a0940",
+  "files": [
+    {
+      "after": {
+        "bytes": 224287,
+        "git_blob": "da9d7603679ecc3bfc2f822a152d0f93147fa830",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-gate-selected-population-private-Yr0fl92H/rollout.after.py.DATA",
+        "sha256": "43eba36819cd183cee96fddda113386964b7233a1a7a1750b3f27423f69961f1"
+      },
+      "before": {
+        "bytes": 221541,
+        "git_blob": "1404a2a89a9b1c1935a91334b0b9171d564340f1",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-gate-selected-population-private-Yr0fl92H/rollout.before.py.DATA",
+        "sha256": "9785ff320f6ab5b16e9c933d6519cfed5b0abe2b7d9db58a363a782b612b167c"
+      },
+      "relative_path": "scripts/ops/legal_ir/hammer_leanstral_rollout_gate.py",
+      "role": "owner"
+    },
+    {
+      "after": {
+        "bytes": 20761,
+        "git_blob": "f98253525e674b0e749e9026050588604080b096",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-gate-selected-population-private-Yr0fl92H/test-cohort-v03/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py",
+        "sha256": "7423913c716018d842a41b4c42ee38a6e9e47b1bb75c30dc11484539917350c5"
+      },
+      "before": {
+        "bytes": 15741,
+        "git_blob": "4f0c8b9a9db1a70c17b75ee83c578e45f2783fe6",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-gate-selected-population-private-Yr0fl92H/test.before.py.DATA",
+        "sha256": "dfbf3ace8d5d0fa5b6e16bacd4c0ffedb80b8d636f29e398299a80e7ceef1a43"
+      },
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py",
+      "role": "test"
+    }
+  ],
+  "fixture_scope": "Existing fictional benchmark packet population and declarative promotion evidence",
+  "forward_and_inverse_byte_verified": true,
+  "measured_rollout_and_final_compiler": {
+    "after-v03": {
+      "failed": 0,
+      "passed": 23,
+      "raw_JUnit": {
+        "bytes": 5025,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-gate-selected-population-private-Yr0fl92H/after-v03/junit.xml",
+        "sha256": "055fa4ad8e7a6471f0a39fb48bc677d022aa0d5d30ffbabfc8a445ced4b58138"
+      },
+      "witness": {
+        "bytes": 293,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-gate-selected-population-private-Yr0fl92H/after-v03/run.json",
+        "sha256": "31f4e3806f2bf3d607722b86e1d60b8712d06f632ee5a49e1d6dfd07ab6a9174"
+      }
+    },
+    "before-v03": {
+      "failed": 6,
+      "passed": 17,
+      "raw_JUnit": {
+        "bytes": 12614,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-gate-selected-population-private-Yr0fl92H/before-v03/junit.xml",
+        "sha256": "41d2a7c135b778d19fafdb1ad4719dfbd4219d18b49a064f48653e0b6e82c72f"
+      },
+      "witness": {
+        "bytes": 293,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-gate-selected-population-private-Yr0fl92H/before-v03/run.json",
+        "sha256": "14dc2ea3f916ecb8ad20c6e85aeae35ebe29a14c14a67f7c0ba599ce4c724415"
+      }
+    },
+    "compiler-interop-v02": {
+      "failed": 0,
+      "passed": 2,
+      "raw_JUnit": {
+        "bytes": 635,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-gate-selected-population-private-Yr0fl92H/compiler-interop-v02/junit.xml",
+        "sha256": "1d874326ea1c55bd848d30da8facd7960a49d71c7ebafdcc8541820d347de2fd"
+      },
+      "witness": {
+        "bytes": 326,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-gate-selected-population-private-Yr0fl92H/compiler-interop-v02/run.json",
+        "sha256": "46287721f3bb9c2ada740bda020b8f550f2718fb7b47a4dbd46fc62e21714b71"
+      }
+    }
+  },
+  "no_project_subprocesses": true,
+  "ordinary_qualification": false,
+  "patches": {
+    "forward": {
+      "bytes": 9195,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-gate-selected-population-private-Yr0fl92H/exact2.forward.diff",
+      "sha256": "3164556c6cf2e4f946a31ce5ed8b2b2619d31f6e559b85193e20c777447d0294"
+    },
+    "inverse": {
+      "bytes": 9195,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-gate-selected-population-private-Yr0fl92H/exact2.inverse.diff",
+      "sha256": "4f2700288820fa61744958a73ab406d7959a14fdd66f7d9b3fafef8f04cd19f8"
+    }
+  },
+  "preserve_existing_no_expected_population_inputs": true,
+  "prior_attempts_observed": {
+    "initial_21_green": {
+      "bytes": 4582,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-gate-selected-population-private-Yr0fl92H/after-v02/junit.xml",
+      "sha256": "1ed10e622c701b9d5d4ddf05631f385cd10e9a539c61443ba5a7eb11364ec6a5"
+    },
+    "initial_21_red": {
+      "bytes": 9395,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-gate-selected-population-private-Yr0fl92H/before/junit.xml",
+      "sha256": "4495c9e0227b70c38746dbf5b6f6937ce11489381ec641fc7fd1459a5b38d748"
+    },
+    "initial_compiler_wrapper_exact_overlay_observation_multiple_imports": {
+      "bytes": 635,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-gate-selected-population-private-Yr0fl92H/compiler-interop/junit.xml",
+      "sha256": "465fb74b49c45ad2d89ed3ecaf093d24c3378ccf1631f8e8d37ccc63c1da2fc8"
+    },
+    "literal_patch_preflight": {
+      "bytes": 137,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-gate-selected-population-private-Yr0fl92H/initial-overlay-preflight-refusal.json",
+      "sha256": "8f45dfad5cda6c24f0198a7da62cb7a29c7b016ef63de131c1592c5f8b788699"
+    }
+  },
+  "published_D": "ff513adcfc94f48f0c76c8639dc10a1cd213264d",
+  "schema": "phase8-selected-external-benchmark-population-rollout-exact2-private/v1"
+}

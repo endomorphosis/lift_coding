@@ -1,0 +1,179 @@
+"""Change only the inherited private operator's custody function after saved RED."""
+from __future__ import annotations
+import ast
+import copy
+import difflib
+import hashlib
+import json
+import os
+from pathlib import Path
+import stat
+import textwrap
+
+HERE = Path(__file__).parent
+BASE = HERE / 'existing-v567-Native3-current-operator-INERT-v01.py.DATA'
+EXPECTED = (35401, '4b844f5645a6607f184d9aa64b2203686effe1d4eb2b02a97a43afb83f0a04e0')
+FIELDS = ('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
+
+
+def read_exact(path, expected):
+    before=path.lstat();fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW)
+    try:
+        raw=b''
+        while piece:=os.read(fd,65536):raw+=piece
+        assert all(getattr(before,k)==getattr(os.fstat(fd),k)==getattr(path.lstat(),k) for k in FIELDS)
+    finally:os.close(fd)
+    assert stat.S_ISREG(before.st_mode) and before.st_nlink==1 and (len(raw),hashlib.sha256(raw).hexdigest())==expected
+    return raw
+
+
+def seal(name, raw):
+    path=HERE/name;fd=os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400)
+    try:
+        todo=memoryview(raw)
+        while todo:
+            n=os.write(fd,todo);assert n>0;todo=todo[n:]
+        os.fsync(fd)
+    finally:os.close(fd)
+    digest=hashlib.sha256(raw).hexdigest();assert read_exact(path,(len(raw),digest))==raw
+    return {'path':str(path),'bytes':len(raw),'sha256':digest}
+
+
+FUNCTION = '''\
+def run_with_actual_custody(method, request, **kwargs):
+    native_guard()
+    returned_result = None
+    retained_result = None
+    try:
+        result = method(request, **kwargs)
+        returned_result = result
+        retain_sdk_result(result, request, returned=True)
+        retained_result = result
+        native_guard()
+        return result
+    except BaseException as error:
+        # Keep the actual primary exception and exact result objects alive in this frame.
+        actual_result = returned_result if type(returned_result) is sdk.ToolRunResult else None
+        secondary_errors = []
+        handle = error.cleanup_handle if type(error) is sdk.OwnedToolCleanupError else None
+        if type(handle) is not sdk.NativeToolCleanupHandle:
+            handle = None
+        pending = {'owner': 'existing SDK ordinary owned-process cleanup',
+                   'SDK_returned_result': returned_result is not None,
+                   'observations': [], 'attempts': 0,
+                   'original_error_type': type(error).__name__}
+        report['owned_cleanup_pending'] = pending
+        current = error.__traceback__
+        while current is not None:
+            code = current.tb_frame.f_code
+            if code in (sdk.BoundedToolRunner.run.__code__, admitted.ResourceAdmittedToolRunner.run.__code__):
+                value = current.tb_frame.f_locals.get('result')
+                if actual_result is None and type(value) is sdk.ToolRunResult:
+                    actual_result = value
+                    pending['SDK_result_origin'] = ('actual canonical managed traceback local before error'
+                        if code is admitted.ResourceAdmittedToolRunner.run.__code__
+                        else 'actual canonical SDK traceback local before error')
+            if code is sdk.BoundedToolRunner.run.__code__:
+                candidate = current.tb_frame.f_locals.get('owned_handle')
+                if handle is None and type(candidate) is sdk.NativeToolCleanupHandle:
+                    handle = candidate
+            current = current.tb_next
+        if actual_result is not None and retained_result is not actual_result:
+            try:
+                retain_sdk_result(actual_result, request, returned=actual_result is returned_result)
+                retained_result = actual_result
+            except BaseException as retention_error:
+                secondary_errors.append(retention_error)
+                pending['raw_result_retention_error'] = {'type': type(retention_error).__name__, 'message': str(retention_error)}
+        result_state = None
+        if actual_result is not None and retained_result is actual_result:
+            try:
+                result_state = actual_result.to_dict()
+                assert type(result_state) is dict
+            except BaseException as view_error:
+                secondary_errors.append(view_error)
+                result_state = None
+                pending['result_view_error'] = {'type': type(view_error).__name__, 'message': str(view_error)}
+        lifecycle = result_state.get('native_lifecycle') if result_state is not None else None
+        native_closed = (result_state is not None and result_state.get('workspace_cleaned') is True
+                         and type(lifecycle) is dict and lifecycle.get('cleanup_confirmed') is True)
+        no_child = (result_state is not None and result_state.get('workspace_cleaned') is True
+                    and actual_result.pid is None and actual_result.native_lifecycle is None
+                    and actual_result.returncode is None)
+        if retained_result is actual_result and actual_result is not None and (native_closed or no_child):
+            report['post_closed_SDK_result_error'] = {'type': type(error).__name__, 'message': str(error),
+                'cleanup_basis': 'FAILED_NO_CHILD' if no_child else 'actual SDK process/workspace cleanup confirmed'}
+            # A known no-child result is a failure; parent subtree/release checks still run.
+            raise
+        # One durable diagnostic before either custody loop. Failure to write cannot
+        # replace the primary exception, discard the actual result or release custody.
+        checkpoint = {'schema': 'native3-existing-custody-error-checkpoint/v1',
+            'failure': {'type': type(error).__name__, 'message': str(error),
+                        'traceback': ''.join(traceback.format_exception(type(error), error, error.__traceback__))},
+            'actual_result_present': actual_result is not None,
+            'raw_result_retention_complete': actual_result is not None and retained_result is actual_result,
+            'new_dispatch': False, 'actual_native_qualification': False, 'current_report': report}
+        try:
+            checkpoint_ref = retain_json('native3-custody-pending-checkpoint.json', checkpoint)
+            read_private(checkpoint_ref['path'], checkpoint_ref['bytes'], checkpoint_ref['sha256'])
+            report['custody_checkpoint'] = checkpoint_ref
+        except BaseException as diagnostic_error:
+            secondary_errors.append(diagnostic_error)
+            report['custody_checkpoint_error'] = {'type': type(diagnostic_error).__name__, 'message': str(diagnostic_error)}
+        if handle is None:
+            pending['ambiguous_without_actual_handle'] = True
+            while True:
+                try:
+                    print(json.dumps({'event': 'AMBIGUOUS_NATIVE3_CUSTODY_RETAINED', 'operator_pid': os.getpid(), 'Source_READ_still_held': True, 'new_dispatch': False}), flush=True)
+                    time.sleep(5)
+                except BaseException as hold_error:
+                    pending['last_hold_error_type'] = type(hold_error).__name__
+        while True:
+            pending['attempts'] += 1
+            confirmed = False
+            try:
+                observation = handle.retry_cleanup()
+                pending['observations'] = (pending['observations'] + [observation.to_dict()])[-32:]
+                confirmed = observation.cleanup_confirmed
+            except BaseException as retry_error:
+                pending['last_retry_error_type'] = type(retry_error).__name__
+            if confirmed:
+                pending['confirmed_after_error'] = True
+                if actual_result is not None and (retained_result is not actual_result or result_state is None):
+                    pending['process_clean_but_result_custody_retained'] = True
+                    while True:
+                        try:
+                            print(json.dumps({'event': 'ACTUAL_NATIVE3_RESULT_CUSTODY_RETAINED', 'operator_pid': os.getpid(), 'Source_READ_still_held': True, 'new_dispatch': False}), flush=True)
+                            time.sleep(5)
+                        except BaseException as hold_error:
+                            pending['last_hold_error_type'] = type(hold_error).__name__
+                raise error
+            try:
+                print(json.dumps({'event': 'ACTUAL_NATIVE3_CUSTODY_RETAINED', 'operator_pid': os.getpid(), 'attempts': pending['attempts'], 'Source_READ_still_held': True, 'new_dispatch': False}), flush=True)
+                time.sleep(1)
+            except BaseException as hold_error:
+                pending['last_hold_error_type'] = type(hold_error).__name__
+'''
+
+
+def main():
+    base=read_exact(BASE,EXPECTED);tree=ast.parse(base)
+    node=next(n for n in ast.walk(tree) if isinstance(n,ast.FunctionDef) and n.name=='run_with_actual_custody')
+    lines=base.decode().splitlines(keepends=True)
+    product=(''.join(lines[:node.lineno-1])+textwrap.indent(FUNCTION,' '*node.col_offset)+''.join(lines[node.end_lineno:])).encode()
+    after=ast.parse(product);compile(product,'<INERT-existing-Native3-custody-successor>','exec',dont_inherit=True)
+    class Mask(ast.NodeTransformer):
+        def visit_FunctionDef(self,n):
+            return ast.Pass() if n.name=='run_with_actual_custody' else self.generic_visit(n)
+    assert ast.dump(Mask().visit(copy.deepcopy(tree)),include_attributes=False)==ast.dump(Mask().visit(copy.deepcopy(after)),include_attributes=False)
+    post=seal('existing-v567-Native3-current-operator-custody-INERT-v02.py.DATA',product)
+    forward=seal('existing-v567-Native3-custody.forward.diff',''.join(difflib.unified_diff(base.decode().splitlines(keepends=True),product.decode().splitlines(keepends=True),fromfile=str(BASE),tofile=post['path'])).encode())
+    inverse=seal('existing-v567-Native3-custody.inverse.diff',''.join(difflib.unified_diff(product.decode().splitlines(keepends=True),base.decode().splitlines(keepends=True),fromfile=post['path'],tofile=str(BASE))).encode())
+    proof={'prior':{'path':str(BASE),'bytes':EXPECTED[0],'sha256':EXPECTED[1]},'post':post,'forward':forward,'inverse':inverse,
+           'only_run_with_actual_custody_AST_changed':True,'original_Source_resource_release_finalizer_AST_exact':True,
+           'all_actual_bindings_remain_NULL':True,'actual_Source':False,'actual_SDK':False,'actual_Native':False,'legal_admission':False,
+           'new_runner_or_registry':False,'RED_preserved':{'path':str(HERE/'actual-existing-Native3-custody-before-RED-v01.json'),'bytes':11689,'sha256':'8d9d015c8f760cca55f2dfa464f75d5f703077eaefecddcabbb2dfaaf408c125'}}
+    print(json.dumps(seal('existing-Native3-custody-two-state-delta-proof-INERT-v01.json',(json.dumps(proof,indent=2,sort_keys=True)+'\n').encode())))
+
+
+if __name__=='__main__':main()

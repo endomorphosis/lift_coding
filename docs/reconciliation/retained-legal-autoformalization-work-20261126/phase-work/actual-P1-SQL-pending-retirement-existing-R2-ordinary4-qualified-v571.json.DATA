@@ -1,0 +1,197 @@
+{
+  "Native_or_model_or_statutory_qualification": false,
+  "Source_and_RESOURCE_and_parent_closed": true,
+  "actual_COLLECT_RUN_JUnit_exact_order": [
+    "tests/unit/logic/test_duckdb_proof_store_persistence.py::test_clear_from_cold_store_cannot_resurrect_any_entry",
+    "tests/unit/logic/test_duckdb_proof_store_persistence.py::test_expired_negative_entry_is_deleted_durably",
+    "tests/unit/logic/test_duckdb_proof_store_persistence.py::test_clear_during_pending_producer_cannot_resurrect_sql_and_replacement_is_durable",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_genuine_sql_legal_shadow_requires_coherent_context_and_preserves_prior_rows"
+  ],
+  "actual_report": {
+    "bytes": 450650,
+    "path": "/tmp/Root-P1-real-DuckDB-existing-R2-ordinary4-v571-5QzDesl6/actual-output/complete-frozen-local-D-P1-current-real-DuckDB-SQL4-existing-owner-report.json",
+    "sha256": "604584bbf1d9476f679b514e267d22e2ee45c90479b85b6644e14a4ecdaf1dd8"
+  },
+  "conservative_Source_full_charge": {
+    "bytes": 1527,
+    "path": "/tmp/Root-P1-real-DuckDB-existing-R2-ordinary4-v571-5QzDesl6/Source-only-SQL4-conservative-full-charge.json",
+    "sha256": "f0c451603eeef85921879d6dfbfaf6a6529ca5360a48f166c2192129bf2435e2"
+  },
+  "controls": {
+    "bytes": 15974,
+    "path": "/tmp/P1-real-DuckDB-SQL4-existing-v325-INERT-5DLqjwB0/READY-existing-P1-real-DuckDB-SQL4.INERT.json",
+    "sha256": "c2b70b43fb1ea48ef346c15dadeb81d5c14becbb23f348b63d306fac5edcc698"
+  },
+  "counts": {
+    "duplicates": 0,
+    "errors": 0,
+    "failures": 0,
+    "functions": 4,
+    "passed": 4,
+    "skipped": 0,
+    "tests": 4
+  },
+  "current_D_HEAD": "8ab01467b60bd26c6c0e7d2f46604c8252720506",
+  "current_D_tree": "dbd7e3bdd6924791602f3a0938d0c015433ef310",
+  "current_owner_module_bindings": {
+    "ipfs_datasets_py.logic.backends.cache_protocol": {
+      "bytes": 43860,
+      "full9": {
+        "st_ctime_ns": "1795648407062981197",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042605",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795648406765241699",
+        "st_nlink": "1",
+        "st_size": "43860",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/backends/cache_protocol.py",
+      "sha256": "0bce3629c7eca5bb102a85fe9d2a2de950fd4723a9b449bd24cbd7ccfe32594b"
+    },
+    "ipfs_datasets_py.logic.common.duckdb_proof_migration": {
+      "bytes": 92609,
+      "full9": {
+        "st_ctime_ns": "1795574588318646330",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042548",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795574587071505104",
+        "st_nlink": "1",
+        "st_size": "92609",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/common/duckdb_proof_migration.py",
+      "sha256": "a82a23ba02a23c34fe25519a3fef498ec3d6f4e7c2637bf9feb6d6a361c35d74"
+    },
+    "ipfs_datasets_py.logic.common.duckdb_proof_store": {
+      "bytes": 112824,
+      "full9": {
+        "st_ctime_ns": "1795648407365984755",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042606",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795648406768673611",
+        "st_nlink": "1",
+        "st_size": "112824",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/common/duckdb_proof_store.py",
+      "sha256": "2edcfca78ccc079112d67e7ab0f7ff2eee86793039892b6161e4aab1c0fd9d79"
+    },
+    "ipfs_datasets_py.logic.common.proof_cache": {
+      "bytes": 168205,
+      "full9": {
+        "st_ctime_ns": "1795421815408120835",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70008694",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795421815408120835",
+        "st_nlink": "1",
+        "st_size": "168205",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/common/proof_cache.py",
+      "sha256": "b68c36ff934ba6ee7a308162ee7035c78f4c522a5483e85e536b428db8485b36"
+    },
+    "ipfs_datasets_py.logic.legal_ir.proof_cache": {
+      "bytes": 62643,
+      "full9": {
+        "st_ctime_ns": "1795574587715645101",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042547",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795574587067926152",
+        "st_nlink": "1",
+        "st_size": "62643",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/legal_ir/proof_cache.py",
+      "sha256": "9b05a2f890f2df62931273f2448182af8a2d99af73248c5c67ef2ec3d04b0c3c"
+    },
+    "tests.unit.logic.legal_ir.test_proof_cache": {
+      "bytes": 97545,
+      "full9": {
+        "st_ctime_ns": "1795594057587041791",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042540",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795594056356675700",
+        "st_nlink": "1",
+        "st_size": "97545",
+        "st_uid": "1000"
+      },
+      "relative_path": "tests/unit/logic/legal_ir/test_proof_cache.py",
+      "sha256": "4e012101e4400324175c02d296b51abde97d065c76abfddef1b51d16329f639d"
+    },
+    "tests.unit.logic.test_duckdb_proof_store_persistence": {
+      "bytes": 30537,
+      "full9": {
+        "st_ctime_ns": "1795713395140376700",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042665",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795713394553363940",
+        "st_nlink": "1",
+        "st_size": "30537",
+        "st_uid": "1000"
+      },
+      "relative_path": "tests/unit/logic/test_duckdb_proof_store_persistence.py",
+      "sha256": "71bd2b31da494123f57c76add563e8a2637eb640e534360218c71b7feb6143c1"
+    }
+  },
+  "exact_local_freeze": {
+    "bytes": 8155,
+    "path": "/tmp/Root-P1-SQL-pending-retirement-freeze-READ2-v570-SOIQYKAJ/actual-P1-SQL-pending-retirement-exact1-local-freeze-v569.json",
+    "sha256": "9a1deb5fb9d1a6dc20df0d7389b14ffac1d407d703267fc3ac5fc1194b55b2d3"
+  },
+  "exact_postfreeze_READ2": {
+    "bytes": 7082,
+    "path": "/tmp/Root-P1-SQL-pending-retirement-freeze-READ2-v570-SOIQYKAJ/actual-P1-SQL-pending-retirement-frozen-READ2-closed-v570.json",
+    "sha256": "393acf63117fdacf43d817a525d23f5bc705b3a214e5e20e885d584ae528c235"
+  },
+  "launch_binding": {
+    "bytes": 3093,
+    "path": "/tmp/Root-P1-real-DuckDB-existing-R2-ordinary4-v571-5QzDesl6/actual-SQL4-binding-launch-v571.json",
+    "sha256": "fd8f763fbfee5c7d08e54cc1d844f815b67c201f20f4d43b1626142f4db4bf6b"
+  },
+  "observed_real_temporary_DuckDB": true,
+  "observed_scope": {
+    "DuckDB_version_recorded": false,
+    "Native_execution": false,
+    "model_execution": false,
+    "pending_producer_retirement": true,
+    "physical_connection_reopen_by_new_case": false,
+    "real_SQL": true,
+    "retained_SQL_shadow_file_reopen": true,
+    "same_connection_fresh_store_instance": true,
+    "statutory_or_corpus_admission": false
+  },
+  "original_A_preservation_reference": {
+    "bytes": 2365,
+    "path": "/tmp/Root-Phase6-deadline-attachment-existing-Source2-v446-zQU3p8aH/observed-existing-unpublished-A-worktree-preservation.json",
+    "sha256": "5268c7d30364dae578cf2ee119ceb129546226f87ab6cc018979eb98aa610f24"
+  },
+  "prior_guide565": {
+    "bytes": 15494,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-guide565-four-doc-three-FF-publication-small-v568.json",
+    "sha256": "b0ae67407b5c2523979cf24a1798e32499c20113a75cf45fba2b4bdaf4a2f4f0"
+  },
+  "raw_junit": {
+    "bytes": 889,
+    "logical_name": "junit.xml",
+    "path": "/tmp/Root-P1-real-DuckDB-existing-R2-ordinary4-v571-5QzDesl6/actual-output/P1-current-real-DuckDB-SQL4-run-result0-output1.bin",
+    "sha256": "eb11a1cb84c28f331c66152c3211903ba671c4859ee56e5aab6df47cbae9773f"
+  },
+  "schema": "actual-P1-SQL-pending-retirement-existing-R2-ordinary4-qualified/v1",
+  "terminal_returncode": 0,
+  "terminal_session": 41421,
+  "unchanged_original_A_preserved": true
+}

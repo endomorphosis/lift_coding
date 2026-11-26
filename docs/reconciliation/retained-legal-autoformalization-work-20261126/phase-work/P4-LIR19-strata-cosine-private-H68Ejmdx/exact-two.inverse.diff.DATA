@@ -1,0 +1,113 @@
+--- a/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py
++++ b/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py
+@@ -24,7 +24,6 @@
+ from concurrent.futures import ThreadPoolExecutor, as_completed
+ from dataclasses import dataclass, field, fields, is_dataclass
+ from datetime import datetime, timezone
+-from statistics import mean
+ from types import MappingProxyType
+ from typing import Any, Final, Optional
+ 
+@@ -1011,8 +1010,6 @@
+         if not vector:
+             unknown.append(f"{axis}:empty_vector")
+             continue
+-        if not all(map(math.isfinite, vector)):
+-            unknown.append(f"{axis}:nonfinite_vector")
+         groups.setdefault(label, []).append(vector)
+     counts = {name: len(vectors) for name, vectors in sorted(groups.items())}
+     intra_values: list[float] = []
+@@ -1035,7 +1032,7 @@
+         unknown.append(f"{axis}:intra_cosine")
+     inter_values = _pairwise_cosines(list(centroids.values()))
+     inter = None if inter_values is None else _mean_optional(inter_values)
+-    if inter is None:
++    if inter is None and len(centroids) < 2:
+         unknown.append(f"{axis}:inter_cosine")
+     labeled_counts = [count for name, count in counts.items() if name != "unspecified"]
+     balance = None
+@@ -1070,9 +1067,7 @@
+     width = len(vectors[0])
+     if width == 0 or any(len(vector) != width for vector in vectors):
+         return None
+-    if any(not all(map(math.isfinite, vector)) for vector in vectors):
+-        return None
+-    return tuple(mean(coordinates) for coordinates in zip(*vectors, strict=True))
++    return tuple(sum(vector[index] for vector in vectors) / len(vectors) for index in range(width))
+ 
+ 
+ def _pairwise_cosines(vectors: Sequence[Sequence[float]]) -> Optional[list[float]]:
+@@ -1090,18 +1085,12 @@
+ def _cosine(left: Sequence[float], right: Sequence[float]) -> Optional[float]:
+     if len(left) != len(right) or not left:
+         return None
+-    if not all(map(math.isfinite, left)) or not all(map(math.isfinite, right)):
++    numerator = sum(float(a) * float(b) for a, b in zip(left, right))
++    left_norm = math.sqrt(sum(float(value) * float(value) for value in left))
++    right_norm = math.sqrt(sum(float(value) * float(value) for value in right))
++    if left_norm == 0.0 or right_norm == 0.0:
+         return None
+-    left_scale = max(map(abs, left))
+-    right_scale = max(map(abs, right))
+-    if left_scale == 0.0 or right_scale == 0.0:
+-        return None
+-    # Independent rescaling preserves direction and keeps products and norms finite.
+-    scaled_left = tuple(value / left_scale for value in left)
+-    scaled_right = tuple(value / right_scale for value in right)
+-    numerator = math.fsum(a * b for a, b in zip(scaled_left, scaled_right, strict=True))
+-    denominator = math.hypot(*scaled_left) * math.hypot(*scaled_right)
+-    return max(-1.0, min(1.0, numerator / denominator))
++    return max(-1.0, min(1.0, numerator / (left_norm * right_norm)))
+ 
+ 
+ def _mean_optional(values: Sequence[float]) -> Optional[float]:
+--- a/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_latent_diagnostics.py
++++ b/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_latent_diagnostics.py
+@@ -369,47 +369,3 @@
+     result = evaluate_legal_ir_semantic_equivalence(left, left, family="deontic")
+     assert result.complete is True
+     assert result.scores["obligation_equivalence"] == pytest.approx(1.0)
+-
+-
+-@pytest.mark.parametrize("scale", [1.0, 1e308, 1e-320], ids=["ordinary", "large", "subnormal"])
+-def test_strata_cosines_and_centroids_preserve_finite_scale(scale):
+-    records = [
+-        LatentRepresentationRecord(sample_id="a1", vector=(scale, scale), family="deontic"),
+-        LatentRepresentationRecord(sample_id="a2", vector=(scale, 0.0), family="deontic"),
+-        LatentRepresentationRecord(sample_id="b1", vector=(scale, 0.0), family="tdfol"),
+-        LatentRepresentationRecord(sample_id="b2", vector=(scale, 0.0), family="tdfol"),
+-    ]
+-    family = evaluate_latent_clustering_strata(records).axes["family"]
+-    expected_intra = (1 + 1 / math.sqrt(2)) / 2
+-    expected_inter = 2 / math.sqrt(5)
+-    assert family.group_counts == {"deontic": 2, "tdfol": 2}
+-    assert family.intra_cosine == pytest.approx(expected_intra), family.to_dict()
+-    assert family.inter_cosine == pytest.approx(expected_inter)
+-    assert family.separation == pytest.approx(expected_intra - expected_inter)
+-    assert family.unknown_denominators == ()
+-
+-
+-@pytest.mark.parametrize("unavailable", [math.nan, math.inf, -math.inf])
+-def test_strata_keep_nonfinite_vectors_out_of_cosine_denominators(unavailable):
+-    result = evaluate_latent_clustering_strata([
+-        {"sample_id": "valid", "family": "deontic", "vector": (1.0, 0.0)},
+-        {"sample_id": "invalid", "family": "deontic", "vector": (unavailable, 1.0)},
+-    ]).axes["family"]
+-    assert result.intra_cosine is None, result.to_dict()
+-    assert result.group_counts == {"deontic": 2}
+-    assert result.in_distribution_count == 2
+-    assert "family:nonfinite_vector" in result.unknown_denominators
+-
+-
+-def test_strata_reports_unavailable_inter_cosine_for_zero_centroids():
+-    records = [
+-        LatentRepresentationRecord(sample_id="a1", vector=(1.0, 0.0), family="deontic"),
+-        LatentRepresentationRecord(sample_id="a2", vector=(-1.0, 0.0), family="deontic"),
+-        LatentRepresentationRecord(sample_id="b1", vector=(0.0, 1.0), family="tdfol"),
+-        LatentRepresentationRecord(sample_id="b2", vector=(0.0, -1.0), family="tdfol"),
+-    ]
+-    family = evaluate_latent_clustering_strata(records).axes["family"]
+-    assert family.intra_cosine == pytest.approx(-1.0)
+-    assert family.inter_cosine is None
+-    assert family.separation is None
+-    assert "family:inter_cosine" in family.unknown_denominators

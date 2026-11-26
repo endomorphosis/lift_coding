@@ -1,0 +1,289 @@
+from __future__ import annotations
+
+import ast
+from copy import deepcopy
+from datetime import datetime
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import resource
+import sys
+from types import ModuleType, SimpleNamespace
+
+
+resource.setrlimit(resource.RLIMIT_AS, (512 * 1024 * 1024,) * 2)
+resource.setrlimit(resource.RLIMIT_CPU, (30, 31))
+os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
+root = Path(__file__).parent
+artifacts = json.loads((root / "pinned-inputs.json").read_bytes())
+owner_path = Path(sys.argv[1])
+owner_digest = sys.argv[2]
+ZERO = "0" * 64
+
+
+def sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def source(name):
+    row = artifacts[name]
+    raw = (root / name).read_bytes()
+    if len(raw) != row["bytes"] or sha(raw) != row["sha256"]:
+        raise RuntimeError(f"fixture input pin differs: {name}")
+    return raw
+
+
+def need(condition, message):
+    if not condition:
+        raise ValueError(message)
+
+
+def require_keys(value, keys, label):
+    need(type(value) is dict and set(value) == keys, label)
+
+
+def require_sha(value, label):
+    need(type(value) is str and re.fullmatch("[0-9a-f]{64}", value), label)
+
+
+def wire(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), default=lambda b: {"$fictional_bytes_hex": b.hex()}).encode()
+
+
+def digest(value):
+    return sha(wire(value))
+
+
+def snapshot(value):
+    return deepcopy(value), digest(value)
+
+
+def time(text):
+    return datetime.fromisoformat(text)
+
+
+def text(value, label):
+    need(type(value) is str and bool(value), label)
+
+
+def checked_declared_artifacts(manifest, component, expected_sha):
+    need(not manifest["missing_dependencies"] and not manifest["cycles"], "fixture manifest is not an acyclic closure")
+    need(manifest["artifacts"][0]["artifact_id"] == component and manifest["artifacts"][0]["artifact_sha256"] == expected_sha,
+         "fixture root differs")
+    expected = [{"dependent_id": component, "dependency_id": key} for key in manifest["expected_artifact_ids"][1:]]
+    need(manifest["edges"] == expected, "fixture requires a complete root/star manifest")
+    return manifest["expected_artifact_ids"], None
+
+
+def validate_source(version, *, expected_raw_sha256, raw_bytes, extracted_text, expected_extracted_sha256):
+    need(raw_bytes == extracted_text.encode() and sha(raw_bytes) == expected_raw_sha256 == expected_extracted_sha256,
+         "fictional UTF-8 source mismatch")
+
+
+def source_geometry(version, *, expected_raw_sha256, extracted_text, expected_extracted_sha256,
+                    start_char, end_char, start_utf8, end_utf8):
+    need(0 <= start_char < end_char <= len(extracted_text), "fictional coordinate bounds")
+    need(len(extracted_text[:start_char].encode()) == start_utf8 and len(extracted_text[:end_char].encode()) == end_utf8,
+         "fictional UTF-8 coordinates mismatch")
+    return extracted_text[start_char:end_char]
+
+
+def source_occurrence(occurrence, *, source_version, **kwargs):
+    coordinates = {key: occurrence[key] for key in ("start_char","end_char","start_utf8","end_utf8")}
+    need(source_geometry(source_version, **kwargs, **coordinates) == occurrence["span_text"], "fictional span text differs")
+    return occurrence
+
+
+def reviewed_refs(rows):
+    need(type(rows) is list and len(rows) == 1, "fictional reference required")
+    require_keys(rows[0], {"artifact_id", "sha256"}, "fictional reference")
+    require_sha(rows[0]["sha256"], "fictional reference")
+
+
+def validate_relational(report, request, *, expected_request_sha256, expected_report_sha256):
+    need(type(request) is bytes and sha(request) == expected_request_sha256 and digest(report) == expected_report_sha256,
+         "fictional relational input pin mismatch")
+    need(json.loads(request) == report, "fictional relational request differs")
+    return deepcopy(report)
+
+
+dependency_module = ModuleType("fixture_actual_dependency_owner")
+exec(compile(source("dependencies.py.DATA"), str(root/"dependencies.py.DATA"), "exec"), vars(dependency_module))
+profile = "fictional-object-profile"
+mixed_profile = "fictional-mixed-profile"
+relational = SimpleNamespace(PROFILE=profile, MIXED_PROFILE=mixed_profile,
+                            validate_relational_norm_v1=validate_relational, validate_mixed_relational_norm_v1=validate_relational)
+source_api = SimpleNamespace(validate_source_version=validate_source, validate_source_occurrence=source_occurrence,
+                             build_source_occurrence=source_geometry)
+authority = SimpleNamespace(MAX_BYTES=8*1024*1024, _id=text, _text=text, _time=time,
+                            _interval=lambda c:(time(c["valid_from_utc"]), time(c["valid_until_utc"])),
+                            _DID=re.compile("did:fixture:[a-z]+"), _closure=checked_declared_artifacts)
+
+
+class FictionalDistinctOccurrences:
+    def __init__(self):
+        self.seen = set()
+
+    def add(self, unit, version, occurrence):
+        cid = occurrence["record_cid"]
+        need(cid not in self.seen, "fictional repeated occurrence")
+        self.seen.add(cid)
+
+
+owner = owner_path.read_bytes()
+need(sha(owner) == owner_digest, "V3 owner pin differs")
+tree = ast.parse(owner, filename=str(owner_path))
+selected = {"_predicate_domain", "_validate_relational", "_reviewed_finish", "_reviewed_subject",
+            "_reviewed_units", "_reviewed_body", "prepare_reviewed_norm_admission_v3"}
+definitions = [node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name in selected]
+need({node.name for node in definitions} == selected, "real V3 boundary functions missing")
+scope = dict(hashlib=hashlib, json=json, _need=need, _keys=require_keys, _sha=require_sha,
+             _auth=lambda:authority, _reviewed_refs=reviewed_refs,
+             _reviewed_owners=lambda:(source_api, None, relational, dependency_module),
+             _reviewed_pins=lambda:{"fixture_selected_V3_owner":owner_digest,
+                                    "actual_dependency_owner":artifacts["dependencies.py.DATA"]["sha256"]},
+             norm=SimpleNamespace(_snapshot=snapshot, _wire=wire),
+             legacy=SimpleNamespace(_ReviewedSourceUseTracker=FictionalDistinctOccurrences),
+             norm_content_adjudication_sha256=digest,
+             REVIEWED_PROFILE="complete-reviewed-mixed-sort-norm-admission/v3",
+             REVIEWED_DECLARATION_SCHEMA="legal-reviewed-mixed-sort-norm-declaration/v3",
+             REVIEWED_SUBJECT_SCHEMA="legal-reviewed-mixed-sort-norm-subject/v3",
+             REVIEWED_SLOTS=("fixture:whole-body",), REVIEWED_USES=("formalization",))
+exec(compile(ast.Module(body=definitions,type_ignores=[]), str(owner_path), "exec"), scope)
+
+downstream_tree = ast.parse(source("incremental.py.DATA"))
+reviewed_facts, = [n for n in downstream_tree.body if isinstance(n, ast.FunctionDef) and n.name == "_reviewed_facts"]
+start = next(i for i,node in enumerate(reviewed_facts.body) if isinstance(node, ast.Assign) and
+             any(isinstance(name,ast.Name) and name.id == "edges" for name in node.targets))
+end = next(i for i,node in enumerate(reviewed_facts.body[start:],start) if isinstance(node, ast.FunctionDef) and node.name == "closure")
+downstream_slice = compile(ast.Module(body=reviewed_facts.body[start:end+1],type_ignores=[]), str(root/"incremental.py.DATA"), "exec")
+
+
+def downstream(body):
+    def fail(message):
+        raise ValueError(message)
+    local = dict(by_unit={u["unit_id"]:u for u in body["units"]}, graph={"definition_use_records":body["definition_uses"]},
+                 _fail=fail)
+    exec(downstream_slice, local)
+    closure = local["closure"]
+    return {key: sorted(closure(key)) for key in local["by_unit"]}
+
+
+def report(kind, node_id, relational_profile):
+    def pred(name, arguments):
+        return {"kind":"predicate","symbol":name,
+                "arguments":[{"kind":"variable","symbol":a} for a in arguments]}
+    if kind == "definition":
+        root = {"kind":"forall","binders":[{"name":"officer"}],"arguments":[
+            {"kind":"iff","arguments":[pred("Covered", ["officer"]), pred("Appointed", ["officer"])]}]}
+        predicates = [("Covered", ["Object"], ["officer"]), ("Appointed", ["Object"], ["officer"])]
+        paths = ["/root","/root/arguments/0","/root/arguments/0/arguments/0","/root/arguments/0/arguments/1"]
+    else:
+        domain = ["Object", "Event"] if relational_profile == mixed_profile else ["Object"]
+        args = ["officer", "event"] if len(domain) == 2 else ["officer"]
+        root = {"kind":"forall","binders":[{"name":x} for x in args],"arguments":[
+            {"kind":"implies","arguments":[pred("Covered", ["officer"]), pred(node_id, args)]}]}
+        predicates = [("Covered", ["Object"], ["officer"]), (node_id, domain, args)]
+        paths = ["/root","/root/arguments/0","/root/arguments/0/arguments/0","/root/arguments/0/arguments/1"]
+    return {"profile":relational_profile,
+            "typed_expression":{"root":root,"signature":{"symbols":[
+                {"kind":"predicate","name":name,"domain":domain} for name,domain,_ in predicates]}},
+            "argument_roles":[{"symbol":name,"roles":roles} for name,_,roles in predicates],
+            "structural_mapping":[{"typed_path":p} for p in paths]}
+
+
+def fixture():
+    units, source_inputs, relational_inputs, definition_uses = [], {}, {}, []
+    for identity, kind, statement, selected_profile in (
+        ("D","definition","Fictional Act: a covered officer is appointed.",profile),
+        ("N1","norm","Fictional Act: a covered officer must file.",profile),
+        ("N2","norm","Fictional Act: a covered officer may inspect at an event.",mixed_profile)):
+        raw = statement.encode()
+        source_sha = sha(raw)
+        version = {"record_cid":f"fixture:version:{identity}","raw_artifact":{"sha256":source_sha},
+                   "extracted_view":{"sha256":source_sha}}
+        coords = {"start_char":0,"end_char":len(statement),"start_utf8":0,"end_utf8":len(raw)}
+        occurrence = {"record_cid":f"fixture:occurrence:{identity}","span_text":statement,**coords}
+        ir = report(kind, "Act"+identity, selected_profile)
+        request = wire(ir)
+        unit = {"unit_id":identity,"kind":kind,"source_version":version,"occurrence":occurrence,
+                "document_revision":"fixture:v1","parent_unit_ids":[],"relational_profile":selected_profile,
+                "relational_request_sha256":sha(request),"source_artifact_id":f"fixture:source:{identity}",
+                "ir_artifact_id":f"fixture:ir:{identity}",
+                "coverage":[{**item,**coords} for item in ir["structural_mapping"]]}
+        units.append(unit)
+        source_inputs[identity] = {"raw_bytes":raw,"extracted_text":statement}
+        relational_inputs[identity] = {"report":ir,"request_raw":request,"expected_report_sha256":digest(ir)}
+        if kind=="norm":
+            definition_uses.append({"definition_unit_id":"D","defined_predicate":"Covered","use_unit_id":identity,
+                "use_occurrence_cid":occurrence["record_cid"],"target_typed_paths":["/root/arguments/0/arguments/0"],
+                "applicability":"governing","interpretation_id":"fixture:interpretation",
+                "evidence_refs":[{"artifact_id":"fictional:independent-process","sha256":ZERO}]})
+    return {
+        "schema":scope["REVIEWED_DECLARATION_SCHEMA"],"component_id":"fixture:component","provenance_kind":"fictional_fixture",
+        "interpretation_id":"fixture:interpretation","governing_context":{"jurisdiction":"fixture:jurisdiction",
+        "instrument_id":"fixture:act","governing_edition":"fixture:v1","legal_as_of_utc":"2026-01-02T00:00:00+00:00",
+        "valid_from_utc":"2026-01-01T00:00:00+00:00","valid_until_utc":"2027-01-01T00:00:00+00:00"},
+        "units":units,"definition_uses":definition_uses,"cross_references":[],"permitted_uses":["formalization"],
+        "unresolved":[],"unsupported":[],"assumptions":[],"source_actors":[{"principal_id":"fictional:producer",
+        "signer_did":"did:fixture:author","public_key_hex":ZERO}],"declared_at_utc":"2026-01-02T00:00:00+00:00"
+    }, source_inputs, relational_inputs
+
+
+def prepare(case):
+    declaration, inputs, ir = case
+    dependency_pins = {k:[] for k in dependency_module.PIN_KINDS}
+    pin = digest(declaration)
+    component = declaration["component_id"]
+    rows = [{"artifact_id":component,"artifact_sha256":pin,"dependency_pins":dependency_pins}]
+    for unit in declaration["units"]:
+        for field, value in (("source_artifact_id",digest(unit["source_version"])),
+                             ("ir_artifact_id",unit["relational_request_sha256"])):
+            rows.append({"artifact_id":unit[field],"artifact_sha256":value,"dependency_pins":dependency_pins})
+    ids = [row["artifact_id"] for row in rows]
+    manifest = dependency_module.build_dependency_manifest(rows,[{"dependent_id":component,"dependency_id":x}
+        for x in ids[1:]],expected_artifact_ids=ids)
+    need(manifest["cycles"] == [], "real artifact manifest unexpected cycle")
+    return scope["prepare_reviewed_norm_admission_v3"](declaration, expected_declaration_sha256=pin,
+        source_inputs=inputs, relational_inputs=ir, dependency_manifest=manifest,
+        expected_manifest_sha256=manifest["manifest_sha256"])
+
+
+cases = [
+    ("plain-valid",{},True),
+    ("acyclic-chain-and-overlapping-reasons",{"N2":["N1","D"],"N1":["D"]},True),
+    ("parent-cycle",{"N1":["N2"],"N2":["N1"]},False),
+    ("mixed-cycle",{"D":["N1"]},False),
+    ("longer-mixed-cycle",{"D":["N2"],"N2":["N1"]},False),
+]
+rows = []
+for name, parents, accepted in cases:
+    bundle = fixture()
+    declaration = bundle[0]
+    for unit in declaration["units"]:
+        unit["parent_unit_ids"] = parents.get(unit["unit_id"], [])
+    downstream_error = None
+    try:
+        dependency_closure = downstream(declaration)
+    except ValueError as exc:
+        downstream_error = str(exc)
+    need((downstream_error is None) == accepted, "downstream control differs from intended case")
+    if downstream_error:
+        need(downstream_error == "cyclic or unresolved reviewed governing dependency", "wrong downstream refusal")
+    observed = None
+    try:
+        result = prepare(bundle)
+        need(result["semantic_use_eligible"] is False and result["proof_authority"] is False,
+             "preparation escalated authority")
+    except ValueError as exc:
+        observed = str(exc)
+    passed = observed is None if accepted else observed == "cyclic or unresolved reviewed governing dependency"
+    rows.append({"case":name,"expected_acceptance":accepted,"actual_prepared":observed is None,
+                 "preparation_error":observed,"downstream_error":downstream_error,"passed":passed})
+output = {"selected_owner_sha256":owner_digest,
+          "passed":sum(r["passed"] for r in rows),"failed":sum(not r["passed"] for r in rows),"cases":rows,
+          "scope":"Exact V3 preparation/unit/body functions, actual artifact manifest owner and extracted existing incremental combined closure. Fictional source/IR/trust/pin transport boundary, no project imports, signatures, Native, model or public pytest."}
+print(json.dumps(output,indent=2,sort_keys=True))
+sys.exit(bool(output["failed"]))

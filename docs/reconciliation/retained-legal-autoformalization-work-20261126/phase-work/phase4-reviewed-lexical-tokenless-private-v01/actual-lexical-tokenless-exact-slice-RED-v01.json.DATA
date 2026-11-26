@@ -1,0 +1,76 @@
+{
+  "D_HEAD": "4ccc8917b2168db8e11f54c5aadd4ca267f1c488",
+  "actual_bm25_rankings": [
+    {
+      "ranking": [
+        [
+          "train-a",
+          0.0
+        ],
+        [
+          "train-b",
+          0.0
+        ]
+      ],
+      "text": "許可を申請する。",
+      "tokens": []
+    },
+    {
+      "ranking": [
+        [
+          "train-a",
+          0.0
+        ],
+        [
+          "train-b",
+          0.0
+        ]
+      ],
+      "text": "記録を保存する。",
+      "tokens": []
+    },
+    {
+      "ranking": [
+        [
+          "train-a",
+          2.610947
+        ],
+        [
+          "train-b",
+          0.0
+        ]
+      ],
+      "text": "apply for a permit",
+      "tokens": [
+        "apply",
+        "for",
+        "a",
+        "permit"
+      ]
+    }
+  ],
+  "exact_retriever_preguard_results": [
+    {
+      "ranking_boundary_reached": 1,
+      "rows": []
+    },
+    {
+      "ranking_boundary_reached": 1,
+      "rows": []
+    },
+    {
+      "ranking_boundary_reached": 1,
+      "rows": []
+    }
+  ],
+  "expected_tokenless_abstention_red_count": 2,
+  "previous_setup_failure": {
+    "cause": "Git default pack mapping hit the 512 MiB limit before the test code ran",
+    "tool_chunk": "64ead7",
+    "unchanged_limit_recovery": "Invocation-only 1 MiB mapping windows and 16 MiB pack mapping cap"
+  },
+  "ranker_sha256": "feb8d74a8a87783408025f1a341500b734a396b99c757f1e65026e4abb26b437",
+  "retriever_sha256": "0ccc01562f0e54ceaeb4145a4fad1585a8870e7e1cd77d3e3b412ef115d400fd",
+  "schema": "reviewed-lexical-tokenless-exact-slice-red/v1",
+  "scope": "Actual stdlib BM25 classes and reviewed retriever loop through its ranking boundary. Fictional already-replayed endpoints. Ordinary owning test, Torch and model execution absent."
+}

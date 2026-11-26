@@ -1,0 +1,34 @@
+INTERNALERROR> Traceback (most recent call last):
+INTERNALERROR>   File "/usr/local/lib/python3.12/dist-packages/_pytest/main.py", line 281, in wrap_session
+INTERNALERROR>     config._do_configure()
+INTERNALERROR>   File "/usr/local/lib/python3.12/dist-packages/_pytest/config/__init__.py", line 1121, in _do_configure
+INTERNALERROR>     self.hook.pytest_configure.call_historic(kwargs=dict(config=self))
+INTERNALERROR>   File "/usr/local/lib/python3.12/dist-packages/pluggy/_hooks.py", line 534, in call_historic
+INTERNALERROR>     res = self._hookexec(self.name, self._hookimpls.copy(), kwargs, False)
+INTERNALERROR>           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+INTERNALERROR>   File "/usr/local/lib/python3.12/dist-packages/pluggy/_manager.py", line 120, in _hookexec
+INTERNALERROR>     return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+INTERNALERROR>            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+INTERNALERROR>   File "/usr/local/lib/python3.12/dist-packages/pluggy/_callers.py", line 167, in _multicall
+INTERNALERROR>     raise exception
+INTERNALERROR>   File "/usr/local/lib/python3.12/dist-packages/pluggy/_callers.py", line 121, in _multicall
+INTERNALERROR>     res = hook_impl.function(*args)
+INTERNALERROR>           ^^^^^^^^^^^^^^^^^^^^^^^^^
+INTERNALERROR>   File "/usr/local/lib/python3.12/dist-packages/_pytest/logging.py", line 643, in pytest_configure
+INTERNALERROR>     config.pluginmanager.register(LoggingPlugin(config), "logging-plugin")
+INTERNALERROR>                                   ^^^^^^^^^^^^^^^^^^^^^
+INTERNALERROR>   File "/usr/local/lib/python3.12/dist-packages/_pytest/logging.py", line 680, in __init__
+INTERNALERROR>     self.log_file_handler = _FileHandler(
+INTERNALERROR>                             ^^^^^^^^^^^^^
+INTERNALERROR>   File "/usr/lib/python3.12/logging/__init__.py", line 1231, in __init__
+INTERNALERROR>     StreamHandler.__init__(self, self._open())
+INTERNALERROR>                                  ^^^^^^^^^^^^
+INTERNALERROR>   File "/usr/lib/python3.12/logging/__init__.py", line 1263, in _open
+INTERNALERROR>     return open_func(self.baseFilename, self.mode,
+INTERNALERROR>            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+INTERNALERROR>   File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/retry-preservation-v02/run_private_fixture.py.DATA", line 44, in audit
+INTERNALERROR>     restrict_path(event, args[0])
+INTERNALERROR>   File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/retry-preservation-v02/run_private_fixture.py.DATA", line 36, in restrict_path
+INTERNALERROR>     raise PermissionError(f"private fixture write denied outside its run directory: {path}")
+INTERNALERROR> PermissionError: private fixture write denied outside its run directory: /dev/null
+{"scope": "private direct scorer fixtures", "pytest_exit": 3, "denied": [["open", "/dev/null"]], "overlays": []}

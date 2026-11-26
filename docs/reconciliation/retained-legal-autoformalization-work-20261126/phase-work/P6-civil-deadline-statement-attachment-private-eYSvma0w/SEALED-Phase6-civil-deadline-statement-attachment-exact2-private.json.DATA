@@ -1,0 +1,348 @@
+{
+  "before_and_after_reports": [
+    {
+      "bytes": 15211,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P6-civil-deadline-statement-attachment-private-eYSvma0w/actual-matching47-before.json",
+      "sha256": "fc6247bb0c86138dae91083db228df17111d343b6cea6ab0959b3f1faf463056"
+    },
+    {
+      "bytes": 14336,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P6-civil-deadline-statement-attachment-private-eYSvma0w/actual-matching47-after.json",
+      "sha256": "6f1060e2d5ae0dd448b6311f7d7767308ca918db3a0d434e9fbf75aada7e7fe4"
+    }
+  ],
+  "before_checkout": "e22897d0b8014b6b8bc5289b14e1932bf6e7d650",
+  "before_inputs": {
+    "bytes": 1340,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P6-civil-deadline-statement-attachment-private-eYSvma0w/exact-current-inputs-and-regression.json",
+    "sha256": "a2f73e983acc74a5f82eb7ae2eb6e99462b589bd2c612fd5ebd0bed00b9b02e3"
+  },
+  "behavior": "due_dates_exact compares ordered statement positions and dates under the supplied calendar context",
+  "canonical_installation": false,
+  "current_checkout_after_disjoint_Phase2_freeze": "7e4245f1641637fae7f514f3fbfa9728346f1ae4",
+  "evidence": {
+    "after_fail": 0,
+    "after_pass": 47,
+    "before_fail": 1,
+    "before_pass": 46,
+    "earlier_focused_reports": [
+      {
+        "bytes": 3472,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P6-civil-deadline-statement-attachment-private-eYSvma0w/actual-before.json",
+        "sha256": "709509c4ea7576547fc88b261e98c53cc5563fd662b4e86846344429314118db"
+      },
+      {
+        "bytes": 9793,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P6-civil-deadline-statement-attachment-private-eYSvma0w/actual-after.json",
+        "sha256": "2f751a2168b49e1e27b6b9ca216d0b65521413b698746b9d9c8c0a892aa4b14c"
+      }
+    ],
+    "execution": "direct fixture calls with real compiler, decompiler and calendar owners",
+    "historical_case_names": {
+      "bytes": 4408,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P6-civil-deadline-statement-attachment-private-eYSvma0w/existing-v335-ordinary44-predecessor-names.json",
+      "sha256": "503654f08684d6be503138ddedb0fd0988c582bdc807802efda3d8aea336b712"
+    },
+    "historical_roster_predecessors": 44,
+    "new_cases": 3
+  },
+  "files": [
+    {
+      "after": {
+        "bytes": 45916,
+        "git_blob": "ec672ab896e9efb54c5711019e7418f169d14faa",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P6-civil-deadline-statement-attachment-private-eYSvma0w/scorer.after.py.DATA",
+        "sha256": "4bcd94f7a3d780e41419eb7d5af7a8b1377b223e6e7fdfb84aac406c6e3c64ab"
+      },
+      "before": {
+        "bytes": 45653,
+        "git_blob": "3e89176b68d5a16b9c808e744a9e09a462ea0ddb",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P6-civil-deadline-statement-attachment-private-eYSvma0w/scorer.before.py.DATA",
+        "sha256": "06a50571f77db77c5ee25d13d45adfb55ecb1ef19ddb1c89d92cfef7bc522d06"
+      },
+      "relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/ir_legal_text_roundtrip.py",
+      "role": "scorer"
+    },
+    {
+      "after": {
+        "bytes": 79713,
+        "git_blob": "08211fa4dda3b52c295426546f40cb94fdc17fc0",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P6-civil-deadline-statement-attachment-private-eYSvma0w/test.after.py.DATA",
+        "sha256": "5e562e963b8ee3dbcdb206da7627692ca78a9b1b6c95f3770b62adc8fcffcba0"
+      },
+      "before": {
+        "bytes": 77915,
+        "git_blob": "41bf5a658264cd8b5ee11b4f94236bd0aa8bfc20",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P6-civil-deadline-statement-attachment-private-eYSvma0w/test.before.py.DATA",
+        "sha256": "ded7776b874b7cdee6a80911f783d9ab96b1965a2c58a38dc6e5b218960badc0"
+      },
+      "relative_path": "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py",
+      "role": "test"
+    }
+  ],
+  "forward": {
+    "bytes": 5208,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P6-civil-deadline-statement-attachment-private-eYSvma0w/exact-two.diff",
+    "sha256": "1f92695dbe58ff17ff098dd55aafe34bbe689bc5c457f6b190e035eb9ce303d7"
+  },
+  "forward_and_inverse_byte_verified": true,
+  "inverse": {
+    "bytes": 5208,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P6-civil-deadline-statement-attachment-private-eYSvma0w/exact-two.inverse.diff",
+    "sha256": "72dddd5f75d375945215709dd04deb9ce3dd8f3f499ec22d9264bc1e5929b035"
+  },
+  "matching_ordered_suite": [
+    {
+      "function": "test_relational_score_separates_typed_structure_normalized_prose_and_original_bytes",
+      "params_index": null,
+      "params_repr": "{}"
+    },
+    {
+      "function": "test_relational_score_original_byte_measurement_is_optional_and_same_row_joint",
+      "params_index": null,
+      "params_repr": "{}"
+    },
+    {
+      "function": "test_relational_score_whole_input_abstentions_remain_in_denominator",
+      "params_index": 0,
+      "params_repr": "{'candidate': ''}"
+    },
+    {
+      "function": "test_relational_score_whole_input_abstentions_remain_in_denominator",
+      "params_index": 1,
+      "params_repr": "{'candidate': '   '}"
+    },
+    {
+      "function": "test_relational_score_whole_input_abstentions_remain_in_denominator",
+      "params_index": 2,
+      "params_repr": "{'candidate': 'An officer must serve a person.'}"
+    },
+    {
+      "function": "test_relational_score_whole_input_abstentions_remain_in_denominator",
+      "params_index": 3,
+      "params_repr": "{'candidate': 'Typed legal rule: tdfol/tdfol_default.\\nTypes: Object.\\nPredicate Serve: server of type Object; addressee of type Object.\\nRule: (for every officer of type Object, (there exists person of type Object such that (it is obligatory that (Serve holds for server: officer of type Object; addressee: person of type Object)))). Further obligations apply.'}"
+    },
+    {
+      "function": "test_relational_score_whole_input_abstentions_remain_in_denominator",
+      "params_index": 4,
+      "params_repr": "{'candidate': 'Typed legal rule: tdfol/tdfol_default.\\nTypes: Object.\\nPredicate Serve: server of type Object; addressee of type Object.\\nRule: (for every officer of type Object, (there exists person of type Object such that (it is obligatory that (Serve holds for server: officer of type Object; server: person of type Object)))).'}"
+    },
+    {
+      "function": "test_relational_score_never_passes_original_source_or_reference_to_inverse",
+      "params_index": null,
+      "params_repr": "{}"
+    },
+    {
+      "function": "test_relational_score_requires_explicit_text_candidate",
+      "params_index": 0,
+      "params_repr": "{'value': None}"
+    },
+    {
+      "function": "test_relational_score_requires_explicit_text_candidate",
+      "params_index": 1,
+      "params_repr": "{'value': 7}"
+    },
+    {
+      "function": "test_relational_score_requires_explicit_text_candidate",
+      "params_index": 2,
+      "params_repr": "{'value': True}"
+    },
+    {
+      "function": "test_relational_score_input_guards_run_before_any_reference_realization",
+      "params_index": 0,
+      "params_repr": "{'fault': 'candidate_surrogate', 'message': 'valid UTF8 candidate and optional original text required'}"
+    },
+    {
+      "function": "test_relational_score_input_guards_run_before_any_reference_realization",
+      "params_index": 1,
+      "params_repr": "{'fault': 'original_surrogate', 'message': 'valid UTF8 candidate and optional original text required'}"
+    },
+    {
+      "function": "test_relational_score_input_guards_run_before_any_reference_realization",
+      "params_index": 2,
+      "params_repr": "{'fault': 'original_bool', 'message': 'optional original source text required'}"
+    },
+    {
+      "function": "test_relational_score_distinguishes_obligation_from_bare_assertion",
+      "params_index": null,
+      "params_repr": "{}"
+    },
+    {
+      "function": "test_relational_score_abstains_on_ordinary_past_tense_prose",
+      "params_index": null,
+      "params_repr": "{}"
+    },
+    {
+      "function": "test_civil_deadline_roundtrip_keeps_typed_unit_and_independent_due_date",
+      "params_index": 0,
+      "params_repr": "{'unit': 'calendar_days', 'expected_due_date': '2024-05-26'}"
+    },
+    {
+      "function": "test_civil_deadline_roundtrip_keeps_typed_unit_and_independent_due_date",
+      "params_index": 1,
+      "params_repr": "{'unit': 'business_days', 'expected_due_date': '2024-05-29'}"
+    },
+    {
+      "function": "test_civil_deadline_roundtrip_distinguishes_opposite_unit_reference",
+      "params_index": null,
+      "params_repr": "{}"
+    },
+    {
+      "function": "test_civil_deadline_inverse_receives_only_candidate_prose_and_profile",
+      "params_index": null,
+      "params_repr": "{}"
+    },
+    {
+      "function": "test_civil_deadline_roundtrip_abstains_on_unsupported_prose",
+      "params_index": null,
+      "params_repr": "{}"
+    },
+    {
+      "function": "test_civil_deadline_roundtrip_requires_exact_named_anchor_context",
+      "params_index": 0,
+      "params_repr": "{'context_case': 'missing'}"
+    },
+    {
+      "function": "test_civil_deadline_roundtrip_requires_exact_named_anchor_context",
+      "params_index": 1,
+      "params_repr": "{'context_case': 'different-anchor'}"
+    },
+    {
+      "function": "test_civil_deadline_roundtrip_requires_covered_business_calendar",
+      "params_index": 0,
+      "params_repr": "{'coverage_case': 'missing-calendar'}"
+    },
+    {
+      "function": "test_civil_deadline_roundtrip_requires_covered_business_calendar",
+      "params_index": 1,
+      "params_repr": "{'coverage_case': 'before-coverage'}"
+    },
+    {
+      "function": "test_civil_deadline_roundtrip_requires_covered_business_calendar",
+      "params_index": 2,
+      "params_repr": "{'coverage_case': 'insufficient-workdays'}"
+    },
+    {
+      "function": "test_effective_date_roundtrip_real_inverse_with_fixed_as_of",
+      "params_index": 0,
+      "params_repr": "{'effective_from': '2030-01-01', 'started': True}"
+    },
+    {
+      "function": "test_effective_date_roundtrip_real_inverse_with_fixed_as_of",
+      "params_index": 1,
+      "params_repr": "{'effective_from': '2030-04-01', 'started': False}"
+    },
+    {
+      "function": "test_effective_date_roundtrip_distinguishes_date_and_start_condition",
+      "params_index": 0,
+      "params_repr": "{'cutoff': (2030, 1, 1), 'agreement': False}"
+    },
+    {
+      "function": "test_effective_date_roundtrip_distinguishes_date_and_start_condition",
+      "params_index": 1,
+      "params_repr": "{'cutoff': (2030, 6, 1), 'agreement': True}"
+    },
+    {
+      "function": "test_effective_date_roundtrip_keeps_typed_deadline_and_norm_binding",
+      "params_index": null,
+      "params_repr": "{}"
+    },
+    {
+      "function": "test_effective_date_roundtrip_refuses_unrepresented_applicability",
+      "params_index": 0,
+      "params_repr": "{'text': 'Norm: \"agency\" must \"publish\" \"rule\". Temporal: effective from 2030-02-30.'}"
+    },
+    {
+      "function": "test_effective_date_roundtrip_refuses_unrepresented_applicability",
+      "params_index": 1,
+      "params_repr": "{'text': 'Norm: \"agency\" must \"publish\" \"rule\". Temporal: effective from 20300201.'}"
+    },
+    {
+      "function": "test_effective_date_roundtrip_refuses_unrepresented_applicability",
+      "params_index": 2,
+      "params_repr": "{'text': 'Norm: \"agency\" must \"publish\" \"rule\". Temporal: effective from 2030-02-01T00:00:00Z.'}"
+    },
+    {
+      "function": "test_effective_date_roundtrip_refuses_unrepresented_applicability",
+      "params_index": 3,
+      "params_repr": "{'text': 'Norm: \"agency\" must \"publish\" \"rule\".'}"
+    },
+    {
+      "function": "test_effective_date_roundtrip_refuses_unrepresented_applicability",
+      "params_index": 4,
+      "params_repr": "{'text': 'Norm: \"agency\" must \"publish\" \"rule\". Temporal: \"effective from 2030-02-01\".'}"
+    },
+    {
+      "function": "test_effective_date_roundtrip_refuses_unrepresented_applicability",
+      "params_index": 5,
+      "params_repr": "{'text': 'Norm: \"agency\" must \"publish\" \"rule\". Temporal: effective from 2030-01-01; effective from 2030-10-01.'}"
+    },
+    {
+      "function": "test_effective_date_roundtrip_refuses_unrepresented_applicability",
+      "params_index": 6,
+      "params_repr": "{'text': 'Definition: \"notice\" means \"a letter\". Temporal: effective from 2030-02-01.'}"
+    },
+    {
+      "function": "test_effective_date_roundtrip_refuses_unrepresented_applicability",
+      "params_index": 7,
+      "params_repr": "{'text': 'Norm: \"agency\" must \"publish\" \"rule\". Temporal: effective from 2030-02-01 when approved.'}"
+    },
+    {
+      "function": "test_effective_date_wire_is_closed_and_legacy_wires_stay_exact",
+      "params_index": null,
+      "params_repr": "{}"
+    },
+    {
+      "function": "test_effective_date_score_requires_explicit_civil_as_of",
+      "params_index": 0,
+      "params_repr": "{'fault': 'text'}"
+    },
+    {
+      "function": "test_effective_date_score_requires_explicit_civil_as_of",
+      "params_index": 1,
+      "params_repr": "{'fault': 'datetime'}"
+    },
+    {
+      "function": "test_effective_date_score_requires_explicit_civil_as_of",
+      "params_index": 2,
+      "params_repr": "{'fault': 'absent'}"
+    },
+    {
+      "function": "test_effective_date_calendar_type_refuses_duplicates_and_invalid_values",
+      "params_index": null,
+      "params_repr": "{}"
+    },
+    {
+      "function": "test_civil_deadline_same_due_date_preserves_statement_attachment",
+      "params_index": 0,
+      "params_repr": "{'change': 'none', 'expected_due_dates_exact': True}"
+    },
+    {
+      "function": "test_civil_deadline_same_due_date_preserves_statement_attachment",
+      "params_index": 1,
+      "params_repr": "{'change': 'different-unit', 'expected_due_dates_exact': True}"
+    },
+    {
+      "function": "test_civil_deadline_same_due_date_preserves_statement_attachment",
+      "params_index": 2,
+      "params_repr": "{'change': 'different-statement', 'expected_due_dates_exact': False}"
+    }
+  ],
+  "model_or_Native_execution": false,
+  "new_ordinary_qualification": false,
+  "preserved": [
+    "existing report schema",
+    "flat date lists",
+    "unsupported-candidate abstention",
+    "source withheld from inverse",
+    "due-date coincidence under the same context even when typed deadline unit changes"
+  ],
+  "review_or_proof_authority": false,
+  "runner": {
+    "bytes": 5319,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P6-civil-deadline-statement-attachment-private-eYSvma0w/run-existing-roundtrip-fixtures-v02.py.DATA",
+    "sha256": "aa9f0b8bf866c1993d0f9d113b136933f3131b974be8736f739b5ce0e6613a1e"
+  },
+  "same_current_baseline_blobs_and_dependency_bytes": true,
+  "schema": "legal-phase6-civil-deadline-positional-equality-exact2-private/v1"
+}

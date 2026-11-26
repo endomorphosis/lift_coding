@@ -1,0 +1,156 @@
+{
+  "canonical_written": false,
+  "change": "Compare current TRAIN extracted-view SHA-256 values to those already independently sealed in the heldout dependency group. Keep the established raw, declared identity, provision, span-near-duplicate, review and callback checks.",
+  "current_D": {
+    "HEAD": "43414c90daa8ba3c891e2aad635d211ddd5e5133",
+    "clean": true,
+    "tree": "a231536bd161ff6c2a18ebda6caaa6b657b26925"
+  },
+  "files": [
+    {
+      "added_definitions": [],
+      "before": {
+        "bytes": 83929,
+        "full9": {
+          "st_ctime_ns": "1795602326663966983",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "70042561",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795602324163273696",
+          "st_nlink": "1",
+          "st_size": "83929",
+          "st_uid": "1000"
+        },
+        "git_blob": "305520ff096af44b584558cc348238b077ec65cd",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_structured_retrieval.py",
+        "sha256": "8dab91f632a4293395ce45b0b7ca276ea87ec0fb44f44db188525fa038898c91"
+      },
+      "changed_definitions": [
+        "_require_disjoint_heldout_review"
+      ],
+      "kept_top_level_ast_count": 70,
+      "post": {
+        "bytes": 84362,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-reviewed-rich-context-extracted-view-private-m5vcu_b0/legal_structured_retrieval.after.py.DATA",
+        "sha256": "40bee20f85d989be078196b67cb02db7a2ab2e7f22ff4922db38839a1df0caa6"
+      },
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_structured_retrieval.py"
+    },
+    {
+      "added_definitions": [
+        "test_reviewed_rich_heldout_same_extracted_view_refuses_before_actual_producer"
+      ],
+      "before": {
+        "bytes": 285095,
+        "full9": {
+          "st_ctime_ns": "1795602327883980550",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "70042563",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795602324170518849",
+          "st_nlink": "1",
+          "st_size": "285095",
+          "st_uid": "1000"
+        },
+        "git_blob": "688da55d9247d187814e39d57c231933d4f7d143",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py",
+        "sha256": "b97a56402ac386f4eb58df6d625fac15b5a1b4c9e93adaeb6335ea306b42d5ae"
+      },
+      "changed_definitions": [
+        "_rich_v3_heldout_case"
+      ],
+      "kept_top_level_ast_count": 190,
+      "post": {
+        "bytes": 288974,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-reviewed-rich-context-extracted-view-private-m5vcu_b0/owning-test.after.py.DATA",
+        "sha256": "df7736aee87046e3fbbdb835bef2cefa02b542c747b93a91571d0481d63734e0"
+      },
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py"
+    }
+  ],
+  "forward_patch": {
+    "bytes": 7986,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-reviewed-rich-context-extracted-view-private-m5vcu_b0/exact-two-source-files.forward.patch",
+    "sha256": "113d51503821863bec859f413e7bf2adf9f7fc0913ccb9315a0994c4124f0065"
+  },
+  "git_mutation": false,
+  "inverse_patch": {
+    "bytes": 7986,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-reviewed-rich-context-extracted-view-private-m5vcu_b0/exact-two-source-files.inverse.patch",
+    "sha256": "e9007b71ebb8ba8261d5f129720c1f183fb724ad60ea0fa8047d11041d2c0cfb"
+  },
+  "legal_training_proof_or_model_qualification": false,
+  "ordinary_proposed": {
+    "expected_cases": 9,
+    "fresh_collect_is_authoritative": true,
+    "function_case_counts": {
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py::test_aggregate_v4_actual_evaluator_dispatches_both_complete_components_and_definitions": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py::test_reviewed_rich_heldout_original_provision_guard_precedes_source_identity_check": 2,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py::test_reviewed_rich_heldout_same_extracted_view_refuses_before_actual_producer": 2,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py::test_reviewed_rich_heldout_shared_source_identity_rejects_before_actual_producer": 2,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py::test_reviewed_rich_heldout_source_identity_is_bound_to_current_declaration": 2
+    },
+    "ordinary_executed": false
+  },
+  "private_tests": {
+    "after_fail": 0,
+    "after_pass": 4,
+    "baseline": [
+      {
+        "independent_view_retention_pass": true,
+        "report": {
+          "bytes": 2247,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-reviewed-rich-context-extracted-view-private-m5vcu_b0/red-v2/stdout.json",
+          "sha256": "95719b8078e3df2d0be4fcbdf5e0e5ad0d9d8e4dfd0ac0f4d3304e1ac3bf7ea7"
+        },
+        "same_shared_view_refusal_assertion_pass": false,
+        "version": "v2"
+      },
+      {
+        "independent_view_retention_pass": true,
+        "report": {
+          "bytes": 2247,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-reviewed-rich-context-extracted-view-private-m5vcu_b0/red-v3/stdout.json",
+          "sha256": "653c5cf00093718b8f676aeb38fc4b34dd60fff1a8227331659aed5aa1f06067"
+        },
+        "same_shared_view_refusal_assertion_pass": false,
+        "version": "v3"
+      }
+    ],
+    "before_fail": 2,
+    "before_pass": 2,
+    "candidate": [
+      {
+        "independent_view_retention_pass": true,
+        "report": {
+          "bytes": 1011,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-reviewed-rich-context-extracted-view-private-m5vcu_b0/green-v2/stdout.json",
+          "sha256": "a2190789d186248cf3e7d80960306f115deed26ac22cfa54135caf736f162a6c"
+        },
+        "same_shared_view_refusal_assertion_pass": true,
+        "version": "v2"
+      },
+      {
+        "independent_view_retention_pass": true,
+        "report": {
+          "bytes": 1011,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-reviewed-rich-context-extracted-view-private-m5vcu_b0/green-v3/stdout.json",
+          "sha256": "33ece98455ac57979da54410c754774394fba1a1dba6e92895c264e353d8cf05"
+        },
+        "same_shared_view_refusal_assertion_pass": true,
+        "version": "v3"
+      }
+    ],
+    "cpu_count": 1,
+    "cpu_seconds": 45,
+    "native_Lean_Torch_model_sql_or_network": false,
+    "shape": "Public evaluator with current signed fictional evidence and a recording abstention callback. Reuses existing guarded process. Candidate product loaded as an in-memory overlay during candidate-stage runs.",
+    "virtual_memory_bytes": 536870912,
+    "wall_alarm_seconds": 60
+  },
+  "reproduced_defect": "Both components were independently signed and their selected spans, raw hashes, source/occurrence IDs, and declared identities differed. Both bindings were ready and the frozen split passed. Identical SHA-256 of the complete decoded view was accepted by both actual public evaluator variants.",
+  "schema": "reviewed-rich-context-shared-extracted-view-private-exact-two-file-candidate/v1",
+  "scope": "Source/dependency-grouped independence for reviewed heldout rich-context replay. This does not certify producer accuracy or all target aliases."
+}

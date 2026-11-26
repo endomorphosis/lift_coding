@@ -1,0 +1,26 @@
+{
+  "actual_pyarrow_loaded": false,
+  "controls": [
+    {
+      "detail": "[Errno 2] No such file or directory: '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/cli.after.py.DATA'",
+      "exception": "FileNotFoundError",
+      "name": "cli-profile",
+      "passed": false,
+      "traceback": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/run-existing-physical-release-selection.py.DATA\", line 92, in <module>\n    module.test_closure_cli_refuses_declared_eligibility_on_other_profiles(g[\"working\"], capture)\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py\", line 3672, in test_closure_cli_refuses_declared_eligibility_on_other_profiles\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1331, in _find_and_load_unlocked\n  File \"<frozen importlib._bootstrap>\", line 935, in _load_unlocked\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/retry-preservation-v02/run_private_fixture.py.DATA\", line 60, in exec_module\n    class InMemoryFixturePolicy(importlib.abc.MetaPathFinder):\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1021, in read_bytes\n    with self.open(mode='rb') as f:\n         ^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/cli.after.py.DATA'\n"
+    }
+  ],
+  "guard_events": [],
+  "lightweight_private_scope": true,
+  "overlays": [
+    {
+      "actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/test.after.py.DATA",
+      "module": "tests.unit.logic.autoformal._private_v4_current_revocation"
+    }
+  ],
+  "permitted_ctypes_self_handles": [],
+  "physical_fixture_constructed": false,
+  "raw_cli_output": "",
+  "test_module_origin": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py",
+  "test_source_sha256": "ac7ea179761aae0a0972bd93b4bf5cc30b16fcba79ef6c50f74c8cfa80b14098",
+  "torch_duckdb_loaded": false
+}

@@ -1,0 +1,173 @@
+{
+  "actual_canonical_mutation_publication_or_resource_SDK_performed": false,
+  "added_split_cases": 9,
+  "canonical_preimage_published": "d60c456d6f522d074499bf861e5bb0227d5d8645",
+  "changes": {
+    "carried_guards": "A passing compact guard cannot hide computed leakage. An explicit blocking guard retains its refusal.",
+    "declared_digest": "Check optional nested declaration against the recomputed digest.",
+    "malformed": "Refuse invalid or null explicit nested body. Legacy summary-only callers retain their path.",
+    "manifest_identity": "Recompute leakage and canonical digest from one decoded nonempty manifest with exact assignments, then compare digest through the existing external binding path.",
+    "nested_external_gate": "Replay exact typed nested raw or saved evidence alongside top-level decisions, preserving status-only legacy input."
+  },
+  "current_HEAD_and_tracking_preimages_at_seal_verified": [
+    "d58f9a004ea8bf27ff234bb1b55e1eda7a49a6a4",
+    "d60c456d6f522d074499bf861e5bb0227d5d8645"
+  ],
+  "exact_forward_inverse_byte_and_mode_verified": true,
+  "files": [
+    {
+      "after": {
+        "bytes": 226977,
+        "git_blob": "e5c79d2fbbaab3c424b5299fd7c686f58ef4ea30",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-split-manifest-identity-and-nested-replay-private-rh46ft23/rollout.after.nested-and-split.py.DATA",
+        "sha256": "589227ba9499432d7cd8af68f1ca89ccbb84c77ccde4b2320ffb56c15a29319a"
+      },
+      "before": {
+        "bytes": 224287,
+        "git_blob": "da9d7603679ecc3bfc2f822a152d0f93147fa830",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-nested-external-evidence-replay-private-n0oyyaah/baseline/scripts/ops/legal_ir/hammer_leanstral_rollout_gate.py",
+        "sha256": "43eba36819cd183cee96fddda113386964b7233a1a7a1750b3f27423f69961f1"
+      },
+      "relative_path": "scripts/ops/legal_ir/hammer_leanstral_rollout_gate.py",
+      "role": "existing_compiler_gate"
+    },
+    {
+      "after": {
+        "bytes": 28012,
+        "git_blob": "a474854742d0f937d0980bd12a253cc7a9da8164",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-split-manifest-identity-and-nested-replay-private-rh46ft23/test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py",
+        "sha256": "4384ceef5a8d2655d395aace8277572807a2c3db0714ab6783b4fd176e1f4e52"
+      },
+      "before": {
+        "bytes": 20168,
+        "git_blob": "c7e6fbcf666312c32434cdeabc9c345cf52410a3",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-nested-external-evidence-replay-private-n0oyyaah/compiler.test.before.py.DATA",
+        "sha256": "cdbcf4c325be7dfefa62fa16b8a6d63fe945a60c199b53dbae77780ddb02ef64"
+      },
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py",
+      "role": "owning_compiler_tests"
+    }
+  ],
+  "forward": {
+    "bytes": 13356,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-split-manifest-identity-and-nested-replay-private-rh46ft23/exact2-forward.patch.DATA",
+    "sha256": "b9ee52b81519025fa8c9af7619a783e08f8113fdb0d64f7d98c7435e91ef6eaa"
+  },
+  "identical_order_all_three": true,
+  "initial_preparation_refusal": "Canonical HEAD advanced for a disjoint file. Reauthenticated both relevant preimages at actual HEAD and at origin/main before preparing private fixtures.",
+  "inverse": {
+    "bytes": 13356,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-split-manifest-identity-and-nested-replay-private-rh46ft23/exact2-inverse.patch.DATA",
+    "sha256": "e8fc3b49056fc3112d70288428219c134478b0bbba21b179bf6338e0fd925555"
+  },
+  "model_legal_native_or_ordinary_claim": false,
+  "predecessor_baseline_manifest": {
+    "bytes": 6454,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-split-manifest-identity-and-nested-replay-private-rh46ft23/exact-composed-role-and-test-inputs.RED.json",
+    "sha256": "dc0556cd822041db29527f8f80a4aa22c2180934ae12835ac137bb737071ab2d"
+  },
+  "predecessor_nested_only_private124": {
+    "bytes": 10741,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-nested-external-evidence-replay-private-n0oyyaah/SEALED-P8-nested-external-gate-replay-exact2-private124.json",
+    "sha256": "50ddd1e037598bbee3f32b920400f2491b8c5ea028337524ead50f69b997e6a3"
+  },
+  "prior_compiler_test_prefix_bytes_exact": 22682,
+  "prior_compiler_test_top_level_AST_nodes_exact": 31,
+  "private_same133": {
+    "published-before": {
+      "duplicates": 0,
+      "errors": 0,
+      "failed": 13,
+      "passed": 120,
+      "raw_JUnit": {
+        "bytes": 38054,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-split-manifest-identity-and-nested-replay-private-rh46ft23/published-before/junit.xml",
+        "sha256": "8565de76692259f75907b5ee86fa75450d671d65e0059243d41df1b33b020800"
+      },
+      "returncode": 1,
+      "run": {
+        "bytes": 1021,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-split-manifest-identity-and-nested-replay-private-rh46ft23/published-before/run.json",
+        "sha256": "e862355d2586774d80ae62a0377c0d721841c223d7882730b38cb8ecb5fc462c"
+      },
+      "skipped": 0,
+      "stdout": {
+        "bytes": 11929,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-split-manifest-identity-and-nested-replay-private-rh46ft23/published-before.stdout",
+        "sha256": "bf205b943838aabb4615d6308b3d89937a039e1baa530aca492be0d8006a72d0"
+      }
+    },
+    "split-after": {
+      "duplicates": 0,
+      "errors": 0,
+      "failed": 0,
+      "passed": 133,
+      "raw_JUnit": {
+        "bytes": 26674,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-split-manifest-identity-and-nested-replay-private-rh46ft23/split-after/junit.xml",
+        "sha256": "42678efcc8a95eb177b83f12fc352380250a957a98e8940b2ec012bd9fec628b"
+      },
+      "returncode": 0,
+      "run": {
+        "bytes": 1020,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-split-manifest-identity-and-nested-replay-private-rh46ft23/split-after/run.json",
+        "sha256": "36013a61a04566f9fa2196704943a68569da23ce4ed46d7252c25d81fb4d3a97"
+      },
+      "skipped": 0,
+      "stdout": {
+        "bytes": 447,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-split-manifest-identity-and-nested-replay-private-rh46ft23/split-after.stdout",
+        "sha256": "aabd2505e630c9cffa84f96e10b171e750f52a6e1c73e737a857423966bde285"
+      }
+    },
+    "split-before": {
+      "duplicates": 0,
+      "errors": 0,
+      "failed": 9,
+      "passed": 124,
+      "raw_JUnit": {
+        "bytes": 34216,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-split-manifest-identity-and-nested-replay-private-rh46ft23/split-before/junit.xml",
+        "sha256": "6673aa63d8e1199c8b849d7b79b677047448058b138d2246c315b8cbc0821822"
+      },
+      "returncode": 1,
+      "run": {
+        "bytes": 1020,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-split-manifest-identity-and-nested-replay-private-rh46ft23/split-before/run.json",
+        "sha256": "3c3de605d0f4d94c589d0a75798e53f7dadc74072a9a5a5fb20221b14e9c7ba3"
+      },
+      "skipped": 0,
+      "stdout": {
+        "bytes": 8429,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-split-manifest-identity-and-nested-replay-private-rh46ft23/split-before.stdout",
+        "sha256": "11e7e98629f121ad018f3356b7275516f72679212aa4cacab2b49576ffe11b1f"
+      }
+    }
+  },
+  "publication_or_normal_selection": null,
+  "published_different_clean_manifest_probe": {
+    "bytes": 3297,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-nested-external-evidence-replay-private-n0oyyaah/actual-published-gate-clean-split-identity-mismatch-private.json",
+    "sha256": "c0da1be3855691c86f80201cec5610a7a52dfaa17c51b1e020022bfcd4d6a2be"
+  },
+  "retained_ordinary_CLI_cases_excluded_from_private_harness": 2,
+  "retained_prior_private124": 124,
+  "roster": {
+    "bytes": 26831,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-split-manifest-identity-and-nested-replay-private-rh46ft23/exact133-roster-and-red-outcomes.json",
+    "sha256": "2f86cfce0c8201e8b3644ee4c81328665a062cf3c80e0247bd9492f6e10eb5b3"
+  },
+  "runner": {
+    "bytes": 3835,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-split-manifest-identity-and-nested-replay-private-rh46ft23/run-existing-composed-benchmark-through-compiler.py.DATA",
+    "sha256": "61f4a17ec9b5ac32dd66f910ed92cede740e71b030ea7d9373aff05b4904bc75"
+  },
+  "schema": "private-Phase8-existing-compiler-nested-gate-and-validated-split-exact2/v1",
+  "selected_private_candidate_manifest": {
+    "bytes": 6481,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-split-manifest-identity-and-nested-replay-private-rh46ft23/exact-composed-role-and-test-inputs.json",
+    "sha256": "a05640370237e86ed460cf528dcd9a762c61c5f966e9ff1239e3cc7607270a4a"
+  },
+  "status": "verified_private_proposal",
+  "workspace_HEAD_observed_while_preparing": "d58f9a004ea8bf27ff234bb1b55e1eda7a49a6a4"
+}

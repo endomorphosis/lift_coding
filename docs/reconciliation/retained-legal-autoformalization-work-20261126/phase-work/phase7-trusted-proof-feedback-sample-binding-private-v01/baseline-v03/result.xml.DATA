@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="1" failures="0" skipped="0" tests="1" time="1.426" timestamp="2026-11-24T19:58:00.812418+00:00" hostname="spark-b271"><testcase classname="" name="tests.unit.logic.integration.test_trusted_feedback_weight_updates" time="0.000"><error message="collection failure">ImportError while importing test module '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/dataset/tests/unit/logic/integration/test_trusted_feedback_weight_updates.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+tests/unit/logic/integration/test_trusted_feedback_weight_updates.py:9: in &lt;module&gt;
+    from ipfs_datasets_py.logic.integration.reasoning.legal_ir_learned_guidance import (
+ipfs_datasets_py/logic/integration/reasoning/legal_ir_learned_guidance.py:29: in &lt;module&gt;
+    from .legal_ir_premise_security import scan_legal_ir_artifact
+ipfs_datasets_py/logic/integration/reasoning/legal_ir_premise_security.py:20: in &lt;module&gt;
+    from .hammer import HammerPremise
+ipfs_datasets_py/logic/integration/reasoning/hammer.py:24: in &lt;module&gt;
+    from ipfs_datasets_py.logic.hammers.process_lifecycle import (
+ipfs_datasets_py/logic/hammers/__init__.py:295: in &lt;module&gt;
+    from .reconstructors import (
+ipfs_datasets_py/logic/hammers/reconstructors/__init__.py:34: in &lt;module&gt;
+    from .isabelle import IsabelleReconstructor
+ipfs_datasets_py/logic/hammers/reconstructors/isabelle.py:19: in &lt;module&gt;
+    from ipfs_datasets_py.logic.backends.kernel.isabelle import evaluate_isabelle_kernel_output
+ipfs_datasets_py/logic/backends/kernel/isabelle.py:41: in &lt;module&gt;
+    from ...families.models import EvidenceAuthority
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.families'</error></testcase></testsuite></testsuites>

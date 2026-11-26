@@ -1,0 +1,457 @@
+{
+  "Native_commands": 0,
+  "SQL_connections": 0,
+  "baseline_compiled_SUT_and_protocol_sha256": {
+    "ipfs_datasets_py.logic.backends.cache_protocol": "1d92c97499d59c09de131e28da6a14aa07b29056897719b5fc16fba6c38ceb59",
+    "ipfs_datasets_py.logic.common.duckdb_proof_migration": "a82a23ba02a23c34fe25519a3fef498ec3d6f4e7c2637bf9feb6d6a361c35d74",
+    "ipfs_datasets_py.logic.common.duckdb_proof_store": "f71463279dc8c2b9c261928cb92dcb28472f79fb8da4baa807cfa38ab499a386",
+    "ipfs_datasets_py.logic.legal_ir.proof_cache": "9b05a2f890f2df62931273f2448182af8a2d99af73248c5c67ef2ec3d04b0c3c"
+  },
+  "canonical_Source_reads_or_Git_worktree_mutations": 0,
+  "fixture_repin_or_installation_selected": false,
+  "green": {
+    "cases": {
+      "test_cache_compute_leader_respects_requested_theorem_authority[advisory-refused-exact]": "pass",
+      "test_cache_compute_leader_respects_requested_theorem_authority[advisory-refused-unified]": "pass",
+      "test_cache_compute_leader_respects_requested_theorem_authority[theorem-usable-exact]": "pass",
+      "test_cache_compute_leader_respects_requested_theorem_authority[theorem-usable-unified]": "pass"
+    },
+    "ordered_nodes": [
+      "test_cache_compute_leader_respects_requested_theorem_authority[advisory-refused-exact]",
+      "test_cache_compute_leader_respects_requested_theorem_authority[advisory-refused-unified]",
+      "test_cache_compute_leader_respects_requested_theorem_authority[theorem-usable-exact]",
+      "test_cache_compute_leader_respects_requested_theorem_authority[theorem-usable-unified]"
+    ],
+    "ref": {
+      "bytes": 754,
+      "full9": {
+        "st_ctime_ns": "1795579419081010739",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72102197",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795579419081010739",
+        "st_nlink": "1",
+        "st_size": "754",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/green-v01/junit.xml",
+      "sha256": "c2a634a144fc4163ee70ecc3ed12abed50cd990e8e0736f280c99ea124c25533"
+    },
+    "time_seconds": 2.546
+  },
+  "leader_contract": "After storage, use the stored entry authority to set usable and reason for the explicit require_result_authority filter. Storage record and retained advisory remain available.",
+  "live_resource_ledger_or_scheduler_access": 0,
+  "only_two_production_module_compiled_hash_differences": [
+    "ipfs_datasets_py.logic.backends.cache_protocol",
+    "ipfs_datasets_py.logic.common.duckdb_proof_store"
+  ],
+  "patch": {
+    "bytes": 2447,
+    "full9": {
+      "st_ctime_ns": "1795579407210529530",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72102189",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795579407210529530",
+      "st_nlink": "1",
+      "st_size": "2447",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/minimal-leader-authority-two-file.patch",
+    "sha256": "eacdc6697c04cd0d4dc5ffd1bd83024cb7580003ab8fa5a59ce20c9392d5ef0e"
+  },
+  "preserved_published_owning_test_bytes": 84499,
+  "preserved_published_owning_test_sha256": "239d05de5b08eba8de06b67a74efe109900a6302d73c27d28d450bf2f8061d2f",
+  "private_posts": {
+    "ipfs_datasets_py/logic/backends/cache_protocol.py": {
+      "bytes": 42603,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/cache_protocol.leader-authority.after.py.DATA",
+      "sha256": "722730748990d01f926a1499b973f9cb64ccc5fdb78225ae29236abe9ac105e1"
+    },
+    "ipfs_datasets_py/logic/common/duckdb_proof_store.py": {
+      "bytes": 110815,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/duckdb_proof_store.leader-authority.after.py.DATA",
+      "sha256": "633f0c555c092522826c1385b967a33b9d81dbbdb3883e7782171ea89e11414b"
+    }
+  },
+  "private_posts_map": {
+    "bytes": 962,
+    "full9": {
+      "st_ctime_ns": "1795579407207406712",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72102188",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795579407207406712",
+      "st_nlink": "1",
+      "st_size": "962",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/exact-two-private-leader-after-map.json",
+    "sha256": "2af86d8ee0debff7622333290f31b7bdb92e0ee06a5decc6f9e736e0078afbf5"
+  },
+  "published_D_baseline": "35e56b6b34c5cd363935e5377c1946a1a53e32b1",
+  "red": {
+    "cases": {
+      "test_cache_compute_leader_respects_requested_theorem_authority[advisory-refused-exact]": "fail",
+      "test_cache_compute_leader_respects_requested_theorem_authority[advisory-refused-unified]": "fail",
+      "test_cache_compute_leader_respects_requested_theorem_authority[theorem-usable-exact]": "pass",
+      "test_cache_compute_leader_respects_requested_theorem_authority[theorem-usable-unified]": "pass"
+    },
+    "ordered_nodes": [
+      "test_cache_compute_leader_respects_requested_theorem_authority[advisory-refused-exact]",
+      "test_cache_compute_leader_respects_requested_theorem_authority[advisory-refused-unified]",
+      "test_cache_compute_leader_respects_requested_theorem_authority[theorem-usable-exact]",
+      "test_cache_compute_leader_respects_requested_theorem_authority[theorem-usable-unified]"
+    ],
+    "ref": {
+      "bytes": 2282,
+      "full9": {
+        "st_ctime_ns": "1795579327501558124",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72102184",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795579327501558124",
+        "st_nlink": "1",
+        "st_size": "2282",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/red-v04/junit.xml",
+      "sha256": "68b8074d67dce98a27f65a6c1648401f77b7e7ec5c4a70bca370c695da40c58b"
+    },
+    "time_seconds": 2.592
+  },
+  "runtime_accounting": {
+    "AS_bytes": 536870912,
+    "CPU_seconds_per_process": 45,
+    "CPU_slots": 1,
+    "cumulative_cached_input_reads_explicit": 13462754,
+    "direct_patch_preimage_and_emitted_post_readback_bytes": 305935,
+    "historical_discovery_shell_and_implicit_library_IO_fully_measured": false,
+    "per_process_cached_input_cap": 8388608,
+    "receipt_assembly_explicit_reads_before_seal": 224719,
+    "unit_cached_exec_inputs_upper_bound": 25165824,
+    "wall_seconds_per_process": 60
+  },
+  "same_case_test_and_runner": {
+    "bytes": 12090,
+    "full9": {
+      "st_ctime_ns": "1795579324631839702",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72102174",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795579324631839702",
+      "st_nlink": "1",
+      "st_size": "12090",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/run_cache_four_v04.py",
+    "sha256": "c0cdd856128b947264845eac417dd674a0964b5d0bca220a997786d929f54a9c"
+  },
+  "same_retained_import_names": 56,
+  "schema": "P1-exact-cache-leader-authority-private-four-case-qualified/v1",
+  "scope": "Four exact same-fixture in-memory cases. Published ordinary166, SQL51, Native and actual theorem-proof qualification stay separate.",
+  "setup_failures_and_all_attempts_retained": [
+    {
+      "actual_exit": 137,
+      "control": {
+        "bytes": 811,
+        "full9": {
+          "st_ctime_ns": "1795579161105638571",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102129",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795579161105638571",
+          "st_nlink": "1",
+          "st_size": "811",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/red-v01/run-control.json",
+        "sha256": "10d9a029921bb53bc13d48d921ff920859e6c9b2708d45e30a50ab9ebdd5c794"
+      },
+      "explicit_cached_read_bytes": 680832,
+      "guard_denied_effects": [
+        [
+          "open",
+          "/dev/null"
+        ]
+      ],
+      "run": "red-v01",
+      "stage": "pytest default log attempted /dev/null before case collection",
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795579160844007992",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102126",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795579160844007992",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/red-v01.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 3261,
+        "full9": {
+          "st_ctime_ns": "1795579161105638571",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102125",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795579161105638571",
+          "st_nlink": "1",
+          "st_size": "3261",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/red-v01.stdout",
+        "sha256": "2c25b7fabfec60c5b2f5073e9ecd5e1c8f60b5016e151a6f03940d882be38fbc"
+      }
+    },
+    {
+      "actual_exit": 1,
+      "control": {
+        "bytes": 25105,
+        "full9": {
+          "st_ctime_ns": "1795579182896181147",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102160",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795579182896181147",
+          "st_nlink": "1",
+          "st_size": "25105",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/red-v02/run-control.json",
+        "sha256": "3bd366698104a4249193a20d3d555b875512765b5d718ec88829da517d952d26"
+      },
+      "explicit_cached_read_bytes": 3134971,
+      "guard_denied_effects": [],
+      "run": "red-v02",
+      "stage": "missing pinned cached process.py import before authority assertions",
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795579180551231758",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102157",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795579180551231758",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/red-v02.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 4830,
+        "full9": {
+          "st_ctime_ns": "1795579182896181147",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102156",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795579182896181147",
+          "st_nlink": "1",
+          "st_size": "4830",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/red-v02.stdout",
+        "sha256": "291a6fc1987b93114b0047e8b1a5fbf1ff09483dea8c4c0aea0c81c93d572f74"
+      }
+    },
+    {
+      "actual_exit": 1,
+      "control": {
+        "bytes": 25540,
+        "full9": {
+          "st_ctime_ns": "1795579285825979711",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102173",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795579285825979711",
+          "st_nlink": "1",
+          "st_size": "25540",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/red-v03/run-control.json",
+        "sha256": "34e2a2cbb5bb4e3cc173f1bdfbf70d10d7b769f503b7ce31815d3201350cca75"
+      },
+      "explicit_cached_read_bytes": 3244678,
+      "guard_denied_effects": [],
+      "run": "red-v03",
+      "stage": "missing pinned cached resource_admission.py import before authority assertions",
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795579283499381110",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102170",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795579283499381110",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/red-v03.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 5018,
+        "full9": {
+          "st_ctime_ns": "1795579285825979711",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102169",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795579285825979711",
+          "st_nlink": "1",
+          "st_size": "5018",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/red-v03.stdout",
+        "sha256": "4e7455756a96c5fb3435b312e6ec2fa666b1362097de5a6102ce4e219dc1951d"
+      }
+    },
+    {
+      "actual_exit": 1,
+      "control": {
+        "bytes": 25828,
+        "full9": {
+          "st_ctime_ns": "1795579327503258991",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102181",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795579327503258991",
+          "st_nlink": "1",
+          "st_size": "25828",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/red-v04/run-control.json",
+        "sha256": "4a1e3549ddb248baebe9c39fe25271459ad140780c9dea0ce9fbf65a1ebe9f02"
+      },
+      "explicit_cached_read_bytes": 3200205,
+      "guard_denied_effects": [],
+      "run": "red-v04",
+      "stage": "genuine authority-check baseline",
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795579324635832113",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102178",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795579324635832113",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/red-v04.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 1848,
+        "full9": {
+          "st_ctime_ns": "1795579327503258991",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102177",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795579327503258991",
+          "st_nlink": "1",
+          "st_size": "1848",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/red-v04.stdout",
+        "sha256": "06ed2005d467d9197265a23e3dbdfc588277d39268366ead30654e1965dc485e"
+      }
+    },
+    {
+      "actual_exit": 0,
+      "control": {
+        "bytes": 26670,
+        "full9": {
+          "st_ctime_ns": "1795579419082425858",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102194",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795579419082425858",
+          "st_nlink": "1",
+          "st_size": "26670",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/green-v01/run-control.json",
+        "sha256": "3f291a6120a395c2e7ff4876ce21abe412b1f9c17f03fac56bab157381aea540"
+      },
+      "explicit_cached_read_bytes": 3202068,
+      "guard_denied_effects": [],
+      "run": "green-v01",
+      "stage": "same four cases after private two-file leader fix",
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795579416277822292",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102191",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795579416277822292",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/green-v01.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 394,
+        "full9": {
+          "st_ctime_ns": "1795579419082425858",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102190",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795579419082425858",
+          "st_nlink": "1",
+          "st_size": "394",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/green-v01.stdout",
+        "sha256": "c07ccb9802a214e8eab52ff1811f6c949ca43703acece8f8d63b0a5a4d6b54a5"
+      }
+    }
+  ],
+  "structural_preservation": "Only the leader return computation in each get_or_compute changed. Same callable signatures, earlier cache lookup and retry decisions, waiter, put and flight finalization.",
+  "test": {
+    "bytes": 86879,
+    "full9": {
+      "st_ctime_ns": "1795578849270696299",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72102105",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795578849270696299",
+      "st_nlink": "1",
+      "st_size": "86879",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/test_proof_cache.after.py.DATA",
+    "sha256": "e86d6d85c1333dd536ee997bf5a3e09b5f625f11bf399ed140c2504a894ece4e"
+  }
+}

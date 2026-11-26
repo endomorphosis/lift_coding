@@ -1,0 +1,77 @@
+{
+  "actual_result": {
+    "complete": false,
+    "detail": {
+      "counterexample_signature_sizes": {
+        "candidate": 0,
+        "reference": 0
+      },
+      "graph_signature_sizes": {
+        "candidate": 0,
+        "reference": 0
+      },
+      "obligation_signature_sizes": {
+        "candidate": 1,
+        "reference": 1
+      },
+      "proof_obligation_counts": {
+        "candidate": 1,
+        "reference": 1,
+        "symmetric_difference": 0
+      },
+      "raw_input_coverage": {
+        "candidate_unsupported_paths": [],
+        "canonical_typed_ir_validated": false,
+        "legal_source_correspondence_verified": false,
+        "profile": "legacy-reported-surfaces/v1",
+        "reference_unsupported_paths": []
+      },
+      "round_trip_evidence": {
+        "authority": "caller_reported_observations_only",
+        "candidate": "missing_or_ambiguous_observation",
+        "independently_recompiled": false,
+        "reference": "missing_or_ambiguous_observation"
+      },
+      "temporal_window_signature_sizes": {
+        "candidate": 0,
+        "reference": 0
+      }
+    },
+    "evidence_sources": [
+      "computed_ir_pair"
+    ],
+    "family": "deontic",
+    "minimum_score": 1.0,
+    "missing_metrics": [
+      "decompiler_round_trip_preservation"
+    ],
+    "raw_deltas": {
+      "proof_obligation_delta": 0.0
+    },
+    "scores": {
+      "counterexample_equivalence": 1.0,
+      "graph_isomorphism": 1.0,
+      "obligation_equivalence": 1.0,
+      "proof_obligation_delta_score": 1.0,
+      "structural_equivalence": 1.0,
+      "temporal_window_agreement": 1.0
+    }
+  },
+  "learned_runtime_loaded": false,
+  "legacy_test_path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_latent_diagnostics.py",
+  "legacy_test_sha256": "9469b0dbacdb61e2acb41d2e75dd3319411266ec06daeebc7810813160b9a3e1",
+  "owner_path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_semantic_metrics.py",
+  "owner_sha256": "8a62ef6ecb50608a828ad15ca90cd478d5b70168d1ab74802bd0ccee594da388",
+  "raw_fixture": {
+    "rules": [
+      {
+        "action": "provide notice",
+        "modality": "obligation",
+        "proof_obligation_ids": [
+          "po-notice"
+        ],
+        "subject": "Agency"
+      }
+    ]
+  }
+}

@@ -1,0 +1,282 @@
+--- v266/operator.INERT.py.DATA
++++ P2-ordinary5/operator.INERT.py.DATA
+@@ -1,4 +1,4 @@
+-"""INERT published-D corpus-release-public-v4-ordinary4 through the existing R2 Source42/SDK route.
++"""INERT frozen-local-D corpus-release-public-v4-revocation-ordinary5 through the existing R2 Source42/SDK route.
+ Final Git/READ pins, fixture effects, IO plan and Root runtime selection are NULL.
+ No Source-WRITE installation or qualified statutory/Native result is asserted.
+ """
+@@ -8,8 +8,8 @@
+ from pathlib import Path
+ ROOT_SELECTION = None
+ ROOT_RUNTIME_SELECTION = None
+-MAINTAINED_OWNER_VISIBILITY_POLICY = {'schema': 'phase6-existing-modern-lazy-owner-visibility/v1', 'selection_group': 'corpus-release-public-v4-ordinary4', 'lazy_owner_names': ['ipfs_datasets_py.logic.autoformal.legal_release_coordinator_v1'], 'force_imports': False, 'early_absence': 'record-not-loaded', 'run_terminal': 'require-loaded-and-compiled'}
+-MAINTAINED_OWNER_VISIBILITY_POLICY_REFERENCE = {'path': '/tmp/Phase8-corpus-CLI4-existing-modern-INERT-v266-ytyxa84v/exact-CLI4-single-coordinator-existing-lazy-visibility-policy.json', 'bytes': 338, 'sha256': 'd17e6542f92b927aad45cd5e14e73e95b7913179fe425eb77c33af06659c2709'}
++MAINTAINED_OWNER_VISIBILITY_POLICY = {'schema': 'phase6-existing-modern-lazy-owner-visibility/v1', 'selection_group': 'corpus-release-public-v4-revocation-ordinary5', 'lazy_owner_names': ['ipfs_datasets_py.logic.autoformal.legal_release_coordinator_v1'], 'force_imports': False, 'early_absence': 'record-not-loaded', 'run_terminal': 'require-loaded-and-compiled'}
++MAINTAINED_OWNER_VISIBILITY_POLICY_REFERENCE = {'path': '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-Phase8-V4-revocation-replay-private-v01-TS3zxd/ordinary5-existing-v266-frozen-local-INERT-f3howlht/exact-ordinary5-existing-lazy-policy.json', 'bytes': 349, 'sha256': '2179a81bb60009acb0e4770f0d4e885506e1a76c0bf3cbc4439b7d341fa76c87'}
+ SELECTED_TEST_REWRITE_POLICY = {'cache_policy': 'bypass-read-only-for-selected-owning-test', 'required_compile_and_execution_witness': True, 'rewrite_policy': 'normal-pytest-assertion-rewrite', 'schema': 'selected-test-normal-pytest-source-AST-code-observation/v1', 'selected_test_binding_names': ['tests.unit.logic.autoformal.test_corpus_release_cli'], 'unobserved_or_cached_only_route': 'REFUSE'}
+ FINAL_OUTPUT_PATH = None
+ FINAL_D_ROOT = None
+@@ -37,11 +37,11 @@
+ FINAL_ADDITIONAL_IMPORT_ROOTS = []
+ SELECTED_TEST_MODULES = {'tests/unit/logic/autoformal/test_corpus_release_cli.py': 'tests.unit.logic.autoformal.test_corpus_release_cli'}
+ MAINTAINED_OWNER_NAMES = ['ipfs_datasets_py.logic.autoformal.legal_release_coordinator_v1']
+-SELECTION = {'function_count': 3, 'literal_expected_cases': 4, 'function_selectors': ['tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_complete_source_use_whole_norm_project_is_independently_replayed', 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_actual_explicit_cli_is_source_only', 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_cli_refuses_native_selection'], 'expected_function_case_counts': {'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_complete_source_use_whole_norm_project_is_independently_replayed': 1, 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_actual_explicit_cli_is_source_only': 2, 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_cli_refuses_native_selection': 1}, 'owning_files': ['tests/unit/logic/autoformal/test_corpus_release_cli.py'], 'actual_collect_is_roster_and_order_authority': True}
+-EXPECTED_BRIDGE27_CASE_VECTOR = (1, 2, 1)
++SELECTION = {'actual_collect_is_roster_and_order_authority': True, 'expected_function_case_counts': {'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_actual_explicit_cli_is_source_only': 2, 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_cli_refuses_native_selection': 1, 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_complete_source_use_whole_norm_project_is_independently_replayed': 1, 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_current_replay_refuses_genuinely_revoked_reviewer': 1}, 'function_count': 4, 'function_selectors': ['tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_complete_source_use_whole_norm_project_is_independently_replayed', 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_actual_explicit_cli_is_source_only', 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_cli_refuses_native_selection', 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_current_replay_refuses_genuinely_revoked_reviewer'], 'literal_expected_cases': 5, 'owning_files': ['tests/unit/logic/autoformal/test_corpus_release_cli.py']}
++EXPECTED_BRIDGE27_CASE_VECTOR = (1, 2, 1, 1)
+ if any((value is None for value in (ROOT_SELECTION, ROOT_RUNTIME_SELECTION, SELECTED_TEST_REWRITE_POLICY, FINAL_OUTPUT_PATH, FINAL_D_ROOT, FINAL_D_HEAD, FINAL_D_TREE, FINAL_A_ROOT, FINAL_A_HEAD, FINAL_A_TREE, D_READ_BINDING_REFERENCE, D_READ_BINDING_ABI, FINAL_BINDING_MANIFEST_REFERENCE, FINAL_BINDING_MANIFEST, FINAL_MODULE_BINDINGS, FINAL_D_PROVENANCE, FINAL_A_PROVENANCE, FINAL_SOURCE_PROJECTS, FINAL_SDK_BINDINGS, FINAL_RESOURCE_STATE_PATH, FINAL_EXPECTED_RESOURCE_CONFIG, FINAL_EXPECTED_CAPACITY, FINAL_FIXTURE_CLOSURE_REFERENCE, FINAL_EFFECT_DECISION_REFERENCE, FINAL_EFFECT_DECISION, FINAL_ADMITTED_IO_PLAN_REFERENCE, FINAL_ADDITIONAL_IMPORT_ROOTS, SELECTED_TEST_MODULES, MAINTAINED_OWNER_NAMES, SELECTION))):
+     raise RuntimeError('INERT D27: current D/A Git READ bindings, fixture-effect decision, IO and Root authority remain NULL')
+-PREP = '/tmp/Phase8-corpus-CLI4-existing-modern-INERT-v266-ytyxa84v'
++PREP = '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-Phase8-V4-revocation-replay-private-v01-TS3zxd/ordinary5-existing-v266-frozen-local-INERT-f3howlht'
+ ROOT = Path(FINAL_D_ROOT)
+ ADDITIONAL_A_ROOT = Path(FINAL_A_ROOT)
+ RUN_OUTPUT = Path(FINAL_OUTPUT_PATH)
+@@ -57,7 +57,7 @@
+         return ()
+     expected_names = ['ipfs_datasets_py.logic.autoformal.legal_release_coordinator_v1']
+     expected_tests = {'tests/unit/logic/autoformal/test_corpus_release_cli.py': 'tests.unit.logic.autoformal.test_corpus_release_cli'}
+-    expected = {'schema': 'phase6-existing-modern-lazy-owner-visibility/v1', 'selection_group': 'corpus-release-public-v4-ordinary4', 'lazy_owner_names': ['ipfs_datasets_py.logic.autoformal.legal_release_coordinator_v1'], 'force_imports': False, 'early_absence': 'record-not-loaded', 'run_terminal': 'require-loaded-and-compiled'}
++    expected = {'schema': 'phase6-existing-modern-lazy-owner-visibility/v1', 'selection_group': 'corpus-release-public-v4-revocation-ordinary5', 'lazy_owner_names': ['ipfs_datasets_py.logic.autoformal.legal_release_coordinator_v1'], 'force_imports': False, 'early_absence': 'record-not-loaded', 'run_terminal': 'require-loaded-and-compiled'}
+     if type(policy) is not dict or set(policy) != set(expected) or policy != expected or (type(policy['force_imports']) is not bool) or (policy['force_imports'] is not False) or (type(policy['lazy_owner_names']) is not list) or (names != expected_names) or (tests != expected_tests) or (group != expected['selection_group']):
+         raise RuntimeError('unknown or out-of-scope maintained-owner visibility policy')
+     return tuple(expected_names)
+@@ -103,13 +103,13 @@
+ assert ROOT_SELECTION == ROOT_RUNTIME_SELECTION['root_selection']
+ assert ROOT.is_absolute() and ADDITIONAL_A_ROOT.is_absolute() and (ROOT != ADDITIONAL_A_ROOT)
+ assert all((type(v) is str and len(v) == 40 and all((c in '0123456789abcdef' for c in v)) for v in (FINAL_D_HEAD, FINAL_D_TREE, FINAL_A_HEAD, FINAL_A_TREE)))
+-BOOTSTRAP_REFERENCE = {'path': '/tmp/Phase8-corpus-CLI4-existing-modern-INERT-v266-ytyxa84v/same-existing-modern-CLI4-single-lazy-bootstrap.INERT.py.DATA', 'bytes': 41398, 'sha256': 'f806ff987f7027d677a045ff5ff09b8d9182c3577a96490ee8f6a32b65dc56b8'}
++BOOTSTRAP_REFERENCE = {'path': '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-Phase8-V4-revocation-replay-private-v01-TS3zxd/ordinary5-existing-v266-frozen-local-INERT-f3howlht/same-existing-v4-revocation5-bootstrap.INERT.py.DATA', 'bytes': 41909, 'sha256': '6fe798b7f884e21f0d0a59182c12b6ce2da183d0a903d4f242f94db0400cf5ba'}
+ _BOOTSTRAP_RAW = read_private(BOOTSTRAP_REFERENCE['path'], BOOTSTRAP_REFERENCE['bytes'], BOOTSTRAP_REFERENCE['sha256'])
+ _BT = ast.parse(_BOOTSTRAP_RAW, filename=BOOTSTRAP_REFERENCE['path'])
+ for _literal_name, _expected in (('ROOT_RUNTIME_SELECTION', ROOT_RUNTIME_SELECTION), ('SELECTED_TEST_REWRITE_POLICY', SELECTED_TEST_REWRITE_POLICY), ('MAINTAINED_OWNER_VISIBILITY_POLICY', MAINTAINED_OWNER_VISIBILITY_POLICY), ('MAINTAINED_OWNER_VISIBILITY_POLICY_REFERENCE', MAINTAINED_OWNER_VISIBILITY_POLICY_REFERENCE)):
+     _matches = [n for n in _BT.body if isinstance(n, ast.Assign) and any((isinstance(t, ast.Name) and t.id == _literal_name for t in n.targets))]
+     assert len(_matches) == 1 and ast.literal_eval(_matches[0].value) == _expected
+-_lazy_owner_names = validate_owner_visibility_policy(MAINTAINED_OWNER_VISIBILITY_POLICY, MAINTAINED_OWNER_NAMES, SELECTED_TEST_MODULES, 'corpus-release-public-v4-ordinary4')
++_lazy_owner_names = validate_owner_visibility_policy(MAINTAINED_OWNER_VISIBILITY_POLICY, MAINTAINED_OWNER_NAMES, SELECTED_TEST_MODULES, 'corpus-release-public-v4-revocation-ordinary5')
+ if MAINTAINED_OWNER_VISIBILITY_POLICY is None:
+     assert MAINTAINED_OWNER_VISIBILITY_POLICY_REFERENCE is None
+ else:
+@@ -157,11 +157,11 @@
+ _effect = json.loads(read_private(FINAL_EFFECT_DECISION_REFERENCE['path'], FINAL_EFFECT_DECISION_REFERENCE['bytes'], FINAL_EFFECT_DECISION_REFERENCE['sha256']))
+ assert _effect == FINAL_EFFECT_DECISION and _effect['Root_selected'] is True and (_effect['ordinary_SDK_execution_selected'] is True)
+ read_private(FINAL_ADMITTED_IO_PLAN_REFERENCE['path'], FINAL_ADMITTED_IO_PLAN_REFERENCE['bytes'], FINAL_ADMITTED_IO_PLAN_REFERENCE['sha256'])
+-assert type(SELECTION) is dict and SELECTION['function_count'] == 3 and (SELECTION['literal_expected_cases'] == 4)
++assert type(SELECTION) is dict and SELECTION['function_count'] == 4 and (SELECTION['literal_expected_cases'] == 5)
+ _selectors = SELECTION['function_selectors']
+ _counts = SELECTION['expected_function_case_counts']
+-assert type(_selectors) is list and len(_selectors) == len(set(_selectors)) == 3 and all((type(n) is str and '::' in n and ('[' not in n) for n in _selectors))
+-assert type(_counts) is dict and set(_counts) == set(_selectors) and all((type(n) is int for n in _counts.values())) and (tuple((_counts[n] for n in _selectors)) == EXPECTED_BRIDGE27_CASE_VECTOR) and (sum(_counts.values()) == 4)
++assert type(_selectors) is list and len(_selectors) == len(set(_selectors)) == 4 and all((type(n) is str and '::' in n and ('[' not in n) for n in _selectors))
++assert type(_counts) is dict and set(_counts) == set(_selectors) and all((type(n) is int for n in _counts.values())) and (tuple((_counts[n] for n in _selectors)) == EXPECTED_BRIDGE27_CASE_VECTOR) and (sum(_counts.values()) == 5)
+ OWNING_FILES = SELECTION['owning_files']
+ assert type(OWNING_FILES) is list and len(OWNING_FILES) == len(set(OWNING_FILES)) and (set(OWNING_FILES) == {n.split('::', 1)[0] for n in _selectors})
+ assert type(SELECTED_TEST_MODULES) is dict and set(SELECTED_TEST_MODULES) == set(OWNING_FILES)
+@@ -175,7 +175,7 @@
+     physical = outer_rows[str(ROOT / relative)]
+     assert all((physical[k] == row[k] for k in ('bytes', 'sha256', 'full9')))
+     assert set(row['full9']) == set(fields) and all((type(v) is str and v.isdigit() for v in row['full9'].values()))
+-    EXPECTED_MODULES[name] = dict(row, scope='published_git_D_source')
++    EXPECTED_MODULES[name] = dict(row, scope='frozen_local_git_D_source')
+ assert {name: FINAL_MODULE_BINDINGS[name]['relative_path'] for name in SELECTED_TEST_MODULES.values()} == {name: relative for relative, name in SELECTED_TEST_MODULES.items()}
+ assert SELECTED_TEST_REWRITE_POLICY['selected_test_binding_names'] == list(SELECTED_TEST_MODULES.values())
+ EXPECTED_CONFIG = FINAL_EXPECTED_RESOURCE_CONFIG
+@@ -184,7 +184,7 @@
+ source42 = {'bytes': 10375, 'encoding': 'zlib+base64', 'path': '/tmp/legal-ir-phase2-reviewed-admission-source-20261108-v01/resource-census-compatible-port-v01/runtime-owner-v4-trainer-compatibility-v01/current-published-cleanup71-original16MiB-input-v01/original42-frozen.py', 'raw_zlib_base64': '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', 'sha256': '42e9f07d0d458177079269d9f495f0b70512180c1adc2f7fe0bfdb05518a12f9'}
+ source_raw = zlib.decompress(base64.b64decode(source42['raw_zlib_base64']))
+ assert len(source_raw) == source42['bytes'] and H(source_raw) == source42['sha256']
+-FACTORY_REFERENCE = {'path': '/tmp/Phase8-corpus-CLI4-existing-modern-INERT-v266-ytyxa84v/same-existing-modern-CLI4-single-lazy-factory.INERT.py.DATA', 'bytes': 3200, 'sha256': 'f3412000781087ec882d1dde026bb15bd0e12ce33613fa4057b9226fc123e188'}
++FACTORY_REFERENCE = {'path': '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-Phase8-V4-revocation-replay-private-v01-TS3zxd/ordinary5-existing-v266-frozen-local-INERT-f3howlht/same-existing-v4-revocation5-factory.INERT.py.DATA', 'bytes': 3250, 'sha256': '392df7fa58335a0206be309dc42b062cdb3e53cf303af0b835179884f8adb4a2'}
+ substitution = read_private(FACTORY_REFERENCE['path'], FACTORY_REFERENCE['bytes'], FACTORY_REFERENCE['sha256'])
+ exec(compile(substitution, FACTORY_REFERENCE['path'], 'exec'), globals())
+ assert not RUN_OUTPUT.exists(), 'fresh selected output required'
+@@ -202,7 +202,7 @@
+ source.__file__ = source42['path']
+ sys.modules[source.__name__] = source
+ exec(compile(source_raw, source42['path'], 'exec'), source.__dict__)
+-report = {'schema': 'actual-published-D-phase2-bridge27-existing-owner/v1', 'selection': ROOT_SELECTION, 'phase_order': [], 'phases': {}, 'errors': [], 'software_sequence_accepted': False, 'qualification_complete': False, 'resource_cleanup_confirmed': False, 'Source_closed': False, 'canonical_Source_application': False, 'published_D_Git_READ_application': True, 'Source_WRITE_claimed': False, 'actual_collected_roster_is_count_authority': True, 'case_count_hint': 4, 'statutory_or_modelquality_or_convergence_authority': False}
++report = {'schema': 'actual-frozen-local-D-phase2-bridge27-existing-owner/v1', 'selection': ROOT_SELECTION, 'phase_order': [], 'phases': {}, 'errors': [], 'software_sequence_accepted': False, 'qualification_complete': False, 'resource_cleanup_confirmed': False, 'Source_closed': False, 'canonical_Source_application': False, 'frozen_local_D_Git_READ_application': True, 'Source_WRITE_claimed': False, 'actual_collected_roster_is_count_authority': True, 'case_count_hint': 5, 'statutory_or_modelquality_or_convergence_authority': False}
+ report.update(git_candidate_provenance=FINAL_D_PROVENANCE, additional_A_provenance=FINAL_A_PROVENANCE, binding_manifest_reference=FINAL_BINDING_MANIFEST_REFERENCE, source_read_binding_reference=D_READ_BINDING_REFERENCE, admitted_io_plan_reference=FINAL_ADMITTED_IO_PLAN_REFERENCE, effect_decision_reference=FINAL_EFFECT_DECISION_REFERENCE, source_epoch_sha256=H(epoch_raw), source_epoch_records=len(EPOCH), request_substitution_sha256=H(substitution), actual_expected_modules=EXPECTED_MODULES)
+ 
+ def metadata_guard():
+@@ -364,7 +364,7 @@
+     binding = json.loads(raw)
+     report['phases'][phase_name]['actual_binding'] = binding
+     expected_request = json.loads(request.input_files['request.json'])
+-    assert binding['schema'] == 'published-D-phase2-bridge27-binding/v1' and binding['canonical_application'] is False and (binding['published_D_Git_READ_application'] is True) and (binding['Source_WRITE_claimed'] is False)
++    assert binding['schema'] == 'frozen-local-D-phase2-bridge27-binding/v1' and binding['canonical_application'] is False and (binding['frozen_local_D_Git_READ_application'] is True) and (binding['Source_WRITE_claimed'] is False)
+     assert binding['actual_bootstrap_execution'] is True and binding['phase'] == expected_request['phase'] and (binding['operation'] == expected_request['operation'])
+     assert binding['collection_accepted'] is True and binding['pytest_exit_code'] == result.returncode
+     assert binding['normal_Source_loader_restored'] is True and binding['normal_pytest_rewrite_observer_restored'] is True
+@@ -376,7 +376,7 @@
+         assert len(rows) == len(byname) == len(EXPECTED_MODULES) and set(byname) == set(EXPECTED_MODULES)
+         for name, want in EXPECTED_MODULES.items():
+             row = byname[name]
+-            assert row['scope'] == 'published_git_D_source' and (row['path'], row['bytes'], row['sha256'], row['full9']) == (str(ROOT / want['relative_path']), want['bytes'], want['sha256'], want['full9'])
++            assert row['scope'] == 'frozen_local_git_D_source' and (row['path'], row['bytes'], row['sha256'], row['full9']) == (str(ROOT / want['relative_path']), want['bytes'], want['sha256'], want['full9'])
+     if _lazy_owner_names:
+         assert binding['maintained_owner_visibility_policy'] == MAINTAINED_OWNER_VISIBILITY_POLICY == expected_request['maintained_owner_visibility_policy']
+         assert binding['maintained_owner_visibility_policy_reference'] == MAINTAINED_OWNER_VISIBILITY_POLICY_REFERENCE == expected_request['maintained_owner_visibility_policy_reference']
+@@ -396,8 +396,8 @@
+         require_actual_rewrite_witness(row, path, want, binding['actual_test_rewrite_source_to_code'][path])
+         assert row['path'] == row['spec_origin'] == path and row['source_sha256'] == want['sha256'] and (row['source_full9'] == want['full9'])
+     roster = binding['actual_collected_roster']
+-    assert type(roster) is list and len(roster) == len(set(roster)) == 4 and all((type(n) is str and n.split('::', 1)[0] in OWNING_FILES for n in roster))
+-    assert binding['selection_group'] == expected_request['selection_group'] == 'corpus-release-public-v4-ordinary4'
++    assert type(roster) is list and len(roster) == len(set(roster)) == 5 and all((type(n) is str and n.split('::', 1)[0] in OWNING_FILES for n in roster))
++    assert binding['selection_group'] == expected_request['selection_group'] == 'corpus-release-public-v4-revocation-ordinary5'
+     counts = {}
+     for node in roster:
+         base = node.split('[', 1)[0]
+@@ -488,7 +488,7 @@
+             subtest_reports = [row for row in terminal_reports if row['is_subtest']]
+             assert [row['nodeid'] for row in parent_reports] == actual_roster and len(parent_reports) == expected_count
+             entry['terminal_report_accounting'] = dict(unique_actual_test_calls=len(actual_calls), terminal_reports=len(terminal_reports), parent_terminal_reports=len(parent_reports), passing_subtest_reports=len(subtest_reports), all_raw_reports_preserved=True)
+-            entry['published_D_bridge_tests_PASS'] = True
++            entry['frozen_local_D_bridge_tests_PASS'] = True
+         entry['accepted'] = True
+         return actual_roster
+     except BaseException as error:
+@@ -541,15 +541,15 @@
+             assert report['resource_before']['state']['child_process_capacity'] == EXPECTED_CAPACITY
+             config = resources.ResourceSchedulerConfig(state_path=str(STATE), **report['resource_before']['state']['config'])
+             scheduler = resources.get_global_resource_scheduler(config=config)
+-            parent = scheduler.try_acquire('validation', cpu_slots=1, memory_mb=4096, child_process_slots=1, requires_gpu=False, gpu_memory_mb=0, unified_memory_mb=0, parent_lease=None, request_id='published-D-corpus-release-public-v4-ordinary4:once')
++            parent = scheduler.try_acquire('validation', cpu_slots=1, memory_mb=4096, child_process_slots=1, requires_gpu=False, gpu_memory_mb=0, unified_memory_mb=0, parent_lease=None, request_id='frozen-local-D-corpus-release-public-v4-revocation-ordinary5:once')
+             if parent is None:
+                 report['admission_refused'] = True
+                 raise RuntimeError('Existing shared validation admission refused; no SDK dispatch or product RED')
+             report['actual_parent_lease'] = parent.to_dict()
+             runner = admitted.ResourceAdmittedToolRunner(parent_lease=parent, cpu_slots=1, child_process_slots=1, base_environment={'PATH': PATH_SCOPE, 'LANG': 'C.UTF-8'}, executable_roots=('/usr/bin', '/home/barberb/lift_coding/.venv/bin'))
+             report['explicit_existing_D27_ordinary_budget'] = {'collect': {'wall_seconds': 120, 'cpu_seconds': 110}, 'run': {'wall_seconds': 600, 'cpu_seconds': 540}, 'cpu_slots': 1, 'child_process_slots': 1, 'resident_memory_bytes': 4294967296, 'same_existing_direct_scheduler_no_Daemon_layer': True}
+-            roster = execute_phase('published-D-corpus-release-public-v4-ordinary4', 'collect', group='corpus-release-public-v4-ordinary4')
+-            execute_phase('published-D-corpus-release-public-v4-ordinary4', 'run', roster, group='corpus-release-public-v4-ordinary4')
++            roster = execute_phase('frozen-local-D-corpus-release-public-v4-revocation-ordinary5', 'collect', group='corpus-release-public-v4-revocation-ordinary5')
++            execute_phase('frozen-local-D-corpus-release-public-v4-revocation-ordinary5', 'run', roster, group='corpus-release-public-v4-revocation-ordinary5')
+             report['software_sequence_accepted'] = True
+         finally:
+             if parent is not None:
+@@ -593,6 +593,6 @@
+ finally:
+     report['Source_closed'] = all((row['exit_returned'] for row in report.get('actual_Source_context_closure', [])))
+     report['qualification_complete'] = report['software_sequence_accepted'] and report['Source_closed'] and report['resource_cleanup_confirmed'] and (not report['errors'])
+-    ref = retain_json('complete-published-D-corpus-release-public-v4-ordinary4-existing-owner-report.json', report)
++    ref = retain_json('complete-frozen-local-D-corpus-release-public-v4-revocation-ordinary5-existing-owner-report.json', report)
+     shutil.rmtree(PARENT_HOME)
+     print(json.dumps({'event': 'ACTUAL_PUBLISHED_D_PHASE2_BRIDGE27_CLOSED', 'report': ref, 'Source_closed': report['Source_closed'], 'resource_cleanup_confirmed': report['resource_cleanup_confirmed'], 'qualification_complete': report['qualification_complete'], 'errors': report['errors']}, sort_keys=True), flush=True)
+--- v266/bootstrap.INERT.py.DATA
++++ P2-ordinary5/bootstrap.INERT.py.DATA
+@@ -1,4 +1,4 @@
+-"""INERT published-D corpus-release-public-v4-ordinary4 bootstrap; private adaptation, never qualification."""
++"""INERT frozen-local-D corpus-release-public-v4-revocation-ordinary5 bootstrap; private adaptation, never qualification."""
+ import ast
+ import base64
+ import hashlib
+@@ -36,14 +36,14 @@
+ EXPECTED_MODULES = None
+ MAINTAINED_OWNER_NAMES = ['ipfs_datasets_py.logic.autoformal.legal_release_coordinator_v1']
+ SELECTED_TEST_MODULES = {'tests/unit/logic/autoformal/test_corpus_release_cli.py': 'tests.unit.logic.autoformal.test_corpus_release_cli'}
+-FUNCTION_SELECTORS = ['tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_complete_source_use_whole_norm_project_is_independently_replayed', 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_actual_explicit_cli_is_source_only', 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_cli_refuses_native_selection']
+-EXPECTED_FUNCTION_CASE_COUNTS = {'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_complete_source_use_whole_norm_project_is_independently_replayed': 1, 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_actual_explicit_cli_is_source_only': 2, 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_cli_refuses_native_selection': 1}
++FUNCTION_SELECTORS = ['tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_complete_source_use_whole_norm_project_is_independently_replayed', 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_actual_explicit_cli_is_source_only', 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_cli_refuses_native_selection', 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_current_replay_refuses_genuinely_revoked_reviewer']
++EXPECTED_FUNCTION_CASE_COUNTS = {'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_actual_explicit_cli_is_source_only': 2, 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_cli_refuses_native_selection': 1, 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_complete_source_use_whole_norm_project_is_independently_replayed': 1, 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_current_replay_refuses_genuinely_revoked_reviewer': 1}
+ REQUIRED_CANONICAL_CONFTESTS = None
+ PYTEST_INIFILE = None
+ SELECTED_TEST_REWRITE_POLICY = {'cache_policy': 'bypass-read-only-for-selected-owning-test', 'required_compile_and_execution_witness': True, 'rewrite_policy': 'normal-pytest-assertion-rewrite', 'schema': 'selected-test-normal-pytest-source-AST-code-observation/v1', 'selected_test_binding_names': ['tests.unit.logic.autoformal.test_corpus_release_cli'], 'unobserved_or_cached_only_route': 'REFUSE'}
+ ROOT_RUNTIME_SELECTION = None
+-MAINTAINED_OWNER_VISIBILITY_POLICY = {'schema': 'phase6-existing-modern-lazy-owner-visibility/v1', 'selection_group': 'corpus-release-public-v4-ordinary4', 'lazy_owner_names': ['ipfs_datasets_py.logic.autoformal.legal_release_coordinator_v1'], 'force_imports': False, 'early_absence': 'record-not-loaded', 'run_terminal': 'require-loaded-and-compiled'}
+-MAINTAINED_OWNER_VISIBILITY_POLICY_REFERENCE = {'path': '/tmp/Phase8-corpus-CLI4-existing-modern-INERT-v266-ytyxa84v/exact-CLI4-single-coordinator-existing-lazy-visibility-policy.json', 'bytes': 338, 'sha256': 'd17e6542f92b927aad45cd5e14e73e95b7913179fe425eb77c33af06659c2709'}
++MAINTAINED_OWNER_VISIBILITY_POLICY = {'schema': 'phase6-existing-modern-lazy-owner-visibility/v1', 'selection_group': 'corpus-release-public-v4-revocation-ordinary5', 'lazy_owner_names': ['ipfs_datasets_py.logic.autoformal.legal_release_coordinator_v1'], 'force_imports': False, 'early_absence': 'record-not-loaded', 'run_terminal': 'require-loaded-and-compiled'}
++MAINTAINED_OWNER_VISIBILITY_POLICY_REFERENCE = {'path': '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-Phase8-V4-revocation-replay-private-v01-TS3zxd/ordinary5-existing-v266-frozen-local-INERT-f3howlht/exact-ordinary5-existing-lazy-policy.json', 'bytes': 349, 'sha256': '2179a81bb60009acb0e4770f0d4e885506e1a76c0bf3cbc4439b7d341fa76c87'}
+ GIT_CANDIDATE_PROVENANCE = None
+ ADDITIONAL_A_PROVENANCE = None
+ BINDING_MANIFEST_REFERENCE = None
+@@ -52,10 +52,10 @@
+ EFFECT_DECISION_REFERENCE = None
+ SOURCE_EPOCH_SHA256 = None
+ SOURCE_EPOCH_RECORD_COUNT = None
+-EXPECTED_ORDERED_CASE_COUNTS = (1, 2, 1)
+-EXPECTED_CASES = 4
++EXPECTED_ORDERED_CASE_COUNTS = (1, 2, 1, 1)
++EXPECTED_CASES = 5
+ if any((value is None for value in (ROOT, ADDITIONAL_A_ROOT, EXPECTED_MODULES, MAINTAINED_OWNER_NAMES, SELECTED_TEST_MODULES, FUNCTION_SELECTORS, EXPECTED_FUNCTION_CASE_COUNTS, REQUIRED_CANONICAL_CONFTESTS, PYTEST_INIFILE, SELECTED_TEST_REWRITE_POLICY, ROOT_RUNTIME_SELECTION, GIT_CANDIDATE_PROVENANCE, ADDITIONAL_A_PROVENANCE, BINDING_MANIFEST_REFERENCE, SOURCE_READ_BINDING_REFERENCE, ADMITTED_IO_PLAN_REFERENCE, EFFECT_DECISION_REFERENCE, SOURCE_EPOCH_SHA256, SOURCE_EPOCH_RECORD_COUNT))):
+-    raise RuntimeError('INERT corpus-release-public-v4-ordinary4: actual roots/pins/full9/Source READ/clock/effect decision remain NULL')
++    raise RuntimeError('INERT corpus-release-public-v4-revocation-ordinary5: actual roots/pins/full9/Source READ/clock/effect decision remain NULL')
+ if not sys.dont_write_bytecode:
+     raise RuntimeError('existing -B/no-bytecode invocation required')
+ 
+@@ -64,7 +64,7 @@
+         return ()
+     expected_names = ['ipfs_datasets_py.logic.autoformal.legal_release_coordinator_v1']
+     expected_tests = {'tests/unit/logic/autoformal/test_corpus_release_cli.py': 'tests.unit.logic.autoformal.test_corpus_release_cli'}
+-    expected = {'schema': 'phase6-existing-modern-lazy-owner-visibility/v1', 'selection_group': 'corpus-release-public-v4-ordinary4', 'lazy_owner_names': ['ipfs_datasets_py.logic.autoformal.legal_release_coordinator_v1'], 'force_imports': False, 'early_absence': 'record-not-loaded', 'run_terminal': 'require-loaded-and-compiled'}
++    expected = {'schema': 'phase6-existing-modern-lazy-owner-visibility/v1', 'selection_group': 'corpus-release-public-v4-revocation-ordinary5', 'lazy_owner_names': ['ipfs_datasets_py.logic.autoformal.legal_release_coordinator_v1'], 'force_imports': False, 'early_absence': 'record-not-loaded', 'run_terminal': 'require-loaded-and-compiled'}
+     if type(policy) is not dict or set(policy) != set(expected) or policy != expected or (type(policy['force_imports']) is not bool) or (policy['force_imports'] is not False) or (type(policy['lazy_owner_names']) is not list) or (names != expected_names) or (tests != expected_tests) or (group != expected['selection_group']):
+         raise RuntimeError('unknown or out-of-scope maintained-owner visibility policy')
+     return tuple(expected_names)
+@@ -79,15 +79,15 @@
+     raise RuntimeError('two distinct real Source READ roots required')
+ phase, operation = (request['phase'], request['operation'])
+ group_name = request['selection_group']
+-if phase != 'published-D-corpus-release-public-v4-ordinary4' or group_name != 'corpus-release-public-v4-ordinary4' or operation not in {'collect', 'run'}:
+-    raise RuntimeError('one explicit corpus-release-public-v4-ordinary4 phase/group and operation required')
++if phase != 'frozen-local-D-corpus-release-public-v4-revocation-ordinary5' or group_name != 'corpus-release-public-v4-revocation-ordinary5' or operation not in {'collect', 'run'}:
++    raise RuntimeError('one explicit corpus-release-public-v4-revocation-ordinary5 phase/group and operation required')
+ for key, expected in (('git_candidate_provenance', GIT_CANDIDATE_PROVENANCE), ('additional_A_provenance', ADDITIONAL_A_PROVENANCE), ('binding_manifest_reference', BINDING_MANIFEST_REFERENCE), ('source_read_binding_reference', SOURCE_READ_BINDING_REFERENCE), ('admitted_io_plan_reference', ADMITTED_IO_PLAN_REFERENCE), ('effect_decision_reference', EFFECT_DECISION_REFERENCE), ('modules', EXPECTED_MODULES), ('maintained_owner_names', MAINTAINED_OWNER_NAMES), ('selected_test_modules', SELECTED_TEST_MODULES), ('function_selectors', FUNCTION_SELECTORS), ('expected_function_case_counts', EXPECTED_FUNCTION_CASE_COUNTS), ('required_canonical_conftests', REQUIRED_CANONICAL_CONFTESTS), ('pytest_inifile', PYTEST_INIFILE), ('selected_test_rewrite_policy', SELECTED_TEST_REWRITE_POLICY)):
+     if request[key] != expected:
+         raise RuntimeError('closed Root binding differs: ' + key)
+ pytest_inifile = Path(request['pytest_inifile'])
+ if not pytest_inifile.is_absolute() or pytest_inifile.resolve(strict=True) != pytest_inifile or (not pytest_inifile.is_relative_to(root)):
+     raise RuntimeError('exact selected real D pytest configuration required')
+-report = {'schema': 'published-D-phase2-bridge27-binding/v1', 'phase': phase, 'operation': operation, 'selection_group': group_name, 'qualification_scope': '3 future-bound public functions/4 statically expected cases under frozen published D and additional A READ provenance', 'canonical_application': False, 'published_D_Git_READ_application': True, 'Source_WRITE_claimed': False, 'external_pretrained_asset_loading_requested': False, 'pretrained_quality_or_convergence_claimed': False, 'execution_granted': False, 'claim_granted': False, 'completion_eligible': False, 'collection_accepted': False, 'pytest_exit_code': None, 'actual_bootstrap_execution': True}
++report = {'schema': 'frozen-local-D-phase2-bridge27-binding/v1', 'phase': phase, 'operation': operation, 'selection_group': group_name, 'qualification_scope': '4 future-bound public functions/5 statically expected cases under frozen local D and additional A READ provenance', 'canonical_application': False, 'frozen_local_D_Git_READ_application': True, 'Source_WRITE_claimed': False, 'external_pretrained_asset_loading_requested': False, 'pretrained_quality_or_convergence_claimed': False, 'execution_granted': False, 'claim_granted': False, 'completion_eligible': False, 'collection_accepted': False, 'pytest_exit_code': None, 'actual_bootstrap_execution': True}
+ for key in ('git_candidate_provenance', 'additional_A_provenance', 'binding_manifest_reference', 'source_read_binding_reference', 'admitted_io_plan_reference', 'effect_decision_reference'):
+     report[key] = request[key]
+ report['pytest_inifile'] = str(pytest_inifile)
+@@ -114,8 +114,8 @@
+ module_order = list(modules)
+ bound_paths = {}
+ for name, row in modules.items():
+-    if row['scope'] != 'published_git_D_source':
+-        raise RuntimeError('explicit published Git D source scope required')
++    if row['scope'] != 'frozen_local_git_D_source':
++        raise RuntimeError('explicit frozen local Git D source scope required')
+     relative = Path(row['relative_path'])
+     if relative.is_absolute() or '..' in relative.parts:
+         raise RuntimeError('bounded D-relative module path required')
+@@ -130,8 +130,8 @@
+     raise RuntimeError('fresh child required; do not replace imported aliases')
+ function_selectors = request['function_selectors']
+ expected_counts = request['expected_function_case_counts']
+-if type(function_selectors) is not list or len(function_selectors) != 3 or len(set(function_selectors)) != 3 or any((type(node) is not str or '::' not in node or '[' in node for node in function_selectors)) or (type(expected_counts) is not dict) or (set(expected_counts) != set(function_selectors)) or any((type(value) is not int for value in expected_counts.values())) or (tuple((expected_counts[node] for node in function_selectors)) != EXPECTED_ORDERED_CASE_COUNTS) or (sum(expected_counts.values()) != EXPECTED_CASES):
+-    raise RuntimeError('exact ordered3-selector case vector/4 required')
++if type(function_selectors) is not list or len(function_selectors) != 4 or len(set(function_selectors)) != 4 or any((type(node) is not str or '::' not in node or '[' in node for node in function_selectors)) or (type(expected_counts) is not dict) or (set(expected_counts) != set(function_selectors)) or any((type(value) is not int for value in expected_counts.values())) or (tuple((expected_counts[node] for node in function_selectors)) != EXPECTED_ORDERED_CASE_COUNTS) or (sum(expected_counts.values()) != EXPECTED_CASES):
++    raise RuntimeError('exact ordered4-selector case vector/5 required')
+ owning_files = request['owning_files']
+ if type(owning_files) is not list or owning_files != list(expected_test_modules) or {node.split('::', 1)[0] for node in function_selectors} != set(owning_files):
+     raise RuntimeError('exact future-bound D owning files required')
+--- v266/factory.INERT.py.DATA
++++ P2-ordinary5/factory.INERT.py.DATA
+@@ -1,17 +1,17 @@
+ def continuation_request(phase, operation, actual_collected_roster=None, *, group):
+     import json
+-    if phase != 'published-D-corpus-release-public-v4-ordinary4' or operation not in ('collect', 'run') or group != 'corpus-release-public-v4-ordinary4':
+-        raise ValueError('exact selected published-D corpus-release-public-v4-ordinary4 ordinary request required')
++    if phase != 'frozen-local-D-corpus-release-public-v4-revocation-ordinary5' or operation not in ('collect', 'run') or group != 'corpus-release-public-v4-revocation-ordinary5':
++        raise ValueError('exact selected frozen-local-D corpus-release-public-v4-revocation-ordinary5 ordinary request required')
+     request = {'phase': phase, 'operation': operation, 'source_root': str(ROOT), 'accelerate_root': str(ADDITIONAL_A_ROOT), 'modules': EXPECTED_MODULES, 'maintained_owner_names': MAINTAINED_OWNER_NAMES, 'selected_test_modules': SELECTED_TEST_MODULES, 'required_canonical_conftests': REQUIRED_CONFTESTS, 'pytest_inifile': fixture['pytest_inifile'], 'selection_group': group, 'owning_files': OWNING_FILES, 'function_selectors': SELECTION['function_selectors'], 'expected_function_case_counts': SELECTION['expected_function_case_counts'], 'source_epoch_sha256': H(epoch_raw), 'source_epoch_record_count': len(EPOCH), 'selected_test_rewrite_policy': SELECTED_TEST_REWRITE_POLICY, 'runtime_authority': ROOT_RUNTIME_SELECTION, 'git_candidate_provenance': FINAL_D_PROVENANCE, 'additional_A_provenance': FINAL_A_PROVENANCE, 'binding_manifest_reference': FINAL_BINDING_MANIFEST_REFERENCE, 'source_read_binding_reference': D_READ_BINDING_REFERENCE, 'admitted_io_plan_reference': FINAL_ADMITTED_IO_PLAN_REFERENCE, 'effect_decision_reference': FINAL_EFFECT_DECISION_REFERENCE, 'maintained_owner_visibility_policy': MAINTAINED_OWNER_VISIBILITY_POLICY, 'maintained_owner_visibility_policy_reference': MAINTAINED_OWNER_VISIBILITY_POLICY_REFERENCE}
+     if operation == 'run':
+-        if type(actual_collected_roster) is not list or len(actual_collected_roster) != 4 or len(set(actual_collected_roster)) != 4 or any((type(node) is not str or node.split('::', 1)[0] not in OWNING_FILES for node in actual_collected_roster)):
+-            raise ValueError('exact actual expanded corpus-release-public-v4-ordinary4 collection required')
++        if type(actual_collected_roster) is not list or len(actual_collected_roster) != 5 or len(set(actual_collected_roster)) != 5 or any((type(node) is not str or node.split('::', 1)[0] not in OWNING_FILES for node in actual_collected_roster)):
++            raise ValueError('exact actual expanded corpus-release-public-v4-revocation-ordinary5 collection required')
+         counts = {}
+         for node in actual_collected_roster:
+             base = node.split('[', 1)[0]
+             counts[base] = counts.get(base, 0) + 1
+         if counts != SELECTION['expected_function_case_counts']:
+-            raise ValueError('actual collection differs from 3 independently selected public-function counts/4 cases')
++            raise ValueError('actual collection differs from 4 independently selected public-function counts/5 cases')
+         request['actual_collected_roster'] = list(actual_collected_roster)
+     payloads = {'bootstrap.py': read_private(BOOTSTRAP_REFERENCE['path'], BOOTSTRAP_REFERENCE['bytes'], BOOTSTRAP_REFERENCE['sha256']), 'source-epoch.json': epoch_raw, 'request.json': json.dumps(request, sort_keys=True, separators=(',', ':')).encode()}
+     wall, cpu = (120, 110) if operation == 'collect' else (600, 540)

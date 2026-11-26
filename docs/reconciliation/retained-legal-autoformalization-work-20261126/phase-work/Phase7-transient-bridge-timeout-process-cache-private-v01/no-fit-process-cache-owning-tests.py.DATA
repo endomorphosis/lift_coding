@@ -1,0 +1,116 @@
+from pathlib import Path
+from types import ModuleType
+import hashlib
+import importlib.util
+import json
+import sys
+import traceback
+
+stage = Path(__file__).absolute().parent
+feedback = stage.parent / "Phase7-current-obligation-write-binding-private-ymey1qtf"
+adapter_path = feedback / "no-fit-current-obligation-bound-feedback-adapter-v02.py"
+raw = adapter_path.read_bytes()
+assert (len(raw), hashlib.sha256(raw).hexdigest()) == (
+    20480, "43ad9ed1524e541998646663dc67baea01cacce87769666d4afa12cd6252abf7",
+)
+adapter = ModuleType("_existing_pinned_nofit_fixture_adapter")
+adapter.__file__ = str(adapter_path)
+sys.modules[adapter.__name__] = adapter
+exec(compile(raw, str(adapter_path), "exec"), adapter.__dict__)
+prior = adapter.load_prior()
+suite_rel = "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_target_process_cache.py"
+owner_rel = "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py"
+
+
+def fixture_loader(owner_pin):
+    baseline = adapter.prepare_loader(prior, {})
+    prior.EXPECTED[suite_rel] = "3265b219a62b7f26e9266cdd700e6126b4c915ae"
+    selected_files = {
+        suite_rel: ("test_legal_ir_target_process_cache.after.DATA", 6744, "3fed598fdf1d9e639c2d26c8c5fd0a1dc98a833cd223e4dcaabec6b0c7ab6f80"),
+    }
+    if owner_pin is not None:
+        selected_files[owner_rel] = owner_pin
+    posts = {path:adapter.pinned_file(stage / leaf, count, digest)
+             for path, (leaf, count, digest) in selected_files.items()}
+    guarded_source = prior.BoundSource
+
+    class CurrentCacheFixtureOverlay(guarded_source):
+        def get_code(self, fullname):
+            baseline_code = super().get_code(fullname)
+            path = Path(self.path).absolute()
+            relative = path.relative_to(prior.ROOT).as_posix()
+            if relative not in posts:
+                return baseline_code
+            code = posts[relative]
+            leaf, count, digest = selected_files[relative]
+            prior.compiled_total += len(code)
+            assert prior.compiled_total <= prior.MAX_MODULE_BYTES
+            prior.compiled[relative]["overlay_executed"] = {
+                "path": str(stage / leaf), "bytes": count, "sha256": digest,
+            }
+            return compile(code, str(path), "exec", dont_inherit=True)
+
+    prior.BoundSource = CurrentCacheFixtureOverlay
+    return baseline
+
+
+def load_owning_tests():
+    name = "_actual_modal_autoencoder_owning_tests"
+    path = prior.ROOT / suite_rel
+    spec = importlib.util.spec_from_file_location(name, path, loader=prior.BoundSource(name, str(path)))
+    owner = importlib.util.module_from_spec(spec)
+    sys.modules[name] = owner
+    spec.loader.exec_module(owner)
+    return owner
+
+
+outcome = {}
+code = 2
+try:
+    assert sys.argv[1:] == ["baseline"] or len(sys.argv) == 5 and sys.argv[1] == "overlay"
+    prior.install_kernel_guards()
+    owner_pin = (sys.argv[2], int(sys.argv[3]), sys.argv[4]) if sys.argv[1] == "overlay" else None
+    fixture_loader(owner_pin)
+    fixture = adapter.import_fixture(prior)
+    owner = load_owning_tests()
+    bridge_name = "ipfs_datasets_py.logic.bridge"
+    assert bridge_name not in sys.modules
+    boundary = ModuleType(bridge_name)
+
+    def unexpected_bridge(**kwargs):
+        raise AssertionError("the fictional producer callback must be installed by the test")
+
+    boundary.evaluate_legal_ir_multiview = unexpected_bridge
+    checks = []
+    with owner.pytest.MonkeyPatch.context() as module_patch:
+        module_patch.setitem(sys.modules, bridge_name, boundary)
+        for case in ("retry-after-timeout-and-retain-healthy-process-hit", "retained-default-process-cache-hit",
+                     "retained-opt-out-process-cache", "retained-false-switch-rejection"):
+            with owner.pytest.MonkeyPatch.context() as patch:
+                try:
+                    if case == "retry-after-timeout-and-retain-healthy-process-hit":
+                        owner.test_legal_ir_timeout_fallback_does_not_poison_process_cache(patch)
+                    else:
+                        native = owner.native.__wrapped__(patch)
+                        if case == "retained-default-process-cache-hit":
+                            owner.test_default_reuses_target_unchanged(native)
+                        elif case == "retained-opt-out-process-cache":
+                            owner.test_optout_bypasses_existing_target_without_destroying_foreign_cache(native)
+                        else:
+                            owner.test_cache_switch_requires_boolean(native, "false")
+                except Exception as error:
+                    checks.append(dict(case=case, passed=False, error=str(error), traceback=traceback.format_exc(limit=12)))
+                else:
+                    checks.append(dict(case=case, passed=True))
+    outcome["rows"] = checks
+    assert not prior.denied
+    code = 0 if all(row["passed"] for row in checks) else 1
+except Exception as error:
+    traceback.print_exc()
+    outcome["refusal"] = repr(error)
+finally:
+    outcome.update(worker_rc=code, denied=prior.denied, guard=prior.guard, compiled=prior.compiled,
+                   project_body_bytes=prior.compiled_total, model_fit=False,
+                   fictional_boundary="ipfs_datasets_py.logic.bridge.evaluate_legal_ir_multiview")
+    print(json.dumps(outcome, sort_keys=True))
+raise SystemExit(code)

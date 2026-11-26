@@ -1,0 +1,47 @@
+"""Fixture-only external benchmark evaluation, denying models and subprocesses."""
+import hashlib
+import importlib.abc
+import importlib.util
+import json
+import os
+from pathlib import Path
+import sys
+
+root = Path(__file__).resolve().parent
+mode = sys.argv[4]
+guard = Path(sys.argv[5])
+assert mode in {"red", "green"}
+assert sys.argv[2] == "red"  # Do not activate the unrelated proof-cache overlays.
+starter = guard.read_text()
+marker = 'owner = repo / "tests/unit/logic/legal_ir/test_proof_cache.py"'
+assert starter.count(marker) == 1
+environment = {"__file__": str(guard)}
+exec(compile(starter.split(marker, 1)[0], str(guard), "exec", dont_inherit=True), environment)
+repo, working = environment["repo"], environment["working"]
+os.chdir(working)
+os.environ["PYTEST_DISABLE_PLUGIN_AUTOLOAD"] = "1"
+relative = "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py"
+def snapshot(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+class PrivateOwner(importlib.abc.MetaPathFinder):
+    def find_spec(self, fullname, path=None, target=None):
+        if fullname == "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark":
+            leaf = "benchmark-owner.before.py.DATA" if mode == "red" else "benchmark-owner.after.py.DATA"
+            return importlib.util.spec_from_file_location(
+                fullname, repo / relative, loader=environment["GuardedLoader"](relative, root / leaf))
+        return None
+
+sys.meta_path.insert(0, PrivateOwner())
+import pytest
+test = root / "isolated/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py"
+fixtures = root / "isolated/tests/fixtures/legal_ir/external_expert_benchmark.jsonl"
+result = int(pytest.main([
+    "-c", "/dev/null", "--noconftest", "-p", "no:cacheprovider", "--rootdir", str(root / "isolated"),
+    "-q", "--tb=short", f"--basetemp={working / 'pytest'}", f"--junitxml={working / 'junit.xml'}",
+    f"--log-file={working / 'pytest.log'}", str(test),
+]))
+print(json.dumps({"mode": mode, "pytest_exit": result, "guard_events": environment["denied"],
+                  "overlays": environment["watched"], "test": snapshot(test), "fixture": snapshot(fixtures)},
+                 sort_keys=True))
+raise SystemExit(result if not environment["denied"] else 2)

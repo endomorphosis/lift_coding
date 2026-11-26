@@ -1,0 +1,85 @@
+{
+  "baseline_cache_code_sha256": {
+    "ipfs_datasets_py.logic.backends.cache_protocol": "1d92c97499d59c09de131e28da6a14aa07b29056897719b5fc16fba6c38ceb59",
+    "ipfs_datasets_py.logic.common.duckdb_proof_migration": "a82a23ba02a23c34fe25519a3fef498ec3d6f4e7c2637bf9feb6d6a361c35d74",
+    "ipfs_datasets_py.logic.common.duckdb_proof_store": "f71463279dc8c2b9c261928cb92dcb28472f79fb8da4baa807cfa38ab499a386",
+    "ipfs_datasets_py.logic.legal_ir.proof_cache": "9b05a2f890f2df62931273f2448182af8a2d99af73248c5c67ef2ec3d04b0c3c"
+  },
+  "cache_input_bytes_all_attempts": 13462754,
+  "canonical_adoption": false,
+  "effects": {
+    "canonical_source": 0,
+    "fixture_repin": 0,
+    "git": 0,
+    "native": 0,
+    "real_sql": 0,
+    "resource_ledger": 0
+  },
+  "evidence_manifest": {
+    "bytes": 21857,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/sealed-private-cache-leader-authority-SAME4-RED-GREEN-v01.json",
+    "sha256": "94de4011cec3a6738d0808627d206fe57f51c9078f8add49f1654a5715e01141"
+  },
+  "green": {
+    "JUnit": {
+      "bytes": 754,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/green-v01/junit.xml",
+      "sha256": "c2a634a144fc4163ee70ecc3ed12abed50cd990e8e0736f280c99ea124c25533"
+    },
+    "errors": 0,
+    "rc": 0,
+    "skips": 0,
+    "unique_failures": 0,
+    "unique_passes": 4
+  },
+  "ordinary166_or_SQL51_qualification": false,
+  "patch": {
+    "bytes": 2447,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/minimal-leader-authority-two-file.patch",
+    "sha256": "eacdc6697c04cd0d4dc5ffd1bd83024cb7580003ab8fa5a59ce20c9392d5ef0e"
+  },
+  "private_source_posts": {
+    "ipfs_datasets_py/logic/backends/cache_protocol.py": {
+      "bytes": 42603,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/cache_protocol.leader-authority.after.py.DATA",
+      "sha256": "722730748990d01f926a1499b973f9cb64ccc5fdb78225ae29236abe9ac105e1"
+    },
+    "ipfs_datasets_py/logic/common/duckdb_proof_store.py": {
+      "bytes": 110815,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/duckdb_proof_store.leader-authority.after.py.DATA",
+      "sha256": "633f0c555c092522826c1385b967a33b9d81dbbdb3883e7782171ea89e11414b"
+    }
+  },
+  "private_test_post": {
+    "bytes": 86879,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/test_proof_cache.after.py.DATA",
+    "sha256": "e86d6d85c1333dd536ee997bf5a3e09b5f625f11bf399ed140c2504a894ece4e"
+  },
+  "published_baseline": "35e56b6b34c5cd363935e5377c1946a1a53e32b1",
+  "published_test_prefix": {
+    "bytes": 84499,
+    "sha256": "239d05de5b08eba8de06b67a74efe109900a6302d73c27d28d450bf2f8061d2f"
+  },
+  "red": {
+    "JUnit": {
+      "bytes": 2282,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/red-v04/junit.xml",
+      "sha256": "68b8074d67dce98a27f65a6c1648401f77b7e7ec5c4a70bca370c695da40c58b"
+    },
+    "errors": 0,
+    "failure": "both advisory retries return usable=True",
+    "rc": 1,
+    "skips": 0,
+    "unique_failures": 2,
+    "unique_passes": 2
+  },
+  "same_four_ordered_nodes": [
+    "test_cache_compute_leader_respects_requested_theorem_authority[advisory-refused-exact]",
+    "test_cache_compute_leader_respects_requested_theorem_authority[advisory-refused-unified]",
+    "test_cache_compute_leader_respects_requested_theorem_authority[theorem-usable-exact]",
+    "test_cache_compute_leader_respects_requested_theorem_authority[theorem-usable-unified]"
+  ],
+  "same_import_inventory_except_two_leader_changes": true,
+  "schema": "private-P1-cache-compute-leader-exact4-small-closeout/v1",
+  "separate_setup_failures_retained": 3
+}

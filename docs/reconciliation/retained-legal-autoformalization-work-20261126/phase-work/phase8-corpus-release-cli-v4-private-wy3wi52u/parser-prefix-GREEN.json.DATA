@@ -1,0 +1,45 @@
+{
+  "outcomes": [
+    {
+      "argv": [
+        "validate-closure",
+        "--request",
+        "unopened.request",
+        "--request-sha256",
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "--profile",
+        "reviewed-source-use-whole-norm-physical-source-replay/v1"
+      ],
+      "case": "explicit_v4",
+      "parsed_profile": "reviewed-source-use-whole-norm-physical-source-replay/v1",
+      "pass": true
+    },
+    {
+      "argv": [
+        "validate-closure",
+        "--request",
+        "unopened.request",
+        "--request-sha256",
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "--profile",
+        "reviewed-norm-v3-direct"
+      ],
+      "case": "direct_v3_control",
+      "parsed_profile": "reviewed-norm-v3-direct",
+      "pass": true
+    },
+    {
+      "argv": [
+        "validate-closure",
+        "--request",
+        "unopened.request",
+        "--request-sha256",
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      ],
+      "case": "legacy_default_control",
+      "parsed_profile": "reviewed-norm-v2-local-replay/v1",
+      "pass": true
+    }
+  ],
+  "scoped_control_only": true
+}

@@ -1,0 +1,111 @@
+"""Read-only real Python fixture imports, two optional private product overlays."""
+import importlib.abc
+import importlib.util
+import json
+import os
+import resource
+import signal
+import sys
+from pathlib import Path
+
+repo = Path(sys.argv[1]).resolve()
+unit = Path(__file__).resolve().parent
+case = sys.argv[2]
+working = Path(sys.argv[3]).resolve()
+os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
+resource.setrlimit(resource.RLIMIT_AS, (512 * 1024**2, 512 * 1024**2))
+resource.setrlimit(resource.RLIMIT_CPU, (45, 45))
+signal.alarm(60)
+sys.dont_write_bytecode = True
+sys.path.insert(0, str(repo))
+os.environ["HOME"] = str(working)
+os.environ["XDG_CACHE_HOME"] = str(working)
+os.environ["TMPDIR"] = str(working)
+denied = []
+watched = []
+blocked_modules = frozenset(("torch", "duckdb", "_duckdb", "transformers", "onnxruntime", "llama_cpp", "tensorflow"))
+writes = (os.O_WRONLY | os.O_RDWR | os.O_CREAT | os.O_TRUNC | os.O_APPEND)
+path_events = {"os.mkdir", "os.rmdir", "os.remove", "os.rename", "os.link", "os.symlink", "os.truncate", "os.chmod",
+               "os.chown", "os.utime", "shutil.rmtree"}
+def restrict_path(event, target):
+    if isinstance(target, int):
+        target = os.readlink(f"/proc/self/fd/{target}")
+    path = os.path.realpath(os.fsdecode(target))
+    if path != str(working) and not path.startswith(str(working) + "/"):
+        denied.append((event, path))
+        raise PermissionError(f"private fixture write denied outside its run directory: {path}")
+
+def audit(event, args):
+    if (event.startswith(("socket.", "subprocess.", "os.exec", "os.spawn", "os.posix_spawn"))
+            or event in {"os.fork", "os.forkpty", "os.system", "os.kill", "os.killpg", "ctypes.dlopen"}):
+        denied.append((event, "execution"))
+        raise PermissionError(f"private fixture action denied: {event}")
+    if event == "open" and len(args) > 2 and args[2] & writes:
+        restrict_path(event, args[0])
+    if event in path_events:
+        restrict_path(event, args[0])
+        if event in {"os.rename", "os.link", "os.symlink"}:
+            restrict_path(event, args[1])
+
+class GuardedLoader(importlib.abc.Loader):
+    def __init__(self, rel, override):
+        self.rel = rel
+        self.override = override
+
+    def exec_module(self, module):
+        raw = self.override.read_bytes()
+        watched.append({"module": module.__name__, "actual_bytes": str(self.override)})
+        exec(compile(raw, str(repo / self.rel), "exec", dont_inherit=True), module.__dict__)
+
+class InMemoryFixturePolicy(importlib.abc.MetaPathFinder):
+    def find_spec(self, fullname, path=None, target=None):
+        if fullname.split(".", 1)[0] in blocked_modules:
+            denied.append(("import", fullname))
+            raise ImportError(f"private fixture backend import denied: {fullname}")
+        if case not in {"green", "retention"}:
+            return None
+        overlays = {
+            "ipfs_datasets_py.logic.legal_ir.proof_cache": (
+                "ipfs_datasets_py/logic/legal_ir/proof_cache.py", "proof_cache.after.py.DATA"),
+            "ipfs_datasets_py.logic.common.duckdb_proof_migration": (
+                "ipfs_datasets_py/logic/common/duckdb_proof_migration.py", "duckdb_proof_migration.after.py.DATA"),
+            "ipfs_datasets_py.logic.common.duckdb_proof_store": (
+                "ipfs_datasets_py/logic/common/duckdb_proof_store.py", "duckdb_proof_store.after.py.DATA"),
+        }
+        override = overlays.get(fullname)
+        if override is None:
+            return None
+        rel, leaf = override
+        return importlib.util.spec_from_file_location(
+            fullname, repo / rel, loader=GuardedLoader(rel, unit / leaf))
+
+sys.addaudithook(audit)
+sys.meta_path.insert(0, InMemoryFixturePolicy())
+import pytest
+import tempfile
+tempfile.tempdir = str(working)
+os.chdir(working)
+os.environ["PYTEST_DISABLE_PLUGIN_AUTOLOAD"] = "1"
+root = unit / "isolated/tests"
+keep = (
+    root / "unit/logic/legal_ir/test_proof_cache.py",
+    *[root / ("integration/logic/backends/test_kernel_backends.py::" + name) for name in (
+        "test_native_cache_fixture_loader_uses_pinned_current_owner_without_invoking_helpers",
+        "test_native_cache_fixture_loader_refuses_tampered_preimage_before_module_creation",
+        "test_native_cache_fixture_loader_refuses_post_import_drift_without_retry",
+        "test_native_cache_fixture_loader_supplies_canonical_constructor_contract_without_execution",
+    )],
+    *[root / ("unit/logic/test_duckdb_proof_migration.py::" + name) for name in (
+        "test_legal_ir_unbound_receipt_status_cannot_grant_theorem_authority",
+        "test_legacy_legal_record_remains_advisory_with_original_identities_and_headers",
+        "test_bound_v2_legal_record_requires_the_canonical_record_validator",
+    )],
+)
+ret = pytest.main([
+    "-c", "/dev/null", "--noconftest", "-p", "no:cacheprovider", "-q", "--tb=short",
+    f"--basetemp={working / 'pytest'}", f"--junitxml={working / 'junit.xml'}",
+    f"--log-file={working / 'pytest.log'}",
+    *map(str, keep),
+])
+print(json.dumps({"exit": int(ret), "guard_events": denied, "overlays": watched}, sort_keys=True))
+raise SystemExit(int(ret) if not denied else 1)

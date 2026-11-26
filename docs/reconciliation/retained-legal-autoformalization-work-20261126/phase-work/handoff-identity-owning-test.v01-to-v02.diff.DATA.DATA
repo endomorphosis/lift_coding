@@ -1,0 +1,25 @@
+--- v01/owning-test.py
++++ v02/owning-test.py
+@@ -2938,3 +2938,22 @@
+             self.assertEqual(payload["gate_evidence_fingerprint"], "d" * 64)
+             self.assertIs(payload["work_complete"], False)
+             self.assertIs(payload["completion_authority"], False)
++
++
++import hashlib as _handoff_hashlib
++
++
++class TestGateHandoffNormalizedIdentity(unittest.TestCase):
++    def test_normalized_request_and_legacy_safe_digest_spelling_cannot_alias(self):
++        task = "LAW-1/"
++        legacy = "LAW-1--" + _handoff_hashlib.sha256(task.encode("utf-8")).hexdigest()
++        self.assertLessEqual(len(legacy), 80)
++        with tempfile.TemporaryDirectory() as directory:
++            recovery = _handoff_gate.GateRecovery(Path(directory) / "attempts.json")
++            first = TestGateHandoffPacketIdentity.packet_for(self, recovery, task)
++            retained = first.read_bytes()
++            second = TestGateHandoffPacketIdentity.packet_for(self, recovery, legacy)
++            self.assertNotEqual(first, second)
++            self.assertEqual(first.read_bytes(), retained)
++            self.assertEqual(json.loads(first.read_text())["task_id"], task)
++            self.assertEqual(json.loads(second.read_text())["task_id"], legacy)

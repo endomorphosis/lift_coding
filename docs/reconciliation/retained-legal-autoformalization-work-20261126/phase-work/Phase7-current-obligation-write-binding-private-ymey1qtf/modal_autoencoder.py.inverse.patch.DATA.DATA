@@ -1,0 +1,92 @@
+--- a/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py
++++ b/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py
+@@ -5660,7 +5660,6 @@
+         self,
+         feedback_records: Iterable[Any],
+         *,
+-        current_proof_targets: Optional[Mapping[str, Any]] = None,
+         expected_versions: Optional[Any] = None,
+         expected_version_fingerprint: str = "",
+         learning_rate: float = 0.10,
+@@ -5668,7 +5667,7 @@
+         require_train_partition: bool = True,
+         abstention_threshold: Optional[float] = None,
+     ) -> Dict[str, Any]:
+-        """Train from verifier feedback matching independently selected current targets.
++        """Train all proof heads from version-matched verifier feedback only.
+ 
+         The first accepted version pins an empty head state.  A caller may pin
+         it explicitly with ``expected_versions``.  Once pinned, records from a
+@@ -5676,9 +5675,6 @@
+         are excluded by default.
+         """
+ 
+-        from ...logic.integration.reasoning.legal_ir_proof_feedback import ProofFeedbackTrainingTarget
+-
+-        targets = dict(current_proof_targets or {})
+         raw_records = _proof_feedback_record_items(feedback_records)
+         requested_fingerprint = str(
+             expected_version_fingerprint or ""
+@@ -5692,21 +5688,14 @@
+             expected_fingerprint=expected_fingerprint,
+             require_train_partition=require_train_partition,
+         )
+-        current_records = []
+-        for record in records:
+-            target = targets.get(record.obligation_id)
+-            if type(target) is ProofFeedbackTrainingTarget and target.matches(record):
+-                current_records.append(record)
+-        skipped_target_count = len(records) - len(current_records)
+-        records = current_records
+         if not expected_fingerprint and records:
+             expected_fingerprint = records[0].version_fingerprint
+             records = [
+                 record for record in records if record.version_fingerprint == expected_fingerprint
+             ]
+-            filtering["skipped_version_mismatch_count"] += (
+-                len(current_records) - len(records)
+-            )
++            filtering["skipped_version_mismatch_count"] += filtering[
++                "eligible_before_version_count"
++            ] - len(records)
+ 
+         configuration_mismatch = bool(
+             requested_fingerprint
+@@ -5824,7 +5813,6 @@
+                 "schema_version": PROOF_AUXILIARY_TRAINING_SCHEMA_VERSION,
+                 "skipped_holdout_count": filtering["skipped_holdout_count"],
+                 "skipped_invalid_count": filtering["skipped_invalid_count"],
+-                "skipped_current_target_count": skipped_target_count,
+                 "skipped_limit_count": max(
+                     0,
+                     len(records) - record_limit,
+@@ -5984,8 +5972,6 @@
+         exposes drafted logic, proof prose, or source spans to learned heads.
+         """
+ 
+-        from ...logic.integration.reasoning.legal_ir_proof_feedback import carries_typed_proof_feedback
+-
+         items = self._leanstral_guidance_items(guidance)
+         item_limit = max(0, int(max_items))
+         step = _clamp_learning_rate(learning_rate)
+@@ -6018,7 +6004,7 @@
+         applied_ids = set(self.state.applied_leanstral_guidance_ids)
+         for raw_item in items[:item_limit]:
+             item = self._normalize_leanstral_guidance_item(raw_item)
+-            if not item or carries_typed_proof_feedback(item):
++            if not item:
+                 report["skipped_invalid_count"] += 1
+                 continue
+             feature_bus = build_trusted_hammer_leanstral_feature_bus(
+@@ -6106,11 +6092,7 @@
+     def _leanstral_guidance_items(self, guidance: Any) -> List[Mapping[str, Any]]:
+         if guidance is None:
+             return []
+-        from ...logic.integration.reasoning.legal_ir_proof_feedback import carries_typed_proof_feedback
+-
+         normalized = self._normalize_leanstral_guidance_item(guidance)
+-        if carries_typed_proof_feedback(normalized):
+-            return [normalized]
+         if isinstance(guidance, Mapping):
+             nested: List[Mapping[str, Any]] = []
+             for key in (

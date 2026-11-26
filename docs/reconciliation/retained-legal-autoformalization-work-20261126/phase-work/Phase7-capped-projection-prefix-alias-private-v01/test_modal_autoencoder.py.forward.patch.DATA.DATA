@@ -1,0 +1,120 @@
+--- a/tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder.py
++++ b/tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder.py
+@@ -13541,3 +13541,117 @@
+     assert typed["heads"]["family"]["shared"] is False
+     assert extended["tokenizer_vocabulary_cid"] == LEGAL_IR_CANONICAL_VOCABULARY_CID
+     assert autoencoder.state.architecture_version == MODAL_AUTOENCODER_ARCHITECTURE_VERSION
++
++
++@pytest.mark.parametrize(
++    "sample_cap, text_cap, validation, expected_count",
++    (
++        (1, 0, False, 1),
++        (2, 40, True, 2),
++        (0, 40, False, 0),
++        (None, 40, False, 3),
++        (3, 0, False, 3),
++        (None, 0, False, 3),
++    ),
++)
++def test_projection_bridge_count_cap_aliases_only_evaluated_full_rows(
++    monkeypatch, sample_cap, text_cap, validation, expected_count,
++) -> None:
++    from ipfs_datasets_py.optimizers.logic_theorem_optimizer import modal_autoencoder as modal
++
++    def population(prefix):
++        return [
++            build_us_code_sample(
++                title="5",
++                section=f"552-{prefix}-{index}",
++                text=(
++                    f"A fictional {prefix} actor {index} must publish notice promptly "
++                    "unless the fictional board grants a waiver."
++                ),
++            )
++            for index in range(3)
++        ]
++
++    training = population("training")
++    validation_rows = population("validation") if validation else None
++    model = AdaptiveModalAutoencoder(compute_device="python")
++    state_before = model.state.state_identity()
++    original_alias = model.alias_cached_legal_ir_targets
++    events = []
++    views = {"deontic.ir": 1.0}
++    losses = {"linear_logic_equivalence_loss": 0.55}
++
++    def target_items(rows, *, bridge_names=(), **kwargs):
++        events.append(("bridge" if bridge_names else "base", list(rows)))
++        if not bridge_names:
++            return []
++        return [
++            (
++                row.sample_id,
++                SimpleNamespace(
++                    losses=losses,
++                    view_distribution=views,
++                    document=SimpleNamespace(canonical_hash=lambda key=row.sample_id: key),
++                    accepted=False,
++                ),
++            )
++            for row in rows
++        ]
++
++    def alias(rows, evaluated_rows):
++        events.append(("alias", list(rows), list(evaluated_rows)))
++        return original_alias(rows, evaluated_rows)
++
++    monkeypatch.setattr(modal, "_legal_ir_target_items", target_items)
++    monkeypatch.setattr(model, "alias_cached_legal_ir_targets", alias)
++    report = model.train_generalizable_projection(
++        training,
++        validation_samples=validation_rows,
++        legal_ir_bridge_names=("deontic_norms",),
++        legal_ir_evaluate_provers=False,
++        legal_ir_parallel_workers=1,
++        legal_ir_bridge_max_samples=sample_cap,
++        legal_ir_bridge_max_sample_text_chars=text_cap,
++        epochs=0,
++    )
++
++    assert model.state.state_identity() == state_before
++    assert report["epoch_reports"] == []
++    assert report["accepted_epochs"] == 0
++    holdout = validation_rows if validation else training
++    assert report["before"]["sample_count"] == len(holdout)
++    assert report["before"]["legal_ir_target_count"] == expected_count
++    assert set(report["before"]["decoded_embeddings"]) == {row.sample_id for row in holdout}
++
++    checked_populations = [holdout, training] if validation else [training]
++    if sample_cap == 0:
++        assert events == [("base", training)]
++    elif sample_cap is None and not text_cap:
++        assert events == [("bridge", training)]
++    else:
++        assert [event[0] for event in events] == ["bridge", "alias", "base"] * len(checked_populations)
++        for index, rows in enumerate(checked_populations):
++            bridge, paired, base = events[3 * index:3 * index + 3]
++            selected = rows[:expected_count]
++            assert len(bridge[1]) == expected_count
++            assert paired == ("alias", selected, bridge[1])
++            assert base == ("base", rows)
++            if text_cap:
++                for source, bounded in zip(selected, bridge[1], strict=True):
++                    assert len(bounded.text) <= text_cap < len(source.text)
++                    assert bounded.sample_id.startswith(f"{source.sample_id}:metric-prefix:")
++            else:
++                assert bridge[1] == selected
++        assert set(report["before"]["legal_ir_target_hashes"]) == {
++            row.sample_id for row in events[0][1]
++        }
++
++    for rows in checked_populations:
++        for index, row in enumerate(rows):
++            expected = views if index < expected_count else {}
++            assert model._legal_ir_view_target_distribution_for_sample(
++                row, include_autoencoder_prior=False,
++            ) == expected
++            assert model._compiler_quality_loss_targets_for_sample(row) == (
++                losses if index < expected_count else {}
++            )

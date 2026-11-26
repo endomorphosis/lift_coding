@@ -1,0 +1,109 @@
+{
+  "active_Source_write_or_run_selection": null,
+  "actual_private_reproduction": {
+    "after": {
+      "returncode": 0,
+      "stdout": {
+        "bytes": 180,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-split-membership-reproduce-private-v02-sbasp949/after.stdout.DATA",
+        "sha256": "d7ae62e6d4df4ad053313cbcd0e8b5ecd975c0c65b761217063f3c9a4a277335"
+      },
+      "summary": "108 passed in 0.13s"
+    },
+    "before": {
+      "returncode": 1,
+      "stdout": {
+        "bytes": 28755,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-split-membership-reproduce-private-v02-sbasp949/before.stdout.DATA",
+        "sha256": "e1097b3d14fe2cb4d7f5d9c42472ca0bb82af47199709841c0136e6bdc1520ee"
+      },
+      "summary": "11 failed, 97 passed in 0.20s"
+    }
+  },
+  "contract": "An explicit assignment cannot authorize an item absent from the manifest example inventory. The legacy manifest-only validation route remains separate.",
+  "current_clean": true,
+  "elapsed_seconds": 0.9300110312178731,
+  "exact_existing_pytest_config": {
+    "bytes": 19,
+    "path": "/tmp/decoder-training-split-membership-fix-private-v01/pytest.ini",
+    "sha256": "713f986ee48be06ad4bff2a700d39514a9f69e34b3547af52366c0a274e30e5b"
+  },
+  "exact_existing_runner": {
+    "bytes": 910,
+    "path": "/tmp/decoder-training-split-membership-fix-private-v01/run_membership_tests.py",
+    "sha256": "b95a1fd004f6731dd2d76fc0572bb10232a2a83071a58b632c5483aab956401c"
+  },
+  "historical_parent_fixture": {
+    "bytes": 5724,
+    "path": "/tmp/decoder-training-split-membership-fix-private-v01/descriptor.json",
+    "sha256": "a47e929c0ab19a47d290c9ad1bfdc483269202ff620a5068c13e0cddd05ca93b"
+  },
+  "matched_patches": {
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py": {
+      "after": {
+        "bytes": 58213,
+        "path": "/tmp/decoder-training-split-membership-fix-private-v01/after/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py",
+        "sha256": "292cbe0624e6fa7a66917f59fdbe7b1b3e2a585d215bca7bcf6cd32f3bd985e9"
+      },
+      "before": {
+        "bytes": 58133,
+        "path": "/tmp/decoder-training-split-membership-fix-private-v01/before/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py",
+        "sha256": "7963ebcb291c0476f0cccc4123e28a519187970f02dbd9059fce78e661287c3c"
+      },
+      "before_Git_blob": "ad21acae2a3420e8c560fd26006504fcfb6849df",
+      "candidate_Git_blob": "08f2dfdfa1b5be5732edceb715e0a6c99f5bc6ac",
+      "canonical_lstat_only": {
+        "st_ctime_ns": "1795421815611123350",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70011742",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795421815611123350",
+        "st_nlink": "1",
+        "st_size": "58133",
+        "st_uid": "1000"
+      },
+      "diff": {
+        "bytes": 1469,
+        "path": "/tmp/decoder-training-split-membership-fix-private-v01/owner.diff",
+        "sha256": "e213017a8a03a96be7f32170fee73e544830931ddc8e5ccddb6a5454f0a73144"
+      }
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py": {
+      "after": {
+        "bytes": 11637,
+        "path": "/tmp/decoder-training-split-membership-fix-private-v01/after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py",
+        "sha256": "f937434bec69067db78bf5b4f19c8ca6ff7a4f8b84b04d42e32866a76207ae1d"
+      },
+      "before": {
+        "bytes": 9788,
+        "path": "/tmp/decoder-training-split-membership-fix-private-v01/before/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py",
+        "sha256": "edbe8140db1ce6c96a521a67beb5eac397c4a9f093dbea7fa16e7995c44151e0"
+      },
+      "before_Git_blob": "6f7d2c26d617b3224f665f9319979398b23ada05",
+      "candidate_Git_blob": "59a8f7c546f030d48b59671352786dcb34e89be1",
+      "canonical_lstat_only": {
+        "st_ctime_ns": "1795421816891139208",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70031759",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795421816891139208",
+        "st_nlink": "1",
+        "st_size": "9788",
+        "st_uid": "1000"
+      },
+      "diff": {
+        "bytes": 2457,
+        "path": "/tmp/decoder-training-split-membership-fix-private-v01/test.diff",
+        "sha256": "17ba6ef70f89e4249a9dd6c07a63d016c2b27ba452668dbac349cf983bc08430"
+      }
+    }
+  },
+  "normal_repository_qualification": null,
+  "schema": "phase5-current-Git-matched-existing-split-member-patch-reproduction/v2",
+  "scope": "Current Git blob matches both cached private preimages. Selected private namespace and fictional fixtures only. No installation, commit, push, canonical Source, actual cohort or model.",
+  "separate_grouped_Unicode_successor_not_overlayed": true,
+  "tested_D_head": "8aebc34eb1e430b00c2b941cb256e853fe2adc02",
+  "tested_D_tree": "00cef1abedbef0ae383dc07df5f5efb22f5253bd"
+}

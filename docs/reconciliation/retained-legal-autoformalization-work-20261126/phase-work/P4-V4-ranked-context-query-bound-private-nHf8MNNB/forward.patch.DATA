@@ -1,0 +1,82 @@
+--- a/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_structured_retrieval.py
++++ b/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_structured_retrieval.py
+@@ -247,6 +247,7 @@
+ REVIEWED_CONTEXT_V3_SCHEMA = "legal-reviewed-retrieval-context/v3"
+ REVIEWED_CONTEXT_ROLE = "structural_examples_not_controlling_authorities"
+ MAX_REVIEWED_CONTEXT_BYTES = 1024 * 1024
++_MAX_REVIEWED_CONTEXT_QUERIES = 32
+ 
+ 
+ def reviewed_context_inputs_sha256(value):
+@@ -453,7 +454,7 @@
+     queries, retrieval = copies
+     guards = tuple(bound._guard(v, h) for v, h in zip(copies,
+         (expected_query_rows_sha256, expected_retrieval_rows_sha256)))
+-    _require(type(queries) is list and 1 <= len(queries) <= 32
++    _require(type(queries) is list and 1 <= len(queries) <= _MAX_REVIEWED_CONTEXT_QUERIES
+              and type(retrieval) is list and len(retrieval) == len(queries),
+              "complete bounded query and retrieval populations required")
+     manifest, examples = bound._manifest(split_manifest, bound._guard(split_manifest))
+@@ -1142,7 +1143,7 @@
+     bound._guard(query_rows, expected_query_rows_sha256)
+     bound._guard(retrieval_rows, expected_retrieval_rows_sha256)
+     queries, selections = frozen["query_rows"], frozen["retrieval_rows"]
+-    _require(type(queries) is list and 1 <= len(queries) <= 32
++    _require(type(queries) is list and 1 <= len(queries) <= _MAX_REVIEWED_CONTEXT_QUERIES
+              and type(selections) is list and len(selections) == len(queries),
+              "complete bounded aggregate query and selection populations required")
+     index = _aggregate_training_index(frozen["components"])
+@@ -1261,10 +1262,13 @@
+     original = dict(query_rows=query_rows, preparation=preparation, registry=registry, policy=policy,
+         reviews=reviews, retrieval_inputs=retrieval_inputs, example_consumer_inputs=example_consumer_inputs)
+     frozen, input_sha = admission.norm._snapshot(original)
++    queries = frozen["query_rows"]
++    _require(type(queries) is list and 1 <= len(queries) <= _MAX_REVIEWED_CONTEXT_QUERIES,
++             "complete bounded aggregate queries required before ranking")
+     pins = _rich_implementation("v4")
+     args = tuple(frozen[key] for key in ("preparation", "registry", "policy", "reviews"))
+     inputs, offered = frozen["retrieval_inputs"], frozen["example_consumer_inputs"]
+-    candidate = build_reviewed_rich_context_candidates_v4(retriever, frozen["query_rows"], *args,
++    candidate = build_reviewed_rich_context_candidates_v4(retriever, queries, *args,
+         retrieval_inputs=inputs, example_consumer_inputs=offered)
+     _require(candidate["status"] == "candidate_only" and candidate["abstention_count"] == 0
+              and len(candidate["rows"]) == len(frozen["query_rows"]),
+--- a/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py
++++ b/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py
+@@ -4633,3 +4633,36 @@
+     assert result["candidate_count"] == 0 and result["abstention_count"] == 1
+     assert result["rows"] == [] and result["model_forward_executed"] is False
+     assert "required_dependency_closure_not_current" in result["blockers"]
++
++
++
++@pytest.mark.parametrize("query_count", [0, 1, 32, 33])
++def test_aggregate_v4_ranked_context_checks_query_count_before_ranking(monkeypatch, query_count):
++    from ipfs_datasets_py.optimizers.logic_theorem_optimizer import legal_structured_retrieval as structured
++
++    queries = [
++        {"id": f"fixture:query:{index}", "split_sample_id": f"fixture:split:{index}",
++         "source_text": f"Fictional provision {index}."}
++        for index in range(query_count)
++    ]
++    calls = []
++
++    class RankingReached(Exception):
++        pass
++
++    def rank(_retriever, offered, *args, **kwargs):
++        calls.append(offered)
++        raise RankingReached
++
++    monkeypatch.setattr(structured, "build_reviewed_rich_context_candidates_v4", rank)
++    expected = RankingReached if 1 <= query_count <= 32 else ValueError
++    with pytest.raises(expected) as stopped:
++        structured.prepare_reviewed_ranked_training_context_v4(
++            object(), queries, None, None, None, [],
++            retrieval_inputs={}, example_consumer_inputs={})
++    if expected is ValueError:
++        assert "bounded aggregate quer" in str(stopped.value)
++        assert calls == []
++    else:
++        assert calls == [queries]
++        assert calls[0] is not queries

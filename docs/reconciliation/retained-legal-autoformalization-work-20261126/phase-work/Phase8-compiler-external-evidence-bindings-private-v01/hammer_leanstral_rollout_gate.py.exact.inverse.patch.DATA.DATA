@@ -1,0 +1,95 @@
+--- a/scripts/ops/legal_ir/hammer_leanstral_rollout_gate.py
++++ b/scripts/ops/legal_ir/hammer_leanstral_rollout_gate.py
+@@ -2312,7 +2312,6 @@
+         payload,
+         evidence_packets,
+         cfg,
+-        external_result=external_result,
+     )
+     failures.extend(binding_failures)
+     metrics["evidence_domains"] = domain_metrics
+@@ -2436,39 +2435,25 @@
+     payload: Mapping[str, Any],
+     cfg: CompilerSystemPromotionConfig,
+ ) -> RolloutGateResult | None:
+-    aliases = (
+-        "external_validity",
+-        "external_validity_promotion",
+-        "external_validity_gate",
+-        "external_validity_evidence",
+-    )
+-    packets = [packet for key in aliases if isinstance(packet := payload.get(key), Mapping)]
+-    if not packets and _schema_version(payload) == EXTERNAL_VALIDITY_PROMOTION_SCHEMA_VERSION:
+-        packets.append(payload)
+-    if not packets:
++    packet = _first_mapping_value(
++        payload,
++        (
++            "external_validity",
++            "external_validity_promotion",
++            "external_validity_gate",
++            "external_validity_evidence",
++        ),
++    )
++    if (
++        packet is None
++        and str(payload.get("schema_version") or "") == EXTERNAL_VALIDITY_PROMOTION_SCHEMA_VERSION
++    ):
++        packet = payload
++    if packet is None:
+         return None
+-
+-    saved = []
+-    replayed = []
+-    for packet in packets:
+-        if _looks_like_gate_decision(packet, EXTERNAL_VALIDITY_PROMOTION_SCHEMA_VERSION):
+-            saved.append(_rollout_result_from_decision(packet))
+-        else:
+-            replayed.append(external_validity_promotion_gate(packet))
+-    results = replayed + saved
+-    selected = results[0]
+-    if all(result.to_dict() == selected.to_dict() for result in results[1:]):
+-        return selected
+-
+-    failures = [failure for result in results for failure in result.failures]
+-    failures.append("external_validity_inputs_disagree")
+-    warnings = [warning for result in results for warning in result.warnings]
+-    return RolloutGateResult(
+-        accepted=False,
+-        failures=list(dict.fromkeys(failures)),
+-        warnings=list(dict.fromkeys(warnings)),
+-        metrics=selected.metrics,
+-    )
++    if _looks_like_gate_decision(packet, EXTERNAL_VALIDITY_PROMOTION_SCHEMA_VERSION):
++        return _rollout_result_from_decision(packet)
++    return external_validity_promotion_gate(packet)
+ 
+ 
+ def _compiler_system_domain_packet(
+@@ -2831,8 +2816,6 @@
+     payload: Mapping[str, Any],
+     evidence_packets: Mapping[str, Mapping[str, Any]],
+     cfg: CompilerSystemPromotionConfig,
+-    *,
+-    external_result: RolloutGateResult | None,
+ ) -> tuple[dict[str, Any], list[str]]:
+     relevant = {
+         domain: packet
+@@ -2845,17 +2828,6 @@
+             "rollback_readiness",
+         }
+     }
+-    # The external result records the identifiers actually evaluated. Keep
+-    # these separate from the labels on the submitted packet.
+-    if external_result is not None:
+-        evaluated = external_result.metrics.get("bindings")
+-        if isinstance(evaluated, Mapping):
+-            relevant["external_validity_result"] = {
+-                field: binding["canonical"]
+-                for field in cfg.required_binding_fields
+-                if isinstance(binding := evaluated.get(field), Mapping)
+-                and isinstance(binding.get("canonical"), str)
+-            }
+     return _external_validity_binding_failures(
+         payload,
+         relevant,

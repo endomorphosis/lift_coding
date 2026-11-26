@@ -1,0 +1,224 @@
+{
+  "accounting": {
+    "cached_inputs_and_readbacks_so_far": 7367061,
+    "earlier523989_static_phase_preserved_separately": true,
+    "full4_then8_then16MiB_reservations_not_reset_or_refunded": true,
+    "implicit_stdlib_library_IO_measured": false,
+    "phase_limit": 16777216
+  },
+  "actual_owned_process": {
+    "exit_code": 1,
+    "no_open_handle": true,
+    "session": 76734,
+    "terminal_reaped": true
+  },
+  "actual_red": {
+    "XML": {
+      "bytes": 4133,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-get-snapshot-private-v01-rfb0jazu/actual-get-snapshot5-corrected-v02/junit.xml",
+      "sha256": "e8bd7454081d39636c77e7e23505993635b7f10d7fc2d2901a788379937bd008"
+    },
+    "actual_parents": 5,
+    "actual_rows": [
+      {
+        "change": "none",
+        "initial_result_authority": "theorem",
+        "initial_trust": "independently_checkable",
+        "policy": {
+          "require_result_authority": "theorem"
+        },
+        "post_lookup_reason": "hit",
+        "post_lookup_usable": true,
+        "real_lookup_usable": true,
+        "requested_key_digest": "sha256:32746f38d75bc7f5bf16e647e834ee808729206c5948f851708092ac24c9566d",
+        "returned_key_digest": "sha256:32746f38d75bc7f5bf16e647e834ee808729206c5948f851708092ac24c9566d",
+        "returned_none": false,
+        "returned_result_authority": "theorem",
+        "returned_trust": "independently_checkable"
+      },
+      {
+        "change": "equivalent-put",
+        "initial_result_authority": "theorem",
+        "initial_trust": "independently_checkable",
+        "policy": {
+          "require_result_authority": "theorem"
+        },
+        "post_lookup_reason": "hit",
+        "post_lookup_usable": true,
+        "real_lookup_usable": true,
+        "requested_key_digest": "sha256:32746f38d75bc7f5bf16e647e834ee808729206c5948f851708092ac24c9566d",
+        "returned_key_digest": "sha256:32746f38d75bc7f5bf16e647e834ee808729206c5948f851708092ac24c9566d",
+        "returned_none": false,
+        "returned_result_authority": "theorem",
+        "returned_trust": "independently_checkable"
+      },
+      {
+        "change": "invalidate",
+        "initial_result_authority": "theorem",
+        "initial_trust": "independently_checkable",
+        "policy": {
+          "require_result_authority": "theorem"
+        },
+        "post_lookup_reason": "miss",
+        "post_lookup_usable": false,
+        "real_lookup_usable": true,
+        "requested_key_digest": "sha256:32746f38d75bc7f5bf16e647e834ee808729206c5948f851708092ac24c9566d",
+        "returned_key_digest": null,
+        "returned_none": true,
+        "returned_result_authority": null,
+        "returned_trust": null
+      },
+      {
+        "change": "result-authority",
+        "initial_result_authority": "theorem",
+        "initial_trust": "independently_checkable",
+        "policy": {
+          "require_result_authority": "theorem"
+        },
+        "post_lookup_reason": "authority_mismatch",
+        "post_lookup_usable": false,
+        "real_lookup_usable": true,
+        "requested_key_digest": "sha256:32746f38d75bc7f5bf16e647e834ee808729206c5948f851708092ac24c9566d",
+        "returned_key_digest": "sha256:32746f38d75bc7f5bf16e647e834ee808729206c5948f851708092ac24c9566d",
+        "returned_none": false,
+        "returned_result_authority": "satisfiability",
+        "returned_trust": "independently_checkable"
+      },
+      {
+        "change": "trust-ceiling",
+        "initial_result_authority": "theorem",
+        "initial_trust": "advisory",
+        "policy": {
+          "max_trust_level": "advisory"
+        },
+        "post_lookup_reason": "insufficient_authority",
+        "post_lookup_usable": false,
+        "real_lookup_usable": true,
+        "requested_key_digest": "sha256:32746f38d75bc7f5bf16e647e834ee808729206c5948f851708092ac24c9566d",
+        "returned_key_digest": "sha256:32746f38d75bc7f5bf16e647e834ee808729206c5948f851708092ac24c9566d",
+        "returned_none": false,
+        "returned_result_authority": "theorem",
+        "returned_trust": "independently_checkable"
+      }
+    ],
+    "actual_runtime_cached_read_bytes": 3213820,
+    "case_names": [
+      "test_unified_get_eligibility_snapshot_after_actual_lookup[none]",
+      "test_unified_get_eligibility_snapshot_after_actual_lookup[equivalent-put]",
+      "test_unified_get_eligibility_snapshot_after_actual_lookup[invalidate]",
+      "test_unified_get_eligibility_snapshot_after_actual_lookup[result-authority]",
+      "test_unified_get_eligibility_snapshot_after_actual_lookup[trust-ceiling]"
+    ],
+    "control": {
+      "bytes": 26847,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-get-snapshot-private-v01-rfb0jazu/actual-get-snapshot5-corrected-v02/run-control.json",
+      "sha256": "d7add4a9060084d1e1e1597a13cf2c20735bf51532a97ebdf74462c61fd2051a"
+    },
+    "denied_effects": [],
+    "errors": 0,
+    "exit": 1,
+    "explicit_generated_trace_writes_bytes": 9032,
+    "failures": 2,
+    "own_output_readback_bytes": 34001,
+    "passes": 3,
+    "retained_imports": 56,
+    "skips": 0,
+    "trace": {
+      "bytes": 3021,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-get-snapshot-private-v01-rfb0jazu/actual-get-snapshot5-corrected-v02/get-snapshot-trace.json",
+      "sha256": "b734247219dc324fbb6402438594583d203a6732814fdacc4405e071f6ddb714"
+    }
+  },
+  "baseline_store": {
+    "bytes": 111147,
+    "path": "/tmp/Root-P1-complete-policy-frozen-post4-index-SourceREAD5-v297-sh1hvvnv/actual-output/1-duckdb_proof_store.py.POST.DATA",
+    "sha256": "db8488f5640c8d9bbc6fb565cfe93b0e6ee1b52b67a079d74238629507d65d37"
+  },
+  "code_map": {
+    "bytes": 1010,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-get-snapshot-private-v01-rfb0jazu/captured-current-code-map.json",
+    "sha256": "23f3af6e9807753bc2aee2b2a6d852edd28850a288857d50c389ea7546b7ae67"
+  },
+  "fixture_default_None_correction": {
+    "bytes": 625,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-get-snapshot-private-v01-rfb0jazu/v02-default-None-forwarding-fixture-only.diff",
+    "sha256": "d0e62b5e53b9356130460c3b57da6e01a4e64e5cabc229e1b30d15d7809241d4"
+  },
+  "history": {
+    "first5_None_default_fixture_failures_retained": {
+      "XML": {
+        "bytes": 5524,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-get-snapshot-private-v01-rfb0jazu/actual-get-snapshot5/junit.xml",
+        "sha256": "9fdf8dc45e79c36732cdf6691a944a9f8ae73dcbcc39087f11cc990bff91bd16"
+      },
+      "actual_parents": 5,
+      "actual_runtime_cached_read_bytes": 3213729,
+      "case_names": [
+        "test_unified_get_eligibility_snapshot_after_actual_lookup[none]",
+        "test_unified_get_eligibility_snapshot_after_actual_lookup[equivalent-put]",
+        "test_unified_get_eligibility_snapshot_after_actual_lookup[invalidate]",
+        "test_unified_get_eligibility_snapshot_after_actual_lookup[result-authority]",
+        "test_unified_get_eligibility_snapshot_after_actual_lookup[trust-ceiling]"
+      ],
+      "control": {
+        "bytes": 26843,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-get-snapshot-private-v01-rfb0jazu/actual-get-snapshot5/run-control.json",
+        "sha256": "70e59b614c2775ce1d5e9f2ed8f3e42efd136ac99d22556a5df59638c1a1710b"
+      },
+      "denied_effects": [],
+      "errors": 0,
+      "exit": 1,
+      "failures": 5,
+      "own_output_readback_bytes": 32367,
+      "retained_imports": 56,
+      "skips": 0
+    },
+    "first_preparation_syntax_failure_retained": {
+      "exit_code": 1,
+      "reads": 247660,
+      "reason": "syntax-only pytest DATA selector splice removed newline before finally",
+      "source_SQL_Git_runtime_or_tests": false
+    },
+    "no_failure_cost_refund": true
+  },
+  "probe_contract": {
+    "actual_memory_put_or_invalidate_only": true,
+    "all93508_prior_test_prefix_bytes_and_AST_preserved": true,
+    "connection_None_and_DB_imports_blocked": true,
+    "final_policy_assertions_unchanged_by_fixture_correction": true,
+    "negative_cases": [
+      "get(requireTHEOREM) returns SATISFIABILITY while real post-lookup rejects AUTHORITY_MISMATCH",
+      "get(maxTrustADVISORY) returns INDEPENDENTLY_CHECKABLE rank4 above2 while real post-lookup rejects INSUFFICIENT_AUTHORITY"
+    ],
+    "positive_controls": [
+      "unchanged current theorem",
+      "same-key equivalent normalized put",
+      "invalidate yields None/MISS"
+    ],
+    "real_lookup_result_returned_unchanged": true,
+    "scheduling": "Synchronous observational hook after real lookup unlocked; actual memory API mutation models interleaving before public get refetch. This is not a real multi-thread stress test."
+  },
+  "protocol": {
+    "bytes": 43005,
+    "path": "/tmp/Root-P1-complete-policy-frozen-post4-index-SourceREAD5-v297-sh1hvvnv/actual-output/0-cache_protocol.py.POST.DATA",
+    "sha256": "48029fa604a91f6f748eda8b30dcb03d11b3127abb2bd32b21d91246b0dd3661"
+  },
+  "runner": {
+    "bytes": 12388,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-get-snapshot-private-v01-rfb0jazu/run_get_snapshot_existing_confined_v02.py",
+    "sha256": "ca2e4d9fef87ada156db5cfd046ff992b55bec33d1594ef83bce588a71aab5ed"
+  },
+  "schema": "actual-private-memory-get-snapshot-RED-five/v1",
+  "status": "REAL PUBLIC GET POLICY BYPASS REPRODUCED, NO PRODUCT FIX YET",
+  "test": {
+    "bytes": 97849,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-get-snapshot-private-v01-rfb0jazu/test_proof_cache.get-snapshot-corrected.py.DATA",
+    "sha256": "3bebc541846fe6944db1f6704426cecebd40d20bbb34edbf1f9469e1641c4425"
+  },
+  "unselected_claims": {
+    "Native_or_model_or_legal_or_full_goal": false,
+    "SQL_qualification": false,
+    "canonical_or_Source_or_Git_actions": false,
+    "ordinary_SDK_qualification": false
+  }
+}

@@ -1,0 +1,1081 @@
+{
+  "canonical_local_and_tracking_HEAD": "611395777d8365a070c4cba4c29a5cbc6c510f8b",
+  "concurrent_unrelated_status_at_seal": [
+    " M ipfs_datasets_py/logic/formalization/autoencoder/ir_legal_text_roundtrip.py",
+    " M tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py"
+  ],
+  "constraint": "A separate private process-returncode proposal exists. Preserve its test additions if composed on a future coordinated adoption. Frozen here independently.",
+  "current_change": "Only accepted LeanKernelOutcome reconstructs and compares request source and translation through existing canonical extractor, plus the exact expected declaration and proposition. Nonaccepted outcomes and the original receipt/guard wire remain unchanged.",
+  "files": [
+    {
+      "after": {
+        "bytes": 103656,
+        "full9": {
+          "st_ctime_ns": "1795681067268815918",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72391614",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795681067255850092",
+          "st_nlink": "1",
+          "st_size": "103656",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/owner.after.py.DATA",
+        "proposed_git_blob": "fd238fee29589151000636add40326bff37cbe1c",
+        "sha256": "3765293cad09e02db05136b1ce58f0b86c27876a6463391059b0adf97b8310fd"
+      },
+      "before": {
+        "bytes": 103060,
+        "full9": {
+          "st_ctime_ns": "1795681009075133160",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72391560",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795681009074105390",
+          "st_nlink": "1",
+          "st_size": "103060",
+          "st_uid": "1000"
+        },
+        "git_blob": "1e1b75b74da8740b5808fb3dd77671eab5673f35",
+        "observed_canonical_full9": {
+          "st_ctime_ns": "1795554179210554432",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "70042539",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795554178597733883",
+          "st_nlink": "1",
+          "st_size": "103060",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/owner.before.py.DATA",
+        "sha256": "1b250246f6ecea6a75b75da8a46f77abac1d5a02a5eba4cd2c1ec0e978e4efc9"
+      },
+      "canonical_path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/backends/kernel/lean.py",
+      "mode": "100644",
+      "relative_path": "ipfs_datasets_py/logic/backends/kernel/lean.py",
+      "role": "owner",
+      "unchanged_remaining_AST": true
+    },
+    {
+      "after": {
+        "bytes": 114049,
+        "full9": {
+          "st_ctime_ns": "1795681044251775921",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72391580",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795681044251775921",
+          "st_nlink": "1",
+          "st_size": "114049",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/test.after.v02.py.DATA",
+        "proposed_git_blob": "86a4ecb3b0d51f1afe0dd32ac1b3274e4e5c2f21",
+        "sha256": "a8d4796fbc685ee5b6c28473607f82c24d91a4248b74a9ff9fdb48f237cfdaf6"
+      },
+      "before": {
+        "bytes": 111809,
+        "full9": {
+          "st_ctime_ns": "1795681009079133135",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72391561",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795681009077210683",
+          "st_nlink": "1",
+          "st_size": "111809",
+          "st_uid": "1000"
+        },
+        "git_blob": "e18eec7a0b92a20d02a672559713a0923f3ad7a5",
+        "observed_canonical_full9": {
+          "st_ctime_ns": "1795594058199046127",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "70042554",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795594056359946444",
+          "st_nlink": "1",
+          "st_size": "111809",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/test.before.py.DATA",
+        "sha256": "5b57349bce86ec8d308f87802f9dc96195d56da15ec849a705f0b5b2a5ad1549"
+      },
+      "canonical_path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/integration/logic/backends/test_kernel_backends.py",
+      "mode": "100644",
+      "relative_path": "tests/integration/logic/backends/test_kernel_backends.py",
+      "role": "test",
+      "unchanged_remaining_AST": true
+    }
+  ],
+  "fixture_scope": {
+    "canonical_ordinary": false,
+    "cpus": 1,
+    "memory_bytes": 536870912,
+    "original_receipt_wire_or_compiler_profile_changed": false,
+    "physical_process_subprocess_and_native_execution_refused": true,
+    "protected_current_worktree_reads_refused_during_run": true
+  },
+  "fixture_setup_attempt_retained": {
+    "first_copy_setup": "dated test was older; exact current Git test used",
+    "first_test_RUN": {
+      "counts": {
+        "error": 0,
+        "failure": 7,
+        "passed": 1,
+        "skipped": 0
+      },
+      "failure_messages": {
+        "test_lean_outcome_binds_accepted_receipt_to_request_payload[declaration]": "NameError: name 'replace' is not defined",
+        "test_lean_outcome_binds_accepted_receipt_to_request_payload[equivalent-source-alias]": "NameError: name 'replace' is not defined",
+        "test_lean_outcome_binds_accepted_receipt_to_request_payload[match]": "NameError: name 'replace' is not defined",
+        "test_lean_outcome_binds_accepted_receipt_to_request_payload[missing-obligation]": "NameError: name 'replace' is not defined",
+        "test_lean_outcome_binds_accepted_receipt_to_request_payload[proposition]": "NameError: name 'replace' is not defined",
+        "test_lean_outcome_binds_accepted_receipt_to_request_payload[source]": "NameError: name 'replace' is not defined",
+        "test_lean_outcome_binds_accepted_receipt_to_request_payload[translation]": "NameError: name 'replace' is not defined"
+      },
+      "junit": {
+        "bytes": 3799,
+        "full9": {
+          "st_ctime_ns": "1795681023228332500",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72391577",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795681023228332500",
+          "st_nlink": "1",
+          "st_size": "3799",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/same8-red/result.xml",
+        "sha256": "44807eb23465bdd88ad401712387a82705b19a1710cc53ecff23a9055c6e3124"
+      },
+      "ordered_cases": [
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_binds_accepted_receipt_to_request_payload[match]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_binds_accepted_receipt_to_request_payload[equivalent-source-alias]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_binds_accepted_receipt_to_request_payload[declaration]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_binds_accepted_receipt_to_request_payload[proposition]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_binds_accepted_receipt_to_request_payload[source]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_binds_accepted_receipt_to_request_payload[translation]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_binds_accepted_receipt_to_request_payload[missing-obligation]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_verified_proof_binds_full_kernel_receipt"
+        ]
+      ],
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795681022034055284",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72391573",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795681022034055284",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/same8-red/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 4218,
+        "full9": {
+          "st_ctime_ns": "1795681023229048320",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72391572",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795681023229048320",
+          "st_nlink": "1",
+          "st_size": "4218",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/same8-red/stdout.DATA",
+        "sha256": "293223d760354572d116f6c7528e15ced337ab81339bd56a67d13f758d5c9b78"
+      },
+      "termination": {
+        "bytes": 2233,
+        "full9": {
+          "st_ctime_ns": "1795681023305502068",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72391574",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795681023305502068",
+          "st_nlink": "1",
+          "st_size": "2233",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/same8-red/exit.json",
+        "sha256": "32993a43ba12081b9ef6cfd2ba6146e09243e0bf36f51eb9010f6d60c1d30b08"
+      }
+    },
+    "first_test_fixture": "local dataclasses.replace import was absent and was corrected before reproducing actual defect",
+    "superseded_test": {
+      "bytes": 114012,
+      "full9": {
+        "st_ctime_ns": "1795681009082133117",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72391562",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795681009080720533",
+        "st_nlink": "1",
+        "st_size": "114012",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/test.after.py.DATA",
+      "sha256": "dc777f5be46cce3b5954c5acebbafbd19c71924fe6588826a3f7a15ed7f9e4d3"
+    }
+  },
+  "forward_and_inverse_exact_bytes_modes_on_private_preimages": true,
+  "inputs": {
+    "bytes": 77647,
+    "full9": {
+      "st_ctime_ns": "1795681044252931547",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72391581",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795681044252931547",
+      "st_nlink": "1",
+      "st_size": "77647",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/inputs-v02.json",
+    "sha256": "a5686f094744b4f06b04ecfe8988fe6f91a320fb1b7bd8898f5bfcab244c1210"
+  },
+  "patches": {
+    "forward": {
+      "bytes": 3852,
+      "full9": {
+        "st_ctime_ns": "1795681152035960267",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72391659",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795681152035960267",
+        "st_nlink": "1",
+        "st_size": "3852",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/forward.patch",
+      "sha256": "75214c72a67d9b6caa0841847f7dd4e6280f34cf6653b786f3b58a7dd5764c17"
+    },
+    "inverse": {
+      "bytes": 3852,
+      "full9": {
+        "st_ctime_ns": "1795681152043132182",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72391660",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795681152043132182",
+        "st_nlink": "1",
+        "st_size": "3852",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/inverse.patch",
+      "sha256": "313eeb6295ddf44fbd847cc046f4c525b35a56f0bd8c47571bdc349d13811d0b"
+    }
+  },
+  "performed": {
+    "Source": false,
+    "canonical_mutation": false,
+    "ordinary_package_runtime": false,
+    "physical_Lean": false,
+    "push": false,
+    "statutory_interpretation_or_admission": false
+  },
+  "retained_independent_overlapping_cohorts": {
+    "prior-kernel54": {
+      "counts": {
+        "error": 0,
+        "failure": 0,
+        "passed": 54,
+        "skipped": 0
+      },
+      "failure_messages": {},
+      "junit": {
+        "bytes": 10925,
+        "full9": {
+          "st_ctime_ns": "1795681070478800775",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72391633",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795681070478800775",
+          "st_nlink": "1",
+          "st_size": "10925",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/prior-kernel54/result.xml",
+        "sha256": "20937360c9e5382c92f28698c899d287949c59814545d917a1e40870f7bf346e"
+      },
+      "ordered_cases": [
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_sorry_is_rejected_and_never_proved"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_sorry_can_explicitly_downgrade_authority"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_unavailable_lean_kernel_never_passes"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_wasm_plane_is_probe_only_and_not_confused_with_native_success"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[missing_guard]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[other_guard]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[original_report]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[identity_missing]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[identity_unchecked]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[changed_version]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[changed_executable]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[changed_executable_sha]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[changed_size]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[changed_stat]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[failed_version]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[stderr_version]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[other_version_command]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[identity_scope]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[unknown_identity_field]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_replay_rejects_guard_and_native_identity_mutations[v2_schema]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_precancelled_request_runs_no_identity_or_proof_callbacks"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[missing_report]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_report_name]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[unapproved_dependency]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[missing_typecheck]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_proposition_digest]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[missing_compiled_source]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_source]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_proof]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_toolchain_policy]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[missing_report_position]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[unknown_field]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[legacy_schema]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[missing_source]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_submitted_source]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_compiled_recipe]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_selected_declaration]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_report_line]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[empty_report_text]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_declaration_report_text]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[hidden_sorry_report_text]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[hidden_dependency_report_text]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[{\"severity\": \"error\", \"data\": \"fictional unsolved goals\"}\\n-stdout]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[{\"severity\": \"error\", \"data\": \"fictional unsolved goals\"}\\n-stderr]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  {\"severity\": \"error\", \"data\": \"fictional type mismatch\"}\\n-stdout]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  {\"severity\": \"error\", \"data\": \"fictional type mismatch\"}\\n-stderr]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[error: fictional unsolved goals\\n-stdout]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[error: fictional unsolved goals\\n-stderr]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[Main.lean:1:0: error: fictional unsolved goals\\n-stdout]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[Main.lean:1:0: error: fictional unsolved goals\\n-stderr]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  \\tMain.lean:12:3: error: fictional unsolved goals\\n-stdout]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  \\tMain.lean:12:3: error: fictional unsolved goals\\n-stderr]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  ERROR: fictional unsolved goals\\n-stdout]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  ERROR: fictional unsolved goals\\n-stderr]"
+        ]
+      ],
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795681069381801988",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72391629",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795681069381801988",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/prior-kernel54/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 917,
+        "full9": {
+          "st_ctime_ns": "1795681070478800775",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72391628",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795681070478800775",
+          "st_nlink": "1",
+          "st_size": "917",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/prior-kernel54/stdout.DATA",
+        "sha256": "1e09e34b3f64e9c0a22b453be7e087feb311d183502adfd7966a2d5fe097f089"
+      },
+      "termination": {
+        "bytes": 2162,
+        "full9": {
+          "st_ctime_ns": "1795681070550039562",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72391630",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795681070550039562",
+          "st_nlink": "1",
+          "st_size": "2162",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/prior-kernel54/exit.json",
+        "sha256": "a839d568f54189a56141cb64ba82d7c5ae556056168c3e30f3ccaa6d8fd629bc"
+      }
+    },
+    "prior-outcome8": {
+      "counts": {
+        "error": 0,
+        "failure": 0,
+        "passed": 8,
+        "skipped": 0
+      },
+      "failure_messages": {},
+      "junit": {
+        "bytes": 1559,
+        "full9": {
+          "st_ctime_ns": "1795681071521970865",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72391639",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795681071521970865",
+          "st_nlink": "1",
+          "st_size": "1559",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/prior-outcome8/result.xml",
+        "sha256": "9e1852600a6497d83012a57c3c6a83851f22df56c2feb49830ba249f7dddd54c"
+      },
+      "ordered_cases": [
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_rejects_inconsistent_evidence[different-result]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_rejects_inconsistent_evidence[different-source]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_rejects_inconsistent_evidence[contradictory-status]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_rejects_inconsistent_evidence[different-witness-receipt]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_rejects_inconsistent_evidence[different-witness-theorem]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_rejects_inconsistent_evidence[different-capability]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_verified_proof_binds_full_kernel_receipt"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_source_only_compilation_cannot_prove_an_opaque_request_obligation"
+        ]
+      ],
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795681070550039562",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72391635",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795681070550039562",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/prior-outcome8/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 836,
+        "full9": {
+          "st_ctime_ns": "1795681071521970865",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72391634",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795681071521970865",
+          "st_nlink": "1",
+          "st_size": "836",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/prior-outcome8/stdout.DATA",
+        "sha256": "44b9df195c65e884c2568a8435008b18ff4411e035e026dbd23aea81f056d899"
+      },
+      "termination": {
+        "bytes": 2217,
+        "full9": {
+          "st_ctime_ns": "1795681071620401270",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72391636",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795681071620401270",
+          "st_nlink": "1",
+          "st_size": "2217",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/prior-outcome8/exit.json",
+        "sha256": "aa8f8c662f1818a95d1e618d74a6a6f00dd0f9d3c1b368ab1127d141f311c741"
+      }
+    },
+    "prior-request8": {
+      "counts": {
+        "error": 0,
+        "failure": 0,
+        "passed": 8,
+        "skipped": 0
+      },
+      "failure_messages": {},
+      "junit": {
+        "bytes": 1519,
+        "full9": {
+          "st_ctime_ns": "1795681069320585732",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72391627",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795681069320585732",
+          "st_nlink": "1",
+          "st_size": "1519",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/prior-request8/result.xml",
+        "sha256": "abaf90758f681bb50d3c5da2c508d91951153ab7d9f0fcb5d308d72eee61aed7"
+      },
+      "ordered_cases": [
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_rejects_fields_from_another_request[result_id]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_rejects_fields_from_another_request[assumptions]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_rejects_fields_from_another_request[bounds]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_verified_proof_binds_full_kernel_receipt"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_source_only_compilation_cannot_prove_an_opaque_request_obligation"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_sorry_is_rejected_and_never_proved"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v2_receipt_binds_expected_goal_policy_and_round_trips_strictly"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_v3_precancelled_request_runs_no_identity_or_proof_callbacks"
+        ]
+      ],
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795681068363030090",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72391623",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795681068363030090",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/prior-request8/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 836,
+        "full9": {
+          "st_ctime_ns": "1795681069320585732",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72391622",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795681069320585732",
+          "st_nlink": "1",
+          "st_size": "836",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/prior-request8/stdout.DATA",
+        "sha256": "fcacab32341cef2c552dc35150d835ca4dd7a27b23bdd3089e61ca2ade26cc19"
+      },
+      "termination": {
+        "bytes": 2177,
+        "full9": {
+          "st_ctime_ns": "1795681069381801988",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72391624",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795681069381801988",
+          "st_nlink": "1",
+          "st_size": "2177",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/prior-request8/exit.json",
+        "sha256": "675293e01bfea22f3b4cf0cfeccab9a8d9e6250f763d624424c4d28423a67502"
+      }
+    }
+  },
+  "runner": {
+    "bytes": 2733,
+    "full9": {
+      "st_ctime_ns": "1795546560046611044",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72094739",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795546560046611044",
+      "st_nlink": "1",
+      "st_size": "2733",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/invoke-existing-pytest-private-v02.py.DATA",
+    "sha256": "37b0cd50f0ce9d5ef5fd38e29d040211401365253595255b74fa60becba76132"
+  },
+  "same_ordered_8": {
+    "baseline": {
+      "counts": {
+        "error": 0,
+        "failure": 5,
+        "passed": 3,
+        "skipped": 0
+      },
+      "failure_messages": {
+        "test_lean_outcome_binds_accepted_receipt_to_request_payload[declaration]": "Failed: DID NOT RAISE <class 'ipfs_datasets_py.logic.backends.kernel.lean.LeanKernelError'>",
+        "test_lean_outcome_binds_accepted_receipt_to_request_payload[missing-obligation]": "Failed: DID NOT RAISE <class 'ipfs_datasets_py.logic.backends.kernel.lean.LeanKernelError'>",
+        "test_lean_outcome_binds_accepted_receipt_to_request_payload[proposition]": "Failed: DID NOT RAISE <class 'ipfs_datasets_py.logic.backends.kernel.lean.LeanKernelError'>",
+        "test_lean_outcome_binds_accepted_receipt_to_request_payload[source]": "Failed: DID NOT RAISE <class 'ipfs_datasets_py.logic.backends.kernel.lean.LeanKernelError'>",
+        "test_lean_outcome_binds_accepted_receipt_to_request_payload[translation]": "Failed: DID NOT RAISE <class 'ipfs_datasets_py.logic.backends.kernel.lean.LeanKernelError'>"
+      },
+      "junit": {
+        "bytes": 3820,
+        "full9": {
+          "st_ctime_ns": "1795681045414878833",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72391591",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795681045414878833",
+          "st_nlink": "1",
+          "st_size": "3820",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/same8-v02-red/result.xml",
+        "sha256": "5364d508c2873cfe96fbc00367015a6688d78acf3387d8bd00835b078ba49eff"
+      },
+      "ordered_cases": [
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_binds_accepted_receipt_to_request_payload[match]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_binds_accepted_receipt_to_request_payload[equivalent-source-alias]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_binds_accepted_receipt_to_request_payload[declaration]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_binds_accepted_receipt_to_request_payload[proposition]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_binds_accepted_receipt_to_request_payload[source]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_binds_accepted_receipt_to_request_payload[translation]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_binds_accepted_receipt_to_request_payload[missing-obligation]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_verified_proof_binds_full_kernel_receipt"
+        ]
+      ],
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795681044272931441",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72391585",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795681044272931441",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/same8-v02-red/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 3632,
+        "full9": {
+          "st_ctime_ns": "1795681045414925409",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72391584",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795681045414925409",
+          "st_nlink": "1",
+          "st_size": "3632",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/same8-v02-red/stdout.DATA",
+        "sha256": "bbc0700194731bb7d41a6bbe030813a6fd1bf983dee54e5d86cb61a30f71f38d"
+      },
+      "termination": {
+        "bytes": 2237,
+        "full9": {
+          "st_ctime_ns": "1795681045492924997",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72391588",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795681045492924997",
+          "st_nlink": "1",
+          "st_size": "2237",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/same8-v02-red/exit.json",
+        "sha256": "9a360bde4891a3a73394fac912ff5253c15c37bd63be0aebad3fe134b0a61c84"
+      }
+    },
+    "candidate": {
+      "counts": {
+        "error": 0,
+        "failure": 0,
+        "passed": 8,
+        "skipped": 0
+      },
+      "failure_messages": {},
+      "junit": {
+        "bytes": 1580,
+        "full9": {
+          "st_ctime_ns": "1795681068262930211",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72391621",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795681068262930211",
+          "st_nlink": "1",
+          "st_size": "1580",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/same8-v02-green/result.xml",
+        "sha256": "9b1f43dec2bae80e97a8f6404ce85bec3a99f957a9f8e3ec810eba1a7a8e2fca"
+      },
+      "ordered_cases": [
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_binds_accepted_receipt_to_request_payload[match]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_binds_accepted_receipt_to_request_payload[equivalent-source-alias]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_binds_accepted_receipt_to_request_payload[declaration]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_binds_accepted_receipt_to_request_payload[proposition]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_binds_accepted_receipt_to_request_payload[source]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_binds_accepted_receipt_to_request_payload[translation]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_outcome_binds_accepted_receipt_to_request_payload[missing-obligation]"
+        ],
+        [
+          "tests.integration.logic.backends.test_kernel_backends",
+          "test_lean_verified_proof_binds_full_kernel_receipt"
+        ]
+      ],
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795681067292815804",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72391617",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795681067292815804",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/same8-v02-green/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 837,
+        "full9": {
+          "st_ctime_ns": "1795681068262930211",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72391616",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795681068262930211",
+          "st_nlink": "1",
+          "st_size": "837",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/same8-v02-green/stdout.DATA",
+        "sha256": "c63e27d44e1d86420e42fb9192b0cbd8c36d74bcb28932063c39e3d47dadd986"
+      },
+      "termination": {
+        "bytes": 2239,
+        "full9": {
+          "st_ctime_ns": "1795681068363030090",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72391618",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795681068363030090",
+          "st_nlink": "1",
+          "st_size": "2239",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/same8-v02-green/exit.json",
+        "sha256": "888a33138a4a23f17e4d5c650653c156fe539aa145f5b8192d4e38061e7d9245"
+      }
+    }
+  },
+  "schema": "private-P1-Lean-outcome-exact-accepted-request-two-file/v1",
+  "selected_pair_canonical_clean": true,
+  "separate_Main_proposal": {
+    "bytes": 22366,
+    "full9": {
+      "st_ctime_ns": "1795680768974923037",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72391166",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795680768974923037",
+      "st_nlink": "1",
+      "st_size": "22366",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/sealed-private-P1-integer-exit-status-two-file-proposal-v01.json",
+    "sha256": "d645777be1857f3ff9cbf35afb3234ca9b20b244361cc18e3e9c2027d5d4af20"
+  },
+  "tree": "d63388fc349d1ab8bc93c702fa27d042aa459880"
+}

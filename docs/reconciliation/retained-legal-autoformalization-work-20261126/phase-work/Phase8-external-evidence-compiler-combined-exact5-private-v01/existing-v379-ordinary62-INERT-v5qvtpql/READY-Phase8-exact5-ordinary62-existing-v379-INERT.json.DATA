@@ -1,0 +1,389 @@
+{
+  "Root_selected": false,
+  "already_maintained_CLI_member_cases": [
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_cli_writes_decision_and_report",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_cli_writes_decision_and_report"
+  ],
+  "base_code_qualification_profile": {
+    "bootstrap": {
+      "bytes": 52544,
+      "path": "/tmp/Root-existing-P7-cache-ordinary23-ontology-bound-v379-rj1br0db/Root-selected-bootstrap.py",
+      "sha256": "2199b3b6af14d3b3206f0c04bcaa15c90e73d974b5230f7a4cb5ff3a3a030b12"
+    },
+    "factory": {
+      "bytes": 3370,
+      "path": "/tmp/Phase7-joint-cache-ordinary23-existing-R2-INERT-u6pE7oXF/Phase7-joint-23-existing-R2-factory.INERT.py.DATA",
+      "sha256": "0eb5e7dd14be9a1b07b1f7d3938d3d90d06c8770c0ae0faca532830a876e7afc"
+    },
+    "operator": {
+      "bytes": 83179,
+      "path": "/tmp/Root-existing-P7-cache-ordinary23-ontology-bound-v379-rj1br0db/Root-selected-P7-existing-ordinary23-operator.py",
+      "sha256": "6915e4bfad768fbb6eae1430b2cb4b9ff75abf180dabbaa1e8fcab68329421c5"
+    }
+  },
+  "base_source_epoch": {
+    "Python": {
+      "bytes": 852659,
+      "path": "/tmp/Root-existing-P7-cache-ordinary23-ontology-bound-v379-rj1br0db/current-actual-frozen-P7-cache-Python-Source-epoch.json",
+      "records": 1527,
+      "sha256": "c9d45cc9aba927ab8773d20c58e3a6a037111f7f4fe6e8bce1a2f954c09ff009"
+    },
+    "outer": {
+      "bytes": 859087,
+      "path": "/tmp/Root-existing-P7-cache-ordinary23-ontology-bound-v379-rj1br0db/current-actual-frozen-P7-cache-outer-Source-epoch.json",
+      "records": 1539,
+      "sha256": "a06e5b7e40415e3df4448aa00f97ef6cc28487366739fbaa6a5eddf29d75c316"
+    }
+  },
+  "candidate_parent_roles": [
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark",
+    "scripts.ops.legal_ir.hammer_leanstral_rollout_gate",
+    "tests.unit.optimizers.logic_theorem_optimizer.test_compiler_system_promotion_gate",
+    "tests.unit.optimizers.logic_theorem_optimizer.test_external_validity_promotion_gate",
+    "tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark"
+  ],
+  "controls": {
+    "bootstrap": {
+      "bytes": 60271,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-evidence-compiler-combined-exact5-private-v01/existing-v379-ordinary62-INERT-v5qvtpql/Phase8-bootstrap-v379-derived.INERT.py.DATA",
+      "sha256": "a02aef39ae7da7a85845df643fda82325640c76dd4a4e68f7f1457f915cd8d63"
+    },
+    "factory": {
+      "bytes": 3366,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-evidence-compiler-combined-exact5-private-v01/existing-v379-ordinary62-INERT-v5qvtpql/Phase8-factory-v379-derived.INERT.py.DATA",
+      "sha256": "15592e2ad3808ce513ae03db7a4bac72189f819252a6dd6a56c9babb798c78a8"
+    },
+    "operator": {
+      "bytes": 84724,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-evidence-compiler-combined-exact5-private-v01/existing-v379-ordinary62-INERT-v5qvtpql/Phase8-operator-v379-derived.INERT.py.DATA",
+      "sha256": "fe473e200ec11ff55ad43f016c1e5e1013d902acab8a07d96e3707536e57b977"
+    }
+  },
+  "forward_changes": {
+    "bootstrap": {
+      "bytes": 54998,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-evidence-compiler-combined-exact5-private-v01/existing-v379-ordinary62-INERT-v5qvtpql/bootstrap.forward.patch.DATA",
+      "sha256": "b20686fc00ed2b7db6adf805faff024cf145029f1ab24323946bb6264031d458"
+    },
+    "factory": {
+      "bytes": 3902,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-evidence-compiler-combined-exact5-private-v01/existing-v379-ordinary62-INERT-v5qvtpql/factory.forward.patch.DATA",
+      "sha256": "8128f692c07e724a23da520c316ed8f234344d6df405c0141ffc4c4cf6ab8433"
+    },
+    "operator": {
+      "bytes": 86402,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-evidence-compiler-combined-exact5-private-v01/existing-v379-ordinary62-INERT-v5qvtpql/operator.forward.patch.DATA",
+      "sha256": "cb65978f9a2f55ad1289e30aee85e26ca4acf9257da1c81b4ff7af240040d0da"
+    }
+  },
+  "independent_in_process_member_cases": [
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_accepts_complete_bound_evidence",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_fails_closed_on_missing_domain",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_rejects_backend_block_and_conformance_gap",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_report_renderer_lists_all_domains",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[False-saved]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[False-raw]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[False-paired]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[False-saved-with-current-labels]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[True-saved]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[True-raw]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[True-paired]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[True-saved-with-current-labels]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_replays_raw_external_evidence_beside_an_accepted_decision",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_replays_real_external_benchmark_report[False]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_replays_real_external_benchmark_report[True]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_accepts_bound_complete_evidence",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_fails_closed_on_missing_required_packets",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_rejects_inconsistent_binding_and_metric_regression",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_recomputes_multi_seed_statistics",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_report_renderer_lists_all_domains",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_accepts_consistent_produced_packet_rows",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[hidden-failure]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[duplicate-row-identity]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[nonboolean-row-acceptance]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[contradictory-row-status]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[missing-rows]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[null-rows]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[count-drift]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[accepted-count-drift]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[score-drift]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_cli_checks_produced_packet_rows_in_process[False]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_cli_checks_produced_packet_rows_in_process[True]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_fixture_loads_versioned_external_expert_packets",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_packets_build_external_test_manifest_and_block_training_use",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_validity_report_is_separate_from_internal_canary_metrics",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_acceptable_ambiguity_allows_expected_family_alternative",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_missing_external_expectations_fail_packet_without_touching_canary_metrics",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_packet_validation_rejects_training_or_poisoned_external_records",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator[omitted]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator[null]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator[empty]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator[invalid]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_legacy_candidate_alias_and_absent_reference_keep_existing_scope",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_required_round_trip_needs_observation",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_empty_external_population_has_no_acceptance",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_ambiguous_prediction_order[accepted-first]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_ambiguous_prediction_order[accepted-last]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_misbound_keyed_prediction[packet_id]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_misbound_keyed_prediction[id]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_conflicting_prediction_aliases[flat]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_conflicting_prediction_aliases[sequence]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_duplicate_population_identity",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_predicts_by_each_supported_identity_form",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_requires_current_declared_packet_digest",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_intake_refuses_inconsistent_declared_digest[source-document]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_intake_refuses_inconsistent_declared_digest[source-text]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_intake_refuses_inconsistent_declared_digest[reference-ir]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_intake_refuses_inconsistent_declared_digest[null-pin]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_intake_refuses_inconsistent_declared_digest[wrong-pin]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_digest_binds_canonical_loaded_revision"
+  ],
+  "metadata_and_fixture_roles": {
+    "bytes": 36958,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-evidence-compiler-combined-exact5-private-v01/current-Phase8-exact5-ordinary62-role-and-child-boundaries-INERT.json",
+    "sha256": "3c4acf4944722a82a5a559fba3df1080440fd68dd70918ccbd1a196ca78a7fca"
+  },
+  "nonclock_actual_fields_NULL": {
+    "JUnit": null,
+    "Source": null,
+    "authority": null,
+    "clock": null,
+    "descendants": null,
+    "effect": null,
+    "frozen_candidate": null,
+    "io": null,
+    "ordinary_collection": null,
+    "ordinary_run": null,
+    "output": null,
+    "post_module_F9": null,
+    "scheduler": null
+  },
+  "pending_post_install_actual_READ": {
+    "append_both_epochs": [
+      "scripts/ops/legal_ir/hammer_leanstral_rollout_gate.py",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py"
+    ],
+    "conditional_Python_count": 1530,
+    "conditional_outer_count": 1542,
+    "existing_operator_child_epoch_wire": "authenticated outer epoch bytes as source-epoch.json",
+    "fresh_D_index_protection_required": true,
+    "old_epoch_as_current": false,
+    "preserve_outer_ini_and_JSONL": true,
+    "replace_both_epochs": [
+      "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py"
+    ]
+  },
+  "private_exact5": {
+    "bytes": 90639,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-evidence-compiler-combined-exact5-private-v01/SEALED-Phase8-benchmark-through-final-compiler-five-private.json",
+    "sha256": "788dd4ccf703f1cb6d36c734651bcc49d1a00167aef54e5f54ad67c111e76ee1"
+  },
+  "rollout_parent_exports": {
+    "tests.unit.optimizers.logic_theorem_optimizer.test_compiler_system_promotion_gate": [
+      "compiler_system_promotion_gate",
+      "render_compiler_system_promotion_report"
+    ],
+    "tests.unit.optimizers.logic_theorem_optimizer.test_external_validity_promotion_gate": [
+      "external_validity_promotion_gate",
+      "render_external_validity_report"
+    ]
+  },
+  "schema": "Phase8-exact5-v379-existing-ordinary62-INERT/v1",
+  "separate_actual_private60_raw_junit": {
+    "bytes": 11984,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-evidence-compiler-combined-exact5-private-v01/joined-green/junit.xml",
+    "sha256": "c7bd14c21d85f89badf7abd21715b51e33913d48b3511d1e8a8c00237c356fff"
+  },
+  "static_controls": {
+    "compiled_all_three_templates_without_execution": true,
+    "exact_60_plus_existing_2": true,
+    "no_Git_Source_runtime_or_child_actions": true,
+    "old_23_and_new_62_distinct": true,
+    "old_Source42_ABI_and_limits_preserved": true,
+    "ordinary_62_pass_claim": false,
+    "pytest_rewrite_and_other_alias_fences_preserved": true
+  },
+  "static_selection": {
+    "expected_function_case_counts": {
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings": 8,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_accepts_complete_bound_evidence": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_cli_writes_decision_and_report": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_fails_closed_on_missing_domain": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_rejects_backend_block_and_conformance_gap": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_replays_raw_external_evidence_beside_an_accepted_decision": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_replays_real_external_benchmark_report": 2,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_report_renderer_lists_all_domains": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_cli_checks_produced_packet_rows_in_process": 2,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_cli_writes_decision_and_report": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_accepts_bound_complete_evidence": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_accepts_consistent_produced_packet_rows": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_fails_closed_on_missing_required_packets": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_recomputes_multi_seed_statistics": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows": 9,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_rejects_inconsistent_binding_and_metric_regression": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_report_renderer_lists_all_domains": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_acceptable_ambiguity_allows_expected_family_alternative": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_digest_binds_canonical_loaded_revision": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_intake_refuses_inconsistent_declared_digest": 5,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_empty_external_population_has_no_acceptance": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_predicts_by_each_supported_identity_form": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_ambiguous_prediction_order": 2,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_conflicting_prediction_aliases": 2,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_duplicate_population_identity": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_misbound_keyed_prediction": 2,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_requires_current_declared_packet_digest": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_packets_build_external_test_manifest_and_block_training_use": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_validity_report_is_separate_from_internal_canary_metrics": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_fixture_loads_versioned_external_expert_packets": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_legacy_candidate_alias_and_absent_reference_keep_existing_scope": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_missing_external_expectations_fail_packet_without_touching_canary_metrics": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_packet_validation_rejects_training_or_poisoned_external_records": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator": 4,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_required_round_trip_needs_observation": 1
+    },
+    "function_count": 35,
+    "function_selectors": [
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_accepts_complete_bound_evidence",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_fails_closed_on_missing_domain",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_rejects_backend_block_and_conformance_gap",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_report_renderer_lists_all_domains",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_replays_raw_external_evidence_beside_an_accepted_decision",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_replays_real_external_benchmark_report",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_accepts_bound_complete_evidence",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_fails_closed_on_missing_required_packets",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_rejects_inconsistent_binding_and_metric_regression",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_recomputes_multi_seed_statistics",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_report_renderer_lists_all_domains",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_accepts_consistent_produced_packet_rows",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_cli_checks_produced_packet_rows_in_process",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_fixture_loads_versioned_external_expert_packets",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_packets_build_external_test_manifest_and_block_training_use",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_validity_report_is_separate_from_internal_canary_metrics",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_acceptable_ambiguity_allows_expected_family_alternative",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_missing_external_expectations_fail_packet_without_touching_canary_metrics",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_packet_validation_rejects_training_or_poisoned_external_records",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_legacy_candidate_alias_and_absent_reference_keep_existing_scope",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_required_round_trip_needs_observation",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_empty_external_population_has_no_acceptance",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_ambiguous_prediction_order",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_misbound_keyed_prediction",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_conflicting_prediction_aliases",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_duplicate_population_identity",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_predicts_by_each_supported_identity_form",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_requires_current_declared_packet_digest",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_intake_refuses_inconsistent_declared_digest",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_digest_binds_canonical_loaded_revision",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_cli_writes_decision_and_report",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_cli_writes_decision_and_report"
+    ],
+    "literal_expected_cases": 62,
+    "literal_expected_nodeids": [
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_accepts_complete_bound_evidence",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_fails_closed_on_missing_domain",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_rejects_backend_block_and_conformance_gap",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_report_renderer_lists_all_domains",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[False-saved]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[False-raw]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[False-paired]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[False-saved-with-current-labels]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[True-saved]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[True-raw]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[True-paired]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[True-saved-with-current-labels]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_replays_raw_external_evidence_beside_an_accepted_decision",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_replays_real_external_benchmark_report[False]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_replays_real_external_benchmark_report[True]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_accepts_bound_complete_evidence",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_fails_closed_on_missing_required_packets",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_rejects_inconsistent_binding_and_metric_regression",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_recomputes_multi_seed_statistics",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_report_renderer_lists_all_domains",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_accepts_consistent_produced_packet_rows",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[hidden-failure]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[duplicate-row-identity]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[nonboolean-row-acceptance]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[contradictory-row-status]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[missing-rows]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[null-rows]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[count-drift]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[accepted-count-drift]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[score-drift]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_cli_checks_produced_packet_rows_in_process[False]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_cli_checks_produced_packet_rows_in_process[True]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_fixture_loads_versioned_external_expert_packets",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_packets_build_external_test_manifest_and_block_training_use",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_validity_report_is_separate_from_internal_canary_metrics",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_acceptable_ambiguity_allows_expected_family_alternative",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_missing_external_expectations_fail_packet_without_touching_canary_metrics",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_packet_validation_rejects_training_or_poisoned_external_records",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator[omitted]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator[null]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator[empty]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator[invalid]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_legacy_candidate_alias_and_absent_reference_keep_existing_scope",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_required_round_trip_needs_observation",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_empty_external_population_has_no_acceptance",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_ambiguous_prediction_order[accepted-first]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_ambiguous_prediction_order[accepted-last]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_misbound_keyed_prediction[packet_id]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_misbound_keyed_prediction[id]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_conflicting_prediction_aliases[flat]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_conflicting_prediction_aliases[sequence]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_duplicate_population_identity",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_predicts_by_each_supported_identity_form",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_requires_current_declared_packet_digest",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_intake_refuses_inconsistent_declared_digest[source-document]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_intake_refuses_inconsistent_declared_digest[source-text]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_intake_refuses_inconsistent_declared_digest[reference-ir]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_intake_refuses_inconsistent_declared_digest[null-pin]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_intake_refuses_inconsistent_declared_digest[wrong-pin]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_digest_binds_canonical_loaded_revision",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_cli_writes_decision_and_report",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_cli_writes_decision_and_report"
+    ],
+    "owning_files": [
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py"
+    ]
+  },
+  "unchanged_scheduler_and_child_profiles": {
+    "CPU": 1,
+    "Python_descendant_compile_claim": false,
+    "R2_existing_direct_owner": true,
+    "RSS_MiB": 4096,
+    "actual_commands_only_allow_the_maintained_two_test_calls_when_selected": {
+      "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_cli_writes_decision_and_report": {
+        "actual_child_outcome": null,
+        "argv_prefix": "sys.executable",
+        "module": "scripts.ops.legal_ir.hammer_leanstral_rollout_gate",
+        "subcommand": "compiler-system-promotion-gate"
+      },
+      "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_cli_writes_decision_and_report": {
+        "actual_child_outcome": null,
+        "argv_prefix": "sys.executable",
+        "module": "scripts.ops.legal_ir.hammer_leanstral_rollout_gate",
+        "subcommand": "external-validity-gate"
+      }
+    },
+    "collect_limits_s": [
+      120,
+      110
+    ],
+    "historical_direct_child_route": {
+      "bytes": 4708,
+      "path": "/tmp/Root-Phase8-corpus-CLI-V4-ordinary4-selected-v266-zbj1of7i/Root-Phase8-public-corpus-V4-ordinary4-qualified-Source-resource-closed-small-v266.json",
+      "sha256": "874512580c535887197eb22c743d794a7454237764d8da28f0e98eb9efe7117f"
+    },
+    "run_limits_s": [
+      600,
+      540
+    ],
+    "simultaneous_child_slots": 1
+  }
+}

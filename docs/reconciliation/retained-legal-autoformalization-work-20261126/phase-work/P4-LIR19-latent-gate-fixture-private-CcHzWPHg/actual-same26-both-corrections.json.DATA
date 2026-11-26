@@ -1,0 +1,166 @@
+{
+  "evaluator_compiled_sha256": "88bfe548fa17e891ea8c6a015f1db29cb9fe03ff9c6d811b2dbd91c5d3b544a9",
+  "evidence_scope": "direct authored-vector diagnostics",
+  "external_events": [],
+  "results": [
+    {
+      "arguments": "()",
+      "case": "test_collapse_fixture_matches_golden_singular_spectrum",
+      "elapsed_seconds": 0.000308,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "()",
+      "case": "test_orthogonal_fixture_matches_golden_rank_and_anisotropy",
+      "elapsed_seconds": 0.00018,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "()",
+      "case": "test_anisotropy_fixture_matches_hand_computed_spectrum",
+      "elapsed_seconds": 0.000126,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "()",
+      "case": "test_identical_family_copies_are_not_false_neighborhoods",
+      "elapsed_seconds": 0.000146,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "()",
+      "case": "test_false_neighborhoods_do_not_count_as_equivalence",
+      "elapsed_seconds": 0.000112,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "()",
+      "case": "test_unknown_denominators_are_explicit_for_degenerate_batch",
+      "elapsed_seconds": 4e-05,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "()",
+      "case": "test_family_domain_length_jurisdiction_and_ood_strata",
+      "elapsed_seconds": 0.000903,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "()",
+      "case": "test_duplicate_clustering_separates_memorized_groups",
+      "elapsed_seconds": 0.000609,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "()",
+      "case": "test_calibration_golden_vector_ece_brier_and_success_conditioned",
+      "elapsed_seconds": 0.000385,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "()",
+      "case": "test_calibration_keeps_unknown_success_labels_out_of_the_denominator",
+      "elapsed_seconds": 0.000276,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "()",
+      "case": "test_lineage_is_deterministic_and_moves_with_representation_content",
+      "elapsed_seconds": 0.000705,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "()",
+      "case": "test_materialized_report_triggers_collapse_anisotropy_and_memorization",
+      "elapsed_seconds": 0.006309,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "()",
+      "case": "test_hidden_test_split_is_rejected_and_does_not_tune_calibration",
+      "elapsed_seconds": 0.000251,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "()",
+      "case": "test_unknown_denominator_trigger_is_explicit_when_ece_cannot_be_formed",
+      "elapsed_seconds": 0.000347,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "()",
+      "case": "test_calibration_fixture_report_emits_ece_trigger_without_treating_confidence_as_authority",
+      "elapsed_seconds": 0.001387,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "()",
+      "case": "test_diagnostic_report_attaches_to_artifact_without_changing_required_dag",
+      "elapsed_seconds": 0.020527,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "('none',)",
+      "case": "test_semantic_equivalence_gate_is_unchanged_by_latent_instrumentation",
+      "elapsed_seconds": 0.004685,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "('missing-round-trip',)",
+      "case": "test_semantic_equivalence_gate_is_unchanged_by_latent_instrumentation",
+      "elapsed_seconds": 0.004218,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "('changed-actor',)",
+      "case": "test_semantic_equivalence_gate_is_unchanged_by_latent_instrumentation",
+      "elapsed_seconds": 0.004315,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "(1.0,)",
+      "case": "test_strata_cosines_and_centroids_preserve_finite_scale",
+      "elapsed_seconds": 0.000213,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "(1e+308,)",
+      "case": "test_strata_cosines_and_centroids_preserve_finite_scale",
+      "elapsed_seconds": 0.000175,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "(1e-320,)",
+      "case": "test_strata_cosines_and_centroids_preserve_finite_scale",
+      "elapsed_seconds": 0.00017,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "(nan,)",
+      "case": "test_strata_keep_nonfinite_vectors_out_of_cosine_denominators",
+      "elapsed_seconds": 5.3e-05,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "(inf,)",
+      "case": "test_strata_keep_nonfinite_vectors_out_of_cosine_denominators",
+      "elapsed_seconds": 4.5e-05,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "(-inf,)",
+      "case": "test_strata_keep_nonfinite_vectors_out_of_cosine_denominators",
+      "elapsed_seconds": 4.2e-05,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "()",
+      "case": "test_strata_reports_unavailable_inter_cosine_for_zero_centroids",
+      "elapsed_seconds": 0.000146,
+      "outcome": "passed"
+    }
+  ],
+  "semantic_metrics_compiled_sha256": "949e4dcbfb3b306d760ebedbf256d79d25441ee6dbe3e3915c63e5304d586413",
+  "test_sha256": "64fd79bcacf072a7d434123cb3f6c2250bd76cf7be274d69656b4dca18017735",
+  "torch_loaded": false
+}

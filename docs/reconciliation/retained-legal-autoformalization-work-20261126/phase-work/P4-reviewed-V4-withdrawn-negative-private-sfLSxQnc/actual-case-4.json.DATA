@@ -1,0 +1,38 @@
+{
+  "excluded_actions": [],
+  "fits_executed": 0,
+  "learned_model_executed": false,
+  "owner_origins": {
+    "_handoff_relation_fixtures": {
+      "bytes": 61464,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/formalization/autoencoder/test_alignment_relation_declarations.py",
+      "sha256": "5f62c07462cb6027b05fb3f75bc2d668d2d59e3d6c734465bcaa0de06068396b"
+    },
+    "ipfs_datasets_py.logic.formalization.autoencoder.alignment_relation_declarations": {
+      "bytes": 41179,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_relation_declarations.py",
+      "sha256": "e8fc5c15900fac19df46896a0bcb5c04b0cdd5533dc574d4d962b5fdf0e11662"
+    },
+    "ipfs_datasets_py.logic.formalization.autoencoder.alignment_relation_mask_handoff": {
+      "bytes": 44296,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_relation_mask_handoff.py",
+      "sha256": "cd4b1e0f2e73a05e9d0f1c061239c5a3c1f532770f306e3c54313937ffe975f2"
+    }
+  },
+  "results": [
+    {
+      "arguments": [
+        "unknown",
+        "unknown_excluded",
+        "unknown_pair_count"
+      ],
+      "elapsed_seconds": 16.386194,
+      "function": "test_reviewed_v4_replacement_review_withdraws_one_directed_negative",
+      "outcome": "passed"
+    }
+  ],
+  "scope": "direct signed fictional V4 mask fixtures; no normal pytest collection",
+  "subprocesses_launched_inside_fixtures": 0,
+  "test_sha256": "58446119fcc4305f4407fc4efc2f7eed8d1beaace94b788c29045a84c22316d4",
+  "torch_loaded": false
+}

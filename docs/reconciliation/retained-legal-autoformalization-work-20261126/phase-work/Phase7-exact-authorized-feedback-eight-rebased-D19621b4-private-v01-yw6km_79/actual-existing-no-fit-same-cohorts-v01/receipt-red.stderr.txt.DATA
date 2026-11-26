@@ -1,0 +1,23 @@
+Traceback (most recent call last):
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/Phase7-rebased-exact-no-fit-projection-v01-bXGJ9YH9/run-phase7-rebased-no-fit-v04.py", line 283, in main
+    outcome = run_cases(args.mode, adapter, prior)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/Phase7-rebased-exact-no-fit-projection-v01-bXGJ9YH9/run-phase7-rebased-no-fit-v04.py", line 238, in run_cases
+    return scope["test_writes"](prior)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/no-fit-exact-feedback-receipt-substitution-v02.py", line 26, in test_writes
+    fixture = adapter.import_fixture(prior)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/no-fit-current-obligation-adapter-v01.py", line 101, in import_fixture
+    spec.loader.exec_module(module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/Phase7-rebased-exact-no-fit-projection-v01-bXGJ9YH9/project/tests/unit/logic/integration/test_trusted_feedback_weight_updates.py", line 9, in <module>
+    from ipfs_datasets_py.logic.integration.reasoning.legal_ir_learned_guidance import (
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/Phase7-rebased-exact-no-fit-projection-v01-bXGJ9YH9/project/ipfs_datasets_py/__init__.py", line 549, in <module>
+    HAVE_IPFS = importlib.util.find_spec(f"{__name__}.ipfs_backend_router") is not None
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib.util>", line 101, in find_spec
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-same-id-proof-feedback-no-fit-v01-gA9Exh/guarded_probe.py", line 188, in find_spec
+    raise ModuleNotFoundError(f"published project dependency missing: {fullname}")
+ModuleNotFoundError: published project dependency missing: ipfs_datasets_py.ipfs_backend_router

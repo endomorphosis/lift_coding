@@ -1,0 +1,11 @@
+--- failed-v01-fixture
++++ corrected-v02-fixture
+@@ -1856,7 +1856,7 @@
+         observed = actual_lookup(*args, **kwargs)
+         assert observed.usable is True and observed.entry is not None
+         assert args[0].digest == initial.key.digest
+-        assert kwargs == {**policy, "now": 100.0}
++        assert kwargs == {"require_result_authority": None, "max_evidence_authority": None, "max_trust_level": None, **policy, "now": 100.0}
+         calls.append(observed)
+         # A synchronous scheduling hook models a different caller mutating
+         # after the real lookup lock was released, before get reacquires it.

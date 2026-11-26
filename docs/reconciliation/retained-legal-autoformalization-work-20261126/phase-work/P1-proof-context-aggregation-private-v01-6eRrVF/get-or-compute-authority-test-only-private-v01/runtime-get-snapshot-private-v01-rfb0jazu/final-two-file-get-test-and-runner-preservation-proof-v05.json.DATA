@@ -1,0 +1,28 @@
+{
+  "SQL_static_scope": "Original get SQL transaction and single _sql_entry refetch retained; the same eligibility filter is applied to that already-refetched row. No SQL query or SQL branch executed.",
+  "all_bytes_outside_get_equal": true,
+  "all_other_module_AST_equal": true,
+  "all_prior_test_AST_equal": true,
+  "appended_test_has_no_file_write_or_dunder_file": true,
+  "cached_module_count": 56,
+  "final_diagnostic_assertions_decorators_signature_equal": true,
+  "final_test_SHA": "4e012101e4400324175c02d296b51abde97d065c76abfddef1b51d16329f639d",
+  "new_static_parameter_cases": 5,
+  "new_test_definition_count": 1,
+  "only_changed_cached_import": "ipfs_datasets_py.logic.common.duckdb_proof_store",
+  "private_trace_file_writer_and_counter_removed": true,
+  "product_only_changed_method": "DuckDBProofStore.get",
+  "queries_not_executed_here": [
+    "SQL",
+    "Native",
+    "Source",
+    "SDK"
+  ],
+  "retained_inmemory_trace_only": true,
+  "runner_SHA": "f8c4638a3add43778cb6fa15cac0010b66ed898b7fd8872fc457c382297ab499",
+  "runner_existing_helpers_classes_AST_equal": true,
+  "schema": "private-get-checked-snapshot-exact-preservation/v1",
+  "test_prefix_SHA256": "cd92c41e80976e707110855423dd6ae6956206e5a6bfd57556cec93611ac4a9e",
+  "test_prefix_bytes": 93508,
+  "whole_get_or_compute_SQL_waiter_bytes_equal": true
+}

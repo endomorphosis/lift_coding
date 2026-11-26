@@ -1,0 +1,97 @@
+--- a/ipfs_datasets_py/logic/formalization/autoencoder/ir_legal_text_roundtrip.py
++++ b/ipfs_datasets_py/logic/formalization/autoencoder/ir_legal_text_roundtrip.py
+@@ -617,9 +617,8 @@
+     """Score controlled deadline prose and its due dates in one declared context.
+ 
+     The inverse receives only the candidate prose and its fixed profile.
+-    The date and workday context is used after reconstruction. Due date
+-    equality compares ordered dates at their original statement positions
+-    in that context. The date lists in the report show the dates alone.
++    The date and workday context is used after reconstruction. Equality of
++    due dates is specific to that context.
+     """
+     from datetime import date
+ 
+@@ -639,24 +638,24 @@
+     _require(all(type(name) is str and type(value) is date for name, value in anchors.items()),
+              "anchor dates must map event names to civil dates")
+ 
+-    def due_dates_by_statement(ir):
++    def due_dates(ir):
+         result = []
+-        for statement_index, statement in enumerate(ir.statements):
++        for statement in ir.statements:
+             if type(statement) is NormV2:
+                 for deadline in statement.temporal:
+                     if type(deadline) is TemporalDeadline:
+                         _require(deadline.anchor in anchors, "missing civil date for deadline anchor")
+                         due = evaluate_civil_deadline(deadline, anchors[deadline.anchor],
+                                                       workday_calendar=workday_calendar)
+-                        result.append((statement_index, due.isoformat()))
++                        result.append(due.isoformat())
+         return result
+ 
+     profile = TYPED_DEADLINE_PROSE_PROFILE
+     reference, candidate, reference_prose, candidate_prose, measurements = _compile_extended_roundtrip(
+         reference_ir, candidate_text, profile=profile, original_text=original_text)
+-    reference_dates = due_dates_by_statement(reference)
++    reference_dates = due_dates(reference)
+     _require(bool(reference_dates), "reference must contain at least one evaluable deadline")
+-    candidate_dates = None if candidate is None else due_dates_by_statement(candidate)
++    candidate_dates = None if candidate is None else due_dates(candidate)
+     return {
+         "schema": "legal-civil-deadline-text-roundtrip-score/v1",
+         "profile": profile,
+@@ -665,8 +664,8 @@
+         "abstention_count": int(candidate is None),
+         "normalized_reference_prose": reference_prose,
+         "normalized_candidate_prose": candidate_prose,
+-        "reference_due_dates": [due for _, due in reference_dates],
+-        "candidate_due_dates": None if candidate_dates is None else [due for _, due in candidate_dates],
++        "reference_due_dates": reference_dates,
++        "candidate_due_dates": candidate_dates,
+         "measurements": {
+             **measurements,
+             "due_dates_exact": None if candidate_dates is None else candidate_dates == reference_dates,
+--- a/tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py
++++ b/tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py
+@@ -1461,39 +1461,3 @@
+         exact.has_started_on(datetime(2032, 2, 29))
+     with pytest.raises(ValueError):
+         NormV2("O", "agency", "publish", "rule", temporal=(exact, exact))
+-
+-
+-@pytest.mark.parametrize("change, expected_due_dates_exact", [
+-    ("none", True),
+-    ("different-unit", True),
+-    ("different-statement", False),
+-])
+-def test_civil_deadline_same_due_date_preserves_statement_attachment(change, expected_due_dates_exact):
+-    from datetime import date
+-
+-    from ipfs_datasets_py.logic.legal_ir.extended_compiler import compile_extended
+-    from ipfs_datasets_py.logic.legal_ir.extended_decompiler import TYPED_DEADLINE_PROSE_PROFILE
+-
+-    agency = 'Norm: "agency" must "file" "report".'
+-    clerk = 'Norm: "clerk" must "archive" "record".'
+-    timing = ' Temporal: within 1 calendar day after event "notice".'
+-    reference_text = agency + timing + "\n" + clerk
+-    reference = compile_extended(reference_text, profile=TYPED_DEADLINE_PROSE_PROFILE)
+-    assert reference is not None
+-    if change == "different-unit":
+-        candidate = reference_text.replace("calendar day", "business day")
+-    elif change == "different-statement":
+-        candidate = agency + "\n" + clerk + timing
+-    else:
+-        candidate = reference_text
+-
+-    report = scorer.score_deadline_legal_text_roundtrip(
+-        reference, candidate, anchor_dates={"notice": date(2024, 5, 28)},
+-        workday_calendar=_civil_deadline_may_2024_calendar())
+-    assert report["status"] == "complete_candidate_scored"
+-    assert report["reference_due_dates"] == report["candidate_due_dates"] == ["2024-05-29"]
+-    measurements = report["measurements"]
+-    assert measurements["complete_typed_structure_exact"] is (change == "none")
+-    assert measurements["canonical_prose_exact"] is (change == "none")
+-    assert measurements["due_dates_exact"] is expected_due_dates_exact, measurements
+-    assert measurements["proof_validity_verified"] is measurements["source_correspondence_verified"] is False

@@ -1,0 +1,103 @@
+"""Read-only real Python fixture imports, two optional private product overlays."""
+import importlib.abc
+import importlib.util
+import json
+import os
+import resource
+import signal
+import sys
+from pathlib import Path
+
+repo = Path(sys.argv[1]).resolve()
+unit = Path(__file__).resolve().parent
+case = sys.argv[2]
+working = Path(sys.argv[3]).resolve()
+os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
+resource.setrlimit(resource.RLIMIT_AS, (512 * 1024**2, 512 * 1024**2))
+resource.setrlimit(resource.RLIMIT_CPU, (45, 45))
+signal.alarm(60)
+sys.dont_write_bytecode = True
+sys.path.insert(0, str(repo))
+os.environ["HOME"] = str(working)
+os.environ["XDG_CACHE_HOME"] = str(working)
+os.environ["TMPDIR"] = str(working)
+denied = []
+watched = []
+blocked_modules = frozenset(("torch", "duckdb", "_duckdb", "transformers", "onnxruntime", "llama_cpp", "tensorflow"))
+writes = (os.O_WRONLY | os.O_RDWR | os.O_CREAT | os.O_TRUNC | os.O_APPEND)
+path_events = {"os.mkdir", "os.rmdir", "os.remove", "os.rename", "os.link", "os.symlink", "os.truncate", "os.chmod",
+               "os.chown", "os.utime", "shutil.rmtree"}
+def restrict_path(event, target):
+    if isinstance(target, int):
+        target = os.readlink(f"/proc/self/fd/{target}")
+    path = os.path.realpath(os.fsdecode(target))
+    if path != str(working) and not path.startswith(str(working) + "/"):
+        denied.append((event, path))
+        raise PermissionError(f"private fixture write denied outside its run directory: {path}")
+
+def audit(event, args):
+    if (event.startswith(("socket.", "subprocess.", "os.exec", "os.spawn", "os.posix_spawn"))
+            or event in {"os.fork", "os.forkpty", "os.system", "os.kill", "os.killpg", "ctypes.dlopen"}):
+        denied.append((event, "execution"))
+        raise PermissionError(f"private fixture action denied: {event}")
+    if event == "open" and len(args) > 2 and args[2] & writes:
+        restrict_path(event, args[0])
+    if event in path_events:
+        restrict_path(event, args[0])
+        if event in {"os.rename", "os.link", "os.symlink"}:
+            restrict_path(event, args[1])
+
+class GuardedLoader(importlib.abc.Loader):
+    def __init__(self, rel, override):
+        self.rel = rel
+        self.override = override
+
+    def exec_module(self, module):
+        raw = self.override.read_bytes()
+        watched.append({"module": module.__name__, "actual_bytes": str(self.override)})
+        exec(compile(raw, str(repo / self.rel), "exec", dont_inherit=True), module.__dict__)
+
+class InMemoryFixturePolicy(importlib.abc.MetaPathFinder):
+    def find_spec(self, fullname, path=None, target=None):
+        if fullname.split(".", 1)[0] in blocked_modules:
+            denied.append(("import", fullname))
+            raise ImportError(f"private fixture backend import denied: {fullname}")
+        if case != "green":
+            return None
+        overlays = {
+            "ipfs_datasets_py.logic.legal_ir.proof_cache": (
+                "ipfs_datasets_py/logic/legal_ir/proof_cache.py", "proof_cache.after.py.DATA"),
+            "ipfs_datasets_py.logic.common.duckdb_proof_migration": (
+                "ipfs_datasets_py/logic/common/duckdb_proof_migration.py", "duckdb_proof_migration.after.py.DATA"),
+            "ipfs_datasets_py.logic.common.duckdb_proof_store": (
+                "ipfs_datasets_py/logic/common/duckdb_proof_store.py", "duckdb_proof_store.after.py.DATA"),
+        }
+        override = overlays.get(fullname)
+        if override is None:
+            return None
+        rel, leaf = override
+        return importlib.util.spec_from_file_location(
+            fullname, repo / rel, loader=GuardedLoader(rel, unit / leaf))
+
+sys.addaudithook(audit)
+sys.meta_path.insert(0, InMemoryFixturePolicy())
+import pytest
+import tempfile
+tempfile.tempdir = str(working)
+from importlib.util import module_from_spec, spec_from_file_location
+
+test_rel = "tests/unit/logic/autoformal/test_legal_relational_reconstruction_v1.py"
+body = Path(sys.argv[4])
+modname = "_private_retained_7214_source_withheld_test"
+spec = spec_from_file_location(modname, repo / test_rel, loader=GuardedLoader(test_rel, body))
+testmod = module_from_spec(spec)
+sys.modules[modname] = testmod
+spec.loader.exec_module(testmod)
+cases = ("test_prose_reconstruction_reports_complete_typed_structure_and_prose_separately",
+         "test_retained_7214_modal_scopes_remain_distinct_after_source_withheld_roundtrip")
+results = []
+for name in cases:
+    getattr(testmod, name)()
+    results.append({"case": name, "passed": True})
+assert not denied
+print(json.dumps({"cases": results, "guard_events": denied, "overlays": watched}, indent=2))

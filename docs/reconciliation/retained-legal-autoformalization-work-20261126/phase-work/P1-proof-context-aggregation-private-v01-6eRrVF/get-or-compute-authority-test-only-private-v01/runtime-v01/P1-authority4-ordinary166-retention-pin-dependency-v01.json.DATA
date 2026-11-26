@@ -1,0 +1,119 @@
+{
+  "Native_or_SQL_run": false,
+  "added_maintained_owner_compile_witness": {
+    "already_in_v285_module_binding": false,
+    "candidate_post": {
+      "bytes": 42603,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/cache_protocol.leader-authority.after.py.DATA",
+      "sha256": "722730748990d01f926a1499b973f9cb64ccc5fdb78225ae29236abe9ac105e1"
+    },
+    "module": "ipfs_datasets_py.logic.backends.cache_protocol",
+    "old_maintained_and_test_roles": 6,
+    "path": "ipfs_datasets_py/logic/backends/cache_protocol.py",
+    "required_maintained_and_test_roles_after_change": 7
+  },
+  "candidate_or_canonical_file_modified": false,
+  "current_D_observed_committed_metadata": {
+    "head": "5cb7aca73e8fc36bc8a1fa9f0cb3c648452967ab",
+    "seven_unchanged_blobs_since_35e56": {
+      "ipfs_datasets_py/logic/backends/cache_protocol.py": "8ba6660f2f7a17263003eb37023044742b3a12e8",
+      "ipfs_datasets_py/logic/common/duckdb_proof_migration.py": "beb273c12434868186605f7d447bb6a350fa2924",
+      "ipfs_datasets_py/logic/common/duckdb_proof_store.py": "0a753bcdb9368a1659ebf8a46067a29b51ffb89c",
+      "ipfs_datasets_py/logic/legal_ir/proof_cache.py": "5f4b9e8eedf00c89d31ff9fa68559dc3584126e1",
+      "tests/integration/logic/backends/test_kernel_backends.py": "7e8ac586bc6283f7acc1976c9b7ba344dbaea914",
+      "tests/unit/logic/legal_ir/test_proof_cache.py": "6a30dd15847b30521d78a06a20fdfa8a6cac267e",
+      "tests/unit/logic/test_duckdb_proof_migration.py": "84f8b2a6c746b486245a1f2fab9a47e9dd85d31c"
+    },
+    "tree": "824d985501147bb58fc9874137c548a8023c3bb6"
+  },
+  "fresh_runtime_source_selection": null,
+  "historical_actual_ordinary166": {
+    "bytes": 1587,
+    "path": "/tmp/Root-P1-local-coherent-cache-ordinary166-READ1-final-v285-vylkm1fy/Root-P1-coherent-cache-ordinary166-qualified-small-v285.json",
+    "sha256": "03b09e1183d2cb1415a82daae2e9de6e30db71cf58924b1e838356a15101b5de"
+  },
+  "historical_control_not_reusable_as_authority": {
+    "bootstrap": {
+      "bytes": 56630,
+      "path": "/tmp/Root-P1-local-coherent-cache-ordinary166-READ1-final-v285-vylkm1fy/Root-selected-bootstrap.py",
+      "sha256": "e83bd464e5a155e98a6c818a2227fe81716620f8053be7012a67a4c467cd8f7d"
+    },
+    "manifest": {
+      "bytes": 8576,
+      "path": "/tmp/Root-P1-local-coherent-cache-ordinary166-READ1-final-v285-vylkm1fy/Root-selected-ordinary166-manifest.json",
+      "sha256": "6beb7d3de07d64a08ba7f6c6b1394c6ab464ec1cd28801acd4be945788cedb8d"
+    },
+    "operator": {
+      "bytes": 82988,
+      "path": "/tmp/Root-P1-local-coherent-cache-ordinary166-READ1-final-v285-vylkm1fy/Root-selected-operator.py",
+      "sha256": "9fa3de7e75b63cf7f2cbbe6147d8cd239dc697d8e1ea2124ec29e3567dd3ab71"
+    }
+  },
+  "historical_ordinary166_raw_JUnit": {
+    "bytes": 26959,
+    "path": "/tmp/Root-P1-local-coherent-cache-ordinary166-READ1-final-v285-vylkm1fy/actual-P1-ordinary166-JUnit.xml",
+    "sha256": "cc5ab40fb0be4448524a4814928bab6edc96e4eaf00554cf5a327c0841591971"
+  },
+  "ordinary170_run_or_qualification": false,
+  "private_actual_same4": {
+    "bytes": 5014,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/small-private-cache-leader-authority-exact4-closeout-v01.json",
+    "sha256": "973600eac1960f57646997c3073e054781139b64c9865ae4adbc2eb6836ff1f3"
+  },
+  "private_green_XML": {
+    "bytes": 754,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/green-v01/junit.xml",
+    "sha256": "c2a634a144fc4163ee70ecc3ed12abed50cd990e8e0736f280c99ea124c25533"
+  },
+  "proposed_selection_after_explicit_retained_fixture_rebind": {
+    "added": 4,
+    "added_function_selector": "tests/unit/logic/legal_ir/test_proof_cache.py::test_cache_compute_leader_respects_requested_theorem_authority",
+    "cases": 170,
+    "evidence_authority": "Fresh normal collection, execution and JUnit; neither historical roster is this qualification.",
+    "functions": 64,
+    "genuine_SQL_method_excluded": "tests/unit/logic/legal_ir/test_proof_cache.py::test_genuine_sql_legal_shadow_requires_coherent_context_and_preserves_prior_rows",
+    "new_exact_param_ids": [
+      "test_cache_compute_leader_respects_requested_theorem_authority[advisory-refused-exact]",
+      "test_cache_compute_leader_respects_requested_theorem_authority[advisory-refused-unified]",
+      "test_cache_compute_leader_respects_requested_theorem_authority[theorem-usable-exact]",
+      "test_cache_compute_leader_respects_requested_theorem_authority[theorem-usable-unified]"
+    ],
+    "owning_files": [
+      "tests/integration/logic/backends/test_kernel_backends.py",
+      "tests/unit/logic/legal_ir/test_proof_cache.py",
+      "tests/unit/logic/test_duckdb_proof_migration.py"
+    ],
+    "per_file_total_hints": {
+      "tests/integration/logic/backends/test_kernel_backends.py": 4,
+      "tests/unit/logic/legal_ir/test_proof_cache.py": 161,
+      "tests/unit/logic/test_duckdb_proof_migration.py": 5
+    },
+    "retained": 166
+  },
+  "real_retention_dependency": {
+    "four_retained_cases_call_loader": [
+      "test_native_cache_fixture_loader_uses_pinned_current_owner_without_invoking_helpers",
+      "test_native_cache_fixture_loader_refuses_tampered_preimage_before_module_creation",
+      "test_native_cache_fixture_loader_refuses_post_import_drift_without_retry",
+      "test_native_cache_fixture_loader_supplies_canonical_constructor_contract_without_execution"
+    ],
+    "guard_lines_check_same_literal_before_and_after_import": [
+      1205,
+      1214
+    ],
+    "held_kernel_test": {
+      "bytes": 111809,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/source6-final-composition-v02/test_kernel_backends.main-SQL-v03-fixture.after.py.DATA",
+      "sha256": "e785194d094d2c93bdb66c5905fc7a5eb91063a5231b4bcbc82c9a4ff2c1d4f0"
+    },
+    "old_literal_test_SHA256": "239d05de5b08eba8de06b67a74efe109900a6302d73c27d28d450bf2f8061d2f",
+    "private_test_replacement_SHA256": "e86d6d85c1333dd536ee997bf5a3e09b5f625f11bf399ed140c2504a894ece4e",
+    "repin_performed_or_selected": false,
+    "three_cases_have_deterministic_wrong_pre_import_hash_on_unrebound_candidate": [
+      "test_native_cache_fixture_loader_uses_pinned_current_owner_without_invoking_helpers",
+      "test_native_cache_fixture_loader_refuses_post_import_drift_without_retry",
+      "test_native_cache_fixture_loader_supplies_canonical_constructor_contract_without_execution"
+    ]
+  },
+  "schema": "P1-proof-cache-authority-v285-retention-rebind-evidence/v1"
+}

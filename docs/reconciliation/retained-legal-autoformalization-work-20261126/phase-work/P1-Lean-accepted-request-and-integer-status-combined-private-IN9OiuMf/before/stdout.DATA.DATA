@@ -1,0 +1,59 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.3.4, pluggy-1.6.0
+rootdir: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-accepted-request-and-integer-status-combined-private-IN9OiuMf/dataset
+configfile: pytest.ini
+asyncio: mode=Mode.STRICT
+collected 81 items
+
+tests/integration/logic/backends/test_kernel_backends.py ............... [ 18%]
+...................................................FF....FF..FFFFF       [100%]
+
+=================================== FAILURES ===================================
+___ test_lean_malformed_or_failed_exit_status_cannot_establish_proof[False] ____
+tests/integration/logic/backends/test_kernel_backends.py:2035: in test_lean_malformed_or_failed_exit_status_cannot_establish_proof
+    assert accepted is False
+E   assert True is False
+____ test_lean_malformed_or_failed_exit_status_cannot_establish_proof[0.0] _____
+tests/integration/logic/backends/test_kernel_backends.py:2035: in test_lean_malformed_or_failed_exit_status_cannot_establish_proof
+    assert accepted is False
+E   assert True is False
+_ test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status[False] _
+tests/integration/logic/backends/test_kernel_backends.py:2052: in test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status
+    assert accepted is False
+E   assert True is False
+_ test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status[0.0] _
+tests/integration/logic/backends/test_kernel_backends.py:2052: in test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status
+    assert accepted is False
+E   assert True is False
+___ test_lean_outcome_binds_accepted_receipt_to_request_payload[declaration] ___
+tests/integration/logic/backends/test_kernel_backends.py:2097: in test_lean_outcome_binds_accepted_receipt_to_request_payload
+    with pytest.raises(LeanKernelError, match="outcome accepted receipt .*request"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.logic.backends.kernel.lean.LeanKernelError'>
+___ test_lean_outcome_binds_accepted_receipt_to_request_payload[proposition] ___
+tests/integration/logic/backends/test_kernel_backends.py:2097: in test_lean_outcome_binds_accepted_receipt_to_request_payload
+    with pytest.raises(LeanKernelError, match="outcome accepted receipt .*request"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.logic.backends.kernel.lean.LeanKernelError'>
+_____ test_lean_outcome_binds_accepted_receipt_to_request_payload[source] ______
+tests/integration/logic/backends/test_kernel_backends.py:2097: in test_lean_outcome_binds_accepted_receipt_to_request_payload
+    with pytest.raises(LeanKernelError, match="outcome accepted receipt .*request"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.logic.backends.kernel.lean.LeanKernelError'>
+___ test_lean_outcome_binds_accepted_receipt_to_request_payload[translation] ___
+tests/integration/logic/backends/test_kernel_backends.py:2097: in test_lean_outcome_binds_accepted_receipt_to_request_payload
+    with pytest.raises(LeanKernelError, match="outcome accepted receipt .*request"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.logic.backends.kernel.lean.LeanKernelError'>
+_ test_lean_outcome_binds_accepted_receipt_to_request_payload[missing-obligation] _
+tests/integration/logic/backends/test_kernel_backends.py:2097: in test_lean_outcome_binds_accepted_receipt_to_request_payload
+    with pytest.raises(LeanKernelError, match="outcome accepted receipt .*request"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.logic.backends.kernel.lean.LeanKernelError'>
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-accepted-request-and-integer-status-combined-private-IN9OiuMf/before/result.xml -
+=========================== short test summary info ============================
+FAILED tests/integration/logic/backends/test_kernel_backends.py::test_lean_malformed_or_failed_exit_status_cannot_establish_proof[False]
+FAILED tests/integration/logic/backends/test_kernel_backends.py::test_lean_malformed_or_failed_exit_status_cannot_establish_proof[0.0]
+FAILED tests/integration/logic/backends/test_kernel_backends.py::test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status[False]
+FAILED tests/integration/logic/backends/test_kernel_backends.py::test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status[0.0]
+FAILED tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload[declaration]
+FAILED tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload[proposition]
+FAILED tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload[source]
+FAILED tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload[translation]
+FAILED tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload[missing-obligation]
+========================= 9 failed, 72 passed in 1.26s =========================

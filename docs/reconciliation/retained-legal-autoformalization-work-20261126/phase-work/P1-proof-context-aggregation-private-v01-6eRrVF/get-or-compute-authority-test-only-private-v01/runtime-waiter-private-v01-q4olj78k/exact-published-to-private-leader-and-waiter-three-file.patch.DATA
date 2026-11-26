@@ -1,0 +1,258 @@
+diff --git a/ipfs_datasets_py/logic/backends/cache_protocol.py b/ipfs_datasets_py/logic/backends/cache_protocol.py
+--- a/ipfs_datasets_py/logic/backends/cache_protocol.py
++++ b/ipfs_datasets_py/logic/backends/cache_protocol.py
+@@ -1080,13 +1080,22 @@
+                 raise VerificationCacheError(
+                     "producer must return VerificationCacheEntry or TypedBackendResult"
+                 )
++            required = (
++                None
++                if require_result_authority is None
++                else _result_authority(require_result_authority)
++            )
+             stored = self.put(entry, now=now)
+             flight.entry = stored.entry
++            authority_matches = required is None or (
++                stored.entry is not None and stored.entry.result_authority is required
++            )
+             return VerificationCacheLookup(
+                 entry=stored.entry,
+                 hit=False,
+-                usable=True,
+-                reason=CacheLookupReason.STORED,
++                usable=authority_matches,
++                reason=(CacheLookupReason.STORED if authority_matches
++                        else CacheLookupReason.AUTHORITY_MISMATCH),
+                 key_digest=key.digest,
+                 single_flight_shared=False,
+             )
+diff --git a/ipfs_datasets_py/logic/common/duckdb_proof_store.py b/ipfs_datasets_py/logic/common/duckdb_proof_store.py
+--- a/ipfs_datasets_py/logic/common/duckdb_proof_store.py
++++ b/ipfs_datasets_py/logic/common/duckdb_proof_store.py
+@@ -2106,6 +2106,7 @@
+         max_trust_level: ProofTrustLevel | None,
+         now: float,
+         single_flight_shared: bool = False,
++        require_result_authority: ResultAuthority | str | None = None,
+     ) -> VerificationCacheLookup:
+         # Exact key check — fail closed on digest mismatch.
+         if entry.key.digest != key.digest:
+@@ -2204,10 +2205,22 @@
+         self._stats["hits"] += 1
+         self._access_touch(entry.key.digest, hit=True, now=now)
+         ventry = entry.to_verification_cache_entry()
++        usable = True
++        if require_result_authority is not None:
++            required = (
++                require_result_authority
++                if isinstance(require_result_authority, ResultAuthority)
++                else ResultAuthority(require_result_authority)
++            )
++            if ventry.result_authority is not required:
++                self._stats["rejections"] += 1
++                self._access_touch(key.digest, rejection=True, now=now)
++                usable = False
++                reason = CacheLookupReason.AUTHORITY_MISMATCH
+         return VerificationCacheLookup(
+             entry=ventry,
+             hit=True,
+-            usable=True,
++            usable=usable,
+             reason=reason,
+             key_digest=key.digest,
+             age_seconds=entry.age_seconds(now=now),
+@@ -2297,31 +2310,10 @@
+                 unified,
+                 max_trust_level=ceiling,
+                 now=current,
+-            )
+-            # Optional result-authority filter (protocol parity).
+-            if (
+-                result.usable
+-                and result.entry is not None
+-                and require_result_authority is not None
+-            ):
+-                required = (
+-                    require_result_authority
+-                    if isinstance(require_result_authority, ResultAuthority)
+-                    else ResultAuthority(require_result_authority)
+-                )
+-                if result.entry.result_authority is not required:
+-                    self._stats["rejections"] += 1
+-                    self._access_touch(
+-                        unified.digest, rejection=True, now=current
+-                    )
+-                    return VerificationCacheLookup(
+-                        entry=result.entry,
+-                        hit=True,
+-                        usable=False,
+-                        reason=CacheLookupReason.AUTHORITY_MISMATCH,
+-                        key_digest=unified.digest,
+-                        age_seconds=result.age_seconds,
+-                    )
++                require_result_authority=require_result_authority,
++            )
++            if result.reason is CacheLookupReason.AUTHORITY_MISMATCH and result.entry is not None:
++                return result
+             if result.reason in {
+                 CacheLookupReason.EXPIRED,
+                 CacheLookupReason.TAMPERED,
+@@ -2516,6 +2508,7 @@
+                 max_trust_level=ceiling,
+                 now=current,
+                 single_flight_shared=True,
++                require_result_authority=require_result_authority,
+             )
+ 
+         try:
+@@ -2541,13 +2534,22 @@
+                     "producer must return UnifiedProofEntry, "
+                     "VerificationCacheEntry, or TypedBackendResult"
+                 )
++            required = (
++                None
++                if require_result_authority is None
++                else _enum(require_result_authority, ResultAuthority, "require_result_authority")
++            )
+             stored = self.put(entry, now=now)
+             flight.entry = self._entries.get(unified.digest)
++            authority_matches = required is None or (
++                stored.entry is not None and stored.entry.result_authority is required
++            )
+             return VerificationCacheLookup(
+                 entry=stored.entry,
+                 hit=False,
+-                usable=True,
+-                reason=CacheLookupReason.STORED,
++                usable=authority_matches,
++                reason=(CacheLookupReason.STORED if authority_matches
++                        else CacheLookupReason.AUTHORITY_MISMATCH),
+                 key_digest=unified.digest,
+                 age_seconds=stored.age_seconds,
+             )
+diff --git a/tests/unit/logic/legal_ir/test_proof_cache.py b/tests/unit/logic/legal_ir/test_proof_cache.py
+--- a/tests/unit/logic/legal_ir/test_proof_cache.py
++++ b/tests/unit/logic/legal_ir/test_proof_cache.py
+@@ -1617,3 +1617,122 @@
+             assert final_store.get(entry.key, now=101.0).to_dict() == entry.to_dict()
+         for digest, rows in coherent_rows.items():
+             assert selected_rows(connection, digest) == rows
++
++
++@pytest.mark.parametrize("store_name", ["exact", "unified"])
++@pytest.mark.parametrize("extra_obligation", [True, False], ids=["advisory-refused", "theorem-usable"])
++def test_cache_compute_leader_respects_requested_theorem_authority(store_name, extra_obligation):
++    from ipfs_datasets_py.logic.backends.cache_protocol import CacheLookupReason, ExactVerificationCache
++    from ipfs_datasets_py.logic.backends.results import ResultAuthority
++    from ipfs_datasets_py.logic.common.duckdb_proof_migration import (
++        ProofCacheFamily, RawLegacyRecord, normalize_legacy_record,
++    )
++    from ipfs_datasets_py.logic.common.duckdb_proof_store import DuckDBProofStore
++
++    record, *_ = _bound_record(extra_obligation=extra_obligation)
++    unified = normalize_legacy_record(
++        RawLegacyRecord(record_index=1, line_number=1, payload=record.to_dict()),
++        family=ProofCacheFamily.LEGAL_IR,
++    ).to_unified_entry(created_at=100.0)
++    if store_name == "exact":
++        store = ExactVerificationCache()
++        entry = unified.to_verification_cache_entry()
++    else:
++        store = DuckDBProofStore()
++        entry = unified
++
++    required = ResultAuthority.THEOREM
++    assert entry.result_authority is (
++        ResultAuthority.CANDIDATE if extra_obligation else required
++    )
++    calls = []
++
++    def produce():
++        calls.append(entry.key.digest)
++        return entry
++
++    if extra_obligation:
++        assert store.put(entry, now=100.0).reason is CacheLookupReason.STORED
++        observed = store.lookup(entry.key, require_result_authority=required, now=101.0)
++        assert observed.hit and not observed.usable
++        assert observed.reason is CacheLookupReason.AUTHORITY_MISMATCH
++        assert observed.entry is not None
++
++    result = store.get_or_compute(
++        entry.key, produce, require_result_authority=required, now=101.0,
++    )
++    assert calls == [entry.key.digest]
++    assert store.get(entry.key, now=102.0).to_dict() == entry.to_dict()
++    if extra_obligation:
++        assert store.get(entry.key, require_result_authority=required, now=102.0) is None
++        assert not result.usable
++        assert result.reason is CacheLookupReason.AUTHORITY_MISMATCH
++    else:
++        assert store.get(entry.key, require_result_authority=required, now=102.0).to_dict() == entry.to_dict()
++        assert result.usable and result.reason is CacheLookupReason.STORED
++
++
++@pytest.mark.parametrize("extra_obligation", [True, False], ids=["advisory-refused", "theorem-usable"])
++def test_unified_cache_waiter_respects_requested_theorem_authority(monkeypatch, extra_obligation):
++    from concurrent.futures import ThreadPoolExecutor
++    from threading import Event
++
++    from ipfs_datasets_py.logic.backends.cache_protocol import CacheLookupReason
++    from ipfs_datasets_py.logic.backends.results import ResultAuthority
++    from ipfs_datasets_py.logic.common.duckdb_proof_migration import (
++        ProofCacheFamily, RawLegacyRecord, normalize_legacy_record,
++    )
++    from ipfs_datasets_py.logic.common.duckdb_proof_store import DuckDBProofStore
++
++    record, *_ = _bound_record(extra_obligation=extra_obligation)
++    entry = normalize_legacy_record(
++        RawLegacyRecord(record_index=1, line_number=1, payload=record.to_dict()),
++        family=ProofCacheFamily.LEGAL_IR,
++    ).to_unified_entry(created_at=100.0)
++    required = ResultAuthority.THEOREM
++    assert entry.result_authority is (ResultAuthority.CANDIDATE if extra_obligation else required)
++    store = DuckDBProofStore()
++    entered = Event()
++    release = Event()
++    flights_waited = []
++
++    def produce():
++        entered.set()
++        assert release.wait(timeout=5), "waiter never reached the producer's flight"
++        return entry
++
++    def must_share():
++        pytest.fail("a waiter independently invoked its producer")
++
++    with ThreadPoolExecutor(max_workers=1) as executor:
++        producing = executor.submit(store.get_or_compute, entry.key, produce, now=101.0)
++        try:
++            assert entered.wait(timeout=5), "producer never entered its flight"
++            with store._lock:
++                event = store._flights[entry.key.digest].event
++            wait = event.wait
++
++            def wait_then_release():
++                flights_waited.append(entry.key.digest)
++                release.set()
++                assert wait(timeout=5), "producer did not release the flight"
++
++            monkeypatch.setattr(event, "wait", wait_then_release)
++            result = store.get_or_compute(
++                entry.key, must_share, require_result_authority=required, now=101.0,
++            )
++        finally:
++            release.set()
++        leader = producing.result(timeout=5)
++
++    assert leader.usable and leader.reason is CacheLookupReason.STORED
++    assert flights_waited == [entry.key.digest]
++    assert result.single_flight_shared
++    assert result.entry.to_dict() == entry.to_verification_cache_entry().to_dict()
++    assert store.get(entry.key, now=101.0).to_dict() == entry.to_dict()
++    if extra_obligation:
++        assert not result.usable
++        assert result.reason is CacheLookupReason.AUTHORITY_MISMATCH
++    else:
++        assert result.usable
++        assert result.reason is CacheLookupReason.SINGLE_FLIGHT_SHARED

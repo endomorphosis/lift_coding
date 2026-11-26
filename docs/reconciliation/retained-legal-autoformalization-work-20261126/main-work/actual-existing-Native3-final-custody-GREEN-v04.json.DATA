@@ -1,0 +1,18 @@
+{
+  "actual_Native": false,
+  "actual_SDK": false,
+  "actual_Source": false,
+  "errors": 0,
+  "exact_function_AST_sha256": "69a3b5e50cf9ff4c7873e82a26c3e119815ef57ca8b797a4960f37e0c017a36a",
+  "failures": 0,
+  "legal_admission": false,
+  "output": "test_bounded_error_keeps_actual_handle_and_result (__main__.suite_for.<locals>.CustodyASTTests.test_bounded_error_keeps_actual_handle_and_result) ... ok\ntest_diagnostic_write_error_does_not_end_ambiguous_custody (__main__.suite_for.<locals>.CustodyASTTests.test_diagnostic_write_error_does_not_end_ambiguous_custody) ... ok\ntest_known_no_child_refusal_does_not_stall_on_missing_lifecycle_key (__main__.suite_for.<locals>.CustodyASTTests.test_known_no_child_refusal_does_not_stall_on_missing_lifecycle_key) ... ok\ntest_managed_exit_failure_retains_exact_result_and_primary (__main__.suite_for.<locals>.CustodyASTTests.test_managed_exit_failure_retains_exact_result_and_primary) ... ok\ntest_normal_return_keeps_exact_result (__main__.suite_for.<locals>.CustodyASTTests.test_normal_return_keeps_exact_result) ... ok\ntest_retention_failure_keeps_raw_result_and_original_error_in_custody (__main__.suite_for.<locals>.CustodyASTTests.test_retention_failure_keeps_raw_result_and_original_error_in_custody) ... ok\ntest_serialization_failure_does_not_replace_primary_or_drop_result (__main__.suite_for.<locals>.CustodyASTTests.test_serialization_failure_does_not_replace_primary_or_drop_result) ... ok\ntest_unknown_dispatch_checkpoints_and_keeps_custody (__main__.suite_for.<locals>.CustodyASTTests.test_unknown_dispatch_checkpoints_and_keeps_custody) ... ok\ntest_value_equal_copied_run_code_is_not_canonical_frame (__main__.suite_for.<locals>.CustodyASTTests.test_value_equal_copied_run_code_is_not_canonical_frame) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 0.003s\n\nOK\n",
+  "scope": "EXACT function AST, fictional classes and IO; line trace only bounds original custody loops. No SDK/project imports, Source/Native/lease or real cleanup execution.",
+  "skipped": 0,
+  "source": {
+    "bytes": 39839,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-v567-Native3-current-operator-custody-readback-INERT-v04.py.DATA",
+    "sha256": "b83e7b413bc8b7b715c643f14462158422635939a9f5fea80e3ee5a5e15c8dff"
+  },
+  "tests_run": 9
+}

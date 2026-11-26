@@ -1,0 +1,103 @@
+{
+  "canonical_source_body_reads": 0,
+  "changed_historical_source_rows": {
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py": {
+      "historical": {
+        "bytes": 1428524,
+        "git_blob_sha1": "180e18423529e15eccb382bc9a466c211a366122",
+        "sha256": "4b44bb723709be5b4606d497935b245723231df8ec19b24f1bd329fd8932ad24"
+      },
+      "projected": {
+        "bytes": 1428092,
+        "git_blob_sha1": "b527db1c29a5e0ba13c13f2adf5a0f8be925ed7e",
+        "sha256": "fd80bf985b3f544a43d6d389feadac49bd33b55ba891d43d155574652c46a35d"
+      }
+    }
+  },
+  "checks": [
+    "runner and inherited selected ASTs compiled only without execution",
+    "historical RED and GREEN test_writes AST identity",
+    "exact 102 bound path union from authenticated past compile records",
+    "selected Git mode/OID/length/SHA and private regular file identity readback"
+  ],
+  "git_head": "7fc2cde7dfda7be7035cb6b555d440e508473622",
+  "git_tree": "19eb4ca59b66673aea7c0707b943f344184445e7",
+  "git_writes": 0,
+  "projection": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/Phase7-rebased-exact-no-fit-projection-v01-bXGJ9YH9/project",
+  "projection_manifest": {
+    "bytes": 60724,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/Phase7-rebased-exact-no-fit-projection-v01-bXGJ9YH9/projection-manifest.json",
+    "sha256": "a5d92fe0c09b1a39a9be40946e8ffbe8b1fe24af454f48c5ba291c9968bcd5cd"
+  },
+  "runner": {
+    "bytes": 14210,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/Phase7-rebased-exact-no-fit-projection-v01-bXGJ9YH9/run-phase7-rebased-no-fit-v04.py",
+    "sha256": "dbcf51ca2e84fd88972121c2124e676c011635510865fe3d0eb395fb2285cb24"
+  },
+  "runtime": {
+    "argv_after_existing_python_-I_-B": [
+      "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/Phase7-rebased-exact-no-fit-projection-v01-bXGJ9YH9/run-phase7-rebased-no-fit-v04.py",
+      "<mode>",
+      "--projection",
+      "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/Phase7-rebased-exact-no-fit-projection-v01-bXGJ9YH9/project",
+      "--projection-manifest",
+      "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/Phase7-rebased-exact-no-fit-projection-v01-bXGJ9YH9/projection-manifest.json",
+      "--projection-bytes",
+      "60724",
+      "--projection-sha256",
+      "a5d92fe0c09b1a39a9be40946e8ffbe8b1fe24af454f48c5ba291c9968bcd5cd",
+      "--overlay-manifest",
+      "<absolute-v04-shaped-manifest>",
+      "--overlay-bytes",
+      "<bytes>",
+      "--overlay-sha256",
+      "<sha256>"
+    ],
+    "execution": null,
+    "guard": "Existing authenticated aarch64 Landlock, seccomp, one CPU, 512 MiB, CPU25s, no Torch or subprocess, recorded exact loader closure.",
+    "maintained": "Exact v02 five matching or divergence entries, ablation refusal, and four record-ID entries, with three additional maintained overlays.",
+    "output": "One stdout JSON receipt; case failure status 1, infrastructure or roster refusal status 2, all cases passing status 0.",
+    "overlay_manifest": null,
+    "overlay_tuple_syntax": [
+      "immediate_sibling_filename",
+      "bytes",
+      "sha256"
+    ],
+    "required_overlay_roles": [
+      "autoencoder",
+      "record",
+      "trainer"
+    ],
+    "same_six_green": "Pinned v02 adapter and all supplied rebased v04 roles.",
+    "same_six_red": "Pinned v01 adapter and v03 record and trainer, with the same supplied rebased modal file; RED/GREEN test_writes AST equal.",
+    "selection": null
+  },
+  "schema": "phase7-rebased-exact-no-fit-INERT-ready/v1",
+  "selected_git_body_bytes": 5290661,
+  "source_count": 102,
+  "source_lease_calls": 0,
+  "static_cohorts": {
+    "maintained": {
+      "cases": 10,
+      "historical_expected_worker_rc": 0,
+      "source_paths": 102
+    },
+    "receipt-green": {
+      "cases": 6,
+      "historical_expected_worker_rc": 0,
+      "source_paths": 100
+    },
+    "receipt-red": {
+      "cases": 6,
+      "historical_expected_worker_rc": 1,
+      "source_paths": 100
+    },
+    "retained": {
+      "cases": 17,
+      "historical_expected_worker_rc": 0,
+      "source_paths": 100
+    }
+  },
+  "status": "PRIVATE INERT; NO EXECUTION OR QUALIFICATION",
+  "test_runs": 0
+}

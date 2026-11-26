@@ -1,0 +1,316 @@
+"""Rebind the existing Phase7 no-fit controls to a pinned private Git projection."""
+
+import argparse
+import ast
+from dataclasses import replace
+import hashlib
+import importlib.util
+import json
+import os
+from pathlib import Path, PurePosixPath
+import re
+import stat
+import sys
+import traceback
+from types import ModuleType
+
+STAGE = Path(__file__).resolve().parent.parent
+RETAINED_ADAPTER = (
+    "no-fit-current-obligation-bound-feedback-adapter-v02.py", 20480,
+    "43ad9ed1524e541998646663dc67baea01cacce87769666d4afa12cd6252abf7",
+)
+RED_ADAPTER = (
+    "no-fit-current-obligation-adapter-v01.py", 20405,
+    "a84c49de31dd4218043f2f6b9ff1f9ef954291eddde2661b20a580fbbc539bf7",
+)
+RED_MANIFEST = (
+    "no-fit-overlay-v03.manifest.json", 359,
+    "65d6f989eabcfa2e837ae58b91090e67c27aa353ce071d9f9867cdbca80aa3c3",
+)
+RECEIPT_GREEN = (
+    "no-fit-exact-feedback-receipt-substitution-v02.py", 4047,
+    "ca63791a73523e689cef71a8b9682e7989464ea6959a6ee465fd0ef219142634",
+)
+MAINTAINED = (
+    "no-fit-maintained-regression-nodes-v02.py", 4933,
+    "1482351231d7a03ff2d0c0435f0ee89d1ddf290aef5f797d574e8ad68294ea7e",
+)
+MODES = ("retained", "receipt-red", "receipt-green", "maintained")
+ROLES = {
+    "record": "ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py",
+    "trainer": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py",
+    "autoencoder": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+}
+ABLATION_TEST = "tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py"
+MAINTAINED_POSTS = {
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py": (
+        "test_trusted_feedback_weight_updates.test.after-v05.DATA", 46285,
+        "78f1f42f172367e8bb932721b0ef01011b8ff9a7b5821ee2942a4f5254eaa9e3",
+    ),
+    ABLATION_TEST: (
+        "test_proof_feedback_ablation.test.after.DATA", 9778,
+        "bf195465dab79f259c87243eb66553286f2bd32084c80ca97cd4c56660191414",
+    ),
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py": (
+        "ablation.after-v02.DATA", 41765,
+        "01dc8c506d30d3348712d1547e46bf801109818aadab77e94c2ded8188f90bbc",
+    ),
+}
+
+
+def sha256(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def identity(info):
+    return (info.st_dev, info.st_ino, info.st_size, info.st_mode, info.st_uid,
+            info.st_gid, info.st_nlink, info.st_mtime_ns, info.st_ctime_ns)
+
+
+def digest_format(value, length):
+    return isinstance(value, str) and re.fullmatch(f"[0-9a-f]{{{length}}}", value) is not None
+
+
+def pinned_file(path, size, digest, maximum):
+    path = Path(path)
+    if (not path.is_absolute() or path.resolve(strict=True) != path
+            or type(size) is not int or not 0 < size <= maximum or not digest_format(digest, 64)):
+        raise ValueError(f"noncanonical or unbounded input: {path}")
+    with os.fdopen(os.open(path, os.O_RDONLY | os.O_CLOEXEC | os.O_NOFOLLOW), "rb") as stream:
+        before = os.fstat(stream.fileno())
+        if (not stat.S_ISREG(before.st_mode) or before.st_uid != os.getuid()
+                or before.st_nlink != 1 or before.st_size != size):
+            raise ValueError(f"input file identity differs: {path}")
+        raw = stream.read(size + 1)
+        after = os.fstat(stream.fileno())
+        if identity(before) != identity(after) or identity(after) != identity(path.lstat()):
+            raise ValueError(f"input file identity drifted: {path}")
+    if len(raw) != size or sha256(raw) != digest:
+        raise ValueError(f"input content differs: {path}")
+    return raw
+
+
+def decode_json(raw):
+    def unique_pairs(items):
+        obj = {}
+        for key, value in items:
+            if key in obj:
+                raise ValueError(f"duplicate manifest key: {key}")
+            obj[key] = value
+        return obj
+
+    return json.loads(raw, object_pairs_hook=unique_pairs)
+
+
+def held(reference, maximum=65536):
+    filename, size, digest = reference
+    path = STAGE / filename
+    return path, pinned_file(path, size, digest, maximum)
+
+
+def load_adapter(reference):
+    path, raw = held(reference)
+    module = ModuleType("_phase7_rebased_authenticated_no_fit_adapter")
+    module.__file__ = str(path)
+    sys.modules[module.__name__] = module
+    exec(compile(raw, str(path), "exec", dont_inherit=True), module.__dict__)
+    return module
+
+
+def manifest(args, prior):
+    raw = pinned_file(args.projection_manifest, args.projection_bytes, args.projection_sha256, 65536)
+    data = decode_json(raw)
+    root = args.projection
+    root_stat = root.lstat()
+    if (not root.is_absolute() or root.resolve(strict=True) != root
+            or not stat.S_ISDIR(root_stat.st_mode) or root_stat.st_uid != os.getuid()
+            or stat.S_IMODE(root_stat.st_mode) != 0o700
+            or data["projection"] != str(root)
+            or data["schema"] != "phase7-rebased-no-fit-private-Git-projection/v1"
+            or not digest_format(data["git_head"], 40)
+            or not digest_format(data["git_tree"], 40)):
+        raise ValueError("private projection identity differs")
+    rows = data["sources"]
+    expected_counts = dict(zip(MODES, (100, 100, 100, 102)))
+    if (len(rows) != 102 or set(data["cohorts"]) != set(MODES)
+            or set(data["cohorts"]["maintained"]["paths"]) != set(rows)
+            or sum(row["bytes"] for row in rows.values()) > prior.MAX_MODULE_BYTES):
+        raise ValueError("private projection coverage differs")
+    for name, cohort in data["cohorts"].items():
+        paths = cohort["paths"]
+        if len(paths) != expected_counts[name] or not set(paths).issubset(rows) or len(set(paths)) != len(paths):
+            raise ValueError(f"historical source roster differs for {name}")
+    for name, row in rows.items():
+        rel = PurePosixPath(name)
+        leaf = root / rel
+        if (rel.is_absolute() or rel.as_posix() != name or ".." in rel.parts or rel.suffix != ".py"
+                or type(row["bytes"]) is not int or not 0 < row["bytes"] <= prior.MAX_FILE
+                or not digest_format(row["sha256"], 64) or not digest_format(row["git_blob_sha1"], 40)
+                or leaf.resolve(strict=True) != leaf or identity(leaf.lstat()) != tuple(row["full9"])):
+            raise ValueError(f"projected source identity differs: {name}")
+    prior.ROOT = root
+    return data
+
+
+def bind_sources(args, prior, sources, cohort):
+    path = args.overlay_manifest
+    data = decode_json(pinned_file(path, args.overlay_bytes, args.overlay_sha256, 1024))
+    if set(data) != set(ROLES):
+        raise ValueError("expected the existing exact three-role v04 overlay manifest")
+    overlays = {}
+    for role, reference in data.items():
+        filename, size, digest = reference
+        if Path(filename).name != filename:
+            raise ValueError(f"overlay role must name an immediate sibling: {role}")
+        overlays[ROLES[role]] = (path.parent / filename, size, digest)
+
+    if args.mode == "receipt-red":
+        _, raw = held(RED_MANIFEST)
+        historical = decode_json(raw)
+        for role in ("record", "trainer"):
+            filename, size, digest = historical[role]
+            overlays[ROLES[role]] = (STAGE / filename, size, digest)
+    if args.mode == "maintained":
+        for rel, (filename, size, digest) in MAINTAINED_POSTS.items():
+            overlays[rel] = (STAGE / filename, size, digest)
+
+    loaded = {}
+    for rel, (path, size, digest) in overlays.items():
+        raw = pinned_file(path, size, digest, prior.MAX_FILE)
+        loaded[rel] = (raw, {"path": str(path), "bytes": size, "sha256": digest,
+                             "base_git_blob_sha1": sources[rel]["git_blob_sha1"]})
+    prior.EXPECTED.clear()
+    prior.EXPECTED.update({rel: sources[rel]["git_blob_sha1"] for rel in cohort["paths"]})
+    if not loaded.keys() <= prior.EXPECTED.keys():
+        raise ValueError("overlay has a role outside the selected source roster")
+    base_loader = prior.BoundSource
+
+    class ProjectedSource(base_loader):
+        def get_code(self, fullname):
+            path = Path(self.path).absolute()
+            rel = path.relative_to(prior.ROOT).as_posix()
+            if rel not in prior.EXPECTED:
+                raise ImportError(f"unlisted projected project source: {rel}")
+            expected = sources[rel]
+            if identity(path.lstat()) != tuple(expected["full9"]):
+                raise ImportError(f"projected project source metadata changed: {rel}")
+            code = super().get_code(fullname)
+            observed = prior.compiled[rel]
+            if (any(observed[k] != expected[k] for k in ("bytes", "sha256", "git_blob_sha1"))
+                    or identity(path.lstat()) != tuple(expected["full9"])):
+                raise ImportError(f"projected project source content or metadata changed: {rel}")
+            if rel not in loaded:
+                return code
+            body, provenance = loaded[rel]
+            prior.compiled_total += len(body)
+            if prior.compiled_total > prior.MAX_MODULE_BYTES:
+                raise RuntimeError("project compile byte budget exceeded")
+            observed["overlay_executed"] = provenance
+            return compile(body, str(path), "exec", dont_inherit=True)
+
+    prior.BoundSource = ProjectedSource
+    return {rel: provenance for rel, (_, provenance) in loaded.items()}
+
+
+def exact_function(body, name):
+    definitions = [
+        node for node in body if isinstance(node, ast.FunctionDef) and node.name == name
+    ]
+    if len(definitions) != 1:
+        raise ValueError(f"expected exactly one held function: {name}")
+    return definitions[0]
+
+
+def run_cases(mode, adapter, prior):
+    if mode == "retained":
+        rows = adapter.suite(adapter.import_fixture(prior), prior, True)
+        return {"cases": rows}
+
+    scope = {
+        "adapter": adapter, "prior": prior, "replace": replace, "importlib": importlib,
+        "sys": sys, "ablation_test": ABLATION_TEST,
+    }
+    if mode in ("receipt-red", "receipt-green"):
+        path, raw = held(RECEIPT_GREEN)
+        suite = exact_function(ast.parse(raw).body, "test_writes")
+        exec(compile(ast.Module(body=[suite], type_ignores=[]), str(path), "exec",
+                     dont_inherit=True), scope)
+        return scope["test_writes"](prior)
+
+    path, raw = held(MAINTAINED)
+    parsed = ast.parse(raw)
+    loader = exact_function(parsed.body, "load_fixture")
+    suite = exact_function(parsed.body, "run")
+    starts = [index for index, node in enumerate(suite.body)
+              if isinstance(node, ast.Assign)
+              and ast.unparse(node) == "source = adapter.import_fixture(prior)"]
+    if len(starts) != 1:
+        raise ValueError("cannot select the exact maintained case body")
+    suite.body = suite.body[starts[0]:]
+    exec(compile(ast.Module(body=[loader, suite], type_ignores=[]), str(path), "exec",
+                 dont_inherit=True), scope)
+    return {"passes": scope["run"]()}
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("mode", choices=MODES)
+    parser.add_argument("--projection", type=Path, required=True)
+    parser.add_argument("--projection-manifest", type=Path, required=True)
+    parser.add_argument("--projection-bytes", type=int, required=True)
+    parser.add_argument("--projection-sha256", required=True)
+    parser.add_argument("--overlay-manifest", type=Path, required=True)
+    parser.add_argument("--overlay-bytes", type=int, required=True)
+    parser.add_argument("--overlay-sha256", required=True)
+    args = parser.parse_args()
+    prior = None
+    code = 2
+    report = {
+        "mode": args.mode, "projection_manifest_sha256": args.projection_sha256,
+        "overlay_input_manifest_sha256": args.overlay_sha256, "model_fit": False,
+    }
+    try:
+        if not sys.flags.isolated or not sys.dont_write_bytecode or sys.flags.optimize:
+            raise ValueError("existing probe requires python -I -B with live assertions")
+        adapter = load_adapter(RED_ADAPTER if args.mode == "receipt-red" else RETAINED_ADAPTER)
+        prior = adapter.load_prior()
+        prior.install_kernel_guards()
+        data = manifest(args, prior)
+        cohort = data["cohorts"][args.mode]
+        overlays = bind_sources(args, prior, data["sources"], cohort)
+        report.update(git_head=data["git_head"], git_tree=data["git_tree"], applied_plan=overlays,
+                      historical_control=cohort["historical_control"])
+        outcome = run_cases(args.mode, adapter, prior)
+        report.update(outcome)
+        if prior.denied or any(name.split(".", 1)[0] in prior.blocked_imports for name in sys.modules):
+            raise RuntimeError("guarded dependency or runtime boundary was reached")
+        if set(prior.compiled) != set(cohort["paths"]):
+            raise RuntimeError("historical compile roster differs from observed exact sources")
+        if {rel for rel, row in prior.compiled.items() if "overlay_executed" in row} != set(overlays):
+            raise RuntimeError("selected overlay execution witness is incomplete")
+        if args.mode == "maintained":
+            names = outcome["passes"]
+            passed = [True for _ in names]
+        else:
+            names = [row["case"] for row in outcome["cases"]]
+            passed = [row["passed"] for row in outcome["cases"]]
+        report.update(case_names=names, case_success=passed,
+                      expected_case_success=cohort["case_success"])
+        if names != cohort["case_names"]:
+            raise RuntimeError("historical case identity or order differs")
+        report["historical_observation_reproduced"] = passed == cohort["case_success"]
+        code = 0 if all(passed) else 1
+    except Exception as error:
+        traceback.print_exc()
+        report["refusal"] = f"{type(error).__name__}: {error}"
+    finally:
+        if prior is not None:
+            report.update(guard=prior.guard, explicit_denials=prior.denied,
+                          compiled=prior.compiled, project_body_bytes=prior.compiled_total)
+        report["worker_rc"] = code
+        print(json.dumps(report, sort_keys=True))
+    return code
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

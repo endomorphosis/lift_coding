@@ -1,0 +1,640 @@
+{
+  "actual_initial_positive_demonstration": [
+    {
+      "bytes": 8454,
+      "full9": [
+        "66306",
+        "72388877",
+        "33024",
+        "1",
+        "1000",
+        "1000",
+        "8454",
+        "1795680218362808621",
+        "1795680218362808621"
+      ],
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/run-saved-v11-baseline.py",
+      "sha256": "2e2a271aeb54496acd0974521e0d47a1bf8ae78ef6ba235d1538db535ffbbcfe"
+    },
+    {
+      "bytes": 2194,
+      "full9": [
+        "66306",
+        "72388878",
+        "33204",
+        "1",
+        "1000",
+        "1000",
+        "2194",
+        "1795680226153496516",
+        "1795680226153496516"
+      ],
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/actual-v11-baseline.stdout",
+      "sha256": "37243376215326873b6519ed24ba6c1072ac54cf7612b8425ac726d5ea470ed2"
+    },
+    {
+      "bytes": 0,
+      "full9": [
+        "66306",
+        "72388879",
+        "33204",
+        "1",
+        "1000",
+        "1000",
+        "0",
+        "1795680224765482254",
+        "1795680224765482254"
+      ],
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/actual-v11-baseline.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "checkout": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+  "current_role_body_references": [
+    {
+      "bytes": 13640,
+      "full9": [
+        "66306",
+        "72388876",
+        "33024",
+        "1",
+        "1000",
+        "1000",
+        "13640",
+        "1795680218359568811",
+        "1795680218359568811"
+      ],
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/exact-v11-measurement-project-inputs.json",
+      "sha256": "4bf31bf8ec6bcd6c1de929fa598ea705cc696467f510aa530eb3f24935b776c4"
+    },
+    {
+      "bytes": 13242,
+      "full9": [
+        "66306",
+        "72389956",
+        "33024",
+        "1",
+        "1000",
+        "1000",
+        "13242",
+        "1795680472701218876",
+        "1795680472701218876"
+      ],
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/exact-v11-measurement-red-green-inputs.v02.json",
+      "sha256": "e021edfa9f59f08bb183c7250a7febd6e3ecb8f3442ec27f5960806c5501dfd5"
+    }
+  ],
+  "files": [
+    {
+      "after": {
+        "bytes": 92465,
+        "full9": [
+          "66306",
+          "72388902",
+          "33024",
+          "1",
+          "1000",
+          "1000",
+          "92465",
+          "1795680377399965784",
+          "1795680377399965784"
+        ],
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/inference.after.evaluation-measurement.py.DATA",
+        "proposed_git_blob": "2ca172903507b0b6ea6d93ab5ebee78c469601cc",
+        "sha256": "944e2fd0e0ddd922858941a5b99002ddc205a2e738114eece8dcf7aa5c69ded4"
+      },
+      "all_other_top_level_AST_exact": true,
+      "before": {
+        "bytes": 89856,
+        "full9": [
+          "66306",
+          "72388856",
+          "33024",
+          "1",
+          "1000",
+          "1000",
+          "89856",
+          "1795680218288481856",
+          "1795680218288481856"
+        ],
+        "git_blob": "308c505b59804a184976e330ce145374943e4cbe",
+        "observed_canonical_full9": [
+          "66306",
+          "70042608",
+          "33204",
+          "1",
+          "1000",
+          "1000",
+          "89856",
+          "1795672036918222563",
+          "1795672037234452238"
+        ],
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_inference.py",
+        "sha256": "2a0325ac9d782fd7e5723751cb9dca3c4ca63c5ecff4f3ed78c76d33e53fedea"
+      },
+      "canonical_path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_inference.py",
+      "changed_existing_definitions": [
+        "_build_parent_typed_structure_audit",
+        "_check_reviewed_evaluation_outputs"
+      ],
+      "git_mode": "100644",
+      "new_definitions": [
+        "_reviewed_evaluation_measurement_cases"
+      ],
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_inference.py"
+    },
+    {
+      "after": {
+        "bytes": 259499,
+        "full9": [
+          "66306",
+          "72389955",
+          "33024",
+          "1",
+          "1000",
+          "1000",
+          "259499",
+          "1795680472696213466",
+          "1795680472696213466"
+        ],
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/owning-test.after.evaluation-measurement.v02.py.DATA",
+        "proposed_git_blob": "1667024f9b2c90c1e0d2b13bfdb33724806c36b1",
+        "sha256": "1530cc742b1b115af381f37ba5b5148a675ec90b2a78bf73d9c7fb946c92ed3a"
+      },
+      "all_other_top_level_AST_exact": true,
+      "before": {
+        "bytes": 254379,
+        "full9": [
+          "66306",
+          "72388870",
+          "33024",
+          "1",
+          "1000",
+          "1000",
+          "254379",
+          "1795680218324411906",
+          "1795680218324411906"
+        ],
+        "git_blob": "059d7a38fb9e9cdde2846f55496073ce77a51f5f",
+        "observed_canonical_full9": [
+          "66306",
+          "70042614",
+          "33204",
+          "1",
+          "1000",
+          "1000",
+          "254379",
+          "1795672036921429974",
+          "1795672037558454134"
+        ],
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/project/tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_inference.py",
+        "sha256": "5a372f8b5bbbb0e70e7e15e6ba583abef680641c39028c6f9b78df2fe1e2f035"
+      },
+      "canonical_path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_inference.py",
+      "changed_existing_definitions": [
+        "_reviewed_v11_bind_saved_source_control",
+        "_reviewed_v11_saved_control",
+        "_reviewed_v11_three_source_coverage_control"
+      ],
+      "git_mode": "100644",
+      "new_definitions": [
+        "_reviewed_v11_saved_evaluation",
+        "test_reviewed_inference_v11_evaluation_scores_the_verified_generation"
+      ],
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_inference.py"
+    }
+  ],
+  "head_tree": "d63388fc349d1ab8bc93c702fa27d042aa459880",
+  "observed_clean_local_head_and_tracking_origin_main": "611395777d8365a070c4cba4c29a5cbc6c510f8b",
+  "optional_typed_audit_existing_assertions": {
+    "evidence": [
+      {
+        "bytes": 9628,
+        "full9": [
+          "66306",
+          "72390988",
+          "33204",
+          "1",
+          "1000",
+          "1000",
+          "9628",
+          "1795680618849661850",
+          "1795680618849661850"
+        ],
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/run-v11-existing-optional-audit-8.py",
+        "sha256": "cc51c0eaff33dfdfb30e0e18c4998190fcc3ce22d06999536ae1df78e5154fa1"
+      },
+      {
+        "bytes": 627,
+        "full9": [
+          "66306",
+          "72390999",
+          "33204",
+          "1",
+          "1000",
+          "1000",
+          "627",
+          "1795680638822642822",
+          "1795680638822642822"
+        ],
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/optional-audit-v02-before.stdout",
+        "sha256": "b46392e2adda7f03799346f83ea1f8c81ad922896a146793fe5733f1fa7a6aa8"
+      },
+      {
+        "bytes": 0,
+        "full9": [
+          "66306",
+          "72391000",
+          "33204",
+          "1",
+          "1000",
+          "1000",
+          "0",
+          "1795680637421628987",
+          "1795680637421628987"
+        ],
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/optional-audit-v02-before.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 626,
+        "full9": [
+          "66306",
+          "72391060",
+          "33204",
+          "1",
+          "1000",
+          "1000",
+          "626",
+          "1795680640618660554",
+          "1795680640618660554"
+        ],
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/optional-audit-v02-after.stdout",
+        "sha256": "f61708f62cc77b1f658f410c7c7d816b35d878bb6655f91bef0a18546f1609af"
+      },
+      {
+        "bytes": 0,
+        "full9": [
+          "66306",
+          "72391061",
+          "33204",
+          "1",
+          "1000",
+          "1000",
+          "0",
+          "1795680639194646495",
+          "1795680639194646495"
+        ],
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/optional-audit-v02-after.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "explicit_valid_failed_batch_and_mismatched_batch_exception": true,
+    "identical_result_rows": true,
+    "old_and_new": 8
+  },
+  "patches": {
+    "both_applied_to_isolated_preimage_with_exact_bytes_and_modes": true,
+    "forward": {
+      "bytes": 17304,
+      "full9": [
+        "66306",
+        "72391162",
+        "33024",
+        "1",
+        "1000",
+        "1000",
+        "17304",
+        "1795680724964398553",
+        "1795680724964398553"
+      ],
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/exact-two-forward.v02.patch",
+      "sha256": "534df778629ada2647f30a3258389313742dcbdd9edc2610db613a6f8e6cbd03"
+    },
+    "inverse": {
+      "bytes": 17304,
+      "full9": [
+        "66306",
+        "72391163",
+        "33024",
+        "1",
+        "1000",
+        "1000",
+        "17304",
+        "1795680724969819166",
+        "1795680724969819166"
+      ],
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/exact-two-inverse.v02.patch",
+      "sha256": "17fc7fb824e17f21bbd57116626410c59e89eae21bfd241bec6082fec9ee18d8"
+    }
+  },
+  "production_join": {
+    "bound": [
+      "source_generation_observation",
+      "source_generation_input_commitment_sha256",
+      "checkpoint_declarations",
+      "request rows_artifact and ordered producer arguments",
+      "raw generation rows",
+      "declared compiler identity",
+      "both complete-norm payload metric copies"
+    ],
+    "canonical_current_verifier": "308c505b59804a184976e330ce145374943e4cbe",
+    "measurement_reused": "evaluate_complete_norm_payloads"
+  },
+  "retained_prior_attempts": {
+    "first_same_cohort": {
+      "baseline": {
+        "error": 1,
+        "failed": 8,
+        "passed": 41
+      },
+      "candidate": {
+        "error": 1,
+        "failed": 0,
+        "passed": 49
+      },
+      "evidence": [
+        {
+          "bytes": 4,
+          "full9": [
+            "66306",
+            "72389952",
+            "33204",
+            "1",
+            "1000",
+            "1000",
+            "4",
+            "1795680418838452989",
+            "1795680418838452989"
+          ],
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/measurement.exit",
+          "sha256": "3f11ad6bbc7ecca0b2416b713dee77f1a635c00aaeaa946e14cde1c2bfae56d5"
+        },
+        {
+          "bytes": 14991,
+          "full9": [
+            "66306",
+            "72388906",
+            "33204",
+            "1",
+            "1000",
+            "1000",
+            "14991",
+            "1795680416198426460",
+            "1795680416198426460"
+          ],
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/measurement-before.stdout",
+          "sha256": "dabfb315d2afabba5ef7956acfb5a13106d693946dee6ef992f81b5015d1f72a"
+        },
+        {
+          "bytes": 14471,
+          "full9": [
+            "66306",
+            "72389449",
+            "33204",
+            "1",
+            "1000",
+            "1000",
+            "14471",
+            "1795680418469449281",
+            "1795680418469449281"
+          ],
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/measurement-after.stdout",
+          "sha256": "98161b164d09f5fb3e36e2af4c9833adabd712fa54091d18e8bbcebdd10299e1"
+        },
+        {
+          "bytes": 259468,
+          "full9": [
+            "66306",
+            "72388903",
+            "33024",
+            "1",
+            "1000",
+            "1000",
+            "259468",
+            "1795680377403358954",
+            "1795680377403358954"
+          ],
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/owning-test.after.evaluation-measurement.py.DATA",
+          "sha256": "77dc0d3e6c81cda4ebcae44febda79f6f65f2e9d491f44816a7b5a905c0ec9a7"
+        },
+        {
+          "bytes": 13238,
+          "full9": [
+            "66306",
+            "72388904",
+            "33024",
+            "1",
+            "1000",
+            "1000",
+            "13238",
+            "1795680377406304728",
+            "1795680377406304728"
+          ],
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/exact-v11-measurement-red-green-inputs.json",
+          "sha256": "6c1f355514bc98efaff151b2cf2b34b151f7ff75dd89c0512f270c541acd0b35"
+        }
+      ],
+      "reason": "checkpoint fixture kept a preexisting empty declaration"
+    },
+    "optional_audit_invocation_lookup": {
+      "cases_executed": 0,
+      "evidence": [
+        {
+          "bytes": 168,
+          "full9": [
+            "66306",
+            "72390990",
+            "33204",
+            "1",
+            "1000",
+            "1000",
+            "168",
+            "1795680618853445519",
+            "1795680618853445519"
+          ],
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/optional-audit-before.stderr",
+          "sha256": "c2f13ec374661c474b62fb0e680628d8a5ad418ba5b820b6e68d53a2e72ecbca"
+        },
+        {
+          "bytes": 168,
+          "full9": [
+            "66306",
+            "72390992",
+            "33204",
+            "1",
+            "1000",
+            "1000",
+            "168",
+            "1795680618854445529",
+            "1795680618854445529"
+          ],
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/optional-audit-after.stderr",
+          "sha256": "c2f13ec374661c474b62fb0e680628d8a5ad418ba5b820b6e68d53a2e72ecbca"
+        }
+      ],
+      "reason": "datasets checkout does not contain the attempted local venv"
+    },
+    "private_forward_mode_readback": {
+      "first_run": "git apply used inherited umask 0002 and produced writable-group mode; fixed only the scratch invocation umask to 0022",
+      "superseded_forward": {
+        "bytes": 17304,
+        "full9": [
+          "66306",
+          "72391149",
+          "33024",
+          "1",
+          "1000",
+          "1000",
+          "17304",
+          "1795680714461908627",
+          "1795680714461908627"
+        ],
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/exact-two-forward.patch",
+        "sha256": "534df778629ada2647f30a3258389313742dcbdd9edc2610db613a6f8e6cbd03"
+      },
+      "unexecuted_inverse": {
+        "bytes": 17304,
+        "full9": [
+          "66306",
+          "72391150",
+          "33024",
+          "1",
+          "1000",
+          "1000",
+          "17304",
+          "1795680714464593262",
+          "1795680714464593262"
+        ],
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/exact-two-inverse.patch",
+        "sha256": "17fc7fb824e17f21bbd57116626410c59e89eae21bfd241bec6082fec9ee18d8"
+      }
+    }
+  },
+  "same_50_saved_artifact_cases": {
+    "baseline": {
+      "error": 0,
+      "failed": 9,
+      "passed": 41
+    },
+    "candidate": {
+      "error": 0,
+      "failed": 0,
+      "passed": 50
+    },
+    "evidence": [
+      {
+        "bytes": 9698,
+        "full9": [
+          "66306",
+          "72389957",
+          "33204",
+          "1",
+          "1000",
+          "1000",
+          "9698",
+          "1795680472704576094",
+          "1795680472704576094"
+        ],
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/run-v11-evaluation-owning-50.v02.py",
+        "sha256": "16b353ebdb205f4de4f54dbd30381e0af08f4e37ea796d2736e79837fde4da16"
+      },
+      {
+        "bytes": 4,
+        "full9": [
+          "66306",
+          "72390980",
+          "33204",
+          "1",
+          "1000",
+          "1000",
+          "4",
+          "1795680477176037542",
+          "1795680477176037542"
+        ],
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/measurement-v02.exit",
+        "sha256": "f4a8ae8e74ddfb896a256de4e3099911dcaa6a9302591713898069b0bcd6e3d7"
+      },
+      {
+        "bytes": 14561,
+        "full9": [
+          "66306",
+          "72389958",
+          "33204",
+          "1",
+          "1000",
+          "1000",
+          "14561",
+          "1795680474583011624",
+          "1795680474583011624"
+        ],
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/measurement-v02-before.stdout",
+        "sha256": "ff387e490db3e85d86b25bf0d9eb73f7994ef0f915341cfb95d0cdbdab883d9f"
+      },
+      {
+        "bytes": 14001,
+        "full9": [
+          "66306",
+          "72390477",
+          "33204",
+          "1",
+          "1000",
+          "1000",
+          "14001",
+          "1795680476799033774",
+          "1795680476799033774"
+        ],
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/measurement-v02-after.stdout",
+        "sha256": "06b45a234b7a774b3d938ea3e2243d9c29f99662a6e7eeea73f4bd509bbed112"
+      },
+      {
+        "bytes": 0,
+        "full9": [
+          "66306",
+          "72389959",
+          "33204",
+          "1",
+          "1000",
+          "1000",
+          "0",
+          "1795680472713992940",
+          "1795680472713992940"
+        ],
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/measurement-v02-before.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 0,
+        "full9": [
+          "66306",
+          "72390478",
+          "33204",
+          "1",
+          "1000",
+          "1000",
+          "0",
+          "1795680474958015373",
+          "1795680474958015373"
+        ],
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/measurement-v02-after.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "identical_order": true,
+    "new": 10,
+    "retained": 40
+  },
+  "schema": "Phase5-v11-saved-evaluation-measurement-join-exact-two-private/v1",
+  "scope": {
+    "canonical_installation": false,
+    "git_worktree_or_index_mutations": 0,
+    "legal_review_or_admission_granted": false,
+    "model_runs": 0,
+    "native_runs": 0,
+    "ordinary_package_qualification": false,
+    "physical_original_owner_fixture_run": false,
+    "private_fixture_linker_only": true,
+    "remote_network_actions": 0,
+    "source_operations": 0
+  }
+}

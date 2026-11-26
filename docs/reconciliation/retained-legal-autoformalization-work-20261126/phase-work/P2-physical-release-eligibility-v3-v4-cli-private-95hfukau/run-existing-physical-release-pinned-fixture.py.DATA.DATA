@@ -1,0 +1,135 @@
+"""Private physical software fixture. No subprocess, Lean, database, or model."""
+import hashlib
+import json
+import os
+import resource
+import sys
+import traceback
+from importlib.util import module_from_spec, spec_from_file_location
+from pathlib import Path
+
+guard = Path(sys.argv[5])
+source = guard.read_text()
+sentinel = 'owner = repo / "tests/unit/logic/legal_ir/test_proof_cache.py"'
+definition = 'def audit(event, args):\n'
+assert source.count(sentinel) == source.count(definition) == 1
+# ctypes' standard initialization requests a handle to the running process.
+# It opens no named library. Keep the inherited denial on every named load.
+scoped = '''self_handles = []
+def audit(event, args):
+    if event == "ctypes.dlopen" and args == (None,):
+        self_handles.append("self_process_handle")
+        return
+'''
+prefix = source.split(sentinel, 1)[0].replace(definition, scoped)
+g = {"__file__": str(guard)}
+exec(compile(prefix, str(guard), "exec", dont_inherit=True), g)
+resource.setrlimit(resource.RLIMIT_FSIZE, (16 * 1024**2, 16 * 1024**2))
+os.chdir(g["working"])
+test_path = "tests/unit/logic/autoformal/test_corpus_release_cli.py"
+post = Path(sys.argv[4])
+if len(sys.argv) == 9:
+    class ReleaseOverlay(g["importlib"].abc.MetaPathFinder):
+        def find_spec(self, fullname, path=None, target=None):
+            overlays = {
+                "ipfs_datasets_py.logic.autoformal.legal_release_coordinator_v1": Path(sys.argv[7]),
+                "scripts.ops.legal_ir.validate_uscode_corpus_release": Path(sys.argv[8]),
+            }
+            selected = overlays.get(fullname)
+            if selected is None:
+                return None
+            return spec_from_file_location(fullname, selected,
+                                          loader=g["GuardedLoader"](selected, selected))
+    sys.meta_path.insert(0, ReleaseOverlay())
+spec = spec_from_file_location("tests.unit.logic.autoformal._private_v4_current_revocation", g["repo"] / test_path,
+                              loader=g["GuardedLoader"](test_path, post))
+module = module_from_spec(spec)
+sys.modules[spec.name] = module
+report = dict(test_source_sha256=hashlib.sha256(post.read_bytes()).hexdigest(),
+              test_module_origin=str(spec.origin), physical_fixture_constructed=False,
+              controls=[], lightweight_private_scope=True)
+
+class OwnedTemporaryPathFactory:
+    def mktemp(self, leaf):
+        path = g["working"] / leaf
+        path.mkdir()
+        return path
+
+import contextlib
+import io
+
+class PrivateCapture:
+    def reset(self):
+        self.output, self.error = io.StringIO(), io.StringIO()
+
+    def readouterr(self):
+        from types import SimpleNamespace
+        return SimpleNamespace(out=self.output.getvalue(), err=self.error.getvalue())
+
+PINNED_V4_WIRE = {'path': '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/before-v4-cli/complete-source-review-v4.wire', 'bytes': 1090977, 'sha256': '84163b067168bcb742dd7b1138967d9063ed3bdbbca3d42e363b7f4b9ec1cde3'}
+
+try:
+    variant = sys.argv[6]
+    assert variant in ("v4-cli", "v4-native", "cli-profile", "v3-source", "v3-retained", "v3-wrong-graph")
+    spec.loader.exec_module(module)
+    maker = OwnedTemporaryPathFactory()
+    capture = PrivateCapture()
+    capture.reset()
+    if variant.startswith("v4"):
+        from ipfs_datasets_py.logic.autoformal import legal_corpus_definition_use_lake_v2 as wire
+        from ipfs_datasets_py.logic.autoformal import legal_corpus_shared_lake as shared
+        from ipfs_datasets_py.logic.autoformal import legal_release_coordinator_v1 as release
+        fixture_wire = Path(PINNED_V4_WIRE["path"])
+        saved = fixture_wire.read_bytes()
+        assert len(saved) == PINNED_V4_WIRE["bytes"] and hashlib.sha256(saved).hexdigest() == PINNED_V4_WIRE["sha256"]
+        request = wire.decode_parent_replay_value_v1(saved, max_bytes=release.MAX_CLOSURE_REQUEST_BYTES_V3,
+                                                   expected_payload_sha256=PINNED_V4_WIRE["sha256"])
+        assert request["native"] is None and request["profile"] == release.CLOSURE_PROFILE_V4
+        preserve = next(row for row in request["artifacts"] if row["artifact_id"] == request["component"]["preservation"])
+        upstream = wire.decode_parent_replay_value_v1(preserve["payload"], expected_payload_sha256=preserve["sha256"])
+        preparation = shared.ReviewedPreservationCorpusPreparation(upstream["manifest_json"],
+            tuple(tuple(file) for file in upstream["files"]))
+        control = dict(physical_request=request, physical_request_raw=saved,
+            physical_request_sha256=PINNED_V4_WIRE["sha256"], graph_sha=request["pins"]["graph"],
+            preservation=preparation)
+        report["reused_exact_authored_V4_fixture_wire"] = PINNED_V4_WIRE
+    elif variant != "cli-profile":
+        material = module.physical_closure_material_v3.__wrapped__(maker)
+        report["physical_fixture_constructed"] = True
+        control = module.physical_closure_control_v3.__wrapped__(material)
+    try:
+        if variant == "v4-cli":
+            with contextlib.redirect_stdout(capture.output), contextlib.redirect_stderr(capture.error):
+                module.test_physical_v4_cli_projects_current_graph_eligibility_without_native_credit(
+                    control, g["working"], capture)
+        elif variant == "v4-native":
+            module.test_physical_v4_declared_eligibility_keeps_native_refusal(control)
+        elif variant == "cli-profile":
+            with contextlib.redirect_stdout(capture.output), contextlib.redirect_stderr(capture.error):
+                module.test_closure_cli_refuses_declared_eligibility_on_other_profiles(g["working"], capture)
+        elif variant == "v3-source":
+            module.test_physical_v3_existing_release_projects_declared_graph_eligibility(control)
+        elif variant == "v3-retained":
+            authored = module.authored_physical_native_v3.__wrapped__(control, maker)
+            module.test_physical_v3_retained_native_keeps_conditional_evidence_on_its_graph(authored)
+        else:
+            module.test_physical_v3_eligibility_requires_current_replay_of_the_exact_graph(control)
+    except (Exception, g["pytest"].fail.Exception) as exc:
+        report["controls"].append({"name": variant, "passed": False, "exception": type(exc).__name__,
+                                  "detail": str(exc), "traceback": traceback.format_exc(limit=12)})
+    else:
+        report["controls"].append({"name": variant, "passed": True})
+except Exception as exc:
+    report["setup_exception"] = type(exc).__name__
+    report["setup_detail"] = str(exc)
+    report["setup_traceback"] = traceback.format_exc(limit=12)
+finally:
+    report["raw_cli_output"] = capture.readouterr().out if "capture" in globals() else None
+    report["guard_events"] = g["denied"]
+    report["overlays"] = g["watched"]
+    report["permitted_ctypes_self_handles"] = g["self_handles"]
+    report["actual_pyarrow_loaded"] = "pyarrow" in sys.modules and "pyarrow.parquet" in sys.modules
+    report["torch_duckdb_loaded"] = any(name.split(".",1)[0] in ("torch","duckdb","_duckdb") for name in sys.modules)
+    print(json.dumps(report,indent=2,sort_keys=True))
+raise SystemExit(0 if len(report["controls"]) == 1 and all(row["passed"] for row in report["controls"])
+                 and not report["guard_events"] and not report["torch_duckdb_loaded"] else 1)

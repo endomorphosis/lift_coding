@@ -1,0 +1,34 @@
+........................................................................ [ 58%]
+.............FF..FF.................................                     [100%]
+=================================== FAILURES ===================================
+_ test_compiler_replays_nested_external_gate_evidence[nested-only-external_validity] _
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:539: in test_compiler_replays_nested_external_gate_evidence
+    assert decision.accepted is expected_acceptance, decision.failures
+E   AssertionError: ['external_validity_promotion_evidence_missing']
+E   assert False is True
+E    +  where False = RolloutGateResult(accepted=False, failures=['external_validity_promotion_evidence_missing'], warnings=[], metrics={'sc...bbbbbbbbbbbbbbbbbbbbbbbbbbbbb'}}}, 'evidence_complete': True, 'rollback_ready': True, 'promotion_decision': 'blocked'}).accepted
+_ test_compiler_replays_nested_external_gate_evidence[nested-only-external_validity_evidence] _
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:539: in test_compiler_replays_nested_external_gate_evidence
+    assert decision.accepted is expected_acceptance, decision.failures
+E   AssertionError: ['external_validity_promotion_evidence_missing']
+E   assert False is True
+E    +  where False = RolloutGateResult(accepted=False, failures=['external_validity_promotion_evidence_missing'], warnings=[], metrics={'sc...bbbbbbbbbbbbbbbbbbbbbbbbbbbbb'}}}, 'evidence_complete': True, 'rollback_ready': True, 'promotion_decision': 'blocked'}).accepted
+_ test_compiler_replays_nested_external_gate_evidence[conflicting-saved-external_validity] _
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:539: in test_compiler_replays_nested_external_gate_evidence
+    assert decision.accepted is expected_acceptance, decision.failures
+E   AssertionError: []
+E   assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-compi...bbbbbbbbbbbbbbbbbbbbbbbbbbbb'}}}, 'evidence_complete': True, 'rollback_ready': True, 'promotion_decision': 'accepted'}).accepted
+_ test_compiler_replays_nested_external_gate_evidence[conflicting-saved-external_validity_evidence] _
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:539: in test_compiler_replays_nested_external_gate_evidence
+    assert decision.accepted is expected_acceptance, decision.failures
+E   AssertionError: []
+E   assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-compi...bbbbbbbbbbbbbbbbbbbbbbbbbbbb'}}}, 'evidence_complete': True, 'rollback_ready': True, 'promotion_decision': 'accepted'}).accepted
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-nested-external-evidence-replay-private-n0oyyaah/baseline-pytest834/junit.xml -
+=========================== short test summary info ============================
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_replays_nested_external_gate_evidence[nested-only-external_validity]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_replays_nested_external_gate_evidence[nested-only-external_validity_evidence]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_replays_nested_external_gate_evidence[conflicting-saved-external_validity]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_replays_nested_external_gate_evidence[conflicting-saved-external_validity_evidence]
+4 failed, 120 passed, 2 deselected in 3.15s

@@ -1,0 +1,61 @@
+Traceback (most recent call last):
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-candidate-custody-current-v01-bg57f4s2/existing-candidate-custody-replay.py", line 224, in <module>
+    restored=adapter.restore_proposed_graph_ast(recovered, **arguments)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-candidate-custody-current-v01-bg57f4s2/git-pinned-project/ipfs_datasets_py/logic/autoformal/corpus_proposed_graph_adapter.py", line 362, in restore_proposed_graph_ast
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-candidate-custody-current-v01-bg57f4s2/git-pinned-project/ipfs_datasets_py/logic/autoformal/corpus_proposed_graph_adapter.py", line 345, in _validate_candidate
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-candidate-custody-current-v01-bg57f4s2/git-pinned-project/ipfs_datasets_py/logic/autoformal/corpus_proposed_graph_adapter.py", line 312, in validate_proposed_graph_candidate
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-candidate-custody-current-v01-bg57f4s2/git-pinned-project/ipfs_datasets_py/logic/autoformal/corpus_proposed_graph_adapter.py", line 179, in adapt_proposed_graph_bytes
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-candidate-custody-current-v01-bg57f4s2/git-pinned-project/ipfs_datasets_py/logic/autoformal/corpus_proposed_graph_adapter.py", line 210, in _candidate
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-candidate-custody-current-v01-bg57f4s2/git-pinned-project/ipfs_datasets_py/logic/autoformal/legal_semantic_graph.py", line 580, in validate_graph
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-candidate-custody-current-v01-bg57f4s2/git-pinned-project/ipfs_datasets_py/logic/autoformal/legal_semantic_graph.py", line 564, in graph_to_ast
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-candidate-custody-current-v01-bg57f4s2/git-pinned-project/ipfs_datasets_py/logic/autoformal/legal_semantic_graph.py", line 338, in _validate_ast
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-candidate-custody-current-v01-bg57f4s2/git-pinned-project/ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py", line 302, in prepare_relational_norm_v1
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-candidate-custody-current-v01-bg57f4s2/git-pinned-project/ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py", line 141, in _owners
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-candidate-custody-current-v01-bg57f4s2/git-pinned-project/ipfs_datasets_py/logic/autoformal/legal_family_routes.py", line 38, in producer_pins
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-candidate-custody-current-v01-bg57f4s2/git-pinned-project/ipfs_datasets_py/logic/autoformal/legal_family_routes.py", line 30, in _pins
+  File "/usr/lib/python3.12/pathlib.py", line 1021, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-candidate-custody-current-v01-bg57f4s2/existing-candidate-custody-replay.py", line 81, in authorize_retained_import
+    assert tracked_reads<=10*1024*1024, "retained fixture code upper bound"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: retained fixture code upper bound
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-candidate-custody-current-v01-bg57f4s2/existing-candidate-custody-replay.py", line 252, in <module>
+    traceback.print_exc()
+  File "/usr/lib/python3.12/traceback.py", line 180, in print_exc
+    print_exception(sys.exception(), limit=limit, file=file, chain=chain)
+  File "/usr/lib/python3.12/traceback.py", line 124, in print_exception
+    te = TracebackException(type(value), value, tb, limit=limit, compact=True)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/traceback.py", line 733, in __init__
+    self.stack = StackSummary._extract_from_extended_frame_gen(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/traceback.py", line 438, in _extract_from_extended_frame_gen
+    f.line
+  File "/usr/lib/python3.12/traceback.py", line 323, in line
+    self._line = linecache.getline(self.filename, self.lineno)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/linecache.py", line 30, in getline
+    lines = getlines(filename, module_globals)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/linecache.py", line 46, in getlines
+    return updatecache(filename, module_globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/linecache.py", line 136, in updatecache
+    with tokenize.open(fullname) as fp:
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/tokenize.py", line 449, in open
+    buffer = _builtin_open(filename, 'rb')
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-candidate-custody-current-v01-bg57f4s2/existing-candidate-custody-replay.py", line 81, in authorize_retained_import
+    assert tracked_reads<=10*1024*1024, "retained fixture code upper bound"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: retained fixture code upper bound

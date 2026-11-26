@@ -1,0 +1,88 @@
+{
+  "SQL_Native_or_SDK_operations": 0,
+  "after": {
+    "bytes": 86879,
+    "full9": {
+      "st_ctime_ns": "1795578849270696299",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72102105",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795578849270696299",
+      "st_nlink": "1",
+      "st_size": "86879",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/test_proof_cache.after.py.DATA",
+    "sha256": "e86d6d85c1333dd536ee997bf5a3e09b5f625f11bf399ed140c2504a894ece4e"
+  },
+  "append": {
+    "bytes": 2380,
+    "full9": {
+      "st_ctime_ns": "1795578849254962593",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72102104",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795578849254962593",
+      "st_nlink": "1",
+      "st_size": "2380",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/test-cache-compute-authority.append.py.DATA",
+    "sha256": "47a9346f99a4b030d30213e4cd7a37af6a418f6288d2d335ce5f577166f0a7b3"
+  },
+  "before": {
+    "bytes": 84499,
+    "full9": {
+      "st_ctime_ns": "1795573960136922171",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "17733055",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795573960136922171",
+      "st_nlink": "1",
+      "st_size": "84499",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Main-P1-genuine-DuckDB-coherent-coverage-regression-private-v01/test_proof_cache.genuine-SQL-live-shadow.after-v03.py.DATA",
+    "sha256": "239d05de5b08eba8de06b67a74efe109900a6302d73c27d28d450bf2f8061d2f"
+  },
+  "before_installation_dependency": "Reproduce through the existing owned public test path on the published baseline, then fix verified owner code and repin the kernel fixture to the final owning-test bytes if adopted.",
+  "canonical_Source_or_Git_mutations": 0,
+  "expected_new_case_count_static": 4,
+  "expected_static_case_matrix": {
+    "implementations": [
+      "ExactVerificationCache",
+      "DuckDBProofStore without connection"
+    ],
+    "scenarios": [
+      "existing advisory is returned by the producer and remains stored",
+      "fresh matching theorem is usable and stored"
+    ]
+  },
+  "new_parameterized_function": "test_cache_compute_leader_respects_requested_theorem_authority",
+  "old_file_byte_prefix_and_AST_preserved": true,
+  "patch": {
+    "bytes": 2761,
+    "full9": {
+      "st_ctime_ns": "1795578849275716683",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72102106",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795578849275716683",
+      "st_nlink": "1",
+      "st_size": "2761",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/test-cache-compute-authority.patch",
+    "sha256": "8f3dd6a2bf3cf2bba2624a3a3d36cacae4ebdcfb5277eb2e25bb9a00f7cf6c94"
+  },
+  "product_patch": null,
+  "project_imports": 0,
+  "published_D_baseline": "35e56b6b34c5cd363935e5377c1946a1a53e32b1",
+  "repo_relative_path": "tests/unit/logic/legal_ir/test_proof_cache.py",
+  "runtime_result": null,
+  "schema": "p1-cache-compute-leader-authority-regression-test-only/v1"
+}

@@ -1,0 +1,86 @@
+from dataclasses import replace
+from pathlib import Path
+from types import ModuleType
+import hashlib
+import json
+import sys
+import traceback
+
+stage = Path(__file__).absolute().parent
+adapter_path = stage / "no-fit-current-obligation-adapter-v01.py"
+adapter_raw = adapter_path.read_bytes()
+assert (len(adapter_raw), hashlib.sha256(adapter_raw).hexdigest()) == (
+    20405, "a84c49de31dd4218043f2f6b9ff1f9ef954291eddde2661b20a580fbbc539bf7",
+)
+adapter = ModuleType("_authentic_current_obligation_probe")
+adapter.__file__ = str(adapter_path)
+sys.modules[adapter.__name__] = adapter
+exec(compile(adapter_raw, str(adapter_path), "exec", dont_inherit=True), adapter.__dict__)
+manifest_path = stage / "no-fit-overlay-v03.manifest.json"
+manifest_pin = (len(manifest_path.read_bytes()), hashlib.sha256(manifest_path.read_bytes()).hexdigest())
+assert manifest_pin == (359, "65d6f989eabcfa2e837ae58b91090e67c27aa353ce071d9f9867cdbca80aa3c3")
+manifest = json.loads(adapter.pinned_file(manifest_path, *manifest_pin))
+
+
+def feature_checks(prior):
+    fixture = adapter.import_fixture(prior)
+    sample, revised, holdout, versions, _ = adapter.samples_and_legacy_record(fixture)
+    intended, target, *_ = adapter.make_current_target(sample, versions)
+    import ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_autoencoder as auto
+    from ipfs_datasets_py.logic.integration.reasoning.legal_ir_proof_feedback import proof_feedback_sample_digest
+    from ipfs_datasets_py.optimizers.logic_theorem_optimizer.trusted_feedback_trainer import _safe_structural_feature_key
+
+    left = auto.AdaptiveModalAutoencoder(compute_device="python")
+    right = auto.AdaptiveModalAutoencoder(compute_device="python")
+    assert left.compute_backend == right.compute_backend == "python"
+    left_state, right_state = prior.state_identity(left), prior.state_identity(right)
+    frame = replace(sample, selected_frame=None)
+    assert sample.selected_frame is not None and sample.sample_id == frame.sample_id
+    sample.validate()
+    frame.validate()
+    frame_collision = proof_feedback_sample_digest(sample) == proof_feedback_sample_digest(frame)
+    original_features = left._legal_ir_view_feature_keys_for(sample)
+    revised_warm_features = left._legal_ir_view_feature_keys_for(revised)
+    revised_cold_features = right._legal_ir_view_feature_keys_for(revised)
+    frame_cold_features = right._legal_ir_view_feature_keys_for(frame)
+    structural = lambda keys: [key for key in keys if _safe_structural_feature_key(key)][:24]
+    assert structural(original_features) != structural(frame_cold_features)
+    assert original_features != revised_cold_features
+    assert prior.state_identity(left) == left_state and prior.state_identity(right) == right_state
+
+    # Existing guard selects valid scope/receipt pins in the surrounding fixture.
+    # The probe only observes the primary seam and never applies either update.
+    gate = adapter.run_trainer(fixture, prior, versions, holdout, "selected-frame-change", intended,
+        frame, 0, targets={target.obligation_id: target})
+    return {"cases": [
+        {"case": "selected-frame-change-requires-current-feature-input", "passed": not frame_collision and gate["passed"],
+         "sample_digest_collision": frame_collision, "different_bounded_feature_input": True, "guard_observation": gate},
+        {"case": "revised-exceptions-require-current-feature-cache", "passed": revised_warm_features == revised_cold_features,
+         "existing_cache_key_alias": auto._sample_content_cache_id(sample) == auto._sample_content_cache_id(revised),
+         "cold_changed_from_orig": revised_cold_features != original_features,
+         "warm_equal_to_orig": revised_warm_features == original_features,
+         "warm_equal_to_current_cold": revised_warm_features == revised_cold_features,
+         "previous_and_current_content_sha": [proof_feedback_sample_digest(row) for row in (sample, revised)],
+         "changed_feature_counts": [len(set(original_features) - set(revised_cold_features)),
+                                    len(set(revised_cold_features) - set(original_features))]},
+    ], "state_unchanged": True}
+
+
+prior = adapter.load_prior()
+outcome = {}
+code = 2
+try:
+    prior.install_kernel_guards()
+    base = adapter.prepare_loader(prior, manifest)
+    outcome.update(feature_checks(prior))
+    assert not prior.denied
+    code = 0 if all(case["passed"] for case in outcome["cases"]) else 1
+except Exception as exc:
+    traceback.print_exc()
+    outcome["refusal"] = repr(exc)
+finally:
+    outcome.update(worker_rc=code, explicit_denials=prior.denied, kernel_guard=prior.guard,
+                   compiled=prior.compiled, project_body_bytes=prior.compiled_total,
+                   no_primary_or_auxiliary_numeric_updates=True, purpose="selection and revised feature identity RED")
+    print(json.dumps(outcome, sort_keys=True))
+raise SystemExit(code)

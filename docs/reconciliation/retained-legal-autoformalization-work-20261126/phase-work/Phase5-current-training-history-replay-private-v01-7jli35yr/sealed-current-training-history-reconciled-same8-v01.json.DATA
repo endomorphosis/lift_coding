@@ -1,0 +1,109 @@
+{
+  "all_exact_inputs": {
+    "Unicode_split_owner": {
+      "bytes": 61991,
+      "path": "/tmp/decoder-training-unicode-campaign-split-private-v01-3SZARfWx/replay/legal_ir_eval_splits.py",
+      "sha256": "e652c79842323fec40f3e5d8f6a23620c9b4ce4a2d1043c597176a13de3f4acd"
+    },
+    "candidate": {
+      "bytes": 179170,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-current-training-history-replay-private-v01-7jli35yr/training_cycle_inputs.after.py.DATA",
+      "sha256": "c172218316d2add710f45f3c0cd99f78fbc4a4f70616cfb875eb07930bea1b28"
+    },
+    "candidate_log": {
+      "bytes": 1650,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-current-training-history-replay-private-v01-7jli35yr/rebased.unittest.DATA",
+      "sha256": "bafed52516d2682a33718cfd41d41e8588277bbcb514a04dab8f0e3ca7e576d4"
+    },
+    "current_consumer": {
+      "bytes": 58356,
+      "path": "/tmp/decoder-training-native-credit-localization-private-v01-GnVsV1xX/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_consumer_binding.py",
+      "sha256": "ff8b61f71280f4c5d1d413feab33d5f9498f3cf560755492eafbbb0348d0bc82"
+    },
+    "current_log": {
+      "bytes": 10096,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-current-training-history-replay-private-v01-7jli35yr/exact-current.unittest.DATA",
+      "sha256": "728470eb7afd199ee211a599ac3131be87f894a0215b51c0fbf27d77ab90ecf1"
+    },
+    "current_training": {
+      "bytes": 177467,
+      "path": "/tmp/decoder-training-native-t5-selected-head-bound-private-v02/source-stage/ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py",
+      "sha256": "88125051a7b1d0dcc887f772faa750fa13b8a2141693679a62e2bd5e97e92db3"
+    },
+    "exact_tests": {
+      "bytes": 11370,
+      "path": "/tmp/decoder-training-unicode-campaign-split-private-v01-3SZARfWx/replay/test_unicode_history.py",
+      "sha256": "cfaa7309a5e1fb2e927e83794d3bfff0a488ee03909e08ed3834e1b6abeb1c3f"
+    },
+    "historical_after": {
+      "bytes": 186529,
+      "path": "/tmp/decoder-training-unicode-campaign-split-private-v01-3SZARfWx/replay/training_cycle_inputs.py",
+      "sha256": "7aeda0b01866056b109c3eefcca2fa4d7e97369c3438a61ed5a7542ff3bdf85b"
+    },
+    "historical_before": {
+      "bytes": 184826,
+      "path": "/tmp/decoder-training-native-compact-launch-binding-private-v01-LP9UjlKk/collection-only/stage/ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py",
+      "sha256": "9c2254df1c21e43831a1790fc5ed7b2426d4eb12026d1f7eee844e399d4a6432"
+    },
+    "legacy_split_owner": {
+      "bytes": 58213,
+      "path": "/tmp/decoder-training-split-membership-fix-private-v01/after/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py",
+      "sha256": "292cbe0624e6fa7a66917f59fdbe7b1b3e2a585d215bca7bcf6cd32f3bd985e9"
+    }
+  },
+  "all_other_source_bytes_preserved": true,
+  "current_canonical_blob_matches": {
+    "ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py": "303422a4cc76266c4659085685854c26efd64af1",
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_consumer_binding.py": "6fff65035cf9183b2e2c234621f4e6189551fae5"
+  },
+  "delta": {
+    "bytes": 8240,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-current-training-history-replay-private-v01-7jli35yr/training_cycle_inputs._reviewed_history.diff",
+    "sha256": "91d2dac03423c9dc0722d4da23632672cc7ba25bfe87f63821060e541551f8dd"
+  },
+  "exactly_one_replaced_function": "_reviewed_history",
+  "harness_only_current_before_after_and_consumer_reference_bindings": 3,
+  "observed_D_head": "8aebc34eb1e430b00c2b941cb256e853fe2adc02",
+  "observed_D_tree": "00cef1abedbef0ae383dc07df5f5efb22f5253bd",
+  "original_private_sealer_refusal_preserved": "After both real suites ran, the first wrapper stopped on its summary assertion. It subtracted subtest reports from the parent count. Parent-level outcomes were recovered from complete logs without rerunning either cohort.",
+  "same_eight_test_methods": [
+    "test_ascii_recomputed_across_unicode_training_history",
+    "test_committed_near_keys_still_block_mixed_profile_history",
+    "test_exact_unicode_replays_and_old_guard_refuses",
+    "test_mixed_candidate_pairs_share_the_existing_aggregate_bound",
+    "test_profile_cannot_change_when_its_fingerprint_happens_to_match",
+    "test_unicode_recomputed_across_legacy_holdout_keeps_withdrawal",
+    "test_unknown_or_stale_profile_refused_even_in_empty_manifest",
+    "test_unmarked_legacy_uses_old_owner_and_matches_exact_guard_result"
+  ],
+  "schema": "phase5-current-training-history-unicode-replay-reconciled-private/v1",
+  "scope": "Private AST-harness model-free tests over retained current code and fictional histories. No normal package qualification, actual training, legal admission, canonical Source operation or Git mutation.",
+  "test_fixture_ASTs_unchanged_during_execution": true,
+  "unbound_remaining_prerequisite": "Enable verified Unicode split producer and map assessment replay to a real current owner before end-to-end use.",
+  "verified_ordinary_unittest_parents_and_reports": {
+    "candidate": {
+      "assertion_failure_reports": 0,
+      "error_reports": 0,
+      "nonpass": 0,
+      "nonpassing_parent_names": [],
+      "pass": 8,
+      "unique_parent_count": 8
+    },
+    "current": {
+      "assertion_failure_reports": 4,
+      "error_reports": 4,
+      "nonpass": 7,
+      "nonpassing_parent_names": [
+        "test_ascii_recomputed_across_unicode_training_history",
+        "test_committed_near_keys_still_block_mixed_profile_history",
+        "test_exact_unicode_replays_and_old_guard_refuses",
+        "test_mixed_candidate_pairs_share_the_existing_aggregate_bound",
+        "test_profile_cannot_change_when_its_fingerprint_happens_to_match",
+        "test_unicode_recomputed_across_legacy_holdout_keeps_withdrawal",
+        "test_unknown_or_stale_profile_refused_even_in_empty_manifest"
+      ],
+      "pass": 1,
+      "unique_parent_count": 8
+    }
+  }
+}

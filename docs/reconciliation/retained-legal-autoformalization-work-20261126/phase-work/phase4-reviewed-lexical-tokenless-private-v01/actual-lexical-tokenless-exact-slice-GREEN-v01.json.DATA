@@ -1,0 +1,116 @@
+{
+  "D_HEAD": "4ccc8917b2168db8e11f54c5aadd4ca267f1c488",
+  "actual_passes": 8,
+  "outcomes": [
+    {
+      "mode": "lexical",
+      "ranking_boundary_reached": 0,
+      "rows": [
+        {
+          "abstention_reasons": [
+            "lexical_query_unscorable"
+          ],
+          "context": null,
+          "eligible_rows": 2,
+          "excluded_examples": [],
+          "id": "q",
+          "retrieved_ids": [],
+          "source_sha256": "ca7fd4db8367ba976402c94e39d8ec889baac2a58c252fe953cda51c1ea17545",
+          "status": "abstained"
+        }
+      ],
+      "text": "許可を申請する。"
+    },
+    {
+      "mode": "lexical",
+      "ranking_boundary_reached": 0,
+      "rows": [
+        {
+          "abstention_reasons": [
+            "lexical_query_unscorable"
+          ],
+          "context": null,
+          "eligible_rows": 2,
+          "excluded_examples": [],
+          "id": "q",
+          "retrieved_ids": [],
+          "source_sha256": "6287b224de0ac1d5686c50f445644829be6b21a75f85c6ce73a3f5531e726f5a",
+          "status": "abstained"
+        }
+      ],
+      "text": "記録を保存する。"
+    },
+    {
+      "mode": "lexical",
+      "ranking_boundary_reached": 1,
+      "rows": [],
+      "text": "apply for a permit"
+    },
+    {
+      "mode": "raw",
+      "ranking_boundary_reached": 1,
+      "rows": [],
+      "text": "許可を申請する。"
+    },
+    {
+      "mode": "joint",
+      "ranking_boundary_reached": 1,
+      "rows": [],
+      "text": "許可を申請する。"
+    },
+    {
+      "mode": "random",
+      "ranking_boundary_reached": 1,
+      "rows": [],
+      "text": "許可を申請する。"
+    },
+    {
+      "mode": "lexical",
+      "ranking_boundary_reached": 0,
+      "rows": [
+        {
+          "abstention_reasons": [
+            "query_representation_unavailable"
+          ],
+          "context": null,
+          "eligible_rows": 2,
+          "excluded_examples": [],
+          "id": "q",
+          "retrieved_ids": [],
+          "source_sha256": "ca7fd4db8367ba976402c94e39d8ec889baac2a58c252fe953cda51c1ea17545",
+          "status": "abstained"
+        }
+      ],
+      "status": "unavailable",
+      "top_k": 1
+    },
+    {
+      "mode": "lexical",
+      "ranking_boundary_reached": 0,
+      "rows": [
+        {
+          "abstention_reasons": [
+            "insufficient_permitted_training_examples"
+          ],
+          "context": null,
+          "eligible_rows": 2,
+          "excluded_examples": [],
+          "id": "q",
+          "retrieved_ids": [],
+          "source_sha256": "ca7fd4db8367ba976402c94e39d8ec889baac2a58c252fe953cda51c1ea17545",
+          "status": "abstained"
+        }
+      ],
+      "status": "available",
+      "top_k": 3
+    }
+  ],
+  "red": {
+    "bytes": 1773,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase4-reviewed-lexical-tokenless-private-v01/actual-lexical-tokenless-exact-slice-RED-v01.json",
+    "sha256": "95fcc09507b8f9d5315f5f1151cccc6ac81de33253c11c3a253c15611224de79"
+  },
+  "retriever_sha256": "b60874c3e8260f926cbd5eab18018c183417b594b9937a167854dbe45fcf9bac",
+  "schema": "reviewed-lexical-tokenless-exact-slice-green/v1",
+  "scope": "Same existing BM25 classes and reviewed retriever loop through its ranking boundary. Fictional already-replayed endpoints. Ordinary owning test, Torch/model execution, wider language coverage and checkpoint transition unqualified."
+}

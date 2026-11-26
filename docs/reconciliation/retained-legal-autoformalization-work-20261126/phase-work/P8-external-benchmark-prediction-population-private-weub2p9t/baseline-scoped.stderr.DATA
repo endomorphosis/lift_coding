@@ -1,0 +1,6 @@
+ERROR: found no collectors for /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-prediction-population-private-weub2p9t/test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py
+
+Traceback (most recent call last):
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-prediction-population-private-weub2p9t/run-private-scoped.py", line 88, in <module>
+    raise RuntimeError(f"Unobserved expected project imports: {sorted(set(modules) - set(actual))}")
+RuntimeError: Unobserved expected project imports: ['ipfs_datasets_py.logic.hammers.process_lifecycle', 'ipfs_datasets_py.logic.integration.reasoning.hammer', 'ipfs_datasets_py.logic.integration.reasoning.legal_ir_premise_security', 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_eval_splits', 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark', 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_family_evaluator', 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_semantic_metrics', 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.snapshot_evaluator']

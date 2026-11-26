@@ -1,0 +1,11 @@
+--- a/operator.py.DATA
++++ b/operator.py.DATA
+@@ -188,7 +188,7 @@
+ source.__file__ = source42['path']
+ sys.modules[source.__name__] = source
+ exec(compile(source_raw, source42['path'], 'exec'), source.__dict__)
+-report = {'schema': 'actual-frozen-local-D-phase2-bridge27-existing-owner/v1', 'selection': ROOT_SELECTION, 'phase_order': [], 'phases': {}, 'errors': [], 'software_sequence_accepted': False, 'qualification_complete': False, 'resource_cleanup_confirmed': False, 'Source_closed': False, 'canonical_Source_application': False, 'frozen_local_D_Git_READ_application': True, 'Source_WRITE_claimed': False, 'actual_collected_roster_is_count_authority': True, 'case_count_hint': 43, 'statutory_or_modelquality_or_convergence_authority': False}
++report = {'schema': 'actual-frozen-local-D-phase2-bridge27-existing-owner/v1', 'selection': ROOT_SELECTION, 'phase_order': [], 'phases': {}, 'errors': [], 'software_sequence_accepted': False, 'qualification_complete': False, 'resource_cleanup_confirmed': False, 'Source_closed': False, 'canonical_Source_application': False, 'frozen_local_D_Git_READ_application': True, 'Source_WRITE_claimed': False, 'actual_collected_roster_is_count_authority': True, 'case_count_hint': 40, 'statutory_or_modelquality_or_convergence_authority': False}
+ report.update(git_candidate_provenance=FINAL_D_PROVENANCE, additional_A_provenance=FINAL_A_PROVENANCE, binding_manifest_reference=FINAL_BINDING_MANIFEST_REFERENCE, source_read_binding_reference=D_READ_BINDING_REFERENCE, admitted_io_plan_reference=FINAL_ADMITTED_IO_PLAN_REFERENCE, effect_decision_reference=FINAL_EFFECT_DECISION_REFERENCE, source_epoch_sha256=H(epoch_raw), source_epoch_records=len(EPOCH), request_substitution_sha256=H(substitution), actual_expected_modules=EXPECTED_MODULES)
+ 
+ def metadata_guard():

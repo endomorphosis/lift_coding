@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions.py", line 56, in <module>
+    worker = physical(link("worker",raw("worker"),{"training_cycle_inputs":inputs, "admission":admission,
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-public-codec-terminal-hook-private-v01-3ct_f9yq/load_exact_cached_codec_fixture.py", line 113, in _compile_module
+    exec(compile(tree, module.__file__, "exec"), module.__dict__)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: empty body on If

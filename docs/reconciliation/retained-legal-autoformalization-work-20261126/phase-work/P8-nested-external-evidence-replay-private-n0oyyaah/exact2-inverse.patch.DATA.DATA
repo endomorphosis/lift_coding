@@ -1,0 +1,79 @@
+diff --git a/scripts/ops/legal_ir/hammer_leanstral_rollout_gate.py b/scripts/ops/legal_ir/hammer_leanstral_rollout_gate.py
+index c0d5615ac50e26a6c05dd4097933c311dbb7876e..da9d7603679ecc3bfc2f822a152d0f93147fa830 100644
+--- a/scripts/ops/legal_ir/hammer_leanstral_rollout_gate.py
++++ b/scripts/ops/legal_ir/hammer_leanstral_rollout_gate.py
+@@ -2452,16 +2452,6 @@
+         "external_validity_evidence",
+     )
+     packets = [packet for key in aliases if isinstance(packet := payload.get(key), Mapping)]
+-    evidence = payload.get("evidence")
+-    if isinstance(evidence, Mapping):
+-        # Replay typed gate packets wherever the compiler accepts domain evidence.
+-        # Unversioned nested status summaries remain domain metadata.
+-        packets.extend(
+-            packet
+-            for key in aliases
+-            if isinstance(packet := evidence.get(key), Mapping)
+-            and _schema_version(packet) == EXTERNAL_VALIDITY_PROMOTION_SCHEMA_VERSION
+-        )
+     if not packets and _schema_version(payload) == EXTERNAL_VALIDITY_PROMOTION_SCHEMA_VERSION:
+         packets.append(payload)
+     if not packets:
+diff --git a/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py b/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py
+index 6d222e36acfd2256962453d6fc37a4ce4f0c3033..c7e6fbcf666312c32434cdeabc9c345cf52410a3 100644
+--- a/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py
++++ b/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py
+@@ -503,53 +503,3 @@
+         assert result["external_validity_score"] == 0.5
+     elif evaluation == "subset":
+         assert "external_validity:external_benchmark_scores:selected_population_mismatch" in gate.failures
+-
+-
+-@pytest.mark.parametrize("alias", ["external_validity", "external_validity_evidence"])
+-@pytest.mark.parametrize("mode", ["nested-only", "matching-saved", "conflicting-saved"])
+-def test_compiler_replays_nested_external_gate_evidence(alias, mode, tmp_path, capsys):
+-    from tests.unit.optimizers.logic_theorem_optimizer.test_external_validity_promotion_gate import (
+-        _actual_external_benchmark_report,
+-    )
+-    from scripts.ops.legal_ir.hammer_leanstral_rollout_gate import external_validity_promotion_gate
+-
+-    raw = _make_external_subgate_input(current=True)
+-    producer_report = _actual_external_benchmark_report()
+-    rows = producer_report["external_validity"]["packet_results"]
+-    assert producer_report["accepted"] is True and len(rows) == 2
+-    raw["expected_external_benchmark"] = {
+-        "benchmark_digest": producer_report["benchmark_digest"],
+-        "packet_ids": [row["packet_id"] for row in rows],
+-    }
+-    raw["evidence"]["external_benchmark_scores"] = _bind(producer_report)
+-
+-    evidence = _complete_evidence()
+-    if mode == "nested-only":
+-        del evidence["external_validity"]
+-    else:
+-        evidence["external_validity"] = _save_external_subgate_decision(raw, tmp_path, capsys)
+-    if mode == "conflicting-saved":
+-        raw["expected_external_benchmark"]["packet_ids"].reverse()
+-
+-    expected_acceptance = mode != "conflicting-saved"
+-    assert external_validity_promotion_gate(raw).accepted is expected_acceptance
+-    evidence["evidence"][alias] = raw
+-    decision = compiler_system_promotion_gate(evidence)
+-
+-    assert decision.accepted is expected_acceptance, decision.failures
+-    if expected_acceptance:
+-        assert decision.failures == []
+-        scores = decision.metrics["external_validity"]["evidence_domains"]["external_benchmark_scores"]
+-        assert scores["selected_population_reconciled"] is True
+-    else:
+-        assert "external_validity:external_validity_inputs_disagree" in decision.failures
+-        assert "external_validity:external_benchmark_scores:selected_population_mismatch" in decision.failures
+-
+-
+-def test_compiler_keeps_legacy_nested_external_domain_status(tmp_path, capsys):
+-    raw = _make_external_subgate_input(current=True)
+-    evidence = _complete_evidence()
+-    evidence["external_validity"] = _save_external_subgate_decision(raw, tmp_path, capsys)
+-    evidence["evidence"]["external_validity"] = {"accepted": True}
+-    decision = compiler_system_promotion_gate(evidence)
+-    assert decision.accepted and decision.failures == []

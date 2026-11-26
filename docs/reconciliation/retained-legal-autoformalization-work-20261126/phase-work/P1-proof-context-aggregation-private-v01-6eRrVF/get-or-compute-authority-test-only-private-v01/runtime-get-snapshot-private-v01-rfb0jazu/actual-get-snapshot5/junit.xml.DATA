@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="5" skipped="0" tests="5" time="2.141" timestamp="2026-11-25T06:09:16.620194+00:00" hostname="spark-b271"><testcase classname="test_proof_cache" name="test_unified_get_eligibility_snapshot_after_actual_lookup[none]" time="0.359"><failure message="AssertionError: assert {'max_evidenc...M: 'theorem'&gt;} == {'now': 100.0...M: 'theorem'&gt;}&#10;  &#10;  Omitting 2 identical items, use -vv to show&#10;  Left contains 2 more items:&#10;  {'max_evidence_authority': None, 'max_trust_level': None}&#10;  Use -v to get more diff">test_proof_cache.py:1870: in test_unified_get_eligibility_snapshot_after_actual_lookup
+    returned = store.get(initial.key, **policy, now=100.0)
+../duckdb_proof_store.captured-current.py.DATA:2343: in get
+    result = self.lookup(
+test_proof_cache.py:1859: in after_actual_lookup
+    assert kwargs == {**policy, "now": 100.0}
+E   AssertionError: assert {'max_evidenc...M: 'theorem'&gt;} == {'now': 100.0...M: 'theorem'&gt;}
+E     
+E     Omitting 2 identical items, use -vv to show
+E     Left contains 2 more items:
+E     {'max_evidence_authority': None, 'max_trust_level': None}
+E     Use -v to get more diff</failure></testcase><testcase classname="test_proof_cache" name="test_unified_get_eligibility_snapshot_after_actual_lookup[equivalent-put]" time="0.183"><failure message="AssertionError: assert {'max_evidenc...M: 'theorem'&gt;} == {'now': 100.0...M: 'theorem'&gt;}&#10;  &#10;  Omitting 2 identical items, use -vv to show&#10;  Left contains 2 more items:&#10;  {'max_evidence_authority': None, 'max_trust_level': None}&#10;  Use -v to get more diff">test_proof_cache.py:1870: in test_unified_get_eligibility_snapshot_after_actual_lookup
+    returned = store.get(initial.key, **policy, now=100.0)
+../duckdb_proof_store.captured-current.py.DATA:2343: in get
+    result = self.lookup(
+test_proof_cache.py:1859: in after_actual_lookup
+    assert kwargs == {**policy, "now": 100.0}
+E   AssertionError: assert {'max_evidenc...M: 'theorem'&gt;} == {'now': 100.0...M: 'theorem'&gt;}
+E     
+E     Omitting 2 identical items, use -vv to show
+E     Left contains 2 more items:
+E     {'max_evidence_authority': None, 'max_trust_level': None}
+E     Use -v to get more diff</failure></testcase><testcase classname="test_proof_cache" name="test_unified_get_eligibility_snapshot_after_actual_lookup[invalidate]" time="0.200"><failure message="AssertionError: assert {'max_evidenc...M: 'theorem'&gt;} == {'now': 100.0...M: 'theorem'&gt;}&#10;  &#10;  Omitting 2 identical items, use -vv to show&#10;  Left contains 2 more items:&#10;  {'max_evidence_authority': None, 'max_trust_level': None}&#10;  Use -v to get more diff">test_proof_cache.py:1870: in test_unified_get_eligibility_snapshot_after_actual_lookup
+    returned = store.get(initial.key, **policy, now=100.0)
+../duckdb_proof_store.captured-current.py.DATA:2343: in get
+    result = self.lookup(
+test_proof_cache.py:1859: in after_actual_lookup
+    assert kwargs == {**policy, "now": 100.0}
+E   AssertionError: assert {'max_evidenc...M: 'theorem'&gt;} == {'now': 100.0...M: 'theorem'&gt;}
+E     
+E     Omitting 2 identical items, use -vv to show
+E     Left contains 2 more items:
+E     {'max_evidence_authority': None, 'max_trust_level': None}
+E     Use -v to get more diff</failure></testcase><testcase classname="test_proof_cache" name="test_unified_get_eligibility_snapshot_after_actual_lookup[result-authority]" time="0.186"><failure message="AssertionError: assert {'max_evidenc...M: 'theorem'&gt;} == {'now': 100.0...M: 'theorem'&gt;}&#10;  &#10;  Omitting 2 identical items, use -vv to show&#10;  Left contains 2 more items:&#10;  {'max_evidence_authority': None, 'max_trust_level': None}&#10;  Use -v to get more diff">test_proof_cache.py:1870: in test_unified_get_eligibility_snapshot_after_actual_lookup
+    returned = store.get(initial.key, **policy, now=100.0)
+../duckdb_proof_store.captured-current.py.DATA:2343: in get
+    result = self.lookup(
+test_proof_cache.py:1859: in after_actual_lookup
+    assert kwargs == {**policy, "now": 100.0}
+E   AssertionError: assert {'max_evidenc...M: 'theorem'&gt;} == {'now': 100.0...M: 'theorem'&gt;}
+E     
+E     Omitting 2 identical items, use -vv to show
+E     Left contains 2 more items:
+E     {'max_evidence_authority': None, 'max_trust_level': None}
+E     Use -v to get more diff</failure></testcase><testcase classname="test_proof_cache" name="test_unified_get_eligibility_snapshot_after_actual_lookup[trust-ceiling]" time="0.187"><failure message="AssertionError: assert {'max_evidenc...hority': None} == {'max_trust_l... 'now': 100.0}&#10;  &#10;  Omitting 2 identical items, use -vv to show&#10;  Left contains 2 more items:&#10;  {'max_evidence_authority': None, 'require_result_authority': None}&#10;  Use -v to get more diff">test_proof_cache.py:1870: in test_unified_get_eligibility_snapshot_after_actual_lookup
+    returned = store.get(initial.key, **policy, now=100.0)
+../duckdb_proof_store.captured-current.py.DATA:2343: in get
+    result = self.lookup(
+test_proof_cache.py:1859: in after_actual_lookup
+    assert kwargs == {**policy, "now": 100.0}
+E   AssertionError: assert {'max_evidenc...hority': None} == {'max_trust_l... 'now': 100.0}
+E     
+E     Omitting 2 identical items, use -vv to show
+E     Left contains 2 more items:
+E     {'max_evidence_authority': None, 'require_result_authority': None}
+E     Use -v to get more diff</failure></testcase></testsuite></testsuites>

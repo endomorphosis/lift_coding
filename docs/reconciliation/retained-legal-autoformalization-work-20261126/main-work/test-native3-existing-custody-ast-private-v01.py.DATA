@@ -1,0 +1,276 @@
+"""Exact operator AST, fictional classes/IO only; never imports the project SDK."""
+from __future__ import annotations
+import argparse
+import ast
+import copy
+import hashlib
+import io
+import json
+import os
+from pathlib import Path
+import stat
+import sys
+import traceback
+import types
+import unittest
+
+
+class PrimaryFailure(RuntimeError):
+    pass
+
+
+class SecondaryFailure(RuntimeError):
+    pass
+
+
+class ObservedCustodyHold(BaseException):
+    """Test trace stops at the original loop header, outside its inner catch."""
+
+
+class FictionalResult:
+    def __init__(self, *, no_child=False, clean=True, serialization_error=None):
+        self.pid = None if no_child else 123
+        self.native_lifecycle = None if no_child else {'cleanup_confirmed': clean}
+        self.workspace_cleaned = clean
+        self.returncode = None if no_child else 0
+        self.serialization_error = serialization_error
+
+    def to_dict(self):
+        if self.serialization_error is not None:
+            raise self.serialization_error
+        value = dict(pid=self.pid, returncode=self.returncode, workspace_cleaned=self.workspace_cleaned)
+        # Actual current process.py omits absent lifecycle; never synthesize null.
+        if self.native_lifecycle is not None:
+            value['native_lifecycle'] = dict(self.native_lifecycle)
+        return value
+
+
+class FictionalObservation:
+    cleanup_confirmed = True
+
+    def to_dict(self):
+        return {'cleanup_confirmed': self.cleanup_confirmed}
+
+
+class FictionalCleanupHandle:
+    def __init__(self):
+        self.calls = 0
+
+    def retry_cleanup(self):
+        self.calls += 1
+        return FictionalObservation()
+
+
+class FictionalOwnedCleanupError(PrimaryFailure):
+    def __init__(self, handle):
+        super().__init__('fictional actual-handle cleanup failure')
+        self.cleanup_handle = handle
+
+
+class FictionalBoundedRunner:
+    def __init__(self, result, error=None):
+        self.result, self.error = result, error
+
+    def run(self, request):
+        result = self.result
+        owned_handle = getattr(self.error, 'cleanup_handle', None)
+        if self.error is not None:
+            raise self.error
+        return result
+
+
+class FictionalManagedRunner:
+    def __init__(self, bounded, error=None):
+        self.bounded, self.error = bounded, error
+
+    def run(self, request):
+        result = self.bounded.run(request)
+        if self.error is not None:
+            raise self.error
+        return result
+
+
+def load_function(raw, filename):
+    tree = ast.parse(raw)
+    node = next(n for n in ast.walk(tree) if isinstance(n, ast.FunctionDef) and n.name == 'run_with_actual_custody')
+    return node, compile(ast.fix_missing_locations(ast.Module(body=[copy.deepcopy(node)], type_ignores=[])), filename, 'exec')
+
+
+def suite_for(raw, filename):
+    node, function_code = load_function(raw, filename)
+    loop_lines = {n.lineno for n in ast.walk(node) if isinstance(n, ast.While) and isinstance(n.test, ast.Constant) and n.test.value is True}
+
+    class CustodyASTTests(unittest.TestCase):
+        def setup_scope(self, *, guard_error=None, retention_error=None, diagnostic_error=None):
+            self.retained, self.checkpoints, self.readbacks, self.prints, self.guards = [], [], [], [], []
+            report = {'native_attempts': [], 'actual_native_qualification': False}
+
+            def native_guard():
+                self.guards.append(True)
+                if len(self.guards) == 2 and guard_error is not None:
+                    raise guard_error
+
+            def retain_result(result, request, *, returned):
+                if retention_error is not None:
+                    raise retention_error
+                self.retained.append((result, request, returned))
+
+            def retain_json(name, value):
+                self.checkpoints.append((name, copy.deepcopy(value)))
+                if diagnostic_error is not None:
+                    raise diagnostic_error
+                raw = (json.dumps(value, sort_keys=True) + '\n').encode()
+                return {'path': '/fictional-private/' + name, 'bytes': len(raw), 'sha256': hashlib.sha256(raw).hexdigest()}
+
+            def read_private(path, size, digest):
+                self.readbacks.append((path, size, digest))
+                return b'fictional readback returned only by explicit fake IO'
+
+            scope = {'sdk': types.SimpleNamespace(ToolRunResult=FictionalResult, BoundedToolRunner=FictionalBoundedRunner,
+                       OwnedToolCleanupError=FictionalOwnedCleanupError, NativeToolCleanupHandle=FictionalCleanupHandle),
+                     'admitted': types.SimpleNamespace(ResourceAdmittedToolRunner=FictionalManagedRunner),
+                     'native_guard': native_guard, 'retain_sdk_result': retain_result, 'retain_json': retain_json,
+                     'read_private': read_private, 'report': report, 'traceback': traceback,
+                     'json': json, 'os': types.SimpleNamespace(getpid=lambda: 123),
+                     'time': types.SimpleNamespace(sleep=lambda _: None),
+                     'print': lambda *a, **k: self.prints.append((a, k))}
+            exec(function_code, scope)
+            self.scope, self.report, self.function = scope, report, scope['run_with_actual_custody']
+            return self.function
+
+        def call(self, method):
+            visits = {}
+            def observe(frame, event, arg):
+                if frame.f_code is self.function.__code__ and event == 'line' and frame.f_lineno in loop_lines:
+                    visits[frame.f_lineno] = visits.get(frame.f_lineno, 0) + 1
+                    if frame.f_locals.get('handle') is None or visits[frame.f_lineno] > 2:
+                        raise ObservedCustodyHold('bounded observation of unchanged custody hold')
+                return observe
+            prior = sys.gettrace()
+            try:
+                sys.settrace(observe)
+                return self.function(method, 'fictional-request')
+            finally:
+                sys.settrace(prior)
+
+        def assert_no_success(self):
+            self.assertIs(self.report['actual_native_qualification'], False)
+
+        def test_normal_return_keeps_exact_result(self):
+            result = FictionalResult(); self.setup_scope()
+            value = self.call(FictionalManagedRunner(FictionalBoundedRunner(result)).run)
+            self.assertIs(value, result)
+            self.assertEqual(self.retained, [(result, 'fictional-request', True)])
+            self.assertEqual(len(self.guards), 2); self.assert_no_success()
+
+        def test_managed_exit_failure_retains_exact_result_and_primary(self):
+            result = FictionalResult(); primary = PrimaryFailure('lease exit after actual result')
+            self.setup_scope()
+            try:
+                self.call(FictionalManagedRunner(FictionalBoundedRunner(result), primary).run)
+            except PrimaryFailure as caught:
+                self.assertIs(caught, primary)
+            else:
+                self.fail('primary error missing')
+            self.assertEqual(self.retained, [(result, 'fictional-request', False)])
+            self.assert_no_success()
+
+        def test_known_no_child_refusal_does_not_stall_on_missing_lifecycle_key(self):
+            for no_child in (True, False):
+                with self.subTest(no_child=no_child):
+                    result = FictionalResult(no_child=no_child); primary = PrimaryFailure('post-result guard error')
+                    self.setup_scope(guard_error=primary)
+                    try:
+                        self.call(FictionalManagedRunner(FictionalBoundedRunner(result)).run)
+                    except PrimaryFailure as caught:
+                        self.assertIs(caught, primary)
+                    else:
+                        self.fail('primary error missing')
+                    self.assertEqual(self.retained, [(result, 'fictional-request', True)])
+                    self.assert_no_success()
+
+        def test_bounded_error_keeps_actual_handle_and_result(self):
+            result = FictionalResult(clean=False); handle = FictionalCleanupHandle()
+            primary = FictionalOwnedCleanupError(handle); self.setup_scope()
+            try:
+                self.call(FictionalManagedRunner(FictionalBoundedRunner(result, primary)).run)
+            except FictionalOwnedCleanupError as caught:
+                self.assertIs(caught, primary)
+            else:
+                self.fail('primary error missing')
+            self.assertEqual(self.retained, [(result, 'fictional-request', False)])
+            self.assertEqual(handle.calls, 1); self.assert_no_success()
+
+        def test_unknown_dispatch_checkpoints_and_keeps_custody(self):
+            primary = PrimaryFailure('unknown post-dispatch failure'); self.setup_scope()
+            def unknown(request):
+                raise primary
+            with self.assertRaises(ObservedCustodyHold):
+                self.call(unknown)
+            self.assertEqual(self.retained, [])
+            self.assertEqual(len(self.checkpoints), 1); self.assertEqual(len(self.readbacks), 1)
+            checkpoint = self.checkpoints[0][1]
+            self.assertEqual(checkpoint['failure']['type'], 'PrimaryFailure')
+            self.assertIs(checkpoint['actual_result_present'], False)
+            self.assert_no_success()
+
+        def test_diagnostic_write_error_does_not_end_ambiguous_custody(self):
+            primary = PrimaryFailure('unknown post-dispatch failure'); secondary = SecondaryFailure('diagnostic IO')
+            self.setup_scope(diagnostic_error=secondary)
+            def unknown(request):
+                raise primary
+            with self.assertRaises(ObservedCustodyHold):
+                self.call(unknown)
+            self.assertEqual(len(self.checkpoints), 1)
+            self.assertEqual(self.report['owned_cleanup_pending']['original_error_type'], 'PrimaryFailure')
+            self.assertEqual(self.report['custody_checkpoint_error']['type'], 'SecondaryFailure')
+            self.assert_no_success()
+
+        def test_retention_failure_keeps_raw_result_and_original_error_in_custody(self):
+            result = FictionalResult(); primary = SecondaryFailure('raw retention failure')
+            self.setup_scope(retention_error=primary)
+            with self.assertRaises(ObservedCustodyHold):
+                self.call(FictionalManagedRunner(FictionalBoundedRunner(result)).run)
+            self.assertEqual(len(self.checkpoints), 1)
+            checkpoint = self.checkpoints[0][1]
+            self.assertIs(checkpoint['actual_result_present'], True)
+            self.assertIs(checkpoint['raw_result_retention_complete'], False)
+            self.assertEqual(checkpoint['failure']['type'], 'SecondaryFailure')
+            self.assert_no_success()
+
+        def test_serialization_failure_does_not_replace_primary_or_drop_result(self):
+            primary = PrimaryFailure('post-result guard failure'); secondary = SecondaryFailure('to_dict failure')
+            result = FictionalResult(serialization_error=secondary)
+            self.setup_scope(guard_error=primary)
+            with self.assertRaises(ObservedCustodyHold):
+                self.call(FictionalManagedRunner(FictionalBoundedRunner(result)).run)
+            self.assertEqual(self.retained, [(result, 'fictional-request', True)])
+            self.assertEqual(self.checkpoints[0][1]['failure']['type'], 'PrimaryFailure')
+            self.assert_no_success()
+    return unittest.defaultTestLoader.loadTestsFromTestCase(CustodyASTTests), node
+
+
+def main():
+    parser = argparse.ArgumentParser(); parser.add_argument('--source', required=True); parser.add_argument('--sha256', required=True); parser.add_argument('--output', required=True)
+    args = parser.parse_args(); path = Path(args.source); before = path.lstat(); fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+    try:
+        raw = b''
+        while piece := os.read(fd, 65536): raw += piece
+        fields = ('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
+        assert all(getattr(before,k)==getattr(os.fstat(fd),k)==getattr(path.lstat(),k) for k in fields)
+    finally: os.close(fd)
+    assert stat.S_ISREG(before.st_mode) and before.st_nlink == 1 and hashlib.sha256(raw).hexdigest() == args.sha256
+    suite,node = suite_for(raw, str(path)); stream = io.StringIO(); result = unittest.TextTestRunner(stream=stream, verbosity=2).run(suite)
+    value = dict(source={'path':str(path),'bytes':len(raw),'sha256':args.sha256}, exact_function_AST_sha256=hashlib.sha256(ast.dump(node,include_attributes=False).encode()).hexdigest(), tests_run=result.testsRun, failures=len(result.failures), errors=len(result.errors), skipped=len(result.skipped), output=stream.getvalue(), scope='EXACT function AST, fictional classes and IO; line trace only bounds original custody loops. No SDK/project imports, Source/Native/lease or real cleanup execution.', actual_Source=False,actual_SDK=False,actual_Native=False,legal_admission=False)
+    saved=(json.dumps(value,indent=2,sort_keys=True)+'\n').encode(); out=Path(args.output);fd=os.open(out,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400)
+    try:
+        todo=memoryview(saved)
+        while todo:
+            n=os.write(fd,todo);assert n>0;todo=todo[n:]
+        os.fsync(fd)
+    finally:os.close(fd)
+    assert out.read_bytes()==saved
+    print(json.dumps({'result':str(out),'bytes':len(saved),'sha256':hashlib.sha256(saved).hexdigest(),'tests_run':result.testsRun,'failures':len(result.failures),'errors':len(result.errors),'skipped':len(result.skipped)}))
+
+
+if __name__ == '__main__': main()

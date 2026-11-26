@@ -1,0 +1,65 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.3.4, pluggy-1.6.0
+rootdir: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-eight-target-private-joined-pytest-v01-VdZf8Ohx/stage
+configfile: pytest.ini
+asyncio: mode=Mode.STRICT
+collected 131 items
+
+tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py . [  0%]
+........................................................................ [ 55%]
+.....................................                                    [ 83%]
+tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_consumer_binding.py . [ 84%]
+....                                                                     [ 87%]
+tests/unit/logic/test_autoformal_campaign_training_inputs.py ..........  [ 95%]
+tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py . [ 96%]
+..FFF                                                                    [100%]
+
+=================================== FAILURES ===================================
+_ test_aggregate_v4_holds_out_unicode_near_duplicate_from_unselected_component[unicode_unrelated] _
+tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py:4441: in test_aggregate_v4_holds_out_unicode_near_duplicate_from_unselected_component
+    ch, options, payload = _aggregate_v4_heldout_case(
+tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py:3451: in _aggregate_v4_heldout_case
+    payload=structured.consume_reviewed_contexts_v4(**context,
+ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_structured_retrieval.py:1135: in consume_reviewed_contexts_v4
+    pins = _rich_implementation("v4")
+ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_structured_retrieval.py:583: in _rich_implementation
+    handoff, admission, consumer = _rich_owners(_admission_version)
+ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_structured_retrieval.py:576: in _rich_owners
+    _, handoff, _, admission = joint._reviewed_owners(_admission_version)
+ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_joint_retrieval.py:440: in _reviewed_owners
+    from ...logic.formalization.autoencoder import alignment_masked_contrastive as objective
+E   ImportError: cannot import name 'alignment_masked_contrastive' from 'ipfs_datasets_py.logic.formalization.autoencoder' (/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-eight-target-private-joined-pytest-v01-VdZf8Ohx/stage/ipfs_datasets_py/logic/formalization/autoencoder/__init__.py)
+_ test_aggregate_v4_holds_out_unicode_near_duplicate_from_unselected_component[unicode_second_alias] _
+tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py:4441: in test_aggregate_v4_holds_out_unicode_near_duplicate_from_unselected_component
+    ch, options, payload = _aggregate_v4_heldout_case(
+tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py:3451: in _aggregate_v4_heldout_case
+    payload=structured.consume_reviewed_contexts_v4(**context,
+ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_structured_retrieval.py:1135: in consume_reviewed_contexts_v4
+    pins = _rich_implementation("v4")
+ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_structured_retrieval.py:583: in _rich_implementation
+    handoff, admission, consumer = _rich_owners(_admission_version)
+ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_structured_retrieval.py:576: in _rich_owners
+    _, handoff, _, admission = joint._reviewed_owners(_admission_version)
+ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_joint_retrieval.py:440: in _reviewed_owners
+    from ...logic.formalization.autoencoder import alignment_masked_contrastive as objective
+E   ImportError: cannot import name 'alignment_masked_contrastive' from 'ipfs_datasets_py.logic.formalization.autoencoder' (/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-eight-target-private-joined-pytest-v01-VdZf8Ohx/stage/ipfs_datasets_py/logic/formalization/autoencoder/__init__.py)
+_ test_aggregate_v4_actual_evaluator_dispatches_both_complete_components_and_definitions _
+tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py:3463: in test_aggregate_v4_actual_evaluator_dispatches_both_complete_components_and_definitions
+    ch, options, payload = _aggregate_v4_heldout_case()
+tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py:3451: in _aggregate_v4_heldout_case
+    payload=structured.consume_reviewed_contexts_v4(**context,
+ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_structured_retrieval.py:1135: in consume_reviewed_contexts_v4
+    pins = _rich_implementation("v4")
+ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_structured_retrieval.py:583: in _rich_implementation
+    handoff, admission, consumer = _rich_owners(_admission_version)
+ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_structured_retrieval.py:576: in _rich_owners
+    _, handoff, _, admission = joint._reviewed_owners(_admission_version)
+ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_joint_retrieval.py:440: in _reviewed_owners
+    from ...logic.formalization.autoencoder import alignment_masked_contrastive as objective
+E   ImportError: cannot import name 'alignment_masked_contrastive' from 'ipfs_datasets_py.logic.formalization.autoencoder' (/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-eight-target-private-joined-pytest-v01-VdZf8Ohx/stage/ipfs_datasets_py/logic/formalization/autoencoder/__init__.py)
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-eight-target-private-joined-pytest-v01-VdZf8Ohx/private-run.junit.xml -
+=========================== short test summary info ============================
+FAILED tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py::test_aggregate_v4_holds_out_unicode_near_duplicate_from_unselected_component[unicode_unrelated]
+FAILED tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py::test_aggregate_v4_holds_out_unicode_near_duplicate_from_unselected_component[unicode_second_alias]
+FAILED tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py::test_aggregate_v4_actual_evaluator_dispatches_both_complete_components_and_definitions
+=================== 3 failed, 128 passed in 85.34s (0:01:25) ===================

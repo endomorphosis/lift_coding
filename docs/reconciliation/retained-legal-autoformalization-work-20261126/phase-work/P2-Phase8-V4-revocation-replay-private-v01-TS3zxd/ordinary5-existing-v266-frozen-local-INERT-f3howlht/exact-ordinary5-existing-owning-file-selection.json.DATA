@@ -1,0 +1,20 @@
+{
+  "actual_collect_is_roster_and_order_authority": true,
+  "expected_function_case_counts": {
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_actual_explicit_cli_is_source_only": 2,
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_cli_refuses_native_selection": 1,
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_complete_source_use_whole_norm_project_is_independently_replayed": 1,
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_current_replay_refuses_genuinely_revoked_reviewer": 1
+  },
+  "function_count": 4,
+  "function_selectors": [
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_complete_source_use_whole_norm_project_is_independently_replayed",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_actual_explicit_cli_is_source_only",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_cli_refuses_native_selection",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_current_replay_refuses_genuinely_revoked_reviewer"
+  ],
+  "literal_expected_cases": 5,
+  "owning_files": [
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py"
+  ]
+}

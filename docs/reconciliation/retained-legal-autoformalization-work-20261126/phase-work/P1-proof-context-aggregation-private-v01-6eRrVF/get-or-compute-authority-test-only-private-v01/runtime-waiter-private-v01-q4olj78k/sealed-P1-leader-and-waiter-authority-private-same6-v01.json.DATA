@@ -1,0 +1,549 @@
+{
+  "SQL_test_or_native_fixture_claim": false,
+  "all_implicit_io_quantified": false,
+  "attempts": {
+    "green": {
+      "Junit": {
+        "bytes": 1100,
+        "full9": {
+          "st_ctime_ns": "1795582862030733718",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102744",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795582862030733718",
+          "st_nlink": "1",
+          "st_size": "1100",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-waiter-private-v01-q4olj78k/green/junit.xml",
+        "sha256": "1c4456428b39cde015be4b9768ae639e96483ee9f4f0333ddebae015cbbd1c9d"
+      },
+      "collection_failed_before_tests": false,
+      "control": {
+        "bytes": 26852,
+        "full9": {
+          "st_ctime_ns": "1795582862032467569",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102741",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795582862032467569",
+          "st_nlink": "1",
+          "st_size": "26852",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-waiter-private-v01-q4olj78k/green/run-control.json",
+        "sha256": "4e421ec804e883811083e73f4098693e94fc5b24fbc6857f25828b939fcd8a6f"
+      },
+      "exit": 0,
+      "explicit_cached_read_bytes": 3204767,
+      "failures": 0,
+      "passes": 6,
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795582858790712081",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102738",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795582858790712081",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-waiter-private-v01-q4olj78k/actual-green.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 414,
+        "full9": {
+          "st_ctime_ns": "1795582862032467569",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102737",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795582862032467569",
+          "st_nlink": "1",
+          "st_size": "414",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-waiter-private-v01-q4olj78k/actual-green.stdout",
+        "sha256": "2191100a0a6418b634030abdc38ae121d06022cacf46d7d4ca1c14e330a9c57f"
+      }
+    },
+    "red": {
+      "Junit": {
+        "bytes": 1020,
+        "full9": {
+          "st_ctime_ns": "1795582632442243258",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102679",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795582632442243258",
+          "st_nlink": "1",
+          "st_size": "1020",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-waiter-private-v01-q4olj78k/red/junit.xml",
+        "sha256": "00fcf93024fda612c91344f1a5aa153ef22fa3b94834f70d1f4ffbeaaf66f558"
+      },
+      "collection_failed_before_tests": true,
+      "control": {
+        "bytes": 1222,
+        "full9": {
+          "st_ctime_ns": "1795582632444455549",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102676",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795582632444455549",
+          "st_nlink": "1",
+          "st_size": "1222",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-waiter-private-v01-q4olj78k/red/run-control.json",
+        "sha256": "d9dfdc04dca982c6cde9b0085bfb59df0ac5b11c97ad8d5e7c56c3f669e794d2"
+      },
+      "exit": 4,
+      "explicit_cached_read_bytes": 684670,
+      "failures": 0,
+      "passes": 0,
+      "stderr": {
+        "bytes": 792,
+        "full9": {
+          "st_ctime_ns": "1795582632442243258",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102673",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795582632442243258",
+          "st_nlink": "1",
+          "st_size": "792",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-waiter-private-v01-q4olj78k/actual-red.stderr",
+        "sha256": "48334bbdb7ee275ce72929b12dd26e2339b7b3f3f6a410986412b028b0e41bb6"
+      },
+      "stdout": {
+        "bytes": 1355,
+        "full9": {
+          "st_ctime_ns": "1795582632444455549",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102672",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795582632444455549",
+          "st_nlink": "1",
+          "st_size": "1355",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-waiter-private-v01-q4olj78k/actual-red.stdout",
+        "sha256": "e7111cc3972ed9e1aeb3e64637bc2eb28dec0ec08629e8da67c352054ff0b8e7"
+      }
+    },
+    "red-v02": {
+      "Junit": {
+        "bytes": 1020,
+        "full9": {
+          "st_ctime_ns": "1795582647729509218",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102688",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795582647729509218",
+          "st_nlink": "1",
+          "st_size": "1020",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-waiter-private-v01-q4olj78k/red-v02/junit.xml",
+        "sha256": "16ba118a847edf19a84bcdf765fce1858698c52a29e89fa101577d5f26d5cc92"
+      },
+      "collection_failed_before_tests": true,
+      "control": {
+        "bytes": 1222,
+        "full9": {
+          "st_ctime_ns": "1795582647730652971",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102685",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795582647730652971",
+          "st_nlink": "1",
+          "st_size": "1222",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-waiter-private-v01-q4olj78k/red-v02/run-control.json",
+        "sha256": "d9dfdc04dca982c6cde9b0085bfb59df0ac5b11c97ad8d5e7c56c3f669e794d2"
+      },
+      "exit": 4,
+      "explicit_cached_read_bytes": 684670,
+      "failures": 0,
+      "passes": 0,
+      "stderr": {
+        "bytes": 800,
+        "full9": {
+          "st_ctime_ns": "1795582647729509218",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102682",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795582647729509218",
+          "st_nlink": "1",
+          "st_size": "800",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-waiter-private-v01-q4olj78k/actual-red-v02.stderr",
+        "sha256": "7cad9ccda9901193fd94eb5931505716411b2c62f220bbe5d052a59f9436cb0e"
+      },
+      "stdout": {
+        "bytes": 1359,
+        "full9": {
+          "st_ctime_ns": "1795582647730652971",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102681",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795582647730652971",
+          "st_nlink": "1",
+          "st_size": "1359",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-waiter-private-v01-q4olj78k/actual-red-v02.stdout",
+        "sha256": "fa15115df16b7ebf476ce39aa15b6b418dce97e54fdd7cd84310dddaecfeefe3"
+      }
+    },
+    "red-v03": {
+      "Junit": {
+        "bytes": 1864,
+        "full9": {
+          "st_ctime_ns": "1795582816872689292",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102733",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795582816872689292",
+          "st_nlink": "1",
+          "st_size": "1864",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-waiter-private-v01-q4olj78k/red-v03/junit.xml",
+        "sha256": "df9ef35a75d572fbc8b306c8aecf0fbd7cae74748bd181f5c7d97873bb087086"
+      },
+      "collection_failed_before_tests": false,
+      "control": {
+        "bytes": 26826,
+        "full9": {
+          "st_ctime_ns": "1795582816874148342",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102730",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795582816874148342",
+          "st_nlink": "1",
+          "st_size": "26826",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-waiter-private-v01-q4olj78k/red-v03/run-control.json",
+        "sha256": "ec25c03576220ad3af77fa976a163b63dfb6ada75c58d2c511fcc51e9b250ac0"
+      },
+      "exit": 1,
+      "explicit_cached_read_bytes": 3204944,
+      "failures": 1,
+      "passes": 5,
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795582813590414189",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102727",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795582813590414189",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-waiter-private-v01-q4olj78k/actual-red-v03.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 1208,
+        "full9": {
+          "st_ctime_ns": "1795582816874148342",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102726",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795582816874148342",
+          "st_nlink": "1",
+          "st_size": "1208",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-waiter-private-v01-q4olj78k/actual-red-v03.stdout",
+        "sha256": "e73f2f8e981e3e90e5e1d7e7b637810bbc56a7e58dba543295544db1279a061f"
+      }
+    }
+  },
+  "before_and_after": {
+    "ipfs_datasets_py/logic/backends/cache_protocol.py": {
+      "before": {
+        "bytes": 42169,
+        "full9": {
+          "st_ctime_ns": "1795576800289096555",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101877",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795576800289096555",
+          "st_nlink": "1",
+          "st_size": "42169",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-P1-current-cache-protocol-UNKNOWN-SHA-SourceREAD1-v284-6od7otu5/actual-output/0-cache_protocol.py.UNKNOWN-SHA.API.DATA",
+        "sha256": "1d92c97499d59c09de131e28da6a14aa07b29056897719b5fc16fba6c38ceb59"
+      },
+      "current_git_blob": "8ba6660f2f7a17263003eb37023044742b3a12e8",
+      "post_git_blob": "45517d1cada5698d9f65fb3b9f30cb3d8f5c6564",
+      "private_after": {
+        "bytes": 42603,
+        "full9": {
+          "st_ctime_ns": "1795582617869216768",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102666",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795582617869216768",
+          "st_nlink": "1",
+          "st_size": "42603",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-waiter-private-v01-q4olj78k/cache_protocol.leader-authority.after.py.DATA",
+        "sha256": "722730748990d01f926a1499b973f9cb64ccc5fdb78225ae29236abe9ac105e1"
+      }
+    },
+    "ipfs_datasets_py/logic/common/duckdb_proof_store.py": {
+      "before": {
+        "bytes": 110348,
+        "full9": {
+          "st_ctime_ns": "1795572248029172676",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101271",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795572146006642079",
+          "st_nlink": "1",
+          "st_size": "110348",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/retry-preservation-v02/duckdb_proof_store.after.py.DATA",
+        "sha256": "f71463279dc8c2b9c261928cb92dcb28472f79fb8da4baa807cfa38ab499a386"
+      },
+      "current_git_blob": "0a753bcdb9368a1659ebf8a46067a29b51ffb89c",
+      "post_git_blob": "5d2caeffa84c3ce36b46540d35fb9e6b835513d9",
+      "private_after": {
+        "bytes": 110627,
+        "full9": {
+          "st_ctime_ns": "1795582850841755217",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102735",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795582850841755217",
+          "st_nlink": "1",
+          "st_size": "110627",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-waiter-private-v01-q4olj78k/duckdb_proof_store.leader-and-waiter-authority.after.py.DATA",
+        "sha256": "661c88c3fd18d9bca1eaae8ec6a3e9910ed4b909eacdb72ec70bcbd8e972445f"
+      }
+    },
+    "tests/unit/logic/legal_ir/test_proof_cache.py": {
+      "before": {
+        "bytes": 84499,
+        "prefix_of": {
+          "bytes": 86879,
+          "full9": {
+            "st_ctime_ns": "1795578849270696299",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72102105",
+            "st_mode": "33024",
+            "st_mtime_ns": "1795578849270696299",
+            "st_nlink": "1",
+            "st_size": "86879",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/test_proof_cache.after.py.DATA",
+          "sha256": "e86d6d85c1333dd536ee997bf5a3e09b5f625f11bf399ed140c2504a894ece4e"
+        },
+        "sha256": "239d05de5b08eba8de06b67a74efe109900a6302d73c27d28d450bf2f8061d2f"
+      },
+      "current_git_blob": "6a30dd15847b30521d78a06a20fdfa8a6cac267e",
+      "post_git_blob": "30df1229bbce4b09d413054320529fa56b934853",
+      "private_after": {
+        "bytes": 89707,
+        "full9": {
+          "st_ctime_ns": "1795582617867672914",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102664",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795582617867672914",
+          "st_nlink": "1",
+          "st_size": "89707",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-waiter-private-v01-q4olj78k/test_proof_cache.waiter.after.py.DATA",
+        "sha256": "cec120e6bba53c09554b69cbde32fe34ffdc9ecaa901fb4c3141ecfe34b83c6e"
+      }
+    }
+  },
+  "canonical_adoption_Git_write_resource_grant_or_Native_SQL_model_execution": false,
+  "canonical_source_import_or_Source_lease": false,
+  "exact_three_file_patch": {
+    "bytes": 11617,
+    "full9": {
+      "st_ctime_ns": "1795582950653034739",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72102746",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795582950653034739",
+      "st_nlink": "1",
+      "st_size": "11617",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-waiter-private-v01-q4olj78k/exact-published-to-private-leader-and-waiter-three-file.patch",
+    "sha256": "33f8fa3adc70940a8da64780fef745952aa061a76a07dc65f04a930d449ba6cf"
+  },
+  "explicit_cached_fixture_reads_all_attempts": 7779051,
+  "frozen_runner": {
+    "bytes": 12320,
+    "full9": {
+      "st_ctime_ns": "1795582646584432301",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72102680",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795582646584432301",
+      "st_nlink": "1",
+      "st_size": "12320",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-waiter-private-v01-q4olj78k/run_cached_waiter_v02.py",
+    "sha256": "afe959887a1144f04b9f1b738654e2ad7b86a9af0c32b50b4a790748cb28df5c"
+  },
+  "green_module_map": {
+    "bytes": 1021,
+    "full9": {
+      "st_ctime_ns": "1795582850841924434",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72102736",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795582850841924434",
+      "st_nlink": "1",
+      "st_size": "1021",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-waiter-private-v01-q4olj78k/green-pinned-leader-waiter-map.json",
+    "sha256": "1e374ac6dc4a511400bc692c4479c7ff6b390fa761dcdd5a778caaf1c12074a6"
+  },
+  "kernel_fixture_repin_performed": false,
+  "mechanism": "Use the existing in-memory result-authority filter for both lookup and the exact shared flight snapshot.",
+  "only_changed_retained_import_between_red_and_green": "ipfs_datasets_py.logic.common.duckdb_proof_store",
+  "ordinary_authority_nontransfer": true,
+  "potential_complete_ordinary_roster_after_explicit_rebind": {
+    "admitted_or_run": false,
+    "case_hint": 172,
+    "function_hint": 65,
+    "new_leader_cases": 4,
+    "new_waiter_cases": 2,
+    "retained_ordinary_cases": 166
+  },
+  "preserved_paths": "SQL branch, producer/store persistence, shared-flight snapshot and result identity, result-authority precedence, test prefix and original four controls.",
+  "private_forward_inverse_and_whitespace_checks": true,
+  "published_Git_metadata_only_observation": {
+    "head": "da6225ff33b56a15345da4ba2322d8771fa36f02",
+    "tree": "38682b9d6cc9ebb8f9a515cc712e271b498629dd"
+  },
+  "red_module_map": {
+    "bytes": 1010,
+    "full9": {
+      "st_ctime_ns": "1795582617869397329",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72102668",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795582617869397329",
+      "st_nlink": "1",
+      "st_size": "1010",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-waiter-private-v01-q4olj78k/red-pinned-leader-only-map.json",
+    "sha256": "047127a3c7371ef96860c4d6ebca52a373dd7f0800e8f0fb56d6b3f3c3e2b1ae"
+  },
+  "retained_leader_only_prior_actual_four": {
+    "bytes": 5014,
+    "full9": {
+      "st_ctime_ns": "1795579505783238826",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72102215",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795579505783238826",
+      "st_nlink": "1",
+      "st_size": "5014",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/small-private-cache-leader-authority-exact4-closeout-v01.json",
+    "sha256": "973600eac1960f57646997c3073e054781139b64c9865ae4adbc2eb6836ff1f3"
+  },
+  "retention_pin_dependency_carries_forward": {
+    "bytes": 7214,
+    "full9": {
+      "st_ctime_ns": "1795582413094346914",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72102626",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795582413094346914",
+      "st_nlink": "1",
+      "st_size": "7214",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/P1-authority4-ordinary166-retention-pin-dependency-v01.json",
+    "sha256": "845f11b7c6b4160df785446b7379163fdc6a19db9a3bfd076accd9a23619786b"
+  },
+  "same_ordered_six": [
+    [
+      "test_proof_cache",
+      "test_cache_compute_leader_respects_requested_theorem_authority[advisory-refused-exact]"
+    ],
+    [
+      "test_proof_cache",
+      "test_cache_compute_leader_respects_requested_theorem_authority[advisory-refused-unified]"
+    ],
+    [
+      "test_proof_cache",
+      "test_cache_compute_leader_respects_requested_theorem_authority[theorem-usable-exact]"
+    ],
+    [
+      "test_proof_cache",
+      "test_cache_compute_leader_respects_requested_theorem_authority[theorem-usable-unified]"
+    ],
+    [
+      "test_proof_cache",
+      "test_unified_cache_waiter_respects_requested_theorem_authority[advisory-refused]"
+    ],
+    [
+      "test_proof_cache",
+      "test_unified_cache_waiter_respects_requested_theorem_authority[theorem-usable]"
+    ]
+  ],
+  "schema": "private-P1-proof-cache-leader-and-in-memory-waiter-authority/v1",
+  "scope": "In-memory cache fixture with actual repository-owned compiled code from retained copies and fictional signed test data."
+}

@@ -1,0 +1,125 @@
+--- a/ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py
++++ b/ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py
+@@ -1038,103 +1038,6 @@
+     return availability, statuses, deterministic_trusted
+ 
+ 
+-@dataclass(frozen=True, slots=True)
+-class ProofFeedbackTrainingTarget:
+-    """Commit to a caller-selected current target, separately from feedback.
+-
+-    The caller supplies the exact proof obligation from its current checked
+-    evidence and the independently selected reviewed interpretation and
+-    dependency commitments. For writes it also pins the exact canonical feedback
+-    record selected by the evidence owner. A target without that independent
+-    record identity may commit an obligation before projection, but cannot
+-    select an update. The record ID is excluded from the obligation digest.
+-    """
+-
+-    sample_id: str
+-    sample_sha256: str
+-    obligation_id: str
+-    obligation_type: str
+-    legal_ir_view: str
+-    formal_obligation_sha256: str
+-    reviewed_target_sha256: str
+-    dependency_manifest_sha256: str
+-    expected_feedback_record_id: str = ""
+-
+-    def __post_init__(self) -> None:
+-        for name in ("sample_id", "obligation_id", "obligation_type", "legal_ir_view"):
+-            value = getattr(self, name)
+-            if type(value) is not str:
+-                raise ProofFeedbackError(f"{name} must be a source-free identifier")
+-            _require_safe_identifier(value, name)
+-        for name in ("sample_sha256", "formal_obligation_sha256", "reviewed_target_sha256",
+-                     "dependency_manifest_sha256"):
+-            value = getattr(self, name)
+-            if type(value) is not str or not _SHA256_RE.fullmatch(value):
+-                raise ProofFeedbackError(f"{name} must be a SHA-256 digest")
+-        feedback_id = self.expected_feedback_record_id
+-        prefix = "legal-ir-proof-feedback-"
+-        if type(feedback_id) is not str or (
+-            feedback_id and (not feedback_id.startswith(prefix)
+-                             or not _SHA256_RE.fullmatch(feedback_id[len(prefix):]))
+-        ):
+-            raise ProofFeedbackError("expected feedback record must be a canonical record ID")
+-
+-    @property
+-    def obligation_digest(self) -> str:
+-        return proof_feedback_content_digest({
+-            "schema": "legal-ir-proof-feedback-training-target/v1",
+-            "sample_id": self.sample_id,
+-            "sample_sha256": self.sample_sha256,
+-            "obligation_id": self.obligation_id,
+-            "obligation_type": self.obligation_type,
+-            "legal_ir_view": self.legal_ir_view,
+-            "formal_obligation_sha256": self.formal_obligation_sha256,
+-            "reviewed_target_sha256": self.reviewed_target_sha256,
+-            "dependency_manifest_sha256": self.dependency_manifest_sha256,
+-        })
+-
+-    def matches(self, record: LegalIRProofFeedbackRecord) -> bool:
+-        return (
+-            self.expected_feedback_record_id != ""
+-            and self.expected_feedback_record_id == record.record_id
+-            and self.obligation_id == record.obligation_id
+-            and self.obligation_type == record.obligation_type
+-            and self.legal_ir_view == record.legal_ir_view
+-            and self.obligation_digest == record.obligation_digest
+-        )
+-
+-
+-def proof_feedback_sample_digest(sample: Any) -> str:
+-    """Hash the current sample's source and parsed representation, without embeddings."""
+-    from ....optimizers.logic_theorem_optimizer.legal_samples import LegalSample
+-
+-    if type(sample) is not LegalSample:
+-        raise ProofFeedbackError("typed LegalSample required for current proof feedback")
+-    sample.validate()
+-    return proof_feedback_content_digest({
+-        "schema": "legal-ir-proof-feedback-sample/v1",
+-        "sample_id": sample.sample_id,
+-        "source": sample.source,
+-        "title": sample.title,
+-        "section": sample.section,
+-        "citation": sample.citation,
+-        "text": sample.text,
+-        "modal_ir": sample.modal_ir.to_dict(),
+-    })
+-
+-
+-def carries_typed_proof_feedback(value: Any) -> bool:
+-    """Recognize typed records and atomic envelopes before guidance projection."""
+-    if isinstance(value, LegalIRProofFeedbackRecord):
+-        return True
+-    if not isinstance(value, Mapping):
+-        return False
+-    return (
+-        value.get("schema_version") == LEGAL_IR_PROOF_FEEDBACK_SCHEMA_VERSION
+-        or value.get("proof_feedback_record") is not None
+-    )
+-
+-
+ def build_legal_ir_proof_feedback_record(
+     obligation: Any,
+     *,
+@@ -1507,18 +1410,15 @@
+     "ProofFeedbackRecord",
+     "ProofFeedbackReplay",
+     "ProofFeedbackStore",
+-    "ProofFeedbackTrainingTarget",
+     "ProofFeedbackTrustError",
+     "ProofFeedbackTrustStatus",
+     "ProofFeedbackVersions",
+     "VerifiedCounterexampleFeedback",
+     "build_legal_ir_proof_feedback_record",
+     "canonical_proof_feedback_json",
+-    "carries_typed_proof_feedback",
+     "deterministic_proof_feedback_partition",
+     "legal_ir_proof_feedback_record_from_result",
+     "load_proof_feedback_jsonl",
+     "proof_feedback_content_digest",
+-    "proof_feedback_sample_digest",
+     "write_proof_feedback_jsonl",
+ ]

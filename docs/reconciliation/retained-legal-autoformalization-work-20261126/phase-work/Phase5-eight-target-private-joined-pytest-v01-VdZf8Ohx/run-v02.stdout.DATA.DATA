@@ -1,0 +1,18 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.3.4, pluggy-1.6.0
+rootdir: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-eight-target-private-joined-pytest-v01-VdZf8Ohx/stage
+configfile: pytest.ini
+asyncio: mode=Mode.STRICT
+collected 131 items
+
+tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py . [  0%]
+........................................................................ [ 55%]
+.....................................                                    [ 83%]
+tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_consumer_binding.py . [ 84%]
+....                                                                     [ 87%]
+tests/unit/logic/test_autoformal_campaign_training_inputs.py ..........  [ 95%]
+tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py . [ 96%]
+.....                                                                    [100%]
+
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-eight-target-private-joined-pytest-v01-VdZf8Ohx/private-run-v02.junit.xml -
+======================= 131 passed in 144.90s (0:02:24) ========================

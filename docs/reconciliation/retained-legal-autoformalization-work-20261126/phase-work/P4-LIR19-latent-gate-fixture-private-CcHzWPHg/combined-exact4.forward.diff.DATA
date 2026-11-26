@@ -1,0 +1,340 @@
+--- a/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_semantic_metrics.py
++++ b/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_semantic_metrics.py
+@@ -128,6 +128,12 @@
+     "predicted_legal_ir",
+ )
+ 
++_LEGACY_ROUND_TRIP_BLOCK_KEYS: Final = ("round_trip", "roundtrip")
++_LEGACY_DECOMPILED_KEYS: Final = ("decompiled", "decompiler")
++_LEGACY_RECOMPILED_KEYS: Final = ("recompiled_ir", "reconstructed_ir")
++_LEGACY_ROUND_TRIP_TEXT_KEYS: Final = _LEGACY_DECOMPILED_KEYS + _LEGACY_RECOMPILED_KEYS
++_LEGACY_ROUND_TRIP_KEYS: Final = frozenset(_LEGACY_ROUND_TRIP_BLOCK_KEYS + _LEGACY_ROUND_TRIP_TEXT_KEYS)
++
+ _IGNORED_NORMALIZATION_KEYS: Final = frozenset(
+     {
+         "created_at",
+@@ -315,6 +321,12 @@
+         }
+ 
+ 
++def _legacy_ir_without_round_trip_observations(value: Any) -> Any:
++    if isinstance(value, Mapping):
++        return {key: child for key, child in value.items() if key not in _LEGACY_ROUND_TRIP_KEYS}
++    return value
++
++
+ def evaluate_legal_ir_semantic_equivalence(
+     reference_ir: Any,
+     candidate_ir: Any,
+@@ -326,25 +338,28 @@
+     This raw-payload route does not validate canonical typed IR, independently
+     recompile text, or establish legal source correspondence. Unknown legacy
+     shapes remain diagnostic inputs, but cannot supply complete gate evidence.
++    Reported round trips are scored separately from the underlying IR facets.
+     """
+ 
+     family_name = _canonical_family_or_unscoped(family)
+-    structural_left = _structural_signature(reference_ir)
+-    structural_right = _structural_signature(candidate_ir)
+-    obligations_left = _obligation_signature(reference_ir)
+-    obligations_right = _obligation_signature(candidate_ir)
+-    counterexamples_left = _counterexample_signature(reference_ir)
+-    counterexamples_right = _counterexample_signature(candidate_ir)
+-    graph_left = _graph_signature(reference_ir)
+-    graph_right = _graph_signature(candidate_ir)
+-    temporal_left = _temporal_window_signature(reference_ir)
+-    temporal_right = _temporal_window_signature(candidate_ir)
++    reference = _legacy_ir_without_round_trip_observations(reference_ir)
++    candidate = _legacy_ir_without_round_trip_observations(candidate_ir)
++    structural_left = _structural_signature(reference)
++    structural_right = _structural_signature(candidate)
++    obligations_left = _obligation_signature(reference)
++    obligations_right = _obligation_signature(candidate)
++    counterexamples_left = _counterexample_signature(reference)
++    counterexamples_right = _counterexample_signature(candidate)
++    graph_left = _graph_signature(reference)
++    graph_right = _graph_signature(candidate)
++    temporal_left = _temporal_window_signature(reference)
++    temporal_right = _temporal_window_signature(candidate)
+     decompiler_left, round_trip_left = _legacy_round_trip_observation(reference_ir)
+     decompiler_right, round_trip_right = _legacy_round_trip_observation(candidate_ir)
+     unsupported_left = _legacy_raw_ir_unsupported_paths(reference_ir)
+     unsupported_right = _legacy_raw_ir_unsupported_paths(candidate_ir)
+-    proof_left = _proof_obligation_signature(reference_ir)
+-    proof_right = _proof_obligation_signature(candidate_ir)
++    proof_left = _proof_obligation_signature(reference)
++    proof_right = _proof_obligation_signature(candidate)
+     proof_delta = float(len(proof_left ^ proof_right))
+ 
+     scores = {
+@@ -791,8 +806,8 @@
+ 
+     schemas = {
+         "root": {"rules": "rules", "graph": "graph", "counterexamples": "counterexamples",
+-                 "round_trip": "round_trip", "roundtrip": "round_trip",
+-                 **text_keys("decompiled decompiler recompiled_ir reconstructed_ir")},
++                 **dict.fromkeys(_LEGACY_ROUND_TRIP_BLOCK_KEYS, "round_trip"),
++                 **dict.fromkeys(_LEGACY_ROUND_TRIP_TEXT_KEYS, "text")},
+         "rule": {**text_keys("modality type norm_type obligation_type subject actor agent party "
+                              "action predicate verb duty obligation condition unless if exception"),
+                  "proof_obligation_ids": "texts", "temporal_window": "temporal"},
+@@ -803,7 +818,7 @@
+         "edge": text_keys("source from subject target to object label type predicate"),
+         "triple": text_keys("subject s predicate p relation object o"),
+         "counterexample": {"assignment": "assignment", "violates": "text"},
+-        "round_trip": text_keys("decompiled decompiler recompiled_ir reconstructed_ir"),
++        "round_trip": dict.fromkeys(_LEGACY_ROUND_TRIP_TEXT_KEYS, "text"),
+     }
+     sequence_items = {"rules": "rule", "nodes": "node", "edges": "edge",
+                       "triples": "triple", "counterexamples": "counterexample", "texts": "text"}
+@@ -884,20 +899,18 @@
+     """Require both named reported observations; structural equality is no substitute."""
+     if not isinstance(value, Mapping):
+         return frozenset(), "unsupported_raw_payload"
+-    source_keys = ("decompiled", "decompiler")
+-    result_keys = ("recompiled_ir", "reconstructed_ir")
+-    blocks = [value[key] for key in ("round_trip", "roundtrip") if key in value]
+-    if any(key in value for key in source_keys + result_keys):
+-        blocks.append({key: value[key] for key in source_keys + result_keys if key in value})
++    blocks = [value[key] for key in _LEGACY_ROUND_TRIP_BLOCK_KEYS if key in value]
++    if any(key in value for key in _LEGACY_ROUND_TRIP_TEXT_KEYS):
++        blocks.append({key: value[key] for key in _LEGACY_ROUND_TRIP_TEXT_KEYS if key in value})
+     if len(blocks) != 1:
+         return frozenset(), "missing_or_ambiguous_observation"
+     block = blocks[0]
+     if not isinstance(block, Mapping) or any(
+-        key not in source_keys + result_keys and key not in _IGNORED_NORMALIZATION_KEYS for key in block
++        key not in _LEGACY_ROUND_TRIP_TEXT_KEYS and key not in _IGNORED_NORMALIZATION_KEYS for key in block
+     ):
+         return frozenset(), "unsupported_observation_shape"
+-    sources = [block[key] for key in source_keys if key in block]
+-    results = [block[key] for key in result_keys if key in block]
++    sources = [block[key] for key in _LEGACY_DECOMPILED_KEYS if key in block]
++    results = [block[key] for key in _LEGACY_RECOMPILED_KEYS if key in block]
+     if len(sources) != 1 or len(results) != 1 or any(
+         type(item) is not str or not item.strip() for item in sources + results
+     ):
+--- a/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py
++++ b/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py
+@@ -874,3 +874,30 @@
+     kwargs.update(ranking_depth=ranking_depth, cutoffs=(1, 3, ranking_depth))
+     with pytest.raises(ValueError, match=error):
+         owner.evaluate_complete_norm_retrieval_rankings(rankings, references, candidates, **kwargs)
++
++
++@pytest.mark.parametrize("observation", ["missing", "changed-prose", "direct-alias"])
++def test_legacy_round_trip_observations_are_separate_from_ir_facets(observation):
++    reference = _reference_ir()
++    reference["round_trip"]["decompiled"] = "The agency must provide notice within 30 days."
++    candidate = _reference_ir()
++    candidate["round_trip"] = dict(reference["round_trip"])
++    if observation == "missing":
++        del candidate["round_trip"]
++    elif observation == "direct-alias":
++        candidate.update(candidate.pop("round_trip"))
++    else:
++        candidate["round_trip"]["decompiled"] = "The contractor may provide notice by 2026-04-10."
++
++    result = evaluate_legal_ir_semantic_equivalence(reference, candidate, family="deontic")
++    assert result.scores[STRUCTURAL_EQUIVALENCE] == 1.0, result.to_dict()
++    assert result.scores[OBLIGATION_EQUIVALENCE] == 1.0
++    assert result.scores[TEMPORAL_WINDOW_AGREEMENT] == 1.0
++    assert not result.detail["raw_input_coverage"]["candidate_unsupported_paths"]
++    assert result.detail["round_trip_evidence"]["independently_recompiled"] is False
++    if observation == "missing":
++        assert result.missing_metrics == (DECOMPILER_ROUND_TRIP_PRESERVATION,)
++    elif observation == "direct-alias":
++        assert result.complete and result.scores[DECOMPILER_ROUND_TRIP_PRESERVATION] == 1.0
++    else:
++        assert result.complete and result.scores[DECOMPILER_ROUND_TRIP_PRESERVATION] < 1.0
+--- a/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py
++++ b/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py
+@@ -24,6 +24,7 @@
+ from concurrent.futures import ThreadPoolExecutor, as_completed
+ from dataclasses import dataclass, field, fields, is_dataclass
+ from datetime import datetime, timezone
++from statistics import mean
+ from types import MappingProxyType
+ from typing import Any, Final, Optional
+ 
+@@ -1010,6 +1011,8 @@
+         if not vector:
+             unknown.append(f"{axis}:empty_vector")
+             continue
++        if not all(map(math.isfinite, vector)):
++            unknown.append(f"{axis}:nonfinite_vector")
+         groups.setdefault(label, []).append(vector)
+     counts = {name: len(vectors) for name, vectors in sorted(groups.items())}
+     intra_values: list[float] = []
+@@ -1032,7 +1035,7 @@
+         unknown.append(f"{axis}:intra_cosine")
+     inter_values = _pairwise_cosines(list(centroids.values()))
+     inter = None if inter_values is None else _mean_optional(inter_values)
+-    if inter is None and len(centroids) < 2:
++    if inter is None:
+         unknown.append(f"{axis}:inter_cosine")
+     labeled_counts = [count for name, count in counts.items() if name != "unspecified"]
+     balance = None
+@@ -1067,7 +1070,9 @@
+     width = len(vectors[0])
+     if width == 0 or any(len(vector) != width for vector in vectors):
+         return None
+-    return tuple(sum(vector[index] for vector in vectors) / len(vectors) for index in range(width))
++    if any(not all(map(math.isfinite, vector)) for vector in vectors):
++        return None
++    return tuple(mean(coordinates) for coordinates in zip(*vectors, strict=True))
+ 
+ 
+ def _pairwise_cosines(vectors: Sequence[Sequence[float]]) -> Optional[list[float]]:
+@@ -1085,12 +1090,18 @@
+ def _cosine(left: Sequence[float], right: Sequence[float]) -> Optional[float]:
+     if len(left) != len(right) or not left:
+         return None
+-    numerator = sum(float(a) * float(b) for a, b in zip(left, right))
+-    left_norm = math.sqrt(sum(float(value) * float(value) for value in left))
+-    right_norm = math.sqrt(sum(float(value) * float(value) for value in right))
+-    if left_norm == 0.0 or right_norm == 0.0:
++    if not all(map(math.isfinite, left)) or not all(map(math.isfinite, right)):
+         return None
+-    return max(-1.0, min(1.0, numerator / (left_norm * right_norm)))
++    left_scale = max(map(abs, left))
++    right_scale = max(map(abs, right))
++    if left_scale == 0.0 or right_scale == 0.0:
++        return None
++    # Independent rescaling preserves direction and keeps products and norms finite.
++    scaled_left = tuple(value / left_scale for value in left)
++    scaled_right = tuple(value / right_scale for value in right)
++    numerator = math.fsum(a * b for a, b in zip(scaled_left, scaled_right, strict=True))
++    denominator = math.hypot(*scaled_left) * math.hypot(*scaled_right)
++    return max(-1.0, min(1.0, numerator / denominator))
+ 
+ 
+ def _mean_optional(values: Sequence[float]) -> Optional[float]:
+--- a/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_latent_diagnostics.py
++++ b/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_latent_diagnostics.py
+@@ -355,17 +355,111 @@
+     assert tuple(bundle.nodes) == LEGAL_IR_ARTIFACT_NODE_ORDER
+ 
+ 
+-def test_semantic_equivalence_gate_is_unchanged_by_latent_instrumentation() -> None:
+-    left = {
+-        "rules": [
+-            {
+-                "modality": "obligation",
+-                "subject": "Agency",
+-                "action": "provide notice",
+-                "proof_obligation_ids": ["po-notice"],
+-            }
+-        ]
+-    }
+-    result = evaluate_legal_ir_semantic_equivalence(left, left, family="deontic")
+-    assert result.complete is True
+-    assert result.scores["obligation_equivalence"] == pytest.approx(1.0)
++@pytest.mark.parametrize("change", ["none", "missing-round-trip", "changed-actor"])
++def test_semantic_equivalence_gate_is_unchanged_by_latent_instrumentation(change):
++    from ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_evaluation_cache import (
++        LegalIREvaluationArtifact,
++    )
++    from ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_semantic_metrics import (
++        SemanticEquivalenceConfig,
++        semantic_equivalence_promotion_gate,
++    )
++
++    def reported_rule(actor):
++        return {
++            "rules": [
++                {"modality": "obligation", "subject": actor, "action": "provide notice",
++                 "proof_obligation_ids": ["po-notice"]},
++            ],
++            "round_trip": {
++                "decompiled": f"The {actor} must provide notice.",
++                "recompiled_ir": f"O(provide_notice({actor.lower()}))",
++            },
++        }
++
++    reference = reported_rule("Agency")
++    candidate = reported_rule("Contractor" if change == "changed-actor" else "Agency")
++    if change == "missing-round-trip":
++        del candidate["round_trip"]
++
++    def metrics(candidate_ir):
++        return {"view_family_metrics": {
++            "deontic": {"reference_ir": reference, "candidate_ir": candidate_ir},
++        }}
++
++    baseline = metrics(reference)
++    case = LegalIREvaluationArtifact(
++        key=LegalIREvaluationCacheKey(
++            sample_hash="fictional-notice-rule",
++            compiler_commit="fixture-compiler",
++            state_hash="fixture-state",
++            metric_schema="fixture-metrics",
++            config_hash="fixture-config",
++        ),
++        compiler_artifact={},
++        metrics=metrics(candidate),
++    )
++    config = SemanticEquivalenceConfig(families=("deontic",))
++    before = semantic_equivalence_promotion_gate(baseline, case.metrics, config=config)
++    diagnostic = materialize_latent_diagnostic_report(synthetic_collapse_fixture())
++    attached = attach_latent_diagnostics(case, diagnostic)
++    assert attached.metadata["latent_diagnostic_digest"] == diagnostic.digest
++    assert case.metrics["view_family_metrics"] == attached.metrics["view_family_metrics"]
++
++    after = semantic_equivalence_promotion_gate(baseline, attached.metrics, config=config)
++    assert before == after
++    assert after["accepted"] is (change == "none")
++    measured = after["family_results"]["deontic"]["after"]
++    assert measured["scores"]["obligation_equivalence"] == (0.0 if change == "changed-actor" else 1.0)
++    observations = measured["detail"]["round_trip_evidence"]
++    assert observations["authority"] == "caller_reported_observations_only"
++    assert observations["independently_recompiled"] is False
++    if change == "missing-round-trip":
++        assert measured["missing_metrics"] == ["decompiler_round_trip_preservation"]
++        assert "deontic:semantic_equivalence_evidence_missing" in after["block_reasons"]
++    else:
++        assert measured["complete"] is True
++
++
++@pytest.mark.parametrize("scale", [1.0, 1e308, 1e-320], ids=["ordinary", "large", "subnormal"])
++def test_strata_cosines_and_centroids_preserve_finite_scale(scale):
++    records = [
++        LatentRepresentationRecord(sample_id="a1", vector=(scale, scale), family="deontic"),
++        LatentRepresentationRecord(sample_id="a2", vector=(scale, 0.0), family="deontic"),
++        LatentRepresentationRecord(sample_id="b1", vector=(scale, 0.0), family="tdfol"),
++        LatentRepresentationRecord(sample_id="b2", vector=(scale, 0.0), family="tdfol"),
++    ]
++    family = evaluate_latent_clustering_strata(records).axes["family"]
++    expected_intra = (1 + 1 / math.sqrt(2)) / 2
++    expected_inter = 2 / math.sqrt(5)
++    assert family.group_counts == {"deontic": 2, "tdfol": 2}
++    assert family.intra_cosine == pytest.approx(expected_intra), family.to_dict()
++    assert family.inter_cosine == pytest.approx(expected_inter)
++    assert family.separation == pytest.approx(expected_intra - expected_inter)
++    assert family.unknown_denominators == ()
++
++
++@pytest.mark.parametrize("unavailable", [math.nan, math.inf, -math.inf])
++def test_strata_keep_nonfinite_vectors_out_of_cosine_denominators(unavailable):
++    result = evaluate_latent_clustering_strata([
++        {"sample_id": "valid", "family": "deontic", "vector": (1.0, 0.0)},
++        {"sample_id": "invalid", "family": "deontic", "vector": (unavailable, 1.0)},
++    ]).axes["family"]
++    assert result.intra_cosine is None, result.to_dict()
++    assert result.group_counts == {"deontic": 2}
++    assert result.in_distribution_count == 2
++    assert "family:nonfinite_vector" in result.unknown_denominators
++
++
++def test_strata_reports_unavailable_inter_cosine_for_zero_centroids():
++    records = [
++        LatentRepresentationRecord(sample_id="a1", vector=(1.0, 0.0), family="deontic"),
++        LatentRepresentationRecord(sample_id="a2", vector=(-1.0, 0.0), family="deontic"),
++        LatentRepresentationRecord(sample_id="b1", vector=(0.0, 1.0), family="tdfol"),
++        LatentRepresentationRecord(sample_id="b2", vector=(0.0, -1.0), family="tdfol"),
++    ]
++    family = evaluate_latent_clustering_strata(records).axes["family"]
++    assert family.intra_cosine == pytest.approx(-1.0)
++    assert family.inter_cosine is None
++    assert family.separation is None
++    assert "family:inter_cosine" in family.unknown_denominators

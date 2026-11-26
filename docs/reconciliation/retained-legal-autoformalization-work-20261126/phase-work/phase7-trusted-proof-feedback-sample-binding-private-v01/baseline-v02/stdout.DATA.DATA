@@ -1,0 +1,25 @@
+
+==================================== ERRORS ====================================
+_ ERROR collecting tests/unit/logic/integration/test_trusted_feedback_weight_updates.py _
+ImportError while importing test module '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/dataset/tests/unit/logic/integration/test_trusted_feedback_weight_updates.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+tests/unit/logic/integration/test_trusted_feedback_weight_updates.py:9: in <module>
+    from ipfs_datasets_py.logic.integration.reasoning.legal_ir_learned_guidance import (
+ipfs_datasets_py/logic/integration/reasoning/legal_ir_learned_guidance.py:29: in <module>
+    from .legal_ir_premise_security import scan_legal_ir_artifact
+ipfs_datasets_py/logic/integration/reasoning/legal_ir_premise_security.py:20: in <module>
+    from .hammer import HammerPremise
+ipfs_datasets_py/logic/integration/reasoning/hammer.py:24: in <module>
+    from ipfs_datasets_py.logic.hammers.process_lifecycle import (
+ipfs_datasets_py/logic/hammers/__init__.py:178: in <module>
+    from .frontends import (
+ipfs_datasets_py/logic/hammers/frontends/__init__.py:40: in <module>
+    from .coq import CoqFrontend
+ipfs_datasets_py/logic/hammers/frontends/coq.py:38: in <module>
+    from ipfs_datasets_py.logic.external_provers.lazy_installer import find_executable
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.external_provers'
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/baseline-v02/result.xml -
+=========================== short test summary info ============================
+ERROR tests/unit/logic/integration/test_trusted_feedback_weight_updates.py
+1 error in 1.16s

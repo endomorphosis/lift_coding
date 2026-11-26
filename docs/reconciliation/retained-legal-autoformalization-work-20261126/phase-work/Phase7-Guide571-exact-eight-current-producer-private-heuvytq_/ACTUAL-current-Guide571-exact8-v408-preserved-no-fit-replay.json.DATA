@@ -1,0 +1,514 @@
+{
+  "Native_or_statutory_or_external_receipt_authentication": false,
+  "actual_model_fit": false,
+  "actual_terminal_orchestrator_session": 69143,
+  "actual_terminal_returncode": 0,
+  "actual_wrong_records_refused_before_primary_or_auxiliary_mutation": true,
+  "canonical_Source_Git_adoption_or_mutation": false,
+  "cohorts": {
+    "maintained": {
+      "case_names": [
+        "test_typed_feedback_uses_current_semantic_target_before_update[matching]",
+        "test_typed_feedback_uses_current_semantic_target_before_update[legacy]",
+        "test_typed_feedback_uses_current_semantic_target_before_update[sample]",
+        "test_typed_feedback_uses_current_semantic_target_before_update[interpretation]",
+        "test_typed_feedback_uses_current_semantic_target_before_update[dependency]",
+        "test_ablation_refuses_unmatched_typed_feedback_before_cloning",
+        "test_typed_feedback_refuses_substituted_record_with_same_target[other_receipt]",
+        "test_typed_feedback_refuses_substituted_record_with_same_target[other_label_same_receipt]",
+        "test_current_target_requires_independent_id_and_canonical_feedback[copied_id]",
+        "test_current_target_requires_independent_id_and_canonical_feedback[unselected_id]"
+      ],
+      "case_success": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "compiled_paths": 102,
+      "exit": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/actual-existing-no-fit-replay/maintained.exit.txt",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "observed_guard": {
+        "address_space_bytes": 536870912,
+        "cpu_affinity": [
+          0
+        ],
+        "cpu_seconds": 25,
+        "kernel_probes": [
+          "socket",
+          "clone3",
+          "write-open"
+        ],
+        "landlock_abi": 7,
+        "stdout_stderr_each_max_bytes": 131072,
+        "syscall_denylist": [
+          "socket",
+          "socketpair",
+          "connect",
+          "accept",
+          "accept4",
+          "bind",
+          "listen",
+          "clone",
+          "clone3",
+          "execve",
+          "execveat",
+          "io_uring_setup",
+          "io_uring_enter",
+          "io_uring_register",
+          "pidfd_getfd",
+          "ptrace",
+          "process_vm_writev",
+          "setns",
+          "unshare",
+          "mount",
+          "umount2",
+          "truncate",
+          "ftruncate",
+          "fchmod",
+          "fchmodat",
+          "fchmodat2",
+          "fchown",
+          "fchownat",
+          "utimensat",
+          "setxattr",
+          "lsetxattr",
+          "fsetxattr",
+          "removexattr",
+          "lremovexattr",
+          "fremovexattr"
+        ]
+      },
+      "project_and_discovery_bytes": 6961892,
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/actual-existing-no-fit-replay/maintained.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 31841,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/actual-existing-no-fit-replay/maintained.stdout.json",
+        "sha256": "79fd35f1798faca31cc87e50cbd4bbbaceac64aee7c2ecdbeb19d238d27e4371"
+      },
+      "worker_rc": 0
+    },
+    "receipt-green": {
+      "case_names": [
+        "selected-record-trainer",
+        "selected-record-auxiliary",
+        "wrong-receipt-trainer",
+        "wrong-receipt-auxiliary",
+        "same-receipt-name-altered-record-trainer",
+        "same-receipt-name-altered-record-auxiliary"
+      ],
+      "case_success": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "compiled_paths": 100,
+      "exit": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/actual-existing-no-fit-replay/receipt-green.exit.txt",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "observed_guard": {
+        "address_space_bytes": 536870912,
+        "cpu_affinity": [
+          0
+        ],
+        "cpu_seconds": 25,
+        "kernel_probes": [
+          "socket",
+          "clone3",
+          "write-open"
+        ],
+        "landlock_abi": 7,
+        "stdout_stderr_each_max_bytes": 131072,
+        "syscall_denylist": [
+          "socket",
+          "socketpair",
+          "connect",
+          "accept",
+          "accept4",
+          "bind",
+          "listen",
+          "clone",
+          "clone3",
+          "execve",
+          "execveat",
+          "io_uring_setup",
+          "io_uring_enter",
+          "io_uring_register",
+          "pidfd_getfd",
+          "ptrace",
+          "process_vm_writev",
+          "setns",
+          "unshare",
+          "mount",
+          "umount2",
+          "truncate",
+          "ftruncate",
+          "fchmod",
+          "fchmodat",
+          "fchmodat2",
+          "fchown",
+          "fchownat",
+          "utimensat",
+          "setxattr",
+          "lsetxattr",
+          "fsetxattr",
+          "removexattr",
+          "lremovexattr",
+          "fremovexattr"
+        ]
+      },
+      "project_and_discovery_bytes": 6814093,
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/actual-existing-no-fit-replay/receipt-green.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 31817,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/actual-existing-no-fit-replay/receipt-green.stdout.json",
+        "sha256": "1b2a3aae00ade619cd7854ae58d81d0f435938e85f0f4f105666bccec730b964"
+      },
+      "worker_rc": 0
+    },
+    "receipt-red": {
+      "case_names": [
+        "selected-record-trainer",
+        "selected-record-auxiliary",
+        "wrong-receipt-trainer",
+        "wrong-receipt-auxiliary",
+        "same-receipt-name-altered-record-trainer",
+        "same-receipt-name-altered-record-auxiliary"
+      ],
+      "case_success": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "compiled_paths": 100,
+      "exit": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/actual-existing-no-fit-replay/receipt-red.exit.txt",
+        "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+      },
+      "observed_guard": {
+        "address_space_bytes": 536870912,
+        "cpu_affinity": [
+          0
+        ],
+        "cpu_seconds": 25,
+        "kernel_probes": [
+          "socket",
+          "clone3",
+          "write-open"
+        ],
+        "landlock_abi": 7,
+        "stdout_stderr_each_max_bytes": 131072,
+        "syscall_denylist": [
+          "socket",
+          "socketpair",
+          "connect",
+          "accept",
+          "accept4",
+          "bind",
+          "listen",
+          "clone",
+          "clone3",
+          "execve",
+          "execveat",
+          "io_uring_setup",
+          "io_uring_enter",
+          "io_uring_register",
+          "pidfd_getfd",
+          "ptrace",
+          "process_vm_writev",
+          "setns",
+          "unshare",
+          "mount",
+          "umount2",
+          "truncate",
+          "ftruncate",
+          "fchmod",
+          "fchmodat",
+          "fchmodat2",
+          "fchown",
+          "fchownat",
+          "utimensat",
+          "setxattr",
+          "lsetxattr",
+          "fsetxattr",
+          "removexattr",
+          "lremovexattr",
+          "fremovexattr"
+        ]
+      },
+      "project_and_discovery_bytes": 6813429,
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/actual-existing-no-fit-replay/receipt-red.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 32219,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/actual-existing-no-fit-replay/receipt-red.stdout.json",
+        "sha256": "982b07151c85709d06937aadaff1ef217a4280a1cb518131336b66ea214cbbe0"
+      },
+      "worker_rc": 1
+    },
+    "retained": {
+      "case_names": [
+        "legacy_matching_unbound",
+        "legacy_same_id_revised_unbound",
+        "legacy_aux_unbound",
+        "historical_legacy_evaluation",
+        "bound_actual_obligation_distinct_id",
+        "bound_raw_wire",
+        "bound_attached_wire",
+        "bound_same_id_revised",
+        "bound_changed_scope",
+        "bound_changed_dependency",
+        "bound_forwards_to_auxiliary_callback",
+        "bound_aux_eligible_no_numeric",
+        "bound_aux_changed_scope",
+        "bound_aux_changed_dependency",
+        "generic_raw_object",
+        "generic_raw_wire",
+        "generic_attached_envelope"
+      ],
+      "case_success": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "compiled_paths": 100,
+      "exit": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/actual-existing-no-fit-replay/retained.exit.txt",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "observed_guard": {
+        "address_space_bytes": 536870912,
+        "cpu_affinity": [
+          0
+        ],
+        "cpu_seconds": 25,
+        "kernel_probes": [
+          "socket",
+          "clone3",
+          "write-open"
+        ],
+        "landlock_abi": 7,
+        "stdout_stderr_each_max_bytes": 131072,
+        "syscall_denylist": [
+          "socket",
+          "socketpair",
+          "connect",
+          "accept",
+          "accept4",
+          "bind",
+          "listen",
+          "clone",
+          "clone3",
+          "execve",
+          "execveat",
+          "io_uring_setup",
+          "io_uring_enter",
+          "io_uring_register",
+          "pidfd_getfd",
+          "ptrace",
+          "process_vm_writev",
+          "setns",
+          "unshare",
+          "mount",
+          "umount2",
+          "truncate",
+          "ftruncate",
+          "fchmod",
+          "fchmodat",
+          "fchmodat2",
+          "fchown",
+          "fchownat",
+          "utimensat",
+          "setxattr",
+          "lsetxattr",
+          "fsetxattr",
+          "removexattr",
+          "lremovexattr",
+          "fremovexattr"
+        ]
+      },
+      "project_and_discovery_bytes": 6814093,
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/actual-existing-no-fit-replay/retained.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 35174,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/actual-existing-no-fit-replay/retained.stdout.json",
+        "sha256": "517ed0fc960e6f15d65004a5087d26bb630a01e01a915468fa3db8935ca9a3dc"
+      },
+      "worker_rc": 0
+    }
+  },
+  "current_HEAD": "6d1b200341ae62d6dc0aa6db27f3955c50483fa7",
+  "current_exact_eight_private_posts": {
+    "ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py": {
+      "bytes": 65270,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/record.current-v408-plus-exact-after-v04.DATA",
+      "sha256": "aee18c5265e4874bd6074637eef5bd4ae6701449cc0876e899abf56d1fb71896"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py": {
+      "bytes": 1429059,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/modal.after.DATA",
+      "sha256": "3440fef3ee319f780f49ae6fb1b61aacfc3d47ea64e2f95b9c795cfc7c81b447"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py": {
+      "bytes": 41765,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/ablation.after-v02.DATA",
+      "sha256": "01dc8c506d30d3348712d1547e46bf801109818aadab77e94c2ded8188f90bbc"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py": {
+      "bytes": 42271,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/trainer.after-v04.DATA",
+      "sha256": "630398501836dc7bba1b213dbd93b2e93a18c593747f52467f325c5033d7fa94"
+    },
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py": {
+      "bytes": 46285,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/test_trusted_feedback_weight_updates.test.after-v05.DATA",
+      "sha256": "78f1f42f172367e8bb932721b0ef01011b8ff9a7b5821ee2942a4f5254eaa9e3"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py": {
+      "bytes": 14210,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/test_modal_autoencoder_proof_heads.current-after.DATA",
+      "sha256": "eca75ef60fd1b7aee67510840f76935c89c2ef8992475f67ea836965b07bd07f"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py": {
+      "bytes": 9778,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/test_proof_feedback_ablation.test.after.DATA",
+      "sha256": "bf195465dab79f259c87243eb66553286f2bd32084c80ca97cd4c56660191414"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py": {
+      "bytes": 9984,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/test_trainable_legal_ir_objective.current-after.DATA",
+      "sha256": "b78d1696b674d0416d108b003b6062a8fb0f2899af0a24dce2532f9ff4460068"
+    }
+  },
+  "current_independent_verified_receipt_producer_to_selected_record_handoff": false,
+  "current_roles": {
+    "ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py": {
+      "git_blob_sha1": "1f3d36a0c1cc595c1797b0f471720546ddc6c520",
+      "git_mode": "100644"
+    },
+    "ipfs_datasets_py/logic/ir_core/protocols.py": {
+      "git_blob_sha1": "09b5536bf3269b6eb54f62cfa83e8dceed53d49e",
+      "git_mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py": {
+      "git_blob_sha1": "b527db1c29a5e0ba13c13f2adf5a0f8be925ed7e",
+      "git_mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py": {
+      "git_blob_sha1": "3e08a06029424257f8aa9df72a4a12d29c0d9547",
+      "git_mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py": {
+      "git_blob_sha1": "37265225393a19b2c58ee0ead946929090b51d23",
+      "git_mode": "100644"
+    },
+    "tests/unit/logic/integration/test_legal_ir_proof_feedback.py": {
+      "git_blob_sha1": "df0bd14954e31c67d445d90b0372265a7e96d3a8",
+      "git_mode": "100644"
+    },
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py": {
+      "git_blob_sha1": "754d53a96072b21bcabb8a44a4fc615b4cf1152f",
+      "git_mode": "100644"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py": {
+      "git_blob_sha1": "af6bf4ff9ad59d7fbe3c1ac8d324e58b437f9c53",
+      "git_mode": "100644"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py": {
+      "git_blob_sha1": "dd11af058186d651fbe94588395494a09a72828c",
+      "git_mode": "100644"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py": {
+      "git_blob_sha1": "7d671b8c3c440731fc2ee48c15999b0d0c6766c9",
+      "git_mode": "100644"
+    }
+  },
+  "current_tree": "5668de8025cfbea85b1d6225ec32cbe2d1bf5acd",
+  "exact_missing_join": {
+    "basis": "v408 builder does not accept a reviewed target commitment and emits the legacy digest. Its Hammer reconstruction mapping does not substitute for independently checked typed legal ProofReceipt evidence.",
+    "current_owner_projection": "obligation_id + statement_sha256 + type",
+    "disposition": "No supported positive producer-to-trainer case in the existing route. Do not alter projected record or infer authority.",
+    "owner": "ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py::build_legal_ir_proof_feedback_record",
+    "required_selection_projection": "caller-selected sample, obligation, formal/view, review, dependency digest and canonical exact feedback record ID"
+  },
+  "ordinary_pytest_full_files_unrun": true,
+  "preflight_only_refusals_preserved": [
+    {
+      "bytes": 12023,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/preflight-root-wide-status-refusal.py.DATA",
+      "sha256": "d9ed50fe81afd8c98c6c86811b560fa6b2fe0feb235b65af66bdba02dd20cd97"
+    },
+    {
+      "bytes": 12061,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/preflight-pretty-manifest-size-refusal.py.DATA",
+      "sha256": "aa92b18668cfe284dd7591f435819d76da3e02aa6eb9d81d2817cfc17e48645c"
+    },
+    {
+      "bytes": 13237,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/preflight-archived-baseline-reference-shape-refusal.py.DATA",
+      "sha256": "e77170022a8a78834653d6c03e7513f832ee253a56dc2eb06a38173ea189117d"
+    }
+  ],
+  "preparation": {
+    "bytes": 11027,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/READY-current-Guide571-existing-no-fit-replay.json",
+    "sha256": "bf23d457e0ee2f50a4c0620f3cd6f9f3ac190af6cb46ed6214524c447a2df654"
+  },
+  "previous_exact_eight": {
+    "bytes": 41352,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-exact-authorized-feedback-eight-rebased-D19621b4-private-v01-yw6km_79/sealed-exact-eight-D19621b4-private-rebase-v01.json",
+    "sha256": "0dc8e7f675fc809609931ce72d0d2b6b988296ecb187d3fae4e7468706b951c7"
+  },
+  "private_existing_same6_before_pass2_fail4_after_pass6": true,
+  "producer_function_exact_v408_preserved": true,
+  "retention17_and_maintained10_are_distinct": true,
+  "schema": "actual-Phase7-Guide571-retained-v408-composed-exact8-private-no-fit/v1"
+}

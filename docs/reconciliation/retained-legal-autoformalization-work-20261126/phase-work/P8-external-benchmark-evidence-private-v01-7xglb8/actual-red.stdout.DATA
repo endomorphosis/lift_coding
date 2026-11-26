@@ -1,0 +1,42 @@
+......FFFF.FF                                                            [100%]
+=================================== FAILURES ===================================
+______ test_reference_ir_requires_candidate_in_fixed_denominator[omitted] ______
+../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:203: in test_reference_ir_requires_candidate_in_fixed_denominator
+    assert result.accepted is False
+E   AssertionError: assert True is False
+E    +  where True = ExternalBenchmarkPacketResult(packet_id='external-expert-privacy-notice-001', accepted=True, scores={'citations': 1.0,...vacy-notice-provenance']}, 'semantic_equivalence': {'available': False, 'reason': 'reference_or_candidate_ir_absent'}}).accepted
+_______ test_reference_ir_requires_candidate_in_fixed_denominator[null] ________
+../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:203: in test_reference_ir_requires_candidate_in_fixed_denominator
+    assert result.accepted is False
+E   AssertionError: assert True is False
+E    +  where True = ExternalBenchmarkPacketResult(packet_id='external-expert-privacy-notice-001', accepted=True, scores={'citations': 1.0,...vacy-notice-provenance']}, 'semantic_equivalence': {'available': False, 'reason': 'reference_or_candidate_ir_absent'}}).accepted
+_______ test_reference_ir_requires_candidate_in_fixed_denominator[empty] _______
+../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:203: in test_reference_ir_requires_candidate_in_fixed_denominator
+    assert result.accepted is False
+E   AssertionError: assert True is False
+E    +  where True = ExternalBenchmarkPacketResult(packet_id='external-expert-privacy-notice-001', accepted=True, scores={'citations': 1.0,...vacy-notice-provenance']}, 'semantic_equivalence': {'available': False, 'reason': 'reference_or_candidate_ir_absent'}}).accepted
+______ test_reference_ir_requires_candidate_in_fixed_denominator[invalid] ______
+../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:203: in test_reference_ir_requires_candidate_in_fixed_denominator
+    assert result.accepted is False
+E   AssertionError: assert True is False
+E    +  where True = ExternalBenchmarkPacketResult(packet_id='external-expert-privacy-notice-001', accepted=True, scores={'citations': 1.0,...vacy-notice-provenance']}, 'semantic_equivalence': {'available': False, 'reason': 'reference_or_candidate_ir_absent'}}).accepted
+__________________ test_required_round_trip_needs_observation __________________
+../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:238: in test_required_round_trip_needs_observation
+    assert result.accepted is False
+E   AssertionError: assert True is False
+E    +  where True = ExternalBenchmarkPacketResult(packet_id='external-expert-privacy-notice-001', accepted=True, scores={'citations': 1.0,...valence': 1.0, 'proof_obligation_delta_score': 1.0, 'structural_equivalence': 1.0, 'temporal_window_agreement': 1.0}}}).accepted
+_______________ test_empty_external_population_has_no_acceptance _______________
+../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:254: in test_empty_external_population_has_no_acceptance
+    assert report.accepted is False
+E   AssertionError: assert True is False
+E    +  where True = ExternalBenchmarkReport(packet_results=(), benchmark_digest='sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945', internal_canary_metrics={}, schema_version='legal-ir-external-benchmark-report-v1').accepted
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-evidence-private-v01-7xglb8/red/junit.xml -
+=========================== short test summary info ============================
+FAILED ../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator[omitted]
+FAILED ../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator[null]
+FAILED ../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator[empty]
+FAILED ../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator[invalid]
+FAILED ../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_required_round_trip_needs_observation
+FAILED ../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_empty_external_population_has_no_acceptance
+6 failed, 7 passed in 1.64s
+{"fixture": "fb9a76552e2b938369d93d73a2a25aa76a963101cac96fd487a246bc43c54971", "guard_events": [], "mode": "red", "overlays": [{"actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-evidence-private-v01-7xglb8/benchmark-owner.before.py.DATA", "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark"}], "pytest_exit": 1, "test": "3be70b613a6225762573760021a15bca4b50da43c42db3b1054a562a42693972"}

@@ -1,0 +1,361 @@
+"""Private AST-only adaptation of the retained operator. Never launch it here."""
+from __future__ import annotations
+
+import ast
+import builtins
+import copy
+import difflib
+import hashlib
+import io
+import json
+import os
+from pathlib import Path
+import re
+import stat
+import sys
+import types
+import unittest
+
+HERE = Path(__file__).parent
+BASE = Path('/tmp/Root-P1-current-protocol-Lean-native-cache-v567-0mR2Fihk/Root-selected-existing-Native-cache-current-operator.py')
+HIST = Path('/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/Phase1-actual-native-expected-declaration-type-dependency-caller-binding-v01/direct-existing-owner-Native3-wrapper-v01/selected-native3-direct-existing-owner-v02.py')
+LEAN = Path('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-accepted-request-and-integer-status-combined-private-IN9OiuMf/owner.after.py.DATA')
+BINDER = HERE / 'bind_existing_native_expected_policy.current-c105-INERT.py.DATA'
+INPUTS = {
+    str(BASE): (36249, 'a229ffa700df5bf1b4a6766c9b2fa18657f9ef98846cbef6f2edadfcb2b55c98'),
+    str(HIST): (28945, '9400579f8f995147eafc2cc8f724aa32906e15de979559497df7f5eee41091ba'),
+    str(LEAN): (103838, 'c1050ad1ec067fc7f7c8fea08793e872511fe58029e9b1aa89ec90d2cb288313'),
+    str(BINDER): (5298, '5e2259b4b6bd6ce4129be265383fc84594e5a3be3aa8e4c5177cc1f22ed3d7db'),
+}
+FIELDS = ('st_dev', 'st_ino', 'st_mode', 'st_nlink', 'st_uid', 'st_gid', 'st_size', 'st_mtime_ns', 'st_ctime_ns')
+f9 = lambda s: {k: str(getattr(s, k)) for k in FIELDS}
+sha = lambda b: hashlib.sha256(b).hexdigest()
+reads = []
+
+
+def read_exact(path, expected):
+    before = path.lstat()
+    assert stat.S_ISREG(before.st_mode) and before.st_nlink == 1
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+    try:
+        assert f9(before) == f9(os.fstat(fd))
+        parts = []
+        while piece := os.read(fd, 65536):
+            parts.append(piece)
+        raw = b''.join(parts)
+        assert f9(before) == f9(os.fstat(fd)) == f9(path.lstat())
+    finally:
+        os.close(fd)
+    assert (len(raw), sha(raw)) == expected
+    reads.append({'path': str(path), 'bytes': len(raw), 'sha256': sha(raw), 'full9': f9(before)})
+    return raw
+
+
+def seal(name, raw):
+    path = HERE / name
+    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o400)
+    try:
+        todo = memoryview(raw)
+        while todo:
+            count = os.write(fd, todo)
+            assert count > 0
+            todo = todo[count:]
+        os.fsync(fd)
+    finally:
+        os.close(fd)
+    read_exact(path, (len(raw), sha(raw)))
+    return {'path': str(path), 'bytes': len(raw), 'sha256': sha(raw)}
+
+
+def seal_json(name, value):
+    return seal(name, (json.dumps(value, indent=2, sort_keys=True) + '\n').encode())
+
+
+def source_segment(raw, first, last):
+    return '\n'.join(raw.decode().splitlines()[first - 1:last]) + '\n'
+
+
+def block(raw):
+    tree = ast.parse(raw)
+    outer = next(n for n in tree.body if isinstance(n, ast.Try))
+    phase = next(n for n in outer.body if isinstance(n, ast.Try))
+    with_node = phase.body[0]
+    inner = next(n for n in with_node.body if isinstance(n, ast.Try))
+    statements = inner.body
+    first = next(i for i, n in enumerate(statements) if isinstance(n, ast.Assign) and any(isinstance(x, ast.Name) and x.id == 'attempts' for x in n.targets))
+    last = next(i for i in range(first, len(statements)) if isinstance(statements[i], ast.Assign) and any(isinstance(x, ast.Subscript) and isinstance(x.value, ast.Name) and x.value.id == 'report' and isinstance(x.slice, ast.Constant) and x.slice.value == 'qualification_scope' for x in statements[i].targets))
+    selected = statements[first:last + 1]
+    # Successor checks the actual test return before accepting the report.
+    preceding = statements[first - 2:first]
+    if any(isinstance(n, ast.Assert) and 'test_return' in ast.unparse(n.test) for n in preceding):
+        selected = [next(n for n in preceding if isinstance(n, ast.Assert) and 'test_return' in ast.unparse(n.test))] + selected
+    return ast.fix_missing_locations(ast.Module(body=copy.deepcopy(selected), type_ignores=[]))
+
+
+def real_diagnostics(raw):
+    tree = ast.parse(raw)
+    definitions = {}
+    for node in tree.body:
+        if isinstance(node, (ast.FunctionDef, ast.ClassDef)):
+            definitions[node.name] = node
+        elif isinstance(node, ast.Assign):
+            for target in node.targets:
+                if isinstance(target, ast.Name):
+                    definitions[target.id] = node
+    required, todo = set(), ['_lean_error_diagnostics']
+    while todo:
+        name = todo.pop()
+        if name in required:
+            continue
+        required.add(name)
+        node = definitions[name]
+        todo.extend(x.id for x in ast.walk(node) if isinstance(x, ast.Name) and isinstance(x.ctx, ast.Load) and x.id in definitions and x.id not in required)
+    selected = [n for n in tree.body if any(n is definitions[k] for k in required)]
+    module = ast.Module(body=[ast.ImportFrom(module='__future__', names=[ast.alias(name='annotations')], level=0)] + copy.deepcopy(selected), type_ignores=[])
+    namespace = {'json': json, 're': re, '__name__': 'actual_cached_lean_diagnostic_functions'}
+    exec(compile(ast.fix_missing_locations(module), str(LEAN), 'exec'), namespace)
+    return types.SimpleNamespace(_lean_error_diagnostics=namespace['_lean_error_diagnostics']), sorted(required)
+
+
+def fixture():
+    def result(rc=0, stdout=''):
+        return dict(returncode=rc, stdout=stdout, stderr='', workspace_cleaned=True,
+                    native_lifecycle={'cleanup_confirmed': True}, timed_out=False,
+                    cancelled=False, unavailable=False, output_truncated=False,
+                    workspace_limit_exceeded=False, resource_exhausted=False)
+    probe = result(stdout='Lean (version 4.34.1)')
+    attempts = [{'SDK_returned_result': True, 'request': {'argv': ['/fictional/lean', '--version']}, 'result': probe}]
+    rows = []
+    for name in ('positive', 'wrong_type', 'unapproved_dependency'):
+        axioms = ['Classical.choice'] if name == 'unapproved_dependency' else []
+        receipt = dict(theorem_name='wanted', native_identity={'fixture': True},
+                       native_identity_checked_after_compile=True, approved_axioms=[],
+                       accepted=name == 'positive', expected_proposition_checked=name == 'positive',
+                       expected_obligation_declaration='wanted',
+                       axiom_report={'axioms': axioms, 'declaration': 'wanted'})
+        rows.append({'case': name, 'outcome': {'receipt': receipt}})
+        output = json.dumps({'severity': 'error', 'data': 'type mismatch'}) if name == 'wrong_type' else ''
+        attempts.append({'SDK_returned_result': True, 'request': {'argv': ['/fictional/lean', '--json', name + '.lean']}, 'result': result(rc=1 if name == 'wrong_type' else 0, stdout=output)})
+    original = dict(schema='native-lean-v2-proof-binding-check/v1', native_Lean_executed=True,
+                    toolchain_version='4.34.1', version_probe=copy.deepcopy(probe), cases=rows,
+                    statutory_or_source_semantic_admission=False)
+    return dict(report={'native_attempts': attempts, 'actual_native_qualification': False},
+                original=original, test_return=None, FLAGS={'IPFS_DATASETS_LEAN_VERSION': '4.34.1'})
+
+
+def run_suite(raw, lean):
+    code = compile(block(raw), '<exact-existing-operator-acceptance-AST>', 'exec')
+    class NativePolicyAcceptance(unittest.TestCase):
+        def accept(self, context):
+            context['lean'] = lean
+            exec(code, context)
+            self.assertIs(context['report']['actual_native_qualification'], True)
+
+        def refuse(self, mutate):
+            context = fixture()
+            mutate(context)
+            with self.assertRaises((AssertionError, KeyError, ValueError, TypeError)):
+                self.accept(context)
+            self.assertIs(context['report']['actual_native_qualification'], False)
+
+        def test_three_actual_case_shapes(self):
+            self.accept(fixture())
+
+        def test_historical_additional_probe_allowed(self):
+            context = fixture()
+            context['report']['native_attempts'].append(copy.deepcopy(context['report']['native_attempts'][0]))
+            self.accept(context)
+
+        def test_missing_compiler(self):
+            self.refuse(lambda c: c['report']['native_attempts'].pop())
+
+        def test_missing_probe(self):
+            self.refuse(lambda c: c['report']['native_attempts'].pop(0))
+
+        def test_unclassified_command(self):
+            def mutate(c):
+                command = copy.deepcopy(c['report']['native_attempts'][0]); command['request']['argv'] = ['/fictional/other']; c['report']['native_attempts'].append(command)
+            self.refuse(mutate)
+
+        def test_nonreturned_result(self):
+            self.refuse(lambda c: c['report']['native_attempts'][1].update(SDK_returned_result=False))
+
+        def test_unclean_result(self):
+            self.refuse(lambda c: c['report']['native_attempts'][1]['result'].update(workspace_cleaned=False))
+
+        def test_unconfirmed_native_cleanup(self):
+            self.refuse(lambda c: c['report']['native_attempts'][1]['result']['native_lifecycle'].update(cleanup_confirmed=False))
+
+        def test_runtime_limit_or_failure_flags(self):
+            for key in ('timed_out', 'cancelled', 'unavailable', 'output_truncated', 'workspace_limit_exceeded', 'resource_exhausted'):
+                with self.subTest(key=key):
+                    self.refuse(lambda c: c['report']['native_attempts'][1]['result'].__setitem__(key, True))
+
+        def test_case_order_changed(self):
+            self.refuse(lambda c: c['original']['cases'].reverse())
+
+        def test_wrong_type_compiles(self):
+            self.refuse(lambda c: c['report']['native_attempts'][2]['result'].update(returncode=0))
+
+        def test_wrong_type_accepted(self):
+            self.refuse(lambda c: c['original']['cases'][1]['outcome']['receipt'].update(accepted=True))
+
+        def test_wrong_type_not_real_diagnostic(self):
+            self.refuse(lambda c: c['report']['native_attempts'][2]['result'].update(stdout='type mismatch in plain non-error text'))
+
+        def test_dependency_accepted(self):
+            self.refuse(lambda c: c['original']['cases'][2]['outcome']['receipt'].update(accepted=True))
+
+        def test_dependency_empty_or_other_declaration(self):
+            for replacement in ({'axioms': [], 'declaration': 'wanted'}, {'axioms': ['Classical.choice'], 'declaration': 'other'}):
+                with self.subTest(value=replacement):
+                    self.refuse(lambda c: c['original']['cases'][2]['outcome']['receipt'].update(axiom_report=replacement))
+
+        def test_positive_unapproved_axiom(self):
+            self.refuse(lambda c: c['original']['cases'][0]['outcome']['receipt']['axiom_report'].update(axioms=['unsafe']))
+
+        def test_positive_proposition_unchecked(self):
+            self.refuse(lambda c: c['original']['cases'][0]['outcome']['receipt'].update(expected_proposition_checked=False))
+
+        def test_missing_native_identity(self):
+            self.refuse(lambda c: c['original']['cases'][0]['outcome']['receipt'].update(native_identity=None))
+
+        def test_wrong_report_schema(self):
+            self.refuse(lambda c: c['original'].update(schema='other'))
+
+        def test_no_statutory_authority(self):
+            self.refuse(lambda c: c['original'].update(statutory_or_source_semantic_admission=True))
+
+        def test_test_return_not_none(self):
+            self.refuse(lambda c: c.update(test_return={}))
+
+        def test_toolchain_mismatch(self):
+            self.refuse(lambda c: c['original'].update(toolchain_version='different'))
+
+        def test_probe_report_not_actual_result(self):
+            self.refuse(lambda c: c['original']['version_probe'].update(stdout='substituted'))
+    stream = io.StringIO()
+    suite = unittest.defaultTestLoader.loadTestsFromTestCase(NativePolicyAcceptance)
+    result = unittest.TextTestRunner(stream=stream, verbosity=2).run(suite)
+    return dict(tests_run=result.testsRun, failures=len(result.failures), errors=len(result.errors), skipped=len(result.skipped), successful=result.wasSuccessful(), output=stream.getvalue())
+
+
+def main():
+    mode = sys.argv[1]
+    source = {name: read_exact(Path(name), expected) for name, expected in INPUTS.items()}
+    base, history, lean_raw = source[str(BASE)], source[str(HIST)], source[str(LEAN)]
+    lean, diagnostic_names = real_diagnostics(lean_raw)
+    if mode == 'red':
+        result = run_suite(base, lean)
+        assert not result['successful'] and result['tests_run'] == 23
+        result.update(scope='Fictional stdlib exact-existing-acceptance-AST controls; no project import, SDK, Source or Native execution', original_operator=INPUTS[str(BASE)], actual_Native_executed=False, diagnostics_are_actual_cached_functions=diagnostic_names, reads=reads)
+        print(json.dumps(seal_json('actual-existing-Native3-adaptation-before-RED-v01.json', result)))
+        return
+    assert mode == 'green'
+    text = base.decode()
+    lines = text.splitlines(keepends=True)
+    # Null every inherited runtime path/value; the assertion remains before outer try.
+    for index in range(19, 30):
+        name = lines[index].split(' = ', 1)[0]
+        lines[index] = name + ' = None\n'
+    lines[30] = "NATIVE_CASE_PROFILE = 'P1-native3-expected-type-dependency/v1'\n"
+    text = ''.join(lines)
+    def replace(old, new):
+        nonlocal text
+        assert text.count(old) == 1, old
+        text = text.replace(old, new)
+    replace("assert type(ROOT_SELECTION) is str and ROOT_SELECTION and (type(CURRENT_BINDING_REF) is dict), 'current Native3 operation is not selected'", "assert (type(ROOT_SELECTION) is str and ROOT_SELECTION and type(CURRENT_BINDING_REF) is dict\n        and isinstance(RUN_OUTPUT, Path) and RUN_OUTPUT.is_absolute()\n        and isinstance(W, Path) and W.is_absolute() and isinstance(A, Path) and A.is_absolute()\n        and type(PATH_SCOPE) is str and PATH_SCOPE), 'current Native3 operation is unbound and not selected'")
+    replace("assert _binding['cache_case_profile'] == CACHE_CASE_PROFILE", "assert _binding['native_case_profile'] == NATIVE_CASE_PROFILE")
+    replace("assert _binding['Native_enrollment']['case_profile'] == CACHE_CASE_PROFILE, 'fresh cache-specific Native enrollment required; no old scope transfer'", "assert _binding['Native_enrollment']['case_profile'] == NATIVE_CASE_PROFILE, 'fresh case-specific Native enrollment required; no old scope transfer'\n    _clock = _binding['clock_scope']\n    assert (type(_clock) is dict and type(_clock.get('not_before_utc_ns')) is int\n            and type(_clock.get('submit_deadline_utc_ns')) is int\n            and _clock['not_before_utc_ns'] <= time.time_ns() <= _clock['submit_deadline_utc_ns']), 'fresh selected submission window required'")
+    replace("assert len(binder_raw) == 5635 and H(binder_raw) == '403a945120e859401603b853d0f699730932da12530f95c0efc892ec89c2c211'", "assert len(binder_raw) == 5298 and H(binder_raw) == '5e2259b4b6bd6ce4129be265383fc84594e5a3be3aa8e4c5177cc1f22ed3d7db'")
+    replace("'native-lean-proof-cache-v3.json'", "'native-lean-v2-result.json'")
+    replace("'actual-current-native-cache-case-caller-owned-validation/v1'", "'actual-current-native3-case-caller-owned-validation/v1'")
+    replace("request_id='phase1:native-cache:exact-reuse'", "request_id='phase1:native3:expected-type-dependency'")
+    replace("bound = binder_namespace['bind_existing_native_cache_exact_reuse'](test_namespace, owning_test_source_bytes=test_raw, caller_owned_runner=runner, caller_owned_processes=cache_processes, executable=LEAN, version=FLAGS['IPFS_DATASETS_LEAN_VERSION'])", "bound = binder_namespace['bind_existing_native_expected_policy'](test_namespace, owning_test_source_bytes=test_raw, caller_owned_runner=runner)")
+    replace('cache_result = bound(TMP)', 'test_return = bound(TMP)')
+    replace("assert original == cache_result, 'maintained helper return/report differ'", "assert test_return is None, 'maintained Native3 test must return None; saved report is read independently'")
+    old = source_segment(base, 375, 407)
+    kept = source_segment(history, 355, 382)
+    kept = ''.join('    ' + line if line.strip() else line for line in kept.splitlines(keepends=True))
+    insert = ("                assert original['schema'] == 'native-lean-v2-proof-binding-check/v1'\n"
+              "                assert original['native_Lean_executed'] is True\n"
+              "                assert original['toolchain_version'] == FLAGS['IPFS_DATASETS_LEAN_VERSION']\n"
+              "                assert original['statutory_or_source_semantic_admission'] is False\n"
+              "                assert any(original['version_probe'] == row['result'] for row in versions), 'test version probe is not an actual retained result'\n")
+    # Add report binding after historical attempt classification, before its policy checks.
+    marker = "                cases = original['cases']\n"
+    assert kept.count(marker) == 1
+    kept = kept.replace(marker, insert + marker)
+    replace(old, kept)
+    replace("'actual-current-native-cache-case-selected-prelude-refusal/v1'", "'actual-current-native3-case-selected-prelude-refusal/v1'")
+    candidate = text.encode()
+    ast.parse(candidate)
+    compile(candidate, '<INERT-existing-current-Native3-operator>', 'exec', dont_inherit=True)
+    # Every function, including custody, Source, resource, retention and release helpers, is unchanged.
+    old_tree, new_tree = ast.parse(base), ast.parse(candidate)
+    old_functions = {n.name: ast.dump(n, include_attributes=False) for n in ast.walk(old_tree) if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))}
+    new_functions = {n.name: ast.dump(n, include_attributes=False) for n in ast.walk(new_tree) if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))}
+    assert old_functions == new_functions
+    old_final = [n for n in ast.walk(old_tree) if isinstance(n, ast.Try) and any(isinstance(x, ast.Assign) and any(isinstance(y, ast.Name) and y.id == '_primary_phase_exception' for y in x.targets) for x in n.finalbody)]
+    new_final = [n for n in ast.walk(new_tree) if isinstance(n, ast.Try) and any(isinstance(x, ast.Assign) and any(isinstance(y, ast.Name) and y.id == '_primary_phase_exception' for y in x.targets) for x in n.finalbody)]
+    assert len(old_final) == len(new_final) == 1
+    assert ast.dump(ast.Module(body=old_final[0].finalbody, type_ignores=[]), include_attributes=False) == ast.dump(ast.Module(body=new_final[0].finalbody, type_ignores=[]), include_attributes=False)
+    # Execute only constant assignments and the outside-try refusal, with an effect sentinel.
+    early = new_tree.body[next(i for i,n in enumerate(new_tree.body) if isinstance(n, ast.Assert))]
+    prefix = [n for n in new_tree.body if isinstance(n, ast.Assign) and n.lineno < early.lineno]
+    prefix = [n for n in prefix if all(isinstance(x, ast.Name) and x.id in {'N','HERE','RUN_OUTPUT','W','A','STATE','LEAN','LEAN_BIN','PATH_SCOPE','ROOT_SELECTION','CURRENT_BINDING_REF','NATIVE_CASE_PROFILE'} for x in n.targets)]
+    effect_calls = []
+    def effect(*args, **kwargs):
+        effect_calls.append((args, kwargs)); raise RuntimeError('unexpected effect')
+    scope = {'Path': Path, 'read_private': effect, 'os': types.SimpleNamespace(open=effect)}
+    try:
+        exec(compile(ast.fix_missing_locations(ast.Module(body=copy.deepcopy(prefix + [early]), type_ignores=[])), '<INERT-pre-effect-refusal-AST>', 'exec'), scope)
+    except AssertionError as error:
+        inert_error = str(error)
+    else:
+        raise AssertionError('unbound operator prefix did not refuse')
+    assert effect_calls == []
+    result = run_suite(candidate, lean)
+    assert result['successful'] and result['tests_run'] == 23
+    post = seal('existing-v567-Native3-current-operator-INERT-v01.py.DATA', candidate)
+    forward = ''.join(difflib.unified_diff(base.decode().splitlines(keepends=True), candidate.decode().splitlines(keepends=True), fromfile=str(BASE), tofile=post['path'])).encode()
+    inverse = ''.join(difflib.unified_diff(candidate.decode().splitlines(keepends=True), base.decode().splitlines(keepends=True), fromfile=post['path'], tofile=str(BASE))).encode()
+    patch_ref = seal('existing-v567-Native3-current-operator.forward.diff', forward)
+    inverse_ref = seal('existing-v567-Native3-current-operator.inverse.diff', inverse)
+    binding = dict(schema='existing-direct-Native3-current-bindings/v1', Root_selection=None,
+                   native_case_profile='P1-native3-expected-type-dependency/v1',
+                   Source42_current_owner=None, Source42_current_owner_binding=None,
+                   Source42_raw=None, Source42_record=None, Source_IO_allocation=None,
+                   Source_epoch=None, W_INDEX=None, PROJECTS=None, Native=None,
+                   normal_namespaces=None, Native_enrollment=None, resource=None,
+                   lean_executable=None, clock_scope=None, owning_test_record=None,
+                   owning_test_raw=None, current_SDK_source_pins=None,
+                   current_protocol_raw_source=None, literal_import_coverage_proof=None,
+                   literal_import_coverage_scope=None,
+                   binder_raw={'path': str(BINDER), 'bytes': INPUTS[str(BINDER)][0], 'sha256': INPUTS[str(BINDER)][1]},
+                   live_bindings_currently_unbound=True)
+    binding_ref = seal_json('existing-v567-Native3-current-binding-NULL-INERT-v01.json', binding)
+    result.update(scope='Fictional stdlib acceptance-AST controls only, real cached diagnostic functions; not SDK/canonical import/Source/Native or current toolchain qualification', actual_Native_executed=False,
+                  diagnostic_functions=diagnostic_names, post=post, same_suite_as_RED=True,
+                  inert_prefix_refused=inert_error, pre_effect_calls=effect_calls,
+                  all_existing_function_ASTs_unchanged=sorted(old_functions),
+                  original_finalizer_AST_unchanged=True)
+    result_ref = seal_json('actual-existing-Native3-adaptation-after-GREEN-v01.json', result)
+    packet = dict(schema='private-existing-operator-Native3-adaptation-INERT/v1',
+                  prior_operator={'path': str(BASE), 'bytes': INPUTS[str(BASE)][0], 'sha256': INPUTS[str(BASE)][1]},
+                  historical_case_acceptance={'path': str(HIST), 'bytes': INPUTS[str(HIST)][0], 'sha256': INPUTS[str(HIST)][1], 'lines': [355,382]},
+                  operator=post, forward=patch_ref, inverse=inverse_ref, future_binding=binding_ref,
+                  green=result_ref, red={'path':str(HERE/'actual-existing-Native3-adaptation-before-RED-v01.json')},
+                  runtime_literals_requiring_actual_binding=['RUN_OUTPUT','W','A','PATH_SCOPE','ROOT_SELECTION','CURRENT_BINDING_REF'],
+                  all_actual_Source_epoch_full9_clock_owner_assets_enrollment_allocation_results=None,
+                  actual_Source=False, actual_SDK=False, actual_Native=False, canonical_mutations=False,
+                  new_runner=False, legal_admission=False, full_Phase1_complete=False, full_eight_phase_goal_complete=False,
+                  inherited_custody_paths_not_requalified=True,
+                  next_existing_owner_action='Fresh-bind actual owner/Source/epoch/protocol/toolchain/resource/clock/output selection to this existing operator; no execution selected by this private packet',
+                  read_costs_this_green_process=reads, explicit_read_bytes_this_green_process=sum(x['bytes'] for x in reads),
+                  prior_reads_RED_failures_repeats_retained=True)
+    print(json.dumps(seal_json('SEALED-existing-v567-Native3-current-operator-adaptation-INERT-v01.json', packet)))
+
+
+if __name__ == '__main__':
+    main()

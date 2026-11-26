@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="23" time="0.420" timestamp="2026-11-25T20:26:12.970288" hostname="spark-b271"><testcase classname="test_legal_ir_semantic_metrics" name="test_retrieved_complete_payloads_bind_frozen_rankings_and_separate_local_matches_from_legal_relevance" time="0.004" /><testcase classname="test_legal_ir_semantic_metrics" name="test_retrieved_payloads_retain_abstentions_and_absent_counterparts_without_false_recall" time="0.006" /><testcase classname="test_legal_ir_semantic_metrics" name="test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[rankings-pin]" time="0.001" /><testcase classname="test_legal_ir_semantic_metrics" name="test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[reference-pin]" time="0.001" /><testcase classname="test_legal_ir_semantic_metrics" name="test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[candidate-pin]" time="0.001" /><testcase classname="test_legal_ir_semantic_metrics" name="test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[missing-query]" time="0.003" /><testcase classname="test_legal_ir_semantic_metrics" name="test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[duplicate-query]" time="0.003" /><testcase classname="test_legal_ir_semantic_metrics" name="test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[foreign-candidate]" time="0.003" /><testcase classname="test_legal_ir_semantic_metrics" name="test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[duplicate-rank]" time="0.003" /><testcase classname="test_legal_ir_semantic_metrics" name="test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[mixed-input]" time="0.003" /><testcase classname="test_legal_ir_semantic_metrics" name="test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[payload-binding]" time="0.003" /><testcase classname="test_legal_ir_semantic_metrics" name="test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[eligible-alias]" time="0.003" /><testcase classname="test_legal_ir_semantic_metrics" name="test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[cutoff-alias]" time="0.001" /><testcase classname="test_legal_ir_semantic_metrics" name="test_retrieved_payload_metrics_refuse_changed_population_binding_budget_and_opaque_rankings[target-access]" time="0.003" /><testcase classname="test_legal_ir_semantic_metrics" name="test_retrieved_payloads_detect_original_input_drift_during_posthoc_scoring" time="0.003" /><testcase classname="test_legal_ir_semantic_metrics" name="test_retrieved_payloads_reject_cutoff_configuration_drift_during_scoring[remove]" time="0.003" /><testcase classname="test_legal_ir_semantic_metrics" name="test_retrieved_payloads_reject_cutoff_configuration_drift_during_scoring[boolean-alias]" time="0.003" /><testcase classname="test_legal_ir_semantic_metrics" name="test_retrieved_payloads_reject_cutoff_configuration_drift_during_scoring[float-alias]" time="0.003" /><testcase classname="test_legal_ir_semantic_metrics" name="test_retrieved_payloads_refuse_methods_with_different_eligible_candidate_sets" time="0.003" /><testcase classname="test_legal_ir_semantic_metrics" name="test_retrieved_payloads_score_all_abstentions_when_depth_exceeds_the_bank[4]" time="0.001"><failure message="ValueError: explicit bounded cutoff configuration and ranking depth required">ranking_depth = 4
+
+    @pytest.mark.parametrize("ranking_depth", [4, 16])
+    def test_retrieved_payloads_score_all_abstentions_when_depth_exceeds_the_bank(ranking_depth):
+        owner, rankings, references, candidates, options = _retrieved_payload_case()
+        for producer in rankings.values():
+            for row in producer["rows"]:
+                row.update(
+                    status="abstained",
+                    abstention_reasons=["insufficient_permitted_training_examples"],
+                    context=None,
+                    retrieved_ids=[],
+                )
+                del row["retrieved_endpoint_refs"]
+        kwargs = options()
+        kwargs.update(ranking_depth=ranking_depth, cutoffs=(1, 3, ranking_depth))
+&gt;       report = owner.evaluate_complete_norm_retrieval_rankings(rankings, references, candidates, **kwargs)
+
+../test_legal_ir_semantic_metrics.py:845: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../../../repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_semantic_metrics.py:2409: in evaluate_complete_norm_retrieval_rankings
+    need(type(ranking_depth) is int and 1&lt;=ranking_depth&lt;=len(candidate_rows)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+message = 'explicit bounded cutoff configuration and ranking depth required'
+
+    def need(condition, message):
+&gt;       if not condition: raise ValueError(message)
+E       ValueError: explicit bounded cutoff configuration and ranking depth required
+
+../../../../repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_semantic_metrics.py:2402: ValueError</failure></testcase><testcase classname="test_legal_ir_semantic_metrics" name="test_retrieved_payloads_score_all_abstentions_when_depth_exceeds_the_bank[16]" time="0.001"><failure message="ValueError: explicit bounded cutoff configuration and ranking depth required">ranking_depth = 16
+
+    @pytest.mark.parametrize("ranking_depth", [4, 16])
+    def test_retrieved_payloads_score_all_abstentions_when_depth_exceeds_the_bank(ranking_depth):
+        owner, rankings, references, candidates, options = _retrieved_payload_case()
+        for producer in rankings.values():
+            for row in producer["rows"]:
+                row.update(
+                    status="abstained",
+                    abstention_reasons=["insufficient_permitted_training_examples"],
+                    context=None,
+                    retrieved_ids=[],
+                )
+                del row["retrieved_endpoint_refs"]
+        kwargs = options()
+        kwargs.update(ranking_depth=ranking_depth, cutoffs=(1, 3, ranking_depth))
+&gt;       report = owner.evaluate_complete_norm_retrieval_rankings(rankings, references, candidates, **kwargs)
+
+../test_legal_ir_semantic_metrics.py:845: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../../../repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_semantic_metrics.py:2409: in evaluate_complete_norm_retrieval_rankings
+    need(type(ranking_depth) is int and 1&lt;=ranking_depth&lt;=len(candidate_rows)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+message = 'explicit bounded cutoff configuration and ranking depth required'
+
+    def need(condition, message):
+&gt;       if not condition: raise ValueError(message)
+E       ValueError: explicit bounded cutoff configuration and ranking depth required
+
+../../../../repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_semantic_metrics.py:2402: ValueError</failure></testcase><testcase classname="test_legal_ir_semantic_metrics" name="test_retrieved_payloads_reject_short_rankings_or_unsupported_depth[4-False-fixed ranking depth or explicit abstention]" time="0.001"><failure message="AssertionError: Regex pattern did not match.&#10; Regex: 'fixed ranking depth or explicit abstention'&#10; Input: 'explicit bounded cutoff configuration and ranking depth required'">ranking_depth = 4, all_abstain = False
+error = 'fixed ranking depth or explicit abstention'
+
+    @pytest.mark.parametrize(
+        ("ranking_depth", "all_abstain", "error"),
+        [
+            (4, False, "fixed ranking depth or explicit abstention"),
+            (17, True, "bounded cutoff configuration and ranking depth"),
+        ],
+    )
+    def test_retrieved_payloads_reject_short_rankings_or_unsupported_depth(ranking_depth, all_abstain, error):
+        owner, rankings, references, candidates, options = _retrieved_payload_case()
+        if all_abstain:
+            for producer in rankings.values():
+                for row in producer["rows"]:
+                    row.update(status="abstained", retrieved_ids=[], retrieved_endpoint_refs=[])
+        kwargs = options()
+        kwargs.update(ranking_depth=ranking_depth, cutoffs=(1, 3, ranking_depth))
+        with pytest.raises(ValueError, match=error):
+&gt;           owner.evaluate_complete_norm_retrieval_rankings(rankings, references, candidates, **kwargs)
+
+../test_legal_ir_semantic_metrics.py:876: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../../../repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_semantic_metrics.py:2409: in evaluate_complete_norm_retrieval_rankings
+    need(type(ranking_depth) is int and 1&lt;=ranking_depth&lt;=len(candidate_rows)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+message = 'explicit bounded cutoff configuration and ranking depth required'
+
+    def need(condition, message):
+&gt;       if not condition: raise ValueError(message)
+E       ValueError: explicit bounded cutoff configuration and ranking depth required
+
+../../../../repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_semantic_metrics.py:2402: ValueError
+
+During handling of the above exception, another exception occurred:
+
+ranking_depth = 4, all_abstain = False
+error = 'fixed ranking depth or explicit abstention'
+
+    @pytest.mark.parametrize(
+        ("ranking_depth", "all_abstain", "error"),
+        [
+            (4, False, "fixed ranking depth or explicit abstention"),
+            (17, True, "bounded cutoff configuration and ranking depth"),
+        ],
+    )
+    def test_retrieved_payloads_reject_short_rankings_or_unsupported_depth(ranking_depth, all_abstain, error):
+        owner, rankings, references, candidates, options = _retrieved_payload_case()
+        if all_abstain:
+            for producer in rankings.values():
+                for row in producer["rows"]:
+                    row.update(status="abstained", retrieved_ids=[], retrieved_endpoint_refs=[])
+        kwargs = options()
+        kwargs.update(ranking_depth=ranking_depth, cutoffs=(1, 3, ranking_depth))
+&gt;       with pytest.raises(ValueError, match=error):
+E       AssertionError: Regex pattern did not match.
+E        Regex: 'fixed ranking depth or explicit abstention'
+E        Input: 'explicit bounded cutoff configuration and ranking depth required'
+
+../test_legal_ir_semantic_metrics.py:875: AssertionError</failure></testcase><testcase classname="test_legal_ir_semantic_metrics" name="test_retrieved_payloads_reject_short_rankings_or_unsupported_depth[17-True-bounded cutoff configuration and ranking depth]" time="0.001" /></testsuite></testsuites>

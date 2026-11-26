@@ -1,0 +1,216 @@
+{
+  "base": "bda9f1fb146722e8b116cb0503880fb22e5291a4",
+  "bytes": 1059185,
+  "roles": {
+    "ipfs_datasets_py.logic.CEC.native.dcec_cleaning": {
+      "bytes": 9131,
+      "git_blob": "95c482f2af3067181559c1eb5af733f5a85e8f0e",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/CEC/native/dcec_cleaning.py",
+      "relative_path": "ipfs_datasets_py/logic/CEC/native/dcec_cleaning.py",
+      "sha256": "06517ecd30e4889d2a54db6732279e61a53945906860ef66378b5d707cca04b0"
+    },
+    "ipfs_datasets_py.logic.CEC.native.dcec_core": {
+      "bytes": 57189,
+      "git_blob": "baa0353e9da94dc1542a5fadb4296710e55f6ec5",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/CEC/native/dcec_core.py",
+      "relative_path": "ipfs_datasets_py/logic/CEC/native/dcec_core.py",
+      "sha256": "bb977f411605fc1f0715ed23c988102d55fa012029053c21c8fc5b14aea17e14"
+    },
+    "ipfs_datasets_py.logic.CEC.native.dcec_integration": {
+      "bytes": 18642,
+      "git_blob": "6306716e4d0bc35c7952629f55aaf0ef53737027",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/CEC/native/dcec_integration.py",
+      "relative_path": "ipfs_datasets_py/logic/CEC/native/dcec_integration.py",
+      "sha256": "f039af934dba224d6c4984e8840fd8a4de00fe5e69837b0678d1d670dc26ac82"
+    },
+    "ipfs_datasets_py.logic.CEC.native.dcec_parsing": {
+      "bytes": 14204,
+      "git_blob": "0feb2b0a0e86f6ad8885ebe08f9ef4636427e8e2",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/CEC/native/dcec_parsing.py",
+      "relative_path": "ipfs_datasets_py/logic/CEC/native/dcec_parsing.py",
+      "sha256": "2756e3c94acf902579bfc54d469e01ddd25b72f53d177b88921829d71df7da70"
+    },
+    "ipfs_datasets_py.logic.CEC.native.dcec_prototypes": {
+      "bytes": 15038,
+      "git_blob": "607e722ed7af91b4ff832142eb38acf2d057f6e7",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/CEC/native/dcec_prototypes.py",
+      "relative_path": "ipfs_datasets_py/logic/CEC/native/dcec_prototypes.py",
+      "sha256": "0e0b231ed68c39054cfd2fd674780cb736fd258cde7570881cb3a41cb5d2680e"
+    },
+    "ipfs_datasets_py.logic.CEC.native.exceptions": {
+      "bytes": 10095,
+      "git_blob": "7d4d894fd23aaf15b8ab0948ee0d8c552fd061c7",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/CEC/native/exceptions.py",
+      "relative_path": "ipfs_datasets_py/logic/CEC/native/exceptions.py",
+      "sha256": "cbbbafacf70d1c7355d7c930f48c5f71fc711765aa4789a817e5c229c8e60622"
+    },
+    "ipfs_datasets_py.logic.TDFOL.tdfol_core": {
+      "bytes": 28721,
+      "git_blob": "c89b513ad59ba3e8c124be78ac2a93355f88a829",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/TDFOL/tdfol_core.py",
+      "relative_path": "ipfs_datasets_py/logic/TDFOL/tdfol_core.py",
+      "sha256": "67be350d1fb0422a64ab040349b2d51c4008fbeeb8b59a99b8901d681d7d71c7"
+    },
+    "ipfs_datasets_py.logic.TDFOL.tdfol_parser": {
+      "bytes": 29788,
+      "git_blob": "6fab7228536c780d1b38704c946532fd9c27cb2f",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/TDFOL/tdfol_parser.py",
+      "relative_path": "ipfs_datasets_py/logic/TDFOL/tdfol_parser.py",
+      "sha256": "8e1f8885be6dc2a7d692ecdf0364ccc4d01692c38c81137775d9d222d8b8d9d3"
+    },
+    "ipfs_datasets_py.logic.autoformal.corpus_contracts": {
+      "bytes": 27024,
+      "git_blob": "a6123cadd2535883d7e21829877e87f16c34a06e",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/autoformal/corpus_contracts.py",
+      "relative_path": "ipfs_datasets_py/logic/autoformal/corpus_contracts.py",
+      "sha256": "0279ad9f7afeb2843aba5c1e0c5b9dd85da8037bd46fd90497f987b613d05982"
+    },
+    "ipfs_datasets_py.logic.autoformal.family_qualification": {
+      "bytes": 37698,
+      "git_blob": "509d35f7e5c68acd2157f85f20face935cafcc31",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/autoformal/family_qualification.py",
+      "relative_path": "ipfs_datasets_py/logic/autoformal/family_qualification.py",
+      "sha256": "4db56c904cce8a030e5889b5d14687f01e9348842093480dd699649ad96dc1a8"
+    },
+    "ipfs_datasets_py.logic.autoformal.legal_canonical_calendar": {
+      "bytes": 29974,
+      "git_blob": "90c4357511dfb11ce18297c9d0d0e1abae57ac48",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/autoformal/legal_canonical_calendar.py",
+      "relative_path": "ipfs_datasets_py/logic/autoformal/legal_canonical_calendar.py",
+      "sha256": "b45d0ad9329e90e4b007885e201adf5b2602b2d789127555b35fdbe5b65bc1b5"
+    },
+    "ipfs_datasets_py.logic.autoformal.legal_canonical_qualified": {
+      "bytes": 19295,
+      "git_blob": "ee1bd80f49ee54d784ce3d82f2a970c18c628cb3",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/autoformal/legal_canonical_qualified.py",
+      "relative_path": "ipfs_datasets_py/logic/autoformal/legal_canonical_qualified.py",
+      "sha256": "580544f2bf329c54832eee9b66042794bab2e6938bad142952aca9f4438f5902"
+    },
+    "ipfs_datasets_py.logic.autoformal.legal_family_routes": {
+      "bytes": 7838,
+      "git_blob": "831d650fc53a1aa2108bd4bbec05d1321b75f8e4",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/autoformal/legal_family_routes.py",
+      "relative_path": "ipfs_datasets_py/logic/autoformal/legal_family_routes.py",
+      "sha256": "5e997e84596c1875d0140573b33a08ff9c12902b003ed3669e1f7bf51aee7c2d"
+    },
+    "ipfs_datasets_py.logic.families.namespaces": {
+      "bytes": 34262,
+      "git_blob": "2ff6102d93759b4bfd30e2d0054353db733e6e2b",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/families/namespaces.py",
+      "relative_path": "ipfs_datasets_py/logic/families/namespaces.py",
+      "sha256": "ba097e653158a812d66ead978d6405d61adaa293521305333579b19bd69a432d"
+    },
+    "ipfs_datasets_py.logic.formalization.autoencoder.native_family_lean_emitters": {
+      "bytes": 39438,
+      "git_blob": "208019d2fadb4c88dce44eab4927c92349ef6d84",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/formalization/autoencoder/native_family_lean_emitters.py",
+      "relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/native_family_lean_emitters.py",
+      "sha256": "dab6bbd4e17eef888f4181aab0c6ce3f087a717edc83a55befb7742fd1f598b1"
+    },
+    "ipfs_datasets_py.logic.formalization.autoencoder.native_legal_qualified_lean": {
+      "bytes": 16858,
+      "git_blob": "669c7d3a7d8df39e094cb84fad39fd4ce164fa71",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/formalization/autoencoder/native_legal_qualified_lean.py",
+      "relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/native_legal_qualified_lean.py",
+      "sha256": "5407ba7299b002048ff8f45dbea7295d3b210f41904f28a98684042d055d0b2a"
+    },
+    "ipfs_datasets_py.logic.formalization.autoencoder.native_qualified_lean": {
+      "bytes": 18936,
+      "git_blob": "3dc4abe1c79b854b612cdcd42167643b7cfe57c9",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/formalization/autoencoder/native_qualified_lean.py",
+      "relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/native_qualified_lean.py",
+      "sha256": "645d38508004833092cd5fd9870f29fdae34aa0e262471888973cb3203121408"
+    },
+    "ipfs_datasets_py.logic.intent_ir.formalize.modal_projections": {
+      "bytes": 22238,
+      "git_blob": "ed043a96be267fb18f78f7f454f320e08ab0fe8a",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/intent_ir/formalize/modal_projections.py",
+      "relative_path": "ipfs_datasets_py/logic/intent_ir/formalize/modal_projections.py",
+      "sha256": "7337b9266ed4f171ec7ee763828f8b637bf57930d8b89fa0d47139650996a14d"
+    },
+    "ipfs_datasets_py.logic.ir_core.provenance": {
+      "bytes": 31891,
+      "git_blob": "9f2e8425894c8287ae0046153ac081734cb77d8d",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/ir_core/provenance.py",
+      "relative_path": "ipfs_datasets_py/logic/ir_core/provenance.py",
+      "sha256": "16eaf7c258550e5625bc19e6e7468c94133aedd1e85e64075f057ab4e52c3efe"
+    },
+    "ipfs_datasets_py.logic.legal_ir.canonical_contracts": {
+      "bytes": 109257,
+      "git_blob": "1bf4da481ff84ccb3554ae0dd1126dfc4cbffb6b",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "relative_path": "ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+    },
+    "ipfs_datasets_py.logic.parsers.event_calculus": {
+      "bytes": 59003,
+      "git_blob": "7c1ce10a60d0153ebfc5e4e9f9d7efcd7188c6fa",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/parsers/event_calculus.py",
+      "relative_path": "ipfs_datasets_py/logic/parsers/event_calculus.py",
+      "sha256": "8bd7217febef6daf86f76bae7e03ab0cbf7eb22a1b64f3040fd26a3d2ebfc390"
+    },
+    "ipfs_datasets_py.logic.parsers.legacy_modal": {
+      "bytes": 71642,
+      "git_blob": "47caa0ac2246ed222d297a392c39647b79a6c57f",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/parsers/legacy_modal.py",
+      "relative_path": "ipfs_datasets_py/logic/parsers/legacy_modal.py",
+      "sha256": "7b18812ea6fcba8b65ed7dc5c3407e0ad06ac9760c5c66441e9677463f9eb66e"
+    },
+    "ipfs_datasets_py.logic.parsers.modal": {
+      "bytes": 99829,
+      "git_blob": "e952b112c50c7a63eb65a0a8f2fd8f9510320ac9",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/parsers/modal.py",
+      "relative_path": "ipfs_datasets_py/logic/parsers/modal.py",
+      "sha256": "3131ff1dd516ebdf52071215c2c7983f9cf317d86bb138ff9437faae9b227942"
+    },
+    "ipfs_datasets_py.logic.syntax_core.algebra": {
+      "bytes": 45735,
+      "git_blob": "3e38b32b0cdb97ff50f84e415c0d4425ab0d0c94",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/syntax_core/algebra.py",
+      "relative_path": "ipfs_datasets_py/logic/syntax_core/algebra.py",
+      "sha256": "d3587e2270943167ebef226e03cbd70cfc8888d936647670a21cfa514240e6b7"
+    },
+    "ipfs_datasets_py.logic.syntax_core.ast": {
+      "bytes": 56966,
+      "git_blob": "129c5c4079d2ef05924bcf62c76fb7d3fd22d5e7",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/syntax_core/ast.py",
+      "relative_path": "ipfs_datasets_py/logic/syntax_core/ast.py",
+      "sha256": "4709513f18ab270858fe9595d88a847ddc52092606c52c7802947abed1ab9ac4"
+    },
+    "ipfs_datasets_py.logic.syntax_core.contracts": {
+      "bytes": 75291,
+      "git_blob": "09d79a0e6ae23d8e71f31fbba9bbebfdb84f4546",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/syntax_core/contracts.py",
+      "relative_path": "ipfs_datasets_py/logic/syntax_core/contracts.py",
+      "sha256": "ce6d49e05ca2b09a84a3125ed6ad4c4aae4adf2c5943d3a4fd4eeeb057b444a8"
+    },
+    "ipfs_datasets_py.logic.syntax_core.diagnostics": {
+      "bytes": 10752,
+      "git_blob": "4b436f9aa0346ede2ef01a0f5a2400bc63abe0d5",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/syntax_core/diagnostics.py",
+      "relative_path": "ipfs_datasets_py/logic/syntax_core/diagnostics.py",
+      "sha256": "a291db3c2cea04ae8dd9221a5e5ddbebd419679c02a5a008034e3755e7650d8f"
+    },
+    "ipfs_datasets_py.logic.syntax_core.lexer": {
+      "bytes": 27534,
+      "git_blob": "dbb9e3f995404a0283fe6bcf5dc83f2d2d145eb4",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/syntax_core/lexer.py",
+      "relative_path": "ipfs_datasets_py/logic/syntax_core/lexer.py",
+      "sha256": "f666e9759323508f4e90964c0d71164645af9ce1de60bed778e5f64f7f4a3aea"
+    },
+    "ipfs_datasets_py.logic.syntax_core.signatures": {
+      "bytes": 30488,
+      "git_blob": "ce8eb3447fdb9ed57c348e0cb16fe60528d440b6",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/logic/syntax_core/signatures.py",
+      "relative_path": "ipfs_datasets_py/logic/syntax_core/signatures.py",
+      "sha256": "49dd4fb0096661a05a15f056eb57248349e2b4e0b02e83239f36db36788c75bf"
+    },
+    "ipfs_datasets_py.utils.cid_utils": {
+      "bytes": 4428,
+      "git_blob": "36944fb73c85e541b0b9c47531ebfd7b79791534",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/projection/ipfs_datasets_py/utils/cid_utils.py",
+      "relative_path": "ipfs_datasets_py/utils/cid_utils.py",
+      "sha256": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"
+    }
+  }
+}

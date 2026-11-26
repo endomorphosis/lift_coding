@@ -1,0 +1,87 @@
+"""Direct engineering fixture calls against current, unmodified package owners."""
+import hashlib
+import importlib.abc
+import json
+import os
+from pathlib import Path
+import resource
+import sys
+import time
+import traceback
+import types
+
+root, private, result_path = map(Path, sys.argv[1:4])
+case_position = int(sys.argv[4])
+resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
+resource.setrlimit(resource.RLIMIT_AS, (512 * 1024**2, 512 * 1024**2))
+resource.setrlimit(resource.RLIMIT_CPU, (45, 46))
+os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
+sys.dont_write_bytecode = True
+sys.path.insert(0, str(root))
+record = json.loads((private / "exact-test-only-candidate.json").read_bytes())
+test_file = root / record["path_in_repo"]
+raw = Path(record["after"]["path"]).read_bytes()
+assert len(raw) == record["after"]["bytes"]
+assert hashlib.sha256(raw).hexdigest() == record["after"]["sha256"]
+assert hashlib.sha256(test_file.read_bytes()).hexdigest() == record["before"]["sha256"]
+
+class RefuseLearnedRuntime(importlib.abc.MetaPathFinder):
+    def find_spec(self, fullname, path=None, target=None):
+        if fullname.split(".", 1)[0] in {"torch", "transformers", "sentence_transformers"}:
+            raise AssertionError("learned software outside the signed-mask fixture scope: " + fullname)
+        return None
+
+sys.meta_path.insert(0, RefuseLearnedRuntime())
+denials = []
+
+def observe(event, args):
+    if (event.startswith(("socket.", "subprocess.")) or event in
+            {"os.posix_spawn", "os.system", "os.exec", "os.fork"}):
+        denials.append(event)
+        raise AssertionError("external action outside the signed-mask fixture scope: " + event)
+
+sys.addaudithook(observe)
+module = types.ModuleType("_existing_mask_handoff_tests")
+module.__file__ = str(test_file)
+sys.modules[module.__name__] = module
+exec(compile(raw, str(test_file), "exec"), module.__dict__)
+fixture = module.reviewed_pair_case_v4.__wrapped__()
+retract = "test_reviewed_v4_replacement_review_withdraws_one_directed_negative"
+promote = "test_reviewed_v4_explicit_cross_context_positive_requires_new_pair_review_not_endpoint_rewrite"
+roster = [
+    ("test_reviewed_v4_whole_context_pair_review_preserves_five_labels_and_no_legal_applicability", ()),
+    ("test_reviewed_v4_endpoint_permissions_without_pair_review_supply_no_labels", ()),
+    (promote, ("corresponding",)),
+    (promote, ("equivalent",)),
+    (retract, ("unknown", "unknown_excluded", "unknown_pair_count")),
+    (retract, ("analogy", "analogy_retrieval_only", "analogy_retrieval_only_pair_count")),
+]
+results = []
+for name, params in [roster[case_position]]:
+    start = time.monotonic()
+    case = {"function": name, "arguments": params}
+    try:
+        getattr(module, name)(fixture, *params)
+    except Exception:
+        case.update(outcome="failed", traceback=traceback.format_exc())
+    else:
+        case["outcome"] = "passed"
+    case["elapsed_seconds"] = round(time.monotonic() - start, 6)
+    results.append(case)
+origins = {}
+for mod in [module.subject, module.subject.relations, module.fixtures]:
+    path = Path(mod.__file__).resolve()
+    value = path.read_bytes()
+    origins[mod.__name__] = {"path": str(path), "bytes": len(value), "sha256": hashlib.sha256(value).hexdigest()}
+report = dict(scope="direct signed fictional V4 mask fixtures; no normal pytest collection",
+    results=results, owner_origins=origins, test_sha256=record["after"]["sha256"], excluded_actions=denials,
+    torch_loaded="torch" in sys.modules, learned_model_executed=False,
+    fits_executed=0, subprocesses_launched_inside_fixtures=0)
+with result_path.open("x", encoding="utf-8") as stream:
+    json.dump(report, stream, indent=2, sort_keys=True)
+    stream.write("\n")
+    stream.flush()
+    os.fsync(stream.fileno())
+result_path.chmod(0o400)
+if any(row["outcome"] != "passed" for row in results) or denials:
+    sys.exit(1)

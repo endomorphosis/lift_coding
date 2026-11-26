@@ -1,0 +1,11 @@
+--- a/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py
++++ b/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py
+@@ -6908,7 +6908,7 @@
+                 sample_count=len(row_list),
+             )
+             bridge = measured_evaluation(bridge_rows, evaluation_kwargs, f"{stage}:bridge")
+-            self.alias_cached_legal_ir_targets(row_list[:len(bridge_rows)], bridge_rows)
++            self.alias_cached_legal_ir_targets(row_list, bridge_rows)
+             base = measured_evaluation(row_list, base_evaluation_kwargs, f"{stage}:base")
+             return replace(
+                 base,

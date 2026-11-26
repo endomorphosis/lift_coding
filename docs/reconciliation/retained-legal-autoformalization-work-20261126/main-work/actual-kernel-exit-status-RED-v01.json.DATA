@@ -1,0 +1,308 @@
+{
+  "kind": "fictional_stdlib_actual_AST_result_consistency_RED",
+  "source_nodes": [
+    {
+      "source": "process.published-611395.py.DATA",
+      "names": [
+        "ToolRuntime"
+      ],
+      "line": 174,
+      "end_line": 187,
+      "AST_sha256": "619379ad3797beaf37872d4da8521dab408f641a295bd3ecbb4cb5e6de460755"
+    },
+    {
+      "source": "process.published-611395.py.DATA",
+      "names": [
+        "ToolRunResult"
+      ],
+      "line": 462,
+      "end_line": 532,
+      "AST_sha256": "2fd1d278a7da60dd28c6bea45a566da9e2933fbab6be0a754f74119f5383078f"
+    },
+    {
+      "source": "wasm.published-611395.py.DATA",
+      "names": [
+        "DEFAULT_MAX_DIAGNOSTIC_CHARS"
+      ],
+      "line": 29,
+      "end_line": 29,
+      "AST_sha256": "697386d33b15af21f863dcb77c576ee48e227e14290ba3a1948ec62533267e2e"
+    },
+    {
+      "source": "wasm.published-611395.py.DATA",
+      "names": [
+        "DEFAULT_MAX_DIAGNOSTICS"
+      ],
+      "line": 30,
+      "end_line": 30,
+      "AST_sha256": "ab37cdd187665676628559d1755243ee9621c22456be5e1f603c8f231d30e03b"
+    },
+    {
+      "source": "wasm.published-611395.py.DATA",
+      "names": [
+        "_CONTROL"
+      ],
+      "line": 34,
+      "end_line": 34,
+      "AST_sha256": "f8867a90a0485bcc53af8b46b56059125f5eaa2697d274d44c1421265eeff12e"
+    },
+    {
+      "source": "wasm.published-611395.py.DATA",
+      "names": [
+        "KernelCapabilityError"
+      ],
+      "line": 37,
+      "end_line": 38,
+      "AST_sha256": "44217f2c25ba6b5b56e4e0cb493e729ea785a75b7537ddcc524d53c9c359dd92"
+    },
+    {
+      "source": "wasm.published-611395.py.DATA",
+      "names": [
+        "sanitize_diagnostic"
+      ],
+      "line": 108,
+      "end_line": 132,
+      "AST_sha256": "07dbefa4cc7e2079474be67a113187619ebfd7ffbad4a47d8841e31f27388c42"
+    },
+    {
+      "source": "wasm.published-611395.py.DATA",
+      "names": [
+        "bound_diagnostics"
+      ],
+      "line": 135,
+      "end_line": 159,
+      "AST_sha256": "66eb5377ec66385debfb7933de3372778936e5b00b9658d933ccf91ef521faf6"
+    },
+    {
+      "source": "kernel_lean.published-611395.py.DATA",
+      "names": [
+        "LEAN_AXIOM_REPORT_VERSION"
+      ],
+      "line": 83,
+      "end_line": 83,
+      "AST_sha256": "22da11b603115830eb199f0cf18199b7627d4536ca7cf5c590cabe57f1bcd879"
+    },
+    {
+      "source": "kernel_lean.published-611395.py.DATA",
+      "names": [
+        "_LEAN_NAME"
+      ],
+      "line": 109,
+      "end_line": 109,
+      "AST_sha256": "6dcff5ee7ef36175708f7bbcdb6b142e932a563c6448b41d384e5ebd8af0bced"
+    },
+    {
+      "source": "kernel_lean.published-611395.py.DATA",
+      "names": [
+        "_AXIOM_MARKER"
+      ],
+      "line": 110,
+      "end_line": 110,
+      "AST_sha256": "2c2ceb78441e68104070b8a11b24093697494373572427c0e1f9fbb90125e5f1"
+    },
+    {
+      "source": "kernel_lean.published-611395.py.DATA",
+      "names": [
+        "_AXIOM_MESSAGE"
+      ],
+      "line": 111,
+      "end_line": 115,
+      "AST_sha256": "f7f1f8fd6f4984874673d0520c02991d144aec265f296e6cd8c5e9ae1903a461"
+    },
+    {
+      "source": "kernel_lean.published-611395.py.DATA",
+      "names": [
+        "LeanKernelError"
+      ],
+      "line": 122,
+      "end_line": 123,
+      "AST_sha256": "bcc8e36db8d90525df79e47bf3bfce598a3f128372c80fba115d4857498e49b2"
+    },
+    {
+      "source": "kernel_lean.published-611395.py.DATA",
+      "names": [
+        "LeanAxiomReport"
+      ],
+      "line": 177,
+      "end_line": 230,
+      "AST_sha256": "aab3085e551ca2b3ea2af5d3d14bf3856fee9a1668bd594aea6a021d82bc8ded"
+    },
+    {
+      "source": "kernel_lean.published-611395.py.DATA",
+      "names": [
+        "_text"
+      ],
+      "line": 672,
+      "end_line": 685,
+      "AST_sha256": "c0089dd7f72053923d869f9ab494d0fa00cc941222fe685c9e4bf419f3afe11f"
+    },
+    {
+      "source": "kernel_lean.published-611395.py.DATA",
+      "names": [
+        "_digest"
+      ],
+      "line": 688,
+      "end_line": 692,
+      "AST_sha256": "d5f557d7056412083430d6ad3b33a8beacb1da396594f98a6a68bdb0c7f2002d"
+    },
+    {
+      "source": "kernel_lean.published-611395.py.DATA",
+      "names": [
+        "_enum"
+      ],
+      "line": 695,
+      "end_line": 700,
+      "AST_sha256": "0f2d165854ddbe31f308d48b0a9679683c29a8f8ef494d4d19e1fd0edc70532a"
+    },
+    {
+      "source": "kernel_lean.published-611395.py.DATA",
+      "names": [
+        "_closed_mapping"
+      ],
+      "line": 711,
+      "end_line": 714,
+      "AST_sha256": "f94eeb78a2ed3ddb7ce21869b937ad7fba829759c39950650cca245e0aaf6556"
+    },
+    {
+      "source": "kernel_lean.published-611395.py.DATA",
+      "names": [
+        "_lean_name"
+      ],
+      "line": 717,
+      "end_line": 721,
+      "AST_sha256": "5ee535ca4f84bc1e8ff75b9defcc1afd0b247622af9e3847cab8fc4789a597b3"
+    },
+    {
+      "source": "kernel_lean.published-611395.py.DATA",
+      "names": [
+        "_approved_axioms"
+      ],
+      "line": 724,
+      "end_line": 730,
+      "AST_sha256": "d6548ab7a0c8e292e12c4a235a517f74a35b320367a270783a144be376bba019"
+    },
+    {
+      "source": "kernel_lean.published-611395.py.DATA",
+      "names": [
+        "_lean_diagnostic_lines"
+      ],
+      "line": 1090,
+      "end_line": 1092,
+      "AST_sha256": "9e0f3c2480fc2394f89c8d6887ddad1425b534a1bbe4d94c578986516dd9dd41"
+    },
+    {
+      "source": "kernel_lean.published-611395.py.DATA",
+      "names": [
+        "_load_lean_json_line"
+      ],
+      "line": 1095,
+      "end_line": 1105,
+      "AST_sha256": "4e3cd85894e390e10dd96a06abba55b557b1d7d7fca24e48a2284d5b75eebe39"
+    },
+    {
+      "source": "kernel_lean.published-611395.py.DATA",
+      "names": [
+        "_PLAIN_LEAN_ERROR"
+      ],
+      "line": 1111,
+      "end_line": 1113,
+      "AST_sha256": "0ef75d0b46851e762c29aeacc643944000857954470410db36dd67fb2babf9d2"
+    },
+    {
+      "source": "kernel_lean.published-611395.py.DATA",
+      "names": [
+        "_lean_error_diagnostics"
+      ],
+      "line": 1116,
+      "end_line": 1139,
+      "AST_sha256": "21b244b5961e3a0befdbe8922bea0fd4648ab1e18e740fbf5771008e2eae95fd"
+    },
+    {
+      "source": "kernel_lean.published-611395.py.DATA",
+      "names": [
+        "_decode_axiom_report_text"
+      ],
+      "line": 1159,
+      "end_line": 1170,
+      "AST_sha256": "43474957367e45b81e224ccef147e8ac40e1a11f014fea91b8e00f86a2cc6967"
+    },
+    {
+      "source": "kernel_lean.published-611395.py.DATA",
+      "names": [
+        "parse_lean_axiom_report"
+      ],
+      "line": 1173,
+      "end_line": 1223,
+      "AST_sha256": "faf457dadf82b66b6c6f3dc56d51d038a529e6401462e39687149ba675563884"
+    },
+    {
+      "source": "kernel_lean.published-611395.py.DATA",
+      "names": [
+        "evaluate_lean_kernel_output"
+      ],
+      "line": 1226,
+      "end_line": 1301,
+      "AST_sha256": "84480605034073ee4e251cea4ef226d09d0b3886c54831ed7d6b36e102abb5a6"
+    },
+    {
+      "source": "test_kernel_backends.published-611395.py.DATA",
+      "names": [
+        "_lean_output"
+      ],
+      "line": 580,
+      "end_line": 583,
+      "AST_sha256": "517c05b431606a885309762ddd71239424142805c61c6ee28bdfb4f388b8761c"
+    },
+    {
+      "source": "test_kernel_backends.published-611395.py.DATA",
+      "names": [
+        "_axiom_message"
+      ],
+      "line": 586,
+      "end_line": 587,
+      "AST_sha256": "5a8382860e8b30277f5a1a915da0ece33bdb766318ca0d788c91975ac874533a"
+    }
+  ],
+  "results": [
+    {
+      "returncode_type": "bool",
+      "returncode_repr": "False",
+      "status": "FAIL",
+      "exception_type": "AssertionError",
+      "traceback": "Traceback (most recent call last):\n  File \"/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/check-existing-kernel-exit-status-private-v01.py\", line 57, in <module>\n    module.test_lean_malformed_or_failed_exit_status_cannot_establish_proof(value)\n  File \"/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/kernel_exit_status_normal_test_fragment.UNRUN.py.DATA\", line 15, in test_lean_malformed_or_failed_exit_status_cannot_establish_proof\n    assert accepted is False\n           ^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "returncode_type": "float",
+      "returncode_repr": "0.0",
+      "status": "FAIL",
+      "exception_type": "AssertionError",
+      "traceback": "Traceback (most recent call last):\n  File \"/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/check-existing-kernel-exit-status-private-v01.py\", line 57, in <module>\n    module.test_lean_malformed_or_failed_exit_status_cannot_establish_proof(value)\n  File \"/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/kernel_exit_status_normal_test_fragment.UNRUN.py.DATA\", line 15, in test_lean_malformed_or_failed_exit_status_cannot_establish_proof\n    assert accepted is False\n           ^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "returncode_type": "bool",
+      "returncode_repr": "True",
+      "status": "PASS"
+    },
+    {
+      "returncode_type": "str",
+      "returncode_repr": "'0'",
+      "status": "PASS"
+    },
+    {
+      "returncode_type": "NoneType",
+      "returncode_repr": "None",
+      "status": "PASS"
+    },
+    {
+      "returncode_type": "int",
+      "returncode_repr": "1",
+      "status": "PASS"
+    }
+  ],
+  "pass": 4,
+  "fail": 2,
+  "input_read_bytes": 350214,
+  "canonical_imports": false,
+  "actual_Native_or_SDK_or_process_execution": false,
+  "Source_Git_or_ledger_mutation": false
+}

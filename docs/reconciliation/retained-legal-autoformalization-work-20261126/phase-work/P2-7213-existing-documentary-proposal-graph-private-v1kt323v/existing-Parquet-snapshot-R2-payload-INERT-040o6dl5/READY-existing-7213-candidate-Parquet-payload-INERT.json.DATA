@@ -1,0 +1,444 @@
+{
+  "Parquet_actual_write_or_readback": null,
+  "actual_prior_JSON_AST_readback": {
+    "bytes": 24596,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-candidate-custody-readback-v02-t5_vs8x4/actual-private-7213-candidate-custody-closeout.json",
+    "sha256": "5e532950c84dc4d84860d09ab4d39b6152025fbfc7a9d2f06df504d49368e91c"
+  },
+  "execute_selected": false,
+  "existing_execution_profile_reference": {
+    "bytes": 3479,
+    "path": "/tmp/Root-P8-V4-reviewed-graph-existing-ordinary9-v331-l4ls_bm7/Root-P8-V4-reviewed-graph-package-ordinary9-qualified-small-v331.json",
+    "sha256": "70eb12e25edfad5852c9c1314c92d7779e5469716633d3bd69d32dd29a43729b"
+  },
+  "existing_request_values": {
+    "argv": [
+      "/home/barberb/lift_coding/.venv/bin/python",
+      "-B",
+      "{workspace}/export-candidate-snapshot.py"
+    ],
+    "original_CPU_slots": 1,
+    "original_RSS_bytes": 4294967296,
+    "original_address_space_bytes": 8589934592,
+    "original_child_slots": 1,
+    "original_max_input_bytes": 4194304,
+    "original_max_output_bytes": 16777216,
+    "original_max_workspace_bytes": 67108864,
+    "original_run_CPU_seconds": 540,
+    "original_run_wall_seconds": 600,
+    "output_paths": [
+      "exchange-observation.json",
+      "bundle/manifest.json",
+      "bundle/snapshot.json",
+      "bundle/nodes.parquet",
+      "bundle/edges.parquet"
+    ]
+  },
+  "input_bytes": 2490885,
+  "input_files": {
+    "candidate-custody-receipt.json": {
+      "bytes": 24596,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/candidate-custody-receipt.json",
+      "sha256": "5e532950c84dc4d84860d09ab4d39b6152025fbfc7a9d2f06df504d49368e91c"
+    },
+    "candidate.json": {
+      "bytes": 766660,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/candidate.json",
+      "sha256": "1e56eca9e6ab6a0f33f2296ba342f5d78a29d3e1bee301f637df1ab5c49809c9"
+    },
+    "export-candidate-snapshot.py": {
+      "bytes": 6814,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/export-candidate-snapshot.py",
+      "sha256": "02aa7ab471fe317e1db6d61f7609440befef847dfaaf55c680ef78a45999db0b"
+    },
+    "project/ipfs_datasets_py/__init__.py": {
+      "Git_blob": "7d8b29b674206355ec12a84f69920a819338e43c",
+      "bytes": 56829,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/__init__.py",
+      "sha256": "f258f8eada774251feacd8e2ee2048efe56c89a8ee88efd50e4271ea41d43dc9"
+    },
+    "project/ipfs_datasets_py/logic/CEC/__init__.py": {
+      "Git_blob": "1efd5b02c02fdbcbd90d0fc80ba6bfd21cf5844b",
+      "bytes": 3407,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/CEC/__init__.py",
+      "sha256": "8f4f1468b80c29eb7f6af4c02907adccc6bad5df1c7f22de5be7731a52b04b6b"
+    },
+    "project/ipfs_datasets_py/logic/CEC/native/__init__.py": {
+      "Git_blob": "6679d43b271c3c39023dff53bc8b4517e3631132",
+      "bytes": 14271,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/CEC/native/__init__.py",
+      "sha256": "ba830d1ab93bea301ead1b31a827878478c89d6c428dba4d0063ca4c6e69e947"
+    },
+    "project/ipfs_datasets_py/logic/CEC/native/dcec_cleaning.py": {
+      "Git_blob": "95c482f2af3067181559c1eb5af733f5a85e8f0e",
+      "bytes": 9131,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/CEC/native/dcec_cleaning.py",
+      "sha256": "06517ecd30e4889d2a54db6732279e61a53945906860ef66378b5d707cca04b0"
+    },
+    "project/ipfs_datasets_py/logic/CEC/native/dcec_core.py": {
+      "Git_blob": "baa0353e9da94dc1542a5fadb4296710e55f6ec5",
+      "bytes": 57189,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/CEC/native/dcec_core.py",
+      "sha256": "bb977f411605fc1f0715ed23c988102d55fa012029053c21c8fc5b14aea17e14"
+    },
+    "project/ipfs_datasets_py/logic/CEC/native/dcec_integration.py": {
+      "Git_blob": "6306716e4d0bc35c7952629f55aaf0ef53737027",
+      "bytes": 18642,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/CEC/native/dcec_integration.py",
+      "sha256": "f039af934dba224d6c4984e8840fd8a4de00fe5e69837b0678d1d670dc26ac82"
+    },
+    "project/ipfs_datasets_py/logic/CEC/native/dcec_parsing.py": {
+      "Git_blob": "0feb2b0a0e86f6ad8885ebe08f9ef4636427e8e2",
+      "bytes": 14204,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/CEC/native/dcec_parsing.py",
+      "sha256": "2756e3c94acf902579bfc54d469e01ddd25b72f53d177b88921829d71df7da70"
+    },
+    "project/ipfs_datasets_py/logic/CEC/native/dcec_prototypes.py": {
+      "Git_blob": "607e722ed7af91b4ff832142eb38acf2d057f6e7",
+      "bytes": 15038,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/CEC/native/dcec_prototypes.py",
+      "sha256": "0e0b231ed68c39054cfd2fd674780cb736fd258cde7570881cb3a41cb5d2680e"
+    },
+    "project/ipfs_datasets_py/logic/CEC/native/exceptions.py": {
+      "Git_blob": "7d4d894fd23aaf15b8ab0948ee0d8c552fd061c7",
+      "bytes": 10095,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/CEC/native/exceptions.py",
+      "sha256": "cbbbafacf70d1c7355d7c930f48c5f71fc711765aa4789a817e5c229c8e60622"
+    },
+    "project/ipfs_datasets_py/logic/TDFOL/__init__.py": {
+      "Git_blob": "3c3a1cd0b7c9fcd5d4c3cb6b30b44169125c1e87",
+      "bytes": 11004,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/TDFOL/__init__.py",
+      "sha256": "42c252ba4fb85301b649bc3afe497a2799d27460b9556e57c7398b5441ba13e8"
+    },
+    "project/ipfs_datasets_py/logic/TDFOL/compiler_repairs.py": {
+      "Git_blob": "b914db06cd23be92ae0a24bcfb35c1b19d3fd1a3",
+      "bytes": 11393,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/TDFOL/compiler_repairs.py",
+      "sha256": "248dd9a3c9be8b21fb75799415aa6a72c6d81d7c559ed7579fa3f4a69660b823"
+    },
+    "project/ipfs_datasets_py/logic/TDFOL/tdfol_core.py": {
+      "Git_blob": "c89b513ad59ba3e8c124be78ac2a93355f88a829",
+      "bytes": 28721,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/TDFOL/tdfol_core.py",
+      "sha256": "67be350d1fb0422a64ab040349b2d51c4008fbeeb8b59a99b8901d681d7d71c7"
+    },
+    "project/ipfs_datasets_py/logic/TDFOL/tdfol_parser.py": {
+      "Git_blob": "6fab7228536c780d1b38704c946532fd9c27cb2f",
+      "bytes": 29788,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/TDFOL/tdfol_parser.py",
+      "sha256": "8e1f8885be6dc2a7d692ecdf0364ccc4d01692c38c81137775d9d222d8b8d9d3"
+    },
+    "project/ipfs_datasets_py/logic/__init__.py": {
+      "Git_blob": "950f95b6c859021bbd76326adcf602bdd4d19482",
+      "bytes": 4434,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/__init__.py",
+      "sha256": "f25a9702ddc282092dbae1bc1731afdcc35576c10745487dccedaa531ccc9e79"
+    },
+    "project/ipfs_datasets_py/logic/autoformal/__init__.py": {
+      "Git_blob": "b0f98a14e91837ddd3d40b9b1e3913b3c0d67cd7",
+      "bytes": 61853,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/autoformal/__init__.py",
+      "sha256": "375049ac8658847ef08a411660a3a0f7f452d211fb78df1399a387db4e0c065b"
+    },
+    "project/ipfs_datasets_py/logic/autoformal/corpus_contracts.py": {
+      "Git_blob": "a6123cadd2535883d7e21829877e87f16c34a06e",
+      "bytes": 27024,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/autoformal/corpus_contracts.py",
+      "sha256": "0279ad9f7afeb2843aba5c1e0c5b9dd85da8037bd46fd90497f987b613d05982"
+    },
+    "project/ipfs_datasets_py/logic/autoformal/corpus_graph.py": {
+      "Git_blob": "3839b30bb3dab26e252d47ace30b8022c3daa692",
+      "bytes": 20583,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/autoformal/corpus_graph.py",
+      "sha256": "8a1dc03ee39962baf784ac780ed2c8286b8e2e3998ec6677db281e81adc04409"
+    },
+    "project/ipfs_datasets_py/logic/autoformal/corpus_graph_exchange.py": {
+      "Git_blob": "44465b6cde059d2c9ce69ce68423c334c5036623",
+      "bytes": 17454,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/autoformal/corpus_graph_exchange.py",
+      "sha256": "32800bca0662830409de0622e16902bd458cf6d47c821fc7079cdf4ba9ddc9ad"
+    },
+    "project/ipfs_datasets_py/logic/autoformal/corpus_proposed_graph_adapter.py": {
+      "Git_blob": "81ce24d3c0c8d9dfe824708f801bea55181a4227",
+      "bytes": 92971,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/autoformal/corpus_proposed_graph_adapter.py",
+      "sha256": "58115e83df44085bf7a6c83af4edcef76e5796e3bb1913609e1b08e5434d8be7"
+    },
+    "project/ipfs_datasets_py/logic/autoformal/corpus_source.py": {
+      "Git_blob": "4505f96bb99dfa53965c185fdfb1ce900b4764a3",
+      "bytes": 16185,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/autoformal/corpus_source.py",
+      "sha256": "6e4be77cfc27a750b11aa57bb92baa92617c57d5c4a26316e25563aa715ec257"
+    },
+    "project/ipfs_datasets_py/logic/autoformal/family_qualification.py": {
+      "Git_blob": "509d35f7e5c68acd2157f85f20face935cafcc31",
+      "bytes": 37698,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/autoformal/family_qualification.py",
+      "sha256": "4db56c904cce8a030e5889b5d14687f01e9348842093480dd699649ad96dc1a8"
+    },
+    "project/ipfs_datasets_py/logic/autoformal/legal_canonical_calendar.py": {
+      "Git_blob": "90c4357511dfb11ce18297c9d0d0e1abae57ac48",
+      "bytes": 29974,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/autoformal/legal_canonical_calendar.py",
+      "sha256": "b45d0ad9329e90e4b007885e201adf5b2602b2d789127555b35fdbe5b65bc1b5"
+    },
+    "project/ipfs_datasets_py/logic/autoformal/legal_canonical_qualified.py": {
+      "Git_blob": "ee1bd80f49ee54d784ce3d82f2a970c18c628cb3",
+      "bytes": 19295,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/autoformal/legal_canonical_qualified.py",
+      "sha256": "580544f2bf329c54832eee9b66042794bab2e6938bad142952aca9f4438f5902"
+    },
+    "project/ipfs_datasets_py/logic/autoformal/legal_family_routes.py": {
+      "Git_blob": "831d650fc53a1aa2108bd4bbec05d1321b75f8e4",
+      "bytes": 7838,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/autoformal/legal_family_routes.py",
+      "sha256": "5e997e84596c1875d0140573b33a08ff9c12902b003ed3669e1f7bf51aee7c2d"
+    },
+    "project/ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py": {
+      "Git_blob": "c8561f81741dfcc7122d50eb7418c857958863d3",
+      "bytes": 61444,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py",
+      "sha256": "e3fb0941e123672f4c280f282b0bce80937dab6cdc56ca607ffd5d3713ae9adf"
+    },
+    "project/ipfs_datasets_py/logic/autoformal/legal_semantic_graph.py": {
+      "Git_blob": "47f4ab05360511aa5265920a8ea9ffb9bd5b61f9",
+      "bytes": 37209,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/autoformal/legal_semantic_graph.py",
+      "sha256": "b198d58209f5151081588fab914bedc7f15bbbd5d1a1717af98711aed031464c"
+    },
+    "project/ipfs_datasets_py/logic/autoformal/legal_statutory_context.py": {
+      "Git_blob": "38b5299431c32f50acced2cf2fd06cc8abad4e0d",
+      "bytes": 25999,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/autoformal/legal_statutory_context.py",
+      "sha256": "96bfd59e00771c77cfc045b9594f284a1ce95e968805764eb613a5b35ce065da"
+    },
+    "project/ipfs_datasets_py/logic/autoformal/tree_pin.py": {
+      "Git_blob": "91611948e2cd7ec3f4b8e4f8c99c70eb501b9261",
+      "bytes": 2052,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/autoformal/tree_pin.py",
+      "sha256": "ec43fd9379f3c9198451e8d62d98db53826dcf115e6858039a73c3da7d72a1c2"
+    },
+    "project/ipfs_datasets_py/logic/families/namespaces.py": {
+      "Git_blob": "2ff6102d93759b4bfd30e2d0054353db733e6e2b",
+      "bytes": 34262,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/families/namespaces.py",
+      "sha256": "ba097e653158a812d66ead978d6405d61adaa293521305333579b19bd69a432d"
+    },
+    "project/ipfs_datasets_py/logic/formalization/__init__.py": {
+      "Git_blob": "59375db940cfdcfb95cff7548630628821ac4bae",
+      "bytes": 2073,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/formalization/__init__.py",
+      "sha256": "91c60c1dfbf9038b8271ae6b1495dbbaf0be8d6ce438524c33f4f7a586f17266"
+    },
+    "project/ipfs_datasets_py/logic/formalization/autoencoder/__init__.py": {
+      "Git_blob": "94864ddd315dab1b20d0d5ae0f5824be1b4fb95e",
+      "bytes": 97,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/formalization/autoencoder/__init__.py",
+      "sha256": "82206d6ca08b8626b2afd37534679ac3ea001005f934ed211aa0f1f4eb81f073"
+    },
+    "project/ipfs_datasets_py/logic/formalization/autoencoder/native_family_lean_emitters.py": {
+      "Git_blob": "208019d2fadb4c88dce44eab4927c92349ef6d84",
+      "bytes": 39438,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/formalization/autoencoder/native_family_lean_emitters.py",
+      "sha256": "dab6bbd4e17eef888f4181aab0c6ce3f087a717edc83a55befb7742fd1f598b1"
+    },
+    "project/ipfs_datasets_py/logic/formalization/autoencoder/native_legal_qualified_lean.py": {
+      "Git_blob": "669c7d3a7d8df39e094cb84fad39fd4ce164fa71",
+      "bytes": 16858,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/formalization/autoencoder/native_legal_qualified_lean.py",
+      "sha256": "5407ba7299b002048ff8f45dbea7295d3b210f41904f28a98684042d055d0b2a"
+    },
+    "project/ipfs_datasets_py/logic/formalization/autoencoder/native_qualified_lean.py": {
+      "Git_blob": "3dc4abe1c79b854b612cdcd42167643b7cfe57c9",
+      "bytes": 18936,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/formalization/autoencoder/native_qualified_lean.py",
+      "sha256": "645d38508004833092cd5fd9870f29fdae34aa0e262471888973cb3203121408"
+    },
+    "project/ipfs_datasets_py/logic/intent_ir/__init__.py": {
+      "Git_blob": "fb934206096eacd6d65e388dee3c0d1fb769ee9d",
+      "bytes": 2386,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/intent_ir/__init__.py",
+      "sha256": "acf68a7215af95b4a7d4e4dc883cb7577e2129e7bbadf49c1fc2c404848bc641"
+    },
+    "project/ipfs_datasets_py/logic/intent_ir/autoencoder.py": {
+      "Git_blob": "14cdf673b44e46f7263daca506813ad5f836aa68",
+      "bytes": 1006,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/intent_ir/autoencoder.py",
+      "sha256": "ff944970bd24db83b6851fe4b84db62fe00128ed6ee0019c17cd941f2feb2e91"
+    },
+    "project/ipfs_datasets_py/logic/intent_ir/canonicalize.py": {
+      "Git_blob": "7dd0eb278d8fed99b9868c1bf9760e41278e196d",
+      "bytes": 1495,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/intent_ir/canonicalize.py",
+      "sha256": "3609047cc8c99437d77461b4f7ea0e05d193a31bf0d20a7e80b7b0c10a8cff87"
+    },
+    "project/ipfs_datasets_py/logic/intent_ir/decoder.py": {
+      "Git_blob": "8b217953c0a6b9f8411df52f6d70953d7ce4246e",
+      "bytes": 24220,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/intent_ir/decoder.py",
+      "sha256": "7bab5781c07e00b54b0283d3a2962926f75935caedc80eceb23264cb388be257"
+    },
+    "project/ipfs_datasets_py/logic/intent_ir/formalize/modal_projections.py": {
+      "Git_blob": "ed043a96be267fb18f78f7f454f320e08ab0fe8a",
+      "bytes": 22238,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/intent_ir/formalize/modal_projections.py",
+      "sha256": "7337b9266ed4f171ec7ee763828f8b637bf57930d8b89fa0d47139650996a14d"
+    },
+    "project/ipfs_datasets_py/logic/intent_ir/protocols.py": {
+      "Git_blob": "f7fa6b469b26602bbc6d82dbadfe840a2b97d4e8",
+      "bytes": 1693,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/intent_ir/protocols.py",
+      "sha256": "adb0ae8eaf2e55bf587ac76baa90d8303b61e0df246c03c30b56cb31a9643780"
+    },
+    "project/ipfs_datasets_py/logic/intent_ir/schema.py": {
+      "Git_blob": "e4a46f49464c84015d96f6a97d87a1a5bfa2af65",
+      "bytes": 27163,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/intent_ir/schema.py",
+      "sha256": "93d38e4724c5f34aab7f39f050742e98ef0c8d80e2ff70459d2401541505fc56"
+    },
+    "project/ipfs_datasets_py/logic/ir_core/__init__.py": {
+      "Git_blob": "71c13cae5d6ffc38d9b1ec4bee8ee90b255b3d0a",
+      "bytes": 6942,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/ir_core/__init__.py",
+      "sha256": "4c0070482e009dd7cb9875e91124d48683da37d53f691cccb306ec50f23c946c"
+    },
+    "project/ipfs_datasets_py/logic/ir_core/canonical.py": {
+      "Git_blob": "fa63fd302dad6340556a937b73883a25376f5f6b",
+      "bytes": 14098,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/ir_core/canonical.py",
+      "sha256": "339b5778581c19525a7685edf432aaf124cd12e02d37cd0eca88cb25ab86c0d0"
+    },
+    "project/ipfs_datasets_py/logic/ir_core/provenance.py": {
+      "Git_blob": "9f2e8425894c8287ae0046153ac081734cb77d8d",
+      "bytes": 31891,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/ir_core/provenance.py",
+      "sha256": "16eaf7c258550e5625bc19e6e7468c94133aedd1e85e64075f057ab4e52c3efe"
+    },
+    "project/ipfs_datasets_py/logic/ir_core/schema_registry.py": {
+      "Git_blob": "bd4c90c1b470c944b8953f64379232f8752f65e0",
+      "bytes": 31823,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/ir_core/schema_registry.py",
+      "sha256": "1b214ea190a41c6a451377a03bc71ea84f6703314293ef78c5f269082eee4fbe"
+    },
+    "project/ipfs_datasets_py/logic/legal_ir/__init__.py": {
+      "Git_blob": "049082bd3528682a395698fea6ae778421ddf156",
+      "bytes": 2708,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/legal_ir/__init__.py",
+      "sha256": "53ce51e56a292ea3210010fa17b352e9d40eb5b59cf15c5e732147000b40fee1"
+    },
+    "project/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py": {
+      "Git_blob": "1bf4da481ff84ccb3554ae0dd1126dfc4cbffb6b",
+      "bytes": 109257,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+    },
+    "project/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py": {
+      "Git_blob": "18783070b45c280067552f110bc48748a210e53e",
+      "bytes": 29993,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py",
+      "sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a"
+    },
+    "project/ipfs_datasets_py/logic/parsers/__init__.py": {
+      "Git_blob": "c7a25d447dbb1f70d660529f0c15f8a92ca47876",
+      "bytes": 8980,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/parsers/__init__.py",
+      "sha256": "e75f0c2ffea0f0706a3d1768a794849e6c013b6647dc59ba331f44797c233386"
+    },
+    "project/ipfs_datasets_py/logic/parsers/event_calculus.py": {
+      "Git_blob": "7c1ce10a60d0153ebfc5e4e9f9d7efcd7188c6fa",
+      "bytes": 59003,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/parsers/event_calculus.py",
+      "sha256": "8bd7217febef6daf86f76bae7e03ab0cbf7eb22a1b64f3040fd26a3d2ebfc390"
+    },
+    "project/ipfs_datasets_py/logic/parsers/legacy_modal.py": {
+      "Git_blob": "47caa0ac2246ed222d297a392c39647b79a6c57f",
+      "bytes": 71642,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/parsers/legacy_modal.py",
+      "sha256": "7b18812ea6fcba8b65ed7dc5c3407e0ad06ac9760c5c66441e9677463f9eb66e"
+    },
+    "project/ipfs_datasets_py/logic/parsers/modal.py": {
+      "Git_blob": "e952b112c50c7a63eb65a0a8f2fd8f9510320ac9",
+      "bytes": 99829,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/parsers/modal.py",
+      "sha256": "3131ff1dd516ebdf52071215c2c7983f9cf317d86bb138ff9437faae9b227942"
+    },
+    "project/ipfs_datasets_py/logic/syntax_core/__init__.py": {
+      "Git_blob": "9d0f887ec3d4d8b559d7cd546b39f4c6c6de3ee7",
+      "bytes": 8285,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/syntax_core/__init__.py",
+      "sha256": "20dd418d90360cdb42c64ba8b87bedcdb640228b460ef6c6ae60312365130e81"
+    },
+    "project/ipfs_datasets_py/logic/syntax_core/algebra.py": {
+      "Git_blob": "3e38b32b0cdb97ff50f84e415c0d4425ab0d0c94",
+      "bytes": 45735,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/syntax_core/algebra.py",
+      "sha256": "d3587e2270943167ebef226e03cbd70cfc8888d936647670a21cfa514240e6b7"
+    },
+    "project/ipfs_datasets_py/logic/syntax_core/ast.py": {
+      "Git_blob": "129c5c4079d2ef05924bcf62c76fb7d3fd22d5e7",
+      "bytes": 56966,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/syntax_core/ast.py",
+      "sha256": "4709513f18ab270858fe9595d88a847ddc52092606c52c7802947abed1ab9ac4"
+    },
+    "project/ipfs_datasets_py/logic/syntax_core/contracts.py": {
+      "Git_blob": "09d79a0e6ae23d8e71f31fbba9bbebfdb84f4546",
+      "bytes": 75291,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/syntax_core/contracts.py",
+      "sha256": "ce6d49e05ca2b09a84a3125ed6ad4c4aae4adf2c5943d3a4fd4eeeb057b444a8"
+    },
+    "project/ipfs_datasets_py/logic/syntax_core/diagnostics.py": {
+      "Git_blob": "4b436f9aa0346ede2ef01a0f5a2400bc63abe0d5",
+      "bytes": 10752,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/syntax_core/diagnostics.py",
+      "sha256": "a291db3c2cea04ae8dd9221a5e5ddbebd419679c02a5a008034e3755e7650d8f"
+    },
+    "project/ipfs_datasets_py/logic/syntax_core/lexer.py": {
+      "Git_blob": "dbb9e3f995404a0283fe6bcf5dc83f2d2d145eb4",
+      "bytes": 27534,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/syntax_core/lexer.py",
+      "sha256": "f666e9759323508f4e90964c0d71164645af9ce1de60bed778e5f64f7f4a3aea"
+    },
+    "project/ipfs_datasets_py/logic/syntax_core/registry.py": {
+      "Git_blob": "a909ce3a3ea1712f9d2aa35ba2c5d2e4eb097f56",
+      "bytes": 27560,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/syntax_core/registry.py",
+      "sha256": "eff5ca12d748eff1e9463b737a8243c97d89cac51e1b604fe2c765aed885cb44"
+    },
+    "project/ipfs_datasets_py/logic/syntax_core/signatures.py": {
+      "Git_blob": "ce8eb3447fdb9ed57c348e0cb16fe60528d440b6",
+      "bytes": 30488,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/logic/syntax_core/signatures.py",
+      "sha256": "49dd4fb0096661a05a15f056eb57248349e2b4e0b02e83239f36db36788c75bf"
+    },
+    "project/ipfs_datasets_py/router_deps.py": {
+      "Git_blob": "906a415bac365db7ba03b2be71f1086edb0fd926",
+      "bytes": 5845,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/router_deps.py",
+      "sha256": "56f66dfff183d9d0ee7977a314c49adbaa181e6fe0087c8f1c581a7d2973bf4c"
+    },
+    "project/ipfs_datasets_py/utils/__init__.py": {
+      "Git_blob": "dd98bbea10f2938d6f040b8aa5c4377bbb14beb9",
+      "bytes": 175,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/utils/__init__.py",
+      "sha256": "78f4cd7f8e14b4fff482c0c91ada5c49f8b9edf707bffd9cd58840b5503e66c2"
+    },
+    "project/ipfs_datasets_py/utils/cid_utils.py": {
+      "Git_blob": "36944fb73c85e541b0b9c47531ebfd7b79791534",
+      "bytes": 4428,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/project/ipfs_datasets_py/utils/cid_utils.py",
+      "sha256": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"
+    }
+  },
+  "no_new_Legal_or_proof_authority": true,
+  "original_companion": {
+    "bytes": 766660,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-candidate-custody-current-v01-bg57f4s2/unreviewed-7213-existing-candidate-custody.json",
+    "sha256": "1e56eca9e6ab6a0f33f2296ba342f5d78a29d3e1bee301f637df1ab5c49809c9"
+  },
+  "output_policy": "Only one fresh private workspace; writer and external manifest-pinned readback; one same-length changed-copy refusal; preserve original four exact files; no subprocess, network, model or compiler.",
+  "runtime_sdk_Source_scheduler_and_clock": null,
+  "schema": "private-7213-candidate-custody-existing-R2-Parquet-payload-INERT/v1",
+  "scope": "Existing graph exchange runs on the held candidate snapshot. The prior independent full source/AST replay remains a separate evidence object.",
+  "source_commit": "bcd55c0d832c38ff7ed696592dfb6a9a55883b2d"
+}

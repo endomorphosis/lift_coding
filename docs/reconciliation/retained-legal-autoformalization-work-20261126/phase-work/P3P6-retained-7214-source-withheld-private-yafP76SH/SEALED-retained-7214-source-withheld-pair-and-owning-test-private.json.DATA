@@ -1,0 +1,115 @@
+{
+  "actual_distinct_pair": {
+    "argument_roles_equal": true,
+    "canonical_prose_equal": false,
+    "exact_typed_expression_equal": false,
+    "typed_structure_equal": false
+  },
+  "actual_output_summaries": [
+    {
+      "alternate_id": "7214:cap_within_permission",
+      "failure": null,
+      "prose_sha256": "91ecb2c532896d5cfe1f025534ffc92496bb4e52872c1b2504523ae04aac1fe4",
+      "report": {
+        "bytes": 146760,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P3P6-retained-7214-source-withheld-private-yafP76SH/retained-alternative-0-source-withheld.json",
+        "sha256": "ea524ed09eda688a8d31bc3742d07d676f11320ca951520dfdc1810221c8882f"
+      }
+    },
+    {
+      "alternate_id": "7214:cap_as_permission_guard",
+      "failure": null,
+      "prose_sha256": "f3a8ba6935a6f798dfa8f782d69aa37103d1e8b8fb4ed9be01508fec52d2a2d1",
+      "report": {
+        "bytes": 140840,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P3P6-retained-7214-source-withheld-private-yafP76SH/retained-alternative-1-source-withheld.json",
+        "sha256": "e9ceb85c24475adf619106d749226ede3753b373e860de3de9e88846949d0318"
+      }
+    }
+  ],
+  "actual_public_roundtrip": {
+    "bytes": 2040,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P3P6-retained-7214-source-withheld-private-yafP76SH/actual.json",
+    "sha256": "1607c2ec0e0ee26ddb93a4a71ecf2cdbcfe2ca0b4511027ed08d8c691ef3094b"
+  },
+  "base_git_HEAD": "e22897d0b8014b6b8bc5289b14e1932bf6e7d650",
+  "current_Source": null,
+  "independent_probe": {
+    "bytes": 4598,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P3P6-retained-7214-source-withheld-private-yafP76SH/run-existing-7214-source-withheld.py",
+    "sha256": "489b3e2b89d22d1c9b6f20bde83a246d39712633c2939e1c59430e5df1656ed9"
+  },
+  "known_scope": "Two distinct authored modal placements for one retained paragraph. Reconstruction receives only typed syntax and ordered roles. It recovers both and preserves their difference; no source restoration, semantic equivalence, actual Lean, selected interpretation, legal review, training, published work, or corpus admission.",
+  "ordinary": null,
+  "owning_test": {
+    "after": {
+      "bytes": 53420,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P3P6-retained-7214-source-withheld-private-yafP76SH/test.after.py.DATA",
+      "sha256": "4d14e9a06b06a51754618c4c97d8ad6ad3d44d2ef547526a9f6fa5b85b5bafa3"
+    },
+    "after_blob": "19cb7241282d65c626bcc76b5dc05ea9f0a2f5e0",
+    "before": {
+      "bytes": 51150,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P3P6-retained-7214-source-withheld-private-yafP76SH/test.before.py.DATA",
+      "sha256": "76696958dab96a73f343c3d8289d28c33c74e8c1ce8451708826850923834d5c"
+    },
+    "before_blob": "8bad23bd0ff8667e8f090cfdb69ddb09b05dd4ce",
+    "patches": {
+      "forward": {
+        "bytes": 3241,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P3P6-retained-7214-source-withheld-private-yafP76SH/owning-test.forward.patch.DATA",
+        "sha256": "c25e7dd0d00cbc35c345520ab69ee2524a64dfc012d608e0fa697b99784f94f6"
+      },
+      "inverse": {
+        "bytes": 3241,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P3P6-retained-7214-source-withheld-private-yafP76SH/owning-test.inverse.patch.DATA",
+        "sha256": "eba5731e6d8e11b3691a6feee4877e12079a43400a9a94dca8fe986248620acc"
+      }
+    },
+    "path": "tests/unit/logic/autoformal/test_legal_relational_reconstruction_v1.py",
+    "private_calls": {
+      "bytes": 640,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P3P6-retained-7214-source-withheld-private-yafP76SH/owning-two/actual.json",
+      "sha256": "9edd83d687f29220746ede86a8f9dae5094c8e3cd7e1896f8bf58ff3ae685681"
+    },
+    "runner": {
+      "bytes": 4625,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P3P6-retained-7214-source-withheld-private-yafP76SH/run-owning-two.py.DATA",
+      "sha256": "0b128c1b77de52fe02691911fad54d4fd306adbad7f2d125d7527d0f41f06acf"
+    }
+  },
+  "published": false,
+  "role_pins": {
+    "ipfs_datasets_py/logic/autoformal/legal_relational_reconstruction_v1.py": {
+      "bytes": 40166,
+      "git_blob": "aedb9d200049dab014f12c12bbc546a77405da69",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/legal_relational_reconstruction_v1.py",
+      "sha256": "e35acbd09c149b13b4d4aa8e0794a7a35fd2678fdd59f40f6facda73b2373d67"
+    },
+    "ipfs_datasets_py/logic/legal_ir/extended_compiler.py": {
+      "bytes": 16302,
+      "git_blob": "3c30f4ffb90199b11293bedc9b8e468ce286cfce",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/legal_ir/extended_compiler.py",
+      "sha256": "1df3a74a711143aef03d08048b06b74b3b2f7d99017e49c831f91493b192316f"
+    },
+    "ipfs_datasets_py/logic/legal_ir/extended_decompiler.py": {
+      "bytes": 18172,
+      "git_blob": "bfca7a6f7a03a1f26ff5322dae81b11aa216b17f",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/legal_ir/extended_decompiler.py",
+      "sha256": "f9fa4903ff67cf246ca0df11ead75278329bef5e5185507ac04c87815a1fe357"
+    },
+    "ipfs_datasets_py/logic/syntax_core/ast.py": {
+      "bytes": 56966,
+      "git_blob": "129c5c4079d2ef05924bcf62c76fb7d3fd22d5e7",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/syntax_core/ast.py",
+      "sha256": "4709513f18ab270858fe9595d88a847ddc52092606c52c7802947abed1ab9ac4"
+    }
+  },
+  "schema": "private-retained-7214-source-withheld-typed-roundtrip/v1",
+  "source_packet": {
+    "bytes": 662668,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/docs/autoformalization/evidence/legal-ir-title10-7214-pending-compositions-20261024.json",
+    "sha256": "dd72e2b92ed5a44a77acfb72dd27ca8614250878400db89742c0437438d59dda"
+  },
+  "source_packet_blob": "71503501c1aeeb26e8c85829594a190bb48abb9e"
+}

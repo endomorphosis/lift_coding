@@ -1,0 +1,38 @@
+{
+  "mode": "before",
+  "fixture": "three fictional ordered rows from exact saved-output fixture",
+  "results": [
+    {
+      "case": null,
+      "status": "passed"
+    },
+    {
+      "case": "rows",
+      "status": "passed"
+    },
+    {
+      "case": "source",
+      "status": "passed"
+    },
+    {
+      "case": "outcome",
+      "status": "passed"
+    },
+    {
+      "case": "metrics",
+      "status": "passed"
+    },
+    {
+      "case": "checkpoint",
+      "status": "passed"
+    },
+    {
+      "case": "batch_error",
+      "status": "passed"
+    },
+    {
+      "case": "unbound_error",
+      "status": "passed"
+    }
+  ]
+}

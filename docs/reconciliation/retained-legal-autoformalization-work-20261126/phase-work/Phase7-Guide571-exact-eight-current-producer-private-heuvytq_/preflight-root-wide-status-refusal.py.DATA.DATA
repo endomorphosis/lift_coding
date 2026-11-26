@@ -1,0 +1,218 @@
+"""Prepare the existing Phase7 no-fit replay from immutable Git objects."""
+
+import ast
+import copy
+import difflib
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import subprocess
+
+
+root = Path(__file__).resolve().parent
+coord = root.parent
+repo = coord.parents[1] / 'repositories/datasets'
+stage = coord / 'Phase7-current-obligation-write-binding-private-ymey1qtf'
+held = coord / 'Phase7-exact-authorized-feedback-eight-rebased-D19621b4-private-v01-yw6km_79'
+product = 'ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py'
+protocol = 'ipfs_datasets_py/logic/ir_core/protocols.py'
+producer_test = 'tests/unit/logic/integration/test_legal_ir_proof_feedback.py'
+current = '6d1b200341ae62d6dc0aa6db27f3955c50483fa7'
+digest = lambda raw: hashlib.sha256(raw).hexdigest()
+git_blob = lambda raw: hashlib.sha1(f'blob {len(raw)}\0'.encode() + raw).hexdigest()
+
+
+def read_ref(reference):
+    path = Path(reference['path'])
+    raw = path.read_bytes()
+    assert len(raw) == reference['bytes'] and digest(raw) == reference['sha256'], path
+    return raw
+
+
+def put(path, data):
+    raw = data if isinstance(data, bytes) else (json.dumps(data, indent=2, sort_keys=True) + '\n').encode()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open('xb') as stream:
+        stream.write(raw)
+        stream.flush()
+        os.fsync(stream.fileno())
+    path.chmod(0o400)
+    return dict(path=str(path), bytes=len(raw), sha256=digest(raw))
+
+
+def git(*args):
+    return subprocess.check_output(['/usr/bin/git','--no-optional-locks','-C',str(repo),*args],
+                                    env=os.environ|{'GIT_NO_LAZY_FETCH':'1'}, timeout=20)
+
+
+def exact_patch(before, patch):
+    rows = patch.splitlines(keepends=True)
+    offsets = [i for i, row in enumerate(rows) if row.startswith(b'@@ ')] + [len(rows)]
+    assert len(offsets) == 3
+    current_body = before
+    inverse_hunks = []
+    for start, stop in zip(offsets[:-1], offsets[1:], strict=True):
+        hunk = rows[start + 1:stop]
+        assert all(x[:1] in (b' ',b'+',b'-') for x in hunk)
+        old = b''.join(x[1:] for x in hunk if x[:1] in (b' ',b'-'))
+        new = b''.join(x[1:] for x in hunk if x[:1] in (b' ',b'+'))
+        assert current_body.count(old) == 1
+        current_body = current_body.replace(old, new, 1)
+        inverse_hunks.append((old, new))
+    original = current_body
+    for old, new in reversed(inverse_hunks):
+        assert original.count(new) == 1
+        original = original.replace(new, old, 1)
+    assert original == before
+    return current_body
+
+
+def function_ast(raw, name):
+    node, = [node for node in ast.parse(raw).body if isinstance(node, ast.FunctionDef) and node.name == name]
+    return ast.dump(node)
+
+
+parent = dict(path=str(held/'ACTUAL-rebased-current-Phase7-exact-eight-no-fit-cohorts-closed-v02.json'),
+              bytes=17278,sha256='16bf2369b83714ad94b9129efa789cbd2d946665859cb8b9f1fdffc657508ae3')
+prior = json.loads(read_ref(parent))
+old_post_ref = prior['exact_eight_preimages_and_posts']
+old_roles = json.loads(read_ref(old_post_ref))['exact_same_eight_paths']
+assert len(old_roles) == 8
+old_harness = json.loads(read_ref(prior['projection_harness']))
+old_manifest_ref = old_harness['projection_manifest']
+old_manifest = json.loads(read_ref(old_manifest_ref))
+runner = read_ref(old_harness['runner'])
+assert git('rev-parse','HEAD','refs/remotes/origin/main').decode().splitlines() == [current,current]
+assert not git('status','--porcelain=v1')
+tree = git('rev-parse',f'{current}^{{tree}}').decode().strip()
+paths = set(old_manifest['sources']) | set(old_manifest['discovery_only']) | set(old_roles)
+assert len(paths) == 105
+assert set(git('diff','--name-only',prior['current_exact_correspondence']['current_public_HEAD'],current,'--',*sorted(paths)).decode().splitlines()) == {product,protocol}
+
+git_rows = {}
+for item in git('ls-tree','-z',current,'--',*sorted(paths | {producer_test})).split(b'\0'):
+    if not item:
+        continue
+    tag, path = item.decode().split('\t')
+    mode, kind, oid = tag.split()
+    assert mode == '100644' and kind == 'blob'
+    git_rows[path] = dict(git_mode=mode,git_blob_sha1=oid)
+assert set(git_rows) == paths | {producer_test}
+assert git_rows[product]['git_blob_sha1'] == '1f3d36a0c1cc595c1797b0f471720546ddc6c520'
+assert git_rows[producer_test]['git_blob_sha1'] == 'df0bd14954e31c67d445d90b0372265a7e96d3a8'
+assert git_rows[protocol]['git_blob_sha1'] == '09b5536bf3269b6eb54f62cfa83e8dceed53d49e'
+
+proj = root/'project'
+proj.mkdir(mode=0o700)
+manifest = copy.deepcopy(old_manifest)
+manifest.update(git_head=current,git_tree=tree,projection=str(proj))
+retained_rows = old_manifest['sources'] | old_manifest['discovery_only']
+current_product_body = None
+for path, old in retained_rows.items():
+    head_row = git_rows[path]
+    data = git('cat-file','blob',head_row['git_blob_sha1'])
+    assert head_row['git_blob_sha1'] == git_blob(data)
+    if path not in (product,protocol):
+        assert (head_row['git_blob_sha1'],len(data),digest(data)) == (old['git_blob_sha1'],old['bytes'],old['sha256'])
+    if path == product:
+        current_product_body = data
+        assert len(data) == 60953 and digest(data) == 'c0bc4092d301318619aec4e109a661da65a86816b9754fb5e73106cb910712f3'
+    elif path == protocol:
+        assert len(data) == 57510 and digest(data) == 'e2dd1dc93d1efa15c7c4088145d32c52636c72e9230b16ade77ca6c6a0c2c336'
+    leaf = proj/path
+    put(leaf,data)
+    stat = leaf.lstat()
+    full9 = [stat.st_dev,stat.st_ino,stat.st_size,stat.st_mode,stat.st_uid,
+             stat.st_gid,stat.st_nlink,stat.st_mtime_ns,stat.st_ctime_ns]
+    mapping = manifest['sources'] if path in manifest['sources'] else manifest['discovery_only']
+    mapping[path].update(head_row,bytes=len(data),sha256=digest(data),full9=full9)
+    if path in manifest['discovery_only']:
+        mapping[path]['current_equivalent_git_head'] = current
+assert current_product_body is not None
+manifest['explicit_git_object_body_bytes'] = sum(x['bytes'] for x in manifest['sources'].values()) + sum(x['bytes'] for x in manifest['discovery_only'].values())
+manifest_ref = put(root/'projection-manifest.json',manifest)
+assert manifest_ref['bytes'] <= 65536
+
+original_body = read_ref(old_roles[product]['before'])
+original_green = read_ref(old_roles[product]['post'])
+forward = read_ref(old_roles[product]['forward'])
+assert exact_patch(original_body,forward) == original_green
+green = exact_patch(current_product_body,forward)
+red_old_manifest = read_ref(dict(path=str(stage/'no-fit-overlay-v03.manifest.json'),bytes=359,sha256='65d6f989eabcfa2e837ae58b91090e67c27aa353ce071d9f9867cdbca80aa3c3'))
+red_old = json.loads(red_old_manifest)
+name, size, body_sha = red_old['record']
+old_red_body = read_ref(dict(path=str(stage/name),bytes=size,sha256=body_sha))
+red_forward = b''.join(difflib.diff_bytes(difflib.unified_diff,original_body.splitlines(keepends=True),old_red_body.splitlines(keepends=True)))
+assert exact_patch(original_body,red_forward) == old_red_body
+red = exact_patch(current_product_body,red_forward)
+for body in (red,green):
+    assert function_ast(body,'build_legal_ir_proof_feedback_record') == function_ast(current_product_body,'build_legal_ir_proof_feedback_record')
+    post_def, = [node for node in ast.parse(body).body if isinstance(node,ast.FunctionDef) and node.name == 'build_legal_ir_proof_feedback_record']
+    pre_def, = [node for node in ast.parse(current_product_body).body if isinstance(node,ast.FunctionDef) and node.name == 'build_legal_ir_proof_feedback_record']
+    raw_definition = lambda raw,node:b''.join(raw.splitlines(keepends=True)[node.lineno-1:node.end_lineno])
+    assert raw_definition(body,post_def) == raw_definition(current_product_body,pre_def)
+    compile(body,product,'exec',dont_inherit=True)
+
+renamed = {
+    'ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py':'modal.after.DATA',
+    'ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py':'trainer.after-v04.DATA',
+    'tests/unit/logic/integration/test_trusted_feedback_weight_updates.py':'test_trusted_feedback_weight_updates.test.after-v05.DATA',
+    'tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py':'test_proof_feedback_ablation.test.after.DATA',
+    'ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py':'ablation.after-v02.DATA',
+}
+posts = {product:put(root/'record.current-v408-plus-exact-after-v04.DATA',green)}
+for path, spec in old_roles.items():
+    if path == product:
+        continue
+    assert git_rows[path]['git_blob_sha1'] == spec['before']['git_blob']
+    body = read_ref(spec['post'])
+    assert spec['post_git_blob'] == git_blob(body)
+    compile(body,path,'exec',dont_inherit=True)
+    posts[path] = put(root/renamed.get(path,Path(path).stem+'.current-after.DATA'),body)
+red_ref = put(root/'record.current-v408-plus-receipt-red.DATA',red)
+
+def relative_pin(reference):
+    return [Path(reference['path']).name,reference['bytes'],reference['sha256']]
+
+red_old['record'] = relative_pin(red_ref)
+red_manifest = put(root/'no-fit-overlay-current-Guide571-red.manifest.json',red_old)
+old_red_name, old_red_size, old_red_sha = red_old['trainer']
+put(root/old_red_name,read_ref(dict(path=str(stage/old_red_name),bytes=old_red_size,sha256=old_red_sha)))
+green_manifest = put(root/'no-fit-overlay-current-Guide571-green.manifest.json',dict(
+    record=relative_pin(posts[product]),trainer=relative_pin(posts[next(path for path in posts if path.endswith('trusted_feedback_trainer.py'))]),
+    autoencoder=relative_pin(posts[next(path for path in posts if path.endswith('modal_autoencoder.py'))])))
+
+runner_ast = ast.parse(runner)
+private_runner = runner
+immutable_assets = {}
+for statement in runner_ast.body:
+    if not isinstance(statement,ast.Assign) or len(statement.targets)!=1 or not isinstance(statement.targets[0],ast.Name):
+        continue
+    key = statement.targets[0].id
+    if key in ('RETAINED_ADAPTER','RED_ADAPTER','RECEIPT_GREEN','MAINTAINED'):
+        asset, nbytes, asset_sha = ast.literal_eval(statement.value)
+        immutable_assets[key] = put(root/asset,read_ref(dict(path=str(stage/asset),bytes=nbytes,sha256=asset_sha)))
+    if key == 'RED_MANIFEST':
+        first, last = statement.lineno-1, statement.end_lineno
+        lines = private_runner.splitlines(keepends=True)
+        private_runner = b''.join(lines[:first]) + ('RED_MANIFEST = '+repr(tuple(relative_pin(red_manifest)))+'\n').encode() + b''.join(lines[last:])
+new_ast = ast.parse(private_runner)
+for ast_value in (runner_ast,new_ast):
+    ast_value.body = [x for x in ast_value.body if not (isinstance(x,ast.Assign) and len(x.targets)==1 and isinstance(x.targets[0],ast.Name) and x.targets[0].id=='RED_MANIFEST')]
+assert ast.dump(runner_ast) == ast.dump(new_ast)
+compile(private_runner,'existing_phase7_no_fit_runner','exec',dont_inherit=True)
+runner_ref = put(root/'runner'/'existing-phase7-rebased-no-fit-current-Guide571.py',private_runner)
+
+summary = dict(schema='phase7-current-Guide571-private-no-fit-preparation/v1',current_HEAD=current,current_tree=tree,
+               previous_actual_no_fit=parent,previous_exact_eight=old_post_ref,paths_audited=105,
+               current_roles={path:git_rows[path] for path in sorted(set(old_roles)|{protocol,producer_test})},
+               projection=manifest_ref,projection_files=103,runner=runner_ref,prior_runner=old_harness['runner'],
+               runner_only_RED_MANIFEST_repin=True,unchanged_harness_fixtures=immutable_assets,
+               red_manifest=red_manifest,green_manifest=green_manifest,red_record=red_ref,posts=posts,
+               v408_producer_function_bytes_and_AST_preserved=True,exact_two_consumer_hunks_and_inverse=True,
+               current_producer_to_selected_feedback_handoff_verified=False,private_execution=None,
+               no_canonical_mutation=True)
+seal = put(root/'READY-current-Guide571-existing-no-fit-replay.json',summary)
+print(json.dumps(seal))

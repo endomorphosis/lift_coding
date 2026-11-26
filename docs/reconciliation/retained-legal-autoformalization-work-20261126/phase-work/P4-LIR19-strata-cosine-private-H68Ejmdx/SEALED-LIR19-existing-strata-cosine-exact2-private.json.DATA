@@ -1,0 +1,137 @@
+{
+  "actual_case_counts": {
+    "after_fail": 0,
+    "after_pass": 11,
+    "before_fail": 6,
+    "before_pass": 5,
+    "new": 7,
+    "retained": 4
+  },
+  "after": {
+    "bytes": 2284,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-strata-cosine-private-H68Ejmdx/actual-matching11-after.json",
+    "sha256": "16d3d91ee086c882557745565c631d03179927a638033fe1d5b924672ce52b66"
+  },
+  "before": {
+    "bytes": 7794,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-strata-cosine-private-H68Ejmdx/actual-matching11-before.json",
+    "sha256": "ff8e8ca9cec1ad398b7886a7e8e49bd7507e75ccc77a4225414a556d8e2cf80e"
+  },
+  "before_roles_equal_in_both_commits": true,
+  "canonical_installation": false,
+  "change": "Cosine on independently scaled finite vectors, exact-coordinate arithmetic means, explicit unavailable inter-cosine",
+  "costs_scope": "bounded direct fixture processes, no physical-I/O accounting performed",
+  "current_HEAD": "7e4245f1641637fae7f514f3fbfa9728346f1ae4",
+  "currently_published_tracking": "e22897d0b8014b6b8bc5289b14e1932bf6e7d650",
+  "exact_forward": {
+    "bytes": 5870,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-strata-cosine-private-H68Ejmdx/exact-two.diff",
+    "sha256": "1d6b0c78194125f8afee781b80e4815ad4de2437090198c323daffe42fab871f"
+  },
+  "exact_forward_and_inverse_byte_verified": true,
+  "exact_inverse": {
+    "bytes": 5870,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-strata-cosine-private-H68Ejmdx/exact-two.inverse.diff",
+    "sha256": "2776da9af35ddd74c3124edd8fd411b1917df7081652cde91fe815ee7aacb1fd"
+  },
+  "files": [
+    {
+      "after": {
+        "bytes": 42627,
+        "git_blob": "7e5eda1003e654f119af085d843ff91182ddc61a",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-strata-cosine-private-H68Ejmdx/evaluator.after.py.DATA",
+        "sha256": "88bfe548fa17e891ea8c6a015f1db29cb9fe03ff9c6d811b2dbd91c5d3b544a9"
+      },
+      "before": {
+        "bytes": 42137,
+        "git_blob": "53d7123051e1a1b9737edeb8928dfe57a579286c",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-strata-cosine-private-H68Ejmdx/evaluator.before.py.DATA",
+        "sha256": "3b6cd3a6fade78fed275a478f010329e5d030a250b914c4b46ab0f0d77b9d5ab"
+      },
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py",
+      "role": "owner"
+    },
+    {
+      "after": {
+        "bytes": 17014,
+        "git_blob": "5d29829d7a65a4aa36729143a6c5b458107ed2dc",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-strata-cosine-private-H68Ejmdx/test.after-v02.py.DATA",
+        "sha256": "5e9d8ab1d1113906b93a08d16a74ee5eb05c9c0b83af0f457bf0a38ceda6aa3e"
+      },
+      "before": {
+        "bytes": 14657,
+        "git_blob": "1ffbd78b6852063678bed4fc7c92cf0b1b56217e",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-strata-cosine-private-H68Ejmdx/test.before.py.DATA",
+        "sha256": "9469b0dbacdb61e2acb41d2e75dd3319411266ec06daeebc7810813160b9a3e1"
+      },
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_latent_diagnostics.py",
+      "role": "test"
+    }
+  ],
+  "first_red": {
+    "bytes": 6972,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-strata-cosine-private-H68Ejmdx/actual-before.json",
+    "sha256": "8faf3d84a3b9a3efc4904d78af72d95744644e5f063409f69ce90663bfb3670d"
+  },
+  "model_executed": false,
+  "ordered_cases": [
+    [
+      "test_family_domain_length_jurisdiction_and_ood_strata",
+      "()"
+    ],
+    [
+      "test_duplicate_clustering_separates_memorized_groups",
+      "()"
+    ],
+    [
+      "test_materialized_report_triggers_collapse_anisotropy_and_memorization",
+      "()"
+    ],
+    [
+      "test_unknown_denominator_trigger_is_explicit_when_ece_cannot_be_formed",
+      "()"
+    ],
+    [
+      "test_strata_cosines_and_centroids_preserve_finite_scale",
+      "(1.0,)"
+    ],
+    [
+      "test_strata_cosines_and_centroids_preserve_finite_scale",
+      "(1e+308,)"
+    ],
+    [
+      "test_strata_cosines_and_centroids_preserve_finite_scale",
+      "(1e-320,)"
+    ],
+    [
+      "test_strata_keep_nonfinite_vectors_out_of_cosine_denominators",
+      "(nan,)"
+    ],
+    [
+      "test_strata_keep_nonfinite_vectors_out_of_cosine_denominators",
+      "(inf,)"
+    ],
+    [
+      "test_strata_keep_nonfinite_vectors_out_of_cosine_denominators",
+      "(-inf,)"
+    ],
+    [
+      "test_strata_reports_unavailable_inter_cosine_for_zero_centroids",
+      "()"
+    ]
+  ],
+  "ordinary_qualification": false,
+  "report_schema_and_population_preserved": true,
+  "schema": "private-LIR19-existing-strata-finite-cosine-exact2/v1",
+  "scope": "Clustering and available-pair means for authored vectors; no spectrum or learned-representation comparison.",
+  "sealed_inputs": {
+    "bytes": 1273,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-strata-cosine-private-H68Ejmdx/exact-inputs-and-test-append-v02.json",
+    "sha256": "9a10b48813acc6020f679049f24142cfd2400245d9eda34db04ecc7ce440c98b"
+  },
+  "test_runner": {
+    "bytes": 3964,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-strata-cosine-private-H68Ejmdx/run-existing-latent-strata-v02.py.DATA",
+    "sha256": "0ad7fdc01952337f995c4d0932c9893252a41d88e402dc09d484b513205b5f9c"
+  }
+}

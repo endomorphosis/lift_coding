@@ -1,0 +1,116 @@
+--- a/ipfs_datasets_py/logic/backends/kernel/lean.py
++++ b/ipfs_datasets_py/logic/backends/kernel/lean.py
+@@ -584,6 +584,18 @@
+         payload["receipt_id"] = self.receipt_id
+         return payload
+ 
++    def _theorem_witness(self) -> dict[str, Any]:
++        return {
++            "receipt_id": self.receipt_id,
++            "theorem_name": self.theorem_name,
++            "theorem_digest": self.theorem_digest,
++            "generated_proof_digest": self.generated_proof_digest,
++            "source_tree": self.source_tree.to_dict(),
++            "toolchain": self.toolchain.to_dict(),
++            "translation": self.translation.to_dict() if self.translation is not None else None,
++            "axiom_report": self.axiom_report.to_dict() if self.axiom_report is not None else None,
++        }
++
+ 
+ @dataclass(frozen=True, slots=True)
+ class LeanKernelOutcome:
+@@ -616,11 +628,25 @@
+             raise LeanKernelError(
+                 f"unsupported Lean kernel interface: {self.interface_version!r}"
+             )
++        if self.source_binding != self.receipt.source_binding:
++            raise LeanKernelError("outcome source binding does not match receipt")
++        if (self.result.status is ResultStatus.PROVED) != self.receipt.accepted:
++            raise LeanKernelError("outcome status does not match receipt acceptance")
++        metadata = self.result.metadata.to_dict()
+         if (
+-            self.result.status is ResultStatus.PROVED
+-            and not self.receipt.accepted
++            metadata.get("adapter_interface") != self.interface_version
++            or metadata.get("capability") != self.capability.to_dict()
++            or metadata.get("kernel_receipt") != self.receipt.to_dict()
++            or metadata.get("source_binding") != self.source_binding.to_dict()
+         ):
+-            raise LeanKernelError("proved results require an accepted kernel receipt")
++            raise LeanKernelError("outcome result metadata does not match its proof evidence")
++        witness = self.result.witness.to_dict()
++        if (
++            witness.get("receipt_id") != self.receipt.receipt_id
++            or witness.get("theorem_name") != self.receipt.theorem_name
++            or (self.receipt.accepted and witness != self.receipt._theorem_witness())
++        ):
++            raise LeanKernelError("outcome result witness does not match its receipt")
+ 
+     def to_dict(self) -> dict[str, Any]:
+         return {
+@@ -1611,24 +1637,7 @@
+                 if status is ResultStatus.PROVED
+                 else EvidenceAuthority.BOUNDED
+             ),
+-            witness={
+-                "receipt_id": receipt.receipt_id,
+-                "theorem_name": receipt.theorem_name,
+-                "theorem_digest": receipt.theorem_digest,
+-                "generated_proof_digest": receipt.generated_proof_digest,
+-                "source_tree": receipt.source_tree.to_dict(),
+-                "toolchain": receipt.toolchain.to_dict(),
+-                "translation": (
+-                    receipt.translation.to_dict()
+-                    if receipt.translation is not None
+-                    else None
+-                ),
+-                "axiom_report": (
+-                    receipt.axiom_report.to_dict()
+-                    if receipt.axiom_report is not None
+-                    else None
+-                ),
+-            },
++            witness=receipt._theorem_witness(),
+             **common,
+         )
+ 
+--- a/tests/integration/logic/backends/test_kernel_backends.py
++++ b/tests/integration/logic/backends/test_kernel_backends.py
+@@ -1960,3 +1960,37 @@
+     assert "<module>" in calls
+     assert owner._reviewed_fixture.__code__.co_filename == str(fixture_path)
+     assert owner._legal_artifact.__code__.co_filename == str(fixture_path)
++
++
++@pytest.mark.parametrize("mutation", [
++    "different-result", "different-source", "contradictory-status",
++    "different-witness-receipt", "different-witness-theorem", "different-capability",
++])
++def test_lean_outcome_rejects_inconsistent_evidence(mutation):
++    from dataclasses import replace
++
++    outcome, _, request = _bound_lean_outcome()
++    assert outcome.result.status is ResultStatus.PROVED and outcome.receipt.accepted
++    assert replace(outcome).to_dict() == outcome.to_dict()
++    different, _, different_request = _bound_lean_outcome(
++        source="theorem another : True := by trivial\n", name="another")
++    assert different.receipt.accepted and request.digest != different_request.digest
++
++    if mutation == "different-result":
++        changes = {"result": different.result}
++    elif mutation == "different-source":
++        changes = {"source_binding": replace(
++            outcome.source_binding, source_digest=different.source_binding.source_digest)}
++    elif mutation == "contradictory-status":
++        changes = {"result": replace(outcome.result, status=ResultStatus.ERROR, reason="fixture error")}
++    elif mutation == "different-capability":
++        changes = {"capability": replace(
++            outcome.capability, native=KernelCapabilityState.unavailable(
++                plane=CapabilityPlane.NATIVE, kernel_id="lean", reason="fixture difference"))}
++    else:
++        key = "receipt_id" if mutation == "different-witness-receipt" else "theorem_digest"
++        witness = outcome.result.witness.to_dict()
++        witness[key] = different.result.witness[key]
++        changes = {"result": replace(outcome.result, witness=witness)}
++    with pytest.raises(LeanKernelError, match="outcome (?:source|result|status)"):
++        replace(outcome, **changes)

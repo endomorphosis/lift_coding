@@ -1,0 +1,159 @@
+{
+  "current_HEAD": "6d1b200341ae62d6dc0aa6db27f3955c50483fa7",
+  "current_producer_to_selected_feedback_handoff_verified": false,
+  "current_roles": {
+    "ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py": {
+      "git_blob_sha1": "1f3d36a0c1cc595c1797b0f471720546ddc6c520",
+      "git_mode": "100644"
+    },
+    "ipfs_datasets_py/logic/ir_core/protocols.py": {
+      "git_blob_sha1": "09b5536bf3269b6eb54f62cfa83e8dceed53d49e",
+      "git_mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py": {
+      "git_blob_sha1": "b527db1c29a5e0ba13c13f2adf5a0f8be925ed7e",
+      "git_mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py": {
+      "git_blob_sha1": "3e08a06029424257f8aa9df72a4a12d29c0d9547",
+      "git_mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py": {
+      "git_blob_sha1": "37265225393a19b2c58ee0ead946929090b51d23",
+      "git_mode": "100644"
+    },
+    "tests/unit/logic/integration/test_legal_ir_proof_feedback.py": {
+      "git_blob_sha1": "df0bd14954e31c67d445d90b0372265a7e96d3a8",
+      "git_mode": "100644"
+    },
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py": {
+      "git_blob_sha1": "754d53a96072b21bcabb8a44a4fc615b4cf1152f",
+      "git_mode": "100644"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py": {
+      "git_blob_sha1": "af6bf4ff9ad59d7fbe3c1ac8d324e58b437f9c53",
+      "git_mode": "100644"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py": {
+      "git_blob_sha1": "dd11af058186d651fbe94588395494a09a72828c",
+      "git_mode": "100644"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py": {
+      "git_blob_sha1": "7d671b8c3c440731fc2ee48c15999b0d0c6766c9",
+      "git_mode": "100644"
+    }
+  },
+  "current_tree": "5668de8025cfbea85b1d6225ec32cbe2d1bf5acd",
+  "exact_two_consumer_hunks_and_inverse": true,
+  "green_manifest": {
+    "bytes": 421,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/no-fit-overlay-current-Guide571-green.manifest.json",
+    "sha256": "7bf52f9399d1211efbd55a74077c79f070250d250e5c5ced132af89c3177f782"
+  },
+  "no_canonical_mutation": true,
+  "paths_audited": 105,
+  "posts": {
+    "ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py": {
+      "bytes": 65270,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/record.current-v408-plus-exact-after-v04.DATA",
+      "sha256": "aee18c5265e4874bd6074637eef5bd4ae6701449cc0876e899abf56d1fb71896"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py": {
+      "bytes": 1429059,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/modal.after.DATA",
+      "sha256": "3440fef3ee319f780f49ae6fb1b61aacfc3d47ea64e2f95b9c795cfc7c81b447"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py": {
+      "bytes": 41765,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/ablation.after-v02.DATA",
+      "sha256": "01dc8c506d30d3348712d1547e46bf801109818aadab77e94c2ded8188f90bbc"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py": {
+      "bytes": 42271,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/trainer.after-v04.DATA",
+      "sha256": "630398501836dc7bba1b213dbd93b2e93a18c593747f52467f325c5033d7fa94"
+    },
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py": {
+      "bytes": 46285,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/test_trusted_feedback_weight_updates.test.after-v05.DATA",
+      "sha256": "78f1f42f172367e8bb932721b0ef01011b8ff9a7b5821ee2942a4f5254eaa9e3"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py": {
+      "bytes": 14210,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/test_modal_autoencoder_proof_heads.current-after.DATA",
+      "sha256": "eca75ef60fd1b7aee67510840f76935c89c2ef8992475f67ea836965b07bd07f"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py": {
+      "bytes": 9778,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/test_proof_feedback_ablation.test.after.DATA",
+      "sha256": "bf195465dab79f259c87243eb66553286f2bd32084c80ca97cd4c56660191414"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py": {
+      "bytes": 9984,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/test_trainable_legal_ir_objective.current-after.DATA",
+      "sha256": "b78d1696b674d0416d108b003b6062a8fb0f2899af0a24dce2532f9ff4460068"
+    }
+  },
+  "previous_actual_no_fit": {
+    "bytes": 17278,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-exact-authorized-feedback-eight-rebased-D19621b4-private-v01-yw6km_79/ACTUAL-rebased-current-Phase7-exact-eight-no-fit-cohorts-closed-v02.json",
+    "sha256": "16bf2369b83714ad94b9129efa789cbd2d946665859cb8b9f1fdffc657508ae3"
+  },
+  "previous_exact_eight": {
+    "bytes": 41352,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-exact-authorized-feedback-eight-rebased-D19621b4-private-v01-yw6km_79/sealed-exact-eight-D19621b4-private-rebase-v01.json",
+    "sha256": "0dc8e7f675fc809609931ce72d0d2b6b988296ecb187d3fae4e7468706b951c7"
+  },
+  "prior_runner": {
+    "bytes": 16140,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/Phase7-rebased-exact-no-fit-router-discovery-v02-f_zjci9y/run-phase7-rebased-no-fit-router-discovery-v02.py",
+    "sha256": "f0fd9e854f5728c7d2eb8f3454bbc6b71730dfb177f0ee7ec60c86048c1e8023"
+  },
+  "private_execution": null,
+  "projection": {
+    "bytes": 61071,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/projection-manifest-replay.json",
+    "sha256": "3f645d4c6737c212742b8d04ab6db63bc730043b02dd7f15c43e3da9af921263"
+  },
+  "projection_files": 103,
+  "red_manifest": {
+    "bytes": 427,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/no-fit-overlay-current-Guide571-red.manifest.json",
+    "sha256": "8660221d9e68a845a86b37473f8e916c3fb75d4fd36e9b3927f9748a51d0a079"
+  },
+  "red_record": {
+    "bytes": 64508,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/record.current-v408-plus-receipt-red.DATA",
+    "sha256": "e8654fd7ea51ca0c56af663f90196cd367798dbe8d48c42000bfc30bc0b9c334"
+  },
+  "runner": {
+    "bytes": 16146,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/runner/existing-phase7-rebased-no-fit-current-Guide571.py",
+    "sha256": "498aa39e9caa3652328951db0fc893ca4a02f0db69500a89b7a315c5e2de25f2"
+  },
+  "runner_only_RED_MANIFEST_repin": true,
+  "schema": "phase7-current-Guide571-private-no-fit-preparation/v1",
+  "unchanged_harness_fixtures": {
+    "MAINTAINED": {
+      "bytes": 4933,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/no-fit-maintained-regression-nodes-v02.py",
+      "sha256": "1482351231d7a03ff2d0c0435f0ee89d1ddf290aef5f797d574e8ad68294ea7e"
+    },
+    "RECEIPT_GREEN": {
+      "bytes": 4047,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/no-fit-exact-feedback-receipt-substitution-v02.py",
+      "sha256": "ca63791a73523e689cef71a8b9682e7989464ea6959a6ee465fd0ef219142634"
+    },
+    "RED_ADAPTER": {
+      "bytes": 20405,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/no-fit-current-obligation-adapter-v01.py",
+      "sha256": "a84c49de31dd4218043f2f6b9ff1f9ef954291eddde2661b20a580fbbc539bf7"
+    },
+    "RETAINED_ADAPTER": {
+      "bytes": 20480,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/no-fit-current-obligation-bound-feedback-adapter-v02.py",
+      "sha256": "43ad9ed1524e541998646663dc67baea01cacce87769666d4afa12cd6252abf7"
+    }
+  },
+  "v408_producer_function_bytes_and_AST_preserved": true
+}

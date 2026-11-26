@@ -1,0 +1,12 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.3.4, pluggy-1.6.0
+rootdir: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-accepted-request-and-integer-status-combined-private-IN9OiuMf/dataset
+configfile: pytest.ini
+asyncio: mode=Mode.STRICT
+collected 81 items
+
+tests/integration/logic/backends/test_kernel_backends.py ............... [ 18%]
+..................................................................       [100%]
+
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-accepted-request-and-integer-status-combined-private-IN9OiuMf/after/result.xml -
+============================== 81 passed in 0.98s ==============================

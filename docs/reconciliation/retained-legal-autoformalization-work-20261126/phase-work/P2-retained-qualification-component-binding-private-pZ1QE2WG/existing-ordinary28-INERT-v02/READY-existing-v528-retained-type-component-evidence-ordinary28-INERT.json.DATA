@@ -1,0 +1,181 @@
+{
+  "Source_or_host_lease": null,
+  "actual_ordinary_qualification": null,
+  "clock_or_effect_decisions": null,
+  "controls": {
+    "bootstrap": {
+      "bytes": 43009,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-retained-qualification-component-binding-private-pZ1QE2WG/existing-ordinary28-INERT-v02/existing-v528-component-evidence-ordinary28-bootstrap.INERT.py.DATA",
+      "sha256": "b52cf38dd851b3a5a47b0f1676d3b949579a787bb54068661a534f35461012a5"
+    },
+    "factory": {
+      "bytes": 3456,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-retained-qualification-component-binding-private-pZ1QE2WG/existing-ordinary28-INERT-v02/existing-v528-component-evidence-ordinary28-factory.INERT.py.DATA",
+      "sha256": "b19b1c44b6d377bfa8cd7673e7475f18815ef65b9e26caa2512392049928b6be"
+    },
+    "operator": {
+      "bytes": 58945,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-retained-qualification-component-binding-private-pZ1QE2WG/existing-ordinary28-INERT-v02/existing-v528-component-evidence-ordinary28-operator.INERT.py.DATA",
+      "sha256": "f4fe6491cc72441ce9fa27bc3f88c8cc3ff3b6e448bbedd6026a9dd8efabe510"
+    }
+  },
+  "current_roster_and_role_metadata": {
+    "bytes": 11596,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-retained-qualification-component-binding-private-pZ1QE2WG/existing-ordinary28-INERT-v02/exact-ordinary28-nonclock-roster-and-role-plan.json",
+    "sha256": "0e133fcfc17bece1c51862d4dd1aa2825eb6fdb01912959a98eadb169257d822"
+  },
+  "exact_factory_data_only_checks": {
+    "bytes": 125,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-retained-qualification-component-binding-private-pZ1QE2WG/existing-ordinary28-INERT-v02/actual-pure-ordinary28-factory-roster-wire-controls.json",
+    "sha256": "0ef788d8d3c39308341d2930fa31502057d7749ce6eaaa1d7025ea4fd8658692"
+  },
+  "exact_private_candidate": {
+    "bytes": 25041,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-retained-qualification-component-binding-private-pZ1QE2WG/SEALED-retained-V4-qualification-component-binding-exact-two.json",
+    "sha256": "454cbc69272925d8e4fcfb24637fc973cf75c8d374a3a7f56b80d2f31697c546"
+  },
+  "existing_lazy_owner_policy": {
+    "bytes": 485,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-retained-qualification-component-binding-private-pZ1QE2WG/existing-ordinary28-INERT-v02/existing-ordinary28-lazy-visibility-policy.json",
+    "sha256": "4fa4fe3d0b144b7a27e332ce3c72edbfdc01fba00de83b42e45eb118a1c5f7f0"
+  },
+  "expected_selection": {
+    "actual_collect_is_roster_and_order_authority": true,
+    "expected_function_case_counts": {
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_preserves_exact_retained_provenance": 2,
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations": 15,
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_malformed_current_review_observation": 8,
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_requires_the_matching_component_evidence": 3
+    },
+    "function_count": 4,
+    "function_selectors": [
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_preserves_exact_retained_provenance",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_malformed_current_review_observation",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_requires_the_matching_component_evidence"
+    ],
+    "literal_expected_cases": 28,
+    "literal_expected_nodeids": [
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_preserves_exact_retained_provenance[one]",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_preserves_exact_retained_provenance[two]",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[foreign-report]",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[foreign-plan]",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[coherent-receipt]",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[coherent-packet]",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[coherent-unit]",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[coherent-review-link]",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[nested-seal]",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[report-pin]",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[preparation-pin]",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[stdout-pin]",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[repinned-alias]",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[repinned-open-type]",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[authority-mask]",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[duplicate-component]",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations[changed-component-transport]",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_malformed_current_review_observation[registry-pin]",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_malformed_current_review_observation[policy-pin]",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_malformed_current_review_observation[reviews-pin]",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_malformed_current_review_observation[caller-observation-pin]",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_malformed_current_review_observation[assessment-pin]",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_malformed_current_review_observation[invalidation-pin]",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_malformed_current_review_observation[utc-format]",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_malformed_current_review_observation[utc-calendar]",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_requires_the_matching_component_evidence[source_integrity-reviewed_crosswalk]",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_requires_the_matching_component_evidence[representation-preservation]",
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_requires_the_matching_component_evidence[dependency-dependency]"
+    ],
+    "owning_files": [
+      "tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py"
+    ],
+    "selection_group": "phase2-retained-type-current-review-metadata-ordinary25"
+  },
+  "next_existing_owner": "After exact Source2 adoption and local freeze, bind genuine READ3 and current epoch, actual Source42 loader and D/A guards. Reuse v590 binding mechanism and kept resource limits. Match the scoped parent-derived module payload and helper/config absences.",
+  "ordered_case_vector": [
+    2,
+    15,
+    8,
+    3
+  ],
+  "ordinary_published_predecessor_v591": {
+    "bytes": 38637,
+    "full9": {
+      "st_ctime_ns": "1795719509839197145",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68863179",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795719509839197145",
+      "st_nlink": "1",
+      "st_size": "38637",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-Phase2-retained-type-review-UTC-SHA-exact2-ordinary25-three-FF-publication-v591.json",
+    "sha256": "f925ede41df94d0f9065ef9fc65bbe0596bf702fdbe281c3b8a62462366ef42f"
+  },
+  "ordinary_resource_profile_historical_limits": {
+    "child_memory_rss_input_output_workspace_bytes": [
+      8589934592,
+      4294967296,
+      4194304,
+      16777216,
+      67108864
+    ],
+    "collect_wall_cpu_seconds": [
+      120,
+      110
+    ],
+    "current_effect_admission": null,
+    "historical_scheduler_code_binding": {
+      "ipfs_datasets_py.logic.backends.process": [
+        "ipfs_datasets_py/logic/backends/process.py",
+        "370ba355be1da87814be4a117d2ce2a1cbc255064958d9ec64ada8e54521a7d7"
+      ],
+      "ipfs_datasets_py.logic.backends.resource_admission": [
+        "ipfs_datasets_py/logic/backends/resource_admission.py",
+        "fda64e02042355fd0a0a3b75934b3d1c4ccb5efb42f0fe861876275ff8a5e1a8"
+      ],
+      "ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler": [
+        "ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py",
+        "7a0dac2d13b4be7775e278054e1a57808f5629d3c58952164b91514e6e2ae2d3"
+      ]
+    },
+    "historical_source42_loader": {
+      "bytes": 10375,
+      "encoding": "zlib+base64",
+      "path": "/tmp/legal-ir-phase2-reviewed-admission-source-20261108-v01/resource-census-compatible-port-v01/runtime-owner-v4-trainer-compatibility-v01/current-published-cleanup71-original16MiB-input-v01/original42-frozen.py",
+      "sha256": "42e9f07d0d458177079269d9f495f0b70512180c1adc2f7fe0bfdb05518a12f9"
+    },
+    "parent_cpu_memoryMiB_child": [
+      1,
+      4096,
+      1
+    ],
+    "previous_Source_envelope_bytes": 134217728,
+    "run_wall_cpu_seconds": [
+      600,
+      540
+    ]
+  },
+  "prior_INERT_template": {
+    "bytes": 31612,
+    "path": "/tmp/P2-retained-type-review-UTC-SHA-existing-v528-ordinary25-INERT-oum3k0s9/READY-existing-v528-retained-type-UTC-SHA-ordinary25-INERT.json",
+    "sha256": "8159d68ad27c386d823488d92406a9be06f8192c23b2bc383c3b41d93bae051e"
+  },
+  "same_actual_v590_method_bodies_authenticated": true,
+  "schema": "existing-v528-retained-type-component-evidence-ordinary28-INERT/v1",
+  "selector_and_Git_freeze": null,
+  "source_runtime_binding_ABI": {
+    "outer_count_key": "outer_epoch_record_count",
+    "outer_epoch_key": "outer_epoch_reference",
+    "protected_index_key": "protected_index_reference",
+    "python_count_key": "python_epoch_record_count",
+    "python_epoch_key": "python_epoch_reference",
+    "required_true_keys": [
+      "Root_selected",
+      "Source_closed",
+      "owned_module_closed"
+    ],
+    "schema": "actual-D27-observed-D-root-initializer-READ-small-closeout/v1"
+  }
+}

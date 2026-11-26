@@ -1,0 +1,94 @@
+{
+  "baseline": {
+    "consumer_sha256": "ff8b61f71280f4c5d1d413feab33d5f9498f3cf560755492eafbbb0348d0bc82",
+    "correct": {
+      "denominator": 3,
+      "exact_manifest_digest_bound": true,
+      "mask_training_eval": [
+        0,
+        0
+      ],
+      "producer_calls": 1,
+      "refused_before_evaluator": false
+    },
+    "eval_owner_sha256": "fe3b8f7dd58532f883918168d9a9ac0e3078fcc9e2ddae3398ec1a71efd4982f",
+    "historical_reviewed_fixture_root": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/ipfs_datasets-lir14-consumer-regression-v01",
+    "incorrect": {
+      "denominator": 3,
+      "exact_manifest_digest_bound": true,
+      "mask_training_eval": [
+        0,
+        0
+      ],
+      "producer_calls": 1,
+      "refused_before_evaluator": false
+    },
+    "side": "base"
+  },
+  "candidate": {
+    "consumer_sha256": "5bb6c1c1d627d65d7e0d98a00d5f646c7519f0c3a73a21492db1936445ecdd4f",
+    "correct": {
+      "denominator": 3,
+      "exact_manifest_digest_bound": true,
+      "mask_training_eval": [
+        0,
+        0
+      ],
+      "producer_calls": 1,
+      "refused_before_evaluator": false
+    },
+    "eval_owner_sha256": "fe3b8f7dd58532f883918168d9a9ac0e3078fcc9e2ddae3398ec1a71efd4982f",
+    "historical_reviewed_fixture_root": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/ipfs_datasets-lir14-consumer-regression-v01",
+    "incorrect": {
+      "diagnostic": "reviewed source fingerprint differs from split manifest example",
+      "producer_calls": 0,
+      "refused_before_evaluator": true
+    },
+    "side": "candidate"
+  },
+  "canonical_scoring_route": "evaluate_reviewed_source_span_producer_artifact dispatches real prepared reviewed binding validation, source-only callback and after-callback replay.",
+  "current_matched_git_blobs": {
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_evaluation_artifacts.py": "48cc1a70c3f353142acbef6d36ab6bd29542b348",
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_consumer_binding.py": "6fff65035cf9183b2e2c234621f4e6189551fae5",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py": "8df5f4025dbcd36c5f36840a393c7e2eefa319ef"
+  },
+  "exact_fixture_and_context": {
+    "V3_prior_companion": {
+      "bytes": 3800,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-reviewed-heldout-fingerprint-private-v01-c3_iyyyn/actual-signed-V3-same-three-unchanged-candidate-companion-v01.json",
+      "sha256": "3ad7349fccb6b7996ec4cf516f6641c81e9081e48f30ddcf18d839761420ce3f"
+    },
+    "actual_existing_executor_DATA": {
+      "bytes": 49913,
+      "path": "/tmp/digest-omitted-existing-evaluation-DATA-derivative-private-v01/evaluate.after-v02.py.DATA",
+      "sha256": "ada274aff540f75b66aa9038c96ec3b75c6466db1b95415c2e7bdcaa59a989a3"
+    },
+    "consumer_preimage": {
+      "bytes": 58356,
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/ipfs_datasets-lir14-consumer-regression-v01/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_consumer_binding.py",
+      "sha256": "ff8b61f71280f4c5d1d413feab33d5f9498f3cf560755492eafbbb0348d0bc82"
+    },
+    "evaluator": {
+      "bytes": 147367,
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/ipfs_datasets-lir14-consumer-regression-v01/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_evaluation_artifacts.py",
+      "sha256": "fe3b8f7dd58532f883918168d9a9ac0e3078fcc9e2ddae3398ec1a71efd4982f"
+    },
+    "evaluator_owning_test": {
+      "bytes": 278838,
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/ipfs_datasets-lir14-consumer-regression-v01/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py",
+      "sha256": "b830cd232fc4964e3c8a354b11ed9ef88046d998017f8aa216e7047b7c7fcaff"
+    },
+    "unchanged_candidate": {
+      "bytes": 6012,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-reviewed-heldout-fingerprint-private-v01-c3_iyyyn/sealed-current-reviewed-heldout-fingerprint-two-file-paired5-v01.json",
+      "sha256": "ae66eaec53e2f24851932fcf47e5a81965008519322f631519b2592c214dd684"
+    }
+  },
+  "new_evaluator_or_new_candidate_code": false,
+  "no_actual_model_accuracy_credit": true,
+  "observed_D_HEAD": "68e3739ffd64e54016133d3d1e0304c6302da1b1",
+  "observed_D_tree": "754fd9f796439076c1bb71e14ec6430f505f3b99",
+  "schema": "phase5-existing-current-evaluator-Unicode-heldout-V3-fictional-companion/v1",
+  "scope": "Private signed historical fictional V3 component and model-free authored callback, exact current artifact evaluator. Neither retained paired-bank executor nor model run. No real statutory review, current profile adopted, test/runtime qualification, Git or Source authority.",
+  "separate_retained_before_after_executor_facts": "The retained paired-bank DATA builds a reviewed V3 binding. Per-arm artifact is returned by the producer evaluate call. Existing evaluation owner then reconstructs and compares saved BEFORE and AFTER artifacts with exact digest pins."
+}

@@ -1,0 +1,91 @@
+"""Direct authored-vector calls to the existing LegalIR evaluator."""
+import hashlib
+import importlib.abc
+import importlib.util
+import json
+import math
+import os
+from pathlib import Path
+import resource
+import sys
+import time
+import traceback
+import types
+
+repo, unit, owner_path, out = map(Path, sys.argv[1:])
+resource.setrlimit(resource.RLIMIT_AS, (512 * 1024**2, 512 * 1024**2))
+resource.setrlimit(resource.RLIMIT_CPU, (45, 46))
+resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
+os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
+sys.dont_write_bytecode = True
+sys.path.insert(0, str(repo))
+manifest = json.loads((unit / "exact-inputs-and-test-append-v02.json").read_bytes())
+for role in ("owner", "test"):
+    raw = (repo / manifest[role + "_rel"]).read_bytes()
+    assert hashlib.sha256(raw).hexdigest() == manifest[role + "_before"]["sha256"]
+raw = owner_path.read_bytes()
+owner_name = "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_family_evaluator"
+observed = []
+
+class ExactEvaluator(importlib.abc.MetaPathFinder, importlib.abc.Loader):
+    def find_spec(self, fullname, path=None, target=None):
+        if fullname.split(".", 1)[0] in {"torch", "transformers", "duckdb"}:
+            raise AssertionError("backend outside this authored-vector diagnostic: " + fullname)
+        if fullname == owner_name:
+            return importlib.util.spec_from_file_location(fullname, repo / manifest["owner_rel"], loader=self)
+        return None
+
+    def exec_module(self, module):
+        observed.append(hashlib.sha256(raw).hexdigest())
+        exec(compile(raw, module.__file__, "exec"), module.__dict__)
+
+sys.meta_path.insert(0, ExactEvaluator())
+external = []
+
+def audit(event, args):
+    if event.startswith(("socket.", "subprocess.")) or event in {"os.exec", "os.fork", "os.posix_spawn", "os.system"}:
+        external.append(event)
+        raise AssertionError("external action outside this diagnostic: " + event)
+
+sys.addaudithook(audit)
+test = types.ModuleType("_private_existing_latent_diagnostic_tests")
+test.__file__ = str(repo / manifest["test_rel"])
+sys.modules[test.__name__] = test
+path = Path(manifest["test_after"]["path"])
+test_raw = path.read_bytes()
+assert hashlib.sha256(test_raw).hexdigest() == manifest["test_after"]["sha256"]
+exec(compile(test_raw, test.__file__, "exec"), test.__dict__)
+assert observed == [hashlib.sha256(raw).hexdigest()]
+names = (
+    ("test_family_domain_length_jurisdiction_and_ood_strata", ((),)),
+    ("test_duplicate_clustering_separates_memorized_groups", ((),)),
+    ("test_materialized_report_triggers_collapse_anisotropy_and_memorization", ((),)),
+    ("test_unknown_denominator_trigger_is_explicit_when_ece_cannot_be_formed", ((),)),
+    ("test_strata_cosines_and_centroids_preserve_finite_scale", ((1.0,), (1e308,), (1e-320,))),
+    ("test_strata_keep_nonfinite_vectors_out_of_cosine_denominators", ((math.nan,), (math.inf,), (-math.inf,))),
+    ("test_strata_reports_unavailable_inter_cosine_for_zero_centroids", ((),)),
+)
+results = []
+for name, cases in names:
+    for args in cases:
+        start = time.monotonic()
+        row = {"case": name, "arguments": repr(args)}
+        try:
+            getattr(test, name)(*args)
+        except Exception:
+            row.update(outcome="failed", traceback=traceback.format_exc())
+        else:
+            row["outcome"] = "passed"
+        row["elapsed_seconds"] = round(time.monotonic() - start, 6)
+        results.append(row)
+report = dict(results=results, evaluator_compiled_sha256=observed[0],
+    test_sha256=manifest["test_after"]["sha256"], external_events=external,
+    torch_loaded="torch" in sys.modules, evidence_scope="direct authored-vector diagnostics")
+with out.open("x", encoding="utf8") as stream:
+    json.dump(report, stream, indent=2, sort_keys=True)
+    stream.write("\n")
+    stream.flush()
+    os.fsync(stream.fileno())
+out.chmod(0o400)
+if external or any(row["outcome"] != "passed" for row in results):
+    sys.exit(1)

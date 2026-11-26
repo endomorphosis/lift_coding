@@ -1,0 +1,19 @@
+{
+  "raw_result": {
+    "bytes": 9519,
+    "sha256": "f78a4dbca3957ec5fa01e48e385cf1c2e78f1050d2c4bf6f229bf62323f1b07d"
+  },
+  "private_output_framing": {
+    "trailing_literal_backslash_n": false,
+    "original_preserved": true
+  },
+  "substantive_result": {
+    "pass": 4,
+    "fail": 2,
+    "failures": [
+      "boolean False accepted as integer zero",
+      "float 0.0 accepted as integer zero"
+    ]
+  },
+  "private_compiler_result_only": true
+}

@@ -1,0 +1,29 @@
+{
+  "argv": [
+    "/home/barberb/lift_coding/.venv/bin/python",
+    "-I",
+    "-B",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/invoke-existing-pytest-private-v02.py.DATA",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-proof-feedback-conflicting-attestations-private-v01/baseline",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-proof-feedback-conflicting-attestations-private-v01/dataset",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+    "/home/barberb/lift_coding/external/ipfs_datasets",
+    "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "tests/unit/logic/integration/test_legal_ir_proof_feedback.py::test_disagreeing_proof_attestation_flags_cannot_create_training_feedback[counterexample-alias-denies]",
+    "tests/unit/logic/integration/test_legal_ir_proof_feedback.py::test_disagreeing_proof_attestation_flags_cannot_create_training_feedback[counterexample-explicit-denial]",
+    "tests/unit/logic/integration/test_legal_ir_proof_feedback.py::test_disagreeing_proof_attestation_flags_cannot_create_training_feedback[contract-alias-denies]",
+    "tests/unit/logic/integration/test_legal_ir_proof_feedback.py::test_disagreeing_proof_attestation_flags_cannot_create_training_feedback[contract-explicit-denial]",
+    "tests/unit/logic/integration/test_legal_ir_proof_feedback.py::test_matching_proof_attestation_aliases_keep_canonical_feedback[counterexample-approve]",
+    "tests/unit/logic/integration/test_legal_ir_proof_feedback.py::test_matching_proof_attestation_aliases_keep_canonical_feedback[counterexample-deny]",
+    "tests/unit/logic/integration/test_legal_ir_proof_feedback.py::test_matching_proof_attestation_aliases_keep_canonical_feedback[contract-approve]",
+    "tests/unit/logic/integration/test_legal_ir_proof_feedback.py::test_matching_proof_attestation_aliases_keep_canonical_feedback[contract-deny]"
+  ],
+  "fixture_source_role_map": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-trusted-proof-feedback-sample-binding-private-v01/existing-private-closure-final-v02.json",
+  "git_base": "5fae066b5871d3fdf0b63dfbc4339c199ca6ffc1",
+  "new_test_sha256": "85806ca14e88f313066eba7c0ca0849f2e2047cb270d00fdf047fd7007654631",
+  "old_owner_sha256": "27e102c61bd93a93202c3f2e10757ebc9506a19bc784719a8ea253c9523849fa",
+  "old_test_sha256": "2d62a2773a2ecfbb54f4663f7ee7cd1cc0a203a94b4dfa1a9cfb114d74cbebfd",
+  "owner": "ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py",
+  "test": "tests/unit/logic/integration/test_legal_ir_proof_feedback.py"
+}

@@ -1,0 +1,127 @@
+{
+  "canonical_expert_fixture_scope": "authored fictional fixture",
+  "pytest_inifile": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/pytest.ini",
+  "required_fixture_closure": [
+    {
+      "bytes": 1536,
+      "full9": {
+        "st_ctime_ns": "1795421816475143830",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "68338402",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795421816475143830",
+        "st_nlink": "1",
+        "st_size": "1536",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/pytest.ini",
+      "sha256": "01737eaafcd2b7e7e1a8db2368a93d4a28053ba44e611a10b1c87d2155dc65ff"
+    },
+    {
+      "bytes": 2054,
+      "full9": {
+        "st_ctime_ns": "1795421807861283462",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "68338392",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795421807861283462",
+        "st_nlink": "1",
+        "st_size": "2054",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/conftest.py",
+      "sha256": "2eab130f3effda3737f25a1770ccd5f9d4955ba42c3d692d659801ffdc1035cf"
+    },
+    {
+      "bytes": 20716,
+      "full9": {
+        "st_ctime_ns": "1795421816568297752",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70026331",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795421816568297752",
+        "st_nlink": "1",
+        "st_size": "20716",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/conftest.py",
+      "sha256": "0a255dc653799cb980d7edbb1d7b2e3c8f0d81b091d4986aa712e1e8e12b7f10"
+    },
+    {
+      "bytes": 1204,
+      "full9": {
+        "st_ctime_ns": "1795421816669136457",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70028541",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795421816669136457",
+        "st_nlink": "1",
+        "st_size": "1204",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/conftest.py",
+      "sha256": "2abb4618add06f636ab71406c19ccd828084a48ecf75448397ddb6cd2bca53a2"
+    },
+    {
+      "bytes": 39426,
+      "full9": {
+        "st_ctime_ns": "1795421816849361842",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70030994",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795421816849361842",
+        "st_nlink": "1",
+        "st_size": "39426",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/optimizers/conftest.py",
+      "sha256": "44b5cc7d0f551c60e19d2ecaf824b07b01f1b40c8acb904fbabb4205e8abd97f"
+    },
+    {
+      "bytes": 5647,
+      "full9": {
+        "st_ctime_ns": "1795421816866138898",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70031468",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795421816866138898",
+        "st_nlink": "1",
+        "st_size": "5647",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/optimizers/logic_theorem_optimizer/conftest.py",
+      "sha256": "28c6a027bf1dab9365f1b70f9b90428a136cb5e6436994176f5b6a9ddc6efc11"
+    },
+    {
+      "bytes": 5763,
+      "full9": {
+        "st_ctime_ns": "1795421816577014036",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70026547",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795421816577014036",
+        "st_nlink": "1",
+        "st_size": "5763",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/fixtures/legal_ir/external_expert_benchmark.jsonl",
+      "sha256": "fb9a76552e2b938369d93d73a2a25aa76a963101cac96fd487a246bc43c54971"
+    }
+  ],
+  "required_normal_conftests": [
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/conftest.py",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/conftest.py",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/conftest.py",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/optimizers/conftest.py",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/optimizers/logic_theorem_optimizer/conftest.py"
+  ],
+  "schema": "actual-frozen-Phase8-benchmark-ordinary62-fixture/v1",
+  "two_real_descendant_outcomes_unclaimed": true
+}

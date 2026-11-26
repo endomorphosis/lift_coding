@@ -1,0 +1,34 @@
+# Hammer/Leanstral External Validity Promotion Gate
+
+- Schema: `legal-ir-hammer-leanstral-external-validity-promotion-v1`
+- Decision: `accepted`
+- Evidence complete: `True`
+- Failure count: `0`
+
+## Evidence Domains
+
+| Domain | Status | Key Evidence |
+| --- | --- | --- |
+| `leak_free_splits` | `passed` | `schema_version=legal-ir-eval-splits-v1` |
+| `semantic_metrics` | `passed` | `schema_version=legal-ir-semantic-equivalence-metrics-v1` |
+| `typed_decoding` | `passed` | `schema_version=legal-ir-typed-grammar-decoder-v1` |
+| `uncertainty` | `passed` | `schema_version=legal-ir-uncertainty-v1` |
+| `fuzzing` | `passed` | `schema_version=legal-ir-metamorphic-differential-fuzzing-v1` |
+| `hard_negatives` | `passed` | `schema_version=legal-ir-hard-negative-effect-v1` |
+| `multi_seed_statistics` | `passed` | `seeds=4` |
+| `schema_compatibility` | `passed` | `schema_version=legal-ir-view-family-metric-v1` |
+| `poisoning_defenses` | `passed` | `schema_version=legal-ir-premise-security-v1` |
+| `external_benchmark_scores` | `passed` | `score=1.0, packets=2` |
+| `rollback_readiness` | `passed` | `schema_version=legal-ir-drift-monitor-v1` |
+
+## Bindings
+
+- `promotion_id`: `promotion-external-validity` from `12` source(s)
+- `compiler_commit`: `compiler-external-validity` from `12` source(s)
+- `source_export_id`: `learned-export-external-validity` from `12` source(s)
+- `fixed_canary_id`: `fixed-canary-external-validity` from `12` source(s)
+- `split_manifest_digest`: `sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa` from `12` source(s)
+
+## Gate Contract
+
+Promotion fails closed unless the evidence envelope binds leak-free splits, semantic metrics, typed decoding, uncertainty, fuzzing, hard negatives, multi-seed statistics, schema compatibility, poisoning defenses, external benchmark scores, and rollback readiness.

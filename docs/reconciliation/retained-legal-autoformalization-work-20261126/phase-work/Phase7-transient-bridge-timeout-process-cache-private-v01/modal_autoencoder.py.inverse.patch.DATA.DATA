@@ -1,0 +1,11 @@
+--- a/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py
++++ b/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py
+@@ -28188,8 +28188,6 @@
+                 cache_key=cache_key,
+                 timeout_seconds=timeout_seconds,
+             )
+-            # The fallback describes this attempt. A later attempt can recover.
+-            return sample.sample_id, target
+         if use_process_cache:
+             with _LEGAL_IR_TARGET_CACHE_LOCK:
+                 if len(_LEGAL_IR_TARGET_CACHE) >= _LEGAL_IR_TARGET_CACHE_MAX:

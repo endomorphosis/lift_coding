@@ -1,0 +1,322 @@
+.......................................................FFFFF........     [100%]
+=================================== FAILURES ===================================
+______ test_clear_discards_pending_single_flight_result[DuckDBProofStore] ______
+
+cache_type = <class 'ipfs_datasets_py.logic.common.duckdb_proof_store.DuckDBProofStore'>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0xffd18475f200>
+
+    @pytest.mark.parametrize("cache_type", [DuckDBProofStore, ExactVerificationCache])
+    def test_clear_discards_pending_single_flight_result(cache_type, monkeypatch):
+        from concurrent.futures import ThreadPoolExecutor
+        from threading import Event
+    
+        store, key = _clear_flight_fixture(cache_type)
+        entered, release, waiter_entered = Event(), Event(), Event()
+    
+        def old_producer():
+            entered.set()
+            assert release.wait(timeout=5)
+            return _theorem(result_id="result:before-clear")
+    
+        def unexpected_producer():
+            pytest.fail("caller should share the pending flight before clear")
+    
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            leader = pool.submit(store.get_or_compute, key, old_producer, now=100.0)
+            try:
+                assert entered.wait(timeout=5)
+                with store._lock:
+                    old_event = store._flights[key.digest].event
+                original_wait = old_event.wait
+    
+                def observe_wait():
+                    waiter_entered.set()
+                    assert original_wait(timeout=5)
+    
+                monkeypatch.setattr(old_event, "wait", observe_wait)
+                waiter = pool.submit(store.get_or_compute, key, unexpected_producer, now=100.0)
+                assert waiter_entered.wait(timeout=5)
+                store.clear()
+                cancelled_wait = waiter.result(timeout=5)
+            finally:
+                release.set()
+            retired = leader.result(timeout=5)
+    
+        assert cancelled_wait.single_flight_shared and cancelled_wait.reason is CacheLookupReason.MISS
+        assert cancelled_wait.entry is None and not cancelled_wait.usable
+>       assert store.get(key, now=101.0) is None, "retired producer repopulated the cleared cache"
+E       AssertionError: retired producer repopulated the cleared cache
+E       assert UnifiedProofEntry(key=UnifiedProofKey(ir_digest='sha256:3d13a1476223eaa0d4fed636157071db31f5a8f3b61290910028f8b7db5f03..., result_id='result:before-clear', diagnostics=(), evidence=(), envelope=None, schema_version='unified-proof-entry/v1') is None
+E        +  where UnifiedProofEntry(key=UnifiedProofKey(ir_digest='sha256:3d13a1476223eaa0d4fed636157071db31f5a8f3b61290910028f8b7db5f03..., result_id='result:before-clear', diagnostics=(), evidence=(), envelope=None, schema_version='unified-proof-entry/v1') = get(UnifiedProofKey(ir_digest='sha256:3d13a1476223eaa0d4fed636157071db31f5a8f3b61290910028f8b7db5f03a8', property_digest='...igest='sha256:bbefc430cbc7021d88ffedc9069ffa50f36f24459bed91ade66d266eba0f6a68', schema_version='unified-proof-key/v1'), now=101.0)
+E        +    where get = <ipfs_datasets_py.logic.common.duckdb_proof_store.DuckDBProofStore object at 0xffd18475f410>.get
+
+baseline/tests/unit/logic/test_duckdb_proof_store.py:769: AssertionError
+___ test_clear_discards_pending_single_flight_result[ExactVerificationCache] ___
+
+cache_type = <class 'ipfs_datasets_py.logic.backends.cache_protocol.ExactVerificationCache'>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0xffd184716d20>
+
+    @pytest.mark.parametrize("cache_type", [DuckDBProofStore, ExactVerificationCache])
+    def test_clear_discards_pending_single_flight_result(cache_type, monkeypatch):
+        from concurrent.futures import ThreadPoolExecutor
+        from threading import Event
+    
+        store, key = _clear_flight_fixture(cache_type)
+        entered, release, waiter_entered = Event(), Event(), Event()
+    
+        def old_producer():
+            entered.set()
+            assert release.wait(timeout=5)
+            return _theorem(result_id="result:before-clear")
+    
+        def unexpected_producer():
+            pytest.fail("caller should share the pending flight before clear")
+    
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            leader = pool.submit(store.get_or_compute, key, old_producer, now=100.0)
+            try:
+                assert entered.wait(timeout=5)
+                with store._lock:
+                    old_event = store._flights[key.digest].event
+                original_wait = old_event.wait
+    
+                def observe_wait():
+                    waiter_entered.set()
+                    assert original_wait(timeout=5)
+    
+                monkeypatch.setattr(old_event, "wait", observe_wait)
+                waiter = pool.submit(store.get_or_compute, key, unexpected_producer, now=100.0)
+                assert waiter_entered.wait(timeout=5)
+                store.clear()
+                cancelled_wait = waiter.result(timeout=5)
+            finally:
+                release.set()
+            retired = leader.result(timeout=5)
+    
+        assert cancelled_wait.single_flight_shared and cancelled_wait.reason is CacheLookupReason.MISS
+        assert cancelled_wait.entry is None and not cancelled_wait.usable
+>       assert store.get(key, now=101.0) is None, "retired producer repopulated the cleared cache"
+E       AssertionError: retired producer repopulated the cleared cache
+E       assert VerificationCacheEntry(key=VerificationCacheKey(ir_digest='sha256:3d13a1476223eaa0d4fed636157071db31f5a8f3b61290910028...631da5327544837b4fc2b9', result_id='result:before-clear', diagnostics=(), schema_version='verification-cache-entry/v1') is None
+E        +  where VerificationCacheEntry(key=VerificationCacheKey(ir_digest='sha256:3d13a1476223eaa0d4fed636157071db31f5a8f3b61290910028...631da5327544837b4fc2b9', result_id='result:before-clear', diagnostics=(), schema_version='verification-cache-entry/v1') = get(VerificationCacheKey(ir_digest='sha256:3d13a1476223eaa0d4fed636157071db31f5a8f3b61290910028f8b7db5f03a8', property_dig...='sha256:71c212a100fe285508abebd31494c8c3401dd4036d66978875b4fe9dd328b531', schema_version='verification-cache-key/v1'), now=101.0)
+E        +    where get = <ipfs_datasets_py.logic.backends.cache_protocol.ExactVerificationCache object at 0xffd184717440>.get
+
+baseline/tests/unit/logic/test_duckdb_proof_store.py:769: AssertionError
+____ test_clear_preserves_replacement_flight[late-success-DuckDBProofStore] ____
+
+cache_type = <class 'ipfs_datasets_py.logic.common.duckdb_proof_store.DuckDBProofStore'>
+producer_fails = False
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0xffd1847851f0>
+
+    @pytest.mark.parametrize("cache_type", [DuckDBProofStore, ExactVerificationCache])
+    @pytest.mark.parametrize("producer_fails", [False, True], ids=["late-success", "late-error"])
+    def test_clear_preserves_replacement_flight(cache_type, producer_fails, monkeypatch):
+        from concurrent.futures import ThreadPoolExecutor
+        from threading import Event
+    
+        store, key = _clear_flight_fixture(cache_type)
+        old_entered, old_release = Event(), Event()
+        new_entered, new_release = Event(), Event()
+    
+        def old_producer():
+            old_entered.set()
+            assert old_release.wait(timeout=5)
+            if producer_fails:
+                raise LookupError("retired producer fixture")
+            return _theorem(result_id="result:retired")
+    
+        def replacement_producer():
+            new_entered.set()
+            assert new_release.wait(timeout=5)
+            return _theorem(result_id="result:replacement")
+    
+        def unexpected_producer():
+            pytest.fail("replacement flight was removed by its retired predecessor")
+    
+        joined_flights = []
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            old = pool.submit(store.get_or_compute, key, old_producer, now=100.0)
+            try:
+                assert old_entered.wait(timeout=5)
+                store.clear()
+                replacement = pool.submit(store.get_or_compute, key, replacement_producer, now=101.0)
+                assert new_entered.wait(timeout=5)
+                with store._lock:
+                    replacement_event = store._flights[key.digest].event
+    
+                old_release.set()
+                if producer_fails:
+                    with pytest.raises(LookupError, match="retired producer fixture"):
+                        old.result(timeout=5)
+                else:
+                    old.result(timeout=5)
+    
+                original_wait = replacement_event.wait
+    
+                def release_replacement():
+                    joined_flights.append(replacement_event)
+                    new_release.set()
+                    assert original_wait(timeout=5)
+    
+                monkeypatch.setattr(replacement_event, "wait", release_replacement)
+                joined = store.get_or_compute(key, unexpected_producer, now=102.0)
+            finally:
+                old_release.set()
+                new_release.set()
+            current = replacement.result(timeout=5)
+    
+>       assert joined_flights == [replacement_event]
+E       assert [] == [<threading.E...4785d90: set>]
+E         
+E         Right contains one more item: <threading.Event at 0xffd184785d90: set>
+E         Use -v to get more diff
+
+baseline/tests/unit/logic/test_duckdb_proof_store.py:833: AssertionError
+_ test_clear_preserves_replacement_flight[late-success-ExactVerificationCache] _
+
+cache_type = <class 'ipfs_datasets_py.logic.backends.cache_protocol.ExactVerificationCache'>
+producer_fails = False
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0xffd184717560>
+
+    @pytest.mark.parametrize("cache_type", [DuckDBProofStore, ExactVerificationCache])
+    @pytest.mark.parametrize("producer_fails", [False, True], ids=["late-success", "late-error"])
+    def test_clear_preserves_replacement_flight(cache_type, producer_fails, monkeypatch):
+        from concurrent.futures import ThreadPoolExecutor
+        from threading import Event
+    
+        store, key = _clear_flight_fixture(cache_type)
+        old_entered, old_release = Event(), Event()
+        new_entered, new_release = Event(), Event()
+    
+        def old_producer():
+            old_entered.set()
+            assert old_release.wait(timeout=5)
+            if producer_fails:
+                raise LookupError("retired producer fixture")
+            return _theorem(result_id="result:retired")
+    
+        def replacement_producer():
+            new_entered.set()
+            assert new_release.wait(timeout=5)
+            return _theorem(result_id="result:replacement")
+    
+        def unexpected_producer():
+            pytest.fail("replacement flight was removed by its retired predecessor")
+    
+        joined_flights = []
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            old = pool.submit(store.get_or_compute, key, old_producer, now=100.0)
+            try:
+                assert old_entered.wait(timeout=5)
+                store.clear()
+                replacement = pool.submit(store.get_or_compute, key, replacement_producer, now=101.0)
+                assert new_entered.wait(timeout=5)
+                with store._lock:
+                    replacement_event = store._flights[key.digest].event
+    
+                old_release.set()
+                if producer_fails:
+                    with pytest.raises(LookupError, match="retired producer fixture"):
+                        old.result(timeout=5)
+                else:
+                    old.result(timeout=5)
+    
+                original_wait = replacement_event.wait
+    
+                def release_replacement():
+                    joined_flights.append(replacement_event)
+                    new_release.set()
+                    assert original_wait(timeout=5)
+    
+                monkeypatch.setattr(replacement_event, "wait", release_replacement)
+                joined = store.get_or_compute(key, unexpected_producer, now=102.0)
+            finally:
+                old_release.set()
+                new_release.set()
+            current = replacement.result(timeout=5)
+    
+>       assert joined_flights == [replacement_event]
+E       assert [] == [<threading.E...47168a0: set>]
+E         
+E         Right contains one more item: <threading.Event at 0xffd1847168a0: set>
+E         Use -v to get more diff
+
+baseline/tests/unit/logic/test_duckdb_proof_store.py:833: AssertionError
+_____ test_clear_preserves_replacement_flight[late-error-DuckDBProofStore] _____
+
+cache_type = <class 'ipfs_datasets_py.logic.common.duckdb_proof_store.DuckDBProofStore'>
+producer_fails = True
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0xffd18475f1d0>
+
+    @pytest.mark.parametrize("cache_type", [DuckDBProofStore, ExactVerificationCache])
+    @pytest.mark.parametrize("producer_fails", [False, True], ids=["late-success", "late-error"])
+    def test_clear_preserves_replacement_flight(cache_type, producer_fails, monkeypatch):
+        from concurrent.futures import ThreadPoolExecutor
+        from threading import Event
+    
+        store, key = _clear_flight_fixture(cache_type)
+        old_entered, old_release = Event(), Event()
+        new_entered, new_release = Event(), Event()
+    
+        def old_producer():
+            old_entered.set()
+            assert old_release.wait(timeout=5)
+            if producer_fails:
+                raise LookupError("retired producer fixture")
+            return _theorem(result_id="result:retired")
+    
+        def replacement_producer():
+            new_entered.set()
+            assert new_release.wait(timeout=5)
+            return _theorem(result_id="result:replacement")
+    
+        def unexpected_producer():
+            pytest.fail("replacement flight was removed by its retired predecessor")
+    
+        joined_flights = []
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            old = pool.submit(store.get_or_compute, key, old_producer, now=100.0)
+            try:
+                assert old_entered.wait(timeout=5)
+                store.clear()
+                replacement = pool.submit(store.get_or_compute, key, replacement_producer, now=101.0)
+                assert new_entered.wait(timeout=5)
+                with store._lock:
+                    replacement_event = store._flights[key.digest].event
+    
+                old_release.set()
+                if producer_fails:
+                    with pytest.raises(LookupError, match="retired producer fixture"):
+                        old.result(timeout=5)
+                else:
+                    old.result(timeout=5)
+    
+                original_wait = replacement_event.wait
+    
+                def release_replacement():
+                    joined_flights.append(replacement_event)
+                    new_release.set()
+                    assert original_wait(timeout=5)
+    
+                monkeypatch.setattr(replacement_event, "wait", release_replacement)
+>               joined = store.get_or_compute(key, unexpected_producer, now=102.0)
+
+baseline/tests/unit/logic/test_duckdb_proof_store.py:827: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+baseline/ipfs_datasets_py/logic/common/duckdb_proof_store.py:2528: in get_or_compute
+    produced = producer()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def unexpected_producer():
+>       pytest.fail("replacement flight was removed by its retired predecessor")
+E       Failed: replacement flight was removed by its retired predecessor
+
+baseline/tests/unit/logic/test_duckdb_proof_store.py:799: Failed
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/actual-red.xml -
+=========================== short test summary info ============================
+FAILED baseline/tests/unit/logic/test_duckdb_proof_store.py::test_clear_discards_pending_single_flight_result[DuckDBProofStore]
+FAILED baseline/tests/unit/logic/test_duckdb_proof_store.py::test_clear_discards_pending_single_flight_result[ExactVerificationCache]
+FAILED baseline/tests/unit/logic/test_duckdb_proof_store.py::test_clear_preserves_replacement_flight[late-success-DuckDBProofStore]
+FAILED baseline/tests/unit/logic/test_duckdb_proof_store.py::test_clear_preserves_replacement_flight[late-success-ExactVerificationCache]
+FAILED baseline/tests/unit/logic/test_duckdb_proof_store.py::test_clear_preserves_replacement_flight[late-error-DuckDBProofStore]
+5 failed, 63 passed in 0.48s

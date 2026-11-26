@@ -1,0 +1,42 @@
+--- a/ipfs_datasets_py/logic/common/duckdb_proof_store.py
++++ b/ipfs_datasets_py/logic/common/duckdb_proof_store.py
+@@ -2557,18 +2557,8 @@
+             # representation. Keep that canonical snapshot, not a later row or
+             # its trust-losing verification projection, for every waiting caller.
+             entry = UnifiedProofEntry.from_dict(entry.to_dict()).verify_integrity()
+-            with self._lock:
+-                # clear() can retire this producer while it computes outside the lock.
+-                if self._flights.get(unified.digest) is not flight:
+-                    return VerificationCacheLookup(
+-                        entry=None,
+-                        hit=False,
+-                        usable=False,
+-                        reason=CacheLookupReason.MISS,
+-                        key_digest=unified.digest,
+-                    )
+-                stored = self.put(entry, now=now)
+-                flight.entry = entry
++            stored = self.put(entry, now=now)
++            flight.entry = entry
+             evaluated = self._evaluate_entry(
+                 entry, unified, max_trust_level=ceiling,
+                 require_result_authority=required,
+@@ -2584,15 +2574,12 @@
+                 age_seconds=stored.age_seconds,
+             )
+         except BaseException as error:
+-            with self._lock:
+-                if self._flights.get(unified.digest) is flight:
+-                    flight.error = error
++            flight.error = error
+             raise
+         finally:
++            flight.event.set()
+             with self._lock:
+-                if self._flights.get(unified.digest) is flight:
+-                    del self._flights[unified.digest]
+-                flight.event.set()
++                self._flights.pop(unified.digest, None)
+ 
+     def invalidate(self, key: UnifiedProofKey | VerificationCacheKey) -> bool:
+         unified = self._resolve_unified_key(key)

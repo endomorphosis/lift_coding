@@ -1,0 +1,166 @@
+"""Execute the maintained saved-response validator with fictional output DATA."""
+from pathlib import Path
+import copy
+import hashlib
+import json
+import os
+import resource
+import runpy
+import sys
+
+resource.setrlimit(resource.RLIMIT_CPU, (50,50))
+resource.setrlimit(resource.RLIMIT_AS, (512 * 1024**2,) * 2)
+os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
+
+root = Path(__file__).resolve().parent
+phase = sys.argv[1]
+assert phase in {"before", "after"}
+helpers = Path("/tmp/decoder-public-codec-terminal-hook-private-v01-3ct_f9yq/load_exact_cached_codec_fixture.py")
+assert helpers.stat().st_size == 10656
+loader = runpy.run_path(str(helpers))
+auth = loader["authenticated"]
+compile_module = loader["_compile_module"]
+manifest = json.loads(auth({
+    "path": str(root/"exact-before-Git-inputs.json"),"bytes":5370,
+    "sha256":"23721e7d691264ee4a2e674588e6afc8a5539269854c6143df821817fa4c55ae",
+}))
+roles = manifest["files"]
+def body(name):
+    return auth(roles[name])
+ns = compile_module("namespaces", body("namespaces"), {})
+contracts = compile_module("contracts", body("contracts"), vars(ns))
+signatures = compile_module("signatures", body("signatures"), {**vars(ns), **vars(contracts)})
+syntax = compile_module("ast", body("syntax"), {**vars(ns), **vars(contracts), **vars(signatures)})
+consumer = compile_module("consumer", body("consumer"), {}, roots=["_preflight"])
+metrics = compile_module("metrics", body("metrics"), {"TypedExpression":syntax.TypedExpression},
+    roots=["evaluate_complete_norm_typed_structure","_complete_norm_payload_shape"])
+inputs = compile_module("inputs", body("inputs"),
+    {"consumer":consumer,"TypedExpression":syntax.TypedExpression,
+     "evaluate_complete_norm_typed_structure":metrics.evaluate_complete_norm_typed_structure},
+    roots=["encode_reviewed_decoder_digest_omitted_target","assemble_reviewed_decoder_digest_omitted_target","_reviewed_wire"])
+worker = compile_module("saved_worker", body("worker"), {},
+    roots=["_reviewed_decoder_artifact","CheckpointArtifact","_reviewed_decoder_generation_policy",
+           "_parse_json","_json_bytes","_digest"])
+inference_ref = roles["inference"] if phase=="before" else json.loads((root/"expected-inference-post.json").read_bytes())
+inference = compile_module("inference", auth(inference_ref),
+    {"worker":worker,"inputs":inputs,"autoencoder_training_worker":worker,"training_cycle_inputs":inputs},
+    roots=["_check_reviewed_evaluation_outputs"])
+from types import SimpleNamespace
+author = loader["load_authored_tests"](SimpleNamespace(inputs=inputs,syntax=syntax,signatures=signatures), {
+    "path":"/tmp/Main-authored-digest-omitted-structural-codec-four-test-fragment-v01-zk6kaiwe/test_authored_digest_omitted_structural_codec.fragment.py.DATA",
+    "bytes":7220,"sha256":"8557d965958066d4a866f33735720eeef9878a8ad4c4295df8dfc76c02ad4d46",
+})
+target = author._authored_digest_omitted_formula_target(True)
+codec = worker.REVIEWED_DIGEST_OMITTED_TARGET_CODEC
+target_wire = inputs.encode_reviewed_decoder_digest_omitted_target(target, target_codec=codec)
+assert inputs.assemble_reviewed_decoder_digest_omitted_target(target_wire, target_codec=codec)==target
+
+direc = root/("run-"+phase)
+direc.mkdir(mode=0o700)
+row_id,unit_id = "fixture:source-row","fixture:unit"
+contexts = {"schema":"saved-context-test-fixture","rows":[{"id":row_id,"unit_id":unit_id}]}
+def put(path, obj):
+    raw = worker._json_bytes(obj)
+    with path.open("xb") as dest:
+        dest.write(raw)
+    return dict(path=str(path), bytes=len(raw), sha256=worker._digest(raw))
+
+context_ref = put(direc/"context.json", contexts)
+exposure = {"fixture":"source-only authored exposure"}
+exposure_ref = put(direc/"exposure.json", exposure)
+assets = {name:put(direc/(name+".json"), {"fixture":name}) for name in
+    ("recipe_artifact","model_config_artifact","tokenizer_artifact","license_artifact","model_checkpoint","optimizer_checkpoint")}
+short_assets = list(assets.values())[:4]
+backend_identity = {"fixture":"same pinned identity in the loader and request"}
+declared_sources = {name:roles[name]["sha256"] for name in ("inference","worker","inputs","consumer")}
+runtime_profile = "builtin-qwen2-bfloat16/v1"
+generation_policy = {"schema":worker.REVIEWED_DIGEST_OMITTED_GENERATION_POLICY_SCHEMA,
+    "generation_profile":"builtin-qwen2-dynamic-kv/v1",
+    "conditioning_profile":worker.REVIEWED_DIGEST_OMITTED_CHATML_PROFILE,
+    "max_generation_seconds":1.0,"context_budget_profile":worker.REVIEWED_QWEN2_CONTEXT_BUDGET_PROFILE,
+    "target_codec":codec}
+bos,eos,vocab = 256,257,258
+body_tokens = list(target_wire.encode("utf-8"))
+max_output = len(body_tokens)+3
+scope = dict(max_output_tokens=max_output,max_source_tokens=8192,operation="heldout_evaluation",
+    admission_inputs_sha256=worker._digest(b"fictional admission binding"),
+    admission_profile="complete-reviewed-mixed-sort-norm-admission/v3",runtime_profile=runtime_profile,
+    backend_identity=backend_identity,generation_policy=generation_policy)
+request = dict(scope,schema="reviewed-source-evaluation-request/v11",assets=assets,
+    source_contexts_artifact=context_ref, exposure_artifact=exposure_ref,source_sha256=declared_sources)
+commitment = dict(scope,schema="reviewed-decoder-digest-omitted-source-producer-policy/v1",assets=short_assets,
+    model_checkpoint=assets["model_checkpoint"],optimizer_checkpoint=assets["optimizer_checkpoint"],
+    source_contexts_sha256=worker._digest(worker._json_bytes(contexts)),training_requested=False, restore_requested=False,
+    source_sha256=declared_sources,exposure_sha256=worker._digest(inputs._reviewed_wire(exposure)),
+    supplied_context_supported="empty_permitted_and_retrieved_only",
+    output_derivation=dict(schema="reviewed-digest-omitted-output-assembly/v1",target_codec=codec,
+        only_computed_field="typed_expression.content_digest",other_default_filling=False))
+generation = dict(schema="reviewed-decoder-digest-omitted-source-producer-observation/v1",input_commitment=commitment,
+    input_profile_id="reviewed-decoder-digest-omitted-producer/v1:"+worker._digest(inputs._reviewed_wire(commitment)))
+receipt = {"schema":"reviewed-decoder-generation-input-receipt/v1",
+    "profile":"source-only-reviewed-decoder-generation-inputs/v1","record_count":1,
+    "source_contexts_sha256":commitment["source_contexts_sha256"],"max_source_tokens":scope["max_source_tokens"],
+    "tokenizer_contract":{"schema":"reviewed-decoder-tokenizer-contract/v2","bos_token_id":bos,"eos_token_id":eos,
+        "vocab_size":vocab,"pipeline_kind":"fictional_fixed_byte",
+        "pipeline_sha256":worker._digest(b"Fictional source byte map"),"pipeline_bytes":26}}
+loaded = {"schema":"reviewed-local-digest-omitted-decoder-runtime-load/v1","target_codec":codec,
+    "expected_backend_identity":backend_identity,"loaded_backend_identity":backend_identity,
+    "producer_pins":declared_sources,"artifacts":list(assets.values()),"runtime_profile":runtime_profile,
+    "device":"cpu","dtype":"bfloat16","optimizer_steps":0,
+    **dict.fromkeys(("checkpoint_restored","matched_pair","load_performed","restore_performed"),True),
+    **dict.fromkeys(("training_performed","downloads_performed","resource_granted",
+        "automatic_old_source_checkpoint_migration","old_objective_checkpoint_migration_performed",
+        "license_bytes_are_permission","pretrained_quality_verified","legal_meaning_verified","proof_authority",
+        "convergence_proved","corpus_admitted"),False)}
+
+cases = [
+    ("complete",True,"complete",[bos,*body_tokens,eos],target_wire,None),
+    ("abstained",True,"abstained",[bos,eos],None,"empty_output"),
+    ("time-before-forward",True,"incomplete",[bos],None,"generation_time_limit_without_eos"),
+    ("token-exhaustion",True,"incomplete",[bos]+[3]*(max_output-1),None,"output_limit_without_eos"),
+    ("unexpected-bos",True,"invalid",[bos,3,bos],None,"unexpected_bos_in_output"),
+    ("invalid-transport",True,"invalid",[bos,255,eos],None,"invalid_output_transport"),
+    ("malformed-body",True,"invalid",[bos,123,eos],"{","invalid_complete_norm_json"),
+    ("empty-decoded-body",True,"invalid",[bos,3,eos],"","invalid_complete_norm_json"),
+    ("complete-without-eos",False,"complete",[bos,*body_tokens,3],target_wire,None),
+    ("complete-with-early-eos",False,"complete",[bos,eos,*body_tokens,eos],target_wire,None),
+    ("complete-with-wrong-bos",False,"complete",[4,*body_tokens,eos],target_wire,None),
+    ("complete-outside-vocab",False,"complete",[bos,vocab,*body_tokens,eos],target_wire,None),
+    ("false-abstention",False,"abstained",[bos,3],None,"empty_output"),
+    ("false-incomplete-with-eos",False,"incomplete",[bos,eos],None,"generation_time_limit_without_eos"),
+    ("false-token-budget",False,"incomplete",[bos,3],None,"output_limit_without_eos"),
+    ("valid-body-called-invalid",False,"invalid",[bos,*body_tokens,eos],target_wire,"invalid_complete_norm_json"),
+    ("missing-tokenizer-receipt",False,"complete",[bos,*body_tokens,eos],target_wire,None),
+]
+control_records = []
+for name,expected,outcome,tokens,text,reason in cases:
+    out = direc/name
+    out.mkdir(mode=0o700)
+    candidate = target if outcome=="complete" else None
+    output = dict(id=row_id,outcome=outcome,candidate=candidate)
+    item = dict(output,unit_id=unit_id,generated_token_ids=tokens,generated_text=text,reason=reason)
+    proof = dict(id=row_id,outcome=outcome,computed_field="typed_expression.content_digest",other_fields_repaired=False,
+        raw_model_text_sha256=worker._digest(text.encode()) if text is not None else None,
+        assembled_full_target_sha256=worker._digest(inputs._reviewed_wire(candidate)) if candidate is not None else None)
+    call = dict(completed=True,entry_pair_match=True,exit_pair_match=True,exception_type=None,
+        input_receipt=copy.deepcopy(receipt),raw_generation_outputs=[item],producer_outputs=[output],output_derivation=[proof])
+    if name=="missing-tokenizer-receipt":
+        del call["input_receipt"]
+    local_request = dict(request,output_directory=str(out))
+    values = {"evaluation":{},"loader":loaded,"generation":dict(generation,last_call=call)}
+    descriptors = {role:put(out/(role+".json"),value) for role,value in values.items()}
+    cycle = dict(output_artifacts=descriptors,inference=dict(profile=request["schema"],**{name:ref["path"] for name,ref in descriptors.items()}))
+    try:
+        inference._check_reviewed_evaluation_outputs(cycle,local_request)
+    except ValueError as error:
+        observed,message = False,str(error)
+    else:
+        observed,message = True,None
+    assert all(worker._digest(Path(ref["path"]).read_bytes())==ref["sha256"] for ref in descriptors.values())
+    control_records.append(dict(case=name,expected_accepted=expected,observed_accepted=observed,
+        agrees=observed==expected,refusal=message))
+print(json.dumps(dict(phase=phase,selected_owner=inference_ref,
+    actual_saved_artifact_parent_validator=True,exact_public_codec=True,
+    cases=control_records,matched=sum(row["agrees"] for row in control_records),
+    total=len(control_records),project_or_model_runtime_loaded=False),indent=2,sort_keys=True))
+sys.exit(0 if all(row["agrees"] for row in control_records) else 1)

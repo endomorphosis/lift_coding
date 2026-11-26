@@ -1,0 +1,371 @@
+--- a/scripts/ops/legal_ir/validate_uscode_corpus_release.py
++++ b/scripts/ops/legal_ir/validate_uscode_corpus_release.py
+@@ -16,7 +16,6 @@
+ 
+ RECEIPT_SCHEMA = "legal-corpus-graph-cli-receipt/v1"
+ _WHOLE_NORM_V4_PROFILE = "reviewed-source-use-whole-norm-physical-source-replay/v1"
+-_PHYSICAL_V3_PROFILE = "reviewed-norm-v3-physical-three-cache-replay/v1"
+ 
+ 
+ class CLIError(ValueError):
+@@ -45,11 +44,10 @@
+     closure.add_argument("-h", "--help", action="store_true")
+     closure.add_argument("--request", required=True)
+     closure.add_argument("--request-sha256", required=True)
+-    closure.add_argument("--include-declared-eligibility", action="store_true")
+     closure.add_argument("--profile", choices=(
+         "reviewed-norm-v2-local-replay/v1",
+         "reviewed-norm-v2-physical-three-cache-replay/v1",
+-        _PHYSICAL_V3_PROFILE,
++        "reviewed-norm-v3-physical-three-cache-replay/v1",
+         "reviewed-norm-v3-direct",
+         _WHOLE_NORM_V4_PROFILE,
+     ), default="reviewed-norm-v2-local-replay/v1")
+@@ -140,15 +138,11 @@
+                 result["supported_profiles"] = [
+                     "reviewed-norm-v2-local-replay/v1",
+                     "reviewed-norm-v2-physical-three-cache-replay/v1",
+-                    _PHYSICAL_V3_PROFILE,
++                    "reviewed-norm-v3-physical-three-cache-replay/v1",
+                     "reviewed-norm-v3-direct",
+                     _WHOLE_NORM_V4_PROFILE,
+                 ]
+                 result["default_profile"] = "reviewed-norm-v2-local-replay/v1"
+-                result["declared_eligibility"] = {
+-                    "flag": "--include-declared-eligibility",
+-                    "supported_profiles": [_PHYSICAL_V3_PROFILE, _WHOLE_NORM_V4_PROFILE],
+-                }
+         else:
+             args = parser.parse_args(arguments)
+             command = args.command
+@@ -158,11 +152,6 @@
+                 from ipfs_datasets_py.logic.autoformal.legal_release_coordinator_v1 import (
+                     MAX_CLOSURE_REQUEST_BYTES, validate_uscode_release_closure_v1,
+                 )
+-                eligibility_options = {}
+-                if args.include_declared_eligibility:
+-                    if args.profile not in (_PHYSICAL_V3_PROFILE, _WHOLE_NORM_V4_PROFILE):
+-                        raise CLIError("declared eligibility requires a supported physical V3 or V4 profile")
+-                    eligibility_options["include_declared_eligibility"] = True
+                 request_limit = MAX_CLOSURE_REQUEST_BYTES
+                 if args.profile in ("reviewed-norm-v3-direct", _WHOLE_NORM_V4_PROFILE):
+                     from ipfs_datasets_py.logic.autoformal.legal_release_coordinator_v1 import (
+@@ -176,7 +165,7 @@
+                         validate_uscode_release_closure_v2,
+                     )
+                     validator = validate_uscode_release_closure_v2
+-                elif args.profile == _PHYSICAL_V3_PROFILE:
++                elif args.profile == "reviewed-norm-v3-physical-three-cache-replay/v1":
+                     from ipfs_datasets_py.logic.autoformal.legal_release_coordinator_v1 import (
+                         validate_uscode_release_closure_v3,
+                     )
+@@ -191,8 +180,7 @@
+                         validate_uscode_release_closure_v4,
+                     )
+                     validator = validate_uscode_release_closure_v4
+-                closure = validator(raw, expected_request_sha256=args.request_sha256,
+-                    **eligibility_options)
++                closure = validator(raw, expected_request_sha256=args.request_sha256)
+                 result = _receipt(status="success", command=command,
+                     validation_scope="selected-component-local-replay-not-release-admission",
+                     closure=closure)
+--- a/ipfs_datasets_py/logic/autoformal/legal_release_coordinator_v1.py
++++ b/ipfs_datasets_py/logic/autoformal/legal_release_coordinator_v1.py
+@@ -1437,108 +1437,25 @@
+         original_parent_handle=original_parent_handle, _original_parent_context=_original_parent_context)
+ 
+ 
+-def _declared_physical_release_eligibility(request_raw, report):
+-    """Project evidence from the completed physical V3 or V4 replay."""
+-    from ipfs_datasets_py.utils.cid_utils import cid_for_bytes
+-    from . import corpus_contracts as contracts, corpus_qualification as qualification
+-    from . import legal_corpus_definition_use_lake_v2 as wire
+-
+-    version = report["reviewed_version"]
+-    request_limit = MAX_CLOSURE_REQUEST_BYTES_V3 if version == 4 else MAX_CLOSURE_REQUEST_BYTES
+-    request = wire.decode_parent_replay_value_v1(
+-        request_raw, expected_payload_sha256=report["request_sha256"],
+-        max_bytes=request_limit,
+-    )
+-    artifacts = {row["artifact_id"]: row for row in request["artifacts"]}
+-    component = request["component"]
+-    admission = _reviewed_json_artifact_v3(artifacts[component["admission"]]["payload"])
+-    preserved = artifacts[component["preservation"]]
+-    preservation = wire.decode_parent_replay_value_v1(
+-        preserved["payload"], expected_payload_sha256=preserved["sha256"],
+-        max_bytes=MAX_CLOSURE_REQUEST_BYTES,
+-    )
+-    expected_obligations = json.loads(preservation["manifest_json"])["preservation_obligations"]
+-    cids = {role: cid_for_bytes(artifacts[component[role]]["payload"]) for role in (
+-        "graph", "reviewed_crosswalk", "admission", "preservation", "dependency",
+-    )}
+-    artifact_cid = cids["graph"]
+-    native = request["native"]
+-    retained_native = None
+-    if report["native_receipt_replayed"]:
+-        retained_native = {
+-            "receipt_cid": cid_for_bytes(artifacts[native["receipt"]]["payload"]),
+-            "packet_index_cid": cid_for_bytes(artifacts[native["packet_index"]]["payload"]),
+-            "packet_sha256": report["native_packet_transport"]["logical_packet_inventory_sha256"],
+-            "observation_profile": native["observation_profile"],
+-        }
+-    evidence = contracts.seal_record({
+-        "schema": f"legal-corpus-physical-v{version}-qualification-evidence/v1",
+-        "reviewed_version": version,
+-        **({key: report[key] for key in (
+-            "instance_identity_profile", "definition_application_profile",
+-        )} if version == 4 else {}),
+-        "artifact_cid": artifact_cid,
+-        "profile": report["profile"],
+-        "request_sha256": report["request_sha256"],
+-        "component_cids": cids,
+-        "graph_sha256": report["graph_sha256"],
+-        "admission_sha256": report["admission_sha256"],
+-        "preservation_sha256": report["preservation_sha256"],
+-        "reviewed_crosswalk_sha256": report["reviewed_crosswalk_sha256"],
+-        "ordered_unit_ids": report["unit_ids"],
+-        "fixture_only": report["fixture_only"],
+-        "permitted_uses": admission["permitted_uses"],
+-        "formal_assumptions": admission["formal_assumptions"],
+-        "preservation_obligations": expected_obligations,
+-        "retained_native": retained_native,
+-    })
+-    # These declarations refer to the verified local component. In particular,
+-    # source integrity is the exact physical byte crosswalk. Retained Native
+-    # observations carry no new compilation or theorem-discharge status.
+-    dimensions = {
+-        "processing": ("complete", evidence["record_cid"]),
+-        "source_integrity": ("verified", cids["reviewed_crosswalk"]),
+-        "interpretation": ("reviewed", cids["admission"]),
+-        "representation": ("supported_complete", cids["preservation"]),
+-        "dependency": ("resolved", cids["dependency"]),
+-    }
+-    record = qualification.prepare_qualification(
+-        artifact_cid=artifact_cid, profile=report["profile"],
+-        theorem_requested=bool(expected_obligations),
+-        dimensions={name: {"status": state, "evidence_cids": [cid]}
+-                    for name, (state, cid) in dimensions.items()},
+-    )
+-    return {
+-        "declared_eligibility_evidence": evidence,
+-        "declared_qualification": record,
+-        "declared_eligibility": qualification.derive_eligibility(
+-            record, artifact_cid=artifact_cid, profile=report["profile"]),
+-    }
+-
+-
+ def validate_uscode_release_closure_v3(request_raw: bytes, *, expected_request_sha256: str,
+-        original_parent_handle=None, include_declared_eligibility=False) -> dict:
+-    """Replay V3 bytes and optionally project the checked local graph evidence.
++        original_parent_handle=None) -> dict:
++    """Replay V3 bytes; optionally consume one actual in-process A parent handle.
+ 
+     None retains the existing retained-only path. The request wire cannot supply
+-    the opaque original parent handle. The opt-in eligibility is declarative,
+-    with conditional obligations and retained observations kept as evidence.
++    the opaque handle, and replay grants no new execution, release or legal authority.
+     """
+     _release_v3_policy()
+-    _need(type(include_declared_eligibility) is bool, "explicit boolean eligibility selection required")
++    if original_parent_handle is None:
++        return _validate_uscode_release_physical_closure(request_raw, expected_request_sha256=expected_request_sha256, reviewed_version=3)
+     if original_parent_handle is not None:
+         entry_guard = _release_original_parent_entry_guard_v3
+         if (entry_guard is not _RELEASE_ORIGINAL_PARENT_ENTRY_GUARD_V3
+                 or entry_guard.__code__ is not _RELEASE_ORIGINAL_PARENT_ENTRY_CODE_V3):
+             raise ReleaseCoordinatorError("original-parent coordinator entry generation changed: entry guard")
+         entry_guard()
+-    report = _validate_uscode_release_physical_closure(
+-        request_raw, expected_request_sha256=expected_request_sha256,
+-        reviewed_version=3, original_parent_handle=original_parent_handle,
+-    )
+-    if include_declared_eligibility:
+-        report.update(_declared_physical_release_eligibility(request_raw, report))
+-    return report
++    return _validate_uscode_release_physical_closure(request_raw, expected_request_sha256=expected_request_sha256,
++        reviewed_version=3, original_parent_handle=original_parent_handle)
++
+ 
+ def validate_reviewed_physical_realization_context_v1(request_raw: bytes, *,
+         expected_request_sha256: str) -> dict:
+@@ -1834,21 +1751,12 @@
+         _captured_native_context=_captured_native_context, _native_transport=_native_transport)
+ 
+ 
+-def validate_uscode_release_closure_v4(request_raw, *, expected_request_sha256,
+-        include_declared_eligibility=False):
+-    """Replay source-only whole-norm correspondence and optionally project eligibility.
+-
+-    The projection binds the upstream preservation obligations, which are
+-    distinct from any later physical realization or Native results.
+-    """
++def validate_uscode_release_closure_v4(request_raw, *, expected_request_sha256):
++    """Replay source-only whole-norm physical correspondence, without Native authority."""
+     _release_v4_policy()
+-    _need(type(include_declared_eligibility) is bool, "explicit boolean eligibility selection required")
+-    report = _validate_uscode_release_physical_closure(request_raw,
++    return _validate_uscode_release_physical_closure(request_raw,
+         expected_request_sha256=expected_request_sha256, reviewed_version=4,
+         _native_transport="direct-packet/v1")
+-    if include_declared_eligibility:
+-        report.update(_declared_physical_release_eligibility(request_raw, report))
+-    return report
+ 
+ 
+ def validate_reviewed_physical_realization_context_v2(request_raw: bytes, *,
+--- a/tests/unit/logic/autoformal/test_corpus_release_cli.py
++++ b/tests/unit/logic/autoformal/test_corpus_release_cli.py
+@@ -3527,153 +3527,3 @@
+     context = control["preparation"].to_dict()["physical_context"]
+     assert context["physical_source_bindings"]["counts"]["reviewed_units"] == 3
+     assert context["native_execution_performed"] is context["release_ready"] is False
+-
+-
+-
+-def test_physical_v3_existing_release_projects_declared_graph_eligibility(physical_closure_control_v3):
+-    wire_request = physical_closure_control_v3[0]
+-    projected, evidence, artifact_cid, raw = _physical_v3_eligibility_fixture_projection(wire_request)
+-    assert evidence["retained_native"] is None
+-    assert "retained_native_receipt_and_packet_not_provided" in projected["blockers"]
+-    assert projected["native_receipt_replayed"] is False
+-
+-
+-def _physical_v3_eligibility_fixture_projection(wire_request):
+-    from ipfs_datasets_py.logic.autoformal import corpus_qualification as qualification
+-    from ipfs_datasets_py.logic.autoformal import legal_corpus_definition_use_lake_v2 as transport
+-    from ipfs_datasets_py.logic.autoformal import legal_release_coordinator_v1 as release
+-    from ipfs_datasets_py.utils.cid_utils import cid_for_bytes
+-
+-    raw = transport.encode_parent_replay_value_v1(wire_request, max_bytes=release.MAX_CLOSURE_REQUEST_BYTES)
+-    request_sha256 = hashlib.sha256(raw).hexdigest()
+-    projected = release.validate_uscode_release_closure_v3(raw,
+-        expected_request_sha256=request_sha256, include_declared_eligibility=True)
+-    assert_release_v3_byte_authority_only(projected)
+-    artifacts = {item["artifact_id"]: item for item in wire_request["artifacts"]}
+-    graph = artifacts[wire_request["component"]["graph"]]
+-    artifact_cid = cid_for_bytes(graph["payload"])
+-    evidence = projected["declared_eligibility_evidence"]
+-    assert evidence["artifact_cid"] == artifact_cid
+-    assert evidence["request_sha256"] == request_sha256
+-    assert evidence["graph_sha256"] == wire_request["pins"]["graph"]
+-    assert evidence["admission_sha256"] == wire_request["pins"]["admission"]
+-    assert evidence["preservation_sha256"] == wire_request["pins"]["preservation"]
+-    assert evidence["reviewed_crosswalk_sha256"] == wire_request["pins"]["reviewed_crosswalk"]
+-    assert evidence["ordered_unit_ids"] == wire_request["expected_unit_ids"]
+-    record = projected["declared_qualification"]
+-    eligibility = projected["declared_eligibility"]
+-    profile = projected["profile"]
+-    assert qualification.validate_eligibility(eligibility, record,
+-        artifact_cid=artifact_cid, profile=profile) == eligibility
+-    assert eligibility["views"]["reviewed_graph"]["declared_eligible"]
+-    assert not eligibility["views"]["checked_lean"]["declared_eligible"]
+-    assert record["dimensions"]["proof"]["status"] == "pending"
+-    assert record["dimensions"]["lean_compilation"]["status"] == "not_run"
+-    assert eligibility["artifact_cid"] == artifact_cid
+-    assert eligibility["authority_policy_required"] is True
+-    assert all(not eligibility[field] for field in qualification.AUTHORITY_FIELDS)
+-    assert evidence["fixture_only"] is True
+-    assert evidence["permitted_uses"] == json.loads(
+-        artifacts[wire_request["component"]["admission"]]["payload"])["permitted_uses"]
+-    return projected, evidence, artifact_cid, raw
+-
+-
+-def test_physical_v3_retained_native_keeps_conditional_evidence_on_its_graph(authored_physical_native_v3):
+-    from ipfs_datasets_py.utils.cid_utils import cid_for_bytes
+-
+-    wire_request, control, receipt, packet, full_wire = authored_physical_native_v3
+-    projected, evidence, artifact_cid, raw = _physical_v3_eligibility_fixture_projection(wire_request)
+-    assert raw == full_wire
+-    assert projected["native_receipt_replayed"] is True
+-    assert projected["native_receipt_authenticated"] is False
+-    rows = {item["artifact_id"]: item for item in wire_request["artifacts"]}
+-    selection = wire_request["native"]
+-    assert evidence["retained_native"] == {
+-        "receipt_cid": cid_for_bytes(rows[selection["receipt"]]["payload"]),
+-        "packet_index_cid": cid_for_bytes(rows[selection["packet_index"]]["payload"]),
+-        "packet_sha256": selection["expected_packet_sha256"],
+-        "observation_profile": "fictional-authored-observation/v1",
+-    }
+-    assert evidence["preservation_obligations"] == control["preparation"].to_dict()["preservation_obligations"]
+-    assert projected["declared_qualification"]["artifact_cid"] == artifact_cid
+-
+-
+-def test_physical_v3_eligibility_requires_current_replay_of_the_exact_graph(physical_closure_control_v3):
+-    from copy import deepcopy
+-    from ipfs_datasets_py.logic.autoformal import legal_corpus_definition_use_lake_v2 as transport
+-    from ipfs_datasets_py.logic.autoformal import legal_release_coordinator_v1 as release
+-
+-    wire_request = deepcopy(physical_closure_control_v3[0])
+-    wire_request["pins"]["graph"] = "0" * 64
+-    raw = transport.encode_parent_replay_value_v1(wire_request, max_bytes=release.MAX_CLOSURE_REQUEST_BYTES)
+-    with pytest.raises(ValueError):
+-        release.validate_uscode_release_closure_v3(raw, expected_request_sha256=hashlib.sha256(raw).hexdigest(),
+-            include_declared_eligibility=True)
+-
+-
+-
+-def test_physical_v4_cli_projects_current_graph_eligibility_without_native_credit(
+-        physical_source_use_whole_norm_control_v2, tmp_path, capsys):
+-    from scripts.ops.legal_ir import validate_uscode_corpus_release as cli
+-    from ipfs_datasets_py.logic.autoformal import corpus_qualification as qualification
+-    from ipfs_datasets_py.logic.autoformal import legal_release_coordinator_v1 as release
+-    from ipfs_datasets_py.utils.cid_utils import cid_for_bytes
+-
+-    control = physical_source_use_whole_norm_control_v2
+-    path = tmp_path / "complete-source-review-v4.wire"
+-    path.write_bytes(control["physical_request_raw"])
+-    argv = ["validate-closure", "--profile", release.CLOSURE_PROFILE_V4,
+-        "--request", str(path), "--request-sha256", control["physical_request_sha256"]]
+-    assert cli.main(argv + ["--include-declared-eligibility"]) == 0
+-    receipt = json.loads(capsys.readouterr().out)
+-    assert receipt["status"] == "success"
+-    assert receipt["admitted"] is receipt["proof_verified"] is False
+-
+-    closure = receipt["closure"]
+-    evidence = closure["declared_eligibility_evidence"]
+-    record, eligibility = closure["declared_qualification"], closure["declared_eligibility"]
+-    request = control["physical_request"]
+-    rows = {row["artifact_id"]: row for row in request["artifacts"]}
+-    graph = rows[request["component"]["graph"]]
+-    artifact_cid = cid_for_bytes(graph["payload"])
+-    assert evidence["artifact_cid"] == artifact_cid
+-    assert evidence["reviewed_version"] == 4
+-    assert evidence["graph_sha256"] == control["graph_sha"]
+-    assert evidence["request_sha256"] == control["physical_request_sha256"]
+-    assert evidence["ordered_unit_ids"] == request["expected_unit_ids"]
+-    assert evidence["instance_identity_profile"] == "reviewed-source-use/v1"
+-    assert evidence["definition_application_profile"] == "whole-norm-definition-expansion/v1"
+-    assert evidence["preservation_obligations"] == control["preservation"].to_dict()["preservation_obligations"]
+-    assert evidence["retained_native"] is None
+-    assert closure["native_receipt_replayed"] is False
+-    assert closure["admission_mask"] == closure["training_mask"] == closure["evaluation_gold_mask"] == 0
+-    assert qualification.validate_eligibility(eligibility, record,
+-        artifact_cid=artifact_cid, profile=release.CLOSURE_PROFILE_V4) == eligibility
+-    assert eligibility["views"]["reviewed_graph"]["declared_eligible"] is True
+-    assert eligibility["views"]["checked_lean"]["declared_eligible"] is False
+-    assert record["dimensions"]["proof"]["status"] == "pending"
+-    assert record["dimensions"]["lean_compilation"]["status"] == "not_run"
+-
+-
+-def test_physical_v4_declared_eligibility_keeps_native_refusal(physical_source_use_whole_norm_control_v2):
+-    from copy import deepcopy
+-    from ipfs_datasets_py.logic.autoformal import legal_corpus_definition_use_lake_v2 as wire
+-    from ipfs_datasets_py.logic.autoformal import legal_release_coordinator_v1 as release
+-
+-    request = deepcopy(physical_source_use_whole_norm_control_v2["physical_request"])
+-    request["native"] = {}
+-    raw = wire.encode_parent_replay_value_v1(request, max_bytes=release.MAX_CLOSURE_REQUEST_BYTES_V3)
+-    with pytest.raises(ValueError, match="cannot acquire Native authority"):
+-        release.validate_uscode_release_closure_v4(raw,
+-            expected_request_sha256=hashlib.sha256(raw).hexdigest(), include_declared_eligibility=True)
+-
+-
+-def test_closure_cli_refuses_declared_eligibility_on_other_profiles(tmp_path, capsys):
+-    from scripts.ops.legal_ir import validate_uscode_corpus_release as cli
+-
+-    rc = cli.main(["validate-closure", "--request", str(tmp_path / "not-read.wire"),
+-        "--request-sha256", "0" * 64, "--include-declared-eligibility"])
+-    receipt = json.loads(capsys.readouterr().out)
+-    assert rc == 1 and receipt["status"] == "error"
+-    assert "declared eligibility requires a supported physical V3 or V4 profile" in receipt["error"]
+-    assert "closure" not in receipt

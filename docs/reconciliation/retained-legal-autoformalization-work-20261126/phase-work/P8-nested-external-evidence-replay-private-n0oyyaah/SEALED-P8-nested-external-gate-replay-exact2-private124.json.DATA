@@ -1,0 +1,157 @@
+{
+  "baseline_input_manifest": {
+    "bytes": 6445,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-nested-external-evidence-replay-private-n0oyyaah/exact-composed-role-and-test-inputs.RED.json",
+    "sha256": "1a30933ed5ed775578fabf8415888d03cf71347f77b83cddafcadd0f6c943efe"
+  },
+  "candidate_input_manifest": {
+    "bytes": 6404,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-nested-external-evidence-replay-private-n0oyyaah/exact-composed-role-and-test-inputs.json",
+    "sha256": "9e72ba38b57733ec65c17b55ce38863c797c78c193a34dcb751aeb7d29088b09"
+  },
+  "canonical_preimage_commit": "d8d688db0d1cf0bafd504a42d33e627ddc6c9261",
+  "canonical_write_or_Git_publication_performed": false,
+  "current_paths_still_match_preimage": true,
+  "defect": "A typed raw external-validity envelope under the compiler evidence map escaped the same replay used for top-level aliases. A saved pass could hide a conflicting selected population.",
+  "files": [
+    {
+      "after": {
+        "bytes": 224751,
+        "git_blob": "c0d5615ac50e26a6c05dd4097933c311dbb7876e",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-nested-external-evidence-replay-private-n0oyyaah/rollout.after.py.DATA",
+        "sha256": "c3915f114a8a0d7670b7c97e57b8fa7af16c36da3e7206b1193e8abd877e0aec"
+      },
+      "before": {
+        "bytes": 224287,
+        "git_blob": "da9d7603679ecc3bfc2f822a152d0f93147fa830",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-nested-external-evidence-replay-private-n0oyyaah/baseline/scripts/ops/legal_ir/hammer_leanstral_rollout_gate.py",
+        "sha256": "43eba36819cd183cee96fddda113386964b7233a1a7a1750b3f27423f69961f1"
+      },
+      "relative_path": "scripts/ops/legal_ir/hammer_leanstral_rollout_gate.py",
+      "role": "existing_compiler_gate"
+    },
+    {
+      "after": {
+        "bytes": 22682,
+        "git_blob": "6d222e36acfd2256962453d6fc37a4ce4f0c3033",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-nested-external-evidence-replay-private-n0oyyaah/test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py",
+        "sha256": "da7c1473d85439dcfa34b02d6a6e8278ce8ef73b9b1cffdae82a0cca28ec3a02"
+      },
+      "before": {
+        "bytes": 20168,
+        "git_blob": "c7e6fbcf666312c32434cdeabc9c345cf52410a3",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-nested-external-evidence-replay-private-n0oyyaah/compiler.test.before.py.DATA",
+        "sha256": "cdbcf4c325be7dfefa62fa16b8a6d63fe945a60c199b53dbae77780ddb02ef64"
+      },
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py",
+      "role": "owning_compiler_tests"
+    }
+  ],
+  "forward": {
+    "bytes": 4373,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-nested-external-evidence-replay-private-n0oyyaah/exact2-forward.patch.DATA",
+    "sha256": "d288375616408884b890fc8c1d376ded350fd0f82a7b7beb508034719df1e039"
+  },
+  "initial_python_setup_error_before_test_calls": {
+    "cause": "Collection traversed /tmp/snap-private-tmp and was refused before compiling any owners.",
+    "pytest": "8.1.1",
+    "raw_collection_xml": {
+      "bytes": 1020,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-nested-external-evidence-replay-private-n0oyyaah/baseline-run/junit.xml",
+      "sha256": "1c93365f70e5b4865926de09b4dcc095317bcca9af7f9b2586a466ae2112be30"
+    },
+    "rc": 1,
+    "resolution": "Reuse project .venv pytest 8.3.4 for the actual matching pair.",
+    "stdout": {
+      "bytes": 8177,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-nested-external-evidence-replay-private-n0oyyaah/baseline.stdout",
+      "sha256": "37d1bfeefd5dd4c99869ead98a896fb628e54a71c1d63f94ddcd84bbdcfc1852"
+    }
+  },
+  "inverse": {
+    "bytes": 4373,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-nested-external-evidence-replay-private-n0oyyaah/exact2-inverse.patch.DATA",
+    "sha256": "baeac06b6503cd0b40194a93eef46fc72cb6277bdefc4a5a0a75a062f2a62873"
+  },
+  "new_cases": 7,
+  "ordinary_qualification_or_model_native_legal_authority": null,
+  "private_explicit_roster_identical_across_pair": true,
+  "private_same124": {
+    "baseline-pytest834": {
+      "errors": 0,
+      "failed": 4,
+      "failure_cases_and_messages": [
+        [
+          "test_compiler_replays_nested_external_gate_evidence[nested-only-external_validity]",
+          "AssertionError: ['external_validity_promotion_evidence_missing']\nassert False is True\n +  where False = RolloutGateResult(accepted=False, failures=['external_validity_promotion_evidence_missing'], warnings=[], metrics={'sc...bbbbbbbbbbbbbbbbbbbbbbbbbbbbb'}}}, 'evidence_complete': True, 'rollback_ready': True, 'promotion_decision': 'blocked'}).accepted"
+        ],
+        [
+          "test_compiler_replays_nested_external_gate_evidence[nested-only-external_validity_evidence]",
+          "AssertionError: ['external_validity_promotion_evidence_missing']\nassert False is True\n +  where False = RolloutGateResult(accepted=False, failures=['external_validity_promotion_evidence_missing'], warnings=[], metrics={'sc...bbbbbbbbbbbbbbbbbbbbbbbbbbbbb'}}}, 'evidence_complete': True, 'rollback_ready': True, 'promotion_decision': 'blocked'}).accepted"
+        ],
+        [
+          "test_compiler_replays_nested_external_gate_evidence[conflicting-saved-external_validity]",
+          "AssertionError: []\nassert True is False\n +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-compi...bbbbbbbbbbbbbbbbbbbbbbbbbbbb'}}}, 'evidence_complete': True, 'rollback_ready': True, 'promotion_decision': 'accepted'}).accepted"
+        ],
+        [
+          "test_compiler_replays_nested_external_gate_evidence[conflicting-saved-external_validity_evidence]",
+          "AssertionError: []\nassert True is False\n +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-compi...bbbbbbbbbbbbbbbbbbbbbbbbbbbb'}}}, 'evidence_complete': True, 'rollback_ready': True, 'promotion_decision': 'accepted'}).accepted"
+        ]
+      ],
+      "passed": 120,
+      "raw_JUnit": {
+        "bytes": 28646,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-nested-external-evidence-replay-private-n0oyyaah/baseline-pytest834/junit.xml",
+        "sha256": "038d24a66e9c9bdeecd97a1c775e51b3a74b37bca01761b0dc599171cbe67035"
+      },
+      "returncode": 1,
+      "run": {
+        "bytes": 1021,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-nested-external-evidence-replay-private-n0oyyaah/baseline-pytest834/run.json",
+        "sha256": "e862355d2586774d80ae62a0377c0d721841c223d7882730b38cb8ecb5fc462c"
+      },
+      "skipped": 0,
+      "stdout": {
+        "bytes": 4058,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-nested-external-evidence-replay-private-n0oyyaah/baseline-pytest834.stdout",
+        "sha256": "d34d531c16db2298f1e8a0c73a0740a7f9ac56aa6cb05fac1f51fb57cfa99e67"
+      }
+    },
+    "candidate-pytest834": {
+      "errors": 0,
+      "failed": 0,
+      "failure_cases_and_messages": [],
+      "passed": 124,
+      "raw_JUnit": {
+        "bytes": 24862,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-nested-external-evidence-replay-private-n0oyyaah/candidate-pytest834/junit.xml",
+        "sha256": "d0941e54de4451bd4a16a1e6bd500d224137bdf9458123759df0de5469258709"
+      },
+      "returncode": 0,
+      "run": {
+        "bytes": 1020,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-nested-external-evidence-replay-private-n0oyyaah/candidate-pytest834/run.json",
+        "sha256": "fd79d1e8237051c8d0d2922e92b4bda412c793bf8345e25a60d8b80738515518"
+      },
+      "skipped": 0,
+      "stdout": {
+        "bytes": 445,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-nested-external-evidence-replay-private-n0oyyaah/candidate-pytest834.stdout",
+        "sha256": "3e5527f8ffc556af6960db3ce2ad1a82eba0f55f56b404063778803d419eae4d"
+      }
+    }
+  },
+  "resolution": "Replay versioned external-validity packets from the existing evidence map through the existing raw/saved reconciliation. Preserve legacy nested status-only domain metadata.",
+  "retained_private_cases": 117,
+  "retained_subprocess_CLI_cases_deselected": 2,
+  "runner": {
+    "bytes": 3835,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-nested-external-evidence-replay-private-n0oyyaah/run-existing-composed-benchmark-through-compiler.py.DATA",
+    "sha256": "61f4a17ec9b5ac32dd66f910ed92cede740e71b030ea7d9373aff05b4904bc75"
+  },
+  "schema": "private-Phase8-existing-compiler-gate-nested-external-replay-exact2/v1",
+  "separately_observed_distinct_clean_split_manifest_digest_binding_not_part_of_exact2": true,
+  "test_prefix_AST_nodes_preserved": 29,
+  "test_prefix_bytes_preserved": 20168,
+  "verified_exact_forward_inverse_all_bytes_and_modes": true
+}

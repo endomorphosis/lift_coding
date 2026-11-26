@@ -1,0 +1,37 @@
+{
+  "actual_Native_executed": false,
+  "all_existing_function_ASTs_unchanged": [
+    "metadata_guard",
+    "native_guard",
+    "observe_state",
+    "read_private",
+    "retain_bytes",
+    "retain_json",
+    "retain_sdk_result",
+    "run",
+    "run_with_actual_custody",
+    "tracked_source_read"
+  ],
+  "diagnostic_functions": [
+    "_PLAIN_LEAN_ERROR",
+    "_lean_diagnostic_lines",
+    "_lean_error_diagnostics",
+    "_load_lean_json_line"
+  ],
+  "errors": 0,
+  "failures": 0,
+  "inert_prefix_refused": "current Native3 operation is unbound and not selected",
+  "original_finalizer_AST_unchanged": true,
+  "output": "test_case_order_changed (__main__.run_suite.<locals>.NativePolicyAcceptance.test_case_order_changed) ... ok\ntest_dependency_accepted (__main__.run_suite.<locals>.NativePolicyAcceptance.test_dependency_accepted) ... ok\ntest_dependency_empty_or_other_declaration (__main__.run_suite.<locals>.NativePolicyAcceptance.test_dependency_empty_or_other_declaration) ... ok\ntest_historical_additional_probe_allowed (__main__.run_suite.<locals>.NativePolicyAcceptance.test_historical_additional_probe_allowed) ... ok\ntest_missing_compiler (__main__.run_suite.<locals>.NativePolicyAcceptance.test_missing_compiler) ... ok\ntest_missing_native_identity (__main__.run_suite.<locals>.NativePolicyAcceptance.test_missing_native_identity) ... ok\ntest_missing_probe (__main__.run_suite.<locals>.NativePolicyAcceptance.test_missing_probe) ... ok\ntest_no_statutory_authority (__main__.run_suite.<locals>.NativePolicyAcceptance.test_no_statutory_authority) ... ok\ntest_nonreturned_result (__main__.run_suite.<locals>.NativePolicyAcceptance.test_nonreturned_result) ... ok\ntest_positive_proposition_unchecked (__main__.run_suite.<locals>.NativePolicyAcceptance.test_positive_proposition_unchecked) ... ok\ntest_positive_unapproved_axiom (__main__.run_suite.<locals>.NativePolicyAcceptance.test_positive_unapproved_axiom) ... ok\ntest_probe_report_not_actual_result (__main__.run_suite.<locals>.NativePolicyAcceptance.test_probe_report_not_actual_result) ... ok\ntest_runtime_limit_or_failure_flags (__main__.run_suite.<locals>.NativePolicyAcceptance.test_runtime_limit_or_failure_flags) ... ok\ntest_test_return_not_none (__main__.run_suite.<locals>.NativePolicyAcceptance.test_test_return_not_none) ... ok\ntest_three_actual_case_shapes (__main__.run_suite.<locals>.NativePolicyAcceptance.test_three_actual_case_shapes) ... ok\ntest_toolchain_mismatch (__main__.run_suite.<locals>.NativePolicyAcceptance.test_toolchain_mismatch) ... ok\ntest_unclassified_command (__main__.run_suite.<locals>.NativePolicyAcceptance.test_unclassified_command) ... ok\ntest_unclean_result (__main__.run_suite.<locals>.NativePolicyAcceptance.test_unclean_result) ... ok\ntest_unconfirmed_native_cleanup (__main__.run_suite.<locals>.NativePolicyAcceptance.test_unconfirmed_native_cleanup) ... ok\ntest_wrong_report_schema (__main__.run_suite.<locals>.NativePolicyAcceptance.test_wrong_report_schema) ... ok\ntest_wrong_type_accepted (__main__.run_suite.<locals>.NativePolicyAcceptance.test_wrong_type_accepted) ... ok\ntest_wrong_type_compiles (__main__.run_suite.<locals>.NativePolicyAcceptance.test_wrong_type_compiles) ... ok\ntest_wrong_type_not_real_diagnostic (__main__.run_suite.<locals>.NativePolicyAcceptance.test_wrong_type_not_real_diagnostic) ... ok\n\n----------------------------------------------------------------------\nRan 23 tests in 0.001s\n\nOK\n",
+  "post": {
+    "bytes": 35401,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-v567-Native3-current-operator-INERT-v01.py.DATA",
+    "sha256": "4b844f5645a6607f184d9aa64b2203686effe1d4eb2b02a97a43afb83f0a04e0"
+  },
+  "pre_effect_calls": [],
+  "same_suite_as_RED": true,
+  "scope": "Fictional stdlib acceptance-AST controls only, real cached diagnostic functions; not SDK/canonical import/Source/Native or current toolchain qualification",
+  "skipped": 0,
+  "successful": true,
+  "tests_run": 23
+}

@@ -1,0 +1,11 @@
+....F.                                                                   [100%]
+=================================== FAILURES ===================================
+_ test_unified_cache_waiter_respects_requested_theorem_authority[advisory-refused] _
+test_proof_cache.py:1734: in test_unified_cache_waiter_respects_requested_theorem_authority
+    assert not result.usable
+E   AssertionError: assert not True
+E    +  where True = VerificationCacheLookup(entry=VerificationCacheEntry(key=VerificationCacheKey(ir_digest='sha256:d8cf5c5eacb724812cbadb...='sha256:85824cb350b2c2bd8e951f6922cb2c14cd93a82257e526efda44ba2e4217f38f', single_flight_shared=True, age_seconds=1.0).usable
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-waiter-private-v01-q4olj78k/red-v03/junit.xml -
+=========================== short test summary info ============================
+FAILED test_proof_cache.py::test_unified_cache_waiter_respects_requested_theorem_authority[advisory-refused]
+1 failed, 5 passed in 3.01s

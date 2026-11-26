@@ -1,0 +1,81 @@
+{
+  "evaluator_compiled_sha256": "3b6cd3a6fade78fed275a478f010329e5d030a250b914c4b46ab0f0d77b9d5ab",
+  "evidence_scope": "direct authored-vector diagnostics",
+  "external_events": [],
+  "results": [
+    {
+      "arguments": "()",
+      "case": "test_family_domain_length_jurisdiction_and_ood_strata",
+      "elapsed_seconds": 0.000461,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "()",
+      "case": "test_duplicate_clustering_separates_memorized_groups",
+      "elapsed_seconds": 0.000421,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "()",
+      "case": "test_materialized_report_triggers_collapse_anisotropy_and_memorization",
+      "elapsed_seconds": 0.00557,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "()",
+      "case": "test_unknown_denominator_trigger_is_explicit_when_ece_cannot_be_formed",
+      "elapsed_seconds": 0.000335,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "(1.0,)",
+      "case": "test_strata_cosines_and_centroids_preserve_finite_scale",
+      "elapsed_seconds": 0.000128,
+      "outcome": "passed"
+    },
+    {
+      "arguments": "(1e+308,)",
+      "case": "test_strata_cosines_and_centroids_preserve_finite_scale",
+      "elapsed_seconds": 0.000611,
+      "outcome": "failed",
+      "traceback": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-strata-cosine-private-H68Ejmdx/run-existing-latent-strata-v02.py.DATA\", line 74, in <module>\n    getattr(test, name)(*args)\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_latent_diagnostics.py\", line 386, in test_strata_cosines_and_centroids_preserve_finite_scale\nAssertionError: {'axis': 'family', 'balance_ratio': 1.0, 'family_balanced': True, 'group_counts': {'deontic': 2, 'tdfol': 2}, 'in_distribution_count': 4, 'inter_cosine': 1.0, 'intra_cosine': 1.0, 'latent_similarity_is_not_equivalence': True, 'ood_count': 0, 'separation': 0.0, 'unspecified_count': 0, 'unknown_denominators': []}\n"
+    },
+    {
+      "arguments": "(1e-320,)",
+      "case": "test_strata_cosines_and_centroids_preserve_finite_scale",
+      "elapsed_seconds": 0.000362,
+      "outcome": "failed",
+      "traceback": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-strata-cosine-private-H68Ejmdx/run-existing-latent-strata-v02.py.DATA\", line 74, in <module>\n    getattr(test, name)(*args)\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_latent_diagnostics.py\", line 386, in test_strata_cosines_and_centroids_preserve_finite_scale\nAssertionError: {'axis': 'family', 'balance_ratio': 1.0, 'family_balanced': True, 'group_counts': {'deontic': 2, 'tdfol': 2}, 'in_distribution_count': 4, 'inter_cosine': None, 'intra_cosine': None, 'latent_similarity_is_not_equivalence': True, 'ood_count': 0, 'separation': None, 'unspecified_count': 0, 'unknown_denominators': ['family:deontic:intra_cosine', 'family:tdfol:intra_cosine', 'family:intra_cosine']}\n"
+    },
+    {
+      "arguments": "(nan,)",
+      "case": "test_strata_keep_nonfinite_vectors_out_of_cosine_denominators",
+      "elapsed_seconds": 0.00024,
+      "outcome": "failed",
+      "traceback": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-strata-cosine-private-H68Ejmdx/run-existing-latent-strata-v02.py.DATA\", line 74, in <module>\n    getattr(test, name)(*args)\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_latent_diagnostics.py\", line 398, in test_strata_keep_nonfinite_vectors_out_of_cosine_denominators\nAssertionError: {'axis': 'family', 'balance_ratio': None, 'family_balanced': False, 'group_counts': {'deontic': 2}, 'in_distribution_count': 2, 'inter_cosine': None, 'intra_cosine': 1.0, 'latent_similarity_is_not_equivalence': True, 'ood_count': 0, 'separation': None, 'unspecified_count': 0, 'unknown_denominators': ['family:inter_cosine', 'family:single_group_balance']}\n"
+    },
+    {
+      "arguments": "(inf,)",
+      "case": "test_strata_keep_nonfinite_vectors_out_of_cosine_denominators",
+      "elapsed_seconds": 0.000223,
+      "outcome": "failed",
+      "traceback": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-strata-cosine-private-H68Ejmdx/run-existing-latent-strata-v02.py.DATA\", line 74, in <module>\n    getattr(test, name)(*args)\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_latent_diagnostics.py\", line 398, in test_strata_keep_nonfinite_vectors_out_of_cosine_denominators\nAssertionError: {'axis': 'family', 'balance_ratio': None, 'family_balanced': False, 'group_counts': {'deontic': 2}, 'in_distribution_count': 2, 'inter_cosine': None, 'intra_cosine': 1.0, 'latent_similarity_is_not_equivalence': True, 'ood_count': 0, 'separation': None, 'unspecified_count': 0, 'unknown_denominators': ['family:inter_cosine', 'family:single_group_balance']}\n"
+    },
+    {
+      "arguments": "(-inf,)",
+      "case": "test_strata_keep_nonfinite_vectors_out_of_cosine_denominators",
+      "elapsed_seconds": 0.000225,
+      "outcome": "failed",
+      "traceback": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-strata-cosine-private-H68Ejmdx/run-existing-latent-strata-v02.py.DATA\", line 74, in <module>\n    getattr(test, name)(*args)\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_latent_diagnostics.py\", line 398, in test_strata_keep_nonfinite_vectors_out_of_cosine_denominators\nAssertionError: {'axis': 'family', 'balance_ratio': None, 'family_balanced': False, 'group_counts': {'deontic': 2}, 'in_distribution_count': 2, 'inter_cosine': None, 'intra_cosine': 1.0, 'latent_similarity_is_not_equivalence': True, 'ood_count': 0, 'separation': None, 'unspecified_count': 0, 'unknown_denominators': ['family:inter_cosine', 'family:single_group_balance']}\n"
+    },
+    {
+      "arguments": "()",
+      "case": "test_strata_reports_unavailable_inter_cosine_for_zero_centroids",
+      "elapsed_seconds": 0.000274,
+      "outcome": "failed",
+      "traceback": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-strata-cosine-private-H68Ejmdx/run-existing-latent-strata-v02.py.DATA\", line 74, in <module>\n    getattr(test, name)(*args)\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_latent_diagnostics.py\", line 415, in test_strata_reports_unavailable_inter_cosine_for_zero_centroids\nAssertionError\n"
+    }
+  ],
+  "test_sha256": "5e9d8ab1d1113906b93a08d16a74ee5eb05c9c0b83af0f457bf0a38ceda6aa3e",
+  "torch_loaded": false
+}

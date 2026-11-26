@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-decoder-mixed-history-private-v01-URVsfYFT/run_cached_decoder_replay.py.DATA", line 71, in <module>
+    namespace["test_full_reviewed_decoder_replays_unicode_stage_with_legacy_holdout"](location, case)
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-decoder-mixed-history-private-v01-URVsfYFT/decoder_replay.fragment.py.DATA", line 59, in test_full_reviewed_decoder_replays_unicode_stage_with_legacy_holdout
+    with pytest.raises(splits.LegalIRSplitLeakageError) as blocked:
+  File "/home/barberb/.local/lib/python3.12/site-packages/_pytest/raises.py", line 699, in __exit__
+    fail(f"DID NOT RAISE {self.expected_exceptions[0].__name__}")
+  File "/home/barberb/.local/lib/python3.12/site-packages/_pytest/outcomes.py", line 162, in __call__
+    raise Failed(msg=reason, pytrace=pytrace)
+Failed: DID NOT RAISE LegalIRSplitLeakageError

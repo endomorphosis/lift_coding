@@ -1,0 +1,65 @@
+FFFF                                                                     [100%]
+=================================== FAILURES ===================================
+_ test_cache_compute_leader_respects_requested_theorem_authority[advisory-refused-exact] _
+test_proof_cache.py:1632: in test_cache_compute_leader_respects_requested_theorem_authority
+    record, *_ = _bound_record(extra_obligation=extra_obligation)
+test_proof_cache.py:658: in _bound_record
+    artifact, receipt, binding, context = _bound_fixture(extra_obligation=extra_obligation,
+test_proof_cache.py:558: in _bound_fixture
+    from ipfs_datasets_py.logic.backends.kernel import lean
+../run_cache_four_v03.py:118: in exec_module
+    exec(compile(self.body, self.filename, 'exec', dont_inherit=True), module.__dict__)
+../../../../phase1-lean-outcome-request-fields-private-v01/owner.after.py.DATA:61: in <module>
+    from ..resource_admission import ResourceAdmittedToolRunner
+../run_cache_four_v03.py:125: in exec_module
+    raise ImportError(f'missing pinned private body for {self.name}')
+E   ImportError: missing pinned private body for ipfs_datasets_py.logic.backends.resource_admission
+_ test_cache_compute_leader_respects_requested_theorem_authority[advisory-refused-unified] _
+test_proof_cache.py:1632: in test_cache_compute_leader_respects_requested_theorem_authority
+    record, *_ = _bound_record(extra_obligation=extra_obligation)
+test_proof_cache.py:658: in _bound_record
+    artifact, receipt, binding, context = _bound_fixture(extra_obligation=extra_obligation,
+test_proof_cache.py:558: in _bound_fixture
+    from ipfs_datasets_py.logic.backends.kernel import lean
+../run_cache_four_v03.py:118: in exec_module
+    exec(compile(self.body, self.filename, 'exec', dont_inherit=True), module.__dict__)
+../../../../phase1-lean-outcome-request-fields-private-v01/owner.after.py.DATA:61: in <module>
+    from ..resource_admission import ResourceAdmittedToolRunner
+../run_cache_four_v03.py:125: in exec_module
+    raise ImportError(f'missing pinned private body for {self.name}')
+E   ImportError: missing pinned private body for ipfs_datasets_py.logic.backends.resource_admission
+_ test_cache_compute_leader_respects_requested_theorem_authority[theorem-usable-exact] _
+test_proof_cache.py:1632: in test_cache_compute_leader_respects_requested_theorem_authority
+    record, *_ = _bound_record(extra_obligation=extra_obligation)
+test_proof_cache.py:658: in _bound_record
+    artifact, receipt, binding, context = _bound_fixture(extra_obligation=extra_obligation,
+test_proof_cache.py:558: in _bound_fixture
+    from ipfs_datasets_py.logic.backends.kernel import lean
+../run_cache_four_v03.py:118: in exec_module
+    exec(compile(self.body, self.filename, 'exec', dont_inherit=True), module.__dict__)
+../../../../phase1-lean-outcome-request-fields-private-v01/owner.after.py.DATA:61: in <module>
+    from ..resource_admission import ResourceAdmittedToolRunner
+../run_cache_four_v03.py:125: in exec_module
+    raise ImportError(f'missing pinned private body for {self.name}')
+E   ImportError: missing pinned private body for ipfs_datasets_py.logic.backends.resource_admission
+_ test_cache_compute_leader_respects_requested_theorem_authority[theorem-usable-unified] _
+test_proof_cache.py:1632: in test_cache_compute_leader_respects_requested_theorem_authority
+    record, *_ = _bound_record(extra_obligation=extra_obligation)
+test_proof_cache.py:658: in _bound_record
+    artifact, receipt, binding, context = _bound_fixture(extra_obligation=extra_obligation,
+test_proof_cache.py:558: in _bound_fixture
+    from ipfs_datasets_py.logic.backends.kernel import lean
+../run_cache_four_v03.py:118: in exec_module
+    exec(compile(self.body, self.filename, 'exec', dont_inherit=True), module.__dict__)
+../../../../phase1-lean-outcome-request-fields-private-v01/owner.after.py.DATA:61: in <module>
+    from ..resource_admission import ResourceAdmittedToolRunner
+../run_cache_four_v03.py:125: in exec_module
+    raise ImportError(f'missing pinned private body for {self.name}')
+E   ImportError: missing pinned private body for ipfs_datasets_py.logic.backends.resource_admission
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-v01/red-v03/junit.xml -
+=========================== short test summary info ============================
+FAILED ../../../../../../../../dev::test_cache_compute_leader_respects_requested_theorem_authority[advisory-refused-exact]
+FAILED ../../../../../../../../dev::test_cache_compute_leader_respects_requested_theorem_authority[advisory-refused-unified]
+FAILED ../../../../../../../../dev::test_cache_compute_leader_respects_requested_theorem_authority[theorem-usable-exact]
+FAILED ../../../../../../../../dev::test_cache_compute_leader_respects_requested_theorem_authority[theorem-usable-unified]
+4 failed in 2.07s

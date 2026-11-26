@@ -1,0 +1,55 @@
+--- a/tests/unit/logic/autoformal/test_legal_relational_reconstruction_v1.py
++++ b/tests/unit/logic/autoformal/test_legal_relational_reconstruction_v1.py
+@@ -1,8 +1,9 @@
+ """Paired authored structures diagnose reconstruction without legal accuracy.
+ 
+ Fixtures use the real existing TypedExpression builders and relational owner.
+-The expected alpha and structural distinctions are authored independently; no
+-statutory payload, labels, model, prover or replacement product namespace is used.
++The expected alpha and structural distinctions are authored independently; the
++retained pilot check uses unreviewed typed proposals. No labels, model, prover
++or replacement product namespace is used.
+ """
+ from __future__ import annotations
+ 
+@@ -986,3 +987,40 @@
+ def test_governing_fidelity_refuses_other_channels_and_invalid_field_types(damage):
+     with pytest.raises(owner.RelationalReconstructionError):
+         owner.compare_relational_governing_fields_v1({}, damage)
++
++
++
++def test_retained_7214_modal_scopes_remain_distinct_after_source_withheld_roundtrip():
++    evidence = (Path(__file__).resolve().parents[4] / "docs/autoformalization/evidence"
++                / "legal-ir-title10-7214-pending-compositions-20261024.json").read_bytes()
++    assert hashlib.sha256(evidence).hexdigest() == "dd72e2b92ed5a44a77acfb72dd27ca8614250878400db89742c0437438d59dda"
++    packet = json.loads(evidence)
++    assert packet["selected_interpretation"] is None
++    assert packet["training_mask"] == packet["evaluation_gold_mask"] == 0
++
++    reconstructed = {}
++    for alternative in packet["alternatives"]:
++        assert alternative["source_binding"] is None
++        assert alternative["governing_definition_use"] is None
++        assert alternative["semantic_coverage_verified"] is False
++        expression = ast.TypedExpression.from_dict(alternative["typed_expression"])
++        roles = alternative["argument_roles"]
++        result = owner.prepare_relational_prose_reconstruction_v1(
++            expression, argument_roles=roles, profile=RELATIONAL_PROSE_PROFILE)
++        assert result["measurements"]["typed_structure_equal"] is True
++        assert result["measurements"]["canonical_prose_fixed_point"] is True
++        assert result["measurements"]["original_utf8_exact"] is None
++        assert result["measurements"]["semantic_equivalence_verified"] is False
++        assert result["original_source_available_to_realizer"] is False
++        assert result["serialized_ast_available_to_inverse"] is False
++        assert result["training_mask"] == result["evaluation_gold_mask"] == 0
++        assert not any(result["authority"].values())
++        recovered = ast.TypedExpression.from_dict(result["reconstructed_typed_expression"])
++        reconstructed[alternative["alternative_id"]] = recovered, result["reconstructed_argument_roles"]
++
++    inside, guard = (reconstructed[name] for name in
++                     ("7214:cap_within_permission", "7214:cap_as_permission_guard"))
++    comparison = _compare_prose_inputs(inside[0], guard[0], inside[1], guard[1])
++    assert comparison["argument_roles_equal"] is True
++    assert comparison["typed_structure_equal"] is False
++    assert comparison["canonical_prose_equal"] is False

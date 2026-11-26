@@ -1,0 +1,18 @@
+{
+  "actual_pyarrow_loaded": false,
+  "controls": [],
+  "guard_events": [
+    [
+      "ctypes.dlopen",
+      "execution"
+    ]
+  ],
+  "lightweight_private_scope": true,
+  "physical_fixture_constructed": false,
+  "setup_detail": "private fixture action denied: ctypes.dlopen",
+  "setup_exception": "PermissionError",
+  "setup_traceback": "Traceback (most recent call last):\n  File \"<stdin>\", line 24, in <module>\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py\", line 1095, in physical_closure_material_v3\n    return _physical_source_material(tmp_path_factory.mktemp(\"mixed-physical-crosswalk\") / \"material\", source_texts=texts)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py\", line 518, in _physical_source_material\n    import pyarrow as pa\n  File \"/home/barberb/lift_coding/.venv/lib/python3.12/site-packages/pyarrow/__init__.py\", line 59, in <module>\n    from pyarrow.lib import (BuildInfo, CppBuildInfo, RuntimeInfo, set_timezone_db_path,\n  File \"pyarrow/lib.pyx\", line 25, in init pyarrow.lib\n  File \"/home/barberb/lift_coding/.venv/lib/python3.12/site-packages/numpy/__init__.py\", line 114, in <module>\n    from numpy.__config__ import show as show_config\n  File \"/home/barberb/lift_coding/.venv/lib/python3.12/site-packages/numpy/__config__.py\", line 4, in <module>\n    from numpy._core._multiarray_umath import (\n  File \"/home/barberb/lift_coding/.venv/lib/python3.12/site-packages/numpy/_core/__init__.py\", line 100, in <module>\n    from . import _internal\n  File \"/home/barberb/lift_coding/.venv/lib/python3.12/site-packages/numpy/_core/_internal.py\", line 17, in <module>\n    import ctypes\n  File \"/usr/lib/python3.12/ctypes/__init__.py\", line 472, in <module>\n    pythonapi = PyDLL(None)\n                ^^^^^^^^^^^\n  File \"/usr/lib/python3.12/ctypes/__init__.py\", line 379, in __init__\n    self._handle = _dlopen(self._name, mode)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/retry-preservation-v02/run_private_fixture.py.DATA\", line 42, in audit\n    raise PermissionError(f\"private fixture action denied: {event}\")\nPermissionError: private fixture action denied: ctypes.dlopen\n",
+  "test_module_origin": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py",
+  "test_source_sha256": "65db8d66896bf1a6dd999fb9a262c68e65384642a4267f87c90900aa4d57457f",
+  "torch_duckdb_loaded": false
+}

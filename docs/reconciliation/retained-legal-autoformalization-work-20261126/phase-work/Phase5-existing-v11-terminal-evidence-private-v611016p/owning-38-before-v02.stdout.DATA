@@ -1,0 +1,258 @@
+{
+  "counts": {
+    "error": 38,
+    "failed": 0,
+    "passed": 0
+  },
+  "inference_owner": {
+    "bytes": 85793,
+    "origin_Git_blob": "370a9c3fb8e52702b9ca71fff60279443ca31781",
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/isolated-owning-38-Git-projection/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_inference.py",
+    "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_inference.py",
+    "sha256": "413cabdaae3c28321215fe418b450013fdd07ac94dde6e0c39d08de5cde3c6f3"
+  },
+  "mode": "before",
+  "owning_test": {
+    "bytes": 253248,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/isolated-owning-38-selected-posts/tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_inference.py",
+    "proposed_blob": "9dd37defc74a0f392b7607e944c7ecc3dbb8c4c8",
+    "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_inference.py",
+    "sha256": "c9c17b2e23560b59f3b018f90bbf38cdd6f77340052dd68901557723b4724ec3"
+  },
+  "private_one_CPU_512MiB": true,
+  "project_initializers_or_model_loaded": false,
+  "real_existing_readers_and_wire_codec_called": true,
+  "results": [
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 132, in test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved[abstained]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 132, in test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved[incomplete]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 132, in test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved[invalid_no_text]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 132, in test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved[invalid_text]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 132, in test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved[complete]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 145, in test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[raw_hash]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 145, in test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[null_as_empty]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 145, in test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[candidate_rewrite]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 145, in test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[supplied_digest]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 145, in test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[derivation]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 145, in test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[population]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 145, in test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[tokens]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 145, in test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[profile]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 145, in test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[observation]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 145, in test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[loader_schema]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 145, in test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[loader_pair]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 145, in test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[loader_authority]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 145, in test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[source]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 145, in test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[exposure]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 145, in test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[commitment_extra]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 245, in test_reviewed_inference_v11_outputs_cover_ordered_source_population\n  File \"<authenticated-cache:owning_metadata_tests>\", line 230, in _reviewed_v11_three_source_coverage_control\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_outputs_cover_ordered_source_population[None]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_outputs_cover_ordered_source_population"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 245, in test_reviewed_inference_v11_outputs_cover_ordered_source_population\n  File \"<authenticated-cache:owning_metadata_tests>\", line 230, in _reviewed_v11_three_source_coverage_control\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_outputs_cover_ordered_source_population[drop_middle]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_outputs_cover_ordered_source_population"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 245, in test_reviewed_inference_v11_outputs_cover_ordered_source_population\n  File \"<authenticated-cache:owning_metadata_tests>\", line 230, in _reviewed_v11_three_source_coverage_control\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_outputs_cover_ordered_source_population[only_one]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_outputs_cover_ordered_source_population"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 245, in test_reviewed_inference_v11_outputs_cover_ordered_source_population\n  File \"<authenticated-cache:owning_metadata_tests>\", line 230, in _reviewed_v11_three_source_coverage_control\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_outputs_cover_ordered_source_population[coordinated_reverse]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_outputs_cover_ordered_source_population"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 245, in test_reviewed_inference_v11_outputs_cover_ordered_source_population\n  File \"<authenticated-cache:owning_metadata_tests>\", line 230, in _reviewed_v11_three_source_coverage_control\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_outputs_cover_ordered_source_population[renamed_id]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_outputs_cover_ordered_source_population"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 245, in test_reviewed_inference_v11_outputs_cover_ordered_source_population\n  File \"<authenticated-cache:owning_metadata_tests>\", line 230, in _reviewed_v11_three_source_coverage_control\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_outputs_cover_ordered_source_population[renamed_unit]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_outputs_cover_ordered_source_population"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 192, in test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[real-token-exhaustion]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 192, in test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[real-unexpected-bos]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 192, in test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[empty-decoded-body]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 192, in test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[complete-without-eos]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 192, in test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[complete-with-early-eos]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 192, in test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[complete-with-wrong-bos]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 192, in test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[complete-outside-vocab]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 192, in test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[false-abstention]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 192, in test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[false-incomplete-with-eos]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 192, in test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[false-token-budget]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 192, in test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[valid-body-called-invalid]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition"
+    },
+    {
+      "error": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v02.py\", line 133, in <module>\n    fn(**args)\n  File \"<authenticated-cache:owning_metadata_tests>\", line 192, in test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition\n  File \"<authenticated-cache:owning_metadata_tests>\", line 94, in _reviewed_v11_saved_control\nModuleNotFoundError: No module named 'tests'\n",
+      "node": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[missing-tokenizer-receipt]",
+      "status": "error",
+      "test": "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition"
+    }
+  ],
+  "schema": "actual-private-Phase5-v11-owning-38-case-functions/v1",
+  "test_functions_executed_without_normal_collection_or_assertion_rewrite": true,
+  "total": 38
+}

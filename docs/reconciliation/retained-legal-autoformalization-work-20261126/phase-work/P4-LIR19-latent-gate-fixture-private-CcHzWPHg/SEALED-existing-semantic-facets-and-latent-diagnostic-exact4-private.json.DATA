@@ -1,0 +1,143 @@
+{
+  "all_26_latent_owned_cases_pass_in_direct_runner": true,
+  "canonical_installation": false,
+  "current_D": "ff513adcfc94f48f0c76c8639dc10a1cd213264d",
+  "evidence": {
+    "complete_latent_26_ordered_reports": [
+      {
+        "bytes": 11304,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-latent-gate-fixture-private-CcHzWPHg/actual-same26-before.json",
+        "sha256": "e05defc61234ee6bca940061a778c4539902dbcb90854ae13e1fe0cee5e3082d"
+      },
+      {
+        "bytes": 5691,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-latent-gate-fixture-private-CcHzWPHg/actual-same26-after.json",
+        "sha256": "8d87114829e8567016c8757f5c4d12f58798effeac2be9667a3e2a61d8546c6c"
+      },
+      {
+        "bytes": 10879,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-latent-gate-fixture-private-CcHzWPHg/actual-same26-semantic-only.json",
+        "sha256": "1d500f4d94e3ca96b6bfee25b3bfacfeee530ed5bf938403f0c31cf0f53aa56a"
+      },
+      {
+        "bytes": 5151,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-latent-gate-fixture-private-CcHzWPHg/actual-same26-both-corrections.json",
+        "sha256": "06bbe820ab14a6ccc69f8e1eb91450f91220b6ffcc3c9b2342b6c26d7b28c315"
+      }
+    ],
+    "current_latent_diagnostic_pure_math": {
+      "bytes": 6497,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-strata-cosine-private-H68Ejmdx/SEALED-LIR19-existing-strata-cosine-exact2-private.json",
+      "sha256": "55eec4fcdd3cc10e876bd83c39520aaf97b504a3519d389f91702e7c1078fdce"
+    },
+    "interpretation": [
+      "Underlying legacy IR facets exclude recognized top-level round-trip fields only.",
+      "Round-trip validation and unsupported-path checks still use the original input.",
+      "Attaching collapse diagnostics preserves matching, incomplete and changed-actor promotion outcomes.",
+      "Caller-reported observations remain diagnostic legacy inputs. No independent legal recompilation claim."
+    ],
+    "legacy_fixture_before": {
+      "bytes": 2341,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-latent-gate-fixture-private-CcHzWPHg/actual-legacy-fixture-coverage-before.json",
+      "sha256": "00065131314fc7fad4957d28787e0aeff24418966947ffd0420380c98a886eef"
+    },
+    "semantic_32_reports": [
+      {
+        "bytes": 12057,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-latent-gate-fixture-private-CcHzWPHg/actual-semantic-facets-before.json",
+        "sha256": "9f2dbcfd5e2ee83c88f48ea263735988b2e98aa9c971bec85f39c3df61c48221"
+      },
+      {
+        "bytes": 6507,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-latent-gate-fixture-private-CcHzWPHg/actual-semantic-facets-after.json",
+        "sha256": "0eb837c7a07811f3dc7359f7c9b602daabbe5a78f925d691b45fa279501de87e"
+      }
+    ]
+  },
+  "files": [
+    {
+      "after": {
+        "bytes": 112276,
+        "git_blob": "2e868b9118b42938b25c159a9dba07d891af9978",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-latent-gate-fixture-private-CcHzWPHg/semantic-metrics.after.py.DATA",
+        "sha256": "949e4dcbfb3b306d760ebedbf256d79d25441ee6dbe3e3915c63e5304d586413"
+      },
+      "before": {
+        "bytes": 111564,
+        "git_blob": "3cca5056ffa6939213ee52b6ffe67108f1838c0d",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-latent-gate-fixture-private-CcHzWPHg/semantic-metrics.before.py.DATA",
+        "sha256": "8a62ef6ecb50608a828ad15ca90cd478d5b70168d1ab74802bd0ccee594da388"
+      },
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_semantic_metrics.py",
+      "role": "semantic:owner"
+    },
+    {
+      "after": {
+        "bytes": 47983,
+        "git_blob": "30d97084ac630256f14ace9b29f0cd833ab014de",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-latent-gate-fixture-private-CcHzWPHg/semantic-test.after.py.DATA",
+        "sha256": "2425e5ec483c7bd7c357019d808f9f66700d823ab446a03e1d98559178da74a8"
+      },
+      "before": {
+        "bytes": 46530,
+        "git_blob": "e13b459893177be23d2cc580028318543abc73b7",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-latent-gate-fixture-private-CcHzWPHg/semantic-test.before.py.DATA",
+        "sha256": "667836209c26614fa5d24562b7e1060462b9428e774f61f39eabd49671903f8d"
+      },
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py",
+      "role": "semantic:test"
+    },
+    {
+      "after": {
+        "bytes": 42627,
+        "git_blob": "7e5eda1003e654f119af085d843ff91182ddc61a",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-strata-cosine-private-H68Ejmdx/evaluator.after.py.DATA",
+        "sha256": "88bfe548fa17e891ea8c6a015f1db29cb9fe03ff9c6d811b2dbd91c5d3b544a9"
+      },
+      "before": {
+        "bytes": 42137,
+        "git_blob": "53d7123051e1a1b9737edeb8928dfe57a579286c",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-strata-cosine-private-H68Ejmdx/evaluator.before.py.DATA",
+        "sha256": "3b6cd3a6fade78fed275a478f010329e5d030a250b914c4b46ab0f0d77b9d5ab"
+      },
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py",
+      "role": "latent:owner"
+    },
+    {
+      "after": {
+        "bytes": 19441,
+        "git_blob": "c0b9cedfcd0da9bb8daa7f180fce659236746e27",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-latent-gate-fixture-private-CcHzWPHg/test-composed.after.py.DATA",
+        "sha256": "64fd79bcacf072a7d434123cb3f6c2250bd76cf7be274d69656b4dca18017735"
+      },
+      "before": {
+        "bytes": 14657,
+        "git_blob": "1ffbd78b6852063678bed4fc7c92cf0b1b56217e",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-strata-cosine-private-H68Ejmdx/test.before.py.DATA",
+        "sha256": "9469b0dbacdb61e2acb41d2e75dd3319411266ec06daeebc7810813160b9a3e1"
+      },
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_latent_diagnostics.py",
+      "role": "latent:test"
+    }
+  ],
+  "model_or_Lean_execution": false,
+  "ordinary_qualification": false,
+  "patches": {
+    "forward": {
+      "bytes": 17642,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-latent-gate-fixture-private-CcHzWPHg/combined-exact4.forward.diff",
+      "sha256": "dce4f1b8ee8a180126f76b845dbe13fc0ffd87994de9be68e6b4cbe340673bde"
+    },
+    "inverse": {
+      "bytes": 17642,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-latent-gate-fixture-private-CcHzWPHg/combined-exact4.inverse.diff",
+      "sha256": "89218e111af9396a7785be4edf9104727bb1c561d01bb816fcadc63ff1e18407"
+    }
+  },
+  "schema": "phase4-phase6-phase8-semantic-facet-and-latent-cosine-exact4-private/v1",
+  "standalone_semantic_exact2": {
+    "bytes": 6634,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-latent-gate-fixture-private-CcHzWPHg/SEALED-existing-legacy-semantic-facets-exact2-private.json",
+    "sha256": "de40d29e6b1483dc59718892052b7bebab195ba71faaa5f4a102cb8adf13ea78"
+  }
+}

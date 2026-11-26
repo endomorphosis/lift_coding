@@ -1,0 +1,51 @@
+from pathlib import Path
+import hashlib
+import json
+import os
+import subprocess
+import sys
+
+root = Path(__file__).resolve().parent
+mode, = sys.argv[1:]
+assert mode in ("red", "green")
+epoch = json.loads((root / "current-exact-private-epoch.json").read_bytes())
+project = root / "dataset"
+output = root / mode
+output.mkdir(mode=0o700)
+def verify(body, row):
+    assert hashlib.sha256(body).hexdigest() == row["sha256"] and len(body) == row["bytes"]
+for relative, pin in epoch["roles"].items():
+    if relative in (epoch["owner"], epoch["test"]):
+        continue
+    verify((project / relative).read_bytes(), pin)
+for name, pin in epoch["private_config"].items():
+    verify((project / name).read_bytes(), pin)
+verify((root / "existing-runner.py.DATA").read_bytes(), epoch["runner_origin"])
+body_path = root / ("owner_base.py.DATA" if mode == "red" else "owner_after.py.DATA")
+assert (project / epoch["owner"]).read_bytes() == body_path.read_bytes()
+if mode == "red":
+    verify(body_path.read_bytes(), epoch["roles"][epoch["owner"]])
+test_raw = (project / epoch["test"]).read_bytes()
+assert test_raw == (root / "test_base.py.DATA").read_bytes() + (root / "governing-definition-test.fragment").read_bytes()
+selectors = [
+    "test_reviewed_v3_requires_nonrecursive_governing_definition",
+    "test_full_fictional_definition_object_use_and_mixed_use_replay",
+    "test_saved_v2_preparation_signatures_and_assessment_survive_sibling_load",
+    "test_governing_definition_rejects_implication_instead_of_complete_equivalence",
+    "test_reviewed_v3_refuses_cyclic_unit_dependencies",
+    "test_reviewed_v3_preserves_acyclic_overlapping_unit_dependencies",
+    "test_reviewed_v3_cross_reference_version_consistency",
+    "test_current_trust_controls_reject_even_genuine_signatures[revoked-key-key_revoked]",
+]
+interpreter = "/home/barberb/lift_coding/.venv/bin/python"
+args = [interpreter, "-I", "-B", str(root / "existing-runner.py.DATA"), str(output), str(project),
+        *epoch["protected_roots"], *[epoch["test"] + "::" + node for node in selectors]]
+with (output / "stdout.DATA").open("xb") as stdout, (output / "stderr.DATA").open("xb") as stderr:
+    child = subprocess.run(args, stdout=stdout, stderr=stderr,
+                           env={**os.environ, "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"}, timeout=60)
+info = {"returncode":child.returncode,"argv":args,"actual_owner_sha256":hashlib.sha256(body_path.read_bytes()).hexdigest(),
+        "actual_test_sha256":hashlib.sha256(test_raw).hexdigest()}
+(output / "run.json").write_text(json.dumps(info,indent=2)+"\n")
+print("\n".join((output / "stdout.DATA").read_text().splitlines()[-8:]))
+print((output / "stderr.DATA").read_text())
+sys.exit(child.returncode)

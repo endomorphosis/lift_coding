@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-rich-Unicode-actual-aggregate-V4-private-v01-ZzGJ4bJJ/run_cached_actual_aggregate-v02.py.DATA", line 67, in <module>
+    function(*arguments)
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-rich-Unicode-actual-aggregate-V4-private-v01-ZzGJ4bJJ/test_legal_ir_evaluation_artifacts.after-v03.py.DATA", line 4474, in test_aggregate_v4_holds_out_unicode_near_duplicate_from_unselected_component
+    with pytest.raises(ValueError, match="heldout and TRAIN share a near-duplicate source group"):
+  File "/home/barberb/.local/lib/python3.12/site-packages/_pytest/raises.py", line 699, in __exit__
+    fail(f"DID NOT RAISE {self.expected_exceptions[0].__name__}")
+  File "/home/barberb/.local/lib/python3.12/site-packages/_pytest/outcomes.py", line 162, in __call__
+    raise Failed(msg=reason, pytrace=pytrace)
+Failed: DID NOT RAISE ValueError

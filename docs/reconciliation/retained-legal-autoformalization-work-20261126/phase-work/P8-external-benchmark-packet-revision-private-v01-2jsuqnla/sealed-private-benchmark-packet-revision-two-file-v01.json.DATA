@@ -1,0 +1,141 @@
+{
+  "effect": "An explicitly supplied packet_digest must match the selected benchmark packet before scoring. Omitted digests retain existing behavior.",
+  "existing_guard": {
+    "bytes": 5502,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/run_private_fixture.py.DATA",
+    "sha256": "b3fe749fe409c404a426669781c4807538115fda1127534bbb3c8613853fd42e"
+  },
+  "existing_runner": {
+    "bytes": 2308,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/run-benchmark-private.py.DATA",
+    "sha256": "2780fdb795bc96cb16bbdabfe4a303d6dbdd18c4a2cfb8445488ffd5c6830ab6"
+  },
+  "files": {
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py": {
+      "before": {
+        "bytes": 37725,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/benchmark-owner.before.py.DATA",
+        "sha256": "1a7d55434d9c89ac22c6cc7dc53f30ded964ab0846e0a35c84efe8d760495f98"
+      },
+      "post": {
+        "bytes": 37952,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/benchmark-owner.after.py.DATA",
+        "sha256": "9ad1187907f37120be9929da6967ba3753cb6887696b48c2386e13854c2df000"
+      },
+      "published_blob": "fe181984a79a0088faa46010bd2d60e155d27b0a"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py": {
+      "before": {
+        "bytes": 12917,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/benchmark-test.before.py.DATA",
+        "sha256": "e64e9f8fa947d15ffbd3196eaf4b9a0b4df99492e6f95bdbb167bfe54ae4fb75"
+      },
+      "post": {
+        "bytes": 13790,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/benchmark-test.after.py.DATA",
+        "sha256": "e2bdaca2566fe5c331bcc401781e286d4956a1af474ddebd666a93f2973f641a"
+      },
+      "published_blob": "939c3d60a7bb13f021679de702d760d0c19f30aa"
+    }
+  },
+  "new_node": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_requires_current_declared_packet_digest",
+  "previous_ordinary21": {
+    "bytes": 4105,
+    "path": "/tmp/Root-P8-benchmark-ordinary21-v307-sz73_pyk/Root-P8-benchmark-ordinary21-qualified-small-v307.json",
+    "sha256": "4faacaab4ca6332c382df49a0131e4b23bac3a6390fff2a8495a677b290de3d1"
+  },
+  "private_patch": {
+    "bytes": 2422,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/exact-two-file-benchmark-packet-revision-v01.patch",
+    "sha256": "b1e907e183697ae159c2690126daf14ec4ee0387264e7dbfae9029553dfdb33e"
+  },
+  "private_same22": {
+    "green": {
+      "errors": 0,
+      "failed": 0,
+      "guard_events": 0,
+      "junit": {
+        "bytes": 4377,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/green/junit.xml",
+        "sha256": "3bf4ca1ad520e0808b38099d459a89994fdf50bc299cbc63d2485e02428b40d7"
+      },
+      "passed": 22,
+      "pytest_exit": 0,
+      "skipped": 0,
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/actual-green.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 916,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/actual-green.stdout",
+        "sha256": "32cb85718231a01022c8df8705c13af676aa7478769353add1d2bac7803ae9d0"
+      }
+    },
+    "red": {
+      "errors": 0,
+      "failed": 1,
+      "guard_events": 0,
+      "junit": {
+        "bytes": 4969,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/red/junit.xml",
+        "sha256": "f1483add16ad4157acfb03c57838709444de9f8501eae90ad48e9d1276b9fcbe"
+      },
+      "passed": 21,
+      "pytest_exit": 1,
+      "skipped": 0,
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/actual-red.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 1733,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/actual-red.stdout",
+        "sha256": "ed80adfdfa3bbb6adc568c98173f41e7ed020a75b60c0393302c938a6c67bb42"
+      }
+    }
+  },
+  "published_D_clean": true,
+  "published_D_head": "17a3d3ff728fd4485220ae7ab85c344672db08c9",
+  "published_D_tree": "c47971d12ada285d5c64bf09f72cdbfedfadf750",
+  "same_fictional_fixture": {
+    "bytes": 5763,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/isolated/tests/fixtures/legal_ir/external_expert_benchmark.jsonl",
+    "sha256": "fb9a76552e2b938369d93d73a2a25aa76a963101cac96fd487a246bc43c54971"
+  },
+  "schema": "private-Phase8-explicit-prediction-packet-revision-binding/v1",
+  "scope": {
+    "Git_mutation": false,
+    "Native_Torch_or_SQL": false,
+    "Source_SDK_resource_lease": false,
+    "actual_producer_authentication": false,
+    "canonical_adopted": false,
+    "normal22_qualified": false,
+    "real_model_or_legal_qualification": false
+  },
+  "unchanged_first21_order": [
+    "test_fixture_loads_versioned_external_expert_packets",
+    "test_external_packets_build_external_test_manifest_and_block_training_use",
+    "test_external_validity_report_is_separate_from_internal_canary_metrics",
+    "test_acceptable_ambiguity_allows_expected_family_alternative",
+    "test_missing_external_expectations_fail_packet_without_touching_canary_metrics",
+    "test_packet_validation_rejects_training_or_poisoned_external_records",
+    "test_reference_ir_requires_candidate_in_fixed_denominator[omitted]",
+    "test_reference_ir_requires_candidate_in_fixed_denominator[null]",
+    "test_reference_ir_requires_candidate_in_fixed_denominator[empty]",
+    "test_reference_ir_requires_candidate_in_fixed_denominator[invalid]",
+    "test_legacy_candidate_alias_and_absent_reference_keep_existing_scope",
+    "test_required_round_trip_needs_observation",
+    "test_empty_external_population_has_no_acceptance",
+    "test_external_benchmark_rejects_ambiguous_prediction_order[accepted-first]",
+    "test_external_benchmark_rejects_ambiguous_prediction_order[accepted-last]",
+    "test_external_benchmark_rejects_misbound_keyed_prediction[packet_id]",
+    "test_external_benchmark_rejects_misbound_keyed_prediction[id]",
+    "test_external_benchmark_rejects_conflicting_prediction_aliases[flat]",
+    "test_external_benchmark_rejects_conflicting_prediction_aliases[sequence]",
+    "test_external_benchmark_rejects_duplicate_population_identity",
+    "test_external_benchmark_predicts_by_each_supported_identity_form"
+  ]
+}

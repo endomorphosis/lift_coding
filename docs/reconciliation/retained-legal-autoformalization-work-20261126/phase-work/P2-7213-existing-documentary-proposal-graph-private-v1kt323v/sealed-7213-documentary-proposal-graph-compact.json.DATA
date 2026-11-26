@@ -1,0 +1,84 @@
+{
+  "Native_or_model_executed": false,
+  "control_run_closed": {
+    "bytes": 23591,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/complete-from-published-v04/private-7213-documentary-graph-provenance-owner-closure.json",
+    "sha256": "d3bbb36ecf10db6aedbc3c4556cfea20fbe87d2c70316931577d16ec6422dd8f"
+  },
+  "corpus_occurrence_cid": "baguqeera7273ybyz2jelfqccfwm4drdgk4vpckg4ogygc26igoh4dv3bj3na",
+  "definition_approved": false,
+  "documentary_selector_id": "legal-view-occurrence:sha256:618334fad8e8cf2731d02a71531ad9234fc005dec09fcb2589444aeef2cafd9d",
+  "evaluation_gold_mask": 0,
+  "first_attempt_current_worktree_drift": {
+    "bytes": 14140,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/private-7213-documentary-graph-provenance-owner-closure.json",
+    "sha256": "0629efe0e36e486e475f6d326cd341c27869558e9152fdd2fd1a58d15148e325"
+  },
+  "graph": {
+    "bytes": 682267,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/complete-from-published-v04/unreviewed-7213-documentary-proposal-graph.json",
+    "sha256": "f5705cd7a94a64f5ffdc36c0d2a02d745775368b96f0cb3980da39e56422be60"
+  },
+  "graph_id": "legal-proposed-graph:sha256:47a0f03bf3bbc82a1847a055efe9bbb24d36c7feb834ce895ac79b83b0c4fe98",
+  "graph_source_binding_sha256": "0ef5118f0220bea4d294ef2bd5c4cdd6f7bdf7753917ec2eb4cde0d2897f98aa",
+  "independently_selected_interpretation": false,
+  "legal_as_of_selected": false,
+  "matched_owner_blob_count": 60,
+  "mutations_refused": [
+    {
+      "control": "changed raw HTML rejects old normalized document",
+      "detail": "document differs from exact immutable normalized extraction",
+      "error_type": "ValueError",
+      "refused": true
+    },
+    {
+      "control": "off-by-one retained selector is refused",
+      "detail": "selector identity, character or UTF8 byte coordinates differ",
+      "error_type": "ValueError",
+      "refused": true
+    },
+    {
+      "control": "rehashed proposal cannot confer authority",
+      "detail": "graph cannot confer semantic authority",
+      "error_type": "ValueError",
+      "refused": true
+    }
+  ],
+  "original_request_formal_source_binding": null,
+  "published_D": "43414c90daa8ba3c891e2aad635d211ddd5e5133",
+  "read_upper_bytes": 9323520,
+  "schema": "title-10-7213-unreviewed-documentary-proposal-graph-compact/v1",
+  "scope": "One exact documentary paragraph and unchanged unreviewed typed request. The existing graph decoder reconstructs the exact request. Full external regeneration is pending.",
+  "second_attempt_read_ceiling": {
+    "exit": 1,
+    "session": 49398
+  },
+  "source_and_original_request": {
+    "authored_request": {
+      "bytes": 18543,
+      "path": "/tmp/Root-P2-7213-existing-public-owner-private-replay-v323-3xl4_76z/unreviewed-authored-7213-request.json",
+      "sha256": "d476c4930f17d1d539f87b3a63e60d70a1ff1fbce63e8c9da971c052edb09499"
+    },
+    "documentary_owner_projection": {
+      "bytes": 598797,
+      "path": "/tmp/P2-remaining-corpus-source-projection-private-v106-xy1erbo3/exact-two-whole-views-four-associations-projection-v106.json",
+      "sha256": "b41d41933c3dec5c1bb9f5979c012d548158b2eed6026be47d470aac9314c566"
+    },
+    "html": {
+      "bytes": 4049,
+      "path": "/tmp/Root-official-2024-pilot101-7213-rawHTML-v85/official-2024-7213.html.DATA",
+      "sha256": "671925114eada7731a355e33c8076baa6926fed1b7cb35c90a8c4c705c55b0ef"
+    },
+    "unreviewed_source_sidecar": {
+      "bytes": 11166,
+      "path": "/tmp/Root-P2-7213-existing-public-owner-private-replay-v323-3xl4_76z/unreviewed-source-and-unresolved-choices-sidecar.json",
+      "sha256": "e42dacf4c46d8a83501f463fa70a282a276d55d3c994c611447f605afa660503"
+    }
+  },
+  "structure": {
+    "assertions": 0,
+    "edges": 983,
+    "nodes": 984
+  },
+  "training_mask": 0
+}

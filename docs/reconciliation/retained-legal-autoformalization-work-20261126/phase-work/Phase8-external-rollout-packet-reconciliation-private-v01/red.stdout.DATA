@@ -1,0 +1,60 @@
+......FFFFFFFFF                                                          [100%]
+=================================== FAILURES ===================================
+_ test_external_validity_gate_refuses_inconsistent_produced_packet_rows[hidden-failure] _
+../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py:376: in test_external_validity_gate_refuses_inconsistent_produced_packet_rows
+    assert result.accepted is False
+E   AssertionError: assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-exter...uncertainty': 'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}}}, 'evidence_complete': True}).accepted
+_ test_external_validity_gate_refuses_inconsistent_produced_packet_rows[duplicate-row-identity] _
+../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py:376: in test_external_validity_gate_refuses_inconsistent_produced_packet_rows
+    assert result.accepted is False
+E   AssertionError: assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-exter...uncertainty': 'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}}}, 'evidence_complete': True}).accepted
+_ test_external_validity_gate_refuses_inconsistent_produced_packet_rows[nonboolean-row-acceptance] _
+../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py:376: in test_external_validity_gate_refuses_inconsistent_produced_packet_rows
+    assert result.accepted is False
+E   AssertionError: assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-exter...uncertainty': 'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}}}, 'evidence_complete': True}).accepted
+_ test_external_validity_gate_refuses_inconsistent_produced_packet_rows[contradictory-row-status] _
+../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py:376: in test_external_validity_gate_refuses_inconsistent_produced_packet_rows
+    assert result.accepted is False
+E   AssertionError: assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-exter...uncertainty': 'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}}}, 'evidence_complete': True}).accepted
+_ test_external_validity_gate_refuses_inconsistent_produced_packet_rows[missing-rows] _
+../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py:376: in test_external_validity_gate_refuses_inconsistent_produced_packet_rows
+    assert result.accepted is False
+E   AssertionError: assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-exter...uncertainty': 'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}}}, 'evidence_complete': True}).accepted
+_ test_external_validity_gate_refuses_inconsistent_produced_packet_rows[null-rows] _
+../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py:376: in test_external_validity_gate_refuses_inconsistent_produced_packet_rows
+    assert result.accepted is False
+E   AssertionError: assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-exter...uncertainty': 'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}}}, 'evidence_complete': True}).accepted
+_ test_external_validity_gate_refuses_inconsistent_produced_packet_rows[count-drift] _
+../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py:376: in test_external_validity_gate_refuses_inconsistent_produced_packet_rows
+    assert result.accepted is False
+E   AssertionError: assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-exter...uncertainty': 'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}}}, 'evidence_complete': True}).accepted
+_ test_external_validity_gate_refuses_inconsistent_produced_packet_rows[accepted-count-drift] _
+../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py:376: in test_external_validity_gate_refuses_inconsistent_produced_packet_rows
+    assert result.accepted is False
+E   AssertionError: assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-exter...uncertainty': 'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}}}, 'evidence_complete': True}).accepted
+_ test_external_validity_gate_refuses_inconsistent_produced_packet_rows[score-drift] _
+../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py:376: in test_external_validity_gate_refuses_inconsistent_produced_packet_rows
+    assert result.accepted is False
+E   AssertionError: assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-exter...uncertainty': 'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}}}, 'evidence_complete': True}).accepted
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-rollout-packet-reconciliation-private-v01/red/junit.xml -
+=========================== short test summary info ============================
+FAILED ../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[hidden-failure]
+FAILED ../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[duplicate-row-identity]
+FAILED ../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[nonboolean-row-acceptance]
+FAILED ../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[contradictory-row-status]
+FAILED ../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[missing-rows]
+FAILED ../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[null-rows]
+FAILED ../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[count-drift]
+FAILED ../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[accepted-count-drift]
+FAILED ../isolated/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[score-drift]
+9 failed, 6 passed, 1 deselected in 1.84s
+{"fixture": "fb9a76552e2b938369d93d73a2a25aa76a963101cac96fd487a246bc43c54971", "guard_events": [], "mode": "red", "overlays": [{"actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-rollout-packet-reconciliation-private-v01/gate-owner.before.py.DATA", "module": "scripts.ops.legal_ir.hammer_leanstral_rollout_gate"}], "pytest_exit": 1, "test": "a6b9a8aaf0c446eecfb19c78c2460f66ecbd288b8e14a920ab162d6987d2eb0b"}

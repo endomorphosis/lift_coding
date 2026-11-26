@@ -1,0 +1,141 @@
+{
+  "actual_fixed_marked_near_duplicate_callback_count": 0,
+  "actual_fresh_unrelated_marked_callback_count": 1,
+  "actual_legacy_callback_count": 1,
+  "cohorts": {
+    "after-v02": {
+      "exit": 0,
+      "failed": 0,
+      "passes": 3,
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-rich-context-reviewed-Unicode-guard-private-v01-A9ySvbY2/after-v02.stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 60,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-rich-context-reviewed-Unicode-guard-private-v01-A9ySvbY2/after-v02.stdout.DATA",
+        "sha256": "baa2a9cd052449126b632f047d56458d6d85790aefa44fadeb8b9e7c5300cbe0"
+      }
+    },
+    "before": {
+      "exit": 1,
+      "failed": 2,
+      "passes": 1,
+      "stderr": {
+        "bytes": 7826,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-rich-context-reviewed-Unicode-guard-private-v01-A9ySvbY2/before.stderr.DATA",
+        "sha256": "8b7270b42c4fb71cc45df2be40ebac120c43dd66ed685782fc88b17fae10c3d4"
+      },
+      "stdout": {
+        "bytes": 60,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-rich-context-reviewed-Unicode-guard-private-v01-A9ySvbY2/before.stdout.DATA",
+        "sha256": "16fe0bf17f3ba96b11ec4582009d5555f43d43fa3300c2973ecac929be8c2887"
+      }
+    },
+    "before-v02": {
+      "exit": 1,
+      "failed": 1,
+      "passes": 2,
+      "stderr": {
+        "bytes": 1193,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-rich-context-reviewed-Unicode-guard-private-v01-A9ySvbY2/before-v02.stderr.DATA",
+        "sha256": "e109c701ba9337761b6a703dc5b68c914f7569d30200f6f35558b2f78e340e13"
+      },
+      "stdout": {
+        "bytes": 60,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-rich-context-reviewed-Unicode-guard-private-v01-A9ySvbY2/before-v02.stdout.DATA",
+        "sha256": "4ef48af6892935c3b68bbb49121ec86b0d16af574690b038bd31d5e4ead3dd61"
+      }
+    }
+  },
+  "confirmed_integrated_gap": "With the private Unicode producer/heldout consumer prerequisite active, published structured retrieval only recomputes legacy features. A signed fictional holdout source similar only under Unicode grouping reached the public rich-context evaluator producer.",
+  "expected_fixture_overlap": {
+    "legacy": [
+      13,
+      17
+    ],
+    "threshold": 0.82,
+    "unicode": [
+      80,
+      92
+    ]
+  },
+  "first_fixture_error_retained": "V01 was not round-trip canonical. V02 rebuilt the full marked manifest through the owner. Both actual before/after use the exact same V02 test.",
+  "guard_change": "Preserve the prior legacy recomputation, and use the maintained selected Unicode fingerprint for all source bytes from both sides when the manifested Unicode data version is present. Refuse cross-split near-duplicate groups before external producer.",
+  "observed_D_head": "68e3739ffd64e54016133d3d1e0304c6302da1b1",
+  "prerequisites": {
+    "existing_six_tuple": {
+      "bytes": 12532,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-V4-unicode-target-codecs-private-v01-sGkV3nkC/sealed-existing-grouped-split-producer-replay-consumer-six-targets-v01.json",
+      "sha256": "a6e3684238dab142681ee742262be4908d8cbf40db29e9e9d18f79138047d16e"
+    },
+    "public_evaluator": {
+      "bytes": 147367,
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/ipfs_datasets-lir14-consumer-regression-v01/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_evaluation_artifacts.py",
+      "sha256": "fe3b8f7dd58532f883918168d9a9ac0e3078fcc9e2ddae3398ec1a71efd4982f"
+    },
+    "reviewed_heldout_consumer": {
+      "bytes": 59243,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-reviewed-heldout-fingerprint-private-v01-c3_iyyyn/legal_span_consumer_binding.after.py.DATA",
+      "sha256": "5bb6c1c1d627d65d7e0d98a00d5f646c7519f0c3a73a21492db1936445ecdd4f"
+    },
+    "split": {
+      "bytes": 61991,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-split-producer-portable-owner-private-v01-dqg82u94/after/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py",
+      "sha256": "e652c79842323fec40f3e5d8f6a23620c9b4ce4a2d1043c597176a13de3f4acd"
+    }
+  },
+  "safety_boundary": "No scientific generalization, released reviewed authority, current ordinary qualification, model run, or canonical mutation.",
+  "schema": "phase5-real-reviewed-rich-heldout-Unicode-near-duplicate-guard/v1",
+  "signed_fixture_runner": {
+    "bytes": 2312,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-rich-context-reviewed-Unicode-guard-private-v01-A9ySvbY2/run_cached_rich_heldout.py.DATA",
+    "sha256": "8593bed6749ef19a1ae65e0109735c6ba48e04304b333a1873c2da450fe8920c"
+  },
+  "signed_fixture_scope": "Distinct independently reviewed fictional TRAIN and heldout V3 components; no corpus authorization. Reused exact current public V3 evaluator with retained supporting code. Existing V4 aggregate calls the same guard, but no V4 or rank/model execution counted.",
+  "targets": {
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_structured_retrieval.py": {
+      "after": {
+        "bytes": 83929,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-rich-context-reviewed-Unicode-guard-private-v01-A9ySvbY2/legal_structured_retrieval.after.py.DATA",
+        "sha256": "8dab91f632a4293395ce45b0b7ca276ea87ec0fb44f44db188525fa038898c91"
+      },
+      "appended_definitions": 0,
+      "before": {
+        "bytes": 83256,
+        "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/ipfs_datasets-lir14-consumer-regression-v01/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_structured_retrieval.py",
+        "sha256": "89dacae6727f0991e47ef22d0beff75c1bb1594c90227933b25a8d574c40c081"
+      },
+      "candidate_git_blob": "305520ff096af44b584558cc348238b077ec65cd",
+      "current_git_blob": "1cbc3ac04f83a4415dcf53073a76639a7f9fcba3",
+      "diff": {
+        "bytes": 2165,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-rich-context-reviewed-Unicode-guard-private-v01-A9ySvbY2/legal_structured_retrieval.py.diff",
+        "sha256": "5e725413914e170fea058919b775c9c3c4e1e0fc38014f74a2c80a7441a0da71"
+      },
+      "only_changed_existing_definition": "_require_disjoint_heldout_review"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py": {
+      "after": {
+        "bytes": 282120,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-rich-context-reviewed-Unicode-guard-private-v01-A9ySvbY2/test_legal_ir_evaluation_artifacts.after-v02.py.DATA",
+        "sha256": "5ba9fefe11606515a783981111c2c44c6aadfdf6cb1112acca55ba76d00913cb"
+      },
+      "appended_definitions": 1,
+      "before": {
+        "bytes": 278838,
+        "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/ipfs_datasets-lir14-consumer-regression-v01/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py",
+        "sha256": "b830cd232fc4964e3c8a354b11ed9ef88046d998017f8aa216e7047b7c7fcaff"
+      },
+      "candidate_git_blob": "bb33ff051260ea66ab96da737b2dfd1836d10e45",
+      "current_git_blob": "8df5f4025dbcd36c5f36840a393c7e2eefa319ef",
+      "diff": {
+        "bytes": 5310,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-rich-context-reviewed-Unicode-guard-private-v01-A9ySvbY2/test_legal_ir_evaluation_artifacts.py.diff",
+        "sha256": "f333d5aab6f12f10a3ddc0fdb5e93177e73572c9cf22d5d68f45634774451ef0"
+      },
+      "only_changed_existing_definition": "_rich_v3_heldout_case"
+    }
+  }
+}

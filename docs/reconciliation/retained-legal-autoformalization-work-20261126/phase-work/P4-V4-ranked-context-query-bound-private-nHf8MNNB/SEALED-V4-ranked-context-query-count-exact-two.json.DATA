@@ -1,0 +1,597 @@
+{
+  "Source_install": null,
+  "actual_rank_kernel_or_model_run": null,
+  "base_private_fixture_HEAD": "8ba21fb39f09ae6243e92bfd86533a610e48a094",
+  "baseline_same4": {
+    "evidence": {
+      "exit": {
+        "bytes": 2,
+        "full9": {
+          "st_ctime_ns": "1795720318445781844",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72500247",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795720318445781844",
+          "st_nlink": "1",
+          "st_size": "2",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/before-boundary.exit",
+        "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+      },
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795720317772792536",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72500246",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795720317772792536",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/before-boundary.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 17436,
+        "full9": {
+          "st_ctime_ns": "1795720318396795500",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72500245",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795720318396795500",
+          "st_nlink": "1",
+          "st_size": "17436",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/before-boundary.stdout",
+        "sha256": "fb1c5539fb92860d21f66927c5db10bd89a9a4a0bb72f0f7f49da1ab860d368a"
+      }
+    },
+    "failed": 2,
+    "passed": 2,
+    "unexpected_rank_callback_counts": [
+      0,
+      33
+    ]
+  },
+  "candidate_same4": {
+    "counts_dispatched_to_callback": [
+      1,
+      32
+    ],
+    "evidence": {
+      "exit": {
+        "bytes": 2,
+        "full9": {
+          "st_ctime_ns": "1795720342924113701",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72500252",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795720342924113701",
+          "st_nlink": "1",
+          "st_size": "2",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/after-boundary.exit",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795720342267911300",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72500251",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795720342267911300",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/after-boundary.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 14112,
+        "full9": {
+          "st_ctime_ns": "1795720342874914305",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72500250",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795720342874914305",
+          "st_nlink": "1",
+          "st_size": "14112",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/after-boundary.stdout",
+        "sha256": "11164dee35fa0229e15bd6099eb5d1a5236ff7681e9006980d71089b72f6e20c"
+      }
+    },
+    "failed": 0,
+    "passed": 4
+  },
+  "files": {
+    "owner": {
+      "after": {
+        "bytes": 84678,
+        "full9": {
+          "st_ctime_ns": "1795720342260911265",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72500248",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795720342248435987",
+          "st_nlink": "1",
+          "st_size": "84678",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/owner.after.py.DATA",
+        "proposed_git_blob": "69a65bdbcfe0322337fa3127757246dd74fbc414",
+        "sha256": "0f1cc9dbf9506aeccaa0a09146c5da848f47568468e1447e09d0998ea197df2f"
+      },
+      "before": {
+        "bytes": 84401,
+        "full9": {
+          "st_ctime_ns": "1795720289896663622",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72500240",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795720289893833193",
+          "st_nlink": "1",
+          "st_size": "84401",
+          "st_uid": "1000"
+        },
+        "git_blob": "93e2cf5deccd2014cd20c553bab3705e73614a4c",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/owner.before.py.DATA",
+        "sha256": "fdcf1fae15f6fe9ec4986097b698d0ea535042f5fc047678b4184b647ef215ea"
+      },
+      "canonical_before_full9": {
+        "st_ctime_ns": "1795715407813547467",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042686",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795715405585091806",
+        "st_nlink": "1",
+        "st_size": "84401",
+        "st_uid": "1000"
+      },
+      "mode": "100644",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_structured_retrieval.py"
+    },
+    "test": {
+      "after": {
+        "bytes": 295662,
+        "full9": {
+          "st_ctime_ns": "1795720289949663860",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72500242",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795720289945687074",
+          "st_nlink": "1",
+          "st_size": "295662",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/test.after.py.DATA",
+        "proposed_git_blob": "f58838d4950e3859edc1f75c264681b862f03c50",
+        "sha256": "2d84d772bc95b22167e833011ec4d127f38dde00bd9c1722f22a89433f94fc4d"
+      },
+      "before": {
+        "bytes": 294426,
+        "full9": {
+          "st_ctime_ns": "1795720289906663667",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72500241",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795720289904548169",
+          "st_nlink": "1",
+          "st_size": "294426",
+          "st_uid": "1000"
+        },
+        "git_blob": "b232fc973f04a76436572f24ca33ea2b8b85801a",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/test.before.py.DATA",
+        "sha256": "0bfc578af7cc9bc43a045a661c2584404b620a4da8ebbb54d3e6377ae7daea86"
+      },
+      "canonical_before_full9": {
+        "st_ctime_ns": "1795684464621252733",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042641",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795684464310765173",
+        "st_nlink": "1",
+        "st_size": "294426",
+        "st_uid": "1000"
+      },
+      "mode": "100644",
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py"
+    }
+  },
+  "input_spec": {
+    "bytes": 1617,
+    "full9": {
+      "st_ctime_ns": "1795720289952663874",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72500243",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795720289950869514",
+      "st_nlink": "1",
+      "st_size": "1617",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/input-spec.json",
+    "sha256": "3cc654b3c8b5232325c2e47d9347d1117f01ee7c29816d73e4ae860956215fc2"
+  },
+  "observed_local_tip_and_tracking_tip": "8ba21fb39f09ae6243e92bfd86533a610e48a094",
+  "observed_scope": "Existing explicit V4 rich-context adapter only. One shared 32-query limit across the adapter and both decoder-context consumers. The standalone wider ranker source is untouched.",
+  "ordinary_qualification": null,
+  "patched_roundtrip_exact_private_bytes_and_mode": {
+    "forward": {
+      "bytes": 4488,
+      "full9": {
+        "st_ctime_ns": "1795720518313759174",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72500281",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795720518313759174",
+        "st_nlink": "1",
+        "st_size": "4488",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/forward.patch",
+      "sha256": "dba7a3f1631635e7b377eb46ee39ab8d09098c4daa7bfbc83f1668b2b2376bbb"
+    },
+    "inverse": {
+      "bytes": 4488,
+      "full9": {
+        "st_ctime_ns": "1795720518321181331",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72500282",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795720518321181331",
+        "st_nlink": "1",
+        "st_size": "4488",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/inverse.patch",
+      "sha256": "394f7cb7d708e3e7f13e51430061891b7e6ac33795932b5a6e19113d428cd05a"
+    }
+  },
+  "publication": null,
+  "read_only_dependency_source_digests_verified_with_current_git": {
+    "bytes": 27789,
+    "full9": {
+      "st_ctime_ns": "1795720518341754930",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72500283",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795720518341754930",
+      "st_nlink": "1",
+      "st_size": "27789",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/observed-readonly-source-module-digests.json",
+    "sha256": "f29060dfbddbddaddea9ee98265bcd4c7bd227c0eebbd5cae7bdee0a25aa422a"
+  },
+  "retained_full_positive_fixture": {
+    "evidence": {
+      "exit": {
+        "bytes": 4,
+        "full9": {
+          "st_ctime_ns": "1795720378995098443",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72500255",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795720378995098443",
+          "st_nlink": "1",
+          "st_size": "4",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/after-None.exit",
+        "sha256": "a6ade98870a92fc7e8bfd6eee3662e7823131fe83fdcdab6b73af38144accd49"
+      },
+      "stderr": {
+        "bytes": 43,
+        "full9": {
+          "st_ctime_ns": "1795720378994098438",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72500254",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795720378994098438",
+          "st_nlink": "1",
+          "st_size": "43",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/after-None.stderr",
+        "sha256": "de25f493e2a030af329f5f01121c9f9249da8508936bfa0a119d0a5c8f638731"
+      },
+      "stdout": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795720342924113701",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72500253",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795720342924113701",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/after-None.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "status": "private_CPU_limit",
+    "terminal_returncode": 152
+  },
+  "retained_negative_actual_custody_candidate_runs": {
+    "cases": {
+      "abstention": {
+        "exit": {
+          "bytes": 2,
+          "full9": {
+            "st_ctime_ns": "1795720399793208996",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72500258",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795720399793208996",
+            "st_nlink": "1",
+            "st_size": "2",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/after-abstention.exit",
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+        },
+        "stderr": {
+          "bytes": 0,
+          "full9": {
+            "st_ctime_ns": "1795720378995098443",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72500257",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795720378995098443",
+            "st_nlink": "1",
+            "st_size": "0",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/after-abstention.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 29779,
+          "full9": {
+            "st_ctime_ns": "1795720399694208463",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72500256",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795720399694208463",
+            "st_nlink": "1",
+            "st_size": "29779",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/after-abstention.stdout",
+          "sha256": "b8de0feacdc94255eaececf19f9eab58e231c85d76936b6fbfa586cc50d21ec1"
+        }
+      },
+      "selected-body": {
+        "exit": {
+          "bytes": 2,
+          "full9": {
+            "st_ctime_ns": "1795720446236467027",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72500265",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795720446236467027",
+            "st_nlink": "1",
+            "st_size": "2",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/after-selected-body.exit",
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+        },
+        "stderr": {
+          "bytes": 0,
+          "full9": {
+            "st_ctime_ns": "1795720423084336525",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72500263",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795720423084336525",
+            "st_nlink": "1",
+            "st_size": "0",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/after-selected-body.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 29785,
+          "full9": {
+            "st_ctime_ns": "1795720446160466593",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72500262",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795720446160466593",
+            "st_nlink": "1",
+            "st_size": "29785",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/after-selected-body.stdout",
+          "sha256": "3043118309128b148dcdde72cf5d314b47cb4441eeed3ec0cef40f4dc0d518f9"
+        }
+      },
+      "source": {
+        "exit": {
+          "bytes": 2,
+          "full9": {
+            "st_ctime_ns": "1795720423083336520",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72500261",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795720423083336520",
+            "st_nlink": "1",
+            "st_size": "2",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/after-source.exit",
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+        },
+        "stderr": {
+          "bytes": 0,
+          "full9": {
+            "st_ctime_ns": "1795720399793208996",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72500260",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795720399793208996",
+            "st_nlink": "1",
+            "st_size": "0",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/after-source.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 29771,
+          "full9": {
+            "st_ctime_ns": "1795720423008336103",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72500259",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795720423008336103",
+            "st_nlink": "1",
+            "st_size": "29771",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/after-source.stdout",
+          "sha256": "34508e41893a12cf6721586bb06bd447a46c9974502c8241861480976474124d"
+        }
+      }
+    },
+    "passed": 3
+  },
+  "runner": {
+    "bytes": 3815,
+    "full9": {
+      "st_ctime_ns": "1795720317772792536",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72500244",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795720317772792536",
+      "st_nlink": "1",
+      "st_size": "3815",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/run.py",
+    "sha256": "9da327677cdc4c790debfe853de3c1b3e5e78febe579f0397d376db16efc0dad"
+  },
+  "schema": "private-V4-ranked-context-query-count-before-ranking-exact-two/v1",
+  "scoped_positive_adapter_provenance_prefix": {
+    "evidence": {
+      "exit": {
+        "bytes": 2,
+        "full9": {
+          "st_ctime_ns": "1795720511415746462",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72500270",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795720511415746462",
+          "st_nlink": "1",
+          "st_size": "2",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/after-adapter-positive.exit",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795720479860662850",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72500268",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795720479860662850",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/after-adapter-positive.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 29777,
+        "full9": {
+          "st_ctime_ns": "1795720511184851609",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72500267",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795720511184851609",
+          "st_nlink": "1",
+          "st_size": "29777",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/after-adapter-positive.stdout",
+        "sha256": "ea9323aefac3bce4e796a8b620f237c5bd1b033912145c0d9f67df344fa213f9"
+      }
+    },
+    "passed": true,
+    "runner": {
+      "bytes": 4925,
+      "full9": {
+        "st_ctime_ns": "1795720479857296670",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72500266",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795720479857296670",
+        "st_nlink": "1",
+        "st_size": "4925",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/run-adapter-positive.py",
+      "sha256": "e15fd20a491cfe6238399661fe546ae799c9173ea034d36a8a022dda1958f0d4"
+    },
+    "scope": "All existing adapter/provenance assertions through the completed prepare call, before the second context replay and downstream evaluator.",
+    "terminal_returncode": 0
+  },
+  "static_ordinary_inputs": {
+    "expected_total": 8,
+    "functions": [
+      "test_aggregate_v4_ranked_recipe_reaches_evaluator_with_genuine_component_custody",
+      "test_aggregate_v4_ranked_context_checks_query_count_before_ranking"
+    ],
+    "selection_and_runtime_authority": null,
+    "single_owning_file": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py"
+  }
+}

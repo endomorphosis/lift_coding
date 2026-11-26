@@ -1,0 +1,248 @@
+{
+  "actual_observations": {
+    "green": {
+      "case_count": 35,
+      "errors": 0,
+      "evidence": {
+        "exit": {
+          "bytes": 2,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-counterexample-assignment-pairing-private-ZGlPIlGs/green.exit",
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+        },
+        "junit.xml": {
+          "bytes": 5602,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-counterexample-assignment-pairing-private-ZGlPIlGs/green.junit.xml",
+          "sha256": "ab600f9edfdcea651566eeb03765e12a97e5a34f5e436ae72e901dbe81c496f0"
+        },
+        "stderr": {
+          "bytes": 0,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-counterexample-assignment-pairing-private-ZGlPIlGs/green.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 400,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-counterexample-assignment-pairing-private-ZGlPIlGs/green.stdout",
+          "sha256": "f63b22610af1f90f1e4d2553d30b983cce1385b103725b9f6c333962f5d4ddce"
+        }
+      },
+      "failed_cases": [],
+      "pass_count": 35,
+      "skipped": 0,
+      "terminal_returncode": 0
+    },
+    "red": {
+      "case_count": 35,
+      "errors": 0,
+      "evidence": {
+        "exit": {
+          "bytes": 2,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-counterexample-assignment-pairing-private-ZGlPIlGs/red.exit",
+          "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+        },
+        "junit.xml": {
+          "bytes": 18867,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-counterexample-assignment-pairing-private-ZGlPIlGs/red.junit.xml",
+          "sha256": "5c4918e900b9655241a9164fcd3b9859eabc0e8e4a52b3eea38d46d91a4759e8"
+        },
+        "stderr": {
+          "bytes": 0,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-counterexample-assignment-pairing-private-ZGlPIlGs/red.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 12659,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-counterexample-assignment-pairing-private-ZGlPIlGs/red.stdout",
+          "sha256": "1cdd38a8adcd95924ffb911c779555054f6fd1804220842f1d675d9a0c3037b6"
+        }
+      },
+      "failed_cases": [
+        "test_counterexample_scores_bind_assignments_to_reported_outcomes[swapped_outcomes]",
+        "test_counterexample_scores_bind_assignments_to_reported_outcomes[assignment_value_type]",
+        "test_counterexample_scores_bind_assignments_to_reported_outcomes[blank_outcome]",
+        "test_counterexample_scores_bind_assignments_to_reported_outcomes[nested_assignment]"
+      ],
+      "pass_count": 31,
+      "skipped": 0,
+      "terminal_returncode": 1
+    }
+  },
+  "actual_ordinary_validation": null,
+  "actual_scenario_execution": false,
+  "all_four_selected_cached_rows_match_current_bytes_SHA_and_decimal_full9": true,
+  "canonical_adoption": null,
+  "canonical_head_and_tracking_tip": "8ba21fb39f09ae6243e92bfd86533a610e48a094",
+  "changed_owner_function_ASTS_only": [
+    "evaluate_legal_ir_semantic_equivalence",
+    "_legacy_raw_ir_unsupported_paths",
+    "_counterexample_signature"
+  ],
+  "claims": "Pairwise storage and comparison of caller-reported scenarios only. No independent scenario execution, statutory review, proof validity, model quality or runtime grant.",
+  "current_tree": "b56aea600834c51f557a9562813097cf3972d125",
+  "exact_shared_private_testcase_order": [
+    "test_raw_ir_pair_scores_semantic_equivalence_beyond_ids_and_order",
+    "test_semantic_metrics_detect_obligation_graph_temporal_and_proof_delta",
+    "test_explicit_metric_payload_accepts_delta_alias_and_fails_closed_on_missing",
+    "test_comparison_reports_disagreement_when_ce_cosine_improve_but_semantics_regress",
+    "test_raw_family_payload_can_drive_hard_promotion_gate",
+    "test_raw_round_trip_requires_both_reported_nonempty_observations[absent]",
+    "test_raw_round_trip_requires_both_reported_nonempty_observations[empty]",
+    "test_raw_round_trip_requires_both_reported_nonempty_observations[scalar]",
+    "test_raw_round_trip_requires_both_reported_nonempty_observations[false]",
+    "test_raw_round_trip_requires_both_reported_nonempty_observations[only_decompiled]",
+    "test_raw_round_trip_requires_both_reported_nonempty_observations[only_recompiled]",
+    "test_raw_round_trip_requires_both_reported_nonempty_observations[blank_decompiled]",
+    "test_raw_round_trip_requires_both_reported_nonempty_observations[blank_recompiled]",
+    "test_raw_round_trip_requires_both_reported_nonempty_observations[nested_result]",
+    "test_raw_round_trip_requires_both_reported_nonempty_observations[extra_field]",
+    "test_raw_round_trip_requires_both_reported_nonempty_observations[ambiguous_source]",
+    "test_raw_round_trip_requires_both_reported_nonempty_observations[ambiguous_container]",
+    "test_one_sided_round_trip_evidence_is_not_a_complete_pair[reference]",
+    "test_one_sided_round_trip_evidence_is_not_a_complete_pair[candidate]",
+    "test_unknown_legacy_shapes_are_diagnostic_and_cannot_claim_typed_semantics[unknown_root]",
+    "test_unknown_legacy_shapes_are_diagnostic_and_cannot_claim_typed_semantics[unknown_rule]",
+    "test_unknown_legacy_shapes_are_diagnostic_and_cannot_claim_typed_semantics[nested_condition]",
+    "test_unknown_legacy_shapes_are_diagnostic_and_cannot_claim_typed_semantics[empty]",
+    "test_unknown_legacy_shapes_are_diagnostic_and_cannot_claim_typed_semantics[sequence]",
+    "test_unknown_legacy_shapes_are_diagnostic_and_cannot_claim_typed_semantics[text]",
+    "test_recognized_actor_change_still_blocks_legacy_raw_promotion",
+    "test_explicit_scores_cannot_launder_uncovered_raw_pair_evidence[missing_reverse]",
+    "test_explicit_scores_cannot_launder_uncovered_raw_pair_evidence[unknown_arguments]",
+    "test_explicit_perfect_scores_cannot_launder_covered_raw_pair_evidence[actor]",
+    "test_explicit_perfect_scores_cannot_launder_covered_raw_pair_evidence[proof_obligation_ids]",
+    "test_counterexample_scores_bind_assignments_to_reported_outcomes[None]",
+    "test_counterexample_scores_bind_assignments_to_reported_outcomes[swapped_outcomes]",
+    "test_counterexample_scores_bind_assignments_to_reported_outcomes[assignment_value_type]",
+    "test_counterexample_scores_bind_assignments_to_reported_outcomes[blank_outcome]",
+    "test_counterexample_scores_bind_assignments_to_reported_outcomes[nested_assignment]"
+  ],
+  "files": {
+    "owner": {
+      "after": {
+        "bytes": 113392,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-counterexample-assignment-pairing-private-ZGlPIlGs/metrics.after.py.DATA",
+        "proposed_git_blob": "9639b17dbc7a429d86b7db50ef4b61ede83f9b5f",
+        "sha256": "eb35ecab32724b28fdbd4824d53f3c1945e001d3780f73b26f3ec9525be490ff"
+      },
+      "before": {
+        "bytes": 112276,
+        "canonical_full9": {
+          "st_ctime_ns": "1795678296401684717",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "70042622",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795678295780789431",
+          "st_nlink": "1",
+          "st_size": "112276",
+          "st_uid": "1000"
+        },
+        "canonical_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_semantic_metrics.py",
+        "git_blob": "2e868b9118b42938b25c159a9dba07d891af9978",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-counterexample-assignment-pairing-private-ZGlPIlGs/metrics.before.py.DATA",
+        "sha256": "949e4dcbfb3b306d760ebedbf256d79d25441ee6dbe3e3915c63e5304d586413"
+      },
+      "canonical_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_semantic_metrics.py"
+    },
+    "test": {
+      "after": {
+        "bytes": 50334,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-counterexample-assignment-pairing-private-ZGlPIlGs/test_legal_ir_semantic_metrics.py.after.py.DATA",
+        "proposed_git_blob": "64f88436bf033eb52b6f33f61272bd9f2bec4429",
+        "sha256": "adf185f2e156c29f02fb7b61c4a60177ed6a5dcb9d9c05160d8a6f02e3a1db4f"
+      },
+      "before": {
+        "bytes": 47983,
+        "canonical_full9": {
+          "st_ctime_ns": "1795678297973698021",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "70042628",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795678295807903069",
+          "st_nlink": "1",
+          "st_size": "47983",
+          "st_uid": "1000"
+        },
+        "canonical_path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py",
+        "git_blob": "30d97084ac630256f14ace9b29f0cd833ab014de",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-counterexample-assignment-pairing-private-ZGlPIlGs/test.before.py.DATA",
+        "sha256": "2425e5ec483c7bd7c357019d808f9f66700d823ab446a03e1d98559178da74a8"
+      },
+      "canonical_path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py"
+    }
+  },
+  "forward": {
+    "bytes": 7229,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-counterexample-assignment-pairing-private-ZGlPIlGs/exact-two.patch.DATA",
+    "sha256": "d059b05fa7a01a6393b98eef15fda0a5045e66247151e9b1d4c392cecdfeb213"
+  },
+  "guide570_existing_guard": {
+    "bytes": 964183,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-retained-qualification-component-binding-private-pZ1QE2WG/existing-Source2-Guide570-INERT-v02/current-1623-metadata-guard-guide570-overlay-INERT.json",
+    "sha256": "1bf24052bf906fd4c33b90cede527b11af3c0faf0534a3e16919479d63ec54d3"
+  },
+  "inverse": {
+    "bytes": 7229,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-counterexample-assignment-pairing-private-ZGlPIlGs/exact-two.inverse.patch.DATA",
+    "sha256": "e16b730a6a5c2370e66d4c73f86979c49800ba5d78f8d27f1fca9271d93535dd"
+  },
+  "legal_source_correspondence_verified": false,
+  "new_cases": 5,
+  "prior_test_AST_and_byte_prefix_identical": true,
+  "private_profile": {
+    "address_space_bytes": 536870912,
+    "cpu_hard_s": 21,
+    "cpu_slots": 1,
+    "cpu_soft_s": 20,
+    "normal_parent_initializers_and_conftests_loaded": false,
+    "pytest_plugin_autoload": false,
+    "wall_s": 25
+  },
+  "private_script": {
+    "bytes": 2757,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-counterexample-assignment-pairing-private-ZGlPIlGs/run-existing-owner-controls.py",
+    "sha256": "58441f31d00eac640d911971fc4b9c579737b45ebf7fdabb6b7fa82e30c48117"
+  },
+  "publication": null,
+  "schema": "private-legacy-counterexample-assignment-outcome-fidelity-exact-two/v1",
+  "supporting_real_Git_blobs": [
+    {
+      "bytes": 42137,
+      "canonical_full9": {
+        "st_ctime_ns": "1795421815612123362",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70011746",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795421815612123362",
+        "st_nlink": "1",
+        "st_size": "42137",
+        "st_uid": "1000"
+      },
+      "canonical_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py",
+      "git_blob": "53d7123051e1a1b9737edeb8928dfe57a579286c",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-counterexample-assignment-pairing-private-ZGlPIlGs/family.py.DATA",
+      "sha256": "3b6cd3a6fade78fed275a478f010329e5d030a250b914c4b46ab0f0d77b9d5ab"
+    },
+    {
+      "bytes": 38995,
+      "canonical_full9": {
+        "st_ctime_ns": "1795421815631123598",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70011899",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795421815631123598",
+        "st_nlink": "1",
+        "st_size": "38995",
+        "st_uid": "1000"
+      },
+      "canonical_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/snapshot_evaluator.py",
+      "git_blob": "a0f72635842cdcb22b333ada6ff782f1fcbfd419",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-counterexample-assignment-pairing-private-ZGlPIlGs/snapshot.py.DATA",
+      "sha256": "1aa122f14dc52a4a5cb161bc2c40862334f7b216210bfcdb42fd5989b69761e6"
+    }
+  ],
+  "task_scope": "Phase8 deterministic benchmark and promotion-scoring software",
+  "unchanged_retained_cases": 30
+}

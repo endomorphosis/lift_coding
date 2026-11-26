@@ -1,0 +1,103 @@
+{
+  "Git_metadata_before_probe": {
+    "D_HEAD": "8aebc34eb1e430b00c2b941cb256e853fe2adc02",
+    "path": "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py",
+    "target_blob_oid": "2c2f9662b7d79393a1b5d5aa684cf6e047820cb5"
+  },
+  "actual_bounded_finite_results": {
+    "both_worlds_local": [
+      {
+        "permission_calls": 8,
+        "seconds": 0.0460778521373868,
+        "truth": true
+      },
+      {
+        "permission_calls": 8,
+        "seconds": 6.973175706341863,
+        "truth": true
+      }
+    ],
+    "one_late_modal_frame_overflow": [
+      {
+        "permission_calls": 8,
+        "seconds": 0.03496653586626053,
+        "truth": false
+      },
+      {
+        "permission_calls": 8,
+        "seconds": 7.089784352108836,
+        "truth": true
+      }
+    ]
+  },
+  "alternative_order": [
+    "7214:cap_within_permission",
+    "7214:cap_as_permission_guard"
+  ],
+  "both_request_report_pairs": [
+    {
+      "bytes": 33989,
+      "path": "/tmp/pytest-of-barberb/legal-ir-mixed-preservation-pure-full229-20261111-v04-5ba4e5e734fe4b8cb600f1cae4c53dcc/attempt-v01/tmp/pytest/mixed-retained-hypotheses/alternative-0.request.json",
+      "sha256": "957b2011acde34b7fda85d8661061622160316605b03324a7b52c94cc17b6bc7"
+    },
+    {
+      "bytes": 167053,
+      "path": "/tmp/pytest-of-barberb/legal-ir-mixed-preservation-pure-full229-20261111-v04-5ba4e5e734fe4b8cb600f1cae4c53dcc/attempt-v01/tmp/pytest/mixed-retained-hypotheses/alternative-0.report.json",
+      "sha256": "1521fd1b6a5c14bbc23a01f34f943da89df505aaa3daf59603a9bee2f962898b"
+    },
+    {
+      "bytes": 34097,
+      "path": "/tmp/pytest-of-barberb/legal-ir-mixed-preservation-pure-full229-20261111-v04-5ba4e5e734fe4b8cb600f1cae4c53dcc/attempt-v01/tmp/pytest/mixed-retained-hypotheses/alternative-1.request.json",
+      "sha256": "20017c7e69b094173ac62810c3c4d146401829f23d9e5d0626260f2227757c58"
+    },
+    {
+      "bytes": 165600,
+      "path": "/tmp/pytest-of-barberb/legal-ir-mixed-preservation-pure-full229-20261111-v04-5ba4e5e734fe4b8cb600f1cae4c53dcc/attempt-v01/tmp/pytest/mixed-retained-hypotheses/alternative-1.report.json",
+      "sha256": "c7a512bfacbedab9e54eee4451e4b6880b270ebe92d558ac1ceb4b9e4350ca75"
+    }
+  ],
+  "current_ordinary_or_Source_or_git_write": false,
+  "effect_scope": "Private test-only proposal. Exact typed and renderer evaluators on existing immutable prepared ASTs. No current projection regeneration, ordinary pytest, Lean execution, statutory selection, or training.",
+  "elapsed_seconds": 14.25884588714689,
+  "exact_diff": {
+    "bytes": 2279,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-mixed-permission-event-time-private-v02-8ukoukxl/one-append-event-time-pair.diff",
+    "sha256": "bda1e4854e7f386addc4a1fd2df5f44a393eae2fc00e77491cfc6c6e7f6c0be5"
+  },
+  "exact_prefix_bytes": 76826,
+  "execution_limit": {
+    "CPU_affinity": 1,
+    "CPU_seconds_soft": 30,
+    "address_space_bytes": 536870912
+  },
+  "existing_oracle_functions_unchanged": [
+    "_mixed_atoms",
+    "_mixed_both_truths",
+    "_mixed_renderer_truth",
+    "_mixed_typed_truth"
+  ],
+  "failed": 0,
+  "historical_saved_fixture_manifest": {
+    "bytes": 1704,
+    "path": "/tmp/pytest-of-barberb/legal-ir-mixed-preservation-pure-full229-20261111-v04-5ba4e5e734fe4b8cb600f1cae4c53dcc/attempt-v01/tmp/pytest/mixed-retained-hypotheses/manifest.json",
+    "sha256": "c116be9eed66876efd0e52a0ca1139218a9920d20068c3a4e010432c44404ba6"
+  },
+  "preimage": {
+    "bytes": 76826,
+    "path": "/tmp/Root-Phase3-contracts-relational-fixture-two-SourceREAD-actual-v140/actual-output/raw/01-test_legal_relational_norm_v1.py.DATA",
+    "sha256": "9a9748194ed1ac98d31705a812ae7752a9792ee9b13df66dad41d7bcbb7c7232"
+  },
+  "prior_failures_retained": [
+    "Initial metadata lookup failed before assertions because observations was misnamed.",
+    "Five-object unoptimized control exceeded 30 CPU seconds; no result from that attempt. Four objects preserve the decisive overflow and controls."
+  ],
+  "proposed_post": {
+    "bytes": 78756,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-mixed-permission-event-time-private-v02-8ukoukxl/test_legal_relational_norm_v1.after.py.DATA",
+    "sha256": "b682b68029459bfb66ca6d09e2fb88269705b77cfd0296ca7ee46f8f96b135ef"
+  },
+  "schema": "phase3-existing-retained-mixed-cardinality-pair-test/v2",
+  "test_function": "test_mixed_cap_permission_counts_each_event_time_pair",
+  "tests_executed_against_saved_fixture": 1,
+  "unchanged_top_level_AST_statements": 97
+}

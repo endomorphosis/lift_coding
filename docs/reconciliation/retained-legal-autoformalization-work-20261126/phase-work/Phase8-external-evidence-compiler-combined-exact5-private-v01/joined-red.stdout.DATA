@@ -1,0 +1,132 @@
+........FFFFF.F......FFFFFFFFF.F......................FFFFFF             [100%]
+=================================== FAILURES ===================================
+_______ test_compiler_system_checks_external_result_bindings[True-saved] _______
+../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:383: in test_compiler_system_checks_external_result_bindings
+    assert result.accepted is not stale
+E   AssertionError: assert True is not True
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-compi...bbbbbbbbbbbbbbbbbbbbbbbbbbbb'}}}, 'evidence_complete': True, 'rollback_ready': True, 'promotion_decision': 'accepted'}).accepted
+________ test_compiler_system_checks_external_result_bindings[True-raw] ________
+../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:383: in test_compiler_system_checks_external_result_bindings
+    assert result.accepted is not stale
+E   AssertionError: assert True is not True
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-compi...bbbbbbbbbbbbbbbbbbbbbbbbbbbb'}}}, 'evidence_complete': True, 'rollback_ready': True, 'promotion_decision': 'accepted'}).accepted
+______ test_compiler_system_checks_external_result_bindings[True-paired] _______
+../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:383: in test_compiler_system_checks_external_result_bindings
+    assert result.accepted is not stale
+E   AssertionError: assert True is not True
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-compi...bbbbbbbbbbbbbbbbbbbbbbbbbbbb'}}}, 'evidence_complete': True, 'rollback_ready': True, 'promotion_decision': 'accepted'}).accepted
+_ test_compiler_system_checks_external_result_bindings[True-saved-with-current-labels] _
+../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:383: in test_compiler_system_checks_external_result_bindings
+    assert result.accepted is not stale
+E   AssertionError: assert True is not True
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-compi...bbbbbbbbbbbbbbbbbbbbbbbbbbbb'}}}, 'evidence_complete': True, 'rollback_ready': True, 'promotion_decision': 'accepted'}).accepted
+_ test_compiler_system_replays_raw_external_evidence_beside_an_accepted_decision _
+../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:407: in test_compiler_system_replays_raw_external_evidence_beside_an_accepted_decision
+    assert result.accepted is False
+E   AssertionError: assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-compi...bbbbbbbbbbbbbbbbbbbbbbbbbbbb'}}}, 'evidence_complete': True, 'rollback_ready': True, 'promotion_decision': 'accepted'}).accepted
+______ test_compiler_system_replays_real_external_benchmark_report[True] _______
+../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:432: in test_compiler_system_replays_real_external_benchmark_report
+    assert result.accepted is not hidden_failure
+E   AssertionError: assert True is not True
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-compi...bbbbbbbbbbbbbbbbbbbbbbbbbbbb'}}}, 'evidence_complete': True, 'rollback_ready': True, 'promotion_decision': 'accepted'}).accepted
+_ test_external_validity_gate_refuses_inconsistent_produced_packet_rows[hidden-failure] _
+../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py:376: in test_external_validity_gate_refuses_inconsistent_produced_packet_rows
+    assert result.accepted is False
+E   AssertionError: assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-exter...uncertainty': 'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}}}, 'evidence_complete': True}).accepted
+_ test_external_validity_gate_refuses_inconsistent_produced_packet_rows[duplicate-row-identity] _
+../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py:376: in test_external_validity_gate_refuses_inconsistent_produced_packet_rows
+    assert result.accepted is False
+E   AssertionError: assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-exter...uncertainty': 'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}}}, 'evidence_complete': True}).accepted
+_ test_external_validity_gate_refuses_inconsistent_produced_packet_rows[nonboolean-row-acceptance] _
+../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py:376: in test_external_validity_gate_refuses_inconsistent_produced_packet_rows
+    assert result.accepted is False
+E   AssertionError: assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-exter...uncertainty': 'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}}}, 'evidence_complete': True}).accepted
+_ test_external_validity_gate_refuses_inconsistent_produced_packet_rows[contradictory-row-status] _
+../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py:376: in test_external_validity_gate_refuses_inconsistent_produced_packet_rows
+    assert result.accepted is False
+E   AssertionError: assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-exter...uncertainty': 'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}}}, 'evidence_complete': True}).accepted
+_ test_external_validity_gate_refuses_inconsistent_produced_packet_rows[missing-rows] _
+../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py:376: in test_external_validity_gate_refuses_inconsistent_produced_packet_rows
+    assert result.accepted is False
+E   AssertionError: assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-exter...uncertainty': 'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}}}, 'evidence_complete': True}).accepted
+_ test_external_validity_gate_refuses_inconsistent_produced_packet_rows[null-rows] _
+../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py:376: in test_external_validity_gate_refuses_inconsistent_produced_packet_rows
+    assert result.accepted is False
+E   AssertionError: assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-exter...uncertainty': 'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}}}, 'evidence_complete': True}).accepted
+_ test_external_validity_gate_refuses_inconsistent_produced_packet_rows[count-drift] _
+../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py:376: in test_external_validity_gate_refuses_inconsistent_produced_packet_rows
+    assert result.accepted is False
+E   AssertionError: assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-exter...uncertainty': 'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}}}, 'evidence_complete': True}).accepted
+_ test_external_validity_gate_refuses_inconsistent_produced_packet_rows[accepted-count-drift] _
+../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py:376: in test_external_validity_gate_refuses_inconsistent_produced_packet_rows
+    assert result.accepted is False
+E   AssertionError: assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-exter...uncertainty': 'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}}}, 'evidence_complete': True}).accepted
+_ test_external_validity_gate_refuses_inconsistent_produced_packet_rows[score-drift] _
+../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py:376: in test_external_validity_gate_refuses_inconsistent_produced_packet_rows
+    assert result.accepted is False
+E   AssertionError: assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-exter...uncertainty': 'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}}}, 'evidence_complete': True}).accepted
+___ test_external_validity_cli_checks_produced_packet_rows_in_process[True] ____
+../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py:414: in test_external_validity_cli_checks_produced_packet_rows_in_process
+    assert exit_code == int(hidden_failure)
+E   assert 0 == 1
+E    +  where 1 = int(True)
+_ test_benchmark_packet_intake_refuses_inconsistent_declared_digest[source-document] _
+../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:349: in test_benchmark_packet_intake_refuses_inconsistent_declared_digest
+    with pytest.raises(LegalIRExternalBenchmarkError, match="benchmark packet digest"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'>
+_ test_benchmark_packet_intake_refuses_inconsistent_declared_digest[source-text] _
+../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:349: in test_benchmark_packet_intake_refuses_inconsistent_declared_digest
+    with pytest.raises(LegalIRExternalBenchmarkError, match="benchmark packet digest"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'>
+_ test_benchmark_packet_intake_refuses_inconsistent_declared_digest[reference-ir] _
+../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:349: in test_benchmark_packet_intake_refuses_inconsistent_declared_digest
+    with pytest.raises(LegalIRExternalBenchmarkError, match="benchmark packet digest"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'>
+_ test_benchmark_packet_intake_refuses_inconsistent_declared_digest[null-pin] __
+../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:349: in test_benchmark_packet_intake_refuses_inconsistent_declared_digest
+    with pytest.raises(LegalIRExternalBenchmarkError, match="benchmark packet digest"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'>
+_ test_benchmark_packet_intake_refuses_inconsistent_declared_digest[wrong-pin] _
+../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:349: in test_benchmark_packet_intake_refuses_inconsistent_declared_digest
+    with pytest.raises(LegalIRExternalBenchmarkError, match="benchmark packet digest"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'>
+_________ test_benchmark_packet_digest_binds_canonical_loaded_revision _________
+../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:383: in test_benchmark_packet_digest_binds_canonical_loaded_revision
+    with pytest.raises(LegalIRExternalBenchmarkError, match=r"benchmarks[.]jsonl:2: .*packet digest"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'>
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-evidence-compiler-combined-exact5-private-v01/joined-red/junit.xml -
+=========================== short test summary info ============================
+FAILED ../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[True-saved]
+FAILED ../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[True-raw]
+FAILED ../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[True-paired]
+FAILED ../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[True-saved-with-current-labels]
+FAILED ../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_replays_raw_external_evidence_beside_an_accepted_decision
+FAILED ../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_replays_real_external_benchmark_report[True]
+FAILED ../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[hidden-failure]
+FAILED ../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[duplicate-row-identity]
+FAILED ../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[nonboolean-row-acceptance]
+FAILED ../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[contradictory-row-status]
+FAILED ../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[missing-rows]
+FAILED ../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[null-rows]
+FAILED ../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[count-drift]
+FAILED ../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[accepted-count-drift]
+FAILED ../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[score-drift]
+FAILED ../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_cli_checks_produced_packet_rows_in_process[True]
+FAILED ../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_intake_refuses_inconsistent_declared_digest[source-document]
+FAILED ../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_intake_refuses_inconsistent_declared_digest[source-text]
+FAILED ../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_intake_refuses_inconsistent_declared_digest[reference-ir]
+FAILED ../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_intake_refuses_inconsistent_declared_digest[null-pin]
+FAILED ../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_intake_refuses_inconsistent_declared_digest[wrong-pin]
+FAILED ../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_digest_binds_canonical_loaded_revision
+22 failed, 38 passed, 2 deselected in 2.55s
+{"fixture": "fb9a76552e2b938369d93d73a2a25aa76a963101cac96fd487a246bc43c54971", "guard_events": [], "mode": "red", "overlays": [{"actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-evidence-compiler-combined-exact5-private-v01/hammer_leanstral_rollout_gate.py.red.DATA", "module": "scripts.ops.legal_ir.hammer_leanstral_rollout_gate"}, {"actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-evidence-compiler-combined-exact5-private-v01/hammer_leanstral_rollout_gate.py.red.DATA", "module": "scripts.ops.legal_ir.hammer_leanstral_rollout_gate"}, {"actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-evidence-compiler-combined-exact5-private-v01/legal_ir_external_benchmark.py.red.DATA", "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark"}, {"actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-evidence-compiler-combined-exact5-private-v01/isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py", "module": "tests.unit.optimizers.logic_theorem_optimizer.test_external_validity_promotion_gate"}, {"actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-evidence-compiler-combined-exact5-private-v01/hammer_leanstral_rollout_gate.py.red.DATA", "module": "scripts.ops.legal_ir.hammer_leanstral_rollout_gate"}], "pytest_exit": 1, "tests": {"tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py": "097a46cb5fdfdf496f743b2792f8b28ca9cbc4a18597558f1fa7b168b418580a", "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py": "dfbf3ace8d5d0fa5b6e16bacd4c0ffedb80b8d636f29e398299a80e7ceef1a43", "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py": "aaa5f5ade2fe8b6a12516f87924c6879158f07ed594fc609d4866b66f81e8bb2"}}

@@ -1,0 +1,444 @@
+........................................................................ [ 66%]
+.........................FFFFFFFFFFF                                     [100%]
+=================================== FAILURES ===================================
+_ test_assignment_without_example_cannot_authorize_item[manifest-training-train] _
+
+manifest = LegalIRSplitManifest(examples=(LegalIRSplitExample(sample_id='canary-a', content_hash='24b0fbf40329aaf2f721d56dff4f178..._library', 'premise', 'length', 'rare_operator', 'exception', 'cross_reference'), metadata={}, assignment_conflicts={})
+operation = 'training', partition = 'train', serialized = False
+
+    @pytest.mark.parametrize(
+        "operation,partition",
+        (*PRIMARY.items(), (splits.HELDOUT_EVALUATION_OPERATION, "holdout")),
+    )
+    @pytest.mark.parametrize("serialized", [False, True], ids=["manifest", "mapping"])
+    def test_assignment_without_example_cannot_authorize_item(
+        manifest, operation, partition, serialized,
+    ):
+        manifest = replace(
+            manifest,
+            assignments={**manifest.assignments, "assignment-only": partition},
+        )
+        candidate = manifest.to_dict() if serialized else manifest
+        valid_id = f"{partition}-a"
+        assert splits.authorize_legal_ir_split_use(
+            candidate, operation=operation, items=[{"sample_id": valid_id}],
+        ).passed
+>       assert policy_error(candidate, operation, [{
+            "sample_ids": [valid_id, "assignment-only", "assignment-only"],
+            "sample_id": "assignment-only",
+            **source_reference(partition),
+        }]) == ({"reason": "sample_not_in_split_manifest", "sample_id": "assignment-only"},)
+
+after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py:236: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+manifest = LegalIRSplitManifest(examples=(LegalIRSplitExample(sample_id='canary-a', content_hash='24b0fbf40329aaf2f721d56dff4f178..._library', 'premise', 'length', 'rare_operator', 'exception', 'cross_reference'), metadata={}, assignment_conflicts={})
+operation = 'training'
+items = [{'sample_id': 'assignment-only', 'sample_ids': ['train-a', 'assignment-only', 'assignment-only'], 'source_document_id': 'doc-train', 'span_end': 20, ...}]
+
+    def policy_error(manifest, operation, items):
+>       with pytest.raises(splits.LegalIRSplitPolicyError) as caught:
+E       Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_eval_splits.LegalIRSplitPolicyError'>
+
+after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py:68: Failed
+_ test_assignment_without_example_cannot_authorize_item[manifest-hparam_selection-validation] _
+
+manifest = LegalIRSplitManifest(examples=(LegalIRSplitExample(sample_id='canary-a', content_hash='24b0fbf40329aaf2f721d56dff4f178..._library', 'premise', 'length', 'rare_operator', 'exception', 'cross_reference'), metadata={}, assignment_conflicts={})
+operation = 'hparam_selection', partition = 'validation', serialized = False
+
+    @pytest.mark.parametrize(
+        "operation,partition",
+        (*PRIMARY.items(), (splits.HELDOUT_EVALUATION_OPERATION, "holdout")),
+    )
+    @pytest.mark.parametrize("serialized", [False, True], ids=["manifest", "mapping"])
+    def test_assignment_without_example_cannot_authorize_item(
+        manifest, operation, partition, serialized,
+    ):
+        manifest = replace(
+            manifest,
+            assignments={**manifest.assignments, "assignment-only": partition},
+        )
+        candidate = manifest.to_dict() if serialized else manifest
+        valid_id = f"{partition}-a"
+        assert splits.authorize_legal_ir_split_use(
+            candidate, operation=operation, items=[{"sample_id": valid_id}],
+        ).passed
+>       assert policy_error(candidate, operation, [{
+            "sample_ids": [valid_id, "assignment-only", "assignment-only"],
+            "sample_id": "assignment-only",
+            **source_reference(partition),
+        }]) == ({"reason": "sample_not_in_split_manifest", "sample_id": "assignment-only"},)
+
+after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py:236: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+manifest = LegalIRSplitManifest(examples=(LegalIRSplitExample(sample_id='canary-a', content_hash='24b0fbf40329aaf2f721d56dff4f178..._library', 'premise', 'length', 'rare_operator', 'exception', 'cross_reference'), metadata={}, assignment_conflicts={})
+operation = 'hparam_selection'
+items = [{'sample_id': 'assignment-only', 'sample_ids': ['validation-a', 'assignment-only', 'assignment-only'], 'source_document_id': 'doc-validation', 'span_end': 20, ...}]
+
+    def policy_error(manifest, operation, items):
+>       with pytest.raises(splits.LegalIRSplitPolicyError) as caught:
+E       Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_eval_splits.LegalIRSplitPolicyError'>
+
+after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py:68: Failed
+_ test_assignment_without_example_cannot_authorize_item[manifest-representation_promotion-canary] _
+
+manifest = LegalIRSplitManifest(examples=(LegalIRSplitExample(sample_id='canary-a', content_hash='24b0fbf40329aaf2f721d56dff4f178..._library', 'premise', 'length', 'rare_operator', 'exception', 'cross_reference'), metadata={}, assignment_conflicts={})
+operation = 'representation_promotion', partition = 'canary', serialized = False
+
+    @pytest.mark.parametrize(
+        "operation,partition",
+        (*PRIMARY.items(), (splits.HELDOUT_EVALUATION_OPERATION, "holdout")),
+    )
+    @pytest.mark.parametrize("serialized", [False, True], ids=["manifest", "mapping"])
+    def test_assignment_without_example_cannot_authorize_item(
+        manifest, operation, partition, serialized,
+    ):
+        manifest = replace(
+            manifest,
+            assignments={**manifest.assignments, "assignment-only": partition},
+        )
+        candidate = manifest.to_dict() if serialized else manifest
+        valid_id = f"{partition}-a"
+        assert splits.authorize_legal_ir_split_use(
+            candidate, operation=operation, items=[{"sample_id": valid_id}],
+        ).passed
+>       assert policy_error(candidate, operation, [{
+            "sample_ids": [valid_id, "assignment-only", "assignment-only"],
+            "sample_id": "assignment-only",
+            **source_reference(partition),
+        }]) == ({"reason": "sample_not_in_split_manifest", "sample_id": "assignment-only"},)
+
+after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py:236: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+manifest = LegalIRSplitManifest(examples=(LegalIRSplitExample(sample_id='canary-a', content_hash='24b0fbf40329aaf2f721d56dff4f178..._library', 'premise', 'length', 'rare_operator', 'exception', 'cross_reference'), metadata={}, assignment_conflicts={})
+operation = 'representation_promotion'
+items = [{'sample_id': 'assignment-only', 'sample_ids': ['canary-a', 'assignment-only', 'assignment-only'], 'source_document_id': 'doc-canary', 'span_end': 20, ...}]
+
+    def policy_error(manifest, operation, items):
+>       with pytest.raises(splits.LegalIRSplitPolicyError) as caught:
+E       Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_eval_splits.LegalIRSplitPolicyError'>
+
+after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py:68: Failed
+_ test_assignment_without_example_cannot_authorize_item[manifest-codex_todo_projection-train] _
+
+manifest = LegalIRSplitManifest(examples=(LegalIRSplitExample(sample_id='canary-a', content_hash='24b0fbf40329aaf2f721d56dff4f178..._library', 'premise', 'length', 'rare_operator', 'exception', 'cross_reference'), metadata={}, assignment_conflicts={})
+operation = 'codex_todo_projection', partition = 'train', serialized = False
+
+    @pytest.mark.parametrize(
+        "operation,partition",
+        (*PRIMARY.items(), (splits.HELDOUT_EVALUATION_OPERATION, "holdout")),
+    )
+    @pytest.mark.parametrize("serialized", [False, True], ids=["manifest", "mapping"])
+    def test_assignment_without_example_cannot_authorize_item(
+        manifest, operation, partition, serialized,
+    ):
+        manifest = replace(
+            manifest,
+            assignments={**manifest.assignments, "assignment-only": partition},
+        )
+        candidate = manifest.to_dict() if serialized else manifest
+        valid_id = f"{partition}-a"
+        assert splits.authorize_legal_ir_split_use(
+            candidate, operation=operation, items=[{"sample_id": valid_id}],
+        ).passed
+>       assert policy_error(candidate, operation, [{
+            "sample_ids": [valid_id, "assignment-only", "assignment-only"],
+            "sample_id": "assignment-only",
+            **source_reference(partition),
+        }]) == ({"reason": "sample_not_in_split_manifest", "sample_id": "assignment-only"},)
+
+after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py:236: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+manifest = LegalIRSplitManifest(examples=(LegalIRSplitExample(sample_id='canary-a', content_hash='24b0fbf40329aaf2f721d56dff4f178..._library', 'premise', 'length', 'rare_operator', 'exception', 'cross_reference'), metadata={}, assignment_conflicts={})
+operation = 'codex_todo_projection'
+items = [{'sample_id': 'assignment-only', 'sample_ids': ['train-a', 'assignment-only', 'assignment-only'], 'source_document_id': 'doc-train', 'span_end': 20, ...}]
+
+    def policy_error(manifest, operation, items):
+>       with pytest.raises(splits.LegalIRSplitPolicyError) as caught:
+E       Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_eval_splits.LegalIRSplitPolicyError'>
+
+after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py:68: Failed
+_ test_assignment_without_example_cannot_authorize_item[manifest-heldout_evaluation-holdout] _
+
+manifest = LegalIRSplitManifest(examples=(LegalIRSplitExample(sample_id='canary-a', content_hash='24b0fbf40329aaf2f721d56dff4f178..._library', 'premise', 'length', 'rare_operator', 'exception', 'cross_reference'), metadata={}, assignment_conflicts={})
+operation = 'heldout_evaluation', partition = 'holdout', serialized = False
+
+    @pytest.mark.parametrize(
+        "operation,partition",
+        (*PRIMARY.items(), (splits.HELDOUT_EVALUATION_OPERATION, "holdout")),
+    )
+    @pytest.mark.parametrize("serialized", [False, True], ids=["manifest", "mapping"])
+    def test_assignment_without_example_cannot_authorize_item(
+        manifest, operation, partition, serialized,
+    ):
+        manifest = replace(
+            manifest,
+            assignments={**manifest.assignments, "assignment-only": partition},
+        )
+        candidate = manifest.to_dict() if serialized else manifest
+        valid_id = f"{partition}-a"
+        assert splits.authorize_legal_ir_split_use(
+            candidate, operation=operation, items=[{"sample_id": valid_id}],
+        ).passed
+>       assert policy_error(candidate, operation, [{
+            "sample_ids": [valid_id, "assignment-only", "assignment-only"],
+            "sample_id": "assignment-only",
+            **source_reference(partition),
+        }]) == ({"reason": "sample_not_in_split_manifest", "sample_id": "assignment-only"},)
+
+after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py:236: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+manifest = LegalIRSplitManifest(examples=(LegalIRSplitExample(sample_id='canary-a', content_hash='24b0fbf40329aaf2f721d56dff4f178..._library', 'premise', 'length', 'rare_operator', 'exception', 'cross_reference'), metadata={}, assignment_conflicts={})
+operation = 'heldout_evaluation'
+items = [{'sample_id': 'assignment-only', 'sample_ids': ['holdout-a', 'assignment-only', 'assignment-only'], 'source_document_id': 'doc-holdout', 'span_end': 20, ...}]
+
+    def policy_error(manifest, operation, items):
+>       with pytest.raises(splits.LegalIRSplitPolicyError) as caught:
+E       Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_eval_splits.LegalIRSplitPolicyError'>
+
+after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py:68: Failed
+_ test_assignment_without_example_cannot_authorize_item[mapping-training-train] _
+
+manifest = LegalIRSplitManifest(examples=(LegalIRSplitExample(sample_id='canary-a', content_hash='24b0fbf40329aaf2f721d56dff4f178..._library', 'premise', 'length', 'rare_operator', 'exception', 'cross_reference'), metadata={}, assignment_conflicts={})
+operation = 'training', partition = 'train', serialized = True
+
+    @pytest.mark.parametrize(
+        "operation,partition",
+        (*PRIMARY.items(), (splits.HELDOUT_EVALUATION_OPERATION, "holdout")),
+    )
+    @pytest.mark.parametrize("serialized", [False, True], ids=["manifest", "mapping"])
+    def test_assignment_without_example_cannot_authorize_item(
+        manifest, operation, partition, serialized,
+    ):
+        manifest = replace(
+            manifest,
+            assignments={**manifest.assignments, "assignment-only": partition},
+        )
+        candidate = manifest.to_dict() if serialized else manifest
+        valid_id = f"{partition}-a"
+        assert splits.authorize_legal_ir_split_use(
+            candidate, operation=operation, items=[{"sample_id": valid_id}],
+        ).passed
+>       assert policy_error(candidate, operation, [{
+            "sample_ids": [valid_id, "assignment-only", "assignment-only"],
+            "sample_id": "assignment-only",
+            **source_reference(partition),
+        }]) == ({"reason": "sample_not_in_split_manifest", "sample_id": "assignment-only"},)
+
+after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py:236: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+manifest = {'assignment_conflicts': {}, 'assignments': {'assignment-only': 'train', 'canary-a': 'canary', 'canary-b': 'canary', '...tent_hash': '55daaf342c07326fa91c4a8848d5ac2399346bb03198843eebc670fcade26537', 'derivation_kind': '', ...}, ...], ...}
+operation = 'training'
+items = [{'sample_id': 'assignment-only', 'sample_ids': ['train-a', 'assignment-only', 'assignment-only'], 'source_document_id': 'doc-train', 'span_end': 20, ...}]
+
+    def policy_error(manifest, operation, items):
+>       with pytest.raises(splits.LegalIRSplitPolicyError) as caught:
+E       Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_eval_splits.LegalIRSplitPolicyError'>
+
+after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py:68: Failed
+_ test_assignment_without_example_cannot_authorize_item[mapping-hparam_selection-validation] _
+
+manifest = LegalIRSplitManifest(examples=(LegalIRSplitExample(sample_id='canary-a', content_hash='24b0fbf40329aaf2f721d56dff4f178..._library', 'premise', 'length', 'rare_operator', 'exception', 'cross_reference'), metadata={}, assignment_conflicts={})
+operation = 'hparam_selection', partition = 'validation', serialized = True
+
+    @pytest.mark.parametrize(
+        "operation,partition",
+        (*PRIMARY.items(), (splits.HELDOUT_EVALUATION_OPERATION, "holdout")),
+    )
+    @pytest.mark.parametrize("serialized", [False, True], ids=["manifest", "mapping"])
+    def test_assignment_without_example_cannot_authorize_item(
+        manifest, operation, partition, serialized,
+    ):
+        manifest = replace(
+            manifest,
+            assignments={**manifest.assignments, "assignment-only": partition},
+        )
+        candidate = manifest.to_dict() if serialized else manifest
+        valid_id = f"{partition}-a"
+        assert splits.authorize_legal_ir_split_use(
+            candidate, operation=operation, items=[{"sample_id": valid_id}],
+        ).passed
+>       assert policy_error(candidate, operation, [{
+            "sample_ids": [valid_id, "assignment-only", "assignment-only"],
+            "sample_id": "assignment-only",
+            **source_reference(partition),
+        }]) == ({"reason": "sample_not_in_split_manifest", "sample_id": "assignment-only"},)
+
+after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py:236: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+manifest = {'assignment_conflicts': {}, 'assignments': {'assignment-only': 'validation', 'canary-a': 'canary', 'canary-b': 'canar...tent_hash': '55daaf342c07326fa91c4a8848d5ac2399346bb03198843eebc670fcade26537', 'derivation_kind': '', ...}, ...], ...}
+operation = 'hparam_selection'
+items = [{'sample_id': 'assignment-only', 'sample_ids': ['validation-a', 'assignment-only', 'assignment-only'], 'source_document_id': 'doc-validation', 'span_end': 20, ...}]
+
+    def policy_error(manifest, operation, items):
+>       with pytest.raises(splits.LegalIRSplitPolicyError) as caught:
+E       Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_eval_splits.LegalIRSplitPolicyError'>
+
+after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py:68: Failed
+_ test_assignment_without_example_cannot_authorize_item[mapping-representation_promotion-canary] _
+
+manifest = LegalIRSplitManifest(examples=(LegalIRSplitExample(sample_id='canary-a', content_hash='24b0fbf40329aaf2f721d56dff4f178..._library', 'premise', 'length', 'rare_operator', 'exception', 'cross_reference'), metadata={}, assignment_conflicts={})
+operation = 'representation_promotion', partition = 'canary', serialized = True
+
+    @pytest.mark.parametrize(
+        "operation,partition",
+        (*PRIMARY.items(), (splits.HELDOUT_EVALUATION_OPERATION, "holdout")),
+    )
+    @pytest.mark.parametrize("serialized", [False, True], ids=["manifest", "mapping"])
+    def test_assignment_without_example_cannot_authorize_item(
+        manifest, operation, partition, serialized,
+    ):
+        manifest = replace(
+            manifest,
+            assignments={**manifest.assignments, "assignment-only": partition},
+        )
+        candidate = manifest.to_dict() if serialized else manifest
+        valid_id = f"{partition}-a"
+        assert splits.authorize_legal_ir_split_use(
+            candidate, operation=operation, items=[{"sample_id": valid_id}],
+        ).passed
+>       assert policy_error(candidate, operation, [{
+            "sample_ids": [valid_id, "assignment-only", "assignment-only"],
+            "sample_id": "assignment-only",
+            **source_reference(partition),
+        }]) == ({"reason": "sample_not_in_split_manifest", "sample_id": "assignment-only"},)
+
+after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py:236: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+manifest = {'assignment_conflicts': {}, 'assignments': {'assignment-only': 'canary', 'canary-a': 'canary', 'canary-b': 'canary', ...tent_hash': '55daaf342c07326fa91c4a8848d5ac2399346bb03198843eebc670fcade26537', 'derivation_kind': '', ...}, ...], ...}
+operation = 'representation_promotion'
+items = [{'sample_id': 'assignment-only', 'sample_ids': ['canary-a', 'assignment-only', 'assignment-only'], 'source_document_id': 'doc-canary', 'span_end': 20, ...}]
+
+    def policy_error(manifest, operation, items):
+>       with pytest.raises(splits.LegalIRSplitPolicyError) as caught:
+E       Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_eval_splits.LegalIRSplitPolicyError'>
+
+after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py:68: Failed
+_ test_assignment_without_example_cannot_authorize_item[mapping-codex_todo_projection-train] _
+
+manifest = LegalIRSplitManifest(examples=(LegalIRSplitExample(sample_id='canary-a', content_hash='24b0fbf40329aaf2f721d56dff4f178..._library', 'premise', 'length', 'rare_operator', 'exception', 'cross_reference'), metadata={}, assignment_conflicts={})
+operation = 'codex_todo_projection', partition = 'train', serialized = True
+
+    @pytest.mark.parametrize(
+        "operation,partition",
+        (*PRIMARY.items(), (splits.HELDOUT_EVALUATION_OPERATION, "holdout")),
+    )
+    @pytest.mark.parametrize("serialized", [False, True], ids=["manifest", "mapping"])
+    def test_assignment_without_example_cannot_authorize_item(
+        manifest, operation, partition, serialized,
+    ):
+        manifest = replace(
+            manifest,
+            assignments={**manifest.assignments, "assignment-only": partition},
+        )
+        candidate = manifest.to_dict() if serialized else manifest
+        valid_id = f"{partition}-a"
+        assert splits.authorize_legal_ir_split_use(
+            candidate, operation=operation, items=[{"sample_id": valid_id}],
+        ).passed
+>       assert policy_error(candidate, operation, [{
+            "sample_ids": [valid_id, "assignment-only", "assignment-only"],
+            "sample_id": "assignment-only",
+            **source_reference(partition),
+        }]) == ({"reason": "sample_not_in_split_manifest", "sample_id": "assignment-only"},)
+
+after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py:236: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+manifest = {'assignment_conflicts': {}, 'assignments': {'assignment-only': 'train', 'canary-a': 'canary', 'canary-b': 'canary', '...tent_hash': '55daaf342c07326fa91c4a8848d5ac2399346bb03198843eebc670fcade26537', 'derivation_kind': '', ...}, ...], ...}
+operation = 'codex_todo_projection'
+items = [{'sample_id': 'assignment-only', 'sample_ids': ['train-a', 'assignment-only', 'assignment-only'], 'source_document_id': 'doc-train', 'span_end': 20, ...}]
+
+    def policy_error(manifest, operation, items):
+>       with pytest.raises(splits.LegalIRSplitPolicyError) as caught:
+E       Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_eval_splits.LegalIRSplitPolicyError'>
+
+after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py:68: Failed
+_ test_assignment_without_example_cannot_authorize_item[mapping-heldout_evaluation-holdout] _
+
+manifest = LegalIRSplitManifest(examples=(LegalIRSplitExample(sample_id='canary-a', content_hash='24b0fbf40329aaf2f721d56dff4f178..._library', 'premise', 'length', 'rare_operator', 'exception', 'cross_reference'), metadata={}, assignment_conflicts={})
+operation = 'heldout_evaluation', partition = 'holdout', serialized = True
+
+    @pytest.mark.parametrize(
+        "operation,partition",
+        (*PRIMARY.items(), (splits.HELDOUT_EVALUATION_OPERATION, "holdout")),
+    )
+    @pytest.mark.parametrize("serialized", [False, True], ids=["manifest", "mapping"])
+    def test_assignment_without_example_cannot_authorize_item(
+        manifest, operation, partition, serialized,
+    ):
+        manifest = replace(
+            manifest,
+            assignments={**manifest.assignments, "assignment-only": partition},
+        )
+        candidate = manifest.to_dict() if serialized else manifest
+        valid_id = f"{partition}-a"
+        assert splits.authorize_legal_ir_split_use(
+            candidate, operation=operation, items=[{"sample_id": valid_id}],
+        ).passed
+>       assert policy_error(candidate, operation, [{
+            "sample_ids": [valid_id, "assignment-only", "assignment-only"],
+            "sample_id": "assignment-only",
+            **source_reference(partition),
+        }]) == ({"reason": "sample_not_in_split_manifest", "sample_id": "assignment-only"},)
+
+after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py:236: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+manifest = {'assignment_conflicts': {}, 'assignments': {'assignment-only': 'holdout', 'canary-a': 'canary', 'canary-b': 'canary',...tent_hash': '55daaf342c07326fa91c4a8848d5ac2399346bb03198843eebc670fcade26537', 'derivation_kind': '', ...}, ...], ...}
+operation = 'heldout_evaluation'
+items = [{'sample_id': 'assignment-only', 'sample_ids': ['holdout-a', 'assignment-only', 'assignment-only'], 'source_document_id': 'doc-holdout', 'span_end': 20, ...}]
+
+    def policy_error(manifest, operation, items):
+>       with pytest.raises(splits.LegalIRSplitPolicyError) as caught:
+E       Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_eval_splits.LegalIRSplitPolicyError'>
+
+after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py:68: Failed
+_ test_legacy_assignment_only_manifest_retains_manifest_checks_and_diagnostics _
+
+    def test_legacy_assignment_only_manifest_retains_manifest_checks_and_diagnostics():
+        manifest = splits.LegalIRSplitManifest.from_mapping(
+            {"samples_by_split": {"train": ["old-train"], "holdout": ["old-holdout"]}},
+        )
+        assert manifest.examples == ()
+        assert splits.authorize_legal_ir_split_use(manifest, operation="training").passed
+        assert splits.LegalIRSplitManifest.from_mapping(manifest.to_dict()).digest == manifest.digest
+        assert policy_error(manifest, "training", [{"sample_id": "old-holdout"}]) == ({
+            "allowed_splits": ["train"], "operation": "training", "sample_id": "old-holdout",
+            "split": "holdout", "known_example": False,
+        },)
+>       assert policy_error(manifest, "training", [{"sample_id": "old-train"}]) == (
+            {"reason": "sample_not_in_split_manifest", "sample_id": "old-train"},
+        )
+
+after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py:254: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+manifest = LegalIRSplitManifest(examples=(), assignments={'old-holdout': 'holdout', 'old-train': 'train'}, config_digest='', prot..._library', 'premise', 'length', 'rare_operator', 'exception', 'cross_reference'), metadata={}, assignment_conflicts={})
+operation = 'training', items = [{'sample_id': 'old-train'}]
+
+    def policy_error(manifest, operation, items):
+>       with pytest.raises(splits.LegalIRSplitPolicyError) as caught:
+E       Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_eval_splits.LegalIRSplitPolicyError'>
+
+after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py:68: Failed
+=========================== short test summary info ============================
+FAILED after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py::test_assignment_without_example_cannot_authorize_item[manifest-training-train]
+FAILED after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py::test_assignment_without_example_cannot_authorize_item[manifest-hparam_selection-validation]
+FAILED after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py::test_assignment_without_example_cannot_authorize_item[manifest-representation_promotion-canary]
+FAILED after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py::test_assignment_without_example_cannot_authorize_item[manifest-codex_todo_projection-train]
+FAILED after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py::test_assignment_without_example_cannot_authorize_item[manifest-heldout_evaluation-holdout]
+FAILED after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py::test_assignment_without_example_cannot_authorize_item[mapping-training-train]
+FAILED after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py::test_assignment_without_example_cannot_authorize_item[mapping-hparam_selection-validation]
+FAILED after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py::test_assignment_without_example_cannot_authorize_item[mapping-representation_promotion-canary]
+FAILED after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py::test_assignment_without_example_cannot_authorize_item[mapping-codex_todo_projection-train]
+FAILED after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py::test_assignment_without_example_cannot_authorize_item[mapping-heldout_evaluation-holdout]
+FAILED after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py::test_legacy_assignment_only_manifest_retains_manifest_checks_and_diagnostics
+11 failed, 97 passed in 0.20s

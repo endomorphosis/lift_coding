@@ -1,0 +1,30 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.3.4, pluggy-1.6.0
+rootdir: /tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/dataset
+configfile: pytest.ini
+asyncio: mode=Mode.STRICT
+collected 88 items
+
+tests/integration/logic/backends/test_kernel_backends.py ............... [ 17%]
+..................................................................FFF... [ 98%]
+.                                                                        [100%]
+
+=================================== FAILURES ===================================
+_ test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind[rocq] _
+tests/integration/logic/backends/test_kernel_backends.py:2128: in test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind
+    with pytest.raises(LeanKernelError, match="outcome request targets"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.logic.backends.kernel.lean.LeanKernelError'>
+_ test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind[cvc5] _
+tests/integration/logic/backends/test_kernel_backends.py:2128: in test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind
+    with pytest.raises(LeanKernelError, match="outcome request targets"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.logic.backends.kernel.lean.LeanKernelError'>
+_ test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind[lean4-wasm] _
+tests/integration/logic/backends/test_kernel_backends.py:2128: in test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind
+    with pytest.raises(LeanKernelError, match="outcome request targets"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.logic.backends.kernel.lean.LeanKernelError'>
+- generated xml file: /tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/before-current-protocol-v03/result.xml -
+=========================== short test summary info ============================
+FAILED tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind[rocq]
+FAILED tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind[cvc5]
+FAILED tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind[lean4-wasm]
+========================= 3 failed, 85 passed in 2.32s =========================

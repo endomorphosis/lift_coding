@@ -1,0 +1,101 @@
+{
+  "actual_ordered_roster": {
+    "bytes": 22204,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-eight-target-private-joined-pytest-v01-VdZf8Ohx/actual-ordered-131-private-pytest-roster.json",
+    "sha256": "221175374dde325e42e03306628941ac41f0c04f802f91e14ccc97df603f6e87"
+  },
+  "actual_wall_s": 144.9,
+  "counts_by_module": {
+    "test_autoformal_campaign_training_inputs": 10,
+    "test_legal_ir_evaluation_artifacts": 6,
+    "test_legal_ir_split_membership": 110,
+    "test_legal_span_consumer_binding": 5
+  },
+  "duplicates": 0,
+  "dynamic_support_only_correction": {
+    "bytes": 2751,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-eight-target-private-joined-pytest-v01-VdZf8Ohx/closure-only-dynamic-owners-v02.json",
+    "sha256": "4ca06989735f6dd4433f7916a70663a8f2ec127fba02d9c6d4c5f5fda4f1c748"
+  },
+  "errors": 0,
+  "exact_candidate": {
+    "bytes": 13742,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-rich-Unicode-actual-aggregate-V4-private-v01-ZzGJ4bJJ/sealed-existing-split-and-rich-context-eight-targets-v01.json",
+    "sha256": "9ea2b698b477c4a15b6e7aaa78afe24b3d69bf840d92ef480d28047470587524"
+  },
+  "failures": 0,
+  "first_party_current_SDK_or_Source_qualification": false,
+  "first_scoped_run_retained": {
+    "JUnit": {
+      "bytes": 33010,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-eight-target-private-joined-pytest-v01-VdZf8Ohx/private-run.junit.xml",
+      "sha256": "d778008a65efcb939a773becdf8c78b148e318ae211f4bf0f03c85a6daf2e63e"
+    },
+    "collect": {
+      "bytes": 15197,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-eight-target-private-joined-pytest-v01-VdZf8Ohx/collect-v02.stdout.DATA",
+      "sha256": "f8a29b335ce9a12afadfec10efe5922f5a1777a6c10d33c8d7fed86ed7430b11"
+    },
+    "errors": 0,
+    "exit": 1,
+    "failed": 3,
+    "failures": [
+      "test_aggregate_v4_holds_out_unicode_near_duplicate_from_unselected_component[unicode_unrelated]",
+      "test_aggregate_v4_holds_out_unicode_near_duplicate_from_unselected_component[unicode_second_alias]",
+      "test_aggregate_v4_actual_evaluator_dispatches_both_complete_components_and_definitions"
+    ],
+    "missing_dynamic_alignment_owner": true,
+    "pass": 128,
+    "run": {
+      "bytes": 6979,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-eight-target-private-joined-pytest-v01-VdZf8Ohx/run.stdout.DATA",
+      "sha256": "0063bc1c20658ac416efb853e6c8f718f9a0315ced113c92807bd550987f6267"
+    },
+    "skips": 0
+  },
+  "inputs_and_support": {
+    "bytes": 4641,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-eight-target-private-joined-pytest-v01-VdZf8Ohx/stage-inputs-v03.json",
+    "sha256": "d4e064a9a2d9a2e5ef9045bc4eb3cdd551ff101207904b275f1f1278113551ae"
+  },
+  "junit": {
+    "bytes": 27201,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-eight-target-private-joined-pytest-v01-VdZf8Ohx/private-run-v02.junit.xml",
+    "sha256": "b3a9552110d05e55a4f06298ad0ec0b31ef120ac8fa2e7f3adc7c825c3756a99"
+  },
+  "no_model_training_Native_or_canonical_mutation": true,
+  "normal_private_collect": {
+    "bytes": 15197,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-eight-target-private-joined-pytest-v01-VdZf8Ohx/collect-v03.stdout.DATA",
+    "sha256": "f8a29b335ce9a12afadfec10efe5922f5a1777a6c10d33c8d7fed86ed7430b11"
+  },
+  "normal_private_run": {
+    "bytes": 1431,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-eight-target-private-joined-pytest-v01-VdZf8Ohx/run-v02.stdout.DATA",
+    "sha256": "14f2b1dd849a064cb5c225c0a730abda587523db46d3883b6e1fa1221ba62b61"
+  },
+  "pass": 131,
+  "prior_prepare_and_collect_only_attempt": {
+    "no_executed_tests": true,
+    "note": "A manifest setup command called Git incorrectly and continued to collect without selectors. It completed only discovery and returned an import error for a missing supplemental module. The scoped suite ran after adding the exact published module and fail-closing on selector cardinality.",
+    "retained_collect_only": {
+      "bytes": 228792,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-eight-target-private-joined-pytest-v01-VdZf8Ohx/collect.stdout.DATA",
+      "sha256": "57cae0e9200671479d25673b4899d79e909f5ab72955329304557293c9436ac5"
+    }
+  },
+  "schema": "phase4-5-eight-target-existing-private-standard-pytest-131/v2",
+  "scope": "Private copy of historical support with exact candidate eight and 19 support additions joined to published Git blobs. Standard pytest collection and tests with retained pytest.ini/conftests; not current checkout or Source/SDK qualification.",
+  "selectors": {
+    "bytes": 1902,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-eight-target-private-joined-pytest-v01-VdZf8Ohx/selectors.txt",
+    "sha256": "09fa9ca7f380df98785249e3ff62eb2d453f157672860e7926cd736857000627"
+  },
+  "single_logical_CPU": true,
+  "skipped": 0,
+  "stderr": {
+    "bytes": 0,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-eight-target-private-joined-pytest-v01-VdZf8Ohx/run-v02.stderr.DATA",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

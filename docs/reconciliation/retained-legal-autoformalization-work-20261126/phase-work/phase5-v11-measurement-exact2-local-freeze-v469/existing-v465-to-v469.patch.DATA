@@ -1,0 +1,105 @@
+--- /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-canonical-predicate-boundary-exact2-local-freeze-v465/freeze-exact-P6-canonical-predicate-boundary-v465.py
++++ /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase5-v11-measurement-exact2-local-freeze-v469/freeze-exact-P5-v11-measurement-v469.py
+@@ -1,4 +1,4 @@
+-"""Freeze the two installed Phase6 canonical predicate-boundary files locally."""
++"""Freeze the two installed Phase5 v11 saved-evaluation measurement-join files locally."""
+ import hashlib
+ import json
+ import os
+@@ -9,10 +9,10 @@
+ 
+ coord = Path(__file__).resolve().parents[1]
+ repos = coord.parents[1] / "repositories"
+-output = coord / "actual-Phase6-canonical-predicate-boundary-exact2-local-freeze-v465.json"
++output = coord / "actual-Phase5-v11-measurement-exact2-local-freeze-v469.json"
+ assert not output.exists()
+-source_ref = {'path': '/tmp/Root-Phase6-canonical-predicate-boundary-existing-Source2-v465-SKcxsPxo/actual-Phase6-canonical-predicate-boundary-exact2-Source-closed-small-v465.json', 'bytes': 10803, 'sha256': 'ea763d9818129be481886b20079669663c27873282afb3acc71c73032527dfd8'}
+-expected = {'ipfs_datasets_py/logic/legal_ir/canonical_decompiler.py': 'fb2c1aa16092e85da6a8462a608736b100474fa5', 'tests/unit/logic/legal_ir/test_canonical_decompiler.py': '6171dffb55ad7ce85c5f533b8739aa096fb23fa8'}
++source_ref = {'path': '/tmp/Root-Phase5-v11-measurement-existing-Source2-v469-ARiRtwOi/actual-Phase5-v11-measurement-exact2-Source-closed-small-v469.json', 'bytes': 10504, 'sha256': '387546cc203efca4bb9b5757ba0beadf115a3b140fc4525497f30ddcffc1b552'}
++expected = {'ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_inference.py': '2ca172903507b0b6ea6d93ab5ebee78c469601cc', 'tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_inference.py': '1667024f9b2c90c1e0d2b13bfdb33724806c36b1'}
+ fields = ("st_dev", "st_ino", "st_mode", "st_nlink", "st_uid", "st_gid",
+           "st_size", "st_mtime_ns", "st_ctime_ns")
+ git_config = (
+@@ -159,7 +159,7 @@
+ assert source["actual_owned_exit_code"]==0 and all(source[k] is True for k in (
+     "Source_closed","module_closed","write_complete",
+ ))
+-assert source["ordinary15"] is None and source["source_root"]==str(repos/"datasets")
++assert source["ordinary50"] is None and source["source_root"]==str(repos/"datasets")
+ assert source["actual"]==source["actual_source_receipt"]
+ actual=json.loads(read_ref(source["actual"]))
+ assert all(actual[k] is True for k in (
+@@ -176,8 +176,8 @@
+ assert all(row["entered"] and row["exit_returned"] for row in actual["Source_contexts"])
+ selection = json.loads(read_ref(source['root_selection']))
+ assert selection['Root_selected'] is True and selection['request'] == source['request']
+-guide = json.loads(read_ref(source['prior_Guide545']))
+-assert guide['terminal_returncode'] == 0 and guide['evidence_ordinal'] == 545
++guide = json.loads(read_ref(source['prior_Guide546']))
++assert guide['terminal_returncode'] == 0 and guide['evidence_ordinal'] == 546
+ assert guide['all_other_paths_and_gitlinks_preserved'] and guide['unpublished_original_A_preserved']
+ companion = json.loads(read_ref(source['clean_published_A_companion']))
+ assert source['clean_published_A_companion'] == guide['clean_A_companion_reference']
+@@ -186,10 +186,24 @@
+ base = {role: item['HEAD'] for role, item in guide['repositories'].items()}
+ assert {row['root'] for row in actual['Source_contexts']} == {companion['root'], str(repos/'datasets')}
+ candidate = json.loads(read_ref(source['candidate']))
+-rows = {r['path']: dict(after_blob=r['after_blob'], before=dict(r['before'], blob=r['before_blob']),
+-        after=r['after'], git_mode='100644') for r in candidate['selected_two'].values()}
++assert source['actual'] == {'path': '/tmp/Root-Phase5-v11-measurement-existing-Source2-v469-ARiRtwOi/actual-output/actual-existing-four-Python-code-CAS-receipt.json', 'bytes': 73024, 'sha256': 'b66c5fcb0637a21c60b4932d76855f46c14dc9d59018c465f0217be1a996e325'}
++assert source['candidate'] == {'path': str(coord/'P5-v11-evaluation-measurement-join-private-sl1z_6si/SEALED-exact-two-V11-evaluation-measurement-private-50.json'), 'bytes': 23440, 'sha256': '60866f179bc0dd848982020891245a213e5fbf37b61d652a06a7c91f01c2b841'}
++assert source['prior_Guide546'] == {'path': str(coord/'actual-guide546-four-doc-three-FF-publication-small-v468.json'), 'bytes': 12765, 'sha256': 'f5604bf0bcc51d3c2d4386a2cf30499af378c2348f44c87d92f58f4a902b0aec'}
++assert len(candidate['files']) == 2
++rows = {r['relative_path']: dict(after_blob=r['after']['proposed_git_blob'],
++        before=dict(r['before'], blob=r['before']['git_blob']), after=r['after'],
++        git_mode=r['git_mode']) for r in candidate['files']}
++assert all(r['git_mode'] == '100644' and r['canonical_path'] == str(repos/'datasets'/r['relative_path']) for r in candidate['files'])
++for installed_row in source['installed']:
++    r = rows[installed_row['relative_path']]
++    assert installed_row['before_Git_blob_oid'] == r['before']['blob']
++    assert installed_row['before_private'] == {k: r['before'][k] for k in ('path','bytes','sha256')}
++    assert installed_row['post_private'] == {k: r['after'][k] for k in ('path','bytes','sha256')}
++    original_mode = next(item['before']['observed_canonical_full9'][2] for item in candidate['files'] if item['relative_path'] == installed_row['relative_path'])
++    assert installed_row['full9']['st_mode'] == original_mode
+ assert {path: r['after_blob'] for path, r in rows.items()} == expected
+-assert candidate['ordinary_qualification'] is None and candidate['source_install'] is None
++assert candidate['scope']['canonical_installation'] is False and candidate['scope']['ordinary_package_qualification'] is False
++assert candidate['scope']['model_runs'] == candidate['scope']['native_runs'] == candidate['scope']['source_operations'] == 0
+ 
+ installed = {row["path"]:row for row in projected}
+ assert set(installed) == {str(repos/"datasets"/path) for path in expected}
+@@ -211,7 +225,7 @@
+     assert snapshot["index"] == guide["index_readback"][repo]["after"], repo
+ prewrite_index=source["frozen_prewrite_D_index"]
+ assert {k:prewrite_index[k] for k in ("path","bytes","sha256","full9")} == parent["index"]
+-assert actual["before_root"]["HEAD"]==actual["after_root"]["HEAD"]==parent["HEAD"]==source["old_head"]=="deb5676aa91210fae596395a65a64f01e02f46ac"
++assert actual["before_root"]["HEAD"]==actual["after_root"]["HEAD"]==parent["HEAD"]==source["old_head"]=="e1ceccbe1aa8b0c002e850bf3e8a4f0bdbf697f7"
+ assert actual["before_root"]["tree"]==actual["after_root"]["tree"]==parent["tree"]
+ assert all(status(repo)==b"" for repo in peers)
+ assert exact(companion["index"]["path"])[1] == companion["index"]
+@@ -258,7 +272,7 @@
+     assert git("datasets","cat-file","blob",blob) == raw_posts[rel]
+     assert exact(repos/"datasets"/rel)[1] == installed[str(repos/"datasets"/rel)]
+ git("datasets","diff","--cached","--check")
+-print(git("datasets","commit","-m","Refuse ambiguous canonical predicate qualifiers").decode(),flush=True)
++print(git("datasets","commit","-m","Bind saved v11 evaluation to measured generation").decode(),flush=True)
+ final = frozen("datasets")
+ assert status("datasets") == b""
+ assert final["local_origin_main_tracking_ref"] == parent["HEAD"]
+@@ -280,12 +294,12 @@
+ assert original_after == original_before
+ assert exact(companion["index"]["path"])[1] == companion["index"]
+ record = {
+-    "schema":"actual-Phase6-canonical-predicate-boundary-exact2-local-only-freeze/v465",
++    "schema":"actual-Phase5-v11-measurement-exact2-local-only-freeze/v469",
+     "source_closed":source_ref,"actual_source_receipt":source["actual"],"private_candidate":source["candidate"],
+-    "prior_Guide545_publication":source["prior_Guide545"],"prewrite_D_index":prewrite_index,
++    "prior_Guide546_publication":source["prior_Guide546"],"prewrite_D_index":prewrite_index,
+     "parent":parent,"frozen":final,"committed":committed,"unchanged_peers":peers,
+-    "local_clean":True,"pushed":False,"ordinary15_run":False,"terminal_returncode":0,
+-    "only_two_D_tree_entries_changed":True,"all_gitlinks_and_Guide545_preserved":True,
++    "local_clean":True,"pushed":False,"ordinary50_run":False,"terminal_returncode":0,
++    "only_two_D_tree_entries_changed":True,"all_gitlinks_and_Guide546_preserved":True,
+     "clean_published_A_companion":source["clean_published_A_companion"],
+     "original_A_preservation":original_A_ref,"original_A_before_and_after_exact":original_after,
+ }

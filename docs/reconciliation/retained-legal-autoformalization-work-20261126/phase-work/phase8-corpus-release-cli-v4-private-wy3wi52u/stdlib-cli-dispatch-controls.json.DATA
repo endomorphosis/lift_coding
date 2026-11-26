@@ -1,0 +1,453 @@
+{
+  "coordination_owner_executed": false,
+  "outcomes": [
+    {
+      "argv": [
+        "validate-closure",
+        "--request",
+        "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase8-corpus-release-cli-v4-private-wy3wi52u/fictional-dispatch-request.DATA",
+        "--request-sha256",
+        "aaa623e2a63aef3837e646a44546d1ccdaa9edfcb35aadc3e34e2dc4b2ee78d1",
+        "--profile",
+        "reviewed-norm-v2-local-replay/v1"
+      ],
+      "case": "reviewed-norm-v2-local-replay/v1",
+      "events": [
+        [
+          "fictional_owner_import",
+          [
+            "MAX_CLOSURE_REQUEST_BYTES",
+            "validate_uscode_release_closure_v1"
+          ]
+        ],
+        [
+          "read",
+          "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase8-corpus-release-cli-v4-private-wy3wi52u/fictional-dispatch-request.DATA",
+          8388608
+        ],
+        [
+          "dispatch",
+          "validate_uscode_release_closure_v1",
+          40,
+          "aaa623e2a63aef3837e646a44546d1ccdaa9edfcb35aadc3e34e2dc4b2ee78d1",
+          "aaa623e2a63aef3837e646a44546d1ccdaa9edfcb35aadc3e34e2dc4b2ee78d1"
+        ]
+      ],
+      "exit": 0,
+      "receipt": {
+        "admitted": false,
+        "closure": {
+          "validator_control": "validate_uscode_release_closure_v1"
+        },
+        "command": "validate-closure",
+        "formalized": false,
+        "proof_verified": false,
+        "schema": "legal-corpus-graph-cli-receipt/v1",
+        "source_authenticity_verified": false,
+        "source_semantics_verified": false,
+        "status": "success",
+        "validation_scope": "selected-component-local-replay-not-release-admission",
+        "view": "candidate"
+      }
+    },
+    {
+      "argv": [
+        "validate-closure",
+        "--request",
+        "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase8-corpus-release-cli-v4-private-wy3wi52u/fictional-dispatch-request.DATA",
+        "--request-sha256",
+        "aaa623e2a63aef3837e646a44546d1ccdaa9edfcb35aadc3e34e2dc4b2ee78d1",
+        "--profile",
+        "reviewed-norm-v2-physical-three-cache-replay/v1"
+      ],
+      "case": "reviewed-norm-v2-physical-three-cache-replay/v1",
+      "events": [
+        [
+          "fictional_owner_import",
+          [
+            "MAX_CLOSURE_REQUEST_BYTES",
+            "validate_uscode_release_closure_v1"
+          ]
+        ],
+        [
+          "read",
+          "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase8-corpus-release-cli-v4-private-wy3wi52u/fictional-dispatch-request.DATA",
+          8388608
+        ],
+        [
+          "fictional_owner_import",
+          [
+            "validate_uscode_release_closure_v2"
+          ]
+        ],
+        [
+          "dispatch",
+          "validate_uscode_release_closure_v2",
+          40,
+          "aaa623e2a63aef3837e646a44546d1ccdaa9edfcb35aadc3e34e2dc4b2ee78d1",
+          "aaa623e2a63aef3837e646a44546d1ccdaa9edfcb35aadc3e34e2dc4b2ee78d1"
+        ]
+      ],
+      "exit": 0,
+      "receipt": {
+        "admitted": false,
+        "closure": {
+          "validator_control": "validate_uscode_release_closure_v2"
+        },
+        "command": "validate-closure",
+        "formalized": false,
+        "proof_verified": false,
+        "schema": "legal-corpus-graph-cli-receipt/v1",
+        "source_authenticity_verified": false,
+        "source_semantics_verified": false,
+        "status": "success",
+        "validation_scope": "selected-component-local-replay-not-release-admission",
+        "view": "candidate"
+      }
+    },
+    {
+      "argv": [
+        "validate-closure",
+        "--request",
+        "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase8-corpus-release-cli-v4-private-wy3wi52u/fictional-dispatch-request.DATA",
+        "--request-sha256",
+        "aaa623e2a63aef3837e646a44546d1ccdaa9edfcb35aadc3e34e2dc4b2ee78d1",
+        "--profile",
+        "reviewed-norm-v3-physical-three-cache-replay/v1"
+      ],
+      "case": "reviewed-norm-v3-physical-three-cache-replay/v1",
+      "events": [
+        [
+          "fictional_owner_import",
+          [
+            "MAX_CLOSURE_REQUEST_BYTES",
+            "validate_uscode_release_closure_v1"
+          ]
+        ],
+        [
+          "read",
+          "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase8-corpus-release-cli-v4-private-wy3wi52u/fictional-dispatch-request.DATA",
+          8388608
+        ],
+        [
+          "fictional_owner_import",
+          [
+            "validate_uscode_release_closure_v3"
+          ]
+        ],
+        [
+          "dispatch",
+          "validate_uscode_release_closure_v3",
+          40,
+          "aaa623e2a63aef3837e646a44546d1ccdaa9edfcb35aadc3e34e2dc4b2ee78d1",
+          "aaa623e2a63aef3837e646a44546d1ccdaa9edfcb35aadc3e34e2dc4b2ee78d1"
+        ]
+      ],
+      "exit": 0,
+      "receipt": {
+        "admitted": false,
+        "closure": {
+          "validator_control": "validate_uscode_release_closure_v3"
+        },
+        "command": "validate-closure",
+        "formalized": false,
+        "proof_verified": false,
+        "schema": "legal-corpus-graph-cli-receipt/v1",
+        "source_authenticity_verified": false,
+        "source_semantics_verified": false,
+        "status": "success",
+        "validation_scope": "selected-component-local-replay-not-release-admission",
+        "view": "candidate"
+      }
+    },
+    {
+      "argv": [
+        "validate-closure",
+        "--request",
+        "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase8-corpus-release-cli-v4-private-wy3wi52u/fictional-dispatch-request.DATA",
+        "--request-sha256",
+        "aaa623e2a63aef3837e646a44546d1ccdaa9edfcb35aadc3e34e2dc4b2ee78d1",
+        "--profile",
+        "reviewed-norm-v3-direct"
+      ],
+      "case": "reviewed-norm-v3-direct",
+      "events": [
+        [
+          "fictional_owner_import",
+          [
+            "MAX_CLOSURE_REQUEST_BYTES",
+            "validate_uscode_release_closure_v1"
+          ]
+        ],
+        [
+          "fictional_owner_import",
+          [
+            "MAX_CLOSURE_REQUEST_BYTES_V3"
+          ]
+        ],
+        [
+          "read",
+          "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase8-corpus-release-cli-v4-private-wy3wi52u/fictional-dispatch-request.DATA",
+          67108864
+        ],
+        [
+          "fictional_owner_import",
+          [
+            "validate_uscode_release_closure_direct_v3"
+          ]
+        ],
+        [
+          "dispatch",
+          "validate_uscode_release_closure_direct_v3",
+          40,
+          "aaa623e2a63aef3837e646a44546d1ccdaa9edfcb35aadc3e34e2dc4b2ee78d1",
+          "aaa623e2a63aef3837e646a44546d1ccdaa9edfcb35aadc3e34e2dc4b2ee78d1"
+        ]
+      ],
+      "exit": 0,
+      "receipt": {
+        "admitted": false,
+        "closure": {
+          "validator_control": "validate_uscode_release_closure_direct_v3"
+        },
+        "command": "validate-closure",
+        "formalized": false,
+        "proof_verified": false,
+        "schema": "legal-corpus-graph-cli-receipt/v1",
+        "source_authenticity_verified": false,
+        "source_semantics_verified": false,
+        "status": "success",
+        "validation_scope": "selected-component-local-replay-not-release-admission",
+        "view": "candidate"
+      }
+    },
+    {
+      "argv": [
+        "validate-closure",
+        "--request",
+        "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase8-corpus-release-cli-v4-private-wy3wi52u/fictional-dispatch-request.DATA",
+        "--request-sha256",
+        "aaa623e2a63aef3837e646a44546d1ccdaa9edfcb35aadc3e34e2dc4b2ee78d1",
+        "--profile",
+        "reviewed-source-use-whole-norm-physical-source-replay/v1"
+      ],
+      "case": "reviewed-source-use-whole-norm-physical-source-replay/v1",
+      "events": [
+        [
+          "fictional_owner_import",
+          [
+            "MAX_CLOSURE_REQUEST_BYTES",
+            "validate_uscode_release_closure_v1"
+          ]
+        ],
+        [
+          "fictional_owner_import",
+          [
+            "MAX_CLOSURE_REQUEST_BYTES_V3"
+          ]
+        ],
+        [
+          "read",
+          "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase8-corpus-release-cli-v4-private-wy3wi52u/fictional-dispatch-request.DATA",
+          67108864
+        ],
+        [
+          "fictional_owner_import",
+          [
+            "validate_uscode_release_closure_v4"
+          ]
+        ],
+        [
+          "dispatch",
+          "validate_uscode_release_closure_v4",
+          40,
+          "aaa623e2a63aef3837e646a44546d1ccdaa9edfcb35aadc3e34e2dc4b2ee78d1",
+          "aaa623e2a63aef3837e646a44546d1ccdaa9edfcb35aadc3e34e2dc4b2ee78d1"
+        ]
+      ],
+      "exit": 0,
+      "receipt": {
+        "admitted": false,
+        "closure": {
+          "validator_control": "validate_uscode_release_closure_v4"
+        },
+        "command": "validate-closure",
+        "formalized": false,
+        "proof_verified": false,
+        "schema": "legal-corpus-graph-cli-receipt/v1",
+        "source_authenticity_verified": false,
+        "source_semantics_verified": false,
+        "status": "success",
+        "validation_scope": "selected-component-local-replay-not-release-admission",
+        "view": "candidate"
+      }
+    },
+    {
+      "argv": [
+        "validate-closure",
+        "--request",
+        "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase8-corpus-release-cli-v4-private-wy3wi52u/fictional-dispatch-request.DATA",
+        "--request-sha256",
+        "aaa623e2a63aef3837e646a44546d1ccdaa9edfcb35aadc3e34e2dc4b2ee78d1"
+      ],
+      "case": "legacy-default",
+      "events": [
+        [
+          "fictional_owner_import",
+          [
+            "MAX_CLOSURE_REQUEST_BYTES",
+            "validate_uscode_release_closure_v1"
+          ]
+        ],
+        [
+          "read",
+          "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase8-corpus-release-cli-v4-private-wy3wi52u/fictional-dispatch-request.DATA",
+          8388608
+        ],
+        [
+          "dispatch",
+          "validate_uscode_release_closure_v1",
+          40,
+          "aaa623e2a63aef3837e646a44546d1ccdaa9edfcb35aadc3e34e2dc4b2ee78d1",
+          "aaa623e2a63aef3837e646a44546d1ccdaa9edfcb35aadc3e34e2dc4b2ee78d1"
+        ]
+      ],
+      "exit": 0,
+      "receipt": {
+        "admitted": false,
+        "closure": {
+          "validator_control": "validate_uscode_release_closure_v1"
+        },
+        "command": "validate-closure",
+        "formalized": false,
+        "proof_verified": false,
+        "schema": "legal-corpus-graph-cli-receipt/v1",
+        "source_authenticity_verified": false,
+        "source_semantics_verified": false,
+        "status": "success",
+        "validation_scope": "selected-component-local-replay-not-release-admission",
+        "view": "candidate"
+      }
+    },
+    {
+      "argv": [
+        "validate-closure",
+        "--help"
+      ],
+      "case": "help",
+      "events": [],
+      "exit": 0,
+      "receipt": {
+        "admitted": false,
+        "command": "validate-closure",
+        "default_profile": "reviewed-norm-v2-local-replay/v1",
+        "formalized": false,
+        "proof_verified": false,
+        "schema": "legal-corpus-graph-cli-receipt/v1",
+        "source_authenticity_verified": false,
+        "source_semantics_verified": false,
+        "status": "help",
+        "supported_profiles": [
+          "reviewed-norm-v2-local-replay/v1",
+          "reviewed-norm-v2-physical-three-cache-replay/v1",
+          "reviewed-norm-v3-physical-three-cache-replay/v1",
+          "reviewed-norm-v3-direct",
+          "reviewed-source-use-whole-norm-physical-source-replay/v1"
+        ],
+        "usage": [
+          "validate-closure --request PATH --request-sha256 SHA"
+        ],
+        "view": "candidate"
+      }
+    },
+    {
+      "argv": [
+        "validate-closure",
+        "--request",
+        "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase8-corpus-release-cli-v4-private-wy3wi52u/fictional-dispatch-request.DATA",
+        "--request-sha256",
+        "aaa623e2a63aef3837e646a44546d1ccdaa9edfcb35aadc3e34e2dc4b2ee78d1",
+        "--profile",
+        "fixture-unsupported/v999"
+      ],
+      "case": "unrecognized-profile",
+      "events": [],
+      "exit": 1,
+      "receipt": {
+        "admitted": false,
+        "command": null,
+        "error": "argument --profile: invalid choice: 'fixture-unsupported/v999' (choose from 'reviewed-norm-v2-local-replay/v1', 'reviewed-norm-v2-physical-three-cache-replay/v1', 'reviewed-norm-v3-physical-three-cache-replay/v1', 'reviewed-norm-v3-direct', 'reviewed-source-use-whole-norm-physical-source-replay/v1')",
+        "error_type": "CLIError",
+        "formalized": false,
+        "proof_verified": false,
+        "schema": "legal-corpus-graph-cli-receipt/v1",
+        "source_authenticity_verified": false,
+        "source_semantics_verified": false,
+        "status": "error",
+        "view": "candidate"
+      }
+    },
+    {
+      "argv": [
+        "validate-closure",
+        "--request",
+        "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase8-corpus-release-cli-v4-private-wy3wi52u/fictional-rejected-dispatch-request.DATA",
+        "--request-sha256",
+        "d38a8934ab834ecb1e39efad5ab61939d800b14877ffbbae9a58e2c582206db1",
+        "--profile",
+        "reviewed-source-use-whole-norm-physical-source-replay/v1"
+      ],
+      "case": "fictional-owner-refusal-no-fallback",
+      "events": [
+        [
+          "fictional_owner_import",
+          [
+            "MAX_CLOSURE_REQUEST_BYTES",
+            "validate_uscode_release_closure_v1"
+          ]
+        ],
+        [
+          "fictional_owner_import",
+          [
+            "MAX_CLOSURE_REQUEST_BYTES_V3"
+          ]
+        ],
+        [
+          "read",
+          "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase8-corpus-release-cli-v4-private-wy3wi52u/fictional-rejected-dispatch-request.DATA",
+          67108864
+        ],
+        [
+          "fictional_owner_import",
+          [
+            "validate_uscode_release_closure_v4"
+          ]
+        ],
+        [
+          "dispatch",
+          "validate_uscode_release_closure_v4",
+          49,
+          "d38a8934ab834ecb1e39efad5ab61939d800b14877ffbbae9a58e2c582206db1",
+          "d38a8934ab834ecb1e39efad5ab61939d800b14877ffbbae9a58e2c582206db1"
+        ]
+      ],
+      "exit": 1,
+      "receipt": {
+        "admitted": false,
+        "command": "validate-closure",
+        "error": "fictional owner rejection sentinel",
+        "error_type": "ValueError",
+        "formalized": false,
+        "proof_verified": false,
+        "schema": "legal-corpus-graph-cli-receipt/v1",
+        "source_authenticity_verified": false,
+        "source_semantics_verified": false,
+        "status": "error",
+        "view": "candidate"
+      }
+    }
+  ],
+  "passing_controls": 9,
+  "project_execution": false,
+  "scope": "exact CLI body, real bounded local file read, fictional owner callbacks only"
+}

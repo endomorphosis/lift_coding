@@ -1,0 +1,46 @@
+{
+  "Source_WRITE_closed": true,
+  "source_lease": {
+    "canonical_root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+    "mode": "write",
+    "lock_path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/workspace/control-plane/source-leases/source.lock",
+    "waited_seconds": 3.424100577831268e-05,
+    "schema_version": "autoencoder-source-lease/v1",
+    "cooperative": true
+  },
+  "changed": [
+    "ipfs_datasets_py/logic/autoformal/supervisor_loop.py",
+    "scripts/ops/legal_ir/run_autoformal_supervisor.py",
+    "tests/unit/logic/test_supervisor_agent_turn_recovery.py",
+    "ipfs_datasets_py/logic/autoformal/docs/OPERATIONS.md",
+    "ipfs_datasets_py/logic/autoformal/README.md",
+    "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md"
+  ],
+  "candidate_hashes": {
+    "ipfs_datasets_py/logic/autoformal/supervisor_loop.py": {
+      "bytes": 292364,
+      "sha256": "ddccaf94d76ca505655a9cdac90a048f695f133e042e87f4e61cbc62bad37a2c"
+    },
+    "scripts/ops/legal_ir/run_autoformal_supervisor.py": {
+      "bytes": 279677,
+      "sha256": "d2d1ede812fb6ce8a1c656726d276b1ae681f5695d61269700ecbd798cf6cadf"
+    },
+    "tests/unit/logic/test_supervisor_agent_turn_recovery.py": {
+      "bytes": 66930,
+      "sha256": "355f8090bcce236e738989df1c952fd8509faea70806029d65d6c0eab99aeaed"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/OPERATIONS.md": {
+      "bytes": 112988,
+      "sha256": "539918df9724f105c458135c5470a91dd839ba7ae57dce62ea20a583ba471275"
+    },
+    "ipfs_datasets_py/logic/autoformal/README.md": {
+      "bytes": 49957,
+      "sha256": "29a2e3e6c1267e4159f4798d436510695df01b596af93bd0282a3e9dc34da869"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md": {
+      "bytes": 1089077,
+      "sha256": "ed91c92c749f9b3f041bdfb028e5303b94e036ce97d7c8a4fd3e4f2ec916dbd5"
+    }
+  },
+  "tests_not_run_by_write": true
+}

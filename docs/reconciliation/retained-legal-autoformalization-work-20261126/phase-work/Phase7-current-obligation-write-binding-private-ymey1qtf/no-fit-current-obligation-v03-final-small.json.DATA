@@ -1,0 +1,127 @@
+{
+  "baseline": {
+    "controls": 4,
+    "exit": 1,
+    "failed_expectations": 3,
+    "head": "31da9dcebec20a351a38eeba37990edd37d6421a",
+    "passes": 1,
+    "raw": {
+      "exit.txt": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/no-fit-baseline-attempt01.exit.txt",
+        "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+      },
+      "stderr.txt": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/no-fit-baseline-attempt01.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout.json": {
+        "bytes": 25587,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/no-fit-baseline-attempt01.stdout.json",
+        "sha256": "119008cf68fd0044fc4ec6cdd125a5ee8f43baca7200b4c936cd0194752eb85a"
+      }
+    },
+    "tree": "2276910f876151dbd612893a51909ce20d6ebf49"
+  },
+  "candidate": {
+    "additional_controls_passed": 13,
+    "exit": 0,
+    "failed": 0,
+    "overlay_manifest": {
+      "bytes": 359,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/no-fit-overlay-v03.manifest.json",
+      "sha256": "65d6f989eabcfa2e837ae58b91090e67c27aa353ce071d9f9867cdbca80aa3c3"
+    },
+    "raw": {
+      "exit.txt": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/no-fit-overlay-v03-attempt01.exit.txt",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr.txt": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/no-fit-overlay-v03-attempt01.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout.json": {
+        "bytes": 32803,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/no-fit-overlay-v03-attempt01.stdout.json",
+        "sha256": "f7eb2d9f08326df79fa46a0510cfde9555b8f675c49565afc32eac4364894751"
+      }
+    },
+    "same_four_retained_passed": 4,
+    "total": 17
+  },
+  "compiled_path_join": {
+    "bytes": 13525,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/no-fit-v03-exact-compile-and-overlay-join.json",
+    "sha256": "78e307ff2891c6de9cda57b1c1ac6b95044907d27da4c19524bc54a56280b537"
+  },
+  "effect_scope": {
+    "ablation_overlay_executed": false,
+    "canonical_source_write": false,
+    "git_mutation": false,
+    "legal_or_training_authority": false,
+    "model_fit": false,
+    "network": false,
+    "numerical_weight_update": false,
+    "ordinary_qualification": false,
+    "persistent_weights": false,
+    "real_lean_native": false,
+    "source_lease": false,
+    "sql": false,
+    "state_changed_in_any_control": false,
+    "worker_subprocess": false
+  },
+  "examined_case_roster": [
+    "legacy_matching_unbound",
+    "legacy_same_id_revised_unbound",
+    "legacy_aux_unbound",
+    "historical_legacy_evaluation",
+    "bound_actual_obligation_distinct_id",
+    "bound_raw_wire",
+    "bound_attached_wire",
+    "bound_same_id_revised",
+    "bound_changed_scope",
+    "bound_changed_dependency",
+    "bound_forwards_to_auxiliary_callback",
+    "bound_aux_eligible_no_numeric",
+    "bound_aux_changed_scope",
+    "bound_aux_changed_dependency",
+    "generic_raw_object",
+    "generic_raw_wire",
+    "generic_attached_envelope"
+  ],
+  "guard": {
+    "address_space_bytes": 536870912,
+    "affinity_cpu_count": 1,
+    "attempts_with_audit_or_blocked_import_denials": 0,
+    "cpu_seconds": 25,
+    "explicit_compiled_project_bytes_baseline": 5241122,
+    "explicit_compiled_project_bytes_overlay": 6776075,
+    "kernel_refusal_probes": [
+      "socket",
+      "clone3",
+      "write-open"
+    ],
+    "landlock_abi": 7,
+    "standard_library_permitted_dependency_reads_unmetered": true,
+    "wall_timeout_seconds": 35
+  },
+  "inherited_runner": {
+    "bytes": 15945,
+    "sha256": "6e483bf40c38136befa85f40f04df617d715c9047bc7ad8bb1812c05f1891bdf"
+  },
+  "prior_bypass_receipt": {
+    "bytes": 8077,
+    "sha256": "ecef7ef42a9ef77fc0161ffa27ec52c24c89aad0a9625160b6f70c7eb69bdbff"
+  },
+  "qualification_scope": "This run validates the real current trainer up to its pre-nudge seam, auxiliary eligibility with zero learning rate, generic typed-refusal guard, and one fictional callback forwarding control. The formal obligation generator is genuine; reviewed scope and dependency commitments are authored fictional controls. The three private overlays are not canonically installed.",
+  "runner": {
+    "bytes": 20405,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/no-fit-current-obligation-adapter-v01.py",
+    "sha256": "a84c49de31dd4218043f2f6b9ff1f9ef954291eddde2661b20a580fbbc539bf7"
+  },
+  "schema": "phase7-current-obligation-private-no-fit-red-green/v1"
+}

@@ -1,0 +1,335 @@
+--- Root-selected-bootstrap.py
++++ P1-ordinary68-bootstrap-v386-derived.INERT.py.DATA
+@@ -1,4 +1,4 @@
+-"""INERT frozen-local-D Phase8-external-validity-through-compiler-ordinary62 bootstrap; private adaptation, never qualification."""
++"""INERT frozen-local-D P1-proof-cache-clear-retired-flight-ordinary68 bootstrap; private adaptation, never qualification."""
+ import ast
+ import base64
+ import hashlib
+@@ -10,7 +10,6 @@
+ from pathlib import Path
+ import stat
+ import sys
+-from types import FunctionType
+ import time
+ 
+ def validate_runtime_authority(authority, expected_authority, now_utc_ns):
+@@ -32,36 +31,173 @@
+     if type(now_utc_ns) is not int or not authority['launch_not_before_utc_ns'] <= now_utc_ns < authority['launch_deadline_utc_ns']:
+         raise RuntimeError('Root launch clock outside selected window')
+     return authority
+-ROOT = '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets'
+-ADDITIONAL_A_ROOT = '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate'
+-EXPECTED_MODULES = {'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark': {'bytes': 38313, 'full9': {'st_ctime_ns': '1795644948831831577', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '70042591', 'st_mode': '33204', 'st_mtime_ns': '1795644948504189165', 'st_nlink': '1', 'st_size': '38313', 'st_uid': '1000'}, 'relative_path': 'ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py', 'sha256': '99397ab0476b222e78a74bfb03d69ed85b9518ae9df330c195c6433da5cb5c27', 'scope': 'frozen_local_git_D_source'}, 'scripts.ops.legal_ir.hammer_leanstral_rollout_gate': {'bytes': 221541, 'full9': {'st_ctime_ns': '1795644949133831913', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '70042592', 'st_mode': '33204', 'st_mtime_ns': '1795644948508725634', 'st_nlink': '1', 'st_size': '221541', 'st_uid': '1000'}, 'relative_path': 'scripts/ops/legal_ir/hammer_leanstral_rollout_gate.py', 'sha256': '9785ff320f6ab5b16e9c933d6519cfed5b0abe2b7d9db58a363a782b612b167c', 'scope': 'frozen_local_git_D_source'}, 'tests.unit.optimizers.logic_theorem_optimizer.test_compiler_system_promotion_gate': {'bytes': 16745, 'full9': {'st_ctime_ns': '1795644949426832242', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '70042601', 'st_mode': '33204', 'st_mtime_ns': '1795644948512507846', 'st_nlink': '1', 'st_size': '16745', 'st_uid': '1000'}, 'relative_path': 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py', 'sha256': '097a46cb5fdfdf496f743b2792f8b28ca9cbc4a18597558f1fa7b168b418580a', 'scope': 'frozen_local_git_D_source'}, 'tests.unit.optimizers.logic_theorem_optimizer.test_external_validity_promotion_gate': {'bytes': 15741, 'full9': {'st_ctime_ns': '1795644949735832588', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '70042602', 'st_mode': '33204', 'st_mtime_ns': '1795644948516761483', 'st_nlink': '1', 'st_size': '15741', 'st_uid': '1000'}, 'relative_path': 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py', 'sha256': 'dfbf3ace8d5d0fa5b6e16bacd4c0ffedb80b8d636f29e398299a80e7ceef1a43', 'scope': 'frozen_local_git_D_source'}, 'tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark': {'bytes': 16178, 'full9': {'st_ctime_ns': '1795644950034832923', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '70042603', 'st_mode': '33204', 'st_mtime_ns': '1795644948520369359', 'st_nlink': '1', 'st_size': '16178', 'st_uid': '1000'}, 'relative_path': 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py', 'sha256': 'aaa5f5ade2fe8b6a12516f87924c6879158f07ed594fc609d4866b66f81e8bb2', 'scope': 'frozen_local_git_D_source'}}
+-MAINTAINED_OWNER_NAMES = ['ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark', 'scripts.ops.legal_ir.hammer_leanstral_rollout_gate']
+-SELECTED_TEST_MODULES = {'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py': 'tests.unit.optimizers.logic_theorem_optimizer.test_compiler_system_promotion_gate', 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py': 'tests.unit.optimizers.logic_theorem_optimizer.test_external_validity_promotion_gate', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py': 'tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark'}
+-FUNCTION_SELECTORS = ['tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_accepts_complete_bound_evidence', 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_fails_closed_on_missing_domain', 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_rejects_backend_block_and_conformance_gap', 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_report_renderer_lists_all_domains', 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings', 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_replays_raw_external_evidence_beside_an_accepted_decision', 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_replays_real_external_benchmark_report', 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_accepts_bound_complete_evidence', 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_fails_closed_on_missing_required_packets', 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_rejects_inconsistent_binding_and_metric_regression', 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_recomputes_multi_seed_statistics', 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_report_renderer_lists_all_domains', 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_accepts_consistent_produced_packet_rows', 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows', 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_cli_checks_produced_packet_rows_in_process', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_fixture_loads_versioned_external_expert_packets', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_packets_build_external_test_manifest_and_block_training_use', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_validity_report_is_separate_from_internal_canary_metrics', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_acceptable_ambiguity_allows_expected_family_alternative', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_missing_external_expectations_fail_packet_without_touching_canary_metrics', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_packet_validation_rejects_training_or_poisoned_external_records', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_legacy_candidate_alias_and_absent_reference_keep_existing_scope', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_required_round_trip_needs_observation', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_empty_external_population_has_no_acceptance', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_ambiguous_prediction_order', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_misbound_keyed_prediction', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_conflicting_prediction_aliases', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_duplicate_population_identity', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_predicts_by_each_supported_identity_form', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_requires_current_declared_packet_digest', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_intake_refuses_inconsistent_declared_digest', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_digest_binds_canonical_loaded_revision', 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_cli_writes_decision_and_report', 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_cli_writes_decision_and_report']
+-EXPECTED_FUNCTION_CASE_COUNTS = {'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_accepts_complete_bound_evidence': 1, 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_fails_closed_on_missing_domain': 1, 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_rejects_backend_block_and_conformance_gap': 1, 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_report_renderer_lists_all_domains': 1, 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings': 8, 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_replays_raw_external_evidence_beside_an_accepted_decision': 1, 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_replays_real_external_benchmark_report': 2, 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_accepts_bound_complete_evidence': 1, 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_fails_closed_on_missing_required_packets': 1, 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_rejects_inconsistent_binding_and_metric_regression': 1, 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_recomputes_multi_seed_statistics': 1, 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_report_renderer_lists_all_domains': 1, 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_accepts_consistent_produced_packet_rows': 1, 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows': 9, 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_cli_checks_produced_packet_rows_in_process': 2, 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_fixture_loads_versioned_external_expert_packets': 1, 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_packets_build_external_test_manifest_and_block_training_use': 1, 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_validity_report_is_separate_from_internal_canary_metrics': 1, 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_acceptable_ambiguity_allows_expected_family_alternative': 1, 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_missing_external_expectations_fail_packet_without_touching_canary_metrics': 1, 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_packet_validation_rejects_training_or_poisoned_external_records': 1, 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator': 4, 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_legacy_candidate_alias_and_absent_reference_keep_existing_scope': 1, 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_required_round_trip_needs_observation': 1, 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_empty_external_population_has_no_acceptance': 1, 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_ambiguous_prediction_order': 2, 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_misbound_keyed_prediction': 2, 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_conflicting_prediction_aliases': 2, 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_duplicate_population_identity': 1, 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_predicts_by_each_supported_identity_form': 1, 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_requires_current_declared_packet_digest': 1, 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_intake_refuses_inconsistent_declared_digest': 5, 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_digest_binds_canonical_loaded_revision': 1, 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_cli_writes_decision_and_report': 1, 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_cli_writes_decision_and_report': 1}
+-REQUIRED_CANONICAL_CONFTESTS = ['/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/conftest.py', '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/conftest.py', '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/conftest.py', '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/optimizers/conftest.py', '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/optimizers/logic_theorem_optimizer/conftest.py']
+-PYTEST_INIFILE = '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/pytest.ini'
++ROOT = None
++ADDITIONAL_A_ROOT = None
++EXPECTED_MODULES = None
++MAINTAINED_OWNER_NAMES = ['ipfs_datasets_py.logic.backends.cache_protocol', 'ipfs_datasets_py.logic.common.duckdb_proof_store']
++SELECTED_TEST_MODULES = {'tests/unit/logic/test_duckdb_proof_store.py': 'tests.unit.logic.test_duckdb_proof_store'}
++FUNCTION_SELECTORS = ['tests/unit/logic/test_duckdb_proof_store.py::test_interfaces_schema_and_catalog_are_pinned',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_module_import_is_inert_without_duckdb',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_all_authority_dimensions_are_present_and_nonempty',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_authority_dimensions_cover_hammer_and_verification_surfaces',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_hammer_key_projection_retains_authority_dimensions',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_verification_cache_key_lift_retains_all_dimensions',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_outcome_kinds_are_closed_and_distinct',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_proof_and_counterexample_entries_are_not_interchangeable',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_unknown_and_error_entries_remain_distinct',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_mismatched_outcome_and_status_rejected',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_entry_integrity_round_trip_and_tamper_rejection',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_unknown_key_fields_fail_closed',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_unknown_entry_fields_fail_closed',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_unsupported_key_schema_fails_closed',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_store_lookup_exact_key_miss_on_dimension_change',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_store_rejects_tampered_in_memory_entry',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_unified_key_must_project_to_matching_verification_key',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_trust_levels_project_from_evidence_authority',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_trust_cannot_exceed_evidence_authority',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_evidence_and_envelope_round_trip',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_envelope_rejects_filesystem_path_authority',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_access_statistics_track_hits_misses_writes',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_store_implements_verification_cache_put_get',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_verification_cache_entry_can_be_put_directly',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_exact_verification_cache_interop_bridge',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_invalidate_and_clear',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_get_or_compute_single_flight_and_store',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_clear_discards_pending_single_flight_result',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_clear_preserves_replacement_flight',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_negative_ttl_expires_unknown_faster_than_proof',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_trust_ceiling_rejects_raise',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_empty_backend_id_rejected',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_premises_digest_changes_with_premise_set',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_advisory_verification_projection_uses_target_status_polarity',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_store_put_retains_advisory_candidate_without_proof_authority']
++EXPECTED_FUNCTION_CASE_COUNTS = {'tests/unit/logic/test_duckdb_proof_store.py::test_interfaces_schema_and_catalog_are_pinned': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_module_import_is_inert_without_duckdb': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_all_authority_dimensions_are_present_and_nonempty': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_authority_dimensions_cover_hammer_and_verification_surfaces': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest': 15,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_hammer_key_projection_retains_authority_dimensions': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_verification_cache_key_lift_retains_all_dimensions': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_outcome_kinds_are_closed_and_distinct': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct': 13,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_proof_and_counterexample_entries_are_not_interchangeable': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_unknown_and_error_entries_remain_distinct': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_mismatched_outcome_and_status_rejected': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_entry_integrity_round_trip_and_tamper_rejection': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_unknown_key_fields_fail_closed': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_unknown_entry_fields_fail_closed': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_unsupported_key_schema_fails_closed': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_store_lookup_exact_key_miss_on_dimension_change': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_store_rejects_tampered_in_memory_entry': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_unified_key_must_project_to_matching_verification_key': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_trust_levels_project_from_evidence_authority': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_trust_cannot_exceed_evidence_authority': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_evidence_and_envelope_round_trip': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_envelope_rejects_filesystem_path_authority': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_access_statistics_track_hits_misses_writes': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_store_implements_verification_cache_put_get': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_verification_cache_entry_can_be_put_directly': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_exact_verification_cache_interop_bridge': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_invalidate_and_clear': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_get_or_compute_single_flight_and_store': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_clear_discards_pending_single_flight_result': 2,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_clear_preserves_replacement_flight': 4,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_negative_ttl_expires_unknown_faster_than_proof': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_trust_ceiling_rejects_raise': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_empty_backend_id_rejected': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_premises_digest_changes_with_premise_set': 1,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_advisory_verification_projection_uses_target_status_polarity': 2,
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_store_put_retains_advisory_candidate_without_proof_authority': 1}
++REQUIRED_CANONICAL_CONFTESTS = None
++PYTEST_INIFILE = None
+ SELECTED_TEST_REWRITE_POLICY = {'schema': 'selected-test-normal-pytest-source-AST-code-observation/v1', 'cache_policy': 'bypass-read-only-for-selected-owning-test', 'rewrite_policy': 'normal-pytest-assertion-rewrite', 'selected_test_binding_names': ['tests.unit.optimizers.logic_theorem_optimizer.test_compiler_system_promotion_gate', 'tests.unit.optimizers.logic_theorem_optimizer.test_external_validity_promotion_gate', 'tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark'], 'unobserved_or_cached_only_route': 'REFUSE', 'required_compile_and_execution_witness': True}
+-ROOT_RUNTIME_SELECTION = {'schema': 'Root-selected-normal-HOME-rescue-launch-authority/v1', 'root_selection': {'path': '/tmp/Root-Phase8-existing-exact5-ordinary62-v386-F1FCg2wr/Root-selected-existing-Phase8-ordinary62.json', 'bytes': 2083, 'sha256': 'dd633139fb0937df44eafbe3ff9e60561f435ed35c92a883b74f91a520f84fa6'}, 'launch_not_before_utc_ns': 1795645260178541255, 'launch_deadline_utc_ns': 1795646100178541255}
+-GIT_CANDIDATE_PROVENANCE = {'HEAD': 'bcd55c0d832c38ff7ed696592dfb6a9a55883b2d', 'actual_closed_Source_READ': {'bytes': 12283, 'path': '/tmp/Root-Phase8-exact-five-posts-and-index-READ6-v385-KTNe1Zfu/actual-output/actual-D27-observed-D-root-initializer-Source-READ-v01-small-closeout.json', 'sha256': '6f833751162940ebd41682bcd651d8ca2167b1adc4dbd88d9ea27e5133bbdff9'}, 'clean_index_provenance_reference': {'bytes': 2691, 'path': '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-evidence-compiler-combined-exact5-private-v01/actual-v385-ordinary62-nonclock-c6m_7ldx/actual-clean-Phase8-D-A-index-and-branch-provenance-v385.json', 'sha256': 'a250c2bbf29e07359325c7ec094ee0e6f302750707d7610e07bbabd0f6990f2a'}, 'clean_worktree_and_index': True, 'local_frozen_Git_metadata_reference': {'bytes': 12909, 'path': '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-P8-exact5-local-freeze-v384.json', 'sha256': '8bf71d763c185363bcfaeb2298a2331a0de866ebe188b693f24f98d3a56f9949'}, 'root': '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets', 'status_sha256': 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855', 'tree': 'bd284d0f540c17433056aa4af72db7b18d1c468e'}
+-ADDITIONAL_A_PROVENANCE = {'HEAD': '190cb69b9035ea210d9af8817fbe76caf890b48f', 'actual_closed_Source_READ': {'bytes': 12283, 'path': '/tmp/Root-Phase8-exact-five-posts-and-index-READ6-v385-KTNe1Zfu/actual-output/actual-D27-observed-D-root-initializer-Source-READ-v01-small-closeout.json', 'sha256': '6f833751162940ebd41682bcd651d8ca2167b1adc4dbd88d9ea27e5133bbdff9'}, 'clean_index_provenance_reference': {'bytes': 2691, 'path': '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-evidence-compiler-combined-exact5-private-v01/actual-v385-ordinary62-nonclock-c6m_7ldx/actual-clean-Phase8-D-A-index-and-branch-provenance-v385.json', 'sha256': 'a250c2bbf29e07359325c7ec094ee0e6f302750707d7610e07bbabd0f6990f2a'}, 'clean_worktree_and_index': True, 'local_frozen_Git_metadata_reference': {'bytes': 12206, 'path': '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-guide530-four-doc-three-FF-publication-small-v382.json', 'sha256': '90002f8a9213922429d3c9b12431bfeafc5e88ad426a2a32738c6df0be82d7a6'}, 'root': '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate', 'status_sha256': 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855', 'tree': 'a60ed4b66f2d828b6e22ace48588fb83c32fc7c6'}
+-BINDING_MANIFEST_REFERENCE = {'path': '/tmp/Root-Phase8-existing-exact5-ordinary62-v386-F1FCg2wr/Root-selected-Phase8-ordinary62-binding-manifest.json', 'bytes': 8172, 'sha256': '82e75461de086a7ddf1d599375b7198e83d74d3ae7f0e345d2b4f5fb5d0947b6'}
+-SOURCE_READ_BINDING_REFERENCE = {'bytes': 3209, 'path': '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-evidence-compiler-combined-exact5-private-v01/actual-v385-ordinary62-nonclock-c6m_7ldx/actual-Phase8-v385-ordinary62-Source-binding-ABI-compact.json', 'sha256': 'd04ffe2940032813bc5173ea4417bda2c62734976537bf30c1ed4d82a89edd34'}
+-ADMITTED_IO_PLAN_REFERENCE = {'path': '/tmp/Root-Phase8-existing-exact5-ordinary62-v386-F1FCg2wr/Root-selected-IO.json', 'bytes': 708, 'sha256': '9efef38079a202efb4e954baf8dba2dbce087dd00bbcef82ac56b57c3293dcd1'}
+-EFFECT_DECISION_REFERENCE = {'path': '/tmp/Root-Phase8-existing-exact5-ordinary62-v386-F1FCg2wr/Root-selected-effect.json', 'bytes': 830, 'sha256': '08d937f16acb571ba5db74ec7042e3843ec5d7bf10a2a0fc6e2847160eac9211'}
+-SOURCE_EPOCH_SHA256 = '98a9590da435c4cee3dae686e08e09a103fc8275a3f8fbcd4194873db0411c68'
+-SOURCE_EPOCH_RECORD_COUNT = 1542
+-EXPECTED_ORDERED_CASE_COUNTS = (1, 1, 1, 1, 8, 1, 2, 1, 1, 1, 1, 1, 1, 9, 2, 1, 1, 1, 1, 1, 1, 4, 1, 1, 1, 2, 2, 2, 1, 1, 1, 5, 1, 1, 1)
+-EXPECTED_CASES = 62
+-LITERAL_EXPECTED_NODEIDS = ['tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_accepts_complete_bound_evidence', 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_fails_closed_on_missing_domain', 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_rejects_backend_block_and_conformance_gap', 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_report_renderer_lists_all_domains', 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[False-saved]', 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[False-raw]', 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[False-paired]', 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[False-saved-with-current-labels]', 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[True-saved]', 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[True-raw]', 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[True-paired]', 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[True-saved-with-current-labels]', 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_replays_raw_external_evidence_beside_an_accepted_decision', 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_replays_real_external_benchmark_report[False]', 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_replays_real_external_benchmark_report[True]', 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_accepts_bound_complete_evidence', 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_fails_closed_on_missing_required_packets', 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_rejects_inconsistent_binding_and_metric_regression', 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_recomputes_multi_seed_statistics', 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_report_renderer_lists_all_domains', 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_accepts_consistent_produced_packet_rows', 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[hidden-failure]', 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[duplicate-row-identity]', 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[nonboolean-row-acceptance]', 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[contradictory-row-status]', 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[missing-rows]', 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[null-rows]', 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[count-drift]', 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[accepted-count-drift]', 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows[score-drift]', 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_cli_checks_produced_packet_rows_in_process[False]', 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_cli_checks_produced_packet_rows_in_process[True]', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_fixture_loads_versioned_external_expert_packets', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_packets_build_external_test_manifest_and_block_training_use', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_validity_report_is_separate_from_internal_canary_metrics', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_acceptable_ambiguity_allows_expected_family_alternative', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_missing_external_expectations_fail_packet_without_touching_canary_metrics', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_packet_validation_rejects_training_or_poisoned_external_records', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator[omitted]', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator[null]', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator[empty]', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator[invalid]', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_legacy_candidate_alias_and_absent_reference_keep_existing_scope', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_required_round_trip_needs_observation', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_empty_external_population_has_no_acceptance', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_ambiguous_prediction_order[accepted-first]', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_ambiguous_prediction_order[accepted-last]', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_misbound_keyed_prediction[packet_id]', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_misbound_keyed_prediction[id]', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_conflicting_prediction_aliases[flat]', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_conflicting_prediction_aliases[sequence]', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_duplicate_population_identity', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_predicts_by_each_supported_identity_form', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_requires_current_declared_packet_digest', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_intake_refuses_inconsistent_declared_digest[source-document]', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_intake_refuses_inconsistent_declared_digest[source-text]', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_intake_refuses_inconsistent_declared_digest[reference-ir]', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_intake_refuses_inconsistent_declared_digest[null-pin]', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_intake_refuses_inconsistent_declared_digest[wrong-pin]', 'tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_digest_binds_canonical_loaded_revision', 'tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_cli_writes_decision_and_report', 'tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_cli_writes_decision_and_report']
+-ROLLOUT_OWNER = 'scripts.ops.legal_ir.hammer_leanstral_rollout_gate'
+-ROLLOUT_EXPORTS = {'tests.unit.optimizers.logic_theorem_optimizer.test_compiler_system_promotion_gate': ['compiler_system_promotion_gate', 'render_compiler_system_promotion_report'], 'tests.unit.optimizers.logic_theorem_optimizer.test_external_validity_promotion_gate': ['external_validity_promotion_gate', 'render_external_validity_report']}
++ROOT_RUNTIME_SELECTION = None
++GIT_CANDIDATE_PROVENANCE = None
++ADDITIONAL_A_PROVENANCE = None
++BINDING_MANIFEST_REFERENCE = None
++SOURCE_READ_BINDING_REFERENCE = None
++ADMITTED_IO_PLAN_REFERENCE = None
++EFFECT_DECISION_REFERENCE = None
++SOURCE_EPOCH_SHA256 = None
++SOURCE_EPOCH_RECORD_COUNT = None
++EXPECTED_ORDERED_CASE_COUNTS = (1, 1, 1, 1, 15, 1, 1, 1, 13, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 4, 1, 1, 1, 1, 2, 1)
++EXPECTED_CASES = 68
++LITERAL_EXPECTED_NODEIDS = ['tests/unit/logic/test_duckdb_proof_store.py::test_interfaces_schema_and_catalog_are_pinned',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_module_import_is_inert_without_duckdb',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_all_authority_dimensions_are_present_and_nonempty',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_authority_dimensions_cover_hammer_and_verification_surfaces',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[ir-override0]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[property_value-override1]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[assumptions-override2]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[selected_premises-override3]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[translator-override4]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[solver_identities-override5]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[toolchain-override6]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[theorem_registry-override7]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[policy-override8]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[resources-override9]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[tree-override10]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[backend_id-override11]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[backend_binary-override12]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[backend_version-override13]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[backend_config-override14]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_hammer_key_projection_retains_authority_dimensions',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_verification_cache_key_lift_retains_all_dimensions',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_outcome_kinds_are_closed_and_distinct',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[proved-proof]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[unsatisfiable-proof]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[attested-proof]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[disproved-counterexample]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[satisfiable-counterexample]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[attack_found-counterexample]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[unknown-unknown]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[candidate-unknown]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[error-error]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[timeout-error]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[malformed-error]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[unavailable-error]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[unsupported-error]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_proof_and_counterexample_entries_are_not_interchangeable',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_unknown_and_error_entries_remain_distinct',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_mismatched_outcome_and_status_rejected',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_entry_integrity_round_trip_and_tamper_rejection',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_unknown_key_fields_fail_closed',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_unknown_entry_fields_fail_closed',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_unsupported_key_schema_fails_closed',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_store_lookup_exact_key_miss_on_dimension_change',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_store_rejects_tampered_in_memory_entry',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_unified_key_must_project_to_matching_verification_key',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_trust_levels_project_from_evidence_authority',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_trust_cannot_exceed_evidence_authority',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_evidence_and_envelope_round_trip',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_envelope_rejects_filesystem_path_authority',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_access_statistics_track_hits_misses_writes',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_store_implements_verification_cache_put_get',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_verification_cache_entry_can_be_put_directly',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_exact_verification_cache_interop_bridge',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_invalidate_and_clear',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_get_or_compute_single_flight_and_store',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_clear_discards_pending_single_flight_result[DuckDBProofStore]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_clear_discards_pending_single_flight_result[ExactVerificationCache]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_clear_preserves_replacement_flight[late-success-DuckDBProofStore]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_clear_preserves_replacement_flight[late-success-ExactVerificationCache]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_clear_preserves_replacement_flight[late-error-DuckDBProofStore]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_clear_preserves_replacement_flight[late-error-ExactVerificationCache]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_negative_ttl_expires_unknown_faster_than_proof',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_trust_ceiling_rejects_raise',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_empty_backend_id_rejected',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_premises_digest_changes_with_premise_set',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_advisory_verification_projection_uses_target_status_polarity[candidate-positive]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_advisory_verification_projection_uses_target_status_polarity[unknown-negative]',
++ 'tests/unit/logic/test_duckdb_proof_store.py::test_store_put_retains_advisory_candidate_without_proof_authority']
+ if any((value is None for value in (ROOT, ADDITIONAL_A_ROOT, EXPECTED_MODULES, MAINTAINED_OWNER_NAMES, SELECTED_TEST_MODULES, FUNCTION_SELECTORS, EXPECTED_FUNCTION_CASE_COUNTS, REQUIRED_CANONICAL_CONFTESTS, PYTEST_INIFILE, SELECTED_TEST_REWRITE_POLICY, ROOT_RUNTIME_SELECTION, GIT_CANDIDATE_PROVENANCE, ADDITIONAL_A_PROVENANCE, BINDING_MANIFEST_REFERENCE, SOURCE_READ_BINDING_REFERENCE, ADMITTED_IO_PLAN_REFERENCE, EFFECT_DECISION_REFERENCE, SOURCE_EPOCH_SHA256, SOURCE_EPOCH_RECORD_COUNT, LITERAL_EXPECTED_NODEIDS))):
+-    raise RuntimeError('INERT Phase8-external-validity-through-compiler-ordinary62: actual roots/pins/full9/Source READ/clock/effect decision remain NULL')
++    raise RuntimeError('INERT P1-proof-cache-clear-retired-flight-ordinary68: actual roots/pins/full9/Source READ/clock/effect decision remain NULL')
+ if not sys.dont_write_bytecode:
+     raise RuntimeError('existing -B/no-bytecode invocation required')
+ if os.environ.get('IPFS_DATASETS_LEGAL_IR_METRIC_DISK_CACHE') != '0' or os.environ.get('IPFS_DATASETS_MODAL_AUTOENCODER_AUTO_CUDA') != '0' or os.environ.get('CUDA_VISIBLE_DEVICES') != '':
+-    raise RuntimeError('Phase8 must preserve disk-cache-off and auto-CUDA-off in the existing owned child')
++    raise RuntimeError('P1 ordinary68 must preserve disk-cache-off and auto-CUDA-off in the existing owned child')
+ workspace = Path(__file__).resolve().parent
+ request = json.loads((workspace / 'request.json').read_bytes())
+ validate_runtime_authority(request.get('runtime_authority'), ROOT_RUNTIME_SELECTION, time.time_ns())
+@@ -73,15 +209,15 @@
+     raise RuntimeError('two distinct real Source READ roots required')
+ phase, operation = (request['phase'], request['operation'])
+ group_name = request['selection_group']
+-if phase != 'frozen-local-D-Phase8-external-validity-through-compiler-ordinary62' or group_name != 'Phase8-external-validity-through-compiler-ordinary62' or operation not in {'collect', 'run'}:
+-    raise RuntimeError('one explicit Phase8-external-validity-through-compiler-ordinary62 phase/group and operation required')
++if phase != 'frozen-local-D-P1-proof-cache-clear-retired-flight-ordinary68' or group_name != 'P1-proof-cache-clear-retired-flight-ordinary68' or operation not in {'collect', 'run'}:
++    raise RuntimeError('one explicit P1-proof-cache-clear-retired-flight-ordinary68 phase/group and operation required')
+ for key, expected in (('git_candidate_provenance', GIT_CANDIDATE_PROVENANCE), ('additional_A_provenance', ADDITIONAL_A_PROVENANCE), ('binding_manifest_reference', BINDING_MANIFEST_REFERENCE), ('source_read_binding_reference', SOURCE_READ_BINDING_REFERENCE), ('admitted_io_plan_reference', ADMITTED_IO_PLAN_REFERENCE), ('effect_decision_reference', EFFECT_DECISION_REFERENCE), ('modules', EXPECTED_MODULES), ('maintained_owner_names', MAINTAINED_OWNER_NAMES), ('selected_test_modules', SELECTED_TEST_MODULES), ('function_selectors', FUNCTION_SELECTORS), ('expected_function_case_counts', EXPECTED_FUNCTION_CASE_COUNTS), ('literal_expected_nodeids', LITERAL_EXPECTED_NODEIDS), ('required_canonical_conftests', REQUIRED_CANONICAL_CONFTESTS), ('pytest_inifile', PYTEST_INIFILE), ('selected_test_rewrite_policy', SELECTED_TEST_REWRITE_POLICY)):
+     if request[key] != expected:
+         raise RuntimeError('closed Root binding differs: ' + key)
+ pytest_inifile = Path(request['pytest_inifile'])
+ if not pytest_inifile.is_absolute() or pytest_inifile.resolve(strict=True) != pytest_inifile or (not pytest_inifile.is_relative_to(root)):
+     raise RuntimeError('exact selected real D pytest configuration required')
+-report = {'schema': 'frozen-local-D-phase2-bridge27-binding/v1', 'phase': phase, 'operation': operation, 'selection_group': group_name, 'qualification_scope': '35 future-bound software functions/62 statically expected cases under frozen local D and additional A READ provenance', 'canonical_application': False, 'frozen_local_D_Git_READ_application': True, 'Source_WRITE_claimed': False, 'external_pretrained_asset_loading_requested': False, 'pretrained_quality_or_convergence_claimed': False, 'execution_granted': False, 'claim_granted': False, 'completion_eligible': False, 'collection_accepted': False, 'pytest_exit_code': None, 'actual_bootstrap_execution': True}
++report = {'schema': 'frozen-local-D-phase2-bridge27-binding/v1', 'phase': phase, 'operation': operation, 'selection_group': group_name, 'qualification_scope': '37 future-bound software functions/68 statically expected cases under frozen local D and additional A READ provenance', 'canonical_application': False, 'frozen_local_D_Git_READ_application': True, 'Source_WRITE_claimed': False, 'external_pretrained_asset_loading_requested': False, 'pretrained_quality_or_convergence_claimed': False, 'execution_granted': False, 'claim_granted': False, 'completion_eligible': False, 'collection_accepted': False, 'pytest_exit_code': None, 'actual_bootstrap_execution': True}
+ for key in ('git_candidate_provenance', 'additional_A_provenance', 'binding_manifest_reference', 'source_read_binding_reference', 'admitted_io_plan_reference', 'effect_decision_reference'):
+     report[key] = request[key]
+ report['pytest_inifile'] = str(pytest_inifile)
+@@ -112,8 +248,8 @@
+     raise RuntimeError('fresh child required; do not replace imported aliases')
+ function_selectors = request['function_selectors']
+ expected_counts = request['expected_function_case_counts']
+-if type(function_selectors) is not list or len(function_selectors) != 35 or len(set(function_selectors)) != 35 or any((type(node) is not str or '::' not in node or '[' in node for node in function_selectors)) or (type(expected_counts) is not dict) or (set(expected_counts) != set(function_selectors)) or any((type(value) is not int for value in expected_counts.values())) or (tuple((expected_counts[node] for node in function_selectors)) != EXPECTED_ORDERED_CASE_COUNTS) or (sum(expected_counts.values()) != EXPECTED_CASES):
+-    raise RuntimeError('exact ordered35-selector case vector/62 required')
++if type(function_selectors) is not list or len(function_selectors) != 37 or len(set(function_selectors)) != 37 or any((type(node) is not str or '::' not in node or '[' in node for node in function_selectors)) or (type(expected_counts) is not dict) or (set(expected_counts) != set(function_selectors)) or any((type(value) is not int for value in expected_counts.values())) or (tuple((expected_counts[node] for node in function_selectors)) != EXPECTED_ORDERED_CASE_COUNTS) or (sum(expected_counts.values()) != EXPECTED_CASES):
++    raise RuntimeError('exact ordered37-selector case vector/68 required')
+ owning_files = request['owning_files']
+ if type(owning_files) is not list or owning_files != list(expected_test_modules) or {node.split('::', 1)[0] for node in function_selectors} != set(owning_files):
+     raise RuntimeError('exact future-bound D owning files required')
+@@ -212,7 +348,6 @@
+ original_source_loader = importlib.machinery.SourceFileLoader.get_code
+ original_meta_path = tuple(sys.meta_path)
+ compiled = {}
+-rollout_code_generations = []
+ 
+ def normal_guarded_source_code(loader, name):
+     path = Path(loader.path).resolve()
+@@ -239,10 +374,6 @@
+             raise RuntimeError('actual Source bytes differ')
+         compiled[str(path)] = row['sha256']
+         code = loader.source_to_code(raw, str(path))
+-        if name == ROLLOUT_OWNER:
+-            if path != bound_paths[ROLLOUT_OWNER]:
+-                raise RuntimeError('rollout owner compiled at a different Source path')
+-            rollout_code_generations.append(code.co_consts)
+         return code
+     return original_source_loader(loader, name)
+ 
+@@ -400,40 +531,6 @@
+ terminal_reports = []
+ rewrite_observer = None
+ 
+-def observe_rollout_test_imports():
+-    # Two maintained test files deliberately reload scripts.*. Keep their
+-    # imported functions coupled to code compiled by the guarded Source loader.
+-    path = str(bound_paths[ROLLOUT_OWNER])
+-    live = sys.modules.get(ROLLOUT_OWNER)
+-    observations = {}
+-    for test, names in ROLLOUT_EXPORTS.items():
+-        generation = None
+-        namespace = None
+-        for name in names:
+-            fn = vars(loaded[test]).get(name)
+-            if type(fn) is not FunctionType or fn.__module__ != ROLLOUT_OWNER:
+-                raise RuntimeError('foreign rollout export in selected test')
+-            scope = fn.__globals__
+-            spec = scope.get('__spec__')
+-            if spec is None or spec.name != ROLLOUT_OWNER or spec.origin != path:
+-                raise RuntimeError('rollout export origin differs from exact Source')
+-            if scope.get('__file__') != path or fn.__code__.co_filename != path:
+-                raise RuntimeError('rollout export path differs from exact Source')
+-            copies = [index for index, constants in enumerate(rollout_code_generations)
+-                      if any(fn.__code__ is constant for constant in constants)]
+-            if len(copies) != 1 or (generation is not None and
+-                    (copies[0] != generation or scope is not namespace)):
+-                raise RuntimeError('test did not retain one guarded rollout source generation')
+-            generation, namespace = copies[0], scope
+-        observations[test] = {'path': path, 'exports': names, 'compiled_SHA256': compiled[path],
+-                              'compile_generation': generation, 'is_current_alias': live is not None and live.__dict__ is namespace}
+-    if len({row['compile_generation'] for row in observations.values()}) != len(ROLLOUT_EXPORTS):
+-        raise RuntimeError('separate fixture imports need distinct guarded code generations')
+-    if sum(row['is_current_alias'] for row in observations.values()) != 1:
+-        raise RuntimeError('live rollout alias differs from observed test imports')
+-    return live, observations
+-
+-
+ class BindingEvidence:
+ 
+     def pytest_collection_finish(self, session):
+@@ -463,7 +560,6 @@
+             raise pytest.UsageError('empty, duplicated, foreign or wrong-count collection')
+         if operation == 'run' and roster != request['actual_collected_roster']:
+             raise pytest.UsageError('RUN roster differs from genuine expanded COLLECT order')
+-        loaded[ROLLOUT_OWNER], report['rollout_fixture_source_imports'] = observe_rollout_test_imports()
+         report['collection_module_bindings'] = audit_modules()
+         report['loaded_bindings'] = audit_modules()
+         actual_conftests = sorted({str(Path(plugin.__file__).resolve()) for _, plugin in session.config.pluginmanager.list_name_plugin() if getattr(plugin, '__file__', None) and Path(plugin.__file__).name == 'conftest.py'})
+@@ -550,8 +646,7 @@
+ importlib.machinery.SourceFileLoader.get_code = normal_guarded_source_code
+ try:
+     for name in maintained_owner_names:
+-        if name != ROLLOUT_OWNER:
+-            loaded[name] = importlib.import_module(name)
++        loaded[name] = importlib.import_module(name)
+     if any((name in sys.modules for name in test_names)):
+         raise RuntimeError('owning tests imported before genuine pytest rewrite observer')
+     import pytest
+@@ -567,11 +662,6 @@
+     code = pytest.main(argv, plugins=[BindingEvidence()])
+     report['pytest_exit_code'] = int(code)
+     report['closing_module_bindings'] = audit_modules()
+-    live, observations = observe_rollout_test_imports()
+-    if live is not loaded[ROLLOUT_OWNER] or observations != report['rollout_fixture_source_imports']:
+-        raise RuntimeError('rollout fixture source imports changed after collection')
+-    report['closing_rollout_fixture_source_imports'] = observations
+-    report['CLI_descendant_compilation_attested'] = False
+     report['closing_configuration_bindings'] = audit_configuration()
+ finally:
+     report['normal_pytest_rewrite_observer_restored'] = True if rewrite_observer is None else rewrite_observer.restore()

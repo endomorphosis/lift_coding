@@ -1,0 +1,202 @@
+{
+  "Git_join": {
+    "bytes": 11166,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/no-fit-ablation-Git-join.json",
+    "sha256": "42ae1dbbabb625f46159d2a02fbc17a4380bd983e2210d1ff582a2ed090c0aa9"
+  },
+  "baseline_head": "31da9dcebec20a351a38eeba37990edd37d6421a",
+  "denied": [],
+  "failed_prior_preflight": [
+    {
+      "bytes": 186,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/abl-baseline.stdout.json",
+      "sha256": "39852bdf3730677a8bcc71605209952ccf9e87a9e63123f9c2708f445956261d"
+    },
+    {
+      "bytes": 1098,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/abl-baseline.stderr.txt",
+      "sha256": "7f3fe08f0ca81af79aaca3b02bc300cc641748b6e4ec1c099a53e4b2c348fde4"
+    },
+    {
+      "bytes": 2,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/abl-baseline.exit.txt",
+      "sha256": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3"
+    },
+    {
+      "bytes": 186,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/abl-overlay.stdout.json",
+      "sha256": "39852bdf3730677a8bcc71605209952ccf9e87a9e63123f9c2708f445956261d"
+    },
+    {
+      "bytes": 1098,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/abl-overlay.stderr.txt",
+      "sha256": "7f3fe08f0ca81af79aaca3b02bc300cc641748b6e4ec1c099a53e4b2c348fde4"
+    },
+    {
+      "bytes": 2,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/abl-overlay.exit.txt",
+      "sha256": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3"
+    }
+  ],
+  "green": [
+    {
+      "case": "typed-object",
+      "expected": "explicit-typed-refusal",
+      "observed": "explicit-typed-refusal",
+      "passed": true
+    },
+    {
+      "case": "typed-wire",
+      "expected": "explicit-typed-refusal",
+      "observed": "explicit-typed-refusal",
+      "passed": true
+    },
+    {
+      "case": "typed-envelope",
+      "expected": "explicit-typed-refusal",
+      "observed": "explicit-typed-refusal",
+      "passed": true
+    },
+    {
+      "case": "ordinary-guidance",
+      "expected": "existing-clone-path",
+      "observed": "existing-clone-path",
+      "passed": true
+    }
+  ],
+  "guard": {
+    "address_space_bytes": 536870912,
+    "cpu_affinity": [
+      0
+    ],
+    "cpu_seconds": 25,
+    "kernel_probes": [
+      "socket",
+      "clone3",
+      "write-open"
+    ],
+    "landlock_abi": 7,
+    "stdout_stderr_each_max_bytes": 131072,
+    "syscall_denylist": [
+      "socket",
+      "socketpair",
+      "connect",
+      "accept",
+      "accept4",
+      "bind",
+      "listen",
+      "clone",
+      "clone3",
+      "execve",
+      "execveat",
+      "io_uring_setup",
+      "io_uring_enter",
+      "io_uring_register",
+      "pidfd_getfd",
+      "ptrace",
+      "process_vm_writev",
+      "setns",
+      "unshare",
+      "mount",
+      "umount2",
+      "truncate",
+      "ftruncate",
+      "fchmod",
+      "fchmodat",
+      "fchmodat2",
+      "fchown",
+      "fchownat",
+      "utimensat",
+      "setxattr",
+      "lsetxattr",
+      "fsetxattr",
+      "removexattr",
+      "lremovexattr",
+      "fremovexattr"
+    ]
+  },
+  "inputs": [
+    {
+      "bytes": 4502,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/no-fit-ablation-atomic-control-v01.py",
+      "sha256": "f42fb6846d2111f2211851c66934f4b4d17d352fc3cebc652327c8b953a5917f"
+    },
+    {
+      "bytes": 63093,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/record.after-v02.DATA",
+      "sha256": "1312c18bca78bc555e9ca7714dd9dcf7509ac92ef30f298fc77b8f67739d2b79"
+    },
+    {
+      "bytes": 41332,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/ablation.before.DATA",
+      "sha256": "4d82c053d90cd30e666b75323fdc5e7eb4b4a613a23e5044a8098a7ecc5e7492"
+    },
+    {
+      "bytes": 41765,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/ablation.after-v02.DATA",
+      "sha256": "01dc8c506d30d3348712d1547e46bf801109818aadab77e94c2ded8188f90bbc"
+    }
+  ],
+  "no_fit": true,
+  "ordinary_qualification": false,
+  "red": [
+    {
+      "case": "typed-object",
+      "expected": "explicit-typed-refusal",
+      "observed": "existing-clone-path",
+      "passed": false
+    },
+    {
+      "case": "typed-wire",
+      "expected": "explicit-typed-refusal",
+      "observed": "existing-clone-path",
+      "passed": false
+    },
+    {
+      "case": "typed-envelope",
+      "expected": "explicit-typed-refusal",
+      "observed": "existing-clone-path",
+      "passed": false
+    },
+    {
+      "case": "ordinary-guidance",
+      "expected": "existing-clone-path",
+      "observed": "existing-clone-path",
+      "passed": true
+    }
+  ],
+  "same_cases": 4,
+  "schema": "private-current-typed-feedback-ablation-no-fit/v1",
+  "trials": [
+    {
+      "bytes": 23235,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/abl-baseline.v02.stdout.json",
+      "sha256": "74c838b1606c1ed4cc450d19a63e77d967a13b2e1b45a14c5aba6ddc53ae6a51"
+    },
+    {
+      "bytes": 0,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/abl-baseline.v02.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/abl-baseline.v02.exit.txt",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "bytes": 24011,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/abl-overlay.v02.stdout.json",
+      "sha256": "14e564346a85b10e7842abcc2c9f9cca9b0c916583f690eb1ecdfdf1cef939c8"
+    },
+    {
+      "bytes": 0,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/abl-overlay.v02.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/abl-overlay.v02.exit.txt",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    }
+  ]
+}

@@ -1,0 +1,280 @@
+diff --git a/ipfs_datasets_py/logic/backends/cache_protocol.py b/ipfs_datasets_py/logic/backends/cache_protocol.py
+--- a/ipfs_datasets_py/logic/backends/cache_protocol.py
++++ b/ipfs_datasets_py/logic/backends/cache_protocol.py
+@@ -775,6 +775,23 @@
+             self._entries.popitem(last=False)
+             self._stats["evictions"] += 1
+ 
++    @staticmethod
++    def _authority_rejection(
++        entry: VerificationCacheEntry | None,
++        required: ResultAuthority | None,
++        ceiling: EvidenceAuthority | None,
++    ) -> CacheLookupReason | None:
++        if required is not None and (entry is None or entry.result_authority is not required):
++            return CacheLookupReason.AUTHORITY_MISMATCH
++        if ceiling is not None:
++            if entry is None:
++                return CacheLookupReason.INSUFFICIENT_AUTHORITY
++            try:
++                entry.require_authority_at_most(ceiling)
++            except VerificationCacheAuthorityError:
++                return CacheLookupReason.INSUFFICIENT_AUTHORITY
++        return None
++
+     def _evaluate_entry(
+         self,
+         entry: VerificationCacheEntry,
+@@ -823,34 +840,20 @@
+                 age_seconds=entry.age_seconds(now=now),
+                 single_flight_shared=single_flight_shared,
+             )
+-        if (
+-            require_result_authority is not None
+-            and entry.result_authority is not require_result_authority
+-        ):
++        rejection = self._authority_rejection(
++            entry, require_result_authority, max_evidence_authority
++        )
++        if rejection is not None:
+             self._stats["rejections"] += 1
+             return VerificationCacheLookup(
+                 entry=entry,
+                 hit=True,
+                 usable=False,
+-                reason=CacheLookupReason.AUTHORITY_MISMATCH,
++                reason=rejection,
+                 key_digest=key.digest,
+                 age_seconds=entry.age_seconds(now=now),
+                 single_flight_shared=single_flight_shared,
+             )
+-        if max_evidence_authority is not None:
+-            try:
+-                entry.require_authority_at_most(max_evidence_authority)
+-            except VerificationCacheAuthorityError:
+-                self._stats["rejections"] += 1
+-                return VerificationCacheLookup(
+-                    entry=entry,
+-                    hit=True,
+-                    usable=False,
+-                    reason=CacheLookupReason.INSUFFICIENT_AUTHORITY,
+-                    key_digest=key.digest,
+-                    age_seconds=entry.age_seconds(now=now),
+-                    single_flight_shared=single_flight_shared,
+-                )
+         reason = (
+             CacheLookupReason.NEGATIVE_HIT
+             if entry.polarity is CachePolarity.NEGATIVE
+@@ -1085,17 +1088,19 @@
+                 if require_result_authority is None
+                 else _result_authority(require_result_authority)
+             )
++            ceiling = (
++                None
++                if max_evidence_authority is None
++                else _evidence_authority(max_evidence_authority)
++            )
+             stored = self.put(entry, now=now)
+             flight.entry = stored.entry
+-            authority_matches = required is None or (
+-                stored.entry is not None and stored.entry.result_authority is required
+-            )
++            rejection = self._authority_rejection(stored.entry, required, ceiling)
+             return VerificationCacheLookup(
+                 entry=stored.entry,
+                 hit=False,
+-                usable=authority_matches,
+-                reason=(CacheLookupReason.STORED if authority_matches
+-                        else CacheLookupReason.AUTHORITY_MISMATCH),
++                usable=rejection is None,
++                reason=rejection or CacheLookupReason.STORED,
+                 key_digest=key.digest,
+                 single_flight_shared=False,
+             )
+diff --git a/ipfs_datasets_py/logic/common/duckdb_proof_store.py b/ipfs_datasets_py/logic/common/duckdb_proof_store.py
+--- a/ipfs_datasets_py/logic/common/duckdb_proof_store.py
++++ b/ipfs_datasets_py/logic/common/duckdb_proof_store.py
+@@ -2097,6 +2097,19 @@
+             vdigest = old_entry.key.to_verification_cache_key().digest
+             self._verification_index.pop(vdigest, None)
+             self._stats["evictions"] += 1
++
++    @staticmethod
++    def _trust_ceiling(
++        max_trust_level: ProofTrustLevel | str | None,
++        max_evidence_authority: EvidenceAuthority | str | None,
++    ) -> ProofTrustLevel | None:
++        if max_trust_level is not None:
++            return _enum(max_trust_level, ProofTrustLevel, "max_trust_level")
++        if max_evidence_authority is not None:
++            return trust_level_from_evidence(
++                _enum(max_evidence_authority, EvidenceAuthority, "max_evidence_authority")
++            )
++        return None
+ 
+     def _evaluate_entry(
+         self,
+@@ -2237,20 +2250,7 @@
+         now: float | None = None,
+     ) -> VerificationCacheLookup:
+         unified = self._resolve_unified_key(key)
+-        ceiling = (
+-            None
+-            if max_trust_level is None
+-            else _enum(max_trust_level, ProofTrustLevel, "max_trust_level")
+-        )
+-        # Map evidence ceiling onto trust when trust ceiling omitted.
+-        if ceiling is None and max_evidence_authority is not None:
+-            ceiling = trust_level_from_evidence(
+-                _enum(
+-                    max_evidence_authority,
+-                    EvidenceAuthority,
+-                    "max_evidence_authority",
+-                )
+-            )
++        ceiling = self._trust_ceiling(max_trust_level, max_evidence_authority)
+         current = time.time() if now is None else float(now)
+         with self._lock:
+             if self._connection is not None:
+@@ -2497,11 +2497,7 @@
+                     reason=CacheLookupReason.SINGLE_FLIGHT_SHARED if result.usable else result.reason,
+                     key_digest=result.key_digest, age_seconds=result.age_seconds, single_flight_shared=True)
+             current = time.time() if now is None else float(now)
+-            ceiling = (
+-                None
+-                if max_trust_level is None
+-                else _enum(max_trust_level, ProofTrustLevel, "max_trust_level")
+-            )
++            ceiling = self._trust_ceiling(max_trust_level, max_evidence_authority)
+             return self._evaluate_entry(
+                 flight.entry,
+                 unified,
+@@ -2539,17 +2535,27 @@
+                 if require_result_authority is None
+                 else _enum(require_result_authority, ResultAuthority, "require_result_authority")
+             )
++            ceiling = self._trust_ceiling(max_trust_level, max_evidence_authority)
++            if ceiling is not None and type(entry) is not UnifiedProofEntry:
++                # Keep the trust check on the same canonical value sent to put.
++                entry = UnifiedProofEntry.from_dict(entry.to_dict())
+             stored = self.put(entry, now=now)
+             flight.entry = self._entries.get(unified.digest)
+-            authority_matches = required is None or (
+-                stored.entry is not None and stored.entry.result_authority is required
+-            )
++            rejection = None
++            if ceiling is not None:
++                try:
++                    entry.require_trust_at_most(ceiling)
++                except DuckDBProofStoreAuthorityError:
++                    rejection = CacheLookupReason.INSUFFICIENT_AUTHORITY
++            if rejection is None and required is not None and (
++                stored.entry is None or stored.entry.result_authority is not required
++            ):
++                rejection = CacheLookupReason.AUTHORITY_MISMATCH
+             return VerificationCacheLookup(
+                 entry=stored.entry,
+                 hit=False,
+-                usable=authority_matches,
+-                reason=(CacheLookupReason.STORED if authority_matches
+-                        else CacheLookupReason.AUTHORITY_MISMATCH),
++                usable=rejection is None,
++                reason=rejection or CacheLookupReason.STORED,
+                 key_digest=unified.digest,
+                 age_seconds=stored.age_seconds,
+             )
+diff --git a/tests/unit/logic/legal_ir/test_proof_cache.py b/tests/unit/logic/legal_ir/test_proof_cache.py
+--- a/tests/unit/logic/legal_ir/test_proof_cache.py
++++ b/tests/unit/logic/legal_ir/test_proof_cache.py
+@@ -1736,3 +1736,91 @@
+     else:
+         assert result.usable
+         assert result.reason is CacheLookupReason.SINGLE_FLIGHT_SHARED
++
++
++def _cache_ceiling_fixture(store_name, ceiling_name):
++    from ipfs_datasets_py.logic.backends.cache_protocol import CacheLookupReason, ExactVerificationCache
++    from ipfs_datasets_py.logic.common.duckdb_proof_migration import (
++        ProofCacheFamily, RawLegacyRecord, normalize_legacy_record,
++    )
++    from ipfs_datasets_py.logic.common.duckdb_proof_store import DuckDBProofStore
++    from ipfs_datasets_py.logic.families.models import EvidenceAuthority
++
++    record, *_ = _bound_record()
++    unified = normalize_legacy_record(
++        RawLegacyRecord(record_index=1, line_number=1, payload=record.to_dict()),
++        family=ProofCacheFamily.LEGAL_IR,
++    ).to_unified_entry(created_at=100.0)
++    entry = unified.to_verification_cache_entry() if store_name == "exact" else unified
++    store_type = ExactVerificationCache if store_name == "exact" else DuckDBProofStore
++    assert entry.evidence_authority is EvidenceAuthority.INDEPENDENTLY_CHECKABLE
++    return store_type(), entry, CacheLookupReason, {ceiling_name: "advisory"}
++
++
++@pytest.mark.parametrize("store_name,ceiling_name", [
++    pytest.param("exact", "max_evidence_authority", id="exact-evidence"),
++    pytest.param("unified", "max_evidence_authority", id="unified-evidence"),
++    pytest.param("unified", "max_trust_level", id="unified-trust"),
++])
++def test_diagnostic_cache_producer_retains_caller_ceiling(store_name, ceiling_name):
++    store, entry, reasons, filters = _cache_ceiling_fixture(store_name, ceiling_name)
++    calls = []
++
++    def produce():
++        calls.append(entry.key.digest)
++        return entry
++
++    computed = store.get_or_compute(entry.key, produce, now=101.0, **filters)
++    later = store.lookup(entry.key, now=101.0, **filters)
++    assert calls == [entry.key.digest]
++    assert later.reason is reasons.INSUFFICIENT_AUTHORITY and not later.usable
++    assert store.get(entry.key, now=101.0).to_dict() == entry.to_dict()
++    assert computed.usable == later.usable
++    assert computed.reason is later.reason
++
++
++@pytest.mark.parametrize("store_name,ceiling_name", [
++    pytest.param("exact", "max_evidence_authority", id="exact-evidence"),
++    pytest.param("unified", "max_evidence_authority", id="unified-evidence"),
++    pytest.param("unified", "max_trust_level", id="unified-trust"),
++])
++def test_diagnostic_cache_waiter_retains_caller_ceiling(monkeypatch, store_name, ceiling_name):
++    from concurrent.futures import ThreadPoolExecutor
++    from threading import Event
++
++    store, entry, reasons, filters = _cache_ceiling_fixture(store_name, ceiling_name)
++    started, release = Event(), Event()
++    waits = []
++
++    def produce():
++        started.set()
++        assert release.wait(timeout=5)
++        return entry
++
++    def unexpected():
++        pytest.fail("the waiting caller became a second producer")
++
++    with ThreadPoolExecutor(max_workers=1) as executor:
++        first = executor.submit(store.get_or_compute, entry.key, produce, now=101.0)
++        try:
++            assert started.wait(timeout=5)
++            with store._lock:
++                event = store._flights[entry.key.digest].event
++            wait = event.wait
++
++            def observed_wait():
++                waits.append(entry.key.digest)
++                release.set()
++                assert wait(timeout=5)
++
++            monkeypatch.setattr(event, "wait", observed_wait)
++            computed = store.get_or_compute(entry.key, unexpected, now=101.0, **filters)
++        finally:
++            release.set()
++        assert first.result(timeout=5).usable
++    assert waits == [entry.key.digest]
++    assert computed.single_flight_shared
++    later = store.lookup(entry.key, now=101.0, **filters)
++    assert later.reason is reasons.INSUFFICIENT_AUTHORITY and not later.usable
++    assert computed.usable == later.usable
++    assert computed.reason is later.reason

@@ -1,0 +1,13 @@
+--- a/ipfs_datasets_py/logic/backends/kernel/lean.py
++++ b/ipfs_datasets_py/logic/backends/kernel/lean.py
+@@ -1294,6 +1294,10 @@
+         diagnostics.append("Lean proof depends on unapproved axioms")
+         return False, axiom_report, bound_diagnostics(diagnostics)
+ 
++    if type(process.returncode) is not int:
++        diagnostics.append("lean produced a non-integer exit status")
++        return False, axiom_report, bound_diagnostics(diagnostics)
++
+     if process.returncode != 0:
+         diagnostics.append(f"lean exited with non-zero status {process.returncode}")
+         return False, axiom_report, bound_diagnostics(diagnostics)

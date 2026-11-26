@@ -1,0 +1,187 @@
+{
+  "baseline": {
+    "bytes": 5078,
+    "full9": {
+      "st_ctime_ns": "1795492078981029329",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68862821",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795492078981029329",
+      "st_nlink": "1",
+      "st_size": "5078",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/gate-handoff-packet-identity-same14-actual-RED-v02.json",
+    "sha256": "a7c86ea054c80d02b85250e14ff0636383e289cc2333e54b71eb8ef40161170e"
+  },
+  "captured_A_HEAD": "de4d5a62b6fac2df61769a6461c2ada97f788208",
+  "effects": {
+    "Source_observations": 0,
+    "canonical_writes": 0,
+    "deployed_or_committed": false,
+    "ordinary_package_or_lane_run": false,
+    "provider_registry_or_authority_changed": false,
+    "task_status_or_claim_changed": false
+  },
+  "engineering_tests": {
+    "errors_after": 0,
+    "existing_unchanged": 9,
+    "failures_after": 0,
+    "new": 5,
+    "parents": 14,
+    "skips_after": 0
+  },
+  "fixture_preparation_note": "v02 explicitly imports its stdlib names for normal owning-file composition; all five class/method ASTs are unchanged from the first RED.",
+  "green": {
+    "bytes": 3767,
+    "full9": {
+      "st_ctime_ns": "1795492079176031218",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68862828",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795492079176031218",
+      "st_nlink": "1",
+      "st_size": "3767",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/gate-handoff-packet-identity-same14-actual-GREEN-v02.json",
+    "sha256": "430e708dc3437522023fe16ba48095cdacce4e373f15f2978d9270109e9fdbcd"
+  },
+  "inverse_checks": {
+    "all_old_owning_test_bytes_exact_prefix": true,
+    "authored_test_assertion_AST_unchanged_from_original_RED": true,
+    "gate_only_new_path_method_and_existing_packet_path_assignment": true,
+    "lane_only_two_packet_path_lookups": true
+  },
+  "limits": {
+    "address_space_bytes": 536870912,
+    "cpu": 1,
+    "cpu_seconds": 60,
+    "wall_seconds": 60
+  },
+  "output_readback_bytes_before_summary": 388398,
+  "private_cached_read_bytes_this_call": 365602,
+  "remaining": "Existing writer guarded adoption and ordinary owning-file/caller qualification; full legal pipeline remains open.",
+  "retained_first_reproduction": {
+    "bytes": 5143,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/gate-handoff-packet-identity-actual-RED-v01.json",
+    "sha256": "fd27ebe21f87ba989663587026f60bdade1c7dda4bf39ba6fc1fd73b27a98285"
+  },
+  "rows": [
+    {
+      "before_bytes": 46019,
+      "before_sha256": "21088a194de7da753a718c25ac0bd276890509b97b02d46bacfff4230e6a1a77",
+      "diff": {
+        "bytes": 1427,
+        "full9": {
+          "st_ctime_ns": "1795492079057030065",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "68862823",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795492079057030065",
+          "st_nlink": "1",
+          "st_size": "1427",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/handoff-identity-gate_recovery.py.diff.DATA",
+        "sha256": "ed82fb33362474ddc30ccaf1cd65da00c5a3d5ec34bfd08a152e1e87167f5e96"
+      },
+      "post": {
+        "bytes": 46540,
+        "full9": {
+          "st_ctime_ns": "1795492079051030007",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "68862822",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795492079051030007",
+          "st_nlink": "1",
+          "st_size": "46540",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/handoff-identity-gate_recovery.py.after.DATA",
+        "sha256": "749cacb40303060b674d71e1f17cea6d39727b1b1fb1ca340a50462e5ba4d580"
+      },
+      "relative_path": "ipfs_accelerate_py/agent_supervisor/rescue/gate_recovery.py"
+    },
+    {
+      "before_bytes": 162702,
+      "before_sha256": "00bf759b8adc52da2838faad75eff5d7ffea5ddb6c9b17b21f67cf87918bf947",
+      "diff": {
+        "bytes": 1391,
+        "full9": {
+          "st_ctime_ns": "1795492079072030210",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "68862825",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795492079072030210",
+          "st_nlink": "1",
+          "st_size": "1391",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/handoff-identity-lane_resume.py.diff.DATA",
+        "sha256": "b52dff5780348fc61d87ad90aa6967fff6a9652a5078e68ca4dc966b0ad45410"
+      },
+      "post": {
+        "bytes": 162648,
+        "full9": {
+          "st_ctime_ns": "1795492079062030114",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "68862824",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795492079062030114",
+          "st_nlink": "1",
+          "st_size": "162648",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/handoff-identity-lane_resume.py.after.DATA",
+        "sha256": "9ed6db0316973f9df45750a1ef3a12b51c3c05ce34acb7487156f4f821c04776"
+      },
+      "relative_path": "ipfs_accelerate_py/agent_supervisor/rescue/lane_resume.py"
+    },
+    {
+      "before_bytes": 151896,
+      "before_sha256": "d34b9d1f07b105deb064a8ede152ed8c32b5e09c8a1e6e5a5d9795c6f4a1baa2",
+      "diff": {
+        "bytes": 5523,
+        "full9": {
+          "st_ctime_ns": "1795492079084030327",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "68862827",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795492079084030327",
+          "st_nlink": "1",
+          "st_size": "5523",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/handoff-identity-test_agent_supervisor_gate_recovery_evidence_refresh.py.diff.DATA",
+        "sha256": "857d8dd1c61f94caf562eec030bb564e95b089c7c647fc18d19a9be3b2ce3ec3"
+      },
+      "post": {
+        "bytes": 156960,
+        "full9": {
+          "st_ctime_ns": "1795492079078030269",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "68862826",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795492079078030269",
+          "st_nlink": "1",
+          "st_size": "156960",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/handoff-identity-test_agent_supervisor_gate_recovery_evidence_refresh.py.after.DATA",
+        "sha256": "09439628656315cc546a40211f526985d75b2b4ef6f9f6d9c95d52609d48c83f"
+      },
+      "relative_path": "test/api/test_agent_supervisor_gate_recovery_evidence_refresh.py"
+    }
+  ],
+  "same_control_AST": true,
+  "schema": "gate-handoff-packet-identity-minimal-private-correction/v1"
+}

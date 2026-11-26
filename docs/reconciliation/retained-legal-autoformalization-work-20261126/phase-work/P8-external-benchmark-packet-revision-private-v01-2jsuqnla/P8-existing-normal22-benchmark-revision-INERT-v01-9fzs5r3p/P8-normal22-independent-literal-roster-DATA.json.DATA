@@ -1,0 +1,120 @@
+{
+  "actual_collection": null,
+  "actual_ordinary_result": null,
+  "collection_rule": "Exact literal ID set/count and function vector required; actual COLLECT order is retained unchanged for RUN.",
+  "expected_function_case_counts": {
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_acceptable_ambiguity_allows_expected_family_alternative": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_empty_external_population_has_no_acceptance": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_predicts_by_each_supported_identity_form": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_ambiguous_prediction_order": 2,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_conflicting_prediction_aliases": 2,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_duplicate_population_identity": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_misbound_keyed_prediction": 2,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_requires_current_declared_packet_digest": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_packets_build_external_test_manifest_and_block_training_use": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_validity_report_is_separate_from_internal_canary_metrics": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_fixture_loads_versioned_external_expert_packets": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_legacy_candidate_alias_and_absent_reference_keep_existing_scope": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_missing_external_expectations_fail_packet_without_touching_canary_metrics": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_packet_validation_rejects_training_or_poisoned_external_records": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator": 4,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_required_round_trip_needs_observation": 1
+  },
+  "function_count": 16,
+  "function_selectors": [
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_fixture_loads_versioned_external_expert_packets",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_packets_build_external_test_manifest_and_block_training_use",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_validity_report_is_separate_from_internal_canary_metrics",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_acceptable_ambiguity_allows_expected_family_alternative",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_missing_external_expectations_fail_packet_without_touching_canary_metrics",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_packet_validation_rejects_training_or_poisoned_external_records",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_legacy_candidate_alias_and_absent_reference_keep_existing_scope",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_required_round_trip_needs_observation",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_empty_external_population_has_no_acceptance",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_ambiguous_prediction_order",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_misbound_keyed_prediction",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_conflicting_prediction_aliases",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_duplicate_population_identity",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_predicts_by_each_supported_identity_form",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_requires_current_declared_packet_digest"
+  ],
+  "literal_expected_cases": 22,
+  "literal_expected_nodeids": [
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_fixture_loads_versioned_external_expert_packets",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_packets_build_external_test_manifest_and_block_training_use",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_validity_report_is_separate_from_internal_canary_metrics",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_acceptable_ambiguity_allows_expected_family_alternative",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_missing_external_expectations_fail_packet_without_touching_canary_metrics",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_packet_validation_rejects_training_or_poisoned_external_records",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator[omitted]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator[null]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator[empty]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator[invalid]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_legacy_candidate_alias_and_absent_reference_keep_existing_scope",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_required_round_trip_needs_observation",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_empty_external_population_has_no_acceptance",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_ambiguous_prediction_order[accepted-first]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_ambiguous_prediction_order[accepted-last]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_misbound_keyed_prediction[packet_id]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_misbound_keyed_prediction[id]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_conflicting_prediction_aliases[flat]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_conflicting_prediction_aliases[sequence]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_duplicate_population_identity",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_predicts_by_each_supported_identity_form",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_requires_current_declared_packet_digest"
+  ],
+  "literal_parametrization_ASTs": {
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_acceptable_ambiguity_allows_expected_family_alternative": [],
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_empty_external_population_has_no_acceptance": [],
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_predicts_by_each_supported_identity_form": [],
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_ambiguous_prediction_order": [
+      "pytest.mark.parametrize('accepted_last', [False, True], ids=['accepted-first', 'accepted-last'])"
+    ],
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_conflicting_prediction_aliases": [
+      "pytest.mark.parametrize('sequence', [False, True], ids=['flat', 'sequence'])"
+    ],
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_duplicate_population_identity": [],
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_misbound_keyed_prediction": [
+      "pytest.mark.parametrize('identity_field', ['packet_id', 'id'])"
+    ],
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_requires_current_declared_packet_digest": [],
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_packets_build_external_test_manifest_and_block_training_use": [],
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_validity_report_is_separate_from_internal_canary_metrics": [],
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_fixture_loads_versioned_external_expert_packets": [],
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_legacy_candidate_alias_and_absent_reference_keep_existing_scope": [],
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_missing_external_expectations_fail_packet_without_touching_canary_metrics": [],
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_packet_validation_rejects_training_or_poisoned_external_records": [],
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator": [
+      "pytest.mark.parametrize('missing_candidate', [pytest.param('omit', id='omitted'), pytest.param(None, id='null'), pytest.param({}, id='empty'), pytest.param('not structured IR', id='invalid')])"
+    ],
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_required_round_trip_needs_observation": []
+  },
+  "ordered_function_case_vector": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    4,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    1,
+    1,
+    1
+  ],
+  "owning_files": [
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py"
+  ],
+  "owning_test_expected_private_post": {
+    "bytes": 13790,
+    "sha256": "e2bdaca2566fe5c331bcc401781e286d4956a1af474ddebd666a93f2973f641a"
+  },
+  "schema": "P8-normal22-independent-literal-roster-DATA/v1",
+  "source_role_reference": null
+}

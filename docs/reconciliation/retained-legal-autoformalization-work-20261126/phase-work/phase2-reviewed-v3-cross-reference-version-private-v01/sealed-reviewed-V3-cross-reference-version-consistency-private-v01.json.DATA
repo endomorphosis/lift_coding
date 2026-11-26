@@ -1,0 +1,390 @@
+{
+  "claims": {
+    "Native_Lean_model_or_training": false,
+    "actual_statutory_meaning_qualified": false,
+    "canonical_source_write": false,
+    "ordinary_current_Source_guard_qualified": false,
+    "push": false,
+    "release_admission": false
+  },
+  "cohorts": {
+    "baseline-config-rebound": {
+      "errors": 0,
+      "failed": 2,
+      "failed_cases": [
+        "test_reviewed_v3_cross_reference_version_consistency[shared-forward-conflict]",
+        "test_reviewed_v3_cross_reference_version_consistency[shared-reverse-conflict]"
+      ],
+      "junit": {
+        "bytes": 2745,
+        "full9": {
+          "st_ctime_ns": "1795551250892341203",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096529",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795551250892341203",
+          "st_nlink": "1",
+          "st_size": "2745",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-cross-reference-version-private-v01/baseline-config-rebound/result.xml",
+        "sha256": "e2f4b42b904d6fdc05934205dfc636c4422a34566f3f219e42ebc5d9b03a972b"
+      },
+      "passed": 6,
+      "rc_observed": 1,
+      "skipped": 0,
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795551238725380011",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096516",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795551238725380011",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-cross-reference-version-private-v01/baseline-config-rebound/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 1742,
+        "full9": {
+          "st_ctime_ns": "1795551250892341203",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096515",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795551250892341203",
+          "st_nlink": "1",
+          "st_size": "1742",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-cross-reference-version-private-v01/baseline-config-rebound/stdout.DATA",
+        "sha256": "081e6448146a73ad6a4988a5ffdf0fb57922f8bd1aef6a703ffa70a5c4f73037"
+      },
+      "test_cases": [
+        "test_reviewed_v3_cross_reference_version_consistency[shared-forward-conflict]",
+        "test_reviewed_v3_cross_reference_version_consistency[shared-reverse-conflict]",
+        "test_reviewed_v3_cross_reference_version_consistency[shared-equal]",
+        "test_reviewed_v3_cross_reference_version_consistency[distinct-identities]",
+        "test_full_fictional_definition_object_use_and_mixed_use_replay",
+        "test_saved_v2_preparation_signatures_and_assessment_survive_sibling_load",
+        "test_current_trust_controls_reject_even_genuine_signatures[revoked-key-key_revoked]",
+        "test_reviewed_v3_preserves_acyclic_overlapping_unit_dependencies"
+      ]
+    },
+    "candidate-same8": {
+      "errors": 0,
+      "failed": 0,
+      "failed_cases": [],
+      "junit": {
+        "bytes": 1689,
+        "full9": {
+          "st_ctime_ns": "1795551294847086854",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096545",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795551294847086854",
+          "st_nlink": "1",
+          "st_size": "1689",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-cross-reference-version-private-v01/candidate-same8/result.xml",
+        "sha256": "2bc6b8b2b375bc467b26bab0fd9c6b8088952214bc408027cbd25f8b4f231141"
+      },
+      "passed": 8,
+      "rc_observed": 0,
+      "skipped": 0,
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795551284143755338",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096531",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795551284143755338",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-cross-reference-version-private-v01/candidate-same8/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 350,
+        "full9": {
+          "st_ctime_ns": "1795551294847086854",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096530",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795551294847086854",
+          "st_nlink": "1",
+          "st_size": "350",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-cross-reference-version-private-v01/candidate-same8/stdout.DATA",
+        "sha256": "791323dc72d19c90f51086e175049ca84be22e28cbd3ea9268d2d9c78b02363d"
+      },
+      "test_cases": [
+        "test_reviewed_v3_cross_reference_version_consistency[shared-forward-conflict]",
+        "test_reviewed_v3_cross_reference_version_consistency[shared-reverse-conflict]",
+        "test_reviewed_v3_cross_reference_version_consistency[shared-equal]",
+        "test_reviewed_v3_cross_reference_version_consistency[distinct-identities]",
+        "test_full_fictional_definition_object_use_and_mixed_use_replay",
+        "test_saved_v2_preparation_signatures_and_assessment_survive_sibling_load",
+        "test_current_trust_controls_reject_even_genuine_signatures[revoked-key-key_revoked]",
+        "test_reviewed_v3_preserves_acyclic_overlapping_unit_dependencies"
+      ]
+    },
+    "candidate-selected-retained8-methods": {
+      "errors": 0,
+      "failed": 0,
+      "failed_cases": [],
+      "junit": {
+        "bytes": 5220,
+        "full9": {
+          "st_ctime_ns": "1795551313719968317",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096553",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795551313719968317",
+          "st_nlink": "1",
+          "st_size": "5220",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-cross-reference-version-private-v01/candidate-selected-retained8-methods/result.xml",
+        "sha256": "fd4755f38fe55dd5b61ae8f1fc3547d07bd6520a2b66dea58055aa86d1345034"
+      },
+      "passed": 23,
+      "rc_observed": 0,
+      "skipped": 0,
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795551294965845087",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096546",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795551294965845087",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-cross-reference-version-private-v01/candidate-selected-retained8-methods/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 372,
+        "full9": {
+          "st_ctime_ns": "1795551313720000893",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096533",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795551313720000893",
+          "st_nlink": "1",
+          "st_size": "372",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-cross-reference-version-private-v01/candidate-selected-retained8-methods/stdout.DATA",
+        "sha256": "ac32adac0fd3cbc3ecabe05b42260c23d327e27dc277d764dd542b7353bf9e35"
+      },
+      "test_cases": [
+        "test_independently_valid_signatures_cannot_cross_domains[v2-claims-in-v3]",
+        "test_independently_valid_signatures_cannot_cross_domains[v3-claims-in-v2]",
+        "test_resealed_complete_transport_cannot_hide_semantic_contract_damage[typed-node-coverage-complete typed-node source correspondence required]",
+        "test_resealed_complete_transport_cannot_hide_semantic_contract_damage[definition-use-target-complete ordered predicate definition-use targets required]",
+        "test_resealed_complete_transport_cannot_hide_semantic_contract_damage[valid-mixed-sort-drift-governing predicate argument sorts differ]",
+        "test_resealed_complete_transport_cannot_hide_semantic_contract_damage[overlapping-use-overlapping interpretations are not two distinct normative uses]",
+        "test_v3_sibling_preserves_v2_source_and_binds_current_producers",
+        "test_governing_definition_rejects_implication_instead_of_complete_equivalence",
+        "test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[duplicate_repackage-logical source occurrence]",
+        "test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[overlapping_repackage-overlapping logical source]",
+        "test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[document_revision_label-logical source occurrence]",
+        "test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_unaligned_view-unsupported source-view alignment]",
+        "test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_view_and_document_revision_label-unsupported source-view alignment]",
+        "test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[physical_alias-physical occurrence]",
+        "test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_provision]",
+        "test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_release]",
+        "test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_edition]",
+        "test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs]",
+        "test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs_different_source_id]",
+        "test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-cycle]",
+        "test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-definition-cycle]",
+        "test_reviewed_v3_refuses_cyclic_unit_dependencies[longer-mixed-cycle]",
+        "test_reviewed_v3_alternate_view_of_same_raw_paragraph_requires_distinct_use_witness"
+      ]
+    }
+  },
+  "compatibility": "Shared dependency and matching version remain valid, and distinct artifact IDs may declare different version labels on equal bytes. Prior product pin and resulting assessments were retained as historical; the new owner creates a new V3 producer epoch.",
+  "configuration_rebind": {
+    "bytes": 1655,
+    "full9": {
+      "st_ctime_ns": "1795551238722027055",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72096513",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795551238722027055",
+      "st_nlink": "1",
+      "st_size": "1655",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-cross-reference-version-private-v01/private-runner-configuration-rebound.json",
+    "sha256": "a6b355d4506632e24d48ee73c072d0e532bf7e11c4d8e0659018230d529a3cb9"
+  },
+  "current_frozen_git_base": "0d71c0d82b2dfc1ed3c7f236009e467e4c201c88",
+  "files": [
+    {
+      "before": {
+        "bytes": 30293,
+        "full9": {
+          "st_ctime_ns": "1795551187272193332",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096502",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795551187272193332",
+          "st_nlink": "1",
+          "st_size": "30293",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-cross-reference-version-private-v01/owner.before.py.DATA",
+        "sha256": "65e8182c945669b0f891b03ab12b1d3bee27697d4443bd8df32861af7a931b05"
+      },
+      "candidate": {
+        "bytes": 30439,
+        "full9": {
+          "st_ctime_ns": "1795551284122896462",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096517",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795551284122896462",
+          "st_nlink": "1",
+          "st_size": "30439",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-cross-reference-version-private-v01/owner.after.py.DATA",
+        "sha256": "76b40e1fd05616b93e4996e17d19fdecfb74747722964a3fc74c97399c4fdea8"
+      },
+      "path": "ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py"
+    },
+    {
+      "before": {
+        "bytes": 28883,
+        "full9": {
+          "st_ctime_ns": "1795551187275749665",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096503",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795551187275749665",
+          "st_nlink": "1",
+          "st_size": "28883",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-cross-reference-version-private-v01/owning-test.before.py.DATA",
+        "sha256": "6982e1f557db2ff140804287d9be4ba1ba0b72242038d058b9fcbdce3a009a05"
+      },
+      "candidate": {
+        "bytes": 31445,
+        "full9": {
+          "st_ctime_ns": "1795551187279511776",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096504",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795551187279511776",
+          "st_nlink": "1",
+          "st_size": "31445",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-cross-reference-version-private-v01/owning-test.after.py.DATA",
+        "sha256": "5bc57fed43f80f84c8a61bf2588158c97f150d745165c6ef7d544acc7e3fbe0c"
+      },
+      "path": "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py"
+    }
+  ],
+  "fixture_inputs": {
+    "bytes": 41756,
+    "full9": {
+      "st_ctime_ns": "1795551187283028204",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72096505",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795551187283028204",
+      "st_nlink": "1",
+      "st_size": "41756",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-cross-reference-version-private-v01/input-bindings.json",
+    "sha256": "87f27f690282b138090f7daa86bd2369e60174de0f457d9f04d5bdd41fb0d15b"
+  },
+  "owner_change": "Only _reviewed_body aggregates one declared version label per cross-reference artifact identity in addition to the existing physical SHA check. Source/IR artifact custody and graph representations otherwise unchanged.",
+  "patch": {
+    "bytes": 4164,
+    "full9": {
+      "st_ctime_ns": "1795551359772441207",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72096558",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795551359772441207",
+      "st_nlink": "1",
+      "st_size": "4164",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-cross-reference-version-private-v01/fictional-reviewed-V3-cross-reference-version-consistency.patch",
+    "sha256": "0f8b9886b55c75f47935e8ae2ed6d668da2c8ecadb583ae0ad4fff3f9b534937"
+  },
+  "runner": {
+    "bytes": 2733,
+    "full9": {
+      "st_ctime_ns": "1795546560046611044",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72094739",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795546560046611044",
+      "st_nlink": "1",
+      "st_size": "2733",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/invoke-existing-pytest-private-v02.py.DATA",
+    "sha256": "37b0cd50f0ce9d5ef5fd38e29d040211401365253595255b74fa60becba76132"
+  },
+  "schema": "existing-reviewed-V3-cross-reference-version-RED-GREEN-private-engineering/v1",
+  "setup_failure": {
+    "cause": "Missing previous private pytest.ini; rebound existing prior configuration and package marker without changes to the product, test or runner.",
+    "observed_rc": 1,
+    "stderr": {
+      "bytes": 3877,
+      "full9": {
+        "st_ctime_ns": "1795551210075144423",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72096508",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795551210075144423",
+        "st_nlink": "1",
+        "st_size": "3877",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-cross-reference-version-private-v01/baseline/stderr.DATA",
+      "sha256": "2c2d9347b0a4327b5d0910c6d13b8082071662135c763bb2a7b0e78e194ccbc2"
+    },
+    "test_cases": 0
+  },
+  "signed_fixture_scope": "Existing V3 producer, genuine fictional Ed25519 signer pairs, exact pinned dependency bytes and both original review directions. No authored source or nonfixture authorities."
+}

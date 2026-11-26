@@ -1,0 +1,52 @@
+profile=private-stdlib-owner-and-pytest-fixture selectors= 13
+...................................FF                                    [100%]
+=================================== FAILURES ===================================
+__ test_malformed_raw_counterexample_cannot_supply_explicit_credit[scenario0] __
+
+scenario = {'assignment': {'notice': False}, 'violates': ' '}
+
+    @pytest.mark.parametrize("scenario", [
+        {"assignment": {"notice": False}, "violates": " "},
+        {"violates": "po-notice"},
+    ])
+    def test_malformed_raw_counterexample_cannot_supply_explicit_credit(scenario):
+        reference = _reference_ir()
+        candidate = _isomorphic_ir()
+        candidate["counterexamples"] = [deepcopy(scenario)]
+        explicit = _all_semantic_scores()
+        result = semantic_equivalence_from_metrics({
+            **explicit, "reference_ir": reference, "candidate_ir": candidate,
+        }, family="deontic")
+    
+>       assert COUNTEREXAMPLE_EQUIVALENCE not in result.scores
+E       AssertionError: assert 'counterexample_equivalence' not in {'counterexample_equivalence': 1.0, 'decompiler_round_trip_preservation': 1.0, 'graph_isomorphism': 1.0, 'obligation_equivalence': 1.0, ...}
+E        +  where {'counterexample_equivalence': 1.0, 'decompiler_round_trip_preservation': 1.0, 'graph_isomorphism': 1.0, 'obligation_equivalence': 1.0, ...} = SemanticEquivalenceFamilyResult(family='deontic', scores={'structural_equivalence': 0.933333333333, 'obligation_equiva...': 1, 'reference': 1, 'symmetric_difference': 0}, 'temporal_window_signature_sizes': {'candidate': 3, 'reference': 3}}).scores
+
+test_legal_ir_semantic_metrics.py:966: AssertionError
+__ test_malformed_raw_counterexample_cannot_supply_explicit_credit[scenario1] __
+
+scenario = {'violates': 'po-notice'}
+
+    @pytest.mark.parametrize("scenario", [
+        {"assignment": {"notice": False}, "violates": " "},
+        {"violates": "po-notice"},
+    ])
+    def test_malformed_raw_counterexample_cannot_supply_explicit_credit(scenario):
+        reference = _reference_ir()
+        candidate = _isomorphic_ir()
+        candidate["counterexamples"] = [deepcopy(scenario)]
+        explicit = _all_semantic_scores()
+        result = semantic_equivalence_from_metrics({
+            **explicit, "reference_ir": reference, "candidate_ir": candidate,
+        }, family="deontic")
+    
+>       assert COUNTEREXAMPLE_EQUIVALENCE not in result.scores
+E       AssertionError: assert 'counterexample_equivalence' not in {'counterexample_equivalence': 1.0, 'decompiler_round_trip_preservation': 1.0, 'graph_isomorphism': 1.0, 'obligation_equivalence': 1.0, ...}
+E        +  where {'counterexample_equivalence': 1.0, 'decompiler_round_trip_preservation': 1.0, 'graph_isomorphism': 1.0, 'obligation_equivalence': 1.0, ...} = SemanticEquivalenceFamilyResult(family='deontic', scores={'structural_equivalence': 0.866666666667, 'obligation_equiva...': 1, 'reference': 1, 'symmetric_difference': 0}, 'temporal_window_signature_sizes': {'candidate': 3, 'reference': 3}}).scores
+
+test_legal_ir_semantic_metrics.py:966: AssertionError
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-counterexample-assignment-pairing-complete-private-YItN2ffh/intermediate.junit.xml -
+=========================== short test summary info ============================
+FAILED test_legal_ir_semantic_metrics.py::test_malformed_raw_counterexample_cannot_supply_explicit_credit[scenario0]
+FAILED test_legal_ir_semantic_metrics.py::test_malformed_raw_counterexample_cannot_supply_explicit_credit[scenario1]
+2 failed, 35 passed in 0.20s

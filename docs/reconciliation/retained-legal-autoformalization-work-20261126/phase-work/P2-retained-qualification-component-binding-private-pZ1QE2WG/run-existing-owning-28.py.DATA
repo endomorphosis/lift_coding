@@ -1,0 +1,27 @@
+import hashlib
+import os
+from pathlib import Path
+import sys
+
+guard=Path('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/retry-preservation-v02/run_private_fixture.py.DATA')
+raw=guard.read_bytes()
+assert hashlib.sha256(raw).hexdigest()=='b3fe749fe409c404a426669781c4807538115fda1127534bbb3c8613853fd42e'
+sentinel='owner = repo / "tests/unit/logic/legal_ir/test_proof_cache.py"'
+assert raw.decode().count(sentinel)==1
+g={"__file__":str(guard)}
+exec(compile(raw.decode().split(sentinel,1)[0],str(guard),'exec',dont_inherit=True),g)
+os.chdir(g['working'])
+os.environ['PYTEST_DISABLE_PLUGIN_AUTOLOAD']='1'
+import pytest
+test = g['repo']/'tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py'
+selectors = g['working'].parent/'selectors.txt'
+args=[str(g['repo']/line) for line in selectors.read_text().splitlines()]
+assert len(args)==4 and all(line.startswith(str(test)+'::') for line in args)
+owner = g['repo']/'ipfs_datasets_py/logic/autoformal/legal_corpus_definition_use_preservation_elaboration_native_v2.py'
+print("exact reader", len(owner.read_bytes()), hashlib.sha256(owner.read_bytes()).hexdigest(), flush=True)
+print("exact selected test", len(test.read_bytes()), hashlib.sha256(test.read_bytes()).hexdigest(), flush=True)
+result = pytest.main(['-q','-c','/dev/null','--confcutdir',str(g['repo']),'-p','no:cacheprovider','-p','no:logging',
+                      '--junitxml',str(g['working']/'result.xml'),*args])
+print("guard events",g['denied'],flush=True)
+assert not g['denied']
+raise SystemExit(result)

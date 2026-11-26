@@ -1,0 +1,153 @@
+{
+  "JUnit": {
+    "bytes": 6282,
+    "full9": {
+      "st_ctime_ns": "1795583214100879724",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72102805",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795583214100879724",
+      "st_nlink": "1",
+      "st_size": "6282",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-approval-ceiling-diagnostic-v01-_beerlu8/diagnostic/junit.xml",
+    "sha256": "143647c6c335f456049ef7234c2c7a466ec99e3d547419cc8090c150ea55ea03"
+  },
+  "SQL_or_Native_exercised": false,
+  "actual_unique": 6,
+  "control": {
+    "bytes": 26930,
+    "full9": {
+      "st_ctime_ns": "1795583214102531768",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72102802",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795583214102531768",
+      "st_nlink": "1",
+      "st_size": "26930",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-approval-ceiling-diagnostic-v01-_beerlu8/diagnostic/run-control.json",
+    "sha256": "20ea1fb0f8d7eca9b4e7bbace4b36a0daa83a74de5d9d4f9a60cf10c4981e569"
+  },
+  "diagnostic_test": {
+    "bytes": 93508,
+    "full9": {
+      "st_ctime_ns": "1795583203637545446",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72102792",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795583203637545446",
+      "st_nlink": "1",
+      "st_size": "93508",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-approval-ceiling-diagnostic-v01-_beerlu8/test_proof_cache.ceiling-diagnostic.py.DATA",
+    "sha256": "cd92c41e80976e707110855423dd6ae6956206e5a6bfd57556cec93611ac4a9e"
+  },
+  "errors": 0,
+  "explicit_cached_read_bytes": 3208594,
+  "failed": [
+    "test_diagnostic_cache_producer_retains_caller_ceiling[exact-evidence]",
+    "test_diagnostic_cache_producer_retains_caller_ceiling[unified-evidence]",
+    "test_diagnostic_cache_producer_retains_caller_ceiling[unified-trust]",
+    "test_diagnostic_cache_waiter_retains_caller_ceiling[unified-evidence]"
+  ],
+  "measured_contradiction": "Each failed compute returned usable=True for the same stored entry that ordinary lookup rejected under identical caller options.",
+  "no_canonical_source_body_read_or_new_Source_operation_or_Git_write": true,
+  "observed_backend_class": "in-process memory only",
+  "passed": [
+    "test_diagnostic_cache_waiter_retains_caller_ceiling[exact-evidence]",
+    "test_diagnostic_cache_waiter_retains_caller_ceiling[unified-trust]"
+  ],
+  "prepared_authority_patch_replaced_or_modified": false,
+  "product_bodies": {
+    "bytes": 1047,
+    "full9": {
+      "st_ctime_ns": "1795583203639180754",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72102796",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795583203639180754",
+      "st_nlink": "1",
+      "st_size": "1047",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-approval-ceiling-diagnostic-v01-_beerlu8/same6-unchanged-code-map.json",
+    "sha256": "1c87baa61a3064900fa6c6a5467c10bd3551de1a8fdb8369810dfb2d56551b1b"
+  },
+  "pytest_exit": 1,
+  "runner": {
+    "bytes": 12431,
+    "full9": {
+      "st_ctime_ns": "1795583203638906816",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72102793",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795583203638906816",
+      "st_nlink": "1",
+      "st_size": "12431",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-approval-ceiling-diagnostic-v01-_beerlu8/run_diagnostic.py",
+    "sha256": "87df8fbd05d080335fa89c9b621bff8e1f86dc0a3226d4f8b831e04709a4515f"
+  },
+  "schema": "private-proof-cache-caller-evidence-ceiling-diagnostic/v1",
+  "shared_waits_observed_with_single_flight_shared": true,
+  "skips": 0,
+  "stderr": {
+    "bytes": 0,
+    "full9": {
+      "st_ctime_ns": "1795583210739235764",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72102799",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795583210739235764",
+      "st_nlink": "1",
+      "st_size": "0",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-approval-ceiling-diagnostic-v01-_beerlu8/stderr",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 4143,
+    "full9": {
+      "st_ctime_ns": "1795583214102531768",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72102798",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795583214102531768",
+      "st_nlink": "1",
+      "st_size": "4143",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-approval-ceiling-diagnostic-v01-_beerlu8/stdout",
+    "sha256": "b3ba5d6bfe6b83540f47a4495f298c78a378768eb57222fd5834d8099ecccfc5"
+  },
+  "unchanged_product_candidate": {
+    "bytes": 25255,
+    "full9": {
+      "st_ctime_ns": "1795582950665529850",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72102747",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795582950665529850",
+      "st_nlink": "1",
+      "st_size": "25255",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-waiter-private-v01-q4olj78k/sealed-P1-leader-and-waiter-authority-private-same6-v01.json",
+    "sha256": "8169e886859c85729eac7abf1dbbb17f53d6e2acfcfb0f3ecbda9472cb902966"
+  },
+  "whole_pipeline_or_ordinary_qualification": false
+}

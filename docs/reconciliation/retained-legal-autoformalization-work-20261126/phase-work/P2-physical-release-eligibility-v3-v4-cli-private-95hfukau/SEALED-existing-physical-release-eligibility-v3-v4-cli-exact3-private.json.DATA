@@ -1,0 +1,268 @@
+{
+  "actual_six_guarded_fixture_checks": {
+    "cli-profile": {
+      "exit": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/qualified-cli-profile/exit",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "report": {
+        "bytes": 2007,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/qualified-cli-profile/actual.json",
+        "sha256": "4ad7240ed667d55bf883602c417f0d0b9339869e0653afdd935c995f25a4c00a"
+      },
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/qualified-cli-profile/stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "v3-retained": {
+      "exit": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/bounded-v3-retained/exit",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "report": {
+        "bytes": 1304,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/bounded-v3-retained/actual.json",
+        "sha256": "4c2cb5d80b677e8dfe980cbfb6b728d1da7555962c4a00f69bb8e13ea5ac5d40"
+      },
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/bounded-v3-retained/stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "v3-source": {
+      "exit": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/bounded-v3-source/exit",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "report": {
+        "bytes": 1302,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/bounded-v3-source/actual.json",
+        "sha256": "154d4aafd06c50bfa1b98750ae2410cf6290b9d497b53c3adee18a884ad00607"
+      },
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/bounded-v3-source/stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "v3-wrong-graph": {
+      "exit": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/bounded-v3-wrong-graph/exit",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "report": {
+        "bytes": 1307,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/bounded-v3-wrong-graph/actual.json",
+        "sha256": "c52f37bb99756cc9ac88d42455ee701eb7b24baf6aa411750fc7ddb76fe38812"
+      },
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/bounded-v3-wrong-graph/stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "v4-cli": {
+      "exit": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/bounded-v4-cli/exit",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "report": {
+        "bytes": 73428,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/bounded-v4-cli/actual.json",
+        "sha256": "6dc98da3dd7a19be8a7f48fe83b2259f9e3a27a6467e9c1c01f14ea2ec7324ca"
+      },
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/bounded-v4-cli/stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "v4-native": {
+      "exit": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/bounded-v4-native/exit",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "report": {
+        "bytes": 1720,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/bounded-v4-native/actual.json",
+        "sha256": "79959814fafd12d0016b8f65cc50fb4675db269a4f68e7e581b38e7e1dc99438"
+      },
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/bounded-v4-native/stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "base_git_HEAD": "e22897d0b8014b6b8bc5289b14e1932bf6e7d650",
+  "base_git_tree": "688b99361a1f0bb9c18557723212e5aac53c2f59",
+  "before_V4_flag_missing": {
+    "exit": {
+      "bytes": 2,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/before-v4-cli/exit",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "report": {
+      "bytes": 2084,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/before-v4-cli/actual.json",
+      "sha256": "bdf1d1c6a875bb1119a202d7ba95d6854904e6ca9aa65fbf2a96c98a9914477d"
+    },
+    "stderr": {
+      "bytes": 0,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/before-v4-cli/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "correction": "Replayed the exact already-authored fixture request under the same private limits instead of repeating realization fixture setup in the validation call.",
+  "current_Source": null,
+  "exact_preimages": {
+    "bytes": 1492,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/current-before-roles.json",
+    "sha256": "72fda97066c8d7cc8bcb0afde1c075a102b9e436773a5d1e612fcf48a3ad62a9"
+  },
+  "exact_saved_V4_wire": {
+    "bytes": 1090977,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/before-v4-cli/complete-source-review-v4.wire",
+    "sha256": "84163b067168bcb742dd7b1138967d9063ed3bdbbca3d42e363b7f4b9ec1cde3"
+  },
+  "inherited_guard": {
+    "bytes": 5502,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/retry-preservation-v02/run_private_fixture.py.DATA",
+    "sha256": "b3fe749fe409c404a426669781c4807538115fda1127534bbb3c8613853fd42e"
+  },
+  "initial_runner": {
+    "bytes": 5792,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/run-existing-physical-release-selection.py.DATA",
+    "sha256": "a4be798ee4648e85b3723a1b39ad33cd9a9492f934a438f6aba569b4a3ed63a9"
+  },
+  "ordinary_qualification": null,
+  "patches": {
+    "forward": {
+      "bytes": 20989,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/exact3.forward.patch.DATA",
+      "sha256": "c5dffa83a941887a2f133ab252fabf129920c79681886037c29f0413b6646481"
+    },
+    "inverse": {
+      "bytes": 20989,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/exact3.inverse.patch.DATA",
+      "sha256": "bda989c7adc732325a7ffc64eb8eb2b5f9fb26ce050e262c05f5d3251b499e61"
+    }
+  },
+  "posts": {
+    "cli": {
+      "after": {
+        "bytes": 12124,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/cli.after.py.DATA",
+        "sha256": "80357f303be5da9175867d82d2e80d7e551490a55b724e151202d6ec9fda6afa"
+      },
+      "after_Git_blob": "53fd49f4a40dc57e595138c9002ddb4b731b337e",
+      "before": {
+        "bytes": 11419,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/cli.before.py.DATA",
+        "sha256": "8be90e0f3a3f5d684f0a310172ba99737cc1e89afbf95c7701ff0321ab4417ad"
+      },
+      "before_Git_blob": "7d63bc58a593c8b487ac31985d48b7b8cf81b383",
+      "mode": "100644",
+      "relative_path": "scripts/ops/legal_ir/validate_uscode_corpus_release.py"
+    },
+    "owner": {
+      "after": {
+        "bytes": 134918,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/owner.after.py.DATA",
+        "sha256": "06d126d5109609a77f298fc6e9d257df8c97e1b972a700ddd0d5c5b66ac6a108"
+      },
+      "after_Git_blob": "ffb7260da7469a5a88d3b2d3eba6c43a76498cdb",
+      "before": {
+        "bytes": 130267,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/owner.before.py.DATA",
+        "sha256": "44206e3e1f92594bc57534f8de756e4ff938600e40ab98c7f314f5da395359c1"
+      },
+      "before_Git_blob": "2faa76f3b111b3d68c814eb0eb0db7724a7a18f8",
+      "mode": "100644",
+      "relative_path": "ipfs_datasets_py/logic/autoformal/legal_release_coordinator_v1.py"
+    },
+    "test": {
+      "after": {
+        "bytes": 223622,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/test.after.py.DATA",
+        "sha256": "ac7ea179761aae0a0972bd93b4bf5cc30b16fcba79ef6c50f74c8cfa80b14098"
+      },
+      "after_Git_blob": "77a627a066083d30666ac42b3be3a3d22c422993",
+      "before": {
+        "bytes": 214761,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/test.before.py.DATA",
+        "sha256": "b02f62e724968f32c3a8df87a3998f7a26014764a04103bbdbc13898134e1371"
+      },
+      "before_Git_blob": "9dbd1c45ede27e34652cf872fb9aebfc06b996b8",
+      "mode": "100644",
+      "relative_path": "tests/unit/logic/autoformal/test_corpus_release_cli.py"
+    }
+  },
+  "private_V3_only_predecessor_retained": {
+    "bytes": 11416,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-existing-release-qualification-projection-private-f7yx_fy_/SEALED-Phase2-existing-V3-release-declared-eligibility-exact2-private.json",
+    "sha256": "6abbe6b3e087ab8c5e9bbdef9da5ca82f94aa3b2fb6878fbfabc2ae49bc2ee99"
+  },
+  "private_limits": {
+    "address_space": 536870912,
+    "cpu_seconds": 45,
+    "cpu_slots": 1,
+    "wall_seconds": 60
+  },
+  "private_runner": {
+    "bytes": 7535,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/run-existing-physical-release-pinned-fixture.py.DATA",
+    "sha256": "e6aa5a5a0cae3ed2332682cd74b28df9ddc9aeda53cf6dbb87de500a76883c53"
+  },
+  "proposed_ordinary15_data": {
+    "bytes": 10064,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/READY-Phase2-existing-ordinary15-roster-RootNULL.json",
+    "sha256": "813fa378b53c677312213878b113f15f294dca235ba253e1bc5225386530c01d"
+  },
+  "published": false,
+  "retained_full_fixture_limit_stop": {
+    "exit": {
+      "bytes": 4,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/qualified-v4-cli/exit",
+      "sha256": "e3b9c2844b5a5c2677b3a2279db2ec8487491dd9a23d6b22fac153391b3bb63c"
+    },
+    "report": {
+      "bytes": 0,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/qualified-v4-cli/actual.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "bytes": 0,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/qualified-v4-cli/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "retained_initial_preflight_missing_CLI_post": {
+    "exit": {
+      "bytes": 2,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/after-cli-profile/exit",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "report": {
+      "bytes": 3170,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/after-cli-profile/actual.json",
+      "sha256": "7a16fcc3a946d42ced7faf9ac57c8661f7db3d0cd79a6f42503ebd7d0ee84518"
+    },
+    "stderr": {
+      "bytes": 0,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/after-cli-profile/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "schema": "private-physical-release-v3-v4-existing-cli-declared-eligibility-exact3/v1",
+  "scope": "Complete reviewed source-only V4 and retained authored V3 checks in the existing release APIs and CLI. Exact signed synthetic graph eligibility under declared policy. Upstream preservation remains conditional and proof pending. No actual Lean compilation, original-parent custody, statutory review, training, release or corpus admission."
+}

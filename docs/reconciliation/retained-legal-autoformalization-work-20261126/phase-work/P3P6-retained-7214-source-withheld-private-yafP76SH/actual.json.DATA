@@ -1,0 +1,39 @@
+{
+  "actual_Lean_runs": 0,
+  "pair": {
+    "argument_roles_equal": true,
+    "canonical_prose_equal": false,
+    "exact_typed_expression_equal": false,
+    "typed_structure_equal": false
+  },
+  "results": [
+    {
+      "alternate_id": "7214:cap_within_permission",
+      "failure": null,
+      "prose_sha256": "91ecb2c532896d5cfe1f025534ffc92496bb4e52872c1b2504523ae04aac1fe4",
+      "report": {
+        "bytes": 146760,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P3P6-retained-7214-source-withheld-private-yafP76SH/retained-alternative-0-source-withheld.json",
+        "sha256": "ea524ed09eda688a8d31bc3742d07d676f11320ca951520dfdc1810221c8882f"
+      }
+    },
+    {
+      "alternate_id": "7214:cap_as_permission_guard",
+      "failure": null,
+      "prose_sha256": "f3a8ba6935a6f798dfa8f782d69aa37103d1e8b8fb4ed9be01508fec52d2a2d1",
+      "report": {
+        "bytes": 140840,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P3P6-retained-7214-source-withheld-private-yafP76SH/retained-alternative-1-source-withheld.json",
+        "sha256": "e9ceb85c24475adf619106d749226ede3753b373e860de3de9e88846949d0318"
+      }
+    }
+  ],
+  "role_SHA256": {
+    "ipfs_datasets_py/logic/autoformal/legal_relational_reconstruction_v1.py": "e35acbd09c149b13b4d4aa8e0794a7a35fd2678fdd59f40f6facda73b2373d67",
+    "ipfs_datasets_py/logic/legal_ir/extended_compiler.py": "1df3a74a711143aef03d08048b06b74b3b2f7d99017e49c831f91493b192316f",
+    "ipfs_datasets_py/logic/legal_ir/extended_decompiler.py": "f9fa4903ff67cf246ca0df11ead75278329bef5e5185507ac04c87815a1fe357",
+    "ipfs_datasets_py/logic/syntax_core/ast.py": "4709513f18ab270858fe9595d88a847ddc52092606c52c7802947abed1ab9ac4"
+  },
+  "selected_legal_interpretation": null,
+  "source_packet_hash": "dd72e2b92ed5a44a77acfb72dd27ca8614250878400db89742c0437438d59dda"
+}

@@ -1,0 +1,13 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.3.4, pluggy-1.6.0
+rootdir: /tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/dataset
+configfile: pytest.ini
+asyncio: mode=Mode.STRICT
+collected 88 items
+
+tests/integration/logic/backends/test_kernel_backends.py ............... [ 17%]
+........................................................................ [ 98%]
+.                                                                        [100%]
+
+- generated xml file: /tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/after-current-protocol-v03/result.xml -
+============================== 88 passed in 2.09s ==============================

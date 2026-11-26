@@ -1,0 +1,70 @@
+{
+  "Source_Git_import_tests_SQL_SDK_fit_or_model_actions": false,
+  "all_function_names_and_test_roster_unchanged": true,
+  "all_original_assertions_AST_exact": true,
+  "conservative_unit_charge_including_input_and_output_readback_bytes": 3145728,
+  "entire_module_AST_exact_after_only_two_expected_substitutions": true,
+  "exact_selected_test_nodes": [
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_todo_daemon.py::test_bounded_bridge_targets_are_aliased_before_full_sample_evaluation",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_todo_daemon.py::test_autoencoder_caches_legal_ir_view_candidate_scan"
+  ],
+  "forward": {
+    "Git_blob_sha1": "55e3a786fad255727c35cad1e74408be9057836b",
+    "bytes": 1128,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Main-modal-daemon-semantic-target-cache-two-test-migration-private-v01/test_modal_todo_daemon.semantic-cache-API.forward.patch",
+    "sha256": "92993a20cafd71a1d248966732b63c670a8a1458e979fffba470b5040c1031ae"
+  },
+  "future_current_Source_Git_clock_runtime_authority": null,
+  "input": {
+    "bytes": 421278,
+    "full9": {
+      "st_ctime_ns": "1795421816907139406",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "70031937",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795421816907139406",
+      "st_nlink": "1",
+      "st_size": "421278",
+      "st_uid": "1000"
+    },
+    "private_store_path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_modal_todo_daemon.py",
+    "sha256": "86f85747c79473f573bfebfbb6c812c479bb91577c6de55db7614bb1bb767873"
+  },
+  "inverse": {
+    "Git_blob_sha1": "a2397c28e4674dc054136396abcb29d9e5e631bc",
+    "bytes": 1128,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Main-modal-daemon-semantic-target-cache-two-test-migration-private-v01/test_modal_todo_daemon.semantic-cache-API.inverse.patch",
+    "sha256": "d75e0a0dcf9f4d61489a3dc94b65c06a52535a69342b5c30e7d7c2edbab461c5"
+  },
+  "migrations": [
+    {
+      "original_expression": "autoencoder._legal_ir_view_target_cache.get(sample.sample_id)",
+      "original_line": 2873,
+      "replacement": "autoencoder._legal_ir_view_target_distribution_for_sample(\n                        sample, include_autoencoder_prior=False\n                    )"
+    },
+    {
+      "original_expression": "autoencoder._legal_ir_view_target_cache[sample.sample_id] = {\"CEC.native\": 1.0}",
+      "original_line": 3378,
+      "replacement": "autoencoder._cache_legal_ir_targets([sample], {sample.sample_id: {\"CEC.native\": 1.0}}, {})"
+    }
+  ],
+  "post_ref": {
+    "Git_blob_sha1": "bbc43c5c55114f456aa55bcf688a9991ff66f2da",
+    "bytes": 421372,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Main-modal-daemon-semantic-target-cache-two-test-migration-private-v01/test_modal_todo_daemon.semantic-cache-API.after.py.DATA",
+    "sha256": "961402d8e2f7b2f2f85f0cf2de3978129bce5df99dd10a61d7f337fec2738628"
+  },
+  "prior_artifacts_and_costs_retained": true,
+  "private_cached_body_unit_ceiling_bytes": 4194304,
+  "product_or_bridge_reuse_tests_changed": false,
+  "qualification": "UNRUN normal/private tests, syntax/static AST only; actual product author owns reproduction and execution",
+  "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_modal_todo_daemon.py",
+  "schema": "Main-two-existing-modal-daemon-cache-API-test-migration-static-proof/v1",
+  "source_ref": {
+    "Git_blob_sha1": "64afec2ff13ad1a257f450426ca80245ffc47f0d",
+    "bytes": 421278,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Main-modal-daemon-semantic-target-cache-two-test-migration-private-v01/test_modal_todo_daemon.before.py.DATA",
+    "sha256": "86f85747c79473f573bfebfbb6c812c479bb91577c6de55db7614bb1bb767873"
+  }
+}

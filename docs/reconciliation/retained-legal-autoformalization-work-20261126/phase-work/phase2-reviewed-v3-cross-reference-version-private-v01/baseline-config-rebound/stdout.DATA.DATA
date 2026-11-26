@@ -1,0 +1,17 @@
+FF......                                                                 [100%]
+=================================== FAILURES ===================================
+_ test_reviewed_v3_cross_reference_version_consistency[shared-forward-conflict] _
+tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py:560: in test_reviewed_v3_cross_reference_version_consistency
+    assert not conflict, "contradictory dependency version labels became eligible in a freshly signed V3 review"
+E   AssertionError: contradictory dependency version labels became eligible in a freshly signed V3 review
+E   assert not True
+_ test_reviewed_v3_cross_reference_version_consistency[shared-reverse-conflict] _
+tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py:560: in test_reviewed_v3_cross_reference_version_consistency
+    assert not conflict, "contradictory dependency version labels became eligible in a freshly signed V3 review"
+E   AssertionError: contradictory dependency version labels became eligible in a freshly signed V3 review
+E   assert not True
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-cross-reference-version-private-v01/baseline-config-rebound/result.xml -
+=========================== short test summary info ============================
+FAILED tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_cross_reference_version_consistency[shared-forward-conflict]
+FAILED tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_cross_reference_version_consistency[shared-reverse-conflict]
+2 failed, 6 passed in 12.02s

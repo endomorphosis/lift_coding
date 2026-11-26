@@ -1,0 +1,2149 @@
+{
+  "authority": {
+    "Lean_admitted": false,
+    "accepted": false,
+    "admitted": false,
+    "applicability_verified": false,
+    "backend_executed": false,
+    "decoder_accuracy_established": false,
+    "evaluation_gold_qualified": false,
+    "governing_use_verified": false,
+    "independently_reviewed": false,
+    "legal_equivalence_verified": false,
+    "legal_roles_verified": false,
+    "model_executed": false,
+    "proof_authority": false,
+    "semantic_equivalence_verified": false,
+    "semantic_graph_admitted": false,
+    "source_bound": false,
+    "source_semantics_verified": false,
+    "training_executed": false,
+    "training_gold_qualified": false,
+    "training_qualified": false
+  },
+  "evaluation_gold_mask": 0,
+  "limitations": [
+    "Canonical prose is controlled authored language, not arbitrary statutory prose.",
+    "Exact typed serialization, normalized typed structure and original source bytes are separate measurements.",
+    "The fixed-three count macro reuses its existing exact canonical expansion; other counting semantics are not inferred.",
+    "Unknown extensions, metadata, ranges, unused predicates and unsupported binder forms refuse the whole input."
+  ],
+  "measurements": {
+    "canonical_prose_fixed_point": true,
+    "exact_typed_expression_equal": false,
+    "original_utf8_exact": null,
+    "semantic_equivalence_verified": false,
+    "source_semantics_verified": false,
+    "typed_structure_equal": true
+  },
+  "normalized_prose": "Typed legal rule: tdfol/tdfol_default.\nTypes: EventFrame, Object, TimeFrame.\nPredicate AssignedTo: assigned_personnel of type Object; assigned_organization of type Object.\nPredicate CorpsEngineers: proposed_corps_entity of type Object.\nPredicate Detail: detailing_authority of type Object; detailed_personnel of type Object; detail_frame of type EventFrame; time_index of type TimeFrame.\nPredicate DistrictColumbia: proposed_district_entity of type Object.\nPredicate DutiesOf: duties_collection of type Object; duties_holder of type Object.\nPredicate MayorOf: beneficiary_office_holder of type Object; district of type Object.\nPredicate Member: counted_personnel of type Object; counting_event_frame of type EventFrame; counting_time_index of type TimeFrame.\nPredicate Officer: personnel_member of type Object.\nPredicate President: authority_holder of type Object.\nPredicate PurposeAssistInDischarging: detail_frame of type EventFrame; assisting_personnel of type Object; beneficiary_office_holder of type Object; duties_collection of type Object; time_index of type TimeFrame.\nRule: (for every event of type EventFrame, (for every time of type TimeFrame, (for every president of type Object, (for every mayor of type Object, (for every corps of type Object, (for every district of type Object, (if (both (both (both (both (President holds for authority_holder: president of type Object) and (CorpsEngineers holds for proposed_corps_entity: corps of type Object)) and (DistrictColumbia holds for proposed_district_entity: district of type Object)) and (MayorOf holds for beneficiary_office_holder: mayor of type Object; district: district of type Object)) and (for every x0 of type Object, (for every x1 of type Object, (for every x2 of type Object, (for every x3 of type Object, (if (both (both (both (Member holds for counted_personnel: x0 of type Object; counting_event_frame: event of type EventFrame; counting_time_index: time of type TimeFrame) and (Member holds for counted_personnel: x1 of type Object; counting_event_frame: event of type EventFrame; counting_time_index: time of type TimeFrame)) and (Member holds for counted_personnel: x2 of type Object; counting_event_frame: event of type EventFrame; counting_time_index: time of type TimeFrame)) and (Member holds for counted_personnel: x3 of type Object; counting_event_frame: event of type EventFrame; counting_time_index: time of type TimeFrame)) then (either (either (either (either (either (x0 of type Object is identical to x1 of type Object) or (x0 of type Object is identical to x2 of type Object)) or (x0 of type Object is identical to x3 of type Object)) or (x1 of type Object is identical to x2 of type Object)) or (x1 of type Object is identical to x3 of type Object)) or (x2 of type Object is identical to x3 of type Object)))))))) then (it is permitted that (there exists duties of type Object such that (both (DutiesOf holds for duties_collection: duties of type Object; duties_holder: mayor of type Object) and (for every officer of type Object, (if (Member holds for counted_personnel: officer of type Object; counting_event_frame: event of type EventFrame; counting_time_index: time of type TimeFrame) then (both (both (both (Officer holds for personnel_member: officer of type Object) and (AssignedTo holds for assigned_personnel: officer of type Object; assigned_organization: corps of type Object)) and (Detail holds for detailing_authority: president of type Object; detailed_personnel: officer of type Object; detail_frame: event of type EventFrame; time_index: time of type TimeFrame)) and (PurposeAssistInDischarging holds for detail_frame: event of type EventFrame; assisting_personnel: officer of type Object; beneficiary_office_holder: mayor of type Object; duties_collection: duties of type Object; time_index: time of type TimeFrame)))))))))))))).",
+  "original_source_available_to_realizer": false,
+  "profile": "source-withheld-typed-relational-legal-prose/v1",
+  "reconstructed_argument_roles": [
+    {
+      "roles": [
+        "assigned_personnel",
+        "assigned_organization"
+      ],
+      "symbol": "AssignedTo"
+    },
+    {
+      "roles": [
+        "proposed_corps_entity"
+      ],
+      "symbol": "CorpsEngineers"
+    },
+    {
+      "roles": [
+        "detailing_authority",
+        "detailed_personnel",
+        "detail_frame",
+        "time_index"
+      ],
+      "symbol": "Detail"
+    },
+    {
+      "roles": [
+        "proposed_district_entity"
+      ],
+      "symbol": "DistrictColumbia"
+    },
+    {
+      "roles": [
+        "duties_collection",
+        "duties_holder"
+      ],
+      "symbol": "DutiesOf"
+    },
+    {
+      "roles": [
+        "beneficiary_office_holder",
+        "district"
+      ],
+      "symbol": "MayorOf"
+    },
+    {
+      "roles": [
+        "counted_personnel",
+        "counting_event_frame",
+        "counting_time_index"
+      ],
+      "symbol": "Member"
+    },
+    {
+      "roles": [
+        "personnel_member"
+      ],
+      "symbol": "Officer"
+    },
+    {
+      "roles": [
+        "authority_holder"
+      ],
+      "symbol": "President"
+    },
+    {
+      "roles": [
+        "detail_frame",
+        "assisting_personnel",
+        "beneficiary_office_holder",
+        "duties_collection",
+        "time_index"
+      ],
+      "symbol": "PurposeAssistInDischarging"
+    }
+  ],
+  "reconstructed_typed_expression": {
+    "content_digest": "1c15c92163305e1d3e0e23a46d298b1cf8f7d26d220aedeef558475f39899ff1",
+    "expression_id": "prose:expression",
+    "family": {
+      "interface": "LogicIdentityNamespaces@1",
+      "namespace": "family",
+      "schema_version": "logic-identity-namespaces/v1",
+      "value": "tdfol",
+      "version": "1.0.0"
+    },
+    "interface": "TypedExpression@1",
+    "metadata": {},
+    "profile": {
+      "interface": "LogicIdentityNamespaces@1",
+      "namespace": "profile",
+      "schema_version": "logic-identity-namespaces/v1",
+      "value": "tdfol_default",
+      "version": "1.0.0"
+    },
+    "root": {
+      "arguments": [
+        {
+          "arguments": [
+            {
+              "arguments": [
+                {
+                  "arguments": [
+                    {
+                      "arguments": [
+                        {
+                          "arguments": [
+                            {
+                              "arguments": [
+                                {
+                                  "arguments": [
+                                    {
+                                      "arguments": [
+                                        {
+                                          "arguments": [
+                                            {
+                                              "arguments": [
+                                                {
+                                                  "arguments": [
+                                                    {
+                                                      "arguments": [],
+                                                      "binders": [],
+                                                      "kind": "variable",
+                                                      "metadata": {},
+                                                      "node_id": "prose:node:1",
+                                                      "schema_version": "syntax-logic-node/v1",
+                                                      "sort": {
+                                                        "arguments": [],
+                                                        "kind": "atomic",
+                                                        "name": "Object",
+                                                        "schema_version": "syntax-logic-sort/v1"
+                                                      },
+                                                      "symbol": "president"
+                                                    }
+                                                  ],
+                                                  "binders": [],
+                                                  "kind": "predicate",
+                                                  "metadata": {},
+                                                  "node_id": "prose:node:2",
+                                                  "schema_version": "syntax-logic-node/v1",
+                                                  "sort": {
+                                                    "arguments": [],
+                                                    "kind": "bool",
+                                                    "name": "Bool",
+                                                    "schema_version": "syntax-logic-sort/v1"
+                                                  },
+                                                  "symbol": "President"
+                                                },
+                                                {
+                                                  "arguments": [
+                                                    {
+                                                      "arguments": [],
+                                                      "binders": [],
+                                                      "kind": "variable",
+                                                      "metadata": {},
+                                                      "node_id": "prose:node:3",
+                                                      "schema_version": "syntax-logic-node/v1",
+                                                      "sort": {
+                                                        "arguments": [],
+                                                        "kind": "atomic",
+                                                        "name": "Object",
+                                                        "schema_version": "syntax-logic-sort/v1"
+                                                      },
+                                                      "symbol": "corps"
+                                                    }
+                                                  ],
+                                                  "binders": [],
+                                                  "kind": "predicate",
+                                                  "metadata": {},
+                                                  "node_id": "prose:node:4",
+                                                  "schema_version": "syntax-logic-node/v1",
+                                                  "sort": {
+                                                    "arguments": [],
+                                                    "kind": "bool",
+                                                    "name": "Bool",
+                                                    "schema_version": "syntax-logic-sort/v1"
+                                                  },
+                                                  "symbol": "CorpsEngineers"
+                                                }
+                                              ],
+                                              "binders": [],
+                                              "kind": "and",
+                                              "metadata": {},
+                                              "node_id": "prose:node:5",
+                                              "schema_version": "syntax-logic-node/v1",
+                                              "sort": {
+                                                "arguments": [],
+                                                "kind": "bool",
+                                                "name": "Bool",
+                                                "schema_version": "syntax-logic-sort/v1"
+                                              },
+                                              "symbol": ""
+                                            },
+                                            {
+                                              "arguments": [
+                                                {
+                                                  "arguments": [],
+                                                  "binders": [],
+                                                  "kind": "variable",
+                                                  "metadata": {},
+                                                  "node_id": "prose:node:6",
+                                                  "schema_version": "syntax-logic-node/v1",
+                                                  "sort": {
+                                                    "arguments": [],
+                                                    "kind": "atomic",
+                                                    "name": "Object",
+                                                    "schema_version": "syntax-logic-sort/v1"
+                                                  },
+                                                  "symbol": "district"
+                                                }
+                                              ],
+                                              "binders": [],
+                                              "kind": "predicate",
+                                              "metadata": {},
+                                              "node_id": "prose:node:7",
+                                              "schema_version": "syntax-logic-node/v1",
+                                              "sort": {
+                                                "arguments": [],
+                                                "kind": "bool",
+                                                "name": "Bool",
+                                                "schema_version": "syntax-logic-sort/v1"
+                                              },
+                                              "symbol": "DistrictColumbia"
+                                            }
+                                          ],
+                                          "binders": [],
+                                          "kind": "and",
+                                          "metadata": {},
+                                          "node_id": "prose:node:8",
+                                          "schema_version": "syntax-logic-node/v1",
+                                          "sort": {
+                                            "arguments": [],
+                                            "kind": "bool",
+                                            "name": "Bool",
+                                            "schema_version": "syntax-logic-sort/v1"
+                                          },
+                                          "symbol": ""
+                                        },
+                                        {
+                                          "arguments": [
+                                            {
+                                              "arguments": [],
+                                              "binders": [],
+                                              "kind": "variable",
+                                              "metadata": {},
+                                              "node_id": "prose:node:9",
+                                              "schema_version": "syntax-logic-node/v1",
+                                              "sort": {
+                                                "arguments": [],
+                                                "kind": "atomic",
+                                                "name": "Object",
+                                                "schema_version": "syntax-logic-sort/v1"
+                                              },
+                                              "symbol": "mayor"
+                                            },
+                                            {
+                                              "arguments": [],
+                                              "binders": [],
+                                              "kind": "variable",
+                                              "metadata": {},
+                                              "node_id": "prose:node:10",
+                                              "schema_version": "syntax-logic-node/v1",
+                                              "sort": {
+                                                "arguments": [],
+                                                "kind": "atomic",
+                                                "name": "Object",
+                                                "schema_version": "syntax-logic-sort/v1"
+                                              },
+                                              "symbol": "district"
+                                            }
+                                          ],
+                                          "binders": [],
+                                          "kind": "predicate",
+                                          "metadata": {},
+                                          "node_id": "prose:node:11",
+                                          "schema_version": "syntax-logic-node/v1",
+                                          "sort": {
+                                            "arguments": [],
+                                            "kind": "bool",
+                                            "name": "Bool",
+                                            "schema_version": "syntax-logic-sort/v1"
+                                          },
+                                          "symbol": "MayorOf"
+                                        }
+                                      ],
+                                      "binders": [],
+                                      "kind": "and",
+                                      "metadata": {},
+                                      "node_id": "prose:node:12",
+                                      "schema_version": "syntax-logic-node/v1",
+                                      "sort": {
+                                        "arguments": [],
+                                        "kind": "bool",
+                                        "name": "Bool",
+                                        "schema_version": "syntax-logic-sort/v1"
+                                      },
+                                      "symbol": ""
+                                    },
+                                    {
+                                      "arguments": [
+                                        {
+                                          "arguments": [
+                                            {
+                                              "arguments": [
+                                                {
+                                                  "arguments": [
+                                                    {
+                                                      "arguments": [
+                                                        {
+                                                          "arguments": [
+                                                            {
+                                                              "arguments": [
+                                                                {
+                                                                  "arguments": [
+                                                                    {
+                                                                      "arguments": [
+                                                                        {
+                                                                          "arguments": [],
+                                                                          "binders": [],
+                                                                          "kind": "variable",
+                                                                          "metadata": {},
+                                                                          "node_id": "prose:node:13",
+                                                                          "schema_version": "syntax-logic-node/v1",
+                                                                          "sort": {
+                                                                            "arguments": [],
+                                                                            "kind": "atomic",
+                                                                            "name": "Object",
+                                                                            "schema_version": "syntax-logic-sort/v1"
+                                                                          },
+                                                                          "symbol": "x0"
+                                                                        },
+                                                                        {
+                                                                          "arguments": [],
+                                                                          "binders": [],
+                                                                          "kind": "variable",
+                                                                          "metadata": {},
+                                                                          "node_id": "prose:node:14",
+                                                                          "schema_version": "syntax-logic-node/v1",
+                                                                          "sort": {
+                                                                            "arguments": [],
+                                                                            "kind": "atomic",
+                                                                            "name": "EventFrame",
+                                                                            "schema_version": "syntax-logic-sort/v1"
+                                                                          },
+                                                                          "symbol": "event"
+                                                                        },
+                                                                        {
+                                                                          "arguments": [],
+                                                                          "binders": [],
+                                                                          "kind": "variable",
+                                                                          "metadata": {},
+                                                                          "node_id": "prose:node:15",
+                                                                          "schema_version": "syntax-logic-node/v1",
+                                                                          "sort": {
+                                                                            "arguments": [],
+                                                                            "kind": "atomic",
+                                                                            "name": "TimeFrame",
+                                                                            "schema_version": "syntax-logic-sort/v1"
+                                                                          },
+                                                                          "symbol": "time"
+                                                                        }
+                                                                      ],
+                                                                      "binders": [],
+                                                                      "kind": "predicate",
+                                                                      "metadata": {},
+                                                                      "node_id": "prose:node:16",
+                                                                      "schema_version": "syntax-logic-node/v1",
+                                                                      "sort": {
+                                                                        "arguments": [],
+                                                                        "kind": "bool",
+                                                                        "name": "Bool",
+                                                                        "schema_version": "syntax-logic-sort/v1"
+                                                                      },
+                                                                      "symbol": "Member"
+                                                                    },
+                                                                    {
+                                                                      "arguments": [
+                                                                        {
+                                                                          "arguments": [],
+                                                                          "binders": [],
+                                                                          "kind": "variable",
+                                                                          "metadata": {},
+                                                                          "node_id": "prose:node:17",
+                                                                          "schema_version": "syntax-logic-node/v1",
+                                                                          "sort": {
+                                                                            "arguments": [],
+                                                                            "kind": "atomic",
+                                                                            "name": "Object",
+                                                                            "schema_version": "syntax-logic-sort/v1"
+                                                                          },
+                                                                          "symbol": "x1"
+                                                                        },
+                                                                        {
+                                                                          "arguments": [],
+                                                                          "binders": [],
+                                                                          "kind": "variable",
+                                                                          "metadata": {},
+                                                                          "node_id": "prose:node:18",
+                                                                          "schema_version": "syntax-logic-node/v1",
+                                                                          "sort": {
+                                                                            "arguments": [],
+                                                                            "kind": "atomic",
+                                                                            "name": "EventFrame",
+                                                                            "schema_version": "syntax-logic-sort/v1"
+                                                                          },
+                                                                          "symbol": "event"
+                                                                        },
+                                                                        {
+                                                                          "arguments": [],
+                                                                          "binders": [],
+                                                                          "kind": "variable",
+                                                                          "metadata": {},
+                                                                          "node_id": "prose:node:19",
+                                                                          "schema_version": "syntax-logic-node/v1",
+                                                                          "sort": {
+                                                                            "arguments": [],
+                                                                            "kind": "atomic",
+                                                                            "name": "TimeFrame",
+                                                                            "schema_version": "syntax-logic-sort/v1"
+                                                                          },
+                                                                          "symbol": "time"
+                                                                        }
+                                                                      ],
+                                                                      "binders": [],
+                                                                      "kind": "predicate",
+                                                                      "metadata": {},
+                                                                      "node_id": "prose:node:20",
+                                                                      "schema_version": "syntax-logic-node/v1",
+                                                                      "sort": {
+                                                                        "arguments": [],
+                                                                        "kind": "bool",
+                                                                        "name": "Bool",
+                                                                        "schema_version": "syntax-logic-sort/v1"
+                                                                      },
+                                                                      "symbol": "Member"
+                                                                    }
+                                                                  ],
+                                                                  "binders": [],
+                                                                  "kind": "and",
+                                                                  "metadata": {},
+                                                                  "node_id": "prose:node:21",
+                                                                  "schema_version": "syntax-logic-node/v1",
+                                                                  "sort": {
+                                                                    "arguments": [],
+                                                                    "kind": "bool",
+                                                                    "name": "Bool",
+                                                                    "schema_version": "syntax-logic-sort/v1"
+                                                                  },
+                                                                  "symbol": ""
+                                                                },
+                                                                {
+                                                                  "arguments": [
+                                                                    {
+                                                                      "arguments": [],
+                                                                      "binders": [],
+                                                                      "kind": "variable",
+                                                                      "metadata": {},
+                                                                      "node_id": "prose:node:22",
+                                                                      "schema_version": "syntax-logic-node/v1",
+                                                                      "sort": {
+                                                                        "arguments": [],
+                                                                        "kind": "atomic",
+                                                                        "name": "Object",
+                                                                        "schema_version": "syntax-logic-sort/v1"
+                                                                      },
+                                                                      "symbol": "x2"
+                                                                    },
+                                                                    {
+                                                                      "arguments": [],
+                                                                      "binders": [],
+                                                                      "kind": "variable",
+                                                                      "metadata": {},
+                                                                      "node_id": "prose:node:23",
+                                                                      "schema_version": "syntax-logic-node/v1",
+                                                                      "sort": {
+                                                                        "arguments": [],
+                                                                        "kind": "atomic",
+                                                                        "name": "EventFrame",
+                                                                        "schema_version": "syntax-logic-sort/v1"
+                                                                      },
+                                                                      "symbol": "event"
+                                                                    },
+                                                                    {
+                                                                      "arguments": [],
+                                                                      "binders": [],
+                                                                      "kind": "variable",
+                                                                      "metadata": {},
+                                                                      "node_id": "prose:node:24",
+                                                                      "schema_version": "syntax-logic-node/v1",
+                                                                      "sort": {
+                                                                        "arguments": [],
+                                                                        "kind": "atomic",
+                                                                        "name": "TimeFrame",
+                                                                        "schema_version": "syntax-logic-sort/v1"
+                                                                      },
+                                                                      "symbol": "time"
+                                                                    }
+                                                                  ],
+                                                                  "binders": [],
+                                                                  "kind": "predicate",
+                                                                  "metadata": {},
+                                                                  "node_id": "prose:node:25",
+                                                                  "schema_version": "syntax-logic-node/v1",
+                                                                  "sort": {
+                                                                    "arguments": [],
+                                                                    "kind": "bool",
+                                                                    "name": "Bool",
+                                                                    "schema_version": "syntax-logic-sort/v1"
+                                                                  },
+                                                                  "symbol": "Member"
+                                                                }
+                                                              ],
+                                                              "binders": [],
+                                                              "kind": "and",
+                                                              "metadata": {},
+                                                              "node_id": "prose:node:26",
+                                                              "schema_version": "syntax-logic-node/v1",
+                                                              "sort": {
+                                                                "arguments": [],
+                                                                "kind": "bool",
+                                                                "name": "Bool",
+                                                                "schema_version": "syntax-logic-sort/v1"
+                                                              },
+                                                              "symbol": ""
+                                                            },
+                                                            {
+                                                              "arguments": [
+                                                                {
+                                                                  "arguments": [],
+                                                                  "binders": [],
+                                                                  "kind": "variable",
+                                                                  "metadata": {},
+                                                                  "node_id": "prose:node:27",
+                                                                  "schema_version": "syntax-logic-node/v1",
+                                                                  "sort": {
+                                                                    "arguments": [],
+                                                                    "kind": "atomic",
+                                                                    "name": "Object",
+                                                                    "schema_version": "syntax-logic-sort/v1"
+                                                                  },
+                                                                  "symbol": "x3"
+                                                                },
+                                                                {
+                                                                  "arguments": [],
+                                                                  "binders": [],
+                                                                  "kind": "variable",
+                                                                  "metadata": {},
+                                                                  "node_id": "prose:node:28",
+                                                                  "schema_version": "syntax-logic-node/v1",
+                                                                  "sort": {
+                                                                    "arguments": [],
+                                                                    "kind": "atomic",
+                                                                    "name": "EventFrame",
+                                                                    "schema_version": "syntax-logic-sort/v1"
+                                                                  },
+                                                                  "symbol": "event"
+                                                                },
+                                                                {
+                                                                  "arguments": [],
+                                                                  "binders": [],
+                                                                  "kind": "variable",
+                                                                  "metadata": {},
+                                                                  "node_id": "prose:node:29",
+                                                                  "schema_version": "syntax-logic-node/v1",
+                                                                  "sort": {
+                                                                    "arguments": [],
+                                                                    "kind": "atomic",
+                                                                    "name": "TimeFrame",
+                                                                    "schema_version": "syntax-logic-sort/v1"
+                                                                  },
+                                                                  "symbol": "time"
+                                                                }
+                                                              ],
+                                                              "binders": [],
+                                                              "kind": "predicate",
+                                                              "metadata": {},
+                                                              "node_id": "prose:node:30",
+                                                              "schema_version": "syntax-logic-node/v1",
+                                                              "sort": {
+                                                                "arguments": [],
+                                                                "kind": "bool",
+                                                                "name": "Bool",
+                                                                "schema_version": "syntax-logic-sort/v1"
+                                                              },
+                                                              "symbol": "Member"
+                                                            }
+                                                          ],
+                                                          "binders": [],
+                                                          "kind": "and",
+                                                          "metadata": {},
+                                                          "node_id": "prose:node:31",
+                                                          "schema_version": "syntax-logic-node/v1",
+                                                          "sort": {
+                                                            "arguments": [],
+                                                            "kind": "bool",
+                                                            "name": "Bool",
+                                                            "schema_version": "syntax-logic-sort/v1"
+                                                          },
+                                                          "symbol": ""
+                                                        },
+                                                        {
+                                                          "arguments": [
+                                                            {
+                                                              "arguments": [
+                                                                {
+                                                                  "arguments": [
+                                                                    {
+                                                                      "arguments": [
+                                                                        {
+                                                                          "arguments": [
+                                                                            {
+                                                                              "arguments": [
+                                                                                {
+                                                                                  "arguments": [],
+                                                                                  "binders": [],
+                                                                                  "kind": "variable",
+                                                                                  "metadata": {},
+                                                                                  "node_id": "prose:node:32",
+                                                                                  "schema_version": "syntax-logic-node/v1",
+                                                                                  "sort": {
+                                                                                    "arguments": [],
+                                                                                    "kind": "atomic",
+                                                                                    "name": "Object",
+                                                                                    "schema_version": "syntax-logic-sort/v1"
+                                                                                  },
+                                                                                  "symbol": "x0"
+                                                                                },
+                                                                                {
+                                                                                  "arguments": [],
+                                                                                  "binders": [],
+                                                                                  "kind": "variable",
+                                                                                  "metadata": {},
+                                                                                  "node_id": "prose:node:34",
+                                                                                  "schema_version": "syntax-logic-node/v1",
+                                                                                  "sort": {
+                                                                                    "arguments": [],
+                                                                                    "kind": "atomic",
+                                                                                    "name": "Object",
+                                                                                    "schema_version": "syntax-logic-sort/v1"
+                                                                                  },
+                                                                                  "symbol": "x1"
+                                                                                }
+                                                                              ],
+                                                                              "binders": [],
+                                                                              "kind": "equality",
+                                                                              "metadata": {},
+                                                                              "node_id": "prose:node:33",
+                                                                              "schema_version": "syntax-logic-node/v1",
+                                                                              "sort": {
+                                                                                "arguments": [],
+                                                                                "kind": "bool",
+                                                                                "name": "Bool",
+                                                                                "schema_version": "syntax-logic-sort/v1"
+                                                                              },
+                                                                              "symbol": ""
+                                                                            },
+                                                                            {
+                                                                              "arguments": [
+                                                                                {
+                                                                                  "arguments": [],
+                                                                                  "binders": [],
+                                                                                  "kind": "variable",
+                                                                                  "metadata": {},
+                                                                                  "node_id": "prose:node:35",
+                                                                                  "schema_version": "syntax-logic-node/v1",
+                                                                                  "sort": {
+                                                                                    "arguments": [],
+                                                                                    "kind": "atomic",
+                                                                                    "name": "Object",
+                                                                                    "schema_version": "syntax-logic-sort/v1"
+                                                                                  },
+                                                                                  "symbol": "x0"
+                                                                                },
+                                                                                {
+                                                                                  "arguments": [],
+                                                                                  "binders": [],
+                                                                                  "kind": "variable",
+                                                                                  "metadata": {},
+                                                                                  "node_id": "prose:node:37",
+                                                                                  "schema_version": "syntax-logic-node/v1",
+                                                                                  "sort": {
+                                                                                    "arguments": [],
+                                                                                    "kind": "atomic",
+                                                                                    "name": "Object",
+                                                                                    "schema_version": "syntax-logic-sort/v1"
+                                                                                  },
+                                                                                  "symbol": "x2"
+                                                                                }
+                                                                              ],
+                                                                              "binders": [],
+                                                                              "kind": "equality",
+                                                                              "metadata": {},
+                                                                              "node_id": "prose:node:36",
+                                                                              "schema_version": "syntax-logic-node/v1",
+                                                                              "sort": {
+                                                                                "arguments": [],
+                                                                                "kind": "bool",
+                                                                                "name": "Bool",
+                                                                                "schema_version": "syntax-logic-sort/v1"
+                                                                              },
+                                                                              "symbol": ""
+                                                                            }
+                                                                          ],
+                                                                          "binders": [],
+                                                                          "kind": "or",
+                                                                          "metadata": {},
+                                                                          "node_id": "prose:node:38",
+                                                                          "schema_version": "syntax-logic-node/v1",
+                                                                          "sort": {
+                                                                            "arguments": [],
+                                                                            "kind": "bool",
+                                                                            "name": "Bool",
+                                                                            "schema_version": "syntax-logic-sort/v1"
+                                                                          },
+                                                                          "symbol": ""
+                                                                        },
+                                                                        {
+                                                                          "arguments": [
+                                                                            {
+                                                                              "arguments": [],
+                                                                              "binders": [],
+                                                                              "kind": "variable",
+                                                                              "metadata": {},
+                                                                              "node_id": "prose:node:39",
+                                                                              "schema_version": "syntax-logic-node/v1",
+                                                                              "sort": {
+                                                                                "arguments": [],
+                                                                                "kind": "atomic",
+                                                                                "name": "Object",
+                                                                                "schema_version": "syntax-logic-sort/v1"
+                                                                              },
+                                                                              "symbol": "x0"
+                                                                            },
+                                                                            {
+                                                                              "arguments": [],
+                                                                              "binders": [],
+                                                                              "kind": "variable",
+                                                                              "metadata": {},
+                                                                              "node_id": "prose:node:41",
+                                                                              "schema_version": "syntax-logic-node/v1",
+                                                                              "sort": {
+                                                                                "arguments": [],
+                                                                                "kind": "atomic",
+                                                                                "name": "Object",
+                                                                                "schema_version": "syntax-logic-sort/v1"
+                                                                              },
+                                                                              "symbol": "x3"
+                                                                            }
+                                                                          ],
+                                                                          "binders": [],
+                                                                          "kind": "equality",
+                                                                          "metadata": {},
+                                                                          "node_id": "prose:node:40",
+                                                                          "schema_version": "syntax-logic-node/v1",
+                                                                          "sort": {
+                                                                            "arguments": [],
+                                                                            "kind": "bool",
+                                                                            "name": "Bool",
+                                                                            "schema_version": "syntax-logic-sort/v1"
+                                                                          },
+                                                                          "symbol": ""
+                                                                        }
+                                                                      ],
+                                                                      "binders": [],
+                                                                      "kind": "or",
+                                                                      "metadata": {},
+                                                                      "node_id": "prose:node:42",
+                                                                      "schema_version": "syntax-logic-node/v1",
+                                                                      "sort": {
+                                                                        "arguments": [],
+                                                                        "kind": "bool",
+                                                                        "name": "Bool",
+                                                                        "schema_version": "syntax-logic-sort/v1"
+                                                                      },
+                                                                      "symbol": ""
+                                                                    },
+                                                                    {
+                                                                      "arguments": [
+                                                                        {
+                                                                          "arguments": [],
+                                                                          "binders": [],
+                                                                          "kind": "variable",
+                                                                          "metadata": {},
+                                                                          "node_id": "prose:node:43",
+                                                                          "schema_version": "syntax-logic-node/v1",
+                                                                          "sort": {
+                                                                            "arguments": [],
+                                                                            "kind": "atomic",
+                                                                            "name": "Object",
+                                                                            "schema_version": "syntax-logic-sort/v1"
+                                                                          },
+                                                                          "symbol": "x1"
+                                                                        },
+                                                                        {
+                                                                          "arguments": [],
+                                                                          "binders": [],
+                                                                          "kind": "variable",
+                                                                          "metadata": {},
+                                                                          "node_id": "prose:node:45",
+                                                                          "schema_version": "syntax-logic-node/v1",
+                                                                          "sort": {
+                                                                            "arguments": [],
+                                                                            "kind": "atomic",
+                                                                            "name": "Object",
+                                                                            "schema_version": "syntax-logic-sort/v1"
+                                                                          },
+                                                                          "symbol": "x2"
+                                                                        }
+                                                                      ],
+                                                                      "binders": [],
+                                                                      "kind": "equality",
+                                                                      "metadata": {},
+                                                                      "node_id": "prose:node:44",
+                                                                      "schema_version": "syntax-logic-node/v1",
+                                                                      "sort": {
+                                                                        "arguments": [],
+                                                                        "kind": "bool",
+                                                                        "name": "Bool",
+                                                                        "schema_version": "syntax-logic-sort/v1"
+                                                                      },
+                                                                      "symbol": ""
+                                                                    }
+                                                                  ],
+                                                                  "binders": [],
+                                                                  "kind": "or",
+                                                                  "metadata": {},
+                                                                  "node_id": "prose:node:46",
+                                                                  "schema_version": "syntax-logic-node/v1",
+                                                                  "sort": {
+                                                                    "arguments": [],
+                                                                    "kind": "bool",
+                                                                    "name": "Bool",
+                                                                    "schema_version": "syntax-logic-sort/v1"
+                                                                  },
+                                                                  "symbol": ""
+                                                                },
+                                                                {
+                                                                  "arguments": [
+                                                                    {
+                                                                      "arguments": [],
+                                                                      "binders": [],
+                                                                      "kind": "variable",
+                                                                      "metadata": {},
+                                                                      "node_id": "prose:node:47",
+                                                                      "schema_version": "syntax-logic-node/v1",
+                                                                      "sort": {
+                                                                        "arguments": [],
+                                                                        "kind": "atomic",
+                                                                        "name": "Object",
+                                                                        "schema_version": "syntax-logic-sort/v1"
+                                                                      },
+                                                                      "symbol": "x1"
+                                                                    },
+                                                                    {
+                                                                      "arguments": [],
+                                                                      "binders": [],
+                                                                      "kind": "variable",
+                                                                      "metadata": {},
+                                                                      "node_id": "prose:node:49",
+                                                                      "schema_version": "syntax-logic-node/v1",
+                                                                      "sort": {
+                                                                        "arguments": [],
+                                                                        "kind": "atomic",
+                                                                        "name": "Object",
+                                                                        "schema_version": "syntax-logic-sort/v1"
+                                                                      },
+                                                                      "symbol": "x3"
+                                                                    }
+                                                                  ],
+                                                                  "binders": [],
+                                                                  "kind": "equality",
+                                                                  "metadata": {},
+                                                                  "node_id": "prose:node:48",
+                                                                  "schema_version": "syntax-logic-node/v1",
+                                                                  "sort": {
+                                                                    "arguments": [],
+                                                                    "kind": "bool",
+                                                                    "name": "Bool",
+                                                                    "schema_version": "syntax-logic-sort/v1"
+                                                                  },
+                                                                  "symbol": ""
+                                                                }
+                                                              ],
+                                                              "binders": [],
+                                                              "kind": "or",
+                                                              "metadata": {},
+                                                              "node_id": "prose:node:50",
+                                                              "schema_version": "syntax-logic-node/v1",
+                                                              "sort": {
+                                                                "arguments": [],
+                                                                "kind": "bool",
+                                                                "name": "Bool",
+                                                                "schema_version": "syntax-logic-sort/v1"
+                                                              },
+                                                              "symbol": ""
+                                                            },
+                                                            {
+                                                              "arguments": [
+                                                                {
+                                                                  "arguments": [],
+                                                                  "binders": [],
+                                                                  "kind": "variable",
+                                                                  "metadata": {},
+                                                                  "node_id": "prose:node:51",
+                                                                  "schema_version": "syntax-logic-node/v1",
+                                                                  "sort": {
+                                                                    "arguments": [],
+                                                                    "kind": "atomic",
+                                                                    "name": "Object",
+                                                                    "schema_version": "syntax-logic-sort/v1"
+                                                                  },
+                                                                  "symbol": "x2"
+                                                                },
+                                                                {
+                                                                  "arguments": [],
+                                                                  "binders": [],
+                                                                  "kind": "variable",
+                                                                  "metadata": {},
+                                                                  "node_id": "prose:node:53",
+                                                                  "schema_version": "syntax-logic-node/v1",
+                                                                  "sort": {
+                                                                    "arguments": [],
+                                                                    "kind": "atomic",
+                                                                    "name": "Object",
+                                                                    "schema_version": "syntax-logic-sort/v1"
+                                                                  },
+                                                                  "symbol": "x3"
+                                                                }
+                                                              ],
+                                                              "binders": [],
+                                                              "kind": "equality",
+                                                              "metadata": {},
+                                                              "node_id": "prose:node:52",
+                                                              "schema_version": "syntax-logic-node/v1",
+                                                              "sort": {
+                                                                "arguments": [],
+                                                                "kind": "bool",
+                                                                "name": "Bool",
+                                                                "schema_version": "syntax-logic-sort/v1"
+                                                              },
+                                                              "symbol": ""
+                                                            }
+                                                          ],
+                                                          "binders": [],
+                                                          "kind": "or",
+                                                          "metadata": {},
+                                                          "node_id": "prose:node:54",
+                                                          "schema_version": "syntax-logic-node/v1",
+                                                          "sort": {
+                                                            "arguments": [],
+                                                            "kind": "bool",
+                                                            "name": "Bool",
+                                                            "schema_version": "syntax-logic-sort/v1"
+                                                          },
+                                                          "symbol": ""
+                                                        }
+                                                      ],
+                                                      "binders": [],
+                                                      "kind": "implies",
+                                                      "metadata": {},
+                                                      "node_id": "prose:node:55",
+                                                      "schema_version": "syntax-logic-node/v1",
+                                                      "sort": {
+                                                        "arguments": [],
+                                                        "kind": "bool",
+                                                        "name": "Bool",
+                                                        "schema_version": "syntax-logic-sort/v1"
+                                                      },
+                                                      "symbol": ""
+                                                    }
+                                                  ],
+                                                  "binders": [
+                                                    {
+                                                      "name": "x3",
+                                                      "schema_version": "syntax-binder/v1",
+                                                      "sort": {
+                                                        "arguments": [],
+                                                        "kind": "atomic",
+                                                        "name": "Object",
+                                                        "schema_version": "syntax-logic-sort/v1"
+                                                      }
+                                                    }
+                                                  ],
+                                                  "kind": "forall",
+                                                  "metadata": {},
+                                                  "node_id": "prose:node:56",
+                                                  "schema_version": "syntax-logic-node/v1",
+                                                  "sort": {
+                                                    "arguments": [],
+                                                    "kind": "bool",
+                                                    "name": "Bool",
+                                                    "schema_version": "syntax-logic-sort/v1"
+                                                  },
+                                                  "symbol": ""
+                                                }
+                                              ],
+                                              "binders": [
+                                                {
+                                                  "name": "x2",
+                                                  "schema_version": "syntax-binder/v1",
+                                                  "sort": {
+                                                    "arguments": [],
+                                                    "kind": "atomic",
+                                                    "name": "Object",
+                                                    "schema_version": "syntax-logic-sort/v1"
+                                                  }
+                                                }
+                                              ],
+                                              "kind": "forall",
+                                              "metadata": {},
+                                              "node_id": "prose:node:57",
+                                              "schema_version": "syntax-logic-node/v1",
+                                              "sort": {
+                                                "arguments": [],
+                                                "kind": "bool",
+                                                "name": "Bool",
+                                                "schema_version": "syntax-logic-sort/v1"
+                                              },
+                                              "symbol": ""
+                                            }
+                                          ],
+                                          "binders": [
+                                            {
+                                              "name": "x1",
+                                              "schema_version": "syntax-binder/v1",
+                                              "sort": {
+                                                "arguments": [],
+                                                "kind": "atomic",
+                                                "name": "Object",
+                                                "schema_version": "syntax-logic-sort/v1"
+                                              }
+                                            }
+                                          ],
+                                          "kind": "forall",
+                                          "metadata": {},
+                                          "node_id": "prose:node:58",
+                                          "schema_version": "syntax-logic-node/v1",
+                                          "sort": {
+                                            "arguments": [],
+                                            "kind": "bool",
+                                            "name": "Bool",
+                                            "schema_version": "syntax-logic-sort/v1"
+                                          },
+                                          "symbol": ""
+                                        }
+                                      ],
+                                      "binders": [
+                                        {
+                                          "name": "x0",
+                                          "schema_version": "syntax-binder/v1",
+                                          "sort": {
+                                            "arguments": [],
+                                            "kind": "atomic",
+                                            "name": "Object",
+                                            "schema_version": "syntax-logic-sort/v1"
+                                          }
+                                        }
+                                      ],
+                                      "kind": "forall",
+                                      "metadata": {},
+                                      "node_id": "prose:node:59",
+                                      "schema_version": "syntax-logic-node/v1",
+                                      "sort": {
+                                        "arguments": [],
+                                        "kind": "bool",
+                                        "name": "Bool",
+                                        "schema_version": "syntax-logic-sort/v1"
+                                      },
+                                      "symbol": ""
+                                    }
+                                  ],
+                                  "binders": [],
+                                  "kind": "and",
+                                  "metadata": {},
+                                  "node_id": "prose:node:60",
+                                  "schema_version": "syntax-logic-node/v1",
+                                  "sort": {
+                                    "arguments": [],
+                                    "kind": "bool",
+                                    "name": "Bool",
+                                    "schema_version": "syntax-logic-sort/v1"
+                                  },
+                                  "symbol": ""
+                                },
+                                {
+                                  "arguments": [],
+                                  "binders": [],
+                                  "extension": {
+                                    "children": [
+                                      {
+                                        "arguments": [
+                                          {
+                                            "arguments": [
+                                              {
+                                                "arguments": [
+                                                  {
+                                                    "arguments": [],
+                                                    "binders": [],
+                                                    "kind": "variable",
+                                                    "metadata": {},
+                                                    "node_id": "prose:node:61",
+                                                    "schema_version": "syntax-logic-node/v1",
+                                                    "sort": {
+                                                      "arguments": [],
+                                                      "kind": "atomic",
+                                                      "name": "Object",
+                                                      "schema_version": "syntax-logic-sort/v1"
+                                                    },
+                                                    "symbol": "duties"
+                                                  },
+                                                  {
+                                                    "arguments": [],
+                                                    "binders": [],
+                                                    "kind": "variable",
+                                                    "metadata": {},
+                                                    "node_id": "prose:node:62",
+                                                    "schema_version": "syntax-logic-node/v1",
+                                                    "sort": {
+                                                      "arguments": [],
+                                                      "kind": "atomic",
+                                                      "name": "Object",
+                                                      "schema_version": "syntax-logic-sort/v1"
+                                                    },
+                                                    "symbol": "mayor"
+                                                  }
+                                                ],
+                                                "binders": [],
+                                                "kind": "predicate",
+                                                "metadata": {},
+                                                "node_id": "prose:node:63",
+                                                "schema_version": "syntax-logic-node/v1",
+                                                "sort": {
+                                                  "arguments": [],
+                                                  "kind": "bool",
+                                                  "name": "Bool",
+                                                  "schema_version": "syntax-logic-sort/v1"
+                                                },
+                                                "symbol": "DutiesOf"
+                                              },
+                                              {
+                                                "arguments": [
+                                                  {
+                                                    "arguments": [
+                                                      {
+                                                        "arguments": [
+                                                          {
+                                                            "arguments": [],
+                                                            "binders": [],
+                                                            "kind": "variable",
+                                                            "metadata": {},
+                                                            "node_id": "prose:node:64",
+                                                            "schema_version": "syntax-logic-node/v1",
+                                                            "sort": {
+                                                              "arguments": [],
+                                                              "kind": "atomic",
+                                                              "name": "Object",
+                                                              "schema_version": "syntax-logic-sort/v1"
+                                                            },
+                                                            "symbol": "officer"
+                                                          },
+                                                          {
+                                                            "arguments": [],
+                                                            "binders": [],
+                                                            "kind": "variable",
+                                                            "metadata": {},
+                                                            "node_id": "prose:node:65",
+                                                            "schema_version": "syntax-logic-node/v1",
+                                                            "sort": {
+                                                              "arguments": [],
+                                                              "kind": "atomic",
+                                                              "name": "EventFrame",
+                                                              "schema_version": "syntax-logic-sort/v1"
+                                                            },
+                                                            "symbol": "event"
+                                                          },
+                                                          {
+                                                            "arguments": [],
+                                                            "binders": [],
+                                                            "kind": "variable",
+                                                            "metadata": {},
+                                                            "node_id": "prose:node:66",
+                                                            "schema_version": "syntax-logic-node/v1",
+                                                            "sort": {
+                                                              "arguments": [],
+                                                              "kind": "atomic",
+                                                              "name": "TimeFrame",
+                                                              "schema_version": "syntax-logic-sort/v1"
+                                                            },
+                                                            "symbol": "time"
+                                                          }
+                                                        ],
+                                                        "binders": [],
+                                                        "kind": "predicate",
+                                                        "metadata": {},
+                                                        "node_id": "prose:node:67",
+                                                        "schema_version": "syntax-logic-node/v1",
+                                                        "sort": {
+                                                          "arguments": [],
+                                                          "kind": "bool",
+                                                          "name": "Bool",
+                                                          "schema_version": "syntax-logic-sort/v1"
+                                                        },
+                                                        "symbol": "Member"
+                                                      },
+                                                      {
+                                                        "arguments": [
+                                                          {
+                                                            "arguments": [
+                                                              {
+                                                                "arguments": [
+                                                                  {
+                                                                    "arguments": [
+                                                                      {
+                                                                        "arguments": [],
+                                                                        "binders": [],
+                                                                        "kind": "variable",
+                                                                        "metadata": {},
+                                                                        "node_id": "prose:node:68",
+                                                                        "schema_version": "syntax-logic-node/v1",
+                                                                        "sort": {
+                                                                          "arguments": [],
+                                                                          "kind": "atomic",
+                                                                          "name": "Object",
+                                                                          "schema_version": "syntax-logic-sort/v1"
+                                                                        },
+                                                                        "symbol": "officer"
+                                                                      }
+                                                                    ],
+                                                                    "binders": [],
+                                                                    "kind": "predicate",
+                                                                    "metadata": {},
+                                                                    "node_id": "prose:node:69",
+                                                                    "schema_version": "syntax-logic-node/v1",
+                                                                    "sort": {
+                                                                      "arguments": [],
+                                                                      "kind": "bool",
+                                                                      "name": "Bool",
+                                                                      "schema_version": "syntax-logic-sort/v1"
+                                                                    },
+                                                                    "symbol": "Officer"
+                                                                  },
+                                                                  {
+                                                                    "arguments": [
+                                                                      {
+                                                                        "arguments": [],
+                                                                        "binders": [],
+                                                                        "kind": "variable",
+                                                                        "metadata": {},
+                                                                        "node_id": "prose:node:70",
+                                                                        "schema_version": "syntax-logic-node/v1",
+                                                                        "sort": {
+                                                                          "arguments": [],
+                                                                          "kind": "atomic",
+                                                                          "name": "Object",
+                                                                          "schema_version": "syntax-logic-sort/v1"
+                                                                        },
+                                                                        "symbol": "officer"
+                                                                      },
+                                                                      {
+                                                                        "arguments": [],
+                                                                        "binders": [],
+                                                                        "kind": "variable",
+                                                                        "metadata": {},
+                                                                        "node_id": "prose:node:71",
+                                                                        "schema_version": "syntax-logic-node/v1",
+                                                                        "sort": {
+                                                                          "arguments": [],
+                                                                          "kind": "atomic",
+                                                                          "name": "Object",
+                                                                          "schema_version": "syntax-logic-sort/v1"
+                                                                        },
+                                                                        "symbol": "corps"
+                                                                      }
+                                                                    ],
+                                                                    "binders": [],
+                                                                    "kind": "predicate",
+                                                                    "metadata": {},
+                                                                    "node_id": "prose:node:72",
+                                                                    "schema_version": "syntax-logic-node/v1",
+                                                                    "sort": {
+                                                                      "arguments": [],
+                                                                      "kind": "bool",
+                                                                      "name": "Bool",
+                                                                      "schema_version": "syntax-logic-sort/v1"
+                                                                    },
+                                                                    "symbol": "AssignedTo"
+                                                                  }
+                                                                ],
+                                                                "binders": [],
+                                                                "kind": "and",
+                                                                "metadata": {},
+                                                                "node_id": "prose:node:73",
+                                                                "schema_version": "syntax-logic-node/v1",
+                                                                "sort": {
+                                                                  "arguments": [],
+                                                                  "kind": "bool",
+                                                                  "name": "Bool",
+                                                                  "schema_version": "syntax-logic-sort/v1"
+                                                                },
+                                                                "symbol": ""
+                                                              },
+                                                              {
+                                                                "arguments": [
+                                                                  {
+                                                                    "arguments": [],
+                                                                    "binders": [],
+                                                                    "kind": "variable",
+                                                                    "metadata": {},
+                                                                    "node_id": "prose:node:74",
+                                                                    "schema_version": "syntax-logic-node/v1",
+                                                                    "sort": {
+                                                                      "arguments": [],
+                                                                      "kind": "atomic",
+                                                                      "name": "Object",
+                                                                      "schema_version": "syntax-logic-sort/v1"
+                                                                    },
+                                                                    "symbol": "president"
+                                                                  },
+                                                                  {
+                                                                    "arguments": [],
+                                                                    "binders": [],
+                                                                    "kind": "variable",
+                                                                    "metadata": {},
+                                                                    "node_id": "prose:node:75",
+                                                                    "schema_version": "syntax-logic-node/v1",
+                                                                    "sort": {
+                                                                      "arguments": [],
+                                                                      "kind": "atomic",
+                                                                      "name": "Object",
+                                                                      "schema_version": "syntax-logic-sort/v1"
+                                                                    },
+                                                                    "symbol": "officer"
+                                                                  },
+                                                                  {
+                                                                    "arguments": [],
+                                                                    "binders": [],
+                                                                    "kind": "variable",
+                                                                    "metadata": {},
+                                                                    "node_id": "prose:node:76",
+                                                                    "schema_version": "syntax-logic-node/v1",
+                                                                    "sort": {
+                                                                      "arguments": [],
+                                                                      "kind": "atomic",
+                                                                      "name": "EventFrame",
+                                                                      "schema_version": "syntax-logic-sort/v1"
+                                                                    },
+                                                                    "symbol": "event"
+                                                                  },
+                                                                  {
+                                                                    "arguments": [],
+                                                                    "binders": [],
+                                                                    "kind": "variable",
+                                                                    "metadata": {},
+                                                                    "node_id": "prose:node:77",
+                                                                    "schema_version": "syntax-logic-node/v1",
+                                                                    "sort": {
+                                                                      "arguments": [],
+                                                                      "kind": "atomic",
+                                                                      "name": "TimeFrame",
+                                                                      "schema_version": "syntax-logic-sort/v1"
+                                                                    },
+                                                                    "symbol": "time"
+                                                                  }
+                                                                ],
+                                                                "binders": [],
+                                                                "kind": "predicate",
+                                                                "metadata": {},
+                                                                "node_id": "prose:node:78",
+                                                                "schema_version": "syntax-logic-node/v1",
+                                                                "sort": {
+                                                                  "arguments": [],
+                                                                  "kind": "bool",
+                                                                  "name": "Bool",
+                                                                  "schema_version": "syntax-logic-sort/v1"
+                                                                },
+                                                                "symbol": "Detail"
+                                                              }
+                                                            ],
+                                                            "binders": [],
+                                                            "kind": "and",
+                                                            "metadata": {},
+                                                            "node_id": "prose:node:79",
+                                                            "schema_version": "syntax-logic-node/v1",
+                                                            "sort": {
+                                                              "arguments": [],
+                                                              "kind": "bool",
+                                                              "name": "Bool",
+                                                              "schema_version": "syntax-logic-sort/v1"
+                                                            },
+                                                            "symbol": ""
+                                                          },
+                                                          {
+                                                            "arguments": [
+                                                              {
+                                                                "arguments": [],
+                                                                "binders": [],
+                                                                "kind": "variable",
+                                                                "metadata": {},
+                                                                "node_id": "prose:node:80",
+                                                                "schema_version": "syntax-logic-node/v1",
+                                                                "sort": {
+                                                                  "arguments": [],
+                                                                  "kind": "atomic",
+                                                                  "name": "EventFrame",
+                                                                  "schema_version": "syntax-logic-sort/v1"
+                                                                },
+                                                                "symbol": "event"
+                                                              },
+                                                              {
+                                                                "arguments": [],
+                                                                "binders": [],
+                                                                "kind": "variable",
+                                                                "metadata": {},
+                                                                "node_id": "prose:node:81",
+                                                                "schema_version": "syntax-logic-node/v1",
+                                                                "sort": {
+                                                                  "arguments": [],
+                                                                  "kind": "atomic",
+                                                                  "name": "Object",
+                                                                  "schema_version": "syntax-logic-sort/v1"
+                                                                },
+                                                                "symbol": "officer"
+                                                              },
+                                                              {
+                                                                "arguments": [],
+                                                                "binders": [],
+                                                                "kind": "variable",
+                                                                "metadata": {},
+                                                                "node_id": "prose:node:82",
+                                                                "schema_version": "syntax-logic-node/v1",
+                                                                "sort": {
+                                                                  "arguments": [],
+                                                                  "kind": "atomic",
+                                                                  "name": "Object",
+                                                                  "schema_version": "syntax-logic-sort/v1"
+                                                                },
+                                                                "symbol": "mayor"
+                                                              },
+                                                              {
+                                                                "arguments": [],
+                                                                "binders": [],
+                                                                "kind": "variable",
+                                                                "metadata": {},
+                                                                "node_id": "prose:node:83",
+                                                                "schema_version": "syntax-logic-node/v1",
+                                                                "sort": {
+                                                                  "arguments": [],
+                                                                  "kind": "atomic",
+                                                                  "name": "Object",
+                                                                  "schema_version": "syntax-logic-sort/v1"
+                                                                },
+                                                                "symbol": "duties"
+                                                              },
+                                                              {
+                                                                "arguments": [],
+                                                                "binders": [],
+                                                                "kind": "variable",
+                                                                "metadata": {},
+                                                                "node_id": "prose:node:84",
+                                                                "schema_version": "syntax-logic-node/v1",
+                                                                "sort": {
+                                                                  "arguments": [],
+                                                                  "kind": "atomic",
+                                                                  "name": "TimeFrame",
+                                                                  "schema_version": "syntax-logic-sort/v1"
+                                                                },
+                                                                "symbol": "time"
+                                                              }
+                                                            ],
+                                                            "binders": [],
+                                                            "kind": "predicate",
+                                                            "metadata": {},
+                                                            "node_id": "prose:node:85",
+                                                            "schema_version": "syntax-logic-node/v1",
+                                                            "sort": {
+                                                              "arguments": [],
+                                                              "kind": "bool",
+                                                              "name": "Bool",
+                                                              "schema_version": "syntax-logic-sort/v1"
+                                                            },
+                                                            "symbol": "PurposeAssistInDischarging"
+                                                          }
+                                                        ],
+                                                        "binders": [],
+                                                        "kind": "and",
+                                                        "metadata": {},
+                                                        "node_id": "prose:node:86",
+                                                        "schema_version": "syntax-logic-node/v1",
+                                                        "sort": {
+                                                          "arguments": [],
+                                                          "kind": "bool",
+                                                          "name": "Bool",
+                                                          "schema_version": "syntax-logic-sort/v1"
+                                                        },
+                                                        "symbol": ""
+                                                      }
+                                                    ],
+                                                    "binders": [],
+                                                    "kind": "implies",
+                                                    "metadata": {},
+                                                    "node_id": "prose:node:87",
+                                                    "schema_version": "syntax-logic-node/v1",
+                                                    "sort": {
+                                                      "arguments": [],
+                                                      "kind": "bool",
+                                                      "name": "Bool",
+                                                      "schema_version": "syntax-logic-sort/v1"
+                                                    },
+                                                    "symbol": ""
+                                                  }
+                                                ],
+                                                "binders": [
+                                                  {
+                                                    "name": "officer",
+                                                    "schema_version": "syntax-binder/v1",
+                                                    "sort": {
+                                                      "arguments": [],
+                                                      "kind": "atomic",
+                                                      "name": "Object",
+                                                      "schema_version": "syntax-logic-sort/v1"
+                                                    }
+                                                  }
+                                                ],
+                                                "kind": "forall",
+                                                "metadata": {},
+                                                "node_id": "prose:node:88",
+                                                "schema_version": "syntax-logic-node/v1",
+                                                "sort": {
+                                                  "arguments": [],
+                                                  "kind": "bool",
+                                                  "name": "Bool",
+                                                  "schema_version": "syntax-logic-sort/v1"
+                                                },
+                                                "symbol": ""
+                                              }
+                                            ],
+                                            "binders": [],
+                                            "kind": "and",
+                                            "metadata": {},
+                                            "node_id": "prose:node:89",
+                                            "schema_version": "syntax-logic-node/v1",
+                                            "sort": {
+                                              "arguments": [],
+                                              "kind": "bool",
+                                              "name": "Bool",
+                                              "schema_version": "syntax-logic-sort/v1"
+                                            },
+                                            "symbol": ""
+                                          }
+                                        ],
+                                        "binders": [
+                                          {
+                                            "name": "duties",
+                                            "schema_version": "syntax-binder/v1",
+                                            "sort": {
+                                              "arguments": [],
+                                              "kind": "atomic",
+                                              "name": "Object",
+                                              "schema_version": "syntax-logic-sort/v1"
+                                            }
+                                          }
+                                        ],
+                                        "kind": "exists",
+                                        "metadata": {},
+                                        "node_id": "prose:node:90",
+                                        "schema_version": "syntax-logic-node/v1",
+                                        "sort": {
+                                          "arguments": [],
+                                          "kind": "bool",
+                                          "name": "Bool",
+                                          "schema_version": "syntax-logic-sort/v1"
+                                        },
+                                        "symbol": ""
+                                      }
+                                    ],
+                                    "family": {
+                                      "interface": "LogicIdentityNamespaces@1",
+                                      "namespace": "family",
+                                      "schema_version": "logic-identity-namespaces/v1",
+                                      "value": "tdfol",
+                                      "version": "1.0.0"
+                                    },
+                                    "features": [
+                                      "legacy.classic_letter",
+                                      "legacy.permission"
+                                    ],
+                                    "interface": "LogicExtensionNode@1",
+                                    "metadata": {},
+                                    "node_id": "prose:node:91:ext",
+                                    "payload": {
+                                      "kind": "permission",
+                                      "letter": "P",
+                                      "resolution": "deontic",
+                                      "schema_version": "legacy.deontic/v1"
+                                    },
+                                    "payload_schema": "legacy.deontic/v1",
+                                    "profile": {
+                                      "interface": "LogicIdentityNamespaces@1",
+                                      "namespace": "profile",
+                                      "schema_version": "logic-identity-namespaces/v1",
+                                      "value": "tdfol_default",
+                                      "version": "1.0.0"
+                                    },
+                                    "schema_version": "syntax-logic-extension-node/v1"
+                                  },
+                                  "kind": "extension",
+                                  "metadata": {},
+                                  "node_id": "prose:node:91",
+                                  "schema_version": "syntax-logic-node/v1",
+                                  "sort": {
+                                    "arguments": [],
+                                    "kind": "bool",
+                                    "name": "Bool",
+                                    "schema_version": "syntax-logic-sort/v1"
+                                  },
+                                  "symbol": ""
+                                }
+                              ],
+                              "binders": [],
+                              "kind": "implies",
+                              "metadata": {},
+                              "node_id": "prose:node:92",
+                              "schema_version": "syntax-logic-node/v1",
+                              "sort": {
+                                "arguments": [],
+                                "kind": "bool",
+                                "name": "Bool",
+                                "schema_version": "syntax-logic-sort/v1"
+                              },
+                              "symbol": ""
+                            }
+                          ],
+                          "binders": [
+                            {
+                              "name": "district",
+                              "schema_version": "syntax-binder/v1",
+                              "sort": {
+                                "arguments": [],
+                                "kind": "atomic",
+                                "name": "Object",
+                                "schema_version": "syntax-logic-sort/v1"
+                              }
+                            }
+                          ],
+                          "kind": "forall",
+                          "metadata": {},
+                          "node_id": "prose:node:93",
+                          "schema_version": "syntax-logic-node/v1",
+                          "sort": {
+                            "arguments": [],
+                            "kind": "bool",
+                            "name": "Bool",
+                            "schema_version": "syntax-logic-sort/v1"
+                          },
+                          "symbol": ""
+                        }
+                      ],
+                      "binders": [
+                        {
+                          "name": "corps",
+                          "schema_version": "syntax-binder/v1",
+                          "sort": {
+                            "arguments": [],
+                            "kind": "atomic",
+                            "name": "Object",
+                            "schema_version": "syntax-logic-sort/v1"
+                          }
+                        }
+                      ],
+                      "kind": "forall",
+                      "metadata": {},
+                      "node_id": "prose:node:94",
+                      "schema_version": "syntax-logic-node/v1",
+                      "sort": {
+                        "arguments": [],
+                        "kind": "bool",
+                        "name": "Bool",
+                        "schema_version": "syntax-logic-sort/v1"
+                      },
+                      "symbol": ""
+                    }
+                  ],
+                  "binders": [
+                    {
+                      "name": "mayor",
+                      "schema_version": "syntax-binder/v1",
+                      "sort": {
+                        "arguments": [],
+                        "kind": "atomic",
+                        "name": "Object",
+                        "schema_version": "syntax-logic-sort/v1"
+                      }
+                    }
+                  ],
+                  "kind": "forall",
+                  "metadata": {},
+                  "node_id": "prose:node:95",
+                  "schema_version": "syntax-logic-node/v1",
+                  "sort": {
+                    "arguments": [],
+                    "kind": "bool",
+                    "name": "Bool",
+                    "schema_version": "syntax-logic-sort/v1"
+                  },
+                  "symbol": ""
+                }
+              ],
+              "binders": [
+                {
+                  "name": "president",
+                  "schema_version": "syntax-binder/v1",
+                  "sort": {
+                    "arguments": [],
+                    "kind": "atomic",
+                    "name": "Object",
+                    "schema_version": "syntax-logic-sort/v1"
+                  }
+                }
+              ],
+              "kind": "forall",
+              "metadata": {},
+              "node_id": "prose:node:96",
+              "schema_version": "syntax-logic-node/v1",
+              "sort": {
+                "arguments": [],
+                "kind": "bool",
+                "name": "Bool",
+                "schema_version": "syntax-logic-sort/v1"
+              },
+              "symbol": ""
+            }
+          ],
+          "binders": [
+            {
+              "name": "time",
+              "schema_version": "syntax-binder/v1",
+              "sort": {
+                "arguments": [],
+                "kind": "atomic",
+                "name": "TimeFrame",
+                "schema_version": "syntax-logic-sort/v1"
+              }
+            }
+          ],
+          "kind": "forall",
+          "metadata": {},
+          "node_id": "prose:node:97",
+          "schema_version": "syntax-logic-node/v1",
+          "sort": {
+            "arguments": [],
+            "kind": "bool",
+            "name": "Bool",
+            "schema_version": "syntax-logic-sort/v1"
+          },
+          "symbol": ""
+        }
+      ],
+      "binders": [
+        {
+          "name": "event",
+          "schema_version": "syntax-binder/v1",
+          "sort": {
+            "arguments": [],
+            "kind": "atomic",
+            "name": "EventFrame",
+            "schema_version": "syntax-logic-sort/v1"
+          }
+        }
+      ],
+      "kind": "forall",
+      "metadata": {},
+      "node_id": "prose:node:98",
+      "schema_version": "syntax-logic-node/v1",
+      "sort": {
+        "arguments": [],
+        "kind": "bool",
+        "name": "Bool",
+        "schema_version": "syntax-logic-sort/v1"
+      },
+      "symbol": ""
+    },
+    "schema_version": "syntax-typed-expression/v1",
+    "signature": {
+      "family": {
+        "interface": "LogicIdentityNamespaces@1",
+        "namespace": "family",
+        "schema_version": "logic-identity-namespaces/v1",
+        "value": "tdfol",
+        "version": "1.0.0"
+      },
+      "features": [],
+      "interface": "LogicSignature@1",
+      "metadata": {},
+      "profile": {
+        "interface": "LogicIdentityNamespaces@1",
+        "namespace": "profile",
+        "schema_version": "logic-identity-namespaces/v1",
+        "value": "tdfol_default",
+        "version": "1.0.0"
+      },
+      "schema_version": "syntax-logic-signature/v1",
+      "signature_id": "prose:signature",
+      "sorts": [
+        {
+          "arguments": [],
+          "kind": "bool",
+          "name": "Bool",
+          "schema_version": "syntax-logic-sort/v1"
+        },
+        {
+          "arguments": [],
+          "kind": "atomic",
+          "name": "EventFrame",
+          "schema_version": "syntax-logic-sort/v1"
+        },
+        {
+          "arguments": [],
+          "kind": "atomic",
+          "name": "Object",
+          "schema_version": "syntax-logic-sort/v1"
+        },
+        {
+          "arguments": [],
+          "kind": "atomic",
+          "name": "TimeFrame",
+          "schema_version": "syntax-logic-sort/v1"
+        }
+      ],
+      "symbols": [
+        {
+          "domain": [
+            {
+              "arguments": [],
+              "kind": "atomic",
+              "name": "Object",
+              "schema_version": "syntax-logic-sort/v1"
+            },
+            {
+              "arguments": [],
+              "kind": "atomic",
+              "name": "Object",
+              "schema_version": "syntax-logic-sort/v1"
+            }
+          ],
+          "kind": "predicate",
+          "metadata": {},
+          "name": "AssignedTo",
+          "range": {
+            "arguments": [],
+            "kind": "bool",
+            "name": "Bool",
+            "schema_version": "syntax-logic-sort/v1"
+          },
+          "schema_version": "syntax-symbol-declaration/v1"
+        },
+        {
+          "domain": [
+            {
+              "arguments": [],
+              "kind": "atomic",
+              "name": "Object",
+              "schema_version": "syntax-logic-sort/v1"
+            }
+          ],
+          "kind": "predicate",
+          "metadata": {},
+          "name": "CorpsEngineers",
+          "range": {
+            "arguments": [],
+            "kind": "bool",
+            "name": "Bool",
+            "schema_version": "syntax-logic-sort/v1"
+          },
+          "schema_version": "syntax-symbol-declaration/v1"
+        },
+        {
+          "domain": [
+            {
+              "arguments": [],
+              "kind": "atomic",
+              "name": "Object",
+              "schema_version": "syntax-logic-sort/v1"
+            },
+            {
+              "arguments": [],
+              "kind": "atomic",
+              "name": "Object",
+              "schema_version": "syntax-logic-sort/v1"
+            },
+            {
+              "arguments": [],
+              "kind": "atomic",
+              "name": "EventFrame",
+              "schema_version": "syntax-logic-sort/v1"
+            },
+            {
+              "arguments": [],
+              "kind": "atomic",
+              "name": "TimeFrame",
+              "schema_version": "syntax-logic-sort/v1"
+            }
+          ],
+          "kind": "predicate",
+          "metadata": {},
+          "name": "Detail",
+          "range": {
+            "arguments": [],
+            "kind": "bool",
+            "name": "Bool",
+            "schema_version": "syntax-logic-sort/v1"
+          },
+          "schema_version": "syntax-symbol-declaration/v1"
+        },
+        {
+          "domain": [
+            {
+              "arguments": [],
+              "kind": "atomic",
+              "name": "Object",
+              "schema_version": "syntax-logic-sort/v1"
+            }
+          ],
+          "kind": "predicate",
+          "metadata": {},
+          "name": "DistrictColumbia",
+          "range": {
+            "arguments": [],
+            "kind": "bool",
+            "name": "Bool",
+            "schema_version": "syntax-logic-sort/v1"
+          },
+          "schema_version": "syntax-symbol-declaration/v1"
+        },
+        {
+          "domain": [
+            {
+              "arguments": [],
+              "kind": "atomic",
+              "name": "Object",
+              "schema_version": "syntax-logic-sort/v1"
+            },
+            {
+              "arguments": [],
+              "kind": "atomic",
+              "name": "Object",
+              "schema_version": "syntax-logic-sort/v1"
+            }
+          ],
+          "kind": "predicate",
+          "metadata": {},
+          "name": "DutiesOf",
+          "range": {
+            "arguments": [],
+            "kind": "bool",
+            "name": "Bool",
+            "schema_version": "syntax-logic-sort/v1"
+          },
+          "schema_version": "syntax-symbol-declaration/v1"
+        },
+        {
+          "domain": [
+            {
+              "arguments": [],
+              "kind": "atomic",
+              "name": "Object",
+              "schema_version": "syntax-logic-sort/v1"
+            },
+            {
+              "arguments": [],
+              "kind": "atomic",
+              "name": "Object",
+              "schema_version": "syntax-logic-sort/v1"
+            }
+          ],
+          "kind": "predicate",
+          "metadata": {},
+          "name": "MayorOf",
+          "range": {
+            "arguments": [],
+            "kind": "bool",
+            "name": "Bool",
+            "schema_version": "syntax-logic-sort/v1"
+          },
+          "schema_version": "syntax-symbol-declaration/v1"
+        },
+        {
+          "domain": [
+            {
+              "arguments": [],
+              "kind": "atomic",
+              "name": "Object",
+              "schema_version": "syntax-logic-sort/v1"
+            },
+            {
+              "arguments": [],
+              "kind": "atomic",
+              "name": "EventFrame",
+              "schema_version": "syntax-logic-sort/v1"
+            },
+            {
+              "arguments": [],
+              "kind": "atomic",
+              "name": "TimeFrame",
+              "schema_version": "syntax-logic-sort/v1"
+            }
+          ],
+          "kind": "predicate",
+          "metadata": {},
+          "name": "Member",
+          "range": {
+            "arguments": [],
+            "kind": "bool",
+            "name": "Bool",
+            "schema_version": "syntax-logic-sort/v1"
+          },
+          "schema_version": "syntax-symbol-declaration/v1"
+        },
+        {
+          "domain": [
+            {
+              "arguments": [],
+              "kind": "atomic",
+              "name": "Object",
+              "schema_version": "syntax-logic-sort/v1"
+            }
+          ],
+          "kind": "predicate",
+          "metadata": {},
+          "name": "Officer",
+          "range": {
+            "arguments": [],
+            "kind": "bool",
+            "name": "Bool",
+            "schema_version": "syntax-logic-sort/v1"
+          },
+          "schema_version": "syntax-symbol-declaration/v1"
+        },
+        {
+          "domain": [
+            {
+              "arguments": [],
+              "kind": "atomic",
+              "name": "Object",
+              "schema_version": "syntax-logic-sort/v1"
+            }
+          ],
+          "kind": "predicate",
+          "metadata": {},
+          "name": "President",
+          "range": {
+            "arguments": [],
+            "kind": "bool",
+            "name": "Bool",
+            "schema_version": "syntax-logic-sort/v1"
+          },
+          "schema_version": "syntax-symbol-declaration/v1"
+        },
+        {
+          "domain": [
+            {
+              "arguments": [],
+              "kind": "atomic",
+              "name": "EventFrame",
+              "schema_version": "syntax-logic-sort/v1"
+            },
+            {
+              "arguments": [],
+              "kind": "atomic",
+              "name": "Object",
+              "schema_version": "syntax-logic-sort/v1"
+            },
+            {
+              "arguments": [],
+              "kind": "atomic",
+              "name": "Object",
+              "schema_version": "syntax-logic-sort/v1"
+            },
+            {
+              "arguments": [],
+              "kind": "atomic",
+              "name": "Object",
+              "schema_version": "syntax-logic-sort/v1"
+            },
+            {
+              "arguments": [],
+              "kind": "atomic",
+              "name": "TimeFrame",
+              "schema_version": "syntax-logic-sort/v1"
+            }
+          ],
+          "kind": "predicate",
+          "metadata": {},
+          "name": "PurposeAssistInDischarging",
+          "range": {
+            "arguments": [],
+            "kind": "bool",
+            "name": "Bool",
+            "schema_version": "syntax-logic-sort/v1"
+          },
+          "schema_version": "syntax-symbol-declaration/v1"
+        }
+      ]
+    }
+  },
+  "schema": "legal-relational-prose-reconstruction/v1",
+  "serialized_ast_available_to_inverse": false,
+  "status": "supported_authored_typed_prose_reconstructed",
+  "training_mask": 0,
+  "typed_structure_scope": "complete supported typed content and ordered roles; excludes transport IDs and declaration-set ordering"
+}

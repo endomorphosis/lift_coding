@@ -1,0 +1,50 @@
+{
+  "Root_selected": null,
+  "Source_authority": null,
+  "actual_source_write_receipt": null,
+  "controls_are_DATA_only": true,
+  "future_frozen_local_D_HEAD": null,
+  "future_frozen_local_D_tree": null,
+  "future_index": null,
+  "historical_published_baseline_only": {
+    "D_head": "17a3d3ff728fd4485220ae7ab85c344672db08c9",
+    "D_tree": "c47971d12ada285d5c64bf09f72cdbfedfadf750"
+  },
+  "schema": "P8-existing-packet-revision-Source2-targets-nonclock-DATA/v1",
+  "targets": [
+    {
+      "actual_current_before_Source": null,
+      "actual_full9": null,
+      "actual_installed_post_Source": null,
+      "exact_private_post_candidate": {
+        "bytes": 37952,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/benchmark-owner.after.py.DATA",
+        "sha256": "9ad1187907f37120be9929da6967ba3753cb6887696b48c2386e13854c2df000"
+      },
+      "expected_old_private_pin": {
+        "bytes": 37725,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/benchmark-owner.before.py.DATA",
+        "sha256": "1a7d55434d9c89ac22c6cc7dc53f30ded964ab0846e0a35c84efe8d760495f98"
+      },
+      "historical_old_Git_blob": "fe181984a79a0088faa46010bd2d60e155d27b0a",
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py"
+    },
+    {
+      "actual_current_before_Source": null,
+      "actual_full9": null,
+      "actual_installed_post_Source": null,
+      "exact_private_post_candidate": {
+        "bytes": 13790,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/benchmark-test.after.py.DATA",
+        "sha256": "e2bdaca2566fe5c331bcc401781e286d4956a1af474ddebd666a93f2973f641a"
+      },
+      "expected_old_private_pin": {
+        "bytes": 12917,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/benchmark-test.before.py.DATA",
+        "sha256": "e64e9f8fa947d15ffbd3196eaf4b9a0b4df99492e6f95bdbb167bfe54ae4fb75"
+      },
+      "historical_old_Git_blob": "939c3d60a7bb13f021679de702d760d0c19f30aa",
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py"
+    }
+  ]
+}

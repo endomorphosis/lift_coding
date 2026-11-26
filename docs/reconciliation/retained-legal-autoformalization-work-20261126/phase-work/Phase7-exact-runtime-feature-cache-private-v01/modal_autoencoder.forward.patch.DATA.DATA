@@ -1,0 +1,38 @@
+--- a/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py
++++ b/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py
+@@ -13,7 +13,7 @@
+ import time
+ from contextlib import nullcontext
+ from concurrent.futures import ThreadPoolExecutor
+-from dataclasses import dataclass, field, replace
++from dataclasses import asdict, dataclass, field, replace
+ from pathlib import Path
+ from typing import (
+     Any,
+@@ -25445,10 +25445,22 @@
+         ]
+ 
+     def _sample_cache_for(self, sample: LegalSample) -> Dict[str, Any]:
+-        return self._sample_feature_cache.setdefault(
+-            (_sample_content_cache_id(sample), len(sample.embedding_vector)),
+-            {},
+-        )
++        # The bridge-target cache uses a citation-independent projection.
++        # Feature extraction reads the whole sample, including formula order,
++        # source roles, and current parser metadata. Hash it at each lookup
++        # because a frozen sample can still contain mutable nested values.
++        try:
++            snapshot = sample
++            if type(sample.embedding_vector) not in (tuple, list):
++                snapshot = replace(sample, embedding_vector=tuple(sample.embedding_vector))
++            payload = json.dumps(asdict(snapshot), ensure_ascii=True,
++                                 allow_nan=False, separators=(",", ":"))
++        except (TypeError, ValueError, RecursionError):
++            # Non-serializable extension inputs may still be processed, but
++            # cannot share a feature-cache entry.
++            return {}
++        digest = hashlib.sha256(payload.encode("ascii")).hexdigest()
++        return self._sample_feature_cache.setdefault((digest, len(sample.embedding_vector)), {})
+ 
+     def _family_contributions_for(
+         self,

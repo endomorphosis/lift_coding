@@ -1,0 +1,54 @@
+profile=private-stdlib-owner-and-pytest-fixture selectors= 13
+...................................FF                                    [100%]
+=================================== FAILURES ===================================
+__ test_malformed_raw_counterexample_cannot_supply_explicit_credit[scenario0] __
+
+scenario = {'assignment': {'notice': False}, 'violates': ' '}
+
+    @pytest.mark.parametrize("scenario", [
+        {"assignment": {"notice": False}, "violates": " "},
+        {"violates": "po-notice"},
+    ])
+    def test_malformed_raw_counterexample_cannot_supply_explicit_credit(scenario):
+        reference = _reference_ir()
+        candidate = _isomorphic_ir()
+        candidate["counterexamples"] = [deepcopy(scenario)]
+        explicit = _all_semantic_scores()
+        result = semantic_equivalence_from_metrics({
+            **explicit, "reference_ir": reference, "candidate_ir": candidate,
+        }, family="deontic")
+    
+        assert COUNTEREXAMPLE_EQUIVALENCE not in result.scores
+        assert COUNTEREXAMPLE_EQUIVALENCE in result.missing_metrics
+>       assert semantic_equivalence_from_metrics(explicit).scores[COUNTEREXAMPLE_EQUIVALENCE] == 1.0
+E       TypeError: semantic_equivalence_from_metrics() missing 1 required keyword-only argument: 'family'
+
+test_legal_ir_semantic_metrics.py:968: TypeError
+__ test_malformed_raw_counterexample_cannot_supply_explicit_credit[scenario1] __
+
+scenario = {'violates': 'po-notice'}
+
+    @pytest.mark.parametrize("scenario", [
+        {"assignment": {"notice": False}, "violates": " "},
+        {"violates": "po-notice"},
+    ])
+    def test_malformed_raw_counterexample_cannot_supply_explicit_credit(scenario):
+        reference = _reference_ir()
+        candidate = _isomorphic_ir()
+        candidate["counterexamples"] = [deepcopy(scenario)]
+        explicit = _all_semantic_scores()
+        result = semantic_equivalence_from_metrics({
+            **explicit, "reference_ir": reference, "candidate_ir": candidate,
+        }, family="deontic")
+    
+        assert COUNTEREXAMPLE_EQUIVALENCE not in result.scores
+        assert COUNTEREXAMPLE_EQUIVALENCE in result.missing_metrics
+>       assert semantic_equivalence_from_metrics(explicit).scores[COUNTEREXAMPLE_EQUIVALENCE] == 1.0
+E       TypeError: semantic_equivalence_from_metrics() missing 1 required keyword-only argument: 'family'
+
+test_legal_ir_semantic_metrics.py:968: TypeError
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-counterexample-assignment-pairing-complete-private-YItN2ffh/green.junit.xml -
+=========================== short test summary info ============================
+FAILED test_legal_ir_semantic_metrics.py::test_malformed_raw_counterexample_cannot_supply_explicit_credit[scenario0]
+FAILED test_legal_ir_semantic_metrics.py::test_malformed_raw_counterexample_cannot_supply_explicit_credit[scenario1]
+2 failed, 35 passed in 0.20s

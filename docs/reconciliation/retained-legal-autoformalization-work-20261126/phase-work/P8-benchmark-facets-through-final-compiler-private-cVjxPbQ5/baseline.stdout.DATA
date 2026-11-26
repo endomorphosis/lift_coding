@@ -1,0 +1,148 @@
+............................FF....FFFFFF.FF.................FFFFFF...... [ 61%]
+.........FFFF.............................FFF                            [100%]
+=================================== FAILURES ===================================
+_ test_external_benchmark_obeys_family_ambiguity_policy[disabled-optional-family] _
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:422: in test_external_benchmark_obeys_family_ambiguity_policy
+    assert report.failed_packet_ids == (packet.packet_id,)
+E   AssertionError: assert () == ('external-ex...-notice-001',)
+E     
+E     Right contains one more item: 'external-expert-privacy-notice-001'
+E     Use -v to get more diff
+_ test_external_benchmark_obeys_family_ambiguity_policy[disabled-family-alternative] _
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:422: in test_external_benchmark_obeys_family_ambiguity_policy
+    assert report.failed_packet_ids == (packet.packet_id,)
+E   AssertionError: assert () == ('external-ex...-waiver-001',)
+E     
+E     Right contains one more item: 'external-expert-conflict-waiver-001'
+E     Use -v to get more diff
+_ test_external_benchmark_refuses_predictions_for_unselected_packets[sequence] _
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:444: in test_external_benchmark_refuses_predictions_for_unselected_packets
+    with pytest.raises(LegalIRExternalBenchmarkError, match="outside the selected benchmark population"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'>
+__ test_external_benchmark_refuses_predictions_for_unselected_packets[keyed] ___
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:444: in test_external_benchmark_refuses_predictions_for_unselected_packets
+    with pytest.raises(LegalIRExternalBenchmarkError, match="outside the selected benchmark population"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'>
+___ test_external_benchmark_refuses_predictions_for_unselected_packets[flat] ___
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:444: in test_external_benchmark_refuses_predictions_for_unselected_packets
+    with pytest.raises(LegalIRExternalBenchmarkError, match="outside the selected benchmark population"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'>
+_____ test_external_benchmark_refuses_unbound_sequence_output[malformed0] ______
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:451: in test_external_benchmark_refuses_unbound_sequence_output
+    with pytest.raises(LegalIRExternalBenchmarkError, match="prediction row requires a packet ID"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'>
+________ test_external_benchmark_refuses_unbound_sequence_output[None] _________
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:451: in test_external_benchmark_refuses_unbound_sequence_output
+    with pytest.raises(LegalIRExternalBenchmarkError, match="prediction row requires a packet ID"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'>
+___________ test_external_benchmark_refuses_nonmapping_keyed_output ____________
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:457: in test_external_benchmark_refuses_nonmapping_keyed_output
+    with pytest.raises(LegalIRExternalBenchmarkError, match="keyed prediction must be a mapping"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'>
+_ test_external_benchmark_counts_only_complete_semantic_coverage[unmeasured-arguments] _
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:496: in test_external_benchmark_counts_only_complete_semantic_coverage
+    assert result.accepted is False, result.to_dict()
+E   AssertionError: {'accepted': True, 'block_reasons': [], 'detail': {'acceptable_ambiguity': {'acceptable_family_alternatives': {'tempor...e'], 'missing_required': [], 'predicted': ['deontic', 'temporal', 'provenance'], ...}, ...}, 'minimum_score': 1.0, ...}
+E   assert True is False
+E    +  where True = ExternalBenchmarkPacketResult(packet_id='external-expert-privacy-notice-001', accepted=True, scores={'citations': 1.0,...valence': 1.0, 'proof_obligation_delta_score': 1.0, 'structural_equivalence': 1.0, 'temporal_window_agreement': 1.0}}}).accepted
+_ test_external_benchmark_counts_only_complete_semantic_coverage[missing-round-trip] _
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:497: in test_external_benchmark_counts_only_complete_semantic_coverage
+    assert result.scores["semantic_equivalence"] == 0.0
+E   assert 0.807692307692 == 0.0
+_ test_external_validity_gate_honors_independently_selected_benchmark_population[complete] _
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py:461: in test_external_validity_gate_honors_independently_selected_benchmark_population
+    assert check["selected_population_reconciled"] is (evaluation == "complete")
+E   KeyError: 'selected_population_reconciled'
+_ test_external_validity_gate_honors_independently_selected_benchmark_population[subset] _
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py:458: in test_external_validity_gate_honors_independently_selected_benchmark_population
+    assert result.accepted is (evaluation == "complete"), result.to_dict()
+E   AssertionError: {'accepted': True, 'failures': [], 'metrics': {'bindings': {'compiler_commit': {'canonical': 'compiler-external-validi..., 'leakage_count': 0.0, 'present': True, 'schema_version': 'legal-ir-eval-splits-v1', ...}, ...}, ...}, 'warnings': []}
+E   assert True is ('subset' == 'complete'
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-exter...uncertainty': 'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}}}, 'evidence_complete': True}).accepted
+E     
+E     - complete
+E     + subset)
+_ test_external_validity_gate_honors_independently_selected_benchmark_population[reordered] _
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py:458: in test_external_validity_gate_honors_independently_selected_benchmark_population
+    assert result.accepted is (evaluation == "complete"), result.to_dict()
+E   AssertionError: {'accepted': True, 'failures': [], 'metrics': {'bindings': {'compiler_commit': {'canonical': 'compiler-external-validi..., 'leakage_count': 0.0, 'present': True, 'schema_version': 'legal-ir-eval-splits-v1', ...}, ...}, ...}, 'warnings': []}
+E   assert True is ('reordered' == 'complete'
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-exter...uncertainty': 'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}}}, 'evidence_complete': True}).accepted
+E     
+E     - complete
+E     + reordered)
+______ test_external_validity_gate_does_not_promote_unmeasured_legacy_ir _______
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py:495: in test_external_validity_gate_does_not_promote_unmeasured_legacy_ir
+    assert not result.accepted, result.to_dict()
+E   AssertionError: {'accepted': True, 'failures': [], 'metrics': {'bindings': {'compiler_commit': {'canonical': 'compiler-external-validi..., 'leakage_count': 0.0, 'present': True, 'schema_version': 'legal-ir-eval-splits-v1', ...}, ...}, ...}, 'warnings': []}
+E   assert not True
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-exter...uncertainty': 'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}}}, 'evidence_complete': True}).accepted
+_ test_external_validity_gate_refuses_unverifiable_selected_benchmark[duplicate-expected-identity] _
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py:515: in test_external_validity_gate_refuses_unverifiable_selected_benchmark
+    assert result.accepted is False, result.to_dict()
+E   AssertionError: {'accepted': True, 'failures': [], 'metrics': {'bindings': {'compiler_commit': {'canonical': 'compiler-external-validi..., 'leakage_count': 0.0, 'present': True, 'schema_version': 'legal-ir-eval-splits-v1', ...}, ...}, ...}, 'warnings': []}
+E   assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-exter...uncertainty': 'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}}}, 'evidence_complete': True}).accepted
+_ test_external_validity_gate_refuses_unverifiable_selected_benchmark[summary-without-rows] _
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py:515: in test_external_validity_gate_refuses_unverifiable_selected_benchmark
+    assert result.accepted is False, result.to_dict()
+E   AssertionError: {'accepted': True, 'failures': [], 'metrics': {'bindings': {'compiler_commit': {'canonical': 'compiler-external-validi..., 'leakage_count': 0.0, 'present': True, 'schema_version': 'legal-ir-eval-splits-v1', ...}, ...}, ...}, 'warnings': []}
+E   assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-exter...uncertainty': 'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}}}, 'evidence_complete': True}).accepted
+______ test_compiler_replays_selected_benchmark_semantic_coverage[plain] _______
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:498: in test_compiler_replays_selected_benchmark_semantic_coverage
+    assert result["selected_population_reconciled"] is (evaluation != "subset")
+E   KeyError: 'selected_population_reconciled'
+_ test_compiler_replays_selected_benchmark_semantic_coverage[observation-alias] _
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:486: in test_compiler_replays_selected_benchmark_semantic_coverage
+    assert first_row["scores"]["semantic_equivalence"] == (1.0 if expect_complete else 0.0)
+E   assert 0.75 == 1.0
+_ test_compiler_replays_selected_benchmark_semantic_coverage[unmeasured-arguments] _
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:486: in test_compiler_replays_selected_benchmark_semantic_coverage
+    assert first_row["scores"]["semantic_equivalence"] == (1.0 if expect_complete else 0.0)
+E   assert 1.0 == 0.0
+______ test_compiler_replays_selected_benchmark_semantic_coverage[subset] ______
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:498: in test_compiler_replays_selected_benchmark_semantic_coverage
+    assert result["selected_population_reconciled"] is (evaluation != "subset")
+E   KeyError: 'selected_population_reconciled'
+___ test_legacy_round_trip_observations_are_separate_from_ir_facets[missing] ___
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py:893: in test_legacy_round_trip_observations_are_separate_from_ir_facets
+    assert result.scores[STRUCTURAL_EQUIVALENCE] == 1.0, result.to_dict()
+E   AssertionError: {'complete': False, 'detail': {'counterexample_signature_sizes': {'candidate': 2, 'reference': 2}, 'graph_signature_si..., 'reference': 1, 'symmetric_difference': 0}, ...}, 'evidence_sources': ['computed_ir_pair'], 'family': 'deontic', ...}
+E   assert 0.848484848485 == 1.0
+_ test_legacy_round_trip_observations_are_separate_from_ir_facets[changed-prose] _
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py:893: in test_legacy_round_trip_observations_are_separate_from_ir_facets
+    assert result.scores[STRUCTURAL_EQUIVALENCE] == 1.0, result.to_dict()
+E   AssertionError: {'complete': True, 'detail': {'counterexample_signature_sizes': {'candidate': 2, 'reference': 2}, 'graph_signature_siz..., 'reference': 1, 'symmetric_difference': 0}, ...}, 'evidence_sources': ['computed_ir_pair'], 'family': 'deontic', ...}
+E   assert 0.939393939394 == 1.0
+_ test_legacy_round_trip_observations_are_separate_from_ir_facets[direct-alias] _
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py:893: in test_legacy_round_trip_observations_are_separate_from_ir_facets
+    assert result.scores[STRUCTURAL_EQUIVALENCE] == 1.0, result.to_dict()
+E   AssertionError: {'complete': True, 'detail': {'counterexample_signature_sizes': {'candidate': 2, 'reference': 2}, 'graph_signature_siz..., 'reference': 1, 'symmetric_difference': 0}, ...}, 'evidence_sources': ['computed_ir_pair'], 'family': 'deontic', ...}
+E   assert 0.8 == 1.0
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-benchmark-facets-through-final-compiler-private-cVjxPbQ5/baseline/junit.xml -
+=========================== short test summary info ============================
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_obeys_family_ambiguity_policy[disabled-optional-family]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_obeys_family_ambiguity_policy[disabled-family-alternative]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_refuses_predictions_for_unselected_packets[sequence]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_refuses_predictions_for_unselected_packets[keyed]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_refuses_predictions_for_unselected_packets[flat]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_refuses_unbound_sequence_output[malformed0]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_refuses_unbound_sequence_output[None]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_refuses_nonmapping_keyed_output
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_counts_only_complete_semantic_coverage[unmeasured-arguments]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_counts_only_complete_semantic_coverage[missing-round-trip]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_honors_independently_selected_benchmark_population[complete]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_honors_independently_selected_benchmark_population[subset]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_honors_independently_selected_benchmark_population[reordered]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_does_not_promote_unmeasured_legacy_ir
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_unverifiable_selected_benchmark[duplicate-expected-identity]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_unverifiable_selected_benchmark[summary-without-rows]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_replays_selected_benchmark_semantic_coverage[plain]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_replays_selected_benchmark_semantic_coverage[observation-alias]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_replays_selected_benchmark_semantic_coverage[unmeasured-arguments]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_replays_selected_benchmark_semantic_coverage[subset]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_legacy_round_trip_observations_are_separate_from_ir_facets[missing]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_legacy_round_trip_observations_are_separate_from_ir_facets[changed-prose]
+FAILED test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_legacy_round_trip_observations_are_separate_from_ir_facets[direct-alias]
+23 failed, 94 passed, 2 deselected in 3.23s

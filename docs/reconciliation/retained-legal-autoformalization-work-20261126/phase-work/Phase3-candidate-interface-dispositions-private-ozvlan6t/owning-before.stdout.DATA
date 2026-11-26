@@ -1,0 +1,20 @@
+{
+  "mode": "before",
+  "exact_owning_ast": true,
+  "actual_profile_owner": true,
+  "ordinary_pytest": false,
+  "results": [
+    {
+      "node": "test_candidate_inventory_retains_candidate_above_its_codec_limit[mixed_relational]",
+      "result": "error",
+      "reason": "complete JSON byte bound exceeded"
+    },
+    {
+      "node": "test_candidate_inventory_retains_candidate_above_its_codec_limit[native_unary_preservation]",
+      "result": "error",
+      "reason": "complete JSON byte bound exceeded"
+    }
+  ],
+  "inference_enabled": false,
+  "selected_owner_sha256": "e3fb0941e123672f4c280f282b0bce80937dab6cdc56ca607ffd5d3713ae9adf"
+}

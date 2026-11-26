@@ -1,0 +1,29 @@
+{
+  "all_actual_Runtime_Source_epoch_full9_clock_assets_resource_output_bindings_NULL": true,
+  "all_prior_variants_and_RED_retained": true,
+  "extra_IO_not_a_Source_or_runtime_grant": true,
+  "forward": {
+    "bytes": 8489,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-v567-Native3-custody-readback-final.forward.diff",
+    "sha256": "de0f2e74e64c04d91e13cb2ef25e5a06b94964145a833a89dc6182def928e4c6"
+  },
+  "inverse": {
+    "bytes": 8489,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-v567-Native3-custody-readback-final.inverse.diff",
+    "sha256": "ca0af1c60105b27e90b174fb23ef4098cb9be8c6dffeec7aa3682bd9152e9103"
+  },
+  "max_total_additional_private_retention_readback_bytes": 33554432,
+  "only_existing_custody_and_retain_bytes_functions_changed": true,
+  "other_AST_Source_resource_release_finalizer_and_Native_policy_exact": true,
+  "post": {
+    "bytes": 39839,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-v567-Native3-current-operator-custody-readback-INERT-v04.py.DATA",
+    "sha256": "b83e7b413bc8b7b715c643f14462158422635939a9f5fea80e3ee5a5e15c8dff"
+  },
+  "prior": {
+    "bytes": 35401,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-v567-Native3-current-operator-INERT-v01.py.DATA",
+    "sha256": "4b844f5645a6607f184d9aa64b2203686effe1d4eb2b02a97a43afb83f0a04e0"
+  },
+  "written_byte_charge_remains_before_readback_failure": true
+}

@@ -1,0 +1,106 @@
+test_ascii_recomputed_across_unicode_training_history (_current_retained_unicode_history_fixture.UnicodeHistoryControls.test_ascii_recomputed_across_unicode_training_history) ... ERROR
+test_committed_near_keys_still_block_mixed_profile_history (_current_retained_unicode_history_fixture.UnicodeHistoryControls.test_committed_near_keys_still_block_mixed_profile_history) ... ERROR
+test_exact_unicode_replays_and_old_guard_refuses (_current_retained_unicode_history_fixture.UnicodeHistoryControls.test_exact_unicode_replays_and_old_guard_refuses) ... ERROR
+test_mixed_candidate_pairs_share_the_existing_aggregate_bound (_current_retained_unicode_history_fixture.UnicodeHistoryControls.test_mixed_candidate_pairs_share_the_existing_aggregate_bound) ... FAIL
+test_profile_cannot_change_when_its_fingerprint_happens_to_match (_current_retained_unicode_history_fixture.UnicodeHistoryControls.test_profile_cannot_change_when_its_fingerprint_happens_to_match) ... FAIL
+test_unicode_recomputed_across_legacy_holdout_keeps_withdrawal (_current_retained_unicode_history_fixture.UnicodeHistoryControls.test_unicode_recomputed_across_legacy_holdout_keeps_withdrawal) ... ERROR
+test_unknown_or_stale_profile_refused_even_in_empty_manifest (_current_retained_unicode_history_fixture.UnicodeHistoryControls.test_unknown_or_stale_profile_refused_even_in_empty_manifest) ... 
+  test_unknown_or_stale_profile_refused_even_in_empty_manifest (_current_retained_unicode_history_fixture.UnicodeHistoryControls.test_unknown_or_stale_profile_refused_even_in_empty_manifest) (metadata={'campaign_split_profile': 'unknown'}) ... FAIL
+  test_unknown_or_stale_profile_refused_even_in_empty_manifest (_current_retained_unicode_history_fixture.UnicodeHistoryControls.test_unknown_or_stale_profile_refused_even_in_empty_manifest) (metadata={'campaign_split_profile': 'unicode-campaign-split/v1', 'unicode_data_version': '0.0.0'}) ... FAIL
+test_unmarked_legacy_uses_old_owner_and_matches_exact_guard_result (_current_retained_unicode_history_fixture.UnicodeHistoryControls.test_unmarked_legacy_uses_old_owner_and_matches_exact_guard_result) ... ok
+
+======================================================================
+ERROR: test_ascii_recomputed_across_unicode_training_history (_current_retained_unicode_history_fixture.UnicodeHistoryControls.test_ascii_recomputed_across_unicode_training_history)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/decoder-training-unicode-campaign-split-private-v01-3SZARfWx/replay/test_unicode_history.py", line 186, in test_ascii_recomputed_across_unicode_training_history
+    violations = after(*args, withdrawal=True)[2]["result"]["violations"]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-native-t5-selected-head-bound-private-v02/source-stage/ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py", line 341, in _reviewed_history
+    _reviewed_need(record["split_example"] == frozen.to_dict()
+  File "/tmp/decoder-training-native-t5-selected-head-bound-private-v02/source-stage/ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py", line 183, in _reviewed_need
+    raise ValueError(message)
+ValueError: historical source fingerprint or frozen grouping differs
+
+======================================================================
+ERROR: test_committed_near_keys_still_block_mixed_profile_history (_current_retained_unicode_history_fixture.UnicodeHistoryControls.test_committed_near_keys_still_block_mixed_profile_history)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/decoder-training-unicode-campaign-split-private-v01-3SZARfWx/replay/test_unicode_history.py", line 194, in test_committed_near_keys_still_block_mixed_profile_history
+    violations = after(*args, withdrawal=True)[2]["result"]["violations"]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-native-t5-selected-head-bound-private-v02/source-stage/ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py", line 341, in _reviewed_history
+    _reviewed_need(record["split_example"] == frozen.to_dict()
+  File "/tmp/decoder-training-native-t5-selected-head-bound-private-v02/source-stage/ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py", line 183, in _reviewed_need
+    raise ValueError(message)
+ValueError: historical source fingerprint or frozen grouping differs
+
+======================================================================
+ERROR: test_exact_unicode_replays_and_old_guard_refuses (_current_retained_unicode_history_fixture.UnicodeHistoryControls.test_exact_unicode_replays_and_old_guard_refuses)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/decoder-training-unicode-campaign-split-private-v01-3SZARfWx/replay/test_unicode_history.py", line 156, in test_exact_unicode_replays_and_old_guard_refuses
+    self.assertEqual(after(*args)[2]["status"], "passed")
+                     ^^^^^^^^^^^^
+  File "/tmp/decoder-training-native-t5-selected-head-bound-private-v02/source-stage/ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py", line 341, in _reviewed_history
+    _reviewed_need(record["split_example"] == frozen.to_dict()
+  File "/tmp/decoder-training-native-t5-selected-head-bound-private-v02/source-stage/ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py", line 183, in _reviewed_need
+    raise ValueError(message)
+ValueError: historical source fingerprint or frozen grouping differs
+
+======================================================================
+ERROR: test_unicode_recomputed_across_legacy_holdout_keeps_withdrawal (_current_retained_unicode_history_fixture.UnicodeHistoryControls.test_unicode_recomputed_across_legacy_holdout_keeps_withdrawal)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/decoder-training-unicode-campaign-split-private-v01-3SZARfWx/replay/test_unicode_history.py", line 168, in test_unicode_recomputed_across_legacy_holdout_keeps_withdrawal
+    after(*args)
+  File "/tmp/decoder-training-native-t5-selected-head-bound-private-v02/source-stage/ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py", line 341, in _reviewed_history
+    _reviewed_need(record["split_example"] == frozen.to_dict()
+  File "/tmp/decoder-training-native-t5-selected-head-bound-private-v02/source-stage/ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py", line 183, in _reviewed_need
+    raise ValueError(message)
+ValueError: historical source fingerprint or frozen grouping differs
+
+======================================================================
+FAIL: test_mixed_candidate_pairs_share_the_existing_aggregate_bound (_current_retained_unicode_history_fixture.UnicodeHistoryControls.test_mixed_candidate_pairs_share_the_existing_aggregate_bound)
+----------------------------------------------------------------------
+ValueError: historical source fingerprint or frozen grouping differs
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/tmp/decoder-training-unicode-campaign-split-private-v01-3SZARfWx/replay/test_unicode_history.py", line 223, in test_mixed_candidate_pairs_share_the_existing_aggregate_bound
+    with self.assertRaisesRegex(ValueError, "unsupported_historical_guard_capacity"):
+AssertionError: "unsupported_historical_guard_capacity" does not match "historical source fingerprint or frozen grouping differs"
+
+======================================================================
+FAIL: test_profile_cannot_change_when_its_fingerprint_happens_to_match (_current_retained_unicode_history_fixture.UnicodeHistoryControls.test_profile_cannot_change_when_its_fingerprint_happens_to_match)
+----------------------------------------------------------------------
+ValueError: historical source population missing, duplicate or foreign
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/tmp/decoder-training-unicode-campaign-split-private-v01-3SZARfWx/replay/test_unicode_history.py", line 202, in test_profile_cannot_change_when_its_fingerprint_happens_to_match
+    with self.assertRaisesRegex(ValueError, "historical source fingerprint profile changed"):
+AssertionError: "historical source fingerprint profile changed" does not match "historical source population missing, duplicate or foreign"
+
+======================================================================
+FAIL: test_unknown_or_stale_profile_refused_even_in_empty_manifest (_current_retained_unicode_history_fixture.UnicodeHistoryControls.test_unknown_or_stale_profile_refused_even_in_empty_manifest) (metadata={'campaign_split_profile': 'unknown'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/decoder-training-unicode-campaign-split-private-v01-3SZARfWx/replay/test_unicode_history.py", line 211, in test_unknown_or_stale_profile_refused_even_in_empty_manifest
+    with self.assertRaisesRegex(ValueError, error):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_unknown_or_stale_profile_refused_even_in_empty_manifest (_current_retained_unicode_history_fixture.UnicodeHistoryControls.test_unknown_or_stale_profile_refused_even_in_empty_manifest) (metadata={'campaign_split_profile': 'unicode-campaign-split/v1', 'unicode_data_version': '0.0.0'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/decoder-training-unicode-campaign-split-private-v01-3SZARfWx/replay/test_unicode_history.py", line 211, in test_unknown_or_stale_profile_refused_even_in_empty_manifest
+    with self.assertRaisesRegex(ValueError, error):
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.070s
+
+FAILED (failures=4, errors=4)

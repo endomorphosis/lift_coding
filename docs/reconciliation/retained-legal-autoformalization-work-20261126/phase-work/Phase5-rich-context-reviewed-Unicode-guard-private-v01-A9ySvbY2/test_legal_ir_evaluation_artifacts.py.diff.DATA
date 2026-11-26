@@ -1,0 +1,88 @@
+--- a/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py
++++ b/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py
+@@ -2237,7 +2237,7 @@
+ 
+ 
+ def _rich_v3_heldout_case(*, shared_provision=False, version="v3", shared_source_identity=False,
+-        defer_heldout_check=False, training_prefix="T"):
++        defer_heldout_check=False, training_prefix="T", split_overlap=None):
+     from tests.unit.optimizers.logic_theorem_optimizer import test_legal_span_consumer_binding as ch
+     from tests.unit.logic.autoformal import test_legal_reviewed_norm_admission_v3 as mixed
+     from ipfs_datasets_py.logic.autoformal import legal_reviewed_norm_admission_v3 as admission
+@@ -2254,6 +2254,8 @@
+                  ["QUERY establishes a covered officer through appointment by its separate inland council.",
+                   "QUERY requires a covered officer to submit monthly statements unless an inland exemption applies.",
+                   "QUERY permits covered officers to inspect records with supervisors at the designated event and time."])
++        if partition == "holdout" and split_overlap in ("legacy_alias", "unicode_alias"):
++            texts[2] = "TRAXN grants officers permission to inspect a regizter with a supervisor at an event and time."
+         source_bindings = None
+         if shared_source_identity and partition == "holdout":
+             from ipfs_datasets_py.logic.autoformal import corpus_source
+@@ -2322,6 +2324,23 @@
+         for part,rows in populations.items() for r in rows),
+         assignments={r["id"]:part for part,rows in populations.items() for r in rows},
+         config_digest=ch.source_digest("fictional reviewed mixed rich heldout split")).to_dict()
++    if split_overlap in ("unicode_unrelated", "unicode_alias"):
++        import unicodedata
++
++        rows = [row for group in populations.values() for row in group]
++        metadata = {"campaign_split_profile": ch.splits.UNICODE_CAMPAIGN_SPLIT_PROFILE,
++                    "unicode_data_version": unicodedata.unidata_version}
++        by_id = {row["id"]: row["source_text"] for row in rows}
++        for example in manifest["examples"]:
++            content_hash, fingerprint = ch.splits.legal_ir_split_source_fingerprint(
++                by_id[example["sample_id"]], metadata=metadata)
++            assert example["content_hash"] == content_hash
++            example["token_fingerprint"] = list(fingerprint)
++        manifest["metadata"] = metadata
++        manifest = ch.splits.LegalIRSplitManifest.from_mapping(manifest).to_dict()
++        # This deliberately retains the separately assigned populations and
++        # declares no near-duplicate keys. The consumer must recompute overlap.
++        assert ch.splits.LegalIRSplitManifest.from_mapping(manifest).guard_result().passed
+     bindings={}
+     for part,rows in populations.items():
+         bindings[part] = getattr(ch.owner,"prepare_reviewed_source_span_consumer_binding_"+version)(rows,
+@@ -4365,3 +4384,43 @@
+     link.unlink();symlink = tmp_path / "symlink.json";symlink.symlink_to(path)
+     with pytest.raises(owner.InvalidEvaluationArtifactError):
+         owner._reviewed_retention_metadata_json({**reference, "path": str(symlink)}, limit=1024, budget=[0])
++
++
++
++@pytest.mark.parametrize("split_overlap", ("legacy_alias", "unicode_unrelated", "unicode_alias"))
++def test_rich_v3_heldout_replays_profile_near_duplicate_before_producer(split_overlap):
++    ch, options, populations, _, _ = _rich_v3_heldout_case(
++        split_overlap=split_overlap, defer_heldout_check=True
++    )
++    train, heldout = (populations[part][2] for part in ("train", "holdout"))
++    assert train["canonical_ir"] != heldout["canonical_ir"]
++    assert train["canonical_ir"]["source_binding"] != heldout["canonical_ir"]["source_binding"]
++    threshold = ch.splits.LegalIREvalSplitConfig().near_duplicate_jaccard_threshold
++
++    def overlap(metadata):
++        first, second = (ch.splits.legal_ir_split_source_fingerprint(row["source_text"], metadata=metadata)
++                         for row in (train, heldout))
++        assert first[0] != second[0]
++        a, b = set(first[1]), set(second[1])
++        return len(a & b) / len(a | b)
++
++    assert overlap({}) < threshold
++    metadata = options["split_manifest"]["metadata"]
++    assert (overlap(metadata) >= threshold) == (split_overlap == "unicode_alias")
++    received = []
++
++    def producer(arguments):
++        received.append(arguments)
++        assert all(set(item) == {"id", "source_text", "context"} for item in arguments)
++        assert all({e["id"] for e in row["context"]["retrieved"]} <= {item["id"] for item in populations["train"]}
++                   for row in arguments)
++        return [dict(id=row["id"], outcome="abstained", candidate=None) for row in arguments]
++
++    if split_overlap == "unicode_alias":
++        with pytest.raises(ValueError, match="heldout and TRAIN share a near-duplicate source group"):
++            _producer_evaluate(options, producer)
++        assert received == []
++    else:
++        artifact = _producer_evaluate(options, producer)
++        assert len(received) == 1
++        assert artifact.to_dict()["metrics"]["complete_norm_payload"]["denominator"] == len(populations["holdout"])

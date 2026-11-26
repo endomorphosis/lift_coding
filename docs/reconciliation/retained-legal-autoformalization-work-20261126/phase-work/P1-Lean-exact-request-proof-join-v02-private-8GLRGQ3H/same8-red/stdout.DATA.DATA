@@ -1,0 +1,48 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.3.4, pluggy-1.6.0
+rootdir: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/dataset
+configfile: pytest.ini
+asyncio: mode=Mode.STRICT
+collected 8 items
+
+tests/integration/logic/backends/test_kernel_backends.py FFFFFFF.        [100%]
+
+=================================== FAILURES ===================================
+______ test_lean_outcome_binds_accepted_receipt_to_request_payload[match] ______
+tests/integration/logic/backends/test_kernel_backends.py:2048: in test_lean_outcome_binds_accepted_receipt_to_request_payload
+    request = replace(original_request, payload=FrozenMap(payload))
+E   NameError: name 'replace' is not defined
+_ test_lean_outcome_binds_accepted_receipt_to_request_payload[equivalent-source-alias] _
+tests/integration/logic/backends/test_kernel_backends.py:2048: in test_lean_outcome_binds_accepted_receipt_to_request_payload
+    request = replace(original_request, payload=FrozenMap(payload))
+E   NameError: name 'replace' is not defined
+___ test_lean_outcome_binds_accepted_receipt_to_request_payload[declaration] ___
+tests/integration/logic/backends/test_kernel_backends.py:2048: in test_lean_outcome_binds_accepted_receipt_to_request_payload
+    request = replace(original_request, payload=FrozenMap(payload))
+E   NameError: name 'replace' is not defined
+___ test_lean_outcome_binds_accepted_receipt_to_request_payload[proposition] ___
+tests/integration/logic/backends/test_kernel_backends.py:2048: in test_lean_outcome_binds_accepted_receipt_to_request_payload
+    request = replace(original_request, payload=FrozenMap(payload))
+E   NameError: name 'replace' is not defined
+_____ test_lean_outcome_binds_accepted_receipt_to_request_payload[source] ______
+tests/integration/logic/backends/test_kernel_backends.py:2048: in test_lean_outcome_binds_accepted_receipt_to_request_payload
+    request = replace(original_request, payload=FrozenMap(payload))
+E   NameError: name 'replace' is not defined
+___ test_lean_outcome_binds_accepted_receipt_to_request_payload[translation] ___
+tests/integration/logic/backends/test_kernel_backends.py:2048: in test_lean_outcome_binds_accepted_receipt_to_request_payload
+    request = replace(original_request, payload=FrozenMap(payload))
+E   NameError: name 'replace' is not defined
+_ test_lean_outcome_binds_accepted_receipt_to_request_payload[missing-obligation] _
+tests/integration/logic/backends/test_kernel_backends.py:2048: in test_lean_outcome_binds_accepted_receipt_to_request_payload
+    request = replace(original_request, payload=FrozenMap(payload))
+E   NameError: name 'replace' is not defined
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/same8-red/result.xml -
+=========================== short test summary info ============================
+FAILED tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload[match]
+FAILED tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload[equivalent-source-alias]
+FAILED tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload[declaration]
+FAILED tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload[proposition]
+FAILED tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload[source]
+FAILED tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload[translation]
+FAILED tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload[missing-obligation]
+========================= 7 failed, 1 passed in 0.91s ==========================

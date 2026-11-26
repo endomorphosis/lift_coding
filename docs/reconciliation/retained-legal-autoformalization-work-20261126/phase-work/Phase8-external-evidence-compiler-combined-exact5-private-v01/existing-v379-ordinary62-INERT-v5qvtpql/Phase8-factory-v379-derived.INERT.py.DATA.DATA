@@ -1,0 +1,20 @@
+def continuation_request(phase, operation, actual_collected_roster=None, *, group):
+    import json
+    if phase != 'frozen-local-D-Phase8-external-validity-through-compiler-ordinary62' or operation not in ('collect', 'run') or group != 'Phase8-external-validity-through-compiler-ordinary62':
+        raise ValueError('exact selected frozen-local-D Phase8-external-validity-through-compiler-ordinary62 ordinary request required')
+    request = {'phase': phase, 'operation': operation, 'source_root': str(ROOT), 'accelerate_root': str(ADDITIONAL_A_ROOT), 'modules': EXPECTED_MODULES, 'maintained_owner_names': MAINTAINED_OWNER_NAMES, 'selected_test_modules': SELECTED_TEST_MODULES, 'required_canonical_conftests': REQUIRED_CONFTESTS, 'pytest_inifile': fixture['pytest_inifile'], 'selection_group': group, 'owning_files': OWNING_FILES, 'function_selectors': SELECTION['function_selectors'], 'expected_function_case_counts': SELECTION['expected_function_case_counts'], 'literal_expected_nodeids': SELECTION['literal_expected_nodeids'], 'source_epoch_sha256': H(epoch_raw), 'source_epoch_record_count': len(EPOCH), 'selected_test_rewrite_policy': SELECTED_TEST_REWRITE_POLICY, 'runtime_authority': ROOT_RUNTIME_SELECTION, 'git_candidate_provenance': FINAL_D_PROVENANCE, 'additional_A_provenance': FINAL_A_PROVENANCE, 'binding_manifest_reference': FINAL_BINDING_MANIFEST_REFERENCE, 'source_read_binding_reference': D_READ_BINDING_REFERENCE, 'admitted_io_plan_reference': FINAL_ADMITTED_IO_PLAN_REFERENCE, 'effect_decision_reference': FINAL_EFFECT_DECISION_REFERENCE}
+    if operation == 'run':
+        if type(actual_collected_roster) is not list or len(actual_collected_roster) != 62 or len(set(actual_collected_roster)) != 62 or any((type(node) is not str or node.split('::', 1)[0] not in OWNING_FILES for node in actual_collected_roster)):
+            raise ValueError('exact actual expanded Phase8-external-validity-through-compiler-ordinary62 collection required')
+        if set(actual_collected_roster) != set(SELECTION['literal_expected_nodeids']):
+            raise ValueError('actual collection differs from independent literal62 nodeid set')
+        counts = {}
+        for node in actual_collected_roster:
+            base = node.split('[', 1)[0]
+            counts[base] = counts.get(base, 0) + 1
+        if counts != SELECTION['expected_function_case_counts']:
+            raise ValueError('actual collection differs from 35 independently selected software-function counts/62 cases')
+        request['actual_collected_roster'] = list(actual_collected_roster)
+    payloads = {'bootstrap.py': read_private(BOOTSTRAP_REFERENCE['path'], BOOTSTRAP_REFERENCE['bytes'], BOOTSTRAP_REFERENCE['sha256']), 'source-epoch.json': epoch_raw, 'request.json': json.dumps(request, sort_keys=True, separators=(',', ':')).encode()}
+    wall, cpu = (120, 110) if operation == 'collect' else (600, 540)
+    return sdk.ToolRunRequest(argv=(PY, '-B', '{workspace}/bootstrap.py'), input_files=payloads, output_paths=('binding.json',) if operation == 'collect' else ('binding.json', 'junit.xml'), limits=sdk.ToolRunLimits(timeout_seconds=wall, termination_grace_seconds=5, cpu_seconds=cpu, memory_bytes=8589934592, resident_memory_bytes=4294967296, max_input_bytes=4194304, max_output_bytes=16777216, max_workspace_bytes=67108864), environment=FLAGS, owned_process_observation=True)

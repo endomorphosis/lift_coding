@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="5" skipped="0" tests="68" time="0.479" timestamp="2026-11-25T22:36:44.212715+00:00" hostname="spark-b271"><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_interfaces_schema_and_catalog_are_pinned" time="0.000" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_module_import_is_inert_without_duckdb" time="0.000" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_all_authority_dimensions_are_present_and_nonempty" time="0.001" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_authority_dimensions_cover_hammer_and_verification_surfaces" time="0.000" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_changing_any_authority_dimension_changes_key_digest[ir-override0]" time="0.001" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_changing_any_authority_dimension_changes_key_digest[property_value-override1]" time="0.001" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_changing_any_authority_dimension_changes_key_digest[assumptions-override2]" time="0.001" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_changing_any_authority_dimension_changes_key_digest[selected_premises-override3]" time="0.001" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_changing_any_authority_dimension_changes_key_digest[translator-override4]" time="0.001" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_changing_any_authority_dimension_changes_key_digest[solver_identities-override5]" time="0.001" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_changing_any_authority_dimension_changes_key_digest[toolchain-override6]" time="0.001" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_changing_any_authority_dimension_changes_key_digest[theorem_registry-override7]" time="0.001" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_changing_any_authority_dimension_changes_key_digest[policy-override8]" time="0.001" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_changing_any_authority_dimension_changes_key_digest[resources-override9]" time="0.001" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_changing_any_authority_dimension_changes_key_digest[tree-override10]" time="0.001" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_changing_any_authority_dimension_changes_key_digest[backend_id-override11]" time="0.001" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_changing_any_authority_dimension_changes_key_digest[backend_binary-override12]" time="0.001" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_changing_any_authority_dimension_changes_key_digest[backend_version-override13]" time="0.001" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_changing_any_authority_dimension_changes_key_digest[backend_config-override14]" time="0.001" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_hammer_key_projection_retains_authority_dimensions" time="0.000" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_verification_cache_key_lift_retains_all_dimensions" time="0.001" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_outcome_kinds_are_closed_and_distinct" time="0.000" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_outcome_mapping_keeps_kinds_distinct[proved-proof]" time="0.000" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_outcome_mapping_keeps_kinds_distinct[unsatisfiable-proof]" time="0.000" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_outcome_mapping_keeps_kinds_distinct[attested-proof]" time="0.000" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_outcome_mapping_keeps_kinds_distinct[disproved-counterexample]" time="0.000" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_outcome_mapping_keeps_kinds_distinct[satisfiable-counterexample]" time="0.000" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_outcome_mapping_keeps_kinds_distinct[attack_found-counterexample]" time="0.000" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_outcome_mapping_keeps_kinds_distinct[unknown-unknown]" time="0.000" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_outcome_mapping_keeps_kinds_distinct[candidate-unknown]" time="0.000" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_outcome_mapping_keeps_kinds_distinct[error-error]" time="0.000" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_outcome_mapping_keeps_kinds_distinct[timeout-error]" time="0.000" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_outcome_mapping_keeps_kinds_distinct[malformed-error]" time="0.000" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_outcome_mapping_keeps_kinds_distinct[unavailable-error]" time="0.000" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_outcome_mapping_keeps_kinds_distinct[unsupported-error]" time="0.000" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_proof_and_counterexample_entries_are_not_interchangeable" time="0.001" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_unknown_and_error_entries_remain_distinct" time="0.001" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_mismatched_outcome_and_status_rejected" time="0.001" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_entry_integrity_round_trip_and_tamper_rejection" time="0.001" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_unknown_key_fields_fail_closed" time="0.000" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_unknown_entry_fields_fail_closed" time="0.001" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_unsupported_key_schema_fails_closed" time="0.000" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_store_lookup_exact_key_miss_on_dimension_change" time="0.002" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_store_rejects_tampered_in_memory_entry" time="0.002" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_unified_key_must_project_to_matching_verification_key" time="0.001" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_trust_levels_project_from_evidence_authority" time="0.000" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_trust_cannot_exceed_evidence_authority" time="0.000" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_evidence_and_envelope_round_trip" time="0.001" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_envelope_rejects_filesystem_path_authority" time="0.000" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_access_statistics_track_hits_misses_writes" time="0.003" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_store_implements_verification_cache_put_get" time="0.003" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_verification_cache_entry_can_be_put_directly" time="0.002" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_exact_verification_cache_interop_bridge" time="0.002" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_invalidate_and_clear" time="0.003" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_get_or_compute_single_flight_and_store" time="0.003" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_clear_discards_pending_single_flight_result[DuckDBProofStore]" time="0.007"><failure message="AssertionError: retired producer repopulated the cleared cache&#10;assert UnifiedProofEntry(key=UnifiedProofKey(ir_digest='sha256:3d13a1476223eaa0d4fed636157071db31f5a8f3b61290910028f8b7db5f03..., result_id='result:before-clear', diagnostics=(), evidence=(), envelope=None, schema_version='unified-proof-entry/v1') is None&#10; +  where UnifiedProofEntry(key=UnifiedProofKey(ir_digest='sha256:3d13a1476223eaa0d4fed636157071db31f5a8f3b61290910028f8b7db5f03..., result_id='result:before-clear', diagnostics=(), evidence=(), envelope=None, schema_version='unified-proof-entry/v1') = get(UnifiedProofKey(ir_digest='sha256:3d13a1476223eaa0d4fed636157071db31f5a8f3b61290910028f8b7db5f03a8', property_digest='...igest='sha256:bbefc430cbc7021d88ffedc9069ffa50f36f24459bed91ade66d266eba0f6a68', schema_version='unified-proof-key/v1'), now=101.0)&#10; +    where get = &lt;ipfs_datasets_py.logic.common.duckdb_proof_store.DuckDBProofStore object at 0xffd18475f410&gt;.get">cache_type = &lt;class 'ipfs_datasets_py.logic.common.duckdb_proof_store.DuckDBProofStore'&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0xffd18475f200&gt;
+
+    @pytest.mark.parametrize("cache_type", [DuckDBProofStore, ExactVerificationCache])
+    def test_clear_discards_pending_single_flight_result(cache_type, monkeypatch):
+        from concurrent.futures import ThreadPoolExecutor
+        from threading import Event
+    
+        store, key = _clear_flight_fixture(cache_type)
+        entered, release, waiter_entered = Event(), Event(), Event()
+    
+        def old_producer():
+            entered.set()
+            assert release.wait(timeout=5)
+            return _theorem(result_id="result:before-clear")
+    
+        def unexpected_producer():
+            pytest.fail("caller should share the pending flight before clear")
+    
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            leader = pool.submit(store.get_or_compute, key, old_producer, now=100.0)
+            try:
+                assert entered.wait(timeout=5)
+                with store._lock:
+                    old_event = store._flights[key.digest].event
+                original_wait = old_event.wait
+    
+                def observe_wait():
+                    waiter_entered.set()
+                    assert original_wait(timeout=5)
+    
+                monkeypatch.setattr(old_event, "wait", observe_wait)
+                waiter = pool.submit(store.get_or_compute, key, unexpected_producer, now=100.0)
+                assert waiter_entered.wait(timeout=5)
+                store.clear()
+                cancelled_wait = waiter.result(timeout=5)
+            finally:
+                release.set()
+            retired = leader.result(timeout=5)
+    
+        assert cancelled_wait.single_flight_shared and cancelled_wait.reason is CacheLookupReason.MISS
+        assert cancelled_wait.entry is None and not cancelled_wait.usable
+&gt;       assert store.get(key, now=101.0) is None, "retired producer repopulated the cleared cache"
+E       AssertionError: retired producer repopulated the cleared cache
+E       assert UnifiedProofEntry(key=UnifiedProofKey(ir_digest='sha256:3d13a1476223eaa0d4fed636157071db31f5a8f3b61290910028f8b7db5f03..., result_id='result:before-clear', diagnostics=(), evidence=(), envelope=None, schema_version='unified-proof-entry/v1') is None
+E        +  where UnifiedProofEntry(key=UnifiedProofKey(ir_digest='sha256:3d13a1476223eaa0d4fed636157071db31f5a8f3b61290910028f8b7db5f03..., result_id='result:before-clear', diagnostics=(), evidence=(), envelope=None, schema_version='unified-proof-entry/v1') = get(UnifiedProofKey(ir_digest='sha256:3d13a1476223eaa0d4fed636157071db31f5a8f3b61290910028f8b7db5f03a8', property_digest='...igest='sha256:bbefc430cbc7021d88ffedc9069ffa50f36f24459bed91ade66d266eba0f6a68', schema_version='unified-proof-key/v1'), now=101.0)
+E        +    where get = &lt;ipfs_datasets_py.logic.common.duckdb_proof_store.DuckDBProofStore object at 0xffd18475f410&gt;.get
+
+baseline/tests/unit/logic/test_duckdb_proof_store.py:769: AssertionError</failure></testcase><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_clear_discards_pending_single_flight_result[ExactVerificationCache]" time="0.002"><failure message="AssertionError: retired producer repopulated the cleared cache&#10;assert VerificationCacheEntry(key=VerificationCacheKey(ir_digest='sha256:3d13a1476223eaa0d4fed636157071db31f5a8f3b61290910028...631da5327544837b4fc2b9', result_id='result:before-clear', diagnostics=(), schema_version='verification-cache-entry/v1') is None&#10; +  where VerificationCacheEntry(key=VerificationCacheKey(ir_digest='sha256:3d13a1476223eaa0d4fed636157071db31f5a8f3b61290910028...631da5327544837b4fc2b9', result_id='result:before-clear', diagnostics=(), schema_version='verification-cache-entry/v1') = get(VerificationCacheKey(ir_digest='sha256:3d13a1476223eaa0d4fed636157071db31f5a8f3b61290910028f8b7db5f03a8', property_dig...='sha256:71c212a100fe285508abebd31494c8c3401dd4036d66978875b4fe9dd328b531', schema_version='verification-cache-key/v1'), now=101.0)&#10; +    where get = &lt;ipfs_datasets_py.logic.backends.cache_protocol.ExactVerificationCache object at 0xffd184717440&gt;.get">cache_type = &lt;class 'ipfs_datasets_py.logic.backends.cache_protocol.ExactVerificationCache'&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0xffd184716d20&gt;
+
+    @pytest.mark.parametrize("cache_type", [DuckDBProofStore, ExactVerificationCache])
+    def test_clear_discards_pending_single_flight_result(cache_type, monkeypatch):
+        from concurrent.futures import ThreadPoolExecutor
+        from threading import Event
+    
+        store, key = _clear_flight_fixture(cache_type)
+        entered, release, waiter_entered = Event(), Event(), Event()
+    
+        def old_producer():
+            entered.set()
+            assert release.wait(timeout=5)
+            return _theorem(result_id="result:before-clear")
+    
+        def unexpected_producer():
+            pytest.fail("caller should share the pending flight before clear")
+    
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            leader = pool.submit(store.get_or_compute, key, old_producer, now=100.0)
+            try:
+                assert entered.wait(timeout=5)
+                with store._lock:
+                    old_event = store._flights[key.digest].event
+                original_wait = old_event.wait
+    
+                def observe_wait():
+                    waiter_entered.set()
+                    assert original_wait(timeout=5)
+    
+                monkeypatch.setattr(old_event, "wait", observe_wait)
+                waiter = pool.submit(store.get_or_compute, key, unexpected_producer, now=100.0)
+                assert waiter_entered.wait(timeout=5)
+                store.clear()
+                cancelled_wait = waiter.result(timeout=5)
+            finally:
+                release.set()
+            retired = leader.result(timeout=5)
+    
+        assert cancelled_wait.single_flight_shared and cancelled_wait.reason is CacheLookupReason.MISS
+        assert cancelled_wait.entry is None and not cancelled_wait.usable
+&gt;       assert store.get(key, now=101.0) is None, "retired producer repopulated the cleared cache"
+E       AssertionError: retired producer repopulated the cleared cache
+E       assert VerificationCacheEntry(key=VerificationCacheKey(ir_digest='sha256:3d13a1476223eaa0d4fed636157071db31f5a8f3b61290910028...631da5327544837b4fc2b9', result_id='result:before-clear', diagnostics=(), schema_version='verification-cache-entry/v1') is None
+E        +  where VerificationCacheEntry(key=VerificationCacheKey(ir_digest='sha256:3d13a1476223eaa0d4fed636157071db31f5a8f3b61290910028...631da5327544837b4fc2b9', result_id='result:before-clear', diagnostics=(), schema_version='verification-cache-entry/v1') = get(VerificationCacheKey(ir_digest='sha256:3d13a1476223eaa0d4fed636157071db31f5a8f3b61290910028f8b7db5f03a8', property_dig...='sha256:71c212a100fe285508abebd31494c8c3401dd4036d66978875b4fe9dd328b531', schema_version='verification-cache-key/v1'), now=101.0)
+E        +    where get = &lt;ipfs_datasets_py.logic.backends.cache_protocol.ExactVerificationCache object at 0xffd184717440&gt;.get
+
+baseline/tests/unit/logic/test_duckdb_proof_store.py:769: AssertionError</failure></testcase><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_clear_preserves_replacement_flight[late-success-DuckDBProofStore]" time="0.006"><failure message="assert [] == [&lt;threading.E...4785d90: set&gt;]&#10;  &#10;  Right contains one more item: &lt;threading.Event at 0xffd184785d90: set&gt;&#10;  Use -v to get more diff">cache_type = &lt;class 'ipfs_datasets_py.logic.common.duckdb_proof_store.DuckDBProofStore'&gt;
+producer_fails = False
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0xffd1847851f0&gt;
+
+    @pytest.mark.parametrize("cache_type", [DuckDBProofStore, ExactVerificationCache])
+    @pytest.mark.parametrize("producer_fails", [False, True], ids=["late-success", "late-error"])
+    def test_clear_preserves_replacement_flight(cache_type, producer_fails, monkeypatch):
+        from concurrent.futures import ThreadPoolExecutor
+        from threading import Event
+    
+        store, key = _clear_flight_fixture(cache_type)
+        old_entered, old_release = Event(), Event()
+        new_entered, new_release = Event(), Event()
+    
+        def old_producer():
+            old_entered.set()
+            assert old_release.wait(timeout=5)
+            if producer_fails:
+                raise LookupError("retired producer fixture")
+            return _theorem(result_id="result:retired")
+    
+        def replacement_producer():
+            new_entered.set()
+            assert new_release.wait(timeout=5)
+            return _theorem(result_id="result:replacement")
+    
+        def unexpected_producer():
+            pytest.fail("replacement flight was removed by its retired predecessor")
+    
+        joined_flights = []
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            old = pool.submit(store.get_or_compute, key, old_producer, now=100.0)
+            try:
+                assert old_entered.wait(timeout=5)
+                store.clear()
+                replacement = pool.submit(store.get_or_compute, key, replacement_producer, now=101.0)
+                assert new_entered.wait(timeout=5)
+                with store._lock:
+                    replacement_event = store._flights[key.digest].event
+    
+                old_release.set()
+                if producer_fails:
+                    with pytest.raises(LookupError, match="retired producer fixture"):
+                        old.result(timeout=5)
+                else:
+                    old.result(timeout=5)
+    
+                original_wait = replacement_event.wait
+    
+                def release_replacement():
+                    joined_flights.append(replacement_event)
+                    new_release.set()
+                    assert original_wait(timeout=5)
+    
+                monkeypatch.setattr(replacement_event, "wait", release_replacement)
+                joined = store.get_or_compute(key, unexpected_producer, now=102.0)
+            finally:
+                old_release.set()
+                new_release.set()
+            current = replacement.result(timeout=5)
+    
+&gt;       assert joined_flights == [replacement_event]
+E       assert [] == [&lt;threading.E...4785d90: set&gt;]
+E         
+E         Right contains one more item: &lt;threading.Event at 0xffd184785d90: set&gt;
+E         Use -v to get more diff
+
+baseline/tests/unit/logic/test_duckdb_proof_store.py:833: AssertionError</failure></testcase><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_clear_preserves_replacement_flight[late-success-ExactVerificationCache]" time="0.003"><failure message="assert [] == [&lt;threading.E...47168a0: set&gt;]&#10;  &#10;  Right contains one more item: &lt;threading.Event at 0xffd1847168a0: set&gt;&#10;  Use -v to get more diff">cache_type = &lt;class 'ipfs_datasets_py.logic.backends.cache_protocol.ExactVerificationCache'&gt;
+producer_fails = False
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0xffd184717560&gt;
+
+    @pytest.mark.parametrize("cache_type", [DuckDBProofStore, ExactVerificationCache])
+    @pytest.mark.parametrize("producer_fails", [False, True], ids=["late-success", "late-error"])
+    def test_clear_preserves_replacement_flight(cache_type, producer_fails, monkeypatch):
+        from concurrent.futures import ThreadPoolExecutor
+        from threading import Event
+    
+        store, key = _clear_flight_fixture(cache_type)
+        old_entered, old_release = Event(), Event()
+        new_entered, new_release = Event(), Event()
+    
+        def old_producer():
+            old_entered.set()
+            assert old_release.wait(timeout=5)
+            if producer_fails:
+                raise LookupError("retired producer fixture")
+            return _theorem(result_id="result:retired")
+    
+        def replacement_producer():
+            new_entered.set()
+            assert new_release.wait(timeout=5)
+            return _theorem(result_id="result:replacement")
+    
+        def unexpected_producer():
+            pytest.fail("replacement flight was removed by its retired predecessor")
+    
+        joined_flights = []
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            old = pool.submit(store.get_or_compute, key, old_producer, now=100.0)
+            try:
+                assert old_entered.wait(timeout=5)
+                store.clear()
+                replacement = pool.submit(store.get_or_compute, key, replacement_producer, now=101.0)
+                assert new_entered.wait(timeout=5)
+                with store._lock:
+                    replacement_event = store._flights[key.digest].event
+    
+                old_release.set()
+                if producer_fails:
+                    with pytest.raises(LookupError, match="retired producer fixture"):
+                        old.result(timeout=5)
+                else:
+                    old.result(timeout=5)
+    
+                original_wait = replacement_event.wait
+    
+                def release_replacement():
+                    joined_flights.append(replacement_event)
+                    new_release.set()
+                    assert original_wait(timeout=5)
+    
+                monkeypatch.setattr(replacement_event, "wait", release_replacement)
+                joined = store.get_or_compute(key, unexpected_producer, now=102.0)
+            finally:
+                old_release.set()
+                new_release.set()
+            current = replacement.result(timeout=5)
+    
+&gt;       assert joined_flights == [replacement_event]
+E       assert [] == [&lt;threading.E...47168a0: set&gt;]
+E         
+E         Right contains one more item: &lt;threading.Event at 0xffd1847168a0: set&gt;
+E         Use -v to get more diff
+
+baseline/tests/unit/logic/test_duckdb_proof_store.py:833: AssertionError</failure></testcase><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_clear_preserves_replacement_flight[late-error-DuckDBProofStore]" time="0.004"><failure message="Failed: replacement flight was removed by its retired predecessor">cache_type = &lt;class 'ipfs_datasets_py.logic.common.duckdb_proof_store.DuckDBProofStore'&gt;
+producer_fails = True
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0xffd18475f1d0&gt;
+
+    @pytest.mark.parametrize("cache_type", [DuckDBProofStore, ExactVerificationCache])
+    @pytest.mark.parametrize("producer_fails", [False, True], ids=["late-success", "late-error"])
+    def test_clear_preserves_replacement_flight(cache_type, producer_fails, monkeypatch):
+        from concurrent.futures import ThreadPoolExecutor
+        from threading import Event
+    
+        store, key = _clear_flight_fixture(cache_type)
+        old_entered, old_release = Event(), Event()
+        new_entered, new_release = Event(), Event()
+    
+        def old_producer():
+            old_entered.set()
+            assert old_release.wait(timeout=5)
+            if producer_fails:
+                raise LookupError("retired producer fixture")
+            return _theorem(result_id="result:retired")
+    
+        def replacement_producer():
+            new_entered.set()
+            assert new_release.wait(timeout=5)
+            return _theorem(result_id="result:replacement")
+    
+        def unexpected_producer():
+            pytest.fail("replacement flight was removed by its retired predecessor")
+    
+        joined_flights = []
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            old = pool.submit(store.get_or_compute, key, old_producer, now=100.0)
+            try:
+                assert old_entered.wait(timeout=5)
+                store.clear()
+                replacement = pool.submit(store.get_or_compute, key, replacement_producer, now=101.0)
+                assert new_entered.wait(timeout=5)
+                with store._lock:
+                    replacement_event = store._flights[key.digest].event
+    
+                old_release.set()
+                if producer_fails:
+                    with pytest.raises(LookupError, match="retired producer fixture"):
+                        old.result(timeout=5)
+                else:
+                    old.result(timeout=5)
+    
+                original_wait = replacement_event.wait
+    
+                def release_replacement():
+                    joined_flights.append(replacement_event)
+                    new_release.set()
+                    assert original_wait(timeout=5)
+    
+                monkeypatch.setattr(replacement_event, "wait", release_replacement)
+&gt;               joined = store.get_or_compute(key, unexpected_producer, now=102.0)
+
+baseline/tests/unit/logic/test_duckdb_proof_store.py:827: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+baseline/ipfs_datasets_py/logic/common/duckdb_proof_store.py:2528: in get_or_compute
+    produced = producer()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def unexpected_producer():
+&gt;       pytest.fail("replacement flight was removed by its retired predecessor")
+E       Failed: replacement flight was removed by its retired predecessor
+
+baseline/tests/unit/logic/test_duckdb_proof_store.py:799: Failed</failure></testcase><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_clear_preserves_replacement_flight[late-error-ExactVerificationCache]" time="0.003" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_negative_ttl_expires_unknown_faster_than_proof" time="0.004" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_trust_ceiling_rejects_raise" time="0.002" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_empty_backend_id_rejected" time="0.000" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_premises_digest_changes_with_premise_set" time="0.001" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_advisory_verification_projection_uses_target_status_polarity[candidate-positive]" time="0.001" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_advisory_verification_projection_uses_target_status_polarity[unknown-negative]" time="0.001" /><testcase classname="tests.unit.logic.test_duckdb_proof_store" name="test_store_put_retains_advisory_candidate_without_proof_authority" time="0.002" /></testsuite></testsuites>

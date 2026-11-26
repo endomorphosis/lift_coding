@@ -1,0 +1,310 @@
+{
+  "actual_existing_cohorts": {
+    "maintained": {
+      "actual_project_and_discovery_bytes": 6958966,
+      "case_identity_in_observed_order": [
+        "test_typed_feedback_uses_current_semantic_target_before_update[matching]",
+        "test_typed_feedback_uses_current_semantic_target_before_update[legacy]",
+        "test_typed_feedback_uses_current_semantic_target_before_update[sample]",
+        "test_typed_feedback_uses_current_semantic_target_before_update[interpretation]",
+        "test_typed_feedback_uses_current_semantic_target_before_update[dependency]",
+        "test_ablation_refuses_unmatched_typed_feedback_before_cloning",
+        "test_typed_feedback_refuses_substituted_record_with_same_target[other_receipt]",
+        "test_typed_feedback_refuses_substituted_record_with_same_target[other_label_same_receipt]",
+        "test_current_target_requires_independent_id_and_canonical_feedback[copied_id]",
+        "test_current_target_requires_independent_id_and_canonical_feedback[unselected_id]"
+      ],
+      "compiled_paths": 102,
+      "exit": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-exact-authorized-feedback-eight-rebased-D19621b4-private-v01-yw6km_79/actual-existing-no-fit-same-cohorts-v02/maintained.exit.txt",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-exact-authorized-feedback-eight-rebased-D19621b4-private-v01-yw6km_79/actual-existing-no-fit-same-cohorts-v02/maintained.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 31952,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-exact-authorized-feedback-eight-rebased-D19621b4-private-v01-yw6km_79/actual-existing-no-fit-same-cohorts-v02/maintained.stdout.json",
+        "sha256": "8e12107dbbe60f4913bba3f036cd39881005899f2e5834e820608748c73121f9"
+      },
+      "test_outcomes": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "worker_rc": 0
+    },
+    "receipt-green": {
+      "actual_project_and_discovery_bytes": 6811167,
+      "case_identity_in_observed_order": [
+        "selected-record-trainer",
+        "selected-record-auxiliary",
+        "wrong-receipt-trainer",
+        "wrong-receipt-auxiliary",
+        "same-receipt-name-altered-record-trainer",
+        "same-receipt-name-altered-record-auxiliary"
+      ],
+      "compiled_paths": 100,
+      "exit": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-exact-authorized-feedback-eight-rebased-D19621b4-private-v01-yw6km_79/actual-existing-no-fit-same-cohorts-v02/receipt-green.exit.txt",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-exact-authorized-feedback-eight-rebased-D19621b4-private-v01-yw6km_79/actual-existing-no-fit-same-cohorts-v02/receipt-green.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 31958,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-exact-authorized-feedback-eight-rebased-D19621b4-private-v01-yw6km_79/actual-existing-no-fit-same-cohorts-v02/receipt-green.stdout.json",
+        "sha256": "de80dde8cf30b7975a40fb0a76d327a3543ad7238ef6d91b99753605c6666676"
+      },
+      "test_outcomes": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "worker_rc": 0
+    },
+    "receipt-red": {
+      "actual_project_and_discovery_bytes": 6810503,
+      "case_identity_in_observed_order": [
+        "selected-record-trainer",
+        "selected-record-auxiliary",
+        "wrong-receipt-trainer",
+        "wrong-receipt-auxiliary",
+        "same-receipt-name-altered-record-trainer",
+        "same-receipt-name-altered-record-auxiliary"
+      ],
+      "compiled_paths": 100,
+      "exit": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-exact-authorized-feedback-eight-rebased-D19621b4-private-v01-yw6km_79/actual-existing-no-fit-same-cohorts-v02/receipt-red.exit.txt",
+        "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+      },
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-exact-authorized-feedback-eight-rebased-D19621b4-private-v01-yw6km_79/actual-existing-no-fit-same-cohorts-v02/receipt-red.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 32288,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-exact-authorized-feedback-eight-rebased-D19621b4-private-v01-yw6km_79/actual-existing-no-fit-same-cohorts-v02/receipt-red.stdout.json",
+        "sha256": "8650138d34ec7acdbb18aab02191a2c036a5642db9f991235a8c47c8ab79572e"
+      },
+      "test_outcomes": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "worker_rc": 1
+    },
+    "retained": {
+      "actual_project_and_discovery_bytes": 6811167,
+      "case_identity_in_observed_order": [
+        "legacy_matching_unbound",
+        "legacy_same_id_revised_unbound",
+        "legacy_aux_unbound",
+        "historical_legacy_evaluation",
+        "bound_actual_obligation_distinct_id",
+        "bound_raw_wire",
+        "bound_attached_wire",
+        "bound_same_id_revised",
+        "bound_changed_scope",
+        "bound_changed_dependency",
+        "bound_forwards_to_auxiliary_callback",
+        "bound_aux_eligible_no_numeric",
+        "bound_aux_changed_scope",
+        "bound_aux_changed_dependency",
+        "generic_raw_object",
+        "generic_raw_wire",
+        "generic_attached_envelope"
+      ],
+      "compiled_paths": 100,
+      "exit": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-exact-authorized-feedback-eight-rebased-D19621b4-private-v01-yw6km_79/actual-existing-no-fit-same-cohorts-v02/retained.exit.txt",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-exact-authorized-feedback-eight-rebased-D19621b4-private-v01-yw6km_79/actual-existing-no-fit-same-cohorts-v02/retained.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 35315,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-exact-authorized-feedback-eight-rebased-D19621b4-private-v01-yw6km_79/actual-existing-no-fit-same-cohorts-v02/retained.stdout.json",
+        "sha256": "6b2f24dc20667f00eccf980832f193676602c36bbaab2bcd4e90f689ea3694aa"
+      },
+      "test_outcomes": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "worker_rc": 0
+    }
+  },
+  "canonical_Source_or_Git_write_model_fit_Native_or_ordinary_run_by_private_unit": false,
+  "current_exact_correspondence": {
+    "current_public_HEAD": "a4af7fd05515d90878dea4ec556c5e8fbd86cddf",
+    "current_public_tree": "d221bac8cbda1986e4f1afaf94c2dc16b8b2a94a",
+    "exact_runtime_candidate_discovery_path_join_count": 105,
+    "projection_HEAD": "7fc2cde7dfda7be7035cb6b555d440e508473622",
+    "projection_tree": "19eb4ca59b66673aea7c0707b943f344184445e7",
+    "rebase_head": "19621b48313fa4e8790ca118f500731d3ec6a7f5",
+    "unrelated_public_delta": [
+      "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json",
+      "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+      "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md",
+      "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json",
+      "ipfs_datasets_py/logic/backends/cache_protocol.py",
+      "ipfs_datasets_py/logic/common/duckdb_proof_store.py",
+      "tests/unit/logic/test_duckdb_proof_store.py"
+    ]
+  },
+  "exact_discovery_original_Git_path_no_compile": "ipfs_datasets_py/ipfs_backend_router.py",
+  "exact_eight_preimages_and_posts": {
+    "bytes": 41352,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-exact-authorized-feedback-eight-rebased-D19621b4-private-v01-yw6km_79/sealed-exact-eight-D19621b4-private-rebase-v01.json",
+    "sha256": "0dc8e7f675fc809609931ce72d0d2b6b988296ecb187d3fae4e7468706b951c7"
+  },
+  "existing_ordinary_needs": {
+    "actual_imports_config_profiles_and_parameter_expansion_after_current_freeze": null,
+    "official_release_or_ordinary_authority": null,
+    "owning_tests": {
+      "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py": {
+        "actual_normal_pytest_full_file_run": false,
+        "literal_module_functions": [
+          "test_ablation_requires_fixed_isolated_heldout_benefit",
+          "test_production_updates_apply_accepted_hammer_and_verified_leanstral",
+          "test_all_required_skip_counters_are_explicit_and_weights_are_unchanged",
+          "test_production_enablement_and_passing_ablation_are_both_required",
+          "test_content_addressed_proof_feedback_updates_primary_and_auxiliary_heads",
+          "test_nested_feedback_outer_rejection_prevents_weight_updates",
+          "test_nested_feedback_valid_envelope_preserves_weight_updates",
+          "test_nested_feedback_outer_source_copy_guards_prevent_weight_updates",
+          "test_nested_feedback_outer_holdout_prevents_weight_updates",
+          "test_typed_nested_feedback_outer_rejection_prevents_weight_updates",
+          "test_typed_nested_feedback_outer_view_conflict_prevents_weight_updates",
+          "test_typed_nested_feedback_outer_version_conflict_prevents_weight_updates",
+          "test_typed_nested_feedback_matching_envelope_preserves_weight_updates",
+          "test_nested_feedback_outer_approval_cannot_promote_untrusted_child",
+          "test_nested_feedback_guard_metadata_never_enters_real_update_payload",
+          "test_typed_proof_feedback_cannot_update_an_unrelated_training_sample",
+          "test_typed_feedback_uses_current_semantic_target_before_update",
+          "test_typed_feedback_refuses_substituted_record_with_same_target",
+          "test_current_target_requires_independent_id_and_canonical_feedback"
+        ],
+        "selected_subset_compiled_in_maintained_private": true,
+        "total_functions_static_only": 19
+      },
+      "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py": {
+        "actual_normal_pytest_full_file_run": false,
+        "literal_module_functions": [
+          "test_architecture_declares_all_bounded_isolated_heads",
+          "test_trusted_version_matched_feedback_trains_every_head_and_reports_family_metrics",
+          "test_untrusted_stale_holdout_invalid_and_duplicate_feedback_never_train",
+          "test_proof_updates_cannot_override_primary_objective_parameters",
+          "test_head_vocabulary_is_bounded_under_many_trusted_labels",
+          "test_architecture_and_proof_heads_serialize_with_legacy_compatibility"
+        ],
+        "selected_subset_compiled_in_maintained_private": false,
+        "total_functions_static_only": 6
+      },
+      "tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py": {
+        "actual_normal_pytest_full_file_run": false,
+        "literal_module_functions": [
+          "test_ablation_runs_all_matched_arms_and_gates_trainer_writes",
+          "test_ablation_blocks_when_correct_labels_do_not_beat_shuffled_control",
+          "test_ablation_refuses_unmatched_typed_feedback_before_cloning"
+        ],
+        "selected_subset_compiled_in_maintained_private": true,
+        "total_functions_static_only": 3
+      },
+      "tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py": {
+        "actual_normal_pytest_full_file_run": false,
+        "literal_module_functions": [
+          "test_legal_ir_objective_component_tracks_view_family_and_proof_losses",
+          "test_training_objective_can_weight_legal_ir_independently",
+          "test_generalizable_projection_trains_legal_ir_view_head_from_cached_targets",
+          "test_projection_update_reports_compiler_semantic_slot_and_decompiler_norms",
+          "test_proof_head_training_reports_finite_nonzero_proof_norms"
+        ],
+        "selected_subset_compiled_in_maintained_private": false,
+        "total_functions_static_only": 5
+      }
+    },
+    "selected_real_SUT_roles": [
+      "ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py",
+      "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+      "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py",
+      "ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py"
+    ]
+  },
+  "first_private_setup_refusal_preserved": {
+    "case_credit": 0,
+    "exit": {
+      "bytes": 2,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-exact-authorized-feedback-eight-rebased-D19621b4-private-v01-yw6km_79/actual-existing-no-fit-same-cohorts-v01/receipt-red.exit.txt",
+      "sha256": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3"
+    },
+    "stderr": {
+      "bytes": 3110,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-exact-authorized-feedback-eight-rebased-D19621b4-private-v01-yw6km_79/actual-existing-no-fit-same-cohorts-v01/receipt-red.stderr.txt",
+      "sha256": "ef3adbdefe08644275e48ab25aa462820508dff3adada5f97d5afcd174ca4720"
+    },
+    "stdout": {
+      "bytes": 3667,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-exact-authorized-feedback-eight-rebased-D19621b4-private-v01-yw6km_79/actual-existing-no-fit-same-cohorts-v01/receipt-red.stdout.json",
+      "sha256": "1a49c15f237293393749ef5e026fd86f5406ed7047e1c5f22eba76d19c14fb47"
+    },
+    "worker_rc": 2
+  },
+  "guide532_publication_current_correspondence": {
+    "bytes": 12922,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-guide532-four-doc-three-FF-publication-small-v397.json",
+    "sha256": "69d3542dbb1c9783078c87a053209def94f119206138a6429b35b35eba364e71"
+  },
+  "independent_verified_receipt_producer_or_real_review_transition_proved": false,
+  "private_existing_same_six_before_2_pass_4_fail_after_6_pass": true,
+  "projection_harness": {
+    "bytes": 9267,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-current-obligation-write-binding-private-ymey1qtf/Phase7-rebased-exact-no-fit-router-discovery-v02-f_zjci9y/READY-router-discovery-exact-repair-v02.json",
+    "sha256": "b354b090183ab3d0055c51f392f26bcd0b97eddc73ee9dfa29d3e9463cdc1c43"
+  },
+  "retention_17_and_maintained_10_reports_are_distinct_cohorts": true,
+  "same_receipt_case_names_identical_and_target_sample_bound_across_red_and_green": true,
+  "schema": "actual-Phase7-exact-eight-current-feedback-guard-rebased-private-no-fit/v1",
+  "successful_four_process_project_plus_discovery_reads": 27391803
+}

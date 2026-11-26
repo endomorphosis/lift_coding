@@ -1,0 +1,50 @@
+{
+  "actual_fixture_constructor_rows": [
+    {
+      "advisory_same_key": true,
+      "complete": null,
+      "entry_digest": "sha256:67842f0acbf90f73352dbdf7bec5c10f876945dbd3dc88ae13c75c85fd792394",
+      "key_digest": "sha256:7f9b08cdb41b495a48fb2940848724bc0d6750b691205dca0a18731e68a89442",
+      "verification_key_digest": "sha256:b6ead01cb38f8f44e52eef752c896981600ff8dd9380200001c3a34f6e4feb5c",
+      "version": "legacy"
+    },
+    {
+      "advisory_same_key": true,
+      "complete": null,
+      "entry_digest": "sha256:4d75e740b36772c36db9c87b98d79fd20bd8fb2c3b55722e83ba96317fd37ad0",
+      "key_digest": "sha256:14278e323f2a6f21fca81fbac8fe64044a5b4d8a11d15760fc137811476151c6",
+      "verification_key_digest": "sha256:8aee0cc065a7cc4cc4c80ee7874ad4d291eddf0c9838ddb19b2c5bd963cffcc8",
+      "version": "bound-v2"
+    },
+    {
+      "advisory_same_key": true,
+      "complete": true,
+      "entry_digest": "sha256:9400a5b343885a2a84df266877454458f2b5820cdf38afbe7b9d871b8966416c",
+      "key_digest": "sha256:5c0fd2f6d0553a897028f9ff001651fcd33ec4cbdb9e254b73136be35c0c1ef5",
+      "verification_key_digest": "sha256:a0740d49f472459956d33ff0ea6be213eb81fcd9a3c23d828e70a84adb93141c",
+      "version": "bound-v2-coherent-coverage/v1"
+    },
+    {
+      "advisory_same_key": true,
+      "complete": false,
+      "entry_digest": "sha256:f0bb6fa3773252841a97320b50a2f96c5fcb6e274d85a4b140ce85d14eae0a0b",
+      "key_digest": "sha256:c02ffdccd52b2aaa9fbb448089a3bc6cf1f631b7362e3355caf5de1cb0949f28",
+      "verification_key_digest": "sha256:7a38aae0f4bd48f7b4f4b79c720ca4a745b2dcb7a1071c71c0f434d11afc316b",
+      "version": "bound-v2-coherent-coverage/v1"
+    }
+  ],
+  "compiled_overlays": [
+    {
+      "actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/retry-preservation-v02/duckdb_proof_store.after.py.DATA",
+      "module": "ipfs_datasets_py.logic.common.duckdb_proof_store"
+    },
+    {
+      "actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/sql-reopen-companion-v01-j19TWM/test_duckdb_proof_store_persistence.after.py.DATA",
+      "module": "_private_legal_coverage_persistence_fixture"
+    }
+  ],
+  "persistence_test_sha256": "4eac16c5cf155db23ab4180f5e867f6993c3644b0a0861267115f6f4b9760bc9",
+  "protected_run_guard_events": [],
+  "raw_db_or_sql_run": false,
+  "software_only": true
+}

@@ -1,0 +1,130 @@
+--- a/tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder.py
++++ b/tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder.py
+@@ -13541,127 +13541,3 @@
+     assert typed["heads"]["family"]["shared"] is False
+     assert extended["tokenizer_vocabulary_cid"] == LEGAL_IR_CANONICAL_VOCABULARY_CID
+     assert autoencoder.state.architecture_version == MODAL_AUTOENCODER_ARCHITECTURE_VERSION
+-
+-
+-@pytest.mark.parametrize("revision", ("exception-removed", "conditions-reordered"))
+-def test_warm_feature_cache_matches_cold_after_clause_revision(revision) -> None:
+-    sample = build_us_code_sample(
+-        title="5",
+-        section="552-feature-clause-fixture",
+-        text="A fictional agency must publish notice unless the board grants a waiver.",
+-    )
+-    formula = replace(
+-        sample.modal_ir.formulas[0],
+-        conditions=["fixture alpha gate", "fixture beta gate"],
+-        exceptions=["fixture board waiver"],
+-    )
+-    sample = replace(sample, modal_ir=replace(sample.modal_ir, formulas=[formula]))
+-    if revision == "exception-removed":
+-        changed_formula = replace(formula, exceptions=[])
+-    else:
+-        changed_formula = replace(formula, conditions=list(reversed(formula.conditions)))
+-    revised = replace(
+-        sample, modal_ir=replace(sample.modal_ir, formulas=[changed_formula])
+-    )
+-    assert sample.sample_id == revised.sample_id
+-    assert sample.text == revised.text
+-    assert sample.modal_ir.canonical_hash() != revised.modal_ir.canonical_hash()
+-
+-    warm = AdaptiveModalAutoencoder(compute_device="python")
+-    original_features = warm._fallback_feature_keys_for(sample)
+-    cold = AdaptiveModalAutoencoder(compute_device="python")
+-    revised_features = cold._fallback_feature_keys_for(revised)
+-    if revision == "exception-removed":
+-        assert "exception:fixture_board_waiver" in original_features
+-        assert "exception:fixture_board_waiver" not in revised_features
+-    else:
+-        alpha = "condition:fixture_alpha_gate"
+-        beta = "condition:fixture_beta_gate"
+-        assert original_features.index(alpha) < original_features.index(beta)
+-        assert revised_features.index(beta) < revised_features.index(alpha)
+-    assert warm._fallback_feature_keys_for(revised) == revised_features
+-
+-
+-def test_warm_feature_cache_preserves_runtime_formula_order() -> None:
+-    sample = build_us_code_sample(
+-        title="5",
+-        section="552-feature-order-fixture",
+-        text="A fictional agency must publish notice.",
+-    )
+-    formula = sample.modal_ir.formulas[0]
+-    first = replace(
+-        formula, predicate=replace(formula.predicate, name="fixture_first_predicate")
+-    )
+-    second = replace(
+-        formula,
+-        formula_id=f"{formula.formula_id}:second",
+-        predicate=replace(formula.predicate, name="fixture_second_predicate"),
+-    )
+-    sample = replace(sample, modal_ir=replace(sample.modal_ir, formulas=[first, second]))
+-    revised = replace(
+-        sample, modal_ir=replace(sample.modal_ir, formulas=[second, first])
+-    )
+-    assert sample.sample_id == revised.sample_id
+-    assert sample.modal_ir.canonical_hash() == revised.modal_ir.canonical_hash()
+-
+-    warm = AdaptiveModalAutoencoder(compute_device="python")
+-    original_features = warm._fallback_feature_keys_for(sample)
+-    cold = AdaptiveModalAutoencoder(compute_device="python")
+-    revised_features = cold._fallback_feature_keys_for(revised)
+-    first_key = "predicate:fixture_first_predicate"
+-    second_key = "predicate:fixture_second_predicate"
+-    assert original_features.index(first_key) < original_features.index(second_key)
+-    assert revised_features.index(second_key) < revised_features.index(first_key)
+-    assert warm._fallback_feature_keys_for(revised) == revised_features
+-
+-
+-@pytest.mark.parametrize(
+-    "field",
+-    ("citation", "title", "section", "selected_frame", "embedding_vector", "parser_trace", "formula_metadata"),
+-)
+-def test_feature_cache_bucket_binds_exact_current_sample_inputs(field) -> None:
+-    sample = build_us_code_sample(
+-        title="5",
+-        section="552-feature-identity-fixture",
+-        text="A fictional agency must publish notice.",
+-        embedding_vector=[1.0, -0.5],
+-    )
+-    formula = sample.modal_ir.formulas[0]
+-    formula = replace(formula, metadata={**formula.metadata, "fixture": {"markers": ["first"]}})
+-    sample = replace(
+-        sample,
+-        modal_ir=replace(sample.modal_ir, formulas=[formula]),
+-        selected_frame="fixture:first",
+-        frame_candidates=[
+-            {"frame_id": "fixture:first", "score": 0.75},
+-            {"frame_id": "fixture:second", "score": 0.25},
+-        ],
+-        parser_trace={**sample.parser_trace, "fixture": {"markers": ["first"]}},
+-    )
+-    autoencoder = AdaptiveModalAutoencoder(compute_device="python")
+-    original_bucket = autoencoder._sample_cache_for(sample)
+-    assert autoencoder._sample_cache_for(replace(sample)) is original_bucket
+-
+-    if field == "parser_trace":
+-        sample.parser_trace["fixture"]["markers"].append("second")
+-        revised = sample
+-    elif field == "formula_metadata":
+-        formula.metadata["fixture"]["markers"].append("second")
+-        revised = sample
+-    else:
+-        next_embedding = math.nextafter(sample.embedding_vector[0], 2.0)
+-        replacements = {
+-            "citation": "5 U.S.C. fictional-citation",
+-            "title": "12",
+-            "section": "553-feature-identity-fixture",
+-            "selected_frame": "fixture:second",
+-            "embedding_vector": [next_embedding, sample.embedding_vector[1]],
+-        }
+-        revised = replace(sample, **{field: replacements[field]})
+-        if field == "embedding_vector":
+-            assert sample.embedding_vector[0] != revised.embedding_vector[0]
+-            assert round(sample.embedding_vector[0], 12) == round(revised.embedding_vector[0], 12)
+-    assert revised.sample_id == sample.sample_id
+-    revised_bucket = autoencoder._sample_cache_for(revised)
+-    assert revised_bucket is not original_bucket
+-    assert autoencoder._sample_cache_for(replace(revised)) is revised_bucket

@@ -1,0 +1,63 @@
+import ast
+from dataclasses import replace
+import hashlib
+from importlib.machinery import SourceFileLoader
+from importlib.util import spec_from_loader, module_from_spec
+from importlib.abc import MetaPathFinder
+import os
+from pathlib import Path
+import resource
+import sys
+from types import SimpleNamespace
+
+import pytest
+
+resource.setrlimit(resource.RLIMIT_CPU, (35, 40))
+if hasattr(os, "sched_getaffinity"):
+    os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
+
+
+class ScopeGuard(MetaPathFinder):
+    def find_spec(self, fullname, path=None, target=None):
+        if fullname.partition(".")[0] in {"torch", "transformers", "duckdb"}:
+            raise AssertionError("out-of-scope import: " + fullname)
+        return None
+
+
+stage_root, test_path, structured_path, split, consumer, run_root = map(Path, sys.argv[1:7])
+run_root.mkdir(mode=0o700)
+sys.path.insert(0, str(stage_root))
+sys.meta_path.insert(0, ScopeGuard())
+
+
+def load_owner(name, path, digest):
+    assert hashlib.sha256(path.read_bytes()).hexdigest() == digest, path
+    spec = spec_from_loader(name, SourceFileLoader(name, str(path)))
+    module = module_from_spec(spec)
+    sys.modules[name] = module
+    spec.loader.exec_module(module)
+    parent, _, attr = name.rpartition(".")
+    if parent in sys.modules:
+        setattr(sys.modules[parent], attr, module)
+    assert Path(module.__file__) == path
+    return module
+
+
+
+p = "ipfs_datasets_py.optimizers.logic_theorem_optimizer."
+splits = load_owner(p + "legal_ir_eval_splits", split, "e652c79842323fec40f3e5d8f6a23620c9b4ce4a2d1043c597176a13de3f4acd")
+binding = load_owner(p + "legal_span_consumer_binding", consumer, "5bb6c1c1d627d65d7e0d98a00d5f646c7519f0c3a73a21492db1936445ecdd4f")
+structured = load_owner(p + "legal_structured_retrieval", structured_path, sys.argv[7])
+tests = load_owner("_retained_signed_rich_eval_tests", test_path, sys.argv[8])
+failures = 0
+for action in ("legacy_alias", "unicode_unrelated", "unicode_alias"):
+    try:
+        tests.test_rich_v3_heldout_replays_profile_near_duplicate_before_producer(action)
+    except (Exception, pytest.fail.Exception):
+        import traceback
+        traceback.print_exc()
+        print(action, "FAIL", flush=True)
+        failures += 1
+    else:
+        print(action, "PASS", flush=True)
+raise SystemExit(bool(failures))

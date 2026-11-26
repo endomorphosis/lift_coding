@@ -1,0 +1,393 @@
+{
+  "actual_private_same17": {
+    "after": {
+      "exit": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/after.exit",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "false_accepts": 0,
+      "false_refusals": 0,
+      "matched": 17,
+      "raw_case_dispositions": [
+        {
+          "agrees": true,
+          "case": "complete",
+          "expected_accepted": true,
+          "observed_accepted": true,
+          "refusal": null
+        },
+        {
+          "agrees": true,
+          "case": "abstained",
+          "expected_accepted": true,
+          "observed_accepted": true,
+          "refusal": null
+        },
+        {
+          "agrees": true,
+          "case": "time-before-forward",
+          "expected_accepted": true,
+          "observed_accepted": true,
+          "refusal": null
+        },
+        {
+          "agrees": true,
+          "case": "token-exhaustion",
+          "expected_accepted": true,
+          "observed_accepted": true,
+          "refusal": null
+        },
+        {
+          "agrees": true,
+          "case": "unexpected-bos",
+          "expected_accepted": true,
+          "observed_accepted": true,
+          "refusal": null
+        },
+        {
+          "agrees": true,
+          "case": "invalid-transport",
+          "expected_accepted": true,
+          "observed_accepted": true,
+          "refusal": null
+        },
+        {
+          "agrees": true,
+          "case": "malformed-body",
+          "expected_accepted": true,
+          "observed_accepted": true,
+          "refusal": null
+        },
+        {
+          "agrees": true,
+          "case": "empty-decoded-body",
+          "expected_accepted": true,
+          "observed_accepted": true,
+          "refusal": null
+        },
+        {
+          "agrees": true,
+          "case": "complete-without-eos",
+          "expected_accepted": false,
+          "observed_accepted": false,
+          "refusal": "v11 complete output requires observed EOS after a generated body"
+        },
+        {
+          "agrees": true,
+          "case": "complete-with-early-eos",
+          "expected_accepted": false,
+          "observed_accepted": false,
+          "refusal": "v11 raw generation tokens or text differ from the saved tokenizer contract"
+        },
+        {
+          "agrees": true,
+          "case": "complete-with-wrong-bos",
+          "expected_accepted": false,
+          "observed_accepted": false,
+          "refusal": "v11 raw generation tokens or text differ from the saved tokenizer contract"
+        },
+        {
+          "agrees": true,
+          "case": "complete-outside-vocab",
+          "expected_accepted": false,
+          "observed_accepted": false,
+          "refusal": "v11 raw generation tokens or text differ from the saved tokenizer contract"
+        },
+        {
+          "agrees": true,
+          "case": "false-abstention",
+          "expected_accepted": false,
+          "observed_accepted": false,
+          "refusal": "v11 abstention requires empty EOS output"
+        },
+        {
+          "agrees": true,
+          "case": "false-incomplete-with-eos",
+          "expected_accepted": false,
+          "observed_accepted": false,
+          "refusal": "v11 incomplete output contradicts the token limit or terminal evidence"
+        },
+        {
+          "agrees": true,
+          "case": "false-token-budget",
+          "expected_accepted": false,
+          "observed_accepted": false,
+          "refusal": "v11 incomplete output contradicts the token limit or terminal evidence"
+        },
+        {
+          "agrees": true,
+          "case": "valid-body-called-invalid",
+          "expected_accepted": false,
+          "observed_accepted": false,
+          "refusal": "v11 invalid body unexpectedly passes strict raw-wire assembly"
+        },
+        {
+          "agrees": true,
+          "case": "missing-tokenizer-receipt",
+          "expected_accepted": false,
+          "observed_accepted": false,
+          "refusal": "v11 generation input receipt differs from the source and token budget"
+        }
+      ],
+      "raw_error": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/after.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "raw_result": {
+        "bytes": 3936,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/after.stdout",
+        "sha256": "3f947e31b9609e3aad7dbcff1f87fc0983b2321c847a26fa4e1de1a136f00223"
+      },
+      "same_expected_population": 17
+    },
+    "before": {
+      "exit": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/before.exit",
+        "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+      },
+      "false_accepts": 9,
+      "false_refusals": 0,
+      "matched": 8,
+      "raw_case_dispositions": [
+        {
+          "agrees": true,
+          "case": "complete",
+          "expected_accepted": true,
+          "observed_accepted": true,
+          "refusal": null
+        },
+        {
+          "agrees": true,
+          "case": "abstained",
+          "expected_accepted": true,
+          "observed_accepted": true,
+          "refusal": null
+        },
+        {
+          "agrees": true,
+          "case": "time-before-forward",
+          "expected_accepted": true,
+          "observed_accepted": true,
+          "refusal": null
+        },
+        {
+          "agrees": true,
+          "case": "token-exhaustion",
+          "expected_accepted": true,
+          "observed_accepted": true,
+          "refusal": null
+        },
+        {
+          "agrees": true,
+          "case": "unexpected-bos",
+          "expected_accepted": true,
+          "observed_accepted": true,
+          "refusal": null
+        },
+        {
+          "agrees": true,
+          "case": "invalid-transport",
+          "expected_accepted": true,
+          "observed_accepted": true,
+          "refusal": null
+        },
+        {
+          "agrees": true,
+          "case": "malformed-body",
+          "expected_accepted": true,
+          "observed_accepted": true,
+          "refusal": null
+        },
+        {
+          "agrees": true,
+          "case": "empty-decoded-body",
+          "expected_accepted": true,
+          "observed_accepted": true,
+          "refusal": null
+        },
+        {
+          "agrees": false,
+          "case": "complete-without-eos",
+          "expected_accepted": false,
+          "observed_accepted": true,
+          "refusal": null
+        },
+        {
+          "agrees": false,
+          "case": "complete-with-early-eos",
+          "expected_accepted": false,
+          "observed_accepted": true,
+          "refusal": null
+        },
+        {
+          "agrees": false,
+          "case": "complete-with-wrong-bos",
+          "expected_accepted": false,
+          "observed_accepted": true,
+          "refusal": null
+        },
+        {
+          "agrees": false,
+          "case": "complete-outside-vocab",
+          "expected_accepted": false,
+          "observed_accepted": true,
+          "refusal": null
+        },
+        {
+          "agrees": false,
+          "case": "false-abstention",
+          "expected_accepted": false,
+          "observed_accepted": true,
+          "refusal": null
+        },
+        {
+          "agrees": false,
+          "case": "false-incomplete-with-eos",
+          "expected_accepted": false,
+          "observed_accepted": true,
+          "refusal": null
+        },
+        {
+          "agrees": false,
+          "case": "false-token-budget",
+          "expected_accepted": false,
+          "observed_accepted": true,
+          "refusal": null
+        },
+        {
+          "agrees": false,
+          "case": "valid-body-called-invalid",
+          "expected_accepted": false,
+          "observed_accepted": true,
+          "refusal": null
+        },
+        {
+          "agrees": false,
+          "case": "missing-tokenizer-receipt",
+          "expected_accepted": false,
+          "observed_accepted": true,
+          "refusal": null
+        }
+      ],
+      "raw_error": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/before.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "raw_result": {
+        "bytes": 3452,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/before.stdout",
+        "sha256": "034928020719712a134f8b2f49a22601a01d851891fdff15e2b70da5e23af1e5"
+      },
+      "same_expected_population": 17
+    }
+  },
+  "base_exact_Git_role_materialization": {
+    "bytes": 5370,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/exact-before-Git-inputs.json",
+    "sha256": "23721e7d691264ee4a2e674588e6afc8a5539269854c6143df821817fa4c55ae"
+  },
+  "change": "Existing v11 saved validator checks matched-pair completion, source-joined tokenizer receipt, actual vocabulary and first/last/early-stop token boundaries, typed reason and token-cap semantics, and rejects canonical valid text classified invalid. It does not re-decode, execute, authenticate a pre-observation coordinated rewrite, compare to gold, or adjudicate meaning.",
+  "defect": "Saved v11 parent validation accepted contradictory raw token, terminal and outcome evidence carrying correctly hashed artifacts. A structurally valid row flagged complete passed with no EOS.",
+  "latest_published_Guide534": {
+    "bytes": 12742,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-guide534-four-doc-three-FF-publication-small-v414.json",
+    "sha256": "078aaea77813d857baaa7c5f98838717dd780dc31aa414b93ba5b9d98e6cd146"
+  },
+  "ordinary_preparation": {
+    "additional_old_physical_positive_requires_fresh_original_owner": "test_reviewed_inference_v11_source_only_physical_original_owner",
+    "authority": null,
+    "canonical_owning_test_executed": false,
+    "clock": null,
+    "known_ordinary_harness_concern": "Historical DATA fixture was made producer-shaped. Actual physical v11 lease was not selected here. Parent lifecycle Source map needs current inference pins and original physical custody for that case.",
+    "metadata_only_selectors_and_expected_cases": {
+      "test_reviewed_inference_v11_outputs_cover_ordered_source_population": 6,
+      "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes": 15,
+      "test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved": 5,
+      "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition": 12
+    },
+    "owning_test": "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_inference.py",
+    "qualification": null,
+    "source_binding": null
+  },
+  "prospective_current_D_head": "cb44a448bf5601f739eb280e9578736680e52f7f",
+  "runner": {
+    "bytes": 11199,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_saved_terminal_controls.py",
+    "sha256": "afce40e8ac8c7214c1db134f5e7af90d5d5023d1bdb9fa4392611b5ca186011f"
+  },
+  "schema": "private-v11-existing-parent-terminal-evidence-two-file-repair/v1",
+  "scope": "Authenticated current Git AST closures, exact held first-party authored target, real byte reader, real generation policy and raw-wire assembly. Scripted fictional outputs only. No project/model/Torch/Source/Native/CI run, canonical edit, admission or performance claim.",
+  "selected_two": {
+    "inference": {
+      "added_functions": [],
+      "after": {
+        "bytes": 89200,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/inference.after.py.DATA",
+        "sha256": "334ccb423da0c0b3de4985f51c541e2ff5966c04055ceaf3fd8ce6388ef08f6b"
+      },
+      "after_blob": "b6a23e81ad5fb38894da764182004397d80c5018",
+      "before": {
+        "blob": "370a9c3fb8e52702b9ca71fff60279443ca31781",
+        "bytes": 85793,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/inference.before.py.DATA",
+        "relative_git_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_inference.py",
+        "sha256": "413cabdaae3c28321215fe418b450013fdd07ac94dde6e0c39d08de5cde3c6f3"
+      },
+      "changed_functions": [
+        "_check_digest_omitted_generation_outputs"
+      ],
+      "forward_patch": {
+        "bytes": 6576,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/inference.forward.diff.DATA",
+        "sha256": "4a9d1cedbb0918f3f9c191833696b2220d2f79def21b6605476c7c8f03de917f"
+      },
+      "inverse_patch": {
+        "bytes": 6576,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/inference.inverse.diff.DATA",
+        "sha256": "08add9dc5964b8b3d89f585f2a80f5f5c3a42addb217e2114dcf2b2c136ec065"
+      },
+      "mode": "100644",
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_inference.py"
+    },
+    "owning_test": {
+      "added_functions": [
+        "_reviewed_v11_bind_saved_source_control",
+        "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition"
+      ],
+      "after": {
+        "bytes": 253248,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/owning_test.after.py.DATA",
+        "sha256": "c9c17b2e23560b59f3b018f90bbf38cdd6f77340052dd68901557723b4724ec3"
+      },
+      "after_blob": "9dd37defc74a0f392b7607e944c7ecc3dbb8c4c8",
+      "before": {
+        "blob": "aefca4080817766eb769fe68523fa15d3151372e",
+        "bytes": 246711,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/owning_test.before.py.DATA",
+        "relative_git_path": "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_inference.py",
+        "sha256": "9342f282e1b063ce592aab4ed54d5c051831642ff50b378d0667285b07f70e92"
+      },
+      "changed_functions": [
+        "_reviewed_v11_saved_control",
+        "_reviewed_v11_three_source_coverage_control"
+      ],
+      "forward_patch": {
+        "bytes": 13613,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/owning_test.forward.diff.DATA",
+        "sha256": "66beea1876bfe8d84437a3b8d7688c8e8618a29dde28d4ff55e72570fb04448b"
+      },
+      "inverse_patch": {
+        "bytes": 13613,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/owning_test.inverse.diff.DATA",
+        "sha256": "62b8037a4117df7dc81582306466ca4d68781bf436ef7f31c787bb12304bad30"
+      },
+      "mode": "100644",
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_inference.py"
+    }
+  },
+  "unchanged_Git_preimage_blobs": true
+}

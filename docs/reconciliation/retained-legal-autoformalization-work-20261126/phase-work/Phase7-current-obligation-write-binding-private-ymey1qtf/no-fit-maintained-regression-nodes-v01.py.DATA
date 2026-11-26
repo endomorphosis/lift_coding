@@ -1,0 +1,98 @@
+from pathlib import Path
+from types import ModuleType
+import hashlib
+import importlib.util
+import json
+import sys
+import traceback
+
+
+stage = Path(__file__).absolute().parent
+path = stage / "no-fit-current-obligation-adapter-v01.py"
+raw = path.read_bytes()
+assert len(raw) == 20405
+assert hashlib.sha256(raw).hexdigest() == "a84c49de31dd4218043f2f6b9ff1f9ef954291eddde2661b20a580fbbc539bf7"
+adapter = ModuleType("_authentic_probe_adapter")
+adapter.__file__ = str(path)
+sys.modules[adapter.__name__] = adapter
+exec(compile(raw, str(path), "exec"), adapter.__dict__)
+prior = adapter.load_prior()
+
+
+def load_fixture(relative, name):
+    path = prior.ROOT / relative
+    spec = importlib.util.spec_from_file_location(name, path, loader=prior.BoundSource(name, str(path)))
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+def run():
+    prior.install_kernel_guards()
+    manifest = {
+        "record": ["record.after-v02.DATA", 63093, "1312c18bca78bc555e9ca7714dd9dcf7509ac92ef30f298fc77b8f67739d2b79"],
+        "trainer": ["trainer.after-v03.DATA", 42369, "924178bac6ad55e4d35f43a0dbad0a6728db7e8c10609ea662336ac6b3f6b4b9"],
+        "autoencoder": ["autoencoder.after-v02.DATA", 1429491, "32f9c5f0ea7123f5b3c7f18130aac4f69774124d2dfd2f1b758ea13527307b85"],
+    }
+    adapter.prepare_loader(prior, manifest)
+    ablation_test = "tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py"
+    ablation_code = "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py"
+    exact = {
+        prior.FIXTURE: ("test_trusted_feedback_weight_updates.test.after-v02.DATA", 42117,
+            "c7b68d023fa596e40a59f5f28ca749725f4c19fc797ce752a152dfc8a7481857", prior.EXPECTED[prior.FIXTURE]),
+        ablation_test: ("test_proof_feedback_ablation.test.after.DATA", 9778,
+            "bf195465dab79f259c87243eb66553286f2bd32084c80ca97cd4c56660191414", "dd11af058186d651fbe94588395494a09a72828c"),
+        ablation_code: ("ablation.after-v02.DATA", 41765,
+            "01dc8c506d30d3348712d1547e46bf801109818aadab77e94c2ded8188f90bbc", "3e08a06029424257f8aa9df72a4a12d29c0d9547"),
+    }
+    overlays = {}
+    for rel, (name, size, sha256, git_oid) in exact.items():
+        path = stage / name
+        overlays[rel] = adapter.pinned_file(path, size, sha256)
+        prior.EXPECTED[rel] = git_oid
+
+    class RegressionOverlay(prior.BoundSource):
+        def get_code(self, fullname):
+            baseline = super().get_code(fullname)
+            path = Path(self.path).absolute()
+            relative = path.relative_to(prior.ROOT).as_posix()
+            if relative not in overlays:
+                return baseline
+            body = overlays[relative]
+            prior.compiled_total += len(body)
+            assert prior.compiled_total <= prior.MAX_MODULE_BYTES
+            prior.compiled[relative]["overlay_executed"] = {
+                "path": str(stage / exact[relative][0]), "bytes": len(body), "sha256": exact[relative][2]
+            }
+            return compile(body, str(path), "exec", dont_inherit=True)
+
+    prior.BoundSource = RegressionOverlay
+    source = adapter.import_fixture(prior)
+    ablation = load_fixture(ablation_test, "_phase7_real_ablation_test_candidate")
+    cases = []
+    for change in ("matching", "legacy", "sample", "interpretation", "dependency"):
+        case = source.test_typed_feedback_uses_current_semantic_target_before_update
+        with source.pytest.MonkeyPatch.context() as patches:
+            case(source.samples.__wrapped__(), patches, change)
+        cases.append(case.__name__ + "[" + change + "]")
+    with source.pytest.MonkeyPatch.context() as patches:
+        ablation.test_ablation_refuses_unmatched_typed_feedback_before_cloning(patches)
+    cases.append("test_ablation_refuses_unmatched_typed_feedback_before_cloning")
+    assert not prior.denied
+    return cases
+
+
+outcome = {}
+code = 2
+try:
+    outcome["passes"] = run()
+    code = 0
+except (Exception, BaseException) as error:
+    traceback.print_exc()
+    outcome["failure"] = repr(error)
+finally:
+    outcome.update(worker_rc=code, denied=prior.denied, guard=prior.guard, compiled=prior.compiled,
+                   project_body_bytes=prior.compiled_total, fit=False)
+    print(json.dumps(outcome, sort_keys=True))
+raise SystemExit(code)

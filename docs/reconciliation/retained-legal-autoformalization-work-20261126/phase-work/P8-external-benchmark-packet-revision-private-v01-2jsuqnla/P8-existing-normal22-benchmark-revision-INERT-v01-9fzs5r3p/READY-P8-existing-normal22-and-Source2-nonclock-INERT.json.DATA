@@ -1,0 +1,290 @@
+{
+  "Root_authority_selection_clock_effect_IO_output": null,
+  "actual_collection_or_run_or_result": null,
+  "all_original_source_routing_and_sdk_limits_preserved": true,
+  "bootstrap_future_null_symbols": [
+    "ROOT",
+    "ADDITIONAL_A_ROOT",
+    "EXPECTED_MODULES",
+    "REQUIRED_CANONICAL_CONFTESTS",
+    "PYTEST_INIFILE",
+    "ROOT_RUNTIME_SELECTION",
+    "GIT_CANDIDATE_PROVENANCE",
+    "ADDITIONAL_A_PROVENANCE",
+    "BINDING_MANIFEST_REFERENCE",
+    "SOURCE_READ_BINDING_REFERENCE",
+    "ADMITTED_IO_PLAN_REFERENCE",
+    "EFFECT_DECISION_REFERENCE",
+    "SOURCE_EPOCH_SHA256",
+    "SOURCE_EPOCH_RECORD_COUNT"
+  ],
+  "controls": {
+    "bootstrap": {
+      "after": {
+        "bytes": 43720,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/P8-existing-normal22-benchmark-revision-INERT-v01-9fzs5r3p/P8-normal22-existing-bootstrap-INERT.py.DATA",
+        "sha256": "9e0f627101eaf26150d81bc7b93cbe1f01ec56d4901fa163a10d0553545e400b"
+      },
+      "before": {
+        "bytes": 50178,
+        "path": "/tmp/P8-existing-normal21-actual-binding-private-v01/actual-READ6-bound-normal21-nonclock-v01/actual-P8-normal21-local-a79-READ6-nonclock-bootstrap.py.DATA",
+        "sha256": "cf8b1e3566816b8d2ce81f52c8ccdacff0685df51fae76e7d8a829f0f4347175"
+      },
+      "changed_top_level_classes": [],
+      "changed_top_level_functions": [],
+      "edited_spans": [
+        "literal:1",
+        "assignment:ROOT",
+        "assignment:ADDITIONAL_A_ROOT",
+        "assignment:EXPECTED_MODULES",
+        "assignment:FUNCTION_SELECTORS",
+        "assignment:EXPECTED_FUNCTION_CASE_COUNTS",
+        "assignment:REQUIRED_CANONICAL_CONFTESTS",
+        "assignment:PYTEST_INIFILE",
+        "assignment:GIT_CANDIDATE_PROVENANCE",
+        "assignment:ADDITIONAL_A_PROVENANCE",
+        "assignment:SOURCE_READ_BINDING_REFERENCE",
+        "assignment:SOURCE_EPOCH_SHA256",
+        "assignment:SOURCE_EPOCH_RECORD_COUNT",
+        "assignment:EXPECTED_ORDERED_CASE_COUNTS",
+        "assignment:EXPECTED_CASES",
+        "assignment:LITERAL_EXPECTED_NODEIDS",
+        "literal:57",
+        "literal:71",
+        "literal:71",
+        "literal:72",
+        "literal:79",
+        "literal:110",
+        "literal:110",
+        "literal:111"
+      ],
+      "forward": {
+        "bytes": 31926,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/P8-existing-normal22-benchmark-revision-INERT-v01-9fzs5r3p/bootstrap.forward.diff",
+        "sha256": "6a3743c9ad79917a82bf9818e4d445c5566adfe7a4cc6b89fc431153783ebd33"
+      },
+      "inverse": {
+        "bytes": 31926,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/P8-existing-normal22-benchmark-revision-INERT-v01-9fzs5r3p/bootstrap.inverse.diff",
+        "sha256": "c93020e5c1dd77a2ed25b5903dce39d0b94b93102fac52c88f8d773ac12ff2c6"
+      }
+    },
+    "factory": {
+      "after": {
+        "bytes": 3323,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/P8-existing-normal22-benchmark-revision-INERT-v01-9fzs5r3p/P8-normal22-existing-factory-INERT.py.DATA",
+        "sha256": "7ea2ad6cb8fec1c65383646f026333d95ba65f130a4be77a9204636993f8d05c"
+      },
+      "before": {
+        "bytes": 3323,
+        "path": "/tmp/Main-P8-existing-normal21-INERT-profile-private-v01/P8-normal21-existing-factory-INERT.py.DATA",
+        "sha256": "3763c9d670ece736d906f2f695a55f67edbb881b9ee93762c23a10e3f95ce6cd"
+      },
+      "changed_top_level_classes": [],
+      "changed_top_level_functions": [
+        "continuation_request"
+      ],
+      "edited_spans": [
+        "literal:4",
+        "literal:4",
+        "literal:5",
+        "literal:18",
+        "literal:18",
+        "literal:19",
+        "literal:21",
+        "literal:26"
+      ],
+      "forward": {
+        "bytes": 3468,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/P8-existing-normal22-benchmark-revision-INERT-v01-9fzs5r3p/factory.forward.diff",
+        "sha256": "470aeeb6abee9be8a758981e42d2a898aedb2db247a085785ef257ede299236a"
+      },
+      "inverse": {
+        "bytes": 3468,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/P8-existing-normal22-benchmark-revision-INERT-v01-9fzs5r3p/factory.inverse.diff",
+        "sha256": "9e8297a06b812023d6ae7a0f70759a4db771dc27e32806f7811b4a6a1c97f619"
+      }
+    },
+    "operator": {
+      "after": {
+        "bytes": 55245,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/P8-existing-normal22-benchmark-revision-INERT-v01-9fzs5r3p/P8-normal22-existing-operator-INERT.py.DATA",
+        "sha256": "a7b183d6be075530731c0ff0a9da1a45890ba4fa3c7b447dc49738bf4b395461"
+      },
+      "before": {
+        "bytes": 68723,
+        "path": "/tmp/P8-existing-normal21-actual-binding-private-v01/actual-READ6-bound-normal21-nonclock-v01/actual-P8-normal21-local-a79-READ6-nonclock-Main-finalizer-fixed-operator.py.DATA",
+        "sha256": "da60435295db5e1071d0c2497be58c679fe9bda9d3c531c27500b4460356db26"
+      },
+      "changed_top_level_classes": [],
+      "changed_top_level_functions": [
+        "binding_for"
+      ],
+      "edited_spans": [
+        "literal:1",
+        "assignment:FINAL_D_ROOT",
+        "assignment:FINAL_D_HEAD",
+        "assignment:FINAL_D_TREE",
+        "assignment:FINAL_A_ROOT",
+        "assignment:FINAL_A_HEAD",
+        "assignment:FINAL_A_TREE",
+        "assignment:D_READ_BINDING_REFERENCE",
+        "assignment:FINAL_MODULE_BINDINGS",
+        "assignment:FINAL_D_PROVENANCE",
+        "assignment:FINAL_A_PROVENANCE",
+        "assignment:FINAL_SOURCE_PROJECTS",
+        "assignment:FINAL_SDK_BINDINGS",
+        "assignment:FINAL_RESOURCE_STATE_PATH",
+        "assignment:FINAL_EXPECTED_RESOURCE_CONFIG",
+        "assignment:FINAL_EXPECTED_CAPACITY",
+        "assignment:FINAL_FIXTURE_CLOSURE_REFERENCE",
+        "assignment:FINAL_ADDITIONAL_IMPORT_ROOTS",
+        "assignment:SELECTION",
+        "assignment:EXPECTED_BRIDGE27_CASE_VECTOR",
+        "assignment:FINAL_ABSENT_PATHS",
+        "literal:42",
+        "assignment:PREP",
+        "literal:142",
+        "literal:142",
+        "literal:145",
+        "literal:146",
+        "literal:148",
+        "assignment:source42",
+        "assignment:FACTORY_REFERENCE",
+        "literal:191",
+        "literal:366",
+        "literal:367",
+        "literal:368",
+        "literal:512",
+        "literal:519",
+        "literal:519",
+        "literal:520",
+        "literal:520",
+        "literal:572"
+      ],
+      "forward": {
+        "bytes": 45547,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/P8-existing-normal22-benchmark-revision-INERT-v01-9fzs5r3p/operator.forward.diff",
+        "sha256": "68e5cd5f7dbfa18dae46fa68959e11ae0dbf33eb51f715a1e64e8481c2fd3e75"
+      },
+      "inverse": {
+        "bytes": 45547,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/P8-existing-normal22-benchmark-revision-INERT-v01-9fzs5r3p/operator.inverse.diff",
+        "sha256": "080f84513c5b8fe9cf26b85938daed404ee15d8f9adc4aacfe019a78feb385ad"
+      }
+    }
+  },
+  "exact_private_product_and_test_revision_candidates": {
+    "bytes": 8664,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/sealed-private-benchmark-packet-revision-two-file-v01.json",
+    "sha256": "59b54c3859174bcf1afcab5d6551b61928d9705f3537c8a70080ab81146e012a"
+  },
+  "functions_cases_vector": {
+    "cases": 22,
+    "functions": 16,
+    "old_order21_prefix_exact": true,
+    "vector": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      4,
+      1,
+      1,
+      1,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1
+    ]
+  },
+  "future_current_Source2_READ6_epochs_Git_roots_full9": null,
+  "future_post_freeze_READ6_roles_DATA": {
+    "bytes": 3080,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/P8-existing-normal22-benchmark-revision-INERT-v01-9fzs5r3p/P8-normal22-READ6-role-plan-nonclock-DATA.json",
+    "sha256": "65c75e3aac48a1a0367b9bf5999107bbfcf8abc85c5822cdea72f40c05771689"
+  },
+  "historical_Source_loader_identity_needs_current_bind": {
+    "bytes": 10375,
+    "encoding": "zlib+base64",
+    "path": "/tmp/legal-ir-phase2-reviewed-admission-source-20261108-v01/resource-census-compatible-port-v01/runtime-owner-v4-trainer-compatibility-v01/current-published-cleanup71-original16MiB-input-v01/original42-frozen.py",
+    "sha256": "42e9f07d0d458177079269d9f495f0b70512180c1adc2f7fe0bfdb05518a12f9"
+  },
+  "inherited_V307_resource_profile_metadata_not_admission": {
+    "collect_cpu_seconds": 110,
+    "collect_wall_seconds": 120,
+    "max_input_bytes": 4194304,
+    "max_output_bytes": 16777216,
+    "max_workspace_bytes": 67108864,
+    "memory_bytes": 8589934592,
+    "resident_memory_bytes": 4294967296,
+    "run_cpu_seconds": 540,
+    "run_wall_seconds": 600,
+    "termination_grace_seconds": 5
+  },
+  "operator_future_null_symbols": [
+    "FINAL_ABSENT_PATHS",
+    "ROOT_SELECTION",
+    "ROOT_RUNTIME_SELECTION",
+    "FINAL_OUTPUT_PATH",
+    "FINAL_D_ROOT",
+    "FINAL_D_HEAD",
+    "FINAL_D_TREE",
+    "FINAL_A_ROOT",
+    "FINAL_A_HEAD",
+    "FINAL_A_TREE",
+    "D_READ_BINDING_REFERENCE",
+    "FINAL_BINDING_MANIFEST_REFERENCE",
+    "FINAL_BINDING_MANIFEST",
+    "FINAL_MODULE_BINDINGS",
+    "FINAL_D_PROVENANCE",
+    "FINAL_A_PROVENANCE",
+    "FINAL_SOURCE_PROJECTS",
+    "FINAL_SDK_BINDINGS",
+    "FINAL_RESOURCE_STATE_PATH",
+    "FINAL_EXPECTED_RESOURCE_CONFIG",
+    "FINAL_EXPECTED_CAPACITY",
+    "FINAL_FIXTURE_CLOSURE_REFERENCE",
+    "FINAL_EFFECT_DECISION_REFERENCE",
+    "FINAL_EFFECT_DECISION",
+    "FINAL_ADMITTED_IO_PLAN_REFERENCE",
+    "FINAL_ADDITIONAL_IMPORT_ROOTS",
+    "BOOTSTRAP_REFERENCE",
+    "source42",
+    "PREP"
+  ],
+  "preserved_corrected_finalizer_AST_except_specific_report_name": true,
+  "prior_normal21_inert_assembly_historical": {
+    "bytes": 12211,
+    "path": "/tmp/Main-P8-existing-normal21-INERT-profile-private-v01/sealed-P8-existing-normal21-INERT-profile-and-binding-tuple-v01.json",
+    "sha256": "bf35a381834ed71c8ed59031a6a0fc3ee681635a710b60857b6362c79342e09a"
+  },
+  "prior_v307_nonclock_recipe_historical": {
+    "bytes": 6607,
+    "path": "/tmp/P8-existing-normal21-actual-binding-private-v01/actual-READ6-bound-normal21-nonclock-v01/READY-existing-P8-normal21-local-a79-READ6-nonclock-Main-finalizer-fixed.json",
+    "sha256": "47b6463485eb42f4f08f3f6ea5f4b92fe33e4c32a1f67f2a23542b84f14de0a7"
+  },
+  "prior_v307_ordinary21_historical": {
+    "bytes": 4105,
+    "path": "/tmp/Root-P8-benchmark-ordinary21-v307-sz73_pyk/Root-P8-benchmark-ordinary21-qualified-small-v307.json",
+    "sha256": "4faacaab4ca6332c382df49a0131e4b23bac3a6390fff2a8495a677b290de3d1"
+  },
+  "schema": "private-P8-normal22-existing-v307-control-retarget-INERT/v1",
+  "source2_targets_DATA": {
+    "bytes": 2749,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/P8-existing-normal22-benchmark-revision-INERT-v01-9fzs5r3p/P8-Source2-targets-nonclock-DATA.json",
+    "sha256": "e984b2f05d96171006211e51d09028c0eeaeaab4840b60e4eff44ad0336554ee"
+  },
+  "source_sql_native_execution_Git_mutation_here": false,
+  "static_roster": {
+    "bytes": 12238,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/P8-existing-normal22-benchmark-revision-INERT-v01-9fzs5r3p/P8-normal22-independent-literal-roster-DATA.json",
+    "sha256": "0c1ef0b558781e74723aefe16c6c7b0f44c86f02837edac84122277ad477c9d2"
+  },
+  "status": "PRIVATE_INERT_NOT_SELECTED_NOT_EXECUTED",
+  "unchanged_authority_and_normal_rewrite_ASTs": true
+}

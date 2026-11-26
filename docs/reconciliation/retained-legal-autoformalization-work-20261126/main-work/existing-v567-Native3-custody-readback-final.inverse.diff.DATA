@@ -1,0 +1,119 @@
+--- /tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-v567-Native3-current-operator-custody-readback-INERT-v04.py.DATA
++++ /tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-v567-Native3-current-operator-INERT-v01.py.DATA
+@@ -125,7 +125,6 @@
+             stream.flush()
+             os.fsync(stream.fileno())
+         report['diagnostic_bytes_written'] += len(raw)
+-        read_private(path, len(raw), H(raw))
+         return {'path': str(path), 'bytes': len(raw), 'sha256': H(raw)}
+ 
+     def retain_json(name, value):
+@@ -213,83 +212,32 @@
+     def run_with_actual_custody(method, request, **kwargs):
+         native_guard()
+         returned_result = None
+-        retained_result = None
+         try:
+             result = method(request, **kwargs)
+             returned_result = result
+             retain_sdk_result(result, request, returned=True)
+-            retained_result = result
+             native_guard()
+             return result
+         except BaseException as error:
+-            # Keep the actual primary exception and exact result objects alive in this frame.
+-            actual_result = returned_result if type(returned_result) is sdk.ToolRunResult else None
+-            secondary_errors = []
++            if type(returned_result) is sdk.ToolRunResult:
++                returned_state = returned_result.to_dict()
++                if returned_state['workspace_cleaned'] and returned_state.get('native_lifecycle', {}).get('cleanup_confirmed') is True:
++                    report['post_closed_SDK_result_error'] = {'type': type(error).__name__, 'message': str(error)}
++                    raise
+             handle = error.cleanup_handle if type(error) is sdk.OwnedToolCleanupError else None
+-            if type(handle) is not sdk.NativeToolCleanupHandle:
+-                handle = None
+-            pending = {'owner': 'existing SDK ordinary owned-process cleanup',
+-                       'SDK_returned_result': returned_result is not None,
+-                       'observations': [], 'attempts': 0,
+-                       'original_error_type': type(error).__name__}
++            pending = {'owner': 'existing SDK ordinary owned-process cleanup', 'SDK_returned_result': False, 'observations': [], 'attempts': 0, 'original_error_type': type(error).__name__}
+             report['owned_cleanup_pending'] = pending
+             current = error.__traceback__
+             while current is not None:
+-                code = current.tb_frame.f_code
+-                if code is sdk.BoundedToolRunner.run.__code__ or code is admitted.ResourceAdmittedToolRunner.run.__code__:
++                if current.tb_frame.f_code is sdk.BoundedToolRunner.run.__code__:
+                     value = current.tb_frame.f_locals.get('result')
+-                    if actual_result is None and type(value) is sdk.ToolRunResult:
+-                        actual_result = value
+-                        pending['SDK_result_origin'] = ('actual canonical managed traceback local before error'
+-                            if code is admitted.ResourceAdmittedToolRunner.run.__code__
+-                            else 'actual canonical SDK traceback local before error')
+-                if code is sdk.BoundedToolRunner.run.__code__:
++                    if type(value) is sdk.ToolRunResult:
++                        retain_sdk_result(value, request, returned=False)
++                        pending['SDK_result_origin'] = 'actual SDK traceback local before error; not a successful return'
+                     candidate = current.tb_frame.f_locals.get('owned_handle')
+                     if handle is None and type(candidate) is sdk.NativeToolCleanupHandle:
+                         handle = candidate
+                 current = current.tb_next
+-            if actual_result is not None and retained_result is not actual_result:
+-                try:
+-                    retain_sdk_result(actual_result, request, returned=actual_result is returned_result)
+-                    retained_result = actual_result
+-                except BaseException as retention_error:
+-                    secondary_errors.append(retention_error)
+-                    pending['raw_result_retention_error'] = {'type': type(retention_error).__name__, 'message': str(retention_error)}
+-            result_state = None
+-            if actual_result is not None and retained_result is actual_result:
+-                try:
+-                    result_state = actual_result.to_dict()
+-                    assert type(result_state) is dict
+-                except BaseException as view_error:
+-                    secondary_errors.append(view_error)
+-                    result_state = None
+-                    pending['result_view_error'] = {'type': type(view_error).__name__, 'message': str(view_error)}
+-            lifecycle = result_state.get('native_lifecycle') if result_state is not None else None
+-            native_closed = (result_state is not None and result_state.get('workspace_cleaned') is True
+-                             and type(lifecycle) is dict and lifecycle.get('cleanup_confirmed') is True)
+-            no_child = (result_state is not None and result_state.get('workspace_cleaned') is True
+-                        and actual_result.pid is None and actual_result.native_lifecycle is None
+-                        and actual_result.returncode is None)
+-            if retained_result is actual_result and actual_result is not None and (native_closed or no_child):
+-                report['post_closed_SDK_result_error'] = {'type': type(error).__name__, 'message': str(error),
+-                    'cleanup_basis': 'FAILED_NO_CHILD' if no_child else 'actual SDK process/workspace cleanup confirmed'}
+-                # A known no-child result is a failure; parent subtree/release checks still run.
+-                raise
+-            # One durable diagnostic before either custody loop. Failure to write cannot
+-            # replace the primary exception, discard the actual result or release custody.
+-            checkpoint = {'schema': 'native3-existing-custody-error-checkpoint/v1',
+-                'failure': {'type': type(error).__name__, 'message': str(error),
+-                            'traceback': ''.join(traceback.format_exception(type(error), error, error.__traceback__))},
+-                'actual_result_present': actual_result is not None,
+-                'raw_result_retention_complete': actual_result is not None and retained_result is actual_result,
+-                'new_dispatch': False, 'actual_native_qualification': False, 'current_report': report}
+-            try:
+-                checkpoint_ref = retain_json('native3-custody-pending-checkpoint.json', checkpoint)
+-                read_private(checkpoint_ref['path'], checkpoint_ref['bytes'], checkpoint_ref['sha256'])
+-                report['custody_checkpoint'] = checkpoint_ref
+-            except BaseException as diagnostic_error:
+-                secondary_errors.append(diagnostic_error)
+-                report['custody_checkpoint_error'] = {'type': type(diagnostic_error).__name__, 'message': str(diagnostic_error)}
+             if handle is None:
+                 pending['ambiguous_without_actual_handle'] = True
+                 while True:
+@@ -309,14 +257,6 @@
+                     pending['last_retry_error_type'] = type(retry_error).__name__
+                 if confirmed:
+                     pending['confirmed_after_error'] = True
+-                    if actual_result is not None and (retained_result is not actual_result or result_state is None):
+-                        pending['process_clean_but_result_custody_retained'] = True
+-                        while True:
+-                            try:
+-                                print(json.dumps({'event': 'ACTUAL_NATIVE3_RESULT_CUSTODY_RETAINED', 'operator_pid': os.getpid(), 'Source_READ_still_held': True, 'new_dispatch': False}), flush=True)
+-                                time.sleep(5)
+-                            except BaseException as hold_error:
+-                                pending['last_hold_error_type'] = type(hold_error).__name__
+                     raise error
+                 try:
+                     print(json.dumps({'event': 'ACTUAL_NATIVE3_CUSTODY_RETAINED', 'operator_pid': os.getpid(), 'attempts': pending['attempts'], 'Source_READ_still_held': True, 'new_dispatch': False}), flush=True)

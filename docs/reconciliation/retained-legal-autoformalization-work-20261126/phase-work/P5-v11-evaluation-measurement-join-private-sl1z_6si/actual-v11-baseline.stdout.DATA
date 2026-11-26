@@ -1,0 +1,40 @@
+{
+  "actual_existing_artifact_reader_executed": true,
+  "cases": {
+    "existing_empty_evaluation": {
+      "accepted": true,
+      "evaluation_bytes": 2,
+      "evaluation_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "fixed_other_artifact_sha256": {
+        "generation": "c0a2dc8a8a9d0ce37e5d64a3a280176dba804bd2b754278c35ccd98f6a74203a",
+        "loader": "d43cd29033501262a949b11b0dac3169c7e27215d938df57a0f6e114f40764d0"
+      }
+    },
+    "unrelated_evaluation": {
+      "accepted": true,
+      "evaluation_bytes": 270,
+      "evaluation_sha256": "c4f32e6d7681d982157a7c1d44aeb6c85ba776592391dada775a5d01f6c3337c",
+      "fixed_other_artifact_sha256": {
+        "generation": "5d883c33c0641d551602d6c4aafd6a274c9fec8fe1d43f528700e86c2bff1836",
+        "loader": "a4bb33351d169e6cd4ecf1d2f76a4c60726efe9b29141dbf38a03ce4374a9054"
+      }
+    }
+  },
+  "ordinary_qualification": false,
+  "owner": {
+    "bytes": 89856,
+    "git_blob": "308c505b59804a184976e330ce145374943e4cbe",
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_inference.py",
+    "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_inference.py",
+    "sha256": "2a0325ac9d782fd7e5723751cb9dca3c4ca63c5ecff4f3ed78c76d33e53fedea"
+  },
+  "owning_test": {
+    "bytes": 254379,
+    "git_blob": "059d7a38fb9e9cdde2846f55496073ce77a51f5f",
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/project/tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_inference.py",
+    "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_inference.py",
+    "sha256": "5a372f8b5bbbb0e70e7e15e6ba583abef680641c39028c6f9b78df2fe1e2f035"
+  },
+  "project_model_or_backend_started": false,
+  "schema": "actual-private-v11-unbound-evaluation-probe/v1"
+}

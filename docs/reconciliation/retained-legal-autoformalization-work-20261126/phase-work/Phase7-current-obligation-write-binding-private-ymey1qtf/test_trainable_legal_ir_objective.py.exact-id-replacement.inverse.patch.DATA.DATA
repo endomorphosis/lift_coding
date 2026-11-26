@@ -1,0 +1,79 @@
+--- a/tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py
++++ b/tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py
+@@ -2,7 +2,6 @@
+ 
+ from __future__ import annotations
+ 
+-from dataclasses import replace
+ from types import SimpleNamespace
+ 
+ import pytest
+@@ -10,10 +9,7 @@
+ from ipfs_datasets_py.logic.integration.reasoning.legal_ir_proof_feedback import (
+     LegalIRProofFeedbackRecord,
+     ProofFeedbackPartitionPolicy,
+-    ProofFeedbackTrainingTarget,
+     ProofFeedbackVersions,
+-    proof_feedback_content_digest,
+-    proof_feedback_sample_digest,
+ )
+ from ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_samples import (
+     build_us_code_sample,
+@@ -189,38 +185,10 @@
+         lean_toolchain_version="lean-proof-norms-v1",
+         theorem_registry_version="proof-norms-theorems-v1",
+     )
+-    sample = build_us_code_sample(
+-        title="5",
+-        section="fictional-proof-objective-norms",
+-        text="A fictional agency shall publish notice unless the board grants an exception.",
+-    )
+-    sample_sha256 = proof_feedback_sample_digest(sample)
+-    obligation = {
+-        "obligation_id": "proof-norms-obligation",
+-        "obligation_type": "exception_scope",
+-        "legal_ir_view": "deontic.ir",
+-        "statement": "The fictional notice exception has the selected scope.",
+-    }
+-    target = ProofFeedbackTrainingTarget(
+-        sample_id=sample.sample_id,
+-        sample_sha256=sample_sha256,
+-        obligation_id=obligation["obligation_id"],
+-        obligation_type=obligation["obligation_type"],
+-        legal_ir_view=obligation["legal_ir_view"],
+-        formal_obligation_sha256=proof_feedback_content_digest(obligation),
+-        reviewed_target_sha256=proof_feedback_content_digest({
+-            "interpretation_id": "fictional-selected-proof-objective-interpretation",
+-            "sample_sha256": sample_sha256,
+-        }),
+-        dependency_manifest_sha256=proof_feedback_content_digest({
+-            "fictional-proof-objective-exception-definition": "revision-1",
+-        }),
+-    )
+-    fixture_record = LegalIRProofFeedbackRecord.create(
+-        obligation_id=target.obligation_id,
+-        obligation_type=target.obligation_type,
+-        legal_ir_view=target.legal_ir_view,
+-        obligation_digest=target.obligation_digest,
++    record = LegalIRProofFeedbackRecord.create(
++        obligation_id="proof-norms-obligation",
++        obligation_type="exception_scope",
++        legal_ir_view="deontic.ir",
+         semantic_family="conditional_normative",
+         semantic_slots={"exception": "present", "condition": "single"},
+         selected_premise_families=("theorem_template",),
+@@ -234,13 +202,10 @@
+         partition_policy=ProofFeedbackPartitionPolicy(holdout_fraction=0.0),
+         versions=versions,
+     )
+-    target = replace(target, expected_feedback_record_id=fixture_record.record_id)
+-    offered_record = LegalIRProofFeedbackRecord.from_dict(fixture_record.to_dict())
+     autoencoder = AdaptiveModalAutoencoder()
+ 
+     report = autoencoder.train_proof_auxiliary_heads(
+-        [offered_record],
+-        current_proof_targets={target.obligation_id: target},
++        [record],
+         expected_versions=versions,
+         learning_rate=0.2,
+     )

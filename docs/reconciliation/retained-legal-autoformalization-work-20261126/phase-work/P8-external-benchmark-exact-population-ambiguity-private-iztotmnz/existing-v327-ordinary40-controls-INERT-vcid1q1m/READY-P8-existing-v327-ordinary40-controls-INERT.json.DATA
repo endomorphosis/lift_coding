@@ -1,0 +1,237 @@
+{
+  "actual": {
+    "COLLECT": null,
+    "Git": null,
+    "IO": null,
+    "RUN": null,
+    "SDK": null,
+    "Source": null,
+    "authority": null,
+    "clock": null,
+    "effect": null,
+    "execution": null,
+    "freeze": null,
+    "index": null,
+    "ordinary_result": null,
+    "output": null,
+    "resources": null,
+    "selection": null
+  },
+  "actual_collect_determines_run_order": true,
+  "changes": {
+    "forward": {
+      "bytes": 66184,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-exact-population-ambiguity-private-iztotmnz/existing-v327-ordinary40-controls-INERT-vcid1q1m/exact-forward.patch.DATA",
+      "sha256": "8f9ac146629d05df518ec2f782bce0a42373b14996f65b7b0068789ba64669b8"
+    },
+    "inverse": {
+      "bytes": 66184,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-exact-population-ambiguity-private-iztotmnz/existing-v327-ordinary40-controls-INERT-vcid1q1m/exact-inverse.patch.DATA",
+      "sha256": "26db5617d968d33828e5b7c185546a8fc41dead1f2b56015d2ef60be71537f26"
+    }
+  },
+  "combined_sealed_candidate": {
+    "bytes": 50821,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-exact-population-ambiguity-private-iztotmnz/SEALED-P8-population-and-ambiguity-exact2-private-same40.json",
+    "sha256": "46242cc0659645124de1ea31f38724a7072b7609d6237d30a3a5944bae5159e5"
+  },
+  "controls": {
+    "bootstrap": {
+      "bytes": 48423,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-exact-population-ambiguity-private-iztotmnz/existing-v327-ordinary40-controls-INERT-vcid1q1m/P8-normal40-existing-bootstrap-INERT.py.DATA",
+      "sha256": "ab8dcc123024ba67cbf15656cf9a3c541f7ea1cd0c7921da374cd6927db4acd3"
+    },
+    "factory": {
+      "bytes": 3323,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-exact-population-ambiguity-private-iztotmnz/existing-v327-ordinary40-controls-INERT-vcid1q1m/P8-normal40-existing-factory-INERT.py.DATA",
+      "sha256": "c6d4b7ec285eabff41b74710b501c87387f6d0e21b8afaeac3404f7bb98e5c53"
+    },
+    "operator": {
+      "bytes": 59942,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-exact-population-ambiguity-private-iztotmnz/existing-v327-ordinary40-controls-INERT-vcid1q1m/P8-normal40-existing-operator-INERT.py.DATA",
+      "sha256": "884296de7630527264be2a788b7fffcd72b374d5654618f8786bb545023b7dad"
+    }
+  },
+  "execution_scope": "Private static assembly only. No runner, fixture, ordinary collection or run, Source, scheduler, checkout or publication action. Actual launch requires current Source, frozen Git and runtime bindings.",
+  "expected_function_count": 22,
+  "expected_literal_case_count": 40,
+  "expected_private_posts": {
+    "owner": {
+      "expected_Git_blob": "00fd8945f0ef2075680dd59842c4f5d89db3c940",
+      "expected_post": {
+        "bytes": 38835,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-exact-population-ambiguity-private-iztotmnz/candidate/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py",
+        "sha256": "2b477c863d2cdf0bcf5e98f3053e953adf264c83b183c14f8dab197468b9c962"
+      },
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py"
+    },
+    "test": {
+      "expected_Git_blob": "6f893b47a2e109d8414f9b8b646fb971c237f211",
+      "expected_post": {
+        "bytes": 19436,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-exact-population-ambiguity-private-iztotmnz/test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py",
+        "sha256": "fa3b70fdeaf1ae46cc44d5627591ef757dfdabd7d47fd9e8d7d617fd5dcb03a1"
+      },
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py"
+    }
+  },
+  "expected_subcohort_sizes": {
+    "ambiguity6": 6,
+    "population6": 6,
+    "retained28": 28
+  },
+  "historical_READ_role_plan": {
+    "bytes": 3080,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/P8-existing-normal22-benchmark-revision-INERT-v01-9fzs5r3p/P8-normal22-READ6-role-plan-nonclock-DATA.json",
+    "sha256": "65c75e3aac48a1a0367b9bf5999107bbfcf8abc85c5822cdea72f40c05771689"
+  },
+  "historical_fixture_config_wire": {
+    "bytes": 7423,
+    "path": "/tmp/P8-normal22-v326-actual-nonclock-p3mdkgj8/P8-normal22-five-conftests-ini-JSONL-real-origin-closure.json",
+    "sha256": "fbbce0335759d6a16fa91043d870d8770f0a553882a22af08e9288c56abc5b10"
+  },
+  "historical_v327": {
+    "bytes": 2203,
+    "path": "/tmp/Root-P8-packet-revision-ordinary22-v327-x8nb2z15/Root-P8-benchmark-packet-revision-existing-R2-qualified22-small-v327.json",
+    "sha256": "67ea74ffcd285467474d9b6dbf2aa5787657703541259b9481c17dee70e8f178"
+  },
+  "historical_v327_controls": {
+    "bootstrap": {
+      "bytes": 51294,
+      "path": "/tmp/Root-P8-packet-revision-ordinary22-v327-x8nb2z15/Root-selected-bootstrap.py",
+      "sha256": "e7fc474fab87a44a1516c96f7e8fab774eee8f479eea561dfe181b0c33fd024d"
+    },
+    "manifest": {
+      "bytes": 9737,
+      "path": "/tmp/Root-P8-packet-revision-ordinary22-v327-x8nb2z15/Root-selected-ordinary22-manifest.json",
+      "sha256": "6e77dc5fcc5ccaf01040c4700a633b6aa90738f30259fbf3bbf500e452d687e5"
+    },
+    "operator": {
+      "bytes": 79766,
+      "path": "/tmp/Root-P8-packet-revision-ordinary22-v327-x8nb2z15/Root-selected-operator.py",
+      "sha256": "d5a38f8108184b60a61ae19cc59caae892f9f1688396d1b26c458d73d15a472d"
+    }
+  },
+  "late_binding_null_assignments": {
+    "bootstrap": [
+      "ROOT",
+      "ADDITIONAL_A_ROOT",
+      "EXPECTED_MODULES",
+      "REQUIRED_CANONICAL_CONFTESTS",
+      "PYTEST_INIFILE",
+      "ROOT_RUNTIME_SELECTION",
+      "GIT_CANDIDATE_PROVENANCE",
+      "ADDITIONAL_A_PROVENANCE",
+      "BINDING_MANIFEST_REFERENCE",
+      "SOURCE_READ_BINDING_REFERENCE",
+      "ADMITTED_IO_PLAN_REFERENCE",
+      "EFFECT_DECISION_REFERENCE",
+      "SOURCE_EPOCH_SHA256",
+      "SOURCE_EPOCH_RECORD_COUNT"
+    ],
+    "operator": [
+      "FINAL_ABSENT_PATHS",
+      "ROOT_SELECTION",
+      "ROOT_RUNTIME_SELECTION",
+      "FINAL_OUTPUT_PATH",
+      "FINAL_D_ROOT",
+      "FINAL_D_HEAD",
+      "FINAL_D_TREE",
+      "FINAL_A_ROOT",
+      "FINAL_A_HEAD",
+      "FINAL_A_TREE",
+      "D_READ_BINDING_REFERENCE",
+      "FINAL_BINDING_MANIFEST_REFERENCE",
+      "FINAL_BINDING_MANIFEST",
+      "FINAL_MODULE_BINDINGS",
+      "FINAL_D_PROVENANCE",
+      "FINAL_A_PROVENANCE",
+      "FINAL_SOURCE_PROJECTS",
+      "FINAL_SDK_BINDINGS",
+      "FINAL_RESOURCE_STATE_PATH",
+      "FINAL_EXPECTED_RESOURCE_CONFIG",
+      "FINAL_EXPECTED_CAPACITY",
+      "FINAL_FIXTURE_CLOSURE_REFERENCE",
+      "FINAL_EFFECT_DECISION_REFERENCE",
+      "FINAL_EFFECT_DECISION",
+      "FINAL_ADMITTED_IO_PLAN_REFERENCE",
+      "FINAL_ADDITIONAL_IMPORT_ROOTS",
+      "BOOTSTRAP_REFERENCE",
+      "source42",
+      "PREP"
+    ]
+  },
+  "ordered_function_count_vector": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    4,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    1,
+    1,
+    1,
+    5,
+    1,
+    6,
+    3,
+    2,
+    1
+  ],
+  "phase": "frozen-local-D-P8-external-benchmark40",
+  "prior_INERT_controls": {
+    "bootstrap": {
+      "bytes": 43720,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/P8-existing-normal22-benchmark-revision-INERT-v01-9fzs5r3p/P8-normal22-existing-bootstrap-INERT.py.DATA",
+      "sha256": "9e0f627101eaf26150d81bc7b93cbe1f01ec56d4901fa163a10d0553545e400b"
+    },
+    "factory": {
+      "bytes": 3323,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/P8-existing-normal22-benchmark-revision-INERT-v01-9fzs5r3p/P8-normal22-existing-factory-INERT.py.DATA",
+      "sha256": "7ea2ad6cb8fec1c65383646f026333d95ba65f130a4be77a9204636993f8d05c"
+    },
+    "operator": {
+      "bytes": 55245,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/P8-existing-normal22-benchmark-revision-INERT-v01-9fzs5r3p/P8-normal22-existing-operator-INERT.py.DATA",
+      "sha256": "a7b183d6be075530731c0ff0a9da1a45890ba4fa3c7b447dc49738bf4b395461"
+    }
+  },
+  "prior_INERT_readiness": {
+    "bytes": 13435,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/P8-existing-normal22-benchmark-revision-INERT-v01-9fzs5r3p/READY-P8-existing-normal22-and-Source2-nonclock-INERT.json",
+    "sha256": "ff5be4fddd01828464dce1fdbad8b7653e77da5c103b16922c7e4dadd349c343"
+  },
+  "roster_DATA": {
+    "bytes": 21326,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-exact-population-ambiguity-private-iztotmnz/existing-v327-ordinary40-controls-INERT-vcid1q1m/P8-normal40-independent-literal-roster-DATA.json",
+    "sha256": "53544a5f7a0b570b64cded684adadcb20aec62c55554acde88f390095beb461b"
+  },
+  "schema": "P8-existing-v327-external-benchmark-ordinary40-controls-INERT/v1",
+  "selection_group": "P8-external-benchmark40",
+  "static_verification": {
+    "22_actual_v327_JUnit_IDs_exact_prefix": true,
+    "all_three_AST_parse_and_compile_only": true,
+    "case_count_and_selected_set_literals_cross_checked": true,
+    "changed_existing_function_ASTs": {
+      "bootstrap": [],
+      "factory": [
+        "continuation_request"
+      ],
+      "operator": [
+        "binding_for"
+      ]
+    },
+    "exact_private_same40_XML_order": true,
+    "existing_SDK_request_resource_limits_custody_and_cleanup_preserved": true,
+    "existing_Source_ABI_selected_rewrite_and_six_role_identities_exact": true,
+    "normal_ini_and_five_conftest_profile_retained": true,
+    "old_INERT_operator_and_bootstrap_match_active_v327_AST_except_late_bind_literals": true
+  }
+}

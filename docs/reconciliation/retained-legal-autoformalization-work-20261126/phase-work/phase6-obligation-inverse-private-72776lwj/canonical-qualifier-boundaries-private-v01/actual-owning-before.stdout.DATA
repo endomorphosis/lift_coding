@@ -1,0 +1,188 @@
+........FFF
+=================================== FAILURES ===================================
+_ test_delimiter_ambiguous_atoms_abstain_and_split_clauses_render[condition-conjunction] _
+
+compound_facets = {'conditions': ('approval_and_notice',)}
+split_facets = {'conditions': ('approval', 'notice')}
+expected_text = 'Agency must file report if approval and notice.'
+
+    @pytest.mark.parametrize(
+        ("compound_facets", "split_facets", "expected_text"),
+        (
+            pytest.param(
+                {"conditions": ("approval_and_notice",)},
+                {"conditions": ("approval", "notice")},
+                "Agency must file report if approval and notice.",
+                id="condition-conjunction",
+            ),
+            pytest.param(
+                {"exceptions": ("fire_or_flood",)},
+                {"exceptions": ("fire", "flood")},
+                "Agency must file report unless fire or flood.",
+                id="exception-disjunction",
+            ),
+            pytest.param(
+                {"conditions": ("approval_unless_fire",)},
+                {"conditions": ("approval",), "exceptions": ("fire",)},
+                "Agency must file report if approval unless fire.",
+                id="condition-exception-boundary",
+            ),
+        ),
+    )
+    def test_delimiter_ambiguous_atoms_abstain_and_split_clauses_render(
+        compound_facets: dict[str, tuple[str, ...]],
+        split_facets: dict[str, tuple[str, ...]],
+        expected_text: str,
+    ) -> None:
+        compound_rule = CanonicalRule("O", "agency", "file", "report", **compound_facets)
+        split_rule = CanonicalRule("O", "agency", "file", "report", **split_facets)
+        compound_request = _request(compound_rule)
+        split_request = _request(split_rule)
+        assert compound_rule.to_dict() != split_rule.to_dict()
+        assert compound_request.canonical_ir.ir_cid != split_request.canonical_ir.ir_cid
+    
+        decompiler = SourceWithheldCanonicalDecompiler()
+        split = decompiler.decompile(split_request)
+        assert split.status is OperationStatus.SUCCESS
+        assert split.error is None
+        assert split.request_cid == split_request.request_cid
+        assert split.text == expected_text
+        assert split.text_cid == cid_for_bytes(expected_text.encode("utf-8"))
+        assert len(split.component_trace) == 1
+        assert split.component_trace[0].input_cid == split_request.canonical_ir.ir_cid
+        assert split.component_trace[0].output_cid == split.text_cid
+    
+        compound = decompiler.decompile(compound_request)
+        assert compound.request_cid == compound_request.request_cid
+>       assert compound.status is OperationStatus.ABSTAINED
+E       AssertionError: assert <OperationStatus.SUCCESS: 'success'> is <OperationStatus.ABSTAINED: 'abstained'>
+E        +  where <OperationStatus.SUCCESS: 'success'> = DecompilerResult(status=<OperationStatus.SUCCESS: 'success'>, request_cid='baguqeeralox22xvxy3kphmsq5bahbwotmnry3dhemo...uqeeratlk326nodsva4rxwm65xgnpenhcovspm7crtyd4enaqhgjciqayq', deterministic=True, model_receipt_cid=None),), error=None).status
+E        +  and   <OperationStatus.ABSTAINED: 'abstained'> = OperationStatus.ABSTAINED
+
+/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-obligation-inverse-private-72776lwj/canonical-qualifier-boundaries-private-v01/isolated-owning-test-projection/tests/unit/logic/legal_ir/test_canonical_decompiler.py:375: AssertionError
+_ test_delimiter_ambiguous_atoms_abstain_and_split_clauses_render[exception-disjunction] _
+
+compound_facets = {'exceptions': ('fire_or_flood',)}
+split_facets = {'exceptions': ('fire', 'flood')}
+expected_text = 'Agency must file report unless fire or flood.'
+
+    @pytest.mark.parametrize(
+        ("compound_facets", "split_facets", "expected_text"),
+        (
+            pytest.param(
+                {"conditions": ("approval_and_notice",)},
+                {"conditions": ("approval", "notice")},
+                "Agency must file report if approval and notice.",
+                id="condition-conjunction",
+            ),
+            pytest.param(
+                {"exceptions": ("fire_or_flood",)},
+                {"exceptions": ("fire", "flood")},
+                "Agency must file report unless fire or flood.",
+                id="exception-disjunction",
+            ),
+            pytest.param(
+                {"conditions": ("approval_unless_fire",)},
+                {"conditions": ("approval",), "exceptions": ("fire",)},
+                "Agency must file report if approval unless fire.",
+                id="condition-exception-boundary",
+            ),
+        ),
+    )
+    def test_delimiter_ambiguous_atoms_abstain_and_split_clauses_render(
+        compound_facets: dict[str, tuple[str, ...]],
+        split_facets: dict[str, tuple[str, ...]],
+        expected_text: str,
+    ) -> None:
+        compound_rule = CanonicalRule("O", "agency", "file", "report", **compound_facets)
+        split_rule = CanonicalRule("O", "agency", "file", "report", **split_facets)
+        compound_request = _request(compound_rule)
+        split_request = _request(split_rule)
+        assert compound_rule.to_dict() != split_rule.to_dict()
+        assert compound_request.canonical_ir.ir_cid != split_request.canonical_ir.ir_cid
+    
+        decompiler = SourceWithheldCanonicalDecompiler()
+        split = decompiler.decompile(split_request)
+        assert split.status is OperationStatus.SUCCESS
+        assert split.error is None
+        assert split.request_cid == split_request.request_cid
+        assert split.text == expected_text
+        assert split.text_cid == cid_for_bytes(expected_text.encode("utf-8"))
+        assert len(split.component_trace) == 1
+        assert split.component_trace[0].input_cid == split_request.canonical_ir.ir_cid
+        assert split.component_trace[0].output_cid == split.text_cid
+    
+        compound = decompiler.decompile(compound_request)
+        assert compound.request_cid == compound_request.request_cid
+>       assert compound.status is OperationStatus.ABSTAINED
+E       AssertionError: assert <OperationStatus.SUCCESS: 'success'> is <OperationStatus.ABSTAINED: 'abstained'>
+E        +  where <OperationStatus.SUCCESS: 'success'> = DecompilerResult(status=<OperationStatus.SUCCESS: 'success'>, request_cid='baguqeerabishr3kxqghaclkjhyrt6enjvciqnin67v...uqeeratlk326nodsva4rxwm65xgnpenhcovspm7crtyd4enaqhgjciqayq', deterministic=True, model_receipt_cid=None),), error=None).status
+E        +  and   <OperationStatus.ABSTAINED: 'abstained'> = OperationStatus.ABSTAINED
+
+/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-obligation-inverse-private-72776lwj/canonical-qualifier-boundaries-private-v01/isolated-owning-test-projection/tests/unit/logic/legal_ir/test_canonical_decompiler.py:375: AssertionError
+_ test_delimiter_ambiguous_atoms_abstain_and_split_clauses_render[condition-exception-boundary] _
+
+compound_facets = {'conditions': ('approval_unless_fire',)}
+split_facets = {'conditions': ('approval',), 'exceptions': ('fire',)}
+expected_text = 'Agency must file report if approval unless fire.'
+
+    @pytest.mark.parametrize(
+        ("compound_facets", "split_facets", "expected_text"),
+        (
+            pytest.param(
+                {"conditions": ("approval_and_notice",)},
+                {"conditions": ("approval", "notice")},
+                "Agency must file report if approval and notice.",
+                id="condition-conjunction",
+            ),
+            pytest.param(
+                {"exceptions": ("fire_or_flood",)},
+                {"exceptions": ("fire", "flood")},
+                "Agency must file report unless fire or flood.",
+                id="exception-disjunction",
+            ),
+            pytest.param(
+                {"conditions": ("approval_unless_fire",)},
+                {"conditions": ("approval",), "exceptions": ("fire",)},
+                "Agency must file report if approval unless fire.",
+                id="condition-exception-boundary",
+            ),
+        ),
+    )
+    def test_delimiter_ambiguous_atoms_abstain_and_split_clauses_render(
+        compound_facets: dict[str, tuple[str, ...]],
+        split_facets: dict[str, tuple[str, ...]],
+        expected_text: str,
+    ) -> None:
+        compound_rule = CanonicalRule("O", "agency", "file", "report", **compound_facets)
+        split_rule = CanonicalRule("O", "agency", "file", "report", **split_facets)
+        compound_request = _request(compound_rule)
+        split_request = _request(split_rule)
+        assert compound_rule.to_dict() != split_rule.to_dict()
+        assert compound_request.canonical_ir.ir_cid != split_request.canonical_ir.ir_cid
+    
+        decompiler = SourceWithheldCanonicalDecompiler()
+        split = decompiler.decompile(split_request)
+        assert split.status is OperationStatus.SUCCESS
+        assert split.error is None
+        assert split.request_cid == split_request.request_cid
+        assert split.text == expected_text
+        assert split.text_cid == cid_for_bytes(expected_text.encode("utf-8"))
+        assert len(split.component_trace) == 1
+        assert split.component_trace[0].input_cid == split_request.canonical_ir.ir_cid
+        assert split.component_trace[0].output_cid == split.text_cid
+    
+        compound = decompiler.decompile(compound_request)
+        assert compound.request_cid == compound_request.request_cid
+>       assert compound.status is OperationStatus.ABSTAINED
+E       AssertionError: assert <OperationStatus.SUCCESS: 'success'> is <OperationStatus.ABSTAINED: 'abstained'>
+E        +  where <OperationStatus.SUCCESS: 'success'> = DecompilerResult(status=<OperationStatus.SUCCESS: 'success'>, request_cid='baguqeeraryqk23mj2reiloey3xy7ha7q6zvxzyopyi...uqeeratlk326nodsva4rxwm65xgnpenhcovspm7crtyd4enaqhgjciqayq', deterministic=True, model_receipt_cid=None),), error=None).status
+E        +  and   <OperationStatus.ABSTAINED: 'abstained'> = OperationStatus.ABSTAINED
+
+/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-obligation-inverse-private-72776lwj/canonical-qualifier-boundaries-private-v01/isolated-owning-test-projection/tests/unit/logic/legal_ir/test_canonical_decompiler.py:375: AssertionError
+=========================== short test summary info ============================
+FAILED ../../../tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-obligation-inverse-private-72776lwj/canonical-qualifier-boundaries-private-v01/isolated-owning-test-projection/tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_delimiter_ambiguous_atoms_abstain_and_split_clauses_render[condition-conjunction]
+FAILED ../../../tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-obligation-inverse-private-72776lwj/canonical-qualifier-boundaries-private-v01/isolated-owning-test-projection/tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_delimiter_ambiguous_atoms_abstain_and_split_clauses_render[exception-disjunction]
+FAILED ../../../tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-obligation-inverse-private-72776lwj/canonical-qualifier-boundaries-private-v01/isolated-owning-test-projection/tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_delimiter_ambiguous_atoms_abstain_and_split_clauses_render[condition-exception-boundary]
+3 failed, 8 passed in 1.32s
+QUALIFIER_OWNING_PYTEST_RESULT {"exact_compiled_project": {"ipfs_datasets_py/__init__.py": {"bytes": 56829, "git_blob_sha1": "7d8b29b674206355ec12a84f69920a819338e43c", "sha256": "f258f8eada774251feacd8e2ee2048efe56c89a8ee88efd50e4271ea41d43dc9"}, "ipfs_datasets_py/logic/__init__.py": {"bytes": 4434, "git_blob_sha1": "950f95b6c859021bbd76326adcf602bdd4d19482", "sha256": "f25a9702ddc282092dbae1bc1731afdcc35576c10745487dccedaa531ccc9e79"}, "ipfs_datasets_py/logic/legal_ir/__init__.py": {"bytes": 2708, "git_blob_sha1": "049082bd3528682a395698fea6ae778421ddf156", "sha256": "53ce51e56a292ea3210010fa17b352e9d40eb5b59cf15c5e732147000b40fee1"}, "ipfs_datasets_py/logic/legal_ir/canonical_contracts.py": {"bytes": 109257, "git_blob_sha1": "1bf4da481ff84ccb3554ae0dd1126dfc4cbffb6b", "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"}, "ipfs_datasets_py/logic/legal_ir/canonical_decompiler.py": {"bytes": 13437, "git_blob_sha1": "1c9e3ac68d938d912ad6174f5257e8cd3d6a81cf", "sha256": "79eeb9072e74e68dc5fab7640b5ad49e82131d0f35232ff473c7f2dfbe232c64"}, "ipfs_datasets_py/utils/__init__.py": {"bytes": 175, "git_blob_sha1": "dd98bbea10f2938d6f040b8aa5c4377bbb14beb9", "sha256": "78f4cd7f8e14b4fff482c0c91ada5c49f8b9edf707bffd9cd58840b5503e66c2"}, "ipfs_datasets_py/utils/cid_utils.py": {"bytes": 4428, "git_blob_sha1": "36944fb73c85e541b0b9c47531ebfd7b79791534", "sha256": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"}}, "frozen_benchmark_adapter_run": false, "guard": {"address_space_bytes": 536870912, "cpu_affinity": [0], "cpu_seconds": 25, "kernel_probes": ["socket", "clone3", "write-open"], "landlock_abi": 7, "stdout_stderr_each_max_bytes": 131072, "syscall_denylist": ["socket", "socketpair", "connect", "accept", "accept4", "bind", "listen", "clone", "clone3", "execve", "execveat", "io_uring_setup", "io_uring_enter", "io_uring_register", "pidfd_getfd", "ptrace", "process_vm_writev", "setns", "unshare", "mount", "umount2", "truncate", "ftruncate", "fchmod", "fchmodat", "fchmodat2", "fchown", "fchownat", "utimensat", "setxattr", "lsetxattr", "fsetxattr", "removexattr", "lremovexattr", "fremovexattr"]}, "mode": "before", "pytest_returncode": 1, "tests": [{"node": "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_temporal_phrase_already_in_the_object_is_not_repeated", "passed": true}, {"node": "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_frozen_grammar_preserves_polarity_roles_and_every_facet", "passed": true}, {"node": "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_success_has_raw_text_cid_and_deterministic_component_trace", "passed": true}, {"node": "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_attribution_receipt_binds_only_public_canonical_inputs_and_t1", "passed": true}, {"node": "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_only_exact_frozen_config_and_policy_are_accepted", "passed": true}, {"node": "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_invalid_requests_and_component_errors_are_typed_failures", "passed": true}, {"node": "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_decompiler_is_stateless_source_withheld_and_model_free", "passed": true}, {"node": "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_production_module_has_no_benchmark_dependency", "passed": true}, {"node": "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_delimiter_ambiguous_atoms_abstain_and_split_clauses_render[condition-conjunction]", "passed": false}, {"node": "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_delimiter_ambiguous_atoms_abstain_and_split_clauses_render[exception-disjunction]", "passed": false}, {"node": "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_delimiter_ambiguous_atoms_abstain_and_split_clauses_render[condition-exception-boundary]", "passed": false}]}

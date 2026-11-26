@@ -1,0 +1,11 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.3.4, pluggy-1.6.0
+rootdir: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/dataset
+configfile: pytest.ini
+asyncio: mode=Mode.STRICT
+collected 8 items
+
+tests/integration/logic/backends/test_kernel_backends.py ........        [100%]
+
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H/prior-request8/result.xml -
+============================== 8 passed in 0.67s ===============================

@@ -1,0 +1,23 @@
+{
+  "mode": "before",
+  "positive_baseline": "representable",
+  "cases": [
+    {
+      "profile": "mixed",
+      "ast_bytes": 659333,
+      "inventory_request_bytes": 764248,
+      "actual": "raised",
+      "error": "complete JSON byte bound exceeded"
+    },
+    {
+      "profile": "native",
+      "ast_bytes": 1145700,
+      "inventory_request_bytes": 1249189,
+      "actual": "raised",
+      "error": "complete JSON byte bound exceeded"
+    }
+  ],
+  "full_existing_public_owner": true,
+  "model_Lean_or_source_execution": false,
+  "owner_sha256": "e3fb0941e123672f4c280f282b0bce80937dab6cdc56ca607ffd5d3713ae9adf"
+}

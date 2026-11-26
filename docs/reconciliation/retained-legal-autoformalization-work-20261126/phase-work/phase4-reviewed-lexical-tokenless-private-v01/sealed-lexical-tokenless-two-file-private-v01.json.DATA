@@ -1,0 +1,49 @@
+{
+  "D_HEAD": "4ccc8917b2168db8e11f54c5aadd4ca267f1c488",
+  "Source_adoption": null,
+  "compatibility": "Scored BM25, raw, joint, random and legacy paths retain their existing branch behavior; exact historical retrieval checkpoint implementation hashes remain enforced. A fresh source-bound checkpoint is required to qualify this changed owner.",
+  "green": {
+    "bytes": 3502,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase4-reviewed-lexical-tokenless-private-v01/actual-lexical-tokenless-exact-slice-GREEN-v01.json",
+    "sha256": "dbbc18b0aa515aca2cb6ae8f79660ec5b838c4ecec5ef84de7aeb0a790f9f3bb"
+  },
+  "legacy_bm25": {
+    "bytes": 79321,
+    "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/frame_bm25_selector.py",
+    "sha256": "feb8d74a8a87783408025f1a341500b734a396b99c757f1e65026e4abb26b437"
+  },
+  "ordinary_qualification": null,
+  "patch": {
+    "bytes": 4941,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase4-reviewed-lexical-tokenless-private-v01/lexical-tokenless-two-file.patch",
+    "sha256": "46f41bb439f4541b103ff7e74d480b655ed60c9ab3a5aa6aee312c24946d85d1"
+  },
+  "product": {
+    "before_bytes": 74693,
+    "before_sha256": "0ccc01562f0e54ceaeb4145a4fad1585a8870e7e1cd77d3e3b412ef115d400fd",
+    "post": {
+      "bytes": 74852,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase4-reviewed-lexical-tokenless-private-v01/legal_joint_retrieval.py.after.DATA",
+      "sha256": "b60874c3e8260f926cbd5eab18018c183417b594b9937a167854dbe45fcf9bac"
+    },
+    "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_joint_retrieval.py"
+  },
+  "red": {
+    "bytes": 1773,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase4-reviewed-lexical-tokenless-private-v01/actual-lexical-tokenless-exact-slice-RED-v01.json",
+    "sha256": "95fcc09507b8f9d5315f5f1151cccc6ac81de33253c11c3a253c15611224de79"
+  },
+  "schema": "reviewed-lexical-tokenless-two-file-private-candidate/v1",
+  "test": {
+    "before_bytes": 64006,
+    "before_sha256": "bc6a712b2bdbd2796b1b2ae5faa2d725805e37154b0c0b57b3d4afcb35a3367f",
+    "existing_test_bytes_prefix_preserved": true,
+    "new_selector": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_joint_retrieval.py::test_reviewed_lexical_baseline_abstains_on_source_without_tokens",
+    "post": {
+      "bytes": 65674,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase4-reviewed-lexical-tokenless-private-v01/test_legal_joint_retrieval.py.after.DATA",
+      "sha256": "3278725db431c6c729a45b5248fc7aa1d762007d721f7bf9899415d9b72ee1d3"
+    },
+    "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_joint_retrieval.py"
+  }
+}

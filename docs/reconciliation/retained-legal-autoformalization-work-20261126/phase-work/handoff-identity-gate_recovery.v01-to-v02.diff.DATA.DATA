@@ -1,0 +1,11 @@
+--- v01/gate_recovery.py
++++ v02/gate_recovery.py
+@@ -682,7 +682,7 @@
+             # Generated prerequisite IDs can differ only beyond the old
+             # filename cutoff. Bind the suffix to the complete original ID.
+             digest = hashlib.sha256(task_id.encode("utf-8", errors="surrogatepass")).hexdigest()
+-            safe = (safe[:48] or "task") + "-" + digest
++            safe = (safe[:48] or "task") + "." + digest
+         return self.path.with_name(f"gate-recovery-{safe}.json")
+ 
+     def packet(

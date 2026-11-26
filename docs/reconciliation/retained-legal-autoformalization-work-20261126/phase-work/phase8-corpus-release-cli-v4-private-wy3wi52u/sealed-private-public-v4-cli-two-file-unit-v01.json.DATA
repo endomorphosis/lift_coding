@@ -1,0 +1,120 @@
+{
+  "authority": {
+    "legal_admission": false,
+    "model_or_training": false,
+    "native": false,
+    "publication": false,
+    "release": false,
+    "source_authenticity": false
+  },
+  "base_git_oid": "0d71c0d82b2dfc1ed3c7f236009e467e4c201c88",
+  "canonical_git_mutation": false,
+  "canonical_source_operation": false,
+  "coordinator": {
+    "bytes": 127752,
+    "entrypoint": "validate_uscode_release_closure_v4",
+    "fixture": "physical_source_use_whole_norm_control_v2",
+    "profile": "reviewed-source-use-whole-norm-physical-source-replay/v1",
+    "repo_relative_path": "ipfs_datasets_py/logic/autoformal/legal_release_coordinator_v1.py",
+    "sha256": "aec9ed9cd79fa334266f299f25c5552280d1d2ace45f45df2aa98c8e57169967"
+  },
+  "files": [
+    {
+      "after": {
+        "bytes": 11419,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase8-corpus-release-cli-v4-private-wy3wi52u/cli.after.py.DATA",
+        "sha256": "8be90e0f3a3f5d684f0a310172ba99737cc1e89afbf95c7701ff0321ab4417ad"
+      },
+      "before": {
+        "bytes": 10926,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase8-corpus-release-cli-v4-private-wy3wi52u/cli.before.py.DATA",
+        "sha256": "18bbcd08391315a49c7cc43778453ab95759f5fa66f026db12263ce0e758aff7"
+      },
+      "diff": {
+        "bytes": 2252,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase8-corpus-release-cli-v4-private-wy3wi52u/cli.diff.DATA",
+        "sha256": "f971047a867bcf61da365b51fa9560dae6af8198a3582aa8fde5dcd805853534"
+      },
+      "repo_relative_path": "scripts/ops/legal_ir/validate_uscode_corpus_release.py"
+    },
+    {
+      "after": {
+        "bytes": 208493,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase8-corpus-release-cli-v4-private-wy3wi52u/owning-test.after.py.DATA",
+        "sha256": "f57ef7f49f1b979c7f75d456bd5c9f9e4eb091a40dd2dcb6c649c468198211bf"
+      },
+      "before": {
+        "bytes": 205532,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase8-corpus-release-cli-v4-private-wy3wi52u/owning-test.before.py.DATA",
+        "sha256": "afafd186aba6e05101f4d3249f9ab435cb508fe7af04a9b9714ff495e296f4dd"
+      },
+      "diff": {
+        "bytes": 3501,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase8-corpus-release-cli-v4-private-wy3wi52u/owning-test.diff.DATA",
+        "sha256": "250bd2505718a0d9e2a8863a6f4f66871b10d0eb5fe84e3b16e04ba37c22ab75"
+      },
+      "repo_relative_path": "tests/unit/logic/autoformal/test_corpus_release_cli.py"
+    }
+  ],
+  "ordinary_boundary": "No existing authorized private package/subprocess closure for the real public V4 fixture was supplied. The retained parser/CLI controls do not exercise the coordinator, signed replay, physical data fixture, or subprocess normal imports.",
+  "patch": {
+    "bytes": 5753,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase8-corpus-release-cli-v4-private-wy3wi52u/two-file.patch.DATA",
+    "sha256": "787425b57c81438aa7a181e0620c457273f1d9712404785bc0571a5600444c85"
+  },
+  "preservation": {
+    "changed_cli_functions": [
+      "_parser",
+      "main"
+    ],
+    "exact_inverse": true,
+    "legacy_default": "reviewed-norm-v2-local-replay/v1",
+    "legacy_dispatch_and_caps_checked": true,
+    "unchanged_old_test_top_level_definitions": 142
+  },
+  "results": {
+    "fictional_dispatch_data": [
+      {
+        "bytes": 40,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase8-corpus-release-cli-v4-private-wy3wi52u/fictional-dispatch-request.DATA",
+        "sha256": "aaa623e2a63aef3837e646a44546d1ccdaa9edfcb35aadc3e34e2dc4b2ee78d1"
+      },
+      {
+        "bytes": 49,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase8-corpus-release-cli-v4-private-wy3wi52u/fictional-rejected-dispatch-request.DATA",
+        "sha256": "d38a8934ab834ecb1e39efad5ab61939d800b14877ffbbae9a58e2c582206db1"
+      }
+    ],
+    "ordinary_executed": 0,
+    "ordinary_expected_case_count": 3,
+    "ordinary_selectors": [
+      "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_actual_explicit_cli_is_source_only",
+      "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_cli_refuses_native_selection"
+    ],
+    "parser_counts_green": {
+      "fail": 0,
+      "pass": 3
+    },
+    "parser_counts_red": {
+      "fail": 1,
+      "pass": 2
+    },
+    "parser_prefix_green": {
+      "bytes": 1209,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase8-corpus-release-cli-v4-private-wy3wi52u/parser-prefix-GREEN.json",
+      "sha256": "062f2012c041cf1fd685ac80c4255104e3d8a9186d6b1d9d2adf7db59a70747a"
+    },
+    "parser_prefix_red": {
+      "bytes": 1449,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase8-corpus-release-cli-v4-private-wy3wi52u/parser-prefix-RED.json",
+      "sha256": "0155bdf6e312428ebdac86a059987f97d1fb6c0acefb48056dd318c224c540c4"
+    },
+    "stdlib_dispatch": {
+      "bytes": 16379,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase8-corpus-release-cli-v4-private-wy3wi52u/stdlib-cli-dispatch-controls.json",
+      "sha256": "32d7b001f5a804e508ad55af83a3942da89534f0d5778f0268fa40135718277c"
+    },
+    "stdlib_dispatch_pass": 9
+  },
+  "schema": "private-existing-corpus-release-cli-v4-implementation/v1"
+}

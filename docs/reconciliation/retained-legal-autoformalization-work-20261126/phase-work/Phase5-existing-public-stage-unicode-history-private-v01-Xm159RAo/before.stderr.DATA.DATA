@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-public-stage-unicode-history-private-v01-Xm159RAo/run_cached_public_stage.py.DATA", line 71, in <module>
+    namespace["test_reviewed_cycle_preserves_actual_campaign_manifest_and_source_history"](path, *args)
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-public-stage-unicode-history-private-v01-Xm159RAo/public_stage_regression.fragment.py.DATA", line 32, in test_reviewed_cycle_preserves_actual_campaign_manifest_and_source_history
+    reference = inputs.stage_reviewed_cycle_inputs(registry, **options)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-native-t5-selected-head-bound-private-v02/source-stage/ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py", line 655, in stage_reviewed_cycle_inputs
+    return _stage_reviewed_cycle_inputs(registry, _admission_version="v2",
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-native-t5-selected-head-bound-private-v02/source-stage/ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py", line 882, in _stage_reviewed_cycle_inputs
+    guard_history, records, history_guard = _reviewed_history(
+                                            ^^^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-native-t5-selected-head-bound-private-v02/source-stage/ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py", line 341, in _reviewed_history
+    _reviewed_need(record["split_example"] == frozen.to_dict()
+  File "/tmp/decoder-training-native-t5-selected-head-bound-private-v02/source-stage/ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py", line 183, in _reviewed_need
+    raise ValueError(message)
+ValueError: historical source fingerprint or frozen grouping differs

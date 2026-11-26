@@ -1,0 +1,141 @@
+...................FFF.                                                  [100%]
+=================================== FAILURES ===================================
+_ test_retrieved_payloads_score_all_abstentions_when_depth_exceeds_the_bank[4] _
+
+ranking_depth = 4
+
+    @pytest.mark.parametrize("ranking_depth", [4, 16])
+    def test_retrieved_payloads_score_all_abstentions_when_depth_exceeds_the_bank(ranking_depth):
+        owner, rankings, references, candidates, options = _retrieved_payload_case()
+        for producer in rankings.values():
+            for row in producer["rows"]:
+                row.update(
+                    status="abstained",
+                    abstention_reasons=["insufficient_permitted_training_examples"],
+                    context=None,
+                    retrieved_ids=[],
+                )
+                del row["retrieved_endpoint_refs"]
+        kwargs = options()
+        kwargs.update(ranking_depth=ranking_depth, cutoffs=(1, 3, ranking_depth))
+>       report = owner.evaluate_complete_norm_retrieval_rankings(rankings, references, candidates, **kwargs)
+
+../test_legal_ir_semantic_metrics.py:845: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../../../repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_semantic_metrics.py:2409: in evaluate_complete_norm_retrieval_rankings
+    need(type(ranking_depth) is int and 1<=ranking_depth<=len(candidate_rows)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+message = 'explicit bounded cutoff configuration and ranking depth required'
+
+    def need(condition, message):
+>       if not condition: raise ValueError(message)
+E       ValueError: explicit bounded cutoff configuration and ranking depth required
+
+../../../../repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_semantic_metrics.py:2402: ValueError
+_ test_retrieved_payloads_score_all_abstentions_when_depth_exceeds_the_bank[16] _
+
+ranking_depth = 16
+
+    @pytest.mark.parametrize("ranking_depth", [4, 16])
+    def test_retrieved_payloads_score_all_abstentions_when_depth_exceeds_the_bank(ranking_depth):
+        owner, rankings, references, candidates, options = _retrieved_payload_case()
+        for producer in rankings.values():
+            for row in producer["rows"]:
+                row.update(
+                    status="abstained",
+                    abstention_reasons=["insufficient_permitted_training_examples"],
+                    context=None,
+                    retrieved_ids=[],
+                )
+                del row["retrieved_endpoint_refs"]
+        kwargs = options()
+        kwargs.update(ranking_depth=ranking_depth, cutoffs=(1, 3, ranking_depth))
+>       report = owner.evaluate_complete_norm_retrieval_rankings(rankings, references, candidates, **kwargs)
+
+../test_legal_ir_semantic_metrics.py:845: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../../../repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_semantic_metrics.py:2409: in evaluate_complete_norm_retrieval_rankings
+    need(type(ranking_depth) is int and 1<=ranking_depth<=len(candidate_rows)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+message = 'explicit bounded cutoff configuration and ranking depth required'
+
+    def need(condition, message):
+>       if not condition: raise ValueError(message)
+E       ValueError: explicit bounded cutoff configuration and ranking depth required
+
+../../../../repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_semantic_metrics.py:2402: ValueError
+_ test_retrieved_payloads_reject_short_rankings_or_unsupported_depth[4-False-fixed ranking depth or explicit abstention] _
+
+ranking_depth = 4, all_abstain = False
+error = 'fixed ranking depth or explicit abstention'
+
+    @pytest.mark.parametrize(
+        ("ranking_depth", "all_abstain", "error"),
+        [
+            (4, False, "fixed ranking depth or explicit abstention"),
+            (17, True, "bounded cutoff configuration and ranking depth"),
+        ],
+    )
+    def test_retrieved_payloads_reject_short_rankings_or_unsupported_depth(ranking_depth, all_abstain, error):
+        owner, rankings, references, candidates, options = _retrieved_payload_case()
+        if all_abstain:
+            for producer in rankings.values():
+                for row in producer["rows"]:
+                    row.update(status="abstained", retrieved_ids=[], retrieved_endpoint_refs=[])
+        kwargs = options()
+        kwargs.update(ranking_depth=ranking_depth, cutoffs=(1, 3, ranking_depth))
+        with pytest.raises(ValueError, match=error):
+>           owner.evaluate_complete_norm_retrieval_rankings(rankings, references, candidates, **kwargs)
+
+../test_legal_ir_semantic_metrics.py:876: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../../../repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_semantic_metrics.py:2409: in evaluate_complete_norm_retrieval_rankings
+    need(type(ranking_depth) is int and 1<=ranking_depth<=len(candidate_rows)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False
+message = 'explicit bounded cutoff configuration and ranking depth required'
+
+    def need(condition, message):
+>       if not condition: raise ValueError(message)
+E       ValueError: explicit bounded cutoff configuration and ranking depth required
+
+../../../../repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_semantic_metrics.py:2402: ValueError
+
+During handling of the above exception, another exception occurred:
+
+ranking_depth = 4, all_abstain = False
+error = 'fixed ranking depth or explicit abstention'
+
+    @pytest.mark.parametrize(
+        ("ranking_depth", "all_abstain", "error"),
+        [
+            (4, False, "fixed ranking depth or explicit abstention"),
+            (17, True, "bounded cutoff configuration and ranking depth"),
+        ],
+    )
+    def test_retrieved_payloads_reject_short_rankings_or_unsupported_depth(ranking_depth, all_abstain, error):
+        owner, rankings, references, candidates, options = _retrieved_payload_case()
+        if all_abstain:
+            for producer in rankings.values():
+                for row in producer["rows"]:
+                    row.update(status="abstained", retrieved_ids=[], retrieved_endpoint_refs=[])
+        kwargs = options()
+        kwargs.update(ranking_depth=ranking_depth, cutoffs=(1, 3, ranking_depth))
+>       with pytest.raises(ValueError, match=error):
+E       AssertionError: Regex pattern did not match.
+E        Regex: 'fixed ranking depth or explicit abstention'
+E        Input: 'explicit bounded cutoff configuration and ranking depth required'
+
+../test_legal_ir_semantic_metrics.py:875: AssertionError
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-retrieval-depth-abstention-private-xlh6n5h6/red-v03/junit.xml -
+=========================== short test summary info ============================
+FAILED ../test_legal_ir_semantic_metrics.py::test_retrieved_payloads_score_all_abstentions_when_depth_exceeds_the_bank[4]
+FAILED ../test_legal_ir_semantic_metrics.py::test_retrieved_payloads_score_all_abstentions_when_depth_exceeds_the_bank[16]
+FAILED ../test_legal_ir_semantic_metrics.py::test_retrieved_payloads_reject_short_rankings_or_unsupported_depth[4-False-fixed ranking depth or explicit abstention]
+3 failed, 20 passed, 95 deselected in 0.42s
+{"scope": "private direct scorer fixtures", "pytest_exit": 1, "denied": [], "overlays": []}

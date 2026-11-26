@@ -1,0 +1,57 @@
+def probe_historical_worker_replay(tmp_path):
+    import hashlib
+    from ipfs_datasets_py.optimizers.logic_theorem_optimizer import autoencoder_training_worker as worker
+
+    data = _reviewed_mixed_unicode_stage(tmp_path)
+    d = Path(worker.__file__)
+    assert hashlib.sha256(d.read_bytes()).hexdigest() == (
+        "451be2dee4de4365ecf78183629a2a4283aa31adeb9a4ddcdaeae0843ad90528"
+    )
+
+    def descriptor(name, payload):
+        path = tmp_path / name
+        raw = worker._json_bytes(payload)
+        path.write_bytes(raw)
+        return worker.CheckpointArtifact(str(path), hashlib.sha256(raw).hexdigest(), len(raw))
+
+    kwargs = data.kwargs
+    spec = SimpleNamespace(
+        admission_profile=kwargs["admission_profile"],
+        stage_artifact=worker.CheckpointArtifact.from_dict(kwargs["stage_artifact"]),
+        source_contexts_artifact=descriptor("source-contexts.json", kwargs["source_contexts"]),
+        exposure_artifact=descriptor("exposure.json", kwargs["exposure_records"]),
+        split_config=kwargs["split_config"],
+        expected_split_config_sha256=kwargs["expected_split_config_sha256"],
+        expected_admission_inputs_sha256=kwargs["expected_admission_inputs_sha256"],
+        max_source_tokens=kwargs["max_source_tokens"],
+        max_target_tokens=kwargs["max_target_tokens"],
+        allow_fictional_fixture=True,
+    )
+    calls = []
+
+    def current_admission():
+        calls.append(True)
+        return kwargs["current_admission_inputs"]
+
+    pairs = (
+        (worker._reviewed_epoch_prepare_binding, inputs.REVIEWED_MIXED_DECODER_INPUT_SCHEMA),
+        (worker._reviewed_digest_cache_epoch_prepare_binding, inputs.REVIEWED_DIGEST_OMITTED_INPUT_SCHEMA),
+    )
+    staged = data.registry.stage_calls
+    results = []
+    for delegate, schema in pairs:
+        prepared = delegate(spec, data.registry, kwargs["tokenizer"], current_admission)
+        assert prepared["schema"] == schema
+        witness = prepared["receipt"]
+        assert witness["stage_artifact_sha256"] == spec.stage_artifact.sha256
+        assert witness["exposure_sha256"] == spec.exposure_artifact.sha256
+        assert witness["source_contexts_sha256"] == spec.source_contexts_artifact.sha256
+        assert witness["backend_execution_authorized"] is False
+        assert witness["training_mask"] == 0
+        results.append(prepared["records"])
+    assert calls == [True, True]
+    assert data.registry.stage_calls == staged
+    for left, right in zip(*results, strict=True):
+        assert left["source_wire"] == right["source_wire"]
+        assert left["source_token_ids"] == right["source_token_ids"]
+        assert left["target_token_ids"] != right["target_token_ids"]

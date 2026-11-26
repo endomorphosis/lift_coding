@@ -1,0 +1,393 @@
+"""Run the existing real-fixture Phase7 pre-nudge probe with exact overlays."""
+from __future__ import annotations
+
+import hashlib
+import importlib.util
+import json
+import os
+import stat
+import sys
+import traceback
+from dataclasses import replace
+from pathlib import Path
+from types import ModuleType
+
+STAGE = Path(__file__).absolute().parent
+PRIOR = STAGE.parent / "phase7-same-id-proof-feedback-no-fit-v01-gA9Exh"
+RUNNER_SHA256 = "6e483bf40c38136befa85f40f04df617d715c9047bc7ad8bb1812c05f1891bdf"
+PRIOR_SHA256 = "ecef7ef42a9ef77fc0161ffa27ec52c24c89aad0a9625160b6f70c7eb69bdbff"
+BASE_SHA256 = "ae979eb6ad736cf7267f14b466ba9845df513e06c909e9138f0adb1cee3ef0be"
+BASE_PLAN_BYTES = 1063
+
+
+def metadata(info):
+    return (info.st_dev, info.st_ino, info.st_size, info.st_mode, info.st_uid,
+            info.st_gid, info.st_nlink, info.st_mtime_ns, info.st_ctime_ns)
+
+
+def pinned_file(path, size, sha256):
+    if path.resolve(strict=True) != path:
+        raise ValueError(f"noncanonical private input {path.name}")
+    fd = os.open(path, os.O_RDONLY | os.O_CLOEXEC | os.O_NOFOLLOW)
+    with os.fdopen(fd, "rb") as stream:
+        info = os.fstat(stream.fileno())
+        if not (stat.S_ISREG(info.st_mode) and info.st_nlink == 1
+                and info.st_uid == os.getuid() and info.st_size == size):
+            raise ValueError(f"private input metadata differs for {path.name}")
+        raw = stream.read(size + 1)
+        if metadata(info) != metadata(os.fstat(stream.fileno())):
+            raise ValueError(f"private input drift for {path.name}")
+    if len(raw) != size or hashlib.sha256(raw).hexdigest() != sha256:
+        raise ValueError(f"private input digest differs for {path.name}")
+    return raw
+
+
+def digest(payload):
+    return hashlib.sha256(json.dumps(payload, sort_keys=True, ensure_ascii=True,
+                                     allow_nan=False, separators=(",", ":")).encode()).hexdigest()
+
+
+def prepare_loader(prior, overlay_manifest):
+    base = json.loads(pinned_file(STAGE / "baseline.json", BASE_PLAN_BYTES, BASE_SHA256))
+    if str(prior.ROOT) != base["repo"] or set(base["roles"]) != {"record", "trainer", "autoencoder"}:
+        raise ValueError("baseline module roles differ")
+    prior.EXPECTED.update({row["repo_relative_path"]: row["git_oid"]
+                           for row in base["roles"].values()})
+    overlays = {}
+    for role, (filename, size, sha256) in overlay_manifest.items():
+        if Path(filename).name != filename or size > prior.MAX_FILE:
+            raise ValueError(f"overlay {role} outside private input bound")
+        relpath = base["roles"][role]["repo_relative_path"]
+        raw = pinned_file(STAGE / filename, size, sha256)
+        overlays[relpath] = (raw, {"path": str(STAGE / filename), "bytes": size, "sha256": sha256,
+                                   "base_git_blob_sha1": base["roles"][role]["git_oid"]})
+    original_loader = prior.BoundSource
+
+    class OverlayLoader(original_loader):
+        def get_code(self, fullname):
+            relpath = Path(self.path).absolute().relative_to(prior.ROOT).as_posix()
+            if relpath not in overlays:
+                return super().get_code(fullname)
+            # Verify the same stable source FD and exact baseline blob even
+            # for overlay roles. Only the separately pinned post is executed.
+            super().get_code(fullname)
+            raw, provenance = overlays[relpath]
+            prior.compiled_total += len(raw)
+            if prior.compiled_total > prior.MAX_MODULE_BYTES:
+                raise RuntimeError("project compile input byte budget exceeded")
+            baseline = prior.compiled[relpath]
+            if (baseline["bytes"] != base["roles"][next(
+                    key for key, row in base["roles"].items() if row["repo_relative_path"] == relpath)]["size"]
+                or baseline["git_blob_sha1"] != provenance["base_git_blob_sha1"]):
+                raise AssertionError("overlay baseline blob or byte count drift")
+            baseline["overlay_executed"] = provenance
+            return compile(raw, str(Path(self.path).absolute()), "exec", dont_inherit=True)
+
+    prior.BoundSource = OverlayLoader
+    return base
+
+
+def import_fixture(prior):
+    sys.path[:0] = [str(prior.ROOT), "/home/barberb/lift_coding/.venv/lib/python3.12/site-packages"]
+    sys.meta_path.insert(0, prior.GuardedImports())
+    sys.addaudithook(prior.audit)
+    name = "_phase7_existing_fixture"
+    path = prior.ROOT / prior.FIXTURE
+    spec = importlib.util.spec_from_file_location(
+        name, path, loader=prior.BoundSource(name, str(path))
+    )
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+def samples_and_legacy_record(fixture):
+    original, holdout = fixture.samples.__wrapped__()
+    versions = fixture._versions()
+    record = fixture._trusted_feedback_record_for_nested_envelope(original, versions)
+    assert record.obligation_digest == digest({
+        "obligation_id": original.sample_id, "type": "exception_scope"
+    })
+    formulas = list(original.modal_ir.formulas)
+    selected = next(i for i, formula in enumerate(formulas) if formula.exceptions)
+    formulas[selected] = replace(formulas[selected], exceptions=[])
+    revised = replace(original, modal_ir=replace(original.modal_ir, formulas=formulas))
+    original.validate()
+    revised.validate()
+    assert original.sample_id == revised.sample_id == record.obligation_id
+    assert original.text == revised.text and original.normalized_text == revised.normalized_text
+    assert original.modal_ir.canonical_hash() != revised.modal_ir.canonical_hash()
+    return original, revised, holdout, versions, record
+
+
+def make_current_target(original, versions):
+    from ipfs_datasets_py.logic.integration.reasoning.legal_ir_obligations import (
+        generate_legal_ir_proof_obligations,
+    )
+    from ipfs_datasets_py.logic.integration.reasoning.legal_ir_proof_feedback import (
+        LegalIRProofFeedbackRecord, ProofFeedbackPartitionPolicy, ProofFeedbackTrainingTarget,
+        proof_feedback_sample_digest,
+    )
+    obligations = [item for item in generate_legal_ir_proof_obligations(original)
+                   if item.kind == "exception_scope_precedence"]
+    obligation = obligations[0]
+    assert obligation.obligation_id.startswith("lir-obligation-")
+    assert obligation.sample_id == original.sample_id != obligation.obligation_id
+    sample_sha256 = digest({
+        "schema": "legal-ir-proof-feedback-sample/v1",
+        "sample_id": original.sample_id, "source": original.source, "title": original.title,
+        "section": original.section, "citation": original.citation, "text": original.text,
+        "modal_ir": original.modal_ir.to_dict(),
+    })
+    assert sample_sha256 == proof_feedback_sample_digest(original)
+    scope = {"jurisdiction": "fictional-A", "interpretation": "selected-review-v1"}
+    dependency = {"fictional-exception-definition": {"revision": "v1", "value": "covered"}}
+    fields = {
+        "sample_id": original.sample_id, "sample_sha256": sample_sha256,
+        "obligation_id": obligation.obligation_id, "obligation_type": obligation.kind,
+        "legal_ir_view": obligation.legal_ir_view,
+        "formal_obligation_sha256": digest(obligation.to_dict()),
+        "reviewed_target_sha256": digest(scope),
+        "dependency_manifest_sha256": digest(dependency),
+    }
+    target = ProofFeedbackTrainingTarget(**fields)
+    explicit_feedback_digest = digest({
+        "schema": "legal-ir-proof-feedback-training-target/v1", **fields
+    })
+    assert target.obligation_digest == explicit_feedback_digest
+    record = LegalIRProofFeedbackRecord.create(
+        obligation_id=obligation.obligation_id, obligation_type=obligation.kind,
+        legal_ir_view=obligation.legal_ir_view, semantic_family=obligation.logic_family,
+        semantic_slots={"exception": "present"},
+        route_availability={"deterministic_contract": True},
+        route_statuses={"deterministic_contract": "passed"},
+        deterministic_trusted=True, evidence_ids=("fictional-current-evidence",),
+        receipt_ids=("fictional-current-receipt",), partition_key=original.sample_id,
+        partition_policy=ProofFeedbackPartitionPolicy(holdout_fraction=0.0),
+        obligation_digest=explicit_feedback_digest, versions=versions,
+    )
+    target = replace(target, expected_feedback_record_id=record.record_id)
+    changed_scope = replace(target, reviewed_target_sha256=digest({
+        **scope, "jurisdiction": "fictional-B",
+    }))
+    changed_dependency = replace(target, dependency_manifest_sha256=digest({
+        "fictional-exception-definition": {"revision": "v2", "value": "different"},
+    }))
+    assert len({target.obligation_digest, changed_scope.obligation_digest,
+                changed_dependency.obligation_digest}) == 3
+    return record, target, changed_scope, changed_dependency
+
+
+def run_trainer(fixture, prior, versions, holdout, label, item, sample, expected_spy,
+                *, targets=None, expected_reason=None, forwarding=False):
+    model = fixture.AdaptiveModalAutoencoder(compute_device="python")
+    assert model.compute_backend == "python"
+    trainer = fixture.TrustedFeedbackTrainer(
+        model, expected_versions=versions,
+        config=fixture.TrustedFeedbackTrainerConfig(production_weight_writes_enabled=True),
+    )
+    before, before_sha = prior.state_identity(model)
+    seen, auxiliary = [], []
+
+    def nudge_spy(model_arg, guidance, sample_arg, *, feedback_id, learning_rate):
+        assert model_arg is model and prior.state_identity(model)[0] == before
+        assert sample_arg.sample_id == sample.sample_id
+        assert sample_arg.modal_ir.canonical_hash() == sample.modal_ir.canonical_hash()
+        if targets:
+            assert sample_arg is not sample
+        seen.append({"record": feedback_id, "sample_ir_sha256": sample_arg.modal_ir.canonical_hash(),
+                     "learning_rate": learning_rate})
+        return forwarding
+
+    def auxiliary_spy(records, **kwargs):
+        auxiliary.append({
+            "callback_without_numeric": True,
+            "forwarded_exact_targets": kwargs.get("current_proof_targets") == targets,
+            "explicit_version_pin_matches": kwargs.get("expected_version_fingerprint") == versions.fingerprint,
+            "record_count": len(records),
+        })
+        return {"applied_count": 0}
+
+    options = {"current_proof_targets": targets} if targets is not None else {}
+    with fixture.pytest.MonkeyPatch.context() as patch:
+        patch.setitem(trainer.train.__globals__, "_apply_bounded_sample_update", nudge_spy)
+        patch.setattr(model, "train_proof_auxiliary_heads", auxiliary_spy)
+        report = trainer.train([item], {sample.sample_id: sample},
+                               ablation_evidence=fixture._ablation(sample.sample_id, holdout.sample_id),
+                               **options)
+    after, after_sha = prior.state_identity(model)
+    assert before == after and not report.write_to_autoencoder_weights
+    assert report.applied_count == 0 and not model.state.applied_proof_feedback_ids
+    expected_auxiliary = [{
+        "callback_without_numeric": True, "forwarded_exact_targets": True,
+        "explicit_version_pin_matches": True, "record_count": 1,
+    }] if forwarding else []
+    assert auxiliary == expected_auxiliary
+    passed = len(seen) == expected_spy and (
+        expected_reason is None or report.block_reasons == {expected_reason: 1}
+    )
+    return {"case": label, "passed": passed, "expected_spy_calls": expected_spy, "spy": seen,
+            "expected_reason": expected_reason, "reasons": report.block_reasons,
+            "auxiliary_forwarding_probe": auxiliary, "full_state_before_sha256": before_sha,
+            "full_state_after_sha256": after_sha, "applied": report.applied_count}
+
+
+def run_auxiliary(fixture, prior, versions, label, record, expected_eligible, *, targets=None,
+                  expected_skipped=None, evaluate=False):
+    model = fixture.AdaptiveModalAutoencoder(compute_device="python")
+    before, before_sha = prior.state_identity(model)
+    def forbid_numeric(*args, **kwargs):
+        raise AssertionError("auxiliary numerical update reached")
+    with fixture.pytest.MonkeyPatch.context() as patch:
+        patch.setattr(model, "_update_proof_auxiliary_head", forbid_numeric)
+        if evaluate:
+            report = model.evaluate_proof_auxiliary_heads([record], expected_versions=versions)
+        else:
+            opts = {"current_proof_targets": targets} if targets is not None else {}
+            report = model.train_proof_auxiliary_heads([record], expected_versions=versions,
+                                                       learning_rate=0.0, **opts)
+    after, after_sha = prior.state_identity(model)
+    assert before == after and report.get("applied_count", 0) == 0
+    passed = report["eligible_count"] == expected_eligible and (
+        expected_skipped is None or report["skipped_current_target_count"] == expected_skipped
+    )
+    return {"case": label, "passed": passed, "expected_eligible": expected_eligible,
+            "eligible": report["eligible_count"], "expected_skipped_current_target": expected_skipped,
+            "skipped_current_target": report.get("skipped_current_target_count"),
+            "mode": "historical_evaluation" if evaluate else "zero_learning_rate",
+            "status": report.get("status"), "full_state_before_sha256": before_sha,
+            "full_state_after_sha256": after_sha}
+
+
+def generic_refusals(fixture, prior, record, sample):
+    model = fixture.AdaptiveModalAutoencoder(compute_device="python")
+    before, before_sha = prior.state_identity(model)
+    typed_wire = record.to_dict()
+    inputs = [
+        ("generic_raw_object", record),
+        ("generic_raw_wire", typed_wire),
+        ("generic_attached_envelope", {"proof_feedback_record": typed_wire,
+                                       "guidance": {"legal_ir_view": record.legal_ir_view}}),
+    ]
+    reports = []
+    def forbid_numeric(*args, **kwargs):
+        raise AssertionError("generic guidance numerical update reached")
+    with fixture.pytest.MonkeyPatch.context() as patch:
+        for attr in ("_nudge_legal_ir_view_logits_toward_distribution",
+                     "_nudge_legal_ir_view_global_logits_toward_distribution",
+                     "_nudge_leanstral_guidance_feature_logits"):
+            patch.setattr(model, attr, forbid_numeric)
+        for label, value in inputs:
+            report = model.apply_leanstral_guidance(value, {sample.sample_id: sample},
+                                                   require_trusted=False)
+            after, after_sha = prior.state_identity(model)
+            assert before == after and report["applied_count"] == 0
+            reports.append({"case": label, "passed": report["skipped_invalid_count"] == 1,
+                            "skipped_invalid": report["skipped_invalid_count"],
+                            "full_state_before_sha256": before_sha,
+                            "full_state_after_sha256": after_sha})
+    return reports
+
+
+def suite(fixture, prior, candidate):
+    original, revised, holdout, versions, legacy = samples_and_legacy_record(fixture)
+    def train(*args, **kwargs):
+        return run_trainer(fixture, prior, versions, holdout, *args, **kwargs)
+    def local_aux(*args, **kwargs):
+        return run_auxiliary(fixture, prior, versions, *args, **kwargs)
+    results = [
+        train("legacy_matching_unbound", legacy, original, 0,
+              expected_reason="proof_feedback_current_target_mismatch" if candidate else None),
+        train("legacy_same_id_revised_unbound", legacy, revised, 0,
+              expected_reason="proof_feedback_current_target_mismatch" if candidate else None),
+        local_aux("legacy_aux_unbound", legacy, 0, expected_skipped=1 if candidate else None),
+        local_aux("historical_legacy_evaluation", legacy, 1, evaluate=True),
+    ]
+    if not candidate:
+        return results
+    record, target, scope, dependency = make_current_target(original, versions)
+    targets = {record.obligation_id: target}
+    def target_map(value):
+        return {record.obligation_id: value}
+    wire = record.to_dict()
+    envelope = {
+        "sample_id": original.sample_id, "proof_feedback_record": wire,
+        "guidance": {"sample_id": original.sample_id, "legal_ir_view": record.legal_ir_view},
+    }
+    results.extend([
+        train("bound_actual_obligation_distinct_id", record, original, 1, targets=targets),
+        train("bound_raw_wire", wire, original, 1, targets=targets),
+        train("bound_attached_wire", envelope, original, 1, targets=targets),
+        train("bound_same_id_revised", record, revised, 0, targets=targets,
+              expected_reason="proof_feedback_current_sample_mismatch"),
+        train("bound_changed_scope", record, original, 0, targets=target_map(scope),
+              expected_reason="proof_feedback_current_target_mismatch"),
+        train("bound_changed_dependency", record, original, 0, targets=target_map(dependency),
+              expected_reason="proof_feedback_current_target_mismatch"),
+        train("bound_forwards_to_auxiliary_callback", record, original, 1, targets=targets,
+              forwarding=True, expected_reason="proof_head_update_rejected"),
+        local_aux("bound_aux_eligible_no_numeric", record, 1, targets=targets, expected_skipped=0),
+        local_aux("bound_aux_changed_scope", record, 0, targets=target_map(scope), expected_skipped=1),
+        local_aux("bound_aux_changed_dependency", record, 0, targets=target_map(dependency), expected_skipped=1),
+    ])
+    results.extend(generic_refusals(fixture, prior, record, original))
+    return results
+
+
+def load_prior():
+    path = PRIOR / "guarded_probe.py"
+    raw = pinned_file(path, 15945, RUNNER_SHA256)
+    evidence = json.loads(pinned_file(
+        PRIOR / "phase7-private-same-id-no-fit-final-small.json", 8077, PRIOR_SHA256
+    ))
+    assert evidence["outcome"]["spy_bypass_reproduced"] is True
+    assert evidence["raw_evidence"]["runner"]["sha256"] == RUNNER_SHA256
+    name = "_phase7_exact_prior_no_fit_runner"
+    module = ModuleType(name)
+    module.__file__ = str(path)
+    sys.modules[name] = module
+    exec(compile(raw, str(path), "exec", dont_inherit=True), module.__dict__)
+    return module
+
+
+if __name__ == "__main__":
+    prior = None
+    code = 2
+    receipt = {"result": None, "candidate": len(sys.argv) == 4}
+    try:
+        if len(sys.argv) not in {2, 4} or sys.argv[1] not in {"baseline", "overlay"}:
+            raise ValueError("expected baseline or overlay plus manifest name and SHA")
+        prior = load_prior()
+        prior.install_kernel_guards()
+        if sys.argv[1] == "overlay":
+            if len(sys.argv) != 4 or Path(sys.argv[2]).name != sys.argv[2]:
+                raise ValueError("exact private manifest required")
+            manifest_path = STAGE / sys.argv[2]
+            if not (0 < manifest_path.lstat().st_size < 1024):
+                raise ValueError("private manifest outside byte bound")
+            manifest = json.loads(pinned_file(manifest_path, manifest_path.lstat().st_size, sys.argv[3]))
+            if set(manifest) != {"record", "trainer", "autoencoder"}:
+                raise ValueError("exact three overlay roles required")
+        else:
+            if len(sys.argv) != 2:
+                raise ValueError("unexpected baseline arguments")
+            manifest = {}
+        base = prepare_loader(prior, manifest)
+        fixture = import_fixture(prior)
+        cases = suite(fixture, prior, bool(manifest))
+        if any(name.split(".", 1)[0] in prior.blocked_imports for name in sys.modules):
+            raise RuntimeError("blocked dependency unexpectedly loaded")
+        code = 0 if all(row["passed"] for row in cases) else 1
+        receipt.update(result=cases, base=base, manifest=manifest,
+                       real_numeric_calls=0, no_fit=True)
+    except Exception as error:
+        traceback.print_exc()
+        receipt["refusal"] = f"{type(error).__name__}: {error}"
+    finally:
+        receipt["worker_rc"] = code
+        if prior is not None:
+            receipt.update(guard=prior.guard, explicit_denials=prior.denied,
+                           executed_sources=prior.compiled, project_body_bytes=prior.compiled_total)
+        print(json.dumps(receipt, sort_keys=True))
+    sys.exit(code)

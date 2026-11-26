@@ -1,0 +1,25 @@
+{
+  "after": {
+    "bytes": 68274,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-reviewed-V4-withdrawn-negative-private-sfLSxQnc/test.after.py.DATA",
+    "sha256": "58446119fcc4305f4407fc4efc2f7eed8d1beaace94b788c29045a84c22316d4"
+  },
+  "append_bytes": 2836,
+  "before": {
+    "bytes": 65438,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-reviewed-V4-withdrawn-negative-private-sfLSxQnc/test.before.py.DATA",
+    "sha256": "8e2b503c0c586b56215d26d63f3c17618ec9d47baa008c914d1f5eaad50aeedd"
+  },
+  "inverse": {
+    "bytes": 3397,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-reviewed-V4-withdrawn-negative-private-sfLSxQnc/test.inverse.diff",
+    "sha256": "f138a6f687834142e2f35b250b4c5b889527dc89c2e80bd05a5bac66a8cf803e"
+  },
+  "patch": {
+    "bytes": 3397,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-reviewed-V4-withdrawn-negative-private-sfLSxQnc/test.append.diff",
+    "sha256": "b479b9c6e3e49a99c0adbc44ce918d33548bd760ae732c2d08f07760d7130a0a"
+  },
+  "path_in_repo": "tests/unit/logic/formalization/autoencoder/test_alignment_relation_mask_handoff.py",
+  "unchanged_top_level_ast_count": 79
+}

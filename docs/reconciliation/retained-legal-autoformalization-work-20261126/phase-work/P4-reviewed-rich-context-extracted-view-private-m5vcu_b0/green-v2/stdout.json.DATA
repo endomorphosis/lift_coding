@@ -1,0 +1,25 @@
+{
+  "version": "v2",
+  "results": [
+    {
+      "case": "shared-extracted-view",
+      "passed": true
+    },
+    {
+      "case": "independent-views",
+      "passed": true
+    }
+  ],
+  "guard_events": [],
+  "overlays": [
+    {
+      "module": "_existing_rich_evaluator_private_cases",
+      "actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-reviewed-rich-context-extracted-view-private-m5vcu_b0/owning-test.after.py.DATA"
+    },
+    {
+      "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_structured_retrieval",
+      "actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-reviewed-rich-context-extracted-view-private-m5vcu_b0/legal_structured_retrieval.after.py.DATA"
+    }
+  ],
+  "test_sha256": "df7736aee87046e3fbbdb835bef2cefa02b542c747b93a91571d0481d63734e0"
+}

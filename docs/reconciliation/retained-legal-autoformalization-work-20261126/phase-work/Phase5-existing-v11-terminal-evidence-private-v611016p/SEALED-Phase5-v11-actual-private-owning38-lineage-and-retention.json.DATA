@@ -1,0 +1,174 @@
+{
+  "actual_before_and_after": {
+    "after": {
+      "counts": {
+        "error": 0,
+        "failed": 0,
+        "passed": 38
+      },
+      "raw": {
+        "exit": {
+          "bytes": 2,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/owning-38-after-v03.exit",
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+        },
+        "stderr": {
+          "bytes": 0,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/owning-38-after-v03.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 11485,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/owning-38-after-v03.stdout",
+          "sha256": "99008b172702becb25c47619d9a431b58300c151721abf967e49653164b1abb6"
+        }
+      },
+      "source_roles": {
+        "inference": {
+          "bytes": 89200,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/isolated-owning-38-selected-posts/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_inference.py",
+          "proposed_blob": "b6a23e81ad5fb38894da764182004397d80c5018",
+          "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_inference.py",
+          "sha256": "334ccb423da0c0b3de4985f51c541e2ff5966c04055ceaf3fd8ce6388ef08f6b"
+        },
+        "owning_test": {
+          "bytes": 253248,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/isolated-owning-38-selected-posts/tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_inference.py",
+          "proposed_blob": "9dd37defc74a0f392b7607e944c7ecc3dbb8c4c8",
+          "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_inference.py",
+          "sha256": "c9c17b2e23560b59f3b018f90bbf38cdd6f77340052dd68901557723b4724ec3"
+        }
+      }
+    },
+    "before": {
+      "counts": {
+        "error": 0,
+        "failed": 9,
+        "passed": 29
+      },
+      "raw": {
+        "exit": {
+          "bytes": 2,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/owning-38-before-v03.exit",
+          "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+        },
+        "stderr": {
+          "bytes": 0,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/owning-38-before-v03.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 11848,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/owning-38-before-v03.stdout",
+          "sha256": "18265313b0488356f32579cd4379e5db41960f65f454b400dc354245d5b44956"
+        }
+      },
+      "source_roles": {
+        "inference": {
+          "bytes": 85793,
+          "origin_Git_blob": "370a9c3fb8e52702b9ca71fff60279443ca31781",
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/isolated-owning-38-Git-projection/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_inference.py",
+          "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_inference.py",
+          "sha256": "413cabdaae3c28321215fe418b450013fdd07ac94dde6e0c39d08de5cde3c6f3"
+        },
+        "owning_test": {
+          "bytes": 253248,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/isolated-owning-38-selected-posts/tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_inference.py",
+          "proposed_blob": "9dd37defc74a0f392b7607e944c7ecc3dbb8c4c8",
+          "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_inference.py",
+          "sha256": "c9c17b2e23560b59f3b018f90bbf38cdd6f77340052dd68901557723b4724ec3"
+        }
+      }
+    }
+  },
+  "input_roles": {
+    "bytes": 15070,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/exact-owning-38-project-inputs.json",
+    "sha256": "b872ac9641b0fb2f4cc8f482efc92268485b568eb7822edc28b9682ad4bf7b0c"
+  },
+  "ordered_roster": [
+    "test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved[abstained]",
+    "test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved[incomplete]",
+    "test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved[invalid_no_text]",
+    "test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved[invalid_text]",
+    "test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved[complete]",
+    "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[raw_hash]",
+    "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[null_as_empty]",
+    "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[candidate_rewrite]",
+    "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[supplied_digest]",
+    "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[derivation]",
+    "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[population]",
+    "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[tokens]",
+    "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[profile]",
+    "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[observation]",
+    "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[loader_schema]",
+    "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[loader_pair]",
+    "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[loader_authority]",
+    "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[source]",
+    "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[exposure]",
+    "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes[commitment_extra]",
+    "test_reviewed_inference_v11_outputs_cover_ordered_source_population[None]",
+    "test_reviewed_inference_v11_outputs_cover_ordered_source_population[drop_middle]",
+    "test_reviewed_inference_v11_outputs_cover_ordered_source_population[only_one]",
+    "test_reviewed_inference_v11_outputs_cover_ordered_source_population[coordinated_reverse]",
+    "test_reviewed_inference_v11_outputs_cover_ordered_source_population[renamed_id]",
+    "test_reviewed_inference_v11_outputs_cover_ordered_source_population[renamed_unit]",
+    "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[real-token-exhaustion]",
+    "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[real-unexpected-bos]",
+    "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[empty-decoded-body]",
+    "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[complete-without-eos]",
+    "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[complete-with-early-eos]",
+    "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[complete-with-wrong-bos]",
+    "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[complete-outside-vocab]",
+    "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[false-abstention]",
+    "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[false-incomplete-with-eos]",
+    "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[false-token-budget]",
+    "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[valid-body-called-invalid]",
+    "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition[missing-tokenizer-receipt]"
+  ],
+  "packet": {
+    "bytes": 17105,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/SEALED-Phase5-existing-v11-terminal-evidence-exact2-private.json",
+    "sha256": "94dffb9cc89d95bed369c0813094922a07240c754fe4e699e41ece7030c132b9"
+  },
+  "read_only_currentness": {
+    "head_at_materialization": "bda9f1fb146722e8b116cb0503880fb22e5291a4",
+    "main_source_install_or_managed_ordinary_selected": false
+  },
+  "retained_pre_effects_setup": {
+    "first": {
+      "exit": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/owning-38-before.exit",
+        "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+      },
+      "issue": "Private binding removed an import-only suite in the exact source-pins function. Restored an inert statement so the original conditional and physical read remain.",
+      "stderr": {
+        "bytes": 796,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/owning-38-before.stderr",
+        "sha256": "17e9a6fb16292d8161c1ece5584c00139610817e3bf3f30d40a11da66c212e10"
+      }
+    },
+    "projection_bound": "Initial setup used the lifecycle cap for the unrelated 1131731-byte numerical fixture source. The exact lifecycle cap was retained. Only the pinned numerical fixture file was allowed up to two MiB.",
+    "second": {
+      "exit": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/owning-38-before-v02.exit",
+        "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+      },
+      "issue": "Exact owning test calls reached the full tests module import. Bound only that known fixture import to the actual selected numerical helper ASTs in the private linkage.",
+      "stdout": {
+        "bytes": 35572,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/owning-38-before-v02.stdout",
+        "sha256": "814edc968a62b22ce7f37e10f7d6f4d7911770cab4a17147d05a3dcc3d9a3d43"
+      }
+    }
+  },
+  "runner": {
+    "bytes": 8978,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/run_owning_38_saved_output_functions_v03.py",
+    "sha256": "5fc07ba1ecaea75fbc4c142585ae5738c2451e4fffda62766c824efabd27cf87"
+  },
+  "schema": "private-Phase5-v11-existing-38-owning-case-functions-lineage/v1",
+  "scope": "Actual execution of the same maintained owning-case function ASTs and pytest assertion helpers in a private authenticated Git projection. No normal package or pytest collection/rewrite, physical model/decoder run, installed source change, or model quality claim. The sealed variant uses the producer-reported tokenizer receipt for terminal consistency. A separate Root-owned successor will check independent request-pinned configuration; its qualification cannot reuse these results."
+}

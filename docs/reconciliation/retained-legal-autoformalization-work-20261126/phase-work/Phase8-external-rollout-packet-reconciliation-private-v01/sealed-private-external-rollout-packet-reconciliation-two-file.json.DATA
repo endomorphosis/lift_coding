@@ -1,0 +1,186 @@
+{
+  "actual_fixture": {
+    "Git_blob_sha1": "03c13bdb014e25448fbcb4344ba71504b15622b4",
+    "bytes": 5763,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-rollout-packet-reconciliation-private-v01/isolated/tests/fixtures/legal_ir/external_expert_benchmark.jsonl",
+    "sha256": "fb9a76552e2b938369d93d73a2a25aa76a963101cac96fd487a246bc43c54971"
+  },
+  "actual_same_selected_15": {
+    "green": {
+      "declared_CLI_subprocess_test_deselected": 1,
+      "errors": 0,
+      "exitcode": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-rollout-packet-reconciliation-private-v01/green.exit",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "failures": [],
+      "guard_denials": [],
+      "ordered_tests": [
+        "test_external_validity_gate_accepts_bound_complete_evidence",
+        "test_external_validity_gate_fails_closed_on_missing_required_packets",
+        "test_external_validity_gate_rejects_inconsistent_binding_and_metric_regression",
+        "test_external_validity_gate_recomputes_multi_seed_statistics",
+        "test_external_validity_report_renderer_lists_all_domains",
+        "test_external_validity_gate_accepts_consistent_produced_packet_rows",
+        "test_external_validity_gate_refuses_inconsistent_produced_packet_rows[hidden-failure]",
+        "test_external_validity_gate_refuses_inconsistent_produced_packet_rows[duplicate-row-identity]",
+        "test_external_validity_gate_refuses_inconsistent_produced_packet_rows[nonboolean-row-acceptance]",
+        "test_external_validity_gate_refuses_inconsistent_produced_packet_rows[contradictory-row-status]",
+        "test_external_validity_gate_refuses_inconsistent_produced_packet_rows[missing-rows]",
+        "test_external_validity_gate_refuses_inconsistent_produced_packet_rows[null-rows]",
+        "test_external_validity_gate_refuses_inconsistent_produced_packet_rows[count-drift]",
+        "test_external_validity_gate_refuses_inconsistent_produced_packet_rows[accepted-count-drift]",
+        "test_external_validity_gate_refuses_inconsistent_produced_packet_rows[score-drift]"
+      ],
+      "passed": 15,
+      "raw_JUnit": {
+        "bytes": 3337,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-rollout-packet-reconciliation-private-v01/green/junit.xml",
+        "sha256": "653e887070826750eb8aa936404daea02f78a9604ec46080888ccead9e3e2909"
+      },
+      "rc": 0,
+      "skips": 0,
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-rollout-packet-reconciliation-private-v01/green.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 894,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-rollout-packet-reconciliation-private-v01/green.stdout",
+        "sha256": "0a159830372b7fa4a0bd76da5e6814e717866a651a8adb829919ba9f8afd5c35"
+      }
+    },
+    "red": {
+      "declared_CLI_subprocess_test_deselected": 1,
+      "errors": 0,
+      "exitcode": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-rollout-packet-reconciliation-private-v01/red.exit",
+        "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+      },
+      "failures": [
+        "test_external_validity_gate_refuses_inconsistent_produced_packet_rows[hidden-failure]",
+        "test_external_validity_gate_refuses_inconsistent_produced_packet_rows[duplicate-row-identity]",
+        "test_external_validity_gate_refuses_inconsistent_produced_packet_rows[nonboolean-row-acceptance]",
+        "test_external_validity_gate_refuses_inconsistent_produced_packet_rows[contradictory-row-status]",
+        "test_external_validity_gate_refuses_inconsistent_produced_packet_rows[missing-rows]",
+        "test_external_validity_gate_refuses_inconsistent_produced_packet_rows[null-rows]",
+        "test_external_validity_gate_refuses_inconsistent_produced_packet_rows[count-drift]",
+        "test_external_validity_gate_refuses_inconsistent_produced_packet_rows[accepted-count-drift]",
+        "test_external_validity_gate_refuses_inconsistent_produced_packet_rows[score-drift]"
+      ],
+      "guard_denials": [],
+      "ordered_tests": [
+        "test_external_validity_gate_accepts_bound_complete_evidence",
+        "test_external_validity_gate_fails_closed_on_missing_required_packets",
+        "test_external_validity_gate_rejects_inconsistent_binding_and_metric_regression",
+        "test_external_validity_gate_recomputes_multi_seed_statistics",
+        "test_external_validity_report_renderer_lists_all_domains",
+        "test_external_validity_gate_accepts_consistent_produced_packet_rows",
+        "test_external_validity_gate_refuses_inconsistent_produced_packet_rows[hidden-failure]",
+        "test_external_validity_gate_refuses_inconsistent_produced_packet_rows[duplicate-row-identity]",
+        "test_external_validity_gate_refuses_inconsistent_produced_packet_rows[nonboolean-row-acceptance]",
+        "test_external_validity_gate_refuses_inconsistent_produced_packet_rows[contradictory-row-status]",
+        "test_external_validity_gate_refuses_inconsistent_produced_packet_rows[missing-rows]",
+        "test_external_validity_gate_refuses_inconsistent_produced_packet_rows[null-rows]",
+        "test_external_validity_gate_refuses_inconsistent_produced_packet_rows[count-drift]",
+        "test_external_validity_gate_refuses_inconsistent_produced_packet_rows[accepted-count-drift]",
+        "test_external_validity_gate_refuses_inconsistent_produced_packet_rows[score-drift]"
+      ],
+      "passed": 6,
+      "raw_JUnit": {
+        "bytes": 11167,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-rollout-packet-reconciliation-private-v01/red/junit.xml",
+        "sha256": "57605b8e98a712e00b8104d8a4487ff8ced952aaff345241c1d98d7ad9ae0d81"
+      },
+      "rc": 1,
+      "skips": 0,
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-rollout-packet-reconciliation-private-v01/red.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 8378,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-rollout-packet-reconciliation-private-v01/red.stdout",
+        "sha256": "9611017f09148ed8be4108320d13e3caa59e6503e3cf5dae9e9824092854229e"
+      }
+    }
+  },
+  "effect": "When an external benchmark report identifies a producer digest or supplies packet results, replay its row IDs and dispositions, recover actual totals, and require the stated counts, score, and failed IDs to match them. Rowless legacy summary packets without a producer digest retain their existing path and explicitly show that packet results were not reconciled.",
+  "exact_forward_and_inverse": true,
+  "existing_guard": {
+    "bytes": 5502,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/run_private_fixture.py.DATA",
+    "sha256": "b3fe749fe409c404a426669781c4807538115fda1127534bbb3c8613853fd42e"
+  },
+  "observed_frozen_D_with_exact_role_blobs": "cacb0e85dbfad57fb1d96f8aa0d8667f6c51b061",
+  "published_evaluation_base": "7c409645b063d990d15b4b267351ed6c7cc5bfba",
+  "roles": {
+    "scripts/ops/legal_ir/hammer_leanstral_rollout_gate.py": {
+      "base": {
+        "Git_blob_sha1": "e9470fd4fc9576ae2f7b5858bd9938423146002e",
+        "bytes": 217722,
+        "mode": "100644",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-rollout-packet-reconciliation-private-v01/gate-owner.before.py.DATA",
+        "sha256": "ccc8334295437ac903b3a5b4fcc19f3e57c071171f1bd99ee153aa78f33fa7c0"
+      },
+      "forward": {
+        "bytes": 3550,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-rollout-packet-reconciliation-private-v01/hammer_leanstral_rollout_gate.py.forward.patch.DATA",
+        "sha256": "00001b2b1e034c83c8e1be431b9b672f7003bef93afd344414471393956a8e35"
+      },
+      "inverse": {
+        "bytes": 3550,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-rollout-packet-reconciliation-private-v01/hammer_leanstral_rollout_gate.py.inverse.patch.DATA",
+        "sha256": "574bf162f2a82f66565d09bd20e2a349e70ffbf8c9c39b3484410438ee831ff2"
+      },
+      "post": {
+        "Git_blob_sha1": "d72d7645e628c2f732efb97137306f626848767d",
+        "bytes": 220216,
+        "mode": "100644",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-rollout-packet-reconciliation-private-v01/gate-owner.after.py.DATA",
+        "sha256": "be32dd9e2b8453aea001fc8b8ff1a9f3f19cc47028be9dc1c5d0fbaa2d1b2a22"
+      }
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py": {
+      "base": {
+        "Git_blob_sha1": "83c43ebef4d4eb874635f586ded14a8e4601421a",
+        "bytes": 10838,
+        "mode": "100644",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-rollout-packet-reconciliation-private-v01/gate-test.before.py.DATA",
+        "sha256": "a5b9c6cd013773d1c0e3b823bb50a5e3131e621c04e9d9a38d8141c0c30ef2d0"
+      },
+      "forward": {
+        "bytes": 3660,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-rollout-packet-reconciliation-private-v01/test_external_validity_promotion_gate.py.forward.patch.DATA",
+        "sha256": "30ee43e5b1ff56ceb17a35b05d0e4e0ea688b46abcde4b42b2e0dc934ff81835"
+      },
+      "inverse": {
+        "bytes": 3660,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-rollout-packet-reconciliation-private-v01/test_external_validity_promotion_gate.py.inverse.patch.DATA",
+        "sha256": "04d45711b07b2d4e814e53e1c0f497087b70876a4d4502728a6fa773c2d451b2"
+      },
+      "post": {
+        "Git_blob_sha1": "a61b6646d3b85ec26224b80cb9fbdbcb3717b946",
+        "bytes": 14008,
+        "mode": "100644",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-rollout-packet-reconciliation-private-v01/isolated/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py",
+        "sha256": "a6b9a8aaf0c446eecfb19c78c2460f66ecbd288b8e14a920ab162d6987d2eb0b"
+      }
+    }
+  },
+  "runner": {
+    "bytes": 2434,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-rollout-packet-reconciliation-private-v01/run-existing-external-rollout-private.py",
+    "sha256": "d2bfaede3ed56e5ba06ddaa372ff715430b1633ad02654d7b1009e883fa70ed9"
+  },
+  "schema": "private-existing-external-rollout-canonical-producer-row-reconciliation/v1",
+  "scope": "Real producer and real promotion API with authored inputs and controlled report mutations. This does not authenticate the source data, benchmark digest, proof receipts, check LegalIR merit, or permit actual model/Lean/production promotion. No canonical Source, Git writes, CLI subprocess or ordinary qualification.",
+  "unchanged_current_producer": {
+    "Git_blob_sha1": "566fcdd4562bb8dc570d0e52b18fccc3172e4224",
+    "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py"
+  }
+}

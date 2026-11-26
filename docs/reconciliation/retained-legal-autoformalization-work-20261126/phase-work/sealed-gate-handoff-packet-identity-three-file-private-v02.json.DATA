@@ -1,0 +1,151 @@
+{
+  "all_prior_RED_and_GREEN_scopes_retained": true,
+  "cached_input_bytes_this_call": 203500,
+  "captured_A_HEAD": "de4d5a62b6fac2df61769a6461c2ada97f788208",
+  "effects": {
+    "Source_observations": 0,
+    "canonical_writes": 0,
+    "deployed_or_committed": false,
+    "model_or_Native_execution": false,
+    "provider_or_queue_or_registry_added": false,
+    "status_or_claim_modified": false
+  },
+  "final_v02_deltas": [
+    {
+      "bytes": 517,
+      "full9": {
+        "st_ctime_ns": "1795492246747643364",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "68862833",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795492246747643364",
+        "st_nlink": "1",
+        "st_size": "517",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/handoff-identity-gate_recovery.v01-to-v02.diff.DATA",
+      "sha256": "cc889f4390bd94125ed304f707e823d9ec3ca1a4eaaff0f6d69db40c6f96b5f6"
+    },
+    {
+      "bytes": 1249,
+      "full9": {
+        "st_ctime_ns": "1795492246755643441",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "68862834",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795492246755643441",
+        "st_nlink": "1",
+        "st_size": "1249",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/handoff-identity-owning-test.v01-to-v02.diff.DATA",
+      "sha256": "478e321e897c3028ff164bdb3721a160606c0330cbf72b20a8d6b6498e122ffb"
+    }
+  ],
+  "new_boundary_RED": {
+    "bytes": 4233,
+    "full9": {
+      "st_ctime_ns": "1795492246692854088",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68862830",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795492246692854088",
+      "st_nlink": "1",
+      "st_size": "4233",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/gate-handoff-packet-identity-same15-normalized-boundary-RED-v01.json",
+    "sha256": "c28775234f701147e77588c996419a038ef032ca9eaec190d622b74523113c57"
+  },
+  "original_packet": {
+    "bytes": 7735,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/sealed-gate-handoff-packet-identity-three-file-private-v01.json",
+    "sha256": "f2c24ce7377724daef438204505769f832cff39304a74e38f6b1a8fcdc2ab028"
+  },
+  "output_readback_bytes_before_descriptor": 213885,
+  "qualification": {
+    "errors_after": 0,
+    "existing_unchanged": 9,
+    "failures_after": 0,
+    "new": 6,
+    "old14_assertion_AST_unchanged": true,
+    "ordinary_package_or_lane_qualification": false,
+    "parents": 15,
+    "skips_after": 0
+  },
+  "rows": [
+    {
+      "before_bytes": 46019,
+      "before_sha256": "21088a194de7da753a718c25ac0bd276890509b97b02d46bacfff4230e6a1a77",
+      "post": {
+        "bytes": 46540,
+        "full9": {
+          "st_ctime_ns": "1795492246738643278",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "68862831",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795492246738643278",
+          "st_nlink": "1",
+          "st_size": "46540",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/handoff-identity-gate_recovery.py.after-v02.DATA",
+        "sha256": "c0b55898a53fbf20c0064ff960b277707dcf398873e6b65cbbae602442413e97"
+      },
+      "relative_path": "ipfs_accelerate_py/agent_supervisor/rescue/gate_recovery.py"
+    },
+    {
+      "before_bytes": 162702,
+      "before_sha256": "00bf759b8adc52da2838faad75eff5d7ffea5ddb6c9b17b21f67cf87918bf947",
+      "post": {
+        "bytes": 162648,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/handoff-identity-lane_resume.py.after.DATA",
+        "sha256": "9ed6db0316973f9df45750a1ef3a12b51c3c05ce34acb7487156f4f821c04776"
+      },
+      "relative_path": "ipfs_accelerate_py/agent_supervisor/rescue/lane_resume.py"
+    },
+    {
+      "before_bytes": 151896,
+      "before_sha256": "d34b9d1f07b105deb064a8ede152ed8c32b5e09c8a1e6e5a5d9795c6f4a1baa2",
+      "post": {
+        "bytes": 157916,
+        "full9": {
+          "st_ctime_ns": "1795492246742643316",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "68862832",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795492246742643316",
+          "st_nlink": "1",
+          "st_size": "157916",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/handoff-identity-test_agent_supervisor_gate_recovery_evidence_refresh.py.after-v02.DATA",
+        "sha256": "ca2be22878dc248abea28bc7189155a519d99668398733b7323088cd687a4a11"
+      },
+      "relative_path": "test/api/test_agent_supervisor_gate_recovery_evidence_refresh.py"
+    }
+  ],
+  "same15_GREEN": {
+    "bytes": 3430,
+    "full9": {
+      "st_ctime_ns": "1795492246846644311",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68862835",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795492246846644311",
+      "st_nlink": "1",
+      "st_size": "3430",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/gate-handoff-packet-identity-same15-actual-GREEN-v02.json",
+    "sha256": "1c4cc69c8febf8d18c6de113ce5aa3e3376b6870ebea832c0048772fe290694f"
+  },
+  "schema": "gate-handoff-packet-identity-superseding-private-correction/v2",
+  "semantics": "Short safe ASCII task IDs retain legacy paths; other identities use their full original-ID SHA256 in a filename namespace separated by a dot, preventing collisions with legacy-safe IDs. Both lane packet lookups reuse the same method. No handoff carries new authority."
+}

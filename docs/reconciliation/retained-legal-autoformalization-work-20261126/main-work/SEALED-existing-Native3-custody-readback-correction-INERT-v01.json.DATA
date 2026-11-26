@@ -1,0 +1,244 @@
+{
+  "Git_mutations": false,
+  "Native3_binder_and_NULL_binding_packet": {
+    "bytes": 11223,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/SEALED-existing-v567-Native3-current-operator-adaptation-INERT-v02.json",
+    "sha256": "25bb2e11e172962a3a790ca141e9cde27eac07846a6897c7fcbb41f905dce51c"
+  },
+  "actual_Native": false,
+  "actual_SDK": false,
+  "actual_Source": false,
+  "actual_results": {
+    "copied_frame_same9_RED": {
+      "errors": 1,
+      "failures": 0,
+      "reference": {
+        "bytes": 3836,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/actual-existing-Native3-custody-copied-frame-RED-v02.json",
+        "sha256": "56e562c20a1b538587a2059ab0ab3dc73e873718b0652dad0f95b5d70b375296"
+      },
+      "tests_run": 9
+    },
+    "custody_final_same9_GREEN": {
+      "errors": 0,
+      "failures": 0,
+      "reference": {
+        "bytes": 2396,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/actual-existing-Native3-final-custody-GREEN-v04.json",
+        "sha256": "6eaf275c1d14a66bba74b96045d1a80443b7e712f393838c71bd8cf40701623c"
+      },
+      "tests_run": 9
+    },
+    "custody_original_RED": {
+      "errors": 4,
+      "failures": 2,
+      "reference": {
+        "bytes": 11689,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/actual-existing-Native3-custody-before-RED-v01.json",
+        "sha256": "8d9d015c8f760cca55f2dfa464f75d5f703077eaefecddcabbb2dfaaf408c125"
+      },
+      "tests_run": 8
+    },
+    "custody_same8_GREEN": {
+      "errors": 0,
+      "failures": 0,
+      "reference": {
+        "bytes": 2221,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/actual-existing-Native3-custody-after-GREEN-v01.json",
+        "sha256": "06138b5bc606a349c222a17de62e37a6017cd58c5346d198541e6d01b3a301f8"
+      },
+      "tests_run": 8
+    },
+    "retention_final_same2_GREEN": {
+      "errors": 0,
+      "failures": 0,
+      "reference": {
+        "bytes": 967,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/actual-existing-Native3-retention-after-GREEN-v04.json",
+        "sha256": "7431600b2766aa0043d226d283976d33859d68fde92a1f43fe5cb91fb84afff8"
+      },
+      "tests_run": 2
+    },
+    "retention_same2_RED": {
+      "errors": 0,
+      "failures": 2,
+      "reference": {
+        "bytes": 3020,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/actual-existing-Native3-retention-before-RED-v01.json",
+        "sha256": "8cf0191fa6774bd5edd89867e3de90cd81b6978accf54f855f6d64cc08969756"
+      },
+      "tests_run": 2
+    }
+  },
+  "all_Source_resource_parent_release_finalizer_Native_case_acceptance_AST_exact": true,
+  "all_prior_versions_failures_costs_preserved": true,
+  "canonical_edits": false,
+  "changes": [
+    "recover only exact actual ToolRunResult from identity-matched canonical SDK or managed run frames",
+    "preserve actual primary, secondary, result and handle objects through custody",
+    "classify exact canonical no-child result as failed cleanup-safe; still run original own-parent/subtree checks",
+    "write and actually read back private failure checkpoint before holds; diagnostic failure cannot drop custody",
+    "do not return custody while raw retention or result view remains unresolved",
+    "verify each raw/private retained byte file by actual NF/F9/hash readback after charging written bytes"
+  ],
+  "controls_and_assembler": {
+    "prepare-native3-custody-successor-v01.py": {
+      "bytes": 10850,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/prepare-native3-custody-successor-v01.py",
+      "sha256": "ff7a8c652e583079d0acc3b0417eacd8597e6544cacef44658e16ce982a1643f"
+    },
+    "test-native3-existing-custody-ast-private-v01.py": {
+      "bytes": 13631,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/test-native3-existing-custody-ast-private-v01.py",
+      "sha256": "279d4df9c4e64c5258f63e48bd2b75a391f404eca4135cb6b27a6663d2fd84ac"
+    },
+    "test-native3-existing-custody-ast-private-v02.py": {
+      "bytes": 14491,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/test-native3-existing-custody-ast-private-v02.py",
+      "sha256": "ade10e3a47c9e8e9b01262b0db6897d217d1a831df6df79231197093ddf5c8a2"
+    },
+    "test-native3-existing-retention-ast-private-v01.py": {
+      "bytes": 3825,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/test-native3-existing-retention-ast-private-v01.py",
+      "sha256": "9c4fd75185c1d206cb6a2e67005c307636f786d3ba143e0f94228899fb1ef8c5"
+    }
+  },
+  "current_bindings_still_NULL": true,
+  "delta_proof": {
+    "bytes": 1635,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-Native3-custody-readback-final-delta-proof-INERT-v04.json",
+    "sha256": "e5b6d7803d8117d44ca818d6fe0bd580a5cc43481d37b91edeeb5ec49521b0e3"
+  },
+  "delta_review": {
+    "custody_v03_scoped_clear_from_existing_child": true,
+    "no_runtime_qualification": true,
+    "read_bytes": 42232,
+    "retention_one_call_after_charge_static_proof": true
+  },
+  "explicit_packet_seal_readbacks": [
+    {
+      "bytes": 1635,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-Native3-custody-readback-final-delta-proof-INERT-v04.json",
+      "sha256": "e5b6d7803d8117d44ca818d6fe0bd580a5cc43481d37b91edeeb5ec49521b0e3"
+    },
+    {
+      "bytes": 35401,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-v567-Native3-current-operator-INERT-v01.py.DATA",
+      "sha256": "4b844f5645a6607f184d9aa64b2203686effe1d4eb2b02a97a43afb83f0a04e0"
+    },
+    {
+      "bytes": 39839,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-v567-Native3-current-operator-custody-readback-INERT-v04.py.DATA",
+      "sha256": "b83e7b413bc8b7b715c643f14462158422635939a9f5fea80e3ee5a5e15c8dff"
+    },
+    {
+      "bytes": 8489,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-v567-Native3-custody-readback-final.forward.diff",
+      "sha256": "de0f2e74e64c04d91e13cb2ef25e5a06b94964145a833a89dc6182def928e4c6"
+    },
+    {
+      "bytes": 8489,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-v567-Native3-custody-readback-final.inverse.diff",
+      "sha256": "ca0af1c60105b27e90b174fb23ef4098cb9be8c6dffeec7aa3682bd9152e9103"
+    },
+    {
+      "bytes": 11689,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/actual-existing-Native3-custody-before-RED-v01.json",
+      "sha256": "8d9d015c8f760cca55f2dfa464f75d5f703077eaefecddcabbb2dfaaf408c125"
+    },
+    {
+      "bytes": 2221,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/actual-existing-Native3-custody-after-GREEN-v01.json",
+      "sha256": "06138b5bc606a349c222a17de62e37a6017cd58c5346d198541e6d01b3a301f8"
+    },
+    {
+      "bytes": 3836,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/actual-existing-Native3-custody-copied-frame-RED-v02.json",
+      "sha256": "56e562c20a1b538587a2059ab0ab3dc73e873718b0652dad0f95b5d70b375296"
+    },
+    {
+      "bytes": 2396,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/actual-existing-Native3-final-custody-GREEN-v04.json",
+      "sha256": "6eaf275c1d14a66bba74b96045d1a80443b7e712f393838c71bd8cf40701623c"
+    },
+    {
+      "bytes": 3020,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/actual-existing-Native3-retention-before-RED-v01.json",
+      "sha256": "8cf0191fa6774bd5edd89867e3de90cd81b6978accf54f855f6d64cc08969756"
+    },
+    {
+      "bytes": 967,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/actual-existing-Native3-retention-after-GREEN-v04.json",
+      "sha256": "7431600b2766aa0043d226d283976d33859d68fde92a1f43fe5cb91fb84afff8"
+    },
+    {
+      "bytes": 13631,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/test-native3-existing-custody-ast-private-v01.py",
+      "sha256": "279d4df9c4e64c5258f63e48bd2b75a391f404eca4135cb6b27a6663d2fd84ac"
+    },
+    {
+      "bytes": 14491,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/test-native3-existing-custody-ast-private-v02.py",
+      "sha256": "ade10e3a47c9e8e9b01262b0db6897d217d1a831df6df79231197093ddf5c8a2"
+    },
+    {
+      "bytes": 3825,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/test-native3-existing-retention-ast-private-v01.py",
+      "sha256": "9c4fd75185c1d206cb6a2e67005c307636f786d3ba143e0f94228899fb1ef8c5"
+    },
+    {
+      "bytes": 10850,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/prepare-native3-custody-successor-v01.py",
+      "sha256": "ff7a8c652e583079d0acc3b0417eacd8597e6544cacef44658e16ce982a1643f"
+    }
+  ],
+  "extra_IO_requires_existing_owners_fresh_complete_plan_not_a_grant": true,
+  "extra_private_readback_IO_upper_bound_bytes": 33554432,
+  "forward": {
+    "bytes": 8489,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-v567-Native3-custody-readback-final.forward.diff",
+    "sha256": "de0f2e74e64c04d91e13cb2ef25e5a06b94964145a833a89dc6182def928e4c6"
+  },
+  "forward_inverse_actually_applied_exact": true,
+  "full_Phase1_complete": false,
+  "full_eight_phase_goal_complete": false,
+  "inert_pre_effect_refusal_exact": true,
+  "inverse": {
+    "bytes": 8489,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-v567-Native3-custody-readback-final.inverse.diff",
+    "sha256": "ca0af1c60105b27e90b174fb23ef4098cb9be8c6dffeec7aa3682bd9152e9103"
+  },
+  "legal_or_model_or_corpus_admission": false,
+  "next_action": "Existing runtime owner may fresh-bind current Source/SDK/protocol/toolchain/clock/resource/IO/output to this existing operator; no run selected by packet",
+  "no_new_controller_runner_registry_queue_or_authority": true,
+  "operator": {
+    "bytes": 39839,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-v567-Native3-current-operator-custody-readback-INERT-v04.py.DATA",
+    "sha256": "b83e7b413bc8b7b715c643f14462158422635939a9f5fea80e3ee5a5e15c8dff"
+  },
+  "prior_operator": {
+    "bytes": 35401,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-v567-Native3-current-operator-INERT-v01.py.DATA",
+    "sha256": "4b844f5645a6607f184d9aa64b2203686effe1d4eb2b02a97a43afb83f0a04e0"
+  },
+  "real_current_sdk_API_trace": {
+    "admission": {
+      "bytes": 19806,
+      "git_blob": "4ec4a57c8fb7e058cf92e9b0a42cd1940290fb4f",
+      "sha256": "fda64e02042355fd0a0a3b75934b3d1c4ccb5efb42f0fe861876275ff8a5e1a8"
+    },
+    "commit": "91ddf809d93072a08999da191d8d09d8f411be34",
+    "managed_result_survives_lease_exit_error": true,
+    "method": "two exact immutable local Git objects with lazy fetch disabled and expected SHA pins; no canonical body read or imports",
+    "no_child_current_to_dict_omits_absent_lifecycle": true,
+    "process": {
+      "bytes": 109707,
+      "git_blob": "1650b31bd0aa342f3614bf9999e9b6010fba17ee",
+      "sha256": "370ba355be1da87814be4a117d2ce2a1cbc255064958d9ec64ada8e54521a7d7"
+    },
+    "read_bytes": 129513
+  },
+  "real_leases_or_cleanup": false,
+  "schema": "private-existing-Native3-custody-and-readback-correction-INERT/v1",
+  "whole_AST_unchanged_except_existing_two_helpers": true
+}

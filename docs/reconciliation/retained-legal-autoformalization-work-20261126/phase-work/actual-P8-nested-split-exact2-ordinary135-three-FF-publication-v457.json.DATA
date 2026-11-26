@@ -1,0 +1,500 @@
+{
+  "Guide542_and_all_other_paths_and_links_preserved": true,
+  "Source_READ3": {
+    "bytes": 7728,
+    "path": "/tmp/Root-P8-nested-split-exact-postfreeze-READ3-v456-med1g41m/actual-output/actual-D27-observed-D-root-initializer-Source-READ-v01-small-closeout.json",
+    "sha256": "b7a43ca07ed2a1a0715e43ba9fc4ccdf988bf11c2fdf38ee5f7042c2969e25cb"
+  },
+  "Source_install": {
+    "bytes": 10375,
+    "path": "/tmp/Root-P8-nested-split-existing-Source2-v455b-pusbuqy9/actual-P8-nested-split-exact2-Source-closed-small-v455b.json",
+    "sha256": "38d3e9de9352490a520a56f4b323a89f866c7f155aceb726a5fa41e48ecf88c9"
+  },
+  "Source_resource_and_parent_closed": true,
+  "child_import_compile_attested": false,
+  "clean_A_companion_reference": {
+    "bytes": 11078,
+    "path": "/tmp/A21d7-private-sparse-companion-h7wM67B1/lease-exclude-v02-825Yd5LY/READY-clean-A21d7-private-sparse-companion-lease-exclude-v02.json",
+    "sha256": "06be515cccae5e249ae58d215201883e627a863bea663a1eaff4f616e30c398a"
+  },
+  "counts": {
+    "duplicates": 0,
+    "errors": 0,
+    "failures": 0,
+    "functions": 61,
+    "passed": 135,
+    "skipped": 0,
+    "tests": 135
+  },
+  "descendant_executable_or_workload_identity_inferred": false,
+  "elapsed_seconds": 13.473,
+  "events": {
+    "bytes": 2089,
+    "path": "/tmp/P8-nested-split-ordinary135-v457-publication-xUTcUYPE/actual-events.jsonl",
+    "sha256": "c0d5a13df2bcb2c2f1ba59febd9816a27e973f6787156b31a189740caa830962"
+  },
+  "exact_function_counts": {
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_binds_split_manifest_actually_validated": 9,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_keeps_legacy_nested_external_domain_status": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_replays_nested_external_gate_evidence": 6,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_replays_selected_benchmark_semantic_coverage": 4,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings": 8,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_accepts_complete_bound_evidence": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_cli_writes_decision_and_report": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_fails_closed_on_missing_domain": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_rejects_backend_block_and_conformance_gap": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_replays_raw_external_evidence_beside_an_accepted_decision": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_replays_real_external_benchmark_report": 2,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_report_renderer_lists_all_domains": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_cli_checks_produced_packet_rows_in_process": 2,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_cli_writes_decision_and_report": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_accepts_bound_complete_evidence": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_accepts_consistent_produced_packet_rows": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_does_not_promote_unmeasured_legacy_ir": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_fails_closed_on_missing_required_packets": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_honors_independently_selected_benchmark_population": 3,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_recomputes_multi_seed_statistics": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_inconsistent_produced_packet_rows": 9,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_refuses_unverifiable_selected_benchmark": 2,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_gate_rejects_inconsistent_binding_and_metric_regression": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_report_renderer_lists_all_domains": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_acceptable_ambiguity_allows_expected_family_alternative": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_digest_binds_canonical_loaded_revision": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_benchmark_packet_intake_refuses_inconsistent_declared_digest": 5,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_empty_external_population_has_no_acceptance": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_counts_only_complete_semantic_coverage": 3,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_obeys_family_ambiguity_policy": 6,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_predicts_by_each_supported_identity_form": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_refuses_nonmapping_keyed_output": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_refuses_predictions_for_unselected_packets": 3,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_refuses_unbound_sequence_output": 2,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_ambiguous_prediction_order": 2,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_conflicting_prediction_aliases": 2,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_duplicate_population_identity": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_misbound_keyed_prediction": 2,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_requires_current_declared_packet_digest": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_packets_build_external_test_manifest_and_block_training_use": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_validity_report_is_separate_from_internal_canary_metrics": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_fixture_loads_versioned_external_expert_packets": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_legacy_candidate_alias_and_absent_reference_keep_existing_scope": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_missing_external_expectations_fail_packet_without_touching_canary_metrics": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_packet_validation_rejects_training_or_poisoned_external_records": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator": 4,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_required_round_trip_needs_observation": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_absent_reverse_round_trip_cannot_be_credited_from_structural_agreement": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_comparison_reports_disagreement_when_ce_cosine_improve_but_semantics_regress": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_explicit_legacy_observation_aliases_retain_reported_only_scope": 3,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_explicit_metric_payload_accepts_delta_alias_and_fails_closed_on_missing": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_explicit_metrics_without_a_raw_pair_keep_the_existing_contract": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_explicit_perfect_scores_cannot_launder_covered_raw_pair_evidence": 2,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_explicit_scores_cannot_launder_uncovered_raw_pair_evidence": 2,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_legacy_round_trip_observations_are_separate_from_ir_facets": 3,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_one_sided_round_trip_evidence_is_not_a_complete_pair": 2,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_raw_family_payload_can_drive_hard_promotion_gate": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_raw_ir_pair_scores_semantic_equivalence_beyond_ids_and_order": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_raw_round_trip_requires_both_reported_nonempty_observations": 12,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_recognized_actor_change_still_blocks_legacy_raw_promotion": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_semantic_metrics_detect_obligation_graph_temporal_and_proof_delta": 1
+  },
+  "exact_two_Source_stage_commit_and_execution_joins": {
+    "scripts/ops/legal_ir/hammer_leanstral_rollout_gate.py": {
+      "bytes": 226977,
+      "full9": {
+        "st_ctime_ns": "1795683137187677917",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042638",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795683136872242903",
+        "st_nlink": "1",
+        "st_size": "226977",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "parent_blob": "da9d7603679ecc3bfc2f822a152d0f93147fa830",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/scripts/ops/legal_ir/hammer_leanstral_rollout_gate.py",
+      "sha256": "589227ba9499432d7cd8af68f1ca89ccbb84c77ccde4b2320ffb56c15a29319a",
+      "stage0_and_committed_blob": "e5c79d2fbbaab3c424b5299fd7c686f58ef4ea30"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py": {
+      "bytes": 28012,
+      "full9": {
+        "st_ctime_ns": "1795683137478680579",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042639",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795683136875677222",
+        "st_nlink": "1",
+        "st_size": "28012",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "parent_blob": "c7e6fbcf666312c32434cdeabc9c345cf52410a3",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py",
+      "sha256": "4384ceef5a8d2655d395aace8277572807a2c3db0714ab6783b4fd176e1f4e52",
+      "stage0_and_committed_blob": "a474854742d0f937d0980bd12a253cc7a9da8164"
+    }
+  },
+  "expert_fixture_preserved": {
+    "bytes": 5763,
+    "full9": {
+      "st_ctime_ns": "1795421816577014036",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "70026547",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795421816577014036",
+      "st_nlink": "1",
+      "st_size": "5763",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/fixtures/legal_ir/external_expert_benchmark.jsonl",
+    "sha256": "fb9a76552e2b938369d93d73a2a25aa76a963101cac96fd487a246bc43c54971"
+  },
+  "explicit_Root_normal_FF_release": {
+    "bytes": 1943,
+    "path": "/tmp/P8-nested-split-ordinary135-v457-publication-xUTcUYPE/Root-RELEASE-v457-exact-P8-ordinary135-three-FF.json",
+    "sha256": "ef4217bf09d0fc9dbc0ad463b5df33d2c79070ae67dda082fb98719fec0f96ed"
+  },
+  "five_normal_conftests_verified_both_phases": true,
+  "index_after": {
+    "accelerate": {
+      "bytes": 4469929,
+      "full9": {
+        "st_ctime_ns": "1795680824468466234",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "10928984",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795680824467466225",
+        "st_nlink": "1",
+        "st_size": "4469929",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/A21d7-private-sparse-companion-h7wM67B1/accelerate/.git/index",
+      "sha256": "c2ace2d9b4780bf2193d25cbb810e984193ad55e133b38fcffabd11ec391f331"
+    },
+    "datasets": {
+      "bytes": 6991149,
+      "full9": {
+        "st_ctime_ns": "1795683177581044656",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "68338235",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795683177579044638",
+        "st_nlink": "1",
+        "st_size": "6991149",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+      "sha256": "3e83b4eaecae0e2155c05749203184232e05672048cb33b641f842275a7c4c69"
+    },
+    "hallucinate": {
+      "bytes": 138750,
+      "full9": {
+        "st_ctime_ns": "1795683528785781503",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "69342837",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795683528785043993",
+        "st_nlink": "1",
+        "st_size": "138750",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/hallucinate/.git/index",
+      "sha256": "51c500f3c3c786ba2918c4124205fecccf17a335c76d42d11381e112bfc0727c"
+    },
+    "root": {
+      "bytes": 7262222,
+      "full9": {
+        "st_ctime_ns": "1795683531519066312",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "69387331",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795683531516066288",
+        "st_nlink": "1",
+        "st_size": "7262222",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/root/.git/index",
+      "sha256": "d4f3bdfe757edafae38d3a47a42080c99d107fc702018ad53f9726f06ece3fc7"
+    }
+  },
+  "index_before": {
+    "accelerate": {
+      "bytes": 4469929,
+      "full9": {
+        "st_ctime_ns": "1795680824468466234",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "10928984",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795680824467466225",
+        "st_nlink": "1",
+        "st_size": "4469929",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/A21d7-private-sparse-companion-h7wM67B1/accelerate/.git/index",
+      "sha256": "c2ace2d9b4780bf2193d25cbb810e984193ad55e133b38fcffabd11ec391f331"
+    },
+    "datasets": {
+      "bytes": 6991149,
+      "full9": {
+        "st_ctime_ns": "1795683177581044656",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "68338235",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795683177579044638",
+        "st_nlink": "1",
+        "st_size": "6991149",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+      "sha256": "3e83b4eaecae0e2155c05749203184232e05672048cb33b641f842275a7c4c69"
+    },
+    "hallucinate": {
+      "bytes": 138750,
+      "full9": {
+        "st_ctime_ns": "1795682577307516708",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "69342837",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795682577306726239",
+        "st_nlink": "1",
+        "st_size": "138750",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/hallucinate/.git/index",
+      "sha256": "6f4b63d3483bc22dfc59e4900be70fee941664997d99d6a464d5fcafc4bbc715"
+    },
+    "root": {
+      "bytes": 7262222,
+      "full9": {
+        "st_ctime_ns": "1795682580252745163",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "69387331",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795682580250745150",
+        "st_nlink": "1",
+        "st_size": "7262222",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/root/.git/index",
+      "sha256": "3a29e53315e3a86f8b05bd07016f2c2e5e41793c175feda3c486bd192488856a"
+    }
+  },
+  "installed_Lean_invoked": false,
+  "local_freeze": {
+    "bytes": 11753,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-P8-nested-split-exact2-local-freeze-v455.json",
+    "sha256": "a6e8fc2323685ae5ef83090d53f8cc51a2fc47609dc03db5462d4a66501dfbdd"
+  },
+  "new_test_Source_SQL_Native_CI_or_model_execution": false,
+  "no_A_publication_or_mutation": true,
+  "ordered_COLLECT_RUN_JUnit_exact": true,
+  "ordinary_runtime_subcohorts": {
+    "existing-CLI-descendants2": 2,
+    "in-process133": 133
+  },
+  "original_A_before_and_after_exact": {
+    "HEAD": "21d7c7b2436a895c9615d7ed9866c5c27b8bb43b",
+    "exact_three_unstaged_rows": [
+      {
+        "bytes": 10477,
+        "full9": {
+          "st_ctime_ns": "1795679996609094637",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69514358",
+          "st_mode": "33277",
+          "st_mtime_ns": "1795679996609094637",
+          "st_nlink": "1",
+          "st_size": "10477",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate/docs/guides/cli/README_CLI.md",
+        "relative_path": "docs/guides/cli/README_CLI.md",
+        "sha256": "5cd14467efcd779e27b007f7639c208270346f12d44573c3b3e710a0fa6f23e5"
+      },
+      {
+        "bytes": 73268,
+        "full9": {
+          "st_ctime_ns": "1795679996593094466",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69517233",
+          "st_mode": "33261",
+          "st_mtime_ns": "1795679996593094466",
+          "st_nlink": "1",
+          "st_size": "73268",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate/ipfs_accelerate_py/cli_integrations/openai_codex_cli_integration.py",
+        "relative_path": "ipfs_accelerate_py/cli_integrations/openai_codex_cli_integration.py",
+        "sha256": "039bb9269ee7f10a95c4227a9a67bbbd2ae7c260935c27d6076578e40a3f62fa"
+      },
+      {
+        "bytes": 123739,
+        "full9": {
+          "st_ctime_ns": "1795679996606094605",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69603142",
+          "st_mode": "33188",
+          "st_mtime_ns": "1795679996606094605",
+          "st_nlink": "1",
+          "st_size": "123739",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate/test/api/test_codex_thread_handoff.py",
+        "relative_path": "test/api/test_codex_thread_handoff.py",
+        "sha256": "b5caa78e61f49635a517c00ed8f9f27e56c22f18d9e11864bdd666f08976d9a2"
+      }
+    ],
+    "index": {
+      "bytes": 4412225,
+      "full9": {
+        "st_ctime_ns": "1795676233159923497",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "69342879",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795676233150923413",
+        "st_nlink": "1",
+        "st_size": "4412225",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate/.git/index",
+      "sha256": "e52c2c37977f4ee20f580e2fbc0fc8e4eac5ff47f18e08fb93980ad2b36a9961"
+    },
+    "status_sha256": "0813d78ba7a1bb3ca8b5312b0997680120a4497e017a3090a4ed4ab30fdcb10a",
+    "tree": "13a0a73c9845158f475bbbc3000c0dd68ff2da5f"
+  },
+  "original_A_preservation_reference": {
+    "bytes": 2365,
+    "path": "/tmp/Root-Phase6-deadline-attachment-existing-Source2-v446-zQU3p8aH/observed-existing-unpublished-A-worktree-preservation.json",
+    "sha256": "5268c7d30364dae578cf2ee119ceb129546226f87ab6cc018979eb98aa610f24"
+  },
+  "prior_Guide542": {
+    "bytes": 12963,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-guide542-four-doc-three-FF-publication-small-v454.json",
+    "sha256": "3c7462ea44774f70f6fca456c109440ad28d66f73b648e0631b4ec7b9e78be36"
+  },
+  "prior_v440_publication": {
+    "bytes": 19770,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-Phase8-benchmark-facets-exact7-ordinary119-three-FF-publication-v440.json",
+    "sha256": "f1765cfd9ac8e253d736916fd939584d064c29131353a5d0791b0fafbe497f55"
+  },
+  "pushes_in_actual_order": [
+    {
+      "after": "606e695eded7c4952db3c187f9ef8ab2553685e5",
+      "before": "a2bd146856e179d0c53f289407f4ef0c28307e3d",
+      "normal_fast_forward": true,
+      "porcelain": " \t606e695eded7c4952db3c187f9ef8ab2553685e5:refs/heads/main\ta2bd146856..606e695ede",
+      "push_returncode": 0,
+      "repository": "datasets"
+    },
+    {
+      "after": "e83267ab0726e97d4461b81237140028ae9c3dca",
+      "before": "ecb30edd861678ed7aacbad877d5f756ad4498d2",
+      "normal_fast_forward": true,
+      "porcelain": " \te83267ab0726e97d4461b81237140028ae9c3dca:refs/heads/main\tecb30ed..e83267a",
+      "push_returncode": 0,
+      "repository": "hallucinate"
+    },
+    {
+      "after": "8d337abc734fed4771db264974bbe8be9ce65b42",
+      "before": "acc9467309c456edc1990ed303153fa4ca09136f",
+      "normal_fast_forward": true,
+      "porcelain": " \t8d337abc734fed4771db264974bbe8be9ce65b42:refs/heads/main\tacc9467309..8d337abc73",
+      "push_returncode": 0,
+      "repository": "root"
+    }
+  ],
+  "qualification": {
+    "bytes": 77246,
+    "path": "/tmp/Root-Phase8-nested-split-existing-ordinary135-v457-7arcunjg/actual-Phase8-nested-split-exact2-ordinary135-closed-small-v457.json",
+    "sha256": "da68b003ba0289ffaa42dcbfb07e7ff33d79012d47eab633fdb2af956496243c"
+  },
+  "raw_JUnit": {
+    "bytes": 27059,
+    "path": "/tmp/Root-Phase8-nested-split-existing-ordinary135-v457-7arcunjg/actual-output/Phase8-external-validity-through-compiler-ordinary135-run-result0-output1.bin",
+    "sha256": "93f72edc0cd69df461aec8722560131b14147a755ecd42d319f6b933b4565be7"
+  },
+  "real_CLI_fixture_cases": [
+    "tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_gate_cli_writes_decision_and_report",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py::test_external_validity_cli_writes_decision_and_report"
+  ],
+  "repositories": {
+    "accelerate": {
+      "HEAD": "21d7c7b2436a895c9615d7ed9866c5c27b8bb43b",
+      "clean_checkout_is_validation_companion": true,
+      "clean_worktree_and_index": true,
+      "gitlinks": {},
+      "origin": "https://github.com/endomorphosis/ipfs_accelerate_py",
+      "origin_main": "21d7c7b2436a895c9615d7ed9866c5c27b8bb43b",
+      "tree": "13a0a73c9845158f475bbbc3000c0dd68ff2da5f"
+    },
+    "datasets": {
+      "HEAD": "606e695eded7c4952db3c187f9ef8ab2553685e5",
+      "clean_worktree_and_index": true,
+      "gitlinks": {},
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
+      "origin_main": "606e695eded7c4952db3c187f9ef8ab2553685e5",
+      "tree": "8f0f3719ffaabe68bcddc3fe99ee26355e82fc86"
+    },
+    "hallucinate": {
+      "HEAD": "e83267ab0726e97d4461b81237140028ae9c3dca",
+      "clean_worktree_and_index": true,
+      "gitlinks": {
+        "ipfs_datasets_py": "606e695eded7c4952db3c187f9ef8ab2553685e5"
+      },
+      "origin": "https://github.com/endomorphosis/hallucinate_app",
+      "origin_main": "e83267ab0726e97d4461b81237140028ae9c3dca",
+      "tree": "f9dc0ba3b304a411ba6df8c8d3a67a9f6ea63027"
+    },
+    "root": {
+      "HEAD": "8d337abc734fed4771db264974bbe8be9ce65b42",
+      "clean_worktree_and_index": true,
+      "gitlinks": {
+        "external/ipfs_datasets": "606e695eded7c4952db3c187f9ef8ab2553685e5",
+        "hallucinate_app": "e83267ab0726e97d4461b81237140028ae9c3dca"
+      },
+      "origin": "https://github.com/endomorphosis/lift_coding",
+      "origin_main": "8d337abc734fed4771db264974bbe8be9ce65b42",
+      "tree": "5e71b6058ac55b1ae9d947724a68af099f7f4bb5"
+    }
+  },
+  "sampled_descendants_by_phase": {
+    "collect": [],
+    "run": [
+      {
+        "birth_ticks": 470138766,
+        "parent_pid": 3465779,
+        "pid": 3465819,
+        "process_group_id": 3465779,
+        "session_id": 3465779
+      },
+      {
+        "birth_ticks": 470138775,
+        "parent_pid": 3465779,
+        "pid": 3465820,
+        "process_group_id": 3465779,
+        "session_id": 3465779
+      }
+    ]
+  },
+  "schema": "actual-P8-nested-split-exact2-ordinary135-child-first-FF/v1",
+  "scoped_cohorts": {
+    "nested_replay_and_split_new16": 16,
+    "v440_retained119": 119
+  },
+  "terminal_returncode": 0
+}

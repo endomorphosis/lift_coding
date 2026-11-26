@@ -1,0 +1,127 @@
+
+"""Fixture payload for the existing R2 owner; exports an unreviewed custody snapshot."""
+EXPECTED_OWNER_SHA = '32800bca0662830409de0622e16902bd458cf6d47c821fc7079cdf4ba9ddc9ad'
+
+from pathlib import Path
+import hashlib
+import json
+import os
+import stat
+import sys
+
+FILES = frozenset(("manifest.json", "snapshot.json", "nodes.parquet", "edges.parquet"))
+FLAGS = ("admitted", "formalized", "source_semantics_verified", "external_references_verified")
+SHA = lambda raw: hashlib.sha256(raw).hexdigest()
+WORK = Path(__file__).resolve(strict=True).parent
+PROJECT = WORK / "project"
+
+def stable(path, max_bytes):
+    with os.fdopen(os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC), "rb") as f:
+        opening = os.fstat(f.fileno())
+        fields = ("st_dev", "st_ino", "st_mode", "st_nlink", "st_uid", "st_gid", "st_size", "st_mtime_ns", "st_ctime_ns")
+        if not stat.S_ISREG(opening.st_mode) or opening.st_nlink != 1 or not 0 < opening.st_size <= max_bytes:
+            raise RuntimeError("unexpected input file size or type")
+        data = f.read(max_bytes + 1)
+        closing = os.fstat(f.fileno())
+        current = path.lstat()
+        if any(getattr(s, k) != getattr(opening, k) for s in (closing, current) for k in fields):
+            raise RuntimeError("file changed during readback")
+    if len(data) != opening.st_size:
+        raise RuntimeError("short or changed read")
+    return data
+
+def payload_ref(path):
+    data = stable(path, 128 * 1024)
+    return {"bytes": len(data), "sha256": SHA(data)}
+
+def forbid_external(event, args):
+    if event.startswith(("socket.", "subprocess.")) or event in {"os.system", "os.fork", "os.forkpty", "os.exec", "os.posix_spawn"}:
+        raise PermissionError("candidate export fixture cannot launch or reach external services")
+    if event == "import" and args[0].split(".", 1)[0] in {"torch", "tensorflow", "transformers", "huggingface_hub", "jax"}:
+        raise ImportError("model runtimes are outside this candidate fixture")
+
+if not sys.dont_write_bytecode or Path.cwd().resolve() != WORK:
+    raise RuntimeError("existing SDK workdir and -B are required")
+sys.addaudithook(forbid_external)
+
+receipt_raw = stable(WORK / "candidate-custody-receipt.json", 25000)
+if SHA(receipt_raw) != "5e532950c84dc4d84860d09ab4d39b6152025fbfc7a9d2f06df504d49368e91c":
+    raise RuntimeError("candidate custody receipt pin differs")
+receipt = json.loads(receipt_raw)
+raw = stable(WORK / "candidate.json", 1024 * 1024)
+if len(raw) != 766660 or SHA(raw) != "1e56eca9e6ab6a0f33f2296ba342f5d78a29d3e1bee301f637df1ab5c49809c9":
+    raise RuntimeError("candidate input pin differs")
+if receipt["status"] != "exact_documentary_candidate_custody_restored" or not receipt["restored_full_authored_AST"]:
+    raise RuntimeError("existing completed independent AST readback required")
+if receipt["current_custody_candidate"]["sha256"] != SHA(raw):
+    raise RuntimeError("candidate differs from existing custody receipt")
+
+sys.path.insert(0, str(PROJECT))
+from ipfs_datasets_py.logic.autoformal import corpus_contracts, corpus_graph_exchange
+from ipfs_datasets_py.utils.cid_utils import canonical_dag_json_bytes
+
+expected = PROJECT / "ipfs_datasets_py/logic/autoformal/corpus_graph_exchange.py"
+if Path(corpus_graph_exchange.__spec__.origin).resolve(strict=True) != expected:
+    raise RuntimeError("existing graph exchange owner loaded from wrong origin")
+if SHA(stable(expected, 100 * 1024)) != EXPECTED_OWNER_SHA:
+    raise RuntimeError("existing graph exchange owner differs from exact Git export")
+candidate = corpus_contracts.load_record_bytes(raw, expected_sha256=SHA(raw))
+graph = candidate["graph"]
+if graph["record_cid"] != receipt["custody_snapshot_cid"] or any(graph[k] is not False for k in FLAGS if k in graph):
+    raise RuntimeError("candidate snapshot differs from receipt or asserts authority")
+if any(candidate[k] is not False for k in receipt["custody_flags"]):
+    raise RuntimeError("candidate authority must remain false")
+if (len(graph["nodes"]), len(graph["edges"])) != (6, 5):
+    raise RuntimeError("candidate snapshot population differs")
+if SHA(candidate["proposal_record"]["proposal_json"].encode()) != receipt["old_semantic_proposal"]["sha256"]:
+    raise RuntimeError("original proposal custody differs")
+
+bundle = WORK / "bundle"
+manifest = corpus_graph_exchange.write_graph_bundle(graph, bundle)
+pin = SHA(canonical_dag_json_bytes(manifest))
+positive = corpus_graph_exchange.load_graph_bundle(bundle, expected_manifest_sha256=pin)
+if positive != {"manifest": manifest, "snapshot": graph} or any(manifest[k] is not False for k in FLAGS):
+    raise RuntimeError("real persisted bundle differed or asserted authority")
+if {p.name for p in bundle.iterdir()} != FILES:
+    raise RuntimeError("bundle files differ")
+before = {name: payload_ref(bundle/name) for name in sorted(FILES)}
+bad = WORK / "same-length-tamper"
+bad.mkdir(mode=0o700, exist_ok=False)
+tamper_pin = None
+for name in sorted(FILES):
+    data = stable(bundle/name, 128*1024)
+    if name == "nodes.parquet":
+        offset = len(data)//2
+        data = data[:offset]+bytes([data[offset]^1])+data[offset+1:]
+        tamper_pin = SHA(data)
+    with (bad/name).open("xb") as f:
+        f.write(data)
+        f.flush()
+        os.fsync(f.fileno())
+try:
+    corpus_graph_exchange.load_graph_bundle(bad, expected_manifest_sha256=pin)
+except corpus_contracts.CorpusContractError as error:
+    if str(error) != "bundle file SHA256 differs: nodes.parquet":
+        raise
+    refusal = str(error)
+else:
+    raise RuntimeError("same-length changed Parquet bytes accepted")
+if before != {name: payload_ref(bundle/name) for name in sorted(FILES)}:
+    raise RuntimeError("original bundle changed during independent tamper check")
+if corpus_graph_exchange.load_graph_bundle(bundle, expected_manifest_sha256=pin) != positive:
+    raise RuntimeError("original bundle no longer passes readback")
+import pyarrow
+if pyarrow.__version__ != "25.0.1":
+    raise RuntimeError("expected already installed PyArrow 25.0.1")
+result = dict(schema="private-section-7213-candidate-Parquet-exchange-observation/v1",
+              candidate_companion_sha256=SHA(raw), custody_receipt_sha256=SHA(receipt_raw),
+              graph_cid=graph["record_cid"], node_count=6, edge_count=5,
+              manifest_sha256=pin, files=before, pyarrow_version=pyarrow.__version__,
+              graph_exchange_owner_sha256=EXPECTED_OWNER_SHA,
+              negative=dict(file="nodes.parquet",same_length=True,changed_sha256=tamper_pin,refusal=refusal),
+              original_bundle_readback_exact=True, reviewed_meaning=False, admitted=False)
+with (WORK/"exchange-observation.json").open("x", encoding="utf-8") as f:
+    json.dump(result,f,sort_keys=True,indent=2)
+    f.write(chr(10))
+    f.flush()
+    os.fsync(f.fileno())

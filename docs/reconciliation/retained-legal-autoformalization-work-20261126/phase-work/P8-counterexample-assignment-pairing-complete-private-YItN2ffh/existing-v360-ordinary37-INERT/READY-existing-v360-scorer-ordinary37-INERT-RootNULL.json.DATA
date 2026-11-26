@@ -1,0 +1,187 @@
+{
+  "actual_ordinary_results": null,
+  "actual_pure_factory_join": {
+    "SDK_calls": 0,
+    "bootstrap_literals_match": true,
+    "collect": true,
+    "duplicate_refused": true,
+    "foreign_refused": true,
+    "run37": true,
+    "short_refused": true
+  },
+  "adapted_controls": {
+    "bootstrap": {
+      "bytes": 45480,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-counterexample-assignment-pairing-complete-private-YItN2ffh/existing-v360-ordinary37-INERT/existing-v360-ordinary37-bootstrap.INERT.py.DATA",
+      "sha256": "6424b6cc396bce4c1e4e593359f241f5a483c5432bc0719db025cce3b1abb29b"
+    },
+    "factory": {
+      "bytes": 3366,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-counterexample-assignment-pairing-complete-private-YItN2ffh/existing-v360-ordinary37-INERT/existing-v360-ordinary37-factory.INERT.py.DATA",
+      "sha256": "c6602fddb35e8723db98306f6008dd69507262d88f9fc0d51e612d609e0de88d"
+    },
+    "operator": {
+      "bytes": 56676,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-counterexample-assignment-pairing-complete-private-YItN2ffh/existing-v360-ordinary37-INERT/existing-v360-ordinary37-operator.INERT.py.DATA",
+      "sha256": "d2a46be8362390250638b06735b622e63347d24236ddc78de885ca212b5a0d26"
+    }
+  },
+  "candidate": {
+    "bytes": 23561,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-counterexample-assignment-pairing-complete-private-YItN2ffh/SEALED-legacy-counterexample-assignment-outcome-exact-two-v02.json",
+    "sha256": "2ebd1cfe3721ea45dc028a95f641e94e8262393adb486b2bbd3f3d16dc7e74a4"
+  },
+  "current_Guide570_matches_private_before_rows": true,
+  "existing_Source2": {
+    "bytes": 3483,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-counterexample-assignment-pairing-complete-private-YItN2ffh/existing-Source2-Guide570-INERT/READY-existing-Guide570-Phase8-Source2-exact-two-NONSELECTED.json",
+    "sha256": "863fcd209ad0abdd73502a2bdec78000f804a4d4f9fb8823aa72abdd9f25e827"
+  },
+  "group": "Phase8-reported-counterexample-assignment-ordinary37",
+  "historic_normal_pytest_ini_and_five_conftests": {
+    "bytes": 4537,
+    "path": "/tmp/Root-existing-P8-scorer-depth-ordinary23-v360-l58nsgfh/actual-frozen-scorer-normal-config-and-fixture-roles.json",
+    "sha256": "2d06faeb9fb6ca540622a90387f53f2a93e623fb5a2896b8007e533174ad9ff7"
+  },
+  "literal_membership_roster": {
+    "bytes": 11077,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-counterexample-assignment-pairing-complete-private-YItN2ffh/existing-v360-ordinary37-INERT/independent-literal37-roster-DATA.json",
+    "sha256": "eae0511a03bf8994663a6140d9fadc56ac2e58a850936247adecfd89423a3c08"
+  },
+  "next_existing_owner_input": "After exact Source2 and local freeze, bind a current Source READ of two frozen posts and the exact D index, retain or refresh all current guard rows; separately bind actual resource and authority.",
+  "ordinary_owning_selection": {
+    "expected_function_case_counts": {
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_comparison_reports_disagreement_when_ce_cosine_improve_but_semantics_regress": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_counterexample_scores_bind_assignments_to_reported_outcomes": 5,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_explicit_metric_payload_accepts_delta_alias_and_fails_closed_on_missing": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_explicit_perfect_scores_cannot_launder_covered_raw_pair_evidence": 2,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_explicit_scores_cannot_launder_uncovered_raw_pair_evidence": 2,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_malformed_raw_counterexample_cannot_supply_explicit_credit": 2,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_one_sided_round_trip_evidence_is_not_a_complete_pair": 2,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_raw_family_payload_can_drive_hard_promotion_gate": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_raw_ir_pair_scores_semantic_equivalence_beyond_ids_and_order": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_raw_round_trip_requires_both_reported_nonempty_observations": 12,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_recognized_actor_change_still_blocks_legacy_raw_promotion": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_semantic_metrics_detect_obligation_graph_temporal_and_proof_delta": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_unknown_legacy_shapes_are_diagnostic_and_cannot_claim_typed_semantics": 6
+    },
+    "function_count": 13,
+    "function_selectors": [
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_raw_ir_pair_scores_semantic_equivalence_beyond_ids_and_order",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_semantic_metrics_detect_obligation_graph_temporal_and_proof_delta",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_explicit_metric_payload_accepts_delta_alias_and_fails_closed_on_missing",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_comparison_reports_disagreement_when_ce_cosine_improve_but_semantics_regress",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_raw_family_payload_can_drive_hard_promotion_gate",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_raw_round_trip_requires_both_reported_nonempty_observations",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_one_sided_round_trip_evidence_is_not_a_complete_pair",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_unknown_legacy_shapes_are_diagnostic_and_cannot_claim_typed_semantics",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_recognized_actor_change_still_blocks_legacy_raw_promotion",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_explicit_scores_cannot_launder_uncovered_raw_pair_evidence",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_explicit_perfect_scores_cannot_launder_covered_raw_pair_evidence",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_counterexample_scores_bind_assignments_to_reported_outcomes",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_malformed_raw_counterexample_cannot_supply_explicit_credit"
+    ],
+    "independent_literal37_roster_reference": {
+      "bytes": 11077,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-counterexample-assignment-pairing-complete-private-YItN2ffh/existing-v360-ordinary37-INERT/independent-literal37-roster-DATA.json",
+      "sha256": "eae0511a03bf8994663a6140d9fadc56ac2e58a850936247adecfd89423a3c08"
+    },
+    "literal_expected_cases": 37,
+    "literal_expected_nodeids": [
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_raw_ir_pair_scores_semantic_equivalence_beyond_ids_and_order",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_semantic_metrics_detect_obligation_graph_temporal_and_proof_delta",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_explicit_metric_payload_accepts_delta_alias_and_fails_closed_on_missing",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_comparison_reports_disagreement_when_ce_cosine_improve_but_semantics_regress",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_raw_family_payload_can_drive_hard_promotion_gate",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_raw_round_trip_requires_both_reported_nonempty_observations[absent]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_raw_round_trip_requires_both_reported_nonempty_observations[empty]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_raw_round_trip_requires_both_reported_nonempty_observations[scalar]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_raw_round_trip_requires_both_reported_nonempty_observations[false]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_raw_round_trip_requires_both_reported_nonempty_observations[only_decompiled]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_raw_round_trip_requires_both_reported_nonempty_observations[only_recompiled]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_raw_round_trip_requires_both_reported_nonempty_observations[blank_decompiled]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_raw_round_trip_requires_both_reported_nonempty_observations[blank_recompiled]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_raw_round_trip_requires_both_reported_nonempty_observations[nested_result]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_raw_round_trip_requires_both_reported_nonempty_observations[extra_field]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_raw_round_trip_requires_both_reported_nonempty_observations[ambiguous_source]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_raw_round_trip_requires_both_reported_nonempty_observations[ambiguous_container]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_one_sided_round_trip_evidence_is_not_a_complete_pair[reference]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_one_sided_round_trip_evidence_is_not_a_complete_pair[candidate]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_unknown_legacy_shapes_are_diagnostic_and_cannot_claim_typed_semantics[unknown_root]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_unknown_legacy_shapes_are_diagnostic_and_cannot_claim_typed_semantics[unknown_rule]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_unknown_legacy_shapes_are_diagnostic_and_cannot_claim_typed_semantics[nested_condition]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_unknown_legacy_shapes_are_diagnostic_and_cannot_claim_typed_semantics[empty]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_unknown_legacy_shapes_are_diagnostic_and_cannot_claim_typed_semantics[sequence]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_unknown_legacy_shapes_are_diagnostic_and_cannot_claim_typed_semantics[text]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_recognized_actor_change_still_blocks_legacy_raw_promotion",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_explicit_scores_cannot_launder_uncovered_raw_pair_evidence[missing_reverse]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_explicit_scores_cannot_launder_uncovered_raw_pair_evidence[unknown_arguments]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_explicit_perfect_scores_cannot_launder_covered_raw_pair_evidence[actor]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_explicit_perfect_scores_cannot_launder_covered_raw_pair_evidence[proof_obligation_ids]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_counterexample_scores_bind_assignments_to_reported_outcomes[None]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_counterexample_scores_bind_assignments_to_reported_outcomes[swapped_outcomes]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_counterexample_scores_bind_assignments_to_reported_outcomes[assignment_value_type]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_counterexample_scores_bind_assignments_to_reported_outcomes[blank_outcome]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_counterexample_scores_bind_assignments_to_reported_outcomes[nested_assignment]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_malformed_raw_counterexample_cannot_supply_explicit_credit[scenario0]",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py::test_malformed_raw_counterexample_cannot_supply_explicit_credit[scenario1]"
+    ],
+    "owning_files": [
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py"
+    ]
+  },
+  "pending_Source2_write_local_freeze_fresh_Source_READ_current_clock_SDK_lease_IO_effect_output": null,
+  "present_Guide570_config_matches_all_six_prior_config_full9_SHA_bytes": true,
+  "prior_controls": {
+    "bytes": 9292,
+    "path": "/tmp/P8-scorer-retrieval-depth-ordinary23-existing-R2-INERT-j3gfjl4S/READY-P8-scorer-retrieval-depth-ordinary23-existing-R2-INERT-RootNULL.json",
+    "sha256": "d322d062e010bbd457b5a5df8bb7fb7456e025a83915dea3bd65f03ab79b5c5e"
+  },
+  "prior_ordinary23_terminal": {
+    "bytes": 10045,
+    "path": "/tmp/Root-existing-P8-scorer-depth-ordinary23-v360-l58nsgfh/actual-scorer-ordinary23-closed-small-v360.json",
+    "sha256": "64b4ac03e48fbabaafb0b98f331dcebbee95406527fd4f3ff9a84a89c5effdc9"
+  },
+  "role_rows": {
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_family_evaluator": {
+      "expected_bytes": 42137,
+      "expected_sha256": "3b6cd3a6fade78fed275a478f010329e5d030a250b914c4b46ab0f0d77b9d5ab",
+      "fresh_Source_role_metadata": null,
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py",
+      "role": "maintained_compile_observation"
+    },
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_semantic_metrics": {
+      "expected_bytes": 113516,
+      "expected_sha256": "1b1c2d37565963ce1746fcac33bd11a1cd154b7ebd5fd82fb2e8e1860bcffcfd",
+      "fresh_Source_role_metadata": null,
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_semantic_metrics.py",
+      "role": "maintained_compile_observation"
+    },
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.snapshot_evaluator": {
+      "expected_bytes": 38995,
+      "expected_sha256": "1aa122f14dc52a4a5cb161bc2c40862334f7b216210bfcdb42fd5989b69761e6",
+      "fresh_Source_role_metadata": null,
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/snapshot_evaluator.py",
+      "role": "required_import_guard_only"
+    },
+    "tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_semantic_metrics": {
+      "expected_bytes": 51124,
+      "expected_sha256": "433dd482449786cf00c96065fbaf179cf11c3c9a9c1d9848b54a47f649b27fba",
+      "fresh_Source_role_metadata": null,
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_semantic_metrics.py",
+      "role": "selected_owning_test_normal_rewrite"
+    }
+  },
+  "schema": "existing-v360-scorer-ordinary37-reported-counterexample-qualification-inert/v1",
+  "scope": "Existing scoring and reported counterexample comparison only; software evidence, no real scenario execution or legal review.",
+  "selected_test_assertion_rewrite_policy": {
+    "cache_policy": "bypass-read-only-for-selected-owning-test",
+    "required_compile_and_execution_witness": true,
+    "rewrite_policy": "normal-pytest-assertion-rewrite",
+    "schema": "selected-test-normal-pytest-source-AST-code-observation/v1",
+    "selected_test_binding_names": [
+      "tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_semantic_metrics"
+    ],
+    "unobserved_or_cached_only_route": "REFUSE"
+  }
+}

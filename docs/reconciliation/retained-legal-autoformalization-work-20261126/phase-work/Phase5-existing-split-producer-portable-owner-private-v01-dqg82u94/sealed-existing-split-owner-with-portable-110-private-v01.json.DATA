@@ -1,0 +1,110 @@
+{
+  "Git_preimage_blob_joins": {
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py": "ad21acae2a3420e8c560fd26006504fcfb6849df",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py": "6f7d2c26d617b3224f665f9319979398b23ada05"
+  },
+  "added_portable_test_methods": [
+    "test_opt_in_grouped_campaign_keeps_near_duplicate_lineages_together",
+    "test_unicode_campaign_groups_japanese_without_linking_unrelated_shared_digits"
+  ],
+  "all_108_retained_membership_case_definitions_preserved": true,
+  "current_membership_only_variant_preserved": true,
+  "elapsed_seconds": 0.9991480885073543,
+  "exact_two_targets": {
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py": {
+      "after": {
+        "bytes": 61991,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-split-producer-portable-owner-private-v01-dqg82u94/after/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py",
+        "sha256": "e652c79842323fec40f3e5d8f6a23620c9b4ce4a2d1043c597176a13de3f4acd"
+      },
+      "before": {
+        "bytes": 58133,
+        "path": "/tmp/decoder-training-split-membership-fix-private-v01/before/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py",
+        "sha256": "7963ebcb291c0476f0cccc4123e28a519187970f02dbd9059fce78e661287c3c"
+      },
+      "diff": {
+        "bytes": 11155,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-split-producer-portable-owner-private-v01-dqg82u94/owner.diff",
+        "sha256": "6dd351c04bb131f97f7992fcd6c25bff49fce6a6d2e93c8168ee06d5437c9923"
+      }
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py": {
+      "after": {
+        "bytes": 15510,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-split-producer-portable-owner-private-v01-dqg82u94/after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py",
+        "sha256": "ff6d5189c29527b9c280c3b8372fb9d3f37ad30d3f097691f5f1957b358708be"
+      },
+      "before": {
+        "bytes": 9788,
+        "path": "/tmp/decoder-training-split-membership-fix-private-v01/before/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py",
+        "sha256": "edbe8140db1ce6c96a521a67beb5eac397c4a9f093dbea7fa16e7995c44151e0"
+      },
+      "diff": {
+        "bytes": 6396,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-split-producer-portable-owner-private-v01-dqg82u94/owning-test.diff",
+        "sha256": "bf525b3462398a4b2d0f703dcd81f593f948b9acf511d97c27427bc6c64ca042"
+      }
+    }
+  },
+  "historical_Unicode_split_input": {
+    "bytes": 7896,
+    "path": "/tmp/decoder-training-unicode-campaign-split-private-v01-3SZARfWx/descriptor.json",
+    "sha256": "0693fb456c9726b26c148d61687d8c9100f773077e4a447cc20eb655c0166b99"
+  },
+  "historical_membership_input": {
+    "bytes": 5724,
+    "path": "/tmp/decoder-training-split-membership-fix-private-v01/descriptor.json",
+    "sha256": "a47e929c0ab19a47d290c9ad1bfdc483269202ff620a5068c13e0cddd05ca93b"
+  },
+  "observed_D_HEAD": "68e3739ffd64e54016133d3d1e0304c6302da1b1",
+  "observed_D_tree": "754fd9f796439076c1bb71e14ec6430f505f3b99",
+  "retained_exact_runner_and_config": [
+    {
+      "bytes": 910,
+      "path": "/tmp/decoder-training-split-membership-fix-private-v01/run_membership_tests.py",
+      "sha256": "b95a1fd004f6731dd2d76fc0572bb10232a2a83071a58b632c5483aab956401c"
+    },
+    {
+      "bytes": 19,
+      "path": "/tmp/decoder-training-split-membership-fix-private-v01/pytest.ini",
+      "sha256": "713f986ee48be06ad4bff2a700d39514a9f69e34b3547af52366c0a274e30e5b"
+    }
+  ],
+  "schema": "phase5-existing-split-producer-and-portable-owning-test-private/v1",
+  "scope": "Existing split owner and ordinary test modules, private selected tests without real statutory rows, evaluation admission, model activity, canonical Source or Git mutation. Two new tests exercise opt-in profile behaviour; baseline misses those features plus the 11 previously reproduced membership cases.",
+  "separate_replay_owner_adoption_required_for_actual_workflow": true,
+  "tests": {
+    "after": {
+      "logs": {
+        "stderr": {
+          "bytes": 0,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-split-producer-portable-owner-private-v01-dqg82u94/after.stderr.DATA",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 180,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-split-producer-portable-owner-private-v01-dqg82u94/after.stdout.DATA",
+          "sha256": "a0f7d8c7d55c2b81aaae85eb635e8d69420d1b1b97378709fccb1fd65743e10a"
+        }
+      },
+      "rc": 0,
+      "summary": "110 passed in 0.14s"
+    },
+    "before": {
+      "logs": {
+        "stderr": {
+          "bytes": 0,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-split-producer-portable-owner-private-v01-dqg82u94/before.stderr.DATA",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 30910,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-split-producer-portable-owner-private-v01-dqg82u94/before.stdout.DATA",
+          "sha256": "2b057421ea2284308e9b7c29dd97ca64c6e8e79e224b146f6ffab800d72822a9"
+        }
+      },
+      "rc": 1,
+      "summary": "13 failed, 97 passed in 0.24s"
+    }
+  }
+}

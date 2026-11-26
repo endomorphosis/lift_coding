@@ -1,0 +1,127 @@
+{
+  "actual": {
+    "COLLECT": null,
+    "Git_freeze": null,
+    "IO": null,
+    "RUN": null,
+    "SDK": null,
+    "Source": null,
+    "authority": null,
+    "clock": null
+  },
+  "binding_needs": [
+    "Retain the old V4 nine cases including the two child CLI cases. Current collection decides actual run order.",
+    "Refresh the three product/test/CLI preimages, exact post and frozen index, and source authority before binding.",
+    "Qualification import is new to the opt-in path. Verify the corpus_qualification owner and source witness plus the existing V3 retained fixture/Native/Shared Lake modules and actual pytest capture before use.",
+    "Do not infer the full V3 import closure or current launch suitability from the earlier V4 ordinary9."
+  ],
+  "expected_candidate_case_inventory": [
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_complete_source_use_whole_norm_project_is_independently_replayed",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_actual_explicit_cli_is_source_only[False]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_actual_explicit_cli_is_source_only[True]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_cli_refuses_native_selection",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_current_replay_refuses_genuinely_revoked_reviewer",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_refuses_hf_graph_different_from_independently_reviewed_graph[node-companion]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_refuses_hf_graph_different_from_independently_reviewed_graph[edge-identity]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_refuses_hf_graph_different_from_independently_reviewed_graph[flat-edge-endpoint]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_reviewed_hf_graph_allows_optional_legal_id",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v3_existing_release_projects_declared_graph_eligibility",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v3_retained_native_keeps_conditional_evidence_on_its_graph",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v3_eligibility_requires_current_replay_of_the_exact_graph",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_cli_projects_current_graph_eligibility_without_native_credit",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_declared_eligibility_keeps_native_refusal",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_closure_cli_refuses_declared_eligibility_on_other_profiles"
+  ],
+  "expected_case_vector": [
+    1,
+    2,
+    1,
+    1,
+    3,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "expected_function_counts": {
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_closure_cli_refuses_declared_eligibility_on_other_profiles": 1,
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_actual_explicit_cli_is_source_only": 2,
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_cli_refuses_native_selection": 1,
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v3_eligibility_requires_current_replay_of_the_exact_graph": 1,
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v3_existing_release_projects_declared_graph_eligibility": 1,
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v3_retained_native_keeps_conditional_evidence_on_its_graph": 1,
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_cli_projects_current_graph_eligibility_without_native_credit": 1,
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_complete_source_use_whole_norm_project_is_independently_replayed": 1,
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_current_replay_refuses_genuinely_revoked_reviewer": 1,
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_declared_eligibility_keeps_native_refusal": 1,
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_refuses_hf_graph_different_from_independently_reviewed_graph": 3,
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_reviewed_hf_graph_allows_optional_legal_id": 1
+  },
+  "expected_ordered_function_selectors": [
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_complete_source_use_whole_norm_project_is_independently_replayed",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_actual_explicit_cli_is_source_only",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_cli_refuses_native_selection",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_current_replay_refuses_genuinely_revoked_reviewer",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_refuses_hf_graph_different_from_independently_reviewed_graph",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_reviewed_hf_graph_allows_optional_legal_id",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v3_existing_release_projects_declared_graph_eligibility",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v3_retained_native_keeps_conditional_evidence_on_its_graph",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v3_eligibility_requires_current_replay_of_the_exact_graph",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_cli_projects_current_graph_eligibility_without_native_credit",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_declared_eligibility_keeps_native_refusal",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_closure_cli_refuses_declared_eligibility_on_other_profiles"
+  ],
+  "expected_scope": "Fictional source/review/graph fixture, conditional retained authored observation. No actual Lean, statutory, training, release or model claim.",
+  "historical_v331_profile": {
+    "bootstrap": {
+      "bytes": 47530,
+      "path": "/tmp/Root-P8-V4-reviewed-graph-existing-ordinary9-v331-l4ls_bm7/Root-selected-bootstrap.py",
+      "sha256": "89170c98147ed7d4805dfecb03d1698e3d9a19523a6639729e51f6d36c9df855"
+    },
+    "manifest": {
+      "bytes": 6139,
+      "path": "/tmp/Root-P8-V4-reviewed-graph-existing-ordinary9-v331-l4ls_bm7/Root-selected-ordinary9-manifest.json",
+      "sha256": "38d2ec2910d814249fa19ac5c4d71559f4c6f93bb397dbf190f5dc8de76636f6"
+    },
+    "operator": {
+      "bytes": 70696,
+      "path": "/tmp/Root-P8-V4-reviewed-graph-existing-ordinary9-v331-l4ls_bm7/Root-selected-existing-ordinary9-operator.py",
+      "sha256": "c6bdf4bf57302218039fa9b09d16ff8ba47f3f66f17873ce1ab84c2f524de453"
+    }
+  },
+  "new_case_ids": [
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v3_existing_release_projects_declared_graph_eligibility",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v3_retained_native_keeps_conditional_evidence_on_its_graph",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v3_eligibility_requires_current_replay_of_the_exact_graph",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_cli_projects_current_graph_eligibility_without_native_credit",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_declared_eligibility_keeps_native_refusal",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_closure_cli_refuses_declared_eligibility_on_other_profiles"
+  ],
+  "new_exact_test_sha256": "ac7ea179761aae0a0972bd93b4bf5cc30b16fcba79ef6c50f74c8cfa80b14098",
+  "retained_case_ids": [
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_complete_source_use_whole_norm_project_is_independently_replayed",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_actual_explicit_cli_is_source_only[False]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_actual_explicit_cli_is_source_only[True]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_closure_v4_cli_refuses_native_selection",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_current_replay_refuses_genuinely_revoked_reviewer",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_refuses_hf_graph_different_from_independently_reviewed_graph[node-companion]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_refuses_hf_graph_different_from_independently_reviewed_graph[edge-identity]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_refuses_hf_graph_different_from_independently_reviewed_graph[flat-edge-endpoint]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_reviewed_hf_graph_allows_optional_legal_id"
+  ],
+  "saved_v331_ordinary9": {
+    "bytes": 3479,
+    "path": "/tmp/Root-P8-V4-reviewed-graph-existing-ordinary9-v331-l4ls_bm7/Root-P8-V4-reviewed-graph-package-ordinary9-qualified-small-v331.json",
+    "sha256": "70eb12e25edfad5852c9c1314c92d7779e5469716633d3bd69d32dd29a43729b"
+  },
+  "saved_v331_raw_JUnit": {
+    "bytes": 1801,
+    "logical_name": "junit.xml",
+    "path": "/tmp/Root-P8-V4-reviewed-graph-existing-ordinary9-v331-l4ls_bm7/actual-output/corpus-release-public-v4-reviewed-graph-ordinary9-run-result0-output1.bin",
+    "sha256": "695d216743ddd87fb68263460a94163d85ae06b05044f4a1452cb464076d2ae8"
+  },
+  "schema": "Phase2-existing-physical-release-eligibility-ordinary15-roster-data/v1"
+}

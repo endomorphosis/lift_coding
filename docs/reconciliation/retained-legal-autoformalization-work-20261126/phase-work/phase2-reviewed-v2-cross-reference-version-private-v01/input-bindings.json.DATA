@@ -1,0 +1,37 @@
+{
+  "argv": [
+    "/home/barberb/lift_coding/.venv/bin/python",
+    "-I",
+    "-B",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/invoke-existing-pytest-private-v02.py.DATA",
+    null,
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v2-cross-reference-version-private-v01/dataset",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+    "/home/barberb/lift_coding/external/ipfs_datasets",
+    "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_cross_reference_version_consistency[shared-forward-conflict]",
+    "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_cross_reference_version_consistency[shared-reverse-conflict]",
+    "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_cross_reference_version_consistency[shared-equal]",
+    "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_cross_reference_version_consistency[distinct-identities]",
+    "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_checks_unit_dependencies_before_signed_admission[parent-two]",
+    "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_checks_unit_dependencies_before_signed_admission[parent-three]",
+    "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_checks_unit_dependencies_before_signed_admission[governing-parent]",
+    "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_checks_unit_dependencies_before_signed_admission[acyclic]"
+  ],
+  "baseline_owner_sha256": "893ad3f353a77e33de33ae93e61b5c81957b40f09292d07c2dffab2c18ae620d",
+  "composed_test_sha256": "80ca1e89438287270e68591c3dad6498fd017c53f11254ce53b4c981d819d778",
+  "current_git": "0d71c0d82b2dfc1ed3c7f236009e467e4c201c88",
+  "current_owner_sha256": "7350235f02340d2d2f0925d25399f614861c59b6faabcb1ebd427e2682a4f1fd",
+  "current_test_sha256": "c0a60c1bd1bbdbdd48700cbdc72769b08e5d41340a82e51be65bf33b8e5d1141",
+  "inputs": {
+    "130_role_source_bindings": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-cross-reference-version-private-v01/input-bindings.json",
+    "private_existing_v2_cycle_candidate": {
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/reviewed-v2-cycle-boundary-private-v01/sealed-private-V2-unit-cycle-two-file-follow-up-and-V3-retention-v01.json",
+      "sha256": "b1a1d344ea332b8250a46ec117ff91dd1c346b4e4dec08d8fdc20e481280c503"
+    },
+    "runner_setup_inputs": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-cross-reference-version-private-v01/private-runner-configuration-rebound.json"
+  },
+  "owner": "ipfs_datasets_py/logic/autoformal/legal_norm_content_adjudication_v1.py",
+  "test": "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py"
+}

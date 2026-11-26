@@ -1,0 +1,25 @@
+{
+  "Source_or_Native_or_model_execution": false,
+  "code_sha256": "21088a194de7da753a718c25ac0bd276890509b97b02d46bacfff4230e6a1a77",
+  "errors": 0,
+  "failures": 2,
+  "fragment": {
+    "bytes": 4985,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/gate-handoff-packet-identity-five-controls.fragment.py.DATA",
+    "sha256": "77f68f04bff71617ab9f2c22ce343416b5addf873389981f88481ee62a9b4862"
+  },
+  "limits": {
+    "address_space_bytes": 536870912,
+    "cpu": 1,
+    "cpu_seconds": 60,
+    "wall_seconds": 60
+  },
+  "owning_test_sha256": "d34b9d1f07b105deb064a8ede152ed8c32b5e09c8a1e6e5a5d9795c6f4a1baa2",
+  "schema": "gate-handoff-packet-identity-engineering-baseline/v1",
+  "scope": "Entire actual stdlib-only gate module; unchanged existing nine test-class AST plus authored five; project/package initialization and lane execution not performed.",
+  "skipped": 0,
+  "stdout": "test_alternating_evidence_never_rearms_or_discards_prior_failures (_actual_gate_packet_tests.GateEvidenceFreshnessTests.test_alternating_evidence_never_rearms_or_discards_prior_failures) ... ok\ntest_clock_churn_retains_probe_spend_and_current_cache (_actual_gate_packet_tests.GateEvidenceFreshnessTests.test_clock_churn_retains_probe_spend_and_current_cache) ... ok\ntest_interrupted_probe_reservation_cannot_be_reused (_actual_gate_packet_tests.GateEvidenceFreshnessTests.test_interrupted_probe_reservation_cannot_be_reused) ... ok\ntest_legacy_probe_origin_is_unknown_without_refunding_the_probe (_actual_gate_packet_tests.GateEvidenceFreshnessTests.test_legacy_probe_origin_is_unknown_without_refunding_the_probe) ... ok\ntest_missing_to_present_marks_old_validation_stale_without_rearming (_actual_gate_packet_tests.GateEvidenceFreshnessTests.test_missing_to_present_marks_old_validation_stale_without_rearming) ... ok\ntest_new_source_contract_keeps_existing_separate_contract_policy (_actual_gate_packet_tests.GateEvidenceFreshnessTests.test_new_source_contract_keeps_existing_separate_contract_policy) ... ok\ntest_restart_preserves_old_origin_and_spent_budget (_actual_gate_packet_tests.GateEvidenceFreshnessTests.test_restart_preserves_old_origin_and_spent_budget) ... ok\ntest_run_id_churn_retains_probe_spend_and_current_cache (_actual_gate_packet_tests.GateEvidenceFreshnessTests.test_run_id_churn_retains_probe_spend_and_current_cache) ... ok\ntest_same_evidence_reports_current_failed_validation_without_acceptance (_actual_gate_packet_tests.GateEvidenceFreshnessTests.test_same_evidence_reports_current_failed_validation_without_acceptance) ... ok\ntest_existing_two_stage_planner_ids_have_separate_handoffs (_actual_gate_packet_tests.TestGateHandoffPacketIdentity.test_existing_two_stage_planner_ids_have_separate_handoffs) ... FAIL\ntest_legacy_short_safe_task_paths_and_false_authority_are_unchanged (_actual_gate_packet_tests.TestGateHandoffPacketIdentity.test_legacy_short_safe_task_paths_and_false_authority_are_unchanged) ... ok\ntest_long_distinct_parent_requests_do_not_overwrite_each_other (_actual_gate_packet_tests.TestGateHandoffPacketIdentity.test_long_distinct_parent_requests_do_not_overwrite_each_other) ... FAIL\ntest_restart_keeps_long_request_identity_and_spent_validation_fence (_actual_gate_packet_tests.TestGateHandoffPacketIdentity.test_restart_keeps_long_request_identity_and_spent_validation_fence) ... ok\ntest_same_request_can_update_evidence_without_changing_identity_or_authority (_actual_gate_packet_tests.TestGateHandoffPacketIdentity.test_same_request_can_update_evidence_without_changing_identity_or_authority) ... ok\n\n======================================================================\nFAIL: test_existing_two_stage_planner_ids_have_separate_handoffs (_actual_gate_packet_tests.TestGateHandoffPacketIdentity.test_existing_two_stage_planner_ids_have_separate_handoffs)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"<authored five handoff controls>\", line 40, in test_existing_two_stage_planner_ids_have_separate_handoffs\nAssertionError: 1 != 2\n\n======================================================================\nFAIL: test_long_distinct_parent_requests_do_not_overwrite_each_other (_actual_gate_packet_tests.TestGateHandoffPacketIdentity.test_long_distinct_parent_requests_do_not_overwrite_each_other)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"<authored five handoff controls>\", line 22, in test_long_distinct_parent_requests_do_not_overwrite_each_other\nAssertionError: PosixPath('/tmp/tmp62qvxdye/gate-recovery-LAW-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.json') == PosixPath('/tmp/tmp62qvxdye/gate-recovery-LAW-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.json')\n\n----------------------------------------------------------------------\nRan 14 tests in 0.058s\n\nFAILED (failures=2)\n",
+  "success": false,
+  "tests_run": 14,
+  "wall_seconds": 0.05848087836056948
+}

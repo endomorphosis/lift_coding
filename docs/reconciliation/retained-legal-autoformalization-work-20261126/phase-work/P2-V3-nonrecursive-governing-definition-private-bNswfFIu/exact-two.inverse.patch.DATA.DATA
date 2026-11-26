@@ -1,0 +1,82 @@
+--- a/ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py
++++ b/ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py
+@@ -173,8 +173,6 @@
+ 
+ 
+ def _reviewed_body(body, source_inputs, relational_inputs):
+-    from ..syntax_core.ast import LogicNode, NodeKind
+-
+     _keys(body, {"schema", "component_id", "provenance_kind", "interpretation_id", "governing_context",
+         "units", "definition_uses", "cross_references", "permitted_uses", "unresolved", "unsupported",
+         "assumptions", "source_actors", "declared_at_utc"}, "complete reviewed meaning declaration")
+@@ -235,10 +233,6 @@
+         left = node["arguments"][0]
+         _need(left["symbol"] == symbol and [argument["symbol"] for argument in left["arguments"]] == binders,
+               "defined predicate must apply to the complete ordered definition binders")
+-        definition_body = LogicNode.from_dict(node["arguments"][1])
+-        _need(not any(child.kind is NodeKind.PREDICATE and child.symbol == symbol
+-                      for child in definition_body.walk()),
+-              "self-referential governing definition unsupported")
+         definition_roles = next(row["roles"] for row in definition_ir["argument_roles"] if row["symbol"] == symbol)
+         norm_ir = by_id[target]["canonical_ir"]
+         norm_roles = [row["roles"] for row in norm_ir["argument_roles"] if row["symbol"] == symbol]
+--- a/tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py
++++ b/tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py
+@@ -558,57 +558,3 @@
+     assert report["fixture_only"] and report["training_mask"] == report["evaluation_gold_mask"] == 0
+     assert [unit["canonical_ir"]["cross_references"][0] for unit in report["units"][1:]] == references
+     assert not conflict, "contradictory dependency version labels became eligible in a freshly signed V3 review"
+-
+-
+-@pytest.mark.parametrize("shape", ["independent", "identity", "nested-self-use"])
+-def test_reviewed_v3_requires_nonrecursive_governing_definition(sibling, mixed_case, shape):
+-    definition = mixed_case["declaration"]["units"][0]
+-    assert definition["kind"] == "definition"
+-    builder = relational_fixture.Builder()
+-    head = builder.atom("CoveredOfficer", "officer")
+-    roles = [("CoveredOfficer", ("officer",))]
+-    if shape == "identity":
+-        right = builder.atom("CoveredOfficer", "officer")
+-    else:
+-        right = builder.atom("AppointedByBoard", "officer")
+-        roles.append(("AppointedByBoard", ("officer",)))
+-        if shape == "nested-self-use":
+-            right = builder.binary("and", right, builder.atom("CoveredOfficer", "officer"))
+-    request = relational_fixture.request_for(
+-        builder, builder.binary("iff", head, right), roles, [("officer", "forall")],
+-    )
+-    raw = fixture.wire(request)
+-    request_sha = fixture.sha(raw)
+-    typed = relational.prepare_relational_norm_v1(raw, expected_request_sha256=request_sha)
+-    assert typed["typed_expression"]["root"]["arguments"][0]["kind"] == "iff"
+-    definition["relational_request_sha256"] = request_sha
+-    occurrence = definition["occurrence"]
+-    definition["coverage"] = [
+-        {"typed_path": item["typed_path"], **{key: occurrence[key] for key in
+-            ("start_char", "end_char", "start_utf8", "end_utf8")}}
+-        for item in typed["structural_mapping"]
+-    ]
+-    mixed_case["relational_inputs"][definition["unit_id"]] = {
+-        "request_raw": raw, "report": typed,
+-        "expected_report_sha256": relational.relational_norm_report_sha256(typed),
+-    }
+-
+-    try:
+-        mixed_case["preparation"] = prepare(sibling, mixed_case)
+-    except ValueError as exc:
+-        assert shape != "independent", str(exc)
+-        assert "self-referential governing definition unsupported" in str(exc)
+-        return
+-
+-    refresh_signed_reviews(mixed_case, sibling)
+-    assert_signatures_valid(mixed_case)
+-    observed = assess(sibling, mixed_case)
+-    if shape != "independent":
+-        pytest.fail(
+-            f"Recursive {shape} passed typed preparation and was assessed as "
+-            f"semantic_use_eligible={observed['semantic_use_eligible']} under exact fictional signatures."
+-        )
+-    assert observed["semantic_use_eligible"] is True
+-    assert observed["fixture_only"] is True
+-    assert observed["training_mask"] == observed["evaluation_gold_mask"] == 0
+-    assert observed["Lean_admitted"] is observed["proof_authority"] is False

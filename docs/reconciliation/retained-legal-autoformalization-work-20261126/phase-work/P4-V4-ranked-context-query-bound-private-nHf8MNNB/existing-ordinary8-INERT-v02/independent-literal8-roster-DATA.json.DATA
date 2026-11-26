@@ -1,0 +1,30 @@
+{
+  "actual_collect_and_run": null,
+  "case_counts": {
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py::test_aggregate_v4_ranked_context_checks_query_count_before_ranking": 4,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py::test_aggregate_v4_ranked_recipe_reaches_evaluator_with_genuine_component_custody": 4
+  },
+  "exact_case_membership": [
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py::test_aggregate_v4_ranked_recipe_reaches_evaluator_with_genuine_component_custody[None]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py::test_aggregate_v4_ranked_recipe_reaches_evaluator_with_genuine_component_custody[abstention]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py::test_aggregate_v4_ranked_recipe_reaches_evaluator_with_genuine_component_custody[source]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py::test_aggregate_v4_ranked_recipe_reaches_evaluator_with_genuine_component_custody[selected-body]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py::test_aggregate_v4_ranked_context_checks_query_count_before_ranking[0]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py::test_aggregate_v4_ranked_context_checks_query_count_before_ranking[1]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py::test_aggregate_v4_ranked_context_checks_query_count_before_ranking[32]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py::test_aggregate_v4_ranked_context_checks_query_count_before_ranking[33]"
+  ],
+  "literal_order_for_independent_membership_only": true,
+  "new": 4,
+  "retained": 4,
+  "schema": "ranked-context-ordinary8-independent-membership/v1",
+  "selectors": [
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py::test_aggregate_v4_ranked_recipe_reaches_evaluator_with_genuine_component_custody",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py::test_aggregate_v4_ranked_context_checks_query_count_before_ranking"
+  ],
+  "source_candidate": {
+    "bytes": 24813,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-V4-ranked-context-query-bound-private-nHf8MNNB/SEALED-V4-ranked-context-query-count-exact-two.json",
+    "sha256": "830258edd624af25e432e7cb17aa3e896d15c6dc921541dbd0b76d62a4e25dae"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "returncode": 0,
+  "argv": [
+    "/home/barberb/lift_coding/.venv/bin/python",
+    "-I",
+    "-B",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-accepted-request-and-integer-status-combined-private-IN9OiuMf/existing-private-runner-sixteen-selectors.py.DATA",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-accepted-request-and-integer-status-combined-private-IN9OiuMf/after",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-accepted-request-and-integer-status-combined-private-IN9OiuMf/dataset",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+    "/home/barberb/lift_coding/external/ipfs_datasets",
+    "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_verified_proof_binds_full_kernel_receipt",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_sorry_is_rejected_and_never_proved",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_sorry_can_explicitly_downgrade_authority",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_unavailable_lean_kernel_never_passes",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_wasm_plane_is_probe_only_and_not_confused_with_native_success",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_binds_expected_goal_policy_and_round_trips_strictly",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_source_only_compilation_cannot_prove_an_opaque_request_obligation",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_precancelled_request_runs_no_identity_or_proof_callbacks",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_inconsistent_evidence",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_fields_from_another_request",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_malformed_or_failed_exit_status_cannot_establish_proof",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "actual_pyarrow_loaded": false,
+  "controls": [],
+  "guard_events": [],
+  "lightweight_private_scope": true,
+  "overlays": [
+    {
+      "actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-existing-release-qualification-projection-private-f7yx_fy_/test.after.py.DATA",
+      "module": "tests.unit.logic.autoformal._private_v4_current_revocation"
+    }
+  ],
+  "permitted_ctypes_self_handles": [],
+  "physical_fixture_constructed": false,
+  "setup_detail": "No module named 'pyarrow'",
+  "setup_exception": "ModuleNotFoundError",
+  "setup_traceback": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-existing-release-qualification-projection-private-f7yx_fy_/run-existing-physical-v3-eligibility.py.DATA\", line 61, in <module>\n    material = module.physical_closure_material_v3.__wrapped__(maker)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py\", line 1122, in physical_closure_material_v3\n    return _physical_source_material(tmp_path_factory.mktemp(\"mixed-physical-crosswalk\") / \"material\", source_texts=texts)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py\", line 518, in _physical_source_material\n    import pyarrow as pa\nModuleNotFoundError: No module named 'pyarrow'\n",
+  "test_module_origin": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py",
+  "test_source_sha256": "c7c9b1c0e8c9512381fa802209fc7844dae0b97549450d53fc8abf679ee8b48f",
+  "torch_duckdb_loaded": false
+}

@@ -1,0 +1,135 @@
+"""Execute the selected maintained metadata-only cases in a private linkage."""
+from pathlib import Path
+from types import SimpleNamespace
+import ast
+import hashlib
+import json
+import os
+import resource
+import runpy
+import sys
+import traceback
+
+resource.setrlimit(resource.RLIMIT_CPU, (50, 50))
+resource.setrlimit(resource.RLIMIT_AS, (512 * 1024**2,) * 2)
+os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
+
+def no_effects(event, args):
+    if event.startswith("socket.") or event in {"subprocess.Popen", "os.system", "os.exec", "os.fork"}:
+        raise RuntimeError("private saved-output metadata exercise attempted an external effect")
+    if event == "import" and args[0].partition(".")[0] in {"torch", "tokenizers", "transformers"}:
+        raise RuntimeError("metadata-only exercise attempted to load numerical model runtime")
+
+sys.addaudithook(no_effects)
+import pytest
+
+root = Path(__file__).resolve().parent
+mode = sys.argv[1]
+assert mode in {"before","after"}
+loader_path = "/tmp/decoder-public-codec-terminal-hook-private-v01-3ct_f9yq/load_exact_cached_codec_fixture.py"
+with open(loader_path,"rb") as f:
+    assert hashlib.sha256(f.read()).hexdigest()=="1a355d5a3d82bef971d616b43712e40150386e7b827102a5bbddabb4a98ff714"
+loader = runpy.run_path(loader_path)
+auth = loader["authenticated"]
+link = loader["_compile_module"]
+manifest = json.loads(auth({'path': '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/exact-v11-measurement-project-inputs.json', 'bytes': 13640, 'sha256': '4bf31bf8ec6bcd6c1de929fa598ea705cc696467f510aa530eb3f24935b776c4'}))
+roles = manifest["roles"]
+def raw(role):
+    return auth(roles[role])
+def physical(module, role):
+    module.__file__ = roles[role]["path"]
+    return module
+
+names = link("namespaces",raw("namespaces"),{})
+contracts = link("contracts",raw("contracts"),vars(names))
+signatures = link("signatures",raw("signatures"),{**vars(names),**vars(contracts)})
+syntax = link("syntax",raw("syntax"),{**vars(names),**vars(contracts),**vars(signatures)})
+consumer = physical(link("consumer",raw("consumer"),{},roots=["_preflight","REVIEWED_HELDOUT_PURPOSE"]),"consumer")
+metrics = link("metrics",raw("metrics"),{"TypedExpression":syntax.TypedExpression},
+    roots=["evaluate_complete_norm_typed_structure","_complete_norm_payload_shape"])
+inputs = physical(link("inputs",raw("inputs"),{"consumer":consumer,"TypedExpression":syntax.TypedExpression,
+    "evaluate_complete_norm_typed_structure":metrics.evaluate_complete_norm_typed_structure},
+    roots=["_reviewed_wire","encode_reviewed_decoder_digest_omitted_target","assemble_reviewed_decoder_digest_omitted_target"]),"inputs")
+admission = SimpleNamespace(__file__=roles["admission"]["path"])
+splits = SimpleNamespace(__file__=roles["splits"]["path"])
+source_tree=ast.parse(raw("worker"))
+pin_function=next(node for node in source_tree.body if isinstance(node,ast.FunctionDef)
+    and node.name=="_reviewed_decoder_source_pins")
+# The exact linker removes project imports. These two branches contain
+# only the import, so keep their statement suites after binding the names.
+profile_if=next(node for node in pin_function.body if isinstance(node,ast.If))
+for branch in (profile_if, profile_if.orelse[0]):
+    assert len(branch.body)==1 and isinstance(branch.body[0],ast.ImportFrom)
+    branch.body.append(ast.Pass())
+worker = physical(link("worker",ast.unparse(source_tree),{"training_cycle_inputs":inputs, "admission":admission,
+    "legal_norm_content_adjudication_v1":None, "legal_reviewed_norm_admission_v3":admission,
+    "legal_span_consumer_binding":consumer,"legal_ir_eval_splits":splits},
+    roots=["_reviewed_decoder_artifact","_reviewed_decoder_generation_policy",
+           "CheckpointArtifact","_parse_json","_json_bytes","_digest","REVIEWED_MIXED_ADMISSION_PROFILE",
+           "_reviewed_decoder_source_pins"]),"worker")
+describer = link("daemon_contracts",raw("daemon_contracts"),{},roots=["describe"])
+chosen = "inference" if mode=="before" else "inference_candidate"
+inference = physical(link("inference",raw(chosen),{"worker":worker,"inputs":inputs,
+    "autoencoder_training_worker":worker,"training_cycle_inputs":inputs,"describe":describer.describe},
+    roots=["_check_reviewed_evaluation_outputs","_reviewed_evaluation_lifecycle_source_sha256"]),chosen)
+numerical = link("numerical_fixture",raw("numerical_test"),
+    {"inputs":inputs,"training_cycle_inputs":inputs,"TypedExpression":syntax.TypedExpression},
+    roots=["_reviewed_Qwen2_generation_policy","_digest_omitted_small_generation_target"])
+selected = {
+    "test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved":5,
+    "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes":15,
+    "test_reviewed_inference_v11_outputs_cover_ordered_source_population":6,
+    "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition":12,
+}
+# The existing five inputs and eight lifecycle reads remain genuine. The
+# alternative rich request helper is unreachable through this saved-output fixture.
+test_tree = ast.parse(raw("owning_test_candidate"))
+helpers = {
+    "_sha","_reviewed_mixed_request_data","_reviewed_profiled_request_data",
+    "_reviewed_profiled_parent_policy_data","_reviewed_Qwen2_parent_policy_data",
+    "_reviewed_v11_tuple","_reviewed_v11_parent_policy_data","_reviewed_v11_bind_saved_source_control",
+    "_reviewed_v11_saved_control","_reviewed_v11_three_source_coverage_control",
+}
+test_nodes = [node for node in test_tree.body if isinstance(node,ast.FunctionDef) and node.name in helpers|set(selected)]
+assert {node.name for node in test_nodes}==helpers|set(selected)
+class BindSelectedNumericalFixture(ast.NodeTransformer):
+    def visit_ImportFrom(self, node):
+        if node.module == "tests.unit.optimizers.logic_theorem_optimizer":
+            assert len(node.names)==1 and node.names[0].name=="test_autoencoder_training_worker" and node.names[0].asname=="numerical"
+            return ast.copy_location(ast.Pass(),node)
+        return node
+test_module=BindSelectedNumericalFixture().visit(ast.Module(body=test_nodes,type_ignores=[]))
+tests = link("owning_metadata_tests",ast.unparse(test_module),
+    {"pytest":pytest,"inference":inference,"worker":worker,"consumer":consumer,
+     "autoencoder_training_worker":worker,"legal_span_consumer_binding":consumer,
+     "numerical":numerical,"test_autoencoder_training_worker":numerical,
+     "Path":Path,"json":json,"hashlib":hashlib})
+run_root=root/"actual-baseline-saved-evaluation-probe"
+run_root.mkdir(mode=0o700)
+rows = {}
+for name in ("existing_empty_evaluation", "unrelated_evaluation"):
+    case = run_root / name
+    case.mkdir(mode=0o700)
+    w, _, request, generation, loader, save = tests._reviewed_v11_saved_control(case, "complete")
+    cycle = save()
+    fixed = {key: Path(cycle["output_artifacts"][key]["path"]).read_bytes()
+             for key in ("generation", "loader")}
+    evaluation = Path(cycle["output_artifacts"]["evaluation"]["path"])
+    if name == "unrelated_evaluation":
+        replacement = {"schema_version": "legal-ir-evaluation-artifact-v1",
+                       "metrics": {"complete_norm_payload": {"fixture": "unrelated report"}},
+                       "compiler_artifact": {"reviewed_source_span_producer_evaluation": {
+                           "producer_outputs": [{"id": "different-case", "candidate": None, "outcome": "abstained"}]
+                       }}}
+        wire = w._json_bytes(replacement)
+        evaluation.write_bytes(wire)
+        cycle["output_artifacts"]["evaluation"].update(bytes=len(wire),sha256=w._digest(wire))
+    inference._check_reviewed_evaluation_outputs(cycle, request)
+    assert all(Path(cycle["output_artifacts"][k]["path"]).read_bytes() == raw for k,raw in fixed.items())
+    rows[name] = dict(accepted=True,evaluation_bytes=evaluation.stat().st_size,
+        evaluation_sha256=cycle["output_artifacts"]["evaluation"]["sha256"],
+        fixed_other_artifact_sha256={k:w._digest(raw) for k,raw in fixed.items()})
+print(json.dumps(dict(schema="actual-private-v11-unbound-evaluation-probe/v1",
+    owner=roles["inference"],owning_test=roles["owning_test"],cases=rows,
+    actual_existing_artifact_reader_executed=True,project_model_or_backend_started=False,
+    ordinary_qualification=False),indent=2,sort_keys=True))

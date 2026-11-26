@@ -1,0 +1,13 @@
+{
+  "errors": 0,
+  "failures": 0,
+  "output": "test_post_write_changed_bytes_refuse_before_custody_release (__main__.main.<locals>.ReadbackTests.test_post_write_changed_bytes_refuse_before_custody_release) ... ok\ntest_raw_retention_actually_reads_back (__main__.main.<locals>.ReadbackTests.test_raw_retention_actually_reads_back) ... ok\n\n----------------------------------------------------------------------\nRan 2 tests in 0.010s\n\nOK\n",
+  "scope": "Exact existing retain_bytes and read_private AST; owned private filesystem only; explicit post-write mutation fixture; no project/SDK/Source/Native/real resource calls.",
+  "skipped": 0,
+  "source": {
+    "bytes": 39839,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-v567-Native3-current-operator-custody-readback-INERT-v04.py.DATA",
+    "sha256": "b83e7b413bc8b7b715c643f14462158422635939a9f5fea80e3ee5a5e15c8dff"
+  },
+  "tests_run": 2
+}

@@ -1,0 +1,201 @@
+{
+  "baseline": "7fc2cde7dfda7be7035cb6b555d440e508473622",
+  "baseline_actual": {
+    "counts": {
+      "failure": 5,
+      "pass": 63
+    },
+    "refs": {
+      "exit": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/actual-red.exit",
+        "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+      },
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/actual-red.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 16753,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/actual-red.stdout",
+        "sha256": "dab2a712dfce53c95bb8e5e547c5284295d4e6928de5cdd35ed4ae86d2bae259"
+      },
+      "xml": {
+        "bytes": 27933,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/actual-red.xml",
+        "sha256": "12180e64d45fa9975a92f052cf55c2f0e94c3aebce7e3d235d07f16eded53f2e"
+      }
+    }
+  },
+  "bounded_memory_fixture_runner": {
+    "bytes": 1395,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/run-existing-focused-fixture-v02.py",
+    "sha256": "73a4e83350cf36ac52e6303a38fd935e6ee9d43a81cc912707b3940cbb38e262"
+  },
+  "canonical_Source_or_Git_changes": false,
+  "corrected_actual": {
+    "counts": {
+      "pass": 68
+    },
+    "refs": {
+      "exit": {
+        "bytes": 2,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/actual-green.exit",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/actual-green.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 338,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/actual-green.stdout",
+        "sha256": "231a3af0e5ca9f84cddd05d830360e20cfba410556b3ff4edd81a8a0b908bcd3"
+      },
+      "xml": {
+        "bytes": 10127,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/actual-green.xml",
+        "sha256": "f8fdfbc173f140621c6b97460877904a010c6b408a34d538c2c586d58e6f63cf"
+      }
+    }
+  },
+  "exact_three_paths": {
+    "ipfs_datasets_py/logic/backends/cache_protocol.py": {
+      "before": {
+        "bytes": 43005,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/cache_protocol.py.before.DATA",
+        "sha256": "48029fa604a91f6f748eda8b30dcb03d11b3127abb2bd32b21d91246b0dd3661"
+      },
+      "before_Git_blob": "5faddd0448df6425f0d4008f39e5c4979e199210",
+      "forward": {
+        "bytes": 1750,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/cache_protocol.py.forward.patch.DATA",
+        "sha256": "75734a167dbe67abc4fbc8e7f3bd0501ac48d300b2697c4e1dee89f29c272f62"
+      },
+      "inverse": {
+        "bytes": 1750,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/cache_protocol.py.inverse.patch.DATA",
+        "sha256": "c8cf44fd03331bcc146e5ddc718f17ee46f6e6784f42f6153bee5972ea164dc4"
+      },
+      "post": {
+        "bytes": 43579,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/cache_protocol.py.after.DATA",
+        "sha256": "cab85688cfc0971c4908cf220b795c0b2be14811dee408100a933005d5072e58"
+      },
+      "post_Git_blob": "312b165080753d8e032900b20d207f5efb1d30c6"
+    },
+    "ipfs_datasets_py/logic/common/duckdb_proof_store.py": {
+      "before": {
+        "bytes": 111908,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/duckdb_proof_store.py.before.DATA",
+        "sha256": "5a614b0a1e3ee3b9f3dbc10e80950aff9ed5f19754e45f0cb5ceac5acdcfc400"
+      },
+      "before_Git_blob": "08cfbf5a1ba36fca739215062b120464f5640379",
+      "forward": {
+        "bytes": 1940,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/duckdb_proof_store.py.forward.patch.DATA",
+        "sha256": "9fc04cd364f65d7b9adc6974e31998e5703c334187472f96416f7b27e51baee6"
+      },
+      "inverse": {
+        "bytes": 1940,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/duckdb_proof_store.py.inverse.patch.DATA",
+        "sha256": "e9ce6d8059e9732ab0e97311a7c6e5bb93ac0ccb3c5e8d0eac3cb69487c80f64"
+      },
+      "post": {
+        "bytes": 112556,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/duckdb_proof_store.py.after.DATA",
+        "sha256": "acfec8c0152c6e7bc840c521deef6edd8ff861c91169bda6912760ab34a590bb"
+      },
+      "post_Git_blob": "f9207a3f3b5f5f1f3e010f5c3ab1518b310e9689"
+    },
+    "tests/unit/logic/test_duckdb_proof_store.py": {
+      "before": {
+        "bytes": 29651,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/test_duckdb_proof_store.py.before.DATA",
+        "sha256": "adf9372ba75efb4aa81007caa2ddea7d188be44015448fb08fdf3f657e82e8f2"
+      },
+      "before_Git_blob": "28957ff35faff61f0915e553a25f0a5cbe3e67f5",
+      "forward": {
+        "bytes": 5166,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/test_duckdb_proof_store.py.forward.patch.DATA",
+        "sha256": "b56ebbab85b48d2b6cc71e895d4fb68054b9e8c54f1b80f93307b6f7183764f2"
+      },
+      "inverse": {
+        "bytes": 5166,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/test_duckdb_proof_store.py.inverse.patch.DATA",
+        "sha256": "99f5c41c2f5dd9a0aac651ed16b4205fd103f1040913e166faa4b084e1754328"
+      },
+      "post": {
+        "bytes": 34415,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/test_duckdb_proof_store.py.after.DATA",
+        "sha256": "3522c4aa2813f6aa2ca4b9943b80d736f374f314f3c7a2be64f38b94109c972c"
+      },
+      "post_Git_blob": "d0dfbd35be14786c963bd688fbd38de390ce83d0"
+    }
+  },
+  "model_run": false,
+  "new_baseline_outcomes": [
+    [
+      "tests.unit.logic.test_duckdb_proof_store",
+      "test_clear_discards_pending_single_flight_result[DuckDBProofStore]",
+      "failure",
+      "AssertionError: retired producer repopulated the cleared cache\nassert UnifiedProofEntry(key=UnifiedProofKey(ir_digest='sha256:3d13a1476223eaa0d4fed636157071db31f5a8f3b61290910028f8b7db5f03..., result_id='result:before-clear', diagnostics=(), evidence=(), envelope=None, schema_version='unified-proof-entry/v1') is None\n +  where UnifiedProofEntry(key=UnifiedProofKey(ir_digest='sha256:3d13a1476223eaa0d4fed636157071db31f5a8f3b61290910028f8b7db5f03..., result_id='result:before-clear', diagnostics=(), evidence=(), envelope=None, schema_version='unified-proof-entry/v1') = get(UnifiedProofKey(ir_digest='sha256:3d13a1476223eaa0d4fed636157071db31f5a8f3b61290910028f8b7db5f03a8', property_digest='...igest='sha256:bbefc430cbc7021d88ffedc9069ffa50f36f24459bed91ade66d266eba0f6a68', schema_version='unified-proof-key/v1'), now=101.0)\n +    where get = <ipfs_datasets_py.logic.common.duckdb_proof_store.DuckDBProofStore object at 0xffd18475f410>.get"
+    ],
+    [
+      "tests.unit.logic.test_duckdb_proof_store",
+      "test_clear_discards_pending_single_flight_result[ExactVerificationCache]",
+      "failure",
+      "AssertionError: retired producer repopulated the cleared cache\nassert VerificationCacheEntry(key=VerificationCacheKey(ir_digest='sha256:3d13a1476223eaa0d4fed636157071db31f5a8f3b61290910028...631da5327544837b4fc2b9', result_id='result:before-clear', diagnostics=(), schema_version='verification-cache-entry/v1') is None\n +  where VerificationCacheEntry(key=VerificationCacheKey(ir_digest='sha256:3d13a1476223eaa0d4fed636157071db31f5a8f3b61290910028...631da5327544837b4fc2b9', result_id='result:before-clear', diagnostics=(), schema_version='verification-cache-entry/v1') = get(VerificationCacheKey(ir_digest='sha256:3d13a1476223eaa0d4fed636157071db31f5a8f3b61290910028f8b7db5f03a8', property_dig...='sha256:71c212a100fe285508abebd31494c8c3401dd4036d66978875b4fe9dd328b531', schema_version='verification-cache-key/v1'), now=101.0)\n +    where get = <ipfs_datasets_py.logic.backends.cache_protocol.ExactVerificationCache object at 0xffd184717440>.get"
+    ],
+    [
+      "tests.unit.logic.test_duckdb_proof_store",
+      "test_clear_preserves_replacement_flight[late-success-DuckDBProofStore]",
+      "failure",
+      "assert [] == [<threading.E...4785d90: set>]\n  \n  Right contains one more item: <threading.Event at 0xffd184785d90: set>\n  Use -v to get more diff"
+    ],
+    [
+      "tests.unit.logic.test_duckdb_proof_store",
+      "test_clear_preserves_replacement_flight[late-success-ExactVerificationCache]",
+      "failure",
+      "assert [] == [<threading.E...47168a0: set>]\n  \n  Right contains one more item: <threading.Event at 0xffd1847168a0: set>\n  Use -v to get more diff"
+    ],
+    [
+      "tests.unit.logic.test_duckdb_proof_store",
+      "test_clear_preserves_replacement_flight[late-error-DuckDBProofStore]",
+      "failure",
+      "Failed: replacement flight was removed by its retired predecessor"
+    ],
+    [
+      "tests.unit.logic.test_duckdb_proof_store",
+      "test_clear_preserves_replacement_flight[late-error-ExactVerificationCache]",
+      "pass",
+      ""
+    ]
+  ],
+  "new_case_count": 6,
+  "ordinary_R2_or_SQL_or_Native_qualification": false,
+  "preserved_other_behaviors": "Existing SQL waiter path, verify-integrity and caller-authority code retained, existing per-key invalidate and store wire unchanged.",
+  "prior_62_preserved_pass": true,
+  "prior_runner_setup_refusal_before_tests": {
+    "exit": {
+      "bytes": 2,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/red.exit",
+      "sha256": "1121cfccd5913f0a63fec40a6ffd44ea64f9dc135c66634ba001d10bcf4302a2"
+    },
+    "runner": {
+      "bytes": 1359,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/run-existing-focused-fixture.py",
+      "sha256": "1dedb51f7f7b965b772a603e02527f041d75db1672b5a60455dbb297e200dd28"
+    },
+    "stdout": {
+      "bytes": 2788,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/red.stdout",
+      "sha256": "be8b5d90d53b8483fe52e0f0e43ea77dc3e8b8690138e5fdceeae5c67b6d00d4"
+    }
+  },
+  "same_68_physical_order": true,
+  "schema": "private-P1-direct-cache-clear-flight-invalidation-three-file/v1",
+  "validated_scope": "The two maintained get_or_compute APIs after clear in the same memory cache instance. Current publication and cleanup are guarded by live flight identity. Producer exceptions retain the original exception for the caller. A detached flight returns a normal unusable miss."
+}

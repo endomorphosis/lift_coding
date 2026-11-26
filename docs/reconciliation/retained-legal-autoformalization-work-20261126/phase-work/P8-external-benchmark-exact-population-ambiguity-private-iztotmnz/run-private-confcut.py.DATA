@@ -1,0 +1,96 @@
+"""Run the exact public evaluator and test with privately materialized Git modules."""
+from pathlib import Path
+import hashlib
+import importlib.util
+from importlib.machinery import ModuleSpec
+import json
+import os
+import resource
+import sys
+import tempfile
+
+root = Path(__file__).resolve(strict=True).parent
+stage = sys.argv[1]
+if stage not in {"baseline", "candidate"}:
+    raise ValueError("expected one explicitly named product stage")
+cap = 512 * 1024 * 1024
+resource.setrlimit(resource.RLIMIT_AS, (cap, cap))
+resource.setrlimit(resource.RLIMIT_CPU, (30, 31))
+os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
+os.environ["PYTEST_DISABLE_PLUGIN_AUTOLOAD"] = "1"
+tempdir = root / f"{stage}-confcut-tmp"
+tempdir.mkdir(mode=0o700, exist_ok=False)
+tempfile.tempdir = str(tempdir)
+os.chdir(root)
+private = root / "baseline"
+manifest = json.loads((root / "published-inputs.json").read_bytes())
+owner_path = "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py"
+modules = {
+    relative.removesuffix(".py").replace("/", "."): (private / relative, row["sha256"])
+    for relative, row in manifest["files"].items()
+    if relative.startswith("ipfs_datasets_py/") and relative.endswith(".py")
+}
+if stage == "candidate":
+    row = json.loads((root / "candidate-owner-pin.json").read_bytes())
+    modules[owner_path.removesuffix(".py").replace("/", ".")] = (root / "candidate" / owner_path, row["sha256"])
+packages = {
+    ".".join(name.split(".")[:length])
+    for name in modules
+    for length in range(1, len(name.split(".")))
+}
+for name, (path, digest) in modules.items():
+    if hashlib.sha256(path.read_bytes()).hexdigest() != digest:
+        raise RuntimeError(f"Unpinned project body: {name}")
+seen = set()
+
+class ExactProjectImports:
+    def find_spec(self, fullname, path=None, target=None):
+        if fullname != "ipfs_datasets_py" and not fullname.startswith("ipfs_datasets_py."):
+            return None
+        if fullname in modules:
+            seen.add(fullname)
+            return importlib.util.spec_from_file_location(fullname, modules[fullname][0])
+        if fullname in packages:
+            # Namespace packaging only. All executed project bodies are exact files.
+            spec = ModuleSpec(fullname, None, is_package=True)
+            spec.submodule_search_locations = [str(private / fullname.replace(".", "/"))]
+            return spec
+        raise ImportError(f"Unselected project module: {fullname}")
+
+def audit(event, args):
+    if event.startswith(("socket.", "subprocess.")) or event in {
+        "os.exec", "os.fork", "os.forkpty", "os.posix_spawn", "os.system"
+    }:
+        raise PermissionError(f"Outside private evaluator scope: {event}")
+    if event == "import" and args[0].split(".", 1)[0] in {
+        "torch", "transformers", "jax", "tensorflow", "huggingface_hub", "duckdb", "pyarrow"
+    }:
+        raise ImportError(f"Outside private evaluator scope: {args[0]}")
+
+sys.meta_path.insert(0, ExactProjectImports())
+sys.addaudithook(audit)
+import pytest
+
+test = root / "test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py"
+report = tempdir / "junit.xml"
+code = pytest.main([
+    "-c", "/dev/null", f"--rootdir={root / 'test-cohort'}",
+    f"--confcutdir={root / 'test-cohort'}", "--noconftest", "-p", "no:cacheprovider",
+    f"--basetemp={tempdir / 'pytest'}", f"--junitxml={report}", "-q", str(test),
+])
+actual = {}
+for name in sorted(seen):
+    module = sys.modules.get(name)
+    if module is None or Path(module.__spec__.origin).resolve(strict=True) != modules[name][0]:
+        raise RuntimeError(f"Selected module did not load from its authenticated path: {name}")
+    actual[name] = modules[name][1]
+if set(actual) != set(modules):
+    raise RuntimeError(f"Unobserved expected project imports: {sorted(set(modules) - set(actual))}")
+with (tempdir / "run.json").open("x", encoding="utf-8") as handle:
+    json.dump(dict(stage=stage, pytest_returncode=int(code), imported_modules=actual,
+                   elapsed_process_cpu_seconds=resource.getrusage(resource.RUSAGE_SELF).ru_utime,
+                   namespace_packages_only=sorted(packages)), handle, indent=2, sort_keys=True)
+    handle.write(chr(10))
+    handle.flush()
+    os.fsync(handle.fileno())
+raise SystemExit(code)

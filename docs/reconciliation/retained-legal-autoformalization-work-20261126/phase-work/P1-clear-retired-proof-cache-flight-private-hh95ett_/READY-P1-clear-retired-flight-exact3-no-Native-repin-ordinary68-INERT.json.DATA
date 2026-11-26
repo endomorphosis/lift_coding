@@ -1,0 +1,821 @@
+{
+  "Native_fixture_pin_impact": {
+    "Native_credit": false,
+    "existing_loader": "_load_native_proof_cache_fixture_owner",
+    "fourth_file_required": false,
+    "future_Native_operational_Source_binding_of_changed_owners_required_if_selected": true,
+    "pin_line": 1189,
+    "unchanged_four_loader_controls_unrun_this_unit": {
+      "test_native_cache_fixture_loader_refuses_post_import_drift_without_retry": 1682,
+      "test_native_cache_fixture_loader_refuses_tampered_preimage_before_module_creation": 1668,
+      "test_native_cache_fixture_loader_supplies_canonical_constructor_contract_without_execution": 1919,
+      "test_native_cache_fixture_loader_uses_pinned_current_owner_without_invoking_helpers": 1645
+    },
+    "unchanged_native_loader_owner": {
+      "bytes": 111809,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/integration/logic/backends/test_kernel_backends.py",
+      "sha256": "5b57349bce86ec8d308f87802f9dc96195d56da15ec849a705f0b5b2a5ad1549"
+    },
+    "unchanged_pin_symbol": "_NATIVE_PROOF_CACHE_FIXTURE_SHA256",
+    "unchanged_pinned_proof_cache_fixture": {
+      "bytes": 97545,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/legal_ir/test_proof_cache.py",
+      "sha256": "4e012101e4400324175c02d296b51abde97d065c76abfddef1b51d16329f639d"
+    }
+  },
+  "actual_private_in_memory_evidence_separate": {
+    "baseline": {
+      "counts": {
+        "failure": 5,
+        "pass": 63
+      },
+      "refs": {
+        "exit": {
+          "bytes": 2,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/actual-red.exit",
+          "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+        },
+        "stderr": {
+          "bytes": 0,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/actual-red.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 16753,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/actual-red.stdout",
+          "sha256": "dab2a712dfce53c95bb8e5e547c5284295d4e6928de5cdd35ed4ae86d2bae259"
+        },
+        "xml": {
+          "bytes": 27933,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/actual-red.xml",
+          "sha256": "12180e64d45fa9975a92f052cf55c2f0e94c3aebce7e3d235d07f16eded53f2e"
+        }
+      }
+    },
+    "corrected": {
+      "counts": {
+        "pass": 68
+      },
+      "refs": {
+        "exit": {
+          "bytes": 2,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/actual-green.exit",
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+        },
+        "stderr": {
+          "bytes": 0,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/actual-green.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 338,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/actual-green.stdout",
+          "sha256": "231a3af0e5ca9f84cddd05d830360e20cfba410556b3ff4edd81a8a0b908bcd3"
+        },
+        "xml": {
+          "bytes": 10127,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/actual-green.xml",
+          "sha256": "f8fdfbc173f140621c6b97460877904a010c6b408a34d538c2c586d58e6f63cf"
+        }
+      }
+    },
+    "exact_retained_62_and_new_6": true,
+    "sql_Lean_or_Native_coverage": false
+  },
+  "baseline_exact_current_public_D": "7fc2cde7dfda7be7035cb6b555d440e508473622",
+  "before_and_private_post_exact_three": {
+    "ipfs_datasets_py/logic/backends/cache_protocol.py": {
+      "actual_canonical_write_or_readback": null,
+      "exact_current_before": {
+        "Git_blob": "5faddd0448df6425f0d4008f39e5c4979e199210",
+        "bytes": 43005,
+        "full9": {
+          "st_ctime_ns": "1795585086706476198",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "70029137",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795585086067185808",
+          "st_nlink": "1",
+          "st_size": "43005",
+          "st_uid": "1000"
+        },
+        "mode": "100644",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/backends/cache_protocol.py",
+        "sha256": "48029fa604a91f6f748eda8b30dcb03d11b3127abb2bd32b21d91246b0dd3661"
+      },
+      "exact_private_after": {
+        "Git_blob": "312b165080753d8e032900b20d207f5efb1d30c6",
+        "bytes": 43579,
+        "mode": "100644",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/cache_protocol.py.after.DATA",
+        "sha256": "cab85688cfc0971c4908cf220b795c0b2be14811dee408100a933005d5072e58"
+      },
+      "forward": {
+        "bytes": 1750,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/cache_protocol.py.forward.patch.DATA",
+        "sha256": "75734a167dbe67abc4fbc8e7f3bd0501ac48d300b2697c4e1dee89f29c272f62"
+      },
+      "inverse": {
+        "bytes": 1750,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/cache_protocol.py.inverse.patch.DATA",
+        "sha256": "c8cf44fd03331bcc146e5ddc718f17ee46f6e6784f42f6153bee5972ea164dc4"
+      },
+      "prior_READ_row_present": true
+    },
+    "ipfs_datasets_py/logic/common/duckdb_proof_store.py": {
+      "actual_canonical_write_or_readback": null,
+      "exact_current_before": {
+        "Git_blob": "08cfbf5a1ba36fca739215062b120464f5640379",
+        "bytes": 111908,
+        "full9": {
+          "st_ctime_ns": "1795594056991037569",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "70042520",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795594056352390422",
+          "st_nlink": "1",
+          "st_size": "111908",
+          "st_uid": "1000"
+        },
+        "mode": "100644",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/common/duckdb_proof_store.py",
+        "sha256": "5a614b0a1e3ee3b9f3dbc10e80950aff9ed5f19754e45f0cb5ceac5acdcfc400"
+      },
+      "exact_private_after": {
+        "Git_blob": "f9207a3f3b5f5f1f3e010f5c3ab1518b310e9689",
+        "bytes": 112556,
+        "mode": "100644",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/duckdb_proof_store.py.after.DATA",
+        "sha256": "acfec8c0152c6e7bc840c521deef6edd8ff861c91169bda6912760ab34a590bb"
+      },
+      "forward": {
+        "bytes": 1940,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/duckdb_proof_store.py.forward.patch.DATA",
+        "sha256": "9fc04cd364f65d7b9adc6974e31998e5703c334187472f96416f7b27e51baee6"
+      },
+      "inverse": {
+        "bytes": 1940,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/duckdb_proof_store.py.inverse.patch.DATA",
+        "sha256": "e9ce6d8059e9732ab0e97311a7c6e5bb93ac0ccb3c5e8d0eac3cb69487c80f64"
+      },
+      "prior_READ_row_present": true
+    },
+    "tests/unit/logic/test_duckdb_proof_store.py": {
+      "actual_canonical_write_or_readback": null,
+      "exact_current_before": {
+        "Git_blob": "28957ff35faff61f0915e553a25f0a5cbe3e67f5",
+        "bytes": 29651,
+        "full9": {
+          "st_ctime_ns": "1795421816825138390",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "70030627",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795421816825138390",
+          "st_nlink": "1",
+          "st_size": "29651",
+          "st_uid": "1000"
+        },
+        "mode": "100644",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/test_duckdb_proof_store.py",
+        "sha256": "adf9372ba75efb4aa81007caa2ddea7d188be44015448fb08fdf3f657e82e8f2"
+      },
+      "exact_private_after": {
+        "Git_blob": "d0dfbd35be14786c963bd688fbd38de390ce83d0",
+        "bytes": 34415,
+        "mode": "100644",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/test_duckdb_proof_store.py.after.DATA",
+        "sha256": "3522c4aa2813f6aa2ca4b9943b80d736f374f314f3c7a2be64f38b94109c972c"
+      },
+      "forward": {
+        "bytes": 5166,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/test_duckdb_proof_store.py.forward.patch.DATA",
+        "sha256": "b56ebbab85b48d2b6cc71e895d4fb68054b9e8c54f1b80f93307b6f7183764f2"
+      },
+      "inverse": {
+        "bytes": 5166,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/test_duckdb_proof_store.py.inverse.patch.DATA",
+        "sha256": "99f5c41c2f5dd9a0aac651ed16b4205fd103f1040913e166faa4b084e1754328"
+      },
+      "prior_READ_row_present": false
+    }
+  },
+  "canonical_application_selected": false,
+  "future_actual_clock_IO_outputs_and_leases": null,
+  "held_current_epoch_metadata_reference_only": {
+    "bytes": 860806,
+    "path": "/tmp/Root-Phase2-private-7213-Parquet-existing-R2-current-v388-wS6axFJW/current-Guide531-private-R2-parent-SDK-outer-source-epoch-DATA.json",
+    "sha256": "02ff5398564845ab40b3322b09dec5929f9a0100809b1661a8864dd27752b466"
+  },
+  "ordinary_expected_but_unrun": {
+    "actual_ordinary_or_Source_selection": null,
+    "actual_runner_transitive_import_closure": null,
+    "case_count": 68,
+    "expected_test_file": "tests/unit/logic/test_duckdb_proof_store.py",
+    "fresh_READ_expected_after_real_frozen_commit": {
+      "add_owning_test_row": [
+        "tests/unit/logic/test_duckdb_proof_store.py"
+      ],
+      "conditional_outer_count": 1543,
+      "keep_current_A_provenance": true,
+      "refresh_protected_D_index_row": true,
+      "replace_two_owner_rows": [
+        "ipfs_datasets_py/logic/backends/cache_protocol.py",
+        "ipfs_datasets_py/logic/common/duckdb_proof_store.py"
+      ]
+    },
+    "function_case_counts": {
+      "tests/unit/logic/test_duckdb_proof_store.py::test_access_statistics_track_hits_misses_writes": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_advisory_verification_projection_uses_target_status_polarity": 2,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_all_authority_dimensions_are_present_and_nonempty": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_authority_dimensions_cover_hammer_and_verification_surfaces": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest": 15,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_clear_discards_pending_single_flight_result": 2,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_clear_preserves_replacement_flight": 4,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_empty_backend_id_rejected": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_entry_integrity_round_trip_and_tamper_rejection": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_envelope_rejects_filesystem_path_authority": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_evidence_and_envelope_round_trip": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_exact_verification_cache_interop_bridge": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_get_or_compute_single_flight_and_store": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_hammer_key_projection_retains_authority_dimensions": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_interfaces_schema_and_catalog_are_pinned": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_invalidate_and_clear": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_mismatched_outcome_and_status_rejected": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_module_import_is_inert_without_duckdb": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_negative_ttl_expires_unknown_faster_than_proof": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_kinds_are_closed_and_distinct": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct": 13,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_premises_digest_changes_with_premise_set": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_proof_and_counterexample_entries_are_not_interchangeable": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_store_implements_verification_cache_put_get": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_store_lookup_exact_key_miss_on_dimension_change": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_store_put_retains_advisory_candidate_without_proof_authority": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_store_rejects_tampered_in_memory_entry": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_trust_cannot_exceed_evidence_authority": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_trust_ceiling_rejects_raise": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_trust_levels_project_from_evidence_authority": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_unified_key_must_project_to_matching_verification_key": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_unknown_and_error_entries_remain_distinct": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_unknown_entry_fields_fail_closed": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_unknown_key_fields_fail_closed": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_unsupported_key_schema_fails_closed": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_verification_cache_entry_can_be_put_directly": 1,
+      "tests/unit/logic/test_duckdb_proof_store.py::test_verification_cache_key_lift_retains_all_dimensions": 1
+    },
+    "function_count": 37,
+    "known_fifteen_unchanged_support_rows": {
+      "ipfs_datasets_py/__init__.py": {
+        "bytes": 56829,
+        "full9": {
+          "st_ctime_ns": "1795421815262119026",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "70007355",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795421815262119026",
+          "st_nlink": "1",
+          "st_size": "56829",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/__init__.py",
+        "sha256": "f258f8eada774251feacd8e2ee2048efe56c89a8ee88efd50e4271ea41d43dc9"
+      },
+      "ipfs_datasets_py/logic/__init__.py": {
+        "bytes": 4434,
+        "full9": {
+          "st_ctime_ns": "1795421815311119633",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "70008091",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795421815311119633",
+          "st_nlink": "1",
+          "st_size": "4434",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/__init__.py",
+        "sha256": "f25a9702ddc282092dbae1bc1731afdcc35576c10745487dccedaa531ccc9e79"
+      },
+      "ipfs_datasets_py/logic/backends/results.py": {
+        "bytes": 27160,
+        "full9": {
+          "st_ctime_ns": "1795421815400120736",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "70008633",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795421815400120736",
+          "st_nlink": "1",
+          "st_size": "27160",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/backends/results.py",
+        "sha256": "afda793472d3a6ba13f20bee13a992bfce68177388bdf338548157a5aa201458"
+      },
+      "ipfs_datasets_py/logic/common/__init__.py": {
+        "bytes": 2438,
+        "full9": {
+          "st_ctime_ns": "1795421815406637536",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "70008683",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795421815406637536",
+          "st_nlink": "1",
+          "st_size": "2438",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/common/__init__.py",
+        "sha256": "e574c74067e7059cc506b32c780bc0444de89c63b55dade3df00ae9fd563431e"
+      },
+      "ipfs_datasets_py/logic/common/bounded_cache.py": {
+        "bytes": 6656,
+        "full9": {
+          "st_ctime_ns": "1795421815406637536",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "70008684",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795421815406637536",
+          "st_nlink": "1",
+          "st_size": "6656",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/common/bounded_cache.py",
+        "sha256": "29a450b5fc08c5577964774035717dc5d7be85c159cfd502fba5252c4ec9c9fa"
+      },
+      "ipfs_datasets_py/logic/common/converters.py": {
+        "bytes": 13962,
+        "full9": {
+          "st_ctime_ns": "1795421815406637536",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "70008686",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795421815406637536",
+          "st_nlink": "1",
+          "st_size": "13962",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/common/converters.py",
+        "sha256": "f530c453775f2c1a4a2f8a26aa647df1f725be109078df258288eab33a427fde"
+      },
+      "ipfs_datasets_py/logic/common/errors.py": {
+        "bytes": 2268,
+        "full9": {
+          "st_ctime_ns": "1795421815408120835",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "70008692",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795421815408120835",
+          "st_nlink": "1",
+          "st_size": "2268",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/common/errors.py",
+        "sha256": "10d21acd8d0fd6049297a1b36d10db1fcc09146095f1dabfe5a686b887f4b8cf"
+      },
+      "ipfs_datasets_py/logic/common/feature_detection.py": {
+        "bytes": 4875,
+        "full9": {
+          "st_ctime_ns": "1795421815408120835",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "70008693",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795421815408120835",
+          "st_nlink": "1",
+          "st_size": "4875",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/common/feature_detection.py",
+        "sha256": "a285d84f9b13ee3c2c54023e07ccf9da94ce93e6736362c1881421db9e509d76"
+      },
+      "ipfs_datasets_py/logic/common/proof_cache.py": {
+        "bytes": 168205,
+        "full9": {
+          "st_ctime_ns": "1795421815408120835",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "70008694",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795421815408120835",
+          "st_nlink": "1",
+          "st_size": "168205",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/common/proof_cache.py",
+        "sha256": "b68c36ff934ba6ee7a308162ee7035c78f4c522a5483e85e536b428db8485b36"
+      },
+      "ipfs_datasets_py/logic/common/utility_monitor.py": {
+        "bytes": 6398,
+        "full9": {
+          "st_ctime_ns": "1795421815408120835",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "70008696",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795421815408120835",
+          "st_nlink": "1",
+          "st_size": "6398",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/common/utility_monitor.py",
+        "sha256": "ef23631a622dfd555cefcdf69793e78a7c64a115c7451aea4dfff5389b014985"
+      },
+      "ipfs_datasets_py/logic/common/validators.py": {
+        "bytes": 8374,
+        "full9": {
+          "st_ctime_ns": "1795421815408120835",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "70008697",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795421815408120835",
+          "st_nlink": "1",
+          "st_size": "8374",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/common/validators.py",
+        "sha256": "e58dbba7d3f346545e2ff572928ed9c7bb9adc71b20e8cc8dc816a7fc060e0c7"
+      },
+      "ipfs_datasets_py/logic/families/models.py": {
+        "bytes": 36277,
+        "full9": {
+          "st_ctime_ns": "1795421815419324733",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "70008824",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795421815419324733",
+          "st_nlink": "1",
+          "st_size": "36277",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/families/models.py",
+        "sha256": "1a92305ef498812e3757147179907d4ddf4a4518371034fc2363922d5d5fed3f"
+      },
+      "ipfs_datasets_py/logic/ir_core/__init__.py": {
+        "bytes": 6942,
+        "full9": {
+          "st_ctime_ns": "1795421815475569574",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "70009560",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795421815475569574",
+          "st_nlink": "1",
+          "st_size": "6942",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/ir_core/__init__.py",
+        "sha256": "4c0070482e009dd7cb9875e91124d48683da37d53f691cccb306ec50f23c946c"
+      },
+      "ipfs_datasets_py/logic/ir_core/claims.py": {
+        "bytes": 16176,
+        "full9": {
+          "st_ctime_ns": "1795421815475854218",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "70009564",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795421815475854218",
+          "st_nlink": "1",
+          "st_size": "16176",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/ir_core/claims.py",
+        "sha256": "282cdd3a6ba18a90079886337d360bae44da172748faa3ad2715d2071070de3b"
+      },
+      "ipfs_datasets_py/logic/ir_core/protocols.py": {
+        "bytes": 57414,
+        "full9": {
+          "st_ctime_ns": "1795421815475854218",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "70009568",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795421815475854218",
+          "st_nlink": "1",
+          "st_size": "57414",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/ir_core/protocols.py",
+        "sha256": "b452a7095a2524f0ea3f4e4f3a395643d3257cd6f42e3c77f8e1817df62f6fed"
+      }
+    },
+    "maintained_module_names": [
+      "ipfs_datasets_py.logic.backends.cache_protocol",
+      "ipfs_datasets_py.logic.common.duckdb_proof_store"
+    ],
+    "new_6": [
+      "tests/unit/logic/test_duckdb_proof_store.py::test_clear_discards_pending_single_flight_result[DuckDBProofStore]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_clear_discards_pending_single_flight_result[ExactVerificationCache]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_clear_preserves_replacement_flight[late-success-DuckDBProofStore]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_clear_preserves_replacement_flight[late-success-ExactVerificationCache]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_clear_preserves_replacement_flight[late-error-DuckDBProofStore]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_clear_preserves_replacement_flight[late-error-ExactVerificationCache]"
+    ],
+    "normal_config": {
+      "A_flat_validation_runtime_existence_probe": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate/ipfs_accelerate_py/agent_supervisor/validation_runtime.py",
+      "A_probe_existing": false,
+      "conftests": [
+        "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/conftest.py",
+        "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/conftest.py",
+        "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/conftest.py"
+      ],
+      "ini": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/pytest.ini",
+      "parent_namespace_absent": [
+        "tests/unit/logic/__init__.py",
+        "tests/unit/logic/conftest.py"
+      ],
+      "source_roles": {
+        "conftest.py": {
+          "bytes": 2054,
+          "full9": {
+            "st_ctime_ns": "1795421807861283462",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "68338392",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795421807861283462",
+            "st_nlink": "1",
+            "st_size": "2054",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/conftest.py",
+          "sha256": "2eab130f3effda3737f25a1770ccd5f9d4955ba42c3d692d659801ffdc1035cf"
+        },
+        "pytest.ini": {
+          "bytes": 1536,
+          "full9": {
+            "st_ctime_ns": "1795421816475143830",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "68338402",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795421816475143830",
+            "st_nlink": "1",
+            "st_size": "1536",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/pytest.ini",
+          "sha256": "01737eaafcd2b7e7e1a8db2368a93d4a28053ba44e611a10b1c87d2155dc65ff"
+        },
+        "tests/__init__.py": {
+          "bytes": 20,
+          "full9": {
+            "st_ctime_ns": "1795421816564177461",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "70026228",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795421816564177461",
+            "st_nlink": "1",
+            "st_size": "20",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/__init__.py",
+          "sha256": "89588b0c2be9d872060e78aa68ccf95f94ca27ea6bcb79a43509d66c296c73ce"
+        },
+        "tests/conftest.py": {
+          "bytes": 20716,
+          "full9": {
+            "st_ctime_ns": "1795421816568297752",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "70026331",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795421816568297752",
+            "st_nlink": "1",
+            "st_size": "20716",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/conftest.py",
+          "sha256": "0a255dc653799cb980d7edbb1d7b2e3c8f0d81b091d4986aa712e1e8e12b7f10"
+        },
+        "tests/unit/__init__.py": {
+          "bytes": 26,
+          "full9": {
+            "st_ctime_ns": "1795421816666213365",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "70028445",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795421816666213365",
+            "st_nlink": "1",
+            "st_size": "26",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/__init__.py",
+          "sha256": "9d566025eaa21543b52722147774afc45981154f677dcc38078a2632e5b52947"
+        },
+        "tests/unit/conftest.py": {
+          "bytes": 1204,
+          "full9": {
+            "st_ctime_ns": "1795421816669136457",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "70028541",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795421816669136457",
+            "st_nlink": "1",
+            "st_size": "1204",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/conftest.py",
+          "sha256": "2abb4618add06f636ab71406c19ccd828084a48ecf75448397ddb6cd2bca53a2"
+        }
+      }
+    },
+    "ordered_private_reference_nodeids": [
+      "tests/unit/logic/test_duckdb_proof_store.py::test_interfaces_schema_and_catalog_are_pinned",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_module_import_is_inert_without_duckdb",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_all_authority_dimensions_are_present_and_nonempty",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_authority_dimensions_cover_hammer_and_verification_surfaces",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[ir-override0]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[property_value-override1]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[assumptions-override2]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[selected_premises-override3]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[translator-override4]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[solver_identities-override5]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[toolchain-override6]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[theorem_registry-override7]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[policy-override8]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[resources-override9]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[tree-override10]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[backend_id-override11]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[backend_binary-override12]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[backend_version-override13]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[backend_config-override14]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_hammer_key_projection_retains_authority_dimensions",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_verification_cache_key_lift_retains_all_dimensions",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_kinds_are_closed_and_distinct",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[proved-proof]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[unsatisfiable-proof]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[attested-proof]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[disproved-counterexample]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[satisfiable-counterexample]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[attack_found-counterexample]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[unknown-unknown]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[candidate-unknown]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[error-error]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[timeout-error]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[malformed-error]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[unavailable-error]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[unsupported-error]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_proof_and_counterexample_entries_are_not_interchangeable",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_unknown_and_error_entries_remain_distinct",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_mismatched_outcome_and_status_rejected",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_entry_integrity_round_trip_and_tamper_rejection",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_unknown_key_fields_fail_closed",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_unknown_entry_fields_fail_closed",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_unsupported_key_schema_fails_closed",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_store_lookup_exact_key_miss_on_dimension_change",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_store_rejects_tampered_in_memory_entry",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_unified_key_must_project_to_matching_verification_key",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_trust_levels_project_from_evidence_authority",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_trust_cannot_exceed_evidence_authority",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_evidence_and_envelope_round_trip",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_envelope_rejects_filesystem_path_authority",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_access_statistics_track_hits_misses_writes",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_store_implements_verification_cache_put_get",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_verification_cache_entry_can_be_put_directly",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_exact_verification_cache_interop_bridge",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_invalidate_and_clear",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_get_or_compute_single_flight_and_store",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_clear_discards_pending_single_flight_result[DuckDBProofStore]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_clear_discards_pending_single_flight_result[ExactVerificationCache]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_clear_preserves_replacement_flight[late-success-DuckDBProofStore]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_clear_preserves_replacement_flight[late-success-ExactVerificationCache]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_clear_preserves_replacement_flight[late-error-DuckDBProofStore]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_clear_preserves_replacement_flight[late-error-ExactVerificationCache]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_negative_ttl_expires_unknown_faster_than_proof",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_trust_ceiling_rejects_raise",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_empty_backend_id_rejected",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_premises_digest_changes_with_premise_set",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_advisory_verification_projection_uses_target_status_polarity[candidate-positive]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_advisory_verification_projection_uses_target_status_polarity[unknown-negative]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_store_put_retains_advisory_candidate_without_proof_authority"
+    ],
+    "ordinary_R2_existing_owner_locator": {
+      "bootstrap": {
+        "bytes": 57731,
+        "path": "/tmp/Root-P1-get-snapshot-ordinary183-v301-bknpttsl/Root-selected-bootstrap.py",
+        "sha256": "7b333b6ca8290e7761686879f2ec410c417c5358a825f9ef0798f5fee43869a5"
+      },
+      "operator": {
+        "bytes": 86842,
+        "path": "/tmp/Root-P1-get-snapshot-ordinary183-v301-bknpttsl/Root-selected-operator.py",
+        "sha256": "159260025234f3bc02cde00e3cf6dd58fc594a0d9391039cf3deee40dff324f8"
+      },
+      "reuse": "Normal pytest/managed lifecycle only; neither the earlier 183 result nor its authority transfers.",
+      "v301_actual": {
+        "bytes": 3725,
+        "path": "/tmp/Root-P1-get-snapshot-ordinary183-v301-bknpttsl/Root-P1-get-checked-snapshot-ordinary183-qualified-small-v301.json",
+        "sha256": "a91378b44a708e3bffe7307fc0fd8b09c75ead0d600e89c1f22991c470da25f2"
+      }
+    },
+    "ordinary_order_and_counts": "Exact membership and case vector required. Establish current COLLECT order and require RUN/JUnit to match. Private order alone grants no ordinary credit.",
+    "owning_test_binding_names": {
+      "tests/unit/logic/test_duckdb_proof_store.py": "tests.unit.logic.test_duckdb_proof_store"
+    },
+    "retained_62": [
+      "tests/unit/logic/test_duckdb_proof_store.py::test_interfaces_schema_and_catalog_are_pinned",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_module_import_is_inert_without_duckdb",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_all_authority_dimensions_are_present_and_nonempty",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_authority_dimensions_cover_hammer_and_verification_surfaces",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[ir-override0]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[property_value-override1]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[assumptions-override2]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[selected_premises-override3]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[translator-override4]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[solver_identities-override5]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[toolchain-override6]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[theorem_registry-override7]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[policy-override8]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[resources-override9]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[tree-override10]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[backend_id-override11]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[backend_binary-override12]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[backend_version-override13]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_changing_any_authority_dimension_changes_key_digest[backend_config-override14]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_hammer_key_projection_retains_authority_dimensions",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_verification_cache_key_lift_retains_all_dimensions",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_kinds_are_closed_and_distinct",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[proved-proof]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[unsatisfiable-proof]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[attested-proof]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[disproved-counterexample]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[satisfiable-counterexample]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[attack_found-counterexample]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[unknown-unknown]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[candidate-unknown]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[error-error]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[timeout-error]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[malformed-error]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[unavailable-error]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_outcome_mapping_keeps_kinds_distinct[unsupported-error]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_proof_and_counterexample_entries_are_not_interchangeable",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_unknown_and_error_entries_remain_distinct",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_mismatched_outcome_and_status_rejected",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_entry_integrity_round_trip_and_tamper_rejection",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_unknown_key_fields_fail_closed",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_unknown_entry_fields_fail_closed",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_unsupported_key_schema_fails_closed",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_store_lookup_exact_key_miss_on_dimension_change",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_store_rejects_tampered_in_memory_entry",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_unified_key_must_project_to_matching_verification_key",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_trust_levels_project_from_evidence_authority",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_trust_cannot_exceed_evidence_authority",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_evidence_and_envelope_round_trip",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_envelope_rejects_filesystem_path_authority",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_access_statistics_track_hits_misses_writes",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_store_implements_verification_cache_put_get",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_verification_cache_entry_can_be_put_directly",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_exact_verification_cache_interop_bridge",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_invalidate_and_clear",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_get_or_compute_single_flight_and_store",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_negative_ttl_expires_unknown_faster_than_proof",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_trust_ceiling_rejects_raise",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_empty_backend_id_rejected",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_premises_digest_changes_with_premise_set",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_advisory_verification_projection_uses_target_status_polarity[candidate-positive]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_advisory_verification_projection_uses_target_status_polarity[unknown-negative]",
+      "tests/unit/logic/test_duckdb_proof_store.py::test_store_put_retains_advisory_candidate_without_proof_authority"
+    ]
+  },
+  "ordinary_or_Native_run_selected": false,
+  "pre_commit_D_index_metadata_only": {
+    "bytes": 6991149,
+    "full9": {
+      "st_ctime_ns": "1795645887737096147",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68338235",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795645887735338378",
+      "st_nlink": "1",
+      "st_size": "6991149",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+    "sha256": "a6b7ba5d6f24bc6a8ce84a3fd34dcd24e73afb423454eabaf9afcaf371964e70"
+  },
+  "private_code_and_test_candidate": {
+    "bytes": 14081,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/SEALED-private-P1-clear-retired-flight-three-file-red-green.json",
+    "sha256": "1908bb8d90fb2272295fe34e3c941a2e419110d38b1df8218e0d6edb9c69c10d"
+  },
+  "private_import_source_map": {
+    "bytes": 4204,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-clear-retired-proof-cache-flight-private-hh95ett_/source-map.json",
+    "sha256": "dff9767b3300c7cbd0001c301cacffcd7295706df34c9c4bb95cb9a074f2b929"
+  },
+  "schema": "P1-direct-clear-flight-exact-three-adoption-not-selected-and-ordinary68-roster/v1",
+  "source_or_git_mutation_by_composer": false
+}

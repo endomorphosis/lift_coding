@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="8" skipped="0" tests="40" time="0.555" timestamp="2026-11-26T06:01:24.653374" hostname="spark-b271"><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_fixture_loads_versioned_external_expert_packets" time="0.010" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_external_packets_build_external_test_manifest_and_block_training_use" time="0.010" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_external_validity_report_is_separate_from_internal_canary_metrics" time="0.008" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_acceptable_ambiguity_allows_expected_family_alternative" time="0.005" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_missing_external_expectations_fail_packet_without_touching_canary_metrics" time="0.005" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_packet_validation_rejects_training_or_poisoned_external_records" time="0.010" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_reference_ir_requires_candidate_in_fixed_denominator[omitted]" time="0.006" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_reference_ir_requires_candidate_in_fixed_denominator[null]" time="0.006" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_reference_ir_requires_candidate_in_fixed_denominator[empty]" time="0.006" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_reference_ir_requires_candidate_in_fixed_denominator[invalid]" time="0.006" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_legacy_candidate_alias_and_absent_reference_keep_existing_scope" time="0.007" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_required_round_trip_needs_observation" time="0.011" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_empty_external_population_has_no_acceptance" time="0.000" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_external_benchmark_rejects_ambiguous_prediction_order[accepted-first]" time="0.008" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_external_benchmark_rejects_ambiguous_prediction_order[accepted-last]" time="0.008" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_external_benchmark_rejects_misbound_keyed_prediction[packet_id]" time="0.003" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_external_benchmark_rejects_misbound_keyed_prediction[id]" time="0.003" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_external_benchmark_rejects_conflicting_prediction_aliases[flat]" time="0.003" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_external_benchmark_rejects_conflicting_prediction_aliases[sequence]" time="0.003" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_external_benchmark_rejects_duplicate_population_identity" time="0.006" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_external_benchmark_predicts_by_each_supported_identity_form" time="0.015" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_external_benchmark_requires_current_declared_packet_digest" time="0.016" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_benchmark_packet_intake_refuses_inconsistent_declared_digest[source-document]" time="0.008" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_benchmark_packet_intake_refuses_inconsistent_declared_digest[source-text]" time="0.008" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_benchmark_packet_intake_refuses_inconsistent_declared_digest[reference-ir]" time="0.008" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_benchmark_packet_intake_refuses_inconsistent_declared_digest[null-pin]" time="0.007" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_benchmark_packet_intake_refuses_inconsistent_declared_digest[wrong-pin]" time="0.008" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_benchmark_packet_digest_binds_canonical_loaded_revision" time="0.033" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_external_benchmark_obeys_family_ambiguity_policy[disabled-optional-family]" time="0.012"><failure message="AssertionError: assert () == ('external-ex...-notice-001',)&#10;  &#10;  Right contains one more item: 'external-expert-privacy-notice-001'&#10;  Use -v to get more diff">packet_index = 0, missing_family = 'temporal', allowed = False
+
+    @pytest.mark.parametrize(
+        ("packet_index", "missing_family"),
+        [(0, "temporal"), (1, "cec")],
+        ids=["optional-family", "family-alternative"],
+    )
+    @pytest.mark.parametrize(
+        "allowed", [False, True, None], ids=["disabled", "enabled", "legacy-implicit"]
+    )
+    def test_external_benchmark_obeys_family_ambiguity_policy(
+        packet_index, missing_family, allowed
+    ) -&gt; None:
+        from dataclasses import replace
+    
+        packet = _packets()[packet_index]
+        ambiguity = dict(packet.acceptable_ambiguity)
+        if packet_index == 0:
+            # Exercise the optional-family clause without its alternate.
+            ambiguity["acceptable_family_alternatives"] = {}
+        if allowed is None:
+            del ambiguity["allowed"]
+        else:
+            ambiguity["allowed"] = allowed
+        packet = replace(packet, acceptable_ambiguity=ambiguity)
+        assert packet.acceptable_ambiguity["allowed"] is (allowed is not False)
+    
+        prediction = {**_prediction(packet), "packet_digest": packet.digest}
+        assert evaluate_external_legal_expert_benchmark([packet], [prediction]).accepted
+    
+        prediction["predicted_ir_families"] = [
+            family for family in packet.expected_ir_families if family != missing_family
+        ]
+        report = evaluate_external_legal_expert_benchmark([packet], [prediction])
+        result, = report.packet_results
+        assert result.packet_id == packet.packet_id
+        if allowed is False:
+&gt;           assert report.failed_packet_ids == (packet.packet_id,)
+E           AssertionError: assert () == ('external-ex...-notice-001',)
+E             
+E             Right contains one more item: 'external-expert-privacy-notice-001'
+E             Use -v to get more diff
+
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:422: AssertionError</failure></testcase><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_external_benchmark_obeys_family_ambiguity_policy[disabled-family-alternative]" time="0.011"><failure message="AssertionError: assert () == ('external-ex...-waiver-001',)&#10;  &#10;  Right contains one more item: 'external-expert-conflict-waiver-001'&#10;  Use -v to get more diff">packet_index = 1, missing_family = 'cec', allowed = False
+
+    @pytest.mark.parametrize(
+        ("packet_index", "missing_family"),
+        [(0, "temporal"), (1, "cec")],
+        ids=["optional-family", "family-alternative"],
+    )
+    @pytest.mark.parametrize(
+        "allowed", [False, True, None], ids=["disabled", "enabled", "legacy-implicit"]
+    )
+    def test_external_benchmark_obeys_family_ambiguity_policy(
+        packet_index, missing_family, allowed
+    ) -&gt; None:
+        from dataclasses import replace
+    
+        packet = _packets()[packet_index]
+        ambiguity = dict(packet.acceptable_ambiguity)
+        if packet_index == 0:
+            # Exercise the optional-family clause without its alternate.
+            ambiguity["acceptable_family_alternatives"] = {}
+        if allowed is None:
+            del ambiguity["allowed"]
+        else:
+            ambiguity["allowed"] = allowed
+        packet = replace(packet, acceptable_ambiguity=ambiguity)
+        assert packet.acceptable_ambiguity["allowed"] is (allowed is not False)
+    
+        prediction = {**_prediction(packet), "packet_digest": packet.digest}
+        assert evaluate_external_legal_expert_benchmark([packet], [prediction]).accepted
+    
+        prediction["predicted_ir_families"] = [
+            family for family in packet.expected_ir_families if family != missing_family
+        ]
+        report = evaluate_external_legal_expert_benchmark([packet], [prediction])
+        result, = report.packet_results
+        assert result.packet_id == packet.packet_id
+        if allowed is False:
+&gt;           assert report.failed_packet_ids == (packet.packet_id,)
+E           AssertionError: assert () == ('external-ex...-waiver-001',)
+E             
+E             Right contains one more item: 'external-expert-conflict-waiver-001'
+E             Use -v to get more diff
+
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:422: AssertionError</failure></testcase><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_external_benchmark_obeys_family_ambiguity_policy[enabled-optional-family]" time="0.012" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_external_benchmark_obeys_family_ambiguity_policy[enabled-family-alternative]" time="0.011" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_external_benchmark_obeys_family_ambiguity_policy[legacy-implicit-optional-family]" time="0.012" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_external_benchmark_obeys_family_ambiguity_policy[legacy-implicit-family-alternative]" time="0.011" /><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_external_benchmark_refuses_predictions_for_unselected_packets[sequence]" time="0.007"><failure message="Failed: DID NOT RAISE &lt;class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'&gt;">form = 'sequence'
+
+    @pytest.mark.parametrize("form", ["sequence", "keyed", "flat"])
+    def test_external_benchmark_refuses_predictions_for_unselected_packets(form) -&gt; None:
+        packet, other = _packets()
+        chosen, foreign = _prediction(packet), _prediction(other)
+        assert evaluate_external_legal_expert_benchmark([packet], [chosen]).accepted
+        if form == "sequence":
+            predictions = [chosen, foreign]
+        elif form == "keyed":
+            predictions = {packet.packet_id: chosen, other.packet_id: foreign}
+        else:
+            predictions = foreign
+&gt;       with pytest.raises(LegalIRExternalBenchmarkError, match="outside the selected benchmark population"):
+E       Failed: DID NOT RAISE &lt;class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'&gt;
+
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:444: Failed</failure></testcase><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_external_benchmark_refuses_predictions_for_unselected_packets[keyed]" time="0.007"><failure message="Failed: DID NOT RAISE &lt;class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'&gt;">form = 'keyed'
+
+    @pytest.mark.parametrize("form", ["sequence", "keyed", "flat"])
+    def test_external_benchmark_refuses_predictions_for_unselected_packets(form) -&gt; None:
+        packet, other = _packets()
+        chosen, foreign = _prediction(packet), _prediction(other)
+        assert evaluate_external_legal_expert_benchmark([packet], [chosen]).accepted
+        if form == "sequence":
+            predictions = [chosen, foreign]
+        elif form == "keyed":
+            predictions = {packet.packet_id: chosen, other.packet_id: foreign}
+        else:
+            predictions = foreign
+&gt;       with pytest.raises(LegalIRExternalBenchmarkError, match="outside the selected benchmark population"):
+E       Failed: DID NOT RAISE &lt;class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'&gt;
+
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:444: Failed</failure></testcase><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_external_benchmark_refuses_predictions_for_unselected_packets[flat]" time="0.006"><failure message="Failed: DID NOT RAISE &lt;class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'&gt;">form = 'flat'
+
+    @pytest.mark.parametrize("form", ["sequence", "keyed", "flat"])
+    def test_external_benchmark_refuses_predictions_for_unselected_packets(form) -&gt; None:
+        packet, other = _packets()
+        chosen, foreign = _prediction(packet), _prediction(other)
+        assert evaluate_external_legal_expert_benchmark([packet], [chosen]).accepted
+        if form == "sequence":
+            predictions = [chosen, foreign]
+        elif form == "keyed":
+            predictions = {packet.packet_id: chosen, other.packet_id: foreign}
+        else:
+            predictions = foreign
+&gt;       with pytest.raises(LegalIRExternalBenchmarkError, match="outside the selected benchmark population"):
+E       Failed: DID NOT RAISE &lt;class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'&gt;
+
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:444: Failed</failure></testcase><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_external_benchmark_refuses_unbound_sequence_output[malformed0]" time="0.005"><failure message="Failed: DID NOT RAISE &lt;class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'&gt;">malformed = {'candidate_ir': {}}
+
+    @pytest.mark.parametrize("malformed", [{"candidate_ir": {}}, None])
+    def test_external_benchmark_refuses_unbound_sequence_output(malformed) -&gt; None:
+        packet = _packets()[0]
+&gt;       with pytest.raises(LegalIRExternalBenchmarkError, match="prediction row requires a packet ID"):
+E       Failed: DID NOT RAISE &lt;class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'&gt;
+
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:451: Failed</failure></testcase><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_external_benchmark_refuses_unbound_sequence_output[None]" time="0.005"><failure message="Failed: DID NOT RAISE &lt;class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'&gt;">malformed = None
+
+    @pytest.mark.parametrize("malformed", [{"candidate_ir": {}}, None])
+    def test_external_benchmark_refuses_unbound_sequence_output(malformed) -&gt; None:
+        packet = _packets()[0]
+&gt;       with pytest.raises(LegalIRExternalBenchmarkError, match="prediction row requires a packet ID"):
+E       Failed: DID NOT RAISE &lt;class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'&gt;
+
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:451: Failed</failure></testcase><testcase classname="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark" name="test_external_benchmark_refuses_nonmapping_keyed_output" time="0.004"><failure message="Failed: DID NOT RAISE &lt;class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'&gt;">def test_external_benchmark_refuses_nonmapping_keyed_output() -&gt; None:
+        packet = _packets()[0]
+&gt;       with pytest.raises(LegalIRExternalBenchmarkError, match="keyed prediction must be a mapping"):
+E       Failed: DID NOT RAISE &lt;class 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark.LegalIRExternalBenchmarkError'&gt;
+
+test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py:457: Failed</failure></testcase></testsuite></testsuites>

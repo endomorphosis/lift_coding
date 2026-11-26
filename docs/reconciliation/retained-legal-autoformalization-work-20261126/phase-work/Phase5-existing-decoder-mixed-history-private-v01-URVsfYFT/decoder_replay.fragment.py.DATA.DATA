@@ -1,0 +1,85 @@
+
+
+@pytest.mark.parametrize("archive", ("none", "unrelated", "unicode_near_duplicate"))
+def test_full_reviewed_decoder_replays_unicode_stage_with_legacy_holdout(tmp_path, archive):
+    from ipfs_datasets_py.optimizers.logic_theorem_optimizer import legal_ir_eval_splits as splits
+
+    data, _, manifest = _unicode_reviewed_stage_options(tmp_path, unicode_profile=True)
+    with pytest.MonkeyPatch.context() as patch:
+        patch.setitem(globals(), "_reviewed_transition_fixture", lambda path: data)
+        _, registry, artifact, kwargs = _reviewed_decoder_fixture(tmp_path)
+
+    seen = []
+
+    class ObservedTokenizer(_ReviewedDecoderByteTokenizer):
+        def encode(self, text):
+            seen.append(text)
+            return super().encode(text)
+
+    kwargs["tokenizer"] = ObservedTokenizer()
+    legacy_id = "fixture:distinct-legacy-holdout"
+    if archive != "none":
+        document = _reviewed_doc(registry, artifact)
+        history = _reviewed_doc(registry, document["history_artifact"])
+        source_row = data.rows[1]
+        text = (
+            source_row["source_text"].replace("covered", "coverzd").replace("Board", "Bourd")
+            if archive == "unicode_near_duplicate"
+            else "Violet minerals rest beneath quiet silver mountains."
+        )
+        config = splits.LegalIREvalSplitConfig(**data.config)
+        historical = splits.LegalIRSplitExample.from_sample({"id": legacy_id, "text": text})
+        original = splits.LegalIRSplitExample.from_sample(source_row)
+        assert original.content_hash != historical.content_hash
+        legacy = splits.LegalIRSplitManifest(
+            examples=(historical,), assignments={legacy_id: "holdout"}, config_digest=config.digest
+        ).to_dict()
+        history["scope_kind"] = "complete_declared_history"
+        history["split_manifests"].append({"manifest": legacy, "sha256": data.fixtures.digest(legacy)})
+        history["records"].append({"id": legacy_id, "source_text": text,
+            "source_sha256": data.fixtures.source_digest(text), "split_example": historical.to_dict(),
+            "assignment": "holdout"})
+
+        def overlap(profile):
+            _, first = splits.legal_ir_split_source_fingerprint(source_row["source_text"], metadata=profile)
+            _, second = splits.legal_ir_split_source_fingerprint(text, metadata=profile)
+            return len(set(first).intersection(second)) / len(set(first).union(second))
+
+        assert overlap({}) < config.near_duplicate_jaccard_threshold
+        assert (overlap(manifest["metadata"]) >= config.near_duplicate_jaccard_threshold) == (
+            archive == "unicode_near_duplicate"
+        )
+        document["history_artifact"] = _reviewed_decoder_put_json(
+            registry, tmp_path / "legacy-heldout-history.json", history
+        )
+        _reviewed_decoder_repin_stage(registry, tmp_path, kwargs, document)
+
+    staged_calls = registry.stage_calls
+    if archive == "unicode_near_duplicate":
+        with pytest.raises(splits.LegalIRSplitLeakageError) as blocked:
+            inputs.prepare_reviewed_decoder_training_inputs(registry, **kwargs)
+        assert seen == []
+        assert registry.stage_calls == staged_calls
+        assert any(
+            item.kind == "near_duplicate"
+            and source_row["id"] in item.sample_ids_by_split.get("train", ())
+            and legacy_id in item.sample_ids_by_split.get("holdout", ())
+            for item in blocked.value.result.violations
+        )
+        return
+
+    result = inputs.prepare_reviewed_decoder_training_inputs(registry, **kwargs)
+    assert registry.stage_calls == staged_calls
+    assert result["receipt"]["training_record_ids"] == [row["id"] for row in data.rows]
+    assert result["receipt"]["training_mask"] == 0
+    assert result["receipt"]["production_training_eligible"] is False
+    assert result["receipt"]["backend_execution_authorized"] is False
+    assert len(seen) == 2 * len(data.rows)
+    if archive == "unrelated":
+        assert all(text not in wire for wire in seen)
+    for row, record in zip(data.rows, result["records"], strict=True):
+        source = json.loads(record["source_wire"])
+        assert source["source_text"] == row["source_text"]
+        assert set(source) == {"profile", "source_text", "governing_context", "source_binding", "selection_context"}
+        assert json.loads(record["target_json"]) == row["canonical_ir"]
+        assert len(json.loads(record["target_json"])) == 9

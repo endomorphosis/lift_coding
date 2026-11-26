@@ -1,0 +1,85 @@
+"""Privately run the current benchmark, semantic, rollout and compiler owning fixtures."""
+from hashlib import sha256
+import importlib.abc
+import importlib.util
+import json
+import os
+from pathlib import Path
+import resource
+import sys
+
+repo, root, out = map(Path, sys.argv[1:4])
+mode = sys.argv[4]
+assert mode in {"before", "after"}
+out.mkdir(mode=0o700, exist_ok=False)
+resource.setrlimit(resource.RLIMIT_AS, (512 * 1024**2, 512 * 1024**2))
+resource.setrlimit(resource.RLIMIT_CPU, (45, 46))
+resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
+os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
+os.environ["PYTEST_DISABLE_PLUGIN_AUTOLOAD"] = "1"
+sys.path.insert(0, str(repo))
+sys.dont_write_bytecode = True
+manifest = json.loads((root / "exact-composed-role-and-test-inputs.json").read_bytes())
+
+def pinned(ref):
+    raw = Path(ref["path"]).read_bytes()
+    assert len(raw) == ref["bytes"] and sha256(raw).hexdigest() == ref["sha256"]
+    return raw
+
+relpaths = {role: Path(ref["path"]) for role, ref in manifest["tests"].items()}
+for ref in [*manifest["tests"].values(), manifest["fixture"]]:
+    pinned(ref)
+actual_bodies = {
+    name: (repo / row["rel"], pinned(row[mode])) for name, row in manifest["owners"].items()
+}
+for name, row in manifest["owners"].items():
+    assert (repo / row["rel"]).read_bytes() == pinned(row["before"])
+helper = "tests.unit.optimizers.logic_theorem_optimizer.test_external_validity_promotion_gate"
+actual_bodies[helper] = (relpaths["rollout"], relpaths["rollout"].read_bytes())
+observed = {}
+
+class ExistingOwners(importlib.abc.MetaPathFinder, importlib.abc.Loader):
+    def find_spec(self, fullname, path=None, target=None):
+        if fullname.split(".", 1)[0] in {"torch", "transformers", "duckdb", "pyarrow"}:
+            raise ImportError("Dependency outside the bounded fixture: " + fullname)
+        if fullname in actual_bodies:
+            return importlib.util.spec_from_file_location(fullname, actual_bodies[fullname][0], loader=self)
+        return None
+
+    def exec_module(self, module):
+        path, body = actual_bodies[module.__name__]
+        observed.setdefault(module.__name__, []).append(sha256(body).hexdigest())
+        exec(compile(body, str(path), "exec"), module.__dict__)
+
+loader = ExistingOwners()
+sys.meta_path.insert(0, loader)
+external = []
+
+def audit(event, args):
+    if event.startswith(("socket.", "subprocess.")) or event in {"os.exec","os.fork","os.posix_spawn","os.system"}:
+        external.append(event)
+        raise PermissionError("Action outside the bounded fixture: " + event)
+
+sys.addaudithook(audit)
+import pytest
+
+class ExactFixtureImport:
+    def pytest_sessionstart(self, session):
+        sys.meta_path.remove(loader)
+        sys.meta_path.insert(0, loader)
+
+code = int(pytest.main([
+    "-c", "/dev/null", "--noconftest", "-p", "no:cacheprovider", "--rootdir", str(root / "test-cohort"),
+    "-q", "--tb=short", "-k", "not (test_external_validity_cli_writes_decision_and_report or test_compiler_system_gate_cli_writes_decision_and_report)",
+    f"--basetemp={out / 'pytest'}", f"--junitxml={out / 'junit.xml'}",
+    *[str(relpaths[role]) for role in ("benchmark", "rollout", "compiler")],
+    *[f"{relpaths['facets']}::{name}" for name in manifest["semantic_selectors"]],
+], plugins=[ExactFixtureImport()]))
+assert set(observed) == set(actual_bodies), observed.keys()
+assert all(set(values) == {sha256(actual_bodies[name][1]).hexdigest()} for name, values in observed.items())
+with (out / "run.json").open("x") as f:
+    json.dump(dict(pytest_exit=code,mode=mode,actual_pinned_imports=observed,external_events=external,
+         fixture=pinned(manifest["fixture"]).hex()[:0] or manifest["fixture"]["sha256"],
+         actual_subprocess_CLI_invocations=0),f,sort_keys=True,indent=2)
+    f.write("\n")
+raise SystemExit(code if not external else 2)

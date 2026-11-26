@@ -1,0 +1,40 @@
+--- a/tests/integration/logic/backends/test_kernel_backends.py
++++ b/tests/integration/logic/backends/test_kernel_backends.py
+@@ -2018,3 +2018,37 @@
+     assert changed.metadata == outcome.result.metadata and changed.witness == outcome.result.witness
+     with pytest.raises(LeanKernelError, match="outcome result .*request"):
+         replace(outcome, result=changed)
++
++
++@pytest.mark.parametrize("returncode", [False, 0.0, True, "0", None, 1])
++def test_lean_malformed_or_failed_exit_status_cannot_establish_proof(returncode):
++    from dataclasses import replace
++
++    report = _axiom_message("'wanted' does not depend on any axioms")
++    positive = _lean_output(report)
++    assert type(positive.returncode) is int and positive.returncode == 0
++    assert evaluate_lean_kernel_output(positive, declaration="wanted")[0] is True
++    process = replace(positive, returncode=returncode)
++    assert process.returncode is returncode
++    accepted, _, diagnostics = evaluate_lean_kernel_output(
++        process, declaration="wanted")
++    assert accepted is False
++    assert diagnostics
++
++
++@pytest.mark.parametrize("returncode", [False, 0.0])
++def test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status(returncode):
++    from dataclasses import replace
++
++    report = _axiom_message(
++        "'wanted' does not depend on any axioms",
++        fileName="Input.lean", pos={"line": 17, "column": 0})
++    positive = _lean_output(report)
++    binding = {"declaration": "wanted", "expected_source_path": "Input.lean",
++               "expected_source_line": 17}
++    assert evaluate_lean_kernel_output(positive, **binding)[0] is True
++    accepted, axiom_report, diagnostics = evaluate_lean_kernel_output(
++        replace(positive, returncode=returncode), **binding)
++    assert accepted is False
++    assert axiom_report is not None and axiom_report.declaration == "wanted"
++    assert diagnostics

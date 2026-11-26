@@ -1,0 +1,136 @@
+{
+  "actual_saved_artifact_parent_validator": true,
+  "cases": [
+    {
+      "agrees": true,
+      "case": "complete",
+      "expected_accepted": true,
+      "observed_accepted": true,
+      "refusal": null
+    },
+    {
+      "agrees": true,
+      "case": "abstained",
+      "expected_accepted": true,
+      "observed_accepted": true,
+      "refusal": null
+    },
+    {
+      "agrees": true,
+      "case": "time-before-forward",
+      "expected_accepted": true,
+      "observed_accepted": true,
+      "refusal": null
+    },
+    {
+      "agrees": true,
+      "case": "token-exhaustion",
+      "expected_accepted": true,
+      "observed_accepted": true,
+      "refusal": null
+    },
+    {
+      "agrees": true,
+      "case": "unexpected-bos",
+      "expected_accepted": true,
+      "observed_accepted": true,
+      "refusal": null
+    },
+    {
+      "agrees": true,
+      "case": "invalid-transport",
+      "expected_accepted": true,
+      "observed_accepted": true,
+      "refusal": null
+    },
+    {
+      "agrees": true,
+      "case": "malformed-body",
+      "expected_accepted": true,
+      "observed_accepted": true,
+      "refusal": null
+    },
+    {
+      "agrees": true,
+      "case": "empty-decoded-body",
+      "expected_accepted": true,
+      "observed_accepted": true,
+      "refusal": null
+    },
+    {
+      "agrees": false,
+      "case": "complete-without-eos",
+      "expected_accepted": false,
+      "observed_accepted": true,
+      "refusal": null
+    },
+    {
+      "agrees": false,
+      "case": "complete-with-early-eos",
+      "expected_accepted": false,
+      "observed_accepted": true,
+      "refusal": null
+    },
+    {
+      "agrees": false,
+      "case": "complete-with-wrong-bos",
+      "expected_accepted": false,
+      "observed_accepted": true,
+      "refusal": null
+    },
+    {
+      "agrees": false,
+      "case": "complete-outside-vocab",
+      "expected_accepted": false,
+      "observed_accepted": true,
+      "refusal": null
+    },
+    {
+      "agrees": false,
+      "case": "false-abstention",
+      "expected_accepted": false,
+      "observed_accepted": true,
+      "refusal": null
+    },
+    {
+      "agrees": false,
+      "case": "false-incomplete-with-eos",
+      "expected_accepted": false,
+      "observed_accepted": true,
+      "refusal": null
+    },
+    {
+      "agrees": false,
+      "case": "false-token-budget",
+      "expected_accepted": false,
+      "observed_accepted": true,
+      "refusal": null
+    },
+    {
+      "agrees": false,
+      "case": "valid-body-called-invalid",
+      "expected_accepted": false,
+      "observed_accepted": true,
+      "refusal": null
+    },
+    {
+      "agrees": false,
+      "case": "missing-tokenizer-receipt",
+      "expected_accepted": false,
+      "observed_accepted": true,
+      "refusal": null
+    }
+  ],
+  "exact_public_codec": true,
+  "matched": 8,
+  "phase": "before",
+  "project_or_model_runtime_loaded": false,
+  "selected_owner": {
+    "blob": "370a9c3fb8e52702b9ca71fff60279443ca31781",
+    "bytes": 85793,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/inference.before.py.DATA",
+    "relative_git_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_inference.py",
+    "sha256": "413cabdaae3c28321215fe418b450013fdd07ac94dde6e0c39d08de5cde3c6f3"
+  },
+  "total": 17
+}

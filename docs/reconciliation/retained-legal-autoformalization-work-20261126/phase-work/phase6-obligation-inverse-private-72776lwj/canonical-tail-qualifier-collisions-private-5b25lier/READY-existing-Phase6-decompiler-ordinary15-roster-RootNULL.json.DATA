@@ -1,0 +1,180 @@
+{
+  "actual": {
+    "SDK": null,
+    "Source": null,
+    "authority": null,
+    "clock": null,
+    "execution": null,
+    "index": null,
+    "result": null,
+    "service": null
+  },
+  "actual_collect_order_still_required": true,
+  "actual_historical_control_inputs": {
+    "bootstrap": {
+      "bytes": 45558,
+      "path": "/tmp/Root-existing-Phase6-canonical-qualifier-ordinary12-v418-ky_iyukk/Root-selected-bootstrap.py",
+      "sha256": "07798089de4cc0558b06e83d17447d9c086d97aa8045cf1fcdba958f8c45aba1"
+    },
+    "manifest": {
+      "bytes": 5509,
+      "path": "/tmp/Root-existing-Phase6-canonical-qualifier-ordinary12-v418-ky_iyukk/Root-selected-Phase6-canonical-qualifiers-ordinary12-binding-manifest.json",
+      "sha256": "eb82fffeffab38c1fbaebe287f3c695128c1681f4a4782664ac41e6f0cb17227"
+    },
+    "operator": {
+      "bytes": 73181,
+      "path": "/tmp/Root-existing-Phase6-canonical-qualifier-ordinary12-v418-ky_iyukk/Root-selected-Phase6-canonical-qualifiers-existing-ordinary12-operator.py",
+      "sha256": "302fe5ee37b0842620362b7469a965290e838f8e71956fb7966b43cc377f607f"
+    }
+  },
+  "candidate": {
+    "bytes": 12271,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-obligation-inverse-private-72776lwj/canonical-tail-qualifier-collisions-private-5b25lier/SEALED-Phase6-predicate-clause-boundary-exact2-private.json",
+    "sha256": "4c7f303ed0e946e36a9d46ecdb37cce6e16c4a6fa46e92ea1de4ceb844caf049"
+  },
+  "maintain_existing_selected_test_rewrite": true,
+  "ordered_count_vector": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3,
+    3
+  ],
+  "owning_file_AST_append_checked": true,
+  "previous_INERT_readiness": {
+    "bytes": 14872,
+    "path": "/tmp/Phase6-existing-R2-ordinary12-INERT-v01-FdYbRmcQ/READY-P6-canonical-qualifier-ordinary12-existing-v408-controls-INERT.json",
+    "sha256": "bf18df6c2745bbed79dae76a3722a8534af31a301b817d2c3df8569f89c3c947"
+  },
+  "previous_controls_INERT": {
+    "bootstrap": {
+      "bytes": 40246,
+      "path": "/tmp/Phase6-existing-R2-ordinary12-INERT-v01-FdYbRmcQ/P6-ordinary12-v408-existing-bootstrap.INERT.py.DATA",
+      "sha256": "f4ba3b04b79f60413f078705f91c761c62cbf7cb32efd9e031065346338836d5"
+    },
+    "factory": {
+      "bytes": 3290,
+      "path": "/tmp/Phase6-existing-R2-ordinary12-INERT-v01-FdYbRmcQ/P6-ordinary12-v408-existing-factory.INERT.py.DATA",
+      "sha256": "35d2cff9ffecb49c2f6ea612714f93ea358eb2f257d4c0822fdd90404342e263"
+    },
+    "operator": {
+      "bytes": 59147,
+      "path": "/tmp/Phase6-existing-R2-ordinary12-INERT-v01-FdYbRmcQ/P6-ordinary12-v408-existing-operator.INERT.py.DATA",
+      "sha256": "6353111081f84ea0b121e214a6b2bae735fc8a9f6bef6a81124c2c594cbf01fe"
+    }
+  },
+  "prior_ordinary12": {
+    "bytes": 18604,
+    "path": "/tmp/Root-existing-Phase6-canonical-qualifier-ordinary12-v418-ky_iyukk/actual-Phase6-canonical-qualifiers-ordinary12-closed-small-v418.json",
+    "sha256": "fbc2e4e7760c5ef97f595c02ba56c54436df242672669aa46fe681b903b90810"
+  },
+  "prior_raw_JUnit": {
+    "bytes": 2205,
+    "path": "/tmp/Root-existing-Phase6-canonical-qualifier-ordinary12-v418-ky_iyukk/actual-output/P6-canonical-qualifier-ordinary12-run-result0-output1.bin",
+    "sha256": "668933e2d8a7149feafad9c73f501ba753b15274f8e148143590f8780751be1d"
+  },
+  "private_same_15_only": true,
+  "prospective_subcohorts": {
+    "qualifier3": [
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_delimiter_ambiguous_atoms_abstain_and_split_clauses_render[condition-conjunction]",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_delimiter_ambiguous_atoms_abstain_and_split_clauses_render[exception-disjunction]",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_delimiter_ambiguous_atoms_abstain_and_split_clauses_render[condition-exception-boundary]"
+    ],
+    "retained9": [
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_all_frozen_t1_outputs_match_selected_benchmark_adapter",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_temporal_phrase_already_in_the_object_is_not_repeated",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_frozen_grammar_preserves_polarity_roles_and_every_facet",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_success_has_raw_text_cid_and_deterministic_component_trace",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_attribution_receipt_binds_only_public_canonical_inputs_and_t1",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_only_exact_frozen_config_and_policy_are_accepted",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_invalid_requests_and_component_errors_are_typed_failures",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_decompiler_is_stateless_source_withheld_and_model_free",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_production_module_has_no_benchmark_dependency"
+    ],
+    "untyped_predicate_qualifier3": [
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_untyped_qualifier_in_predicate_abstains_without_erasing_explicit_clause[action-condition]",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_untyped_qualifier_in_predicate_abstains_without_erasing_explicit_clause[object-condition]",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_untyped_qualifier_in_predicate_abstains_without_erasing_explicit_clause[temporal-exception]"
+    ]
+  },
+  "retained_fixture_wire_recipe": {
+    "actual_required_fixture_closure": null,
+    "bind": "Use absolute path plus bytes, sha256 and full9 from actual closed READ50 and same outer row. Keep nonempty v307 fixture row. Three actual current ancestor conftests and pytest.ini must resolve to guarded current rows. Root late bind verifies current absence witnesses separately.",
+    "fixture_body_checks": "Existing bootstrap exact() attests real absolute fixture by FD/path before and after genuine pytest COLLECT and RUN. Parent joins both to actual outer row. Four fixed-size body reads total 58320 bytes in selected SDK children. No copying or replacement of the test physical fixture path.",
+    "keys": [
+      "required_fixture_closure",
+      "required_normal_conftests",
+      "pytest_inifile"
+    ],
+    "physical_getsource": "Existing maintained owner loader reads frozen canonical file bytes and records compile origin, with body identity checks before and after. Preserve the owning test that calls ordinary inspect.getsource(module) and validates imports, with same real path and no linecache or loader stub.",
+    "pytest_inifile_expected": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/pytest.ini",
+    "required_fixture_closure_row": {
+      "bytes": 14580,
+      "full9": null,
+      "relative_path": "tests/fixtures/semantic_roundtrip/pilot_cases.json",
+      "sha256": "6d34cdd1392d3a9964f04e4260f722e076ba7b96c3cdd2fc59749460756cf167"
+    },
+    "required_normal_conftests_expected": [
+      "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/conftest.py",
+      "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/conftest.py",
+      "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/conftest.py"
+    ]
+  },
+  "schema": "phase6-qualifier-tail-ordinary15-roster-data-only/v1",
+  "selection": {
+    "expected_function_case_counts": {
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_all_frozen_t1_outputs_match_selected_benchmark_adapter": 1,
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_attribution_receipt_binds_only_public_canonical_inputs_and_t1": 1,
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_decompiler_is_stateless_source_withheld_and_model_free": 1,
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_delimiter_ambiguous_atoms_abstain_and_split_clauses_render": 3,
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_frozen_grammar_preserves_polarity_roles_and_every_facet": 1,
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_invalid_requests_and_component_errors_are_typed_failures": 1,
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_only_exact_frozen_config_and_policy_are_accepted": 1,
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_production_module_has_no_benchmark_dependency": 1,
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_success_has_raw_text_cid_and_deterministic_component_trace": 1,
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_temporal_phrase_already_in_the_object_is_not_repeated": 1,
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_untyped_qualifier_in_predicate_abstains_without_erasing_explicit_clause": 3
+    },
+    "function_count": 11,
+    "function_selectors": [
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_all_frozen_t1_outputs_match_selected_benchmark_adapter",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_temporal_phrase_already_in_the_object_is_not_repeated",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_frozen_grammar_preserves_polarity_roles_and_every_facet",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_success_has_raw_text_cid_and_deterministic_component_trace",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_attribution_receipt_binds_only_public_canonical_inputs_and_t1",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_only_exact_frozen_config_and_policy_are_accepted",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_invalid_requests_and_component_errors_are_typed_failures",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_decompiler_is_stateless_source_withheld_and_model_free",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_production_module_has_no_benchmark_dependency",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_delimiter_ambiguous_atoms_abstain_and_split_clauses_render",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_untyped_qualifier_in_predicate_abstains_without_erasing_explicit_clause"
+    ],
+    "literal_expected_cases": 15,
+    "literal_expected_nodeids": [
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_all_frozen_t1_outputs_match_selected_benchmark_adapter",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_temporal_phrase_already_in_the_object_is_not_repeated",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_frozen_grammar_preserves_polarity_roles_and_every_facet",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_success_has_raw_text_cid_and_deterministic_component_trace",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_attribution_receipt_binds_only_public_canonical_inputs_and_t1",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_only_exact_frozen_config_and_policy_are_accepted",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_invalid_requests_and_component_errors_are_typed_failures",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_decompiler_is_stateless_source_withheld_and_model_free",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_production_module_has_no_benchmark_dependency",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_delimiter_ambiguous_atoms_abstain_and_split_clauses_render[condition-conjunction]",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_delimiter_ambiguous_atoms_abstain_and_split_clauses_render[exception-disjunction]",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_delimiter_ambiguous_atoms_abstain_and_split_clauses_render[condition-exception-boundary]",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_untyped_qualifier_in_predicate_abstains_without_erasing_explicit_clause[action-condition]",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_untyped_qualifier_in_predicate_abstains_without_erasing_explicit_clause[object-condition]",
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py::test_untyped_qualifier_in_predicate_abstains_without_erasing_explicit_clause[temporal-exception]"
+    ],
+    "owning_files": [
+      "tests/unit/logic/legal_ir/test_canonical_decompiler.py"
+    ]
+  }
+}

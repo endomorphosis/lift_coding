@@ -1,0 +1,294 @@
+{
+  "actual_Source_or_Native_or_hostedCI_or_model_or_SQL": false,
+  "actual_private_current_protocol_runs": {
+    "after-current-protocol-v03": {
+      "errors": [],
+      "failures": [],
+      "raw_XML": {
+        "bytes": 16748,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/after-current-protocol-v03/result.xml",
+        "sha256": "452303777a735a4bb9c6ee229509ad7772144c7c10ee9e14e91f9059691994c9"
+      },
+      "skipped": [],
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/after-current-protocol-v03/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 883,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/after-current-protocol-v03/stdout.DATA",
+        "sha256": "773fc13ecd0e7bbebc9c4056f9a4646da4abef910f4a45c0999bb75048c661d7"
+      },
+      "termination": {
+        "bytes": 3394,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/after-current-protocol-v03/termination.json",
+        "sha256": "d4a3bd11d6917014ea44cf3d41317177db8c2af6e0f128ecc146e91ebe0c7a3c"
+      },
+      "unique_cases": 88
+    },
+    "before-current-protocol-v03": {
+      "errors": [],
+      "failures": [
+        "test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind[rocq]",
+        "test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind[cvc5]",
+        "test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind[lean4-wasm]"
+      ],
+      "raw_XML": {
+        "bytes": 18101,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/before-current-protocol-v03/result.xml",
+        "sha256": "49c64353f67b6ee6b3423918ca4e9636157a5424545b8c5819dac713a3ffc823"
+      },
+      "skipped": [],
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/before-current-protocol-v03/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 2675,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/before-current-protocol-v03/stdout.DATA",
+        "sha256": "c7c29ec0eb8648cc89c2b4a15809c8d7aa6fa1f44d18253cdb8ff3ba6cd57eaf"
+      },
+      "termination": {
+        "bytes": 3438,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/before-current-protocol-v03/termination.json",
+        "sha256": "f1e6b146f0fef36079ab57bf3684380dd35cd7fac617a65693ca73b1b081ae58"
+      },
+      "unique_cases": 88
+    }
+  },
+  "actual_private_runs": {
+    "after-corrected-fixture-v02": {
+      "errors": [],
+      "failures": [],
+      "raw_XML": {
+        "bytes": 16748,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/after-corrected-fixture-v02/result.xml",
+        "sha256": "a79c502a4d86f4558cb8bd9ca7f6fba1597bf8cbbe441f4d199e10611887026e"
+      },
+      "skipped": [],
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/after-corrected-fixture-v02/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 884,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/after-corrected-fixture-v02/stdout.DATA",
+        "sha256": "550e261336d8ecd78161c9d9d6ac9210648383f933681e43d0c984999183b803"
+      },
+      "termination": {
+        "bytes": 3370,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/after-corrected-fixture-v02/termination.json",
+        "sha256": "011f1e3ff368a4c72479302fbeecb0a4b874b92821d14e352d74b100fa3b9e44"
+      },
+      "unique_cases": 88
+    },
+    "before": {
+      "errors": [],
+      "failures": [
+        "test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind[rocq]",
+        "test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind[cvc5]",
+        "test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind[lean4-wasm]",
+        "test_lean_outcome_preserves_default_and_supported_requested_backend_aliases[None]"
+      ],
+      "raw_XML": {
+        "bytes": 19126,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/before/result.xml",
+        "sha256": "429a9dd5fd80b795b850d679ef3e04487d09376083b9885096dd45fbbb8470a1"
+      },
+      "skipped": [],
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/before/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 3743,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/before/stdout.DATA",
+        "sha256": "62847ae37bec402471ab44aeafe40828b636465d05f914756d86b4ba14eb0517"
+      },
+      "termination": {
+        "bytes": 3475,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/before/termination.json",
+        "sha256": "e814b109111f66b32a1ab96452c0841e61f06be20ab6ce8179a1d124a280051e"
+      },
+      "unique_cases": 88
+    },
+    "before-corrected-fixture-v02": {
+      "errors": [],
+      "failures": [
+        "test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind[rocq]",
+        "test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind[cvc5]",
+        "test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind[lean4-wasm]"
+      ],
+      "raw_XML": {
+        "bytes": 18101,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/before-corrected-fixture-v02/result.xml",
+        "sha256": "ca2f7e7b126cc3affdeac03987d535cb07ec1de6372adf3d1cfb3eb9949e3fdf"
+      },
+      "skipped": [],
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/before-corrected-fixture-v02/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 2676,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/before-corrected-fixture-v02/stdout.DATA",
+        "sha256": "1e47c46d6190c0541cb3565fd748deb471a987bcd94b009e0e15c66b133aa08d"
+      },
+      "termination": {
+        "bytes": 3520,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/before-corrected-fixture-v02/termination.json",
+        "sha256": "7fca64b2d20cc8ae707dafe2e6e019668b9dce557c1118ffda24a69a33814279"
+      },
+      "unique_cases": 88
+    }
+  },
+  "all_actual_Source_epoch_full9_clock_resource_IO_ordinary_output_and_publication": null,
+  "all_old16_selector_prefix_exact": true,
+  "all_prior_failures_costs_receipts_and_code_defaults_preserved": true,
+  "cached_closure_metadata": {
+    "ipfs_datasets_py/logic/backends/process.py": {
+      "bytes": 109707,
+      "sha256": "370ba355be1da87814be4a117d2ce2a1cbc255064958d9ec64ada8e54521a7d7"
+    },
+    "ipfs_datasets_py/logic/backends/resource_admission.py": {
+      "bytes": 19806,
+      "sha256": "fda64e02042355fd0a0a3b75934b3d1c4ccb5efb42f0fe861876275ff8a5e1a8"
+    },
+    "ipfs_datasets_py/logic/ir_core/protocols.py": {
+      "actual_closed_current_API_cache": {
+        "bytes": 57510,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/protocols.current-e2dd.cached.py.DATA",
+        "sha256": "e2dd1dc93d1efa15c7c4088145d32c52636c72e9230b16ade77ca6c6a0c2c336"
+      },
+      "bytes": 57510,
+      "sha256": "e2dd1dc93d1efa15c7c4088145d32c52636c72e9230b16ade77ca6c6a0c2c336"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py": {
+      "bytes": 151350,
+      "sha256": "7a0dac2d13b4be7775e278054e1a57808f5629d3c58952164b91514e6e2ae2d3"
+    }
+  },
+  "cached_source_graph_is_not_current_canonical_module_qualification": true,
+  "canonical_edits_or_Git_mutations": false,
+  "current_Root_Native_frozen_c105_unchanged": true,
+  "current_protocol_binding": {
+    "bytes": 499,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/current-protocol-private-closure-only-binding-v03.json",
+    "sha256": "b5d73c71224b4ed0f6a75c35f77d524b215e2e4b7b23f1baf2cf6aff8e103818"
+  },
+  "existing_runner": {
+    "bytes": 2734,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/existing-private-runner-eighteen-selectors.py.DATA",
+    "sha256": "7e6f0405bdaaa9c9358dc61a65679672437cf9a5ebe09e28fd4b1792e3966d49"
+  },
+  "finite_delta_peer_review": {
+    "existing_child_scoped_clear": true,
+    "no_runtime_qualification": true,
+    "owner_C46_test_A52_authenticated": true,
+    "reads_new224753_previous219404_retained": true
+  },
+  "fixture_initial_None_mistake_preserved_and_corrected_only_parameter_to_supported_empty_default": true,
+  "full_Phase1_or_eight_phase_goal_complete": false,
+  "literal_private_88_case_roster": {
+    "bytes": 15288,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/private-existing-eighteen-method-88-case-roster-v01.json",
+    "sha256": "921301471c7a38d018d48aa3f3443c5d440b745b7667cfbe09dc4f84ae76e6b5"
+  },
+  "new_runner_controller_queue_or_registry": false,
+  "next_existing_owner_action": "After current Source/Native custody closes, fresh-check exact preimages, adopt two posts with existing Source writer, then qualify existing ordinary88 using actual current Source/code observers and guards. No Source or runtime action selected by private packet.",
+  "no_actual_Source_body_captures_or_leases_or_canonical_changes": true,
+  "old81_and_new7_not_extra_Native_credit": true,
+  "owner": {
+    "forward": {
+      "bytes": 932,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/lean.forward.diff",
+      "sha256": "50eb6d20cb764491620d81bc0489f4b5d4bedce23dcdb8fd6ee04c65bed2c6ed"
+    },
+    "inverse": {
+      "bytes": 932,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/lean.inverse.diff",
+      "sha256": "1730bb38cfbc1d1d0696a33b8afa56330c095e9b451892da35995112b3f4df03"
+    },
+    "mode": "100644",
+    "postimage": {
+      "bytes": 104191,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/lean.after.py.DATA",
+      "sha256": "c46d745caa68bae79fb828e734cfaeb874e21a16c76b9edbdf6f05d2d30ac090"
+    },
+    "preimage": {
+      "bytes": 103838,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-accepted-request-and-integer-status-combined-private-IN9OiuMf/owner.after.py.DATA",
+      "sha256": "c1050ad1ec067fc7f7c8fea08793e872511fe58029e9b1aa89ec90d2cb288313"
+    },
+    "repo_relative_path": "ipfs_datasets_py/logic/backends/kernel/lean.py"
+  },
+  "owner_change": "One existing constructor if statement, using canonical LeanKernelBackend.backend_id and aliases; no backend instantiation, new alias table or new authority.",
+  "owner_delta_proof": {
+    "bytes": 1571,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/owner-backend-routing-minimal-delta-proof-v01.json",
+    "sha256": "cb1c924bc8f3d503a9c4e91932c3d482250cc2963be5d0325dbf3aac5626080d"
+  },
+  "owning_test": {
+    "append": {
+      "bytes": 3425,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/owning-test.append.v02.py.DATA",
+      "sha256": "948767bb74365ae385584a809efd09b64e7c04e2cc5debc72b0c632327676156"
+    },
+    "foreign_targets": [
+      "rocq",
+      "cvc5",
+      "lean4-wasm"
+    ],
+    "forward": {
+      "bytes": 3798,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/test_kernel_backends.forward.diff",
+      "sha256": "d25dc3a3c5a076ea59568cef5920dc38f471b23bebda946dfba97b2c35efbf3e"
+    },
+    "inverse": {
+      "bytes": 3798,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/test_kernel_backends.inverse.diff",
+      "sha256": "f3fd9578ca02f1ba00880c40c3005c2bdee8cb964ec164c2792647f1af7a66a0"
+    },
+    "mode": "100644",
+    "new_methods": 2,
+    "new_parameter_cases": 7,
+    "old_prefix_all_ASTs_and_assertions_exact": true,
+    "postimage": {
+      "bytes": 118991,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/test_kernel_backends.after.v02.py.DATA",
+      "sha256": "a52a7f996666ca5230757ee43c80e844fba475b57ada0f8da5791c72144b4ecd"
+    },
+    "preimage": {
+      "bytes": 115566,
+      "git_blob": "94cd39ed1d3e352faa41992f6236fe72179958eb",
+      "sha256": "99e00363bbd1ea23d450af0912374fdbf4d30ab3b1802371fb8d237dccbf7da5"
+    },
+    "repo_relative_path": "tests/integration/logic/backends/test_kernel_backends.py",
+    "supported_defaults_and_aliases": [
+      "",
+      "lean",
+      "lean4",
+      "lean-kernel"
+    ]
+  },
+  "prior_cached_protocol_only_retained_separately": {
+    "bytes": 57414,
+    "sha256": "b452a7095a2524f0ea3f4e4f3a395643d3257cd6f42e3c77f8e1817df62f6fed"
+  },
+  "prior_packet": {
+    "bytes": 11639,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/SEALED-private-Lean-outcome-backend-routing-two-file-proposal-v01.json",
+    "sha256": "523434975c57a7ba5a2df19d2b9739160f57064f13d2dbe43b1412609840b257"
+  },
+  "private_current_source_cache_IO_scope_not_measured_physical_total": true,
+  "problem": "LeanKernelOutcome reconstruction accepted an explicit foreign requested_backend_id after all request/receipt/result bindings were correctly recomputed; public LeanKernelBackend.run already rejected the same request before callbacks. This is a routing/provenance defect, not a demonstrated false Lean theorem.",
+  "runner_change_only_literal16_to18": true,
+  "same_88_roster_before_after_current_e2dd": true,
+  "same_cases_across_closures_not_additional_176_credit": true,
+  "schema": "private-Lean-outcome-requested-backend-binding-two-file-proposal/v1"
+}

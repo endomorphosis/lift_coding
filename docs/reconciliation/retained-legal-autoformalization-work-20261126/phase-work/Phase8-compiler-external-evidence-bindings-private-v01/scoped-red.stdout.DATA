@@ -1,0 +1,36 @@
+........FFFFF                                                            [100%]
+=================================== FAILURES ===================================
+_______ test_compiler_system_checks_external_result_bindings[True-saved] _______
+../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:383: in test_compiler_system_checks_external_result_bindings
+    assert result.accepted is not stale
+E   AssertionError: assert True is not True
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-compi...bbbbbbbbbbbbbbbbbbbbbbbbbbbb'}}}, 'evidence_complete': True, 'rollback_ready': True, 'promotion_decision': 'accepted'}).accepted
+________ test_compiler_system_checks_external_result_bindings[True-raw] ________
+../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:383: in test_compiler_system_checks_external_result_bindings
+    assert result.accepted is not stale
+E   AssertionError: assert True is not True
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-compi...bbbbbbbbbbbbbbbbbbbbbbbbbbbb'}}}, 'evidence_complete': True, 'rollback_ready': True, 'promotion_decision': 'accepted'}).accepted
+______ test_compiler_system_checks_external_result_bindings[True-paired] _______
+../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:383: in test_compiler_system_checks_external_result_bindings
+    assert result.accepted is not stale
+E   AssertionError: assert True is not True
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-compi...bbbbbbbbbbbbbbbbbbbbbbbbbbbb'}}}, 'evidence_complete': True, 'rollback_ready': True, 'promotion_decision': 'accepted'}).accepted
+_ test_compiler_system_checks_external_result_bindings[True-saved-with-current-labels] _
+../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:383: in test_compiler_system_checks_external_result_bindings
+    assert result.accepted is not stale
+E   AssertionError: assert True is not True
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-compi...bbbbbbbbbbbbbbbbbbbbbbbbbbbb'}}}, 'evidence_complete': True, 'rollback_ready': True, 'promotion_decision': 'accepted'}).accepted
+_ test_compiler_system_replays_raw_external_evidence_beside_an_accepted_decision _
+../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py:407: in test_compiler_system_replays_raw_external_evidence_beside_an_accepted_decision
+    assert result.accepted is False
+E   AssertionError: assert True is False
+E    +  where True = RolloutGateResult(accepted=True, failures=[], warnings=[], metrics={'schema_version': 'legal-ir-hammer-leanstral-compi...bbbbbbbbbbbbbbbbbbbbbbbbbbbb'}}}, 'evidence_complete': True, 'rollback_ready': True, 'promotion_decision': 'accepted'}).accepted
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-compiler-external-evidence-bindings-private-v01/scoped-red/junit.xml -
+=========================== short test summary info ============================
+FAILED ../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[True-saved]
+FAILED ../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[True-raw]
+FAILED ../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[True-paired]
+FAILED ../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_checks_external_result_bindings[True-saved-with-current-labels]
+FAILED ../isolated-v03/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py::test_compiler_system_replays_raw_external_evidence_beside_an_accepted_decision
+5 failed, 8 passed, 1 deselected in 1.35s
+{"fixture": "a5b9c6cd013773d1c0e3b823bb50a5e3131e621c04e9d9a38d8141c0c30ef2d0", "guard_events": [], "mode": "red", "overlays": [{"actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-compiler-external-evidence-bindings-private-v01/gate-owner.before.py.DATA", "module": "scripts.ops.legal_ir.hammer_leanstral_rollout_gate"}, {"actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-compiler-external-evidence-bindings-private-v01/gate-owner.before.py.DATA", "module": "scripts.ops.legal_ir.hammer_leanstral_rollout_gate"}], "pytest_exit": 1, "test": "a7003d6c9013437104794f97b39e4a57f2e6055b079d39a8a1af7dd703fe2b3f"}

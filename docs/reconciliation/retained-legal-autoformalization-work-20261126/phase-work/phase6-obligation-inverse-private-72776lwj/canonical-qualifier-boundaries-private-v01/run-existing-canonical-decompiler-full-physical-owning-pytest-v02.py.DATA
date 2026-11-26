@@ -1,0 +1,211 @@
+"""Run the published source-withheld decompiler through the existing private test guard."""
+
+from __future__ import annotations
+
+import hashlib
+import importlib
+import json
+import os
+from pathlib import Path
+import sys
+import traceback
+from types import ModuleType
+
+
+OWN = Path(__file__).resolve().parent
+COORD = OWN.parents[1]
+ROLE = "ipfs_datasets_py/logic/legal_ir/canonical_decompiler.py"
+ROUTER = "ipfs_datasets_py/ipfs_backend_router.py"
+PILOT = "tests/fixtures/semantic_roundtrip/pilot_cases.json"
+PRIOR = COORD / "phase7-same-id-proof-feedback-no-fit-v01-gA9Exh/guarded_probe.py"
+
+
+def digest(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def read(path, sha256, size):
+    path = Path(path)
+    with os.fdopen(os.open(path, os.O_RDONLY | os.O_NOFOLLOW), "rb") as f:
+        a = os.fstat(f.fileno())
+        raw = f.read(size + 1)
+        b = os.fstat(f.fileno())
+    p = path.lstat()
+    keys = ("st_dev", "st_ino", "st_mode", "st_nlink", "st_uid", "st_gid",
+            "st_size", "st_mtime_ns", "st_ctime_ns")
+    for key in keys:
+        assert getattr(a, key) == getattr(b, key) == getattr(p, key)
+    assert a.st_nlink == 1 and len(raw) == size and digest(raw) == sha256
+    return raw
+
+
+def typed_report(contracts, decompiler):
+    C = contracts
+    D = decompiler.SourceWithheldCanonicalDecompiler()
+    patterns = [
+        ("condition-and", {"conditions": ("approval_and_notice",)},
+         {"conditions": ("approval", "notice")},
+         "Agency must file report if approval and notice."),
+        ("exception-or", {"exceptions": ("fire_or_flood",)}, {"exceptions": ("fire", "flood")},
+         "Agency must file report unless fire or flood."),
+        ("cross-clause", {"conditions": ("approval_unless_fire",)},
+         {"conditions": ("approval",), "exceptions": ("fire",)},
+         "Agency must file report if approval unless fire."),
+    ]
+
+    def observe(fields):
+        rule = C.CanonicalRule("O", "agency", "file", "report", **fields)
+        request = C.DecompilerRequest(C.CanonicalRoundTripIR((rule,)), request_id="authored-qualifier-test")
+        result = D.decompile(request)
+        assert result.request_cid == request.request_cid
+        return {
+            "ir_cid": request.canonical_ir.ir_cid,
+            "request_cid": result.request_cid,
+            "status": result.status.value,
+            "text": result.text,
+            "text_cid": result.text_cid,
+            "component_count": len(result.component_trace),
+            "error": None if result.error is None else result.error.to_dict(),
+        }
+
+    rows = []
+    for name, compound, separated, expected in patterns:
+        a, b = observe(compound), observe(separated)
+        assert a["ir_cid"] != b["ir_cid"] and a["request_cid"] != b["request_cid"]
+        assert b["status"] == "success" and b["text"] == expected and b["text_cid"] is not None
+        safe = (a["status"] == "abstained" and a["text"] is None
+                and a["text_cid"] is None and a["component_count"] == 0
+                and a["error"]["code"] == "unsupported_semantics")
+        rows.append({"id": name, "compound": a, "separated": b, "safe": safe})
+    return rows
+
+
+def main(mode, manifest_sha, manifest_size, owner_path=None, owner_sha=None, owner_size=None):
+    assert sys.flags.isolated and sys.dont_write_bytecode and sys.flags.optimize == 0
+    prior_bytes = read(PRIOR, "6e483bf40c38136befa85f40f04df617d715c9047bc7ad8bb1812c05f1891bdf", 15945)
+    prior = ModuleType("_existing_legal_ir_guard")
+    prior.__file__ = str(PRIOR)
+    sys.modules[prior.__name__] = prior
+    exec(compile(prior_bytes, str(PRIOR), "exec", dont_inherit=True), prior.__dict__)
+    prior.install_kernel_guards()
+    manifest = json.loads(read(OWN / f"exact-private-full-physical-owner-{mode}.json", manifest_sha, int(manifest_size)))
+    root = Path(manifest["root"])
+    assert root.is_absolute() and root.resolve(strict=True) == root and root.parent == OWN
+    sources = manifest["sources"]
+    router = sources[ROUTER]
+    assert read(root / ROUTER, router["sha256"], router["bytes"])
+    prior.ROOT = root
+    prior.EXPECTED.clear()
+    prior.EXPECTED.update({key: row["git_blob_sha1"] for key, row in sources.items()
+                          if key.endswith(".py") and key != ROUTER})
+    assert mode in ("before", "after")
+    assert manifest["physical_owner_variant"] == mode
+    assert owner_path is owner_sha is owner_size is None
+    selected_owner_sha = ("79eeb9072e74e68dc5fab7640b5ad49e82131d0f35232ff473c7f2dfbe232c64"
+                          if mode=="before" else
+                          "c3cceb3e0051d93da6a05b7078e9ebc96468b3de6e873153d82cbc5dc2e85853")
+    assert sources[ROLE]["sha256"] == selected_owner_sha
+    overlay = None
+    os.environ["IPFS_DATASETS_PY_MINIMAL_IMPORTS"] = "1"
+    original_loader = prior.BoundSource
+
+    class CurrentRealizerSource(original_loader):
+        def get_code(self, fullname):
+            rel = Path(self.path).relative_to(root).as_posix()
+            assert rel in prior.EXPECTED, (fullname, rel)
+            code = super().get_code(fullname)
+            expected = sources[rel]
+            assert prior.compiled[rel] == expected, rel
+            if rel == ROLE and overlay is not None:
+                prior.compiled_total += len(overlay)
+                assert prior.compiled_total <= prior.MAX_MODULE_BYTES
+                prior.compiled[rel]["overlay_compiled_sha256"] = digest(overlay)
+                return compile(overlay, str(root / rel), "exec", dont_inherit=True)
+            return code
+
+    prior.BoundSource = CurrentRealizerSource
+    sys.path.insert(0, str(root))
+    class BoundBenchmarkImports:
+        def find_spec(self, fullname, path=None, target=None):
+            if fullname.partition(".")[0] != "benchmarks":
+                return None
+            spec = importlib.machinery.PathFinder.find_spec(fullname, path, target)
+            if spec is None:
+                raise ModuleNotFoundError(f"unlisted benchmark dependency: {fullname}")
+            if spec.origin is None and spec.submodule_search_locations and all(
+                Path(part).resolve(strict=True).is_relative_to(root)
+                for part in spec.submodule_search_locations
+            ):
+                return spec
+            if spec.origin and Path(spec.origin).is_relative_to(root) and spec.origin.endswith(".py"):
+                spec.loader = CurrentRealizerSource(fullname, spec.origin)
+                return spec
+            raise ImportError(f"unexpected benchmark source origin: {fullname}")
+
+    sys.meta_path.insert(0, prior.GuardedImports())
+    sys.meta_path.insert(0, BoundBenchmarkImports())
+    sys.addaudithook(prior.audit)
+    C = importlib.import_module("ipfs_datasets_py.logic.legal_ir.canonical_contracts")
+    D = importlib.import_module("ipfs_datasets_py.logic.legal_ir.canonical_decompiler")
+    assert str(Path(D.__file__).relative_to(root)) == ROLE
+    import inspect
+    inspected = inspect.getsource(D).encode("utf-8")
+    assert digest(inspected) == prior.compiled[ROLE]["sha256"] == selected_owner_sha
+    assert len(inspected) == sources[ROLE]["bytes"]
+    # Execute the exact owning tests through real pytest; retain native/kernel and write fences.
+    os.environ["PYTEST_DISABLE_PLUGIN_AUTOLOAD"] = "1"
+    import pytest
+    test_file = OWN / "isolated-owning-test-projection/tests/unit/logic/legal_ir/test_canonical_decompiler.py"
+    assert read(test_file, "fa582795d3c6f590f613dc7452ea2d23165e940c61ee94d537c2d1c06b25ef32", 13882)
+    assert read(test_file.parents[4] / PILOT, "6d34cdd1392d3a9964f04e4260f722e076ba7b96c3cdd2fc59749460756cf167", 14580)
+    nodes = (
+        "test_all_frozen_t1_outputs_match_selected_benchmark_adapter",
+        "test_temporal_phrase_already_in_the_object_is_not_repeated",
+        "test_frozen_grammar_preserves_polarity_roles_and_every_facet",
+        "test_success_has_raw_text_cid_and_deterministic_component_trace",
+        "test_attribution_receipt_binds_only_public_canonical_inputs_and_t1",
+        "test_only_exact_frozen_config_and_policy_are_accepted",
+        "test_invalid_requests_and_component_errors_are_typed_failures",
+        "test_decompiler_is_stateless_source_withheld_and_model_free",
+        "test_production_module_has_no_benchmark_dependency",
+        "test_delimiter_ambiguous_atoms_abstain_and_split_clauses_render",
+    )
+    results = []
+
+    class Report:
+        def pytest_runtest_logreport(self, report):
+            if report.when == "call":
+                results.append({"node": report.nodeid, "passed": report.passed})
+
+    ret = pytest.main(
+        [
+            "-c", "/dev/null", "--rootdir", str(test_file.parents[4]), "--import-mode=importlib",
+            "-p", "no:cacheprovider", "-p", "no:logging", "-s", "-q",
+            *(f"{test_file}::{name}" for name in nodes),
+        ],
+        plugins=[Report()],
+    )
+    assert not prior.denied, prior.denied
+    assert sys.modules["ipfs_datasets_py"].HAVE_IPFS and ROUTER not in prior.compiled
+    assert all(family not in sys.modules for family in prior.blocked_imports)
+    display = [row["node"].split("::",1)[1] for row in results]
+    assert display == list(nodes[:-1]) + [
+        f"{nodes[-1]}[{case}]" for case in ("condition-conjunction", "exception-disjunction", "condition-exception-boundary")
+    ]
+    assert [row["passed"] for row in results] == [True]*9 + [mode=="after"]*3
+    assert int(ret) == (1 if mode=="before" else 0)
+    record = dict(mode=mode, tests=results, pytest_returncode=int(ret), guard=prior.guard,
+                  exact_compiled_project=prior.compiled, frozen_benchmark_adapter_run=True,
+                  actual_inspected_owner_sha=selected_owner_sha, actual_inspected_owner_bytes=len(inspected),
+                  minor_import_profile="IPFS_DATASETS_PY_MINIMAL_IMPORTS=1")
+    print("QUALIFIER_OWNING_PYTEST_RESULT " + json.dumps(record, sort_keys=True))
+    return int(ret)
+
+
+if __name__ == "__main__":
+    try:
+        raise SystemExit(main(*sys.argv[1:]))
+    except Exception as error:
+        traceback.print_exc()
+        print(json.dumps({"infrastructure_error": f"{type(error).__name__}: {error}"}))
+        raise SystemExit(2) from error

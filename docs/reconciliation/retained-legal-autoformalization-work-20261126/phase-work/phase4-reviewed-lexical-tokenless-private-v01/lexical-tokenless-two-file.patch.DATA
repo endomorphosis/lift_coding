@@ -1,0 +1,75 @@
+--- a/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_joint_retrieval.py
++++ b/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_joint_retrieval.py
+@@ -1018,6 +1018,18 @@
+                 if rule is None: eligible.append(index)
+                 else: excluded.append({"id": endpoint["id"], "reason": rule})
+             if len(eligible) < top_k: reasons.append("insufficient_permitted_training_examples")
++            if mode == "lexical" and not reasons:
++                _require(sum(len(lexical_texts[index].encode("utf-8")) for index in eligible)
++                         <= lexical_profile["max_document_bytes"], "lexical document byte budget exceeded")
++                selector = lexical.BM25FrameSelector([lexical.FrameCandidate(
++                    frame_id=endpoints[index]["id"], label=lexical_texts[index], domain="") for index in eligible],
++                    k1=lexical_profile["k1"], b=lexical_profile["b"])
++                query_terms = set(selector._tokenize(query["source_text"]))
++                if not query_terms:
++                    reasons.append("lexical_query_unscorable")
++                _require(sum(len(document) for document in selector._documents)
++                    * len(query_terms) <= lexical_profile["max_token_comparisons"],
++                    "lexical token comparison budget exceeded")
+             if reasons:
+                 results.append({"id": query["id"], "source_sha256": raw_source_sha256,
+                     "status": "abstained", "abstention_reasons": reasons, "eligible_rows": len(eligible),
+@@ -1030,14 +1042,6 @@
+             formal = torch.tensor([formal_rows[index] for index in eligible], dtype=torch.float32, device="cpu")
+             with torch.no_grad():
+                 if mode == "lexical":
+-                    _require(sum(len(lexical_texts[index].encode("utf-8")) for index in eligible)
+-                             <= lexical_profile["max_document_bytes"], "lexical document byte budget exceeded")
+-                    selector = lexical.BM25FrameSelector([lexical.FrameCandidate(
+-                        frame_id=endpoints[index]["id"], label=lexical_texts[index], domain="") for index in eligible],
+-                        k1=lexical_profile["k1"], b=lexical_profile["b"])
+-                    _require(sum(len(document) for document in selector._documents)
+-                        * len(set(selector._tokenize(query["source_text"]))) <= lexical_profile["max_token_comparisons"],
+-                        "lexical token comparison budget exceeded")
+                     ranked_rows = selector.rank(query["source_text"], top_k=len(eligible))
+                     positions = {endpoints[index]["id"]:position for position,index in enumerate(eligible)}
+                     _require(len(ranked_rows) == len(eligible)
+--- a/tests/unit/optimizers/logic_theorem_optimizer/test_legal_joint_retrieval.py
++++ b/tests/unit/optimizers/logic_theorem_optimizer/test_legal_joint_retrieval.py
+@@ -1043,3 +1043,36 @@
+     assert case["preparation"] == original_preparation
+     assert handoff["training_gold_mask"] == handoff["evaluation_gold_mask"] == 0
+     assert handoff["legal_applicability_verified"] is handoff["controlling_authority"] is False
++
++
++
++def test_reviewed_lexical_baseline_abstains_on_source_without_tokens(
++        reviewed_trained, reviewed_fixture_owner, reviewed_case, monkeypatch):
++    from ipfs_datasets_py.optimizers.logic_theorem_optimizer import frame_bm25_selector as lexical
++
++    query = {
++        "id": "query:lexical-tokenless",
++        "split_sample_id": "sample:lexical-tokenless",
++        "source_text": "許可を申請する。",
++    }
++    case, query, lane, expected = _reviewed_structural_query_fixture(
++        reviewed_fixture_owner, reviewed_case, query=query)
++    assert lane["rows"][0]["status"] == "available"
++    checkpoint = reviewed_trained["checkpoint"]
++    model = retrieval.ReviewedLegalJointRetriever(
++        checkpoint, expected_checkpoint_sha256=retrieval.checkpoint_digest(checkpoint))
++
++    def unexpected_scoring(*args, **kwargs):
++        pytest.fail("tokenless lexical query reached scoring")
++
++    monkeypatch.setattr(lexical.BM25FrameSelector, "rank", unexpected_scoring)
++    monkeypatch.setattr(model._model, "forward", unexpected_scoring)
++    result = _structural_call(
++        model, reviewed_fixture_owner, case, query, lane, expected, mode="lexical", top_k=1)
++    row = result["rows"][0]
++    assert row["eligible_rows"] >= 1
++    assert row["source_sha256"] == hashlib.sha256(query["source_text"].encode("utf-8")).hexdigest()
++    assert row["status"] == "abstained" and row["abstention_reasons"] == ["lexical_query_unscorable"]
++    assert row["retrieved_ids"] == [] and row["context"] is None
++    assert result["retrieved_count"] == 0 and result["abstention_count"] == 1
++    assert result["model_forward_executed"] is False and model.checkpoint == checkpoint

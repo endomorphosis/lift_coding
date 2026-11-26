@@ -1,0 +1,247 @@
+{
+  "actual": {
+    "COLLECT": null,
+    "Git": null,
+    "IO": null,
+    "RUN": null,
+    "SDK": null,
+    "Source": null,
+    "authority": null,
+    "canonical": null,
+    "clock": null,
+    "effect": null,
+    "execution": null,
+    "freeze": null,
+    "index": null,
+    "ordinary_result": null,
+    "output": null,
+    "resources": null,
+    "selection": null
+  },
+  "actual_COLLECT_order_controls_RUN": true,
+  "additional_unbound_historical_literals": [
+    "FINAL_SDK_BINDINGS",
+    "FINAL_RESOURCE_STATE_PATH",
+    "FINAL_EXPECTED_RESOURCE_CONFIG",
+    "FINAL_EXPECTED_CAPACITY",
+    "FINAL_ADDITIONAL_IMPORT_ROOTS",
+    "source42",
+    "PREP"
+  ],
+  "controls": {
+    "bootstrap": {
+      "bytes": 44059,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/existing-v331-ordinary15-controls-INERT-eqx8m1w9/P2-ordinary15-existing-bootstrap.INERT.py.DATA",
+      "sha256": "54acf4d59d71901cddbaa00e52ac1747abe8f8127b32f797fbc8f6edff7144c4"
+    },
+    "factory": {
+      "bytes": 3457,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/existing-v331-ordinary15-controls-INERT-eqx8m1w9/P2-ordinary15-existing-factory.INERT.py.DATA",
+      "sha256": "df5646107acd1075d8a386a59f54a7e55d983578c11ba8c5134e7af90bcc143d"
+    },
+    "operator": {
+      "bytes": 56410,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/existing-v331-ordinary15-controls-INERT-eqx8m1w9/P2-ordinary15-existing-operator.INERT.py.DATA",
+      "sha256": "34d2af8b22ede8addce0aa5fa6241984d864b24e352784074212a67b24bf375d"
+    }
+  },
+  "execution_scope": "Private static control assembly. Actual Source, frozen Git, fixture/import closure, SDK/resource effects and clock authority must be supplied by the existing owner. The historical two ordinary child CLI cases stay selected; the new controls do not assert child script compilation or proof admission.",
+  "existing_late_bind_slots": {
+    "bootstrap": [
+      "ROOT",
+      "ADDITIONAL_A_ROOT",
+      "EXPECTED_MODULES",
+      "REQUIRED_CANONICAL_CONFTESTS",
+      "PYTEST_INIFILE",
+      "ROOT_RUNTIME_SELECTION",
+      "GIT_CANDIDATE_PROVENANCE",
+      "ADDITIONAL_A_PROVENANCE",
+      "BINDING_MANIFEST_REFERENCE",
+      "SOURCE_READ_BINDING_REFERENCE",
+      "ADMITTED_IO_PLAN_REFERENCE",
+      "EFFECT_DECISION_REFERENCE",
+      "SOURCE_EPOCH_SHA256",
+      "SOURCE_EPOCH_RECORD_COUNT"
+    ],
+    "operator": [
+      "ROOT_SELECTION",
+      "ROOT_RUNTIME_SELECTION",
+      "FINAL_OUTPUT_PATH",
+      "FINAL_D_ROOT",
+      "FINAL_D_HEAD",
+      "FINAL_D_TREE",
+      "FINAL_A_ROOT",
+      "FINAL_A_HEAD",
+      "FINAL_A_TREE",
+      "D_READ_BINDING_REFERENCE",
+      "FINAL_BINDING_MANIFEST_REFERENCE",
+      "FINAL_BINDING_MANIFEST",
+      "FINAL_MODULE_BINDINGS",
+      "FINAL_D_PROVENANCE",
+      "FINAL_A_PROVENANCE",
+      "FINAL_SOURCE_PROJECTS",
+      "FINAL_FIXTURE_CLOSURE_REFERENCE",
+      "FINAL_EFFECT_DECISION_REFERENCE",
+      "FINAL_EFFECT_DECISION",
+      "FINAL_ADMITTED_IO_PLAN_REFERENCE",
+      "BOOTSTRAP_REFERENCE"
+    ]
+  },
+  "expected_case_count": 15,
+  "expected_function_count": 12,
+  "expected_private_posts": {
+    "cli": {
+      "expected_Git_blob": "53fd49f4a40dc57e595138c9002ddb4b731b337e",
+      "expected_post": {
+        "bytes": 12124,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/cli.after.py.DATA",
+        "sha256": "80357f303be5da9175867d82d2e80d7e551490a55b724e151202d6ec9fda6afa"
+      },
+      "relative_path": "scripts/ops/legal_ir/validate_uscode_corpus_release.py"
+    },
+    "owner": {
+      "expected_Git_blob": "ffb7260da7469a5a88d3b2d3eba6c43a76498cdb",
+      "expected_post": {
+        "bytes": 134918,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/owner.after.py.DATA",
+        "sha256": "06d126d5109609a77f298fc6e9d257df8c97e1b972a700ddd0d5c5b66ac6a108"
+      },
+      "relative_path": "ipfs_datasets_py/logic/autoformal/legal_release_coordinator_v1.py"
+    },
+    "test": {
+      "expected_Git_blob": "77a627a066083d30666ac42b3be3a3d22c422993",
+      "expected_post": {
+        "bytes": 223622,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/test.after.py.DATA",
+        "sha256": "ac7ea179761aae0a0972bd93b4bf5cc30b16fcba79ef6c50f74c8cfa80b14098"
+      },
+      "relative_path": "tests/unit/logic/autoformal/test_corpus_release_cli.py"
+    }
+  },
+  "new_dependencies_pending": {
+    "actual_normal_pytest_fixture_and_capture_binding": null,
+    "child_cli_actual_compile_witness": null,
+    "corpus_qualification_owner_Source_and_observed_compile": null,
+    "current_Shared_Lake_and_Native_owner_fixture_provenance": null,
+    "current_V3_retained_fixture_and_replay_import_closure": null,
+    "current_qualification_and_CLI_source_custody": null
+  },
+  "ordered_function_count_vector": [
+    1,
+    2,
+    1,
+    1,
+    3,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "patches": {
+    "forward": {
+      "bytes": 51160,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/existing-v331-ordinary15-controls-INERT-eqx8m1w9/exact-forward.patch.DATA",
+      "sha256": "74bed5a985404fa5b814c45242b0c450f6ea4236d4d0f5ccc81a9c6475868acc"
+    },
+    "inverse": {
+      "bytes": 51160,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/existing-v331-ordinary15-controls-INERT-eqx8m1w9/exact-inverse.patch.DATA",
+      "sha256": "9456eabd275a2ef9ab4e1729a94822d3bf776519722e4c25170c4bf621e46489"
+    }
+  },
+  "phase": "frozen-local-D-corpus-release-public-v3-v4-eligibility-ordinary15",
+  "prior_INERT_closeout": {
+    "bytes": 4193,
+    "path": "/tmp/P8-V4-reviewed-graph-existing-ordinary-profile-prep-private-v01/inert-normal9-controls-v01/FINAL-READY-existing-normal9-INERT-controls-author-v02-READ3-joined.json",
+    "sha256": "e4c2ddf426c3e20a7f3c7af2cc9856106cfc56c7829b5dde3a2d9567dd8a0d93"
+  },
+  "prior_INERT_controls": {
+    "bootstrap": {
+      "bytes": 42309,
+      "path": "/tmp/P8-V4-reviewed-graph-existing-ordinary-profile-prep-private-v01/inert-normal9-controls-v01/same-existing-v304-reviewed-graph-normal9-bootstrap.INERT.py.DATA",
+      "sha256": "163f4090c6d9e51bc2ab72f62f087b6b7d17211ffded892b2476e417ce7f6f5f"
+    },
+    "factory": {
+      "bytes": 3266,
+      "path": "/tmp/P8-V4-reviewed-graph-existing-ordinary-profile-prep-private-v01/inert-normal9-controls-v01/same-existing-v304-reviewed-graph-normal9-factory.INERT.py.DATA",
+      "sha256": "8a1e8b3570e3c78b207b0e913121275e75fae1ede76a795092d00f2d7e19899c"
+    },
+    "operator": {
+      "bytes": 58851,
+      "path": "/tmp/P8-V4-reviewed-graph-existing-ordinary-profile-prep-private-v01/inert-normal9-controls-v01/same-existing-v304-reviewed-graph-normal9-operator.INERT.py.DATA",
+      "sha256": "19a28e89bee32efbd5f314a67ff044238371b92cff424d77b72b43f8e8355e66"
+    }
+  },
+  "prior_actual_v331_closeout": {
+    "bytes": 3479,
+    "path": "/tmp/Root-P8-V4-reviewed-graph-existing-ordinary9-v331-l4ls_bm7/Root-P8-V4-reviewed-graph-package-ordinary9-qualified-small-v331.json",
+    "sha256": "70eb12e25edfad5852c9c1314c92d7779e5469716633d3bd69d32dd29a43729b"
+  },
+  "prior_actual_v331_controls": {
+    "bootstrap": {
+      "bytes": 47530,
+      "path": "/tmp/Root-P8-V4-reviewed-graph-existing-ordinary9-v331-l4ls_bm7/Root-selected-bootstrap.py",
+      "sha256": "89170c98147ed7d4805dfecb03d1698e3d9a19523a6639729e51f6d36c9df855"
+    },
+    "manifest": {
+      "bytes": 6139,
+      "path": "/tmp/Root-P8-V4-reviewed-graph-existing-ordinary9-v331-l4ls_bm7/Root-selected-ordinary9-manifest.json",
+      "sha256": "38d2ec2910d814249fa19ac5c4d71559f4c6f93bb397dbf190f5dc8de76636f6"
+    },
+    "operator": {
+      "bytes": 70696,
+      "path": "/tmp/Root-P8-V4-reviewed-graph-existing-ordinary9-v331-l4ls_bm7/Root-selected-existing-ordinary9-operator.py",
+      "sha256": "c6bdf4bf57302218039fa9b09d16ff8ba47f3f66f17873ce1ab84c2f524de453"
+    }
+  },
+  "prior_actual_v331_fixture_config": {
+    "bytes": 6163,
+    "path": "/tmp/Root-P8-V4-ordinary9-actual-binding-epoch-nonclock-v331-bbjnp09g/actual-existing-three-conftests-cli-and-owning-test-fixture.json",
+    "sha256": "574575e84eecf5c67094e02feda4ef3fd5b57193890d0ac318cf980be1581569"
+  },
+  "roster_DATA": {
+    "bytes": 10064,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/READY-Phase2-existing-ordinary15-roster-RootNULL.json",
+    "sha256": "813fa378b53c677312213878b113f15f294dca235ba253e1bc5225386530c01d"
+  },
+  "schema": "Phase2-existing-v331-ordinary15-exact3-controls-INERT/v1",
+  "scoped_existing_lazy_owner_policy": {
+    "bytes": 354,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/existing-v331-ordinary15-controls-INERT-eqx8m1w9/existing-ordinary15-same-lazy-owner-policy.json",
+    "sha256": "0cbbac2001896acee48f8cb20967c7573cc64e7bde6f49bc7fecd18d26f28956"
+  },
+  "sealed_exact3": {
+    "bytes": 18200,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/SEALED-existing-physical-release-eligibility-v3-v4-cli-exact3-private.json",
+    "sha256": "6844e9311cbea58c1ddb2a261d71354fbbf80a05046a1b5196f5cd7198a3d280"
+  },
+  "selection_group": "corpus-release-public-v3-v4-eligibility-ordinary15",
+  "static_checks": {
+    "all_three_AST_parse_and_compile_only": true,
+    "changed_existing_function_ASTs": {
+      "bootstrap": [
+        "validate_owner_visibility_policy"
+      ],
+      "factory": [
+        "continuation_request"
+      ],
+      "operator": [
+        "binding_for",
+        "validate_owner_visibility_policy"
+      ]
+    },
+    "exact_historical_v331_raw_JUnit_nine_IDs_retained": true,
+    "existing_owner_test_identities_lazy_behavior_and_rewrite_exact": true,
+    "literal_parent_factory_membership_checks_no_wire_change": true,
+    "no_new_dependency_declared_as_observed": true,
+    "old_INERT_operator_bootstrap_match_v331_AST_except_exact_historical_binding_literals": true,
+    "source_ABI_fixture_gate_and_R2_limits_cleanup_exact": true
+  },
+  "subcohorts": {
+    "exact3_new6": 6,
+    "v331_retained9": 9
+  }
+}

@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-obligation-inverse-private-72776lwj/canonical-qualifier-boundaries-private-v01/run-existing-explicit-qualifier-paired-software-controls.py", line 173, in <module>
+    raise SystemExit(main(*sys.argv[1:]))
+                     ^^^^^^^^^^^^^^^^^^^
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-obligation-inverse-private-72776lwj/canonical-qualifier-boundaries-private-v01/run-existing-explicit-qualifier-paired-software-controls.py", line 153, in main
+    assert first.source_cid != reconstructed.text_cid
+           ^^^^^^^^^^^^^^^^
+AttributeError: 'CompilerResult' object has no attribute 'source_cid'. Did you mean: 'source_map'?

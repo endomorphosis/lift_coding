@@ -1,0 +1,133 @@
+"""Exercise the existing candidate inventory over exact no-model source roles."""
+from pathlib import Path
+from dataclasses import replace
+from types import ModuleType
+import ast as python_ast
+import hashlib
+import importlib
+from importlib.util import spec_from_file_location, module_from_spec
+import json
+import os
+import resource
+import sys
+
+resource.setrlimit(resource.RLIMIT_CPU,(50,50))
+resource.setrlimit(resource.RLIMIT_AS,(512*1024**2,)*2)
+os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})
+def guard(event,args):
+    if event.startswith('socket.') or event in {'subprocess.Popen','os.system','os.exec','os.fork'}:
+        raise RuntimeError('candidate inventory attempted to execute external code')
+    if event=='import' and args[0].partition('.')[0] in {'torch','transformers','tokenizers'}:
+        raise RuntimeError('candidate inventory attempted to load a model')
+sys.addaudithook(guard)
+root=Path(__file__).resolve().parent
+mode=sys.argv[1]
+assert mode in {'before','after'}
+manifest=(root/'exact-published-profile-inputs.json').read_bytes()
+assert hashlib.sha256(manifest).hexdigest()=='eee60b28b3b7cba18b7ce5a73a50fb9a5e3cc625304fa8910a74bca7bc2d94cb'
+files=json.loads(manifest)['files']
+projection=root/'projection'
+for ref in files.values():
+    raw=Path(ref['path']).read_bytes()
+    assert (len(raw),hashlib.sha256(raw).hexdigest())==(ref['bytes'],ref['sha256'])
+packages=['ipfs_datasets_py','ipfs_datasets_py.logic','ipfs_datasets_py.logic.families',
+          'ipfs_datasets_py.logic.syntax_core','ipfs_datasets_py.logic.autoformal',
+          'ipfs_datasets_py.logic.formalization','ipfs_datasets_py.logic.formalization.autoencoder']
+for name in packages:
+    module=ModuleType(name)
+    module.__path__=[str(projection/Path(*name.split('.')))]
+    module.__package__=name
+    sys.modules[name]=module
+    if '.' in name:
+        parent,child=name.rsplit('.',1)
+        setattr(sys.modules[parent],child,module)
+from ipfs_datasets_py.logic.syntax_core import ast, signatures
+from ipfs_datasets_py.logic.autoformal import legal_native_ast_preservation as native
+qualified_name='ipfs_datasets_py.logic.autoformal.legal_relational_norm_v1'
+owner=Path(files['bridge']['path'])
+if mode=='after':
+    owner=root/'proposed'/'legal_relational_norm_v1.py'
+    ref=json.loads((root/'expected-proposed-owner.json').read_bytes())
+    raw=owner.read_bytes()
+    assert (len(raw),hashlib.sha256(raw).hexdigest())==(ref['bytes'],ref['sha256'])
+spec=spec_from_file_location(qualified_name,owner)
+bridge=module_from_spec(spec)
+sys.modules[qualified_name]=bridge
+spec.loader.exec_module(bridge)
+
+# Load the actual existing fixture constructors without unrelated tests.
+wanted={'Builder','OBJECT','wire','mixed_member_request','interface_row','interface_prepare'}
+test_source=Path(files['owning_test']['path']).read_bytes()
+selected=[]
+for node in python_ast.parse(test_source).body:
+    if isinstance(node,(python_ast.FunctionDef,python_ast.ClassDef)) and node.name in wanted:
+        selected.append(node)
+    elif isinstance(node,python_ast.Assign) and any(isinstance(target,python_ast.Name) and target.id=='OBJECT' for target in node.targets):
+        selected.append(node)
+assert len(selected)==len(wanted)
+test={'ast':ast,'signatures':signatures,'bridge':bridge,'json':json,'hashlib':hashlib}
+exec(compile(python_ast.Module(body=selected,type_ignores=[]),files['owning_test']['path'],'exec'),test)
+wire,make,mix_row,call=(test[name] for name in ('wire','mixed_member_request','interface_row','interface_prepare'))
+small=make()
+positive=mix_row('authored:small','mixed_relational',small)
+_,base=call([positive])
+assert base['candidate_records'][0]['disposition']=='representable'
+original=ast.TypedExpression.from_dict(small['expression'])
+obj,event,time=(signatures.LogicSort(name) for name in ('Object','EventFrame','TimeFrame'))
+predicates=[ast.mk_predicate(f'fixture:event:{i}:claim','Member',[
+    ast.mk_variable(f'fixture:event:{i}:actor','actor',obj),
+    ast.mk_variable(f'fixture:event:{i}:event','event',event),
+    ast.mk_variable(f'fixture:event:{i}:moment','moment',time)])
+    for i in range(650)]
+expr=ast.mk_and('fixture:event:all',*predicates)
+for name,sort in [('moment',time),('event',event),('actor',obj)]:
+    expr=ast.mk_forall('fixture:event:bind:'+name,[ast.Binder(name,sort)],expr)
+large=small | {'expression':replace(original,root=expr,content_digest='').to_dict()}
+large_ast=wire(large['expression'])
+assert ast.TypedExpression.from_dict(large['expression']).to_dict()==large['expression']
+assert len(large_ast)>bridge.MAX_REQUEST_BYTES
+
+# Balanced authored unary syntax above the native route's own record cap.
+# Every leaf is still in the closed ordinary serialization and inventoried.
+long_name='Declaration'+('Name'*29)
+bound_name='Bound'+('Name'*30)
+pred=dict(node_type='Predicate',name=long_name,
+          arguments=[dict(node_type='Variable',name=bound_name,sort=None)])
+layer=[pred for _ in range(2580)]
+while len(layer)>1:
+    layer=[dict(node_type='BinaryFormula',operator={'enum':'LogicOperator','value':'∧'},
+           left=layer[i],right=layer[i+1]) if i+1<len(layer) else layer[i]
+           for i in range(0,len(layer),2)]
+native_ast=dict(node_type='QuantifiedFormula',quantifier={'enum':'Quantifier','value':'∀'},
+    variable=dict(node_type='Variable',name=bound_name,sort=None),formula=layer[0])
+native_ast_bytes=wire(native_ast)
+assert len(native_ast_bytes)>native.MAX_RECORD_BYTES
+native_input={'native_ast':native_ast,'family':'fol','schema':'legal-native-family-route/v1'}
+cases=[
+    ('mixed',mix_row('authored:long-mixed','mixed_relational',large),large_ast),
+    ('native',mix_row('authored:long-native','native_unary_preservation',native_input,'leanprover/lean4:v4.34.1'),native_ast_bytes),
+]
+records=[]
+for kind,candidate,typed in cases:
+    rows=[positive,candidate]
+    request=wire({'schema':bridge.INTERFACE_REQUEST_SCHEMA,'candidates':rows})
+    assert len(request)<bridge.INTERFACE_MAX_BYTES
+    try:
+        raw,report=call(rows)
+    except ValueError as error:
+        observed=dict(actual='raised',error=str(error))
+    else:
+        assert report['candidate_records'][0]==base['candidate_records'][0]
+        offered=report['candidate_records'][1]
+        assert offered['disposition']=='unsupported' and offered['replacement_ast'] is None
+        assert offered['payload_raw_utf8']==candidate['payload_raw_utf8']
+        assert offered['argument_roles']==(large['argument_roles'] if kind=='mixed' else None)
+        assert offered['candidate_ast_sha256']==hashlib.sha256(typed).hexdigest()
+        assert bridge.validate_candidate_ir_interface_v1(report,raw,
+            expected_request_sha256=hashlib.sha256(raw).hexdigest(),
+            expected_report_sha256=bridge.candidate_ir_interface_sha256(report))==report
+        observed=dict(actual='unsupported-and-positive-retained',offered_disposition=offered['disposition'])
+    records.append(dict(profile=kind,ast_bytes=len(typed),inventory_request_bytes=len(request),**observed))
+print(json.dumps(dict(mode=mode,positive_baseline='representable',cases=records,
+    full_existing_public_owner=True,model_Lean_or_source_execution=False,
+    owner_sha256=hashlib.sha256(owner.read_bytes()).hexdigest()),indent=2))

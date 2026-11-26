@@ -1,0 +1,42 @@
+diff --git a/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py b/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py
+--- a/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py
++++ b/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py
+@@ -693,6 +693,11 @@
+     packet: ExternalLegalExpertBenchmarkPacket,
+     prediction: Mapping[str, Any],
+ ) -> ExternalBenchmarkPacketResult:
++    if "packet_digest" in prediction and prediction["packet_digest"] != packet.digest:
++        raise LegalIRExternalBenchmarkError(
++            "prediction packet digest does not match the selected benchmark packet"
++        )
++
+     family_score, family_detail, family_blocks = _family_score(packet, prediction)
+     citation_score, citation_detail, citation_blocks = _citation_score(packet, prediction)
+     proof_score, proof_detail, proof_blocks = _proof_score(packet, prediction)
+diff --git a/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py b/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py
+--- a/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py
++++ b/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py
+@@ -305,3 +305,23 @@
+         {packet.packet_id: {**payload, "id": packet.packet_id}},
+     ):
+         assert evaluate_external_legal_expert_benchmark([packet], predictions).accepted
++
++
++def test_external_benchmark_requires_current_declared_packet_digest() -> None:
++    from dataclasses import replace
++
++    packet = _packets()[0]
++    revised = replace(packet, source_document_id=f"{packet.source_document_id}:revised")
++    assert revised.packet_id == packet.packet_id
++    assert revised.digest != packet.digest
++
++    prediction = _prediction(packet)
++    assert evaluate_external_legal_expert_benchmark([revised], prediction).accepted
++    current = {**prediction, "packet_digest": revised.digest}
++    assert evaluate_external_legal_expert_benchmark([revised], current).accepted
++
++    for stale_digest in (packet.digest, None):
++        with pytest.raises(LegalIRExternalBenchmarkError, match="prediction packet digest"):
++            evaluate_external_legal_expert_benchmark(
++                [revised], {**prediction, "packet_digest": stale_digest}
++            )

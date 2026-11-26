@@ -1,0 +1,85 @@
+{
+  "controls": "Public V2 fictional ready path, independent exact pinned split and dependency replay, existing signature revocation, plus exact Unicode fingerprint and unknown/stale/orphaned profile refusal before callback. The shared V2/V3 implementation is changed; only V2 exercised here.",
+  "current_owner_test_git_blob_matches": {
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_consumer_binding.py": "6fff65035cf9183b2e2c234621f4e6189551fae5",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_consumer_binding.py": "08f31273edcae660520d10f13eab680621df978e"
+  },
+  "defect_reproduced": "With the actual current consumer and retained Unicode split implementation, a genuine signed fictional component and a freshly pinned manifest with a nonmatching recorded feature were accepted as ready. Both fictional masks stayed zero.",
+  "dependencies": "Reuses e652c798 optional split profile. Undefined or unsupported profile rejects when a manifest declares it; unmarked legacy source matching stays exact. Whole workflow still requires existing split and assessment replay adoption.",
+  "exact_private_inputs_and_posts": {
+    "consumer_after": {
+      "bytes": 59243,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-reviewed-heldout-fingerprint-private-v01-c3_iyyyn/legal_span_consumer_binding.after.py.DATA",
+      "sha256": "5bb6c1c1d627d65d7e0d98a00d5f646c7519f0c3a73a21492db1936445ecdd4f"
+    },
+    "consumer_before": {
+      "bytes": 58356,
+      "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_consumer_binding.py",
+      "sha256": "ff8b61f71280f4c5d1d413feab33d5f9498f3cf560755492eafbbb0348d0bc82"
+    },
+    "consumer_diff": {
+      "bytes": 2046,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-reviewed-heldout-fingerprint-private-v01-c3_iyyyn/owner.diff",
+      "sha256": "2a9914f2ccc78b76231e6b95b375385e6342acfadc453fb6cc942c401d0f950e"
+    },
+    "historical_signed_V2_fixture": {
+      "bytes": 120520,
+      "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py",
+      "sha256": "c0a60c1bd1bbdbdd48700cbdc72769b08e5d41340a82e51be65bf33b8e5d1141"
+    },
+    "historical_signed_V2_owner": {
+      "bytes": 88512,
+      "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/legal_norm_content_adjudication_v1.py",
+      "sha256": "7350235f02340d2d2f0925d25399f614861c59b6faabcb1ebd427e2682a4f1fd"
+    },
+    "private_Unicode_split_owner": {
+      "bytes": 61991,
+      "path": "/tmp/decoder-training-unicode-campaign-split-private-v01-3SZARfWx/replay/legal_ir_eval_splits.py",
+      "sha256": "e652c79842323fec40f3e5d8f6a23620c9b4ce4a2d1043c597176a13de3f4acd"
+    },
+    "test_after": {
+      "bytes": 68690,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-reviewed-heldout-fingerprint-private-v01-c3_iyyyn/test_legal_span_consumer_binding.after.py.DATA",
+      "sha256": "d9fbbd2e465bf170675617af1fd4376efc9de545ded4ad843a76aae938055445"
+    },
+    "test_before": {
+      "bytes": 66226,
+      "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_consumer_binding.py",
+      "sha256": "b3376a24990eaecc603ca829f5de971f092cb5cd2e83e84b9eb28fb10e399c78"
+    },
+    "test_diff": {
+      "bytes": 2877,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-reviewed-heldout-fingerprint-private-v01-c3_iyyyn/test.diff",
+      "sha256": "eeb230092fa5f60a8d3b8195385e68ae7983ea9fc0eb78d58e836c6233dcd17a"
+    }
+  },
+  "modified_existing_function_only": "_prepare_reviewed_source_span_consumer_binding",
+  "observed_D_HEAD": "8aebc34eb1e430b00c2b941cb256e853fe2adc02",
+  "observed_D_tree": "00cef1abedbef0ae383dc07df5f5efb22f5253bd",
+  "paired_exact_five_results": {
+    "baseline": {
+      "fail": 1,
+      "log": {
+        "bytes": 1066,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-reviewed-heldout-fingerprint-private-v01-c3_iyyyn/baseline.actual-result.json.DATA",
+        "sha256": "a62afab751fa1db3ed2475b7517500d862e2854ea9619f774cb1935ba5aa38f0"
+      },
+      "pass": 4,
+      "process_exit": 1
+    },
+    "candidate": {
+      "fail": 0,
+      "log": {
+        "bytes": 899,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-reviewed-heldout-fingerprint-private-v01-c3_iyyyn/candidate.actual-result.json.DATA",
+        "sha256": "3de6a8ad97be13c5fe7edbc79f5708cef2fc351955c42a03463d6e883c4b959b"
+      },
+      "pass": 5,
+      "process_exit": 0
+    }
+  },
+  "prior_setup_refusal": "Initial exploratory probe treated receipt as a value rather than a method; corrected and preserved separately from the paired test result.",
+  "schema": "phase5-reviewed-heldout-fingerprint-real-signed-fictional-paired-controls/v1",
+  "scope": "Private signed fictional historical V2 fixture and exact current heldout consumer owner. No canonical installation, actual statutory approval, whole training/evaluation, Normal pytest, SQL, Native, SDK, Source access or Git mutation.",
+  "test_append_only": true
+}

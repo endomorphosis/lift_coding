@@ -1,0 +1,162 @@
+{
+  "adoption": "Existing Source2 exact candidate post deploy, local freeze, and genuine READ for the two posts and resulting index. Use the existing current epoch/fixture route. Report any actual new capture separately.",
+  "current_actual_READ3": null,
+  "current_actual_Source_epoch": null,
+  "expected_absence_roles": [
+    {
+      "currently_absent": true,
+      "relative_path": "tests/integration/conftest.py",
+      "requires_current_Source_absence_guard": true
+    },
+    {
+      "currently_absent": true,
+      "relative_path": "tests/integration/logic/conftest.py",
+      "requires_current_Source_absence_guard": true
+    },
+    {
+      "currently_absent": true,
+      "relative_path": "tests/integration/logic/__init__.py",
+      "requires_current_Source_absence_guard": true
+    },
+    {
+      "currently_absent": true,
+      "relative_path": "tests/integration/logic/backends/conftest.py",
+      "requires_current_Source_absence_guard": true
+    },
+    {
+      "currently_absent": true,
+      "relative_path": "tests/integration/logic/backends/__init__.py",
+      "requires_current_Source_absence_guard": true
+    },
+    {
+      "currently_absent": true,
+      "relative_path": "ipfs_datasets_py/logic/backends/kernel/__init__.py",
+      "requires_current_Source_absence_guard": true
+    }
+  ],
+  "integration_init": "tests/integration/__init__.py",
+  "module_roles": {
+    "ipfs_datasets_py.logic.backends.kernel.lean": {
+      "actual_Source_full9": null,
+      "current_preimage_git_blob": "1e1b75b74da8740b5808fb3dd77671eab5673f35",
+      "expected_after_adoption": {
+        "bytes": 103838,
+        "proposed_git_blob": "a96fcf58d02523fee3912912933302c026c92788",
+        "sha256": "c1050ad1ec067fc7f7c8fea08793e872511fe58029e9b1aa89ec90d2cb288313"
+      },
+      "relative_path": "ipfs_datasets_py/logic/backends/kernel/lean.py"
+    },
+    "ipfs_datasets_py.logic.backends.kernel.rocq": {
+      "actual_Source_full9": null,
+      "current_preimage_git_blob": "114904463a9f4217132cde3849c49e84d271e66c",
+      "expected_after_adoption": {
+        "bytes": 41607,
+        "proposed_git_blob": "114904463a9f4217132cde3849c49e84d271e66c",
+        "sha256": "7fd1b39643190277f00325dac59cf3923b24a3056963713bd7437a364b6a0f9a"
+      },
+      "relative_path": "ipfs_datasets_py/logic/backends/kernel/rocq.py"
+    },
+    "ipfs_datasets_py.logic.backends.kernel.wasm": {
+      "actual_Source_full9": null,
+      "current_preimage_git_blob": "452f7d2fa0d285ae213abdc4a7b9ea83875b8c1b",
+      "expected_after_adoption": {
+        "bytes": 24933,
+        "proposed_git_blob": "452f7d2fa0d285ae213abdc4a7b9ea83875b8c1b",
+        "sha256": "49cfdbc0108b43d45ab9f567b4153f384985563b075f369b32e37f855252d6cc"
+      },
+      "relative_path": "ipfs_datasets_py/logic/backends/kernel/wasm.py"
+    },
+    "ipfs_datasets_py.logic.backends.process": {
+      "actual_Source_full9": null,
+      "current_preimage_git_blob": "1650b31bd0aa342f3614bf9999e9b6010fba17ee",
+      "expected_after_adoption": {
+        "bytes": 109707,
+        "proposed_git_blob": "1650b31bd0aa342f3614bf9999e9b6010fba17ee",
+        "sha256": "370ba355be1da87814be4a117d2ce2a1cbc255064958d9ec64ada8e54521a7d7"
+      },
+      "relative_path": "ipfs_datasets_py/logic/backends/process.py"
+    },
+    "ipfs_datasets_py.logic.backends.resource_admission": {
+      "actual_Source_full9": null,
+      "current_preimage_git_blob": "4ec4a57c8fb7e058cf92e9b0a42cd1940290fb4f",
+      "expected_after_adoption": {
+        "bytes": 19806,
+        "proposed_git_blob": "4ec4a57c8fb7e058cf92e9b0a42cd1940290fb4f",
+        "sha256": "fda64e02042355fd0a0a3b75934b3d1c4ccb5efb42f0fe861876275ff8a5e1a8"
+      },
+      "relative_path": "ipfs_datasets_py/logic/backends/resource_admission.py"
+    },
+    "ipfs_datasets_py.logic.backends.results": {
+      "actual_Source_full9": null,
+      "current_preimage_git_blob": "7ffdc5b4019faa80749df5fb0bb7d1f06379573f",
+      "expected_after_adoption": {
+        "bytes": 27160,
+        "proposed_git_blob": "7ffdc5b4019faa80749df5fb0bb7d1f06379573f",
+        "sha256": "afda793472d3a6ba13f20bee13a992bfce68177388bdf338548157a5aa201458"
+      },
+      "relative_path": "ipfs_datasets_py/logic/backends/results.py"
+    },
+    "ipfs_datasets_py.logic.families.models": {
+      "actual_Source_full9": null,
+      "current_preimage_git_blob": "053af9eaf293ba268c2dc8155844f2e3dc5355ce",
+      "expected_after_adoption": {
+        "bytes": 36277,
+        "proposed_git_blob": "053af9eaf293ba268c2dc8155844f2e3dc5355ce",
+        "sha256": "1a92305ef498812e3757147179907d4ddf4a4518371034fc2363922d5d5fed3f"
+      },
+      "relative_path": "ipfs_datasets_py/logic/families/models.py"
+    },
+    "ipfs_datasets_py.logic.ir_core.claims": {
+      "actual_Source_full9": null,
+      "current_preimage_git_blob": "63af5a987404010aa0ec69fb827722afc9b53b81",
+      "expected_after_adoption": {
+        "bytes": 16176,
+        "proposed_git_blob": "63af5a987404010aa0ec69fb827722afc9b53b81",
+        "sha256": "282cdd3a6ba18a90079886337d360bae44da172748faa3ad2715d2071070de3b"
+      },
+      "relative_path": "ipfs_datasets_py/logic/ir_core/claims.py"
+    },
+    "ipfs_datasets_py.logic.ir_core.protocols": {
+      "actual_Source_full9": null,
+      "current_preimage_git_blob": "e0c645ccac9c3e89cc72e6a6c773a49528257946",
+      "expected_after_adoption": {
+        "bytes": 57414,
+        "proposed_git_blob": "e0c645ccac9c3e89cc72e6a6c773a49528257946",
+        "sha256": "b452a7095a2524f0ea3f4e4f3a395643d3257cd6f42e3c77f8e1817df62f6fed"
+      },
+      "relative_path": "ipfs_datasets_py/logic/ir_core/protocols.py"
+    },
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler": {
+      "actual_Source_full9": null,
+      "current_preimage_git_blob": "54dc1effc87deb3fba782f1b9df4db460ffb4f1a",
+      "expected_after_adoption": {
+        "bytes": 151350,
+        "proposed_git_blob": "54dc1effc87deb3fba782f1b9df4db460ffb4f1a",
+        "sha256": "7a0dac2d13b4be7775e278054e1a57808f5629d3c58952164b91514e6e2ae2d3"
+      },
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py"
+    },
+    "tests.integration.logic.backends.test_kernel_backends": {
+      "actual_Source_full9": null,
+      "current_preimage_git_blob": "e18eec7a0b92a20d02a672559713a0923f3ad7a5",
+      "expected_after_adoption": {
+        "bytes": 115566,
+        "proposed_git_blob": "94cd39ed1d3e352faa41992f6236fe72179958eb",
+        "sha256": "99e00363bbd1ea23d450af0912374fdbf4d30ab3b1802371fb8d237dccbf7da5"
+      },
+      "relative_path": "tests/integration/logic/backends/test_kernel_backends.py"
+    }
+  },
+  "observed_local_HEAD": "2fb234a23c3b7aa548272b7351c3c26b70bd9fe1",
+  "observed_status_at_preparation": [
+    " M ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json",
+    " M ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+    " M ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md",
+    " M ipfs_datasets_py/logic/autoformal/docs/work_catalog.json"
+  ],
+  "pytest_ini": "pytest.ini",
+  "required_normal_conftests": [
+    "conftest.py",
+    "tests/conftest.py"
+  ]
+}

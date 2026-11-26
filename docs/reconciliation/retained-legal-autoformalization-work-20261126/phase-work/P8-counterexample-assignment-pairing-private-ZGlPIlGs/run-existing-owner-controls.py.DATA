@@ -1,0 +1,59 @@
+from pathlib import Path
+import ast
+import hashlib
+import json
+import os
+import resource
+import sys
+from types import ModuleType
+
+import pytest
+
+root = Path(__file__).resolve().parent
+phase, metrics_file = sys.argv[1:]
+profiles = {"red": "metrics.before.py.DATA", "green": "metrics.after.py.DATA"}
+assert metrics_file == profiles[phase]
+resource.setrlimit(resource.RLIMIT_CPU, (20, 21))
+resource.setrlimit(resource.RLIMIT_AS, (512 * 1024**2, 512 * 1024**2))
+os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
+refs = json.loads((root / "exact-current-inputs.json").read_bytes())["files"]
+package = "ipfs_datasets_py.optimizers.logic_theorem_optimizer"
+modules = [("snapshot_evaluator", "snapshot.py.DATA"),
+           ("legal_ir_family_evaluator", "family.py.DATA"),
+           ("legal_ir_semantic_metrics", metrics_file)]
+for name in ("ipfs_datasets_py", "ipfs_datasets_py.optimizers", package):
+    mod = ModuleType(name)
+    mod.__path__ = []
+    sys.modules[name] = mod
+for name, filename in modules:
+    module = ModuleType(package + "." + name)
+    module.__package__ = package
+    path = root / filename
+    module.__file__ = str(path)
+    raw = path.read_bytes()
+    if filename in refs:
+        assert (len(raw),hashlib.sha256(raw).hexdigest()) == (refs[filename]["bytes"],refs[filename]["sha256"])
+    sys.modules[module.__name__] = module
+    exec(compile(raw, str(path), "exec", dont_inherit=True), module.__dict__)
+
+test = root / "test_legal_ir_semantic_metrics.py"
+before = (root / "test.before.py.DATA").read_bytes()
+assert hashlib.sha256(before).hexdigest() == refs["test.before.py.DATA"]["sha256"]
+assert test.read_bytes() == before + (root / "scenario-tests.py.fragment").read_bytes()
+extra = (
+    "test_raw_round_trip_requires_both_reported_nonempty_observations",
+    "test_one_sided_round_trip_evidence_is_not_a_complete_pair",
+    "test_unknown_legacy_shapes_are_diagnostic_and_cannot_claim_typed_semantics",
+    "test_recognized_actor_change_still_blocks_legacy_raw_promotion",
+    "test_explicit_scores_cannot_launder_uncovered_raw_pair_evidence",
+    "test_explicit_perfect_scores_cannot_launder_covered_raw_pair_evidence",
+    "test_counterexample_scores_bind_assignments_to_reported_outcomes",
+)
+tests = [n.name for n in ast.parse(test.read_bytes()).body
+         if isinstance(n, ast.FunctionDef) and n.name.startswith("test_")
+         and (n.lineno < 242 or n.name in extra)]
+assert all(test_name in tests for test_name in extra)
+print("profile=private-stdlib-owner-and-pytest-fixture", "selectors=", len(tests), flush=True)
+args = ["-q", "-p", "no:cacheprovider", "--confcutdir", str(root),
+        "--junitxml", str(root / f"{phase}.junit.xml")]
+sys.exit(pytest.main(args + [str(test) + "::" + name for name in tests]))

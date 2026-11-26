@@ -1,0 +1,161 @@
+"""Execute the selected maintained metadata-only cases in a private linkage."""
+from pathlib import Path
+from types import SimpleNamespace
+import ast
+import hashlib
+import json
+import os
+import resource
+import runpy
+import sys
+import traceback
+
+resource.setrlimit(resource.RLIMIT_CPU, (50, 50))
+resource.setrlimit(resource.RLIMIT_AS, (512 * 1024**2,) * 2)
+os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
+
+def no_effects(event, args):
+    if event.startswith("socket.") or event in {"subprocess.Popen", "os.system", "os.exec", "os.fork"}:
+        raise RuntimeError("private saved-output metadata exercise attempted an external effect")
+    if event == "import" and args[0].partition(".")[0] in {"torch", "tokenizers", "transformers"}:
+        raise RuntimeError("metadata-only exercise attempted to load numerical model runtime")
+
+sys.addaudithook(no_effects)
+import pytest
+
+root = Path(__file__).resolve().parent
+mode = sys.argv[1]
+assert mode in {"before","after"}
+loader_path = "/tmp/decoder-public-codec-terminal-hook-private-v01-3ct_f9yq/load_exact_cached_codec_fixture.py"
+with open(loader_path,"rb") as f:
+    assert hashlib.sha256(f.read()).hexdigest()=="1a355d5a3d82bef971d616b43712e40150386e7b827102a5bbddabb4a98ff714"
+loader = runpy.run_path(loader_path)
+auth = loader["authenticated"]
+link = loader["_compile_module"]
+manifest = json.loads(auth({'path': '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P5-v11-evaluation-measurement-join-private-sl1z_6si/exact-v11-measurement-red-green-inputs.v02.json', 'bytes': 13242, 'sha256': 'e021edfa9f59f08bb183c7250a7febd6e3ecb8f3442ec27f5960806c5501dfd5'}))
+roles = manifest["roles"]
+def raw(role):
+    return auth(roles[role])
+def physical(module, role):
+    module.__file__ = roles[role]["path"]
+    return module
+
+names = link("namespaces",raw("namespaces"),{})
+contracts = link("contracts",raw("contracts"),vars(names))
+signatures = link("signatures",raw("signatures"),{**vars(names),**vars(contracts)})
+syntax = link("syntax",raw("syntax"),{**vars(names),**vars(contracts),**vars(signatures)})
+consumer = physical(link("consumer",raw("consumer"),{},roots=["_preflight","REVIEWED_HELDOUT_PURPOSE"]),"consumer")
+metrics = link("metrics",raw("metrics"),{"TypedExpression":syntax.TypedExpression},
+    roots=["evaluate_complete_norm_typed_structure","evaluate_complete_norm_payloads","_complete_norm_payload_shape"])
+inputs = physical(link("inputs",raw("inputs"),{"consumer":consumer,"TypedExpression":syntax.TypedExpression,
+    "evaluate_complete_norm_typed_structure":metrics.evaluate_complete_norm_typed_structure},
+    roots=["_reviewed_wire","encode_reviewed_decoder_digest_omitted_target","assemble_reviewed_decoder_digest_omitted_target"]),"inputs")
+admission = SimpleNamespace(__file__=roles["admission"]["path"])
+splits = SimpleNamespace(__file__=roles["splits"]["path"])
+source_tree=ast.parse(raw("worker"))
+pin_function=next(node for node in source_tree.body if isinstance(node,ast.FunctionDef)
+    and node.name=="_reviewed_decoder_source_pins")
+# The exact linker removes project imports. These two branches contain
+# only the import, so keep their statement suites after binding the names.
+profile_if=next(node for node in pin_function.body if isinstance(node,ast.If))
+for branch in (profile_if, profile_if.orelse[0]):
+    assert len(branch.body)==1 and isinstance(branch.body[0],ast.ImportFrom)
+    branch.body.append(ast.Pass())
+worker = physical(link("worker",ast.unparse(source_tree),{"training_cycle_inputs":inputs, "admission":admission,
+    "legal_norm_content_adjudication_v1":None, "legal_reviewed_norm_admission_v3":admission,
+    "legal_span_consumer_binding":consumer,"legal_ir_eval_splits":splits},
+    roots=["_reviewed_decoder_artifact","_reviewed_decoder_generation_policy",
+           "CheckpointArtifact","_parse_json","_json_bytes","_digest","REVIEWED_MIXED_ADMISSION_PROFILE",
+           "_reviewed_decoder_source_pins"]),"worker")
+describer = link("daemon_contracts",raw("daemon_contracts"),{},roots=["describe"])
+chosen = "inference" if mode=="before" else "inference_candidate"
+inference = physical(link("inference",raw(chosen),{"worker":worker,"inputs":inputs,
+    "autoencoder_training_worker":worker,"training_cycle_inputs":inputs,"describe":describer.describe,
+    "legal_ir_semantic_metrics":metrics, "metrics":metrics},
+    roots=["_check_reviewed_evaluation_outputs","_reviewed_evaluation_lifecycle_source_sha256","_build_parent_typed_structure_audit"]),chosen)
+if mode=="after":
+    projection = root/"candidate-project-optional-audit"
+    for role in ("inference_candidate","launch","campaign_process","campaign_worker",
+                 "daemon_worker","daemon_resources","scheduler","existing_scheduler"):
+        relative = roles["inference"]["relative_path"] if role=="inference_candidate" else roles[role]["relative_path"]
+        destination = projection / relative
+        destination.parent.mkdir(parents=True,exist_ok=True)
+        content = raw(role)
+        with destination.open("xb") as f:
+            f.write(content)
+        destination.chmod(0o400)
+        assert destination.read_bytes()==content
+    inference.__file__ = str(projection / roles["inference"]["relative_path"])
+numerical = link("numerical_fixture",raw("numerical_test"),
+    {"inputs":inputs,"training_cycle_inputs":inputs,"TypedExpression":syntax.TypedExpression},
+    roots=["_reviewed_Qwen2_generation_policy","_digest_omitted_small_generation_target"])
+selected = {
+    "test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved":5,
+    "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes":15,
+    "test_reviewed_inference_v11_outputs_cover_ordered_source_population":6,
+    "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition":14,
+    "test_reviewed_inference_v11_evaluation_scores_the_verified_generation":10,
+}
+# The existing five inputs and eight lifecycle reads remain genuine. The
+# alternative rich request helper is unreachable through this saved-output fixture.
+test_tree = ast.parse(raw("owning_test_candidate"))
+helpers = {
+    "_sha","_reviewed_mixed_request_data","_reviewed_profiled_request_data",
+    "_reviewed_profiled_parent_policy_data","_reviewed_Qwen2_parent_policy_data",
+    "_reviewed_v11_tuple","_reviewed_v11_parent_policy_data","_reviewed_v11_bind_saved_source_control",
+    "_reviewed_v11_saved_control","_reviewed_v11_three_source_coverage_control","_reviewed_v11_saved_evaluation",
+}
+audit_selected={"test_reviewed_inference_parent_typed_audit_binds_complete_original_artifacts"}
+test_nodes = [node for node in test_tree.body if isinstance(node,ast.FunctionDef) and node.name in helpers|set(selected)|audit_selected]
+assert {node.name for node in test_nodes}==helpers|set(selected)|audit_selected
+class BindSelectedNumericalFixture(ast.NodeTransformer):
+    def visit_ImportFrom(self, node):
+        if node.module == "tests.unit.optimizers.logic_theorem_optimizer":
+            assert len(node.names)==1 and node.names[0].name=="test_autoencoder_training_worker" and node.names[0].asname=="numerical"
+            return ast.copy_location(ast.Pass(),node)
+        return node
+test_module=BindSelectedNumericalFixture().visit(ast.Module(body=test_nodes,type_ignores=[]))
+tests = link("owning_metadata_tests",ast.unparse(test_module),
+    {"pytest":pytest,"inference":inference,"worker":worker,"consumer":consumer,
+     "autoencoder_training_worker":worker,"legal_span_consumer_binding":consumer,
+     "numerical":numerical,"test_autoencoder_training_worker":numerical,"legal_ir_semantic_metrics":metrics,"metrics":metrics,
+     "Path":Path,"json":json,"hashlib":hashlib})
+
+run_root = root / ("evaluation-optional-audit-v01-" + mode)
+run_root.mkdir(mode=0o700)
+seed_path = run_root / "seed"
+seed_path.mkdir()
+_, _, request, _, _, write = tests._reviewed_v11_saved_control(seed_path, "complete")
+cycle = write()
+rows = json.loads(Path(request["rows_artifact"]["path"]).read_bytes())
+evaluation = json.loads(Path(cycle["output_artifacts"]["evaluation"]["path"]).read_bytes())
+payload = evaluation["compiler_artifact"]["reviewed_source_span_producer_evaluation"]
+from copy import deepcopy
+
+def ordered_clones(values):
+    assert len(values) == 1
+    return [{**deepcopy(values[0]), "id": "fixture:optional-audit:" + str(index)} for index in range(3)]
+
+rows = ordered_clones(rows)
+for key in ("reference_population", "producer_arguments", "producer_outputs"):
+    payload[key] = ordered_clones(payload[key])
+exact = metrics.evaluate_complete_norm_payloads([
+    dict(case_id=r["id"], reference=r["canonical_ir"], candidate=o["candidate"], outcome=o["outcome"])
+    for r,o in zip(rows, payload["producer_outputs"], strict=True)
+])
+payload["comparison"] = exact
+evaluation["metrics"]["complete_norm_payload"] = deepcopy(exact)
+fn = tests.test_reviewed_inference_parent_typed_audit_binds_complete_original_artifacts
+results = []
+for index, damage in enumerate(fn.pytestmark[0].args[1]):
+    case = run_root / str(index)
+    case.mkdir()
+    try:
+        fn(case, (rows, evaluation), damage)
+    except (Exception, pytest.fail.Exception) as exc:
+        results.append({"case": damage, "status": "failed", "details": traceback.format_exc()})
+    else:
+        results.append({"case": damage, "status": "passed"})
+print(json.dumps({"mode": mode, "fixture": "three fictional ordered rows from exact saved-output fixture",
+                  "results": results}, indent=2))
+assert len(results) == 8 and all(row["status"] == "passed" for row in results)

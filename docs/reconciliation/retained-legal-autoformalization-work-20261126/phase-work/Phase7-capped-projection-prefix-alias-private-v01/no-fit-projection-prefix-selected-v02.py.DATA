@@ -1,0 +1,111 @@
+from pathlib import Path
+from types import ModuleType
+import hashlib
+import importlib.util
+import json
+import sys
+import traceback
+
+stage = Path(__file__).absolute().parent
+feedback = stage.parent / "Phase7-current-obligation-write-binding-private-ymey1qtf"
+adapter_path = feedback / "no-fit-current-obligation-bound-feedback-adapter-v02.py"
+raw = adapter_path.read_bytes()
+assert (len(raw), hashlib.sha256(raw).hexdigest()) == (
+    20480, "43ad9ed1524e541998646663dc67baea01cacce87769666d4afa12cd6252abf7",
+)
+adapter = ModuleType("_existing_pinned_nofit_fixture_adapter")
+adapter.__file__ = str(adapter_path)
+sys.modules[adapter.__name__] = adapter
+exec(compile(raw, str(adapter_path), "exec"), adapter.__dict__)
+prior = adapter.load_prior()
+suite_rel = "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder.py"
+owner_rel = "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py"
+
+
+def fixture_loader(owner_pin):
+    baseline = adapter.prepare_loader(prior, {})
+    prior.EXPECTED[suite_rel] = "a33b50edbbf876a4b62e98821d0e4dcf7a7d558f"
+    selected_files = {
+        suite_rel: ("test_modal_autoencoder.projection-prefix.after.DATA", 532752, "886e9d97dd06c4f2849cf4d444632430c73e110099e2d01cdcad09377203df29"),
+    }
+    if owner_pin is not None:
+        selected_files[owner_rel] = owner_pin
+    posts = {path:adapter.pinned_file(stage / leaf, count, digest)
+             for path, (leaf, count, digest) in selected_files.items()}
+    guarded_source = prior.BoundSource
+
+    class CurrentCacheFixtureOverlay(guarded_source):
+        def get_code(self, fullname):
+            baseline_code = super().get_code(fullname)
+            path = Path(self.path).absolute()
+            relative = path.relative_to(prior.ROOT).as_posix()
+            if relative not in posts:
+                return baseline_code
+            code = posts[relative]
+            leaf, count, digest = selected_files[relative]
+            prior.compiled_total += len(code)
+            assert prior.compiled_total <= prior.MAX_MODULE_BYTES
+            prior.compiled[relative]["overlay_executed"] = {
+                "path": str(stage / leaf), "bytes": count, "sha256": digest,
+            }
+            return compile(code, str(path), "exec", dont_inherit=True)
+
+    prior.BoundSource = CurrentCacheFixtureOverlay
+    return baseline
+
+
+def load_owning_tests():
+    name = "_actual_modal_autoencoder_owning_tests"
+    path = prior.ROOT / suite_rel
+    spec = importlib.util.spec_from_file_location(name, path, loader=prior.BoundSource(name, str(path)))
+    owner = importlib.util.module_from_spec(spec)
+    sys.modules[name] = owner
+    spec.loader.exec_module(owner)
+    return owner
+
+
+outcome = {}
+code = 2
+try:
+    assert sys.argv[1:] == ["baseline"] or len(sys.argv) == 5 and sys.argv[1] == "overlay"
+    prior.install_kernel_guards()
+    owner_pin = (sys.argv[2], int(sys.argv[3]), sys.argv[4]) if sys.argv[1] == "overlay" else None
+    fixture_loader(owner_pin)
+    fixture = adapter.import_fixture(prior)
+    owner = load_owning_tests()
+    from ipfs_datasets_py.optimizers.logic_theorem_optimizer import modal_autoencoder as modal
+
+    def skip_unrelated_ontology_capture(_samples):
+        return []
+    checks = []
+    cases = (
+        ("strict-count-cap", 1, 0, False, 1),
+        ("strict-count-and-text-cap-holdout-and-training", 2, 40, True, 2),
+        ("zero-disables-bridge", 0, 40, False, 0),
+        ("text-only-cap", None, 40, False, 3),
+        ("count-cap-equals-population", 3, 0, False, 3),
+        ("unbounded-full-pass", None, 0, False, 3),
+    )
+    for name, *params in cases:
+        with owner.pytest.MonkeyPatch.context() as patch:
+            patch.setattr(modal, "_capture_ontology", skip_unrelated_ontology_capture)
+            try:
+                owner.test_projection_bridge_count_cap_aliases_only_evaluated_full_rows(patch, *params)
+            except Exception as error:
+                checks.append(dict(case=name, passed=False, error_type=type(error).__name__, error=str(error),
+                                   traceback=traceback.format_exc(limit=12)))
+            else:
+                checks.append(dict(case=name, passed=True))
+    outcome["rows"] = checks
+    assert not prior.denied
+    code = 0 if all(row["passed"] for row in checks) else 1
+except Exception as error:
+    traceback.print_exc()
+    outcome["refusal"] = repr(error)
+finally:
+    outcome.update(worker_rc=code, denied=prior.denied, guard=prior.guard,
+                   compiled=prior.compiled, project_body_bytes=prior.compiled_total,
+                   model_fit=False, optimizer_epochs=0,
+                   fictional_boundaries=["modal_autoencoder._legal_ir_target_items", "modal_autoencoder._capture_ontology"])
+    print(json.dumps(outcome, sort_keys=True))
+raise SystemExit(code)

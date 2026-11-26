@@ -1,0 +1,53 @@
+--- a/tests/unit/logic/formalization/autoencoder/test_alignment_relation_mask_handoff.py
++++ b/tests/unit/logic/formalization/autoencoder/test_alignment_relation_mask_handoff.py
+@@ -1096,3 +1096,50 @@
+     assert report["objective_positive_pair_count"] == sum(map(sum, case["expected_positive_mask"])) + 1
+     assert admission.norm._snapshot(case["preparation_inputs"]["endpoint_admissions"])[1] == original_endpoints
+     assert report["legal_applicability_verified"] is report["controlling_authority"] is False
++
++
++@pytest.mark.parametrize(
++    ("replacement", "disposition", "diagnostic_count"),
++    [
++        ("unknown", "unknown_excluded", "unknown_pair_count"),
++        ("analogy", "analogy_retrieval_only", "analogy_retrieval_only_pair_count"),
++    ],
++)
++def test_reviewed_v4_replacement_review_withdraws_one_directed_negative(
++        reviewed_pair_case_v4, replacement, disposition, diagnostic_count):
++    case = reviewed_pair_clone_v2(reviewed_pair_case_v4)
++    original = reviewed_mask_compile_v4(case)
++    body = case["preparation_inputs"]["body"]
++    index, pair = next(
++        (index, pair) for index, pair in enumerate(body["pairs"])
++        if (pair["left_id"], pair["right_id"]) == ("source:a:0", "formal:b:2")
++    )
++    row, column = divmod(index, original["formal_row_count"])
++    assert pair["relation"] == "incompatible"
++    assert original["reviewed_pair_labels_authenticated"] is original["reviewed_objective_mask_ready"] is True
++    assert original["objective_permitted_negative_mask"][row][column] is True
++
++    pair.update(relation=replacement, reason="Fictional replacement review withdraws incompatibility.", evidence_refs=[])
++    _refresh_reviewed_pair_ledger(case, "v4")
++    current = reviewed_mask_compile_v4(case)
++    expected_negative_mask = deepcopy(original["objective_permitted_negative_mask"])
++    expected_negative_mask[row][column] = False
++    assert current["reviewed_pair_labels_authenticated"] is current["reviewed_objective_mask_ready"] is True
++    assert current["body_sha256"] != original["body_sha256"]
++    for field in ("context_set_sha256", "ordered_endpoint_sha256", "current_endpoint_assessment_sha256s",
++                  "source_vector_sha256", "formal_vector_sha256", "objective_positive_mask"):
++        assert current[field] == original[field]
++    assert current["objective_permitted_negative_mask"] == expected_negative_mask
++    assert current["objective_permitted_negative_pair_count"] == original["objective_permitted_negative_pair_count"] - 1
++    assert current[diagnostic_count] == original[diagnostic_count] + 1
++    assert current["pair_rows"][index]["disposition"] == disposition
++    assert current["pair_rows"][:index] == original["pair_rows"][:index]
++    assert current["pair_rows"][index + 1:] == original["pair_rows"][index + 1:]
++    assert current["actual_fit_authorized"] is current["legal_applicability_verified"] is False
++
++    args, options = reviewed_mask_arguments_v2(case)
++    with pytest.raises(ValueError, match="reviewed pair mask receipt differs from complete replay"):
++        subject.validate_reviewed_train_relation_masks_v4(original, *args,
++            expected_receipt_sha256=subject._digest(original), **options)
++    assert subject.validate_reviewed_train_relation_masks_v4(current, *args,
++        expected_receipt_sha256=subject._digest(current), **options) == current

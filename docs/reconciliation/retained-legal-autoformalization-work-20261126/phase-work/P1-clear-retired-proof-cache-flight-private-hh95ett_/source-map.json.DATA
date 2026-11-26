@@ -1,0 +1,96 @@
+{
+  "head": "7fc2cde7dfda7be7035cb6b555d440e508473622",
+  "roles": {
+    "ipfs_datasets_py/__init__.py": {
+      "Git_blob": "7d8b29b674206355ec12a84f69920a819338e43c",
+      "bytes": 56829,
+      "sha256": "f258f8eada774251feacd8e2ee2048efe56c89a8ee88efd50e4271ea41d43dc9"
+    },
+    "ipfs_datasets_py/logic/__init__.py": {
+      "Git_blob": "950f95b6c859021bbd76326adcf602bdd4d19482",
+      "bytes": 4434,
+      "sha256": "f25a9702ddc282092dbae1bc1731afdcc35576c10745487dccedaa531ccc9e79"
+    },
+    "ipfs_datasets_py/logic/backends/cache_protocol.py": {
+      "Git_blob": "5faddd0448df6425f0d4008f39e5c4979e199210",
+      "bytes": 43005,
+      "sha256": "48029fa604a91f6f748eda8b30dcb03d11b3127abb2bd32b21d91246b0dd3661"
+    },
+    "ipfs_datasets_py/logic/backends/results.py": {
+      "Git_blob": "7ffdc5b4019faa80749df5fb0bb7d1f06379573f",
+      "bytes": 27160,
+      "sha256": "afda793472d3a6ba13f20bee13a992bfce68177388bdf338548157a5aa201458"
+    },
+    "ipfs_datasets_py/logic/common/__init__.py": {
+      "Git_blob": "c06c400f28c7a07e5c0ce719a7e3d3227a3bef0f",
+      "bytes": 2438,
+      "sha256": "e574c74067e7059cc506b32c780bc0444de89c63b55dade3df00ae9fd563431e"
+    },
+    "ipfs_datasets_py/logic/common/bounded_cache.py": {
+      "Git_blob": "9d37b6c2c22299cc433b565e2ff5148808f9790e",
+      "bytes": 6656,
+      "sha256": "29a450b5fc08c5577964774035717dc5d7be85c159cfd502fba5252c4ec9c9fa"
+    },
+    "ipfs_datasets_py/logic/common/converters.py": {
+      "Git_blob": "f2ed787161b6303057d125c3149cb1df5f4b8c9b",
+      "bytes": 13962,
+      "sha256": "f530c453775f2c1a4a2f8a26aa647df1f725be109078df258288eab33a427fde"
+    },
+    "ipfs_datasets_py/logic/common/duckdb_proof_store.py": {
+      "Git_blob": "08cfbf5a1ba36fca739215062b120464f5640379",
+      "bytes": 111908,
+      "sha256": "5a614b0a1e3ee3b9f3dbc10e80950aff9ed5f19754e45f0cb5ceac5acdcfc400"
+    },
+    "ipfs_datasets_py/logic/common/errors.py": {
+      "Git_blob": "c84a797f91f8a512178527e66ddc7bdfe06b4948",
+      "bytes": 2268,
+      "sha256": "10d21acd8d0fd6049297a1b36d10db1fcc09146095f1dabfe5a686b887f4b8cf"
+    },
+    "ipfs_datasets_py/logic/common/feature_detection.py": {
+      "Git_blob": "227753dce0379026054a44604ac65361f7108031",
+      "bytes": 4875,
+      "sha256": "a285d84f9b13ee3c2c54023e07ccf9da94ce93e6736362c1881421db9e509d76"
+    },
+    "ipfs_datasets_py/logic/common/proof_cache.py": {
+      "Git_blob": "ebfe06198a3634ae0812dd7e2d997909a9fb978d",
+      "bytes": 168205,
+      "sha256": "b68c36ff934ba6ee7a308162ee7035c78f4c522a5483e85e536b428db8485b36"
+    },
+    "ipfs_datasets_py/logic/common/utility_monitor.py": {
+      "Git_blob": "bbb296dcc09ca863536e40a7503a061fdc4f6c50",
+      "bytes": 6398,
+      "sha256": "ef23631a622dfd555cefcdf69793e78a7c64a115c7451aea4dfff5389b014985"
+    },
+    "ipfs_datasets_py/logic/common/validators.py": {
+      "Git_blob": "121b08d093b79f6dc2298b5fa799e7b15b2e682a",
+      "bytes": 8374,
+      "sha256": "e58dbba7d3f346545e2ff572928ed9c7bb9adc71b20e8cc8dc816a7fc060e0c7"
+    },
+    "ipfs_datasets_py/logic/families/models.py": {
+      "Git_blob": "053af9eaf293ba268c2dc8155844f2e3dc5355ce",
+      "bytes": 36277,
+      "sha256": "1a92305ef498812e3757147179907d4ddf4a4518371034fc2363922d5d5fed3f"
+    },
+    "ipfs_datasets_py/logic/ir_core/__init__.py": {
+      "Git_blob": "71c13cae5d6ffc38d9b1ec4bee8ee90b255b3d0a",
+      "bytes": 6942,
+      "sha256": "4c0070482e009dd7cb9875e91124d48683da37d53f691cccb306ec50f23c946c"
+    },
+    "ipfs_datasets_py/logic/ir_core/claims.py": {
+      "Git_blob": "63af5a987404010aa0ec69fb827722afc9b53b81",
+      "bytes": 16176,
+      "sha256": "282cdd3a6ba18a90079886337d360bae44da172748faa3ad2715d2071070de3b"
+    },
+    "ipfs_datasets_py/logic/ir_core/protocols.py": {
+      "Git_blob": "e0c645ccac9c3e89cc72e6a6c773a49528257946",
+      "bytes": 57414,
+      "sha256": "b452a7095a2524f0ea3f4e4f3a395643d3257cd6f42e3c77f8e1817df62f6fed"
+    },
+    "tests/unit/logic/test_duckdb_proof_store.py": {
+      "Git_blob": "28957ff35faff61f0915e553a25f0a5cbe3e67f5",
+      "bytes": 29651,
+      "sha256": "adf9372ba75efb4aa81007caa2ddea7d188be44015448fb08fdf3f657e82e8f2"
+    }
+  },
+  "test": "tests/unit/logic/test_duckdb_proof_store.py"
+}

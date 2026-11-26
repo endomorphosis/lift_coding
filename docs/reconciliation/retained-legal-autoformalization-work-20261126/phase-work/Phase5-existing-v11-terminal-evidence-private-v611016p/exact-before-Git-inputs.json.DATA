@@ -1,0 +1,76 @@
+{
+  "HEAD": "d5a31aa7583e7eea64e55529af9bbfcd9fff18f5",
+  "files": {
+    "consumer": {
+      "blob": "bf07881f4139104a12eeae766fa7890cfd49097f",
+      "bytes": 59243,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/consumer.before.py.DATA",
+      "relative_git_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_consumer_binding.py",
+      "sha256": "5bb6c1c1d627d65d7e0d98a00d5f646c7519f0c3a73a21492db1936445ecdd4f"
+    },
+    "contracts": {
+      "blob": "09d79a0e6ae23d8e71f31fbba9bbebfdb84f4546",
+      "bytes": 75291,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/contracts.before.py.DATA",
+      "relative_git_path": "ipfs_datasets_py/logic/syntax_core/contracts.py",
+      "sha256": "ce6d49e05ca2b09a84a3125ed6ad4c4aae4adf2c5943d3a4fd4eeeb057b444a8"
+    },
+    "inference": {
+      "blob": "370a9c3fb8e52702b9ca71fff60279443ca31781",
+      "bytes": 85793,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/inference.before.py.DATA",
+      "relative_git_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_inference.py",
+      "sha256": "413cabdaae3c28321215fe418b450013fdd07ac94dde6e0c39d08de5cde3c6f3"
+    },
+    "inputs": {
+      "blob": "29fd3b0b8a197a2674231ffc64cd1f3790307cd6",
+      "bytes": 179170,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/inputs.before.py.DATA",
+      "relative_git_path": "ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py",
+      "sha256": "c172218316d2add710f45f3c0cd99f78fbc4a4f70616cfb875eb07930bea1b28"
+    },
+    "metrics": {
+      "blob": "3cca5056ffa6939213ee52b6ffe67108f1838c0d",
+      "bytes": 111564,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/metrics.before.py.DATA",
+      "relative_git_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_semantic_metrics.py",
+      "sha256": "8a62ef6ecb50608a828ad15ca90cd478d5b70168d1ab74802bd0ccee594da388"
+    },
+    "namespaces": {
+      "blob": "2ff6102d93759b4bfd30e2d0054353db733e6e2b",
+      "bytes": 34262,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/namespaces.before.py.DATA",
+      "relative_git_path": "ipfs_datasets_py/logic/families/namespaces.py",
+      "sha256": "ba097e653158a812d66ead978d6405d61adaa293521305333579b19bd69a432d"
+    },
+    "owning_test": {
+      "blob": "aefca4080817766eb769fe68523fa15d3151372e",
+      "bytes": 246711,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/owning_test.before.py.DATA",
+      "relative_git_path": "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_inference.py",
+      "sha256": "9342f282e1b063ce592aab4ed54d5c051831642ff50b378d0667285b07f70e92"
+    },
+    "signatures": {
+      "blob": "ce8eb3447fdb9ed57c348e0cb16fe60528d440b6",
+      "bytes": 30488,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/signatures.before.py.DATA",
+      "relative_git_path": "ipfs_datasets_py/logic/syntax_core/signatures.py",
+      "sha256": "49dd4fb0096661a05a15f056eb57248349e2b4e0b02e83239f36db36788c75bf"
+    },
+    "syntax": {
+      "blob": "129c5c4079d2ef05924bcf62c76fb7d3fd22d5e7",
+      "bytes": 56966,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/syntax.before.py.DATA",
+      "relative_git_path": "ipfs_datasets_py/logic/syntax_core/ast.py",
+      "sha256": "4709513f18ab270858fe9595d88a847ddc52092606c52c7802947abed1ab9ac4"
+    },
+    "worker": {
+      "blob": "7f3f37945c60913eaea15b68bcff81a764cabec0",
+      "bytes": 597715,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-v11-terminal-evidence-private-v611016p/worker.before.py.DATA",
+      "relative_git_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_worker.py",
+      "sha256": "451be2dee4de4365ecf78183629a2a4283aa31adeb9a4ddcdaeae0843ad90528"
+    }
+  },
+  "tree": "92bdb7f88adbac69ae7ef30e21debc79a381e0ee"
+}

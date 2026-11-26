@@ -1,0 +1,28 @@
+{
+  "actual_pyarrow_loaded": true,
+  "controls": [
+    {
+      "detail": "",
+      "exception": "AssertionError",
+      "name": "v4-cli",
+      "passed": false,
+      "traceback": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/run-existing-physical-release-selection.py.DATA\", line 86, in <module>\n    module.test_physical_v4_cli_projects_current_graph_eligibility_without_native_credit(\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py\", line 3627, in test_physical_v4_cli_projects_current_graph_eligibility_without_native_credit\nAssertionError\n"
+    }
+  ],
+  "guard_events": [],
+  "lightweight_private_scope": true,
+  "overlays": [
+    {
+      "actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-physical-release-eligibility-v3-v4-cli-private-95hfukau/test.after.py.DATA",
+      "module": "tests.unit.logic.autoformal._private_v4_current_revocation"
+    }
+  ],
+  "permitted_ctypes_self_handles": [
+    "self_process_handle"
+  ],
+  "physical_fixture_constructed": true,
+  "raw_cli_output": "{\"admitted\": false, \"command\": null, \"error\": \"unrecognized arguments: --include-declared-eligibility\", \"error_type\": \"CLIError\", \"formalized\": false, \"proof_verified\": false, \"schema\": \"legal-corpus-graph-cli-receipt/v1\", \"source_authenticity_verified\": false, \"source_semantics_verified\": false, \"status\": \"error\", \"view\": \"candidate\"}\n",
+  "test_module_origin": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py",
+  "test_source_sha256": "ac7ea179761aae0a0972bd93b4bf5cc30b16fcba79ef6c50f74c8cfa80b14098",
+  "torch_duckdb_loaded": false
+}

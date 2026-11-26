@@ -1,0 +1,58 @@
+Traceback (most recent call last):
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-reviewed-heldout-fingerprint-private-v01-c3_iyyyn/legal_span_consumer_binding.after.py.DATA", line 114, in _check
+    guard.check(value, message=label + " content changed")
+  File "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/ipfs_datasets-lir14-consumer-regression-v01/ipfs_datasets_py/optimizers/logic_theorem_optimizer/checkpoint_content_guard.py", line 167, in check
+    raise ValueError(message)
+ValueError: complete split manifest roundtrip content changed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-rich-context-reviewed-Unicode-guard-private-v01-A9ySvbY2/run_cached_rich_heldout.py.DATA", line 55, in <module>
+    tests.test_rich_v3_heldout_replays_profile_near_duplicate_before_producer(action)
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-rich-context-reviewed-Unicode-guard-private-v01-A9ySvbY2/test_legal_ir_evaluation_artifacts.after.py.DATA", line 4391, in test_rich_v3_heldout_replays_profile_near_duplicate_before_producer
+    ch, options, populations, _, _ = _rich_v3_heldout_case(
+                                     ^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-rich-context-reviewed-Unicode-guard-private-v01-A9ySvbY2/test_legal_ir_evaluation_artifacts.after.py.DATA", line 2345, in _rich_v3_heldout_case
+    bindings[part] = getattr(ch.owner,"prepare_reviewed_source_span_consumer_binding_"+version)(rows,
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-reviewed-heldout-fingerprint-private-v01-c3_iyyyn/legal_span_consumer_binding.after.py.DATA", line 571, in prepare_reviewed_source_span_consumer_binding_v3
+    return _prepare_reviewed_source_span_consumer_binding(rows,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-reviewed-heldout-fingerprint-private-v01-c3_iyyyn/legal_span_consumer_binding.after.py.DATA", line 628, in _prepare_reviewed_source_span_consumer_binding
+    manifest, examples = _manifest(manifest_copy, guards[1])
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-reviewed-heldout-fingerprint-private-v01-c3_iyyyn/legal_span_consumer_binding.after.py.DATA", line 148, in _manifest
+    _check(offered_guard, regenerated, "complete split manifest roundtrip")
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-reviewed-heldout-fingerprint-private-v01-c3_iyyyn/legal_span_consumer_binding.after.py.DATA", line 116, in _check
+    raise SourceSpanConsumerBindingError(str(error)) from error
+ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_span_consumer_binding.SourceSpanConsumerBindingError: complete split manifest roundtrip content changed
+Traceback (most recent call last):
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-reviewed-heldout-fingerprint-private-v01-c3_iyyyn/legal_span_consumer_binding.after.py.DATA", line 114, in _check
+    guard.check(value, message=label + " content changed")
+  File "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/ipfs_datasets-lir14-consumer-regression-v01/ipfs_datasets_py/optimizers/logic_theorem_optimizer/checkpoint_content_guard.py", line 167, in check
+    raise ValueError(message)
+ValueError: complete split manifest roundtrip content changed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-rich-context-reviewed-Unicode-guard-private-v01-A9ySvbY2/run_cached_rich_heldout.py.DATA", line 55, in <module>
+    tests.test_rich_v3_heldout_replays_profile_near_duplicate_before_producer(action)
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-rich-context-reviewed-Unicode-guard-private-v01-A9ySvbY2/test_legal_ir_evaluation_artifacts.after.py.DATA", line 4391, in test_rich_v3_heldout_replays_profile_near_duplicate_before_producer
+    ch, options, populations, _, _ = _rich_v3_heldout_case(
+                                     ^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-rich-context-reviewed-Unicode-guard-private-v01-A9ySvbY2/test_legal_ir_evaluation_artifacts.after.py.DATA", line 2345, in _rich_v3_heldout_case
+    bindings[part] = getattr(ch.owner,"prepare_reviewed_source_span_consumer_binding_"+version)(rows,
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-reviewed-heldout-fingerprint-private-v01-c3_iyyyn/legal_span_consumer_binding.after.py.DATA", line 571, in prepare_reviewed_source_span_consumer_binding_v3
+    return _prepare_reviewed_source_span_consumer_binding(rows,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-reviewed-heldout-fingerprint-private-v01-c3_iyyyn/legal_span_consumer_binding.after.py.DATA", line 628, in _prepare_reviewed_source_span_consumer_binding
+    manifest, examples = _manifest(manifest_copy, guards[1])
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-reviewed-heldout-fingerprint-private-v01-c3_iyyyn/legal_span_consumer_binding.after.py.DATA", line 148, in _manifest
+    _check(offered_guard, regenerated, "complete split manifest roundtrip")
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase5-existing-reviewed-heldout-fingerprint-private-v01-c3_iyyyn/legal_span_consumer_binding.after.py.DATA", line 116, in _check
+    raise SourceSpanConsumerBindingError(str(error)) from error
+ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_span_consumer_binding.SourceSpanConsumerBindingError: complete split manifest roundtrip content changed
