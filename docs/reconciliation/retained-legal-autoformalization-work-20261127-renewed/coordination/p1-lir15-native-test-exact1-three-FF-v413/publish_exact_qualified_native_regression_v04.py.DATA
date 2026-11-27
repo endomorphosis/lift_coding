@@ -1,0 +1,313 @@
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import time
+
+
+work = Path(__file__).parent
+coord = work.parent
+repos = Path('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories')
+receipt_path = Path('/tmp/Root-P1-LIR15-existing-v355-managed-actual-v413-Ozpo4FWZ/actual-current-LIR15-installed-Lean-failed-donor-closeout-v413.json')
+output = coord / 'actual-P1-LIR15-native-test-exact1-three-FF-publication-v413.json'
+assert not output.exists()
+started = time.monotonic()
+base = {
+    'datasets': '52f05cbf9b3f3c1e1a3c8a1e2119ab9ef0d0a06d',
+    'hallucinate': 'e35c777379e3743f96e80cfe49e7d9cdb809c45d',
+    'root': '92dceda7d2ad1f4bf47f5375a9942a8381e9cee6',
+    'accelerate': '190cb69b9035ea210d9af8817fbe76caf890b48f',
+}
+urls = {
+    'datasets':'https://github.com/endomorphosis/ipfs_datasets_py',
+    'hallucinate':'https://github.com/endomorphosis/hallucinate_app',
+    'root':'https://github.com/endomorphosis/lift_coding',
+    'accelerate':'https://github.com/endomorphosis/ipfs_accelerate_py',
+}
+env = dict(os.environ, GIT_OPTIONAL_LOCKS='0', GIT_NO_LAZY_FETCH='1', GIT_TERMINAL_PROMPT='0')
+fields = ('st_ctime_ns','st_dev','st_gid','st_ino','st_mode','st_mtime_ns','st_nlink','st_size','st_uid')
+
+def checked(path, length, digest):
+    path = Path(path)
+    metadata = {'bytes': length, 'sha256': digest, 'full9': {key: str(getattr(path.lstat(), key)) for key in fields}}
+    return stable(path, metadata)
+
+def checked_ref(row):
+    return checked(row['path'], row['bytes'], row['sha256'])
+
+def observe(role, *args, data=None):
+    result = subprocess.run(['git','-c','core.fsmonitor=false','-c','core.preloadIndex=false','-c','pack.threads=1','-c','pack.windowMemory=16m','-c','pack.deltaCacheSize=16m','-c','core.packedGitLimit=32m','-c','core.packedGitWindowSize=8m','-C',str(repos/role),*args],
+                            input=data, capture_output=True, env=env, timeout=150, check=False)
+    if result.returncode!=0:
+        record({'git_failed':args[0],'repository':role,'returncode':result.returncode,'stderr':result.stderr.decode(errors='replace')[:4000]})
+        result.check_returncode()
+    return result.stdout
+
+def record(event):
+    with (work/'actual-v04-events.jsonl').open('a', encoding='utf-8') as file:
+        file.write(json.dumps(event, sort_keys=True)+'\n')
+        file.flush()
+        os.fsync(file.fileno())
+    print(json.dumps(event, sort_keys=True), flush=True)
+
+def revision(role, ref='HEAD'):
+    return observe(role,'rev-parse',ref).decode().strip()
+
+def origin(role):
+    raw = observe(role,'ls-remote','--exit-code','origin','refs/heads/main').decode().splitlines()
+    assert len(raw) == 1
+    oid, ref = raw[0].split('\t')
+    assert ref == 'refs/heads/main' and len(oid) == 40
+    return oid
+
+def clean(role):
+    assert observe(role,'status','--porcelain=v1','--untracked-files=all','--ignore-submodules=none') == b'', role
+    assert observe(role,'diff','--cached','--name-only','--ignore-submodules=none') == b'', role
+
+def rows_at(role, rev):
+    rows = {}
+    for line in observe(role,'ls-tree','-rz',rev).split(b'\0'):
+        if line:
+            metadata, path = line.decode().split('\t',1)
+            mode, kind, oid = metadata.split()
+            rows[path] = (mode,kind,oid)
+    return rows
+
+def exact_gitlinks(role, old, new, links):
+    before = rows_at(role, old)
+    after = rows_at(role, new)
+    assert set(before) == set(after)
+    assert {path for path in before if before[path] != after[path]} == set(links)
+    for path, oid in links.items():
+        assert before[path][:2] == ('160000','commit') and after[path] == ('160000','commit',oid)
+
+def gitlink_commit(role, updates, message):
+    assert revision(role) == base[role] and origin(role) == base[role], role
+    clean(role)
+    before = rows_at(role, base[role])
+    for path, (prior, _) in updates.items():
+        assert before[path] == ('160000','commit',prior)
+    links = {path: value for path, (_,value) in updates.items()}
+    data = ''.join(f'160000 {oid}\t{path}\n' for path,oid in links.items()).encode()
+    observe(role,'update-index','--index-info',data=data)
+    assert set(observe(role,'diff','--cached','--name-only').decode().splitlines()) == set(links)
+    observe(role,'commit','-m',message)
+    oid = revision(role)
+    assert revision(role,'HEAD^') == base[role]
+    exact_gitlinks(role,base[role],oid,links)
+    clean(role)
+    record({'local_commit':oid,'repository':role,'links':links})
+    return oid, links
+
+pushes = []
+def push(role, oid):
+    assert revision(role) == oid and origin(role) == base[role], role
+    observe(role,'merge-base','--is-ancestor',base[role],oid)
+    clean(role)
+    record({'push_start':role,'before':base[role],'target':oid})
+    porcelain = observe(role,'push','--porcelain','origin',oid+':refs/heads/main').decode()
+    result = next(line for line in porcelain.splitlines() if '\t' in line)
+    assert result.startswith(' \t') and origin(role) == oid and revision(role,'refs/remotes/origin/main') == oid
+    event = {'repository':role,'before':base[role],'after':oid,'normal_fast_forward':True,
+             'push_returncode':0,'porcelain':result}
+    pushes.append(event)
+    record(event)
+
+
+def stable(path, metadata):
+    with os.fdopen(os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK),'rb') as f:
+        before = {key:str(getattr(os.fstat(f.fileno()),key)) for key in fields}
+        assert before == metadata['full9']
+        raw = f.read(metadata['bytes']+1)
+        last = {key:str(getattr(os.fstat(f.fileno()),key)) for key in fields}
+    leaf = path.lstat()
+    assert before == last == {key:str(getattr(leaf,key)) for key in fields}
+    assert len(raw) == metadata['bytes'] and hashlib.sha256(raw).hexdigest() == metadata['sha256']
+    return raw
+
+
+
+source_ref = dict(path=str(receipt_path), bytes=4890,
+                  sha256='c78448b557ce1b533866493e07ed632f47c1b0a1da5ea222eb27bdcceff39152')
+q = json.loads(checked_ref(source_ref))
+assert q['terminal_returncode'] == q['pytest_case_credit'] == 0
+assert q['Source_closed'] and q['resource_cleanup_confirmed'] and q['old_root_artifact_evicted']
+assert not q['actual_statutory_or_training_or_model_qualification']
+assert (q['actual_native_probe_count'], q['cold_native_compiles'], q['failed_donor_native_compiles']) == (4,10,1)
+assert len(set(q['retained_independent_modules'])) == 6
+checked_ref(q['retained_Source_charge'])
+prior411=json.loads(checked_ref(q['prior_attempt_one_successful_probe_no_compiler']))
+prior412=json.loads(checked_ref(q['prior_v412_aggregate_size_refusal']))
+assert prior411['Source_closed'] and prior411['resource_cleanup_confirmed'] and not prior411['actual_native_qualification']
+assert len(prior411['native_attempts'])==1 and prior411['errors'][0]['type']=='AttributeError'
+probe=prior411['native_attempts'][0]
+assert probe['SDK_returned_result'] and probe['request']['argv'][1:]==['--version'] and probe['result']['returncode']==0
+checked_ref(probe['durable_actual_event'])
+assert prior412['terminal_returncode']!=0 and prior412['original_pytest_credit']==0 and not prior412['original_aggregate_report_published']
+report=json.loads(checked_ref(q['full_report']))
+assert all(report[k] is True for k in ('Source_closed','actual_parent_release_return','parent_home_cleanup_confirmed',
+    'resource_cleanup_confirmed','actual_lir15_installed_lean_failure_case','actual_native_qualification',
+    'public_build_wrapper_executed'))
+assert not report['errors'] and not report['statutory_or_model_or_corpus_admission']
+assert report['pytest_case_credit']==0 and report['actual_command_counts']=={'cold_module_compiles':10,'faulted_module_compiles':1,'version_probes':4}
+closures=report['actual_Source_context_closure']
+assert len(closures)==2 and {row['root'] for row in closures}=={str(repos/'accelerate'),str(repos/'datasets')}
+assert all(row['entered'] and row['exit_returned'] for row in closures)
+attempts=report['native_attempts']
+assert len(attempts)==15 and [row['returncode'] for row in attempts]==[0]*14+[1]
+for row in attempts:
+    checked_ref(row['durable_actual_event'])
+cold=json.loads(checked_ref(q['cold_build']))
+failed=json.loads(checked_ref(q['failed_build']))
+fault=json.loads(checked_ref(q['exact_fault_request']))
+faulted=checked_ref(q['faulted_input'])
+prepared=checked_ref(q['original_prepared_input'])
+marker=b"lir15IntentionalUnknownForFailedDonor"
+assert faulted==prepared+b"\n#check "+marker+b"\n"
+assert fault['faulted_source_sha256']==q['faulted_input']['sha256'] and fault['original_source_sha256']==q['original_prepared_input']['sha256']
+assert fault['diagnostic_line_1_based']==prepared.count(b'\n')+2 and not fault['source_bytes_match_frozen_preparation']
+raw_observations=checked_ref(q['raw_compiler_observation']).splitlines()
+assert len(raw_observations)==1
+native=json.loads(raw_observations[0])
+assert native['module']==fault['module'] and native['command']==fault['argv'] and native['returncode']==1
+assert native['native_lifecycle']['cleanup_confirmed'] and native['native_lifecycle']['leader_reaped'] and native['workspace_cleaned']
+diagnostic=':'+str(fault['diagnostic_line_1_based'])+':'
+assert diagnostic in native['stdout'] and "Unknown identifier `"+marker.decode()+"`" in native['stdout']
+assert not any(native[k] for k in ('cancelled','timed_out','unavailable','resource_exhausted','workspace_limit_exceeded','output_truncated'))
+assert native['output_files'][fault['source_path']]=={k:q['faulted_input'][k] for k in ('bytes','sha256')}
+assert cold['build_passed'] and cold['lean_compilation_verified'] and cold['module_compile_invocations']==10
+assert not failed['build_passed'] and not failed['lean_compilation_verified'] and failed['module_compile_invocations']==1
+assert failed['compiled_modules']==[fault['module']] and failed['fresh_theorems']==[]
+retained=q['retained_independent_modules']
+assert set(failed['artifact_files'])==set(retained) and set(retained)<=set(failed['reused_modules'])
+removed=sorted(set(cold['artifact_files'])-set(failed['artifact_files']))
+assert len(removed)==4 and 'LegalCorpusParent' in removed and fault['module'] not in failed['artifact_files']
+checked_artifacts={}
+artifacts=report['test_case_artifacts']
+for module in retained:
+    old_file=cold['artifact_files'][module]
+    new_file=failed['artifact_files'][module]
+    before_ref=artifacts['failed-donor-cold/'+old_file]
+    after_ref=artifacts['failed-donor-affected/'+new_file]
+    assert checked_ref(before_ref)==checked_ref(after_ref)
+    checked_artifacts[module]={'cold':before_ref,'reused':after_ref}
+for phase, data in (('failed-donor-cold',cold),('failed-donor-affected',failed)):
+    cache=json.loads(checked_ref(artifacts[phase+'/cache.json']))
+    assert cache['qualified'] is (phase=='failed-donor-cold')
+    if phase=='failed-donor-cold':
+        assert failed['previous_cache_cid']==cache['record_cid']
+    else:
+        assert any(row['module']==fault['module'] and row['output'] is None for row in cache['module_facts'])
+
+freeze_ref=q['actual_local_freeze']
+freeze=json.loads(checked_ref(freeze_ref))
+install=json.loads(checked_ref(q['exact_installed_case']))
+readback=json.loads(checked_ref(q['exact_current_READ2']))
+prior=json.loads(checked_ref(freeze['prior_v408_publication']))
+assert all(prior['repositories'][k]['HEAD']==base[k] for k in base) and prior['Guide533_and_all_other_paths_and_links_preserved']
+assert freeze['source_closed']==q['exact_installed_case'] and freeze['local_clean'] and not freeze['pushed']
+assert install['Source_closed'] and install['write_complete'] and not install['actual_native_test_run']
+assert readback['Source_closed'] and readback['owned_module_closed'] and not readback['errors']
+d=freeze['frozen']['HEAD']
+assert d==q['actual_D_frozen']=='d5a31aa7583e7eea64e55529af9bbfcd9fff18f5'
+assert freeze['frozen']['tree']==revision('datasets','HEAD^{tree}')=='92bdb7f88adbac69ae7ef30e21debc79a381e0ee'
+assert revision('datasets','HEAD^')==freeze['parent']['HEAD']==base['datasets']
+branch=freeze['frozen']['branch_file']
+assert stable(Path(branch['path']),branch)==(d+'\n').encode()
+
+def idx(role):
+    path = repos/role/'.git/index'
+    with os.fdopen(os.open(path, os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK), 'rb') as f:
+        first = {key:str(getattr(os.fstat(f.fileno()), key)) for key in fields}
+        sha = hashlib.file_digest(f, 'sha256').hexdigest()
+        last = {key:str(getattr(os.fstat(f.fileno()), key)) for key in fields}
+    assert first == last == {key:str(getattr(path.lstat(), key)) for key in fields}
+    return dict(path=str(path), bytes=int(first['st_size']), sha256=sha, full9=first)
+
+indices = {}
+for role, parent in base.items():
+    assert origin(role) == revision(role, 'refs/remotes/origin/main') == parent, role
+    assert revision(role) == (d if role == 'datasets' else parent), role
+    for option in ((), ('--push',)):
+        assert observe(role, 'remote', 'get-url', *option, 'origin').decode().strip().removesuffix('.git') == urls[role]
+    clean(role)
+    indices[role] = idx(role)
+
+assert indices['datasets']==freeze['frozen']['index']
+assert all(indices[k]==freeze['unchanged_peers'][k]['index']==prior['index_after'][k] for k in base if k!='datasets')
+assert freeze['parent']['index']==prior['index_after']['datasets']
+keys=('path','bytes','sha256','full9')
+recorded={row['path']:{k:row[k] for k in keys} for row in install['installed']}
+captured={row['path']:{k:row[k] for k in keys} for row in readback['captures']}
+assert len(recorded)==1 and len(captured)==2 and captured=={**recorded,indices['datasets']['path']:indices['datasets']}
+old=rows_at('datasets',base['datasets'])
+new=rows_at('datasets',d)
+committed=freeze['committed']
+assert set(old)==set(new) and len(committed)==1
+assert {path for path in old if old[path]!=new[path]}==set(committed)
+path,row=next(iter(committed.items()))
+blob=row['stage0_and_committed_blob']
+assert row['path']==str(repos/'datasets'/path) and {k:row[k] for k in keys}==recorded[row['path']]
+assert row['sha256']==report['test_source_sha256'] and blob=='1561bf1dd487c780827a1a1b53d67548feec10dc'
+assert row['git_mode']=='100644' and old[path]==('100644','blob',row['parent_blob']) and new[path]==('100644','blob',blob)
+assert observe('datasets','ls-files','--stage','-z','--',path)==f'100644 {blob} 0\t{path}\0'.encode()
+assert observe('datasets','cat-file','blob',blob)==stable(Path(row['path']),row)
+
+record({'exact_preflight':True, 'origin_main_before':base, 'qualified_D':d, 'direct_native_owning_assertions':1,'pytest_case_credit':0})
+push('datasets', d)
+h, h_links = gitlink_commit('hallucinate', {'ipfs_datasets_py':(base['datasets'],d)}, 'Update datasets link for failed Lean donor regression')
+push('hallucinate', h)
+root, r_links = gitlink_commit(
+    'root', {'external/ipfs_datasets':(base['datasets'],d), 'hallucinate_app':(base['hallucinate'],h)},
+    'Update failed Lean donor regression links',
+)
+push('root', root)
+targets = dict(datasets=d, accelerate=base['accelerate'], hallucinate=h, root=root)
+after = {}
+for role, head in targets.items():
+    assert head == origin(role) == revision(role) == revision(role,'refs/remotes/origin/main')
+    clean(role)
+    after[role] = dict(HEAD=head, tree=revision(role,'HEAD^{tree}'), origin_main=head, origin=urls[role],
+                      clean_worktree_and_index=True, gitlinks={'hallucinate':h_links,'root':r_links}.get(role,{}))
+ending = {role:idx(role) for role in targets}
+assert all(ending[k] == indices[k] for k in ('datasets','accelerate'))
+assert stable(Path(branch['path']),branch) == (d+'\n').encode()
+exact_gitlinks('hallucinate', base['hallucinate'], h, h_links)
+exact_gitlinks('root', base['root'], root, r_links)
+for row in committed.values():
+    stable(Path(row['path']), row)
+events_path = work/'actual-v04-events.jsonl'
+events = events_path.read_bytes()
+
+result=dict(
+    schema='actual-P1-LIR15-native-failed-donor-exact1-child-first-fast-forward-publication/v1',
+    terminal_returncode=0,qualification=source_ref,actual_native_owning_case=install['selected_nodeid'],
+    actual_command_counts=report['actual_command_counts'],pytest_case_credit=0,
+    Source_resource_and_parent_closed=True,local_freeze=freeze_ref,Source_install=q['exact_installed_case'],
+    Source_READ2=q['exact_current_READ2'],one_Source_stage_commit_and_actual_Native_test_join=committed,
+    raw_failed_Lean_observation=q['raw_compiler_observation'],old_cache_artifacts_removed=removed,
+    retained_independent_module_exact_bytes=retained,
+    old_root_artifact_evicted=True,
+    prior_attempts_retained={'v411':q['prior_attempt_one_successful_probe_no_compiler'],'v412':q['prior_v412_aggregate_size_refusal']},
+    retained_full_Source_charge=q['retained_Source_charge'],
+    prior_local_publication_refusals={
+        'v01': 'Checker read a v411 field that was introduced only in v413. Stopped before Git effects.',
+        'v02': 'Datasets push exited 128. All four origin/main readbacks still matched original heads.',
+        'v03': 'Datasets push exited 128: the 512 MiB address space cap prevented the existing Go credential helper from reserving sparse runtime metadata. Normal publication retains one CPU and bounded Git pack settings.',
+        'v03_raw_log': dict(path=str(work/'actual-v03-events.jsonl'),
+            bytes=(work/'actual-v03-events.jsonl').stat().st_size,
+            sha256=hashlib.sha256((work/'actual-v03-events.jsonl').read_bytes()).hexdigest()),
+    },
+    index_before=indices,index_after=ending,repositories=after,pushes_in_actual_order=pushes,
+    Guide533_and_all_other_paths_and_links_preserved=True,
+    new_test_Source_SQL_Native_CI_or_model_execution=False,
+    events=dict(path=str(events_path),bytes=len(events),sha256=hashlib.sha256(events).hexdigest()),
+)
+raw = (json.dumps(result, sort_keys=True, indent=2)+'\n').encode()
+with os.fdopen(os.open(output, os.O_CREAT|os.O_EXCL|os.O_WRONLY|os.O_NOFOLLOW, 0o400), 'wb') as file:
+    file.write(raw)
+    file.flush()
+    os.fsync(file.fileno())
+assert output.read_bytes() == raw
+print(json.dumps(dict(receipt=str(output), bytes=len(raw), sha256=hashlib.sha256(raw).hexdigest(), heads=targets)), flush=True)

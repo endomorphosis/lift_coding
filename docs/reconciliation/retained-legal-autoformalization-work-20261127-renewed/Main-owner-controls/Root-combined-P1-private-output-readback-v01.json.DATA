@@ -1,0 +1,145 @@
+{
+  "kind": "Main_read_only_Root_existing_private_composition_result_observation",
+  "scope": "Saved private Root-fixture pytest only; not ordinary Source/SDK qualification or Native execution. No replay or new test execution by Main.",
+  "outputs": {
+    "before": {
+      "termination": {
+        "reference": {
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-accepted-request-and-integer-status-combined-private-IN9OiuMf/before/termination.json",
+          "bytes": 3176,
+          "computed_sha256": "6833ecbc30cecd33448c393d8a90f9a33baefb6cc69764602e3905173e54f4e6",
+          "full9": {
+            "st_dev": "66306",
+            "st_ino": "72391945",
+            "st_mode": "33204",
+            "st_nlink": "1",
+            "st_uid": "1000",
+            "st_gid": "1000",
+            "st_size": "3176",
+            "st_mtime_ns": "1795681282652726266",
+            "st_ctime_ns": "1795681282652726266"
+          }
+        },
+        "top_keys": [
+          "returncode",
+          "argv"
+        ],
+        "status_fields": {
+          "returncode": 1
+        }
+      },
+      "JUnit": {
+        "reference": {
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-accepted-request-and-integer-status-combined-private-IN9OiuMf/before/result.xml",
+          "bytes": 18712,
+          "computed_sha256": "683bc1e74bc20f2476dd93702318978df9c4ba6b855237badc64acff85f3d192",
+          "full9": {
+            "st_dev": "66306",
+            "st_ino": "72391948",
+            "st_mode": "33204",
+            "st_nlink": "1",
+            "st_uid": "1000",
+            "st_gid": "1000",
+            "st_size": "18712",
+            "st_mtime_ns": "1795681282551258898",
+            "st_ctime_ns": "1795681282551258898"
+          }
+        },
+        "counts": {
+          "cases": 81,
+          "failures": 9,
+          "errors": 0,
+          "skipped": 0,
+          "passed": 72
+        },
+        "failed_case_names": [
+          "test_lean_malformed_or_failed_exit_status_cannot_establish_proof[False]",
+          "test_lean_malformed_or_failed_exit_status_cannot_establish_proof[0.0]",
+          "test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status[False]",
+          "test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status[0.0]",
+          "test_lean_outcome_binds_accepted_receipt_to_request_payload[declaration]",
+          "test_lean_outcome_binds_accepted_receipt_to_request_payload[proposition]",
+          "test_lean_outcome_binds_accepted_receipt_to_request_payload[source]",
+          "test_lean_outcome_binds_accepted_receipt_to_request_payload[translation]",
+          "test_lean_outcome_binds_accepted_receipt_to_request_payload[missing-obligation]"
+        ],
+        "main_case_names": [
+          "test_lean_malformed_or_failed_exit_status_cannot_establish_proof[False]",
+          "test_lean_malformed_or_failed_exit_status_cannot_establish_proof[0.0]",
+          "test_lean_malformed_or_failed_exit_status_cannot_establish_proof[True]",
+          "test_lean_malformed_or_failed_exit_status_cannot_establish_proof[0]",
+          "test_lean_malformed_or_failed_exit_status_cannot_establish_proof[None]",
+          "test_lean_malformed_or_failed_exit_status_cannot_establish_proof[1]",
+          "test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status[False]",
+          "test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status[0.0]"
+        ]
+      }
+    },
+    "after": {
+      "termination": {
+        "reference": {
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-accepted-request-and-integer-status-combined-private-IN9OiuMf/after/termination.json",
+          "bytes": 3175,
+          "computed_sha256": "0d369e70096643089ce8e3b4fbbd98a2039ffd9dd4389d973b0e78c4fa1cb9cb",
+          "full9": {
+            "st_dev": "66306",
+            "st_ino": "72391951",
+            "st_mode": "33204",
+            "st_nlink": "1",
+            "st_uid": "1000",
+            "st_gid": "1000",
+            "st_size": "3175",
+            "st_mtime_ns": "1795681284026937074",
+            "st_ctime_ns": "1795681284026937074"
+          }
+        },
+        "top_keys": [
+          "returncode",
+          "argv"
+        ],
+        "status_fields": {
+          "returncode": 0
+        }
+      },
+      "JUnit": {
+        "reference": {
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-accepted-request-and-integer-status-combined-private-IN9OiuMf/after/result.xml",
+          "bytes": 15484,
+          "computed_sha256": "baa917b7df41f0aa718d1a38e889f2c104c5a76273a02aa7c7a027dbfc1cda93",
+          "full9": {
+            "st_dev": "66306",
+            "st_ino": "72391954",
+            "st_mode": "33204",
+            "st_nlink": "1",
+            "st_uid": "1000",
+            "st_gid": "1000",
+            "st_size": "15484",
+            "st_mtime_ns": "1795681283946673673",
+            "st_ctime_ns": "1795681283946673673"
+          }
+        },
+        "counts": {
+          "cases": 81,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "passed": 81
+        },
+        "failed_case_names": [],
+        "main_case_names": [
+          "test_lean_malformed_or_failed_exit_status_cannot_establish_proof[False]",
+          "test_lean_malformed_or_failed_exit_status_cannot_establish_proof[0.0]",
+          "test_lean_malformed_or_failed_exit_status_cannot_establish_proof[True]",
+          "test_lean_malformed_or_failed_exit_status_cannot_establish_proof[0]",
+          "test_lean_malformed_or_failed_exit_status_cannot_establish_proof[None]",
+          "test_lean_malformed_or_failed_exit_status_cannot_establish_proof[1]",
+          "test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status[False]",
+          "test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status[0.0]"
+        ]
+      }
+    }
+  },
+  "explicit_input_bytes": 40547,
+  "Source_or_Git_or_SDK_mutation": false,
+  "ordinary_or_Native_qualification_inferred": false
+}

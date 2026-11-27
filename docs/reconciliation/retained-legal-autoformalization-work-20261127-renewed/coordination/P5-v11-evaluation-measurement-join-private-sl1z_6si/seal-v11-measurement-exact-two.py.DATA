@@ -1,0 +1,184 @@
+from pathlib import Path
+import ast
+import difflib
+import hashlib
+import json
+import os
+import stat
+import subprocess
+
+root = Path(__file__).resolve().parent
+base = root.parents[2]
+checkout = base / "repositories/datasets"
+inputs_path = root / "exact-v11-measurement-red-green-inputs.v02.json"
+env = {**os.environ, "GIT_OPTIONAL_LOCKS": "0", "GIT_NO_LAZY_FETCH": "1", "GIT_TERMINAL_PROMPT": "0"}
+inputs = json.loads(inputs_path.read_bytes())
+
+def sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+def blob(raw):
+    return hashlib.sha1(b"blob " + str(len(raw)).encode() + b"\0" + raw).hexdigest()
+
+def full9(st):
+    return list(map(str, (st.st_dev, st.st_ino, st.st_mode, st.st_nlink, st.st_uid, st.st_gid,
+                          st.st_size, st.st_mtime_ns, st.st_ctime_ns)))
+
+def read(path):
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
+    with os.fdopen(fd, "rb") as handle:
+        before = os.fstat(handle.fileno())
+        assert stat.S_ISREG(before.st_mode) and before.st_nlink == 1
+        body = handle.read()
+        assert full9(os.fstat(handle.fileno())) == full9(before) == full9(path.lstat())
+        assert len(body) == before.st_size
+    return body, full9(before)
+
+def artifact(path):
+    body, stamp = read(path)
+    return {"path":str(path), "bytes":len(body), "sha256":sha(body), "full9":stamp}
+
+def put(path, raw, mode=0o400):
+    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, mode)
+    with os.fdopen(fd, "wb") as handle:
+        handle.write(raw)
+        handle.flush()
+        os.fsync(handle.fileno())
+    assert read(path)[0] == raw
+    return artifact(path)
+
+def git(*args, cwd=checkout):
+    return subprocess.check_output(["git", "-c", "core.preloadIndex=false", "-C", str(cwd), *args], env=env)
+
+expected_head = inputs["head"]
+actual_head, tracking_head = git("rev-parse", "HEAD", "refs/remotes/origin/main").decode().splitlines()
+assert actual_head == tracking_head == expected_head
+assert not git("status", "--porcelain=v1", "--untracked-files=all")
+
+def definitions(raw):
+    tree = ast.parse(raw)
+    forms, other = {}, []
+    for form in tree.body:
+        if isinstance(form, (ast.ClassDef, ast.FunctionDef, ast.AsyncFunctionDef)):
+            assert form.name not in forms
+            forms[form.name] = ast.dump(form)
+        else:
+            other.append(ast.dump(form))
+    return forms, other
+
+changes = (
+    ("inference", "inference_candidate",
+     ["_build_parent_typed_structure_audit", "_check_reviewed_evaluation_outputs"],
+     {"_reviewed_evaluation_measurement_cases"}),
+    ("owning_test", "owning_test_candidate",
+     ["_reviewed_v11_bind_saved_source_control", "_reviewed_v11_saved_control", "_reviewed_v11_three_source_coverage_control"],
+     {"_reviewed_v11_saved_evaluation", "test_reviewed_inference_v11_evaluation_scores_the_verified_generation"}),
+)
+records, forward, reverse = [], [], []
+scratch = root / "diff-forward-inverse-private-v01"
+scratch.mkdir(mode=0o700)
+for before_name, after_name, permitted_changed, permitted_new in changes:
+    before_ref, after_ref = (inputs["roles"][name] for name in (before_name, after_name))
+    relative = before_ref["relative_path"]
+    before_path, after_path = map(Path, (before_ref["path"], after_ref["path"]))
+    before, after = (read(path)[0] for path in (before_path, after_path))
+    for ref, raw in ((before_ref, before), (after_ref, after)):
+        assert (len(raw), sha(raw)) == (ref["bytes"], ref["sha256"])
+    live_before, live_stamp = read(checkout / relative)
+    row = git("ls-tree", expected_head, "--", relative).decode().rstrip("\n")
+    information, tree_path = row.split("\t")
+    mode, kind, tree_blob = information.split()
+    assert relative == tree_path and mode == "100644" and kind == "blob"
+    assert live_before == before == git("cat-file", "blob", tree_blob)
+    assert tree_blob == blob(before) == before_ref["git_blob"]
+    old_forms, old_other = definitions(before)
+    new_forms, new_other = definitions(after)
+    assert old_other == new_other and old_forms.keys() <= new_forms.keys()
+    assert [name for name in old_forms if old_forms[name] != new_forms[name]] == permitted_changed
+    assert new_forms.keys() - old_forms.keys() == permitted_new
+    records.append({
+        "relative_path": relative, "canonical_path": str(checkout / relative), "git_mode": mode,
+        "before": {**artifact(before_path), "git_blob": blob(before), "observed_canonical_full9": live_stamp},
+        "after": {**artifact(after_path), "proposed_git_blob": blob(after)},
+        "changed_existing_definitions": permitted_changed, "new_definitions": sorted(permitted_new),
+        "all_other_top_level_AST_exact": True,
+    })
+    a = b"a/" + os.fsencode(relative)
+    b = b"b/" + os.fsencode(relative)
+    forward.extend(difflib.diff_bytes(difflib.unified_diff, before.splitlines(keepends=True),
+                                       after.splitlines(keepends=True), fromfile=a, tofile=b))
+    reverse.extend(difflib.diff_bytes(difflib.unified_diff, after.splitlines(keepends=True),
+                                       before.splitlines(keepends=True), fromfile=a, tofile=b))
+    dest = scratch / relative
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    put(dest, before, mode=0o644)
+forward_path = root / "exact-two-forward.patch"
+reverse_path = root / "exact-two-inverse.patch"
+patch_refs = [put(forward_path, b"".join(forward)), put(reverse_path, b"".join(reverse))]
+for patch, key in ((forward_path, "after"), (reverse_path, "before")):
+    assert subprocess.run(["git","apply","--no-index","--whitespace=nowarn",str(patch)], cwd=scratch, env=env, check=True).returncode == 0
+    for rec in records:
+        tested = artifact(scratch / rec["relative_path"])
+        assert tested["sha256"] == rec[key]["sha256"] and tested["bytes"] == rec[key]["bytes"]
+        assert stat.S_IMODE(int(tested["full9"][2])) == 0o644
+assert not git("status", "--porcelain=v1", "--untracked-files=all")
+assert git("rev-parse", "HEAD", "refs/remotes/origin/main").decode().splitlines() == [expected_head]*2
+
+def load(log):
+    return json.loads((root / log).read_bytes())
+
+def refs(*names):
+    return [artifact(root/name) for name in names]
+
+old, new = (load(f"measurement-v02-{mode}.stdout") for mode in ("before","after"))
+assert (root/"measurement-v02.exit").read_bytes()==b"1 0\n"
+assert old["counts"]=={"passed":41,"failed":9,"error":0} and new["counts"]=={"passed":50,"failed":0,"error":0}
+old_cases, new_cases = (report["results"] for report in (old,new))
+assert [case["node"] for case in old_cases] == [case["node"] for case in new_cases]
+assert len(old_cases) == len({case["node"] for case in old_cases}) == 50
+assert [case["status"] for case in old_cases] == ["passed"]*41+["failed"]*9
+assert all(case["status"]=="passed" for case in new_cases)
+previous = [load(f"optional-audit-v02-{mode}.stdout") for mode in ("before","after")]
+assert previous[0]["results"] == previous[1]["results"]
+assert len(previous[0]["results"]) == 8 and all(case["status"]=="passed" for case in previous[0]["results"])
+for name in ("measurement-v02-before.stderr","measurement-v02-after.stderr",
+             "optional-audit-v02-before.stderr","optional-audit-v02-after.stderr"):
+    assert (root / name).stat().st_size == 0
+
+packet = {
+    "schema": "Phase5-v11-saved-evaluation-measurement-join-exact-two-private/v1",
+    "checkout": str(checkout), "observed_clean_local_head_and_tracking_origin_main": actual_head,
+    "head_tree": git("rev-parse","HEAD^{tree}").decode().strip(),
+    "files": records, "patches": {"forward":patch_refs[0], "inverse":patch_refs[1],
+        "both_applied_to_isolated_preimage_with_exact_bytes_and_modes": True},
+    "current_role_body_references": refs("exact-v11-measurement-project-inputs.json",
+          "exact-v11-measurement-red-green-inputs.v02.json"),
+    "actual_initial_positive_demonstration": refs("run-saved-v11-baseline.py","actual-v11-baseline.stdout",
+                                                   "actual-v11-baseline.stderr"),
+    "same_50_saved_artifact_cases": {"baseline":old["counts"],"candidate":new["counts"],
+        "retained":40,"new":10,"identical_order":True,
+        "evidence":refs("run-v11-evaluation-owning-50.v02.py","measurement-v02.exit","measurement-v02-before.stdout",
+                        "measurement-v02-after.stdout","measurement-v02-before.stderr","measurement-v02-after.stderr")},
+    "optional_typed_audit_existing_assertions": {"old_and_new":8,"identical_result_rows":True,
+        "explicit_valid_failed_batch_and_mismatched_batch_exception":True,
+        "evidence":refs("run-v11-existing-optional-audit-8.py","optional-audit-v02-before.stdout",
+                        "optional-audit-v02-before.stderr","optional-audit-v02-after.stdout","optional-audit-v02-after.stderr")},
+    "retained_prior_attempts": {
+        "first_same_cohort": {"reason":"checkpoint fixture kept a preexisting empty declaration",
+            "baseline":load("measurement-before.stdout")["counts"], "candidate":load("measurement-after.stdout")["counts"],
+            "evidence":refs("measurement.exit","measurement-before.stdout","measurement-after.stdout",
+                   "owning-test.after.evaluation-measurement.py.DATA","exact-v11-measurement-red-green-inputs.json")},
+        "optional_audit_invocation_lookup": {"reason":"datasets checkout does not contain the attempted local venv",
+            "cases_executed":0, "evidence":refs("optional-audit-before.stderr","optional-audit-after.stderr")}},
+    "production_join": {"canonical_current_verifier":records[0]["before"]["git_blob"],
+        "measurement_reused":"evaluate_complete_norm_payloads",
+        "bound":["source_generation_observation","source_generation_input_commitment_sha256","checkpoint_declarations",
+                 "request rows_artifact and ordered producer arguments","raw generation rows","declared compiler identity",
+                 "both complete-norm payload metric copies"]},
+    "scope": {"private_fixture_linker_only":True,"canonical_installation":False,"ordinary_package_qualification":False,
+              "physical_original_owner_fixture_run":False,"model_runs":0,"native_runs":0,"source_operations":0,
+              "legal_review_or_admission_granted":False,"remote_network_actions":0,"git_worktree_or_index_mutations":0},
+}
+path = root / "SEALED-exact-two-V11-evaluation-measurement-private-50.json"
+seal = put(path, (json.dumps(packet,indent=2,sort_keys=True)+"\n").encode())
+print(json.dumps(seal))

@@ -1,0 +1,40 @@
+{
+  "after": {
+    "bytes": 5341,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-strata-cosine-private-H68Ejmdx/actual-matching24-after.json",
+    "sha256": "36219bdfb66c02258997391eb7d76587ab1fb0a27a019bfd2d8dd1c89d77c5c0"
+  },
+  "after_counts": {
+    "failed": 1,
+    "passed": 23
+  },
+  "before": {
+    "bytes": 10927,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-strata-cosine-private-H68Ejmdx/actual-matching24-before.json",
+    "sha256": "c3348d60520c27b3482e7b1b9e9e8a1b463cc370f2b752aa6a9cc4b8aa551cf6"
+  },
+  "before_counts": {
+    "failed": 7,
+    "passed": 17
+  },
+  "both_runs_failed_cases": [
+    "test_semantic_equivalence_gate_is_unchanged_by_latent_instrumentation"
+  ],
+  "exact_private_patch": {
+    "bytes": 6497,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-strata-cosine-private-H68Ejmdx/SEALED-LIR19-existing-strata-cosine-exact2-private.json",
+    "sha256": "55eec4fcdd3cc10e876bd83c39520aaf97b504a3519d389f91702e7c1078fdce"
+  },
+  "initial_roster_preflight_refusal": {
+    "bytes": 248,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-strata-cosine-private-H68Ejmdx/full-direct-v03-roster-preflight-closed.json",
+    "sha256": "4efba4e4018c6d060e9e0441c909cd3aba2e55e67ecee35545112f272d906bfd"
+  },
+  "ordinary_qualification": false,
+  "runner": {
+    "bytes": 3858,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-LIR19-strata-cosine-private-H68Ejmdx/run-existing-latent-strata-full-direct-v04.py.DATA",
+    "sha256": "d55dc429ffbee6989dbd58625f545a7cbc6af6565253635cd7469bb619eb3553"
+  },
+  "same_24": true
+}

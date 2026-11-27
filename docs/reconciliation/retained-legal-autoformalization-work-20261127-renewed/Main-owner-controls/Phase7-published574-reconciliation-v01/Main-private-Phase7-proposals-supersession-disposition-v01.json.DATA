@@ -1,0 +1,113 @@
+{
+  "Git_mutations": 0,
+  "Native": 0,
+  "SDK": 0,
+  "Source_contexts": 0,
+  "actual_qualification_refs": [
+    {
+      "bytes": 2647,
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/actual-Guide574-four-docs-three-FF-publication.json",
+      "sha256": "84d3364b66b4990a14a687417fb17ae38bc1fdb85131c51bfda55d34a0a1e84d"
+    },
+    {
+      "bytes": 21352,
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/actual-Phase7-ordinary26-check-feedback-three-FF-publication.json",
+      "sha256": "dbb00c0b498d16c52246142aaefa2ed8dbdc58782ad03112e4d8ab97ff66afa6"
+    },
+    {
+      "bytes": 6769,
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/actual-Phase7-current-checked-proof-ordinary26-closed.json",
+      "sha256": "d7869ec2129071491a627ed7313aae19851ff39a5b18afa8478f13e714619ca9"
+    }
+  ],
+  "all_old_artifacts_refs_receipts_failures_retained": true,
+  "authoritative_published_head": "6106a4633ec6504ee8c004cc5a9c7fe348ff38bf",
+  "canonical_checkout_body_reads": 0,
+  "coverage_reconciliation": {
+    "absence_of_explicit_legacy_digest_assertion_not_called_a_product_defect": true,
+    "actual_builder_keyword": "training_target",
+    "actual_formal_type": "ipfs_datasets_py.logic.ir_core.claims.ProofObligation",
+    "actual_receipt_owner": "ipfs_datasets_py.logic.legal_ir.proof_cache.LegalProofRecord.theorem_receipt_results",
+    "actual_replay_pins": [
+      "current legal sample",
+      "artifact digest",
+      "legal proof record digest",
+      "protocol receipt digest",
+      "formal obligation digest",
+      "interpretation digest",
+      "dependency versions"
+    ],
+    "already_covered": [
+      "same receipt ID with altered digest",
+      "stale raw source with same sample ID/modal IR",
+      "changed interpretation/dependencies",
+      "unreviewed source",
+      "missing modal binding",
+      "JSON roundtrip and both consumers",
+      "nested guidance redirection",
+      "raw/wrapped learning input and updates equivalence",
+      "metadata-only unverified positive refusal"
+    ],
+    "distinct_uncovered_product_defect_established": false,
+    "legacy_builder_digest_behavior_preserved": true
+  },
+  "full_eight_phase_goal_complete": false,
+  "model_fit": 0,
+  "new_Source_Git_Runtime_or_authority_action_selected": false,
+  "no_new_guide_wave_requested": true,
+  "no_test_replay_or_counts_pooled": true,
+  "previous_goal_turn": "progress: actual factory correction and unchanged tests GREEN; no blocked wait",
+  "private_artifacts": [
+    {
+      "description": "Generic TrustedProofReceipt target carrier and tests. Published legal-specific replay is the selected path; do not introduce second carrier.",
+      "sha256": "8cdbf238fbafc512690b9912f17bcc389fa73c632fb9d268bada4c8c018089ef",
+      "status": "SUPERSEDED_FOR_CANONICAL_ADOPTION"
+    },
+    {
+      "description": "Proposed current_target acceptance cases used legacy generated obligation/wire. Actual training_target deliberately requires typed protocol ProofObligation and exact selected legal proof; do not force old API.",
+      "sha256": "ee77e224f22360aeb795b52e8a7a7c5be49787edc4b52742d7783773931bf0fb",
+      "status": "SUPERSEDED_API_SPECIFICATION"
+    },
+    {
+      "description": "Canonical generic receipt-factory bounds correction. Its old base blob9a52 remains exact at published6106. It is separate from closed legal-specific Phase7 work.",
+      "sha256": "3aecbf5629c3500baac63beffd701c8e50d02783e93d7cf93c50d702967ac6d9",
+      "status": "INDEPENDENT_PRIVATE_PROPOSAL_NOT_ADOPTED"
+    }
+  ],
+  "published_roles": [
+    {
+      "bytes": 74557,
+      "git_blob_sha1": "3c2cc1443e9f96a611a81052c0e13f7b6634248e",
+      "mode": "100644",
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-published574-reconciliation-v01/ipfs_datasets_py__logic__integration__reasoning__legal_ir_proof_feedback.py.DATA",
+      "repo_relative_path": "ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py",
+      "sha256": "5c44d695c17fab26d6bba70d544e57a7bd0b5fd5b2434f810c9656db13926478"
+    },
+    {
+      "bytes": 42453,
+      "git_blob_sha1": "f185deec8ddbfc25db15352cc15def76bb5ab351",
+      "mode": "100644",
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-published574-reconciliation-v01/ipfs_datasets_py__optimizers__logic_theorem_optimizer__trusted_feedback_trainer.py.DATA",
+      "repo_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py",
+      "sha256": "cd37964aa4a497e8d778ae0e6a90fe87f3362ead8c9a3751a5a3288b7370ed2e"
+    },
+    {
+      "bytes": 62474,
+      "git_blob_sha1": "b3440e026ac79e9f96fce9b852f2bdbbfd5763a9",
+      "mode": "100644",
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-published574-reconciliation-v01/tests__unit__logic__integration__test_trusted_feedback_weight_updates.py.DATA",
+      "repo_relative_path": "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py",
+      "sha256": "da2e3d88faf184d3fa03c9531b4122583e2a882d9545bef1d0c7c2ab20b7bb83"
+    }
+  ],
+  "qualified_scope": {
+    "bounded_in_memory_updates_with_fictional_fixtures": true,
+    "errors": 0,
+    "failures": 0,
+    "functions": 13,
+    "large_fit_Native_or_legal_qualification": false,
+    "skips": 0,
+    "tests": 26
+  },
+  "schema": "Main-Phase7-private-proposal-disposition-after-published574/v1"
+}

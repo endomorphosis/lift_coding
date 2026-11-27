@@ -1,0 +1,57 @@
+import hashlib
+import importlib.util
+import json
+import os
+from pathlib import Path
+import sys
+
+
+def test_exact_public_evaluator_with_fictional_extra_records():
+    test = Path.cwd() / "tests/integration/logic/backends/test_kernel_backends.py"
+    lean = Path.cwd() / "ipfs_datasets_py/logic/backends/kernel/lean.py"
+    assert hashlib.sha256(test.read_bytes()).hexdigest() == "8bca876c855d44df4d48cb909fc6a0e9a007480d61037831536e84a8cc68adf9"
+    assert hashlib.sha256(lean.read_bytes()).hexdigest() == "de99fe31f53fb34bf247e5c24b4b1424ca06874f1da5dc8875b3dbf886d1e4cb"
+    spec = importlib.util.spec_from_file_location("_held_current_lean99_fixtures", test)
+    fixture = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = fixture
+    spec.loader.exec_module(fixture)
+    evaluator = fixture.evaluate_lean_kernel_output
+    assert Path(evaluator.__code__.co_filename) == lean
+    stdout, bindings = fixture._bound_clean_lean_dependency_fixture()
+    text = "fictional unsolved goals"
+    cases = [
+        ("warning", {"severity": "warning", "data": "warning quoting error: text"}, True),
+        ("nested_metadata", {"severity": "information", "data": "note", "extra": {"items": [[1, 2]]}}, True),
+        ("error", {"severity": "error", "data": text}, False),
+        ("invalid_json", '{"severity":"error","data":"unfinished"', False),
+        ("nonobject", [{"severity": "error", "data": text}], False),
+        ("severity_list", {"severity": ["error"], "data": text}, None),
+        ("severity_object", {"severity": {"value": "error"}, "data": text}, None),
+        ("severity_missing", {"data": text}, None),
+        ("severity_unrecognized", {"severity": "fatal", "data": text}, None),
+        ("warning_data_object", {"severity": "warning", "data": {"text": text}}, None),
+        ("warning_data_missing", {"severity": "warning"}, None),
+        ("error_data_object", {"severity": "error", "data": {"text": text}}, False),
+        ("opaque_logging_object", {"kind": "fictional_trace", "message": "ordinary trace"}, None),
+    ]
+    observations = []
+    for stream in ("stdout", "stderr"):
+        for name, extra, expected in [("clean", "", True), *cases]:
+            suffix = (extra if isinstance(extra, str) else json.dumps(extra)) + "\n"
+            process = fixture._lean_output(stdout + (suffix if stream == "stdout" else ""),
+                                           stderr=suffix if stream == "stderr" else "")
+            assert type(process.returncode) is int and process.returncode == 0
+            accepted, report, diagnostics = evaluator(process, **bindings)
+            if expected is not None:
+                assert accepted is expected, (stream, name, diagnostics)
+            if accepted:
+                assert (report.declaration, report.source_path, report.source_line, report.source_column, report.axioms) == (
+                    bindings["declaration"], bindings["expected_source_path"], bindings["expected_source_line"], 0, ())
+            observations.append(dict(stream=stream, name=name, extra_record=extra, accepted=accepted,
+                                     report_returned=report is not None, diagnostics=list(diagnostics)))
+    output = Path(__file__).with_name("actual-public-evaluator-observations.json")
+    with os.fdopen(os.open(output, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o400), "w") as f:
+        json.dump(dict(bindings=bindings, bound_report_stdout=stdout, observations=observations), f, indent=2)
+        f.write("\n")
+        f.flush()
+        os.fsync(f.fileno())

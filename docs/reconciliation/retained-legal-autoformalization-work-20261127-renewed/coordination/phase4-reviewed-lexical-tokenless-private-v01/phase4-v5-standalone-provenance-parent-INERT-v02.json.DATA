@@ -1,0 +1,37 @@
+{
+  "actual_source_scheduler_or_pytest_run": null,
+  "before": {
+    "bytes": 34764,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase4-reviewed-lexical-tokenless-private-v01/existing-v5-source-held-current-A-D-parent-INERT.v01.py.DATA",
+    "sha256": "d51918e511d2838c33e4d4cbcbd533644159a1ed1a4c80c743c1f8682ef2d038"
+  },
+  "diff": {
+    "bytes": 9924,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase4-reviewed-lexical-tokenless-private-v01/phase4-v5-standalone-provenance-parent-v02.patch",
+    "sha256": "0e41687eeb7edad795417892e40c2a1dc94bfeceba4a0a8bcb5881ec3659aa05"
+  },
+  "existing_provenance_schema": "actual-clean-frozen-Git-index-READ-provenance/v1",
+  "existing_resource_limits_unchanged": true,
+  "guard_checks": {
+    "changed_index_refused": true,
+    "changed_receipt_bytes_refused": true,
+    "changed_refs_refused": true,
+    "dirty_worktree_refused": true,
+    "exact_paired_snapshot_accepted": true,
+    "expired_guard_refused": true,
+    "stale_root_HEAD_even_if_both_receipts_agree_refused": true
+  },
+  "post": {
+    "bytes": 41284,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase4-reviewed-lexical-tokenless-private-v01/existing-v5-source-held-current-A-D-standalone-parent-INERT.v02.py.DATA",
+    "sha256": "66e2a66a3d4cce2ec6b7dacd63ec0270aa4d42d627d71c24e2fe715608b744b7"
+  },
+  "read_only_baseline": {
+    "bytes": 12333,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase4-reviewed-lexical-tokenless-private-v01/phase4-current-standalone-A-D-readonly-git-baseline-v01.json",
+    "sha256": "d0b21588ef2af0810a13d48c3deb3bd637b08edf0acaee5d5754104defe12577"
+  },
+  "root_flags_and_request_and_selection_digest_remain_inert": true,
+  "schema": "phase4-existing-v5-parent-standalone-provenance-INERT-v2",
+  "scope": "Private existing parent successor. Actual new guard functions tested with fictional Git responses and isolated regular files. Existing wait, cleanup, custody and Source42 code unchanged."
+}

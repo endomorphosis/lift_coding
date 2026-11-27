@@ -1,0 +1,84 @@
+{
+  "mode": "green",
+  "results": [
+    {
+      "projection": "shadow",
+      "variant": "same",
+      "passed": true
+    },
+    {
+      "projection": "shadow",
+      "variant": "interpretation",
+      "passed": true
+    },
+    {
+      "projection": "shadow",
+      "variant": "dependency",
+      "passed": true
+    },
+    {
+      "projection": "shadow",
+      "variant": "toolchain",
+      "passed": true
+    },
+    {
+      "projection": "shadow",
+      "variant": "numeric-toolchain-alias",
+      "passed": true
+    },
+    {
+      "projection": "migration",
+      "variant": "same",
+      "passed": true
+    },
+    {
+      "projection": "migration",
+      "variant": "interpretation",
+      "passed": true
+    },
+    {
+      "projection": "migration",
+      "variant": "dependency",
+      "passed": true
+    },
+    {
+      "projection": "migration",
+      "variant": "toolchain",
+      "passed": true
+    },
+    {
+      "projection": "migration",
+      "variant": "numeric-toolchain-alias",
+      "passed": true
+    },
+    {
+      "projection": "store",
+      "variant": "legacy",
+      "passed": true
+    },
+    {
+      "projection": "store",
+      "variant": "bound-v2",
+      "passed": true
+    }
+  ],
+  "guard_events": [],
+  "overrides": [
+    {
+      "module": "_private_context_aggregation_owning_test",
+      "actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/owning-test.after.py.DATA"
+    },
+    {
+      "module": "ipfs_datasets_py.logic.legal_ir.proof_cache",
+      "actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/proof_cache.after.py.DATA"
+    },
+    {
+      "module": "ipfs_datasets_py.logic.common.duckdb_proof_store",
+      "actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/duckdb_proof_store.after.py.DATA"
+    },
+    {
+      "module": "ipfs_datasets_py.logic.common.duckdb_proof_migration",
+      "actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/duckdb_proof_migration.after.py.DATA"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "added_Source_only_envelope": 167772160,
+  "after_full_retained_precharge": {
+    "captures": 543428,
+    "capturesComplete": false,
+    "global_cap": 60280031242,
+    "internal_cap": 60089439368,
+    "internal_used": 60083082376,
+    "used": 60273674250
+  },
+  "all_prior_costs_retained": true,
+  "exact_human_affirmation": {
+    "bytes": 2960,
+    "path": "/tmp/Main-source-cap-human-provenance-v01-g9hs_s_q/Root-original-human-Source-cap-approval.record.jsonl",
+    "sha256": "8fdf2d6c57542b3ce8e8a06773645487c39a3cb2a8a9929426cc785d3fc78dda"
+  },
+  "extra_private_readback_upper": 33554432,
+  "no_policy_capacity_or_model_change": true,
+  "physical_IO_accounting_complete": false,
+  "previous_charge": {
+    "bytes": 2428,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/Source-only-authorized-P1-combined-Lean-ordinary99-cap-prior-retained.v04.json",
+    "sha256": "9d6d03b1c69b777c69969495d525c2f616a2eb34a4675bcd2dd417603121f89a"
+  },
+  "prior": {
+    "captures": 543427,
+    "capturesComplete": false,
+    "global_cap": 60112259082,
+    "internal_cap": 59921667208,
+    "internal_used": 59915310216,
+    "used": 60105902090
+  },
+  "prior_cap": {
+    "bytes": 2428,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/Source-only-authorized-P1-combined-Lean-ordinary99-cap-prior-retained.v04.json",
+    "sha256": "9d6d03b1c69b777c69969495d525c2f616a2eb34a4675bcd2dd417603121f89a"
+  },
+  "prior_native_envelope_bytes": 134217728,
+  "resource_policy_capacity_unchanged": true,
+  "selected": {
+    "captures": 543427,
+    "capturesComplete": false,
+    "global_cap": 60280031242,
+    "internal_cap": 60089439368,
+    "internal_used": 59915310216,
+    "used": 60105902090
+  }
+}

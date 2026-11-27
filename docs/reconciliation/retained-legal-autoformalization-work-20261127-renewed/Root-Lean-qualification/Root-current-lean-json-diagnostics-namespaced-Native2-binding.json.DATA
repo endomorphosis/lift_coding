@@ -1,0 +1,753 @@
+{
+  "Native": [
+    {
+      "actual_full9": {
+        "st_ctime_ns": "1774822425139943817",
+        "st_dev": "66306",
+        "st_gid": "0",
+        "st_ino": "1311395",
+        "st_mode": "33261",
+        "st_mtime_ns": "1772812854000000000",
+        "st_nlink": "1",
+        "st_size": "68256",
+        "st_uid": "0"
+      },
+      "bytes": 68256,
+      "path": "/usr/bin/prlimit",
+      "sha256": "2a479939c95a886fb8b52244381639816f8cf1f68eee713a9227d0c5d257c805"
+    },
+    {
+      "actual_full9": {
+        "st_ctime_ns": "1790376166598792624",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "6728796",
+        "st_mode": "33261",
+        "st_mtime_ns": "1790273308000000000",
+        "st_nlink": "1",
+        "st_size": "19192",
+        "st_uid": "1000"
+      },
+      "bytes": 19192,
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lake",
+      "sha256": "f80f50cbab5322e35bcb0bf88937e22e9d908b5e4e336e83ddfc30eb1506aacf"
+    },
+    {
+      "actual_full9": {
+        "st_ctime_ns": "1790376166615972340",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "6721251",
+        "st_mode": "33261",
+        "st_mtime_ns": "1790273308000000000",
+        "st_nlink": "1",
+        "st_size": "13824",
+        "st_uid": "1000"
+      },
+      "bytes": 13824,
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+      "sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085"
+    },
+    {
+      "actual_full9": {
+        "st_ctime_ns": "1790376162716932043",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "5943291",
+        "st_mode": "33188",
+        "st_mtime_ns": "1790273308000000000",
+        "st_nlink": "1",
+        "st_size": "13934112",
+        "st_uid": "1000"
+      },
+      "bytes": 13934112,
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/lib/lean/libLake_shared.so",
+      "sha256": "c797777a91dd5e7654ced392282560d6465f4e7b623f1a612ae295c5feb208e9"
+    },
+    {
+      "actual_full9": {
+        "st_ctime_ns": "1790376162774226637",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "5943314",
+        "st_mode": "33188",
+        "st_mtime_ns": "1790273307000000000",
+        "st_nlink": "1",
+        "st_size": "7040",
+        "st_uid": "1000"
+      },
+      "bytes": 7040,
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/lib/lean/libInit_shared.so",
+      "sha256": "57b86819d11d621bd0ba8f4078b0ec7d5e1a48d8a915729a8ac0496177d78be4"
+    },
+    {
+      "actual_full9": {
+        "st_ctime_ns": "1790376162717749080",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "5943296",
+        "st_mode": "33188",
+        "st_mtime_ns": "1790273307000000000",
+        "st_nlink": "1",
+        "st_size": "7040",
+        "st_uid": "1000"
+      },
+      "bytes": 7040,
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/lib/lean/libleanshared_1.so",
+      "sha256": "6fbf499b4e2391b8c3ed4e72aa6bbfe44b98358a52b646b3441cbfc6ca23e841"
+    },
+    {
+      "actual_full9": {
+        "st_ctime_ns": "1790376163851478822",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "5943325",
+        "st_mode": "33188",
+        "st_mtime_ns": "1790273307000000000",
+        "st_nlink": "1",
+        "st_size": "7040",
+        "st_uid": "1000"
+      },
+      "bytes": 7040,
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/lib/lean/libleanshared_2.so",
+      "sha256": "e79f607f11b72cb2d3822e5cfe375351c75b5571e2994737a71835e273d724d1"
+    },
+    {
+      "actual_full9": {
+        "st_ctime_ns": "1790376166499989197",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "5943334",
+        "st_mode": "33188",
+        "st_mtime_ns": "1790273308000000000",
+        "st_nlink": "1",
+        "st_size": "255113200",
+        "st_uid": "1000"
+      },
+      "bytes": 255113200,
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/lib/lean/libleanshared.so",
+      "sha256": "62108c3204c29d8532efd7101df65b391a1098da2de1ff9a4d0be3765fe2a67c"
+    }
+  ],
+  "Native_enrollment": {
+    "Root_selection": {
+      "bytes": 11526,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/Root-selected-lean-json-diagnostics-namespaced-Native2-once.json",
+      "sha256": "4a34b0a8febd7a5942b65a471fa87f54018ed4543a5d940dff750b067dce36bc"
+    },
+    "admission_API": "existing scheduler.try_acquire only; actual refusal ends this selected dispatch",
+    "authority": "exact current invocation selection only; no borrowed lease or historical grant transfer",
+    "case_profile": "P1-native-namespaced-expected-declaration/v1",
+    "clock_scope": {
+      "kind": "exact submission window for existing validation profile",
+      "not_before_utc_ns": 1795755436147728076,
+      "submit_deadline_utc_ns": 1795755616147728076
+    },
+    "current_resource_state_observation": {
+      "bytes": 30853,
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase2-whole-norm-source-use-onebuild-preparation-v01/selected-whole-norm-source-use-Native-output-v01/native-resource-scheduler.json",
+      "sha256": "f6cda9929a0a2a90ef980ae7a0fcb52cfe5eca2af079b50a8c3816e6a72267f0"
+    },
+    "current_toolchain_assets_exact": true,
+    "expected_policy_sha256": "087675d7e42c0d817dffa712955f553b39c4f1a529c76805d3f19afb0be31808",
+    "parent_request": {
+      "child_process_slots": 1,
+      "cpu_slots": 1,
+      "gpu_memory_mb": 0,
+      "memory_mb": 8192,
+      "parent_lease": null,
+      "requires_gpu": false,
+      "unified_memory_mb": 0,
+      "workload": "validation"
+    },
+    "schema": "existing-canonical-owner-Native3-invocation-selection/v1",
+    "state_path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase2-whole-norm-source-use-onebuild-preparation-v01/selected-whole-norm-source-use-Native-output-v01/native-resource-scheduler.json"
+  },
+  "PROJECTS": [
+    {
+      "Git_HEAD": "95dc193c3a4a37f9c9227da640a346b2cd58e54c",
+      "Git_tree": "c37ef87f96ba8a61d8644692f03df572352e12de",
+      "root": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets"
+    },
+    {
+      "Git_HEAD": "219ba3da0f62f772801d71715e22c506faa21126",
+      "Git_tree": "c670052e6e12473d974382e455c7aef4adb6aebe",
+      "root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate"
+    }
+  ],
+  "Root_selection": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/Root-selected-lean-json-diagnostics-namespaced-Native2-once.json",
+  "Source42_current_owner": "/root",
+  "Source42_current_owner_binding": {
+    "actual_index_and_targets_READ3": {
+      "bytes": 7482,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-isolated-Phase1-lean-json-diagnostics-READ3-closed.json",
+      "sha256": "0b9d17c27efa541b520be7d9e3578b71df4ef584d92152ccfeb2e965e527ccb5"
+    },
+    "current_published_parent": {
+      "bytes": 5270,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-current-main-fast-forward-official-V2-base.json",
+      "sha256": "23a507a1f439e697be16860808c32ba21af50ac094a44d8d108a6e1e35dc829f"
+    },
+    "current_read_guard_pair": [
+      {
+        "Git_HEAD": "95dc193c3a4a37f9c9227da640a346b2cd58e54c",
+        "Git_tree": "c37ef87f96ba8a61d8644692f03df572352e12de",
+        "root": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets"
+      },
+      {
+        "Git_HEAD": "219ba3da0f62f772801d71715e22c506faa21126",
+        "Git_tree": "c670052e6e12473d974382e455c7aef4adb6aebe",
+        "root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate"
+      }
+    ],
+    "existing_Source42_binding_verified": true
+  },
+  "Source42_raw": {
+    "bytes": 10375,
+    "full9": {
+      "st_ctime_ns": "1795468368725410461",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "30316768",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795468368725410461",
+      "st_nlink": "1",
+      "st_size": "10375",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Reader-P1-current-published-Source-and-assets-read-preparation-private-v01/actual-doc-owner-approved-Source42-control-code.py.DATA",
+    "sha256": "42e9f07d0d458177079269d9f495f0b70512180c1adc2f7fe0bfdb05518a12f9"
+  },
+  "Source42_record": {
+    "bytes": 10375,
+    "encoding": "zlib+base64",
+    "path": "/tmp/legal-ir-phase2-reviewed-admission-source-20261108-v01/resource-census-compatible-port-v01/runtime-owner-v4-trainer-compatibility-v01/current-published-cleanup71-original16MiB-input-v01/original42-frozen.py",
+    "sha256": "42e9f07d0d458177079269d9f495f0b70512180c1adc2f7fe0bfdb05518a12f9"
+  },
+  "Source_IO_allocation": {
+    "actual_total_runtime_bytes": "UNKNOWN",
+    "additional_private_readback_upper": 33554432,
+    "debit_bytes": 167772160,
+    "debit_even_on_failure": true,
+    "explicit_ledger_increase_and_charge_reference": {
+      "bytes": 1749,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/Source-only-lean-json-diagnostics-namespaced-Native2-full-retained-cap.json",
+      "sha256": "f86281355aee837b7da1ebdfc57f0e5418a84faeaf81b97d8cbc6304a3f60de4"
+    },
+    "schema": "conservative-accounting-allocation-not-measured-runtime/v1"
+  },
+  "Source_composition_proof": {
+    "current_27_all_in_epoch": true,
+    "current_prepared_scope": {
+      "bytes": 7482,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-isolated-Phase1-lean-json-diagnostics-READ3-closed.json",
+      "sha256": "0b9d17c27efa541b520be7d9e3578b71df4ef584d92152ccfeb2e965e527ccb5"
+    },
+    "current_proof_protocol_owner_binding": {
+      "bytes": 57510,
+      "full9": {
+        "st_ctime_ns": "1795741365154799247",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513481",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741365154799247",
+        "st_nlink": "1",
+        "st_size": "57510",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/ir_core/protocols.py",
+      "sha256": "e2dd1dc93d1efa15c7c4088145d32c52636c72e9230b16ade77ca6c6a0c2c336"
+    },
+    "exact_current_freeze": {
+      "bytes": 16495,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-isolated-Phase1-lean-json-diagnostics-exact-two-local-freeze.json",
+      "sha256": "a52014d373c00aade6e9673cb3dab91deefbfe7c23d456b4b483ce5964532e8a"
+    },
+    "prior_direct_roles": {
+      "bytes": 71656,
+      "path": "/tmp/Phase1-Native-cache-current-v385-boundary-DATA-wrklbsta/READY-current-Phase1-Native-cache-existing-owner-v385-DATA-only.json",
+      "sha256": "a1fe5853ef4765978557d7d5ed46698258a4d49c2106735cb4acdcc39c2051dc"
+    },
+    "prior_direct_runtime": {
+      "bytes": 29541,
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/Root-current-existing-Native2-binding.json",
+      "sha256": "32a8fd78c39f75f3fa6c9f2560dcd5e094891afcb7b288a0fea62d57654f0ae0"
+    }
+  },
+  "Source_epoch": {
+    "bytes": 852469,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-live-reconciled-outer1618-epoch.json",
+    "sha256": "2ada76fe314264f23d8aa68d724248738dc13d54d03cbe4e75a6e4ec0268d725"
+  },
+  "W_INDEX": {
+    "bytes": 7070589,
+    "full9": {
+      "st_ctime_ns": "1795755055898035075",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72533257",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795755055888035039",
+      "st_nlink": "1",
+      "st_size": "7070589",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/index",
+    "sha256": "a929f5fefc9a4cd7630b8e33a57139fa0da0ebcef46fb959ea14d9aba4745bae"
+  },
+  "binder_raw": {
+    "bytes": 5314,
+    "path": "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/existing-namespaced-native2-binder.INERT.py.DATA",
+    "sha256": "6c692f2b88eeaa8a7a1c33825f2df6638d4cd4178f34f5a2e1e0c061d8350650"
+  },
+  "clock_scope": {
+    "kind": "exact submission window for existing validation profile",
+    "not_before_utc_ns": 1795755436147728076,
+    "submit_deadline_utc_ns": 1795755616147728076
+  },
+  "closed_current_core_Source_role_reference": {
+    "bytes": 42003,
+    "path": "/tmp/P1-current-Native-cache-existing-owner-metadata-recovery-private-v01/current-Native-cache-fourteen-core-roles-two-closed-READ8-joins.json",
+    "sha256": "e3e0ca8b8f713612292427481a5e6c6d8c4ab04c01f7141d4edb8bb17555eef2"
+  },
+  "current_D_config": {
+    "status": "config not a selected read role"
+  },
+  "current_SDK_source_pins": {
+    "ipfs_datasets_py.logic.backends.kernel.lean": [
+      "ipfs_datasets_py/logic/backends/kernel/lean.py",
+      "de99fe31f53fb34bf247e5c24b4b1424ca06874f1da5dc8875b3dbf886d1e4cb"
+    ],
+    "ipfs_datasets_py.logic.backends.process": [
+      "ipfs_datasets_py/logic/backends/process.py",
+      "370ba355be1da87814be4a117d2ce2a1cbc255064958d9ec64ada8e54521a7d7"
+    ],
+    "ipfs_datasets_py.logic.backends.resource_admission": [
+      "ipfs_datasets_py/logic/backends/resource_admission.py",
+      "fda64e02042355fd0a0a3b75934b3d1c4ccb5efb42f0fe861876275ff8a5e1a8"
+    ],
+    "ipfs_datasets_py.logic.ir_core.protocols": [
+      "ipfs_datasets_py/logic/ir_core/protocols.py",
+      "e2dd1dc93d1efa15c7c4088145d32c52636c72e9230b16ade77ca6c6a0c2c336"
+    ],
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler": [
+      "ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py",
+      "7a0dac2d13b4be7775e278054e1a57808f5629d3c58952164b91514e6e2ae2d3"
+    ]
+  },
+  "current_protocol_raw_source": {
+    "bytes": 57510,
+    "full9": {
+      "st_ctime_ns": "1795700833373335378",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72488974",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795700833373335378",
+      "st_nlink": "1",
+      "st_size": "57510",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-P1-receipt-usage-logic-postfreeze-READ3-v517-QLL8r8du/actual-output/raw/00-protocols.py.DATA",
+    "sha256": "e2dd1dc93d1efa15c7c4088145d32c52636c72e9230b16ade77ca6c6a0c2c336"
+  },
+  "historical_Native_asset_records_NOT_current": [
+    {
+      "actual_full9": {
+        "st_ctime_ns": "1774822425139943817",
+        "st_dev": "66306",
+        "st_gid": "0",
+        "st_ino": "1311395",
+        "st_mode": "33261",
+        "st_mtime_ns": "1772812854000000000",
+        "st_nlink": "1",
+        "st_size": "68256",
+        "st_uid": "0"
+      },
+      "bytes": 68256,
+      "path": "/usr/bin/prlimit",
+      "sha256": "2a479939c95a886fb8b52244381639816f8cf1f68eee713a9227d0c5d257c805"
+    },
+    {
+      "actual_full9": {
+        "st_ctime_ns": "1790376166598792624",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "6728796",
+        "st_mode": "33261",
+        "st_mtime_ns": "1790273308000000000",
+        "st_nlink": "1",
+        "st_size": "19192",
+        "st_uid": "1000"
+      },
+      "bytes": 19192,
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lake",
+      "sha256": "f80f50cbab5322e35bcb0bf88937e22e9d908b5e4e336e83ddfc30eb1506aacf"
+    },
+    {
+      "actual_full9": {
+        "st_ctime_ns": "1790376166615972340",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "6721251",
+        "st_mode": "33261",
+        "st_mtime_ns": "1790273308000000000",
+        "st_nlink": "1",
+        "st_size": "13824",
+        "st_uid": "1000"
+      },
+      "bytes": 13824,
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+      "sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085"
+    },
+    {
+      "actual_full9": {
+        "st_ctime_ns": "1790376162716932043",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "5943291",
+        "st_mode": "33188",
+        "st_mtime_ns": "1790273308000000000",
+        "st_nlink": "1",
+        "st_size": "13934112",
+        "st_uid": "1000"
+      },
+      "bytes": 13934112,
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/lib/lean/libLake_shared.so",
+      "sha256": "c797777a91dd5e7654ced392282560d6465f4e7b623f1a612ae295c5feb208e9"
+    },
+    {
+      "actual_full9": {
+        "st_ctime_ns": "1790376162774226637",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "5943314",
+        "st_mode": "33188",
+        "st_mtime_ns": "1790273307000000000",
+        "st_nlink": "1",
+        "st_size": "7040",
+        "st_uid": "1000"
+      },
+      "bytes": 7040,
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/lib/lean/libInit_shared.so",
+      "sha256": "57b86819d11d621bd0ba8f4078b0ec7d5e1a48d8a915729a8ac0496177d78be4"
+    },
+    {
+      "actual_full9": {
+        "st_ctime_ns": "1790376162717749080",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "5943296",
+        "st_mode": "33188",
+        "st_mtime_ns": "1790273307000000000",
+        "st_nlink": "1",
+        "st_size": "7040",
+        "st_uid": "1000"
+      },
+      "bytes": 7040,
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/lib/lean/libleanshared_1.so",
+      "sha256": "6fbf499b4e2391b8c3ed4e72aa6bbfe44b98358a52b646b3441cbfc6ca23e841"
+    },
+    {
+      "actual_full9": {
+        "st_ctime_ns": "1790376163851478822",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "5943325",
+        "st_mode": "33188",
+        "st_mtime_ns": "1790273307000000000",
+        "st_nlink": "1",
+        "st_size": "7040",
+        "st_uid": "1000"
+      },
+      "bytes": 7040,
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/lib/lean/libleanshared_2.so",
+      "sha256": "e79f607f11b72cb2d3822e5cfe375351c75b5571e2994737a71835e273d724d1"
+    },
+    {
+      "actual_full9": {
+        "st_ctime_ns": "1790376166499989197",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "5943334",
+        "st_mode": "33188",
+        "st_mtime_ns": "1790273308000000000",
+        "st_nlink": "1",
+        "st_size": "255113200",
+        "st_uid": "1000"
+      },
+      "bytes": 255113200,
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/lib/lean/libleanshared.so",
+      "sha256": "62108c3204c29d8532efd7101df65b391a1098da2de1ff9a4d0be3765fe2a67c"
+    }
+  ],
+  "historical_normal_namespaces_NOT_current": [
+    {
+      "FD_closed": true,
+      "code_body_bytes_read": 0,
+      "device": 66306,
+      "full9": {
+        "st_ctime_ns": "1795426131690106078",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70008567",
+        "st_mode": "16893",
+        "st_mtime_ns": "1795426131690106078",
+        "st_nlink": "12",
+        "st_size": "4096",
+        "st_uid": "1000"
+      },
+      "fullname": "ipfs_datasets_py.logic.backends",
+      "initializer_absent": true,
+      "initializer_before_after_equal": true,
+      "initializer_path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/backends/__init__.py",
+      "inode": 70008567,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/backends",
+      "path_FD_after_equal": true,
+      "profile": "reviewed-preservation-normal-namespaces/v2",
+      "status": "stable_metadata_only",
+      "symlink_target_or_ancestor": false
+    },
+    {
+      "FD_closed": true,
+      "code_body_bytes_read": 0,
+      "device": 66306,
+      "full9": {
+        "st_ctime_ns": "1795421815420120983",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70008819",
+        "st_mode": "16893",
+        "st_mtime_ns": "1795421815420120983",
+        "st_nlink": "2",
+        "st_size": "4096",
+        "st_uid": "1000"
+      },
+      "fullname": "ipfs_datasets_py.logic.families",
+      "initializer_absent": true,
+      "initializer_before_after_equal": true,
+      "initializer_path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/families/__init__.py",
+      "inode": 70008819,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/families",
+      "path_FD_after_equal": true,
+      "profile": "reviewed-preservation-normal-namespaces/v2",
+      "status": "stable_metadata_only",
+      "symlink_target_or_ancestor": false
+    },
+    {
+      "FD_closed": true,
+      "code_body_bytes_read": 0,
+      "device": 66306,
+      "full9": {
+        "st_ctime_ns": "1795421815472121628",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70009469",
+        "st_mode": "16893",
+        "st_mtime_ns": "1795421815472121628",
+        "st_nlink": "2",
+        "st_size": "4096",
+        "st_uid": "1000"
+      },
+      "fullname": "ipfs_datasets_py.logic.intent_ir.formalize",
+      "initializer_absent": true,
+      "initializer_before_after_equal": true,
+      "initializer_path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/intent_ir/formalize/__init__.py",
+      "inode": 70009469,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/intent_ir/formalize",
+      "path_FD_after_equal": true,
+      "profile": "reviewed-preservation-normal-namespaces/v2",
+      "status": "stable_metadata_only",
+      "symlink_target_or_ancestor": false
+    }
+  ],
+  "historical_resource_config_capacity_state_NOT_current": {
+    "expected_capacity": {
+      "base_config_sha256": "087675d7e42c0d817dffa712955f553b39c4f1a529c76805d3f19afb0be31808",
+      "base_total_child_process_slots": 16,
+      "capacity_sha256": "979943816b18db1ed5d1cbce8ecbd5f20bbb6ac688b433b259020020a0587c61",
+      "schema": "legal-ir-child-process-capacity/v1",
+      "total_child_process_slots": 32
+    },
+    "expected_config": {
+      "lane_reservations": {
+        "validation": {
+          "cpu_slots": 2,
+          "memory_mb": 0
+        }
+      },
+      "max_gpu_memory_percent": null,
+      "max_memory_percent": null,
+      "max_swap_percent": null,
+      "max_waiting_requests": 256,
+      "proof_backoff_seconds": 2.0,
+      "proof_cpu_stall_percent": 50.0,
+      "proof_io_stall_percent": 10.0,
+      "proof_memory_headroom_mb": 24922,
+      "proof_memory_stall_percent": 10.0,
+      "proof_recovery_enabled": true,
+      "proof_recovery_grants": 1,
+      "proof_recovery_interval_seconds": 0.25,
+      "proof_recovery_samples": 2,
+      "proof_resource_profile": "local-benchmark@1",
+      "proof_safety_enabled": true,
+      "require_known_gpu_for_gpu_work": true,
+      "reserved_gpu_memory_mb": 0,
+      "reserved_memory_mb": 0,
+      "total_child_process_slots": 16,
+      "total_cpu_slots": 16,
+      "total_gpu_memory_mb": null,
+      "total_memory_mb": 99688,
+      "total_unified_memory_mb": null
+    },
+    "expected_policy_sha256": "087675d7e42c0d817dffa712955f553b39c4f1a529c76805d3f19afb0be31808",
+    "state_path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase2-whole-norm-source-use-onebuild-preparation-v01/selected-whole-norm-source-use-Native-output-v01/native-resource-scheduler.json"
+  },
+  "lean_executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+  "literal_import_coverage_proof": {
+    "bytes": 14862,
+    "explicit_readback_bytes": 1266430,
+    "historical_support": 16,
+    "native_direct_module_bases": 13,
+    "path": "/tmp/Root-current-Native-cache-existing-Source-composition-v327-enk0juoj/carried-Source1369-native-core14-and-direct-modules.json",
+    "sha256": "f036d34cee8144022be2f95e78c7bacb74e59d3e07f6aad5e36f46ed439d5180"
+  },
+  "literal_import_coverage_scope": "Existing declared current Core14 and direct executable test and fixture modules plus unchanged historical support. No exhaustive import effect assertion.",
+  "live_bindings_currently_unbound": false,
+  "native_asset_content_review": {
+    "bytes": 4941,
+    "path": "/tmp/Reader-P1-current-published-Source-and-assets-read-preparation-private-v01/actual-eight-assets-onepass-SHA-owned-terminal-small-companion-v01.json",
+    "sha256": "3774c8fbd27d50358d1400282b1170ccf8e0a65df9e8589a6dc41077afeafb91"
+  },
+  "native_case_profile": "P1-native-namespaced-expected-declaration/v1",
+  "normal_namespaces": [
+    {
+      "FD_closed": true,
+      "code_body_bytes_read": 0,
+      "device": 66306,
+      "full9": {
+        "st_ctime_ns": "1795741365136799123",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513266",
+        "st_mode": "16893",
+        "st_mtime_ns": "1795741365136799123",
+        "st_nlink": "5",
+        "st_size": "4096",
+        "st_uid": "1000"
+      },
+      "fullname": "ipfs_datasets_py.logic.backends",
+      "initializer_absent": true,
+      "initializer_path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/backends/__init__.py",
+      "inode": 72513266,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/backends"
+    },
+    {
+      "FD_closed": true,
+      "code_body_bytes_read": 0,
+      "device": 66306,
+      "full9": {
+        "st_ctime_ns": "1795741365144236630",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513344",
+        "st_mode": "16893",
+        "st_mtime_ns": "1795741365144236630",
+        "st_nlink": "2",
+        "st_size": "4096",
+        "st_uid": "1000"
+      },
+      "fullname": "ipfs_datasets_py.logic.families",
+      "initializer_absent": true,
+      "initializer_path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/families/__init__.py",
+      "inode": 72513344,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/families"
+    },
+    {
+      "FD_closed": true,
+      "code_body_bytes_read": 0,
+      "device": 66306,
+      "full9": {
+        "st_ctime_ns": "1795741365154037466",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513464",
+        "st_mode": "16893",
+        "st_mtime_ns": "1795741365154037466",
+        "st_nlink": "2",
+        "st_size": "4096",
+        "st_uid": "1000"
+      },
+      "fullname": "ipfs_datasets_py.logic.intent_ir.formalize",
+      "initializer_absent": true,
+      "initializer_path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/intent_ir/formalize/__init__.py",
+      "inode": 72513464,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/intent_ir/formalize"
+    }
+  ],
+  "owning_test_raw": {
+    "bytes": 130553,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/retained-Source-test_kernel_backends.py.DATA",
+    "sha256": "8bca876c855d44df4d48cb909fc6a0e9a007480d61037831536e84a8cc68adf9"
+  },
+  "owning_test_record": {
+    "bytes": 130553,
+    "full9": {
+      "st_ctime_ns": "1795755055677970484",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72514356",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795755055677970484",
+      "st_nlink": "1",
+      "st_size": "130553",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/integration/logic/backends/test_kernel_backends.py",
+    "sha256": "8bca876c855d44df4d48cb909fc6a0e9a007480d61037831536e84a8cc68adf9"
+  },
+  "resource": {
+    "expected_capacity": {
+      "base_config_sha256": "087675d7e42c0d817dffa712955f553b39c4f1a529c76805d3f19afb0be31808",
+      "base_total_child_process_slots": 16,
+      "capacity_sha256": "979943816b18db1ed5d1cbce8ecbd5f20bbb6ac688b433b259020020a0587c61",
+      "schema": "legal-ir-child-process-capacity/v1",
+      "total_child_process_slots": 32
+    },
+    "expected_config": {
+      "lane_reservations": {
+        "validation": {
+          "cpu_slots": 2,
+          "memory_mb": 0
+        }
+      },
+      "max_gpu_memory_percent": null,
+      "max_memory_percent": null,
+      "max_swap_percent": null,
+      "max_waiting_requests": 256,
+      "proof_backoff_seconds": 2.0,
+      "proof_cpu_stall_percent": 50.0,
+      "proof_io_stall_percent": 10.0,
+      "proof_memory_headroom_mb": 24922,
+      "proof_memory_stall_percent": 10.0,
+      "proof_recovery_enabled": true,
+      "proof_recovery_grants": 1,
+      "proof_recovery_interval_seconds": 0.25,
+      "proof_recovery_samples": 2,
+      "proof_resource_profile": "local-benchmark@1",
+      "proof_safety_enabled": true,
+      "require_known_gpu_for_gpu_work": true,
+      "reserved_gpu_memory_mb": 0,
+      "reserved_memory_mb": 0,
+      "total_child_process_slots": 16,
+      "total_cpu_slots": 16,
+      "total_gpu_memory_mb": null,
+      "total_memory_mb": 99688,
+      "total_unified_memory_mb": null
+    },
+    "expected_policy_sha256": "087675d7e42c0d817dffa712955f553b39c4f1a529c76805d3f19afb0be31808",
+    "state_path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase2-whole-norm-source-use-onebuild-preparation-v01/selected-whole-norm-source-use-Native-output-v01/native-resource-scheduler.json"
+  },
+  "schema": "existing-direct-Native3-current-bindings/v1"
+}

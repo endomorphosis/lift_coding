@@ -1,0 +1,41 @@
+{
+  "all_prior_reads_failures_retained": true,
+  "compiler_settings": {
+    "autoencoder": null,
+    "timeout": 0,
+    "use_autoencoder_guidance": false
+  },
+  "direct_model_or_SQL_initialization_found": false,
+  "existing_disk_cache_environment": "IPFS_DATASETS_LEGAL_IR_METRIC_DISK_CACHE",
+  "existing_false_values": [
+    "0",
+    "false",
+    "no",
+    "off",
+    "none",
+    "disabled"
+  ],
+  "invocation_environment_selection": null,
+  "new_runner_authored": false,
+  "no_guard_widening": true,
+  "normal_or_Source_or_SDK_run": false,
+  "old_fixture_note": "Original test_cross_path... builds expected compiler block before monkeypatching disk hooks; do not assume all19 avoid real cache I/O without existing invocation policy.",
+  "ordinary19_owned_by": "existing Root/Reader",
+  "runner_bytes": 998965,
+  "runner_path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/uscode_modal_daemon_runner.py.published574.DATA",
+  "runner_sha256": "9e1043f39507cd3be06cf1131f9be5f4787b2a71da5f7ccbe5ae76762482fbd1",
+  "status": "STATIC_EXISTING_IMPORT_FIXTURE_FACTS_ONLY",
+  "test_fixtures": [
+    "pytest monkeypatch",
+    "field/value parametrization",
+    "existing _Codec/_sample/SimpleNamespace"
+  ],
+  "tmp_path_fixture": false,
+  "transitive_initialization_verified": false,
+  "unconditional_imports": [
+    "pyarrow.parquet",
+    "huggingface_hub.HfFileSystem",
+    "project reasoning/modal/bridge packages",
+    "modal_autoencoder"
+  ]
+}

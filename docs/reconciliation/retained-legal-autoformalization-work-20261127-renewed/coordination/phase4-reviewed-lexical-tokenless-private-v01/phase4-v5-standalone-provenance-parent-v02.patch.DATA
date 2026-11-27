@@ -1,0 +1,157 @@
+--- existing-current-A-D-parent-v01
++++ existing-current-A-D-standalone-parent-v02
+@@ -8,6 +8,7 @@
+ import json
+ import math
+ import os
++import stat
+ from pathlib import Path
+ import subprocess
+ import sys
+@@ -36,7 +37,8 @@
+ CLASSIFIER_SHA = 'a0b2785bf417bfca462d958827d319ef1da2347645becdd1f6a001cec24ad6aa'
+ OWNER = R / 'scripts/ops/legal_ir/run_owned_validation.py'
+ LEDGER = CONTROL_HOME / 'workspace/test-logs/federal-corpus-audits/owned-daemon-resource-control/disk-reservations.json'
+-GIT_IDENTITY_SHA256 = None
++STANDALONE_GIT_PROVENANCE_SHA256 = None
++STANDALONE_PROJECT_EXPECTATIONS = {'/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate': {'HEAD': '88c0d9f82f66aaddbb01344c9f85236e92a5dc88', 'tree': '416a953630c9ba7ef521fd87bf821f075b052efc', 'branch_ref': 'refs/heads/reconcile/accelerator-autonomy-eight-files-20261123', 'refs_sha256': 'd8e27a3051da7e2745809670b2c113f5b0a7c3689fa2dfba9b8dade8b493c6da'}, '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets': {'HEAD': 'a5c3f972d0245f760e239ef9a7e92d899cea061c', 'tree': 'a1b4f52a47b3b08633e25d5040e558e11a189089', 'branch_ref': 'refs/heads/work/phase6-capacity-composition-20261123', 'refs_sha256': '54f2ab54566078a5c557e410626e073f7547e1963c3d02fac76f75a777a68eb3'}}
+ 
+ 
+ def load_private_helper():
+@@ -256,6 +258,99 @@
+         and custody['retained_storage_bytes'] == request['storage_bytes'] > 0)
+ 
+ 
++def read_standalone_git_provenance(io):
++    """Bind the two exact standalone snapshots to the existing Source READ receipt."""
++    path = P / 'standalone-git-provenance.json'
++    raw = io.read(path)
++    if len(raw) > 65536 or hashlib.sha256(raw).hexdigest() != STANDALONE_GIT_PROVENANCE_SHA256:
++        raise ValueError('selected standalone Git provenance changed')
++    record = json.loads(raw)
++    if (record.get('schema') != 'actual-clean-frozen-Git-index-READ-provenance/v1'
++            or record.get('Root_selected') is not True
++            or record.get('Source_READ_closed') is not True
++            or record.get('Source_WRITE_claimed') is not False):
++        raise ValueError('selected closed standalone Git READ provenance required')
++    roots = {str(R): 'D_index', str(A): 'A_index'}
++    if record['before'] != record['after'] or set(record['before']) != set(roots):
++        raise ValueError('paired standalone Git snapshots did not close unchanged')
++    if set(STANDALONE_PROJECT_EXPECTATIONS) != set(roots):
++        raise ValueError('exact standalone project expectations required')
++    exclude_pins = record['exact_exclude_pins']
++    without_duplicates = {row['path']: row for row in exclude_pins}
++    if len(exclude_pins) != 2 or set(without_duplicates) != {
++            str(Path(root) / '.git/info/exclude') for root in roots}:
++        raise ValueError('both exact local exclude pins required')
++    for root, index_key in roots.items():
++        snapshot = record['before'][root]
++        expected = STANDALONE_PROJECT_EXPECTATIONS[root]
++        if (snapshot['HEAD'] != expected['HEAD'] or snapshot['tree'] != expected['tree']
++                or snapshot.get('clean_worktree_and_index') is not True
++                or snapshot.get('status_sha256') != hashlib.sha256(b'').hexdigest()
++                or snapshot.get('cached_diff_returncode') != 0 or snapshot.get('working_diff_returncode') != 0
++                or record[index_key]['path'] != str(Path(root) / '.git/index')):
++            raise ValueError('selected standalone Git snapshot does not match the prepared project')
++    return record
++
++
++def verify_standalone_git(io, record, deadline):
++    """Recheck selected roots and index/exclude bytes under the existing Source contexts."""
++    def full9(value):
++        return {key: str(getattr(value, key)) for key in (
++            'st_dev', 'st_ino', 'st_mode', 'st_uid', 'st_gid', 'st_nlink', 'st_size', 'st_mtime_ns', 'st_ctime_ns')}
++
++    def git(root, *args):
++        remaining = deadline - time.monotonic()
++        if remaining <= 0:
++            raise ValueError('initial total420 expired during standalone Git guards')
++        env = dict(os.environ, GIT_OPTIONAL_LOCKS='0', GIT_NO_LAZY_FETCH='1', GIT_TERMINAL_PROMPT='0')
++        command = ['/usr/bin/git', '-c', 'core.preloadIndex=false', '-c', 'core.fscache=false',
++                   '-c', 'index.threads=1', '-c', 'core.packedGitWindowSize=1m',
++                   '-c', 'core.packedGitLimit=16m', '-C', root, *args]
++        result = subprocess.run(command, env=env, capture_output=True, check=True,
++                                timeout=min(remaining, 10))
++        if len(result.stdout) + len(result.stderr) > 262144:
++            raise ValueError('standalone Git guard output exceeds bound')
++        return result.stdout
++
++    def check_pin(pin):
++        path = Path(pin['path'])
++        begin = path.lstat()
++        if (not stat.S_ISREG(begin.st_mode) or begin.st_nlink != 1
++                or full9(begin) != pin['full9'] or begin.st_size != pin['bytes']):
++            raise ValueError(f'standalone Git metadata changed: {path}')
++        raw = io.read(path)
++        if (time.monotonic() >= deadline or len(raw) != pin['bytes']
++                or hashlib.sha256(raw).hexdigest() != pin['sha256']
++                or full9(path.lstat()) != pin['full9']):
++            raise ValueError(f'standalone Git pin changed or guard expired: {path}')
++
++    excludes = {row['path']: row for row in record['exact_exclude_pins']}
++    for root, index_key in ((str(R), 'D_index'), (str(A), 'A_index')):
++        expected = STANDALONE_PROJECT_EXPECTATIONS[root]
++        git_dir = Path(root) / '.git'
++        branch = git(root, 'symbolic-ref', 'HEAD').decode().strip()
++        if (not stat.S_ISDIR(git_dir.lstat().st_mode) or os.path.lexists(git_dir / 'commondir')
++                or git(root, 'rev-parse', '--absolute-git-dir').decode().strip() != str(git_dir)
++                or git(root, 'rev-parse', '--path-format=absolute', '--git-common-dir').decode().strip()
++                    != str(git_dir)
++                or branch != expected['branch_ref']
++                or git(root, 'rev-parse', branch).decode().strip() != expected['HEAD']
++                or git(root, 'rev-parse', 'HEAD').decode().strip() != expected['HEAD']
++                or git(root, 'rev-parse', 'HEAD^{tree}').decode().strip() != expected['tree']
++                or hashlib.sha256(git(root, 'for-each-ref', '--format=%(refname) %(objectname)')).hexdigest()
++                    != expected['refs_sha256']
++                or git(root, 'status', '--porcelain=v1', '-z', '--untracked-files=normal') != b''):
++            raise ValueError(f'standalone Git root, branch, refs, tree or cleanliness changed: {root}')
++        git(root, 'diff', '--cached', '--quiet', 'HEAD', '--')
++        git(root, 'diff', '--quiet', '--')
++        index = record[index_key]
++        exclude = excludes[str(git_dir / 'info/exclude')]
++        check_pin(index)
++        check_pin(exclude)
++    if time.monotonic() >= deadline:
++        raise ValueError('initial total420 expired after standalone Git guards')
++
++
+ def main():
+     if not ROOT_ORIGINAL_EXECUTION_SELECTED:
+         raise ValueError('INERT: Root must separately select a fresh generated Original packet')
+@@ -266,8 +361,9 @@
+     if not PREPARATION_COMPLETE:
+         raise ValueError('INERT: reviewed scheduling profile needs a distinct fresh P3 request')
+     if not (type(REQUEST_SHA) is str and len(REQUEST_SHA) == 64
+-            and type(GIT_IDENTITY_SHA256) is dict and len(GIT_IDENTITY_SHA256) == 8):
+-        raise ValueError('INERT: fresh request and both current Git identity maps are required')
++            and type(STANDALONE_GIT_PROVENANCE_SHA256) is str
++            and len(STANDALONE_GIT_PROVENANCE_SHA256) == 64):
++        raise ValueError('INERT: fresh request and both standalone Git snapshots are required')
+     helper = load_private_helper()
+     # The cached original42 code has its honest private origin. Both repository
+     # roots are supplied explicitly; no canonical __file__ is impersonated.
+@@ -328,8 +424,9 @@
+         classifier = helper.load_original(CLASSIFIER, CLASSIFIER_SHA,
+                                            '_source_held_original_a0b')
+         helper.authenticate_sources(io, request)
+-        helper.need(all(hashlib.sha256(io.read(Path(path))).hexdigest() == wanted
+-            for path, wanted in GIT_IDENTITY_SHA256.items()), 'current worktree Git identity/ref changed before launch')
++        git_provenance = read_standalone_git_provenance(io)
++        verify_standalone_git(io, git_provenance, overall_deadline)
++        parent['standalone_Git_verified_before_launch'] = True
+         helper.need(REQUEST.read_bytes() == raw, 'request changed before original Popen')
+         # Bootstrap real canonical packages within the ORIGINAL Source/preflight
+         # window. The unchanged CLI requires these package origins before its
+@@ -433,8 +530,10 @@
+             helper.need(time.monotonic() < overall_deadline, 'initial total420 expired during source guards')
+             if hashlib.sha256(io.read(Path(path))).hexdigest() != wanted: drift.append(path)
+         helper.need(REQUEST.read_bytes() == raw, 'request changed after original wait')
+-        drift += [path for path, wanted in GIT_IDENTITY_SHA256.items()
+-                  if hashlib.sha256(io.read(Path(path))).hexdigest() != wanted]
++        helper.need(read_standalone_git_provenance(io) == git_provenance,
++            'standalone Git provenance changed after original wait')
++        verify_standalone_git(io, git_provenance, overall_deadline)
++        parent['standalone_Git_verified_after_wait'] = True
+         parent['source_drift'] = drift
+         productive_closed = (custody.get('actual_a0b_terminal_cleanup_verified') is True
+             and custody.get('all_observed_identities_gone') is True

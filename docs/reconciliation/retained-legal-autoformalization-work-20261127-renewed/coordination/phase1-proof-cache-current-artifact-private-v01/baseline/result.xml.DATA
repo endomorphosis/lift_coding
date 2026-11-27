@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="1" failures="0" skipped="0" tests="1" time="0.341" timestamp="2026-11-24T20:35:20.362096+00:00" hostname="spark-b271"><testcase classname="" name="tests.unit.logic.legal_ir.test_proof_cache" time="0.000"><error message="collection failure">ImportError while importing test module '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase1-proof-cache-current-artifact-private-v01/dataset/tests/unit/logic/legal_ir/test_proof_cache.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+tests/unit/logic/legal_ir/test_proof_cache.py:13: in &lt;module&gt;
+    from ipfs_datasets_py.logic.formalization.compiler import FormalizationArtifact
+ipfs_datasets_py/logic/formalization/compiler.py:22: in &lt;module&gt;
+    from ipfs_datasets_py.logic.ir_core.diagnostics import (
+ipfs_datasets_py/logic/ir_core/diagnostics.py:12: in &lt;module&gt;
+    from .evidence import Evidence, EvidenceValidationError, validate_evidence
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.ir_core.evidence'</error></testcase></testsuite></testsuites>

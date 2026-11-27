@@ -1,0 +1,131 @@
+{
+  "A_D_all_refs": {
+    "accelerate": {
+      "exact_source_only_commit_object_raw_bytes": 198798,
+      "external_parents_all_ancestor_of_published_main": true,
+      "positive_range_pack_candidates": {
+        "complete": true,
+        "object_type_counts": {
+          "blob": 1148,
+          "commit": 457,
+          "tree": 1677
+        },
+        "raw_total_bytes": 2314009655,
+        "scope": "Deduplicated sufficient positive-range pack candidates, NOT exact source-content/object novelty versus all published history.",
+        "uncompressed_object_bytes_by_type": {
+          "blob": 2297007591,
+          "commit": 198798,
+          "tree": 16803266
+        },
+        "unique_objects": 3282
+      },
+      "published_main_prerequisite": "de4d5a62b6fac2df61769a6461c2ada97f788208",
+      "selected_tips": 81,
+      "source_only_commit_objects": 457
+    },
+    "datasets": {
+      "exact_source_only_commit_object_raw_bytes": 121149,
+      "external_parents_all_ancestor_of_published_main": true,
+      "positive_range_pack_candidates": {
+        "actual_terminal_returncode": -15,
+        "complete": false,
+        "owned_metadata_PID": 1253676,
+        "parsed_identity_lines_lower_bound": 2533,
+        "precomputed_ID_bound": 2532,
+        "reason": "Stopped and reaped only this owned read-only Git metadata process at its cumulative-output bound; no Source/SDK process touched.",
+        "wait_returned": true
+      },
+      "published_main_prerequisite": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+      "selected_tips": 206,
+      "source_only_commit_objects": 264
+    }
+  },
+  "Kit_Swiss_commit_only_archival_feasibility": {
+    "coverage_limit": "No Kit/Swiss archival claim in selected eight-foreign-bundle advertised heads; recorded producer-object lookups are in full report. Opaque unrelated archives not globally excluded. No bundle created.",
+    "four_commit_raw_bytes": 1242,
+    "kit": {
+      "external_parent": "f6a574375febbcf9a46fcd24bbc7bc5cfb551de5",
+      "new_tree_blob_objects": 0,
+      "objects": [
+        {
+          "bytes": 319,
+          "oid": "e9e85ba2198164bd28e99d6d1150070fa5692695",
+          "type": "commit"
+        },
+        {
+          "bytes": 302,
+          "oid": "fc537feb8c8c51a8d561519a71fbc7600b98cbb6",
+          "type": "commit"
+        }
+      ],
+      "source_ref": "refs/remotes/nested-kit/sync-preserved-20261109-43d891462378",
+      "source_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/kit",
+      "sufficient_prerequisite_main": "b15442e490dc39d046a911ea663c73c99ed3c755",
+      "tip": "e9e85ba2198164bd28e99d6d1150070fa5692695"
+    },
+    "proof": "All four actual object sizes/parent identities checked; each complete root tree equals a commit tree independently checked ancestral to published main. No leaf code overlay required.",
+    "swiss": {
+      "external_parent": "df11f08fae17d35153e420fdcdc5b38d9f6b9a7f",
+      "new_tree_blob_objects": 0,
+      "objects": [
+        {
+          "bytes": 319,
+          "oid": "7e7c69c939f79825821b647c44044a3c8029f053",
+          "type": "commit"
+        },
+        {
+          "bytes": 302,
+          "oid": "4a9c3224275e7d9537de5c35d0a2658a30648d88",
+          "type": "commit"
+        }
+      ],
+      "source_ref": "refs/remotes/nested-source/sync-preserved-20261109-afb698779b41",
+      "source_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/history-completion-audit/swiss-objects.git",
+      "sufficient_prerequisite_main": "453a30b01e62b6acdd1c54070821dbacfbf7908e",
+      "tip": "7e7c69c939f79825821b647c44044a3c8029f053"
+    }
+  },
+  "accounting": {
+    "Git_internal_object_reads": "not metered",
+    "all_prior_costs_retained": true,
+    "cap": 4194304,
+    "cumulative_explicit_private_control_and_Git_stdout_stderr_reads": 3861639,
+    "output_write_sizes": "separate artifact sizes; not presented as zero IO",
+    "remaining": 332665
+  },
+  "formerly_missing_PUB_objects": {
+    "11596bc53c2118319121626109b743c4eaa92c88": "Available through read-only alternate from /tmp/codex-origin-main-reconciliation-20261118-gytue816/ipfs_accelerate_py",
+    "a4ce4b16135dbbd34cd40f3d5ae204fdb7bb06f9": "Available through read-only alternate from /tmp/legal-ir-d965-tests20-package22-preserve-20261116-v01/A"
+  },
+  "full_metadata_report": {
+    "bytes": 569097,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/history-identity-archive-feasibility-final-v04.json",
+    "sha256": "123e2e5da4d6b906b86551be8461a8b07302ebcc4bad282fe376afcd5f03a489"
+  },
+  "head_only_resolution_report": {
+    "bytes": 98936,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/branch-gap-resolution-final-v03.json",
+    "sha256": "ee133ec7d34f776a3fdf0d9da9c37e4bcf0ce8c8e8637515be7892e3add2e314"
+  },
+  "initial39_corrections": {
+    "dependency_refs_pinned_or_proved_ancestral": 9,
+    "local_origin_alias_refs_proved_ancestral": 12,
+    "no_origin_bounded_arithmetic_fixture_refs": 2,
+    "remaining_Mcp_lookup": "Published target33c0c56e9423e11945837657e3a82fe865c60f91 absent in source Mcp store; no fetch or absent-source equivalence claimed."
+  },
+  "no_Source_bodies_tests_network_fetch_Git_mutation_or_bundle_creation": true,
+  "remaining_precise_gaps": [
+    "Complete D sufficient-pack object enumeration/type-size totals exceeded this metadata output envelope.",
+    "A positive-range candidate raw objects total2.314GB; exact published-reachability set difference/large-object metadata screening remains before bounded archive creation.",
+    "Actual A/D bundle archival and any Root commit/push are unselected and unexecuted here.",
+    "Mcp ancestor lookup needs the published dependency commit object in an allowed existing store or a later selected fetch.",
+    "UNKNOWN8175 provenance remains unmapped; no invented family or adoption."
+  ],
+  "schema": "same-publisher-history-identity-feasibility-compact/v4",
+  "unknown_family_row": {
+    "oid": "8175d84ae2f751f8e59ddfdd709a2fd9ef8f2a7f",
+    "origin": "none",
+    "presence_hint": "commit exists in accelerate store; family/provenance not inferred from that alone",
+    "source": "/tmp/lift-sync-candidate-pruning-merge-preview-20261111-v01/git"
+  }
+}

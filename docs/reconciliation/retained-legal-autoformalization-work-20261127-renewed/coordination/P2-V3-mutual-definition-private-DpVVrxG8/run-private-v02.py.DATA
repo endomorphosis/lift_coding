@@ -1,0 +1,66 @@
+from pathlib import Path
+import hashlib
+import json
+import os
+import subprocess
+import sys
+import time
+import xml.etree.ElementTree as ET
+
+w = Path(__file__).resolve().parent
+epoch = json.loads((w / "current-input-epoch.json").read_bytes())
+phase, = sys.argv[1:]
+assert phase in {"red-v02", "green-v02", "retention-v02", "retention-v2-final"}
+project = w / "project"
+selected = json.loads((w / "selectors-v02.json").read_bytes())[phase]
+assert selected and len(selected) <= 50
+runner = w / "existing-runner.py.DATA"
+assert hashlib.sha256(runner.read_bytes()).hexdigest() == epoch["runner_sha256"]
+
+def verify():
+    result = {}
+    for rel, pin in epoch["roles"].items():
+        raw = (project / rel).read_bytes()
+        if rel == epoch["test"]:
+            original = (w / "test.before.DATA").read_bytes()
+            assert raw == original + (w / "tests.append.v02.py.fragment").read_bytes()
+        elif rel in (epoch["owner"], "ipfs_datasets_py/logic/autoformal/legal_norm_content_adjudication_v1.py") and not phase.startswith("red"):
+            assert raw == (w / (Path(rel).name + ".after.DATA")).read_bytes()
+        else:
+            assert (len(raw), hashlib.sha256(raw).hexdigest()) == (pin["bytes"], pin["sha256"]), rel
+        result[rel] = hashlib.sha256(raw).hexdigest()
+    for rel, pin in epoch["private_config"].items():
+        raw = (project / rel).read_bytes()
+        assert (len(raw), hashlib.sha256(raw).hexdigest()) == (pin["bytes"], pin["sha256"])
+    return result
+
+before = verify()
+out = w / phase
+out.mkdir(mode=0o700)
+argv = ["/home/barberb/lift_coding/.venv/bin/python", "-I", "-B", str(runner),
+        str(out), str(project), *epoch["protected_roots"], *selected]
+start = time.monotonic()
+with (out / "stdout.DATA").open("xb") as stdout, (out / "stderr.DATA").open("xb") as stderr:
+    execution = subprocess.run(argv, env={**os.environ,"PYTEST_DISABLE_PLUGIN_AUTOLOAD":"1",
+        "GITHUB_TOKEN":"fictional-offline-fixture", "IPFS_DATASETS_RUN_NATIVE_LEAN":"0",
+        "OPENBLAS_NUM_THREADS":"1", "OMP_NUM_THREADS":"1", "MKL_NUM_THREADS":"1"},
+        stdout=stdout, stderr=stderr, timeout=60)
+assert verify() == before
+record = {"phase":phase,"returncode":execution.returncode,"argv":argv,
+          "seconds":time.monotonic() - start,"verified_roles":len(before),
+          "source_sha256":{rel:before[rel] for rel in (epoch["owner"],epoch["test"],"ipfs_datasets_py/logic/autoformal/legal_norm_content_adjudication_v1.py")}}
+xml = out / "result.xml"
+if xml.is_file():
+    raw = xml.read_bytes()
+    nodes = ET.fromstring(raw).findall(".//testcase")
+    record["junit"] = {"path":str(xml),"bytes":len(raw),"sha256":hashlib.sha256(raw).hexdigest()}
+    record["cases"] = [n.attrib.get("name") for n in nodes]
+    record["counts"] = {tag:sum(n.find(tag) is not None for n in nodes) for tag in ("failure","error","skipped")}
+    record["counts"]["tests"] = len(nodes)
+with (out / "execution.json").open("x") as stream:
+    json.dump(record,stream,indent=2,sort_keys=True)
+    stream.write("\n")
+print((out / "stdout.DATA").read_text()[-6500:])
+print((out / "stderr.DATA").read_text()[-1000:])
+print(json.dumps(record))
+raise SystemExit(execution.returncode)

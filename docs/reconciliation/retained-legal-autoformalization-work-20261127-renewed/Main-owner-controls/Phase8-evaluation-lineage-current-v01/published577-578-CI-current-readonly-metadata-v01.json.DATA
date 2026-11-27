@@ -1,0 +1,382 @@
+{
+  "Source_or_Git_mutation_or_SDK_or_Native_or_model_effect": false,
+  "all_prior_costs_retained": true,
+  "connector_combined_statuses": {
+    "0cf525e0d3070135547f145e87726dade3d70a1f": [],
+    "81ee859cd2bbd4872b0a2e3bc75e2994c14140fe": []
+  },
+  "connector_workflow_query_not_used": "Only supports pull_request event; exact published-main query used gh read-only API.",
+  "full_goal_complete": false,
+  "logs_or_artifacts_downloaded": false,
+  "records": [
+    {
+      "commit": "0cf525e0d3070135547f145e87726dade3d70a1f",
+      "endpoint": "repos/endomorphosis/ipfs_datasets_py/commits/0cf525e0d3070135547f145e87726dade3d70a1f/check-runs?per_page=10",
+      "items": [
+        {
+          "completed_at": "2026-11-27T01:50:25Z",
+          "conclusion": "cancelled",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/45924748844/job/140263691199",
+          "head_sha": "0cf525e0d3070135547f145e87726dade3d70a1f",
+          "id": 140263691199,
+          "name": "Publish Python \ud83d\udc0d distribution \ud83d\udce6 to PyPI",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/140263691199/annotations",
+            "summary": null,
+            "title": null
+          },
+          "started_at": "2026-11-27T01:50:25Z",
+          "status": "completed"
+        },
+        {
+          "completed_at": "2026-11-27T01:49:45Z",
+          "conclusion": "failure",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/45924748709/job/140263473008",
+          "head_sha": "0cf525e0d3070135547f145e87726dade3d70a1f",
+          "id": 140263473008,
+          "name": "legal-autoformal-native-lean",
+          "output": {
+            "annotations_count": 1,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/140263473008/annotations",
+            "summary": null,
+            "title": null
+          },
+          "started_at": "2026-11-27T01:49:41Z",
+          "status": "completed"
+        },
+        {
+          "completed_at": "2026-11-27T01:49:30Z",
+          "conclusion": "skipped",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/45924766541/job/140263423271",
+          "head_sha": "0cf525e0d3070135547f145e87726dade3d70a1f",
+          "id": 140263423271,
+          "name": "autofix-with-copilot-agent",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/140263423271/annotations",
+            "summary": null,
+            "title": null
+          },
+          "started_at": "2026-11-27T01:49:31Z",
+          "status": "completed"
+        },
+        {
+          "completed_at": "2026-11-27T01:49:23Z",
+          "conclusion": "skipped",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/45924756041/job/140263389168",
+          "head_sha": "0cf525e0d3070135547f145e87726dade3d70a1f",
+          "id": 140263389168,
+          "name": "autofix-with-copilot-agent",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/140263389168/annotations",
+            "summary": null,
+            "title": null
+          },
+          "started_at": "2026-11-27T01:49:24Z",
+          "status": "completed"
+        },
+        {
+          "completed_at": "2026-11-27T01:49:22Z",
+          "conclusion": "skipped",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/45924754619/job/140263384415",
+          "head_sha": "0cf525e0d3070135547f145e87726dade3d70a1f",
+          "id": 140263384415,
+          "name": "autofix-with-copilot-agent",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/140263384415/annotations",
+            "summary": null,
+            "title": null
+          },
+          "started_at": "2026-11-27T01:49:23Z",
+          "status": "completed"
+        },
+        {
+          "completed_at": "2026-11-27T01:50:25Z",
+          "conclusion": "cancelled",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/45924748844/job/140263365655",
+          "head_sha": "0cf525e0d3070135547f145e87726dade3d70a1f",
+          "id": 140263365655,
+          "name": "Build distribution \ud83d\udce6",
+          "output": {
+            "annotations_count": 1,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/140263365655/annotations",
+            "summary": null,
+            "title": null
+          },
+          "started_at": "2026-11-27T01:49:19Z",
+          "status": "completed"
+        },
+        {
+          "completed_at": "2026-11-27T01:49:41Z",
+          "conclusion": "failure",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/45924748709/job/140263364757",
+          "head_sha": "0cf525e0d3070135547f145e87726dade3d70a1f",
+          "id": 140263364757,
+          "name": "Legal autoformal validation (cpu-7)",
+          "output": {
+            "annotations_count": 1,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/140263364757/annotations",
+            "summary": null,
+            "title": null
+          },
+          "started_at": "2026-11-27T01:49:19Z",
+          "status": "completed"
+        },
+        {
+          "completed_at": "2026-11-27T01:49:23Z",
+          "conclusion": "failure",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/45924748709/job/140263363733",
+          "head_sha": "0cf525e0d3070135547f145e87726dade3d70a1f",
+          "id": 140263363733,
+          "name": "Legal autoformal validation (contracts)",
+          "output": {
+            "annotations_count": 1,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/140263363733/annotations",
+            "summary": null,
+            "title": null
+          },
+          "started_at": "2026-11-27T01:49:19Z",
+          "status": "completed"
+        },
+        {
+          "completed_at": "2026-11-27T01:49:35Z",
+          "conclusion": "failure",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/45924748709/job/140263363628",
+          "head_sha": "0cf525e0d3070135547f145e87726dade3d70a1f",
+          "id": 140263363628,
+          "name": "Legal autoformal validation (cpu-3)",
+          "output": {
+            "annotations_count": 1,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/140263363628/annotations",
+            "summary": null,
+            "title": null
+          },
+          "started_at": "2026-11-27T01:49:19Z",
+          "status": "completed"
+        },
+        {
+          "completed_at": "2026-11-27T01:49:28Z",
+          "conclusion": "failure",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/45924748709/job/140263363627",
+          "head_sha": "0cf525e0d3070135547f145e87726dade3d70a1f",
+          "id": 140263363627,
+          "name": "Legal autoformal validation (admission)",
+          "output": {
+            "annotations_count": 1,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/140263363627/annotations",
+            "summary": null,
+            "title": null
+          },
+          "started_at": "2026-11-27T01:49:19Z",
+          "status": "completed"
+        }
+      ],
+      "kind": "checks",
+      "raw_response_bytes": 31269,
+      "raw_response_sha256": "f70f0a9c4b7593b2bb71b3e9eae511d24d685c971212a67895d3edf5252b3a83",
+      "returncode": 0,
+      "returned_count": 10,
+      "total_count": 28,
+      "truncated": true
+    },
+    {
+      "cause": "metadata unavailable or response bound exceeded",
+      "commit": "0cf525e0d3070135547f145e87726dade3d70a1f",
+      "endpoint": "repos/endomorphosis/ipfs_datasets_py/actions/runs?head_sha=0cf525e0d3070135547f145e87726dade3d70a1f&per_page=10",
+      "error": "",
+      "kind": "actions",
+      "raw_response_bytes": 133341,
+      "raw_response_sha256": "46d8a5fcb59199c8082f62f6457adcd264a6e613d53c779cca0c337a139e4da2",
+      "returncode": 0
+    },
+    {
+      "commit": "81ee859cd2bbd4872b0a2e3bc75e2994c14140fe",
+      "endpoint": "repos/endomorphosis/ipfs_datasets_py/commits/81ee859cd2bbd4872b0a2e3bc75e2994c14140fe/check-runs?per_page=10",
+      "items": [
+        {
+          "completed_at": "2026-11-27T02:30:51Z",
+          "conclusion": "skipped",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/45928761026/job/140276261765",
+          "head_sha": "81ee859cd2bbd4872b0a2e3bc75e2994c14140fe",
+          "id": 140276261765,
+          "name": "Generate Health Dashboard",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/140276261765/annotations",
+            "summary": null,
+            "title": null
+          },
+          "started_at": "2026-11-27T02:30:51Z",
+          "status": "completed"
+        },
+        {
+          "completed_at": "2026-11-27T02:30:51Z",
+          "conclusion": "failure",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/45928761026/job/140276240270",
+          "head_sha": "81ee859cd2bbd4872b0a2e3bc75e2994c14140fe",
+          "id": 140276240270,
+          "name": "Collect Workflow Metrics",
+          "output": {
+            "annotations_count": 1,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/140276240270/annotations",
+            "summary": null,
+            "title": null
+          },
+          "started_at": "2026-11-27T02:30:47Z",
+          "status": "completed"
+        },
+        {
+          "completed_at": "2026-11-27T01:50:50Z",
+          "conclusion": "failure",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/45924854524/job/140263793348",
+          "head_sha": "81ee859cd2bbd4872b0a2e3bc75e2994c14140fe",
+          "id": 140263793348,
+          "name": "legal-autoformal-native-lean",
+          "output": {
+            "annotations_count": 1,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/140263793348/annotations",
+            "summary": null,
+            "title": null
+          },
+          "started_at": "2026-11-27T01:50:46Z",
+          "status": "completed"
+        },
+        {
+          "completed_at": "2026-11-27T01:50:31Z",
+          "conclusion": "skipped",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/45924864112/job/140263766222",
+          "head_sha": "81ee859cd2bbd4872b0a2e3bc75e2994c14140fe",
+          "id": 140263766222,
+          "name": "autofix-with-copilot-agent",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/140263766222/annotations",
+            "summary": null,
+            "title": null
+          },
+          "started_at": "2026-11-27T01:50:41Z",
+          "status": "completed"
+        },
+        {
+          "completed_at": "2026-11-27T01:50:32Z",
+          "conclusion": "skipped",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/45924864898/job/140263723081",
+          "head_sha": "81ee859cd2bbd4872b0a2e3bc75e2994c14140fe",
+          "id": 140263723081,
+          "name": "autofix-with-copilot-agent",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/140263723081/annotations",
+            "summary": null,
+            "title": null
+          },
+          "started_at": "2026-11-27T01:50:32Z",
+          "status": "completed"
+        },
+        {
+          "completed_at": "2026-11-27T01:50:31Z",
+          "conclusion": "skipped",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/45924863947/job/140263720555",
+          "head_sha": "81ee859cd2bbd4872b0a2e3bc75e2994c14140fe",
+          "id": 140263720555,
+          "name": "autofix-with-copilot-agent",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/140263720555/annotations",
+            "summary": null,
+            "title": null
+          },
+          "started_at": "2026-11-27T01:50:32Z",
+          "status": "completed"
+        },
+        {
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/45924854580/job/140263691887",
+          "head_sha": "81ee859cd2bbd4872b0a2e3bc75e2994c14140fe",
+          "id": 140263691887,
+          "name": "Build distribution \ud83d\udce6",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/140263691887/annotations",
+            "summary": null,
+            "title": null
+          },
+          "started_at": "2026-11-27T01:50:26Z",
+          "status": "queued"
+        },
+        {
+          "completed_at": "2026-11-27T01:50:46Z",
+          "conclusion": "failure",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/45924854524/job/140263690302",
+          "head_sha": "81ee859cd2bbd4872b0a2e3bc75e2994c14140fe",
+          "id": 140263690302,
+          "name": "Legal autoformal validation (cpu-7)",
+          "output": {
+            "annotations_count": 1,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/140263690302/annotations",
+            "summary": null,
+            "title": null
+          },
+          "started_at": "2026-11-27T01:50:25Z",
+          "status": "completed"
+        },
+        {
+          "completed_at": "2026-11-27T01:50:32Z",
+          "conclusion": "failure",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/45924854524/job/140263689263",
+          "head_sha": "81ee859cd2bbd4872b0a2e3bc75e2994c14140fe",
+          "id": 140263689263,
+          "name": "Legal autoformal validation (parent-1)",
+          "output": {
+            "annotations_count": 1,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/140263689263/annotations",
+            "summary": null,
+            "title": null
+          },
+          "started_at": "2026-11-27T01:50:25Z",
+          "status": "completed"
+        },
+        {
+          "completed_at": "2026-11-27T01:50:29Z",
+          "conclusion": "failure",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/45924854524/job/140263689218",
+          "head_sha": "81ee859cd2bbd4872b0a2e3bc75e2994c14140fe",
+          "id": 140263689218,
+          "name": "Legal autoformal validation (native-lean)",
+          "output": {
+            "annotations_count": 1,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/140263689218/annotations",
+            "summary": null,
+            "title": null
+          },
+          "started_at": "2026-11-27T01:50:25Z",
+          "status": "completed"
+        }
+      ],
+      "kind": "checks",
+      "raw_response_bytes": 31209,
+      "raw_response_sha256": "31effda1529e192f345a7dad4eccb8aa9c7a58883fba0e32059534d793499b3a",
+      "returncode": 0,
+      "returned_count": 10,
+      "total_count": 29,
+      "truncated": true
+    },
+    {
+      "cause": "metadata unavailable or response bound exceeded",
+      "commit": "81ee859cd2bbd4872b0a2e3bc75e2994c14140fe",
+      "endpoint": "repos/endomorphosis/ipfs_datasets_py/actions/runs?head_sha=81ee859cd2bbd4872b0a2e3bc75e2994c14140fe&per_page=10",
+      "error": "",
+      "kind": "actions",
+      "raw_response_bytes": 133156,
+      "raw_response_sha256": "48f358eb836a2eb81847f758b3ebfd32911c98f540f5585fc8d48914e96ce8fd",
+      "returncode": 0
+    }
+  ],
+  "repo": "endomorphosis/ipfs_datasets_py",
+  "status": "ONE_READ_ONLY_CURRENT_CI_METADATA_PASS",
+  "workflow_dispatch_or_retry": false
+}

@@ -1,0 +1,8 @@
+{
+  "error": "git fetch exited 128: remote: warning: lazy fetching disabled; some objects may not be available        \nremote: fatal: could not fetch 52d3bb5e6dae53e17e128f010cb60c0409ffb204 from promisor remote        \nerror: git upload-pack: git-pack-objects died with error.\nfatal: git upload-pack: aborting due to possible repository corruption on the remote side.\nremote: aborting due to possible repository corruption on the remote side.\u0000\nfatal: protocol error: bad pack header",
+  "expected_tips": 35,
+  "family": "ipfs_datasets_py",
+  "restored_tips": 0,
+  "stage": "fetch to private aggregate",
+  "status": "FAILED"
+}

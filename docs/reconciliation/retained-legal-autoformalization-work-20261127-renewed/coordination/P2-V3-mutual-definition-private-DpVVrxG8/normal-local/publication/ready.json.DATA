@@ -1,0 +1,32 @@
+{
+  "before": {
+    "accelerate": "64a8649952bed66a457d7b87bf6dced9fadab8d4",
+    "datasets": "5bf57f390a12621a40716595fe261c35d2741e12",
+    "hallucinate": "fe0d51a95aa4662efad395bfeeb996dab567313c",
+    "root": "20a2b7ac3b47a12971ac9cb469e719f474df01ba"
+  },
+  "candidate_with_handoff": {
+    "bytes": 2103,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/candidate-with-handoff.json",
+    "sha256": "5e65343fff185637cec73f3b931ba8d64d528c7816392c1b6e90e283d85b7045"
+  },
+  "heads": {
+    "accelerate": "64a8649952bed66a457d7b87bf6dced9fadab8d4",
+    "datasets": "3bdfec5b148ad6c4ac53281ceb02ecd8377643e0",
+    "hallucinate": "cd31ee793f829af78634d624a2d4ab3b963e993c",
+    "root": "936c6ec275621191453579d82deb82cb2116787d"
+  },
+  "only_dataset_paths": [
+    "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+    "ipfs_datasets_py/logic/autoformal/legal_norm_content_adjudication_v1.py",
+    "ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py"
+  ],
+  "shared_Source42_SDK_qualification": false,
+  "source_qualification": {
+    "bytes": 6069,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/actual-local-Source-V2-15-and-V3-46-qualified-closed.json",
+    "sha256": "a131e976e98bb528fdf38a2849bad184f835774c0458541093c3a28779017d47"
+  },
+  "tested_code_commit": "e9586bf615b5b6525afd2cde163e70703b9909e2"
+}

@@ -1,0 +1,97 @@
+{
+  "Source_test_model_or_CI_invoked": false,
+  "all_gitlinks_unchanged": true,
+  "all_other_git_metadata_unchanged": true,
+  "branch": "refs/heads/work/phase6-capacity-composition-20261123",
+  "diff_check_passed": true,
+  "frozen_for_normal27": true,
+  "head": "0f13cbc9b6c76926015e0b00d976e81f67397e0c",
+  "index": {
+    "bytes": 6991149,
+    "clean": true,
+    "full9": {
+      "st_ctime_ns": "1795518576712103062",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68338235",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795518576711103052",
+      "st_nlink": "1",
+      "st_size": "6991149",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index"
+  },
+  "installation_receipt": {
+    "bytes": 2800,
+    "full9": {
+      "st_ctime_ns": "1795518469478376217",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72089703",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795518469478376217",
+      "st_nlink": "1",
+      "st_size": "2800",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-CLI-public27-two-code-CAS-actual-v123/Root-actual-CLI2-installed-Source-closed-small-v123.json",
+    "sha256": "50b36bc9e6863011d224121d88c352900560c3119f9e2742bc385dc490a25d8c"
+  },
+  "only_two_selected_paths_committed": true,
+  "origin_main_tracking_ref": "bb982846f24cc116d5d86ac93f1533f94cae4389",
+  "other_repo_heads": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "hallucinate": "274d49e4ed2abba1e3c414cd5d0eadff4b7f4f56",
+    "root": "996d25a8d9b59b1ad747588e823e6a8ef56b4d24"
+  },
+  "parent": "bb982846f24cc116d5d86ac93f1533f94cae4389",
+  "pushed": false,
+  "schema": "CLI2-local-candidate-frozen/v123",
+  "selected_roles": [
+    {
+      "blob": "32330c7bcb04fe13223755290e094a6fcea3352b",
+      "bytes": 229123,
+      "full9": {
+        "st_ctime_ns": "1795518439437775479",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70029342",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795518438840002896",
+        "st_nlink": "1",
+        "st_size": "229123",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "parent_blob": "e8b15ce3656077146579871cf981bf555190fe2a",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/scripts/ops/legal_ir/run_owned_validation.py",
+      "repo_relative_path": "scripts/ops/legal_ir/run_owned_validation.py",
+      "role": "owned validation CLI",
+      "sha256": "0b83f1df27b38a77ddfacba35aa92370c253796343910e3e7615c1f4f6188572"
+    },
+    {
+      "blob": "4f5182cc6cc0a1364fba5d9edbcd44f0417ba17f",
+      "bytes": 633336,
+      "full9": {
+        "st_ctime_ns": "1795518440030781232",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042520",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795518438843865062",
+        "st_nlink": "1",
+        "st_size": "633336",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "parent_blob": "b812e24ca6a8067ac9e67586e4622dca6def8837",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_validation_run_resources.py",
+      "repo_relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_validation_run_resources.py",
+      "role": "CLI resource validation tests",
+      "sha256": "cf50e6ec9fd470b699c922ec7511e7c7c4805a5d5bbc5e0cd79471d57fa2fda7"
+    }
+  ],
+  "tree": "fd52d1c69beead40d498ffe7936abd5554e1cbe4",
+  "worktree_clean": true
+}

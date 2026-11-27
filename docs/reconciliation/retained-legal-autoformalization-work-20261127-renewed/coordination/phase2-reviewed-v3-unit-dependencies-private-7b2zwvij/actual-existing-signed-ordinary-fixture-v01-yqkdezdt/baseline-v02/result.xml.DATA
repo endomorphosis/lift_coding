@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="28" failures="0" skipped="0" tests="28" time="9.276" timestamp="2026-11-24T18:56:00.360755+00:00" hostname="spark-b271"><testcase classname="tests.unit.logic.autoformal.test_legal_norm_content_adjudication_v1" name="test_reviewed_v2_alternate_view_of_same_raw_paragraph_requires_distinct_use_witness" time="0.583"><error message="failed on setup with &quot;ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'&quot;">ipfs_datasets_py/logic/autoformal/family_qualification.py:339: in validate_family_artifact
+    _, parsed = _strict_tdfol(formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:62: in _strict_tdfol
+    module = _module("ipfs_datasets_py.logic.TDFOL.tdfol_parser")
+ipfs_datasets_py/logic/autoformal/family_qualification.py:53: in _module
+    from .tree_pin import LogicTreePinError, workspace_root
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:976: in reviewed_case_v2
+    return reviewed_norm_fixture_v2(owner)
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:871: in reviewed_norm_fixture_v2
+    report = relational.prepare_relational_norm_v1(request_raw, expected_request_sha256=sha(request_raw))
+ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py:307: in prepare_relational_norm_v1
+    receipt = routes.prepare_native_fragment(family="deontic_fol", formula=formula,
+ipfs_datasets_py/logic/autoformal/legal_family_routes.py:93: in prepare_native_fragment
+    syntax = qualification.validate_family_artifact(family, formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:352: in validate_family_artifact
+    from .tree_pin import LogicTreePinError
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'</error></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_norm_content_adjudication_v1" name="test_reviewed_v2_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[duplicate_repackage-logical source occurrence]" time="0.087"><error message="failed on setup with &quot;ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'&quot;">ipfs_datasets_py/logic/autoformal/family_qualification.py:339: in validate_family_artifact
+    _, parsed = _strict_tdfol(formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:62: in _strict_tdfol
+    module = _module("ipfs_datasets_py.logic.TDFOL.tdfol_parser")
+ipfs_datasets_py/logic/autoformal/family_qualification.py:53: in _module
+    from .tree_pin import LogicTreePinError, workspace_root
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:976: in reviewed_case_v2
+    return reviewed_norm_fixture_v2(owner)
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:871: in reviewed_norm_fixture_v2
+    report = relational.prepare_relational_norm_v1(request_raw, expected_request_sha256=sha(request_raw))
+ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py:307: in prepare_relational_norm_v1
+    receipt = routes.prepare_native_fragment(family="deontic_fol", formula=formula,
+ipfs_datasets_py/logic/autoformal/legal_family_routes.py:93: in prepare_native_fragment
+    syntax = qualification.validate_family_artifact(family, formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:352: in validate_family_artifact
+    from .tree_pin import LogicTreePinError
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'</error></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_norm_content_adjudication_v1" name="test_reviewed_v2_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[overlapping_repackage-overlapping logical source]" time="0.089"><error message="failed on setup with &quot;ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'&quot;">ipfs_datasets_py/logic/autoformal/family_qualification.py:339: in validate_family_artifact
+    _, parsed = _strict_tdfol(formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:62: in _strict_tdfol
+    module = _module("ipfs_datasets_py.logic.TDFOL.tdfol_parser")
+ipfs_datasets_py/logic/autoformal/family_qualification.py:53: in _module
+    from .tree_pin import LogicTreePinError, workspace_root
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:976: in reviewed_case_v2
+    return reviewed_norm_fixture_v2(owner)
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:871: in reviewed_norm_fixture_v2
+    report = relational.prepare_relational_norm_v1(request_raw, expected_request_sha256=sha(request_raw))
+ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py:307: in prepare_relational_norm_v1
+    receipt = routes.prepare_native_fragment(family="deontic_fol", formula=formula,
+ipfs_datasets_py/logic/autoformal/legal_family_routes.py:93: in prepare_native_fragment
+    syntax = qualification.validate_family_artifact(family, formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:352: in validate_family_artifact
+    from .tree_pin import LogicTreePinError
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'</error></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_norm_content_adjudication_v1" name="test_reviewed_v2_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[document_revision_label-logical source occurrence]" time="0.090"><error message="failed on setup with &quot;ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'&quot;">ipfs_datasets_py/logic/autoformal/family_qualification.py:339: in validate_family_artifact
+    _, parsed = _strict_tdfol(formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:62: in _strict_tdfol
+    module = _module("ipfs_datasets_py.logic.TDFOL.tdfol_parser")
+ipfs_datasets_py/logic/autoformal/family_qualification.py:53: in _module
+    from .tree_pin import LogicTreePinError, workspace_root
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:976: in reviewed_case_v2
+    return reviewed_norm_fixture_v2(owner)
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:871: in reviewed_norm_fixture_v2
+    report = relational.prepare_relational_norm_v1(request_raw, expected_request_sha256=sha(request_raw))
+ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py:307: in prepare_relational_norm_v1
+    receipt = routes.prepare_native_fragment(family="deontic_fol", formula=formula,
+ipfs_datasets_py/logic/autoformal/legal_family_routes.py:93: in prepare_native_fragment
+    syntax = qualification.validate_family_artifact(family, formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:352: in validate_family_artifact
+    from .tree_pin import LogicTreePinError
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'</error></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_norm_content_adjudication_v1" name="test_reviewed_v2_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_unaligned_view-unsupported source-view alignment]" time="0.091"><error message="failed on setup with &quot;ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'&quot;">ipfs_datasets_py/logic/autoformal/family_qualification.py:339: in validate_family_artifact
+    _, parsed = _strict_tdfol(formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:62: in _strict_tdfol
+    module = _module("ipfs_datasets_py.logic.TDFOL.tdfol_parser")
+ipfs_datasets_py/logic/autoformal/family_qualification.py:53: in _module
+    from .tree_pin import LogicTreePinError, workspace_root
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:976: in reviewed_case_v2
+    return reviewed_norm_fixture_v2(owner)
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:871: in reviewed_norm_fixture_v2
+    report = relational.prepare_relational_norm_v1(request_raw, expected_request_sha256=sha(request_raw))
+ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py:307: in prepare_relational_norm_v1
+    receipt = routes.prepare_native_fragment(family="deontic_fol", formula=formula,
+ipfs_datasets_py/logic/autoformal/legal_family_routes.py:93: in prepare_native_fragment
+    syntax = qualification.validate_family_artifact(family, formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:352: in validate_family_artifact
+    from .tree_pin import LogicTreePinError
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'</error></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_norm_content_adjudication_v1" name="test_reviewed_v2_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_view_and_document_revision_label-unsupported source-view alignment]" time="0.086"><error message="failed on setup with &quot;ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'&quot;">ipfs_datasets_py/logic/autoformal/family_qualification.py:339: in validate_family_artifact
+    _, parsed = _strict_tdfol(formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:62: in _strict_tdfol
+    module = _module("ipfs_datasets_py.logic.TDFOL.tdfol_parser")
+ipfs_datasets_py/logic/autoformal/family_qualification.py:53: in _module
+    from .tree_pin import LogicTreePinError, workspace_root
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:976: in reviewed_case_v2
+    return reviewed_norm_fixture_v2(owner)
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:871: in reviewed_norm_fixture_v2
+    report = relational.prepare_relational_norm_v1(request_raw, expected_request_sha256=sha(request_raw))
+ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py:307: in prepare_relational_norm_v1
+    receipt = routes.prepare_native_fragment(family="deontic_fol", formula=formula,
+ipfs_datasets_py/logic/autoformal/legal_family_routes.py:93: in prepare_native_fragment
+    syntax = qualification.validate_family_artifact(family, formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:352: in validate_family_artifact
+    from .tree_pin import LogicTreePinError
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'</error></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_norm_content_adjudication_v1" name="test_reviewed_v2_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[physical_alias-physical occurrence]" time="0.130"><error message="failed on setup with &quot;ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'&quot;">ipfs_datasets_py/logic/autoformal/family_qualification.py:339: in validate_family_artifact
+    _, parsed = _strict_tdfol(formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:62: in _strict_tdfol
+    module = _module("ipfs_datasets_py.logic.TDFOL.tdfol_parser")
+ipfs_datasets_py/logic/autoformal/family_qualification.py:53: in _module
+    from .tree_pin import LogicTreePinError, workspace_root
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:976: in reviewed_case_v2
+    return reviewed_norm_fixture_v2(owner)
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:871: in reviewed_norm_fixture_v2
+    report = relational.prepare_relational_norm_v1(request_raw, expected_request_sha256=sha(request_raw))
+ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py:307: in prepare_relational_norm_v1
+    receipt = routes.prepare_native_fragment(family="deontic_fol", formula=formula,
+ipfs_datasets_py/logic/autoformal/legal_family_routes.py:93: in prepare_native_fragment
+    syntax = qualification.validate_family_artifact(family, formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:352: in validate_family_artifact
+    from .tree_pin import LogicTreePinError
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'</error></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_norm_content_adjudication_v1" name="test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[different_provision]" time="0.086"><error message="failed on setup with &quot;ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'&quot;">ipfs_datasets_py/logic/autoformal/family_qualification.py:339: in validate_family_artifact
+    _, parsed = _strict_tdfol(formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:62: in _strict_tdfol
+    module = _module("ipfs_datasets_py.logic.TDFOL.tdfol_parser")
+ipfs_datasets_py/logic/autoformal/family_qualification.py:53: in _module
+    from .tree_pin import LogicTreePinError, workspace_root
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:976: in reviewed_case_v2
+    return reviewed_norm_fixture_v2(owner)
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:871: in reviewed_norm_fixture_v2
+    report = relational.prepare_relational_norm_v1(request_raw, expected_request_sha256=sha(request_raw))
+ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py:307: in prepare_relational_norm_v1
+    receipt = routes.prepare_native_fragment(family="deontic_fol", formula=formula,
+ipfs_datasets_py/logic/autoformal/legal_family_routes.py:93: in prepare_native_fragment
+    syntax = qualification.validate_family_artifact(family, formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:352: in validate_family_artifact
+    from .tree_pin import LogicTreePinError
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'</error></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_norm_content_adjudication_v1" name="test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[different_release]" time="0.086"><error message="failed on setup with &quot;ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'&quot;">ipfs_datasets_py/logic/autoformal/family_qualification.py:339: in validate_family_artifact
+    _, parsed = _strict_tdfol(formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:62: in _strict_tdfol
+    module = _module("ipfs_datasets_py.logic.TDFOL.tdfol_parser")
+ipfs_datasets_py/logic/autoformal/family_qualification.py:53: in _module
+    from .tree_pin import LogicTreePinError, workspace_root
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:976: in reviewed_case_v2
+    return reviewed_norm_fixture_v2(owner)
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:871: in reviewed_norm_fixture_v2
+    report = relational.prepare_relational_norm_v1(request_raw, expected_request_sha256=sha(request_raw))
+ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py:307: in prepare_relational_norm_v1
+    receipt = routes.prepare_native_fragment(family="deontic_fol", formula=formula,
+ipfs_datasets_py/logic/autoformal/legal_family_routes.py:93: in prepare_native_fragment
+    syntax = qualification.validate_family_artifact(family, formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:352: in validate_family_artifact
+    from .tree_pin import LogicTreePinError
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'</error></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_norm_content_adjudication_v1" name="test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[different_edition]" time="0.086"><error message="failed on setup with &quot;ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'&quot;">ipfs_datasets_py/logic/autoformal/family_qualification.py:339: in validate_family_artifact
+    _, parsed = _strict_tdfol(formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:62: in _strict_tdfol
+    module = _module("ipfs_datasets_py.logic.TDFOL.tdfol_parser")
+ipfs_datasets_py/logic/autoformal/family_qualification.py:53: in _module
+    from .tree_pin import LogicTreePinError, workspace_root
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:976: in reviewed_case_v2
+    return reviewed_norm_fixture_v2(owner)
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:871: in reviewed_norm_fixture_v2
+    report = relational.prepare_relational_norm_v1(request_raw, expected_request_sha256=sha(request_raw))
+ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py:307: in prepare_relational_norm_v1
+    receipt = routes.prepare_native_fragment(family="deontic_fol", formula=formula,
+ipfs_datasets_py/logic/autoformal/legal_family_routes.py:93: in prepare_native_fragment
+    syntax = qualification.validate_family_artifact(family, formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:352: in validate_family_artifact
+    from .tree_pin import LogicTreePinError
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'</error></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_norm_content_adjudication_v1" name="test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs]" time="0.088"><error message="failed on setup with &quot;ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'&quot;">ipfs_datasets_py/logic/autoformal/family_qualification.py:339: in validate_family_artifact
+    _, parsed = _strict_tdfol(formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:62: in _strict_tdfol
+    module = _module("ipfs_datasets_py.logic.TDFOL.tdfol_parser")
+ipfs_datasets_py/logic/autoformal/family_qualification.py:53: in _module
+    from .tree_pin import LogicTreePinError, workspace_root
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:976: in reviewed_case_v2
+    return reviewed_norm_fixture_v2(owner)
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:871: in reviewed_norm_fixture_v2
+    report = relational.prepare_relational_norm_v1(request_raw, expected_request_sha256=sha(request_raw))
+ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py:307: in prepare_relational_norm_v1
+    receipt = routes.prepare_native_fragment(family="deontic_fol", formula=formula,
+ipfs_datasets_py/logic/autoformal/legal_family_routes.py:93: in prepare_native_fragment
+    syntax = qualification.validate_family_artifact(family, formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:352: in validate_family_artifact
+    from .tree_pin import LogicTreePinError
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'</error></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_norm_content_adjudication_v1" name="test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs_different_source_id]" time="0.088"><error message="failed on setup with &quot;ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'&quot;">ipfs_datasets_py/logic/autoformal/family_qualification.py:339: in validate_family_artifact
+    _, parsed = _strict_tdfol(formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:62: in _strict_tdfol
+    module = _module("ipfs_datasets_py.logic.TDFOL.tdfol_parser")
+ipfs_datasets_py/logic/autoformal/family_qualification.py:53: in _module
+    from .tree_pin import LogicTreePinError, workspace_root
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:976: in reviewed_case_v2
+    return reviewed_norm_fixture_v2(owner)
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:871: in reviewed_norm_fixture_v2
+    report = relational.prepare_relational_norm_v1(request_raw, expected_request_sha256=sha(request_raw))
+ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py:307: in prepare_relational_norm_v1
+    receipt = routes.prepare_native_fragment(family="deontic_fol", formula=formula,
+ipfs_datasets_py/logic/autoformal/legal_family_routes.py:93: in prepare_native_fragment
+    syntax = qualification.validate_family_artifact(family, formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:352: in validate_family_artifact
+    from .tree_pin import LogicTreePinError
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'</error></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_reviewed_norm_admission_v3" name="test_reviewed_v3_alternate_view_of_same_raw_paragraph_requires_distinct_use_witness" time="0.086"><error message="failed on setup with &quot;ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'&quot;">ipfs_datasets_py/logic/autoformal/family_qualification.py:339: in validate_family_artifact
+    _, parsed = _strict_tdfol(formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:62: in _strict_tdfol
+    module = _module("ipfs_datasets_py.logic.TDFOL.tdfol_parser")
+ipfs_datasets_py/logic/autoformal/family_qualification.py:53: in _module
+    from .tree_pin import LogicTreePinError, workspace_root
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py:65: in v2_saved
+    case = fixture.reviewed_norm_fixture_v2(legacy)
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:871: in reviewed_norm_fixture_v2
+    report = relational.prepare_relational_norm_v1(request_raw, expected_request_sha256=sha(request_raw))
+ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py:307: in prepare_relational_norm_v1
+    receipt = routes.prepare_native_fragment(family="deontic_fol", formula=formula,
+ipfs_datasets_py/logic/autoformal/legal_family_routes.py:93: in prepare_native_fragment
+    syntax = qualification.validate_family_artifact(family, formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:352: in validate_family_artifact
+    from .tree_pin import LogicTreePinError
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'</error></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_reviewed_norm_admission_v3" name="test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[duplicate_repackage-logical source occurrence]" time="0.000"><error message="failed on setup with &quot;ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'&quot;">ipfs_datasets_py/logic/autoformal/family_qualification.py:339: in validate_family_artifact
+    _, parsed = _strict_tdfol(formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:62: in _strict_tdfol
+    module = _module("ipfs_datasets_py.logic.TDFOL.tdfol_parser")
+ipfs_datasets_py/logic/autoformal/family_qualification.py:53: in _module
+    from .tree_pin import LogicTreePinError, workspace_root
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py:65: in v2_saved
+    case = fixture.reviewed_norm_fixture_v2(legacy)
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:871: in reviewed_norm_fixture_v2
+    report = relational.prepare_relational_norm_v1(request_raw, expected_request_sha256=sha(request_raw))
+ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py:307: in prepare_relational_norm_v1
+    receipt = routes.prepare_native_fragment(family="deontic_fol", formula=formula,
+ipfs_datasets_py/logic/autoformal/legal_family_routes.py:93: in prepare_native_fragment
+    syntax = qualification.validate_family_artifact(family, formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:352: in validate_family_artifact
+    from .tree_pin import LogicTreePinError
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'</error></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_reviewed_norm_admission_v3" name="test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[overlapping_repackage-overlapping logical source]" time="0.000"><error message="failed on setup with &quot;ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'&quot;">ipfs_datasets_py/logic/autoformal/family_qualification.py:339: in validate_family_artifact
+    _, parsed = _strict_tdfol(formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:62: in _strict_tdfol
+    module = _module("ipfs_datasets_py.logic.TDFOL.tdfol_parser")
+ipfs_datasets_py/logic/autoformal/family_qualification.py:53: in _module
+    from .tree_pin import LogicTreePinError, workspace_root
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py:65: in v2_saved
+    case = fixture.reviewed_norm_fixture_v2(legacy)
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:871: in reviewed_norm_fixture_v2
+    report = relational.prepare_relational_norm_v1(request_raw, expected_request_sha256=sha(request_raw))
+ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py:307: in prepare_relational_norm_v1
+    receipt = routes.prepare_native_fragment(family="deontic_fol", formula=formula,
+ipfs_datasets_py/logic/autoformal/legal_family_routes.py:93: in prepare_native_fragment
+    syntax = qualification.validate_family_artifact(family, formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:352: in validate_family_artifact
+    from .tree_pin import LogicTreePinError
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'</error></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_reviewed_norm_admission_v3" name="test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[document_revision_label-logical source occurrence]" time="0.000"><error message="failed on setup with &quot;ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'&quot;">ipfs_datasets_py/logic/autoformal/family_qualification.py:339: in validate_family_artifact
+    _, parsed = _strict_tdfol(formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:62: in _strict_tdfol
+    module = _module("ipfs_datasets_py.logic.TDFOL.tdfol_parser")
+ipfs_datasets_py/logic/autoformal/family_qualification.py:53: in _module
+    from .tree_pin import LogicTreePinError, workspace_root
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py:65: in v2_saved
+    case = fixture.reviewed_norm_fixture_v2(legacy)
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:871: in reviewed_norm_fixture_v2
+    report = relational.prepare_relational_norm_v1(request_raw, expected_request_sha256=sha(request_raw))
+ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py:307: in prepare_relational_norm_v1
+    receipt = routes.prepare_native_fragment(family="deontic_fol", formula=formula,
+ipfs_datasets_py/logic/autoformal/legal_family_routes.py:93: in prepare_native_fragment
+    syntax = qualification.validate_family_artifact(family, formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:352: in validate_family_artifact
+    from .tree_pin import LogicTreePinError
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'</error></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_reviewed_norm_admission_v3" name="test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_unaligned_view-unsupported source-view alignment]" time="0.000"><error message="failed on setup with &quot;ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'&quot;">ipfs_datasets_py/logic/autoformal/family_qualification.py:339: in validate_family_artifact
+    _, parsed = _strict_tdfol(formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:62: in _strict_tdfol
+    module = _module("ipfs_datasets_py.logic.TDFOL.tdfol_parser")
+ipfs_datasets_py/logic/autoformal/family_qualification.py:53: in _module
+    from .tree_pin import LogicTreePinError, workspace_root
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py:65: in v2_saved
+    case = fixture.reviewed_norm_fixture_v2(legacy)
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:871: in reviewed_norm_fixture_v2
+    report = relational.prepare_relational_norm_v1(request_raw, expected_request_sha256=sha(request_raw))
+ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py:307: in prepare_relational_norm_v1
+    receipt = routes.prepare_native_fragment(family="deontic_fol", formula=formula,
+ipfs_datasets_py/logic/autoformal/legal_family_routes.py:93: in prepare_native_fragment
+    syntax = qualification.validate_family_artifact(family, formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:352: in validate_family_artifact
+    from .tree_pin import LogicTreePinError
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'</error></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_reviewed_norm_admission_v3" name="test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_view_and_document_revision_label-unsupported source-view alignment]" time="0.000"><error message="failed on setup with &quot;ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'&quot;">ipfs_datasets_py/logic/autoformal/family_qualification.py:339: in validate_family_artifact
+    _, parsed = _strict_tdfol(formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:62: in _strict_tdfol
+    module = _module("ipfs_datasets_py.logic.TDFOL.tdfol_parser")
+ipfs_datasets_py/logic/autoformal/family_qualification.py:53: in _module
+    from .tree_pin import LogicTreePinError, workspace_root
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py:65: in v2_saved
+    case = fixture.reviewed_norm_fixture_v2(legacy)
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:871: in reviewed_norm_fixture_v2
+    report = relational.prepare_relational_norm_v1(request_raw, expected_request_sha256=sha(request_raw))
+ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py:307: in prepare_relational_norm_v1
+    receipt = routes.prepare_native_fragment(family="deontic_fol", formula=formula,
+ipfs_datasets_py/logic/autoformal/legal_family_routes.py:93: in prepare_native_fragment
+    syntax = qualification.validate_family_artifact(family, formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:352: in validate_family_artifact
+    from .tree_pin import LogicTreePinError
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'</error></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_reviewed_norm_admission_v3" name="test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[physical_alias-physical occurrence]" time="0.000"><error message="failed on setup with &quot;ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'&quot;">ipfs_datasets_py/logic/autoformal/family_qualification.py:339: in validate_family_artifact
+    _, parsed = _strict_tdfol(formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:62: in _strict_tdfol
+    module = _module("ipfs_datasets_py.logic.TDFOL.tdfol_parser")
+ipfs_datasets_py/logic/autoformal/family_qualification.py:53: in _module
+    from .tree_pin import LogicTreePinError, workspace_root
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py:65: in v2_saved
+    case = fixture.reviewed_norm_fixture_v2(legacy)
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:871: in reviewed_norm_fixture_v2
+    report = relational.prepare_relational_norm_v1(request_raw, expected_request_sha256=sha(request_raw))
+ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py:307: in prepare_relational_norm_v1
+    receipt = routes.prepare_native_fragment(family="deontic_fol", formula=formula,
+ipfs_datasets_py/logic/autoformal/legal_family_routes.py:93: in prepare_native_fragment
+    syntax = qualification.validate_family_artifact(family, formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:352: in validate_family_artifact
+    from .tree_pin import LogicTreePinError
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'</error></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_reviewed_norm_admission_v3" name="test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_provision]" time="0.000"><error message="failed on setup with &quot;ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'&quot;">ipfs_datasets_py/logic/autoformal/family_qualification.py:339: in validate_family_artifact
+    _, parsed = _strict_tdfol(formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:62: in _strict_tdfol
+    module = _module("ipfs_datasets_py.logic.TDFOL.tdfol_parser")
+ipfs_datasets_py/logic/autoformal/family_qualification.py:53: in _module
+    from .tree_pin import LogicTreePinError, workspace_root
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py:65: in v2_saved
+    case = fixture.reviewed_norm_fixture_v2(legacy)
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:871: in reviewed_norm_fixture_v2
+    report = relational.prepare_relational_norm_v1(request_raw, expected_request_sha256=sha(request_raw))
+ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py:307: in prepare_relational_norm_v1
+    receipt = routes.prepare_native_fragment(family="deontic_fol", formula=formula,
+ipfs_datasets_py/logic/autoformal/legal_family_routes.py:93: in prepare_native_fragment
+    syntax = qualification.validate_family_artifact(family, formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:352: in validate_family_artifact
+    from .tree_pin import LogicTreePinError
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'</error></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_reviewed_norm_admission_v3" name="test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_release]" time="0.000"><error message="failed on setup with &quot;ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'&quot;">ipfs_datasets_py/logic/autoformal/family_qualification.py:339: in validate_family_artifact
+    _, parsed = _strict_tdfol(formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:62: in _strict_tdfol
+    module = _module("ipfs_datasets_py.logic.TDFOL.tdfol_parser")
+ipfs_datasets_py/logic/autoformal/family_qualification.py:53: in _module
+    from .tree_pin import LogicTreePinError, workspace_root
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py:65: in v2_saved
+    case = fixture.reviewed_norm_fixture_v2(legacy)
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:871: in reviewed_norm_fixture_v2
+    report = relational.prepare_relational_norm_v1(request_raw, expected_request_sha256=sha(request_raw))
+ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py:307: in prepare_relational_norm_v1
+    receipt = routes.prepare_native_fragment(family="deontic_fol", formula=formula,
+ipfs_datasets_py/logic/autoformal/legal_family_routes.py:93: in prepare_native_fragment
+    syntax = qualification.validate_family_artifact(family, formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:352: in validate_family_artifact
+    from .tree_pin import LogicTreePinError
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'</error></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_reviewed_norm_admission_v3" name="test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_edition]" time="0.000"><error message="failed on setup with &quot;ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'&quot;">ipfs_datasets_py/logic/autoformal/family_qualification.py:339: in validate_family_artifact
+    _, parsed = _strict_tdfol(formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:62: in _strict_tdfol
+    module = _module("ipfs_datasets_py.logic.TDFOL.tdfol_parser")
+ipfs_datasets_py/logic/autoformal/family_qualification.py:53: in _module
+    from .tree_pin import LogicTreePinError, workspace_root
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py:65: in v2_saved
+    case = fixture.reviewed_norm_fixture_v2(legacy)
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:871: in reviewed_norm_fixture_v2
+    report = relational.prepare_relational_norm_v1(request_raw, expected_request_sha256=sha(request_raw))
+ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py:307: in prepare_relational_norm_v1
+    receipt = routes.prepare_native_fragment(family="deontic_fol", formula=formula,
+ipfs_datasets_py/logic/autoformal/legal_family_routes.py:93: in prepare_native_fragment
+    syntax = qualification.validate_family_artifact(family, formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:352: in validate_family_artifact
+    from .tree_pin import LogicTreePinError
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'</error></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_reviewed_norm_admission_v3" name="test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs]" time="0.000"><error message="failed on setup with &quot;ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'&quot;">ipfs_datasets_py/logic/autoformal/family_qualification.py:339: in validate_family_artifact
+    _, parsed = _strict_tdfol(formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:62: in _strict_tdfol
+    module = _module("ipfs_datasets_py.logic.TDFOL.tdfol_parser")
+ipfs_datasets_py/logic/autoformal/family_qualification.py:53: in _module
+    from .tree_pin import LogicTreePinError, workspace_root
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py:65: in v2_saved
+    case = fixture.reviewed_norm_fixture_v2(legacy)
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:871: in reviewed_norm_fixture_v2
+    report = relational.prepare_relational_norm_v1(request_raw, expected_request_sha256=sha(request_raw))
+ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py:307: in prepare_relational_norm_v1
+    receipt = routes.prepare_native_fragment(family="deontic_fol", formula=formula,
+ipfs_datasets_py/logic/autoformal/legal_family_routes.py:93: in prepare_native_fragment
+    syntax = qualification.validate_family_artifact(family, formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:352: in validate_family_artifact
+    from .tree_pin import LogicTreePinError
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'</error></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_reviewed_norm_admission_v3" name="test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs_different_source_id]" time="0.003"><error message="failed on setup with &quot;ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'&quot;">ipfs_datasets_py/logic/autoformal/family_qualification.py:339: in validate_family_artifact
+    _, parsed = _strict_tdfol(formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:62: in _strict_tdfol
+    module = _module("ipfs_datasets_py.logic.TDFOL.tdfol_parser")
+ipfs_datasets_py/logic/autoformal/family_qualification.py:53: in _module
+    from .tree_pin import LogicTreePinError, workspace_root
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py:65: in v2_saved
+    case = fixture.reviewed_norm_fixture_v2(legacy)
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:871: in reviewed_norm_fixture_v2
+    report = relational.prepare_relational_norm_v1(request_raw, expected_request_sha256=sha(request_raw))
+ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py:307: in prepare_relational_norm_v1
+    receipt = routes.prepare_native_fragment(family="deontic_fol", formula=formula,
+ipfs_datasets_py/logic/autoformal/legal_family_routes.py:93: in prepare_native_fragment
+    syntax = qualification.validate_family_artifact(family, formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:352: in validate_family_artifact
+    from .tree_pin import LogicTreePinError
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'</error></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_reviewed_norm_admission_v3" name="test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-cycle]" time="0.003"><error message="failed on setup with &quot;ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'&quot;">ipfs_datasets_py/logic/autoformal/family_qualification.py:339: in validate_family_artifact
+    _, parsed = _strict_tdfol(formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:62: in _strict_tdfol
+    module = _module("ipfs_datasets_py.logic.TDFOL.tdfol_parser")
+ipfs_datasets_py/logic/autoformal/family_qualification.py:53: in _module
+    from .tree_pin import LogicTreePinError, workspace_root
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py:65: in v2_saved
+    case = fixture.reviewed_norm_fixture_v2(legacy)
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:871: in reviewed_norm_fixture_v2
+    report = relational.prepare_relational_norm_v1(request_raw, expected_request_sha256=sha(request_raw))
+ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py:307: in prepare_relational_norm_v1
+    receipt = routes.prepare_native_fragment(family="deontic_fol", formula=formula,
+ipfs_datasets_py/logic/autoformal/legal_family_routes.py:93: in prepare_native_fragment
+    syntax = qualification.validate_family_artifact(family, formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:352: in validate_family_artifact
+    from .tree_pin import LogicTreePinError
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'</error></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_reviewed_norm_admission_v3" name="test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-definition-cycle]" time="0.000"><error message="failed on setup with &quot;ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'&quot;">ipfs_datasets_py/logic/autoformal/family_qualification.py:339: in validate_family_artifact
+    _, parsed = _strict_tdfol(formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:62: in _strict_tdfol
+    module = _module("ipfs_datasets_py.logic.TDFOL.tdfol_parser")
+ipfs_datasets_py/logic/autoformal/family_qualification.py:53: in _module
+    from .tree_pin import LogicTreePinError, workspace_root
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py:65: in v2_saved
+    case = fixture.reviewed_norm_fixture_v2(legacy)
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:871: in reviewed_norm_fixture_v2
+    report = relational.prepare_relational_norm_v1(request_raw, expected_request_sha256=sha(request_raw))
+ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py:307: in prepare_relational_norm_v1
+    receipt = routes.prepare_native_fragment(family="deontic_fol", formula=formula,
+ipfs_datasets_py/logic/autoformal/legal_family_routes.py:93: in prepare_native_fragment
+    syntax = qualification.validate_family_artifact(family, formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:352: in validate_family_artifact
+    from .tree_pin import LogicTreePinError
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'</error></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_reviewed_norm_admission_v3" name="test_reviewed_v3_refuses_cyclic_unit_dependencies[longer-mixed-cycle]" time="0.000"><error message="failed on setup with &quot;ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'&quot;">ipfs_datasets_py/logic/autoformal/family_qualification.py:339: in validate_family_artifact
+    _, parsed = _strict_tdfol(formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:62: in _strict_tdfol
+    module = _module("ipfs_datasets_py.logic.TDFOL.tdfol_parser")
+ipfs_datasets_py/logic/autoformal/family_qualification.py:53: in _module
+    from .tree_pin import LogicTreePinError, workspace_root
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py:65: in v2_saved
+    case = fixture.reviewed_norm_fixture_v2(legacy)
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:871: in reviewed_norm_fixture_v2
+    report = relational.prepare_relational_norm_v1(request_raw, expected_request_sha256=sha(request_raw))
+ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py:307: in prepare_relational_norm_v1
+    receipt = routes.prepare_native_fragment(family="deontic_fol", formula=formula,
+ipfs_datasets_py/logic/autoformal/legal_family_routes.py:93: in prepare_native_fragment
+    syntax = qualification.validate_family_artifact(family, formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:352: in validate_family_artifact
+    from .tree_pin import LogicTreePinError
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'</error></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_reviewed_norm_admission_v3" name="test_reviewed_v3_preserves_acyclic_overlapping_unit_dependencies" time="0.000"><error message="failed on setup with &quot;ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'&quot;">ipfs_datasets_py/logic/autoformal/family_qualification.py:339: in validate_family_artifact
+    _, parsed = _strict_tdfol(formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:62: in _strict_tdfol
+    module = _module("ipfs_datasets_py.logic.TDFOL.tdfol_parser")
+ipfs_datasets_py/logic/autoformal/family_qualification.py:53: in _module
+    from .tree_pin import LogicTreePinError, workspace_root
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py:65: in v2_saved
+    case = fixture.reviewed_norm_fixture_v2(legacy)
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:871: in reviewed_norm_fixture_v2
+    report = relational.prepare_relational_norm_v1(request_raw, expected_request_sha256=sha(request_raw))
+ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py:307: in prepare_relational_norm_v1
+    receipt = routes.prepare_native_fragment(family="deontic_fol", formula=formula,
+ipfs_datasets_py/logic/autoformal/legal_family_routes.py:93: in prepare_native_fragment
+    syntax = qualification.validate_family_artifact(family, formula)
+ipfs_datasets_py/logic/autoformal/family_qualification.py:352: in validate_family_artifact
+    from .tree_pin import LogicTreePinError
+E   ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'</error></testcase></testsuite></testsuites>

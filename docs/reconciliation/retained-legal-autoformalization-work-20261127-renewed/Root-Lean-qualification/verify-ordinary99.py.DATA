@@ -1,0 +1,87 @@
+"""Verify the saved ordinary99 qualification of the isolated Git candidate."""
+from pathlib import Path
+from hashlib import sha256
+from collections import Counter
+import json,sys,xml.etree.ElementTree as ET
+
+W=Path(__file__).resolve().parent
+helper=W/'freeze-lean-json-diagnostics.py'
+verification_entry=__file__;__file__=str(helper)
+exec(compile(helper.read_text().split(chr(10)+'if __name__==')[0],str(helper),'exec'),globals())
+__file__=verification_entry
+W=Path(__file__).resolve().parent
+assert __debug__ and len(sys.argv)==5
+q_ref=dict(path=sys.argv[1],bytes=int(sys.argv[2]),sha256=sys.argv[3])
+session=int(sys.argv[4]);assert session>0
+assert Path(q_ref['path']).name=='complete-frozen-local-D-phase1-lean-json-diagnostics-99-existing-owner-report.json'
+q=json.loads(load(q_ref))
+assert all(q[k] is True for k in ('Source_closed','qualification_complete','actual_parent_release_return',
+    'resource_cleanup_confirmed','software_sequence_accepted','frozen_D_Git_READ_application'))
+assert not q['errors'] and q['Source_WRITE_claimed'] is False
+f_ref,raw=capture(W/'actual-isolated-Phase1-lean-json-diagnostics-exact-two-local-freeze.json')
+f=json.loads(raw); root=Path(f['root'])
+assert root==D and not f['pushed']
+assert q['git_candidate_provenance']['root']==str(root)
+assert q['additional_A_provenance']['root']=='/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate' and q['additional_A_provenance']['HEAD']=='219ba3da0f62f772801d71715e22c506faa21126'
+assert f['parent']=='7c0d40925436665bd90f62941d66ec63edadfb5b'
+assert q['git_candidate_provenance']['HEAD']==f['frozen']['HEAD'] and q['git_candidate_provenance']['tree']==f['frozen']['tree']
+assert git(root,'rev-parse','HEAD','HEAD^').decode().split()==[f['frozen']['HEAD'],f['parent']]
+assert not git(root,'status','--porcelain=v1','-z','-uall')
+assert capture(root/'.git/index')[0]==f['frozen']['index']
+assert len(q['actual_Source_context_closure'])==2 and all(x['entered'] and x['exit_returned'] for x in q['actual_Source_context_closure'])
+assert set(x['root'] for x in q['actual_Source_context_closure'])=={str(root),q['additional_A_provenance']['root']}
+state=q['resource_after_parent_release']['state']
+parent=q['actual_parent_lease']['lease_id']
+assert not any(isinstance(row,dict) and row.get('lease_id')==parent for row in (state.get('leases',{}).values() if isinstance(state.get('leases',{}),dict) else state.get('leases',[])))
+phases={p['operation']:p for p in q['phases'].values()}
+assert set(phases)=={'collect','run'} and len(q['phases'])==2
+collect,run=(phases[key] for key in ('collect','run'))
+c,r=(p['actual_binding'] for p in (collect,run))
+ids=c['actual_collected_roster']
+assert ids==r['actual_collected_roster']==r['actual_called_roster'] and len(ids)==len(set(ids))==99
+candidate=json.loads(load(f['candidate']))
+private_xml=ET.fromstring(load(candidate['raw_GREEN_JUnit']))
+private_cases=private_xml.findall('testsuite/testcase')
+assert len(private_cases)==99
+assert [n.rsplit('::',1)[1] for n in ids]==[node.attrib['name'] for node in private_cases]
+assert all('test_lean_native_' not in x for x in ids)
+counts=Counter(n.split('[',1)[0] for n in ids)
+assert len(counts)==24
+compiler=str(root/'ipfs_datasets_py/logic/backends/kernel/lean.py')
+test=str(root/'tests/integration/logic/backends/test_kernel_backends.py')
+expected_cli=f['committed']['ipfs_datasets_py/logic/backends/kernel/lean.py']['sha256']
+expected_test=f['committed']['tests/integration/logic/backends/test_kernel_backends.py']['sha256']
+assert r['actual_compiled_current_Source'][compiler]==expected_cli
+assert not any(Path(path).is_relative_to(SHARED) for phase in (c,r) for path in phase['actual_compiled_current_Source'])
+witnesses={}
+for phase in (collect,run):
+    assert phase['accepted'] and not phase['error']
+    result,=phase['actual_results']; sdk=result['result']; assert result['SDK_returned_result'] and sdk['returncode']==0 and sdk['workspace_cleaned']
+    assert not any(sdk[key] for key in ('timed_out','cancelled','unavailable','output_truncated','workspace_limit_exceeded','resource_exhausted'))
+    life=sdk['native_lifecycle'];assert life['cleanup_confirmed'] and life['leader_reaped'] and life['descendant_tracking_complete']
+    assert not life['remaining_group_members'] and not life['remaining_tracked_descendants'] and not life['observation_errors']
+    b=phase['actual_binding'];t=b['actual_test_rewrite_source_to_code'][test]
+    assert t['source_to_AST_observed'] and t['AST_to_code_observed'] and t['code_execution_observed']
+    assert t['source_sha256']==t['compile_source_sha256']==expected_test
+    br,= [x for x in result['raw_output_files'] if x['logical_name']=='binding.json']
+    assert json.loads(load(br))==b
+    witnesses[phase['operation']]=dict(raw_binding=br,tests=t,lifecycle=life)
+j,=[item for item in run['actual_results'][0]['raw_output_files'] if item['logical_name']=='junit.xml']
+xml=ET.fromstring(load(j)); suite,=xml.findall('testsuite')
+expected=dict(tests=99,failures=0,errors=0,skipped=0)
+assert {k:int(suite.attrib[k]) for k in expected}==expected
+cases=suite.findall('testcase')
+assert len(cases)==99 and [x.attrib['name'] for x in cases]==[n.rsplit('::',1)[1] for n in ids]
+assert not any(x.find(tag) is not None for x in cases for tag in ('failure','error','skipped'))
+assert set(x.attrib['classname'] for x in cases)=={'tests.integration.logic.backends.test_kernel_backends'}
+assert not (Path(q_ref['path']).parent/'parent-home').exists()
+answer=dict(schema='actual-live-reconciled-P1-Lean-ordinary99-closed/v1',terminal_returncode=0,owned_terminal_session=session,
+    isolated_freeze={k:f_ref[k] for k in ('path','bytes','sha256')},actual_report=q_ref,Source_READ3=q['source_read_binding_reference'],
+    actual_raw_JUnit=j,ordered_cases=ids,counts=dict(expected,passed=99,functions=24),witnesses=witnesses,
+    Lean_owner_normal_RUN_source_compile_sha256=expected_cli,Source_and_resource_and_parent_closed=True,
+    canonical_adoption_or_publication=False,statutory_admission_or_model_or_Native_qualification=False)
+file=W/'actual-live-reconciled-P1-Lean-ordinary99-closed.json'
+with file.open('x') as out:
+    json.dump(answer,out,sort_keys=True,indent=2);out.write(chr(10));out.flush();os.fsync(out.fileno())
+record,_=capture(file)
+print(json.dumps({k:record[k] for k in ('path','bytes','sha256')}))

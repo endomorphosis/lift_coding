@@ -1,0 +1,37 @@
+{
+  "kind": "exact_historical_and_current_Native3_function_compatibility_static_proof",
+  "historical": {
+    "commit": "ebab0edfa5b5630a3acd8ad7e133447a51d49252",
+    "Git_blob": "1010f0521c704f47fbf6808720c540ce2ed37724",
+    "private_path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/test_kernel_backends.Native3-historical-ebab.py.DATA",
+    "bytes": 108837,
+    "sha256": "0ad3389fce78ca14a68d1588ea9e3fa59f8bc377bf824f3b81b561b0665bbcb1"
+  },
+  "current": {
+    "private_path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-accepted-request-and-integer-status-combined-private-IN9OiuMf/test.after.py.DATA",
+    "bytes": 115566,
+    "sha256": "99e00363bbd1ea23d450af0912374fdbf4d30ab3b1802371fb8d237dccbf7da5"
+  },
+  "selected_function_and_helper": {
+    "test_lean_native_v2_expected_type_and_dependency_policy": {
+      "historical_line": 758,
+      "current_line": 758,
+      "AST_equal_including_decorators": true,
+      "historical_AST_sha256": "a7f85f8725c7f3426536a4bd8d735f61e804da259dcdbd1261ef5f8845931105",
+      "current_AST_sha256": "a7f85f8725c7f3426536a4bd8d735f61e804da259dcdbd1261ef5f8845931105"
+    },
+    "_request": {
+      "historical_line": 107,
+      "current_line": 107,
+      "AST_equal_including_decorators": true,
+      "historical_AST_sha256": "8332b2991819426947120fc716ea84b607f09b0737ed16718124cbca02d4bdd0",
+      "current_AST_sha256": "8332b2991819426947120fc716ea84b607f09b0737ed16718124cbca02d4bdd0"
+    }
+  },
+  "all_top_level_import_AST_equal": true,
+  "whole_current_first_108837_SHA": "5a3604b30a79ec4a6c3d45de495b5f6195fcac1c372a828924b3670f0fde6b25",
+  "whole_byte_prefix_equality_not_claimed": true,
+  "old_failed_prefix_assertion_preserved": true,
+  "current_Native_run_or_qualification": false,
+  "Source_or_Git_mutation": false
+}

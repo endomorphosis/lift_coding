@@ -1,0 +1,134 @@
+"""Reuse the retained guarded fixture runner; no canonical paths or Native work."""
+from __future__ import annotations
+import ast
+import hashlib
+import json
+import os
+from pathlib import Path
+import stat
+
+BASE = Path('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-accepted-request-and-integer-status-combined-private-IN9OiuMf')
+HERE = Path(__file__).parent / 'Lean-outcome-backend-routing-private-v01'
+FIELDS = ('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
+sha = lambda b: hashlib.sha256(b).hexdigest()
+reads=[]
+
+
+def read(path, expected=None):
+    before=path.lstat();fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW)
+    try:
+        data=b''
+        while piece:=os.read(fd,65536):data+=piece
+        assert all(getattr(before,k)==getattr(os.fstat(fd),k)==getattr(path.lstat(),k) for k in FIELDS)
+    finally:os.close(fd)
+    assert stat.S_ISREG(before.st_mode) and before.st_nlink==1
+    if expected:assert (len(data),sha(data))==expected
+    reads.append({'path':str(path),'bytes':len(data),'sha256':sha(data)})
+    return data
+
+
+def seal(path,data):
+    path.parent.mkdir(parents=True,exist_ok=True,mode=0o700)
+    fd=os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400)
+    try:
+        todo=memoryview(data)
+        while todo:n=os.write(fd,todo);assert n>0;todo=todo[n:]
+        os.fsync(fd)
+    finally:os.close(fd)
+    assert read(path,(len(data),sha(data)))==data
+    return {'path':str(path),'bytes':len(data),'sha256':sha(data)}
+
+
+APPEND = '''
+
+@pytest.mark.parametrize("requested_backend_id", ["rocq", "cvc5", "lean4-wasm"])
+def test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind(requested_backend_id):
+    from dataclasses import replace
+
+    from ipfs_datasets_py.logic.backends.kernel import lean
+
+    outcome, calls, original_request = _bound_lean_outcome()
+    assert outcome.receipt.accepted and len(calls) == 1
+    request = replace(original_request, requested_backend_id=requested_backend_id)
+    assert request.digest != original_request.digest
+    source = outcome.receipt.submitted_source
+    binding = lean.LeanSourceBinding.bind(request, source)
+    receipt = replace(outcome.receipt, request_digest=request.digest, source_binding=binding)
+    assert lean.LeanKernelReceipt.from_dict(receipt.to_dict()) == receipt
+    metadata = outcome.result.metadata.to_dict()
+    metadata.update(kernel_receipt=receipt.to_dict(), source_binding=binding.to_dict())
+    result = replace(outcome.result, result_id=lean._result_id("lean", request),
+                     metadata=metadata, witness=receipt._theorem_witness())
+    # The public dispatch route already rejects this target before any callback.
+    runner, direct_calls = _process_runner("")
+    backend = LeanKernelBackend(runner=runner, native_identity_probe=_fictional_native_identity,
+        native_probe=lambda: _available_native("lean", "fixture-not-an-executed-compiler"))
+    with pytest.raises(LeanKernelError, match="request targets"):
+        backend.run(request)
+    assert direct_calls == []
+    # Complete cryptographic rebinding cannot turn a foreign target into Lean authority.
+    with pytest.raises(LeanKernelError, match="outcome request targets"):
+        replace(outcome, request=request, request_digest=request.digest,
+                source_binding=binding, receipt=receipt, result=result)
+    assert len(calls) == 1
+
+
+@pytest.mark.parametrize("requested_backend_id", [None, "lean", "lean4", "lean-kernel"])
+def test_lean_outcome_preserves_default_and_supported_requested_backend_aliases(requested_backend_id):
+    from dataclasses import replace
+
+    from ipfs_datasets_py.logic.backends.kernel import lean
+
+    outcome, calls, original_request = _bound_lean_outcome()
+    assert outcome.receipt.accepted and len(calls) == 1
+    request = replace(original_request, requested_backend_id=requested_backend_id)
+    binding = lean.LeanSourceBinding.bind(request, outcome.receipt.submitted_source)
+    receipt = replace(outcome.receipt, request_digest=request.digest, source_binding=binding)
+    assert lean.LeanKernelReceipt.from_dict(receipt.to_dict()) == receipt
+    metadata = outcome.result.metadata.to_dict()
+    metadata.update(kernel_receipt=receipt.to_dict(), source_binding=binding.to_dict())
+    result = replace(outcome.result, result_id=lean._result_id("lean", request),
+                     metadata=metadata, witness=receipt._theorem_witness())
+    rebound = replace(outcome, request=request, request_digest=request.digest,
+                      source_binding=binding, receipt=receipt, result=result)
+    assert rebound.result.status is ResultStatus.PROVED and rebound.receipt.accepted
+    assert rebound.receipt.theorem_name == outcome.receipt.theorem_name
+    assert rebound.receipt.expected_proposition == outcome.receipt.expected_proposition
+    assert rebound.receipt.submitted_source == outcome.receipt.submitted_source
+    assert len(calls) == 1
+'''
+
+
+def main():
+    HERE.mkdir(mode=0o700)
+    spec_raw=read(BASE/'inputs.json',(21580,'19049bf760d4eeb7d90e9675317d39e3a7822c554afb3ea4ec0ab431192ea6e4'))
+    spec=json.loads(spec_raw);runner=read(Path(spec['runner']['path']),(2734,'438d497ba491df2aa6906337050d41afb3e8086e2011dfce53e9050e79e64515'))
+    changed=runner.replace(b'assert len(selectors) == 16',b'assert len(selectors) == 18')
+    assert changed!=runner and runner.count(b'assert len(selectors) == 16')==1
+    old_ast,new_ast=ast.parse(runner),ast.parse(changed)
+    old_check=next(n for n in old_ast.body if isinstance(n,ast.Assert));new_check=next(n for n in new_ast.body if isinstance(n,ast.Assert));new_check.test.comparators[0].value=16
+    assert ast.dump(old_ast,include_attributes=False)==ast.dump(new_ast,include_attributes=False)
+    runner_ref=seal(HERE/'existing-private-runner-eighteen-selectors.py.DATA',changed)
+    owner_rel=spec['role_paths']['owner'];test_rel=spec['role_paths']['test'];source=BASE/'dataset';project=HERE/'dataset';manifest=[]
+    for directory,dirs,files in os.walk(source,followlinks=False):
+        assert not any((Path(directory)/x).is_symlink() for x in dirs)
+        for name in sorted(files):
+            path=Path(directory)/name;relative=str(path.relative_to(source))
+            if relative.startswith('tests/') and relative!=test_rel:continue
+            data=read(path)
+            if relative==owner_rel:assert (len(data),sha(data))==(103838,'c1050ad1ec067fc7f7c8fea08793e872511fe58029e9b1aa89ec90d2cb288313')
+            if relative==test_rel:
+                assert (len(data),sha(data))==(115566,'99e00363bbd1ea23d450af0912374fdbf4d30ab3b1802371fb8d237dccbf7da5')
+                old=data;data=old+APPEND.encode();a,b=ast.parse(old),ast.parse(data);assert ast.dump(ast.Module(body=b.body[:len(a.body)],type_ignores=[]),include_attributes=False)==ast.dump(a,include_attributes=False)
+                append_ref=seal(HERE/'owning-test.append.py.DATA',APPEND.encode());test_ref=seal(HERE/'test_kernel_backends.after.py.DATA',data)
+            manifest.append({'relative_path':relative,**seal(project/relative,data)})
+    assert len(manifest)==220
+    before_argv=spec['invocations']['after'].copy();before_argv[3]=runner_ref['path'];before_argv[4]=str(HERE/'before');before_argv[5]=str(project)
+    before_argv.extend([test_rel+'::test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind',test_rel+'::test_lean_outcome_preserves_default_and_supported_requested_backend_aliases'])
+    assert len(before_argv[10:])==18
+    after_argv=before_argv.copy();after_argv[4]=str(HERE/'after')
+    value={'role_paths':spec['role_paths'],'runner':runner_ref,'invocations':{'before':before_argv,'after':after_argv},'owning_test_append':append_ref,'owning_test_post':test_ref,'existing16_selectors_exact_prefix_preserved':True,'existing_all81_case_ASTs_and_115566_byte_prefix_preserved':True,'new_two_methods_static_seven_cases':True,'cached_graph_files':manifest,'all_cached_reads_and_readbacks':reads,'new_private_no_Source_or_runtime_grant':True,'actual_Native_Source_SDK_or_canonical_body_reads':False,'all_prior_costs_and_failures_retained':True}
+    print(json.dumps(seal(HERE/'private-existing-runner-eighteen-role-inputs-v01.json',(json.dumps(value,indent=2,sort_keys=True)+'\n').encode())))
+
+
+if __name__=='__main__':main()

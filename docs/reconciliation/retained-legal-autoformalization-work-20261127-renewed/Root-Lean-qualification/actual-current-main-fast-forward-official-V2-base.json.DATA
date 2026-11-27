@@ -1,0 +1,109 @@
+{
+  "current_gitlinks": {
+    "hallucinate": {
+      "ipfs_accelerate_py": "219ba3da0f62f772801d71715e22c506faa21126",
+      "ipfs_datasets_py": "7c0d40925436665bd90f62941d66ec63edadfb5b"
+    },
+    "root": {
+      "external/ipfs_accelerate": "219ba3da0f62f772801d71715e22c506faa21126",
+      "external/ipfs_datasets": "7c0d40925436665bd90f62941d66ec63edadfb5b",
+      "hallucinate_app": "d5d8e4ad1aeb62de43c9921943e6f004249fe2fd"
+    }
+  },
+  "exact_D_delta": {
+    "ipfs_datasets_py/logic/autoformal/corpus_source_adjudication.py": {
+      "materialized": true,
+      "observed_blob": "6b0a281866717d56a9cf793673c3c8d4f674b302",
+      "prior_blob": "41a44d2fc0bcb4f47d111c056d526493402880cc"
+    },
+    "ipfs_datasets_py/logic/autoformal/corpus_source_application.py": {
+      "materialized": true,
+      "observed_blob": "7ad9016d73382232500ed085908b4f8603f10102",
+      "prior_blob": "199c88971a61d73692adb3112755c4304da0bf20"
+    },
+    "ipfs_datasets_py/logic/autoformal/corpus_source_review_packets.py": {
+      "materialized": true,
+      "observed_blob": "9cc75909574b045badfa5b42a01999e6b6e61170",
+      "prior_blob": "1c364f16a954806d27976b1fa8eb2c6028907f4a"
+    },
+    "ipfs_datasets_py/logic/autoformal/corpus_source_review_responses.py": {
+      "materialized": true,
+      "observed_blob": "b9711610e8735e857054f4b293eb61009a2c4708",
+      "prior_blob": "f48770f68e72fc55f2bdf9bd0226dcc4e5af361c"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md": {
+      "materialized": true,
+      "observed_blob": "6beff522031fa3c912c278f7c7b8272df7059aa6",
+      "prior_blob": "11ffcb69bb455f4f3b54d806ef30ab81f275b96d"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/guides/corpus_source_review_packets.md": {
+      "materialized": false,
+      "observed_blob": "bfecf6aac8cfe8c58adc0dbc24640245ba3c9c4c",
+      "prior_blob": "09510ed55efbdb8482cc6f8ffd76b6e6bb720342"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/guides/corpus_source_review_responses.md": {
+      "materialized": false,
+      "observed_blob": "d7626f9463323169d53cb6aba7ce626b5c8c61aa",
+      "prior_blob": "0e37eb5274f93ee464e172e54ee1e5f7730bbff8"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_norm_content_adjudication_v1.py": {
+      "materialized": true,
+      "observed_blob": "f2f1151c8bb3b834e14da8b0ae941ff13728ce53",
+      "prior_blob": "b6b4612aacefb1620329b7fb8ae3475a23bec89d"
+    },
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py": {
+      "materialized": true,
+      "observed_blob": "92255954ba6420db384ae19a8f70f09e5896b369",
+      "prior_blob": "bc028c90d14268516e7c7845a761053419d180ec"
+    },
+    "tests/unit/logic/autoformal/test_corpus_source_application.py": {
+      "materialized": true,
+      "observed_blob": "06d4b999378311308f981eb4878e7ea3d52a3835",
+      "prior_blob": "ac7fb726bfdd73b7bd444124b24730a2e5e7ed13"
+    },
+    "tests/unit/logic/autoformal/test_corpus_source_review_packets.py": {
+      "materialized": true,
+      "observed_blob": "31ce911981fdb8df899c77130b5afa98d8aab412",
+      "prior_blob": "a7e731b5ff00ef053a2ea0efa45da5120cf74f54"
+    },
+    "tests/unit/logic/autoformal/test_corpus_source_review_responses.py": {
+      "materialized": true,
+      "observed_blob": "df57931491ad9ec491e25aa32ba425b752845e69",
+      "prior_blob": "5200c3d6e97021518052f4cc3eae2757f17d223d"
+    },
+    "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py": {
+      "materialized": true,
+      "observed_blob": "ded31ed3ad317c4ca1584847e49c992b0c031dda",
+      "prior_blob": "b531d4b67134a980648aec910fed88733941afde"
+    }
+  },
+  "git_worktrees_changed": false,
+  "guide_main": {
+    "accelerate": "219ba3da0f62f772801d71715e22c506faa21126",
+    "datasets": "d067738daf11465f74a91c75165747d9db766cdc",
+    "hallucinate": "db523a840f8324f4b23832c5bdc5e61222aca933",
+    "root": "c614d9d52eaeb30c5d37bb3285616d5273772c9b"
+  },
+  "live_main_after": {
+    "accelerate": "219ba3da0f62f772801d71715e22c506faa21126",
+    "datasets": "7c0d40925436665bd90f62941d66ec63edadfb5b",
+    "hallucinate": "d5d8e4ad1aeb62de43c9921943e6f004249fe2fd",
+    "root": "a013cb437b56ff3cdc14540460a34727f4b57d0e"
+  },
+  "observed_base_is_dataset_descendant": true,
+  "previous_author_qualification_claimed": false,
+  "previous_published_guide": {
+    "bytes": 2991,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-Guide580-four-docs-three-FF-publication.json",
+    "sha256": "12de3885bbfd86bc00dd792861c9f670af1bee590b0b8a996a9eae97cbbda9fc"
+  },
+  "schema": "observed-current-main-official-V2-series-descendant-of-Guide580/v1",
+  "unchanged_D_git_blobs": {
+    "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json": "d61943356a98f41a61d9fb297c6b9e1e113995c6",
+    "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md": "94cacef761af4b38a423c180eaac4d9ecfe1a80c",
+    "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json": "25f6876dcdf62b06db53af7f97c8ac4687c95b9b",
+    "ipfs_datasets_py/logic/backends/kernel/lean.py": "7ee0cdb71958b052038fa467230dbf86dd0c3fb2",
+    "tests/integration/logic/backends/test_kernel_backends.py": "20f612f6c6a241804cdf71b09dc9a0a4f0c2e923",
+    "tests/unit/logic/legal_ir/test_proof_cache.py": "8d3a1e52040ea8497a74ec1f47c420141de1b9bf"
+  }
+}

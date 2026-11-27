@@ -1,0 +1,915 @@
+"""Prepare and select a single arm through the existing reviewed decoder worker."""
+from dataclasses import asdict, dataclass, replace
+from pathlib import Path
+
+from . import relational_trial as trial, teacher_relational as geometry
+from .relational_origin import ZERO, PARENT_ASSETS, INPUT_SCHEMA, INPUT_RECEIPT, INPUT_PROFILE
+from .teacher_prefix import NativeVector, PopulationRow, _commit, _need, _pin, _row_commit, _sha, _wire, population_commit
+
+SCHEMA = "reviewed-relational-arming/v1"
+TEACHER_WIDTHS = {"spacy":8, "gte-small":384, "gte-base-multilingual":768, "leanstral":4096}
+JOB_INPUTS = {"stage_artifact","exposure_artifact","source_contexts_artifact","split_config",
+              "max_seconds","code_identity","allow_fictional_fixture"}
+FULL_TARGET_CODEC = "complete-reviewed-norm-json/v2"
+T5_MODEL_CLASS = "transformers.models.t5.modeling_t5.T5ForConditionalGeneration"
+JOB_GEOMETRY = {
+    "reviewed-mixed-digest-omitted-decoder-job/v1": geometry.QWEN,
+    "autoencoder-training-job-v10-reviewed-mixed-legal-ir": geometry.T5,
+}
+
+
+@dataclass(frozen=True)
+class Teacher:
+    name: str
+    profile_sha256: str
+    population: tuple[PopulationRow, ...]
+    train_admission_sha256: str
+    pair_authority_sha256: str
+    vector_owner_close_sha256: str
+    rows: tuple[NativeVector, ...]
+    approved_edges: tuple[tuple[str, str], ...]
+    coefficient: float
+    maximum_hidden_elements: int
+
+
+@dataclass(frozen=True)
+class Arm:
+    name: str
+    job_id: str
+    run_id: str
+    output_directory: str
+    recipe_sha256: str
+    attempt_sha256: str
+
+
+@dataclass(frozen=True)
+class Arming:
+    study_sha256: str
+    origin_proof_sha256: str
+    parent_sha256: str
+    parent_path: str
+    configuration_sha256: str
+    teacher_sha256: str
+    job_inputs_sha256: str
+    owner_supplement_sha256: str
+    arms: tuple[Arm, ...]
+
+
+@dataclass(frozen=True)
+class Prepared:
+    arming_sha256: str
+    matched_sha256: str
+    arms: tuple[Arm, ...]
+    specs: tuple[bytes, ...]
+    trials: tuple[trial.Trial, ...]
+
+
+def _name(value):
+    return type(value) is str and 0 < len(value) <= 512 and value.strip() == value and not any(c in value for c in "\x00\r\n")
+
+
+def _path(value):
+    return (_name(value) and Path(value).is_absolute() and value != "/" and not value.startswith("//") and ".." not in Path(value).parts
+            and str(Path(value)) == value)
+
+
+def teacher_commitment(value):
+    _need(type(value) is Teacher and type(value.name) is str and value.name in TEACHER_WIDTHS
+          and all(_pin(pin) for pin in (value.profile_sha256,value.train_admission_sha256,
+                  value.pair_authority_sha256,value.vector_owner_close_sha256))
+          and type(value.rows) is tuple and 2 <= len(value.rows) <= 1024,
+          "selected native teacher, owner close and TRAIN pair authority required")
+    width = TEACHER_WIDTHS[value.name]
+    _need(all(type(row) is NativeVector and type(row.width) is int and row.width == width
+              and row.profile_sha256 == value.profile_sha256 and type(row.data) is bytes and len(row.data) == 4*width
+              and row.materialized_f32_sha256 == _sha(row.data) for row in value.rows),
+          "one exact native teacher profile and materialization required")
+    rows = tuple(_row_commit(row) for row in value.rows)
+    ids = {row.row_id for row in value.rows}
+    _need(len(ids) == len(rows) and type(value.approved_edges) is tuple
+          and 1 <= len(value.approved_edges) <= trial.MAX_BATCHES*496,
+          "unique approved vectors and bounded source-only edges required")
+    last = None
+    for edge in value.approved_edges:
+        _need(type(edge) is tuple and len(edge) == 2 and all(_name(key) and key in ids for key in edge)
+              and edge[0] < edge[1] and (last is None or last < edge), "canonical distinct approved source edges required")
+        last = edge
+    population_sha = population_commit(value.population, maximum_rows=4096)
+    return _commit((SCHEMA,value.name,width,value.profile_sha256,population_sha,value.train_admission_sha256,
+        value.pair_authority_sha256,value.vector_owner_close_sha256,rows,value.approved_edges,
+        value.coefficient,value.maximum_hidden_elements))
+
+
+def arming_commitment(value):
+    _need(type(value) is Arming and _path(value.parent_path)
+          and all(_pin(pin) for pin in (value.study_sha256,value.origin_proof_sha256,value.parent_sha256,
+                 value.configuration_sha256,value.teacher_sha256,value.job_inputs_sha256,value.owner_supplement_sha256))
+          and type(value.arms) is tuple and len(value.arms) == len(trial.ARMS)
+          and all(type(arm) is Arm and _name(arm.job_id) and _name(arm.run_id) and _path(arm.output_directory)
+                  and _pin(arm.recipe_sha256) and _pin(arm.attempt_sha256) for arm in value.arms)
+          and tuple(arm.name for arm in value.arms) == trial.ARMS, "closed selected matched arming required")
+    for field in ("job_id","run_id","output_directory","recipe_sha256","attempt_sha256"):
+        _need(len({getattr(arm,field) for arm in value.arms}) == len(trial.ARMS), "each arm needs a distinct " + field)
+    outputs = [Path(arm.output_directory) for arm in value.arms]
+    _need(all(not out.is_relative_to(other) for out in outputs for other in outputs if out != other)
+          and all(not Path(value.parent_path).is_relative_to(out) for out in outputs),
+          "selected arm output directories and initial parent must stay disjoint")
+    return _commit((SCHEMA,asdict(value)))
+
+
+def _student_profile(configuration):
+    _need(type(configuration) is dict and type(configuration.get("model_config")) is dict
+          and "cache_source_epoch_marker" not in configuration,
+          "fresh selected unmarked decoder configuration required")
+    family = (configuration.get("architecture"), configuration["model_config"].get("model_type"))
+    if family == ("causal_lm", "qwen2"):
+        return geometry.QWEN
+    _need(family == ("encoder_decoder", "t5") and configuration.get("model_class") == T5_MODEL_CLASS
+          and configuration.get("device") == "cpu" and configuration.get("target_codec") == FULL_TARGET_CODEC
+          and configuration.get("model_profile") is None,
+          "only the selected Qwen2 or native full-target CPU T5 family can be armed")
+    return geometry.T5
+
+
+def _prepared_batches(parent, origin_proof, prepared, config, teacher, student_profile):
+    records=prepared["records"]
+    schedule=origin_proof.get("scheduled_batches")
+    _need(type(schedule) in (tuple,list) and 1 <= len(schedule) <= trial.MAX_BATCHES
+          and type(records) is list and 2 <= len(records) <= 4096
+          and all(type(row) is dict and _name(row.get("id")) and type(row.get("source_wire")) is str for row in records)
+          and len({row["id"] for row in records}) == len(records),
+          "complete unique prepared records and bounded scheduled batches required")
+    progress=dict(ZERO)
+    ordered=[]
+    for step in schedule:
+        batch=[records[i] for i in trial.batch_indices(len(records),parent["batch_size"],parent["seed"],progress)]
+        ids=tuple(row["id"] for row in batch)
+        expected={"row_ids":ids,"records_sha256":_commit(batch)}
+        _need(2 <= len(ids) <= 32 and _commit(step) == _commit(expected),
+              "origin schedule differs from exact ordered TRAIN co-batch")
+        ordered.append((batch,ids,expected["records_sha256"]))
+        trial.advance(progress,len(batch),len(records))
+    coverage={row for _,ids,_ in ordered for row in ids}
+    _need(tuple(ent.row_id for ent in teacher.rows) == tuple(row["id"] for row in records if row["id"] in coverage),
+          "native vectors must cover exactly the selected TRAIN batch union in prepared order")
+    teacher_rows={ent.row_id:ent for ent in teacher.rows}
+    authorized=set(teacher.approved_edges)
+    population_sha=population_commit(teacher.population,maximum_rows=4096)
+    config_sha=_commit(config)
+    initial_sha=origin_proof["parent_sha256"]
+    result=[]
+    for batch,ids,batch_sha in ordered:
+        edges=tuple((i,j) for i in range(len(ids)) for j in range(i+1,len(ids))
+                    if tuple(sorted((ids[i],ids[j]))) in authorized)
+        _need(bool(edges),"scheduled batch has no independently approved source pair")
+        sources=geometry.SourcePairs(geometry.SOURCE_PAIR_SCOPE,teacher.train_admission_sha256,
+                                      teacher.pair_authority_sha256,ids,edges)
+        plan=geometry.Plan(config_sha,initial_sha,batch_sha,population_sha,teacher.population,sources,
+                teacher.profile_sha256,TEACHER_WIDTHS[teacher.name],tuple(teacher_rows[key] for key in ids),
+                student_profile,teacher.coefficient,teacher.maximum_hidden_elements)
+        geometry.bind(plan,batch,configuration=config,expected_plan_sha256=geometry.plan_commit(plan))
+        result.append(trial.Batch(batch_sha,ids,plan))
+    return tuple(result)
+
+
+def prepare(arming, *, expected_arming_sha256, parent_raw, origin_proof, prepared, configuration,
+            job_inputs, teacher, verify_origin, verify_teacher_pairs):
+    """Render exact jobs and matched selections. Runtime launch still needs its own approval."""
+    from . import autoencoder_training_worker as worker
+
+    student_profile = _student_profile(configuration)
+    if student_profile == geometry.T5:
+        from .relational_sources import FULL_TARGET_INPUT, T5_ORIGIN_SCHEMA
+
+        origin_schema = T5_ORIGIN_SCHEMA
+        input_schema, input_receipt, input_profile = FULL_TARGET_INPUT
+        parent_schema = worker.REVIEWED_DECODER_CHECKPOINT_SCHEMA
+        job_class = worker.ReviewedMixedDecoderTrainingJobSpec
+        job_schema = worker.REVIEWED_MIXED_DECODER_SCHEMA_VERSION
+        codec = FULL_TARGET_CODEC
+    else:
+        origin_schema = "relational-pristine-parent-draft/v1"
+        input_schema, input_receipt, input_profile = INPUT_SCHEMA, INPUT_RECEIPT, INPUT_PROFILE
+        parent_schema = worker.REVIEWED_DIGEST_OMITTED_CHECKPOINT_SCHEMA
+        job_class = worker.ReviewedDigestOmittedDecoderTrainingJobSpec
+        job_schema = worker.REVIEWED_DIGEST_OMITTED_JOB_SCHEMA
+        codec = worker.REVIEWED_DIGEST_OMITTED_TARGET_CODEC
+    _need(_pin(expected_arming_sha256) and arming_commitment(arming) == expected_arming_sha256
+          and type(origin_proof) is dict and _commit(origin_proof) == arming.origin_proof_sha256
+          and origin_proof.get("schema") == origin_schema
+          and origin_proof.get("study_sha256") == arming.study_sha256
+          and origin_proof.get("parent_sha256") == arming.parent_sha256
+          and origin_proof.get("training_executed") is False
+          and callable(verify_origin),
+          "independently closed pristine origin for this selected study required")
+    native_origin = origin_proof.get("native_vendor_origin_sha256")
+    _need(verify_origin(arming.origin_proof_sha256) is True,
+          "independently closed pristine origin for this selected study required")
+    _need(_commit(origin_proof) == arming.origin_proof_sha256,
+          "selected pristine origin changed during owner verification")
+    parent=trial._evidence_json(parent_raw,2*1024**2)
+    budgets=parent.get("token_budgets")
+    parent_fields={"schema","checkpoint_lineage_id","base_version_id","backend_identity","assets","training_binding",
+        "model_state","optimizer_state","progress","batch_size","seed","parent_checkpoint_sha256","producer_pins",
+        "token_budgets","qualified","promotion_performed"}
+    _need(_sha(parent_raw) == arming.parent_sha256 and set(parent) == parent_fields
+          and parent["schema"] == parent_schema
+          and parent["progress"] == ZERO and all(type(value) is int for value in parent["progress"].values())
+          and parent["qualified"] is parent["promotion_performed"] is False
+          and parent["parent_checkpoint_sha256"] is parent["training_binding"] is None
+          and type(parent["seed"]) is int and parent["seed"] == origin_proof.get("job_seed")
+          and type(parent["batch_size"]) is int and 2 <= parent["batch_size"] <= 32
+          and type(budgets) is dict
+          and all(trial._artifact(parent[key]) for key in ("model_state","optimizer_state"))
+          and parent["model_state"]["path"] != parent["optimizer_state"]["path"],
+          "exact unmarked step-zero parent and distinct paired numerical artifacts required")
+    _need(_commit(configuration) == arming.configuration_sha256
+          and configuration.get("tokenizer") == budgets.get("tokenizer_contract")
+          and type(parent.get("backend_identity")) is dict and parent["backend_identity"].get("target_codec") == codec,
+          "fresh selected unmarked decoder configuration or parent codec differs")
+    _need(type(prepared) is dict and set(prepared) == {"schema","receipt","records","prepared_sha256"}
+          and prepared["prepared_sha256"] == origin_proof.get("prepared_inputs_sha256")
+          and prepared["prepared_sha256"] == _commit({key:prepared[key] for key in ("schema","receipt","records")})
+          and type(job_inputs) is dict and set(job_inputs) == JOB_INPUTS and _commit(job_inputs) == arming.job_inputs_sha256,
+          "exact selected prepared TRAIN inputs and job controls required")
+    data=prepared["receipt"]
+    _need(prepared["schema"] == input_schema and type(data) is dict
+          and data.get("schema") == input_receipt and data.get("profile") == input_profile
+          and data.get("admission_profile") == worker.REVIEWED_MIXED_ADMISSION_PROFILE
+          and data.get("source_context_profile") == "reviewed-component-source-selection-context/v1"
+          and data.get("target_codec") == codec
+          and _pin(data.get("admission_inputs_sha256"))
+          and type(job_inputs["allow_fictional_fixture"]) is bool and job_inputs["allow_fictional_fixture"] is data.get("fixture_only")
+          and _commit(job_inputs["split_config"]) == data.get("split_config_sha256")
+          and data.get("max_source_tokens") == budgets.get("max_source_tokens")
+          and data.get("max_target_tokens") == budgets.get("max_target_tokens"),
+          "job split, fiction scope, budget or TRAIN admission differ")
+    trial.require_native_t5_origin(native_origin, uses_t5=student_profile == geometry.T5,
+                                  fixture_only=data["fixture_only"])
+    for artifact, field in (("stage_artifact","stage_artifact_sha256"),("exposure_artifact","exposure_sha256"),
+                            ("source_contexts_artifact","source_contexts_sha256")):
+        _need(trial._artifact(job_inputs[artifact]) and job_inputs[artifact]["sha256"] == data.get(field),
+              "job does not bind the exact prepared " + artifact)
+    _need(teacher_commitment(teacher) == arming.teacher_sha256 and teacher.train_admission_sha256 == data["admission_inputs_sha256"]
+          and callable(verify_teacher_pairs) and verify_teacher_pairs(arming.teacher_sha256) is True,
+          "selected current native teacher and source-pair authority required")
+    assets=parent["assets"]
+    _need(type(assets) is list and len(assets) == len(PARENT_ASSETS)
+          and all(trial._artifact(item) for item in assets) and assets[0] == parent["model_state"]
+          and len({item["path"] for item in (*assets,parent["optimizer_state"])}) == len(assets)+1,
+          "complete exact original model, optimizer and distinct loader asset roster required")
+    batches=_prepared_batches(parent,origin_proof,prepared,configuration,teacher,student_profile)
+    parent_ref={"path":arming.parent_path,"sha256":arming.parent_sha256,"bytes":len(parent_raw)}
+    common={**job_inputs,"base_version_id":parent["base_version_id"],"checkpoint_lineage_id":parent["checkpoint_lineage_id"],
+        "schema_version":job_schema,"admission_profile":worker.REVIEWED_MIXED_ADMISSION_PROFILE,
+        "model_artifact":assets[0],"tokenizer_artifact":assets[1],"license_artifact":assets[2],"backend_artifacts":assets[3:],
+        "base_model_checkpoint":parent["model_state"],"base_optimizer_checkpoint":parent["optimizer_state"],
+        "parent_checkpoint_artifact":parent_ref,"expected_admission_inputs_sha256":data["admission_inputs_sha256"],
+        "expected_split_config_sha256":data["split_config_sha256"],"backend_identity":parent["backend_identity"],
+        "expected_source_sha256":parent["producer_pins"],"max_source_tokens":budgets["max_source_tokens"],
+        "max_target_tokens":budgets["max_target_tokens"],"batch_size":parent["batch_size"],
+        "max_steps":len(batches),"seed":parent["seed"]}
+    specs,trials=[],[]
+    for arm in arming.arms:
+        job=job_class.from_dict(
+            {**common,"job_id":arm.job_id,"run_id":arm.run_id,"output_directory":arm.output_directory})
+        job_raw=_wire(job.to_dict())
+        _need(job.canonical_sha256 == _sha(job_raw), "existing typed job canonical identity differs")
+        entries=tuple(replace(batch,geometry_plan=None) for batch in batches) if arm.name=="supervised" else batches
+        specs.append(job_raw)
+        trials.append(trial.Trial(arming.study_sha256,arm.recipe_sha256,arm.attempt_sha256,arm.name,job.seed,
+            job.canonical_sha256,trial.job_controls(job),arming.owner_supplement_sha256,prepared["prepared_sha256"],
+            arming.parent_sha256,parent["model_state"]["sha256"],parent["optimizer_state"]["sha256"],
+            arming.configuration_sha256, entries, native_vendor_origin_sha256=native_origin))
+    # Callbacks receive only selected pins. Recheck mutable inputs before emitting.
+    _need(_commit(job_inputs) == arming.job_inputs_sha256 and _commit(origin_proof) == arming.origin_proof_sha256
+          and _commit(configuration) == arming.configuration_sha256
+          and teacher_commitment(teacher) == arming.teacher_sha256
+          and arming_commitment(arming) == expected_arming_sha256
+          and prepared["prepared_sha256"] == origin_proof["prepared_inputs_sha256"]
+          and _commit({key:prepared[key] for key in ("schema","receipt","records")}) == prepared["prepared_sha256"],
+          "selected origin, job, teacher or preparation changed during arming")
+    trials=tuple(trials)
+    return Prepared(expected_arming_sha256,trial.matched_commitment(trials),arming.arms,tuple(specs),trials)
+
+
+def packet_commitment(value):
+    _need(type(value) is Prepared and _pin(value.arming_sha256)
+          and type(value.arms) is tuple and type(value.specs) is tuple
+          and len(value.arms) == len(value.specs) == len(trial.ARMS)
+          and all(type(arm) is Arm for arm in value.arms)
+          and all(type(raw) is bytes and 0 < len(raw) <= 1024**2 for raw in value.specs)
+          and trial.matched_commitment(value.trials) == value.matched_sha256,
+          "closed matched packet required")
+    pins=tuple(_sha(raw) for raw in value.specs)
+    _need(pins == tuple(entry.job_sha256 for entry in value.trials)
+          and all((arm.name,arm.attempt_sha256,arm.recipe_sha256) ==
+                  (entry.arm,entry.attempt_sha256,entry.arm_recipe_sha256)
+                  for arm,entry in zip(value.arms,value.trials,strict=True)),
+          "job bytes or attempt identity differ from exact matched trial")
+    student_profiles = {batch.geometry_plan.student_profile for entry in value.trials[1:]
+                        for batch in entry.batches}
+    jobs = tuple(trial._evidence_json(raw, 1024**2) for raw in value.specs)
+    schemas = tuple(job.get("schema_version") for job in jobs)
+    _need(all(type(schema) is str and schema in JOB_GEOMETRY for schema in schemas),
+          "matched packet job schema differs from selected student geometry")
+    profiles = {JOB_GEOMETRY[schema] for schema in schemas}
+    _need(len(student_profiles) == 1 and profiles == student_profiles
+          and all(job.get("continuation_profile") is None for job in jobs),
+          "matched packet job schema or continuation differs from selected student geometry")
+    return _commit((SCHEMA,value.arming_sha256,value.matched_sha256,tuple(asdict(arm) for arm in value.arms),pins))
+
+
+def bind_arm(value, *, expected_packet_sha256, arm_name, expected_trial_sha256, loaded_runtime,
+             load_receipt, owner_guard, train_admission_provider, train_asset_policy_guard):
+    """Bind one independently selected existing worker call. No dispatch or retry occurs here."""
+    from . import autoencoder_training_worker as worker
+
+    _need(_pin(expected_packet_sha256) and packet_commitment(value) == expected_packet_sha256
+          and type(arm_name) is str and arm_name in trial.ARMS and _pin(expected_trial_sha256)
+          and type(load_receipt) is dict and callable(owner_guard)
+          and callable(train_admission_provider) and callable(train_asset_policy_guard)
+          and type(loaded_runtime) is worker.ReviewedDecoderRuntime and loaded_runtime.relational_trial is None
+          and type(loaded_runtime.backend) is worker.TorchReviewedDecoderBackend,
+          "one exact selected arm and an existing freshly loaded worker are required")
+    index=trial.ARMS.index(arm_name)
+    entry=value.trials[index]
+    _need(trial.commitment(entry) == expected_trial_sha256, "independently selected arm identity differs")
+
+    raw=value.specs[index]
+    job = trial._evidence_json(raw, 1024**2)
+    backend = loaded_runtime.backend
+    configuration = backend._configuration()
+    student_profile = _student_profile(configuration)
+    job_class = (worker.ReviewedMixedDecoderTrainingJobSpec if student_profile == geometry.T5
+                 else worker.ReviewedDigestOmittedDecoderTrainingJobSpec)
+    spec = job_class.from_dict(job)
+    _need(spec.continuation_profile is None and _commit(configuration) == entry.configuration_sha256
+          and all(batch.geometry_plan.student_profile == student_profile
+                  for batch in value.trials[1].batches),
+          "selected trial student geometry, fresh job or loaded model family differs")
+    trial.require_native_t5_origin(entry.native_vendor_origin_sha256, uses_t5=student_profile == geometry.T5,
+                                  fixture_only=spec.allow_fictional_fixture)
+    _need(load_receipt.get("checkpoint_restored") is True and load_receipt.get("matched_pair") is True
+          and load_receipt.get("training_performed") is False and type(load_receipt.get("optimizer_steps")) is int
+          and load_receipt["optimizer_steps"] == 0 and type(load_receipt.get("artifacts")) is list
+          and load_receipt["artifacts"][-2:] == [asdict(spec.base_model_checkpoint),asdict(spec.base_optimizer_checkpoint)]
+          and load_receipt.get("loaded_backend_identity") == spec.to_dict()["backend_identity"]
+          and load_receipt.get("producer_pins") == spec.to_dict()["expected_source_sha256"]
+          and "cache_source_epoch_migration" not in load_receipt and "cache_source_epoch_marker" not in load_receipt,
+          "existing owner reload receipt does not bind the exact fresh numerical pair")
+    load_pin=_commit(load_receipt)
+
+    def selected_guard(trial_sha,matched_sha):
+        _need((trial_sha,matched_sha) == (expected_trial_sha256,value.matched_sha256)
+              and _commit(load_receipt) == load_pin, "worker requested a different matched arm or reload changed")
+        _need(owner_guard(expected_packet_sha256,expected_trial_sha256,load_pin) is True,
+              "existing owner did not approve this exact arm and reload")
+        _need(_commit(load_receipt) == load_pin, "reload receipt changed during owner approval")
+        if entry.native_vendor_origin_sha256 is not None:
+            return True
+
+    choice=trial.Selection(entry,expected_trial_sha256,value.trials,value.matched_sha256,selected_guard)
+    trial.approve(choice)
+    arm=value.arms[index]
+    _need((spec.job_id,spec.run_id,spec.output_directory) == (arm.job_id,arm.run_id,arm.output_directory)
+          and spec.canonical_sha256 == entry.job_sha256
+          and backend.cache_source_epoch_marker is None and type(backend._optimizer_steps) is int
+          and backend._optimizer_steps == 0 and not backend.optimizer.state
+          and _commit(backend._configuration()) == entry.configuration_sha256,
+          "selected job or fresh loaded backend differs")
+    runtime=replace(loaded_runtime,current_admission_provider=train_admission_provider,
+                    asset_policy_guard=train_asset_policy_guard,relational_trial=choice)
+    return spec,runtime
+
+
+TRANSPORT = "reviewed-relational-arming-packet/v1"
+MAX_PACKET_BYTES = 48 * 1024**2
+
+
+def transport(value):
+    """Serialize each native row once. Complete TRAIN record bodies stay with their owner."""
+    from base64 import b64encode
+
+    packet = packet_commitment(value)
+    batches=value.trials[2].batches
+    first=batches[0].geometry_plan
+    fixed_roles=("configuration_sha256","checkpoint_sha256","population_sha256","teacher_profile_sha256",
+                 "teacher_width","student_profile","coefficient","maximum_hidden_elements")
+    header={key:getattr(first,key) for key in fixed_roles}
+    sources=(first.source_pairs.scope,first.source_pairs.train_admission_sha256,first.source_pairs.pair_authority_sha256)
+    roster={}
+    steps=[]
+    for entry in batches:
+        plan=entry.geometry_plan
+        _need({key:getattr(plan,key) for key in fixed_roles} == header and plan.population == first.population
+              and (plan.source_pairs.scope,plan.source_pairs.train_admission_sha256,plan.source_pairs.pair_authority_sha256)
+                  == sources, "one frozen geometry profile, population and authority per packet required")
+        for row in plan.rows:
+            _need(roster.setdefault(row.row_id,row) == row, "native row changed between selected co-batches")
+        steps.append({"row_ids":entry.row_ids,"records_sha256":entry.records_sha256,"edges":plan.source_pairs.edges})
+    native=[]
+    for entry in roster.values():
+        metadata={key:value for key,value in vars(entry).items() if key!="data"}
+        native.append({**metadata,"data":b64encode(entry.data).decode("ascii")})
+    raw=_wire({"schema":TRANSPORT,"packet_sha256":packet,"arming_sha256":value.arming_sha256,
+        "matched_sha256":value.matched_sha256,"arms":[asdict(arm) for arm in value.arms],
+        "specs":[trial._evidence_json(body,1024**2) for body in value.specs],
+        "trials":[{key:item for key,item in vars(entry).items()
+                   if key != "batches" and (key != "native_vendor_origin_sha256" or item is not None)}
+                  for entry in value.trials],
+        "geometry":header,"population":[asdict(row) for row in first.population],
+        "source_pair_binding":sources,"native":native,"steps":steps})
+    _need(len(raw)<=MAX_PACKET_BYTES,"selected packet transport exceeds byte bound")
+    return raw
+
+
+def read_transport(raw, *, expected_transport_sha256, expected_packet_sha256):
+    """Rehydrate a selected packet. The public worker still replays live input custody."""
+    from base64 import b64decode
+
+    _need(type(raw) is bytes and 0<len(raw)<=MAX_PACKET_BYTES and _pin(expected_transport_sha256)
+          and _sha(raw)==expected_transport_sha256 and _pin(expected_packet_sha256),
+          "exact bounded selected arming transport required")
+    value=trial._evidence_json(raw,MAX_PACKET_BYTES)
+    keys={"schema","packet_sha256","arming_sha256","matched_sha256","arms","specs","trials",
+          "geometry","population","source_pair_binding","native","steps"}
+    _need(set(value)==keys and value["schema"]==TRANSPORT and value["packet_sha256"]==expected_packet_sha256
+          and all(type(value[key]) is list and len(value[key])==len(trial.ARMS) for key in ("arms","specs","trials"))
+          and type(value["geometry"]) is dict and value["geometry"].get("teacher_width") in TEACHER_WIDTHS.values()
+          and type(value["population"]) is list and 2<=len(value["population"])<=4096
+          and type(value["source_pair_binding"]) is list and len(value["source_pair_binding"])==3
+          and type(value["native"]) is list and 2<=len(value["native"])<=1024
+          and type(value["steps"]) is list and 1<=len(value["steps"])<=trial.MAX_BATCHES,
+          "closed exact arming transport roster required")
+    width=value["geometry"]["teacher_width"]
+    population=tuple(PopulationRow(**row) for row in value["population"])
+    roster={}
+    for row in value["native"]:
+        _need(type(row) is dict and type(row.get("data")) is str and len(row["data"])==4*((4*width+2)//3),
+              "exact native binary float32 transport required")
+        binary=b64decode(row["data"],validate=True)
+        _need(len(binary)==4*width,"native transport bit width differs")
+        native=NativeVector(**{**row,"data":binary})
+        _need(type(native.row_id) is str and native.row_id not in roster,"native transport row is ambiguous")
+        roster[native.row_id]=native
+    with_geometry=[]
+    scope,admission,pair_authority=value["source_pair_binding"]
+    for step in value["steps"]:
+        _need(type(step) is dict and set(step)=={"row_ids","records_sha256","edges"}
+              and type(step["row_ids"]) is list and 2<=len(step["row_ids"])<=32
+              and all(type(key) is str and key in roster for key in step["row_ids"])
+              and type(step["edges"]) is list and 1<=len(step["edges"])<=496
+              and all(type(edge) is list and len(edge)==2 for edge in step["edges"]),
+              "selected transport co-batch roster or edges differ")
+        ids=tuple(step["row_ids"])
+        sources=geometry.SourcePairs(scope,admission,pair_authority,ids,tuple(tuple(edge) for edge in step["edges"]))
+        plan=geometry.Plan(**value["geometry"],train_records_sha256=step["records_sha256"],
+                           population=population,source_pairs=sources,rows=tuple(roster[key] for key in ids))
+        with_geometry.append(trial.Batch(step["records_sha256"],ids,plan))
+    with_geometry=tuple(with_geometry)
+    without=tuple(replace(entry,geometry_plan=None) for entry in with_geometry)
+    trials=tuple(trial.Trial(**entry,batches=without if name=="supervised" else with_geometry)
+                 for name,entry in zip(trial.ARMS,value["trials"],strict=True))
+    packet=Prepared(value["arming_sha256"],value["matched_sha256"],tuple(Arm(**arm) for arm in value["arms"]),
+                    tuple(_wire(spec) for spec in value["specs"]),trials)
+    _need(packet_commitment(packet)==expected_packet_sha256 and transport(packet)==raw,
+          "reconstructed job/teacher/pair identities differ from selected transport")
+    return packet
+
+
+PANEL_SCHEMA = "reviewed-relational-teacher-panel/v1"
+
+
+def _panel_scope(arming, teacher):
+    return (
+        arming.study_sha256, arming.origin_proof_sha256, arming.parent_sha256,
+        arming.parent_path, arming.configuration_sha256, arming.job_inputs_sha256,
+        arming.owner_supplement_sha256, teacher.population, teacher.train_admission_sha256,
+        tuple((row.row_id, row.source_wire_sha256) for row in teacher.rows),
+        teacher.approved_edges, teacher.pair_authority_sha256, teacher.coefficient,
+        teacher.maximum_hidden_elements,
+    )
+
+
+def panel_commitment(selections):
+    """Commit one matched selection for each supported native teacher."""
+    _need(type(selections) is tuple and len(selections) == len(TEACHER_WIDTHS)
+          and all(type(cell) is tuple and len(cell) == 2
+                  and type(cell[0]) is Arming and type(cell[1]) is Teacher for cell in selections),
+          "exact ordered teacher panel selections required")
+    _need(tuple(teacher.name for _, teacher in selections) == tuple(TEACHER_WIDTHS),
+          "exact ordered teacher names required")
+    pins = []
+    for arming, teacher in selections:
+        teacher_pin = teacher_commitment(teacher)
+        _need(arming.teacher_sha256 == teacher_pin, "arming does not commit its selected native teacher")
+        _need(type(teacher.coefficient) is float and 0 < teacher.coefficient <= 1
+              and type(teacher.maximum_hidden_elements) is int
+              and 0 < teacher.maximum_hidden_elements <= 2**27,
+              "bounded teacher panel coefficient and observation limit required")
+        pins.append((arming_commitment(arming), teacher_pin))
+    _need(len({teacher.profile_sha256 for _, teacher in selections}) == len(selections),
+          "distinct teacher profile identities required")
+    scope = _panel_scope(*selections[0])
+    _need(all(_panel_scope(*cell) == scope for cell in selections[1:]),
+          "teacher panel study, origin, training population, pair authority or controls differ")
+
+    arms = tuple(arm for arming, _ in selections for arm in arming.arms)
+    for field in ("attempt_sha256", "job_id", "run_id", "output_directory"):
+        _need(len({getattr(arm, field) for arm in arms}) == len(arms),
+              "every teacher panel arm needs a distinct " + field)
+    outputs = tuple(Path(arm.output_directory) for arm in arms)
+    _need(all(not output.is_relative_to(other)
+              for output in outputs for other in outputs if output != other),
+          "teacher panel output directories must stay disjoint")
+    return _commit((PANEL_SCHEMA, tuple(pins)))
+
+
+def prepare_teacher_panel(selections, *, expected_panel_sha256, parent_raw, origin_proof,
+                          prepared, configuration, job_inputs, verify_origin, verify_teacher_pairs):
+    """Preflight four exact packets without dispatching or sharing any arm."""
+    _need(_pin(expected_panel_sha256) and panel_commitment(selections) == expected_panel_sha256,
+          "independently selected teacher panel commitment differs")
+    arming = selections[0][0]
+    _need(type(parent_raw) is bytes and 0 < len(parent_raw) <= 2*1024**2
+          and _sha(parent_raw) == arming.parent_sha256
+          and type(origin_proof) is dict and _commit(origin_proof) == arming.origin_proof_sha256
+          and type(configuration) is dict and _commit(configuration) == arming.configuration_sha256
+          and type(job_inputs) is dict and _commit(job_inputs) == arming.job_inputs_sha256
+          and type(prepared) is dict and set(prepared) == {"schema", "receipt", "records", "prepared_sha256"}
+          and prepared["prepared_sha256"] == origin_proof.get("prepared_inputs_sha256")
+          and prepared["prepared_sha256"] == _commit({key: prepared[key] for key in ("schema", "receipt", "records")})
+          and callable(verify_origin) and callable(verify_teacher_pairs),
+          "exact shared teacher panel preparation and owner verifiers required")
+
+    packets = []
+    for arming, teacher in selections:
+        packet = prepare(arming, expected_arming_sha256=arming_commitment(arming), parent_raw=parent_raw,
+                         origin_proof=origin_proof, prepared=prepared, configuration=configuration,
+                         job_inputs=job_inputs, teacher=teacher, verify_origin=verify_origin,
+                         verify_teacher_pairs=verify_teacher_pairs)
+        _need(panel_commitment(selections) == expected_panel_sha256,
+              "teacher panel selection changed during owner verification")
+        _need(not packets or packet.trials[0].batches == packets[0].trials[0].batches,
+              "prepared teacher panel co-batches differ")
+        packets.append(packet)
+    return tuple(packets)
+
+
+MATCHED_PANEL_SCHEMA = "reviewed-relational-matched-student-panels/v1"
+
+
+@dataclass(frozen=True)
+class StudentPanel:
+    label: str
+    selections: tuple[tuple[Arming, Teacher], ...]
+    parent_raw: bytes
+    origin_proof: dict
+    prepared: dict
+    configuration: dict
+    job_inputs: dict
+
+
+def _matched_panels(panels, seed_label):
+    from .relational_sources import training_cohort_commitment
+
+    _need(_name(seed_label) and type(panels) is tuple and 2 <= len(panels) <= 8
+          and all(type(panel) is StudentPanel and _name(panel.label) for panel in panels)
+          and len({panel.label for panel in panels}) == len(panels),
+          "distinct ordered student panels and explicit study seed label required")
+    variants, all_arms = [], []
+    common = None
+    for panel in panels:
+        panel_pin = panel_commitment(panel.selections)
+        base, teacher = panel.selections[0]
+        proof = panel.origin_proof
+        profile = _student_profile(panel.configuration)
+        _need(type(panel.parent_raw) is bytes and 0 < len(panel.parent_raw) <= 2*1024**2
+              and _sha(panel.parent_raw) == base.parent_sha256 and type(proof) is dict
+              and _commit(proof) == base.origin_proof_sha256 and proof.get("study_sha256") == base.study_sha256
+              and type(proof.get("job_seed")) is int and proof.get("parent_sha256") == base.parent_sha256
+              and _commit(panel.configuration) == base.configuration_sha256
+              and type(panel.job_inputs) is dict and _commit(panel.job_inputs) == base.job_inputs_sha256,
+              "student panel differs from its selected origin, configuration or job controls")
+        parent = trial._evidence_json(panel.parent_raw, 2*1024**2)
+        seed = proof["job_seed"]
+        _need(type(parent.get("seed")) is int and parent["seed"] == seed,
+              "exact common job seed must match the paired parent")
+        cohort = training_cohort_commitment(panel.prepared, proof, teacher.population,
+            expected_prepared_sha256=proof.get("prepared_inputs_sha256"), expected_origin_proof_sha256=base.origin_proof_sha256)
+        # Each selected packet still pins its architecture-specific observation cap.
+        teacher_pins = tuple(teacher_commitment(replace(item, maximum_hidden_elements=1))
+                             for _, item in panel.selections)
+        scope = (base.study_sha256, seed, cohort, teacher_pins)
+        _need(common is None or common == scope,
+              "student panels differ in study, job seed, reviewed TRAIN cohort or selected teachers")
+        common = scope
+        all_arms.extend(arm for selection, _ in panel.selections for arm in selection.arms)
+        variants.append({"label": panel.label, "student_profile": profile, "panel_sha256": panel_pin,
+                         "parent_sha256": base.parent_sha256, "origin_proof_sha256": base.origin_proof_sha256,
+                         "configuration_sha256": base.configuration_sha256,
+                         "job_inputs_sha256": base.job_inputs_sha256, "prepared_sha256": proof["prepared_inputs_sha256"]})
+    _need(len({variant["configuration_sha256"] for variant in variants}) == len(variants),
+          "explicit distinct student configurations required")
+    for field in ("attempt_sha256", "job_id", "run_id", "output_directory"):
+        _need(len({getattr(arm, field) for arm in all_arms}) == len(all_arms),
+              "student panels need globally distinct " + field)
+    outputs = [Path(arm.output_directory) for arm in all_arms]
+    _need(all(not path.is_relative_to(other) for path in outputs for other in outputs if path != other)
+          and all(not Path(selection.parent_path).is_relative_to(path)
+                  for panel in panels for selection, _ in panel.selections for path in outputs),
+          "student panels need disjoint output directories and starting pairs")
+    study, native_seed, cohort, teachers = common
+    return {"schema": MATCHED_PANEL_SCHEMA, "study_sha256": study, "seed_label": seed_label, "job_seed": native_seed,
+            "train_cohort_sha256": cohort, "common_teacher_inputs_sha256s": teachers, "variants": tuple(variants)}
+
+
+def matched_teacher_panels_commitment(panels, *, seed_label):
+    return _commit(_matched_panels(panels, seed_label))
+
+
+def prepare_matched_teacher_panels(panels, *, seed_label, expected_selection_sha256,
+                                   verify_selection_owner, verify_origin, verify_teacher_pairs):
+    """Render existing packets after the study owner verifies a common reviewed cohort."""
+    selected = _matched_panels(panels, seed_label)
+    _need(_pin(expected_selection_sha256) and _commit(selected) == expected_selection_sha256
+          and callable(verify_selection_owner) and callable(verify_origin) and callable(verify_teacher_pairs)
+          and verify_selection_owner(expected_selection_sha256) is True,
+          "independently selected matched student panels required")
+    _need(matched_teacher_panels_commitment(panels, seed_label=seed_label) == expected_selection_sha256,
+          "matched student selection changed during study verification")
+    batches = []
+    proofs = []
+    for panel, inputs in zip(panels, selected["variants"], strict=True):
+        packets = prepare_teacher_panel(panel.selections, expected_panel_sha256=inputs["panel_sha256"],
+            parent_raw=panel.parent_raw, origin_proof=panel.origin_proof, prepared=panel.prepared,
+            configuration=panel.configuration, job_inputs=panel.job_inputs, verify_origin=verify_origin,
+            verify_teacher_pairs=verify_teacher_pairs)
+        batches.append(packets)
+        proofs.append(tuple({"packet_sha256": packet_commitment(packet),
+                             "trial_sha256s": tuple(trial.commitment(entry) for entry in packet.trials)}
+                            for packet in packets))
+    _need(matched_teacher_panels_commitment(panels, seed_label=seed_label) == expected_selection_sha256,
+          "matched student selection changed during panel verification")
+    return tuple(batches), {**selected, "selection_sha256": expected_selection_sha256,
+                            "packet_proofs": tuple(proofs)}
+
+
+# The opt-in extension keeps the issued fresh-arm binder and packet source intact.
+from typing import Callable
+
+CHECKPOINT_CAPTURE_SCHEMA = "reviewed-relational-packet-checkpoint-capture/v1"
+
+
+@dataclass(frozen=True)
+class CheckpointCapturePlan:
+    packet_sha256: str
+    study_sha256: str
+    development_design_sha256: str
+    steps: tuple[tuple[str, int], ...]
+    max_intermediate_bytes: int
+    resource_plan_sha256: str
+
+
+@dataclass(frozen=True)
+class CheckpointCaptureSelection:
+    plan: CheckpointCapturePlan
+    expected_sha256: str
+    expected_step_grid_sha256: str
+    guard: Callable[[str, str, str, str], bool]
+
+
+def checkpoint_capture_commitment(plan):
+    """Commit one capture policy for an issued matched packet."""
+    _need(type(plan) is CheckpointCapturePlan and all(_pin(pin) for pin in (
+          plan.packet_sha256, plan.study_sha256, plan.development_design_sha256, plan.resource_plan_sha256))
+          and type(plan.steps) is tuple and 1 <= len(plan.steps) <= trial.MAX_BATCHES
+          and all(type(row) is tuple and len(row) == 2 and type(row[0]) is str and type(row[1]) is int
+                  for row in plan.steps)
+          and type(plan.max_intermediate_bytes) is int and plan.max_intermediate_bytes > 0,
+          "matched packet checkpoint capture requires an explicit grid, byte bound and resource plan")
+    return _commit((CHECKPOINT_CAPTURE_SCHEMA, asdict(plan)))
+
+
+def _bind_checkpoint_capture(value, choice, capture, *, packet_sha256, load_receipt, load_sha256, max_steps):
+    _need(type(capture) is CheckpointCaptureSelection and callable(capture.guard)
+          and _pin(capture.expected_sha256) and _pin(capture.expected_step_grid_sha256),
+          "independently selected matched checkpoint capture required")
+    plan, guard = capture.plan, capture.guard
+    capture_sha, grid_sha = capture.expected_sha256, capture.expected_step_grid_sha256
+    selected_trial, selected_trial_sha = choice.trial, choice.expected_sha256
+    _need(checkpoint_capture_commitment(plan) == capture_sha
+          and (plan.packet_sha256, plan.study_sha256) == (packet_sha256, choice.trial.study_sha256)
+          and max_steps == len(choice.trial.batches),
+          "checkpoint capture does not bind the selected packet, study and worker save window")
+    schedule = trial.DevelopmentCheckpointSchedule(selected_trial_sha, plan.study_sha256,
+        plan.development_design_sha256, plan.steps, plan.max_intermediate_bytes)
+    schedule_sha = trial.development_checkpoint_schedule_commitment(schedule)
+
+    def current():
+        _need(capture.plan is plan and capture.guard is guard
+              and (capture.expected_sha256, capture.expected_step_grid_sha256) == (capture_sha, grid_sha)
+              and choice.trial is selected_trial and choice.expected_sha256 == selected_trial_sha
+              and checkpoint_capture_commitment(plan) == capture_sha
+              and packet_commitment(value) == packet_sha256 and _commit(load_receipt) == load_sha256,
+              "checkpoint capture plan, packet or fresh reload changed during verification")
+
+    def verify(schedule_sha256, step_grid_sha256):
+        _need((schedule_sha256, step_grid_sha256) == (schedule_sha, grid_sha),
+              "worker requested a different checkpoint capture schedule or grid")
+        current()
+        accepted = guard(capture_sha, grid_sha, selected_trial_sha, load_sha256)
+        current()
+        return accepted is True
+
+    selected = trial.DevelopmentCheckpointSelection(schedule, schedule_sha, grid_sha, verify)
+    trial.approve_development_checkpoints(selected, choice, initial_optimizer_steps=0, max_steps=max_steps)
+    return selected
+
+
+_bind_fresh_arm = bind_arm
+
+
+def bind_arm(value, *, expected_packet_sha256, arm_name, expected_trial_sha256, loaded_runtime,
+             load_receipt, owner_guard, train_admission_provider, train_asset_policy_guard,
+             checkpoint_capture=None):
+    """Bind the issued training arm and, when selected, its checkpoint capture."""
+    _need(getattr(loaded_runtime, "development_checkpoints", None) is None,
+          "existing freshly loaded worker without prior checkpoint capture required")
+    spec, runtime = _bind_fresh_arm(value, expected_packet_sha256=expected_packet_sha256, arm_name=arm_name,
+        expected_trial_sha256=expected_trial_sha256, loaded_runtime=loaded_runtime, load_receipt=load_receipt,
+        owner_guard=owner_guard, train_admission_provider=train_admission_provider,
+        train_asset_policy_guard=train_asset_policy_guard)
+    if checkpoint_capture is None:
+        return spec, runtime
+
+    _need(hasattr(loaded_runtime, "development_checkpoints"), "selected worker runtime lacks scheduled checkpoint capture")
+    load_sha = _commit(load_receipt)
+    choice = runtime.relational_trial
+    capture = _bind_checkpoint_capture(value, choice, checkpoint_capture, packet_sha256=expected_packet_sha256,
+        load_receipt=load_receipt, load_sha256=load_sha, max_steps=spec.max_steps)
+    backend = runtime.backend
+    _need(type(backend._optimizer_steps) is int and backend._optimizer_steps == 0
+          and not backend.optimizer.state and backend.cache_source_epoch_marker is None
+          and _commit(backend._configuration()) == choice.trial.configuration_sha256
+          and spec.canonical_sha256 == choice.trial.job_sha256,
+          "selected job or fresh loaded backend differs after capture approval")
+    return spec, replace(runtime, development_checkpoints=capture)
+
+
+ARCHIVED_CHECKPOINT_ARM_SCHEMA = "reviewed-relational-archived-checkpoint-arm/v1"
+
+
+@dataclass(frozen=True)
+class ArchivedCheckpointArm:
+    packet_sha256: str
+    trial_sha256: str
+    capture_plan_sha256: str
+    step_grid_sha256: str
+    schedule_sha256: str
+    load_receipt_sha256: str
+    terminal_close_sha256: str
+
+
+def archived_checkpoint_arm_commitment(reference):
+    """Commit the exact archived authorization for one closed arm."""
+    _need(type(reference) is ArchivedCheckpointArm
+          and all(_pin(value) for value in asdict(reference).values()),
+          "exact archived checkpoint arm commitments required")
+    return _commit((ARCHIVED_CHECKPOINT_ARM_SCHEMA, asdict(reference)))
+
+
+def bind_archived_checkpoint_arm(value, *, capture_plan, reference, expected_reference_sha256,
+                                 load_receipt, terminal_close, verify_archived_owner):
+    """Rebind one closed arm from authenticated metadata for checkpoint readback."""
+    _need(_pin(expected_reference_sha256)
+          and archived_checkpoint_arm_commitment(reference) == expected_reference_sha256
+          and callable(verify_archived_owner) and type(load_receipt) is dict
+          and packet_commitment(value) == reference.packet_sha256
+          and checkpoint_capture_commitment(capture_plan) == reference.capture_plan_sha256
+          and capture_plan.packet_sha256 == reference.packet_sha256
+          and trial.close_commitment(terminal_close) == reference.terminal_close_sha256,
+          "archived packet, capture plan, owner verifier or terminal close differs")
+    matched, matched_sha = value.trials, value.matched_sha256
+    indices = tuple(index for index, entry in enumerate(matched)
+                    if trial.commitment(entry) == reference.trial_sha256)
+    _need(len(indices) == 1, "archived trial must occur exactly once in the selected packet")
+    index = indices[0]
+    entry, arm = matched[index], value.arms[index]
+    job = trial._evidence_json(value.specs[index], 1024**2)
+    max_steps = job.get("max_steps")
+    parent, model, optimizer = (job.get(role) for role in (
+        "parent_checkpoint_artifact", "base_model_checkpoint", "base_optimizer_checkpoint"))
+    _need(entry.study_sha256 == capture_plan.study_sha256
+          and entry.attempt_sha256 == terminal_close.attempt_sha256
+          and (job.get("job_id"), job.get("run_id"), job.get("output_directory"))
+              == (arm.job_id, arm.run_id, arm.output_directory)
+          and type(job.get("seed")) is int and job["seed"] == entry.seed
+          and type(max_steps) is int and max_steps == len(entry.batches)
+          and all(trial._artifact(item) for item in (parent, model, optimizer))
+          and (parent["sha256"], model["sha256"], optimizer["sha256"])
+              == (entry.parent_manifest_sha256, entry.base_model_sha256, entry.base_optimizer_sha256)
+          and job.get("continuation_profile") is None
+          and {"cache_source_epoch_migration", "cache_source_epoch_marker"}.isdisjoint(job),
+          "archived fresh job, declared save window or starting pair differs from the selected trial")
+    schedule = trial.DevelopmentCheckpointSchedule(reference.trial_sha256, capture_plan.study_sha256,
+        capture_plan.development_design_sha256, capture_plan.steps, capture_plan.max_intermediate_bytes)
+    _need(trial.development_checkpoint_schedule_commitment(schedule) == reference.schedule_sha256
+          and trial.development_step_grid_commitment(schedule) == reference.step_grid_sha256
+          and all(step <= max_steps for _, step in schedule.steps),
+          "archived checkpoint schedule or grid differs from the selected fresh save window")
+
+    digest_omitted = JOB_GEOMETRY[job["schema_version"]] == geometry.QWEN
+    load_schema = ("reviewed-local-digest-omitted-decoder-runtime-load/v1" if digest_omitted
+                   else "reviewed-local-decoder-runtime-load/v2")
+    identity, source_pins = job.get("backend_identity"), job.get("expected_source_sha256")
+    _need(type(identity) is dict and type(source_pins) is dict
+          and load_receipt.get("schema") == load_schema
+          and (not digest_omitted or load_receipt.get("target_codec") == identity.get("target_codec"))
+          and load_receipt.get("checkpoint_restored") is True and load_receipt.get("matched_pair") is True
+          and load_receipt.get("training_performed") is False
+          and type(load_receipt.get("optimizer_steps")) is int and load_receipt["optimizer_steps"] == 0
+          and type(load_receipt.get("artifacts")) is list and load_receipt["artifacts"][-2:] == [model, optimizer]
+          and load_receipt.get("loaded_backend_identity") == identity
+          and load_receipt.get("producer_pins") == source_pins
+          and {"cache_source_epoch_migration", "cache_source_epoch_marker"}.isdisjoint(load_receipt)
+          and _commit(load_receipt) == reference.load_receipt_sha256,
+          "archived reload schema or receipt does not bind the selected step-zero pair")
+
+    execution_record_sha = terminal_close.owner_execution_record_sha256
+
+    def current():
+        _need(archived_checkpoint_arm_commitment(reference) == expected_reference_sha256
+              and value.trials is matched and value.matched_sha256 == matched_sha
+              and packet_commitment(value) == reference.packet_sha256
+              and checkpoint_capture_commitment(capture_plan) == reference.capture_plan_sha256
+              and trial.development_checkpoint_schedule_commitment(schedule) == reference.schedule_sha256
+              and trial.development_step_grid_commitment(schedule) == reference.step_grid_sha256
+              and _commit(load_receipt) == reference.load_receipt_sha256
+              and trial.close_commitment(terminal_close) == reference.terminal_close_sha256,
+              "archived checkpoint arm or evidence changed during owner verification")
+
+    def verify_archive():
+        current()
+        accepted = verify_archived_owner(expected_reference_sha256, execution_record_sha)
+        current()
+        return accepted is True
+
+    _need(verify_archive() is True, "owner did not authenticate the archived checkpoint arm")
+    return trial.ArchivedScheduledSelection(entry, reference.trial_sha256, matched, matched_sha,
+        schedule, reference.schedule_sha256, reference.step_grid_sha256, reference.terminal_close_sha256,
+        verify_archive)
+
+
+_bind_archived_checkpoint_arm = bind_archived_checkpoint_arm
+
+
+def bind_archived_checkpoint_arm(value, *, capture_plan, reference, expected_reference_sha256,
+                                 load_receipt, terminal_close, verify_archived_owner):
+    """Retain the owner-verified capture and resource commitments for readback."""
+    selected = _bind_archived_checkpoint_arm(value, capture_plan=capture_plan, reference=reference,
+        expected_reference_sha256=expected_reference_sha256, load_receipt=load_receipt,
+        terminal_close=terminal_close, verify_archived_owner=verify_archived_owner)
+    identity = trial.ArchivedCaptureIdentity(expected_reference_sha256, reference.capture_plan_sha256,
+                                             capture_plan.resource_plan_sha256)
+    approved_pins = trial._archived_capture_pins(identity)
+
+    def verify_capture():
+        _need(trial._archived_capture_pins(identity) == approved_pins, "archived capture changed since owner binding")
+        accepted = selected.verify_archive()
+        _need(trial._archived_capture_pins(identity) == approved_pins, "archived capture changed since owner binding")
+        return accepted is True
+
+    verifier = trial._ArchivedCaptureVerifier(identity, verify_capture)
+    return replace(selected, archived_capture=identity, verify_archive=verifier)
+
+
+_prepare_matched_teacher_panels = prepare_matched_teacher_panels
+
+
+def prepare_matched_teacher_panels(panels, *, seed_label, expected_selection_sha256,
+                                   verify_selection_owner, verify_origin, verify_teacher_pairs,
+                                   include_teacher_evidence=False):
+    """Optionally retain the verified native teacher owner for each prepared packet."""
+    _need(type(include_teacher_evidence) is bool, "explicit teacher evidence option must be boolean")
+    batches, receipt = _prepare_matched_teacher_panels(panels, seed_label=seed_label,
+        expected_selection_sha256=expected_selection_sha256, verify_selection_owner=verify_selection_owner,
+        verify_origin=verify_origin, verify_teacher_pairs=verify_teacher_pairs)
+    if not include_teacher_evidence:
+        return batches, receipt
+
+    enriched = []
+    for panel, packets, proofs in zip(panels, batches, receipt["packet_proofs"], strict=True):
+        rows = []
+        for (arming, teacher), packet, proof in zip(panel.selections, packets, proofs, strict=True):
+            _need(packet.arming_sha256 == arming_commitment(arming),
+                  "teacher evidence must belong to the exact prepared packet")
+            rows.append({**proof, "teacher_evidence": {"profile_sha256": teacher.profile_sha256,
+                "teacher_sha256": arming.teacher_sha256, "owner_close_sha256": teacher.vector_owner_close_sha256}})
+        enriched.append(tuple(rows))
+
+    # This also recomputes each original teacher commitment, including its observation cap.
+    _need(matched_teacher_panels_commitment(panels, seed_label=seed_label) == expected_selection_sha256,
+          "matched teacher evidence changed during panel verification")
+    return batches, {**receipt, "packet_proofs": tuple(enriched)}

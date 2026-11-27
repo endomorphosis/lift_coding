@@ -1,0 +1,201 @@
+{
+  "effect_scope": {
+    "auxiliary_update_called": false,
+    "canonical_source_write": false,
+    "external_artifact_export": false,
+    "fit": false,
+    "native_lean": false,
+    "network": false,
+    "ordinary_qualification": false,
+    "persistent_weight_write": false,
+    "product_edit": false,
+    "real_nudge_called": false,
+    "source_lease": false,
+    "sql": false,
+    "worker_child_process": false
+  },
+  "execution": {
+    "attempt_count": 1,
+    "matching_control_pass_count": 1,
+    "process_terminal": true,
+    "stale_acceptance_expectation_failure_count": 1,
+    "wall_timeout_seconds": 35,
+    "worker_exit": 1
+  },
+  "guard": {
+    "actual_explicit_project_body_bytes": 5278551,
+    "blocked_import_families": [
+      "torch",
+      "torchvision",
+      "torchaudio",
+      "transformers",
+      "sentence_transformers",
+      "duckdb",
+      "sqlite3",
+      "_sqlite3",
+      "sqlalchemy"
+    ],
+    "kernel": {
+      "address_space_bytes": 536870912,
+      "cpu_affinity": [
+        0
+      ],
+      "cpu_seconds": 25,
+      "kernel_probes": [
+        "socket",
+        "clone3",
+        "write-open"
+      ],
+      "landlock_abi": 7,
+      "stdout_stderr_each_max_bytes": 131072,
+      "syscall_denylist": [
+        "socket",
+        "socketpair",
+        "connect",
+        "accept",
+        "accept4",
+        "bind",
+        "listen",
+        "clone",
+        "clone3",
+        "execve",
+        "execveat",
+        "io_uring_setup",
+        "io_uring_enter",
+        "io_uring_register",
+        "pidfd_getfd",
+        "ptrace",
+        "process_vm_writev",
+        "setns",
+        "unshare",
+        "mount",
+        "umount2",
+        "truncate",
+        "ftruncate",
+        "fchmod",
+        "fchmodat",
+        "fchmodat2",
+        "fchown",
+        "fchownat",
+        "utimensat",
+        "setxattr",
+        "lsetxattr",
+        "fsetxattr",
+        "removexattr",
+        "lremovexattr",
+        "fremovexattr"
+      ]
+    },
+    "module_compile_max_each_bytes": 2097152,
+    "module_compile_max_files": 160,
+    "module_compile_max_total_bytes": 8388608,
+    "python_audit_refusals": [],
+    "stdlib_and_venv_library_reads_bytes_unmetered": true
+  },
+  "outcome": {
+    "cases": [
+      {
+        "actual_spy_calls": 1,
+        "applied_count": 0,
+        "block_reasons": {
+          "no_bounded_learning_target": 1
+        },
+        "case": "matching",
+        "exact_state_unchanged": true,
+        "expected_spy_calls": 1,
+        "passed_acceptance_expectation": true,
+        "spy": [
+          {
+            "feedback_record_id": "legal-ir-proof-feedback-2213050fedf292dec83e2e26d3f0b470db62d310cddacb1107e7b0d5f304970a",
+            "learning_rate": 0.05,
+            "sample_ir_sha256": "07dcece18db524515e069deef0102d6c250d374349998849486f692197bb3b25"
+          }
+        ],
+        "state_after_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+        "state_before_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+        "weight_write_reported": false
+      },
+      {
+        "actual_spy_calls": 1,
+        "applied_count": 0,
+        "block_reasons": {
+          "no_bounded_learning_target": 1
+        },
+        "case": "revised",
+        "exact_state_unchanged": true,
+        "expected_spy_calls": 0,
+        "passed_acceptance_expectation": false,
+        "spy": [
+          {
+            "feedback_record_id": "legal-ir-proof-feedback-2213050fedf292dec83e2e26d3f0b470db62d310cddacb1107e7b0d5f304970a",
+            "learning_rate": 0.05,
+            "sample_ir_sha256": "01831dbd17ff736dcdabfa1866766f92fdbfd803a4d3277cdb3ea6d0d8a7150b"
+          }
+        ],
+        "state_after_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+        "state_before_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+        "weight_write_reported": false
+      }
+    ],
+    "no_fit": true,
+    "no_real_bounded_update_called": true,
+    "original_document_sha256": "07dcece18db524515e069deef0102d6c250d374349998849486f692197bb3b25",
+    "record_digest_kind": "create fallback over obligation_id and type",
+    "record_obligation_digest": "a56d724b6b7780de93e27f7b2ff0bc730a44e894c7dec646f83f803aff2b05d3",
+    "revised_document_sha256": "01831dbd17ff736dcdabfa1866766f92fdbfd803a4d3277cdb3ea6d0d8a7150b",
+    "same_normalized_text": true,
+    "same_sample_id": true,
+    "spy_bypass_reproduced": true
+  },
+  "ownership": "Private Phase7 reproduction only",
+  "published_input": {
+    "fixture": {
+      "bytes": 37429,
+      "git_blob_sha1": "754d53a96072b21bcabb8a44a4fc615b4cf1152f",
+      "sha256": "9ea38219594c8f5841fec7dbd2ad6da8925147eda44cb0ca9df2cff0fc5a2d7e"
+    },
+    "head": "86a9a0c49e2021ecc98bdd56b000f0c99238342a",
+    "project_blob_join": {
+      "bytes": 11903,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-same-id-proof-feedback-no-fit-v01-gA9Exh/attempt01.published-blob-join-v02.json",
+      "sha256": "3ae0a9cc56e69d33bc4fe07cc4eac1555e32c06dbff9bddefbd006d2a3fa213e"
+    },
+    "repository": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+    "trainer": {
+      "bytes": 40652,
+      "git_blob_sha1": "37265225393a19b2c58ee0ead946929090b51d23",
+      "sha256": "5274253f346efe110c5a69eec161e5dcb51ce858fae5f3275c045528b32273a5"
+    },
+    "tree": "b3c7bc9a88c642bd9119a432f9d3b44834c95b4b"
+  },
+  "raw_evidence": {
+    "exit": {
+      "bytes": 2,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-same-id-proof-feedback-no-fit-v01-gA9Exh/attempt01.exit.txt",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "runner": {
+      "bytes": 15945,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-same-id-proof-feedback-no-fit-v01-gA9Exh/guarded_probe.py",
+      "sha256": "6e483bf40c38136befa85f40f04df617d715c9047bc7ad8bb1812c05f1891bdf"
+    },
+    "stderr": {
+      "bytes": 0,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-same-id-proof-feedback-no-fit-v01-gA9Exh/attempt01.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stdout": {
+      "bytes": 24341,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-same-id-proof-feedback-no-fit-v01-gA9Exh/attempt01.stdout.json",
+      "sha256": "b6b6026e1bb0b16ef0a6680490aa7b9d3003c0f80af85dd317d78254f6f723e9"
+    }
+  },
+  "readback_correction": "The initial verification matched all compiled blobs then hit an unrelated worktree-wide clean assertion. Current noncompiled guide deltas are reported literally in the v02 Git join. The corrected verifier limits the clean predicate to compiled paths. The actual probe was never rerun.",
+  "schema": "phase7-typed-feedback-same-id-private-no-fit-reproduction-v1",
+  "separate_contract_finding": {
+    "current_feedback_digest": "legal_ir_proof_feedback.py:841\u2013848,1133\u20131142",
+    "current_proof_target_generation": "legal_ir_obligations.py:223\u2013251,499\u2013526,629\u2013646",
+    "missing": "An independently derived current sample-to-obligation binding in a digest domain that includes the interpreted target and applicable definition dependency revision.",
+    "scope": "The fallback ID/type case reproduced here contains no proof target. An actual generated obligation has an ID distinct from sample_id. The separate statement-based projection can omit a meaning change at equal exception count. No new contract or schema implemented."
+  }
+}

@@ -1,0 +1,176 @@
+{
+  "actual_push_outputs": {
+    "datasets": "To https://github.com/endomorphosis/ipfs_datasets_py.git\n \t0d71c0d82b2dfc1ed3c7f236009e467e4c201c88:refs/heads/main\t5fae066b58..0d71c0d82b\nDone",
+    "hallucinate": "To https://github.com/endomorphosis/hallucinate_app.git\n \t7e97bf92592900dc05d07ec1bc9d8663b8242d68:refs/heads/main\teb981c0..7e97bf9\nDone",
+    "root": "To https://github.com/endomorphosis/lift_coding.git\n \tc40b39e3431abfc7c2f7a288e4780bdba20349de:refs/heads/main\tb2f400bbd4..c40b39e343\nDone"
+  },
+  "force_or_tag_push": false,
+  "gitlink_updates": {
+    "hallucinate": {
+      "ipfs_datasets_py": {
+        "from": "5fae066b5871d3fdf0b63dfbc4339c199ca6ffc1",
+        "to": "0d71c0d82b2dfc1ed3c7f236009e467e4c201c88"
+      }
+    },
+    "root": {
+      "external/ipfs_datasets": {
+        "from": "5fae066b5871d3fdf0b63dfbc4339c199ca6ffc1",
+        "to": "0d71c0d82b2dfc1ed3c7f236009e467e4c201c88"
+      },
+      "hallucinate_app": {
+        "from": "eb981c0201aaed687b37668c6e88c642cc71b39a",
+        "to": "7e97bf92592900dc05d07ec1bc9d8663b8242d68"
+      }
+    }
+  },
+  "guide_blobs": {
+    "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json": {
+      "blob": "a4db65444115281aa35dab8cc2ad64ec416f72e2",
+      "bytes": 1447756,
+      "full9": {
+        "st_ctime_ns": "1795550537894062346",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042530",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795550537249732981",
+        "st_nlink": "1",
+        "st_size": "1447756",
+        "st_uid": "1000"
+      },
+      "inserted_bytes": 26711,
+      "previous_blob": "f012712866b005ff0d16580e9e013ac4d893873c",
+      "sha256": "dbbe8152315c2e3c4b2e66abdc941625d19b33743d82aa39b201a544c32c7dda"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md": {
+      "blob": "7787ecf9e04df46cc6822fd70cb68b49041a06b2",
+      "bytes": 950833,
+      "full9": {
+        "st_ctime_ns": "1795550539098070254",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042534",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795550537260120441",
+        "st_nlink": "1",
+        "st_size": "950833",
+        "st_uid": "1000"
+      },
+      "inserted_bytes": 6445,
+      "previous_blob": "f668ab7c6ab8ee541206107d2034effc8adce65c",
+      "sha256": "be20c9d60c78663bc0f24434c1426977bbfa32d70ca2919d89dfc3d4eee6e823"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md": {
+      "blob": "e7898f08f976f8c54a29782894e5a1ff592d1df6",
+      "bytes": 710818,
+      "full9": {
+        "st_ctime_ns": "1795550539687074125",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042535",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795550537263909138",
+        "st_nlink": "1",
+        "st_size": "710818",
+        "st_uid": "1000"
+      },
+      "inserted_bytes": 6445,
+      "previous_blob": "dc1c8a306a568e8e665c0186b750feb85c99ef63",
+      "sha256": "095b5d0cf76a90040e8fa721a80bfd0bec0c3213ed28dfb3bf28fda3e6126c36"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json": {
+      "blob": "c4ff8214a94cd76537d670c663e890b4f37de2a8",
+      "bytes": 1699672,
+      "full9": {
+        "st_ctime_ns": "1795550538485066227",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042533",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795550537254303411",
+        "st_nlink": "1",
+        "st_size": "1699672",
+        "st_uid": "1000"
+      },
+      "inserted_bytes": 27616,
+      "previous_blob": "95130b7fe7b018fa24d2377e9946078c8f8cbcb8",
+      "sha256": "c7bd2f663288eb33772cb2916b08ef47d772e815c723b242fa8f1e7599d9dfc7"
+    }
+  },
+  "installation": {
+    "Source_module_and_all_stage_FDs_closed": true,
+    "bytes": 4234,
+    "full9": {
+      "st_ctime_ns": "1795550601555488839",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72096060",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795550601555488839",
+      "st_nlink": "1",
+      "st_size": "4234",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-same-guide513-four-Source-CAS-selected-v207-azcevyr6/Root-same-guide513-four-installed-Source-closed-small-v207.json",
+    "sha256": "17ff1cd7c6ede464f14251feb6371ed300ba423cbd978bc0545e48768df0f415"
+  },
+  "local_after": {
+    "accelerate": {
+      "head": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "index_and_worktree_clean": true,
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "datasets": {
+      "head": "0d71c0d82b2dfc1ed3c7f236009e467e4c201c88",
+      "index_and_worktree_clean": true,
+      "tree": "898cc8fd8ea51e9d65c1396859d42da432ac339f"
+    },
+    "hallucinate": {
+      "head": "7e97bf92592900dc05d07ec1bc9d8663b8242d68",
+      "index_and_worktree_clean": true,
+      "tree": "422be3d8695eedac95bc536993d0b74de4cd3685"
+    },
+    "root": {
+      "head": "c40b39e3431abfc7c2f7a288e4780bdba20349de",
+      "index_and_worktree_clean": true,
+      "tree": "9d908ed4e2616d3e5609195950d4b5c846e3ace1"
+    }
+  },
+  "new_Source_test_CI_model_or_Lean_invocation": false,
+  "non_doc_product_paths_preserved": true,
+  "origin_main_after": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "0d71c0d82b2dfc1ed3c7f236009e467e4c201c88",
+    "hallucinate": "7e97bf92592900dc05d07ec1bc9d8663b8242d68",
+    "root": "c40b39e3431abfc7c2f7a288e4780bdba20349de"
+  },
+  "origin_main_before": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "5fae066b5871d3fdf0b63dfbc4339c199ca6ffc1",
+    "hallucinate": "eb981c0201aaed687b37668c6e88c642cc71b39a",
+    "root": "b2f400bbd4c804e84d7fedc7da6134575ff1e93b"
+  },
+  "origin_urls": {
+    "accelerate": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+    "datasets": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+    "hallucinate": "https://github.com/endomorphosis/hallucinate_app.git",
+    "root": "https://github.com/endomorphosis/lift_coding.git"
+  },
+  "other_gitlinks_and_accelerate_preserved": true,
+  "preservation": {
+    "added_backlog_key": "current_user_goal_real_single_claim_closeout_and_independent_postcensus_engineering_milestone513_20261124",
+    "added_evidence_id": "real-single-claim-closeout-and-independent-postcensus-engineering-milestone513-20261124",
+    "added_evidence_ordinal": 513,
+    "component_count": 126,
+    "exact_old_Markdown_byte_prefixes": true,
+    "prior_evidence_values_preserved": 512,
+    "task_count": 24
+  },
+  "push_order": [
+    "datasets",
+    "hallucinate",
+    "root"
+  ],
+  "schema": "actual-guide513-four-document-three-fast-forward-publication/v207",
+  "scope": "Published engineering documentation only. No new proof, legal admission, fit, training or corpus qualification."
+}

@@ -1,0 +1,879 @@
+{
+  "Source_fresh_reads": 0,
+  "all_history_and_evidence_bodies_excluded": true,
+  "components": [
+    {
+      "id": "historical-hammer-proof-feedback-replay",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "typed-positive-pair-evidence-proposals",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "typed-mutation-evidence-proposals",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "explicit-mutation-label-admission",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "source-intake",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "source-coordinates",
+      "status": "implementation_present"
+    },
+    {
+      "id": "span-intake",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "entity-intake",
+      "status": "implementation_present"
+    },
+    {
+      "id": "source-span-entity-join",
+      "status": "implementation_present"
+    },
+    {
+      "id": "source-context-intake",
+      "status": "implementation_present"
+    },
+    {
+      "id": "target-eligibility",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "definition-lookup",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "definition-use",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "definition-use-review",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "definition-use-lake",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "definition-use-native",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "shared-corpus",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "incremental-corpus",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "compact-serving",
+      "status": "bounded_assay_qualified"
+    },
+    {
+      "id": "compact-budget-generation",
+      "status": "bounded_assay_qualified"
+    },
+    {
+      "id": "compact-training",
+      "status": "implementation_present"
+    },
+    {
+      "id": "persistent-conditioning",
+      "status": "implementation_present"
+    },
+    {
+      "id": "contextual-serving",
+      "status": "implementation_present"
+    },
+    {
+      "id": "full-norm-consequences",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "experimental-context-initialization",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "experimental-context150",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "experimental-gated-conditioning",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "experimental-gated-state",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "experimental-journal-training",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "experimental-journal-inference",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "source-span-entity-census",
+      "status": "implementation_present"
+    },
+    {
+      "id": "uscode-source-coordinates",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "source-representation-profile",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "source-representation-registration",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "coordinate-corpus-custody",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "source-correspondence-requests",
+      "status": "implementation_present"
+    },
+    {
+      "id": "legacy-source-review",
+      "status": "implementation_present"
+    },
+    {
+      "id": "normative-target-compatibility",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "compact-decoder-example",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "arbitrary-native-source-cache",
+      "status": "implementation_present"
+    },
+    {
+      "id": "arbitrary-native-legal-ir-runtime",
+      "status": "implementation_present"
+    },
+    {
+      "id": "arbitrary-native-span-runtime",
+      "status": "implementation_present"
+    },
+    {
+      "id": "compact-content-tokens",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "relational-batch-evaluation",
+      "status": "bounded_assay_qualified"
+    },
+    {
+      "id": "relational-compact-codec",
+      "status": "bounded_assay_qualified"
+    },
+    {
+      "id": "compact-role-warmstart-training",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "bound-native4096-checkpoint-loading",
+      "status": "bounded_assay_qualified"
+    },
+    {
+      "id": "compact-role-warmstart-runtime",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "counted-frame-content",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "counted-threshold-target-factory",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "counted-threshold-codec-prefix",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "counted-content-numerical-head",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "counted-content-head-transfer",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "counted-threshold-numerical-view",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "definition-use-preservation-packet",
+      "status": "implementation_present"
+    },
+    {
+      "id": "definition-use-preservation-index",
+      "status": "implementation_present"
+    },
+    {
+      "id": "compact-content-generic-training-v2",
+      "status": "implementation_present"
+    },
+    {
+      "id": "compact-content-trained-runtime-v2",
+      "status": "implementation_present"
+    },
+    {
+      "id": "compact-content-prepared-runtime-v3",
+      "status": "implementation_present"
+    },
+    {
+      "id": "compact-role-warmstart-reference-runtime",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "compact-content-persistent-v1",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "compact-predicate-objective-diagnostic",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "compact-predicate-training",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "bound-variable-definition-v1",
+      "status": "implementation_present"
+    },
+    {
+      "id": "norm-definition-evidence-v1",
+      "status": "implementation_present"
+    },
+    {
+      "id": "norm-interpretation-review-v1",
+      "status": "implementation_present"
+    },
+    {
+      "id": "norm-scope-correspondence-v1",
+      "status": "implementation_present"
+    },
+    {
+      "id": "source-sampling-review-context",
+      "status": "implementation_present"
+    },
+    {
+      "id": "source-sampling-context-definition-binding-v2",
+      "status": "implementation_present"
+    },
+    {
+      "id": "source-sampling-context-definition-review-v2",
+      "status": "implementation_present"
+    },
+    {
+      "id": "source-sampling-review",
+      "status": "implementation_present"
+    },
+    {
+      "id": "source-sampling-definition-binding-v2",
+      "status": "implementation_present"
+    },
+    {
+      "id": "source-sampling-definition-review-v2",
+      "status": "implementation_present"
+    },
+    {
+      "id": "compact-content-persistent-runtime-v1",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "compact-content-completion-budget-v2",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "compact-content-persistent-runtime-v2",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "compact-content-completion-budget-v3",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "compact-content-branch-selection-v1",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "norm-definition-graph-adapter",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "compact-content-persistent-runtime-v3",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "norm-content-responses-v1",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "norm-content-adjudication-v1",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "norm-content-declaration-v1",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "norm-content-declaration-binding-v1",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "norm-definition-applicability-v1",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "source-typed-norm-join",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "counted-relation-binding-v1",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "source-norm-scope-v1",
+      "status": "implementation_present"
+    },
+    {
+      "id": "parent-bound-norm-lake-v1",
+      "status": "implementation_present"
+    },
+    {
+      "id": "semantic-graph",
+      "status": "implementation_present"
+    },
+    {
+      "id": "relational-norm-fragment",
+      "status": "implementation_present"
+    },
+    {
+      "id": "legal-original-text-roundtrip",
+      "status": "implementation_present"
+    },
+    {
+      "id": "native-family-lean-renderer",
+      "status": "implementation_present"
+    },
+    {
+      "id": "conditions-fullspan-margin-v1",
+      "status": "implementation_present"
+    },
+    {
+      "id": "supervisor-handoff-preflight",
+      "status": "implementation_present"
+    },
+    {
+      "id": "conditions-fullspan-f18-four-tensor-training-v1",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "conditions-fullspan-f18-optimizer-recipe-metadata-v1",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "conditions-fullspan-f18-four-tensor-training-v2",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "source-span-consumer-binding",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "kernel-proof-evidence-integrity",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "native-ast-preservation",
+      "status": "implementation_present"
+    },
+    {
+      "id": "native-ast-preservation-executor",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "reviewed-rich-retrieval-context",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "reviewed-relation-declarations",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "reviewed-train-relation-masks",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "reviewed-joint-retriever",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "extended-source-withheld-decompiler",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "extended-controlled-language-compiler",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "sampled-validation-storage-recovery",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "owned-validation-no-child-native-closed-inspection",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "reviewed-decoder-numerical-worker",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "reviewed-component-cycle-preparation",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "reviewed-evaluation-and-retention",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "reviewed-original-parent-inference",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "reviewed-supervisor-dispatch",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "reviewed-mixed-sort-admission-v3",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "released-reconciliation-ledger-archival",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "legal-release-coordinator",
+      "status": "implementation_present"
+    },
+    {
+      "id": "uscode-hf-release-packaging",
+      "status": "implementation_present"
+    },
+    {
+      "id": "source-representation-lane-bindings",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "native384-production-receipts",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "source-embedding-numerical-composition",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "complete-norm-payload-metrics",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "official-document-views",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "trusted-feedback-weight-updates",
+      "status": "focused_tests_qualified"
+    },
+    {
+      "id": "complete-source-context-evidence-review",
+      "status": "implementation_present"
+    }
+  ],
+  "explicit_input_body_bytes_this_read": 3899597,
+  "full_goal_complete": false,
+  "known_cumulative_object_cache_body_bytes": 11698791,
+  "prior_object_read_and_readback_bytes_preserved": 7799194,
+  "published_head": "6106a4633ec6504ee8c004cc5a9c7fe348ff38bf",
+  "task_edits": 0,
+  "tasks": [
+    {
+      "acceptance_criteria": [
+        "Every selected baseline binds exact checkpoint, producer, representation, codec and supported profile.",
+        "Selected, last and initial states and tensor aliases remain separate."
+      ],
+      "depends_on": [],
+      "id": "LIR-01",
+      "priority": "P0",
+      "remaining_scope": "Current full runtime compatibility and remaining lineage adapters. Retained Context150 parent metadata differs at shared tree_pin.py and ui_ux_ir/decoder.py identities. Preserve original descriptors and exact loader gates until an explicit reviewed compatibility/migration contract covers parent, initial checkpoint, trained checkpoint and inference with explicit producer/consumer lineage and rejection of mixed generations. This profile remains planned. Retained candidate/termination/token-count records can support later replay; the selected artifacts contain no raw-logit oracle. Strongest compatible 384D wording-baseline selection remains separate. Retry02 resource custody is unresolved: preserve null dispositions and conservatively account for 128 MiB until the original owner reservation identity or terminal receipt permits inspection.",
+      "status": "in_progress",
+      "title": "Preserve baselines and consumer capabilities"
+    },
+    {
+      "acceptance_criteria": [
+        "Exact source and extracted view hashes and offset systems replay.",
+        "Unresolved archived IDs and missing context are retained; no guessed aliases or truncation.",
+        "Source/join release adoption binds the selected immutable law revision to the unchanged logical profile publicus-ir-graphrag/v2, existing viewer alias publicus-ir-graphrag-v2 and explicit file inventory; actual table conformance and viewer readback remain separately verified release gates, with source/edition/occurrence decisions unresolved until supported."
+      ],
+      "depends_on": [
+        "LIR-01"
+      ],
+      "id": "LIR-02",
+      "priority": "P0",
+      "remaining_scope": "Raw-row coordinate/cache/paired/context/join transport is published. Bind selected physical rows/editions and preserve distinct original-input and retained eligibility contracts through their existing owners. Add bounded, independently pinned full-report publication/readback before treating a small exchange reference as portable evidence. The supplied-text API cannot recover removed upstream bytes. Capture selectors in new production and reconcile historical producer-occurrence decisions. Select actual reviewer trust and collect authenticated source/context evidence and decisions under the available compatible domain. Applying reviewed decisions and semantic qualification require separately versioned records. Keep native paragraph, parent-field, normalized and rendered coordinate profiles distinct; larger corpus transports need separate qualification. Current2026-11-19 fromraw source-only P/A/independentcompleteV is mechanically qualified on Source4166/ad788 with42retainedfiles/148132089B and418pendinggroups,0authenticatedEvidence/reviews,authorityfalse/masks0; see grouped evidence same-namespace-capacity-and-whole-norm-native-20261119. This supersedes the earlier current-data-generation pending cutoff only: statutory source/edition/meaning review, independently reviewed \u00a7101-inclusive pilot and typed Native/model/gold/corpus admission remain open. The separate2026-11-20 official-occurrence mode now mechanically prepares and independently validates the \u00a7101/\u00a77213/\u00a77214 pending source roster (3documents/4distinctoccurrences), atSource33cface9; edition/applicability and semantic/native/model/gold/corpus gates remain unresolved.",
+      "status": "in_progress",
+      "title": "Join source identities and declared context"
+    },
+    {
+      "acceptance_criteria": [
+        "Processing, meaning, representation, dependency, compilation and proof status are independent.",
+        "Legacy sealed/admitted/formalized values grant no unsupported promotion."
+      ],
+      "depends_on": [
+        "LIR-01"
+      ],
+      "id": "LIR-03",
+      "priority": "P0",
+      "remaining_scope": "Externally governed trust/reviewer evidence, source authenticity and actual independently reviewed statutory records; qualify real consumers and reviewed binding/admission decisions. Typed native review-subject interface is implemented, with no human-identity, legal-meaning or accepted-view authority. Support newly qualified parent-field/official-v2 pending requests through an explicit compatible source-review contract; current418requestinventory doesnotconstitute typednative review.",
+      "status": "in_progress",
+      "title": "Define qualification and legacy adapters"
+    },
+    {
+      "acceptance_criteria": [
+        "Every instance edge has valid endpoints in the snapshot or pinned import.",
+        "Existing exports and IDs remain compatible; overflow is accounted.",
+        "Mutually exclusive source interpretations retain explicit alternative groups and are not merged into an asserted union."
+      ],
+      "depends_on": [
+        "LIR-02",
+        "LIR-03"
+      ],
+      "id": "LIR-04",
+      "priority": "P0",
+      "remaining_scope": "External semantic imports, larger companion/reference transport, qualified source-grounded assertion aggregation and coherent cross-dataset/Lean release manifests. Primary structural graph reconstruction is implemented; its labels do not establish statutory meaning.",
+      "status": "in_progress",
+      "title": "Specify and validate graph interchange"
+    },
+    {
+      "acceptance_criteria": [
+        "Approximately20\u201340 provisions cover actual definitions and users within a bounded profile.",
+        "Semantic dependency clusters, near duplicates and amendments have declared split handling."
+      ],
+      "depends_on": [
+        "LIR-02"
+      ],
+      "id": "LIR-05",
+      "priority": "P0",
+      "remaining_scope": "The separate \u00a7101/\u00a77213/\u00a77214 pending source roster now has three complete documents and four distinct nominated occurrences, with complete current preparation/assessment/independent-validation evidence. Actual governing edition/applicability, independent legal interpretation and use reviews, admitted definitions/native ASTs and the original20\u201340 connected-provision pilot remain pending. Two \u00a77214 interpretation references do not count as two statutory uses.",
+      "status": "proposed",
+      "title": "Select connected statutory pilot"
+    },
+    {
+      "acceptance_criteria": [
+        "Each included meaning unit has reviewed interpretation or explicit pending/unsupported disposition.",
+        "Reviewer/adjudication evidence and training/evaluation masks are bound to exact source/context.",
+        "Authenticated evidence bytes and typed answer validity are separate; unknown/open answers cannot substantiate declared-complete/resolved decisions."
+      ],
+      "depends_on": [
+        "LIR-03",
+        "LIR-05"
+      ],
+      "id": "LIR-06",
+      "priority": "P0",
+      "remaining_scope": "Supply actual source/adjudication/application/revision trust and signed decisions. Bounded exact-root candidate answer history and conditional current projection are available; authoritative head/global completeness/fork governance, preparation/source migrations and downstream cross-generation invalidation remain unqualified. Add structured independently reviewed governing-source/version/occurrence/applicability bindings, then candidate-blind connected statutory meanings, scoped term/entity/definition/reference graphs, reviewed training/evaluation masks and native Lean admission. Answer-reference revisions supply no physical source decisions or legal gold. Current official-occurrence v2 intake supplies a mechanically qualified3document/4occurrence \u00a7101-inclusive pending review population with source/context declarations and deferred questions intact; it supplies no independent statutory reviews or governing decisions.",
+      "status": "proposed",
+      "title": "Complete source interpretation reviews"
+    },
+    {
+      "acceptance_criteria": [
+        "Operators, binders, role arguments, repeated qualifiers and attachment survive roundtrip.",
+        "Every reviewed pilot target is representable or explicitly unsupported; none is simplified to fit."
+      ],
+      "depends_on": [
+        "LIR-03",
+        "LIR-05"
+      ],
+      "id": "LIR-07",
+      "priority": "P0",
+      "remaining_scope": "Broader reviewed definition operators, relations, arities, legal sorts, cross-section applicability and supported lossless IR migrations. Absolute producer-path pin portability needs a separate owner contract.",
+      "status": "in_progress",
+      "title": "Extend typed IR losslessly"
+    },
+    {
+      "acceptance_criteria": [
+        "Mentions, scoped senses and denoted entities have distinct identities.",
+        "Edition/scope/operator changes create explicit versioned assertions; label matches do not merge entities."
+      ],
+      "depends_on": [
+        "LIR-04",
+        "LIR-07"
+      ],
+      "id": "LIR-08",
+      "priority": "P1",
+      "remaining_scope": "Actual reviewed statutory declarations, denoted-entity resolution and broader typed assertions; source/body interpretation completeness and general definition operators remain unverified.",
+      "status": "in_progress",
+      "title": "Create scoped senses and typed assertions"
+    },
+    {
+      "acceptance_criteria": [
+        "Resolution retains candidates/exclusions and applicability evidence.",
+        "Ambiguity, cycles, missing time/context and resource frontier remain visible.",
+        "Only verified selected uses create semantic definition dependencies.",
+        "Role, arity and applicable argument sorts constrain every candidate binding.",
+        "Every resolution records searched scope/version/index partitions, including resolved lookups."
+      ],
+      "depends_on": [
+        "LIR-06",
+        "LIR-08"
+      ],
+      "id": "LIR-09",
+      "priority": "P1",
+      "remaining_scope": "Actual reviewed applicability/search route completeness and selected binding authority; validate source/interpretation companion references through their own owners, then connect verified resolution decisions to semantic graph/Lean preparation. General definition operators, arity/legal sorts, temporal applicability, cycles/external components and exhaustive legal closure remain open.",
+      "status": "in_progress",
+      "title": "Resolve definitions and dependency closure"
+    },
+    {
+      "acceptance_criteria": [
+        "Source hierarchy/physical geometry determines declared order; hash sort does not.",
+        "Inherited context, shared qualifiers, duplicate arguments and omissions are preserved."
+      ],
+      "depends_on": [
+        "LIR-07",
+        "LIR-09"
+      ],
+      "id": "LIR-10",
+      "priority": "P1",
+      "remaining_scope": "Aggregate reviewed meaning units under governing hierarchy and shared qualifiers, explicit definition/role bindings and conflicts. Literal custody/partitions do not assemble legal meaning.",
+      "status": "proposed",
+      "title": "Assemble complete provision interpretations"
+    },
+    {
+      "acceptance_criteria": [
+        "Node/edge/assertion counts and roots reconcile included/excluded/unresolved records.",
+        "Every semantic assertion traces to interpretation and source evidence."
+      ],
+      "depends_on": [
+        "LIR-04",
+        "LIR-10"
+      ],
+      "id": "LIR-11",
+      "priority": "P1",
+      "status": "proposed",
+      "title": "Publish reconstructable local graph snapshot"
+    },
+    {
+      "acceptance_criteria": [
+        "Supported meaning and supplied O/P/F semantics are explicit.",
+        "Definition operators, binders, scope and time use typed contracts; unsupported structure refuses."
+      ],
+      "depends_on": [
+        "LIR-07"
+      ],
+      "id": "LIR-12",
+      "priority": "P1",
+      "remaining_scope": "Broader reviewed legal syntax, typed carriers and interpretation profiles, complete content-addressed toolchain/dependency release closure and source-semantic correspondence.",
+      "status": "in_progress",
+      "title": "Define shared Lean interpretation library"
+    },
+    {
+      "acceptance_criteria": [
+        "Shared definition symbols are emitted once with complete imports.",
+        "All pilot assertions are included or explicitly excluded; no source slicing or silent cap loss.",
+        "Generation consumes an immutable graph snapshot whose endpoint and assertion validation passed."
+      ],
+      "depends_on": [
+        "LIR-10",
+        "LIR-12",
+        "LIR-11"
+      ],
+      "id": "LIR-13",
+      "priority": "P1",
+      "remaining_scope": "Reviewed statutory pilot assembly, cross-section resolved definition components, broader native profiles and large-population partitioning. Exact source-scoped sharing does not infer semantic equivalence or resolve missing context. Parent-compatible shared preparation is now available under the distinct exact-parent-definition-use-module-sharing/v1 profile with28 main passing cases and two independently reused physical-source controls; the separate authored aggregate parent-native engineering profile qualifies only two FOL/TDFOL projects, each with nine modules,15 executed inputs and six unique conditional theorem observations. Pending child reviews and explicit interpretation, carrier, time, definition and alias premises remain; no statutory meaning is qualified. The separate actual FOL/TDFOL parent direct-Lean cohort qualifies conditional cold 13 / warm 0 / affected 6 + 7 reused / clean 13 artifact equivalence for a same-text all-to-any donor interpretation change and a copied-text independent engineering custody branch. Actual review/revocation and closing physical-source mutation refusals, wider source/scope/lookup invalidation, broader native semantics and reviewed statutory corpus assembly remain open.",
+      "status": "in_progress",
+      "title": "Generate modular Lean corpus"
+    },
+    {
+      "acceptance_criteria": [
+        "Pinned actual build covers every expected module.",
+        "Compilation, source correspondence and theorem discharge remain separate; assumptions are recorded."
+      ],
+      "depends_on": [
+        "LIR-13"
+      ],
+      "id": "LIR-14",
+      "priority": "P1",
+      "remaining_scope": "Actual reviewed statutory corpus builds and domain obligations, broader profile coverage, independently established legal/source correspondence and coherent released toolchain closure. Authored conditional witnesses do not finish the statutory pilot. Historical code5135b951/test9b888ce7 was an unexecuted consumer proposal; the separately factored test19bb4e18/code34eba72e subsequently had one ordinary preparation/consumer pass under Sourceab58972d. Original42018 later closed its actual Source/resource custody after same-parent raw Mapping correction, but its wrong-basename collector retained an emptyZIP and exited1; keep that failure and7860 retention errors. A separately corrected caller now has one unchanged whole-norm[source-use] Native pass on originalSource4127/041770b3, with93 retained members,10 compiledmodules and30 conditionaltheorems with empty observed axiom dependencies; authorityfalse and masks0. This does not run the later factored consumer callback or establish statutory/model/gold/corpus authority. Separately, existingresourceowner7a0dac2d/test4af66862 passed43 cases (12old+31new) on Source4162/0936, then its public same-namespace capacityCAS applied effective16-to-32 while retaining base16/CPU16/memory99688 and safety/history. The older2c006 facade was also observed working/renewing/releasing with this overlay in the correctedNative run. Operating limits are adjustable under userauthorization through existingowners with actual admission, custody and allcharges retained. The firstfour69attempts remain closedfailures; the later reviewedworker61118/test0e315 now has21new+69existing disjointsoftwarecases allPASS0FES on Source4166/0658. Smallinstalled4.52CPU compatibility/retention is qualified, nottrainingcampaign/pretrainedquality/legalmeaning/convergence. Separately, current fromraw Source4166/ad788 preparation/assessment/completevalidation retained42files/148132089B in619.366s:418requests/subjects/dependencyManifests,7pages,6688questions(3762sourceSlots+2926deferred); all418groups pending,0authenticatedEvidence/reviews,authorityfalse/masks0 and \u00a7101absent. Existingresource followup47 passed on Source4166/0830 with helperb2b/testaf7; no actualproduction idleadmin expansion is inferred. Reallegal/source/edition/meaning reviews, \u00a7101-inclusivepilot, training/convergence and the full eight-phase goal remain open. 2026-11-20 existing physical bridge: A protocol 4/R internal live 5 retains each owner's existing opaque factory; the original A parent handle is passed directly to the physical facade. A and R have distinct opaque classes/factories. Separate selected A25 controls passed at 4cb7 and R32 controls at e139; preserve R31 CPU240 cutoff,30P1F,focused plain-fixture1 and actual pure-SDK fsizeRED. Native5 explicitly bounds physical file128 MiB/workspace256 MiB with legacy limits preserved. Collector53902 failed at metadata classification; a separate56-module isolated startup observation is preparation evidence only, with no repaired-collector pass yet. Actual Native build/packet/facade replay remains PENDING. No statutory/model/training/convergence/gold/corpus or task-completion authority. Milestone475 (2026-11-20, separate current epoch): Root verified direct original-R Native R5/profile v5, not Git R5 staging or historical Native93/4127: 10 modules, 30 conditional obligations with observed empty axiom lists, three authored units and 93 ZIP members. Original A parent/facade integration and integrated preservation remain pending. Main frontier is Phase5 decoder/pretrained integration; standalone rich mechanics (451 forwards) still produced three incomplete/zero complete outputs and zero whole/full-nine-field metrics; aggregate lengths 8229/8229/5877 refused before forward at 8192 for the first two, then None iteration masked the capacity error. Separate Qwen9, retention90 and corrected A49 software results do not pool cohorts or qualify model quality. The 16K/None-safe core is PRODUCT+TEST STATIC CLEAR only, private/uninstalled/unexecuted. Real four source occurrences remain pending with zero independent reviews; Phase7 trusted reviewed-corpus continual-learning evaluation and release remain unqualified. Existing contracts, task states, dependencies, acceptance criteria and frontier fields are unchanged; see grouped evidence direct-R5-native-and-scoped-decoder-diagnostics-milestone475-20261120.",
+      "status": "in_progress",
+      "title": "Run source-bound corpus builds and obligations"
+    },
+    {
+      "acceptance_criteria": [
+        "Changed definition rebuilds actual consumers and previously unresolved lookup dependents.",
+        "Incremental outputs match clean rebuild for the pilot.",
+        "Toolchain/import/profile changes invalidate stale proof/build receipts.",
+        "New competing definitions reopen previously resolved mentions through searched-index dependencies as well as negative lookups."
+      ],
+      "depends_on": [
+        "LIR-11",
+        "LIR-14"
+      ],
+      "id": "LIR-15",
+      "priority": "P1",
+      "remaining_scope": "Connect actual reviewed applicability/search routes and authoritative definition decisions to semantic graph/native corpus inputs and negative-lookup partition coverage; reopen newly relevant outside partitions through revised independently pinned queries. Broader/cyclic/external import profiles, accepted-view authority and authenticated release publication remain open. The separate actual FOL/TDFOL parent direct-Lean cohort now qualifies cold 13 / warm 0 / affected 6 + 7 reused / clean 13 conditional artifact equivalence for a same-text unreviewed donor interpretation change and a copied-text independent engineering custody branch. Genuine public validator warm review/revocation and closing physical-source mutation refusals are now qualified on authored cache/compiler observations and fictional sources with test signing credentials. A separate installed-Lean four-case qualification now integrates the two warm refusals with actual six-module cold artifacts and keeps the original cold cache unchanged. Further actual source-text/scope amendments, negative/resolved/ambiguous or competing lookup invalidation, producer/toolchain/library changes and failed-compiler descendant behavior remain open; authored coordinator controls, the original 22 history, separate actual FOL/TDFOL positive cases, legacy native benchmarks and aggregate Lake outputs retain their distinct qualifications.",
+      "status": "in_progress",
+      "title": "Extend incremental invalidation and build keys"
+    },
+    {
+      "acceptance_criteria": [
+        "Existing draft owner is preserved; no overlapping trainer is started.",
+        "Parity and resource gates precede numerical work; declared retention and fresh-reference results govern disposition."
+      ],
+      "depends_on": [
+        "LIR-01"
+      ],
+      "id": "LIR-16",
+      "priority": "P2",
+      "status": "completed",
+      "title": "Reconcile temporal attention comparison"
+    },
+    {
+      "acceptance_criteria": [
+        "Candidate coverage, final binding, stopping and complete IR are separately measured.",
+        "Casewise/length/class retention and unsupported floors pass before selecting a candidate."
+      ],
+      "depends_on": [
+        "LIR-06",
+        "LIR-07",
+        "LIR-09"
+      ],
+      "id": "LIR-17",
+      "priority": "P2",
+      "remaining_scope": "Reviewed relational/binding training and changed responsible-head comparisons remain pending; completed authored CE/hinge/context/conditions controls do not meet reviewed-source acceptance.",
+      "status": "in_progress",
+      "title": "Train reviewed relation and binding heads"
+    },
+    {
+      "acceptance_criteria": [
+        "Legacy correctness is preserved and inherited parent mistakes are reported.",
+        "Improvement is measured on reviewed new groups without selecting on test labels.",
+        "Changed features/supervision/architecture are explicit relative to the completed predicted-trigger/global residual comparison."
+      ],
+      "depends_on": [
+        "LIR-06",
+        "LIR-07"
+      ],
+      "id": "LIR-18",
+      "priority": "P2",
+      "status": "proposed",
+      "title": "Compare context-sensitive modality adaptation"
+    },
+    {
+      "acceptance_criteria": [
+        "Real encoders/checkpoints, decoders, budgets and controls are bound; no placeholder-width claims.",
+        "Incremental reviewed fidelity/coverage benefit is compared against retained source-only/raw controls."
+      ],
+      "depends_on": [
+        "LIR-06",
+        "LIR-17"
+      ],
+      "id": "LIR-19",
+      "priority": "P2",
+      "status": "proposed",
+      "title": "Measure genuine representation benefit"
+    },
+    {
+      "acceptance_criteria": [
+        "Unknown/disputed relations are masked; withheld answers/future assertions are inaccessible.",
+        "Correct dependency resolution and downstream semantics improve under declared coverage/error constraints."
+      ],
+      "depends_on": [
+        "LIR-09",
+        "LIR-11",
+        "LIR-17"
+      ],
+      "id": "LIR-20",
+      "priority": "P2",
+      "status": "proposed",
+      "title": "Evaluate scoped graph context and retrieval"
+    },
+    {
+      "acceptance_criteria": [
+        "Every artifact is verified at immutable revision before the coherent release is selected.",
+        "Interrupted publication leaves the previous release usable.",
+        "Coordinator references completed data commits without including its own final storage-commit hash; selected-release pointer changes only after complete readback.",
+        "At the selected immutable Hub revision, viewer aliases, explicit file membership and actual table schemas/counts agree with the producer manifest, card and standard infos; physical envelope records, laws, spans, entity-index rows and reviewed assertions keep distinct denominators.",
+        "Failed viewer/readback or interrupted publication retains the previous coherent release pointer and quarantines candidate/recovery artifacts. Optional per-family viewer views require an explicit compatible profile without renaming the existing logical source profile or silently widening qualified consumers."
+      ],
+      "depends_on": [
+        "LIR-11",
+        "LIR-14",
+        "LIR-15"
+      ],
+      "id": "LIR-21",
+      "priority": "P1",
+      "status": "proposed",
+      "title": "Seal cross-dataset and Lean release"
+    },
+    {
+      "acceptance_criteria": [
+        "Source/binding/translation/proof/resource failures are separated.",
+        "Neither solver failure nor build success automatically creates semantic gold."
+      ],
+      "depends_on": [
+        "LIR-03",
+        "LIR-14",
+        "LIR-17"
+      ],
+      "id": "LIR-22",
+      "priority": "P2",
+      "status": "proposed",
+      "title": "Classify repair feedback and admit training evidence"
+    },
+    {
+      "acceptance_criteria": [
+        "Encoding, decoding, review, graph, build and publication scopes are explicit.",
+        "All abstentions, failures and unresolved work remain in appropriate denominators."
+      ],
+      "depends_on": [
+        "LIR-14"
+      ],
+      "id": "LIR-23",
+      "priority": "P1",
+      "status": "proposed",
+      "title": "Measure pipeline costs and coverage"
+    },
+    {
+      "acceptance_criteria": [
+        "Expansion preserves reviewed/source/dependency/build gates and historical releases.",
+        "Actual source/review throughput sets scale; no blanket corpus-wide success from pilot metrics."
+      ],
+      "depends_on": [
+        "LIR-20",
+        "LIR-21",
+        "LIR-22",
+        "LIR-23"
+      ],
+      "id": "LIR-24",
+      "priority": "P3",
+      "status": "proposed",
+      "title": "Expand corpus by qualified dependency components"
+    }
+  ]
+}

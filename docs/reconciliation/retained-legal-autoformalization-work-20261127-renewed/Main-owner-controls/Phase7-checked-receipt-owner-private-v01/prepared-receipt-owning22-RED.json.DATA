@@ -1,0 +1,59 @@
+{
+  "all_old_prefix_and_AST_exact": true,
+  "append": {
+    "bytes": 4946,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/receipt-bounds-owningtests.append.py.DATA",
+    "sha256": "db4c6d62a5c0c68d892e04fb635bee47b61ee4810843e02abc9bc46c24dee751"
+  },
+  "cases": [
+    "test_interface_and_schema_versions_are_pinned",
+    "test_public_inputs_bind_all_required_dimensions",
+    "test_each_public_input_dimension_change_produces_distinct_digest",
+    "test_trusted_receipt_rejects_non_conclusive_and_attestation_authority",
+    "test_private_witness_never_serializes",
+    "test_cryptographic_execution_succeeds_and_projects_attestation_authority",
+    "test_attestation_does_not_raise_underlying_semantic_authority",
+    "test_simulated_backend_fails_production_gates",
+    "test_circuit_mismatch_fails_closed",
+    "test_stale_attestation_fails",
+    "test_revoked_material_fails",
+    "test_rejected_and_error_verdicts_are_non_authoritative",
+    "test_malformed_prover_output_fails_closed",
+    "test_statement_and_record_round_trip",
+    "test_request_repr_redacts_witness",
+    "test_receipt_factory_preserves_typed_execution_bounds_without_metadata_copy",
+    "test_receipt_factory_preserves_explicit_metadata_bounds_exactly[empty]",
+    "test_receipt_factory_preserves_explicit_metadata_bounds_exactly[null]",
+    "test_receipt_factory_preserves_explicit_metadata_bounds_exactly[partial]",
+    "test_declared_conflicting_bounds_are_not_rewritten_into_valid_evidence",
+    "test_adding_execution_bounds_does_not_upgrade_missing_translation_authority",
+    "test_old_receipt_without_bounds_keeps_its_serialized_content_identity"
+  ],
+  "control": {
+    "bytes": 6881,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/existing-maintained-receipt-owning22-controls.py.DATA",
+    "sha256": "57647a9f1a68d417021b46f417f73d3643c8a818a2a7fc503d583b091a6e3693"
+  },
+  "new_cases": 7,
+  "old_cases": 15,
+  "overlay": {
+    "bytes": 350,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/same-consumer-v02-overlay.json",
+    "sha256": "843d9cc96eb21b3565589bbb64e7a42de29256e5cd11a07c1d65ba442b1a135a"
+  },
+  "projection": {
+    "bytes": 64046,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/receipt-owning22-projection.json",
+    "sha256": "92c893d8e9381124538ee1472733b044b91d17b70e496b62e1715d282c7da40c"
+  },
+  "runner": {
+    "bytes": 16734,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/existing-rebased-receipt-owning22-RED-runner.py.DATA",
+    "sha256": "640c5ca5a4008b592495a2fe36126242e9bbabe0589c09c9dbd7a3dba84cdea2"
+  },
+  "test": {
+    "bytes": 27851,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/test_proof_receipt_attestation.bounds.after.py.DATA",
+    "sha256": "e6cc137379fb50e0aec6e6ae9a1b315344190652ff51fd0ca250f57acf3ab861"
+  }
+}

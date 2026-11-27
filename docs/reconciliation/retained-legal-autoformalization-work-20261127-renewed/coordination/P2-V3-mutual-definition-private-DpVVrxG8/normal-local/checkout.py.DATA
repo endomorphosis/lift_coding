@@ -1,0 +1,90 @@
+from pathlib import Path
+import hashlib
+import importlib.util
+import json
+import os
+import subprocess
+import sys
+
+w = Path(__file__).resolve().parent
+authored = w.parent
+current = Path("/tmp/P1-proof-cache-translation-current-6btZZr/datasets")
+head = "5bf57f390a12621a40716595fe261c35d2741e12"
+root = w / "checkout"
+env = {**os.environ, "GIT_OPTIONAL_LOCKS":"0", "GIT_NO_LAZY_FETCH":"1", "GIT_TERMINAL_PROMPT":"0"}
+
+def git(directory, *args):
+    return subprocess.check_output(["git", "-C", str(directory), "-c", "pack.threads=1",
+        "-c", "index.threads=1", "-c", "core.preloadIndex=false", *args], env=env, timeout=45)
+
+def reference(path):
+    raw = path.read_bytes()
+    return {"path":str(path),"bytes":len(raw),"sha256":hashlib.sha256(raw).hexdigest()}
+
+epoch = json.loads((authored / "current-input-epoch.json").read_bytes())
+proposal = authored / "SEALED-existing-V2-V3-local-definition-binding-exact3-private-v03.json"
+assert reference(proposal)["sha256"] == "89c6365977e5922518fba085ddeeb27430a8dd38593b245e973da3e1fb082632"
+roles = json.loads(proposal.read_bytes())["roles"]
+lease = "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_source_lease.py"
+configs = ["pytest.ini", "conftest.py", "tests/conftest.py", "tests/unit/conftest.py"]
+paths = sorted(set(epoch["roles"]) | {lease,"ipfs_datasets_py/logic/autoformal/AGENTS.md",*configs})
+assert git(current, "rev-parse", head + "^{tree}").decode().strip() == "75bf48f724778639eb3f8ae076c275dafda98d55"
+subprocess.run(["git", "init", "--quiet", str(root)], env=env, check=True, timeout=30)
+objects = current / ".git/objects"
+assert objects.is_dir()
+(root / ".git/objects/info/alternates").write_text(str(objects) + "\n")
+git(root, "config", "--local", "core.sparseCheckout", "true")
+git(root, "config", "--local", "core.sparseCheckoutCone", "false")
+(root / ".git/info/sparse-checkout").write_text("".join("/" + p + "\n" for p in paths))
+with (root / ".git/info/exclude").open("a") as stream:
+    stream.write("\n/workspace/control-plane/source-leases/admission.lock\n/workspace/control-plane/source-leases/source.lock\n")
+git(root, "-c", "advice.detachedHead=false", "checkout", "--detach", "--quiet", head)
+assert git(root, "status", "--porcelain=v1", "--untracked-files=all") == b""
+pins = {}
+for rel in paths:
+    raw = (root / rel).read_bytes()
+    row = git(root, "ls-tree", head, "--", rel).decode().split()
+    assert row[0] in {"100644","100755"} and row[-1] == rel
+    oid = hashlib.sha1(f"blob {len(raw)}\0".encode() + raw).hexdigest()
+    assert oid == row[2]
+    pins[rel] = {"bytes":len(raw),"sha256":hashlib.sha256(raw).hexdigest(),"git_blob":oid,"mode":row[0]}
+for rel, role in roles.items():
+    assert pins[rel]["git_blob"] == role["before"]["git_blob"]
+    assert pins[rel]["sha256"] == role["before"]["sha256"]
+spec = importlib.util.spec_from_file_location("isolated_p2_definition_source_lease", root / lease)
+control = importlib.util.module_from_spec(spec)
+sys.modules[spec.name] = control
+spec.loader.exec_module(control)
+assert control.canonical_source_root(root) == root
+with control.source_lease(root, mode="write", timeout_seconds=30) as held:
+    assert held.mode == "write" and held.canonical_root == str(root)
+    git(root, "apply", "--check", str(authored / "exact-three.forward.patch.DATA"))
+    git(root, "apply", str(authored / "exact-three.forward.patch.DATA"))
+    git(root, "apply", "--check", str(authored / "exact-three.inverse.patch.DATA"))
+    dirty = git(root, "diff", "--name-only", "-z").decode().rstrip("\0").split("\0")
+    assert set(dirty) == set(roles)
+    for rel, role in roles.items():
+        raw = (root / rel).read_bytes()
+        assert (len(raw), hashlib.sha256(raw).hexdigest()) == (role["after"]["bytes"],role["after"]["sha256"])
+    git(root, "switch", "-c", "work/p2-explicit-governing-definition-bindings")
+    git(root, "add", "--", *sorted(roles))
+    git(root, "diff", "--cached", "--check")
+    git(root, "commit", "--quiet", "-m", "Require explicit local governing-definition dependencies")
+    candidate = git(root, "rev-parse", "HEAD").decode().strip()
+    assert git(root, "rev-parse", "HEAD^").decode().strip() == head
+    for rel, role in roles.items():
+        raw = (root / rel).read_bytes()
+        oid = role["after"]["git_blob"]
+        assert git(root, "ls-files", "--stage", "-z", "--", rel) == f"100644 {oid} 0\t{rel}\0".encode()
+        assert git(root, "cat-file", "blob", candidate + ":" + rel) == raw
+        pins[rel].update(bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest(),git_blob=oid)
+assert git(root, "status", "--porcelain=v1", "--untracked-files=all") == b""
+meta = {"authored_candidate":{"oid":candidate,"tree":git(root,"rev-parse","HEAD^{tree}").decode().strip(),
+    "parent":head,"isolated_store":str(root / ".git")},"selected_repo":str(root),"paths":pins,
+    "lease_module":lease,"normal_config":configs,"private_seal":reference(proposal),
+    "isolated_Source_write_closed":True,"write_lease":held.to_dict(),"shared_checkout_modified":False,
+    "SDK_managed":False,"Source42_qualification":False,"published":False}
+with (w / "real-checkout-pins.json").open("x") as stream:
+    json.dump(meta,stream,indent=2,sort_keys=True)
+    stream.write("\n")
+print(json.dumps({"candidate":meta["authored_candidate"],"paths":len(pins),"isolated_write_closed":True}))

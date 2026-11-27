@@ -1,0 +1,92 @@
+{
+  "Root_runtime_execution_selection": false,
+  "SELECTION_reference": {
+    "bytes": 21179,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/gate-handoff-normal57-selection-INERT-v01.json",
+    "sha256": "27ede2789793a922c71af4057ae287d4d8d1403fdf4164bfdd4c5793d5a46e1c"
+  },
+  "actual_existing_consumer_ABI": {
+    "RUN_uses_actual_collect_order": true,
+    "actual_COLLECT_ID_set_must_match_independent_roster": true,
+    "changed_test_requires_explicit_roster_reconciliation_reference": true,
+    "operator_lines": [
+      162,
+      173
+    ],
+    "required_proof_fields": [
+      "owning_file",
+      "test_bytes",
+      "test_sha256",
+      "literal_nodeids"
+    ]
+  },
+  "cached_input_accounting": {
+    "Source_ledger_or_execution_caps_changed": false,
+    "descriptor": 10462,
+    "independent_roster_two_inputs": 168582,
+    "operator_and_bootstrap": 91497,
+    "parent_seed_recheck": 10666,
+    "prior_implementation_and_review_bytes": 2973080,
+    "prior_spend_and_failures_retained": true,
+    "private_aggregate_bound": 4194304,
+    "total_before_output_readbacks": 3254287
+  },
+  "existing_control_descriptor": {
+    "bytes": 10462,
+    "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/Git51-INERT-provenance-adapter-v01-0yaggrah/sealed-INERT-Git-candidate-gate51-adapter-v03.json",
+    "sha256": "5934d7fc6ea9644bd40f3652fcf70c1d6db87132f61a0dccbe782c92a1d726f6"
+  },
+  "expected_literal_parents_conditional_on_exact_test": 57,
+  "explicit_roster_proof_reference": {
+    "bytes": 12423,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/gate-handoff-normal57-explicit-roster-proof-INERT-v01.json",
+    "sha256": "de70268a31a27f16752a887870b2ec0e40d7472b338bb4e31379d425feb9bbcd"
+  },
+  "future_bindings": {
+    "HEAD": null,
+    "IO_plan": null,
+    "actual_Source_provenance": null,
+    "actual_collection": null,
+    "candidate_root": null,
+    "canonical_adoption": null,
+    "clean_index": null,
+    "clock": null,
+    "current_import_and_fixture_closure": null,
+    "execution_results": null,
+    "protected_full9": null,
+    "runtime_authority": null,
+    "tree": null
+  },
+  "implementation_packet": {
+    "bytes": 6401,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/sealed-gate-handoff-packet-identity-three-file-private-v02.json",
+    "sha256": "e775e0364c3f8d19ad632f7e51a6083daa2f296063b72904e1b10141ec91e9be"
+  },
+  "no_new_runner_or_control_variant": true,
+  "reuse_existing_control_bytes_unchanged": {
+    "bootstrap": {
+      "bytes": 29467,
+      "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/Git51-INERT-provenance-adapter-v01-0yaggrah/bootstrap-Git-candidate-gate51-INERT.v03.py.DATA",
+      "sha256": "138bdadac5916b9050d3fbb640c2d6853c19d3a5dca1dc4747a09f8ac516da2d"
+    },
+    "factory": {
+      "bytes": 3404,
+      "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/Git51-INERT-provenance-adapter-v01-0yaggrah/factory-Git-candidate-gate51-INERT.v03.py.DATA",
+      "sha256": "d8a17ad862050ddc1a923c33b2a21f7a50e4984edf2506c97354b802c38580ce"
+    },
+    "operator": {
+      "bytes": 62030,
+      "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/Git51-INERT-provenance-adapter-v01-0yaggrah/operator-Git-candidate-gate51-INERT.v03.py.DATA",
+      "sha256": "7707c1f5a6bb25c9f6e3f93a00078287b634c4e7593e8051260cd23abacbc58a"
+    }
+  },
+  "schema": "gate-handoff-owning57-existing-adapter-INERT-handoff/v1",
+  "scope_limits": [
+    "No Source/SDK/runner/control execution, current filesystem-code claim, admission, budget change or cap reset.",
+    "Existing seven maintained logical roles and independent typed/JUnit/rewrite/origin/custody checks remain mandatory.",
+    "The six new literal IDs plus unchanged seed51 are static facts only; actual COLLECT/RUN/JUnit acceptance is still required.",
+    "The final current writer/runtime owner is Root p1_configuration_fix; no activation of the failed old Reader thread.",
+    "Main board-watchdog25 remains a separate test cohort and is not counted here."
+  ],
+  "status": "PRIVATE_DATA_ONLY_NOT_EXECUTED"
+}

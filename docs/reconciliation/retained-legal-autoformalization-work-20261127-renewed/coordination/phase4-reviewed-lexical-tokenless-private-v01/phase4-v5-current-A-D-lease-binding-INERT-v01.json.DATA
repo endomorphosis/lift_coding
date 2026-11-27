@@ -1,0 +1,126 @@
+{
+  "existing_authority_fields_still_unset": true,
+  "git_expectations": {
+    "bytes": 61986,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase4-reviewed-lexical-tokenless-private-v01/phase4-existing-191-source-Git-expectations-and-selected-tests-v02.json",
+    "sha256": "44b5e84fc449dbddbd516bb962fcb26e2eeb6dcf7158be4a6a12893178bb5db2"
+  },
+  "helper": {
+    "bytes": 31241,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase4-reviewed-lexical-tokenless-private-v01/existing-v5-wait-helper-explicit-lease-roots.v01.py.DATA",
+    "sha256": "779a75eaa6f365fb1b62556b7bfbf10152ffd5bbf6cd89162af4e3729befd97c"
+  },
+  "old_helper": {
+    "bytes": 31229,
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/federal-corpus-audits/legal-ir-reviewed-component-cycle-20261110-Ex3yDW/reviewed-mixed-joint-adoption-v01/profiled-retention-integration-v01/wait-helper-reviewed-source-use-R2-owner-INERT-v01.py",
+    "sha256": "8d7309ebf7b51f27980dbcd088ab6782d6b26f68c48249be3b549234bfff7d9b"
+  },
+  "old_parent": {
+    "bytes": 34631,
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/federal-corpus-audits/legal-ir-reviewed-component-cycle-20261110-Ex3yDW/reviewed-mixed-joint-adoption-v01/profiled-retention-integration-v01/run-original-source-held-v5-acquired-no-child-R2-parent-INERT-v02-canonical-packages.py",
+    "sha256": "c64229cf92224505b656b155af738bf38a725cef00ba7b85f2b80c777545e560"
+  },
+  "parent": {
+    "bytes": 34764,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase4-reviewed-lexical-tokenless-private-v01/existing-v5-source-held-current-A-D-parent-INERT.v01.py.DATA",
+    "sha256": "d51918e511d2838c33e4d4cbcbd533644159a1ed1a4c80c743c1f8682ef2d038"
+  },
+  "patch": {
+    "bytes": 5428,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase4-reviewed-lexical-tokenless-private-v01/existing-v5-current-A-D-literal-binding.patch",
+    "sha256": "20cb551b1e7eef23e19a8fb8b6d1f83fd909edb7e23289b0402139bee566bf29"
+  },
+  "prior_test_setup_error": {
+    "error": "Fictional Context did not accept the retained timeout_seconds keyword",
+    "tool_chunk": "0cd220"
+  },
+  "remaining_bindings": {
+    "Git8": null,
+    "current_Source_full9": null,
+    "fresh_request_and_plan": null,
+    "ordinary_test_result": null,
+    "resource_admission": null,
+    "runtime_origin": null
+  },
+  "root_scope_controls": {
+    "current_explicit": {
+      "error": null,
+      "events": [
+        [
+          "enter",
+          "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+          "read",
+          59.0
+        ],
+        [
+          "enter",
+          "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+          "read",
+          59.0
+        ],
+        [
+          "exit",
+          "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate"
+        ],
+        [
+          "exit",
+          "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets"
+        ]
+      ]
+    },
+    "expired_timing_prevents_entry": {
+      "error": "ValueError",
+      "events": []
+    },
+    "failure_unwinds_first": {
+      "error": "OSError",
+      "events": [
+        [
+          "enter",
+          "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+          "read",
+          59.0
+        ],
+        [
+          "enter",
+          "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+          "read",
+          59.0
+        ],
+        [
+          "exit",
+          "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets"
+        ]
+      ]
+    },
+    "old_default_unmodified": {
+      "error": null,
+      "events": [
+        [
+          "enter",
+          "/home/barberb/lift_coding/external/ipfs_datasets",
+          "read",
+          59.0
+        ],
+        [
+          "enter",
+          "/home/barberb/lift_coding/external/ipfs_accelerate",
+          "read",
+          59.0
+        ],
+        [
+          "exit",
+          "/home/barberb/lift_coding/external/ipfs_accelerate"
+        ],
+        [
+          "exit",
+          "/home/barberb/lift_coding/external/ipfs_datasets"
+        ]
+      ]
+    },
+    "old_no_deadline_default_unchanged": true
+  },
+  "schema": "phase4-existing-v5-source-held-current-A-D-binding-inert/v1",
+  "scope": "Private static binding and exact dual_reads AST with fictional contexts. No source lease, toolchain, scheduler, model, pytest or canonical mutation.",
+  "unchanged_caps": "Source 60 s, parent 420 s, child 300 s, scratch 16 MiB, 1 CPU, 1536 MiB, four child slots."
+}

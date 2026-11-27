@@ -1,0 +1,75 @@
+{
+  "schema": "Main-actual-published-parser99-and-Guide581-closure/v1",
+  "status": "PARSER_UNIT_ACTUALLY_CLOSED__FULL_GOAL_OPEN",
+  "implemented": "Existing Lean JSON decoder normalizes RecursionError into the existing invalid-JSON path; malformed diagnostics reject and graceful collection retains following valid records. No proof acceptance relaxation.",
+  "ordinary": {
+    "tests": 99,
+    "functions": 24,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "raw_JUnit": {
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-output-v04/phase1-lean-json-diagnostics-99-run-result0-output1.bin",
+      "bytes": 18639,
+      "sha256": "0ce4209b08c2917064d3834e94b38ace3a09c35dc9c8c570102c6e65728be241"
+    },
+    "all_Main_five_recursion_cases_present_once": true,
+    "Source_AST_Code_execution_consistent": true,
+    "Source_resource_parent_closed_reported": true
+  },
+  "published_exact_code": {
+    "owner": {
+      "relative_path": "ipfs_datasets_py/logic/backends/kernel/lean.py",
+      "bytes": 104465,
+      "sha256": "de99fe31f53fb34bf247e5c24b4b1424ca06874f1da5dc8875b3dbf886d1e4cb",
+      "Gitblob": "97c7e2b760f7775de3aae312557a8eccc82437ba",
+      "Main_loader_function_AST_exact": true
+    },
+    "owning_test": {
+      "relative_path": "tests/integration/logic/backends/test_kernel_backends.py",
+      "bytes": 130553,
+      "sha256": "8bca876c855d44df4d48cb909fc6a0e9a007480d61037831536e84a8cc68adf9",
+      "Gitblob": "6568d9404adbe1a8439829321ade7588a150969e",
+      "all_Main_four_test_function_AST_exact": true
+    }
+  },
+  "actual_normal_FF_code_publication": {
+    "D": "95dc193c3a4a37f9c9227da640a346b2cd58e54c",
+    "H": "06c3dafed7db60d84f2eb3607eca896aa0c6581e",
+    "root": "f928b0599b16dc7f783a8a9572b422e87edf617d",
+    "A_preserved_in_that_epoch": "e55316f48847b17a8b4041a2da30bcaa0ba6eb90"
+  },
+  "actual_Guide581_normal_FF_publication": {
+    "D": "5bf57f390a12621a40716595fe261c35d2741e12",
+    "H": "fe0d51a95aa4662efad395bfeeb996dab567313c",
+    "root": "9712f24eeb4cf444416b2613cf23f097c17bda30",
+    "A_preserved_in_that_epoch": "64a8649952bed66a457d7b87bf6dced9fadab8d4",
+    "four_guides_only": true,
+    "old24_tasks126_components580_records_preserved": true
+  },
+  "A_scope": "Physical ordinary qualification used A219ba; separate later publication epochs preserve their own distinct A baselines. No global unchanged-A or cross-epoch runtime qualification claim.",
+  "Native2_separate_scope": "Small saved closeout reports version rc0, compiler rc[0,1] for separate positive/negative namespaced checks and cleanup. No pytest credit or whole-Phase1/statutory/model/corpus claim.",
+  "evidence": [
+    {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/independent-saved-parser99-Native2-and-Guide581-readback-v01.json",
+      "bytes": 5907,
+      "sha256": "04a4a0442e010c6a97a0bf0550577440412034eef4776f1167054f3f81bba2e1"
+    },
+    {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/independent-saved-parser99-raw-JUnit-addendum-v01.json",
+      "bytes": 2767,
+      "sha256": "c638d54b8aeaf8052f5c31bae41e99459c3214cbca1b9e7da54210c04f0ca406"
+    }
+  ],
+  "preservation": "Initial too-shallow parser calibration, original Root platform-stop snapshot, normal bootstrap-selector refusal, initial publisher rc1 and read-only finalizer recovery remain retained. No rerun or history change by Main.",
+  "watchdog_new_unit_boundary": {
+    "private_packet": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/SEALED-existing-watchdog-event-aware-recheck-two-file-private-v03.json",
+    "bytes": 13817,
+    "sha256": "0dd365d7e8cf0d2e7583755c3aba8a329157167edacb7db276267ccf629bd28f",
+    "engineering_only": "27 scripted passes,12 existing plus15 new, no real SQL or normal/package/runtime/adoption qualification",
+    "handoff": "One new artifact message accepted on original Root active turn01a21b74-e520-7962-a4df-52307ca76e8e using unchanged reviewed caller; processing/adoption unconfirmed, no replay."
+  },
+  "new_Main_Source_SDK_Native_model_Git_or_CI_actions_for_this_reconciliation": 0,
+  "fresh_remote_check_claimed": false,
+  "full_eight_phase_goal_complete": false
+}

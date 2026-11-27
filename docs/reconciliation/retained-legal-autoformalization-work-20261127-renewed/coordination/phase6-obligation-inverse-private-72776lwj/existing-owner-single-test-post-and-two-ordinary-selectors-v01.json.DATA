@@ -1,0 +1,50 @@
+{
+  "actual_normal_collect": null,
+  "actual_normal_run": null,
+  "canonical_mutation_or_authority_selected": false,
+  "dataset_base": "017fb546935826d4e8f13d314395f6053cee4d3f",
+  "dataset_tree": "10194ed7c670c3bd14e3f5f1353ad38e94f6c817",
+  "existing_current_conftest_rewrite_Source_resource_owner_binding_required": true,
+  "existing_tests_and_original_module_AST_preserved": true,
+  "expected_not_actual_new_case_count": 2,
+  "new_ordinary_selectors": [
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_distinguishes_obligation_from_bare_assertion",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_abstains_on_ordinary_past_tense_prose"
+  ],
+  "patch": {
+    "bytes": 2617,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-obligation-inverse-private-72776lwj/test-ir-legal-text-roundtrip-obligation-assertion.patch",
+    "sha256": "2f01beea2daf74109d2a55447eaf8b5026c5fc872a20ae554a5339b5c978eb95"
+  },
+  "previous_Source63_normal16_covers_extended_decompiler_owning_tests_only": true,
+  "previous_Source63_normal16_does_not_qualify_these_cases": true,
+  "private_actual_two_case_receipt": {
+    "bytes": 4073,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-obligation-inverse-private-72776lwj/actual-cached-two-obligation-assertion-controls-result.json",
+    "sha256": "004c1957d173b99f985c0b42705b1cbe3f36e8e8780b509c153dab52336d6b38"
+  },
+  "schema": "Phase6-obligation-assertion-existing-owning-case-and-source-selection-data/v1",
+  "source_target": {
+    "actual_Source_binding": null,
+    "expected_before_bytes": 56035,
+    "expected_before_sha256": "2874f63696c14d09e2418eaf9abb5f2c318b818d760f0633340e3dfd0bed4118",
+    "expected_git_blob": "8605cf77dc20215271ec4d8e547a996ce5d31db3",
+    "observed_working_metadata_F9_only": {
+      "st_ctime_ns": "1795426945498017997",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "70042509",
+      "st_mode": "33188",
+      "st_mtime_ns": "1795426945484581285",
+      "st_nlink": "1",
+      "st_size": "56035",
+      "st_uid": "1000"
+    },
+    "private_post": {
+      "bytes": 58044,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-obligation-inverse-private-72776lwj/current-owning-test-obligation-assertion-v01.after.py.DATA",
+      "sha256": "f918c5c29396beccf9119d41a4017763511a3abb737c4ce79f1f33c3eda50c72"
+    },
+    "repo_relative_path": "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py"
+  }
+}

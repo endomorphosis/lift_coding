@@ -1,0 +1,1218 @@
+{
+  "after": {
+    "HEAD": "678996d3c02dbd43b77fdf6123a7368a860a6060",
+    "HEAD_tree_index_unchanged": true,
+    "cached_diff_empty": true,
+    "diff_check_passed": true,
+    "exact19_only_untracked": true,
+    "index_full9": {
+      "st_ctime_ns": "1795468113172585415",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "69343213",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795468113172118163",
+      "st_nlink": "1",
+      "st_size": "7244241",
+      "st_uid": "1000"
+    },
+    "status_bytes": 2089,
+    "status_sha256": "22de309b94ae0bd4d2413f2fe6bd0c6951e152572f5628ab7302c532f0b22bde",
+    "tree": "641fca68a02991d294a2b8cad7424d1a332656ba"
+  },
+  "all_owned_FDs_closed_except_this_receipt_during_seal": true,
+  "all_owned_Git_processes_terminal": true,
+  "before": {
+    "HEAD": "678996d3c02dbd43b77fdf6123a7368a860a6060",
+    "all19_targets_absent_in_HEAD_and_worktree": true,
+    "index_full9": {
+      "st_ctime_ns": "1795468113172585415",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "69343213",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795468113172118163",
+      "st_nlink": "1",
+      "st_size": "7244241",
+      "st_uid": "1000"
+    },
+    "index_path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/root/.git/index",
+    "tree": "641fca68a02991d294a2b8cad7424d1a332656ba",
+    "worktree_and_index_clean": true
+  },
+  "complete": true,
+  "created_directories": [
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/root/docs/reconciliation/main-private-controls-20261123",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/root/docs/reconciliation/main-private-controls-20261123/tests",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/root/docs/reconciliation/main-private-controls-20261123/controls",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/root/docs/reconciliation/main-private-controls-20261123/records",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/root/docs/reconciliation/main-private-controls-20261123/evidence",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/root/docs/reconciliation/recovery-commit-identities-20261123"
+  ],
+  "errors": [],
+  "expected_HEAD": "678996d3c02dbd43b77fdf6123a7368a860a6060",
+  "files": [
+    {
+      "bytes": 22230,
+      "complete_readback_equal": true,
+      "git_blob_sha1": "fd2ee11004438e7e81098632b999c8607f75e4bf",
+      "git_mode": "100644",
+      "historical_status": "HISTORICAL_TEST_CONTROL",
+      "installed_full9": {
+        "st_ctime_ns": "1795481104745255083",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006706",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795481104745255083",
+        "st_nlink": "1",
+        "st_size": "22230",
+        "st_uid": "1000"
+      },
+      "prepared_observed_full9": {
+        "st_ctime_ns": "1795476670741454326",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006649",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795476670741454326",
+        "st_nlink": "1",
+        "st_size": "22230",
+        "st_uid": "1000"
+      },
+      "prepared_ref": {
+        "FS_mode_octal": "0o400",
+        "bytes": 22230,
+        "full9": {
+          "st_ctime_ns": "1795476670741454326",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006649",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476670741454326",
+          "st_nlink": "1",
+          "st_size": "22230",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "fd2ee11004438e7e81098632b999c8607f75e4bf",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/new-Main-preservation13-prepared-v01/files/docs/reconciliation/main-private-controls-20261123/tests/test_parent_preflight_original_finalizer_three_controls_v01.py.DATA",
+        "sha256": "45115ee8c70e14e6c06980963a24a037b34c423ede78618aef0116d97a8ff95c"
+      },
+      "repo_relative_path": "docs/reconciliation/main-private-controls-20261123/tests/test_parent_preflight_original_finalizer_three_controls_v01.py.DATA",
+      "sha256": "45115ee8c70e14e6c06980963a24a037b34c423ede78618aef0116d97a8ff95c",
+      "working_FS_mode": "0o644"
+    },
+    {
+      "bytes": 10131,
+      "complete_readback_equal": true,
+      "git_blob_sha1": "93a9521eb33788b580c77f40503e9f6569e82daf",
+      "git_mode": "100644",
+      "historical_status": "HISTORICAL_TEST_CONTROL",
+      "installed_full9": {
+        "st_ctime_ns": "1795481104750255141",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006707",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795481104750255141",
+        "st_nlink": "1",
+        "st_size": "10131",
+        "st_uid": "1000"
+      },
+      "prepared_observed_full9": {
+        "st_ctime_ns": "1795476670753454423",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006650",
+        "st_mode": "33152",
+        "st_mtime_ns": "1795476670753454423",
+        "st_nlink": "1",
+        "st_size": "10131",
+        "st_uid": "1000"
+      },
+      "prepared_ref": {
+        "FS_mode_octal": "0o600",
+        "bytes": 10131,
+        "full9": {
+          "st_ctime_ns": "1795476670753454423",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006650",
+          "st_mode": "33152",
+          "st_mtime_ns": "1795476670753454423",
+          "st_nlink": "1",
+          "st_size": "10131",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "93a9521eb33788b580c77f40503e9f6569e82daf",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/new-Main-preservation13-prepared-v01/files/docs/reconciliation/main-private-controls-20261123/tests/test_parent_success_cleanup_failure_one_control_v01.py.DATA",
+        "sha256": "713203472d9422438dcbad4924ea6682ee6f52a5076307d705138a7be0c9a164"
+      },
+      "repo_relative_path": "docs/reconciliation/main-private-controls-20261123/tests/test_parent_success_cleanup_failure_one_control_v01.py.DATA",
+      "sha256": "713203472d9422438dcbad4924ea6682ee6f52a5076307d705138a7be0c9a164",
+      "working_FS_mode": "0o644"
+    },
+    {
+      "bytes": 47298,
+      "complete_readback_equal": true,
+      "git_blob_sha1": "1aec38c1d7a00f51ddc65f6b33930f6997899c06",
+      "git_mode": "100644",
+      "historical_status": "UNADOPTED_INERT_HISTORICAL_VERSION",
+      "installed_full9": {
+        "st_ctime_ns": "1795481104756255210",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006709",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795481104756255210",
+        "st_nlink": "1",
+        "st_size": "47298",
+        "st_uid": "1000"
+      },
+      "prepared_observed_full9": {
+        "st_ctime_ns": "1795476670756454447",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006652",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795476670756454447",
+        "st_nlink": "1",
+        "st_size": "47298",
+        "st_uid": "1000"
+      },
+      "prepared_ref": {
+        "FS_mode_octal": "0o400",
+        "bytes": 47298,
+        "full9": {
+          "st_ctime_ns": "1795476670756454447",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006652",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476670756454447",
+          "st_nlink": "1",
+          "st_size": "47298",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "1aec38c1d7a00f51ddc65f6b33930f6997899c06",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/new-Main-preservation13-prepared-v01/files/docs/reconciliation/main-private-controls-20261123/controls/existing-R2-published-D27-operator-INERT.v01.py.DATA",
+        "sha256": "2936fa4786a336c5f741c71ee5151f08e75692774f095c8325d79a0a3512dd73"
+      },
+      "repo_relative_path": "docs/reconciliation/main-private-controls-20261123/controls/existing-R2-published-D27-operator-INERT.v01.py.DATA",
+      "sha256": "2936fa4786a336c5f741c71ee5151f08e75692774f095c8325d79a0a3512dd73",
+      "working_FS_mode": "0o644"
+    },
+    {
+      "bytes": 3003,
+      "complete_readback_equal": true,
+      "git_blob_sha1": "7f96c7da7403e564aca2c43492daece4a76ba3f2",
+      "git_mode": "100644",
+      "historical_status": "UNADOPTED_INERT_HISTORICAL_VERSION",
+      "installed_full9": {
+        "st_ctime_ns": "1795481104760255257",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006710",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795481104760255257",
+        "st_nlink": "1",
+        "st_size": "3003",
+        "st_uid": "1000"
+      },
+      "prepared_observed_full9": {
+        "st_ctime_ns": "1795476670760454480",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006653",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795476670760454480",
+        "st_nlink": "1",
+        "st_size": "3003",
+        "st_uid": "1000"
+      },
+      "prepared_ref": {
+        "FS_mode_octal": "0o400",
+        "bytes": 3003,
+        "full9": {
+          "st_ctime_ns": "1795476670760454480",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006653",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476670760454480",
+          "st_nlink": "1",
+          "st_size": "3003",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "7f96c7da7403e564aca2c43492daece4a76ba3f2",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/new-Main-preservation13-prepared-v01/files/docs/reconciliation/main-private-controls-20261123/controls/existing-R2-published-D27-request-INERT.v01.py.DATA",
+        "sha256": "24473ccf82802e37270ba505fc473dcc95d4f2b54ce195f99bf2a4d9f988a78e"
+      },
+      "repo_relative_path": "docs/reconciliation/main-private-controls-20261123/controls/existing-R2-published-D27-request-INERT.v01.py.DATA",
+      "sha256": "24473ccf82802e37270ba505fc473dcc95d4f2b54ce195f99bf2a4d9f988a78e",
+      "working_FS_mode": "0o644"
+    },
+    {
+      "bytes": 33546,
+      "complete_readback_equal": true,
+      "git_blob_sha1": "7165d975ebc327e7a953d1d19336cc1cf90e2293",
+      "git_mode": "100644",
+      "historical_status": "UNADOPTED_INERT_HISTORICAL_VERSION",
+      "installed_full9": {
+        "st_ctime_ns": "1795481104763255292",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006711",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795481104763255292",
+        "st_nlink": "1",
+        "st_size": "33546",
+        "st_uid": "1000"
+      },
+      "prepared_observed_full9": {
+        "st_ctime_ns": "1795476670763454504",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006654",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795476670763454504",
+        "st_nlink": "1",
+        "st_size": "33546",
+        "st_uid": "1000"
+      },
+      "prepared_ref": {
+        "FS_mode_octal": "0o400",
+        "bytes": 33546,
+        "full9": {
+          "st_ctime_ns": "1795476670763454504",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006654",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476670763454504",
+          "st_nlink": "1",
+          "st_size": "33546",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "7165d975ebc327e7a953d1d19336cc1cf90e2293",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/new-Main-preservation13-prepared-v01/files/docs/reconciliation/main-private-controls-20261123/controls/bootstrap-published-D-phase2-bridge27-INERT.v03.py.DATA",
+        "sha256": "2f5fb934f54166a5dbcc6c0fbf5dd35073b190df1c846e28c5b86366fa4e8179"
+      },
+      "repo_relative_path": "docs/reconciliation/main-private-controls-20261123/controls/bootstrap-published-D-phase2-bridge27-INERT.v03.py.DATA",
+      "sha256": "2f5fb934f54166a5dbcc6c0fbf5dd35073b190df1c846e28c5b86366fa4e8179",
+      "working_FS_mode": "0o644"
+    },
+    {
+      "bytes": 10956,
+      "complete_readback_equal": true,
+      "git_blob_sha1": "5d47342f5da2da13ba6be0cbee19dfa20ba0a95e",
+      "git_mode": "100644",
+      "historical_status": "HISTORICAL_NULL_BINDING_METADATA",
+      "installed_full9": {
+        "st_ctime_ns": "1795481104771255384",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006713",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795481104771255384",
+        "st_nlink": "1",
+        "st_size": "10956",
+        "st_uid": "1000"
+      },
+      "prepared_observed_full9": {
+        "st_ctime_ns": "1795476670766454529",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006656",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795476670766454529",
+        "st_nlink": "1",
+        "st_size": "10956",
+        "st_uid": "1000"
+      },
+      "prepared_ref": {
+        "FS_mode_octal": "0o400",
+        "bytes": 10956,
+        "full9": {
+          "st_ctime_ns": "1795476670766454529",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006656",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476670766454529",
+          "st_nlink": "1",
+          "st_size": "10956",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "5d47342f5da2da13ba6be0cbee19dfa20ba0a95e",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/new-Main-preservation13-prepared-v01/files/docs/reconciliation/main-private-controls-20261123/records/sealed-existing-R2-published-D27-INERT-tuple-v02.json",
+        "sha256": "1d71aa16a8f6e43d7289163dbeebe192c469f13ba07a95ecca66524f89434e0c"
+      },
+      "repo_relative_path": "docs/reconciliation/main-private-controls-20261123/records/sealed-existing-R2-published-D27-INERT-tuple-v02.json",
+      "sha256": "1d71aa16a8f6e43d7289163dbeebe192c469f13ba07a95ecca66524f89434e0c",
+      "working_FS_mode": "0o644"
+    },
+    {
+      "bytes": 11552,
+      "complete_readback_equal": true,
+      "git_blob_sha1": "a2ac75222a492f2e41ebaca64de7d36283be4489",
+      "git_mode": "100644",
+      "historical_status": "HISTORICAL_REUSE_METADATA_NOT_ENROLLED",
+      "installed_full9": {
+        "st_ctime_ns": "1795481104775255431",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006714",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795481104775255431",
+        "st_nlink": "1",
+        "st_size": "11552",
+        "st_uid": "1000"
+      },
+      "prepared_observed_full9": {
+        "st_ctime_ns": "1795476670769454553",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006657",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795476670769454553",
+        "st_nlink": "1",
+        "st_size": "11552",
+        "st_uid": "1000"
+      },
+      "prepared_ref": {
+        "FS_mode_octal": "0o400",
+        "bytes": 11552,
+        "full9": {
+          "st_ctime_ns": "1795476670769454553",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006657",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476670769454553",
+          "st_nlink": "1",
+          "st_size": "11552",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "a2ac75222a492f2e41ebaca64de7d36283be4489",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/new-Main-preservation13-prepared-v01/files/docs/reconciliation/main-private-controls-20261123/records/sealed-retained-Native3-direct-control-reuse-tuple-v01.json",
+        "sha256": "6170026d3db0e6cf70405032e805b1bd807150568a3174bd3bb8ab9ac2f899c6"
+      },
+      "repo_relative_path": "docs/reconciliation/main-private-controls-20261123/records/sealed-retained-Native3-direct-control-reuse-tuple-v01.json",
+      "sha256": "6170026d3db0e6cf70405032e805b1bd807150568a3174bd3bb8ab9ac2f899c6",
+      "working_FS_mode": "0o644"
+    },
+    {
+      "bytes": 5023,
+      "complete_readback_equal": true,
+      "git_blob_sha1": "5c04a444b080e0cdfcf1997097168524883ed8fa",
+      "git_mode": "100644",
+      "historical_status": "HISTORICAL_RED3_DESCRIPTOR",
+      "installed_full9": {
+        "st_ctime_ns": "1795481104781255500",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006715",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795481104781255500",
+        "st_nlink": "1",
+        "st_size": "5023",
+        "st_uid": "1000"
+      },
+      "prepared_observed_full9": {
+        "st_ctime_ns": "1795476670772454577",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006658",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795476670772454577",
+        "st_nlink": "1",
+        "st_size": "5023",
+        "st_uid": "1000"
+      },
+      "prepared_ref": {
+        "FS_mode_octal": "0o400",
+        "bytes": 5023,
+        "full9": {
+          "st_ctime_ns": "1795476670772454577",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006658",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476670772454577",
+          "st_nlink": "1",
+          "st_size": "5023",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "5c04a444b080e0cdfcf1997097168524883ed8fa",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/new-Main-preservation13-prepared-v01/files/docs/reconciliation/main-private-controls-20261123/records/sealed-test-only-parent-preflight-original-finalizer-three-controls-v01.json",
+        "sha256": "0563a56b80997d9e80a021d5514b2669a90b4633cafd2d65b3da3e8206c6e508"
+      },
+      "repo_relative_path": "docs/reconciliation/main-private-controls-20261123/records/sealed-test-only-parent-preflight-original-finalizer-three-controls-v01.json",
+      "sha256": "0563a56b80997d9e80a021d5514b2669a90b4633cafd2d65b3da3e8206c6e508",
+      "working_FS_mode": "0o644"
+    },
+    {
+      "bytes": 3568,
+      "complete_readback_equal": true,
+      "git_blob_sha1": "1fa7534e144a14c2238590cbab23c30fa138f108",
+      "git_mode": "100644",
+      "historical_status": "HISTORICAL_RED1_DESCRIPTOR",
+      "installed_full9": {
+        "st_ctime_ns": "1795481104785255547",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006716",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795481104785255547",
+        "st_nlink": "1",
+        "st_size": "3568",
+        "st_uid": "1000"
+      },
+      "prepared_observed_full9": {
+        "st_ctime_ns": "1795476670776454610",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006659",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795476670776454610",
+        "st_nlink": "1",
+        "st_size": "3568",
+        "st_uid": "1000"
+      },
+      "prepared_ref": {
+        "FS_mode_octal": "0o400",
+        "bytes": 3568,
+        "full9": {
+          "st_ctime_ns": "1795476670776454610",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006659",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476670776454610",
+          "st_nlink": "1",
+          "st_size": "3568",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "1fa7534e144a14c2238590cbab23c30fa138f108",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/new-Main-preservation13-prepared-v01/files/docs/reconciliation/main-private-controls-20261123/records/sealed-separate-success-cleanup-failure-one-control-v01.json",
+        "sha256": "e881c84b5f768fd61c6497dd4fe3a57a6f5548cb2a2fc1c1a80421262d4b2a3c"
+      },
+      "repo_relative_path": "docs/reconciliation/main-private-controls-20261123/records/sealed-separate-success-cleanup-failure-one-control-v01.json",
+      "sha256": "e881c84b5f768fd61c6497dd4fe3a57a6f5548cb2a2fc1c1a80421262d4b2a3c",
+      "working_FS_mode": "0o644"
+    },
+    {
+      "bytes": 6594,
+      "complete_readback_equal": true,
+      "git_blob_sha1": "02176248ae00e0a85422a42c3464b7d419559ad3",
+      "git_mode": "100644",
+      "historical_status": "ACTUAL_PRIVATE_RED3",
+      "installed_full9": {
+        "st_ctime_ns": "1795481104799255709",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006718",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795481104799255709",
+        "st_nlink": "1",
+        "st_size": "6594",
+        "st_uid": "1000"
+      },
+      "prepared_observed_full9": {
+        "st_ctime_ns": "1795476670779454634",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006661",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795476670779454634",
+        "st_nlink": "1",
+        "st_size": "6594",
+        "st_uid": "1000"
+      },
+      "prepared_ref": {
+        "FS_mode_octal": "0o400",
+        "bytes": 6594,
+        "full9": {
+          "st_ctime_ns": "1795476670779454634",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006661",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476670779454634",
+          "st_nlink": "1",
+          "st_size": "6594",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "02176248ae00e0a85422a42c3464b7d419559ad3",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/new-Main-preservation13-prepared-v01/files/docs/reconciliation/main-private-controls-20261123/evidence/actual-parent-preflight-original-finalizer-three-controls-RED-v01.json",
+        "sha256": "f05f187ec320993cd1830950b3d1f2163c6d47b0b51b6b7f2778d5dde4eb7fff"
+      },
+      "repo_relative_path": "docs/reconciliation/main-private-controls-20261123/evidence/actual-parent-preflight-original-finalizer-three-controls-RED-v01.json",
+      "sha256": "f05f187ec320993cd1830950b3d1f2163c6d47b0b51b6b7f2778d5dde4eb7fff",
+      "working_FS_mode": "0o644"
+    },
+    {
+      "bytes": 5333,
+      "complete_readback_equal": true,
+      "git_blob_sha1": "6b58379b3116298f78b10e78498cead30c487a36",
+      "git_mode": "100644",
+      "historical_status": "ACTUAL_PRIVATE_RED1",
+      "installed_full9": {
+        "st_ctime_ns": "1795481104802255744",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006719",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795481104802255744",
+        "st_nlink": "1",
+        "st_size": "5333",
+        "st_uid": "1000"
+      },
+      "prepared_observed_full9": {
+        "st_ctime_ns": "1795476670785454683",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006662",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795476670785454683",
+        "st_nlink": "1",
+        "st_size": "5333",
+        "st_uid": "1000"
+      },
+      "prepared_ref": {
+        "FS_mode_octal": "0o400",
+        "bytes": 5333,
+        "full9": {
+          "st_ctime_ns": "1795476670785454683",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006662",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476670785454683",
+          "st_nlink": "1",
+          "st_size": "5333",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "6b58379b3116298f78b10e78498cead30c487a36",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/new-Main-preservation13-prepared-v01/files/docs/reconciliation/main-private-controls-20261123/evidence/actual-parent-success-cleanup-failure-RED1-v01.json",
+        "sha256": "f0803dad3f8820fce648fed94f97cd23960153a6113ed4e03656e269f95c3c57"
+      },
+      "repo_relative_path": "docs/reconciliation/main-private-controls-20261123/evidence/actual-parent-success-cleanup-failure-RED1-v01.json",
+      "sha256": "f0803dad3f8820fce648fed94f97cd23960153a6113ed4e03656e269f95c3c57",
+      "working_FS_mode": "0o644"
+    },
+    {
+      "bytes": 11369,
+      "complete_readback_equal": true,
+      "git_blob_sha1": "5255a0d753e0479af71c6dc876f3c8408b05dcff",
+      "git_mode": "100644",
+      "historical_status": "HISTORICAL_PRESERVATION_MANIFEST",
+      "installed_full9": {
+        "st_ctime_ns": "1795481104806255791",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006720",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795481104806255791",
+        "st_nlink": "1",
+        "st_size": "11369",
+        "st_uid": "1000"
+      },
+      "prepared_observed_full9": {
+        "st_ctime_ns": "1795476670789454715",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006663",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795476670789454715",
+        "st_nlink": "1",
+        "st_size": "11369",
+        "st_uid": "1000"
+      },
+      "prepared_ref": {
+        "FS_mode_octal": "0o400",
+        "bytes": 11369,
+        "full9": {
+          "st_ctime_ns": "1795476670789454715",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006663",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476670789454715",
+          "st_nlink": "1",
+          "st_size": "11369",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "5255a0d753e0479af71c6dc876f3c8408b05dcff",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/new-Main-preservation13-prepared-v01/files/docs/reconciliation/main-private-controls-20261123/manifest.json",
+        "sha256": "9f58282fbaf27ffe2d36132b953ea943e1185dbd7726bbbf1ba5988f64861188"
+      },
+      "repo_relative_path": "docs/reconciliation/main-private-controls-20261123/manifest.json",
+      "sha256": "9f58282fbaf27ffe2d36132b953ea943e1185dbd7726bbbf1ba5988f64861188",
+      "working_FS_mode": "0o644"
+    },
+    {
+      "bytes": 3082,
+      "complete_readback_equal": true,
+      "git_blob_sha1": "922048945b0d6d07bc00963d8695b16a35ba2e00",
+      "git_mode": "100644",
+      "historical_status": "HISTORICAL_UNADOPTED_ARCHIVE_README",
+      "installed_full9": {
+        "st_ctime_ns": "1795481104810255837",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006721",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795481104810255837",
+        "st_nlink": "1",
+        "st_size": "3082",
+        "st_uid": "1000"
+      },
+      "prepared_observed_full9": {
+        "st_ctime_ns": "1795476670792454739",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006664",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795476670792454739",
+        "st_nlink": "1",
+        "st_size": "3082",
+        "st_uid": "1000"
+      },
+      "prepared_ref": {
+        "FS_mode_octal": "0o400",
+        "bytes": 3082,
+        "full9": {
+          "st_ctime_ns": "1795476670792454739",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006664",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476670792454739",
+          "st_nlink": "1",
+          "st_size": "3082",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "922048945b0d6d07bc00963d8695b16a35ba2e00",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/new-Main-preservation13-prepared-v01/files/docs/reconciliation/main-private-controls-20261123/README.md",
+        "sha256": "f2c4dd2edd6ef7b6398140bc7c832d881ee5e57f6235a5e9e6a5146fad2542ac"
+      },
+      "repo_relative_path": "docs/reconciliation/main-private-controls-20261123/README.md",
+      "sha256": "f2c4dd2edd6ef7b6398140bc7c832d881ee5e57f6235a5e9e6a5146fad2542ac",
+      "working_FS_mode": "0o644"
+    },
+    {
+      "bytes": 319,
+      "complete_readback_equal": true,
+      "git_blob_sha1": "9c85b571441d502c8483bb94aabdd88c41ac07cd",
+      "git_mode": "100644",
+      "historical_status": "NOT_ADOPTED_RECOVERY_COMMIT_IDENTITY_ONLY",
+      "installed_full9": {
+        "st_ctime_ns": "1795481104819255941",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006723",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795481104819255941",
+        "st_nlink": "1",
+        "st_size": "319",
+        "st_uid": "1000"
+      },
+      "prepared_observed_full9": {
+        "st_ctime_ns": "1795476982336982556",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006669",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795476982336982556",
+        "st_nlink": "1",
+        "st_size": "319",
+        "st_uid": "1000"
+      },
+      "prepared_ref": {
+        "bytes": 319,
+        "full9": {
+          "st_ctime_ns": "1795476982336982556",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006669",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476982336982556",
+          "st_nlink": "1",
+          "st_size": "319",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Kit-Swiss-four-commit-raw-archive-v02/archive/docs/reconciliation/recovery-commit-identities-20261123/kit-e9e85ba2198164bd28e99d6d1150070fa5692695.commit.DATA",
+        "sha256": "71f3e1d7582fcbd671ba0f4916e95a4a3dc05658dc516f65d4e5be910a3bcfe3"
+      },
+      "repo_relative_path": "docs/reconciliation/recovery-commit-identities-20261123/kit-e9e85ba2198164bd28e99d6d1150070fa5692695.commit.DATA",
+      "sha256": "71f3e1d7582fcbd671ba0f4916e95a4a3dc05658dc516f65d4e5be910a3bcfe3",
+      "working_FS_mode": "0o644"
+    },
+    {
+      "bytes": 302,
+      "complete_readback_equal": true,
+      "git_blob_sha1": "f8943a59e078cadf78ee32c8cae770e395936d0d",
+      "git_mode": "100644",
+      "historical_status": "NOT_ADOPTED_RECOVERY_COMMIT_IDENTITY_ONLY",
+      "installed_full9": {
+        "st_ctime_ns": "1795481104823255988",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006724",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795481104823255988",
+        "st_nlink": "1",
+        "st_size": "302",
+        "st_uid": "1000"
+      },
+      "prepared_observed_full9": {
+        "st_ctime_ns": "1795476982349982661",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006670",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795476982349982661",
+        "st_nlink": "1",
+        "st_size": "302",
+        "st_uid": "1000"
+      },
+      "prepared_ref": {
+        "bytes": 302,
+        "full9": {
+          "st_ctime_ns": "1795476982349982661",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006670",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476982349982661",
+          "st_nlink": "1",
+          "st_size": "302",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Kit-Swiss-four-commit-raw-archive-v02/archive/docs/reconciliation/recovery-commit-identities-20261123/kit-fc537feb8c8c51a8d561519a71fbc7600b98cbb6.commit.DATA",
+        "sha256": "ba38d584803c6a3e3a0041cdac63bd709be973a87511fe146107d9a40ce19f62"
+      },
+      "repo_relative_path": "docs/reconciliation/recovery-commit-identities-20261123/kit-fc537feb8c8c51a8d561519a71fbc7600b98cbb6.commit.DATA",
+      "sha256": "ba38d584803c6a3e3a0041cdac63bd709be973a87511fe146107d9a40ce19f62",
+      "working_FS_mode": "0o644"
+    },
+    {
+      "bytes": 319,
+      "complete_readback_equal": true,
+      "git_blob_sha1": "d667bc71836955fe6543d732af1631017c36e695",
+      "git_mode": "100644",
+      "historical_status": "NOT_ADOPTED_RECOVERY_COMMIT_IDENTITY_ONLY",
+      "installed_full9": {
+        "st_ctime_ns": "1795481104826256022",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006725",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795481104826256022",
+        "st_nlink": "1",
+        "st_size": "319",
+        "st_uid": "1000"
+      },
+      "prepared_observed_full9": {
+        "st_ctime_ns": "1795476982351982678",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006671",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795476982351982678",
+        "st_nlink": "1",
+        "st_size": "319",
+        "st_uid": "1000"
+      },
+      "prepared_ref": {
+        "bytes": 319,
+        "full9": {
+          "st_ctime_ns": "1795476982351982678",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006671",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476982351982678",
+          "st_nlink": "1",
+          "st_size": "319",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Kit-Swiss-four-commit-raw-archive-v02/archive/docs/reconciliation/recovery-commit-identities-20261123/swiss-7e7c69c939f79825821b647c44044a3c8029f053.commit.DATA",
+        "sha256": "7dcca2fde61546ff5342256b502127d103fedc5ab7c9f78edccdcbfbdd0f033f"
+      },
+      "repo_relative_path": "docs/reconciliation/recovery-commit-identities-20261123/swiss-7e7c69c939f79825821b647c44044a3c8029f053.commit.DATA",
+      "sha256": "7dcca2fde61546ff5342256b502127d103fedc5ab7c9f78edccdcbfbdd0f033f",
+      "working_FS_mode": "0o644"
+    },
+    {
+      "bytes": 302,
+      "complete_readback_equal": true,
+      "git_blob_sha1": "db1a818b04930eb675c2de19ec57b8056724a478",
+      "git_mode": "100644",
+      "historical_status": "NOT_ADOPTED_RECOVERY_COMMIT_IDENTITY_ONLY",
+      "installed_full9": {
+        "st_ctime_ns": "1795481104832256092",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006726",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795481104832256092",
+        "st_nlink": "1",
+        "st_size": "302",
+        "st_uid": "1000"
+      },
+      "prepared_observed_full9": {
+        "st_ctime_ns": "1795476982355982710",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006672",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795476982355982710",
+        "st_nlink": "1",
+        "st_size": "302",
+        "st_uid": "1000"
+      },
+      "prepared_ref": {
+        "bytes": 302,
+        "full9": {
+          "st_ctime_ns": "1795476982355982710",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006672",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476982355982710",
+          "st_nlink": "1",
+          "st_size": "302",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Kit-Swiss-four-commit-raw-archive-v02/archive/docs/reconciliation/recovery-commit-identities-20261123/swiss-4a9c3224275e7d9537de5c35d0a2658a30648d88.commit.DATA",
+        "sha256": "f9c973abd2585e4754d3ca3c5a5357abb97aff579713fdf0fa8de5de987dcc08"
+      },
+      "repo_relative_path": "docs/reconciliation/recovery-commit-identities-20261123/swiss-4a9c3224275e7d9537de5c35d0a2658a30648d88.commit.DATA",
+      "sha256": "f9c973abd2585e4754d3ca3c5a5357abb97aff579713fdf0fa8de5de987dcc08",
+      "working_FS_mode": "0o644"
+    },
+    {
+      "bytes": 2044,
+      "complete_readback_equal": true,
+      "git_blob_sha1": "810bb0fea4b3a34e7d22c4caa7fff02153a4db68",
+      "git_mode": "100644",
+      "historical_status": "NOT_ADOPTED_RECOVERY_COMMIT_IDENTITY_ONLY",
+      "installed_full9": {
+        "st_ctime_ns": "1795481104836256138",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006727",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795481104836256138",
+        "st_nlink": "1",
+        "st_size": "2044",
+        "st_uid": "1000"
+      },
+      "prepared_observed_full9": {
+        "st_ctime_ns": "1795476982573984479",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006702",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795476982573984479",
+        "st_nlink": "1",
+        "st_size": "2044",
+        "st_uid": "1000"
+      },
+      "prepared_ref": {
+        "bytes": 2044,
+        "full9": {
+          "st_ctime_ns": "1795476982573984479",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006702",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476982573984479",
+          "st_nlink": "1",
+          "st_size": "2044",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Kit-Swiss-four-commit-raw-archive-v02/archive/docs/reconciliation/recovery-commit-identities-20261123/README.md",
+        "sha256": "7d8efdadde96616bffffe09b6f2f08331243eeb92d8cb44621d86891bd642856"
+      },
+      "repo_relative_path": "docs/reconciliation/recovery-commit-identities-20261123/README.md",
+      "sha256": "7d8efdadde96616bffffe09b6f2f08331243eeb92d8cb44621d86891bd642856",
+      "working_FS_mode": "0o644"
+    },
+    {
+      "bytes": 4896,
+      "complete_readback_equal": true,
+      "git_blob_sha1": "165db277e88ebf9040612c5ef502f8f728aad6fb",
+      "git_mode": "100644",
+      "historical_status": "NOT_ADOPTED_RECOVERY_COMMIT_IDENTITY_ONLY",
+      "installed_full9": {
+        "st_ctime_ns": "1795481104843256220",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006728",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795481104843256220",
+        "st_nlink": "1",
+        "st_size": "4896",
+        "st_uid": "1000"
+      },
+      "prepared_observed_full9": {
+        "st_ctime_ns": "1795476982577984511",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006703",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795476982577984511",
+        "st_nlink": "1",
+        "st_size": "4896",
+        "st_uid": "1000"
+      },
+      "prepared_ref": {
+        "bytes": 4896,
+        "full9": {
+          "st_ctime_ns": "1795476982577984511",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006703",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476982577984511",
+          "st_nlink": "1",
+          "st_size": "4896",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Kit-Swiss-four-commit-raw-archive-v02/archive/docs/reconciliation/recovery-commit-identities-20261123/manifest.json",
+        "sha256": "f7f828623f608c90f6032b6fe3f0271173cca683684bae882b37103713303ab3"
+      },
+      "repo_relative_path": "docs/reconciliation/recovery-commit-identities-20261123/manifest.json",
+      "sha256": "f7f828623f608c90f6032b6fe3f0271173cca683684bae882b37103713303ab3",
+      "working_FS_mode": "0o644"
+    }
+  ],
+  "finished_ns": "1795481104955966439",
+  "git_commands": [
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stderr_bytes": 0,
+      "stdout_bytes": 41,
+      "stdout_sha256": "d656bc969ea62482c66523c4981e5a019357791075399b0654d5824f63a0307e"
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD^{tree}"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stderr_bytes": 0,
+      "stdout_bytes": 41,
+      "stdout_sha256": "5f8f3c47703e67006de62b13b6b85dca368637dd82ee7029c89e5003804704b4"
+    },
+    {
+      "argv": [
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stderr_bytes": 0,
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "ls-tree",
+        "-r",
+        "HEAD",
+        "--",
+        "docs/reconciliation/main-private-controls-20261123/tests/test_parent_preflight_original_finalizer_three_controls_v01.py.DATA",
+        "docs/reconciliation/main-private-controls-20261123/tests/test_parent_success_cleanup_failure_one_control_v01.py.DATA",
+        "docs/reconciliation/main-private-controls-20261123/controls/existing-R2-published-D27-operator-INERT.v01.py.DATA",
+        "docs/reconciliation/main-private-controls-20261123/controls/existing-R2-published-D27-request-INERT.v01.py.DATA",
+        "docs/reconciliation/main-private-controls-20261123/controls/bootstrap-published-D-phase2-bridge27-INERT.v03.py.DATA",
+        "docs/reconciliation/main-private-controls-20261123/records/sealed-existing-R2-published-D27-INERT-tuple-v02.json",
+        "docs/reconciliation/main-private-controls-20261123/records/sealed-retained-Native3-direct-control-reuse-tuple-v01.json",
+        "docs/reconciliation/main-private-controls-20261123/records/sealed-test-only-parent-preflight-original-finalizer-three-controls-v01.json",
+        "docs/reconciliation/main-private-controls-20261123/records/sealed-separate-success-cleanup-failure-one-control-v01.json",
+        "docs/reconciliation/main-private-controls-20261123/evidence/actual-parent-preflight-original-finalizer-three-controls-RED-v01.json",
+        "docs/reconciliation/main-private-controls-20261123/evidence/actual-parent-success-cleanup-failure-RED1-v01.json",
+        "docs/reconciliation/main-private-controls-20261123/manifest.json",
+        "docs/reconciliation/main-private-controls-20261123/README.md",
+        "docs/reconciliation/recovery-commit-identities-20261123/kit-e9e85ba2198164bd28e99d6d1150070fa5692695.commit.DATA",
+        "docs/reconciliation/recovery-commit-identities-20261123/kit-fc537feb8c8c51a8d561519a71fbc7600b98cbb6.commit.DATA",
+        "docs/reconciliation/recovery-commit-identities-20261123/swiss-7e7c69c939f79825821b647c44044a3c8029f053.commit.DATA",
+        "docs/reconciliation/recovery-commit-identities-20261123/swiss-4a9c3224275e7d9537de5c35d0a2658a30648d88.commit.DATA",
+        "docs/reconciliation/recovery-commit-identities-20261123/README.md",
+        "docs/reconciliation/recovery-commit-identities-20261123/manifest.json"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stderr_bytes": 0,
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "diff",
+        "--cached",
+        "--quiet"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stderr_bytes": 0,
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "--git-path",
+        "index"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stderr_bytes": 0,
+      "stdout_bytes": 11,
+      "stdout_sha256": "742e1586a644af64934a892663d03c75415bfb01edafdfdd924a8627573bfb9c"
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stderr_bytes": 0,
+      "stdout_bytes": 41,
+      "stdout_sha256": "d656bc969ea62482c66523c4981e5a019357791075399b0654d5824f63a0307e"
+    },
+    {
+      "argv": [
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stderr_bytes": 0,
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stderr_bytes": 0,
+      "stdout_bytes": 41,
+      "stdout_sha256": "d656bc969ea62482c66523c4981e5a019357791075399b0654d5824f63a0307e"
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD^{tree}"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stderr_bytes": 0,
+      "stdout_bytes": 41,
+      "stdout_sha256": "5f8f3c47703e67006de62b13b6b85dca368637dd82ee7029c89e5003804704b4"
+    },
+    {
+      "argv": [
+        "diff",
+        "--cached",
+        "--quiet"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stderr_bytes": 0,
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "diff",
+        "--check"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stderr_bytes": 0,
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "status",
+        "--porcelain=v1",
+        "-z",
+        "--untracked-files=all"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stderr_bytes": 0,
+      "stdout_bytes": 2089,
+      "stdout_sha256": "22de309b94ae0bd4d2413f2fe6bd0c6951e152572f5628ab7302c532f0b22bde"
+    }
+  ],
+  "mutations": {
+    "stage_index_refs_commit_push_config_network_Source_runtime_tests": false,
+    "working_file_creates": 19
+  },
+  "plans": [
+    {
+      "bytes": 32967,
+      "observed_full9": {
+        "st_ctime_ns": "1795476670805454845",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72006665",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795476670805454845",
+        "st_nlink": "1",
+        "st_size": "32967",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/new-Main-preservation13-prepared-v01/prepared-Main13-exact-additive-plan-v02.json",
+      "sha256": "161057d3f018a7e91a2bbced4fe5c66de348c546249799ec77f7f2efb7ac7af7"
+    },
+    {
+      "bytes": 41287,
+      "observed_full9": {
+        "st_ctime_ns": "1795476982580984536",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "69086198",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795476982580984536",
+        "st_nlink": "1",
+        "st_size": "41287",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Kit-Swiss-four-commit-raw-archive-v02/prepared-four-raw-commit-archive-plan-v02.json",
+      "sha256": "356b6fdffd8f43a82e40a3cf2104ef8accdffcee058e3abf96a4c750b8f1e2cc"
+    }
+  ],
+  "purpose": "Historical and NOT_ADOPTED preservation only; no code execution, staging, commit, push, source or runtime qualification.",
+  "read_accounting": {
+    "Git_internal_IO": "Not fully metered; no source body reads requested.",
+    "applicable_AGENTS_bytes": 0,
+    "cap": 524288,
+    "explicit_private_inputs": 256121,
+    "installed_readback_bytes": 181867,
+    "total_explicit_input_and_readback_bytes": 437988
+  },
+  "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/root",
+  "schema": "exact19-additive-archive-working-install/v1",
+  "started_ns": "1795481104560271641"
+}

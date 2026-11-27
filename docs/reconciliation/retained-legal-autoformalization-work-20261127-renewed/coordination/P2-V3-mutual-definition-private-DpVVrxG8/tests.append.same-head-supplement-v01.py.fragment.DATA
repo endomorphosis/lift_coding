@@ -1,0 +1,70 @@
+
+
+@pytest.mark.parametrize("selection", ["one", "both"])
+def test_reviewed_v3_same_typed_head_requires_one_declared_parent(sibling, mixed_case, selection):
+    first, second = _reviewed_two_definition_fixture(mixed_case, recursive=False)
+    declaration = mixed_case["declaration"]
+    permission = declaration["units"][-1]
+    release = first["source_version"]["release_id"]
+    edition = first["source_version"]["edition"]
+    alternative, additional_use = deepcopy(second), deepcopy(permission)
+    for unit, unit_id, text in (
+        (alternative, release + "/unit-5", "In this fictional provision, an officer appointed by the "
+         "Board means an officer certified for appointment."),
+        (additional_use, release + "/unit-6", "This second fictional provision also provides: "
+         + mixed_case["source_inputs"][permission["unit_id"]]["extracted_text"]),
+    ):
+        raw = text.encode("utf-8")
+        digest = fixture.sha(raw)
+        version = sources.build_source_version(
+            source_id=unit_id, release_id=release, edition=edition, provision_id=unit_id,
+            raw_bytes=raw, expected_raw_sha256=digest, extracted_text=text, expected_extracted_sha256=digest,
+            extraction_profile="identity/v1", normalization_profile="identity/v1", media_type="text/plain",
+        )
+        occurrence = sources.build_source_occurrence(
+            version, expected_raw_sha256=digest, extracted_text=text, expected_extracted_sha256=digest,
+            start_char=0, end_char=len(text), start_utf8=0, end_utf8=len(raw),
+        )
+        unit.update(unit_id=unit_id, source_artifact_id=unit_id + ":source", ir_artifact_id=unit_id + ":ir",
+                    source_version=version, occurrence=occurrence)
+        mixed_case["source_inputs"][unit_id] = {"raw_bytes": raw, "extracted_text": text}
+
+    symbol, term = "AppointedByBoard", "CertifiedForAppointment"
+    builder = relational_fixture.Builder()
+    definition = relational_fixture.request_for(
+        builder, builder.binary("iff", builder.atom(symbol, "officer"), builder.atom(term, "officer")),
+        [(symbol, ("officer",)), (term, ("officer",))], [("officer", "forall")],
+    )
+    _reviewed_dependency_fixture_report(
+        mixed_case, alternative, definition, relational.prepare_relational_norm_v1,
+        relational.relational_norm_report_sha256,
+    )
+    original_request = json.loads(mixed_case["relational_inputs"][permission["unit_id"]]["request_raw"])
+    _reviewed_dependency_fixture_report(
+        mixed_case, additional_use, original_request, relational.prepare_mixed_relational_norm_v1,
+        relational.mixed_relational_norm_report_sha256,
+    )
+    declaration["units"].insert(2, alternative)
+    declaration["units"].append(additional_use)
+    declaration["definition_uses"].append(dict(
+        declaration["definition_uses"][-1], definition_unit_id=alternative["unit_id"],
+        use_unit_id=additional_use["unit_id"], use_occurrence_cid=additional_use["occurrence"]["record_cid"],
+    ))
+    first["parent_unit_ids"] = [alternative["unit_id"]]
+    if selection == "both":
+        first["parent_unit_ids"].append(second["unit_id"])
+
+    fixture.reviewed_refresh_manifest_v2(mixed_case)
+    assert mixed_case["manifest"]["cycles"] == []
+    if selection == "both":
+        with pytest.raises(ValueError, match="reviewed governing dependency"):
+            sibling.prepare_reviewed_norm_admission_v3(declaration, **prepare_args(mixed_case))
+    else:
+        mixed_case["preparation"] = prepare(sibling, mixed_case)
+        refresh_signed_reviews(mixed_case, sibling)
+        assert_signatures_valid(mixed_case)
+        report = assess(sibling, mixed_case)
+        assert report["semantic_use_eligible"] is report["fixture_only"] is True
+        assert report["blockers"] == []
+        assert report["declaration_sha256"] == sibling.norm_content_adjudication_sha256(declaration)
+        assert mixed_case["preparation"]["declaration"]["units"][0]["parent_unit_ids"] == [alternative["unit_id"]]

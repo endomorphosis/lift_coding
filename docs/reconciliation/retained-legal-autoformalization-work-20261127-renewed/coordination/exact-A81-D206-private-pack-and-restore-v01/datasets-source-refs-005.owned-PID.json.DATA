@@ -1,0 +1,1 @@
+{"PID": 2018961, "command": ["git", "-c", "pack.threads=1", "-c", "pack.windowMemory=32m", "-c", "core.bigFileThreshold=8m", "-C", "/tmp/datasets-reviewed-source-use-main-20261115", "for-each-ref", "--format=%(refname) %(objectname)"], "started_ns": "1795481183942170905"}

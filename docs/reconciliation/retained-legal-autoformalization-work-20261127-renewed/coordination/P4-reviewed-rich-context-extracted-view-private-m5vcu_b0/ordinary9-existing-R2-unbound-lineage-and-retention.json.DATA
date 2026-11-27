@@ -1,0 +1,75 @@
+{
+  "changed_owners_requiring_fresh_executable_witness": [
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_structured_retrieval.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py"
+  ],
+  "fresh_selection": {
+    "Source_read": null,
+    "actual_qualification": null,
+    "current_frozen_D": null,
+    "expected_cases": 9,
+    "function_case_counts": {
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py::test_aggregate_v4_actual_evaluator_dispatches_both_complete_components_and_definitions": 1,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py::test_reviewed_rich_heldout_original_provision_guard_precedes_source_identity_check": 2,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py::test_reviewed_rich_heldout_same_extracted_view_refuses_before_actual_producer": 2,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py::test_reviewed_rich_heldout_shared_source_identity_rejects_before_actual_producer": 2,
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py::test_reviewed_rich_heldout_source_identity_is_bound_to_current_declaration": 2
+    },
+    "new": 2,
+    "owning_test": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py",
+    "retained": 7
+  },
+  "historical_six": {
+    "exact_cases": [
+      "test_reviewed_rich_heldout_source_identity_is_bound_to_current_declaration[v2]",
+      "test_reviewed_rich_heldout_source_identity_is_bound_to_current_declaration[v3]",
+      "test_reviewed_rich_heldout_shared_source_identity_rejects_before_actual_producer[v2]",
+      "test_reviewed_rich_heldout_shared_source_identity_rejects_before_actual_producer[v3]",
+      "test_reviewed_rich_heldout_original_provision_guard_precedes_source_identity_check[v2]",
+      "test_reviewed_rich_heldout_original_provision_guard_precedes_source_identity_check[v3]"
+    ],
+    "harness": {
+      "bytes": 4348,
+      "path": "/tmp/legal-ir-diagnostic-source-boundary-publication-20261115-v01/canonical-source-fixture-and-heldout-result.json",
+      "sha256": "934f22a7ad209946fad924714bdb380e3ffe6e97feaab1947e96d4d9ac2f3fd8"
+    },
+    "raw_JUnit": {
+      "bytes": 44379,
+      "path": "/tmp/legal-ir-diagnostic-source-boundary-publication-20261115-v01/canonical-source-fixture-and-heldout-junit.xml",
+      "sha256": "71757ab3896d107869cded3abe588f156cb8f4b64b2ccc31944b666487e389a7"
+    },
+    "scope": "Prior guarded source-only execution. Saved XML class names are blank under this harness."
+  },
+  "other_existing_requirements": "Use current evaluator, consumer, split, corpus-source and signed case-helper import closure, five ancestor conftests and real pytest.ini. Fresh collection confirms exact order.",
+  "prior_ordinary_one": {
+    "exact_cases": [
+      "test_aggregate_v4_actual_evaluator_dispatches_both_complete_components_and_definitions"
+    ],
+    "raw_JUnit": {
+      "bytes": 31193,
+      "path": "/tmp/Root-Phase45-grouped-Unicode-ordinary152-v315-0zy06y6l/actual-output/Phase45-eight-plus-P8-152-run-result0-output1.bin",
+      "sha256": "de0af3c2623e57c2b932b82c1c090aaac660d49c1f96d69d6a76106c3f594c5b"
+    },
+    "scope": "One exact overlapping V4 aggregate ordinary v315 case"
+  },
+  "private_candidate": {
+    "bytes": 8439,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P4-reviewed-rich-context-extracted-view-private-m5vcu_b0/sealed-two-reviewed-extracted-view-source-files-private-candidate.json",
+    "sha256": "9ceb1f09ff66e5a5255d573357d77c2a5e5f5f510ff6d8333c5b5134fabb8931"
+  },
+  "retained_R2_pattern": {
+    "existing_binding_recipe": {
+      "bytes": 3439,
+      "path": "/tmp/Phase45-normal152-complete-preload-supplement-rebind-private-v01/schema-contract-preserved-nonclock-v02/normal152-Root-nine-plus-four-original-ABI-contract-binding-recipe.json",
+      "sha256": "15d7901adc06c7b5be642c1647637b4b32c9d64ce7ed59de0f01ffea4ec773c0"
+    },
+    "inert_READY": {
+      "bytes": 14611,
+      "path": "/tmp/Phase45-normal152-complete-preload-supplement-rebind-private-v01/schema-contract-preserved-nonclock-v02/READY-existing-normal152-original-ABI-contract-nonclock-v02.json",
+      "sha256": "08c8c50c3ae0a5faa7b18ac36b3b4f4d98ebd5b3da89097bd5855a3ebe4ceffc"
+    },
+    "scope": "Reuse orchestration pattern. v315 counts, Git/Source, resource and compile observations retain historical scope."
+  },
+  "schema": "P4-extracted-view-ordinary9-existing-owner-unbound-lineage/v1",
+  "unchanged_candidate_preimage_blobs_at_local_calendar_freeze": "86a9a0c49e2021ecc98bdd56b000f0c99238342a"
+}

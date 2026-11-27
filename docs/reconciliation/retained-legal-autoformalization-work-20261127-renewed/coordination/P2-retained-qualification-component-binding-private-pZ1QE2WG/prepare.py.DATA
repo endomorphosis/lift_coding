@@ -1,0 +1,117 @@
+from pathlib import Path
+import ast
+import hashlib
+import json
+import os
+import subprocess
+
+work=Path(__file__).resolve().parent
+old=Path("/tmp/P2-retained-type-review-UTC-and-SHA-private-8BxdcNWA")
+repo=work.parents[2]/"repositories/datasets"
+proj=work/"project"
+owner="ipfs_datasets_py/logic/autoformal/legal_corpus_definition_use_preservation_elaboration_native_v2.py"
+test="tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py"
+env={**os.environ,"GIT_OPTIONAL_LOCKS":"0","GIT_NO_LAZY_FETCH":"1"}
+
+def git(*args):
+    return subprocess.check_output(["git","-c","core.preloadIndex=false","-C",str(repo),*args],env=env)
+def sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+def blob(raw):
+    return hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest()
+def put(path,data):
+    path.parent.mkdir(mode=0o700,parents=True,exist_ok=True)
+    with path.open("xb") as f:
+        f.write(data)
+        f.flush()
+        os.fsync(f.fileno())
+    path.chmod(0o400)
+    assert path.read_bytes()==data
+    return {"path":str(path),"bytes":len(data),"sha256":sha(data)}
+
+head,tracking=git("rev-parse","HEAD","refs/remotes/origin/main").decode().splitlines()
+assert head==tracking
+assert not git("status","--porcelain=v1","--untracked-files=all","--",owner,test)
+tree={}
+for line in git("ls-tree","-rz",head).split(b"\0"):
+    if line:
+        row,path=line.split(b"\t",1)
+        mode,kind,oid=row.decode().split()
+        if kind=="blob":
+            tree[os.fsdecode(path)]=(mode,oid)
+sources={}
+renewed=[]
+for path in sorted((old/"project").rglob("*")):
+    assert not path.is_symlink()
+    if not path.is_file():
+        continue
+    relative=path.relative_to(old/"project").as_posix()
+    mode,oid=tree[relative]
+    raw=path.read_bytes()
+    if blob(raw)!=oid:
+        raw=git("cat-file","blob",oid)
+        assert blob(raw)==oid and mode=="100644"
+        renewed.append(relative)
+    if relative in (owner,test):
+        assert raw==(repo/relative).read_bytes()
+    sources[relative]={**put(proj/relative,raw),"git_blob":oid,"mode":mode}
+assert len(sources)==249
+
+prior=(proj/test).read_bytes()
+addition=br'''
+
+
+@pytest.mark.parametrize("dimension,role", [
+    ("source_integrity", "reviewed_crosswalk"),
+    ("representation", "preservation"),
+    ("dependency", "dependency"),
+])
+def test_checked_release_type_capture_requires_the_matching_component_evidence(dimension, role):
+    from ipfs_datasets_py.logic.autoformal import corpus_qualification as qualification
+
+    case = _checked_release_type_capture_fixture("one")
+    report = deepcopy(case["report"])
+    evidence = report["declared_eligibility_evidence"]
+    components = evidence["component_cids"]
+    original = report["declared_qualification"]
+    dimensions = deepcopy(original["dimensions"])
+    assert dimensions[dimension]["evidence_cids"] == [components[role]]
+    assert components[role] != components["graph"]
+    dimensions[dimension]["evidence_cids"] = [components["graph"]]
+    declared = qualification.prepare_qualification(
+        artifact_cid=evidence["artifact_cid"], profile=report["profile"],
+        theorem_requested=original["theorem_requested"], dimensions=dimensions)
+    eligibility = qualification.derive_eligibility(
+        declared, artifact_cid=evidence["artifact_cid"], profile=report["profile"])
+    assert declared["record_cid"] != original["record_cid"]
+    assert eligibility["views"] == case["report"]["declared_eligibility"]["views"]
+    assert eligibility["views"]["reviewed_graph"]["declared_eligible"] is True
+    assert eligibility["views"]["checked_lean"]["declared_eligible"] is False
+    report.update(declared_qualification=declared, declared_eligibility=eligibility)
+    raw = canonical(report)
+    options = {**case["options"], "checked_release_report_raw": raw,
+               "expected_checked_release_report_sha256": sha(raw)}
+    with pytest.raises(ValueError, match=dimension + " evidence differs"):
+        elaboration_native.read_checked_release_physical_whole_norm_type_capture_v2(
+            case["request"], case["files"], case["stdout"], case["stderr"], **options)
+'''
+test_after=prior+addition
+ast.parse(test_after)
+put(work/"owner.before.py.DATA",(proj/owner).read_bytes())
+put(work/"test.before.py.DATA",prior)
+postinfo=put(work/"test.after.py.DATA",test_after)
+(proj/test).unlink()
+put(proj/test,test_after)
+
+old_runner=(old/"run-owning.py").read_bytes()
+assert old_runner.count(b"assert len(args)==3")==1
+runner=put(work/"run-existing-owning-28.py",old_runner.replace(b"assert len(args)==3",b"assert len(args)==4"))
+selectors=(old/"selectors.txt").read_text().splitlines()
+selectors.append(test+"::test_checked_release_type_capture_requires_the_matching_component_evidence")
+put(work/"selectors.txt",("\n".join(selectors)+"\n").encode())
+lock={"head":head,"repo":str(repo),"owner":owner,"test":test, "project":str(proj),
+      "roles":sources,"updated_roles_from_new_git":renewed,"runner":runner,"exact_new_test":postinfo,
+      "selectors":selectors,"current_prior_v591_origin":"d757ac866895a9ea3b1a4fdfc0e0b842d7feda80"}
+put(work/"input-spec.json",(json.dumps(lock,indent=2,sort_keys=True)+"\n").encode())
+print(work)
+print("exact Git roles",len(sources),"renewed preimages",renewed)

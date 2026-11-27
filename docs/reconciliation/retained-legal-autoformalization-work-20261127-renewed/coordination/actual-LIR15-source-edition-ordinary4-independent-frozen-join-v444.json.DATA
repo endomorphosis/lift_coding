@@ -1,0 +1,75 @@
+{
+  "Source_stage0_Git_join": {
+    "bytes": 193595,
+    "full9": {
+      "st_ctime_ns": "1795679153641612764",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "70042500",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795679153334657241",
+      "st_nlink": "1",
+      "st_size": "193595",
+      "st_uid": "1000"
+    },
+    "git_mode": "100644",
+    "parent_blob": "1561bf1dd487c780827a1a1b53d67548feec10dc",
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/autoformal/test_legal_corpus_incremental.py",
+    "sha256": "b9bf04fd80ada4c4f0194e0d2c8aea47cf43bfab925fed07c08d8b6a3de20a9e",
+    "stage0_and_committed_blob": "808b589a20a8a82fb26292813fbb62feae188ef6"
+  },
+  "actual_READ3": {
+    "bytes": 7743,
+    "path": "/tmp/Root-LIR15-edition-postfreeze-READ3-v443-ct8QK9TO/actual-output/actual-D27-observed-D-root-initializer-Source-READ-v01-small-closeout.json",
+    "sha256": "425528dcc443b5e271926910b89f059e1ea86ed3d2310332abc64e380e0b3174"
+  },
+  "actual_source_to_AST_to_code_rewrite_count": 1,
+  "actually_compiled_owner_count": 7,
+  "all_local_checkouts_clean": true,
+  "counts": {
+    "duplicates": 0,
+    "errors": 0,
+    "failures": 0,
+    "functions": 4,
+    "passed": 4,
+    "skipped": 0,
+    "tests": 4
+  },
+  "frozen_D_commit": "d58f9a004ea8bf27ff234bb1b55e1eda7a49a6a4",
+  "frozen_D_index": {
+    "bytes": 6991149,
+    "full9": {
+      "st_ctime_ns": "1795679322370620441",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68338235",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795679322370069953",
+      "st_nlink": "1",
+      "st_size": "6991149",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+    "sha256": "6858cf5c4a3774c4d2256fec1e4ec149821a7f8269add63764dff551361daeaa"
+  },
+  "installed_Lean_invoked": false,
+  "literal_JUnit_COLLECT_RUN": [
+    "tests/unit/logic/autoformal/test_legal_corpus_incremental.py::test_no_change_requires_no_compiler_execution_and_counts_no_fresh_theorems",
+    "tests/unit/logic/autoformal/test_legal_corpus_incremental.py::test_changed_definition_A_rebuilds_only_its_closure_and_matches_complete_rebuild",
+    "tests/unit/logic/autoformal/test_legal_corpus_incremental.py::test_failed_changed_definition_blocks_its_norm_and_root_without_resurrecting_cached_outputs",
+    "tests/unit/logic/autoformal/test_legal_corpus_incremental.py::test_source_edition_only_change_splits_shared_definition_cache_and_matches_clean"
+  ],
+  "publication_performed_by_verifier": false,
+  "qualification": {
+    "bytes": 24871,
+    "path": "/tmp/Root-existing-LIR15-edition-ordinary4-v444-ZMufyIaY/actual-LIR15-source-edition-ordinary4-closed-small-v444.json",
+    "sha256": "486e837f4ffd12a72f9d71a754c012933d8dd164a38c8440e816a82205b2947a"
+  },
+  "raw_JUnit": {
+    "bytes": 984,
+    "path": "/tmp/Root-existing-LIR15-edition-ordinary4-v444-ZMufyIaY/actual-output/Phase1-LIR15-source-edition-ordinary4-run-result0-output1.bin",
+    "sha256": "b7ecfd07c2f4d2afd7b30cc7a78d9101c7aa1d09b8b2d8680f3a6a2efdded01b"
+  },
+  "schema": "independent-LIR15-edition-ordinary4-to-frozen-Git-readback/v1",
+  "scope": "Authored source-edition identity, unaffected branch retention, warm zero-compile, failed-branch refusal, and clean equivalence through the existing fake compiler."
+}

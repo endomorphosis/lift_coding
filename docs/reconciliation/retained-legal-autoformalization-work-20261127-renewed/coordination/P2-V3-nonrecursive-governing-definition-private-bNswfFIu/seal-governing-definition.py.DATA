@@ -1,0 +1,135 @@
+from pathlib import Path
+import ast
+import difflib
+import hashlib
+import json
+import os
+import stat
+import subprocess
+import xml.etree.ElementTree as ET
+
+w=Path(__file__).resolve().parent
+coord=w.parent
+d=w.parents[2]/"repositories/datasets"
+def hash_bytes(raw):
+    return hashlib.sha256(raw).hexdigest()
+def f9(info):
+    return {field:str(getattr(info,field)) for field in (
+        "st_dev","st_ino","st_mode","st_nlink","st_uid","st_gid","st_size","st_mtime_ns","st_ctime_ns")}
+def read(path):
+    with os.fdopen(os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK),"rb") as f:
+        opened=os.fstat(f.fileno())
+        assert stat.S_ISREG(opened.st_mode) and opened.st_nlink==1
+        raw=f.read()
+        assert len(raw)==opened.st_size and f9(opened)==f9(os.fstat(f.fileno()))==f9(path.lstat())
+    return raw
+def pin(path,raw=None):
+    if raw is None:
+        raw=read(path)
+    return dict(path=str(path),bytes=len(raw),sha256=hash_bytes(raw))
+def auth(row):
+    raw=read(Path(row["path"]))
+    assert (len(raw),hash_bytes(raw))==(row["bytes"],row["sha256"])
+    return raw
+def wire(row):
+    return json.loads(auth(row))
+def emit(name,raw):
+    path=w/name
+    with os.fdopen(os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400),"wb") as f:
+        f.write(raw)
+        f.flush()
+        os.fsync(f.fileno())
+    assert read(path)==raw
+    return pin(path,raw)
+def git(*args):
+    return subprocess.check_output(["git","-c","core.preloadIndex=false","-C",str(d),*args],
+        env={**os.environ,"GIT_OPTIONAL_LOCKS":"0","GIT_NO_LAZY_FETCH":"1"},timeout=20)
+def blob(raw):
+    return hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest()
+def delta(relative,old,new):
+    return "".join(difflib.unified_diff(old.decode().splitlines(keepends=True),
+        new.decode().splitlines(keepends=True),fromfile="a/"+relative,tofile="b/"+relative))
+
+epoch_ref=pin(w/"current-exact-private-epoch.json")
+epoch=wire(epoch_ref)
+head,track,tree=git("rev-parse","HEAD","refs/remotes/origin/main","HEAD^{tree}").decode().splitlines()
+assert head==track==epoch["current_Git"] and not git("status","--porcelain=v1","--untracked-files=all")
+past_ready=pin(coord/"P2-retained-qualification-component-binding-private-pZ1QE2WG/existing-Source2-Guide570-INERT-v02/READY-Guide570-existing-Source2-exact-component-evidence-NONSELECTED.json")
+assert past_ready["sha256"]=="03cbb53316fc31a037fc95988aa06f8f03f8eb5147bc7c2dee325ec6b818a50a"
+guard_ref=wire(past_ready)["actual_metadata_guards"]
+guard={row["path"]:row for row in wire(guard_ref)["rows"]}
+assert len(guard)==1623
+
+files={}
+forward,inverse=[],[]
+for role,before,after in (("owner","owner_base.py.DATA","owner_after.py.DATA"),
+                         ("test","test_base.py.DATA",None)):
+    relative=epoch[role]
+    pre=read(w/before)
+    post=read(w/"dataset"/relative)
+    expected=epoch["roles"][relative]
+    actual=guard[str(d/relative)]
+    assert (len(pre),hash_bytes(pre),blob(pre))==(expected["bytes"],expected["sha256"],expected["git_blob"])
+    assert (actual["bytes"],actual["sha256"],actual["full9"])==(len(pre),hash_bytes(pre),f9((d/relative).lstat()))
+    assert git("ls-tree","HEAD","--",relative).decode().strip()==f"100644 blob {blob(pre)}\t{relative}"
+    compile(post,relative,"exec",dont_inherit=True)
+    if role=="owner":
+        assert post==read(w/after)
+        changes=[(a.name,b.name) for a,b in zip(ast.parse(pre).body,ast.parse(post).body,strict=True)
+                 if ast.dump(a)!=ast.dump(b)]
+        assert changes==[("_reviewed_body","_reviewed_body")]
+    else:
+        assert post==pre+read(w/"governing-definition-test.fragment")
+        assert [ast.dump(node) for node in ast.parse(pre).body]==[ast.dump(node) for node in ast.parse(post).body[:-1]]
+        assert ast.parse(post).body[-1].name=="test_reviewed_v3_requires_nonrecursive_governing_definition"
+    files[role]={"canonical_path":relative,"before":{**pin(w/before,pre),"git_blob":blob(pre),"canonical_full9":actual["full9"]},
+                 "after":{**emit(f"final-{role}.py.DATA",post),"proposed_git_blob":blob(post)},"mode":"100644"}
+    forward.append(delta(relative,pre,post))
+    inverse.append(delta(relative,post,pre))
+
+observed={}
+rosters={}
+expected_bad=["test_reviewed_v3_requires_nonrecursive_governing_definition[identity]",
+              "test_reviewed_v3_requires_nonrecursive_governing_definition[nested-self-use]"]
+for mode,code,bad in (("red",1,expected_bad),("green",0,[])):
+    folder=w/mode
+    refs={name:pin(folder/name) for name in ("run.json","result.xml","stdout.DATA","stderr.DATA","pytest.log")}
+    run=wire(refs["run.json"])
+    assert run["returncode"]==code and run["actual_test_sha256"]==files["test"]["after"]["sha256"]
+    assert run["actual_owner_sha256"]==files["owner"]["before" if mode=="red" else "after"]["sha256"]
+    cases=ET.fromstring(auth(refs["result.xml"])).findall(".//testcase")
+    order=[(row.attrib["classname"],row.attrib["name"]) for row in cases]
+    assert len(order)==len(set(order))==15
+    assert all(row.find("error") is None and row.find("skipped") is None for row in cases)
+    failed=[row for row in cases if row.find("failure") is not None]
+    assert [row.attrib["name"] for row in failed]==bad
+    for row in failed:
+        assert "semantic_use_eligible=True under exact fictional signatures" in row.find("failure").text
+    rosters[mode]=order
+    observed[mode]={"terminal_returncode":code,"passed":15-len(failed),"failed":len(failed),"errors":0,
+                    "skipped":0,"failed_nodes":bad,"evidence":refs}
+assert rosters["red"]==rosters["green"]
+assert sum("test_reviewed_v3_requires_nonrecursive_governing_definition" in n for _,n in rosters["green"])==3
+report={
+    "schema":"fictional-reviewed-V3-nonrecursive-governing-definition-exact-two/v1",
+    "canonical_head_and_tracking_tip":head,"canonical_tree":tree,
+    "Guide570_match_two_targets":guard_ref,"files":files,"current_private_role_bytes":epoch_ref,
+    "forward_patch":emit("exact-two.forward.patch.DATA","".join(forward).encode()),
+    "inverse_patch":emit("exact-two.inverse.patch.DATA","".join(inverse).encode()),
+    "changes":"Existing typed LogicNode walker rejects the defined predicate anywhere on the definition RHS.",
+    "verified_before":"Identity and nested self-use each reached semantic_use_eligible=True under independently verified fictional Ed25519 signatures.",
+    "verified_after":"Both recursive cases are rejected during preparation; independent definition remains eligible under fictional signatures with zero training/gold masks.",
+    "same_ordered_15":[node for _,node in rosters["green"]],"retained_cases":12,"new_cases":3,
+    "actual_private_observations":observed,
+    "setup_issue":"Initial prep had reversed configuration hash labels. Corrected from the original config reference before any test.",
+    "profile":{"cpu":1,"address_space_bytes":536870912,"soft_CPU_s":55,"wall_s":60,
+               "previous_fixture_runner":epoch["runner_origin"],"launcher":pin(w/"launch-reused-private-profile.py")},
+    "no_new_project_import_roles":True,"retained_legacy_v2_source_unchanged_in_this_unit":True,
+    "v3_owner_new_source_epoch":True,"historical_signed_receipts_untouched":True,
+    "not_established":["mutual definition cycles across definition units","real independent legal review","proof authority",
+                       "fresh Native receipt or ordinary qualification for the new V3 epoch"],
+    "canonical_adoption":None,"Git_freeze":None,"ordinary_qualification":None,
+    "native_qualification":None,"publication":None,
+}
+print(json.dumps(emit("SEALED-V3-governing-definition-direct-self-reference-exact-two.json",
+                      (json.dumps(report,sort_keys=True,indent=2)+"\n").encode())))

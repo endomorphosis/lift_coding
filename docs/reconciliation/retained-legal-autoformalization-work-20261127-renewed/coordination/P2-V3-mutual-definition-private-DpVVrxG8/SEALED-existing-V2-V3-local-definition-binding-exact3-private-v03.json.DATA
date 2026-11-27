@@ -1,0 +1,443 @@
+{
+  "actual_recorded_subprocess_seconds": 187.63278052117676,
+  "all_previous_costs_retained": true,
+  "baseline_HEAD": "7c0d40925436665bd90f62941d66ec63edadfb5b",
+  "baseline_tree": "21a13df6371bf60034e2deece4265079bd5b2f7c",
+  "canonical_Source_or_Git_changes": false,
+  "changed_functions": {
+    "ipfs_datasets_py/logic/autoformal/legal_norm_content_adjudication_v1.py": {
+      "added": [
+        "_reviewed_definition_dependencies"
+      ],
+      "changed": [
+        "_reviewed_body"
+      ]
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py": {
+      "added": [],
+      "changed": [
+        "_reviewed_body"
+      ]
+    },
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py": {
+      "added": [
+        "_reviewed_dependency_fixture_report",
+        "_reviewed_two_definition_fixture",
+        "test_reviewed_refuses_unbound_typed_definition_dependencies",
+        "test_reviewed_v3_preserves_acyclic_typed_definition_dependency_in_graph",
+        "test_reviewed_v3_same_typed_head_requires_one_declared_parent"
+      ],
+      "changed": []
+    }
+  },
+  "expected_current_owning_cases": 46,
+  "final_driver": {
+    "bytes": 3195,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/run-private-v03.py",
+    "sha256": "e6345cd4709f39943e74c34888793d4c727378f89578a57691e4dbcb30b9fad7"
+  },
+  "final_test_fragment": {
+    "bytes": 15528,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/tests.append.v03.py.fragment",
+    "sha256": "68eff32cb50a60a3ea956dce92b55cc3af6f56a5b5550379d81d640516e8e632"
+  },
+  "fixed_limits": {
+    "address_space_bytes": 536870912,
+    "cpu_hard_seconds": 56,
+    "cpu_soft_seconds": 55,
+    "cpus": 1,
+    "wall_seconds_each": 60
+  },
+  "forward_patch": {
+    "bytes": 19451,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/exact-three.forward.patch.DATA",
+    "sha256": "5b3ea91deb8b69d855c180b8cc775668c3232a4756e28ebcb367606df177c5fa"
+  },
+  "handoff": {
+    "bytes": 1325,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/handoff.addendum.md",
+    "sha256": "d24c7eacec317985b569cdec7b2dfd669450f441c5d95dc9af759bb5e46bd1a3"
+  },
+  "independent_static_review": "Explicit parent identity rule and final nine assertions reviewed; no reviewer execution or authority grant",
+  "inverse_patch": {
+    "bytes": 19451,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/exact-three.inverse.patch.DATA",
+    "sha256": "b8c8ba3951d4dfa75e44639881b69015c3815a97137e942774925e19c914ca2f"
+  },
+  "native_or_model_or_SQL_execution": false,
+  "new_cases": 9,
+  "old_test_prefix_bytes": 34149,
+  "old_test_top_level_ASTs": 50,
+  "ordinary_installed_qualification": false,
+  "private_runner": {
+    "bytes": 2739,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/existing-runner.py.DATA",
+    "sha256": "b280adbd78e009091a75c7c97de43334ec95464a88eae52050fe2108f4480b94"
+  },
+  "public_route_controls": {
+    "green": {
+      "case_names": [
+        "test_reviewed_refuses_mutual_typed_definition_dependencies[v2]",
+        "test_reviewed_refuses_mutual_typed_definition_dependencies[v3]",
+        "test_reviewed_v3_preserves_acyclic_typed_definition_dependency_in_graph"
+      ],
+      "counts": {
+        "error": 0,
+        "failure": 0,
+        "skipped": 0,
+        "tests": 3
+      },
+      "execution": {
+        "bytes": 2362,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/green/execution.json",
+        "sha256": "b563941df37cc0612f3dce918f8b54ef5f8db5f7490423e6c67cb14411cf18c6"
+      },
+      "junit": {
+        "bytes": 754,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/green/result.xml",
+        "sha256": "0ff0d8a075283b26d53f67806a4975fff8649f3bf10703e0fa686fd440891d6d"
+      },
+      "returncode": 0,
+      "seconds": 8.705676457844675
+    },
+    "green-v03": {
+      "case_names": [
+        "test_reviewed_refuses_unbound_typed_definition_dependencies[mutual-cycle-v2]",
+        "test_reviewed_refuses_unbound_typed_definition_dependencies[mutual-cycle-v3]",
+        "test_reviewed_refuses_unbound_typed_definition_dependencies[acyclic-parent-missing-v2]",
+        "test_reviewed_refuses_unbound_typed_definition_dependencies[acyclic-parent-missing-v3]",
+        "test_reviewed_v3_preserves_acyclic_typed_definition_dependency_in_graph[same]",
+        "test_reviewed_v3_preserves_acyclic_typed_definition_dependency_in_graph[different-role]",
+        "test_reviewed_v3_preserves_acyclic_typed_definition_dependency_in_graph[different-sort]",
+        "test_reviewed_v3_same_typed_head_requires_one_declared_parent[one]",
+        "test_reviewed_v3_same_typed_head_requires_one_declared_parent[both]"
+      ],
+      "counts": {
+        "error": 0,
+        "failure": 0,
+        "skipped": 0,
+        "tests": 9
+      },
+      "execution": {
+        "bytes": 3224,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/green-v03/execution.json",
+        "sha256": "f69fe0cfd8f49c11b880a80bee9d860db57c468c42aeae163e00fa8353256cae"
+      },
+      "junit": {
+        "bytes": 1934,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/green-v03/result.xml",
+        "sha256": "2f5f0eb4ac704e858b73560270ab4943eec92c08121635a70302896f98c18dd3"
+      },
+      "returncode": 0,
+      "seconds": 21.065307677723467
+    },
+    "red": {
+      "case_names": [
+        "test_reviewed_refuses_mutual_typed_definition_dependencies[v2]",
+        "test_reviewed_refuses_mutual_typed_definition_dependencies[v3]",
+        "test_reviewed_v3_preserves_acyclic_typed_definition_dependency_in_graph"
+      ],
+      "counts": {
+        "error": 0,
+        "failure": 2,
+        "skipped": 0,
+        "tests": 3
+      },
+      "execution": {
+        "bytes": 2356,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/red/execution.json",
+        "sha256": "994460a1951cddfe3d597dbeff0d12652d1bb42f4dd0eb6cdf8023a2ffbfa848"
+      },
+      "junit": {
+        "bytes": 1496,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/red/result.xml",
+        "sha256": "fa2a84bab541145dfca8e1a8b84e3d38f6efc4fd3006c789716d0575e4f6cf5c"
+      },
+      "returncode": 1,
+      "seconds": 8.86655261926353
+    },
+    "red-v02": {
+      "case_names": [
+        "test_reviewed_refuses_unbound_typed_definition_dependencies[mutual-cycle-v2]",
+        "test_reviewed_refuses_unbound_typed_definition_dependencies[mutual-cycle-v3]",
+        "test_reviewed_refuses_unbound_typed_definition_dependencies[acyclic-parent-missing-v2]",
+        "test_reviewed_refuses_unbound_typed_definition_dependencies[acyclic-parent-missing-v3]",
+        "test_reviewed_v3_preserves_acyclic_typed_definition_dependency_in_graph[same]",
+        "test_reviewed_v3_preserves_acyclic_typed_definition_dependency_in_graph[different-role]",
+        "test_reviewed_v3_preserves_acyclic_typed_definition_dependency_in_graph[different-sort]"
+      ],
+      "counts": {
+        "error": 0,
+        "failure": 4,
+        "skipped": 0,
+        "tests": 7
+      },
+      "execution": {
+        "bytes": 2929,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/red-v02/execution.json",
+        "sha256": "7f534eca39834d2e9bf6447dfc711ea2e2762a70fb6cf6e5a46032890de314ea"
+      },
+      "junit": {
+        "bytes": 3583,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/red-v02/result.xml",
+        "sha256": "1cc1cbb698a32789b583cb44c8419e9d5009bd60d6f621a3c8f23963c6daf151"
+      },
+      "returncode": 1,
+      "seconds": 22.38195821736008
+    },
+    "red-v03": {
+      "case_names": [
+        "test_reviewed_refuses_unbound_typed_definition_dependencies[mutual-cycle-v2]",
+        "test_reviewed_refuses_unbound_typed_definition_dependencies[mutual-cycle-v3]",
+        "test_reviewed_refuses_unbound_typed_definition_dependencies[acyclic-parent-missing-v2]",
+        "test_reviewed_refuses_unbound_typed_definition_dependencies[acyclic-parent-missing-v3]",
+        "test_reviewed_v3_preserves_acyclic_typed_definition_dependency_in_graph[same]",
+        "test_reviewed_v3_preserves_acyclic_typed_definition_dependency_in_graph[different-role]",
+        "test_reviewed_v3_preserves_acyclic_typed_definition_dependency_in_graph[different-sort]",
+        "test_reviewed_v3_same_typed_head_requires_one_declared_parent[one]",
+        "test_reviewed_v3_same_typed_head_requires_one_declared_parent[both]"
+      ],
+      "counts": {
+        "error": 0,
+        "failure": 5,
+        "skipped": 0,
+        "tests": 9
+      },
+      "execution": {
+        "bytes": 3217,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/red-v03/execution.json",
+        "sha256": "18ff32f50be6a437cf023d118196ed5380cb626b7c38a713ee4bd18784597ae0"
+      },
+      "junit": {
+        "bytes": 4291,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/red-v03/result.xml",
+        "sha256": "88aea229687e50078c3a1c4546efdadf19e1967d1034d93a391c3e8f32ec0374"
+      },
+      "returncode": 1,
+      "seconds": 25.51524824090302
+    },
+    "retention": {
+      "case_names": [
+        "test_full_fictional_definition_object_use_and_mixed_use_replay",
+        "test_saved_v2_preparation_signatures_and_assessment_survive_sibling_load",
+        "test_independently_valid_signatures_cannot_cross_domains[v2-claims-in-v3]",
+        "test_independently_valid_signatures_cannot_cross_domains[v3-claims-in-v2]",
+        "test_resealed_complete_transport_cannot_hide_semantic_contract_damage[typed-node-coverage-complete typed-node source correspondence required]",
+        "test_resealed_complete_transport_cannot_hide_semantic_contract_damage[definition-use-target-complete ordered predicate definition-use targets required]",
+        "test_resealed_complete_transport_cannot_hide_semantic_contract_damage[valid-mixed-sort-drift-governing predicate argument sorts differ]",
+        "test_resealed_complete_transport_cannot_hide_semantic_contract_damage[overlapping-use-overlapping interpretations are not two distinct normative uses]",
+        "test_current_trust_controls_reject_even_genuine_signatures[stale-policy-signature-signed_policy_sha256_differs]",
+        "test_current_trust_controls_reject_even_genuine_signatures[expired-policy-policy_not_current]",
+        "test_current_trust_controls_reject_even_genuine_signatures[revoked-key-key_revoked]",
+        "test_current_trust_controls_reject_even_genuine_signatures[revoked-principal-principal_revoked]",
+        "test_v3_sibling_preserves_v2_source_and_binds_current_producers",
+        "test_governing_definition_rejects_implication_instead_of_complete_equivalence",
+        "test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[duplicate_repackage-logical source occurrence]",
+        "test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[overlapping_repackage-overlapping logical source]",
+        "test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[document_revision_label-logical source occurrence]",
+        "test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_unaligned_view-unsupported source-view alignment]",
+        "test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_view_and_document_revision_label-unsupported source-view alignment]",
+        "test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[physical_alias-physical occurrence]",
+        "test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_provision]",
+        "test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_release]",
+        "test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_edition]",
+        "test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs]",
+        "test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs_different_source_id]",
+        "test_old_generation_source_pin_cannot_be_rehashed_into_current_v2_preparation",
+        "test_reviewed_v3_alternate_view_of_same_raw_paragraph_requires_distinct_use_witness",
+        "test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-cycle]",
+        "test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-definition-cycle]",
+        "test_reviewed_v3_refuses_cyclic_unit_dependencies[longer-mixed-cycle]",
+        "test_reviewed_v3_preserves_acyclic_overlapping_unit_dependencies",
+        "test_reviewed_v3_cross_reference_version_consistency[shared-forward-conflict]",
+        "test_reviewed_v3_cross_reference_version_consistency[shared-reverse-conflict]",
+        "test_reviewed_v3_cross_reference_version_consistency[shared-equal]",
+        "test_reviewed_v3_cross_reference_version_consistency[distinct-identities]",
+        "test_reviewed_v3_refuses_governing_definition_reusing_its_predicate[direct]",
+        "test_reviewed_v3_refuses_governing_definition_reusing_its_predicate[nested]",
+        "test_reviewed_refuses_mutual_typed_definition_dependencies[v2]",
+        "test_reviewed_refuses_mutual_typed_definition_dependencies[v3]",
+        "test_reviewed_v3_preserves_acyclic_typed_definition_dependency_in_graph"
+      ],
+      "counts": {
+        "error": 0,
+        "failure": 0,
+        "skipped": 0,
+        "tests": 40
+      },
+      "execution": {
+        "bytes": 6002,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/retention/execution.json",
+        "sha256": "ee1209feb42ef88d67bc5529d3bfc9db7975e7602fba59b00fd8d7f1dba8f336"
+      },
+      "junit": {
+        "bytes": 8402,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/retention/result.xml",
+        "sha256": "8245e8aea2bd15ad11da1515e5afeb3756ee50a99e4b43b671080867c99e299e"
+      },
+      "returncode": 0,
+      "seconds": 34.78357701655477
+    },
+    "retention-v03": {
+      "case_names": [
+        "test_full_fictional_definition_object_use_and_mixed_use_replay",
+        "test_saved_v2_preparation_signatures_and_assessment_survive_sibling_load",
+        "test_independently_valid_signatures_cannot_cross_domains[v2-claims-in-v3]",
+        "test_independently_valid_signatures_cannot_cross_domains[v3-claims-in-v2]",
+        "test_resealed_complete_transport_cannot_hide_semantic_contract_damage[typed-node-coverage-complete typed-node source correspondence required]",
+        "test_resealed_complete_transport_cannot_hide_semantic_contract_damage[definition-use-target-complete ordered predicate definition-use targets required]",
+        "test_resealed_complete_transport_cannot_hide_semantic_contract_damage[valid-mixed-sort-drift-governing predicate argument sorts differ]",
+        "test_resealed_complete_transport_cannot_hide_semantic_contract_damage[overlapping-use-overlapping interpretations are not two distinct normative uses]",
+        "test_current_trust_controls_reject_even_genuine_signatures[stale-policy-signature-signed_policy_sha256_differs]",
+        "test_current_trust_controls_reject_even_genuine_signatures[expired-policy-policy_not_current]",
+        "test_current_trust_controls_reject_even_genuine_signatures[revoked-key-key_revoked]",
+        "test_current_trust_controls_reject_even_genuine_signatures[revoked-principal-principal_revoked]",
+        "test_v3_sibling_preserves_v2_source_and_binds_current_producers",
+        "test_governing_definition_rejects_implication_instead_of_complete_equivalence",
+        "test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[duplicate_repackage-logical source occurrence]",
+        "test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[overlapping_repackage-overlapping logical source]",
+        "test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[document_revision_label-logical source occurrence]",
+        "test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_unaligned_view-unsupported source-view alignment]",
+        "test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_view_and_document_revision_label-unsupported source-view alignment]",
+        "test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[physical_alias-physical occurrence]",
+        "test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_provision]",
+        "test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_release]",
+        "test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_edition]",
+        "test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs]",
+        "test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs_different_source_id]",
+        "test_old_generation_source_pin_cannot_be_rehashed_into_current_v2_preparation",
+        "test_reviewed_v3_alternate_view_of_same_raw_paragraph_requires_distinct_use_witness",
+        "test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-cycle]",
+        "test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-definition-cycle]",
+        "test_reviewed_v3_refuses_cyclic_unit_dependencies[longer-mixed-cycle]",
+        "test_reviewed_v3_preserves_acyclic_overlapping_unit_dependencies",
+        "test_reviewed_v3_cross_reference_version_consistency[shared-forward-conflict]",
+        "test_reviewed_v3_cross_reference_version_consistency[shared-reverse-conflict]",
+        "test_reviewed_v3_cross_reference_version_consistency[shared-equal]",
+        "test_reviewed_v3_cross_reference_version_consistency[distinct-identities]",
+        "test_reviewed_v3_refuses_governing_definition_reusing_its_predicate[direct]",
+        "test_reviewed_v3_refuses_governing_definition_reusing_its_predicate[nested]",
+        "test_reviewed_refuses_unbound_typed_definition_dependencies[mutual-cycle-v2]",
+        "test_reviewed_refuses_unbound_typed_definition_dependencies[mutual-cycle-v3]",
+        "test_reviewed_refuses_unbound_typed_definition_dependencies[acyclic-parent-missing-v2]",
+        "test_reviewed_refuses_unbound_typed_definition_dependencies[acyclic-parent-missing-v3]",
+        "test_reviewed_v3_preserves_acyclic_typed_definition_dependency_in_graph[same]",
+        "test_reviewed_v3_preserves_acyclic_typed_definition_dependency_in_graph[different-role]",
+        "test_reviewed_v3_preserves_acyclic_typed_definition_dependency_in_graph[different-sort]",
+        "test_reviewed_v3_same_typed_head_requires_one_declared_parent[one]",
+        "test_reviewed_v3_same_typed_head_requires_one_declared_parent[both]"
+      ],
+      "counts": {
+        "error": 0,
+        "failure": 0,
+        "skipped": 0,
+        "tests": 46
+      },
+      "execution": {
+        "bytes": 6722,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/retention-v03/execution.json",
+        "sha256": "b40a1cdf3ddc73b68697d0295c52fefe7bc2e844b51b7eb55bd995a1af1c2881"
+      },
+      "junit": {
+        "bytes": 9581,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/retention-v03/result.xml",
+        "sha256": "9dfb0c150db6333b95535f5836d982c6074ca800b5d04546c1a7cd3ab18710af"
+      },
+      "returncode": 0,
+      "seconds": 47.44146520551294
+    },
+    "retention-v2": {
+      "case_names": [
+        "test_reviewed_v2_requires_nonrecursive_governing_definition[independent]",
+        "test_reviewed_v2_requires_nonrecursive_governing_definition[identity]",
+        "test_reviewed_v2_requires_nonrecursive_governing_definition[nested-self-use]",
+        "test_reviewed_v2_complete_fictional_transition_uses_full_sources_and_typed_ir",
+        "test_reviewed_v2_resealed_positive_report_requires_complete_public_replay",
+        "test_reviewed_v2_synthetic_trust_cannot_be_promoted_to_production_review",
+        "test_reviewed_v2_relabeling_one_physical_paragraph_cannot_supply_two_statutory_uses",
+        "test_reviewed_v2_alternate_view_of_same_raw_paragraph_requires_distinct_use_witness",
+        "test_reviewed_v2_manifest_refresh_preserves_shared_uses_and_refuses_conflicting_bytes[False]",
+        "test_reviewed_v2_manifest_refresh_preserves_shared_uses_and_refuses_conflicting_bytes[True]",
+        "test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[different_provision]",
+        "test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[different_release]",
+        "test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[different_edition]",
+        "test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs]",
+        "test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs_different_source_id]"
+      ],
+      "counts": {
+        "error": 0,
+        "failure": 0,
+        "skipped": 0,
+        "tests": 15
+      },
+      "execution": {
+        "bytes": 4538,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/retention-v2/execution.json",
+        "sha256": "4dec947f288311ef27b236c3d038c6eae37be83df78512f6fd12a6090adecf2f"
+      },
+      "junit": {
+        "bytes": 3214,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/retention-v2/result.xml",
+        "sha256": "ed010ebff4411af274bf745327989e11e4c96926e8ede4d858d173889770b007"
+      },
+      "returncode": 0,
+      "seconds": 18.87299508601427
+    }
+  },
+  "retained_owning_cases": 37,
+  "role_count": 132,
+  "roles": {
+    "ipfs_datasets_py/logic/autoformal/legal_norm_content_adjudication_v1.py": {
+      "after": {
+        "bytes": 91360,
+        "git_blob": "6b0117f291f68a6c3e7f9948b513e008e6921574",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/legal_norm_content_adjudication_v1.py.after.DATA",
+        "sha256": "2022e3760a3f3fc80fe4a9a9168193518b8f54f49e49841f167302d40a1bd0eb"
+      },
+      "before": {
+        "bytes": 89622,
+        "git_blob": "f2f1151c8bb3b834e14da8b0ae941ff13728ce53",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/legal_norm_content_adjudication_v1.py.before.DATA",
+        "sha256": "5532f9f5e8899ea3aee4f52c6bf309dfd59695dc5a7894704885ce0c1ee6ddfa"
+      },
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py": {
+      "after": {
+        "bytes": 35308,
+        "git_blob": "0369b5a97a1ca057d3de06365bdfaf5348cf3eb4",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/legal_reviewed_norm_admission_v3.py.after.DATA",
+        "sha256": "173cf611423f2b7e7f7cd2703a8a8a4c8b8a8c0db4db5a2f39734db501ca177c"
+      },
+      "before": {
+        "bytes": 35250,
+        "git_blob": "d2959d73378a870453c48775692fa6462d154a5d",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/legal_reviewed_norm_admission_v3.py.before.DATA",
+        "sha256": "1b294d2d896f715c7fe667cf194e2a04bc681705af558a535d55210b4cacf917"
+      },
+      "mode": "100644"
+    },
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py": {
+      "after": {
+        "bytes": 49677,
+        "git_blob": "a89034335bc2d8906bf7c28103a203caf41636b8",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/test.final-v03.DATA",
+        "sha256": "2bd042f47612b20a4c15b7b469bd82ff775655548bcdc312db1a5ecd5006bfde"
+      },
+      "before": {
+        "bytes": 34149,
+        "git_blob": "57cba9cbfe55bf91fa8377808cd853d7d39c9059",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/test.before.DATA",
+        "sha256": "b33ec128970c9601583df4cf9b8c78744a7def25af3a497eb6bed7194c183a91"
+      },
+      "mode": "100644"
+    }
+  },
+  "schema": "existing-reviewed-admission-complete-local-definition-bindings-private/v1",
+  "source_epoch": {
+    "bytes": 35612,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/current-input-epoch.json",
+    "sha256": "4fc1a41c3ae6e6990afb2ece76de164f4d07411b37357e7903de380f5119a753"
+  },
+  "substantive_statutory_review": false
+}

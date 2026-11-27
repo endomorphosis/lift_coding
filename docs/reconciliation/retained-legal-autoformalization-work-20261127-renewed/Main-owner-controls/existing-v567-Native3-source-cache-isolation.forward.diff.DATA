@@ -1,0 +1,12 @@
+--- /tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-v567-Native3-current-operator-custody-readback-INERT-v04.py.DATA
++++ /tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-v567-Native3-current-operator-source-cache-INERT-v05.py.DATA
+@@ -108,6 +108,9 @@
+     os.environ.update({'PATH': PATH_SCOPE, 'LANG': 'C.UTF-8', 'HOME': str(PARENT_HOME), 'XDG_CONFIG_HOME': str(PARENT_HOME / 'xdg-config'), 'XDG_CACHE_HOME': str(PARENT_HOME / 'xdg-cache'), 'XDG_DATA_HOME': str(PARENT_HOME / 'xdg-data'), 'GH_CONFIG_DIR': str(PARENT_HOME / 'gh-config'), 'GIT_CONFIG_GLOBAL': '/dev/null', 'GIT_CONFIG_NOSYSTEM': '1'})
+     os.environ.update(FLAGS)
+     sys.dont_write_bytecode = True
++    _private_import_cache_prefix = PARENT_HOME / 'python-source-cache-isolation'
++    assert not os.path.lexists(_private_import_cache_prefix), 'fresh private import-cache namespace required'
++    sys.pycache_prefix = str(_private_import_cache_prefix)
+     source = types.ModuleType('selected_native3_existing_source42_owner')
+     source.__file__ = source_record['path']
+     sys.modules[source.__name__] = source

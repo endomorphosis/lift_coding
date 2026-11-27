@@ -1,0 +1,149 @@
+{
+  "diagnostic_explicit_read_bytes": 90907,
+  "requests": [
+    {
+      "id": 1,
+      "jsonrpc": "2.0",
+      "method": "initialize",
+      "params": {
+        "clientInfo": {
+          "name": "ipfs-accelerate-state-reader",
+          "version": "1"
+        }
+      }
+    },
+    {
+      "jsonrpc": "2.0",
+      "method": "initialized"
+    },
+    {
+      "id": 2,
+      "jsonrpc": "2.0",
+      "method": "thread/read",
+      "params": {
+        "includeTurns": false,
+        "threadId": "01a15853-8d90-7881-815c-f23bd69098c2"
+      }
+    },
+    {
+      "id": 3,
+      "jsonrpc": "2.0",
+      "method": "thread/turns/list",
+      "params": {
+        "limit": 1,
+        "sortDirection": "desc",
+        "threadId": "01a15853-8d90-7881-815c-f23bd69098c2"
+      }
+    }
+  ],
+  "result": {
+    "UNKNOWN_reservation": {
+      "artifact_state": "retained",
+      "bytes": 734,
+      "claim_granted": false,
+      "completion_eligible": false,
+      "created": true,
+      "delivery_assessed": false,
+      "execution_granted": false,
+      "full9": {
+        "st_ctime_ns": "1795582664713012765",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72102699",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795582664713012765",
+        "st_nlink": "1",
+        "st_size": "734",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/owned-fictional-v5k3xgl8/unknown.json",
+      "processing_confirmed": false,
+      "readback_verified": true,
+      "reason": "exact_artifact_retained",
+      "retryable": false,
+      "schema": "codex-private-handoff-artifact-write/v1",
+      "sha256": "250056b00732994bd5ebd563c24350cd6231ae8616f40e021387486eeebdbb95"
+    },
+    "acknowledged_turn_id": null,
+    "claim_granted": false,
+    "completion_eligible": false,
+    "delivery_state": "delivery_unknown",
+    "enqueue_acknowledged": false,
+    "execution_granted": false,
+    "existing_sender_outcome": {
+      "attempts": 1,
+      "claim_granted": false,
+      "completion_eligible": false,
+      "delivery_state": "not_sent",
+      "enqueue_acknowledged": false,
+      "execution_granted": false,
+      "message_sha256": "78de8b74a8e5ad540ceac68d02a0ef2577449d91d18a6b5b5ec918b9a52030fe",
+      "processing_confirmed": false,
+      "reason": "preflight_unavailable",
+      "retryable": false
+    },
+    "message_artifact": {
+      "artifact_state": "retained",
+      "bytes": 43,
+      "claim_granted": false,
+      "completion_eligible": false,
+      "created": true,
+      "delivery_assessed": false,
+      "execution_granted": false,
+      "full9": {
+        "st_ctime_ns": "1795582664699034667",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72102698",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795582664699034667",
+        "st_nlink": "1",
+        "st_size": "43",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/owned-fictional-v5k3xgl8/retained.DATA",
+      "processing_confirmed": false,
+      "readback_verified": true,
+      "reason": "exact_artifact_retained",
+      "retryable": false,
+      "schema": "codex-private-handoff-artifact-write/v1",
+      "sha256": "78de8b74a8e5ad540ceac68d02a0ef2577449d91d18a6b5b5ec918b9a52030fe"
+    },
+    "message_sha256": "78de8b74a8e5ad540ceac68d02a0ef2577449d91d18a6b5b5ec918b9a52030fe",
+    "method": "turn/steer",
+    "no_replay": true,
+    "processing_confirmed": false,
+    "reason": "existing_sender_result",
+    "result_artifact": {
+      "artifact_state": "retained",
+      "bytes": 2317,
+      "claim_granted": false,
+      "completion_eligible": false,
+      "created": true,
+      "delivery_assessed": false,
+      "execution_granted": false,
+      "full9": {
+        "st_ctime_ns": "1795582664732837264",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72102701",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795582664732837264",
+        "st_nlink": "1",
+        "st_size": "2317",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/owned-fictional-v5k3xgl8/result.json",
+      "processing_confirmed": false,
+      "readback_verified": true,
+      "reason": "exact_artifact_retained",
+      "retryable": false,
+      "schema": "codex-private-handoff-artifact-write/v1",
+      "sha256": "7d0862fed5cb0ecbcbc3c747ebcf52b246ecc2addd075bc527f32423b6ccc980"
+    },
+    "retryable": false,
+    "rpc_ids_scope": "Existing sender validates replies internally; IDs are not exposed.",
+    "rpc_response_ids": null,
+    "thread_id": "01a15853-8d90-7881-815c-f23bd69098c2"
+  }
+}

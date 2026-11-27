@@ -1,0 +1,38 @@
+
+
+@pytest.mark.parametrize("legacy_version", ["legacy", "bound-v2"])
+def test_old_aggregate_cache_authority_is_unusable_but_retained(legacy_version):
+    from ipfs_datasets_py.logic.common.duckdb_proof_migration import (
+        ProofCacheFamily, RawLegacyRecord, normalize_legacy_record,
+    )
+    from ipfs_datasets_py.logic.common.duckdb_proof_store import (
+        DuckDBProofStore, DuckDBProofStoreAuthorityError,
+    )
+
+    record, _, _, _, _ = _bound_record()
+    projection = normalize_legacy_record(
+        RawLegacyRecord(record_index=1, line_number=1, payload=record.to_dict()),
+        family=ProofCacheFamily.LEGAL_IR,
+    )
+    current = projection.to_unified_entry(created_at=1.0)
+    store = DuckDBProofStore()
+    assert store.put(current, now=1.0).usable is True
+    assert store.get(current.key, now=2.0) == current
+    legacy_payload = current.result_payload.to_dict()
+    legacy_payload.pop("complete_proof_contexts", None)
+    old = replace(current, key=replace(current.key, backend_version=legacy_version),
+                  result_payload=legacy_payload, entry_digest="")
+    # Seed the exact historical row without going through new write admission.
+    archive = DuckDBProofStore()
+    archive._entries[old.key.digest] = old
+    result = archive.lookup(old.key, now=2.0)
+    assert result.usable is False
+    assert result.entry is None
+    assert result.reason.value == "authority_mismatch"
+    assert archive.get(old.key, now=2.0) is None
+    assert archive._entries[old.key.digest].to_dict() == old.to_dict()
+    with pytest.raises(DuckDBProofStoreAuthorityError):
+        archive.put(old, now=2.0)
+    with pytest.raises(DuckDBProofStoreAuthorityError):
+        archive.get_or_compute(old.key, lambda: old, now=2.0)
+    assert archive._entries[old.key.digest].to_dict() == old.to_dict()

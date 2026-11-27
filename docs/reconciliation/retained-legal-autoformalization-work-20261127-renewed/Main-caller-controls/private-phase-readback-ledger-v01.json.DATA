@@ -1,0 +1,50 @@
+{
+  "all_prior_costs_retained": true,
+  "charged_upper_bound_before_ledger_readback": 5069063,
+  "conservative_other_private_IO_reserve": 1048576,
+  "explicit_reads_and_prior_conservative_debits": 4020487,
+  "limit": 8388608,
+  "prior_failed_cohort_conservative_debit": 3145728,
+  "reads": [
+    {
+      "bytes": 15730,
+      "path": "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/caller.before.py.DATA",
+      "sha256": "cf78dacd03150efba5cd7e2d6d4eeb7c61d58e850a47319d98298fac34c3dd81"
+    },
+    {
+      "bytes": 20569,
+      "path": "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/test_existing_invoke_once_hydration.py",
+      "sha256": "f32c6dcd0f192dbdbe291f719749a233a9e1f682220e162a66065ae4543f2127"
+    },
+    {
+      "bytes": 45424,
+      "path": "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/actual-same-caller-unloaded-resume-RED-v02-corrected-fictional-cap.json",
+      "sha256": "827725309be7a746c22dc9b260e8da1c17f0480a2ff0bb0c299e219bfdc7d141"
+    },
+    {
+      "bytes": 19593,
+      "path": "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/invoke-existing-durable-handoff.unloaded-hydration.after.py.DATA",
+      "sha256": "00d26e75f8e84fe03364101fbbe1a88c32e4d4b02bd24dd92fd263adbc1da9ca"
+    },
+    {
+      "bytes": 5742,
+      "path": "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/actual-same-caller-unloaded-resume-GREEN.json",
+      "sha256": "d061938578707060b3110ce778fe18b7f10d8e7d44cac4d8e175bc69ded51d9d"
+    },
+    {
+      "bytes": 10623,
+      "path": "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/invoke-once-hydration.forward.patch",
+      "sha256": "103beeb1674b1c9aa8afb6ba4b53e1b439e69c4a0f3a2be7f183d9f84a1bd802"
+    },
+    {
+      "bytes": 10623,
+      "path": "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/invoke-once-hydration.inverse.patch",
+      "sha256": "87d23a37715447962475607c72e1871da705e41f851b57f78dac3cd09076d17d"
+    },
+    {
+      "bytes": 2819,
+      "path": "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/sealed-private-existing-invoke-once-unloaded-hydration-v01.json",
+      "sha256": "ed9f35af2b83b098a5ff63a5fb85b3c637abfd1026eb9bbcb0de075721dfd6b4"
+    }
+  ]
+}

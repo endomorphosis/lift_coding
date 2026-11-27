@@ -1,0 +1,75 @@
+{
+  "actual_COLLECT_supplied_order_retained": true,
+  "actual_Source_SDK_test_or_child_execution": false,
+  "constructors_called_in_memory": 2,
+  "factory": {
+    "bytes": 3374,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-benchmark-facets-through-final-compiler-private-cVjxPbQ5/existing-v386-ordinary119-controls-INERT/Phase8-factory-v386-derived-ordinary119.INERT.py.DATA",
+    "sha256": "727cdf5e89896660a5d6baffe0c67c45b6fcec2b85fd287856aab717bc3a3d88"
+  },
+  "historical_size_sample_epoch": {
+    "bytes": 860806,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase8-external-evidence-compiler-combined-exact5-private-v01/actual-v385-ordinary62-nonclock-c6m_7ldx/Phase8-v385-current-1542-outer-Source-epoch.json",
+    "sha256": "98a9590da435c4cee3dae686e08e09a103fc8275a3f8fbcd4194873db0411c68"
+  },
+  "legacy_setup_failures": [
+    "First check used the wrong historical conftest key. It stopped before factory execution.",
+    "Second check expected the wrong words in the first correct refusal. No request was constructed."
+  ],
+  "positive": {
+    "collect": {
+      "input_bytes": {
+        "bootstrap.py": 76993,
+        "request.json": 42257,
+        "source-epoch.json": 860806
+      },
+      "limits": {
+        "cpu_seconds": 110,
+        "max_input_bytes": 4194304,
+        "max_output_bytes": 16777216,
+        "max_workspace_bytes": 67108864,
+        "memory_bytes": 8589934592,
+        "resident_memory_bytes": 4294967296,
+        "termination_grace_seconds": 5,
+        "timeout_seconds": 120
+      },
+      "total": 980056
+    },
+    "run": {
+      "input_bytes": {
+        "bootstrap.py": 76993,
+        "request.json": 61276,
+        "source-epoch.json": 860806
+      },
+      "limits": {
+        "cpu_seconds": 540,
+        "max_input_bytes": 4194304,
+        "max_output_bytes": 16777216,
+        "max_workspace_bytes": 67108864,
+        "memory_bytes": 8589934592,
+        "resident_memory_bytes": 4294967296,
+        "termination_grace_seconds": 5,
+        "timeout_seconds": 600
+      },
+      "total": 999075
+    }
+  },
+  "profile": {
+    "bytes": 50646,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-benchmark-facets-through-final-compiler-private-cVjxPbQ5/existing-v386-ordinary119-controls-INERT/READY-Phase8-exact7-existing-ordinary119-INERT.json",
+    "sha256": "24de4c6d2ef799a36af7e15530a8a25c3d8f9f1ba0ea839bb778fb48ba9ad3a5"
+  },
+  "qualification": null,
+  "refusals_before_constructor": {
+    "duplicate case": "exact actual expanded Phase8-external-validity-through-compiler-ordinary119 collection required",
+    "foreign owning file": "exact actual expanded Phase8-external-validity-through-compiler-ordinary119 collection required",
+    "missing retained CLI": "exact actual expanded Phase8-external-validity-through-compiler-ordinary119 collection required",
+    "old 62 only": "exact actual expanded Phase8-external-validity-through-compiler-ordinary119 collection required",
+    "old group": "exact selected frozen-local-D Phase8-external-validity-through-compiler-ordinary119 ordinary request required",
+    "old phase": "exact selected frozen-local-D Phase8-external-validity-through-compiler-ordinary119 ordinary request required",
+    "unsupported operation": "exact selected frozen-local-D Phase8-external-validity-through-compiler-ordinary119 ordinary request required",
+    "wrong case with same count": "actual collection differs from independent literal119 nodeid set"
+  },
+  "schema": "existing-ordinary119-inert-factory-handoff-controls/v1",
+  "template_bytes_changed": false
+}

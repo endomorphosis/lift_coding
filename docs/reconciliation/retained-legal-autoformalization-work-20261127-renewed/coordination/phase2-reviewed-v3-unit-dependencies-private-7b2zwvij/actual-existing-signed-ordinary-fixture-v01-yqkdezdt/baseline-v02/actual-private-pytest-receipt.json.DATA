@@ -1,0 +1,308 @@
+{
+  "JUnit": {
+    "bytes": 51670,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/baseline-v02/result.xml",
+    "sha256": "109686edd8c860815ba0dedfa7618d68658d2df7563b304f0d9038fac76663cd"
+  },
+  "argv": [
+    "/home/barberb/lift_coding/.venv/bin/python",
+    "-I",
+    "-B",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/invoke-existing-pytest-private-v02.py.DATA",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/baseline-v02",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/dataset",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+    "/home/barberb/lift_coding/external/ipfs_datasets",
+    "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_alternate_view_of_same_raw_paragraph_requires_distinct_use_witness",
+    "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_raw_repackaging_and_artifact_labels_do_not_create_legal_uses",
+    "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_alternate_view_of_same_raw_paragraph_requires_distinct_use_witness",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_cyclic_unit_dependencies",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_preserves_acyclic_overlapping_unit_dependencies"
+  ],
+  "original_setup_only_refusal": {
+    "bytes": 8416,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/baseline/actual-private-pytest-receipt.json",
+    "sha256": "437c2492604963e728be460a3dabe4cae4810698c041d89fa33f5365656e5a86"
+  },
+  "rc": 1,
+  "runner": {
+    "bytes": 2733,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/invoke-existing-pytest-private-v02.py.DATA",
+    "sha256": "37b0cd50f0ce9d5ef5fd38e29d040211401365253595255b74fa60becba76132"
+  },
+  "schema": "private-actual-package-signed-fixtures/v2",
+  "stderr": {
+    "bytes": 0,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/baseline-v02/stderr.DATA",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 50561,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/baseline-v02/stdout.DATA",
+    "sha256": "643266dcdb84a1883614e609873fcff20779bc194630fa73a95d6a703615deb0"
+  },
+  "tests": {
+    "nodes": [
+      "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_alternate_view_of_same_raw_paragraph_requires_distinct_use_witness",
+      "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[duplicate_repackage-logical source occurrence]",
+      "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[overlapping_repackage-overlapping logical source]",
+      "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[document_revision_label-logical source occurrence]",
+      "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_unaligned_view-unsupported source-view alignment]",
+      "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_view_and_document_revision_label-unsupported source-view alignment]",
+      "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[physical_alias-physical occurrence]",
+      "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[different_provision]",
+      "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[different_release]",
+      "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[different_edition]",
+      "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs]",
+      "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs_different_source_id]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_alternate_view_of_same_raw_paragraph_requires_distinct_use_witness",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[duplicate_repackage-logical source occurrence]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[overlapping_repackage-overlapping logical source]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[document_revision_label-logical source occurrence]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_unaligned_view-unsupported source-view alignment]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_view_and_document_revision_label-unsupported source-view alignment]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[physical_alias-physical occurrence]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_provision]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_release]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_edition]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs_different_source_id]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-cycle]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-definition-cycle]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_cyclic_unit_dependencies[longer-mixed-cycle]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_preserves_acyclic_overlapping_unit_dependencies"
+    ],
+    "other": [
+      {
+        "error": [
+          "failed on setup with \"ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'\""
+        ],
+        "failure": [],
+        "node": "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_alternate_view_of_same_raw_paragraph_requires_distinct_use_witness",
+        "skipped": []
+      },
+      {
+        "error": [
+          "failed on setup with \"ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'\""
+        ],
+        "failure": [],
+        "node": "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[duplicate_repackage-logical source occurrence]",
+        "skipped": []
+      },
+      {
+        "error": [
+          "failed on setup with \"ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'\""
+        ],
+        "failure": [],
+        "node": "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[overlapping_repackage-overlapping logical source]",
+        "skipped": []
+      },
+      {
+        "error": [
+          "failed on setup with \"ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'\""
+        ],
+        "failure": [],
+        "node": "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[document_revision_label-logical source occurrence]",
+        "skipped": []
+      },
+      {
+        "error": [
+          "failed on setup with \"ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'\""
+        ],
+        "failure": [],
+        "node": "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_unaligned_view-unsupported source-view alignment]",
+        "skipped": []
+      },
+      {
+        "error": [
+          "failed on setup with \"ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'\""
+        ],
+        "failure": [],
+        "node": "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_view_and_document_revision_label-unsupported source-view alignment]",
+        "skipped": []
+      },
+      {
+        "error": [
+          "failed on setup with \"ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'\""
+        ],
+        "failure": [],
+        "node": "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[physical_alias-physical occurrence]",
+        "skipped": []
+      },
+      {
+        "error": [
+          "failed on setup with \"ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'\""
+        ],
+        "failure": [],
+        "node": "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[different_provision]",
+        "skipped": []
+      },
+      {
+        "error": [
+          "failed on setup with \"ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'\""
+        ],
+        "failure": [],
+        "node": "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[different_release]",
+        "skipped": []
+      },
+      {
+        "error": [
+          "failed on setup with \"ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'\""
+        ],
+        "failure": [],
+        "node": "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[different_edition]",
+        "skipped": []
+      },
+      {
+        "error": [
+          "failed on setup with \"ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'\""
+        ],
+        "failure": [],
+        "node": "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs]",
+        "skipped": []
+      },
+      {
+        "error": [
+          "failed on setup with \"ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'\""
+        ],
+        "failure": [],
+        "node": "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs_different_source_id]",
+        "skipped": []
+      },
+      {
+        "error": [
+          "failed on setup with \"ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'\""
+        ],
+        "failure": [],
+        "node": "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_alternate_view_of_same_raw_paragraph_requires_distinct_use_witness",
+        "skipped": []
+      },
+      {
+        "error": [
+          "failed on setup with \"ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'\""
+        ],
+        "failure": [],
+        "node": "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[duplicate_repackage-logical source occurrence]",
+        "skipped": []
+      },
+      {
+        "error": [
+          "failed on setup with \"ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'\""
+        ],
+        "failure": [],
+        "node": "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[overlapping_repackage-overlapping logical source]",
+        "skipped": []
+      },
+      {
+        "error": [
+          "failed on setup with \"ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'\""
+        ],
+        "failure": [],
+        "node": "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[document_revision_label-logical source occurrence]",
+        "skipped": []
+      },
+      {
+        "error": [
+          "failed on setup with \"ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'\""
+        ],
+        "failure": [],
+        "node": "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_unaligned_view-unsupported source-view alignment]",
+        "skipped": []
+      },
+      {
+        "error": [
+          "failed on setup with \"ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'\""
+        ],
+        "failure": [],
+        "node": "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_view_and_document_revision_label-unsupported source-view alignment]",
+        "skipped": []
+      },
+      {
+        "error": [
+          "failed on setup with \"ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'\""
+        ],
+        "failure": [],
+        "node": "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[physical_alias-physical occurrence]",
+        "skipped": []
+      },
+      {
+        "error": [
+          "failed on setup with \"ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'\""
+        ],
+        "failure": [],
+        "node": "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_provision]",
+        "skipped": []
+      },
+      {
+        "error": [
+          "failed on setup with \"ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'\""
+        ],
+        "failure": [],
+        "node": "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_release]",
+        "skipped": []
+      },
+      {
+        "error": [
+          "failed on setup with \"ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'\""
+        ],
+        "failure": [],
+        "node": "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_edition]",
+        "skipped": []
+      },
+      {
+        "error": [
+          "failed on setup with \"ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'\""
+        ],
+        "failure": [],
+        "node": "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs]",
+        "skipped": []
+      },
+      {
+        "error": [
+          "failed on setup with \"ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'\""
+        ],
+        "failure": [],
+        "node": "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs_different_source_id]",
+        "skipped": []
+      },
+      {
+        "error": [
+          "failed on setup with \"ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'\""
+        ],
+        "failure": [],
+        "node": "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-cycle]",
+        "skipped": []
+      },
+      {
+        "error": [
+          "failed on setup with \"ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'\""
+        ],
+        "failure": [],
+        "node": "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-definition-cycle]",
+        "skipped": []
+      },
+      {
+        "error": [
+          "failed on setup with \"ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'\""
+        ],
+        "failure": [],
+        "node": "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_cyclic_unit_dependencies[longer-mixed-cycle]",
+        "skipped": []
+      },
+      {
+        "error": [
+          "failed on setup with \"ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.autoformal.tree_pin'\""
+        ],
+        "failure": [],
+        "node": "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_preserves_acyclic_overlapping_unit_dependencies",
+        "skipped": []
+      }
+    ],
+    "passed": 0
+  }
+}

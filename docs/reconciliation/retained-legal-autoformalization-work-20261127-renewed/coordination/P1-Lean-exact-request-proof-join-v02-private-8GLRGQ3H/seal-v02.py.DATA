@@ -1,0 +1,164 @@
+from pathlib import Path
+from xml.etree import ElementTree
+import ast
+import difflib
+import hashlib
+import json
+import os
+import stat
+import subprocess
+
+root = Path(__file__).resolve().parent
+spec_path = root / "inputs-v02.json"
+spec = json.loads(spec_path.read_bytes())
+checkout = Path(spec["canonical"])
+os.umask(0o022)
+env = {**os.environ, "GIT_OPTIONAL_LOCKS":"0", "GIT_NO_LAZY_FETCH":"1"}
+
+def git(*args, cwd=checkout):
+    return subprocess.check_output(["git","-c","core.preloadIndex=false","-C",str(cwd),*args],env=env)
+
+def sha(data):
+    return hashlib.sha256(data).hexdigest()
+
+def blob(data):
+    return hashlib.sha1(b"blob "+str(len(data)).encode()+b"\0"+data).hexdigest()
+
+def full9(st):
+    names=("st_dev","st_ino","st_mode","st_nlink","st_uid","st_gid","st_size","st_mtime_ns","st_ctime_ns")
+    return {name:str(getattr(st,name)) for name in names}
+
+def read(path):
+    fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK)
+    with os.fdopen(fd,"rb") as handle:
+        before=os.fstat(handle.fileno())
+        assert stat.S_ISREG(before.st_mode) and before.st_nlink==1
+        data=handle.read()
+        assert full9(before)==full9(os.fstat(handle.fileno()))==full9(path.lstat())
+        assert len(data)==before.st_size
+    return data,full9(before)
+
+def artifact(path):
+    raw, stamp=read(path)
+    return dict(path=str(path),bytes=len(raw),sha256=sha(raw),full9=stamp)
+
+def put(path, data, mode=0o400):
+    fd=os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,mode)
+    with os.fdopen(fd,"wb") as handle:
+        handle.write(data)
+        handle.flush()
+        os.fsync(handle.fileno())
+    assert read(path)[0]==data
+    return artifact(path)
+
+head=spec["head"]
+assert git("rev-parse","HEAD","refs/remotes/origin/main").decode().splitlines()==[head,head]
+assert not git("status","--porcelain=v1","--untracked-files=all","--",spec["owner"],spec["test"])
+concurrent_status = git("status","--porcelain=v1","--untracked-files=all").decode().splitlines()
+files=[]
+patch_lines={"forward":[],"inverse":[]}
+scratch=root/"isolated-inverse-check"
+scratch.mkdir(mode=0o700)
+for role, post in (("owner","owner.after.py.DATA"),("test","test.after.v02.py.DATA")):
+    path=spec[role]
+    before_path=root/(role+".before.py.DATA")
+    after_path=root/post
+    before,_=read(before_path)
+    after,_=read(after_path)
+    live_bytes,live_stamp=read(checkout/path)
+    mode,kind,oid=git("ls-tree",head,"--",path).split(b"\t")[0].decode().split()
+    assert kind=="blob" and mode=="100644" and oid==blob(before)
+    assert live_bytes==before==git("cat-file","blob",oid)
+    assert spec["input_tree"][path]["sha256"]==sha(before)
+    before_ast=list(ast.parse(before).body)
+    after_ast=list(ast.parse(after).body)
+    if role=="owner":
+        changed=[(a,b) for a,b in zip(before_ast,after_ast,strict=True) if ast.dump(a)!=ast.dump(b)]
+        assert len(changed)==1
+        old,new=changed[0]
+        assert old.name==new.name=="LeanKernelOutcome"
+        sub=[(a,b) for a,b in zip(old.body,new.body,strict=True) if ast.dump(a)!=ast.dump(b)]
+        assert len(sub)==1 and sub[0][0].name==sub[0][1].name=="__post_init__"
+    else:
+        assert after.startswith(before) and len(after_ast)==len(before_ast)+1
+        assert [ast.dump(f) for f in before_ast]==[ast.dump(f) for f in after_ast[:-1]]
+        assert after_ast[-1].name=="test_lean_outcome_binds_accepted_receipt_to_request_payload"
+    a=b"a/"+os.fsencode(path)
+    b=b"b/"+os.fsencode(path)
+    for direction,left,right in (("forward",before,after),("inverse",after,before)):
+        patch_lines[direction].extend(difflib.diff_bytes(difflib.unified_diff,left.splitlines(True),
+                            right.splitlines(True),fromfile=a,tofile=b))
+    dest=scratch/path
+    dest.parent.mkdir(parents=True,exist_ok=True)
+    put(dest,before,mode=0o644)
+    files.append({"role":role,"relative_path":path,"canonical_path":str(checkout/path),"mode":mode,
+                  "before":{**artifact(before_path),"git_blob":oid,"observed_canonical_full9":live_stamp},
+                  "after":{**artifact(after_path),"proposed_git_blob":blob(after)},
+                  "unchanged_remaining_AST":True})
+patches=dict()
+for direction,key in (("forward","after"),("inverse","before")):
+    p=scratch.parent/(direction+".patch")
+    patches[direction]=put(p,b"".join(patch_lines[direction]))
+    git("apply","--no-index","--whitespace=nowarn",str(p),cwd=scratch)
+    for rec in files:
+        actual=artifact(scratch/rec["relative_path"])
+        assert actual["sha256"]==rec[key]["sha256"] and actual["bytes"]==rec[key]["bytes"]
+        assert stat.S_IMODE(int(actual["full9"]["st_mode"]))==0o644
+assert git("rev-parse","HEAD","refs/remotes/origin/main").decode().splitlines()==[head,head]
+assert not git("status","--porcelain=v1","--untracked-files=all","--",spec["owner"],spec["test"])
+
+def report(name, expected_counts):
+    loc=root/name
+    parsed=ElementTree.parse(loc/"result.xml")
+    rows=parsed.findall(".//testcase")
+    cases=[(r.attrib["classname"],r.attrib["name"]) for r in rows]
+    assert len(cases)==len(set(cases))
+    marks={key:sum(row.find(key) is not None for row in rows) for key in ("failure","error","skipped")}
+    counts=[len(cases)-sum(marks.values()),*marks.values()]
+    assert counts==expected_counts,(name,counts)
+    failed={row.attrib["name"]:row.find("failure").get("message") for row in rows if row.find("failure") is not None}
+    code=json.loads((loc/"exit.json").read_bytes())["returncode"]
+    assert code==(1 if marks["failure"] else 0)
+    return {"junit":artifact(loc/"result.xml"),"stdout":artifact(loc/"stdout.DATA"),
+            "stderr":artifact(loc/"stderr.DATA"),"termination":artifact(loc/"exit.json"),
+            "counts":{"passed":counts[0],**marks},"ordered_cases":cases,"failure_messages":failed}
+
+prior=report("same8-red",[1,7,0,0])
+red=report("same8-v02-red",[3,5,0,0])
+green=report("same8-v02-green",[8,0,0,0])
+assert red["ordered_cases"]==green["ordered_cases"]
+assert all("DID NOT RAISE" in v for v in red["failure_messages"].values())
+assert {k.rsplit("[",1)[-1][:-1] for k in red["failure_messages"]}=={
+    "declaration","proposition","source","translation","missing-obligation"}
+assert all("NameError" in v and "replace" in v for v in prior["failure_messages"].values())
+retained={name:report(name,[count,0,0,0]) for name,count in
+          (("prior-request8",8),("prior-kernel54",54),("prior-outcome8",8))}
+runner=artifact(Path(spec["runner"]))
+assert runner["sha256"]==spec["runner_sha256"]
+main_path=Path("/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/sealed-private-P1-integer-exit-status-two-file-proposal-v01.json")
+main=artifact(main_path)
+assert main["bytes"]==22366 and main["sha256"].startswith("d645777be1857f3ff")
+out={
+  "schema":"private-P1-Lean-outcome-exact-accepted-request-two-file/v1",
+  "canonical_local_and_tracking_HEAD":head,
+  "selected_pair_canonical_clean":True,"concurrent_unrelated_status_at_seal":concurrent_status,"tree":git("rev-parse","HEAD^{tree}").decode().strip(),
+  "files":files,"patches":patches,"forward_and_inverse_exact_bytes_modes_on_private_preimages":True,
+  "inputs":artifact(spec_path),"runner":runner,
+  "fixture_scope":{"protected_current_worktree_reads_refused_during_run":True,
+      "physical_process_subprocess_and_native_execution_refused":True,"memory_bytes":536870912,
+      "cpus":1,"canonical_ordinary":False,"original_receipt_wire_or_compiler_profile_changed":False},
+  "same_ordered_8":{"baseline":red,"candidate":green},
+  "retained_independent_overlapping_cohorts":retained,
+  "fixture_setup_attempt_retained":{"first_copy_setup":"dated test was older; exact current Git test used",
+     "first_test_fixture":"local dataclasses.replace import was absent and was corrected before reproducing actual defect",
+     "first_test_RUN":prior,"superseded_test":artifact(root/"test.after.py.DATA")},
+  "constraint":"A separate private process-returncode proposal exists. Preserve its test additions if composed on a future coordinated adoption. Frozen here independently.",
+  "separate_Main_proposal":main,
+  "current_change":"Only accepted LeanKernelOutcome reconstructs and compares request source and translation through existing canonical extractor, plus the exact expected declaration and proposition. Nonaccepted outcomes and the original receipt/guard wire remain unchanged.",
+  "performed":{"Source":False,"canonical_mutation":False,"push":False,"ordinary_package_runtime":False,
+       "physical_Lean":False,"statutory_interpretation_or_admission":False},
+}
+ref=put(root/"SEALED-P1-Lean-exact-accepted-request-two-file-private-v01.json",(json.dumps(out,indent=2,sort_keys=True)+"\n").encode())
+print(json.dumps(ref))
+print(json.dumps({"roles":[{k:r["after"][k] for k in ("bytes","sha256","proposed_git_blob")} for r in files],
+    "not_pooled":{k:v["counts"] for k,v in retained.items()}}))

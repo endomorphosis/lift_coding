@@ -1,0 +1,66 @@
+{
+  "Source_or_ordinary_pytest_executed": false,
+  "actual_capacity_or_admission": null,
+  "exact_request_ledger_root_order_match": true,
+  "existing_enrolled_root_paths_in_observed_order": [
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs",
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/todo-queues",
+    "/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/reports/evidence",
+    "/tmp/pytest-of-barberb"
+  ],
+  "explicit_bytes_read": 16562644,
+  "fresh_attempt_parent_observed_absent": "/tmp/pytest-of-barberb/legal-ir-phase4-v4-a5c3-prefixed-query-v01",
+  "ledger_snapshot_limit_bytes": 16777216,
+  "ledger_snapshot_limit_minus_observed_bytes": 296454,
+  "prepared_single_test": {
+    "bytes": 48099,
+    "full9": {
+      "st_ctime_ns": "1795503354748836743",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72007941",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795503354748836743",
+      "st_nlink": "1",
+      "st_size": "48099",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase4-reviewed-lexical-tokenless-private-v01/request.json",
+    "sha256": "f62a37431d5cd7a6bd989495b1254e0b25329797c6a8336148995ac1471b9ff5"
+  },
+  "read_only_disk_ledger_reference": {
+    "bytes": 16480762,
+    "full9": {
+      "st_ctime_ns": "1795349997816662025",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "67026985",
+      "st_mode": "33152",
+      "st_mtime_ns": "1795349997807017872",
+      "st_nlink": "1",
+      "st_size": "16480762",
+      "st_uid": "1000"
+    },
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/federal-corpus-audits/owned-daemon-resource-control/disk-reservations.json",
+    "sha256": "a640b378b4ee84ba2fdd20eb5b5ee83afe596f9f04425b9f48bacf0d0951aacb"
+  },
+  "read_only_scheduler_reference": {
+    "bytes": 33783,
+    "full9": {
+      "st_ctime_ns": "1795008230641908030",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "525678",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795008230638908440",
+      "st_nlink": "1",
+      "st_size": "33783",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/ipfs-datasets-resource-scheduler-1000.json",
+    "sha256": "e070e930642b8eeeeebac9f10c1808140470f3c97c1faa8f046183a64af5fb05"
+  },
+  "scheduler_configuration_sha256": "f07cb14289fcb6275e4497dcc36be0dcf8bfc3dc87531ff7a9537eb85fdcc661",
+  "schema": "phase4-v5-existing-resource-ledger-roots-readonly-check/v1",
+  "scope": "Expected-input reconciliation only. Use existing actual reservation and selector to validate capacity and custody."
+}

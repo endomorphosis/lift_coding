@@ -1,0 +1,138 @@
+"""Execute the selected maintained metadata-only cases in a private linkage."""
+from pathlib import Path
+from types import SimpleNamespace
+import ast
+import hashlib
+import json
+import os
+import resource
+import runpy
+import sys
+import traceback
+
+resource.setrlimit(resource.RLIMIT_CPU, (50, 50))
+resource.setrlimit(resource.RLIMIT_AS, (512 * 1024**2,) * 2)
+os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
+
+def no_effects(event, args):
+    if event.startswith("socket.") or event in {"subprocess.Popen", "os.system", "os.exec", "os.fork"}:
+        raise RuntimeError("private saved-output metadata exercise attempted an external effect")
+    if event == "import" and args[0].partition(".")[0] in {"torch", "tokenizers", "transformers"}:
+        raise RuntimeError("metadata-only exercise attempted to load numerical model runtime")
+
+sys.addaudithook(no_effects)
+import pytest
+
+root = Path(__file__).resolve().parent
+mode = sys.argv[1]
+assert mode in {"before","after"}
+loader_path = "/tmp/decoder-public-codec-terminal-hook-private-v01-3ct_f9yq/load_exact_cached_codec_fixture.py"
+with open(loader_path,"rb") as f:
+    assert hashlib.sha256(f.read()).hexdigest()=="1a355d5a3d82bef971d616b43712e40150386e7b827102a5bbddabb4a98ff714"
+loader = runpy.run_path(loader_path)
+auth = loader["authenticated"]
+link = loader["_compile_module"]
+manifest = json.loads(auth({"path":str(root/"exact-owning-38-project-inputs.json"),"bytes":15070,
+    "sha256":"b872ac9641b0fb2f4cc8f482efc92268485b568eb7822edc28b9682ad4bf7b0c"}))
+roles = manifest["roles"]
+def raw(role):
+    return auth(roles[role])
+def physical(module, role):
+    module.__file__ = roles[role]["path"]
+    return module
+
+names = link("namespaces",raw("namespaces"),{})
+contracts = link("contracts",raw("contracts"),vars(names))
+signatures = link("signatures",raw("signatures"),{**vars(names),**vars(contracts)})
+syntax = link("syntax",raw("syntax"),{**vars(names),**vars(contracts),**vars(signatures)})
+consumer = physical(link("consumer",raw("consumer"),{},roots=["_preflight","REVIEWED_HELDOUT_PURPOSE"]),"consumer")
+metrics = link("metrics",raw("metrics"),{"TypedExpression":syntax.TypedExpression},
+    roots=["evaluate_complete_norm_typed_structure","_complete_norm_payload_shape"])
+inputs = physical(link("inputs",raw("inputs"),{"consumer":consumer,"TypedExpression":syntax.TypedExpression,
+    "evaluate_complete_norm_typed_structure":metrics.evaluate_complete_norm_typed_structure},
+    roots=["_reviewed_wire","encode_reviewed_decoder_digest_omitted_target","assemble_reviewed_decoder_digest_omitted_target"]),"inputs")
+admission = SimpleNamespace(__file__=roles["admission"]["path"])
+splits = SimpleNamespace(__file__=roles["splits"]["path"])
+worker = physical(link("worker",raw("worker"),{"training_cycle_inputs":inputs, "admission":admission,
+    "legal_norm_content_adjudication_v1":None, "legal_reviewed_norm_admission_v3":admission,
+    "legal_span_consumer_binding":consumer,"legal_ir_eval_splits":splits},
+    roots=["_reviewed_decoder_artifact","_reviewed_decoder_generation_policy",
+           "CheckpointArtifact","_parse_json","_json_bytes","_digest","REVIEWED_MIXED_ADMISSION_PROFILE",
+           "_reviewed_decoder_source_pins"]),"worker")
+describer = link("daemon_contracts",raw("daemon_contracts"),{},roots=["describe"])
+chosen = "inference" if mode=="before" else "inference_candidate"
+if mode=="after":
+    projected = Path(roles[chosen]["path"]).parents[3]
+    for role in ("launch","campaign_process","campaign_worker","daemon_worker","daemon_resources",
+                 "scheduler","existing_scheduler"):
+        source = raw(role)
+        dst = projected/roles[role]["relative_path"]
+        dst.parent.mkdir(parents=True,exist_ok=True)
+        with dst.open("xb") as f:
+            f.write(source)
+        dst.chmod(0o400)
+        assert dst.read_bytes()==source
+inference = physical(link("inference",raw(chosen),{"worker":worker,"inputs":inputs,
+    "autoencoder_training_worker":worker,"training_cycle_inputs":inputs,"describe":describer.describe},
+    roots=["_check_reviewed_evaluation_outputs","_reviewed_evaluation_lifecycle_source_sha256"]),chosen)
+numerical = link("numerical_fixture",raw("numerical_test"),
+    {"inputs":inputs,"training_cycle_inputs":inputs,"TypedExpression":syntax.TypedExpression},
+    roots=["_reviewed_Qwen2_generation_policy","_digest_omitted_small_generation_target"])
+selected = {
+    "test_reviewed_inference_v11_saved_raw_assembled_dispositions_preserved":5,
+    "test_reviewed_inference_v11_saved_output_refuses_raw_derivation_or_scope_changes":15,
+    "test_reviewed_inference_v11_outputs_cover_ordered_source_population":6,
+    "test_reviewed_inference_v11_saved_terminal_evidence_matches_disposition":12,
+}
+# The existing five inputs and eight lifecycle reads remain genuine. The
+# alternative rich request helper is unreachable through this saved-output fixture.
+test_tree = ast.parse(raw("owning_test_candidate"))
+helpers = {
+    "_sha","_reviewed_mixed_request_data","_reviewed_profiled_request_data",
+    "_reviewed_profiled_parent_policy_data","_reviewed_Qwen2_parent_policy_data",
+    "_reviewed_v11_tuple","_reviewed_v11_parent_policy_data","_reviewed_v11_bind_saved_source_control",
+    "_reviewed_v11_saved_control","_reviewed_v11_three_source_coverage_control",
+}
+test_nodes = [node for node in test_tree.body if isinstance(node,ast.FunctionDef) and node.name in helpers|set(selected)]
+assert {node.name for node in test_nodes}==helpers|set(selected)
+tests = link("owning_metadata_tests",ast.unparse(ast.Module(body=test_nodes,type_ignores=[])),
+    {"pytest":pytest,"inference":inference,"worker":worker,"consumer":consumer,
+     "autoencoder_training_worker":worker,"legal_span_consumer_binding":consumer,
+     "numerical":numerical,"test_autoencoder_training_worker":numerical,
+     "Path":Path,"json":json,"hashlib":hashlib})
+run_root=root/("owning-38-"+mode)
+run_root.mkdir(mode=0o700)
+results=[]
+for name, case_count in selected.items():
+    fn=getattr(tests,name)
+    marks=fn.pytestmark
+    assert len(marks)==1 and marks[0].name=="parametrize"
+    fields, values=marks[0].args
+    fields=tuple(field.strip() for field in fields.split(",")) if isinstance(fields,str) else tuple(fields)
+    assert len(values)==case_count
+    for i,value in enumerate(values):
+        tmp_path=run_root/(str(len(results)).zfill(2))
+        tmp_path.mkdir(mode=0o700)
+        case_values=value.values if hasattr(value,"values") else (value,) if len(fields)==1 else value
+        case_id=(value.id if hasattr(value,"id") else str(value)) or str(i)
+        args=dict(zip(fields,case_values,strict=True),tmp_path=tmp_path)
+        status,error="passed",None
+        with pytest.MonkeyPatch.context() as monkeypatch:
+            if "monkeypatch" in fn.__code__.co_varnames[:fn.__code__.co_argcount]:
+                args["monkeypatch"]=monkeypatch
+            try:
+                fn(**args)
+            except (AssertionError,pytest.fail.Exception) as exc:
+                status,error="failed",f"{type(exc).__name__}: {exc}"
+            except Exception as exc:
+                status,error="error",traceback.format_exc()
+        results.append(dict(test=name,node=name+"["+case_id+"]",status=status,error=error))
+assert len(results)==len({row["node"] for row in results})==38
+counts={key:sum(row["status"]==key for row in results) for key in ("passed","failed","error")}
+summary={"schema":"actual-private-Phase5-v11-owning-38-case-functions/v1","mode":mode,"counts":counts,
+    "total":len(results),"results":results,"owning_test":roles["owning_test_candidate"],
+    "inference_owner":roles[chosen],"real_existing_readers_and_wire_codec_called":True,
+    "test_functions_executed_without_normal_collection_or_assertion_rewrite":True,
+    "project_initializers_or_model_loaded":False,"private_one_CPU_512MiB":True}
+print(json.dumps(summary,indent=2,sort_keys=True))
+sys.exit(0 if counts=={"passed":38,"failed":0,"error":0} else 1)

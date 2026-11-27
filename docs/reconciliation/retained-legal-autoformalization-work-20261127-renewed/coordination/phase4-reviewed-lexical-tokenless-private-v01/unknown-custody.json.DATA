@@ -1,0 +1,124 @@
+{
+  "actual_original_owner_argv": [
+    "/home/barberb/lift_coding/.venv/bin/python",
+    "-B",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/scripts/ops/legal_ir/run_owned_validation.py",
+    "--request",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase4-reviewed-lexical-tokenless-private-v01/request.json",
+    "--expected-request-sha256",
+    "f62a37431d5cd7a6bd989495b1254e0b25329797c6a8336148995ac1471b9ff5",
+    "--resource-ledger",
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/federal-corpus-audits/owned-daemon-resource-control/disk-reservations.json"
+  ],
+  "automatic_retry_authorized": false,
+  "canonical_package_bootstrap": {
+    "before_original_cli_load": true,
+    "before_original_owner_launch": true,
+    "bytecode_disabled": true,
+    "finished_monotonic": 4530251.822170387,
+    "initial_deadline_monotonic": 4530671.108705809,
+    "minimal_imports": "1",
+    "packages": [
+      {
+        "file": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/__init__.py",
+        "package": "ipfs_datasets_py",
+        "package_path": [
+          "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py"
+        ],
+        "source_sha256": "f258f8eada774251feacd8e2ee2048efe56c89a8ee88efd50e4271ea41d43dc9",
+        "spec_origin": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/__init__.py"
+      },
+      {
+        "file": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/optimizers/__init__.py",
+        "package": "ipfs_datasets_py.optimizers",
+        "package_path": [
+          "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/optimizers"
+        ],
+        "source_sha256": "a12bab3724da07be67b447719ace42fc1f480cb5635581f320a99a372f02f450",
+        "spec_origin": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/optimizers/__init__.py"
+      },
+      {
+        "file": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/__init__.py",
+        "package": "ipfs_datasets_py.optimizers.logic_theorem_optimizer",
+        "package_path": [
+          "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer"
+        ],
+        "source_sha256": "9d693fa576f00dc36899faad75ef3044c437e2bfec5c62306f7031236725bb0e",
+        "spec_origin": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/__init__.py"
+      }
+    ],
+    "schema": "canonical-package-bootstrap-observation/v1"
+  },
+  "current_sampled_recovery_profile_qualified": false,
+  "native_and_source_exit_verified_before_parent_Source_close": false,
+  "ordinary_scratch_profile": {
+    "schema": "owned-validation-ordinary-scratch-live/v1"
+  },
+  "original_cli_spawn_attempted": true,
+  "original_cli_started": true,
+  "original_owner_custody": {
+    "actual_a0b_terminal_cleanup_verified": false,
+    "child_reaped": false,
+    "errors": [
+      {
+        "stage": "actual_terminal_classification",
+        "type": "RuntimeError"
+      }
+    ],
+    "genuine_wait_completed": true,
+    "original_completed_result_verified": false,
+    "original_native_compute_closed": false,
+    "original_source_exit_lifecycle_closed": false,
+    "original_terminal": null,
+    "owner_birth": "453025182",
+    "owner_pid": 3186578,
+    "returncode": 1
+  },
+  "original_source_READs": [
+    {
+      "canonical_root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "cooperative": true,
+      "lock_path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/workspace/control-plane/source-leases/source.lock",
+      "mode": "read",
+      "schema_version": "autoencoder-source-lease/v1",
+      "waited_seconds": 7.662363350391388e-05
+    },
+    {
+      "canonical_root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "cooperative": true,
+      "lock_path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate/workspace/control-plane/source-leases/source.lock",
+      "mode": "read",
+      "schema_version": "autoencoder-source-lease/v1",
+      "waited_seconds": 6.660725921392441e-05
+    }
+  ],
+  "overall_deadline_monotonic": 4530671.108705809,
+  "overall_started_monotonic": 4530251.108705809,
+  "owner_pid": 3186578,
+  "owner_returncode": 1,
+  "physical_source_to_canonical_lock_roots": [
+    {
+      "canonical_root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "physical_root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets"
+    },
+    {
+      "canonical_root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "physical_root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate"
+    }
+  ],
+  "positive_software_acceptance_eligible_before_final_journal": false,
+  "recovery_or_storage_release_authorized": false,
+  "request_schema": "owned-validation-request/v5",
+  "request_sha256": "f62a37431d5cd7a6bd989495b1254e0b25329797c6a8336148995ac1471b9ff5",
+  "schema": "source-held-owned-validation-v5-observation/v1",
+  "shared_Source_admission_deadline_monotonic": 4530311.108705809,
+  "software_admission_profile": "original-owning-shared-Source60-total420/v1",
+  "source_admission_attempted": true,
+  "source_admission_completed": true,
+  "source_admission_failed": false,
+  "source_closed": false,
+  "source_drift": [],
+  "standalone_Git_verified_after_wait": true,
+  "standalone_Git_verified_before_launch": true,
+  "state": "UNKNOWN_ORIGINAL_CUSTODY_SOURCE_READS_RETAINED_NO_REPLAY"
+}

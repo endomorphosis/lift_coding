@@ -1,0 +1,626 @@
+"""Minimal successor of the existing Source-held reviewed-retrieval parent.
+
+INERT versioned V5 acquired-no-child caller/API join; no Original or Source selection. Original admission and Root execution selection remain required. No resource owner,
+subject bootstrap, recovery call, retry, signal or manual claim release here.
+"""
+import hashlib
+import importlib
+import json
+import math
+import os
+import stat
+from pathlib import Path
+import subprocess
+import sys
+import time
+import types
+
+R = Path('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets')
+A = Path('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate')
+LOCK_R = R
+LOCK_A = A
+CONTROL_HOME = Path('/home/barberb/lift_coding/external/ipfs_datasets')
+P = Path(__file__).resolve().parent
+HELPER_BASE = Path('/tmp/legal-ir-phase2-reviewed-admission-source-20261108-v01/resource-census-compatible-port-v01/runtime-owner-v4-trainer-compatibility-v01/current-published-cleanup71-original16MiB-input-v03-shared60-total420')
+BASE = Path('/tmp/legal-ir-phase2-reviewed-admission-source-20261108-v01/resource-census-compatible-port-v01/runtime-owner-v4-trainer-compatibility-v01/current-published-cleanup71-original16MiB-input-v01')
+REQUEST = P / 'request.json'
+REQUEST_SHA = 'f62a37431d5cd7a6bd989495b1254e0b25329797c6a8336148995ac1471b9ff5'
+PREPARATION_COMPLETE = False
+ROOT_ORIGINAL_EXECUTION_SELECTED = False
+CURRENT_V5_ACQUIRED_CLI_SHA = '7ce92270e5a203b4bea00451997712ba5255ba3552728721d6457486157d57e3'
+HELPER = Path('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase4-reviewed-lexical-tokenless-private-v01/existing-v5-wait-helper-explicit-lease-roots.v01.py.DATA')
+HELPER_SHA = '779a75eaa6f365fb1b62556b7bfbf10152ffd5bbf6cd89162af4e3729befd97c'
+LEASE_SHA = '42e9f07d0d458177079269d9f495f0b70512180c1adc2f7fe0bfdb05518a12f9'
+IO = CONTROL_HOME / 'workspace/test-logs/federal-corpus-audits/legal-ir-normative-target-binding-20261021-01/controls/install_product_v02.py'
+IO_SHA = '733d651fb88f08fd1f09c4075e0b6d2b496509c1dcac04926f9e00d373d85671'
+CLASSIFIER = CONTROL_HOME / 'workspace/test-logs/federal-corpus-audits/legal-ir-planning-review-20261020-01/review-11/cp128-warmstart-qualification-v01/controls/launch_single_lease.py'
+CLASSIFIER_SHA = 'a0b2785bf417bfca462d958827d319ef1da2347645becdd1f6a001cec24ad6aa'
+OWNER = R / 'scripts/ops/legal_ir/run_owned_validation.py'
+LEDGER = CONTROL_HOME / 'workspace/test-logs/federal-corpus-audits/owned-daemon-resource-control/disk-reservations.json'
+STANDALONE_GIT_PROVENANCE_SHA256 = 'dde3c80bba0fa69c6bea105f2dfbc681e8eea71dd1dd01fc1efac30114c8a94b'
+STANDALONE_PROJECT_EXPECTATIONS = {'/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate': {'HEAD': '88c0d9f82f66aaddbb01344c9f85236e92a5dc88', 'tree': '416a953630c9ba7ef521fd87bf821f075b052efc', 'branch_ref': 'refs/heads/reconcile/accelerator-autonomy-eight-files-20261123', 'refs_sha256': 'd8e27a3051da7e2745809670b2c113f5b0a7c3689fa2dfba9b8dade8b493c6da', 'Git_selector_metadata': {'HEAD': {'full9': {'st_ctime_ns': '1795421614678716926', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '69384576', 'st_mode': '33204', 'st_mtime_ns': '1795421614678716926', 'st_nlink': '1', 'st_size': '68', 'st_uid': '1000'}, 'path': '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate/.git/HEAD'}, 'ref': {'full9': {'st_ctime_ns': '1795500785298142774', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '69911655', 'st_mode': '33204', 'st_mtime_ns': '1795500785298142774', 'st_nlink': '1', 'st_size': '41', 'st_uid': '1000'}, 'path': '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate/.git/refs/heads/reconcile/accelerator-autonomy-eight-files-20261123'}, 'config': {'full9': {'st_ctime_ns': '1795421614677886019', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '69342869', 'st_mode': '33204', 'st_mtime_ns': '1795421614677886019', 'st_nlink': '1', 'st_size': '520', 'st_uid': '1000'}, 'path': '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate/.git/config'}}}, '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets': {'HEAD': 'a5c3f972d0245f760e239ef9a7e92d899cea061c', 'tree': 'a1b4f52a47b3b08633e25d5040e558e11a189089', 'branch_ref': 'refs/heads/work/phase6-capacity-composition-20261123', 'refs_sha256': '54f2ab54566078a5c557e410626e073f7547e1963c3d02fac76f75a777a68eb3', 'Git_selector_metadata': {'HEAD': {'full9': {'st_ctime_ns': '1795421817209629985', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '68338411', 'st_mode': '33204', 'st_mtime_ns': '1795421817209629985', 'st_nlink': '1', 'st_size': '58', 'st_uid': '1000'}, 'path': '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/HEAD'}, 'ref': {'full9': {'st_ctime_ns': '1795503115746852286', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '68862854', 'st_mode': '33204', 'st_mtime_ns': '1795503115745852278', 'st_nlink': '1', 'st_size': '41', 'st_uid': '1000'}, 'path': '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/refs/heads/work/phase6-capacity-composition-20261123'}, 'config': {'full9': {'st_ctime_ns': '1795421298887619555', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '68303583', 'st_mode': '33204', 'st_mtime_ns': '1795421298887619555', 'st_nlink': '1', 'st_size': '505', 'st_uid': '1000'}, 'path': '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/config'}}}}
+
+
+def load_private_helper():
+    raw = HELPER.read_bytes()
+    if hashlib.sha256(raw).hexdigest() != HELPER_SHA:
+        raise ValueError('existing original wait helper changed')
+    module = types.ModuleType('_source_held_existing_wait_helper')
+    module.__file__ = str(HELPER)
+    sys.modules[module.__name__] = module
+    exec(compile(raw, str(HELPER), 'exec'), module.__dict__)
+    module.OWNER = OWNER
+    return module
+
+
+def classify_current_v5_no_grant_after_wait(helper, classifier, process, request,
+        request_raw, stdout_path, custody, original_cli):
+    """Use only the pinned original CLI's explicit no-child/no-grant closure."""
+    if custody.get('returncode') == 0:
+        return False
+    helper.need(type(process) is subprocess.Popen
+        and custody.get('genuine_wait_completed') is True
+        and type(custody.get('returncode')) is int
+        and custody['returncode'] != 0 and process.returncode == custody['returncode']
+        and custody.get('owner_pid') == process.pid
+        and type(custody.get('owner_birth')) is str and custody['owner_birth'].isdecimal(),
+        'genuine original V5 owner wait and birth required')
+    proven, terminal = classifier.verified_terminal(process, custody['owner_birth'],
+        request, REQUEST_SHA, stdout_path, custody['returncode'])
+    # The original productive branch remains responsible for all native cleanup.
+    if proven or type(terminal) is not dict:
+        return False
+    reservation = terminal.get('reservation')
+    if (type(reservation) is not dict or reservation.get('resource_lease') is not None
+            or reservation.get('process_observation') is not None):
+        return False
+    helper.need(type(request_raw) is bytes
+        and hashlib.sha256(request_raw).hexdigest() == REQUEST_SHA
+        and json.dumps(json.loads(request_raw), sort_keys=True, separators=(',', ':'), allow_nan=False)
+            == json.dumps(request, sort_keys=True, separators=(',', ':'), allow_nan=False),
+        'exact V5 request bytes and object required')
+    helper.need(type(original_cli) is types.ModuleType and original_cli.__file__ == str(OWNER),
+        'pinned current original CLI module required under Source READ')
+    function = original_cli.classify_owned_validation_source_custody
+    helper.need(function.__globals__ is vars(original_cli)
+        and function.__code__.co_filename == str(OWNER),
+        'exact current original CLI Source classifier identity required')
+    verdict = function(terminal, request_raw, expected_request_sha256=REQUEST_SHA,
+        owner_pid=process.pid, owner_birth=custody['owner_birth'],
+        returncode=custody['returncode'], expected_resource_ledger=str(LEDGER))
+    custody['current_V5_no_grant_classifier_observation'] = verdict
+    if not (type(verdict) is dict and set(verdict) == {
+            'verdict', 'source_custody_closed', 'storage_release_authorized'}
+            and verdict['verdict'] == 'proven_original_no_child_no_native_grant'
+            and verdict['source_custody_closed'] is True
+            and verdict['storage_release_authorized'] is False):
+        return False
+    helper.need(helper.identity_gone(process.pid, custody['owner_birth']),
+        'original V5 CLI owner identity remains live')
+    row = reservation.get('record')
+    helper.need((reservation.get('status') == 'not_entered' and row is None)
+        or (reservation.get('status') == 'retained' and type(row) is dict
+            and row.get('status') == 'retained' and row.get('storage_bytes') == request['storage_bytes']
+            and row.get('artifacts_durable_asserted') is False),
+        'original no-child V5 storage remains separate and unreleased')
+    custody.update(original_terminal=terminal,
+        actual_a0b_terminal_cleanup_verified=False,
+        actual_original_no_child_verdict=verdict,
+        actual_original_no_child_custody_verified=True,
+        actual_observed_identity_count=0, all_observed_identities_gone=True,
+        owner_identity_gone=True, productive_child_created=False, child_reaped=False,
+        no_productive_child_cleanup_required=True, original_native_grant_absent_verified=True,
+        original_native_compute_closed=True, original_source_exit_lifecycle_closed=True,
+        storage_status=reservation['status'],
+        storage_artifacts_durable_asserted=None if row is None else row['artifacts_durable_asserted'],
+        storage_released_and_durable=False, storage_release_authorized=False,
+        retained_storage_bytes=0 if row is None else row['storage_bytes'])
+    return True
+
+
+def classify_current_v5_acquired_no_child_after_wait(helper, classifier, process, request,
+        request_raw, stdout_path, custody, original_cli, *, original_wait_deadline_monotonic):
+    """Consume the canonical V5 waiter; Source and retained storage stay separate."""
+    if type(custody.get('returncode')) is not int or custody['returncode'] != 1:
+        return False
+    helper.need(type(process) is subprocess.Popen
+        and custody.get('genuine_wait_completed') is True
+        and type(custody.get('returncode')) is int and custody['returncode'] == 1
+        and process.returncode == custody['returncode']
+        and type(custody.get('owner_pid')) is int and custody['owner_pid'] == process.pid
+        and type(custody.get('owner_birth')) is str and custody['owner_birth'].isdecimal(),
+        'genuine original V5 acquired-no-child wait and birth required')
+    helper.need(type(original_wait_deadline_monotonic) in (int, float)
+        and math.isfinite(original_wait_deadline_monotonic), 'original finite caller cutoff required')
+    remaining = original_wait_deadline_monotonic - time.monotonic()
+    helper.need(0 < remaining <= 420, 'original total420 caller cutoff exhausted or widened')
+    _, terminal = classifier.verified_terminal(process, custody['owner_birth'],
+        request, REQUEST_SHA, stdout_path, custody['returncode'])
+    if type(terminal) is not dict:
+        return False
+    reservation = terminal.get('reservation')
+    row = reservation.get('record') if type(reservation) is dict else None
+    if (type(row) is not dict or row.get('child') is not None
+            or type(reservation.get('resource_lease')) is not dict):
+        return False
+    helper.need(type(request_raw) is bytes
+        and hashlib.sha256(request_raw).hexdigest() == REQUEST_SHA
+        and json.dumps(json.loads(request_raw), sort_keys=True, separators=(',', ':'), allow_nan=False)
+            == json.dumps(request, sort_keys=True, separators=(',', ':'), allow_nan=False),
+        'exact original V5 acquired-no-child request bytes and object required')
+    helper.need(type(original_cli) is types.ModuleType and original_cli.__file__ == str(OWNER)
+        and Path(original_cli.__file__).resolve(strict=True) == OWNER
+        and request.get('schema') == 'owned-validation-request/v5'
+        and request.get('source_sha256', {}).get(str(OWNER)) == CURRENT_V5_ACQUIRED_CLI_SHA,
+        'current pinned canonical V5 acquired-no-child CLI required')
+    for name in ('classify_owned_validation_source_custody',
+            'wait_and_inspect_owned_validation_no_child_native_closed_v5', 'source_guard', 'snapshot'):
+        function = getattr(original_cli, name, None)
+        helper.need(type(function) is types.FunctionType and function.__globals__ is vars(original_cli)
+            and function.__code__.co_filename == str(OWNER) and function.__name__ == name,
+            'current original CLI acquired-no-child API origin differs')
+    waiter = original_cli.wait_and_inspect_owned_validation_no_child_native_closed_v5
+    code = waiter.__code__
+    helper.need(code.co_argcount == 3 and code.co_kwonlyargcount == 4
+        and code.co_varnames[:7] == ('process', 'terminal', 'request_raw',
+            'expected_request_sha256', 'owner_birth', 'expected_resource_ledger',
+            'original_wait_deadline_monotonic')
+        and code.co_flags & 12 == 0 and waiter.__defaults__ is None and waiter.__kwdefaults__ is None,
+        'current original CLI acquired-no-child waiter ABI differs')
+    helper.need(hashlib.sha256(original_cli.snapshot(OWNER, 4*1024**2)).hexdigest()
+        == CURRENT_V5_ACQUIRED_CLI_SHA, 'current original CLI source changed')
+    original_cli.source_guard(request)
+    no_grant = original_cli.classify_owned_validation_source_custody(terminal, request_raw,
+        expected_request_sha256=REQUEST_SHA, owner_pid=process.pid,
+        owner_birth=custody['owner_birth'], returncode=custody['returncode'],
+        expected_resource_ledger=str(LEDGER))
+    custody['current_V5_acquired_no_child_no_grant_observation'] = no_grant
+    if not (type(no_grant) is dict and set(no_grant) == {
+            'verdict', 'source_custody_closed', 'storage_release_authorized'}
+            and no_grant == {'verdict':'requires_original_native_cleanup',
+                'source_custody_closed':False, 'storage_release_authorized':False}):
+        return False
+    from ipfs_datasets_py.optimizers.logic_theorem_optimizer import resource_scheduler as native
+    native_path = Path(original_cli.ROOT) / 'ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py'
+    helper.need(type(native) is types.ModuleType and native.__file__ == str(native_path)
+        and str(native_path) in request['source_sha256'], 'canonical pinned Native deadline owner differs')
+    began = time.monotonic()
+    cleanup_end = min(original_wait_deadline_monotonic, began + 5)
+    previous = native.resource_operation_deadline()
+    if previous is not None:
+        helper.need(type(previous.native_deadline_monotonic) in (int, float)
+            and math.isfinite(previous.native_deadline_monotonic), 'existing Native cutoff differs')
+        cleanup_end = min(cleanup_end, previous.native_deadline_monotonic)
+    helper.need(began < cleanup_end, 'original acquired-no-child cleanup cutoff exhausted')
+    with native.resource_cleanup_deadline(native_deadline_monotonic=cleanup_end):
+        verdict = waiter(process, terminal, request_raw, expected_request_sha256=REQUEST_SHA,
+            owner_birth=custody['owner_birth'], expected_resource_ledger=str(LEDGER),
+            original_wait_deadline_monotonic=original_wait_deadline_monotonic)
+        custody['current_V5_acquired_no_child_api_observation'] = verdict
+        custody['acquired_no_child_cleanup_deadline_monotonic'] = cleanup_end
+        if time.monotonic() >= cleanup_end or time.monotonic() >= original_wait_deadline_monotonic:
+            return False
+        if not (type(verdict) is dict and set(verdict) == {
+                'verdict', 'source_custody_closed', 'storage_release_authorized'}
+                and verdict['verdict'] == 'proven_original_no_child_native_closed'
+                and verdict['source_custody_closed'] is True
+                and verdict['storage_release_authorized'] is False):
+            return False
+        original_cli.source_guard(request)
+        helper.need(hashlib.sha256(original_cli.snapshot(OWNER, 4*1024**2)).hexdigest()
+            == CURRENT_V5_ACQUIRED_CLI_SHA, 'original CLI source changed after acquired-no-child observation')
+        owner_gone = helper.identity_gone(process.pid, custody['owner_birth'])
+        helper.need(owner_gone, 'original acquired-no-child owner remains live')
+        if time.monotonic() >= cleanup_end or time.monotonic() >= original_wait_deadline_monotonic:
+            return False
+    helper.need(reservation.get('status') == row.get('status') == 'retained'
+        and type(row.get('storage_bytes')) is int and row['storage_bytes'] == request['storage_bytes']
+        and row.get('artifacts_durable_asserted') is False,
+        'original acquired-no-child retained storage is not released or durable')
+    if time.monotonic() >= cleanup_end or time.monotonic() >= original_wait_deadline_monotonic:
+        return False
+    custody.update(original_terminal=terminal, actual_a0b_terminal_cleanup_verified=False,
+        actual_original_acquired_no_child_verdict=verdict,
+        actual_original_acquired_no_child_custody_verified=True,
+        original_acquired_native_closed_verified=True, original_native_grant_absent_verified=False,
+        actual_observed_identity_count=0, all_observed_identities_gone=True,
+        owner_identity_gone=True, productive_child_created=False, child_reaped=False,
+        no_productive_child_cleanup_required=True, original_native_compute_closed=True,
+        original_source_exit_lifecycle_closed=True, storage_status='retained',
+        storage_artifacts_durable_asserted=False, storage_released_and_durable=False,
+        storage_release_authorized=False, retained_storage_bytes=row['storage_bytes'])
+    return True
+
+
+def current_v5_acquired_no_child_may_close(custody, request):
+    """This finite arm permits Source exit only; it never accepts software work."""
+    verdict = custody.get('actual_original_acquired_no_child_verdict')
+    return bool(type(verdict) is dict and set(verdict) == {
+        'verdict', 'source_custody_closed', 'storage_release_authorized'}
+        and verdict['verdict'] == 'proven_original_no_child_native_closed'
+        and verdict['source_custody_closed'] is True and verdict['storage_release_authorized'] is False
+        and custody.get('actual_original_acquired_no_child_custody_verified') is True
+        and custody.get('original_acquired_native_closed_verified') is True
+        and custody.get('original_native_grant_absent_verified') is False
+        and custody.get('original_native_compute_closed') is True
+        and custody.get('original_source_exit_lifecycle_closed') is True
+        and custody.get('owner_identity_gone') is True
+        and custody.get('productive_child_created') is False and custody.get('child_reaped') is False
+        and custody.get('no_productive_child_cleanup_required') is True
+        and type(custody.get('actual_observed_identity_count')) is int
+        and custody['actual_observed_identity_count'] == 0
+        and custody.get('all_observed_identities_gone') is True
+        and custody.get('storage_status') == 'retained'
+        and custody.get('storage_artifacts_durable_asserted') is False
+        and custody.get('storage_released_and_durable') is False
+        and custody.get('storage_release_authorized') is False
+        and type(custody.get('retained_storage_bytes')) is int
+        and custody['retained_storage_bytes'] == request['storage_bytes'] > 0)
+
+
+def read_standalone_git_provenance(io):
+    """Bind the two exact standalone snapshots to the existing Source READ receipt."""
+    path = P / 'standalone-git-provenance.json'
+    raw = io.read(path)
+    if len(raw) > 65536 or hashlib.sha256(raw).hexdigest() != STANDALONE_GIT_PROVENANCE_SHA256:
+        raise ValueError('selected standalone Git provenance changed')
+    record = json.loads(raw)
+    if (record.get('schema') != 'actual-clean-frozen-Git-index-READ-provenance/v1'
+            or record.get('Root_selected') is not True
+            or record.get('Source_READ_closed') is not True
+            or record.get('Source_WRITE_claimed') is not False):
+        raise ValueError('selected closed standalone Git READ provenance required')
+    roots = {str(R): 'D_index', str(A): 'A_index'}
+    if record['before'] != record['after'] or set(record['before']) != set(roots):
+        raise ValueError('paired standalone Git snapshots did not close unchanged')
+    if set(STANDALONE_PROJECT_EXPECTATIONS) != set(roots):
+        raise ValueError('exact standalone project expectations required')
+    exclude_pins = record['exact_exclude_pins']
+    without_duplicates = {row['path']: row for row in exclude_pins}
+    if len(exclude_pins) != 2 or set(without_duplicates) != {
+            str(Path(root) / '.git/info/exclude') for root in roots}:
+        raise ValueError('both exact local exclude pins required')
+    for root, index_key in roots.items():
+        snapshot = record['before'][root]
+        expected = STANDALONE_PROJECT_EXPECTATIONS[root]
+        if (snapshot['HEAD'] != expected['HEAD'] or snapshot['tree'] != expected['tree']
+                or snapshot.get('clean_worktree_and_index') is not True
+                or snapshot.get('status_sha256') != hashlib.sha256(b'').hexdigest()
+                or snapshot.get('cached_diff_returncode') != 0 or snapshot.get('working_diff_returncode') != 0
+                or record[index_key]['path'] != str(Path(root) / '.git/index')):
+            raise ValueError('selected standalone Git snapshot does not match the prepared project')
+    return record
+
+
+def verify_standalone_git(io, record, deadline):
+    """Recheck selected roots and index/exclude bytes under the existing Source contexts."""
+    def full9(value):
+        return {key: str(getattr(value, key)) for key in (
+            'st_dev', 'st_ino', 'st_mode', 'st_uid', 'st_gid', 'st_nlink', 'st_size', 'st_mtime_ns', 'st_ctime_ns')}
+
+    def git(root, *args):
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            raise ValueError('initial total420 expired during standalone Git guards')
+        env = dict(os.environ, GIT_OPTIONAL_LOCKS='0', GIT_NO_LAZY_FETCH='1', GIT_TERMINAL_PROMPT='0')
+        command = ['/usr/bin/git', '-c', 'core.preloadIndex=false', '-c', 'core.fscache=false',
+                   '-c', 'index.threads=1', '-c', 'core.packedGitWindowSize=1m',
+                   '-c', 'core.packedGitLimit=16m', '-C', root, *args]
+        result = subprocess.run(command, env=env, capture_output=True, check=True,
+                                timeout=min(remaining, 10))
+        if len(result.stdout) + len(result.stderr) > 262144:
+            raise ValueError('standalone Git guard output exceeds bound')
+        return result.stdout
+
+    def check_pin(pin):
+        path = Path(pin['path'])
+        begin = path.lstat()
+        if (not stat.S_ISREG(begin.st_mode) or begin.st_nlink != 1
+                or full9(begin) != pin['full9'] or begin.st_size != pin['bytes']):
+            raise ValueError(f'standalone Git metadata changed: {path}')
+        raw = io.read(path)
+        if (time.monotonic() >= deadline or len(raw) != pin['bytes']
+                or hashlib.sha256(raw).hexdigest() != pin['sha256']
+                or full9(path.lstat()) != pin['full9']):
+            raise ValueError(f'standalone Git pin changed or guard expired: {path}')
+
+    excludes = {row['path']: row for row in record['exact_exclude_pins']}
+    for root, index_key in ((str(R), 'D_index'), (str(A), 'A_index')):
+        expected = STANDALONE_PROJECT_EXPECTATIONS[root]
+        git_dir = Path(root) / '.git'
+        selector_pins = expected['Git_selector_metadata']
+        if set(selector_pins) != {'HEAD', 'ref', 'config'}:
+            raise ValueError('exact standalone Git selector metadata required')
+        for pin in selector_pins.values():
+            path = Path(pin['path'])
+            if not path.is_relative_to(git_dir) or full9(path.lstat()) != pin['full9']:
+                raise ValueError(f'standalone Git selector metadata changed: {path}')
+        actual_index = git(root, 'rev-parse', '--path-format=absolute', '--git-path', 'index').decode().strip()
+        actual_exclude = git(root, 'rev-parse', '--path-format=absolute', '--git-path',
+                             'info/exclude').decode().strip()
+        if actual_index != record[index_key]['path'] or actual_exclude != str(git_dir / 'info/exclude'):
+            raise ValueError(f'standalone Git index or exclude path changed: {root}')
+        branch = git(root, 'symbolic-ref', 'HEAD').decode().strip()
+        if (not stat.S_ISDIR(git_dir.lstat().st_mode) or os.path.lexists(git_dir / 'commondir')
+                or git(root, 'rev-parse', '--absolute-git-dir').decode().strip() != str(git_dir)
+                or git(root, 'rev-parse', '--path-format=absolute', '--git-common-dir').decode().strip()
+                    != str(git_dir)
+                or branch != expected['branch_ref']
+                or git(root, 'rev-parse', branch).decode().strip() != expected['HEAD']
+                or git(root, 'rev-parse', 'HEAD').decode().strip() != expected['HEAD']
+                or git(root, 'rev-parse', 'HEAD^{tree}').decode().strip() != expected['tree']
+                or hashlib.sha256(git(root, 'for-each-ref', '--format=%(refname) %(objectname)')).hexdigest()
+                    != expected['refs_sha256']
+                or git(root, 'status', '--porcelain=v1', '-z', '--untracked-files=normal') != b''):
+            raise ValueError(f'standalone Git root, branch, refs, tree or cleanliness changed: {root}')
+        git(root, 'diff', '--cached', '--quiet', 'HEAD', '--')
+        git(root, 'diff', '--quiet', '--')
+        index = record[index_key]
+        exclude = excludes[str(git_dir / 'info/exclude')]
+        check_pin(index)
+        check_pin(exclude)
+        if any(full9(Path(pin['path']).lstat()) != pin['full9'] for pin in selector_pins.values()):
+            raise ValueError(f'standalone Git selector changed during verification: {root}')
+    if time.monotonic() >= deadline:
+        raise ValueError('initial total420 expired after standalone Git guards')
+
+
+def main():
+    if not ROOT_ORIGINAL_EXECUTION_SELECTED:
+        raise ValueError('INERT: Root must separately select a fresh generated Original packet')
+    overall_started = time.monotonic()  # Authority starts before helpers/preflight/Source.
+    overall_deadline = overall_started + 420.0
+    admission_deadline = overall_started + 60.0
+    owner_wait_deadline = overall_deadline
+    if not PREPARATION_COMPLETE:
+        raise ValueError('INERT: reviewed scheduling profile needs a distinct fresh P3 request')
+    if not (type(REQUEST_SHA) is str and len(REQUEST_SHA) == 64
+            and type(STANDALONE_GIT_PROVENANCE_SHA256) is str
+            and len(STANDALONE_GIT_PROVENANCE_SHA256) == 64):
+        raise ValueError('INERT: fresh request and both standalone Git snapshots are required')
+    helper = load_private_helper()
+    # The cached original42 code has its honest private origin. Both repository
+    # roots are supplied explicitly; no canonical __file__ is impersonated.
+    lease = helper.load_original(BASE / 'original42-frozen.py', LEASE_SHA,
+                                 '_source_held_original42')
+    raw = REQUEST.read_bytes()
+    helper.need(hashlib.sha256(raw).hexdigest() == REQUEST_SHA, 'fresh exact request differs')
+    request = json.loads(raw)
+    helper.need(request['schema'] == 'owned-validation-request/v5'
+        and request['ordinary_scratch_profile'] == {'schema': 'owned-validation-ordinary-scratch-live/v1'}
+        and request['storage_bytes'] == 16777216 and request['timeout_seconds'] == 300
+        and request['cpu_slots'] == 1 and request['memory_mb'] == 1536
+        and request['child_process_slots'] == 4, 'chosen explicit V5 ordinary-scratch envelope changed')
+    environment = dict(os.environ)
+    environment.update(PYTEST_DISABLE_PLUGIN_AUTOLOAD='1', PYTHONDONTWRITEBYTECODE='1',
+        PYTEST_ADDOPTS='', PYTEST_PLUGINS='',
+        IPFS_DATASETS_PY_MINIMAL_IMPORTS='1', IPFS_AUTO_INSTALL='false',
+        IPFS_DATASETS_AUTO_INSTALL='0', HF_HUB_OFFLINE='1', TRANSFORMERS_OFFLINE='1',
+        CUDA_VISIBLE_DEVICES='', OMP_NUM_THREADS='1', OPENBLAS_NUM_THREADS='1',
+        MKL_NUM_THREADS='1', IPFS_DATASETS_RUN_NATIVE_LEAN='0', IPFS_ACCEL_SKIP_CORE='1',
+        PYTHONPATH=str(A) + os.pathsep + str(R), PY_COLORS='0', NO_COLOR='1', FORCE_COLOR='',
+        IPFS_DATASETS_PY_ENABLE_MCP_IMPORTS='0', IPFS_DATASETS_PY_ENABLE_FASTAPI_IMPORTS='0',
+        IPFS_DATASETS_PY_ENABLE_FINANCE_DASHBOARD_IMPORTS='0', IPFS_DATASETS_PY_ENABLE_LLM_IMPORTS='0')
+    custody = dict(errors=[], owner_pid=None, owner_birth=None, returncode=None,
+        genuine_wait_completed=False, actual_a0b_terminal_cleanup_verified=False,
+        original_native_compute_closed=False, original_source_exit_lifecycle_closed=False,
+        child_reaped=False, original_completed_result_verified=False)
+    parent = dict(schema='source-held-owned-validation-v5-observation/v1',
+        request_schema=request['schema'], ordinary_scratch_profile=request['ordinary_scratch_profile'],
+        current_sampled_recovery_profile_qualified=False,
+        request_sha256=REQUEST_SHA, owner_pid=None, owner_returncode=None,
+        source_closed=False, source_drift=None, original_owner_custody=custody,
+        automatic_retry_authorized=False, recovery_or_storage_release_authorized=False,
+        source_admission_attempted=False, source_admission_completed=False, source_admission_failed=False,
+        original_cli_spawn_attempted=False, original_cli_started=False,
+        software_admission_profile='original-owning-shared-Source60-total420/v1',
+        overall_started_monotonic=overall_started, overall_deadline_monotonic=overall_deadline,
+        shared_Source_admission_deadline_monotonic=admission_deadline,
+        positive_software_acceptance_eligible_before_final_journal=False)
+    reads = None; io = None; process = None; popen_attempted = False
+    stdout = stderr = None; may_close = False
+    try:
+        # Unlike the old wait helper's standalone main(), these SAME read
+        # contexts stay held across Popen, genuine wait, classification and pins.
+        parent['source_admission_attempted'] = True
+        reads, receipts = helper.dual_reads(
+            lease, admission_deadline=admission_deadline, roots=(LOCK_R, LOCK_A))
+        parent['source_admission_completed'] = True
+        parent['original_source_READs'] = receipts
+        helper.need([row['canonical_root'] for row in receipts] == [str(LOCK_R), str(LOCK_A)],
+            'original primary Source READ roots differ')
+        helper.need(lease.canonical_source_root(R) == LOCK_R and lease.canonical_source_root(A) == LOCK_A,
+            'physical worktree/common canonical Source mapping changed')
+        parent['physical_source_to_canonical_lock_roots'] = [
+            {'physical_root':str(R),'canonical_root':str(LOCK_R)},
+            {'physical_root':str(A),'canonical_root':str(LOCK_A)}]
+        io = helper.load_original(IO, IO_SHA, '_source_held_original733')
+        classifier = helper.load_original(CLASSIFIER, CLASSIFIER_SHA,
+                                           '_source_held_original_a0b')
+        helper.authenticate_sources(io, request)
+        git_provenance = read_standalone_git_provenance(io)
+        verify_standalone_git(io, git_provenance, overall_deadline)
+        parent['standalone_Git_verified_before_launch'] = True
+        helper.need(REQUEST.read_bytes() == raw, 'request changed before original Popen')
+        # Bootstrap real canonical packages within the ORIGINAL Source/preflight
+        # window. The unchanged CLI requires these package origins before its
+        # no-child SDK classifier; a sys.path entry alone cannot establish them.
+        helper.need(time.monotonic() < overall_deadline,
+            'initial total420 exhausted before canonical package bootstrap')
+        sys.path.insert(0, str(R))
+        os.environ['IPFS_DATASETS_PY_MINIMAL_IMPORTS'] = '1'
+        sys.dont_write_bytecode = True  # Retain -B behavior for normal imports.
+        bootstrap = []
+        for package_name in ('ipfs_datasets_py', 'ipfs_datasets_py.optimizers',
+                'ipfs_datasets_py.optimizers.logic_theorem_optimizer'):
+            package_directory = R / package_name.replace('.', '/')
+            package_init = package_directory / '__init__.py'
+            package_pin = request['source_sha256'].get(str(package_init))
+            helper.need(type(package_pin) is str and len(package_pin) == 64
+                and hashlib.sha256(io.read(package_init)).hexdigest() == package_pin,
+                'canonical package bootstrap source pin differs')
+            package = importlib.import_module(package_name)
+            specification = getattr(package, '__spec__', None)
+            helper.need(type(package) is types.ModuleType
+                and sys.modules.get(package_name) is package
+                and package.__file__ == str(package_init)
+                and Path(package.__file__).resolve(strict=True) == package_init
+                and specification is not None and specification.origin == str(package_init)
+                and list(getattr(package, '__path__', [])) == [str(package_directory)]
+                and hashlib.sha256(io.read(package_init)).hexdigest() == package_pin,
+                'real canonical package bootstrap origin or source differs')
+            bootstrap.append(dict(package=package_name, file=str(package_init),
+                spec_origin=specification.origin, package_path=list(package.__path__),
+                source_sha256=package_pin))
+        helper.need(time.monotonic() < overall_deadline,
+            'initial total420 exhausted after canonical package bootstrap')
+        parent['canonical_package_bootstrap'] = dict(
+            schema='canonical-package-bootstrap-observation/v1', packages=bootstrap,
+            minimal_imports=os.environ['IPFS_DATASETS_PY_MINIMAL_IMPORTS'],
+            bytecode_disabled=sys.dont_write_bytecode,
+            before_original_owner_launch=True, before_original_cli_load=True,
+            initial_deadline_monotonic=overall_deadline,
+            finished_monotonic=time.monotonic())
+        attempt = Path(request['attempt_directory'])
+        helper.need(not os.path.lexists(attempt), 'fresh original attempt already exists')
+        if not attempt.parent.exists(): attempt.parent.mkdir(mode=0o700)
+        attempt.mkdir(mode=0o700)
+        io.fsync_directory(attempt.parent)
+        stdout = (P / 'owner.stdout').open('xb')
+        stderr = (P / 'owner.stderr').open('xb')
+        owner_argv = [request['argv'][0], '-B', str(OWNER), '--request', str(REQUEST),
+            '--expected-request-sha256', REQUEST_SHA, '--resource-ledger', str(LEDGER)]
+        parent['actual_original_owner_argv'] = owner_argv
+        helper.need(time.monotonic() + request['timeout_seconds'] + 60 <= overall_deadline,
+            'full nominal300 plus60 drain/proof reserve no longer fits before initial420')
+        helper.need(time.monotonic() < admission_deadline,
+            'shared Source/preflight admission window expired before actual Popen')
+        popen_attempted = True
+        parent['original_cli_spawn_attempted'] = True
+        parent['original_cli_started'] = None  # A Popen exception can leave actual start unknown.
+        process = subprocess.Popen(owner_argv, cwd=R, stdout=stdout, stderr=stderr,
+                                   env=environment, start_new_session=True)
+        parent['original_cli_started'] = True
+        custody['owner_pid'] = parent['owner_pid'] = process.pid
+        try:
+            # Keep the observed decimal string joined to the actual original
+            # producer witness and ledger owner_birth; do not infer a birth.
+            custody['owner_birth'] = Path('/proc', str(process.pid), 'stat').read_text().rsplit(
+                ') ', 1)[1].split()[19]
+        except BaseException as error:
+            custody['errors'].append(helper.error_row('actual_owner_birth', error))
+        io.save(P / 'started.json', dict(pid=process.pid, birth=custody['owner_birth'],
+                                       request_sha256=REQUEST_SHA, time=time.time()))
+        helper.wait_original(process, custody, owner_wait_deadline)
+        helper.close_log(stdout, custody, 'stdout'); stdout = None
+        helper.close_log(stderr, custody, 'stderr'); stderr = None
+        parent['owner_returncode'] = custody['returncode']
+        if custody['genuine_wait_completed']:
+            try:
+                helper.need(time.monotonic() < overall_deadline,
+                    'initial total420 acceptance authority expired before native/source proof')
+                helper.need(custody['owner_birth'] is not None, 'actual birth required')
+                # The real packages were bootstrapped before owner launch.
+                # This original CLI retains its honest canonical source origin.
+                original_cli = helper.load_original(OWNER,
+                    request['source_sha256'][str(OWNER)], '_source_held_current_original_cli')
+                no_grant_closed = classify_current_v5_no_grant_after_wait(helper, classifier,
+                    process, request, raw, P / 'owner.stdout', custody, original_cli)
+                acquired_no_child_closed = False
+                if not no_grant_closed:
+                    acquired_no_child_closed = classify_current_v5_acquired_no_child_after_wait(
+                        helper, classifier, process, request, raw, P / 'owner.stdout', custody, original_cli,
+                        original_wait_deadline_monotonic=overall_deadline)
+                if not no_grant_closed and not acquired_no_child_closed:
+                    # Preserve the original productive path and every error it reports.
+                    helper.classify_after_wait(io, classifier, process, request, REQUEST_SHA,
+                        P / 'owner.stdout', custody, original_cli=original_cli, request_raw=raw)
+            except BaseException as error:
+                custody['errors'].append(helper.error_row('actual_terminal_classification', error))
+        helper.need(time.monotonic() < overall_deadline,
+            'initial total420 acceptance authority expired before final source guards')
+        drift = []
+        for path, wanted in request['source_sha256'].items():
+            helper.need(time.monotonic() < overall_deadline, 'initial total420 expired during source guards')
+            if hashlib.sha256(io.read(Path(path))).hexdigest() != wanted: drift.append(path)
+        helper.need(REQUEST.read_bytes() == raw, 'request changed after original wait')
+        helper.need(read_standalone_git_provenance(io) == git_provenance,
+            'standalone Git provenance changed after original wait')
+        verify_standalone_git(io, git_provenance, overall_deadline)
+        parent['standalone_Git_verified_after_wait'] = True
+        parent['source_drift'] = drift
+        productive_closed = (custody.get('actual_a0b_terminal_cleanup_verified') is True
+            and custody.get('all_observed_identities_gone') is True
+            and custody.get('owner_identity_gone') is True and custody.get('child_reaped') is True
+            and custody.get('original_native_compute_closed') is True
+            and custody.get('original_source_exit_lifecycle_closed') is True)
+        no_child_closed = (custody.get('actual_original_no_child_custody_verified') is True
+            and custody.get('original_native_grant_absent_verified') is True
+            and custody.get('owner_identity_gone') is True
+            and custody.get('original_source_exit_lifecycle_closed') is True)
+        acquired_no_child_closed = current_v5_acquired_no_child_may_close(custody, request)
+        may_close = bool(custody['genuine_wait_completed'] and not drift
+                         and (productive_closed or no_child_closed or acquired_no_child_closed))
+        parent['native_and_source_exit_verified_before_parent_Source_close'] = may_close
+        if may_close:
+            helper.need(time.monotonic() < overall_deadline,
+                'initial total420 acceptance authority expired before Source exit')
+    except BaseException as error:
+        custody['errors'].append(helper.error_row('source_held_parent', error))
+        parent['source_admission_failed'] = bool(not popen_attempted
+            and parent['source_admission_attempted'] and not parent['source_admission_completed'])
+        # An unattempted Popen is a local refusal, not a native lifecycle proof.
+        may_close = not popen_attempted
+    finally:
+        if process is not None and not custody['genuine_wait_completed']:
+            # A journaling exception after actual Popen still owes the genuine
+            # wait; never infer child/native termination from this exception.
+            helper.wait_original(process, custody, owner_wait_deadline)
+            parent['owner_returncode'] = custody['returncode']
+        helper.close_log(stdout, custody, 'stdout')
+        helper.close_log(stderr, custody, 'stderr')
+    if not may_close:
+        parent['state'] = 'UNKNOWN_ORIGINAL_CUSTODY_SOURCE_READS_RETAINED_NO_REPLAY'
+        if io is not None: io.save(P / 'unknown-custody.json', parent)
+        # This is the existing foreground parent retaining its original READs,
+        # not another controller or grant. Root must resolve original custody.
+        print(json.dumps(dict(state=parent['state'], request_sha256=REQUEST_SHA)), flush=True)
+        while True: time.sleep(10)
+    try:
+        if reads is not None: reads.close()
+        parent['source_closed'] = True
+        parent['source_exit_finished_at_monotonic'] = time.monotonic()
+        parent['Source_exit_before_initial420'] = parent['source_exit_finished_at_monotonic'] < overall_deadline
+    except BaseException as error:
+        custody['errors'].append(helper.error_row('actual_Source_close', error))
+    parent['state'] = ('ORIGINAL_SOURCE_CLOSE_UNVERIFIED' if not parent['source_closed'] else
+        'SOURCE_CLOSED_AFTER_TOTAL420_NO_POSITIVE_ACCEPTANCE' if not parent['Source_exit_before_initial420'] else
+        'PRELAUNCH_SOURCE_ADMISSION_FAILED' if parent['source_admission_failed'] else
+        'PRELAUNCH_REFUSED_SOURCE_CLOSED_NO_ORIGINAL_OWNER' if not popen_attempted else
+        'ORIGINAL_OWNER_WAITED_SOURCE_CLOSED_STORAGE_SEPARATE')
+    parent['positive_software_acceptance_eligible_before_final_journal'] = bool(
+        parent['source_closed'] and parent.get('Source_exit_before_initial420') is True
+        and custody['genuine_wait_completed'] and custody['returncode'] == 0
+        and custody.get('original_completed_result_verified') is True
+        and custody.get('storage_released_and_durable') is True and not custody['errors']
+        and time.monotonic() < overall_deadline)
+    if io is not None: io.save(P / 'parent-closeout.json', parent)
+    else:
+        with (P / 'parent-closeout.json').open('x') as stream:
+            json.dump(parent, stream, sort_keys=True); stream.write('\n'); stream.flush(); os.fsync(stream.fileno())
+    acceptance_before_terminal = bool(
+        parent['positive_software_acceptance_eligible_before_final_journal']
+        and time.monotonic() < overall_deadline)
+    print(json.dumps(dict(parent_closeout=str(P / 'parent-closeout.json'),
+        owner_returncode=parent['owner_returncode'], source_closed=parent['source_closed'],
+        positive_software_acceptance_before_final_terminal=acceptance_before_terminal,
+        overall_deadline_monotonic=overall_deadline)), flush=True)
+    if time.monotonic() >= overall_deadline:
+        return 2  # Even a late journal/terminal write cannot turn into passing acceptance.
+    if parent['source_closed'] and not custody['errors'] and type(custody['returncode']) is int:
+        return 0 if custody['returncode'] == 0 and acceptance_before_terminal else (custody['returncode'] or 2)
+    return 2
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

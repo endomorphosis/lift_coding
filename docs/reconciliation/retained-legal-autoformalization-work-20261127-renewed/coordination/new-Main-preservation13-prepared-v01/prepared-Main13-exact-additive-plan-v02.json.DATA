@@ -1,0 +1,742 @@
+{
+  "Root_Git_metadata": {
+    "HEAD_after": "678996d3c02dbd43b77fdf6123a7368a860a6060",
+    "HEAD_before": "678996d3c02dbd43b77fdf6123a7368a860a6060",
+    "all13_HEAD_target_paths_absent": true,
+    "all13_working_target_paths_absent": true,
+    "no_lazy_fetch": "1",
+    "optional_locks": "0",
+    "tree_after": "641fca68a02991d294a2b8cad7424d1a332656ba",
+    "tree_before": "641fca68a02991d294a2b8cad7424d1a332656ba"
+  },
+  "all_owned_FDs_closed": true,
+  "authenticated_descriptor": {
+    "bytes": 9059,
+    "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/Main-private-controls-publication-preservation-proposal-v01/descriptor.json",
+    "sha256": "27f8ce1f0472e5dce612f5290bcfc7bceb492092df38294815a1f3f7a368c9ea"
+  },
+  "authenticated_handoff": {
+    "bytes": 2724,
+    "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/new-publication-request-consolidated-Main-handoff-v01.json",
+    "sha256": "ef96c35a28708d1cfca26d1a9334bde355064ea403600b77d72b7ad62327896a"
+  },
+  "created_ns": "1795476670806227075",
+  "files": [
+    {
+      "bytes": 22230,
+      "git_blob_sha1": "fd2ee11004438e7e81098632b999c8607f75e4bf",
+      "historical_status": "HISTORICAL_TEST_CONTROL",
+      "intended_git_mode": "100644",
+      "intended_target_path": "docs/reconciliation/main-private-controls-20261123/tests/test_parent_preflight_original_finalizer_three_controls_v01.py.DATA",
+      "json_schema_metadata": null,
+      "prepared_ref": {
+        "FS_mode_octal": "0o400",
+        "bytes": 22230,
+        "full9": {
+          "st_ctime_ns": "1795476670741454326",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006649",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476670741454326",
+          "st_nlink": "1",
+          "st_size": "22230",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "fd2ee11004438e7e81098632b999c8607f75e4bf",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/new-Main-preservation13-prepared-v01/files/docs/reconciliation/main-private-controls-20261123/tests/test_parent_preflight_original_finalizer_three_controls_v01.py.DATA",
+        "sha256": "45115ee8c70e14e6c06980963a24a037b34c423ede78618aef0116d97a8ff95c"
+      },
+      "sha256": "45115ee8c70e14e6c06980963a24a037b34c423ede78618aef0116d97a8ff95c",
+      "source_FS_mode_octal": "0o400",
+      "source_full9": {
+        "st_ctime_ns": "1795457234832450044",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "50877686",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795457234832450044",
+        "st_nlink": "1",
+        "st_size": "22230",
+        "st_uid": "1000"
+      },
+      "source_mode_integer": 256,
+      "source_path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/test_parent_preflight_original_finalizer_three_controls_v01.py.DATA"
+    },
+    {
+      "bytes": 10131,
+      "git_blob_sha1": "93a9521eb33788b580c77f40503e9f6569e82daf",
+      "historical_status": "HISTORICAL_TEST_CONTROL",
+      "intended_git_mode": "100644",
+      "intended_target_path": "docs/reconciliation/main-private-controls-20261123/tests/test_parent_success_cleanup_failure_one_control_v01.py.DATA",
+      "json_schema_metadata": null,
+      "prepared_ref": {
+        "FS_mode_octal": "0o600",
+        "bytes": 10131,
+        "full9": {
+          "st_ctime_ns": "1795476670753454423",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006650",
+          "st_mode": "33152",
+          "st_mtime_ns": "1795476670753454423",
+          "st_nlink": "1",
+          "st_size": "10131",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "93a9521eb33788b580c77f40503e9f6569e82daf",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/new-Main-preservation13-prepared-v01/files/docs/reconciliation/main-private-controls-20261123/tests/test_parent_success_cleanup_failure_one_control_v01.py.DATA",
+        "sha256": "713203472d9422438dcbad4924ea6682ee6f52a5076307d705138a7be0c9a164"
+      },
+      "sha256": "713203472d9422438dcbad4924ea6682ee6f52a5076307d705138a7be0c9a164",
+      "source_FS_mode_octal": "0o600",
+      "source_full9": {
+        "st_ctime_ns": "1795457716258060521",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "50877690",
+        "st_mode": "33152",
+        "st_mtime_ns": "1795457716258060521",
+        "st_nlink": "1",
+        "st_size": "10131",
+        "st_uid": "1000"
+      },
+      "source_mode_integer": 384,
+      "source_path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/test_parent_success_cleanup_failure_one_control_v01.py.DATA"
+    },
+    {
+      "bytes": 47298,
+      "git_blob_sha1": "1aec38c1d7a00f51ddc65f6b33930f6997899c06",
+      "historical_status": "UNADOPTED_INERT_HISTORICAL_VERSION",
+      "intended_git_mode": "100644",
+      "intended_target_path": "docs/reconciliation/main-private-controls-20261123/controls/existing-R2-published-D27-operator-INERT.v01.py.DATA",
+      "json_schema_metadata": null,
+      "prepared_ref": {
+        "FS_mode_octal": "0o400",
+        "bytes": 47298,
+        "full9": {
+          "st_ctime_ns": "1795476670756454447",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006652",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476670756454447",
+          "st_nlink": "1",
+          "st_size": "47298",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "1aec38c1d7a00f51ddc65f6b33930f6997899c06",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/new-Main-preservation13-prepared-v01/files/docs/reconciliation/main-private-controls-20261123/controls/existing-R2-published-D27-operator-INERT.v01.py.DATA",
+        "sha256": "2936fa4786a336c5f741c71ee5151f08e75692774f095c8325d79a0a3512dd73"
+      },
+      "sha256": "2936fa4786a336c5f741c71ee5151f08e75692774f095c8325d79a0a3512dd73",
+      "source_FS_mode_octal": "0o400",
+      "source_full9": {
+        "st_ctime_ns": "1795432073660916619",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "50877661",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795432073660916619",
+        "st_nlink": "1",
+        "st_size": "47298",
+        "st_uid": "1000"
+      },
+      "source_mode_integer": 256,
+      "source_path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/existing-R2-published-D27-operator-INERT.v01.py.DATA"
+    },
+    {
+      "bytes": 3003,
+      "git_blob_sha1": "7f96c7da7403e564aca2c43492daece4a76ba3f2",
+      "historical_status": "UNADOPTED_INERT_HISTORICAL_VERSION",
+      "intended_git_mode": "100644",
+      "intended_target_path": "docs/reconciliation/main-private-controls-20261123/controls/existing-R2-published-D27-request-INERT.v01.py.DATA",
+      "json_schema_metadata": null,
+      "prepared_ref": {
+        "FS_mode_octal": "0o400",
+        "bytes": 3003,
+        "full9": {
+          "st_ctime_ns": "1795476670760454480",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006653",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476670760454480",
+          "st_nlink": "1",
+          "st_size": "3003",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "7f96c7da7403e564aca2c43492daece4a76ba3f2",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/new-Main-preservation13-prepared-v01/files/docs/reconciliation/main-private-controls-20261123/controls/existing-R2-published-D27-request-INERT.v01.py.DATA",
+        "sha256": "24473ccf82802e37270ba505fc473dcc95d4f2b54ce195f99bf2a4d9f988a78e"
+      },
+      "sha256": "24473ccf82802e37270ba505fc473dcc95d4f2b54ce195f99bf2a4d9f988a78e",
+      "source_FS_mode_octal": "0o400",
+      "source_full9": {
+        "st_ctime_ns": "1795432073356913806",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "50877660",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795432073356913806",
+        "st_nlink": "1",
+        "st_size": "3003",
+        "st_uid": "1000"
+      },
+      "source_mode_integer": 256,
+      "source_path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/existing-R2-published-D27-request-INERT.v01.py.DATA"
+    },
+    {
+      "bytes": 33546,
+      "git_blob_sha1": "7165d975ebc327e7a953d1d19336cc1cf90e2293",
+      "historical_status": "UNADOPTED_INERT_HISTORICAL_VERSION",
+      "intended_git_mode": "100644",
+      "intended_target_path": "docs/reconciliation/main-private-controls-20261123/controls/bootstrap-published-D-phase2-bridge27-INERT.v03.py.DATA",
+      "json_schema_metadata": null,
+      "prepared_ref": {
+        "FS_mode_octal": "0o400",
+        "bytes": 33546,
+        "full9": {
+          "st_ctime_ns": "1795476670763454504",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006654",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476670763454504",
+          "st_nlink": "1",
+          "st_size": "33546",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "7165d975ebc327e7a953d1d19336cc1cf90e2293",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/new-Main-preservation13-prepared-v01/files/docs/reconciliation/main-private-controls-20261123/controls/bootstrap-published-D-phase2-bridge27-INERT.v03.py.DATA",
+        "sha256": "2f5fb934f54166a5dbcc6c0fbf5dd35073b190df1c846e28c5b86366fa4e8179"
+      },
+      "sha256": "2f5fb934f54166a5dbcc6c0fbf5dd35073b190df1c846e28c5b86366fa4e8179",
+      "source_FS_mode_octal": "0o400",
+      "source_full9": {
+        "st_ctime_ns": "1795432052700722654",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "50877658",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795432052700722654",
+        "st_nlink": "1",
+        "st_size": "33546",
+        "st_uid": "1000"
+      },
+      "source_mode_integer": 256,
+      "source_path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/bootstrap-published-D-phase2-bridge27-INERT.v03.py.DATA"
+    },
+    {
+      "bytes": 10956,
+      "git_blob_sha1": "5d47342f5da2da13ba6be0cbee19dfa20ba0a95e",
+      "historical_status": "HISTORICAL_NULL_BINDING_METADATA",
+      "intended_git_mode": "100644",
+      "intended_target_path": "docs/reconciliation/main-private-controls-20261123/records/sealed-existing-R2-published-D27-INERT-tuple-v02.json",
+      "json_schema_metadata": {
+        "schema": "Main-existing-R2-published-D-phase2-bridge27-INERT-controls/v1",
+        "top_level_keys": [
+          "schema",
+          "status",
+          "refs",
+          "diffs",
+          "required_final_bindings_all_NULL",
+          "Root_runtime_authority",
+          "selected_roster",
+          "limits",
+          "provenance",
+          "fixture_effects_and_actual_collection",
+          "ordinary_execution_requires_actual_Root_effect_decision",
+          "Source_SDK_Git_tests_model_or_service_actions",
+          "historical_inputs_and_earlier_failures_preserved",
+          "previous_sealed_v01",
+          "Root_existing_controls_locator",
+          "bootstrap_inherited_AST_proof",
+          "bootstrap_final_derivative",
+          "static_private_input_ledger",
+          "static_private_input_total_upper_bytes",
+          "static_private_input_cap_bytes",
+          "output_FD_readbacks_are_output_verification_not_new_static_inputs",
+          "bootstrap_required_NULL_literals",
+          "actual_invocation_contract",
+          "actual_results_and_qualification"
+        ]
+      },
+      "prepared_ref": {
+        "FS_mode_octal": "0o400",
+        "bytes": 10956,
+        "full9": {
+          "st_ctime_ns": "1795476670766454529",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006656",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476670766454529",
+          "st_nlink": "1",
+          "st_size": "10956",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "5d47342f5da2da13ba6be0cbee19dfa20ba0a95e",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/new-Main-preservation13-prepared-v01/files/docs/reconciliation/main-private-controls-20261123/records/sealed-existing-R2-published-D27-INERT-tuple-v02.json",
+        "sha256": "1d71aa16a8f6e43d7289163dbeebe192c469f13ba07a95ecca66524f89434e0c"
+      },
+      "sha256": "1d71aa16a8f6e43d7289163dbeebe192c469f13ba07a95ecca66524f89434e0c",
+      "source_FS_mode_octal": "0o400",
+      "source_full9": {
+        "st_ctime_ns": "1795432126359430172",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "50877668",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795432126359430172",
+        "st_nlink": "1",
+        "st_size": "10956",
+        "st_uid": "1000"
+      },
+      "source_mode_integer": 256,
+      "source_path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/sealed-existing-R2-published-D27-INERT-tuple-v02.json"
+    },
+    {
+      "bytes": 11552,
+      "git_blob_sha1": "a2ac75222a492f2e41ebaca64de7d36283be4489",
+      "historical_status": "HISTORICAL_REUSE_METADATA_NOT_ENROLLED",
+      "intended_git_mode": "100644",
+      "intended_target_path": "docs/reconciliation/main-private-controls-20261123/records/sealed-retained-Native3-direct-control-reuse-tuple-v01.json",
+      "json_schema_metadata": {
+        "schema": "Main-retained-Native3-direct-control-reuse-tuple/v1",
+        "top_level_keys": [
+          "schema",
+          "status",
+          "refs",
+          "historical_reuse_architecture",
+          "historical_profile_only",
+          "exact_call",
+          "historical_source_requirements",
+          "exact_class_identity_requirements",
+          "Native_outcome_acceptance",
+          "coverage_limits",
+          "fresh_later_bindings_required",
+          "preservation",
+          "new_Source_Git_SDK_Native_enrollment_or_execution",
+          "private_inputs_previous_bytes",
+          "private_inputs_this_step",
+          "cumulative_private_input_bytes",
+          "private_input_cap_bytes",
+          "metadata_intermediate",
+          "exact_literal_rebinding_seams",
+          "evidence_handler",
+          "additional_existing_enrollment_artifact_indexed",
+          "direct_operator_AST_map_reference"
+        ]
+      },
+      "prepared_ref": {
+        "FS_mode_octal": "0o400",
+        "bytes": 11552,
+        "full9": {
+          "st_ctime_ns": "1795476670769454553",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006657",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476670769454553",
+          "st_nlink": "1",
+          "st_size": "11552",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "a2ac75222a492f2e41ebaca64de7d36283be4489",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/new-Main-preservation13-prepared-v01/files/docs/reconciliation/main-private-controls-20261123/records/sealed-retained-Native3-direct-control-reuse-tuple-v01.json",
+        "sha256": "6170026d3db0e6cf70405032e805b1bd807150568a3174bd3bb8ab9ac2f899c6"
+      },
+      "sha256": "6170026d3db0e6cf70405032e805b1bd807150568a3174bd3bb8ab9ac2f899c6",
+      "source_FS_mode_octal": "0o400",
+      "source_full9": {
+        "st_ctime_ns": "1795441805239265940",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "50877677",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795441805239265940",
+        "st_nlink": "1",
+        "st_size": "11552",
+        "st_uid": "1000"
+      },
+      "source_mode_integer": 256,
+      "source_path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/sealed-retained-Native3-direct-control-reuse-tuple-v01.json"
+    },
+    {
+      "bytes": 5023,
+      "git_blob_sha1": "5c04a444b080e0cdfcf1997097168524883ed8fa",
+      "historical_status": "HISTORICAL_RED3_DESCRIPTOR",
+      "intended_git_mode": "100644",
+      "intended_target_path": "docs/reconciliation/main-private-controls-20261123/records/sealed-test-only-parent-preflight-original-finalizer-three-controls-v01.json",
+      "json_schema_metadata": {
+        "schema": "Main-test-only-parent-preflight-original-finalizer-three-controls/v1",
+        "top_level_keys": [
+          "schema",
+          "status",
+          "refs",
+          "parent_operator",
+          "case_population",
+          "actual_results",
+          "reproduced_gap",
+          "Reader_owned_next_action",
+          "isolation",
+          "counts_not_pooled",
+          "private_input_ledger_upper",
+          "private_input_total_upper_bytes",
+          "private_input_ceiling_bytes",
+          "old_charges_failures_and_operator_versions_preserved",
+          "parallel_static_review"
+        ]
+      },
+      "prepared_ref": {
+        "FS_mode_octal": "0o400",
+        "bytes": 5023,
+        "full9": {
+          "st_ctime_ns": "1795476670772454577",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006658",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476670772454577",
+          "st_nlink": "1",
+          "st_size": "5023",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "5c04a444b080e0cdfcf1997097168524883ed8fa",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/new-Main-preservation13-prepared-v01/files/docs/reconciliation/main-private-controls-20261123/records/sealed-test-only-parent-preflight-original-finalizer-three-controls-v01.json",
+        "sha256": "0563a56b80997d9e80a021d5514b2669a90b4633cafd2d65b3da3e8206c6e508"
+      },
+      "sha256": "0563a56b80997d9e80a021d5514b2669a90b4633cafd2d65b3da3e8206c6e508",
+      "source_FS_mode_octal": "0o400",
+      "source_full9": {
+        "st_ctime_ns": "1795457352818596966",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "50877689",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795457352818596966",
+        "st_nlink": "1",
+        "st_size": "5023",
+        "st_uid": "1000"
+      },
+      "source_mode_integer": 256,
+      "source_path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/sealed-test-only-parent-preflight-original-finalizer-three-controls-v01.json"
+    },
+    {
+      "bytes": 3568,
+      "git_blob_sha1": "1fa7534e144a14c2238590cbab23c30fa138f108",
+      "historical_status": "HISTORICAL_RED1_DESCRIPTOR",
+      "intended_git_mode": "100644",
+      "intended_target_path": "docs/reconciliation/main-private-controls-20261123/records/sealed-separate-success-cleanup-failure-one-control-v01.json",
+      "json_schema_metadata": {
+        "schema": "Main-separate-success-path-cleanup-failure-one-control/v1",
+        "top_level_keys": [
+          "schema",
+          "status",
+          "test_fragment",
+          "actual_result",
+          "parent_operator_sha256",
+          "actual",
+          "defect",
+          "unchanged_old_three_methods",
+          "no_counts_pooled",
+          "isolation",
+          "AST_identity",
+          "private_inputs",
+          "Root_Reader_owned_next_action",
+          "preserved_authoring_failure",
+          "limits",
+          "fresh_Source_Git_SDK_Native_or_authority"
+        ]
+      },
+      "prepared_ref": {
+        "FS_mode_octal": "0o400",
+        "bytes": 3568,
+        "full9": {
+          "st_ctime_ns": "1795476670776454610",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006659",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476670776454610",
+          "st_nlink": "1",
+          "st_size": "3568",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "1fa7534e144a14c2238590cbab23c30fa138f108",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/new-Main-preservation13-prepared-v01/files/docs/reconciliation/main-private-controls-20261123/records/sealed-separate-success-cleanup-failure-one-control-v01.json",
+        "sha256": "e881c84b5f768fd61c6497dd4fe3a57a6f5548cb2a2fc1c1a80421262d4b2a3c"
+      },
+      "sha256": "e881c84b5f768fd61c6497dd4fe3a57a6f5548cb2a2fc1c1a80421262d4b2a3c",
+      "source_FS_mode_octal": "0o400",
+      "source_full9": {
+        "st_ctime_ns": "1795457846798287375",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "50877692",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795457846798287375",
+        "st_nlink": "1",
+        "st_size": "3568",
+        "st_uid": "1000"
+      },
+      "source_mode_integer": 256,
+      "source_path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/sealed-separate-success-cleanup-failure-one-control-v01.json"
+    },
+    {
+      "bytes": 6594,
+      "git_blob_sha1": "02176248ae00e0a85422a42c3464b7d419559ad3",
+      "historical_status": "ACTUAL_PRIVATE_RED3",
+      "intended_git_mode": "100644",
+      "intended_target_path": "docs/reconciliation/main-private-controls-20261123/evidence/actual-parent-preflight-original-finalizer-three-controls-RED-v01.json",
+      "json_schema_metadata": {
+        "schema": "actual-private-parent-preflight-original-finalizer-three-controls/v1",
+        "top_level_keys": [
+          "schema",
+          "parent_operator_sha256",
+          "tests",
+          "failures",
+          "errors",
+          "skipped",
+          "passed",
+          "observations",
+          "unittest_output",
+          "scope"
+        ]
+      },
+      "prepared_ref": {
+        "FS_mode_octal": "0o400",
+        "bytes": 6594,
+        "full9": {
+          "st_ctime_ns": "1795476670779454634",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006661",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476670779454634",
+          "st_nlink": "1",
+          "st_size": "6594",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "02176248ae00e0a85422a42c3464b7d419559ad3",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/new-Main-preservation13-prepared-v01/files/docs/reconciliation/main-private-controls-20261123/evidence/actual-parent-preflight-original-finalizer-three-controls-RED-v01.json",
+        "sha256": "f05f187ec320993cd1830950b3d1f2163c6d47b0b51b6b7f2778d5dde4eb7fff"
+      },
+      "sha256": "f05f187ec320993cd1830950b3d1f2163c6d47b0b51b6b7f2778d5dde4eb7fff",
+      "source_FS_mode_octal": "0o400",
+      "source_full9": {
+        "st_ctime_ns": "1795457261123706879",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "50877688",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795457261123706879",
+        "st_nlink": "1",
+        "st_size": "6594",
+        "st_uid": "1000"
+      },
+      "source_mode_integer": 256,
+      "source_path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/actual-parent-preflight-original-finalizer-three-controls-RED-v01.json"
+    },
+    {
+      "bytes": 5333,
+      "git_blob_sha1": "6b58379b3116298f78b10e78498cead30c487a36",
+      "historical_status": "ACTUAL_PRIVATE_RED1",
+      "intended_git_mode": "100644",
+      "intended_target_path": "docs/reconciliation/main-private-controls-20261123/evidence/actual-parent-success-cleanup-failure-RED1-v01.json",
+      "json_schema_metadata": {
+        "schema": "actual-private-success-cleanup-failure-one-control/v1",
+        "top_level_keys": [
+          "AST_identity",
+          "errors",
+          "failures",
+          "observations",
+          "parent_operator_sha256",
+          "schema",
+          "scope",
+          "skipped",
+          "tests",
+          "unittest_output"
+        ]
+      },
+      "prepared_ref": {
+        "FS_mode_octal": "0o400",
+        "bytes": 5333,
+        "full9": {
+          "st_ctime_ns": "1795476670785454683",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006662",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476670785454683",
+          "st_nlink": "1",
+          "st_size": "5333",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "6b58379b3116298f78b10e78498cead30c487a36",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/new-Main-preservation13-prepared-v01/files/docs/reconciliation/main-private-controls-20261123/evidence/actual-parent-success-cleanup-failure-RED1-v01.json",
+        "sha256": "f0803dad3f8820fce648fed94f97cd23960153a6113ed4e03656e269f95c3c57"
+      },
+      "sha256": "f0803dad3f8820fce648fed94f97cd23960153a6113ed4e03656e269f95c3c57",
+      "source_FS_mode_octal": "0o400",
+      "source_full9": {
+        "st_ctime_ns": "1795457747055350583",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "50877691",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795457747055350583",
+        "st_nlink": "1",
+        "st_size": "5333",
+        "st_uid": "1000"
+      },
+      "source_mode_integer": 256,
+      "source_path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/actual-parent-success-cleanup-failure-RED1-v01.json"
+    },
+    {
+      "bytes": 11369,
+      "git_blob_sha1": "5255a0d753e0479af71c6dc876f3c8408b05dcff",
+      "historical_status": "HISTORICAL_PRESERVATION_MANIFEST",
+      "intended_git_mode": "100644",
+      "intended_target_path": "docs/reconciliation/main-private-controls-20261123/manifest.json",
+      "json_schema_metadata": {
+        "schema": "historical-main-private-controls-preservation-manifest/v1",
+        "top_level_keys": [
+          "archive_root",
+          "artifacts",
+          "authored_artifact_bytes",
+          "authored_artifact_count",
+          "comparison",
+          "no_live_operator_or_source_overlay",
+          "no_new_authority",
+          "original_artifacts_unchanged",
+          "proposed_mode",
+          "qualification",
+          "schema",
+          "status"
+        ]
+      },
+      "prepared_ref": {
+        "FS_mode_octal": "0o400",
+        "bytes": 11369,
+        "full9": {
+          "st_ctime_ns": "1795476670789454715",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006663",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476670789454715",
+          "st_nlink": "1",
+          "st_size": "11369",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "5255a0d753e0479af71c6dc876f3c8408b05dcff",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/new-Main-preservation13-prepared-v01/files/docs/reconciliation/main-private-controls-20261123/manifest.json",
+        "sha256": "9f58282fbaf27ffe2d36132b953ea943e1185dbd7726bbbf1ba5988f64861188"
+      },
+      "sha256": "9f58282fbaf27ffe2d36132b953ea943e1185dbd7726bbbf1ba5988f64861188",
+      "source_FS_mode_octal": "0o400",
+      "source_full9": {
+        "st_ctime_ns": "1795476240162656056",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "51816751",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795476240162656056",
+        "st_nlink": "1",
+        "st_size": "11369",
+        "st_uid": "1000"
+      },
+      "source_mode_integer": 256,
+      "source_path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/Main-private-controls-publication-preservation-proposal-v01/manifest.json"
+    },
+    {
+      "bytes": 3082,
+      "git_blob_sha1": "922048945b0d6d07bc00963d8695b16a35ba2e00",
+      "historical_status": "HISTORICAL_UNADOPTED_ARCHIVE_README",
+      "intended_git_mode": "100644",
+      "intended_target_path": "docs/reconciliation/main-private-controls-20261123/README.md",
+      "json_schema_metadata": null,
+      "prepared_ref": {
+        "FS_mode_octal": "0o400",
+        "bytes": 3082,
+        "full9": {
+          "st_ctime_ns": "1795476670792454739",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72006664",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795476670792454739",
+          "st_nlink": "1",
+          "st_size": "3082",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "922048945b0d6d07bc00963d8695b16a35ba2e00",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/new-Main-preservation13-prepared-v01/files/docs/reconciliation/main-private-controls-20261123/README.md",
+        "sha256": "f2c4dd2edd6ef7b6398140bc7c832d881ee5e57f6235a5e9e6a5146fad2542ac"
+      },
+      "sha256": "f2c4dd2edd6ef7b6398140bc7c832d881ee5e57f6235a5e9e6a5146fad2542ac",
+      "source_FS_mode_octal": "0o400",
+      "source_full9": {
+        "st_ctime_ns": "1795476240175424256",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "51816752",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795476240175424256",
+        "st_nlink": "1",
+        "st_size": "3082",
+        "st_uid": "1000"
+      },
+      "source_mode_integer": 256,
+      "source_path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/Main-private-controls-publication-preservation-proposal-v01/README.md"
+    }
+  ],
+  "immutability_meaning": "Cooperative pinned-byte preservation: O_EXCL/no overwrite/fsync/complete readback/source+copyfull9+SHA. Original0400/0600 modes preserved;0600 copies are NOT claimed OS-readonly.",
+  "intended_all_Git_modes": "100644",
+  "intended_archive_subtree": "docs/reconciliation/main-private-controls-20261123/",
+  "next_existing_owner_action": "Sole publisher may compose these exact additive13paths into existing isolated Root only after P1 Git mutation hold genuinely closes, with fresh remote/target guards. No automatic adoption or push selected here.",
+  "no_staging_commit_publication_or_Root_worktree_writes": true,
+  "prior_failed_attempt": {
+    "Root_or_Source_or_product_mutation": false,
+    "no_source_or_product_drift_inferred": true,
+    "prior_body_read": 22230,
+    "reason": "Bad private-output assumption expected every original0400; second actual original0600 rejected before read/OUTmkdir/copy.",
+    "terminal": 1,
+    "tool_chunk": "79f645"
+  },
+  "private_original_and_copy_mode_counts": {
+    "0o400": 12,
+    "0o600": 1
+  },
+  "qualification_limits": {
+    "Main_reported_prior_blob_absence": 11,
+    "all13_are_historical_preservation_only": true,
+    "eleven_authored_controls_and_RED_evidence_are_not_product_adoption": true,
+    "later_Root_Reader_green_results_not_reexecuted_or_independently_authenticated_by_this_packet": true,
+    "no_runtime_or_legal_or_model_acceptance_granted": true,
+    "prior_private_RED_results_retained_exact": true,
+    "project_imports_or_Source_or_Native_actions": 0,
+    "tests_executed": 0
+  },
+  "read_accounting": {
+    "actual_cumulative_explicit_private_input_bytes": 381383,
+    "complete13_private_copy_readbacks": 173685,
+    "conservative_combined_explicit_bytes": 381639,
+    "current_Git_metadata_stdout_stderr_bytes": 169,
+    "current_exact13_private_bytes_once": 173685,
+    "first22230B_body_reread_reason": "Prior completed refusal process had ended; bytes not retained in a live process. Necessary reread charged, no refund.",
+    "implicit_Git_kernel_IO_not_claimed_fully_metered": true,
+    "new_unit_cap": 524288,
+    "no_reset_or_refund": true,
+    "previous_attempt_Git_metadata_bytes": 87,
+    "previous_attempt_handoff_descriptor_and_first_body_reads": 34013,
+    "prior_metadata_unit_reads_preserved_separately": 18490749
+  },
+  "schema": "prepared-Main13-additive-unadopted-archive/v2",
+  "status": "PRIVATE_PREPARED_NOT_INSTALLED_STAGED_COMMITTED_OR_EXECUTED",
+  "target_count": 13,
+  "target_repository": "endomorphosis/lift_coding",
+  "target_total_bytes": 173685
+}

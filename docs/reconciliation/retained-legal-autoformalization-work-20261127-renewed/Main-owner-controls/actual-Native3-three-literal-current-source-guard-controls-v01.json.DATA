@@ -1,0 +1,61 @@
+{
+  "kind": "actual_existing_binder_current_source_repin_controls",
+  "binder": {
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/bind_existing_native_expected_policy.current-c105-INERT.py.DATA",
+    "bytes": 5298,
+    "sha256": "5e2259b4b6bd6ce4129be265383fc84594e5a3be3aa8e4c5177cc1f22ed3d7db"
+  },
+  "passed_controls": 6,
+  "failed_controls": 0,
+  "results": [
+    {
+      "case": "current_source_without_module_graph",
+      "expected_exception": "ValueError",
+      "actual_exception": "ValueError",
+      "message": "caller must load the existing normal canonical module graph",
+      "pass": true
+    },
+    {
+      "case": "historical_old_source",
+      "expected_exception": "ValueError",
+      "actual_exception": "ValueError",
+      "message": "owning-test source identity differs from prepared binding",
+      "pass": true
+    },
+    {
+      "case": "current_one_byte_mutation",
+      "expected_exception": "ValueError",
+      "actual_exception": "ValueError",
+      "message": "owning-test source identity differs from prepared binding",
+      "pass": true
+    },
+    {
+      "case": "current_truncation",
+      "expected_exception": "ValueError",
+      "actual_exception": "ValueError",
+      "message": "owning-test source identity differs from prepared binding",
+      "pass": true
+    },
+    {
+      "case": "mutable_bytearray",
+      "expected_exception": "TypeError",
+      "actual_exception": "TypeError",
+      "message": "exact authenticated owning-test bytes required",
+      "pass": true
+    },
+    {
+      "case": "None_source",
+      "expected_exception": "TypeError",
+      "actual_exception": "TypeError",
+      "message": "exact authenticated owning-test bytes required",
+      "pass": true
+    }
+  ],
+  "current_source_identity_passes_before_unchanged_module_graph_refusal": true,
+  "all_calls_refuse_binding_without_real_canonical_graph": true,
+  "no_module_graph_stubs_or_mock_validator": true,
+  "Python_stdlib_fixture_executed": true,
+  "Native_Source_SDK_resource_Git_socket_or_model_action": false,
+  "actual_current_runtime_selection": null,
+  "no_Native_or_actual_runner_qualification_inferred": true
+}

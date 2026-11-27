@@ -1,0 +1,136 @@
+from pathlib import Path
+import json
+import hashlib
+import os
+import subprocess
+
+work = Path(__file__).resolve().parent
+old = work.parent / "phase1-lean-outcome-request-fields-private-v01"
+checkout = work.parents[2] / "repositories/datasets"
+locked = json.loads((old / "input-bindings.json").read_bytes())
+project = work / "dataset"
+owner = "ipfs_datasets_py/logic/backends/kernel/lean.py"
+test = "tests/integration/logic/backends/test_kernel_backends.py"
+refs = {
+    owner: ("1b250246f6ecea6a75b75da8a46f77abac1d5a02a5eba4cd2c1ec0e978e4efc9", "1e1b75b"),
+    test: ("5b57349bce86ec8d308f87802f9dc96195d56da15ec849a705f0b5b2a5ad1549", "e18eec7"),
+}
+env = {**os.environ, "GIT_OPTIONAL_LOCKS": "0", "GIT_NO_LAZY_FETCH": "1"}
+head = "611395777d8365a070c4cba4c29a5cbc6c510f8b"
+def sha(body):
+    return hashlib.sha256(body).hexdigest()
+def blob(body):
+    return hashlib.sha1(b"blob " + str(len(body)).encode() + b"\0" + body).hexdigest()
+def git(*args):
+    return subprocess.check_output(["git", "-C", str(checkout), *args], env=env)
+def put(path, body):
+    path.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
+    with path.open("xb") as handle:
+        handle.write(body)
+        handle.flush()
+        os.fsync(handle.fileno())
+    path.chmod(0o400)
+    assert path.read_bytes() == body
+
+assert git("rev-parse", "HEAD").decode().strip() == head
+tree = {}
+for row in git("ls-tree", "-rz", head).split(b"\0"):
+    if row:
+        info, path = row.split(b"\t")
+        mode, kind, oid = info.decode().split()
+        if kind == "blob":
+            tree[os.fsdecode(path)] = (mode, oid)
+before = {}
+cached = {}
+for path, ref in locked["rows"].items():
+    if path in refs:
+        oid = tree[path][1]
+        body = git("cat-file", "blob", oid)
+        assert sha(body) == refs[path][0] and oid.startswith(refs[path][1])
+        before[path] = body
+    else:
+        source = old / "dataset" / path
+        assert source.is_file() and not source.is_symlink()
+        body = source.read_bytes()
+        assert (len(body), sha(body)) == (ref["bytes"], ref["sha256"])
+        tree_row = tree.get(path)
+        if tree_row is not None and tree_row[1] != blob(body):
+            assert tree_row[0] == "100644"
+            body = git("cat-file", "blob", tree_row[1])
+            assert tree_row[1] == blob(body)
+    cached[path] = {"bytes": len(body), "sha256": sha(body), "git_blob": blob(body),
+                    "matches_tree": tree.get(path, ("", ""))[1] == blob(body)}
+    if path != test:
+        put(project / path, body)
+
+snippet = br'''
+
+@pytest.mark.parametrize("changed", [
+    "match", "equivalent-source-alias", "declaration", "proposition",
+    "source", "translation", "missing-obligation",
+])
+def test_lean_outcome_binds_accepted_receipt_to_request_payload(changed):
+    from ipfs_datasets_py.logic.backends.kernel import lean
+
+    source = "theorem wanted : True := by trivial\ntheorem alternative : True := by trivial\n"
+    outcome, calls, original_request = _bound_lean_outcome(source=source)
+    assert len(calls) == 1 and outcome.receipt.accepted
+    payload = original_request.payload.to_dict()
+    if changed == "equivalent-source-alias":
+        payload["checked_source"] = payload.pop("source")
+    elif changed == "declaration":
+        payload["expected_declaration"] = "alternative"
+    elif changed == "proposition":
+        payload["expected_proposition"] = "(True)"
+    elif changed == "source":
+        payload["source"] += "-- separately submitted exact source\n"
+    elif changed == "translation":
+        payload["translation"] = _translation("lean4")
+    elif changed == "missing-obligation":
+        del payload["expected_declaration"]
+        del payload["expected_proposition"]
+
+    request = replace(original_request, payload=FrozenMap(payload))
+    binding = lean.LeanSourceBinding.bind(request, source)
+    receipt = replace(outcome.receipt, request_digest=request.digest, source_binding=binding)
+    assert lean.LeanKernelReceipt.from_dict(receipt.to_dict()) == receipt
+    metadata = outcome.result.metadata.to_dict()
+    metadata.update(kernel_receipt=receipt.to_dict(), source_binding=binding.to_dict())
+    result = replace(outcome.result, result_id=lean._result_id("lean", request),
+                     metadata=metadata, witness=receipt._theorem_witness())
+    kwargs = dict(request=request, request_digest=request.digest, source_binding=binding,
+                  receipt=receipt, result=result)
+    if changed in {"match", "equivalent-source-alias"}:
+        assert replace(outcome, **kwargs).result.status is ResultStatus.PROVED
+    else:
+        with pytest.raises(LeanKernelError, match="outcome accepted receipt .*request"):
+            replace(outcome, **kwargs)
+    assert len(calls) == 1
+'''
+put(work / "owner.before.py.DATA", before[owner])
+put(work / "test.before.py.DATA", before[test])
+put(work / "test.after.py.DATA", before[test] + snippet)
+put(project / test, before[test] + snippet)
+runner = Path(locked["argv"][3])
+assert sha(runner.read_bytes()) == locked["runner_sha256"]
+new = test + "::test_lean_outcome_binds_accepted_receipt_to_request_payload"
+nodes = [f"{new}[{key}]" for key in ("match", "equivalent-source-alias", "declaration",
+         "proposition", "source", "translation", "missing-obligation")]
+nodes.append(test + "::test_lean_verified_proof_binds_full_kernel_receipt")
+prior = {
+    "prior-request8": "candidate-same8",
+    "prior-kernel54": "candidate-retained-kernel54",
+    "prior-outcome8": "candidate-retained-outcome8",
+}
+retention = {key: json.loads((old / value / "argv.json").read_bytes())[10:] for key, value in prior.items()}
+assert all(len(items) == 8 for items in retention.values())
+def invocation(output, selectors):
+    return [*locked["argv"][:4], str(work / output), str(project), *locked["argv"][6:10], *selectors]
+prepared = {"head": head, "canonical": str(checkout), "owner": owner, "test": test,
+            "input_tree": cached, "runner": str(runner), "runner_sha256": locked["runner_sha256"],
+            "roster": nodes, "prior_rosters": retention,
+            "invocations": {key: invocation(key, values) for key, values in
+                            [("same8-red", nodes), ("same8-green", nodes), *retention.items()]}}
+put(work / "inputs.json", (json.dumps(prepared, indent=2, sort_keys=True) + "\n").encode())
+print(work)
+print(len(cached), sum(ref["bytes"] for ref in cached.values()), [key for key, ref in cached.items() if not ref["matches_tree"]])

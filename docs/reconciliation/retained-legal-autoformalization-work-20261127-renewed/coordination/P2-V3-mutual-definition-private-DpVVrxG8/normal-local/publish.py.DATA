@@ -1,0 +1,156 @@
+from pathlib import Path
+import hashlib
+import json
+import os
+import subprocess
+import sys
+import xml.etree.ElementTree as ET
+
+w = Path(__file__).resolve().parent
+publication = w / "publication"
+repos = {"datasets":w / "checkout/.git",
+         "hallucinate":publication / "hallucinate.git", "root":publication / "root.git"}
+urls = {"datasets":"https://github.com/endomorphosis/ipfs_datasets_py.git",
+        "accelerate":"https://github.com/endomorphosis/ipfs_accelerate_py.git",
+        "hallucinate":"https://github.com/endomorphosis/hallucinate_app.git",
+        "root":"https://github.com/endomorphosis/lift_coding.git"}
+bases = {"datasets":"5bf57f390a12621a40716595fe261c35d2741e12",
+         "accelerate":"64a8649952bed66a457d7b87bf6dced9fadab8d4",
+         "hallucinate":"fe0d51a95aa4662efad395bfeeb996dab567313c",
+         "root":"20a2b7ac3b47a12971ac9cb469e719f474df01ba"}
+links = {"hallucinate":{"ipfs_datasets_py":"datasets","ipfs_accelerate_py":"accelerate"},
+         "root":{"external/ipfs_datasets":"datasets","external/ipfs_accelerate":"accelerate",
+                 "hallucinate_app":"hallucinate"}}
+env = {**os.environ,"GIT_OPTIONAL_LOCKS":"0","GIT_NO_LAZY_FETCH":"1","GIT_TERMINAL_PROMPT":"0"}
+for field in ("NAME","EMAIL"):
+    value = subprocess.check_output(["git","-C","/home/barberb/lift_coding","config",
+                                    "--get","user." + field.lower()],env=env,timeout=15).decode().strip()
+    env["GIT_AUTHOR_" + field] = env["GIT_COMMITTER_" + field] = value
+
+def git(repo, *args, raw=None, index=False, check=True):
+    selected = dict(env)
+    if index:
+        selected["GIT_INDEX_FILE"] = str(publication / (repo + ".index"))
+    result = subprocess.run(["git","--git-dir",str(repos[repo]),"-c","pack.threads=1",
+        "-c","index.threads=1",*args],input=raw,env=selected,capture_output=True,timeout=180)
+    if check and result.returncode:
+        raise RuntimeError((repo,args[0],result.returncode,result.stderr.decode(errors="replace")[-1500:]))
+    return result.stdout if check else result
+
+def save(name, value):
+    with (publication / name).open("x") as stream:
+        json.dump(value,stream,indent=2,sort_keys=True)
+        stream.write("\n")
+
+def reference(path):
+    raw = path.read_bytes()
+    return {"path":str(path),"bytes":len(raw),"sha256":hashlib.sha256(raw).hexdigest()}
+
+def remotes():
+    result = {}
+    for repo,url in urls.items():
+        line = subprocess.check_output(["git","ls-remote","--exit-code",url,"refs/heads/main"],
+                                       env=env,timeout=45).decode().split()
+        assert len(line) == 2 and line[1] == "refs/heads/main"
+        result[repo] = line[0]
+    return result
+
+def tree(repo, rev, *paths):
+    output = git(repo,"ls-tree","-rz",rev,"--",*paths)
+    result = {}
+    for row in output.split(b"\0"):
+        if row:
+            fields,name = row.split(b"\t",1)
+            mode,_,oid = fields.decode().split()
+            result[name.decode()] = (mode,oid)
+    return result
+
+def parent_commit(repo, parent, updates):
+    git(repo,"read-tree",parent,index=True)
+    raw = b"".join(f"160000 {oid}\t{path}\0".encode() for path,oid in sorted(updates.items()))
+    git(repo,"update-index","-z","--index-info",raw=raw,index=True)
+    target_tree = git(repo,"write-tree","--missing-ok",index=True).decode().strip()
+    target = git(repo,"commit-tree",target_tree,"-p",parent,
+        raw=b"Update reviewed governing-definition dependency links [skip ci]\n").decode().strip()
+    changes = git(repo,"diff-tree","-r","--no-commit-id","--name-only","-z",parent,target)
+    assert set(changes.decode().rstrip("\0").split("\0")) == set(updates)
+    assert tree(repo,target,*updates) == {path:("160000",oid) for path,oid in updates.items()}
+    git(repo,"update-ref","refs/heads/publication",target)
+    return target
+
+def prepare():
+    assert remotes() == bases
+    metadata = json.loads((w / "real-checkout-pins.json").read_bytes())
+    candidate = json.loads((w / "candidate-with-handoff.json").read_bytes())
+    qualification = w / "actual-local-Source-V2-15-and-V3-46-qualified-closed.json"
+    assert reference(qualification)["sha256"] == "a131e976e98bb528fdf38a2849bad184f835774c0458541093c3a28779017d47"
+    assessed = json.loads(qualification.read_bytes())
+    assert assessed["terminal_returncode"] == 0 and assessed["local_clean"]
+    assert assessed["isolated_write_and_both_read_leases_closed_and_locks_free"]
+    target = candidate["candidate"]
+    tested = metadata["authored_candidate"]["oid"]
+    assert candidate["tested_code_commit"] == tested
+    assert git("datasets","rev-parse",target + "^").decode().strip() == tested
+    assert git("datasets","rev-parse",tested + "^").decode().strip() == bases["datasets"]
+    assert git("datasets","rev-parse","HEAD").decode().strip() == target
+    for rel,pin in metadata["paths"].items():
+        assert tree("datasets",target,rel)[rel] == (pin["mode"],pin["git_blob"])
+    for name,count in (("v2",15),("v3",46)):
+        entry = assessed["local_runs"][name]
+        path = Path(entry["junit"]["path"])
+        assert reference(path) == entry["junit"]
+        nodes = ET.fromstring(path.read_bytes()).findall(".//testcase")
+        assert len(nodes) == count == len({(n.get("classname"),n.get("name")) for n in nodes})
+        assert all(n.find(tag) is None for n in nodes for tag in ("failure","error","skipped"))
+    roles = json.loads((w.parent / "source-three-roles.json").read_bytes())
+    selected = set(roles) | {candidate["handoff_path"]}
+    delta = git("datasets","diff-tree","-r","--no-commit-id","--name-only","-z",bases["datasets"],target)
+    assert set(delta.decode().rstrip("\0").split("\0")) == selected
+    for rel,role in roles.items():
+        raw = git("datasets","cat-file","blob",target + ":" + rel)
+        assert (len(raw),hashlib.sha256(raw).hexdigest()) == (role["after"]["bytes"],role["after"]["sha256"])
+    git("datasets","diff","--check",bases["datasets"],target)
+    heads = dict(bases,datasets=target)
+    for repo,mapping in links.items():
+        assert tree(repo,bases[repo],*mapping) == {p:("160000",bases[n]) for p,n in mapping.items()}
+        changes = {p:heads[n] for p,n in mapping.items() if heads[n] != bases[n]}
+        heads[repo] = parent_commit(repo,bases[repo],changes)
+    save("ready.json",{"before":bases,"heads":heads,"source_qualification":reference(qualification),
+         "tested_code_commit":tested,"candidate_with_handoff":reference(w / "candidate-with-handoff.json"),
+         "only_dataset_paths":sorted(selected),"shared_Source42_SDK_qualification":False})
+    print(json.dumps(heads,indent=2))
+
+def publish():
+    plan = json.loads((publication / "ready.json").read_bytes())
+    current = dict(plan["before"])
+    steps = []
+    for repo in ("datasets","hallucinate","root"):
+        assert remotes() == current
+        target = plan["heads"][repo]
+        git(repo,"merge-base","--is-ancestor",current[repo],target)
+        result = git(repo,"push","--porcelain",urls[repo],target + ":refs/heads/main",check=False)
+        step = {"repository":repo,"before":current[repo],"after":target,"returncode":result.returncode,
+                "stdout":result.stdout.decode(errors="replace"),"stderr":result.stderr.decode(errors="replace")}
+        save(repo + "-push.json",step)
+        after = remotes()
+        assert result.returncode == 0 and after[repo] == target, step
+        current[repo] = target
+        assert after == current
+        steps.append({k:v for k,v in step.items() if k not in {"stdout","stderr"}})
+    assert remotes() == plan["heads"]
+    joins = {}
+    for repo,mapping in links.items():
+        joins[repo] = tree(repo,current[repo],*mapping)
+        assert joins[repo] == {p:("160000",current[n]) for p,n in mapping.items()}
+    assert git("datasets","diff","--cached","--exit-code",current["datasets"]) == b""
+    report = {"terminal_returncode":0,"remote_main":current,"gitlinks":joins,
+              "steps":steps,"dataset_paths":plan["only_dataset_paths"],
+              "source_qualification":plan["source_qualification"],"tested_code_commit":plan["tested_code_commit"],
+              "local_package_fixture_cases":{"v2":15,"v3":46},
+              "Source42_SDK_qualification":False,"Native_model_statutory_review":False,
+              "shared_working_code_or_index_modified":False}
+    save("publication-final.json",report)
+    print(json.dumps(report,indent=2))
+
+if __name__ == "__main__":
+    {"prepare":prepare,"publish":publish}[sys.argv[1]]()

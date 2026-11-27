@@ -1,0 +1,192 @@
+{
+  "actual_case_assertions_recovered": false,
+  "mathematical_stage_of_v02_failure_unproven": true,
+  "missing_required_bodies_in_this_workspace": {
+    "coordinate_index_artifact": "2583ec456af65949327c1b0d68e37d1780ef29d024b6b62293c9f6087c4581de",
+    "coordinate_report_artifact": "060b78ce3fa474cea7aed55dbc7741caf207e066939b38beb1bd4009c3a36d04",
+    "original_receipt_artifact": null
+  },
+  "no_complete_v4_request_or_returned_material_mapping_seen": true,
+  "no_model_or_SQL_or_Lean_execution_or_legal_review_claim": true,
+  "paired_manifest_and_three_table_pairs": {
+    "artifacts": {
+      "producer": {
+        "bytes": 12635,
+        "full9": {
+          "st_ctime_ns": "1795572996264193974",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101417",
+          "st_mode": "33152",
+          "st_mtime_ns": "1795572996264193974",
+          "st_nlink": "1",
+          "st_size": "12635",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-Phase8-V4-revocation-replay-private-v01-TS3zxd/run-v02/mixed-physical-crosswalk/material/producer/artifacts-69e592fcef4bc3975446874784f6ad97924c74d71a435a0f1900d1705f8ce216-fba1eaa6474b53a86c52c285014a2bb325b6fcb0e149e374b3c82f49fa91620d.parquet",
+        "sha256": "fba1eaa6474b53a86c52c285014a2bb325b6fcb0e149e374b3c82f49fa91620d"
+      },
+      "retained": {
+        "bytes": 12635,
+        "full9": {
+          "st_ctime_ns": "1795572996266316062",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101432",
+          "st_mode": "33152",
+          "st_mtime_ns": "1795572996266316062",
+          "st_nlink": "1",
+          "st_size": "12635",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-Phase8-V4-revocation-replay-private-v01-TS3zxd/run-v02/mixed-physical-crosswalk/material/retained/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb/autoformal/uscode/paired-v3/artifacts/fictional-physical-crosswalk/artifacts-69e592fcef4bc3975446874784f6ad97924c74d71a435a0f1900d1705f8ce216-fba1eaa6474b53a86c52c285014a2bb325b6fcb0e149e374b3c82f49fa91620d.parquet",
+        "sha256": "fba1eaa6474b53a86c52c285014a2bb325b6fcb0e149e374b3c82f49fa91620d"
+      },
+      "same_bytes": true
+    },
+    "goals": {
+      "producer": {
+        "bytes": 7653,
+        "full9": {
+          "st_ctime_ns": "1795572996263706960",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101416",
+          "st_mode": "33152",
+          "st_mtime_ns": "1795572996263706960",
+          "st_nlink": "1",
+          "st_size": "7653",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-Phase8-V4-revocation-replay-private-v01-TS3zxd/run-v02/mixed-physical-crosswalk/material/producer/goals-69e592fcef4bc3975446874784f6ad97924c74d71a435a0f1900d1705f8ce216-e6a5effaeac0760ad8c896b41ff30ba4389089d29b137d6db3ec5d179c02e1f7.parquet",
+        "sha256": "e6a5effaeac0760ad8c896b41ff30ba4389089d29b137d6db3ec5d179c02e1f7"
+      },
+      "retained": {
+        "bytes": 7653,
+        "full9": {
+          "st_ctime_ns": "1795572996265912185",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101429",
+          "st_mode": "33152",
+          "st_mtime_ns": "1795572996265912185",
+          "st_nlink": "1",
+          "st_size": "7653",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-Phase8-V4-revocation-replay-private-v01-TS3zxd/run-v02/mixed-physical-crosswalk/material/retained/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb/autoformal/uscode/paired-v3/goals/fictional-physical-crosswalk/goals-69e592fcef4bc3975446874784f6ad97924c74d71a435a0f1900d1705f8ce216-e6a5effaeac0760ad8c896b41ff30ba4389089d29b137d6db3ec5d179c02e1f7.parquet",
+        "sha256": "e6a5effaeac0760ad8c896b41ff30ba4389089d29b137d6db3ec5d179c02e1f7"
+      },
+      "same_bytes": true
+    },
+    "manifest": {
+      "producer": {
+        "bytes": 2442,
+        "full9": {
+          "st_ctime_ns": "1795572996264400600",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101418",
+          "st_mode": "33152",
+          "st_mtime_ns": "1795572996264400600",
+          "st_nlink": "1",
+          "st_size": "2442",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-Phase8-V4-revocation-replay-private-v01-TS3zxd/run-v02/mixed-physical-crosswalk/material/producer/manifest-d578cc7b5d399bf731418adcbf393d3658fe484d8fd709a1814e99f0fdc0a792.json",
+        "sha256": "13a1c0eeb879ea09570e4778506ee476356fd5bb256b45fec19f27dc047a935d"
+      },
+      "retained": {
+        "bytes": 2442,
+        "full9": {
+          "st_ctime_ns": "1795572996266681666",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101435",
+          "st_mode": "33152",
+          "st_mtime_ns": "1795572996266681666",
+          "st_nlink": "1",
+          "st_size": "2442",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-Phase8-V4-revocation-replay-private-v01-TS3zxd/run-v02/mixed-physical-crosswalk/material/retained/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb/autoformal/uscode/paired-v3/manifests/fictional-physical-crosswalk/manifest-d578cc7b5d399bf731418adcbf393d3658fe484d8fd709a1814e99f0fdc0a792.json",
+        "sha256": "13a1c0eeb879ea09570e4778506ee476356fd5bb256b45fec19f27dc047a935d"
+      },
+      "same_bytes": true
+    },
+    "paired_spans": {
+      "producer": {
+        "bytes": 32535,
+        "full9": {
+          "st_ctime_ns": "1795572996262703813",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101415",
+          "st_mode": "33152",
+          "st_mtime_ns": "1795572996262703813",
+          "st_nlink": "1",
+          "st_size": "32535",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-Phase8-V4-revocation-replay-private-v01-TS3zxd/run-v02/mixed-physical-crosswalk/material/producer/paired_spans-69e592fcef4bc3975446874784f6ad97924c74d71a435a0f1900d1705f8ce216-04e76a1f6b210f7b9d3434f0cd58417392bd68ea828da1621b1b5111554fb731.parquet",
+        "sha256": "04e76a1f6b210f7b9d3434f0cd58417392bd68ea828da1621b1b5111554fb731"
+      },
+      "retained": {
+        "bytes": 32535,
+        "full9": {
+          "st_ctime_ns": "1795572996265458948",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72101426",
+          "st_mode": "33152",
+          "st_mtime_ns": "1795572996265458948",
+          "st_nlink": "1",
+          "st_size": "32535",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-Phase8-V4-revocation-replay-private-v01-TS3zxd/run-v02/mixed-physical-crosswalk/material/retained/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb/autoformal/uscode/paired-v3/paired_spans/fictional-physical-crosswalk/paired_spans-69e592fcef4bc3975446874784f6ad97924c74d71a435a0f1900d1705f8ce216-04e76a1f6b210f7b9d3434f0cd58417392bd68ea828da1621b1b5111554fb731.parquet",
+        "sha256": "04e76a1f6b210f7b9d3434f0cd58417392bd68ea828da1621b1b5111554fb731"
+      },
+      "same_bytes": true
+    }
+  },
+  "prior_private_terminal_exit137_kept_unqualified": true,
+  "regular_ordering": "The test writes these physical artifacts before in-memory crosswalk and request construction. Their presence does not establish that either constructor returned.",
+  "schema": "private-v4-failedoverall-v02-retained-subset-custody/v1",
+  "scope": "Only the exact physical material directory retained by the prior v02 failure was read.",
+  "standalone_law_and_entity_parquet": {
+    "entity-index.parquet": {
+      "bytes": 4704,
+      "full9": {
+        "st_ctime_ns": "1795572996450837288",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72101436",
+        "st_mode": "33152",
+        "st_mtime_ns": "1795572996450837288",
+        "st_nlink": "1",
+        "st_size": "4704",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-Phase8-V4-revocation-replay-private-v01-TS3zxd/run-v02/mixed-physical-crosswalk/material/entity-index.parquet",
+      "sha256": "282167099a94726766c7b8f0fd5194645264392e12912deba8f2cb4b5d8785ab"
+    },
+    "laws.parquet": {
+      "bytes": 3762,
+      "full9": {
+        "st_ctime_ns": "1795572996208067626",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72101413",
+        "st_mode": "33152",
+        "st_mtime_ns": "1795572996208067626",
+        "st_nlink": "1",
+        "st_size": "3762",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-Phase8-V4-revocation-replay-private-v01-TS3zxd/run-v02/mixed-physical-crosswalk/material/laws.parquet",
+      "sha256": "2b6ea3fa2ed52d3aada21a9c1a36b13aa98634746489fe15b13e6683990b5f74"
+    }
+  },
+  "verified_files": 10
+}

@@ -1,0 +1,30 @@
+--- factory.v221.INERT
++++ factory.ordinary81.INERT
+@@ -1,8 +1,8 @@
+ # Finite retarget of the existing ordinary R2 SDK request substitution.
+ def continuation_request(phase,operation,actual_collected_roster=None,*,group):
+     import json
+-    if phase!='published-D-phase1-lean-outcome66' or operation not in ('collect','run') or group!='phase1-lean-outcome66':
+-        raise ValueError('exact selected published-D phase1-lean-outcome66 ordinary request required')
++    if phase!='published-D-phase1-lean-request-81' or operation not in ('collect','run') or group!='phase1-lean-request-81':
++        raise ValueError('exact selected published-D phase1-lean-request-81 ordinary request required')
+     request={'phase':phase,'operation':operation,'source_root':str(ROOT),'accelerate_root':str(ADDITIONAL_A_ROOT),
+         'modules':EXPECTED_MODULES,'maintained_owner_names':MAINTAINED_OWNER_NAMES,'selected_test_modules':SELECTED_TEST_MODULES,
+         'required_canonical_conftests':REQUIRED_CONFTESTS,'pytest_inifile':fixture['pytest_inifile'],
+@@ -14,13 +14,13 @@
+         'binding_manifest_reference':FINAL_BINDING_MANIFEST_REFERENCE,'source_read_binding_reference':D_READ_BINDING_REFERENCE,
+         'admitted_io_plan_reference':FINAL_ADMITTED_IO_PLAN_REFERENCE,'effect_decision_reference':FINAL_EFFECT_DECISION_REFERENCE}
+     if operation=='run':
+-        if type(actual_collected_roster)is not list or len(actual_collected_roster)!=66 or len(set(actual_collected_roster))!=66 or any(type(node)is not str or node.split('::',1)[0]not in OWNING_FILES for node in actual_collected_roster):
+-            raise ValueError('exact actual expanded phase1-lean-outcome66 collection required')
++        if type(actual_collected_roster)is not list or len(actual_collected_roster)!=81 or len(set(actual_collected_roster))!=81 or any(type(node)is not str or node.split('::',1)[0]not in OWNING_FILES for node in actual_collected_roster):
++            raise ValueError('exact actual expanded phase1-lean-request-81 collection required')
+         counts={}
+         for node in actual_collected_roster:
+             base=node.split('[',1)[0];counts[base]=counts.get(base,0)+1
+         if counts!=SELECTION['expected_function_case_counts']:
+-            raise ValueError('actual collection differs from 13 independently selected public-function counts/66 cases')
++            raise ValueError('actual collection differs from 16 independently selected public-function counts/81 cases')
+         request['actual_collected_roster']=list(actual_collected_roster)
+     payloads={'bootstrap.py':read_private(BOOTSTRAP_REFERENCE['path'],BOOTSTRAP_REFERENCE['bytes'],BOOTSTRAP_REFERENCE['sha256']),
+         'source-epoch.json':epoch_raw,'request.json':json.dumps(request,sort_keys=True,separators=(',',':')).encode()}

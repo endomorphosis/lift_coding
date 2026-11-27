@@ -1,0 +1,101 @@
+{
+  "Native_or_model_or_SQL_or_statutory_review": false,
+  "Source42_or_SDK_qualification": false,
+  "all_137_exact_Git_source_files_verified_before_and_after": true,
+  "branch": "refs/heads/work/p2-explicit-governing-definition-bindings",
+  "branch_reference": {
+    "bytes": 41,
+    "full9": [
+      "66306",
+      "72779584",
+      "33204",
+      "1",
+      "1000",
+      "1000",
+      "41",
+      "1795756640919799770",
+      "1795756640919799770"
+    ],
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/checkout/.git/refs/heads/work/p2-explicit-governing-definition-bindings",
+    "sha256": "006f9ae39d1a7ffec981b262e3e4457adfffbc3bfefc78a014efe6f494fec8ba"
+  },
+  "candidate": {
+    "isolated_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/checkout/.git",
+    "oid": "e9586bf615b5b6525afd2cde163e70703b9909e2",
+    "parent": "5bf57f390a12621a40716595fe261c35d2741e12",
+    "tree": "5dbb6d3417674880b83d610239626a9e2ad6156e"
+  },
+  "index": {
+    "bytes": 7073453,
+    "full9": [
+      "66306",
+      "72779380",
+      "33204",
+      "1",
+      "1000",
+      "1000",
+      "7073453",
+      "1795756640916799753",
+      "1795756640917799759"
+    ],
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/checkout/.git/index",
+    "sha256": "c3852b9797db04ebb8094d9230bdff5e26e043d472c542bd9727a26a2ac0b3dd"
+  },
+  "isolated_write_and_both_read_leases_closed_and_locks_free": true,
+  "local_clean": true,
+  "local_runs": {
+    "v2": {
+      "cases": 15,
+      "elapsed_seconds": 19.402762441895902,
+      "junit": {
+        "bytes": 3214,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/v2/result.xml",
+        "sha256": "c336694919f6caac5e16ea28643b8e413acfe1a6820abb045efdb7c0605949e1"
+      },
+      "original_conftests": [
+        "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/checkout/conftest.py",
+        "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/checkout/tests/conftest.py",
+        "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/checkout/tests/unit/conftest.py"
+      ],
+      "report": {
+        "bytes": 22153,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/v2/local-source-closeout.json",
+        "sha256": "b0b694a7869106555e2a5d491f79162ef394a7f0b261788b1543a738a2caaf9b"
+      }
+    },
+    "v3": {
+      "cases": 46,
+      "elapsed_seconds": 48.111697586253285,
+      "junit": {
+        "bytes": 9581,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/v3/result.xml",
+        "sha256": "78467029cbb24161d533ef89fe92bf621603df485e115c40c70af27818469dc0"
+      },
+      "original_conftests": [
+        "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/checkout/conftest.py",
+        "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/checkout/tests/conftest.py",
+        "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/checkout/tests/unit/conftest.py"
+      ],
+      "report": {
+        "bytes": 35034,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/v3/local-source-closeout.json",
+        "sha256": "94ae936b04228ded951164765abc8a3d779bbbc316de1d01723eb44705e98020"
+      }
+    }
+  },
+  "original_private_seal": {
+    "bytes": 28156,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/SEALED-existing-V2-V3-local-definition-binding-exact3-private-v03.json",
+    "sha256": "89c6365977e5922518fba085ddeeb27430a8dd38593b245e973da3e1fb082632"
+  },
+  "published": false,
+  "schema": "local-Source-package-pytest-definition-binding-qualification/v1",
+  "selected_V3_import_held_until_fixture": true,
+  "shared_canonical_Source_adoption": false,
+  "source_role_map": {
+    "bytes": 37892,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/real-checkout-pins.json",
+    "sha256": "72bdde0fe8734d8bb044f06a8e966e48b5181b29cf0a811d34b33473f6e361f9"
+  },
+  "terminal_returncode": 0
+}

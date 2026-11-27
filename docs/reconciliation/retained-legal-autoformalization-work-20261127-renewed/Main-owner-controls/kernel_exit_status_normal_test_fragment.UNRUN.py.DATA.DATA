@@ -1,0 +1,16 @@
+
+
+@pytest.mark.parametrize("returncode", [False, 0.0, True, "0", None, 1])
+def test_lean_malformed_or_failed_exit_status_cannot_establish_proof(returncode):
+    from dataclasses import replace
+
+    report = _axiom_message("'wanted' does not depend on any axioms")
+    positive = _lean_output(report)
+    assert type(positive.returncode) is int and positive.returncode == 0
+    assert evaluate_lean_kernel_output(positive, declaration="wanted")[0] is True
+    process = replace(positive, returncode=returncode)
+    assert process.returncode is returncode
+    accepted, _, diagnostics = evaluate_lean_kernel_output(
+        process, declaration="wanted")
+    assert accepted is False
+    assert diagnostics

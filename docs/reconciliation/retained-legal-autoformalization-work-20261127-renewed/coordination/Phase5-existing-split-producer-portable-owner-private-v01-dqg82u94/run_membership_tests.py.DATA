@@ -1,0 +1,26 @@
+"""Run the exact owning membership tests against a private before or after module."""
+
+from pathlib import Path
+import sys
+
+import pytest
+
+
+def main():
+    version, = sys.argv[1:]
+    if version not in {"before", "after"}:
+        raise ValueError("expected before or after")
+    root = Path(__file__).resolve().parent
+    sys.path.insert(0, str(root / version))
+    from ipfs_datasets_py.optimizers.logic_theorem_optimizer import legal_ir_eval_splits
+
+    if not Path(legal_ir_eval_splits.__file__).is_relative_to(root / version):
+        raise RuntimeError("selected split owner is outside the private snapshot")
+    case = root / "after/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py"
+    return pytest.main([
+        "-q", "-c", str(root / "pytest.ini"), "--noconftest", "-p", "no:cacheprovider", str(case),
+    ])
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

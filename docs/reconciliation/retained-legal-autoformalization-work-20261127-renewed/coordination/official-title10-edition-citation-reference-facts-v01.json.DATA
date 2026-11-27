@@ -1,0 +1,114 @@
+{
+  "boundaries": {
+    "canonical_code_or_docs_changed": false,
+    "legal_review_created": false,
+    "qualification_transferred": false,
+    "retained_source_replay_success_invalidated": false,
+    "runtime_or_model_execution": false,
+    "source_capture_performed": false,
+    "statutory_admission_granted": false
+  },
+  "date_distinctions": [
+    "annual edition",
+    "enactment date",
+    "amendment effective date",
+    "retrieval date"
+  ],
+  "facts": [
+    {
+      "edition": "2010",
+      "evidence_owner": "independent official_title10_citation_history lookup",
+      "heading": "Apprehension of deserters and prisoners; operation of shore patrols",
+      "qualifications": "Historical Navy provision; this does not identify the retained corpus row.",
+      "section": "7214",
+      "source_url": "https://www.govinfo.gov/content/pkg/USCODE-2010-title10/pdf/USCODE-2010-title10-subtitleC-partIII.pdf",
+      "title": 10
+    },
+    {
+      "amendment_effective_on": "2019-02-01",
+      "edition": "2020",
+      "enacted_on": "2018-08-13",
+      "former_section": "7214",
+      "heading": "Apprehension of deserters and prisoners; operation of shore patrols",
+      "renumbering_law": "Pub. L. 115-232, section 807(d)(1)",
+      "section": "8614",
+      "source_lines": [
+        10292,
+        10317
+      ],
+      "source_url": "https://www.govinfo.gov/content/pkg/USCODE-2020-title10/html/USCODE-2020-title10-subtitleC.htm",
+      "title": 10
+    },
+    {
+      "amendment_effective_on": "2019-02-01",
+      "edition": "2023",
+      "enacted_on": "2018-08-13",
+      "former_section": "3533",
+      "heading": "Corps of Engineers: assignment or transfer of officers to duties involving civil functions",
+      "renumbering_law": "Pub. L. 115-232, section 808(b)(6)",
+      "section": "7213",
+      "source_lines": [
+        3467,
+        3488
+      ],
+      "source_url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title10/html/USCODE-2023-title10-subtitleB.htm",
+      "title": 10
+    },
+    {
+      "amendment_effective_on": "2019-02-01",
+      "edition": "2023",
+      "enacted_on": "2018-08-13",
+      "former_section": "3534",
+      "heading": "Corps of Engineers: detail of officers to assist Mayor of District of Columbia",
+      "prior_section7214_destination": "8614",
+      "renumbering_law": "Pub. L. 115-232, section 808(b)(6)",
+      "section": "7214",
+      "source_lines": [
+        3489,
+        3522
+      ],
+      "source_url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title10/html/USCODE-2023-title10-subtitleB.htm",
+      "title": 10
+    },
+    {
+      "edition": "2024",
+      "facts": [
+        "Title-wide personnel definitions include commissioned and warrant officers in officer; commissioned officer includes commissioned warrant officer.",
+        "The source includes rules of construction and references to Title 1 sections 1 through 5."
+      ],
+      "qualifications": "No conclusion that this edition governs a retained corpus row or every use of a defined term.",
+      "section": "101",
+      "source_lines": [
+        75,
+        79,
+        216,
+        228
+      ],
+      "source_url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title10/html/USCODE-2024-title10-subtitleA-partI-chap1-sec101.htm",
+      "subsections": [
+        "b(1)",
+        "b(2)",
+        "g",
+        "h"
+      ],
+      "title": 10
+    }
+  ],
+  "failed_lookup_limits": [
+    "Several direct per-section GovInfo/House URLs were inaccessible; no statutory absence inference was drawn.",
+    "The independent six-call lookup did not verify the old Navy destination; parent independently verified 8614 in official 2020 text."
+  ],
+  "inference": {
+    "citation_reuse_counterexample": "The pair title=10, section=7214 alone can denote different provisions across editions.",
+    "existing_implementation_defect_proven": false,
+    "governing_definition_applicability": null,
+    "next_existing_owner_evidence_needed": [
+      "Retained source row edition/revision identifier and source citation metadata.",
+      "Authenticated relationship between that source revision and the intended definition/use contexts."
+    ],
+    "retained_row_edition": null
+  },
+  "purpose": "Primary-source reference facts for the existing statutory-provenance owner; no new admission or registry.",
+  "retrieved_on": "2026-11-24",
+  "schema": "OFFICIAL_TITLE10_EDITION_CITATION_REFERENCE_FACTS_V1"
+}

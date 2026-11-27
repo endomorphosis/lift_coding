@@ -1,0 +1,48 @@
+{
+  "accounting": {
+    "Source_or_runtime_cap_change": false,
+    "all_prior_reads_and_failed_attempts_retained": true,
+    "canonical_Source_observations": 0,
+    "captures_complete": false,
+    "cumulative_explicit_cached_reads_and_output_verification_before_this_record": 2970734,
+    "implicit_library_IO_measured": false,
+    "private_self_bound_bytes": 3145728,
+    "shared_Source_ledger_mutated_by_author": false,
+    "temporary_fictional_fixture_IO_included_in_cached_input_total": false
+  },
+  "actual_engineering_result": {
+    "counts_not_pooled_with_earlier14": true,
+    "errors": 0,
+    "existing_unchanged": 9,
+    "failures": 0,
+    "final_unique_test_parents": 15,
+    "new": 6,
+    "ordinary_package_or_lane_qualification": false,
+    "skips": 0
+  },
+  "independent_review": {
+    "agent": "/root/handoff_identity_review",
+    "all_full9_stable_and_FDs_closed": true,
+    "authenticated_inputs": 4,
+    "bytes_read_once": 373505,
+    "findings": "Full original-ID SHA separates long requests; dot delimiter separates hashed filenames from legacy-safe names. Both lane lookups share the path method; authority and task-state behavior remain unchanged.",
+    "inverse_original_gate_SHA256": "21088a194de7da753a718c25ac0bd276890509b97b02d46bacfff4230e6a1a77",
+    "inverse_original_lane_SHA256": "00bf759b8adc52da2838faad75eff5d7ffea5ddb6c9b17b21f67cf87918bf947",
+    "new_execution_or_tests": false,
+    "old_owning_test_prefix_SHA256": "d34b9d1f07b105deb064a8ede152ed8c32b5e09c8a1e6e5a5d9795c6f4a1baa2",
+    "tool_chunk": "058013",
+    "verdict": "SCOPED_CLEAR"
+  },
+  "no_new_registry_controller_queue_provider_or_admission": true,
+  "packet": {
+    "bytes": 6401,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/sealed-gate-handoff-packet-identity-three-file-private-v02.json",
+    "sha256": "e775e0364c3f8d19ad632f7e51a6083daa2f296063b72904e1b10141ec91e9be"
+  },
+  "remaining_existing_owner_actions": [
+    "Guarded three-file adoption preserving current changes and modes.",
+    "Ordinary owning-file and real lane caller qualification.",
+    "Consolidated maintained-doc update with the independently owned frontier-consumer change."
+  ],
+  "schema": "existing-gate-handoff-identity-private-review-closeout/v1"
+}

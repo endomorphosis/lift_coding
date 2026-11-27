@@ -1,0 +1,46 @@
+from pathlib import Path
+import hashlib
+import json
+import os
+import subprocess
+
+root=Path(__file__).resolve().parent
+spec=json.loads((root/"inputs.json").read_bytes())
+
+def bytes_for(entry):
+    raw=Path(entry["path"]).read_bytes()
+    assert (len(raw),hashlib.sha256(raw).hexdigest())==(entry["bytes"],entry["sha256"])
+    return raw
+
+def run(mode,expected_owner):
+    argv=spec["invocations"][mode]
+    assert argv[3]==spec["runner"]["path"] and bytes_for(spec["runner"])
+    project=Path(argv[5])
+    assert (project/spec["role_paths"]["owner"]).read_bytes()==expected_owner
+    assert (project/spec["role_paths"]["test"]).read_bytes()==bytes_for(spec["combined_posts"]["test"])
+    output=root/mode
+    output.mkdir(mode=0o700)
+    env={**os.environ,"PYTEST_DISABLE_PLUGIN_AUTOLOAD":"1","PYTHONDONTWRITEBYTECODE":"1",
+         "OPENBLAS_NUM_THREADS":"1","OMP_NUM_THREADS":"1","MKL_NUM_THREADS":"1","NUMEXPR_NUM_THREADS":"1"}
+    with (output/"stdout.DATA").open("xb") as stdout,(output/"stderr.DATA").open("xb") as stderr:
+        code=subprocess.run(argv,stdout=stdout,stderr=stderr,timeout=65,env=env).returncode
+    with (output/"termination.json").open("x") as fd:
+        json.dump({"returncode":code,"argv":argv},fd,indent=2)
+        fd.flush()
+        os.fsync(fd.fileno())
+    print(mode,code,flush=True)
+    assert code==(1 if mode=="before" else 0)
+
+before=bytes_for(spec["before_posts"]["owner"])
+run("before",before)
+after=bytes_for(spec["combined_posts"]["owner"])
+owner=root/"dataset"/spec["role_paths"]["owner"]
+stage=owner.with_name(owner.name+".stage.DATA")
+with stage.open("xb") as fd:
+    fd.write(after)
+    fd.flush()
+    os.fsync(fd.fileno())
+stage.chmod(0o400)
+assert owner.read_bytes()==before
+os.replace(stage,owner)
+run("after",after)

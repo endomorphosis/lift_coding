@@ -1,0 +1,61 @@
+{
+  "Git_mutations": false,
+  "HEAD": "8ba21fb39f09ae6243e92bfd86533a610e48a094",
+  "Native3_correction_packet": {
+    "bytes": 12606,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/SEALED-existing-Native3-custody-readback-correction-INERT-v01.json",
+    "sha256": "037c872a4153ca43981bf8aae656fe4411de8e0d8137047e329812be0b1e40eb"
+  },
+  "actual_Native_or_SDK_or_Source": false,
+  "all_actual_Source_full9_epoch_clock_assets_current_lease_resource_IO_output_bindings": null,
+  "all_five_Gitblob_ids_equal_retained_v567_code_and_test": true,
+  "all_prior_costs_and_receipts_preserved": true,
+  "entries": [
+    {
+      "current_body_rehashed": false,
+      "git_blob": "a96fcf58d02523fee3912912933302c026c92788",
+      "known_baseline_bytes": 103838,
+      "known_baseline_sha256": "c1050ad1ec067fc7f7c8fea08793e872511fe58029e9b1aa89ec90d2cb288313",
+      "mode": "100644",
+      "path": "ipfs_datasets_py/logic/backends/kernel/lean.py"
+    },
+    {
+      "current_body_rehashed": false,
+      "git_blob": "1650b31bd0aa342f3614bf9999e9b6010fba17ee",
+      "known_baseline_bytes": 109707,
+      "known_baseline_sha256": "370ba355be1da87814be4a117d2ce2a1cbc255064958d9ec64ada8e54521a7d7",
+      "mode": "100644",
+      "path": "ipfs_datasets_py/logic/backends/process.py"
+    },
+    {
+      "current_body_rehashed": false,
+      "git_blob": "4ec4a57c8fb7e058cf92e9b0a42cd1940290fb4f",
+      "known_baseline_bytes": 19806,
+      "known_baseline_sha256": "fda64e02042355fd0a0a3b75934b3d1c4ccb5efb42f0fe861876275ff8a5e1a8",
+      "mode": "100644",
+      "path": "ipfs_datasets_py/logic/backends/resource_admission.py"
+    },
+    {
+      "current_body_rehashed": false,
+      "git_blob": "94cd39ed1d3e352faa41992f6236fe72179958eb",
+      "known_baseline_bytes": 115566,
+      "known_baseline_sha256": "99e00363bbd1ea23d450af0912374fdbf4d30ab3b1802371fb8d237dccbf7da5",
+      "mode": "100644",
+      "path": "tests/integration/logic/backends/test_kernel_backends.py"
+    },
+    {
+      "current_immutable_object_bytes": 57510,
+      "current_immutable_object_sha256": "e2dd1dc93d1efa15c7c4088145d32c52636c72e9230b16ade77ca6c6a0c2c336",
+      "current_object_hash_and_Git_framing_verified": true,
+      "git_blob": "09b5536bf3269b6eb54f62cfa83e8dceed53d49e",
+      "mode": "100644",
+      "path": "ipfs_datasets_py/logic/ir_core/protocols.py"
+    }
+  ],
+  "method": "read-only git --no-optional-locks with GIT_NO_LAZY_FETCH=1; exact five path metadata, no fetch/index/ref mutation",
+  "new_code_epoch_or_qualification_claim": false,
+  "next_existing_owner_step": "Fresh-bind and select exact Native3 operation after actual current Source/resource/toolchain/IO/clock observation; no code repin inferred necessary from retained Git metadata",
+  "retained_repo": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+  "schema": "existing-Native3-current-retained-Git-metadata-coherence-INERT/v1",
+  "tree": "b56aea600834c51f557a9562813097cf3972d125"
+}

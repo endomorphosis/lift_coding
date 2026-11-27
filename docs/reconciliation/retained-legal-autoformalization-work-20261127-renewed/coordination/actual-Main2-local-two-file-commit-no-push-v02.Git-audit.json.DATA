@@ -1,0 +1,630 @@
+{
+  "Gitlinks_after": [
+    "160000 commit 5dd8cde2f9e5d9423fbaf2e6eb2e500693399cc4\tdocs/fastmcp",
+    "160000 commit 0da9a074d09267a927d72faa58c26d828f0f8edb\tdocs/mcp-python-sdk",
+    "160000 commit 628bb6e7b01867f3bc252a3c276c0e6ef6acd5b0\tipfs_accelerate_py/mcplusplus",
+    "160000 commit 311e2d12699bb3c051a88bec0535a6e1581421ca\tipfs_datasets_py",
+    "160000 commit a1f4b23332a4e22d97d6c4e441fb5795e3eba2c8\tipfs_kit_py",
+    "160000 commit 4f99e470d12f45f3918128dec2610e1685564ffb\tipfs_model_manager_py",
+    "160000 commit b397988ed9e3e656475c1cf4417b84efdb95daf3\tipfs_transformers_py",
+    "160000 commit 057fde0083b864ba617eed617e45c1e4d599e5e7\ttest/doc-builder",
+    "160000 commit 057fde0083b864ba617eed617e45c1e4d599e5e7\ttest/huggingface_doc_builder",
+    "160000 commit 6c4710bdef6b0db127d40704d8ee2f82c551b27f\ttest/huggingface_transformers"
+  ],
+  "Gitlinks_before": [
+    "160000 commit 5dd8cde2f9e5d9423fbaf2e6eb2e500693399cc4\tdocs/fastmcp",
+    "160000 commit 0da9a074d09267a927d72faa58c26d828f0f8edb\tdocs/mcp-python-sdk",
+    "160000 commit 628bb6e7b01867f3bc252a3c276c0e6ef6acd5b0\tipfs_accelerate_py/mcplusplus",
+    "160000 commit 311e2d12699bb3c051a88bec0535a6e1581421ca\tipfs_datasets_py",
+    "160000 commit a1f4b23332a4e22d97d6c4e441fb5795e3eba2c8\tipfs_kit_py",
+    "160000 commit 4f99e470d12f45f3918128dec2610e1685564ffb\tipfs_model_manager_py",
+    "160000 commit b397988ed9e3e656475c1cf4417b84efdb95daf3\tipfs_transformers_py",
+    "160000 commit 057fde0083b864ba617eed617e45c1e4d599e5e7\ttest/doc-builder",
+    "160000 commit 057fde0083b864ba617eed617e45c1e4d599e5e7\ttest/huggingface_doc_builder",
+    "160000 commit 6c4710bdef6b0db127d40704d8ee2f82c551b27f\ttest/huggingface_transformers"
+  ],
+  "commands": [
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr": "",
+      "stdout_bytes": 41
+    },
+    {
+      "argv": [
+        "diff",
+        "--cached",
+        "--name-only"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr": "",
+      "stdout_bytes": 0
+    },
+    {
+      "argv": [
+        "status",
+        "--porcelain=v1",
+        "-z",
+        "-uall"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr": "",
+      "stdout_bytes": 117
+    },
+    {
+      "argv": [
+        "ls-tree",
+        "-r",
+        "HEAD"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr": "",
+      "stdout_bytes": 3895670
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "stderr": "",
+      "stdout_bytes": 41
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD^{tree}"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "stderr": "",
+      "stdout_bytes": 41
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/hallucinate",
+      "stderr": "",
+      "stdout_bytes": 41
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD^{tree}"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/hallucinate",
+      "stderr": "",
+      "stdout_bytes": 41
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/root",
+      "stderr": "",
+      "stdout_bytes": 41
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD^{tree}"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/root",
+      "stderr": "",
+      "stdout_bytes": 41
+    },
+    {
+      "argv": [
+        "diff",
+        "--check",
+        "--",
+        "ipfs_accelerate_py/agent_supervisor/task_sources/board_stall_watchdog.py",
+        "test/api/test_board_stall_watchdog.py"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr": "",
+      "stdout_bytes": 0
+    },
+    {
+      "argv": [
+        "add",
+        "--",
+        "ipfs_accelerate_py/agent_supervisor/task_sources/board_stall_watchdog.py",
+        "test/api/test_board_stall_watchdog.py"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr": "",
+      "stdout_bytes": 0
+    },
+    {
+      "argv": [
+        "diff",
+        "--cached",
+        "--name-only"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr": "",
+      "stdout_bytes": 111
+    },
+    {
+      "argv": [
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr": "",
+      "stdout_bytes": 0
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        ":ipfs_accelerate_py/agent_supervisor/task_sources/board_stall_watchdog.py"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr": "",
+      "stdout_bytes": 20585
+    },
+    {
+      "argv": [
+        "rev-parse",
+        ":ipfs_accelerate_py/agent_supervisor/task_sources/board_stall_watchdog.py"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr": "",
+      "stdout_bytes": 41
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        ":test/api/test_board_stall_watchdog.py"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr": "",
+      "stdout_bytes": 27433
+    },
+    {
+      "argv": [
+        "rev-parse",
+        ":test/api/test_board_stall_watchdog.py"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr": "",
+      "stdout_bytes": 41
+    },
+    {
+      "argv": [
+        "commit",
+        "-m",
+        "fix(supervisor): continue metadata recovery alongside active work"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr": "",
+      "stdout_bytes": 183
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr": "",
+      "stdout_bytes": 41
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD^{tree}"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr": "",
+      "stdout_bytes": 41
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD^"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr": "",
+      "stdout_bytes": 41
+    },
+    {
+      "argv": [
+        "diff",
+        "--name-only",
+        "8967b3ba8fbf76a5e42f8fd4e8d85949173138ed",
+        "fa30630b7843085aa01ae57d09df75148897b597"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr": "",
+      "stdout_bytes": 111
+    },
+    {
+      "argv": [
+        "status",
+        "--porcelain=v1",
+        "-uall"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr": "",
+      "stdout_bytes": 0
+    },
+    {
+      "argv": [
+        "diff",
+        "--cached",
+        "--name-only"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr": "",
+      "stdout_bytes": 0
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD:ipfs_accelerate_py/agent_supervisor/task_sources/board_stall_watchdog.py"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr": "",
+      "stdout_bytes": 41
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD:test/api/test_board_stall_watchdog.py"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr": "",
+      "stdout_bytes": 41
+    },
+    {
+      "argv": [
+        "ls-tree",
+        "-r",
+        "HEAD"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr": "",
+      "stdout_bytes": 3895670
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "stderr": "",
+      "stdout_bytes": 41
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD^{tree}"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "stderr": "",
+      "stdout_bytes": 41
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/hallucinate",
+      "stderr": "",
+      "stdout_bytes": 41
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD^{tree}"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/hallucinate",
+      "stderr": "",
+      "stdout_bytes": 41
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/root",
+      "stderr": "",
+      "stdout_bytes": 41
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD^{tree}"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/root",
+      "stderr": "",
+      "stdout_bytes": 41
+    }
+  ],
+  "effects": {
+    "commit_returned": true,
+    "staged": true
+  },
+  "error": null,
+  "other_repositories_after": {
+    "datasets": {
+      "Git_metadata": {
+        "HEAD": {
+          "st_ctime_ns": "1795421817209629985",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "68338411",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795421817209629985",
+          "st_nlink": "1",
+          "st_size": "58",
+          "st_uid": "1000"
+        },
+        "config": {
+          "st_ctime_ns": "1795421298887619555",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "68303583",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795421298887619555",
+          "st_nlink": "1",
+          "st_size": "505",
+          "st_uid": "1000"
+        },
+        "index": {
+          "st_ctime_ns": "1795490127787077403",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "68338235",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795490127786077392",
+          "st_nlink": "1",
+          "st_size": "6991149",
+          "st_uid": "1000"
+        }
+      },
+      "HEAD": "4ccc8917b2168db8e11f54c5aadd4ca267f1c488",
+      "tree": "329d830d7ed44f85f997b345310bf9622a9cb31a"
+    },
+    "hallucinate": {
+      "Git_metadata": {
+        "HEAD": {
+          "st_ctime_ns": "1795424157161552783",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69387304",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795424157161552783",
+          "st_nlink": "1",
+          "st_size": "53",
+          "st_uid": "1000"
+        },
+        "config": {
+          "st_ctime_ns": "1795424157161204054",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69343542",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795424157161204054",
+          "st_nlink": "1",
+          "st_size": "493",
+          "st_uid": "1000"
+        },
+        "index": {
+          "st_ctime_ns": "1795497271831296990",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69342837",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795497271830180377",
+          "st_nlink": "1",
+          "st_size": "138750",
+          "st_uid": "1000"
+        }
+      },
+      "HEAD": "f6290dbae751294ce5014babeb667fd75feaa9fa",
+      "tree": "757bd8b8bac6ffb9411e0257fb369aaf4a3638fb"
+    },
+    "root": {
+      "Git_metadata": {
+        "HEAD": {
+          "st_ctime_ns": "1795424161626544727",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69387314",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795424161626544727",
+          "st_nlink": "1",
+          "st_size": "56",
+          "st_uid": "1000"
+        },
+        "config": {
+          "st_ctime_ns": "1795424161624585040",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69343244",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795424161624585040",
+          "st_nlink": "1",
+          "st_size": "508",
+          "st_uid": "1000"
+        },
+        "index": {
+          "st_ctime_ns": "1795497274527192484",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69387317",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795497274526192479",
+          "st_nlink": "1",
+          "st_size": "7262222",
+          "st_uid": "1000"
+        }
+      },
+      "HEAD": "e40b197092df3876afdb92f94d49bcd932fe2a9c",
+      "tree": "a3df51f3d0cd08c8a74e5c9db5638cad57e6d358"
+    }
+  },
+  "other_repositories_before": {
+    "datasets": {
+      "Git_metadata": {
+        "HEAD": {
+          "st_ctime_ns": "1795421817209629985",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "68338411",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795421817209629985",
+          "st_nlink": "1",
+          "st_size": "58",
+          "st_uid": "1000"
+        },
+        "config": {
+          "st_ctime_ns": "1795421298887619555",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "68303583",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795421298887619555",
+          "st_nlink": "1",
+          "st_size": "505",
+          "st_uid": "1000"
+        },
+        "index": {
+          "st_ctime_ns": "1795490127787077403",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "68338235",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795490127786077392",
+          "st_nlink": "1",
+          "st_size": "6991149",
+          "st_uid": "1000"
+        }
+      },
+      "HEAD": "4ccc8917b2168db8e11f54c5aadd4ca267f1c488",
+      "tree": "329d830d7ed44f85f997b345310bf9622a9cb31a"
+    },
+    "hallucinate": {
+      "Git_metadata": {
+        "HEAD": {
+          "st_ctime_ns": "1795424157161552783",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69387304",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795424157161552783",
+          "st_nlink": "1",
+          "st_size": "53",
+          "st_uid": "1000"
+        },
+        "config": {
+          "st_ctime_ns": "1795424157161204054",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69343542",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795424157161204054",
+          "st_nlink": "1",
+          "st_size": "493",
+          "st_uid": "1000"
+        },
+        "index": {
+          "st_ctime_ns": "1795497271831296990",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69342837",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795497271830180377",
+          "st_nlink": "1",
+          "st_size": "138750",
+          "st_uid": "1000"
+        }
+      },
+      "HEAD": "f6290dbae751294ce5014babeb667fd75feaa9fa",
+      "tree": "757bd8b8bac6ffb9411e0257fb369aaf4a3638fb"
+    },
+    "root": {
+      "Git_metadata": {
+        "HEAD": {
+          "st_ctime_ns": "1795424161626544727",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69387314",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795424161626544727",
+          "st_nlink": "1",
+          "st_size": "56",
+          "st_uid": "1000"
+        },
+        "config": {
+          "st_ctime_ns": "1795424161624585040",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69343244",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795424161624585040",
+          "st_nlink": "1",
+          "st_size": "508",
+          "st_uid": "1000"
+        },
+        "index": {
+          "st_ctime_ns": "1795497274527192484",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69387317",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795497274526192479",
+          "st_nlink": "1",
+          "st_size": "7262222",
+          "st_uid": "1000"
+        }
+      },
+      "HEAD": "e40b197092df3876afdb92f94d49bcd932fe2a9c",
+      "tree": "a3df51f3d0cd08c8a74e5c9db5638cad57e6d358"
+    }
+  }
+}

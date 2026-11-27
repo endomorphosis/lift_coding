@@ -1,0 +1,13 @@
+--- v02
++++ v03
+@@ -337,6 +337,10 @@
+             )
+             decision["signature"] = signature
+             return decision
++        if not active_work and repair_already_requested:
++            # Reserve this metadata attempt before the resolver can fail.
++            # Neither an exception nor an unknown observation refunds it.
++            self._idle_checked_at[signature] = time.monotonic()
+         try:
+             release_result = repo.release_dependency_satisfied_blocks()
+         except Exception as exc:

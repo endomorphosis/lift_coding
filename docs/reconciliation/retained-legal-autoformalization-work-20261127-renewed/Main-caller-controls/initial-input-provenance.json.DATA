@@ -1,0 +1,73 @@
+{
+  "refs": [
+    {
+      "path": "/tmp/Root-existing-durable-handoff-INERT-sq3b7w03/invoke-existing-durable-handoff-INERT.py.DATA",
+      "bytes": 15730,
+      "sha256": "cf78dacd03150efba5cd7e2d6d4eeb7c61d58e850a47319d98298fac34c3dd81",
+      "full9": {
+        "st_dev": "66306",
+        "st_ino": "72008533",
+        "st_mode": "33024",
+        "st_nlink": "1",
+        "st_uid": "1000",
+        "st_gid": "1000",
+        "st_size": "15730",
+        "st_mtime_ns": "1795517115237704150",
+        "st_ctime_ns": "1795517115237704150"
+      }
+    },
+    {
+      "path": "/tmp/Main-Codex-durable-handoff-producer-private-v01-puhefwvb/openai_codex_cli_integration.strict-v02.after.py.DATA",
+      "bytes": 51089,
+      "sha256": "9496e744a6bb21befe520b327a6c6f90f0af2150b4fd4117c37a4f96adadf5f4",
+      "full9": {
+        "st_dev": "66306",
+        "st_ino": "804582",
+        "st_mode": "33024",
+        "st_nlink": "1",
+        "st_uid": "1000",
+        "st_gid": "1000",
+        "st_size": "51089",
+        "st_mtime_ns": "1795422061978161903",
+        "st_ctime_ns": "1795422061978161903"
+      }
+    },
+    {
+      "path": "/tmp/Root-V1-ordinary54-sole-publication-release-once-v293-6vwps0o4/result.json",
+      "bytes": 1647,
+      "sha256": "6be7c2b1cf2b8295146d3bfdcded87cb45d619ae3b5c92f912e24389b89935b5",
+      "full9": {
+        "st_dev": "66306",
+        "st_ino": "45369288",
+        "st_mode": "33024",
+        "st_nlink": "1",
+        "st_uid": "1000",
+        "st_gid": "1000",
+        "st_size": "1647",
+        "st_mtime_ns": "1795581217901103293",
+        "st_ctime_ns": "1795581217901103293"
+      }
+    },
+    {
+      "path": "/tmp/Root-V1-ordinary54-post-resume-new-release-once-v293-vq60un8q/result.json",
+      "bytes": 1942,
+      "sha256": "ef8342935d0700cd2529d9f7d452a1fed9f49b9be15720553407162609c7dd02",
+      "full9": {
+        "st_dev": "66306",
+        "st_ino": "59032005",
+        "st_mode": "33024",
+        "st_nlink": "1",
+        "st_uid": "1000",
+        "st_gid": "1000",
+        "st_size": "1942",
+        "st_mtime_ns": "1795581347143171174",
+        "st_ctime_ns": "1795581347143171174"
+      }
+    }
+  ],
+  "prior_unpatched_consumer_investigation_reads_retained": 54223,
+  "assignment_read": 5091,
+  "current_parent_file_reads": 70408,
+  "phase_limit": 8388608,
+  "prior_P1_closed_unit_bytes_2074871_retained_separately": true
+}

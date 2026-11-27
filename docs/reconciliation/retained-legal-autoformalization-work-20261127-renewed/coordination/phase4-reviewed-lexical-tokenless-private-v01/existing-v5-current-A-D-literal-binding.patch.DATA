@@ -1,0 +1,85 @@
+--- c642-parent
++++ current-A-D-parent-INERT
+@@ -14,10 +14,11 @@
+ import time
+ import types
+ 
+-R = Path('/tmp/datasets-reviewed-source-use-main-20261115')
+-A = Path('/tmp/lift-sync-accelerate-all-main-20261114')
+-LOCK_R = Path('/home/barberb/lift_coding/external/ipfs_datasets')
+-LOCK_A = LOCK_R.parent / 'ipfs_accelerate'
++R = Path('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets')
++A = Path('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate')
++LOCK_R = R
++LOCK_A = A
++CONTROL_HOME = Path('/home/barberb/lift_coding/external/ipfs_datasets')
+ P = Path(__file__).resolve().parent
+ HELPER_BASE = Path('/tmp/legal-ir-phase2-reviewed-admission-source-20261108-v01/resource-census-compatible-port-v01/runtime-owner-v4-trainer-compatibility-v01/current-published-cleanup71-original16MiB-input-v03-shared60-total420')
+ BASE = Path('/tmp/legal-ir-phase2-reviewed-admission-source-20261108-v01/resource-census-compatible-port-v01/runtime-owner-v4-trainer-compatibility-v01/current-published-cleanup71-original16MiB-input-v01')
+@@ -26,15 +27,15 @@
+ PREPARATION_COMPLETE = False
+ ROOT_ORIGINAL_EXECUTION_SELECTED = False
+ CURRENT_V5_ACQUIRED_CLI_SHA = '7ce92270e5a203b4bea00451997712ba5255ba3552728721d6457486157d57e3'
+-HELPER = Path('/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/federal-corpus-audits/legal-ir-reviewed-component-cycle-20261110-Ex3yDW/reviewed-mixed-joint-adoption-v01/profiled-retention-integration-v01/wait-helper-reviewed-source-use-R2-owner-INERT-v01.py')
+-HELPER_SHA = '8d7309ebf7b51f27980dbcd088ab6782d6b26f68c48249be3b549234bfff7d9b'
++HELPER = Path('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase4-reviewed-lexical-tokenless-private-v01/existing-v5-wait-helper-explicit-lease-roots.v01.py.DATA')
++HELPER_SHA = '779a75eaa6f365fb1b62556b7bfbf10152ffd5bbf6cd89162af4e3729befd97c'
+ LEASE_SHA = '42e9f07d0d458177079269d9f495f0b70512180c1adc2f7fe0bfdb05518a12f9'
+-IO = LOCK_R / 'workspace/test-logs/federal-corpus-audits/legal-ir-normative-target-binding-20261021-01/controls/install_product_v02.py'
++IO = CONTROL_HOME / 'workspace/test-logs/federal-corpus-audits/legal-ir-normative-target-binding-20261021-01/controls/install_product_v02.py'
+ IO_SHA = '733d651fb88f08fd1f09c4075e0b6d2b496509c1dcac04926f9e00d373d85671'
+-CLASSIFIER = LOCK_R / 'workspace/test-logs/federal-corpus-audits/legal-ir-planning-review-20261020-01/review-11/cp128-warmstart-qualification-v01/controls/launch_single_lease.py'
++CLASSIFIER = CONTROL_HOME / 'workspace/test-logs/federal-corpus-audits/legal-ir-planning-review-20261020-01/review-11/cp128-warmstart-qualification-v01/controls/launch_single_lease.py'
+ CLASSIFIER_SHA = 'a0b2785bf417bfca462d958827d319ef1da2347645becdd1f6a001cec24ad6aa'
+ OWNER = R / 'scripts/ops/legal_ir/run_owned_validation.py'
+-LEDGER = LOCK_R / 'workspace/test-logs/federal-corpus-audits/owned-daemon-resource-control/disk-reservations.json'
++LEDGER = CONTROL_HOME / 'workspace/test-logs/federal-corpus-audits/owned-daemon-resource-control/disk-reservations.json'
+ GIT_IDENTITY_SHA256 = None
+ 
+ 
+@@ -46,6 +47,7 @@
+     module.__file__ = str(HELPER)
+     sys.modules[module.__name__] = module
+     exec(compile(raw, str(HELPER), 'exec'), module.__dict__)
++    module.OWNER = OWNER
+     return module
+ 
+ 
+@@ -311,7 +313,8 @@
+         # Unlike the old wait helper's standalone main(), these SAME read
+         # contexts stay held across Popen, genuine wait, classification and pins.
+         parent['source_admission_attempted'] = True
+-        reads, receipts = helper.dual_reads(lease, admission_deadline=admission_deadline)
++        reads, receipts = helper.dual_reads(
++            lease, admission_deadline=admission_deadline, roots=(LOCK_R, LOCK_A))
+         parent['source_admission_completed'] = True
+         parent['original_source_READs'] = receipts
+         helper.need([row['canonical_root'] for row in receipts] == [str(LOCK_R), str(LOCK_A)],
+--- 8d73-helper
++++ explicit-lease-roots-helper
+@@ -101,7 +101,7 @@
+         separators=(',', ':'), allow_nan=False).encode()).hexdigest()
+ 
+ 
+-def dual_reads(lease, *, admission_deadline=None):
++def dual_reads(lease, *, admission_deadline=None, roots=(R, A)):
+     """Original READs, optionally sharing one caller-owned admission cutoff.
+ 
+     None preserves the original two3s lock waits. The explicit caller supplies
+@@ -113,14 +113,14 @@
+     try:
+         if admission_deadline is None:
+             receipts = [stack.enter_context(lease.source_lease(root, mode='read', timeout_seconds=3)).to_dict()
+-                        for root in (R, A)]
++                        for root in roots]
+         else:
+             observed = time.monotonic()
+             need(type(admission_deadline) in (int, float) and math.isfinite(admission_deadline)
+                  and observed < admission_deadline <= observed + 60,
+                  'finite caller-owned shared Source admission cutoff required')
+             receipts = []
+-            for root in (R, A):
++            for root in roots:
+                 remaining = admission_deadline - time.monotonic()
+                 need(remaining > 0, 'shared Source admission expired before entry')
+                 held = stack.enter_context(lease.source_lease(root, mode='read', timeout_seconds=remaining))

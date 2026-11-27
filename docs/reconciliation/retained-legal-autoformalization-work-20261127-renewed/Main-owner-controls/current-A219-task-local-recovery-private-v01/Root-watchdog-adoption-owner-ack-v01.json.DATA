@@ -1,0 +1,85 @@
+{
+  "schema": "Root-watchdog-adoption-owner-ack/v1",
+  "observed_utc": "2026-11-27T05:49:48+00:00",
+  "unit": "Main watchdog privatef7c3",
+  "owner": "Root",
+  "phase": "owned_Source_IO_funded_awaiting_fresh_Source2_binding",
+  "packet": {
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/SEALED-existing-watchdog-event-aware-recheck-two-file-private-v03.json",
+    "bytes": 13817,
+    "sha256": "0dd365d7e8cf0d2e7583755c3aba8a329157167edacb7db276267ccf629bd28f"
+  },
+  "selected_scope": {
+    "changes": [
+      "ipfs_accelerate_py/agent_supervisor/task_sources/board_stall_watchdog.py",
+      "test/api/test_board_stall_watchdog.py"
+    ],
+    "planned_qualification": "Existing SDK full owning module. Actual COLLECT determines RUN roster.",
+    "expected_cases_static": 40,
+    "retained_cases_static": 25,
+    "new_cases_static": 15,
+    "qualified_cases_on_current_packet": null
+  },
+  "current_Git_preflight": {
+    "accelerate_origin_main": "64a8649952bed66a457d7b87bf6dced9fadab8d4",
+    "datasets_origin_main": "3bdfec5b148ad6c4ac53281ceb02ecd8377643e0",
+    "accelerate_tree": "09f7c8fe34fc2d31759fba97968642b823269bb8",
+    "read_only_preimage_checkout": "/tmp/accelerate-objective-output-owner-main-ybAvG5Rm/checkout",
+    "watchdog_blob": "0dd6e6adf2243634f6f2e4e4ad1b68e0bc706f5b",
+    "owning_test_blob": "dba0961ebf1bc9ac71f282f2d28de1ca7a6c7a28",
+    "unchanged_repository_blob": "e9b885a48a38ee00969d00220b0b2a30ef9daf63"
+  },
+  "actual": {
+    "execution_handle": null,
+    "fresh_Source_epoch": null,
+    "fresh_launch_clock": null,
+    "SDK_lease": null,
+    "Source2_installation": null,
+    "COLLECT": null,
+    "RUN": null,
+    "Git_publication": null,
+    "parent_pin_publication": null
+  },
+  "shared_checkout_changes": [],
+  "previous_cap_blocker": {
+    "kind": "insufficient_retained_Source_IO_headroom_at_unchanged_caps",
+    "last_verified_closed_ledger": {
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/Source-only-Guide581-full-retained-cap.json",
+      "bytes": 1321,
+      "sha256": "91acf9ffe66d861824275ca128635becb9fac6f6805a3c411ede206b30f012b7"
+    },
+    "ledger_terminal": {
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-Guide581-four-docs-Source-closed-and-frozen.json",
+      "bytes": 6552,
+      "sha256": "38e41dfb04443a92c2a20308d4f01a9cb75fa34f97029856ffbcbf82f1429503"
+    },
+    "existing_Source2_profile": {
+      "path": "/tmp/Root-A-CLI111-existing-Source2-v430-e5uezx7r/Source-only-A-CLI111-exact2-paid-preserve-Guide537.json",
+      "bytes": 1430,
+      "sha256": "ac7e8023c20cc7145b6dabe885316d238033d09f5d50c2f198c1dee62d822121"
+    },
+    "available_bytes": 6356992,
+    "Source2_envelope_bytes": 67108864,
+    "Source2_shortfall_bytes": 60751872,
+    "existing_watchdog_SDK_profile": {
+      "path": "/tmp/Root-selected-native-watchdog-normal25-corrected-v58/Root-selection.json",
+      "bytes": 2220,
+      "sha256": "0ac5718e69d665178afd2a1d971bcc4d98616d9cb2605d331dd3577fc1514663"
+    },
+    "ordinary_predebit_bytes": 134217728,
+    "ordinary_shortfall_bytes_before_Source2_or_reads": 127860736,
+    "new_paid_or_admitted_binding_found": false
+  },
+  "funding": {
+    "record": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/Root-watchdog-Source-only-funding-v01.json",
+      "bytes": 5328,
+      "sha256": "075893a03ecb8aaddf7eeaa29df9600c3bd410bb758153ab18bd37f2a3e5ce72"
+    },
+    "added_Source_IO_bytes": 268435456,
+    "old_charges_retained": true,
+    "phase_precharges_applied": 0,
+    "unreserved_headroom_bytes": 6356992
+  },
+  "next_binding": "Fresh current guarded Source2 selection with a clean isolated Accelerator, paired D physical roles, full9, custody and clock."
+}

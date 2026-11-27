@@ -1,0 +1,22 @@
+{
+  "all_other_top_level_AST_exact": true,
+  "forward": {
+    "bytes": 5767,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/record.forward.diff",
+    "sha256": "eca6754a1e5d836f5223a40d4fb70bacceb61b8e295080ee1078db4f1293dd53"
+  },
+  "inverse": {
+    "bytes": 5767,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/record.inverse.diff",
+    "sha256": "42c22fea7af1a16b7a406e09641d759c9075dadb5e668cfe15fe8793f72bc968"
+  },
+  "negative_legacy_behavior_preserved": true,
+  "obligation_digest_AST_exact": true,
+  "positive_without_context_intentionally_refused": true,
+  "post": {
+    "bytes": 69864,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/legal_ir_proof_feedback.after.py.DATA",
+    "sha256": "e471a920935b032eefe480102fe609a872899ea77e3334a197354804c502a92b"
+  },
+  "run": false
+}

@@ -1,0 +1,61 @@
+import os
+from pathlib import Path
+import resource
+import sys
+import tempfile
+
+private = Path(sys.argv[1]).resolve()
+project = Path(sys.argv[2]).resolve()
+protected = tuple(Path(x).resolve() for x in sys.argv[3:7])
+selectors = sys.argv[7:]
+assert 1 <= len(selectors) <= 60
+resource.setrlimit(resource.RLIMIT_AS, (512*1024*1024,) * 2)
+resource.setrlimit(resource.RLIMIT_CPU, (55, 56))
+os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
+tempfile.tempdir = str(private)
+sys.path.insert(0,str(project))
+os.chdir(project)
+blocked_backend = {"torch","jax","tensorflow","transformers","huggingface_hub"}
+
+def resolve(path, dir_fd=-1):
+    path = Path(os.fsdecode(path))
+    if not path.is_absolute() and type(dir_fd) is int and dir_fd >= 0:
+        path = Path(os.readlink(f"/proc/self/fd/{dir_fd}")) / path
+    return path.resolve()
+
+def check_write(path,dir_fd=-1):
+    dest = resolve(path,dir_fd)
+    if not dest.is_relative_to(private):
+        raise PermissionError(f"private fixture write refused: {dest}")
+
+def audit(event,args):
+    if event.startswith("socket.") or event.startswith("subprocess.") or event in {
+            "os.system","os.fork","os.forkpty","os.exec","os.posix_spawn"}:
+        raise PermissionError(f"private fixture process/network operation refused: {event}")
+    if event == "import" and args[0].split(".",1)[0] in blocked_backend:
+        raise ImportError(f"private fixture model backend refused: {args[0]}")
+    if event == "open" and not isinstance(args[0], int):
+        dest = resolve(args[0])
+        if any(dest.is_relative_to(p) for p in protected):
+            raise PermissionError(f"private fixture canonical body read refused: {dest}")
+        flags = args[2] or 0
+        if flags & (os.O_WRONLY|os.O_RDWR|os.O_CREAT|os.O_TRUNC|os.O_APPEND):
+            check_write(dest)
+    elif event in {"os.remove","os.rmdir","os.mkdir","os.chmod"}:
+        check_write(args[0],args[-1])
+    elif event in {"os.rename","os.link"}:
+        check_write(args[0],args[2])
+        check_write(args[1],args[3])
+    elif event == "os.symlink":
+        raise PermissionError("private fixture symlink creation refused")
+    elif event in {"os.truncate","os.utime","os.chown"} and not isinstance(args[0],int):
+        check_write(args[0],args[-1] if event in {"os.utime","os.chown"} else -1)
+
+sys.addaudithook(audit)
+import pytest
+args=["--noconftest","-c",str(project/"pytest.ini"),"--rootdir",str(project),
+      "--import-mode=importlib","--basetemp",str(private/"pytest"),
+      "--junitxml",str(private/"result.xml"),"--log-file",str(private/"pytest.log"),
+      "-p","no:cacheprovider","--color=no","-q","--tb=short",
+      *[str(project/selector) for selector in selectors]]
+raise SystemExit(pytest.main(args))

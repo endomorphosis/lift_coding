@@ -1,0 +1,155 @@
+{
+  "force_or_tag_push": false,
+  "gitlink_updates": {
+    "hallucinate": {
+      "ipfs_datasets_py": {
+        "from": "2d3d1475b3aebfc22efe26370a0c015b02ff145b",
+        "to": "0749418e5229f410b82db97c269250d3e044472c"
+      }
+    },
+    "root": {
+      "external/ipfs_datasets": {
+        "from": "2d3d1475b3aebfc22efe26370a0c015b02ff145b",
+        "to": "0749418e5229f410b82db97c269250d3e044472c"
+      },
+      "hallucinate_app": {
+        "from": "7a7192f116d610f89071db882bf1ec4ed9664c7d",
+        "to": "80be21a8004aa7856cf0f6b8ec0749ac973d8f10"
+      }
+    }
+  },
+  "guide_blobs": {
+    "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json": {
+      "before_blob": "12c543f8afaff7aff2341bb4e88cddeb3be5608d",
+      "blob": "5526daca8f089b6fd09cdfbffec72ab94bc653a4",
+      "bytes": 1407264,
+      "inserted_bytes": 12824,
+      "sha256": "10d5a52c182e087edb809ed09b3fb2f32a0969c6bd18b54fd85051606598ddfd"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md": {
+      "before_blob": "57db900cd34ab20342e5c7a822b023af19170039",
+      "blob": "ebbbe9c1c66598415303ab75f886ce41c83b3ed8",
+      "bytes": 940606,
+      "inserted_bytes": 5108,
+      "sha256": "e65e762a193998a8ac1105ffe60f927e4fcf7be48fdc021a50421429df578e24"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md": {
+      "before_blob": "67e16bf5c6c5d34adc7f974d02ddcb65849e7c43",
+      "blob": "1115551f23940a18f6fa9368673a2fe0cb096458",
+      "bytes": 700591,
+      "inserted_bytes": 5108,
+      "sha256": "621d313d586c4f1aba84c8033f50738e5d48208029007361f364ce3a7ceebc45"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json": {
+      "before_blob": "a87757891272391008ddcdd9ece0c7caf1fc402e",
+      "blob": "6b2ddaa7af8d5c4d1915d14e253b84d5426cd120",
+      "bytes": 1657614,
+      "inserted_bytes": 13406,
+      "sha256": "b9bc3bf316eb0142f1cafde8a943dd37aa985e657e5d695918f3a3c0b71062b7"
+    }
+  },
+  "installation": {
+    "Source_actual_IO": {
+      "bytes": 57019096,
+      "captures": 131
+    },
+    "Source_module_and_stage_FDs_closed": true,
+    "bytes": 4930,
+    "full_Root_Source_envelope_retained": 100663296,
+    "path": "/tmp/Root-one511-four-guide-CAS-actual-v180-sbr1mzmr/Root-one511-four-installed-Source-closed-small-v180.json",
+    "sha256": "c73bcdad8792a89d3b23968d5dad9366f65978d2e4897b088083be8ec8563718"
+  },
+  "local_after": {
+    "accelerate": {
+      "head": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "index_and_worktree_clean": true,
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "datasets": {
+      "head": "0749418e5229f410b82db97c269250d3e044472c",
+      "index_and_worktree_clean": true,
+      "tree": "5c85a83d33b1a19baef213058cb216495b0f0661"
+    },
+    "hallucinate": {
+      "head": "80be21a8004aa7856cf0f6b8ec0749ac973d8f10",
+      "index_and_worktree_clean": true,
+      "tree": "dce35f0fb82b2dec4cd9084b801a417f9f1c03d4"
+    },
+    "root": {
+      "head": "698e4cabbcf755f249768a873a7aacda5cb3c59a",
+      "index_and_worktree_clean": true,
+      "tree": "6f2d126f2fbe3d6904982d606a66cfde7c5c8d4f"
+    }
+  },
+  "new_Source_test_CI_or_model_invocation": false,
+  "origin_main_after": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "0749418e5229f410b82db97c269250d3e044472c",
+    "hallucinate": "80be21a8004aa7856cf0f6b8ec0749ac973d8f10",
+    "root": "698e4cabbcf755f249768a873a7aacda5cb3c59a"
+  },
+  "origin_main_before": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "2d3d1475b3aebfc22efe26370a0c015b02ff145b",
+    "hallucinate": "7a7192f116d610f89071db882bf1ec4ed9664c7d",
+    "root": "f7e9e19dd9856e937a36e27ee1f2b1a8adb35e82"
+  },
+  "origin_urls": {
+    "accelerate": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+    "datasets": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+    "hallucinate": "https://github.com/endomorphosis/hallucinate_app.git",
+    "root": "https://github.com/endomorphosis/lift_coding.git"
+  },
+  "other_gitlinks_and_accelerate_preserved": true,
+  "preservation": {
+    "added_backlog_entry": "current_user_goal_v4_fixture_and_lexical_tokenless_engineering_milestone511_20261124",
+    "added_catalog_id": "v4-fixture-and-lexical-tokenless-engineering-milestone511-20261124",
+    "added_evidence_ordinal": 511,
+    "both_MD_complete_prefixes_exact": true,
+    "components": 126,
+    "old_catalog_records": 510,
+    "one_byte_insertion_per_guide": true,
+    "task_statuses_dependencies_acceptance_unchanged": true,
+    "tasks": 24
+  },
+  "push_order": [
+    "datasets",
+    "hallucinate",
+    "root"
+  ],
+  "pushes": {
+    "datasets": {
+      "from": "2d3d1475b3aebfc22efe26370a0c015b02ff145b",
+      "porcelain": " \t0749418e5229f410b82db97c269250d3e044472c:refs/heads/main\t2d3d1475b3..0749418e52",
+      "rc": 0,
+      "ref": "refs/heads/main",
+      "to": "0749418e5229f410b82db97c269250d3e044472c"
+    },
+    "hallucinate": {
+      "from": "7a7192f116d610f89071db882bf1ec4ed9664c7d",
+      "porcelain": " \t80be21a8004aa7856cf0f6b8ec0749ac973d8f10:refs/heads/main\t7a7192f..80be21a",
+      "rc": 0,
+      "ref": "refs/heads/main",
+      "to": "80be21a8004aa7856cf0f6b8ec0749ac973d8f10"
+    },
+    "root": {
+      "from": "f7e9e19dd9856e937a36e27ee1f2b1a8adb35e82",
+      "porcelain": " \t698e4cabbcf755f249768a873a7aacda5cb3c59a:refs/heads/main\tf7e9e19dd9..698e4cabbc",
+      "rc": 0,
+      "ref": "refs/heads/main",
+      "to": "698e4cabbcf755f249768a873a7aacda5cb3c59a"
+    }
+  },
+  "schema": "guide511-GitHub-publication/v180",
+  "scope": {
+    "du_liveness_or_release_authority": false,
+    "ledger_claim_context_only": true,
+    "new_admission_or_goal_completion": false,
+    "private_stdlib9_and_private_lexical12_separate": true,
+    "public_Torch_or_V4_executed": false
+  },
+  "unchanged_lexical_blobs": {
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_joint_retrieval.py": "c15582df34f21c148d22bf93e07dd59044bb66b4",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_joint_retrieval.py": "07dd3bf1fcb2bd6b005f64e2b4e16f76e38f214a"
+  }
+}

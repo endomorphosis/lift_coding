@@ -1,0 +1,307 @@
+{
+  "analysis": "AST/static assertion inspection only; no existing test/validator/script execution, no project import.",
+  "call_metadata_helper": {
+    "definition": "def call_metadata(s=None, m=None, c=None):\n    return metadata_check(snapshot if s is None else s, manifest if m is None else m, old_config, old_pipeline, contract if c is None else c)",
+    "end_line": 217,
+    "line": 215
+  },
+  "conclusion": {
+    "all_five_requested_refusal_categories_have_existing_negative_controls": true,
+    "new_product_defect_reproduced": false,
+    "new_tests_authored_or_executed": 0,
+    "product_patch_justified_by_this_review": false,
+    "recommendation": "Finite clear for the requested coverage question; reuse the saved23 result and do not duplicate tests or change production owners.",
+    "uncovered_requested_category_identified": false
+  },
+  "coverage": {
+    "parent": [
+      {
+        "authored_mutations": [
+          "c = copy.deepcopy(contract)",
+          "c['old_checkpoint_manifest_sha256'] = authored_sha('other-parent')"
+        ],
+        "end_line": 248,
+        "line": 244,
+        "method": "test_05_changed_parent_manifest_binding_refused",
+        "owner_calls": [
+          "call_metadata(c=c)"
+        ],
+        "raises_assertions": [
+          "self.assertRaisesRegex(Error, 'saved pair commitments differ')"
+        ]
+      },
+      {
+        "authored_mutations": [
+          "s = copy.deepcopy(snapshot)",
+          "s[key] = authored_sha('changed-snapshot-' + key)"
+        ],
+        "end_line": 291,
+        "line": 286,
+        "method": "test_11_changed_snapshot_parent_configuration_pipeline_refused",
+        "owner_calls": [
+          "call_metadata(s=s)"
+        ],
+        "raises_assertions": [
+          "self.assertRaises(Error)"
+        ]
+      }
+    ],
+    "purpose": [
+      {
+        "authored_mutations": [],
+        "end_line": 229,
+        "line": 226,
+        "method": "test_02_policy_cannot_assert_training_or_authority",
+        "owner_calls": [
+          "policy_check(dict(terminal_policy, **{key: True}))"
+        ],
+        "raises_assertions": [
+          "self.assertRaises(Error)"
+        ]
+      },
+      {
+        "authored_mutations": [
+          "c = copy.deepcopy(contract)",
+          "c[key] = True"
+        ],
+        "end_line": 305,
+        "line": 300,
+        "method": "test_13_training_purpose_and_assumption_fields_refused",
+        "owner_calls": [
+          "call_metadata(c=c)"
+        ],
+        "raises_assertions": [
+          "self.assertRaises(Error)"
+        ]
+      },
+      {
+        "authored_mutations": [
+          "c = copy.deepcopy(contract)",
+          "c['generation_policy'] = terminal_policy"
+        ],
+        "end_line": 317,
+        "line": 313,
+        "method": "test_15_new_policy_is_not_a_source_contract_field",
+        "owner_calls": [
+          "call_metadata(c=c)"
+        ],
+        "raises_assertions": [
+          "self.assertRaises(Error)"
+        ]
+      }
+    ],
+    "scope": [
+      {
+        "authored_mutations": [
+          "value = copy.deepcopy(contract if role == 'contract' else snapshot)",
+          "value[key] = 'FICTIONAL-historical-execution-attested/v1'"
+        ],
+        "end_line": 298,
+        "line": 293,
+        "method": "test_12_historical_execution_attestation_scope_refused",
+        "owner_calls": [
+          "call_metadata(c=value)",
+          "call_metadata(s=value)"
+        ],
+        "raises_assertions": [
+          "self.assertRaises(Error)"
+        ]
+      }
+    ],
+    "source": [
+      {
+        "authored_mutations": [
+          "c = copy.deepcopy(contract)",
+          "c['old_source_sha256']['worker'] = authored_sha('other-old-worker')"
+        ],
+        "end_line": 254,
+        "line": 250,
+        "method": "test_06_changed_old_source_binding_refused",
+        "owner_calls": [
+          "call_metadata(c=c)"
+        ],
+        "raises_assertions": [
+          "self.assertRaises(Error)"
+        ]
+      },
+      {
+        "authored_mutations": [
+          "s = copy.deepcopy(snapshot)",
+          "s['current_source_sha256']['worker'] = old_source['worker']"
+        ],
+        "end_line": 260,
+        "line": 256,
+        "method": "test_07_stale_current_source_snapshot_refused",
+        "owner_calls": [
+          "call_metadata(s=s)"
+        ],
+        "raises_assertions": [
+          "self.assertRaisesRegex(Error, 'exact old pair and current Source5')"
+        ]
+      },
+      {
+        "authored_mutations": [
+          "c = copy.deepcopy(contract)",
+          "c['current_source_sha256']['worker'] = value"
+        ],
+        "end_line": 267,
+        "line": 262,
+        "method": "test_08_malformed_source_digest_refused",
+        "owner_calls": [
+          "call_metadata(c=c)"
+        ],
+        "raises_assertions": [
+          "self.assertRaises(Error)"
+        ]
+      },
+      {
+        "authored_mutations": [
+          "c = copy.deepcopy(contract)",
+          "c['current_source_sha256']['unbound_role'] = authored_sha('extra')"
+        ],
+        "end_line": 277,
+        "line": 269,
+        "method": "test_09_missing_or_added_source_role_refused",
+        "owner_calls": [
+          "call_metadata(c=c)"
+        ],
+        "raises_assertions": [
+          "self.assertRaises(Error)"
+        ]
+      }
+    ],
+    "target": [
+      {
+        "authored_mutations": [],
+        "end_line": 235,
+        "line": 231,
+        "method": "test_03_policy_wrong_terminal_and_target_refused",
+        "owner_calls": [
+          "policy_check(dict(terminal_policy, **{key: value}))"
+        ],
+        "raises_assertions": [
+          "self.assertRaises(Error)"
+        ]
+      },
+      {
+        "authored_mutations": [
+          "m = copy.deepcopy(manifest)",
+          "m['backend_identity']['target_codec'] = 'complete-reviewed-norm-json/v2'"
+        ],
+        "end_line": 311,
+        "line": 307,
+        "method": "test_14_changed_old_objective_refused",
+        "owner_calls": [
+          "call_metadata(m=m)"
+        ],
+        "raises_assertions": [
+          "self.assertRaisesRegex(Error, 'same digest objective')"
+        ]
+      }
+    ]
+  },
+  "created_ns": "1795482172494278702",
+  "delegated_boundaries": [
+    {
+      "end_line": 324,
+      "line": 319,
+      "meaning": "Current-configuration and physical-artifact authentication belongs to downstream owners, not this pure metadata-association validator.",
+      "method": "test_16_metadata_validator_delegates_current_configuration_and_artifact_proof"
+    },
+    {
+      "end_line": 330,
+      "line": 326,
+      "meaning": "Distribution/implementation proof belongs to the actual dependency owner; placeholder metadata acceptance is explicitly tested and is not evidence of runtime compatibility.",
+      "method": "test_17_metadata_validator_delegates_distribution_implementation_proof"
+    },
+    {
+      "end_line": 336,
+      "line": 332,
+      "meaning": "Marker shape validation is not parent authentication. A different well-formed parent digest remains syntactically valid; a full owner must establish identity.",
+      "method": "test_18_marker_closed_shape_is_not_parent_authentication"
+    }
+  ],
+  "effects": {
+    "Git_operations": false,
+    "Source_or_canonical_IO": false,
+    "input_FDs_closed": true,
+    "model_assets_Native_SDK": false,
+    "network": false,
+    "only_output_written": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-existing23-five-refusal-independent-coverage-v01.json",
+    "project_imports": false,
+    "script_or_tests_executed": false
+  },
+  "historical_saved_result": {
+    "attributed_not_rerun": true,
+    "elapsed_seconds": 0.181352024897933,
+    "execution": "stdlib-only, exact pure cached definitions; actual projection invoked without relaxing guard",
+    "tests": {
+      "actual_success": true,
+      "errors": 0,
+      "failures": 0,
+      "run": 23,
+      "skipped": 0
+    }
+  },
+  "inputs": [
+    {
+      "FD_closed": true,
+      "bytes": 21787,
+      "observed_full9": {
+        "st_ctime_ns": "1795378716207834153",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "57446512",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795378716207834153",
+        "st_nlink": "1",
+        "st_size": "21787",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Source66-existing-generation-relationship-private-controls-v01-hdkkbb5_/check_existing_relationship.py",
+      "sha256": "23008e6e20e5185aabc63a812a2a754955ff4f4f0bbc78c44e4bde5e46951595"
+    },
+    {
+      "FD_closed": true,
+      "bytes": 9051,
+      "observed_full9": {
+        "st_ctime_ns": "1795378721397881107",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "57446515",
+        "st_mode": "33152",
+        "st_mtime_ns": "1795378721397881107",
+        "st_nlink": "1",
+        "st_size": "9051",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Source66-existing-generation-relationship-private-controls-v01-hdkkbb5_/actual-authored-controls-report-v01.json",
+      "sha256": "8bd8b439dd7b848c247f935875fdb5e8017ce0d865c7b14be957d94021e3439e"
+    }
+  ],
+  "limits": [
+    "Historical Source66 software-control scope only; no current Source, checkpoint, admission, migration, model or training compatibility qualified.",
+    "Coverage is scoped to the authored existing assertions and saved result. This static review does not prove all malformed values or all runtime routes are correct.",
+    "The recorded actual historical-source projection refusal remains unsupported; no bypass, new profile, registry, budget, permission or execution grant is proposed."
+  ],
+  "read_accounting": {
+    "actual_explicit_private_input_bytes": 30838,
+    "all_prior_parent_and_historical_reads_preserved_separately": true,
+    "cap": 32768,
+    "implicit_interpreter_IO_not_claimed_fully_metered": true,
+    "no_refund_or_reset": true
+  },
+  "schema": "independent-existing23-five-refusal-static-coverage/v1",
+  "source_function_aliases": {
+    "marker_check": "ns['_reviewed_digest_cache_epoch_validate_marker']",
+    "metadata_check": "ns['_reviewed_digest_cache_current_dependency_metadata']",
+    "policy_check": "ns['_reviewed_decoder_generation_policy']",
+    "projection_check": "ns['_reviewed_digest_cache_epoch_projection']"
+  },
+  "test_class": {
+    "end_line": 387,
+    "existing_parent_methods": 23,
+    "line": 220,
+    "name": "ExistingRelationshipControls"
+  }
+}

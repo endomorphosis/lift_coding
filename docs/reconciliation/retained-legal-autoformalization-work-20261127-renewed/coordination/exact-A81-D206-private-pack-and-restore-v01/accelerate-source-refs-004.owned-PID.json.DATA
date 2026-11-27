@@ -1,0 +1,1 @@
+{"PID": 2011067, "command": ["git", "-c", "pack.threads=1", "-c", "pack.windowMemory=32m", "-c", "core.bigFileThreshold=8m", "-C", "/tmp/ipfs-world-prompt-compaction-20261016-rt7u97xh/accelerate", "for-each-ref", "--format=%(refname) %(objectname)"], "started_ns": "1795481141356866037"}

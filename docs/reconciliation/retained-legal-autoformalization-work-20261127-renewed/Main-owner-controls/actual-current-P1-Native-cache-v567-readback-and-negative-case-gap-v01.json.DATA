@@ -1,0 +1,109 @@
+{
+  "kind": "Main_current_P1_native_cache_saved_result_reconciliation_and_remaining_scope",
+  "Root_compact": {
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-P1-current-exact-Lean-wrapper-and-cache-native-qualification-closed-v567.json",
+    "bytes": 7865,
+    "sha256": "bc870726ddc789d736465e88d68f2fb4f4188739aee7efd2e95b5550727e5555"
+  },
+  "actual_report": {
+    "bytes": 108023,
+    "path": "/tmp/Root-P1-current-protocol-Lean-native-cache-v567-0mR2Fihk/actual-output/complete-native3-direct-existing-owner-report.json",
+    "sha256": "a5781e7cc9337c4fa284943d4608e338860accd036d15a82f9b85c7cd4d23cd9"
+  },
+  "test_report": {
+    "bytes": 128441,
+    "path": "/tmp/Root-P1-current-protocol-Lean-native-cache-v567-0mR2Fihk/actual-output/original-test-temp/native-lean-proof-cache-v3.json",
+    "sha256": "38ac6c9cb4f58fc933861af56ef26ba37ed96452370f04e9404d78ac1ea31ffa"
+  },
+  "actual_current_source_bindings": {
+    "kernel_sha256": "c1050ad1ec067fc7f7c8fea08793e872511fe58029e9b1aa89ec90d2cb288313",
+    "test_sha256": "99e00363bbd1ea23d450af0912374fdbf4d30ab3b1802371fb8d237dccbf7da5",
+    "protocol_sha256": "e2dd1dc93d1efa15c7c4088145d32c52636c72e9230b16ade77ca6c6a0c2c336"
+  },
+  "actual_installed_Lean": "Lean (version 4.34.1, aarch64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "actual_saved_command_checks": [
+    {
+      "index": 0,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+        "--version"
+      ],
+      "exit_code": 0,
+      "leader_reaped": true,
+      "readers_joined": 2,
+      "workspace_removed": true,
+      "remaining_groups_and_tracked_empty": true,
+      "ownership_sampled": true,
+      "kernel_containment_attested": false
+    },
+    {
+      "index": 1,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+        "-s65536",
+        "-j1",
+        "--json",
+        "Main.lean"
+      ],
+      "exit_code": 0,
+      "leader_reaped": true,
+      "readers_joined": 2,
+      "workspace_removed": true,
+      "remaining_groups_and_tracked_empty": true,
+      "ownership_sampled": true,
+      "kernel_containment_attested": false
+    },
+    {
+      "index": 2,
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+        "-s65536",
+        "-j1",
+        "--json",
+        "Main.lean"
+      ],
+      "exit_code": 0,
+      "leader_reaped": true,
+      "readers_joined": 2,
+      "workspace_removed": true,
+      "remaining_groups_and_tracked_empty": true,
+      "ownership_sampled": true,
+      "kernel_containment_attested": false
+    }
+  ],
+  "actual_Source_contexts_exited": true,
+  "Source_before_after_equal": true,
+  "actual_own_parent_release_return": true,
+  "own_lease_absent_and_no_direct_descendants_in_saved_after_state": true,
+  "parent_home_cleanup_confirmed": true,
+  "scope": "Two genuine positive Lean compilations plus exactcache roundtrip/reuse and no-new-native-command mismatches on authoredfictional legalfixture; no Nativewrongtype/unapproveddependencycase inthisrun.",
+  "cache_artifact_negative_facets": [
+    "source",
+    "obligation",
+    "assumptions"
+  ],
+  "cache_context_negative_facets": [
+    "declaration",
+    "proposition",
+    "toolchain",
+    "backend-profile",
+    "interpretation",
+    "dependency"
+  ],
+  "mismatch_or_reuse_commands": 0,
+  "software_only_version_mutation_controls": 2,
+  "pytest_credit": 0,
+  "physical_IO_accounting_complete": false,
+  "Native_scope_not_entire_Phase1": true,
+  "source_or_statutory_legal_corpus_model_or_full_goal_qualification": false,
+  "remaining_precise_Native_requirement": "Useexisting maintained Native3test foractualwrong-proposition andunapproved-dependency rejection againstcurrentowner underfreshRootselectedSource/toolchain/resource/clock. Existingcachepositives areclosed; do not re-run merelytoresolvealreadyprovenpositive/cachefacet.",
+  "prepared_existing_binder_reference": {
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/SEALED-existing-Native3-current-binder-repin-and-unbound-contract-INERT-v01.json",
+    "bytes": 7904,
+    "sha256": "981d61426cc3763e1fe1df2b5ddd9930103804e1a56232cb4f90208ab3d0ce15"
+  },
+  "historical_v459_retained_as_prior_epoch_only": true,
+  "no_newRootrunner_Source_SDK_Native_model_or_ledger_effect_byMain": true,
+  "Source_and_actualNative_process_handles_were_not_polled_or_replayed": true,
+  "full_eight_phase_goal_complete": false
+}

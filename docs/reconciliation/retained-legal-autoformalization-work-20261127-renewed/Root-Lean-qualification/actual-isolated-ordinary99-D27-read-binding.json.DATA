@@ -1,0 +1,46 @@
+{
+  "Root_selected": true,
+  "Source_WRITE_claimed": false,
+  "Source_closed": true,
+  "actual_isolated_content_epoch": {
+    "bytes": 9553,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-live-reconciled-Source42-content-epoch-closed.json",
+    "sha256": "1d609bd6f829ddac94791852f283e82ab5ec70a502aeae9c4ba44207f77949ed"
+  },
+  "exact_local_freeze": {
+    "bytes": 16495,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-isolated-Phase1-lean-json-diagnostics-exact-two-local-freeze.json",
+    "sha256": "a52014d373c00aade6e9673cb3dab91deefbfe7c23d456b4b483ce5964532e8a"
+  },
+  "outer_epoch_record_count": 1618,
+  "outer_epoch_reference": {
+    "bytes": 852469,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-live-reconciled-outer1618-epoch.json",
+    "sha256": "2ada76fe314264f23d8aa68d724248738dc13d54d03cbe4e75a6e4ec0268d725"
+  },
+  "owned_module_closed": true,
+  "promotion_selected": false,
+  "protected_index_reference": {
+    "bytes": 7070589,
+    "full9": {
+      "st_ctime_ns": "1795755055898035075",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72533257",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795755055888035039",
+      "st_nlink": "1",
+      "st_size": "7070589",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/index",
+    "sha256": "a929f5fefc9a4cd7630b8e33a57139fa0da0ebcef46fb959ea14d9aba4745bae"
+  },
+  "python_epoch_record_count": 1605,
+  "python_epoch_reference": {
+    "bytes": 845899,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-live-reconciled-Python1605-epoch.json",
+    "sha256": "a0f702fa577b602055d0b44891a9010849cd8fb107a8f3829268afdf467d9ea1"
+  },
+  "schema": "actual-D27-observed-D-root-initializer-READ-small-closeout/v1"
+}

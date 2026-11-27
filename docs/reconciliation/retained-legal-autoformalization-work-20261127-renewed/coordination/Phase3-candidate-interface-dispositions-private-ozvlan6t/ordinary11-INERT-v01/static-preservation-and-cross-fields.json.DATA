@@ -1,0 +1,104 @@
+{
+  "schema": "Phase3-candidate11-existing-controls-static-preservation/v1",
+  "AST": {
+    "factory": {
+      "all_original_definition_names_and_order_preserved": true,
+      "changed_existing_definitions": [
+        "continuation_request"
+      ],
+      "unchanged_existing_definitions": []
+    },
+    "bootstrap": {
+      "all_original_definition_names_and_order_preserved": true,
+      "changed_existing_definitions": [],
+      "unchanged_existing_definitions": [
+        "validate_runtime_authority",
+        "exact",
+        "audit_phase6_pilot_fixture",
+        "body_identity",
+        "audit_configuration",
+        "audit_modules",
+        "normal_guarded_source_code",
+        "SelectedTestRewriteObserver",
+        "normalized",
+        "BindingEvidence"
+      ]
+    },
+    "operator": {
+      "all_original_definition_names_and_order_preserved": true,
+      "changed_existing_definitions": [
+        "binding_for"
+      ],
+      "unchanged_existing_definitions": [
+        "read_private",
+        "validate_runtime_authority",
+        "metadata_guard",
+        "genuine",
+        "observe_state",
+        "run_phase_with_actual_custody",
+        "retain_json",
+        "retain_bytes",
+        "retain_phase_result",
+        "require_actual_rewrite_witness",
+        "reconcile_junit",
+        "execute_phase",
+        "tracked_source_read"
+      ]
+    }
+  },
+  "all_operator_live_NULL_fields": [
+    "ROOT_SELECTION",
+    "ROOT_RUNTIME_SELECTION",
+    "FINAL_OUTPUT_PATH",
+    "FINAL_D_ROOT",
+    "FINAL_D_HEAD",
+    "FINAL_D_TREE",
+    "FINAL_A_ROOT",
+    "FINAL_A_HEAD",
+    "FINAL_A_TREE",
+    "D_READ_BINDING_REFERENCE",
+    "FINAL_BINDING_MANIFEST_REFERENCE",
+    "FINAL_BINDING_MANIFEST",
+    "FINAL_MODULE_BINDINGS",
+    "FINAL_D_PROVENANCE",
+    "FINAL_A_PROVENANCE",
+    "FINAL_SOURCE_PROJECTS",
+    "FINAL_SDK_BINDINGS",
+    "FINAL_RESOURCE_STATE_PATH",
+    "FINAL_EXPECTED_RESOURCE_CONFIG",
+    "FINAL_EXPECTED_CAPACITY",
+    "FINAL_FIXTURE_CLOSURE_REFERENCE",
+    "FINAL_EFFECT_DECISION_REFERENCE",
+    "FINAL_EFFECT_DECISION",
+    "FINAL_ADMITTED_IO_PLAN_REFERENCE",
+    "FINAL_ADDITIONAL_IMPORT_ROOTS",
+    "FINAL_ABSENT_PATHS",
+    "BOOTSTRAP_REFERENCE",
+    "PY",
+    "PATH_SCOPE",
+    "EXECUTION_PYTHONUSERBASE"
+  ],
+  "all_bootstrap_live_NULL_fields": [
+    "ROOT",
+    "ADDITIONAL_A_ROOT",
+    "EXPECTED_MODULES",
+    "REQUIRED_CANONICAL_CONFTESTS",
+    "PYTEST_INIFILE",
+    "ROOT_RUNTIME_SELECTION",
+    "GIT_CANDIDATE_PROVENANCE",
+    "ADDITIONAL_A_PROVENANCE",
+    "BINDING_MANIFEST_REFERENCE",
+    "SOURCE_READ_BINDING_REFERENCE",
+    "ADMITTED_IO_PLAN_REFERENCE",
+    "EFFECT_DECISION_REFERENCE",
+    "SOURCE_EPOCH_SHA256",
+    "SOURCE_EPOCH_RECORD_COUNT"
+  ],
+  "all_NULL_checks_passed": true,
+  "source42_embedded_original_owner_exact": true,
+  "selection_equal_across_controls": true,
+  "roles_equal_across_controls": true,
+  "rewrite_policy_equal_across_controls": true,
+  "fixture_identity_equal_across_controls": true,
+  "no_guard_logic_API_resource_limits_or_finalizer_changes": true
+}

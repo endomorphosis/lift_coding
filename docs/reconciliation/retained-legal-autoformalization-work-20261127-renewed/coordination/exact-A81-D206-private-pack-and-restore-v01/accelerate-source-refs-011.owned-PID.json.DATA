@@ -1,0 +1,1 @@
+{"PID": 2011074, "command": ["git", "-c", "pack.threads=1", "-c", "pack.windowMemory=32m", "-c", "core.bigFileThreshold=8m", "-C", "/tmp/lift-sync-primary-gate-main-20261110", "for-each-ref", "--format=%(refname) %(objectname)"], "started_ns": "1795481141404413291"}

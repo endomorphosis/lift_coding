@@ -1,0 +1,53 @@
+
+
+@pytest.mark.parametrize("accepted_last", [False, True], ids=["accepted-first", "accepted-last"])
+def test_external_benchmark_rejects_ambiguous_prediction_order(accepted_last) -> None:
+    packet = _packets()[0]
+    accepted = _prediction(packet)
+    refused = {**accepted, "round_trip_success": False}
+    assert evaluate_external_legal_expert_benchmark([packet], [accepted]).accepted
+    assert not evaluate_external_legal_expert_benchmark([packet], [refused]).accepted
+    predictions = [refused, accepted] if accepted_last else [accepted, refused]
+    with pytest.raises(LegalIRExternalBenchmarkError, match="duplicate prediction packet ID"):
+        evaluate_external_legal_expert_benchmark([packet], predictions)
+
+
+@pytest.mark.parametrize("identity_field", ["packet_id", "id"])
+def test_external_benchmark_rejects_misbound_keyed_prediction(identity_field) -> None:
+    packet, other = _packets()
+    prediction = _prediction(packet)
+    del prediction["packet_id"]
+    prediction[identity_field] = other.packet_id
+    with pytest.raises(LegalIRExternalBenchmarkError, match="prediction packet ID does not match"):
+        evaluate_external_legal_expert_benchmark([packet], {packet.packet_id: prediction})
+
+
+@pytest.mark.parametrize("sequence", [False, True], ids=["flat", "sequence"])
+def test_external_benchmark_rejects_conflicting_prediction_aliases(sequence) -> None:
+    packet, other = _packets()
+    prediction = {**_prediction(packet), "id": other.packet_id}
+    with pytest.raises(LegalIRExternalBenchmarkError, match="conflicting prediction packet IDs"):
+        evaluate_external_legal_expert_benchmark([packet], [prediction] if sequence else prediction)
+
+
+def test_external_benchmark_rejects_duplicate_population_identity() -> None:
+    packet, other = _packets()
+    prediction = _prediction(packet)
+    report = evaluate_external_legal_expert_benchmark([packet, other], [prediction])
+    assert report.external_validity_score == pytest.approx(0.5)
+    with pytest.raises(LegalIRExternalBenchmarkError, match="duplicate external benchmark packet ID"):
+        evaluate_external_legal_expert_benchmark([packet, packet, other], [prediction])
+
+
+def test_external_benchmark_predicts_by_each_supported_identity_form() -> None:
+    packet = _packets()[0]
+    prediction = _prediction(packet)
+    payload = {key: value for key, value in prediction.items() if key != "packet_id"}
+    for predictions in (
+        prediction,
+        [{**payload, "id": packet.packet_id}],
+        {packet.packet_id: prediction},
+        {packet.packet_id: payload},
+        {packet.packet_id: {**payload, "id": packet.packet_id}},
+    ):
+        assert evaluate_external_legal_expert_benchmark([packet], predictions).accepted

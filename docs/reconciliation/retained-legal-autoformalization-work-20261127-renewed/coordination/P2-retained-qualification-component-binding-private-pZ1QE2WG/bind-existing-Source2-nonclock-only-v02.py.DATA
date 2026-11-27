@@ -1,0 +1,233 @@
+import ast
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import stat
+import subprocess
+
+here=Path(__file__).resolve().parent
+coord=here.parent
+base=here.parents[2]
+d=base/"repositories/datasets"
+out=here/"existing-Source2-Guide570-INERT-v02"
+out.mkdir(mode=0o700)
+def sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+def gitblob(raw):
+    return hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest()
+def f9(info):
+    return {field:str(getattr(info,field)) for field in ("st_dev","st_ino","st_mode","st_nlink",
+        "st_uid","st_gid","st_size","st_mtime_ns","st_ctime_ns")}
+def read(path,bytes_expected=None,expected=None):
+    fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK)
+    with os.fdopen(fd,"rb") as source:
+        before=os.fstat(source.fileno())
+        assert stat.S_ISREG(before.st_mode) and before.st_nlink==1
+        raw=source.read()
+        assert f9(before)==f9(os.fstat(source.fileno()))==f9(path.lstat()) and len(raw)==before.st_size
+    if bytes_expected is not None:
+        assert bytes_expected==len(raw)
+    if expected is not None:
+        assert sha(raw)==expected
+    return raw
+def artifact(path,n=None,s=None):
+    raw=read(path,n,s)
+    return dict(path=str(path),bytes=len(raw),sha256=sha(raw))
+def auth(ref):
+    return read(Path(ref["path"]),ref["bytes"],ref["sha256"])
+def wire(ref):
+    return json.loads(auth(ref))
+def put(p,raw):
+    with os.fdopen(os.open(p,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400),"wb") as handle:
+        handle.write(raw);handle.flush();os.fsync(handle.fileno())
+    assert read(p)==raw
+    return artifact(p)
+def save(name,data):
+    return put(out/name,(json.dumps(data,indent=2,sort_keys=True)+"\n").encode())
+def git(repo,*args):
+    prefix=["git","-c","core.preloadIndex=false","-c","index.threads=1","-C",str(repo)]
+    return subprocess.check_output([*prefix,*args],env={**os.environ,"GIT_OPTIONAL_LOCKS":"0","GIT_NO_LAZY_FETCH":"1",
+                                                       "GIT_TERMINAL_PROMPT":"0"},timeout=25)
+def minimal(ref):
+    return {k:ref[k] for k in ("path","bytes","sha256")}
+def status(path):
+    return git(path,"status","--porcelain=v1","-z","--untracked-files=all")
+
+guide_ref=artifact(coord/"actual-guide570-four-doc-three-FF-publication-small-v592.json",15127,
+                   "ca01b3b4bb3e551e03c89e5421e7d30057c3f6cf3da951b7f20008d4f4acf148")
+guide=wire(guide_ref)
+assert guide["terminal_returncode"]==0 and guide["evidence_ordinal"]==570
+assert guide["all_other_paths_and_gitlinks_preserved"] and guide["unpublished_original_A_preserved"]
+assert all(row["normal_fast_forward"] and row["push_returncode"]==0 for row in guide["pushes_in_actual_order"])
+source_ref=guide["source_closed_installation"]
+assert source_ref["sha256"]=="eaf78e1bcd8e23767b632be0ed75e73b93a4de38f9f3e6d9c34353de6971c273"
+source=wire(source_ref)
+assert source["actual_owned_exit_code"]==0 and source["Source_closed"] and source["module_closed"]
+assert source["only_documentary_targets"] and source["write_complete"]
+guide_request=wire(source["request"])
+prior_guard_ref=guide_request["full_metadata_guard"]
+assert prior_guard_ref["sha256"]=="51b051bfb8f01f0051c2f243fe562fd9d5167b6e2592f46149362623de22916a"
+prior_rows=wire(prior_guard_ref)["rows"]
+rows={row["path"]:row for row in prior_rows}
+assert len(rows)==len(prior_rows)==1623
+
+companion_ref=guide["clean_A_companion_reference"]
+companion=wire(companion_ref)
+a=Path(companion["root"])
+assert a!=base/"repositories/accelerate" and guide_request["additional_A"]["root"]==str(a)
+original_a_ref=source["original_A_preservation"]
+assert original_a_ref==guide_request["original_A_preservation"]
+original_a=wire(original_a_ref)
+original_root=Path(original_a["root"])
+assert original_root==base/"repositories/accelerate" and original_root!=a
+assert git(original_root,"rev-parse","HEAD").decode().strip()==original_a["HEAD"]
+assert sha(status(original_root))==original_a["git_status_sha256"] and not git(original_root,"diff","--cached","--name-only")
+assert len(original_a["exact_three_rows"])==3
+assert all(f9(Path(row["path"]).lstat())==row["full9"] for row in original_a["exact_three_rows"])
+
+for name,expected in guide["repositories"].items():
+    path=a if name=="accelerate" else base/"repositories"/name
+    actual=git(path,"rev-parse","HEAD","refs/remotes/origin/main","HEAD^{tree}").decode().splitlines()
+    assert actual==[expected["HEAD"],expected["origin_main"],expected["tree"]],name
+    assert not status(path),name
+d_pub=guide["repositories"]["datasets"]
+assert str(d)==guide_request["root"]
+a_pub=guide["repositories"]["accelerate"]
+assert a_pub["HEAD"]==companion["HEAD"] and a_pub["tree"]==companion["tree"]
+
+overlays=[]
+after_doc={row["relative_path"]:row for row in source["installed"]}
+assert len(after_doc)==4 and set(after_doc)==set(guide["committed_docs"])
+for rel,row in after_doc.items():
+    observed=guide["committed_docs"][rel]
+    path=str(d/rel)
+    assert row["path"]==path and all(row[k]==observed[k] for k in ("bytes","sha256","full9"))
+    assert git(d,"rev-parse","HEAD:"+rel).decode().strip()==observed["committed_blob"]
+    before=rows[path]
+    rows[path]={k:row[k] for k in ("path","bytes","sha256","full9")}
+    overlays.append(dict(path=path,before=before,after=rows[path],origin="Guide570 separate Source4 readback and published Git blob"))
+indexes=guide["index_readback"]
+idx_before,idx_after=indexes["datasets"]["before"],indexes["datasets"]["after"]
+assert rows[idx_before["path"]]==idx_before and idx_after["path"]==str(d/".git/index")
+rows[idx_after["path"]]=idx_after
+overlays.append(dict(path=idx_after["path"],before=idx_before,after=idx_after,origin="published index receipt, metadata-only current check"))
+assert indexes["accelerate"]["after"]==companion["index"]==rows[str(a/".git/index")]
+branch=d/".git"/git(d,"symbolic-ref","HEAD").decode().strip()
+branch_before=rows[str(branch)]
+branch_raw=read(branch,41)
+assert branch_raw==(d_pub["HEAD"]+"\n").encode()
+rows[str(branch)]={**branch_before,"full9":f9(branch.lstat()),"sha256":sha(branch_raw)}
+overlays.append(dict(path=str(branch),before=branch_before,after=rows[str(branch)],origin="exact current branch pointer"))
+assert len(overlays)==6
+drift=[key for key,row in rows.items() if f9(Path(key).lstat())!=row["full9"]]
+assert not drift, drift
+assert len(rows)==1623
+
+ready=Path("/tmp/P2-retained-type-UTC-SHA-exact2-existing-v579-Source2-INERT-0tfhv1ld/READY-existing-v579-compatible-retained-type-review-UTC-SHA-Source2-v02-INERT.json")
+ready_ref=artifact(ready,3743,"58390cd16847b9db71e7b4691d6babe2946426be2e6dfdf20315a95194746df5")
+prior=wire(ready_ref)
+old_request_ref=prior["actual_ancestor_request"]
+old_request=wire(old_request_ref)
+old_writer_ref=prior["actual_ancestor_writer"]
+writer=auth(old_writer_ref).decode()
+assert old_request["target_count"]==2 and old_request["canonical_write_selected"] is True
+assert old_request["approved_Source42_binding"]==guide_request["approved_Source42_binding"]
+stage_ref=old_request["stage_helper"]
+stage=auth(stage_ref)
+assert b"len(stages)==2" in stage
+compile(stage,stage_ref["path"],"exec",dont_inherit=True)
+config=old_request["Git_aux"][1]
+assert config==guide_request["Git_aux"][1]
+assert all(rows[config["path"]][key]==config[key] for key in ("path","bytes","full9"))
+assert sha(auth(config["raw_reference"]))==config["sha256"]
+
+candidate_ref=artifact(here/"SEALED-retained-V4-qualification-component-binding-exact-two.json",25041,
+        "454cbc69272925d8e4fcfb24637fc973cf75c8d374a3a7f56b80d2f31697c546")
+candidate=wire(candidate_ref)
+assert git(d,"merge-base",candidate["fixture_Git_HEAD"],d_pub["HEAD"]).decode().strip()==candidate["fixture_Git_HEAD"]
+assert candidate["cohorts"]["before"]["failed"]==3 and candidate["cohorts"]["after"]["passed"]==28
+ordinary=artifact(here/"existing-ordinary28-INERT-v02/READY-existing-v528-retained-type-component-evidence-ordinary28-INERT.json",14235,
+                   "e120907e7f012351ea51ffb8977f12cb4022dbc157fefda38620d300850bf68d")
+assert wire(ordinary)["exact_private_candidate"]==candidate_ref
+
+targets=[]
+for role,row in candidate["files"].items():
+    rel=row["path"]
+    pre,post=(auth(row[key]) for key in ("before","after"))
+    actual=rows[str(d/rel)]
+    assert actual["bytes"]==len(pre) and actual["sha256"]==sha(pre)
+    assert row["canonical_preimage_full9"]==actual["full9"]
+    assert row["mode"]=="100644" and gitblob(pre)==row["before"]["git_blob"] and gitblob(post)==row["after"]["proposed_git_blob"]
+    assert git(d,"ls-tree","HEAD","--",rel).decode().strip()==f"100644 blob {gitblob(pre)}\t{rel}"
+    assert max(len(pre),len(post))<=old_request["per_document_input_cap"]
+    assert post.endswith(b"\n") and not post.endswith(b"\n\n")
+    compile(pre,rel,"exec",dont_inherit=True)
+    compile(post,rel,"exec",dont_inherit=True)
+    targets.append(dict(actual,relative_path=rel,before_Git_blob_oid=row["before"]["git_blob"],
+        before_private=minimal(row["before"]),post_private=minimal(row["after"]),before_sha256=actual["sha256"],
+        post_Git_blob_oid=row["after"]["proposed_git_blob"]))
+assert len(targets)==2
+fences=[dict(rows[str(d/rel)],relative_path=rel) for rel in (
+    "ipfs_datasets_py/logic/autoformal/legal_corpus_definition_use_preservation_elaboration_v2.py",
+    "ipfs_datasets_py/logic/autoformal/corpus_qualification.py",
+    "ipfs_datasets_py/logic/autoformal/legal_graph_review.py")]
+assert len({entry["path"] for entry in targets+fences})==5
+known={row["path"]:row for row in old_request["AGENTS_chain_metadata"]+guide_request["AGENTS_chain_metadata"]}
+agents={}
+for row in targets+fences:
+    for parent in Path(row["path"]).parents:
+        if not parent.is_relative_to(d):
+            break
+        for n in ("AGENTS.md","AGENTS.override.md"):
+            path=str(parent/n)
+            prior_row=known.get(path)
+            if prior_row and prior_row["exists"]:
+                assert f9(Path(path).lstat())==prior_row["full9"]
+                auth(prior_row["reuse_captured_raw"])
+                agents[path]=prior_row
+            else:
+                assert not os.path.lexists(path)
+                agents[path]=dict(path=path,exists=False,full9=None)
+assert sum(row["exists"] for row in agents.values())==1
+
+for name in ("SEL","REQ","PREBOUND_OUTPUT_NAMESPACE","before"):
+    writer,count=re.subn(r"(?m)^"+name+r" = .*$",lambda _ : name+" = None",writer)
+    assert count==1
+compile(writer,"existing Source2 writer inert", "exec",dont_inherit=True)
+assignments={n.targets[0].id:n.value for n in ast.parse(writer).body if isinstance(n,ast.Assign)
+             and len(n.targets)==1 and isinstance(n.targets[0],ast.Name)}
+for name in ("SEL","REQ","PREBOUND_OUTPUT_NAMESPACE","before"):
+    assert ast.literal_eval(assignments[name]) is None
+writer_ref=put(out/"existing-Source2-writer-all-authority-NULL.INERT.py.DATA",writer.encode())
+
+guards=save("current-1623-metadata-guard-guide570-overlay-INERT.json",{
+    "rows":sorted(rows.values(),key=lambda row:row["path"]),"preceding":prior_guard_ref,
+    "published_guide570":guide_ref,"exact_six_rows_overlay":overlays})
+template=save("existing-Source2-request-structural-inputs-NONSELECTED.json",{
+    "schema":"existing-retained-V4-component-evidence-source2-structural-inputs/v1",
+    "root":str(d),"root_expected":{"Git_HEAD":d_pub["HEAD"],"Git_tree":d_pub["tree"]},
+    "additional_A":{"root":str(a),"Git_HEAD":a_pub["HEAD"],"Git_tree":a_pub["tree"]},
+    "target_count":2,"targets":targets,"unchanged_fences":fences,"AGENTS_chain_metadata":list(agents.values()),
+    "Git_aux":[idx_after,config],"metadata_guard_observation":guards,"expected_guard_row_count_after_scope_extension":1623,
+    "exact_private_candidate":candidate_ref,"exact_ordinary28_static":ordinary,
+    "prior_Guide570":guide_ref,"prior_Guide570_Source4":source_ref,"original_A_preservation":original_a_ref,
+    "clean_published_A_companion":companion_ref,"previous_selected_writer":old_writer_ref,
+    "historical_approved_Source42_binding":old_request["approved_Source42_binding"],
+    "stage_helper":stage_ref,"per_document_input_cap":old_request["per_document_input_cap"],
+    "protected_completed_targets":old_request["protected_completed_targets"],
+    "canonical_write_selected":None,"actual_Source_lease":None,"Root_selection":None,"ledger_before":None,
+    "Source_envelope":None,"complete_IO_upper":None,"full_retained_charge":None,"actual_clock":None,"output_namespace":None})
+assert all(f9(Path(path).lstat())==row["full9"] for path,row in rows.items())
+assert not status(d) and not status(a)
+print(json.dumps(save("READY-Guide570-existing-Source2-exact-component-evidence-NONSELECTED.json",{
+    "schema":"existing-Source2-Guide570-retained-V4-component-evidence-inert-handoff/v1",
+    "canonical_candidate":candidate_ref,"ordinary28_inert":ordinary,
+    "actual_metadata_guards":guards,"structural_request_inputs":template,"existing_writer_inert":writer_ref,
+    "exact_predecessor":ready_ref,"prior_published_Guide570":guide_ref,
+    "before_target_bytes_and_stage_shapes_verified":True,"metadata_lstat_of_all_1623_match":True,
+    "actual_current_observation_scope":"read-only Git/local body pins and lstat; index bytes come from actual publication proof",
+    "historical_Source2_limits_only":prior["exact_resource_limits"],"authority_clock_ledger_output":None,
+    "actual_Source_bootstrap_selection":None
+})))

@@ -1,0 +1,152 @@
+"""Training-only cosine geometry auxiliary for exact decoder capability profiles."""
+from dataclasses import dataclass
+from math import fsum, hypot, isfinite
+
+from .teacher_prefix import NativeVector, PopulationRow, WIDTHS
+from .teacher_prefix import _commit, _f32, _need, _pin, _row_commit, _sha, population_commit
+
+PROFILE = "train-source-pair-cosine-distillation/v1"
+SOURCE_PAIR_SCOPE = "train-source-to-source-geometry/v1"
+QWEN = "qwen2-causal-last-source/v1"
+T5 = "t5-encoder-last-source/v1"
+
+
+@dataclass(frozen=True)
+class SourcePairs:
+    scope: str
+    train_admission_sha256: str
+    pair_authority_sha256: str
+    row_ids: tuple[str, ...]
+    edges: tuple[tuple[int, int], ...]
+
+
+@dataclass(frozen=True)
+class Plan:
+    configuration_sha256: str
+    checkpoint_sha256: str
+    train_records_sha256: str
+    population_sha256: str
+    population: tuple[PopulationRow, ...]
+    source_pairs: SourcePairs
+    teacher_profile_sha256: str
+    teacher_width: int
+    rows: tuple[NativeVector, ...]
+    student_profile: str
+    coefficient: float
+    maximum_hidden_elements: int
+
+
+def plan_commit(plan):
+    _need(type(plan) is Plan and type(plan.source_pairs) is SourcePairs, "exact geometry plan required")
+    pairs = plan.source_pairs
+    _need(all(_pin(pin) for pin in (plan.configuration_sha256, plan.checkpoint_sha256,
+          plan.train_records_sha256, plan.population_sha256, plan.teacher_profile_sha256,
+          pairs.train_admission_sha256, pairs.pair_authority_sha256)), "closed plan provenance required")
+    _need(plan.student_profile in (QWEN, T5)
+          and type(plan.teacher_width) is int and plan.teacher_width in WIDTHS
+          and type(plan.coefficient) is float and isfinite(plan.coefficient) and 0 < plan.coefficient <= 1
+          and type(plan.maximum_hidden_elements) is int and 0 < plan.maximum_hidden_elements <= 2**27,
+          "unsupported geometry profile or resource limit")
+    _need(population_commit(plan.population, maximum_rows=4096) == plan.population_sha256,
+          "selected split population changed")
+    _need(type(plan.rows) is tuple and 2 <= len(plan.rows) <= 32
+          and all(type(row) is NativeVector for row in plan.rows), "exact bounded native row batch required")
+    _need(all(type(row.data) is bytes and len(row.data) == 4 * plan.teacher_width for row in plan.rows),
+          "native vector byte length exceeds the selected width")
+    rows = tuple(_row_commit(row) for row in plan.rows)
+    ids = tuple(row.row_id for row in plan.rows)
+    _need(pairs.scope == SOURCE_PAIR_SCOPE and type(pairs.row_ids) is tuple
+          and pairs.row_ids == ids and len(set(ids)) == len(ids)
+          and type(pairs.edges) is tuple and 1 <= len(pairs.edges) <= 496,
+          "selected ordered TRAIN source-pair roster required")
+    previous = (-1, -1)
+    for edge in pairs.edges:
+        _need(type(edge) is tuple and len(edge) == 2 and all(type(i) is int for i in edge)
+              and 0 <= edge[0] < edge[1] < len(ids) and previous < edge,
+              "source-pair edges must be sorted, unique and off diagonal")
+        previous = edge
+    _need(all(row.width == plan.teacher_width and type(row.width) is int
+              and row.profile_sha256 == plan.teacher_profile_sha256
+              and _sha(row.data) == row.materialized_f32_sha256 for row in plan.rows),
+          "native teacher width, producer or materialization differs")
+    return _commit((PROFILE, plan.configuration_sha256, plan.checkpoint_sha256,
+        plan.train_records_sha256, plan.population_sha256, pairs.scope, pairs.train_admission_sha256,
+        pairs.pair_authority_sha256, ids, pairs.edges, plan.teacher_profile_sha256, plan.teacher_width,
+        rows, plan.student_profile, plan.coefficient, plan.maximum_hidden_elements))
+
+
+def bind(plan, records, *, configuration, expected_plan_sha256):
+    """Bind reviewed selections. The caller owns review and checkpoint authentication."""
+    _need(_pin(expected_plan_sha256) and plan_commit(plan) == expected_plan_sha256
+          and _commit(records) == plan.train_records_sha256
+          and _commit(configuration) == plan.configuration_sha256
+          and len(plan.rows) == len(records), "selected geometry plan, records or configuration differs")
+    population = {row.row_id: row for row in plan.population}
+    units = []
+    for row, record in zip(plan.rows, records, strict=True):
+        member = population.get(row.row_id)
+        _need(member is not None and member.partition == "train" and record["id"] == row.row_id
+              and member.source_wire_sha256 == row.source_wire_sha256
+              and row.source_wire_sha256 == _sha(record["source_wire"].encode("utf-8")),
+              "native vector does not bind the selected TRAIN row and source")
+        values = _f32(row.data, plan.teacher_width)
+        norm = hypot(*values)
+        _need(norm > 0 and isfinite(norm), "teacher source vector has no finite nonzero norm")
+        units.append(tuple(value / norm for value in values))
+    return tuple(min(1., max(-1., fsum(a * b for a, b in zip(units[i], units[j], strict=True))))
+                 for i, j in plan.source_pairs.edges)
+
+
+def student_geometry(backend, plan, torch):
+    """Dispatch by exact supported model and live execution mode."""
+    model = backend.model
+    native = (type(model).__module__, type(model).__qualname__)
+    config = model.config
+    _need(torch.is_grad_enabled() and not torch.is_inference_mode_enabled(),
+          "source state observation requires autograd")
+    if plan.student_profile == QWEN:
+        _need(native == ("transformers.models.qwen2.modeling_qwen2", "Qwen2ForCausalLM")
+              and backend.architecture == "causal_lm"
+              and backend.model_profile == "builtin-qwen2-bfloat16/v1"
+              and getattr(config, "_attn_implementation", None) == "eager",
+              "reviewed eager Qwen2 causal source observation required")
+        width, depth = config.hidden_size, config.num_hidden_layers + 1
+    else:
+        _need(plan.student_profile == T5
+              and native == ("transformers.models.t5.modeling_t5", "T5ForConditionalGeneration")
+              and backend.architecture == "encoder_decoder", "reviewed T5 encoder observation required")
+        width, depth = config.d_model, 1
+    _need(type(width) is int and width > 0 and type(depth) is int and depth > 0,
+          "explicit observed hidden-state geometry required")
+    return width, depth
+
+
+def source_unit(output, *, torch, observation, width, depth, source_positions, input_positions, device):
+    if observation == QWEN:
+        hidden_states = getattr(output, "hidden_states", None)
+        _need(type(hidden_states) is tuple and len(hidden_states) == depth
+              and all(torch.is_tensor(value) and tuple(value.shape) == (1, input_positions, width)
+                      for value in hidden_states), "unexpected Qwen2 hidden-state roster")
+        state = hidden_states[-1]
+    else:
+        state = getattr(output, "encoder_last_hidden_state", None)
+    _need(torch.is_tensor(state) and tuple(state.shape) == (1, input_positions, width)
+          and state.device == device and state.dtype in (torch.float32, torch.bfloat16) and state.requires_grad
+          and type(source_positions) is int and 0 < source_positions <= input_positions,
+          "expected attached native source state")
+    # Float32/BF16 states fit comfortably in float64 norm arithmetic.
+    state = state[0, source_positions - 1, :].double()
+    norm = torch.linalg.vector_norm(state)
+    _need(bool(torch.isfinite(norm)) and bool(norm > 0), "student source state has no finite nonzero norm")
+    return state / norm
+
+
+def combine(plan, torch, supervised, units, targets):
+    similarities = tuple((units[i] * units[j]).sum() for i, j in plan.source_pairs.edges)
+    residuals = tuple(student - target for student, target in zip(similarities, targets, strict=True))
+    auxiliary = torch.stack([residual.square() for residual in residuals]).mean()
+    total = supervised + plan.coefficient * auxiliary
+    _need(bool(torch.isfinite(auxiliary)) and bool(torch.isfinite(total)) and auxiliary.requires_grad,
+          "finite attached geometry objective required")
+    return (total, float(supervised.detach().cpu()), float(auxiliary.detach().cpu()),
+            tuple(float(student.detach().cpu()) for student in similarities))

@@ -1,0 +1,137 @@
+"""Record the published Lean diagnostic handling and its two qualifications in the four maintained guides."""
+from pathlib import Path
+from hashlib import sha256
+from contextlib import ExitStack
+import json,os,sys,types
+
+W=Path(__file__).parent
+helper=W/'freeze-lean-json-diagnostics.py'
+entry=__file__;__file__=str(helper)
+exec(compile(helper.read_text().split(chr(10)+'if __name__==')[0],str(helper),'exec'),globals())
+__file__=entry
+A=Path('/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate')
+assert __debug__ and len(sys.argv) in (10,11) and sys.argv[10:] in ([],['--install-and-freeze'])
+def argument(start):
+    path,length,digest=sys.argv[start:start+3]
+    return dict(path=path,bytes=int(length),sha256=digest)
+READY=argument(1)
+CODE=argument(4)
+PREVIOUS=argument(7)
+assert Path(CODE["path"])==W/'actual-Phase1-lean-json-diagnostics-ordinary99-and-native-three-FF-publication.json'
+
+def small(row):
+    return {k:row[k] for k in ('path','bytes','sha256')}
+
+def save(name,obj):
+    p=W/name
+    with os.fdopen(os.open(p,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400),'wb') as f:
+        f.write((json.dumps(obj,sort_keys=True,indent=2)+chr(10)).encode());f.flush();os.fsync(f.fileno())
+    return small(capture(p)[0])
+
+
+ready,pub=map(lambda ref:json.loads(load(ref)),(READY,CODE))
+assert pub['schema']=='actual-current-Phase1-lean-json-diagnostics-ordinary99-and-native-live-publication/v1'
+assert pub['terminal_returncode']==0 and pub['terminal_success'] and pub['shared_worktrees_preserved']
+baseline=pub['live_main_after']
+assert baseline['datasets']=='95dc193c3a4a37f9c9227da640a346b2cd58e54c'
+assert baseline['accelerate']=='e55316f48847b17a8b4041a2da30bcaa0ba6eb90'
+assert pub['qualification_A']=='219ba3da0f62f772801d71715e22c506faa21126'
+assert pub['previous_published_guide']==guarded_guide and pub['external_base_observation']==OBSERVED
+assert set(pub['exact_two_changes'])=={OWNER,TEST}
+assert ready['current_external_base_observation']==OBSERVED
+q=json.loads(load(pub['qualification']))
+native=json.loads(load(pub['native_qualification']))
+assert q['schema']=='actual-live-reconciled-P1-Lean-ordinary99-closed/v1'
+assert q['terminal_returncode']==0 and q['Source_and_resource_and_parent_closed']
+assert q['counts']==dict(tests=99,passed=99,functions=24,failures=0,errors=0,skipped=0)
+assert q['isolated_freeze']==pub['exact_local_freeze']
+assert native['cleanup_verified'] and native['native_cases']==2 and native['compiler_rc']==[0,1]
+assert native['version_rc']==native['pytest_case_credit']==0 and native['full_Phase1_complete'] is False
+assert ready['actual_live_code_publication']==CODE and ready['actual_live_ordinary99']==pub['qualification']
+assert ready['actual_live_native_namespaced2']==pub['native_qualification']
+assert PREVIOUS==native['full_retained_Source_cap']
+assert ready['evidence_ordinal']==581 and ready['expected_current_D_HEAD']==baseline['datasets']
+assert ready['expected_current_A_HEAD']==pub['qualification_A'] and ready['live_A_main_HEAD']==baseline['accelerate']
+pkg=json.loads(load(ready['joint_facts'])); assert pkg['evidence_ordinal']==581
+assert ready['exact_all4_inverse_removal_complete'] and ready['entire_Markdown_prefixes_and_EOF_preserved']
+prefix='ipfs_datasets_py/logic/autoformal/docs/'
+files={row['relative_path']:row for row in ready['files']}
+assert set(files)=={prefix+n for n in ('BACKLOG.json','work_catalog.json','HANDOFF.md','TRAINING_HISTORY.md')}
+assert git(D,'rev-parse','HEAD','HEAD^{tree}').decode().split()==[baseline['datasets'],ready['expected_current_D_tree']]
+assert git(A,'rev-parse','HEAD','HEAD^{tree}').decode().split()==[pub['qualification_A'],ready['expected_current_A_tree']]
+assert all(not git(repo,'status','--porcelain=v1','-z','-uall') for repo in (D,A))
+assert capture(D/'.git/index')[0]==pub['D_index'] and capture(A/'.git/index')[0]==pub['A_index']
+states={}
+for rel,item in files.items():
+    state,old=capture(D/rel);new=load(item['post_private'])
+    assert old==load(item['before_private']) and state['full9']==item['before_full9']
+    assert oid(old)==item['before_Git_blob_oid']==git(D,'rev-parse','HEAD:'+rel).decode().strip()
+    change=item['surgical_insertion'];i,n=change['offset'],change['inserted_bytes']
+    assert sha256(new[i:i+n]).hexdigest()==change['inserted_sha256'] and new[:i]+new[i+n:]==old
+    if rel.endswith('.md'):
+        assert new.startswith(old) and b'## Evidence581' in new[i:i+n]
+    else:
+        prior,after=json.loads(old),json.loads(new)
+        if rel.endswith('BACKLOG.json'):
+            assert len(prior['tasks'])==24 and after['migration'].pop(pkg['migration_key'])==pkg['backlog_record']
+        else:
+            assert len(prior['components'])==126 and len(prior['selected_evidence'])==580
+            assert after['selected_evidence'].pop()==pkg['catalog_record']
+        assert prior==after
+    states[rel]=state
+load(ready['forward_patch']);git(D,'apply','--check',ready['forward_patch']['path'])
+if not sys.argv[10:]:
+    print(json.dumps(dict(preflight=True,docs=sorted(files),new_evidence=581,selected=False)));raise SystemExit(0)
+
+previous_ref=native['full_retained_Source_cap']
+assert (previous_ref['bytes'],previous_ref['sha256'])==(1749,'f86281355aee837b7da1ebdfc57f0e5418a84faeaf81b97d8cbc6304a3f60de4')
+previous=json.loads(load(previous_ref))
+assert previous['all_prior_costs_retained'] and previous['resource_policy_capacity_unchanged']
+auth=previous['exact_human_affirmation'];load(auth)
+assert auth['sha256']=='8fdf2d6c57542b3ce8e8a06773645487c39a3cb2a8a9929426cc785d3fc78dda'
+prior=previous['after_full_retained_precharge'];amount=150994944
+selected=dict(prior,global_cap=prior['global_cap']+amount,internal_cap=prior['internal_cap']+amount)
+after=dict(selected,used=selected['used']+amount,internal_used=selected['internal_used']+amount,captures=selected['captures']+1)
+cap=save('Source-only-Guide581-full-retained-cap.json',dict(prior=prior,selected=selected,after_full_retained_precharge=after,
+    exact_human_affirmation=auth,prior_cap=previous_ref,added_Source_only_envelope=amount,resource_policy_capacity_unchanged=True,
+    all_prior_costs_retained=True,physical_IO_accounting_complete=False))
+source=types.ModuleType('isolated_guide581_existing_source42')
+source.__file__=SOURCE['path'];sys.modules[source.__name__]=source
+exec(compile(load(SOURCE),SOURCE['path'],'exec'),vars(source))
+initial_a=capture(A/'.git/index')[0]
+with ExitStack() as stack:
+    leases=[stack.enter_context(source.source_lease(repo,mode=mode,timeout_seconds=30)) for repo,mode in sorted(((D,'write'),(A,'read')))]
+    assert all(not git(repo,'status','--porcelain=v1','-z','-uall') for repo in (D,A))
+    assert capture(D/'.git/index')[0]==pub['D_index'] and capture(A/'.git/index')[0]==pub['A_index']
+    assert git(D,'rev-parse','HEAD').decode().strip()==baseline['datasets']
+    assert git(A,'rev-parse','HEAD').decode().strip()==pub['qualification_A']
+    assert all(capture(D/rel)[0]==row for rel,row in states.items())
+    git(D,'apply',ready['forward_patch']['path'])
+    load(ready['inverse_patch']);git(D,'apply','--check',ready['inverse_patch']['path'])
+    assert read_names('diff','--name-only','-z')==set(files)
+    doc_rows={}
+    for rel,item in files.items():
+        row,b=capture(D/rel);assert b==load(item['post_private'])
+        doc_rows[rel]=row|dict(committed_blob=oid(b))
+    git(D,'add','--',*sorted(files))
+    assert read_names('diff','--cached','--name-only','-z')==set(files)
+    git(D,'-c','core.whitespace=-blank-at-eof','diff','--cached','--check','--',*sorted(files))
+    git(D,'commit','-m','Record legal autoformalization evidence 581')
+    head=git(D,'rev-parse','HEAD').decode().strip();tree=git(D,'rev-parse','HEAD^{tree}').decode().strip()
+    assert git(D,'rev-parse','HEAD^').decode().strip()==baseline['datasets']
+    assert read_names('diff','--name-only','-z','HEAD^','HEAD')==set(files)
+    for rel,row in doc_rows.items():
+        post=row['committed_blob']
+        assert git(D,'rev-parse','HEAD:'+rel).decode().strip()==post
+        assert git(D,'ls-files','--stage','-z','--',rel)==f'100644 {post} 0\t{rel}\0'.encode()
+        assert git(D,'cat-file','blob',post)==load(files[rel]['post_private'])
+    assert all(not git(repo,'status','--porcelain=v1','-z','-uall') for repo in (D,A))
+    assert capture(A/'.git/index')[0]==initial_a
+    index=capture(D/'.git/index')[0]
+out=save('actual-Guide581-four-docs-Source-closed-and-frozen.json',dict(schema='actual-Guide581-exact-four-isolated-Source-freeze/v1',
+    terminal_returncode=0,Source_closed=True,module_closed=True,actual_Source_leases=[l.to_dict() for l in leases],
+    code_publication=CODE,ordinary_qualification=pub['qualification'],native_qualification=pub['native_qualification'],composer_READY=READY,full_charge=cap,
+    prior_D=baseline['datasets'],HEAD=head,tree=tree,A=baseline['accelerate'],qualified_A=pub['qualification_A'],A_index=initial_a,index=index,
+    evidence_ordinal=581,committed_docs=doc_rows,exact_forward_and_inverse_verified=True,prior_values_preserved=dict(tasks=24,components=126,evidence_records=580),
+    only_four_Git_changes=True,pushed=False))
+print(json.dumps(out))

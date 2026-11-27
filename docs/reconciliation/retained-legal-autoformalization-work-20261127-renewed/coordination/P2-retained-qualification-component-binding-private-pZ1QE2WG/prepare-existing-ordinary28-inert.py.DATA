@@ -1,0 +1,244 @@
+import ast
+import difflib
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import stat
+import subprocess
+from types import SimpleNamespace
+
+root=Path(__file__).resolve().parent
+out=root/"existing-ordinary28-INERT"
+out.mkdir(mode=0o700)
+source_root=Path("/tmp/P2-retained-type-review-UTC-SHA-existing-v528-ordinary25-INERT-oum3k0s9")
+old_ready=source_root/"READY-existing-v528-retained-type-UTC-SHA-ordinary25-INERT.json"
+packet_path=root/"SEALED-retained-V4-qualification-component-binding-exact-two.json"
+success_root=Path("/tmp/P2-retained-type-review-ordinary25-v528-helpers-INERT-f65vnpjw")
+marker="phase2-retained-type-current-review-metadata-ordinary25"
+next_marker="phase2-retained-type-component-evidence-ordinary28"
+def sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+def fingerprint(s):
+    return {k:str(getattr(s,k)) for k in ("st_dev","st_ino","st_mode","st_nlink","st_uid","st_gid","st_size","st_mtime_ns","st_ctime_ns")}
+def read(path):
+    with os.fdopen(os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK),"rb") as f:
+        start=os.fstat(f.fileno())
+        assert stat.S_ISREG(start.st_mode) and start.st_nlink==1
+        raw=f.read()
+        assert len(raw)==start.st_size and fingerprint(start)==fingerprint(os.fstat(f.fileno()))==fingerprint(path.lstat())
+    return raw
+def ref(path,expected_sha=None):
+    raw=read(path)
+    digest=sha(raw)
+    if expected_sha is not None:
+        assert digest==expected_sha
+    return dict(path=str(path),bytes=len(raw),sha256=digest)
+def auth(r):
+    raw=read(Path(r["path"]))
+    assert sha(raw)==r["sha256"] and len(raw)==r["bytes"]
+    return raw
+def put(path,raw):
+    with os.fdopen(os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400),"wb") as file:
+        file.write(raw)
+        file.flush()
+        os.fsync(file.fileno())
+    assert read(path)==raw
+    return ref(path)
+def save(name,data):
+    return put(out/name,(json.dumps(data,indent=2,sort_keys=True)+"\n").encode())
+def literals(code):
+    result={}
+    for n in ast.parse(code).body:
+        if isinstance(n,ast.Assign) and len(n.targets)==1 and isinstance(n.targets[0],ast.Name):
+            key=n.targets[0].id
+            if key not in result:
+                try:
+                    result[key]=ast.literal_eval(n.value)
+                except (TypeError,ValueError):
+                    continue
+    return result
+def replace_value(code,key,val):
+    matches=[n for n in ast.parse(code).body if isinstance(n,ast.Assign) and
+             len(n.targets)==1 and isinstance(n.targets[0],ast.Name) and n.targets[0].id==key]
+    assert len(matches)==1,(key,len(matches))
+    n=matches[0]
+    rows=code.splitlines(keepends=True)
+    rows[n.lineno-1:n.end_lineno]=[key+" = "+repr(val)+"\n"]
+    return "".join(rows)
+def replace_exact(code,old,new,size=1):
+    assert code.count(old)==size,(old,code.count(old))
+    return code.replace(old,new)
+
+old_ready_ref=ref(old_ready,"8159d68ad27c386d823488d92406a9be06f8192c23b2bc383c3b41d93bae051e")
+candidate_ref=ref(packet_path,"454cbc69272925d8e4fcfb24637fc973cf75c8d374a3a7f56b80d2f31697c546")
+old=json.loads(auth(old_ready_ref))
+packet=json.loads(auth(candidate_ref))
+base={name:auth(old["controls"][name]).decode() for name in ("operator","bootstrap","factory")}
+prior_selected_operator=read(success_root/"Root-selected-Phase2-checked-release-type-capture-existing-ordinary25-operator.py")
+prior_selected_bootstrap=read(success_root/"Root-selected-bootstrap.py")
+def defs(code):
+    return {n.name:ast.dump(n) for n in ast.parse(code).body if isinstance(n,(ast.FunctionDef,ast.ClassDef))}
+assert defs(base["operator"])==defs(prior_selected_operator)
+assert defs(base["bootstrap"])==defs(prior_selected_bootstrap)
+old_op=literals(base["operator"])
+old_boot=literals(base["bootstrap"])
+assert old_op["MAINTAINED_OWNER_VISIBILITY_POLICY"]==old_boot["MAINTAINED_OWNER_VISIBILITY_POLICY"]
+assert old_op["MAINTAINED_OWNER_VISIBILITY_POLICY"]["force_imports"] is False
+assert old_op["FINAL_D_HEAD"] is None and old_op["FINAL_BINDING_MANIFEST"] is None
+assert old_op["source42"] != literals(prior_selected_operator)["source42"]
+old_seq=old["expected_selection"]["literal_expected_nodeids"]
+new_seq=packet["new_expected_ordinary28"]["ordered_testcases"]
+assert new_seq[:25]==old_seq and len(new_seq)==len(set(new_seq))==28
+selectors=list(dict.fromkeys(n.partition("[")[0] for n in new_seq))
+counts={key:packet["new_expected_ordinary28"]["function_counts"][key] for key in selectors}
+vector=tuple(counts.values())
+assert vector==(2,15,8,3) and sum(vector)==len(new_seq)
+selection={**old["expected_selection"],"literal_expected_cases":28,"literal_expected_nodeids":new_seq,
+           "function_selectors":selectors,"expected_function_case_counts":counts,"function_count":4}
+
+controls={name:code.replace(marker,next_marker) for name,code in base.items()}
+operator=replace_value(controls["operator"],"SELECTION",selection)
+operator=replace_value(operator,"EXPECTED_BRIDGE27_CASE_VECTOR",vector)
+for old_s,new_s in (("['function_count'] == 3","['function_count'] == 4"),
+                    ("['literal_expected_cases'] == 25","['literal_expected_cases'] == 28"),
+                    ("len(set(_selectors)) == 3","len(set(_selectors)) == 4"),
+                    ("sum(_counts.values()) == 25","sum(_counts.values()) == 28"),
+                    ("len(set(roster)) == 25","len(set(roster)) == 28"),
+                    ("literal25 nodeid","literal28 nodeid")):
+    operator=replace_exact(operator,old_s,new_s)
+# Execution owner binds the current Source42 loader. Historical loader refs are provenance only.
+operator=replace_value(operator,"source42",None)
+bootstrap=controls["bootstrap"]
+for key,value in {"FUNCTION_SELECTORS":selectors,"EXPECTED_FUNCTION_CASE_COUNTS":counts,
+                  "EXPECTED_ORDERED_CASE_COUNTS":vector,"EXPECTED_CASES":28}.items():
+    bootstrap=replace_value(bootstrap,key,value)
+for a,b in (("len(function_selectors) != 3","len(function_selectors) != 4"),
+            ("len(set(function_selectors)) != 3","len(set(function_selectors)) != 4"),
+            ("ordered3-selector case vector/25","ordered4-selector case vector/28"),
+            ("3 future-bound public functions/25","4 future-bound public functions/28")):
+    if a=="3 future-bound public functions/25" and a not in bootstrap:
+        continue
+    bootstrap=replace_exact(bootstrap,a,b)
+factory=controls["factory"]
+for a,b,size in ((" != 25"," != 28",2),("literal25 nodeid","literal28 nodeid",1),
+                ("3 independently selected public-function counts/25","4 independently selected public-function counts/28",1)):
+    factory=replace_exact(factory,a,b,size)
+fref=put(out/"existing-v528-component-evidence-ordinary28-factory.INERT.py.DATA",factory.encode())
+operator=replace_value(operator,"FACTORY_REFERENCE",fref)
+bref=put(out/"existing-v528-component-evidence-ordinary28-bootstrap.INERT.py.DATA",bootstrap.encode())
+oref=put(out/"existing-v528-component-evidence-ordinary28-operator.INERT.py.DATA",operator.encode())
+for name,(result,raw) in {"operator":(oref,operator),"bootstrap":(bref,bootstrap),"factory":(fref,factory)}.items():
+    compile(raw,result["path"],"exec",dont_inherit=True)
+    assert not re.search(r"(?:==|!=|=) 25\b|literal25\b|ordered3-selector",raw)
+    diff="".join(difflib.unified_diff(base[name].splitlines(True),raw.splitlines(True),fromfile=name+".old",tofile=name+".28"))
+    put(out/(name+".static-selection.patch"),diff.encode())
+for name in ("operator","bootstrap"):
+    current=literals(operator if name=="operator" else bootstrap)
+    for key in old["existing_late_bind_slots"][name]:
+        assert current[key] is None,(name,key)
+assert literals(operator)["FINAL_SDK_BINDINGS"] is None and literals(operator)["source42"] is None
+assert defs(bootstrap)==defs(base["bootstrap"])
+assert defs(operator)==defs(base["operator"])
+
+# Execute just the original factory callable against inert DATA, without an SDK.
+# This verifies actual roster gates and wire cardinality before the owner binds them.
+test_calls=[]
+def inert_request(**kwargs):
+    test_calls.append(kwargs)
+    return kwargs
+scope=dict(ROOT="/fictional/d",ADDITIONAL_A_ROOT="/fictional/a",EXPECTED_MODULES={},
+    MAINTAINED_OWNER_NAMES=old_op["MAINTAINED_OWNER_NAMES"],
+    SELECTED_TEST_MODULES=old_op["SELECTED_TEST_MODULES"],REQUIRED_CONFTESTS=["/fictional/d/conftest.py"],
+    fixture=dict(pytest_inifile="/fictional/d/pytest.ini"),OWNING_FILES=selection["owning_files"],
+    SELECTION=selection,H=sha,epoch_raw=b"[]",EPOCH=[],
+    SELECTED_TEST_REWRITE_POLICY=old_op["SELECTED_TEST_REWRITE_POLICY"],
+    ROOT_RUNTIME_SELECTION=None,FINAL_D_PROVENANCE=None,FINAL_A_PROVENANCE=None,
+    FINAL_BINDING_MANIFEST_REFERENCE=None,D_READ_BINDING_REFERENCE=None,
+    FINAL_ADMITTED_IO_PLAN_REFERENCE=None,FINAL_EFFECT_DECISION_REFERENCE=None,
+    MAINTAINED_OWNER_VISIBILITY_POLICY=old_op["MAINTAINED_OWNER_VISIBILITY_POLICY"],
+    MAINTAINED_OWNER_VISIBILITY_POLICY_REFERENCE=old_op["MAINTAINED_OWNER_VISIBILITY_POLICY_REFERENCE"],
+    BOOTSTRAP_REFERENCE=bref,read_private=lambda p,n,s:auth(dict(path=p,bytes=n,sha256=s)),
+    sdk=SimpleNamespace(ToolRunRequest=inert_request,ToolRunLimits=lambda **kwargs:kwargs),PY="/fictional/python",
+    FLAGS={},SELECTED_TEST_MODULES_LITERAL=old_op["SELECTED_TEST_MODULES"])
+exec(compile(factory,fref["path"],"exec",dont_inherit=True),scope)
+call=scope["continuation_request"]
+phase="frozen-local-D-"+next_marker
+collect=call(phase,"collect",group=next_marker)
+run=call(phase,"run",new_seq,group=next_marker)
+wire=json.loads(run["input_files"]["request.json"])
+assert wire["actual_collected_roster"]==new_seq and wire["expected_function_case_counts"]==counts
+assert json.loads(collect["input_files"]["request.json"])["function_selectors"]==selectors
+assert run["limits"]["cpu_seconds"]==540 and collect["limits"]["cpu_seconds"]==110
+assert run["limits"]["resident_memory_bytes"]==4294967296 and run["limits"]["memory_bytes"]==8589934592
+probes={
+    "missing":new_seq[:-1],
+    "duplicate":[*new_seq[:-1],new_seq[0]],
+    "foreign":[*new_seq[:-1],new_seq[-1]+"x"],
+}
+for value in probes.values():
+    try:
+        call(phase,"run",value,group=next_marker)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("invalid isolated roster accepted")
+assert len(test_calls)==2
+factory_checks=save("actual-pure-ordinary28-factory-roster-wire-controls.json",
+    dict(passed=["collect","exact28-run","missing","duplicate","foreign"], actual_SDK=False))
+
+public=Path(packet["old_ordinary25_publication"]["path"])
+old_pub=json.loads(auth(packet["old_ordinary25_publication"]))
+assert old_pub["Source_resource_and_parent_closed"] and old_pub["ordered_COLLECT_RUN_JUnit_exact"]
+old_manifest_path=success_root/"Root-selected-Phase2-checked-release-type-capture-ordinary25-binding-manifest.json"
+past_manifest=json.loads(read(old_manifest_path))
+assert set(past_manifest["modules"])==set(old_op["MAINTAINED_OWNER_NAMES"])|set(old_op["SELECTED_TEST_MODULES"].values())
+checkout=Path(packet["files"]["owner"]["canonical_path"])
+for _ in Path(packet["files"]["owner"]["path"]).parts:
+    checkout=checkout.parent
+env={**os.environ,"GIT_OPTIONAL_LOCKS":"0","GIT_NO_LAZY_FETCH":"1"}
+def git(*args):
+    return subprocess.check_output(["git","-c","core.preloadIndex=false","-C",str(checkout),*args],env=env)
+head,tracking=git("rev-parse","HEAD","refs/remotes/origin/main").decode().splitlines()
+assert head==tracking
+planned={}
+for name,old_row in past_manifest["modules"].items():
+    path=old_row["relative_path"]
+    current_oid=git("rev-parse",f"HEAD:{path}").decode().strip()
+    target=next((row for row in packet["files"].values() if row["path"]==path),None)
+    if target is not None:
+        assert current_oid==target["before"]["git_blob"]
+        binding=target["after"]
+    else:
+        raw=git("cat-file","blob",current_oid)
+        assert sha(raw)==old_row["sha256"]
+        binding=dict(bytes=len(raw),sha256=sha(raw),proposed_git_blob=current_oid)
+    planned[name]={"relative_path":path,"bytes":binding["bytes"],"sha256":binding["sha256"],
+                   "expected_Git_blob":binding["proposed_git_blob"],"physical_full9":None}
+assert len(planned)==3
+wire_fixture=old["fixture_wire_DATA"]
+fixture_plan={
+    "expected_relative_config_and_helper_rows":[row["path"] for row in wire_fixture["required_fixture_closure"]],
+    "canonical_pytest_ini_path":wire_fixture["pytest_inifile"],
+    "required_absent_paths":wire_fixture["required_absent_paths"],
+    "natural_RUN_support_paths":[row["path"] for row in old["natural_RUN_support_roles_current"]],
+    "genuine_current_SDK_fixture_or_absence_observations":None
+}
+metadata=save("exact-ordinary28-nonclock-roster-and-role-plan.json",{
+    "selection":selection,"case_vector":list(vector),"required_module_rows":planned,
+    "fixture_paths_to_bind":fixture_plan,"current_tip_observed_as_metadata_only":head})
+ready={
+    "schema":"existing-v528-retained-type-component-evidence-ordinary28-INERT/v1",
+    "exact_private_candidate":candidate_ref,"expected_selection":selection,"ordered_case_vector":list(vector),
+    "controls":{"operator":oref,"bootstrap":bref,"factory":fref},
+    "ordinary_published_predecessor_v591":packet["old_ordinary25_publication"],
+    "prior_INERT_template":old_ready_ref,"same_actual_v590_method_bodies_authenticated":True,
+    "current_roster_and_role_metadata":metadata,"source_runtime_binding_ABI":old["source_runtime_binding_ABI"],
+    "ordinary_resource_profile_historical_limits":old["prior_v486_preserved_limits"],
+    "existing_lazy_owner_policy":old_op["MAINTAINED_OWNER_VISIBILITY_POLICY"],"exact_factory_data_only_checks":factory_checks,
+    "selector_and_Git_freeze":None,"Source_or_host_lease":None,"clock_or_effect_decisions":None,
+    "actual_ordinary_qualification":None,
+    "next_existing_owner":"After exact Source2 adoption and local freeze, bind genuine READ3 and current epoch, actual Source42 loader and D/A guards. Reuse v590 binding mechanism and kept resource limits. Match the scoped parent-derived module payload and helper/config absences."
+}
+print(json.dumps(save("READY-existing-v528-retained-type-component-evidence-ordinary28-INERT.json",ready)))

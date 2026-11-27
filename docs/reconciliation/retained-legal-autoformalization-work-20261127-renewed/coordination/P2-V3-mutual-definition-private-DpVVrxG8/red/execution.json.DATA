@@ -1,0 +1,40 @@
+{
+  "argv": [
+    "/home/barberb/lift_coding/.venv/bin/python",
+    "-I",
+    "-B",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/existing-runner.py.DATA",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/red",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+    "/home/barberb/lift_coding/external/ipfs_datasets",
+    "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_refuses_mutual_typed_definition_dependencies",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_preserves_acyclic_typed_definition_dependency_in_graph"
+  ],
+  "cases": [
+    "test_reviewed_refuses_mutual_typed_definition_dependencies[v2]",
+    "test_reviewed_refuses_mutual_typed_definition_dependencies[v3]",
+    "test_reviewed_v3_preserves_acyclic_typed_definition_dependency_in_graph"
+  ],
+  "counts": {
+    "error": 0,
+    "failure": 2,
+    "skipped": 0,
+    "tests": 3
+  },
+  "junit": {
+    "bytes": 1496,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/red/result.xml",
+    "sha256": "fa2a84bab541145dfca8e1a8b84e3d38f6efc4fd3006c789716d0575e4f6cf5c"
+  },
+  "phase": "red",
+  "returncode": 1,
+  "seconds": 8.86655261926353,
+  "source_sha256": {
+    "ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py": "1b294d2d896f715c7fe667cf194e2a04bc681705af558a535d55210b4cacf917",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py": "7983f7729d88909fb69c931c891782fa0abde78eba75c163ee437b68258fc8de"
+  },
+  "verified_roles": 132
+}

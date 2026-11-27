@@ -1,0 +1,40 @@
+{
+  "added_Source_only_envelope": 33554432,
+  "after_full_retained_precharge": {
+    "captures": 543424,
+    "capturesComplete": false,
+    "global_cap": 59810269194,
+    "internal_cap": 59619677320,
+    "internal_used": 59613320328,
+    "used": 59803912202
+  },
+  "all_prior_costs_retained": true,
+  "exact_human_affirmation": {
+    "bytes": 2960,
+    "path": "/tmp/Main-source-cap-human-provenance-v01-g9hs_s_q/Root-original-human-Source-cap-approval.record.jsonl",
+    "sha256": "8fdf2d6c57542b3ce8e8a06773645487c39a3cb2a8a9929426cc785d3fc78dda"
+  },
+  "physical_IO_accounting_complete": false,
+  "previous_charge": {
+    "bytes": 1289,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/Source-only-lean-json-diagnostics-WRITE-full-retained.json",
+    "sha256": "b2db71a64ce89374326c708351d8929b2a9cef7d56c929e7a585cfb92a3bc824"
+  },
+  "prior": {
+    "captures": 543423,
+    "capturesComplete": false,
+    "global_cap": 59776714762,
+    "internal_cap": 59586122888,
+    "internal_used": 59579765896,
+    "used": 59770357770
+  },
+  "resource_policy_capacity_unchanged": true,
+  "selected": {
+    "captures": 543423,
+    "capturesComplete": false,
+    "global_cap": 59810269194,
+    "internal_cap": 59619677320,
+    "internal_used": 59579765896,
+    "used": 59770357770
+  }
+}

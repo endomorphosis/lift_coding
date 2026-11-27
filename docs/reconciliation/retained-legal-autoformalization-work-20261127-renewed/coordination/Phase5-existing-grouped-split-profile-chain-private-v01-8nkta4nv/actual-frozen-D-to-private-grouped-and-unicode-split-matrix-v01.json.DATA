@@ -1,0 +1,178 @@
+{
+  "absent_historical_assessment_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/relational_assessment.py",
+  "actual_fictional_experiment": {
+    "english_current": {
+      "assignments": {
+        "a-internal": "train",
+        "b-external": "external_test"
+      },
+      "common_cluster": false,
+      "guard_pass": true,
+      "intersections": 14,
+      "same_content_hash": false,
+      "same_lineage": false,
+      "unions": 16
+    },
+    "english_grouped": {
+      "assignments": {
+        "a-internal": "external_test",
+        "b-external": "external_test"
+      },
+      "common_cluster": true,
+      "guard_pass": true,
+      "intersections": 14,
+      "same_content_hash": false,
+      "same_lineage": false,
+      "unions": 16
+    },
+    "english_grouped_with_unicode_owner": {
+      "assignments": {
+        "a-internal": "external_test",
+        "b-external": "external_test"
+      },
+      "common_cluster": true,
+      "guard_pass": true,
+      "intersections": 14,
+      "same_content_hash": false,
+      "same_lineage": false,
+      "unions": 16
+    },
+    "japanese_ascii": {
+      "assignments": {
+        "a-internal": "holdout",
+        "b-external": "train"
+      },
+      "common_cluster": false,
+      "guard_pass": true,
+      "intersections": 0,
+      "same_content_hash": false,
+      "same_lineage": false,
+      "unions": 0
+    },
+    "japanese_current": {
+      "assignments": {
+        "a-internal": "holdout",
+        "b-external": "train"
+      },
+      "common_cluster": false,
+      "guard_pass": true,
+      "intersections": 0,
+      "same_content_hash": false,
+      "same_lineage": false,
+      "unions": 0
+    },
+    "japanese_unicode": {
+      "assignments": {
+        "a-internal": "holdout",
+        "b-external": "holdout"
+      },
+      "common_cluster": true,
+      "guard_pass": true,
+      "intersections": 62,
+      "same_content_hash": false,
+      "same_lineage": false,
+      "unions": 70
+    },
+    "unrelated_ascii": {
+      "assignments": {
+        "a": "external_test",
+        "b": "external_test"
+      },
+      "common_cluster": true,
+      "guard_pass": true,
+      "intersections": 1,
+      "same_content_hash": false,
+      "same_lineage": false,
+      "unions": 1
+    },
+    "unrelated_unicode": {
+      "assignments": {
+        "a": "train",
+        "b": "external_test"
+      },
+      "common_cluster": false,
+      "guard_pass": true,
+      "intersections": 4,
+      "same_content_hash": false,
+      "same_lineage": false,
+      "unions": 60
+    }
+  },
+  "current_training_owner": {
+    "Git_blob_oid": "303422a4cc76266c4659085685854c26efd64af1",
+    "path": "ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py"
+  },
+  "elapsed_seconds": 0.10835014283657074,
+  "exact_retained_fixture_sources": [
+    {
+      "bytes": 13413,
+      "path": "/tmp/decoder-training-dependency-grouped-split-private-v01/test_dependency_grouped_split.py",
+      "sha256": "9ccbc9c697bf70c21da0bf5b83045c3b0a23c28db9dbdf82ff47d72061763b02"
+    },
+    {
+      "bytes": 11764,
+      "path": "/tmp/decoder-training-unicode-campaign-split-private-v01-3SZARfWx/test_unicode_campaign_split.py",
+      "sha256": "fafa5be91af0470d0d368c03022fd1765f4ed8859f3a5582f90b6c9998f08b18"
+    }
+  ],
+  "four_stage_exact_body_chain": {
+    "current": {
+      "Git_blob_oid": "ad21acae2a3420e8c560fd26006504fcfb6849df",
+      "bytes": 58133,
+      "path": "/tmp/decoder-training-split-membership-fix-private-v01/before/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py",
+      "sha256": "7963ebcb291c0476f0cccc4123e28a519187970f02dbd9059fce78e661287c3c"
+    },
+    "grouped": {
+      "Git_blob_oid": "ee95599b58c488259664973ba2b30a97149c61f5",
+      "bytes": 59574,
+      "path": "/tmp/decoder-training-dependency-grouped-split-private-v01/legal_ir_eval_splits.py",
+      "sha256": "9e5a875771021f2cb081a227e7cd6e028f145d7c0beba590315e798422117675"
+    },
+    "membership": {
+      "Git_blob_oid": "08f2dfdfa1b5be5732edceb715e0a6c99f5bc6ac",
+      "bytes": 58213,
+      "path": "/tmp/decoder-training-split-membership-fix-private-v01/after/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py",
+      "sha256": "292cbe0624e6fa7a66917f59fdbe7b1b3e2a585d215bca7bcf6cd32f3bd985e9"
+    },
+    "unicode": {
+      "Git_blob_oid": "07b499a1263becd7bd5c6d2755dc81c24cbe6f56",
+      "bytes": 61991,
+      "path": "/tmp/decoder-training-unicode-campaign-split-private-v01-3SZARfWx/replay/legal_ir_eval_splits.py",
+      "sha256": "e652c79842323fec40f3e5d8f6a23620c9b4ce4a2d1043c597176a13de3f4acd"
+    }
+  },
+  "identical_default_manifest_hashes": {
+    "english": "f293e71727af2e862d675d095869af8770e1f7c4dd56fc63c9561777f3b7f5d1",
+    "japanese": "f6a42fa065ee4e2342b1ad297d3560304efb7f25577bb17daeba0264d6140366",
+    "unrelated_scripts": "e221180be89682c7af412e6002e79dd638a2a9de3c5009ed52df0cdc4e9b1db6"
+  },
+  "immutable_predecessor_descriptors": [
+    {
+      "bytes": 5724,
+      "path": "/tmp/decoder-training-split-membership-fix-private-v01/descriptor.json",
+      "sha256": "a47e929c0ab19a47d290c9ad1bfdc483269202ff620a5068c13e0cddd05ca93b"
+    },
+    {
+      "bytes": 4123,
+      "path": "/tmp/decoder-training-dependency-grouped-split-private-v01/descriptor.json",
+      "sha256": "373eedcb5eb6740876515831a6cb7fccc220c8eb5d487f3c4019828ca67b4b54"
+    },
+    {
+      "bytes": 7896,
+      "path": "/tmp/decoder-training-unicode-campaign-split-private-v01-3SZARfWx/descriptor.json",
+      "sha256": "0693fb456c9726b26c148d61687d8c9100f773077e4a447cc20eb655c0166b99"
+    }
+  ],
+  "nonmatching_inferrable_Unicode_training_preimage": {
+    "Git_blob_oid": "58c4e928c93754a9e4bf6bb9551acb9f7e5cf830",
+    "bytes": 184826,
+    "path": "/tmp/decoder-training-native-compact-launch-binding-private-v01-LP9UjlKk/collection-only/stage/ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py",
+    "sha256": "9c2254df1c21e43831a1790fc5ed7b2426d4eb12026d1f7eee844e399d4a6432"
+  },
+  "observed_D_head": "8aebc34eb1e430b00c2b941cb256e853fe2adc02",
+  "observed_D_tree": "00cef1abedbef0ae383dc07df5f5efb22f5253bd",
+  "previous_failed_assertion": "First check incorrectly reused historical 17/19 overlap for the different authored fixture. Corrected to the actual feature overlap and owner threshold.",
+  "schema": "phase5-existing-exact-split-owner-profile-chain/v1",
+  "scope": "Actual direct execution of four authenticated existing split-owner bodies on retained fictional samples. No live Source, package qualification, installation, real cohort, developer or final assessment replay, or model.",
+  "target_owner": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py"
+}

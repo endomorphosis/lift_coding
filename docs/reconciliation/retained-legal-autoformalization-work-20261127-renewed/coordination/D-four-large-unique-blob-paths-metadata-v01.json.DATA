@@ -1,0 +1,77 @@
+{
+  "cap": 67108864,
+  "cumulative_explicit_metadata_control_read_bytes": 50514650,
+  "exact_difference_report": {
+    "bytes": 1209658,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/complete-exact-A81-D206-object-difference-metadata-v06.json",
+    "sha256": "258dcddfd29c0b1f9240ae37bb0bc68df4825cc79644f49480a59569fd642e73"
+  },
+  "rows": [
+    {
+      "bytes": 196205088,
+      "direct_blob_body_requests": 0,
+      "historical_changing_or_deleting_commit": "b8a9bb35a8234d1c12204f2bae34d2a0c2635056",
+      "metadata_bound_reached": false,
+      "oid": "0be6b6e0639997edb9029c3e32700532c540c0f2",
+      "owned_metadata_PID": 1378743,
+      "path_match": {
+        "raw_diff_metadata": ":000000 100644 0000000000000000000000000000000000000000 0be6b6e0639997edb9029c3e32700532c540c0f2 A",
+        "recorded_path": "docs/implementation/reports/evidence/decoder-action-consistency-20261003/evidence.tar.xz"
+      },
+      "raw_metadata_bytes": 95014,
+      "stderr_bytes": 0,
+      "terminal_returncode": -15,
+      "wait_returned": true
+    },
+    {
+      "bytes": 106911344,
+      "direct_blob_body_requests": 0,
+      "historical_changing_or_deleting_commit": "b8a9bb35a8234d1c12204f2bae34d2a0c2635056",
+      "metadata_bound_reached": false,
+      "oid": "3328ec7edccf75229b3d402d31a7af1fe8d1dfe5",
+      "owned_metadata_PID": 1378745,
+      "path_match": {
+        "raw_diff_metadata": ":000000 100644 0000000000000000000000000000000000000000 3328ec7edccf75229b3d402d31a7af1fe8d1dfe5 A",
+        "recorded_path": "docs/implementation/reports/evidence/decoder-action-binding-20261003/evidence.tar.xz"
+      },
+      "raw_metadata_bytes": 89222,
+      "stderr_bytes": 0,
+      "terminal_returncode": -15,
+      "wait_returned": true
+    },
+    {
+      "bytes": 119263308,
+      "direct_blob_body_requests": 0,
+      "historical_changing_or_deleting_commit": "b8a9bb35a8234d1c12204f2bae34d2a0c2635056",
+      "metadata_bound_reached": false,
+      "oid": "81530fd237ea4b1f929dd631cae0a6532d61c6bc",
+      "owned_metadata_PID": 1378747,
+      "path_match": {
+        "raw_diff_metadata": ":000000 100644 0000000000000000000000000000000000000000 81530fd237ea4b1f929dd631cae0a6532d61c6bc A",
+        "recorded_path": "docs/implementation/reports/evidence/decoder-context-boundary-training-20261003/evidence.tar.xz"
+      },
+      "raw_metadata_bytes": 99256,
+      "stderr_bytes": 0,
+      "terminal_returncode": -15,
+      "wait_returned": true
+    },
+    {
+      "bytes": 203598796,
+      "direct_blob_body_requests": 0,
+      "historical_changing_or_deleting_commit": "b8a9bb35a8234d1c12204f2bae34d2a0c2635056",
+      "metadata_bound_reached": false,
+      "oid": "ef215b8ffb1ed15505a0145a50dd080528fcdccf",
+      "owned_metadata_PID": 1378749,
+      "path_match": {
+        "raw_diff_metadata": ":000000 100644 0000000000000000000000000000000000000000 ef215b8ffb1ed15505a0145a50dd080528fcdccf A",
+        "recorded_path": "docs/implementation/reports/evidence/decoder-generated-field-training-r2-20261003/evidence.tar.xz"
+      },
+      "raw_metadata_bytes": 102148,
+      "stderr_bytes": 0,
+      "terminal_returncode": -15,
+      "wait_returned": true
+    }
+  ],
+  "schema": "D-four-large-unique-blob-paths-metadata/v1",
+  "scope": "Historical Git paths from object-identity pickaxe and raw tree diffs. No blob contents, direct Source bodies, pack, Git mutation or upload."
+}

@@ -1,0 +1,62 @@
+{
+  "kind": "actual_Main_P1_component_canonical_adoption_and_local_freeze_reconciliation",
+  "root_actual_source_compact": {
+    "path": "/tmp/Root-P1-combined-request-returncode-existing-Source2-v451-tf0jgxhx/actual-P1-combined-request-returncode-exact2-Source-closed-small-v451.json",
+    "bytes": 10161,
+    "sha256": "16833210a264d08bfa3f5d1334ef6f9bd35cdf8b321c56afd3a299dd3cd84c23"
+  },
+  "root_actual_local_freeze": {
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-P1-combined-request-returncode-exact2-local-freeze-v451.json",
+    "bytes": 11722,
+    "sha256": "d84c8ab1349fd2f1417ef1bcc348e4bb29d2e6ebd930963555050716e92a119c"
+  },
+  "actual_Source_closed": true,
+  "actual_Source_module_closed": true,
+  "actual_write_complete": true,
+  "actual_Source_owner_exit_code": 0,
+  "actual_Source_session_retained_only_no_foreign_poll": 59281,
+  "local_commit": "8b628c46653814e0a5d8d293acbf5214db7d409b",
+  "local_tree": "22c06f1cde9baaf6f33edfa95d8922bf1832dd88",
+  "sole_parent": "5d14d3b59f6438edaf0423cfd9b9f21d9c5f177e",
+  "exact_2_raw_tree_changes": [
+    {
+      "path": "ipfs_datasets_py/logic/backends/kernel/lean.py",
+      "old_blob": "1e1b75b74da8740b5808fb3dd77671eab5673f35",
+      "new_blob": "a96fcf58d02523fee3912912933302c026c92788",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/integration/logic/backends/test_kernel_backends.py",
+      "old_blob": "e18eec7a0b92a20d02a672559713a0923f3ad7a5",
+      "new_blob": "94cd39ed1d3e352faa41992f6236fe72179958eb",
+      "mode": "100644"
+    }
+  ],
+  "immutable_committed_Git_blobs_independently_read_and_SHA256_verified": {
+    "owner": {
+      "bytes": 103838,
+      "sha256": "c1050ad1ec067fc7f7c8fea08793e872511fe58029e9b1aa89ec90d2cb288313"
+    },
+    "test": {
+      "bytes": 115566,
+      "sha256": "99e00363bbd1ea23d450af0912374fdbf4d30ab3b1802371fb8d237dccbf7da5"
+    }
+  },
+  "receipt_reported_local_clean": true,
+  "receipt_reported_all_gitlinks_and_Guide541_preserved": true,
+  "Main_guard_and_8_assertions": {
+    "preservation_reference": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Root-combined-P1-Main-eight-case-preservation-and-current-handoff-v01.json",
+    "bytes": 4646,
+    "sha256": "b2ff295d4750da5d422aed7336e277c1aad183c4d2ce24bfd9423737367db97e"
+  },
+  "historical_private_81_passes_remain_separate": true,
+  "actual_Source_bound_ordinary81": null,
+  "new_Native_result": null,
+  "actual_push": false,
+  "Root_historical_sealed_private_packet_Null_fields_are_not_current_adoption_status": true,
+  "next": "Existing Root owns actual Source-bound ordinary81 and later normal publication. No new writer/control/Source/runtime/publication started by Main.",
+  "this_reconciliation_Source_Git_SDK_SQL_model_or_ledger_mutation": false,
+  "full_eight_phase_goal_complete": false,
+  "explicit_private_input_bytes_this_reconciliation": 22185,
+  "all_prior_failures_costs_refs_and_masks_retained": true
+}

@@ -1,0 +1,183 @@
+{
+  "actual_public_source_validator": "validate_reviewed_definition_realization_native_v1",
+  "actual_run": {
+    "duplicates": 0,
+    "errors": 0,
+    "failed": 0,
+    "junit": {
+      "bytes": 1863,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/candidate-v03-exact-capsule-whole-norm-definition-application-private-v01/result.xml",
+      "sha256": "ccbc6114330b3758893d27fb65c07ba87ec929595f8f51a50bf42eaca860883d"
+    },
+    "ordered_nodes": [
+      "test_exact_signed_v3_capsule_reaches_whole_norm_native_validator[exact]",
+      "test_exact_signed_v3_capsule_reaches_whole_norm_native_validator[realization-pin]",
+      "test_exact_signed_v3_capsule_reaches_whole_norm_native_validator[preservation-pin]",
+      "test_exact_signed_v3_capsule_reaches_whole_norm_native_validator[source-bytes]",
+      "test_exact_signed_v3_capsule_reaches_whole_norm_native_validator[swapped-use-binding]",
+      "test_exact_signed_v3_capsule_reaches_whole_norm_native_validator[omitted-norm]",
+      "test_exact_signed_v3_capsule_reaches_whole_norm_native_validator[assumed-equivalence]",
+      "test_exact_signed_v3_capsule_reaches_whole_norm_native_validator[downgraded-profile]"
+    ],
+    "passed": 8,
+    "pytest_wall_seconds": 17.8,
+    "rc": 0,
+    "session": 95920,
+    "skipped": 0,
+    "stderr": {
+      "bytes": 0,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/candidate-v03-exact-capsule-whole-norm-definition-application-private-v01/stderr.DATA",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stdout": {
+      "bytes": 460,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/candidate-v03-exact-capsule-whole-norm-definition-application-private-v01/stdout.DATA",
+      "sha256": "0cc4bb5da83262048c3581322bd93b3030b3c2babe4a45b3ff76fbcedc3575f3"
+    },
+    "terminal_chunk": "0c6a9d"
+  },
+  "definition_application_profile": "whole-norm-definition-expansion/v1",
+  "execution_scope": {
+    "canonical_Source_or_Git_mutation": false,
+    "cross_unit_equivalence_is_conditional": true,
+    "native_process_executed": false,
+    "production_legal_admission": false,
+    "proof_checked": false,
+    "same_existing_signed_fictional_component": true,
+    "training_or_evaluation_gold_admission": false
+  },
+  "expected_admission_sha256": "3b483b9c482c25a2125a04097ae2aedf75ebb8198ec3200b4793c0349e2e8181",
+  "expected_graph_sha256": "9995099172212c5becd541a987a4fdbd409c84d42fd6100f1729b209facd891c",
+  "expected_preservation_sha256": "56cc4cb291928704c3a1ce343bbae6c98c0b6c039373b2af71d2e22070bf798b",
+  "expected_realization_sha256": "b77693934d774bad5fbbc6d76df818f2cf50187dcbe3f61a3b40594e99048217",
+  "frozen_product_git_commit": "5fae066b5871d3fdf0b63dfbc4339c199ca6ffc1",
+  "future_existing_native_entrypoint": "build_verified_reviewed_definition_realization_native_v1",
+  "native_replay_capsule": {
+    "bytes": 1930594,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/candidate-v03-exact-capsule-whole-norm-definition-application-private-v01/pytest/test_exact_signed_v3_capsule_r0/fictional-signed-v3-whole-norm-native-replay-inputs.json",
+    "sha256": "3a2f196984ee676e4fe4d632ef8ee852d56a745b945017d9d62a879251500444"
+  },
+  "native_selection": null,
+  "project": {
+    "definition_use_record_cids": [
+      "baguqeeratfdpqp226t6ltlpdohsoa7lxvzkg5f4rwk4ptcp3obj55pjmgtiq",
+      "baguqeerasz7rj6ws7vxu43bcyyzwxdnwsyodne5i26dw326fu5l7v7juxuca"
+    ],
+    "exact_byte_sha256": {
+      "LegalMixedRelationalAstPreservation/Instance42bc4757b93fc47e3b4050dfc5ce7c1846c16978e6b5c4532b4024e8729b3264.lean": "956975b69384f96d54132ecbff113f8bd445a29967d2f8a490358e47c31f04e5",
+      "LegalMixedRelationalAstPreservation/Prelude.lean": "e0fd298e58039c4b07462b7fcaccf6e9d053b973b4d181f4b53e073a2008f721",
+      "LegalMixedRelationalAstPreservation/Semantics.lean": "6ba110571cd8f1c4260c17ec4043564843c3f45ed3feb9de2d0c20ef7a9db72d",
+      "LegalRelationalAstPreservation/Instance4fd6dded64c9fb6c604f71b49815fdd4b5ff74dc683e13e6614e141ffe973040.lean": "7233e2e98b0cd49f84ef1bdf057aab9123579317a7607797c122814d61a9d564",
+      "LegalRelationalAstPreservation/Instanced730343569165d945393cf90cfb7015f7c7007ff4e4f604ef430fa50a5e9c7ec.lean": "723d1093acc958f4245a955b246aaf899a440ae582381fe11f6ed7ffb0bb2c4a",
+      "LegalRelationalAstPreservation/Prelude.lean": "71c81c61fd79de2edda1fec57c4d06255c0cacd4bbe7cf6deef158bd0c2f478f",
+      "LegalRelationalAstPreservation/Semantics.lean": "b4f195abb28f385361f374eacf8b9812f038361b672794af45ba5459dc6705bc",
+      "LegalReviewedDefinitionRealization.lean": "2eb3714fd52d4c155dc9eefd9a1af1e33e0e3c68126377654b80401128be51b8",
+      "LegalReviewedDefinitionRealization/Instance8dff54facebc47a5d87432eb9a4c02f4274a0538090113aaccc4ee7bb2a86343.lean": "6b69a8a0266dd84bdca1e05d5b875f45e2b3a025ce9eaa94c8cf2d80381de11f",
+      "LegalReviewedMixedNormPreservation.lean": "005b8c5f3658c81510a323f4ef5906975e72ae659e0788e7797b1c69748fd64a",
+      "definition-realization-input-bindings.json": "187705d5bd0bc88b2e440ed8ad2bd2671fc685cd59e0d9946da7e09c092dd110",
+      "definition-realization-original-lakefile.txt": "7a5c68a6b1c24bafba1f19661fa9797c93b1c7aae966828ab142cef2d9301162",
+      "lakefile.toml": "cef124e76756dfdd9dcdefbfaf2501fcf57237fbb10587194e55ca1b47b4268c",
+      "lean-toolchain": "d5edba4e4b8faad9c1baeadb265716d20d03be4d1a2647dc5e35b0c0325bea7b",
+      "reviewed-input-bindings.json": "5bc7490822d9c8129b2c4e0c9e42c804c4965e770c3c890f8bd466fa49ff1b4a",
+      "unit-companions/00-file-00.txt": "da514f584e88378b23bc9f42bdbbc01c1503cad84b395aa6ac5b867f01f68051",
+      "unit-companions/00-file-01.txt": "723d1093acc958f4245a955b246aaf899a440ae582381fe11f6ed7ffb0bb2c4a",
+      "unit-companions/00-file-02.txt": "71c81c61fd79de2edda1fec57c4d06255c0cacd4bbe7cf6deef158bd0c2f478f",
+      "unit-companions/00-file-03.txt": "b4f195abb28f385361f374eacf8b9812f038361b672794af45ba5459dc6705bc",
+      "unit-companions/00-file-04.txt": "770ccc68e4b03292de3ff805ce0b06ed98b1213eb747220e2f9f7a7f571b303e",
+      "unit-companions/00-file-05.txt": "d5edba4e4b8faad9c1baeadb265716d20d03be4d1a2647dc5e35b0c0325bea7b",
+      "unit-companions/00-file-06.txt": "a373719f8f7b902a49586194037424a4390fbda1a88e2b72e01a919e423929d3",
+      "unit-companions/00-manifest.json": "b32b10349a6111250c9460677ba1346bae27495f58446cb2f93e3962b4aa1dbd",
+      "unit-companions/01-file-00.txt": "d1b15abe81d20878bc156455c0c27fe6edbbba160c100cba7b050a83fea76ae0",
+      "unit-companions/01-file-01.txt": "7233e2e98b0cd49f84ef1bdf057aab9123579317a7607797c122814d61a9d564",
+      "unit-companions/01-file-02.txt": "71c81c61fd79de2edda1fec57c4d06255c0cacd4bbe7cf6deef158bd0c2f478f",
+      "unit-companions/01-file-03.txt": "b4f195abb28f385361f374eacf8b9812f038361b672794af45ba5459dc6705bc",
+      "unit-companions/01-file-04.txt": "770ccc68e4b03292de3ff805ce0b06ed98b1213eb747220e2f9f7a7f571b303e",
+      "unit-companions/01-file-05.txt": "d5edba4e4b8faad9c1baeadb265716d20d03be4d1a2647dc5e35b0c0325bea7b",
+      "unit-companions/01-file-06.txt": "99e1fe1d1a1e882a0e4732a07d94dbe668c0de189c03c363578fa1b612f8a544",
+      "unit-companions/01-manifest.json": "5939a5e5488512cf357a9324699e9e40572cbc7054d30b3cfe0fb19bc84881d5",
+      "unit-companions/02-file-00.txt": "82304e4adf0b60b3ebbc592ac33280a95f7119a97491028037d470116c3a0858",
+      "unit-companions/02-file-01.txt": "956975b69384f96d54132ecbff113f8bd445a29967d2f8a490358e47c31f04e5",
+      "unit-companions/02-file-02.txt": "e0fd298e58039c4b07462b7fcaccf6e9d053b973b4d181f4b53e073a2008f721",
+      "unit-companions/02-file-03.txt": "6ba110571cd8f1c4260c17ec4043564843c3f45ed3feb9de2d0c20ef7a9db72d",
+      "unit-companions/02-file-04.txt": "c117d67ed2b23ff18a0f7ad2e2d37d9d5409bbbede7a56c34ba140c5fbc8be37",
+      "unit-companions/02-file-05.txt": "d5edba4e4b8faad9c1baeadb265716d20d03be4d1a2647dc5e35b0c0325bea7b",
+      "unit-companions/02-file-06.txt": "39cedbeab69b2ba29499e1a6e4ebcbb9f7fb36310778a352133431bdd6f6758a",
+      "unit-companions/02-manifest.json": "bbd2b0bef4f9c0259deb127e9b893c52947fb7b0dacb79e03cca2c275827dde1"
+    },
+    "files": 39,
+    "module_names": [
+      "LegalMixedRelationalAstPreservation.Prelude",
+      "LegalMixedRelationalAstPreservation.Semantics",
+      "LegalRelationalAstPreservation.Prelude",
+      "LegalRelationalAstPreservation.Semantics",
+      "LegalRelationalAstPreservation.Instanced730343569165d945393cf90cfb7015f7c7007ff4e4f604ef430fa50a5e9c7ec",
+      "LegalRelationalAstPreservation.Instance4fd6dded64c9fb6c604f71b49815fdd4b5ff74dc683e13e6614e141ffe973040",
+      "LegalMixedRelationalAstPreservation.Instance42bc4757b93fc47e3b4050dfc5ce7c1846c16978e6b5c4532b4024e8729b3264",
+      "LegalReviewedMixedNormPreservation",
+      "LegalReviewedDefinitionRealization.Instance8dff54facebc47a5d87432eb9a4c02f4274a0538090113aaccc4ee7bb2a86343",
+      "LegalReviewedDefinitionRealization"
+    ],
+    "ordered_parent_unit_ids": {
+      "fixture:mixed-act-v1/unit-1": [],
+      "fixture:mixed-act-v1/unit-2": [
+        "fixture:mixed-act-v1/unit-1"
+      ],
+      "fixture:mixed-act-v1/unit-3": [
+        "fixture:mixed-act-v1/unit-2",
+        "fixture:mixed-act-v1/unit-1"
+      ]
+    },
+    "preservation_obligations": [
+      "LegalRelationalAstPreservation.Instanced730343569165d945393cf90cfb7015f7c7007ff4e4f604ef430fa50a5e9c7ec.native_value_exact",
+      "LegalRelationalAstPreservation.Instanced730343569165d945393cf90cfb7015f7c7007ff4e4f604ef430fa50a5e9c7ec.native_ast_closed",
+      "LegalRelationalAstPreservation.Instanced730343569165d945393cf90cfb7015f7c7007ff4e4f604ef430fa50a5e9c7ec.denotation_matches_native",
+      "LegalRelationalAstPreservation.Instanced730343569165d945393cf90cfb7015f7c7007ff4e4f604ef430fa50a5e9c7ec.typed_source_lowering_exact",
+      "LegalRelationalAstPreservation.Instanced730343569165d945393cf90cfb7015f7c7007ff4e4f604ef430fa50a5e9c7ec.role_denotation_matches_native",
+      "LegalRelationalAstPreservation.Instance4fd6dded64c9fb6c604f71b49815fdd4b5ff74dc683e13e6614e141ffe973040.native_value_exact",
+      "LegalRelationalAstPreservation.Instance4fd6dded64c9fb6c604f71b49815fdd4b5ff74dc683e13e6614e141ffe973040.native_ast_closed",
+      "LegalRelationalAstPreservation.Instance4fd6dded64c9fb6c604f71b49815fdd4b5ff74dc683e13e6614e141ffe973040.denotation_matches_native",
+      "LegalRelationalAstPreservation.Instance4fd6dded64c9fb6c604f71b49815fdd4b5ff74dc683e13e6614e141ffe973040.typed_source_lowering_exact",
+      "LegalRelationalAstPreservation.Instance4fd6dded64c9fb6c604f71b49815fdd4b5ff74dc683e13e6614e141ffe973040.role_denotation_matches_native",
+      "LegalMixedRelationalAstPreservation.Instance42bc4757b93fc47e3b4050dfc5ce7c1846c16978e6b5c4532b4024e8729b3264.mixed_typed_value_exact",
+      "LegalMixedRelationalAstPreservation.Instance42bc4757b93fc47e3b4050dfc5ce7c1846c16978e6b5c4532b4024e8729b3264.mixed_renderer_value_exact",
+      "LegalMixedRelationalAstPreservation.Instance42bc4757b93fc47e3b4050dfc5ce7c1846c16978e6b5c4532b4024e8729b3264.mixed_ast_closed",
+      "LegalMixedRelationalAstPreservation.Instance42bc4757b93fc47e3b4050dfc5ce7c1846c16978e6b5c4532b4024e8729b3264.mixed_denotation_matches_lowering",
+      "LegalMixedRelationalAstPreservation.Instance42bc4757b93fc47e3b4050dfc5ce7c1846c16978e6b5c4532b4024e8729b3264.mixed_role_denotation_matches_lowering",
+      "LegalReviewedDefinitionRealization.Instance8dff54facebc47a5d87432eb9a4c02f4274a0538090113aaccc4ee7bb2a86343.definition_body_source_exact",
+      "LegalReviewedDefinitionRealization.Instance8dff54facebc47a5d87432eb9a4c02f4274a0538090113aaccc4ee7bb2a86343.definition_realized",
+      "LegalReviewedDefinitionRealization.Instance8dff54facebc47a5d87432eb9a4c02f4274a0538090113aaccc4ee7bb2a86343.occurrence_0_source_exact",
+      "LegalReviewedDefinitionRealization.Instance8dff54facebc47a5d87432eb9a4c02f4274a0538090113aaccc4ee7bb2a86343.occurrence_0_matches_body",
+      "LegalReviewedDefinitionRealization.Instance8dff54facebc47a5d87432eb9a4c02f4274a0538090113aaccc4ee7bb2a86343.occurrence_1_source_exact",
+      "LegalReviewedDefinitionRealization.Instance8dff54facebc47a5d87432eb9a4c02f4274a0538090113aaccc4ee7bb2a86343.occurrence_1_matches_body",
+      "LegalReviewedDefinitionRealization.Instance8dff54facebc47a5d87432eb9a4c02f4274a0538090113aaccc4ee7bb2a86343.occurrence_2_source_exact",
+      "LegalReviewedDefinitionRealization.Instance8dff54facebc47a5d87432eb9a4c02f4274a0538090113aaccc4ee7bb2a86343.occurrence_2_matches_body",
+      "LegalReviewedDefinitionRealization.Instance8dff54facebc47a5d87432eb9a4c02f4274a0538090113aaccc4ee7bb2a86343.unit_0_preservation_under_realization",
+      "LegalReviewedDefinitionRealization.Instance8dff54facebc47a5d87432eb9a4c02f4274a0538090113aaccc4ee7bb2a86343.unit_1_preservation_under_realization",
+      "LegalReviewedDefinitionRealization.Instance8dff54facebc47a5d87432eb9a4c02f4274a0538090113aaccc4ee7bb2a86343.unit_2_preservation_under_realization",
+      "LegalReviewedDefinitionRealization.Instance8dff54facebc47a5d87432eb9a4c02f4274a0538090113aaccc4ee7bb2a86343.unit_1_expansion_source_exact",
+      "LegalReviewedDefinitionRealization.Instance8dff54facebc47a5d87432eb9a4c02f4274a0538090113aaccc4ee7bb2a86343.unit_1_whole_norm_definition_expansion",
+      "LegalReviewedDefinitionRealization.Instance8dff54facebc47a5d87432eb9a4c02f4274a0538090113aaccc4ee7bb2a86343.unit_2_expansion_source_exact",
+      "LegalReviewedDefinitionRealization.Instance8dff54facebc47a5d87432eb9a4c02f4274a0538090113aaccc4ee7bb2a86343.unit_2_whole_norm_definition_expansion"
+    ],
+    "target": "legal",
+    "whole_norm_exact_obligations": [
+      "LegalReviewedDefinitionRealization.Instance8dff54facebc47a5d87432eb9a4c02f4274a0538090113aaccc4ee7bb2a86343.unit_1_expansion_source_exact",
+      "LegalReviewedDefinitionRealization.Instance8dff54facebc47a5d87432eb9a4c02f4274a0538090113aaccc4ee7bb2a86343.unit_1_whole_norm_definition_expansion",
+      "LegalReviewedDefinitionRealization.Instance8dff54facebc47a5d87432eb9a4c02f4274a0538090113aaccc4ee7bb2a86343.unit_2_expansion_source_exact",
+      "LegalReviewedDefinitionRealization.Instance8dff54facebc47a5d87432eb9a4c02f4274a0538090113aaccc4ee7bb2a86343.unit_2_whole_norm_definition_expansion"
+    ]
+  },
+  "public_preparation": "prepare_reviewed_definition_realization_corpus_v1",
+  "schema": "actual-existing-V3-whole-norm-source-and-native-preflight-capsule/v1",
+  "test_inputs": {
+    "bytes": 4280,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/candidate-v03-exact-capsule-whole-norm-definition-application-private-v01/private-whole-norm-test-inputs-v01.json",
+    "sha256": "db4235c82689970e4576f207a3ef53490a031cccd3188bdbf08a49c9907f9c38"
+  },
+  "toolchain_declaration": "leanprover/lean4:v4.34.1",
+  "unmodified_signed_input_capsule": {
+    "bytes": 1058267,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/candidate-v03-complete-native-replay-inputs-private-v02/pytest/test_private_export_source_onl0/fictional-v3-complete-native-replay-inputs.json",
+    "sha256": "28f7c0e592fceaa50ba9fac97e953ea0c59e0c45156b31b127ac4259f760ae7c"
+  }
+}

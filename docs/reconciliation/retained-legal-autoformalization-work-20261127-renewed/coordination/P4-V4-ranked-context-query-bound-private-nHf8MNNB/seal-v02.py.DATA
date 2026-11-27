@@ -1,0 +1,170 @@
+from pathlib import Path
+import ast
+import difflib
+import hashlib
+import json
+import os
+import stat
+import subprocess
+
+root=Path(__file__).resolve().parent
+spec=json.loads((root/"input-spec.json").read_bytes())
+repo=Path(spec["repo"])
+env={**os.environ,"GIT_OPTIONAL_LOCKS":"0","GIT_NO_LAZY_FETCH":"1"}
+os.umask(0o022)
+def git(*args,cwd=repo):
+    return subprocess.check_output(["git","-c","core.preloadIndex=false","-C",str(cwd),*args],env=env)
+def sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+def blob(raw):
+    return hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest()
+def stamp(st):
+    keys=("st_dev","st_ino","st_mode","st_nlink","st_uid","st_gid","st_size","st_mtime_ns","st_ctime_ns")
+    return {k:str(getattr(st,k)) for k in keys}
+def read(p):
+    with os.fdopen(os.open(p,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK),"rb") as f:
+        before=os.fstat(f.fileno())
+        assert stat.S_ISREG(before.st_mode) and before.st_nlink==1
+        raw=f.read()
+        assert stamp(before)==stamp(os.fstat(f.fileno()))==stamp(p.lstat()) and len(raw)==before.st_size
+    return raw,stamp(before)
+def ref(p):
+    raw,identity=read(p)
+    return {"path":str(p),"bytes":len(raw),"sha256":sha(raw),"full9":identity}
+def auth(r):
+    raw,_=read(Path(r["path"]))
+    assert (len(raw),sha(raw))==(r["bytes"],r["sha256"])
+    return raw
+def put(p,raw,mode=0o400):
+    p.parent.mkdir(mode=0o700,parents=True,exist_ok=True)
+    with os.fdopen(os.open(p,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,mode),"wb") as f:
+        f.write(raw); f.flush(); os.fsync(f.fileno())
+    assert read(p)[0]==raw
+    return ref(p)
+
+def outcomes(mode, case):
+    base=root/(mode+"-"+case)
+    stdout,stderr,code=[base.with_suffix("."+suffix) for suffix in ("stdout","stderr","exit")]
+    return (json.loads(read(stdout)[0]),int(read(code)[0]),{"stdout":ref(stdout),"stderr":ref(stderr),"exit":ref(code)})
+
+before,red,red_inputs=outcomes("before","boundary")
+after,green,green_inputs=outcomes("after","boundary")
+assert red==1 and green==0
+assert [(r["case"],r["status"]) for r in before["results"]]==[(0,"failed"),(1,"passed"),(32,"passed"),(33,"failed")]
+assert all(r["traceback"].endswith(".RankingReached\n") for r in before["results"] if r["status"]=="failed")
+assert after["results"]==[{"case":n,"status":"passed"} for n in (0,1,32,33)]
+assert before["test"]==after["test"]==spec["after_test"]
+assert before["read_only_project_module_sources"]==after["read_only_project_module_sources"]
+retained={}
+observed=dict(before["read_only_project_module_sources"])
+for case in ("abstention","source","selected-body"):
+    result,status,refs=outcomes("after",case)
+    assert status==0 and len(result["results"])==1 and result["results"][0]["status"]=="passed"
+    assert result["owner"]==after["owner"] and result["test"]==after["test"]
+    for key,row in result["read_only_project_module_sources"].items():
+        assert key not in observed or row==observed[key]
+        observed[key]=row
+    retained[case]=refs
+assert (root/"after-None.exit").read_bytes()==b"152\n" and not (root/"after-None.stdout").stat().st_size
+full_cutoff={suffix:ref(root/("after-None."+suffix)) for suffix in ("stdout","stderr","exit")}
+prefix_terminal=int((root/"after-adapter-positive.exit").read_bytes())
+prefix_evidence={suffix:ref(root/("after-adapter-positive."+suffix))
+    for suffix in ("stdout","stderr","exit")}
+prefix_case_passed=False
+if prefix_terminal==0:
+    prefix,_,_=outcomes("after","adapter-positive")
+    assert prefix["results"]==[{"case":None,"status":"passed"}]
+    assert prefix["owner"]==after["owner"] and prefix["test"]==after["test"]
+    for key,row in prefix["read_only_project_module_sources"].items():
+        assert key not in observed or row==observed[key]
+        observed[key]=row
+    prefix_case_passed=True
+else:
+    assert prefix_terminal in (1,124,152)
+
+tip,tracking=git("rev-parse","HEAD","refs/remotes/origin/main").decode().splitlines()
+assert tip==tracking
+assert subprocess.run(["git","-C",str(repo),"merge-base","--is-ancestor",spec["head"],tip],env=env).returncode==0
+changed=set(git("diff","--name-only",spec["head"],tip).decode().splitlines())
+assert not changed.intersection(row["relative_path"] for row in observed.values())
+tree=git("ls-tree","-rz",tip)
+tree_lookup={}
+for raw in tree.split(b"\0"):
+    if raw:
+        description,path=raw.split(b"\t",1)
+        tree_lookup[os.fsdecode(path)]=description.decode().split()[-1]
+for row in observed.values():
+    raw=(repo/row["relative_path"]).read_bytes()
+    assert (len(raw),sha(raw))==(row["bytes"],row["sha256"])
+    assert tree_lookup[row["relative_path"]]==blob(raw)
+
+after_refs={"owner":after["owner"],"test":after["test"]}
+relative_paths=[v["relative"] for v in spec["roles"].values()]
+def check_targets():
+    assert git("rev-parse","HEAD","refs/remotes/origin/main").decode().splitlines()==[tip,tip]
+    assert not git("status","--porcelain=v1","--untracked-files=all","--",*relative_paths)
+check_targets()
+files={}
+changes={k:[] for k in ("forward","inverse")}
+scratch=root/"private-patch-readback"
+scratch.mkdir(mode=0o700)
+for name in ("owner","test"):
+    old=spec["roles"][name]
+    new=after_refs[name]
+    before_data,after_data=auth(old),auth(new)
+    source,canonical=read(repo/old["relative"])
+    assert source==before_data and tree_lookup[old["relative"]]==old["oid"]==blob(before_data)
+    old_tree=ast.parse(before_data)
+    new_tree=ast.parse(after_data)
+    if name=="owner":
+        collect=lambda tree:{node.name:ast.dump(node) for node in tree.body if isinstance(node,ast.FunctionDef)}
+        old_functions,new_functions=map(collect,(old_tree,new_tree))
+        assert old_functions.keys()==new_functions.keys()
+        assert {k for k,v in old_functions.items() if new_functions[k]!=v}=={
+          "_consume_reviewed_contexts","consume_reviewed_contexts_v4","prepare_reviewed_ranked_training_context_v4"}
+        assert b"_MAX_REVIEWED_CONTEXT_QUERIES = 32\n" in after_data
+    else:
+        assert after_data.startswith(before_data)
+        assert len(new_tree.body)==len(old_tree.body)+1
+        assert new_tree.body[-1].name=="test_aggregate_v4_ranked_context_checks_query_count_before_ranking"
+    path=old["relative"]
+    files[name]={"path":path,"canonical_before_full9":canonical,"mode":"100644",
+                 "before":{**ref(Path(old["path"])),"git_blob":old["oid"]},
+                 "after":{**ref(Path(new["path"])),"proposed_git_blob":blob(after_data)}}
+    for direction,a,b in (("forward",before_data,after_data),("inverse",after_data,before_data)):
+        changes[direction].extend(difflib.diff_bytes(difflib.unified_diff,a.splitlines(True),b.splitlines(True),
+            fromfile=b"a/"+os.fsencode(path),tofile=b"b/"+os.fsencode(path)))
+    put(scratch/path,before_data,0o644)
+
+patches={}
+for direction,key in (("forward","after"),("inverse","before")):
+    target=root/(direction+".patch")
+    patches[direction]=put(target,b"".join(changes[direction]))
+    git("apply","--no-index","--whitespace=nowarn",str(target),cwd=scratch)
+    for row in files.values():
+        content,identity=read(scratch/row["path"])
+        assert sha(content)==row[key]["sha256"] and stat.S_IMODE(int(identity["st_mode"]))==0o644
+check_targets()
+witness=put(root/"observed-readonly-source-module-digests.json",(json.dumps(observed,sort_keys=True,indent=2)+"\n").encode())
+packet={
+ "schema":"private-V4-ranked-context-query-count-before-ranking-exact-two/v1",
+ "base_private_fixture_HEAD":spec["head"],"observed_local_tip_and_tracking_tip":tip,"files":files,
+ "observed_scope":"Existing explicit V4 rich-context adapter only. One shared 32-query limit across the adapter and both decoder-context consumers. The standalone wider ranker source is untouched.",
+ "baseline_same4":{"passed":2,"failed":2,"unexpected_rank_callback_counts":[0,33],"evidence":red_inputs},
+ "candidate_same4":{"passed":4,"failed":0,"counts_dispatched_to_callback":[1,32],"evidence":green_inputs},
+ "retained_negative_actual_custody_candidate_runs":{"passed":3,"cases":retained},
+ "retained_full_positive_fixture":{"status":"private_CPU_limit","terminal_returncode":152,"evidence":full_cutoff},
+ "scoped_positive_adapter_provenance_prefix":{"passed":prefix_case_passed,
+    "terminal_returncode":prefix_terminal,"evidence":prefix_evidence,
+    "scope":"All existing adapter/provenance assertions through the completed prepare call, before the second context replay and downstream evaluator.",
+    "runner":ref(root/"run-adapter-positive.py")},
+ "ordinary_qualification":None,"actual_rank_kernel_or_model_run":None,"Source_install":None,"publication":None,
+ "read_only_dependency_source_digests_verified_with_current_git":witness,
+ "patched_roundtrip_exact_private_bytes_and_mode":patches,
+ "runner":ref(root/"run.py"),"input_spec":ref(root/"input-spec.json"),
+ "static_ordinary_inputs":{"single_owning_file":files["test"]["path"],"functions":[
+    "test_aggregate_v4_ranked_recipe_reaches_evaluator_with_genuine_component_custody",
+    "test_aggregate_v4_ranked_context_checks_query_count_before_ranking"],
+    "expected_total":8,"selection_and_runtime_authority":None}
+}
+print(json.dumps(put(root/"SEALED-V4-ranked-context-query-count-exact-two.json",(json.dumps(packet,sort_keys=True,indent=2)+"\n").encode())))

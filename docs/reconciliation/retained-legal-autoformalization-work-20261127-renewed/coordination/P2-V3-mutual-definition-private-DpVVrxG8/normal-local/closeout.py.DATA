@@ -1,0 +1,80 @@
+from pathlib import Path
+import fcntl
+import hashlib
+import json
+import os
+import subprocess
+import sys
+import xml.etree.ElementTree as ET
+
+w = Path(__file__).resolve().parent
+meta = json.loads((w / "real-checkout-pins.json").read_bytes())
+root = Path(meta["selected_repo"])
+candidate = meta["authored_candidate"]["oid"]
+env = {**os.environ,"GIT_OPTIONAL_LOCKS":"0","GIT_NO_LAZY_FETCH":"1"}
+
+def git(*args):
+    return subprocess.check_output(["git","-C",str(root),"-c","core.preloadIndex=false",
+                                   "-c","index.threads=1",*args],env=env,timeout=30)
+
+def ref(path):
+    data = path.read_bytes()
+    return {"path":str(path),"bytes":len(data),"sha256":hashlib.sha256(data).hexdigest()}
+
+def full9(path):
+    status = path.stat()
+    return [str(getattr(status,key)) for key in ("st_dev","st_ino","st_mode","st_nlink",
+        "st_uid","st_gid","st_size","st_mtime_ns","st_ctime_ns")]
+
+assert git("rev-parse","HEAD").decode().strip() == candidate
+assert git("status","--porcelain=v1","--untracked-files=all") == b""
+summary = {}
+legacy = "ipfs_datasets_py/logic/autoformal/legal_norm_content_adjudication_v1.py"
+sibling = "ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py"
+owning = "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py"
+for name, count in (("v2",15),("v3",46)):
+    path = w / name / "local-source-closeout.json"
+    run = json.loads(path.read_bytes())
+    junit = Path(run["junit"]["path"])
+    assert ref(junit) == {key:run["junit"][key] for key in ("path","bytes","sha256")}
+    cases = ET.fromstring(junit.read_bytes()).findall(".//testcase")
+    assert len(cases) == count == len({(c.get("classname"),c.get("name")) for c in cases})
+    assert all(c.find(tag) is None for c in cases for tag in ("failure","error","skipped"))
+    assert [c.get("name") for c in cases] == json.loads((w / (name + ".expected.json")).read_bytes())
+    assert run["returncode"] == 0 and run["commit"] == candidate and run["source_read_closed"]
+    assert run["same_collection_execution_xml"] and run["all_source_pins_verified_before_and_after"]
+    assert len(run["conftest_origins"]) == 3 and run["SDK_managed"] is False
+    for rel in ([legacy] if name == "v2" else [legacy,sibling,owning]):
+        assert run["compiled_at_terminal"][rel] == [meta["paths"][rel]["sha256"]], rel
+    assert sibling not in run["compiled_at_collect"]
+    summary[name] = {"cases":count,"report":ref(path),"junit":ref(junit),
+                     "elapsed_seconds":run["elapsed_seconds"],"original_conftests":run["conftest_origins"]}
+for rel,pin in meta["paths"].items():
+    raw = (root / rel).read_bytes()
+    assert (len(raw),hashlib.sha256(raw).hexdigest()) == (pin["bytes"],pin["sha256"])
+    assert git("rev-parse",candidate + ":" + rel).decode().strip() == pin["git_blob"]
+for name in ("admission.lock","source.lock"):
+    path = root / "workspace/control-plane/source-leases" / name
+    with path.open("rb") as stream:
+        fcntl.flock(stream.fileno(),fcntl.LOCK_EX | fcntl.LOCK_NB)
+        fcntl.flock(stream.fileno(),fcntl.LOCK_UN)
+record = {"schema":"local-Source-package-pytest-definition-binding-qualification/v1",
+    "candidate":meta["authored_candidate"],"source_role_map":ref(w / "real-checkout-pins.json"),
+    "original_private_seal":meta["private_seal"],"local_runs":summary,
+    "all_137_exact_Git_source_files_verified_before_and_after":len(meta["paths"]) == 137,
+    "isolated_write_and_both_read_leases_closed_and_locks_free":True,
+    "selected_V3_import_held_until_fixture":True,"local_clean":True,
+    "index":ref(root / ".git/index") | {"full9":full9(root / ".git/index")},
+    "branch":"refs/heads/work/p2-explicit-governing-definition-bindings",
+    "branch_reference":ref(root / ".git/refs/heads/work/p2-explicit-governing-definition-bindings") |
+        {"full9":full9(root / ".git/refs/heads/work/p2-explicit-governing-definition-bindings")},
+    "Source42_or_SDK_qualification":False,"shared_canonical_Source_adoption":False,
+    "Native_or_model_or_SQL_or_statutory_review":False,"published":False,"terminal_returncode":0}
+target = w / "actual-local-Source-V2-15-and-V3-46-qualified-closed.json"
+raw = (json.dumps(record,indent=2,sort_keys=True) + "\n").encode()
+with os.fdopen(os.open(target,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o400),"wb") as stream:
+    stream.write(raw)
+    stream.flush()
+    os.fsync(stream.fileno())
+assert target.read_bytes() == raw
+print(json.dumps(ref(target)))

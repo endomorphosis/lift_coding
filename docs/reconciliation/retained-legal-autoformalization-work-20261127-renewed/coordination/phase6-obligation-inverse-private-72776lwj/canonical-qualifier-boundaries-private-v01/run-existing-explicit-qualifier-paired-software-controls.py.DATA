@@ -1,0 +1,177 @@
+"""Run the published source-withheld decompiler through the existing private test guard."""
+
+from __future__ import annotations
+
+import hashlib
+import importlib
+import json
+import os
+from pathlib import Path
+import sys
+import traceback
+from types import ModuleType
+
+
+OWN = Path(__file__).resolve().parent
+COORD = OWN.parents[1]
+ROLE = "ipfs_datasets_py/logic/legal_ir/canonical_decompiler.py"
+ROUTER = "ipfs_datasets_py/ipfs_backend_router.py"
+PILOT = "tests/fixtures/semantic_roundtrip/pilot_cases.json"
+PRIOR = COORD / "phase7-same-id-proof-feedback-no-fit-v01-gA9Exh/guarded_probe.py"
+
+
+def digest(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def read(path, sha256, size):
+    path = Path(path)
+    with os.fdopen(os.open(path, os.O_RDONLY | os.O_NOFOLLOW), "rb") as f:
+        a = os.fstat(f.fileno())
+        raw = f.read(size + 1)
+        b = os.fstat(f.fileno())
+    p = path.lstat()
+    keys = ("st_dev", "st_ino", "st_mode", "st_nlink", "st_uid", "st_gid",
+            "st_size", "st_mtime_ns", "st_ctime_ns")
+    for key in keys:
+        assert getattr(a, key) == getattr(b, key) == getattr(p, key)
+    assert a.st_nlink == 1 and len(raw) == size and digest(raw) == sha256
+    return raw
+
+
+def typed_report(contracts, decompiler):
+    C = contracts
+    D = decompiler.SourceWithheldCanonicalDecompiler()
+    patterns = [
+        ("condition-and", {"conditions": ("approval_and_notice",)},
+         {"conditions": ("approval", "notice")},
+         "Agency must file report if approval and notice."),
+        ("exception-or", {"exceptions": ("fire_or_flood",)}, {"exceptions": ("fire", "flood")},
+         "Agency must file report unless fire or flood."),
+        ("cross-clause", {"conditions": ("approval_unless_fire",)},
+         {"conditions": ("approval",), "exceptions": ("fire",)},
+         "Agency must file report if approval unless fire."),
+    ]
+
+    def observe(fields):
+        rule = C.CanonicalRule("O", "agency", "file", "report", **fields)
+        request = C.DecompilerRequest(C.CanonicalRoundTripIR((rule,)), request_id="authored-qualifier-test")
+        result = D.decompile(request)
+        assert result.request_cid == request.request_cid
+        return {
+            "ir_cid": request.canonical_ir.ir_cid,
+            "request_cid": result.request_cid,
+            "status": result.status.value,
+            "text": result.text,
+            "text_cid": result.text_cid,
+            "component_count": len(result.component_trace),
+            "error": None if result.error is None else result.error.to_dict(),
+        }
+
+    rows = []
+    for name, compound, separated, expected in patterns:
+        a, b = observe(compound), observe(separated)
+        assert a["ir_cid"] != b["ir_cid"] and a["request_cid"] != b["request_cid"]
+        assert b["status"] == "success" and b["text"] == expected and b["text_cid"] is not None
+        safe = (a["status"] == "abstained" and a["text"] is None
+                and a["text_cid"] is None and a["component_count"] == 0
+                and a["error"]["code"] == "unsupported_semantics")
+        rows.append({"id": name, "compound": a, "separated": b, "safe": safe})
+    return rows
+
+
+def main(mode, manifest_sha, manifest_size, owner_path=None, owner_sha=None, owner_size=None):
+    assert sys.flags.isolated and sys.dont_write_bytecode and sys.flags.optimize == 0
+    prior_bytes = read(PRIOR, "6e483bf40c38136befa85f40f04df617d715c9047bc7ad8bb1812c05f1891bdf", 15945)
+    prior = ModuleType("_existing_legal_ir_guard")
+    prior.__file__ = str(PRIOR)
+    sys.modules[prior.__name__] = prior
+    exec(compile(prior_bytes, str(PRIOR), "exec", dont_inherit=True), prior.__dict__)
+    prior.install_kernel_guards()
+    manifest = json.loads(read(OWN / "exact-current-real-qualifier-compiler-projection.json", manifest_sha, int(manifest_size)))
+    root = Path(manifest["root"])
+    assert root.is_absolute() and root.resolve(strict=True) == root and root.parent == OWN
+    sources = manifest["sources"]
+    router = sources[ROUTER]
+    assert read(root / ROUTER, router["sha256"], router["bytes"])
+    prior.ROOT = root
+    prior.EXPECTED.clear()
+    prior.EXPECTED.update({key: row["git_blob_sha1"] for key, row in sources.items()
+                          if key.endswith(".py") and key != ROUTER})
+    assert mode in ("before", "after")
+    overlay = None if mode == "before" else read(owner_path, owner_sha, int(owner_size))
+    original_loader = prior.BoundSource
+
+    class CurrentRealizerSource(original_loader):
+        def get_code(self, fullname):
+            rel = Path(self.path).relative_to(root).as_posix()
+            assert rel in prior.EXPECTED, (fullname, rel)
+            code = super().get_code(fullname)
+            expected = sources[rel]
+            assert prior.compiled[rel] == expected, rel
+            if rel == ROLE and overlay is not None:
+                prior.compiled_total += len(overlay)
+                assert prior.compiled_total <= prior.MAX_MODULE_BYTES
+                prior.compiled[rel]["overlay_compiled_sha256"] = digest(overlay)
+                return compile(overlay, str(root / rel), "exec", dont_inherit=True)
+            return code
+
+    prior.BoundSource = CurrentRealizerSource
+    sys.path.insert(0, str(root))
+    sys.meta_path.insert(0, prior.GuardedImports())
+    sys.addaudithook(prior.audit)
+    C = importlib.import_module("ipfs_datasets_py.logic.legal_ir.canonical_contracts")
+    D = importlib.import_module("ipfs_datasets_py.logic.legal_ir.canonical_decompiler")
+    assert str(Path(D.__file__).relative_to(root)) == ROLE
+    assert mode == "after"
+    compiler_module = importlib.import_module("ipfs_datasets_py.logic.legal_ir.canonical_explicit_qualifiers")
+    compiler = compiler_module.ExplicitQualifierCanonicalCompiler()
+    decompiler = D.SourceWithheldCanonicalDecompiler()
+    vocabulary = C.CanonicalAtomVocabulary(
+        actors=("agency",), actions=("file",), objects=("report",),
+        qualifiers=("approval", "notice", "fire", "flood"),
+    )
+    scenarios = (
+        ("condition-and", "if approval and notice", ("approval", "notice"), ()),
+        ("exception-or", "unless fire or flood", (), ("fire", "flood")),
+        ("cross-clause", "if approval unless fire", ("approval",), ("fire",)),
+    )
+    result = []
+    for name, suffix, conditions, exceptions in scenarios:
+        source = f"The agency shall file report {suffix}."
+        first = compiler.compile(C.CompilerRequest(source, name+":l1", vocabulary))
+        assert first.status is C.OperationStatus.SUCCESS and first.canonical_ir is not None, first.to_dict()
+        identity = first.canonical_ir
+        (rule,) = identity.rules
+        assert rule == C.CanonicalRule("O", "agency", "file", "report",
+                                       conditions=conditions, exceptions=exceptions)
+        t1_request = C.DecompilerRequest(identity, request_id=name+":t1")
+        assert set(t1_request.to_dict()).isdisjoint({"source_text", "source_map", "provenance"})
+        reconstructed = decompiler.decompile(t1_request)
+        assert reconstructed.status is C.OperationStatus.SUCCESS, reconstructed.to_dict()
+        assert reconstructed.text == f"Agency must file report {suffix}."
+        assert first.source_cid != reconstructed.text_cid
+        last = compiler.compile(C.CompilerRequest(reconstructed.text, name+":l2", vocabulary))
+        assert last.status is C.OperationStatus.SUCCESS and last.canonical_ir == identity
+        result.append({
+            "id":name,"l1":first.result_cid,"t1":reconstructed.result_cid,"l2":last.result_cid,
+            "l1_ir":identity.ir_cid,"l2_ir":last.canonical_ir.ir_cid,
+            "source_and_normalized_text_differ":True,
+            "conditions":list(conditions),"exceptions":list(exceptions),"pass":True,
+        })
+    assert not prior.denied
+    assert sys.modules["ipfs_datasets_py"].HAVE_IPFS and ROUTER not in prior.compiled
+    assert all(family not in sys.modules for family in prior.blocked_imports)
+    print(json.dumps({"mode":mode, "compiler_profile":compiler.configuration_cid,
+        "separate_actual_compile_decompile_compile":result,"explicit_profile_not_frozen_orchestrator":True,
+        "guard":prior.guard,"compiled_project":prior.compiled},sort_keys=True))
+    return 0
+
+
+if __name__ == "__main__":
+    try:
+        raise SystemExit(main(*sys.argv[1:]))
+    except Exception as error:
+        traceback.print_exc()
+        print(json.dumps({"infrastructure_error": f"{type(error).__name__}: {error}"}))
+        raise SystemExit(2) from error

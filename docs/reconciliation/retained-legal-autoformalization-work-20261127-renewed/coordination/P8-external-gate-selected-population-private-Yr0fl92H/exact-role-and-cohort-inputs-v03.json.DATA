@@ -1,0 +1,25 @@
+{
+  "fixture": {
+    "bytes": 5763,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-gate-selected-population-private-Yr0fl92H/test-cohort-v03/tests/fixtures/legal_ir/external_expert_benchmark.jsonl",
+    "sha256": "fb9a76552e2b938369d93d73a2a25aa76a963101cac96fd487a246bc43c54971"
+  },
+  "fixture_rel": "tests/fixtures/legal_ir/external_expert_benchmark.jsonl",
+  "owner_before": {
+    "bytes": 221541,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-gate-selected-population-private-Yr0fl92H/rollout.before.py.DATA",
+    "sha256": "9785ff320f6ab5b16e9c933d6519cfed5b0abe2b7d9db58a363a782b612b167c"
+  },
+  "owner_rel": "scripts/ops/legal_ir/hammer_leanstral_rollout_gate.py",
+  "test_after": {
+    "bytes": 20761,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-gate-selected-population-private-Yr0fl92H/test-cohort-v03/tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py",
+    "sha256": "7423913c716018d842a41b4c42ee38a6e9e47b1bb75c30dc11484539917350c5"
+  },
+  "test_before": {
+    "bytes": 15741,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-gate-selected-population-private-Yr0fl92H/test.before.py.DATA",
+    "sha256": "dfbf3ace8d5d0fa5b6e16bacd4c0ffedb80b8d636f29e398299a80e7ceef1a43"
+  },
+  "test_rel": "tests/unit/optimizers/logic_theorem_optimizer/test_external_validity_promotion_gate.py"
+}

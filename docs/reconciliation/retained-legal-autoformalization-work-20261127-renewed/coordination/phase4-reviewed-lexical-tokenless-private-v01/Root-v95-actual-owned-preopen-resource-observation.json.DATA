@@ -1,0 +1,110 @@
+{
+  "actual_state_read_bytes": 16514545,
+  "no_global_no_work_claim": true,
+  "no_grant_absence_conclusion_without_code_ordering": true,
+  "observed_at_utc_ns": "1795512578589694403",
+  "owner_birth": "453025182",
+  "owner_pid": 3186578,
+  "schema": "Root-actual-owned-P4-preopen-resource-observation/v1",
+  "states": {
+    "disk": {
+      "all_record_count": 3424,
+      "bytes": 16480762,
+      "child_process_capacity": null,
+      "config": null,
+      "exact_owned_records": {},
+      "full9": {
+        "st_ctime_ns": "1795349997816662025",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "67026985",
+        "st_mode": "33152",
+        "st_mtime_ns": "1795349997807017872",
+        "st_nlink": "1",
+        "st_size": "16480762",
+        "st_uid": "1000"
+      },
+      "limit_bytes": 280000000000,
+      "no_mutation": true,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/federal-corpus-audits/owned-daemon-resource-control/disk-reservations.json",
+      "roots": [
+        {
+          "device": 66306,
+          "inode": 66764317,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs"
+        },
+        {
+          "device": 66306,
+          "inode": 58092485,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/todo-queues"
+        },
+        {
+          "device": 66306,
+          "inode": 51016937,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/reports/evidence"
+        },
+        {
+          "device": 66306,
+          "inode": 524344,
+          "path": "/tmp/pytest-of-barberb"
+        }
+      ],
+      "schema": "daemon-resource-reservations-v1",
+      "sha256": "a640b378b4ee84ba2fdd20eb5b5ee83afe596f9f04425b9f48bacf0d0951aacb"
+    },
+    "scheduler": {
+      "all_record_count": 0,
+      "bytes": 33783,
+      "child_process_capacity": null,
+      "config": {
+        "lane_reservations": {
+          "validation": {
+            "cpu_slots": 2,
+            "memory_mb": 0
+          }
+        },
+        "max_gpu_memory_percent": null,
+        "max_memory_percent": null,
+        "max_swap_percent": null,
+        "max_waiting_requests": 256,
+        "proof_backoff_seconds": 2.0,
+        "proof_cpu_stall_percent": 50.0,
+        "proof_io_stall_percent": 10.0,
+        "proof_memory_headroom_mb": 24922,
+        "proof_memory_stall_percent": 2.0,
+        "proof_recovery_enabled": false,
+        "proof_recovery_grants": 4,
+        "proof_recovery_interval_seconds": 0.25,
+        "proof_recovery_samples": 2,
+        "proof_resource_profile": null,
+        "proof_safety_enabled": true,
+        "require_known_gpu_for_gpu_work": true,
+        "reserved_gpu_memory_mb": 0,
+        "reserved_memory_mb": 0,
+        "total_child_process_slots": 16,
+        "total_cpu_slots": 16,
+        "total_gpu_memory_mb": null,
+        "total_memory_mb": 99688,
+        "total_unified_memory_mb": null
+      },
+      "exact_owned_records": {},
+      "full9": {
+        "st_ctime_ns": "1795008230641908030",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "525678",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795008230638908440",
+        "st_nlink": "1",
+        "st_size": "33783",
+        "st_uid": "1000"
+      },
+      "limit_bytes": null,
+      "no_mutation": true,
+      "path": "/tmp/ipfs-datasets-resource-scheduler-1000.json",
+      "roots": null,
+      "schema": null,
+      "sha256": "e070e930642b8eeeeebac9f10c1808140470f3c97c1faa8f046183a64af5fb05"
+    }
+  }
+}

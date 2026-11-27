@@ -1,0 +1,256 @@
+"""The existing reviewed TRAIN source-only occurrence seam shared by native teachers."""
+from dataclasses import asdict, dataclass
+import json
+
+from . import relational_trial as trial
+from .relational_origin import INPUT_SCHEMA, INPUT_RECEIPT, INPUT_PROFILE
+from .teacher_prefix import _commit, _need, _pin, _sha, _wire, population_commit
+
+PROJECTION_SCHEMA = "reviewed-relational-train-source-projection/v1"
+SOURCE_PROFILE = "reviewed-source-selection-context/v2"
+QWEN_ORIGIN_SCHEMA = "relational-pristine-parent-draft/v1"
+T5_ORIGIN_SCHEMA = "relational-t5-pristine-parent-draft/v1"
+FULL_TARGET_INPUT = (
+    "reviewed-decoder-training-inputs/v4",
+    "reviewed-decoder-training-input-receipt/v4",
+    "mixed-sort-admission-component-decoder-training-inputs/v4",
+)
+
+
+@dataclass(frozen=True)
+class OccurrenceLink:
+    row_id: str
+    source_version: dict
+    occurrence: dict
+    document_revision: str
+
+
+@dataclass(frozen=True)
+class SourceLink(OccurrenceLink):
+    source_kind: str
+    document_id: str
+    language: str
+    title: str
+    section: str
+    citation: str
+
+
+def _matches_training_input(schema, receipt, origin_schema):
+    identity = (schema, receipt.get("schema"), receipt.get("profile"))
+    if origin_schema == T5_ORIGIN_SCHEMA:
+        return (identity == FULL_TARGET_INPUT
+                and receipt.get("target_codec") == "complete-reviewed-norm-json/v2"
+                and receipt.get("admission_profile") == "complete-reviewed-mixed-sort-norm-admission/v3"
+                and receipt.get("source_context_profile") == "reviewed-component-source-selection-context/v1")
+    return origin_schema == QWEN_ORIGIN_SCHEMA and identity == (INPUT_SCHEMA, INPUT_RECEIPT, INPUT_PROFILE)
+
+
+def project_training_sources(prepared, *, expected_prepared_sha256, origin_proof, expected_origin_proof_sha256):
+    """Project exact source fields. The existing TRAIN owner keeps the complete target records."""
+    _need(type(prepared) is dict and set(prepared) == {"schema","receipt","records","prepared_sha256"}
+          and _pin(expected_prepared_sha256) and prepared["prepared_sha256"] == expected_prepared_sha256
+          and _commit({key:prepared[key] for key in ("schema","receipt","records")}) == expected_prepared_sha256
+          and type(origin_proof) is dict and _pin(expected_origin_proof_sha256)
+          and _commit(origin_proof) == expected_origin_proof_sha256
+          and origin_proof.get("schema") in (QWEN_ORIGIN_SCHEMA, T5_ORIGIN_SCHEMA)
+          and origin_proof.get("prepared_inputs_sha256") == expected_prepared_sha256,
+          "exact prepared TRAIN records and selected co-batch origin required")
+    receipt=prepared["receipt"]
+    records=prepared["records"]
+    steps=origin_proof.get("scheduled_batches")
+    _need(type(receipt) is dict and _matches_training_input(prepared["schema"], receipt, origin_proof["schema"])
+          and receipt.get("source_profile") == SOURCE_PROFILE
+          and receipt.get("current_reviewed_training_permitted") is True
+          and type(receipt.get("fixture_only")) is bool and _pin(receipt.get("admission_inputs_sha256"))
+          and _pin(receipt.get("split_manifest_sha256")) and _pin(receipt.get("source_contexts_sha256"))
+          and type(receipt.get("row_commitments")) is list and type(records) is list and 2 <= len(records) <= 4096
+          and len(receipt["row_commitments"]) == len(records) and receipt.get("prepared_records_sha256") == _commit(records)
+          and type(steps) in (tuple,list) and 1 <= len(steps) <= trial.MAX_BATCHES,
+          "complete current TRAIN source commitments and co-batches required")
+    indexed={}
+    for row, commitment in zip(records,receipt["row_commitments"],strict=True):
+        _need(type(row) is dict and type(commitment) is dict and type(row.get("id")) is str
+              and type(row.get("unit_id")) is str and type(row.get("source_wire")) is str
+              and row["id"] not in indexed and row["id"] == commitment.get("id")
+              and row["unit_id"] == commitment.get("unit_id")
+              and _sha(row["source_wire"].encode("utf-8")) == commitment.get("source_wire_sha256"),
+              "exact prepared row, unit and source wire differ")
+        indexed[row["id"]]=(row,commitment)
+    selected=set()
+    for step in steps:
+        ids=step["row_ids"]
+        _need(type(ids) in (tuple,list) and 2 <= len(ids) <= 32 and all(type(key) is str and key in indexed for key in ids)
+              and len(set(ids)) == len(ids)
+              and _commit([indexed[key][0] for key in ids]) == step["records_sha256"],
+              "origin co-batch does not bind complete ordered prepared rows")
+        selected.update(ids)
+    rows=[]
+    for key,(row,commitment) in indexed.items():
+        if key not in selected:
+            continue
+        source=trial._evidence_json(row["source_wire"].encode("utf-8"),64*1024**2)
+        fields={"profile","source_text","governing_context","source_binding","selection_context"}
+        binding=source.get("source_binding")
+        _need(set(source)==fields and source["profile"]==SOURCE_PROFILE and type(source["source_text"]) is str
+              and _sha(source["source_text"].encode("utf-8")) == commitment.get("source_text_sha256")
+              and type(binding) is dict and set(binding)=={"source_version_cid","occurrence_cid","document_revision"}
+              and type(commitment.get("target_identities")) is dict
+              and _commit(binding) == commitment["target_identities"].get("source_binding_sha256"),
+              "reviewed source-only wire and exact source binding required")
+        rows.append({"row_id":key,"unit_id":row["unit_id"],"source_wire_sha256":commitment["source_wire_sha256"],
+            "source_text_sha256":commitment["source_text_sha256"],"source_text":source["source_text"],"source_binding":binding})
+    return {"schema":PROJECTION_SCHEMA,"prepared_inputs_sha256":expected_prepared_sha256,
+        "origin_proof_sha256":expected_origin_proof_sha256,"train_admission_sha256":receipt["admission_inputs_sha256"],
+        "split_manifest_sha256":receipt["split_manifest_sha256"],"source_contexts_sha256":receipt["source_contexts_sha256"],
+        "fixture_only":receipt["fixture_only"],"rows":rows}
+
+
+def verify_training_occurrences(projection, links, population, *, expected_projection_sha256, expected_links_sha256,
+                  expected_population_sha256, source_stack_guard, resolver, maximum_source_bytes,
+                  allowed_source_kinds=None):
+    """Resolve selected extracted views with the existing corpus owners."""
+    from ...logic.autoformal import corpus_source
+    from . import autoencoder_corpus_manifest as corpus
+
+    _need(type(projection) is dict and projection.get("schema") == PROJECTION_SCHEMA
+          and _pin(expected_projection_sha256)
+          and type(links) is tuple and all(type(link) in (OccurrenceLink,SourceLink) for link in links)
+          and _pin(expected_links_sha256) and _pin(expected_population_sha256)
+          and type(maximum_source_bytes) is int and 0 < maximum_source_bytes <= 256*1024**2
+          and callable(source_stack_guard) and callable(resolver),
+          "independent source crosswalk, TRAIN projection and split authority required")
+
+    projection_wire = _wire(projection)
+    link_types = tuple(type(link) for link in links)
+    link_fields = tuple(asdict(link) for link in links)
+    _need(_sha(projection_wire) == expected_projection_sha256
+          and _commit(link_fields) == expected_links_sha256
+          and population_commit(population, maximum_rows=4096) == expected_population_sha256
+          and source_stack_guard(expected_projection_sha256, expected_links_sha256, expected_population_sha256) is True,
+          "independent source crosswalk, TRAIN projection and split authority required")
+
+    def require_current(message):
+        _need(_commit(projection) == expected_projection_sha256
+              and tuple(type(link) for link in links) == link_types
+              and _commit(tuple(asdict(link) for link in links)) == expected_links_sha256
+              and population_commit(population, maximum_rows=4096) == expected_population_sha256,
+              message)
+
+    require_current("reviewed crosswalk, projection or population changed during source authority verification")
+    # Resolve the selected copies so a resolver cannot redirect a later read
+    # or change an occurrence while an earlier artifact is being verified.
+    selected_projection = json.loads(projection_wire)
+    selected_links = tuple(link_type(**fields) for link_type, fields in zip(link_types, link_fields, strict=True))
+    rows=selected_projection["rows"]
+    _need(type(rows) is list and 2 <= len(rows) == len(selected_links) <= 1024
+          and tuple(row["row_id"] for row in rows) == tuple(link.row_id for link in selected_links),
+          "exact ordered TRAIN source crosswalk required")
+    members={item.row_id:item for item in population}
+    views={}
+    selected=[]
+    for row,link in zip(rows,selected_links,strict=True):
+        version,occurrence=link.source_version,link.occurrence
+        binding=row["source_binding"]
+        member=members.get(link.row_id)
+        view=version["extracted_view"]
+        reference={"sha256":view["sha256"],"bytes":view["byte_length"]}
+        _need(member is not None and member.partition=="train" and member.source_wire_sha256==row["source_wire_sha256"]
+              and member.source_span_sha256==occurrence.get("span_sha256")==row["source_text_sha256"]
+              and version.get("record_cid")==binding["source_version_cid"]
+              and occurrence.get("record_cid")==binding["occurrence_cid"]
+              and link.document_revision==binding["document_revision"]
+              and (allowed_source_kinds is None or type(link) is SourceLink and link.source_kind in allowed_source_kinds)
+              and (selected_projection["fixture_only"] or getattr(link,"source_kind",None) != "diagnostic"),
+              "exact reviewed TRAIN version, occurrence or supported source kind differs")
+        _need(_pin(reference["sha256"]) and type(reference["bytes"]) is int and 0<reference["bytes"]<=corpus_source.MAX_TEXT_BYTES
+              and views.setdefault(reference["sha256"],reference["bytes"])==reference["bytes"],
+              "exact bounded extracted-view artifact descriptor required")
+        selected.append((row,link,reference))
+    _need(sum(views.values())<=maximum_source_bytes,"selected extracted source views exceed existing owner allowance")
+    cached={}
+    joined=[]
+    for row,link,reference in selected:
+        view_id=reference["sha256"]
+        if view_id not in cached:
+            cached[view_id]=corpus._read_verified(resolver(dict(reference)),reference,corpus_source.MAX_TEXT_BYTES).decode("utf-8")
+        version=link.source_version
+        occurrence=corpus_source.validate_source_occurrence(link.occurrence,source_version=version,
+            expected_raw_sha256=version["raw_artifact"]["sha256"],extracted_text=cached[view_id],
+            expected_extracted_sha256=view_id)
+        _need(occurrence["span_text"]==row["source_text"] and occurrence["span_sha256"]==row["source_text_sha256"],
+              "approved occurrence is not the exact reviewed decoder source text")
+        joined.append((row,link,reference,occurrence))
+    require_current("reviewed crosswalk, projection or population changed during source resolution")
+    return tuple(joined)
+
+
+TRAIN_COHORT_SCHEMA = "reviewed-relational-matched-train-cohort/v1"
+_SHARED_TRAIN_PINS = (
+    "rows_sha256", "split_manifest_sha256", "split_config_sha256", "admission_inputs_sha256",
+    "admission_assessment_sha256", "exposure_sha256", "source_contexts_sha256", "selection_context_sha256",
+)
+
+
+def training_cohort_commitment(prepared, origin_proof, population, *, expected_prepared_sha256,
+                               expected_origin_proof_sha256):
+    """Commit the exact legal TRAIN cohort and schedule before architecture-specific rendering.
+
+    The existing owner authenticates each prepared receipt and its source/split custody.
+    The shared identity deliberately keeps model tokenization and stage lineage separate.
+    """
+    project_training_sources(prepared, expected_prepared_sha256=expected_prepared_sha256,
+                             origin_proof=origin_proof, expected_origin_proof_sha256=expected_origin_proof_sha256)
+    receipt = prepared["receipt"]
+    shared = tuple(receipt.get(key) for key in _SHARED_TRAIN_PINS)
+    _need(all(_pin(pin) for pin in shared) and type(receipt.get("provenance_kind")) is str
+          and bool(receipt["provenance_kind"]) and type(receipt.get("training_mask")) is int
+          and receipt["training_mask"] == (0 if receipt["fixture_only"] else 1)
+          and receipt.get("production_training_eligible") is (not receipt["fixture_only"])
+          and receipt["fixture_only"] is (receipt["provenance_kind"] == "fictional_fixture"),
+          "exact reviewed TRAIN population, admission and provenance commitments required")
+    population_pin = population_commit(population, maximum_rows=4096)
+    members = {entry.row_id: entry for entry in population}
+    _need({row["id"] for row in prepared["records"]} == {entry.row_id for entry in population
+                                                        if entry.partition == "train"},
+          "split population must bind the complete prepared TRAIN roster")
+    full_target = origin_proof["schema"] == T5_ORIGIN_SCHEMA
+    if not full_target:
+        from ...logic.autoformal.training_cycle_inputs import (
+            _reviewed_wire,
+            assemble_reviewed_decoder_digest_omitted_target,
+        )
+
+    rows = []
+    for record, item in zip(prepared["records"], receipt["row_commitments"], strict=True):
+        member = members[record["id"]]
+        identities = item.get("target_identities")
+        _need(type(identities) is dict and identities.get("schema") == "reviewed-decoder-target-identities/v1"
+              and identities.get("semantic_equivalence_or_incompatibility_proved") is False
+              and _pin(identities.get("full_nine_field_target_sha256"))
+              and identities["full_nine_field_target_sha256"] == item.get("canonical_ir_sha256")
+              and _pin(identities.get("source_binding_sha256"))
+              and type(record.get("target_json")) is str,
+              "complete reviewed target commitment required for every TRAIN row")
+        model_target_pin = item["canonical_ir_sha256"] if full_target else item.get("model_target_wire_sha256")
+        _need(_pin(model_target_pin) and _sha(record["target_json"].encode("utf-8")) == model_target_pin,
+              "model-specific target bytes differ from the authentic prepared receipt")
+        if not full_target:
+            restored = assemble_reviewed_decoder_digest_omitted_target(
+                record["target_json"], target_codec=receipt.get("target_codec"))
+            _need(_sha(_reviewed_wire(restored)) == item["canonical_ir_sha256"],
+                  "digest-omitted target does not reconstruct its exact reviewed full target")
+        source = trial._evidence_json(record["source_wire"].encode("utf-8"), 64*1024**2)
+        binding = source.get("source_binding")
+        _need(source.get("profile") == SOURCE_PROFILE and type(source.get("source_text")) is str
+              and type(binding) is dict and set(binding) == {"source_version_cid", "occurrence_cid", "document_revision"}
+              and all(type(value) is str and value for value in binding.values())
+              and _commit(binding) == identities["source_binding_sha256"]
+              and member.source_wire_sha256 == item["source_wire_sha256"]
+              and member.source_span_sha256 == item.get("source_text_sha256")
+              == _sha(source["source_text"].encode("utf-8")),
+              "source occurrence, legal revision or TRAIN split identity differs")
+        rows.append((record["id"], record["unit_id"], member.source_wire_sha256, member.source_span_sha256,
+                     identities["source_binding_sha256"], identities["full_nine_field_target_sha256"]))
+    steps = tuple(tuple(step["row_ids"]) for step in origin_proof["scheduled_batches"])
+    return _commit((TRAIN_COHORT_SCHEMA, shared, receipt["provenance_kind"], receipt["fixture_only"],
+                    population_pin, tuple(rows), steps))

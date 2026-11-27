@@ -1,0 +1,1428 @@
+{
+  "inputs": [
+    {
+      "actual_bytes": 3167,
+      "kind": "Root_selection",
+      "path": "/tmp/Root-selected-publication-remaining2620-existing-READ-v01.json"
+    },
+    {
+      "actual_bytes": 5607898,
+      "kind": "exact2620_normalized_projection",
+      "path": "/tmp/Reader-combined-remaining2620-private-audit-v03/exact-remaining-present-targets-and-provenance-v03.json"
+    },
+    {
+      "actual_bytes": 54529,
+      "kind": "existing_Source42_control",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase2-whole-norm-source-use-onebuild-preparation-v01/proven-control-opening-data-v01.json"
+    },
+    {
+      "actual_bytes": 2199,
+      "kind": "known_cached_R2_binding",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/milestone496-four-guide-Source70-CAS-v01/actual-post-milestone496-Source-and-index-binding-v01.json"
+    },
+    {
+      "actual_bytes": 2497790,
+      "kind": "known_cached_R2_content_pins",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/milestone496-four-guide-Source70-CAS-v01/paired-current-milestone496-source-4229-v70.json"
+    },
+    {
+      "actual_bytes": 5937,
+      "kind": "known_cached_HOME_binding",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/HOME-six-prefix-nine-bindings-ready-DRAFT-v10/actual-sixfile-guarded-attempt-v02/actual-post-Home-six-existing-file-Source-binding.json"
+    },
+    {
+      "actual_bytes": 14665,
+      "kind": "known_cached_HOME_content_pins",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/HOME-six-prefix-nine-bindings-ready-DRAFT-v10/actual-sixfile-guarded-attempt-v02/actual-current-Home-protected-rows.json"
+    },
+    {
+      "actual_bytes": 41,
+      "argv": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "kind": "HEAD_before",
+      "root": "/home/barberb/lift_coding"
+    },
+    {
+      "actual_bytes": 8323,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/.gitignore"
+    },
+    {
+      "actual_bytes": 8323,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0000-.gitignore.DATA"
+    },
+    {
+      "actual_bytes": 1205,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/.gitmodules"
+    },
+    {
+      "actual_bytes": 1205,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0001-.gitmodules.DATA"
+    },
+    {
+      "actual_bytes": 13747,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/.pgir_campaign/runtime/parallel/discovery/2026-08-17-pgir-114-pgir-030-retry-budget.md"
+    },
+    {
+      "actual_bytes": 13747,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0002-2026-08-17-pgir-114-pgir-030-retry-budget.md.DATA"
+    },
+    {
+      "actual_bytes": 1503,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/.git-sync-recovery-20260727-202941.md"
+    },
+    {
+      "actual_bytes": 1503,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0003-.git-sync-recovery-20260727-202941.md.DATA"
+    },
+    {
+      "actual_bytes": 230277,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/docs/architecture/agent_supervisor_causal_event_federation.todo.md"
+    },
+    {
+      "actual_bytes": 230277,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0004-agent_supervisor_causal_event_federation.todo.md.DATA"
+    },
+    {
+      "actual_bytes": 145695,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md"
+    },
+    {
+      "actual_bytes": 145695,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0005-49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md.DATA"
+    },
+    {
+      "actual_bytes": 46069,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/50-autoformalization-alignment-implementation-backlog-2026-10-04.md"
+    },
+    {
+      "actual_bytes": 46069,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0006-50-autoformalization-alignment-implementation-backlog-2026-10-04.md.DATA"
+    },
+    {
+      "actual_bytes": 8148,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/51-autoformalization-review-evidence-intake-2026-10-04.md"
+    },
+    {
+      "actual_bytes": 8148,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0007-51-autoformalization-review-evidence-intake-2026-10-04.md.DATA"
+    },
+    {
+      "actual_bytes": 13121,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/52-autoformalization-statement-scope-coverage-2026-10-04.md"
+    },
+    {
+      "actual_bytes": 13121,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0008-52-autoformalization-statement-scope-coverage-2026-10-04.md.DATA"
+    },
+    {
+      "actual_bytes": 13081,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/53-autoformalization-representation-and-stage-boundaries-2026-10-04.md"
+    },
+    {
+      "actual_bytes": 13081,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0009-53-autoformalization-representation-and-stage-boundaries-2026-10-04.md.DATA"
+    },
+    {
+      "actual_bytes": 10313,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/54-autoformalization-pinned-stage-workflows-2026-10-04.md"
+    },
+    {
+      "actual_bytes": 10313,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0010-54-autoformalization-pinned-stage-workflows-2026-10-04.md.DATA"
+    },
+    {
+      "actual_bytes": 13447,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/55-autoformalization-masked-contrastive-relations-2026-10-04.md"
+    },
+    {
+      "actual_bytes": 13447,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0011-55-autoformalization-masked-contrastive-relations-2026-10-04.md.DATA"
+    },
+    {
+      "actual_bytes": 12916,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/56-autoformalization-relation-mask-handoff-2026-10-04.md"
+    },
+    {
+      "actual_bytes": 12916,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0012-56-autoformalization-relation-mask-handoff-2026-10-04.md.DATA"
+    },
+    {
+      "actual_bytes": 11140,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/57-autoformalization-signed-review-provenance-2026-10-04.md"
+    },
+    {
+      "actual_bytes": 11140,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0013-57-autoformalization-signed-review-provenance-2026-10-04.md.DATA"
+    },
+    {
+      "actual_bytes": 12552,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/58-autoencoder-progress-integration-2026-10-06.md"
+    },
+    {
+      "actual_bytes": 12552,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0014-58-autoencoder-progress-integration-2026-10-06.md.DATA"
+    },
+    {
+      "actual_bytes": 3105,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/59-autoencoder-progress-reconciliation-2026-10-06.md"
+    },
+    {
+      "actual_bytes": 3105,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0015-59-autoencoder-progress-reconciliation-2026-10-06.md.DATA"
+    },
+    {
+      "actual_bytes": 2857,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/legal-ir-autoformalization-delivery-plan-2026-10-18.md"
+    },
+    {
+      "actual_bytes": 2857,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0016-legal-ir-autoformalization-delivery-plan-2026-10-18.md.DATA"
+    },
+    {
+      "actual_bytes": 105988,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/legal-ir-autoformalization-roadmap-2026-10-15.md"
+    },
+    {
+      "actual_bytes": 105988,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0017-legal-ir-autoformalization-roadmap-2026-10-15.md.DATA"
+    },
+    {
+      "actual_bytes": 187374,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/legal-ir-autoformalization-roadmap-2026-10-16.md"
+    },
+    {
+      "actual_bytes": 187374,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0018-legal-ir-autoformalization-roadmap-2026-10-16.md.DATA"
+    },
+    {
+      "actual_bytes": 83333,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/legal-ir-connected-statutory-pilot-spec-2026-10-15.md"
+    },
+    {
+      "actual_bytes": 83333,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0019-legal-ir-connected-statutory-pilot-spec-2026-10-15.md.DATA"
+    },
+    {
+      "actual_bytes": 77310,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/legal-ir-definition-profile-extension-spec-2026-10-15.md"
+    },
+    {
+      "actual_bytes": 77310,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0020-legal-ir-definition-profile-extension-spec-2026-10-15.md.DATA"
+    },
+    {
+      "actual_bytes": 127782,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/legal-ir-next-implementation-plan-2026-10-16.md"
+    },
+    {
+      "actual_bytes": 127782,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0021-legal-ir-next-implementation-plan-2026-10-16.md.DATA"
+    },
+    {
+      "actual_bytes": 117976,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/legal-ir-production-owner-handoff-2026-10-17.md"
+    },
+    {
+      "actual_bytes": 117976,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0022-legal-ir-production-owner-handoff-2026-10-17.md.DATA"
+    },
+    {
+      "actual_bytes": 6420,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/legal-ir-source-to-lean4-delivery-plan-2026-10-17.md"
+    },
+    {
+      "actual_bytes": 6420,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0023-legal-ir-source-to-lean4-delivery-plan-2026-10-17.md.DATA"
+    },
+    {
+      "actual_bytes": 245700,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/legal-ir-span-graph-lean4-implementation-plan-2026-10-13.md"
+    },
+    {
+      "actual_bytes": 245700,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0024-legal-ir-span-graph-lean4-implementation-plan-2026-10-13.md.DATA"
+    },
+    {
+      "actual_bytes": 221452,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/legal-ir-supervisor-operations-2026-10-16.md"
+    },
+    {
+      "actual_bytes": 221452,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0025-legal-ir-supervisor-operations-2026-10-16.md.DATA"
+    },
+    {
+      "actual_bytes": 116781,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/legal-ir-supervisor-recovery-status-2026-10-19.md"
+    },
+    {
+      "actual_bytes": 116781,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0026-legal-ir-supervisor-recovery-status-2026-10-19.md.DATA"
+    },
+    {
+      "actual_bytes": 209217,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/legal-ir-training-review-and-corpus-plan-2026-10-13.md"
+    },
+    {
+      "actual_bytes": 209217,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0027-legal-ir-training-review-and-corpus-plan-2026-10-13.md.DATA"
+    },
+    {
+      "actual_bytes": 2740,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/legal_autoformalization_convergence_20261013/campaign.json"
+    },
+    {
+      "actual_bytes": 2740,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0028-campaign.json.DATA"
+    },
+    {
+      "actual_bytes": 4377,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/legal_autoformalization_convergence_20261013/evidence_baseline.json"
+    },
+    {
+      "actual_bytes": 4377,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0029-evidence_baseline.json.DATA"
+    },
+    {
+      "actual_bytes": 35458,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/legal_autoformalization_convergence_20261013/goals.objectives.md"
+    },
+    {
+      "actual_bytes": 35458,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0030-goals.objectives.md.DATA"
+    },
+    {
+      "actual_bytes": 29978,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/legal_autoformalization_convergence_20261013/plan.md"
+    },
+    {
+      "actual_bytes": 29978,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0031-plan.md.DATA"
+    },
+    {
+      "actual_bytes": 190570,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/legal_autoformalization_convergence_20261013/tasks.json"
+    },
+    {
+      "actual_bytes": 190570,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0032-tasks.json.DATA"
+    },
+    {
+      "actual_bytes": 151717,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/legal_autoformalization_convergence_20261013/tasks.todo.md"
+    },
+    {
+      "actual_bytes": 151717,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0033-tasks.todo.md.DATA"
+    },
+    {
+      "actual_bytes": 18486,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/legal_autoformalization_convergence_20261013/validate_plan.py"
+    },
+    {
+      "actual_bytes": 18486,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0034-validate_plan.py.DATA"
+    },
+    {
+      "actual_bytes": 4394,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/legal_autoformalization_convergence_20261013/validation.json"
+    },
+    {
+      "actual_bytes": 4394,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0035-validation.json.DATA"
+    },
+    {
+      "actual_bytes": 3521,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/proof_grounded_ir_learning_fabric/CAMPAIGN_LAUNCH_RECEIPT.json"
+    },
+    {
+      "actual_bytes": 3521,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0036-CAMPAIGN_LAUNCH_RECEIPT.json.DATA"
+    },
+    {
+      "actual_bytes": 22864,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/proof_grounded_ir_learning_fabric/CURRENT_IMPLEMENTATION_INVENTORY.md"
+    },
+    {
+      "actual_bytes": 22864,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0037-CURRENT_IMPLEMENTATION_INVENTORY.md.DATA"
+    },
+    {
+      "actual_bytes": 2190,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/proof_grounded_ir_learning_fabric/FINAL_REPORT_TEMPLATE.md"
+    },
+    {
+      "actual_bytes": 2190,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0038-FINAL_REPORT_TEMPLATE.md.DATA"
+    },
+    {
+      "actual_bytes": 23842,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/proof_grounded_ir_learning_fabric/JUSTICEDAO_INVENTORY.md"
+    },
+    {
+      "actual_bytes": 23842,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0039-JUSTICEDAO_INVENTORY.md.DATA"
+    },
+    {
+      "actual_bytes": 6003,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/proof_grounded_ir_learning_fabric/OPERATOR_UNBLOCK_RECEIPT.json"
+    },
+    {
+      "actual_bytes": 6003,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0040-OPERATOR_UNBLOCK_RECEIPT.json.DATA"
+    },
+    {
+      "actual_bytes": 1107,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/proof_grounded_ir_learning_fabric/PARALLEL_FANOUT_INTENT.json"
+    },
+    {
+      "actual_bytes": 1107,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0041-PARALLEL_FANOUT_INTENT.json.DATA"
+    },
+    {
+      "actual_bytes": 3329,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/proof_grounded_ir_learning_fabric/PARALLEL_LAUNCH_RECEIPT.json"
+    },
+    {
+      "actual_bytes": 3329,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0042-PARALLEL_LAUNCH_RECEIPT.json.DATA"
+    },
+    {
+      "actual_bytes": 3920,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/proof_grounded_ir_learning_fabric/PARALLEL_RESUME_RECEIPT.json"
+    },
+    {
+      "actual_bytes": 3920,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0043-PARALLEL_RESUME_RECEIPT.json.DATA"
+    },
+    {
+      "actual_bytes": 6755,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/proof_grounded_ir_learning_fabric/README.md"
+    },
+    {
+      "actual_bytes": 6755,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0044-README.md.DATA"
+    },
+    {
+      "actual_bytes": 38157,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/proof_grounded_ir_learning_fabric/SUPERVISOR_RUNBOOK.md"
+    },
+    {
+      "actual_bytes": 38157,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0045-SUPERVISOR_RUNBOOK.md.DATA"
+    },
+    {
+      "actual_bytes": 6802,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/proof_grounded_ir_learning_fabric/justice_dao_pinset.yaml"
+    },
+    {
+      "actual_bytes": 6802,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0046-justice_dao_pinset.yaml.DATA"
+    },
+    {
+      "actual_bytes": 8506,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/proof_grounded_ir_learning_fabric/proof_grounded_ir_learning_fabric.objectives.md"
+    },
+    {
+      "actual_bytes": 8506,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0047-proof_grounded_ir_learning_fabric.objectives.md.DATA"
+    },
+    {
+      "actual_bytes": 102901,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/implementation_plan/proof_grounded_ir_learning_fabric/proof_grounded_ir_learning_fabric.todo.md"
+    },
+    {
+      "actual_bytes": 102901,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0048-proof_grounded_ir_learning_fabric.todo.md.DATA"
+    },
+    {
+      "actual_bytes": 4220,
+      "kind": "canonical_current_working_file",
+      "path": "/home/barberb/lift_coding/ne_detail_audit.py"
+    },
+    {
+      "actual_bytes": 4220,
+      "kind": "immutable_raw_complete_readback",
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/raw/0049-ne_detail_audit.py.DATA"
+    }
+  ],
+  "manifest_reference": {
+    "bytes": 219512,
+    "full9": {
+      "st_ctime_ns": "1795424413706642888",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "71869167",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795424413706642888",
+      "st_nlink": "1",
+      "st_size": "219512",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2620-existing-Source42-READ-v01/portable-remaining2620-current-working-source-closed-manifest.json",
+    "sha256": "ba11a6018f622de10461d0469f41268ff0b00e9fd091d4e43a2afa93aa68b1f9"
+  },
+  "source_witnesses": [
+    {
+      "HEAD": null,
+      "at": "regular_exports[49].actual_file",
+      "full9": {
+        "st_ctime_ns": "1787987208429852432",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4369313",
+        "st_mode": "33204",
+        "st_mtime_ns": "1787987208429852432",
+        "st_nlink": "1",
+        "st_size": "4220",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/ne_detail_audit.py",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[48].actual_file",
+      "full9": {
+        "st_ctime_ns": "1786919794759708549",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4770515",
+        "st_mode": "33152",
+        "st_mtime_ns": "1786919794759708549",
+        "st_nlink": "1",
+        "st_size": "102901",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/proof_grounded_ir_learning_fabric/proof_grounded_ir_learning_fabric.todo.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[47].actual_file",
+      "full9": {
+        "st_ctime_ns": "1786915663121420367",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4723135",
+        "st_mode": "33152",
+        "st_mtime_ns": "1786915663121420367",
+        "st_nlink": "1",
+        "st_size": "8506",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/proof_grounded_ir_learning_fabric/proof_grounded_ir_learning_fabric.objectives.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[46].actual_file",
+      "full9": {
+        "st_ctime_ns": "1786915766091957223",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4723137",
+        "st_mode": "33152",
+        "st_mtime_ns": "1786915766091957223",
+        "st_nlink": "1",
+        "st_size": "6802",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/proof_grounded_ir_learning_fabric/justice_dao_pinset.yaml",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[45].actual_file",
+      "full9": {
+        "st_ctime_ns": "1786919638995861546",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4770518",
+        "st_mode": "33152",
+        "st_mtime_ns": "1786919638995861546",
+        "st_nlink": "1",
+        "st_size": "38157",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/proof_grounded_ir_learning_fabric/SUPERVISOR_RUNBOOK.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[44].actual_file",
+      "full9": {
+        "st_ctime_ns": "1786919470334862999",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4770519",
+        "st_mode": "33152",
+        "st_mtime_ns": "1786919470334862999",
+        "st_nlink": "1",
+        "st_size": "6755",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/proof_grounded_ir_learning_fabric/README.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[43].actual_file",
+      "full9": {
+        "st_ctime_ns": "1786920593083184791",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4770524",
+        "st_mode": "33152",
+        "st_mtime_ns": "1786920593083184791",
+        "st_nlink": "1",
+        "st_size": "3920",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/proof_grounded_ir_learning_fabric/PARALLEL_RESUME_RECEIPT.json",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[42].actual_file",
+      "full9": {
+        "st_ctime_ns": "1786919470324862881",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4770522",
+        "st_mode": "33152",
+        "st_mtime_ns": "1786919470324862881",
+        "st_nlink": "1",
+        "st_size": "3329",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/proof_grounded_ir_learning_fabric/PARALLEL_LAUNCH_RECEIPT.json",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[41].actual_file",
+      "full9": {
+        "st_ctime_ns": "1786940010215853131",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4770827",
+        "st_mode": "33204",
+        "st_mtime_ns": "1786940010215853131",
+        "st_nlink": "1",
+        "st_size": "1107",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/proof_grounded_ir_learning_fabric/PARALLEL_FANOUT_INTENT.json",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[40].actual_file",
+      "full9": {
+        "st_ctime_ns": "1786938815481583784",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4770529",
+        "st_mode": "33204",
+        "st_mtime_ns": "1786938815481583784",
+        "st_nlink": "1",
+        "st_size": "6003",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/proof_grounded_ir_learning_fabric/OPERATOR_UNBLOCK_RECEIPT.json",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[39].actual_file",
+      "full9": {
+        "st_ctime_ns": "1786916680138223345",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4770517",
+        "st_mode": "33152",
+        "st_mtime_ns": "1786916680138223345",
+        "st_nlink": "1",
+        "st_size": "23842",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/proof_grounded_ir_learning_fabric/JUSTICEDAO_INVENTORY.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[38].actual_file",
+      "full9": {
+        "st_ctime_ns": "1786916935832454275",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4770520",
+        "st_mode": "33152",
+        "st_mtime_ns": "1786916935832454275",
+        "st_nlink": "1",
+        "st_size": "2190",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/proof_grounded_ir_learning_fabric/FINAL_REPORT_TEMPLATE.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[37].actual_file",
+      "full9": {
+        "st_ctime_ns": "1786916645374780694",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4770516",
+        "st_mode": "33152",
+        "st_mtime_ns": "1786916645374780694",
+        "st_nlink": "1",
+        "st_size": "22864",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/proof_grounded_ir_learning_fabric/CURRENT_IMPLEMENTATION_INVENTORY.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[36].actual_file",
+      "full9": {
+        "st_ctime_ns": "1786917078169238436",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4770521",
+        "st_mode": "33152",
+        "st_mtime_ns": "1786917078169238436",
+        "st_nlink": "1",
+        "st_size": "3521",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/proof_grounded_ir_learning_fabric/CAMPAIGN_LAUNCH_RECEIPT.json",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[35].actual_file",
+      "full9": {
+        "st_ctime_ns": "1791874939459347604",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4620299",
+        "st_mode": "33204",
+        "st_mtime_ns": "1791874939459347604",
+        "st_nlink": "1",
+        "st_size": "4394",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/legal_autoformalization_convergence_20261013/validation.json",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[34].actual_file",
+      "full9": {
+        "st_ctime_ns": "1791874904550820128",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4620307",
+        "st_mode": "33204",
+        "st_mtime_ns": "1791874904550820128",
+        "st_nlink": "1",
+        "st_size": "18486",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/legal_autoformalization_convergence_20261013/validate_plan.py",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[33].actual_file",
+      "full9": {
+        "st_ctime_ns": "1791874774169611037",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4620310",
+        "st_mode": "33204",
+        "st_mtime_ns": "1791874774169611037",
+        "st_nlink": "1",
+        "st_size": "151717",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/legal_autoformalization_convergence_20261013/tasks.todo.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[32].actual_file",
+      "full9": {
+        "st_ctime_ns": "1791874774163467909",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4620306",
+        "st_mode": "33204",
+        "st_mtime_ns": "1791874774163467909",
+        "st_nlink": "1",
+        "st_size": "190570",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/legal_autoformalization_convergence_20261013/tasks.json",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[31].actual_file",
+      "full9": {
+        "st_ctime_ns": "1791874830804120997",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4620314",
+        "st_mode": "33204",
+        "st_mtime_ns": "1791874830804120997",
+        "st_nlink": "1",
+        "st_size": "29978",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/legal_autoformalization_convergence_20261013/plan.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[30].actual_file",
+      "full9": {
+        "st_ctime_ns": "1791874774169302385",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4620309",
+        "st_mode": "33204",
+        "st_mtime_ns": "1791874774169302385",
+        "st_nlink": "1",
+        "st_size": "35458",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/legal_autoformalization_convergence_20261013/goals.objectives.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[29].actual_file",
+      "full9": {
+        "st_ctime_ns": "1791874774191222131",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4620312",
+        "st_mode": "33204",
+        "st_mtime_ns": "1791874774191222131",
+        "st_nlink": "1",
+        "st_size": "4377",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/legal_autoformalization_convergence_20261013/evidence_baseline.json",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[28].actual_file",
+      "full9": {
+        "st_ctime_ns": "1791874774191354113",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4620313",
+        "st_mode": "33204",
+        "st_mtime_ns": "1791874774191354113",
+        "st_nlink": "1",
+        "st_size": "2740",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/legal_autoformalization_convergence_20261013/campaign.json",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[27].actual_file",
+      "full9": {
+        "st_ctime_ns": "1792111631881124377",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4620316",
+        "st_mode": "33204",
+        "st_mtime_ns": "1792111631881124377",
+        "st_nlink": "1",
+        "st_size": "209217",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/legal-ir-training-review-and-corpus-plan-2026-10-13.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[26].actual_file",
+      "full9": {
+        "st_ctime_ns": "1792535443716859904",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4635554",
+        "st_mode": "33204",
+        "st_mtime_ns": "1792535443716859904",
+        "st_nlink": "1",
+        "st_size": "116781",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/legal-ir-supervisor-recovery-status-2026-10-19.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[25].actual_file",
+      "full9": {
+        "st_ctime_ns": "1792448474854865381",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4593554",
+        "st_mode": "33204",
+        "st_mtime_ns": "1792448474854865381",
+        "st_nlink": "1",
+        "st_size": "221452",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/legal-ir-supervisor-operations-2026-10-16.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[24].actual_file",
+      "full9": {
+        "st_ctime_ns": "1792127636836166879",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4620317",
+        "st_mode": "33204",
+        "st_mtime_ns": "1792127636836166879",
+        "st_nlink": "1",
+        "st_size": "245700",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/legal-ir-span-graph-lean4-implementation-plan-2026-10-13.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[23].actual_file",
+      "full9": {
+        "st_ctime_ns": "1792442954752494828",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4635642",
+        "st_mode": "33152",
+        "st_mtime_ns": "1792442954750150292",
+        "st_nlink": "1",
+        "st_size": "6420",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/legal-ir-source-to-lean4-delivery-plan-2026-10-17.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[22].actual_file",
+      "full9": {
+        "st_ctime_ns": "1792448474868864928",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4635618",
+        "st_mode": "33204",
+        "st_mtime_ns": "1792448474868864928",
+        "st_nlink": "1",
+        "st_size": "117976",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/legal-ir-production-owner-handoff-2026-10-17.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[21].actual_file",
+      "full9": {
+        "st_ctime_ns": "1792433933070504250",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4635640",
+        "st_mode": "33152",
+        "st_mtime_ns": "1792433933067755327",
+        "st_nlink": "1",
+        "st_size": "127782",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/legal-ir-next-implementation-plan-2026-10-16.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[20].actual_file",
+      "full9": {
+        "st_ctime_ns": "1792109468842926413",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4637248",
+        "st_mode": "33204",
+        "st_mtime_ns": "1792109468842926413",
+        "st_nlink": "1",
+        "st_size": "77310",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/legal-ir-definition-profile-extension-spec-2026-10-15.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[19].actual_file",
+      "full9": {
+        "st_ctime_ns": "1792109468842715979",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4636581",
+        "st_mode": "33204",
+        "st_mtime_ns": "1792109468842715979",
+        "st_nlink": "1",
+        "st_size": "83333",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/legal-ir-connected-statutory-pilot-spec-2026-10-15.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[18].actual_file",
+      "full9": {
+        "st_ctime_ns": "1792433933078504329",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4635641",
+        "st_mode": "33152",
+        "st_mtime_ns": "1792433933075020486",
+        "st_nlink": "1",
+        "st_size": "187374",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/legal-ir-autoformalization-roadmap-2026-10-16.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[17].actual_file",
+      "full9": {
+        "st_ctime_ns": "1792132310478960328",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4593555",
+        "st_mode": "33204",
+        "st_mtime_ns": "1792132310478960328",
+        "st_nlink": "1",
+        "st_size": "105988",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/legal-ir-autoformalization-roadmap-2026-10-15.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[16].actual_file",
+      "full9": {
+        "st_ctime_ns": "1792442954763495087",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4589491",
+        "st_mode": "33204",
+        "st_mtime_ns": "1792442954760317972",
+        "st_nlink": "1",
+        "st_size": "2857",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/legal-ir-autoformalization-delivery-plan-2026-10-18.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[15].actual_file",
+      "full9": {
+        "st_ctime_ns": "1791297472330237410",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4589533",
+        "st_mode": "33204",
+        "st_mtime_ns": "1791297472330237410",
+        "st_nlink": "1",
+        "st_size": "3105",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/59-autoencoder-progress-reconciliation-2026-10-06.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[14].actual_file",
+      "full9": {
+        "st_ctime_ns": "1791274736939631985",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4589536",
+        "st_mode": "33204",
+        "st_mtime_ns": "1791274736939631985",
+        "st_nlink": "1",
+        "st_size": "12552",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/58-autoencoder-progress-integration-2026-10-06.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[13].actual_file",
+      "full9": {
+        "st_ctime_ns": "1791132026034321461",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4599963",
+        "st_mode": "33204",
+        "st_mtime_ns": "1791132026034321461",
+        "st_nlink": "1",
+        "st_size": "11140",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/57-autoformalization-signed-review-provenance-2026-10-04.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[12].actual_file",
+      "full9": {
+        "st_ctime_ns": "1791128265463562472",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4599958",
+        "st_mode": "33204",
+        "st_mtime_ns": "1791128265463562472",
+        "st_nlink": "1",
+        "st_size": "12916",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/56-autoformalization-relation-mask-handoff-2026-10-04.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[11].actual_file",
+      "full9": {
+        "st_ctime_ns": "1791119907128120845",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4598754",
+        "st_mode": "33204",
+        "st_mtime_ns": "1791119907128120845",
+        "st_nlink": "1",
+        "st_size": "13447",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/55-autoformalization-masked-contrastive-relations-2026-10-04.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[10].actual_file",
+      "full9": {
+        "st_ctime_ns": "1791103532795001989",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4590052",
+        "st_mode": "33204",
+        "st_mtime_ns": "1791103532795001989",
+        "st_nlink": "1",
+        "st_size": "10313",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/54-autoformalization-pinned-stage-workflows-2026-10-04.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[9].actual_file",
+      "full9": {
+        "st_ctime_ns": "1791101183033158531",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4589535",
+        "st_mode": "33204",
+        "st_mtime_ns": "1791101183033158531",
+        "st_nlink": "1",
+        "st_size": "13081",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/53-autoformalization-representation-and-stage-boundaries-2026-10-04.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[8].actual_file",
+      "full9": {
+        "st_ctime_ns": "1791098816341070357",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4588801",
+        "st_mode": "33204",
+        "st_mtime_ns": "1791098816341070357",
+        "st_nlink": "1",
+        "st_size": "13121",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/52-autoformalization-statement-scope-coverage-2026-10-04.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[7].actual_file",
+      "full9": {
+        "st_ctime_ns": "1791095675381335121",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4599300",
+        "st_mode": "33204",
+        "st_mtime_ns": "1791095675381335121",
+        "st_nlink": "1",
+        "st_size": "8148",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/51-autoformalization-review-evidence-intake-2026-10-04.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[6].actual_file",
+      "full9": {
+        "st_ctime_ns": "1791169330696998953",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4588802",
+        "st_mode": "33204",
+        "st_mtime_ns": "1791169330696998953",
+        "st_nlink": "1",
+        "st_size": "46069",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/50-autoformalization-alignment-implementation-backlog-2026-10-04.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[5].actual_file",
+      "full9": {
+        "st_ctime_ns": "1791169330695998938",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4599972",
+        "st_mode": "33204",
+        "st_mtime_ns": "1791169330695998938",
+        "st_nlink": "1",
+        "st_size": "145695",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[4].actual_file",
+      "full9": {
+        "st_ctime_ns": "1787347230635615871",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4639805",
+        "st_mode": "33204",
+        "st_mtime_ns": "1787347230635615871",
+        "st_nlink": "1",
+        "st_size": "230277",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/docs/architecture/agent_supervisor_causal_event_federation.todo.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[3].actual_file",
+      "full9": {
+        "st_ctime_ns": "1785184184168446602",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4368899",
+        "st_mode": "33204",
+        "st_mtime_ns": "1785184184168446602",
+        "st_nlink": "1",
+        "st_size": "1503",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/.git-sync-recovery-20260727-202941.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[2].actual_file",
+      "full9": {
+        "st_ctime_ns": "1786967620545405691",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "6046633",
+        "st_mode": "33204",
+        "st_mtime_ns": "1786967620545405691",
+        "st_nlink": "1",
+        "st_size": "13747",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/.pgir_campaign/runtime/parallel/discovery/2026-08-17-pgir-114-pgir-030-retry-budget.md",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[1].actual_file",
+      "full9": {
+        "st_ctime_ns": "1794192750854944898",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4374613",
+        "st_mode": "33204",
+        "st_mtime_ns": "1794192750851041734",
+        "st_nlink": "1",
+        "st_size": "1205",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/.gitmodules",
+      "repo_root": null
+    },
+    {
+      "HEAD": null,
+      "at": "regular_exports[0].actual_file",
+      "full9": {
+        "st_ctime_ns": "1791172188852861732",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4359178",
+        "st_mode": "33204",
+        "st_mtime_ns": "1791172188852861732",
+        "st_nlink": "1",
+        "st_size": "8323",
+        "st_uid": "1000"
+      },
+      "path": "/home/barberb/lift_coding/.gitignore",
+      "repo_root": null
+    }
+  ],
+  "top_level_control_references": {
+    "exact_projection": {
+      "bytes": 5607898,
+      "path": "/tmp/Reader-combined-remaining2620-private-audit-v03/exact-remaining-present-targets-and-provenance-v03.json",
+      "sha256": "5cc61ae5b74f4626e8f4da92e407b3c19420c7130679581e7ddb30f2cebb9b52"
+    },
+    "selection": {
+      "bytes": 3167,
+      "path": "/tmp/Root-selected-publication-remaining2620-existing-READ-v01.json",
+      "sha256": "3ca44114bff819a50fba285f8c852d56921344d47ea94c36ca73ba9048ead0e1"
+    }
+  }
+}

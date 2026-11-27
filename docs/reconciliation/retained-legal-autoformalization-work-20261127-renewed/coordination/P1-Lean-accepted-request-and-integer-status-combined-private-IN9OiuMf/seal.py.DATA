@@ -1,0 +1,136 @@
+from pathlib import Path
+from xml.etree import ElementTree
+from collections import Counter
+import ast
+import difflib
+import hashlib
+import json
+import os
+import stat
+import subprocess
+
+root=Path(__file__).resolve().parent
+spec=json.loads((root/"inputs.json").read_bytes())
+checkout=Path(spec["checkout"])
+head=spec["local_HEAD"]
+paths=spec["role_paths"]
+env={**os.environ,"GIT_OPTIONAL_LOCKS":"0","GIT_NO_LAZY_FETCH":"1"}
+os.umask(0o022)
+def git(*args,cwd=checkout):
+    return subprocess.check_output(["git","-c","core.preloadIndex=false","-C",str(cwd),*args],env=env)
+def stamp(info):
+    return {key:str(getattr(info,key)) for key in ("st_dev","st_ino","st_mode","st_nlink","st_uid","st_gid","st_size","st_mtime_ns","st_ctime_ns")}
+def read(path):
+    with os.fdopen(os.open(path,os.O_RDONLY|os.O_NONBLOCK|os.O_NOFOLLOW),"rb") as f:
+        before=os.fstat(f.fileno())
+        assert stat.S_ISREG(before.st_mode) and before.st_nlink==1
+        raw=f.read()
+        assert stamp(before)==stamp(os.fstat(f.fileno()))==stamp(path.lstat())
+        assert len(raw)==before.st_size
+    return raw,stamp(before)
+def sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+def ref(path):
+    raw,f9=read(path)
+    return {"path":str(path),"bytes":len(raw),"sha256":sha(raw),"full9":f9}
+def checked(r):
+    p=Path(r["path"]); raw,_=read(p)
+    assert len(raw)==r["bytes"] and sha(raw)==r["sha256"]
+    return raw
+def write(path,raw,mode=0o400):
+    path.parent.mkdir(mode=0o700,parents=True,exist_ok=True)
+    with os.fdopen(os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,mode),"wb") as f:
+        f.write(raw);f.flush();os.fsync(f.fileno())
+    assert read(path)[0]==raw
+    return ref(path)
+def blob(raw):
+    return hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest()
+def assert_live():
+    assert git("rev-parse","HEAD","refs/remotes/origin/main").decode().splitlines()==[head,head]
+    assert not git("status","--porcelain=v1","--untracked-files=all","--",*paths.values())
+assert_live()
+diffs={"forward":[],"inverse":[]}
+scratch=root/"private-patch-verification"
+scratch.mkdir(mode=0o700)
+files={}
+for role,path in paths.items():
+    before,after=(checked(spec[key][role]) for key in ("before_posts","combined_posts"))
+    canonical,canonical_stamp=read(checkout/path)
+    mode,kind,oid=git("ls-tree",head,"--",path).split(b"\t")[0].decode().split()
+    assert mode=="100644" and kind=="blob"
+    assert canonical==before and blob(before)==oid
+    assert before==git("cat-file","blob",oid)
+    assert (root/"dataset"/path).read_bytes()==after
+    files[role]={"relative_path":path,"canonical_path":str(checkout/path),"git_mode":mode,
+        "canonical_preimage_full9":canonical_stamp,
+        "before":{**ref(Path(spec["before_posts"][role]["path"])),"git_blob":oid},
+        "after":{**ref(Path(spec["combined_posts"][role]["path"])),"proposed_git_blob":blob(after)}}
+    a,b=b"a/"+os.fsencode(path),b"b/"+os.fsencode(path)
+    for direction,left,right in (("forward",before,after),("inverse",after,before)):
+        diffs[direction].extend(difflib.diff_bytes(difflib.unified_diff,left.splitlines(True),
+                         right.splitlines(True),fromfile=a,tofile=b))
+    write(scratch/path,before,mode=0o644)
+patches={}
+for direction,field in (("forward","after"),("inverse","before")):
+    filepath=root/(direction+".patch")
+    patches[direction]=write(filepath,b"".join(diffs[direction]))
+    git("apply","--no-index","--whitespace=nowarn",str(filepath),cwd=scratch)
+    for role,path in paths.items():
+        raw,f9=read(scratch/path)
+        assert sha(raw)==files[role][field]["sha256"] and stat.S_IMODE(int(f9["st_mode"]))==0o644
+assert_live()
+
+expected_new={
+ "test_lean_malformed_or_failed_exit_status_cannot_establish_proof",
+ "test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status",
+ "test_lean_outcome_binds_accepted_receipt_to_request_payload",
+}
+assert sum(spec["function_case_counts"].values())==81 and len(spec["function_case_counts"])==16
+reports={}
+orders={}
+for mode,expected_failure in (("before",9),("after",0)):
+    run=root/mode
+    j=ref(run/"result.xml")
+    parsed=ElementTree.fromstring(checked(j))
+    rows=parsed.findall(".//testcase")
+    case_names=[row.attrib["name"] for row in rows]
+    assert len(case_names)==len(set(case_names))==81
+    count=Counter(paths["test"]+"::"+name.partition("[")[0] for name in case_names)
+    assert dict(count)==spec["function_case_counts"]
+    assert case_names[:66]==spec["expected_retained_order"]
+    assert {r.partition("[")[0] for r in case_names[66:]}==expected_new
+    assert not parsed.findall(".//error") and not parsed.findall(".//skipped")
+    failures={row.attrib["name"]:row.find("failure").attrib["message"] for row in rows if row.find("failure") is not None}
+    assert len(failures)==expected_failure
+    assert json.loads((run/"termination.json").read_bytes())["returncode"]==bool(expected_failure)
+    stderr=ref(run/"stderr.DATA")
+    assert not stderr["bytes"]
+    reports[mode]={"testcases":81,"passed":81-expected_failure,"failures":expected_failure,
+        "errors":0,"skips":0,"failure_messages":failures,"junit":j,"stdout":ref(run/"stdout.DATA"),
+        "stderr":stderr,"termination":ref(run/"termination.json")}
+    orders[mode]=case_names
+assert orders["before"]==orders["after"]
+initial_failed=reports["before"]["failure_messages"]
+assert sum("DID NOT RAISE" in v for v in initial_failed.values())==5
+assert {n.split("[")[-1][:-1] for n in initial_failed if not n.startswith("test_lean_outcome")}=={"False","0.0"}
+
+post={
+ "schema":"private-P1-Lean-exact-two-combined-and-qualified-fixtures/v1",
+ "checkout":str(checkout),"observed_HEAD":head,"HEAD_tree":git("rev-parse","HEAD^{tree}").decode().strip(),
+ "checkout_selected_preimages_clean":True,
+ "outside_selected_paths_status":git("status","--porcelain=v1","--untracked-files=all").decode().splitlines(),
+ "files":files,"patches":patches,"forward_inverse_exact_byte_and_mode_proven":True,
+ "from_independent_private_packets":spec["before_recipes"],"retained_actual_v225":spec["prior_ordinary66"],
+ "fixed_boundaries":["accepted outcome's original request source, translation, declaration and proposition",
+                     "successful process result requires a built-in integer zero status"],
+ "test_order":"All existing test bytes first, followed by Main's two exit-status functions, then the request-join function. Both test suffixes are unchanged.",
+ "fixture_equivalence":{"one_owner_diff_only_between_runs":True,"actual_order":orders["after"],
+     "retained_v225_cases":66,"Main_appended":8,"accepted_request_appended":7,"distinct_functions":16},
+ "private_fixture_runs":reports,"input_bindings":ref(root/"inputs.json"),"latest_existing_private_runner":spec["runner"],
+ "existing_ordinary81_selector_inputs":spec["exact_owned_roster"],"case_vector":{
+     node:spec["function_case_counts"][node] for node in spec["exact_owned_roster"]},
+ "source_installation":None,"local_candidate_commit":None,"actual_ordinary81":None,
+ "actual_native_result":None,"SDK_runtime_selection":None,
+}
+print(json.dumps(write(root/"SEALED-combined-P1-Lean-two-files-private81.json",(json.dumps(post,indent=2,sort_keys=True)+"\n").encode())))
+print([(k,v["after"]["bytes"],v["after"]["sha256"]) for k,v in files.items()])

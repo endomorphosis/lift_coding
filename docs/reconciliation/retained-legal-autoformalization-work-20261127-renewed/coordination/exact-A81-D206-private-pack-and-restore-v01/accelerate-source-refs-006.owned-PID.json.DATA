@@ -1,0 +1,1 @@
+{"PID": 2011069, "command": ["git", "-c", "pack.threads=1", "-c", "pack.windowMemory=32m", "-c", "core.bigFileThreshold=8m", "-C", "/tmp/legal-ir-d965-tests20-package22-preserve-20261116-v01/A", "for-each-ref", "--format=%(refname) %(objectname)"], "started_ns": "1795481141369622872"}

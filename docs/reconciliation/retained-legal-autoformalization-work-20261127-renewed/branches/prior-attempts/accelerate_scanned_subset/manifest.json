@@ -1,0 +1,37 @@
+{
+  "driver": {
+    "bytes": 15423,
+    "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/accelerate_scanned_subset/package_accelerate34.py",
+    "sha256": "40a5c98e6cb5721e8f54d8e931fb35b8ac29802d382cba9a90b523fba767a568"
+  },
+  "expected_tips": 34,
+  "families": [
+    {
+      "bundle": {
+        "bytes": 40479704,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/accelerate_scanned_subset/ipfs_accelerate_py/ipfs_accelerate_py-historical-tips.bundle",
+        "sha256": "ed8c180d702e2c92ff2166ca77faec13130e809262dd8866af3613c07fe6cb52"
+      },
+      "expected_tips": 34,
+      "family": "ipfs_accelerate_py",
+      "publication_files": [
+        {
+          "bytes": 40479704,
+          "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/accelerate_scanned_subset/ipfs_accelerate_py/ipfs_accelerate_py-historical-tips.bundle",
+          "sha256": "ed8c180d702e2c92ff2166ca77faec13130e809262dd8866af3613c07fe6cb52"
+        }
+      ],
+      "receipt": {
+        "bytes": 42476,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/accelerate_scanned_subset/ipfs_accelerate_py/restore-receipt.json",
+        "sha256": "ed3f966e68c872b8952ec4a36677b2cf12554db8f43cc7c2c79c2d5e7b458893"
+      },
+      "restored_tips": 34,
+      "status": "RESTORE_VERIFIED"
+    }
+  ],
+  "publication_attempted": false,
+  "restored_tips": 34,
+  "schema": "private-historical-bundle-restoration/v1",
+  "timestamp_utc": "2026-11-27T05:49:23.641791+00:00"
+}

@@ -1,0 +1,258 @@
+"""Bounded stdlib-only before/after controls; no real transport or project import."""
+import ast
+import difflib
+import hashlib
+import io
+import json
+import os
+from pathlib import Path
+import resource
+import signal
+import sys
+import time
+import types
+import unittest
+
+W = Path(__file__).parent
+LIMIT = 8 * 1024**2
+# Earlier scoping, assignment, exact sources, child schema/closeout reads and repeats.
+SPENT = 226514
+PRIVATE_IO_RESERVE = 1024**2
+READS = []
+START = time.monotonic()
+resource.setrlimit(resource.RLIMIT_AS, (512*1024**2,512*1024**2))
+resource.setrlimit(resource.RLIMIT_CPU, (60,60))
+os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})
+signal.alarm(60)
+REAL_READ = os.read
+
+def observed_read(fd,size):
+    global SPENT
+    b=REAL_READ(fd,size)
+    SPENT+=len(b)
+    if SPENT+PRIVATE_IO_RESERVE>LIMIT:
+        raise RuntimeError('private_input_byte_limit')
+    return b
+
+def read(p,sha=None):
+    fd=os.open(p,os.O_RDONLY|os.O_NOFOLLOW)
+    K=('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
+    try:
+        a=os.fstat(fd);parts=[]
+        while True:
+            b=observed_read(fd,65536)
+            if not b:break
+            parts.append(b)
+        z=os.fstat(fd);raw=b''.join(parts)
+        assert tuple(getattr(a,k) for k in K)==tuple(getattr(z,k) for k in K)==tuple(getattr(os.stat(p,follow_symlinks=False),k) for k in K)
+    finally:os.close(fd)
+    if sha:assert hashlib.sha256(raw).hexdigest()==sha
+    READS.append(dict(path=str(p),bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest()))
+    return raw
+
+def save(name,raw):
+    if not isinstance(raw,bytes):raw=(json.dumps(raw,sort_keys=True,indent=2,allow_nan=False)+'\n').encode()
+    p=W/name;fd=os.open(p,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o400)
+    try:
+        v=memoryview(raw)
+        while v:n=os.write(fd,v);v=v[n:]
+        os.fsync(fd)
+    finally:os.close(fd)
+    assert read(p)==raw
+    return dict(path=str(p),bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())
+
+BEFORE=read(W/'caller.before.py.DATA','cf78dacd03150efba5cd7e2d6d4eeb7c61d58e850a47319d98298fac34c3dd81')
+TEST=read(W/'test_existing_invoke_once_hydration.py')
+
+def cohort(raw,label):
+    module=types.ModuleType('_private_same_invoke_once_tests_'+label)
+    module.__file__=str(W/'test_existing_invoke_once_hydration.py')
+    exec(compile(TEST,module.__file__,'exec'),module.__dict__)
+    module.CALLER_RAW=raw;module.WORKDIR=str(W)
+    suite=unittest.defaultTestLoader.loadTestsFromTestCase(module.ExistingCallerHydrationTests)
+    transcript=io.StringIO()
+    os.read=observed_read
+    try:result=unittest.TextTestRunner(stream=transcript,verbosity=2).run(suite)
+    finally:os.read=REAL_READ
+    return dict(label=label,parents=result.testsRun,failures=[dict(test=str(t),traceback=s) for t,s in result.failures],
+        errors=[dict(test=str(t),traceback=s) for t,s in result.errors],skipped=[str(x) for x in result.skipped],
+        transcript=transcript.getvalue(),root_cause=module.ROOT_CAUSE,
+        actual_function='same invoke_once and exact pinned existing function exports',
+        boundary='only _open_codex_app_connection replaced by explicit fictional transport; real metadata parser/artifact writer/reader/sender validators retained',
+        real_RPC=0,Source=0,Git=0,SQL=0,SDK=0,Native=0,model=0)
+
+red=cohort(BEFORE,'before')
+RED=save('actual-same-caller-unloaded-resume-RED.json',red)
+assert red['parents']==24 and not red['skipped'],red['parents']
+bad='\n'.join(x['test'] for x in red['errors']+red['failures'])
+assert 'test_existing_loaded_terminal_starts_without_resume' not in bad
+assert 'test_existing_loaded_active_steers_without_resume_or_start' not in bad
+assert red['root_cause'][0]['result']=='refused'
+assert red['root_cause'][0]['reason']=='current_thread_state_unverified'
+assert red['root_cause'][0]['read_snapshot']['status']=='notLoaded'
+assert red['root_cause'][0]['read_snapshot']['can_accept_direct_input'] is None
+assert 'thread/resume' not in red['root_cause'][0]['methods'] and 'turn/start' not in red['root_cause'][0]['methods']
+assert red['failures'] or red['errors']
+print(json.dumps(dict(RED=RED,parents=red['parents'],failures=len(red['failures']),errors=len(red['errors']),root_cause=red['root_cause'])),flush=True)
+
+s=BEFORE.decode()
+old='''    if (state.get('observation_state')!='observed' or type(snapshot) is not dict
+            or snapshot.get('id')!=THREAD_ID or snapshot.get('can_accept_direct_input') is not True
+            or type(turn) is not dict):
+        return finish(no_authority('refused','current_thread_state_unverified',state_observation=state))
+'''
+new='''    if (state.get('observation_state')!='observed' or type(snapshot) is not dict
+            or snapshot.get('id')!=THREAD_ID or type(turn) is not dict):
+        return finish(no_authority('refused','current_thread_state_unverified',state_observation=state))
+    needs_resume=snapshot.get('status')=='notLoaded'
+    if needs_resume:
+        if (turn.get('status') not in {'completed','failed','interrupted'}
+                or type(turn.get('id')) is not str
+                or re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}',turn['id']) is None
+                or not (snapshot.get('can_accept_direct_input') is None
+                        or snapshot.get('can_accept_direct_input') is False)):
+            return finish(no_authority('refused','unloaded_thread_requires_verified_terminal_turn',state_observation=state))
+    elif snapshot.get('can_accept_direct_input') is not True:
+        return finish(no_authority('refused','current_thread_state_unverified',state_observation=state))
+'''
+assert s.count(old)==1;s=s.replace(old,new)
+old='''    def reserve(method, expected):
+'''
+new='''    def authenticate(reserved):
+        # Resume and enqueue share one immutable reservation; never overwrite
+        # an UNKNOWN record to obtain permission for another mutation.
+        for item in (retained,reserved):
+            checked=ns['read_codex_handoff_artifact'](private_root=str(private),artifact_path=item['path'],
+                expected_bytes=item['bytes'],expected_sha256=item['sha256'])
+            if checked.get('artifact_state')!='verified' or checked.get('full9')!=item['full9']:
+                raise ValueError('durable pre-mutation artifact changed')
+    def reserve(method, expected):
+'''
+assert s.count(old)==1;s=s.replace(old,new)
+old='''        # Re-authenticate both immutable artifacts immediately before the mutation boundary.
+        for item in (retained,saved):
+            checked=ns['read_codex_handoff_artifact'](private_root=str(private),artifact_path=item['path'],
+                expected_bytes=item['bytes'],expected_sha256=item['sha256'])
+            if checked.get('artifact_state')!='verified' or checked.get('full9')!=item['full9']:
+                raise ValueError('durable pre-mutation artifact changed')
+        return saved
+'''
+new='''        # Re-authenticate both immutable artifacts immediately before the mutation boundary.
+        authenticate(saved)
+        return saved
+'''
+assert s.count(old)==1;s=s.replace(old,new)
+old='''    mutation_started=False;reservation=None
+'''
+new='''    mutation_started=False;reservation=None;mutation_method=None;resume_acknowledged=False
+'''
+assert s.count(old)==1;s=s.replace(old,new)
+old='''            again=rpc('thread/read',{'threadId':THREAD_ID,'includeTurns':False})
+            current=again.get('thread') if type(again) is dict else None
+            listing=rpc('thread/turns/list',{'threadId':THREAD_ID,'limit':1,'sortDirection':'desc'})
+            rows=listing.get('data') if type(listing) is dict else None
+            row=rows[0] if type(rows) is list and len(rows)==1 else None
+            latest=row.get('turn',row) if type(row) is dict else None
+            if (type(current) is not dict or current.get('id')!=THREAD_ID
+                    or current.get('canAcceptDirectInput') is not True
+                    or type(latest) is not dict or latest.get('id')!=turn['id']
+                    or latest.get('status')!=turn['status']
+                    or latest.get('status') not in {'completed','failed','interrupted'}):
+                return finish(no_authority('refused','idle_state_changed_no_dispatch',
+                                          method='turn/start',rpc_response_ids=response_ids))
+            reservation=reserve('turn/start',{'id':latest['id'],'status':latest['status']})
+            mutation_started=True  # Any send/ack failure from this durable point is UNKNOWN.
+'''
+new='''            def observe_latest():
+                again=rpc('thread/read',{'threadId':THREAD_ID,'includeTurns':False})
+                current=again.get('thread') if type(again) is dict else None
+                listing=rpc('thread/turns/list',{'threadId':THREAD_ID,'limit':1,'sortDirection':'desc'})
+                rows=listing.get('data') if type(listing) is dict else None
+                row=rows[0] if type(rows) is list and len(rows)==1 else None
+                return current,row.get('turn',row) if type(row) is dict else None
+            def same_terminal(latest):
+                return (type(latest) is dict and latest.get('id')==turn['id']
+                    and latest.get('status')==turn['status']
+                    and latest.get('status') in {'completed','failed','interrupted'})
+            def status_type(current):
+                status=current.get('status') if type(current) is dict else None
+                return status.get('type') if type(status) is dict else status
+            current,latest=observe_latest()
+            if needs_resume:
+                if (type(current) is not dict or current.get('id')!=THREAD_ID
+                        or status_type(current)!='notLoaded'
+                        or not (current.get('canAcceptDirectInput') is None
+                                or current.get('canAcceptDirectInput') is False)
+                        or not same_terminal(latest)):
+                    return finish(no_authority('refused','unloaded_state_changed_no_dispatch',
+                        method='thread/resume',rpc_response_ids=response_ids))
+                reservation=reserve('thread/resume+turn/start',{'id':latest['id'],'status':latest['status']})
+                mutation_started=True;mutation_method='thread/resume'
+                hydrated=rpc('thread/resume',{'threadId':THREAD_ID,'excludeTurns':True})
+                resumed=hydrated.get('thread') if type(hydrated) is dict else None
+                if (type(resumed) is not dict or resumed.get('id')!=THREAD_ID
+                        or resumed.get('canAcceptDirectInput') is not True
+                        or status_type(resumed)!='idle'):
+                    raise ValueError('same_thread_resume_ack_invalid')
+                resume_acknowledged=True
+                # Hydration is not an enqueue or a current-turn guarantee.
+                current,latest=observe_latest()
+                if (type(current) is not dict or current.get('id')!=THREAD_ID
+                        or current.get('canAcceptDirectInput') is not True
+                        or status_type(current)!='idle' or not same_terminal(latest)):
+                    return finish(no_authority('refused','hydrated_state_changed_no_dispatch',
+                        method='turn/start',rpc_response_ids=response_ids,
+                        metadata_resume_acknowledged=True,UNKNOWN_reservation=reservation,
+                        current_call_mutation_started=True,message_mutation_started=False))
+                authenticate(reservation)
+            elif (type(current) is not dict or current.get('id')!=THREAD_ID
+                    or current.get('canAcceptDirectInput') is not True or not same_terminal(latest)):
+                return finish(no_authority('refused','idle_state_changed_no_dispatch',
+                                          method='turn/start',rpc_response_ids=response_ids))
+            if reservation is None:
+                reservation=reserve('turn/start',{'id':latest['id'],'status':latest['status']})
+            mutation_started=True;mutation_method='turn/start'  # Unacknowledged enqueue is UNKNOWN.
+'''
+assert s.count(old)==1;s=s.replace(old,new)
+old='''                'state_reads_atomic':False})
+'''
+new='''                'state_reads_atomic':False,
+                **({'metadata_resume_acknowledged':True} if needs_resume else {})})
+'''
+assert s.count(old)==1;s=s.replace(old,new)
+old='''        return finish(no_authority('delivery_unknown' if mutation_started else 'refused',
+            'turn_start_unacknowledged' if mutation_started else 'idle_preflight_refused',
+            method='turn/start',error_type=type(error).__name__,rpc_response_ids=response_ids,
+            UNKNOWN_reservation=reservation,current_call_mutation_started=mutation_started))
+'''
+new='''        unknown=mutation_started and not (mutation_method=='thread/resume' and resume_acknowledged)
+        reason=('turn_start_unacknowledged' if mutation_method=='turn/start' else
+                'post_resume_state_unverified' if resume_acknowledged else
+                'thread_resume_unacknowledged' if mutation_started else 'idle_preflight_refused')
+        return finish(no_authority('delivery_unknown' if unknown else 'refused',reason,
+            method=mutation_method or 'turn/start',error_type=type(error).__name__,rpc_response_ids=response_ids,
+            UNKNOWN_reservation=reservation,current_call_mutation_started=mutation_started,
+            **({'metadata_resume_acknowledged':resume_acknowledged,
+                'message_mutation_started':mutation_method=='turn/start'} if needs_resume else {})))
+'''
+assert s.count(old)==1;s=s.replace(old,new)
+AFTER=s.encode()
+bt,at=ast.parse(BEFORE),ast.parse(AFTER)
+assert len(bt.body)==len(at.body)
+changed=[]
+for old,new in zip(bt.body,at.body):
+    if ast.dump(old,include_attributes=False)!=ast.dump(new,include_attributes=False):
+        assert isinstance(old,ast.FunctionDef) and isinstance(new,ast.FunctionDef) and old.name==new.name
+        changed.append(old.name)
+assert changed==['invoke_once'],changed
+POST=save('invoke-existing-durable-handoff.unloaded-hydration.after.py.DATA',AFTER)
+green=cohort(AFTER,'after')
+GREEN=save('actual-same-caller-unloaded-resume-GREEN.json',green)
+assert green['parents']==24 and not green['failures'] and not green['errors'] and not green['skipped'],GREEN
+forward=''.join(difflib.unified_diff(BEFORE.decode().splitlines(True),AFTER.decode().splitlines(True),fromfile='a/invoke-existing-durable-handoff-INERT.py.DATA',tofile='b/invoke-existing-durable-handoff-INERT.py.DATA')).encode()
+inverse=''.join(difflib.unified_diff(AFTER.decode().splitlines(True),BEFORE.decode().splitlines(True),fromfile='b/invoke-existing-durable-handoff-INERT.py.DATA',tofile='a/invoke-existing-durable-handoff-INERT.py.DATA')).encode()
+F=save('invoke-once-hydration.forward.patch',forward);I=save('invoke-once-hydration.inverse.patch',inverse)
+packet=dict(status='PRIVATE implemented existing-caller workaround; fictional transport only',before=dict(bytes=len(BEFORE),sha256=hashlib.sha256(BEFORE).hexdigest()),post=POST,owning_regressions=dict(path=str(W/'test_existing_invoke_once_hydration.py'),bytes=len(TEST),sha256=hashlib.sha256(TEST).hexdigest()),actual_RED=RED,actual_GREEN=GREEN,parent_methods=24,failed_before=len(red['failures'])+len(red['errors']),failed_after=0,changed_top_level_AST=changed,all_other_caller_AST_and_globals_unchanged=True,production_CLI_source_unchanged=True,allowed_resume_params=['threadId','excludeTurns=true'],metadata_resume_and_message_enqueue_are_distinct=True,pre_mutation_durable_UNKNOWN_and_reauth_preserved=True,no_replay=True,active_steer_and_loaded_idle_start_preserved=True,forward=F,inverse=I,observed_explicit_read_bytes=SPENT,conservative_other_private_IO_reserve=PRIVATE_IO_RESERVE,phase_charged_upper_bound_before_final_readback=SPENT+PRIVATE_IO_RESERVE,phase_limit=LIMIT,earlier_scoping_and_reads_retained=True,closed_P1_unit_2074871_retained_separately=True,profile=dict(cpu_count=1,address_space_bytes=512*1024**2,cpu_seconds=60,wall_seconds=60),elapsed_seconds=time.monotonic()-START,real_RPC_Source_Git_SQL_SDK_model_Native=0,new_provider_controller_thread_or_authority=False)
+FINAL=save('sealed-private-existing-invoke-once-unloaded-hydration-v01.json',packet)
+ledger=save('private-phase-readback-ledger-v01.json',dict(explicit_observed_read_bytes=SPENT,conservative_other_private_IO_reserve=PRIVATE_IO_RESERVE,charged_upper_bound_before_ledger_readback=SPENT+PRIVATE_IO_RESERVE,limit=LIMIT,reads=READS,all_prior_costs_retained=True))
+print(json.dumps(dict(proposal=FINAL,post=POST,tests=packet['owning_regressions'],GREEN=GREEN,parents=24,failures=0,errors=0,skips=0,charged_upper_bound=SPENT+PRIVATE_IO_RESERVE,limit=LIMIT,ledger=ledger)),flush=True)

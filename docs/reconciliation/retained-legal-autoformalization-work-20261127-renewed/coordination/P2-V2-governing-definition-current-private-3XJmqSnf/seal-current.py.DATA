@@ -1,0 +1,119 @@
+from pathlib import Path
+import ast,difflib,hashlib,json,os,subprocess,tempfile
+import xml.etree.ElementTree as ET
+
+w=Path.cwd()
+repo=w.parents[2]/"publish-all-20261126-nsFFGMUO/datasets.git"
+stage=json.loads((w/"current-fixture-epoch.json").read_bytes())
+env={**os.environ,"GIT_OPTIONAL_LOCKS":"0","GIT_NO_LAZY_FETCH":"1","GIT_TERMINAL_PROMPT":"0",
+     "GIT_INDEX_FILE":str(w/"candidate-private.index")}
+def git(*args,raw=None):
+    return subprocess.check_output(["git","--git-dir",str(repo),"-c","index.threads=1",*args],
+                                   env=env,input=raw,timeout=25)
+def digest(raw):
+    return hashlib.sha256(raw).hexdigest()
+def pin(p):
+    raw=p.read_bytes()
+    return {"path":str(p),"bytes":len(raw),"sha256":digest(raw)}
+def save(name,raw):
+    p=w/name
+    with os.fdopen(os.open(p,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400),"wb") as f:
+        f.write(raw)
+        f.flush()
+        os.fsync(f.fileno())
+    assert p.read_bytes()==raw
+    return pin(p)
+
+observed={}
+identity={}
+for group,code,total,failed in (("red",1,15,2),("green",0,15,0),("v3-retention",0,14,0)):
+    run=w/group/"run.json"
+    value=json.loads(run.read_bytes())
+    assert value["published_HEAD"]==stage["head"] and value["returncode"]==code
+    assert value["V3_owner_sha256"]==stage["roles"][stage["v3_owner"]]["sha256"]
+    assert value["V3_test_sha256"]==stage["roles"][stage["v3_test"]]["sha256"]
+    assert value["V2_owner_sha256"]==pin(w/("owner.before.py.DATA" if group=="red" else "owner.after.py.DATA"))["sha256"]
+    assert value["V2_test_sha256"]==pin(w/"test.after.py.DATA")["sha256"]
+    rows=ET.fromstring((w/group/"result.xml").read_bytes()).findall(".//testcase")
+    assert len(rows)==len({(r.get("classname"),r.get("name")) for r in rows})==total
+    failures=[r for r in rows if r.find("failure") is not None]
+    assert len(failures)==failed and all(r.find("error") is None and r.find("skipped") is None for r in rows)
+    if group=="red":
+        assert {r.get("name").split("[")[-1] for r in failures}=={"identity]","nested-self-use]"}
+        assert all("semantic_use_eligible=True under exact fictional signatures" in r.find("failure").text for r in failures)
+    identity[group]=[r.get("name") for r in rows]
+    observed[group]={"passes":total-failed,"failures":failed,"errors":0,"skips":0,"process_rc":code,
+                     "evidence":[pin(w/group/n) for n in ("run.json","result.xml","stdout.DATA","stderr.DATA")]}
+assert identity["red"]==identity["green"]
+
+head=stage["head"]
+assert git("rev-parse","refs/reconciliation/current-20261127").decode().strip()==head
+assert git("ls-remote","--exit-code","origin","refs/heads/main").decode().split()==[head,"refs/heads/main"]
+git("read-tree",head)
+files={}
+forward=[]
+inverse=[]
+for role in ("owner","test"):
+    relative=stage[role]
+    pre=w/(role+".before.py.DATA")
+    post=w/(role+".after.py.DATA")
+    before,after=pre.read_bytes(),post.read_bytes()
+    assert before==git("show",head+":"+relative)
+    assert digest(before)==stage["roles"][relative]["sha256"]
+    assert after==(w/"dataset"/relative).read_bytes()
+    old_ast,new_ast=ast.parse(before),ast.parse(after)
+    if role=="test":
+        assert before+(w/"test-fragment.py.DATA").read_bytes()==after
+        assert [ast.dump(n) for n in old_ast.body]==[ast.dump(n) for n in new_ast.body[:-1]]
+    else:
+        assert [n0.name for n0,n1 in zip(old_ast.body,new_ast.body,strict=True)
+                if ast.dump(n0)!=ast.dump(n1)]==["_reviewed_body"]
+    compile(after,relative,"exec")
+    mode,typ,old,rel=git("ls-tree",head,"--",relative).decode().split()
+    assert (mode,typ,old,rel)==("100644","blob",stage["roles"][relative]["git_blob"],relative)
+    oid=git("hash-object","-w","--stdin",raw=after).decode().strip()
+    git("update-index","--cacheinfo",mode,oid,relative)
+    files[role]={"canonical_path":relative,"mode":mode,"before":{**pin(pre),"git_blob":old},
+                 "after":{**pin(post),"git_blob":oid}}
+    for a,b,parts in ((before,after,forward),(after,before,inverse)):
+        parts.extend(difflib.unified_diff(a.decode().splitlines(keepends=True),b.decode().splitlines(keepends=True),
+            fromfile="a/"+relative,tofile="b/"+relative))
+forward_pin=save("exact-two.forward.patch.DATA","".join(forward).encode())
+inverse_pin=save("exact-two.inverse.patch.DATA","".join(inverse).encode())
+with tempfile.TemporaryDirectory(dir=w) as t:
+    p=Path(t)
+    for role in files.values():
+        path=p/role["canonical_path"]
+        path.parent.mkdir(parents=True,exist_ok=True)
+        path.write_bytes(Path(role["before"]["path"]).read_bytes())
+    for patch, side in ((forward_pin,"after"),(inverse_pin,"before")):
+        subprocess.run(["patch","--batch","--forward","--fuzz=0","-p1","--no-backup-if-mismatch"],
+                       cwd=p,input=Path(patch["path"]).read_bytes(),check=True,capture_output=True,timeout=10)
+        assert all((p/r["canonical_path"]).read_bytes()==Path(r[side]["path"]).read_bytes() for r in files.values())
+tree=git("write-tree").decode().strip()
+git("diff","--cached","--check",head)
+for k in ("name","email"):
+    val=subprocess.check_output(["git","-C",str(w.parents[2]/"repositories/datasets"),"config","--get","user."+k]).decode().strip()
+    env[f"GIT_AUTHOR_{k.upper()}"]=env[f"GIT_COMMITTER_{k.upper()}"]=val
+candidate=git("commit-tree",tree,"-p",head,raw=b"Reject self-referential V2 reviewed governing definitions\n").decode().strip()
+ref="refs/reconciliation/pending-v2-governing-definition-20261127"
+git("update-ref",ref,candidate,"0"*40)
+assert set(git("diff-tree","--no-commit-id","-r","--name-only",head,candidate).decode().splitlines())=={
+    row["canonical_path"] for row in files.values()}
+report={
+    "schema":"phase2-V2-direct-self-reference-fix-on-published-V3-epoch/v1",
+    "current_remote_base":head,"base_tree":stage["tree"],
+    "published_V3_guard_ancestor":"c5a72c90394d86a54cb93cc3a2187da954a2677f",
+    "canonical_source_files":files,"forward_patch":forward_pin,"inverse_patch":inverse_pin,"byte_exact_roundtrip":True,
+    "exact_current_130_Git_fixture_inputs":pin(w/"current-fixture-epoch.json"),
+    "ordinary_qualification":None,"canonical_installation":None,"remote_publication":None,
+    "local_candidate_commit":{"oid":candidate,"tree":tree,"ref":ref,"isolated_store":str(repo),"parent":head},
+    "actual_private_pytest":observed,"same_ordered_V2_roster":identity["green"],"V3_retention_roster":identity["v3-retention"],
+    "profile":{"cpu_slots":1,"CPU_s":55,"wall_s":60,"address_space_bytes":536870912,
+               "retained_runner":pin(w/"existing-runner.py.DATA"),"launcher":pin(w/"run-private-current.py")},
+    "retained_V3_current_Git_source_and_test":{rel:stage["roles"][rel] for rel in (stage["v3_owner"],stage["v3_test"])},
+    "scope":"Fictional admission. V2 self-pin advances; V3 source and prior signed archives are preserved. Fresh V2/V3 fixture commitments regenerated."
+}
+sealed=save("SEALED-current-V2-governing-definition-guard-exact-two.json",
+         (json.dumps(report,indent=2,sort_keys=True)+"\n").encode())
+print(json.dumps(sealed));print(candidate,tree)

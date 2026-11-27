@@ -1,0 +1,60 @@
+{
+  "actual": {
+    "Native_model_network_service": false,
+    "cache_manifest_sha256": "764d77e63decbbc3bdd9a261d1547e582ca09d25a90f661b2cabc435f514a63b",
+    "canonical_Source_body_reads": 0,
+    "errors": 0,
+    "failures": 0,
+    "log": "test_relational_score_abstains_on_ordinary_past_tense_prose (builtins.TestRelationalObligationAssertion.test_relational_score_abstains_on_ordinary_past_tense_prose) ... ok\ntest_relational_score_distinguishes_obligation_from_bare_assertion (builtins.TestRelationalObligationAssertion.test_relational_score_distinguishes_obligation_from_bare_assertion) ... ok\n\n----------------------------------------------------------------------\nRan 2 tests in 0.017s\n\nOK\n",
+    "mode": "candidate",
+    "normal_import_or_current_Source_qualification": false,
+    "private_candidate_pins_sha256": "411b68b663362dd5a9244f6e904de8eeff87f2dac8658638ccd523756662a7ad",
+    "schema": "cached-relational-obligation-inverse-owning-test-cohort/v1",
+    "skipped": 0,
+    "successful": true,
+    "testsRun": 2
+  },
+  "attempts": 1,
+  "descriptor": {
+    "bytes": 4493,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-obligation-inverse-private-72776lwj/two-controls-private-cached-run-input.json",
+    "sha256": "4168fe6a515bb4d6e931154522146dc6cdee5316cadf1323608a79142b9150d1"
+  },
+  "exit_code": 0,
+  "git_revision": "017fb546935826d4e8f13d314395f6053cee4d3f",
+  "implicit_IO_accounting_complete": false,
+  "legal_source_correspondence_or_observation_verified": false,
+  "limits": {
+    "AS_bytes": 536870912,
+    "CPU_timeout_s": 60,
+    "CPUs": 1,
+    "wall_timeout_s": 60
+  },
+  "normal_public_qualification": false,
+  "private_controls_passed": true,
+  "retained_preparation_stop": {
+    "execution_attempted": false,
+    "exit_code": 1,
+    "reason": "literal locator replacement expected double quotes, retained source uses single quotes",
+    "tool_chunk": "ad4173",
+    "verified_inputs_preserved": true
+  },
+  "returned_child_reaped": true,
+  "runner": {
+    "bytes": 7659,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-obligation-inverse-private-72776lwj/existing-harness-two-control-DATA-retarget.py.DATA",
+    "sha256": "5d505e86b2d1f9b508dbc3dc64dc152b229432d17b78d4365ef0200c840ea0c2"
+  },
+  "runner_declared_explicit_cached_input_bytes": 697125,
+  "runner_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "runner_stderr_utf8": "",
+  "runner_stdout_sha256": "e73f336f8f1ad3e7d2d71e4055efcb7975cb7132f7b733ed047c46daa352160a",
+  "runner_stdout_utf8": "{\"Native_model_network_service\": false, \"cache_manifest_sha256\": \"764d77e63decbbc3bdd9a261d1547e582ca09d25a90f661b2cabc435f514a63b\", \"canonical_Source_body_reads\": 0, \"errors\": 0, \"failures\": 0, \"log\": \"test_relational_score_abstains_on_ordinary_past_tense_prose (builtins.TestRelationalObligationAssertion.test_relational_score_abstains_on_ordinary_past_tense_prose) ... ok\\ntest_relational_score_distinguishes_obligation_from_bare_assertion (builtins.TestRelationalObligationAssertion.test_relational_score_distinguishes_obligation_from_bare_assertion) ... ok\\n\\n----------------------------------------------------------------------\\nRan 2 tests in 0.017s\\n\\nOK\\n\", \"mode\": \"candidate\", \"normal_import_or_current_Source_qualification\": false, \"private_candidate_pins_sha256\": \"411b68b663362dd5a9244f6e904de8eeff87f2dac8658638ccd523756662a7ad\", \"schema\": \"cached-relational-obligation-inverse-owning-test-cohort/v1\", \"skipped\": 0, \"successful\": true, \"testsRun\": 2}\n",
+  "schema": "private-actual-two-real-relational-inverse-controls/v1",
+  "selectors": [
+    "test_relational_score_distinguishes_obligation_from_bare_assertion",
+    "test_relational_score_abstains_on_ordinary_past_tense_prose"
+  ],
+  "timed_out": false,
+  "wall_seconds": 0.2654136959463358
+}

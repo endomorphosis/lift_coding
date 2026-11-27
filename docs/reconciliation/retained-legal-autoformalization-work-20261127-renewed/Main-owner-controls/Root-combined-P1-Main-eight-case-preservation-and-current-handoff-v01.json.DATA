@@ -1,0 +1,83 @@
+{
+  "kind": "Main_existing_P1_fix_consumed_by_Root_combined_candidate_handoff",
+  "Root_combined_private_metadata": {
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-accepted-request-and-integer-status-combined-private-IN9OiuMf/inputs.json",
+    "bytes": 21580,
+    "sha256": "19049bf760d4eeb7d90e9675317d39e3a7822c554afb3ea4ec0ab431192ea6e4",
+    "observed_snapshot_only": true
+  },
+  "Root_combined_posts": {
+    "owner": {
+      "bytes": 103838,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-accepted-request-and-integer-status-combined-private-IN9OiuMf/owner.after.py.DATA",
+      "sha256": "c1050ad1ec067fc7f7c8fea08793e872511fe58029e9b1aa89ec90d2cb288313"
+    },
+    "test": {
+      "bytes": 115566,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-accepted-request-and-integer-status-combined-private-IN9OiuMf/test.after.py.DATA",
+      "sha256": "99e00363bbd1ea23d450af0912374fdbf4d30ab3b1802371fb8d237dccbf7da5"
+    }
+  },
+  "Main_preservation": {
+    "evaluator_AST_sha256": "bcfb53a009e486bc20c490cf29acce6b19ef68f0fe20216b1c1ec02899e17745",
+    "matches_Main_sealed_GREEN_evaluator_AST": true,
+    "all_2_Main_test_methods_decorators_and_assertions_exact": true,
+    "original_test_111809_byte_prefix_exact": true,
+    "Main_8_case_IDs_retained_once_each": [
+      "test_lean_malformed_or_failed_exit_status_cannot_establish_proof[False]",
+      "test_lean_malformed_or_failed_exit_status_cannot_establish_proof[0.0]",
+      "test_lean_malformed_or_failed_exit_status_cannot_establish_proof[True]",
+      "test_lean_malformed_or_failed_exit_status_cannot_establish_proof[0]",
+      "test_lean_malformed_or_failed_exit_status_cannot_establish_proof[None]",
+      "test_lean_malformed_or_failed_exit_status_cannot_establish_proof[1]",
+      "test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status[False]",
+      "test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status[0.0]"
+    ],
+    "peer_read_bytes": 230245,
+    "peer_review_scope": "static Main-component preservation only; optional constant AST index omitted AnnAssign, no product mismatch observed"
+  },
+  "combined_private_result": {
+    "readback": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Root-combined-P1-private-output-readback-v01.json",
+      "bytes": 6465,
+      "sha256": "f2a73922b0974e3f2e4f8870fb6b361745cbdc1d6ab62eb07c76b2322adbc7fd"
+    },
+    "before": {
+      "passed": 72,
+      "failed": 9,
+      "errors": 0,
+      "skipped": 0
+    },
+    "after": {
+      "passed": 81,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "functions": 16,
+    "parent_cases": 81,
+    "includes_retained_baseline": 66,
+    "includes_Main_cases": 8,
+    "includes_Root_request_binding_cases": 7,
+    "Root_declared_retained_order_count": 66,
+    "Root_declared_retained_order_matches_actual_subsequence": true,
+    "Root_declared_function_case_counts_match_all_actual_cases": true,
+    "private_scope_only": true
+  },
+  "standalone_Main_artifacts": {
+    "proposal": "sealed-private-P1-integer-exit-status-two-file-proposal-v01.json22366/d645777be1857f3ff9cbf35afb3234ca9b20b244361cc18e3e9c2027d5d4af20",
+    "normal8_DATA": "existing-R2-normal8-literal-selection-and-nonclock-requirements-INERT-v01.json5629/ea97b9e8ef9e28d133934df97ace05a32889bee6ca8a37b836e65296169f83d6",
+    "preserved_immutable": true,
+    "adoption_disposition": "Composition inputs retained. Use actual Root combined posts and complete selected scope for future adoption/qualification; standalone two-file pins describe earlier narrower candidate."
+  },
+  "next_existing_owner_action": "Root retains actual guarded Source adoption/current freeze/ordinary qualification of combined candidate through existing controls. Main owns no source/runtime/foreign handle and starts no competing writer, test run or publication.",
+  "actual_Source_receipt": null,
+  "actual_sdk_admission": null,
+  "actual_selected_clock": null,
+  "actual_ordinary_result": null,
+  "actual_publication": null,
+  "no_Source_Git_SQL_SDK_Native_model_or_ledger_effect_from_this_readback": true,
+  "private_cached_read_bytes_this_proof": 49158,
+  "all_prior_costs_failures_receipts_and_masks_retained": true,
+  "full_eight_phase_goal_complete": false
+}

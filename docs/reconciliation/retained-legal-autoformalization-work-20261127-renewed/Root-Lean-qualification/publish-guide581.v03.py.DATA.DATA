@@ -1,0 +1,105 @@
+"""Publish only the four reconciled Evidence581 documents."""
+from pathlib import Path
+import json,os,sys
+
+here=Path(__file__).resolve().parent
+transport=Path('/tmp/P2-V4-CLI-live-reconciled-ordinary33-publisher-INERT-UHtLMQQb/publish-live-reconciled-cli33.v02.py.DATA')
+raw=transport.read_bytes()
+import hashlib
+assert (len(raw),hashlib.sha256(raw).hexdigest())==(21002,'646f67811f0202f9080f91e11e7a92933475e3718eff84ca7982b24a627d44bd')
+exec(compile(raw.decode().split(chr(10)+'def main():')[0],str(transport),'exec'),globals())
+WORK=here/'guide581-transport'
+ENV['GIT_ALTERNATE_OBJECT_DIRECTORIES'] = '/tmp/lift-origin-main-reconcile-private-A8hmZDEd/root/.git/objects'
+class Repositories:
+    def __truediv__(self,role):
+        return (here.parent if role=='datasets' else Path('/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0'))/role
+CLONES=Repositories()
+
+JOURNAL=WORK/'actual-Guide581-publication-events.jsonl'
+def ref(path,size,digest):
+    return dict(path=path,bytes=size,sha256=digest)
+
+assert __debug__ and len(sys.argv) in (7,8) and sys.argv[7:] in ([],['--publish-released'])
+FREEZE=ref(sys.argv[1],int(sys.argv[2]),sys.argv[3])
+assert Path(FREEZE['path'])==here/'actual-Guide581-four-docs-Source-closed-and-frozen.json'
+CODE=ref(sys.argv[4],int(sys.argv[5]),sys.argv[6])
+assert Path(CODE['path'])==here/'actual-Phase1-lean-json-diagnostics-ordinary99-and-native-three-FF-publication.json'
+doc,code=map(obj,(FREEZE,CODE))
+assert code['schema']=='actual-current-Phase1-lean-json-diagnostics-ordinary99-and-native-live-publication/v1'
+assert doc['terminal_returncode']==code['terminal_returncode']==0 and code['terminal_success']
+assert doc['code_publication']==CODE and doc['ordinary_qualification']==code['qualification'] and doc['native_qualification']==code['native_qualification']
+assert doc['exact_forward_and_inverse_verified']
+q=obj(code['qualification'])
+native=obj(code['native_qualification'])
+assert q['schema']=='actual-live-reconciled-P1-Lean-ordinary99-closed/v1'
+assert q['terminal_returncode']==0 and q['Source_and_resource_and_parent_closed']
+assert q['counts']==dict(tests=99,passed=99,functions=24,failures=0,errors=0,skipped=0)
+assert q['isolated_freeze']==code['exact_local_freeze']
+assert native['cleanup_verified'] and native['native_cases']==2 and native['compiler_rc']==[0,1]
+assert native['version_rc']==native['pytest_case_credit']==0 and native['full_Phase1_complete'] is False
+assert doc['Source_closed'] and doc['module_closed'] and doc['only_four_Git_changes'] and doc['pushed'] is False
+assert doc['evidence_ordinal']==581 and doc['prior_values_preserved']==dict(tasks=24,components=126,evidence_records=580)
+BASE=code['live_main_after']
+LINKS=code['current_gitlinks']
+assert BASE['datasets']==doc['prior_D'] and BASE['accelerate']==doc['A']
+assert rev(CLONES/'datasets','HEAD')==doc['HEAD']
+assert rev(CLONES/'datasets','HEAD^')==BASE['datasets'] and rev(CLONES/'datasets','HEAD^{tree}')==doc['tree']
+assert doc['qualified_A']==code['qualification_A']=='219ba3da0f62f772801d71715e22c506faa21126'
+assert BASE['accelerate']=='e55316f48847b17a8b4041a2da30bcaa0ba6eb90'
+assert rev(CLONES/'accelerate','HEAD')==doc['qualified_A']
+assert snapshot(CLONES/'accelerate'/'.git/index',8*1024**2)[0]==doc['A_index']==code['A_index']
+assert snapshot(CLONES/'datasets'/'.git/index',8*1024**2)[0]==doc['index']
+assert all(not git(CLONES/name,'status','--porcelain=v1','-z','--untracked-files=all') for name in ('datasets','accelerate'))
+old=entries(CLONES/'datasets',BASE['datasets']);new=entries(CLONES/'datasets',doc['HEAD'])
+docs=doc['committed_docs']
+prefix='ipfs_datasets_py/logic/autoformal/docs/'
+assert set(docs)=={prefix+n for n in ('BACKLOG.json','work_catalog.json','HANDOFF.md','TRAINING_HISTORY.md')}
+assert changed(old,new)=={p.encode() for p in docs}
+for path,row in docs.items():
+    assert new[path.encode()]==('100644','blob',row['committed_blob'])
+    assert git(CLONES/'datasets','cat-file','blob',row['committed_blob'])==read(row)
+for role in ('hallucinate','root'):
+    for path,tip in LINKS[role].items():
+        assert entries(CLONES/role,BASE[role])[path.encode()]==('160000','commit',tip)
+assert LINKS['root']['external/ipfs_accelerate']==BASE['accelerate']
+assert entries(CLONES/'hallucinate',BASE['hallucinate'])[b'ipfs_accelerate_py']==('160000','commit',BASE['accelerate'])
+before=primary_snapshot()
+assert before==code['primary_after']
+live_all(BASE)
+if not sys.argv[7:]:
+    print(json.dumps(dict(preflight=True,evidence=581,docs=sorted(docs),candidate=doc['HEAD'],publish_selected=False)));raise SystemExit(0)
+assert not JOURNAL.exists()
+WORK.mkdir(mode=0o700,exist_ok=False)
+append_event(dict(preflight=True,evidence=581,exact_four_documents=sorted(docs),expected_live_main=BASE))
+h=gitlink_commit('hallucinate',{'ipfs_datasets_py':doc['HEAD']},'Update datasets link for legal evidence 581')
+root=gitlink_commit('root',{'external/ipfs_datasets':doc['HEAD'],'hallucinate_app':h},'Update legal autoformalization guide 581 links')
+wanted=dict(datasets=doc['HEAD'],hallucinate=h,root=root,accelerate=BASE['accelerate'])
+seen=BASE
+from_steps=[]
+for role in ('datasets','hallucinate','root'):
+    seen=push(role,wanted[role],seen)
+    from_steps.append(dict(repository=role,before=BASE[role],after=wanted[role],normal_fast_forward=True,push_returncode=0))
+assert seen==wanted and live_all(wanted)==wanted
+assert primary_snapshot()==before
+assert snapshot(CLONES/'datasets'/'.git/index',8*1024**2)[0]==doc['index']
+assert snapshot(CLONES/'accelerate'/'.git/index',8*1024**2)[0]==doc['A_index']==code['A_index']
+assert all(not git(CLONES/role,'status','--porcelain=v1','-z','--untracked-files=all')
+           for role in ('datasets','accelerate'))
+for role,paths in LINKS.items():
+    for path,prior in paths.items():
+        assert entries(CLONES/role,BASE[role])[path.encode()]==('160000','commit',prior)
+        wanted_link=({'ipfs_datasets_py':wanted['datasets']} if role=='hallucinate'
+            else {'external/ipfs_datasets':wanted['datasets'],'hallucinate_app':wanted['hallucinate']})
+        assert entries(CLONES/role,wanted[role])[path.encode()]==('160000','commit',wanted_link.get(path,prior))
+
+record=dict(schema='actual-Guide581-four-docs-live-ordinary99-and-native-three-FF-publication/v1',terminal_returncode=0,
+    evidence_ordinal=581,actual_doc_Source_closed=FREEZE,actual_code_publication=CODE,actual_ordinary99=doc['ordinary_qualification'],
+    actual_native_namespaced2=doc['native_qualification'],
+    live_main_before=BASE,live_main_after=wanted,pushes_in_actual_order=from_steps,only_four_docs=sorted(docs),
+    prior_values_preserved=doc['prior_values_preserved'],shared_checkouts_preserved=True,accelerate_published_head_preserved=True,
+    qualified_physical_A_HEAD=doc['qualified_A'],qualified_physical_A_index=doc['A_index'])
+out=here/'actual-Guide581-four-docs-three-FF-publication.json'
+b=(json.dumps(record,sort_keys=True,indent=2)+chr(10)).encode()
+with out.open('xb') as f:
+    f.write(b);f.flush();os.fsync(f.fileno())
+print(json.dumps(dict(receipt=dict(path=str(out),bytes=len(b),sha256=hashlib.sha256(b).hexdigest()),live_main_after=wanted)))

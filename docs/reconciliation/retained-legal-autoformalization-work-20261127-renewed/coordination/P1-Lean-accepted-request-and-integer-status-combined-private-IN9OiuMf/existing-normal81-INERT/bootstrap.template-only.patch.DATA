@@ -1,0 +1,77 @@
+--- bootstrap.v221.INERT
++++ bootstrap.ordinary81.INERT
+@@ -1,4 +1,4 @@
+-'INERT published-D phase1-lean-outcome66 bootstrap; private adaptation, never qualification.'
++'INERT published-D phase1-lean-request-81 bootstrap; private adaptation, never qualification.'
+ import ast
+ import base64
+ import hashlib
+@@ -36,8 +36,8 @@
+ EXPECTED_MODULES = None
+ MAINTAINED_OWNER_NAMES = ['ipfs_datasets_py.logic.backends.kernel.lean', 'ipfs_datasets_py.logic.backends.kernel.rocq', 'ipfs_datasets_py.logic.backends.kernel.wasm', 'ipfs_datasets_py.logic.backends.process', 'ipfs_datasets_py.logic.backends.results', 'ipfs_datasets_py.logic.ir_core.claims', 'ipfs_datasets_py.logic.ir_core.protocols', 'ipfs_datasets_py.logic.families.models', 'ipfs_datasets_py.logic.backends.resource_admission', 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler']
+ SELECTED_TEST_MODULES = {'tests/integration/logic/backends/test_kernel_backends.py': 'tests.integration.logic.backends.test_kernel_backends'}
+-FUNCTION_SELECTORS = ['tests/integration/logic/backends/test_kernel_backends.py::test_lean_verified_proof_binds_full_kernel_receipt', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_sorry_is_rejected_and_never_proved', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_sorry_can_explicitly_downgrade_authority', 'tests/integration/logic/backends/test_kernel_backends.py::test_unavailable_lean_kernel_never_passes', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_wasm_plane_is_probe_only_and_not_confused_with_native_success', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_binds_expected_goal_policy_and_round_trips_strictly', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_source_only_compilation_cannot_prove_an_opaque_request_obligation', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_precancelled_request_runs_no_identity_or_proof_callbacks', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_inconsistent_evidence', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_fields_from_another_request']
+-EXPECTED_FUNCTION_CASE_COUNTS = {'tests/integration/logic/backends/test_kernel_backends.py::test_lean_verified_proof_binds_full_kernel_receipt': 1, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_sorry_is_rejected_and_never_proved': 1, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_sorry_can_explicitly_downgrade_authority': 1, 'tests/integration/logic/backends/test_kernel_backends.py::test_unavailable_lean_kernel_never_passes': 1, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_wasm_plane_is_probe_only_and_not_confused_with_native_success': 1, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_binds_expected_goal_policy_and_round_trips_strictly': 1, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id': 21, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_source_only_compilation_cannot_prove_an_opaque_request_obligation': 1, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations': 16, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_precancelled_request_runs_no_identity_or_proof_callbacks': 1, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued': 12, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_inconsistent_evidence': 6, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_fields_from_another_request': 3}
++FUNCTION_SELECTORS = ['tests/integration/logic/backends/test_kernel_backends.py::test_lean_verified_proof_binds_full_kernel_receipt', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_sorry_is_rejected_and_never_proved', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_sorry_can_explicitly_downgrade_authority', 'tests/integration/logic/backends/test_kernel_backends.py::test_unavailable_lean_kernel_never_passes', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_wasm_plane_is_probe_only_and_not_confused_with_native_success', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_binds_expected_goal_policy_and_round_trips_strictly', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_source_only_compilation_cannot_prove_an_opaque_request_obligation', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_precancelled_request_runs_no_identity_or_proof_callbacks', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_inconsistent_evidence', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_fields_from_another_request', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_malformed_or_failed_exit_status_cannot_establish_proof', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload']
++EXPECTED_FUNCTION_CASE_COUNTS = {'tests/integration/logic/backends/test_kernel_backends.py::test_lean_verified_proof_binds_full_kernel_receipt': 1, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_sorry_is_rejected_and_never_proved': 1, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_sorry_can_explicitly_downgrade_authority': 1, 'tests/integration/logic/backends/test_kernel_backends.py::test_unavailable_lean_kernel_never_passes': 1, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_wasm_plane_is_probe_only_and_not_confused_with_native_success': 1, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_binds_expected_goal_policy_and_round_trips_strictly': 1, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id': 21, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_source_only_compilation_cannot_prove_an_opaque_request_obligation': 1, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations': 16, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_precancelled_request_runs_no_identity_or_proof_callbacks': 1, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued': 12, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_inconsistent_evidence': 6, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_fields_from_another_request': 3, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_malformed_or_failed_exit_status_cannot_establish_proof': 6, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status': 2, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload': 7}
+ REQUIRED_CANONICAL_CONFTESTS = None
+ PYTEST_INIFILE = None
+ SELECTED_TEST_REWRITE_POLICY = {'cache_policy': 'bypass-read-only-for-selected-owning-test', 'required_compile_and_execution_witness': True, 'rewrite_policy': 'normal-pytest-assertion-rewrite', 'schema': 'selected-test-normal-pytest-source-AST-code-observation/v1', 'selected_test_binding_names': ['tests.integration.logic.backends.test_kernel_backends'], 'unobserved_or_cached_only_route': 'REFUSE'}
+@@ -50,8 +50,8 @@
+ EFFECT_DECISION_REFERENCE = None
+ SOURCE_EPOCH_SHA256 = None
+ SOURCE_EPOCH_RECORD_COUNT = None
+-EXPECTED_ORDERED_CASE_COUNTS = (1, 1, 1, 1, 1, 1, 21, 1, 16, 1, 12, 6, 3)
+-EXPECTED_CASES = 66
++EXPECTED_ORDERED_CASE_COUNTS = (1, 1, 1, 1, 1, 1, 21, 1, 16, 1, 12, 6, 3, 6, 2, 7)
++EXPECTED_CASES = 81
+ if any(value is None for value in (
+     ROOT, ADDITIONAL_A_ROOT, EXPECTED_MODULES, MAINTAINED_OWNER_NAMES,
+     SELECTED_TEST_MODULES, FUNCTION_SELECTORS, EXPECTED_FUNCTION_CASE_COUNTS,
+@@ -61,7 +61,7 @@
+     ADMITTED_IO_PLAN_REFERENCE, EFFECT_DECISION_REFERENCE,
+     SOURCE_EPOCH_SHA256, SOURCE_EPOCH_RECORD_COUNT,
+ )):
+-    raise RuntimeError('INERT phase1-lean-outcome66: actual roots/pins/full9/Source READ/clock/effect decision remain NULL')
++    raise RuntimeError('INERT phase1-lean-request-81: actual roots/pins/full9/Source READ/clock/effect decision remain NULL')
+ 
+ if not sys.dont_write_bytecode:
+     raise RuntimeError("existing -B/no-bytecode invocation required")
+@@ -78,8 +78,8 @@
+     raise RuntimeError("two distinct real Source READ roots required")
+ phase, operation = request["phase"], request["operation"]
+ group_name = request["selection_group"]
+-if phase != 'published-D-phase1-lean-outcome66' or group_name != 'phase1-lean-outcome66' or operation not in {"collect", "run"}:
+-    raise RuntimeError('one explicit phase1-lean-outcome66 phase/group and operation required')
++if phase != 'published-D-phase1-lean-request-81' or group_name != 'phase1-lean-request-81' or operation not in {"collect", "run"}:
++    raise RuntimeError('one explicit phase1-lean-request-81 phase/group and operation required')
+ for key, expected in (
+     ("git_candidate_provenance", GIT_CANDIDATE_PROVENANCE),
+     ("additional_A_provenance", ADDITIONAL_A_PROVENANCE),
+@@ -107,7 +107,7 @@
+ report = {
+     "schema": "published-D-phase2-bridge27-binding/v1",
+     "phase": phase, "operation": operation, "selection_group": group_name,
+-    "qualification_scope": '13 future-bound public functions/66 statically expected cases under frozen published D and additional A READ provenance',
++    "qualification_scope": '16 future-bound public functions/81 statically expected cases under frozen published D and additional A READ provenance',
+     "canonical_application": False, "published_D_Git_READ_application": True,
+     "Source_WRITE_claimed": False,
+     "external_pretrained_asset_loading_requested": False,
+@@ -155,14 +155,14 @@
+ 
+ function_selectors = request["function_selectors"]
+ expected_counts = request["expected_function_case_counts"]
+-if (type(function_selectors) is not list or len(function_selectors) != 13
+-        or len(set(function_selectors)) != 13
++if (type(function_selectors) is not list or len(function_selectors) != 16
++        or len(set(function_selectors)) != 16
+         or any(type(node) is not str or "::" not in node or "[" in node for node in function_selectors)
+         or type(expected_counts) is not dict or set(expected_counts) != set(function_selectors)
+         or any(type(value) is not int for value in expected_counts.values())
+         or tuple(expected_counts[node] for node in function_selectors) != EXPECTED_ORDERED_CASE_COUNTS
+         or sum(expected_counts.values()) != EXPECTED_CASES):
+-    raise RuntimeError('exact ordered13-selector case vector/66 required')
++    raise RuntimeError('exact ordered16-selector case vector/81 required')
+ owning_files = request["owning_files"]
+ if (type(owning_files) is not list or owning_files != list(expected_test_modules)
+         or {node.split("::", 1)[0] for node in function_selectors} != set(owning_files)):

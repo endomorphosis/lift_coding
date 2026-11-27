@@ -1,0 +1,23 @@
+{
+  "all_parent_thread_children": [],
+  "code_boundary": "disk _read at889 raised before ledger write903/entered905/native acquire906 and CLI child launch2390",
+  "exact_command_verified": true,
+  "no_global_storage_or_native_release": true,
+  "no_retry_no_test_no_RED_no_PASS": true,
+  "old_strict_terminal_still_absent": true,
+  "original_genuine_wait_from_owned_parent": true,
+  "original_owner_birth": "453025182",
+  "original_owner_pid": 3186578,
+  "original_reaped_rc": 1,
+  "owned_disk_records_and_scheduler_leases_absent": true,
+  "parent_birth": "453025096",
+  "parent_pid": 3185956,
+  "resource_observation_ref": {
+    "bytes": 3577,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase4-reviewed-lexical-tokenless-private-v01/Root-v95-actual-owned-preopen-resource-observation.json",
+    "sha256": "2a3e4ce1037aee9dde027c41cce007a5e7112b5662eaa9c2648f61aae4f748e5"
+  },
+  "schema": "Root-owned-preentry-refusal-holder-cancellation/v1",
+  "selected_action": "SIGINT only this owned idle Source-holder, then actual owner wait and OS-lock release verification",
+  "selected_at_utc_ns": "1795512878940856291"
+}

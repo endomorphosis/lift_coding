@@ -1,0 +1,24 @@
+{
+  "increment": {
+    "bytes": 440,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/mappingproxy-correction.forward.diff",
+    "sha256": "23bf63cb013d66e412461529e4810993ab96b02a98562d3a0cfb4d695a0773df"
+  },
+  "only_delta": "response.result.to_dict() -> dict(response.result)",
+  "overlay": {
+    "bytes": 350,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/same-consumer-v02-overlay.json",
+    "sha256": "843d9cc96eb21b3565589bbb64e7a42de29256e5cd11a07c1d65ba442b1a135a"
+  },
+  "post": {
+    "bytes": 69860,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/legal_ir_proof_feedback.after-v02.py.DATA",
+    "sha256": "7c575350ee3152b77a4374a1358b0973c3efefdfd69f4955129aae736deec7dd"
+  },
+  "prior_positive_RED_preserved": true,
+  "projection": {
+    "bytes": 64423,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/checked-positive-SAME-GREEN-projection.json",
+    "sha256": "f9b7ec18a4f96d8d78e08d7a864e62007dff9f3a53fd3f9329f91c04f9fd4101"
+  }
+}

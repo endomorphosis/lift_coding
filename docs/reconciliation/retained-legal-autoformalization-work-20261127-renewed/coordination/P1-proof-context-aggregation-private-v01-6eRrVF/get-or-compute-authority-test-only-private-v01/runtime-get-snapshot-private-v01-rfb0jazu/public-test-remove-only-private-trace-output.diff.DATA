@@ -1,0 +1,21 @@
+--- private-probe-3beb
++++ final-public-test
+@@ -1828,7 +1828,6 @@
+ 
+ # Deterministic test-only interleaving: lookup result is real and returned unchanged.
+ _GET_SNAPSHOT_TRACE = []
+-_GET_SNAPSHOT_TRACE_WRITTEN_BYTES = 0
+ 
+ @pytest.mark.parametrize("change", ["none", "equivalent-put", "invalidate", "result-authority", "trust-ceiling"])
+ def test_unified_get_eligibility_snapshot_after_actual_lookup(change, monkeypatch):
+@@ -1885,10 +1884,6 @@
+         "requested_key_digest": initial.key.digest,
+     }
+     _GET_SNAPSHOT_TRACE.append(row)
+-    global _GET_SNAPSHOT_TRACE_WRITTEN_BYTES
+-    encoded = (json.dumps(_GET_SNAPSHOT_TRACE, sort_keys=True, indent=2) + "\n").encode()
+-    Path(__file__).with_name("get-snapshot-trace.json").write_bytes(encoded)
+-    _GET_SNAPSHOT_TRACE_WRITTEN_BYTES += len(encoded)
+     if change == "result-authority":
+         assert after.usable is False and after.reason is reasons.AUTHORITY_MISMATCH
+     elif change == "trust-ceiling":

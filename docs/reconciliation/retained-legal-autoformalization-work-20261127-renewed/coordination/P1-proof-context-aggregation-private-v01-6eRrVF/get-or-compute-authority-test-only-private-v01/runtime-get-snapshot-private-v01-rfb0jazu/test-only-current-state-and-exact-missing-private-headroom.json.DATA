@@ -1,0 +1,69 @@
+{
+  "actual_case_scope": "5 fixture failures before replacement: get() explicitly forwards legitimate unused None policy defaults; these are not product RED results.",
+  "actual_exit": 1,
+  "actual_first_cohort": {
+    "XML": {
+      "bytes": 5524,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-get-snapshot-private-v01-rfb0jazu/actual-get-snapshot5/junit.xml",
+      "sha256": "9fdf8dc45e79c36732cdf6691a944a9f8ae73dcbcc39087f11cc990bff91bd16"
+    },
+    "actual_parents": 5,
+    "actual_runtime_cached_read_bytes": 3213729,
+    "case_names": [
+      "test_unified_get_eligibility_snapshot_after_actual_lookup[none]",
+      "test_unified_get_eligibility_snapshot_after_actual_lookup[equivalent-put]",
+      "test_unified_get_eligibility_snapshot_after_actual_lookup[invalidate]",
+      "test_unified_get_eligibility_snapshot_after_actual_lookup[result-authority]",
+      "test_unified_get_eligibility_snapshot_after_actual_lookup[trust-ceiling]"
+    ],
+    "control": {
+      "bytes": 26843,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-get-snapshot-private-v01-rfb0jazu/actual-get-snapshot5/run-control.json",
+      "sha256": "70e59b614c2775ce1d5e9f2ed8f3e42efd136ac99d22556a5df59638c1a1710b"
+    },
+    "denied_effects": [],
+    "errors": 0,
+    "exit": 1,
+    "failures": 5,
+    "own_output_readback_bytes": 32367,
+    "retained_imports": 56,
+    "skips": 0
+  },
+  "actual_session": 75458,
+  "all_prior_failed_prep_and_runtime_reads_retained": true,
+  "cached_before_new_artifact_readback": 3901968,
+  "corrected_change": "expected kwargs includes None for require_result_authority/max_evidence_authority/max_trust_level before caller overrides; final policy assertions unchanged",
+  "corrected_fragment_UNRUN": {
+    "bytes": 4341,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-get-snapshot-private-v01-rfb0jazu/get-snapshot-corrected-kwargs-fragment-UNRUN.py.DATA",
+    "sha256": "9cfc3ab78f06fce761eadd54cc12c681011b1753c542c0dfdd6d300242f286ec"
+  },
+  "current_limit": 4194304,
+  "estimated_remaining_inputs": "~0.21MB preparation/readbacks +~3.214MB one fresh guarded cohort +<64KB saved evidence",
+  "existing_runner": {
+    "bytes": 12384,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-get-snapshot-private-v01-rfb0jazu/run_get_snapshot_existing_confined.py",
+    "sha256": "716bbf10f880bd58dd9bbbccdf579acfb35690d1bdb7750da58e8cad9ca10267"
+  },
+  "no_Source_Git_SQL_SDK_Native_model_RPC": true,
+  "no_live_owned_handle": true,
+  "original_fixture": {
+    "bytes": 97758,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-get-snapshot-private-v01-rfb0jazu/test_proof_cache.ceiling-diagnostic.py.DATA",
+    "sha256": "e5d06473bb7f1097b35d2b180505ae2c9f484fcac8ab593f21069dfb5601c470"
+  },
+  "original_fragment": {
+    "bytes": 4250,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-get-snapshot-private-v01-rfb0jazu/get-snapshot-five-test-only-fragment.py.DATA",
+    "sha256": "73d23faabb6bd4bd2c79cea3ee5cf1111cfa0fa3de2f85c6357618932cb3edf4"
+  },
+  "requested_same_phase_total_limit": 8388608,
+  "schema": "test-only-get-snapshot-fixture-correction-awaiting-headroom/v1",
+  "source_product_changed": false,
+  "status": "PRIVATE GET DEFECT UNPROVEN; CORRECTED FIXTURE UNRUN",
+  "unchanged_owner_map": {
+    "bytes": 1010,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/get-or-compute-authority-test-only-private-v01/runtime-get-snapshot-private-v01-rfb0jazu/captured-current-code-map.json",
+    "sha256": "23f3af6e9807753bc2aee2b2a6d852edd28850a288857d50c389ea7546b7ae67"
+  }
+}

@@ -1,0 +1,51 @@
+
+
+class _EventResolverFailureRepo(_EventRepo):
+    resolution_error = None
+    def release_dependency_satisfied_blocks(self):
+        if self.resolution_error is not None:
+            assert self.in_readonly_session is False
+            self.release_calls += 1
+            raise self.resolution_error
+        return super().release_dependency_satisfied_blocks()
+
+
+def test_event_resolution_failure_keeps_the_attempt_cooldown_spent():
+    repo = _EventResolverFailureRepo((_blocked("LAW-RESOLUTION-FAILURE"),))
+    owner = BoardStallWatchdog()
+    with _event_clock():
+        owner.tick(repo, operator_hold_present=True)
+        signatures = set(owner._idle_signatures)
+        repo.watermark = 1
+        repo.resolution_error = ValueError("fictional metadata failure")
+        failed = owner.tick(repo, operator_hold_present=True)
+        assert failed["action"] == "release_failed" and failed["error"] == "ValueError"
+        assert repo.release_calls == 3
+        repeated = owner.tick(repo, operator_hold_present=True)
+        repo.watermark = None
+        unknown = owner.tick(repo, operator_hold_present=True)
+    assert repeated["action"] == unknown["action"] == "stall_recorded"
+    assert repo.release_calls == 3 and owner._idle_signatures == signatures
+    _event_recheck_fence(failed)
+    _event_recheck_fence(repeated)
+
+
+def test_event_lock_failure_preserves_identity_and_attempt_cooldown():
+    repo = _EventResolverFailureRepo((_blocked("LAW-LOCK-FAILURE"),))
+    owner = BoardStallWatchdog()
+    error = RuntimeError("database is locked")
+    with _event_clock():
+        owner.tick(repo, operator_hold_present=True)
+        signatures = set(owner._idle_signatures)
+        repo.watermark = 1
+        repo.resolution_error = error
+        try:
+            owner.tick(repo, operator_hold_present=True)
+        except RuntimeError as caught:
+            assert caught is error
+        else:
+            raise AssertionError("the existing lock exception must propagate unchanged")
+        repeated = owner.tick(repo, operator_hold_present=True)
+    assert repeated["action"] == "stall_recorded"
+    assert repo.release_calls == 3 and owner._idle_signatures == signatures
+    _event_recheck_fence(repeated)

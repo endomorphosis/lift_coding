@@ -1,0 +1,431 @@
+{
+  "accepted": true,
+  "evidence_path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-benchmark-facets-through-final-compiler-private-cVjxPbQ5/candidate/pytest/test_external_validity_cli_che0/external-validity.json",
+  "evidence_sha256": "ad4fd39fe64efd0eb76b0347ec2e87e1c00df563bb806b1f67de9a160962de05",
+  "failures": [],
+  "metrics": {
+    "bindings": {
+      "compiler_commit": {
+        "canonical": "compiler-external-validity",
+        "sources": {
+          "evidence_bindings": "compiler-external-validity",
+          "external_benchmark_scores": "compiler-external-validity",
+          "fuzzing": "compiler-external-validity",
+          "hard_negatives": "compiler-external-validity",
+          "leak_free_splits": "compiler-external-validity",
+          "multi_seed_statistics": "compiler-external-validity",
+          "poisoning_defenses": "compiler-external-validity",
+          "rollback_readiness": "compiler-external-validity",
+          "schema_compatibility": "compiler-external-validity",
+          "semantic_metrics": "compiler-external-validity",
+          "typed_decoding": "compiler-external-validity",
+          "uncertainty": "compiler-external-validity"
+        }
+      },
+      "fixed_canary_id": {
+        "canonical": "fixed-canary-external-validity",
+        "sources": {
+          "evidence_bindings": "fixed-canary-external-validity",
+          "external_benchmark_scores": "fixed-canary-external-validity",
+          "fuzzing": "fixed-canary-external-validity",
+          "hard_negatives": "fixed-canary-external-validity",
+          "leak_free_splits": "fixed-canary-external-validity",
+          "multi_seed_statistics": "fixed-canary-external-validity",
+          "poisoning_defenses": "fixed-canary-external-validity",
+          "rollback_readiness": "fixed-canary-external-validity",
+          "schema_compatibility": "fixed-canary-external-validity",
+          "semantic_metrics": "fixed-canary-external-validity",
+          "typed_decoding": "fixed-canary-external-validity",
+          "uncertainty": "fixed-canary-external-validity"
+        }
+      },
+      "promotion_id": {
+        "canonical": "promotion-external-validity",
+        "sources": {
+          "evidence_bindings": "promotion-external-validity",
+          "external_benchmark_scores": "promotion-external-validity",
+          "fuzzing": "promotion-external-validity",
+          "hard_negatives": "promotion-external-validity",
+          "leak_free_splits": "promotion-external-validity",
+          "multi_seed_statistics": "promotion-external-validity",
+          "poisoning_defenses": "promotion-external-validity",
+          "rollback_readiness": "promotion-external-validity",
+          "schema_compatibility": "promotion-external-validity",
+          "semantic_metrics": "promotion-external-validity",
+          "typed_decoding": "promotion-external-validity",
+          "uncertainty": "promotion-external-validity"
+        }
+      },
+      "source_export_id": {
+        "canonical": "learned-export-external-validity",
+        "sources": {
+          "evidence_bindings": "learned-export-external-validity",
+          "external_benchmark_scores": "learned-export-external-validity",
+          "fuzzing": "learned-export-external-validity",
+          "hard_negatives": "learned-export-external-validity",
+          "leak_free_splits": "learned-export-external-validity",
+          "multi_seed_statistics": "learned-export-external-validity",
+          "poisoning_defenses": "learned-export-external-validity",
+          "rollback_readiness": "learned-export-external-validity",
+          "schema_compatibility": "learned-export-external-validity",
+          "semantic_metrics": "learned-export-external-validity",
+          "typed_decoding": "learned-export-external-validity",
+          "uncertainty": "learned-export-external-validity"
+        }
+      },
+      "split_manifest_digest": {
+        "canonical": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "sources": {
+          "evidence_bindings": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "external_benchmark_scores": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "fuzzing": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "hard_negatives": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "leak_free_splits": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "multi_seed_statistics": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "poisoning_defenses": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "rollback_readiness": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "schema_compatibility": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "semantic_metrics": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "typed_decoding": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "uncertainty": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      }
+    },
+    "domain_status": {
+      "external_benchmark_scores": true,
+      "fuzzing": true,
+      "hard_negatives": true,
+      "leak_free_splits": true,
+      "multi_seed_statistics": true,
+      "poisoning_defenses": true,
+      "rollback_readiness": true,
+      "schema_compatibility": true,
+      "semantic_metrics": true,
+      "typed_decoding": true,
+      "uncertainty": true
+    },
+    "evidence_complete": true,
+    "evidence_domains": {
+      "external_benchmark_scores": {
+        "evidence_path": "evidence.external_benchmark_scores",
+        "external_validity_score": 1.0,
+        "failed_packet_ids": [],
+        "packet_count": 2,
+        "packet_results_reconciled": true,
+        "present": true,
+        "schema_version": "legal-ir-external-benchmark-report-v1",
+        "separate_from_internal_canary_metrics": true
+      },
+      "fuzzing": {
+        "evidence_path": "evidence.fuzzing",
+        "failed_mutation_ids": [],
+        "mutation_count": 4.0,
+        "present": true,
+        "schema_version": "legal-ir-metamorphic-differential-fuzzing-v1",
+        "trusted_negative_count": 2.0
+      },
+      "hard_negatives": {
+        "evidence_path": "evidence.hard_negatives",
+        "false_positive_reduction": 0.12,
+        "negative_example_count": 8.0,
+        "present": true,
+        "schema_version": "legal-ir-hard-negative-effect-v1",
+        "trusted_positive_count": 5.0
+      },
+      "leak_free_splits": {
+        "evidence_path": "evidence.leak_free_splits",
+        "leakage_count": 0.0,
+        "present": true,
+        "schema_version": "legal-ir-eval-splits-v1",
+        "violations_count": 0
+      },
+      "multi_seed_statistics": {
+        "accepted": true,
+        "evidence_path": "evidence.multi_seed_statistics",
+        "metrics": {
+          "compiler_commit": "compiler-external-validity",
+          "confidence_level": 0.95,
+          "failure_family_attribution": {
+            "none": 24
+          },
+          "min_seed_count": 3,
+          "multi_seed_evidence_path": "",
+          "multi_seed_evidence_present": true,
+          "multi_seed_metrics": {
+            "accepted_patch_rate": {
+              "confidence_interval": {
+                "level": 0.95,
+                "lower": 0.0481815,
+                "upper": 0.0593185
+              },
+              "direction": "higher",
+              "effect_size": 0.05375,
+              "effects": [
+                0.05,
+                0.055,
+                0.052,
+                0.058
+              ],
+              "failure_family_attribution": {
+                "none": 4
+              },
+              "minimum_effect": 0.01,
+              "sample_count": 4,
+              "seed_set": [
+                "101",
+                "103",
+                "107",
+                "109"
+              ],
+              "standard_error": 0.00175,
+              "variance": 1.225e-05
+            },
+            "deterministic_compiler_quality": {
+              "confidence_interval": {
+                "level": 0.95,
+                "lower": 0.0481815,
+                "upper": 0.0593185
+              },
+              "direction": "higher",
+              "effect_size": 0.05375,
+              "effects": [
+                0.05,
+                0.055,
+                0.052,
+                0.058
+              ],
+              "failure_family_attribution": {
+                "none": 4
+              },
+              "minimum_effect": 0.01,
+              "sample_count": 4,
+              "seed_set": [
+                "101",
+                "103",
+                "107",
+                "109"
+              ],
+              "standard_error": 0.00175,
+              "variance": 1.225e-05
+            },
+            "hard_negative_performance": {
+              "confidence_interval": {
+                "level": 0.95,
+                "lower": 0.0481815,
+                "upper": 0.0593185
+              },
+              "direction": "higher",
+              "effect_size": 0.05375,
+              "effects": [
+                0.05,
+                0.055,
+                0.052,
+                0.058
+              ],
+              "failure_family_attribution": {
+                "none": 4
+              },
+              "minimum_effect": 0.01,
+              "sample_count": 4,
+              "seed_set": [
+                "101",
+                "103",
+                "107",
+                "109"
+              ],
+              "standard_error": 0.00175,
+              "variance": 1.225e-05
+            },
+            "learned_quality": {
+              "confidence_interval": {
+                "level": 0.95,
+                "lower": 0.0481815,
+                "upper": 0.0593185
+              },
+              "direction": "higher",
+              "effect_size": 0.05375,
+              "effects": [
+                0.05,
+                0.055,
+                0.052,
+                0.058
+              ],
+              "failure_family_attribution": {
+                "none": 4
+              },
+              "minimum_effect": 0.01,
+              "sample_count": 4,
+              "seed_set": [
+                "101",
+                "103",
+                "107",
+                "109"
+              ],
+              "standard_error": 0.00175,
+              "variance": 1.225e-05
+            },
+            "proof_validity": {
+              "confidence_interval": {
+                "level": 0.95,
+                "lower": 0.0481815,
+                "upper": 0.0593185
+              },
+              "direction": "higher",
+              "effect_size": 0.05375,
+              "effects": [
+                0.05,
+                0.055,
+                0.052,
+                0.058
+              ],
+              "failure_family_attribution": {
+                "none": 4
+              },
+              "minimum_effect": 0.01,
+              "sample_count": 4,
+              "seed_set": [
+                "101",
+                "103",
+                "107",
+                "109"
+              ],
+              "standard_error": 0.00175,
+              "variance": 1.225e-05
+            },
+            "semantic_equivalence": {
+              "confidence_interval": {
+                "level": 0.95,
+                "lower": 0.0481815,
+                "upper": 0.0593185
+              },
+              "direction": "higher",
+              "effect_size": 0.05375,
+              "effects": [
+                0.05,
+                0.055,
+                0.052,
+                0.058
+              ],
+              "failure_family_attribution": {
+                "none": 4
+              },
+              "minimum_effect": 0.01,
+              "sample_count": 4,
+              "seed_set": [
+                "101",
+                "103",
+                "107",
+                "109"
+              ],
+              "standard_error": 0.00175,
+              "variance": 1.225e-05
+            }
+          },
+          "promotion_id": "promotion-external-validity",
+          "required_metrics": [
+            "learned_quality",
+            "deterministic_compiler_quality",
+            "semantic_equivalence",
+            "proof_validity",
+            "hard_negative_performance",
+            "accepted_patch_rate"
+          ],
+          "schema_version": "legal-ir-hammer-leanstral-multi-seed-promotion-v1",
+          "seed_set": [
+            "101",
+            "103",
+            "107",
+            "109"
+          ]
+        },
+        "present": true,
+        "schema_version": "legal-ir-hammer-leanstral-multi-seed-promotion-v1"
+      },
+      "poisoning_defenses": {
+        "evidence_path": "evidence.poisoning_defenses",
+        "hard_rule": "legal_source_text_is_data_not_instructions",
+        "present": true,
+        "rejected_count": 3.0,
+        "schema_version": "legal-ir-premise-security-v1",
+        "tested_poisoning_families": [
+          "prompt",
+          "premise"
+        ]
+      },
+      "rollback_readiness": {
+        "accepted": true,
+        "disable_action": "remove_promoted_guidance_records",
+        "evidence_path": "evidence.rollback_readiness",
+        "present": true,
+        "restorable": true,
+        "rollback_id": "rollback-external-validity",
+        "rollback_required": false,
+        "schema_version": "legal-ir-drift-monitor-v1",
+        "status": "stable"
+      },
+      "schema_compatibility": {
+        "compatibility": "compatible",
+        "evidence_path": "evidence.schema_compatibility",
+        "issue_count": 0,
+        "present": true,
+        "reusable": true,
+        "schema_version": "legal-ir-view-family-metric-v1",
+        "schema_version_id": "legal-ir-schema-evolution-v1"
+      },
+      "semantic_metrics": {
+        "evidence_path": "evidence.semantic_metrics",
+        "present": true,
+        "schema_version": "legal-ir-semantic-equivalence-metrics-v1",
+        "scores": {
+          "counterexample_equivalence": 1.0,
+          "decompiler_round_trip_preservation": 1.0,
+          "graph_isomorphism": 1.0,
+          "obligation_equivalence": 1.0,
+          "proof_obligation_delta_score": 1.0,
+          "structural_equivalence": 1.0,
+          "temporal_window_agreement": 1.0
+        }
+      },
+      "typed_decoding": {
+        "evidence_path": "evidence.typed_decoding",
+        "present": true,
+        "rejection_count": 0.0,
+        "schema_version": "legal-ir-typed-grammar-decoder-v1",
+        "source_copy_penalty": 0.0,
+        "success_rate": 1.0
+      },
+      "uncertainty": {
+        "block_reasons": [],
+        "evidence_path": "evidence.uncertainty",
+        "failed_families": [],
+        "present": true,
+        "schema_version": "legal-ir-uncertainty-v1",
+        "unsupported_guidance_ids": []
+      }
+    },
+    "input_schema_version": "legal-ir-hammer-leanstral-external-validity-promotion-v1",
+    "required_binding_fields": [
+      "promotion_id",
+      "compiler_commit",
+      "source_export_id",
+      "fixed_canary_id",
+      "split_manifest_digest"
+    ],
+    "required_domains": [
+      "leak_free_splits",
+      "semantic_metrics",
+      "typed_decoding",
+      "uncertainty",
+      "fuzzing",
+      "hard_negatives",
+      "multi_seed_statistics",
+      "schema_compatibility",
+      "poisoning_defenses",
+      "external_benchmark_scores",
+      "rollback_readiness"
+    ],
+    "schema_version": "legal-ir-hammer-leanstral-external-validity-promotion-v1"
+  },
+  "schema_version": "legal-ir-hammer-leanstral-external-validity-promotion-v1",
+  "warnings": []
+}

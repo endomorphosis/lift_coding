@@ -1,0 +1,15 @@
+{
+  "schema": "Main-existing-Source-authority-provenance-relay/v1",
+  "scope": "Provenance relay to existing Root owner, no Main cap/ledger change and no new runtime authority.",
+  "bindings": {
+    "Root_selected": true,
+    "message_path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/existing-coordinator-source-authority-relay-once-v01/message.txt",
+    "message_bytes": 868,
+    "message_sha256": "c5a8c43b002a1e238d56a2a86acaa9d8920be886ed173d614faf58648b677e86",
+    "private_root": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/existing-coordinator-source-authority-relay-once-v01",
+    "message_artifact_path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/existing-coordinator-source-authority-relay-once-v01/retained-message.json",
+    "unknown_reservation_path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/existing-coordinator-source-authority-relay-once-v01/unknown-before-mutation.json",
+    "sender_receipt_path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/existing-coordinator-source-authority-relay-once-v01/sender-receipt.json",
+    "result_path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/existing-coordinator-source-authority-relay-once-v01/result.json"
+  }
+}

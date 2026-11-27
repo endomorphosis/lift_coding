@@ -1,0 +1,78 @@
+--- bootstrap.old
++++ bootstrap.28
+@@ -1,4 +1,4 @@
+-'INERT frozen-local-D phase2-retained-type-current-review-metadata-ordinary25 bootstrap; private adaptation, never qualification.'
++'INERT frozen-local-D phase2-retained-type-component-evidence-ordinary28 bootstrap; private adaptation, never qualification.'
+ import ast
+ import base64
+ import hashlib
+@@ -36,13 +36,13 @@
+ EXPECTED_MODULES = None
+ MAINTAINED_OWNER_NAMES = ['ipfs_datasets_py.logic.autoformal.legal_corpus_definition_use_preservation_elaboration_v2', 'ipfs_datasets_py.logic.autoformal.legal_corpus_definition_use_preservation_elaboration_native_v2']
+ SELECTED_TEST_MODULES = {'tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py': 'tests.unit.logic.autoformal.test_legal_corpus_definition_use_preservation_elaboration_v2'}
+-FUNCTION_SELECTORS = ['tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_preserves_exact_retained_provenance', 'tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations', 'tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_malformed_current_review_observation']
+-EXPECTED_FUNCTION_CASE_COUNTS = {'tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_preserves_exact_retained_provenance': 2, 'tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations': 15, 'tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_malformed_current_review_observation': 8}
++FUNCTION_SELECTORS = ['tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_preserves_exact_retained_provenance', 'tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations', 'tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_malformed_current_review_observation', 'tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_requires_the_matching_component_evidence']
++EXPECTED_FUNCTION_CASE_COUNTS = {'tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_preserves_exact_retained_provenance': 2, 'tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_cross_release_and_repinned_mutations': 15, 'tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_refuses_malformed_current_review_observation': 8, 'tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py::test_checked_release_type_capture_requires_the_matching_component_evidence': 3}
+ REQUIRED_CANONICAL_CONFTESTS = None
+ PYTEST_INIFILE = None
+ SELECTED_TEST_REWRITE_POLICY = {'cache_policy': 'bypass-read-only-for-selected-owning-test', 'required_compile_and_execution_witness': True, 'rewrite_policy': 'normal-pytest-assertion-rewrite', 'schema': 'selected-test-normal-pytest-source-AST-code-observation/v1', 'selected_test_binding_names': ['tests.unit.logic.autoformal.test_legal_corpus_definition_use_preservation_elaboration_v2'], 'unobserved_or_cached_only_route': 'REFUSE'}
+ ROOT_RUNTIME_SELECTION = None
+-MAINTAINED_OWNER_VISIBILITY_POLICY = {'early_absence': 'record-not-loaded', 'force_imports': False, 'lazy_owner_names': ['ipfs_datasets_py.logic.autoformal.legal_corpus_definition_use_preservation_elaboration_v2', 'ipfs_datasets_py.logic.autoformal.legal_corpus_definition_use_preservation_elaboration_native_v2'], 'run_terminal': 'require-loaded-and-compiled', 'schema': 'phase6-existing-modern-lazy-owner-visibility/v1', 'selection_group': 'phase2-retained-type-current-review-metadata-ordinary25'}
++MAINTAINED_OWNER_VISIBILITY_POLICY = {'early_absence': 'record-not-loaded', 'force_imports': False, 'lazy_owner_names': ['ipfs_datasets_py.logic.autoformal.legal_corpus_definition_use_preservation_elaboration_v2', 'ipfs_datasets_py.logic.autoformal.legal_corpus_definition_use_preservation_elaboration_native_v2'], 'run_terminal': 'require-loaded-and-compiled', 'schema': 'phase6-existing-modern-lazy-owner-visibility/v1', 'selection_group': 'phase2-retained-type-component-evidence-ordinary28'}
+ MAINTAINED_OWNER_VISIBILITY_POLICY_REFERENCE = {'path': '/tmp/P2-retained-type-review-UTC-SHA-existing-v528-ordinary25-INERT-oum3k0s9/v528-no-force-owner-policy-ordinary25.json', 'bytes': 490, 'sha256': 'c8887700a33e7c0851fe856415160f8d8cd001fab8e95c7c156176dcee1d4510'}
+ GIT_CANDIDATE_PROVENANCE = None
+ ADDITIONAL_A_PROVENANCE = None
+@@ -52,10 +52,10 @@
+ EFFECT_DECISION_REFERENCE = None
+ SOURCE_EPOCH_SHA256 = None
+ SOURCE_EPOCH_RECORD_COUNT = None
+-EXPECTED_ORDERED_CASE_COUNTS = (2, 15, 8)
+-EXPECTED_CASES = 25
++EXPECTED_ORDERED_CASE_COUNTS = (2, 15, 8, 3)
++EXPECTED_CASES = 28
+ if any((value is None for value in (ROOT, ADDITIONAL_A_ROOT, EXPECTED_MODULES, MAINTAINED_OWNER_NAMES, SELECTED_TEST_MODULES, FUNCTION_SELECTORS, EXPECTED_FUNCTION_CASE_COUNTS, REQUIRED_CANONICAL_CONFTESTS, PYTEST_INIFILE, SELECTED_TEST_REWRITE_POLICY, ROOT_RUNTIME_SELECTION, GIT_CANDIDATE_PROVENANCE, ADDITIONAL_A_PROVENANCE, BINDING_MANIFEST_REFERENCE, SOURCE_READ_BINDING_REFERENCE, ADMITTED_IO_PLAN_REFERENCE, EFFECT_DECISION_REFERENCE, SOURCE_EPOCH_SHA256, SOURCE_EPOCH_RECORD_COUNT))):
+-    raise RuntimeError('INERT phase2-retained-type-current-review-metadata-ordinary25: actual roots/pins/full9/Source READ/clock/effect decision remain NULL')
++    raise RuntimeError('INERT phase2-retained-type-component-evidence-ordinary28: actual roots/pins/full9/Source READ/clock/effect decision remain NULL')
+ if not sys.dont_write_bytecode:
+     raise RuntimeError('existing -B/no-bytecode invocation required')
+ 
+@@ -64,7 +64,7 @@
+         return ()
+     expected_names = ['ipfs_datasets_py.logic.autoformal.legal_corpus_definition_use_preservation_elaboration_v2', 'ipfs_datasets_py.logic.autoformal.legal_corpus_definition_use_preservation_elaboration_native_v2']
+     expected_tests = {'tests/unit/logic/autoformal/test_legal_corpus_definition_use_preservation_elaboration_v2.py': 'tests.unit.logic.autoformal.test_legal_corpus_definition_use_preservation_elaboration_v2'}
+-    expected = {'early_absence': 'record-not-loaded', 'force_imports': False, 'lazy_owner_names': ['ipfs_datasets_py.logic.autoformal.legal_corpus_definition_use_preservation_elaboration_v2', 'ipfs_datasets_py.logic.autoformal.legal_corpus_definition_use_preservation_elaboration_native_v2'], 'run_terminal': 'require-loaded-and-compiled', 'schema': 'phase6-existing-modern-lazy-owner-visibility/v1', 'selection_group': 'phase2-retained-type-current-review-metadata-ordinary25'}
++    expected = {'early_absence': 'record-not-loaded', 'force_imports': False, 'lazy_owner_names': ['ipfs_datasets_py.logic.autoformal.legal_corpus_definition_use_preservation_elaboration_v2', 'ipfs_datasets_py.logic.autoformal.legal_corpus_definition_use_preservation_elaboration_native_v2'], 'run_terminal': 'require-loaded-and-compiled', 'schema': 'phase6-existing-modern-lazy-owner-visibility/v1', 'selection_group': 'phase2-retained-type-component-evidence-ordinary28'}
+     if type(policy) is not dict or set(policy) != set(expected) or policy != expected or (type(policy['force_imports']) is not bool) or (policy['force_imports'] is not False) or (type(policy['lazy_owner_names']) is not list) or (names != expected_names) or (tests != expected_tests) or (group != expected['selection_group']):
+         raise RuntimeError('unknown or out-of-scope maintained-owner visibility policy')
+     return tuple(expected_names)
+@@ -79,15 +79,15 @@
+     raise RuntimeError('two distinct real Source READ roots required')
+ phase, operation = (request['phase'], request['operation'])
+ group_name = request['selection_group']
+-if phase != 'frozen-local-D-phase2-retained-type-current-review-metadata-ordinary25' or group_name != 'phase2-retained-type-current-review-metadata-ordinary25' or operation not in {'collect', 'run'}:
+-    raise RuntimeError('one explicit phase2-retained-type-current-review-metadata-ordinary25 phase/group and operation required')
++if phase != 'frozen-local-D-phase2-retained-type-component-evidence-ordinary28' or group_name != 'phase2-retained-type-component-evidence-ordinary28' or operation not in {'collect', 'run'}:
++    raise RuntimeError('one explicit phase2-retained-type-component-evidence-ordinary28 phase/group and operation required')
+ for key, expected in (('git_candidate_provenance', GIT_CANDIDATE_PROVENANCE), ('additional_A_provenance', ADDITIONAL_A_PROVENANCE), ('binding_manifest_reference', BINDING_MANIFEST_REFERENCE), ('source_read_binding_reference', SOURCE_READ_BINDING_REFERENCE), ('admitted_io_plan_reference', ADMITTED_IO_PLAN_REFERENCE), ('effect_decision_reference', EFFECT_DECISION_REFERENCE), ('modules', EXPECTED_MODULES), ('maintained_owner_names', MAINTAINED_OWNER_NAMES), ('selected_test_modules', SELECTED_TEST_MODULES), ('function_selectors', FUNCTION_SELECTORS), ('expected_function_case_counts', EXPECTED_FUNCTION_CASE_COUNTS), ('required_canonical_conftests', REQUIRED_CANONICAL_CONFTESTS), ('pytest_inifile', PYTEST_INIFILE), ('selected_test_rewrite_policy', SELECTED_TEST_REWRITE_POLICY)):
+     if request[key] != expected:
+         raise RuntimeError('closed Root binding differs: ' + key)
+ pytest_inifile = Path(request['pytest_inifile'])
+ if not pytest_inifile.is_absolute() or pytest_inifile.resolve(strict=True) != pytest_inifile or (not pytest_inifile.is_relative_to(root)):
+     raise RuntimeError('exact selected real D pytest configuration required')
+-report = {'schema': 'frozen-local-D-phase2-bridge27-binding/v1', 'phase': phase, 'operation': operation, 'selection_group': group_name, 'qualification_scope': '3 future-bound public functions/25 statically expected cases under frozen local D and additional A READ provenance', 'canonical_application': False, 'frozen_local_D_Git_READ_application': True, 'Source_WRITE_claimed': False, 'external_pretrained_asset_loading_requested': False, 'pretrained_quality_or_convergence_claimed': False, 'execution_granted': False, 'claim_granted': False, 'completion_eligible': False, 'collection_accepted': False, 'pytest_exit_code': None, 'actual_bootstrap_execution': True}
++report = {'schema': 'frozen-local-D-phase2-bridge27-binding/v1', 'phase': phase, 'operation': operation, 'selection_group': group_name, 'qualification_scope': '4 future-bound public functions/28 statically expected cases under frozen local D and additional A READ provenance', 'canonical_application': False, 'frozen_local_D_Git_READ_application': True, 'Source_WRITE_claimed': False, 'external_pretrained_asset_loading_requested': False, 'pretrained_quality_or_convergence_claimed': False, 'execution_granted': False, 'claim_granted': False, 'completion_eligible': False, 'collection_accepted': False, 'pytest_exit_code': None, 'actual_bootstrap_execution': True}
+ for key in ('git_candidate_provenance', 'additional_A_provenance', 'binding_manifest_reference', 'source_read_binding_reference', 'admitted_io_plan_reference', 'effect_decision_reference'):
+     report[key] = request[key]
+ report['pytest_inifile'] = str(pytest_inifile)
+@@ -130,8 +130,8 @@
+     raise RuntimeError('fresh child required; do not replace imported aliases')
+ function_selectors = request['function_selectors']
+ expected_counts = request['expected_function_case_counts']
+-if type(function_selectors) is not list or len(function_selectors) != 3 or len(set(function_selectors)) != 3 or any((type(node) is not str or '::' not in node or '[' in node for node in function_selectors)) or (type(expected_counts) is not dict) or (set(expected_counts) != set(function_selectors)) or any((type(value) is not int for value in expected_counts.values())) or (tuple((expected_counts[node] for node in function_selectors)) != EXPECTED_ORDERED_CASE_COUNTS) or (sum(expected_counts.values()) != EXPECTED_CASES):
+-    raise RuntimeError('exact ordered3-selector case vector/25 required')
++if type(function_selectors) is not list or len(function_selectors) != 4 or len(set(function_selectors)) != 4 or any((type(node) is not str or '::' not in node or '[' in node for node in function_selectors)) or (type(expected_counts) is not dict) or (set(expected_counts) != set(function_selectors)) or any((type(value) is not int for value in expected_counts.values())) or (tuple((expected_counts[node] for node in function_selectors)) != EXPECTED_ORDERED_CASE_COUNTS) or (sum(expected_counts.values()) != EXPECTED_CASES):
++    raise RuntimeError('exact ordered4-selector case vector/28 required')
+ owning_files = request['owning_files']
+ if type(owning_files) is not list or owning_files != list(expected_test_modules) or {node.split('::', 1)[0] for node in function_selectors} != set(owning_files):
+     raise RuntimeError('exact future-bound D owning files required')

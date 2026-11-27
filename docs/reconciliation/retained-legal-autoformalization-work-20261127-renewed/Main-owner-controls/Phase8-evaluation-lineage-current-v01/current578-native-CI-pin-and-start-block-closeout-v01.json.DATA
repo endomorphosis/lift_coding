@@ -1,0 +1,51 @@
+{
+  "Source_or_SDK_or_Native_or_model_or_Git_mutation": false,
+  "all_prior_artifacts_and_read_costs_retained": true,
+  "code_change_justified": false,
+  "connector_statuses_empty_does_not_mean_no_check_runs": true,
+  "dispatch_or_rerun_or_billing_or_new_runner_selected": false,
+  "full_goal_complete": false,
+  "hosted_evidence": {
+    "Native_execution_or_pass_established": false,
+    "actual_native_lane_annotation": {
+      "bytes": 1366,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/published578-actual-native-lane-CI-declared-cause-v02.json",
+      "sha256": "ddf392fb44f4e563653a0e1fd580dadacb4030d6f0f2d868403b0ee85bf12302"
+    },
+    "actual_native_lane_check_id": 140263689218,
+    "aggregate_annotations_and_runs": {
+      "bytes": 3611,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/published577-578-native-CI-declared-cause-v01.json",
+      "sha256": "5f4ccdc0cf4a3790ef13c23d9179ccdcf40c3debebc85e30b7bf5ca0fac0519a"
+    },
+    "attempt": 1,
+    "classification": "External GitHub account/billing start blocker, not a Lean/test failure.",
+    "declared_cause": "The job was not started because your account is locked due to a billing issue.",
+    "event": "push",
+    "metadata": {
+      "bytes": 16738,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/published577-578-CI-current-readonly-metadata-v01.json",
+      "sha256": "44493ca5a429242e5e8a5398333291b0a9dbfa11c9940d5b2e19f6ddc9ce7e9c"
+    },
+    "run_id": 45924854524
+  },
+  "initial_check_lists_truncated_and_actions_list_bound_failures_preserved": true,
+  "original_native_owner_failure_remains_separate": true,
+  "published_commit": "81ee859cd2bbd4872b0a2e3bc75e2994c14140fe",
+  "status": "CURRENT_NATIVE_CI_PIN_AND_TRIGGER_PRESENT_HOSTED_START_BLOCKED",
+  "workflow": {
+    "Lean_archive_SHA256": "47bf4bbd78f70c2e9670598ab7124d92b6efb7330ff33e5fbb4030f6fd72e4e4",
+    "Lean_version": "4.34.1",
+    "actual_Native_commands": "Validation matrix native-lean lane; final native-named job is an aggregate gate.",
+    "bytes": 62773,
+    "declared_pins_and_executable_cache_paths_consistent": true,
+    "elan_version": "4.1.2",
+    "git_blob": "46152c94393bd2c7d68bbe2009c437d461b16014",
+    "inspection": "Exact immutable object size/framedGitOID/SHA verified by existing helper, source read once; no workflow execution.",
+    "path": ".github/workflows/legal-v2-reasoner-ci.yml",
+    "private_DATA": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/legal-v2-reasoner-ci.published-81ee859.yml.DATA",
+    "push_and_PR_paths": "main/develop with affected logic/backend/IR/autoformal/test/fixture/workflow filters.",
+    "sha256": "8f2b612fd27c59249a9e38d5107271413ecc61ebaad2b1f6eb24ff3516b12ecd",
+    "unresolved_declared_pin": null
+  }
+}

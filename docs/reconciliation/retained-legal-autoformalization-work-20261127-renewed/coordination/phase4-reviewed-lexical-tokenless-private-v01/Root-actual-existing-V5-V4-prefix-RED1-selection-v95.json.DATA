@@ -1,0 +1,26 @@
+{
+  "Root_parent_fresh_prefix": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase4-reviewed-lexical-tokenless-private-v01/Root-v95-fresh-parent-bytecode",
+  "Root_selected": true,
+  "Source_envelope_conservative": 134217728,
+  "Source_physical_IO_complete": false,
+  "actual_selected_at_utc_ns": "1795512133805527331",
+  "expected_call_phase": "V4 fixture incorrectly dispatches to V2",
+  "operator": {
+    "bytes": 44694,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase4-reviewed-lexical-tokenless-private-v01/Root-selected-existing-V5-V4-prefix-RED1-v95.py",
+    "sha256": "a9995c60afcad23a637112d19b456b66003446416792d1c5cbfa85511d6d4436"
+  },
+  "ordinary_PASS_not_expected": true,
+  "ordinary_caps_unchanged": {
+    "Source_preflight_s": 60,
+    "child_s": 300,
+    "child_slots": 4,
+    "cpu": 1,
+    "memory_mb": 1536,
+    "parent_total_s": 420,
+    "scratch": 16777216
+  },
+  "paired_provenance_sha256": "dde3c80bba0fa69c6bea105f2dfbc681e8eea71dd1dd01fc1efac30114c8a94b",
+  "request_sha256": "f62a37431d5cd7a6bd989495b1254e0b25329797c6a8336148995ac1471b9ff5",
+  "worker_project_source_hook_with_pinned_plain_assertions": true
+}

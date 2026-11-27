@@ -1,0 +1,11 @@
+--- a/receipt-guard-v01.py
++++ b/receipt-guard-v02.py
+@@ -1166,7 +1166,7 @@
+         response = LogicVerificationAPI().verify_receipt(
+             receipt, expectation=expectation, request_id=record.record_id
+         )
+-        result = response.result.to_dict()
++        result = dict(response.result)
+         return (
+             response.operation == "verify_receipt"
+             and response.status is VerificationStatus.SUCCEEDED

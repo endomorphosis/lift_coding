@@ -1,0 +1,322 @@
+{
+  "A_prov": {
+    "HEAD": "219ba3da0f62f772801d71715e22c506faa21126",
+    "actual_closed_Source_READ": {
+      "bytes": 7482,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-isolated-Phase1-lean-json-diagnostics-READ3-closed.json",
+      "sha256": "0b9d17c27efa541b520be7d9e3578b71df4ef584d92152ccfeb2e965e527ccb5"
+    },
+    "clean_index_provenance_reference": {
+      "bytes": 2166,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-live-ordinary99-clean-D-A-index-provenance.v03.json",
+      "sha256": "0fc2cab6b7a67514ca1435f9993a7a2128910c0322e8756613358e7960354466"
+    },
+    "clean_worktree_and_index": true,
+    "local_frozen_Git_metadata_reference": {
+      "bytes": 2166,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-live-ordinary99-clean-D-A-index-provenance.v03.json",
+      "sha256": "0fc2cab6b7a67514ca1435f9993a7a2128910c0322e8756613358e7960354466"
+    },
+    "root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate",
+    "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tree": "c670052e6e12473d974382e455c7aef4adb6aebe"
+  },
+  "D_prov": {
+    "HEAD": "95dc193c3a4a37f9c9227da640a346b2cd58e54c",
+    "actual_closed_Source_READ": {
+      "bytes": 7482,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-isolated-Phase1-lean-json-diagnostics-READ3-closed.json",
+      "sha256": "0b9d17c27efa541b520be7d9e3578b71df4ef584d92152ccfeb2e965e527ccb5"
+    },
+    "clean_index_provenance_reference": {
+      "bytes": 2166,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-live-ordinary99-clean-D-A-index-provenance.v03.json",
+      "sha256": "0fc2cab6b7a67514ca1435f9993a7a2128910c0322e8756613358e7960354466"
+    },
+    "clean_worktree_and_index": true,
+    "local_frozen_Git_metadata_reference": {
+      "bytes": 16495,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-isolated-Phase1-lean-json-diagnostics-exact-two-local-freeze.json",
+      "sha256": "a52014d373c00aade6e9673cb3dab91deefbfe7c23d456b4b483ce5964532e8a"
+    },
+    "root": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets",
+    "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tree": "c37ef87f96ba8a61d8644692f03df572352e12de"
+  },
+  "canonical_source_application": false,
+  "controls": {
+    "bytes": 17390,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/READY-P1-existing-ordinary99-controls-INERT.v04.json",
+    "sha256": "b3f97e2f75683aa3430f5271c7f9f445c23900f1ad11ef682d9f15261897005f"
+  },
+  "exact_write_full_charge": {
+    "bytes": 1309,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/Source-only-lean-json-diagnostics-WRITE-full-retained-v02.json",
+    "sha256": "411ab018ad69f28fdeba137a4eb662cb06b4a62ee78e04da5ad0b864144922aa"
+  },
+  "expected_absent_paths": [
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/integration/conftest.py",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/integration/logic/conftest.py",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/integration/logic/__init__.py",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/integration/logic/backends/conftest.py",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/integration/logic/backends/__init__.py",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/backends/kernel/__init__.py"
+  ],
+  "final_ordinary_runtime_qualification_eligibility_authority": null,
+  "fixture": {
+    "bytes": 19664,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-live-ordinary99-exact-32-fixture-wire.v03.json",
+    "sha256": "f8c019748daeadd6efdfb7f8b616748be2db740e19bf347134bc8daed7e15517"
+  },
+  "freeze": {
+    "bytes": 16495,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-isolated-Phase1-lean-json-diagnostics-exact-two-local-freeze.json",
+    "sha256": "a52014d373c00aade6e9673cb3dab91deefbfe7c23d456b4b483ce5964532e8a"
+  },
+  "isolated_frozen_local_git_candidate": true,
+  "latest_closed_Source_full_precharge": {
+    "bytes": 1313,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/Source-only-Phase1-lean-json-diagnostics-READ-overlay-full-retained.json",
+    "sha256": "f2a323ebb01c565d9c2ce86146f2ad1e357ed7ec7cff45f7a334485013b6a7bc"
+  },
+  "modules": {
+    "ipfs_datasets_py.logic.backends.kernel.lean": {
+      "bytes": 104465,
+      "full9": {
+        "st_ctime_ns": "1795755055677970484",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513274",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795755055677970484",
+        "st_nlink": "1",
+        "st_size": "104465",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/backends/kernel/lean.py",
+      "sha256": "de99fe31f53fb34bf247e5c24b4b1424ca06874f1da5dc8875b3dbf886d1e4cb"
+    },
+    "ipfs_datasets_py.logic.backends.kernel.rocq": {
+      "bytes": 41607,
+      "full9": {
+        "st_ctime_ns": "1795741365135834572",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513275",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741365135834572",
+        "st_nlink": "1",
+        "st_size": "41607",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/backends/kernel/rocq.py",
+      "sha256": "7fd1b39643190277f00325dac59cf3923b24a3056963713bd7437a364b6a0f9a"
+    },
+    "ipfs_datasets_py.logic.backends.kernel.wasm": {
+      "bytes": 24933,
+      "full9": {
+        "st_ctime_ns": "1795741365135834572",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513276",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741365135834572",
+        "st_nlink": "1",
+        "st_size": "24933",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/backends/kernel/wasm.py",
+      "sha256": "49cfdbc0108b43d45ab9f567b4153f384985563b075f369b32e37f855252d6cc"
+    },
+    "ipfs_datasets_py.logic.backends.process": {
+      "bytes": 109707,
+      "full9": {
+        "st_ctime_ns": "1795741365135834572",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513277",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741365135834572",
+        "st_nlink": "1",
+        "st_size": "109707",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/backends/process.py",
+      "sha256": "370ba355be1da87814be4a117d2ce2a1cbc255064958d9ec64ada8e54521a7d7"
+    },
+    "ipfs_datasets_py.logic.backends.resource_admission": {
+      "bytes": 19806,
+      "full9": {
+        "st_ctime_ns": "1795741365135834572",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513278",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741365135834572",
+        "st_nlink": "1",
+        "st_size": "19806",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/backends/resource_admission.py",
+      "sha256": "fda64e02042355fd0a0a3b75934b3d1c4ccb5efb42f0fe861876275ff8a5e1a8"
+    },
+    "ipfs_datasets_py.logic.backends.results": {
+      "bytes": 27160,
+      "full9": {
+        "st_ctime_ns": "1795741365135834572",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513279",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741365135834572",
+        "st_nlink": "1",
+        "st_size": "27160",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/backends/results.py",
+      "sha256": "afda793472d3a6ba13f20bee13a992bfce68177388bdf338548157a5aa201458"
+    },
+    "ipfs_datasets_py.logic.families.models": {
+      "bytes": 36277,
+      "full9": {
+        "st_ctime_ns": "1795741365144089893",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513345",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741365144089893",
+        "st_nlink": "1",
+        "st_size": "36277",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/families/models.py",
+      "sha256": "1a92305ef498812e3757147179907d4ddf4a4518371034fc2363922d5d5fed3f"
+    },
+    "ipfs_datasets_py.logic.ir_core.claims": {
+      "bytes": 16176,
+      "full9": {
+        "st_ctime_ns": "1795741365154768559",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513477",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741365154768559",
+        "st_nlink": "1",
+        "st_size": "16176",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/ir_core/claims.py",
+      "sha256": "282cdd3a6ba18a90079886337d360bae44da172748faa3ad2715d2071070de3b"
+    },
+    "ipfs_datasets_py.logic.ir_core.protocols": {
+      "bytes": 57510,
+      "full9": {
+        "st_ctime_ns": "1795741365154799247",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513481",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741365154799247",
+        "st_nlink": "1",
+        "st_size": "57510",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/ir_core/protocols.py",
+      "sha256": "e2dd1dc93d1efa15c7c4088145d32c52636c72e9230b16ade77ca6c6a0c2c336"
+    },
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler": {
+      "bytes": 151350,
+      "full9": {
+        "st_ctime_ns": "1795741365193799515",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513789",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741365193799515",
+        "st_nlink": "1",
+        "st_size": "151350",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py",
+      "sha256": "7a0dac2d13b4be7775e278054e1a57808f5629d3c58952164b91514e6e2ae2d3"
+    },
+    "tests.integration.logic.backends.test_kernel_backends": {
+      "bytes": 130553,
+      "full9": {
+        "st_ctime_ns": "1795755055677970484",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514356",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795755055677970484",
+        "st_nlink": "1",
+        "st_size": "130553",
+        "st_uid": "1000"
+      },
+      "relative_path": "tests/integration/logic/backends/test_kernel_backends.py",
+      "sha256": "8bca876c855d44df4d48cb909fc6a0e9a007480d61037831536e84a8cc68adf9"
+    }
+  },
+  "named_metadata_count": 1625,
+  "observed_independent_base": {
+    "bytes": 5270,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-current-main-fast-forward-official-V2-base.json",
+    "sha256": "23a507a1f439e697be16860808c32ba21af50ac094a44d8d108a6e1e35dc829f"
+  },
+  "outer": {
+    "bytes": 852469,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-live-reconciled-outer1618-epoch.json",
+    "sha256": "2ada76fe314264f23d8aa68d724248738dc13d54d03cbe4e75a6e4ec0268d725"
+  },
+  "protected_guide_full_charge": {
+    "bytes": 1300,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/Source-only-Guide580-full-retained-cap.json",
+    "sha256": "2d5de10320457962f3755cbb99c00b918a4f0ebbe9ecf48a81a9b332fad03b66"
+  },
+  "protected_guide_publication": {
+    "bytes": 2991,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-Guide580-four-docs-three-FF-publication.json",
+    "sha256": "12de3885bbfd86bc00dd792861c9f670af1bee590b0b8a996a9eae97cbbda9fc"
+  },
+  "python": {
+    "bytes": 845899,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-live-reconciled-Python1605-epoch.json",
+    "sha256": "a0f702fa577b602055d0b44891a9010849cd8fb107a8f3829268afdf467d9ea1"
+  },
+  "read": {
+    "bytes": 1911,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-isolated-ordinary99-D27-read-binding.json",
+    "sha256": "2d456b9f2d76ae70d7997174e2443cd3a64db85c925180e1930b7851b175bbd7"
+  },
+  "read3_named_metadata_guard": {
+    "bytes": 907999,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-isolated-1625-named-metadata-guard.json",
+    "sha256": "aa237efeae1dd8f6d6d2a8809bb9b1338838a334f84de04c36be67d5dad935d5"
+  },
+  "read_close": {
+    "bytes": 7482,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-isolated-Phase1-lean-json-diagnostics-READ3-closed.json",
+    "sha256": "0b9d17c27efa541b520be7d9e3578b71df4ef584d92152ccfeb2e965e527ccb5"
+  },
+  "retained_first_write_charge": {
+    "bytes": 1289,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/Source-only-lean-json-diagnostics-WRITE-full-retained.json",
+    "sha256": "b2db71a64ce89374326c708351d8929b2a9cef7d56c929e7a585cfb92a3bc824"
+  },
+  "retained_first_write_refusal": {
+    "bytes": 837,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-first-write-missing-filtered-base-object-refusal.json",
+    "sha256": "a45032f43505257d98b0ba03d014e464285352b45799e3d3038f013cd25d5858"
+  },
+  "retained_v03_nonclock": {
+    "bytes": 13477,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/READY-live-ordinary99-actual-READ3-INERT.v03.json",
+    "sha256": "b6f6de1646b27a3b68e8f4836012e0fafe335f9130da299fdb8773303b2a31e5"
+  },
+  "retained_v03_refusal": {
+    "bytes": 1784,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-ordinary99-v03-bootstrap-selector-refusal-closed.json",
+    "sha256": "46b6ccee43ed4fdc73c61c0391aaf2bb175981c166c8d52e4a658e0faad57461"
+  },
+  "schema": "actual-READ3-live-ordinary99-nonclock/v1"
+}

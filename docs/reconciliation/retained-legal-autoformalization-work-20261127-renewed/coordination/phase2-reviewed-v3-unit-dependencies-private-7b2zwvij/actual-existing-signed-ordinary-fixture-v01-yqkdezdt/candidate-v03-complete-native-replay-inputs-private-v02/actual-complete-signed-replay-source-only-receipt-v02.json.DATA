@@ -1,0 +1,106 @@
+{
+  "JUnit": {
+    "bytes": 1908,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/candidate-v03-complete-native-replay-inputs-private-v02/result.xml",
+    "sha256": "8e111c919cc04af7f93862066dbb8b45e7142739450677e2e4047cbb686214cb"
+  },
+  "Lean_executed_or_proof_or_legal_or_training_authority": false,
+  "actual_private_input_manifest": {
+    "bytes": 5457,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/candidate-v03-complete-native-replay-inputs-private-v02/private-complete-signed-replay-export-inputs.json",
+    "sha256": "f3d1ae10700d65fddd265c019ba14bc478c11a0ace0beebb5111cc6d01ac7838"
+  },
+  "canonical_Source_or_Git_mutated": false,
+  "cases": [
+    {
+      "classname": "tests.unit.logic.autoformal.test_private_v3_signed_native_replay_capsule",
+      "error": 0,
+      "failure": 0,
+      "name": "test_reviewed_preservation_v3_retains_all_mixed_and_object_children_without_coercion",
+      "skipped": 0
+    },
+    {
+      "classname": "tests.unit.logic.autoformal.test_private_v3_signed_native_replay_capsule",
+      "error": 0,
+      "failure": 0,
+      "name": "test_reviewed_preservation_v3_resealed_population_namespace_and_child_mutants_refuse[definition_use]",
+      "skipped": 0
+    },
+    {
+      "classname": "tests.unit.logic.autoformal.test_private_v3_signed_native_replay_capsule",
+      "error": 0,
+      "failure": 0,
+      "name": "test_reviewed_preservation_v3_resealed_population_namespace_and_child_mutants_refuse[active_mixed]",
+      "skipped": 0
+    },
+    {
+      "classname": "tests.unit.logic.autoformal.test_private_v3_signed_native_replay_capsule",
+      "error": 0,
+      "failure": 0,
+      "name": "test_reviewed_preservation_v3_resealed_population_namespace_and_child_mutants_refuse[predicate_roles]",
+      "skipped": 0
+    },
+    {
+      "classname": "tests.unit.logic.autoformal.test_private_v3_signed_native_replay_capsule",
+      "error": 0,
+      "failure": 0,
+      "name": "test_reviewed_preservation_v3_replays_current_complete_sources_reviews_and_dependencies[source]",
+      "skipped": 0
+    },
+    {
+      "classname": "tests.unit.logic.autoformal.test_private_v3_signed_native_replay_capsule",
+      "error": 0,
+      "failure": 0,
+      "name": "test_reviewed_preservation_v3_replays_current_complete_sources_reviews_and_dependencies[review]",
+      "skipped": 0
+    },
+    {
+      "classname": "tests.unit.logic.autoformal.test_private_v3_signed_native_replay_capsule",
+      "error": 0,
+      "failure": 0,
+      "name": "test_reviewed_preservation_v3_replays_current_complete_sources_reviews_and_dependencies[dependency]",
+      "skipped": 0
+    },
+    {
+      "classname": "tests.unit.logic.autoformal.test_private_v3_signed_native_replay_capsule",
+      "error": 0,
+      "failure": 0,
+      "name": "test_private_export_source_only_for_signed_acyclic_mixed_fixture",
+      "skipped": 0
+    }
+  ],
+  "completed_and_reaped": true,
+  "native_build_can_only_replay_in_selected_exact_source_epoch": true,
+  "new_replay_artifact": [
+    {
+      "bytes": 1058267,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/candidate-v03-complete-native-replay-inputs-private-v02/pytest/test_private_export_source_onl0/fictional-v3-complete-native-replay-inputs.json",
+      "private_admission_sha256": "3b483b9c482c25a2125a04097ae2aedf75ebb8198ec3200b4793c0349e2e8181",
+      "private_graph_sha256": "9995099172212c5becd541a987a4fdbd409c84d42fd6100f1729b209facd891c",
+      "private_preservation_sha256": "56cc4cb291928704c3a1ce343bbae6c98c0b6c039373b2af71d2e22070bf798b",
+      "sha256": "28f7c0e592fceaa50ba9fac97e953ea0c59e0c45156b31b127ac4259f760ae7c"
+    }
+  ],
+  "old_source_only_artifact_preserved": {
+    "bytes": 502846,
+    "files": 35,
+    "modules": 8,
+    "obligations": 15,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/candidate-v03-graph-to-lean-source-private-v01/pytest/test_private_export_source_onl0/fictional-acyclic-mixed-lean-source-project.json",
+    "sha256": "6788c8ea5cd21ba5ecce8b30a1dc0b34fca75051971cf290534c07fca152e5a2"
+  },
+  "rc": 0,
+  "same_suite_scope_as_prior": true,
+  "schema": "actual-Phase2-complete-private-signed-replay-source-export/v2",
+  "stderr": {
+    "bytes": 0,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/candidate-v03-complete-native-replay-inputs-private-v02/stderr.DATA",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 442,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/candidate-v03-complete-native-replay-inputs-private-v02/stdout.DATA",
+    "sha256": "c8727a8b2bbfe799927d14a0414618a914e4ed740c34170c531721619d8f4174"
+  },
+  "success": true
+}

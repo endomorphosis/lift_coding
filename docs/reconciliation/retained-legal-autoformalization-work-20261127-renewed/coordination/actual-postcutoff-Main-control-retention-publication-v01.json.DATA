@@ -1,0 +1,308 @@
+{
+  "authority_or_product_adoption": false,
+  "clean": true,
+  "commands": [
+    {
+      "args": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stdout": "9483326771d57d2b2f7ed870deb4e18b8ac7df0c\n"
+    },
+    {
+      "args": [
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "ls-remote",
+        "--heads",
+        "origin",
+        "refs/heads/main"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stdout": "9483326771d57d2b2f7ed870deb4e18b8ac7df0c\trefs/heads/main\n"
+    },
+    {
+      "args": [
+        "ls-tree",
+        "-r",
+        "HEAD",
+        "--",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/00-sealed-private-proofcache35-provenance-fix-and-regression-v01.json.DATA",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/01-selected-bootstrap.py.DATA.DATA",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/02-selected-bootstrap-provenance-corrected.after.py.DATA.DATA",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/03-test_exact_factory_closed_provenance.py.DATA.DATA",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/04-actual-exact-provenance-RED-GREEN-result-v01.json.DATA",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/05-forward-two-literal-edits-v01.json.DATA",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/06-inverse-two-literal-edits-v01.json.DATA",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/07-actual-RED-GREEN-assessment-correction-v01.json.DATA",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/manifest.json",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/README.md"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "diff",
+        "--cached",
+        "--name-only"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "add",
+        "--",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/00-sealed-private-proofcache35-provenance-fix-and-regression-v01.json.DATA",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/01-selected-bootstrap.py.DATA.DATA",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/02-selected-bootstrap-provenance-corrected.after.py.DATA.DATA",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/03-test_exact_factory_closed_provenance.py.DATA.DATA",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/04-actual-exact-provenance-RED-GREEN-result-v01.json.DATA",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/05-forward-two-literal-edits-v01.json.DATA",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/06-inverse-two-literal-edits-v01.json.DATA",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/07-actual-RED-GREEN-assessment-correction-v01.json.DATA",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/manifest.json",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/README.md"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "ls-files",
+        "--stage",
+        "--",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/00-sealed-private-proofcache35-provenance-fix-and-regression-v01.json.DATA",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/01-selected-bootstrap.py.DATA.DATA",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/02-selected-bootstrap-provenance-corrected.after.py.DATA.DATA",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/03-test_exact_factory_closed_provenance.py.DATA.DATA",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/04-actual-exact-provenance-RED-GREEN-result-v01.json.DATA",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/05-forward-two-literal-edits-v01.json.DATA",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/06-inverse-two-literal-edits-v01.json.DATA",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/07-actual-RED-GREEN-assessment-correction-v01.json.DATA",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/manifest.json",
+        "docs/reconciliation/main-private-controls-20261124-postcutoff/README.md"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stdout": "100644 636967ebd3f72af31ba741c79b8c947957a3a310 0\tdocs/reconciliation/main-private-controls-20261124-postcutoff/00-sealed-private-proofcache35-provenance-fix-and-regression-v01.json.DATA\n100644 106feef8707c03e589e42394a5a27c49cdc88fc4 0\tdocs/reconciliation/main-private-controls-20261124-postcutoff/01-selected-bootstrap.py.DATA.DATA\n100644 a170c343a8dc197135ff14cecc7e68ba93a8205e 0\tdocs/reconciliation/main-private-controls-20261124-postcutoff/02-selected-bootstrap-provenance-corrected.after.py.DATA.DATA\n100644 2dba6852df9780616cafc93a7cceb7be08aa12c8 0\tdocs/reconciliation/main-private-controls-20261124-postcutoff/03-test_exact_factory_closed_provenance.py.DATA.DATA\n100644 7db7d38ea843ed4651d47dce7ad0f882b957af17 0\tdocs/reconciliation/main-private-controls-20261124-postcutoff/04-actual-exact-provenance-RED-GREEN-result-v01.json.DATA\n100644 3d40b00c52019a5fd5fb5f620099b4165888fcdc 0\tdocs/reconciliation/main-private-controls-20261124-postcutoff/05-forward-two-literal-edits-v01.json.DATA\n100644 9176aef35380eb3f06d9b5c287840005bea81e1a 0\tdocs/reconciliation/main-private-controls-20261124-postcutoff/06-inverse-two-literal-edits-v01.json.DATA\n100644 3f71cbcb0cee2751b377a3aa772055dcc46e4ad7 0\tdocs/reconciliation/main-private-controls-20261124-postcutoff/07-actual-RED-GREEN-assessment-correction-v01.json.DATA\n100644 4f537acc97a50ce9884651850f48a1267dd2281a 0\tdocs/reconciliation/main-private-controls-20261124-postcutoff/README.md\n100644 a0342f1ed84716fc5890e315209beed0f035e872 0\tdocs/reconciliation/main-private-controls-20261124-postcutoff/manifest.json\n"
+    },
+    {
+      "args": [
+        "diff",
+        "--cached",
+        "--name-only"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stdout": "docs/reconciliation/main-private-controls-20261124-postcutoff/00-sealed-private-proofcache35-provenance-fix-and-regression-v01.json.DATA\ndocs/reconciliation/main-private-controls-20261124-postcutoff/01-selected-bootstrap.py.DATA.DATA\ndocs/reconciliation/main-private-controls-20261124-postcutoff/02-selected-bootstrap-provenance-corrected.after.py.DATA.DATA\ndocs/reconciliation/main-private-controls-20261124-postcutoff/03-test_exact_factory_closed_provenance.py.DATA.DATA\ndocs/reconciliation/main-private-controls-20261124-postcutoff/04-actual-exact-provenance-RED-GREEN-result-v01.json.DATA\ndocs/reconciliation/main-private-controls-20261124-postcutoff/05-forward-two-literal-edits-v01.json.DATA\ndocs/reconciliation/main-private-controls-20261124-postcutoff/06-inverse-two-literal-edits-v01.json.DATA\ndocs/reconciliation/main-private-controls-20261124-postcutoff/07-actual-RED-GREEN-assessment-correction-v01.json.DATA\ndocs/reconciliation/main-private-controls-20261124-postcutoff/README.md\ndocs/reconciliation/main-private-controls-20261124-postcutoff/manifest.json\n"
+    },
+    {
+      "args": [
+        "diff",
+        "--cached",
+        "--check",
+        "--",
+        ".",
+        ":!**/*.DATA"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "commit",
+        "-m",
+        "Preserve post-cutoff provenance regression and historical failures [skip ci]"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stdout": "[reconcile/all-work-parent-main-20261123 61ef5bfb42] Preserve post-cutoff provenance regression and historical failures [skip ci]\n 10 files changed, 2520 insertions(+)\n create mode 100644 docs/reconciliation/main-private-controls-20261124-postcutoff/00-sealed-private-proofcache35-provenance-fix-and-regression-v01.json.DATA\n create mode 100644 docs/reconciliation/main-private-controls-20261124-postcutoff/01-selected-bootstrap.py.DATA.DATA\n create mode 100644 docs/reconciliation/main-private-controls-20261124-postcutoff/02-selected-bootstrap-provenance-corrected.after.py.DATA.DATA\n create mode 100644 docs/reconciliation/main-private-controls-20261124-postcutoff/03-test_exact_factory_closed_provenance.py.DATA.DATA\n create mode 100644 docs/reconciliation/main-private-controls-20261124-postcutoff/04-actual-exact-provenance-RED-GREEN-result-v01.json.DATA\n create mode 100644 docs/reconciliation/main-private-controls-20261124-postcutoff/05-forward-two-literal-edits-v01.json.DATA\n create mode 100644 docs/reconciliation/main-private-controls-20261124-postcutoff/06-inverse-two-literal-edits-v01.json.DATA\n create mode 100644 docs/reconciliation/main-private-controls-20261124-postcutoff/07-actual-RED-GREEN-assessment-correction-v01.json.DATA\n create mode 100644 docs/reconciliation/main-private-controls-20261124-postcutoff/README.md\n create mode 100644 docs/reconciliation/main-private-controls-20261124-postcutoff/manifest.json\n"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stdout": "61ef5bfb421ba029e9971244bcfb97a5c0298960\n"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "HEAD^{tree}"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stdout": "fedd39d60be3b081690ef3f581005802f51deb5a\n"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "HEAD^"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stdout": "9483326771d57d2b2f7ed870deb4e18b8ac7df0c\n"
+    },
+    {
+      "args": [
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "ls-remote",
+        "--heads",
+        "origin",
+        "refs/heads/main"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stdout": "9483326771d57d2b2f7ed870deb4e18b8ac7df0c\trefs/heads/main\n"
+    },
+    {
+      "args": [
+        "push",
+        "--porcelain",
+        "origin",
+        "HEAD:refs/heads/main"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stdout": "To https://github.com/endomorphosis/lift_coding.git\n \tHEAD:refs/heads/main\t9483326771..61ef5bfb42\nDone\n"
+    },
+    {
+      "args": [
+        "ls-remote",
+        "--heads",
+        "origin",
+        "refs/heads/main"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stdout": "61ef5bfb421ba029e9971244bcfb97a5c0298960\trefs/heads/main\n"
+    },
+    {
+      "args": [
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all"
+      ],
+      "rc": 0,
+      "stderr": "",
+      "stdout": ""
+    }
+  ],
+  "commit": "61ef5bfb421ba029e9971244bcfb97a5c0298960",
+  "complete": true,
+  "file_bytes": 210375,
+  "file_count": 10,
+  "files": [
+    {
+      "bytes": 5370,
+      "git_blob_oid": "636967ebd3f72af31ba741c79b8c947957a3a310",
+      "mode": "100644",
+      "path": "docs/reconciliation/main-private-controls-20261124-postcutoff/00-sealed-private-proofcache35-provenance-fix-and-regression-v01.json.DATA",
+      "sha256": "ee5df79ec8c3e7b2ba4372216fe13e0637a0110ce8b660b69164019706fc0213"
+    },
+    {
+      "bytes": 79804,
+      "git_blob_oid": "106feef8707c03e589e42394a5a27c49cdc88fc4",
+      "mode": "100644",
+      "path": "docs/reconciliation/main-private-controls-20261124-postcutoff/01-selected-bootstrap.py.DATA.DATA",
+      "sha256": "9796c0036e2607ccdf309c6e95c7ecaa5dde74fedb2eb96c98398bb2116a8d0e"
+    },
+    {
+      "bytes": 79804,
+      "git_blob_oid": "a170c343a8dc197135ff14cecc7e68ba93a8205e",
+      "mode": "100644",
+      "path": "docs/reconciliation/main-private-controls-20261124-postcutoff/02-selected-bootstrap-provenance-corrected.after.py.DATA.DATA",
+      "sha256": "d0ea55f7b66f1b51a685bbebc8a6f7412601ab5ecf646cb2f0488cb503cb42d4"
+    },
+    {
+      "bytes": 13042,
+      "git_blob_oid": "2dba6852df9780616cafc93a7cceb7be08aa12c8",
+      "mode": "100644",
+      "path": "docs/reconciliation/main-private-controls-20261124-postcutoff/03-test_exact_factory_closed_provenance.py.DATA.DATA",
+      "sha256": "96597c3978051dab1b0c3e38ce80ad0707b53209749214f9d15504204e8142fe"
+    },
+    {
+      "bytes": 9741,
+      "git_blob_oid": "7db7d38ea843ed4651d47dce7ad0f882b957af17",
+      "mode": "100644",
+      "path": "docs/reconciliation/main-private-controls-20261124-postcutoff/04-actual-exact-provenance-RED-GREEN-result-v01.json.DATA",
+      "sha256": "062acbe73a0fd258d07bff7af0b74723967d7819a8e0ef669b67207c07edfa33"
+    },
+    {
+      "bytes": 1227,
+      "git_blob_oid": "3d40b00c52019a5fd5fb5f620099b4165888fcdc",
+      "mode": "100644",
+      "path": "docs/reconciliation/main-private-controls-20261124-postcutoff/05-forward-two-literal-edits-v01.json.DATA",
+      "sha256": "a78af33c0c8a193509aba7ebaedb3e66f45930c60e85ede4301487ca7510282d"
+    },
+    {
+      "bytes": 1227,
+      "git_blob_oid": "9176aef35380eb3f06d9b5c287840005bea81e1a",
+      "mode": "100644",
+      "path": "docs/reconciliation/main-private-controls-20261124-postcutoff/06-inverse-two-literal-edits-v01.json.DATA",
+      "sha256": "6417fa40718cee4ed889d98fff0d7694d3bc2d177d98797d5ca7634b71f93639"
+    },
+    {
+      "bytes": 1728,
+      "git_blob_oid": "3f71cbcb0cee2751b377a3aa772055dcc46e4ad7",
+      "mode": "100644",
+      "path": "docs/reconciliation/main-private-controls-20261124-postcutoff/07-actual-RED-GREEN-assessment-correction-v01.json.DATA",
+      "sha256": "710cbceda361b7b3a2b08334d62504128d7fee51c1fdf2e9bc3922d8a3196c70"
+    },
+    {
+      "bytes": 16457,
+      "git_blob_oid": "a0342f1ed84716fc5890e315209beed0f035e872",
+      "mode": "100644",
+      "path": "docs/reconciliation/main-private-controls-20261124-postcutoff/manifest.json",
+      "sha256": "c843e474c34d31c08fed432b9531f45ac8a7adfbdc1404fb04a9580a63c18e35"
+    },
+    {
+      "bytes": 1975,
+      "git_blob_oid": "4f537acc97a50ce9884651850f48a1267dd2281a",
+      "mode": "100644",
+      "path": "docs/reconciliation/main-private-controls-20261124-postcutoff/README.md",
+      "sha256": "7986490745dc962637b4157c6235d3fff2947af2081d26eddbebcca2f6fcc65a"
+    }
+  ],
+  "finished_ns": "1795481811511163957",
+  "force_or_LFS_or_CI_dispatch": false,
+  "input": {
+    "bytes": 16925,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/postcutoff-Main-proofcache35-inert-preparation-v01/actual-private-preparation-receipt-v01.json",
+    "sha256": "b47e6084647c0803199af504d15eabe93cffd95d3a467a85c18dd5a741d3ce26"
+  },
+  "old_head": "9483326771d57d2b2f7ed870deb4e18b8ac7df0c",
+  "remote_main": "61ef5bfb421ba029e9971244bcfb97a5c0298960",
+  "schema": "actual-postcutoff-Main-control-retention-publication/v1",
+  "started_ns": "1795481808710003823",
+  "tests_run_or_ordinary35_qualification": false,
+  "tree": "fedd39d60be3b081690ef3f581005802f51deb5a"
+}

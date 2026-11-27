@@ -1,0 +1,53 @@
+from pathlib import Path
+import ast
+import hashlib
+import importlib.util
+import json
+import sys
+
+ROOT = Path('/tmp/legal-refusal-recovery-j_10md5l/repo')
+BASE = ROOT.parent
+control = ROOT / 'ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_source_lease.py'
+spec = importlib.util.spec_from_file_location('refusal_checkpoint_source_control', control)
+module = importlib.util.module_from_spec(spec)
+sys.modules[spec.name] = module
+spec.loader.exec_module(module)
+owner = ROOT / 'ipfs_datasets_py/logic/autoformal/supervisor_loop.py'
+cli = ROOT / 'scripts/ops/legal_ir/run_autoformal_supervisor.py'
+originals = {owner: owner.read_bytes(), cli: cli.read_bytes()}
+assert b'def prepare_agent_turn_recovery_checkpoint_v1(' not in originals[owner]
+updated_owner = originals[owner] + b'\n\n' + (BASE/'checkpoint_impl.py.DATA').read_bytes()
+text = originals[cli].decode()
+tree = ast.parse(text)
+fn = next(n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == 'agent_turn_recovery_main_v1')
+lines = text.splitlines(keepends=True)
+old = ''.join(lines[fn.lineno-1:fn.end_lineno])
+new = old
+def replace(before, after):
+    global new
+    assert new.count(before) == 1, before
+    new = new.replace(before, after)
+replace('    parser.add_argument("--output", type=Path)\n',
+        '    parser.add_argument("--output", type=Path)\n    parser.add_argument("--observation", type=Path)\n')
+replace('    if args.output is not None and args.inputs.resolve() == args.output.resolve():\n        parser.error("agent frontier input and output must be distinct")\n',
+        '    if args.observation is not None and args.output is None:\n        parser.error("provider observation ingestion requires a durable --output checkpoint")\n'
+        '    paths = [p.resolve() for p in (args.inputs, args.observation, args.output) if p is not None]\n'
+        '    if len(paths) != len(set(paths)):\n        parser.error("agent frontier, observation and output must be distinct")\n')
+replace('        plan_agent_turn_recovery_v1,\n', '        prepare_agent_turn_recovery_checkpoint_v1,\n        plan_agent_turn_recovery_v1,\n')
+replace('        planner = (plan_agent_turn_recovery_v2 if snapshot.get("schema") == "legal-ir-agent-turn-frontier/v2"\n                   else plan_agent_turn_recovery_v1)\n        result = planner(snapshot)\n',
+        '        if args.observation is not None:\n            result = prepare_agent_turn_recovery_checkpoint_v1(\n                snapshot, _read_handoff_metadata_v2(args.observation))\n'
+        '        else:\n            planner = (plan_agent_turn_recovery_v2 if snapshot.get("schema") == "legal-ir-agent-turn-frontier/v2"\n                       else plan_agent_turn_recovery_v1)\n            result = planner(snapshot)\n')
+replace('        else:\n            _write_handoff_metadata_v2(args.output, raw)\n',
+        '        elif args.observation is not None:\n            _write_agent_turn_checkpoint_v1(args.output, raw)\n'
+        '        else:\n            _write_handoff_metadata_v2(args.output, raw)\n')
+new_cli = text.replace(old, (BASE/'cli_checkpoint_writer.py.DATA').read_text()+new)
+updates = {owner: updated_owner, cli: new_cli.encode()}
+for p, raw in updates.items(): ast.parse(raw, filename=str(p))
+with module.source_lease(ROOT, mode='write', timeout_seconds=30) as lease:
+    for p, before in originals.items(): assert p.read_bytes() == before
+    for p, raw in updates.items(): p.write_bytes(raw)
+    for p, raw in updates.items(): assert p.read_bytes() == raw
+    facts = lease.to_dict()
+print(json.dumps({'Source_WRITE_closed': True, 'lease': facts, 'files': [
+    {'path':str(p),'before_sha256':hashlib.sha256(originals[p]).hexdigest(),
+     'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()} for p,raw in updates.items()]}))

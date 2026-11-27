@@ -1,0 +1,108 @@
+{
+  "Source_test_SDK_native_model_or_CI_invoked": false,
+  "all_gitlinks_preserved": true,
+  "branch": "refs/heads/work/phase6-capacity-composition-20261123",
+  "diff_check_passed": true,
+  "frozen_for_ordinary37": true,
+  "head": "48a1df131fb7f2a66b7b57bfb98647b91dbd308a",
+  "host_ledger_operation_performed": false,
+  "index": {
+    "bytes": 6991149,
+    "clean": true,
+    "full9": {
+      "st_ctime_ns": "1795526114567242330",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68338235",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795526114558242255",
+      "st_nlink": "1",
+      "st_size": "6991149",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index"
+  },
+  "installation": {
+    "bytes": 3425,
+    "first_partial_receipt": {
+      "bytes": 62609,
+      "path": "/tmp/Root-managed-disk-lowering-two-code-CAS-actual-v147/actual-output/actual-existing-two-Python-code-CAS-receipt.json",
+      "sha256": "0424eec647b721b4c8fb04c6cb49da32fa6895ded6b55444a9830a695f66e666"
+    },
+    "full9": {
+      "st_ctime_ns": "1795525982315147518",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72091418",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795525982315147518",
+      "st_nlink": "1",
+      "st_size": "3425",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-managed-disk-lowering-remaining-test-CAS-actual-v149/Root-managed-disk-lowering-two-files-installed-Source-closed-small-v149.json",
+    "remaining_test_closeout_receipt": {
+      "bytes": 47057,
+      "path": "/tmp/Root-managed-disk-lowering-remaining-test-CAS-actual-v149/actual-output/actual-existing-two-Python-code-CAS-receipt.json",
+      "sha256": "f0e95d3d2ed28d9e9f3ace8fe3ea159194e80405ff6e02499ad095112d87f241"
+    },
+    "sha256": "7cc0cc552d74bb83b25af3139c11a42152bdedf2a7e36a2e9919f5f88393d730"
+  },
+  "origin_main_tracking_ref": "8aa66fac886a1f6a916372ec89729334e6740aee",
+  "other_git_metadata_preserved": true,
+  "other_heads": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "hallucinate": "c5913262bb4a104c94600939e0e0c16ea5e1156e",
+    "root": "2f9193c82be2c6b175be4ad9b2d489abf12b14c8"
+  },
+  "parent": "8aa66fac886a1f6a916372ec89729334e6740aee",
+  "pushed": false,
+  "schema": "managed-disk-lowering-two-file-local-candidate/v149",
+  "selected_roles": [
+    {
+      "blob": "57af9526f01f6f392172dd03d145377f4e63d5db",
+      "bytes": 71686,
+      "full9": {
+        "st_ctime_ns": "1795525247451598548",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042518",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795525246835309670",
+        "st_nlink": "1",
+        "st_size": "71686",
+        "st_uid": "1000"
+      },
+      "mode": "100644",
+      "parent_blob": "2b2ecae48986e6e9b8776b849aedda227d4289c2",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_resources.py",
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_resources.py",
+      "role": "resource owner",
+      "sha256": "51bec0e627e266595229dee298f22c7bdcf82bb5876eb2da1efd5f3655fbe585"
+    },
+    {
+      "blob": "277b0563af02437de8056c4ada34d24a5eb1a7c4",
+      "bytes": 109735,
+      "full9": {
+        "st_ctime_ns": "1795525880471320649",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70011544",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795525879889887719",
+        "st_nlink": "1",
+        "st_size": "109735",
+        "st_uid": "1000"
+      },
+      "mode": "100644",
+      "parent_blob": "bbdfa8345df813c4b54a5b729677e0f2c047fa24",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_daemon_resources.py",
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_daemon_resources.py",
+      "role": "resource owner tests",
+      "sha256": "b2f0f2d8651c39c4521eb30f44d6a12036c08df8efaa6b142fdeac6307a0e5fd"
+    }
+  ],
+  "tree": "0b4a603878f0a1288eb1f883518d5604a79e8239",
+  "two_selected_paths_only": true,
+  "worktrees_clean": true
+}

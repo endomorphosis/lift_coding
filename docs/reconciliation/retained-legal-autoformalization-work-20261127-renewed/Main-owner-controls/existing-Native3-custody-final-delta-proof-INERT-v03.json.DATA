@@ -1,0 +1,47 @@
+{
+  "RED_preserved": {
+    "bytes": 11689,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/actual-existing-Native3-custody-before-RED-v01.json",
+    "sha256": "8d9d015c8f760cca55f2dfa464f75d5f703077eaefecddcabbb2dfaaf408c125"
+  },
+  "actual_Native": false,
+  "actual_SDK": false,
+  "actual_Source": false,
+  "all_actual_bindings_remain_NULL": true,
+  "forward": {
+    "bytes": 8181,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-v567-Native3-custody-final.forward.diff",
+    "sha256": "59e1d4e925627d0b6fc778e84be290fa111e3a7cf06885faf6222ff73b0cdc6c"
+  },
+  "intermediate_custody_post": {
+    "bytes": 39786,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-v567-Native3-current-operator-custody-INERT-v02.py.DATA",
+    "sha256": "7f84448012a7dc9246f95edce479c14f8bb81aaed42bd5423bd32eaf3f9ef29e"
+  },
+  "inverse": {
+    "bytes": 8181,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-v567-Native3-custody-final.inverse.diff",
+    "sha256": "2cb05cd69cff5a00442a5307b8662702de75419770902ba133d7924d914458f1"
+  },
+  "legal_admission": false,
+  "new_copied_frame_control_RED_preserved": {
+    "bytes": 3836,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/actual-existing-Native3-custody-copied-frame-RED-v02.json",
+    "sha256": "56e562c20a1b538587a2059ab0ab3dc73e873718b0652dad0f95b5d70b375296"
+  },
+  "new_runner_or_registry": false,
+  "only_run_with_actual_custody_AST_changed": true,
+  "original8_controls_unchanged": true,
+  "original_Source_resource_release_finalizer_AST_exact": true,
+  "post": {
+    "bytes": 39794,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-v567-Native3-current-operator-custody-INERT-v03.py.DATA",
+    "sha256": "71d5c505e12f91431b9b38413a0e5e43c619d994b420aaa91984082b357fe2ef"
+  },
+  "prior": {
+    "bytes": 35401,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-v567-Native3-current-operator-INERT-v01.py.DATA",
+    "sha256": "4b844f5645a6607f184d9aa64b2203686effe1d4eb2b02a97a43afb83f0a04e0"
+  },
+  "strict_code_object_identity": true
+}

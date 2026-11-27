@@ -1,0 +1,149 @@
+from pathlib import Path
+from types import ModuleType
+import hashlib
+import importlib.util
+import json
+import sys
+import traceback
+
+stage = Path(__file__).absolute().parent
+feedback = stage.parent / "Phase7-current-obligation-write-binding-private-ymey1qtf"
+adapter_path = feedback / "no-fit-current-obligation-bound-feedback-adapter-v02.py"
+raw = adapter_path.read_bytes()
+assert (len(raw), hashlib.sha256(raw).hexdigest()) == (
+    20480, "43ad9ed1524e541998646663dc67baea01cacce87769666d4afa12cd6252abf7",
+)
+adapter = ModuleType("_existing_pinned_nofit_fixture_adapter")
+adapter.__file__ = str(adapter_path)
+sys.modules[adapter.__name__] = adapter
+exec(compile(raw, str(adapter_path), "exec"), adapter.__dict__)
+prior = adapter.load_prior()
+suite_rel = "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder.py"
+owner_rel = "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py"
+
+
+def fixture_loader(overlay):
+    baseline = adapter.prepare_loader(prior, {})
+    prior.EXPECTED[suite_rel] = "a33b50edbbf876a4b62e98821d0e4dcf7a7d558f"
+    selected_files = {
+        suite_rel: ("test_modal_autoencoder.after.DATA", 539848,
+                    "7907a65257ade3521a74ef29c006276dd5561d902b1fb363f8a107e6f412dd90"),
+    }
+    if overlay:
+        selected_files[owner_rel] = ("modal_autoencoder.after.DATA", 1427930,
+            "34b86545c37c86b4f3f03d71b565425794fca6b9bae764f4e0d412a36ebb816c")
+    posts = {path:adapter.pinned_file(stage / leaf, count, digest)
+             for path, (leaf, count, digest) in selected_files.items()}
+    guarded_source = prior.BoundSource
+
+    class CurrentCacheFixtureOverlay(guarded_source):
+        def get_code(self, fullname):
+            baseline_code = super().get_code(fullname)
+            path = Path(self.path).absolute()
+            relative = path.relative_to(prior.ROOT).as_posix()
+            if relative not in posts:
+                return baseline_code
+            code = posts[relative]
+            leaf, count, digest = selected_files[relative]
+            prior.compiled_total += len(code)
+            assert prior.compiled_total <= prior.MAX_MODULE_BYTES
+            prior.compiled[relative]["overlay_executed"] = {
+                "path": str(stage / leaf), "bytes": count, "sha256": digest,
+            }
+            return compile(code, str(path), "exec", dont_inherit=True)
+
+    prior.BoundSource = CurrentCacheFixtureOverlay
+    return baseline
+
+
+def load_owning_tests():
+    name = "_actual_modal_autoencoder_owning_tests"
+    path = prior.ROOT / suite_rel
+    spec = importlib.util.spec_from_file_location(name, path, loader=prior.BoundSource(name, str(path)))
+    owner = importlib.util.module_from_spec(spec)
+    sys.modules[name] = owner
+    spec.loader.exec_module(owner)
+    return owner
+
+
+def previous_published_red(fixture):
+    original, revised, _, _, _ = adapter.samples_and_legacy_record(fixture)
+    assert original.sample_id == revised.sample_id and original.text == revised.text
+    assert original.modal_ir.canonical_hash() != revised.modal_ir.canonical_hash()
+    warm = fixture.AdaptiveModalAutoencoder(compute_device="python")
+    cold = fixture.AdaptiveModalAutoencoder(compute_device="python")
+    original_keys = warm._legal_ir_view_feature_keys_for(original)
+    revised_warm = warm._legal_ir_view_feature_keys_for(revised)
+    revised_cold = cold._legal_ir_view_feature_keys_for(revised)
+    assert original_keys != revised_cold
+    assert revised_warm == revised_cold
+
+
+def nonserializable_cache_input_bypasses_old_bucket(fixture):
+    from dataclasses import replace
+
+    sample, *_ = adapter.samples_and_legacy_record(fixture)
+    model = fixture.AdaptiveModalAutoencoder(compute_device="python")
+    model._sample_cache_for(sample)["old"] = "stale"
+    offered = replace(sample, parser_trace={"custom_probe": object()})
+    one = model._sample_cache_for(offered)
+    assert "old" not in one
+    assert model._sample_cache_for(offered) is not one
+
+
+def check_cases(owner, fixture):
+    checks = [
+        ("published-same-text-exception-deletion", lambda: previous_published_red(fixture)),
+        ("nonjson-input-does-not-share-an-old-bucket", lambda: nonserializable_cache_input_bypasses_old_bucket(fixture)),
+        ("feature-clause-exception", lambda: owner.test_warm_feature_cache_matches_cold_after_clause_revision("exception-removed")),
+        ("feature-clause-order", lambda: owner.test_warm_feature_cache_matches_cold_after_clause_revision("conditions-reordered")),
+        ("runtime-formula-order", owner.test_warm_feature_cache_preserves_runtime_formula_order),
+        ("retained-target-citation-parity", owner.test_legal_ir_target_cache_key_uses_source_text_not_citation_identity),
+        ("retained-state-only-codec-reuse", owner.test_codec_feature_extraction_survives_target_and_state_cache_invalidation),
+    ]
+    checks.extend(("full-input-" + field, lambda field=field: owner.test_feature_cache_bucket_binds_exact_current_sample_inputs(field))
+                  for field in ("citation", "title", "section", "selected_frame", "embedding_vector",
+                                "parser_trace", "formula_metadata"))
+    checks.extend(("owning-target-revision-" + revision,
+        lambda revision=revision: owner.test_instance_targets_do_not_follow_a_different_sample_revision(revision))
+        for revision in ("formula", "source", "sample-id"))
+    checks.extend([
+        ("owning-bounded-target-explicit-alias", owner.test_bounded_targets_require_an_exact_evaluated_row_and_explicit_alias),
+        ("owning-atomic-ambiguity-refusal", owner.test_ambiguous_target_priming_refuses_before_writing_any_revision),
+        ("owning-override-restoration", lambda: owner.test_temporary_target_override_restores_only_the_selected_revision_on_error(patch)),
+    ])
+    results = []
+    with owner.pytest.MonkeyPatch.context() as patch:
+        # Keep this software-only fixture on the same explicit CPU/Python
+        # compute branch, including the older retained default-device test.
+        patch.setitem(owner.AdaptiveModalAutoencoder.__init__.__kwdefaults__, "compute_device", "python")
+        for name, callable_case in checks:
+            try:
+                callable_case()
+            except Exception as error:
+                results.append(dict(case=name, passed=False, type=type(error).__name__, message=str(error),
+                                    traceback=traceback.format_exc(limit=10)))
+            else:
+                results.append(dict(case=name, passed=True))
+    return results
+
+
+outcome = {}
+code = 2
+try:
+    assert sys.argv[1:] in (["baseline"], ["overlay"])
+    prior.install_kernel_guards()
+    baseline = fixture_loader(sys.argv[1] == "overlay")
+    fixture = adapter.import_fixture(prior)
+    owner = load_owning_tests()
+    outcome["rows"] = check_cases(owner, fixture)
+    assert not prior.denied
+    code = 0 if all(row["passed"] for row in outcome["rows"]) else 1
+except Exception as error:
+    traceback.print_exc()
+    outcome["refusal"] = repr(error)
+finally:
+    outcome.update(worker_rc=code, denied=prior.denied, guard=prior.guard, compiled=prior.compiled,
+                   project_body_bytes=prior.compiled_total, model_fit=False)
+    print(json.dumps(outcome, sort_keys=True))
+raise SystemExit(code)

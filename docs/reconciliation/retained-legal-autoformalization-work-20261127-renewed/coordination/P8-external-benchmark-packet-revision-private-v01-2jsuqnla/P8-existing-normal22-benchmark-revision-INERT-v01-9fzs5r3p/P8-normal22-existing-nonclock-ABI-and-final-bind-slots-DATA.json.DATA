@@ -1,0 +1,217 @@
+{
+  "actual_execution_and_results": null,
+  "clock_resource_grant_effect_IO_output": null,
+  "current_Source_actual_or_fresh_selection": null,
+  "existing_DATA_refs": {
+    "READ6": {
+      "bytes": 3080,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/P8-existing-normal22-benchmark-revision-INERT-v01-9fzs5r3p/P8-normal22-READ6-role-plan-nonclock-DATA.json",
+      "sha256": "65c75e3aac48a1a0367b9bf5999107bbfcf8abc85c5822cdea72f40c05771689"
+    },
+    "roster": {
+      "bytes": 12238,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/P8-existing-normal22-benchmark-revision-INERT-v01-9fzs5r3p/P8-normal22-independent-literal-roster-DATA.json",
+      "sha256": "0c1ef0b558781e74723aefe16c6c7b0f44c86f02837edac84122277ad477c9d2"
+    },
+    "source2": {
+      "bytes": 2749,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/P8-existing-normal22-benchmark-revision-INERT-v01-9fzs5r3p/P8-Source2-targets-nonclock-DATA.json",
+      "sha256": "e984b2f05d96171006211e51d09028c0eeaeaab4840b60e4eff44ad0336554ee"
+    }
+  },
+  "final_Root_bind_symbol_order": {
+    "bootstrap": [
+      "ROOT_RUNTIME_SELECTION",
+      "BINDING_MANIFEST_REFERENCE",
+      "ADMITTED_IO_PLAN_REFERENCE",
+      "EFFECT_DECISION_REFERENCE"
+    ],
+    "bootstrap_join": "BOOTSTRAP_REFERENCE uses final actually bound bootstrap bytes, not the inert template.",
+    "execution_order": "Exactly the inherited 16-selector/22-node checks followed by RUN in actual COLLECT order.",
+    "manifest": "Existing actual nonclock manifest first. Root-only current selection, admitted effect and IO references last.",
+    "operator": [
+      "ROOT_SELECTION",
+      "ROOT_RUNTIME_SELECTION",
+      "FINAL_OUTPUT_PATH",
+      "FINAL_EFFECT_DECISION_REFERENCE",
+      "FINAL_EFFECT_DECISION",
+      "FINAL_ADMITTED_IO_PLAN_REFERENCE",
+      "FINAL_BINDING_MANIFEST_REFERENCE",
+      "FINAL_BINDING_MANIFEST",
+      "BOOTSTRAP_REFERENCE"
+    ]
+  },
+  "historical_template_refs": {
+    "abi": {
+      "bytes": 785,
+      "path": "/tmp/Main-P8-existing-normal21-INERT-profile-private-v01/P8-normal21-aggregate-READ-ABI-INERT.json",
+      "sha256": "522fada8cd2766fce1655bfa8b7885623dd3a73fbcb2e556290685a8e2c18308"
+    },
+    "fixture": {
+      "bytes": 905,
+      "path": "/tmp/Main-P8-existing-normal21-INERT-profile-private-v01/P8-normal21-fixture-closure-INERT.json",
+      "sha256": "f642777a815f51000b7925cbbd1f385088328a92a871cb619ce393f7a1253080"
+    },
+    "manifest": {
+      "bytes": 1015,
+      "path": "/tmp/Main-P8-existing-normal21-INERT-profile-private-v01/P8-normal21-binding-manifest-INERT.json",
+      "sha256": "e7a29834b426ef85967f72af1fa318eda0348a80fbe3ad37e6ab1873c3098be2"
+    }
+  },
+  "historical_v307_binding_recipe_only": {
+    "bytes": 2794,
+    "path": "/tmp/P8-existing-normal21-actual-binding-private-v01/actual-READ6-bound-normal21-nonclock-v01/Root-P8-normal21-existing-nine-plus-four-final-binding-recipe.json",
+    "sha256": "36f7bf1cfd551040bff79a32365dc57913d643f7e7d3d1de8067ec73c7bd4174"
+  },
+  "nonclock_before_final_Root_bind": {
+    "bootstrap": [
+      "ROOT",
+      "ADDITIONAL_A_ROOT",
+      "EXPECTED_MODULES",
+      "REQUIRED_CANONICAL_CONFTESTS",
+      "PYTEST_INIFILE",
+      "GIT_CANDIDATE_PROVENANCE",
+      "ADDITIONAL_A_PROVENANCE",
+      "SOURCE_READ_BINDING_REFERENCE",
+      "SOURCE_EPOCH_SHA256",
+      "SOURCE_EPOCH_RECORD_COUNT"
+    ],
+    "inputs": "After SQL51 custody release, validate exact target preimages through existing Source2. Bind actual current source and Git readbacks after install, local freeze and exact READ6. Retain prior epoch lineage with independent current checks. The shared Source42 loader is an explicit current-identity bind at source42 before use. PREP is unused and has no effect binding.",
+    "operator": [
+      "FINAL_ABSENT_PATHS",
+      "FINAL_D_ROOT",
+      "FINAL_D_HEAD",
+      "FINAL_D_TREE",
+      "FINAL_A_ROOT",
+      "FINAL_A_HEAD",
+      "FINAL_A_TREE",
+      "D_READ_BINDING_REFERENCE",
+      "FINAL_MODULE_BINDINGS",
+      "FINAL_D_PROVENANCE",
+      "FINAL_A_PROVENANCE",
+      "FINAL_SOURCE_PROJECTS",
+      "FINAL_SDK_BINDINGS",
+      "FINAL_RESOURCE_STATE_PATH",
+      "FINAL_EXPECTED_RESOURCE_CONFIG",
+      "FINAL_EXPECTED_CAPACITY",
+      "FINAL_FIXTURE_CLOSURE_REFERENCE",
+      "FINAL_ADDITIONAL_IMPORT_ROOTS",
+      "source42"
+    ]
+  },
+  "owner_adaptation_READY": {
+    "bytes": 13435,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/P8-existing-normal22-benchmark-revision-INERT-v01-9fzs5r3p/READY-P8-existing-normal22-and-Source2-nonclock-INERT.json",
+    "sha256": "ff5be4fddd01828464dce1fdbad8b7653e77da5c103b16922c7e4dadd349c343"
+  },
+  "schema": "P8-normal22-v307-existing-nonclock-ABI-shape-and-slot-order/v1",
+  "scope": "Private inert DATA. Historical normal21 evidence remains historical. Source WRITE custody and Source READ evidence retain separate provenance. No controls executed or canonical state changed.",
+  "six_module_slot_identities_only": {
+    "ipfs_datasets_py.logic.integration.reasoning.legal_ir_premise_security": {
+      "actual_Current_SHA256": null,
+      "actual_Current_full9": null,
+      "actual_old_or_new_epoch_bytes": null,
+      "relative_path": "ipfs_datasets_py/logic/integration/reasoning/legal_ir_premise_security.py"
+    },
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_eval_splits": {
+      "actual_Current_SHA256": null,
+      "actual_Current_full9": null,
+      "actual_old_or_new_epoch_bytes": null,
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py"
+    },
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_external_benchmark": {
+      "actual_Current_SHA256": null,
+      "actual_Current_full9": null,
+      "actual_old_or_new_epoch_bytes": null,
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py"
+    },
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_family_evaluator": {
+      "actual_Current_SHA256": null,
+      "actual_Current_full9": null,
+      "actual_old_or_new_epoch_bytes": null,
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py"
+    },
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_semantic_metrics": {
+      "actual_Current_SHA256": null,
+      "actual_Current_full9": null,
+      "actual_old_or_new_epoch_bytes": null,
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_semantic_metrics.py"
+    },
+    "tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_external_benchmark": {
+      "actual_Current_SHA256": null,
+      "actual_Current_full9": null,
+      "actual_old_or_new_epoch_bytes": null,
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py"
+    }
+  },
+  "unbound_payloads_preserving_existing_wire_contracts": {
+    "aggregate_READ_ABI": {
+      "A_provenance": null,
+      "D_provenance": null,
+      "Root_selected": null,
+      "Source_closed": null,
+      "actual_fixture_reference": null,
+      "actual_source_closeout_reference": null,
+      "binding_note": "Existing READ ABI retained. A closed WRITE is not READ evidence; an owned-module-close field must carry actual ownership/closure provenance, never invented for metadata-only READs.",
+      "ordinary22_execution": null,
+      "outer_epoch_record_count": null,
+      "outer_epoch_reference": null,
+      "owned_module_closed": null,
+      "owned_module_closed_provenance": null,
+      "physical_IO_accounting_complete": null,
+      "protected_index_reference": null,
+      "python_epoch_record_count": null,
+      "python_epoch_reference": null,
+      "schema": "actual-D27-observed-D-root-initializer-READ-small-closeout/v1"
+    },
+    "binding_manifest": {
+      "A_provenance": null,
+      "D_provenance": null,
+      "Root_selected": null,
+      "Source_WRITE_claimed": false,
+      "actual_configuration_bindings": null,
+      "actual_module_compilation": null,
+      "admitted_io_plan_reference": null,
+      "effect_decision_reference": null,
+      "expected_static_selection_reference": {
+        "bytes": 12238,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/P8-existing-normal22-benchmark-revision-INERT-v01-9fzs5r3p/P8-normal22-independent-literal-roster-DATA.json",
+        "sha256": "0c1ef0b558781e74723aefe16c6c7b0f44c86f02837edac84122277ad477c9d2"
+      },
+      "expected_static_source_contract_reference": {
+        "bytes": 3080,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/P8-existing-normal22-benchmark-revision-INERT-v01-9fzs5r3p/P8-normal22-READ6-role-plan-nonclock-DATA.json",
+        "sha256": "65c75e3aac48a1a0367b9bf5999107bbfcf8abc85c5822cdea72f40c05771689"
+      },
+      "fixture_closure_reference": null,
+      "frozen_Git_candidates": null,
+      "modules": null,
+      "projects": null,
+      "schema": "P8-normal21-binding-manifest-INERT/v1",
+      "source_read_binding_reference": null
+    },
+    "ordinary_fixture_closure": {
+      "actual_frozen_D_root": null,
+      "expected_fixture_identity": {
+        "bytes": 5763,
+        "physical_rows": 2,
+        "relative_path": "tests/fixtures/legal_ir/external_expert_benchmark.jsonl",
+        "sha256": "fb9a76552e2b938369d93d73a2a25aa76a963101cac96fd487a246bc43c54971"
+      },
+      "expected_relative_normal_conftests": [
+        "conftest.py",
+        "tests/conftest.py",
+        "tests/unit/conftest.py",
+        "tests/unit/optimizers/conftest.py",
+        "tests/unit/optimizers/logic_theorem_optimizer/conftest.py"
+      ],
+      "expected_relative_pytest_inifile": "pytest.ini",
+      "fixture_resolved_from_actual_test_origin": null,
+      "ordinary_invocation_policy": "Normal pytest.ini and exact five actual ancestor conftests; no -c /dev/null, --noconftest or confcutdir bypass.",
+      "pytest_inifile": null,
+      "required_fixture_closure": null,
+      "required_normal_conftests": null,
+      "schema": "P8-normal21-fixture-closure-INERT/v1"
+    }
+  }
+}

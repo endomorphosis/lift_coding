@@ -1,0 +1,133 @@
+{
+  "advertises_runnable_authority": false,
+  "current_exact_cached_fixture_pin": "efdd956ba61d5f001cf511078bb381ef93abab9cbbce1ff8e130bfbfc6a704a7",
+  "dataset": {
+    "clean_observed_before_after": true,
+    "head": "9f938e46a507322d2f35b717b0c14de7b9978a43",
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+    "tree": "e053a1041e4249b869065c3a00f5be8d91ff2243"
+  },
+  "existing_hosted_CI_selector": "tests/integration/logic/backends/test_kernel_backends.py::test_lean_native_v3_proof_cache_round_trip_and_exact_reuse_context",
+  "existing_local_resource_owner_route": {
+    "callee": "_assert_lean_native_v3_proof_cache_round_trip",
+    "compiler_expected_observations": [
+      "one real version probe",
+      "one actual profile discovery compile",
+      "one actual exact-obligation compile",
+      "zero Native calls during disk reopen, cache reuse and mismatch controls"
+    ],
+    "current_native_inputs_compiler_and_resource_state_bound": false,
+    "generated_report_name": "native-lean-proof-cache-v3.json",
+    "historical_caller": {
+      "bytes": 6940,
+      "path": "/tmp/legal-ir-native-cache-controls-20261109-v03/bootstrap.py",
+      "sha256": "d7da7d85d1159eaacf9837c835f1d7fb888dc2347271f9bd31b053235ce6d2a1"
+    },
+    "historical_executable_name": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+    "historical_executable_sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+    "historical_plan": {
+      "bytes": 21586,
+      "path": "/tmp/legal-ir-native-cache-controls-20261109-v03/plan.json",
+      "sha256": "d62b16e59ce28bea4e47ae73301789a2039e45aa8fc6cb31040723cb36afba9c"
+    },
+    "historical_terminal": {
+      "bytes": 875,
+      "path": "/tmp/legal-ir-native-cache-controls-20261109-v03/parent-closeout.json",
+      "sha256": "ad27c5c66e4b321790355ec8318bd4add1578e8f36346d739adfcfa96c90d37d"
+    }
+  },
+  "existing_standalone_CI_opt_in": "IPFS_DATASETS_RUN_NATIVE_LEAN=1",
+  "new_Source_lease_Git_mutation_CI_Native_execution_or_model_action": false,
+  "owner_symbols": {
+    "_assert_lean_native_v3_proof_cache_round_trip": {
+      "AST_unchanged_since_ordinary35_and_Native3_frontier": true,
+      "end_line": 1446,
+      "line": 1218
+    },
+    "_load_native_proof_cache_fixture_owner": {
+      "AST_unchanged_since_ordinary35_and_Native3_frontier": true,
+      "end_line": 1215,
+      "line": 1192
+    },
+    "test_lean_native_v3_proof_cache_round_trip_and_exact_reuse_context": {
+      "AST_unchanged_since_ordinary35_and_Native3_frontier": true,
+      "end_line": 1472,
+      "line": 1453
+    }
+  },
+  "proven_scope": {
+    "earlier_proof_cache35_cache_and_fixture_blob_unchanged": true,
+    "new_runtime_or_Native_qualification": false,
+    "ordinary66": {
+      "bytes": 6020,
+      "path": "/tmp/Root-Phase1-Lean-outcome66-selected-v225-csqemsg0/Root-Phase1-Lean-outcome-ordinary66-qualified-Source-resource-closed-small-v225.json",
+      "sha256": "11416dbf31205cdbaba4faaa24196a0e86a07ca9a37c307ffa6ba4762f74c2f2"
+    },
+    "ordinary66_current_owner_SHA_join": true,
+    "ordinary66_fixture_loader_cases": [],
+    "ordinary66_native_wrapper_present": false,
+    "ordinary66_raw_JUnit": {
+      "bytes": 12937,
+      "logical_name": "junit.xml",
+      "path": "/tmp/Root-Phase1-Lean-outcome66-selected-v225-csqemsg0/actual-output/phase1-lean-outcome66-run-result0-output1.bin",
+      "sha256": "27e86ac9c250916cd736b3695286c168ba6baad8abeac3fd5261a6fb68cd8e84"
+    },
+    "ordinary66_unique_passes": 66,
+    "prior_Native3": {
+      "bytes": 8099,
+      "path": "/tmp/Reader-P1-current-published-Source-and-assets-read-preparation-private-v01/Native3-current-D4cd-1191-binding-v01/actual-current-D4cd-Native3-owned-terminal-small-v01.json",
+      "sha256": "5bc470ccbfbd841e4a20aac552c7802ca86591a905a71e4fa362ee321dae4598"
+    },
+    "prior_Native3_cache_roundtrip_covered": false
+  },
+  "required_for_fresh_result": [
+    "Have the existing Source owner bind fresh D and A roots and the selected real import and loader closure, including fixture dynamic compile.",
+    "Have the existing admitted Native owner bind actual selected Native executable/identity, interpreter and applicable limits; allocate current Source I/O and admitted resources under current policy.",
+    "Use a fresh output root and actual caller-owned process observation and closure to join compiled Lean backend, proof cache and exact helper/fixture with the native-cache report."
+  ],
+  "role_blobs": {
+    ".github/workflows/legal-v2-reasoner-ci.yml": {
+      "current_Git_blob": "46152c94393bd2c7d68bbe2009c437d461b16014",
+      "current_blob_bytes": 62773,
+      "current_blob_sha256": "8f2b612fd27c59249a9e38d5107271413ecc61ebaad2b1f6eb24ff3516b12ecd",
+      "ordinary35_and_Native3_frontier_Git_blob": "46152c94393bd2c7d68bbe2009c437d461b16014",
+      "same_blob_as_that_frontier": true
+    },
+    "ipfs_datasets_py/logic/backends/kernel/lean.py": {
+      "current_Git_blob": "1e1b75b74da8740b5808fb3dd77671eab5673f35",
+      "current_blob_bytes": 103060,
+      "current_blob_sha256": "1b250246f6ecea6a75b75da8a46f77abac1d5a02a5eba4cd2c1ec0e978e4efc9",
+      "ordinary35_and_Native3_frontier_Git_blob": "0b5183973a0106325be1e6673ba75ca7fa0a8e53",
+      "same_blob_as_that_frontier": false
+    },
+    "ipfs_datasets_py/logic/ir_core/protocols.py": {
+      "current_Git_blob": "e0c645ccac9c3e89cc72e6a6c773a49528257946",
+      "current_blob_bytes": 57414,
+      "current_blob_sha256": "b452a7095a2524f0ea3f4e4f3a395643d3257cd6f42e3c77f8e1817df62f6fed",
+      "ordinary35_and_Native3_frontier_Git_blob": "e0c645ccac9c3e89cc72e6a6c773a49528257946",
+      "same_blob_as_that_frontier": true
+    },
+    "ipfs_datasets_py/logic/legal_ir/proof_cache.py": {
+      "current_Git_blob": "d23eea85c38abc9e047594b0234e2c8396eee23e",
+      "current_blob_bytes": 61410,
+      "current_blob_sha256": "fc7b97d6873f01e3c8073aaa215b456b1a6bcc83016ba7401ea36abb18351749",
+      "ordinary35_and_Native3_frontier_Git_blob": "d23eea85c38abc9e047594b0234e2c8396eee23e",
+      "same_blob_as_that_frontier": true
+    },
+    "tests/integration/logic/backends/test_kernel_backends.py": {
+      "current_Git_blob": "238bda4cc8502210242ee32aa5cd0259a55b9649",
+      "current_blob_bytes": 111809,
+      "current_blob_sha256": "1405d01db7bf3462a46fcc8213b055de7604970a4bfb33a6c51424555b5a973c",
+      "ordinary35_and_Native3_frontier_Git_blob": "1010f0521c704f47fbf6808720c540ce2ed37724",
+      "same_blob_as_that_frontier": false
+    },
+    "tests/unit/logic/legal_ir/test_proof_cache.py": {
+      "current_Git_blob": "4a33a98fc79f34852be49691e68a01615201ed19",
+      "current_blob_bytes": 66463,
+      "current_blob_sha256": "efdd956ba61d5f001cf511078bb381ef93abab9cbbce1ff8e130bfbfc6a704a7",
+      "ordinary35_and_Native3_frontier_Git_blob": "4a33a98fc79f34852be49691e68a01615201ed19",
+      "same_blob_as_that_frontier": true
+    }
+  },
+  "schema": "P1-existing-Lean-cache-current-Git-owner-compatibility-handoff/v1"
+}

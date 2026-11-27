@@ -1,0 +1,136 @@
+import ast
+import difflib
+import hashlib
+import json
+import os
+from pathlib import Path
+import stat
+import subprocess
+
+root=Path(__file__).resolve().parent
+repo=root.parents[2]/"repositories/datasets"
+old=root.parent/"P5-v11-evaluation-measurement-join-private-sl1z_6si"
+pub=root.parent/"actual-Phase5-v11-measurement-exact2-ordinary50-three-FF-publication-v471.json"
+previous=old/"SEALED-exact-two-V11-evaluation-measurement-private-50.json"
+env={**os.environ,"GIT_OPTIONAL_LOCKS":"0","GIT_NO_LAZY_FETCH":"1"}
+os.umask(0o022)
+def git(*args,cwd=repo):
+    return subprocess.check_output(["git","-c","core.preloadIndex=false","-C",str(cwd),*args],env=env)
+def sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+def blob(raw):
+    return hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest()
+def full9(st):
+    fields=("st_dev","st_ino","st_mode","st_nlink","st_uid","st_gid","st_size","st_mtime_ns","st_ctime_ns")
+    return {key:str(getattr(st,key)) for key in fields}
+def read(path):
+    with os.fdopen(os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK),"rb") as f:
+        before=os.fstat(f.fileno())
+        assert stat.S_ISREG(before.st_mode) and before.st_nlink==1
+        data=f.read()
+        assert full9(before)==full9(os.fstat(f.fileno()))==full9(path.lstat())
+        assert len(data)==before.st_size
+    return data,full9(before)
+def art(path):
+    data,f9=read(path)
+    return {"path":str(path),"bytes":len(data),"sha256":sha(data),"full9":f9}
+def auth(ref):
+    raw,_=read(Path(ref["path"]))
+    assert (len(raw),sha(raw))==(ref["bytes"],ref["sha256"])
+    return raw
+def put(path,raw,mode=0o400):
+    path.parent.mkdir(exist_ok=True,parents=True,mode=0o700)
+    with os.fdopen(os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,mode),"wb") as f:
+        f.write(raw); f.flush(); os.fsync(f.fileno())
+    assert read(path)[0]==raw
+    return art(path)
+
+def load(path):
+    return json.loads(read(path)[0])
+a,b=(load(root/f"input-spec.{mode}.json") for mode in ("before","after"))
+assert a["head"]==b["head"] and a["roles"]=={k:v for k,v in b["roles"].items() if k!="inference_candidate"}
+roles=b["roles"]
+roster=(load(root/"before.stdout"),load(root/"after.stdout"))
+assert roster[0]["counts"]=={"passed":51,"failed":4,"error":0}
+assert roster[1]["counts"]=={"passed":55,"failed":0,"error":0}
+old_run=load(old/"measurement-v02-after.stdout")
+before_nodes,after_nodes=([r["node"] for r in j["results"]] for j in roster)
+assert before_nodes==after_nodes and len(before_nodes)==len(set(before_nodes))==55
+assert before_nodes[:50]==[r["node"] for r in old_run["results"]]
+failures=[r for r in roster[0]["results"] if r["status"]!="passed"]
+assert len(failures)==4 and all(r["status"]=="failed" and "DID NOT RAISE" in r["error"] for r in failures)
+assert {r["node"].rsplit("[",1)[-1][:-1] for r in failures}=={
+    "nonempty-permitted","nonempty-retrieved","receipt-arguments","reference-unit"}
+assert (root/"before.exit").read_bytes()==b"1\n" and (root/"after.exit").read_bytes()==b"0\n"
+assert all(not (root/f"{mode}.stderr").stat().st_size for mode in ("before","after"))
+
+tip,tracking=git("rev-parse","HEAD","refs/remotes/origin/main").decode().splitlines()
+assert tip==tracking
+assert subprocess.run(["git","-C",str(repo),"merge-base","--is-ancestor",a["head"],tip],env=env).returncode==0
+pinned_paths={v["relative_path"] for v in roles.values() if "relative_path" in v}
+changed=set(git("diff","--name-only",a["head"],tip).decode().splitlines())
+assert not changed & pinned_paths
+def check_targets():
+    assert git("rev-parse","HEAD","refs/remotes/origin/main").decode().splitlines()==[tip,tip]
+    assert not git("status","--porcelain=v1","--untracked-files=all","--",roles["inference"]["relative_path"],roles["owning_test"]["relative_path"])
+check_targets()
+
+files={}
+scratch=root/"inverse-apply-private"
+scratch.mkdir(mode=0o700)
+diffs={"forward":[],"inverse":[]}
+for role in ("inference","owning_test"):
+    before_ref,after_ref=(roles[k] for k in (role,role+"_candidate"))
+    original,post=auth(before_ref),auth(after_ref)
+    relative=before_ref["relative_path"]
+    canonical,stamp=read(repo/relative)
+    tree_row=git("ls-tree",tip,"--",relative).decode().split("\t")[0].split()
+    assert canonical==original and tree_row==["100644","blob",blob(original)]
+    assert before_ref["git_blob"]==blob(original)
+    prior_ast=ast.parse(original).body
+    post_ast=ast.parse(post).body
+    length=len(prior_ast)
+    expected=["_check_reviewed_evaluation_outputs"] if role=="inference" else ["_reviewed_v11_bind_saved_source_control"]
+    assert [n.name for i,n in enumerate(prior_ast) if ast.dump(n)!=ast.dump(post_ast[i])]==expected
+    assert len(post_ast)==length+(role=="owning_test")
+    if role=="owning_test":
+        assert post_ast[-1].name=="test_reviewed_inference_v11_binds_source_only_arguments_and_reference_units"
+    files[role]={"path":relative,"canonical_path":str(repo/relative),"git_mode":"100644","canonical_before_full9":stamp,
+                 "before":{**art(Path(before_ref["path"])),"git_blob":blob(original)},
+                 "after":{**art(Path(after_ref["path"])),"proposed_git_blob":blob(post)},
+                 "existing_top_level_functions_changed":expected}
+    for direction,first,last in (("forward",original,post),("inverse",post,original)):
+        diffs[direction].extend(difflib.diff_bytes(difflib.unified_diff,first.splitlines(True),last.splitlines(True),
+            fromfile=b"a/"+os.fsencode(relative),tofile=b"b/"+os.fsencode(relative)))
+    put(scratch/relative,original,0o644)
+
+patches={}
+for direction,key in (("forward","after"),("inverse","before")):
+    path=root/(direction+".patch")
+    patches[direction]=put(path,b"".join(diffs[direction]))
+    git("apply","--no-index","--whitespace=nowarn",str(path),cwd=scratch)
+    for file in files.values():
+        actual,stamp=read(scratch/file["path"])
+        assert sha(actual)==file[key]["sha256"] and stat.S_IMODE(int(stamp["st_mode"]))==0o644
+check_targets()
+
+assert git("merge-base","--is-ancestor","91d1d59098",tip)==b""
+result={
+    "schema":"private-v11-saved-evaluation-source-only-reference-unit-exact-two/v1",
+    "repository":str(repo),"fixture_roles_at_HEAD":a["head"],"observed_target_pair_at_later_local_HEAD":tip,
+    "HEAD_tree":git("rev-parse","HEAD^{tree}").decode().strip(),
+    "later_head_changes_outside_fixture_roles":sorted(changed),"target_paths_clean_at_seal":True,
+    "retained_published_v471":art(pub),"retained_private_measurement_lineage":art(previous),
+    "files":files,"patches":patches,"roundtrip_targets_preserve_exact_bytes_and_mode":True,
+    "reproduced":{"current_owner_passed":51,"current_owner_failed":4,"candidate_passed":55,"candidate_failed":0,
+        "combined_errors_or_skips":0,"unchanged_retained50_order":True,"five_new_source_fidelity_cases":True,
+        "case_order":after_nodes,"failure_details":failures},
+    "results":{mode:[art(root/(mode+suffix)) for suffix in (".stdout",".stderr",".exit")] for mode in ("before","after")},
+    "inputs":[art(root/name) for name in ("input-spec.before.json","input-spec.after.json","existing-saved-output-runner-55.py")],
+    "authority_scope":{"private_exact_current_AST_linker_only":True,"normal_package_qualification":False,
+        "physical_original_owner_run":False,"decoder_model_or_tokenizer_loaded":False,
+        "native_or_statutory_qualification":False,"Source_lease_or_Git_index_mutation":False},
+    "next_exact_unit":"Existing two-file Source installation and freeze, then existing ordinary v471 saved-output route with 55 cases and actual current fixture/epoch/clock bindings."
+}
+print(json.dumps(put(root/"SEALED-v11-source-only-context-reference-units-private55.json",(json.dumps(result,indent=2,sort_keys=True)+"\n").encode())))
+print([(k,v["after"]["bytes"],v["after"]["sha256"]) for k,v in files.items()])

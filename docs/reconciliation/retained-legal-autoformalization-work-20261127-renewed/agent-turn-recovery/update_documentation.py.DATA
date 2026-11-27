@@ -1,0 +1,105 @@
+exec(compile(open('/tmp/legal-refusal-recovery-j_10md5l/install_checkpoint.py').read().split('originals = ')[0], '<load-source-control>', 'exec'))
+descriptor=json.loads((BASE/'evidence-descriptor.json').read_bytes())
+docs=ROOT/'ipfs_datasets_py/logic/autoformal'
+paths=[docs/'README.md',docs/'docs/HANDOFF.md',docs/'docs/OPERATIONS.md',docs/'docs/work_catalog.json']
+originals={p:p.read_bytes() for p in paths};updates={}
+p=paths[0];text=originals[p].decode()
+needle='See [operations](docs/OPERATIONS.md#agent-owner-pauses-and-independent-continuations).'
+assert text.count(needle)==1
+updates[p]=text.replace(needle,needle+' Exact provider-turn observations can now be ingested into a durable continuation checkpoint, retaining refusal evidence, spent attempts and both histories. The local owning suite passed 95 tests and 171 subtests; rejected operations remain held.').encode()
+p=paths[1];text=originals[p].decode();assert text.startswith('# Current handoff\n')
+note='''
+## Provider-turn continuation checkpoint — local software change
+
+The existing `agent-turn-recovery` command now accepts `--observation` for an already charged task and its exact original thread/turn. It preserves provider errors/evidence and emits `next_frontier` with policy holds and both histories. Cleanup and acceptance require explicit independent evidence; terminal provider status does not release an unknown Source/process/resource scope. Rejected operations, aliases and unaccepted dependents remain held, while independent already-authorized tasks retain existing scope, capacity and pause/usage checks. Dispatch, retry, resume, goal mutation and admission flags remain false.
+
+Observation mode requires an exclusive checkpoint output. Success follows file and directory fsync plus identity rechecks. Failed writes preserve partial artifacts and return failure; filename existence alone is not commit. The caller retains the whole checkpoint and compares its consumed-frontier digest before existing atomic claim/admission.
+
+All 95 local owning unit/CLI tests and 171 subtests passed, zero failures/errors/skips: 67 retained tests plus 28 new controls. Source hashes remained unchanged and the Source READ closed. Limits were one CPU, 60 CPU/wall seconds and 512MiB address space. Independent static review found three issues fixed before qualification: digesting mutable input twice, allowing refusal-evidence rewrites, and missing post-directory-sync identity checks. The tests cover those findings, duplicate events, wrong owners, unknown cleanup, failed syncs and retained budget/policy barriers. This isolated branch is not published and does not execute a live provider request, replay a rejected operation, change a host goal, or qualify Native Lean, statutory meaning, model training or corpus admission. The earlier 67-test record and broader failed runs remain historical.
+
+'''
+note+='Local evidence: `'+descriptor['path']+'` ('+str(descriptor['bytes'])+' bytes / SHA256 `'+descriptor['sha256']+'`).\n\n'
+updates[p]=text.replace('# Current handoff\n','# Current handoff\n\n'+note,1).encode()
+p=paths[2];text=originals[p].decode();anchor='## CLI4 separate original custody and retained failures'
+assert text.count(anchor)==1
+addition='''### Ingest an observed provider turn
+
+Use the same owner and existing V2 frontier:
+
+```sh
+python scripts/ops/legal_ir/run_autoformal_supervisor.py agent-turn-recovery \\
+  --inputs frontier.json --observation owner-turn.json --output checkpoint.json
+```
+
+`owner-turn.json` has exactly these fields, using actual original IDs/error and
+saved evidence references:
+
+```json
+{
+  "schema": "legal-ir-agent-turn-observation/v1",
+  "task_id": "existing-task",
+  "thread_id": "existing-thread",
+  "turn": {"id": "existing-turn", "status": "failed", "error": {"code": "policy_refusal", "message": "Original refusal"}},
+  "cleanup_confirmed": false,
+  "accepted": false,
+  "evidence_refs": []
+}
+```
+
+The task must already have a charged attempt and a matching current or retained
+owner observation. Supported provider states are `inProgress`, `completed`,
+`failed` and `interrupted`; absent/ambiguous state is not terminal. Cleanup and
+acceptance are never inferred. Keep them false without the existing owner's
+independent evidence. Live owners remain exact polling targets. A refusal and its
+original evidence stay held across aliases, resume directives and duplicate
+delivery; explicit pauses and run-wide usage/resource holds remain effective.
+
+Retain the whole output and pass its `next_frontier` into the next existing
+scheduling call. It includes the updated observation, policy holds and both
+histories; exact duplicate events preserve spent counters and the next frontier.
+Verify `observation_checkpoint.input_frontier_sha256` against the current immutable
+frontier before existing atomic claim/admission. Event and next-frontier digests
+are also included. This adapter does not authenticate its own provider metadata
+or mutate the task/goal store.
+
+Observation mode requires `--output`; the three paths must differ. Output creation
+is exclusive, with file and directory fsync and post-sync identity checks before
+success. Failure returns code 2, starts no work and may leave a partial output.
+Preserve it: existence alone is not a successful commit, and failed output must
+not drive a claim or automatic repeat. Existing planning-only stdout mode remains
+unchanged when `--observation` is absent. Local software qualification passed 95
+tests and 171 subtests; no live provider recovery was performed.
+
+'''
+updates[p]=text.replace(anchor,addition+anchor,1).encode()
+p=paths[3];data=json.loads(originals[p])
+c=next(c for c in data['components'] if c['id']=='supervisor-handoff-preflight')
+assert 'agent_turn_observation_checkpoint_v1' not in c
+c['agent_turn_observation_checkpoint_v1']={'api':'prepare_agent_turn_recovery_checkpoint_v1',
+ 'cli':'scripts/ops/legal_ir/run_autoformal_supervisor.py agent-turn-recovery --inputs frontier.json --observation owner-turn.json --output checkpoint.json',
+ 'evidence':descriptor,'qualification':'95 local owning tests and 171 subtests passed; Source READ closed.',
+ 'publication_status':'local_branch_not_published',
+ 'scope':'Existing-turn metadata ingestion and durable checkpoint only; no provider authentication, retry, dispatch, goal mutation, runtime or legal admission.',
+ 'task_component_selected_evidence_populations_unchanged':True}
+assert len(data['components'])==126 and len(data['selected_evidence'])==580
+text=originals[p].decode()
+marker='"id": "supervisor-handoff-preflight"'
+assert text.count(marker)==1
+start=text.rfind('\n    {',0,text.index(marker))+5
+old_component,consumed=json.JSONDecoder().raw_decode(text[start:])
+assert old_component['id']=='supervisor-handoff-preflight'
+position=text.rfind('\n    }',start,start+consumed)
+assert text[position:start+consumed]=='\n    }'
+field='agent_turn_observation_checkpoint_v1'
+fragment='\n'.join('    '+line for line in json.dumps({field:c[field]},sort_keys=True,indent=2,ensure_ascii=False).splitlines()[1:-1])
+insertion=',\n'+fragment
+new_text=text[:position]+insertion+text[position:]
+assert new_text[:position]+new_text[position+len(insertion):]==text
+assert json.loads(new_text)==data
+updates[p]=new_text.encode()
+with module.source_lease(ROOT,mode='write',timeout_seconds=30) as lease:
+ for p,before in originals.items():assert p.read_bytes()==before
+ for p,raw in updates.items():p.write_bytes(raw)
+ for p,raw in updates.items():assert p.read_bytes()==raw
+ facts=lease.to_dict()
+print(json.dumps({'Source_WRITE_closed':True,'lease':facts,'evidence':descriptor,'docs':[{'path':str(p),'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()} for p,raw in updates.items()]}))

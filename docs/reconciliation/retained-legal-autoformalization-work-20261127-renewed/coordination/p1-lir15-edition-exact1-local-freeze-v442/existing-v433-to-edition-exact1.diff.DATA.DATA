@@ -1,0 +1,143 @@
+--- existing-v433-freezer
++++ LIR15-exact1-freezer
+@@ -1,4 +1,5 @@
+-"""Freeze the two installed Phase 3 candidate-inventory files locally."""
++"""Freeze the exact installed source-edition LIR15 regression locally."""
++import ast
+ import hashlib
+ import json
+ import os
+@@ -9,16 +10,15 @@
+ 
+ coord = Path(__file__).resolve().parents[1]
+ repos = coord.parents[1] / "repositories"
+-output = coord / "actual-Phase3-candidate-inventory-exact2-local-freeze-v433.json"
++output = coord / "actual-P1-LIR15-edition-test-exact1-local-freeze-v442.json"
+ assert not output.exists()
+ source_ref = {
+-    "path": "/tmp/Root-Phase3-inventory-existing-Source2-v433-OTtX4THI/actual-Phase3-candidate-inventory-exact2-Source-closed-small-v433.json",
+-    "bytes": 5858,
+-    "sha256": "80b2eab6c6ef42f247838807eac4a2603616ef2dbc49bc56b90f053908baefcf",
++    "path": "/tmp/Root-P1-LIR15-edition-existing-Source1-v442-vCVPzhDr/actual-LIR15-source-edition-exact1-Source-closed-small-v442.json",
++    "bytes": 4733,
++    "sha256": "ba307fe9af4e3a8155baff8d69fcec36c5e79a77cf46e5ac9330f86741ded516",
+ }
+ expected = {
+-    "ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py": "7d3609f35c81a071798f37eb79ac310ab62e93ae",
+-    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py": "f3fd84f94af3c9957d2e43e485d4009a05c88d7c",
++    "tests/unit/logic/autoformal/test_legal_corpus_incremental.py": "808b589a20a8a82fb26292813fbb62feae188ef6",
+ }
+ fields = ("st_dev", "st_ino", "st_mode", "st_nlink", "st_uid", "st_gid",
+           "st_size", "st_mtime_ns", "st_ctime_ns")
+@@ -102,30 +102,36 @@
+ assert source["actual_owned_exit_code"]==0 and all(source[k] is True for k in (
+     "Root_selected","Source_closed","module_closed","write_complete",
+ ))
+-assert source["ordinary11"] is None and source["source_root"]==str(repos/"datasets")
++assert source["ordinary"] is None and source["source_root"]==str(repos/"datasets")
+ assert source["actual"]==source["actual_source_receipt"]
+ actual=json.loads(read_ref(source["actual"]))
+ assert all(actual[k] is True for k in (
+-    "Source_closed","module_closed","write_complete","all2_posts_staged_fsynced_and_readback_before_first_effect",
++    "Source_closed","module_closed","write_complete","all1_posts_staged_fsynced_and_readback_before_first_effect",
+ ))
+ assert actual["errors"]==actual["remaining_own_stages"]==actual["uncertain_stage_FDs"]==[]
+-assert len(actual["staged"])==2 and all(row["FD_closed"] and row["canonical_replacement_returned"] for row in actual["staged"])
++assert len(actual["staged"])==1 and all(row["FD_closed"] and row["canonical_replacement_returned"] for row in actual["staged"])
+ stamp_fields = ("path", "bytes", "sha256", "full9")
+-assert source["actual_installed"] == 2
++assert source["actual_installed"] == 1
+ projected = [{k:row[k] for k in stamp_fields} for row in source["installed"]]
+ assert actual["installed"] == actual["separate_post_readbacks"] == projected
+ assert set(actual["only_worktree_deltas"])==set(source["only_intended_worktree_changes"])==set(expected)
+ assert len(actual["Source_contexts"])==2
+ assert all(row["entered"] and row["exit_returned"] for row in actual["Source_contexts"])
+ assert {row["root"] for row in actual["Source_contexts"]}=={str(repos/"accelerate"),str(repos/"datasets")}
+-guide=json.loads(read_ref(source["prior_v432"]))
+-assert guide["terminal_returncode"] == 0 and guide["datasets_Guide537_unchanged"]
+-assert guide["exact_parent_links_only"]
++guide=json.loads(read_ref(source["prior_Guide539"]))
++assert source["prior_Guide539"] == dict(path=str(coord/"actual-guide539-four-doc-three-FF-publication-small-v441.json"),bytes=13378,sha256="0c41a15cb69673709ba75becf72a5598f4aceed4af5650cac42787b723413625")
++assert guide["terminal_returncode"] == 0 and guide["evidence_ordinal"] == 539
++assert guide["all_other_paths_and_gitlinks_preserved"]
+ candidate=json.loads(read_ref(source["candidate"]))
+-rows={row["relative_path"]:row for row in candidate["candidate_two_paths"]}
++assert candidate["status"] == "PRIVATE_TEST_ONLY_UNRUN" and candidate["no_product_patch_or_reproduced_product_defect_claim"]
++assert candidate["actual_collect_RUN_JUnit_subreports_results"] is None
++assert candidate["literal_new_parent_functions"] == 1
++assert source["candidate"] == dict(path="/tmp/Main-board-stall-evidence-refresh-private-v01/LIR15-source-version-private-v01/sealed-existing-LIR15-source-edition-only-one-test-UNRUN-v01.json",bytes=9807,sha256="81c12dc7656f40087815f2efffd7cb1316605d6d128b1452e637b045ad9ac4ba")
++path="tests/unit/logic/autoformal/test_legal_corpus_incremental.py"
++rows={path:dict(relative_path=path,before=dict(candidate["preimage"],blob="1561bf1dd487c780827a1a1b53d67548feec10dc"),after=candidate["postimage"],after_blob=candidate["postimage"]["Git_blob_sha1"],git_mode="100644")}
+ assert {path:row["after_blob"] for path,row in rows.items()}==expected
+-assert candidate["ordinary_qualification"] is None
+-assert candidate["Source_install"] is None
++assert candidate["selected_function"] == path+"::test_source_edition_only_change_splits_shared_definition_cache_and_matches_clean"
++assert source["expected_post_Git_blob"] == expected[path]
+ 
+ installed = {row["path"]:row for row in projected}
+ assert set(installed) == {str(repos/"datasets"/path) for path in expected}
+@@ -143,12 +149,12 @@
+ for repo,snapshot in {"datasets":parent,**peers}.items():
+     assert all(snapshot[k]==guide["repositories"][repo][k] for k in ("HEAD","tree")), repo
+     assert snapshot["local_origin_main_tracking_ref"] == snapshot["HEAD"], repo
+-    assert snapshot["index"] == guide["index_after"][repo], repo
++    assert snapshot["index"] == guide["index_readback"][repo]["after"], repo
+ prewrite_index=source["frozen_prewrite_D_index"]
+ assert {k:prewrite_index[k] for k in ("path","bytes","sha256","full9")} == parent["index"]
+-saved_index=prewrite_index["raw_reference"]
+-assert saved_index["sha256"]==parent["index"]["sha256"] and saved_index["bytes"]==parent["index"]["bytes"]
+-assert actual["before_root"]["HEAD"]==actual["after_root"]["HEAD"]==parent["HEAD"]==source["old_head"]=="ff513adcfc94f48f0c76c8639dc10a1cd213264d"
++captured_indexes=[row for row in actual["Git_aux_before"] if row["path"]==parent["index"]["path"]]
++assert len(captured_indexes)==1 and {k:captured_indexes[0][k] for k in ("path","bytes","sha256","full9")}==parent["index"]
++assert actual["before_root"]["HEAD"]==actual["after_root"]["HEAD"]==parent["HEAD"]==source["old_head"]=="d60c456d6f522d074499bf861e5bb0227d5d8645"
+ assert actual["before_root"]["tree"]==actual["after_root"]["tree"]==parent["tree"]
+ assert all(status(repo)==b"" for repo in peers)
+ assert set(status("datasets").split(b"\0")) == {b"",*(f" M {path}".encode() for path in expected)}
+@@ -177,6 +183,12 @@
+         os.fsync(dest.fileno())
+     assert zlib.decompress(exact(object_path)[0])==raw_object
+     assert git("datasets","cat-file","blob",baseline_oid)==baseline
++    assert len(baseline)==188040 and hashlib.sha256(baseline).hexdigest()=="d774f0274f37a554da8f1bb9345b22c7f17ad12c6ed28ac350c6d473a2ce04c1"
++    assert len(raw)==193595 and hashlib.sha256(raw).hexdigest()=="b9bf04fd80ada4c4f0194e0d2c8aea47cf43bfab925fed07c08d8b6a3de20a9e" and raw.startswith(baseline)
++    old_AST,new_AST=ast.parse(baseline),ast.parse(raw)
++    assert len(new_AST.body)==len(old_AST.body)+1
++    assert [ast.dump(node,include_attributes=False) for node in old_AST.body]==[ast.dump(node,include_attributes=False) for node in new_AST.body[:-1]]
++    assert isinstance(new_AST.body[-1],ast.FunctionDef) and new_AST.body[-1].name==candidate["selected_function"].split("::")[1]
+     stage_matches(rel,row["before"]["blob"])
+     raw_posts[rel] = raw
+ git("datasets","diff","--cached","--quiet","--exit-code")
+@@ -185,7 +197,7 @@
+ assert all(frozen(repo)==peer for repo,peer in peers.items())
+ assert all(exact(repos/"datasets"/rel)[1]==installed[str(repos/"datasets"/rel)] for rel in expected)
+ 
+-print(json.dumps(dict(preflight_two_exact=True,parent=parent["HEAD"],staging=sorted(expected))),flush=True)
++print(json.dumps(dict(preflight_one_exact=True,parent=parent["HEAD"],staging=sorted(expected))),flush=True)
+ git("datasets","add","--",*sorted(expected))
+ assert set(status("datasets").split(b"\0")) == {b"",*(f"M  {path}".encode() for path in expected)}
+ for rel,blob in expected.items():
+@@ -193,7 +205,7 @@
+     assert git("datasets","cat-file","blob",blob) == raw_posts[rel]
+     assert exact(repos/"datasets"/rel)[1] == installed[str(repos/"datasets"/rel)]
+ git("datasets","diff","--cached","--check")
+-print(git("datasets","commit","-m","Retain candidate interface inventory dispositions").decode(),flush=True)
++print(git("datasets","commit","-m","Exercise source-edition isolation in incremental corpus cache").decode(),flush=True)
+ final = frozen("datasets")
+ assert status("datasets") == b""
+ assert final["local_origin_main_tracking_ref"] == parent["HEAD"]
+@@ -212,12 +224,12 @@
+     committed[rel] = dict(installed[str(path)],git_mode="100644",parent_blob=rows[rel]["before"]["blob"],
+                           stage0_and_committed_blob=blob)
+ record = {
+-    "schema":"actual-Phase3-candidate-inventory-exact2-local-only-freeze/v433",
++    "schema":"actual-P1-LIR15-edition-test-exact1-local-only-freeze/v442",
+     "source_closed":source_ref,"actual_source_receipt":source["actual"],"private_candidate":source["candidate"],
+-    "prior_v432_publication":source["prior_v432"],"prewrite_D_index":prewrite_index,
++    "prior_Guide539_publication":source["prior_Guide539"],"prewrite_D_index":prewrite_index,
+     "parent":parent,"frozen":final,"committed":committed,"unchanged_peers":peers,
+-    "local_clean":True,"pushed":False,"ordinary11_run":False,"terminal_returncode":0,
+-    "only_two_D_tree_entries_changed":True,"all_gitlinks_and_Guide537_preserved":True,
++    "local_clean":True,"pushed":False,"actual_test_or_Native_run":False,"terminal_returncode":0,
++    "only_one_D_tree_entry_changed":True,"all_gitlinks_and_Guide539_preserved":True,
+ }
+ raw = (json.dumps(record,sort_keys=True,indent=2)+"\n").encode()
+ with os.fdopen(os.open(output,os.O_CREAT|os.O_EXCL|os.O_WRONLY|os.O_NOFOLLOW,0o400),"wb") as f:

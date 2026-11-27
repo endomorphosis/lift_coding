@@ -1,0 +1,124 @@
+{
+  "Git_mutations": false,
+  "Native": false,
+  "SDK": false,
+  "SQL": false,
+  "all_prior_costs_and_failures_retained": true,
+  "canonical_Source_reads": 0,
+  "canonical_writes": 0,
+  "changes_required_from_this_navigation": [],
+  "existing_contracts": [
+    {
+      "invariant": "Closed versioned request; exact immutable law/span/entity revisions, bounded ordered artifact population and distinct component roles.",
+      "lines": [
+        503,
+        568
+      ]
+    },
+    {
+      "invariant": "Replay reviewed semantic admission; exact source-version/edition/occurrence, complete typed-IR bytes, current acyclic dependency manifest and reviewed graph.",
+      "lines": [
+        575,
+        606
+      ]
+    },
+    {
+      "invariant": "Revalidate complete Lean preservation project against same graph, admission, toolchain and pins.",
+      "lines": [
+        607,
+        620
+      ]
+    },
+    {
+      "invariant": "Revalidate source/span/entity join; join immutable revisions and package metadata/bytes, plus reviewed graph in V4.",
+      "lines": [
+        621,
+        668
+      ]
+    },
+    {
+      "invariant": "Optional retained proof evidence has explicit validators; replay alone keeps release, admission and proof authority false.",
+      "lines": [
+        669,
+        755
+      ]
+    },
+    {
+      "invariant": "Explicit V4 current-review and checked-Native observation paths; retained replay cannot acquire original Native authority.",
+      "lines": [
+        2250,
+        2312
+      ]
+    }
+  ],
+  "existing_test_map": [
+    {
+      "coverage": "Three-unit/13-artifact fictional preparation; resealed source, IR, graph, dependency, preservation, revision, population, stale-review and disconnected-package mutants.",
+      "lines": [
+        291,
+        469
+      ]
+    },
+    {
+      "coverage": "Signed physical crosswalk geometry/scope and equal-text artifact replacement.",
+      "lines": [
+        1014,
+        1110
+      ]
+    },
+    {
+      "coverage": "All nine canonical IR fields, graph AST and source/occurrence CIDs; changed toolchain, dependency, reviewer and omitted-field mutants.",
+      "lines": [
+        2069,
+        2197
+      ]
+    },
+    {
+      "coverage": "Explicit validate-closure CLI/profile selection.",
+      "lines": [
+        3019,
+        3053
+      ]
+    },
+    {
+      "coverage": "Independently supplied current registry/policy, expiry, dependency and rollback.",
+      "lines": [
+        3853,
+        3914
+      ]
+    },
+    {
+      "coverage": "Retained request/cache bytes and current-trust changes.",
+      "lines": [
+        4387,
+        4821
+      ]
+    }
+  ],
+  "full_goal_complete": false,
+  "leaf_owner_disposition": {
+    "proof_corpus_manifest": "Body/hash/CID/registry/lineage integrity, not replacement semantic join.",
+    "uscode_release_schema": "Structural/physical manifest contract, not replacement semantic join."
+  },
+  "legal_or_review_authority": false,
+  "network": false,
+  "new_schema_or_controller": false,
+  "owner": {
+    "bytes": 168024,
+    "cache_path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-release-validator-current-lookup-v01/ipfs_datasets_py__logic__autoformal__legal_release_coordinator_v1.py.published574.DATA",
+    "git_blob": "804144f8d656652ecf39db698ee6f389d2bf3833",
+    "repo_path": "ipfs_datasets_py/logic/autoformal/legal_release_coordinator_v1.py",
+    "sha256": "ddc5e64b56e6cde041f321e3044088cb74020d57cb3215a2d092757a96b78f2b"
+  },
+  "owning_test": {
+    "bytes": 294620,
+    "cache_path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-release-validator-current-lookup-v01/tests__unit__logic__autoformal__test_corpus_release_cli.py.published574.DATA",
+    "git_blob": "770c9a612e7f35fc6fd16ed79dc5a011ed93b674",
+    "repo_path": "tests/unit/logic/autoformal/test_corpus_release_cli.py",
+    "sha256": "f61a83b403b7d253b34b473d74d6411e7151f4ad26cf5075584c51c31b4780cb"
+  },
+  "publication": false,
+  "published_revision": "6106a4633ec6504ee8c004cc5a9c7fe348ff38bf",
+  "status": "FINITE_STATIC_CLEAR_NO_DISTINCT_PRODUCT_DEFECT",
+  "tests_run_this_unit": false
+}

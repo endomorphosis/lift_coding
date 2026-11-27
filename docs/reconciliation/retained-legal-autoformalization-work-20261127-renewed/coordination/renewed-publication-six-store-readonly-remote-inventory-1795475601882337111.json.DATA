@@ -1,0 +1,1675 @@
+{
+  "Git_mutations": false,
+  "environment": {
+    "GIT_NO_LAZY_FETCH": "1",
+    "GIT_OPTIONAL_LOCKS": "0"
+  },
+  "finished_ns": "1795475602324224367",
+  "repositories": {
+    "accelerate": {
+      "HEAD": "de4d5a62b6fac2df61769a6461c2ada97f788208",
+      "HEAD_ahead_remote_count": 0,
+      "HEAD_behind_remote_count": 0,
+      "bare": false,
+      "branch_ref_count": 2,
+      "branches": [
+        {
+          "oid": "81b5e11f3c6063486a7cadc6c3d4c6ea50e85bb2",
+          "ref": "refs/heads/main"
+        },
+        {
+          "oid": "de4d5a62b6fac2df61769a6461c2ada97f788208",
+          "ref": "refs/heads/reconcile/accelerator-autonomy-eight-files-20261123"
+        }
+      ],
+      "commands": [
+        {
+          "argv": [
+            "rev-parse",
+            "HEAD"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 41
+        },
+        {
+          "argv": [
+            "rev-parse",
+            "HEAD^{tree}"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 41
+        },
+        {
+          "argv": [
+            "remote",
+            "get-url",
+            "origin"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 56
+        },
+        {
+          "argv": [
+            "rev-parse",
+            "--is-bare-repository"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 6
+        },
+        {
+          "argv": [
+            "for-each-ref",
+            "--format=%(refname) %(objectname)",
+            "refs/heads"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 161
+        },
+        {
+          "argv": [
+            "log",
+            "-10",
+            "--format=%H%x00%P%x00%s"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 1569
+        },
+        {
+          "argv": [
+            "status",
+            "--porcelain=v1",
+            "-z",
+            "--untracked-files=normal"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        },
+        {
+          "argv": [
+            "ls-remote",
+            "--heads",
+            "origin",
+            "refs/heads/main"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 57
+        },
+        {
+          "argv": [
+            "cat-file",
+            "-e",
+            "de4d5a62b6fac2df61769a6461c2ada97f788208^{commit}"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        },
+        {
+          "argv": [
+            "cat-file",
+            "-e",
+            "de4d5a62b6fac2df61769a6461c2ada97f788208^{commit}"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        },
+        {
+          "argv": [
+            "merge-base",
+            "--is-ancestor",
+            "de4d5a62b6fac2df61769a6461c2ada97f788208",
+            "de4d5a62b6fac2df61769a6461c2ada97f788208"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        },
+        {
+          "argv": [
+            "rev-list",
+            "--count",
+            "de4d5a62b6fac2df61769a6461c2ada97f788208..HEAD"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 2
+        },
+        {
+          "argv": [
+            "log",
+            "-10",
+            "--format=%H%x00%s",
+            "de4d5a62b6fac2df61769a6461c2ada97f788208..HEAD"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        },
+        {
+          "argv": [
+            "rev-list",
+            "--left-right",
+            "--count",
+            "HEAD...de4d5a62b6fac2df61769a6461c2ada97f788208"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 4
+        },
+        {
+          "argv": [
+            "merge-base",
+            "--is-ancestor",
+            "de4d5a62b6fac2df61769a6461c2ada97f788208",
+            "de4d5a62b6fac2df61769a6461c2ada97f788208"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        }
+      ],
+      "last_published_commit_available_locally": true,
+      "last_published_reference": "de4d5a62b6fac2df61769a6461c2ada97f788208",
+      "local_HEAD_descends_from_last_published": true,
+      "local_commits_since_last_published_bounded": [],
+      "local_commits_since_last_published_count": 0,
+      "materialized_checkout_status": {
+        "checked": true,
+        "clean": true,
+        "porcelain_bytes": 0,
+        "porcelain_entries": []
+      },
+      "metadata_only": true,
+      "origin": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+      "recent_log": [
+        {
+          "commit": "de4d5a62b6fac2df61769a6461c2ada97f788208",
+          "parents": [
+            "3e101b1cace3d8223f148808a2faa87cf567d459"
+          ],
+          "subject": "Retain scoped supervisor evidence and reconciled worktree history [skip ci]"
+        },
+        {
+          "commit": "3e101b1cace3d8223f148808a2faa87cf567d459",
+          "parents": [
+            "317bd433b44791e1ff5f3eebee802832424f1953"
+          ],
+          "subject": "Preserve hierarchical refill state and scientific cycle identity [skip ci]"
+        },
+        {
+          "commit": "317bd433b44791e1ff5f3eebee802832424f1953",
+          "parents": [
+            "ffa674abc6794465cd4ebc5c458f3c5b27e09bb1"
+          ],
+          "subject": "Persist handoff payloads before existing transport attempts [skip ci]"
+        },
+        {
+          "commit": "ffa674abc6794465cd4ebc5c458f3c5b27e09bb1",
+          "parents": [
+            "9052a7b487c0f427a53fee6022caa2ab6ef24ba9"
+          ],
+          "subject": "Preserve the Codex CLI executable entry point [skip ci]"
+        },
+        {
+          "commit": "9052a7b487c0f427a53fee6022caa2ab6ef24ba9",
+          "parents": [
+            "efce9cb1f8a5b148cd22b0fdf6c016e4149e10b6"
+          ],
+          "subject": "Integrate autonomous prerequisite recovery and durable read-only handoffs [skip ci]"
+        },
+        {
+          "commit": "efce9cb1f8a5b148cd22b0fdf6c016e4149e10b6",
+          "parents": [
+            "2cba1dca337356c33b198df4e366cb279e4ff787"
+          ],
+          "subject": "[skip ci] Add physical definition realization bridge"
+        },
+        {
+          "commit": "2cba1dca337356c33b198df4e366cb279e4ff787",
+          "parents": [
+            "534a5362996fa4bf4fb453fbc09fe896fea35c7c"
+          ],
+          "subject": "Preserve Main Native bootstrap population and cross-domain packet controls"
+        },
+        {
+          "commit": "534a5362996fa4bf4fb453fbc09fe896fea35c7c",
+          "parents": [
+            "92fd1f07a0811deba7396cabf0edad6eae84aed9"
+          ],
+          "subject": "Reconcile guarded Native facade with existing custody and worker routes"
+        },
+        {
+          "commit": "92fd1f07a0811deba7396cabf0edad6eae84aed9",
+          "parents": [
+            "4f8fa9b4299af2bc5729ba71bedbe6a56a8ff637",
+            "999a9d1486065650af795facdde38995dabbcf5a"
+          ],
+          "subject": "Preserve maintained Source snapshot variants without replacing current main"
+        },
+        {
+          "commit": "999a9d1486065650af795facdde38995dabbcf5a",
+          "parents": [
+            "81b5e11f3c6063486a7cadc6c3d4c6ea50e85bb2"
+          ],
+          "subject": "UNADOPTED preservation-only closed current Source snapshot: accelerate"
+        }
+      ],
+      "remote_commit_available_locally": true,
+      "remote_descends_from_last_published": true,
+      "remote_main": "de4d5a62b6fac2df61769a6461c2ada97f788208",
+      "remote_main_differs_from_last_published": false,
+      "remote_main_equals_HEAD": true,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "tree": "74202f1a6a09085e0b0e238ea6d555806d8fb927"
+    },
+    "datasets": {
+      "HEAD": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+      "HEAD_ahead_remote_count": 0,
+      "HEAD_behind_remote_count": 0,
+      "bare": false,
+      "branch_ref_count": 2,
+      "branches": [
+        {
+          "oid": "3f1691d59cc0a310750c0b441b51d3528b17eb85",
+          "ref": "refs/heads/feat/legal-relational-counted-preservation-20261109"
+        },
+        {
+          "oid": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+          "ref": "refs/heads/work/phase6-capacity-composition-20261123"
+        }
+      ],
+      "commands": [
+        {
+          "argv": [
+            "rev-parse",
+            "HEAD"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 41
+        },
+        {
+          "argv": [
+            "rev-parse",
+            "HEAD^{tree}"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 41
+        },
+        {
+          "argv": [
+            "remote",
+            "get-url",
+            "origin"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 54
+        },
+        {
+          "argv": [
+            "rev-parse",
+            "--is-bare-repository"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 6
+        },
+        {
+          "argv": [
+            "for-each-ref",
+            "--format=%(refname) %(objectname)",
+            "refs/heads"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 198
+        },
+        {
+          "argv": [
+            "log",
+            "-10",
+            "--format=%H%x00%P%x00%s"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 1579
+        },
+        {
+          "argv": [
+            "status",
+            "--porcelain=v1",
+            "-z",
+            "--untracked-files=normal"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        },
+        {
+          "argv": [
+            "ls-remote",
+            "--heads",
+            "origin",
+            "refs/heads/main"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 57
+        },
+        {
+          "argv": [
+            "cat-file",
+            "-e",
+            "e88e21eed18ac588cce062d62f609d9738fbdfd7^{commit}"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        },
+        {
+          "argv": [
+            "cat-file",
+            "-e",
+            "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7^{commit}"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        },
+        {
+          "argv": [
+            "merge-base",
+            "--is-ancestor",
+            "e88e21eed18ac588cce062d62f609d9738fbdfd7",
+            "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        },
+        {
+          "argv": [
+            "rev-list",
+            "--count",
+            "e88e21eed18ac588cce062d62f609d9738fbdfd7..HEAD"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 2
+        },
+        {
+          "argv": [
+            "log",
+            "-10",
+            "--format=%H%x00%s",
+            "e88e21eed18ac588cce062d62f609d9738fbdfd7..HEAD"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 107
+        },
+        {
+          "argv": [
+            "rev-list",
+            "--left-right",
+            "--count",
+            "HEAD...4cd912f4e4256bde28ae331d6ebbb239e44f2bd7"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 4
+        },
+        {
+          "argv": [
+            "merge-base",
+            "--is-ancestor",
+            "e88e21eed18ac588cce062d62f609d9738fbdfd7",
+            "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        }
+      ],
+      "last_published_commit_available_locally": true,
+      "last_published_reference": "e88e21eed18ac588cce062d62f609d9738fbdfd7",
+      "local_HEAD_descends_from_last_published": true,
+      "local_commits_since_last_published_bounded": [
+        {
+          "commit": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+          "subject": "docs: record published CI and original-parent software validation"
+        }
+      ],
+      "local_commits_since_last_published_count": 1,
+      "materialized_checkout_status": {
+        "checked": true,
+        "clean": true,
+        "porcelain_bytes": 0,
+        "porcelain_entries": []
+      },
+      "metadata_only": true,
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+      "recent_log": [
+        {
+          "commit": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+          "parents": [
+            "e88e21eed18ac588cce062d62f609d9738fbdfd7"
+          ],
+          "subject": "docs: record published CI and original-parent software validation"
+        },
+        {
+          "commit": "e88e21eed18ac588cce062d62f609d9738fbdfd7",
+          "parents": [
+            "eaf1e0e7de5b121a8b6d5ac22019f997225cd68b"
+          ],
+          "subject": "Run pinned legal Lean validation on affected pushes and pull requests"
+        },
+        {
+          "commit": "eaf1e0e7de5b121a8b6d5ac22019f997225cd68b",
+          "parents": [
+            "e638daf628a5455a0b108c5990ffdf15ce7d5626"
+          ],
+          "subject": "Preserve source-scoped graph and fixture documentation [skip ci]"
+        },
+        {
+          "commit": "e638daf628a5455a0b108c5990ffdf15ce7d5626",
+          "parents": [
+            "bb4594586349b63f6a1bf5e8617cc1381140f98a"
+          ],
+          "subject": "Retain source-authored roundtrip cases and the unadopted CI trigger proposal [skip ci]"
+        },
+        {
+          "commit": "bb4594586349b63f6a1bf5e8617cc1381140f98a",
+          "parents": [
+            "0674cd0dafe11ac50e64744ef82d6e272db6627c"
+          ],
+          "subject": "Retain optional accelerator-parent release qualification integration [skip ci]"
+        },
+        {
+          "commit": "0674cd0dafe11ac50e64744ef82d6e272db6627c",
+          "parents": [
+            "cf393413b71ad81d1ff04917f89328b1b8daef93"
+          ],
+          "subject": "Preserve captured legal pipeline evidence without replacing current history [skip ci]"
+        },
+        {
+          "commit": "cf393413b71ad81d1ff04917f89328b1b8daef93",
+          "parents": [
+            "7e4229bd18807fc564dd31fd1a7f73adbc99a458"
+          ],
+          "subject": "Preserve the unadopted V4 numerical proposal and its limits [skip ci]"
+        },
+        {
+          "commit": "7e4229bd18807fc564dd31fd1a7f73adbc99a458",
+          "parents": [
+            "ee62ce0acc5ffc464d00f6eaef4219ff4e9aeef4"
+          ],
+          "subject": "Reconcile legal pipeline scheduling, WORLD objectives, and retained fixtures [skip ci]"
+        },
+        {
+          "commit": "ee62ce0acc5ffc464d00f6eaef4219ff4e9aeef4",
+          "parents": [
+            "333e1cd026c122284ab865ce259dccd7fa348f2e"
+          ],
+          "subject": "Retain decoder terminal policies and authenticated cache epochs [skip ci]"
+        },
+        {
+          "commit": "333e1cd026c122284ab865ce259dccd7fa348f2e",
+          "parents": [
+            "481a635ab4c0bd7ea39443c93f565dc64e4ec636"
+          ],
+          "subject": "Reconcile worldwide legal pipeline evidence through milestone493 [skip ci]"
+        }
+      ],
+      "remote_commit_available_locally": true,
+      "remote_descends_from_last_published": true,
+      "remote_main": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+      "remote_main_differs_from_last_published": true,
+      "remote_main_equals_HEAD": true,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "tree": "26c527d48b5f2f4c1ce034f7d76b73abb4bc38c4"
+    },
+    "hallucinate": {
+      "HEAD": "7b0a0ef351939f7c71ad82a90aea3240712c0844",
+      "HEAD_ahead_remote_count": 0,
+      "HEAD_behind_remote_count": 0,
+      "bare": false,
+      "branch_ref_count": 2,
+      "branches": [
+        {
+          "oid": "16d73f200ba972af595c1116be690e973fe1c3d3",
+          "ref": "refs/heads/main"
+        },
+        {
+          "oid": "7b0a0ef351939f7c71ad82a90aea3240712c0844",
+          "ref": "refs/heads/reconcile/all-work-app-main-20261123"
+        }
+      ],
+      "commands": [
+        {
+          "argv": [
+            "rev-parse",
+            "HEAD"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 41
+        },
+        {
+          "argv": [
+            "rev-parse",
+            "HEAD^{tree}"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 41
+        },
+        {
+          "argv": [
+            "remote",
+            "get-url",
+            "origin"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 53
+        },
+        {
+          "argv": [
+            "rev-parse",
+            "--is-bare-repository"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 6
+        },
+        {
+          "argv": [
+            "for-each-ref",
+            "--format=%(refname) %(objectname)",
+            "refs/heads"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 146
+        },
+        {
+          "argv": [
+            "log",
+            "-10",
+            "--format=%H%x00%P%x00%s"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 1383
+        },
+        {
+          "argv": [
+            "status",
+            "--porcelain=v1",
+            "-z",
+            "--untracked-files=normal"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        },
+        {
+          "argv": [
+            "ls-remote",
+            "--heads",
+            "origin",
+            "refs/heads/main"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 57
+        },
+        {
+          "argv": [
+            "cat-file",
+            "-e",
+            "3c660dcea2f23a733fb91e105a69216d8278a667^{commit}"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        },
+        {
+          "argv": [
+            "cat-file",
+            "-e",
+            "7b0a0ef351939f7c71ad82a90aea3240712c0844^{commit}"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        },
+        {
+          "argv": [
+            "merge-base",
+            "--is-ancestor",
+            "3c660dcea2f23a733fb91e105a69216d8278a667",
+            "7b0a0ef351939f7c71ad82a90aea3240712c0844"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        },
+        {
+          "argv": [
+            "rev-list",
+            "--count",
+            "3c660dcea2f23a733fb91e105a69216d8278a667..HEAD"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 2
+        },
+        {
+          "argv": [
+            "log",
+            "-10",
+            "--format=%H%x00%s",
+            "3c660dcea2f23a733fb91e105a69216d8278a667..HEAD"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 92
+        },
+        {
+          "argv": [
+            "rev-list",
+            "--left-right",
+            "--count",
+            "HEAD...7b0a0ef351939f7c71ad82a90aea3240712c0844"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 4
+        },
+        {
+          "argv": [
+            "merge-base",
+            "--is-ancestor",
+            "3c660dcea2f23a733fb91e105a69216d8278a667",
+            "7b0a0ef351939f7c71ad82a90aea3240712c0844"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        }
+      ],
+      "last_published_commit_available_locally": true,
+      "last_published_reference": "3c660dcea2f23a733fb91e105a69216d8278a667",
+      "local_HEAD_descends_from_last_published": true,
+      "local_commits_since_last_published_bounded": [
+        {
+          "commit": "7b0a0ef351939f7c71ad82a90aea3240712c0844",
+          "subject": "chore: advance datasets maintained-record evidence"
+        }
+      ],
+      "local_commits_since_last_published_count": 1,
+      "materialized_checkout_status": {
+        "checked": true,
+        "clean": true,
+        "porcelain_bytes": 0,
+        "porcelain_entries": []
+      },
+      "metadata_only": true,
+      "origin": "https://github.com/endomorphosis/hallucinate_app.git",
+      "recent_log": [
+        {
+          "commit": "7b0a0ef351939f7c71ad82a90aea3240712c0844",
+          "parents": [
+            "3c660dcea2f23a733fb91e105a69216d8278a667"
+          ],
+          "subject": "chore: advance datasets maintained-record evidence"
+        },
+        {
+          "commit": "3c660dcea2f23a733fb91e105a69216d8278a667",
+          "parents": [
+            "acdf3ebf0ddf53021950a23500e2c19b5c63ef80"
+          ],
+          "subject": "Update datasets link for automatic legal Lean validation"
+        },
+        {
+          "commit": "acdf3ebf0ddf53021950a23500e2c19b5c63ef80",
+          "parents": [
+            "784b9418c0a1779d50c377af0b8195994dfefa06"
+          ],
+          "subject": "Pin reconciled accelerator and legal pipeline modules [skip ci]"
+        },
+        {
+          "commit": "784b9418c0a1779d50c377af0b8195994dfefa06",
+          "parents": [
+            "1dd03ea8575b095a3bbaa5c8f23007101038ca56"
+          ],
+          "subject": "Pin verified datasets milestone485 [skip ci]"
+        },
+        {
+          "commit": "1dd03ea8575b095a3bbaa5c8f23007101038ca56",
+          "parents": [
+            "7121b42bbca3bdf3f0ab8b1f730bd47dc5bb0a93"
+          ],
+          "subject": "Pin verified datasets codec milestone484 [skip ci]"
+        },
+        {
+          "commit": "7121b42bbca3bdf3f0ab8b1f730bd47dc5bb0a93",
+          "parents": [
+            "580d8f6563a7a36fe96dd66465f0487735040150"
+          ],
+          "subject": "Pin reviewed datasets train-resume and quantity milestones [skip ci]"
+        },
+        {
+          "commit": "580d8f6563a7a36fe96dd66465f0487735040150",
+          "parents": [
+            "abf641037220a0f6773ad5396a4ea29f36eb67c2"
+          ],
+          "subject": "Advance matched decoder fit documentation pins [skip ci]"
+        },
+        {
+          "commit": "abf641037220a0f6773ad5396a4ea29f36eb67c2",
+          "parents": [
+            "aedf5737eeabf89152996c38dde24e3e2c75cfab"
+          ],
+          "subject": "Advance operational receipt and capacity dataset pins [skip ci]"
+        },
+        {
+          "commit": "aedf5737eeabf89152996c38dde24e3e2c75cfab",
+          "parents": [
+            "de12dc2579d89eb466fb7ab734010087c7556dc4"
+          ],
+          "subject": "Update read-only decoder dataset pins [skip ci]"
+        },
+        {
+          "commit": "de12dc2579d89eb466fb7ab734010087c7556dc4",
+          "parents": [
+            "3babc117118cb6c6e83b249d11b0793ef34a8d12"
+          ],
+          "subject": "Advance counted-logic and Unicode dataset pins [skip ci]"
+        }
+      ],
+      "remote_commit_available_locally": true,
+      "remote_descends_from_last_published": true,
+      "remote_main": "7b0a0ef351939f7c71ad82a90aea3240712c0844",
+      "remote_main_differs_from_last_published": true,
+      "remote_main_equals_HEAD": true,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/hallucinate",
+      "tree": "b6d114446177e1e0081e24356942e95b8f732a8a"
+    },
+    "kit": {
+      "HEAD": "f5de9ad4a52b37cc771a0d904b91da746e825553",
+      "HEAD_ahead_remote_count": 0,
+      "HEAD_behind_remote_count": 18,
+      "bare": false,
+      "branch_ref_count": 1,
+      "branches": [
+        {
+          "oid": "f5de9ad4a52b37cc771a0d904b91da746e825553",
+          "ref": "refs/heads/main"
+        }
+      ],
+      "commands": [
+        {
+          "argv": [
+            "rev-parse",
+            "HEAD"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 41
+        },
+        {
+          "argv": [
+            "rev-parse",
+            "HEAD^{tree}"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 41
+        },
+        {
+          "argv": [
+            "remote",
+            "get-url",
+            "origin"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 49
+        },
+        {
+          "argv": [
+            "rev-parse",
+            "--is-bare-repository"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 6
+        },
+        {
+          "argv": [
+            "for-each-ref",
+            "--format=%(refname) %(objectname)",
+            "refs/heads"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 57
+        },
+        {
+          "argv": [
+            "log",
+            "-10",
+            "--format=%H%x00%P%x00%s"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 1598
+        },
+        {
+          "argv": [
+            "ls-remote",
+            "--heads",
+            "origin",
+            "refs/heads/main"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 57
+        },
+        {
+          "argv": [
+            "cat-file",
+            "-e",
+            "b15442e490dc39d046a911ea663c73c99ed3c755^{commit}"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        },
+        {
+          "argv": [
+            "cat-file",
+            "-e",
+            "b15442e490dc39d046a911ea663c73c99ed3c755^{commit}"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        },
+        {
+          "argv": [
+            "merge-base",
+            "--is-ancestor",
+            "b15442e490dc39d046a911ea663c73c99ed3c755",
+            "f5de9ad4a52b37cc771a0d904b91da746e825553"
+          ],
+          "rc": 1,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        },
+        {
+          "argv": [
+            "rev-list",
+            "--count",
+            "b15442e490dc39d046a911ea663c73c99ed3c755..HEAD"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 2
+        },
+        {
+          "argv": [
+            "log",
+            "-10",
+            "--format=%H%x00%s",
+            "b15442e490dc39d046a911ea663c73c99ed3c755..HEAD"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        },
+        {
+          "argv": [
+            "rev-list",
+            "--left-right",
+            "--count",
+            "HEAD...b15442e490dc39d046a911ea663c73c99ed3c755"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 5
+        },
+        {
+          "argv": [
+            "merge-base",
+            "--is-ancestor",
+            "b15442e490dc39d046a911ea663c73c99ed3c755",
+            "b15442e490dc39d046a911ea663c73c99ed3c755"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        }
+      ],
+      "last_published_commit_available_locally": true,
+      "last_published_reference": "b15442e490dc39d046a911ea663c73c99ed3c755",
+      "local_HEAD_descends_from_last_published": false,
+      "local_commits_since_last_published_bounded": [],
+      "local_commits_since_last_published_count": 0,
+      "materialized_checkout_status": {
+        "checked": false,
+        "clean": null,
+        "reason": "Retained no-checkout publication store; no working-tree deletion inference."
+      },
+      "metadata_only": true,
+      "origin": "https://github.com/endomorphosis/ipfs_kit_py.git",
+      "recent_log": [
+        {
+          "commit": "f5de9ad4a52b37cc771a0d904b91da746e825553",
+          "parents": [
+            "f84ea1d01dc9d5eea7ab3c564a3158b5b8984950"
+          ],
+          "subject": "Add pinned IPFS identity, peer, and pubsub APIs"
+        },
+        {
+          "commit": "f84ea1d01dc9d5eea7ab3c564a3158b5b8984950",
+          "parents": [
+            "0007f735b90215fa611f39aa558eb512a493b8af"
+          ],
+          "subject": "chore: align accelerator submodule with published main"
+        },
+        {
+          "commit": "0007f735b90215fa611f39aa558eb512a493b8af",
+          "parents": [
+            "40c98c71b95be750509ffdb21e7e5494d91b4e79"
+          ],
+          "subject": "Refresh published dependency references and integrated Accelerate parent link"
+        },
+        {
+          "commit": "40c98c71b95be750509ffdb21e7e5494d91b4e79",
+          "parents": [
+            "8ac00bb1974b1378e12091d546d8425af34049e0"
+          ],
+          "subject": "Preserve bounded canonical wire JSON through admitted DuckDB storage"
+        },
+        {
+          "commit": "8ac00bb1974b1378e12091d546d8425af34049e0",
+          "parents": [
+            "66b411bb8d864028aa4228abe34ff568f1901416"
+          ],
+          "subject": "Restore complete pinned canonical source tree after archival history integration"
+        },
+        {
+          "commit": "66b411bb8d864028aa4228abe34ff568f1901416",
+          "parents": [
+            "2e2a72e328de1c3f5210c3cb42f32b8e2f24f1fe"
+          ],
+          "subject": "Preserve pinned canonical source after history integration"
+        },
+        {
+          "commit": "2e2a72e328de1c3f5210c3cb42f32b8e2f24f1fe",
+          "parents": [
+            "94b97f393a971f1eb60d47407532ce4fb2b6a55a",
+            "3e8f8deb20e20a3b1f0ed9627a07b34be3bcc7db"
+          ],
+          "subject": "Integrate preserved source history and worktree changes"
+        },
+        {
+          "commit": "94b97f393a971f1eb60d47407532ce4fb2b6a55a",
+          "parents": [
+            "f27823bbb29fd895d3c58ee76ebe6d6310e4dedf",
+            "ea67fd3e6875ff373e77bc1dd0de3d681eb37ab1"
+          ],
+          "subject": "Integrate preserved source history and worktree changes"
+        },
+        {
+          "commit": "f27823bbb29fd895d3c58ee76ebe6d6310e4dedf",
+          "parents": [
+            "8176410ad24ae416c34a7bc7f0dee1791f8209a4",
+            "e34e4ac1f837d2c00740e318e85afdd877378b77"
+          ],
+          "subject": "Integrate preserved source history and worktree changes"
+        },
+        {
+          "commit": "8176410ad24ae416c34a7bc7f0dee1791f8209a4",
+          "parents": [
+            "d293ca0cefce5e15bbca7aede9bc331fe12232e1",
+            "e2ec4671da6b5c0af4f3806f336cb964fe950ce5"
+          ],
+          "subject": "Integrate preserved source history and worktree changes"
+        }
+      ],
+      "remote_commit_available_locally": true,
+      "remote_descends_from_last_published": true,
+      "remote_main": "b15442e490dc39d046a911ea663c73c99ed3c755",
+      "remote_main_differs_from_last_published": false,
+      "remote_main_equals_HEAD": false,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/kit",
+      "tree": "8ef401790d07d48698e358461152cea45f172c2c"
+    },
+    "root": {
+      "HEAD": "678996d3c02dbd43b77fdf6123a7368a860a6060",
+      "HEAD_ahead_remote_count": 0,
+      "HEAD_behind_remote_count": 0,
+      "bare": false,
+      "branch_ref_count": 2,
+      "branches": [
+        {
+          "oid": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+          "ref": "refs/heads/chore/fmt-check-main"
+        },
+        {
+          "oid": "678996d3c02dbd43b77fdf6123a7368a860a6060",
+          "ref": "refs/heads/reconcile/all-work-parent-main-20261123"
+        }
+      ],
+      "commands": [
+        {
+          "argv": [
+            "rev-parse",
+            "HEAD"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 41
+        },
+        {
+          "argv": [
+            "rev-parse",
+            "HEAD^{tree}"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 41
+        },
+        {
+          "argv": [
+            "remote",
+            "get-url",
+            "origin"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 49
+        },
+        {
+          "argv": [
+            "rev-parse",
+            "--is-bare-repository"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 6
+        },
+        {
+          "argv": [
+            "for-each-ref",
+            "--format=%(refname) %(objectname)",
+            "refs/heads"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 165
+        },
+        {
+          "argv": [
+            "log",
+            "-10",
+            "--format=%H%x00%P%x00%s"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 1439
+        },
+        {
+          "argv": [
+            "status",
+            "--porcelain=v1",
+            "-z",
+            "--untracked-files=normal"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        },
+        {
+          "argv": [
+            "ls-remote",
+            "--heads",
+            "origin",
+            "refs/heads/main"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 57
+        },
+        {
+          "argv": [
+            "cat-file",
+            "-e",
+            "d7498fa17e585bce48da255c45284bdbf62d3e0a^{commit}"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        },
+        {
+          "argv": [
+            "cat-file",
+            "-e",
+            "678996d3c02dbd43b77fdf6123a7368a860a6060^{commit}"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        },
+        {
+          "argv": [
+            "merge-base",
+            "--is-ancestor",
+            "d7498fa17e585bce48da255c45284bdbf62d3e0a",
+            "678996d3c02dbd43b77fdf6123a7368a860a6060"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        },
+        {
+          "argv": [
+            "rev-list",
+            "--count",
+            "d7498fa17e585bce48da255c45284bdbf62d3e0a..HEAD"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 2
+        },
+        {
+          "argv": [
+            "log",
+            "-10",
+            "--format=%H%x00%s",
+            "d7498fa17e585bce48da255c45284bdbf62d3e0a..HEAD"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 93
+        },
+        {
+          "argv": [
+            "rev-list",
+            "--left-right",
+            "--count",
+            "HEAD...678996d3c02dbd43b77fdf6123a7368a860a6060"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 4
+        },
+        {
+          "argv": [
+            "merge-base",
+            "--is-ancestor",
+            "d7498fa17e585bce48da255c45284bdbf62d3e0a",
+            "678996d3c02dbd43b77fdf6123a7368a860a6060"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        }
+      ],
+      "last_published_commit_available_locally": true,
+      "last_published_reference": "d7498fa17e585bce48da255c45284bdbf62d3e0a",
+      "local_HEAD_descends_from_last_published": true,
+      "local_commits_since_last_published_bounded": [
+        {
+          "commit": "678996d3c02dbd43b77fdf6123a7368a860a6060",
+          "subject": "chore: advance published maintained-record gitlinks"
+        }
+      ],
+      "local_commits_since_last_published_count": 1,
+      "materialized_checkout_status": {
+        "checked": true,
+        "clean": true,
+        "porcelain_bytes": 0,
+        "porcelain_entries": []
+      },
+      "metadata_only": true,
+      "origin": "https://github.com/endomorphosis/lift_coding.git",
+      "recent_log": [
+        {
+          "commit": "678996d3c02dbd43b77fdf6123a7368a860a6060",
+          "parents": [
+            "d7498fa17e585bce48da255c45284bdbf62d3e0a"
+          ],
+          "subject": "chore: advance published maintained-record gitlinks"
+        },
+        {
+          "commit": "d7498fa17e585bce48da255c45284bdbf62d3e0a",
+          "parents": [
+            "60b07c95e0a87a1151fea8af2bbb2b3308962a0d"
+          ],
+          "subject": "Update legal validation workflow submodule links"
+        },
+        {
+          "commit": "60b07c95e0a87a1151fea8af2bbb2b3308962a0d",
+          "parents": [
+            "f93ef479a97fce85b859bece51c5d80f6d2c4c46"
+          ],
+          "subject": "Publish reconciled submodule tips and retained worktree history [skip ci]"
+        },
+        {
+          "commit": "f93ef479a97fce85b859bece51c5d80f6d2c4c46",
+          "parents": [
+            "26777efeef228c4ce00dad5bef618806b0ab3ccf"
+          ],
+          "subject": "Preserve the unadopted WORLD service rollout configuration [skip ci]"
+        },
+        {
+          "commit": "26777efeef228c4ce00dad5bef618806b0ab3ccf",
+          "parents": [
+            "d3092d09dcaa814c14c5d3d4fc56b1168a4b459d"
+          ],
+          "subject": "Preserve unpublished dependency branch history as verified bundles [skip ci]"
+        },
+        {
+          "commit": "d3092d09dcaa814c14c5d3d4fc56b1168a4b459d",
+          "parents": [
+            "a17718f28cfc45aeedd7ae6a2844852cc481523a"
+          ],
+          "subject": "Advance verified datasets and app milestone485 pins [skip ci]"
+        },
+        {
+          "commit": "a17718f28cfc45aeedd7ae6a2844852cc481523a",
+          "parents": [
+            "3db3d66d305c098cc7c9b4cbb1a7d0007e18031a"
+          ],
+          "subject": "Advance verified datasets and app codec milestone pins [skip ci]"
+        },
+        {
+          "commit": "3db3d66d305c098cc7c9b4cbb1a7d0007e18031a",
+          "parents": [
+            "da8d1153e56a4922b8479a8736fd8961b975de11"
+          ],
+          "subject": "Advance datasets and app milestone pins [skip ci]"
+        },
+        {
+          "commit": "da8d1153e56a4922b8479a8736fd8961b975de11",
+          "parents": [
+            "5810c1526a242fa0dedddaf903ddfaf6516cad46"
+          ],
+          "subject": "Advance matched decoder fit documentation pins [skip ci]"
+        },
+        {
+          "commit": "5810c1526a242fa0dedddaf903ddfaf6516cad46",
+          "parents": [
+            "8b35c173342cecfbe77629ee15a11baf104b9b47"
+          ],
+          "subject": "Advance operational receipt and capacity dataset pins [skip ci]"
+        }
+      ],
+      "remote_commit_available_locally": true,
+      "remote_descends_from_last_published": true,
+      "remote_main": "678996d3c02dbd43b77fdf6123a7368a860a6060",
+      "remote_main_differs_from_last_published": true,
+      "remote_main_equals_HEAD": true,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/root",
+      "tree": "641fca68a02991d294a2b8cad7424d1a332656ba"
+    },
+    "swiss": {
+      "HEAD": "e3e1e771400a6c2b51c7eff325871769e4436ebb",
+      "HEAD_ahead_remote_count": 0,
+      "HEAD_behind_remote_count": 3,
+      "bare": false,
+      "branch_ref_count": 1,
+      "branches": [
+        {
+          "oid": "e3e1e771400a6c2b51c7eff325871769e4436ebb",
+          "ref": "refs/heads/main"
+        }
+      ],
+      "commands": [
+        {
+          "argv": [
+            "rev-parse",
+            "HEAD"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 41
+        },
+        {
+          "argv": [
+            "rev-parse",
+            "HEAD^{tree}"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 41
+        },
+        {
+          "argv": [
+            "remote",
+            "get-url",
+            "origin"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 48
+        },
+        {
+          "argv": [
+            "rev-parse",
+            "--is-bare-repository"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 6
+        },
+        {
+          "argv": [
+            "for-each-ref",
+            "--format=%(refname) %(objectname)",
+            "refs/heads"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 57
+        },
+        {
+          "argv": [
+            "log",
+            "-10",
+            "--format=%H%x00%P%x00%s"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 1436
+        },
+        {
+          "argv": [
+            "ls-remote",
+            "--heads",
+            "origin",
+            "refs/heads/main"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 57
+        },
+        {
+          "argv": [
+            "cat-file",
+            "-e",
+            "453a30b01e62b6acdd1c54070821dbacfbf7908e^{commit}"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        },
+        {
+          "argv": [
+            "cat-file",
+            "-e",
+            "453a30b01e62b6acdd1c54070821dbacfbf7908e^{commit}"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        },
+        {
+          "argv": [
+            "merge-base",
+            "--is-ancestor",
+            "453a30b01e62b6acdd1c54070821dbacfbf7908e",
+            "e3e1e771400a6c2b51c7eff325871769e4436ebb"
+          ],
+          "rc": 1,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        },
+        {
+          "argv": [
+            "rev-list",
+            "--count",
+            "453a30b01e62b6acdd1c54070821dbacfbf7908e..HEAD"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 2
+        },
+        {
+          "argv": [
+            "log",
+            "-10",
+            "--format=%H%x00%s",
+            "453a30b01e62b6acdd1c54070821dbacfbf7908e..HEAD"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        },
+        {
+          "argv": [
+            "rev-list",
+            "--left-right",
+            "--count",
+            "HEAD...453a30b01e62b6acdd1c54070821dbacfbf7908e"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 4
+        },
+        {
+          "argv": [
+            "merge-base",
+            "--is-ancestor",
+            "453a30b01e62b6acdd1c54070821dbacfbf7908e",
+            "453a30b01e62b6acdd1c54070821dbacfbf7908e"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "stderr_bytes": 0,
+          "stdout_bytes": 0
+        }
+      ],
+      "last_published_commit_available_locally": true,
+      "last_published_reference": "453a30b01e62b6acdd1c54070821dbacfbf7908e",
+      "local_HEAD_descends_from_last_published": false,
+      "local_commits_since_last_published_bounded": [],
+      "local_commits_since_last_published_count": 0,
+      "materialized_checkout_status": {
+        "checked": false,
+        "clean": null,
+        "reason": "Retained no-checkout publication store; no working-tree deletion inference."
+      },
+      "metadata_only": true,
+      "origin": "https://github.com/endomorphosis/swissknife.git",
+      "recent_log": [
+        {
+          "commit": "e3e1e771400a6c2b51c7eff325871769e4436ebb",
+          "parents": [
+            "e502c79de6d367ca2a04e436e6f59c107c4ffe81"
+          ],
+          "subject": "Record the legal corpus views and visual-functional workflow edits."
+        },
+        {
+          "commit": "e502c79de6d367ca2a04e436e6f59c107c4ffe81",
+          "parents": [
+            "70e058f1416f0102a3cc4e926fa8a38ef2b8f19a"
+          ],
+          "subject": "Record visual-functional workflow edits."
+        },
+        {
+          "commit": "70e058f1416f0102a3cc4e926fa8a38ef2b8f19a",
+          "parents": [
+            "a85bd6e287a0f1363f39d2c555f109600ff037c5"
+          ],
+          "subject": "Record uncommitted visual-functional workflow edits."
+        },
+        {
+          "commit": "a85bd6e287a0f1363f39d2c555f109600ff037c5",
+          "parents": [
+            "0ad73afc8a61fad4e747f594b73ff072aec663ad",
+            "e62bb2dfb2fbfe86543f226b9033042dbe734277"
+          ],
+          "subject": "Merge commit 'e62bb2dfb2fbfe86543f226b9033042dbe734277' into HEAD"
+        },
+        {
+          "commit": "0ad73afc8a61fad4e747f594b73ff072aec663ad",
+          "parents": [
+            "000a2831a33293fafd895203ad869fa420beb954"
+          ],
+          "subject": "Keep Terminal output and status inside its window"
+        },
+        {
+          "commit": "000a2831a33293fafd895203ad869fa420beb954",
+          "parents": [
+            "d43d7429ce5753490a6bef32e74d672a422bcd48"
+          ],
+          "subject": "Keep native task controls visible beside validated results"
+        },
+        {
+          "commit": "d43d7429ce5753490a6bef32e74d672a422bcd48",
+          "parents": [
+            "5df259d930b76475b2595ffd311b89d833f6d32f"
+          ],
+          "subject": "Retain fetched request receipts and per-task readbacks"
+        },
+        {
+          "commit": "5df259d930b76475b2595ffd311b89d833f6d32f",
+          "parents": [
+            "248ed95b237851a5684c75b2cb5a7829040b878d"
+          ],
+          "subject": "Keep Cinema export actions visible and verify output state"
+        },
+        {
+          "commit": "248ed95b237851a5684c75b2cb5a7829040b878d",
+          "parents": [
+            "4920f83a075179fde1006cda640c6ddb9513a051"
+          ],
+          "subject": "Keep native task controls and full media references readable"
+        },
+        {
+          "commit": "4920f83a075179fde1006cda640c6ddb9513a051",
+          "parents": [
+            "87203becb3df73b39fc0acf6ab4e5d321b661be9"
+          ],
+          "subject": "Use native Supervisor lifecycle and bounded Cinema WebM export"
+        }
+      ],
+      "remote_commit_available_locally": true,
+      "remote_descends_from_last_published": true,
+      "remote_main": "453a30b01e62b6acdd1c54070821dbacfbf7908e",
+      "remote_main_differs_from_last_published": false,
+      "remote_main_equals_HEAD": false,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/swiss",
+      "tree": "e9efaf9f4fd561acc67b1aa10ed486080c6df87c"
+    }
+  },
+  "schema": "renewed-publication-readonly-six-store-remote-inventory/v1",
+  "scope": "Git metadata and remote heads only. No source bodies, fetch, stage, commits, config/ref/index mutation, SDK/CI/runtime work.",
+  "source_bodies_read": 0,
+  "started_ns": "1795475601882337111"
+}

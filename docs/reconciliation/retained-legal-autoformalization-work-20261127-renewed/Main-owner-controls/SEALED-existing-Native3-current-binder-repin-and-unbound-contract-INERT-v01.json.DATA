@@ -1,0 +1,126 @@
+{
+  "kind": "existing_Native3_current_c105_test99e0_binder_repin_and_remaining_contract_INERT",
+  "purpose": "Reuse the actual existing Native3 caller/test with authenticated currentcode afterpublishedordinary81, without inventing a new Native wrapper or adopting historical Source/runtime authority.",
+  "existing_controls": {
+    "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/sealed-retained-Native3-direct-control-reuse-tuple-v01.json",
+    "bytes": 11552,
+    "sha256": "6170026d3db0e6cf70405032e805b1bd807150568a3174bd3bb8ab9ac2f899c6"
+  },
+  "references": {
+    "binder": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/bind_existing_native_expected_policy.current-c105-INERT.py.DATA",
+      "bytes": 5298,
+      "sha256": "5e2259b4b6bd6ce4129be265383fc84594e5a3be3aa8e4c5177cc1f22ed3d7db"
+    },
+    "binder_preservation": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Native3-binder-three-literal-repin-preservation-proof-INERT-v01.json",
+      "bytes": 1772,
+      "sha256": "d04c14807c2e7c3ca293fa07a5d6902812453750aef3d27f809723349bb00484"
+    },
+    "forward": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Native3-binder-current-c105.forward.diff",
+      "bytes": 651,
+      "sha256": "25b2884221ef285dffb651eb3a54bde879b7b995ff76d3f55968fa4f5752c40c"
+    },
+    "inverse": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Native3-binder-current-c105.inverse.diff",
+      "bytes": 651,
+      "sha256": "40fb3aa8cfbe61fa46429e4f442969763df1747a943b9b5244cd09c77ffd2a37"
+    },
+    "function_preservation": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-Native3-exact-historical-function-and-helper-preservation-v02.json",
+      "bytes": 1941,
+      "sha256": "35354a95ccf18ae14d6ea54d061f5697927f76ece9f795636eea38d14bf47bb9"
+    },
+    "prefix_failure": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-Native3-selected-test-source-observation-v01.json",
+      "bytes": 1083,
+      "sha256": "1b24a314a446c404990f2158b72e06a29cf6d3071d13c5f810d065205c548e2b"
+    },
+    "before": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/actual-Native3-old-binder-current-source-refusal-before-v01.json",
+      "bytes": 725,
+      "sha256": "1648e327b0f803cb05dd4de665aaff4b668e1963a0f0ddeed30b5362eeeac949"
+    },
+    "controls": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/actual-Native3-three-literal-current-source-guard-controls-v01.json",
+      "bytes": 2201,
+      "sha256": "f123137e3cb076f88a07202913c0e2b5d4659e7ce082560e5d56aec34d728e59"
+    }
+  },
+  "actual_current_known_software_inputs": {
+    "lean_owner": {
+      "path": "ipfs_datasets_py/logic/backends/kernel/lean.py",
+      "bytes": 103838,
+      "sha256": "c1050ad1ec067fc7f7c8fea08793e872511fe58029e9b1aa89ec90d2cb288313",
+      "source_adopted_software_qualified_publication": "v453/D8b628c46653814e0a5d8d293acbf5214db7d409b"
+    },
+    "owning_test": {
+      "path": "tests/integration/logic/backends/test_kernel_backends.py",
+      "bytes": 115566,
+      "sha256": "99e00363bbd1ea23d450af0912374fdbf4d30ab3b1802371fb8d237dccbf7da5",
+      "selected_function": "test_lean_native_v2_expected_type_and_dependency_policy",
+      "selected_function_AST_sha256": "a7f85f8725c7f3426536a4bd8d735f61e804da259dcdbd1261ef5f8845931105",
+      "selected_cases": [
+        "positive",
+        "wrong_type",
+        "unapproved_dependency"
+      ]
+    }
+  },
+  "verified_reuse": {
+    "selected_test_function_with_decorators_and_request_helper_AST_equal_to_exact_historical_ebab_Git_blob": true,
+    "all_top_level_imports_AST_equal": true,
+    "historical_test_Git_blob": "1010f0521c704f47fbf6808720c540ce2ed37724",
+    "historical_test_bytes_SHA": "108837/0ad3389fce78ca14a68d1588ea9e3fa59f8bc377bf824f3b81b561b0665bbcb1",
+    "historical_whole_file_prefix_is_NOT_current_prefix": true,
+    "whole_prefix_assertion_failure_preserved": true
+  },
+  "minimal_binder_delta": {
+    "changed_literals_only": [
+      "OWNING_TEST_SHA256",
+      "OWNING_TEST_BYTES",
+      "LEAN_SHA256"
+    ],
+    "all_function_AST_and_identity_runner_environment_guards_unchanged": true,
+    "only_original_function_local_runner_import_rebound_to_same_caller_owned_instance": true,
+    "LEAN_SHA_is_provenance_only_operator_must_enforce_current_kernel_identity": true
+  },
+  "actual_private_source_gate_results": {
+    "old_binder_refuses_current_source_before_module_lookup": true,
+    "new_binder_accepts_current_file_identity_then_refuses_missing_real_module_graph": true,
+    "historical_source_mutation_truncation_bytearray_None_all_refuse": true,
+    "actual_controls": 6,
+    "all_passed": true,
+    "canonical_product_modules_loaded": false,
+    "SDK_or_Native_runner_or_validator_stub_constructed": false,
+    "not_Native_or_actual_canonical_graph_binding_qualification": true
+  },
+  "existing_operator_rebinding_required_before_any_run": [
+    "Existing historical operator28945/9400579f remainsimmutable/HISTORICALLYBOUND: do notexecuteunchanged.",
+    "Replace legacy cached owningtest record108837/0ad with authenticated current115566/99e0 input, retaining failclosed byteidentity checks.",
+    "Bind existing operator binderreference to5298/5e225 successor andkernelmodulepin toc105; retain all classidentity/caller-owned-runner checks.",
+    "Authenticate currentSDK/process/admission/scheduler/capability/claims/protocol module origins and exact canonical graph against current selectedSource; historicalABI hashes are not currentpins.",
+    "Bind actual currentD/A/projectroots, HEAD/tree/index/full9, Sourceepoch/guard policy, asset roots/Leanbinary/version identities, schedulerstate/basepolicy/effectivecapacity, ownparentrequest/lane/PID/birth, admittedresourceprofile/currentclock, freshoutputpath and exactRootselection.",
+    "Retain observed rawToolRunResult objects and bytes before reportconversion, realfailure/cleanuphandles, actualownpublicrelease+inspectsubtreedrain and actualSourceclosure. Root/Nativeownerretainscustody.",
+    "Require actual positiveproved+wrongtype/unapproveddependencyrefusal and actualtooloutputs/profilechecks; no mereexitcode/privatefixture successpromotion."
+  ],
+  "historical_resources": "Oldcpu1/memory8192MiB/child1,parent/probe15s/backend30s,4GiBaddressfloor/512MiBRSS/sourceoutput65536,basepolicy087675/effective32 are historicalmetadata only; freshcurrentowneradmissionrequired. No wholepool-empty or foreignlease adoption.",
+  "current_native_owner": null,
+  "actual_Root_runtime_selection": null,
+  "actual_Source_epoch": null,
+  "actual_current_roots_HEAD_tree_index_full9": null,
+  "actual_current_module_graph": null,
+  "actual_native_assets_toolchain": null,
+  "actual_resource_enrollment": null,
+  "actual_clock": null,
+  "actual_output": null,
+  "actual_native_result": null,
+  "control_code_created": "Only3literal successor toexistingbinder; no newwrapper/bootstrap/factory/provider/queue/controller/operator.",
+  "Source_Git_SQL_ledger_model_realRPC_or_Native_effect": false,
+  "normal_or_Native_or_legal_admission_authority_granted": false,
+  "all_old_costs_reads_repeats_receipts_failures_masks_and_refusal_history_retained": true,
+  "explicit_cached_input_bytes_in_final_sealing": 14322,
+  "current_finite_static_unit_planning_bound_bytes": 2097152,
+  "goal": "Full8phasegoal remainsactive/incomplete; this only removes a concrete stalewholefile sourcebinding obstacle fromcurrentNativepreparation."
+}

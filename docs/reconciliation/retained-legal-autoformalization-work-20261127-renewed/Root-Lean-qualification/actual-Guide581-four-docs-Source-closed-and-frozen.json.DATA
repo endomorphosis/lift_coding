@@ -1,0 +1,165 @@
+{
+  "A": "e55316f48847b17a8b4041a2da30bcaa0ba6eb90",
+  "A_index": {
+    "bytes": 4469929,
+    "full9": {
+      "st_ctime_ns": "1795734671233647109",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "48763139",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795734671232647103",
+      "st_nlink": "1",
+      "st_size": "4469929",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/.git/index",
+    "sha256": "8b777ee97314c4f0712b10b2fae9cc75a71901327a01a9d77a5be0c03a76441c"
+  },
+  "HEAD": "5bf57f390a12621a40716595fe261c35d2741e12",
+  "Source_closed": true,
+  "actual_Source_leases": [
+    {
+      "canonical_root": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets",
+      "cooperative": true,
+      "lock_path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/workspace/control-plane/source-leases/source.lock",
+      "mode": "write",
+      "schema_version": "autoencoder-source-lease/v1",
+      "waited_seconds": 3.175996243953705e-05
+    },
+    {
+      "canonical_root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate",
+      "cooperative": true,
+      "lock_path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/workspace/control-plane/source-leases/source.lock",
+      "mode": "read",
+      "schema_version": "autoencoder-source-lease/v1",
+      "waited_seconds": 2.4256296455860138e-05
+    }
+  ],
+  "code_publication": {
+    "bytes": 17212,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-Phase1-lean-json-diagnostics-ordinary99-and-native-three-FF-publication.json",
+    "sha256": "fefe2ecad990326bf6269e626000bb04d68a70ed55a9448a3118d8e3b0f1c4a4"
+  },
+  "committed_docs": {
+    "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json": {
+      "bytes": 1558615,
+      "committed_blob": "5508b25ac3bbdd7379ccc64ee476da145b3d0a14",
+      "full9": {
+        "st_ctime_ns": "1795756035420364020",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513030",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795756035420364020",
+        "st_nlink": "1",
+        "st_size": "1558615",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json",
+      "sha256": "7a345e9ea35de4129b04f9c45ca0682dcf18b51a9b2a78110c12a375aa7c47df"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md": {
+      "bytes": 1103193,
+      "committed_blob": "870d2d6b7f53d08be86773899599541236a583a0",
+      "full9": {
+        "st_ctime_ns": "1795756035421095592",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513032",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795756035421095592",
+        "st_nlink": "1",
+        "st_size": "1103193",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+      "sha256": "fd5c3d88c884fe41568fd7474b4e3232d34f75e14e75a8200e58e8a847ac62e4"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md": {
+      "bytes": 857894,
+      "committed_blob": "ae77f4c97228cf061a0a3febf871894ab6426236",
+      "full9": {
+        "st_ctime_ns": "1795756035421253609",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513033",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795756035421253609",
+        "st_nlink": "1",
+        "st_size": "857894",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md",
+      "sha256": "245f18a919fbe396294000800f199ea3f2ebf5fc4eca5b198ccdb88c8836690d"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json": {
+      "bytes": 2394140,
+      "committed_blob": "c79a86db0f361d4e5ae0cd741278ad0bf18cb1b1",
+      "full9": {
+        "st_ctime_ns": "1795756035420739398",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513031",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795756035420739398",
+        "st_nlink": "1",
+        "st_size": "2394140",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/autoformal/docs/work_catalog.json",
+      "sha256": "8389e088599fa5e8b696700919813627821535727af481b6cf83cc25ff850758"
+    }
+  },
+  "composer_READY": {
+    "bytes": 20995,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/guide581-composition/READY-one-existing-guide581-four-guides.json",
+    "sha256": "d68ed0260eb4cd0d8f8257db60b0a8e9f7b7175fcb3c292eb72f8cc669cf557c"
+  },
+  "evidence_ordinal": 581,
+  "exact_forward_and_inverse_verified": true,
+  "full_charge": {
+    "bytes": 1321,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/Source-only-Guide581-full-retained-cap.json",
+    "sha256": "91acf9ffe66d861824275ca128635becb9fac6f6805a3c411ede206b30f012b7"
+  },
+  "index": {
+    "bytes": 7070589,
+    "full9": {
+      "st_ctime_ns": "1795756035761619880",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72533257",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795756035751619831",
+      "st_nlink": "1",
+      "st_size": "7070589",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/index",
+    "sha256": "b0133f594f37349d5a6959ec0904089265fac8d3fb5c0637b8d0769aecce1078"
+  },
+  "module_closed": true,
+  "native_qualification": {
+    "bytes": 1026,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-Lean-JSON-diagnostics-namespaced-Native2-closed.json",
+    "sha256": "abbf8d4ced879afceeccba6598e56f1fd72c9b915199842cbd1e347d32dd220c"
+  },
+  "only_four_Git_changes": true,
+  "ordinary_qualification": {
+    "bytes": 25346,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-live-reconciled-P1-Lean-ordinary99-closed.json",
+    "sha256": "ba0317da64826b8d5f81839ec911a2ac9bc16fc2188d6773da467ed489e637d2"
+  },
+  "prior_D": "95dc193c3a4a37f9c9227da640a346b2cd58e54c",
+  "prior_values_preserved": {
+    "components": 126,
+    "evidence_records": 580,
+    "tasks": 24
+  },
+  "pushed": false,
+  "qualified_A": "219ba3da0f62f772801d71715e22c506faa21126",
+  "schema": "actual-Guide581-exact-four-isolated-Source-freeze/v1",
+  "terminal_returncode": 0,
+  "tree": "75bf48f724778639eb3f8ae076c275dafda98d55"
+}

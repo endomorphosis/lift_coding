@@ -1,0 +1,91 @@
+{
+  "Native_runs": 0,
+  "Source_reads": 0,
+  "canonical_api": {
+    "binding_keys": [
+      "tree_id",
+      "property_id",
+      "assumptions",
+      "bounds",
+      "backend_id",
+      "authority",
+      "source_result_digest",
+      "content_id",
+      "receipt_id",
+      "now"
+    ],
+    "call": "LogicVerificationAPI.verify_receipt(receipt, expectation=..., request_id=...)",
+    "expectation_none_is_structural_only": true,
+    "input_type": "TrustedProofReceipt",
+    "native_execution_performed": false,
+    "opaque_verified_receipt_type_established": false,
+    "original_typed_object_retained_by_response": false,
+    "require_independent_current_expectation": true,
+    "require_positive_theorem": true,
+    "return_type": "VerificationResponse",
+    "revocation_registry_checked": false
+  },
+  "canonical_writes": 0,
+  "existing_consumer_order": {
+    "bounded_update_line": 369,
+    "normalize_line": 283,
+    "target_matches_line": 362
+  },
+  "input_refs": [
+    {
+      "bytes": 303308,
+      "full9": [
+        66306,
+        72509833,
+        33024,
+        1,
+        1000,
+        1000,
+        303308,
+        1795735370265724310,
+        1795735370265724310
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-canonical-receipt-inputs-v01/verification_api.py.DATA",
+      "sha256": "37a8c4ac10610b877dd4eb0dd22fc1466b35b429fa4c4f02c76a43eb427284c0"
+    },
+    {
+      "bytes": 63071,
+      "full9": [
+        66306,
+        72509835,
+        33024,
+        1,
+        1000,
+        1000,
+        63071,
+        1795735510984832596,
+        1795735510984832596
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-canonical-receipt-inputs-v01/proof_receipt_attestation.py.DATA",
+      "sha256": "61296f095b933730ea24b070d2eaaf4202da9714c274a605bd5e18c6f4df49a7"
+    },
+    {
+      "bytes": 42271,
+      "full9": [
+        66306,
+        72502860,
+        33024,
+        1,
+        1000,
+        1000,
+        42271,
+        1795733170410605988,
+        1795733170413101054
+      ],
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/trainer.after-v04.DATA",
+      "sha256": "630398501836dc7bba1b213dbd93b2e93a18c593747f52467f325c5033d7fa94"
+    }
+  ],
+  "inspection_only": true,
+  "model_fits": 0,
+  "new_execution_or_authority": false,
+  "precise_unresolved_binding": "Current ProofFeedbackTrainingTarget formal/review/dependency commitments have no defined mapping to the selected proof producer receipt property_id/tree_id/source_result_digest. IDs must be independently supplied; no digest-shape inference.",
+  "product_patch_authored": false,
+  "safe_existing_join": "Existing target.matches runs after feedback serde and before updates. Extending that existing target verification avoids another trainer or adapter. Full receipt remains outside source-free feedback record.",
+  "schema": "Main-Phase7-existing-consumer-canonical-receipt-contract/v1"
+}

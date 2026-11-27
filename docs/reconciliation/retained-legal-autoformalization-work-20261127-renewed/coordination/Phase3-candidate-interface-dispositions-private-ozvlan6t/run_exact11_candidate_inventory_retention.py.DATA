@@ -1,0 +1,142 @@
+"""Exercise the existing candidate inventory over exact no-model source roles."""
+from pathlib import Path
+from dataclasses import replace
+from types import ModuleType
+import ast as python_ast
+import hashlib
+import importlib
+from importlib.util import spec_from_file_location, module_from_spec
+import json
+import os
+import resource
+import sys
+
+resource.setrlimit(resource.RLIMIT_CPU,(50,50))
+resource.setrlimit(resource.RLIMIT_AS,(512*1024**2,)*2)
+os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})
+def guard(event,args):
+    if event.startswith('socket.') or event in {'subprocess.Popen','os.system','os.exec','os.fork'}:
+        raise RuntimeError('candidate inventory attempted to execute external code')
+    if event=='import' and args[0].partition('.')[0] in {'torch','transformers','tokenizers'}:
+        raise RuntimeError('candidate inventory attempted to load a model')
+sys.addaudithook(guard)
+root=Path(__file__).resolve().parent
+mode=sys.argv[1]
+assert mode in {'before','after'}
+manifest=(root/'exact-published-profile-inputs.json').read_bytes()
+assert hashlib.sha256(manifest).hexdigest()=='eee60b28b3b7cba18b7ce5a73a50fb9a5e3cc625304fa8910a74bca7bc2d94cb'
+files=json.loads(manifest)['files']
+projection=root/'projection'
+for ref in files.values():
+    raw=Path(ref['path']).read_bytes()
+    assert (len(raw),hashlib.sha256(raw).hexdigest())==(ref['bytes'],ref['sha256'])
+packages=['ipfs_datasets_py','ipfs_datasets_py.logic','ipfs_datasets_py.logic.families',
+          'ipfs_datasets_py.logic.syntax_core','ipfs_datasets_py.logic.autoformal',
+          'ipfs_datasets_py.logic.formalization','ipfs_datasets_py.logic.formalization.autoencoder']
+more=(root/"retention-extra-source-pins.json").read_bytes()
+assert hashlib.sha256(more).hexdigest()=="1447f61ee0242cc5abbbc35e2fc7497b784689ff7890a6bb51e77148a3f65868"
+for name,ref in json.loads(more)["roles"].items():
+    src=Path(ref["path"]).read_bytes()
+    assert (len(src),hashlib.sha256(src).hexdigest())==(ref["bytes"],ref["sha256"])
+    crumbs=name.split(".")
+    packages.extend(".".join(crumbs[:i]) for i in range(1,len(crumbs)))
+packages=sorted(set(packages),key=lambda n:(n.count("."),n))
+for name in packages:
+    module=ModuleType(name)
+    module.__path__=[str(projection/Path(*name.split('.')))]
+    module.__package__=name
+    sys.modules[name]=module
+    if '.' in name:
+        parent,child=name.rsplit('.',1)
+        setattr(sys.modules[parent],child,module)
+from ipfs_datasets_py.logic.syntax_core import ast, signatures
+from ipfs_datasets_py.logic.autoformal import legal_native_ast_preservation as native
+qualified_name='ipfs_datasets_py.logic.autoformal.legal_relational_norm_v1'
+owner=Path(files['bridge']['path'])
+if mode=='after':
+    owner=root/'proposed'/'legal_relational_norm_v1.py'
+    ref=json.loads((root/'expected-proposed-owner.json').read_bytes())
+    raw=owner.read_bytes()
+    assert (len(raw),hashlib.sha256(raw).hexdigest())==(ref['bytes'],ref['sha256'])
+spec=spec_from_file_location(qualified_name,owner)
+bridge=module_from_spec(spec)
+sys.modules[qualified_name]=bridge
+spec.loader.exec_module(bridge)
+
+
+
+import pytest
+from copy import deepcopy
+from types import SimpleNamespace
+
+selected_functions=(
+    "test_candidate_interface_covers_every_declared_disposition_and_keeps_order",
+    "test_unsupported_and_ambiguous_candidates_keep_payloads_without_replacement",
+    "test_candidate_order_and_serialization_are_lossless",
+    "test_mixed_and_native_codecs_retain_every_disposition",
+    "test_ambiguous_reserved_identifier_does_not_call_a_codec",
+    "test_candidate_interface_bounds_refuse_before_classification",
+    "test_retained_7214_candidates_keep_identity_roles_and_binder_order",
+    "test_candidate_inventory_retains_candidate_above_its_codec_limit",
+)
+helpers={"Builder","OBJECT","wire","approval_request","request_for","mixed_member_request","interface_row",
+                   "interface_prepare","reseal_expression","_object_reserved_request","_object_equality_request",
+          "section101_fragment","SECTION_101_HEAD","SECTION_101_BODY","SECTION_101_AST_SHA","_MIXED_RETAINED_PACKET",
+         "_MIXED_RETAINED_PACKET_SHA","NATIVE_TOOLCHAIN","mixed_retained_reports"}
+wanted=helpers|set(selected_functions)
+release=projection/"docs/autoformalization/evidence/legal-ir-title10-7214-pending-compositions-20261024.json"
+payload=release.read_bytes()
+assert len(payload)==662668 and hashlib.sha256(payload).hexdigest()=="dd72e2b92ed5a44a77acfb72dd27ca8614250878400db89742c0437438d59dda"
+
+proposed=root/"proposed/test_legal_relational_norm_v1.py"
+test_source=proposed.read_bytes()
+assert len(test_source)==82687 and hashlib.sha256(test_source).hexdigest()=="d6180c3e711e5d795c9bea3c4a258ed8720e4a9d831f1426fa61b67322d8cbea"
+nodes=[]
+for node in python_ast.parse(test_source).body:
+    if isinstance(node,(python_ast.FunctionDef,python_ast.ClassDef)) and node.name in wanted:
+        nodes.append(node)
+    elif isinstance(node,python_ast.Assign) and any(isinstance(target,python_ast.Name) and target.id in wanted for target in node.targets):
+        nodes.append(node)
+assert len(nodes)==len(wanted)
+test={"ast":ast,"signatures":signatures,"bridge":bridge,"json":json,"hashlib":hashlib,"pytest":pytest,
+      "Path":Path,"__file__":files["owning_test"]["path"],"deepcopy":deepcopy}
+exec(compile(python_ast.Module(body=nodes,type_ignores=[]),str(proposed),"exec"),test)
+work=root/("retention11-"+mode)
+work.mkdir(mode=0o700)
+def mktemp(name, *, numbered):
+    assert not numbered
+    path=work/name
+    path.mkdir(mode=0o700)
+    return path
+hypotheses=test["mixed_retained_reports"].__wrapped__(SimpleNamespace(mktemp=mktemp))
+results=[]
+for name in selected_functions:
+    fn=test[name]
+    marks=getattr(fn,"pytestmark",[])
+    if marks:
+        assert len(marks)==1 and marks[0].name=="parametrize"
+        arg,cases=marks[0].args
+        choices=[(str(case) if arg=="codec" else f"rows{index}",{arg:case}) for index,case in enumerate(cases)]
+    else:
+        choices=[("",{})]
+    if "mixed_retained_reports" in fn.__code__.co_varnames[:fn.__code__.co_argcount]:
+        choices=[("",{"mixed_retained_reports":hypotheses})]
+    for case,args in choices:
+        with pytest.MonkeyPatch.context() as mp:
+            if "monkeypatch" in fn.__code__.co_varnames[:fn.__code__.co_argcount]:
+                args["monkeypatch"]=mp
+            try:
+                fn(**args)
+            except ValueError as exc:
+                state,reason="error",str(exc)
+            except AssertionError as exc:
+                state,reason="failed",str(exc)
+            else:
+                state,reason="passed",None
+        results.append(dict(node=name+("["+case+"]" if case else ""),result=state,reason=reason))
+assert len(results)==len({result["node"] for result in results})==11
+expected=[row["result"] for row in results]
+assert expected==["passed"]*(9 if mode=="before" else 11)+(["error"]*2 if mode=="before" else [])
+print(json.dumps(dict(mode=mode,exact_owning_ast=True,actual_profile_owner=True,
+    ordinary_pytest=False,results=results,held_7214_fixture_source_has_no_admission=True,
+    selected_owner_sha256=hashlib.sha256(owner.read_bytes()).hexdigest()),indent=2))

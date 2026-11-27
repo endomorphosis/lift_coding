@@ -1,0 +1,694 @@
+{
+  "Lean_SDK_model_or_production_invocation": false,
+  "baseline_git": "0d71c0d82b2dfc1ed3c7f236009e467e4c201c88",
+  "canonical_Git_Source_or_Git_publication_mutation": false,
+  "changed_fixture_paths_only": {
+    "ipfs_datasets_py/logic/autoformal/legal_norm_content_adjudication_v1.py": {
+      "baseline": {
+        "bytes": 88512,
+        "full9": {
+          "st_ctime_ns": "1795551461900368432",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096733",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795551461900368432",
+          "st_nlink": "1",
+          "st_size": "88512",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v2-cross-reference-version-private-v01/owner.current.py.DATA",
+        "sha256": "7350235f02340d2d2f0925d25399f614861c59b6faabcb1ebd427e2682a4f1fd"
+      },
+      "candidate": {
+        "bytes": 89284,
+        "full9": {
+          "st_ctime_ns": "1795551719064938438",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096748",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795551719064938438",
+          "st_nlink": "1",
+          "st_size": "89284",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v2-cross-reference-version-private-v01/owner.after.py.DATA",
+        "sha256": "fd43ce8ab0263b34ad1f3c37ebceecdf3ea73500584dced589208cf1f831e13e"
+      },
+      "sealed_packet": {
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v2-cross-reference-version-private-v01/sealed-reviewed-V2-cycle-and-cross-reference-version-composition-private-v01.json",
+        "sha256": "07bfb9d712c6598ea93ce869c3768b0381a4a2c7dd9a058bbf49399d9c9ac0e3"
+      }
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py": {
+      "baseline": {
+        "bytes": 30293,
+        "full9": {
+          "st_ctime_ns": "1795551187272193332",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096502",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795551187272193332",
+          "st_nlink": "1",
+          "st_size": "30293",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-cross-reference-version-private-v01/owner.before.py.DATA",
+        "sha256": "65e8182c945669b0f891b03ab12b1d3bee27697d4443bd8df32861af7a931b05"
+      },
+      "candidate": {
+        "bytes": 30439,
+        "full9": {
+          "st_ctime_ns": "1795551284122896462",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096517",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795551284122896462",
+          "st_nlink": "1",
+          "st_size": "30439",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-cross-reference-version-private-v01/owner.after.py.DATA",
+        "sha256": "76b40e1fd05616b93e4996e17d19fdecfb74747722964a3fc74c97399c4fdea8"
+      },
+      "sealed_packet": {
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-cross-reference-version-private-v01/sealed-reviewed-V3-cross-reference-version-consistency-private-v01.json",
+        "sha256": "87ce67a6edfa0851594e8bf264994f4206713bcd5004d158f1ba11f3f7f77b2b"
+      }
+    },
+    "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py": {
+      "baseline": {
+        "bytes": 120520,
+        "full9": {
+          "st_ctime_ns": "1795551461907905855",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096735",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795551461907905855",
+          "st_nlink": "1",
+          "st_size": "120520",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v2-cross-reference-version-private-v01/owning-test.current.py.DATA",
+        "sha256": "c0a60c1bd1bbdbdd48700cbdc72769b08e5d41340a82e51be65bf33b8e5d1141"
+      },
+      "candidate": {
+        "bytes": 125523,
+        "full9": {
+          "st_ctime_ns": "1795551461912200179",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096736",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795551461912200179",
+          "st_nlink": "1",
+          "st_size": "125523",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v2-cross-reference-version-private-v01/owning-test.composed.py.DATA",
+        "sha256": "80ca1e89438287270e68591c3dad6498fd017c53f11254ce53b4c981d819d778"
+      },
+      "sealed_packet": {
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v2-cross-reference-version-private-v01/sealed-reviewed-V2-cycle-and-cross-reference-version-composition-private-v01.json",
+        "sha256": "07bfb9d712c6598ea93ce869c3768b0381a4a2c7dd9a058bbf49399d9c9ac0e3"
+      }
+    },
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py": {
+      "baseline": {
+        "bytes": 28883,
+        "full9": {
+          "st_ctime_ns": "1795551187275749665",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096503",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795551187275749665",
+          "st_nlink": "1",
+          "st_size": "28883",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-cross-reference-version-private-v01/owning-test.before.py.DATA",
+        "sha256": "6982e1f557db2ff140804287d9be4ba1ba0b72242038d058b9fcbdce3a009a05"
+      },
+      "candidate": {
+        "bytes": 31445,
+        "full9": {
+          "st_ctime_ns": "1795551187279511776",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72096504",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795551187279511776",
+          "st_nlink": "1",
+          "st_size": "31445",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-cross-reference-version-private-v01/owning-test.after.py.DATA",
+        "sha256": "5bc57fed43f80f84c8a61bf2588158c97f150d745165c6ef7d544acc7e3fbe0c"
+      },
+      "sealed_packet": {
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-cross-reference-version-private-v01/sealed-reviewed-V3-cross-reference-version-consistency-private-v01.json",
+        "sha256": "87ce67a6edfa0851594e8bf264994f4206713bcd5004d158f1ba11f3f7f77b2b"
+      }
+    }
+  },
+  "predecessor_capsule_digest_bindings": {
+    "bytes": 231,
+    "full9": {
+      "st_ctime_ns": "1795551934943080134",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72097044",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795551934943080134",
+      "st_nlink": "1",
+      "st_size": "231",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-version-composed-producer-epoch-mask-replay-private-v01/bound-predecessor-capsule-sha256.json",
+    "sha256": "5bf893a05a9d06e24e3d56fed18eca271ddf19d5331d8c0cb1f73f32765e3e08"
+  },
+  "predecessor_replay": "Same eight selectors passed on both sides. All three original capsule receipts replayed at the baseline and were refused at the changed producer generation; freshly signed fixture masks match exact values and dimensions.",
+  "runner_limits": {
+    "CPU_count": 1,
+    "CPU_second_soft_per_attempt": 55,
+    "address_space_bytes": 536870912,
+    "wall_seconds_per_attempt": 60
+  },
+  "runs": {
+    "baseline": {
+      "argv": {
+        "bytes": 2422,
+        "full9": {
+          "st_ctime_ns": "1795551887119613438",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097040",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795551887119613438",
+          "st_nlink": "1",
+          "st_size": "2422",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-version-composed-producer-epoch-mask-replay-private-v01/baseline/argv.json",
+        "sha256": "d29ed530d830db11410522f904d697b935ce3e89ece238679cff054161e7ee1a"
+      },
+      "cases": [
+        [
+          "tests.unit.logic.formalization.autoencoder.test_alignment_relation_mask_handoff",
+          "test_private_pair_consumer_preserves_fresh_signed_mask_semantics[v2]"
+        ],
+        [
+          "tests.unit.logic.formalization.autoencoder.test_alignment_relation_mask_handoff",
+          "test_private_pair_consumer_preserves_fresh_signed_mask_semantics[v3]"
+        ],
+        [
+          "tests.unit.logic.formalization.autoencoder.test_alignment_relation_mask_handoff",
+          "test_private_pair_consumer_preserves_fresh_signed_mask_semantics[v4]"
+        ],
+        [
+          "tests.unit.logic.formalization.autoencoder.test_alignment_relation_mask_handoff",
+          "test_private_pair_consumer_refuses_exact_old_receipt_after_v2_epoch_change[v2]"
+        ],
+        [
+          "tests.unit.logic.formalization.autoencoder.test_alignment_relation_mask_handoff",
+          "test_private_pair_consumer_refuses_exact_old_receipt_after_v2_epoch_change[v3]"
+        ],
+        [
+          "tests.unit.logic.formalization.autoencoder.test_alignment_relation_mask_handoff",
+          "test_private_pair_consumer_refuses_exact_old_receipt_after_v2_epoch_change[v4]"
+        ],
+        [
+          "tests.unit.logic.formalization.autoencoder.test_alignment_relation_mask_handoff",
+          "test_reviewed_pair_endpoint_admission_without_pair_reviews_remains_unavailable"
+        ],
+        [
+          "tests.unit.logic.formalization.autoencoder.test_alignment_relation_mask_handoff",
+          "test_reviewed_pair_saved_report_cannot_turn_unknowns_or_analogies_into_negatives"
+        ]
+      ],
+      "errors": 0,
+      "exit_status": {
+        "bytes": 906,
+        "full9": {
+          "st_ctime_ns": "1795551934921502335",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097043",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795551934921502335",
+          "st_nlink": "1",
+          "st_size": "906",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-version-composed-producer-epoch-mask-replay-private-v01/baseline/observed-exit-result.json",
+        "sha256": "3782380a916b7d50e7c315c995a80e8ed7f7a53f7eb9b67011f7332d1354eb08"
+      },
+      "failed": 0,
+      "junit": {
+        "bytes": 1824,
+        "full9": {
+          "st_ctime_ns": "1795551934829632898",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097049",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795551934829632898",
+          "st_nlink": "1",
+          "st_size": "1824",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-version-composed-producer-epoch-mask-replay-private-v01/baseline/result.xml",
+        "sha256": "692da0a91cdaeead0e8a6c044a4479ba002d4c67593294a381ef115500f57b25"
+      },
+      "passed": 8,
+      "skipped": 0,
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795551887122882426",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097042",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795551887122882426",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-version-composed-producer-epoch-mask-replay-private-v01/baseline/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 351,
+        "full9": {
+          "st_ctime_ns": "1795551934829632898",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097041",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795551934829632898",
+          "st_nlink": "1",
+          "st_size": "351",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-version-composed-producer-epoch-mask-replay-private-v01/baseline/stdout.DATA",
+        "sha256": "d81042e0021d6836a4ab49aab955c3623c0bb403272ad3452668b56d698388bd"
+      }
+    },
+    "candidate": {
+      "argv": {
+        "bytes": 2423,
+        "full9": {
+          "st_ctime_ns": "1795551934973560223",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097051",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795551934973560223",
+          "st_nlink": "1",
+          "st_size": "2423",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-version-composed-producer-epoch-mask-replay-private-v01/candidate/argv.json",
+        "sha256": "2185c5ac1452099febb7a469b8b1d1cec98ba18bcc705c7789d93e371937ee60"
+      },
+      "cases": [
+        [
+          "tests.unit.logic.formalization.autoencoder.test_alignment_relation_mask_handoff",
+          "test_private_pair_consumer_preserves_fresh_signed_mask_semantics[v2]"
+        ],
+        [
+          "tests.unit.logic.formalization.autoencoder.test_alignment_relation_mask_handoff",
+          "test_private_pair_consumer_preserves_fresh_signed_mask_semantics[v3]"
+        ],
+        [
+          "tests.unit.logic.formalization.autoencoder.test_alignment_relation_mask_handoff",
+          "test_private_pair_consumer_preserves_fresh_signed_mask_semantics[v4]"
+        ],
+        [
+          "tests.unit.logic.formalization.autoencoder.test_alignment_relation_mask_handoff",
+          "test_private_pair_consumer_refuses_exact_old_receipt_after_v2_epoch_change[v2]"
+        ],
+        [
+          "tests.unit.logic.formalization.autoencoder.test_alignment_relation_mask_handoff",
+          "test_private_pair_consumer_refuses_exact_old_receipt_after_v2_epoch_change[v3]"
+        ],
+        [
+          "tests.unit.logic.formalization.autoencoder.test_alignment_relation_mask_handoff",
+          "test_private_pair_consumer_refuses_exact_old_receipt_after_v2_epoch_change[v4]"
+        ],
+        [
+          "tests.unit.logic.formalization.autoencoder.test_alignment_relation_mask_handoff",
+          "test_reviewed_pair_endpoint_admission_without_pair_reviews_remains_unavailable"
+        ],
+        [
+          "tests.unit.logic.formalization.autoencoder.test_alignment_relation_mask_handoff",
+          "test_reviewed_pair_saved_report_cannot_turn_unknowns_or_analogies_into_negatives"
+        ]
+      ],
+      "errors": 0,
+      "exit_status": {
+        "bytes": 906,
+        "full9": {
+          "st_ctime_ns": "1795551976480041855",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097054",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795551976480041855",
+          "st_nlink": "1",
+          "st_size": "906",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-version-composed-producer-epoch-mask-replay-private-v01/candidate/observed-exit-result.json",
+        "sha256": "10b1cebaa4bdc52bbceecb7fb5a96382aaf36f9ddc3990287f9c7baf935c8ba8"
+      },
+      "failed": 0,
+      "junit": {
+        "bytes": 1824,
+        "full9": {
+          "st_ctime_ns": "1795551976394343132",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097060",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795551976394343132",
+          "st_nlink": "1",
+          "st_size": "1824",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-version-composed-producer-epoch-mask-replay-private-v01/candidate/result.xml",
+        "sha256": "503ac41ccec262e9f32191b37c2dca932dcdde30893849226869e397916bce19"
+      },
+      "passed": 8,
+      "skipped": 0,
+      "stderr": {
+        "bytes": 0,
+        "full9": {
+          "st_ctime_ns": "1795551934975299343",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097053",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795551934975299343",
+          "st_nlink": "1",
+          "st_size": "0",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-version-composed-producer-epoch-mask-replay-private-v01/candidate/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 352,
+        "full9": {
+          "st_ctime_ns": "1795551976394343132",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72097052",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795551976394343132",
+          "st_nlink": "1",
+          "st_size": "352",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-version-composed-producer-epoch-mask-replay-private-v01/candidate/stdout.DATA",
+        "sha256": "defd6aca545d32cb7138ccc67237b41c1aa244a5d948d4d2cf40673463e5ee44"
+      }
+    }
+  },
+  "schema": "actual-V2-V3-composed-version-guard-epoch-and-mask-compatibility-private/v1",
+  "scope": "Existing real V2, V3, and V4 Python compilers and validators covering only fictional in-memory source and typed reviews. No corpus acceptance, scientific computation, legal or Native qualification.",
+  "signed_fictional_controls": {
+    "v2": {
+      "baseline": {
+        "authority": {
+          "actual_fit_authorized": false,
+          "evaluation_gold_mask": 0,
+          "production_contrastive_mask": 0,
+          "runtime_computation_proven": false,
+          "training_executed": false,
+          "training_gold_mask": 0
+        },
+        "capsule": {
+          "bytes": 713012,
+          "full9": {
+            "st_ctime_ns": "1795551894352774677",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72097046",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795551894352774677",
+            "st_nlink": "1",
+            "st_size": "713012",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-version-composed-producer-epoch-mask-replay-private-v01/baseline/v2-signed-mask-inputs.json",
+          "sha256": "78c29b329191328c7e1b2db3613f3f77216d93748e68a2b3587c92bccdddab5f"
+        },
+        "producer_shas": {
+          "legal_norm_content_adjudication_v1.py": "7350235f02340d2d2f0925d25399f614861c59b6faabcb1ebd427e2682a4f1fd"
+        },
+        "receipt_sha256": "d0a1f62a34d63fe1021e924a7e468bf3783f4416bc83c66bc81aeb9c397a2a36",
+        "stats": {
+          "analogy_retrieval_only_pair_count": 1,
+          "formal_row_count": 3,
+          "objective_permitted_negative_mask_sha256": "d2f9c15b8d7bbed88c74dc1ee9d5750c25e65c3973cbc8303c2acb53159c6a7f",
+          "objective_permitted_negative_pair_count": 1,
+          "objective_positive_mask_sha256": "a8535c45388f8395825c05899b508a7ad3adbb3a34831e31883a9abbc021cc0a",
+          "objective_positive_pair_count": 3,
+          "source_row_count": 2,
+          "unknown_pair_count": 1
+        }
+      },
+      "candidate": {
+        "authority": {
+          "actual_fit_authorized": false,
+          "evaluation_gold_mask": 0,
+          "production_contrastive_mask": 0,
+          "runtime_computation_proven": false,
+          "training_executed": false,
+          "training_gold_mask": 0
+        },
+        "capsule": {
+          "bytes": 713012,
+          "full9": {
+            "st_ctime_ns": "1795551942234833049",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72097057",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795551942234833049",
+            "st_nlink": "1",
+            "st_size": "713012",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-version-composed-producer-epoch-mask-replay-private-v01/candidate/v2-signed-mask-inputs.json",
+          "sha256": "a960f90596ee94ee382b6f9b4a04e401610f0c335fa38799aa7fe047402a1416"
+        },
+        "producer_shas": {
+          "legal_norm_content_adjudication_v1.py": "fd43ce8ab0263b34ad1f3c37ebceecdf3ea73500584dced589208cf1f831e13e"
+        },
+        "receipt_sha256": "a16c7483ad842c0933e92f30d3b9c5ca864c5d2dd7fc61142194efe23a103a26",
+        "stats": {
+          "analogy_retrieval_only_pair_count": 1,
+          "formal_row_count": 3,
+          "objective_permitted_negative_mask_sha256": "d2f9c15b8d7bbed88c74dc1ee9d5750c25e65c3973cbc8303c2acb53159c6a7f",
+          "objective_permitted_negative_pair_count": 1,
+          "objective_positive_mask_sha256": "a8535c45388f8395825c05899b508a7ad3adbb3a34831e31883a9abbc021cc0a",
+          "objective_positive_pair_count": 3,
+          "source_row_count": 2,
+          "unknown_pair_count": 1
+        }
+      }
+    },
+    "v3": {
+      "baseline": {
+        "authority": {
+          "actual_fit_authorized": false,
+          "evaluation_gold_mask": 0,
+          "production_contrastive_mask": 0,
+          "runtime_computation_proven": false,
+          "training_executed": false,
+          "training_gold_mask": 0
+        },
+        "capsule": {
+          "bytes": 793622,
+          "full9": {
+            "st_ctime_ns": "1795551901666815047",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72097047",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795551901666815047",
+            "st_nlink": "1",
+            "st_size": "793622",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-version-composed-producer-epoch-mask-replay-private-v01/baseline/v3-signed-mask-inputs.json",
+          "sha256": "4d5789db3c5654a589e52df70ee21701447922d7b53b4c6df83df46d6be36c63"
+        },
+        "producer_shas": {
+          "legal_norm_content_adjudication_v1.py": "7350235f02340d2d2f0925d25399f614861c59b6faabcb1ebd427e2682a4f1fd",
+          "legal_reviewed_norm_admission_v3.py": "65e8182c945669b0f891b03ab12b1d3bee27697d4443bd8df32861af7a931b05"
+        },
+        "receipt_sha256": "cbb62db9d332c946d32c759a92f45752b836a79010115594d087a16cbc4daf4d",
+        "stats": {
+          "analogy_retrieval_only_pair_count": 1,
+          "formal_row_count": 3,
+          "objective_permitted_negative_mask_sha256": "d2f9c15b8d7bbed88c74dc1ee9d5750c25e65c3973cbc8303c2acb53159c6a7f",
+          "objective_permitted_negative_pair_count": 1,
+          "objective_positive_mask_sha256": "a8535c45388f8395825c05899b508a7ad3adbb3a34831e31883a9abbc021cc0a",
+          "objective_positive_pair_count": 3,
+          "source_row_count": 2,
+          "unknown_pair_count": 1
+        }
+      },
+      "candidate": {
+        "authority": {
+          "actual_fit_authorized": false,
+          "evaluation_gold_mask": 0,
+          "production_contrastive_mask": 0,
+          "runtime_computation_proven": false,
+          "training_executed": false,
+          "training_gold_mask": 0
+        },
+        "capsule": {
+          "bytes": 793622,
+          "full9": {
+            "st_ctime_ns": "1795551949610106727",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72097058",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795551949610106727",
+            "st_nlink": "1",
+            "st_size": "793622",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-version-composed-producer-epoch-mask-replay-private-v01/candidate/v3-signed-mask-inputs.json",
+          "sha256": "a02bb6745d6d0c4006ebd557af05ac7bb53766afa951ee9661503ce23370c6ab"
+        },
+        "producer_shas": {
+          "legal_norm_content_adjudication_v1.py": "fd43ce8ab0263b34ad1f3c37ebceecdf3ea73500584dced589208cf1f831e13e",
+          "legal_reviewed_norm_admission_v3.py": "76b40e1fd05616b93e4996e17d19fdecfb74747722964a3fc74c97399c4fdea8"
+        },
+        "receipt_sha256": "6ba66c32f3872a51cc1aea5e42e93dadd3468b4b1d41392d48d6b5516c019c4c",
+        "stats": {
+          "analogy_retrieval_only_pair_count": 1,
+          "formal_row_count": 3,
+          "objective_permitted_negative_mask_sha256": "d2f9c15b8d7bbed88c74dc1ee9d5750c25e65c3973cbc8303c2acb53159c6a7f",
+          "objective_permitted_negative_pair_count": 1,
+          "objective_positive_mask_sha256": "a8535c45388f8395825c05899b508a7ad3adbb3a34831e31883a9abbc021cc0a",
+          "objective_positive_pair_count": 3,
+          "source_row_count": 2,
+          "unknown_pair_count": 1
+        }
+      }
+    },
+    "v4": {
+      "baseline": {
+        "authority": {
+          "actual_fit_authorized": false,
+          "evaluation_gold_mask": 0,
+          "production_contrastive_mask": 0,
+          "runtime_computation_proven": false,
+          "training_executed": false,
+          "training_gold_mask": 0
+        },
+        "capsule": {
+          "bytes": 1539502,
+          "full9": {
+            "st_ctime_ns": "1795551917827765300",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72097048",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795551917827765300",
+            "st_nlink": "1",
+            "st_size": "1539502",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-version-composed-producer-epoch-mask-replay-private-v01/baseline/v4-signed-mask-inputs.json",
+          "sha256": "d6ef9f618d2072afa8924d509f5207e52d689191db214f6d895cf3e4be54202b"
+        },
+        "producer_shas": {
+          "legal_norm_content_adjudication_v1.py": "7350235f02340d2d2f0925d25399f614861c59b6faabcb1ebd427e2682a4f1fd",
+          "legal_reviewed_norm_admission_v3.py": "65e8182c945669b0f891b03ab12b1d3bee27697d4443bd8df32861af7a931b05"
+        },
+        "receipt_sha256": "9c85f1e5180637b7328f10a6112f8f1cc944b0337a1fbcb01f06cf3cc03bf691",
+        "stats": {
+          "analogy_retrieval_only_pair_count": 3,
+          "formal_row_count": 6,
+          "objective_permitted_negative_mask_sha256": "a4fc58478ec9c2c716e077b3118e97490687806e324d380d1bb48bda070b0669",
+          "objective_permitted_negative_pair_count": 3,
+          "objective_positive_mask_sha256": "fdf30551b11bc9810838aa37c9bda9c76a46dc8ad4e1aa7ab3ce65e1f2bcb484",
+          "objective_positive_pair_count": 6,
+          "source_row_count": 4,
+          "unknown_pair_count": 12
+        }
+      },
+      "candidate": {
+        "authority": {
+          "actual_fit_authorized": false,
+          "evaluation_gold_mask": 0,
+          "production_contrastive_mask": 0,
+          "runtime_computation_proven": false,
+          "training_executed": false,
+          "training_gold_mask": 0
+        },
+        "capsule": {
+          "bytes": 1539502,
+          "full9": {
+            "st_ctime_ns": "1795551965765788160",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72097059",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795551965765788160",
+            "st_nlink": "1",
+            "st_size": "1539502",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-version-composed-producer-epoch-mask-replay-private-v01/candidate/v4-signed-mask-inputs.json",
+          "sha256": "7bc6350de6d4dc2dddbed295bc29750c35741b50310208fae3a1e5ee907fbf9c"
+        },
+        "producer_shas": {
+          "legal_norm_content_adjudication_v1.py": "fd43ce8ab0263b34ad1f3c37ebceecdf3ea73500584dced589208cf1f831e13e",
+          "legal_reviewed_norm_admission_v3.py": "76b40e1fd05616b93e4996e17d19fdecfb74747722964a3fc74c97399c4fdea8"
+        },
+        "receipt_sha256": "74d8e6bf1d9b482c3bba4f51db3aebf2484209c6f59b4a63b175910086ab7d45",
+        "stats": {
+          "analogy_retrieval_only_pair_count": 3,
+          "formal_row_count": 6,
+          "objective_permitted_negative_mask_sha256": "a4fc58478ec9c2c716e077b3118e97490687806e324d380d1bb48bda070b0669",
+          "objective_permitted_negative_pair_count": 3,
+          "objective_positive_mask_sha256": "fdf30551b11bc9810838aa37c9bda9c76a46dc8ad4e1aa7ab3ce65e1f2bcb484",
+          "objective_positive_pair_count": 6,
+          "source_row_count": 4,
+          "unknown_pair_count": 12
+        }
+      }
+    }
+  },
+  "source_role_bindings": {
+    "bytes": 86844,
+    "full9": {
+      "st_ctime_ns": "1795551852545498396",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72097038",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795551852545498396",
+      "st_nlink": "1",
+      "st_size": "86844",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-version-composed-producer-epoch-mask-replay-private-v01/input-bindings.json",
+    "sha256": "3b0c2cd492c32bc29f381c07990c0e51540a5977a3968eae6537e3cb6b453dab"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "all_prior_costs_failures_retained": true,
+  "initial_external_byte_SHA_was_unprovided": true,
+  "records": [
+    {
+      "bytes": 2639,
+      "full9": [
+        66306,
+        72514579,
+        33204,
+        1,
+        1000,
+        1000,
+        2639,
+        1795742298187884159,
+        1795742298187884159
+      ],
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-Guide575-four-docs-three-FF-publication.json",
+      "reported_outcomes": {
+        "accelerate_published_head_preserved": true,
+        "pushes_in_actual_order[0].push_returncode": 0,
+        "pushes_in_actual_order[0].repository": "datasets",
+        "pushes_in_actual_order[1].push_returncode": 0,
+        "pushes_in_actual_order[1].repository": "hallucinate",
+        "pushes_in_actual_order[2].push_returncode": 0,
+        "pushes_in_actual_order[2].repository": "root"
+      },
+      "sha256_observed": "c04197de963678c357e0f2b97f0a501b343f3f468d4a6a50a7d15ba22a9d568a"
+    },
+    {
+      "bytes": 2703,
+      "full9": [
+        66306,
+        72514722,
+        33204,
+        1,
+        1000,
+        1000,
+        2703,
+        1795742760524419096,
+        1795742760524419096
+      ],
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase2-self-reference/actual-Guide576-four-docs-three-FF-publication.json",
+      "reported_outcomes": {
+        "accelerate_published_head_preserved": true,
+        "pushes_in_actual_order[0].push_returncode": 0,
+        "pushes_in_actual_order[0].repository": "datasets",
+        "pushes_in_actual_order[1].push_returncode": 0,
+        "pushes_in_actual_order[1].repository": "hallucinate",
+        "pushes_in_actual_order[2].push_returncode": 0,
+        "pushes_in_actual_order[2].repository": "root"
+      },
+      "sha256_observed": "28c2677788637620b8eedf080dd4b4da948cc0173735316f909bd516b4d458db"
+    }
+  ],
+  "scope": "Closed private publication receipt metadata only; no Source, Git, SDK or semantic/Native qualification transfer."
+}

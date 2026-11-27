@@ -1,0 +1,129 @@
+from pathlib import Path
+from hashlib import sha256
+import json, os, sys
+
+home=Path(__file__).resolve().parent
+transport=Path('/tmp/P2-V4-CLI-live-reconciled-ordinary33-publisher-INERT-UHtLMQQb/publish-live-reconciled-cli33.v02.py.DATA')
+raw=transport.read_bytes()
+assert (len(raw),sha256(raw).hexdigest())==(21002,'646f67811f0202f9080f91e11e7a92933475e3718eff84ca7982b24a627d44bd')
+exec(compile(raw.decode().split(chr(10)+'def main():')[0],str(transport),'exec'),globals())
+WORK=home
+PEERS=Path('/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0')
+class Repositories:
+    def __truediv__(self, role):
+        return (WORK.parent if role=='datasets' else PEERS)/role
+CLONES=Repositories()
+FIRST_JOURNAL=WORK/'actual-Phase1-lean-json-diagnostics-publication-events.jsonl'
+assert FIRST_JOURNAL.is_file()
+first_journal_raw=FIRST_JOURNAL.read_bytes()
+assert not any('push_start' in json.loads(line) for line in first_journal_raw.splitlines())
+JOURNAL=WORK/'code-publication-v02/actual-Phase1-lean-json-diagnostics-publication-events.jsonl'
+ENV['GIT_ALTERNATE_OBJECT_DIRECTORIES']='/tmp/lift-origin-main-reconcile-private-A8hmZDEd/root/.git/objects'
+assert git(CLONES/'root','cat-file','-t','02fb07d390a5538fc2d44561db2671d922cc935d').strip()==b'blob'
+GUIDE=reference(WORK.parent/'cache-atomic-put/actual-Guide580-four-docs-three-FF-publication.json',2991,'12de3885bbfd86bc00dd792861c9f670af1bee590b0b8a996a9eae97cbbda9fc')
+OBS=reference(WORK/'actual-current-main-fast-forward-official-V2-base.json',5270,'23a507a1f439e697be16860808c32ba21af50ac094a44d8d108a6e1e35dc829f')
+QUALIFIED_A='219ba3da0f62f772801d71715e22c506faa21126'
+BASE=dict(datasets='7c0d40925436665bd90f62941d66ec63edadfb5b',accelerate='e55316f48847b17a8b4041a2da30bcaa0ba6eb90',
+    hallucinate='d5d8e4ad1aeb62de43c9921943e6f004249fe2fd',root='0e4e509048c7486bff76ec2939d4abc62ed4a6b9')
+observation=obj(OBS)
+assert observation['previous_published_guide']==GUIDE and observation['live_main_after']['datasets']==BASE['datasets']
+assert observation['live_main_after']['hallucinate']==BASE['hallucinate']
+LINKS=dict(hallucinate={'ipfs_datasets_py':BASE['datasets'],'ipfs_accelerate_py':QUALIFIED_A},
+    root={'external/ipfs_datasets':BASE['datasets'],'hallucinate_app':BASE['hallucinate'],'external/ipfs_accelerate':BASE['accelerate']})
+assert rev(CLONES/'accelerate',BASE['accelerate']+'^')==QUALIFIED_A
+assert rev(CLONES/'accelerate',BASE['accelerate']+'^{tree}')=='68cff10df483132b143c5ba920921e8364b80fbf'
+git(CLONES/'root','merge-base','--is-ancestor',observation['live_main_after']['root'],BASE['root'])
+FREEZE=dict(path=str(WORK/'actual-isolated-Phase1-lean-json-diagnostics-exact-two-local-freeze.json'),
+            bytes=16495,sha256='a52014d373c00aade6e9673cb3dab91deefbfe7c23d456b4b483ce5964532e8a')
+EPOCH=dict(path=str(WORK/'actual-live-reconciled-Source42-content-epoch-closed.json'),
+           bytes=9553,sha256='1d609bd6f829ddac94791852f283e82ab5ec70a502aeae9c4ba44207f77949ed')
+assert __debug__ and len(sys.argv) in (10,11) and sys.argv[10:] in ([],['--publish-released'])
+READ3=reference(sys.argv[1],int(sys.argv[2]),sys.argv[3])
+Q=reference(sys.argv[4],int(sys.argv[5]),sys.argv[6])
+NATIVE=reference(sys.argv[7],int(sys.argv[8]),sys.argv[9])
+native=obj(NATIVE)
+assert native['cleanup_verified'] and native['native_cases']==2 and native['compiler_rc']==[0,1]
+assert native['version_rc']==native['pytest_case_credit']==0
+binding=obj(native['binding'])
+assert binding['PROJECTS'][1]['Git_HEAD']==QUALIFIED_A
+assert obj(binding['Native_enrollment']['Root_selection'])['ordinary99']==Q
+freeze,epoch,read3,q=map(obj,(FREEZE,EPOCH,READ3,Q))
+assert q['terminal_returncode']==0 and q['Source_and_resource_and_parent_closed']
+assert q['counts']==dict(tests=99,passed=99,functions=24,failures=0,errors=0,skipped=0)
+assert q['isolated_freeze']==epoch['exact_local_freeze']==read3['exact_local_freeze']==FREEZE
+assert read3['actual_isolated_content_epoch']==EPOCH and binding['Source_epoch']==read3['outer_epoch_reference']
+assert q['Source_READ3']==read3['ordinary_read_binding_abi']
+assert freeze['isolated_Source_context_closed'] and epoch['Source_closed'] and read3['Source_closed'] and read3['module_closed']
+suite,=ET.fromstring(read(q['actual_raw_JUnit'])).findall('testsuite')
+assert all(int(suite.attrib[k])==q['counts'][k] for k in ('tests','failures','errors','skipped'))
+assert [case.attrib['name'] for case in suite.findall('testcase')]==[node.rsplit('::',1)[1] for node in q['ordered_cases']]
+D=freeze['frozen']['HEAD']
+TREE=freeze['frozen']['tree']
+repo=CLONES/'datasets'; a=CLONES/'accelerate'
+assert (rev(repo),rev(repo,'HEAD^'),rev(repo,'HEAD^{tree}'))==(D,BASE['datasets'],TREE)
+assert rev(a)==QUALIFIED_A
+for checkout in (repo,a):
+    clean(checkout)
+for role in ('hallucinate','root'):
+    assert {item.name for item in (CLONES/role).iterdir()}=={'.git'} and not (CLONES/role/'.git/index').exists()
+index=read3['protected_index_reference']
+assert snapshot(repo/'.git/index',8*1024**2)[0]==index==freeze['frozen']['index']
+A_INDEX=read3['actual_accelerate_index_metadata']
+assert snapshot(a/'.git/index',8*1024**2)[0]==A_INDEX==epoch['actual_A_index']
+old,new=entries(repo,BASE['datasets']),entries(repo,D)
+posts=freeze['committed']
+assert len(posts)==2 and changed(old,new)=={rel.encode() for rel in posts}
+captures={Path(item['path']).relative_to(repo).as_posix():item for item in read3['individual_captures']}
+assert set(captures)==set(posts)|{'.git/index'}
+assert read(captures['.git/index']['raw_reference'])==read(index)
+for rel,row in posts.items():
+    assert old[rel.encode()]==('100644','blob',row['parent_blob'])
+    post=row['stage0_and_committed_blob']
+    assert new[rel.encode()]==('100644','blob',post)
+    assert git(repo,'ls-files','--stage','-z','--',rel)==f'100644 {post} 0\t{rel}\0'.encode()
+    assert read(row)==read(captures[rel]['raw_reference'])==git(repo,'cat-file','blob',post)
+primary=primary_snapshot()
+journal,raw_journal=snapshot(JOURNAL,65536)
+events=[json.loads(raw) for raw in raw_journal.splitlines()]
+before,h_event,root_event,*push_events=events
+assert before==dict(preflight=True,D=D,ordinary=99,base=BASE)
+assert h_event['role']=='hallucinate' and root_event['role']=='root'
+h,root=h_event['private_index_commit'],root_event['private_index_commit']
+wanted=dict(datasets=D,hallucinate=h,root=root,accelerate=BASE['accelerate'])
+seen=dict(BASE)
+steps=[]
+assert len(push_events)==9
+for i,role in enumerate(('datasets','hallucinate','root')):
+    start,completed,verified=push_events[i*3:i*3+3]
+    assert start['push_start']==completed['push_returned']==verified['fast_forward_verified']==role
+    assert start['from_main']==BASE[role] and start['exact_commit']==wanted[role] and completed['returncode']==0
+    assert rev(CLONES/role,wanted[role]+'^')==BASE[role]
+    statuses=[line for line in completed['porcelain'].splitlines() if chr(9) in line]
+    assert len(statuses)==1 and statuses[0].startswith(' '+chr(9)) and statuses[0].split(chr(9))[1]==wanted[role]+':refs/heads/main'
+    seen[role]=wanted[role]
+    assert verified['live_readback']==seen
+    steps.append(dict(repo=role,prior=BASE[role],published=wanted[role],normal_fast_forward=True))
+assert seen==wanted==live_all(wanted)
+for event in (h_event,root_event):
+    role=event['role']
+    earlier=entries(CLONES/role,BASE[role]);later=entries(CLONES/role,wanted[role])
+    assert event['parent']==BASE[role] and event['tree']==rev(CLONES/role,wanted[role]+'^{tree}')
+    assert changed(earlier,later)=={p.encode() for p in event['exact_gitlinks']}
+    assert all(later[p.encode()]==('160000','commit',v) for p,v in event['exact_gitlinks'].items())
+assert snapshot(repo/'.git/index',8*1024**2)[0]==index and snapshot(a/'.git/index',8*1024**2)[0]==A_INDEX
+assert rev(CLONES/'datasets')==wanted['datasets'] and rev(CLONES/'accelerate')==QUALIFIED_A
+for checkout in (repo,a):
+    clean(checkout)
+LINKS['hallucinate'].update(ipfs_datasets_py=D,ipfs_accelerate_py=BASE['accelerate'])
+LINKS['root'].update({'external/ipfs_datasets':D,'hallucinate_app':h})
+verify_live_links(wanted)
+receipt=dict(schema='actual-current-Phase1-lean-json-diagnostics-ordinary99-and-native-live-publication/v1',
+    terminal_success=True,terminal_returncode=0,post_push_initial_publisher_returncode=1,publication_finalizer_recovered_read_only=True,actual_completed_push_journal=journal,qualification=Q,native_qualification=NATIVE,qualification_A=QUALIFIED_A,external_base_observation=OBS,previous_published_guide=GUIDE,
+    READ3=READ3,current_frozen_Source_epoch=EPOCH,exact_local_freeze=FREEZE,live_main_before=BASE,live_main_after=wanted,
+    current_gitlinks=LINKS,exact_two_changes=posts,pushes_in_actual_order=steps,primary_after=primary,
+    retained_first_preeffect_Git_refusal=dict(path=str(FIRST_JOURNAL),bytes=len(first_journal_raw),sha256=sha256(first_journal_raw).hexdigest()),shared_worktrees_preserved=True,D_index=index,A_index=A_INDEX,physical_IO_accounting_complete=False)
+path=WORK/'actual-Phase1-lean-json-diagnostics-ordinary99-and-native-three-FF-publication.json'
+b=(json.dumps(receipt,sort_keys=True,indent=2)+chr(10)).encode()
+with path.open('xb') as stream:
+    stream.write(b);stream.flush();os.fsync(stream.fileno())
+print(json.dumps(dict(receipt=reference(path,len(b),sha256(b).hexdigest()),live_main_after=wanted)))

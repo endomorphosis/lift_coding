@@ -1,0 +1,48 @@
+{
+  "added_Source_only_envelope": 134217728,
+  "after_full_retained_precharge": {
+    "captures": 543426,
+    "capturesComplete": false,
+    "global_cap": 59978041354,
+    "internal_cap": 59787449480,
+    "internal_used": 59781092488,
+    "used": 59971684362
+  },
+  "exact_human_affirmation": {
+    "bytes": 2960,
+    "path": "/tmp/Main-source-cap-human-provenance-v01-g9hs_s_q/Root-original-human-Source-cap-approval.record.jsonl",
+    "sha256": "8fdf2d6c57542b3ce8e8a06773645487c39a3cb2a8a9929426cc785d3fc78dda"
+  },
+  "no_policy_capacity_or_model_change": true,
+  "prior": {
+    "captures": 543425,
+    "capturesComplete": false,
+    "global_cap": 59843823626,
+    "internal_cap": 59653231752,
+    "internal_used": 59646874760,
+    "used": 59837466634
+  },
+  "read3_full_retained_charge": {
+    "bytes": 1313,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/Source-only-Phase1-lean-json-diagnostics-READ-overlay-full-retained.json",
+    "sha256": "f2a323ebb01c565d9c2ce86146f2ad1e357ed7ec7cff45f7a334485013b6a7bc"
+  },
+  "retained_first_write_charge": {
+    "bytes": 1289,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/Source-only-lean-json-diagnostics-WRITE-full-retained.json",
+    "sha256": "b2db71a64ce89374326c708351d8929b2a9cef7d56c929e7a585cfb92a3bc824"
+  },
+  "retained_first_write_refusal": {
+    "bytes": 837,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-first-write-missing-filtered-base-object-refusal.json",
+    "sha256": "a45032f43505257d98b0ba03d014e464285352b45799e3d3038f013cd25d5858"
+  },
+  "selected": {
+    "captures": 543425,
+    "capturesComplete": false,
+    "global_cap": 59978041354,
+    "internal_cap": 59787449480,
+    "internal_used": 59646874760,
+    "used": 59837466634
+  }
+}

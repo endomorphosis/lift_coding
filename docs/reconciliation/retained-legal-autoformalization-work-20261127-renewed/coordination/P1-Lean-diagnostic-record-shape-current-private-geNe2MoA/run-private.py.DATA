@@ -1,0 +1,65 @@
+from pathlib import Path
+import hashlib
+import json
+import os
+import subprocess
+import sys
+import time
+import xml.etree.ElementTree as ET
+
+w = Path(__file__).resolve().parent
+epoch = json.loads((w / "current-input-epoch.json").read_bytes())
+phase, = sys.argv[1:]
+assert phase in {"red", "green"}
+runner = w / "existing-private-runner.py.DATA"
+assert hashlib.sha256(runner.read_bytes()).hexdigest() == epoch["runner_sha256"]
+project = w / "project"
+new = ["test_lean_bound_malformed_extra_diagnostic_record_fails_closed",
+       "test_lean_bound_well_shaped_extra_diagnostic_retains_proof_binding",
+       "test_lean_bound_opaque_json_without_diagnostic_keys_retains_proof_binding",
+       "test_lean_json_message_collector_preserves_objects_independently_of_proof_predicate"]
+selectors = epoch["retained_selectors"] + [epoch["test"] + "::" + name for name in new]
+assert len(selectors) == len(set(selectors)) == 32
+
+def verify():
+    for rel,pin in epoch["roles"].items():
+        raw = (project / rel).read_bytes()
+        if rel == epoch["test"]:
+            assert raw == (w / "test_kernel_backends.diagnostic-record-shape.after.py.DATA").read_bytes()
+        elif rel == epoch["owner"] and phase == "green":
+            assert raw == (w / "owner.after.DATA").read_bytes()
+        else:
+            assert (len(raw),hashlib.sha256(raw).hexdigest()) == (pin["bytes"],pin["sha256"]), rel
+    for rel,pin in epoch["private_config"].items():
+        raw = (project / rel).read_bytes()
+        assert (len(raw),hashlib.sha256(raw).hexdigest()) == (pin["bytes"],pin["sha256"])
+
+verify()
+out = w / phase
+out.mkdir(mode=0o700)
+argv = ["/home/barberb/lift_coding/.venv/bin/python","-I","-B",str(runner),str(out),
+        str(project),*epoch["protected_roots"],*selectors]
+started = time.monotonic()
+with (out / "stdout.DATA").open("xb") as stdout, (out / "stderr.DATA").open("xb") as stderr:
+    result = subprocess.run(argv,env={**os.environ,"PYTEST_DISABLE_PLUGIN_AUTOLOAD":"1",
+        "IPFS_DATASETS_RUN_NATIVE_LEAN":"0","OPENBLAS_NUM_THREADS":"1","OMP_NUM_THREADS":"1",
+        "MKL_NUM_THREADS":"1"},stdout=stdout,stderr=stderr,timeout=60)
+verify()
+xml = out / "result.xml"
+raw = xml.read_bytes()
+cases = ET.fromstring(raw).findall(".//testcase")
+record = {"phase":phase,"returncode":result.returncode,"seconds":time.monotonic()-started,
+    "argv":argv,"role_count":len(epoch["roles"]),
+    "junit":{"path":str(xml),"bytes":len(raw),"sha256":hashlib.sha256(raw).hexdigest()},
+    "cases":[(n.attrib.get("classname"),n.attrib["name"]) for n in cases],
+    "counts":{tag:sum(n.find(tag) is not None for n in cases) for tag in ("failure","error","skipped")},
+    "selected_roles":{rel:hashlib.sha256((project / rel).read_bytes()).hexdigest()
+                      for rel in (epoch["owner"],epoch["test"])}}
+record["counts"]["tests"] = len(cases)
+with (out / "execution.json").open("x") as stream:
+    json.dump(record,stream,indent=2,sort_keys=True)
+    stream.write("\n")
+print((out / "stdout.DATA").read_text()[-14000:])
+print((out / "stderr.DATA").read_text()[-1000:])
+print(json.dumps({"phase":phase,"counts":record["counts"],"returncode":result.returncode}))
+raise SystemExit(result.returncode)

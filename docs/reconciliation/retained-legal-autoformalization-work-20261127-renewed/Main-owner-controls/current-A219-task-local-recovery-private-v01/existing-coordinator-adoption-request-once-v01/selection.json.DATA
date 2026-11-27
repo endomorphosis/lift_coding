@@ -1,0 +1,17 @@
+{
+  "schema": "Main-existing-owner-exact-unit-integration-request/v1",
+  "scope": "Ask existing Root integration owner to select exact prepared unit under continuing user goal; Main does not derive Source/SDK/resource eligibility or take over custody.",
+  "status_evidence_sha256": "d132e80bfbd3cc1a47dd80ccc4ba9704d55b740dc5a770e97dfe0b10e982a57a",
+  "bindings": {
+    "Root_selected": true,
+    "message_path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/existing-coordinator-adoption-request-once-v01/message.txt",
+    "message_bytes": 934,
+    "message_sha256": "bc40476d7b65bd30506b40b2ead2d796b569d558b73cb04ebaea6b3ae62d332c",
+    "private_root": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/existing-coordinator-adoption-request-once-v01",
+    "message_artifact_path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/existing-coordinator-adoption-request-once-v01/retained-message.json",
+    "unknown_reservation_path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/existing-coordinator-adoption-request-once-v01/unknown-before-mutation.json",
+    "sender_receipt_path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/existing-coordinator-adoption-request-once-v01/sender-receipt.json",
+    "result_path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/existing-coordinator-adoption-request-once-v01/result.json"
+  },
+  "prior_preflight": "fdfaa2 length assertion failed before message write/invoke/RPC; directory confirmed empty before corrected bounded request."
+}

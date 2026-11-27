@@ -1,0 +1,90 @@
+{
+  "accelerate_published_head_preserved": true,
+  "actual_code_publication": {
+    "bytes": 17212,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-Phase1-lean-json-diagnostics-ordinary99-and-native-three-FF-publication.json",
+    "sha256": "fefe2ecad990326bf6269e626000bb04d68a70ed55a9448a3118d8e3b0f1c4a4"
+  },
+  "actual_doc_Source_closed": {
+    "bytes": 6552,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-Guide581-four-docs-Source-closed-and-frozen.json",
+    "sha256": "38e41dfb04443a92c2a20308d4f01a9cb75fa34f97029856ffbcbf82f1429503"
+  },
+  "actual_native_namespaced2": {
+    "bytes": 1026,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-Lean-JSON-diagnostics-namespaced-Native2-closed.json",
+    "sha256": "abbf8d4ced879afceeccba6598e56f1fd72c9b915199842cbd1e347d32dd220c"
+  },
+  "actual_ordinary99": {
+    "bytes": 25346,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-live-reconciled-P1-Lean-ordinary99-closed.json",
+    "sha256": "ba0317da64826b8d5f81839ec911a2ac9bc16fc2188d6773da467ed489e637d2"
+  },
+  "evidence_ordinal": 581,
+  "live_main_after": {
+    "accelerate": "64a8649952bed66a457d7b87bf6dced9fadab8d4",
+    "datasets": "5bf57f390a12621a40716595fe261c35d2741e12",
+    "hallucinate": "fe0d51a95aa4662efad395bfeeb996dab567313c",
+    "root": "9712f24eeb4cf444416b2613cf23f097c17bda30"
+  },
+  "live_main_before": {
+    "accelerate": "64a8649952bed66a457d7b87bf6dced9fadab8d4",
+    "datasets": "95dc193c3a4a37f9c9227da640a346b2cd58e54c",
+    "hallucinate": "06c3dafed7db60d84f2eb3607eca896aa0c6581e",
+    "root": "0ff4b2a168ea8e00c1c552a041e804e5f236ee7f"
+  },
+  "only_four_docs": [
+    "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json",
+    "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+    "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md",
+    "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json"
+  ],
+  "prior_values_preserved": {
+    "components": 126,
+    "evidence_records": 580,
+    "tasks": 24
+  },
+  "pushes_in_actual_order": [
+    {
+      "after": "5bf57f390a12621a40716595fe261c35d2741e12",
+      "before": "95dc193c3a4a37f9c9227da640a346b2cd58e54c",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "datasets"
+    },
+    {
+      "after": "fe0d51a95aa4662efad395bfeeb996dab567313c",
+      "before": "06c3dafed7db60d84f2eb3607eca896aa0c6581e",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "hallucinate"
+    },
+    {
+      "after": "9712f24eeb4cf444416b2613cf23f097c17bda30",
+      "before": "0ff4b2a168ea8e00c1c552a041e804e5f236ee7f",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "root"
+    }
+  ],
+  "qualified_physical_A_HEAD": "219ba3da0f62f772801d71715e22c506faa21126",
+  "qualified_physical_A_index": {
+    "bytes": 4469929,
+    "full9": {
+      "st_ctime_ns": "1795734671233647109",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "48763139",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795734671232647103",
+      "st_nlink": "1",
+      "st_size": "4469929",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/.git/index",
+    "sha256": "8b777ee97314c4f0712b10b2fae9cc75a71901327a01a9d77a5be0c03a76441c"
+  },
+  "schema": "actual-Guide581-four-docs-live-ordinary99-and-native-three-FF-publication/v1",
+  "shared_checkouts_preserved": true,
+  "terminal_returncode": 0
+}

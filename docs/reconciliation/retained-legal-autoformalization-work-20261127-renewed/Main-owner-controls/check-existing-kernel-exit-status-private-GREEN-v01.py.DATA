@@ -1,0 +1,64 @@
+from __future__ import annotations
+import ast,hashlib,json,os,re,stat,time,types,sys
+from pathlib import Path
+from dataclasses import dataclass,field,replace
+from enum import StrEnum
+from collections.abc import Mapping,Sequence,Iterator
+from typing import Any,Final
+import resource,traceback
+resource.setrlimit(resource.RLIMIT_CPU,(60,60))
+resource.setrlimit(resource.RLIMIT_AS,(512*1024**2,512*1024**2))
+BASE=Path(__file__).parent
+SPECS=[
+ ("process.published-611395.py.DATA",109707,"370ba355be1da87814be4a117d2ce2a1cbc255064958d9ec64ada8e54521a7d7",{"ToolRuntime","ToolRunResult"}),
+ ("wasm.published-611395.py.DATA",24933,"49cfdbc0108b43d45ab9f567b4153f384985563b075f369b32e37f855252d6cc",{"KernelCapabilityError","DEFAULT_MAX_DIAGNOSTIC_CHARS","DEFAULT_MAX_DIAGNOSTICS","_CONTROL","sanitize_diagnostic","bound_diagnostics"}),
+ ("kernel_lean.exact-integer-status.after-v01.py.DATA",103242,"4983edfb0928667c64e7fe38d247b4924aae9cb3ff12d59cf24a622100573c90",{"LeanKernelError","LeanAxiomReport","LEAN_AXIOM_REPORT_VERSION","_LEAN_NAME","_AXIOM_MARKER","_AXIOM_MESSAGE","_PLAIN_LEAN_ERROR","_text","_digest","_enum","_closed_mapping","_lean_name","_approved_axioms","_lean_diagnostic_lines","_load_lean_json_line","_lean_error_diagnostics","_decode_axiom_report_text","parse_lean_axiom_report","evaluate_lean_kernel_output"}),
+ ("test_kernel_backends.published-611395.py.DATA",111809,"5b57349bce86ec8d308f87802f9dc96195d56da15ec849a705f0b5b2a5ad1549",{"_lean_output","_axiom_message"})]
+def names(n):
+ if isinstance(n,(ast.FunctionDef,ast.ClassDef)):return {n.name}
+ if isinstance(n,ast.Assign):return {t.id for t in n.targets if isinstance(t,ast.Name)}
+ if isinstance(n,ast.AnnAssign) and isinstance(n.target,ast.Name):return {n.target.id}
+ return set()
+def seal(path,raw):
+ fd=os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400)
+ try:assert os.write(fd,raw)==len(raw);os.fsync(fd)
+ finally:os.close(fd)
+ fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW)
+ try:back=os.read(fd,len(raw)+1)
+ finally:os.close(fd)
+ assert back==raw
+rows=[];selected=[];read_bytes=0
+for file,size,sha,wanted in SPECS:
+ p=BASE/file;fd=os.open(p,os.O_RDONLY|os.O_NOFOLLOW)
+ try:
+  a=os.fstat(fd);raw=os.read(fd,size+1);b=os.fstat(fd)
+ finally:os.close(fd)
+ f9=lambda s:(s.st_dev,s.st_ino,s.st_mode,s.st_nlink,s.st_uid,s.st_gid,s.st_size,s.st_mtime_ns,s.st_ctime_ns)
+ assert f9(a)==f9(b)==f9(os.stat(p,follow_symlinks=False))
+ assert len(raw)==size and hashlib.sha256(raw).hexdigest()==sha
+ read_bytes+=len(raw);tree=ast.parse(raw.decode(),str(p));found=set()
+ for n in tree.body:
+  hit=names(n)&wanted
+  if hit:
+   found|=hit;selected.append(n);rows.append({"source":file,"names":sorted(hit),"line":n.lineno,"end_line":n.end_lineno,"AST_sha256":hashlib.sha256(ast.dump(n,include_attributes=False).encode()).hexdigest()})
+ assert found==wanted,(file,sorted(wanted-found))
+module=types.ModuleType("existing_lean_public_result_consistency_fixture")
+module.__dict__.update({k:v for k,v in globals().copy().items() if k in ("dataclass","field","replace","StrEnum","Mapping","Sequence","Iterator","Any","Final","json","re","hashlib","os","Path","stat","time")})
+sys.modules[module.__name__]=module
+actual=ast.Module(body=[ast.ImportFrom(module="__future__",names=[ast.alias(name="annotations")],level=0),*selected],type_ignores=[])
+exec(compile(ast.fix_missing_locations(actual),"<exact-published-owner-AST>","exec"),module.__dict__)
+frag=BASE/"kernel_exit_status_normal_test_fragment.UNRUN.py.DATA"
+raw=frag.read_bytes();read_bytes+=len(raw)
+ft=ast.parse(raw.decode());test=next(n for n in ft.body if isinstance(n,ast.FunctionDef));test.decorator_list=[]
+exec(compile(ast.fix_missing_locations(ast.Module(body=[test],type_ignores=[])),str(frag),"exec"),module.__dict__)
+results=[]
+for value in (False,0.0,True,"0",None,1):
+ try:
+  module.test_lean_malformed_or_failed_exit_status_cannot_establish_proof(value)
+ except Exception as e:
+  results.append({"returncode_type":type(value).__name__,"returncode_repr":repr(value),"status":"FAIL","exception_type":type(e).__name__,"traceback":traceback.format_exc()})
+ else:results.append({"returncode_type":type(value).__name__,"returncode_repr":repr(value),"status":"PASS"})
+result={"kind":"fictional_stdlib_actual_AST_result_consistency_GREEN","source_nodes":rows,"results":results,"pass":sum(x["status"]=="PASS" for x in results),"fail":sum(x["status"]=="FAIL" for x in results),"input_read_bytes":read_bytes,"canonical_imports":False,"actual_Native_or_SDK_or_process_execution":False,"Source_Git_or_ledger_mutation":False}
+raw=(json.dumps(result,indent=2)+"\n").encode();out=BASE/"actual-kernel-exit-status-GREEN-v01.json";seal(out,raw)
+print(json.dumps({"path":str(out),"bytes":len(raw),"sha256":hashlib.sha256(raw).hexdigest(),"pass":result["pass"],"fail":result["fail"],"input_read_bytes":read_bytes}))
+raise SystemExit(1 if result["fail"] else 0)

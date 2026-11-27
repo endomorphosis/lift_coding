@@ -1,0 +1,224 @@
+from pathlib import Path
+import ast
+import hashlib
+import json
+
+stage = Path(__file__).resolve().parent
+
+def rewrite(role, replacements):
+    original = (stage / f"{role}.before.DATA").read_text()
+    updated = original
+    for old, new in replacements:
+        assert updated.count(old) == 1, (role, old[:100], updated.count(old))
+        updated = updated.replace(old, new, 1)
+    ast.parse(updated)
+    post = stage / f"{role}.after.DATA"
+    with post.open("x", encoding="utf-8") as stream:
+        stream.write(updated)
+    post.chmod(0o400)
+    return {"path": str(post), "bytes": post.stat().st_size,
+            "sha256": hashlib.sha256(post.read_bytes()).hexdigest()}
+
+
+target = '''@dataclass(frozen=True, slots=True)
+class ProofFeedbackTrainingTarget:
+    """Commit to a caller-selected current target, separately from feedback.
+
+    The caller supplies the exact proof obligation from its current checked
+    evidence and the independently selected reviewed interpretation and
+    dependency commitments. This identity does not itself perform those
+    checks or grant training authority.
+    """
+
+    sample_id: str
+    sample_sha256: str
+    obligation_id: str
+    obligation_type: str
+    legal_ir_view: str
+    formal_obligation_sha256: str
+    reviewed_target_sha256: str
+    dependency_manifest_sha256: str
+
+    def __post_init__(self) -> None:
+        for name in ("sample_id", "obligation_id", "obligation_type", "legal_ir_view"):
+            value = getattr(self, name)
+            if type(value) is not str:
+                raise ProofFeedbackError(f"{name} must be a source-free identifier")
+            _require_safe_identifier(value, name)
+        for name in ("sample_sha256", "formal_obligation_sha256", "reviewed_target_sha256",
+                     "dependency_manifest_sha256"):
+            value = getattr(self, name)
+            if type(value) is not str or not _SHA256_RE.fullmatch(value):
+                raise ProofFeedbackError(f"{name} must be a SHA-256 digest")
+
+    @property
+    def obligation_digest(self) -> str:
+        return proof_feedback_content_digest({
+            "schema": "legal-ir-proof-feedback-training-target/v1",
+            "sample_id": self.sample_id,
+            "sample_sha256": self.sample_sha256,
+            "obligation_id": self.obligation_id,
+            "obligation_type": self.obligation_type,
+            "legal_ir_view": self.legal_ir_view,
+            "formal_obligation_sha256": self.formal_obligation_sha256,
+            "reviewed_target_sha256": self.reviewed_target_sha256,
+            "dependency_manifest_sha256": self.dependency_manifest_sha256,
+        })
+
+    def matches(self, record: LegalIRProofFeedbackRecord) -> bool:
+        return (
+            self.obligation_id == record.obligation_id
+            and self.obligation_type == record.obligation_type
+            and self.legal_ir_view == record.legal_ir_view
+            and self.obligation_digest == record.obligation_digest
+        )
+
+
+def proof_feedback_sample_digest(sample: Any) -> str:
+    """Hash the current sample's source and parsed representation, without embeddings."""
+    from ....optimizers.logic_theorem_optimizer.legal_samples import LegalSample
+
+    if type(sample) is not LegalSample:
+        raise ProofFeedbackError("typed LegalSample required for current proof feedback")
+    sample.validate()
+    return proof_feedback_content_digest({
+        "schema": "legal-ir-proof-feedback-sample/v1",
+        "sample_id": sample.sample_id,
+        "source": sample.source,
+        "title": sample.title,
+        "section": sample.section,
+        "citation": sample.citation,
+        "text": sample.text,
+        "modal_ir": sample.modal_ir.to_dict(),
+    })
+
+
+'''
+records = rewrite("record", [
+    ("def build_legal_ir_proof_feedback_record(",
+     target + "def build_legal_ir_proof_feedback_record("),
+    ('    "ProofFeedbackTrustError",\n', '    "ProofFeedbackTrainingTarget",\n    "ProofFeedbackTrustError",\n'),
+    ('    "proof_feedback_content_digest",\n', '    "proof_feedback_content_digest",\n    "proof_feedback_sample_digest",\n'),
+])
+trainer = rewrite("trainer", [
+    ("from dataclasses import dataclass, field\n", "from copy import deepcopy\nfrom dataclasses import dataclass, field\n"),
+    ("    ProofFeedbackTrustStatus,\n", "    ProofFeedbackTrainingTarget,\n    ProofFeedbackTrustStatus,\n"),
+    ("    proof_feedback_content_digest,\n", "    proof_feedback_content_digest,\n    proof_feedback_sample_digest,\n"),
+    ("        production_weight_writes_enabled: Optional[bool] = None,\n        learning_rate:",
+     "        current_proof_targets: Mapping[str, ProofFeedbackTrainingTarget] | None = None,\n"
+     "        production_weight_writes_enabled: Optional[bool] = None,\n        learning_rate:"),
+    ('        """Validate and apply one bounded batch, returning exhaustive counters."""\n\n        items = _feedback_items(feedback)',
+     '        """Apply a batch using independently selected current targets for typed feedback."""\n\n'
+     '        targets = dict(current_proof_targets or {})\n        items = _feedback_items(feedback)'),
+    ("                sample_id = _sample_id(item, proof_record)\n",
+     "                target = targets.get(proof_record.obligation_id) if proof_record is not None else None\n"
+     "                sample_id = (target.sample_id if type(target) is ProofFeedbackTrainingTarget\n"
+     "                             else _sample_id(item, proof_record))\n"),
+    ('''                    if proof_record is not None and not _proof_feedback_sample_matches(
+                        proof_record, sample_id, sample, (item, *guard_layers)
+                    ):
+                        block("guardrail_blocked_count", "proof_feedback_sample_mismatch")
+                        continue
+''', '''                    if proof_record is not None:
+                        if not _proof_feedback_sample_matches(sample_id, sample, (item, *guard_layers)):
+                            block("guardrail_blocked_count", "proof_feedback_sample_mismatch")
+                            continue
+                        if type(target) is not ProofFeedbackTrainingTarget or not target.matches(proof_record):
+                            block("guardrail_blocked_count", "proof_feedback_current_target_mismatch")
+                            continue
+                        sample = deepcopy(sample)
+                        if proof_feedback_sample_digest(sample) != target.sample_sha256:
+                            block("guardrail_blocked_count", "proof_feedback_current_sample_mismatch")
+                            continue
+'''),
+    ("                            [proof_record],\n                            expected_versions=self.expected_versions,\n",
+     "                            [proof_record],\n"
+     "                            current_proof_targets={proof_record.obligation_id: target},\n"
+     "                            expected_version_fingerprint=self.expected_version_fingerprint,\n"
+     "                            expected_versions=self.expected_versions,\n"),
+    ("    ablation_evidence: TrustedFeedbackAblationEvidence | Mapping[str, Any],\n    config:",
+     "    ablation_evidence: TrustedFeedbackAblationEvidence | Mapping[str, Any],\n"
+     "    current_proof_targets: Mapping[str, ProofFeedbackTrainingTarget] | None = None,\n    config:"),
+    ("        ablation_evidence=ablation_evidence,\n        production_weight_writes_enabled=True,\n",
+     "        ablation_evidence=ablation_evidence,\n        current_proof_targets=current_proof_targets,\n"
+     "        production_weight_writes_enabled=True,\n"),
+    ('''    expected_id = record.obligation_id
+''', ""),
+    ('''def _proof_feedback_sample_matches(
+    record: LegalIRProofFeedbackRecord,
+    selected_id: str,
+''', '''def _proof_feedback_sample_matches(
+    selected_id: str,
+'''),
+    ('''    # The typed route already defaults to this record identity. Envelope
+    # selectors and a caller's index cannot reassign its proof to other data.
+''', '''    # Envelope selectors cannot reassign independently selected current data.
+'''),
+    ("    return selected_id == actual_id == expected_id and all(\n        str(layer.get(key) or \"\").strip() in (\"\", expected_id)\n",
+     "    return selected_id == actual_id and all(\n        str(layer.get(key) or \"\").strip() in (\"\", selected_id)\n"),
+    ('        item.setdefault("sample_id", record.obligation_id)\n', ""),
+])
+encoder = rewrite("autoencoder", [
+    ('''        feedback_records: Iterable[Any],
+        *,
+        expected_versions: Optional[Any] = None,
+        expected_version_fingerprint: str = "",
+        learning_rate: float = 0.10,
+''', '''        feedback_records: Iterable[Any],
+        *,
+        current_proof_targets: Optional[Mapping[str, Any]] = None,
+        expected_versions: Optional[Any] = None,
+        expected_version_fingerprint: str = "",
+        learning_rate: float = 0.10,
+'''),
+    ('''        """Train all proof heads from version-matched verifier feedback only.
+
+        The first accepted version pins an empty head state.  A caller may pin
+''', '''        """Train from verifier feedback matching independently selected current targets.
+
+        The first accepted version pins an empty head state.  A caller may pin
+'''),
+    ('''        raw_records = _proof_feedback_record_items(feedback_records)
+        requested_fingerprint = str(
+''', '''        from ...logic.integration.reasoning.legal_ir_proof_feedback import ProofFeedbackTrainingTarget
+
+        targets = dict(current_proof_targets or {})
+        raw_records = _proof_feedback_record_items(feedback_records)
+        requested_fingerprint = str(
+'''),
+    ('''        if not expected_fingerprint and records:
+            expected_fingerprint = records[0].version_fingerprint
+            records = [
+                record for record in records if record.version_fingerprint == expected_fingerprint
+            ]
+            filtering["skipped_version_mismatch_count"] += filtering[
+                "eligible_before_version_count"
+            ] - len(records)
+''',
+     '''        current_records = []
+        for record in records:
+            target = targets.get(record.obligation_id)
+            if type(target) is ProofFeedbackTrainingTarget and target.matches(record):
+                current_records.append(record)
+        skipped_target_count = len(records) - len(current_records)
+        records = current_records
+        if not expected_fingerprint and records:
+            expected_fingerprint = records[0].version_fingerprint
+            records = [
+                record for record in records if record.version_fingerprint == expected_fingerprint
+            ]
+            filtering["skipped_version_mismatch_count"] += (
+                len(current_records) - len(records)
+            )
+'''),
+    ('''                "skipped_limit_count": max(
+                    0,
+                    len(records) - record_limit,
+''',
+     '''                "skipped_current_target_count": skipped_target_count,
+                "skipped_limit_count": max(
+                    0,
+                    len(records) - record_limit,
+'''),
+])
+print(json.dumps({"record": records, "trainer": trainer, "encoder": encoder}, indent=2))

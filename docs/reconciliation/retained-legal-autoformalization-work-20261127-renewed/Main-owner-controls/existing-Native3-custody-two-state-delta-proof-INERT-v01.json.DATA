@@ -1,0 +1,35 @@
+{
+  "RED_preserved": {
+    "bytes": 11689,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/actual-existing-Native3-custody-before-RED-v01.json",
+    "sha256": "8d9d015c8f760cca55f2dfa464f75d5f703077eaefecddcabbb2dfaaf408c125"
+  },
+  "actual_Native": false,
+  "actual_SDK": false,
+  "actual_Source": false,
+  "all_actual_bindings_remain_NULL": true,
+  "forward": {
+    "bytes": 8173,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-v567-Native3-custody.forward.diff",
+    "sha256": "24cabacd8259cd6d17cb9f15a90e043e12925a67618d112294152065421204cf"
+  },
+  "inverse": {
+    "bytes": 8173,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-v567-Native3-custody.inverse.diff",
+    "sha256": "4e88496f144556a5ce7180db17e9b3ecf2e7718fb0d4edcbbe370b0fcbff227f"
+  },
+  "legal_admission": false,
+  "new_runner_or_registry": false,
+  "only_run_with_actual_custody_AST_changed": true,
+  "original_Source_resource_release_finalizer_AST_exact": true,
+  "post": {
+    "bytes": 39786,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-v567-Native3-current-operator-custody-INERT-v02.py.DATA",
+    "sha256": "7f84448012a7dc9246f95edce479c14f8bb81aaed42bd5423bd32eaf3f9ef29e"
+  },
+  "prior": {
+    "bytes": 35401,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-v567-Native3-current-operator-INERT-v01.py.DATA",
+    "sha256": "4b844f5645a6607f184d9aa64b2203686effe1d4eb2b02a97a43afb83f0a04e0"
+  }
+}

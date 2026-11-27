@@ -1,0 +1,187 @@
+{
+  "boundaries": {
+    "Source_or_SDK_execution_performed_by_publisher": false,
+    "edition_findings_or_new_replay_added_to_frozen507": false,
+    "force_push": false,
+    "hosted_CI_status": "UNVERIFIED_NOT_POLLED",
+    "implicit_Git_library_IO_measured": false,
+    "legal_admission_granted": false,
+    "model_or_Native_runs": 0,
+    "old_checkout_mutations_performed": 0,
+    "source_ledger_changed_by_publisher": false,
+    "unit_tests_run": false
+  },
+  "committed_guides": [
+    {
+      "bytes": 1379480,
+      "committed_blob_verified": true,
+      "relative_path": "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json",
+      "sha256": "fa259fc989bccf5f1a7e1729757205ef4c7908df9342eb2e6aec4d4a5623844a"
+    },
+    {
+      "bytes": 1617695,
+      "committed_blob_verified": true,
+      "relative_path": "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json",
+      "sha256": "6b69318198d55541880e8e7e6f153439761b27b516b520283d3d6e7426a6bec3"
+    },
+    {
+      "bytes": 922052,
+      "committed_blob_verified": true,
+      "relative_path": "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+      "sha256": "969ba712bfdf5c3fb930cc0f28efbde83960c2e0df17d158fc439912b420bc63"
+    },
+    {
+      "bytes": 682047,
+      "committed_blob_verified": true,
+      "relative_path": "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md",
+      "sha256": "b8e70e8bd0193abb9a88cd6901ce37b300e4fee886af5525907ebb526be7b7bd"
+    }
+  ],
+  "exact_scope": {
+    "all506_prior_evidence_entries_preserved": true,
+    "code_or_test_changes": 0,
+    "datasets_files": 4,
+    "evidence_count_after": 507,
+    "existing24_tasks_and126_components_preserved": true,
+    "fast_forward_commits_and_pushes": 3,
+    "hallucinate_gitlinks": 1,
+    "old_Markdown_prefixes_preserved": true,
+    "prior_archives_unmodified_by_this_commit": true,
+    "root_gitlinks": 2
+  },
+  "full_eight_phase_goal_complete": false,
+  "gitlinks": {
+    "hallucinate": [
+      "160000 commit de4d5a62b6fac2df61769a6461c2ada97f788208\tipfs_accelerate_py",
+      "160000 commit 4ccc8917b2168db8e11f54c5aadd4ca267f1c488\tipfs_datasets_py",
+      "160000 commit b15442e490dc39d046a911ea663c73c99ed3c755\tipfs_kit_py",
+      "160000 commit 453a30b01e62b6acdd1c54070821dbacfbf7908e\tswissknife"
+    ],
+    "root": [
+      "160000 commit 810e8bd91b14fd945e086840ccd0e2874a7910c3\tJevOps",
+      "160000 commit 33c0c56e9423e11945837657e3a82fe865c60f91\tMcp-Plus-Plus",
+      "160000 commit de4d5a62b6fac2df61769a6461c2ada97f788208\texternal/ipfs_accelerate",
+      "160000 commit 4ccc8917b2168db8e11f54c5aadd4ca267f1c488\texternal/ipfs_datasets",
+      "160000 commit b15442e490dc39d046a911ea663c73c99ed3c755\texternal/ipfs_kit",
+      "160000 commit f4371bc9f90249d51eb07d7f8a61e8d829294f16\texternal/meta-wearables-dat-android",
+      "160000 commit bbae597cd1c748cd29b9375a1624a8d75b1c9e14\texternal/meta-wearables-dat-ios",
+      "160000 commit d1b5b2aa39690b1d832ec4d7c774c1fc287e60ed\thallucinate_app",
+      "160000 commit 453a30b01e62b6acdd1c54070821dbacfbf7908e\tswissknife"
+    ]
+  },
+  "next_existing_owner_task": "Resume actual pipeline implementation against the new D/H/Root revisions; statutory admission/definition applicability and remaining model/runtime gaps stay explicit.",
+  "processes": {
+    "all_terminal_returncode0": true,
+    "no_own_live_handle": true,
+    "remote_writes_verified": true,
+    "sessions": [
+      86430,
+      96862,
+      42790
+    ]
+  },
+  "publication_evidence": [
+    {
+      "bytes": 3911,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/guide507-publication-exact-post-preflight-v02.json",
+      "sha256": "b5cf9f9410142eede3b62a23574d79000fe485bbfd313aaa9a442de56f92f8ea"
+    },
+    {
+      "bytes": 8303,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/guide507-datasets-local-commit-receipt-v01.json",
+      "sha256": "0332c85cd920b58ee0191f5d37815e5deb791b26aae1e15059ed528d34901ba5"
+    },
+    {
+      "bytes": 3855,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/guide507-H-FF-publication-receipt-v01.json",
+      "sha256": "ed7b265363b590afaf8ae5171fb73835c6169fa149488ac90bbcaa3ec1bfdf8e"
+    },
+    {
+      "bytes": 4694,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/guide507-Root-FF-publication-receipt-v01.json",
+      "sha256": "81ee2d3c63a586470cccbee0921a43d7090f31088c4bcb9537c31b04d5f63f1f"
+    }
+  ],
+  "remote_readbacks": [
+    {
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+      "remote_main": "4ccc8917b2168db8e11f54c5aadd4ca267f1c488",
+      "repo": "datasets",
+      "returncode": 0
+    },
+    {
+      "origin": "https://github.com/endomorphosis/hallucinate_app.git",
+      "remote_main": "d1b5b2aa39690b1d832ec4d7c774c1fc287e60ed",
+      "repo": "hallucinate",
+      "returncode": 0
+    },
+    {
+      "origin": "https://github.com/endomorphosis/lift_coding.git",
+      "remote_main": "1a00d581fc45092d0cdfeb6c11133121b16fec30",
+      "repo": "root",
+      "returncode": 0
+    },
+    {
+      "origin": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+      "remote_main": "de4d5a62b6fac2df61769a6461c2ada97f788208",
+      "repo": "accelerate",
+      "returncode": 0
+    },
+    {
+      "origin": "https://github.com/endomorphosis/ipfs_kit_py.git",
+      "remote_main": "b15442e490dc39d046a911ea663c73c99ed3c755",
+      "repo": "kit",
+      "returncode": 0
+    },
+    {
+      "origin": "https://github.com/endomorphosis/swissknife.git",
+      "remote_main": "453a30b01e62b6acdd1c54070821dbacfbf7908e",
+      "repo": "swiss",
+      "returncode": 0
+    }
+  ],
+  "retained_failure": {
+    "before_mutation": true,
+    "correction": "All old object keys/values and list prefixes are retained; all exact approved postimage hashes remain mandatory.",
+    "preflight_chunk": "da75a3",
+    "product_changed": false,
+    "reason": "Preflight assumed an array append; frozen BACKLOG uses an additive migration key.",
+    "returncode": 1
+  },
+  "schema": "guide507-child-first-origin-main-publication-closeout/v1",
+  "source_write_receipt": {
+    "Source_closed": true,
+    "bytes": 123478,
+    "errors": [],
+    "module_closed": true,
+    "path": "/tmp/Root-current-D4cd-one507-four-guide-CAS-actual-v29/actual-existing-remaining-three-document-CAS-receipt.json",
+    "sha256": "895ca9fda1faca358cfdffd9e56c9a8f026e42f20d7a9153040d36e8009582cc"
+  },
+  "states": [
+    {
+      "HEAD": "4ccc8917b2168db8e11f54c5aadd4ca267f1c488",
+      "clean_worktree_and_index": true,
+      "repo": "datasets",
+      "tree": "329d830d7ed44f85f997b345310bf9622a9cb31a"
+    },
+    {
+      "HEAD": "d1b5b2aa39690b1d832ec4d7c774c1fc287e60ed",
+      "clean_worktree_and_index": true,
+      "repo": "hallucinate",
+      "tree": "e33f8159cd9f9244dd209cc172fa2fbe93accbe7"
+    },
+    {
+      "HEAD": "1a00d581fc45092d0cdfeb6c11133121b16fec30",
+      "clean_worktree_and_index": true,
+      "repo": "root",
+      "tree": "8fe8eefbd93a7238b42acc37cf21de0a5ab090a9"
+    },
+    {
+      "HEAD": "de4d5a62b6fac2df61769a6461c2ada97f788208",
+      "clean_worktree_and_index": true,
+      "repo": "accelerate",
+      "tree": "74202f1a6a09085e0b0e238ea6d555806d8fb927"
+    }
+  ],
+  "status": "COMPLETE_EXACT_FROZEN_FOUR_GUIDE_PUBLICATION"
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="8" time="15.359" timestamp="2026-11-24T19:31:41.738886+00:00" hostname="spark-b271"><testcase classname="tests.unit.logic.autoformal.test_legal_norm_content_adjudication_v1" name="test_reviewed_v2_checks_unit_dependencies_before_signed_admission[parent-two]" time="2.777"><failure message="AssertionError: cyclic declaration reached signed V2 semantic eligibility&#10;assert 'parent-two' == 'acyclic'&#10;  &#10;  - acyclic&#10;  + parent-two">tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:2055: in test_reviewed_v2_checks_unit_dependencies_before_signed_admission
+    assert shape == "acyclic", "cyclic declaration reached signed V2 semantic eligibility"
+E   AssertionError: cyclic declaration reached signed V2 semantic eligibility
+E   assert 'parent-two' == 'acyclic'
+E     
+E     - acyclic
+E     + parent-two</failure></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_norm_content_adjudication_v1" name="test_reviewed_v2_checks_unit_dependencies_before_signed_admission[parent-three]" time="2.177"><failure message="AssertionError: cyclic declaration reached signed V2 semantic eligibility&#10;assert 'parent-three' == 'acyclic'&#10;  &#10;  - acyclic&#10;  + parent-three">tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:2055: in test_reviewed_v2_checks_unit_dependencies_before_signed_admission
+    assert shape == "acyclic", "cyclic declaration reached signed V2 semantic eligibility"
+E   AssertionError: cyclic declaration reached signed V2 semantic eligibility
+E   assert 'parent-three' == 'acyclic'
+E     
+E     - acyclic
+E     + parent-three</failure></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_norm_content_adjudication_v1" name="test_reviewed_v2_checks_unit_dependencies_before_signed_admission[governing-parent]" time="2.203"><failure message="AssertionError: cyclic declaration reached signed V2 semantic eligibility&#10;assert 'governing-parent' == 'acyclic'&#10;  &#10;  - acyclic&#10;  + governing-parent">tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:2055: in test_reviewed_v2_checks_unit_dependencies_before_signed_admission
+    assert shape == "acyclic", "cyclic declaration reached signed V2 semantic eligibility"
+E   AssertionError: cyclic declaration reached signed V2 semantic eligibility
+E   assert 'governing-parent' == 'acyclic'
+E     
+E     - acyclic
+E     + governing-parent</failure></testcase><testcase classname="tests.unit.logic.autoformal.test_legal_norm_content_adjudication_v1" name="test_reviewed_v2_checks_unit_dependencies_before_signed_admission[acyclic]" time="2.179" /><testcase classname="tests.unit.logic.autoformal.test_legal_norm_content_adjudication_v1" name="test_reviewed_v2_complete_fictional_transition_uses_full_sources_and_typed_ir" time="1.795" /><testcase classname="tests.unit.logic.autoformal.test_legal_norm_content_adjudication_v1" name="test_reviewed_v2_synthetic_trust_cannot_be_promoted_to_production_review" time="1.104" /><testcase classname="tests.unit.logic.autoformal.test_legal_norm_content_adjudication_v1" name="test_reviewed_v2_resealed_positive_report_requires_complete_public_replay" time="1.684" /><testcase classname="tests.unit.logic.autoformal.test_legal_norm_content_adjudication_v1" name="test_reviewed_v2_alternate_view_of_same_raw_paragraph_requires_distinct_use_witness" time="0.830" /></testsuite></testsuites>

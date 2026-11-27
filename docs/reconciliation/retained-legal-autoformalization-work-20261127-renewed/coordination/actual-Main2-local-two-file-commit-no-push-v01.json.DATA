@@ -1,0 +1,77 @@
+{
+  "A3_source_fences_and_all_A_gitlinks_preserved": false,
+  "HEAD": null,
+  "audit": {
+    "bytes": 1885,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-Main2-local-two-file-commit-no-push-v01.Git-audit.json",
+    "sha256": "97f65b9b4068c31781e547c06396237d3a3456680d4d40f084aa090e53d299a4"
+  },
+  "candidate_root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+  "clean": false,
+  "committed_paths_and_verified_staged_blob_hashes": {},
+  "complete": false,
+  "error": {
+    "message": "('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate', ['ls-tree', '-r', 'HEAD'], 128, 'fatal: packfile /home/barberb/lift_coding/.git/modules/external/ipfs_accelerate/objects/pack/pack-7a9e351e8bf6571d17f310523dd215419cf1ffd1.pack cannot be mapped, check sys.vm.max_map_count and/or RLIMIT_DATA: Cannot allocate memory\\n')",
+    "type": "AssertionError"
+  },
+  "hold": "A frozen for actual ordinary25; no push selected",
+  "index": null,
+  "installed_Source_reference": {
+    "bytes": 5189,
+    "path": "/tmp/Root-Main2-current-two-code-CAS-v46/Root-Main2-installed-Source-closed-small-v46.json",
+    "sha256": "3351ebf91767541af2414bfc65ae21655d21ad9ef74a954967e29707ac6b132d"
+  },
+  "installed_post_full9": {
+    "ipfs_accelerate_py/agent_supervisor/task_sources/board_stall_watchdog.py": {
+      "st_ctime_ns": "1795497836291787021",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "69516617",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795497835686230777",
+      "st_nlink": "1",
+      "st_size": "20585",
+      "st_uid": "1000"
+    },
+    "test/api/test_board_stall_watchdog.py": {
+      "st_ctime_ns": "1795497836890814845",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "69650080",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795497835689580437",
+      "st_nlink": "1",
+      "st_size": "27433",
+      "st_uid": "1000"
+    }
+  },
+  "other_roots_unchanged": {},
+  "previous_HEAD": "8967b3ba8fbf76a5e42f8fd4e8d85949173138ed",
+  "schema": "Main2-exact-local-two-file-commit-no-push/v1",
+  "scope": {
+    "AS_bytes": 536870912,
+    "CPU_seconds": 60,
+    "CPUs": 1,
+    "Git_invocation_options": [
+      "core.preloadIndex=false",
+      "core.fscache=false",
+      "index.threads=1"
+    ],
+    "Git_staged_object_bytes_verified": 0,
+    "Source_contexts_opened": false,
+    "all_direct_Git_subprocesses_returned": true,
+    "canonical_source_review_body_reads": 0,
+    "config_written": false,
+    "full_eight_phase_goal_complete": false,
+    "index_body_read": false,
+    "local_commit_only": true,
+    "network_commands": 0,
+    "normal25_qualified": false,
+    "prior_v45_failure_retained": "675b393793a2a572967ac5917ed2c11633d1521a7507fa5130124652ed606741",
+    "push_executed": false,
+    "serial_Git": true,
+    "services_CI_models_Native": false,
+    "tests_or_SDK_executed": false
+  },
+  "tree": null
+}

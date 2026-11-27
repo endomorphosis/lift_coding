@@ -1,0 +1,353 @@
+"""Frozen source-conditioned projection and one-slot numeric input binding.
+
+The existing owners authenticate producer receipts, split/admission, restored
+checkpoint and projection selection. This module checks the selected bytes
+and the reviewed decoder consumes the projection in its own forward.
+"""
+from dataclasses import dataclass
+from hashlib import sha256
+import json
+from math import fsum, isfinite
+from struct import iter_unpack, pack
+
+PROFILE = "reviewed-qwen2-chatml-frozen-teacher-prefix/v1"
+PROJECTION_PROFILE = "frozen-f32-row-major-linear-fsum/v1"
+WIDTHS = (8, 384, 768, 4096)
+
+
+@dataclass(frozen=True)
+class NativeVector:
+    row_id: str
+    source_wire_sha256: str
+    source_input_receipt_sha256: str
+    producer_receipt_sha256: str
+    native_vector_sha256: str
+    materialized_f32_sha256: str
+    profile_sha256: str
+    width: int
+    data: bytes  # Receipt owner's exact native values as little-endian f32.
+
+
+@dataclass(frozen=True)
+class Projection:
+    profile_sha256: str
+    input_width: int
+    output_width: int
+    matrix_sha256: str  # [output_width, input_width], little-endian f32.
+    maximum_products: int
+
+
+@dataclass(frozen=True)
+class PrefixRow:
+    row_id: str
+    source_wire_sha256: str
+    source_input_receipt_sha256: str
+    producer_receipt_sha256: str
+    native_vector_sha256: str
+    materialized_f32_sha256: str
+    profile_sha256: str
+    projection_sha256: str
+    data: bytes  # Frozen projection's little-endian f32 result.
+
+
+@dataclass(frozen=True)
+class PopulationRow:
+    row_id: str
+    source_wire_sha256: str
+    dependency_group: str
+    partition: str
+    source_span_sha256: str
+
+
+@dataclass(frozen=True)
+class Batch:
+    phase: str
+    mode: str
+    partition: str
+    population_sha256: str
+    population: tuple[PopulationRow, ...]
+    checkpoint_sha256: str
+    configuration_sha256: str
+    projection: Projection
+    rows: tuple[PrefixRow, ...]
+    maximum_observations: int
+    maximum_population_rows: int
+    maximum_report_bytes: int
+
+
+def _need(ok, message):
+    if not ok:
+        raise ValueError(message)
+
+
+def _pin(value):
+    return type(value) is str and len(value) == 64 and all(c in "0123456789abcdef" for c in value)
+
+
+def _sha(value):
+    return sha256(value).hexdigest()
+
+
+def _wire(value):
+    return json.dumps(value, ensure_ascii=True, sort_keys=True,
+                      separators=(",", ":"), allow_nan=False).encode("ascii")
+
+
+def _commit(value):
+    return _sha(_wire(value))
+
+
+def _projection_commit(projection):
+    _need(type(projection) is Projection and _pin(projection.profile_sha256) and _pin(projection.matrix_sha256)
+          and type(projection.input_width) is int and projection.input_width in WIDTHS
+          and type(projection.output_width) is int and 1 <= projection.output_width <= 65536
+          and type(projection.maximum_products) is int
+          and 0 < projection.input_width * projection.output_width <= projection.maximum_products,
+          "selected native profile, frozen geometry and product ceiling required")
+    return _commit((PROJECTION_PROFILE, projection.profile_sha256, projection.input_width,
+                    projection.output_width, projection.matrix_sha256, projection.maximum_products))
+
+
+def _f32(data, width):
+    _need(type(data) is bytes and len(data) == 4*width, "exact finite little-endian float32 vector required")
+    values = tuple(item for item, in iter_unpack("<f", data))
+    _need(all(isfinite(item) for item in values), "nonfinite teacher or projection coordinate")
+    return values
+
+
+def _row_commit(row):
+    _need(type(row) in (PrefixRow, NativeVector)
+          and type(row.row_id) is str and 0 < len(row.row_id) <= 512
+          and all(_pin(value) for value in (row.source_wire_sha256, row.source_input_receipt_sha256,
+              row.producer_receipt_sha256, row.native_vector_sha256, row.materialized_f32_sha256))
+          and _pin(row.profile_sha256)
+          and type(row.data) is bytes, "closed source-only teacher provenance required")
+    common = (row.row_id, row.source_wire_sha256, row.source_input_receipt_sha256, row.producer_receipt_sha256,
+              row.native_vector_sha256, row.materialized_f32_sha256, row.profile_sha256, _sha(row.data))
+    if type(row) is PrefixRow:
+        _need(_pin(row.projection_sha256), "projected row requires the frozen matrix profile")
+        return (*common, row.projection_sha256)
+    return common
+
+
+def project_native(native, projection, matrix, *, expected_native_sha256, expected_projection_sha256):
+    """Apply an explicitly frozen affine-free matrix to every native coordinate.
+
+    Input has already been materialized by the producer owner. Its original
+    receipt digest and the lossless or declared f32 conversion stay distinct.
+    The caller owns the matrix fit population, provenance and charged work.
+    """
+    _need(type(native) is NativeVector and type(native.width) is int and native.width in WIDTHS
+          and type(native.data) is bytes and len(native.data) == 4*native.width
+          and _pin(expected_native_sha256) and native.materialized_f32_sha256 == expected_native_sha256
+          and _sha(native.data) == expected_native_sha256, "selected native materialized bytes differ")
+    _row_commit(native)
+    _need(_pin(expected_projection_sha256) and _projection_commit(projection) == expected_projection_sha256
+          and projection.profile_sha256 == native.profile_sha256 and projection.input_width == native.width
+          and type(matrix) is bytes and len(matrix) == 4*native.width*projection.output_width
+          and _sha(matrix) == projection.matrix_sha256, "selected frozen teacher matrix or profile differs")
+    values = _f32(native.data, native.width)
+    stride = 4*native.width
+    projected = []
+    for offset in range(0, len(matrix), stride):
+        weights = _f32(matrix[offset:offset+stride], native.width)
+        projected.append(fsum(x*y for x, y in zip(values, weights, strict=True)))
+    try:
+        data = pack("<" + "f"*len(projected), *projected)
+    except (OverflowError, ValueError) as error:
+        raise ValueError("teacher projection exceeds float32 storage") from error
+    _f32(data, projection.output_width)
+    return PrefixRow(native.row_id, native.source_wire_sha256, native.source_input_receipt_sha256,
+        native.producer_receipt_sha256, native.native_vector_sha256, expected_native_sha256,
+        native.profile_sha256, expected_projection_sha256, data)
+
+
+def population_commit(population, *, maximum_rows):
+    _need(type(population) is tuple and type(maximum_rows) is int and 1 <= len(population) <= maximum_rows,
+          "bounded explicit source and dependency roster required")
+    rows, groups, sources, spans, values = set(), {}, {}, {}, []
+    for item in population:
+        _need(type(item) is PopulationRow and type(item.row_id) is str and 0 < len(item.row_id) <= 512
+              and item.row_id not in rows and _pin(item.source_wire_sha256) and _pin(item.source_span_sha256)
+              and type(item.dependency_group) is str and 0 < len(item.dependency_group) <= 512
+              and item.partition in ("train", "development", "final"),
+              "unique source row and an explicit partition required")
+        _need(groups.setdefault(item.dependency_group, item.partition) == item.partition
+              and sources.setdefault(item.source_wire_sha256, item.partition) == item.partition
+              and spans.setdefault(item.source_span_sha256, item.partition) == item.partition,
+              "source, span or dependency group crosses the declared split")
+        rows.add(item.row_id)
+        values.append((item.row_id, item.source_wire_sha256, item.dependency_group,
+                       item.partition, item.source_span_sha256))
+    return _commit(tuple(values))
+
+
+def batch_commit(batch):
+    _need(type(batch) is Batch and batch.phase in ("train", "inference")
+          and batch.mode in ("conditioned", "matched_null")
+          and batch.partition in ("train", "development", "final")
+          and (batch.phase == "inference" or batch.partition == "train")
+          and _pin(batch.population_sha256)
+          and population_commit(batch.population, maximum_rows=batch.maximum_population_rows) == batch.population_sha256
+          and type(batch.maximum_observations) is int and batch.maximum_observations > 0
+          and type(batch.maximum_report_bytes) is int and batch.maximum_report_bytes > 0
+          and all(_pin(value) for value in (batch.population_sha256, batch.checkpoint_sha256,
+                                           batch.configuration_sha256))
+          and type(batch.rows) is tuple and 1 <= len(batch.rows) <= 32,
+          "closed phase-specific teacher prefix batch required")
+    projection_sha = _projection_commit(batch.projection)
+    _need(all(type(row) is PrefixRow and type(row.data) is bytes
+              and len(row.data) == 4*batch.projection.output_width for row in batch.rows),
+          "projected payload must have one exact bounded f32 row")
+    return _commit((PROFILE, batch.phase, batch.mode, batch.partition, batch.population_sha256, batch.checkpoint_sha256,
+                    batch.configuration_sha256, projection_sha, batch.maximum_observations,
+                    batch.maximum_population_rows, batch.maximum_report_bytes,
+                    tuple(_row_commit(row) for row in batch.rows)))
+
+
+def bind_batch(batch, records, *, phase, configuration, expected_batch_sha256, forwards_per_row=1):
+    _need(_pin(expected_batch_sha256) and batch_commit(batch) == expected_batch_sha256
+          and batch.phase == phase and batch.configuration_sha256 == _commit(configuration),
+          "selected teacher batch, role or decoder configuration differs")
+    _need(batch.projection.output_width == configuration["model_config"]["hidden_size"],
+          "projected teacher width differs from the native tokenizer embedding width")
+    _need(type(forwards_per_row) is int and forwards_per_row > 0
+          and len(batch.rows) * forwards_per_row <= batch.maximum_observations,
+          "selected teacher observation budget cannot cover this batch")
+    _need(len(batch.rows) == len(records)
+          and all(type(row) is PrefixRow for row in batch.rows)
+          and len({row.row_id for row in batch.rows}) == len(batch.rows),
+          "complete ordered teacher row batch required")
+    bound = {}
+    roster = {item.row_id: item for item in batch.population}
+    projection_sha = _projection_commit(batch.projection)
+    for row, record in zip(batch.rows, records, strict=True):
+        member = roster.get(row.row_id)
+        _need(member is not None and member.partition == batch.partition
+              and member.source_wire_sha256 == row.source_wire_sha256 and row.row_id == record["id"]
+              and row.source_wire_sha256 == _sha(record["source_wire"].encode("utf-8")),
+              "teacher row, split membership or complete source wire changed")
+        _need(row.projection_sha256 == projection_sha and row.profile_sha256 == batch.projection.profile_sha256,
+              "teacher producer or projection identity differs from selected lane")
+        if phase == "inference":
+            _need(set(record) == {"id", "unit_id", "source_wire", "source_token_ids"},
+                  "teacher inference records must be source only")
+        values = _f32(row.data, batch.projection.output_width)
+        if batch.mode == "matched_null":
+            _need(row.data == bytes(4*batch.projection.output_width),
+                  "capacity-matched null requires the canonical zero prefix")
+        bound[row.row_id] = (row, values)
+    return bound
+
+
+def _materialized_slot(torch, joined):
+    cast = joined[0, 0, :].detach().to(dtype=torch.float32).cpu().tolist()
+    _need(all(isfinite(item) for item in cast), "nonfinite observed teacher slot")
+    return _sha(pack("<" + "f"*len(cast), *cast))
+
+
+def materialize_batch(torch, device, rows):
+    """Cast the frozen slots before the owner mutates mode or gradients."""
+    result = {}
+    for identifier, (row, values) in rows.items():
+        slot = torch.tensor([[values]], dtype=torch.float32, device=device).to(dtype=torch.bfloat16)
+        result[identifier] = (row, slot, len(values), _materialized_slot(torch, slot))
+    return result
+
+
+def conditioning_sha256(batch, bound_row):
+    """Shared frozen slot identity, independent of the two checkpoint roles."""
+    row, slot, width, stamp = bound_row
+    return _commit((PROFILE, batch.population_sha256, batch.partition, batch.mode,
+                    _projection_commit(batch.projection), _row_commit(row), width, "cpu-bfloat16", stamp))
+
+
+def prepare_forward(backend, torch, *, arguments, bound_row, use_cache=False):
+    row, slot, width, expected_stamp = bound_row
+    ids = arguments["input_ids"]
+    mask = arguments["attention_mask"]
+    _need(len(ids.shape) == 2 and ids.shape[0] == 1 and ids.shape[1] > 0
+          and tuple(mask.shape) == tuple(ids.shape)
+          and mask.detach().cpu().tolist() == [[1] * ids.shape[1]],
+          "teacher prefix needs one unpadded native token row")
+    if "labels" in arguments:
+        _need(tuple(arguments["labels"].shape) == (1, ids.shape[1]+1),
+              "teacher prefix and causal labels disagree")
+    lookup_ids = ids.detach().cpu().tolist()
+    native = backend.model.get_input_embeddings()(ids)
+    _need(ids.detach().cpu().tolist() == lookup_ids, "native text IDs changed during embedding lookup")
+    _need(tuple(native.shape) == (1, ids.shape[1], width) and tuple(slot.shape) == (1, 1, width)
+          and native.device == slot.device == ids.device and ids.device.type == "cpu"
+          and native.dtype == slot.dtype == torch.bfloat16,
+          "teacher prefix needs exact CPU BF16 native embeddings")
+    joined = torch.cat((slot, native), dim=1)
+    _need(tuple(joined.shape) == (1, ids.shape[1]+1, width), "native teacher slot geometry differs")
+    paid_args = {key: value for key, value in arguments.items() if key not in ("input_ids", "attention_mask")}
+    paid_args.update(inputs_embeds=joined,
+                     attention_mask=torch.cat((torch.ones_like(mask[:, :1]), mask), dim=1),
+                     use_cache=use_cache)
+    check_slot(torch, joined, bound_row)
+    return paid_args
+
+
+def check_slot(torch, joined, bound_row):
+    _need(_materialized_slot(torch, joined) == bound_row[3],
+          "actual prefix bytes differ from the selected native cast or changed its consumed prefix")
+
+
+def observe_forward(torch, arguments, bound_row, observed):
+    row, slot, width, stamp = bound_row
+    joined = arguments["inputs_embeds"]
+    check_slot(torch, joined, bound_row)
+    observed.append({"row_id": row.row_id, "producer_receipt_sha256": row.producer_receipt_sha256,
+        "source_wire_sha256": row.source_wire_sha256, "source_input_receipt_sha256": row.source_input_receipt_sha256,
+        "native_vector_sha256": row.native_vector_sha256, "materialized_native_f32_sha256": row.materialized_f32_sha256,
+        "staged_projection_f32_sha256": _sha(row.data), "actual_bf16_slot_reexpanded_f32_sha256": stamp,
+        "slot_shape": (1, 1, width), "model_input_positions": joined.shape[1]})
+
+
+def forward(backend, torch, *, arguments, bound_row, observed):
+    """Call the reviewed owner once with its embeddings plus one frozen slot."""
+    prepared = prepare_forward(backend, torch, arguments=arguments, bound_row=bound_row)
+    output = backend.model(**prepared)
+    _need(getattr(output, "past_key_values", None) is None, "teacher forward returned a cache")
+    observe_forward(torch, prepared, bound_row, observed)
+    return output
+
+
+class Observations:
+    """Guard bounded evidence during the owned forward, before retention."""
+
+    def __init__(self, batch):
+        self.maximum_rows = batch.maximum_observations
+        self.maximum_bytes = batch.maximum_report_bytes
+        self.rows = []
+        self.used = 0
+
+    def append(self, observation):
+        self.used += len(_wire(observation))+1
+        _need(len(self.rows) < self.maximum_rows and self.used <= self.maximum_bytes,
+              "selected teacher observation evidence budget exceeded")
+        self.rows.append(observation)
+
+
+def evidence(batch, pinned, observations, *, row_forward_counts, train_records_sha256=None):
+    _need(batch_commit(batch) == pinned and type(observations) is Observations
+          and len(row_forward_counts) == len(batch.rows)
+          and all(type(count) is int and count >= 0 for count in row_forward_counts)
+          and sum(row_forward_counts) == len(observations.rows) <= batch.maximum_observations,
+          "selected teacher batch or observation coverage changed")
+    _need(batch.phase == "train" and _pin(train_records_sha256) and all(n == 1 for n in row_forward_counts)
+          or batch.phase == "inference" and train_records_sha256 is None,
+          "teacher evidence phase or TRAIN records commitment differs")
+    expected = (item.row_id for item, count in zip(batch.rows, row_forward_counts, strict=True) for _ in range(count))
+    _need(all(row["row_id"] == identifier for row, identifier in zip(observations.rows, expected, strict=True)),
+          "teacher observations differ from the related model calls")
+    result = {"profile": PROFILE, "phase": batch.phase, "mode": batch.mode, "partition": batch.partition,
+              "batch_sha256": pinned, "population_sha256": batch.population_sha256,
+              "starting_checkpoint_sha256": batch.checkpoint_sha256,
+              "projection_sha256": _projection_commit(batch.projection), "forwards": tuple(observations.rows)}
+    if train_records_sha256 is not None:
+        result["train_records_sha256"] = train_records_sha256
+    _need(len(_wire(result)) <= batch.maximum_report_bytes, "selected teacher observation evidence budget exceeded")
+    return result

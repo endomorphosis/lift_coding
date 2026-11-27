@@ -1,0 +1,82 @@
+[
+  {
+    "change": "none",
+    "initial_result_authority": "theorem",
+    "initial_trust": "independently_checkable",
+    "policy": {
+      "require_result_authority": "theorem"
+    },
+    "post_lookup_reason": "hit",
+    "post_lookup_usable": true,
+    "real_lookup_usable": true,
+    "requested_key_digest": "sha256:32746f38d75bc7f5bf16e647e834ee808729206c5948f851708092ac24c9566d",
+    "returned_key_digest": "sha256:32746f38d75bc7f5bf16e647e834ee808729206c5948f851708092ac24c9566d",
+    "returned_none": false,
+    "returned_result_authority": "theorem",
+    "returned_trust": "independently_checkable"
+  },
+  {
+    "change": "equivalent-put",
+    "initial_result_authority": "theorem",
+    "initial_trust": "independently_checkable",
+    "policy": {
+      "require_result_authority": "theorem"
+    },
+    "post_lookup_reason": "hit",
+    "post_lookup_usable": true,
+    "real_lookup_usable": true,
+    "requested_key_digest": "sha256:32746f38d75bc7f5bf16e647e834ee808729206c5948f851708092ac24c9566d",
+    "returned_key_digest": "sha256:32746f38d75bc7f5bf16e647e834ee808729206c5948f851708092ac24c9566d",
+    "returned_none": false,
+    "returned_result_authority": "theorem",
+    "returned_trust": "independently_checkable"
+  },
+  {
+    "change": "invalidate",
+    "initial_result_authority": "theorem",
+    "initial_trust": "independently_checkable",
+    "policy": {
+      "require_result_authority": "theorem"
+    },
+    "post_lookup_reason": "miss",
+    "post_lookup_usable": false,
+    "real_lookup_usable": true,
+    "requested_key_digest": "sha256:32746f38d75bc7f5bf16e647e834ee808729206c5948f851708092ac24c9566d",
+    "returned_key_digest": null,
+    "returned_none": true,
+    "returned_result_authority": null,
+    "returned_trust": null
+  },
+  {
+    "change": "result-authority",
+    "initial_result_authority": "theorem",
+    "initial_trust": "independently_checkable",
+    "policy": {
+      "require_result_authority": "theorem"
+    },
+    "post_lookup_reason": "authority_mismatch",
+    "post_lookup_usable": false,
+    "real_lookup_usable": true,
+    "requested_key_digest": "sha256:32746f38d75bc7f5bf16e647e834ee808729206c5948f851708092ac24c9566d",
+    "returned_key_digest": null,
+    "returned_none": true,
+    "returned_result_authority": null,
+    "returned_trust": null
+  },
+  {
+    "change": "trust-ceiling",
+    "initial_result_authority": "theorem",
+    "initial_trust": "advisory",
+    "policy": {
+      "max_trust_level": "advisory"
+    },
+    "post_lookup_reason": "insufficient_authority",
+    "post_lookup_usable": false,
+    "real_lookup_usable": true,
+    "requested_key_digest": "sha256:32746f38d75bc7f5bf16e647e834ee808729206c5948f851708092ac24c9566d",
+    "returned_key_digest": null,
+    "returned_none": true,
+    "returned_result_authority": null,
+    "returned_trust": null
+  }
+]

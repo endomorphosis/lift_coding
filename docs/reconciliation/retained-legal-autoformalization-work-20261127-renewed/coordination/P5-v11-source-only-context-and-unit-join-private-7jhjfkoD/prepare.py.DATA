@@ -1,0 +1,116 @@
+from pathlib import Path
+import hashlib
+import json
+import os
+import re
+import subprocess
+
+root=Path(__file__).resolve().parent
+prev=root.parent/"P5-v11-evaluation-measurement-join-private-sl1z_6si"
+repo=root.parents[2]/"repositories/datasets"
+old=json.loads((prev/"exact-v11-measurement-red-green-inputs.v02.json").read_bytes())
+env={**os.environ,"GIT_OPTIONAL_LOCKS":"0","GIT_NO_LAZY_FETCH":"1"}
+
+def git(*args):
+    return subprocess.check_output(["git","-c","core.preloadIndex=false","-C",str(repo),*args],env=env)
+def sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+def put(path,raw):
+    path.parent.mkdir(parents=True,mode=0o700,exist_ok=True)
+    with path.open("xb") as f:
+        f.write(raw)
+        f.flush()
+        os.fsync(f.fileno())
+    path.chmod(0o400)
+    assert path.read_bytes()==raw
+    return dict(path=str(path),bytes=len(raw),sha256=sha(raw))
+
+head,tracking=git("rev-parse","HEAD","refs/remotes/origin/main").decode().splitlines()
+assert head==tracking
+records={}
+for name,row in old["roles"].items():
+    if name.endswith("_candidate"):
+        continue
+    path=row["relative_path"]
+    entry=git("ls-tree",head,"--",path).decode().strip()
+    mode,kind,oid=entry.split("\t",1)[0].split()
+    assert mode=="100644" and kind=="blob"
+    body=git("cat-file","blob",oid)
+    assert body==(repo/path).read_bytes()
+    assert hashlib.sha1(b"blob "+str(len(body)).encode()+b"\0"+body).hexdigest()==oid
+    records[name]={**put(root/"project"/path,body),"relative_path":path,"git_blob":oid}
+for role,digest in (("inference","944e2fd0e0ddd922858941a5b99002ddc205a2e738114eece8dcf7aa5c69ded4"),
+                    ("owning_test","1530cc742b1b115af381f37ba5b5148a675ec90b2a78bf73d9c7fb946c92ed3a")):
+    assert records[role]["sha256"]==digest
+path=Path(records["owning_test"]["path"])
+test=path.read_bytes()
+old_block=b'''    references = [{"id": argument["id"], "source_text": argument["source_text"],
+        "canonical_ir": reference_target} for argument in arguments]
+'''
+new_block=b'''    references = [{"id": argument["id"], "unit_id": row["unit_id"],
+        "source_text": argument["source_text"], "canonical_ir": reference_target}
+        for argument, row in zip(arguments, rows, strict=True)]
+'''
+assert test.count(old_block)==1
+test=test.replace(old_block,new_block)
+test+=br'''
+
+
+@pytest.mark.parametrize("damage", [None, "nonempty-permitted", "nonempty-retrieved",
+    "receipt-arguments", "reference-unit"])
+def test_reviewed_inference_v11_binds_source_only_arguments_and_reference_units(tmp_path, damage):
+    worker, inputs, request, generation, _, save = _reviewed_v11_saved_control(tmp_path, "complete")
+
+    def rewrite(reference, value):
+        raw = worker._json_bytes(value)
+        path = Path(reference["path"])
+        path.write_bytes(raw)
+        reference.update(bytes=len(raw), sha256=worker._digest(raw))
+
+    if damage == "reference-unit":
+        reference = request["rows_artifact"]
+        rows = json.loads(Path(reference["path"]).read_bytes())
+        rows[0]["unit_id"] = "fixture:different-legal-unit"
+        rewrite(reference, rows)
+    cycle = save()
+    descriptors = cycle["output_artifacts"]
+    evaluation = json.loads(Path(descriptors["evaluation"]["path"]).read_bytes())
+    call = generation["last_call"]
+    if damage in {"nonempty-permitted", "nonempty-retrieved"}:
+        field = damage.removeprefix("nonempty-")
+        payload = evaluation["compiler_artifact"]["reviewed_source_span_producer_evaluation"]
+        arguments = payload["producer_arguments"]
+        arguments[0]["context"][field].append("fictional supplied context")
+        digest = worker._digest(inputs._reviewed_wire(arguments))
+        call["source_arguments_sha256"] = digest
+        call["input_receipt"]["source_arguments_sha256"] = digest
+    elif damage == "receipt-arguments":
+        call["input_receipt"]["source_arguments_sha256"] = "f" * 64
+    if damage in {"nonempty-permitted", "nonempty-retrieved", "receipt-arguments"}:
+        rewrite(descriptors["generation"], generation)
+        evaluation["metadata"]["source_generation_observation"] = generation
+        rewrite(descriptors["evaluation"], evaluation)
+    frozen = {key: Path(ref["path"]).read_bytes() for key, ref in descriptors.items()}
+    pinned = {key: Path(request[key]["path"]).read_bytes()
+        for key in ("rows_artifact", "source_contexts_artifact")}
+    if damage is None:
+        inference._check_reviewed_evaluation_outputs(cycle, request)
+    else:
+        with pytest.raises(ValueError, match="v11 evaluation (?:source-only arguments|reference units)"):
+            inference._check_reviewed_evaluation_outputs(cycle, request)
+    assert all(Path(ref["path"]).read_bytes() == frozen[key] for key, ref in descriptors.items())
+    assert all(Path(request[key]["path"]).read_bytes() == data for key, data in pinned.items())
+'''
+records["owning_test_candidate"]=put(root/"owning-test.after.py.DATA",test)
+metadata=put(root/"input-spec.before.json",(json.dumps({"head":head,"roles":records},indent=2,sort_keys=True)+"\n").encode())
+prior_runner=(prev/"run-v11-evaluation-owning-50.v02.py").read_text()
+runner=prior_runner.replace("candidate-project-v02","candidate-project-source-only").replace('evaluation-owning-50-v02-', 'evaluation-owning-55-source-only-')
+runner=runner.replace('"test_reviewed_inference_v11_evaluation_scores_the_verified_generation":10,',
+    '"test_reviewed_inference_v11_evaluation_scores_the_verified_generation":10,\n'
+    '    "test_reviewed_inference_v11_binds_source_only_arguments_and_reference_units":5,')
+runner=runner.replace("==50","==55").replace('{"passed":50,','{"passed":55,').replace("evaluation-owning-50-case-functions","source-only-owning-55-case-functions")
+runner,changes=re.subn(r"manifest = json.loads\(auth\(\{[^\n]+\}\)\)",'manifest = json.loads(auth(json.loads(sys.argv[2])))',runner)
+assert changes==1 and '==55' in runner
+put(root/"existing-saved-output-runner-55.py",runner.encode())
+print(root)
+print(json.dumps(metadata))

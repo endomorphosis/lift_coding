@@ -1,0 +1,296 @@
+{
+  "additional_public_tree_commit_identity": {
+    "archive": "branches/accelerate-identical-public-tree/commit.DATA",
+    "large_blob_previously_published": "9b6ded832adffea56cd1402bb08d1dca484eb3c8",
+    "new_large_blob_transfer": false,
+    "parents": [
+      "49569f1f2a9aa233e532e92c27f74ba5c004fd48",
+      "c5e099195ef509503891a8a2b3df5739c8bf7ee6"
+    ],
+    "public_same_tree_ancestor": "d6163a6cb844617f35f8f56d0b6ccd521fa677b7",
+    "public_tree_complete": true,
+    "raw_commit": {
+      "bytes": 377,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-all-renewed-20261127-ygf45pp5/retained/branches/accelerate-identical-public-tree/commit.DATA",
+      "sha256": "bf3ba8282f3e77a02c12341b5b3beb0336ff22d11b34f4b904d37c0ea2237434"
+    },
+    "tip": "1c16fb1773a03a202523a7ff62d191717b7d8173",
+    "tree": "4e0e8ebb25b218c51b6f3ee935b3595bed1542c6"
+  },
+  "all_original_refs_untouched": true,
+  "bundles": [
+    {
+      "base_store": "/tmp/accelerate-objective-output-owner-main-ybAvG5Rm/checkout/.git",
+      "bundle": {
+        "archive": "branches/accelerate_scanned_subset-ipfs_accelerate_py/ipfs_accelerate_py-historical-tips.bundle",
+        "bytes": 40479704,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/accelerate_scanned_subset/ipfs_accelerate_py/ipfs_accelerate_py-historical-tips.bundle",
+        "sha256": "ed8c180d702e2c92ff2166ca77faec13130e809262dd8866af3613c07fe6cb52"
+      },
+      "family": "ipfs_accelerate_py",
+      "fresh_private_restore": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-all-renewed-20261127-ygf45pp5/fresh-branch-restores/accelerate_scanned_subset-ipfs_accelerate_py.git",
+      "incremental_closure_complete_against_published_base": true,
+      "marker_scan": {
+        "archive": "branches/accelerate_scanned_subset-ipfs_accelerate_py/credential-marker-scan.json.DATA",
+        "bytes": 2268,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/accelerate_scanned_subset/ipfs_accelerate_py/credential-marker-scan.json",
+        "sha256": "03a39bc9cf58c316b8df47fc2c8b24bff5e52fd4af9e0ed66c6d83cf1314a03e"
+      },
+      "no_live_code_adoption": true,
+      "no_missing_new_branch_objects": true,
+      "published_base": "64a8649952bed66a457d7b87bf6dced9fadab8d4",
+      "source_receipt": {
+        "archive": "branches/accelerate_scanned_subset-ipfs_accelerate_py/restore-receipt.json.DATA",
+        "bytes": 42476,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/accelerate_scanned_subset/ipfs_accelerate_py/restore-receipt.json",
+        "sha256": "ed3f966e68c872b8952ec4a36677b2cf12554db8f43cc7c2c79c2d5e7b458893"
+      },
+      "tip_count": 34,
+      "tips": [
+        "0d2b16db2277a33118066aab50f44fd07b0c25a8",
+        "1a8063bf2416f88270ffe202df3f860a2f02a230",
+        "1afb6e1fcd3b12cbe73bc269147f3dba7abcf691",
+        "1d61a153deecb82775199694e7d112d75472963b",
+        "2632a7cb3cf5c4c60220419f09ed32250bfbaf9a",
+        "2c531b4a52338aed04f8b63beda1ddf8bcc18f61",
+        "35423acbdcb3f15719406726c9c7688b3058e3cb",
+        "396a4ef8c194b0e282baed40a438eb675b7432f9",
+        "3f5722ef7098314e08632ed9025e3dea3a55a243",
+        "4a1f1d2050fd013aa07b211259c9706b5a8ea034",
+        "4cc59787445ff759c6172e96ff0174a7471133f6",
+        "523034a7f536a4f975f56106b0033a12c52d40f7",
+        "573947f67d1cb9b55904aa36e12686b186a297a5",
+        "5dd82e675f4d210364676c774aba575cb4a33210",
+        "5e3e75466f80c528dfb21b25675821037132f9be",
+        "67287a9aa80fc89fecede117b992b86896d0969c",
+        "67515e0e8762570db50b4ad90b273b654bdfdc43",
+        "6ab7f4d70e1688efc893956dcd486617d4fedcf3",
+        "7200de98609fbfe1af132b0a2944691b77dac8ff",
+        "73c7cc6c3e337a94aecdd4188a1b3496504177da",
+        "764f274d61bfcab4b80a0f82c1923c4f838c9a82",
+        "8db7fbd3c9080e84ea9e30c9d885d1d5fa21f44f",
+        "9251b21f07a3ae5c0cf5a6f06b0c529e3a43600d",
+        "92be85cce22362fb9a06bdfed9e2f8d0b0d5e7f9",
+        "94d99f98de87be53c6c4a99be85eb9239dd07834",
+        "971e8f13f8b317c88766f58187d50bb6e626661c",
+        "99da28d816c6a4e36f3d34cdd1d3651e8e6eac76",
+        "c39d04312a37916b709aff39384f2fb7dda05c5e",
+        "c3e66d083563bf6c69ae7253e5235ce0b17029be",
+        "c7a7af8461385ecc5613a636c8933efd1987bdfb",
+        "cff3a2a72e3bf1a71e84ec8560126d39842cfbff",
+        "de4444b4aaad58d276a9a3280df44f7b757d5714",
+        "ee2d86e7a0d6311b2fca2fddfca7cda6cec2777c",
+        "fbc41ab5b980233afe349b97fb72c4a1eddcdb6b"
+      ],
+      "uncached_published_base_objects": 0
+    },
+    {
+      "base_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/kit/.git",
+      "bundle": {
+        "archive": "branches/ipfs_kit_py/ipfs_kit_py-historical-tips.bundle",
+        "bytes": 5904318,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/ipfs_kit_py/ipfs_kit_py-historical-tips.bundle",
+        "sha256": "db5b8579093a4336269ff95c92956ec70499e1426a39032322f3fe6895cfc789"
+      },
+      "family": "ipfs_kit_py",
+      "fresh_private_restore": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-all-renewed-20261127-ygf45pp5/fresh-branch-restores/ipfs_kit_py.git",
+      "incremental_closure_complete_against_published_base": true,
+      "marker_scan": {
+        "archive": "branches/ipfs_kit_py/credential-marker-scan.json.DATA",
+        "bytes": 3299,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/ipfs_kit_py/credential-marker-scan.json",
+        "sha256": "b2e26b023a17577927b4145174e39446a830d269877b84feb13425f9775a7747"
+      },
+      "no_live_code_adoption": true,
+      "no_missing_new_branch_objects": true,
+      "published_base": "b15442e490dc39d046a911ea663c73c99ed3c755",
+      "source_receipt": {
+        "archive": "branches/ipfs_kit_py/restore-receipt.json.DATA",
+        "bytes": 111809,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/ipfs_kit_py/restore-receipt.json",
+        "sha256": "392089c893edeaf99d9cc8a54036e7703429552ae38581979db5a7de6229f88f"
+      },
+      "tip_count": 11,
+      "tips": [
+        "1e934800a9fdae2a31dd8c8174e54266f009671b",
+        "27d8fe11c2c6a603bb670c967018b8fbd2b0e85e",
+        "2d1b33fa33637a363dff40e891d5ca6ddd2c97ae",
+        "2e4f54e347b0c1317c2fe78e2b16abec92362b23",
+        "485461d73a7142e14ebc6a8964a961aecf2638b7",
+        "9cdc42d456db4b2d7c20f96942c2a5184ab57d9f",
+        "d717665ae193039e128c551243334fa06735403a",
+        "e24443c8d768ab75a9b279d2c753bc0109ae6a8d",
+        "e3a28b29832d12279d55af2c21f1fbfd0fbd4e01",
+        "e9e85ba2198164bd28e99d6d1150070fa5692695",
+        "f814d0dc2f43ec0465ef1128e9046150a9a6db86"
+      ],
+      "uncached_published_base_objects": 0
+    },
+    {
+      "base_store": "/tmp/git-main-followup-20261127-zYjieLmd/datasets-current-main-proof.git",
+      "bundle": {
+        "archive": "branches/recovery-ipfs_datasets_py/ipfs_datasets_py-historical-tips.bundle",
+        "bytes": 7597493,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/ipfs_datasets_py/ipfs_datasets_py-historical-tips.bundle",
+        "sha256": "182cceb3a5a93b3a9c043333cc3af92a23896e5183b2d8d87edf7e6c73346dee"
+      },
+      "family": "ipfs_datasets_py",
+      "fresh_private_restore": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-all-renewed-20261127-ygf45pp5/fresh-branch-restores/recovery-ipfs_datasets_py.git",
+      "incremental_closure_complete_against_published_base": true,
+      "marker_scan": {
+        "archive": "branches/recovery-ipfs_datasets_py/credential-marker-scan.json.DATA",
+        "bytes": 2048,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/ipfs_datasets_py/credential-marker-scan.json",
+        "sha256": "e392930a464c098e0e007e32f5ccfd2dad03c841addd7030c02d8223dbef8a4b"
+      },
+      "no_live_code_adoption": true,
+      "no_missing_new_branch_objects": true,
+      "published_base": "3bdfec5b148ad6c4ac53281ceb02ecd8377643e0",
+      "source_receipt": {
+        "archive": "branches/recovery-ipfs_datasets_py/restore-receipt.json.DATA",
+        "bytes": 65875,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/ipfs_datasets_py/restore-receipt.json",
+        "sha256": "d9a166a8afc22a97fdda12e15f3c227fb415e92bffbd4b480c97e256d5bbed13"
+      },
+      "tip_count": 35,
+      "tips": [
+        "0637dd45020d70c287afb7e5fbb6eb0bd2211445",
+        "09c32e5bf30432969665f1b4c9903170c5b38f00",
+        "1e328c0da00f2a4e36e0697e46408e22400cd731",
+        "2bd114658748e7c6b8c85e459103b4a737e4a890",
+        "2bdfaaf974c2282cd7e77b711a83621475757adb",
+        "4cce8427b8e4d5c06a88404ea3500946e303100c",
+        "55d160f3ff3151aec5cbc26b5cc619158f31a9b8",
+        "55e10713440faa79c95210f36e3d1db1a981dbdb",
+        "6009a4288f1f59f239636ddddc60548730059183",
+        "6130223c73186a2934e6ed3a4f3456f9353e2433",
+        "621df67c374699533c01e828cef58b34e8bb83e9",
+        "68a9ada86e6724d9cd15b0782bdc702603c42993",
+        "6f51907ac16fab1772a5fab29ab4f6694b8c0c19",
+        "72813a35a8b07a9d9dc9d0a9f7249cd6636e63e7",
+        "7a4f5bce36a563609e6e20e3860f52cdd9c169f5",
+        "7fbdf825271f736b7ed4b65900a4d4006cca74ee",
+        "88ae031490575bd4d74f13b2e8b7246c3ae84032",
+        "8e1db8e20b000ec40dadb635555c00a1c12650f4",
+        "94c1552d6b4163181e7fbc22d49d24c57268ef3e",
+        "977478b8f2f35edd32edb1bf6930acfe9a5b61e2",
+        "9ac5a293da08aaa7b954d92284e8e97a82cdbd4d",
+        "a14ce5e2684f424c1996c5788e0f2cfa2feb46eb",
+        "a79a6399144a54da2ddab814125832472cfcc3cb",
+        "a8ee2dbacb5f9bed0b36618e053c005ce2d44000",
+        "b0f925c6b6dc532e97e994b2730a1e7e747b7eaa",
+        "be1908c7c889e2efcddac2f89d63cfbf22f9a429",
+        "c15627b976c636b4023223d11c50fdf7f0b89da0",
+        "c2a81bbc782f2b29bbd20299903f7c49d416d4d4",
+        "c810d4faf88f4f9f6bb933991663a25911561ba7",
+        "e18e2c4ce17aebece816e02bbb559c272958acdd",
+        "ed02ef7aebfb4d119389055533280a88b686ba84",
+        "f0104b18c0dcdba7220776d14bc4f2cac55100bf",
+        "f07a8b7a467f2f113ea2a7c0f22b766d3b04fe27",
+        "f9e1e6e8bd17e892b72e3011582d2628748d74ae",
+        "fc035127359d28021afebd04c17a4aee370a80ea"
+      ],
+      "uncached_published_base_objects": 7
+    },
+    {
+      "base_store": "/tmp/git-main-followup-20261127-zYjieLmd/swissknife-main-proof.git",
+      "bundle": {
+        "archive": "branches/nonthin_recovery-swissknife/swissknife-historical-tips.bundle",
+        "bytes": 794393,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/swissknife/swissknife-historical-tips.bundle",
+        "sha256": "b165fc6f56518f644d2657c8e546f89d9492b669687cd4cb073cb14d9f465ad8"
+      },
+      "family": "swissknife",
+      "fresh_private_restore": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-all-renewed-20261127-ygf45pp5/fresh-branch-restores/nonthin_recovery-swissknife.git",
+      "incremental_closure_complete_against_published_base": true,
+      "marker_scan": {
+        "archive": "branches/nonthin_recovery-swissknife/credential-marker-scan.json.DATA",
+        "bytes": 698,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/swissknife/credential-marker-scan.json",
+        "sha256": "4d2b3b1bb41824df8a79488e847f691da937fd8452f498a5fdc7f85e39d0282d"
+      },
+      "no_live_code_adoption": true,
+      "no_missing_new_branch_objects": true,
+      "published_base": "453a30b01e62b6acdd1c54070821dbacfbf7908e",
+      "source_receipt": {
+        "archive": "branches/nonthin_recovery-swissknife/restore-receipt.json.DATA",
+        "bytes": 4370,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/swissknife/restore-receipt.json",
+        "sha256": "2f338b96ec2f22d416f9761f71e596f66f0679230ec8a5ab01518e4edffbc121"
+      },
+      "tip_count": 1,
+      "tips": [
+        "7e7c69c939f79825821b647c44044a3c8029f053"
+      ],
+      "uncached_published_base_objects": 16020
+    },
+    {
+      "base_store": "/tmp/lift-origin-main-reconcile-private-A8hmZDEd/root/.git",
+      "bundle": {
+        "archive": "branches/nonthin_recovery-lift_coding/lift_coding-historical-tips.bundle",
+        "bytes": 1913663,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/lift_coding/lift_coding-historical-tips.bundle",
+        "sha256": "e121273507abff97b6eb07135fc0c1e715bc0fccfc819c65ce5999b7c8d19e64"
+      },
+      "family": "lift_coding",
+      "fresh_private_restore": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-all-renewed-20261127-ygf45pp5/fresh-branch-restores/nonthin_recovery-lift_coding.git",
+      "incremental_closure_complete_against_published_base": true,
+      "marker_scan": {
+        "archive": "branches/nonthin_recovery-lift_coding/credential-marker-scan.json.DATA",
+        "bytes": 697,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/lift_coding/credential-marker-scan.json",
+        "sha256": "c40cea66d62378d50cddf84baf437b15490cdb4451a214539e197255cfc88de2"
+      },
+      "no_live_code_adoption": true,
+      "no_missing_new_branch_objects": true,
+      "published_base": "93edf9895e09ffa873a7eb65634a1c0ed27d297d",
+      "source_receipt": {
+        "archive": "branches/nonthin_recovery-lift_coding/restore-receipt.json.DATA",
+        "bytes": 4538,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/lift_coding/restore-receipt.json",
+        "sha256": "b959aa4d1c1ccda5b73df18d111704d075fbec1d8c7c086c00fbeacd5a2871ab"
+      },
+      "tip_count": 1,
+      "tips": [
+        "80ca8550261a59f06d086d47cd969cfd1583ef88"
+      ],
+      "uncached_published_base_objects": 77497
+    },
+    {
+      "base_store": "/tmp/accelerate-objective-output-owner-main-ybAvG5Rm/checkout/.git",
+      "bundle": {
+        "archive": "branches/recovery-ipfs_accelerate_py_detached/ipfs_accelerate_py_detached-historical-tips.bundle",
+        "bytes": 5396,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/ipfs_accelerate_py_detached/ipfs_accelerate_py_detached-historical-tips.bundle",
+        "sha256": "36a3eac68c18ab7de909e11e1ff5eaa193b625da556ea8bd40488d668aa3e2aa"
+      },
+      "family": "ipfs_accelerate_py_detached",
+      "fresh_private_restore": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-all-renewed-20261127-ygf45pp5/fresh-branch-restores/recovery-ipfs_accelerate_py_detached.git",
+      "incremental_closure_complete_against_published_base": true,
+      "marker_scan": {
+        "archive": "branches/recovery-ipfs_accelerate_py_detached/credential-marker-scan.json.DATA",
+        "bytes": 695,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/ipfs_accelerate_py_detached/credential-marker-scan.json",
+        "sha256": "c2f609a8b9d60c7ab7e82562e0642216bb74f5b302733fa2dcb879c23b5e37f0"
+      },
+      "no_live_code_adoption": true,
+      "no_missing_new_branch_objects": true,
+      "published_base": "64a8649952bed66a457d7b87bf6dced9fadab8d4",
+      "source_receipt": {
+        "archive": "branches/recovery-ipfs_accelerate_py_detached/restore-receipt.json.DATA",
+        "bytes": 5816,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/ipfs_accelerate_py_detached/restore-receipt.json",
+        "sha256": "d4e24951aca326b0668a8ab4f919abcd356144483be53d24ff140d419f080656"
+      },
+      "tip_count": 1,
+      "tips": [
+        "a53b173781999cdde0faaccf245ea5b4d404f730"
+      ],
+      "uncached_published_base_objects": 0
+    }
+  ],
+  "code_adoption": false,
+  "credential_marker_review": "Named small marker hits are static rejection fixtures, placeholders or examples. No 2GiB blob transferred. Prior scans retained.",
+  "restored_tip_count": 83,
+  "schema": "renewed-historical-branch-preservation/v1"
+}

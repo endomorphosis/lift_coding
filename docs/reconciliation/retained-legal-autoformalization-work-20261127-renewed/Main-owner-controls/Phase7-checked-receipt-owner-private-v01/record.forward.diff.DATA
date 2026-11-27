@@ -1,0 +1,113 @@
+--- a/legal_ir_proof_feedback.py
++++ b/legal_ir_proof_feedback.py
+@@ -22,7 +22,7 @@
+ import os
+ import re
+ import tempfile
+-from dataclasses import dataclass
++from dataclasses import dataclass, field
+ from enum import Enum
+ from pathlib import Path
+ from typing import Any, Final, Iterable, Iterator, Mapping, Optional, Sequence
+@@ -1059,6 +1059,10 @@
+     reviewed_target_sha256: str
+     dependency_manifest_sha256: str
+     expected_feedback_record_id: str = ""
++    checked_proof_receipt: Any = field(default=None, repr=False, compare=False)
++    checked_proof_expectation: Optional[Mapping[str, Any]] = field(
++        default=None, repr=False, compare=False
++    )
+ 
+     def __post_init__(self) -> None:
+         for name in ("sample_id", "obligation_id", "obligation_type", "legal_ir_view"):
+@@ -1078,6 +1082,36 @@
+                              or not _SHA256_RE.fullmatch(feedback_id[len(prefix):]))
+         ):
+             raise ProofFeedbackError("expected feedback record must be a canonical record ID")
++        receipt = self.checked_proof_receipt
++        expectation = self.checked_proof_expectation
++        if receipt is None and expectation is None:
++            return
++        from ...bridge.proof_receipt_attestation import TrustedProofReceipt
++        from ...ir_core.claims import FrozenMap
++
++        if type(receipt) is not TrustedProofReceipt or not isinstance(expectation, Mapping):
++            raise ProofFeedbackError("checked proof requires its typed receipt and independent expectation")
++        required = {
++            "receipt_id", "content_id", "source_result_digest", "property_id", "tree_id",
++            "backend_id", "authority", "assumptions", "bounds", "sample_sha256",
++            "formal_obligation_sha256", "reviewed_target_sha256", "dependency_manifest_sha256",
++        }
++        if not required.issubset(expectation):
++            raise ProofFeedbackError("checked proof expectation is incomplete")
++        for name in required - {"assumptions", "bounds"}:
++            if type(expectation[name]) is not str or not expectation[name]:
++                raise ProofFeedbackError("checked proof expectation identifiers must be explicit strings")
++        if expectation["authority"] != "theorem":
++            raise ProofFeedbackError("positive proof feedback requires theorem authority")
++        if (receipt.metadata.get("issued_at") or receipt.metadata.get("expires_at")) and not (
++            expectation.get("now") or expectation.get("as_of")
++        ):
++            raise ProofFeedbackError("time-bounded proof requires an explicitly selected as-of value")
++        try:
++            frozen = FrozenMap(expectation)
++        except (TypeError, ValueError) as error:
++            raise ProofFeedbackError("checked proof expectation must be immutable JSON") from error
++        object.__setattr__(self, "checked_proof_expectation", frozen)
+ 
+     @property
+     def obligation_digest(self) -> str:
+@@ -1101,6 +1135,53 @@
+             and self.obligation_type == record.obligation_type
+             and self.legal_ir_view == record.legal_ir_view
+             and self.obligation_digest == record.obligation_digest
++            and (not record.positive or self._checked_positive_receipt_matches(record))
++        )
++
++    def _checked_positive_receipt_matches(self, record: LegalIRProofFeedbackRecord) -> bool:
++        """Validate supplied checked evidence against an independent selection.
++
++        This validates the receipt and its selected bindings; it does not run a
++        prover, authenticate its producer, infer formal-target IDs, or grant
++        legal review. The evidence owner supplies the receipt-to-target join.
++        Legacy nonpositive feedback retains its separate verification path.
++        """
++
++        receipt = self.checked_proof_receipt
++        expectation = self.checked_proof_expectation
++        if receipt is None or expectation is None:
++            return False
++        from ...bridge.proof_receipt_attestation import TrustedProofReceipt
++        from ...verification_api import (
++            TRUSTED_PROOF_RECEIPT_SCHEMA, VERIFIED_RECEIPT_DISPATCH_INTERFACE,
++            LogicVerificationAPI, VerificationAuthority, VerificationStatus,
++        )
++
++        if type(receipt) is not TrustedProofReceipt or receipt.receipt_id not in record.receipt_ids:
++            return False
++        for name in ("sample_sha256", "formal_obligation_sha256", "reviewed_target_sha256",
++                     "dependency_manifest_sha256"):
++            if expectation.get(name) != getattr(self, name):
++                return False
++        response = LogicVerificationAPI().verify_receipt(
++            receipt, expectation=expectation, request_id=record.record_id
++        )
++        result = response.result.to_dict()
++        return (
++            response.operation == "verify_receipt"
++            and response.status is VerificationStatus.SUCCEEDED
++            and response.authority is VerificationAuthority.THEOREM
++            and response.request_id == record.record_id
++            and result.get("valid") is True
++            and result.get("kind") == "trusted_proof_receipt"
++            and result.get("dispatch") == VERIFIED_RECEIPT_DISPATCH_INTERFACE
++            and result.get("schema_version") == TRUSTED_PROOF_RECEIPT_SCHEMA
++            and result.get("underlying_authority") == "theorem"
++            and result.get("underlying_status") == "proved"
++            and result.get("receipt_id") == expectation["receipt_id"]
++            and result.get("content_id") == expectation["content_id"]
++            and result.get("source_result_digest") == expectation["source_result_digest"]
++            and result.get("round_trip") == receipt.to_dict()
+         )
+ 
+ 

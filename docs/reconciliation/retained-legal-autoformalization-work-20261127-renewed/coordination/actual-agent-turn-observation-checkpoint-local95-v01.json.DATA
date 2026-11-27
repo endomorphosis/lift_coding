@@ -1,0 +1,57 @@
+{
+  "api": "prepare_agent_turn_recovery_checkpoint_v1",
+  "base_commit": "7c0d40925436665bd90f62941d66ec63edadfb5b",
+  "before_implementation_reproduction_chunk": "544365",
+  "final_static_review": "No remaining blocker in reviewed fixes; static only, not independent runtime execution.",
+  "goal_mutated": false,
+  "historical_failures_preserved": true,
+  "live_provider_called": false,
+  "native_or_model_or_legal_admission": false,
+  "new_tests": 28,
+  "partial_write_rule": "Require CLI success and binding verification; output existence alone is not commit. Failed exclusive output stays preserved.",
+  "publication_status": "local_branch_not_published",
+  "qualification": {
+    "Source_READ_closed": true,
+    "details": [],
+    "errors": [],
+    "failures": 0,
+    "lease": {
+      "canonical_root": "/tmp/legal-refusal-recovery-j_10md5l/repo",
+      "cooperative": true,
+      "lock_path": "/tmp/legal-refusal-recovery-j_10md5l/repo/workspace/control-plane/source-leases/source.lock",
+      "mode": "read",
+      "schema_version": "autoencoder-source-lease/v1",
+      "waited_seconds": 6.913673132658005e-05
+    },
+    "native_or_model_executed": false,
+    "passed": true,
+    "profile": {
+      "AS_bytes": 536870912,
+      "CPU": 1,
+      "CPU_seconds": 60,
+      "wall_seconds": 60
+    },
+    "schema": "legal-ir-agent-turn-observation-checkpoint-local-tests/v1",
+    "seconds": 0.4566882150247693,
+    "skips": 0,
+    "source_sha256": {
+      "/tmp/legal-refusal-recovery-j_10md5l/repo/ipfs_datasets_py/logic/autoformal/supervisor_loop.py": "c2022b4ac640ad67e09ecddf86b8f7ee1854c98c936cb0be643ec7ad6a5ea2c1",
+      "/tmp/legal-refusal-recovery-j_10md5l/repo/scripts/ops/legal_ir/run_autoformal_supervisor.py": "0259393ad5f0177d93147c39b8be3640755b8415177ac731b5f60384180f5d06",
+      "/tmp/legal-refusal-recovery-j_10md5l/repo/tests/unit/logic/test_supervisor_agent_turn_recovery.py": "fc96432ba7df1d9f6b9c079f461ce5c914f9dd5a184826de5f2f77b9c73979de"
+    },
+    "subtests": 171,
+    "test_errors": 0,
+    "tests": 95,
+    "workers_started": false
+  },
+  "qualification_chunk": "4c39a6",
+  "retained_tests": 67,
+  "retries_authorized": false,
+  "review_findings_fixed": [
+    "hash initially consumed bytes",
+    "preserve refusal error/evidence on replay",
+    "recheck file/parent identity after directory fsync"
+  ],
+  "schema": "legal-ir-agent-turn-observation-checkpoint-qualification/v1",
+  "workers_started": false
+}

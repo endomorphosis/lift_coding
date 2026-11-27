@@ -1,0 +1,83 @@
+{
+  "actual_effects": {
+    "Git_mutations": 0,
+    "Native": 0,
+    "Source": 0,
+    "fit": 0,
+    "qualification": false
+  },
+  "canonical_API": "LegalProofRecord.theorem_receipt_results(expected_context=..., obligation_id=...)",
+  "constraints": [
+    "Keep canonical receipt outside feedback and before primary/auxiliary eligibility.",
+    "TrustedProofReceipt is a separate translation/bridge API.",
+    "Hammer and protocol obligation identities are separate without a verified crosswalk.",
+    "Retained fictional v567 proof fixture is usable for a no-fit replay without claiming actual statutory review."
+  ],
+  "consumer_RED": {
+    "bytes": 11106,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-unattested-current-target-consumer-regression-v01/SEALED-private-existing-consumer-unattested-current-target-RED-v01.json",
+    "sha256": "d0756eaf57cca75e969f486c13ec2fb8dd45042b887d2e83c7319bfae63d8419"
+  },
+  "evidence573": {
+    "bytes": 3117,
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-Guide573-four-docs-three-FF-publication.json",
+    "sha256": "1a83a7c66b2e726b4f6605039fbd5bad4296f6cb3f008e965436c68a9e89e8c7"
+  },
+  "exact_Git_roles": {
+    "ipfs_datasets_py/logic/formalization/compiler.py": {
+      "blob": "85f27c5708fd5ebd43f616de7895b4a99bac2f13",
+      "bytes": 35152,
+      "sha256": "2d4c63025e3d0004774c3a1d688193187f115b181085d7825d46c9d72581b03c"
+    },
+    "ipfs_datasets_py/logic/integration/reasoning/legal_ir_obligations.py": {
+      "blob": "d9b8c183d91ae62fe2d86977995ccbc45221a1b8",
+      "bytes": 29049,
+      "sha256": "982f1cfad15976c162e71e809ada5b00794bb67b8ae42c981b80a8fc7d24ae1b"
+    },
+    "ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py": {
+      "blob": "1f3d36a0c1cc595c1797b0f471720546ddc6c520",
+      "bytes": 60953,
+      "sha256": "c0bc4092d301318619aec4e109a661da65a86816b9754fb5e73106cb910712f3"
+    },
+    "ipfs_datasets_py/logic/ir_core/claims.py": {
+      "blob": "63af5a987404010aa0ec69fb827722afc9b53b81",
+      "bytes": 16176,
+      "sha256": "282cdd3a6ba18a90079886337d360bae44da172748faa3ad2715d2071070de3b"
+    },
+    "ipfs_datasets_py/logic/ir_core/protocols.py": {
+      "blob": "09b5536bf3269b6eb54f62cfa83e8dceed53d49e",
+      "bytes": 57510,
+      "sha256": "e2dd1dc93d1efa15c7c4088145d32c52636c72e9230b16ade77ca6c6a0c2c336"
+    },
+    "ipfs_datasets_py/logic/legal_ir/proof_cache.py": {
+      "blob": "5f4b9e8eedf00c89d31ff9fa68559dc3584126e1",
+      "bytes": 62643,
+      "sha256": "9b05a2f890f2df62931273f2448182af8a2d99af73248c5c67ef2ec3d04b0c3c"
+    },
+    "tests/integration/logic/backends/test_kernel_backends.py": {
+      "blob": "005655a32c50d14e20a4a65b1bc7d3773d8061d6",
+      "bytes": 123945,
+      "sha256": "ab3718e38b87756b07be9052614d16171171d2a7c7217b6e17405895c21ac945"
+    },
+    "tests/unit/logic/legal_ir/test_proof_cache.py": {
+      "blob": "4525114941200e1d74adf6b45449e03b2dd2c1a2",
+      "bytes": 97545,
+      "sha256": "4e012101e4400324175c02d296b51abde97d065c76abfddef1b51d16329f639d"
+    }
+  },
+  "head": "78b3466e3259bece28ccf9edc03dc7609efa22fd",
+  "independently_select": [
+    "current sample and reviewed artifact",
+    "full formal obligation and artifact membership",
+    "exact legal proof record",
+    "protocol ProofReceipt.digest",
+    "current reuse interpretation and dependencies",
+    "exact source-free produced record ID"
+  ],
+  "retained_fictional_actual_native_fixture": {
+    "bytes": 37828,
+    "path": "/tmp/Root-P1-current-protocol-Lean-native-cache-v567-0mR2Fihk/actual-output/original-test-temp/native-proof-cache/records/bafkreic4sb7r2pgmze4t3vei4kz4dfmhnihqtcvcz63ibm7mct5s7t3ffm.json",
+    "sha256": "ab533fd33e925ae16900b7f4fc6782df9f61b86806965605984380e45d594f32"
+  },
+  "schema": "current-Phase7-canonical-legal-proof-record-handoff-private/v1"
+}

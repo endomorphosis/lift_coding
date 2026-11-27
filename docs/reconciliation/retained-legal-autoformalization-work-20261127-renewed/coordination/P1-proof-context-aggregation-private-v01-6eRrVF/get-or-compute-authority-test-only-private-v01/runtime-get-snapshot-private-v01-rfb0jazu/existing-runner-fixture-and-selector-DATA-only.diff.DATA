@@ -1,0 +1,25 @@
+--- existing_same12_runner
++++ same_existing_runner_get_snapshot5
+@@ -208,8 +208,8 @@
+             records[relative] = (row['bytes'],row['sha256'])
+     sys.meta_path.insert(0,BoundFinder(records,{k:(v,) for k,v in explicit.items()}))
+     assert not any(name.split('.',1)[0] in archived for name in sys.modules)
+-    fixture = pinned(out/'test_proof_cache.ceiling-diagnostic.py.DATA',93508,
+-                     'cd92c41e80976e707110855423dd6ae6956206e5a6bfd57556cec93611ac4a9e')
++    fixture = pinned(out/'test_proof_cache.ceiling-diagnostic.py.DATA',97758,
++                     'e5d06473bb7f1097b35d2b180505ae2c9f484fcac8ab593f21069dfb5601c470')
+     assert hashlib.sha256(fixture[:89707]).hexdigest() == 'cec120e6bba53c09554b69cbde32fe34ffdc9ecaa901fb4c3141ecfe34b83c6e'
+     assert hashlib.sha256(fixture[:86879]).hexdigest() == 'e86d6d85c1333dd536ee997bf5a3e09b5f625f11bf399ed140c2504a894ece4e'
+     assert hashlib.sha256(fixture[:84499]).hexdigest() == '239d05de5b08eba8de06b67a74efe109900a6302d73c27d28d450bf2f8061d2f'
+@@ -220,10 +220,7 @@
+     tempfile.tempdir = str(work)
+     rc = int(pytest.main(['-c','/dev/null','--noconftest','-p','no:cacheprovider',f'--rootdir={work}',f'--confcutdir={work}',
+           '-q','--tb=short',f'--basetemp={work/"tmp"}',f'--junitxml={work/"junit.xml"}',f'--log-file={work/"pytest.log"}',
+-          f'{test}::test_cache_compute_leader_respects_requested_theorem_authority',
+-          f'{test}::test_unified_cache_waiter_respects_requested_theorem_authority',
+-          f'{test}::test_diagnostic_cache_producer_retains_caller_ceiling',
+-          f'{test}::test_diagnostic_cache_waiter_retains_caller_ceiling']))
++          f'{test}::test_unified_get_eligibility_snapshot_after_actual_lookup']))
+ finally:
+     assert not any(name.split('.',1)[0] in blocked for name in sys.modules)
+     report_path.write_text(json.dumps({'exit':rc,'explicit_cached_read_bytes':byte_count,

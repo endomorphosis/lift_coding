@@ -1,0 +1,87 @@
+from importlib.abc import MetaPathFinder
+from importlib.machinery import SourceFileLoader
+from importlib.util import module_from_spec,spec_from_loader
+from pathlib import Path
+import hashlib
+import json
+import os
+import resource
+import sys
+import traceback
+
+import pytest
+
+root=Path(__file__).resolve().parent
+spec=json.loads((root/"input-spec.json").read_bytes())
+repo=Path(spec["repo"])
+mode=sys.argv[1]
+assert mode in {"before","after"}
+suite=sys.argv[2]
+resource.setrlimit(resource.RLIMIT_CPU,(55,56))
+resource.setrlimit(resource.RLIMIT_AS,(512*1024**2,)*2)
+resource.setrlimit(resource.RLIMIT_CORE,(0,0))
+os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})
+sys.path.insert(0,str(repo))
+
+class SoftwareOnly(MetaPathFinder):
+    def find_spec(self,fullname,path=None,target=None):
+        if fullname.partition(".")[0] in {"torch","transformers","duckdb","tensorflow","jax"}:
+            raise ImportError("software fixture excludes numerical runtime " + fullname)
+        return None
+
+def audit(event,args):
+    if event.startswith(("socket.","subprocess.")) or event in {"os.system","os.fork","os.exec","os.posix_spawn"}:
+        raise RuntimeError("software fixture excludes process or network effects")
+    if event=="open" and not isinstance(args[0],int) and args[2] & (os.O_WRONLY|os.O_RDWR|os.O_CREAT|os.O_TRUNC|os.O_APPEND):
+        if not Path(os.fsdecode(args[0])).resolve().is_relative_to(root):
+            raise RuntimeError("software fixture write must stay under its private root")
+
+sys.meta_path.insert(0,SoftwareOnly())
+sys.addaudithook(audit)
+def sha(data):
+    return hashlib.sha256(data).hexdigest()
+def load(name,role):
+    path=Path(role["path"])
+    data=path.read_bytes()
+    assert sha(data)==role["sha256"] and len(data)==role["bytes"]
+    module_spec=spec_from_loader(name,SourceFileLoader(name,str(path)))
+    module=module_from_spec(module_spec)
+    sys.modules[name]=module
+    module_spec.loader.exec_module(module)
+    assert Path(module.__file__)==path
+    assert path.read_bytes()==data
+    return module
+
+import ipfs_datasets_py.optimizers.logic_theorem_optimizer as package
+owner_ref=spec["roles"]["owner"] if mode=="before" else json.loads((root/"owner.after.ref.json").read_text())
+assert package.__name__+".legal_structured_retrieval" not in sys.modules
+owner=load(package.__name__+".legal_structured_retrieval",owner_ref)
+package.legal_structured_retrieval=owner
+tests=load("private_actual_owning_ranked_context",spec["after_test"])
+if suite=="boundary":
+    fn=tests.test_aggregate_v4_ranked_context_checks_query_count_before_ranking
+    labels=fn.pytestmark[0].args[1]
+elif suite in {"None","abstention","source","selected-body"}:
+    fn=tests.test_aggregate_v4_ranked_recipe_reaches_evaluator_with_genuine_component_custody
+    labels=[None if suite=="None" else suite]
+else:
+    raise AssertionError("unselected suite")
+results=[]
+for case in labels:
+    with pytest.MonkeyPatch.context() as patch:
+        try:
+            fn(patch,case)
+        except (Exception,pytest.fail.Exception):
+            results.append({"case":case,"status":"failed","traceback":traceback.format_exc()})
+        else:
+            results.append({"case":case,"status":"passed"})
+modules={}
+for name,module in tuple(sys.modules.items()):
+    if type(getattr(module,"__file__",None)) is str:
+        path=Path(module.__file__).resolve()
+        if path.is_relative_to(repo) and path.suffix==".py":
+            data=path.read_bytes()
+            modules[name]={"relative_path":str(path.relative_to(repo)),"bytes":len(data),"sha256":sha(data)}
+print(json.dumps({"mode":mode,"suite":suite,"results":results,"read_only_project_module_sources":modules,
+    "owner":owner_ref,"test":spec["after_test"]},sort_keys=True,indent=2))
+raise SystemExit(any(row["status"]=="failed" for row in results))

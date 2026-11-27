@@ -1,0 +1,2075 @@
+{
+  "all_prior_charges_retained": true,
+  "bundle_head_coverage": [
+    {
+      "adoption_status": "NOT_ADOPTED",
+      "bundle": "docs/reconciliation/dependency-worktree-preservation-20261123/fsspec-filesystem_spec-e8d585aa.bundle",
+      "oid": "5f3d0a15dff3908bd5c5d4f2e99fd3d5fbd3a222",
+      "origin": "https://github.com/fsspec/filesystem_spec.git",
+      "ref": "refs/heads/sync-preserved/20261109-01f3cbbc6812"
+    },
+    {
+      "adoption_status": "NOT_ADOPTED",
+      "bundle": "docs/reconciliation/dependency-worktree-preservation-20261123/fsspec-filesystem_spec-e8d585aa.bundle",
+      "oid": "cf7dbfe0333e4a0ea4ce4f5dbfd9535547329cfc",
+      "origin": "https://github.com/fsspec/filesystem_spec.git",
+      "ref": "refs/heads/sync-preserved/20261109-226c69dd2b32"
+    },
+    {
+      "adoption_status": "NOT_ADOPTED",
+      "bundle": "docs/reconciliation/dependency-worktree-preservation-20261123/fsspec-filesystem_spec-e8d585aa.bundle",
+      "oid": "313c0cc35c4d72f72d856e5864c9c9c483629a48",
+      "origin": "https://github.com/fsspec/filesystem_spec.git",
+      "ref": "refs/heads/sync-preserved/20261109-e4a1dea22143"
+    },
+    {
+      "adoption_status": "NOT_ADOPTED",
+      "bundle": "docs/reconciliation/dependency-worktree-preservation-20261123/ipfs-ipfs-docs-eb0c32c7.bundle",
+      "oid": "cbc5cf46904be3b745ba6bf915020042f7b933f6",
+      "origin": "https://github.com/ipfs/ipfs-docs.git",
+      "ref": "refs/heads/sync-preserved/20261109-22b1bd90c296"
+    },
+    {
+      "adoption_status": "NOT_ADOPTED",
+      "bundle": "docs/reconciliation/dependency-worktree-preservation-20261123/ipfs-ipfs-docs-eb0c32c7.bundle",
+      "oid": "248c898104283e48f9ccbea660bad481eee6fb3a",
+      "origin": "https://github.com/ipfs/ipfs-docs.git",
+      "ref": "refs/heads/sync-preserved/20261109-5b8b4ccfd510"
+    },
+    {
+      "adoption_status": "NOT_ADOPTED",
+      "bundle": "docs/reconciliation/dependency-worktree-preservation-20261123/ipfs-ipfs-docs-eb0c32c7.bundle",
+      "oid": "df6476024baa566c3dfb336b4fafc0d0c176ae75",
+      "origin": "https://github.com/ipfs/ipfs-docs.git",
+      "ref": "refs/heads/sync-preserved/20261109-682246bf2ff5"
+    },
+    {
+      "adoption_status": "NOT_ADOPTED",
+      "bundle": "docs/reconciliation/dependency-worktree-preservation-20261123/fsspec-ipfsspec-33dc2ca3.bundle",
+      "oid": "b154ee23723f999a9fd5f9943489d7f6984cc9f6",
+      "origin": "https://github.com/fsspec/ipfsspec.git",
+      "ref": "refs/heads/sync-preserved/20261109-5f6334a47177"
+    },
+    {
+      "adoption_status": "NOT_ADOPTED",
+      "bundle": "docs/reconciliation/dependency-worktree-preservation-20261123/fsspec-ipfsspec-33dc2ca3.bundle",
+      "oid": "46cf747b29178f1b1c16687ceb38bb7675f0d322",
+      "origin": "https://github.com/fsspec/ipfsspec.git",
+      "ref": "refs/heads/sync-preserved/20261109-7c606e9bd620"
+    },
+    {
+      "adoption_status": "NOT_ADOPTED",
+      "bundle": "docs/reconciliation/dependency-worktree-preservation-20261123/fsspec-ipfsspec-33dc2ca3.bundle",
+      "oid": "a96c05ef37e2624e77433091a979f67e91a85cae",
+      "origin": "https://github.com/fsspec/ipfsspec.git",
+      "ref": "refs/heads/sync-preserved/20261109-a1ab258ce45e"
+    },
+    {
+      "adoption_status": "NOT_ADOPTED",
+      "bundle": "docs/reconciliation/dependency-worktree-preservation-20261123/lighthouse-web3-lighthouse-python-sdk-ca9c25c2.bundle",
+      "oid": "c097c48985f97cffdc1cb9cbde96296fb0bc014d",
+      "origin": "https://github.com/lighthouse-web3/lighthouse-python-sdk.git",
+      "ref": "refs/heads/sync-preserved/20261109-474843e77b61"
+    },
+    {
+      "adoption_status": "NOT_ADOPTED",
+      "bundle": "docs/reconciliation/dependency-worktree-preservation-20261123/lighthouse-web3-lighthouse-python-sdk-ca9c25c2.bundle",
+      "oid": "83cf3f3d61c50636be3c969018524307e3f65b3b",
+      "origin": "https://github.com/lighthouse-web3/lighthouse-python-sdk.git",
+      "ref": "refs/heads/sync-preserved/20261109-bb3c9e409047"
+    },
+    {
+      "adoption_status": "NOT_ADOPTED",
+      "bundle": "docs/reconciliation/dependency-worktree-preservation-20261123/lighthouse-web3-lighthouse-python-sdk-ca9c25c2.bundle",
+      "oid": "d39528a2c4a7fbb525fae5d74fcfdeb6b6f99ce9",
+      "origin": "https://github.com/lighthouse-web3/lighthouse-python-sdk.git",
+      "ref": "refs/heads/sync-preserved/20261109-e0d239348250"
+    },
+    {
+      "adoption_status": "NOT_ADOPTED",
+      "bundle": "docs/reconciliation/dependency-worktree-preservation-20261123/modelcontextprotocol-python-sdk-5901bc6d.bundle",
+      "oid": "a218ddcbe269b8dca30d001a5f3bbeb620a762df",
+      "origin": "https://github.com/modelcontextprotocol/python-sdk.git",
+      "ref": "refs/heads/sync-preserved/20261109-0e356d776c18"
+    },
+    {
+      "adoption_status": "NOT_ADOPTED",
+      "bundle": "docs/reconciliation/dependency-worktree-preservation-20261123/modelcontextprotocol-python-sdk-5901bc6d.bundle",
+      "oid": "f1b58cf910d4dd08d5340cf8251ff9495cbc9384",
+      "origin": "https://github.com/modelcontextprotocol/python-sdk.git",
+      "ref": "refs/heads/sync-preserved/20261109-acf539cb98dc"
+    },
+    {
+      "adoption_status": "NOT_ADOPTED",
+      "bundle": "docs/reconciliation/dependency-worktree-preservation-20261123/modelcontextprotocol-python-sdk-5901bc6d.bundle",
+      "oid": "d25e32c91aaa889f9e5bf7a3adaac7c4e4867d80",
+      "origin": "https://github.com/modelcontextprotocol/python-sdk.git",
+      "ref": "refs/heads/sync-preserved/20261109-e7819359baeb"
+    },
+    {
+      "adoption_status": "NOT_ADOPTED",
+      "bundle": "docs/reconciliation/dependency-worktree-preservation-20261123/jlowin-fastmcp-e462a381.bundle",
+      "oid": "51912b7dca7db75213ba9bc7d6ac877a70ac0cc8",
+      "origin": "https://github.com/jlowin/fastmcp.git",
+      "ref": "refs/heads/sync-preserved/20261109-8e0fa8b8e66e"
+    },
+    {
+      "adoption_status": "NOT_ADOPTED",
+      "bundle": "docs/reconciliation/dependency-worktree-preservation-20261123/jlowin-fastmcp-e462a381.bundle",
+      "oid": "1639526270ff9b1a515912acff2568c06e302127",
+      "origin": "https://github.com/jlowin/fastmcp.git",
+      "ref": "refs/heads/sync-preserved/20261109-bb0458212e84"
+    },
+    {
+      "adoption_status": "NOT_ADOPTED",
+      "bundle": "docs/reconciliation/dependency-worktree-preservation-20261123/jlowin-mcp-python-sdk-fa43e53f.bundle",
+      "oid": "4d683d25648103fddec519a202d84297eaecae62",
+      "origin": "https://github.com/jlowin/mcp-python-sdk.git",
+      "ref": "refs/heads/sync-preserved/20261109-2c220f3bd13f"
+    },
+    {
+      "adoption_status": "NOT_ADOPTED",
+      "bundle": "docs/reconciliation/dependency-worktree-preservation-20261123/jlowin-mcp-python-sdk-fa43e53f.bundle",
+      "oid": "db4c29021e2b4a097111a9eeb7b3b0bbf85b81e8",
+      "origin": "https://github.com/jlowin/mcp-python-sdk.git",
+      "ref": "refs/heads/sync-preserved/20261109-401cbc183eb9"
+    },
+    {
+      "adoption_status": "NOT_ADOPTED",
+      "bundle": "docs/reconciliation/dependency-worktree-preservation-20261123/huggingface-transformers-3faf8fd7.bundle",
+      "oid": "ec642404baf5554482974e6fbcc74d5c9b5cb480",
+      "origin": "https://github.com/huggingface/transformers.git",
+      "ref": "refs/heads/sync-preserved/20261109-7b6f805b7e10"
+    }
+  ],
+  "bundle_matching_current_candidates": [],
+  "commands": [
+    {
+      "alternate_objects_env_only": null,
+      "argv": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "rc": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr_bytes": 0,
+      "stdout_bytes": 41
+    },
+    {
+      "alternate_objects_env_only": null,
+      "argv": [
+        "rev-list",
+        "--count",
+        "de4d5a62b6fac2df61769a6461c2ada97f788208"
+      ],
+      "rc": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr_bytes": 0,
+      "stdout_bytes": 6
+    },
+    {
+      "alternate_objects_env_only": null,
+      "argv": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "rc": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "stderr_bytes": 0,
+      "stdout_bytes": 41
+    },
+    {
+      "alternate_objects_env_only": null,
+      "argv": [
+        "rev-list",
+        "--count",
+        "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7"
+      ],
+      "rc": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "stderr_bytes": 0,
+      "stdout_bytes": 6
+    },
+    {
+      "alternate_objects_env_only": null,
+      "argv": [
+        "log",
+        "--format=%T",
+        "de4d5a62b6fac2df61769a6461c2ada97f788208"
+      ],
+      "rc": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr_bytes": 0,
+      "stdout_bytes": 770021
+    },
+    {
+      "alternate_objects_env_only": null,
+      "argv": [
+        "log",
+        "--format=%T",
+        "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7"
+      ],
+      "rc": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "stderr_bytes": 0,
+      "stdout_bytes": 606144
+    },
+    {
+      "alternate_objects_env_only": "/home/barberb/lift_coding/.git/modules/external/ipfs_accelerate/objects",
+      "argv": [
+        "log",
+        "--format=%H %T",
+        "04fbb09b4a8b34e77d11bd8da6642e0978baa02c",
+        "--not",
+        "de4d5a62b6fac2df61769a6461c2ada97f788208"
+      ],
+      "rc": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr_bytes": 0,
+      "stdout_bytes": 2296
+    },
+    {
+      "alternate_objects_env_only": "/home/barberb/lift_coding/.git/modules/external/ipfs_accelerate/objects",
+      "argv": [
+        "log",
+        "--format=%H %T",
+        "d065233b1ed4f5f8ba9fa9bfb1a7d872240b3791",
+        "--not",
+        "de4d5a62b6fac2df61769a6461c2ada97f788208"
+      ],
+      "rc": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr_bytes": 0,
+      "stdout_bytes": 656
+    },
+    {
+      "alternate_objects_env_only": "/home/barberb/lift_coding/.git/modules/external/ipfs_accelerate/objects",
+      "argv": [
+        "log",
+        "--format=%H %T",
+        "49569f1f2a9aa233e532e92c27f74ba5c004fd48",
+        "--not",
+        "de4d5a62b6fac2df61769a6461c2ada97f788208"
+      ],
+      "rc": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr_bytes": 0,
+      "stdout_bytes": 33128
+    },
+    {
+      "alternate_objects_env_only": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/objects",
+      "argv": [
+        "log",
+        "--format=%H %T",
+        "dbacb17e3ca75042aca45061ebd1a4b8a646ecfc",
+        "--not",
+        "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7"
+      ],
+      "rc": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "stderr_bytes": 0,
+      "stdout_bytes": 82
+    },
+    {
+      "alternate_objects_env_only": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/objects",
+      "argv": [
+        "log",
+        "--format=%H %T",
+        "ac7d085a34258281ccab0e07df73a0b3d64d50cc",
+        "--not",
+        "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7"
+      ],
+      "rc": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "stderr_bytes": 0,
+      "stdout_bytes": 82
+    },
+    {
+      "alternate_objects_env_only": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/objects",
+      "argv": [
+        "log",
+        "--format=%H %T",
+        "d90fb1d391d9c6973431df67af2227df7d1834bb",
+        "--not",
+        "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7"
+      ],
+      "rc": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "stderr_bytes": 0,
+      "stdout_bytes": 82
+    },
+    {
+      "alternate_objects_env_only": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/objects",
+      "argv": [
+        "log",
+        "--format=%H %T",
+        "362650fc688ba34d2de6b95f32e97f7914edae4d",
+        "--not",
+        "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7"
+      ],
+      "rc": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "stderr_bytes": 0,
+      "stdout_bytes": 82
+    },
+    {
+      "alternate_objects_env_only": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/objects",
+      "argv": [
+        "log",
+        "--format=%H %T",
+        "5eedd23dd8b8ae4e2cac1716f00f1fcaf19a2801",
+        "--not",
+        "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7"
+      ],
+      "rc": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "stderr_bytes": 0,
+      "stdout_bytes": 3936
+    },
+    {
+      "alternate_objects_env_only": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/objects",
+      "argv": [
+        "log",
+        "--format=%H %T",
+        "23540627b1cf6515df0fd84c9417b4cbdb91234a",
+        "--not",
+        "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7"
+      ],
+      "rc": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "stderr_bytes": 0,
+      "stdout_bytes": 4100
+    },
+    {
+      "alternate_objects_env_only": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/objects",
+      "argv": [
+        "log",
+        "--format=%H %T",
+        "b8a9bb35a8234d1c12204f2bae34d2a0c2635056",
+        "--not",
+        "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7"
+      ],
+      "rc": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "stderr_bytes": 0,
+      "stdout_bytes": 82
+    },
+    {
+      "alternate_objects_env_only": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/objects",
+      "argv": [
+        "log",
+        "--format=%H %T",
+        "3a8bd9e948abb77f7d228c9ff8554200da124471",
+        "--not",
+        "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7"
+      ],
+      "rc": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "stderr_bytes": 0,
+      "stdout_bytes": 82
+    },
+    {
+      "alternate_objects_env_only": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/objects",
+      "argv": [
+        "log",
+        "--format=%H %T",
+        "9c08f5efea82f112f3854f9798025a7a5d0d0ceb",
+        "--not",
+        "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7"
+      ],
+      "rc": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "stderr_bytes": 0,
+      "stdout_bytes": 82
+    },
+    {
+      "alternate_objects_env_only": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/objects",
+      "argv": [
+        "log",
+        "--format=%H %T",
+        "5b2cbd94fe7d1b850da8cb22ec973caf2bb4badf",
+        "--not",
+        "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7"
+      ],
+      "rc": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "stderr_bytes": 0,
+      "stdout_bytes": 82
+    },
+    {
+      "alternate_objects_env_only": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/objects",
+      "argv": [
+        "log",
+        "--format=%H %T",
+        "d59c140ca7034bbea101413ac275deb771ecd840",
+        "--not",
+        "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7"
+      ],
+      "rc": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "stderr_bytes": 0,
+      "stdout_bytes": 82
+    },
+    {
+      "alternate_objects_env_only": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ipfs_accelerate_py/.git/objects",
+      "argv": [
+        "log",
+        "--format=%H %T",
+        "11596bc53c2118319121626109b743c4eaa92c88",
+        "--not",
+        "de4d5a62b6fac2df61769a6461c2ada97f788208"
+      ],
+      "rc": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr_bytes": 0,
+      "stdout_bytes": 738
+    },
+    {
+      "alternate_objects_env_only": null,
+      "argv": [
+        "cat-file",
+        "-e",
+        "33c0c56e9423e11945837657e3a82fe865c60f91^{commit}"
+      ],
+      "rc": 128,
+      "root": "/home/barberb/lift_coding/Mcp-Plus-Plus",
+      "stderr_bytes": 81,
+      "stdout_bytes": 0
+    },
+    {
+      "alternate_objects_env_only": null,
+      "argv": [
+        "cat-file",
+        "-e",
+        "810e8bd91b14fd945e086840ccd0e2874a7910c3^{commit}"
+      ],
+      "rc": 0,
+      "root": "/home/barberb/lift_coding/JevOps",
+      "stderr_bytes": 0,
+      "stdout_bytes": 0
+    },
+    {
+      "alternate_objects_env_only": null,
+      "argv": [
+        "merge-base",
+        "--is-ancestor",
+        "9af1ebb6a4245ce2b4e673ac277e4988da4d5caa",
+        "810e8bd91b14fd945e086840ccd0e2874a7910c3"
+      ],
+      "rc": 0,
+      "root": "/home/barberb/lift_coding/JevOps",
+      "stderr_bytes": 0,
+      "stdout_bytes": 0
+    },
+    {
+      "alternate_objects_env_only": null,
+      "argv": [
+        "cat-file",
+        "-e",
+        "810e8bd91b14fd945e086840ccd0e2874a7910c3^{commit}"
+      ],
+      "rc": 0,
+      "root": "/home/barberb/lift_coding/JevOps",
+      "stderr_bytes": 0,
+      "stdout_bytes": 0
+    },
+    {
+      "alternate_objects_env_only": null,
+      "argv": [
+        "merge-base",
+        "--is-ancestor",
+        "0491349bd3e92e02dc50992e79b0c0a97a521ede",
+        "810e8bd91b14fd945e086840ccd0e2874a7910c3"
+      ],
+      "rc": 0,
+      "root": "/home/barberb/lift_coding/JevOps",
+      "stderr_bytes": 0,
+      "stdout_bytes": 0
+    },
+    {
+      "alternate_objects_env_only": null,
+      "argv": [
+        "cat-file",
+        "-e",
+        "810e8bd91b14fd945e086840ccd0e2874a7910c3^{commit}"
+      ],
+      "rc": 0,
+      "root": "/home/barberb/lift_coding/JevOps",
+      "stderr_bytes": 0,
+      "stdout_bytes": 0
+    },
+    {
+      "alternate_objects_env_only": null,
+      "argv": [
+        "merge-base",
+        "--is-ancestor",
+        "1b8e26d2dbe3989d02737efb7e948b5012c82e42",
+        "810e8bd91b14fd945e086840ccd0e2874a7910c3"
+      ],
+      "rc": 0,
+      "root": "/home/barberb/lift_coding/JevOps",
+      "stderr_bytes": 0,
+      "stdout_bytes": 0
+    },
+    {
+      "alternate_objects_env_only": null,
+      "argv": [
+        "cat-file",
+        "-e",
+        "810e8bd91b14fd945e086840ccd0e2874a7910c3^{commit}"
+      ],
+      "rc": 0,
+      "root": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/JevOps",
+      "stderr_bytes": 0,
+      "stdout_bytes": 0
+    },
+    {
+      "alternate_objects_env_only": null,
+      "argv": [
+        "merge-base",
+        "--is-ancestor",
+        "0491349bd3e92e02dc50992e79b0c0a97a521ede",
+        "810e8bd91b14fd945e086840ccd0e2874a7910c3"
+      ],
+      "rc": 0,
+      "root": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/JevOps",
+      "stderr_bytes": 0,
+      "stdout_bytes": 0
+    }
+  ],
+  "cumulative_cap": 4194304,
+  "cumulative_explicit_control_and_git_output_bytes": 3102191,
+  "dependency_ref_checks": [
+    {
+      "classification": "NO_MATCHING_PUBLICATION_STORE_OR_EXACT_SELECTED_BASELINE",
+      "common_dir": "/home/barberb/lift_coding/.git/modules/Mcp-Plus-Plus",
+      "comparison_main": null,
+      "genuinely_new_since_old_full_refset": null,
+      "oid": "628bb6e7b01867f3bc252a3c276c0e6ef6acd5b0",
+      "origin": "https://github.com/endomorphosis/Mcp-Plus-Plus.git",
+      "published_gitlink": "33c0c56e9423e11945837657e3a82fe865c60f91",
+      "published_gitlink_path": "Mcp-Plus-Plus",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/main",
+      "representative": "/home/barberb/lift_coding/Mcp-Plus-Plus",
+      "resolution": "PUBLISHED_DEPENDENCY_TARGET_UNAVAILABLE_IN_SOURCE_STORE"
+    },
+    {
+      "classification": "NO_MATCHING_PUBLICATION_STORE_OR_EXACT_SELECTED_BASELINE",
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/meta-wearables-dat-android",
+      "comparison_main": null,
+      "genuinely_new_since_old_full_refset": null,
+      "oid": "f4371bc9f90249d51eb07d7f8a61e8d829294f16",
+      "origin": "https://github.com/facebook/meta-wearables-dat-android",
+      "published_gitlink": "f4371bc9f90249d51eb07d7f8a61e8d829294f16",
+      "published_gitlink_path": "external/meta-wearables-dat-android",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/main",
+      "representative": "/home/barberb/lift_coding/external/meta-wearables-dat-android",
+      "resolution": "EXACT_ALREADY_PUBLISHED_DEPENDENCY_GITLINK"
+    },
+    {
+      "classification": "NO_MATCHING_PUBLICATION_STORE_OR_EXACT_SELECTED_BASELINE",
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/meta-wearables-dat-ios",
+      "comparison_main": null,
+      "genuinely_new_since_old_full_refset": null,
+      "oid": "bbae597cd1c748cd29b9375a1624a8d75b1c9e14",
+      "origin": "https://github.com/facebook/meta-wearables-dat-ios",
+      "published_gitlink": "bbae597cd1c748cd29b9375a1624a8d75b1c9e14",
+      "published_gitlink_path": "external/meta-wearables-dat-ios",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/main",
+      "representative": "/home/barberb/lift_coding/external/meta-wearables-dat-ios",
+      "resolution": "EXACT_ALREADY_PUBLISHED_DEPENDENCY_GITLINK"
+    },
+    {
+      "classification": "NO_MATCHING_PUBLICATION_STORE_OR_EXACT_SELECTED_BASELINE",
+      "common_dir": "/home/barberb/lift_coding/JevOps/.git",
+      "comparison_main": null,
+      "genuinely_new_since_old_full_refset": null,
+      "oid": "9af1ebb6a4245ce2b4e673ac277e4988da4d5caa",
+      "origin": "https://github.com/endomorphosis/JevOps",
+      "published_gitlink": "810e8bd91b14fd945e086840ccd0e2874a7910c3",
+      "published_gitlink_path": "JevOps",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/codex/legal-training-sync-20260926",
+      "representative": "/home/barberb/lift_coding/JevOps",
+      "resolution": "ANCESTOR_OF_ALREADY_PUBLISHED_DEPENDENCY_GITLINK"
+    },
+    {
+      "classification": "NO_MATCHING_PUBLICATION_STORE_OR_EXACT_SELECTED_BASELINE",
+      "common_dir": "/home/barberb/lift_coding/JevOps/.git",
+      "comparison_main": null,
+      "genuinely_new_since_old_full_refset": null,
+      "oid": "0491349bd3e92e02dc50992e79b0c0a97a521ede",
+      "origin": "https://github.com/endomorphosis/JevOps",
+      "published_gitlink": "810e8bd91b14fd945e086840ccd0e2874a7910c3",
+      "published_gitlink_path": "JevOps",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/main",
+      "representative": "/home/barberb/lift_coding/JevOps",
+      "resolution": "ANCESTOR_OF_ALREADY_PUBLISHED_DEPENDENCY_GITLINK"
+    },
+    {
+      "classification": "NO_MATCHING_PUBLICATION_STORE_OR_EXACT_SELECTED_BASELINE",
+      "common_dir": "/home/barberb/lift_coding/JevOps/.git",
+      "comparison_main": null,
+      "genuinely_new_since_old_full_refset": null,
+      "oid": "810e8bd91b14fd945e086840ccd0e2874a7910c3",
+      "origin": "https://github.com/endomorphosis/JevOps",
+      "published_gitlink": "810e8bd91b14fd945e086840ccd0e2874a7910c3",
+      "published_gitlink_path": "JevOps",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/reconcile/all-preserved-history-20261115",
+      "representative": "/home/barberb/lift_coding/JevOps",
+      "resolution": "EXACT_ALREADY_PUBLISHED_DEPENDENCY_GITLINK"
+    },
+    {
+      "classification": "NO_MATCHING_PUBLICATION_STORE_OR_EXACT_SELECTED_BASELINE",
+      "common_dir": "/home/barberb/lift_coding/JevOps/.git",
+      "comparison_main": null,
+      "genuinely_new_since_old_full_refset": null,
+      "oid": "1b8e26d2dbe3989d02737efb7e948b5012c82e42",
+      "origin": "https://github.com/endomorphosis/JevOps",
+      "published_gitlink": "810e8bd91b14fd945e086840ccd0e2874a7910c3",
+      "published_gitlink_path": "JevOps",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/sync-preserved/20261109-a0508d870fc4",
+      "representative": "/home/barberb/lift_coding/JevOps",
+      "resolution": "ANCESTOR_OF_ALREADY_PUBLISHED_DEPENDENCY_GITLINK"
+    },
+    {
+      "classification": "NO_MATCHING_PUBLICATION_STORE_OR_EXACT_SELECTED_BASELINE",
+      "common_dir": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/JevOps/.git",
+      "comparison_main": null,
+      "genuinely_new_since_old_full_refset": null,
+      "oid": "0491349bd3e92e02dc50992e79b0c0a97a521ede",
+      "origin": "https://github.com/endomorphosis/JevOps.git",
+      "published_gitlink": "810e8bd91b14fd945e086840ccd0e2874a7910c3",
+      "published_gitlink_path": "JevOps",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/main",
+      "representative": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/JevOps",
+      "resolution": "ANCESTOR_OF_ALREADY_PUBLISHED_DEPENDENCY_GITLINK"
+    },
+    {
+      "classification": "NO_MATCHING_PUBLICATION_STORE_OR_EXACT_SELECTED_BASELINE",
+      "common_dir": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/JevOps/.git",
+      "comparison_main": null,
+      "genuinely_new_since_old_full_refset": null,
+      "oid": "810e8bd91b14fd945e086840ccd0e2874a7910c3",
+      "origin": "https://github.com/endomorphosis/JevOps.git",
+      "published_gitlink": "810e8bd91b14fd945e086840ccd0e2874a7910c3",
+      "published_gitlink_path": "JevOps",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/publication/all-work-20261118",
+      "representative": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/JevOps",
+      "resolution": "EXACT_ALREADY_PUBLISHED_DEPENDENCY_GITLINK"
+    },
+    {
+      "classification": "NO_MATCHING_PUBLICATION_STORE_OR_EXACT_SELECTED_BASELINE",
+      "common_dir": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ShadowProver/.git",
+      "comparison_main": null,
+      "genuinely_new_since_old_full_refset": null,
+      "oid": "dc92f8473e9636bad93c1c1df5bc1502945d54b2",
+      "origin": "https://github.com/endomorphosis/ShadowProver.git",
+      "published_gitlink": "dc92f8473e9636bad93c1c1df5bc1502945d54b2",
+      "published_gitlink_path": "ipfs_datasets_py/logic/CEC/ShadowProver",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/publication/shadow-history-audit-20261118",
+      "representative": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ShadowProver",
+      "resolution": "EXACT_ALREADY_PUBLISHED_DEPENDENCY_GITLINK"
+    }
+  ],
+  "foreign_compact": {
+    "bytes": 15328,
+    "full9": {
+      "st_ctime_ns": "1795426678408049099",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68207372",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795426678408049099",
+      "st_nlink": "1",
+      "st_size": "15328",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/history-completion-audit/eight-foreign-origins-fresh-content-compact-v01.json",
+    "pin_kind": "observed",
+    "sha256": "f30c1dd8cd6a49423b9088811c7b87e99a681b190395c6dfea84e80231131314"
+  },
+  "full_tree_check_executed": true,
+  "implicit_Git_internal_object_IO": "Not metered; explicit stdout/stderr/control reads counted.",
+  "local_origin_aliases": [
+    {
+      "classification": "NO_MATCHING_PUBLICATION_STORE_OR_EXACT_SELECTED_BASELINE",
+      "common_dir": "/tmp/ipfs-world-prompt-compaction-20261016-ikvbzj4m/accelerate/.git",
+      "comparison_main": "de4d5a62b6fac2df61769a6461c2ada97f788208",
+      "genuinely_new_since_old_full_refset": null,
+      "mapped_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "oid": "90acc9b21c214e2f4c3a6c84769fd891cfdbd627",
+      "origin": "/home/barberb/lift_coding/external/ipfs_accelerate",
+      "read_only_alternate": "/tmp/ipfs-world-prompt-compaction-20261016-ikvbzj4m/accelerate/.git/objects",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/main",
+      "ref_still_exact": true,
+      "representative": "/tmp/ipfs-world-prompt-compaction-20261016-ikvbzj4m/accelerate",
+      "resolution": "LOCAL_ORIGIN_ALIAS_ALREADY_ANCESTRAL_TO_PUBLISHED_MAIN"
+    },
+    {
+      "classification": "NO_MATCHING_PUBLICATION_STORE_OR_EXACT_SELECTED_BASELINE",
+      "common_dir": "/tmp/ipfs-world-prompt-compaction-20261016-ikvbzj4m/datasets/.git",
+      "comparison_main": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+      "genuinely_new_since_old_full_refset": null,
+      "mapped_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "oid": "74f5d98c8ffff3c284cffddf430091b5fc4c6f8c",
+      "origin": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "read_only_alternate": "/tmp/ipfs-world-prompt-compaction-20261016-ikvbzj4m/datasets/.git/objects",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/main",
+      "ref_still_exact": true,
+      "representative": "/tmp/ipfs-world-prompt-compaction-20261016-ikvbzj4m/datasets",
+      "resolution": "LOCAL_ORIGIN_ALIAS_ALREADY_ANCESTRAL_TO_PUBLISHED_MAIN"
+    },
+    {
+      "classification": "NO_MATCHING_PUBLICATION_STORE_OR_EXACT_SELECTED_BASELINE",
+      "common_dir": "/tmp/ipfs-world-prompt-compaction-20261016-ikvbzj4m/kit/.git",
+      "comparison_main": "b15442e490dc39d046a911ea663c73c99ed3c755",
+      "genuinely_new_since_old_full_refset": null,
+      "mapped_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/kit",
+      "oid": "40c98c71b95be750509ffdb21e7e5494d91b4e79",
+      "origin": "/home/barberb/lift_coding/external/ipfs_kit",
+      "read_only_alternate": "/tmp/ipfs-world-prompt-compaction-20261016-ikvbzj4m/kit/.git/objects",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/main",
+      "ref_still_exact": true,
+      "representative": "/tmp/ipfs-world-prompt-compaction-20261016-ikvbzj4m/kit",
+      "resolution": "LOCAL_ORIGIN_ALIAS_ALREADY_ANCESTRAL_TO_PUBLISHED_MAIN"
+    },
+    {
+      "classification": "NO_MATCHING_PUBLICATION_STORE_OR_EXACT_SELECTED_BASELINE",
+      "common_dir": "/tmp/ipfs-world-prompt-compaction-20261016-p_vq7jvr/accelerate/.git",
+      "comparison_main": "de4d5a62b6fac2df61769a6461c2ada97f788208",
+      "genuinely_new_since_old_full_refset": null,
+      "mapped_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "oid": "90acc9b21c214e2f4c3a6c84769fd891cfdbd627",
+      "origin": "/home/barberb/lift_coding/external/ipfs_accelerate",
+      "read_only_alternate": "/tmp/ipfs-world-prompt-compaction-20261016-p_vq7jvr/accelerate/.git/objects",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/main",
+      "ref_still_exact": true,
+      "representative": "/tmp/ipfs-world-prompt-compaction-20261016-p_vq7jvr/accelerate",
+      "resolution": "LOCAL_ORIGIN_ALIAS_ALREADY_ANCESTRAL_TO_PUBLISHED_MAIN"
+    },
+    {
+      "classification": "NO_MATCHING_PUBLICATION_STORE_OR_EXACT_SELECTED_BASELINE",
+      "common_dir": "/tmp/ipfs-world-prompt-compaction-20261016-p_vq7jvr/datasets/.git",
+      "comparison_main": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+      "genuinely_new_since_old_full_refset": null,
+      "mapped_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "oid": "74f5d98c8ffff3c284cffddf430091b5fc4c6f8c",
+      "origin": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "read_only_alternate": "/tmp/ipfs-world-prompt-compaction-20261016-p_vq7jvr/datasets/.git/objects",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/main",
+      "ref_still_exact": true,
+      "representative": "/tmp/ipfs-world-prompt-compaction-20261016-p_vq7jvr/datasets",
+      "resolution": "LOCAL_ORIGIN_ALIAS_ALREADY_ANCESTRAL_TO_PUBLISHED_MAIN"
+    },
+    {
+      "classification": "NO_MATCHING_PUBLICATION_STORE_OR_EXACT_SELECTED_BASELINE",
+      "common_dir": "/tmp/ipfs-world-prompt-compaction-20261016-p_vq7jvr/kit/.git",
+      "comparison_main": "b15442e490dc39d046a911ea663c73c99ed3c755",
+      "genuinely_new_since_old_full_refset": null,
+      "mapped_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/kit",
+      "oid": "40c98c71b95be750509ffdb21e7e5494d91b4e79",
+      "origin": "/home/barberb/lift_coding/external/ipfs_kit",
+      "read_only_alternate": "/tmp/ipfs-world-prompt-compaction-20261016-p_vq7jvr/kit/.git/objects",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/main",
+      "ref_still_exact": true,
+      "representative": "/tmp/ipfs-world-prompt-compaction-20261016-p_vq7jvr/kit",
+      "resolution": "LOCAL_ORIGIN_ALIAS_ALREADY_ANCESTRAL_TO_PUBLISHED_MAIN"
+    },
+    {
+      "classification": "NO_MATCHING_PUBLICATION_STORE_OR_EXACT_SELECTED_BASELINE",
+      "common_dir": "/tmp/ipfs-world-prompt-compaction-20261016-qohkjce8/accelerate/.git",
+      "comparison_main": "de4d5a62b6fac2df61769a6461c2ada97f788208",
+      "genuinely_new_since_old_full_refset": null,
+      "mapped_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "oid": "90acc9b21c214e2f4c3a6c84769fd891cfdbd627",
+      "origin": "/home/barberb/lift_coding/external/ipfs_accelerate",
+      "read_only_alternate": "/tmp/ipfs-world-prompt-compaction-20261016-qohkjce8/accelerate/.git/objects",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/main",
+      "ref_still_exact": true,
+      "representative": "/tmp/ipfs-world-prompt-compaction-20261016-qohkjce8/accelerate",
+      "resolution": "LOCAL_ORIGIN_ALIAS_ALREADY_ANCESTRAL_TO_PUBLISHED_MAIN"
+    },
+    {
+      "classification": "NO_MATCHING_PUBLICATION_STORE_OR_EXACT_SELECTED_BASELINE",
+      "common_dir": "/tmp/ipfs-world-prompt-compaction-20261016-qohkjce8/datasets/.git",
+      "comparison_main": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+      "genuinely_new_since_old_full_refset": null,
+      "mapped_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "oid": "74f5d98c8ffff3c284cffddf430091b5fc4c6f8c",
+      "origin": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "read_only_alternate": "/tmp/ipfs-world-prompt-compaction-20261016-qohkjce8/datasets/.git/objects",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/main",
+      "ref_still_exact": true,
+      "representative": "/tmp/ipfs-world-prompt-compaction-20261016-qohkjce8/datasets",
+      "resolution": "LOCAL_ORIGIN_ALIAS_ALREADY_ANCESTRAL_TO_PUBLISHED_MAIN"
+    },
+    {
+      "classification": "NO_MATCHING_PUBLICATION_STORE_OR_EXACT_SELECTED_BASELINE",
+      "common_dir": "/tmp/ipfs-world-prompt-compaction-20261016-qohkjce8/kit/.git",
+      "comparison_main": "b15442e490dc39d046a911ea663c73c99ed3c755",
+      "genuinely_new_since_old_full_refset": null,
+      "mapped_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/kit",
+      "oid": "40c98c71b95be750509ffdb21e7e5494d91b4e79",
+      "origin": "/home/barberb/lift_coding/external/ipfs_kit",
+      "read_only_alternate": "/tmp/ipfs-world-prompt-compaction-20261016-qohkjce8/kit/.git/objects",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/main",
+      "ref_still_exact": true,
+      "representative": "/tmp/ipfs-world-prompt-compaction-20261016-qohkjce8/kit",
+      "resolution": "LOCAL_ORIGIN_ALIAS_ALREADY_ANCESTRAL_TO_PUBLISHED_MAIN"
+    },
+    {
+      "classification": "NO_MATCHING_PUBLICATION_STORE_OR_EXACT_SELECTED_BASELINE",
+      "common_dir": "/tmp/ipfs-world-prompt-compaction-20261016-rt7u97xh/accelerate/.git",
+      "comparison_main": "de4d5a62b6fac2df61769a6461c2ada97f788208",
+      "genuinely_new_since_old_full_refset": null,
+      "mapped_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "oid": "90acc9b21c214e2f4c3a6c84769fd891cfdbd627",
+      "origin": "/home/barberb/lift_coding/external/ipfs_accelerate",
+      "read_only_alternate": "/tmp/ipfs-world-prompt-compaction-20261016-rt7u97xh/accelerate/.git/objects",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/main",
+      "ref_still_exact": true,
+      "representative": "/tmp/ipfs-world-prompt-compaction-20261016-rt7u97xh/accelerate",
+      "resolution": "LOCAL_ORIGIN_ALIAS_ALREADY_ANCESTRAL_TO_PUBLISHED_MAIN"
+    },
+    {
+      "classification": "NO_MATCHING_PUBLICATION_STORE_OR_EXACT_SELECTED_BASELINE",
+      "common_dir": "/tmp/ipfs-world-prompt-compaction-20261016-rt7u97xh/datasets/.git",
+      "comparison_main": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+      "genuinely_new_since_old_full_refset": null,
+      "mapped_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "oid": "74f5d98c8ffff3c284cffddf430091b5fc4c6f8c",
+      "origin": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "read_only_alternate": "/tmp/ipfs-world-prompt-compaction-20261016-rt7u97xh/datasets/.git/objects",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/main",
+      "ref_still_exact": true,
+      "representative": "/tmp/ipfs-world-prompt-compaction-20261016-rt7u97xh/datasets",
+      "resolution": "LOCAL_ORIGIN_ALIAS_ALREADY_ANCESTRAL_TO_PUBLISHED_MAIN"
+    },
+    {
+      "classification": "NO_MATCHING_PUBLICATION_STORE_OR_EXACT_SELECTED_BASELINE",
+      "common_dir": "/tmp/ipfs-world-prompt-compaction-20261016-rt7u97xh/kit/.git",
+      "comparison_main": "b15442e490dc39d046a911ea663c73c99ed3c755",
+      "genuinely_new_since_old_full_refset": null,
+      "mapped_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/kit",
+      "oid": "40c98c71b95be750509ffdb21e7e5494d91b4e79",
+      "origin": "/home/barberb/lift_coding/external/ipfs_kit",
+      "read_only_alternate": "/tmp/ipfs-world-prompt-compaction-20261016-rt7u97xh/kit/.git/objects",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/main",
+      "ref_still_exact": true,
+      "representative": "/tmp/ipfs-world-prompt-compaction-20261016-rt7u97xh/kit",
+      "resolution": "LOCAL_ORIGIN_ALIAS_ALREADY_ANCESTRAL_TO_PUBLISHED_MAIN"
+    }
+  ],
+  "no_fetch_network_Source_bodies_Git_mutations_or_tests": true,
+  "nonancestor_checks": [
+    {
+      "classification": "NOT_ANCESTRAL_TO_PUBLISHED_MAIN_AND_NO_EXACT_SELECTED_BASELINE",
+      "commit_metadata": {
+        "commit": "04fbb09b4a8b34e77d11bd8da6642e0978baa02c",
+        "parents": [
+          "b242b14ee2dbf4e74c6ba88898ffc9f3b33d1809"
+        ],
+        "subject": "PGIR-013: mark todo completed",
+        "tree": "95c69c2346cc02ab085c011bf2eccff0a740b944"
+      },
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_accelerate",
+      "comparison_main": "de4d5a62b6fac2df61769a6461c2ada97f788208",
+      "comparison_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "exact_unique_reachable_object_counts": null,
+      "genuinely_new_since_old_full_refset": null,
+      "object_count_proof": "Uncovered root composition exists; root-tree absence alone does not establish unique blobs or all nested trees. Full-object reachability set difference remains required.",
+      "object_present_in_source": true,
+      "oid": "04fbb09b4a8b34e77d11bd8da6642e0978baa02c",
+      "origin": "https://github.com/endomorphosis/ipfs_accelerate_py",
+      "read_only_alternate": "/home/barberb/lift_coding/.git/modules/external/ipfs_accelerate/objects",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/archive/pgir-authority-20260817",
+      "ref_still_exact": true,
+      "representative": "/home/barberb/lift_coding/.worktrees/legal-ir-batch-git-cold-20261030",
+      "resolution": "EXACT_COMMIT_METADATA_CAPTURED_SOURCE_PRESENT",
+      "source_only_commit_root_tree_check": {
+        "all_root_trees_already_in_published_commit_history": false,
+        "commits": 28,
+        "exact_metadata_sequence_sha256": "f6b16d0db85c16275abf7283c047a6dc8b09a26ff5bfc363adc4ff3d816c6ad5",
+        "uncovered_commit_tree_bindings": [
+          {
+            "commit": "4bb7c312f9d026c69529e5831f6e96397e842b54",
+            "tree": "b9e9583d9f9a3f095f9acc24ca2a12f46f2e1b93"
+          },
+          {
+            "commit": "0e1073672eeb8b879c33618160092d65d9af8d6a",
+            "tree": "76d8b4c65533584146fb2356ea211af91c1dd3ea"
+          }
+        ],
+        "uncovered_root_tree_hashes": [
+          "76d8b4c65533584146fb2356ea211af91c1dd3ea",
+          "b9e9583d9f9a3f095f9acc24ca2a12f46f2e1b93"
+        ]
+      },
+      "unique_commit_counts": {
+        "main_not_source": 12880,
+        "source_not_main": 28
+      }
+    },
+    {
+      "classification": "NOT_ANCESTRAL_TO_PUBLISHED_MAIN_AND_NO_EXACT_SELECTED_BASELINE",
+      "commit_metadata": {
+        "commit": "d065233b1ed4f5f8ba9fa9bfb1a7d872240b3791",
+        "parents": [
+          "4ef6ff1caf7cfe3feecb5145e1ab7b6336d0b9c2"
+        ],
+        "subject": "Authorize parent search before initial worktree provisioning",
+        "tree": "8b5c23e6bc4343ee375cb1f76304af62cbecff54"
+      },
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_accelerate",
+      "comparison_main": "de4d5a62b6fac2df61769a6461c2ada97f788208",
+      "comparison_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "exact_unique_reachable_object_counts": null,
+      "genuinely_new_since_old_full_refset": null,
+      "object_count_proof": "Uncovered root composition exists; root-tree absence alone does not establish unique blobs or all nested trees. Full-object reachability set difference remains required.",
+      "object_present_in_source": true,
+      "oid": "d065233b1ed4f5f8ba9fa9bfb1a7d872240b3791",
+      "origin": "https://github.com/endomorphosis/ipfs_accelerate_py",
+      "read_only_alternate": "/home/barberb/lift_coding/.git/modules/external/ipfs_accelerate/objects",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/codex/candidate-owner-continuation-20261015",
+      "ref_still_exact": true,
+      "representative": "/home/barberb/lift_coding/.worktrees/legal-ir-batch-git-cold-20261030",
+      "resolution": "EXACT_COMMIT_METADATA_CAPTURED_SOURCE_PRESENT",
+      "source_only_commit_root_tree_check": {
+        "all_root_trees_already_in_published_commit_history": false,
+        "commits": 8,
+        "exact_metadata_sequence_sha256": "bc7687d72df58163fdf684f2d79ef005e8e65529fe392aaa384fd4f8aeeb6824",
+        "uncovered_commit_tree_bindings": [
+          {
+            "commit": "d065233b1ed4f5f8ba9fa9bfb1a7d872240b3791",
+            "tree": "8b5c23e6bc4343ee375cb1f76304af62cbecff54"
+          },
+          {
+            "commit": "4ef6ff1caf7cfe3feecb5145e1ab7b6336d0b9c2",
+            "tree": "d596354d828376e89bbae3383c70571ed1dce36d"
+          },
+          {
+            "commit": "2b8e44e28ccd5ff6c8f2a2a526c71a52929f6465",
+            "tree": "82bc7d6add9750a9e41a2db7cb671ae3b86bae94"
+          },
+          {
+            "commit": "516dd2febb93a517d384f21c9eaf4b99d4e8eaad",
+            "tree": "ff64bda95a51f620942405ce907115fd4e1db2db"
+          },
+          {
+            "commit": "f5b1d08fe22da5075e4a585d95a51d00f094333f",
+            "tree": "cc5c1c095ab9f5cefea64100295b7b4f2130b8d9"
+          },
+          {
+            "commit": "028f800ed1baeb3a20a5a8f94d5423a462159935",
+            "tree": "0d6b3194d2e337c76bc87df8e9dd04a6a5a42802"
+          },
+          {
+            "commit": "684bb7ea1a741a25a7fef4fa014ced393b5ed490",
+            "tree": "be68e7e0aefda1e1d2879cedf0f7efff3345e124"
+          },
+          {
+            "commit": "3acd8ef6aaf05356cae79c5cdbb741e804c455c5",
+            "tree": "8455a4a96c660114975a615141b5051fcaa39dc8"
+          }
+        ],
+        "uncovered_root_tree_hashes": [
+          "0d6b3194d2e337c76bc87df8e9dd04a6a5a42802",
+          "82bc7d6add9750a9e41a2db7cb671ae3b86bae94",
+          "8455a4a96c660114975a615141b5051fcaa39dc8",
+          "8b5c23e6bc4343ee375cb1f76304af62cbecff54",
+          "be68e7e0aefda1e1d2879cedf0f7efff3345e124",
+          "cc5c1c095ab9f5cefea64100295b7b4f2130b8d9",
+          "d596354d828376e89bbae3383c70571ed1dce36d",
+          "ff64bda95a51f620942405ce907115fd4e1db2db"
+        ]
+      },
+      "unique_commit_counts": {
+        "main_not_source": 995,
+        "source_not_main": 8
+      }
+    },
+    {
+      "classification": "NOT_ANCESTRAL_TO_PUBLISHED_MAIN_AND_NO_EXACT_SELECTED_BASELINE",
+      "commit_metadata": {
+        "commit": "49569f1f2a9aa233e532e92c27f74ba5c004fd48",
+        "parents": [
+          "7f80f48d1298905930b8f6c04df5ef38ef52958e"
+        ],
+        "subject": "Preserve canonical submodule links after archival history integration",
+        "tree": "4e0e8ebb25b218c51b6f3ee935b3595bed1542c6"
+      },
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_accelerate",
+      "comparison_main": "de4d5a62b6fac2df61769a6461c2ada97f788208",
+      "comparison_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "exact_unique_reachable_object_counts": null,
+      "genuinely_new_since_old_full_refset": null,
+      "object_count_proof": "Uncovered root composition exists; root-tree absence alone does not establish unique blobs or all nested trees. Full-object reachability set difference remains required.",
+      "object_present_in_source": true,
+      "oid": "49569f1f2a9aa233e532e92c27f74ba5c004fd48",
+      "origin": "https://github.com/endomorphosis/ipfs_accelerate_py",
+      "read_only_alternate": "/home/barberb/lift_coding/.git/modules/external/ipfs_accelerate/objects",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/publication/main-20261004/accelerate",
+      "ref_still_exact": true,
+      "representative": "/home/barberb/lift_coding/.worktrees/legal-ir-batch-git-cold-20261030",
+      "resolution": "EXACT_COMMIT_METADATA_CAPTURED_SOURCE_PRESENT",
+      "source_only_commit_root_tree_check": {
+        "all_root_trees_already_in_published_commit_history": false,
+        "commits": 404,
+        "exact_metadata_sequence_sha256": "cc6ea97d0c798625121640ce4123682dba110be2ee657c1531df8356bdad3b17",
+        "uncovered_commit_tree_bindings": [
+          {
+            "commit": "91508f2649c4bf7a582f28db129862cc6467adab",
+            "tree": "dd07531561c474c80ea776e84abaeb2638c6cd35"
+          },
+          {
+            "commit": "40e67c2f9e43ca687f9214d1f1883c0e086ee00c",
+            "tree": "ffbdd26e06dcc730a8e99c964d78abad92155acb"
+          },
+          {
+            "commit": "eb9694bffa380e12322a08cad93e94297e41b9d3",
+            "tree": "e1f5a1587c32d0971cb1983241b1026093f55760"
+          },
+          {
+            "commit": "248abba933e0d606b6ce22d962c60332cb6edad4",
+            "tree": "e1f5a1587c32d0971cb1983241b1026093f55760"
+          },
+          {
+            "commit": "f2fe7a6c45f49243ec5e2beb8613e2989f7dde8e",
+            "tree": "ffbdd26e06dcc730a8e99c964d78abad92155acb"
+          },
+          {
+            "commit": "5f4dfb89eb1a6290263cac28594f86bef3e57370",
+            "tree": "e1f5a1587c32d0971cb1983241b1026093f55760"
+          },
+          {
+            "commit": "04a471cec62baab2c4d5c1928c906ce4f9a7cd00",
+            "tree": "f3d286d1cee62542ca51719a9a0d5b1f2b0ad5e2"
+          },
+          {
+            "commit": "6d210b35559eeba973589457332eed1f1f341261",
+            "tree": "1c6c481953f659c0840113363b16cbe508171e34"
+          },
+          {
+            "commit": "327bb0093060be1bf07ebfcd058803d8b1d13c48",
+            "tree": "f82ca2ddeeeb75ce0f46eab205cbe8f1b6cc2d31"
+          },
+          {
+            "commit": "9fea9f355f9a2bfd8f1480b91e57554fcd7cb672",
+            "tree": "e898e8457edeefdeffc4d2f0ec7d91fbbb07a430"
+          },
+          {
+            "commit": "2eca1919cb7712b14d806accc983bbdb4f161351",
+            "tree": "1cc78dec0f58cf2515e359ee47b5cec4dfa2bd31"
+          },
+          {
+            "commit": "e57a65ca05a1bcec9929e9a878729fea48bb52c4",
+            "tree": "dd07531561c474c80ea776e84abaeb2638c6cd35"
+          },
+          {
+            "commit": "eefac4abe142e393b6053d5b43caf8245371b568",
+            "tree": "e1f5a1587c32d0971cb1983241b1026093f55760"
+          },
+          {
+            "commit": "4bb7c312f9d026c69529e5831f6e96397e842b54",
+            "tree": "b9e9583d9f9a3f095f9acc24ca2a12f46f2e1b93"
+          },
+          {
+            "commit": "0e1073672eeb8b879c33618160092d65d9af8d6a",
+            "tree": "76d8b4c65533584146fb2356ea211af91c1dd3ea"
+          },
+          {
+            "commit": "ccff4be18d4f38468b4703354321c39d059f98a3",
+            "tree": "04f859e8a76c8b56454b9eb919cc61e7c22fb366"
+          },
+          {
+            "commit": "9b33df28c885085c9b0dfd5a2c58e3143ab98e3c",
+            "tree": "04f859e8a76c8b56454b9eb919cc61e7c22fb366"
+          },
+          {
+            "commit": "aaf8cfc1007cb37ff2ec0d438b47fd992f54ba43",
+            "tree": "0bfee002e78b2bfcb95adda5f15aaa7f3c2c0da8"
+          },
+          {
+            "commit": "68f8f2b99818c6f86ec730993fedd205f73be97b",
+            "tree": "8b8d52b395aba321fce3661010bf349579507c74"
+          },
+          {
+            "commit": "df844ec817973787cef816f114d9b94f98961bb6",
+            "tree": "3c980593a17c9507d3d9f1c9403423359cdf235c"
+          },
+          {
+            "commit": "2bfe7ec446c69d0b5a3c7ec546fa4013bb5d9c4d",
+            "tree": "99aa0f15216ea0fcc9fca3677c8966171338533b"
+          },
+          {
+            "commit": "a8861ec3640ff68368c97e788690d11387f22571",
+            "tree": "f85fe89849b5f2c9da58c0d11f0b9e6ce2fb536b"
+          },
+          {
+            "commit": "730c56d2c6cca26e423336c812120064a1f75f96",
+            "tree": "057614bc7c73c4761c6fe76ecf7ecee4f93eaf66"
+          },
+          {
+            "commit": "2c6964f8874c56dd8b33a453cf25795be16b3c9a",
+            "tree": "cd36d3370adf4ddbb8f5f9635ac04354dbea9154"
+          },
+          {
+            "commit": "56fe5195f5cd31f8297033f4516d8325690c3abb",
+            "tree": "ca575f43fa831d85fa798fd2dcb50673857abbb9"
+          },
+          {
+            "commit": "bd48c6846be5fa51949a0ad333982f7667c81910",
+            "tree": "cb04fe94cbebbd592bac7968d0c7c9543a01550f"
+          },
+          {
+            "commit": "a1bd4f63f5b2c649486847f35686f94690c08260",
+            "tree": "312600760a95a8592eac468434fa1b1835930dc5"
+          },
+          {
+            "commit": "908428dbecb3c9802f5c0be96224fbdb87fd66a7",
+            "tree": "7783dee9da9fb7bbc46c00fb8376a18c115fc6f8"
+          },
+          {
+            "commit": "a147ca03affee7b15d3ec892e91e9add0e9c18de",
+            "tree": "5ff25078abababbd30a2575de86516884eaa4249"
+          },
+          {
+            "commit": "21eb84b5d5505bcfec4debb517e4aafc31a56db8",
+            "tree": "618670d50fadfc8f6ec89c1b38448fe2e9b17d18"
+          },
+          {
+            "commit": "6d3e3d8995fd0c05179f634f71c7b9d868db6b85",
+            "tree": "68b36f8da816adea42cb98cbdf8b2c148d4a5f18"
+          },
+          {
+            "commit": "b1a1b4d9a037959973c104e63afe57374db918d4",
+            "tree": "3defb1bab2e38afd5fed23961626f801baef1f1a"
+          },
+          {
+            "commit": "a047f1f9b7318cbf2d30696f72b685a934e2764d",
+            "tree": "ae345da35007a77a51c53233cfd2923a57f64bd0"
+          },
+          {
+            "commit": "d791eb4428730867a5595035ab6fb0a50528f0e2",
+            "tree": "a6660ce1fc9738a7dd7e2ab265d127a5ac618a11"
+          },
+          {
+            "commit": "89d58de42ae380852a5e178200b001c421238f13",
+            "tree": "4dddfc7cee8db8bee8c63c7c3eaad21d2ad8c33a"
+          },
+          {
+            "commit": "645ca194472fe995828e45b2e5790ed7a81abe4f",
+            "tree": "1cd16bcf80b83e186215253972f1acaf4019287d"
+          },
+          {
+            "commit": "5bfa97cddc802bf0b6e30fe0824eb9feab01f98e",
+            "tree": "4bfbf058f233d0ae6f5d3da785f0e383a6588c0c"
+          },
+          {
+            "commit": "1b6fccfcc9300ca186e2459d26534c92efdabf24",
+            "tree": "290d2b97bc8cde69daef6e3da7d4147062deba33"
+          },
+          {
+            "commit": "a9d85abdc6fe3552139233cea9c99b3baf2936f2",
+            "tree": "a9920326153c1135d366c2a6fec74908d9c0c5a6"
+          },
+          {
+            "commit": "e929f0321a5ac46be27f896ba68b2301e707234e",
+            "tree": "5945b706099d07aee893dc02bc766095bca9aff0"
+          },
+          {
+            "commit": "5a25c2e8fb451131319ff99a9c6e080e6a1bdbc0",
+            "tree": "ac5cd2b40cbe517f601ddc5acb993df1157f7f23"
+          },
+          {
+            "commit": "e88891f23d7d92fb148c63e1135bba4876f19e9b",
+            "tree": "cd0cce89960be1e623773e88e26f5b1f56527f81"
+          },
+          {
+            "commit": "2eec0cbed9296e6a21579bd2ceb6d081e361ebbb",
+            "tree": "cd0cce89960be1e623773e88e26f5b1f56527f81"
+          },
+          {
+            "commit": "2fbc0dbdf2045ccfa9e7fbde7803f1274a65121c",
+            "tree": "1dbb53e42a857e40776226745b0f66ae733b0d1c"
+          },
+          {
+            "commit": "6037f0db9d9073508dadbaa4880065b20e583927",
+            "tree": "1dbb53e42a857e40776226745b0f66ae733b0d1c"
+          },
+          {
+            "commit": "7a4aaab668072baeea165c88737a3b636cbc3766",
+            "tree": "7a443774e68c60ecc1dc16f73e268eb9ee388c59"
+          },
+          {
+            "commit": "0a4f3c09c6197a3ff2cfe1af2681fa9014a606e8",
+            "tree": "410e1a2b8ebb36906dbb1ae1370c3c435b5a48df"
+          },
+          {
+            "commit": "3f60acf359b55c6175f5f54ccf3a072904ad40d0",
+            "tree": "d01b0f945ef968e31d9df3b8a5a67d1d27c02c07"
+          },
+          {
+            "commit": "24e8bae68b508afc59178261a6b92fa30ee814ef",
+            "tree": "d01b0f945ef968e31d9df3b8a5a67d1d27c02c07"
+          },
+          {
+            "commit": "899efa29f86d9e9d91ab494d239fb9401134fdb3",
+            "tree": "7334ad946cc8c8d8eb0a69317c0fb2b92e68f301"
+          },
+          {
+            "commit": "49b5a3602cb69d72ae236875aa3c274d0a5cf434",
+            "tree": "f313b9258797c90ae2efab28ae831179c543f0f8"
+          },
+          {
+            "commit": "9589e968b419a7653eee1344dab814d7743dbfe1",
+            "tree": "0e9190424c89edfe99ebc26f5a87a4479622219b"
+          },
+          {
+            "commit": "f9bc7e60c90f3c0492f108594979de84d976aaf2",
+            "tree": "97040f35a0a243538fb1c25e4674333c20dba3af"
+          },
+          {
+            "commit": "941c0d2cb066bc0d423b54c7c8f8c56f2da0fc10",
+            "tree": "41d74f79e72663248b3c6050386fbeafd3f3d95a"
+          },
+          {
+            "commit": "788dc5361a7804c261b4f5f0c9b425508ad9ec6e",
+            "tree": "29faad7abbbb004198253708db300301dcecfb02"
+          },
+          {
+            "commit": "83a932f4ff88e53bb294adde2e84c0892fa7f9c2",
+            "tree": "1bd5a7ad42b6b48a447be784c95c9d39f7cf6ef0"
+          },
+          {
+            "commit": "0d297df299390c351c5047a6b28ba74d47202ce0",
+            "tree": "1bd5a7ad42b6b48a447be784c95c9d39f7cf6ef0"
+          },
+          {
+            "commit": "78afa28ebdeda50e36ab2ede1116a6f0db5f6dce",
+            "tree": "9192a6688a4a6248de7603aa37a9103a82bc21e7"
+          },
+          {
+            "commit": "68403111bb02a82a91323bff6deab254a6fbf920",
+            "tree": "7f4d6844643e1f911f2313bd4caff6a773b1228f"
+          },
+          {
+            "commit": "90d53682b373f8acfe79df0cf43c2c559dd272d9",
+            "tree": "b8f35e095dedee1052dcc12d7dcf368748770d10"
+          },
+          {
+            "commit": "f2393b723224d93c099f92a942bb11a64633a112",
+            "tree": "d106c101889795011bb4afefa451877bf523c628"
+          },
+          {
+            "commit": "8d3f2df9b2f672ad3cefa6b8e63f430c553c39e8",
+            "tree": "c6e8ebf8138062dbd4eea235c08ce5249d8e499f"
+          },
+          {
+            "commit": "044576da9f9ee36ffd417559056682fe6edd3f41",
+            "tree": "2e7a53c71d76bc26bad151ca3dc6488a2f4a988a"
+          },
+          {
+            "commit": "997fd27e75783ff3ad8c644e2284fa5b17e5e92e",
+            "tree": "dfb75bfca70963fca68691a3aa6817eb888a6014"
+          },
+          {
+            "commit": "44d4797ae47b7bebbfac3180a2f7bc47d38a0ace",
+            "tree": "dfb75bfca70963fca68691a3aa6817eb888a6014"
+          },
+          {
+            "commit": "7a2a1ef1ecf93936775286f1951088ada102a46b",
+            "tree": "d066d8a1a116173f2509e99738216dee092313a2"
+          },
+          {
+            "commit": "7995dc817ab14f5343ef973b0f80014ecac4f133",
+            "tree": "c4f511000a904cdbd85f216fdd284eba61dace30"
+          },
+          {
+            "commit": "d88ae51ef8ac4d1d99cbceee43bc39b0df7b2d20",
+            "tree": "c4f511000a904cdbd85f216fdd284eba61dace30"
+          },
+          {
+            "commit": "0be798bc8fd0c048a78cae37c8082b9c25f1f23f",
+            "tree": "e9d0ef04db46b683982011f79e53dbdbb5376ec1"
+          },
+          {
+            "commit": "ea6277aeb706c8d1e0e75c979c68c258da90edd3",
+            "tree": "64f683da8b6f545272471e9bc5f7cf5b53136042"
+          },
+          {
+            "commit": "424c215f3a7a8276e54a9518ff9203850dfbfe94",
+            "tree": "64f683da8b6f545272471e9bc5f7cf5b53136042"
+          },
+          {
+            "commit": "66459d36f466227984ee4cd29f76a5fe773c5db4",
+            "tree": "05412d4c5642e344339b99d132649339bcce1a20"
+          }
+        ],
+        "uncovered_root_tree_hashes": [
+          "04f859e8a76c8b56454b9eb919cc61e7c22fb366",
+          "05412d4c5642e344339b99d132649339bcce1a20",
+          "057614bc7c73c4761c6fe76ecf7ecee4f93eaf66",
+          "0bfee002e78b2bfcb95adda5f15aaa7f3c2c0da8",
+          "0e9190424c89edfe99ebc26f5a87a4479622219b",
+          "1bd5a7ad42b6b48a447be784c95c9d39f7cf6ef0",
+          "1c6c481953f659c0840113363b16cbe508171e34",
+          "1cc78dec0f58cf2515e359ee47b5cec4dfa2bd31",
+          "1cd16bcf80b83e186215253972f1acaf4019287d",
+          "1dbb53e42a857e40776226745b0f66ae733b0d1c",
+          "290d2b97bc8cde69daef6e3da7d4147062deba33",
+          "29faad7abbbb004198253708db300301dcecfb02",
+          "2e7a53c71d76bc26bad151ca3dc6488a2f4a988a",
+          "312600760a95a8592eac468434fa1b1835930dc5",
+          "3c980593a17c9507d3d9f1c9403423359cdf235c",
+          "3defb1bab2e38afd5fed23961626f801baef1f1a",
+          "410e1a2b8ebb36906dbb1ae1370c3c435b5a48df",
+          "41d74f79e72663248b3c6050386fbeafd3f3d95a",
+          "4bfbf058f233d0ae6f5d3da785f0e383a6588c0c",
+          "4dddfc7cee8db8bee8c63c7c3eaad21d2ad8c33a",
+          "5945b706099d07aee893dc02bc766095bca9aff0",
+          "5ff25078abababbd30a2575de86516884eaa4249",
+          "618670d50fadfc8f6ec89c1b38448fe2e9b17d18",
+          "64f683da8b6f545272471e9bc5f7cf5b53136042",
+          "68b36f8da816adea42cb98cbdf8b2c148d4a5f18",
+          "7334ad946cc8c8d8eb0a69317c0fb2b92e68f301",
+          "76d8b4c65533584146fb2356ea211af91c1dd3ea",
+          "7783dee9da9fb7bbc46c00fb8376a18c115fc6f8",
+          "7a443774e68c60ecc1dc16f73e268eb9ee388c59",
+          "7f4d6844643e1f911f2313bd4caff6a773b1228f",
+          "8b8d52b395aba321fce3661010bf349579507c74",
+          "9192a6688a4a6248de7603aa37a9103a82bc21e7",
+          "97040f35a0a243538fb1c25e4674333c20dba3af",
+          "99aa0f15216ea0fcc9fca3677c8966171338533b",
+          "a6660ce1fc9738a7dd7e2ab265d127a5ac618a11",
+          "a9920326153c1135d366c2a6fec74908d9c0c5a6",
+          "ac5cd2b40cbe517f601ddc5acb993df1157f7f23",
+          "ae345da35007a77a51c53233cfd2923a57f64bd0",
+          "b8f35e095dedee1052dcc12d7dcf368748770d10",
+          "b9e9583d9f9a3f095f9acc24ca2a12f46f2e1b93",
+          "c4f511000a904cdbd85f216fdd284eba61dace30",
+          "c6e8ebf8138062dbd4eea235c08ce5249d8e499f",
+          "ca575f43fa831d85fa798fd2dcb50673857abbb9",
+          "cb04fe94cbebbd592bac7968d0c7c9543a01550f",
+          "cd0cce89960be1e623773e88e26f5b1f56527f81",
+          "cd36d3370adf4ddbb8f5f9635ac04354dbea9154",
+          "d01b0f945ef968e31d9df3b8a5a67d1d27c02c07",
+          "d066d8a1a116173f2509e99738216dee092313a2",
+          "d106c101889795011bb4afefa451877bf523c628",
+          "dd07531561c474c80ea776e84abaeb2638c6cd35",
+          "dfb75bfca70963fca68691a3aa6817eb888a6014",
+          "e1f5a1587c32d0971cb1983241b1026093f55760",
+          "e898e8457edeefdeffc4d2f0ec7d91fbbb07a430",
+          "e9d0ef04db46b683982011f79e53dbdbb5376ec1",
+          "f313b9258797c90ae2efab28ae831179c543f0f8",
+          "f3d286d1cee62542ca51719a9a0d5b1f2b0ad5e2",
+          "f82ca2ddeeeb75ce0f46eab205cbe8f1b6cc2d31",
+          "f85fe89849b5f2c9da58c0d11f0b9e6ce2fb536b",
+          "ffbdd26e06dcc730a8e99c964d78abad92155acb"
+        ]
+      },
+      "unique_commit_counts": {
+        "main_not_source": 2000,
+        "source_not_main": 404
+      }
+    },
+    {
+      "classification": "NOT_ANCESTRAL_TO_PUBLISHED_MAIN_AND_NO_EXACT_SELECTED_BASELINE",
+      "commit_metadata": {
+        "commit": "dbacb17e3ca75042aca45061ebd1a4b8a646ecfc",
+        "parents": [
+          "7b5cfb016defc52528689fe80df6f8de7bba1dc2"
+        ],
+        "subject": "fix(legal-ir): allow exactly pinned empty validation sources",
+        "tree": "52b454c7694fa660d0bbf70696cee20d3bb42636"
+      },
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets",
+      "comparison_main": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+      "comparison_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "exact_unique_reachable_object_counts": null,
+      "genuinely_new_since_old_full_refset": null,
+      "object_count_proof": "Uncovered root composition exists; root-tree absence alone does not establish unique blobs or all nested trees. Full-object reachability set difference remains required.",
+      "object_present_in_source": true,
+      "oid": "dbacb17e3ca75042aca45061ebd1a4b8a646ecfc",
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
+      "read_only_alternate": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/objects",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/agent/legal-ir-empty-source-guard-20261027",
+      "ref_still_exact": true,
+      "representative": "/home/barberb/lift_coding/.worktrees/legal-ir-0101-inventory-union-20261029",
+      "resolution": "EXACT_COMMIT_METADATA_CAPTURED_SOURCE_PRESENT",
+      "source_only_commit_root_tree_check": {
+        "all_root_trees_already_in_published_commit_history": false,
+        "commits": 1,
+        "exact_metadata_sequence_sha256": "fc3b14278132bd0cfe1120e17269e03d025a940b63fe562e0d8ed24c38777860",
+        "uncovered_commit_tree_bindings": [
+          {
+            "commit": "dbacb17e3ca75042aca45061ebd1a4b8a646ecfc",
+            "tree": "52b454c7694fa660d0bbf70696cee20d3bb42636"
+          }
+        ],
+        "uncovered_root_tree_hashes": [
+          "52b454c7694fa660d0bbf70696cee20d3bb42636"
+        ]
+      },
+      "unique_commit_counts": {
+        "main_not_source": 860,
+        "source_not_main": 1
+      }
+    },
+    {
+      "classification": "NOT_ANCESTRAL_TO_PUBLISHED_MAIN_AND_NO_EXACT_SELECTED_BASELINE",
+      "commit_metadata": {
+        "commit": "ac7d085a34258281ccab0e07df73a0b3d64d50cc",
+        "parents": [
+          "9eeed0d159d4fb7c2287143d64ec4d9ddbbb04f6"
+        ],
+        "subject": "feat(legal-ir): support scoped mixed relational graph transport",
+        "tree": "2ad51c922cd4659c05af948c88a78846eb1e8a38"
+      },
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets",
+      "comparison_main": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+      "comparison_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "exact_unique_reachable_object_counts": null,
+      "genuinely_new_since_old_full_refset": null,
+      "object_count_proof": "Uncovered root composition exists; root-tree absence alone does not establish unique blobs or all nested trees. Full-object reachability set difference remains required.",
+      "object_present_in_source": true,
+      "oid": "ac7d085a34258281ccab0e07df73a0b3d64d50cc",
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
+      "read_only_alternate": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/objects",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/agent/legal-ir-mixed-graph-20261027",
+      "ref_still_exact": true,
+      "representative": "/home/barberb/lift_coding/.worktrees/legal-ir-0101-inventory-union-20261029",
+      "resolution": "EXACT_COMMIT_METADATA_CAPTURED_SOURCE_PRESENT",
+      "source_only_commit_root_tree_check": {
+        "all_root_trees_already_in_published_commit_history": false,
+        "commits": 1,
+        "exact_metadata_sequence_sha256": "2172cf5f6efed7a1077780a12f865bb9d65c59cb90f055687a09ad2bb999dbb4",
+        "uncovered_commit_tree_bindings": [
+          {
+            "commit": "ac7d085a34258281ccab0e07df73a0b3d64d50cc",
+            "tree": "2ad51c922cd4659c05af948c88a78846eb1e8a38"
+          }
+        ],
+        "uncovered_root_tree_hashes": [
+          "2ad51c922cd4659c05af948c88a78846eb1e8a38"
+        ]
+      },
+      "unique_commit_counts": {
+        "main_not_source": 864,
+        "source_not_main": 1
+      }
+    },
+    {
+      "classification": "NOT_ANCESTRAL_TO_PUBLISHED_MAIN_AND_NO_EXACT_SELECTED_BASELINE",
+      "commit_metadata": {
+        "commit": "d90fb1d391d9c6973431df67af2227df7d1834bb",
+        "parents": [
+          "c8ec1b9f4288614c422e68c2e0e4a8a772c6ab2f"
+        ],
+        "subject": "feat(legal-ir): port bounded source review dossier preparation",
+        "tree": "e6bde9931de277569ecbe47b6498e590d867db8a"
+      },
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets",
+      "comparison_main": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+      "comparison_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "exact_unique_reachable_object_counts": null,
+      "genuinely_new_since_old_full_refset": null,
+      "object_count_proof": "Uncovered root composition exists; root-tree absence alone does not establish unique blobs or all nested trees. Full-object reachability set difference remains required.",
+      "object_present_in_source": true,
+      "oid": "d90fb1d391d9c6973431df67af2227df7d1834bb",
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
+      "read_only_alternate": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/objects",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/agent/legal-ir-source-dossier-port-20261027",
+      "ref_still_exact": true,
+      "representative": "/home/barberb/lift_coding/.worktrees/legal-ir-0101-inventory-union-20261029",
+      "resolution": "EXACT_COMMIT_METADATA_CAPTURED_SOURCE_PRESENT",
+      "source_only_commit_root_tree_check": {
+        "all_root_trees_already_in_published_commit_history": false,
+        "commits": 1,
+        "exact_metadata_sequence_sha256": "1b8e66dc494083e97d90986e385b531d0ef8a3155b02c024227a080cce25f03e",
+        "uncovered_commit_tree_bindings": [
+          {
+            "commit": "d90fb1d391d9c6973431df67af2227df7d1834bb",
+            "tree": "e6bde9931de277569ecbe47b6498e590d867db8a"
+          }
+        ],
+        "uncovered_root_tree_hashes": [
+          "e6bde9931de277569ecbe47b6498e590d867db8a"
+        ]
+      },
+      "unique_commit_counts": {
+        "main_not_source": 862,
+        "source_not_main": 1
+      }
+    },
+    {
+      "classification": "NOT_ANCESTRAL_TO_PUBLISHED_MAIN_AND_NO_EXACT_SELECTED_BASELINE",
+      "commit_metadata": {
+        "commit": "362650fc688ba34d2de6b95f32e97f7914edae4d",
+        "parents": [
+          "2c34992ba9b511f6994d1398e4c1eba9d0440ba0"
+        ],
+        "subject": "Add persisted four-tensor F18 checkpoints and bounded continuation",
+        "tree": "c930249df8a5ca5e3a530aaa49998ae07bfda172"
+      },
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets",
+      "comparison_main": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+      "comparison_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "exact_unique_reachable_object_counts": null,
+      "genuinely_new_since_old_full_refset": null,
+      "object_count_proof": "Uncovered root composition exists; root-tree absence alone does not establish unique blobs or all nested trees. Full-object reachability set difference remains required.",
+      "object_present_in_source": true,
+      "oid": "362650fc688ba34d2de6b95f32e97f7914edae4d",
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
+      "read_only_alternate": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/objects",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/legal-ir/conditions-persisted-resume-20261027",
+      "ref_still_exact": true,
+      "representative": "/home/barberb/lift_coding/.worktrees/legal-ir-0101-inventory-union-20261029",
+      "resolution": "EXACT_COMMIT_METADATA_CAPTURED_SOURCE_PRESENT",
+      "source_only_commit_root_tree_check": {
+        "all_root_trees_already_in_published_commit_history": false,
+        "commits": 1,
+        "exact_metadata_sequence_sha256": "05733c83f32d95abd18dd2792da7b5c14ae3ff8c3ef000be41191705c1513a7f",
+        "uncovered_commit_tree_bindings": [
+          {
+            "commit": "362650fc688ba34d2de6b95f32e97f7914edae4d",
+            "tree": "c930249df8a5ca5e3a530aaa49998ae07bfda172"
+          }
+        ],
+        "uncovered_root_tree_hashes": [
+          "c930249df8a5ca5e3a530aaa49998ae07bfda172"
+        ]
+      },
+      "unique_commit_counts": {
+        "main_not_source": 836,
+        "source_not_main": 1
+      }
+    },
+    {
+      "classification": "NOT_ANCESTRAL_TO_PUBLISHED_MAIN_AND_NO_EXACT_SELECTED_BASELINE",
+      "commit_metadata": {
+        "commit": "5eedd23dd8b8ae4e2cac1716f00f1fcaf19a2801",
+        "parents": [
+          "c028a2079a88720df8a50d2ccd2e479caa8bc379"
+        ],
+        "subject": "Restore complete pinned canonical source tree after archival history integration",
+        "tree": "c0aa5ae10f9c490069f0dac5f3c856f7e270e953"
+      },
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets",
+      "comparison_main": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+      "comparison_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "exact_unique_reachable_object_counts": null,
+      "genuinely_new_since_old_full_refset": null,
+      "object_count_proof": "Uncovered root composition exists; root-tree absence alone does not establish unique blobs or all nested trees. Full-object reachability set difference remains required.",
+      "object_present_in_source": true,
+      "oid": "5eedd23dd8b8ae4e2cac1716f00f1fcaf19a2801",
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
+      "read_only_alternate": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/objects",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/publication/main-20261004/datasets",
+      "ref_still_exact": true,
+      "representative": "/home/barberb/lift_coding/.worktrees/legal-ir-0101-inventory-union-20261029",
+      "resolution": "EXACT_COMMIT_METADATA_CAPTURED_SOURCE_PRESENT",
+      "source_only_commit_root_tree_check": {
+        "all_root_trees_already_in_published_commit_history": false,
+        "commits": 48,
+        "exact_metadata_sequence_sha256": "0f79d3497f034299b7e765c265a836228618c05354a18222f8e277c74e39acfa",
+        "uncovered_commit_tree_bindings": [
+          {
+            "commit": "b8a9bb35a8234d1c12204f2bae34d2a0c2635056",
+            "tree": "6151839a7cccba1a3e6009218d2d3cbe3e102dd9"
+          }
+        ],
+        "uncovered_root_tree_hashes": [
+          "6151839a7cccba1a3e6009218d2d3cbe3e102dd9"
+        ]
+      },
+      "unique_commit_counts": {
+        "main_not_source": 1567,
+        "source_not_main": 48
+      }
+    },
+    {
+      "classification": "NOT_ANCESTRAL_TO_PUBLISHED_MAIN_AND_NO_EXACT_SELECTED_BASELINE",
+      "commit_metadata": {
+        "commit": "23540627b1cf6515df0fd84c9417b4cbdb91234a",
+        "parents": [
+          "47413d75e8ab095ad7bd8c946ba231a91432b23b"
+        ],
+        "subject": "Restore complete selected canonical source after main refresh",
+        "tree": "80bf51a72b166224b6eddbfa4990016fb3dc0f4e"
+      },
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets",
+      "comparison_main": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+      "comparison_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "exact_unique_reachable_object_counts": null,
+      "genuinely_new_since_old_full_refset": null,
+      "object_count_proof": "Uncovered root composition exists; root-tree absence alone does not establish unique blobs or all nested trees. Full-object reachability set difference remains required.",
+      "object_present_in_source": true,
+      "oid": "23540627b1cf6515df0fd84c9417b4cbdb91234a",
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
+      "read_only_alternate": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/objects",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/publication/main-refresh-20261004/datasets-01",
+      "ref_still_exact": true,
+      "representative": "/home/barberb/lift_coding/.worktrees/legal-ir-0101-inventory-union-20261029",
+      "resolution": "EXACT_COMMIT_METADATA_CAPTURED_SOURCE_PRESENT",
+      "source_only_commit_root_tree_check": {
+        "all_root_trees_already_in_published_commit_history": false,
+        "commits": 50,
+        "exact_metadata_sequence_sha256": "da11225a7da560a22edde06c3656cc70fc72ab12539d692642c31dabbd4d58fc",
+        "uncovered_commit_tree_bindings": [
+          {
+            "commit": "b8a9bb35a8234d1c12204f2bae34d2a0c2635056",
+            "tree": "6151839a7cccba1a3e6009218d2d3cbe3e102dd9"
+          }
+        ],
+        "uncovered_root_tree_hashes": [
+          "6151839a7cccba1a3e6009218d2d3cbe3e102dd9"
+        ]
+      },
+      "unique_commit_counts": {
+        "main_not_source": 1566,
+        "source_not_main": 50
+      }
+    },
+    {
+      "classification": "NOT_ANCESTRAL_TO_PUBLISHED_MAIN_AND_NO_EXACT_SELECTED_BASELINE",
+      "commit_metadata": {
+        "commit": "b8a9bb35a8234d1c12204f2bae34d2a0c2635056",
+        "parents": [
+          "d5238def256d1c352793ee7d977e6b17b6d8cbee"
+        ],
+        "subject": "Preserve local source and tests before main reconciliation",
+        "tree": "6151839a7cccba1a3e6009218d2d3cbe3e102dd9"
+      },
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets",
+      "comparison_main": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+      "comparison_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "exact_unique_reachable_object_counts": null,
+      "genuinely_new_since_old_full_refset": null,
+      "object_count_proof": "Uncovered root composition exists; root-tree absence alone does not establish unique blobs or all nested trees. Full-object reachability set difference remains required.",
+      "object_present_in_source": true,
+      "oid": "b8a9bb35a8234d1c12204f2bae34d2a0c2635056",
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
+      "read_only_alternate": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/objects",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/recovery/local-source-20261004",
+      "ref_still_exact": true,
+      "representative": "/home/barberb/lift_coding/.worktrees/legal-ir-0101-inventory-union-20261029",
+      "resolution": "EXACT_COMMIT_METADATA_CAPTURED_SOURCE_PRESENT",
+      "source_only_commit_root_tree_check": {
+        "all_root_trees_already_in_published_commit_history": false,
+        "commits": 1,
+        "exact_metadata_sequence_sha256": "1fd316cea2047dc58e2efc88c7aa050a45112055d40c75cff85805f1f7a53525",
+        "uncovered_commit_tree_bindings": [
+          {
+            "commit": "b8a9bb35a8234d1c12204f2bae34d2a0c2635056",
+            "tree": "6151839a7cccba1a3e6009218d2d3cbe3e102dd9"
+          }
+        ],
+        "uncovered_root_tree_hashes": [
+          "6151839a7cccba1a3e6009218d2d3cbe3e102dd9"
+        ]
+      },
+      "unique_commit_counts": {
+        "main_not_source": 5251,
+        "source_not_main": 1
+      }
+    },
+    {
+      "classification": "NOT_ANCESTRAL_TO_PUBLISHED_MAIN_AND_NO_EXACT_SELECTED_BASELINE",
+      "commit_metadata": {
+        "commit": "3a8bd9e948abb77f7d228c9ff8554200da124471",
+        "parents": [
+          "798515b398d1f91f9b4f2ba1b308495f6b289a08"
+        ],
+        "subject": "LIRAE-CONT-OCCURRENCE-VALIDATE-01: Validate retained occurrence-context fixture evidence without rerunning it",
+        "tree": "b640a0e3bdc9abbaa075800a224708db2505ca28"
+      },
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets",
+      "comparison_main": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+      "comparison_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "exact_unique_reachable_object_counts": null,
+      "genuinely_new_since_old_full_refset": null,
+      "object_count_proof": "Uncovered root composition exists; root-tree absence alone does not establish unique blobs or all nested trees. Full-object reachability set difference remains required.",
+      "object_present_in_source": true,
+      "oid": "3a8bd9e948abb77f7d228c9ff8554200da124471",
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
+      "read_only_alternate": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/objects",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/rescue/lirae-cont-occurrence-validate-01-4dbe3ea85d76-attempt-1-1793140618-failed-validation",
+      "ref_still_exact": true,
+      "representative": "/home/barberb/lift_coding/.worktrees/legal-ir-0101-inventory-union-20261029",
+      "resolution": "EXACT_COMMIT_METADATA_CAPTURED_SOURCE_PRESENT",
+      "source_only_commit_root_tree_check": {
+        "all_root_trees_already_in_published_commit_history": false,
+        "commits": 1,
+        "exact_metadata_sequence_sha256": "1816fc47eef2d504efc7187fc8ed68e6ae1f87e1b3600f7d57b813591d3a7ec4",
+        "uncovered_commit_tree_bindings": [
+          {
+            "commit": "3a8bd9e948abb77f7d228c9ff8554200da124471",
+            "tree": "b640a0e3bdc9abbaa075800a224708db2505ca28"
+          }
+        ],
+        "uncovered_root_tree_hashes": [
+          "b640a0e3bdc9abbaa075800a224708db2505ca28"
+        ]
+      },
+      "unique_commit_counts": {
+        "main_not_source": 421,
+        "source_not_main": 1
+      }
+    },
+    {
+      "classification": "NOT_ANCESTRAL_TO_PUBLISHED_MAIN_AND_NO_EXACT_SELECTED_BASELINE",
+      "commit_metadata": {
+        "commit": "9c08f5efea82f112f3854f9798025a7a5d0d0ceb",
+        "parents": [
+          "798515b398d1f91f9b4f2ba1b308495f6b289a08"
+        ],
+        "subject": "LIRAE-CONT-OCCURRENCE-VALIDATE-01: Validate retained occurrence-context fixture evidence without rerunning it",
+        "tree": "b640a0e3bdc9abbaa075800a224708db2505ca28"
+      },
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets",
+      "comparison_main": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+      "comparison_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "exact_unique_reachable_object_counts": null,
+      "genuinely_new_since_old_full_refset": null,
+      "object_count_proof": "Uncovered root composition exists; root-tree absence alone does not establish unique blobs or all nested trees. Full-object reachability set difference remains required.",
+      "object_present_in_source": true,
+      "oid": "9c08f5efea82f112f3854f9798025a7a5d0d0ceb",
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
+      "read_only_alternate": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/objects",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/rescue/lirae-cont-occurrence-validate-01-4dbe3ea85d76-attempt-2-1793140938-failed-validation",
+      "ref_still_exact": true,
+      "representative": "/home/barberb/lift_coding/.worktrees/legal-ir-0101-inventory-union-20261029",
+      "resolution": "EXACT_COMMIT_METADATA_CAPTURED_SOURCE_PRESENT",
+      "source_only_commit_root_tree_check": {
+        "all_root_trees_already_in_published_commit_history": false,
+        "commits": 1,
+        "exact_metadata_sequence_sha256": "b149233b722add07a82a27baf693f2c46a107bad46aec47350f37118e4496dde",
+        "uncovered_commit_tree_bindings": [
+          {
+            "commit": "9c08f5efea82f112f3854f9798025a7a5d0d0ceb",
+            "tree": "b640a0e3bdc9abbaa075800a224708db2505ca28"
+          }
+        ],
+        "uncovered_root_tree_hashes": [
+          "b640a0e3bdc9abbaa075800a224708db2505ca28"
+        ]
+      },
+      "unique_commit_counts": {
+        "main_not_source": 421,
+        "source_not_main": 1
+      }
+    },
+    {
+      "classification": "NOT_ANCESTRAL_TO_PUBLISHED_MAIN_AND_NO_EXACT_SELECTED_BASELINE",
+      "commit_metadata": {
+        "commit": "5b2cbd94fe7d1b850da8cb22ec973caf2bb4badf",
+        "parents": [
+          "798515b398d1f91f9b4f2ba1b308495f6b289a08"
+        ],
+        "subject": "LIRAE-CONT-VALIDATION-LIFECYCLE-VALIDATE-01: Validate retained constructor-refusal and lease-timeout lifecycle evidence",
+        "tree": "91baa394c6631d99e2b46bcb777b5482a47e19b1"
+      },
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets",
+      "comparison_main": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+      "comparison_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "exact_unique_reachable_object_counts": null,
+      "genuinely_new_since_old_full_refset": null,
+      "object_count_proof": "Uncovered root composition exists; root-tree absence alone does not establish unique blobs or all nested trees. Full-object reachability set difference remains required.",
+      "object_present_in_source": true,
+      "oid": "5b2cbd94fe7d1b850da8cb22ec973caf2bb4badf",
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
+      "read_only_alternate": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/objects",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/rescue/lirae-cont-validation-lifecycle-validate-01-f2f772879049-attempt-1-1793140613-failed-validation",
+      "ref_still_exact": true,
+      "representative": "/home/barberb/lift_coding/.worktrees/legal-ir-0101-inventory-union-20261029",
+      "resolution": "EXACT_COMMIT_METADATA_CAPTURED_SOURCE_PRESENT",
+      "source_only_commit_root_tree_check": {
+        "all_root_trees_already_in_published_commit_history": false,
+        "commits": 1,
+        "exact_metadata_sequence_sha256": "a9cb4c26cdbfbfc11e9e8605424f93f75bf4309db991475fa4f84a271db6de3c",
+        "uncovered_commit_tree_bindings": [
+          {
+            "commit": "5b2cbd94fe7d1b850da8cb22ec973caf2bb4badf",
+            "tree": "91baa394c6631d99e2b46bcb777b5482a47e19b1"
+          }
+        ],
+        "uncovered_root_tree_hashes": [
+          "91baa394c6631d99e2b46bcb777b5482a47e19b1"
+        ]
+      },
+      "unique_commit_counts": {
+        "main_not_source": 421,
+        "source_not_main": 1
+      }
+    },
+    {
+      "classification": "NOT_ANCESTRAL_TO_PUBLISHED_MAIN_AND_NO_EXACT_SELECTED_BASELINE",
+      "commit_metadata": {
+        "commit": "d59c140ca7034bbea101413ac275deb771ecd840",
+        "parents": [
+          "798515b398d1f91f9b4f2ba1b308495f6b289a08"
+        ],
+        "subject": "LIRAE-CONT-VALIDATION-LIFECYCLE-VALIDATE-01: Validate retained constructor-refusal and lease-timeout lifecycle evidence",
+        "tree": "91baa394c6631d99e2b46bcb777b5482a47e19b1"
+      },
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets",
+      "comparison_main": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+      "comparison_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+      "exact_unique_reachable_object_counts": null,
+      "genuinely_new_since_old_full_refset": null,
+      "object_count_proof": "Uncovered root composition exists; root-tree absence alone does not establish unique blobs or all nested trees. Full-object reachability set difference remains required.",
+      "object_present_in_source": true,
+      "oid": "d59c140ca7034bbea101413ac275deb771ecd840",
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
+      "read_only_alternate": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/objects",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/rescue/lirae-cont-validation-lifecycle-validate-01-f2f772879049-attempt-2-1793140934-failed-validation",
+      "ref_still_exact": true,
+      "representative": "/home/barberb/lift_coding/.worktrees/legal-ir-0101-inventory-union-20261029",
+      "resolution": "EXACT_COMMIT_METADATA_CAPTURED_SOURCE_PRESENT",
+      "source_only_commit_root_tree_check": {
+        "all_root_trees_already_in_published_commit_history": false,
+        "commits": 1,
+        "exact_metadata_sequence_sha256": "09aac639e3bf59c06fcd7a49fb70784edc4ae34bbb1bc4f884855e5aa99adec1",
+        "uncovered_commit_tree_bindings": [
+          {
+            "commit": "d59c140ca7034bbea101413ac275deb771ecd840",
+            "tree": "91baa394c6631d99e2b46bcb777b5482a47e19b1"
+          }
+        ],
+        "uncovered_root_tree_hashes": [
+          "91baa394c6631d99e2b46bcb777b5482a47e19b1"
+        ]
+      },
+      "unique_commit_counts": {
+        "main_not_source": 421,
+        "source_not_main": 1
+      }
+    },
+    {
+      "classification": "OID_UNAVAILABLE_IN_PUBLICATION_STORE_NO_FETCH",
+      "commit_metadata": {
+        "commit": "11596bc53c2118319121626109b743c4eaa92c88",
+        "parents": [
+          "bb47ea2455e011ccad4cd7b8c5439ccebd59b9cf",
+          "8a54a73e9decbe41a056a69ec9f102812f45e186",
+          "d065233b1ed4f5f8ba9fa9bfb1a7d872240b3791",
+          "79f414af2c34a88a656d774544882f74e0f60ebe",
+          "fe166e5d8af6840c883cf06e0bc1b95de78a656f",
+          "5f7f66ed700a3dc24eebd7fd1f7bc2837a581d15",
+          "d31a9c94217a56123111d530107983d0c6f8a171",
+          "b065279895bb621278b98e40cd022816420b7712",
+          "d965474493c68d7c3312f7a2cc516ab67ef01f9f",
+          "7af881a0b3b17dd07b31b0448aa50b2b3c14f79c",
+          "91f92372a697ed0b089601ced68b8457edd87761",
+          "967320589d547216a92bb12d8d25144842d4e915",
+          "f0e55c878e3f06d2a18b62572374d60c5af5a28a",
+          "ce45568fb1613426f5eebf163d0d51fffda6ea72",
+          "95954de8f9fdca3a24518bffbdae943107de761c",
+          "dff3ffb194ca9789cbcf415e623692a85fdbe0ca",
+          "789e0e3efef140fb2764374a3cf93fc82ec22815"
+        ],
+        "subject": "UNSELECTED / UNADOPTED historical work preservation preparation",
+        "tree": "e6ac550dfacb1a953b7afb4f75dc5c7a7b510919"
+      },
+      "common_dir": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ipfs_accelerate_py/.git",
+      "comparison_main": "de4d5a62b6fac2df61769a6461c2ada97f788208",
+      "comparison_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "exact_unique_reachable_object_counts": null,
+      "genuinely_new_since_old_full_refset": null,
+      "object_count_proof": "Uncovered root composition exists; root-tree absence alone does not establish unique blobs or all nested trees. Full-object reachability set difference remains required.",
+      "object_present_in_source": true,
+      "oid": "11596bc53c2118319121626109b743c4eaa92c88",
+      "origin": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+      "read_only_alternate": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ipfs_accelerate_py/.git/objects",
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/prepare/all-work-history-20261118-UNSELECTED-accelerate-v01",
+      "ref_still_exact": true,
+      "representative": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ipfs_accelerate_py",
+      "resolution": "EXACT_COMMIT_METADATA_CAPTURED_SOURCE_PRESENT",
+      "source_only_commit_root_tree_check": {
+        "all_root_trees_already_in_published_commit_history": false,
+        "commits": 9,
+        "exact_metadata_sequence_sha256": "11e30dc706587061221e4737274462ee259b3bc73a9b51a0dd301ec0811d4578",
+        "uncovered_commit_tree_bindings": [
+          {
+            "commit": "d065233b1ed4f5f8ba9fa9bfb1a7d872240b3791",
+            "tree": "8b5c23e6bc4343ee375cb1f76304af62cbecff54"
+          },
+          {
+            "commit": "4ef6ff1caf7cfe3feecb5145e1ab7b6336d0b9c2",
+            "tree": "d596354d828376e89bbae3383c70571ed1dce36d"
+          },
+          {
+            "commit": "2b8e44e28ccd5ff6c8f2a2a526c71a52929f6465",
+            "tree": "82bc7d6add9750a9e41a2db7cb671ae3b86bae94"
+          },
+          {
+            "commit": "516dd2febb93a517d384f21c9eaf4b99d4e8eaad",
+            "tree": "ff64bda95a51f620942405ce907115fd4e1db2db"
+          },
+          {
+            "commit": "f5b1d08fe22da5075e4a585d95a51d00f094333f",
+            "tree": "cc5c1c095ab9f5cefea64100295b7b4f2130b8d9"
+          },
+          {
+            "commit": "028f800ed1baeb3a20a5a8f94d5423a462159935",
+            "tree": "0d6b3194d2e337c76bc87df8e9dd04a6a5a42802"
+          },
+          {
+            "commit": "684bb7ea1a741a25a7fef4fa014ced393b5ed490",
+            "tree": "be68e7e0aefda1e1d2879cedf0f7efff3345e124"
+          },
+          {
+            "commit": "3acd8ef6aaf05356cae79c5cdbb741e804c455c5",
+            "tree": "8455a4a96c660114975a615141b5051fcaa39dc8"
+          }
+        ],
+        "uncovered_root_tree_hashes": [
+          "0d6b3194d2e337c76bc87df8e9dd04a6a5a42802",
+          "82bc7d6add9750a9e41a2db7cb671ae3b86bae94",
+          "8455a4a96c660114975a615141b5051fcaa39dc8",
+          "8b5c23e6bc4343ee375cb1f76304af62cbecff54",
+          "be68e7e0aefda1e1d2879cedf0f7efff3345e124",
+          "cc5c1c095ab9f5cefea64100295b7b4f2130b8d9",
+          "d596354d828376e89bbae3383c70571ed1dce36d",
+          "ff64bda95a51f620942405ce907115fd4e1db2db"
+        ]
+      },
+      "unique_commit_counts": {
+        "main_not_source": 19,
+        "source_not_main": 9
+      }
+    }
+  ],
+  "original_3_control_observed_SHA256": {
+    "all-initialized-other-refs-compact-v01.json": "b876687b5766d49f8e47159453c5b40b33198e45493e8102f4d7fd3d84199247",
+    "remaining-object-history-compact-completion-v01.json": "09b715b8f60eb28716ad7f5f593dd18631f6f943e58b97c49c9ebbdf9137183c",
+    "root-kit-swiss-reachability-audit-v01.json": "e321d184f7cfb38b533ccf9d917754742daa0db341f49d0ce09ddd87ea35a58c"
+  },
+  "prior_cumulative_explicit_bytes": 1241323,
+  "published_manifest": {
+    "bytes": 138098,
+    "git_blob_path": "docs/reconciliation/dependency-worktree-preservation-20261123/manifest.json",
+    "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/root",
+    "sha256": "1cdfc47e4ed907b523f395f36f11412fb4a7c805b64ed532a21865a12973d4dd"
+  },
+  "published_manifest_status_qualification": "Actual immutable blob is present in current published Root commit; embedded committed:false/pushed:false are retained historical preparation fields. NOT_ADOPTED remains binding.",
+  "published_root_tree_metadata": {
+    "accelerate": {
+      "commit_count": 18781,
+      "distinct_root_trees": 15500,
+      "root_tree_output_upper_bytes": 770021,
+      "root_tree_sequence_sha256": "7aab16b61e8de33dfae7f43172e969af31d489aacc426da3ed87e97d2cd0c3fb"
+    },
+    "datasets": {
+      "commit_count": 14784,
+      "distinct_root_trees": 12253,
+      "root_tree_output_upper_bytes": 606144,
+      "root_tree_sequence_sha256": "96d128602f04daa8e0c0e74a9341c93eb1c88da72586a6330897edf0e599f99f"
+    }
+  },
+  "quality_pair_checks": [
+    {
+      "basis": "Commit subject: Fixed bounded arithmetic repair fixture; paths calc.py and test_acceptance.py; no origin; same root commit in both arms.",
+      "classification": "NO_MATCHING_PUBLICATION_STORE_OR_EXACT_SELECTED_BASELINE",
+      "commit_metadata": {
+        "commit": "0b32e1daaf0c9a604dd2d1244786472c0fff6d33",
+        "parents": [],
+        "subject": "Fixed bounded arithmetic repair fixture",
+        "tree": "5fcecc7fc756e6a5244b795510237abaf77829c4"
+      },
+      "common_dir": "/tmp/ipfs-world-quality-pair-1000-20261015-01/arm-0000/.git",
+      "comparison_main": null,
+      "genuinely_new_since_old_full_refset": null,
+      "limitations": "Source bodies, test behavior, adoption, and published preservation were not inspected or inferred.",
+      "oid": "0b32e1daaf0c9a604dd2d1244786472c0fff6d33",
+      "origin": null,
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/master",
+      "ref_still_exact": true,
+      "representative": "/tmp/ipfs-world-quality-pair-1000-20261015-01/arm-0000",
+      "resolution": "BOUNDED_ARITHMETIC_REPAIR_FIXTURE_BY_LITERAL_COMMIT_AND_TWO_TREE_PATHS",
+      "tree_pathnames": [
+        "calc.py",
+        "test_acceptance.py"
+      ]
+    },
+    {
+      "basis": "Commit subject: Fixed bounded arithmetic repair fixture; paths calc.py and test_acceptance.py; no origin; same root commit in both arms.",
+      "classification": "NO_MATCHING_PUBLICATION_STORE_OR_EXACT_SELECTED_BASELINE",
+      "commit_metadata": {
+        "commit": "0b32e1daaf0c9a604dd2d1244786472c0fff6d33",
+        "parents": [],
+        "subject": "Fixed bounded arithmetic repair fixture",
+        "tree": "5fcecc7fc756e6a5244b795510237abaf77829c4"
+      },
+      "common_dir": "/tmp/ipfs-world-quality-pair-1000-20261015-01/arm-0001/.git",
+      "comparison_main": null,
+      "genuinely_new_since_old_full_refset": null,
+      "limitations": "Source bodies, test behavior, adoption, and published preservation were not inspected or inferred.",
+      "oid": "0b32e1daaf0c9a604dd2d1244786472c0fff6d33",
+      "origin": null,
+      "reason": "No complete historical refset is supplied; this is an unaccounted candidate, not an assertion of novel code.",
+      "ref": "refs/heads/master",
+      "ref_still_exact": true,
+      "representative": "/tmp/ipfs-world-quality-pair-1000-20261015-01/arm-0001",
+      "resolution": "BOUNDED_ARITHMETIC_REPAIR_FIXTURE_BY_LITERAL_COMMIT_AND_TWO_TREE_PATHS",
+      "tree_pathnames": [
+        "calc.py",
+        "test_acceptance.py"
+      ]
+    }
+  ],
+  "schema": "renewed-publication-branch-gap-resolution/v3",
+  "summary": {
+    "advertised_preserved_bundle_heads": 20,
+    "current_candidate_exact_bundle_head_matches": 0,
+    "dependency_refs_resolved": 9,
+    "dependency_refs_unresolved": 1,
+    "exact_noncommit_reuse_proved_refs": 0,
+    "local_origin_alias_refs_resolved_ancestral": 12,
+    "new_code_or_adoption_claim": false,
+    "nonancestor_refs_examined": 15,
+    "original_candidate_refs": 39,
+    "quality_pair_fixture_refs": 2,
+    "remaining_full_object_reachability_gaps": 15,
+    "source_object_present_all15": true
+  }
+}

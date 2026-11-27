@@ -1,0 +1,86 @@
+{
+  "driver": {
+    "bytes": 16514,
+    "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/package_and_restore_recovery.py",
+    "sha256": "8152183ff6baa76ddbe14bbaa96abd6bf1ea624312d287daeefb610137e53dc9"
+  },
+  "expected_tips": 38,
+  "families": [
+    {
+      "bundle": {
+        "bytes": 7597493,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/ipfs_datasets_py/ipfs_datasets_py-historical-tips.bundle",
+        "sha256": "182cceb3a5a93b3a9c043333cc3af92a23896e5183b2d8d87edf7e6c73346dee"
+      },
+      "expected_tips": 35,
+      "family": "ipfs_datasets_py",
+      "publication_files": [
+        {
+          "bytes": 7597493,
+          "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/ipfs_datasets_py/ipfs_datasets_py-historical-tips.bundle",
+          "sha256": "182cceb3a5a93b3a9c043333cc3af92a23896e5183b2d8d87edf7e6c73346dee"
+        }
+      ],
+      "receipt": {
+        "bytes": 65875,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/ipfs_datasets_py/restore-receipt.json",
+        "sha256": "d9a166a8afc22a97fdda12e15f3c227fb415e92bffbd4b480c97e256d5bbed13"
+      },
+      "restored_tips": 35,
+      "status": "RESTORE_VERIFIED"
+    },
+    {
+      "error": "git bundle exited 1: fatal: pack has 87 unresolved deltas\nerror: index-pack died",
+      "expected_tips": 1,
+      "family": "swissknife",
+      "receipt": {
+        "bytes": 227,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/swissknife/failure.json",
+        "sha256": "f0931a43be11e8df0d3ff205e75504780eb6c6a1d0a7a2f864f2d0c358194520"
+      },
+      "restored_tips": 0,
+      "stage": "fresh private restore",
+      "status": "FAILED"
+    },
+    {
+      "error": "git bundle exited 1: fatal: pack has 3 unresolved deltas\nerror: index-pack died",
+      "expected_tips": 1,
+      "family": "lift_coding",
+      "receipt": {
+        "bytes": 227,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/lift_coding/failure.json",
+        "sha256": "c1487391f889922e5362acfbdeeaa9044034978ee781cb0bb0b9e3e788c3c1ae"
+      },
+      "restored_tips": 0,
+      "stage": "fresh private restore",
+      "status": "FAILED"
+    },
+    {
+      "bundle": {
+        "bytes": 5396,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/ipfs_accelerate_py_detached/ipfs_accelerate_py_detached-historical-tips.bundle",
+        "sha256": "36a3eac68c18ab7de909e11e1ff5eaa193b625da556ea8bd40488d668aa3e2aa"
+      },
+      "expected_tips": 1,
+      "family": "ipfs_accelerate_py_detached",
+      "publication_files": [
+        {
+          "bytes": 5396,
+          "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/ipfs_accelerate_py_detached/ipfs_accelerate_py_detached-historical-tips.bundle",
+          "sha256": "36a3eac68c18ab7de909e11e1ff5eaa193b625da556ea8bd40488d668aa3e2aa"
+        }
+      ],
+      "receipt": {
+        "bytes": 5816,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/ipfs_accelerate_py_detached/restore-receipt.json",
+        "sha256": "d4e24951aca326b0668a8ab4f919abcd356144483be53d24ff140d419f080656"
+      },
+      "restored_tips": 1,
+      "status": "RESTORE_VERIFIED"
+    }
+  ],
+  "publication_attempted": false,
+  "restored_tips": 36,
+  "schema": "private-historical-bundle-restoration/v1",
+  "timestamp_utc": "2026-11-27T05:46:27.630848+00:00"
+}

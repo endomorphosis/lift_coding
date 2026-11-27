@@ -1,0 +1,30 @@
+{
+  "controls": {
+    "bytes": 4442,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/existing-maintained-checked-receipt-positive-RED-controls.py.DATA",
+    "sha256": "a952f6d16834d609b3c682a117287fb8fb326bf308a736f929f185975876e47c"
+  },
+  "old_all_prefix_exact": true,
+  "overlay": {
+    "bytes": 346,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/same-consumer-GREEN-overlay.json",
+    "sha256": "2cbeef6f6a639be313033200040252dc103d707d36fd63805aca5a16783fc7a5"
+  },
+  "projection": {
+    "bytes": 64334,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/checked-positive-RED-projection.json",
+    "sha256": "7672d33d022a2b4c3eafd45bf26c179dd8eda4ccf01f3903499d312734bbca7d"
+  },
+  "retained_prep_failure": "Assembler incorrectly required breadth-first AST visit order; no test was executed. Corrected order-insensitive exact two-count set only.",
+  "run": false,
+  "runner": {
+    "bytes": 16413,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/existing-rebased-checked-receipt-positive-RED-runner.py.DATA",
+    "sha256": "475b0c4c08706b2580fbf3871af65fb6e1a111cf579d09426a007ae48a8f0961"
+  },
+  "test": {
+    "bytes": 55453,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/test_trusted_feedback_weight_updates.checked-receipt.after.py.DATA",
+    "sha256": "fd29cf3deef5cfb2fb7b82415b9262c3b8fcc3d197df14f414de0bd599000ef8"
+  }
+}

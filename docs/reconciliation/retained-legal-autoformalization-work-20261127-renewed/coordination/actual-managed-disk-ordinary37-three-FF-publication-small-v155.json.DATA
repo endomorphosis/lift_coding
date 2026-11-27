@@ -1,0 +1,129 @@
+{
+  "Source_test_CI_model_or_native_invoked": false,
+  "accelerate_and_other_gitlinks_preserved": true,
+  "force_or_tag_push": false,
+  "gitlink_updates": {
+    "hallucinate": {
+      "ipfs_datasets_py": {
+        "from": "8aa66fac886a1f6a916372ec89729334e6740aee",
+        "to": "48a1df131fb7f2a66b7b57bfb98647b91dbd308a"
+      }
+    },
+    "root": {
+      "external/ipfs_datasets": {
+        "from": "8aa66fac886a1f6a916372ec89729334e6740aee",
+        "to": "48a1df131fb7f2a66b7b57bfb98647b91dbd308a"
+      },
+      "hallucinate_app": {
+        "from": "c5913262bb4a104c94600939e0e0c16ea5e1156e",
+        "to": "9883cf1806122d070750edd351475480b3f11fbb"
+      }
+    }
+  },
+  "host_ledger_change_or_live_lowering": false,
+  "local_after": {
+    "accelerate": {
+      "clean_index_worktree": true,
+      "head": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "datasets": {
+      "clean_index_worktree": true,
+      "head": "48a1df131fb7f2a66b7b57bfb98647b91dbd308a",
+      "tree": "0b4a603878f0a1288eb1f883518d5604a79e8239"
+    },
+    "hallucinate": {
+      "clean_index_worktree": true,
+      "head": "9883cf1806122d070750edd351475480b3f11fbb",
+      "tree": "7900173f825c0fd90748993fd3b5104af636a655"
+    },
+    "root": {
+      "clean_index_worktree": true,
+      "head": "2f292b5e90b52176410a1f27ac5346d8769aaf40",
+      "tree": "4e28fea163bde6259e7243f1d29f8117ada5f895"
+    }
+  },
+  "origin_main_after": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "48a1df131fb7f2a66b7b57bfb98647b91dbd308a",
+    "hallucinate": "9883cf1806122d070750edd351475480b3f11fbb",
+    "root": "2f292b5e90b52176410a1f27ac5346d8769aaf40"
+  },
+  "origin_main_before": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "8aa66fac886a1f6a916372ec89729334e6740aee",
+    "hallucinate": "c5913262bb4a104c94600939e0e0c16ea5e1156e",
+    "root": "2f9193c82be2c6b175be4ad9b2d489abf12b14c8"
+  },
+  "origin_urls": {
+    "accelerate": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+    "datasets": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+    "hallucinate": "https://github.com/endomorphosis/hallucinate_app.git",
+    "root": "https://github.com/endomorphosis/lift_coding.git"
+  },
+  "push_order": [
+    "datasets",
+    "hallucinate",
+    "root"
+  ],
+  "pushes": {
+    "datasets": {
+      "from": "8aa66fac886a1f6a916372ec89729334e6740aee",
+      "porcelain": " \t48a1df131fb7f2a66b7b57bfb98647b91dbd308a:refs/heads/main\t8aa66fac88..48a1df131f",
+      "rc": 0,
+      "ref": "refs/heads/main",
+      "to": "48a1df131fb7f2a66b7b57bfb98647b91dbd308a"
+    },
+    "hallucinate": {
+      "from": "c5913262bb4a104c94600939e0e0c16ea5e1156e",
+      "porcelain": " \t9883cf1806122d070750edd351475480b3f11fbb:refs/heads/main\tc591326..9883cf1",
+      "rc": 0,
+      "ref": "refs/heads/main",
+      "to": "9883cf1806122d070750edd351475480b3f11fbb"
+    },
+    "root": {
+      "from": "2f9193c82be2c6b175be4ad9b2d489abf12b14c8",
+      "porcelain": " \t2f292b5e90b52176410a1f27ac5346d8769aaf40:refs/heads/main\t2f9193c82b..2f292b5e90",
+      "rc": 0,
+      "ref": "refs/heads/main",
+      "to": "2f292b5e90b52176410a1f27ac5346d8769aaf40"
+    }
+  },
+  "qualification": {
+    "Source_and_resources_closed": true,
+    "bytes": 3218,
+    "errors": 0,
+    "failures": 0,
+    "functions": 14,
+    "path": "/tmp/Root-managed-disk-ordinary37-scope-map-corrected-actual-v155/Root-managed-disk-lowering-ordinary37-qualified-Source-resource-closed-small-v155.json",
+    "prior_zero_credit_failure": {
+      "bytes": 84314,
+      "cause": "bootstrap omitted existing scope key in expected module DATA; strict guard retained",
+      "path": "/tmp/Root-managed-disk-ordinary37-actual-v153/actual-output/complete-published-D-managed-disk-lowering37-existing-owner-report.json",
+      "sha256": "b316337b1ad1cb999ecbd0f45a10baf8cafe69a2f8c1de382f2e12b875ae6677"
+    },
+    "public_owning_cases_passed": 37,
+    "qualification_scope": "37 public owning-test cases only; fictional ledger fixtures, no actual host policy migration",
+    "raw_XML": {
+      "bytes": 7940,
+      "path": "/tmp/Root-managed-disk-ordinary37-scope-map-corrected-actual-v155/actual-output/managed-disk-lowering37-run-result0-output1.bin",
+      "sha256": "d8e276984e5a28774508d205b26ba55a52ec827a548bd4e4f8308887cdd9aded"
+    },
+    "reaped_pid": 1548095,
+    "sha256": "8126f933f6d8f5d9173e97646ea36d56fc62e4e684c22f00a1edf38dbc961780",
+    "skips": 0
+  },
+  "schema": "managed-disk-ordinary37-GitHub-publication/v155",
+  "selected_blobs": {
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_resources.py": {
+      "blob": "57af9526f01f6f392172dd03d145377f4e63d5db",
+      "bytes": 71686,
+      "sha256": "51bec0e627e266595229dee298f22c7bdcf82bb5876eb2da1efd5f3655fbe585"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_daemon_resources.py": {
+      "blob": "277b0563af02437de8056c4ada34d24a5eb1a7c4",
+      "bytes": 109735,
+      "sha256": "b2f0f2d8651c39c4521eb30f44d6a12036c08df8efaa6b142fdeac6307a0e5fd"
+    }
+  }
+}

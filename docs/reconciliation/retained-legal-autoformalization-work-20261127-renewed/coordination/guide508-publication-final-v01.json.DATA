@@ -1,0 +1,102 @@
+{
+  "all_other_gitlinks_preserved": true,
+  "closed_Source_receipt": {
+    "bytes": 7485,
+    "path": "/tmp/Root-one508-four-guide-CAS-actual-v62/Root-one508-four-installed-Source-closed-small-v62.json",
+    "sha256": "b1e6ab9d4f1c4415031af7b5eea6a7f5dd1f932e1454210357ee49cf8a07b305"
+  },
+  "complete": true,
+  "force_push": false,
+  "full_goal_complete": false,
+  "guide_paths": {
+    "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json": {
+      "Git_blob": "9dd4cd8bfcd9d1f5aed1825dda784eb141269d89",
+      "bytes": 1383271,
+      "sha256": "65c25b0cf07be0dbc9c5aefa14d4a98ec626565d7b517623ecb9aacee1b367ff"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md": {
+      "Git_blob": "c7509f93996e6ba5e3ac4880f7a86020c2233f89",
+      "bytes": 925246,
+      "sha256": "08eb502d780b7c8b1323f0628ae399ad1206c31ec1626abe443283fa111f7617"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md": {
+      "Git_blob": "8508ac36048830335717ea81fd56aa51b30e0d8e",
+      "bytes": 685231,
+      "sha256": "07d2bb16a3dbc05125fb30408900fb9e5c739811e9e0bee84a19d5721eb44306"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json": {
+      "Git_blob": "230eca8501f71d60fed02a749bf51cc0abe0a896",
+      "bytes": 1628903,
+      "sha256": "6fdcdffe29c6341f2e62aa3d5a811a6f675f1172e62f6ab93f716c2d0ba58298"
+    }
+  },
+  "repositories": {
+    "accelerate": {
+      "HEAD": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "clean": true,
+      "origin": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+      "previous_remote_head": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "push_attempted": false,
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "datasets": {
+      "HEAD": "a5c3f972d0245f760e239ef9a7e92d899cea061c",
+      "clean": true,
+      "local_commit": "a5c3f972d0245f760e239ef9a7e92d899cea061c",
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+      "previous_remote_head": "4ccc8917b2168db8e11f54c5aadd4ca267f1c488",
+      "push_attempted": true,
+      "push_returned": true,
+      "staged_paths": [
+        "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json",
+        "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+        "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md",
+        "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json"
+      ],
+      "tree": "a1b4f52a47b3b08633e25d5040e558e11a189089",
+      "verified_remote_after_push": "a5c3f972d0245f760e239ef9a7e92d899cea061c"
+    },
+    "hallucinate": {
+      "HEAD": "d6f881f9cd0c2599edaaaa6b27b100018822464c",
+      "clean": true,
+      "local_commit": "d6f881f9cd0c2599edaaaa6b27b100018822464c",
+      "origin": "https://github.com/endomorphosis/hallucinate_app.git",
+      "previous_remote_head": "0f6eb8e3337002accc647f481b46f930c6a7abeb",
+      "push_attempted": true,
+      "push_returned": true,
+      "staged_gitlinks": {
+        "ipfs_datasets_py": "a5c3f972d0245f760e239ef9a7e92d899cea061c"
+      },
+      "tree": "e132afe82b2671c064cc5eb286c0d56653486b48",
+      "verified_remote_after_push": "d6f881f9cd0c2599edaaaa6b27b100018822464c"
+    },
+    "root": {
+      "HEAD": "31536e9fa6a380dc6e615fc5e74bfe185bb3ccbc",
+      "clean": true,
+      "local_commit": "31536e9fa6a380dc6e615fc5e74bfe185bb3ccbc",
+      "origin": "https://github.com/endomorphosis/lift_coding.git",
+      "previous_remote_head": "c701ab2730b2bee49d98daf7e10e56dc18c6bf29",
+      "push_attempted": true,
+      "push_returned": true,
+      "staged_gitlinks": {
+        "external/ipfs_datasets": "a5c3f972d0245f760e239ef9a7e92d899cea061c",
+        "hallucinate_app": "d6f881f9cd0c2599edaaaa6b27b100018822464c"
+      },
+      "tree": "af3aed3c0a1cfe745d6fbdc8d13b63c06ef05ca8",
+      "verified_remote_after_push": "31536e9fa6a380dc6e615fc5e74bfe185bb3ccbc"
+    }
+  },
+  "runtime_or_Source_replay": false,
+  "schema": "guide508-verified-child-first-fast-forward/v1",
+  "verified_gitlink_updates": {
+    "accelerate": {},
+    "datasets": {},
+    "hallucinate": {
+      "ipfs_datasets_py": "a5c3f972d0245f760e239ef9a7e92d899cea061c"
+    },
+    "root": {
+      "external/ipfs_datasets": "a5c3f972d0245f760e239ef9a7e92d899cea061c",
+      "hallucinate_app": "d6f881f9cd0c2599edaaaa6b27b100018822464c"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "declared_metadata_bounds_unchanged": true,
+  "forward": {
+    "bytes": 590,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/receipt-bounds.forward.diff",
+    "sha256": "1b7eddc3914b8db959a171b3b813f6eb1da4f7552c919d2a5ee3d129bbb45b27"
+  },
+  "inverse": {
+    "bytes": 590,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/receipt-bounds.inverse.diff",
+    "sha256": "b04d6a98f25dbd73a1fae3bbb8cf101947c9703fb66fe91d71f14bf9f6532a26"
+  },
+  "new_Runtime_Resource_grant": false,
+  "new_missing_bounds_receipt_content_ID_changes_intentionally": true,
+  "only_changed_method": "TrustedProofReceipt.from_backend_result metadata argument",
+  "post": {
+    "bytes": 63254,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/proof_receipt_attestation.bounds.after.py.DATA",
+    "sha256": "c350097f9425ce916997b1e116297e9497716ae13747719e722b36fe92f38921"
+  },
+  "source_result_digest_unchanged": true,
+  "stored_receipt_from_dict_unchanged": true,
+  "translation_ceiling_unchanged": true
+}

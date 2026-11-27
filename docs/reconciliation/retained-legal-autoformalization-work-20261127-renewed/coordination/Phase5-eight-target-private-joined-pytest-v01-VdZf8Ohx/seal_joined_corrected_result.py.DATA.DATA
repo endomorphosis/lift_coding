@@ -1,0 +1,113 @@
+from pathlib import Path
+import collections
+import hashlib
+import json
+import os
+import re
+import sys
+import xml.etree.ElementTree as ET
+
+d = Path(sys.argv[1])
+inputs_path = d / 'stage-inputs-v03.json'
+inputs = json.loads(inputs_path.read_bytes())
+stage = Path(inputs['physical_private_stage'])
+candidate_path = Path(inputs['source_packet'])
+candidate = json.loads(candidate_path.read_bytes())
+
+def digest(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+def ref(path):
+    raw = path.read_bytes()
+    return {'path': str(path), 'bytes': len(raw), 'sha256': digest(raw)}
+
+def save(name, value):
+    path = d / name
+    raw = (json.dumps(value, sort_keys=True, indent=2)+chr(10)).encode()
+    fd = os.open(path, os.O_CREAT | os.O_EXCL | os.O_WRONLY | os.O_NOFOLLOW, 0o400)
+    with os.fdopen(fd, 'wb') as file:
+        file.write(raw)
+        file.flush()
+        os.fsync(file.fileno())
+    assert path.read_bytes() == raw
+    return ref(path)
+
+for rel, data in candidate['targets'].items():
+    raw = (stage/rel).read_bytes()
+    assert len(raw) == data['after']['bytes'] and digest(raw) == data['after']['sha256'], rel
+for rel, data in inputs['new_support_current_git_joined'].items():
+    raw = (stage/rel).read_bytes()
+    assert len(raw) == data['bytes'] and digest(raw) == data['sha256'], rel
+assert len(inputs['new_support_current_git_joined']) == 14
+assert sum(data['bytes'] for data in inputs['new_support_current_git_joined'].values()) == 856436
+dynamic_path = d/'closure-only-dynamic-owners-v02.json'
+dynamic = json.loads(dynamic_path.read_bytes())
+assert len(dynamic['new_support_current_git_joined']) == 5
+assert dynamic['explicit_new_bytes'] == 149253
+for rel, data in dynamic['new_support_current_git_joined'].items():
+    raw = (stage/rel).read_bytes()
+    assert len(raw) == data['bytes'] and digest(raw) == data['sha256'], rel
+
+
+ordered = []
+module = None
+for line in (d/'collect-v03.stdout.DATA').read_text().splitlines():
+    m = re.search(r'<Module (.+)>', line)
+    if m:
+        module = m[1].removesuffix('.py')
+    n = re.search(r'<Function (.+)>', line)
+    if n:
+        assert module
+        ordered.append((module, n[1]))
+assert len(ordered) == len(set(ordered)) == 131
+junit = d / 'private-run-v02.junit.xml'
+xml = list(ET.parse(junit).iter('testcase'))
+assert len(xml) == 131
+assert [(row.attrib['classname'].rsplit('.',1)[-1],row.attrib['name']) for row in xml] == ordered
+assert not any(row.find(tag) is not None for row in xml for tag in ('failure','error','skipped'))
+by_module = collections.Counter(file for file, _ in ordered)
+assert by_module=={'test_legal_ir_split_membership':110,'test_legal_span_consumer_binding':5,
+                  'test_autoformal_campaign_training_inputs':10,'test_legal_ir_evaluation_artifacts':6}
+stdout = d/'run-v02.stdout.DATA'
+duration = re.search(r'131 passed in ([0-9.]+)s',stdout.read_text())
+assert duration
+unscoped = d/'collect.stdout.DATA'
+assert '2068 tests collected, 1 error' in unscoped.read_text()
+assert "No module named 'ipfs_datasets_py.logic.integration.reasoning.legal_ir_source_maps'" in unscoped.read_text()
+
+first_run = d/'private-run.junit.xml'
+failed=[]
+first_rows=list(ET.parse(first_run).iter('testcase'))
+assert len(first_rows)==131
+assert [(row.attrib['classname'].rsplit('.',1)[-1],row.attrib['name']) for row in first_rows] == ordered
+for row in first_rows:
+    failures = row.findall('failure')
+    if failures:
+        assert len(failures)==1 and 'alignment_masked_contrastive' in (failures[0].text or '')
+        failed.append(row.attrib['name'])
+    assert row.find('error') is None and row.find('skipped') is None
+assert len(failed) == 3 and all('aggregate_v4' in name for name in failed)
+roster = save('actual-ordered-131-private-pytest-roster.json',
+    {'order_matches_raw_JUnit':True,'tests':[{'file_stem':f,'case':c} for f,c in ordered]})
+receipt = save('sealed-existing-split-rich-eight-joined-private-pytest131-v02.json',{
+    'schema':'phase4-5-eight-target-existing-private-standard-pytest-131/v2',
+    'exact_candidate':ref(candidate_path),
+    'inputs_and_support':ref(inputs_path),
+    'scope':'Private copy of historical support with exact candidate eight and 19 support additions joined to published Git blobs. Standard pytest collection and tests with retained pytest.ini/conftests; not current checkout or Source/SDK qualification.',
+    'selectors':ref(d/'selectors.txt'),
+    'dynamic_support_only_correction':ref(dynamic_path),
+    'first_scoped_run_retained':{'exit':1,'pass':128,'failed':3,'errors':0,'skips':0,
+        'missing_dynamic_alignment_owner':True,'failures':failed,'JUnit':ref(first_run),
+        'collect':ref(d/'collect-v02.stdout.DATA'),'run':ref(d/'run.stdout.DATA')},
+
+    'prior_prepare_and_collect_only_attempt':{
+        'note':'A manifest setup command called Git incorrectly and continued to collect without selectors. It completed only discovery and returned an import error for a missing supplemental module. The scoped suite ran after adding the exact published module and fail-closing on selector cardinality.',
+        'retained_collect_only':ref(unscoped),'no_executed_tests':True},
+    'actual_ordered_roster':roster,'counts_by_module':dict(by_module),
+    'normal_private_collect':ref(d/'collect-v03.stdout.DATA'),'junit':ref(junit),
+    'normal_private_run':ref(stdout),'stderr':ref(d/'run-v02.stderr.DATA'),
+    'pass':131,'failures':0,'errors':0,'skipped':0,'duplicates':0,'actual_wall_s':float(duration[1]),
+    'single_logical_CPU':True,'first_party_current_SDK_or_Source_qualification':False,
+    'no_model_training_Native_or_canonical_mutation':True,
+})
+print(json.dumps({'receipt':receipt,'junit':ref(junit)}))

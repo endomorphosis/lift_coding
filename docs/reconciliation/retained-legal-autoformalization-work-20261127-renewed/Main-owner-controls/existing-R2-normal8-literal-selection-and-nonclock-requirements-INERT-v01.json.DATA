@@ -1,0 +1,110 @@
+{
+  "kind": "private_existing_R2_normal8_literal_selection_DATA_only",
+  "base_publication": "611395777d8365a070c4cba4c29a5cbc6c510f8b",
+  "selected_test_post": {
+    "relative_path": "tests/integration/logic/backends/test_kernel_backends.py",
+    "private_path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/test_kernel_backends.exact-integer-status.after-v02.py.DATA",
+    "bytes": 113326,
+    "sha256": "b211f53efcfa85811667fe69a7f8a12c3b64160f7a94ec86061fe5b702fa04a4",
+    "git_mode": "100644"
+  },
+  "selected_product_post": {
+    "relative_path": "ipfs_datasets_py/logic/backends/kernel/lean.py",
+    "private_path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/kernel_lean.exact-integer-status.after-v01.py.DATA",
+    "bytes": 103242,
+    "sha256": "4983edfb0928667c64e7fe38d247b4924aae9cb3ff12d59cf24a622100573c90",
+    "git_mode": "100644"
+  },
+  "independent_literal_nodeids": [
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_malformed_or_failed_exit_status_cannot_establish_proof[False]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_malformed_or_failed_exit_status_cannot_establish_proof[0.0]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_malformed_or_failed_exit_status_cannot_establish_proof[True]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_malformed_or_failed_exit_status_cannot_establish_proof[0]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_malformed_or_failed_exit_status_cannot_establish_proof[None]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_malformed_or_failed_exit_status_cannot_establish_proof[1]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status[False]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status[0.0]"
+  ],
+  "independent_literal_count": 8,
+  "independent_function_count": 2,
+  "static_source_matches_literal_values": true,
+  "source_function_proof": [
+    {
+      "name": "test_lean_malformed_or_failed_exit_status_cannot_establish_proof",
+      "line": 2024,
+      "end_line": 2036,
+      "case_count": 6,
+      "AST_sha256": "c764d62af8365911cd09355b09852f8b913a6f181a76defeed46f306df86de4f",
+      "values": [
+        {
+          "type": "bool",
+          "repr": "False"
+        },
+        {
+          "type": "float",
+          "repr": "0.0"
+        },
+        {
+          "type": "bool",
+          "repr": "True"
+        },
+        {
+          "type": "str",
+          "repr": "'0'"
+        },
+        {
+          "type": "NoneType",
+          "repr": "None"
+        },
+        {
+          "type": "int",
+          "repr": "1"
+        }
+      ]
+    },
+    {
+      "name": "test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status",
+      "line": 2040,
+      "end_line": 2054,
+      "case_count": 2,
+      "AST_sha256": "11ff20bff034c0f288bc5eba8f3b93174ddb556afc4a92ebb2e5d8a8e59b16fe",
+      "values": [
+        {
+          "type": "bool",
+          "repr": "False"
+        },
+        {
+          "type": "float",
+          "repr": "0.0"
+        }
+      ]
+    }
+  ],
+  "run_order": "Use actual successful COLLECT order, while independently requiring exact selected8 ID set/count. Do not derive expected count solely from RUN=COLLECT self-consistency. If framework ID spelling differs, inspect explicit collected type/value mapping and seal exact reconciliation; do not silently drop/skip cases.",
+  "scope": "Fictional compiler-result parser/evaluator consistency on genuine canonical ToolRunResult objects. Positive built-in integer0 is tested in each case; False/0.0 refuse even with exact source filename/line report binding. No Lean/native executable, source compiler invocation, model or real ledger is selected by these tests.",
+  "existing_control_requirements": [
+    "Reuse existing R2 ordinary operator/bootstrap/factory and current canonical import path.",
+    "Retain all actual normal pytest.ini/ancestor conftests, SourceREAD/current Source epoch, immutable HEAD/tree/index and full9 witnesses.",
+    "Observe actual selected test source -> rewritten AST -> code -> execution with genuine typed parent/subreports and exact raw JUnit.",
+    "Retain original managed SDK/resource parent/admission/custody/cleanup/drain/finalizer/IO guards and unchanged selected resource limits.",
+    "Do not execute old Native selectors merely because their definitions share this owning-test module.",
+    "Compare actual two-file preimages at adoption; actual filesystem metadata must be observed/preserved, not inferred from private0400 posts."
+  ],
+  "new_operator_bootstrap_factory_runner_or_registry_created": false,
+  "actual_Source_or_Git_or_SDK_or_Native_or_SQL_effect": false,
+  "future_actual_adoption": null,
+  "future_Source": null,
+  "future_Source_epoch": null,
+  "future_HEAD": null,
+  "future_tree": null,
+  "future_full9": null,
+  "future_clock": null,
+  "future_authority": null,
+  "future_COLLECT": null,
+  "future_RUN": null,
+  "future_subreports": null,
+  "future_JUnit": null,
+  "future_qualification": null,
+  "old_test_prefix_and_all_AST": "Preserved by sealed d2346936 proof; old baseline111809/SHA5b57349b remains prefixexact. All prior tests and fixture assertions stay intact.",
+  "private_result_count": "Private final8 overlaps earlier6; these are not a new normal/Native qualification."
+}

@@ -1,0 +1,144 @@
+"""Publish the exact additive archives already installed and verified."""
+import hashlib
+import json
+import os
+from pathlib import Path
+import stat
+import re
+import subprocess
+import time
+
+BASE = Path(__file__).resolve().parent
+ROOT = BASE.parents[1] / "repositories/root"
+EXPECTED_HEAD = "678996d3c02dbd43b77fdf6123a7368a860a6060"
+ORIGIN = "https://github.com/endomorphosis/lift_coding.git"
+INPUTS = [
+    ("actual-prepared19-additive-archive-working-install-v01.json", 48012, "76ab10ba45fa0c0a761b78912da79ec0b24e56f1580395c32a639ff3eb85f1c1"),
+    ("actual-verified-history-archive-working-install-v01.json", 9404, "0a8086a62bac2e97208705599b34a40f01b92fd7bc4a63c245361213e1d870b2"),
+    ("actual-private44-inert-archive-working-install-v02.json", 52199, "8293378ea29e04eba2067c526eca7b062de84af4cad425855fc7be78ce8dce20"),
+]
+F9 = ("st_dev", "st_ino", "st_mode", "st_uid", "st_gid", "st_nlink", "st_size", "st_mtime_ns", "st_ctime_ns")
+RECEIPT = {"schema": "actual-renewed-all-work-archive-publication/v2-staged-continuation", "started_ns": str(time.time_ns()), "commands": [], "inputs": [], "files": [], "force_push_used": False, "LFS_billing_or_existing_history_rewrite": False, "Source_model_Native_or_CI_actions": False, "old_active_checkouts_modified": False}
+ENV = {**os.environ, "GIT_OPTIONAL_LOCKS": "0", "GIT_NO_LAZY_FETCH": "1", "GIT_TERMINAL_PROMPT": "0"}
+
+
+def f9(value):
+    return {key: str(getattr(value, key)) for key in F9}
+
+
+def authenticated(path, size, sha):
+    before = path.lstat()
+    assert stat.S_ISREG(before.st_mode) and before.st_nlink == 1
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+    try:
+        assert f9(before) == f9(os.fstat(fd))
+        chunks = bytearray()
+        while len(chunks) <= size:
+            part = os.read(fd, min(1048576, size + 1 - len(chunks)))
+            if not part:
+                break
+            chunks.extend(part)
+        assert f9(before) == f9(os.fstat(fd)) == f9(path.lstat())
+    finally:
+        os.close(fd)
+    raw = bytes(chunks)
+    assert len(raw) == size and hashlib.sha256(raw).hexdigest() == sha
+    return raw
+
+
+def git(*args, data=None, timeout=900):
+    started = time.monotonic()
+    p = subprocess.run(["git", "-c", "pack.threads=1", "-C", str(ROOT), *args], input=data,
+                       stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=ENV, timeout=timeout)
+    RECEIPT["commands"].append({"args": list(args), "returncode": p.returncode, "stdout": p.stdout.decode(errors="replace"), "stderr": p.stderr.decode(errors="replace"), "elapsed_seconds": time.monotonic() - started})
+    assert p.returncode == 0, (args, p.returncode, p.stderr[:2000])
+    return p.stdout
+
+
+RECEIPT["prior_closed_attempt"] = {"path": str(BASE / "actual-renewed-all-work-archives-Root-publication-v01.json"), "bytes":71132,"sha256":"53fc1551abf2a2d0bcd374db18b3faf46e4b1c75edd12f9840f040cf1fbe6296", "commit":None,"push":False,"effect":"Exact94 staged; historical-DATA whitespace advisory retained."}
+
+try:
+    expected = {}
+    for name, size, sha in INPUTS:
+        raw = authenticated(BASE / name, size, sha)
+        packet = json.loads(raw)
+        assert packet["complete"] is True
+        RECEIPT["inputs"].append({"path": str(BASE / name), "bytes": size, "sha256": sha})
+        for row in packet["files"]:
+            path = row.get("repo_relative_path", row.get("path"))
+            oid = row.get("git_blob_sha1", row.get("git_blob_oid", row.get("Git_blob_sha1")))
+            mode = row.get("git_mode", row.get("Git_mode"))
+            assert mode == "100644" and path not in expected and oid and len(oid) == 40
+            assert path.startswith("docs/reconciliation/") and ".." not in Path(path).parts
+            expected[path] = {"path": path, "bytes": row["bytes"], "sha256": row["sha256"], "git_blob_oid": oid, "mode": mode}
+    assert len(expected) == 94 and sum(x["bytes"] for x in expected.values()) == 921558276
+    assert git("rev-parse", "HEAD").decode().strip() == EXPECTED_HEAD
+    assert git("remote", "get-url", "origin").decode().strip() == ORIGIN
+    assert set(git("diff", "--cached", "--name-only").decode().splitlines()) == set(expected)
+    assert git("diff", "--name-only") == b""
+    untracked = set(git("ls-files", "--others", "--exclude-standard", "-z").decode().strip("\0").split("\0"))
+    assert untracked in (set(), {""}), ("unexpected untracked path after exact94 staging", sorted(untracked))
+    assert git("ls-tree", "-r", "HEAD", "--", *sorted(expected)) == b""
+    assert git("ls-remote", "--heads", "origin", "refs/heads/main").decode().split()[0] == EXPECTED_HEAD
+    for path, row in expected.items():
+        raw = authenticated(ROOT / path, row["bytes"], row["sha256"])
+        assert stat.S_IMODE((ROOT / path).stat().st_mode) == 0o644
+        assert hashlib.sha1(("blob %d\0" % len(raw)).encode() + raw).hexdigest() == row["git_blob_oid"]
+    paths = b"".join(path.encode() + b"\0" for path in sorted(expected))
+    # Exact94 index entries were written by the genuine closed first attempt. Do not restage.
+    entries = git("ls-files", "--stage", "-z", "--", *sorted(expected)).decode().strip("\0").split("\0")
+    observed = {}
+    for entry in entries:
+        meta, path = entry.split("\t", 1)
+        mode, oid, stage = meta.split()
+        assert stage == "0"
+        observed[path] = (mode, oid)
+    assert observed == {p: (r["mode"], r["git_blob_oid"]) for p, r in expected.items()}
+    changes = git("diff", "--cached", "--name-status", "-z").decode().strip("\0").split("\0")
+    assert len(changes) == 2 * len(expected)
+    assert set(changes[1::2]) == set(expected) and set(changes[0::2]) == {"A"}
+    warning = subprocess.run(["git", "-C", str(ROOT), "diff", "--cached", "--check"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=ENV, timeout=60)
+    assert warning.returncode == 2 and not warning.stderr
+    warning_lines = warning.stdout.decode().splitlines()
+    diagnostics = [line for line in warning_lines if line != "+ "]
+    assert diagnostics and all(re.fullmatch(r"docs/reconciliation/reader-private-controls-20261124/[^:]+\.DATA:[0-9]+: trailing whitespace\.", line) for line in diagnostics)
+    RECEIPT["historical_byte_preservation_whitespace_diagnostics"] = {"returncode": 2, "exact_diagnostics": diagnostics, "scope": "Original inert unified-diff context blank lines; original SHA/Gitblob exact; do not normalize historical bytes."}
+    git("diff", "--cached", "--check", "--", ".", ":!**/*.DATA")
+    git("commit", "-m", "Preserve retained worktree histories and private engineering controls [skip ci]")
+    head = git("rev-parse", "HEAD").decode().strip()
+    RECEIPT["commit"] = head
+    RECEIPT["tree"] = git("rev-parse", "HEAD^{tree}").decode().strip()
+    assert git("rev-parse", "HEAD^").decode().strip() == EXPECTED_HEAD
+    assert set(git("diff-tree", "--no-commit-id", "--name-only", "-r", "HEAD").decode().splitlines()) == set(expected)
+    assert git("status", "--porcelain=v1", "--untracked-files=all") == b""
+    committed = git("ls-tree", "-r", "-z", "HEAD", "--", *sorted(expected)).decode().strip("\0").split("\0")
+    assert len(committed) == len(expected)
+    for entry in committed:
+        meta, path = entry.split("\t", 1)
+        mode, kind, oid = meta.split()
+        assert kind == "blob" and (mode, oid) == observed[path]
+    assert git("ls-remote", "--heads", "origin", "refs/heads/main").decode().split()[0] == EXPECTED_HEAD
+    print(json.dumps({"local_commit_complete": head, "files": len(expected), "bytes": sum(x["bytes"] for x in expected.values()), "next": "ordinary-fast-forward-push"}), flush=True)
+    git("push", "--porcelain", "origin", "HEAD:refs/heads/main")
+    remote = git("ls-remote", "--heads", "origin", "refs/heads/main").decode().split()[0]
+    assert remote == head
+    assert git("status", "--porcelain=v1", "--untracked-files=all") == b""
+    RECEIPT.update(complete=True, remote_main=remote, origin=ORIGIN, clean=True,
+                   file_count=len(expected), file_bytes=sum(x["bytes"] for x in expected.values()),
+                   files=[expected[p] for p in sorted(expected)])
+except BaseException as error:
+    RECEIPT["error"] = {"type": type(error).__name__, "message": str(error)[:4000]}
+    raise
+finally:
+    RECEIPT["finished_ns"] = str(time.time_ns())
+    raw = (json.dumps(RECEIPT, sort_keys=True, indent=2) + "\n").encode()
+    path = BASE / "actual-renewed-all-work-archives-Root-publication-v02.json"
+    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o400)
+    try:
+        offset = 0
+        while offset < len(raw):
+            offset += os.write(fd, raw[offset:])
+        os.fsync(fd)
+    finally:
+        os.close(fd)
+    print(json.dumps({"receipt": str(path), "bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest(), "commit": RECEIPT.get("commit"), "complete": RECEIPT.get("complete", False), "error": RECEIPT.get("error")}), flush=True)

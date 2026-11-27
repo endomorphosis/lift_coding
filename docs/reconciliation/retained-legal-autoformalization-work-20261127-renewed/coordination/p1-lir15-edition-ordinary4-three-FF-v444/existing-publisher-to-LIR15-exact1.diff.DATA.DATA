@@ -1,0 +1,214 @@
+--- existing-Phase3-ordinary11-publisher
++++ LIR15-ordinary4-exact1-publisher
+@@ -9,23 +9,33 @@
+ work = Path(__file__).parent
+ coord = work.parent
+ repos = Path('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories')
+-receipt_path = Path('/tmp/Root-existing-Phase3-candidate-inventory-ordinary11-v435-mISXHM3q/actual-Phase3-candidate-inventory-ordinary11-closed-small-v435.json')
+-output = coord / 'actual-Phase3-candidate-inventory-exact2-ordinary11-three-FF-publication-v435.json'
++receipt_path = Path('/tmp/Root-existing-LIR15-edition-ordinary4-v444-ZMufyIaY/actual-LIR15-source-edition-ordinary4-closed-small-v444.json')
++output = coord / 'actual-P1-LIR15-edition-exact1-ordinary4-three-FF-publication-v444.json'
+ assert not output.exists()
+ started = time.monotonic()
+ base = {
+-    'datasets': 'ff513adcfc94f48f0c76c8639dc10a1cd213264d',
+-    'hallucinate': '3937d2b10468d0efa90bb03a5e7ab8b0eaddb1d7',
+-    'root': '58f40088292232a5697e6a694eba08ddf086c479',
++    'datasets': 'd60c456d6f522d074499bf861e5bb0227d5d8645',
++    'hallucinate': '3f147afc6ceea49ddac1c9b61e5b28c6c10f83da',
++    'root': '41414a6e30b5c4ce4ff9fd5d5b01eeb543441bd9',
+     'accelerate': '21d7c7b2436a895c9615d7ed9866c5c27b8bb43b',
+ }
++# Root's explicit release follows the genuine closed session14186.  This
++# publisher performs only existing Git transport/link operations, never tests.
++ROOT_NORMAL_FF_RELEASE = {
++    'Root_selected': True, 'ordinary_terminal_session': 14186,
++    'qualification': {'path': str(receipt_path), 'bytes': 24871, 'sha256': '486e837f4ffd12a72f9d71a754c012933d8dd164a38c8440e816a82205b2947a'},
++    'order': ['datasets', 'hallucinate', 'root'], 'exact_D': 'd58f9a004ea8bf27ff234bb1b55e1eda7a49a6a4',
++    'normal_fast_forward_only': True, 'Source_test_CI_or_docs_action_selected': False,
++}
++assert ROOT_NORMAL_FF_RELEASE['Root_selected'] is True
++assert ROOT_NORMAL_FF_RELEASE['order'] == ['datasets','hallucinate','root']
+ urls = {
+     'datasets':'https://github.com/endomorphosis/ipfs_datasets_py',
+     'hallucinate':'https://github.com/endomorphosis/hallucinate_app',
+     'root':'https://github.com/endomorphosis/lift_coding',
+     'accelerate':'https://github.com/endomorphosis/ipfs_accelerate_py',
+ }
+-env = dict(os.environ, GIT_OPTIONAL_LOCKS='0', GIT_NO_LAZY_FETCH='1', GIT_TERMINAL_PROMPT='0')
++env = dict(os.environ, GIT_OPTIONAL_LOCKS='0', GIT_NO_LAZY_FETCH='1', GIT_TERMINAL_PROMPT='0', GOMAXPROCS='1')
+ fields = ('st_ctime_ns','st_dev','st_gid','st_ino','st_mode','st_mtime_ns','st_nlink','st_size','st_uid')
+ 
+ def checked(path, length, digest):
+@@ -130,15 +140,16 @@
+ from collections import Counter
+ import xml.etree.ElementTree as ET
+ 
+-source_ref = dict(path=str(receipt_path), bytes=25998,
+-                  sha256='a31a2a56aea0cd6f7af1e503f8fd04f0c087a2d620834264741c4270ef2d0ee9')
++source_ref = dict(path=str(receipt_path), bytes=24871,
++                  sha256='486e837f4ffd12a72f9d71a754c012933d8dd164a38c8440e816a82205b2947a')
++assert source_ref == ROOT_NORMAL_FF_RELEASE['qualification']
+ q = json.loads(checked_ref(source_ref))
+ assert q['terminal_returncode'] == 0
+ assert all(q[key] is True for key in (
+     'Source_closed', 'resource_cleanup_confirmed', 'parent_home_absent', 'collect_run_calls_JUnit_exact_order',
+ ))
+-assert q['counts'] == dict(tests=11, passed=11, failures=0, errors=0, skipped=0, duplicates=0, functions=8)
+-assert q['subcohort_counts'] == {'oversize2':2,'retained9':9}
++assert q['counts'] == dict(tests=4, passed=4, failures=0, errors=0, skipped=0, duplicates=0, functions=4)
++assert q['subcohort_counts'] == {'retained_legacy_incremental3':3,'source_edition_only1':1}
+ checked_ref(q['retained_full_charges'])
+ report = json.loads(checked_ref(q['exact_ordinary_report']))
+ assert all(report[key] is True for key in (
+@@ -173,32 +184,34 @@
+         assert {k:raw_outputs['junit.xml'][k] for k in ('path','bytes','sha256')} == q['raw_JUnit']
+ cases = list(ET.fromstring(checked_ref(q['raw_JUnit'])).iter('testcase'))
+ ids = [row.get('classname').replace('.', '/') + '.py::' + row.get('name') for row in cases]
+-assert len(ids) == len(set(ids)) == 11
++assert len(ids) == len(set(ids)) == 4
+ assert not any(child.tag in ('failure', 'error', 'skipped') for row in cases for child in row)
+ assert ids == q['ordered_actual_cases'] == collect['actual_binding']['actual_collected_roster']
+ assert ids == run['actual_binding']['actual_collected_roster'] == run['actual_binding']['actual_called_roster']
+ assert dict(Counter(node.split('[',1)[0] for node in ids)) == q['exact_function_counts']
+-checked_ref(q['private_same11'])
++checked_ref(q['private_test_proposal'])
++assert q['installed_Lean_invoked'] is False
+ assert report['statutory_or_modelquality_or_convergence_authority'] is False and report['Source_WRITE_claimed'] is False
+ assert report['additional_A_provenance']==q['additional_A']
+ assert all(item['actual_binding']['external_pretrained_asset_loading_requested'] is False for item in phases)
+ assert run['qualified_subcohort_cases'] == q['subcohort_counts']
+ 
+ freeze_ref = q['git']['local_frozen_Git_metadata_reference']
+-assert freeze_ref == q['freeze'] and q['git']['actual_closed_Source_READ'] == q['exact_closed_READ5']
++assert freeze_ref == q['freeze'] and q['git']['actual_closed_Source_READ'] == q['exact_closed_READ3']
+ freeze = json.loads(checked_ref(freeze_ref))
+ install = json.loads(checked_ref(q['exact_Source_install']))
+ readback = json.loads(checked_ref(q['git']['actual_closed_Source_READ']))
+-guide = json.loads(checked_ref(freeze['prior_v432_publication']))
++guide = json.loads(checked_ref(freeze['prior_Guide539_publication']))
+ assert not freeze['pushed'] and freeze['local_clean'] and freeze['source_closed'] == q['exact_Source_install']
+-assert install['Source_closed'] and install['write_complete'] and install['ordinary11'] is None
++assert install['Source_closed'] and install['write_complete'] and install['ordinary'] is None
+ assert readback['Source_closed'] and readback['owned_module_closed'] and not readback['errors']
+-assert guide['terminal_returncode'] == 0 and guide['datasets_Guide537_unchanged'] and guide['exact_parent_links_only']
++assert guide['terminal_returncode'] == 0 and guide['evidence_ordinal'] == 539 and guide['all_other_paths_and_gitlinks_preserved']
++assert freeze['prior_Guide539_publication'] == dict(path=str(coord/'actual-guide539-four-doc-three-FF-publication-small-v441.json'),bytes=13378,sha256='0c41a15cb69673709ba75becf72a5598f4aceed4af5650cac42787b723413625')
+ assert {key:guide['repositories'][key]['HEAD'] for key in base} == base
+ 
+ d = freeze['frozen']['HEAD']
+-assert d == q['git']['HEAD'] == '0ad89e81ffa91e24279ebdd9d675c47c781a0940'
+-assert freeze['frozen']['tree'] == q['git']['tree'] == revision('datasets','HEAD^{tree}') == 'cbbdae3559b32f8d63392e10e865ca10ac2bd230'
++assert d == q['git']['HEAD'] == 'd58f9a004ea8bf27ff234bb1b55e1eda7a49a6a4'
++assert freeze['frozen']['tree'] == q['git']['tree'] == revision('datasets','HEAD^{tree}') == '620975ae8b58d2499dc84e6a70bd7d44b5fc3cba'
+ assert revision('datasets','HEAD^') == freeze['parent']['HEAD'] == base['datasets']
+ branch = freeze['frozen']['branch_file']
+ assert stable(Path(branch['path']), branch) == (d+'\n').encode()
+@@ -225,30 +238,44 @@
+ keys = ('path', 'bytes', 'sha256', 'full9')
+ recorded = {row['path']:{k:row[k] for k in keys} for row in install['installed']}
+ captured = {row['path']:{k:row[k] for k in keys} for row in readback['captures']}
+-assert len(recorded)==2 and len(captured)==len(readback['captures'])==5
++assert len(recorded)==1 and len(captured)==len(readback['captures'])==3
+ assert {path:captured[path] for path in recorded}==recorded
+ assert captured[indices['datasets']['path']] == indices['datasets']
+-# READ5 recaptured D. The unchanged A index is joined to its actual READ9.
+-parent_read9 = json.loads(checked_ref(guide['Source_READ9']))
+-assert parent_read9['Source_closed'] and parent_read9['owned_module_closed'] and not parent_read9['errors']
+-a_capture, = [row for row in parent_read9['captures'] if row['path'] == indices['accelerate']['path']]
+-assert {k:a_capture[k] for k in keys} == indices['accelerate']
+-
+-pilot={k:q['pilot_fixture'][k] for k in keys}
+-assert captured[pilot['path']]==pilot
+-assert stable(Path(pilot['path']), pilot)
++# READ3 recaptured the exact test, D index and unchanged sibling fixture.
++# A's current full9 witness is in the real READ3 named-metadata record and
++# independently joins the prior Guide539 immutable index baseline.
++readback_full = json.loads(checked_ref(readback['full_report_reference']))
++assert readback_full['named_metadata_before'][indices['accelerate']['path']] == indices['accelerate']['full9']
++assert readback_full['named_metadata_after'][indices['accelerate']['path']] == indices['accelerate']['full9']
++sibling={k:q['sibling_fixture'][k] for k in keys}
++assert captured[sibling['path']]==sibling
++assert sibling['path']==str(repos/'datasets'/'tests/unit/logic/autoformal/test_legal_corpus_shared_lake.py')
++assert (sibling['bytes'],sibling['sha256'])==(204417,'25ed3e6a71adff8e80eb679324e4e1094d61e2bfef940b9ed0a2cc31682628bf')
++assert stable(Path(sibling['path']), sibling)
+ provenance=json.loads(checked_ref(q['clean_index_provenance']))
+ assert provenance['D']==indices['datasets'] and provenance['A']==indices['accelerate']
+-assert provenance['actual_READ5']==q['exact_closed_READ5']
+-assert freeze['prior_v432_publication']==provenance['published_A_v432']
+-assert indices['accelerate']==guide['index_after']['accelerate']
+-assert all(indices[role]==guide['index_after'][role] for role in ('hallucinate','root'))
+-assert freeze['parent']['index']==guide['index_after']['datasets']
++assert provenance['branch']==branch and provenance['actual_READ3']==q['exact_closed_READ3']
++assert provenance['exact_local_freeze']==freeze_ref
++assert freeze['prior_Guide539_publication']==provenance['published_guide539']
++assert indices['accelerate']==guide['index_readback']['accelerate']['after']
++assert all(indices[role]==guide['index_readback'][role]['after'] for role in ('hallucinate','root'))
++assert freeze['parent']['index']==guide['index_readback']['datasets']['after']
++for phase in phases:
++    binding=phase['actual_binding']
++    assert len(binding['actual_maintained_owner_origins'])==7
++    for stage in ('initial_sibling_fixture_binding','closing_sibling_fixture_binding'):
++        observed=binding[stage]
++        assert all(observed[k]==sibling[k] for k in keys) and observed['stable_FD_path_before_after'] is True
++    assert binding['actual_compiled_current_Source'][sibling['path']]==sibling['sha256']
++    for name,row in binding['actual_maintained_owner_origins'].items():
++        assert q['compiled_source_sha256_by_path'][row['path']]==row['compiled_SHA256']
+ old = rows_at('datasets', base['datasets'])
+ new = rows_at('datasets', d)
+ committed = freeze['committed']
+-assert set(old) == set(new) and len(committed) == 2
++assert set(old) == set(new) and len(committed) == 1
+ assert {path for path in old if old[path] != new[path]} == set(committed)
++assert set(committed)=={'tests/unit/logic/autoformal/test_legal_corpus_incremental.py'}
++assert all(old[path]==new[path] for path in guide['committed_docs'])
+ assert len(q['compiled_source_sha256_by_path']) == 8
+ assert set(recorded) < set(q['compiled_source_sha256_by_path'])
+ for item in phases:
+@@ -275,13 +302,13 @@
+     assert observe('datasets', 'ls-files', '--stage', '-z', '--', path) == f'100644 {blob} 0\t{path}\0'.encode()
+     assert observe('datasets', 'cat-file', 'blob', blob) == stable(Path(row['path']), row)
+ 
+-record({'exact_preflight':True, 'origin_main_before':base, 'qualified_D':d, 'ordinary_cases':11})
++record({'exact_preflight':True, 'origin_main_before':base, 'qualified_D':d, 'ordinary_cases':4})
+ push('datasets', d)
+-h, h_links = gitlink_commit('hallucinate', {'ipfs_datasets_py':(base['datasets'],d)}, 'Update datasets link for candidate inventory dispositions')
++h, h_links = gitlink_commit('hallucinate', {'ipfs_datasets_py':(base['datasets'],d)}, 'Update datasets link for source-edition incremental cache controls')
+ push('hallucinate', h)
+ root, r_links = gitlink_commit(
+     'root', {'external/ipfs_datasets':(base['datasets'],d), 'hallucinate_app':(base['hallucinate'],h)},
+-    'Update legal candidate inventory links',
++    'Update source-edition incremental cache links',
+ )
+ push('root', root)
+ targets = dict(datasets=d, accelerate=base['accelerate'], hallucinate=h, root=root)
+@@ -301,20 +328,19 @@
+ events_path = work/'actual-events.jsonl'
+ events = events_path.read_bytes()
+ result = dict(
+-    schema='actual-Phase3-candidate-inventory-exact2-ordinary11-child-first-fast-forward-publication/v435',
+-    terminal_returncode=0, preflight_v01_refusal_before_Git_effects='A index belongs to prior READ9, not actual D READ5',
+-    unchanged_A_Source_READ9=guide['Source_READ9'], qualification=source_ref, raw_JUnit=q['raw_JUnit'], counts=q['counts'], ordered_COLLECT_RUN_JUnit_exact=True,
++    schema='actual-P1-LIR15-edition-exact1-ordinary4-child-first-fast-forward-publication/v444',
++    terminal_returncode=0, qualification=source_ref, raw_JUnit=q['raw_JUnit'], counts=q['counts'], ordered_COLLECT_RUN_JUnit_exact=True,
+     scoped_cohorts=q['subcohort_counts'], ordinary_scope=q['ordinary_scope'],
+-    prior_v432=freeze['prior_v432_publication'], pilot_fixture_preserved=pilot,
+-    Source_resource_and_parent_closed=True, private_same11_separate_reference=q['private_same11'],
+-    sampled_descendants_by_phase={item['operation']: item['actual_SDK_resource_flags']['native_lifecycle']['observed_descendants']
+-                                  for item in phases},
++    prior_Guide539=freeze['prior_Guide539_publication'], sibling_fixture_preserved=sibling,
++    Source_resource_and_parent_closed=True, private_test_proposal_separate_reference=q['private_test_proposal'],
++    sampled_descendants_by_phase={item['operation']:item['actual_SDK_resource_flags']['native_lifecycle']['observed_descendants'] for item in phases},
+     descendant_executable_or_workload_identity_inferred=False, installed_Lean_invoked=False,
+-    retained_full_charges=q['retained_full_charges'], two_Source_stage_commit_and_compile_joins=committed,
+-    Source_install=q['exact_Source_install'], Source_READ5=q['git']['actual_closed_Source_READ'],
++    retained_full_charges=q['retained_full_charges'], one_Source_stage_commit_and_compile_join=committed,
++    Source_install=q['exact_Source_install'], Source_READ3=q['exact_closed_READ3'],
+     local_freeze=freeze_ref, index_before=indices, index_after=ending, repositories=after,
+-    pushes_in_actual_order=pushes, Guide537_and_all_other_paths_and_links_preserved=True,
++    pushes_in_actual_order=pushes, Guide539_and_all_other_paths_and_links_preserved=True,
+     new_test_Source_SQL_Native_CI_or_model_execution=False,
++    explicit_Root_normal_FF_release=ROOT_NORMAL_FF_RELEASE,
+     events=dict(path=str(events_path), bytes=len(events), sha256=hashlib.sha256(events).hexdigest()),
+ )
+ raw = (json.dumps(result, sort_keys=True, indent=2)+'\n').encode()

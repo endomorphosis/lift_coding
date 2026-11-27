@@ -1,0 +1,48 @@
+{
+  "argv": [
+    "/home/barberb/lift_coding/.venv/bin/python",
+    "-I",
+    "-B",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/existing-runner.py.DATA",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/red-v03",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+    "/home/barberb/lift_coding/external/ipfs_datasets",
+    "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_refuses_unbound_typed_definition_dependencies",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_preserves_acyclic_typed_definition_dependency_in_graph",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_same_typed_head_requires_one_declared_parent"
+  ],
+  "cases": [
+    "test_reviewed_refuses_unbound_typed_definition_dependencies[mutual-cycle-v2]",
+    "test_reviewed_refuses_unbound_typed_definition_dependencies[mutual-cycle-v3]",
+    "test_reviewed_refuses_unbound_typed_definition_dependencies[acyclic-parent-missing-v2]",
+    "test_reviewed_refuses_unbound_typed_definition_dependencies[acyclic-parent-missing-v3]",
+    "test_reviewed_v3_preserves_acyclic_typed_definition_dependency_in_graph[same]",
+    "test_reviewed_v3_preserves_acyclic_typed_definition_dependency_in_graph[different-role]",
+    "test_reviewed_v3_preserves_acyclic_typed_definition_dependency_in_graph[different-sort]",
+    "test_reviewed_v3_same_typed_head_requires_one_declared_parent[one]",
+    "test_reviewed_v3_same_typed_head_requires_one_declared_parent[both]"
+  ],
+  "counts": {
+    "error": 0,
+    "failure": 5,
+    "skipped": 0,
+    "tests": 9
+  },
+  "junit": {
+    "bytes": 4291,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/red-v03/result.xml",
+    "sha256": "88aea229687e50078c3a1c4546efdadf19e1967d1034d93a391c3e8f32ec0374"
+  },
+  "phase": "red-v03",
+  "returncode": 1,
+  "seconds": 25.51524824090302,
+  "source_sha256": {
+    "ipfs_datasets_py/logic/autoformal/legal_norm_content_adjudication_v1.py": "5532f9f5e8899ea3aee4f52c6bf309dfd59695dc5a7894704885ce0c1ee6ddfa",
+    "ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py": "1b294d2d896f715c7fe667cf194e2a04bc681705af558a535d55210b4cacf917",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py": "2bd042f47612b20a4c15b7b469bd82ff775655548bcdc312db1a5ecd5006bfde"
+  },
+  "verified_roles": 132
+}

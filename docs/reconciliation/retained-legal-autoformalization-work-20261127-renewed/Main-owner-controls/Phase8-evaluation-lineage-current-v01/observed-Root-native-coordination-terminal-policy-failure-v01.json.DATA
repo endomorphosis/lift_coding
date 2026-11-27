@@ -1,0 +1,31 @@
+{
+  "Main_Source_or_SDK_or_Native_or_Git_effects": false,
+  "Main_real_RPC_mutations": 0,
+  "Source_context_or_resource_custody": "UNOBSERVED_FROM_THIS_FAILURE; retain original owner; do not release/adopt/restart.",
+  "actual_native_outcome": null,
+  "all_prior_artifacts_costs_failures_and_qualifications_retained": true,
+  "authoritative_observations": [
+    "TUI read_thread returned terminal failed/platform content flag.",
+    "TUI wait_threads(timeoutMs=0) returned inactiveStatus, same failed turn and unchanged revision1795744756."
+  ],
+  "closed_main_work_preserved": {
+    "latest_closed_guide_commit": "81ee859cd2bbd4872b0a2e3bc75e2994c14140fe",
+    "metric_cache_commit": "da3024e6ab94fecad9f258375dcc18b04902bfe2",
+    "receipt_bounds_commit": "0cf525e0d3070135547f145e87726dade3d70a1f"
+  },
+  "failure_kind": "platform_content_flag",
+  "full_goal_complete": false,
+  "future_processing_condition": "Original owner coordination restored through its supported process; this record authorizes no retry.",
+  "goal_status_changed": false,
+  "independent_work": "Existing caller fake-transport policy-failure/no-replay coverage only; no new production patch justified yet.",
+  "model_policy_bypass": false,
+  "observed_current_thread_status": "systemError",
+  "observed_current_turn_status": "failed",
+  "owner_thread": "01a0f851-65f0-7c11-b737-07a24c5090ea",
+  "replacement_thread_or_controller": false,
+  "scope": "Original owner coordination turn only; no Source/SDK/Native completion or child liveness inferred.",
+  "selected_replay_or_owner_transfer": false,
+  "status": "CURRENT_COORDINATION_FAILURE_OBSERVED_NOT_A_NATIVE_RESULT",
+  "terminal_updated_at": 1795744756,
+  "turn": "01a21ab5-344a-7df3-914e-cfd8fd9cb2ac"
+}

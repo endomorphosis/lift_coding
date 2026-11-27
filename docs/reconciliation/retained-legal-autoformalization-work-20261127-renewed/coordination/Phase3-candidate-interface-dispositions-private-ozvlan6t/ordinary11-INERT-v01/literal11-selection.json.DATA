@@ -1,0 +1,45 @@
+{
+  "function_count": 8,
+  "literal_expected_cases": 11,
+  "function_selectors": [
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py::test_candidate_interface_covers_every_declared_disposition_and_keeps_order",
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py::test_unsupported_and_ambiguous_candidates_keep_payloads_without_replacement",
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py::test_candidate_order_and_serialization_are_lossless",
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py::test_mixed_and_native_codecs_retain_every_disposition",
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py::test_ambiguous_reserved_identifier_does_not_call_a_codec",
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py::test_candidate_interface_bounds_refuse_before_classification",
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py::test_retained_7214_candidates_keep_identity_roles_and_binder_order",
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py::test_candidate_inventory_retains_candidate_above_its_codec_limit"
+  ],
+  "expected_function_case_counts": {
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py::test_candidate_interface_covers_every_declared_disposition_and_keeps_order": 1,
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py::test_unsupported_and_ambiguous_candidates_keep_payloads_without_replacement": 1,
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py::test_candidate_order_and_serialization_are_lossless": 1,
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py::test_mixed_and_native_codecs_retain_every_disposition": 1,
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py::test_ambiguous_reserved_identifier_does_not_call_a_codec": 1,
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py::test_candidate_interface_bounds_refuse_before_classification": 3,
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py::test_retained_7214_candidates_keep_identity_roles_and_binder_order": 1,
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py::test_candidate_inventory_retains_candidate_above_its_codec_limit": 2
+  },
+  "literal_expected_nodeids": [
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py::test_candidate_interface_covers_every_declared_disposition_and_keeps_order",
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py::test_unsupported_and_ambiguous_candidates_keep_payloads_without_replacement",
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py::test_candidate_order_and_serialization_are_lossless",
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py::test_mixed_and_native_codecs_retain_every_disposition",
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py::test_ambiguous_reserved_identifier_does_not_call_a_codec",
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py::test_candidate_interface_bounds_refuse_before_classification[rows0]",
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py::test_candidate_interface_bounds_refuse_before_classification[rows1]",
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py::test_candidate_interface_bounds_refuse_before_classification[rows2]",
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py::test_retained_7214_candidates_keep_identity_roles_and_binder_order",
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py::test_candidate_inventory_retains_candidate_above_its_codec_limit[mixed_relational]",
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py::test_candidate_inventory_retains_candidate_above_its_codec_limit[native_unary_preservation]"
+  ],
+  "owning_files": [
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py"
+  ],
+  "independent_literal11_roster_reference": {
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/SEALED-Phase3-candidate-inventory-private-same11-retention-and-role-coverage.json",
+    "bytes": 23020,
+    "sha256": "44b16e7c91292dd7f10cb88923c301fef0f5fc37e12e0ab2c2315152e608c104"
+  }
+}

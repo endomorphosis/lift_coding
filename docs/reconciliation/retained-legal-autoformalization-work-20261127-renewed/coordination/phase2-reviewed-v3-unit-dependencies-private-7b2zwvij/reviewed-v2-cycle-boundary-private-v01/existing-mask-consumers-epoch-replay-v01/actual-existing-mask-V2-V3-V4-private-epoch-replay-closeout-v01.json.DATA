@@ -1,0 +1,204 @@
+{
+  "base": "5fae066b5871d3fdf0b63dfbc4339c199ca6ffc1",
+  "candidate": {
+    "bytes": 12729,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/reviewed-v2-cycle-boundary-private-v01/sealed-private-V2-unit-cycle-two-file-follow-up-and-V3-retention-v01.json",
+    "sha256": "b1a1d344ea332b8250a46ec117ff91dd1c346b4e4dec08d8fdc20e481280c503"
+  },
+  "canonical_or_public_ordinary_qualifies": false,
+  "compiler_entrypoint": "alignment_relation_mask_handoff.compile_reviewed_train_relation_masks_v{2,3,4}",
+  "exact_saved_capsule_pins": {
+    "bytes": 2778,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/reviewed-v2-cycle-boundary-private-v01/existing-mask-consumers-epoch-replay-v01/candidate/bound-predecessor-pins.json",
+    "sha256": "dff0e60f74d478ab571f87e1082f9a72824d099c80f18449043931d98b4fdf1f"
+  },
+  "fresh_masks_exact_on_both_generations": [
+    "v2",
+    "v3",
+    "v4"
+  ],
+  "inputs": {
+    "bytes": 5323,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/reviewed-v2-cycle-boundary-private-v01/existing-mask-consumers-epoch-replay-v01/input-bindings.json",
+    "sha256": "ea71005969f60cb8ba700e80673b4d0967e47ba2b687e2c6d29a429d8c96136f"
+  },
+  "old_receipts_accepted_by_original_owner_and_refused_after_v2_change": [
+    "v2",
+    "v3",
+    "v4"
+  ],
+  "qualification_scope": "Actual private Python fixture using current existing mask owners and freshly signed fictional operands. Raw vectors were authored; no encoder execution, fit, Lean, Source or statutory authority.",
+  "runs": {
+    "baseline": {
+      "duplicates": 0,
+      "errors": 0,
+      "failed": 0,
+      "junit": {
+        "bytes": 1824,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/reviewed-v2-cycle-boundary-private-v01/existing-mask-consumers-epoch-replay-v01/baseline/result.xml",
+        "sha256": "b06de4ee20aa7a590b4329629251ae1a2f92db6f9bd266db644b644614882b2e"
+      },
+      "nodes": [
+        "test_private_pair_consumer_preserves_fresh_signed_mask_semantics[v2]",
+        "test_private_pair_consumer_preserves_fresh_signed_mask_semantics[v3]",
+        "test_private_pair_consumer_preserves_fresh_signed_mask_semantics[v4]",
+        "test_private_pair_consumer_refuses_exact_old_receipt_after_v2_epoch_change[v2]",
+        "test_private_pair_consumer_refuses_exact_old_receipt_after_v2_epoch_change[v3]",
+        "test_private_pair_consumer_refuses_exact_old_receipt_after_v2_epoch_change[v4]",
+        "test_reviewed_pair_endpoint_admission_without_pair_reviews_remains_unavailable",
+        "test_reviewed_pair_saved_report_cannot_turn_unknowns_or_analogies_into_negatives"
+      ],
+      "passed": 8,
+      "rc": 0,
+      "session": 81687,
+      "skipped": 0,
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/reviewed-v2-cycle-boundary-private-v01/existing-mask-consumers-epoch-replay-v01/baseline/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 422,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/reviewed-v2-cycle-boundary-private-v01/existing-mask-consumers-epoch-replay-v01/baseline/stdout.DATA",
+        "sha256": "cca1c94e87dda3bf5c9d8e0ff3813863d43a71887ceacddb7ec018320c03cd56"
+      },
+      "terminal_chunk": "206fd5",
+      "wall_seconds": 49.39
+    },
+    "candidate": {
+      "duplicates": 0,
+      "errors": 0,
+      "failed": 0,
+      "junit": {
+        "bytes": 1824,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/reviewed-v2-cycle-boundary-private-v01/existing-mask-consumers-epoch-replay-v01/candidate/result.xml",
+        "sha256": "b6e08c7e940e1d83f225fcee48c3576940af173659cbf094fb1651224fe5552d"
+      },
+      "nodes": [
+        "test_private_pair_consumer_preserves_fresh_signed_mask_semantics[v2]",
+        "test_private_pair_consumer_preserves_fresh_signed_mask_semantics[v3]",
+        "test_private_pair_consumer_preserves_fresh_signed_mask_semantics[v4]",
+        "test_private_pair_consumer_refuses_exact_old_receipt_after_v2_epoch_change[v2]",
+        "test_private_pair_consumer_refuses_exact_old_receipt_after_v2_epoch_change[v3]",
+        "test_private_pair_consumer_refuses_exact_old_receipt_after_v2_epoch_change[v4]",
+        "test_reviewed_pair_endpoint_admission_without_pair_reviews_remains_unavailable",
+        "test_reviewed_pair_saved_report_cannot_turn_unknowns_or_analogies_into_negatives"
+      ],
+      "passed": 8,
+      "rc": 0,
+      "session": 74900,
+      "skipped": 0,
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/reviewed-v2-cycle-boundary-private-v01/existing-mask-consumers-epoch-replay-v01/candidate/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 423,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/reviewed-v2-cycle-boundary-private-v01/existing-mask-consumers-epoch-replay-v01/candidate/stdout.DATA",
+        "sha256": "cd23fa5456d0c981395dce74bb5940cb05273bfee595f6b65249b311ccd014e2"
+      },
+      "terminal_chunk": "6c40d7",
+      "wall_seconds": 42.69
+    }
+  },
+  "same_ordered_cohort": true,
+  "schema": "actual-Phase2-V2-producer-epoch-private-downstream-mask-replay/v1",
+  "signed_fictional_snapshots": {
+    "baseline": {
+      "v2": {
+        "analogy_excluded": 1,
+        "expected_receipt_sha256": "a11490c60ad97fd0fa6d87d1e8908adb0e605af13a6052d463028de2751189aa",
+        "formal_rows": 3,
+        "permitted_negative_mask_sha256": "d2f9c15b8d7bbed88c74dc1ee9d5750c25e65c3973cbc8303c2acb53159c6a7f",
+        "positive_mask_sha256": "a8535c45388f8395825c05899b508a7ad3adbb3a34831e31883a9abbc021cc0a",
+        "producer_sha256": "7350235f02340d2d2f0925d25399f614861c59b6faabcb1ebd427e2682a4f1fd",
+        "signed_capsule": {
+          "bytes": 735306,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/reviewed-v2-cycle-boundary-private-v01/existing-mask-consumers-epoch-replay-v01/baseline/v2-signed-mask-inputs.json",
+          "sha256": "1962e8e0e1979cb67ec7b43cebfc9da7564b29800676c6300ebaeef2c23fca95"
+        },
+        "source_rows": 2,
+        "unknown_excluded": 1
+      },
+      "v3": {
+        "analogy_excluded": 1,
+        "expected_receipt_sha256": "107868268260cb458b736185e5bda462031c205f717f3d23b8df7d60618d9537",
+        "formal_rows": 3,
+        "permitted_negative_mask_sha256": "d2f9c15b8d7bbed88c74dc1ee9d5750c25e65c3973cbc8303c2acb53159c6a7f",
+        "positive_mask_sha256": "a8535c45388f8395825c05899b508a7ad3adbb3a34831e31883a9abbc021cc0a",
+        "producer_sha256": "7350235f02340d2d2f0925d25399f614861c59b6faabcb1ebd427e2682a4f1fd",
+        "signed_capsule": {
+          "bytes": 813786,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/reviewed-v2-cycle-boundary-private-v01/existing-mask-consumers-epoch-replay-v01/baseline/v3-signed-mask-inputs.json",
+          "sha256": "294cac16cf689d64c61ca6f633a1f331d1f0ef6774e3c3719ecf88b2b3e9d519"
+        },
+        "source_rows": 2,
+        "unknown_excluded": 1
+      },
+      "v4": {
+        "analogy_excluded": 3,
+        "expected_receipt_sha256": "5973998ad2273664d6dd21d22c23710d059e844328d52a4f5b5f5e980987209f",
+        "formal_rows": 6,
+        "permitted_negative_mask_sha256": "a4fc58478ec9c2c716e077b3118e97490687806e324d380d1bb48bda070b0669",
+        "positive_mask_sha256": "fdf30551b11bc9810838aa37c9bda9c76a46dc8ad4e1aa7ab3ce65e1f2bcb484",
+        "producer_sha256": "7350235f02340d2d2f0925d25399f614861c59b6faabcb1ebd427e2682a4f1fd",
+        "signed_capsule": {
+          "bytes": 1572446,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/reviewed-v2-cycle-boundary-private-v01/existing-mask-consumers-epoch-replay-v01/baseline/v4-signed-mask-inputs.json",
+          "sha256": "8822016a377bd94676af824b2842839960c0b5e4215cb6efcb238774a6bbbbdd"
+        },
+        "source_rows": 4,
+        "unknown_excluded": 12
+      }
+    },
+    "candidate": {
+      "v2": {
+        "analogy_excluded": 1,
+        "expected_receipt_sha256": "ed7e8087ec803648d3ab5e59656a7c1e9bdbbca635388391e03d4e1910094bfc",
+        "formal_rows": 3,
+        "permitted_negative_mask_sha256": "d2f9c15b8d7bbed88c74dc1ee9d5750c25e65c3973cbc8303c2acb53159c6a7f",
+        "positive_mask_sha256": "a8535c45388f8395825c05899b508a7ad3adbb3a34831e31883a9abbc021cc0a",
+        "producer_sha256": "893ad3f353a77e33de33ae93e61b5c81957b40f09292d07c2dffab2c18ae620d",
+        "signed_capsule": {
+          "bytes": 735306,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/reviewed-v2-cycle-boundary-private-v01/existing-mask-consumers-epoch-replay-v01/candidate/v2-signed-mask-inputs.json",
+          "sha256": "6bcb798fc8661d296bfd3efaf07720429b48e6e40b0de79f884b173fe4054a4c"
+        },
+        "source_rows": 2,
+        "unknown_excluded": 1
+      },
+      "v3": {
+        "analogy_excluded": 1,
+        "expected_receipt_sha256": "f38c838826f52431c3ab2fb800eb86219fc29eac3092f4ccc32eff7aa8154cb3",
+        "formal_rows": 3,
+        "permitted_negative_mask_sha256": "d2f9c15b8d7bbed88c74dc1ee9d5750c25e65c3973cbc8303c2acb53159c6a7f",
+        "positive_mask_sha256": "a8535c45388f8395825c05899b508a7ad3adbb3a34831e31883a9abbc021cc0a",
+        "producer_sha256": "893ad3f353a77e33de33ae93e61b5c81957b40f09292d07c2dffab2c18ae620d",
+        "signed_capsule": {
+          "bytes": 813786,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/reviewed-v2-cycle-boundary-private-v01/existing-mask-consumers-epoch-replay-v01/candidate/v3-signed-mask-inputs.json",
+          "sha256": "79947e89499585db43389265168c2346b0530784bbf2ea65dfeafea141e614d8"
+        },
+        "source_rows": 2,
+        "unknown_excluded": 1
+      },
+      "v4": {
+        "analogy_excluded": 3,
+        "expected_receipt_sha256": "a5f2dd9a83d4bb26b7fe33670921e90e6755418cf306b9152d0cdcfcd911f10b",
+        "formal_rows": 6,
+        "permitted_negative_mask_sha256": "a4fc58478ec9c2c716e077b3118e97490687806e324d380d1bb48bda070b0669",
+        "positive_mask_sha256": "fdf30551b11bc9810838aa37c9bda9c76a46dc8ad4e1aa7ab3ce65e1f2bcb484",
+        "producer_sha256": "893ad3f353a77e33de33ae93e61b5c81957b40f09292d07c2dffab2c18ae620d",
+        "signed_capsule": {
+          "bytes": 1572446,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/reviewed-v2-cycle-boundary-private-v01/existing-mask-consumers-epoch-replay-v01/candidate/v4-signed-mask-inputs.json",
+          "sha256": "0774bb25621a03849b71ab468ec6f38699d5d8b86a29f630e74de1eefd95e5c0"
+        },
+        "source_rows": 4,
+        "unknown_excluded": 12
+      }
+    }
+  },
+  "validator_entrypoint": "alignment_relation_mask_handoff.validate_reviewed_train_relation_masks_v{2,3,4}"
+}

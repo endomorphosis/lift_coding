@@ -1,0 +1,196 @@
+{
+  "Git_persistent_mutations": 0,
+  "actual_PUBKit_common_dir": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/kit/.git",
+  "actual_original_common_dir": "/tmp/decommission-source-restore-20261114-ipfs-kit/.git",
+  "actual_owned_PID": 1240757,
+  "actual_terminal_returncode": 0,
+  "all_owned_FDs_closed": true,
+  "common_dir_verification_commands": [
+    {
+      "argv": [
+        "rev-parse",
+        "--path-format=absolute",
+        "--git-common-dir"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/kit",
+      "stderr": "",
+      "stdout": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/kit/.git\n"
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "--path-format=absolute",
+        "--git-common-dir"
+      ],
+      "returncode": 0,
+      "root": "/tmp/decommission-source-restore-20261114-ipfs-kit",
+      "stderr": "",
+      "stdout": "/tmp/decommission-source-restore-20261114-ipfs-kit/.git\n"
+    }
+  ],
+  "counts": {
+    "emitted_paths": 0,
+    "excluded_generated_paths": 0,
+    "lstat_attempts": 0,
+    "lstat_errors": 0,
+    "nonregular_paths": 0,
+    "recent_regular_paths": 0,
+    "regular_before_cutoff": 0
+  },
+  "created_ns": "1795476648551206872",
+  "cumulative_emitted_paths": 175617,
+  "cumulative_lstat_attempts": 124871,
+  "cumulative_scan_wall_seconds": 7.788555258885026,
+  "direct_blob_output": 0,
+  "errors": [],
+  "filesystem_supplement_not_run": true,
+  "foreign_process_polling": 0,
+  "full9_metadata_after": {
+    "/tmp/decommission-source-restore-20261114-ipfs-kit/.git/HEAD": {
+      "st_ctime_ns": "1794694419419106145",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "56900959",
+      "st_mode": "33204",
+      "st_mtime_ns": "1794694419419106145",
+      "st_nlink": "1",
+      "st_size": "21",
+      "st_uid": "1000"
+    },
+    "/tmp/decommission-source-restore-20261114-ipfs-kit/.git/config": {
+      "st_ctime_ns": "1794694413670896381",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "56885265",
+      "st_mode": "33204",
+      "st_mtime_ns": "1794694413670896381",
+      "st_nlink": "1",
+      "st_size": "360",
+      "st_uid": "1000"
+    },
+    "/tmp/decommission-source-restore-20261114-ipfs-kit/.git/index": {
+      "st_ctime_ns": "1794694419418835886",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "56885268",
+      "st_mode": "33204",
+      "st_mtime_ns": "1794694419417960580",
+      "st_nlink": "1",
+      "st_size": "902399",
+      "st_uid": "1000"
+    },
+    "/tmp/decommission-source-restore-20261114-ipfs-kit/.git/objects/info/alternates": null
+  },
+  "full9_metadata_before": {
+    "/tmp/decommission-source-restore-20261114-ipfs-kit/.git/HEAD": {
+      "st_ctime_ns": "1794694419419106145",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "56900959",
+      "st_mode": "33204",
+      "st_mtime_ns": "1794694419419106145",
+      "st_nlink": "1",
+      "st_size": "21",
+      "st_uid": "1000"
+    },
+    "/tmp/decommission-source-restore-20261114-ipfs-kit/.git/config": {
+      "st_ctime_ns": "1794694413670896381",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "56885265",
+      "st_mode": "33204",
+      "st_mtime_ns": "1794694413670896381",
+      "st_nlink": "1",
+      "st_size": "360",
+      "st_uid": "1000"
+    },
+    "/tmp/decommission-source-restore-20261114-ipfs-kit/.git/index": {
+      "st_ctime_ns": "1794694419418835886",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "56885268",
+      "st_mode": "33204",
+      "st_mtime_ns": "1794694419417960580",
+      "st_nlink": "1",
+      "st_size": "902399",
+      "st_uid": "1000"
+    },
+    "/tmp/decommission-source-restore-20261114-ipfs-kit/.git/objects/info/alternates": null
+  },
+  "invocation_only_environment": {
+    "GIT_ALTERNATE_OBJECT_DIRECTORIES": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/kit/.git/objects",
+    "GIT_NO_LAZY_FETCH": "1",
+    "GIT_OPTIONAL_LOCKS": "0"
+  },
+  "limit_messages": [],
+  "limits": {
+    "cumulative_emitted": 1500000,
+    "cumulative_lstat": 1000000,
+    "cumulative_wall_seconds": 300,
+    "fresh_emitted_paths": 10000,
+    "fresh_wall_seconds": 15
+  },
+  "ls_files_argv": [
+    "git",
+    "-C",
+    "/tmp/decommission-source-restore-20261114-ipfs-kit",
+    "ls-files",
+    "--others",
+    "--exclude-standard",
+    "-z",
+    "--",
+    "*.py",
+    "*.py.DATA",
+    "*.PUBLIC.DATA",
+    "*.CANDIDATE.DATA",
+    "*.lean",
+    "*.yaml",
+    "*.yml",
+    "*.sh",
+    "*.js",
+    "*.ts",
+    "*.tsx",
+    "*.jsx",
+    "*.toml",
+    "*.md",
+    "*.patch",
+    "*.diff",
+    ":(glob)source/**/*.json",
+    ":(glob)src/**/*.json",
+    ":(glob)lib/**/*.json",
+    ":(glob)ipfs_datasets_py/**/*.json",
+    ":(glob)ipfs_accelerate_py/**/*.json",
+    ":(glob)ipfs_kit_py/**/*.json",
+    ":(glob)tests/**/*.json",
+    ":(glob)test/**/*.json",
+    ":(glob)scripts/**/*.json",
+    ":(glob)docs/**/*.json",
+    ":(glob)config/**/*.json",
+    ":(glob)configs/**/*.json",
+    ":(glob).github/**/*.json"
+  ],
+  "ls_files_completed_successfully": true,
+  "metadata_classification_available": true,
+  "network_fetch": 0,
+  "observed_old_git_metadata_equal": true,
+  "owned_kill_sent": false,
+  "owned_process_reaped": true,
+  "owned_terminate_sent": false,
+  "prior_failure_retained": {
+    "PID": 1201654,
+    "missing_promisor_object": "54c14319bdacba63109b170574acc09b23bd2fbc",
+    "returncode": 128
+  },
+  "private_control_read_bytes_retained": 833721,
+  "processed_prefix_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "recent_regular_candidates": [],
+  "root": "/tmp/decommission-source-restore-20261114-ipfs-kit",
+  "scan_wall_seconds_this_supplement": 0.011732847429811954,
+  "schema": "offline-kit-invocation-only-alternate-untracked-metadata-check/v1",
+  "scope": "Existing source-suffix/date/ignore selection only; no global repository/body/adoption completion claim.",
+  "separate_prior_private_reads_retained": 1621692,
+  "source_bodies_explicitly_read": 0,
+  "stderr": "",
+  "unparsed_buffer_bytes": 0
+}

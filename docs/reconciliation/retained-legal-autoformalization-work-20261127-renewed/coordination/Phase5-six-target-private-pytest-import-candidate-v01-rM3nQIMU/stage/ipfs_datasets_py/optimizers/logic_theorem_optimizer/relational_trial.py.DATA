@@ -1,0 +1,717 @@
+"""Selected arm receipts inside the existing reviewed-decoder execution lifecycle."""
+from dataclasses import dataclass
+import json
+from os.path import isabs
+from math import isclose, isfinite
+from random import Random
+from typing import Callable
+
+from . import teacher_relational as geometry
+from .teacher_prefix import _commit, _need, _pin, _sha, _wire
+
+ARMS = ("supervised", "tap_only", "relational")
+CHECKPOINT_SCHEMA = "reviewed-decoder-relational-trial-checkpoint/v1"
+RECEIPT_SCHEMA = "reviewed-decoder-relational-trial/v1"
+WORKER_RECEIPT_SCHEMA = "reviewed-decoder-relational-trial-worker/v1"
+DEVELOPMENT_STEP_GRID_SCHEMA = "reviewed-development-optimizer-step-grid/v1"
+DEVELOPMENT_CHECKPOINT_SCHEDULE_SCHEMA = "reviewed-decoder-development-checkpoint-schedule/v1"
+DEVELOPMENT_CHECKPOINT_RECEIPT_SCHEMA = "reviewed-decoder-development-checkpoints/v1"
+MAX_BATCHES = 32
+MAX_NATIVE_BYTES = 16 * 1024**2
+
+
+@dataclass(frozen=True)
+class Batch:
+    records_sha256: str
+    row_ids: tuple[str, ...]
+    geometry_plan: geometry.Plan | None
+
+
+@dataclass(frozen=True)
+class Trial:
+    study_sha256: str
+    arm_recipe_sha256: str
+    attempt_sha256: str
+    arm: str
+    seed: int
+    job_sha256: str
+    job_controls_sha256: str
+    owner_supplement_sha256: str
+    prepared_inputs_sha256: str
+    parent_manifest_sha256: str
+    base_model_sha256: str
+    base_optimizer_sha256: str
+    configuration_sha256: str
+    batches: tuple[Batch, ...]
+    native_vendor_origin_sha256: str | None = None
+
+
+@dataclass(frozen=True)
+class Selection:
+    trial: Trial
+    expected_sha256: str
+    matched_trials: tuple[Trial, ...]
+    expected_matched_sha256: str
+    guard: Callable[[str, str], None]
+
+
+@dataclass(frozen=True)
+class DevelopmentCheckpointSchedule:
+    trial_sha256: str
+    study_sha256: str
+    development_design_sha256: str
+    steps: tuple[tuple[str, int], ...]
+    max_intermediate_bytes: int
+
+
+@dataclass(frozen=True)
+class DevelopmentCheckpointSelection:
+    schedule: DevelopmentCheckpointSchedule
+    expected_schedule_sha256: str
+    expected_step_grid_sha256: str
+    guard: Callable[[str, str], bool]
+
+
+@dataclass(frozen=True)
+class ArchivedCaptureIdentity:
+    archived_arm_sha256: str
+    capture_plan_sha256: str
+    resource_plan_sha256: str
+
+
+@dataclass(frozen=True)
+class _ArchivedCaptureVerifier:
+    identity: ArchivedCaptureIdentity
+    owner_verifier: Callable[[], bool]
+
+    def __call__(self):
+        return self.owner_verifier() is True
+
+
+def _archived_capture_pins(identity):
+    _need(type(identity) is ArchivedCaptureIdentity, "typed archived capture identity required")
+    pins = {"archived_arm_sha256": identity.archived_arm_sha256,
+            "capture_plan_sha256": identity.capture_plan_sha256,
+            "resource_plan_sha256": identity.resource_plan_sha256}
+    _need(all(_pin(pin) for pin in pins.values()), "exact archived capture commitments required")
+    return pins
+
+
+@dataclass(frozen=True)
+class ArchivedScheduledSelection:
+    """Owner-authenticated checkpoint readback. The training worker requires Selection."""
+    trial: Trial
+    expected_sha256: str
+    matched_trials: tuple[Trial, ...]
+    expected_matched_sha256: str
+    schedule: DevelopmentCheckpointSchedule
+    expected_schedule_sha256: str
+    expected_step_grid_sha256: str
+    terminal_close_sha256: str
+    verify_archive: Callable[[], bool]
+    archived_capture: ArchivedCaptureIdentity | None = None
+
+
+def development_step_grid_commitment(schedule):
+    """Use the existing development study's exact grid commitment encoding."""
+    _need(type(schedule) is DevelopmentCheckpointSchedule and _pin(schedule.study_sha256)
+          and _pin(schedule.development_design_sha256) and type(schedule.steps) is tuple
+          and 1 <= len(schedule.steps) <= MAX_BATCHES
+          and all(type(row) is tuple and len(row) == 2 and type(row[0]) is str
+                  and 0 < len(row[0]) <= 512 and row[0] not in ("close", "final")
+                  and type(row[1]) is int and 0 < row[1] <= 10**9 for row in schedule.steps)
+          and len({look for look, _ in schedule.steps}) == len(schedule.steps)
+          and all(left[1] < right[1] for left, right in zip(schedule.steps, schedule.steps[1:])),
+          "bounded ordered development labels and exact positive optimizer steps required")
+    return _commit((DEVELOPMENT_STEP_GRID_SCHEMA, {
+        "study_sha256": schedule.study_sha256,
+        "development_design_sha256": schedule.development_design_sha256, "steps": schedule.steps}))
+
+
+def development_checkpoint_schedule_commitment(schedule):
+    grid_sha256 = development_step_grid_commitment(schedule)
+    _need(_pin(schedule.trial_sha256) and type(schedule.max_intermediate_bytes) is int
+          and schedule.max_intermediate_bytes > 0, "trial pin and positive intermediate byte budget required")
+    return _commit((DEVELOPMENT_CHECKPOINT_SCHEDULE_SCHEMA, schedule.trial_sha256,
+                    grid_sha256, schedule.max_intermediate_bytes))
+
+
+def approve_development_checkpoints(development, selection, *, initial_optimizer_steps, max_steps):
+    """Check the selected save window and replay the existing owner's grant."""
+    _need(type(development) is DevelopmentCheckpointSelection and type(selection) is Selection,
+          "explicit development checkpoint and relational trial selections required")
+    schedule = development.schedule
+    schedule_sha256, grid_sha256 = development.expected_schedule_sha256, development.expected_step_grid_sha256
+    _need(callable(development.guard), "development checkpoint selection or save window differs")
+    _check_checkpoint_window(selection, schedule, schedule_sha256, grid_sha256,
+                             initial_optimizer_steps=initial_optimizer_steps, max_steps=max_steps)
+    guard = development.guard
+    _need(guard(schedule_sha256, grid_sha256) is True, "owner did not approve scheduled checkpoint capture")
+    _need(development.schedule is schedule and development.guard is guard
+          and (development.expected_schedule_sha256, development.expected_step_grid_sha256) ==
+          (schedule_sha256, grid_sha256) and development_checkpoint_schedule_commitment(schedule) == schedule_sha256
+          and schedule.trial_sha256 == selection.expected_sha256
+          and schedule.study_sha256 == selection.trial.study_sha256,
+          "development checkpoint selection changed during owner verification")
+    return schedule
+
+
+def _check_checkpoint_window(selection, schedule, schedule_sha256, grid_sha256, *, initial_optimizer_steps, max_steps):
+    _need(development_checkpoint_schedule_commitment(schedule) == schedule_sha256
+          and development_step_grid_commitment(schedule) == grid_sha256
+          and schedule.trial_sha256 == selection.expected_sha256
+          and schedule.study_sha256 == selection.trial.study_sha256
+          and type(initial_optimizer_steps) is int and initial_optimizer_steps >= 0
+          and type(max_steps) is int and 1 <= max_steps <= len(selection.trial.batches)
+          and all(initial_optimizer_steps < step <= initial_optimizer_steps + max_steps
+                  for _, step in schedule.steps), "development checkpoint selection or save window differs")
+
+
+def require_native_t5_origin(value, *, uses_t5, fixture_only):
+    """Require native proof on fresh non-fixture T5 relational calls."""
+    if uses_t5:
+        _need(type(fixture_only) is bool, "explicit matched T5 fiction scope required")
+    expected = uses_t5 and fixture_only is False
+    _need(_pin(value) if expected else value is None,
+          "native vendor origin required for non-fixture matched T5 only")
+
+
+def commitment(trial):
+    _need(type(trial) is Trial and type(trial.arm) is str and trial.arm in ARMS and type(trial.seed) is int,
+          "explicit reviewed experimental arm and seed required")
+    pins = (trial.study_sha256, trial.arm_recipe_sha256, trial.attempt_sha256, trial.job_sha256, trial.job_controls_sha256,
+            trial.owner_supplement_sha256, trial.prepared_inputs_sha256, trial.parent_manifest_sha256,
+            trial.base_model_sha256, trial.base_optimizer_sha256, trial.configuration_sha256)
+    _need(all(_pin(pin) for pin in pins) and type(trial.batches) is tuple and 1 <= len(trial.batches) <= MAX_BATCHES,
+          "bounded exact reviewed trial and owner commitments required")
+    entries = []
+    charged = 0
+    for entry in trial.batches:
+        _need(type(entry) is Batch and _pin(entry.records_sha256) and type(entry.row_ids) is tuple
+              and 2 <= len(entry.row_ids) <= 32 and all(type(row) is str and 0 < len(row) <= 512 for row in entry.row_ids)
+              and len(set(entry.row_ids)) == len(entry.row_ids), "complete bounded co-batch required")
+        if trial.arm == "supervised":
+            _need(entry.geometry_plan is None, "ordinary supervised arm has no geometry plan")
+            plan_pin = None
+        else:
+            plan = entry.geometry_plan
+            plan_pin = geometry.plan_commit(plan)
+            _need((plan.train_records_sha256, plan.source_pairs.row_ids, plan.checkpoint_sha256,
+                   plan.configuration_sha256) ==
+                  (entry.records_sha256, entry.row_ids, trial.parent_manifest_sha256, trial.configuration_sha256),
+                  "geometry plan differs from co-batch or run-start ancestry")
+            charged += sum(len(row.data) for row in plan.rows)
+            _need(charged <= MAX_NATIVE_BYTES, "trial native vector byte budget exceeded")
+        entries.append((entry.records_sha256, entry.row_ids, plan_pin))
+    payload = (RECEIPT_SCHEMA, trial.arm, trial.seed, pins, entries)
+    native_origin = trial.native_vendor_origin_sha256
+    if native_origin is not None:
+        _need(_pin(native_origin), "exact native vendor origin digest required")
+        payload = (*payload, ("native-t5-vendor-origin/v1", native_origin))
+    return _commit(payload)
+
+
+def job_controls(spec):
+    return _commit((spec.seed, spec.batch_size, spec.max_steps, spec.max_seconds,
+                    spec.max_source_tokens, spec.max_target_tokens, spec.allow_fictional_fixture))
+
+
+def matched_commitment(trials):
+    _need(type(trials) is tuple and len(trials) == len(ARMS), "all three matched arms are required")
+    pins = tuple(commitment(trial) for trial in trials)
+    _need(tuple(trial.arm for trial in trials) == ARMS, "matched arm order differs")
+    for field in ("arm_recipe_sha256", "attempt_sha256", "job_sha256"):
+        _need(len({getattr(trial, field) for trial in trials}) == len(ARMS),
+              "arms require distinct selected recipes, attempts and jobs")
+
+    def common(trial):
+        return (trial.study_sha256, trial.seed, trial.job_controls_sha256,
+                trial.owner_supplement_sha256, trial.prepared_inputs_sha256,
+                trial.parent_manifest_sha256, trial.base_model_sha256, trial.base_optimizer_sha256,
+                trial.configuration_sha256, trial.native_vendor_origin_sha256,
+                tuple((batch.records_sha256, batch.row_ids) for batch in trial.batches))
+
+    _need(common(trials[0]) == common(trials[1]) == common(trials[2]),
+          "matched arms do not share exact source order, resources and initial lineage")
+    for tap, relational in zip(trials[1].batches, trials[2].batches, strict=True):
+        _need(geometry.plan_commit(tap.geometry_plan) == geometry.plan_commit(relational.geometry_plan),
+              "tap-only and geometry arm observation plans differ")
+    return _commit((RECEIPT_SCHEMA, "matched-three-arms/v1", pins))
+
+
+def _check_matched_selection(selection):
+    _need(_pin(selection.expected_sha256) and _pin(selection.expected_matched_sha256)
+          and matched_commitment(selection.matched_trials) == selection.expected_matched_sha256
+          and any(commitment(trial) == selection.expected_sha256 and trial == selection.trial
+                  for trial in selection.matched_trials),
+          "independently selected matched trial and owner guard required")
+
+
+def locked_owner_guard(selection):
+    """Replay owner approval with the selected native origin held across callbacks."""
+    selected_trial = selection.trial
+    matched_trials = selection.matched_trials
+    selected_guard = selection.guard
+    selected_pins = selection.expected_sha256, selection.expected_matched_sha256
+    origin = selected_trial.native_vendor_origin_sha256
+
+    def check():
+        _need(selection.trial.native_vendor_origin_sha256 == origin
+              and all(arm.native_vendor_origin_sha256 == origin for arm in selection.matched_trials),
+              "selected native vendor origin changed during owner verification")
+        if origin is not None:
+            _need(selection.trial is selected_trial and selection.matched_trials is matched_trials
+                  and selection.guard is selected_guard
+                  and (selection.expected_sha256, selection.expected_matched_sha256) == selected_pins,
+                  "selected native T5 trial or owner guard changed during verification")
+
+    def replay():
+        check()
+        approved = selection.guard(selection.expected_sha256, selection.expected_matched_sha256)
+        check()
+        if origin is not None:
+            _need(approved is True, "native T5 owner refused the exact trial")
+
+    return replay
+
+
+def approve(selection):
+    _need(type(selection) is Selection and callable(selection.guard),
+          "independently selected matched trial and owner guard required")
+    _check_matched_selection(selection)
+    locked_owner_guard(selection)()
+    return selection.trial
+
+
+def batch_indices(record_count, batch_size, seed, progress):
+    """Existing deterministic order and cursor semantics."""
+    order = list(range(record_count))
+    Random(seed + progress["epochs_completed"]).shuffle(order)
+    offset = progress["row_cursor"]
+    return order[offset:offset + batch_size]
+
+
+def advance(progress, size, record_count):
+    progress["optimizer_steps"] += 1
+    progress["row_cursor"] += size
+    if progress["row_cursor"] == record_count:
+        progress["epochs_completed"] += 1
+        progress["row_cursor"] = 0
+
+
+def check_batch(entry, batch):
+    _need(entry.row_ids == tuple(row["id"] for row in batch) and entry.records_sha256 == _commit(batch),
+          "selected co-batch differs from actual ordered admitted records")
+
+
+def preflight(trial, spec, data, records, progress, configuration):
+    _need((trial.job_sha256, trial.job_controls_sha256, trial.seed, len(trial.batches), trial.prepared_inputs_sha256,
+           trial.parent_manifest_sha256, trial.base_model_sha256, trial.base_optimizer_sha256,
+           trial.configuration_sha256) ==
+          (spec.canonical_sha256, job_controls(spec), spec.seed, spec.max_steps, data["prepared_sha256"],
+           spec.parent_checkpoint_artifact.sha256, spec.base_model_checkpoint.sha256,
+           spec.base_optimizer_checkpoint.sha256, _commit(configuration)),
+          "trial differs from selected reviewed job, prepared inputs, or initial checkpoint pair")
+    model_config = configuration.get("model_config")
+    uses_t5 = (configuration.get("architecture") == "encoder_decoder"
+               and type(model_config) is dict and model_config.get("model_type") == "t5")
+    fixture_only = None
+    if uses_t5:
+        receipt = data.get("receipt")
+        _need(type(receipt) is dict and type(receipt.get("fixture_only")) is bool
+              and receipt["fixture_only"] is spec.allow_fictional_fixture,
+              "actual TRAIN fiction scope differs from the matched T5 job")
+        fixture_only = receipt["fixture_only"]
+    require_native_t5_origin(trial.native_vendor_origin_sha256, uses_t5=uses_t5, fixture_only=fixture_only)
+    simulated = dict(progress)
+    expected_targets = []
+    for entry in trial.batches:
+        indices = batch_indices(len(records), spec.batch_size, spec.seed, simulated)
+        payload = [records[i] for i in indices]
+        check_batch(entry, payload)
+        targets = None
+        if entry.geometry_plan is not None:
+            targets = geometry.bind(entry.geometry_plan, payload, configuration=configuration,
+                                    expected_plan_sha256=geometry.plan_commit(entry.geometry_plan))
+        expected_targets.append(targets)
+        advance(simulated, len(payload), len(records))
+    return tuple(expected_targets)
+
+
+def checked_evidence(trial, entry, report, detail, *, step_before, expected_targets):
+    _need(type(report.get("optimizer_steps")) is int and report["optimizer_steps"] == step_before + 1
+          and type(report.get("loss")) in (float, int) and isfinite(report["loss"]),
+          "returned numeric report does not bind completed optimizer update")
+    plan = entry.geometry_plan
+    if plan is None:
+        _need(detail is None, "supervised arm must use the ordinary update")
+        return None
+    fields = {"schema", "plan_sha256", "checkpoint_sha256", "train_records_sha256", "student_profile",
+              "teacher_profile_sha256", "teacher_width", "coefficient", "supervised_model_loss", "geometry_loss",
+              "edges", "row_ids", "selected_source_positions_zero_based", "observed_hidden_elements",
+              "teacher_target_cosines", "student_cosines", "extra_model_forwards", "row_forward_counts",
+              "update_objective"}
+    objective = "supervised" if trial.arm == "tap_only" else "supervised_plus_geometry"
+    _need(type(detail) is dict and set(detail) == fields and
+          (detail["schema"], detail["plan_sha256"], detail["checkpoint_sha256"], detail["train_records_sha256"],
+           detail["student_profile"], detail["teacher_profile_sha256"], detail["teacher_width"],
+           detail["coefficient"], detail["edges"], detail["row_ids"], detail["update_objective"]) ==
+          ("train-source-pair-cosine-step/v1", geometry.plan_commit(plan), trial.parent_manifest_sha256,
+           entry.records_sha256, plan.student_profile, plan.teacher_profile_sha256, plan.teacher_width,
+           plan.coefficient, plan.source_pairs.edges, entry.row_ids, objective),
+          "returned geometry detail does not bind the selected arm, plan and batch")
+    _need(detail["row_forward_counts"] == (1,) * len(entry.row_ids)
+          and type(detail["extra_model_forwards"]) is int and detail["extra_model_forwards"] == 0
+          and type(detail["observed_hidden_elements"]) is int
+          and 0 < detail["observed_hidden_elements"] <= plan.maximum_hidden_elements
+          and type(detail["selected_source_positions_zero_based"]) is tuple
+          and len(detail["selected_source_positions_zero_based"]) == len(entry.row_ids)
+          and all(type(index) is int and index >= 0 for index in detail["selected_source_positions_zero_based"]),
+          "returned geometry observation budget differs")
+    teacher, student = detail["teacher_target_cosines"], detail["student_cosines"]
+    _need(teacher == expected_targets, "returned teacher targets differ from exact selected native vector geometry")
+    _need(type(teacher) is type(student) is tuple and len(teacher) == len(student) == len(plan.source_pairs.edges)
+          and all(type(value) is float and isfinite(value) and abs(value) <= 1.0000000001
+                  for pair in (teacher, student) for value in pair),
+          "returned geometry scores differ from selected pair roster")
+    supervised, auxiliary = detail["supervised_model_loss"], detail["geometry_loss"]
+    _need(type(supervised) is type(auxiliary) is float and isfinite(supervised) and isfinite(auxiliary)
+          and isclose(auxiliary, sum((a-b)**2 for a,b in zip(teacher, student, strict=True)) / len(teacher),
+                      rel_tol=1e-10, abs_tol=1e-14)
+          and (report["loss"] == supervised if trial.arm == "tap_only" else
+               isclose(report["loss"], supervised + plan.coefficient * auxiliary, rel_tol=1e-10, abs_tol=1e-14)),
+          "reported step scalar differs from the selected objective")
+    return detail
+
+
+def provenance(selection, steps):
+    trial = selection.trial
+    return {"schema": RECEIPT_SCHEMA, "selection_sha256": selection.expected_sha256,
+            "matched_selection_sha256": selection.expected_matched_sha256,
+            "study_sha256": trial.study_sha256, "arm_recipe_sha256": trial.arm_recipe_sha256,
+            "attempt_sha256": trial.attempt_sha256, "arm": trial.arm, "seed": trial.seed,
+            "prepared_inputs_sha256": trial.prepared_inputs_sha256,
+            "parent_manifest_sha256": trial.parent_manifest_sha256,
+            "base_model_sha256": trial.base_model_sha256, "base_optimizer_sha256": trial.base_optimizer_sha256,
+            "scheduled_batches": len(trial.batches), "completed_steps": tuple(steps),
+            "batch_timing_scope": "worker-backend-call-only/excludes-arm-closeout-and-preparation",
+            "whole_arm_cost_required": True}
+
+
+def _evidence_json(raw, limit):
+    _need(type(raw) is bytes and 0 < len(raw) <= limit, "bounded exact trial evidence bytes required")
+    value = json.loads(raw)
+    _need(type(value) is dict and _wire(value) == raw, "canonical trial evidence object required")
+    return value
+
+
+def _artifact(value):
+    return (type(value) is dict and set(value) == {"path", "sha256", "bytes"}
+            and type(value["path"]) is str and isabs(value["path"]) and _pin(value["sha256"])
+            and type(value["bytes"]) is int and value["bytes"] > 0)
+
+
+@dataclass(frozen=True)
+class TerminalClose:
+    attempt_sha256: str
+    worker_receipt_sha256: str
+    candidate_sha256: str
+    owner_execution_record_sha256: str
+    status: str
+
+
+def close_commitment(close):
+    _need(type(close) is TerminalClose and close.status == "normal_return_and_output_closed"
+          and all(_pin(value) for value in (close.attempt_sha256, close.worker_receipt_sha256,
+                  close.candidate_sha256, close.owner_execution_record_sha256)),
+          "independent terminal success and output closure required")
+    return _commit(("relational-trial-owner-close/v1", close.status, close.attempt_sha256,
+                    close.worker_receipt_sha256, close.candidate_sha256, close.owner_execution_record_sha256))
+
+
+def bind_candidate(selection, *, worker_receipt, expected_worker_receipt_sha256, candidate_manifest,
+                   terminal_close, expected_terminal_close_sha256, verify_owner_close):
+    """Associate a persisted successful attempt with the exact candidate references.
+
+    Subsequent evaluators still own artifact authentication, numerical restore and
+    independent legal results. The study meter is never derived from these bytes.
+    """
+    trial = approve(selection)
+    return _bind_selected_candidate(selection, trial, worker_receipt=worker_receipt,
+        expected_worker_receipt_sha256=expected_worker_receipt_sha256, candidate_manifest=candidate_manifest,
+        terminal_close=terminal_close, expected_terminal_close_sha256=expected_terminal_close_sha256,
+        verify_owner_close=verify_owner_close)
+
+
+def _bind_selected_candidate(selection, trial, *, worker_receipt, expected_worker_receipt_sha256, candidate_manifest,
+                             terminal_close, expected_terminal_close_sha256, verify_owner_close):
+    _need(_pin(expected_terminal_close_sha256) and close_commitment(terminal_close) == expected_terminal_close_sha256
+          and callable(verify_owner_close) and terminal_close.attempt_sha256 == trial.attempt_sha256
+          and terminal_close.worker_receipt_sha256 == expected_worker_receipt_sha256,
+          "selected terminal owner close differs from trial and worker receipt")
+    # This verifier is the admitted owner boundary. An absent failure file
+    # cannot establish normal return, durable output or clean process closure.
+    _need(verify_owner_close(terminal_close) is True, "owner did not verify terminal execution and output closure")
+    receipt = _evidence_json(worker_receipt, 8 * 1024**2)
+    candidate = _evidence_json(candidate_manifest, 2 * 1024**2)
+    candidate_ref = receipt.get("candidate")
+    _need(_pin(expected_worker_receipt_sha256) and _sha(worker_receipt) == expected_worker_receipt_sha256
+          and _artifact(candidate_ref) and candidate_ref["bytes"] == len(candidate_manifest)
+          and candidate_ref["sha256"] == terminal_close.candidate_sha256 == _sha(candidate_manifest)
+          and receipt.get("schema_version") == WORKER_RECEIPT_SCHEMA and candidate.get("schema") == CHECKPOINT_SCHEMA
+          and receipt.get("qualified") is False and candidate.get("qualified") is False
+          and receipt.get("promotion_performed") is False and candidate.get("promotion_performed") is False,
+          "selected worker receipt and trial manifest do not bind the same closed candidate")
+    detail = receipt.get("relational_trial")
+    _need(type(detail) is dict and type(detail.get("completed_steps")) is list
+          and _commit(detail) == candidate.get("relational_trial_sha256")
+          and _wire(provenance(selection, detail["completed_steps"])) == _wire(detail)
+          and receipt.get("job_spec_sha256") == trial.job_sha256
+          and candidate.get("parent_checkpoint_sha256") == trial.parent_manifest_sha256
+          and candidate.get("progress") == receipt.get("worker_progress"),
+          "trial selection, starting ancestry or published progress differs")
+    model, optimizer = receipt.get("model_checkpoint"), receipt.get("optimizer_checkpoint")
+    _need(_artifact(model) and _artifact(optimizer) and model == candidate.get("model_state")
+          and optimizer == candidate.get("optimizer_state")
+          and _artifact(receipt.get("base_model_checkpoint")) and _artifact(receipt.get("base_optimizer_checkpoint"))
+          and receipt["base_model_checkpoint"]["sha256"] == trial.base_model_sha256
+          and receipt["base_optimizer_checkpoint"]["sha256"] == trial.base_optimizer_sha256,
+          "trial receipt does not bind the exact starting and candidate numerical pairs")
+    steps, metrics = detail["completed_steps"], receipt.get("backend_reported_metrics")
+    start = receipt.get("initial_progress", {}).get("optimizer_steps")
+    _need(type(start) is int and start >= 0 and type(metrics) is list
+          and 1 <= len(steps) == len(metrics) == receipt.get("backend_train_batch_calls") <= len(trial.batches)
+          and start + len(steps) == candidate["progress"]["optimizer_steps"]
+          == receipt.get("backend_reported_optimizer_steps"), "trial evidence is not a contiguous completed prefix")
+    for i, (step, report, entry) in enumerate(zip(steps, metrics, trial.batches[:len(steps)], strict=True)):
+        _need(type(step) is dict and type(step.get("call")) is dict
+              and step.get("row_ids") == list(entry.row_ids)
+              and step["call"].get("records_sha256") == entry.records_sha256
+              and step["call"].get("batch_index") == i and step["call"].get("returned") is True
+              and step["call"].get("optimizer_step_before") == start + i
+              and step.get("optimizer_step_after") == start + i + 1
+              and step.get("metrics_sha256") == _commit(report), "trial step evidence differs from selected co-batch or progress")
+    return {"study_sha256": trial.study_sha256, "arm": trial.arm, "seed": trial.seed,
+            "attempt_sha256": trial.attempt_sha256, "arm_recipe_sha256": trial.arm_recipe_sha256,
+            "worker_receipt_sha256": expected_worker_receipt_sha256,
+            "owner_execution_record_sha256": terminal_close.owner_execution_record_sha256,
+            "terminal_close_sha256": expected_terminal_close_sha256, "candidate": candidate_ref,
+            "model_checkpoint": model, "optimizer_checkpoint": optimizer,
+            "qualified": False, "whole_arm_cost_required": True}
+
+
+@dataclass(frozen=True)
+class ScheduledCheckpointClose:
+    attempt_sha256: str
+    worker_receipt_sha256: str
+    terminal_close_sha256: str
+    schedule_sha256: str
+    step_grid_sha256: str
+    look: str
+    optimizer_step: int
+    candidate_sha256: str
+    owner_stage_record_sha256: str
+    status: str
+
+
+def scheduled_checkpoint_close_commitment(close):
+    _need(type(close) is ScheduledCheckpointClose and close.status == "snapshot_output_closed_and_read_back"
+          and type(close.look) is str and bool(close.look)
+          and type(close.optimizer_step) is int and close.optimizer_step > 0
+          and all(_pin(value) for value in (close.attempt_sha256, close.worker_receipt_sha256,
+              close.terminal_close_sha256, close.schedule_sha256, close.step_grid_sha256,
+              close.candidate_sha256, close.owner_stage_record_sha256)),
+          "independent scheduled checkpoint output closure and readback required")
+    return _commit(("relational-trial-scheduled-checkpoint-close/v1", close.status,
+                    close.attempt_sha256, close.worker_receipt_sha256, close.terminal_close_sha256,
+                    close.schedule_sha256, close.step_grid_sha256, close.look, close.optimizer_step,
+                    close.candidate_sha256, close.owner_stage_record_sha256))
+
+
+def _scheduled_checkpoint_row(receipt, terminal, schedule, *, schedule_sha256, step_grid_sha256, close):
+    evidence = receipt.get("development_checkpoints")
+    _need(type(evidence) is dict and set(evidence) == {"schema", "schedule_sha256", "step_grid_sha256",
+              "max_intermediate_bytes", "intermediate_bytes", "looks"}
+          and evidence["schema"] == DEVELOPMENT_CHECKPOINT_RECEIPT_SCHEMA
+          and (evidence["schedule_sha256"], evidence["step_grid_sha256"]) == (schedule_sha256, step_grid_sha256)
+          and type(evidence["max_intermediate_bytes"]) is int
+          and evidence["max_intermediate_bytes"] == schedule.max_intermediate_bytes
+          and type(evidence["intermediate_bytes"]) is int
+          and 0 <= evidence["intermediate_bytes"] <= schedule.max_intermediate_bytes
+          and type(evidence["looks"]) is list and len(evidence["looks"]) == len(schedule.steps),
+          "terminal receipt must retain the exact selected schedule, roster and output allowance")
+
+    base_fields = {"look", "optimizer_step", "status"}
+    artifact_fields = ("candidate", "model_checkpoint", "optimizer_checkpoint")
+    terminal_artifacts = tuple(receipt[key] for key in artifact_fields)
+    paths = {ref["path"] for ref in terminal_artifacts}
+    _need(len(paths) == len(terminal_artifacts), "terminal candidate and paired state paths must be distinct")
+    candidate_pins = {receipt["candidate"]["sha256"]}
+    output_directory = receipt["candidate"]["path"].rsplit("/", 1)[0]
+    initial_step = receipt["initial_progress"]["optimizer_steps"]
+    last_step = terminal["progress"]["optimizer_steps"]
+    max_step = initial_step + receipt["relational_trial"]["scheduled_batches"]
+    total_bytes = 0
+    selected = None
+    for row, (look, step) in zip(evidence["looks"], schedule.steps, strict=True):
+        _need(type(row) is dict and (row.get("look"), row.get("optimizer_step")) == (look, step)
+              and type(row.get("optimizer_step")) is int,
+              "terminal checkpoint roster differs from the exact ordered scheduled looks")
+        status = row.get("status")
+        if step > last_step:
+            _need(status == "not_reached" and set(row) == base_fields,
+                  "unreached checkpoint cannot carry artifact references")
+            continue
+
+        _need(set(row) == base_fields | set(artifact_fields) and all(_artifact(row[key]) for key in artifact_fields),
+              "reached checkpoint must retain its exact candidate and paired state references")
+        refs = tuple(row[key] for key in artifact_fields)
+        if status == "terminal_candidate":
+            _need(step == last_step == max_step and refs == terminal_artifacts,
+                  "terminal look must alias the exact terminal artifacts and optimizer step")
+        else:
+            added_paths = {ref["path"] for ref in refs}
+            stem = f"{output_directory}/development-step-{step:010d}"
+            expected_paths = (f"{stem}.manifest.json", f"{stem}.model.checkpoint", f"{stem}.optimizer.checkpoint")
+            _need(status == "intermediate_retained" and step < max_step
+                  and tuple(ref["path"] for ref in refs) == expected_paths and not paths.intersection(added_paths)
+                  and row["candidate"]["sha256"] not in candidate_pins,
+                  "retained intermediate checkpoint requires distinct exact artifact paths and manifest")
+            paths.update(added_paths)
+            candidate_pins.add(row["candidate"]["sha256"])
+            total_bytes += sum(ref["bytes"] for ref in refs)
+        if (look, step) == (close.look, close.optimizer_step):
+            selected = row
+
+    _need(total_bytes == evidence["intermediate_bytes"], "retained intermediate checkpoint byte total differs")
+    _need(selected is not None and selected["candidate"]["sha256"] == close.candidate_sha256,
+          "selected checkpoint is absent, unreached or differs from its closed artifact")
+    return selected
+
+
+def bind_scheduled_candidate(selection, *, development=None, worker_receipt, expected_worker_receipt_sha256,
+                             terminal_candidate_manifest, candidate_manifest, terminal_close,
+                             expected_terminal_close_sha256, verify_owner_close, scheduled_close,
+                             expected_scheduled_close_sha256, verify_scheduled_close):
+    """Bind a retained look retrospectively after the original trial is closed."""
+    archived = type(selection) is ArchivedScheduledSelection
+    _need((archived and development is None
+           or type(selection) is Selection and type(development) is DevelopmentCheckpointSelection)
+          and callable(verify_scheduled_close) and _pin(expected_scheduled_close_sha256),
+          "selected trial, development checkpoint schedule and independent snapshot verifier required")
+    trial_sha = selection.expected_sha256
+    matched_sha = selection.expected_matched_sha256
+    selected_development = selection if archived else development
+    schedule_sha = selected_development.expected_schedule_sha256
+    grid_sha = selected_development.expected_step_grid_sha256
+    capture_pins = None
+    if archived:
+        verify_archive = selection.verify_archive
+        capture_identity = selection.archived_capture
+        _need(callable(verify_archive) and selection.terminal_close_sha256 == expected_terminal_close_sha256,
+              "archive must select the exact whole trial close and its owner verifier")
+        _need((capture_identity is not None) == (type(verify_archive) is _ArchivedCaptureVerifier),
+              "archived capture identity and its owner verifier must travel together")
+        if capture_identity is not None:
+            _need(verify_archive.identity is capture_identity and callable(verify_archive.owner_verifier),
+                  "archived capture identity differs from its owner verifier")
+            capture_owner_verifier = verify_archive.owner_verifier
+            capture_pins = _archived_capture_pins(capture_identity)
+    else:
+        trial_guard, schedule_guard = selection.guard, development.guard
+
+    def current():
+        _need(selection.expected_sha256 == commitment(selection.trial) == trial_sha
+              and selection.expected_matched_sha256 == matched_commitment(selection.matched_trials) == matched_sha
+              and (selection.verify_archive is verify_archive and selection.terminal_close_sha256 == expected_terminal_close_sha256
+                   and selection.archived_capture is capture_identity
+                   and (capture_pins is None or (verify_archive.identity is capture_identity
+                        and verify_archive.owner_verifier is capture_owner_verifier
+                        and _archived_capture_pins(capture_identity) == capture_pins))
+                   if archived else selection.guard is trial_guard and development.guard is schedule_guard)
+              and selected_development.expected_schedule_sha256 ==
+                  development_checkpoint_schedule_commitment(selected_development.schedule)
+                  == schedule_sha
+              and selected_development.expected_step_grid_sha256 == grid_sha
+              and close_commitment(terminal_close) == expected_terminal_close_sha256
+              and scheduled_checkpoint_close_commitment(scheduled_close) == expected_scheduled_close_sha256
+              and (scheduled_close.attempt_sha256, scheduled_close.worker_receipt_sha256,
+                   scheduled_close.terminal_close_sha256, scheduled_close.schedule_sha256,
+                   scheduled_close.step_grid_sha256) == (selection.trial.attempt_sha256,
+                   expected_worker_receipt_sha256, expected_terminal_close_sha256, schedule_sha, grid_sha),
+              "scheduled checkpoint selection or either owner close differs or changed")
+
+    current()
+    if archived:
+        _check_matched_selection(selection)
+        _need(verify_archive() is True, "owner did not authenticate archived arm and capture approval")
+        current()
+        selected_trial = selection.trial
+    else:
+        selected_trial = approve(selection)
+    linked = _bind_selected_candidate(selection, selected_trial, worker_receipt=worker_receipt,
+        expected_worker_receipt_sha256=expected_worker_receipt_sha256, candidate_manifest=terminal_candidate_manifest,
+        terminal_close=terminal_close, expected_terminal_close_sha256=expected_terminal_close_sha256,
+        verify_owner_close=verify_owner_close)
+    current()
+    receipt = _evidence_json(worker_receipt, 8 * 1024**2)
+    terminal = _evidence_json(terminal_candidate_manifest, 2 * 1024**2)
+    trial = selection.trial
+    initial_steps = receipt["initial_progress"]["optimizer_steps"]
+    if archived:
+        _need(receipt["initial_progress"] == {"epochs_completed": 0, "row_cursor": 0, "optimizer_steps": 0}
+              and all(type(value) is int for value in receipt["initial_progress"].values()),
+              "archived fresh checkpoint arm must retain its step-zero starting progress")
+        schedule = selection.schedule
+        _check_checkpoint_window(selection, schedule, schedule_sha, grid_sha,
+                                 initial_optimizer_steps=initial_steps, max_steps=len(trial.batches))
+    else:
+        schedule = approve_development_checkpoints(development, selection, initial_optimizer_steps=initial_steps,
+                                                  max_steps=len(trial.batches))
+    current()
+    _need(development_checkpoint_schedule_commitment(schedule) == schedule_sha,
+          "approved checkpoint schedule differs from the archived selection")
+    row = _scheduled_checkpoint_row(receipt, terminal, schedule, schedule_sha256=schedule_sha,
+                                    step_grid_sha256=grid_sha, close=scheduled_close)
+    candidate = _evidence_json(candidate_manifest, 2 * 1024**2)
+    _need(len(candidate_manifest) == row["candidate"]["bytes"] and _sha(candidate_manifest) == row["candidate"]["sha256"],
+          "scheduled candidate manifest differs from its retained bytes")
+    if row["status"] == "terminal_candidate":
+        _need(candidate_manifest == terminal_candidate_manifest, "terminal alias must use the exact terminal manifest")
+    else:
+        progress = dict(receipt["initial_progress"])
+        completed = scheduled_close.optimizer_step - progress["optimizer_steps"]
+        _need(0 < completed <= len(receipt["relational_trial"]["completed_steps"]),
+              "scheduled step does not name an exact completed training prefix")
+        record_count = terminal["training_binding"].get("record_count") if type(terminal.get("training_binding")) is dict else None
+        _need(type(record_count) is int and record_count > 0
+              and set(progress) == {"optimizer_steps", "epochs_completed", "row_cursor"}
+              and all(type(value) is int and value >= 0 for value in progress.values())
+              and progress["row_cursor"] < record_count,
+              "scheduled candidate requires the original reviewed population and initial cursor")
+        for batch in trial.batches[:completed]:
+            _need(progress["row_cursor"] + len(batch.row_ids) <= record_count,
+                  "selected training prefix exceeds its reviewed population boundary")
+            advance(progress, len(batch.row_ids), record_count)
+        prefix = provenance(selection, receipt["relational_trial"]["completed_steps"][:completed])
+        expected = {**terminal, "model_state": row["model_checkpoint"], "optimizer_state": row["optimizer_checkpoint"],
+                    "progress": progress, "relational_trial_sha256": _commit(prefix)}
+        _need(_wire(candidate) == _wire(expected),
+              "scheduled candidate does not bind the exact terminal lineage, numerical pair and verified prefix")
+
+    _need(verify_scheduled_close(scheduled_close) is True,
+          "owner did not authenticate the selected scheduled checkpoint output and readback")
+    if capture_pins is not None:
+        current()
+    if archived:
+        _need(verify_archive() is True, "owner did not reauthenticate archived arm and capture approval")
+    current()
+    result = {**linked, "candidate": row["candidate"], "model_checkpoint": row["model_checkpoint"],
+            "optimizer_checkpoint": row["optimizer_checkpoint"], "candidate_role": row["status"],
+            "scheduled_checkpoint_close_sha256": expected_scheduled_close_sha256,
+            "scheduled_checkpoint_owner_stage_record_sha256": scheduled_close.owner_stage_record_sha256,
+            "schedule_sha256": schedule_sha, "step_grid_sha256": grid_sha,
+            "look": scheduled_close.look, "optimizer_step": scheduled_close.optimizer_step}
+    if capture_pins is not None:
+        result["archived_capture"] = capture_pins
+    return result

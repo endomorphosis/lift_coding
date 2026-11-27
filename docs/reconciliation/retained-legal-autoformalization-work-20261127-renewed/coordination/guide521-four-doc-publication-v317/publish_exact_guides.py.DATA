@@ -1,0 +1,286 @@
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import time
+
+
+work = Path(__file__).parent
+coord = work.parent
+repos = Path('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories')
+receipt_path = Path('/tmp/Root-one-guide521-four-Source-CAS-selected-v317-h_oh8qez/Root-one521-four-installed-Source-closed-small.json')
+output = coord / 'actual-guide521-four-doc-three-FF-publication-small-v317.json'
+assert not output.exists()
+started = time.monotonic()
+base = {
+    'datasets': 'e28f7f0de5d6ca4beb71326f035011638158748f',
+    'hallucinate': '30f77622060155c6f4070fcdc4e957cedfaae3ef',
+    'root': 'f5ccc9972ff8e84ba274edca4e0e4945dba8ba05',
+    'accelerate': '88c0d9f82f66aaddbb01344c9f85236e92a5dc88',
+}
+urls = {
+    'datasets':'https://github.com/endomorphosis/ipfs_datasets_py',
+    'hallucinate':'https://github.com/endomorphosis/hallucinate_app',
+    'root':'https://github.com/endomorphosis/lift_coding',
+    'accelerate':'https://github.com/endomorphosis/ipfs_accelerate_py',
+}
+env = dict(os.environ, GIT_OPTIONAL_LOCKS='0', GIT_NO_LAZY_FETCH='1', GIT_TERMINAL_PROMPT='0')
+fields = ('st_ctime_ns','st_dev','st_gid','st_ino','st_mode','st_mtime_ns','st_nlink','st_size','st_uid')
+
+def checked(path, length, digest):
+    value = Path(path).read_bytes()
+    assert len(value) == length and hashlib.sha256(value).hexdigest() == digest, path
+    return value
+
+def checked_ref(row):
+    return checked(row['path'], row['bytes'], row['sha256'])
+
+def observe(role, *args, data=None):
+    result = subprocess.run(['git','-c','core.fsmonitor=false','-C',str(repos/role),*args],
+                            input=data, capture_output=True, env=env, timeout=90, check=True)
+    return result.stdout
+
+def record(event):
+    with (work/'actual-events.jsonl').open('a', encoding='utf-8') as file:
+        file.write(json.dumps(event, sort_keys=True)+'\n')
+        file.flush()
+        os.fsync(file.fileno())
+    print(json.dumps(event, sort_keys=True), flush=True)
+
+def revision(role, ref='HEAD'):
+    return observe(role,'rev-parse',ref).decode().strip()
+
+def origin(role):
+    raw = observe(role,'ls-remote','--exit-code','origin','refs/heads/main').decode().splitlines()
+    assert len(raw) == 1
+    oid, ref = raw[0].split('\t')
+    assert ref == 'refs/heads/main' and len(oid) == 40
+    return oid
+
+def clean(role):
+    assert observe(role,'status','--porcelain=v1','--untracked-files=all','--ignore-submodules=dirty') == b'', role
+    assert observe(role,'diff','--cached','--name-only','--ignore-submodules=none') == b'', role
+
+def rows_at(role, rev):
+    rows = {}
+    for line in observe(role,'ls-tree','-rz',rev).split(b'\0'):
+        if line:
+            metadata, path = line.decode().split('\t',1)
+            mode, kind, oid = metadata.split()
+            rows[path] = (mode,kind,oid)
+    return rows
+
+def exact_gitlinks(role, old, new, links):
+    before = rows_at(role, old)
+    after = rows_at(role, new)
+    assert set(before) == set(after)
+    assert {path for path in before if before[path] != after[path]} == set(links)
+    for path, oid in links.items():
+        assert before[path][:2] == ('160000','commit') and after[path] == ('160000','commit',oid)
+
+def gitlink_commit(role, updates, message):
+    assert revision(role) == base[role] and origin(role) == base[role], role
+    clean(role)
+    before = rows_at(role, base[role])
+    for path, (prior, _) in updates.items():
+        assert before[path] == ('160000','commit',prior)
+    links = {path: value for path, (_,value) in updates.items()}
+    data = ''.join(f'160000 {oid}\t{path}\n' for path,oid in links.items()).encode()
+    observe(role,'update-index','--index-info',data=data)
+    assert set(observe(role,'diff','--cached','--name-only').decode().splitlines()) == set(links)
+    observe(role,'commit','-m',message)
+    oid = revision(role)
+    assert revision(role,'HEAD^') == base[role]
+    exact_gitlinks(role,base[role],oid,links)
+    clean(role)
+    record({'local_commit':oid,'repository':role,'links':links})
+    return oid, links
+
+pushes = []
+def push(role, oid):
+    assert revision(role) == oid and origin(role) == base[role], role
+    observe(role,'merge-base','--is-ancestor',base[role],oid)
+    clean(role)
+    record({'push_start':role,'before':base[role],'target':oid})
+    porcelain = observe(role,'push','--porcelain','origin',oid+':refs/heads/main').decode()
+    result = next(line for line in porcelain.splitlines() if '\t' in line)
+    assert result.startswith(' \t') and origin(role) == oid and revision(role,'refs/remotes/origin/main') == oid
+    event = {'repository':role,'before':base[role],'after':oid,'normal_fast_forward':True,
+             'push_returncode':0,'porcelain':result}
+    pushes.append(event)
+    record(event)
+
+
+def stable(path, metadata):
+    with os.fdopen(os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK),'rb') as f:
+        before = {key:str(getattr(os.fstat(f.fileno()),key)) for key in fields}
+        assert before == metadata['full9']
+        raw = f.read(metadata['bytes']+1)
+        last = {key:str(getattr(os.fstat(f.fileno()),key)) for key in fields}
+    leaf = path.lstat()
+    assert before == last == {key:str(getattr(leaf,key)) for key in fields}
+    assert len(raw) == metadata['bytes'] and hashlib.sha256(raw).hexdigest() == metadata['sha256']
+    return raw
+
+installed = json.loads(checked(receipt_path,6503,'c8689ccb24446d8a4da59f8f155faaf351d7a866f66444ea36b2dd5fcab4ba4d'))
+assert all(installed[key] for key in ('Source_closed','module_closed','canonical_doc_install_complete',
+    'all4_installed_hashes_and_full9_match_separate_readbacks','all_stages_closed_and_paths_absent'))
+assert installed['errors'] == [] and installed['SQL51_tests'] == 0
+assert installed['before_D']['HEAD'] == installed['after_D']['HEAD'] == base['datasets']
+ready = json.loads(checked_ref(installed['composer_READY']))
+assert ready['one_consolidation_only'] is True and ready['evidence_ordinal'] == 521
+prefix_docs = 'ipfs_datasets_py/logic/autoformal/docs/'
+targets = {prefix_docs+p for p in ('BACKLOG.json','work_catalog.json','HANDOFF.md','TRAINING_HISTORY.md')}
+assert set(installed['only_worktree_deltas']) == targets
+docdir = repos/'datasets'
+docs = {str(Path(row['path']).relative_to(docdir)):row for row in installed['installed']}
+assert set(docs) == targets
+status = observe('datasets','status','--porcelain=v1','--untracked-files=all','--ignore-submodules=dirty').decode().splitlines()
+assert set(status) == {' M '+path for path in targets}
+assert observe('datasets','diff','--cached','--name-only','--ignore-submodules=none') == b''
+for role, value in base.items():
+    assert revision(role) == value and revision(role,'refs/remotes/origin/main') == value
+    assert observe(role,'remote','get-url','origin').decode().strip().removesuffix('.git') == urls[role]
+    assert observe(role,'remote','get-url','--push','origin').decode().strip().removesuffix('.git') == urls[role]
+    assert origin(role) == value
+    if role != 'datasets':
+        clean(role)
+assert revision('datasets','HEAD^{tree}') == installed['after_D']['tree']
+assert revision('accelerate','HEAD^{tree}') == installed['A_preserved']['tree']
+
+qualification=json.loads(checked_ref(installed['actual_ordinary152_qualification']))
+prior_publication=json.loads(checked_ref(installed['actual_ordinary152_publication']))
+assert qualification['actual_ordinary_unique_PASS']==prior_publication['ordinary_unique_pass']==152
+assert qualification['D_HEAD']==base['datasets'] and not qualification['actual_model_fit_prediction_quality_training_gold_legal_or_Native_claim']
+assert installed['one_new_521'] and installed['all24tasks126components520priorrecords_and_MD_prefixes_preserved']
+assert installed['full_Source_prepaid_144MiB_retained']==150994944
+failed316={'path':'/tmp/Root-one-guide521-four-Source-CAS-selected-v316-rlrc6xny/actual-output/actual-existing-remaining-three-document-CAS-receipt.json',
+           'bytes':9190,'sha256':'7705e45aaded29ae89b9aaa43447b67783e44255e45da380e83eb3a04208961a'}
+previous=json.loads(checked_ref(failed316))
+assert previous['Source_closed'] and not previous['installed'] and not previous['write_complete']
+assert not previous['partial_failure_effects']['canonical_replacements_returned']
+assert not previous['partial_failure_effects']['remaining_stages']
+
+def index_snapshot(role):
+    path = repos/role/'.git/index'
+    with os.fdopen(os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK),'rb') as f:
+        before={key:str(getattr(os.fstat(f.fileno()),key)) for key in fields}
+        sha=hashlib.file_digest(f,'sha256').hexdigest()
+        last={key:str(getattr(os.fstat(f.fileno()),key)) for key in fields}
+    assert before==last=={key:str(getattr(path.lstat(),key)) for key in fields}
+    return {'path':str(path),'bytes':int(before['st_size']),'sha256':sha,'full9':before}
+indices_before={role:index_snapshot(role) for role in base}
+
+manifest = {row['relative_path']:row for row in ready['files']}
+assert set(manifest) == targets
+old_docs, prepared = {}, {}
+for path in sorted(targets):
+    row, planned = docs[path], manifest[path]
+    old = observe('datasets','cat-file','blob',base['datasets']+':'+path)
+    archived_before = planned['before_private']
+    assert len(old) == archived_before['bytes'] and hashlib.sha256(old).hexdigest() == archived_before['sha256']
+    new = stable(Path(row['path']),row)
+    assert row['bytes'] == planned['post_private']['bytes'] and row['sha256'] == planned['post_private']['sha256']
+    insert = planned['surgical_insertion']
+    offset, n = insert['offset'], insert['inserted_bytes']
+    assert hashlib.sha256(new[offset:offset+n]).hexdigest() == insert['inserted_sha256']
+    assert new[:offset]+new[offset+n:] == old
+    if path.endswith('.md'):
+        assert offset == len(old)
+    old_docs[path] = old
+    prepared[path] = new
+
+backlog = prefix_docs+'BACKLOG.json'
+catalog = prefix_docs+'work_catalog.json'
+old, new = (json.loads(raw[backlog]) for raw in (old_docs, prepared))
+assert len(new['tasks']) == 24 and old['tasks'] == new['tasks']
+new_key, = set(new['migration']) - set(old['migration'])
+assert new_key == 'phase45_grouped_unicode_ordinary152_closed_software_evidence_20261125'
+del new['migration'][new_key]
+assert old == new
+old, new = (json.loads(raw[catalog]) for raw in (old_docs, prepared))
+assert len(new['selected_evidence']) == 521 and len(new['components']) == 126
+evidence = new['selected_evidence'].pop()
+assert evidence['evidence_ordinal'] == 521 and evidence['id'] == ready['record_id']
+assert old == new
+
+assert not observe('datasets','-c','core.whitespace=-blank-at-eof','diff','--check','--',*sorted(targets))
+record({'preflight_exact':True,'before_remotes':base,'docs':sorted(targets),'catalog_ordinal':521})
+before_tree = rows_at('datasets',base['datasets'])
+assert revision('datasets') == base['datasets'] and origin('datasets') == base['datasets']
+assert observe('datasets','status','--porcelain=v1','--untracked-files=all','--ignore-submodules=dirty').decode().splitlines() == status
+observe('datasets','add','--',*sorted(targets))
+assert set(observe('datasets','diff','--cached','--name-only').decode().splitlines()) == targets
+staged = {}
+for path in sorted(targets):
+    row = observe('datasets','ls-files','--stage','--',path).decode().strip()
+    mode_oid_stage, staged_path = row.split('	')
+    mode, oid, stage = mode_oid_stage.split()
+    assert staged_path == path and stage == '0' and mode == before_tree[path][0]
+    assert observe('datasets','cat-file','blob',oid) == prepared[path]
+    staged[path] = oid
+observe('datasets','commit','-m','Record legal autoformalization evidence 521')
+target = revision('datasets')
+assert revision('datasets','HEAD^') == base['datasets']
+after_tree = rows_at('datasets',target)
+assert set(before_tree) == set(after_tree)
+assert {path for path in before_tree if before_tree[path] != after_tree[path]} == targets
+for path in targets:
+    assert after_tree[path] == (before_tree[path][0],'blob',staged[path])
+clean('datasets')
+index_before_push=index_snapshot('datasets')
+record({'local_commit':target,'repository':'datasets','docs_only':True})
+push('datasets',target)
+h, h_links = gitlink_commit('hallucinate',{'ipfs_datasets_py':(base['datasets'],target)},
+                           'Update datasets link for legal evidence 521')
+push('hallucinate',h)
+root, root_links = gitlink_commit('root',{
+    'external/ipfs_datasets':(base['datasets'],target),'hallucinate_app':(base['hallucinate'],h)},
+    'Update legal autoformalization guide 521 links')
+push('root',root)
+final_heads = {'datasets':target,'hallucinate':h,'root':root,'accelerate':base['accelerate']}
+final_links = {'datasets':{},'hallucinate':h_links,'root':root_links,'accelerate':{}}
+repo_result = {}
+for role, oid in final_heads.items():
+    readback = origin(role)
+    assert readback == oid == revision(role) == revision(role,'refs/remotes/origin/main')
+    clean(role)
+    repo_result[role] = {'HEAD':oid,'tree':revision(role,'HEAD^{tree}'),'origin_main':readback,
+                         'origin':urls[role],'clean_worktree_and_index':True,
+                         'gitlinks_updated':final_links[role]}
+exact_gitlinks('hallucinate',base['hallucinate'],h,h_links)
+exact_gitlinks('root',base['root'],root,root_links)
+indices={role:{'before':indices_before[role],'after':index_snapshot(role)} for role in base}
+assert indices['datasets']['after']==index_before_push
+assert indices['accelerate']['after']==indices['accelerate']['before']
+for path in targets:
+    row=observe('datasets','ls-files','--stage','--',path).decode().rstrip(chr(10))
+    assert row==f"{before_tree[path][0]} {staged[path]} 0"+chr(9)+path
+summary = {
+    'schema':'guide521-four-doc-child-first-fast-forward-publication/v1',
+    'source_closed_installation':{'path':str(receipt_path),'bytes':6503,'sha256':'c8689ccb24446d8a4da59f8f155faaf351d7a866f66444ea36b2dd5fcab4ba4d'},
+    'evidence_ordinal':521,'accepted_catalog_record':ready['record_id'],
+    'independently_verified_recovered_all4_old_blobs_by_exact_inverse_insertions':True,
+    'independently_verified_24_tasks_126_components_520_evidence_values_and_old_MD_prefixes_exact':True,
+    'all_other_paths_and_gitlinks_preserved':True,
+    'committed_docs':{path:{**docs[path],'before_blob':before_tree[path][2],'committed_blob':staged[path]} for path in sorted(targets)},
+    'documentary_evidence_scope':{'ordinary152_publication':installed['actual_ordinary152_publication'],
+        'ordinary152_qualification':installed['actual_ordinary152_qualification'],
+        'fictional_fixture_software_only':True,'SQL51_tests':0,'SQLget_MainSQL_Native':'UNRUN'},
+    'failed_v316_retained_before_staging':failed316,
+    'actual_v317_full_144_MiB_Source_prepaid_retained':installed['full_Source_prepaid_144MiB_retained'],
+    'EOF_whitespace_check_scoped_to_selected_documents_no_normalization':True,
+    'index_readback':indices,
+    'repositories':repo_result,'pushes_in_actual_order':pushes,
+    'elapsed_seconds':time.monotonic()-started,
+    'no_new_Source_test_CI_Lean_training_operation':True,'active_eight_phase_goal_complete':False,
+}
+raw = (json.dumps(summary,sort_keys=True,indent=2)+chr(10)).encode()
+fd = os.open(output,os.O_CREAT|os.O_EXCL|os.O_WRONLY|os.O_NOFOLLOW,0o400)
+with os.fdopen(fd,'wb') as stream:
+    stream.write(raw)
+    stream.flush()
+    os.fsync(stream.fileno())
+assert output.read_bytes() == raw
+print(json.dumps({'receipt':str(output),'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest(),'heads':final_heads}),flush=True)

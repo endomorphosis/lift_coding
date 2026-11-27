@@ -1,0 +1,145 @@
+{
+  "Root_commits": [
+    "9483326771d57d2b2f7ed870deb4e18b8ac7df0c",
+    "61ef5bfb421ba029e9971244bcfb97a5c0298960"
+  ],
+  "all_changes_additive_historical_archives_only": true,
+  "committed_chunk_manifest": {
+    "bytes": 9578,
+    "repo_relative_path": "docs/reconciliation/retained-A-D-object-history-20261124/manifest.json",
+    "sha256": "f8bcbbbb4eff3fddaab5174a482d3404ed6f18a40385bd2a538223af1acad6a0"
+  },
+  "complete_selected_publication": true,
+  "families": {
+    "accelerate": {
+      "chunk_count": 6,
+      "exact_archived_objects": 1876,
+      "pack_bytes": 287949953,
+      "pack_sha256": "50cf9343aa3643f69f9ed323747e37542e3e05290113271df2617f9ec3373e34",
+      "published_base": "de4d5a62b6fac2df61769a6461c2ada97f788208",
+      "retained_tips": 81,
+      "strict_index_verify_pack_local_inventory_and_all_tips_connectivity": true
+    },
+    "datasets": {
+      "chunk_count": 13,
+      "exact_archived_objects": 2380,
+      "pack_bytes": 631260669,
+      "pack_sha256": "d905688950215b08e674729a58297f6e3b9272734c4928fb49f095f5cb5f8ee9",
+      "published_base": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+      "retained_tips": 206,
+      "strict_index_verify_pack_local_inventory_and_all_tips_connectivity": true
+    }
+  },
+  "force_push_LFS_billing_history_rewrite_Source_SDK_Native_model_CI_action": false,
+  "full_receipts": [
+    {
+      "bytes": 152496,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-renewed-all-work-archives-Root-publication-v02.json",
+      "sha256": "c24b53cceeda6b7b0338e09d0b24cd6d9d7e80f3d15db40f8cb93592f141837e"
+    },
+    {
+      "bytes": 15283,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-postcutoff-Main-control-retention-publication-v01.json",
+      "sha256": "fa17aa408fb5fab3c630f7397a95b2ff0dfd6a7bd5402fa52f02a044a9bacde3"
+    },
+    {
+      "bytes": 80568,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/exact-A81-D206-private-pack-and-restore-v01/actual-exact-A81-D206-private-pack-and-restore-receipt-v01.json",
+      "sha256": "a1be792986161f1311eb19333737cf357dcecacac1ccdc4f394ac93df4c1aa05"
+    }
+  ],
+  "gitlinks": {
+    "hallucinate": {
+      "ipfs_accelerate_py": "de4d5a62b6fac2df61769a6461c2ada97f788208",
+      "ipfs_datasets_py": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+      "ipfs_kit_py": "b15442e490dc39d046a911ea663c73c99ed3c755",
+      "swissknife": "453a30b01e62b6acdd1c54070821dbacfbf7908e"
+    },
+    "root": {
+      "external/ipfs_accelerate": "de4d5a62b6fac2df61769a6461c2ada97f788208",
+      "external/ipfs_datasets": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+      "external/ipfs_kit": "b15442e490dc39d046a911ea663c73c99ed3c755",
+      "hallucinate_app": "7b0a0ef351939f7c71ad82a90aea3240712c0844",
+      "swissknife": "453a30b01e62b6acdd1c54070821dbacfbf7908e"
+    }
+  },
+  "historical_staging_failure": "Exact inert diff.DATA context whitespace retained; scoped human-readable checks passed. Original refusal and all charges remain in first receipt.",
+  "limitations": [
+    "Archived code/controls remain historical or unadopted; no activation, ordinary35, Native, model, legal-review or CI success is conferred.",
+    "Generated/raw temporary fixtures outside recorded selection scope were not dumped as source; this is not a global inventory of every temporary byte.",
+    "The full eight-phase legal autoformalization objective remains open."
+  ],
+  "new_Root_bytes": 921768651,
+  "new_Root_files": 104,
+  "old_active_checkouts_not_reset_or_cleaned": true,
+  "preserved_scopes": {
+    "Kit_Swiss_exact_recovery_commits": 4,
+    "Main_original_private_files": 13,
+    "Main_postcutoff_private_fix_files": 10,
+    "Reader_classifications": {
+      "UNKNOWN": 4,
+      "history": 5,
+      "qualification_controls": 35
+    },
+    "Reader_private_candidates": 44,
+    "all_six_large_historical_blobs_included": true
+  },
+  "publication_processes_terminal": {
+    "archive_copy_37251": 0,
+    "normal_first_push_48045": 0,
+    "pack_and_restore_88012": 0,
+    "postcutoff_push_16450": 0,
+    "staging_attempt_89222": 1
+  },
+  "repositories": {
+    "accelerate": {
+      "clean": true,
+      "local_HEAD": "de4d5a62b6fac2df61769a6461c2ada97f788208",
+      "origin": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+      "remote_main": "de4d5a62b6fac2df61769a6461c2ada97f788208",
+      "tree": "74202f1a6a09085e0b0e238ea6d555806d8fb927"
+    },
+    "datasets": {
+      "clean": true,
+      "local_HEAD": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+      "remote_main": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+      "tree": "26c527d48b5f2f4c1ce034f7d76b73abb4bc38c4"
+    },
+    "hallucinate": {
+      "clean": true,
+      "local_HEAD": "7b0a0ef351939f7c71ad82a90aea3240712c0844",
+      "origin": "https://github.com/endomorphosis/hallucinate_app.git",
+      "remote_main": "7b0a0ef351939f7c71ad82a90aea3240712c0844",
+      "tree": "b6d114446177e1e0081e24356942e95b8f732a8a"
+    },
+    "kit": {
+      "local_no_checkout_store_not_reset": true,
+      "origin": "https://github.com/endomorphosis/ipfs_kit_py.git",
+      "remote_main": "b15442e490dc39d046a911ea663c73c99ed3c755"
+    },
+    "root": {
+      "clean": true,
+      "local_HEAD": "61ef5bfb421ba029e9971244bcfb97a5c0298960",
+      "origin": "https://github.com/endomorphosis/lift_coding.git",
+      "remote_main": "61ef5bfb421ba029e9971244bcfb97a5c0298960",
+      "tree": "fedd39d60be3b081690ef3f581005802f51deb5a"
+    },
+    "swiss": {
+      "local_no_checkout_store_not_reset": true,
+      "origin": "https://github.com/endomorphosis/swissknife.git",
+      "remote_main": "453a30b01e62b6acdd1c54070821dbacfbf7908e"
+    }
+  },
+  "schema": "renewed-all-work-publication-final/v1",
+  "verified_ns": "1795481882271800060",
+  "working_source_metadata_reconciliation": {
+    "explicit_no_checkout_skips": 2,
+    "fresh_byte_hashes_not_claimed": true,
+    "full9_unchanged_in_scoped_comparison": true,
+    "materialized_untracked_checks_succeeded": 116,
+    "original_selected_paths": 2793,
+    "recent_candidates_in_selected_suffix_date_ignore_scope": 0,
+    "worktree_paths_examined": 118
+  }
+}

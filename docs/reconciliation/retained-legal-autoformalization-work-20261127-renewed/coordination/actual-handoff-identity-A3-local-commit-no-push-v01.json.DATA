@@ -1,0 +1,295 @@
+{
+  "HEAD": "8967b3ba8fbf76a5e42f8fd4e8d85949173138ed",
+  "Source_execution_by_publisher": false,
+  "before_HEAD": "de4d5a62b6fac2df61769a6461c2ada97f788208",
+  "changed_paths": [
+    "ipfs_accelerate_py/agent_supervisor/rescue/gate_recovery.py",
+    "ipfs_accelerate_py/agent_supervisor/rescue/lane_resume.py",
+    "test/api/test_agent_supervisor_gate_recovery_evidence_refresh.py"
+  ],
+  "clean_worktree_and_index": true,
+  "commands": [
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "de4d5a62b6fac2df61769a6461c2ada97f788208\n"
+    },
+    {
+      "argv": [
+        "status",
+        "--porcelain=v1",
+        "-uall"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": " M ipfs_accelerate_py/agent_supervisor/rescue/gate_recovery.py\n M ipfs_accelerate_py/agent_supervisor/rescue/lane_resume.py\n M test/api/test_agent_supervisor_gate_recovery_evidence_refresh.py\n"
+    },
+    {
+      "argv": [
+        "diff",
+        "--cached",
+        "--name-only"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "diff",
+        "--check",
+        "--",
+        "ipfs_accelerate_py/agent_supervisor/rescue/gate_recovery.py",
+        "ipfs_accelerate_py/agent_supervisor/rescue/lane_resume.py",
+        "test/api/test_agent_supervisor_gate_recovery_evidence_refresh.py"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "add",
+        "--",
+        "ipfs_accelerate_py/agent_supervisor/rescue/gate_recovery.py",
+        "ipfs_accelerate_py/agent_supervisor/rescue/lane_resume.py",
+        "test/api/test_agent_supervisor_gate_recovery_evidence_refresh.py"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "diff",
+        "--cached",
+        "--name-only"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "ipfs_accelerate_py/agent_supervisor/rescue/gate_recovery.py\nipfs_accelerate_py/agent_supervisor/rescue/lane_resume.py\ntest/api/test_agent_supervisor_gate_recovery_evidence_refresh.py\n"
+    },
+    {
+      "argv": [
+        "show",
+        ":ipfs_accelerate_py/agent_supervisor/rescue/gate_recovery.py"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "[authenticated exact Git blob omitted]"
+    },
+    {
+      "argv": [
+        "show",
+        ":ipfs_accelerate_py/agent_supervisor/rescue/lane_resume.py"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "[authenticated exact Git blob omitted]"
+    },
+    {
+      "argv": [
+        "show",
+        ":test/api/test_agent_supervisor_gate_recovery_evidence_refresh.py"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "[authenticated exact Git blob omitted]"
+    },
+    {
+      "argv": [
+        "diff",
+        "--cached",
+        "--check",
+        "--",
+        "ipfs_accelerate_py/agent_supervisor/rescue/gate_recovery.py",
+        "ipfs_accelerate_py/agent_supervisor/rescue/lane_resume.py",
+        "test/api/test_agent_supervisor_gate_recovery_evidence_refresh.py"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "commit",
+        "-m",
+        "fix(supervisor): preserve distinct prerequisite handoff identities"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "[reconcile/accelerator-autonomy-eight-files-20261123 8967b3ba8f] fix(supervisor): preserve distinct prerequisite handoff identities\n 3 files changed, 122 insertions(+), 4 deletions(-)\n"
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "8967b3ba8fbf76a5e42f8fd4e8d85949173138ed\n"
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD^{tree}"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "ee57c3137733458c56a04feaef311dedbdb4d976\n"
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD^"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "de4d5a62b6fac2df61769a6461c2ada97f788208\n"
+    },
+    {
+      "argv": [
+        "diff-tree",
+        "--no-commit-id",
+        "--name-only",
+        "-r",
+        "HEAD"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "ipfs_accelerate_py/agent_supervisor/rescue/gate_recovery.py\nipfs_accelerate_py/agent_supervisor/rescue/lane_resume.py\ntest/api/test_agent_supervisor_gate_recovery_evidence_refresh.py\n"
+    },
+    {
+      "argv": [
+        "status",
+        "--porcelain=v1",
+        "-uall"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "show",
+        "HEAD:ipfs_accelerate_py/agent_supervisor/rescue/gate_recovery.py"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "[authenticated exact Git blob omitted]"
+    },
+    {
+      "argv": [
+        "show",
+        "HEAD:ipfs_accelerate_py/agent_supervisor/rescue/lane_resume.py"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "[authenticated exact Git blob omitted]"
+    },
+    {
+      "argv": [
+        "show",
+        "HEAD:test/api/test_agent_supervisor_gate_recovery_evidence_refresh.py"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "[authenticated exact Git blob omitted]"
+    },
+    {
+      "argv": [
+        "remote",
+        "get-url",
+        "origin"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "https://github.com/endomorphosis/ipfs_accelerate_py.git\n"
+    }
+  ],
+  "current_index_full9": {
+    "st_ctime_ns": "1795494325905258807",
+    "st_dev": "66306",
+    "st_gid": "1000",
+    "st_ino": "69342879",
+    "st_mode": "33204",
+    "st_mtime_ns": "1795494325904258798",
+    "st_nlink": "1",
+    "st_size": "4412225",
+    "st_uid": "1000"
+  },
+  "no_live_Source_or_runtime_handle_claimed_from_Git": true,
+  "normal57_or_ordinary_lane_qualified": false,
+  "origin": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+  "other_roots_or_Main2_mutated": false,
+  "owned_process_complete": true,
+  "post_rows": [
+    {
+      "bytes": 46540,
+      "full9": {
+        "st_ctime_ns": "1795494142808674964",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "69516607",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795494142536495494",
+        "st_nlink": "1",
+        "st_size": "46540",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_accelerate_py/agent_supervisor/rescue/gate_recovery.py",
+      "sha256": "c0b55898a53fbf20c0064ff960b277707dcf398873e6b65cbbae602442413e97"
+    },
+    {
+      "bytes": 162648,
+      "full9": {
+        "st_ctime_ns": "1795494143088677365",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "69518352",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795494142540172566",
+        "st_nlink": "1",
+        "st_size": "162648",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_accelerate_py/agent_supervisor/rescue/lane_resume.py",
+      "sha256": "9ed6db0316973f9df45750a1ef3a12b51c3c05ce34acb7487156f4f821c04776"
+    },
+    {
+      "bytes": 157916,
+      "full9": {
+        "st_ctime_ns": "1795494143380679869",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "69650085",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795494142543455282",
+        "st_nlink": "1",
+        "st_size": "157916",
+        "st_uid": "1000"
+      },
+      "relative_path": "test/api/test_agent_supervisor_gate_recovery_evidence_refresh.py",
+      "sha256": "ca2be22878dc248abea28bc7189155a519d99668398733b7323088cd687a4a11"
+    }
+  ],
+  "prior_index_full9": {
+    "st_ctime_ns": "1795425061865646156",
+    "st_dev": "66306",
+    "st_gid": "1000",
+    "st_ino": "69342879",
+    "st_mode": "33204",
+    "st_mtime_ns": "1795425061827156749",
+    "st_nlink": "1",
+    "st_size": "4412225",
+    "st_uid": "1000"
+  },
+  "push_performed": false,
+  "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+  "schema": "actual-installed-handoff-identity-local-candidate-commit/v1",
+  "tree": "ee57c3137733458c56a04feaef311dedbdb4d976"
+}

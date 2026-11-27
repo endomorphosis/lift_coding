@@ -1,0 +1,431 @@
+{
+  "A_index": {
+    "bytes": 4469929,
+    "full9": {
+      "st_ctime_ns": "1795734671233647109",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "48763139",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795734671232647103",
+      "st_nlink": "1",
+      "st_size": "4469929",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/.git/index",
+    "sha256": "8b777ee97314c4f0712b10b2fae9cc75a71901327a01a9d77a5be0c03a76441c"
+  },
+  "D_index": {
+    "bytes": 7070589,
+    "full9": {
+      "st_ctime_ns": "1795755055898035075",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72533257",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795755055888035039",
+      "st_nlink": "1",
+      "st_size": "7070589",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/index",
+    "sha256": "a929f5fefc9a4cd7630b8e33a57139fa0da0ebcef46fb959ea14d9aba4745bae"
+  },
+  "READ3": {
+    "bytes": 7482,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-isolated-Phase1-lean-json-diagnostics-READ3-closed.json",
+    "sha256": "0b9d17c27efa541b520be7d9e3578b71df4ef584d92152ccfeb2e965e527ccb5"
+  },
+  "actual_completed_push_journal": {
+    "bytes": 3450,
+    "full9": {
+      "st_ctime_ns": "1795755731815219998",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72768141",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795755731815219998",
+      "st_nlink": "1",
+      "st_size": "3450",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/code-publication-v02/actual-Phase1-lean-json-diagnostics-publication-events.jsonl",
+    "sha256": "573b81539255e672dc650a2a2069455386431ed5dac6d0614389cd7f4ae138f6"
+  },
+  "current_frozen_Source_epoch": {
+    "bytes": 9553,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-live-reconciled-Source42-content-epoch-closed.json",
+    "sha256": "1d609bd6f829ddac94791852f283e82ab5ec70a502aeae9c4ba44207f77949ed"
+  },
+  "current_gitlinks": {
+    "hallucinate": {
+      "ipfs_accelerate_py": "e55316f48847b17a8b4041a2da30bcaa0ba6eb90",
+      "ipfs_datasets_py": "95dc193c3a4a37f9c9227da640a346b2cd58e54c"
+    },
+    "root": {
+      "external/ipfs_accelerate": "e55316f48847b17a8b4041a2da30bcaa0ba6eb90",
+      "external/ipfs_datasets": "95dc193c3a4a37f9c9227da640a346b2cd58e54c",
+      "hallucinate_app": "06c3dafed7db60d84f2eb3607eca896aa0c6581e"
+    }
+  },
+  "exact_local_freeze": {
+    "bytes": 16495,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-isolated-Phase1-lean-json-diagnostics-exact-two-local-freeze.json",
+    "sha256": "a52014d373c00aade6e9673cb3dab91deefbfe7c23d456b4b483ce5964532e8a"
+  },
+  "exact_two_changes": {
+    "ipfs_datasets_py/logic/backends/kernel/lean.py": {
+      "bytes": 104465,
+      "full9": {
+        "st_ctime_ns": "1795755055677970484",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513274",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795755055677970484",
+        "st_nlink": "1",
+        "st_size": "104465",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "parent_blob": "7ee0cdb71958b052038fa467230dbf86dd0c3fb2",
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/backends/kernel/lean.py",
+      "sha256": "de99fe31f53fb34bf247e5c24b4b1424ca06874f1da5dc8875b3dbf886d1e4cb",
+      "stage0_and_committed_blob": "97c7e2b760f7775de3aae312557a8eccc82437ba"
+    },
+    "tests/integration/logic/backends/test_kernel_backends.py": {
+      "bytes": 130553,
+      "full9": {
+        "st_ctime_ns": "1795755055677970484",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514356",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795755055677970484",
+        "st_nlink": "1",
+        "st_size": "130553",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "parent_blob": "20f612f6c6a241804cdf71b09dc9a0a4f0c2e923",
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/integration/logic/backends/test_kernel_backends.py",
+      "sha256": "8bca876c855d44df4d48cb909fc6a0e9a007480d61037831536e84a8cc68adf9",
+      "stage0_and_committed_blob": "6568d9404adbe1a8439829321ade7588a150969e"
+    }
+  },
+  "external_base_observation": {
+    "bytes": 5270,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-current-main-fast-forward-official-V2-base.json",
+    "sha256": "23a507a1f439e697be16860808c32ba21af50ac094a44d8d108a6e1e35dc829f"
+  },
+  "live_main_after": {
+    "accelerate": "e55316f48847b17a8b4041a2da30bcaa0ba6eb90",
+    "datasets": "95dc193c3a4a37f9c9227da640a346b2cd58e54c",
+    "hallucinate": "06c3dafed7db60d84f2eb3607eca896aa0c6581e",
+    "root": "f928b0599b16dc7f783a8a9572b422e87edf617d"
+  },
+  "live_main_before": {
+    "accelerate": "e55316f48847b17a8b4041a2da30bcaa0ba6eb90",
+    "datasets": "7c0d40925436665bd90f62941d66ec63edadfb5b",
+    "hallucinate": "d5d8e4ad1aeb62de43c9921943e6f004249fe2fd",
+    "root": "0e4e509048c7486bff76ec2939d4abc62ed4a6b9"
+  },
+  "native_qualification": {
+    "bytes": 1026,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-Lean-JSON-diagnostics-namespaced-Native2-closed.json",
+    "sha256": "abbf8d4ced879afceeccba6598e56f1fd72c9b915199842cbd1e347d32dd220c"
+  },
+  "physical_IO_accounting_complete": false,
+  "post_push_initial_publisher_returncode": 1,
+  "previous_published_guide": {
+    "bytes": 2991,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-Guide580-four-docs-three-FF-publication.json",
+    "sha256": "12de3885bbfd86bc00dd792861c9f670af1bee590b0b8a996a9eae97cbbda9fc"
+  },
+  "primary_after": {
+    "accelerate": {
+      "HEAD": "21d7c7b2436a895c9615d7ed9866c5c27b8bb43b",
+      "dirty_files": [
+        {
+          "bytes": 10477,
+          "full9": {
+            "st_ctime_ns": "1795679996609094637",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "69514358",
+            "st_mode": "33277",
+            "st_mtime_ns": "1795679996609094637",
+            "st_nlink": "1",
+            "st_size": "10477",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate/docs/guides/cli/README_CLI.md",
+          "sha256": "5cd14467efcd779e27b007f7639c208270346f12d44573c3b3e710a0fa6f23e5"
+        },
+        {
+          "bytes": 73268,
+          "full9": {
+            "st_ctime_ns": "1795679996593094466",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "69517233",
+            "st_mode": "33261",
+            "st_mtime_ns": "1795679996593094466",
+            "st_nlink": "1",
+            "st_size": "73268",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate/ipfs_accelerate_py/cli_integrations/openai_codex_cli_integration.py",
+          "sha256": "039bb9269ee7f10a95c4227a9a67bbbd2ae7c260935c27d6076578e40a3f62fa"
+        },
+        {
+          "bytes": 123739,
+          "full9": {
+            "st_ctime_ns": "1795679996606094605",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "69603142",
+            "st_mode": "33188",
+            "st_mtime_ns": "1795679996606094605",
+            "st_nlink": "1",
+            "st_size": "123739",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate/test/api/test_codex_thread_handoff.py",
+          "sha256": "b5caa78e61f49635a517c00ed8f9f27e56c22f18d9e11864bdd666f08976d9a2"
+        }
+      ],
+      "index": {
+        "bytes": 4412225,
+        "full9": {
+          "st_ctime_ns": "1795676233159923497",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69342879",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795676233150923413",
+          "st_nlink": "1",
+          "st_size": "4412225",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate/.git/index",
+        "sha256": "e52c2c37977f4ee20f580e2fbc0fc8e4eac5ff47f18e08fb93980ad2b36a9961"
+      },
+      "origin_main": "21d7c7b2436a895c9615d7ed9866c5c27b8bb43b",
+      "status_sha256": "0813d78ba7a1bb3ca8b5312b0997680120a4497e017a3090a4ed4ab30fdcb10a"
+    },
+    "datasets": {
+      "HEAD": "6d1b200341ae62d6dc0aa6db27f3955c50483fa7",
+      "dirty_files": [
+        {
+          "bytes": 49957,
+          "full9": {
+            "st_ctime_ns": "1795733029445592091",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "70008243",
+            "st_mode": "33188",
+            "st_mtime_ns": "1795733029445592091",
+            "st_nlink": "1",
+            "st_size": "49957",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/README.md",
+          "sha256": "29a2e3e6c1267e4159f4798d436510695df01b596af93bd0282a3e9dc34da869"
+        },
+        {
+          "bytes": 1089818,
+          "full9": {
+            "st_ctime_ns": "1795733279995229368",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "70042581",
+            "st_mode": "33188",
+            "st_mtime_ns": "1795733279995229368",
+            "st_nlink": "1",
+            "st_size": "1089818",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+          "sha256": "3c82d7178a12b3b78aa9fb452a8e6ad89bd6306b198a9fb93358f1a448dc52c2"
+        },
+        {
+          "bytes": 112988,
+          "full9": {
+            "st_ctime_ns": "1795733029442592058",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "70008153",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795733029442592058",
+            "st_nlink": "1",
+            "st_size": "112988",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/docs/OPERATIONS.md",
+          "sha256": "539918df9724f105c458135c5470a91dd839ba7ae57dce62ea20a583ba471275"
+        },
+        {
+          "bytes": 2328609,
+          "full9": {
+            "st_ctime_ns": "1795733314093573857",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "70042653",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795733314093573857",
+            "st_nlink": "1",
+            "st_size": "2328609",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/docs/work_catalog.json",
+          "sha256": "487cc09197cd20b3e259da845b880e4f47a57915484089c65c287626910206c4"
+        },
+        {
+          "bytes": 292364,
+          "full9": {
+            "st_ctime_ns": "1795733029422591838",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "70008554",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795733029422591838",
+            "st_nlink": "1",
+            "st_size": "292364",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/supervisor_loop.py",
+          "sha256": "ddccaf94d76ca505655a9cdac90a048f695f133e042e87f4e61cbc62bad37a2c"
+        },
+        {
+          "bytes": 279677,
+          "full9": {
+            "st_ctime_ns": "1795733029435591981",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "70025824",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795733029435591981",
+            "st_nlink": "1",
+            "st_size": "279677",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/scripts/ops/legal_ir/run_autoformal_supervisor.py",
+          "sha256": "d2d1ede812fb6ce8a1c656726d276b1ae681f5695d61269700ecbd798cf6cadf"
+        },
+        {
+          "bytes": 66930,
+          "full9": {
+            "st_ctime_ns": "1795733029440461986",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "70042693",
+            "st_mode": "33188",
+            "st_mtime_ns": "1795733029440461986",
+            "st_nlink": "1",
+            "st_size": "66930",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/test_supervisor_agent_turn_recovery.py",
+          "sha256": "355f8090bcce236e738989df1c952fd8509faea70806029d65d6c0eab99aeaed"
+        }
+      ],
+      "index": {
+        "bytes": 6991149,
+        "full9": {
+          "st_ctime_ns": "1795732746412283036",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "68338235",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795732746411283024",
+          "st_nlink": "1",
+          "st_size": "6991149",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+        "sha256": "8afa59074a9bec81c88f7019d978f1f17d14a2f27440449c77a566408642883e"
+      },
+      "origin_main": "6d1b200341ae62d6dc0aa6db27f3955c50483fa7",
+      "status_sha256": "6e07703a6a150fc2147a54da5bb083934d44353019b5c97e8493ac868b79464e"
+    },
+    "hallucinate": {
+      "HEAD": "72f545fbce55a54c8c6d90cf4050b68949c31f38",
+      "index": {
+        "bytes": 138750,
+        "full9": {
+          "st_ctime_ns": "1795732751487212222",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69342837",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795732751486346643",
+          "st_nlink": "1",
+          "st_size": "138750",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/hallucinate/.git/index",
+        "sha256": "bfd1065e6b13eccbe1392a873133b25b5ce82d76e3c261347c10605ac8b916fe"
+      },
+      "origin_main": "72f545fbce55a54c8c6d90cf4050b68949c31f38",
+      "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "root": {
+      "HEAD": "4d55f51e8860642f7ce038b63fa463ab800b88d4",
+      "index": {
+        "bytes": 7262222,
+        "full9": {
+          "st_ctime_ns": "1795732754122379615",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69387331",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795732754121379602",
+          "st_nlink": "1",
+          "st_size": "7262222",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/root/.git/index",
+        "sha256": "a55ef7dc02ea5a1fda41553d9dda535afbcd7f3b09f1f1eff4c3c532854fe856"
+      },
+      "origin_main": "4d55f51e8860642f7ce038b63fa463ab800b88d4",
+      "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "publication_finalizer_recovered_read_only": true,
+  "pushes_in_actual_order": [
+    {
+      "normal_fast_forward": true,
+      "prior": "7c0d40925436665bd90f62941d66ec63edadfb5b",
+      "published": "95dc193c3a4a37f9c9227da640a346b2cd58e54c",
+      "repo": "datasets"
+    },
+    {
+      "normal_fast_forward": true,
+      "prior": "d5d8e4ad1aeb62de43c9921943e6f004249fe2fd",
+      "published": "06c3dafed7db60d84f2eb3607eca896aa0c6581e",
+      "repo": "hallucinate"
+    },
+    {
+      "normal_fast_forward": true,
+      "prior": "0e4e509048c7486bff76ec2939d4abc62ed4a6b9",
+      "published": "f928b0599b16dc7f783a8a9572b422e87edf617d",
+      "repo": "root"
+    }
+  ],
+  "qualification": {
+    "bytes": 25346,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-live-reconciled-P1-Lean-ordinary99-closed.json",
+    "sha256": "ba0317da64826b8d5f81839ec911a2ac9bc16fc2188d6773da467ed489e637d2"
+  },
+  "qualification_A": "219ba3da0f62f772801d71715e22c506faa21126",
+  "retained_first_preeffect_Git_refusal": {
+    "bytes": 668,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-Phase1-lean-json-diagnostics-publication-events.jsonl",
+    "sha256": "5aabdb3e6b20ce50a87040fe858e9f31ff8caefb0abb478a7fa39e212cf8fbbf"
+  },
+  "schema": "actual-current-Phase1-lean-json-diagnostics-ordinary99-and-native-live-publication/v1",
+  "shared_worktrees_preserved": true,
+  "terminal_returncode": 0,
+  "terminal_success": true
+}

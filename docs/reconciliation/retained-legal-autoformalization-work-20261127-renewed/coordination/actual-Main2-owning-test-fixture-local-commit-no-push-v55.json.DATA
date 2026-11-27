@@ -1,0 +1,97 @@
+{
+  "HEAD": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+  "Source_or_test_execution": false,
+  "clean": true,
+  "commit_returned": true,
+  "complete": true,
+  "config_full9_preserved": true,
+  "index": {
+    "full9": {
+      "st_ctime_ns": "1795500785295142737",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "69342879",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795500785294142725",
+      "st_nlink": "1",
+      "st_size": "4412225",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate/.git/index"
+  },
+  "installed_Source_reference": {
+    "bytes": 4344,
+    "path": "/tmp/Root-single-owning-test-fixture-CAS-v55/Root-single-test-installed-closed-small-v55.json",
+    "sha256": "677a20437063c94ffebc5d18dbd6bb50958017c15080883395360db37b8e72d6"
+  },
+  "installed_test": {
+    "bytes": 28670,
+    "full9": {
+      "st_ctime_ns": "1795500618512417942",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "69603466",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795500617914977463",
+      "st_nlink": "1",
+      "st_size": "28670",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate/test/api/test_board_stall_watchdog.py",
+    "sha256": "5b0d140ce0ac404e2e037db401d79ec23db0094347d9006986867e7cd99059f1"
+  },
+  "limits": {
+    "AS_bytes": 536870912,
+    "CPU_seconds": 60,
+    "Git_invocation_options": [
+      "core.preloadIndex=false",
+      "core.fscache=false",
+      "index.threads=1",
+      "core.packedGitWindowSize=1m",
+      "core.packedGitLimit=16m",
+      "maintenance.auto=false",
+      "gc.auto=0"
+    ],
+    "cpu_count": 1
+  },
+  "network": false,
+  "next_state": "Keep the checkout frozen for the test/index READ and the same 25-test rerun.",
+  "normal25_qualification": null,
+  "other_roots": {
+    "datasets": {
+      "HEAD": "4ccc8917b2168db8e11f54c5aadd4ca267f1c488",
+      "HEAD_index_config_full9_preserved": true,
+      "tree": "329d830d7ed44f85f997b345310bf9622a9cb31a"
+    },
+    "hallucinate": {
+      "HEAD": "f6290dbae751294ce5014babeb667fd75feaa9fa",
+      "HEAD_index_config_full9_preserved": true,
+      "tree": "757bd8b8bac6ffb9411e0257fb369aaf4a3638fb"
+    },
+    "root": {
+      "HEAD": "e40b197092df3876afdb92f94d49bcd932fe2a9c",
+      "HEAD_index_config_full9_preserved": true,
+      "tree": "a3df51f3d0cd08c8a74e5c9db5638cad57e6d358"
+    }
+  },
+  "parent": "fa30630b7843085aa01ae57d09df75148897b597",
+  "parent_tree": "49cc33a782d59f67bdd91c888161f095e311e3ce",
+  "preserved_gitlinks": 10,
+  "preserved_product_and_A3_blobs": {
+    "ipfs_accelerate_py/agent_supervisor/rescue/gate_recovery.py": "35ec4cb1b97df01523c10ababe81ec6de0ce1bde",
+    "ipfs_accelerate_py/agent_supervisor/rescue/lane_resume.py": "b935d4f105666dfc632374b80550b5f8189d3915",
+    "ipfs_accelerate_py/agent_supervisor/task_sources/board_stall_watchdog.py": "0dd6e6adf2243634f6f2e4e4ad1b68e0bc706f5b",
+    "test/api/test_agent_supervisor_gate_recovery_evidence_refresh.py": "519335d9adb20bde8f5b6d5dc649bf4e84364f4e"
+  },
+  "push": false,
+  "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+  "schema": "Main2-owning-test-fixture-local-only-commit/v1",
+  "stage_returned": true,
+  "staged_blob": {
+    "bytes": 28670,
+    "mode": "100644",
+    "oid": "dba0961ebf1bc9ac71f282f2d28de1ca7a6c7a28",
+    "sha256": "5b0d140ce0ac404e2e037db401d79ec23db0094347d9006986867e7cd99059f1"
+  },
+  "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+}

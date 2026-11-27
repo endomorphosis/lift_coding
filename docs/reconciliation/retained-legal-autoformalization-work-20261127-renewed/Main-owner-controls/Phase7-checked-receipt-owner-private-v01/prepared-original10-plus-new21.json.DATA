@@ -1,0 +1,62 @@
+{
+  "controls": {
+    "bytes": 5842,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/existing-maintained-original10-plus-new21-controls.py.DATA",
+    "sha256": "0da501b5b59b2b932c51cedefd8a78338abd12560552d737dc5598a983d5da11"
+  },
+  "expected_cases": [
+    "test_typed_feedback_uses_current_semantic_target_before_update[matching]",
+    "test_typed_feedback_uses_current_semantic_target_before_update[legacy]",
+    "test_typed_feedback_uses_current_semantic_target_before_update[sample]",
+    "test_typed_feedback_uses_current_semantic_target_before_update[interpretation]",
+    "test_typed_feedback_uses_current_semantic_target_before_update[dependency]",
+    "test_ablation_refuses_unmatched_typed_feedback_before_cloning",
+    "test_typed_feedback_refuses_substituted_record_with_same_target[other_receipt]",
+    "test_typed_feedback_refuses_substituted_record_with_same_target[other_label_same_receipt]",
+    "test_current_target_requires_independent_id_and_canonical_feedback[copied_id]",
+    "test_current_target_requires_independent_id_and_canonical_feedback[unselected_id]",
+    "test_current_target_metadata_without_checked_receipt_never_reaches_update",
+    "test_checked_current_receipt_gates_both_existing_consumers[matching]",
+    "test_checked_current_receipt_gates_both_existing_consumers[tree]",
+    "test_checked_current_receipt_gates_both_existing_consumers[property]",
+    "test_checked_current_receipt_gates_both_existing_consumers[source_result]",
+    "test_checked_current_receipt_gates_both_existing_consumers[content]",
+    "test_checked_current_receipt_gates_both_existing_consumers[assumptions]",
+    "test_checked_current_receipt_gates_both_existing_consumers[bounds]",
+    "test_checked_current_receipt_gates_both_existing_consumers[status]",
+    "test_checked_current_receipt_gates_both_existing_consumers[expired]",
+    "test_checked_current_receipt_gates_both_existing_consumers[formal_binding]",
+    "test_checked_current_receipt_gates_both_existing_consumers[review_binding]",
+    "test_checked_current_receipt_gates_both_existing_consumers[dependency_binding]",
+    "test_checked_current_receipt_gates_both_existing_consumers[sample_binding]",
+    "test_checked_current_receipt_gates_both_existing_consumers[input_mutation]",
+    "test_checked_current_target_refuses_incomplete_receipt_selection[missing_receipt]",
+    "test_checked_current_target_refuses_incomplete_receipt_selection[mapping_receipt]",
+    "test_checked_current_target_refuses_incomplete_receipt_selection[empty_expectation]",
+    "test_checked_current_target_refuses_incomplete_receipt_selection[missing_source_result]",
+    "test_checked_current_target_refuses_incomplete_receipt_selection[missing_formal]",
+    "test_checked_current_target_refuses_incomplete_receipt_selection[missing_as_of]"
+  ],
+  "old_assertions_and_ids_preserved": true,
+  "overlay": {
+    "bytes": 350,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/same-consumer-v02-overlay.json",
+    "sha256": "843d9cc96eb21b3565589bbb64e7a42de29256e5cd11a07c1d65ba442b1a135a"
+  },
+  "projection": {
+    "bytes": 64938,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/original10-plus-new21-projection.json",
+    "sha256": "d2f8c74841256797da1a7c73b77bff82af34ae6d3e35390bb167df3d6e06f646"
+  },
+  "runner": {
+    "bytes": 16410,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/existing-rebased-original10-plus-new21-runner.py.DATA",
+    "sha256": "182ab74c08bafc944879d3ce56622efa3e6a9f217a84d72d94d7a4adb2934910"
+  },
+  "scope": "Private actual-package guarded no-fit cases; no normal pytest or Source epoch qualification.",
+  "test": {
+    "bytes": 55601,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/test_trusted_feedback_weight_updates.checked-receipt.after-v03.py.DATA",
+    "sha256": "7726114eca83166b7a45973ad9839ce5f80782172d6f10cf521f069541b20b34"
+  }
+}

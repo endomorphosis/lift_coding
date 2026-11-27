@@ -1,0 +1,34 @@
+{
+  "Git_mutations": 0,
+  "SDK": false,
+  "actual_ordinary22": null,
+  "actual_runtime_selection": null,
+  "all_prior_costs_and_failures_retained": true,
+  "body_reads": 0,
+  "canonical_Source_reads": 0,
+  "clock": null,
+  "existing_final_proposal": {
+    "bytes": 18741,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/SEALED-private-existing-receipt-bounds-two-file-GREEN-v01.json",
+    "sha256": "3aecbf5629c3500baac63beffd701c8e50d02783e93d7cf93c50d702967ac6d9"
+  },
+  "model_or_Native": false,
+  "published_revision_from_authenticated_closed_receipt": "254ba85016cb9dba03ac6aa96b8aa411aeeb465a",
+  "records": [
+    {
+      "bytes": 63071,
+      "exact_base_match": true,
+      "git_blob": "9a52c4a11642edb0cb62b5c00b02ad67a9983e53",
+      "mode": "100644",
+      "repo_path": "ipfs_datasets_py/logic/bridge/proof_receipt_attestation.py"
+    },
+    {
+      "bytes": 22905,
+      "exact_base_match": true,
+      "git_blob": "2de37c1db9c3c5808a087e5ed1ed8a23ab8f672f",
+      "mode": "100644",
+      "repo_path": "tests/integration/logic/test_proof_receipt_attestation.py"
+    }
+  ],
+  "status": "TWO_PREIMAGES_EXACT_ON_PUBLISHED577"
+}

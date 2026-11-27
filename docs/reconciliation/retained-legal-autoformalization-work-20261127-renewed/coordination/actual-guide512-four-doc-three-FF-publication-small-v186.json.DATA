@@ -1,0 +1,156 @@
+{
+  "force_or_tag_push": false,
+  "gitlink_updates": {
+    "hallucinate": {
+      "ipfs_datasets_py": {
+        "from": "e1f27b2f6a19e3a56b1624babbf57b0a7b15b152",
+        "to": "017fb546935826d4e8f13d314395f6053cee4d3f"
+      }
+    },
+    "root": {
+      "external/ipfs_datasets": {
+        "from": "e1f27b2f6a19e3a56b1624babbf57b0a7b15b152",
+        "to": "017fb546935826d4e8f13d314395f6053cee4d3f"
+      },
+      "hallucinate_app": {
+        "from": "60021e8ea19a85b2e5caf6de4ad0bf053581958d",
+        "to": "229da710403f3373f0e32d9427ed0225badcb5d8"
+      }
+    }
+  },
+  "guide_blobs": {
+    "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json": {
+      "blob": "f012712866b005ff0d16580e9e013ac4d893873c",
+      "bytes": 1421045,
+      "inserted_bytes": 13781,
+      "parent_blob": "5526daca8f089b6fd09cdfbffec72ab94bc653a4",
+      "sha256": "55906e32d33f89c2a855fddf0349311f5ff1797f718df8fc9b133d1896744186"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md": {
+      "blob": "f668ab7c6ab8ee541206107d2034effc8adce65c",
+      "bytes": 944388,
+      "inserted_bytes": 3782,
+      "parent_blob": "ebbbe9c1c66598415303ab75f886ce41c83b3ed8",
+      "sha256": "6927782f3c14b745e156fdd9661e97f9326cd92eda3eef283092c9ac6345e140"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md": {
+      "blob": "dc1c8a306a568e8e665c0186b750feb85c99ef63",
+      "bytes": 704373,
+      "inserted_bytes": 3782,
+      "parent_blob": "1115551f23940a18f6fa9368673a2fe0cb096458",
+      "sha256": "43d73b7c78382d70d48e8ef5357b4b23b253e02b70a6cfa3e3172029558bb685"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json": {
+      "blob": "95130b7fe7b018fa24d2377e9946078c8f8cbcb8",
+      "bytes": 1672056,
+      "inserted_bytes": 14442,
+      "parent_blob": "6b2ddaa7af8d5c4d1915d14e253b84d5426cd120",
+      "sha256": "7928c0ee489c100c383fbd1b38a3f2315b76cb4ab11c3d62c9d5cb2d3b67493c"
+    }
+  },
+  "installation": {
+    "Source_actual_IO": {
+      "bytes": 57347923,
+      "captures": 131
+    },
+    "Source_module_and_stage_FDs_closed": true,
+    "bytes": 4646,
+    "full_Root_Source_envelope_retained": 100663296,
+    "path": "/tmp/Root-one512-four-guide-CAS-actual-v186-9ixw83sj/Root-one512-four-installed-Source-closed-small-v186.json",
+    "sha256": "6d76ae86b5348031f905a6b4d61dbfc6a5dad4e93655a333987531643e2ab5f6"
+  },
+  "local_after": {
+    "accelerate": {
+      "head": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "index_and_worktree_clean": true,
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "datasets": {
+      "head": "017fb546935826d4e8f13d314395f6053cee4d3f",
+      "index_and_worktree_clean": true,
+      "tree": "10194ed7c670c3bd14e3f5f1353ad38e94f6c817"
+    },
+    "hallucinate": {
+      "head": "229da710403f3373f0e32d9427ed0225badcb5d8",
+      "index_and_worktree_clean": true,
+      "tree": "9332ebe4f208141493be844e1ff1e6e060a34d0e"
+    },
+    "root": {
+      "head": "b6f6bac06249bbcfecbc10d13d0d105e89a3b349",
+      "index_and_worktree_clean": true,
+      "tree": "b1f3f2be555594ee4943dfb55dca1d66ac6f93c9"
+    }
+  },
+  "new_Source_test_CI_or_model_invocation": false,
+  "origin_main_after": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "017fb546935826d4e8f13d314395f6053cee4d3f",
+    "hallucinate": "229da710403f3373f0e32d9427ed0225badcb5d8",
+    "root": "b6f6bac06249bbcfecbc10d13d0d105e89a3b349"
+  },
+  "origin_main_before": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "e1f27b2f6a19e3a56b1624babbf57b0a7b15b152",
+    "hallucinate": "60021e8ea19a85b2e5caf6de4ad0bf053581958d",
+    "root": "38e8e0c9a5140ab5d16efdf35cdc38797a9ca92d"
+  },
+  "origin_urls": {
+    "accelerate": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+    "datasets": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+    "hallucinate": "https://github.com/endomorphosis/hallucinate_app.git",
+    "root": "https://github.com/endomorphosis/lift_coding.git"
+  },
+  "other_gitlinks_and_accelerate_preserved": true,
+  "preservation": {
+    "added_backlog_entry": "current_user_goal_generic_recovery_expected_ledger_limit_ordinary21_engineering_milestone512_20261124",
+    "added_catalog_id": "generic-recovery-expected-ledger-limit-ordinary21-engineering-milestone512-20261124",
+    "all511_old_catalog_records_unchanged": true,
+    "both_MD_complete_prefixes_exact": true,
+    "components": 126,
+    "one_byte_insertion_per_guide": true,
+    "one_new_evidence": 512,
+    "task_status_dependencies_acceptance_unchanged": true,
+    "tasks": 24
+  },
+  "push_order": [
+    "datasets",
+    "hallucinate",
+    "root"
+  ],
+  "pushes": {
+    "datasets": {
+      "from": "e1f27b2f6a19e3a56b1624babbf57b0a7b15b152",
+      "porcelain": " \t017fb546935826d4e8f13d314395f6053cee4d3f:refs/heads/main\te1f27b2f6a..017fb54693",
+      "rc": 0,
+      "ref": "refs/heads/main",
+      "to": "017fb546935826d4e8f13d314395f6053cee4d3f"
+    },
+    "hallucinate": {
+      "from": "60021e8ea19a85b2e5caf6de4ad0bf053581958d",
+      "porcelain": " \t229da710403f3373f0e32d9427ed0225badcb5d8:refs/heads/main\t60021e8..229da71",
+      "rc": 0,
+      "ref": "refs/heads/main",
+      "to": "229da710403f3373f0e32d9427ed0225badcb5d8"
+    },
+    "root": {
+      "from": "38e8e0c9a5140ab5d16efdf35cdc38797a9ca92d",
+      "porcelain": " \tb6f6bac06249bbcfecbc10d13d0d105e89a3b349:refs/heads/main\t38e8e0c9a5..b6f6bac062",
+      "rc": 0,
+      "ref": "refs/heads/main",
+      "to": "b6f6bac06249bbcfecbc10d13d0d105e89a3b349"
+    }
+  },
+  "schema": "guide512-GitHub-publication/v186",
+  "scope": {
+    "full_eight_phase_goal_complete": false,
+    "host_3f19_eligibility": false,
+    "public21_remains_separate_from_private21": true,
+    "public21_rerun": false,
+    "public_Torch_or_V4_executed": false,
+    "real_managed_ledger_cap_or_claim_operation": false
+  },
+  "unchanged_LIR23_core_and_test_blobs": {
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_resource_recovery.py": "eb6388cac544c9e9fb6340cef53cca26ff0fafab",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_resource_recovery.py": "8359394ca1be95b9fb2bfccb8633b5ad060ae2c4"
+  }
+}

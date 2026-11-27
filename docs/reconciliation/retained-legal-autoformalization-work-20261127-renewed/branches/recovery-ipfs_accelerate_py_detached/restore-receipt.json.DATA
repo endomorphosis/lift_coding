@@ -1,0 +1,154 @@
+{
+  "base_commit_ancestor_count": 18789,
+  "bundle": {
+    "bytes": 5396,
+    "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/ipfs_accelerate_py_detached/ipfs_accelerate_py_detached-historical-tips.bundle",
+    "sha256": "36a3eac68c18ab7de909e11e1ff5eaa193b625da556ea8bd40488d668aa3e2aa"
+  },
+  "exact_source_refs": [
+    {
+      "family": "ipfs_accelerate_py",
+      "oid": "a53b173781999cdde0faaccf245ea5b4d404f730",
+      "proven_local_source_sightings": [
+        {
+          "branch": null,
+          "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_accelerate",
+          "kind": "observed_HEAD",
+          "path": "/home/barberb/lift_coding/.worktrees/legal-ir-scientific-capacity-owner-prequal-20261109-v01"
+        }
+      ],
+      "representative": {
+        "branch": null,
+        "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_accelerate",
+        "kind": "observed_HEAD",
+        "path": "/home/barberb/lift_coding/.worktrees/legal-ir-scientific-capacity-owner-prequal-20261109-v01",
+        "ref": null
+      },
+      "sightings": [
+        {
+          "branch": null,
+          "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_accelerate",
+          "kind": "observed_HEAD",
+          "path": "/home/barberb/lift_coding/.worktrees/legal-ir-scientific-capacity-owner-prequal-20261109-v01"
+        },
+        {
+          "branch": null,
+          "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_accelerate",
+          "kind": "observed_HEAD",
+          "path": "/home/barberb/lift_coding/.worktrees/legal-ir-scientific-capacity-producer-prequal-20261109-v01"
+        },
+        {
+          "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_accelerate",
+          "kind": "registered_worktree_HEAD",
+          "path": "/home/barberb/lift_coding/.worktrees/legal-ir-scientific-capacity-owner-prequal-20261109-v01",
+          "prunable": null
+        },
+        {
+          "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_accelerate",
+          "kind": "registered_worktree_HEAD",
+          "path": "/home/barberb/lift_coding/.worktrees/legal-ir-scientific-capacity-producer-prequal-20261109-v01",
+          "prunable": null
+        }
+      ]
+    }
+  ],
+  "family": "ipfs_accelerate_py_detached",
+  "git_bundle_verify_stderr": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/ipfs_accelerate_py_detached/ipfs_accelerate_py_detached-historical-tips.bundle is okay\n",
+  "git_bundle_verify_stdout": "The bundle contains this ref:\na53b173781999cdde0faaccf245ea5b4d404f730 refs/heads/retained/a53b173781999cdde0faaccf245ea5b4d404f730\nThe bundle requires this ref:\n9df264ec1c624c11e747eacf4e3bdd53e1d51846 \nThe bundle uses this hash algorithm: sha1\n",
+  "live_code_adoption": false,
+  "private_source_alternates": [
+    "/home/barberb/lift_coding/.git/modules/external/ipfs_accelerate/objects"
+  ],
+  "provided_object_delta_bases": [
+    "2e198ca0c0d7785ca309ef6f988c8489d1d8fbf5",
+    "5445cc5476c4482fd07bf4d4c96102ad3fde7dd8",
+    "8c5def6d8e834f8e2d93ab310cbf0a92dfd0cc7b",
+    "93969f5361b9aa81c497970cac8b4f3759e9406a",
+    "a3d77c8ce73f7288dcf0ec9a5e772a5975cf4a05",
+    "a7487f172a0a3e14d76e2cac9ba973725c3dc108"
+  ],
+  "publication_files_in_reassembly_order": [
+    {
+      "bytes": 5396,
+      "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/ipfs_accelerate_py_detached/ipfs_accelerate_py_detached-historical-tips.bundle",
+      "sha256": "36a3eac68c18ab7de909e11e1ff5eaa193b625da556ea8bd40488d668aa3e2aa"
+    }
+  ],
+  "published_base": "64a8649952bed66a457d7b87bf6dced9fadab8d4",
+  "published_base_object_db": "/tmp/accelerate-objective-output-owner-main-ybAvG5Rm/checkout/.git",
+  "readonly_inputs": true,
+  "restore_uses_published_base_alternate_only": true,
+  "restored_exact_incremental_object_ids": {
+    "bytes": 287,
+    "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/ipfs_accelerate_py_detached/exact-delta-object-ids.txt",
+    "sha256": "ccf7461dddbf1630a4bfcfa19c8154d60d56a45ab94a922353bd7758b702b4fb"
+  },
+  "restored_pack_objects": 13,
+  "sizing": {
+    "object_counts_by_type": {
+      "blob": 2,
+      "commit": 1,
+      "tree": 4
+    },
+    "objects": 7,
+    "sum_storage_bytes_in_aggregate": 102113,
+    "ten_largest_objects": [
+      [
+        226377,
+        "08b8eed71b496885d851d45de5975d36d16e5df9",
+        "blob"
+      ],
+      [
+        78748,
+        "5d9380a4fb4a41a2242a5fe02f776a8406350c0d",
+        "blob"
+      ],
+      [
+        4454,
+        "599650c3f90b433ce71149806b401ea0d3b48181",
+        "tree"
+      ],
+      [
+        4110,
+        "39524d3b7a3e6591a9af2130d632282a26bbd070",
+        "tree"
+      ],
+      [
+        2924,
+        "e1ecc269517d48c14e090cb368015539e49b737e",
+        "tree"
+      ],
+      [
+        2915,
+        "3ca94ad899e7b4be2738deaca886787326e7a4ac",
+        "tree"
+      ],
+      [
+        301,
+        "a53b173781999cdde0faaccf245ea5b4d404f730",
+        "commit"
+      ]
+    ],
+    "uncompressed_bytes_by_type": {
+      "blob": 305125,
+      "commit": 301,
+      "tree": 14403
+    },
+    "uncompressed_object_bytes": 319829
+  },
+  "sizing_receipt": {
+    "bytes": 929,
+    "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/ipfs_accelerate_py_detached/pre-pack-object-sizes.json",
+    "sha256": "0675130ea516107058e4063a48631e597f47b0f9d134c611ec4463a865d934fe"
+  },
+  "source_roster": {
+    "bytes": 1580,
+    "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/additional-accelerate-detached-input.json",
+    "sha256": "c29e23613e977ce56269f2bbf3c4e4459825405138589c0fb3968b6abb6f41f4"
+  },
+  "status": "RESTORE_VERIFIED",
+  "tip_count": 1,
+  "tips": [
+    "a53b173781999cdde0faaccf245ea5b4d404f730"
+  ]
+}

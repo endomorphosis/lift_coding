@@ -1,0 +1,74 @@
+import ast
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+
+root=Path(__file__).resolve().parent
+repo=root.parents[2]/"repositories/datasets"
+env={**os.environ,"GIT_OPTIONAL_LOCKS":"0","GIT_NO_LAZY_FETCH":"1"}
+def git(*args):
+    return subprocess.check_output(["git","-c","core.preloadIndex=false","-C",str(repo),*args],env=env)
+def put(p,raw):
+    with p.open("xb") as f:
+        f.write(raw)
+        f.flush()
+        os.fsync(f.fileno())
+    p.chmod(0o400)
+    assert p.read_bytes()==raw
+    return {"path":str(p),"bytes":len(raw),"sha256":hashlib.sha256(raw).hexdigest()}
+roles={
+    "owner":"ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_structured_retrieval.py",
+    "test":"tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py",
+}
+head,remote=git("rev-parse","HEAD","refs/remotes/origin/main").decode().splitlines()
+assert head==remote
+assert not git("status","--porcelain=v1","--untracked-files=all","--",*roles.values())
+inputs={"head":head,"repo":str(repo),"roles":{}}
+for role,path in roles.items():
+    mode,kind,oid=git("ls-tree",head,"--",path).decode().split("\t")[0].split()
+    assert mode=="100644" and kind=="blob"
+    raw=git("cat-file","blob",oid)
+    assert (repo/path).read_bytes()==raw
+    inputs["roles"][role]={**put(root/(role+".before.py.DATA"),raw),"relative":path,"oid":oid,"mode":mode}
+new_test=br'''
+
+
+@pytest.mark.parametrize("query_count", [0, 1, 32, 33])
+def test_aggregate_v4_ranked_context_checks_query_count_before_ranking(monkeypatch, query_count):
+    from ipfs_datasets_py.optimizers.logic_theorem_optimizer import legal_structured_retrieval as structured
+
+    queries = [
+        {"id": f"fixture:query:{index}", "split_sample_id": f"fixture:split:{index}",
+         "source_text": f"Fictional provision {index}."}
+        for index in range(query_count)
+    ]
+    calls = []
+
+    class RankingReached(Exception):
+        pass
+
+    def rank(_retriever, offered, *args, **kwargs):
+        calls.append(offered)
+        raise RankingReached
+
+    monkeypatch.setattr(structured, "build_reviewed_rich_context_candidates_v4", rank)
+    expected = RankingReached if 1 <= query_count <= 32 else ValueError
+    with pytest.raises(expected) as stopped:
+        structured.prepare_reviewed_ranked_training_context_v4(
+            object(), queries, None, None, None, [],
+            retrieval_inputs={}, example_consumer_inputs={})
+    if expected is ValueError:
+        assert "bounded aggregate quer" in str(stopped.value)
+        assert calls == []
+    else:
+        assert calls == [queries]
+        assert calls[0] is not queries
+'''
+before=Path(inputs["roles"]["test"]["path"]).read_bytes()
+body=before+new_test
+ast.parse(body)
+inputs["after_test"]=put(root/"test.after.py.DATA",body)
+put(root/"input-spec.json",(json.dumps(inputs,indent=2,sort_keys=True)+"\n").encode())
+print(root)

@@ -1,0 +1,156 @@
+import ast
+from collections import Counter
+import difflib
+import hashlib
+import json
+import os
+from pathlib import Path
+import stat
+import subprocess
+from xml.etree import ElementTree
+
+root=Path(__file__).resolve().parent
+spec=json.loads((root/"input-spec.json").read_bytes())
+repo=Path(spec["repo"])
+env={**os.environ,"GIT_OPTIONAL_LOCKS":"0","GIT_NO_LAZY_FETCH":"1"}
+os.umask(0o022)
+def git(*args,cwd=repo):
+    return subprocess.check_output(["git","-c","core.preloadIndex=false","-C",str(cwd),*args],env=env)
+def sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+def blob(raw):
+    return hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest()
+def f9(s):
+    return {k:str(getattr(s,k)) for k in ("st_dev","st_ino","st_mode","st_nlink","st_uid","st_gid","st_size","st_mtime_ns","st_ctime_ns")}
+def raw9(p):
+    with os.fdopen(os.open(p,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK),"rb") as handle:
+        before=os.fstat(handle.fileno())
+        assert stat.S_ISREG(before.st_mode) and before.st_nlink==1
+        raw=handle.read()
+        assert len(raw)==before.st_size and f9(before)==f9(os.fstat(handle.fileno()))==f9(p.lstat())
+    return raw,f9(before)
+def artifact(p,digest=None):
+    raw,identity=raw9(p)
+    checksum=sha(raw)
+    if digest is not None:
+        assert checksum==digest
+    return {"path":str(p),"bytes":len(raw),"sha256":checksum,"full9":identity}
+def checked(ref):
+    raw,_=raw9(Path(ref["path"]))
+    assert (len(raw),sha(raw))==(ref["bytes"],ref["sha256"])
+    return raw
+def put(p,raw,mode=0o400):
+    p.parent.mkdir(mode=0o700,parents=True,exist_ok=True)
+    with os.fdopen(os.open(p,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,mode),"wb") as handle:
+        handle.write(raw);handle.flush();os.fsync(handle.fileno())
+    assert raw9(p)[0]==raw
+    return artifact(p)
+
+tip,tracking=git("rev-parse","HEAD","refs/remotes/origin/main").decode().splitlines()
+assert tip==tracking
+assert subprocess.run(["git","-C",str(repo),"merge-base","--is-ancestor",spec["head"],tip],env=env).returncode==0
+new_paths=set(git("diff","--name-only",spec["head"],tip).decode().splitlines())
+assert not new_paths.intersection(spec["roles"])
+def current():
+    assert git("rev-parse","HEAD","refs/remotes/origin/main").decode().splitlines()==[tip,tip]
+    assert not git("status","--porcelain=v1","--untracked-files=all","--",spec["owner"],spec["test"])
+current()
+scratch=root/"verified-private-roundtrip"
+scratch.mkdir(mode=0o700)
+files,patch_refs={},{}
+diffs={"forward":[],"inverse":[]}
+for role in ("owner","test"):
+    path=spec[role]
+    pre,post=[root/(role+"."+side+".py.DATA") for side in ("before","after")]
+    a,b=raw9(pre)[0],raw9(post)[0]
+    active,identity=raw9(repo/path)
+    entry=git("ls-tree",tip,"--",path).decode().split("\t")[0].split()
+    assert active==a and entry==["100644","blob",blob(a)]
+    assert spec["roles"][path]["git_blob"]==blob(a)
+    assert raw9(Path(spec["project"])/path)[0]==b
+    old,new=ast.parse(a).body,ast.parse(b).body
+    if role=="owner":
+        changed=[node.name for old_node,node in zip(old,new,strict=True) if ast.dump(old_node)!=ast.dump(node)]
+        assert changed==["_checked_release_type_capture_context"]
+    else:
+        assert b.startswith(a) and len(new)==len(old)+1
+        assert new[-1].name=="test_checked_release_type_capture_requires_the_matching_component_evidence"
+    files[role]={"path":path,"canonical_path":str(repo/path),"mode":"100644",
+       "canonical_preimage_full9":identity,"before":{**artifact(pre),"git_blob":blob(a)},
+       "after":{**artifact(post),"proposed_git_blob":blob(b)}}
+    names={"fromfile":b"a/"+os.fsencode(path),"tofile":b"b/"+os.fsencode(path)}
+    for direction,first,last in (("forward",a,b),("inverse",b,a)):
+        diffs[direction].extend(difflib.diff_bytes(difflib.unified_diff,
+                         first.splitlines(True), last.splitlines(True),**names))
+    put(scratch/path,a,0o644)
+for direction,key in (("forward","after"),("inverse","before")):
+    p=root/(direction+".patch")
+    patch_refs[direction]=put(p,b"".join(diffs[direction]))
+    git("apply","--no-index","--whitespace=nowarn",str(p),cwd=scratch)
+    for row in files.values():
+        raw,identity=raw9(scratch/row["path"])
+        assert sha(raw)==row[key]["sha256"] and stat.S_IMODE(int(identity["st_mode"]))==0o644
+current()
+
+prev=root.parent/"actual-Phase2-retained-type-review-UTC-SHA-exact2-ordinary25-three-FF-publication-v591.json"
+previous=artifact(prev,"f925ede41df94d0f9065ef9fc65bbe0596bf702fdbe281c3b8a62462366ef42f")
+pub=json.loads(checked(previous))
+assert pub["ordered_COLLECT_RUN_JUnit_exact"] and pub["Source_resource_and_parent_closed"]
+prefix=spec["test"]+"::"
+prior_xml=ElementTree.fromstring(checked(pub["raw_JUnit"]))
+old_cases=[prefix+row.attrib["name"] for row in prior_xml.findall(".//testcase")]
+assert old_cases==pub["ordered_actual_cases"] and len(old_cases)==25
+case_reports={}
+seq={}
+for mode,expected_failed in (("before",3),("after",0)):
+    base=root/mode
+    code=int(raw9(base/"exit")[0])
+    xml=ElementTree.fromstring(raw9(base/"result.xml")[0])
+    rows=xml.findall(".//testcase")
+    assert len(rows)==28 and len(set(r.attrib["name"] for r in rows))==28
+    case_names=[prefix+r.attrib["name"] for r in rows]
+    assert case_names[:25]==old_cases
+    assert not xml.findall(".//error") and not xml.findall(".//skipped")
+    failure={row.attrib["name"]:row.find("failure").attrib["message"] for row in rows if row.find("failure") is not None}
+    assert len(failure)==expected_failed and code==bool(expected_failed)
+    assert all("DID NOT RAISE" in detail for detail in failure.values())
+    assert not (base/"stderr.txt").stat().st_size
+    assert b"guard events []" in raw9(base/"stdout.txt")[0]
+    case_reports[mode]={"unique":28,"passed":28-expected_failed,"failed":expected_failed,
+        "errors":0,"skipped":0,"declared_case_failures":failure,
+        "logs":[artifact(base/name) for name in ("result.xml","stdout.txt","stderr.txt","exit")]}
+    seq[mode]=case_names
+assert seq["before"]==seq["after"]
+counts=Counter(name.partition("[")[0] for name in seq["after"])
+assert tuple(counts)==tuple(spec["selectors"]) and list(counts.values())==[2,15,8,3]
+retained=root/"retained-readback"
+retained_results=json.loads(raw9(retained/"stdout.json")[0])
+original=Path("/tmp/P2-retained-type-review-UTC-and-SHA-private-8BxdcNWA/retained-readback/actual-bound-closed-type-provenance.json")
+result_path=retained/"actual-bound-closed-type-provenance.json"
+assert raw9(result_path)[0]==raw9(original)[0]
+assert retained_results["unchanged_type_capture_bytes"]==12915
+assert retained_results["unchanged_type_capture_sha256"]=="3cf0a96c785f038389cb87c20b75f084a69fa15e122dc049ab79bfbe768aacf1"
+assert all(retained_results["rows"].values()) and len(retained_results["rows"])==10
+assert not retained_results["guard_events"] and retained_results["Native_or_model_or_admission_action"] is False
+assert int(raw9(retained/"exit")[0])==0 and not (retained/"stderr.txt").stat().st_size
+
+packet={
+ "schema":"retained-physical-V4-declared-evidence-exact-component-binding-private/v1",
+ "fixture_Git_HEAD":spec["head"],"observed_local_and_tracking_tip":tip,"target_paths_clean":True,
+ "files":files,"forward_inverse_exact_private_readback":patch_refs,"cohorts":case_reports,
+ "old_ordinary25_publication":previous,"old_actual_JUnit":pub["raw_JUnit"],
+ "new_expected_ordinary28":{"ordered_testcases":seq["after"],"function_counts":dict(counts),
+     "actual_current_ordinary":None,"selection_epoch_clock_and_resource_binding":None},
+ "genuine_retained_type_readback":{"prior_exact_provenance":artifact(original),
+      "fresh_software_readback_identical":artifact(result_path),
+      "prior_execution_unmodified":True,"new_native_execution":False,
+      "actual_kept_capture_bytes":retained_results["unchanged_type_capture_bytes"],
+      "actual_kept_capture_sha256":retained_results["unchanged_type_capture_sha256"],
+      "replayed_original_controls":[artifact(retained/name) for name in ("stdout.json","stderr.txt","exit")]},
+ "read_only_private_project_current_Git_manifest":artifact(root/"input-spec.json"),
+ "evidence_join":{"source_integrity":"reviewed_crosswalk","representation":"preservation","dependency":"dependency"},
+ "authority_scope":{"synthetic_mutation_cases":True,"Native_execution_this_turn":False,
+       "new_legal_admission":False,"new_Lean_discharge":False,"canonical_adoption":False}
+}
+print(json.dumps(put(root/"SEALED-retained-V4-qualification-component-binding-exact-two.json",
+     (json.dumps(packet,indent=2,sort_keys=True)+"\n").encode())))

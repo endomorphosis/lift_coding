@@ -1,0 +1,61 @@
+from dataclasses import replace
+from pathlib import Path
+from types import ModuleType
+import hashlib
+import json
+import sys
+import traceback
+
+stage = Path(__file__).absolute().parent
+adapter_path = stage / "no-fit-current-obligation-adapter-v01.py"
+adapter_raw = adapter_path.read_bytes()
+assert (len(adapter_raw), hashlib.sha256(adapter_raw).hexdigest()) == (
+    20405, "a84c49de31dd4218043f2f6b9ff1f9ef954291eddde2661b20a580fbbc539bf7",
+)
+adapter = ModuleType("_authentic_current_obligation_probe")
+adapter.__file__ = str(adapter_path)
+sys.modules[adapter.__name__] = adapter
+exec(compile(adapter_raw, str(adapter_path), "exec", dont_inherit=True), adapter.__dict__)
+
+def feature_checks(prior):
+    fixture = adapter.import_fixture(prior)
+    original, revised, _, _, _ = adapter.samples_and_legacy_record(fixture)
+    import ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_autoencoder as auto
+    warm = auto.AdaptiveModalAutoencoder(compute_device="python")
+    cold = auto.AdaptiveModalAutoencoder(compute_device="python")
+    before = [prior.state_identity(model) for model in (warm, cold)]
+    original_keys = warm._legal_ir_view_feature_keys_for(original)
+    revised_warm = warm._legal_ir_view_feature_keys_for(revised)
+    revised_cold = cold._legal_ir_view_feature_keys_for(revised)
+    assert original.sample_id == revised.sample_id and original.text == revised.text
+    assert original.modal_ir.canonical_hash() != revised.modal_ir.canonical_hash()
+    assert revised_cold != original_keys
+    assert before == [prior.state_identity(model) for model in (warm, cold)]
+    return {"cases": [{
+        "case": "current-published-warm-revised-features-equal-current-cold",
+        "passed": revised_warm == revised_cold,
+        "same_legacy_cache_key": auto._sample_content_cache_id(original) == auto._sample_content_cache_id(revised),
+        "warm_still_original": revised_warm == original_keys,
+        "current_feature_difference_counts": [len(set(original_keys) - set(revised_cold)),
+                                              len(set(revised_cold) - set(original_keys))],
+    }], "state_unchanged": True}
+
+
+prior = adapter.load_prior()
+outcome = {}
+code = 2
+try:
+    prior.install_kernel_guards()
+    base = adapter.prepare_loader(prior, {})
+    outcome.update(feature_checks(prior))
+    assert not prior.denied
+    code = 0 if all(case["passed"] for case in outcome["cases"]) else 1
+except Exception as exc:
+    traceback.print_exc()
+    outcome["refusal"] = repr(exc)
+finally:
+    outcome.update(worker_rc=code, explicit_denials=prior.denied, kernel_guard=prior.guard,
+                   compiled=prior.compiled, project_body_bytes=prior.compiled_total,
+                   no_primary_or_auxiliary_numeric_updates=True, purpose="current published code stale cache RED")
+    print(json.dumps(outcome, sort_keys=True))
+raise SystemExit(code)

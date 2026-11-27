@@ -1,0 +1,213 @@
+{
+  "schema": "Main-existing-watchdog-event-aware-metadata-recheck-private/v1",
+  "status": "PRIVATE_ENGINEERING_GREEN__NORMAL_AND_ADOPTION_UNRUN",
+  "selected_published_preimage": "219ba3da0f62f772801d71715e22c506faa21126",
+  "fresh_remote_equality_asserted": false,
+  "task": "Let the existing supervisor notice newly retained dependency evidence even when task counts and statuses stay unchanged. Keep failed/unknown work fenced while independent work continues.",
+  "files": [
+    {
+      "relative_path": "ipfs_accelerate_py/agent_supervisor/task_sources/board_stall_watchdog.py",
+      "Git_mode": "100644",
+      "before": {
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/board_stall_watchdog.py.DATA",
+        "bytes": 20585,
+        "sha256": "249c7c9bcb24ac30d4737e501f56c34dff63ccbe0c5e7bc1d50d514339dfbb95",
+        "Gitblob": "0dd6e6adf2243634f6f2e4e4ad1b68e0bc706f5b"
+      },
+      "post": {
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/board_stall_watchdog.after.v03.py.DATA",
+        "bytes": 23177,
+        "sha256": "f7c3e86fde060136b2c3fe481271d454b1cbda26a81145f4dede6f9a811fa758",
+        "Gitblob": "c99b489fd760b566172c48591365565b2704a6b8"
+      }
+    },
+    {
+      "relative_path": "test/api/test_board_stall_watchdog.py",
+      "Git_mode": "100644",
+      "before": {
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/test_board_stall_watchdog.py.DATA",
+        "bytes": 28670,
+        "sha256": "5b0d140ce0ac404e2e037db401d79ec23db0094347d9006986867e7cd99059f1",
+        "Gitblob": "dba0961ebf1bc9ac71f282f2d28de1ca7a6c7a28"
+      },
+      "post": {
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/test_board_stall_watchdog.after.v03.py.DATA",
+        "bytes": 43068,
+        "sha256": "fec2fd4e57e644e043338807321b69422e1e3cf4edb576a4b8b700a0ffd8361b",
+        "Gitblob": "428771f7a5eb229d6d6072393b1ccb88c40c56da"
+      },
+      "append": {
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/event_recheck_tests.v04.py.DATA",
+        "bytes": 14398,
+        "sha256": "808988a3c1a226174e1d5251c19906f5fa833b368dbfd4748db8a251d216fb8f",
+        "Gitblob": "70cdc813651e29034ba16524ecf6ba98756ab0f8"
+      }
+    }
+  ],
+  "behavior": {
+    "authoritative_signal": "Existing IntentRepository.event_watermark through read_session(read_only=True); exact nonnegative int only. No default writable/read-session fallback.",
+    "signal_scope": "Global metadata event sequence is a cache freshness hint, never task revision, evidence validity, claim, lease, budget or admission authority.",
+    "both_existing_paths": [
+      "BoardStallWatchdog.tick",
+      "serve -> run_once -> tick"
+    ],
+    "same_or_unknown_signal": "Preserve120second fallback and prior repair signature. Read/close failure never learns a new marker.",
+    "known_signal": "Bind to same repository object; invalidate only metadata check freshness before resolution. Preserve notification across a second failed observation.",
+    "attempt_reservation": "When inactive and already repair-latched, reserve timestamp before canonical resolution; exception or unknown observation cannot refund attempt. Preserve original lock exception identity.",
+    "active_work": "No new event observation and no changes to active repair/timer state. Existing continue disposition retained.",
+    "canonical_resolver": "Unchanged repository release_dependency_satisfied_blocks retains all task revision, evidence, claim, lease, operator/runtime/packet/backoff/budget guards. No ready/native/scientific dispatch."
+  },
+  "literal_existing_API_proof": {
+    "path": "/tmp/Root-normal25-ten-Source-READ-actual-v48/raw/03-intent_repository.py.DATA",
+    "bytes": 458446,
+    "sha256": "76bc54642770a24a16e15796f79f6c43dffe4ab2fd680a3250f6395719519c05",
+    "matched_published_A219_Gitblob": "e9b885a48a38ee00969d00220b0b2a30ef9daf63",
+    "event_watermark": "3192-3197 SELECT COALESCE(MAX(global_sequence),0) FROM domain_events",
+    "evidence_notification": "record_evidence4752-4830 appends EVIDENCE_RECORDED in same write transaction. Coverage of all other writers not claimed, so120s fallback retained.",
+    "physical_readonly": "read_session3008-3053 refuses bound/Quack/nested writer sessions, owns close; exit before resolution. Unknown means no cleanup/admission assertion.",
+    "metadata_resolver": "5425-5659: no source probe, no clearing claims/leases/holds/permissions/packet/backoff/budgets and never ready. Canonical exact spec/dependency/evidence and transaction/CAS fences stay unchanged."
+  },
+  "preservation_proof": {
+    "all_other_top_level_function_AST_exact": true,
+    "all_import_constant_AST_exact": true,
+    "changed_existing_class_methods": [
+      "__init__",
+      "tick"
+    ],
+    "idle_recorded_signature_and_body_AST_exact": true,
+    "new_global_helper": "_dependency_event_watermark",
+    "new_private_class_method": "_observe_dependency_event",
+    "observation_helper_does_not_touch_repair_latch": true,
+    "original_test28670_byte_prefix_and_all_AST_exact": true,
+    "new_public_test_functions": 15,
+    "normal_collection_count_and_order": null,
+    "main_service_arguments_and_default120interval_AST_exact": true
+  },
+  "engineering_results": {
+    "initial_SAME20_RED": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/actual-same20-event-recheck-RED.json",
+      "bytes": 8891,
+      "sha256": "bfcc4395094976a312a3e3647c7f6e1785c6aad0f1a090ce1bff430129f82b93"
+    },
+    "initial_SAME20_counts": "12 unchanged existing tests plus8 new;14pass6fail0error before first product change.",
+    "initial_SAME20_GREEN": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/actual-same20-event-recheck-GREEN.json",
+      "bytes": 5962,
+      "sha256": "10abfd8f41a639318d37ada470da06b354029b4dcca0f2ff14ce8d65683ae903"
+    },
+    "two_probe_corrected_SAME25_RED": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/actual-same25-event-recheck-v01-RED-v03.json",
+      "bytes": 8260,
+      "sha256": "d8c09542a849001f95ada57fa0f8e34ed898fc5fec832f075a6e6235b54c828a"
+    },
+    "two_probe_counts": "23pass2fail on v01; same corrected25 then25pass on v02.",
+    "two_probe_SAME25_GREEN": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/actual-same25-event-recheck-v02-GREEN.json",
+      "bytes": 7102,
+      "sha256": "606fa211ff4df03a88c2f455c31a86ea196bcac18240cd965a40bfcde8f1ce73"
+    },
+    "failure_budget_SAME27_RED": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/actual-same27-event-recheck-v02-RED.json",
+      "bytes": 9042,
+      "sha256": "8cb54eed554e3890cfa68013a65aa96eb15380e1ac89f6236a367a7d47de75d7"
+    },
+    "failure_budget_counts": "25pass1failure1error on v02, same27 on v03 now27pass0F/E/S.",
+    "final_SAME27_GREEN": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/actual-same27-event-recheck-v03-GREEN.json",
+      "bytes": 7581,
+      "sha256": "b32b469b2f74733915e224651b6e36092d856888011157265b87a1761081f779"
+    },
+    "final_driver": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/same27-existing-watchdog-controls.v04.py.DATA",
+      "bytes": 3695,
+      "sha256": "1c0d24798eea6e2977fa936e7d1e91579bb7a9611d9b4b5ecf9859255298b604"
+    },
+    "scope": "Actual whole cached stdlib watchdog module, exact12 old fixture tests and15 new scripted-event tests. Fake repository is explicit; no real SQL/validator/package/native/source execution. Cohorts overlap, never sum them.",
+    "limits": {
+      "CPU_seconds": 30,
+      "address_space_bytes": 536870912
+    },
+    "retained_fixture_error": {
+      "result": {
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/actual-same25-event-recheck-v01-RED.json",
+        "bytes": 7096,
+        "sha256": "318bfdd4c6d441665b8a50b31f4bc34e69a5ef0685b167403b51422918856d75"
+      },
+      "disposition": "First extended fixture mistakenly changed operator hold signature between tick and serve, so25pass did not reproduce the race. Corrected only fixture hold booleans before genuine same25RED; all versions/outputs retained."
+    }
+  },
+  "peer_feedback": {
+    "same_existing_reviewer": "/root/frontier_caller_map",
+    "actual_findings_fixed": [
+      "Lost known event after second probe read/close failure",
+      "Repeated metadata attempts after resolver failure removed cooldown"
+    ],
+    "final_522byte_delta_and2218byte_controls": "CLEAR;2740B reviewed only, not a new execution or normal gate.",
+    "normal_or_actual_SQL_qualification": false
+  },
+  "normal_owning_selectors_UNRUN": [
+    "test/api/test_board_stall_watchdog.py::test_tick_rechecks_same_idle_frontier_after_repository_event",
+    "test/api/test_board_stall_watchdog.py::test_serve_rechecks_same_readonly_frontier_after_repository_event",
+    "test/api/test_board_stall_watchdog.py::test_event_change_refreshes_metadata_but_never_rearms_repair_budget",
+    "test/api/test_board_stall_watchdog.py::test_event_arriving_during_repair_is_not_marked_already_checked",
+    "test/api/test_board_stall_watchdog.py::test_unknown_event_observations_keep_the_legacy_cooldown",
+    "test/api/test_board_stall_watchdog.py::test_active_frontier_does_not_read_or_spend_an_idle_event_observation",
+    "test/api/test_board_stall_watchdog.py::test_repository_event_readonly_scope_exits_before_resolution",
+    "test/api/test_board_stall_watchdog.py::test_idle_event_cache_does_not_cross_repository_instances",
+    "test/api/test_board_stall_watchdog.py::test_serve_keeps_a_known_event_when_the_second_read_fails",
+    "test/api/test_board_stall_watchdog.py::test_serve_keeps_a_known_event_when_the_second_close_fails",
+    "test/api/test_board_stall_watchdog.py::test_failed_readonly_close_does_not_learn_a_new_event_marker",
+    "test/api/test_board_stall_watchdog.py::test_first_known_event_refreshes_once_without_rearming_repair",
+    "test/api/test_board_stall_watchdog.py::test_periodic_fallback_rechecks_even_without_a_new_event",
+    "test/api/test_board_stall_watchdog.py::test_event_resolution_failure_keeps_the_attempt_cooldown_spent",
+    "test/api/test_board_stall_watchdog.py::test_event_lock_failure_preserves_identity_and_attempt_cooldown"
+  ],
+  "actual_future_bindings": {
+    "current_Head": null,
+    "tree": null,
+    "Source_epoch": null,
+    "Source_full9": null,
+    "Source_or_runtime_authority": null,
+    "clock": null,
+    "collect": null,
+    "ordinary_run": null,
+    "SDK_or_resource_lease": null,
+    "publication": null
+  },
+  "effects": {
+    "canonical_changes": 0,
+    "Source_capture": 0,
+    "SQL_execution": 0,
+    "SDK_calls": 0,
+    "Native": 0,
+    "model": 0,
+    "Git_mutations": 0,
+    "live_RPC_mutations": 0,
+    "new_queue_provider_registry_controller": false,
+    "budget_or_cap_reset": false,
+    "physical_IO_accounting_complete": false
+  },
+  "handoff_boundary": "Only this existing consumer changed privately. Existing original integration owner must fresh-bind actual preimages/Source/runtime before normal qualification and publication. Current coordination MCP read is unavailable; original Root liveness and SDK custody remain unknown, with no takeover/replay or safety-control bypass.",
+  "patches": {
+    "board_stall_watchdog_forward": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/board_stall_watchdog.v03.forward.diff",
+      "bytes": 5294,
+      "sha256": "add1a44dbf5b38f0f6d8d34faffcb0997a9dd5d57f0e553584c7678eb1a29957"
+    },
+    "board_stall_watchdog_inverse": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/board_stall_watchdog.v03.inverse.diff",
+      "bytes": 5294,
+      "sha256": "f0077e9ce454150f60804c5d56ee8e099ca1ecb2bd5a36e15cd74426af24b625"
+    },
+    "test_board_stall_watchdog_forward": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/test_board_stall_watchdog.v03.forward.diff",
+      "bytes": 14914,
+      "sha256": "7bf3f36c9c119284710997a3bbf74c46741e7387846e2c7a05ac20267cb1187a"
+    },
+    "test_board_stall_watchdog_inverse": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/test_board_stall_watchdog.v03.inverse.diff",
+      "bytes": 14914,
+      "sha256": "e47f599a3940e5855999bcebe34f2777e166837ce134a0cb457826ae9e59a876"
+    }
+  }
+}

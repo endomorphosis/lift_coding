@@ -1,0 +1,138 @@
+"""Engineering-only cached owner-function cohort; no canonical imports or proof credit."""
+from __future__ import annotations
+
+import ast as pyast
+import hashlib
+import importlib.abc
+import json
+import os
+from pathlib import Path
+import resource
+import sys
+import types
+
+D = Path('/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/Phase6-parametric-counted-source-withheld-reconstruction-private-v01')
+resource.setrlimit(resource.RLIMIT_CPU, (60, 60))
+resource.setrlimit(resource.RLIMIT_AS, (512 * 1024**2, 512 * 1024**2))
+resource.setrlimit(resource.RLIMIT_FSIZE, (1024**2, 1024**2))
+os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
+
+manifest_raw = Path('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-obligation-inverse-private-72776lwj/two-controls-current-exact-owner-pins.json').read_bytes()
+assert hashlib.sha256(manifest_raw).hexdigest() == "764d77e63decbbc3bdd9a261d1547e582ca09d25a90f661b2cabc435f514a63b"
+manifest = json.loads(manifest_raw)
+cached = {}
+for row in manifest["records"]:
+    raw = Path(row["path"]).read_bytes()
+    assert len(raw) == row["bytes"] and hashlib.sha256(raw).hexdigest() == row["sha256"]
+    cached[row["repo_relative_path"]] = raw
+
+def audit(event, args):
+    if event.startswith(("subprocess.", "socket.")) or event in (
+        "os.fork", "os.forkpty", "os.posix_spawn", "os.exec", "os.system",
+        "os.mkdir", "os.remove", "os.rename", "os.truncate", "os.rmdir",
+    ):
+        raise RuntimeError("engineering cohort denies process/network/filesystem mutation")
+    if event == "open":
+        path, mode, flags = args
+        if isinstance(path, (str, bytes)) and str(path).startswith("/home/"):
+            raise RuntimeError("engineering cohort denies canonical Source reads")
+        if flags & (os.O_WRONLY | os.O_RDWR | os.O_CREAT | os.O_TRUNC | os.O_APPEND):
+            raise RuntimeError("engineering cohort has stdout-only output")
+
+sys.addaudithook(audit)
+
+class CachedOnly(importlib.abc.MetaPathFinder):
+    def find_spec(self, fullname, path=None, target=None):
+        if fullname.startswith("ipfs_datasets_py"):
+            raise ImportError("unbound project module: " + fullname)
+        return None
+
+sys.meta_path.insert(0, CachedOnly())
+for name in (
+    "ipfs_datasets_py", "ipfs_datasets_py.logic", "ipfs_datasets_py.logic.families",
+    "ipfs_datasets_py.logic.syntax_core", "ipfs_datasets_py.logic.autoformal",
+    "ipfs_datasets_py.logic.legal_ir",
+):
+    module = types.ModuleType(name)
+    module.__path__ = []
+    sys.modules[name] = module
+    if "." in name:
+        parent, child = name.rsplit(".", 1)
+        setattr(sys.modules[parent], child, module)
+
+def load(relative_path, selected=None):
+    name = relative_path[:-3].replace("/", ".")
+    raw = cached[relative_path]
+    tree = pyast.parse(raw, filename="cached:" + relative_path)
+    if selected is not None:
+        tree.body = [node for node in tree.body if (
+            isinstance(node, pyast.ImportFrom) and node.module == "__future__"
+            or isinstance(node, (pyast.FunctionDef, pyast.ClassDef)) and node.name in selected
+            or isinstance(node, pyast.Assign)
+        )]
+    module = types.ModuleType(name)
+    module.__file__ = next(row["path"] for row in manifest["records"] if row["repo_relative_path"] == relative_path)
+    module.__package__ = name.rsplit(".", 1)[0]
+    sys.modules[name] = module
+    setattr(sys.modules[module.__package__], name.rsplit(".", 1)[1], module)
+    if selected is not None:
+        from itertools import combinations
+        module.combinations = combinations
+    if relative_path.endswith("/extended_compiler.py"):
+        import re
+        owner = sys.modules["ipfs_datasets_py.logic.legal_ir.extended_decompiler"]
+        module.__dict__.update(json=json, re=re, MAX_RENDERED_UTF8_BYTES=owner.MAX_RENDERED_UTF8_BYTES)
+    exec(compile(tree, module.__file__, "exec"), module.__dict__)
+    return module
+
+
+mode = sys.argv[1]
+assert mode in ("baseline", "candidate")
+pins_raw = Path('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-obligation-inverse-private-72776lwj/two-controls-selector-DATA.json').read_bytes()
+assert hashlib.sha256(pins_raw).hexdigest() == "411b68b663362dd5a9244f6e904de8eeff87f2dac8658638ccd523756662a7ad"
+pins = json.loads(pins_raw)
+for row in pins["records"] + [pins["test_fragment"]]:
+    raw = Path(row["path"]).read_bytes()
+    assert len(raw) == row["bytes"] and hashlib.sha256(raw).hexdigest() == row["sha256"]
+    if mode == "candidate" and "repo_relative_path" in row:
+        cached[row["repo_relative_path"]] = raw
+for relative_path in list(cached)[:5]:
+    load(relative_path)
+load("ipfs_datasets_py/logic/autoformal/legal_native_ast_preservation.py")
+threshold = load("ipfs_datasets_py/logic/autoformal/legal_counted_frame_threshold_v2.py")
+decompiler_path = "ipfs_datasets_py/logic/legal_ir/extended_decompiler.py"
+decompiler_tree = pyast.parse(cached[decompiler_path])
+selected = {node.name for node in decompiler_tree.body if isinstance(node, pyast.FunctionDef)}
+decompiler = load(decompiler_path, selected)
+compiler = load("ipfs_datasets_py/logic/legal_ir/extended_compiler.py",
+    {"_ClauseReader", "_RelationalProseReader", "compile_relational"})
+load("ipfs_datasets_py/logic/autoformal/legal_relational_reconstruction_v1.py")
+for name in ("ipfs_datasets_py.logic.formalization", "ipfs_datasets_py.logic.formalization.autoencoder"):
+    module = types.ModuleType(name)
+    module.__path__ = []
+    sys.modules[name] = module
+    parent, child = name.rsplit(".", 1)
+    setattr(sys.modules[parent], child, module)
+load("ipfs_datasets_py/logic/formalization/autoencoder/ir_legal_text_roundtrip.py")
+import unittest
+import io
+from copy import deepcopy
+namespace = {"unittest": unittest, "deepcopy": deepcopy,
+    "prose_ast": sys.modules["ipfs_datasets_py.logic.syntax_core.ast"],
+    "prose_signatures": sys.modules["ipfs_datasets_py.logic.syntax_core.signatures"]}
+old_tests = pyast.parse(cached["tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py"])
+helpers = [node for node in old_tests.body if isinstance(node, (pyast.FunctionDef, pyast.ClassDef))
+           and node.name in ("_relational_score_reference", "_score_relational")]
+exec(compile(pyast.Module(body=helpers, type_ignores=[]), "cached:existing-independent-fixture", "exec"), namespace)
+fragment = Path(pins["test_fragment"]["path"]).read_bytes()
+exec(compile(fragment, pins["test_fragment"]["path"], "exec"), namespace)
+suite = unittest.TestSuite(unittest.defaultTestLoader.loadTestsFromTestCase(namespace[name]) for name in ("TestRelationalObligationAssertion",))
+log = io.StringIO()
+result = unittest.TextTestRunner(stream=log, verbosity=2).run(suite)
+print(json.dumps({"schema":"cached-relational-obligation-inverse-owning-test-cohort/v1", "mode":mode,
+    "testsRun":result.testsRun,"failures":len(result.failures),"errors":len(result.errors),
+    "skipped":len(result.skipped),"successful":result.wasSuccessful(),"log":log.getvalue(),
+    "cache_manifest_sha256":hashlib.sha256(manifest_raw).hexdigest(),
+    "private_candidate_pins_sha256":hashlib.sha256(pins_raw).hexdigest(),
+    "normal_import_or_current_Source_qualification":False,
+    "canonical_Source_body_reads":0,"Native_model_network_service":False}, sort_keys=True))

@@ -1,0 +1,80 @@
+{
+  "D_head": "017fb546935826d4e8f13d314395f6053cee4d3f",
+  "additions": {
+    "__init__.py": {
+      "git_blob": "f193dac78f8856b9144978fe4ba0f07ffc6fe19c",
+      "git_bytes": 478,
+      "git_sha256": "bd518ec0f37a0a5c4c0b35e7cf36504716a1fe4dbe4f0a803629a965a9fdeeb1",
+      "private_materialized": {
+        "bytes": 478,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/dataset/__init__.py",
+        "sha256": "bd518ec0f37a0a5c4c0b35e7cf36504716a1fe4dbe4f0a803629a965a9fdeeb1"
+      },
+      "unchanged_git_bytes": true
+    },
+    "ipfs_datasets_py/logic/autoformal/corpus_graph.py": {
+      "git_blob": "3839b30bb3dab26e252d47ace30b8022c3daa692",
+      "git_bytes": 20583,
+      "git_sha256": "8a1dc03ee39962baf784ac780ed2c8286b8e2e3998ec6677db281e81adc04409",
+      "private_materialized": {
+        "bytes": 20583,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/dataset/ipfs_datasets_py/logic/autoformal/corpus_graph.py",
+        "sha256": "8a1dc03ee39962baf784ac780ed2c8286b8e2e3998ec6677db281e81adc04409"
+      },
+      "unchanged_git_bytes": true
+    },
+    "ipfs_datasets_py/logic/autoformal/corpus_norm_definition_adapter.py": {
+      "git_blob": "3664e8da87608d53a0a3bbaf9bb519dfd2cdd5f2",
+      "git_bytes": 56136,
+      "git_sha256": "0071cc56a8284bac64c49ee24d1f2b3030c2dc98302b964c7baefd39d526939a",
+      "private_materialized": {
+        "bytes": 56136,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/dataset/ipfs_datasets_py/logic/autoformal/corpus_norm_definition_adapter.py",
+        "sha256": "0071cc56a8284bac64c49ee24d1f2b3030c2dc98302b964c7baefd39d526939a"
+      },
+      "unchanged_git_bytes": true
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_norm_definition_evidence_v1.py": {
+      "git_blob": "81be6490acd636b732427df10aedf630616f2a6d",
+      "git_bytes": 50615,
+      "git_sha256": "f83919d11c18ee01759022de39c992486c5b06eb940b1135709e1344c9f793d1",
+      "private_materialized": {
+        "bytes": 50615,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/dataset/ipfs_datasets_py/logic/autoformal/legal_norm_definition_evidence_v1.py",
+        "sha256": "f83919d11c18ee01759022de39c992486c5b06eb940b1135709e1344c9f793d1"
+      },
+      "unchanged_git_bytes": true
+    },
+    "tests/unit/logic/autoformal/test_corpus_norm_definition_adapter.py": {
+      "git_blob": "6cd0db1cdb355f77699c334d64ae5b3bd354850d",
+      "git_bytes": 64310,
+      "git_sha256": "65e048cb503a2c5532e2ad65cce02a8e61de52ac89602cdf811eda224ae1f3b4",
+      "private_materialized": {
+        "bytes": 66257,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/dataset/tests/unit/logic/autoformal/test_corpus_norm_definition_adapter.py",
+        "sha256": "4bd795b76e11a56a7c25fdbb82ba04edeb9987380d46367eb0c83127c365e295"
+      },
+      "unchanged_git_bytes": false
+    }
+  },
+  "existing_prepared_private_tree_130_plus_graph_5": true,
+  "no_changes_to_canonical_product_or_owning_tests": true,
+  "preexisting_confirmed_v3_sealed_owner": {
+    "bytes": 30293,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/owner.after.py.DATA",
+    "sha256": "65e8182c945669b0f891b03ab12b1d3bee27697d4443bd8df32861af7a931b05"
+  },
+  "private_acyclic_graph_case_new_only": "test_private_acyclic_signed_mixed_units_reach_the_graph_with_all_parent_links",
+  "private_source_role_count": 135,
+  "schema": "Phase2-V3-private-admission-to-existing-graph-fixture-roster/v1",
+  "selectors": [
+    "test_reviewed_graph_v3_requires_explicit_domain_after_genuine_mixed_admission",
+    "test_reviewed_graph_v3_fresh_validation_replays_original_prepare_assess_validate",
+    "test_reviewed_graph_v3_replays_current_original_source_ir_review_and_dependencies[definition]",
+    "test_reviewed_graph_v3_replays_current_original_source_ir_review_and_dependencies[source_raw]",
+    "test_reviewed_graph_v3_current_trust_refusals_preserve_genuine_signatures[revoked-key-key_revoked]",
+    "test_reviewed_graph_v3_requires_genuine_formalization_permission",
+    "test_reviewed_graph_v3_resealed_damage_requires_complete_regeneration[missing_definition_edge]",
+    "test_private_acyclic_signed_mixed_units_reach_the_graph_with_all_parent_links"
+  ]
+}

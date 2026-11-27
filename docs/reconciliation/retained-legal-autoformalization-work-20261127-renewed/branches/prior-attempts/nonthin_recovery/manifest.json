@@ -1,0 +1,60 @@
+{
+  "driver": {
+    "bytes": 17239,
+    "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/package_and_restore_nonthin.py",
+    "sha256": "ba78dba81c99d45d1778bdeeab15a91f003a1d30bb942c7ee80be2754382a326"
+  },
+  "expected_tips": 2,
+  "families": [
+    {
+      "bundle": {
+        "bytes": 794393,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/swissknife/swissknife-historical-tips.bundle",
+        "sha256": "b165fc6f56518f644d2657c8e546f89d9492b669687cd4cb073cb14d9f465ad8"
+      },
+      "expected_tips": 1,
+      "family": "swissknife",
+      "publication_files": [
+        {
+          "bytes": 794393,
+          "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/swissknife/swissknife-historical-tips.bundle",
+          "sha256": "b165fc6f56518f644d2657c8e546f89d9492b669687cd4cb073cb14d9f465ad8"
+        }
+      ],
+      "receipt": {
+        "bytes": 4370,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/swissknife/restore-receipt.json",
+        "sha256": "2f338b96ec2f22d416f9761f71e596f66f0679230ec8a5ab01518e4edffbc121"
+      },
+      "restored_tips": 1,
+      "status": "RESTORE_VERIFIED"
+    },
+    {
+      "bundle": {
+        "bytes": 1913663,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/lift_coding/lift_coding-historical-tips.bundle",
+        "sha256": "e121273507abff97b6eb07135fc0c1e715bc0fccfc819c65ce5999b7c8d19e64"
+      },
+      "expected_tips": 1,
+      "family": "lift_coding",
+      "publication_files": [
+        {
+          "bytes": 1913663,
+          "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/lift_coding/lift_coding-historical-tips.bundle",
+          "sha256": "e121273507abff97b6eb07135fc0c1e715bc0fccfc819c65ce5999b7c8d19e64"
+        }
+      ],
+      "receipt": {
+        "bytes": 4538,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/lift_coding/restore-receipt.json",
+        "sha256": "b959aa4d1c1ccda5b73df18d111704d075fbec1d8c7c086c00fbeacd5a2871ab"
+      },
+      "restored_tips": 1,
+      "status": "RESTORE_VERIFIED"
+    }
+  ],
+  "publication_attempted": false,
+  "restored_tips": 2,
+  "schema": "private-historical-bundle-restoration/v1",
+  "timestamp_utc": "2026-11-27T05:48:03.277731+00:00"
+}

@@ -1,0 +1,39 @@
+def _write_agent_turn_checkpoint_v1(path: Path, raw: bytes) -> None:
+    """Exclusively retain a recovery checkpoint before acknowledging it."""
+    import stat
+
+    directory = os.open(path.parent, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+    try:
+        parent = os.fstat(directory)
+        fd = os.open(path.name, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW,
+                     0o600, dir_fd=directory)
+        try:
+            view = memoryview(raw)
+            while view:
+                count = os.write(fd, view)
+                if count <= 0:
+                    raise OSError("short recovery checkpoint write")
+                view = view[count:]
+            os.fsync(fd)
+            written = os.fstat(fd)
+            installed = os.stat(path.name, dir_fd=directory, follow_symlinks=False)
+            stamp = lambda st: (st.st_dev, st.st_ino, st.st_mode, st.st_nlink,
+                                st.st_size, st.st_mtime_ns, st.st_ctime_ns)
+            if (not stat.S_ISREG(written.st_mode) or written.st_nlink != 1
+                    or written.st_size != len(raw) or stamp(written) != stamp(installed)):
+                raise ValueError("recovery checkpoint identity changed")
+        finally:
+            os.close(fd)
+        selected = path.parent.lstat()
+        if (parent.st_dev, parent.st_ino) != (selected.st_dev, selected.st_ino):
+            raise ValueError("recovery checkpoint directory changed")
+        os.fsync(directory)
+        selected = path.parent.lstat()
+        installed = os.stat(path.name, dir_fd=directory, follow_symlinks=False)
+        if ((parent.st_dev, parent.st_ino) != (selected.st_dev, selected.st_ino)
+                or stamp(written) != stamp(installed)):
+            raise ValueError("recovery checkpoint changed during directory sync")
+    finally:
+        os.close(directory)
+
+

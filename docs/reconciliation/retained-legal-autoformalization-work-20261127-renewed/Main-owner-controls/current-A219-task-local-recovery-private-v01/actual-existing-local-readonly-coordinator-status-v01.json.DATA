@@ -1,0 +1,42 @@
+{
+  "schema": "Main-existing-transport-readonly-original-owner-observation/v1",
+  "caller": {
+    "path": "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/invoke-existing-durable-handoff.unloaded-hydration.after.py.DATA",
+    "bytes": 19593,
+    "sha256": "00d26e75f8e84fe03364101fbbe1a88c32e4d4b02bd24dd92fd263adbc1da9ca"
+  },
+  "exact_existing_exports": {
+    "path": "/tmp/Main-Codex-durable-handoff-producer-private-v01-puhefwvb/openai_codex_cli_integration.strict-v02.after.py.DATA",
+    "bytes": 51089,
+    "sha256": "9496e744a6bb21befe520b327a6c6f90f0af2150b4fd4117c37a4f96adadf5f4"
+  },
+  "thread_id": "01a0f851-65f0-7c11-b737-07a24c5090ea",
+  "observation": {
+    "schema": "codex-existing-thread-state/v1",
+    "observation_state": "observed",
+    "reason": "metadata_observed",
+    "thread_id": "01a0f851-65f0-7c11-b737-07a24c5090ea",
+    "thread_snapshot": {
+      "id": "01a0f851-65f0-7c11-b737-07a24c5090ea",
+      "can_accept_direct_input": true,
+      "status": "idle"
+    },
+    "latest_turn": {
+      "id": "01a21b6d-ce86-74f2-9d90-5d58fb70f26e",
+      "status": "completed"
+    },
+    "read_only": true,
+    "snapshot_atomic": false,
+    "history_complete": false,
+    "delivery_assessed": false,
+    "processing_confirmed": false,
+    "completion_eligible": false,
+    "execution_granted": false,
+    "claim_granted": false
+  },
+  "mutations": 0,
+  "resume_start_steer": false,
+  "SDK_custody_inferred": false,
+  "Source_or_Native_or_model_or_runtime_admission": false,
+  "reason": "MCP status connector transport unavailable; one direct use of existing qualified read-only function against existing socket. No daemon/server started."
+}

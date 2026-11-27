@@ -1,0 +1,150 @@
+{
+  "case_count": 21,
+  "current_D_Git_metadata": {
+    "clean": true,
+    "head": "3ff7a0b738e96295d030711a2fceb06374110713",
+    "tree": "68296180592741b617655638de849b91394ef67a"
+  },
+  "direct_product_import_roles_already_held_as_Git_metadata": {
+    "ipfs_datasets_py/logic/integration/reasoning/legal_ir_premise_security.py": {
+      "current_blob": "463b73a05d61dd61058c17381d4dae1db8d53fa4",
+      "selected_as_runtime_authority": false
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py": {
+      "current_blob": "ad21acae2a3420e8c560fd26006504fcfb6849df",
+      "selected_as_runtime_authority": false
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py": {
+      "current_blob": "53d7123051e1a1b9737edeb8928dfe57a579286c",
+      "selected_as_runtime_authority": false
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_semantic_metrics.py": {
+      "current_blob": "762476368dcec6b315d75d15b0c72264e06703cd",
+      "selected_as_runtime_authority": false
+    }
+  },
+  "exact_derived_function_case_counts": {
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_acceptable_ambiguity_allows_expected_family_alternative": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_empty_external_population_has_no_acceptance": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_predicts_by_each_supported_identity_form": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_ambiguous_prediction_order": 2,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_conflicting_prediction_aliases": 2,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_duplicate_population_identity": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_misbound_keyed_prediction": 2,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_packets_build_external_test_manifest_and_block_training_use": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_validity_report_is_separate_from_internal_canary_metrics": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_fixture_loads_versioned_external_expert_packets": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_legacy_candidate_alias_and_absent_reference_keep_existing_scope": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_missing_external_expectations_fail_packet_without_touching_canary_metrics": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_packet_validation_rejects_training_or_poisoned_external_records": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator": 4,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_required_round_trip_needs_observation": 1
+  },
+  "exact_two_code_roles_and_current_preimages": {
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py": {
+      "current_preimage_Git_blob": "a7f4498dc98e26740a49c3865bc329cd10505f66",
+      "private_post": {
+        "bytes": 37725,
+        "full9": {
+          "st_ctime_ns": "1795581801237179507",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102578",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795581801237179507",
+          "st_nlink": "1",
+          "st_size": "37725",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-identity-private-v02-7s7wxq6o/benchmark-owner.after.py.DATA",
+        "sha256": "1a7d55434d9c89ac22c6cc7dc53f30ded964ab0846e0a35c84efe8d760495f98"
+      },
+      "private_post_Git_blob_expected": "fe181984a79a0088faa46010bd2d60e155d27b0a"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py": {
+      "current_preimage_Git_blob": "078599a90c5cf003b8252f63ba0a9f04dc81b69a",
+      "private_post": {
+        "bytes": 12917,
+        "full9": {
+          "st_ctime_ns": "1795581768642184987",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72102569",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795581768642184987",
+          "st_nlink": "1",
+          "st_size": "12917",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-identity-private-v02-7s7wxq6o/benchmark-test.after.py.DATA",
+        "sha256": "e64e9f8fa947d15ffbd3196eaf4b9a0b4df99492e6f95bdbb167bfe54ae4fb75"
+      },
+      "private_post_Git_blob_expected": "939c3d60a7bb13f021679de702d760d0c19f30aa"
+    }
+  },
+  "existing_private_21_case_evidence": {
+    "bytes": 16390,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-identity-private-v02-7s7wxq6o/sealed-external-benchmark-packet-identity-two-file-v02.json",
+    "sha256": "cea251cd7ae73059d666b36ac7ef806c85e010f11cad114e8efbd350e27c2e8e"
+  },
+  "fresh_Source_Git_and_resource_selection": null,
+  "function_count": 15,
+  "no_canonical_or_runtime_effect": true,
+  "no_external_expert_truth_training_Native_model_or_CI_qualification": true,
+  "ordinary_21_qualified": false,
+  "private_test_runtime_limit": "Retained isolated pytest results used /dev/null and --noconftest. Normal config/import closure, rewritten test, actual Source compile, and fresh collection need the existing ordinary owner.",
+  "proposed_complete_owning_file_roster": [
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_fixture_loads_versioned_external_expert_packets",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_packets_build_external_test_manifest_and_block_training_use",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_validity_report_is_separate_from_internal_canary_metrics",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_acceptable_ambiguity_allows_expected_family_alternative",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_missing_external_expectations_fail_packet_without_touching_canary_metrics",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_packet_validation_rejects_training_or_poisoned_external_records",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator[omitted]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator[null]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator[empty]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_reference_ir_requires_candidate_in_fixed_denominator[invalid]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_legacy_candidate_alias_and_absent_reference_keep_existing_scope",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_required_round_trip_needs_observation",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_empty_external_population_has_no_acceptance",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_ambiguous_prediction_order[accepted-first]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_ambiguous_prediction_order[accepted-last]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_misbound_keyed_prediction[packet_id]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_misbound_keyed_prediction[id]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_conflicting_prediction_aliases[flat]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_conflicting_prediction_aliases[sequence]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_rejects_duplicate_population_identity",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py::test_external_benchmark_predicts_by_each_supported_identity_form"
+  ],
+  "schema": "P8-external-benchmark-existing-normal21-data-only-handoff/v1",
+  "test_file": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py",
+  "tracked_fixture_matches_retained_actual_bytes": {
+    "blob": "03c13bdb014e25448fbcb4344ba71504b15622b4",
+    "fixture_cache": {
+      "bytes": 5763,
+      "full9": {
+        "st_ctime_ns": "1795581768642139931",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72102567",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795581768642139931",
+        "st_nlink": "1",
+        "st_size": "5763",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-identity-private-v02-7s7wxq6o/isolated/tests/fixtures/legal_ir/external_expert_benchmark.jsonl",
+      "sha256": "fb9a76552e2b938369d93d73a2a25aa76a963101cac96fd487a246bc43c54971"
+    },
+    "path": "tests/fixtures/legal_ir/external_expert_benchmark.jsonl",
+    "physical_rows": 2
+  },
+  "tracked_pytest_ini_and_five_ancestor_conftest_candidates": {
+    "conftest.py": "5cad63c1111f76828f01024a5a1bc726ad1211d5",
+    "pytest.ini": "5ebc8ab6330fc940b64e3037c605d0faf034e1e6",
+    "tests/conftest.py": "feac04dd85490c131e0bf8b132f0b221d7446de4",
+    "tests/unit/conftest.py": "998f93deb362b71ccf555e1ff43fd56117137978",
+    "tests/unit/optimizers/conftest.py": "6685eb59bbea1d8cc15321e2568e92c0659a1e3d",
+    "tests/unit/optimizers/logic_theorem_optimizer/conftest.py": "81cf45c01ee456a6747611412590bd3fabdd7707"
+  }
+}

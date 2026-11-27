@@ -1,0 +1,148 @@
+from pathlib import Path
+from xml.etree import ElementTree
+import ast
+import hashlib
+import json
+import os
+import subprocess
+
+root=Path(__file__).resolve().parent
+prev=root.parent/"P1-Lean-exact-request-proof-join-v02-private-8GLRGQ3H"
+main=Path("/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/sealed-private-P1-integer-exit-status-two-file-proposal-v01.json")
+our=prev/"SEALED-P1-Lean-exact-accepted-request-two-file-private-v01.json"
+prior=Path("/tmp/Root-Phase1-Lean-outcome66-selected-v225-csqemsg0/Root-Phase1-Lean-outcome-ordinary66-qualified-Source-resource-closed-small-v225.json")
+def sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+def read(path,size=None,digest=None):
+    fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK)
+    with os.fdopen(fd,"rb") as handle:
+        before=os.fstat(fd)
+        raw=handle.read()
+        assert os.fstat(fd)==before or (os.fstat(fd).st_size, os.fstat(fd).st_mtime_ns)==(before.st_size,before.st_mtime_ns)
+        assert len(raw)==before.st_size
+    if size is not None:
+        assert len(raw)==size
+    if digest is not None:
+        assert sha(raw)==digest
+    return raw
+def checked(ref):
+    return read(Path(ref["path"]),ref["bytes"],ref["sha256"])
+def put(path, raw):
+    path.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
+    with path.open("xb") as handle:
+        handle.write(raw)
+        handle.flush()
+        os.fsync(handle.fileno())
+    path.chmod(0o400)
+    assert read(path)==raw
+def data(path,obj):
+    put(path,(json.dumps(obj,indent=2,sort_keys=True)+"\n").encode())
+def ref(path):
+    raw=read(path)
+    return {"path":str(path),"bytes":len(raw),"sha256":sha(raw)}
+
+locked_main=json.loads(read(main,22366,"d645777be1857f3ff9cbf35afb3234ca9b20b244361cc18e3e9c2027d5d4af20"))
+locked_our=json.loads(read(our,47722,"a0c47847f5d2266c611f0b4b36bf01e7a0cef27b9e42e162eb8cefbf9e80147e"))
+normal=json.loads(read(prior,6020,"11416dbf31205cdbaba4faaa24196a0e86a07ca9a37c307ffa6ba4762f74c2f2"))
+old_spec=json.loads(checked(locked_our["inputs"]))
+current=Path(old_spec["canonical"])
+head=old_spec["head"]
+env={**os.environ,"GIT_OPTIONAL_LOCKS":"0","GIT_NO_LAZY_FETCH":"1"}
+def git(*args):
+    return subprocess.check_output(["git","-c","core.preloadIndex=false","-C",str(current),*args],env=env)
+assert git("rev-parse","HEAD","refs/remotes/origin/main").decode().splitlines()==[head]*2
+owner,test=old_spec["owner"],old_spec["test"]
+assert not git("status","--porcelain=v1","--untracked-files=all","--",owner,test)
+m={row["path"]:row for row in locked_main["canonical_targets"]}
+o={row["relative_path"]:row for row in locked_our["files"]}
+assert set(m)==set(o)=={owner,test}
+before={}
+for path in (owner,test):
+    before[path]=checked(o[path]["before"])
+    assert before[path]==checked(m[path]["before"])
+    assert read(current/path)==before[path]
+    assert git("rev-parse",f"HEAD:{path}").decode().strip()==o[path]["before"]["git_blob"]==m[path]["before_git_blob"]
+    put(root / ("owner.before.py.DATA" if path==owner else "test.before.py.DATA"),before[path])
+
+main_owner=checked(m[owner]["post"])
+our_owner=checked(o[owner]["after"])
+main_delta=b'''    if type(process.returncode) is not int:
+        diagnostics.append("lean produced a non-integer exit status")
+        return False, axiom_report, bound_diagnostics(diagnostics)
+
+'''
+assert main_owner.replace(main_delta,b"",1)==before[owner]
+anchor=b'    if process.returncode != 0:\n        diagnostics.append(f"lean exited with non-zero status {process.returncode}")\n'
+assert main_owner.count(main_delta+anchor)==1 and our_owner.count(anchor)==1
+combined_owner=our_owner.replace(anchor,main_delta+anchor,1)
+assert combined_owner.replace(main_delta,b"",1)==our_owner
+def nodes(source):
+    return list(ast.parse(source).body)
+old_owner_ast=nodes(before[owner])
+new_owner_ast=nodes(combined_owner)
+change=[n.name for old,n in zip(old_owner_ast,new_owner_ast,strict=True) if ast.dump(old)!=ast.dump(n)]
+assert change==["LeanKernelOutcome","evaluate_lean_kernel_output"]
+main_test=checked(m[test]["post"])
+our_test=checked(o[test]["after"])
+assert main_test.startswith(before[test]) and our_test.startswith(before[test])
+combined_test=main_test+our_test[len(before[test]):]
+current_test_ast=nodes(before[test])
+combined_test_ast=nodes(combined_test)
+assert [ast.dump(x) for x in combined_test_ast[:len(current_test_ast)]]==[ast.dump(x) for x in current_test_ast]
+new_test_nodes=combined_test_ast[len(current_test_ast):]
+assert len(new_test_nodes)==3
+assert [ast.dump(n) for n in new_test_nodes]==[
+    *[ast.dump(n) for n in nodes(main_test)[len(current_test_ast):]],
+    *[ast.dump(n) for n in nodes(our_test)[len(current_test_ast):]],
+]
+put(root/"owner.after.py.DATA",combined_owner)
+put(root/"test.after.py.DATA",combined_test)
+private_project=root/"dataset"
+for name,row in old_spec["input_tree"].items():
+    assert row["matches_tree"] is True
+    if name in before:
+        continue
+    raw=read(prev/"dataset"/name,row["bytes"],row["sha256"])
+    assert hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest()==row["git_blob"]
+    assert git("rev-parse",f"HEAD:{name}").decode().strip()==row["git_blob"]
+    put(private_project/name,raw)
+put(private_project/owner,before[owner])
+put(private_project/test,combined_test)
+
+xml=ElementTree.fromstring(checked(normal["raw_JUnit"]))
+retained=[case.attrib["name"] for case in xml.findall(".//testcase")]
+assert len(retained)==len(set(retained))==66
+owners=list(dict.fromkeys(name.partition("[")[0] for name in retained))
+assert len(owners)==13 and set(normal["function_counts"])=={test+"::"+name for name in owners}
+new_functions=[]
+for fn in new_test_nodes:
+    assert fn.name not in owners
+    decorators=[d for d in fn.decorator_list if isinstance(d,ast.Call) and ast.unparse(d.func)=="pytest.mark.parametrize"]
+    assert len(decorators)==1
+    cases=ast.literal_eval(decorators[0].args[1])
+    new_functions.append((fn.name,len(cases)))
+assert [count for _,count in new_functions]==[6,2,7]
+# Same existing bounded private launcher, with the assertion updated for one selector per function.
+runner_before=checked(locked_our["runner"])
+assert runner_before.count(b"assert len(selectors) == 8")==1
+runner=root/"existing-private-runner-sixteen-selectors.py.DATA"
+put(runner,runner_before.replace(b"assert len(selectors) == 8",b"assert len(selectors) == 16"))
+sel=[test+"::"+name for name in owners+[a for a,_ in new_functions]]
+argv_template=old_spec["invocations"]["same8-v02-red"]
+spec={
+  "local_HEAD":head,"checkout":str(current),"role_paths":{"owner":owner,"test":test},
+  "before_posts":{k:ref(root/(k+".before.py.DATA")) for k in ("owner","test")},
+  "combined_posts":{k:ref(root/(k+".after.py.DATA")) for k in ("owner","test")},
+  "before_recipes":{"Main":ref(main),"request_outcome":ref(our)},
+  "prior_ordinary66":ref(prior),"prior_raw_JUnit":normal["raw_JUnit"],
+  "exact_owned_roster":sel,"expected_retained_order":retained,
+  "function_case_counts":{**normal["function_counts"],**{test+"::"+fn:n for fn,n in new_functions}},
+  "runner":ref(runner),"retained_fixture_environment":locked_our["inputs"],
+  "invocations":{mode:[*argv_template[:3],str(runner),str(root/mode),str(private_project),
+                      *argv_template[6:10],*sel] for mode in ("before","after")},
+  "Source_receipt":None,"selected_clock":None,"sdk_admission":None,
+}
+assert sum(spec["function_case_counts"].values())==81
+data(root/"inputs.json",spec)
+print(root)
+print(change,new_functions,len(sel))

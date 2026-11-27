@@ -1,0 +1,24 @@
+{
+  "head": "31da9dcebec20a351a38eeba37990edd37d6421a",
+  "roles": {
+    "record": {
+      "repo_relative_path": "ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py",
+      "git_oid": "fdc8331d089947b5cece6b9b341551fc146592ae",
+      "size": 59538,
+      "sha256": "c58df29db75d5200fae7b27ae1297ecc925e8761fb6663a5d70eae2fd55a8e1c"
+    },
+    "trainer": {
+      "repo_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py",
+      "git_oid": "37265225393a19b2c58ee0ead946929090b51d23",
+      "size": 40652,
+      "sha256": "5274253f346efe110c5a69eec161e5dcb51ce858fae5f3275c045528b32273a5"
+    },
+    "autoencoder": {
+      "repo_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+      "git_oid": "180e18423529e15eccb382bc9a466c211a366122",
+      "size": 1428524,
+      "sha256": "4b44bb723709be5b4606d497935b245723231df8ec19b24f1bd329fd8932ad24"
+    }
+  },
+  "repo": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets"
+}

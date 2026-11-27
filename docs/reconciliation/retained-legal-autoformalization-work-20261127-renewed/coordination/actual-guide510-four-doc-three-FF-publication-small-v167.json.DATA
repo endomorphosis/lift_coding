@@ -1,0 +1,141 @@
+{
+  "V4_RED1_run": false,
+  "force_or_tag_push": false,
+  "gitlink_updates": {
+    "hallucinate": {
+      "ipfs_datasets_py": {
+        "from": "48a1df131fb7f2a66b7b57bfb98647b91dbd308a",
+        "to": "04c7ee1e881cb7e274efb9e473364a198267652a"
+      }
+    },
+    "root": {
+      "external/ipfs_datasets": {
+        "from": "48a1df131fb7f2a66b7b57bfb98647b91dbd308a",
+        "to": "04c7ee1e881cb7e274efb9e473364a198267652a"
+      },
+      "hallucinate_app": {
+        "from": "9883cf1806122d070750edd351475480b3f11fbb",
+        "to": "f90a0a5cf0f4ee7694d823251dac29ef11a45bf1"
+      }
+    }
+  },
+  "guide_blobs": {
+    "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json": {
+      "before_blob": "7996974009e17c0648b18b769edceebf7f3febfb",
+      "blob": "12c543f8afaff7aff2341bb4e88cddeb3be5608d",
+      "bytes": 1394440,
+      "inserted_bytes": 5630,
+      "sha256": "365d376ddcaf6013eb617d8a4fd2d28c24836b3ba0c76ad32ff28d0e47e2ffb6"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md": {
+      "before_blob": "093190bf1a960a184f1ae19103008a2650d5e124",
+      "blob": "57db900cd34ab20342e5c7a822b023af19170039",
+      "bytes": 935498,
+      "inserted_bytes": 5719,
+      "sha256": "12ecd520fd8582b806d0aeb5c5afe90c5013320eb4daa34eab8de3c457141a36"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md": {
+      "before_blob": "45edd106443c06317bffa4e3b1e63f5c54d9ba88",
+      "blob": "67e16bf5c6c5d34adc7f974d02ddcb65849e7c43",
+      "bytes": 695483,
+      "inserted_bytes": 5719,
+      "sha256": "0cf5ad502c47fb8763767f9a239e2738b135a67b14d25493793e9d111a4eded9"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json": {
+      "before_blob": "e0ee58e40768eccb9d9cc02c82e5da180b9e0a6d",
+      "blob": "a87757891272391008ddcdd9ece0c7caf1fc402e",
+      "bytes": 1644208,
+      "inserted_bytes": 7354,
+      "sha256": "88ceeda8d371abdb44da11d49b144f4165ddba6fcf906bd18246211dde5f5202"
+    }
+  },
+  "installation": {
+    "Source_and_module_closed": true,
+    "bytes": 4897,
+    "guard_paths": 1223,
+    "path": "/tmp/Root-one510-four-guide-CAS-actual-v167-jtj8qnqq/Root-one510-four-installed-Source-closed-small-v167.json",
+    "sha256": "c2620f7b82cbfbe9274e6dce5fb44f540baf8cf0a871e6e3677ee563c9435385"
+  },
+  "local_after": {
+    "accelerate": {
+      "head": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "index_and_worktree_clean": true,
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "datasets": {
+      "head": "04c7ee1e881cb7e274efb9e473364a198267652a",
+      "index_and_worktree_clean": true,
+      "tree": "a37e77f897e9f7b1bd6c1baad988e8ea613c9dff"
+    },
+    "hallucinate": {
+      "head": "f90a0a5cf0f4ee7694d823251dac29ef11a45bf1",
+      "index_and_worktree_clean": true,
+      "tree": "48c3b8e4a54c5084d429e2d4ab073772baa40cf6"
+    },
+    "root": {
+      "head": "590b63c785d995166614c5e66d5dba4bff3031d7",
+      "index_and_worktree_clean": true,
+      "tree": "42b754d7ea5523e4f780dc152f6bc923253a10e3"
+    }
+  },
+  "managed_host_ledger_operation": false,
+  "new_Source_test_CI_or_model_invocation": false,
+  "origin_main_after": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "04c7ee1e881cb7e274efb9e473364a198267652a",
+    "hallucinate": "f90a0a5cf0f4ee7694d823251dac29ef11a45bf1",
+    "root": "590b63c785d995166614c5e66d5dba4bff3031d7"
+  },
+  "origin_main_before": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "48a1df131fb7f2a66b7b57bfb98647b91dbd308a",
+    "hallucinate": "9883cf1806122d070750edd351475480b3f11fbb",
+    "root": "2f292b5e90b52176410a1f27ac5346d8769aaf40"
+  },
+  "origin_urls": {
+    "accelerate": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+    "datasets": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+    "hallucinate": "https://github.com/endomorphosis/hallucinate_app.git",
+    "root": "https://github.com/endomorphosis/lift_coding.git"
+  },
+  "other_gitlinks_accelerate_and_code_unchanged": true,
+  "preservation": {
+    "added_backlog_entry": "current_user_goal_managed_disk_lowering37_and_typed7213_engineering_milestone510_20261124",
+    "added_catalog_id": "managed-disk-lowering37-and-typed7213-engineering-milestone510-20261124",
+    "added_evidence_ordinal": 510,
+    "components": 126,
+    "markdown_prefixes_preserved": true,
+    "one_byte_insertion_per_guide": true,
+    "prior_evidence_records": 509,
+    "tasks": 24
+  },
+  "push_order": [
+    "datasets",
+    "hallucinate",
+    "root"
+  ],
+  "pushes": {
+    "datasets": {
+      "from": "48a1df131fb7f2a66b7b57bfb98647b91dbd308a",
+      "porcelain": " \t04c7ee1e881cb7e274efb9e473364a198267652a:refs/heads/main\t48a1df131f..04c7ee1e88",
+      "rc": 0,
+      "ref": "refs/heads/main",
+      "to": "04c7ee1e881cb7e274efb9e473364a198267652a"
+    },
+    "hallucinate": {
+      "from": "9883cf1806122d070750edd351475480b3f11fbb",
+      "porcelain": " \tf90a0a5cf0f4ee7694d823251dac29ef11a45bf1:refs/heads/main\t9883cf1..f90a0a5",
+      "rc": 0,
+      "ref": "refs/heads/main",
+      "to": "f90a0a5cf0f4ee7694d823251dac29ef11a45bf1"
+    },
+    "root": {
+      "from": "2f292b5e90b52176410a1f27ac5346d8769aaf40",
+      "porcelain": " \t590b63c785d995166614c5e66d5dba4bff3031d7:refs/heads/main\t2f292b5e90..590b63c785",
+      "rc": 0,
+      "ref": "refs/heads/main",
+      "to": "590b63c785d995166614c5e66d5dba4bff3031d7"
+    }
+  },
+  "schema": "guide510-GitHub-publication/v167"
+}

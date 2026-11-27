@@ -1,0 +1,127 @@
+{
+  "accelerate_unchanged": true,
+  "all_other_gitlinks_preserved": true,
+  "force_or_tag_push": false,
+  "gitlink_updates": {
+    "hallucinate": {
+      "ipfs_datasets_py": {
+        "from": "04c7ee1e881cb7e274efb9e473364a198267652a",
+        "to": "ade03ff800c4162882997dcb5597100e41a36ae1"
+      }
+    },
+    "root": {
+      "external/ipfs_datasets": {
+        "from": "04c7ee1e881cb7e274efb9e473364a198267652a",
+        "to": "ade03ff800c4162882997dcb5597100e41a36ae1"
+      },
+      "hallucinate_app": {
+        "from": "f90a0a5cf0f4ee7694d823251dac29ef11a45bf1",
+        "to": "d9c71ad597b4b1d2f11083afc1c564aaba03f520"
+      }
+    }
+  },
+  "installation": {
+    "Source_and_module_closed": true,
+    "bytes": 2842,
+    "guards": 1225,
+    "path": "/tmp/Root-V4-one-existing-test-corrected-union-CAS-actual-v174-6f2rm60p/Root-V4-fixture-one-installed-Source-closed-small-v174.json",
+    "sha256": "42e1c36806b68384dd9c7d9f5f731a2ed70aeadfb59652de6691efdb1aae4afc"
+  },
+  "local_after": {
+    "accelerate": {
+      "clean_index_worktree": true,
+      "head": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "datasets": {
+      "clean_index_worktree": true,
+      "head": "ade03ff800c4162882997dcb5597100e41a36ae1",
+      "tree": "19f368fe1c59cc93f1ff7f3f4419faaa983db6e8"
+    },
+    "hallucinate": {
+      "clean_index_worktree": true,
+      "head": "d9c71ad597b4b1d2f11083afc1c564aaba03f520",
+      "tree": "82d0195a23370c8a2b8642b7145bfae5ae6c8eb5"
+    },
+    "root": {
+      "clean_index_worktree": true,
+      "head": "6c32ae44ae1d286b4bf65c0d689b4f696ddf688e",
+      "tree": "b0a55b9bff3fdec12c76a636029d8cf1b5e449cf"
+    }
+  },
+  "new_Source_test_CI_model_or_Native_invocation": false,
+  "origin_main_after": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "ade03ff800c4162882997dcb5597100e41a36ae1",
+    "hallucinate": "d9c71ad597b4b1d2f11083afc1c564aaba03f520",
+    "root": "6c32ae44ae1d286b4bf65c0d689b4f696ddf688e"
+  },
+  "origin_main_before": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "04c7ee1e881cb7e274efb9e473364a198267652a",
+    "hallucinate": "f90a0a5cf0f4ee7694d823251dac29ef11a45bf1",
+    "root": "590b63c785d995166614c5e66d5dba4bff3031d7"
+  },
+  "origin_urls": {
+    "accelerate": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+    "datasets": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+    "hallucinate": "https://github.com/endomorphosis/hallucinate_app.git",
+    "root": "https://github.com/endomorphosis/lift_coding.git"
+  },
+  "push_order": [
+    "datasets",
+    "hallucinate",
+    "root"
+  ],
+  "pushes": {
+    "datasets": {
+      "from": "04c7ee1e881cb7e274efb9e473364a198267652a",
+      "porcelain": " \tade03ff800c4162882997dcb5597100e41a36ae1:refs/heads/main\t04c7ee1e88..ade03ff800",
+      "rc": 0,
+      "ref": "refs/heads/main",
+      "to": "ade03ff800c4162882997dcb5597100e41a36ae1"
+    },
+    "hallucinate": {
+      "from": "f90a0a5cf0f4ee7694d823251dac29ef11a45bf1",
+      "porcelain": " \td9c71ad597b4b1d2f11083afc1c564aaba03f520:refs/heads/main\tf90a0a5..d9c71ad",
+      "rc": 0,
+      "ref": "refs/heads/main",
+      "to": "d9c71ad597b4b1d2f11083afc1c564aaba03f520"
+    },
+    "root": {
+      "from": "590b63c785d995166614c5e66d5dba4bff3031d7",
+      "porcelain": " \t6c32ae44ae1d286b4bf65c0d689b4f696ddf688e:refs/heads/main\t590b63c785..6c32ae44ae",
+      "rc": 0,
+      "ref": "refs/heads/main",
+      "to": "6c32ae44ae1d286b4bf65c0d689b4f696ddf688e"
+    }
+  },
+  "schema": "V4-fixture-mechanical-dispatch-GitHub-publication/v174",
+  "scope": {
+    "Native_PASS": false,
+    "existing_public_tests_preserved": 39,
+    "lexical_patch_adopted": false,
+    "private_stdlib_helper_controls": {
+      "actual_project_or_Torch_import": false,
+      "after_failures": 0,
+      "baseline_failures": 7,
+      "errors": 0,
+      "report": {
+        "bytes": 15835,
+        "path": "/tmp/V4-fixture-refresh-dispatch-private-v168-brhc4rkc/actual-private-stdlib-same9-dispatch-RED-GREEN-result.json",
+        "sha256": "8fabf403555c7aa3da43d197ca256cbcad25cfc048580d687dfd2235907046e3"
+      },
+      "same_cases": 9,
+      "skips": 0
+    },
+    "public_Torch_V4_executed": false
+  },
+  "selected_fixture": {
+    "blob": "e58a1c995c7ec1d7cf50dd5a1826b55f34e03cb2",
+    "bytes": 64098,
+    "only_V4_dispatch_changed": true,
+    "parent_blob": "dc6abfa6a59f6f439d9f887a8fa2bc4c7503433e",
+    "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_joint_retrieval.py",
+    "sha256": "c23aadaa392b64c2e97235ab63f3eb8d70786f4a2dff7f1892a254af0c479f6f"
+  }
+}

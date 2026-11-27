@@ -1,0 +1,91 @@
+"""Exercise the exact optional-backend selector with an authored importer."""
+
+import ast
+import builtins
+import hashlib
+import json
+import sys
+from pathlib import Path
+from types import SimpleNamespace
+from typing import Any
+
+
+FLAG = "IPFS_DATASETS_MODAL_AUTOENCODER_AUTO_CUDA"
+MISSING = object()
+
+
+def fixture_case(declaration, *, request, flag, torch_fixture, cuda_available, expected):
+    calls = []
+
+    def available():
+        calls.append("cuda.is_available")
+        return cuda_available
+
+    def device(name):
+        calls.append(f"device:{name}")
+        return name
+
+    fake_torch = SimpleNamespace(cuda=SimpleNamespace(is_available=available), device=device)
+
+    def importer(name, *args, **kwargs):
+        if name != "torch":
+            raise AssertionError(f"unexpected import: {name}")
+        calls.append("import:torch")
+        if not torch_fixture:
+            raise ModuleNotFoundError("authored optional dependency unavailable", name=name)
+        return fake_torch
+
+    environ = {} if flag is MISSING else {FLAG: flag}
+    namespace = {
+        "__builtins__": dict(vars(builtins), __import__=importer),
+        "Any": Any,
+        "os": SimpleNamespace(environ=environ),
+    }
+    exec(compile(ast.Module(body=[declaration], type_ignores=[]), "exact-modal-backend-selector.py",
+                 "exec", dont_inherit=True), namespace)
+    normalized, backend, selected_device, library = namespace[declaration.name](request)
+    observed = [normalized, backend, selected_device, library is fake_torch, calls]
+    return {
+        "call": request,
+        "auto_cuda_flag": None if flag is MISSING else flag,
+        "fixture_torch_available": torch_fixture,
+        "fixture_cuda_available": cuda_available,
+        "observed": observed,
+        "expected": expected,
+        "pass": observed == expected,
+    }
+
+
+def main():
+    owner_path, expected_sha = Path(sys.argv[1]), sys.argv[2]
+    raw = owner_path.read_bytes()
+    assert hashlib.sha256(raw).hexdigest() == expected_sha
+    declaration, = [node for node in ast.parse(raw).body
+                    if isinstance(node, ast.FunctionDef) and node.name == "_resolve_vector_compute_backend"]
+    authored_cases = [
+        ("auto", MISSING, False, False, ["auto", "python", None, False, []]),
+        ("auto", "0", True, True, ["auto", "python", None, False, []]),
+        ("", " false ", True, True, ["auto", "python", None, False, []]),
+        ("python", "1", True, True, ["python", "python", None, False, []]),
+        ("auto", "yes", False, False, ["auto", "python", None, False, ["import:torch"]]),
+        ("AUTO", " True ", True, True,
+         ["auto", "torch_cuda", "cuda", True, ["import:torch", "cuda.is_available", "device:cuda"]]),
+        ("auto", "on", True, False,
+         ["auto", "python", None, False, ["import:torch", "cuda.is_available"]]),
+        ("cpu", "0", True, True,
+         ["cpu", "torch_cpu", "cpu", True, ["import:torch", "device:cpu"]]),
+        ("cuda:1", "0", True, True,
+         ["cuda:1", "torch_cuda", "cuda:1", True, ["import:torch", "cuda.is_available", "device:cuda:1"]]),
+        ("cuda", "0", True, False,
+         ["cuda", "python_cuda_unavailable", None, False, ["import:torch", "cuda.is_available"]]),
+    ]
+    result = [fixture_case(declaration, request=request, flag=flag, torch_fixture=torch,
+                           cuda_available=cuda, expected=expected)
+              for request, flag, torch, cuda, expected in authored_cases]
+    print(json.dumps({"owner_body_sha256": expected_sha, "real_torch_imported": "torch" in sys.modules,
+                      "exact_extracted_function": declaration.name, "cases": result}, sort_keys=True))
+    return 0 if all(row["pass"] for row in result) else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

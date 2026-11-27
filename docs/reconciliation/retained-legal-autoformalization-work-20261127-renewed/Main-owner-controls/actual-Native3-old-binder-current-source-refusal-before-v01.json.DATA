@@ -1,0 +1,22 @@
+{
+  "kind": "actual_existing_binder_source_gate_before_current_repin",
+  "results": [
+    {
+      "case": "current_post",
+      "type": "ValueError",
+      "message": "owning-test source identity differs from prepared binding",
+      "expected": true
+    },
+    {
+      "case": "historical_control",
+      "type": "ValueError",
+      "message": "caller must load the existing normal canonical module graph",
+      "expected": true
+    }
+  ],
+  "current_post_refused_by_old_whole_file_identity": true,
+  "historical_control_reaches_unchanged_missing_graph_fence": true,
+  "canonical_modules_or_validator_stubs_loaded": false,
+  "native_runner_or_source_or_sdk_or_git_action": false,
+  "Python_stdlib_fixture_executed": true
+}

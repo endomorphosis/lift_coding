@@ -1,0 +1,149 @@
+{
+  "Source_installation": {
+    "Source_and_module_closed": true,
+    "bytes": 4275,
+    "path": "/tmp/Root-one509-four-guide-CAS-actual-v134/Root-one509-four-installed-Source-closed-small-v134.json",
+    "reaped_pid": 565680,
+    "sha256": "a54ad495762f1f204ca92efd0bfc5cc2e653987628d72ef104c7f59441cce70e"
+  },
+  "all_other_gitlinks_preserved": true,
+  "code_and_accelerate_unchanged": true,
+  "documented_distinct_cohorts": {
+    "0f13cbc9b6c76926015e0b00d976e81f67397e0c": 27,
+    "bb982846f24cc116d5d86ac93f1533f94cae4389": 48
+  },
+  "documented_unreviewed_sources": {
+    "occurrences": 5,
+    "versions": 3
+  },
+  "force_or_tag_push": false,
+  "gitlink_updates": {
+    "hallucinate": {
+      "ipfs_datasets_py": {
+        "from": "0f13cbc9b6c76926015e0b00d976e81f67397e0c",
+        "to": "8aa66fac886a1f6a916372ec89729334e6740aee"
+      }
+    },
+    "root": {
+      "external/ipfs_datasets": {
+        "from": "0f13cbc9b6c76926015e0b00d976e81f67397e0c",
+        "to": "8aa66fac886a1f6a916372ec89729334e6740aee"
+      },
+      "hallucinate_app": {
+        "from": "e91c6b2a54f7d5f6bb00c78c235d4b4f8ee4ebdc",
+        "to": "c5913262bb4a104c94600939e0e0c16ea5e1156e"
+      }
+    }
+  },
+  "guide_blobs": {
+    "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json": {
+      "blob": "7996974009e17c0648b18b769edceebf7f3febfb",
+      "bytes": 1388810,
+      "inserted_bytes": 5539,
+      "old_blob": "9dd4cd8bfcd9d1f5aed1825dda784eb141269d89",
+      "sha256": "79e99021fcf46ffa49302e8b710f7e99ce63a71acc92b99ac2225b67a0538eaf"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md": {
+      "blob": "093190bf1a960a184f1ae19103008a2650d5e124",
+      "bytes": 929779,
+      "inserted_bytes": 4533,
+      "old_blob": "c7509f93996e6ba5e3ac4880f7a86020c2233f89",
+      "sha256": "00912a62d852462313ebab90673a29c34d883b1b0a1653b4e63cbe96ab2fcc0c"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md": {
+      "blob": "45edd106443c06317bffa4e3b1e63f5c54d9ba88",
+      "bytes": 689764,
+      "inserted_bytes": 4533,
+      "old_blob": "8508ac36048830335717ea81fd56aa51b30e0d8e",
+      "sha256": "d4a6e75573bec56c77f7fd33ff27bc1c1f23667c38791ab4e6500c660e3d4bf6"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json": {
+      "blob": "e0ee58e40768eccb9d9cc02c82e5da180b9e0a6d",
+      "bytes": 1636854,
+      "inserted_bytes": 7951,
+      "old_blob": "230eca8501f71d60fed02a749bf51cc0abe0a896",
+      "sha256": "f471fbfd5b75e1330fcbbb73bfa1e3a2a433fa6ec7c5229c76c8ba8dcd028356"
+    }
+  },
+  "legal_training_or_full_goal_completion_claimed": false,
+  "local_after": {
+    "accelerate": {
+      "head": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "index_and_worktree_clean": true,
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "datasets": {
+      "head": "8aa66fac886a1f6a916372ec89729334e6740aee",
+      "index_and_worktree_clean": true,
+      "tree": "d561ee5c173b88b82882f7a0489d59ea0b2cd68c"
+    },
+    "hallucinate": {
+      "head": "c5913262bb4a104c94600939e0e0c16ea5e1156e",
+      "index_and_worktree_clean": true,
+      "tree": "ce7cdff22588abf79d339fd33ca54cf63d561805"
+    },
+    "root": {
+      "head": "2f9193c82be2c6b175be4ad9b2d489abf12b14c8",
+      "index_and_worktree_clean": true,
+      "tree": "3b17b21ee4d35f2950f2b1d59bae4bbd52a2c01a"
+    }
+  },
+  "new_Source_test_model_CI_invocation": false,
+  "origin_main_after": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "8aa66fac886a1f6a916372ec89729334e6740aee",
+    "hallucinate": "c5913262bb4a104c94600939e0e0c16ea5e1156e",
+    "root": "2f9193c82be2c6b175be4ad9b2d489abf12b14c8"
+  },
+  "origin_main_before": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "0f13cbc9b6c76926015e0b00d976e81f67397e0c",
+    "hallucinate": "e91c6b2a54f7d5f6bb00c78c235d4b4f8ee4ebdc",
+    "root": "fcae986b1e8c89cf339462d9c3cf9af5e5b241cf"
+  },
+  "origin_urls": {
+    "accelerate": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+    "datasets": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+    "hallucinate": "https://github.com/endomorphosis/hallucinate_app.git",
+    "root": "https://github.com/endomorphosis/lift_coding.git"
+  },
+  "preservation": {
+    "added_backlog_crosslink": "current_user_goal_statutory_context_source_constructors_cli_entry_refusal_milestone509_20261124",
+    "added_catalog_record": 509,
+    "both_markdown_prefixes_exact": true,
+    "catalog_id": "statutory-context-source-constructors-cli-entry-refusal-engineering-milestone509-20261124",
+    "components": 126,
+    "only_one_byte_insertion_per_guide": true,
+    "prior_evidence_records": 508,
+    "tasks": 24
+  },
+  "push_order": [
+    "datasets",
+    "hallucinate",
+    "root"
+  ],
+  "pushes": {
+    "datasets": {
+      "from": "0f13cbc9b6c76926015e0b00d976e81f67397e0c",
+      "porcelain": " \t8aa66fac886a1f6a916372ec89729334e6740aee:refs/heads/main\t0f13cbc9b6..8aa66fac88",
+      "rc": 0,
+      "ref": "refs/heads/main",
+      "to": "8aa66fac886a1f6a916372ec89729334e6740aee"
+    },
+    "hallucinate": {
+      "from": "e91c6b2a54f7d5f6bb00c78c235d4b4f8ee4ebdc",
+      "porcelain": " \tc5913262bb4a104c94600939e0e0c16ea5e1156e:refs/heads/main\te91c6b2..c591326",
+      "rc": 0,
+      "ref": "refs/heads/main",
+      "to": "c5913262bb4a104c94600939e0e0c16ea5e1156e"
+    },
+    "root": {
+      "from": "fcae986b1e8c89cf339462d9c3cf9af5e5b241cf",
+      "porcelain": " \t2f9193c82be2c6b175be4ad9b2d489abf12b14c8:refs/heads/main\tfcae986b1e..2f9193c82b",
+      "rc": 0,
+      "ref": "refs/heads/main",
+      "to": "2f9193c82be2c6b175be4ad9b2d489abf12b14c8"
+    }
+  },
+  "schema": "guide509-GitHub-publication/v134"
+}

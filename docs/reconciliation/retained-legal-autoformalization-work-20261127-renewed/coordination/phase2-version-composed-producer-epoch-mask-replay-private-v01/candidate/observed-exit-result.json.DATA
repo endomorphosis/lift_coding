@@ -1,0 +1,21 @@
+{
+  "issues": {
+    "error": 0,
+    "failure": 0,
+    "skipped": 0
+  },
+  "junit_sha256": "503ac41ccec262e9f32191b37c2dca932dcdde30893849226869e397916bce19",
+  "junit_size": 1824,
+  "names": [
+    "test_private_pair_consumer_preserves_fresh_signed_mask_semantics[v2]",
+    "test_private_pair_consumer_preserves_fresh_signed_mask_semantics[v3]",
+    "test_private_pair_consumer_preserves_fresh_signed_mask_semantics[v4]",
+    "test_private_pair_consumer_refuses_exact_old_receipt_after_v2_epoch_change[v2]",
+    "test_private_pair_consumer_refuses_exact_old_receipt_after_v2_epoch_change[v3]",
+    "test_private_pair_consumer_refuses_exact_old_receipt_after_v2_epoch_change[v4]",
+    "test_reviewed_pair_endpoint_admission_without_pair_reviews_remains_unavailable",
+    "test_reviewed_pair_saved_report_cannot_turn_unknowns_or_analogies_into_negatives"
+  ],
+  "observed_exit_code": 0,
+  "unique_cases": 8
+}

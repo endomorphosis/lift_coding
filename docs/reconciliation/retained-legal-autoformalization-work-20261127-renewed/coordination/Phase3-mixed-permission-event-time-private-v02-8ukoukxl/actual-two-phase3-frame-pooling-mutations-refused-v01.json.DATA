@@ -1,0 +1,48 @@
+{
+  "controls_actual": 2,
+  "elapsed_seconds": 6.654710155911744,
+  "expected_rejections_observed": 2,
+  "explicit_private_input_bytes": 484212,
+  "ordinary_tests_Lean_review_or_Source_operations": false,
+  "raw_mutated_AST_persisted": false,
+  "results": [
+    {
+      "expected_assertion_refusal": true,
+      "mutated_alternative": "7214:cap_within_permission",
+      "observed": [
+        {
+          "oracle_agreement": false,
+          "permission_calls": 5
+        }
+      ],
+      "pooled_axis": "TimeFrame",
+      "seconds": 0.02389239054173231
+    },
+    {
+      "expected_assertion_refusal": true,
+      "mutated_alternative": "7214:cap_as_permission_guard",
+      "observed": [
+        {
+          "oracle_agreement": true,
+          "permission_calls": 8,
+          "truth": true
+        },
+        {
+          "oracle_agreement": true,
+          "permission_calls": 6,
+          "truth": true
+        }
+      ],
+      "pooled_axis": "EventFrame",
+      "seconds": 6.5824821181595325
+    }
+  ],
+  "schema": "phase3-event-time-regression-actual-renderer-mutation-controls/v1",
+  "scope": "Original AST and test unchanged. Each mutation pools one scope axis by existential projection at four renderer Member sites inside the cap only. Existing oracles and the added test reject both mutations.",
+  "test_candidate_updated": false,
+  "unchanged_sealed_candidate": {
+    "bytes": 4717,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-mixed-permission-event-time-private-v02-8ukoukxl/sealed-one-test-phase3-saved-fixture-actual-stdlib-v02.json",
+    "sha256": "9acba488edd9f23d612e58456b8a0143084c069346ce174d56ad5c3c198f1552"
+  }
+}

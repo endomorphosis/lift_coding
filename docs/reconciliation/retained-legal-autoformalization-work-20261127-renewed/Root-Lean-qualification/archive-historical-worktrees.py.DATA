@@ -1,0 +1,72 @@
+import json,os,sys
+from hashlib import sha256
+from pathlib import Path
+home=Path(__file__).resolve().parent
+p=Path('/tmp/P2-V4-CLI-live-reconciled-ordinary33-publisher-INERT-UHtLMQQb/publish-live-reconciled-cli33.v02.py.DATA')
+raw=p.read_bytes()
+assert sha256(raw).hexdigest()=='646f67811f0202f9080f91e11e7a92933475e3718eff84ca7982b24a627d44bd'
+exec(compile(raw.decode().split(chr(10)+'def main():')[0],str(p),'exec'),globals())
+WORK=home
+class Repositories:
+    def __truediv__(self,role):
+        return (home.parent if role=='datasets' else Path('/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0'))/role
+CLONES=Repositories()
+ENV['GIT_ALTERNATE_OBJECT_DIRECTORIES']='/tmp/lift-origin-main-reconcile-private-A8hmZDEd/root/.git/objects'
+JOURNAL=WORK/'historical-worktree-variants-publication.jsonl'
+assert sys.argv[-1] in ('--verify-only','--publish-released')
+args=sys.argv[1:-1]
+assert len(args)>=6 and len(args)%3==0
+base_ref,*plans=[reference(args[i],int(args[i+1]),args[i+2]) for i in range(0,len(args),3)]
+base=obj(base_ref)
+assert base['terminal_returncode']==0
+BASE=base['live_main_after']
+assert live_all(BASE)==BASE
+LINKS=dict(hallucinate={'ipfs_datasets_py':BASE['datasets'],'ipfs_accelerate_py':BASE['accelerate']},
+    root={'external/ipfs_datasets':BASE['datasets'],'hallucinate_app':BASE['hallucinate'],'external/ipfs_accelerate':BASE['accelerate']})
+verify_live_links(BASE)
+primary=primary_snapshot()
+root=CLONES/'root'
+prior=entries(root,BASE['root'])
+recovered={}
+prefix='docs/reconciliation/retained-legal-autoformalization-work-20261127-followup/'
+for plan in plans:
+    group=obj(plan)['upload_files']
+    assert not recovered.keys()&group.keys()
+    for name,row in group.items():
+        assert name.startswith(prefix) and Path(name).as_posix()==name and '..' not in Path(name).parts
+        assert name.endswith(('.DATA','/manifest.json','/README.md')) and row['git_mode']=='100644'
+        assert name.encode() not in prior
+        assert git(root,'hash-object','--stdin',data=read(row)).decode().strip()==row['git_blob']
+    recovered.update(group)
+assert 0<len(recovered)<=24 and sum(x['bytes'] for x in recovered.values())<=4*1024**2
+if sys.argv[-1]=='--verify-only':
+    print(json.dumps(dict(current_root=BASE['root'],archive_files=len(recovered),selected=False)))
+    raise SystemExit(0)
+idx=WORK/'historical-worktree-variants.private-index'
+assert not (root/'.git/index').exists() and not idx.exists() and not JOURNAL.exists()
+git(root,'read-tree',BASE['root'],index=idx)
+rows=[]
+for name,row in sorted(recovered.items()):
+    blob=git(root,'hash-object','-w','--stdin',data=read(row)).decode().strip()
+    assert blob==row['git_blob']
+    rows.append(f'100644 {blob}\t{name}\n')
+git(root,'update-index','--index-info',data=''.join(rows).encode(),index=idx)
+tree=git(root,'write-tree','--missing-ok',index=idx).decode().strip()
+after_entries=entries(root,tree)
+assert changed(prior,after_entries)=={name.encode() for name in recovered}
+for name,row in recovered.items():
+    assert after_entries[name.encode()]==('100644','blob',row['git_blob'])
+    assert git(root,'cat-file','blob',row['git_blob'])==read(row)
+head=git(root,'commit-tree',tree,'-p',BASE['root'],'-m','Preserve exact historical worktree variants [skip ci]',index=idx).decode().strip()
+assert rev(root,head+'^')==BASE['root'] and primary_snapshot()==primary
+after=push('root',head,BASE)
+assert live_all(after)==after and primary_snapshot()==primary
+verify_live_links(after)
+receipt=dict(schema='actual-historical-worktree-source-archive-fast-forward/v1',terminal_returncode=0,
+    guide_publication=base_ref,live_main_before=BASE,live_main_after=after,tree=tree,archive_files=recovered,
+    exact_plan_refs=plans,activated_archived_proposals=False,shared_worktrees_preserved=True)
+out=WORK/'actual-historical-worktree-source-archive-publication.json'
+b=(json.dumps(receipt,sort_keys=True,indent=2)+'\n').encode()
+with out.open('xb') as f:
+    f.write(b);f.flush();os.fsync(f.fileno())
+print(json.dumps(dict(receipt=reference(out,len(b),sha256(b).hexdigest()),live_main_after=after)))

@@ -1,0 +1,76 @@
+{
+  "Source_execution_or_current_qualification_selected": false,
+  "current_Source_conftest_rewrite_resource_and_exact_collect_still_required": true,
+  "existing_test_candidate": {
+    "bytes": 2861,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-obligation-inverse-private-72776lwj/existing-owner-single-test-post-and-two-ordinary-selectors-v01.json",
+    "sha256": "9a5e69c0f7b4773fee851edf76a6816ee5743a139dcc7ca59e07a0921800ab1c"
+  },
+  "expected_not_actual_current_ordinary_count": 16,
+  "historical_ordinary306_JUnit": {
+    "bytes": 59914,
+    "path": "/tmp/pytest-of-barberb/legal-ir-relational-prose-inverse-v02-ordinary306-20261110-v03/attempt-v01/exports/test-results.xml",
+    "sha256": "a100519cbb1a296c1d7abb1235e850d08921e4a03885e9c88e31f105fc05c5da"
+  },
+  "historical_ordinary306_summary": {
+    "bytes": 2291,
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/federal-corpus-audits/legal-ir-relational-prose-inverse-source-20261110-v02/ordinary-qualification-summary.json",
+    "sha256": "4dd679f16d337cfc87fadc7bd6853b99ab05f8b919c772a2b386ab482227890c"
+  },
+  "ordered_retention_comparison_node_ids": [
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_separates_typed_structure_normalized_prose_and_original_bytes",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_original_byte_measurement_is_optional_and_same_row_joint",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_whole_input_abstentions_remain_in_denominator[]",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_whole_input_abstentions_remain_in_denominator[   ]",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_whole_input_abstentions_remain_in_denominator[An officer must serve a person.]",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_whole_input_abstentions_remain_in_denominator[Typed legal rule: tdfol/tdfol_default.\\nTypes: Object.\\nPredicate Serve: server of type Object; addressee of type Object.\\nRule: (for every officer of type Object, (there exists person of type Object such that (it is obligatory that (Serve holds for server: officer of type Object; addressee: person of type Object)))). Further obligations apply.]",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_whole_input_abstentions_remain_in_denominator[Typed legal rule: tdfol/tdfol_default.\\nTypes: Object.\\nPredicate Serve: server of type Object; addressee of type Object.\\nRule: (for every officer of type Object, (there exists person of type Object such that (it is obligatory that (Serve holds for server: officer of type Object; server: person of type Object)))).]",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_never_passes_original_source_or_reference_to_inverse",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_requires_explicit_text_candidate[None]",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_requires_explicit_text_candidate[7]",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_requires_explicit_text_candidate[True]",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_input_guards_run_before_any_reference_realization[candidate_surrogate-valid UTF8 candidate and optional original text required]",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_input_guards_run_before_any_reference_realization[original_surrogate-valid UTF8 candidate and optional original text required]",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_input_guards_run_before_any_reference_realization[original_bool-optional original source text required]",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_distinguishes_obligation_from_bare_assertion",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_abstains_on_ordinary_past_tense_prose"
+  ],
+  "relative_selectors": [
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_separates_typed_structure_normalized_prose_and_original_bytes",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_original_byte_measurement_is_optional_and_same_row_joint",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_whole_input_abstentions_remain_in_denominator",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_never_passes_original_source_or_reference_to_inverse",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_requires_explicit_text_candidate",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_input_guards_run_before_any_reference_realization",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_distinguishes_obligation_from_bare_assertion",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_abstains_on_ordinary_past_tense_prose"
+  ],
+  "same_owner_real_inverse_history": {
+    "candidate_static_counts": {
+      "test_relational_score_input_guards_run_before_any_reference_realization": 3,
+      "test_relational_score_never_passes_original_source_or_reference_to_inverse": 1,
+      "test_relational_score_original_byte_measurement_is_optional_and_same_row_joint": 1,
+      "test_relational_score_requires_explicit_text_candidate": 3,
+      "test_relational_score_separates_typed_structure_normalized_prose_and_original_bytes": 1,
+      "test_relational_score_whole_input_abstentions_remain_in_denominator": 5
+    },
+    "function_selectors": [
+      "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_separates_typed_structure_normalized_prose_and_original_bytes",
+      "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_original_byte_measurement_is_optional_and_same_row_joint",
+      "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_whole_input_abstentions_remain_in_denominator",
+      "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_never_passes_original_source_or_reference_to_inverse",
+      "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_requires_explicit_text_candidate",
+      "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_input_guards_run_before_any_reference_realization"
+    ],
+    "historical_physical_cases": 14
+  },
+  "schema": "Phase6-existing-real-inverse-ordinary-retention-selectors/v1",
+  "static_parameter_shape_first_attempt": {
+    "cause": "literal evaluation of values reached a legal named AST constant before report creation",
+    "pytest_executed": false,
+    "rc": 1,
+    "resolution": "count unstarred positional AST elements without resolving values",
+    "tool_chunk": "ee06cc"
+  },
+  "unrelated_Source63_normal16_not_included": true
+}

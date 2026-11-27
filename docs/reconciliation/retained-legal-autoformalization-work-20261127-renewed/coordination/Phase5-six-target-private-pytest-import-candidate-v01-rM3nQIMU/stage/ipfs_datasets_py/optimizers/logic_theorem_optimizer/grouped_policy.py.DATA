@@ -1,0 +1,639 @@
+"""Fixed-action grouped credit reduction for the existing optimizer owner."""
+from dataclasses import asdict, dataclass
+from hashlib import sha256
+import json
+from math import isfinite
+
+
+PROFILE = "fixed-admitted-equal-action-policy-reduction/v1"
+SCOPED_PROFILE = "exact-selected-action-policy-reduction/v1"
+
+
+def _need(ok, message):
+    if not ok:
+        raise ValueError(message)
+
+
+def _pin(value):
+    return type(value) is str and len(value) == 64 and all(c in "0123456789abcdef" for c in value)
+
+
+def _digest(value):
+    body = json.dumps(value, sort_keys=True, ensure_ascii=True, separators=(",", ":"), allow_nan=False)
+    return sha256(body.encode("ascii")).hexdigest()
+
+
+@dataclass(frozen=True)
+class Trajectory:
+    trajectory_id: str
+    alignment: object
+    expected_decision_ids: tuple[str, ...]
+    samples: tuple
+    frames: tuple
+
+
+@dataclass(frozen=True)
+class Slot:
+    trajectory_id: str
+    trajectory_sha256: str
+    decision_id: str
+    action_position: int
+    action_id: str
+    evidence_sha256: str
+    sample_sha256: str
+    advantage: float
+
+
+@dataclass(frozen=True)
+class FrozenGroup:
+    profile: str
+    credit_sha256: str
+    candidate_policy_sha256: str
+    clip_epsilon: float
+    bridge: str
+    trajectories_sha256: str
+    coverage: tuple
+    slots: tuple[Slot, ...]
+
+    def digest(self):
+        return _digest(asdict(self))
+
+
+@dataclass(frozen=True)
+class CandidateInput:
+    tensor: object
+    bound_replay: dict
+
+
+@dataclass(frozen=True)
+class Reduction:
+    plan_sha256: str
+    normalizer: int
+    active: int
+    dispositions: tuple
+    mean_loss: object | None
+    loss_for_owner: object | None
+
+
+def _cache_bridges(sampler):
+    bridges = (getattr(sampler, "QWEN_CACHED_BRIDGE", None), getattr(sampler, "QWEN_TEACHER_BRIDGE", None))
+    return tuple(value for value in bridges if type(value) is str)
+
+
+def prepare_group(credit_owner, alignment_owner, sampler_owner, *, credit, trajectories,
+                  expected_credit_sha256, expected_trajectory_ids, candidate_policy_sha256, clip_epsilon,
+                  action_scope=None, expected_action_scope_sha256=None,
+                  cached_rollout_closes=(), expected_cached_rollout_closes_sha256=None):
+    """Freeze all coverage and establish one versioned action denominator."""
+    _need(type(credit) is credit_owner.GroupCredit and _pin(expected_credit_sha256)
+          and _digest(asdict(credit)) == expected_credit_sha256 and _pin(candidate_policy_sha256),
+          "independent grouped-credit and candidate policy commitments required")
+    _need(type(clip_epsilon) is float and 0.0 < clip_epsilon < 1.0, "explicit finite clipping recipe required")
+    _need(credit.binding.sampler_digest == sampler_owner.SAMPLER_CONTRACT_SHA256,
+          "grouped credit uses a different sampler")
+    _need(type(trajectories) is tuple and type(expected_trajectory_ids) is tuple
+          and bool(expected_trajectory_ids) and len(trajectories) == len(expected_trajectory_ids)
+          and all(type(traj) is Trajectory for traj in trajectories)
+          and tuple(row.trajectory_id for row in credit.rows) == expected_trajectory_ids
+          and tuple(traj.trajectory_id for traj in trajectories) == expected_trajectory_ids
+          and len(set(expected_trajectory_ids)) == len(expected_trajectory_ids),
+          "complete ordered unique trajectory roster required")
+    close_by_id = {}
+    if cached_rollout_closes or expected_cached_rollout_closes_sha256 is not None:
+        _need(type(cached_rollout_closes) is tuple and _pin(expected_cached_rollout_closes_sha256)
+              and _digest(cached_rollout_closes) == expected_cached_rollout_closes_sha256,
+              "independently selected cached rollout close roster required")
+        for entry in cached_rollout_closes:
+            _need(type(entry) is tuple and len(entry) == 4 and type(entry[0]) is str
+                and all(_pin(value) for value in entry[1:]) and entry[0] not in close_by_id,
+                "one owner close receipt per cached trajectory required")
+            close_by_id[entry[0]] = entry[1:]
+        _need(tuple(close_by_id) == expected_trajectory_ids, "cached close roster differs from the ordered trajectories")
+    scope = {}
+    if action_scope is not None:
+        _need(type(action_scope) is tuple and _pin(expected_action_scope_sha256)
+              and _digest(action_scope) == expected_action_scope_sha256,
+              "independently committed selected action scope required")
+        for entry in action_scope:
+            _need(type(entry) is tuple and len(entry) == 6, "closed action scope entry required")
+            trajectory, decision, position, action, link_sha, sample_sha = entry
+            _need(trajectory in expected_trajectory_ids and trajectory not in scope
+                  and type(decision) is str and bool(decision)
+                  and type(position) is int and position >= 0 and type(action) is str and bool(action)
+                  and _pin(link_sha) and _pin(sample_sha), "one complete selected action per trajectory required")
+            scope[trajectory] = (decision, position, action, link_sha, sample_sha)
+    else:
+        _need(expected_action_scope_sha256 is None, "action scope commitment needs its exact body")
+    coverage, slots, seen_draws, seen_tapes = [], [], set(), set()
+    conditioning = None
+    cached_qwen_frame = getattr(sampler_owner, "CachedQwenBehaviorFrame", None)
+    teacher_qwen_frame = getattr(sampler_owner, "TeacherCachedQwenFrame", None)
+    cached_frames = (cached_qwen_frame, teacher_qwen_frame)
+    cached_sessions, cached_forwards = set(), set()
+    for trace, signal in zip(trajectories, credit.rows, strict=True):
+        _need(signal.signal is None or signal.eligibility == "eligible"
+              and type(signal.signal) is float and isfinite(signal.signal),
+              "unresolved credit cannot supply a numeric advantage")
+        report, samples = trace.alignment, trace.samples
+        _need(type(report) is alignment_owner.DecisionAlignment and type(samples) is tuple and bool(samples)
+              and type(trace.frames) is tuple and len(trace.frames) == len(samples),
+              "complete authenticated decision report, ordered samples and consumed frames required")
+        _need(report.binding.trajectory_sha256 not in seen_tapes, "reused trajectory tape")
+        seen_tapes.add(report.binding.trajectory_sha256)
+        actions, scores = [], []
+        cache_revisions = set()
+        for index, (row, frame) in enumerate(zip(samples, trace.frames, strict=True)):
+            _need(type(row) is sampler_owner.Sample and row.trajectory_id == trace.trajectory_id
+                  and type(row.action_position) is int and row.action_position == index
+                  and row.behavior_policy_sha256 == credit.binding.behavior_policy_digest
+                  and row.profile in (sampler_owner.SAMPLER, "forced-no-draw/v1"),
+                  "sampled action does not bind the ordered trajectory or behavior policy")
+            encoder_decoder_frame = getattr(sampler_owner, "EncoderDecoderPrefixFrame", None)
+            projected_qwen_frame = getattr(sampler_owner, "ProjectedQwenPrefixFrame", None)
+            _need(type(frame) in (sampler_owner.PrefixFrame, encoder_decoder_frame, projected_qwen_frame, *cached_frames)
+                  and frame.source_record_sha256 == credit.binding.source_and_context_digest
+                  and len(frame.generated_body_ids) == index and frame.digest() == row.prefix_sha256,
+                  "sampled prefix differs from the grouped source, context or action position")
+            if type(frame) is encoder_decoder_frame:
+                frame_conditioning = ("encoder_decoder", frame.encoder_input_ids, frame.encoder_attention_mask,
+                    frame.decoder_bos_token_id, frame.tokenizer_sha256, frame.forward_profile_sha256)
+            elif type(frame) in (projected_qwen_frame, *cached_frames):
+                mode = ("qwen2_teacher_cached" if type(frame) is teacher_qwen_frame else
+                        "qwen2_cached" if type(frame) is cached_qwen_frame else "qwen2_projected")
+                frame_conditioning = (mode, frame.framed_prompt_ids, frame.tokenizer_vocab_size,
+                    frame.logical_bos_token_id, frame.eos_token_id, frame.tokenizer_sha256, frame.forward_profile_sha256)
+                if type(frame) is teacher_qwen_frame:
+                    frame_conditioning = (*frame_conditioning, frame.teacher_row_id, frame.teacher_conditioning_sha256)
+                _need(type(row.output_column) is int and 0 <= row.output_column < frame.tokenizer_vocab_size,
+                      "projected sample emitted a column outside the tokenizer domain")
+            else:
+                frame_conditioning = ("causal", frame.prompt_ids, frame.tokenizer_sha256, frame.forward_profile_sha256)
+            if conditioning is None:
+                conditioning = frame_conditioning
+            _need(frame_conditioning == conditioning, "grouped trajectories differ in encoded prompt or forward profile")
+            if index:
+                previous = trace.frames[index - 1]
+                # In these native-token heads the selected output
+                # column is the exact next token ID consumed by the decoder.
+                _need(frame.generated_body_ids == previous.generated_body_ids + (samples[index - 1].output_column,),
+                      "successive source-only frame omitted or changed its emitted token")
+            if type(frame) in cached_frames:
+                if index == 0:
+                    _need(frame.cache_session_sha256 not in cached_sessions, "cache session reused across trajectories")
+                    cached_sessions.add(frame.cache_session_sha256)
+                    cache_revisions.add(frame.input_cache_revision_sha256)
+                else:
+                    _need(frame.cache_session_sha256 == previous.cache_session_sha256
+                          and frame.input_cache_revision_sha256 == previous.output_cache_revision_sha256,
+                          "cached trajectory does not advance its preceding owned revision")
+                _need(frame.output_cache_revision_sha256 not in cache_revisions
+                      and frame.behavior_forward_receipt_sha256 not in cached_forwards,
+                      "cached trajectory reused a cache revision or forward receipt")
+                cache_revisions.add(frame.output_cache_revision_sha256)
+                cached_forwards.add(frame.behavior_forward_receipt_sha256)
+            sampled = row.profile == sampler_owner.SAMPLER
+            if sampled:
+                _need(type(row.rng_event) is sampler_owner.DrawIdentity and _pin(row.rng_event.stream_sha256)
+                      and type(row.rng_event.ordinal) is int and row.rng_event.ordinal >= 0,
+                      "sampled action needs its observed RNG event")
+                event = (row.rng_event.stream_sha256, row.rng_event.ordinal)
+                _need(event not in seen_draws, "RNG event reused in the grouped roster")
+                seen_draws.add(event)
+            else:
+                _need(row.draw is row.rng_event is None and row.exact_mass_log_probability == 0.0,
+                      "forced action declares stochastic behavior")
+            actions.append(row.action_id)
+            scores.append(alignment_owner.Score(index, row.action_id, row.exact_mass_log_probability, sampled))
+
+        if type(trace.frames[0]) in cached_frames:
+            close = close_by_id.get(trace.trajectory_id)
+            _need(close is not None and close[:2] == (trace.frames[0].cache_session_sha256,
+                        _digest(tuple(row.digest() for row in samples))),
+                  "cached rollout does not match the independently closed session and extent")
+
+        replayed = alignment_owner.bind_tape(report.binding.trajectory_sha256,
+                            report.binding.action_contract_sha256, actions, scores)
+        _need(replayed == report.binding, "sampled actions and probabilities differ from the aligned tape")
+        checked = alignment_owner.align_decisions(actual_trajectory_sha256=replayed.trajectory_sha256,
+                    actual_action_contract_sha256=replayed.action_contract_sha256, binding=replayed,
+                    actions=actions, scores=scores, expected_decision_ids=trace.expected_decision_ids,
+                    links=tuple(decision.source for decision in report.decisions))
+        _need(_digest(asdict(checked)) == _digest(asdict(report)),
+              "complete decision report differs from the expected aligned roster")
+        decisions = tuple((decision.source.decision_id, decision.disposition, decision.source.evidence_sha256)
+                          for decision in checked.decisions)
+        assigned = {position: decision.source for decision in checked.decisions
+                    if decision.disposition == "aligned" for position in decision.aligned_score_positions}
+
+        selected = scope.get(trace.trajectory_id)
+        if action_scope is not None:
+            _need(signal.signal is None or selected is not None,
+                  "numeric scoped advantage needs a selected exact action")
+            if selected is not None:
+                decision, position, action, link_sha, sample_sha = selected
+                link = assigned.get(position)
+                _need(link is not None and samples[position].profile == sampler_owner.SAMPLER
+                    and (link.decision_id, samples[position].action_id, link.evidence_sha256,
+                         samples[position].digest()) == (decision, action, link_sha, sample_sha),
+                      "selected action is absent from the replayed exact sampled alignment")
+        positions = []
+        for position, row in enumerate(samples):
+            link = assigned.get(position)
+            if row.profile != sampler_owner.SAMPLER:
+                disposition = "forced_no_draw"
+            elif link is None:
+                disposition = "unresolved_alignment"
+            elif action_scope is not None and (selected is None or selected[1] != position):
+                disposition = "outside_reward_action_scope"
+            elif signal.signal is None:
+                disposition = "unresolved_reward"
+            else:
+                disposition = "included"
+                slots.append(Slot(trace.trajectory_id, report.binding.trajectory_sha256, link.decision_id,
+                                  position, row.action_id, link.evidence_sha256, row.digest(), signal.signal))
+            positions.append((position, row.action_id, disposition, row.digest()))
+        coverage.append((trace.trajectory_id, signal.eligibility, signal.reason, tuple(decisions), tuple(positions)))
+    profile = PROFILE if action_scope is None else SCOPED_PROFILE
+    mode = conditioning[0]
+    uses_cached_behavior = mode in ("qwen2_cached", "qwen2_teacher_cached")
+    _need(uses_cached_behavior == bool(close_by_id), "cached close roster supplied for the wrong behavior profile")
+    bridge = (sampler_owner.QWEN_TEACHER_BRIDGE if mode == "qwen2_teacher_cached" else
+              sampler_owner.QWEN_CACHED_BRIDGE if uses_cached_behavior else sampler_owner.BRIDGE)
+    trace_body = [asdict(v) for v in trajectories]
+    trace_scope = {"trajectories": trace_body, "cached_rollout_closes": cached_rollout_closes} if uses_cached_behavior else trace_body
+    return FrozenGroup(profile, expected_credit_sha256, candidate_policy_sha256, clip_epsilon, bridge,
+                       _digest(trace_scope), tuple(coverage), tuple(slots))
+
+
+def reduce_group(torch, term_owner, sampler_owner, mask_owner, plan, read_input, *, expected_plan_sha256,
+                 projected_observations=(), expected_projected_observations_sha256=None):
+    """Check exact term bindings and reduce all admitted actions once."""
+    _need(type(plan) is FrozenGroup and plan.profile in (PROFILE, SCOPED_PROFILE) and _pin(expected_plan_sha256)
+          and plan.digest() == expected_plan_sha256 and callable(read_input)
+          and plan.bridge in (sampler_owner.BRIDGE, *_cache_bridges(sampler_owner)),
+          "independent frozen reduction plan required")
+    projected = {}
+    if projected_observations or expected_projected_observations_sha256 is not None:
+        _need(type(projected_observations) is tuple and _pin(expected_projected_observations_sha256)
+            and _digest(projected_observations) == expected_projected_observations_sha256,
+            "independent projected candidate forward roster required")
+        slots = {slot.sample_sha256 for slot in plan.slots}
+        for entry in projected_observations:
+            _need(type(entry) is tuple and len(entry) == 2 and _pin(entry[0]) and _pin(entry[1])
+                and entry[0] in slots and entry[0] not in projected,
+                "one unique projected forward per selected slot required")
+            projected[entry[0]] = entry[1]
+    if plan.bridge in _cache_bridges(sampler_owner):
+        _need(tuple(projected) == tuple(slot.sample_sha256 for slot in plan.slots),
+              "cached plan requires the complete ordered candidate forward roster before scoring")
+    observed_projected = set()
+    losses, dispositions, active = [], [], 0
+    frozen_slots = tuple(Slot(**asdict(slot)) for slot in plan.slots)
+    policy, epsilon, bridge = plan.candidate_policy_sha256, plan.clip_epsilon, plan.bridge
+    replay_fields = {"receipt", "expected_behavior_policy_sha256", "expected_behavior_logit_dtype",
+                     "behavior_ordered_logits", "expected_rng_event", "frame", "expected_prefix_sha256",
+                     "columns", "expected_action_columns_sha256", "support", "expected_support_sha256",
+                     "candidate_policy_sha256"}
+    for slot in frozen_slots:
+        bound_slot = _digest(asdict(slot))
+        observed = read_input(slot)
+        _need(_digest(asdict(slot)) == bound_slot, "frozen slot changed during candidate observation")
+        _need(type(observed) is CandidateInput and type(observed.bound_replay) is dict
+              and set(observed.bound_replay) == replay_fields,
+              "candidate observation must supply only tensor and exact replay data")
+        forward = {}
+        projected_types = (getattr(sampler_owner, "ProjectedQwenPrefixFrame", None),
+                           getattr(sampler_owner, "CachedQwenBehaviorFrame", None),
+                           getattr(sampler_owner, "TeacherCachedQwenFrame", None))
+        if type(observed.bound_replay["frame"]) in projected_types:
+            _need(slot.sample_sha256 in projected, "projected candidate slot lacks independent forward commitment")
+            observed_projected.add(slot.sample_sha256)
+            forward["expected_projected_observation_sha256"] = projected[slot.sample_sha256]
+        term = sampler_owner.candidate_term(term_owner, torch, observed.tensor, mask_owner,
+            expected_receipt_sha256=slot.sample_sha256, expected_candidate_policy_sha256=policy,
+            expected_trajectory_id=slot.trajectory_id, bridge=bridge, advantage=slot.advantage,
+            clip_epsilon=epsilon, **observed.bound_replay, **forward)
+        _need(type(term) is term_owner.TensorPolicyTerm and term.profile == term_owner.TENSOR_LOSS_PROFILE,
+              "candidate term is unbound or differs from the admitted sampled action")
+        _need(term.status in ("active", "clipped", "zero_signal")
+              and (term.status == "zero_signal") == (slot.advantage == 0.0),
+              "admitted choice has incompatible numeric disposition")
+        loss = term.loss
+        _need(torch.is_tensor(loss) and loss.ndim == 0 and bool(torch.isfinite(loss.detach()))
+              and bool(loss.requires_grad) == (term.status == "active"),
+              "finite scalar with the declared gradient disposition required")
+        losses.append(loss)
+        dispositions.append(term.status)
+        active += int(term.status == "active")
+    _need(observed_projected == projected.keys(), "projected roster includes an unobserved or wrong-architecture slot")
+    _need(plan.digest() == expected_plan_sha256, "frozen reduction changed during term scoring")
+    mean = torch.stack(losses).mean() if losses else None
+    if mean is not None:
+        _need(torch.is_tensor(mean) and mean.ndim == 0 and bool(torch.isfinite(mean.detach()))
+              and bool(mean.requires_grad) == bool(active), "group loss is nonfinite or lost attachment")
+    return Reduction(expected_plan_sha256, len(losses), active, tuple(dispositions), mean,
+                     mean if active else None)
+
+
+def apply_group_step(backend, torch, reduction, *, expected_plan_sha256, expected_optimizer_steps, current):
+    """Candidate-only adapter to the existing backend's guarded update tail.
+
+    The existing owner must supply a private isolated candidate and authenticate
+    the reduction's tensor origins. A failure leaves the candidate with that
+    owner and earns no receipt or retry. An active-but-zero-gradient disposal
+    has already changed gradient state, even though the optimizer did not step.
+    """
+    _need(type(reduction) is Reduction and _pin(expected_plan_sha256)
+          and reduction.plan_sha256 == expected_plan_sha256 and callable(current)
+          and type(expected_optimizer_steps) is int and 0 <= expected_optimizer_steps < 10**9
+          and type(backend._optimizer_steps) is int and backend._optimizer_steps == expected_optimizer_steps,
+          "exact reduction plan, candidate progress and owner guard required")
+    _need(type(reduction.active) is int and type(reduction.normalizer) is int
+          and 0 <= reduction.active <= reduction.normalizer
+          and len(reduction.dispositions) == reduction.normalizer
+          and reduction.dispositions.count("active") == reduction.active
+          and all(status in ("active", "clipped", "zero_signal") for status in reduction.dispositions),
+          "reduction action dispositions differ from its gradient scope")
+    current()
+    if not reduction.active:
+        _need(reduction.loss_for_owner is None, "inactive group supplied an update loss")
+        return {"status": "no_active_terms", "optimizer_steps": expected_optimizer_steps}
+
+    loss = reduction.loss_for_owner
+    _need(loss is reduction.mean_loss and torch.is_tensor(loss) and loss.ndim == 0
+          and bool(loss.requires_grad) and bool(torch.isfinite(loss.detach())),
+          "guarded update requires its finite attached reduced scalar")
+    backend.optimizer.zero_grad(set_to_none=True)
+    current()
+    report = backend._backpropagate_and_step(loss, torch=torch, current=current, skip_zero_gradient=True)
+    if report is None:
+        _need(backend._optimizer_steps == expected_optimizer_steps, "zero-gradient path changed optimizer progress")
+        return {"status": "no_nonzero_gradients", "optimizer_steps": expected_optimizer_steps,
+                "gradient_state_touched": True}
+    _need(type(report) is dict and backend._optimizer_steps == report.get("optimizer_steps")
+          == expected_optimizer_steps + 1, "backend reports unexpected optimizer progress")
+    return {"status": "one_step", **report}
+
+
+@dataclass(frozen=True)
+class CachedCandidateReplay:
+    """An independently selected, detached candidate input for one frozen slot."""
+
+    receipt: object
+    frame: object
+    columns: object
+    support: object
+    behavior_ordered_logits: tuple[float, ...]
+
+
+def _cached_candidate_inputs(sampler, mask, plan, replay_rows, *, expected_replay_sha256,
+                             expected_tokenizer_sha256, tokenizer, model_width, maximum_context,
+                             maximum_forward_tokens, maximum_head_elements):
+    conditioned = plan.bridge == getattr(sampler, "QWEN_TEACHER_BRIDGE", None)
+    frame_type = sampler.TeacherCachedQwenFrame if conditioned else sampler.CachedQwenBehaviorFrame
+    _need(type(replay_rows) is tuple and len(replay_rows) == len(plan.slots)
+          and all(type(row) is CachedCandidateReplay and type(row.receipt) is sampler.Sample
+                  and type(row.frame) is frame_type
+                  and type(row.columns) is sampler.ActionColumns and type(row.support) is mask.SupportBinding
+                  and type(row.behavior_ordered_logits) is tuple for row in replay_rows)
+          and _pin(expected_replay_sha256) and _digest(tuple(asdict(row) for row in replay_rows)) == expected_replay_sha256,
+          "independently selected ordered cached replay inputs required")
+    _need(_pin(expected_tokenizer_sha256)
+          and type(maximum_context) is int and maximum_context > 0
+          and type(maximum_forward_tokens) is int and maximum_forward_tokens > 0
+          and type(maximum_head_elements) is int and maximum_head_elements > 0
+          and type(model_width) is int and model_width > 0,
+          "explicit candidate context, forward-token and projected-head bounds required")
+    _need(len({slot.sample_sha256 for slot in plan.slots}) == len(plan.slots),
+          "candidate plan repeats a sampled slot")
+    inputs = []
+    total_tokens = 0
+    for slot, row in zip(plan.slots, replay_rows, strict=True):
+        frame, saved = row.frame, row.receipt
+        _need((saved.action_id, saved.action_position, saved.trajectory_id)
+              == (slot.action_id, slot.action_position, slot.trajectory_id)
+              and saved.action_position == len(frame.generated_body_ids)
+              and saved.profile == sampler.SAMPLER
+              and frame.tokenizer_sha256 == expected_tokenizer_sha256
+              and (frame.tokenizer_vocab_size, frame.logical_bos_token_id, frame.eos_token_id) ==
+                  (tokenizer["vocab_size"], tokenizer["bos_token_id"], tokenizer["eos_token_id"])
+              and row.columns.model_width == model_width,
+              "cached replay slot, tokenizer domain or projected width differs")
+        prefix = frame.framed_prompt_ids + frame.generated_body_ids
+        physical_positions = len(prefix) + int(conditioned)
+        _need(prefix and physical_positions <= maximum_context, "candidate full prefix exceeds declared model context")
+        total_tokens += physical_positions
+        _need(total_tokens <= maximum_forward_tokens
+              and (len(inputs)+1) * model_width <= maximum_head_elements,
+              "candidate group exceeds its declared forward or retained-head budget")
+        map_sha = row.columns.digest(row.support)
+        verified = sampler.replay_behavior(mask, receipt=saved, expected_receipt_sha256=slot.sample_sha256,
+            frame=frame, expected_prefix_sha256=saved.prefix_sha256, columns=row.columns,
+            expected_action_columns_sha256=map_sha, support=row.support,
+            expected_support_sha256=saved.support_sha256, ordered_logits=row.behavior_ordered_logits,
+            trajectory_id=slot.trajectory_id, behavior_policy_sha256=saved.behavior_policy_sha256,
+            behavior_logit_dtype=saved.behavior_logit_dtype, rng_event=saved.rng_event)
+        replay = {
+            "receipt": verified, "frame": frame, "expected_prefix_sha256": saved.prefix_sha256,
+            "columns": row.columns, "expected_action_columns_sha256": map_sha, "support": row.support,
+            "expected_support_sha256": saved.support_sha256, "behavior_ordered_logits": row.behavior_ordered_logits,
+            "expected_behavior_policy_sha256": saved.behavior_policy_sha256,
+            "expected_behavior_logit_dtype": saved.behavior_logit_dtype, "expected_rng_event": saved.rng_event,
+            "candidate_policy_sha256": plan.candidate_policy_sha256,
+        }
+        inputs.append((slot.sample_sha256, prefix, replay))
+    return inputs, total_tokens
+
+
+def apply_cached_qwen_candidate_group(backend, torch, term, sampler, mask, *, plan, replay_rows,
+        expected_plan_sha256, expected_replay_sha256, expected_configuration_sha256, expected_tokenizer_sha256,
+        attempt_sha256, expected_optimizer_steps, maximum_forward_tokens, maximum_head_elements, execution_guard,
+        teacher_prefix_owner=None, teacher_prefix_batch=None, expected_teacher_batch_sha256=None,
+        teacher_source_records=None):
+    """Collect fresh attached heads, then score and update within one candidate owner.
+
+    The existing caller supplies the independently authenticated candidate
+    checkpoint, sampler/math owners, admission and single-use attempt. It
+    authenticates that the replay tokenizer identity and selected live
+    pipeline use the same token mapping. That owner retains the isolated
+    candidate on error. No restore or retry occurs.
+    """
+    _need(callable(execution_guard) and _pin(attempt_sha256) and _pin(expected_configuration_sha256)
+          and _pin(expected_plan_sha256) and type(plan) is FrozenGroup
+          and plan.profile in (PROFILE, SCOPED_PROFILE) and plan.bridge in _cache_bridges(sampler)
+          and plan.digest() == expected_plan_sha256 and _pin(plan.candidate_policy_sha256)
+          and type(expected_optimizer_steps) is int and 0 <= expected_optimizer_steps < 10**9
+          and type(backend._optimizer_steps) is int and backend._optimizer_steps == expected_optimizer_steps,
+          "exact cached reduction plan, candidate attempt and start progress required")
+    execution_guard()
+    model, optimizer = backend.model, backend.optimizer
+    _need((type(model).__module__, type(model).__qualname__) ==
+                ("transformers.models.qwen2.modeling_qwen2", "Qwen2ForCausalLM")
+          and backend.architecture == "causal_lm" and backend.model_profile == "builtin-qwen2-bfloat16/v1"
+          and backend.target_codec == "complete-reviewed-norm-digest-omitted-json/v1"
+          and backend.training_conditioning_profile == sampler.QWEN_CONDITIONING_PROFILE
+          and getattr(model.config, "_attn_implementation", None) == "eager",
+          "exact reviewed digest-omitted Qwen2 candidate required")
+    _need(torch.is_grad_enabled() and not torch.is_inference_mode_enabled(),
+          "candidate optimizer ownership requires enabled normal autograd")
+    config = backend._configuration()
+    _need(_digest(config) == expected_configuration_sha256, "candidate backend configuration differs")
+    modules = tuple(model.modules())
+    params = tuple(model.parameters())
+    _need(bool(modules) and all(module.training is False for module in modules)
+          and bool(params) and params[0].device.type == "cpu"
+          and all(p.device == params[0].device and p.dtype == torch.bfloat16 for p in params),
+          "candidate requires the selected CPU BF16 evaluation mode")
+    versions = tuple(p._version for p in params)
+    vocab_size = config["model_config"]["vocab_size"]
+    candidates, positions = _cached_candidate_inputs(sampler, mask, plan, replay_rows,
+        expected_replay_sha256=expected_replay_sha256, expected_tokenizer_sha256=expected_tokenizer_sha256,
+        tokenizer=config["tokenizer"], model_width=vocab_size, maximum_context=config["max_sequence_tokens"],
+        maximum_forward_tokens=maximum_forward_tokens, maximum_head_elements=maximum_head_elements)
+
+    conditioned = plan.bridge == getattr(sampler, "QWEN_TEACHER_BRIDGE", None)
+    materialized = None
+    if conditioned:
+        owner = teacher_prefix_owner
+        _need(owner is not None and type(teacher_prefix_batch) is owner.Batch
+              and teacher_prefix_batch.partition == "train"
+              and type(teacher_source_records) is list,
+              "conditioned policy requires selected source-only TRAIN rows")
+        rows = owner.bind_batch(teacher_prefix_batch, teacher_source_records, phase="inference",
+            configuration=config, expected_batch_sha256=expected_teacher_batch_sha256)
+        # One group uses one frozen source and condition, possibly at many action positions.
+        _need(len(rows) == 1 and len(candidates) <= teacher_prefix_batch.maximum_observations,
+              "selected teacher group source and observation budget differ")
+        materialized = owner.materialize_batch(torch, params[0].device, rows)
+        record = teacher_source_records[0]
+        actual_prefix = tuple(backend._chatml_frame(record["source_wire"], sampler.QWEN_CONDITIONING_PROFILE,
+                                                    config["tokenizer"]))
+        condition = owner.conditioning_sha256(teacher_prefix_batch, materialized[record["id"]])
+        for _, _, replay in candidates:
+            frame = replay["frame"]
+            _need(frame.teacher_row_id == record["id"] and condition == frame.teacher_conditioning_sha256,
+                  "candidate teacher condition differs from the cached behavior slot")
+            _need(frame.framed_prompt_ids == actual_prefix, "candidate tokenizer frame differs from cached behavior")
+        teacher_observed = owner.Observations(teacher_prefix_batch)
+    else:
+        _need(all(item is None for item in (teacher_prefix_owner, teacher_prefix_batch,
+                                            expected_teacher_batch_sha256, teacher_source_records)),
+              "teacher inputs require the selected teacher policy bridge")
+
+    updating = False
+
+    def current():
+        execution_guard()
+        owned_params, owned_modules = tuple(model.parameters()), tuple(model.modules())
+        _need(backend.model is model and backend.optimizer is optimizer and len(owned_params) == len(params)
+              and all(a is b for a, b in zip(owned_params, params, strict=True))
+              and len(owned_modules) == len(modules)
+              and all(a is b and a.training is False for a, b in zip(owned_modules, modules, strict=True))
+              and torch.is_grad_enabled() and not torch.is_inference_mode_enabled()
+              and getattr(model.config, "_attn_implementation", None) == "eager"
+              and _digest(backend._configuration()) == expected_configuration_sha256,
+              "candidate owner, evaluation mode or configuration changed")
+        step = backend._optimizer_steps
+        _need(type(step) is int and (step == expected_optimizer_steps or
+                                   updating and step == expected_optimizer_steps+1),
+              "candidate optimizer progress changed outside its owned step")
+        if step == expected_optimizer_steps:
+            _need(tuple(p._version for p in params) == versions,
+                  "candidate parameter version changed before the update")
+            if updating:
+                _need(all(body.tensor.tensor._version == version for body, version in retained.values()),
+                      "retained candidate head changed before backward")
+
+    retained, forwards, observed_bodies, seen_heads = {}, [], [], set()
+    for index, (sample_sha, prefix, replay) in enumerate(candidates):
+        current()
+        ids = torch.tensor([prefix], dtype=torch.long, device=params[0].device)
+        arguments = {"input_ids": ids, "attention_mask": torch.ones_like(ids),
+                     "logits_to_keep": 1, "use_cache": False}
+        physical_positions = len(prefix) + int(conditioned)
+        if conditioned:
+            bound_row = materialized[replay["frame"].teacher_row_id]
+            arguments["position_ids"] = torch.arange(0, physical_positions, dtype=torch.long,
+                                                       device=params[0].device).unsqueeze(0)
+            arguments = owner.prepare_forward(backend, torch, arguments=arguments, bound_row=bound_row)
+            embeddings = arguments["inputs_embeds"]
+            embedding_version = embeddings._version
+        output = model(**arguments)
+        current()
+        logits = getattr(output, "logits", None)
+        input_rows = ids.detach().cpu().tolist()
+        mask_rows = arguments["attention_mask"].detach().cpu().tolist()
+        _need(input_rows == [list(prefix)] and mask_rows == [[1]*physical_positions]
+              and hasattr(output, "past_key_values") and output.past_key_values is None
+              and torch.is_tensor(logits) and torch.is_floating_point(logits)
+              and logits.device == params[0].device and tuple(logits.shape) == (1, 1, vocab_size)
+              and str(logits.dtype) == replay["expected_behavior_logit_dtype"]
+              and bool(logits.requires_grad) and logits.grad_fn is not None
+              and bool(torch.isfinite(logits.detach()).all()) and id(logits) not in seen_heads,
+              "fresh native candidate prefix, cache, dtype or attached logits differ")
+        actual_ids, mask_ids = tuple(input_rows[0]), tuple(mask_rows[0])
+        seen_heads.add(id(logits))
+        forward_fields = (attempt_sha256, index, sample_sha, expected_plan_sha256, plan.candidate_policy_sha256,
+                           expected_configuration_sha256, actual_ids, mask_ids, 1, False, str(logits.dtype))
+        if conditioned:
+            _need(arguments["inputs_embeds"] is embeddings and embeddings._version == embedding_version
+                  and tuple(embeddings.shape) == (1, physical_positions, bound_row[2]),
+                  "candidate teacher embeddings changed in native custody")
+            position_rows = arguments["position_ids"].detach().cpu().tolist()
+            _need(position_rows == [list(range(physical_positions))], "candidate observed teacher positions differ")
+            positions_used = tuple(position_rows[0])
+            condition = replay["frame"].teacher_conditioning_sha256
+            owner.observe_forward(torch, arguments, bound_row, teacher_observed)
+            forward_fields = (*forward_fields, condition, positions_used)
+        forward = _digest(forward_fields)
+        meta_fields = (replay["frame"].digest(), plan.candidate_policy_sha256, forward, actual_ids, mask_ids,
+                       physical_positions-1, 1, sampler.QWEN_CONDITIONING_PROFILE,
+                       sampler.QWEN_TEACHER_CANDIDATE if conditioned else sampler.QWEN_FRESH_CANDIDATE_PROFILE,
+                       "qwen2", tuple(sorted(arguments)), False, False, False)
+        meta = (sampler.TeacherFreshQwenObservation(*meta_fields, condition, positions_used) if conditioned
+                else sampler.FreshQwenCandidateObservation(*meta_fields))
+        observed = meta.digest()
+        head = sampler.ProjectedQwenHead(logits, meta, observed)
+        retained[sample_sha] = (CandidateInput(head, replay), logits._version)
+        forwards.append((sample_sha, observed))
+        observed_bodies.append(asdict(meta))
+
+    def read(slot):
+        body, version = retained[slot.sample_sha256]
+        _need(body.tensor.tensor._version == version, "retained candidate head changed before reduction")
+        return body
+
+    current()
+    roster = tuple(forwards)
+    observed_sha = _digest(roster)
+    reduced = reduce_group(torch, term, sampler, mask, plan, read, expected_plan_sha256=expected_plan_sha256,
+        projected_observations=roster, expected_projected_observations_sha256=observed_sha)
+    current()
+    teacher_evidence = (owner.evidence(teacher_prefix_batch, expected_teacher_batch_sha256, teacher_observed,
+                        row_forward_counts=(len(candidates),)) if conditioned else None)
+    updating = reduced.active > 0
+    update = apply_group_step(backend, torch, reduced, expected_plan_sha256=expected_plan_sha256,
+                              expected_optimizer_steps=expected_optimizer_steps, current=current)
+    current()
+    _need(backend._optimizer_steps == update["optimizer_steps"], "candidate progress differs from the update result")
+    report = {
+        "profile": ("reviewed-cached-qwen2-teacher-owner-policy-update/v1" if conditioned
+                    else "reviewed-cached-qwen2-owner-policy-update/v1"),
+        "attempt_sha256": attempt_sha256,
+        "plan_sha256": expected_plan_sha256,
+        "replay_sha256": expected_replay_sha256,
+        "candidate_configuration_sha256": expected_configuration_sha256,
+        "projected_observations": roster,
+        "projected_observations_sha256": observed_sha,
+        "projected_observation_bodies": tuple(observed_bodies),
+        "model_forwards": len(roster),
+        "full_prefix_token_positions": positions,
+        "projected_head_elements": len(roster)*vocab_size,
+        "normalizer": reduced.normalizer,
+        "active": reduced.active,
+        "dispositions": reduced.dispositions,
+        "update": update,
+    }
+    if conditioned:
+        report["teacher_candidate"] = teacher_evidence
+    return report

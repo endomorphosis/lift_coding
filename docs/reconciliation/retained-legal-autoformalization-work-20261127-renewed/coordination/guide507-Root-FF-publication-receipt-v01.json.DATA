@@ -1,0 +1,208 @@
+{
+  "HEAD": "1a00d581fc45092d0cdfeb6c11133121b16fec30",
+  "before": "61ef5bfb421ba029e9971244bcfb97a5c0298960",
+  "clean": true,
+  "commands": [
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "61ef5bfb421ba029e9971244bcfb97a5c0298960\n"
+    },
+    {
+      "argv": [
+        "status",
+        "--porcelain=v1",
+        "-uall"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "ls-remote",
+        "--exit-code",
+        "origin",
+        "refs/heads/main"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "61ef5bfb421ba029e9971244bcfb97a5c0298960\trefs/heads/main\n"
+    },
+    {
+      "argv": [
+        "ls-tree",
+        "HEAD",
+        "external/ipfs_datasets"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "160000 commit 4cd912f4e4256bde28ae331d6ebbb239e44f2bd7\texternal/ipfs_datasets\n"
+    },
+    {
+      "argv": [
+        "update-index",
+        "--cacheinfo",
+        "160000",
+        "4ccc8917b2168db8e11f54c5aadd4ca267f1c488",
+        "external/ipfs_datasets"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "ls-tree",
+        "HEAD",
+        "hallucinate_app"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "160000 commit 7b0a0ef351939f7c71ad82a90aea3240712c0844\thallucinate_app\n"
+    },
+    {
+      "argv": [
+        "update-index",
+        "--cacheinfo",
+        "160000",
+        "d1b5b2aa39690b1d832ec4d7c774c1fc287e60ed",
+        "hallucinate_app"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "diff",
+        "--cached",
+        "--name-only"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "external/ipfs_datasets\nhallucinate_app\n"
+    },
+    {
+      "argv": [
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "commit",
+        "-m",
+        "chore: publish milestone 507 evidence submodule references"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "[reconcile/all-work-parent-main-20261123 1a00d581fc] chore: publish milestone 507 evidence submodule references\n 2 files changed, 2 insertions(+), 2 deletions(-)\n"
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "1a00d581fc45092d0cdfeb6c11133121b16fec30\n"
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD^{tree}"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "8fe8eefbd93a7238b42acc37cf21de0a5ab090a9\n"
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD^"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "61ef5bfb421ba029e9971244bcfb97a5c0298960\n"
+    },
+    {
+      "argv": [
+        "status",
+        "--porcelain=v1",
+        "-uall"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "ls-tree",
+        "HEAD",
+        "external/ipfs_datasets"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "160000 commit 4ccc8917b2168db8e11f54c5aadd4ca267f1c488\texternal/ipfs_datasets\n"
+    },
+    {
+      "argv": [
+        "ls-tree",
+        "HEAD",
+        "hallucinate_app"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "160000 commit d1b5b2aa39690b1d832ec4d7c774c1fc287e60ed\thallucinate_app\n"
+    },
+    {
+      "argv": [
+        "ls-remote",
+        "--exit-code",
+        "origin",
+        "refs/heads/main"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "61ef5bfb421ba029e9971244bcfb97a5c0298960\trefs/heads/main\n"
+    },
+    {
+      "argv": [
+        "push",
+        "origin",
+        "HEAD:refs/heads/main"
+      ],
+      "returncode": 0,
+      "stderr": "To https://github.com/endomorphosis/lift_coding.git\n   61ef5bfb42..1a00d581fc  HEAD -> main\n",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "ls-remote",
+        "--exit-code",
+        "origin",
+        "refs/heads/main"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "1a00d581fc45092d0cdfeb6c11133121b16fec30\trefs/heads/main\n"
+    }
+  ],
+  "gitlinks": {
+    "external/ipfs_datasets": "4ccc8917b2168db8e11f54c5aadd4ca267f1c488",
+    "hallucinate_app": "d1b5b2aa39690b1d832ec4d7c774c1fc287e60ed"
+  },
+  "owned_process_terminal": true,
+  "remote_verified": true,
+  "schema": "guide507-outer-Root-FF-publication/v1",
+  "tree": "8fe8eefbd93a7238b42acc37cf21de0a5ab090a9"
+}

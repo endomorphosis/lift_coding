@@ -1,0 +1,193 @@
+{
+  "schema": "Phase3-candidate11-private-INERT-existing-R2-controls-adaptation/v1",
+  "status": "PRIVATE_INERT_UNBOUND_UNRUN_PENDING_INDEPENDENT_STATIC_REVIEW",
+  "existing_lineage": {
+    "control_trio": "Existing compatible v418 real ordinary12 controls, no new runner/controller",
+    "ordinary_qualification": {
+      "path": "/tmp/Root-existing-Phase6-canonical-qualifier-ordinary12-v418-ky_iyukk/actual-Phase6-canonical-qualifiers-ordinary12-closed-small-v418.json",
+      "bytes": 18604,
+      "sha256": "fbc2e4e7760c5ef97f595c02ba56c54436df242672669aa46fe681b903b90810"
+    }
+  },
+  "records": [
+    {
+      "name": "factory",
+      "before": {
+        "path": "/tmp/Phase6-existing-R2-ordinary12-INERT-v01-FdYbRmcQ/P6-ordinary12-v408-existing-factory.INERT.py.DATA",
+        "bytes": 3290,
+        "sha256": "35d2cff9ffecb49c2f6ea612714f93ea358eb2f257d4c0822fdd90404342e263"
+      },
+      "after": {
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/ordinary11-INERT-v01/existing-factory.INERT.py.DATA",
+        "bytes": 3305,
+        "sha256": "aab1fbf3cdaa324a759324561a0213a4063784b496b247c29b4b0bea02721778"
+      },
+      "forward": {
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/ordinary11-INERT-v01/factory.forward.diff.DATA",
+        "bytes": 3758,
+        "sha256": "0ba632f0a9dc12f84b749427b31d70d9fe70d636b83056525aaf7a964b6d81d2"
+      },
+      "inverse": {
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/ordinary11-INERT-v01/factory.inverse.diff.DATA",
+        "bytes": 3758,
+        "sha256": "0adf2d442caa334216fbca41b55bcd46e2baa5c6ee7830061b81b72cd2f582b5"
+      }
+    },
+    {
+      "name": "bootstrap",
+      "before": {
+        "path": "/tmp/Phase6-existing-R2-ordinary12-INERT-v01-FdYbRmcQ/P6-ordinary12-v408-existing-bootstrap.INERT.py.DATA",
+        "bytes": 40246,
+        "sha256": "f4ba3b04b79f60413f078705f91c761c62cbf7cb32efd9e031065346338836d5"
+      },
+      "after": {
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/ordinary11-INERT-v01/existing-bootstrap.INERT.py.DATA",
+        "bytes": 40301,
+        "sha256": "c6a86ec168d90ce8e08d1fcf2a5cd6d66bfe0ec232d70be076a29eeb13b41aa5"
+      },
+      "forward": {
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/ordinary11-INERT-v01/bootstrap.forward.diff.DATA",
+        "bytes": 17558,
+        "sha256": "61e920853273418150178c675b928af3ed853471e09e71ac3c41e1606d1086a3"
+      },
+      "inverse": {
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/ordinary11-INERT-v01/bootstrap.inverse.diff.DATA",
+        "bytes": 17558,
+        "sha256": "1cfea2477db1f235bc86e41c769d86af012aa1163716449dee3b3d39ed5d5d91"
+      }
+    },
+    {
+      "name": "operator",
+      "before": {
+        "path": "/tmp/Phase6-existing-R2-ordinary12-INERT-v01-FdYbRmcQ/P6-ordinary12-v408-existing-operator.INERT.py.DATA",
+        "bytes": 59147,
+        "sha256": "6353111081f84ea0b121e214a6b2bae735fc8a9f6bef6a81124c2c594cbf01fe"
+      },
+      "after": {
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/ordinary11-INERT-v01/existing-operator.INERT.py.DATA",
+        "bytes": 59952,
+        "sha256": "71ac091d28a455a3558236ea2949eea7664ef09cbbd0821e839c2c486116b7b1"
+      },
+      "forward": {
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/ordinary11-INERT-v01/operator.forward.diff.DATA",
+        "bytes": 33482,
+        "sha256": "41b99fcb49114997387dd47d68bc145fd2992424f25b2fcb92311cdf604b3efe"
+      },
+      "inverse": {
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/ordinary11-INERT-v01/operator.inverse.diff.DATA",
+        "bytes": 33482,
+        "sha256": "d173947867a6e784cd76fbcc691518bd1d2a2eb3bda45c2bf3030f5119587ff4"
+      }
+    }
+  ],
+  "literal_selection": {
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/ordinary11-INERT-v01/literal11-selection.json",
+    "bytes": 4369,
+    "sha256": "8e8239aec87017b09e139c224d455ade07497c5fca3327f58143e2257bfed18f"
+  },
+  "manifest_template": {
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/ordinary11-INERT-v01/binding-manifest.INERT.json",
+    "bytes": 3299,
+    "sha256": "fdaaefaf065c3ab3e7bc3b17cce13879aafaf6f8c4a5c1b92e90d8c064cd2561"
+  },
+  "static_preservation": {
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/ordinary11-INERT-v01/static-preservation-and-cross-fields.json",
+    "bytes": 3031,
+    "sha256": "ef1e48275b4501bf74a0e0412be258e835dcff4b574234d35d0db8ad4548667b"
+  },
+  "exact_original_candidate_packet_identity": {
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/SEALED-Phase3-candidate-inventory-exact2-private.json",
+    "bytes": 10207,
+    "sha256": "02f6169b3bbb1513559141fd74d01310794b2d797f307fe12b372353ef6cb7a6"
+  },
+  "separate_private_same11_reference": {
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/SEALED-Phase3-candidate-inventory-private-same11-retention-and-role-coverage.json",
+    "bytes": 23020,
+    "sha256": "44b16e7c91292dd7f10cb88923c301fef0f5fc37e12e0ab2c2315152e608c104"
+  },
+  "actual_new_qualification": null,
+  "scope": {
+    "function_count": 8,
+    "case_count": 11,
+    "case_vector": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      3,
+      1,
+      2
+    ],
+    "product_owner_count": 7,
+    "test_module_count": 1,
+    "subcohorts": {
+      "retained9": 9,
+      "oversize2": 2
+    },
+    "actual_collection_is_count_authority": true,
+    "whole_owning_file_selected": false,
+    "Native_Lean_model_training_statutory_review_or_convergence_claim": false
+  },
+  "required_module_pin_population": {
+    "ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py": [
+      61518,
+      "ff66f344c9cda788801a9fa2d3ef66afd7046d903a53d2bbf11f8dbfdf847ad2"
+    ],
+    "ipfs_datasets_py/logic/syntax_core/ast.py": [
+      56966,
+      "4709513f18ab270858fe9595d88a847ddc52092606c52c7802947abed1ab9ac4"
+    ],
+    "ipfs_datasets_py/logic/syntax_core/contracts.py": [
+      75291,
+      "ce6d49e05ca2b09a84a3125ed6ad4c4aae4adf2c5943d3a4fd4eeeb057b444a8"
+    ],
+    "ipfs_datasets_py/logic/syntax_core/signatures.py": [
+      30488,
+      "49dd4fb0096661a05a15f056eb57248349e2b4e0b02e83239f36db36788c75bf"
+    ],
+    "ipfs_datasets_py/logic/families/namespaces.py": [
+      34262,
+      "ba097e653158a812d66ead978d6405d61adaa293521305333579b19bd69a432d"
+    ],
+    "ipfs_datasets_py/logic/formalization/autoencoder/native_family_lean_emitters.py": [
+      39438,
+      "dab6bbd4e17eef888f4181aab0c6ce3f087a717edc83a55befb7742fd1f598b1"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_native_ast_preservation.py": [
+      206212,
+      "8ecc4a9a2c87c6369b2d7a359c77b2a11b2aa70ad4bc873da1260b9544e7dec2"
+    ],
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py": [
+      82687,
+      "d6180c3e711e5d795c9bea3c4a258ed8720e4a9d831f1426fa61b67322d8cbea"
+    ]
+  },
+  "raw_7214_fixture": {
+    "path": "docs/autoformalization/evidence/legal-ir-title10-7214-pending-compositions-20261024.json",
+    "bytes": 662668,
+    "sha256": "dd72e2b92ed5a44a77acfb72dd27ca8614250878400db89742c0437438d59dda"
+  },
+  "raw_fixture_witness": "Inherited v418 exact()/audit_phase6_pilot_fixture with stable FD/full9/path read opening and closing in BOTH collect/run. Historical helper/report field names retained so no owner/callback duplication. Data identity now exact retained pending7214 bytes; no legal acceptance inferred.",
+  "guards_preserved": [
+    "Root runtime finite-clock and output selection refuse unbound NULL before dispatch",
+    "Original observed-D-root READ ABI and required true keys; never treat SourceWRITE as READ",
+    "Source full9/raw SHA current epochs/protected index/clean Git provenance and actual all8 module compilation",
+    "Normal three ancestor conftests+pytest.ini, no namespace substitution",
+    "Same selected-owning-test real pytest Source\u2192AST\u2192code/rewrite/execution witness and cache bypass",
+    "Actual ordered COLLECT\u2192RUN, exact11 literal node IDs/functioncounts/subcohorts and typed JUnit reconciliation",
+    "Same original ToolRunRequest/ToolRunResult and ResourceAdmittedToolRunner/parent scheduler",
+    "Same 120wall110CPU collect,600wall540CPU run,1CPU/4GiB resident/8GiB memory/4MiB input/16MiB output/64MiB workspace finite caps",
+    "Same metadata rechecks, owned-process cleanup/finalizer/resource+Source closure; original42 raw owner exact",
+    "Disk metric cache0, automatic CUDA0, CUDA_VISIBLE_DEVICES empty remain inherited"
+  ],
+  "Root_remaining_binding_only": [
+    "Source2 exact candidate61518/ff66 and82687/d618 installation/closing custody plus current frozen Git/index metadata; author performs none.",
+    "Fresh actual READ closure includes eight mandatory modules, raw7214 fixture, normal configs and real absence namespace checks; map actual rows/full9 into existing original READ ABI.",
+    "Bind operator live NULL fields only under current Root selection/SDK identity/resource config/capacity/IO/effect/clock/output authority. Bootstrap identical current ROOT/A/module/pin/config/provenance/IO/effect/clock fields remain NULL now.",
+    "Manifest template current observations NULL; Root fills matching original schema fields, exact candidate packet identity and actual module/config/provenance rows; keep static8pin and rawfixture constraints.",
+    "Root seals the bound private bootstrap and fills BOOTSTRAP_REFERENCE; factory already references exact immutable new private bytes, not source authority.",
+    "Root alone may choose actual launch; private exact2/private11 PASS never current ordinary credit."
+  ],
+  "Source_canonical_writes_launch_tests_imports_runtime_or_Git_mutations_by_author": false
+}

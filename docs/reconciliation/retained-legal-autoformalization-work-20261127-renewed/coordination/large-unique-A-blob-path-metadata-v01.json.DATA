@@ -1,0 +1,45 @@
+{
+  "cap": 33554432,
+  "cumulative_explicit_control_and_Git_metadata_output_bytes": 32978699,
+  "exact_difference_ref": {
+    "bytes": 466458,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/exact-A81-D206-object-set-difference-metadata-v05.json",
+    "sha256": "b7874ef9b19b71cd93bdb0e4a6817cbf3c10f0b9807b5990f3fc98720be54258"
+  },
+  "rows": [
+    {
+      "bytes": 142880768,
+      "introducing_or_changing_commit": "66459d36f466227984ee4cd29f76a5fe773c5db4",
+      "metadata_PID": 1341445,
+      "observed_diff_metadata_bytes": 1120,
+      "oid": "14d6706502842110d16161a81d168281d6989a1c",
+      "path_match": {
+        "raw_diff_metadata": ":100644 100644 6fa7432a9139657f4e28b1a8abec437228cdcce0 14d6706502842110d16161a81d168281d6989a1c M",
+        "recorded_path": "data/agent_supervisor/formal_verification_tactician_readiness/bundles/index.duckdb"
+      },
+      "source_bodies_or_blob_contents_read": false,
+      "stderr_bytes": 0,
+      "stopped_at_metadata_bound": false,
+      "terminal_returncode": 0,
+      "wait_returned": true
+    },
+    {
+      "bytes": 2022179327,
+      "introducing_or_changing_commit": "bd7447d29ee06b2cfd12e471ebf645a6fb436017",
+      "metadata_PID": 1341504,
+      "observed_diff_metadata_bytes": 182,
+      "oid": "9b6ded832adffea56cd1402bb08d1dca484eb3c8",
+      "path_match": {
+        "raw_diff_metadata": ":100644 000000 9b6ded832adffea56cd1402bb08d1dca484eb3c8 0000000000000000000000000000000000000000 D",
+        "recorded_path": "data/agent_supervisor/proof_grounded_ir_learning/datasets/pgir-objective-ast.jsonl"
+      },
+      "source_bodies_or_blob_contents_read": false,
+      "stderr_bytes": 0,
+      "stopped_at_metadata_bound": false,
+      "terminal_returncode": 0,
+      "wait_returned": true
+    }
+  ],
+  "schema": "large-unique-Git-blob-path-metadata/v1",
+  "scope": "Git pickaxe object-identity lookup and raw tree diff only; no blob contents, package imports, Git writes, packing, source adoption, or deletion."
+}

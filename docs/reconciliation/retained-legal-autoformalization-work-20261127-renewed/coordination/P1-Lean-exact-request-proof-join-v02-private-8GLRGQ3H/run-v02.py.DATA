@@ -1,0 +1,21 @@
+from pathlib import Path
+import hashlib
+import json
+import os
+import subprocess
+import sys
+
+root=Path(__file__).resolve().parent
+spec=json.loads((root/"inputs-v02.json").read_bytes())
+assert hashlib.sha256(Path(spec["runner"]).read_bytes()).hexdigest()==spec["runner_sha256"]
+env={**os.environ, "PYTEST_DISABLE_PLUGIN_AUTOLOAD":"1", "PYTHONDONTWRITEBYTECODE":"1",
+     "OPENBLAS_NUM_THREADS":"1", "OMP_NUM_THREADS":"1", "MKL_NUM_THREADS":"1", "NUMEXPR_NUM_THREADS":"1"}
+for mode in sys.argv[1:]:
+    argv=spec["invocations"][mode]
+    output=root/mode
+    output.mkdir(mode=0o700)
+    with (output/"stdout.DATA").open("xb") as stdout, (output/"stderr.DATA").open("xb") as stderr:
+        rc=subprocess.run(argv, stdout=stdout, stderr=stderr, timeout=65, env=env).returncode
+    with (output/"exit.json").open("x") as f:
+        json.dump({"returncode":rc,"argv":argv},f,indent=2)
+    print(mode,rc,flush=True)

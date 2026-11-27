@@ -1,0 +1,166 @@
+{
+  "Parquet_result_claimed": false,
+  "Source_lease_and_precharge": {
+    "SDK_contract": "Direct ResourceAdmittedToolRunner reserves runtime resources and submits one bounded process. It does not acquire Source42 or use its ledger.",
+    "private_child_Source_targets": [],
+    "private_child_requires_Source_lease": false,
+    "private_child_requires_Source_precharge": false,
+    "separate_SDK_loader": "The 66-file worker payload does not contain the parent SDK. If selecting an outer loader that reads canonical SDK source, bind only its actual current READ scope and precharge under the existing owner. A separately authenticated already-held SDK can serve the private route. Current selection is NULL.",
+    "v331_outer_contract": "The historical ordinary operator separately entered D/A READ because it consumed guarded canonical files. No historical Source scope or precharge is portable."
+  },
+  "actual_dispatch_performed": false,
+  "closeout_evidence": {
+    "actual_closeout": null,
+    "requires": [
+      "One actual result, rc0, exact five output buffers, no truncation or refusal",
+      "Native owned lifecycle and workspace cleanup confirmed; owner releases actual parent after child cleanup",
+      "Readback manifest SHA and four exact file size/SHA values; original 6 nodes and 5 edges",
+      "Same-length changed-copy nodes.parquet SHA refusal and original revalidated",
+      "Unreviewed candidate custody only. No statutory admission, Lean, corpus release, training or model authority."
+    ],
+    "uncertain_cleanup": "Retain existing owning process/handle and follow its existing cleanup. No second launch while unresolved."
+  },
+  "existing_parent_acquisition": {
+    "custody": "Fresh live same-process parent. Refusal prevents dispatch. Use its existing scheduler capacity and configuration.",
+    "interface": "GlobalResourceScheduler.try_acquire",
+    "kwargs": {
+      "child_process_slots": 1,
+      "cpu_slots": 1,
+      "gpu_memory_mb": 0,
+      "memory_mb": 4096,
+      "parent_lease": null,
+      "requires_gpu": false,
+      "unified_memory_mb": 0
+    },
+    "lane": "validation",
+    "request_id": null
+  },
+  "existing_runner": {
+    "base_environment": {
+      "LANG": "C.UTF-8",
+      "PATH": "/home/barberb/lift_coding/.venv/bin:/usr/bin:/usr/lib/git-core"
+    },
+    "child_process_slots": 1,
+    "cpu_slots": 1,
+    "executable_roots": [
+      "/usr/bin",
+      "/home/barberb/lift_coding/.venv/bin"
+    ],
+    "method": "run",
+    "no_custom_executor": true,
+    "parent_lease": null,
+    "qualified_class": "ipfs_datasets_py.logic.backends.resource_admission.ResourceAdmittedToolRunner"
+  },
+  "fresh_selection_fields": {
+    "Root_selection": null,
+    "Source_precharge": null,
+    "actual_dispatch_and_results": null,
+    "canonical_Source_scope": null,
+    "clock": null,
+    "effect_decision": null,
+    "output_destination": null,
+    "parent_lease": null,
+    "scheduler_configuration_and_state": null
+  },
+  "historical_existing_owner": {
+    "historical_authority_transferred": false,
+    "observed_current_Git_head": "bcd55c0d832c38ff7ed696592dfb6a9a55883b2d",
+    "three_SDK_Git_blobs_match_v331": {
+      "ipfs_datasets_py.logic.backends.process": {
+        "held_v331_sha256": "370ba355be1da87814be4a117d2ce2a1cbc255064958d9ec64ada8e54521a7d7",
+        "observed_Git_blob": "1650b31bd0aa342f3614bf9999e9b6010fba17ee",
+        "relative_path": "ipfs_datasets_py/logic/backends/process.py"
+      },
+      "ipfs_datasets_py.logic.backends.resource_admission": {
+        "held_v331_sha256": "fda64e02042355fd0a0a3b75934b3d1c4ccb5efb42f0fe861876275ff8a5e1a8",
+        "observed_Git_blob": "4ec4a57c8fb7e058cf92e9b0a42cd1940290fb4f",
+        "relative_path": "ipfs_datasets_py/logic/backends/resource_admission.py"
+      },
+      "ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler": {
+        "held_v331_sha256": "7a0dac2d13b4be7775e278054e1a57808f5629d3c58952164b91514e6e2ae2d3",
+        "observed_Git_blob": "54dc1effc87deb3fba782f1b9df4db460ffb4f1a",
+        "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py"
+      }
+    },
+    "v331_actual_SDK_RUN_limits_and_custody": {
+      "bytes": 526590,
+      "path": "/tmp/Root-P8-V4-reviewed-graph-existing-ordinary9-v331-l4ls_bm7/actual-output/complete-frozen-local-D-corpus-release-public-v4-reviewed-graph-ordinary9-existing-owner-report.json",
+      "sha256": "b4eb93c369cb5dfa50151f7c2de2725c7834fd78e7076215b61c3a81321ce2e7"
+    },
+    "v331_operator": {
+      "bytes": 70696,
+      "path": "/tmp/Root-P8-V4-reviewed-graph-existing-ordinary9-v331-l4ls_bm7/Root-selected-existing-ordinary9-operator.py",
+      "sha256": "c6bdf4bf57302218039fa9b09d16ff8ba47f3f66f17873ce1ab84c2f524de453"
+    }
+  },
+  "input_files_materialization": {
+    "bytes": 2490885,
+    "format": "Map workspace-relative POSIX names to exact authenticated raw bytes. Verify path, bytes and SHA-256 first. No canonical PYTHONPATH; SDK creates workspace and sets HOME/TMPDIR.",
+    "key": "input_files",
+    "members": 66,
+    "read_manifest": {
+      "bytes": 40136,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/READY-existing-7213-candidate-Parquet-payload-INERT.json",
+      "sha256": "22ae8b374725d89fcefbc4847d1d104c1e775e6604d36471d7d3e7f6058b6c5e"
+    }
+  },
+  "payload_ready_ref": {
+    "bytes": 40136,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-Parquet-snapshot-R2-payload-INERT-040o6dl5/READY-existing-7213-candidate-Parquet-payload-INERT.json",
+    "sha256": "22ae8b374725d89fcefbc4847d1d104c1e775e6604d36471d7d3e7f6058b6c5e"
+  },
+  "proposed_ToolRunRequest_fields": {
+    "argv": [
+      "/home/barberb/lift_coding/.venv/bin/python",
+      "-B",
+      "{workspace}/export-candidate-snapshot.py"
+    ],
+    "environment": {
+      "BLIS_NUM_THREADS": "1",
+      "CUDA_VISIBLE_DEVICES": "",
+      "HF_HUB_OFFLINE": "1",
+      "IPFS_ACCEL_AUTO_INSTALL": "0",
+      "IPFS_DATASETS_AUTO_INSTALL_TEST_DEPS": "0",
+      "IPFS_DATASETS_PY_MINIMAL_IMPORTS": "1",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "TRANSFORMERS_OFFLINE": "1"
+    },
+    "limits": {
+      "cpu_seconds": 540,
+      "enforce_file_size_limit": true,
+      "max_argument_bytes": 65536,
+      "max_arguments": 256,
+      "max_environment_bytes": 131072,
+      "max_file_bytes": null,
+      "max_input_bytes": 4194304,
+      "max_output_bytes": 16777216,
+      "max_output_files": 64,
+      "max_path_bytes": 512,
+      "max_workspace_bytes": 67108864,
+      "max_workspace_depth": 64,
+      "max_workspace_entries": 16384,
+      "memory_bytes": 8589934592,
+      "resident_memory_bytes": 4294967296,
+      "termination_grace_seconds": 5,
+      "timeout_seconds": 600
+    },
+    "output_paths": [
+      "exchange-observation.json",
+      "bundle/manifest.json",
+      "bundle/snapshot.json",
+      "bundle/nodes.parquet",
+      "bundle/edges.parquet"
+    ],
+    "owned_process_observation": true,
+    "runtime": "native",
+    "secrets": [],
+    "stdin": null
+  },
+  "schema": "Section-7213-existing-direct-R2-Parquet-custody-dispatch-handoff-INERT/v1",
+  "selected": false,
+  "statutory_admission_or_model_claim": false
+}

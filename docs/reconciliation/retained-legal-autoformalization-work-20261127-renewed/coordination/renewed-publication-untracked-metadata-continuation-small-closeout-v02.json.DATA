@@ -1,0 +1,56 @@
+{
+  "Git_mutations": 0,
+  "all118_worktree_paths_accounted": true,
+  "all_owned_FDs_closed": true,
+  "all_owned_git_processes_reaped": true,
+  "baseline_join": "Candidate paths remain empty; no baseline cache read needed. No global /tmp/source/body/adoption completeness inferred.",
+  "candidate_count_recent_regular": 0,
+  "emitted_paths_cumulative_including_revalidation": 175617,
+  "foreign_process_polling": 0,
+  "full_coverage_complete": false,
+  "generated_path_exclusions": 462,
+  "limits_preserved": {
+    "emitted_paths_cumulative": 1500000,
+    "lstat_cumulative": 1000000,
+    "wall_seconds_cumulative": 300
+  },
+  "lstat_attempts_cumulative": 124871,
+  "network_calls": 0,
+  "no_checkout_stores_skipped": 2,
+  "nonregular_files": 298,
+  "offline_unavailable": {
+    "automatic_retry": false,
+    "fetch_attempted": false,
+    "missing_promisor_object": "54c14319bdacba63109b170574acc09b23bd2fbc",
+    "owned_PID": 1201654,
+    "path": "/tmp/decommission-source-restore-20261114-ipfs-kit",
+    "reaped": true,
+    "stderr": "warning: lazy fetching disabled; some objects may not be available\nfatal: could not fetch 54c14319bdacba63109b170574acc09b23bd2fbc from promisor remote\n",
+    "terminal_returncode": 128
+  },
+  "old_regular_files": 124573,
+  "prior_separate_candidate_extraction_private_reads_retained": 1621692,
+  "private_control_read_bytes_cumulative": 833721,
+  "report": {
+    "bytes": 98239,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/renewed-publication-recent-untracked-source-metadata-v02.json",
+    "sha256": "66fb3224a3288e0a300231af870c40f3e953480caede7f3eea06bdc1db794d0b"
+  },
+  "reported_scan_wall_seconds_cumulative": 7.776822411455214,
+  "saved_prefix_validation": {
+    "completed_prefix_lstat_repeated": 0,
+    "count": 50284,
+    "matched": true,
+    "repeat_emissions_charged": 50284,
+    "sha256": "a84730064628ce92c74403995b55403e6b72d3ac1efd883ca6411ae945078e7b"
+  },
+  "schema": "recent-untracked-source-metadata-continuation-closeout/v2",
+  "small_candidate_paths": {
+    "bytes": 1158,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/renewed-publication-recent-untracked-source-candidate-paths-v02.json",
+    "sha256": "3c9c04825d505323686939dd7a0537f9356e9662f724ff0dca893d1ab65e202e"
+  },
+  "source_body_reads": 0,
+  "successful_materialized_worktree_checks": 115,
+  "unavailable_offline_worktrees": 1
+}

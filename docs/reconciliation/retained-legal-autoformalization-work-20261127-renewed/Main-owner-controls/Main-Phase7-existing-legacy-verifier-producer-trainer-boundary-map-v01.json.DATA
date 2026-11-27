@@ -1,0 +1,70 @@
+{
+  "actual_static_call_chain": [
+    "LegalIRProofRouteResult.hammer_result retains actual HammerResult; route to_dict omits that object",
+    "HammerProofReconstructor.reconstruct retains exact KernelVerifier.verify return as HammerReconstruction.verification",
+    "NativeKernelVerifier.verify returns HammerVerification from process result; goal/premises are discarded by that verifier",
+    "Producer obtains route_result.hammer_result then reconstruction_receipt_from_hammer_result",
+    "HammerReconstructionReceipt is projected by _mapping into KernelReconstructionFeedback",
+    "Trainer normalizes through LegalIRProofFeedbackRecord.to_dict/from_dict and independently selected current_proof_targets"
+  ],
+  "all_prior_costs_and_repeats_preserved": true,
+  "child_cumulative_read_bytes": 308331,
+  "child_original_private_unit_limit": 524288,
+  "closed_cached_roles": {
+    "owning_test": {
+      "bytes": 46285,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/test_trusted_feedback_weight_updates.test.after-v05.DATA",
+      "positive_fixture": "_current_feedback_fixture lines290-333 manually creates LegalIRProofFeedbackRecord",
+      "sha256": "78f1f42f172367e8bb932721b0ef01011b8ff9a7b5821ee2942a4f5254eaa9e3"
+    },
+    "producer": {
+      "API": "build_legal_ir_proof_feedback_record",
+      "bytes": 65270,
+      "lines": [
+        1138,
+        1292
+      ],
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/record.current-v408-plus-exact-after-v04.DATA",
+      "sha256": "aee18c5265e4874bd6074637eef5bd4ae6701449cc0876e899abf56d1fb71896"
+    },
+    "trainer": {
+      "API": "TrustedFeedbackTrainer.train / _normalize_feedback",
+      "bytes": 42271,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/trainer.after-v04.DATA",
+      "sha256": "630398501836dc7bba1b213dbd93b2e93a18c593747f52467f325c5033d7fa94"
+    }
+  },
+  "full_goal_unchanged_and_incomplete": true,
+  "missing_input_for_faithful_integration": "Existing canonical verifier-owner class/API plus its authenticated body and selected producer binding from checked proof to the independently selected current obligation/target; legacy booleans cannot be substituted for that contract.",
+  "next_existing_owner_action": "Root retains producer. Reuse existing strict kernel receipt/verifier if selected and provide its exact current contract; Main can then implement one disjoint existing consumer/test handoff without a new queue, trainer, provider or metadata-derived authority.",
+  "no_Source_runtime_ordinary_Native_SQL_Git_mutation_model_or_test_execution": true,
+  "no_new_Source_epoch_adoption_or_current_private_producer_claim_from_published_dependencies": true,
+  "no_production_training_or_admission_qualification": true,
+  "not_claimed": "This static trace is not a new execution, a new legal/admission bypass, or proof that no canonical verifier exists elsewhere. It does not invalidate existing private33 or historical67 scopes.",
+  "precise_boundary": "Legacy HammerVerification is an actual retained object but is NOT canonical opaque VerifiedReceipt or LeanKernelReceipt. Inspected chain has verification booleans/identifiers, not canonical request/obligation/review/dependency receipt commitments. No named canonical verifier adapter was found in these exact modules.",
+  "retained_report": {
+    "bytes": 22035,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/ACTUAL-current-Guide571-exact8-v408-preserved-no-fit-replay.json",
+    "sha256": "0b89d860159b03b9aa4fa2e5f5f33e11391d079f53f7667e90ecd440a06a4067"
+  },
+  "schema": "Main-current-Phase7-legacy-receipt-handoff-contract-map/v1",
+  "two_exact_published_dependency_imports_plus_hammer": {
+    "hammer.py": {
+      "bytes": 44974,
+      "git_blob": "8ad360a063308e39fa1a4ba095abf79eedce06c3",
+      "sha256": "c7561ac3f4833dddf11a6bb4a2b045fc132f95248a40a144a97b3b3ac44d5fbd"
+    },
+    "legal_ir_hammer_translation.py": {
+      "bytes": 30916,
+      "git_blob": "c16c1c3f393c4bebf32a54c82f2d2796a0f3abd1",
+      "sha256": "b1058c253091447f69e708c4ef3dd879a0357849fb0e742efecfa7a3d14af83f"
+    },
+    "legal_ir_proof_router.py": {
+      "bytes": 56155,
+      "git_blob": "9635b8c241cd778982caae54a6c9aa0c5e7736e1",
+      "sha256": "d1f7e330390f9ca6f81d876c0103dd261c2a24ebb27f43b685c48a11a7861af2"
+    },
+    "method": "Only exact immutable local Git objects, lazy fetch disabled/no optional locks; expected sizes/framed GitOIDs and observed SHA256, no canonical bodies",
+    "observed_published_D_HEAD": "6d1b200341ae62d6dc0aa6db27f3955c50483fa7"
+  }
+}

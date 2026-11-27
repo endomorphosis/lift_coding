@@ -1,0 +1,70 @@
+{
+  "actual_loaded_module_git_pins_matched": 11,
+  "candidate_test": {
+    "bytes": 58044,
+    "sha256": "f918c5c29396beccf9119d41a4017763511a3abb737c4ce79f1f33c3eda50c72"
+  },
+  "execution_limits": {
+    "AS_bytes": 536870912,
+    "CPU_timeout_s": 60,
+    "CPUs": 1,
+    "wall_timeout_s": 60
+  },
+  "execution_started": false,
+  "fixture": {
+    "bytes": 56035,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-obligation-inverse-private-72776lwj/current-owning-test-git-017fb5.py.DATA",
+    "sha256": "2874f63696c14d09e2418eaf9abb5f2c318b818d760f0633340e3dfd0bed4118"
+  },
+  "fragment": {
+    "bytes": 2919,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-obligation-inverse-private-72776lwj/two-controls-exact-ast-fragment.py.DATA",
+    "sha256": "2b448b1b0473b62ec70071955e06b31485290cf6841ab08f03734a2dafe41493"
+  },
+  "git_revision": "017fb546935826d4e8f13d314395f6053cee4d3f",
+  "manifest": {
+    "bytes": 10694,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-obligation-inverse-private-72776lwj/two-controls-current-exact-owner-pins.json",
+    "sha256": "764d77e63decbbc3bdd9a261d1547e582ca09d25a90f661b2cabc435f514a63b"
+  },
+  "origin_harness": {
+    "bytes": 8061,
+    "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/Phase6-parametric-counted-source-withheld-reconstruction-private-v01/expanded-capacity-propagation-private-v01/run_cached_owning_test_cohort_v02.expanded-capacity-DATA-retarget.py.DATA",
+    "sha256": "775dee04904736b15a3d2f55b51cbceee57642242bcd5ca63956f83c9900087c"
+  },
+  "original_loader_audit_and_guard_AST_unchanged": true,
+  "prior_cache_manifest_and_selector_overlays": {
+    "manifest": {
+      "bytes": 11512,
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/Phase6-parametric-counted-source-withheld-reconstruction-private-v01/expanded-capacity-propagation-private-v01/current-four-owner-and-existing-capacity-cached-inputs-v01.json",
+      "sha256": "e7448ee2d17652abf1148ce90ee4063e7d2939144ed04913f681e48690dd3433"
+    },
+    "pins": {
+      "bytes": 3045,
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/Phase6-parametric-counted-source-withheld-reconstruction-private-v01/expanded-capacity-propagation-private-v01/existing-cached-capacity-cohort-pins-v01.json",
+      "sha256": "8ad8372895b3bd52052b52c936ddfce33d7a4ada6eff254b1fa7bd8d0692bd3c"
+    }
+  },
+  "retained_preparation_stop": {
+    "execution_attempted": false,
+    "exit_code": 1,
+    "reason": "literal locator replacement expected double quotes, retained source uses single quotes",
+    "tool_chunk": "ad4173",
+    "verified_inputs_preserved": true
+  },
+  "runner": {
+    "bytes": 7659,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-obligation-inverse-private-72776lwj/existing-harness-two-control-DATA-retarget.py.DATA",
+    "sha256": "5d505e86b2d1f9b508dbc3dc64dc152b229432d17b78d4365ef0200c840ea0c2"
+  },
+  "schema": "private-relational-obligation-inverse-same-harness-preparation/v1",
+  "selection": {
+    "bytes": 446,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-obligation-inverse-private-72776lwj/two-controls-selector-DATA.json",
+    "sha256": "411b68b663362dd5a9244f6e904de8eeff87f2dac8658638ccd523756662a7ad"
+  },
+  "selectors": [
+    "test_relational_score_distinguishes_obligation_from_bare_assertion",
+    "test_relational_score_abstains_on_ordinary_past_tense_prose"
+  ]
+}

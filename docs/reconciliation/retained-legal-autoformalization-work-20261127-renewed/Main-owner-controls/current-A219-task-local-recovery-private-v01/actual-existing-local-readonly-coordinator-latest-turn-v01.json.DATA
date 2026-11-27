@@ -1,0 +1,33 @@
+{
+  "schema": "Main-existing-local-readonly-latest-turn-summary/v1",
+  "thread": "01a0f851-65f0-7c11-b737-07a24c5090ea",
+  "read_only": true,
+  "mutations": 0,
+  "response_bytes": 1561,
+  "turns": [
+    {
+      "id": "01a21b79-2f33-7d71-8ab9-2139e03aff33",
+      "status": "completed",
+      "keys": [
+        "id",
+        "rootTurnId",
+        "items",
+        "itemsView",
+        "status",
+        "error",
+        "startedAt",
+        "completedAt",
+        "durationMs"
+      ],
+      "item_count": 1,
+      "messages": [
+        {
+          "type": "agentMessage",
+          "phase": "final_answer",
+          "text": ""
+        }
+      ]
+    }
+  ],
+  "SDK_or_Source_custody_inferred": false
+}

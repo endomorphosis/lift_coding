@@ -1,0 +1,154 @@
+{
+  "Main_Source_or_SDK_or_Git_mutation_or_model_or_SQL_or_Native": false,
+  "Main_fresh_remote_query": false,
+  "Source_lease_and_resource_closed": true,
+  "actual_Source_READ_binding": {
+    "bytes": 1903,
+    "full9": [
+      66306,
+      72514768,
+      33024,
+      1,
+      1000,
+      1000,
+      1903,
+      1795743219273713846,
+      1795743219273713846
+    ],
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-isolated-ordinary19-D27-read-binding.json",
+    "sha256": "a52d8fd5999a5d9098598c517f1e058e6b7b77d6486e65bff98c52334fc920e5"
+  },
+  "actual_isolated_Source_WRITE_freeze": {
+    "bytes": 7762,
+    "full9": [
+      66306,
+      72512709,
+      33024,
+      1,
+      1000,
+      1000,
+      7762,
+      1795743194765354845,
+      1795743194765354845
+    ],
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-isolated-Phase8-metric-lineage-exact-two-local-freeze.json",
+    "sha256": "8611c18407c338ca365cae4c14737e9fb029332618ad81f8f70cab7508e9f309"
+  },
+  "actual_ordinary": {
+    "bytes": 5768,
+    "full9": [
+      66306,
+      72514809,
+      33204,
+      1,
+      1000,
+      1000,
+      5768,
+      1795743576366587166,
+      1795743576366587166
+    ],
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-Phase8-current-metric-lineage-ordinary19-closed.json",
+    "sha256": "5a4dbca147a2179a2540209d256550dffd4e1426cc7065e221037c2f680bac37"
+  },
+  "actual_ordinary_counts": {
+    "errors": 0,
+    "failures": 0,
+    "functions": 10,
+    "passed": 19,
+    "skipped": 0,
+    "tests": 19
+  },
+  "all_prior_costs_failures_and_scopes_retained": true,
+  "code_commit": "da3024e6ab94fecad9f258375dcc18b04902bfe2",
+  "code_parent": "8a902502e1a82d3da05b9c31a42db8c39ea8a9e1",
+  "code_publication": {
+    "bytes": 15701,
+    "full9": [
+      66306,
+      72514822,
+      33204,
+      1,
+      1000,
+      1000,
+      15701,
+      1795743601702701124,
+      1795743601702701124
+    ],
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-Phase8-metric-lineage-ordinary19-three-FF-publication.json",
+    "sha256": "3f0a1e4487ef85bada8904383ce45606b29df1f77b268eb4ee23ed175116bc98"
+  },
+  "code_tree": "07af7b655e1e64fefe695e2bd79a20f28c5d915e",
+  "coordination": "Root outgoing coordination message failed; Main recovered exact CLOSED artifacts through existing shared paths, without replaying any job or acquiring another owner.",
+  "first_full19_private_HF_collection_refusal_preserved": {
+    "bytes": 2886,
+    "not_reopened_by_Main": true,
+    "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/SEALED-metric-lineage-private-full19-collection-refusal.json",
+    "sha256": "f6bff267051a701fc91012c38953fd5adf540aedcbebc2f3ce1e62b8c1e81560",
+    "tests_executed": 0
+  },
+  "full_goal_complete": false,
+  "guide577_publication": {
+    "bytes": 2700,
+    "full9": [
+      66306,
+      72514889,
+      33204,
+      1,
+      1000,
+      1000,
+      2700,
+      1795743682252465312,
+      1795743682252465312
+    ],
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-Guide577-four-docs-three-FF-publication.json",
+    "sha256": "22ad68b457d362a51ab947499b84e868c52bff4396123d79756ec26a53dc572d"
+  },
+  "guide_commit": "254ba85016cb9dba03ac6aa96b8aa411aeeb465a",
+  "guide_sole_parent_is_code_commit": true,
+  "guide_tree": "d264b5126e3e47512faf6c6c536b0bfda8cd999b",
+  "immutable_local_commit_tree_and_blob_metadata_checked": true,
+  "independent_raw_JUnit_and_Code_review": {
+    "bytes": 5262,
+    "full9": [
+      66306,
+      72514935,
+      33024,
+      1,
+      1000,
+      1000,
+      5262,
+      1795744034073057696,
+      1795744034073057696
+    ],
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/independent-saved-ordinary19-JUnit-and-Code-readback-v01.json",
+    "sha256": "9b56ce8f6486f79533d8be531f83f5f644dcc1c7ee9b202e09134a029b2a8858"
+  },
+  "literal_membership_checked": true,
+  "next_pending_independent_unit": "Existing receipt-bounds2 proposal3aec and actual ordinary22, routed to same Root owner after19 closure; no new runner/controller/authority.",
+  "old_private_SAME11_evidence_preserved_not_added_to19": true,
+  "physical_IO_accounting_complete": false,
+  "reported_remote_heads_after577": {
+    "accelerate": "219ba3da0f62f772801d71715e22c506faa21126",
+    "datasets": "254ba85016cb9dba03ac6aa96b8aa411aeeb465a",
+    "hallucinate": "3d0fca0e84040e0c8911e66893780bc37fd465df",
+    "root": "d3b03b938cdc58d71478067fa4b8a461c1ce4d65"
+  },
+  "schema_caveat": "Inherited raw control labels bridge27/future-bound are preserved. Actual recorded19 collection/call/terminal rosters and Source->AST->Code->execution observations were independently reconciled.",
+  "scope": "Existing matcher/daemon recovery software; no statutory/model/Native/crypto qualification.",
+  "shared_WIP_and_old_receipts_preserved": true,
+  "status": "MAIN_METRIC_CACHE_RECOVERY_FINITE_UNIT_GENUINELY_CLOSED_PUBLISHED",
+  "two_post_roles": {
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_metric_lineage.py": {
+      "bytes": 20259,
+      "git_blob": "29f2ff8ba693812e4fea7a798f0da21ead56c1cf",
+      "mode": "100644",
+      "sha256": "fd476d9372ae92cd37b9e8f7f8e7415a5f383227fc6d533ab611ee7c4ed6274d"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py": {
+      "bytes": 13043,
+      "git_blob": "de3144b88fdc62f398fdb041e55449be22c6bcb8",
+      "mode": "100644",
+      "sha256": "8a1aa33563b0b60d69d34cec9d8e48c1e1f0f1b3d33ead3609e5ee075e8e84e4"
+    }
+  }
+}

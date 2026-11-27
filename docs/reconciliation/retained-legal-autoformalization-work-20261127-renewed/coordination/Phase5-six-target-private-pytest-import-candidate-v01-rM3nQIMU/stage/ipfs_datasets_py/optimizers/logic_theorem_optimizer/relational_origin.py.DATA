@@ -1,0 +1,705 @@
+"""Bind a closed vendor-origin pair to the existing reviewed training job inputs."""
+from dataclasses import asdict, dataclass
+import json
+
+from .relational_trial import ARMS, MAX_BATCHES, _artifact, _evidence_json, advance, batch_indices
+from .teacher_prefix import _commit, _need, _pin, _sha, _wire
+
+ORIGIN_SELECTION = "relational-vendor-pristine-origin/v1"
+ORIGIN_RECEIPT = "relational-vendor-pristine-numeric-origin/v1"
+PAIR_SCHEMA = "actual-pinned-Qwen25-relational-origin-pristine-pair/v1"
+ARTIFACTS = ("model_checkpoint", "tokenizer_artifact", "license_artifact", "recipe_artifact",
+             "model_config_artifact", "optimizer_checkpoint")
+PARENT_ASSETS = ARTIFACTS[:-1]
+INPUT_SCHEMA = "reviewed-decoder-digest-omitted-training-inputs/v1"
+INPUT_RECEIPT = "reviewed-decoder-digest-omitted-training-input-receipt/v1"
+INPUT_PROFILE = "complete-reviewed-mixed-digest-omitted-training-inputs/v1"
+ZERO = {"epochs_completed":0, "row_cursor":0, "optimizer_steps":0}
+
+
+@dataclass(frozen=True)
+class Origin:
+    study_sha256: str
+    job_seed: int
+    cpu_rng_seed: int
+    source_sha256: tuple[tuple[str, str], ...]
+    vendor_asset_qualification_sha256: str
+    import_worker_sha256: str
+
+
+def origin_commitment(value):
+    _need(type(value) is Origin and all(_pin(item) for item in (value.study_sha256,
+          value.vendor_asset_qualification_sha256, value.import_worker_sha256))
+          and type(value.job_seed) is type(value.cpu_rng_seed) is int
+          and 0 <= value.job_seed < 2**31 and 0 <= value.cpu_rng_seed < 2**31
+          and type(value.source_sha256) is tuple
+          and tuple(k for k,_ in value.source_sha256) == ("admission","consumer","inputs","splits","worker")
+          and all(_pin(digest) for _,digest in value.source_sha256), "closed exact fresh origin selection required")
+    return _commit((ORIGIN_SELECTION, asdict(value)))
+
+
+def origin_controls(value):
+    digest = origin_commitment(value)
+    key = "relational-origin:" + digest + ":" + str(value.job_seed) + ":"
+    return {"relational_origin":{"schema":ORIGIN_SELECTION,"study_sha256":value.study_sha256,
+                "selection_sha256":digest,"job_seed":value.job_seed,"cpu_rng_seed":value.cpu_rng_seed},
+            "experiment_id":key+"experiment","base_version_id":key+"base","checkpoint_lineage_id":key+"lineage"}
+
+
+@dataclass(frozen=True)
+class PairClose:
+    origin_selection_sha256: str
+    origin_receipt_sha256: str
+    prepared_pair_sha256: str
+    importer_sha256: str
+    execution_record_sha256: str
+    status: str
+
+
+def close_commitment(close):
+    _need(type(close) is PairClose and close.status == "normal_return_and_outputs_closed"
+          and all(_pin(item) for item in (close.origin_selection_sha256,close.origin_receipt_sha256,
+          close.prepared_pair_sha256,close.importer_sha256,close.execution_record_sha256)),
+          "terminal independent vendor-import custody evidence required")
+    return _commit(("relational-vendor-origin-owner-close/v1",asdict(close)))
+
+
+def bind_pair(selection, *, receipt_raw, pair_raw, source_observation_raw, owner_close, expected_owner_close_sha256, verify_owner_close):
+    controls = origin_controls(selection)
+    selected = controls["relational_origin"]["selection_sha256"]
+    _need(_pin(expected_owner_close_sha256) and close_commitment(owner_close) == expected_owner_close_sha256
+          and owner_close.origin_selection_sha256 == selected
+          and owner_close.importer_sha256 == selection.import_worker_sha256
+          and callable(verify_owner_close) and verify_owner_close(owner_close) is True,
+          "independent closed current vendor import required")
+    receipt = _evidence_json(receipt_raw,1024**2)
+    _need(type(pair_raw) is bytes and 0 < len(pair_raw) <= 2*1024**2
+          and owner_close.origin_receipt_sha256 == _sha(receipt_raw)
+          and owner_close.prepared_pair_sha256 == _sha(pair_raw), "closed pair and receipt bytes changed")
+    # The existing importer writes its diagnostic pair description as indented
+    # JSON. The independent close binds those exact raw bytes.
+    pair = json.loads(pair_raw)
+    pair_ref = receipt.get("prepared_pair_artifact")
+    _need(type(pair) is dict and _artifact(pair_ref) and pair_ref["bytes"] == len(pair_raw)
+          and pair_ref["sha256"] == _sha(pair_raw) and receipt.get("schema") == ORIGIN_RECEIPT
+          and receipt.get("selection") == controls["relational_origin"]
+          and all(receipt.get(key) == pair.get(key) == controls[key] for key in
+                  ("experiment_id","base_version_id","checkpoint_lineage_id")),
+          "numeric origin receipt or fresh lineage does not bind the selected pair")
+    _need(type(receipt.get("optimizer_steps")) is int and receipt["optimizer_steps"] == 0
+          and receipt.get("fresh_Adam_state_empty") is True and receipt.get("independent_reload_required") is True
+          and all(receipt.get(key) is False for key in ("numeric_parent_checkpoint_accepted","model_forward_executed",
+                  "training_performed","registry_opened","evaluation_performed"))
+          and pair.get("schema") == PAIR_SCHEMA and type(pair.get("optimizer_steps")) is int
+          and pair["optimizer_steps"] == 0 and pair.get("fresh_Adam_state_empty") is True
+          and pair.get("pretrained_declaration") is True and pair.get("all_stored_parameters_bit_equal") is True
+          and all(pair.get(key) is False for key in
+                  ("numeric_parent_checkpoint_accepted","model_forward_executed","training_performed","model_weights_downloaded"))
+          and _pin(pair.get("cpu_rng_sha256")) and pair["cpu_rng_sha256"] == receipt.get("cpu_rng_sha256")
+          and pair.get("expected_source_sha256") == dict(selection.source_sha256)
+          and _artifact(pair.get("qualified_asset_source"))
+          and pair["qualified_asset_source"]["sha256"] == selection.vendor_asset_qualification_sha256,
+          "fresh current source, stateless Adam, vendor provenance or no-parent evidence differs")
+    source_ref = receipt.get("source_observation_artifact")
+    _need(type(source_observation_raw) is bytes and 0 < len(source_observation_raw) <= 2*1024**2
+          and _artifact(source_ref) and source_ref["bytes"] == len(source_observation_raw)
+          and source_ref["sha256"] == _sha(source_observation_raw), "exact compiled-source observation required")
+    observed = json.loads(source_observation_raw)
+    compiled = observed.get("compiled_sources") if type(observed) is dict else None
+    _need(type(compiled) is dict
+          and observed.get("source_drift") == [] and observed.get("foreign_product_origins") == {}
+          and observed.get("audit_violations") == []
+          and [value for path,value in compiled.items()
+               if path.endswith("/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_worker.py")]
+              == [dict(selection.source_sha256)["worker"]],
+          "compiled worker identity or product module custody differs")
+    assets, config, identity = (pair.get(name) for name in ("artifacts","configuration_identity","expected_backend_identity"))
+    _need(type(assets) is dict and set(assets) == set(ARTIFACTS) and all(_artifact(value) for value in assets.values())
+          and len({value["path"] for value in assets.values()}) == len(ARTIFACTS)
+          and type(config) is dict and type(config.get("model_config")) is dict
+          and (config.get("architecture"),config["model_config"].get("model_type")) == ("causal_lm","qwen2")
+          and "cache_source_epoch_marker" not in config and type(identity) is dict
+          and identity.get("implementation_sha256") == dict(selection.source_sha256)["worker"]
+          and identity.get("pretrained") is True,
+          "unmarked Qwen2 pair, current backend or distinct loader artifacts differ")
+    return pair
+
+
+def verify_reload(worker, runtime, load, pair, execution_guard):
+    """Use the existing admitted loader's independent same-epoch reload."""
+    _need(callable(execution_guard) and type(runtime) is worker.ReviewedDecoderRuntime
+          and type(runtime.backend) is worker.TorchReviewedDecoderBackend and runtime.relational_trial is None
+          and type(load) is dict, "existing exact reviewed fresh runtime and execution guard required")
+    execution_guard()
+    backend = runtime.backend
+    artifacts = [pair["artifacts"][name] for name in ("recipe_artifact","model_config_artifact",
+                 "tokenizer_artifact","license_artifact","model_checkpoint","optimizer_checkpoint")]
+    _need(load.get("checkpoint_restored") is True and load.get("matched_pair") is True
+          and load.get("training_performed") is False and type(load.get("optimizer_steps")) is int
+          and load["optimizer_steps"] == 0 and load.get("artifacts") == artifacts
+          and load.get("loaded_backend_identity") == pair["expected_backend_identity"]
+          and load.get("producer_pins") == pair["expected_source_sha256"]
+          and "cache_source_epoch_migration" not in load and "cache_source_epoch_marker" not in load
+          and type(backend._optimizer_steps) is int and backend._optimizer_steps == 0
+          and backend.cache_source_epoch_marker is None and not backend.optimizer.state
+          and backend.identity() == pair["expected_backend_identity"]
+          and backend._configuration() == pair["configuration_identity"]
+          and _sha(backend._torch().get_rng_state().numpy().tobytes()) == pair["cpu_rng_sha256"],
+          "live loader pair, exact configuration, empty Adam, RNG or current source differs")
+
+
+def prepare_parent(selection, *, receipt_raw, pair_raw, source_observation_raw, owner_close, expected_owner_close_sha256, verify_owner_close,
+                   runtime, load, execution_guard, prepared, expected_prepared_sha256,
+                   batch_size, max_steps, max_source_tokens, max_target_tokens):
+    """Render the ordinary unmarked parent and exact co-batches without dispatch."""
+    from . import autoencoder_training_worker as worker
+
+    pair = bind_pair(selection,receipt_raw=receipt_raw,pair_raw=pair_raw,source_observation_raw=source_observation_raw,owner_close=owner_close,
+                     expected_owner_close_sha256=expected_owner_close_sha256,verify_owner_close=verify_owner_close)
+    verify_reload(worker,runtime,load,pair,execution_guard)
+    _need(type(batch_size) is int and 2 <= batch_size <= 32
+          and type(max_steps) is int and 1 <= max_steps <= MAX_BATCHES
+          and type(max_source_tokens) is int and 2 <= max_source_tokens <= 65536
+          and type(max_target_tokens) is int and 3 <= max_target_tokens <= 65536
+          and type(prepared) is dict and set(prepared) == {"schema","receipt","records","prepared_sha256"}
+          and _pin(expected_prepared_sha256) and prepared["prepared_sha256"] == expected_prepared_sha256
+          and _commit({key:prepared[key] for key in ("schema","receipt","records")}) == expected_prepared_sha256,
+          "closed exact existing TRAIN preparation or schedule differs")
+    payload = prepared["receipt"]
+    records = prepared["records"]
+    _need(prepared["schema"] == INPUT_SCHEMA and type(payload) is dict
+          and payload.get("schema") == INPUT_RECEIPT and payload.get("profile") == INPUT_PROFILE
+          and payload.get("admission_profile") == worker.REVIEWED_MIXED_ADMISSION_PROFILE
+          and payload.get("target_codec") == worker.REVIEWED_DIGEST_OMITTED_TARGET_CODEC
+          and type(records) is list and len(records) >= batch_size
+          and payload.get("record_count") == len(records)
+          and payload.get("training_record_ids") == [row["id"] for row in records]
+          and payload.get("prepared_records_sha256") == _commit(records)
+          and payload.get("max_source_tokens") == max_source_tokens and payload.get("max_target_tokens") == max_target_tokens
+          and payload.get("current_reviewed_training_permitted") is True
+          and type(payload.get("training_mask")) is int and type(payload.get("fixture_only")) is bool
+          and payload.get("production_training_eligible") is (not payload["fixture_only"])
+          and payload["training_mask"] == (0 if payload["fixture_only"] else 1)
+          and type(payload.get("tokenizer_contract")) is dict
+          and payload["tokenizer_contract"] == pair["configuration_identity"].get("tokenizer")
+          and payload.get("training_executed") is False
+          and payload.get("weights_updated") is False,
+          "current TRAIN preparation codec, tokenizer or roster differs")
+    expected_producers = {
+        "inputs":"training_cycle_inputs.py",
+        "consumer":"legal_span_consumer_binding.py",
+        "admission":"legal_reviewed_norm_admission_v3.py",
+        "splits":"legal_ir_eval_splits.py",
+    }
+    declared = payload.get("implementation")
+    _need(type(declared) is dict and all(type(path) is str for path in declared)
+          and all([value for path,value in declared.items() if path.endswith("/"+name)]
+                  == [dict(selection.source_sha256)[role]] for role,name in expected_producers.items()),
+          "current TRAIN preparation producer source differs")
+    copied = dict(ZERO)
+    schedule = []
+    for _ in range(max_steps):
+        batch = [records[i] for i in batch_indices(len(records),batch_size,selection.job_seed,copied)]
+        ids = tuple(row["id"] for row in batch)
+        _need(len(ids) >= 2 and len(set(ids)) == len(ids)
+              and all(type(key) is str and 0 < len(key) <= 512 for key in ids),
+              "selected seeded schedule reaches a singleton or ambiguous co-batch")
+        schedule.append({"row_ids":ids,"records_sha256":_commit(batch)})
+        advance(copied,len(batch),len(records))
+    artifacts = pair["artifacts"]
+    parent = {"schema":worker.REVIEWED_DIGEST_OMITTED_CHECKPOINT_SCHEMA,
+              "checkpoint_lineage_id":pair["checkpoint_lineage_id"],"base_version_id":pair["base_version_id"],
+              "backend_identity":pair["expected_backend_identity"],"assets":[artifacts[name] for name in PARENT_ASSETS],
+              "training_binding":None,"model_state":artifacts["model_checkpoint"],"optimizer_state":artifacts["optimizer_checkpoint"],
+              "progress":dict(ZERO),"batch_size":batch_size,"seed":selection.job_seed,"parent_checkpoint_sha256":None,
+              "producer_pins":pair["expected_source_sha256"],"token_budgets":{"max_source_tokens":max_source_tokens,
+                  "max_target_tokens":max_target_tokens,"tokenizer_contract":payload["tokenizer_contract"]},
+              "qualified":False,"promotion_performed":False}
+    parent_raw = _wire(parent)
+    verify_reload(worker,runtime,load,pair,execution_guard)
+    _need(prepared["prepared_sha256"] == expected_prepared_sha256
+          and _commit({key:prepared[key] for key in ("schema","receipt","records")}) == expected_prepared_sha256,
+          "selected TRAIN preparation changed during parent rendering")
+    return parent_raw, {"schema":"relational-pristine-parent-draft/v1","study_sha256":selection.study_sha256,
+             "origin_selection_sha256":origin_commitment(selection),"independent_origin_close_sha256":expected_owner_close_sha256,
+             "prepared_inputs_sha256":expected_prepared_sha256,"parent_sha256":_sha(parent_raw),"job_seed":selection.job_seed,
+             "cpu_rng_seed":selection.cpu_rng_seed,"reload_receipt_sha256":_commit(load),"arms":ARMS,
+             "scheduled_batches":tuple(schedule),"geometry_plan_authorization_required":True,"training_executed":False}
+
+
+def prepare_t5_parent(*, study_sha256, job_seed, pair, expected_pair_sha256, expected_owner_close_sha256,
+                      verify_pair_owner, runtime, load, execution_guard, prepared, expected_prepared_sha256,
+                      batch_size, max_steps, max_source_tokens, max_target_tokens):
+    """Bind an already reloaded, independently closed T5 pair to full-target TRAIN inputs."""
+    from . import autoencoder_training_worker as worker
+    from .relational_sources import SOURCE_PROFILE, T5_ORIGIN_SCHEMA, _matches_training_input
+
+    _need(all(_pin(value) for value in (study_sha256, expected_pair_sha256, expected_owner_close_sha256,
+                                       expected_prepared_sha256))
+          and type(job_seed) is int and 0 <= job_seed < 2**31
+          and type(batch_size) is int and 2 <= batch_size <= 32
+          and type(max_steps) is int and 1 <= max_steps <= MAX_BATCHES
+          and type(max_source_tokens) is int and 2 <= max_source_tokens <= 65536
+          and type(max_target_tokens) is int and 3 <= max_target_tokens <= 65536
+          and callable(verify_pair_owner) and callable(execution_guard)
+          and type(pair) is dict and set(pair) == {"artifacts", "configuration_identity",
+              "expected_backend_identity", "expected_source_sha256", "base_version_id",
+              "checkpoint_lineage_id", "cpu_rng_sha256"}
+          and _commit(pair) == expected_pair_sha256 and _pin(pair["cpu_rng_sha256"])
+          and all(type(pair[key]) is str and bool(pair[key].strip())
+                  for key in ("base_version_id", "checkpoint_lineage_id")),
+          "exact independently selected T5 pair and bounded pristine co-batch selection required")
+    assets, config = pair["artifacts"], pair["configuration_identity"]
+    identity, source_pins = pair["expected_backend_identity"], pair["expected_source_sha256"]
+    codec = "complete-reviewed-norm-json/v2"
+    _need(type(assets) is dict and set(assets) == set(ARTIFACTS)
+          and all(_artifact(item) for item in assets.values())
+          and len({item["path"] for item in assets.values()}) == len(ARTIFACTS)
+          and type(source_pins) is dict and set(source_pins) == worker.REVIEWED_DECODER_SOURCE_NAMES
+          and all(_pin(value) for value in source_pins.values())
+          and type(config) is dict and config.get("architecture") == "encoder_decoder"
+          and config.get("model_class") == "transformers.models.t5.modeling_t5.T5ForConditionalGeneration"
+          and type(config.get("model_config")) is dict and config["model_config"].get("model_type") == "t5"
+          and config.get("device") == "cpu" and config.get("target_codec") == codec
+          and config.get("model_profile") is None and "cache_source_epoch_marker" not in config
+          and type(identity) is dict and identity.get("implementation_sha256") == source_pins["worker"]
+          and identity.get("target_codec") == codec and identity.get("source_conditioned") is True
+          and type(identity.get("pretrained")) is bool and config.get("pretrained_declaration") is identity["pretrained"],
+          "unmarked local CPU T5, full-target backend and six distinct exact artifacts required")
+    _need(type(load) is dict and load.get("schema") == "reviewed-local-decoder-runtime-load/v2"
+          and load.get("admission_profile") == worker.REVIEWED_MIXED_ADMISSION_PROFILE
+          and (load.get("device"), load.get("dtype"), load.get("attention_implementation"))
+              == ("cpu", "float32", "eager")
+          and load.get("load_performed") is True and load.get("restore_performed") is True
+          and load.get("downloads_performed") is False
+          and not load.get("explicit_source_epoch_migration_performed"),
+          "fresh built-in T5 reload in the explicit V3 admission domain required")
+    load_sha256 = _commit(load)
+    _need(type(prepared) is dict and set(prepared) == {"schema", "receipt", "records", "prepared_sha256"},
+          "exact existing full-target TRAIN preparation required")
+
+    def check_selected():
+        _need(_commit(pair) == expected_pair_sha256 and _commit(load) == load_sha256
+              and set(prepared) == {"schema", "receipt", "records", "prepared_sha256"}
+              and prepared["prepared_sha256"] == expected_prepared_sha256
+              and _commit({key: prepared[key] for key in ("schema", "receipt", "records")}) == expected_prepared_sha256,
+              "selected T5 pair, reload or TRAIN preparation changed during parent rendering")
+
+    check_selected()
+    payload, records = prepared["receipt"], prepared["records"]
+    _need(type(payload) is dict and _matches_training_input(prepared["schema"], payload, T5_ORIGIN_SCHEMA)
+          and payload.get("source_profile") == SOURCE_PROFILE
+          and type(records) is list and len(records) >= batch_size
+          and all(type(row) is dict and type(row.get("id")) is str and 0 < len(row["id"]) <= 512 for row in records)
+          and len({row["id"] for row in records}) == len(records)
+          and payload.get("record_count") == len(records)
+          and payload.get("training_record_ids") == [row["id"] for row in records]
+          and payload.get("prepared_records_sha256") == _commit(records)
+          and payload.get("max_source_tokens") == max_source_tokens and payload.get("max_target_tokens") == max_target_tokens
+          and payload.get("current_reviewed_training_permitted") is True
+          and type(payload.get("training_mask")) is int and type(payload.get("fixture_only")) is bool
+          and payload.get("production_training_eligible") is (not payload["fixture_only"])
+          and payload["training_mask"] == (0 if payload["fixture_only"] else 1)
+          and (identity["pretrained"] or payload["fixture_only"])
+          and type(payload.get("tokenizer_contract")) is dict and payload["tokenizer_contract"] == config.get("tokenizer")
+          and payload.get("training_executed") is False and payload.get("weights_updated") is False,
+          "current full-target TRAIN roster, tokenizer, budgets or fictional scope differs")
+    expected_producers = {
+        "inputs": "training_cycle_inputs.py", "consumer": "legal_span_consumer_binding.py",
+        "admission": "legal_reviewed_norm_admission_v3.py", "splits": "legal_ir_eval_splits.py",
+    }
+    declared = payload.get("implementation")
+    _need(type(declared) is dict and all(type(path) is str for path in declared)
+          and all([value for path, value in declared.items() if path.endswith("/" + name)] == [source_pins[role]]
+                  for role, name in expected_producers.items()),
+          "current full-target TRAIN preparation producer source differs")
+    _need(verify_pair_owner(expected_pair_sha256, expected_owner_close_sha256) is True,
+          "independent T5 pair owner closure refused")
+    check_selected()
+    verify_reload(worker, runtime, load, pair, execution_guard)
+    check_selected()
+
+    progress = dict(ZERO)
+    schedule = []
+    for _ in range(max_steps):
+        batch = [records[index] for index in batch_indices(len(records), batch_size, job_seed, progress)]
+        _need(len(batch) >= 2, "selected seeded schedule reaches a singleton")
+        schedule.append({"row_ids": tuple(row["id"] for row in batch), "records_sha256": _commit(batch)})
+        advance(progress, len(batch), len(records))
+    parent = {
+        "schema": worker.REVIEWED_DECODER_CHECKPOINT_SCHEMA,
+        "checkpoint_lineage_id": pair["checkpoint_lineage_id"], "base_version_id": pair["base_version_id"],
+        "backend_identity": identity, "assets": [assets[name] for name in PARENT_ASSETS],
+        "training_binding": None, "model_state": assets["model_checkpoint"], "optimizer_state": assets["optimizer_checkpoint"],
+        "progress": dict(ZERO), "batch_size": batch_size, "seed": job_seed, "parent_checkpoint_sha256": None,
+        "producer_pins": source_pins, "token_budgets": {"max_source_tokens": max_source_tokens,
+            "max_target_tokens": max_target_tokens, "tokenizer_contract": payload["tokenizer_contract"]},
+        "qualified": False, "promotion_performed": False,
+    }
+    parent_raw = _wire(parent)
+    verify_reload(worker, runtime, load, pair, execution_guard)
+    check_selected()
+    return parent_raw, {
+        "schema": T5_ORIGIN_SCHEMA, "study_sha256": study_sha256,
+        "origin_selection_sha256": _commit((T5_ORIGIN_SCHEMA, study_sha256, job_seed, expected_pair_sha256)),
+        "pair_sha256": expected_pair_sha256, "independent_origin_close_sha256": expected_owner_close_sha256,
+        "prepared_inputs_sha256": expected_prepared_sha256, "parent_sha256": _sha(parent_raw), "job_seed": job_seed,
+        "cpu_rng_sha256": pair["cpu_rng_sha256"], "reload_receipt_sha256": load_sha256, "arms": ARMS,
+        "scheduled_batches": tuple(schedule), "geometry_plan_authorization_required": True, "training_executed": False,
+    }
+
+
+T5_VENDOR_OBSERVATION_SCHEMA = "reviewed-t5-origin-vendor-observation/v1"
+T5_VENDOR_PREFLIGHT_SCHEMA = "reviewed-t5-origin-vendor-metadata-preflight/v1"
+T5_LOADER_PROFILE = "builtin-t5-gpt2-float32/v1"
+T5_LOADER_STATE_BYTES = 512 * 1024**2
+T5_LOADER_TOKENIZER_BYTES = 32 * 1024**2
+T5_ASSET_OPTIONS = ("bos_token", "eos_token", "unk_token", "pad_token")
+T5_EMBEDDING_ROLES = ("encoder_input", "decoder_input", "output")
+T5_CONFIG_LIMITS = {"vocab_size": 1024**2, "d_model": 65536, "d_ff": 65536,
+                    "num_heads": 256, "d_kv": 65536, "num_layers": 128,
+                    "num_decoder_layers": 128, "relative_attention_num_buckets": 65536}
+
+
+def _selected_t5_asset_json(raw, reference):
+    """Bind small owner-supplied JSON bytes without opening the referenced file."""
+    _need(type(raw) is bytes and 0 < len(raw) <= 1024**2
+          and reference["bytes"] == len(raw) and reference["sha256"] == _sha(raw),
+          "exact selected T5 recipe and configuration bytes required")
+
+    def unique_fields(pairs):
+        fields = dict(pairs)
+        _need(len(fields) == len(pairs), "duplicate T5 JSON member")
+        return fields
+
+    def invalid_constant(value):
+        raise ValueError("nonfinite T5 metadata constant: " + value)
+
+    value = json.loads(raw, object_pairs_hook=unique_fields, parse_constant=invalid_constant)
+    _need(type(value) is dict, "T5 recipe and configuration must be JSON objects")
+    _wire(value)  # Reject nonfinite parsed numbers, including exponent overflow in unknown fields.
+    return value
+
+
+def _t5_origin_recipe_compatible(recipe):
+    from math import isfinite
+
+    def number(value):
+        try:
+            return type(value) in (int, float) and isfinite(value)
+        except OverflowError:
+            return False
+
+    if (set(recipe) != {"schema", "architecture", "model_type", "max_sequence_tokens",
+                       "pretrained", "gradient_clip", "optimizer", "tokenizer"}
+            or (recipe["schema"], recipe["architecture"], recipe["model_type"])
+               != ("reviewed-local-decoder-recipe/v1", "encoder_decoder", "t5")
+            or recipe["pretrained"] is not True or type(recipe["max_sequence_tokens"]) is not int
+            or not 3 <= recipe["max_sequence_tokens"] <= 65536 or not number(recipe["gradient_clip"])
+            or recipe["gradient_clip"] <= 0):
+        return False
+    adam, tokenizer = recipe["optimizer"], recipe["tokenizer"]
+    return (type(adam) is dict and set(adam) == {"learning_rate", "betas", "eps", "weight_decay"}
+            and type(adam["betas"]) is list and len(adam["betas"]) == 2
+            and all(number(value) and 0 <= value < 1 for value in adam["betas"])
+            and all(number(adam[name]) and adam[name] > 0 for name in ("learning_rate", "eps"))
+            and number(adam["weight_decay"]) and adam["weight_decay"] >= 0
+            and type(tokenizer) is dict and set(tokenizer) == {*T5_ASSET_OPTIONS,
+                   "model_max_length", "clean_up_tokenization_spaces"}
+            and tokenizer["clean_up_tokenization_spaces"] is False
+            and type(tokenizer["model_max_length"]) is int
+            and tokenizer["model_max_length"] == recipe["max_sequence_tokens"]
+            and all(type(tokenizer[name]) is str and 0 < len(tokenizer[name]) <= 512
+                    for name in T5_ASSET_OPTIONS[:3])
+            and (tokenizer["pad_token"] is None or type(tokenizer["pad_token"]) is str
+                 and 0 < len(tokenizer["pad_token"]) <= 512)
+            and tokenizer["bos_token"] != tokenizer["eos_token"])
+
+
+def _t5_origin_fp32_estimate(effective):
+    # Same integer sizing formula as the built-in T5 loader before model construction.
+    vocab, width, ff = (effective[key] for key in ("vocab_size", "d_model", "d_ff"))
+    heads, kv = (effective[key] for key in ("num_heads", "d_kv"))
+    encoder, decoder, buckets = (effective[key] for key in
+                                 ("num_layers", "num_decoder_layers", "relative_attention_num_buckets"))
+    return 4 * (4 * vocab * width + encoder * (4 * width * heads * kv + 3 * width * ff + 3 * width)
+                + decoder * (8 * width * heads * kv + 3 * width * ff + 4 * width)
+                + 2 * buckets * heads + 2 * width)
+
+
+def _t5_origin_tokenizer_observation(observed, reference):
+    _need(type(observed) is dict and set(observed) == {"artifact_sha256", "native_vocab_size", "frontend_vocab_size",
+            "native_vocab_sha256", "frontend_vocab_sha256", "frontend_pipeline_sha256", "encode_special_tokens",
+            "padding", "truncation", "roles"}
+          and observed["artifact_sha256"] == reference["sha256"]
+          and all(_pin(observed[key]) for key in ("native_vocab_sha256", "frontend_vocab_sha256", "frontend_pipeline_sha256"))
+          and all(type(observed[key]) is int and observed[key] >= 0 for key in ("native_vocab_size", "frontend_vocab_size"))
+          and type(observed["encode_special_tokens"]) is bool,
+          "loader tokenizer observation differs from the exact selected asset")
+    roles = observed["roles"]
+    _need(type(roles) is dict and set(roles) == set(T5_ASSET_OPTIONS)
+          and all(type(role) is list and len(role) == 3
+                  and (role[0] is None or type(role[0]) is str)
+                  and all(value is None or type(value) is int for value in role[1:]) for role in roles.values()),
+          "exact native and frontend transport role observations required")
+    return roles
+
+
+def _t5_origin_embedding_observation(observed, assets):
+    shards = [item["sha256"] for item in assets["vendor_weight_artifacts"]]
+    _need(type(observed) is dict and set(observed) == {"receipt_sha256", "shards", "embedding_roles"}
+          and observed["receipt_sha256"] == assets["weight_header_receipt"]["sha256"]
+          and observed["shards"] == shards, "weight headers differ from the selected vendor stores")
+    roles = observed["embedding_roles"]
+    _need(type(roles) is dict and set(roles) == set(T5_EMBEDDING_ROLES)
+          and all(type(entry) is dict and set(entry) == {"file_sha256", "tensor", "shape", "dtype"}
+                  and entry["file_sha256"] in shards and type(entry["tensor"]) is str and bool(entry["tensor"])
+                  and type(entry["shape"]) is list and all(type(dim) is int and dim > 0 for dim in entry["shape"])
+                  and type(entry["dtype"]) is str for entry in roles.values()),
+          "exact header descriptors of the three effective T5 embedding roles required")
+    return roles
+
+
+def preflight_t5_origin_assets(*, observation_raw, expected_observation_sha256, expected_owner_close_sha256,
+        expected_loader_sha256, recipe_raw, config_raw, max_model_bytes, verify_asset_owner):
+    """Screen one already observed vendor bundle before any model or tokenizer load.
+
+    The existing asset owner authenticates the revision, canonical observation
+    and its metadata claims. This preflight reads only supplied JSON bytes.
+    Header geometry cannot verify tensor values or native alias restoration.
+    """
+    _need(type(observation_raw) is bytes and 0 < len(observation_raw) <= 2*1024**2 and _pin(expected_observation_sha256)
+          and _sha(observation_raw) == expected_observation_sha256 and _pin(expected_owner_close_sha256)
+          and _pin(expected_loader_sha256) and type(max_model_bytes) is int and max_model_bytes > 0
+          and callable(verify_asset_owner), "exact owner-selected T5 asset observation and model byte limit required")
+    observed = _evidence_json(observation_raw, 2*1024**2)
+    _need(set(observed) == {"schema", "evidence_kind", "repository", "revision", "owner_close_sha256",
+                                  "loader_sha256", "assets", "effective_configuration", "tokenizer", "weight_headers"}
+          and observed["schema"] == T5_VENDOR_OBSERVATION_SCHEMA
+          and observed["evidence_kind"] in ("native_vendor", "fictional_fixture")
+          and all(type(observed[key]) is str and bool(observed[key].strip()) for key in ("repository", "revision"))
+          and observed["owner_close_sha256"] == expected_owner_close_sha256
+          and observed["loader_sha256"] == expected_loader_sha256,
+          "selected vendor revision, loader or original asset closure differs")
+    assets = observed["assets"]
+    keys = {"recipe_artifact", "model_config_artifact", "tokenizer_artifact", "license_artifact", "weight_header_receipt"}
+    _need(type(assets) is dict and set(assets) == {*keys, "vendor_weight_artifacts"}
+          and all(_artifact(assets[key]) for key in keys)
+          and type(assets["vendor_weight_artifacts"]) is list and bool(assets["vendor_weight_artifacts"])
+          and all(_artifact(ref) for ref in assets["vendor_weight_artifacts"]),
+          "selected T5 asset roles and original weight header references required")
+    refs = [assets[key] for key in keys] + assets["vendor_weight_artifacts"]
+    _need(len({ref["path"] for ref in refs}) == len(refs)
+          and len({ref["sha256"] for ref in assets["vendor_weight_artifacts"]}) == len(assets["vendor_weight_artifacts"]),
+          "ambiguous original T5 asset paths or shard identities")
+    _need(verify_asset_owner(expected_observation_sha256, expected_owner_close_sha256, expected_loader_sha256) is True,
+          "independent owner refused the exact T5 asset observation")
+    recipe = _selected_t5_asset_json(recipe_raw, assets["recipe_artifact"])
+    raw_config = _selected_t5_asset_json(config_raw, assets["model_config_artifact"])
+    effective = observed["effective_configuration"]
+    config_roles = ("decoder_start_token_id", "bos_token_id", "eos_token_id", "pad_token_id")
+    fields = {*T5_CONFIG_LIMITS, "model_type", "is_encoder_decoder", "tie_word_embeddings", *config_roles}
+    _need(type(effective) is dict and set(effective) == fields
+          and type(effective["model_type"]) is str
+          and all(type(effective[key]) is bool for key in ("is_encoder_decoder", "tie_word_embeddings"))
+          and all(type(effective[key]) is int and 1 <= effective[key] <= limit for key, limit in T5_CONFIG_LIMITS.items())
+          and all(effective[key] is None or type(effective[key]) is int for key in config_roles)
+          and all(key not in raw_config or _wire(raw_config[key]) == _wire(effective[key])
+                  or key == "num_decoder_layers" and raw_config[key] is None and effective[key] == effective["num_layers"]
+                  for key in fields), "effective T5 configuration disagrees with selected vendor declarations")
+    tokenizer = observed["tokenizer"]
+    roles = _t5_origin_tokenizer_observation(tokenizer, assets["tokenizer_artifact"])
+    embeddings = _t5_origin_embedding_observation(observed["weight_headers"], assets)
+
+    blockers = []
+    if raw_config.get("model_type") != "t5" or effective["model_type"] != "t5" or not effective["is_encoder_decoder"]:
+        blockers.append("model_not_builtin_t5")
+    if (any(raw_config.get(key) not in (None, {}, [], "", False) for key in
+            ("auto_map", "_auto_class", "trust_remote_code", "custom_pipelines", "quantization_config"))
+            or any(value not in (None, "eager") for key, value in raw_config.items()
+                   if any(token in key for token in ("attn_implementation", "attention_implementation", "experts_implementation")))
+            or any(value not in (None, {}, [], "", False) for key, value in raw_config.items() if "kernel" in key)):
+        blockers.append("unsupported_config_feature")
+    recipe_compatible = _t5_origin_recipe_compatible(recipe)
+    limit = raw_config.get("max_position_embeddings", raw_config.get("n_positions"))
+    if not recipe_compatible or type(limit) is int and recipe["max_sequence_tokens"] > limit:
+        blockers.append("invalid_t5_recipe")
+    vocab = effective["vocab_size"]
+    if not 3 <= tokenizer["native_vocab_size"] == vocab:
+        blockers.append("model_and_tokenizer_vocabulary_differ")
+    if (tokenizer["frontend_vocab_size"] != tokenizer["native_vocab_size"]
+            or tokenizer["frontend_vocab_sha256"] != tokenizer["native_vocab_sha256"]):
+        blockers.append("tokenizer_vocabulary_changed")
+    if tokenizer["encode_special_tokens"] or tokenizer["padding"] is not None or tokenizer["truncation"] is not None:
+        blockers.append("unsupported_tokenizer_pipeline")
+    if (not recipe_compatible or any(token != recipe["tokenizer"][name]
+            or (token is None and (native_id is not None or frontend_id is not None))
+            or (token is not None and (native_id is None or frontend_id != native_id
+                                      or not 0 <= native_id < tokenizer["native_vocab_size"]))
+            for name, (token, native_id, frontend_id) in roles.items())
+            or roles["bos_token"][2] == roles["eos_token"][2]):
+        blockers.append("transport_roles_unavailable_or_changed")
+    expected_shape = [vocab, effective["d_model"]]
+    if any(entry["shape"] != expected_shape or entry["dtype"] not in {"F32", "F16", "BF16"} for entry in embeddings.values()):
+        blockers.append("embedding_shape_or_dtype_differs")
+    slots = {role: (entry["file_sha256"], entry["tensor"]) for role, entry in embeddings.items()}
+    _need(all(slots[left] != slots[right] or embeddings[left] == embeddings[right]
+              for left in slots for right in slots), "conflicting observations for the same stored tensor")
+    if not effective["tie_word_embeddings"] and slots["output"] in (slots["encoder_input"], slots["decoder_input"]):
+        blockers.append("untied_output_uses_input_header")
+    estimate = _t5_origin_fp32_estimate(effective)
+    if max_model_bytes > T5_LOADER_STATE_BYTES:
+        blockers.append("loader_model_byte_limit_unsupported")
+    if (assets["tokenizer_artifact"]["bytes"] > T5_LOADER_TOKENIZER_BYTES
+            or assets["license_artifact"]["bytes"] > T5_LOADER_STATE_BYTES):
+        blockers.append("loader_asset_byte_limits_exceeded")
+    if estimate > max_model_bytes:
+        blockers.append("fp32_model_estimate_exceeds_limit")
+    bos = roles["bos_token"][2]
+    start = effective["decoder_start_token_id"]
+    return {"schema": T5_VENDOR_PREFLIGHT_SCHEMA, "evidence_kind": observed["evidence_kind"],
+            "observation_sha256": expected_observation_sha256, "owner_close_sha256": expected_owner_close_sha256,
+            "loader_sha256": expected_loader_sha256, "loader_profile": T5_LOADER_PROFILE,
+            "repository": observed["repository"], "revision": observed["revision"],
+            "metadata_compatible": not blockers, "blockers": tuple(blockers),
+            "estimated_fp32_bytes": estimate, "model_byte_limit": max_model_bytes,
+            "tokenizer_artifact": assets["tokenizer_artifact"], "embedding_roles": embeddings,
+            "transport_roles": roles, "vendor_configured_decoder_start": start,
+            "decoder_start_matches_transport_bos": None if start is None or bos is None else start == bos,
+            "configured_output_weight_tying": effective["tie_word_embeddings"],
+            "native_weight_payload_opened": False, "runtime_tokenizer_opened": False,
+            "exact_legal_text_roundtrip_required": True, "independent_origin_and_reload_required": True}
+
+
+T5_VENDOR_SELECTION = "reviewed-t5-vendor-numeric-origin-selection/v1"
+T5_VENDOR_NUMERIC_RECEIPT = "reviewed-t5-vendor-numeric-origin/v1"
+T5_VENDOR_ORIGIN_EVIDENCE = "reviewed-t5-vendor-parent-evidence/v1"
+
+
+@dataclass(frozen=True)
+class T5VendorAssets:
+    """Exact metadata inputs already selected by the vendor asset owner."""
+
+    observation_raw: bytes
+    observation_sha256: str
+    asset_owner_close_sha256: str
+    loader_sha256: str
+    recipe_raw: bytes
+    config_raw: bytes
+    max_model_bytes: int
+
+
+def t5_vendor_origin_selection(study_sha256, job_seed, preflight_sha256, importer_sha256):
+    """Commit the selected numeric import before it produces a pair."""
+    _need(all(_pin(value) for value in (study_sha256, preflight_sha256, importer_sha256))
+          and type(job_seed) is int and 0 <= job_seed < 2**31,
+          "exact T5 vendor preflight, study seed and selected importer required")
+    return _commit((T5_VENDOR_SELECTION, study_sha256, job_seed, preflight_sha256, importer_sha256))
+
+
+def prepare_vendor_t5_parent(*, vendor_assets, importer_sha256, numeric_receipt_raw, owner_close,
+        expected_owner_close_sha256, expected_reload_sha256, verify_asset_owner, verify_numeric_owner_close,
+        study_sha256, job_seed, pair, expected_pair_sha256, runtime, load, execution_guard, prepared,
+        expected_prepared_sha256, batch_size, max_steps, max_source_tokens, max_target_tokens):
+    """Use the existing T5 parent renderer with independently closed vendor evidence.
+
+    The numeric owner retains exact paired artifact bytes and proves vendor tensor
+    mapping, value preservation and terminal custody. The asset observation's
+    frontend_pipeline_sha256 uses the existing reviewed tokenizer contract's
+    complete pipeline hash. This function replays metadata and reload bindings
+    without opening vendor payloads or dispatching.
+    """
+    _need(type(vendor_assets) is T5VendorAssets and _pin(importer_sha256)
+          and callable(verify_numeric_owner_close) and _pin(expected_owner_close_sha256)
+          and close_commitment(owner_close) == expected_owner_close_sha256
+          and all(_pin(pin) for pin in (expected_pair_sha256, expected_reload_sha256, expected_prepared_sha256))
+          and type(pair) is dict and type(load) is dict,
+          "exact independent T5 numeric custody required")
+    metadata = {
+        "observation_raw": vendor_assets.observation_raw,
+        "expected_observation_sha256": vendor_assets.observation_sha256,
+        "expected_owner_close_sha256": vendor_assets.asset_owner_close_sha256,
+        "expected_loader_sha256": vendor_assets.loader_sha256,
+        "recipe_raw": vendor_assets.recipe_raw, "config_raw": vendor_assets.config_raw,
+        "max_model_bytes": vendor_assets.max_model_bytes, "verify_asset_owner": verify_asset_owner,
+    }
+
+    def check_bound():
+        _need(_commit(pair) == expected_pair_sha256 and _commit(load) == expected_reload_sha256
+              and close_commitment(owner_close) == expected_owner_close_sha256,
+              "selected T5 pair, reload or terminal close changed")
+        _need(type(prepared) is dict and set(prepared) == {"schema", "receipt", "records", "prepared_sha256"}
+              and type(prepared["receipt"]) is dict and prepared["receipt"].get("fixture_only") is False
+              and prepared["prepared_sha256"] == expected_prepared_sha256
+              and _commit({key: prepared[key] for key in ("schema", "receipt", "records")}) == expected_prepared_sha256,
+              "selected non-fixture TRAIN preparation required throughout T5 vendor binding")
+
+    check_bound()
+    preflight = preflight_t5_origin_assets(**metadata)
+    check_bound()
+    observed = _evidence_json(metadata["observation_raw"], 2*1024**2)
+    _need(preflight["evidence_kind"] == "native_vendor" and preflight["metadata_compatible"] is True
+          and preflight["decoder_start_matches_transport_bos"] is True
+          and observed["effective_configuration"]["eos_token_id"] == preflight["transport_roles"]["eos_token"][2],
+          "native T5 metadata and configured transport roles are incompatible")
+
+    loaded_assets = pair.get("artifacts")
+    sources = pair.get("expected_source_sha256")
+    selected_assets = observed["assets"]
+    configuration = pair.get("configuration_identity")
+    model_config = configuration.get("model_config") if type(configuration) is dict else None
+    tokenizer = configuration.get("tokenizer") if type(configuration) is dict else None
+    _need(type(model_config) is dict
+          and all(key in model_config and _wire(model_config[key]) == _wire(value)
+                  for key, value in observed["effective_configuration"].items())
+          and type(tokenizer) is dict and tokenizer.get("pipeline_kind") == "huggingface_fast"
+          and tokenizer.get("pipeline_sha256") == observed["tokenizer"]["frontend_pipeline_sha256"]
+          and _wire((tokenizer.get("vocab_size"), tokenizer.get("bos_token_id"), tokenizer.get("eos_token_id")))
+              == _wire((observed["tokenizer"]["native_vocab_size"], preflight["transport_roles"]["bos_token"][2],
+                        preflight["transport_roles"]["eos_token"][2])),
+          "reloaded T5 configuration or tokenizer transport differs from vendor observation")
+    _need(type(loaded_assets) is dict and set(loaded_assets) == set(ARTIFACTS)
+          and all(_artifact(ref) for ref in loaded_assets.values())
+          and all((loaded_assets[key]["sha256"], loaded_assets[key]["bytes"])
+                  == (selected_assets[key]["sha256"], selected_assets[key]["bytes"])
+                  for key in ("recipe_artifact", "model_config_artifact", "tokenizer_artifact", "license_artifact"))
+          and type(sources) is dict and sources.get("worker") == preflight["loader_sha256"]
+          and load.get("max_model_bytes") == metadata["max_model_bytes"],
+          "reloaded T5 asset content, loader or selected model byte budget differs from vendor preflight")
+
+    preflight_sha256 = _commit(preflight)
+    selection = t5_vendor_origin_selection(study_sha256, job_seed, preflight_sha256, importer_sha256)
+    required = {
+        "schema": T5_VENDOR_NUMERIC_RECEIPT, "selection_sha256": selection,
+        "prepared_pair_sha256": expected_pair_sha256, "optimizer_steps": 0,
+        "fresh_Adam_state_empty": True, "vendor_tensor_mapping_verified": True,
+        "vendor_tensor_values_preserved": True, "independent_reload_required": True,
+        "model_forward_executed": False, "training_performed": False, "model_weights_downloaded": False,
+    }
+    _need(type(numeric_receipt_raw) is bytes and numeric_receipt_raw == _wire(required)
+          and owner_close.origin_selection_sha256 == selection
+          and owner_close.importer_sha256 == importer_sha256
+          and owner_close.origin_receipt_sha256 == _sha(numeric_receipt_raw)
+          and owner_close.prepared_pair_sha256 == expected_pair_sha256,
+          "numeric T5 receipt and terminal close must bind this preflight and exact step-zero pair")
+    evidence = _commit((T5_VENDOR_ORIGIN_EVIDENCE, selection, preflight_sha256,
+                        _sha(numeric_receipt_raw), expected_owner_close_sha256,
+                        expected_pair_sha256, expected_reload_sha256))
+
+    def verify_pair(pair_sha256, close_sha256):
+        if (pair_sha256, close_sha256) != (expected_pair_sha256, expected_owner_close_sha256):
+            return False
+        check_bound()
+        approved = verify_numeric_owner_close(owner_close)
+        check_bound()
+        return approved is True
+
+    parent, proof = prepare_t5_parent(
+        study_sha256=study_sha256, job_seed=job_seed, pair=pair, expected_pair_sha256=expected_pair_sha256,
+        expected_owner_close_sha256=expected_owner_close_sha256, verify_pair_owner=verify_pair,
+        runtime=runtime, load=load, execution_guard=execution_guard, prepared=prepared,
+        expected_prepared_sha256=expected_prepared_sha256, batch_size=batch_size, max_steps=max_steps,
+        max_source_tokens=max_source_tokens, max_target_tokens=max_target_tokens,
+    )
+    check_bound()
+    return parent, {**proof, "native_vendor_origin_sha256": evidence}

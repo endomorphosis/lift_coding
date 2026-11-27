@@ -1,0 +1,68 @@
+"""Copy the bounded static import closure of the existing inventory owners."""
+from pathlib import Path
+import ast
+import hashlib
+import importlib.util
+import json
+import os
+import subprocess
+
+d=Path(__file__).resolve().parent
+repo=d.parents[2]/'repositories/datasets'
+base='bda9f1fb146722e8b116cb0503880fb22e5291a4'
+env=dict(os.environ,GIT_NO_LAZY_FETCH='1',GIT_OPTIONAL_LOCKS='0')
+def git(*args):
+    return subprocess.check_output(['git','-C',str(repo),'-c','core.fsmonitor=false','-c','core.preloadIndex=false',*args],env=env)
+
+modules={}
+for row in git('ls-tree','-r','-z',base,'--','ipfs_datasets_py').split(b'\0'):
+    if not row:
+        continue
+    header,path=row.decode().split('\t')
+    if path.endswith('.py'):
+        module=path.removesuffix('.py').replace('/','.')
+        if not module.endswith('.__init__'):
+            modules[module]=(path,header.split()[2])
+queue=[
+    'ipfs_datasets_py.logic.parsers.legacy_modal',
+    'ipfs_datasets_py.logic.TDFOL.tdfol_core',
+    'ipfs_datasets_py.logic.intent_ir.formalize.modal_projections',
+    'ipfs_datasets_py.logic.autoformal.legal_family_routes',
+    'ipfs_datasets_py.logic.autoformal.corpus_contracts',
+]
+def imports(tree,name):
+    loaded=[]
+    for node in tree.body:
+        if isinstance(node,ast.ImportFrom):
+            spec='.'*node.level+(node.module or '')
+            full=importlib.util.resolve_name(spec,name.rsplit('.',1)[0]) if node.level else spec
+            if full in modules:
+                loaded.append(full)
+            else:
+                loaded.extend(full+'.'+alias.name for alias in node.names if full+'.'+alias.name in modules)
+        elif isinstance(node,ast.Import):
+            loaded.extend(alias.name for alias in node.names if alias.name in modules)
+    return loaded
+refs={};size=0
+while queue:
+    name=queue.pop()
+    if name in refs:
+        continue
+    rel,oid=modules[name]
+    raw=git('cat-file','blob',oid)
+    assert hashlib.sha1(f'blob {len(raw)}\0'.encode()+raw).hexdigest()==oid
+    size+=len(raw)
+    assert len(refs)<64 and size<=8*1024**2
+    path=d/'projection'/rel
+    if not path.exists():
+        path.parent.mkdir(parents=True,exist_ok=True)
+        with os.fdopen(os.open(path,os.O_CREAT|os.O_EXCL|os.O_WRONLY|os.O_NOFOLLOW,0o400),'wb') as f:
+            f.write(raw); f.flush(); os.fsync(f.fileno())
+    assert path.read_bytes()==raw
+    refs[name]=dict(path=str(path),relative_path=rel,bytes=len(raw),git_blob=oid,sha256=hashlib.sha256(raw).hexdigest())
+    queue.extend(imports(ast.parse(raw),name))
+target=d/'retention-extra-source-pins.json'
+data=(json.dumps(dict(base=base,roles=refs,bytes=size),indent=2,sort_keys=True)+'\n').encode()
+with target.open('xb') as f:
+    f.write(data)
+print(len(refs),size,len(data),hashlib.sha256(data).hexdigest())

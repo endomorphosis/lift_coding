@@ -1,0 +1,354 @@
+{
+  "bindings": {
+    "declaration": "_ipfs_expected_obligation_530efa23a7780e9fd1ae1067ff8e04d60d3d906d7dd76fe62470f4bf1931038a",
+    "expected_source_path": "Main.lean",
+    "expected_source_line": 7
+  },
+  "bound_report_stdout": "{\"severity\": \"information\", \"data\": \"'_ipfs_expected_obligation_530efa23a7780e9fd1ae1067ff8e04d60d3d906d7dd76fe62470f4bf1931038a' does not depend on any axioms\", \"fileName\": \"Main.lean\", \"pos\": {\"line\": 7, \"column\": 0}}\n",
+  "observations": [
+    {
+      "stream": "stdout",
+      "name": "clean",
+      "extra_record": "",
+      "accepted": true,
+      "report_returned": true,
+      "diagnostics": []
+    },
+    {
+      "stream": "stdout",
+      "name": "warning",
+      "extra_record": {
+        "severity": "warning",
+        "data": "warning quoting error: text"
+      },
+      "accepted": true,
+      "report_returned": true,
+      "diagnostics": []
+    },
+    {
+      "stream": "stdout",
+      "name": "nested_metadata",
+      "extra_record": {
+        "severity": "information",
+        "data": "note",
+        "extra": {
+          "items": [
+            [
+              1,
+              2
+            ]
+          ]
+        }
+      },
+      "accepted": true,
+      "report_returned": true,
+      "diagnostics": []
+    },
+    {
+      "stream": "stdout",
+      "name": "error",
+      "extra_record": {
+        "severity": "error",
+        "data": "fictional unsolved goals"
+      },
+      "accepted": false,
+      "report_returned": false,
+      "diagnostics": [
+        "lean reported error diagnostics: fictional unsolved goals"
+      ]
+    },
+    {
+      "stream": "stdout",
+      "name": "invalid_json",
+      "extra_record": "{\"severity\":\"error\",\"data\":\"unfinished\"",
+      "accepted": false,
+      "report_returned": false,
+      "diagnostics": [
+        "lean reported error diagnostics: malformed Lean JSON diagnostic on stdout"
+      ]
+    },
+    {
+      "stream": "stdout",
+      "name": "nonobject",
+      "extra_record": [
+        {
+          "severity": "error",
+          "data": "fictional unsolved goals"
+        }
+      ],
+      "accepted": false,
+      "report_returned": false,
+      "diagnostics": [
+        "lean reported error diagnostics: non-object Lean JSON diagnostic on stdout"
+      ]
+    },
+    {
+      "stream": "stdout",
+      "name": "severity_list",
+      "extra_record": {
+        "severity": [
+          "error"
+        ],
+        "data": "fictional unsolved goals"
+      },
+      "accepted": true,
+      "report_returned": true,
+      "diagnostics": []
+    },
+    {
+      "stream": "stdout",
+      "name": "severity_object",
+      "extra_record": {
+        "severity": {
+          "value": "error"
+        },
+        "data": "fictional unsolved goals"
+      },
+      "accepted": true,
+      "report_returned": true,
+      "diagnostics": []
+    },
+    {
+      "stream": "stdout",
+      "name": "severity_missing",
+      "extra_record": {
+        "data": "fictional unsolved goals"
+      },
+      "accepted": true,
+      "report_returned": true,
+      "diagnostics": []
+    },
+    {
+      "stream": "stdout",
+      "name": "severity_unrecognized",
+      "extra_record": {
+        "severity": "fatal",
+        "data": "fictional unsolved goals"
+      },
+      "accepted": true,
+      "report_returned": true,
+      "diagnostics": []
+    },
+    {
+      "stream": "stdout",
+      "name": "warning_data_object",
+      "extra_record": {
+        "severity": "warning",
+        "data": {
+          "text": "fictional unsolved goals"
+        }
+      },
+      "accepted": true,
+      "report_returned": true,
+      "diagnostics": []
+    },
+    {
+      "stream": "stdout",
+      "name": "warning_data_missing",
+      "extra_record": {
+        "severity": "warning"
+      },
+      "accepted": true,
+      "report_returned": true,
+      "diagnostics": []
+    },
+    {
+      "stream": "stdout",
+      "name": "error_data_object",
+      "extra_record": {
+        "severity": "error",
+        "data": {
+          "text": "fictional unsolved goals"
+        }
+      },
+      "accepted": false,
+      "report_returned": false,
+      "diagnostics": [
+        "lean reported error diagnostics: {'text': 'fictional unsolved goals'}"
+      ]
+    },
+    {
+      "stream": "stdout",
+      "name": "opaque_logging_object",
+      "extra_record": {
+        "kind": "fictional_trace",
+        "message": "ordinary trace"
+      },
+      "accepted": true,
+      "report_returned": true,
+      "diagnostics": []
+    },
+    {
+      "stream": "stderr",
+      "name": "clean",
+      "extra_record": "",
+      "accepted": true,
+      "report_returned": true,
+      "diagnostics": []
+    },
+    {
+      "stream": "stderr",
+      "name": "warning",
+      "extra_record": {
+        "severity": "warning",
+        "data": "warning quoting error: text"
+      },
+      "accepted": true,
+      "report_returned": true,
+      "diagnostics": []
+    },
+    {
+      "stream": "stderr",
+      "name": "nested_metadata",
+      "extra_record": {
+        "severity": "information",
+        "data": "note",
+        "extra": {
+          "items": [
+            [
+              1,
+              2
+            ]
+          ]
+        }
+      },
+      "accepted": true,
+      "report_returned": true,
+      "diagnostics": []
+    },
+    {
+      "stream": "stderr",
+      "name": "error",
+      "extra_record": {
+        "severity": "error",
+        "data": "fictional unsolved goals"
+      },
+      "accepted": false,
+      "report_returned": false,
+      "diagnostics": [
+        "lean reported error diagnostics: fictional unsolved goals"
+      ]
+    },
+    {
+      "stream": "stderr",
+      "name": "invalid_json",
+      "extra_record": "{\"severity\":\"error\",\"data\":\"unfinished\"",
+      "accepted": false,
+      "report_returned": false,
+      "diagnostics": [
+        "lean reported error diagnostics: malformed Lean JSON diagnostic on stderr"
+      ]
+    },
+    {
+      "stream": "stderr",
+      "name": "nonobject",
+      "extra_record": [
+        {
+          "severity": "error",
+          "data": "fictional unsolved goals"
+        }
+      ],
+      "accepted": false,
+      "report_returned": false,
+      "diagnostics": [
+        "lean reported error diagnostics: non-object Lean JSON diagnostic on stderr"
+      ]
+    },
+    {
+      "stream": "stderr",
+      "name": "severity_list",
+      "extra_record": {
+        "severity": [
+          "error"
+        ],
+        "data": "fictional unsolved goals"
+      },
+      "accepted": true,
+      "report_returned": true,
+      "diagnostics": []
+    },
+    {
+      "stream": "stderr",
+      "name": "severity_object",
+      "extra_record": {
+        "severity": {
+          "value": "error"
+        },
+        "data": "fictional unsolved goals"
+      },
+      "accepted": true,
+      "report_returned": true,
+      "diagnostics": []
+    },
+    {
+      "stream": "stderr",
+      "name": "severity_missing",
+      "extra_record": {
+        "data": "fictional unsolved goals"
+      },
+      "accepted": true,
+      "report_returned": true,
+      "diagnostics": []
+    },
+    {
+      "stream": "stderr",
+      "name": "severity_unrecognized",
+      "extra_record": {
+        "severity": "fatal",
+        "data": "fictional unsolved goals"
+      },
+      "accepted": true,
+      "report_returned": true,
+      "diagnostics": []
+    },
+    {
+      "stream": "stderr",
+      "name": "warning_data_object",
+      "extra_record": {
+        "severity": "warning",
+        "data": {
+          "text": "fictional unsolved goals"
+        }
+      },
+      "accepted": true,
+      "report_returned": true,
+      "diagnostics": []
+    },
+    {
+      "stream": "stderr",
+      "name": "warning_data_missing",
+      "extra_record": {
+        "severity": "warning"
+      },
+      "accepted": true,
+      "report_returned": true,
+      "diagnostics": []
+    },
+    {
+      "stream": "stderr",
+      "name": "error_data_object",
+      "extra_record": {
+        "severity": "error",
+        "data": {
+          "text": "fictional unsolved goals"
+        }
+      },
+      "accepted": false,
+      "report_returned": false,
+      "diagnostics": [
+        "lean reported error diagnostics: {'text': 'fictional unsolved goals'}"
+      ]
+    },
+    {
+      "stream": "stderr",
+      "name": "opaque_logging_object",
+      "extra_record": {
+        "kind": "fictional_trace",
+        "message": "ordinary trace"
+      },
+      "accepted": true,
+      "report_returned": true,
+      "diagnostics": []
+    }
+  ]
+}

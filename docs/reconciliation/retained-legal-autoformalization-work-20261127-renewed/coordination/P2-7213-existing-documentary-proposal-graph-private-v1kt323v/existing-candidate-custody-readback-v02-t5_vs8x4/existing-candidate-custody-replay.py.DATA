@@ -1,0 +1,254 @@
+import os
+from pathlib import Path
+import resource
+import sys
+import tempfile
+
+private = Path(sys.argv[1]).resolve()
+project = Path(sys.argv[2]).resolve()
+protected = tuple(Path(x).resolve() for x in sys.argv[3:7])
+assert len(sys.argv)==7
+resource.setrlimit(resource.RLIMIT_AS, (512*1024*1024,) * 2)
+resource.setrlimit(resource.RLIMIT_CPU, (55, 56))
+os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
+tempfile.tempdir = str(private)
+sys.path.insert(0,str(project))
+os.chdir(project)
+blocked_backend = {"torch","jax","tensorflow","transformers","huggingface_hub"}
+
+def resolve(path, dir_fd=-1):
+    path = Path(os.fsdecode(path))
+    if not path.is_absolute() and type(dir_fd) is int and dir_fd >= 0:
+        path = Path(os.readlink(f"/proc/self/fd/{dir_fd}")) / path
+    return path.resolve()
+
+def check_write(path,dir_fd=-1):
+    dest = resolve(path,dir_fd)
+    if not dest.is_relative_to(private):
+        raise PermissionError(f"private fixture write refused: {dest}")
+
+def audit(event,args):
+    if event.startswith("socket.") or event.startswith("subprocess.") or event in {
+            "os.system","os.fork","os.forkpty","os.exec","os.posix_spawn"}:
+        raise PermissionError(f"private fixture process/network operation refused: {event}")
+    if event == "import" and args[0].split(".",1)[0] in blocked_backend:
+        raise ImportError(f"private fixture model backend refused: {args[0]}")
+    if event == "open" and not isinstance(args[0], int):
+        dest = resolve(args[0])
+        if any(dest.is_relative_to(p) for p in protected):
+            raise PermissionError(f"private fixture canonical body read refused: {dest}")
+        flags = args[2] or 0
+        if flags & (os.O_WRONLY|os.O_RDWR|os.O_CREAT|os.O_TRUNC|os.O_APPEND):
+            check_write(dest)
+    elif event in {"os.remove","os.rmdir","os.mkdir","os.chmod"}:
+        check_write(args[0],args[-1])
+    elif event in {"os.rename","os.link"}:
+        check_write(args[0],args[2])
+        check_write(args[1],args[3])
+    elif event == "os.symlink":
+        raise PermissionError("private fixture symlink creation refused")
+    elif event in {"os.truncate","os.utime","os.chown"} and not isinstance(args[0],int):
+        check_write(args[0],args[-1] if event in {"os.utime","os.chown"} else -1)
+
+sys.addaudithook(audit)
+
+import hashlib,json,importlib,traceback
+sys.pycache_prefix=str(private/'unused-pycache')
+tree=json.loads((private/'current-commit-git-blob-metadata.json').read_bytes())
+pinned_files={}
+tracked_reads=0
+examining=False
+
+def authorize_retained_import(event,args):
+    global examining, tracked_reads
+    if examining or event!="open" or isinstance(args[0],int):
+        return
+    path=resolve(args[0])
+    if not path.is_relative_to(project):
+        if path.suffix in ('.py','.pyc') and '/ipfs_datasets_py/' in str(path):
+            raise PermissionError("unbound package source: "+str(path))
+        return
+    relative=path.relative_to(project).as_posix()
+    if relative.endswith('.pyc'):
+        raise PermissionError("unbound cached bytecode: "+relative)
+    if not relative.endswith('.py'):
+        return
+    oid=tree.get(relative)
+    if not oid:
+        raise PermissionError("package source absent from current metadata: "+relative)
+    info=path.stat()
+    tracked_reads+=info.st_size
+    assert tracked_reads<=10*1024*1024, "retained fixture code upper bound"
+    version=[info.st_ino,info.st_size,info.st_mtime_ns,info.st_ctime_ns]
+    if relative not in pinned_files:
+        examining=True
+        try:
+            fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW)
+            with os.fdopen(fd,'rb') as stream:
+                executable_bytes=stream.read(info.st_size+1)
+            assert len(executable_bytes)==info.st_size
+            assert hashlib.sha1(f"blob {len(executable_bytes)}\0".encode()+executable_bytes).hexdigest()==oid, "cached body differs from current Git blob: "+relative
+            pinned_files[relative]={'oid':oid,'sha256':hashlib.sha256(executable_bytes).hexdigest(),'identity':version}
+            tracked_reads+=info.st_size
+        finally:
+            examining=False
+    else:
+        assert pinned_files[relative]['identity']==version, "retained fixture changed"
+
+def output(name, value):
+    content=(json.dumps(value,sort_keys=True,indent=2,ensure_ascii=False,allow_nan=False)+'\n').encode()
+    assert len(content)<2*1024*1024
+    path=private/name
+    with path.open('xb') as f:
+        f.write(content)
+        f.flush()
+        os.fsync(f.fileno())
+    return {'path':str(path),'bytes':len(content),'sha256':hashlib.sha256(content).hexdigest()}
+
+sys.addaudithook(authorize_retained_import)
+import signal
+import stat
+signal.alarm(60)
+
+input_root=Path("/tmp/Root-P2-7213-existing-public-owner-private-replay-v323-3xl4_76z")
+def checked(path, length, digest):
+    with os.fdopen(os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_CLOEXEC),"rb") as stream:
+        opening=os.fstat(stream.fileno())
+        assert opening.st_size==length
+        body=stream.read(length+1)
+        keys=("dev","ino","mode","nlink","uid","gid","size","mtime_ns","ctime_ns")
+        identity=lambda st: tuple(getattr(st,"st_"+k) for k in keys)
+        assert stat.S_ISREG(opening.st_mode)
+        assert identity(opening)==identity(os.fstat(stream.fileno()))==identity(path.lstat())
+    assert len(body)==length and hashlib.sha256(body).hexdigest()==digest
+    return body,dict(path=str(path),bytes=length,sha256=digest)
+
+def guard_control(label, invoke, message):
+    try:
+        invoke()
+    except ValueError as error:
+        assert message in str(error),(label,str(error))
+        return dict(control=label,refused=True,error_type=type(error).__name__,detail=str(error))
+    raise AssertionError(label+" accepted changed documentary input")
+
+summary=dict(scope="Existing proposal graph custody for the unreviewed §7213 draft",
+             current_git_head="cacb0e85dbfad57fb1d96f8aa0d8667f6c51b061", status="started",
+             independently_reviewed=False, new_legal_interpretation_selected=False,
+             legal_as_of_selected=False, training_mask=0, evaluation_gold_mask=0)
+try:
+    from ipfs_datasets_py.logic.autoformal import corpus_source, legal_statutory_context, legal_semantic_graph
+    s,sidecar_ref=checked(input_root/"unreviewed-source-and-unresolved-choices-sidecar.json",
+        11166,"e42dacf4c46d8a83501f463fa70a282a276d55d3c994c611447f605afa660503")
+    source_sidecar=json.loads(s)["source"]
+    projection_path=Path("/tmp/P2-remaining-corpus-source-projection-private-v106-xy1erbo3/exact-two-whole-views-four-associations-projection-v106.json")
+    p,projection_ref=checked(projection_path,598797,
+        "b41d41933c3dec5c1bb9f5979c012d548158b2eed6026be47d470aac9314c566")
+    projection=json.loads(p)
+    raw_source=source_sidecar["official_HTML"]
+    assert raw_source["sha256"]=="671925114eada7731a355e33c8076baa6926fed1b7cb35c90a8c4c705c55b0ef"
+    raw_html,html_ref=checked(Path(raw_source["path"]),raw_source["bytes"],raw_source["sha256"])
+    q,req_ref=checked(input_root/"unreviewed-authored-7213-request.json",18543,
+        "d476c4930f17d1d539f87b3a63e60d70a1ff1fbce63e8c9da971c052edb09499")
+    request=json.loads(q)
+    assert request["source_binding"] is None and request["interpretation_status"]=="authored_unreviewed_declaration"
+    version=source_sidecar["source_version"]
+    occurrence=source_sidecar["operative_occurrence"]
+    view_text=source_sidecar["source_inputs"]["extracted_text"]
+    read_version=dict(expected_raw_sha256=html_ref["sha256"],extracted_text=view_text,
+                       expected_extracted_sha256=version["extracted_view"]["sha256"])
+    assert corpus_source.validate_source_version(version,raw_bytes=raw_html,**read_version)==version
+    assert corpus_source.validate_source_occurrence(occurrence,source_version=version,**read_version)==occurrence
+    old_doc=projection["documents"][1]["document"]
+    assert old_doc["legal_id"]==version["provision_id"]=="usc:us:10:7213"
+    assert old_doc["source_url"]==version["source_id"] and old_doc["edition"]==int(version["edition"])==2024
+    doc=legal_statutory_context.extract_document(raw_html,url=old_doc["source_url"],
+                    edition=old_doc["edition"],legal_id=old_doc["legal_id"])
+    assert doc==old_doc
+    matches=legal_statutory_context.exact_view_occurrences(doc,raw_html,text=occurrence["span_text"])
+    selector,=matches
+    assert selector["text_sha256"]==occurrence["span_sha256"]
+    assert (selector["char_start"],selector["char_end"],selector["utf8_byte_start"],selector["utf8_byte_end"])==(
+        occurrence["start_char"],occurrence["end_char"],occurrence["start_utf8"],occurrence["end_utf8"])==(0,193,0,193)
+    a=projection["associations"][3]
+    old_binding=a["exact_association_without_repeated_document_data"]["actual_source_occurrence"]
+    assert selector==old_binding["selector"]
+    source=legal_semantic_graph.bind_source_occurrence(
+        doc,raw_html,selector=selector,document_revision=version["release_id"])
+    assert source==old_binding
+    paragraph,=[item for item in doc["paragraphs"] if item["paragraph_index"]==source["paragraph_index"]]
+    assert (paragraph["char_start"],paragraph["char_end"])==(selector["char_start"],selector["char_end"])
+    expected_scope=a["source_binding_members"][0]["binding_metadata"]["scope"]
+    scope=legal_semantic_graph.bind_scope(**{key:expected_scope[key] for key in (
+        "jurisdiction","instrument","edition","applicability","definition_scope")})
+    assert scope==expected_scope and scope["applicability"]==scope["definition_scope"]=="not_asserted"
+    args=dict(profile="relational_norm_v1",source=source,scope=scope)
+    saved_graph=Path('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/complete-from-published-v04/unreviewed-7213-documentary-proposal-graph.json')
+    graph_raw,graph_ref=checked(saved_graph,682267,
+        "f5705cd7a94a64f5ffdc36c0d2a02d745775368b96f0cb3980da39e56422be60")
+    proposal=json.loads(graph_raw)
+
+    from ipfs_datasets_py.logic.autoformal import corpus_proposed_graph_adapter as adapter
+    from ipfs_datasets_py.logic.autoformal.corpus_contracts import load_record_bytes
+    from ipfs_datasets_py.utils.cid_utils import canonical_dag_json_bytes
+
+    assert not any(proposal['authority'].values())
+    trusted = dict(args, ast=request, semantic_declarations=None, dependency_refs=[],
+                   evidence_refs=[], scope_request=None)
+    inputs_raw = canonical_dag_json_bytes(trusted)
+    arguments = dict(expected_proposal_sha256=graph_ref['sha256'],
+                     trusted_proposal_inputs=trusted,
+                     expected_inputs_sha256=hashlib.sha256(inputs_raw).hexdigest(),
+                     document=doc, raw_html=raw_html, expected_raw_sha256=html_ref['sha256'],
+                     expected_extracted_sha256=version['extracted_view']['sha256'])
+    readback,candidate_ref=checked(Path('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-candidate-custody-current-v01-bg57f4s2/unreviewed-7213-existing-candidate-custody.json'),766660,'1e56eca9e6ab6a0f33f2296ba342f5d78a29d3e1bee301f637df1ab5c49809c9')
+    candidate=load_record_bytes(readback, expected_sha256=candidate_ref['sha256'])
+    recovered=candidate
+    assert candidate['view']=='candidate' and candidate['source_occurrence']['span_text']==occurrence['span_text']
+    custody_flags=('admitted','formalized','source_semantics_verified','source_authenticity_verified',
+                   'external_references_verified','definition_semantics_encoded')
+    assert all(candidate[name] is False for name in custody_flags)
+    assert candidate['source_version']['raw_artifact']==version['raw_artifact']
+    assert candidate['source_version']['extracted_view']==version['extracted_view']
+    assert candidate['source_version']['record_cid']!=version['record_cid']
+    assert candidate['source_occurrence']['record_cid']!=occurrence['record_cid']
+    assert candidate['source_version']['source_id']==doc['legal_id']
+    assert len(candidate['graph']['nodes'])==6 and len(candidate['graph']['edges'])==5
+    restored=adapter.restore_proposed_graph_ast(recovered, **arguments)
+    assert restored==request
+    assert recovered['proposal_record']['proposal_json'].encode('utf-8')==graph_raw
+
+    changed=graph_raw+b' '
+    controls=[guard_control('changed_proposal_raw_bytes',
+                  lambda:adapter.adapt_proposed_graph_bytes(changed, **arguments),
+                  'record bytes differ'),
+              guard_control('changed_independent_input_digest',
+                  lambda:adapter.restore_proposed_graph_ast(recovered,
+                           **dict(arguments, expected_inputs_sha256='0'*64)),
+                  'original proposal inputs differ')]
+    summary.update(status='exact_documentary_candidate_custody_restored',
+        old_semantic_proposal=graph_ref, current_custody_candidate=candidate_ref,
+        independently_pinned_inputs=dict(html=html_ref,authored_ast=req_ref,source_sidecar=sidecar_ref,
+                                         documentary_owner_projection=projection_ref),
+        trusted_inputs_canonical_sha256=arguments['expected_inputs_sha256'],
+        restored_ast_canonical_sha256=hashlib.sha256(canonical_dag_json_bytes(restored)).hexdigest(),
+        original_source_version_cid=version['record_cid'],original_occurrence_cid=occurrence['record_cid'],
+        custody_source_version_cid=candidate['source_version']['record_cid'],
+        custody_occurrence_cid=candidate['source_occurrence']['record_cid'],
+        custody_snapshot_cid=candidate['graph']['record_cid'],
+        custody_nodes=len(candidate['graph']['nodes']),custody_edges=len(candidate['graph']['edges']),
+        custody_flags={name:candidate[name] for name in custody_flags},
+        retained_original_proposal_bytes=True,restored_full_authored_AST=True,
+        alternative_scope_asserted=False, controls=controls)
+except BaseException as error:
+    summary['failure']=dict(error_type=type(error).__name__,detail=str(error))
+    print(summary["failure"],file=sys.stderr,flush=True)
+summary['executed_current_Git_matched_retained_files']=pinned_files
+summary['retained_project_read_size_upper_from_open_events']=tracked_reads
+summary['prior_adapt_and_budget_stop']={'path': '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-7213-existing-documentary-proposal-graph-private-v1kt323v/existing-candidate-custody-current-v01-bg57f4s2/attempt.stderr', 'bytes': 8263, 'sha256': '00e8c6fecb3d7c38a845e3878cde639429371f066746deddfd95a0dcf83045f4'}
+summary['Parquet_export_run']=False
+summary['Native_or_model_training_run']=False
+receipt=output('actual-private-7213-candidate-custody-closeout.json',summary)
+print(json.dumps({'status':summary['status'],'receipt':receipt,'failure':summary.get('failure'),
+                  'candidate':summary.get('current_custody_candidate'),
+                  'bound_owner_files':len(pinned_files)}),flush=True)
+raise SystemExit(0 if summary['status']=='exact_documentary_candidate_custody_restored' else 2)

@@ -1,0 +1,91 @@
+{
+  "kind": "private_existing_consumer_callpath_result",
+  "purpose": "Connect published owner observations to existing task selection without substituting metadata for claim, resource, custody or completion authority.",
+  "published_accelerate_commit": "21d7c7b2436a895c9615d7ed9866c5c27b8bb43b",
+  "observed_inputs": [
+    {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/implementation_supervisor.published-21d7-e694.py.DATA",
+      "bytes": 1085194,
+      "sha256": "e6946466f9815284cd12ec2389c378c0bd9845a616db34ca23c805047cf63be0",
+      "git_blob": "27d4abac169aa9631fdcc814924e0bb6b99d63c5"
+    },
+    {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/selected-existing-master-consumer-seams-v01.json",
+      "bytes": 37686,
+      "sha256": "817dcef89941feed7c9736416af07fbfa4b66ba43e93f6289853a076ba1e382b"
+    },
+    {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/test_agent_supervisor_prompt_goal_codex_transport.py.published-21d7.DATA",
+      "bytes": 5151,
+      "sha256": "f0f8bc4b7e9123df7a0e335404b60ec1bcb8076139357b7d5dcbe192b4f6b3d1",
+      "git_blob": "2670eb6cd5902b096a92d816bc1e1d9b46a72ebd"
+    },
+    {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/test_supervisor_codex_command_owner.py.published-21d7.DATA",
+      "bytes": 7870,
+      "sha256": "2199cb825b8bec3178d2b68b83a4be347474a4943663c4562df8ab07c31ff6eb",
+      "git_blob": "fc5fd00ec039d96925955e2433e577dd4d875723"
+    }
+  ],
+  "findings": [
+    {
+      "owner": "openai_codex_cli_integration.py",
+      "callpath": "__main__ -> codex_thread_handoff_main(read-owner) -> codex_owner_dependency_main -> read_codex_owner_dependency -> read_codex_thread_state",
+      "finding": "Published utility reachable. No scheduling consumer or owner-read class delegate established in this file."
+    },
+    {
+      "owner": "implementation_supervisor.py",
+      "lines": [
+        5126,
+        5211
+      ],
+      "finding": "_await_plan_bound_merge_turn uses exact revision/manifest/slice/reassigned owner lane and authoritative merge_completed lease phase. Provider work stays parallel; finite waiting occurs outside store/claim/lifecycle locks. Codex turn terminal metadata cannot substitute for merge_completed."
+    },
+    {
+      "owner": "implementation_supervisor.py",
+      "lines": [
+        10316,
+        10395,
+        11068
+      ],
+      "finding": "independent_work_preserved appears in quarantine results, not an owner-read consumer. Existing stale-recovery CAS authority must remain intact."
+    },
+    {
+      "owner": "test_agent_supervisor_prompt_goal_codex_transport.py",
+      "finding": "Real isolated child/native CLI/schema fixture transport. No thread-result scheduling consumer in these controls."
+    },
+    {
+      "owner": "test_supervisor_codex_command_owner.py",
+      "finding": "Shared CLI command/model-policy ownership controls. No thread-result scheduling consumer in these controls."
+    }
+  ],
+  "required_existing_input": {
+    "caller": "Actual current task-selection callsite binding a task dependency to a selected Codex thread and expected turn.",
+    "owning_test": "Its current owning test/fixture and source identity.",
+    "contract": "Observation deadline and budget; task revision/generation; live-owner/lease/hold/custody checks; independent eligible work selection; accepted enqueue is not processing; terminal turn is not SDK drain/completion."
+  },
+  "disposition": "No safe consumer injection point established in the inspected owners. Do not alter canonical board merge lifecycle or add a duplicate controller.",
+  "accounting": {
+    "prior_recorded_explicit_input_and_readback_bytes": 3323009,
+    "additional_bounded_master_prefix_bytes": 475519,
+    "excerpt_readback_bytes": 37686,
+    "child_excerpt_read_bytes": 37686,
+    "immutable_test_blob_and_readback_bytes": 26042,
+    "metadata_failure": {
+      "operation": "Recursive immutable ls-tree metadata filter",
+      "result": "AssertionError after metadata response exceeded 262144 bytes, before body output or any product mutation",
+      "exact_metadata_response_bytes": "not_retained",
+      "lower_bound_bytes": 262145
+    },
+    "notes": "All prior reads and failures retained. The preceding metadata operation makes total private I/O exceed the originally chosen 4MiB planning bound; no reset/refund or claim of a measured exact total. Source bytes/caps and runtime profiles unchanged."
+  },
+  "product_patch_created": false,
+  "tests_executed": false,
+  "canonical_or_source_mutation": false,
+  "sdk_or_native_or_model_execution": false,
+  "real_rpc_or_message_replay": false,
+  "work_complete": false,
+  "claim_granted": false,
+  "admission_granted": false,
+  "completion_authority": false
+}

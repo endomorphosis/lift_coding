@@ -1,0 +1,70 @@
+{
+  "schema": "Phase3-candidate11-existing-R2-binding-manifest-INERT/v1",
+  "Root_selected": null,
+  "frozen_Git_candidates": null,
+  "Source_WRITE_claimed": false,
+  "D_provenance": null,
+  "A_provenance": null,
+  "modules": null,
+  "projects": null,
+  "source_read_binding_reference": null,
+  "fixture_closure_reference": null,
+  "effect_decision_reference": null,
+  "admitted_io_plan_reference": null,
+  "actual_configuration_bindings": null,
+  "actual_module_compilation": null,
+  "expected_static_selection_reference": {
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/ordinary11-INERT-v01/literal11-selection.json",
+    "bytes": 4369,
+    "sha256": "8e8239aec87017b09e139c224d455ade07497c5fca3327f58143e2257bfed18f"
+  },
+  "candidate_identity_reference": {
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/SEALED-Phase3-candidate-inventory-exact2-private.json",
+    "bytes": 10207,
+    "sha256": "02f6169b3bbb1513559141fd74d01310794b2d797f307fe12b372353ef6cb7a6"
+  },
+  "private_same11_reference": {
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase3-candidate-interface-dispositions-private-ozvlan6t/SEALED-Phase3-candidate-inventory-private-same11-retention-and-role-coverage.json",
+    "bytes": 23020,
+    "sha256": "44b16e7c91292dd7f10cb88923c301fef0f5fc37e12e0ab2c2315152e608c104"
+  },
+  "static_expected_module_posts": {
+    "ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py": [
+      61518,
+      "ff66f344c9cda788801a9fa2d3ef66afd7046d903a53d2bbf11f8dbfdf847ad2"
+    ],
+    "ipfs_datasets_py/logic/syntax_core/ast.py": [
+      56966,
+      "4709513f18ab270858fe9595d88a847ddc52092606c52c7802947abed1ab9ac4"
+    ],
+    "ipfs_datasets_py/logic/syntax_core/contracts.py": [
+      75291,
+      "ce6d49e05ca2b09a84a3125ed6ad4c4aae4adf2c5943d3a4fd4eeeb057b444a8"
+    ],
+    "ipfs_datasets_py/logic/syntax_core/signatures.py": [
+      30488,
+      "49dd4fb0096661a05a15f056eb57248349e2b4e0b02e83239f36db36788c75bf"
+    ],
+    "ipfs_datasets_py/logic/families/namespaces.py": [
+      34262,
+      "ba097e653158a812d66ead978d6405d61adaa293521305333579b19bd69a432d"
+    ],
+    "ipfs_datasets_py/logic/formalization/autoencoder/native_family_lean_emitters.py": [
+      39438,
+      "dab6bbd4e17eef888f4181aab0c6ce3f087a717edc83a55befb7742fd1f598b1"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_native_ast_preservation.py": [
+      206212,
+      "8ecc4a9a2c87c6369b2d7a359c77b2a11b2aa70ad4bc873da1260b9544e7dec2"
+    ],
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py": [
+      82687,
+      "d6180c3e711e5d795c9bea3c4a258ed8720e4a9d831f1426fa61b67322d8cbea"
+    ]
+  },
+  "static_required_fixture": {
+    "path": "docs/autoformalization/evidence/legal-ir-title10-7214-pending-compositions-20261024.json",
+    "bytes": 662668,
+    "sha256": "dd72e2b92ed5a44a77acfb72dd27ca8614250878400db89742c0437438d59dda"
+  }
+}

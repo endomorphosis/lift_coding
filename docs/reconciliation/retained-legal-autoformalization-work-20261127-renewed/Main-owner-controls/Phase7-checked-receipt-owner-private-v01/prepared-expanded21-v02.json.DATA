@@ -1,0 +1,66 @@
+{
+  "all_callable_runner_AST_exact": true,
+  "append": {
+    "bytes": 7598,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/checked-receipt-owningtests.append-v02.py.DATA",
+    "sha256": "ebb359f055aea12e43839453424e86fbcbf34108f8b3b4dde694c2016ad11eec"
+  },
+  "controls": {
+    "bytes": 5196,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/existing-maintained-checked-receipt-expanded21-controls.py.DATA",
+    "sha256": "5b9d4251873b396df91d3e560996e537202ade77583b45f5a3890558c814cded"
+  },
+  "expected_cases": [
+    "test_current_target_metadata_without_checked_receipt_never_reaches_update",
+    "test_checked_current_receipt_gates_both_existing_consumers[matching]",
+    "test_checked_current_receipt_gates_both_existing_consumers[tree]",
+    "test_checked_current_receipt_gates_both_existing_consumers[property]",
+    "test_checked_current_receipt_gates_both_existing_consumers[source_result]",
+    "test_checked_current_receipt_gates_both_existing_consumers[content]",
+    "test_checked_current_receipt_gates_both_existing_consumers[assumptions]",
+    "test_checked_current_receipt_gates_both_existing_consumers[bounds]",
+    "test_checked_current_receipt_gates_both_existing_consumers[status]",
+    "test_checked_current_receipt_gates_both_existing_consumers[expired]",
+    "test_checked_current_receipt_gates_both_existing_consumers[formal_binding]",
+    "test_checked_current_receipt_gates_both_existing_consumers[review_binding]",
+    "test_checked_current_receipt_gates_both_existing_consumers[dependency_binding]",
+    "test_checked_current_receipt_gates_both_existing_consumers[sample_binding]",
+    "test_checked_current_receipt_gates_both_existing_consumers[input_mutation]",
+    "test_checked_current_target_refuses_incomplete_receipt_selection[missing_receipt]",
+    "test_checked_current_target_refuses_incomplete_receipt_selection[mapping_receipt]",
+    "test_checked_current_target_refuses_incomplete_receipt_selection[empty_expectation]",
+    "test_checked_current_target_refuses_incomplete_receipt_selection[missing_source_result]",
+    "test_checked_current_target_refuses_incomplete_receipt_selection[missing_formal]",
+    "test_checked_current_target_refuses_incomplete_receipt_selection[missing_as_of]"
+  ],
+  "inactive_cohort_cases_retained_in": {
+    "bytes": 80166,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/projection-manifest.json",
+    "sha256": "d8390948aa1656562a256cc57cedfff3b993f433b83615c2231deaf6205da3ff"
+  },
+  "overlay": {
+    "bytes": 350,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/same-consumer-v02-overlay.json",
+    "sha256": "843d9cc96eb21b3565589bbb64e7a42de29256e5cd11a07c1d65ba442b1a135a"
+  },
+  "projection": {
+    "bytes": 65207,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/checked-receipt-expanded21-projection.v03.json",
+    "sha256": "709bb02b3d06346d8ba3bc9bcb260d92227dc3b4fd331a38676262fd015ed6c1"
+  },
+  "retained_fixture_correction": "DISPROVED is refused by canonical receipt constructor. Status adversary now uses actual eligible UNSATISFIABLE enum with same negative assertions; old failure retained.",
+  "retained_preparation_failure": "Expanded metadata exceeded existing 65536 input bound; no worker launched. Retained nonselected cases separately without changing active assertions or limits.",
+  "runner": {
+    "bytes": 16415,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/existing-rebased-checked-receipt-expanded21-runner.v02.py.DATA",
+    "sha256": "e56514cdc98c0bf9b418cf699483e052c9ff188f3fff8c4463458c43520162bb"
+  },
+  "selected_mode": "maintained",
+  "test": {
+    "bytes": 55457,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/test_trusted_feedback_weight_updates.checked-receipt.after-v02.py.DATA",
+    "sha256": "f7e5ede19d2fb5640d7bd2fe0a0ca255a079f97c9a9024e7cf06b3dac534a734"
+  },
+  "test_source_unchanged": "fd29cf3deef5cfb2fb7b82415b9262c3b8fcc3d197df14f414de0bd599000ef8",
+  "test_source_unchanged_assertions": true
+}

@@ -1,0 +1,36 @@
+{
+  "Root_current_Native_owner_keeps_runtime_authority": true,
+  "actual_Native": false,
+  "actual_SDK": false,
+  "actual_Source": false,
+  "actual_cases": [
+    {
+      "actual_loaded_VALUE": 1,
+      "current_source_VALUE": 0,
+      "fresh_private_pycache_prefix": false,
+      "metadata_guard_passed": true,
+      "new_pycache_namespace_exists": false,
+      "read_compiled_source_not_stale_cache": false,
+      "source_bytes_exact": true
+    },
+    {
+      "actual_loaded_VALUE": 0,
+      "current_source_VALUE": 0,
+      "fresh_private_pycache_prefix": true,
+      "metadata_guard_passed": true,
+      "new_pycache_namespace_exists": false,
+      "read_compiled_source_not_stale_cache": true,
+      "source_bytes_exact": true
+    }
+  ],
+  "exact_existing_binding_loop_AST_sha256": "a4390af867110c29356520098a52579749498b91c387f9a0fd81cc3c4a8b55c9",
+  "finding": "Existing metadata guard can accept stale executed bytecode; sys.dont_write_bytecode prevents writing but does not prevent cache reads. A fresh private sys.pycache_prefix before project imports selects current source without deleting canonical caches.",
+  "fixture": "Owned private same-length changed Python source with timestamp pyc; genuine stdlib SourceFileLoader and exact operator binding-loop AST; no project module import or SDK/Source/Native.",
+  "operator": {
+    "bytes": 39839,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/existing-v567-Native3-current-operator-custody-readback-INERT-v04.py.DATA",
+    "sha256": "b83e7b413bc8b7b715c643f14462158422635939a9f5fea80e3ee5a5e15c8dff"
+  },
+  "real_current_checkout_stale_pyc_not_claimed": true,
+  "schema": "private-current-Native-operator-module-bytecode-source-provenance-reproduction/v1"
+}

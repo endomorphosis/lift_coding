@@ -1,0 +1,87 @@
+"""Private physical software fixture. No subprocess, Lean, database, or model."""
+import hashlib
+import json
+import os
+import resource
+import sys
+import traceback
+from importlib.util import module_from_spec, spec_from_file_location
+from pathlib import Path
+
+guard = Path(sys.argv[5])
+source = guard.read_text()
+sentinel = 'owner = repo / "tests/unit/logic/legal_ir/test_proof_cache.py"'
+definition = 'def audit(event, args):\n'
+assert source.count(sentinel) == source.count(definition) == 1
+# ctypes' standard initialization requests a handle to the running process.
+# It opens no named library. Keep the inherited denial on every named load.
+scoped = '''self_handles = []
+def audit(event, args):
+    if event == "ctypes.dlopen" and args == (None,):
+        self_handles.append("self_process_handle")
+        return
+'''
+prefix = source.split(sentinel, 1)[0].replace(definition, scoped)
+g = {"__file__": str(guard)}
+exec(compile(prefix, str(guard), "exec", dont_inherit=True), g)
+resource.setrlimit(resource.RLIMIT_FSIZE, (16 * 1024**2, 16 * 1024**2))
+os.chdir(g["working"])
+test_path = "tests/unit/logic/autoformal/test_corpus_release_cli.py"
+post = Path(sys.argv[4])
+if len(sys.argv) == 8:
+    owner_name = "ipfs_datasets_py.logic.autoformal.legal_release_coordinator_v1"
+    owner_path = "ipfs_datasets_py/logic/autoformal/legal_release_coordinator_v1.py"
+    overlay = Path(sys.argv[7])
+    class CoordinatorOverlay(g["importlib"].abc.MetaPathFinder):
+        def find_spec(self, fullname, path=None, target=None):
+            if fullname != owner_name:
+                return None
+            return spec_from_file_location(fullname, g["repo"] / owner_path,
+                                          loader=g["GuardedLoader"](owner_path, overlay))
+    sys.meta_path.insert(0, CoordinatorOverlay())
+spec = spec_from_file_location("tests.unit.logic.autoformal._private_v4_current_revocation", g["repo"] / test_path,
+                              loader=g["GuardedLoader"](test_path, post))
+module = module_from_spec(spec)
+sys.modules[spec.name] = module
+report = dict(test_source_sha256=hashlib.sha256(post.read_bytes()).hexdigest(),
+              test_module_origin=str(spec.origin), physical_fixture_constructed=False,
+              controls=[], lightweight_private_scope=True)
+
+class OwnedTemporaryPathFactory:
+    def mktemp(self, leaf):
+        path = g["working"] / leaf
+        path.mkdir()
+        return path
+
+try:
+    variant = sys.argv[6]
+    assert variant in ("node-companion", "edge-identity", "retained-positive")
+    spec.loader.exec_module(module)
+    print("test module loaded", file=sys.stderr, flush=True)
+    material = module.physical_closure_material_v3.__wrapped__(OwnedTemporaryPathFactory())
+    report["physical_fixture_constructed"] = True
+    print("physical fixture constructed", file=sys.stderr, flush=True)
+    try:
+        if variant == "retained-positive":
+            control = module.reviewed_physical_whole_norm_control_v2(material)
+            assert control["preparation"].to_dict()["physical_context"]["native_receipt_replayed"] is False
+        else:
+            module.test_physical_v4_refuses_hf_graph_different_from_independently_reviewed_graph(material, variant)
+    except (Exception, g["pytest"].fail.Exception) as exc:
+        report["controls"].append({"name": variant, "passed": False, "exception": type(exc).__name__,
+                                  "detail": str(exc), "traceback": traceback.format_exc(limit=12)})
+    else:
+        report["controls"].append({"name": variant, "passed": True})
+except Exception as exc:
+    report["setup_exception"] = type(exc).__name__
+    report["setup_detail"] = str(exc)
+    report["setup_traceback"] = traceback.format_exc(limit=12)
+finally:
+    report["guard_events"] = g["denied"]
+    report["overlays"] = g["watched"]
+    report["permitted_ctypes_self_handles"] = g["self_handles"]
+    report["actual_pyarrow_loaded"] = "pyarrow" in sys.modules and "pyarrow.parquet" in sys.modules
+    report["torch_duckdb_loaded"] = any(name.split(".",1)[0] in ("torch","duckdb","_duckdb") for name in sys.modules)
+    print(json.dumps(report,indent=2,sort_keys=True))
+raise SystemExit(0 if len(report["controls"]) == 1 and all(row["passed"] for row in report["controls"])
+                 and not report["guard_events"] and not report["torch_duckdb_loaded"] else 1)

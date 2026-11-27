@@ -1,0 +1,29 @@
+import sys,json,hashlib,importlib.machinery
+from pathlib import Path
+c=Path(__file__).parent
+p=json.loads((c/'plan.json').read_text());root=Path(p['root'])
+pins=json.loads((c/'request.json').read_text())['source_sha256']
+assert all(pins.get(f)==h for f,h in p['pins'].items())
+sys.dont_write_bytecode=True
+sys.path.insert(0,str(root))
+compiled={}; violations=[]
+original=importlib.machinery.SourceFileLoader.get_code
+def get_code(loader,fullname):
+ path=Path(loader.path).resolve()
+ if path.is_relative_to(root):
+  raw=path.read_bytes();digest=hashlib.sha256(raw).hexdigest()
+  if pins.get(str(path))!=digest:
+   violations.append('unpinned or changed canonical source: '+str(path));raise RuntimeError(violations[-1])
+  compiled[str(path)]=digest
+  return loader.source_to_code(raw,str(path))
+ return original(loader,fullname)
+importlib.machinery.SourceFileLoader.get_code=get_code
+import pytest
+try:
+ code=pytest.main(p['pytest_arguments'])
+finally:
+ drift=[f for f,h in pins.items() if hashlib.sha256(Path(f).read_bytes()).hexdigest()!=h]
+ foreign={name:str(Path(module.__file__).resolve()) for name,module in list(sys.modules.items()) if name.startswith('ipfs_datasets_py') and getattr(module,'__file__',None) and not Path(module.__file__).resolve().is_relative_to(root)}
+ (Path(p['attempt'])/'exports/source-observation.json').write_text(json.dumps(dict(compiled_sources=compiled,source_drift=drift,foreign_product_origins=foreign,audit_violations=violations,child_compilation_attested=False),indent=2)+'\n')
+assert not drift and not foreign and not violations
+raise SystemExit(code)

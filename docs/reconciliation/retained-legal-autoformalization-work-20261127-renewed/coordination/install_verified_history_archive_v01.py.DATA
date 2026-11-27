@@ -1,0 +1,182 @@
+"""Install only the already verified historical archive; never stage or publish."""
+import hashlib
+import json
+import os
+from pathlib import Path
+import stat
+import subprocess
+import time
+
+BASE = Path(__file__).resolve().parent
+PACK = BASE / "exact-A81-D206-private-pack-and-restore-v01"
+ROOT = BASE.parents[1] / "repositories/root"
+TARGET = ROOT / "docs/reconciliation/retained-A-D-object-history-20261124"
+RECEIPT_REF = {"path": str(PACK / "actual-exact-A81-D206-private-pack-and-restore-receipt-v01.json"), "bytes": 80568, "sha256": "a1be792986161f1311eb19333737cf357dcecacac1ccdc4f394ac93df4c1aa05"}
+PLAN_REF = {"path": str(BASE / "same-publisher-exact-A81-D206-object-input-plan-v07.json"), "bytes": 20534, "sha256": "640c61eeb6a4364fc38cd04547f88edb1d015a9250e5cc19047be668dfba2b07"}
+F9 = ("st_dev", "st_ino", "st_mode", "st_uid", "st_gid", "st_nlink", "st_size", "st_mtime_ns", "st_ctime_ns")
+REPORT = {"schema": "installed-exact-historical-object-archive/v1", "started_ns": str(time.time_ns()), "files": [], "Git_index_refs_config_mutated": False, "runtime_or_code_adoption": False}
+
+
+def f9(st):
+    return {k: str(getattr(st, k)) for k in F9}
+
+
+def read(ref):
+    path = Path(ref["path"])
+    before = path.lstat()
+    assert stat.S_ISREG(before.st_mode) and before.st_nlink == 1
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+    try:
+        assert f9(before) == f9(os.fstat(fd))
+        raw = bytearray()
+        while len(raw) <= ref["bytes"]:
+            part = os.read(fd, min(1048576, ref["bytes"] + 1 - len(raw)))
+            if not part:
+                break
+            raw.extend(part)
+        assert f9(before) == f9(os.fstat(fd)) == f9(path.lstat())
+    finally:
+        os.close(fd)
+    raw = bytes(raw)
+    assert len(raw) == ref["bytes"] and hashlib.sha256(raw).hexdigest() == ref["sha256"]
+    return raw
+
+
+def write(path, raw):
+    assert path.is_relative_to(TARGET)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o644)
+    try:
+        offset = 0
+        while offset < len(raw):
+            offset += os.write(fd, raw[offset:])
+        os.fsync(fd)
+    finally:
+        os.close(fd)
+    sha = hashlib.sha256(raw).hexdigest()
+    ref = {"path": str(path), "bytes": len(raw), "sha256": sha}
+    assert read(ref) == raw
+    REPORT["files"].append({"path": str(path.relative_to(ROOT)), "bytes": len(raw), "sha256": sha, "git_blob_oid": hashlib.sha1(("blob %d\0" % len(raw)).encode() + raw).hexdigest(), "git_mode": "100644"})
+    return {"file": str(path.relative_to(TARGET)), "bytes": len(raw), "sha256": sha}
+
+
+try:
+    env = {**os.environ, "GIT_OPTIONAL_LOCKS": "0", "GIT_NO_LAZY_FETCH": "1"}
+    current = subprocess.check_output(["git", "-C", str(ROOT), "rev-parse", "HEAD"], env=env).decode().strip()
+    assert current == "678996d3c02dbd43b77fdf6123a7368a860a6060"
+    assert not TARGET.exists()
+    assert subprocess.check_output(["git", "-C", str(ROOT), "ls-tree", "HEAD", "--", str(TARGET.relative_to(ROOT))], env=env) == b""
+    assert subprocess.check_output(["git", "-C", str(ROOT), "diff", "--cached", "--name-only"], env=env) == b""
+    receipt_raw = read(RECEIPT_REF)
+    plan_raw = read(PLAN_REF)
+    receipt = json.loads(receipt_raw)
+    plan = json.loads(plan_raw)
+    assert receipt["complete"] is True and "error" not in receipt
+    manifest = {"schema": "retained-unadopted-Git-object-history/v1", "status": "HISTORICAL_PRESERVATION_ONLY_NOT_PRODUCT_ADOPTION", "archive_scope": "81 accelerator and206 datasets retained historical tips, including all six large data blobs; exact objects missing from the corresponding published base object sets.", "families": {}, "requires_published_base_objects": True, "no_force_or_history_rewrite_or_LFS_change": True, "published_runtime_native_model_or_legal_qualification": False}
+    for family, facts in receipt["families"].items():
+        assert facts["local_only_exact_object_inventory_verified_before_alternates"] is True
+        assert facts["all_selected_heads_connectivity_verified"] is True
+        chunks = []
+        for part in facts["chunks"]:
+            assert part["bytes"] <= 50 * 1024 * 1024
+            source = {"path": str(PACK / part["file"]), "bytes": part["bytes"], "sha256": part["sha256"]}
+            chunks.append(write(TARGET / family / part["file"], read(source)))
+        object_list = write(TARGET / family / "exact-object-IDs.DATA", read(facts["exact_object_ID_list"]))
+        head_list = write(TARGET / family / "retained-tip-IDs.DATA", ("\n".join(facts["selected_heads"]) + "\n").encode())
+        manifest["families"][family] = {"published_base_commit": facts["published_base_commit"], "published_origin": "https://github.com/endomorphosis/" + ("ipfs_accelerate_py" if family == "accelerate" else "ipfs_datasets_py") + ".git", "pack_bytes": facts["pack_bytes"], "pack_sha256": facts["pack_sha256"], "pack_trailer_sha1": facts["pack_trailer_sha1"], "pack_object_count": facts["pack_object_count"], "raw_object_summary": facts["raw_object_summary"], "selected_tip_count": len(facts["selected_heads"]), "chunks": chunks, "exact_object_IDs": object_list, "retained_tip_IDs": head_list, "actual_private_restore_verified": True}
+    provenance = write(TARGET / "source-object-provenance-and-difference.json.DATA", read(plan["exact_full_report"]))
+    manifest["source_object_provenance"] = provenance
+    manifest["input_plan"] = write(TARGET / "original-object-input-plan.json.DATA", plan_raw)
+    manifest["actual_pack_restore_receipt"] = write(TARGET / "actual-private-pack-and-restore-receipt.json.DATA", receipt_raw)
+    manifest["large_historical_objects"] = plan["large_unique_historical_objects"]
+    readme = """# Retained worktree object histories
+
+These are historical archives, not adopted source code, launch controls, statutory
+review, or proof/model qualification. Existing product files and repository history
+were not replaced. The archive preserves all exact objects missing from the two
+specified published base commits and needed by287 retained tips. Six historical
+large data blobs are included. Chunking bounds individual archive files; it does
+not remove or rewrite any original Git object.
+
+`manifest.json` pins ordered chunks, complete pack hashes, exact object inventories,
+retained tips, prerequisites, and actual private restore evidence. The original
+source-ref and object-difference observations are retained as inert `.DATA` files;
+their local paths and clocks are historical, not current authority.
+
+## Restore without checking out or running archived code
+
+Use an existing clone of the corresponding published base repository, with its
+base commit and objects available locally. No network is necessary for the steps
+below. Work in a new destination. Replace FAMILY with `accelerate` or `datasets`.
+The shell variables are examples and confer no execution or admission permission.
+
+```sh
+archive_dir=/absolute/path/to/this/archive
+family=accelerate
+base_repo=/absolute/path/to/existing/base/clone
+restore_dir=/absolute/path/to/NEW-empty-destination.git
+test ! -e "$restore_dir" || exit 1
+git init --bare "$restore_dir"
+base_objects="$(git -C "$base_repo" rev-parse --path-format=absolute --git-common-dir)/objects"
+```
+
+First verify every chunk's size/SHA256 and their ordered concatenation against the
+manifest. Filenames are zero padded; concatenate only that family's listed chunks:
+
+```sh
+cat "$archive_dir/$family/"*.pack.part-*.DATA > "$restore_dir/objects/pack/archive.pack"
+sha256sum "$restore_dir/objects/pack/archive.pack"
+GIT_NO_LAZY_FETCH=1 GIT_ALTERNATE_OBJECT_DIRECTORIES="$base_objects" \
+  git -C "$restore_dir" index-pack --strict "$restore_dir/objects/pack/archive.pack"
+git -C "$restore_dir" verify-pack -v "$restore_dir/objects/pack/archive.idx"
+```
+
+The reported SHA256 must equal `pack_sha256`; `verify-pack` object IDs must equal
+the complete `exact-object-IDs.DATA` inventory, not merely contain one expected
+tip. Our private qualification performed these checks, plus a local-only
+`cat-file --batch-check` before setting alternates, for every archived object.
+
+For complete graph connectivity, supply only the corresponding published base
+object store, then check all retained tips. The base is an explicit prerequisite;
+this archive does not contain unrelated objects already available from that base.
+
+```sh
+printf '%s\\n' "$base_objects" > "$restore_dir/objects/info/alternates"
+GIT_NO_LAZY_FETCH=1 git -C "$restore_dir" fsck --connectivity-only --no-dangling \
+  $(cat "$archive_dir/$family/retained-tip-IDs.DATA")
+```
+
+Do not automatically checkout, execute, merge, replay, or treat these old failed,
+superseded, or unselected branches as approved work. A recovery ref can be created
+explicitly with `git update-ref` only after selecting the desired historical tip.
+The original current branches, worktrees, and failure evidence remain intact.
+"""
+    write(TARGET / "README.md", readme.encode())
+    write(TARGET / "manifest.json", (json.dumps(manifest, sort_keys=True, indent=2) + "\n").encode())
+    for root, dirs, files in os.walk(TARGET, topdown=False):
+        fd = os.open(root, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+        try:
+            os.fsync(fd)
+        finally:
+            os.close(fd)
+    assert subprocess.check_output(["git", "-C", str(ROOT), "rev-parse", "HEAD"], env=env).decode().strip() == current
+    assert subprocess.check_output(["git", "-C", str(ROOT), "diff", "--cached", "--name-only"], env=env) == b""
+    REPORT["complete"] = True
+    REPORT["total_files"] = len(REPORT["files"])
+    REPORT["total_bytes"] = sum(row["bytes"] for row in REPORT["files"])
+except BaseException as error:
+    REPORT["error"] = {"type": type(error).__name__, "message": str(error)[:3000]}
+    raise
+finally:
+    REPORT["finished_ns"] = str(time.time_ns())
+    raw = (json.dumps(REPORT, sort_keys=True, indent=2) + "\n").encode()
+    output = BASE / "actual-verified-history-archive-working-install-v01.json"
+    fd = os.open(output, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o400)
+    try:
+        offset = 0
+        while offset < len(raw):
+            offset += os.write(fd, raw[offset:])
+        os.fsync(fd)
+    finally:
+        os.close(fd)
+    print(json.dumps({"receipt": str(output), "bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest(), "complete": REPORT.get("complete", False), "archive_files": REPORT.get("total_files"), "archive_bytes": REPORT.get("total_bytes"), "error": REPORT.get("error")}), flush=True)

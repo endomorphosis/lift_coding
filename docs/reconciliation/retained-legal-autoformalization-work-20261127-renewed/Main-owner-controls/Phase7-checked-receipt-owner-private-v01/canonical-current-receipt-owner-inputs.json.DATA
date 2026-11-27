@@ -1,0 +1,114 @@
+{
+  "Git_mutations": 0,
+  "canonical_body_reads": 0,
+  "immutable_git_head": "6d1b200341ae62d6dc0aa6db27f3955c50483fa7",
+  "namespace_no_init": [
+    "ipfs_datasets_py/logic/families"
+  ],
+  "retained_preparation_failure": "Initial six-path set assertion found families/__init__.py absent in exact Git tree; no body read in failed attempt.",
+  "roles": [
+    {
+      "bytes": 303308,
+      "git_blob_sha1": "41133c0b54b7dbcf6dee56caa9dd9957de8fe8bd",
+      "git_mode": "100644",
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/ipfs_datasets_py__logic__verification_api.py.DATA",
+      "repo_relative_path": "ipfs_datasets_py/logic/verification_api.py",
+      "sha256": "37a8c4ac10610b877dd4eb0dd22fc1466b35b429fa4c4f02c76a43eb427284c0",
+      "top_imports": [
+        "from __future__ import annotations",
+        "import json",
+        "from collections.abc import Mapping, Sequence",
+        "from dataclasses import dataclass, field",
+        "from enum import StrEnum",
+        "from types import MappingProxyType",
+        "from typing import Any, Final",
+        "from ipfs_datasets_py.logic.ir_core.claims import FrozenMap, stable_digest"
+      ]
+    },
+    {
+      "bytes": 5409,
+      "git_blob_sha1": "bd26901d2cfb2abd429d556ced536c8e0870f338",
+      "git_mode": "100644",
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/ipfs_datasets_py__logic__bridge____init__.py.DATA",
+      "repo_relative_path": "ipfs_datasets_py/logic/bridge/__init__.py",
+      "sha256": "9f2e770a994fe25ad591040b8717c821adbb4370e3c12bf8b3af3da65cd65ce4",
+      "top_imports": [
+        "from __future__ import annotations",
+        "from .canonical import compose_typed_bridge, extract_canonical_ir, extract_formalization_artifact, extract_legal_ir_document, wrap_canonical_ir, wrap_compiler_result, wrap_formalization_artifact, wrap_legal_ir_document",
+        "from .decompiler import CANONICAL_DECOMPILER_IDENTITY_CID, DomainNeutralCanonicalDecompiler, StructuralReview, adversarial_decompilation_fixtures, decompile_structural_review, decompile_with_preservation, evaluate_adversarial_decompilation",
+        "from .conformance import FamilyConformanceReceipt, FamilyConformanceVector, adapter_conformance_records, build_conformance_bridge, evaluate_family_conformance, family_conformance_receipts, family_conformance_vectors, schema_golden_vectors",
+        "from .constructs import construct_catalog, construct_coverage, required_bridge_constructs",
+        "from .recompilation import SemanticRecompilationGateResult, classify_ir_preservation, compare_canonical_semantics, evaluate_semantic_recompilation_gate, recorded_roundtrip_equality_criteria, run_with_preservation",
+        "from .migrations import BridgeMigrationSource, TypedBridgeMigrationReceipt, export_canonical_ir, export_formalization_artifact, export_legal_ir_document, migrate_canonical_ir, migrate_formalization_artifact, migrate_from_source, migrate_identity, migrate_legal_ir_document",
+        "from .multiview import LegalIRTrainingTarget, MultiViewLegalIRReport, evaluate_legal_ir_multiview",
+        "from .registry import DEFAULT_LEGAL_IR_BRIDGE_NAMES, LogicBridgeSpec, TypedBridgeContractSpec, bridge_name_for_component, load_logic_bridge_adapter, logic_bridge_manifest, logic_bridge_spec, logic_bridge_specs, typed_bridge_contract_manifest, typed_bridge_contract_specs",
+        "from .schema import load_typed_bridge_schema",
+        "from .translation import CLOSED_EQUALITY_CRITERIA, CLOSED_PRESERVATION_CLASSES, CLOSED_RECONSTRUCTION_MODES, EqualityCriterion, FidelityClaim, ReconstructionMode, TRANSLATION_DIRECTION_CATALOG_CID, TRANSLATION_PRESERVATION_INTERFACE, TRANSLATION_RECEIPT_INTERFACE, TranslationDirectionSpec, TranslationPreservationClass, TranslationReceipt, catalog_default_receipt, issue_translation_receipt, recorded_equality_criteria, recorded_roundtrip_directions, translation_direction_catalog, translation_direction_catalog_document",
+        "from .types import BridgeEvaluationReport, GraphProjectionResult, LegalIRDocument, LogicIRView, ProofGateResult, RoundTripMetrics"
+      ]
+    },
+    {
+      "bytes": 63071,
+      "git_blob_sha1": "9a52c4a11642edb0cb62b5c00b02ad67a9983e53",
+      "git_mode": "100644",
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/ipfs_datasets_py__logic__bridge__proof_receipt_attestation.py.DATA",
+      "repo_relative_path": "ipfs_datasets_py/logic/bridge/proof_receipt_attestation.py",
+      "sha256": "61296f095b933730ea24b070d2eaaf4202da9714c274a605bd5e18c6f4df49a7",
+      "top_imports": [
+        "from __future__ import annotations",
+        "import copy",
+        "import json",
+        "from collections.abc import Callable, Mapping, Sequence",
+        "from dataclasses import dataclass, field",
+        "from datetime import datetime, timezone",
+        "from enum import StrEnum",
+        "from types import MappingProxyType",
+        "from typing import Any, ClassVar, Final, TypeVar",
+        "from ipfs_datasets_py.logic.backends.results import AttestationResult, AuthoritySubstitutionError, ResultAuthority, ResultStatus, TheoremResult, TypedBackendResult",
+        "from ipfs_datasets_py.logic.families.models import EvidenceAuthority",
+        "from ipfs_datasets_py.logic.ir_core.claims import FrozenMap, stable_digest",
+        "from ipfs_datasets_py.logic.ir_core.protocols import ExecutionBounds, ResourceUsage"
+      ]
+    },
+    {
+      "bytes": 27160,
+      "git_blob_sha1": "7ffdc5b4019faa80749df5fb0bb7d1f06379573f",
+      "git_mode": "100644",
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/ipfs_datasets_py__logic__backends__results.py.DATA",
+      "repo_relative_path": "ipfs_datasets_py/logic/backends/results.py",
+      "sha256": "afda793472d3a6ba13f20bee13a992bfce68177388bdf338548157a5aa201458",
+      "top_imports": [
+        "from __future__ import annotations",
+        "from collections.abc import Mapping, Sequence",
+        "from dataclasses import dataclass, field",
+        "from enum import Enum, StrEnum",
+        "from typing import Any, ClassVar, Final",
+        "from ..families.models import EvidenceAuthority",
+        "from ..ir_core.claims import FrozenMap, stable_digest",
+        "from ..ir_core.protocols import BoundedResult as CoreBoundedResult",
+        "from ..ir_core.protocols import EvidenceGateResult as CoreEvidenceGateResult",
+        "from ..ir_core.protocols import ExecutionBounds, ResourceUsage",
+        "from ..ir_core.protocols import MonitorResult as CoreMonitorResult",
+        "from ..ir_core.protocols import PolicyDecision as CorePolicyDecision",
+        "from ..ir_core.protocols import ProofResult as CoreProofResult",
+        "from ..ir_core.protocols import ResultStatus as CoreResultStatus",
+        "from ..ir_core.protocols import SatisfiabilityResult as CoreSatisfiabilityResult"
+      ]
+    },
+    {
+      "bytes": 36277,
+      "git_blob_sha1": "053af9eaf293ba268c2dc8155844f2e3dc5355ce",
+      "git_mode": "100644",
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/ipfs_datasets_py__logic__families__models.py.DATA",
+      "repo_relative_path": "ipfs_datasets_py/logic/families/models.py",
+      "sha256": "1a92305ef498812e3757147179907d4ddf4a4518371034fc2363922d5d5fed3f",
+      "top_imports": [
+        "from __future__ import annotations",
+        "import re",
+        "from dataclasses import dataclass, field",
+        "from enum import Enum",
+        "from typing import Any, ClassVar, Final, Mapping, Sequence"
+      ]
+    }
+  ]
+}

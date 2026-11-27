@@ -1,0 +1,507 @@
+"""Explicitly gated orchestration of three exact original7c profiles; no new owner.
+
+This control never retries, signals, releases reservations, or changes inputs.
+Only Root may select the next serialized slot and supply all authorization pins.
+"""
+from contextlib import ExitStack
+from pathlib import Path
+import argparse
+import hashlib
+import json
+import math
+import os
+import subprocess
+import sys
+import time
+import types
+
+R = Path('/home/barberb/lift_coding/external/ipfs_datasets')
+A = Path('/home/barberb/lift_coding/external/ipfs_accelerate')
+OWNER = Path('/tmp/datasets-reviewed-source-use-main-20261115/scripts/ops/legal_ir/run_owned_validation.py')
+PYTHON = '/home/barberb/lift_coding/.venv/bin/python'
+LEDGER = R / 'workspace/test-logs/federal-corpus-audits/owned-daemon-resource-control/disk-reservations.json'
+CLASSIFIER = R / 'workspace/test-logs/federal-corpus-audits/legal-ir-planning-review-20261020-01/review-11/cp128-warmstart-qualification-v01/controls/launch_single_lease.py'
+CLASSIFIER_SHA = 'a0b2785bf417bfca462d958827d319ef1da2347645becdd1f6a001cec24ad6aa'
+POLICY_SHA = 'f07cb14289fcb6275e4497dcc36be0dcf8bfc3dc87531ff7a9537eb85fdcc661'
+OUTER_WAIT_SECONDS = 420
+JOBS = {
+    'local54': {
+        'directory': '/tmp/legal-ir-LIR2102-local-candidate-materialization-controls-20261107-v02',
+        'manifest_name': 'prepared-manifest.json',
+        'manifest_sha': '4f802afafad4e672533ec8e142d57b3c2bd70347f22270566a786d8d03f19d6b',
+        'request_sha': '4c7ca9c959b27d775adedc0ffb199a596d07f5306b8ea1f1c77a6a9b8667c38f',
+        'plan_sha': '62b6838fc9e31ceedf2c15f05f279543019dcb029647020ae3e450dec5723a66',
+        'review': '/tmp/legal-ir-LIR2102-local54-v02-independent-static-control-review-20261107-v01.json',
+        'review_sha': '8c334eae105b89c84ba17126f75eb95a2a98e6ed4808e98d1a8f016c72315073',
+        'source_pins': 85, 'source_refs': 83, 'installed_refs': 0, 'child_slots': 2,
+        'attempt': '/tmp/pytest-of-barberb/legal-ir-LIR2102-local-candidate-materialization-20261107-v02/attempt-v01',
+        'output': str(R / 'workspace/test-logs/federal-corpus-audits/legal-ir-LIR2102-local-candidate-materialization-20261107-v02'),
+    },
+    'ir30': {
+        'directory': '/tmp/legal-ir-IRpublisher-readback30-qualification-controls-20261107-v02',
+        'manifest_name': 'prepared-manifest-v02.json',
+        'manifest_sha': '51c9930f6a5f6aa10879f5e1513e3bb82cd6b2a5ea8630efc76bf5fe8bfc9350',
+        'request_sha': '7b8963f31260689a345a703e6a817968e4bf0e93faa143d48b36c4e1587c6260',
+        'plan_sha': 'f8964d3582af634f23515989b46d21cecdd56026234ffa870c4028166d73a86e',
+        'review': '/tmp/legal-ir-IRpublisher-readback30-v02-independent-static-control-review-20261107-v01.json',
+        'review_sha': '3643b19704626f8a0dfbf6543cd30eb8e36e6097e10580d742a57acd78923b64',
+        'cases': 30, 'source_review_sha': 'f95835fcfcb5bd052b2df514ab77d4252b62149b1cf181b59ab8abbb7eb9bb8f',
+        'source_pins': 122, 'source_refs': 118, 'installed_refs': 2405, 'child_slots': 4,
+        'attempt': '/tmp/pytest-of-barberb/legal-ir-IRpublisher-readback30-20261107-v02/attempt-v01',
+        'output': str(R / 'workspace/test-logs/federal-corpus-audits/legal-ir-IRpublisher-readback30-qualification-20261107-v02'),
+    },
+    'ir33': {
+        'directory': '/tmp/legal-ir-IRpublisher-readback33-qualification-controls-20261107-v03',
+        'manifest_name': 'prepared-manifest-v03.json',
+        'manifest_sha': '57a54f9a2e8488de8b068060eabf8820f0239ea57e9f936b1b495900a7f2d1f4',
+        'request_sha': 'd8cd5b8f5eaf716c77e8530517df3a0c51f37e13477dacc38fe51ff453160e7c',
+        'plan_sha': 'b73462ba727269502ececb57d915c16450d7259d33713c4287a38bb11be2cba9',
+        'review': '/tmp/legal-ir-IRpublisher-readback33-v03-independent-static-control-review-20261107-v01.json',
+        'review_sha': 'c4271776d6ff6468132d9acdb6ece4e74086bb9f169b66ff71761e7614fae338',
+        'cases': 33, 'source_review_sha': '390e7f44937df74975daaf5bd0a36ad8a17a283fae09eee2e5baaa50fde3beda',
+        'source_pins': 122, 'source_refs': 118, 'installed_refs': 2405, 'child_slots': 4,
+        'attempt': '/tmp/pytest-of-barberb/legal-ir-IRpublisher-readback33-20261107-v03/attempt-v01',
+        'output': str(R / 'workspace/test-logs/federal-corpus-audits/legal-ir-IRpublisher-readback33-qualification-20261107-v03'),
+    },
+}
+
+
+def need(value, message):
+    if not value:
+        raise RuntimeError(message)
+
+
+def load_original(path, digest, name):
+    raw = path.read_bytes()
+    need(hashlib.sha256(raw).hexdigest() == digest, 'original helper changed')
+    module = types.ModuleType(name)
+    module.__file__ = str(path)
+    sys.modules[name] = module
+    exec(compile(raw, str(path), 'exec'), module.__dict__)
+    return module
+
+
+def descriptor(io, path):
+    return io.desc(path, io.read(path))
+
+
+def authenticate_refs(io, refs):
+    for row in refs:
+        need(descriptor(io, Path(row['path'])) == row, 'declared input changed')
+
+
+def authenticate_sources(io, request):
+    for spelling, digest in request['source_sha256'].items():
+        need(io.sha(io.read(Path(spelling))) == digest, 'declared source changed')
+
+
+def policy_digest(io, request):
+    state = io.parse(io.read(Path(request['scheduler_state_path'])))
+    return hashlib.sha256(json.dumps(state['config'], sort_keys=True,
+        separators=(',', ':'), allow_nan=False).encode()).hexdigest()
+
+
+def dual_reads(lease, *, admission_deadline=None, roots=(R, A)):
+    """Original READs, optionally sharing one caller-owned admission cutoff.
+
+    None preserves the original two3s lock waits. The explicit caller supplies
+    an absolute cutoff at most60s ahead. Source42 Git/IO has separate existing
+    bounds, so passing remaining time alone is insufficient: check before and
+    after every actual enter, unwind late admission, and never mint new time.
+    """
+    stack = ExitStack()
+    try:
+        if admission_deadline is None:
+            receipts = [stack.enter_context(lease.source_lease(root, mode='read', timeout_seconds=3)).to_dict()
+                        for root in roots]
+        else:
+            observed = time.monotonic()
+            need(type(admission_deadline) in (int, float) and math.isfinite(admission_deadline)
+                 and observed < admission_deadline <= observed + 60,
+                 'finite caller-owned shared Source admission cutoff required')
+            receipts = []
+            for root in roots:
+                remaining = admission_deadline - time.monotonic()
+                need(remaining > 0, 'shared Source admission expired before entry')
+                held = stack.enter_context(lease.source_lease(root, mode='read', timeout_seconds=remaining))
+                need(time.monotonic() < admission_deadline,
+                     'shared Source admission expired during original Git/lock entry')
+                receipts.append(held.to_dict())
+        return stack, receipts
+    except BaseException:
+        stack.close()
+        raise
+
+
+def error_row(stage, error):
+    # No provider message, credential value, or arbitrary exception repr is copied.
+    return {'stage': stage, 'type': type(error).__name__[:128]}
+
+
+def check_packet(io, job, args):
+    q, out = Path(job['directory']), Path(job['output'])
+    manifest_ref = descriptor(io, q / job['manifest_name'])
+    need(manifest_ref['sha256'] == job['manifest_sha'], 'allowlisted manifest changed')
+    manifest = io.parse(io.read(Path(manifest_ref['path'])))
+    packet_refs = [manifest_ref]
+    for key in ('request', 'plan', 'bootstrap', 'original_metadata_preflight'):
+        authenticate_refs(io, [manifest[key]])
+        packet_refs.append(manifest[key])
+    need(manifest['request']['sha256'] == job['request_sha']
+         and manifest['plan']['sha256'] == job['plan_sha'], 'allowlisted request/plan changed')
+    request = io.parse(io.read(Path(manifest['request']['path'])))
+    plan = io.parse(io.read(Path(manifest['plan']['path'])))
+    need(request['schema'] == 'owned-validation-request/v1' and len(request) == 17
+         and len(request['source_sha256']) == job['source_pins'] <= 256,
+         'exact original request and source cap required')
+    need({key: request[key] for key in ('timeout_seconds', 'storage_bytes', 'memory_mb',
+         'cpu_slots', 'child_process_slots')} == dict(timeout_seconds=300,
+         storage_bytes=134217728, memory_mb=1536, cpu_slots=1, child_process_slots=job['child_slots']),
+         'exact finite job budget required')
+    attempt = Path(job['attempt'])
+    need(request['attempt_directory'] == plan['attempt_directory'] == str(attempt)
+         and request['outputs'] == {name: str(attempt / name)
+             for name in ('tmp', 'cache', 'db', 'logs', 'exports', 'pytest')},
+         'all six exact fresh output paths required')
+    need(len(plan['source_refs']) == job['source_refs']
+         and len(plan.get('installed_dependency_refs', [])) == job['installed_refs']
+         and len(plan['runtime_refs']) == 2, 'exact declared input profile required')
+    expected_argv = [PYTHON, '-I', '-B', str(OWNER), '--request', manifest['request']['path'],
+        '--expected-request-sha256', job['request_sha'], '--resource-ledger', str(LEDGER)]
+    need(manifest['actual_owner_invocation'] == expected_argv, 'original owner argv changed')
+    if args.job == 'local54':
+        need(manifest['ready'] is True and plan['ready_for_original_owner_execution'] is True
+             and manifest['artifact_count'] == len(plan['artifacts']) == 54
+             and all(row['status'] == 'candidate' for row in plan['artifacts'])
+             and plan['remote_or_canonical_or_task_writes_authorized'] is False
+             and request['selected_checks'] == plan['declared_checks'], 'exact local candidate scope required')
+    else:
+        for key in ('candidate_manifest', 'source_candidate_independent_static_review',
+                    'literal_pytest_ini', 'source_closeout', 'prepare_script'):
+            authenticate_refs(io, [manifest[key]])
+            packet_refs.append(manifest[key])
+        need(manifest['ready_for_independent_control_review'] is True and manifest['qualified'] is False
+             and plan['expected_cases'] == sum(plan['expected_function_cases'].values()) == job['cases']
+             and plan['entire_owning_file_selected'] is True
+             and request['selected_checks'] == [str(Path(plan['package_root']) /
+                 'tests/unit/logic/ir_learning/publication/test_ir_publication.py')],
+             'exact whole IR owning-file source-only scope required')
+        need(manifest['source_candidate_independent_static_review']['sha256'] ==
+             job['source_review_sha'], 'candidate review changed')
+    authenticate_sources(io, request)
+    authenticate_refs(io, plan['source_refs'] + plan.get('installed_dependency_refs', []) + plan['runtime_refs'])
+    need(request['source_sha256'].get(str(OWNER)) ==
+         '7cdbec1093c0b2a4d10f77c8053332f0d0439ed39150cf2498fd32eff8897e7e', 'original7c required')
+    need(request['expected_scheduler_policy_sha256'] == policy_digest(io, request) == POLICY_SHA,
+         'actual unchanged stored f07 config required')
+    review_ref = descriptor(io, Path(job['review']))
+    need(review_ref['sha256'] == job['review_sha'], 'independent control review changed')
+    review = io.parse(io.read(Path(job['review'])))
+    need(review['passed'] is True and review['manifest'] == manifest_ref
+         and review['request'] == manifest['request'] and review['plan'] == manifest['plan'],
+         'independent review must join exact job packet')
+    slot_ref = descriptor(io, args.serialized_slot_closeout)
+    need(slot_ref['sha256'] == args.serialized_slot_closeout_sha256, 'Root supplied slot closeout changed')
+    slot = io.parse(io.read(args.serialized_slot_closeout))
+    need(slot.get('schema') in ('legal-ir-native-executor-health-original-capture/v1',
+         'legal-ir-allowlisted-original-owner-wait/v1')
+         and all(slot.get(key) is True for key in ('original_native_compute_closed',
+             'source_READ_closed', 'source_custody_closed', 'child_reaped'))
+         and slot.get('cleanup_errors') == [], 'actual prior Native/source/process closure required')
+    need(not os.path.lexists(out) and not os.path.lexists(attempt), 'fresh output and attempt required; never replay')
+    packet_refs += [review_ref, slot_ref, descriptor(io, CLASSIFIER), descriptor(io, Path(__file__))]
+    return manifest_ref, manifest, request, plan, review_ref, slot_ref, packet_refs
+
+
+def wait_original(process, record, deadline):
+    try:
+        record['returncode'] = process.wait(timeout=max(0, deadline - time.monotonic()))
+        record['genuine_wait_completed'] = True
+    except subprocess.TimeoutExpired as error:
+        record['errors'].append(error_row('genuine_original_wait_timeout', error))
+    except BaseException as error:
+        record['errors'].append(error_row('genuine_original_wait_error', error))
+
+
+def close_log(stream, record, label):
+    if stream is None:
+        return
+    try:
+        if record['genuine_wait_completed']:
+            stream.flush()
+            os.fsync(stream.fileno())
+    except BaseException as error:
+        record['errors'].append(error_row(label + '_flush_fsync', error))
+    finally:
+        try:
+            stream.close()
+        except BaseException as error:
+            record['errors'].append(error_row(label + '_close', error))
+
+
+def identity_gone(pid, birth):
+    try:
+        actual = Path('/proc', str(pid), 'stat').read_text().rsplit(') ', 1)[1].split()[19]
+        return actual != str(birth)
+    except (FileNotFoundError, ProcessLookupError):
+        return True
+
+
+def failure_source_lifecycle_closed(terminal, request, request_sha, record):
+    witness = terminal.get('source_custody_lifecycle') or {}
+    reservation = terminal.get('reservation') or {}
+    return bool(witness.get('schema') == 'owned-validation-source-custody-lifecycle/v1'
+        and witness.get('request_sha256') == request_sha
+        and witness.get('producer') == {'path': str(OWNER), 'sha256': request['source_sha256'][str(OWNER)]}
+        and witness.get('owner') == {'pid': record['owner_pid'], 'birth': str(record['owner_birth'])}
+        and witness.get('reservation_id') == reservation.get('reservation_id')
+        and witness.get('ledger_path') == str(LEDGER)
+        and witness.get('attempt_directory') == request['attempt_directory']
+        and witness.get('outputs') == request['outputs']
+        and witness.get('process_scope') == request['process_scope']
+        and witness.get('budgets') == {key: request[key] for key in
+            ('cpu_slots', 'memory_mb', 'child_process_slots', 'storage_bytes')}
+        and witness.get('scheduler') == {'state_path': request['scheduler_state_path'],
+            'policy_sha256': POLICY_SHA, 'lane': 'validation', 'workload': 'canonical_validation'}
+        and witness.get('events', {}).get('owner_exit_handling_completed') is True
+        and witness.get('source_guards') == {'request_unchanged': True, 'source_pins_unchanged': True,
+            'owner_identity_unchanged': True, 'errors': []})
+
+
+def classify_after_wait(io, classifier, process, request, request_sha, stdout_path, record, *,
+        original_cli=None, request_raw=None):
+    # The actual retained Popen handle is passed directly. No reconstructed PID owner.
+    proven, terminal = classifier.verified_terminal(process, str(record['owner_birth']),
+        request, request_sha, stdout_path, record['returncode'])
+    record['original_terminal'] = terminal
+    record['actual_a0b_terminal_cleanup_verified'] = proven
+    need(terminal is not None, 'original terminal absent')
+    reservation = terminal.get('reservation') or {}
+    row = reservation.get('record') or {}
+    observation = reservation.get('process_observation') or {}
+    witness = terminal.get('source_custody_lifecycle') or {}
+    if type(witness) is dict and witness.get('schema') in (
+            'owned-validation-pre-grant-capacity-refusal/v1',
+            'owned-validation-pre-grant-ledger-lock-refusal/v1'):
+        # This branch needs the current original CLI, authenticated by the
+        # caller inside its existing closing Source READ. Header/message alone
+        # never proves custody; the original closed-envelope API decides.
+        need(type(process) is subprocess.Popen and record.get('genuine_wait_completed') is True
+             and type(record.get('returncode')) is int and record['returncode'] != 0
+             and process.returncode == record['returncode']
+             and record.get('owner_pid') == process.pid,
+             'genuine original owner wait required before no-child classification')
+        need(type(request_raw) is bytes and hashlib.sha256(request_raw).hexdigest() == request_sha
+             and json.dumps(json.loads(request_raw), sort_keys=True, separators=(',', ':'), allow_nan=False)
+                 == json.dumps(request, sort_keys=True, separators=(',', ':'), allow_nan=False),
+             'exact original request bytes/object required')
+        need(type(original_cli) is types.ModuleType and original_cli.__file__ == str(OWNER),
+             'current original CLI module required under closing Source READ')
+        function = original_cli.classify_owned_validation_source_custody
+        need(function.__globals__ is vars(original_cli) and function.__code__.co_filename == str(OWNER),
+             'exact original CLI classifier code identity required')
+        verdict = function(terminal, request_raw, expected_request_sha256=request_sha,
+            owner_pid=process.pid, owner_birth=str(record['owner_birth']),
+            returncode=record['returncode'], expected_resource_ledger=str(LEDGER))
+        need(type(verdict) is dict and set(verdict) == {
+                'verdict', 'source_custody_closed', 'storage_release_authorized'}
+             and verdict['verdict'] == 'proven_original_no_child_no_native_grant'
+             and verdict['source_custody_closed'] is True
+             and verdict['storage_release_authorized'] is False,
+             'original strict no-child/no-native classifier did not prove closure')
+        need(type(reservation) is dict and reservation.get('status') == 'not_entered'
+             and reservation.get('record') is None and reservation.get('resource_lease') is None
+             and reservation.get('process_observation') is None,
+             'unentered/no-record/no-native/no-child receipt required')
+        owner_gone = identity_gone(process.pid, record['owner_birth'])
+        need(owner_gone, 'original CLI owner identity remains live')
+        record.update(actual_original_no_child_verdict=verdict,
+            actual_original_no_child_custody_verified=True,
+            actual_observed_identity_count=0, all_observed_identities_gone=True,
+            owner_identity_gone=True, productive_child_created=False, child_reaped=False,
+            no_productive_child_cleanup_required=True, original_native_grant_absent_verified=True,
+            original_native_compute_closed=True, original_source_exit_lifecycle_closed=True,
+            storage_status='not_entered', storage_artifacts_durable_asserted=None,
+            storage_released_and_durable=False, storage_release_authorized=False,
+            retained_storage_bytes=0)
+        return
+    identities = observation.get('observed_identities')
+    need(type(identities) is list and len(identities) >= 1, 'actual observed identity evidence required')
+    record['actual_observed_identity_count'] = len(identities)
+    record['all_observed_identities_gone'] = all(identity_gone(x['pid'], x['birth_ticks']) for x in identities)
+    record['owner_identity_gone'] = identity_gone(process.pid, record['owner_birth'])
+    record['child_reaped'] = bool(proven and record['all_observed_identities_gone'] and record['owner_identity_gone'])
+    record['original_native_compute_closed'] = bool(proven and record['child_reaped'])
+    record['original_source_exit_lifecycle_closed'] = (record['returncode'] == 0 or
+        failure_source_lifecycle_closed(terminal, request, request_sha, record))
+    record['storage_status'] = row.get('status')
+    record['storage_artifacts_durable_asserted'] = row.get('artifacts_durable_asserted')
+    record['storage_released_and_durable'] = bool(reservation.get('status') == row.get('status') == 'released'
+        and row.get('artifacts_durable_asserted') is True and reservation.get('cleanup_error') is None)
+    record['retained_storage_bytes'] = row.get('storage_bytes') if row.get('status') == 'retained' else 0
+    if record['returncode'] == 0:
+        result_path = Path(request['outputs']['logs']) / 'result.json'
+        need(terminal.get('result') == str(result_path), 'exact original result path required')
+        record['original_result'] = descriptor(io, result_path)
+        result = io.parse(io.read(result_path))
+        record['original_completed_result_verified'] = bool(result.get('schema') == 'owned-validation-result/v1'
+            and result.get('request_sha256') == request_sha and result.get('returncode') == 0
+            and result.get('completed') is True and result.get('executed_checks') == request['selected_checks'])
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--job', choices=tuple(JOBS))
+    parser.add_argument('--root-authorized-request-sha256')
+    parser.add_argument('--root-reviewed-control-sha256')
+    parser.add_argument('--serialized-slot-closeout', type=Path)
+    parser.add_argument('--serialized-slot-closeout-sha256')
+    args = parser.parse_args()
+    need(args.job in JOBS, 'REFUSE: explicit Root job selection required')
+    job = JOBS[args.job]
+    need(args.root_authorized_request_sha256 == job['request_sha']
+         and type(args.root_reviewed_control_sha256) is str
+         and len(args.root_reviewed_control_sha256) == 64
+         and args.serialized_slot_closeout is not None
+         and type(args.serialized_slot_closeout_sha256) is str
+         and len(args.serialized_slot_closeout_sha256) == 64,
+         'REFUSE: Root must bind exact request, reviewed control and fresh actual closed slot')
+    need(sys.flags.isolated and sys.flags.dont_write_bytecode and __debug__, 'fresh -I -B control required')
+    lease = load_original(R / 'ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_source_lease.py',
+        '42e9f07d0d458177079269d9f495f0b70512180c1adc2f7fe0bfdb05518a12f9', '_dual_outer_original42')
+    reads, opening_leases = dual_reads(lease)
+    began = time.monotonic()
+    with reads:
+        io = load_original(R / 'workspace/test-logs/federal-corpus-audits/legal-ir-normative-target-binding-20261021-01/controls/install_product_v02.py',
+            '733d651fb88f08fd1f09c4075e0b6d2b496509c1dcac04926f9e00d373d85671', '_dual_outer_original733')
+        need(descriptor(io, Path(__file__))['sha256'] == args.root_reviewed_control_sha256,
+             'Root review pin must bind these exact control bytes')
+        classifier = load_original(CLASSIFIER, CLASSIFIER_SHA, '_dual_outer_original_a0b')
+        manifest_ref, manifest, request, plan, review_ref, slot_ref, packet_refs = check_packet(io, job, args)
+        need(time.monotonic() - began < 3, 'bounded opening source READ required')
+    opening_seconds = time.monotonic() - began
+    outdir = Path(job['output'])
+    outdir.mkdir(mode=0o700)
+    io.fsync_directory(outdir.parent)
+    attempt = Path(request['attempt_directory'])
+    if not attempt.parent.exists():
+        attempt.parent.mkdir(mode=0o700)
+    attempt.mkdir(mode=0o700)
+    io.fsync_directory(attempt.parent)
+    record = dict(schema='legal-ir-allowlisted-original-owner-wait/v1', job=args.job, manifest=manifest_ref,
+        request=manifest['request'], plan=manifest['plan'], independent_control_review=review_ref,
+        actual_original_owner_argv=manifest['actual_owner_invocation'], control=descriptor(io, Path(__file__)),
+        original_a0b_classifier=next(row for row in packet_refs if row['path'] == str(CLASSIFIER)), prior_serialized_slot_closeout=slot_ref,
+        prior_slot_selected_explicitly_by_Root=True, Root_reviewed_control_sha256=args.root_reviewed_control_sha256,
+        opening_source_READs=opening_leases, opening_source_READ_scope_seconds=opening_seconds,
+        parent_source_READ_closed_before_Popen=True, original_owner_Popen_returned=False,
+        genuine_wait_completed=False, owner_birth=None, returncode=None, errors=[], cleanup_errors=[],
+        automatic_retry_authorized=False, kill_signal_or_manual_reservation_release_performed=False,
+        new_resource_owner_created=False, original_native_compute_closed=False, child_reaped=False,
+        source_custody_closed=False, source_READ_closed=False, source_pins_unchanged=False,
+        installed_dependencies_unchanged=False, runtime_refs_unchanged=False, packet_refs_unchanged=False,
+        original_source_exit_lifecycle_closed=False, original_completed_result_verified=False,
+        storage_released_and_durable=False, closing_source_READ_closed=False, outer_wait_seconds=OUTER_WAIT_SECONDS,
+        actual_publication_or_task_completion_authority=False)
+    io.save(outdir / 'preflight.json', record)
+    environment = dict(plan.get('environment', {}), PATH='/usr/bin:/bin',
+        PYTHONDONTWRITEBYTECODE='1', PYTHONNOUSERSITE='1', IPFS_DATASETS_PY_MINIMAL_IMPORTS='1',
+        IPFS_DATASETS_AUTO_INSTALL='0', IPFS_AUTO_INSTALL='false', IPFS_DATASETS_AUTO_INSTALL_TEST_DEPS='0',
+        IPFS_DATASETS_PY_LAZY_INSTALL_ERGOAI='0', TRANSFORMERS_OFFLINE='1', HF_HUB_OFFLINE='1',
+        HF_HUB_DISABLE_IMPLICIT_TOKEN='1', HF_HUB_DISABLE_XET='1', HF_HUB_DISABLE_TELEMETRY='1',
+        DO_NOT_TRACK='1', SETUPTOOLS_USE_DISTUTILS='stdlib', OMP_NUM_THREADS='1',
+        OPENBLAS_NUM_THREADS='1', MKL_NUM_THREADS='1', CUDA_VISIBLE_DEVICES='')
+    record['declared_nonsecret_owner_environment'] = environment
+    record['parent_environment_inherited'] = False
+    io.save(outdir / 'launch-intent.json', record)
+    stdout_path, stderr_path = outdir / 'owner.stdout', outdir / 'owner.stderr'
+    stdout = stderr = process = None
+    started = time.monotonic()
+    try:
+        stdout = stdout_path.open('xb')
+        stderr = stderr_path.open('xb')
+        process = subprocess.Popen(manifest['actual_owner_invocation'], cwd=R, env=environment,
+            stdout=stdout, stderr=stderr, start_new_session=True)
+        record['original_owner_Popen_returned'] = True
+        record['owner_pid'] = process.pid
+        try:
+            record['owner_birth'] = int(Path('/proc', str(process.pid), 'stat').read_text()
+                .rsplit(') ', 1)[1].split()[19])
+        except BaseException as error:
+            record['errors'].append(error_row('owner_birth_read', error))
+        io.save(outdir / 'actual-popen-returned.json', record)
+    except BaseException as error:
+        record['errors'].append(error_row('original_owner_launch_or_popen_journal', error))
+    finally:
+        if process is not None:
+            wait_original(process, record, started + OUTER_WAIT_SECONDS)
+        close_log(stdout, record, 'stdout')
+        close_log(stderr, record, 'stderr')
+    record['elapsed_seconds'] = time.monotonic() - started
+    if process is not None and not record['genuine_wait_completed']:
+        record['state'] = 'UNKNOWN_OWNER_WAIT_NO_KILL_NO_REPLAY_NO_MANUAL_RELEASE'
+        record['unstable_output_paths'] = [str(stdout_path), str(stderr_path)]
+        target = outdir / 'unknown-owner-wait.json'
+        io.save(target, record)
+        print(json.dumps(descriptor(io, target), sort_keys=True), flush=True)
+        return 2
+    for label, path in (('owner_stdout', stdout_path), ('owner_stderr', stderr_path)):
+        try:
+            record[label] = descriptor(io, path)
+        except BaseException as error:
+            record['errors'].append(error_row(label + '_authentication', error))
+    if process is not None and record['genuine_wait_completed']:
+        try:
+            need(record['owner_birth'] is not None, 'genuine owner birth required for classification')
+            classify_after_wait(io, classifier, process, request, job['request_sha'], stdout_path, record)
+        except BaseException as error:
+            record['errors'].append(error_row('original_terminal_classification', error))
+    try:
+        closing_reads, closing_leases = dual_reads(lease)
+        began = time.monotonic()
+        with closing_reads:
+            record['closing_source_READs'] = closing_leases
+            for label, callback in (
+                ('source_pins_unchanged', lambda: authenticate_sources(io, request)),
+                ('installed_dependencies_unchanged', lambda: authenticate_refs(io, plan.get('installed_dependency_refs', []))),
+                ('runtime_refs_unchanged', lambda: authenticate_refs(io, plan['runtime_refs'])),
+                ('packet_refs_unchanged', lambda: authenticate_refs(io, packet_refs))):
+                try:
+                    callback()
+                    record[label] = True
+                except BaseException as error:
+                    record['errors'].append(error_row('closing_' + label, error))
+            need(time.monotonic() - began < 3, 'bounded closing source READ required')
+        record['closing_source_READ_closed'] = True
+        record['closing_source_READ_scope_seconds'] = time.monotonic() - began
+    except BaseException as error:
+        record['errors'].append(error_row('closing_source_READ', error))
+    record['source_READ_closed'] = record['closing_source_READ_closed']
+    record['source_custody_closed'] = bool(record['source_READ_closed'] and record['source_pins_unchanged']
+        and record['packet_refs_unchanged'] and record['original_source_exit_lifecycle_closed']
+        and record['original_native_compute_closed'] and record['child_reaped'])
+    record['native_source_process_storage_closed'] = bool(record['source_custody_closed']
+        and record['storage_released_and_durable'])
+    record['cleanup_errors'] = list(record['errors'])
+    try:
+        io.fsync_directory(outdir)
+    except BaseException as error:
+        record['errors'].append(error_row('closing_output_directory_fsync', error))
+        record['cleanup_errors'] = list(record['errors'])
+    if process is None:
+        record['state'] = 'FAILED_BEFORE_ORIGINAL_POPEN_RETURNED'
+    elif record['returncode'] != 0:
+        record['state'] = ('ACTUAL_ORIGINAL_OWNER_FAILED_REAPED_NATIVE_SOURCE_PROCESS_CLOSED_STORAGE_SEPARATE'
+            if record['source_custody_closed'] else 'ACTUAL_ORIGINAL_OWNER_FAILED_REAPED_CUSTODY_UNKNOWN')
+    elif record['errors'] or not record['native_source_process_storage_closed'] or not record['original_completed_result_verified']:
+        record['state'] = 'ACTUAL_WRAPPER_FAILED_AFTER_ORIGINAL_OWNER_REAP'
+    else:
+        record['state'] = 'ORIGINAL_OWNER_PASSED_AND_CLOSED_INDEPENDENT_RESULT_REVIEW_PENDING'
+    target = outdir / 'actual-owner-closeout.json'
+    io.save(target, record)
+    print(json.dumps(descriptor(io, target), sort_keys=True), flush=True)
+    return 0 if record['state'] == 'ORIGINAL_OWNER_PASSED_AND_CLOSED_INDEPENDENT_RESULT_REVIEW_PENDING' else 1
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

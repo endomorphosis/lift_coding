@@ -1,0 +1,120 @@
+{
+  "schema": "Root-authorized-Source-review-byte-allowance-increase/v1",
+  "Root_selected": true,
+  "unit": "Main watchdog privatef7c3",
+  "recorded_utc": "2026-11-27T05:49:48+00:00",
+  "packet": {
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/SEALED-existing-watchdog-event-aware-recheck-two-file-private-v03.json",
+    "bytes": 13817,
+    "sha256": "0dd365d7e8cf0d2e7583755c3aba8a329157167edacb7db276267ccf629bd28f"
+  },
+  "prior_owner_ack": {
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/Root-watchdog-adoption-owner-ack-v01.json",
+    "bytes": 3274,
+    "sha256": "933694c8771d426c86efeb5421c982438099cc6ad86d7d236a577af977b359a7"
+  },
+  "standing_authority": {
+    "path": "/tmp/Root-authorized-Source-review-plus64MiB-for-normal51-v01.json",
+    "bytes": 2377,
+    "sha256": "2e26fec63362aa01e0e1d475398261a13211016446ea1557a207f4a3956d55ea"
+  },
+  "human_authorization": {
+    "path": "/tmp/Main-source-cap-human-provenance-v01-g9hs_s_q/Root-original-human-Source-cap-approval.record.jsonl",
+    "bytes": 2960,
+    "sha256": "8fdf2d6c57542b3ce8e8a06773645487c39a3cb2a8a9929426cc785d3fc78dda"
+  },
+  "immediate_context": {
+    "path": "/tmp/Main-source-cap-human-provenance-v01-g9hs_s_q/Root-original-human-approval-immediate-context-v01.json",
+    "bytes": 2096,
+    "sha256": "36619c14214b1b8f2ceebeee64bf7326ef8f57864cfe0fcec2e884887aa12656"
+  },
+  "previous_charge": {
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/Source-only-Guide581-full-retained-cap.json",
+    "bytes": 1321,
+    "sha256": "91acf9ffe66d861824275ca128635becb9fac6f6805a3c411ede206b30f012b7"
+  },
+  "previous_charge_terminal": {
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-Guide581-four-docs-Source-closed-and-frozen.json",
+    "bytes": 6552,
+    "sha256": "38e41dfb04443a92c2a20308d4f01a9cb75fa34f97029856ffbcbf82f1429503"
+  },
+  "prior_ledger": {
+    "captures": 543429,
+    "capturesComplete": false,
+    "global_cap": 60431026186,
+    "internal_cap": 60240434312,
+    "internal_used": 60234077320,
+    "used": 60424669194
+  },
+  "increase_each_cap": 268435456,
+  "ledger_after_allowance_increase": {
+    "captures": 543429,
+    "capturesComplete": false,
+    "global_cap": 60699461642,
+    "internal_cap": 60508869768,
+    "internal_used": 60234077320,
+    "used": 60424669194
+  },
+  "reservations": [
+    {
+      "phase": "Source2_write",
+      "bytes": 67108864,
+      "existing_envelope": {
+        "path": "/tmp/Root-A-CLI111-existing-Source2-v430-e5uezx7r/Source-only-A-CLI111-exact2-paid-preserve-Guide537.json",
+        "bytes": 1430,
+        "sha256": "ac7e8023c20cc7145b6dabe885316d238033d09f5d50c2f198c1dee62d822121"
+      },
+      "scope": "Exact two-file guarded CAS, pre/post evidence, readback and custody closure."
+    },
+    {
+      "phase": "postfreeze_Source_READ10",
+      "bytes": 67108864,
+      "existing_envelope": {
+        "path": "/tmp/Root-A-CLI111-existing-two-root-READ9-v431-x5jscjt3/Root-Source-only-READ9-authorized-full-prior-retention.json",
+        "bytes": 1458,
+        "sha256": "6b11e9f2d9a9d450bc0780c90c738212b0a571eb565fe47807789f8714740fc0"
+      },
+      "watchdog_READ10_precedent": {
+        "path": "/tmp/Root-normal25-ten-Source-READ-actual-v48/actual-D27-observed-D-root-initializer-Source-READ-v01-small-closeout.json",
+        "bytes": 16183,
+        "sha256": "bd313ba93fcb28fcdc7991b82308f12588139124d8c40f29deb9f7b45bc4078c"
+      },
+      "scope": "Fresh A and D indexes, watchdog and owning test, repository and migration owners, test/pytest.ini and three protected conftests. Only the two test conftests are expected loaded."
+    },
+    {
+      "phase": "ordinary_qualification",
+      "bytes": 134217728,
+      "existing_envelope": {
+        "path": "/tmp/Root-selected-native-watchdog-normal25-corrected-v58/Root-selection.json",
+        "bytes": 2220,
+        "sha256": "0ac5718e69d665178afd2a1d971bcc4d98616d9cb2605d331dd3577fc1514663"
+      },
+      "scope": "Full owning file, actual COLLECT roster drives RUN, Source/AST/Code witnesses, readback and custody/process cleanup."
+    }
+  ],
+  "whole_reservation_bytes": 268435456,
+  "unreserved_headroom_bytes": 6356992,
+  "internal_reserve_gap_bytes": 190591874,
+  "ordinary_resource_profile_unchanged": {
+    "AS": 8589934592,
+    "CPU": 1,
+    "RSS": 4294967296,
+    "RUN_wall_CPU": [
+      180,
+      170
+    ],
+    "child": 1,
+    "collect_wall_CPU": [
+      120,
+      110
+    ],
+    "input": 4194304,
+    "output": 16777216,
+    "workspace": 67108864
+  },
+  "launch_precharges_applied": 0,
+  "actual_runtime_selection": null,
+  "physical_IO_accounting_complete": false,
+  "phase_join": "Source2 uses fresh guarded A and D custody and clock. READ10 follows closed Source2 and exact-two local freeze. Ordinary uses closed READ, fresh SDK admission and clock. At each actual selection predebit only that phase, then carry terminal costs, failures and actual capture floor into the next.",
+  "scope": "Source IO allowance only. Existing CPU, RAM, wall, admission, custody, Native, model, service and task permissions are preserved."
+}

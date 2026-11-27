@@ -1,0 +1,53 @@
+{
+  "schema": "Root-watchdog-existing-owner-status/v1",
+  "unit": "Main watchdog privatef7c3",
+  "packet": {
+    "file": "SEALED-existing-watchdog-event-aware-recheck-two-file-private-v03.json",
+    "bytes": 13817,
+    "sha256": "0dd365d7e8cf0d2e7583755c3aba8a329157167edacb7db276267ccf629bd28f"
+  },
+  "coordinator": {
+    "owner": "Root",
+    "thread_id": "01a0f851-65f0-7c11-b737-07a24c5090ea"
+  },
+  "private_candidate_owner": "Main",
+  "phase": "awaiting_watchdog_adoption_selection",
+  "blocker": "Root has not selected a watchdog adoption or qualification job for this packet. There is no task-specific execution owner or handle to report.",
+  "prior_artifact_handoff": {
+    "receipt": "existing-coordinator-artifact-handoff-once-v01/result.json",
+    "message_bytes": 861,
+    "delivery": "accepted_enqueue_only",
+    "turn_id": "01a21b74-e520-7962-a4df-52307ca76e8e",
+    "observed_turn_status": "completed",
+    "watchdog_processing_confirmed": false
+  },
+  "current_read_only_status": {
+    "transport": "existing owned Unix metadata caller",
+    "thread_status": "active",
+    "turn_id": "01a21b80-f411-77d3-8a61-b8769b10d502",
+    "observed_turn_status": "inProgress",
+    "scope": "status request only"
+  },
+  "actual": {
+    "execution_owner": null,
+    "handle": null,
+    "source_binding": null,
+    "write": null,
+    "ordinary_qualification": null,
+    "runtime": null,
+    "publication": null
+  },
+  "candidate_evidence": {
+    "scope": "private scripted checks",
+    "passes": 27,
+    "private_posts": 2
+  },
+  "immutable_preimage_reference": {
+    "accelerate_commit": "64a86499",
+    "watchdog_blob": "0dd6e6ad",
+    "test_blob": "dba0961e",
+    "repository_blob": "e9b885a4",
+    "fresh_remote_verified": false
+  },
+  "started_operations": []
+}

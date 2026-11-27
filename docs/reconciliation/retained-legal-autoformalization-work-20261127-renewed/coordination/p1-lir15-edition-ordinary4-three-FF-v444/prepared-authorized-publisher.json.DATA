@@ -1,0 +1,42 @@
+{
+  "schema": "existing-child-first-normal-FF-publisher-LIR15-exact1-ordinary4/v1",
+  "status": "ROOT_RELEASED_PENDING_LAST_STATIC_REVIEW_NOT_EXECUTED",
+  "existing_publisher": {
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase3-candidate-inventory-ordinary11-three-FF-v435/publish_exact_qualified_phase3_inventory_two_v02.py",
+    "bytes": 18428,
+    "sha256": "029f30e24add7078b1ab12efeebe7e1fb89cda89638d0311cb74dcce4bd877b3"
+  },
+  "program": {
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/p1-lir15-edition-ordinary4-three-FF-v444/publish_exact_qualified_lir15_edition_one.py",
+    "bytes": 20611,
+    "sha256": "7a22bdfe1c9d4687157b04a706beed38cc96a1f6cbdd74861f65edf7e57f5adc"
+  },
+  "forward_delta": {
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/p1-lir15-edition-ordinary4-three-FF-v444/existing-publisher-to-LIR15-exact1.diff.DATA",
+    "bytes": 15119,
+    "sha256": "c87876e49bf25ebba8846db48b72b000f609fd72643227cdf416ffc5f588f4af"
+  },
+  "all_existing_function_AST_exact": true,
+  "Root_release_terminal_session": 14186,
+  "qualification": {
+    "path": "/tmp/Root-existing-LIR15-edition-ordinary4-v444-ZMufyIaY/actual-LIR15-source-edition-ordinary4-closed-small-v444.json",
+    "bytes": 24871,
+    "sha256": "486e837f4ffd12a72f9d71a754c012933d8dd164a38c8440e816a82205b2947a"
+  },
+  "current_READ3": {
+    "bytes": 7743,
+    "sha256": "425528dcc443b5e271926910b89f059e1ea86ed3d2310332abc64e380e0b3174"
+  },
+  "qualified_D": "d58f9a004ea8bf27ff234bb1b55e1eda7a49a6a4",
+  "prior_Guide539": {
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-guide539-four-doc-three-FF-publication-small-v441.json",
+    "bytes": 13378,
+    "sha256": "0c41a15cb69673709ba75becf72a5598f4aceed4af5650cac42787b723413625"
+  },
+  "local_freeze": {
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-P1-LIR15-edition-test-exact1-local-freeze-v442.json",
+    "bytes": 10269,
+    "sha256": "1fc95a8965a4c8fe30192a6bcf3d5c989e5c7e975ef8bd786919b7b712635847"
+  },
+  "source_or_tests_CI_replays_docs_or_Git_actions_during_preparation": false
+}

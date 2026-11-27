@@ -1,0 +1,1462 @@
+{
+  "Lean_admitted": false,
+  "blockers": [
+    "authenticated_complete_context_declarations_missing",
+    "authenticated_formal_review_missing",
+    "authenticated_legal_review_missing",
+    "distinct_authorized_review_principals_missing",
+    "independent_review_roles_missing",
+    "review_evidence_not_fully_authenticated"
+  ],
+  "corpus_admitted": false,
+  "declaration_sha256": "d430666b7df73d764564c60563cfa7bb99f1f3fec409aba99de15eb993a396a2",
+  "eligibility_scope": "declared semantic uses under supplied current trust and observations",
+  "evaluation_clock_authenticated": false,
+  "evaluation_gold_mask": 0,
+  "fixture_only": true,
+  "formal_assumptions": [],
+  "formal_assumptions_proved": false,
+  "global_reviewer_cohort_verified": false,
+  "human_identity_and_competence_verified": false,
+  "permitted_uses": [],
+  "preparation_sha256": "7035ccf829b90a153315ad686a0039f4225a7863a30f150d29611aa7a0231e4f",
+  "producer_pins": {
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/CEC/native/dcec_cleaning.py": "06517ecd30e4889d2a54db6732279e61a53945906860ef66378b5d707cca04b0",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/CEC/native/dcec_core.py": "bb977f411605fc1f0715ed23c988102d55fa012029053c21c8fc5b14aea17e14",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/CEC/native/dcec_integration.py": "f039af934dba224d6c4984e8840fd8a4de00fe5e69837b0678d1d670dc26ac82",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/CEC/native/dcec_parsing.py": "2756e3c94acf902579bfc54d469e01ddd25b72f53d177b88921829d71df7da70",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/CEC/native/dcec_prototypes.py": "0e0b231ed68c39054cfd2fd674780cb736fd258cde7570881cb3a41cb5d2680e",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/TDFOL/tdfol_core.py": "67be350d1fb0422a64ab040349b2d51c4008fbeeb8b59a99b8901d681d7d71c7",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/TDFOL/tdfol_parser.py": "8e1f8885be6dc2a7d692ecdf0364ccc4d01692c38c81137775d9d222d8b8d9d3",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/autoformal/corpus_contracts.py": "0279ad9f7afeb2843aba5c1e0c5b9dd85da8037bd46fd90497f987b613d05982",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/autoformal/corpus_source.py": "6e4be77cfc27a750b11aa57bb92baa92617c57d5c4a26316e25563aa715ec257",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/autoformal/family_qualification.py": "4db56c904cce8a030e5889b5d14687f01e9348842093480dd699649ad96dc1a8",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/autoformal/legal_canonical_calendar.py": "b45d0ad9329e90e4b007885e201adf5b2602b2d789127555b35fdbe5b65bc1b5",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/autoformal/legal_canonical_qualified.py": "580544f2bf329c54832eee9b66042794bab2e6938bad142952aca9f4438f5902",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/autoformal/legal_context_obligations.py": "8b637a6c1947c152abefef3396b86b95739e214dde80e17739ad3f483e2c0482",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/autoformal/legal_family_routes.py": "5e997e84596c1875d0140573b33a08ff9c12902b003ed3669e1f7bf51aee7c2d",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/autoformal/legal_graph_dependencies.py": "eba3bc49bf9f88a660ce9d0d6947f99c603c44a8fc3379d001d31cfe77f98afa",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/autoformal/legal_graph_review.py": "32abecbf17bc3d10b59d1bd08fde3e8b6bfa58f73b17e31e817fe0f4e910af9e",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/autoformal/legal_norm_content_adjudication_v1.py": "2022e3760a3f3fc80fe4a9a9168193518b8f54f49e49841f167302d40a1bd0eb",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/autoformal/legal_norm_content_responses_v1.py": "c6f53e87191a417b2551233fca11b4324e7bb2a060fb540fa029048462fe25a1",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/autoformal/legal_norm_interpretation_review_v1.py": "bdb61ffa938b6d6b26fe81507f54f55263a81c8e38720d027c8d97ea754927b6",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/autoformal/legal_norm_scope_correspondence_v1.py": "731d4b6fa766ccf30f05339dc6d487c96a2e84a25dfbf0f995df647086591fa1",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/autoformal/legal_official_document_views.py": "e43e7e19c6d58ec179224128d9ceabe6a9bf0963db6b42e0c738419a110f00cb",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/autoformal/legal_official_source_custody.py": "876bb6618fd76f6be33b995e9597796e4a5b4d95fa6689129beb3fb918b796e7",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/autoformal/legal_paired_manifest_inventory_v1.py": "f5778bbb6f2fef41a45057ce45ca2f409f0f27647c39e538b21909dd38a1990b",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py": "ff66f344c9cda788801a9fa2d3ef66afd7046d903a53d2bbf11f8dbfdf847ad2",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py": "173cf611423f2b7e7f7cd2703a8a8a4c8b8a8c0db4db5a2f39734db501ca177c",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/autoformal/legal_semantic_graph.py": "b198d58209f5151081588fab914bedc7f15bbbd5d1a1717af98711aed031464c",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/autoformal/legal_source_norm_scope_v1.py": "9131a433da50e564412b73f77b36502fe43c72f46858c21a56f2c57cd178141d",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/autoformal/legal_source_sampling.py": "bdf8a76c13e5e3dd67e5cd2b18230726063d65a97c6db5a018c26dcadefc2489",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/autoformal/legal_source_sampling_review.py": "0434ee6773f68365598394a02d4130d89f18d5c822ea521fcfd5d381e2375e46",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/autoformal/legal_source_sampling_review_context.py": "d5422415f3311451259818f89928d62e69f0bbd9df70648290dbe4a84d4e0645",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/autoformal/legal_statutory_context.py": "96bfd59e00771c77cfc045b9594f284a1ce95e968805764eb613a5b35ce065da",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/autoformal/legal_statutory_context_v2.py": "2f4e2895e29d6a7fcefdb240c73b732b8e0504b918af62994a04964bc572a13e",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/families/namespaces.py": "ba097e653158a812d66ead978d6405d61adaa293521305333579b19bd69a432d",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/formalization/autoencoder/native_family_lean_emitters.py": "dab6bbd4e17eef888f4181aab0c6ce3f087a717edc83a55befb7742fd1f598b1",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/formalization/autoencoder/native_legal_qualified_lean.py": "5407ba7299b002048ff8f45dbea7295d3b210f41904f28a98684042d055d0b2a",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/formalization/autoencoder/native_qualified_lean.py": "645d38508004833092cd5fd9870f29fdae34aa0e262471888973cb3203121408",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/intent_ir/formalize/modal_projections.py": "7337b9266ed4f171ec7ee763828f8b637bf57930d8b89fa0d47139650996a14d",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/ir_core/provenance.py": "16eaf7c258550e5625bc19e6e7468c94133aedd1e85e64075f057ab4e52c3efe",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope_bridge.py": "7e74f5ea2230549165fd0cb0230b2b8baaa0016cc2352d5a422c70c20f5e4da8",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/parsers/legacy_modal.py": "7b18812ea6fcba8b65ed7dc5c3407e0ad06ac9760c5c66441e9677463f9eb66e",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/profile_g.py": "4ca5dcc601f30c723467f425a6a03a7c5b1f644c2239a0f4a489705f1b715f03",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/syntax_core/ast.py": "4709513f18ab270858fe9595d88a847ddc52092606c52c7802947abed1ab9ac4",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/syntax_core/contracts.py": "ce6d49e05ca2b09a84a3125ed6ad4c4aae4adf2c5943d3a4fd4eeeb057b444a8",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/logic/syntax_core/signatures.py": "49dd4fb0096661a05a15f056eb57248349e2b4e0b02e83239f36db36788c75bf",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/project/ipfs_datasets_py/utils/cid_utils.py": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"
+  },
+  "profile": "complete-reviewed-mixed-sort-norm-admission/v3",
+  "proof_authority": false,
+  "provenance_kind": "fictional_fixture",
+  "registry_freshness_authenticated": false,
+  "review_authority": {
+    "accepted_view_eligible": false,
+    "admitted": false,
+    "assessment_sha256": "bd843e54b6c610e5d3f557d5ecd369366bb0207849f9a8ac07311a68d857807b",
+    "authenticated_evidence_count": 0,
+    "blockers": [
+      "authenticated_complete_context_declarations_missing",
+      "authenticated_formal_review_missing",
+      "authenticated_legal_review_missing",
+      "distinct_authorized_review_principals_missing",
+      "downstream_Lean_kernel_admission_required",
+      "downstream_semantic_validation_required",
+      "review_evidence_not_fully_authenticated"
+    ],
+    "context_closure_verified": false,
+    "coverage_scope": "exact_selected_graph_reviews_context_slots_and_declared_dependencies_only",
+    "dependency_invalidation_sha256": "ca44c76ec799969d420d37651fea5db4b3ed4480beb8281b81eedd709407cba2",
+    "dependency_manifest_sha256": "1e27cb65f6db0c4fa3464869fbef3f4dc420891521ccaecc97c8950cb771cc9c",
+    "eligibility_status": "blocked",
+    "evaluation_clock_authenticated": false,
+    "evaluation_time_utc": "2026-10-15T12:03:00Z",
+    "evidence_artifact_sha256s": {
+      "fixture:reviewed-mixed-act-v1": "d430666b7df73d764564c60563cfa7bb99f1f3fec409aba99de15eb993a396a2",
+      "fixture:reviewed-process-evidence": "0b615d48c2dccad89db514054a793e966e582dcb7180e055f85678d9d26f5086"
+    },
+    "evidence_assessment_status": "rejected",
+    "formalized": false,
+    "global_consistency_verified": false,
+    "human_identity_verified": false,
+    "human_independence_verified": false,
+    "legal_dependency_inventory_exhaustive": false,
+    "policy_sha256": "b687e2450c288b0e98811a5da5705ffa86fb76c3047651fd6c8f96ccfc3d4719",
+    "proof_authority": false,
+    "registry_identity_authenticated_by_this_api": false,
+    "registry_sha256": "d82fbbc3e6914eab3da3a78b6f5f2d754e7c2e41c34d5421cd9791c09bd1e0f1",
+    "review_count": 2,
+    "review_prerequisites_satisfied_under_selected_trust": false,
+    "reviews": [
+      {
+        "blockers": [
+          "signed_policy_sha256_differs"
+        ],
+        "context_blockers": [],
+        "context_declaration_sha256": "9dcca2a1086a4edebb493dac87654e95413f19f2e7cfcda70bb05d58de629b35",
+        "declared_ambiguity": [],
+        "declared_decision": "support",
+        "key_id": "fixture:reviewed-key:0",
+        "principal_id": "fixture:reviewed-principal:0",
+        "review_id": "fixture:reviewed-review:0",
+        "review_sha256": "750294903201dc08d1ff189001a8949e8ac8c3b40886d7f95de71be6cfda2062",
+        "role": "legal_review",
+        "signature_status": "valid",
+        "signed_context_declaration_complete": true,
+        "status": "rejected"
+      },
+      {
+        "blockers": [
+          "signed_policy_sha256_differs"
+        ],
+        "context_blockers": [],
+        "context_declaration_sha256": "9dcca2a1086a4edebb493dac87654e95413f19f2e7cfcda70bb05d58de629b35",
+        "declared_ambiguity": [],
+        "declared_decision": "support",
+        "key_id": "fixture:reviewed-key:1",
+        "principal_id": "fixture:reviewed-principal:1",
+        "review_id": "fixture:reviewed-review:1",
+        "review_sha256": "d48948a7de636e8ef0afcef8d948993f48600f72f569011188c3e17105bc6ef8",
+        "role": "formal_review",
+        "signature_status": "valid",
+        "signed_context_declaration_complete": true,
+        "status": "rejected"
+      }
+    ],
+    "reviews_sha256": "b17b0926277afad3f74034ef402a9961318d2be1dd95b7523b875fcd97e91148",
+    "schema": "legal-reviewed-mixed-sort-norm-authority-assessment/v3",
+    "signature_establishes_legal_truth": false,
+    "source_semantics_verified": false,
+    "structural_intake_valid": true,
+    "subject_sha256": "c8831bc6408d438f8635edcbb9f979b765774a9677a942a643a4c580316cca20",
+    "training_qualified": false,
+    "trust_mode": "external_pinned_trust"
+  },
+  "schema": "legal-reviewed-mixed-sort-norm-admission-assessment/v3",
+  "semantic_graph_admitted": false,
+  "semantic_use_eligible": false,
+  "training_executed": false,
+  "training_mask": 0,
+  "units": [
+    {
+      "argument_roles": [
+        {
+          "roles": [
+            "officer"
+          ],
+          "symbol": "CoveredOfficer"
+        },
+        {
+          "roles": [
+            "officer"
+          ],
+          "symbol": "AppointedByBoard"
+        }
+      ],
+      "canonical_ir": {
+        "argument_roles": [
+          {
+            "roles": [
+              "officer"
+            ],
+            "symbol": "CoveredOfficer"
+          },
+          {
+            "roles": [
+              "officer"
+            ],
+            "symbol": "AppointedByBoard"
+          }
+        ],
+        "assumptions": [],
+        "cross_references": [],
+        "definition_uses": [
+          {
+            "applicability": "governing",
+            "defined_predicate": "CoveredOfficer",
+            "definition_unit_id": "fixture:mixed-act-v1/unit-1",
+            "evidence_refs": [
+              {
+                "artifact_id": "fixture:reviewed-process-evidence",
+                "sha256": "0b615d48c2dccad89db514054a793e966e582dcb7180e055f85678d9d26f5086"
+              }
+            ],
+            "interpretation_id": "fixture:mixed-act-v1/selected-interpretation",
+            "target_typed_paths": [
+              "/root/arguments/0/arguments/0"
+            ],
+            "use_occurrence_cid": "baguqeeraspsmmgi7rz74uwbolgtvhnjz2llvqld36jwcf2526l6eejw7ogoq",
+            "use_unit_id": "fixture:mixed-act-v1/unit-2"
+          },
+          {
+            "applicability": "governing",
+            "defined_predicate": "CoveredOfficer",
+            "definition_unit_id": "fixture:mixed-act-v1/unit-1",
+            "evidence_refs": [
+              {
+                "artifact_id": "fixture:reviewed-process-evidence",
+                "sha256": "0b615d48c2dccad89db514054a793e966e582dcb7180e055f85678d9d26f5086"
+              }
+            ],
+            "interpretation_id": "fixture:mixed-act-v1/selected-interpretation",
+            "target_typed_paths": [
+              "/root/arguments/0/arguments/0/arguments/0/arguments/0/arguments/0/arguments/0",
+              "/root/arguments/0/arguments/0/arguments/0/arguments/0/arguments/0/arguments/1"
+            ],
+            "use_occurrence_cid": "baguqeera7sbnrtwgmqegsigv7mc6v6eit3ugb2pl425jgjduxgvsrwsslcma",
+            "use_unit_id": "fixture:mixed-act-v1/unit-3"
+          }
+        ],
+        "governing_context": {
+          "governing_edition": "fictional-edition-1",
+          "instrument_id": "fixture:mixed-act-v1",
+          "jurisdiction": "fictional-jurisdiction",
+          "legal_as_of_utc": "2026-10-15T12:03:00Z",
+          "valid_from_utc": "2026-10-01T00:00:00Z",
+          "valid_until_utc": "2026-11-01T00:00:00Z"
+        },
+        "interpretation_id": "fixture:mixed-act-v1/selected-interpretation",
+        "profile": "authored-object-relational-deontic/v1",
+        "source_binding": {
+          "document_revision": "fixture:mixed-act-v1/revision-1",
+          "occurrence_cid": "baguqeera4yau6cgen6bv75aarclm6jt2dkus5evyjmkfglq77o7cjriybeva",
+          "source_version_cid": "baguqeeratx4l7gz2yxhj2k5hk6mektowhevpagt4iwlijvbphszbxwzg7oka"
+        },
+        "typed_expression": {
+          "content_digest": "d72a08d25be06eedc1403b78e851e8bb6dda9ee2c45309e4c32fd79eded1a83e",
+          "expression_id": "fixture:expression",
+          "family": {
+            "interface": "LogicIdentityNamespaces@1",
+            "namespace": "family",
+            "schema_version": "logic-identity-namespaces/v1",
+            "value": "tdfol",
+            "version": "1.0.0"
+          },
+          "interface": "TypedExpression@1",
+          "metadata": {},
+          "profile": {
+            "interface": "LogicIdentityNamespaces@1",
+            "namespace": "profile",
+            "schema_version": "logic-identity-namespaces/v1",
+            "value": "tdfol_default",
+            "version": "1.0.0"
+          },
+          "root": {
+            "arguments": [
+              {
+                "arguments": [
+                  {
+                    "arguments": [
+                      {
+                        "arguments": [],
+                        "binders": [],
+                        "kind": "variable",
+                        "metadata": {},
+                        "node_id": "fixture:node:2",
+                        "schema_version": "syntax-logic-node/v1",
+                        "sort": {
+                          "arguments": [],
+                          "kind": "atomic",
+                          "name": "Object",
+                          "schema_version": "syntax-logic-sort/v1"
+                        },
+                        "symbol": "officer"
+                      }
+                    ],
+                    "binders": [],
+                    "kind": "predicate",
+                    "metadata": {},
+                    "node_id": "fixture:node:1",
+                    "schema_version": "syntax-logic-node/v1",
+                    "sort": {
+                      "arguments": [],
+                      "kind": "bool",
+                      "name": "Bool",
+                      "schema_version": "syntax-logic-sort/v1"
+                    },
+                    "symbol": "CoveredOfficer"
+                  },
+                  {
+                    "arguments": [
+                      {
+                        "arguments": [],
+                        "binders": [],
+                        "kind": "variable",
+                        "metadata": {},
+                        "node_id": "fixture:node:4",
+                        "schema_version": "syntax-logic-node/v1",
+                        "sort": {
+                          "arguments": [],
+                          "kind": "atomic",
+                          "name": "Object",
+                          "schema_version": "syntax-logic-sort/v1"
+                        },
+                        "symbol": "officer"
+                      }
+                    ],
+                    "binders": [],
+                    "kind": "predicate",
+                    "metadata": {},
+                    "node_id": "fixture:node:3",
+                    "schema_version": "syntax-logic-node/v1",
+                    "sort": {
+                      "arguments": [],
+                      "kind": "bool",
+                      "name": "Bool",
+                      "schema_version": "syntax-logic-sort/v1"
+                    },
+                    "symbol": "AppointedByBoard"
+                  }
+                ],
+                "binders": [],
+                "kind": "iff",
+                "metadata": {},
+                "node_id": "fixture:node:5",
+                "schema_version": "syntax-logic-node/v1",
+                "sort": {
+                  "arguments": [],
+                  "kind": "bool",
+                  "name": "Bool",
+                  "schema_version": "syntax-logic-sort/v1"
+                },
+                "symbol": ""
+              }
+            ],
+            "binders": [
+              {
+                "name": "officer",
+                "schema_version": "syntax-binder/v1",
+                "sort": {
+                  "arguments": [],
+                  "kind": "atomic",
+                  "name": "Object",
+                  "schema_version": "syntax-logic-sort/v1"
+                }
+              }
+            ],
+            "kind": "forall",
+            "metadata": {},
+            "node_id": "fixture:node:6",
+            "schema_version": "syntax-logic-node/v1",
+            "sort": {
+              "arguments": [],
+              "kind": "bool",
+              "name": "Bool",
+              "schema_version": "syntax-logic-sort/v1"
+            },
+            "symbol": ""
+          },
+          "schema_version": "syntax-typed-expression/v1",
+          "signature": {
+            "family": {
+              "interface": "LogicIdentityNamespaces@1",
+              "namespace": "family",
+              "schema_version": "logic-identity-namespaces/v1",
+              "value": "tdfol",
+              "version": "1.0.0"
+            },
+            "features": [],
+            "interface": "LogicSignature@1",
+            "metadata": {},
+            "profile": {
+              "interface": "LogicIdentityNamespaces@1",
+              "namespace": "profile",
+              "schema_version": "logic-identity-namespaces/v1",
+              "value": "tdfol_default",
+              "version": "1.0.0"
+            },
+            "schema_version": "syntax-logic-signature/v1",
+            "signature_id": "fixture:signature",
+            "sorts": [
+              {
+                "arguments": [],
+                "kind": "bool",
+                "name": "Bool",
+                "schema_version": "syntax-logic-sort/v1"
+              },
+              {
+                "arguments": [],
+                "kind": "atomic",
+                "name": "Object",
+                "schema_version": "syntax-logic-sort/v1"
+              }
+            ],
+            "symbols": [
+              {
+                "domain": [
+                  {
+                    "arguments": [],
+                    "kind": "atomic",
+                    "name": "Object",
+                    "schema_version": "syntax-logic-sort/v1"
+                  }
+                ],
+                "kind": "predicate",
+                "metadata": {},
+                "name": "CoveredOfficer",
+                "range": {
+                  "arguments": [],
+                  "kind": "bool",
+                  "name": "Bool",
+                  "schema_version": "syntax-logic-sort/v1"
+                },
+                "schema_version": "syntax-symbol-declaration/v1"
+              },
+              {
+                "domain": [
+                  {
+                    "arguments": [],
+                    "kind": "atomic",
+                    "name": "Object",
+                    "schema_version": "syntax-logic-sort/v1"
+                  }
+                ],
+                "kind": "predicate",
+                "metadata": {},
+                "name": "AppointedByBoard",
+                "range": {
+                  "arguments": [],
+                  "kind": "bool",
+                  "name": "Bool",
+                  "schema_version": "syntax-logic-sort/v1"
+                },
+                "schema_version": "syntax-symbol-declaration/v1"
+              }
+            ]
+          }
+        }
+      },
+      "kind": "definition",
+      "occurrence_cid": "baguqeera4yau6cgen6bv75aarclm6jt2dkus5evyjmkfglq77o7cjriybeva",
+      "relational_profile": "authored-object-relational-deontic/v1",
+      "source_text": "For this fictional Act, a covered officer means an officer appointed by the Board. Café.",
+      "source_version_cid": "baguqeeratx4l7gz2yxhj2k5hk6mektowhevpagt4iwlijvbphszbxwzg7oka",
+      "typed_paths": [
+        "/root",
+        "/root/binders/0",
+        "/root/arguments/0",
+        "/root/arguments/0/arguments/0",
+        "/root/arguments/0/arguments/0/arguments/0",
+        "/root/arguments/0/arguments/1",
+        "/root/arguments/0/arguments/1/arguments/0"
+      ],
+      "unit_id": "fixture:mixed-act-v1/unit-1"
+    },
+    {
+      "argument_roles": [
+        {
+          "roles": [
+            "officer"
+          ],
+          "symbol": "CoveredOfficer"
+        },
+        {
+          "roles": [
+            "officer"
+          ],
+          "symbol": "Excused"
+        },
+        {
+          "roles": [
+            "officer"
+          ],
+          "symbol": "FilesReport"
+        }
+      ],
+      "canonical_ir": {
+        "argument_roles": [
+          {
+            "roles": [
+              "officer"
+            ],
+            "symbol": "CoveredOfficer"
+          },
+          {
+            "roles": [
+              "officer"
+            ],
+            "symbol": "Excused"
+          },
+          {
+            "roles": [
+              "officer"
+            ],
+            "symbol": "FilesReport"
+          }
+        ],
+        "assumptions": [],
+        "cross_references": [],
+        "definition_uses": [
+          {
+            "applicability": "governing",
+            "defined_predicate": "CoveredOfficer",
+            "definition_unit_id": "fixture:mixed-act-v1/unit-1",
+            "evidence_refs": [
+              {
+                "artifact_id": "fixture:reviewed-process-evidence",
+                "sha256": "0b615d48c2dccad89db514054a793e966e582dcb7180e055f85678d9d26f5086"
+              }
+            ],
+            "interpretation_id": "fixture:mixed-act-v1/selected-interpretation",
+            "target_typed_paths": [
+              "/root/arguments/0/arguments/0"
+            ],
+            "use_occurrence_cid": "baguqeeraspsmmgi7rz74uwbolgtvhnjz2llvqld36jwcf2526l6eejw7ogoq",
+            "use_unit_id": "fixture:mixed-act-v1/unit-2"
+          }
+        ],
+        "governing_context": {
+          "governing_edition": "fictional-edition-1",
+          "instrument_id": "fixture:mixed-act-v1",
+          "jurisdiction": "fictional-jurisdiction",
+          "legal_as_of_utc": "2026-10-15T12:03:00Z",
+          "valid_from_utc": "2026-10-01T00:00:00Z",
+          "valid_until_utc": "2026-11-01T00:00:00Z"
+        },
+        "interpretation_id": "fixture:mixed-act-v1/selected-interpretation",
+        "profile": "authored-object-relational-deontic/v1",
+        "source_binding": {
+          "document_revision": "fixture:mixed-act-v1/revision-1",
+          "occurrence_cid": "baguqeeraspsmmgi7rz74uwbolgtvhnjz2llvqld36jwcf2526l6eejw7ogoq",
+          "source_version_cid": "baguqeera76h6foirdop7np677cr6f25nl6xkzgvzjbqhstyc3m6iv57a6mca"
+        },
+        "typed_expression": {
+          "content_digest": "bf1648a1fb7fab9299ebe80b200da5f61ecb515374af81d83a9b4c7503130c7d",
+          "expression_id": "fixture:expression",
+          "family": {
+            "interface": "LogicIdentityNamespaces@1",
+            "namespace": "family",
+            "schema_version": "logic-identity-namespaces/v1",
+            "value": "tdfol",
+            "version": "1.0.0"
+          },
+          "interface": "TypedExpression@1",
+          "metadata": {},
+          "profile": {
+            "interface": "LogicIdentityNamespaces@1",
+            "namespace": "profile",
+            "schema_version": "logic-identity-namespaces/v1",
+            "value": "tdfol_default",
+            "version": "1.0.0"
+          },
+          "root": {
+            "arguments": [
+              {
+                "arguments": [
+                  {
+                    "arguments": [
+                      {
+                        "arguments": [],
+                        "binders": [],
+                        "kind": "variable",
+                        "metadata": {},
+                        "node_id": "fixture:node:2",
+                        "schema_version": "syntax-logic-node/v1",
+                        "sort": {
+                          "arguments": [],
+                          "kind": "atomic",
+                          "name": "Object",
+                          "schema_version": "syntax-logic-sort/v1"
+                        },
+                        "symbol": "officer"
+                      }
+                    ],
+                    "binders": [],
+                    "kind": "predicate",
+                    "metadata": {},
+                    "node_id": "fixture:node:1",
+                    "schema_version": "syntax-logic-node/v1",
+                    "sort": {
+                      "arguments": [],
+                      "kind": "bool",
+                      "name": "Bool",
+                      "schema_version": "syntax-logic-sort/v1"
+                    },
+                    "symbol": "CoveredOfficer"
+                  },
+                  {
+                    "arguments": [
+                      {
+                        "arguments": [
+                          {
+                            "arguments": [
+                              {
+                                "arguments": [],
+                                "binders": [],
+                                "kind": "variable",
+                                "metadata": {},
+                                "node_id": "fixture:node:5",
+                                "schema_version": "syntax-logic-node/v1",
+                                "sort": {
+                                  "arguments": [],
+                                  "kind": "atomic",
+                                  "name": "Object",
+                                  "schema_version": "syntax-logic-sort/v1"
+                                },
+                                "symbol": "officer"
+                              }
+                            ],
+                            "binders": [],
+                            "kind": "predicate",
+                            "metadata": {},
+                            "node_id": "fixture:node:4",
+                            "schema_version": "syntax-logic-node/v1",
+                            "sort": {
+                              "arguments": [],
+                              "kind": "bool",
+                              "name": "Bool",
+                              "schema_version": "syntax-logic-sort/v1"
+                            },
+                            "symbol": "Excused"
+                          }
+                        ],
+                        "binders": [],
+                        "kind": "not",
+                        "metadata": {},
+                        "node_id": "fixture:node:3",
+                        "schema_version": "syntax-logic-node/v1",
+                        "sort": {
+                          "arguments": [],
+                          "kind": "bool",
+                          "name": "Bool",
+                          "schema_version": "syntax-logic-sort/v1"
+                        },
+                        "symbol": ""
+                      },
+                      {
+                        "arguments": [],
+                        "binders": [],
+                        "extension": {
+                          "children": [
+                            {
+                              "arguments": [
+                                {
+                                  "arguments": [],
+                                  "binders": [],
+                                  "kind": "variable",
+                                  "metadata": {},
+                                  "node_id": "fixture:node:7",
+                                  "schema_version": "syntax-logic-node/v1",
+                                  "sort": {
+                                    "arguments": [],
+                                    "kind": "atomic",
+                                    "name": "Object",
+                                    "schema_version": "syntax-logic-sort/v1"
+                                  },
+                                  "symbol": "officer"
+                                }
+                              ],
+                              "binders": [],
+                              "kind": "predicate",
+                              "metadata": {},
+                              "node_id": "fixture:node:6",
+                              "schema_version": "syntax-logic-node/v1",
+                              "sort": {
+                                "arguments": [],
+                                "kind": "bool",
+                                "name": "Bool",
+                                "schema_version": "syntax-logic-sort/v1"
+                              },
+                              "symbol": "FilesReport"
+                            }
+                          ],
+                          "family": {
+                            "interface": "LogicIdentityNamespaces@1",
+                            "namespace": "family",
+                            "schema_version": "logic-identity-namespaces/v1",
+                            "value": "tdfol",
+                            "version": "1.0.0"
+                          },
+                          "features": [
+                            "legacy.classic_letter",
+                            "legacy.obligation"
+                          ],
+                          "interface": "LogicExtensionNode@1",
+                          "metadata": {},
+                          "node_id": "fixture:node:8:ext",
+                          "payload": {
+                            "kind": "obligation",
+                            "letter": "O",
+                            "resolution": "deontic",
+                            "schema_version": "legacy.deontic/v1"
+                          },
+                          "payload_schema": "legacy.deontic/v1",
+                          "profile": {
+                            "interface": "LogicIdentityNamespaces@1",
+                            "namespace": "profile",
+                            "schema_version": "logic-identity-namespaces/v1",
+                            "value": "tdfol_default",
+                            "version": "1.0.0"
+                          },
+                          "schema_version": "syntax-logic-extension-node/v1"
+                        },
+                        "kind": "extension",
+                        "metadata": {},
+                        "node_id": "fixture:node:8",
+                        "schema_version": "syntax-logic-node/v1",
+                        "sort": {
+                          "arguments": [],
+                          "kind": "bool",
+                          "name": "Bool",
+                          "schema_version": "syntax-logic-sort/v1"
+                        },
+                        "symbol": ""
+                      }
+                    ],
+                    "binders": [],
+                    "kind": "implies",
+                    "metadata": {},
+                    "node_id": "fixture:node:9",
+                    "schema_version": "syntax-logic-node/v1",
+                    "sort": {
+                      "arguments": [],
+                      "kind": "bool",
+                      "name": "Bool",
+                      "schema_version": "syntax-logic-sort/v1"
+                    },
+                    "symbol": ""
+                  }
+                ],
+                "binders": [],
+                "kind": "implies",
+                "metadata": {},
+                "node_id": "fixture:node:10",
+                "schema_version": "syntax-logic-node/v1",
+                "sort": {
+                  "arguments": [],
+                  "kind": "bool",
+                  "name": "Bool",
+                  "schema_version": "syntax-logic-sort/v1"
+                },
+                "symbol": ""
+              }
+            ],
+            "binders": [
+              {
+                "name": "officer",
+                "schema_version": "syntax-binder/v1",
+                "sort": {
+                  "arguments": [],
+                  "kind": "atomic",
+                  "name": "Object",
+                  "schema_version": "syntax-logic-sort/v1"
+                }
+              }
+            ],
+            "kind": "forall",
+            "metadata": {},
+            "node_id": "fixture:node:11",
+            "schema_version": "syntax-logic-node/v1",
+            "sort": {
+              "arguments": [],
+              "kind": "bool",
+              "name": "Bool",
+              "schema_version": "syntax-logic-sort/v1"
+            },
+            "symbol": ""
+          },
+          "schema_version": "syntax-typed-expression/v1",
+          "signature": {
+            "family": {
+              "interface": "LogicIdentityNamespaces@1",
+              "namespace": "family",
+              "schema_version": "logic-identity-namespaces/v1",
+              "value": "tdfol",
+              "version": "1.0.0"
+            },
+            "features": [],
+            "interface": "LogicSignature@1",
+            "metadata": {},
+            "profile": {
+              "interface": "LogicIdentityNamespaces@1",
+              "namespace": "profile",
+              "schema_version": "logic-identity-namespaces/v1",
+              "value": "tdfol_default",
+              "version": "1.0.0"
+            },
+            "schema_version": "syntax-logic-signature/v1",
+            "signature_id": "fixture:signature",
+            "sorts": [
+              {
+                "arguments": [],
+                "kind": "bool",
+                "name": "Bool",
+                "schema_version": "syntax-logic-sort/v1"
+              },
+              {
+                "arguments": [],
+                "kind": "atomic",
+                "name": "Object",
+                "schema_version": "syntax-logic-sort/v1"
+              }
+            ],
+            "symbols": [
+              {
+                "domain": [
+                  {
+                    "arguments": [],
+                    "kind": "atomic",
+                    "name": "Object",
+                    "schema_version": "syntax-logic-sort/v1"
+                  }
+                ],
+                "kind": "predicate",
+                "metadata": {},
+                "name": "CoveredOfficer",
+                "range": {
+                  "arguments": [],
+                  "kind": "bool",
+                  "name": "Bool",
+                  "schema_version": "syntax-logic-sort/v1"
+                },
+                "schema_version": "syntax-symbol-declaration/v1"
+              },
+              {
+                "domain": [
+                  {
+                    "arguments": [],
+                    "kind": "atomic",
+                    "name": "Object",
+                    "schema_version": "syntax-logic-sort/v1"
+                  }
+                ],
+                "kind": "predicate",
+                "metadata": {},
+                "name": "Excused",
+                "range": {
+                  "arguments": [],
+                  "kind": "bool",
+                  "name": "Bool",
+                  "schema_version": "syntax-logic-sort/v1"
+                },
+                "schema_version": "syntax-symbol-declaration/v1"
+              },
+              {
+                "domain": [
+                  {
+                    "arguments": [],
+                    "kind": "atomic",
+                    "name": "Object",
+                    "schema_version": "syntax-logic-sort/v1"
+                  }
+                ],
+                "kind": "predicate",
+                "metadata": {},
+                "name": "FilesReport",
+                "range": {
+                  "arguments": [],
+                  "kind": "bool",
+                  "name": "Bool",
+                  "schema_version": "syntax-logic-sort/v1"
+                },
+                "schema_version": "syntax-symbol-declaration/v1"
+              }
+            ]
+          }
+        }
+      },
+      "kind": "norm",
+      "occurrence_cid": "baguqeeraspsmmgi7rz74uwbolgtvhnjz2llvqld36jwcf2526l6eejw7ogoq",
+      "relational_profile": "authored-object-relational-deontic/v1",
+      "source_text": "Every covered officer must file a report unless the Board expressly excuses that officer.",
+      "source_version_cid": "baguqeera76h6foirdop7np677cr6f25nl6xkzgvzjbqhstyc3m6iv57a6mca",
+      "typed_paths": [
+        "/root",
+        "/root/binders/0",
+        "/root/arguments/0",
+        "/root/arguments/0/arguments/0",
+        "/root/arguments/0/arguments/0/arguments/0",
+        "/root/arguments/0/arguments/1",
+        "/root/arguments/0/arguments/1/arguments/0",
+        "/root/arguments/0/arguments/1/arguments/0/arguments/0",
+        "/root/arguments/0/arguments/1/arguments/0/arguments/0/arguments/0",
+        "/root/arguments/0/arguments/1/arguments/1",
+        "/root/arguments/0/arguments/1/arguments/1/extension",
+        "/root/arguments/0/arguments/1/arguments/1/extension/children/0",
+        "/root/arguments/0/arguments/1/arguments/1/extension/children/0/arguments/0"
+      ],
+      "unit_id": "fixture:mixed-act-v1/unit-2"
+    },
+    {
+      "argument_roles": [
+        {
+          "roles": [
+            "officer"
+          ],
+          "symbol": "CoveredOfficer"
+        },
+        {
+          "roles": [
+            "officer",
+            "supervisor",
+            "event",
+            "moment"
+          ],
+          "symbol": "InspectsRegisterAt"
+        }
+      ],
+      "canonical_ir": {
+        "argument_roles": [
+          {
+            "roles": [
+              "officer"
+            ],
+            "symbol": "CoveredOfficer"
+          },
+          {
+            "roles": [
+              "officer",
+              "supervisor",
+              "event",
+              "moment"
+            ],
+            "symbol": "InspectsRegisterAt"
+          }
+        ],
+        "assumptions": [],
+        "cross_references": [],
+        "definition_uses": [
+          {
+            "applicability": "governing",
+            "defined_predicate": "CoveredOfficer",
+            "definition_unit_id": "fixture:mixed-act-v1/unit-1",
+            "evidence_refs": [
+              {
+                "artifact_id": "fixture:reviewed-process-evidence",
+                "sha256": "0b615d48c2dccad89db514054a793e966e582dcb7180e055f85678d9d26f5086"
+              }
+            ],
+            "interpretation_id": "fixture:mixed-act-v1/selected-interpretation",
+            "target_typed_paths": [
+              "/root/arguments/0/arguments/0/arguments/0/arguments/0/arguments/0/arguments/0",
+              "/root/arguments/0/arguments/0/arguments/0/arguments/0/arguments/0/arguments/1"
+            ],
+            "use_occurrence_cid": "baguqeera7sbnrtwgmqegsigv7mc6v6eit3ugb2pl425jgjduxgvsrwsslcma",
+            "use_unit_id": "fixture:mixed-act-v1/unit-3"
+          }
+        ],
+        "governing_context": {
+          "governing_edition": "fictional-edition-1",
+          "instrument_id": "fixture:mixed-act-v1",
+          "jurisdiction": "fictional-jurisdiction",
+          "legal_as_of_utc": "2026-10-15T12:03:00Z",
+          "valid_from_utc": "2026-10-01T00:00:00Z",
+          "valid_until_utc": "2026-11-01T00:00:00Z"
+        },
+        "interpretation_id": "fixture:mixed-act-v1/selected-interpretation",
+        "profile": "authored-many-sorted-relational-deontic/v1",
+        "source_binding": {
+          "document_revision": "fixture:mixed-act-v1/revision-1",
+          "occurrence_cid": "baguqeera7sbnrtwgmqegsigv7mc6v6eit3ugb2pl425jgjduxgvsrwsslcma",
+          "source_version_cid": "baguqeerajnvuszussa3idemidjf5fau2jutxvfyihltferekhw7faxxmjvdq"
+        },
+        "typed_expression": {
+          "content_digest": "c69b6a0dbfd514f4bd2b48e3b7820a4e5f7f7ec260f27b6a6e67c6b94edacf6b",
+          "expression_id": "fixture:complete-mixed-expression",
+          "family": {
+            "interface": "LogicIdentityNamespaces@1",
+            "namespace": "family",
+            "schema_version": "logic-identity-namespaces/v1",
+            "value": "tdfol",
+            "version": "1.0.0"
+          },
+          "interface": "TypedExpression@1",
+          "metadata": {},
+          "profile": {
+            "interface": "LogicIdentityNamespaces@1",
+            "namespace": "profile",
+            "schema_version": "logic-identity-namespaces/v1",
+            "value": "tdfol_default",
+            "version": "1.0.0"
+          },
+          "root": {
+            "arguments": [
+              {
+                "arguments": [
+                  {
+                    "arguments": [
+                      {
+                        "arguments": [
+                          {
+                            "arguments": [
+                              {
+                                "arguments": [
+                                  {
+                                    "arguments": [
+                                      {
+                                        "arguments": [],
+                                        "binders": [],
+                                        "kind": "variable",
+                                        "metadata": {},
+                                        "node_id": "fixture:node:3",
+                                        "schema_version": "syntax-logic-node/v1",
+                                        "sort": {
+                                          "arguments": [],
+                                          "kind": "atomic",
+                                          "name": "Object",
+                                          "schema_version": "syntax-logic-sort/v1"
+                                        },
+                                        "symbol": "officer"
+                                      }
+                                    ],
+                                    "binders": [],
+                                    "kind": "predicate",
+                                    "metadata": {},
+                                    "node_id": "fixture:node:2",
+                                    "schema_version": "syntax-logic-node/v1",
+                                    "sort": {
+                                      "arguments": [],
+                                      "kind": "bool",
+                                      "name": "Bool",
+                                      "schema_version": "syntax-logic-sort/v1"
+                                    },
+                                    "symbol": "CoveredOfficer"
+                                  },
+                                  {
+                                    "arguments": [
+                                      {
+                                        "arguments": [],
+                                        "binders": [],
+                                        "kind": "variable",
+                                        "metadata": {},
+                                        "node_id": "fixture:node:5",
+                                        "schema_version": "syntax-logic-node/v1",
+                                        "sort": {
+                                          "arguments": [],
+                                          "kind": "atomic",
+                                          "name": "Object",
+                                          "schema_version": "syntax-logic-sort/v1"
+                                        },
+                                        "symbol": "supervisor"
+                                      }
+                                    ],
+                                    "binders": [],
+                                    "kind": "predicate",
+                                    "metadata": {},
+                                    "node_id": "fixture:node:4",
+                                    "schema_version": "syntax-logic-node/v1",
+                                    "sort": {
+                                      "arguments": [],
+                                      "kind": "bool",
+                                      "name": "Bool",
+                                      "schema_version": "syntax-logic-sort/v1"
+                                    },
+                                    "symbol": "CoveredOfficer"
+                                  }
+                                ],
+                                "binders": [],
+                                "kind": "and",
+                                "metadata": {},
+                                "node_id": "fixture:node:1",
+                                "schema_version": "syntax-logic-node/v1",
+                                "sort": {
+                                  "arguments": [],
+                                  "kind": "bool",
+                                  "name": "Bool",
+                                  "schema_version": "syntax-logic-sort/v1"
+                                },
+                                "symbol": ""
+                              },
+                              {
+                                "arguments": [],
+                                "binders": [],
+                                "extension": {
+                                  "children": [
+                                    {
+                                      "arguments": [
+                                        {
+                                          "arguments": [],
+                                          "binders": [],
+                                          "kind": "variable",
+                                          "metadata": {},
+                                          "node_id": "fixture:node:7",
+                                          "schema_version": "syntax-logic-node/v1",
+                                          "sort": {
+                                            "arguments": [],
+                                            "kind": "atomic",
+                                            "name": "Object",
+                                            "schema_version": "syntax-logic-sort/v1"
+                                          },
+                                          "symbol": "officer"
+                                        },
+                                        {
+                                          "arguments": [],
+                                          "binders": [],
+                                          "kind": "variable",
+                                          "metadata": {},
+                                          "node_id": "fixture:node:8",
+                                          "schema_version": "syntax-logic-node/v1",
+                                          "sort": {
+                                            "arguments": [],
+                                            "kind": "atomic",
+                                            "name": "Object",
+                                            "schema_version": "syntax-logic-sort/v1"
+                                          },
+                                          "symbol": "supervisor"
+                                        },
+                                        {
+                                          "arguments": [],
+                                          "binders": [],
+                                          "kind": "variable",
+                                          "metadata": {},
+                                          "node_id": "fixture:node:9",
+                                          "schema_version": "syntax-logic-node/v1",
+                                          "sort": {
+                                            "arguments": [],
+                                            "kind": "atomic",
+                                            "name": "EventFrame",
+                                            "schema_version": "syntax-logic-sort/v1"
+                                          },
+                                          "symbol": "event"
+                                        },
+                                        {
+                                          "arguments": [],
+                                          "binders": [],
+                                          "kind": "variable",
+                                          "metadata": {},
+                                          "node_id": "fixture:node:10",
+                                          "schema_version": "syntax-logic-node/v1",
+                                          "sort": {
+                                            "arguments": [],
+                                            "kind": "atomic",
+                                            "name": "TimeFrame",
+                                            "schema_version": "syntax-logic-sort/v1"
+                                          },
+                                          "symbol": "moment"
+                                        }
+                                      ],
+                                      "binders": [],
+                                      "kind": "predicate",
+                                      "metadata": {},
+                                      "node_id": "fixture:node:6",
+                                      "schema_version": "syntax-logic-node/v1",
+                                      "sort": {
+                                        "arguments": [],
+                                        "kind": "bool",
+                                        "name": "Bool",
+                                        "schema_version": "syntax-logic-sort/v1"
+                                      },
+                                      "symbol": "InspectsRegisterAt"
+                                    }
+                                  ],
+                                  "family": {
+                                    "interface": "LogicIdentityNamespaces@1",
+                                    "namespace": "family",
+                                    "schema_version": "logic-identity-namespaces/v1",
+                                    "value": "tdfol",
+                                    "version": "1.0.0"
+                                  },
+                                  "features": [
+                                    "legacy.classic_letter",
+                                    "legacy.permission"
+                                  ],
+                                  "interface": "LogicExtensionNode@1",
+                                  "metadata": {},
+                                  "node_id": "fixture:node:12:ext",
+                                  "payload": {
+                                    "kind": "permission",
+                                    "letter": "P",
+                                    "resolution": "deontic",
+                                    "schema_version": "legacy.deontic/v1"
+                                  },
+                                  "payload_schema": "legacy.deontic/v1",
+                                  "profile": {
+                                    "interface": "LogicIdentityNamespaces@1",
+                                    "namespace": "profile",
+                                    "schema_version": "logic-identity-namespaces/v1",
+                                    "value": "tdfol_default",
+                                    "version": "1.0.0"
+                                  },
+                                  "schema_version": "syntax-logic-extension-node/v1"
+                                },
+                                "kind": "extension",
+                                "metadata": {},
+                                "node_id": "fixture:node:12",
+                                "schema_version": "syntax-logic-node/v1",
+                                "sort": {
+                                  "arguments": [],
+                                  "kind": "bool",
+                                  "name": "Bool",
+                                  "schema_version": "syntax-logic-sort/v1"
+                                },
+                                "symbol": ""
+                              }
+                            ],
+                            "binders": [],
+                            "kind": "implies",
+                            "metadata": {},
+                            "node_id": "fixture:node:11",
+                            "schema_version": "syntax-logic-node/v1",
+                            "sort": {
+                              "arguments": [],
+                              "kind": "bool",
+                              "name": "Bool",
+                              "schema_version": "syntax-logic-sort/v1"
+                            },
+                            "symbol": ""
+                          }
+                        ],
+                        "binders": [
+                          {
+                            "name": "moment",
+                            "schema_version": "syntax-binder/v1",
+                            "sort": {
+                              "arguments": [],
+                              "kind": "atomic",
+                              "name": "TimeFrame",
+                              "schema_version": "syntax-logic-sort/v1"
+                            }
+                          }
+                        ],
+                        "kind": "forall",
+                        "metadata": {},
+                        "node_id": "fixture:node:13",
+                        "schema_version": "syntax-logic-node/v1",
+                        "sort": {
+                          "arguments": [],
+                          "kind": "bool",
+                          "name": "Bool",
+                          "schema_version": "syntax-logic-sort/v1"
+                        },
+                        "symbol": ""
+                      }
+                    ],
+                    "binders": [
+                      {
+                        "name": "event",
+                        "schema_version": "syntax-binder/v1",
+                        "sort": {
+                          "arguments": [],
+                          "kind": "atomic",
+                          "name": "EventFrame",
+                          "schema_version": "syntax-logic-sort/v1"
+                        }
+                      }
+                    ],
+                    "kind": "forall",
+                    "metadata": {},
+                    "node_id": "fixture:node:14",
+                    "schema_version": "syntax-logic-node/v1",
+                    "sort": {
+                      "arguments": [],
+                      "kind": "bool",
+                      "name": "Bool",
+                      "schema_version": "syntax-logic-sort/v1"
+                    },
+                    "symbol": ""
+                  }
+                ],
+                "binders": [
+                  {
+                    "name": "supervisor",
+                    "schema_version": "syntax-binder/v1",
+                    "sort": {
+                      "arguments": [],
+                      "kind": "atomic",
+                      "name": "Object",
+                      "schema_version": "syntax-logic-sort/v1"
+                    }
+                  }
+                ],
+                "kind": "forall",
+                "metadata": {},
+                "node_id": "fixture:node:15",
+                "schema_version": "syntax-logic-node/v1",
+                "sort": {
+                  "arguments": [],
+                  "kind": "bool",
+                  "name": "Bool",
+                  "schema_version": "syntax-logic-sort/v1"
+                },
+                "symbol": ""
+              }
+            ],
+            "binders": [
+              {
+                "name": "officer",
+                "schema_version": "syntax-binder/v1",
+                "sort": {
+                  "arguments": [],
+                  "kind": "atomic",
+                  "name": "Object",
+                  "schema_version": "syntax-logic-sort/v1"
+                }
+              }
+            ],
+            "kind": "forall",
+            "metadata": {},
+            "node_id": "fixture:node:16",
+            "schema_version": "syntax-logic-node/v1",
+            "sort": {
+              "arguments": [],
+              "kind": "bool",
+              "name": "Bool",
+              "schema_version": "syntax-logic-sort/v1"
+            },
+            "symbol": ""
+          },
+          "schema_version": "syntax-typed-expression/v1",
+          "signature": {
+            "family": {
+              "interface": "LogicIdentityNamespaces@1",
+              "namespace": "family",
+              "schema_version": "logic-identity-namespaces/v1",
+              "value": "tdfol",
+              "version": "1.0.0"
+            },
+            "features": [],
+            "interface": "LogicSignature@1",
+            "metadata": {},
+            "profile": {
+              "interface": "LogicIdentityNamespaces@1",
+              "namespace": "profile",
+              "schema_version": "logic-identity-namespaces/v1",
+              "value": "tdfol_default",
+              "version": "1.0.0"
+            },
+            "schema_version": "syntax-logic-signature/v1",
+            "signature_id": "fixture:complete-mixed-signature",
+            "sorts": [
+              {
+                "arguments": [],
+                "kind": "bool",
+                "name": "Bool",
+                "schema_version": "syntax-logic-sort/v1"
+              },
+              {
+                "arguments": [],
+                "kind": "atomic",
+                "name": "Object",
+                "schema_version": "syntax-logic-sort/v1"
+              },
+              {
+                "arguments": [],
+                "kind": "atomic",
+                "name": "EventFrame",
+                "schema_version": "syntax-logic-sort/v1"
+              },
+              {
+                "arguments": [],
+                "kind": "atomic",
+                "name": "TimeFrame",
+                "schema_version": "syntax-logic-sort/v1"
+              }
+            ],
+            "symbols": [
+              {
+                "domain": [
+                  {
+                    "arguments": [],
+                    "kind": "atomic",
+                    "name": "Object",
+                    "schema_version": "syntax-logic-sort/v1"
+                  }
+                ],
+                "kind": "predicate",
+                "metadata": {},
+                "name": "CoveredOfficer",
+                "range": {
+                  "arguments": [],
+                  "kind": "bool",
+                  "name": "Bool",
+                  "schema_version": "syntax-logic-sort/v1"
+                },
+                "schema_version": "syntax-symbol-declaration/v1"
+              },
+              {
+                "domain": [
+                  {
+                    "arguments": [],
+                    "kind": "atomic",
+                    "name": "Object",
+                    "schema_version": "syntax-logic-sort/v1"
+                  },
+                  {
+                    "arguments": [],
+                    "kind": "atomic",
+                    "name": "Object",
+                    "schema_version": "syntax-logic-sort/v1"
+                  },
+                  {
+                    "arguments": [],
+                    "kind": "atomic",
+                    "name": "EventFrame",
+                    "schema_version": "syntax-logic-sort/v1"
+                  },
+                  {
+                    "arguments": [],
+                    "kind": "atomic",
+                    "name": "TimeFrame",
+                    "schema_version": "syntax-logic-sort/v1"
+                  }
+                ],
+                "kind": "predicate",
+                "metadata": {},
+                "name": "InspectsRegisterAt",
+                "range": {
+                  "arguments": [],
+                  "kind": "bool",
+                  "name": "Bool",
+                  "schema_version": "syntax-logic-sort/v1"
+                },
+                "schema_version": "syntax-symbol-declaration/v1"
+              }
+            ]
+          }
+        }
+      },
+      "kind": "norm",
+      "occurrence_cid": "baguqeera7sbnrtwgmqegsigv7mc6v6eit3ugb2pl425jgjduxgvsrwsslcma",
+      "relational_profile": "authored-many-sorted-relational-deontic/v1",
+      "source_text": "For every officer, supervisor, event, and time, if both people are covered officers, that officer may inspect the register under that supervisor at that event and time.",
+      "source_version_cid": "baguqeerajnvuszussa3idemidjf5fau2jutxvfyihltferekhw7faxxmjvdq",
+      "typed_paths": [
+        "/root",
+        "/root/binders/0",
+        "/root/arguments/0",
+        "/root/arguments/0/binders/0",
+        "/root/arguments/0/arguments/0",
+        "/root/arguments/0/arguments/0/binders/0",
+        "/root/arguments/0/arguments/0/arguments/0",
+        "/root/arguments/0/arguments/0/arguments/0/binders/0",
+        "/root/arguments/0/arguments/0/arguments/0/arguments/0",
+        "/root/arguments/0/arguments/0/arguments/0/arguments/0/arguments/0",
+        "/root/arguments/0/arguments/0/arguments/0/arguments/0/arguments/0/arguments/0",
+        "/root/arguments/0/arguments/0/arguments/0/arguments/0/arguments/0/arguments/0/arguments/0",
+        "/root/arguments/0/arguments/0/arguments/0/arguments/0/arguments/0/arguments/1",
+        "/root/arguments/0/arguments/0/arguments/0/arguments/0/arguments/0/arguments/1/arguments/0",
+        "/root/arguments/0/arguments/0/arguments/0/arguments/0/arguments/1",
+        "/root/arguments/0/arguments/0/arguments/0/arguments/0/arguments/1/extension",
+        "/root/arguments/0/arguments/0/arguments/0/arguments/0/arguments/1/extension/children/0",
+        "/root/arguments/0/arguments/0/arguments/0/arguments/0/arguments/1/extension/children/0/arguments/0",
+        "/root/arguments/0/arguments/0/arguments/0/arguments/0/arguments/1/extension/children/0/arguments/1",
+        "/root/arguments/0/arguments/0/arguments/0/arguments/0/arguments/1/extension/children/0/arguments/2",
+        "/root/arguments/0/arguments/0/arguments/0/arguments/0/arguments/1/extension/children/0/arguments/3"
+      ],
+      "unit_id": "fixture:mixed-act-v1/unit-3"
+    }
+  ]
+}

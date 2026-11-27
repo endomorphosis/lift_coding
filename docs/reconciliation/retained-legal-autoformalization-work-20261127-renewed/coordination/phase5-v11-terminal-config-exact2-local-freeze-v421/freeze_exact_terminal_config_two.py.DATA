@@ -1,0 +1,224 @@
+"""Freeze the two installed Phase 5 terminal evidence files locally."""
+import hashlib
+import json
+import os
+from pathlib import Path
+import stat
+import subprocess
+import zlib
+
+coord = Path(__file__).resolve().parents[1]
+repos = coord.parents[1] / "repositories"
+output = coord / "actual-Phase5-v11-terminal-config-exact2-local-freeze-v421.json"
+assert not output.exists()
+source_ref = {
+    "path": "/tmp/Root-Phase5-v11-terminal-evidence-Source2-v421-54qvj32g/actual-Phase5-v11-terminal-config-exact2-Source-closed-small-v421.json",
+    "bytes": 6253,
+    "sha256": "55a81b40a3dc122a73eadc2b925835b49ffb2a6f00ee15684ca269fffd9dcd8c",
+}
+expected = {
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_inference.py": "308c505b59804a184976e330ce145374943e4cbe",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_inference.py": "059d7a38fb9e9cdde2846f55496073ce77a51f5f",
+}
+fields = ("st_dev", "st_ino", "st_mode", "st_nlink", "st_uid", "st_gid",
+          "st_size", "st_mtime_ns", "st_ctime_ns")
+git_config = (
+    "-c", "core.fsmonitor=false", "-c", "core.preloadIndex=false", "-c", "pack.threads=1",
+    "-c", "pack.windowMemory=16m", "-c", "pack.deltaCacheSize=16m",
+    "-c", "gc.auto=0", "-c", "maintenance.auto=false",
+    "-c", "core.packedGitLimit=32m", "-c", "core.packedGitWindowSize=8m",
+)
+env = dict(os.environ, GIT_OPTIONAL_LOCKS="0", GIT_NO_LAZY_FETCH="1", GIT_TERMINAL_PROMPT="0")
+
+
+def full9(info):
+    return {field: str(getattr(info, field)) for field in fields}
+
+
+def exact(path):
+    path = Path(path)
+    before = path.lstat()
+    assert stat.S_ISREG(before.st_mode) and before.st_nlink == 1, path
+    with os.fdopen(os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK), "rb") as f:
+        assert full9(os.fstat(f.fileno())) == full9(before), path
+        raw = f.read(before.st_size + 1)
+        assert full9(os.fstat(f.fileno())) == full9(before), path
+    assert len(raw) == before.st_size and full9(path.lstat()) == full9(before), path
+    return raw, {"path": str(path), "bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest(),
+                 "full9": full9(before)}
+
+
+def read_ref(ref):
+    raw, observed = exact(ref["path"])
+    assert all(observed[k] == ref[k] for k in ("path", "bytes", "sha256"))
+    return raw
+
+
+def git(repo, *args):
+    return subprocess.run(
+        ["git", *git_config, "-C", str(repos / repo), *args], env=env,
+        capture_output=True, check=True, timeout=150,
+    ).stdout
+
+
+def one(repo, *args):
+    return git(repo, *args).decode().strip()
+
+
+def status(repo):
+    return git(repo, "status", "--porcelain=v1", "-z", "--untracked-files=all", "--ignore-submodules=none")
+
+
+def frozen(repo):
+    branch = one(repo, "symbolic-ref", "HEAD")
+    assert branch.startswith("refs/heads/")
+    index_path = one(repo, "rev-parse", "--path-format=absolute", "--git-path", "index")
+    branch_path = one(repo, "rev-parse", "--path-format=absolute", "--git-path", branch)
+    head = one(repo, "rev-parse", "HEAD")
+    branch_raw, branch_meta = exact(branch_path)
+    assert branch_raw == (head + "\n").encode()
+    return {
+        "HEAD": head, "tree": one(repo, "rev-parse", "HEAD^{tree}"), "branch": branch,
+        "branch_file": branch_meta, "index": exact(index_path)[1],
+        "local_origin_main_tracking_ref": one(repo, "rev-parse", "refs/remotes/origin/main"),
+    }
+
+
+def tree_rows(repo, commit):
+    result = {}
+    for item in git(repo, "ls-tree", "-r", "-z", commit).split(b"\0"):
+        if item:
+            metadata, rel = item.decode().split("\t", 1)
+            assert rel not in result
+            result[rel] = tuple(metadata.split())
+    return result
+
+
+def stage_matches(path, blob):
+    assert git("datasets", "ls-files", "--stage", "-z", "--", path) == f"100644 {blob} 0\t{path}\0".encode()
+
+
+source = json.loads(read_ref(source_ref))
+assert source["actual_owned_exit_code"]==0 and all(source[k] is True for k in (
+    "Root_selected","Source_closed","module_closed","write_complete",
+))
+assert source["ordinary40"] is None and source["source_root"]==str(repos/"datasets")
+assert source["actual"]==source["actual_source_receipt"]
+actual=json.loads(read_ref(source["actual"]))
+assert all(actual[k] is True for k in (
+    "Source_closed","module_closed","write_complete","all2_posts_staged_fsynced_and_readback_before_first_effect",
+))
+assert actual["errors"]==actual["remaining_own_stages"]==actual["uncertain_stage_FDs"]==[]
+assert len(actual["staged"])==2 and all(row["FD_closed"] and row["canonical_replacement_returned"] for row in actual["staged"])
+assert actual["installed"]==actual["separate_post_readbacks"]==source["installed"]==source["actual_installed"]
+assert set(actual["only_worktree_deltas"])==set(source["only_intended_worktree_changes"])==set(expected)
+assert len(actual["Source_contexts"])==2
+assert all(row["entered"] and row["exit_returned"] for row in actual["Source_contexts"])
+assert {row["root"] for row in actual["Source_contexts"]}=={str(repos/"accelerate"),str(repos/"datasets")}
+guide=json.loads(read_ref(source["prior_Guide535"]))
+assert guide["evidence_ordinal"]==535 and guide["all_other_paths_and_gitlinks_preserved"]
+candidate=json.loads(read_ref(source["candidate"]))
+rows={row["relative_path"]:row for row in candidate["selected_two"].values()}
+assert {path:row["after_blob"] for path,row in rows.items()}==expected
+assert candidate["ordinary_qualification"] is None
+assert candidate["current_same40"]["equal_ordered_roster"] is True
+
+installed = {row["path"]:row for row in source["installed"]}
+assert set(installed) == {str(repos/"datasets"/path) for path in expected}
+
+for stage in actual["staged"]:
+    assert stage["fully_staged"] and not os.path.lexists(stage["temporary_path"])
+    post = installed[stage["target"]]["full9"]
+    pre_rename = stage["stage_full9"]
+    assert pre_rename == stage["last_owned_FD_full9"]
+    assert all(post[k]==pre_rename[k] for k in fields if k!="st_ctime_ns")
+
+
+peers = {repo:frozen(repo) for repo in ("accelerate","hallucinate","root")}
+parent = frozen("datasets")
+for repo,snapshot in {"datasets":parent,**peers}.items():
+    assert all(snapshot[k]==guide["repositories"][repo][k] for k in ("HEAD","tree")), repo
+    assert snapshot["local_origin_main_tracking_ref"] == snapshot["HEAD"], repo
+    assert snapshot["index"] == guide["index_readback"][repo]["after"], repo
+prewrite_index=source["frozen_prewrite_D_index"]
+assert {k:prewrite_index[k] for k in ("path","bytes","sha256","full9")} == parent["index"]
+saved_index=prewrite_index["raw_reference"]
+assert saved_index["sha256"]==parent["index"]["sha256"] and saved_index["bytes"]==parent["index"]["bytes"]
+assert actual["before_root"]["HEAD"]==actual["after_root"]["HEAD"]==parent["HEAD"]==source["old_head"]=="bda9f1fb146722e8b116cb0503880fb22e5291a4"
+assert actual["before_root"]["tree"]==actual["after_root"]["tree"]==parent["tree"]
+assert all(status(repo)==b"" for repo in peers)
+assert set(status("datasets").split(b"\0")) == {b"",*(f" M {path}".encode() for path in expected)}
+before = tree_rows("datasets",parent["HEAD"])
+raw_posts = {}
+objects=Path(__file__).parent/"exact-private-preimage-loose-objects"
+objects.mkdir(mode=0o700)
+env["GIT_ALTERNATE_OBJECT_DIRECTORIES"]=str(objects)
+for rel,row in rows.items():
+    path = repos/"datasets"/rel
+    raw,meta = exact(path)
+    assert meta == installed[str(path)] and row["mode"]=="100644"
+    assert not int(meta["full9"]["st_mode"]) & 0o111
+    assert raw == read_ref(row["after"])
+    assert hashlib.sha1(f"blob {len(raw)}\0".encode()+raw).hexdigest() == expected[rel]
+    assert before[rel] == ("100644","blob",row["before"]["blob"])
+    baseline=read_ref(row["before"])
+    raw_object=f"blob {len(baseline)}\0".encode()+baseline
+    baseline_oid=hashlib.sha1(raw_object).hexdigest()
+    assert baseline_oid==row["before"]["blob"]
+    object_path=objects/baseline_oid[:2]/baseline_oid[2:]
+    object_path.parent.mkdir(mode=0o700,exist_ok=True)
+    with os.fdopen(os.open(object_path,os.O_CREAT|os.O_EXCL|os.O_WRONLY|os.O_NOFOLLOW,0o400),"wb") as dest:
+        dest.write(zlib.compress(raw_object))
+        dest.flush()
+        os.fsync(dest.fileno())
+    assert zlib.decompress(exact(object_path)[0])==raw_object
+    assert git("datasets","cat-file","blob",baseline_oid)==baseline
+    stage_matches(rel,row["before"]["blob"])
+    raw_posts[rel] = raw
+git("datasets","diff","--cached","--quiet","--exit-code")
+git("datasets","diff","--check","--",*sorted(expected))
+assert frozen("datasets")==parent
+assert all(frozen(repo)==peer for repo,peer in peers.items())
+assert all(exact(repos/"datasets"/rel)[1]==installed[str(repos/"datasets"/rel)] for rel in expected)
+
+print(json.dumps(dict(preflight_two_exact=True,parent=parent["HEAD"],staging=sorted(expected))),flush=True)
+git("datasets","add","--",*sorted(expected))
+assert set(status("datasets").split(b"\0")) == {b"",*(f"M  {path}".encode() for path in expected)}
+for rel,blob in expected.items():
+    stage_matches(rel,blob)
+    assert git("datasets","cat-file","blob",blob) == raw_posts[rel]
+    assert exact(repos/"datasets"/rel)[1] == installed[str(repos/"datasets"/rel)]
+git("datasets","diff","--cached","--check")
+print(git("datasets","commit","-m","Bind reviewed generation terminals to requested tokenizer configuration").decode(),flush=True)
+final = frozen("datasets")
+assert status("datasets") == b""
+assert final["local_origin_main_tracking_ref"] == parent["HEAD"]
+assert one("datasets","rev-list","--parents","-n","1","HEAD").split() == [final["HEAD"],parent["HEAD"]]
+after = tree_rows("datasets",final["HEAD"])
+assert set(after) == set(before)
+assert {rel for rel in after if after[rel]!=before[rel]} == set(expected)
+assert all(status(repo)==b"" and frozen(repo)==peer for repo,peer in peers.items())
+committed = {}
+for rel,blob in expected.items():
+    assert after[rel] == ("100644","blob",blob)
+    stage_matches(rel,blob)
+    assert git("datasets","cat-file","blob",blob) == raw_posts[rel]
+    path=repos/"datasets"/rel
+    assert exact(path)[1] == installed[str(path)]
+    committed[rel] = dict(installed[str(path)],git_mode="100644",parent_blob=rows[rel]["before"]["blob"],
+                          stage0_and_committed_blob=blob)
+record = {
+    "schema":"actual-Phase5-v11-terminal-config-exact2-local-only-freeze/v421",
+    "source_closed":source_ref,"actual_source_receipt":source["actual"],"private_candidate":source["candidate"],
+    "prior_Guide535_publication":source["prior_Guide535"],"prewrite_D_index":prewrite_index,
+    "parent":parent,"frozen":final,"committed":committed,"unchanged_peers":peers,
+    "local_clean":True,"pushed":False,"ordinary40_run":False,"terminal_returncode":0,
+    "only_two_D_tree_entries_changed":True,"all_gitlinks_and_Guide535_preserved":True,
+}
+raw = (json.dumps(record,sort_keys=True,indent=2)+"\n").encode()
+with os.fdopen(os.open(output,os.O_CREAT|os.O_EXCL|os.O_WRONLY|os.O_NOFOLLOW,0o400),"wb") as f:
+    f.write(raw)
+    f.flush()
+    os.fsync(f.fileno())
+assert exact(output)[0]==raw
+print(json.dumps(dict(receipt=exact(output)[1],frozen=final,committed=committed)),flush=True)

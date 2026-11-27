@@ -1,0 +1,114 @@
+{
+  "driver": {
+    "bytes": 15455,
+    "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/package_and_restore.py",
+    "sha256": "e56b7b2d477ff6f5598fd00e6f52c8c6e32b997163ef95e55378224bc3ed9145"
+  },
+  "expected_tips": 83,
+  "families": [
+    {
+      "error": "git fetch exited 128: remote: warning: lazy fetching disabled; some objects may not be available        \nremote: fatal: could not fetch 52d3bb5e6dae53e17e128f010cb60c0409ffb204 from promisor remote        \nerror: git upload-pack: git-pack-objects died with error.\nfatal: git upload-pack: aborting due to possible repository corruption on the remote side.\nremote: aborting due to possible repository corruption on the remote side.\u0000\nfatal: protocol error: bad pack header",
+      "expected_tips": 35,
+      "family": "ipfs_datasets_py",
+      "receipt": {
+        "bytes": 637,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/ipfs_datasets_py/failure.json",
+        "sha256": "913cbc220e8d24b07525397dba8acc4866650299e76f9c2afe6e009558581a32"
+      },
+      "restored_tips": 0,
+      "stage": "fetch to private aggregate",
+      "status": "FAILED"
+    },
+    {
+      "bundle": {
+        "bytes": 285754256,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/ipfs_accelerate_py/ipfs_accelerate_py-historical-tips.bundle",
+        "sha256": "0e2440cfe1e6446cef0ec6ad3949375cfd3d889ea91594939fcac6531e5d15b6"
+      },
+      "expected_tips": 35,
+      "family": "ipfs_accelerate_py",
+      "publication_files": [
+        {
+          "bytes": 90000000,
+          "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/ipfs_accelerate_py/ipfs_accelerate_py-historical-tips.bundle.part-000.DATA",
+          "sha256": "b22089953d89907c048dd289d0ec238f818d2468db0c40b6fa9b59be4639a564"
+        },
+        {
+          "bytes": 90000000,
+          "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/ipfs_accelerate_py/ipfs_accelerate_py-historical-tips.bundle.part-001.DATA",
+          "sha256": "a30b166ebbfa9b73cb48935b26a862707ee6bcb96e1f49890ceaa1f01ddc0b14"
+        },
+        {
+          "bytes": 90000000,
+          "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/ipfs_accelerate_py/ipfs_accelerate_py-historical-tips.bundle.part-002.DATA",
+          "sha256": "e53914fd43fa7b874500ed119d0d6f1e9f138c9a0f7bd0b042420d856e422cb5"
+        },
+        {
+          "bytes": 15754256,
+          "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/ipfs_accelerate_py/ipfs_accelerate_py-historical-tips.bundle.part-003.DATA",
+          "sha256": "348baf3dd2bf607214d6ab3b27390c85fe9afcec8acefcd59391ab8657cff7fb"
+        }
+      ],
+      "receipt": {
+        "bytes": 55983,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/ipfs_accelerate_py/restore-receipt.json",
+        "sha256": "a8f7ef732fcfc931af0adace0ecaea9d7e8e910428b3f66e945487d3e3cf1de1"
+      },
+      "restored_tips": 35,
+      "status": "RESTORE_VERIFIED"
+    },
+    {
+      "bundle": {
+        "bytes": 5904318,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/ipfs_kit_py/ipfs_kit_py-historical-tips.bundle",
+        "sha256": "db5b8579093a4336269ff95c92956ec70499e1426a39032322f3fe6895cfc789"
+      },
+      "expected_tips": 11,
+      "family": "ipfs_kit_py",
+      "publication_files": [
+        {
+          "bytes": 5904318,
+          "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/ipfs_kit_py/ipfs_kit_py-historical-tips.bundle",
+          "sha256": "db5b8579093a4336269ff95c92956ec70499e1426a39032322f3fe6895cfc789"
+        }
+      ],
+      "receipt": {
+        "bytes": 111809,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/ipfs_kit_py/restore-receipt.json",
+        "sha256": "392089c893edeaf99d9cc8a54036e7703429552ae38581979db5a7de6229f88f"
+      },
+      "restored_tips": 11,
+      "status": "RESTORE_VERIFIED"
+    },
+    {
+      "error": "git fetch exited 128: fatal: pack has 87 unresolved deltas\nfatal: fetch-pack: invalid index-pack output",
+      "expected_tips": 1,
+      "family": "swissknife",
+      "receipt": {
+        "bytes": 255,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/swissknife/failure.json",
+        "sha256": "00041e721517d9477b3d4f7b7bf2c34dee84aa09df8b001a38b8cf9f34440911"
+      },
+      "restored_tips": 0,
+      "stage": "fetch to private aggregate",
+      "status": "FAILED"
+    },
+    {
+      "error": "git fetch exited 128: fatal: pack has 3 unresolved deltas\nfatal: fetch-pack: invalid index-pack output",
+      "expected_tips": 1,
+      "family": "lift_coding",
+      "receipt": {
+        "bytes": 255,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/lift_coding/failure.json",
+        "sha256": "19420fddfcd4cf95fe722bedea1afdae9a642b57b0e864ccb073080bc8bda637"
+      },
+      "restored_tips": 0,
+      "stage": "fetch to private aggregate",
+      "status": "FAILED"
+    }
+  ],
+  "publication_attempted": false,
+  "restored_tips": 46,
+  "schema": "private-historical-bundle-restoration/v1",
+  "timestamp_utc": "2026-11-27T05:43:47.115463+00:00"
+}

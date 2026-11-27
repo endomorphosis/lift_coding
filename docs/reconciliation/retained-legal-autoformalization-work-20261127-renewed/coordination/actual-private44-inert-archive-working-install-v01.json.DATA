@@ -1,0 +1,49 @@
+{
+  "Git_commands": [],
+  "all_owned_FDs_closed_after_receipt_seal": true,
+  "all_owned_Git_processes_terminal": true,
+  "all_payloads_opaque_inert": true,
+  "author_fragment": {
+    "bytes": 11617,
+    "path": "/tmp/Reader-P1-current-published-Source-and-assets-read-preparation-private-v01/Phase1.2-current-proofcache-ordinary-binding-private-v01/publication-exact44-retained-author-adoption-dispositions-fragment-v02.json",
+    "sha256": "ee7834954d3ab0d401fa6aed58e252297b22b3a171bacf7e5a3caeeb89bfa5d4"
+  },
+  "author_fragment_observed_full9": {
+    "st_ctime_ns": "1795481139802661296",
+    "st_dev": "66306",
+    "st_gid": "1000",
+    "st_ino": "32555553",
+    "st_mode": "33024",
+    "st_mtime_ns": "1795481139802661296",
+    "st_nlink": "1",
+    "st_size": "11617",
+    "st_uid": "1000"
+  },
+  "complete": false,
+  "created_directories": [],
+  "errors": [
+    {
+      "message": "",
+      "type": "AssertionError"
+    }
+  ],
+  "files": [],
+  "finished_ns": "1795481333471092355",
+  "historical_source_clocks_or_ledger_updated": false,
+  "prior19_unit_explicit_bytes_retained_separately": 437988,
+  "read_accounting": {
+    "cap": 4194304,
+    "current_author_fragment": 11617,
+    "current_candidate_bytes": 0,
+    "implicit_Git_IO": "Not fully metered.",
+    "manifest_README_fragment_readbacks": 0,
+    "payload_copy_readbacks": 0,
+    "prior_author_fragment_inspection": 11617
+  },
+  "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/root",
+  "schema": "actual-private44-inert-archive-working-install/v1",
+  "source_authority_or_adoption_inferred": false,
+  "staging_refs_index_commit_push_config_network_Source_runtime_tests": false,
+  "started_ns": "1795481333470904545",
+  "subtree": "docs/reconciliation/reader-private-controls-20261124"
+}

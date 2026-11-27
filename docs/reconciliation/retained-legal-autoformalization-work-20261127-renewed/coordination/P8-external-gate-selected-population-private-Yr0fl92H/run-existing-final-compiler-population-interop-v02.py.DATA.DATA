@@ -1,0 +1,57 @@
+"""Run the existing offline external-validity cohort with an exact local owner overlay."""
+from hashlib import sha256
+import importlib.abc
+import importlib.util
+import json
+import os
+from pathlib import Path
+import resource
+import sys
+
+repo, root, owner, working = map(Path, sys.argv[1:])
+resource.setrlimit(resource.RLIMIT_AS, (512 * 1024**2, 512 * 1024**2))
+resource.setrlimit(resource.RLIMIT_CPU, (45, 46))
+resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
+os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
+sys.dont_write_bytecode = True
+working.mkdir(mode=0o700, exist_ok=False)
+os.environ["PYTEST_DISABLE_PLUGIN_AUTOLOAD"] = "1"
+sys.path.insert(0, str(repo))
+m = json.loads((root / "exact-role-and-cohort-inputs-v03.json").read_bytes())
+test_path = Path(m["test_after"]["path"])
+assert sha256(test_path.read_bytes()).hexdigest() == m["test_after"]["sha256"]
+for role in ("owner", "test"):
+    assert sha256((repo / m[role + "_rel"]).read_bytes()).hexdigest() == m[role + "_before"]["sha256"]
+body = owner.read_bytes()
+observed = []
+class ExistingOwner(importlib.abc.MetaPathFinder, importlib.abc.Loader):
+    def find_spec(self, fullname, path=None, target=None):
+        if fullname.split(".", 1)[0] in {"torch", "transformers", "duckdb", "pyarrow"}:
+            raise ImportError("Outside the offline benchmark fixture: " + fullname)
+        if fullname == "scripts.ops.legal_ir.hammer_leanstral_rollout_gate":
+            return importlib.util.spec_from_file_location(fullname, repo / m["owner_rel"], loader=self)
+        return None
+
+    def exec_module(self, module):
+        observed.append(sha256(body).hexdigest())
+        exec(compile(body, module.__file__, "exec"), module.__dict__)
+
+sys.meta_path.insert(0, ExistingOwner())
+denied = []
+def audit(event, args):
+    if event.startswith(("socket.", "subprocess.")) or event in {"os.exec", "os.fork", "os.posix_spawn", "os.system"}:
+        denied.append(event)
+        raise PermissionError("Outside the offline benchmark fixture: " + event)
+sys.addaudithook(audit)
+import pytest
+compiler_test = Path('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-gate-selected-population-private-Yr0fl92H/test-cohort-v03/tests/unit/optimizers/logic_theorem_optimizer/test_compiler_system_promotion_gate.py')
+assert sha256(compiler_test.read_bytes()).hexdigest() == '731962e5cbe132e87ee9a761ec8f8081ea5a9f6b5f0ee35e6b4a24aafc6304ba'
+code = int(pytest.main(["-c", "/dev/null", "--noconftest", "-p", "no:cacheprovider", "--rootdir", str(root / "test-cohort-v03"),
+    "-q", "--tb=short", "-k", "test_private_compiler_rechecks_independent_external_benchmark_selection",
+    f"--basetemp={working / 'pytest'}", f"--junitxml={working / 'junit.xml'}", str(compiler_test)]))
+assert observed and set(observed) == {sha256(body).hexdigest()}
+with (working / "run.json").open("x") as f:
+    json.dump(dict(pytest_exit=code, exact_owner_compiled=observed[0], observed_overlay_imports=len(observed), exact_test=sha256(compiler_test.read_bytes()).hexdigest(),
+        external_events=denied, scope="standalone offline fixture and in-process owning CLI"), f, sort_keys=True, indent=2)
+    f.write("\n")
+raise SystemExit(code if not denied else 2)

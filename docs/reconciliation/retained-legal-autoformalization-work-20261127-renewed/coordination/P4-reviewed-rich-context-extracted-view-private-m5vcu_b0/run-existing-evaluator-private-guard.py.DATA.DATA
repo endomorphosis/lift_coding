@@ -1,0 +1,51 @@
+import hashlib
+import json
+import sys
+import traceback
+from pathlib import Path
+from importlib.util import module_from_spec, spec_from_file_location
+
+guard = Path(sys.argv[5])
+sentinel = 'owner = repo / "tests/unit/logic/legal_ir/test_proof_cache.py"'
+raw = guard.read_text()
+assert raw.count(sentinel) == 1
+scope = {"__file__": str(guard)}
+exec(compile(raw.split(sentinel, 1)[0], str(guard), "exec", dont_inherit=True), scope)
+repo, loader, pytest = (scope[key] for key in ("repo", "GuardedLoader", "pytest"))
+os = scope["os"]
+os.chdir(scope["working"])
+if len(sys.argv) == 8:
+    module_name = "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_structured_retrieval"
+    module_path = "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_structured_retrieval.py"
+    overlay = Path(sys.argv[7])
+    class OneOverlay(scope["importlib"].abc.MetaPathFinder):
+        def find_spec(self, fullname, path=None, target=None):
+            if fullname == module_name:
+                return spec_from_file_location(fullname, repo / module_path, loader=loader(module_path, overlay))
+    sys.meta_path.insert(0, OneOverlay())
+rel = "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py"
+test = Path(sys.argv[4])
+specification = spec_from_file_location("_existing_rich_evaluator_private_cases", repo / rel,
+                                        loader=loader(rel, test))
+module = module_from_spec(specification)
+sys.modules[specification.name] = module
+specification.loader.exec_module(module)
+version = sys.argv[6]
+assert version in ("v2", "v3")
+results = []
+for key, callable_case in (
+    ("shared-extracted-view", lambda: module.test_reviewed_rich_heldout_same_extracted_view_refuses_before_actual_producer(version)),
+    ("independent-views", lambda: module.test_reviewed_rich_heldout_source_identity_is_bound_to_current_declaration(
+        (version, module._rich_v3_heldout_case(version=version)))),
+):
+    try:
+        callable_case()
+    except (Exception, pytest.fail.Exception) as exc:
+        results.append(dict(case=key, passed=False, error=type(exc).__name__, detail=str(exc),
+                            traceback=traceback.format_exc(limit=12)))
+    else:
+        results.append(dict(case=key, passed=True))
+report = dict(version=version, results=results, guard_events=scope["denied"], overlays=scope["watched"],
+              test_sha256=hashlib.sha256(test.read_bytes()).hexdigest())
+print(json.dumps(report, indent=2))
+raise SystemExit(0 if all(row["passed"] for row in results) and not report["guard_events"] else 1)

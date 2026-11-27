@@ -1,0 +1,211 @@
+from pathlib import Path
+import ast
+import hashlib
+import json
+import os
+import re
+import stat
+import subprocess
+from types import SimpleNamespace
+
+here=Path(__file__).resolve().parent
+coord=here.parent
+out=here/"existing-ordinary8-INERT"
+out.mkdir(mode=0o700)
+d=here.parents[2]/"repositories/datasets"
+old=Path("/tmp/P4-extracted-view-ordinary9-existing-R2-INERT-xvc6ai4j")
+def sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+def f9(info):
+    return {f:str(getattr(info,f)) for f in ("st_dev","st_ino","st_mode","st_nlink","st_uid",
+        "st_gid","st_size","st_mtime_ns","st_ctime_ns")}
+def read(p):
+    fd=os.open(p,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK)
+    with os.fdopen(fd,"rb") as f:
+        before=os.fstat(f.fileno())
+        assert stat.S_ISREG(before.st_mode) and before.st_nlink==1
+        raw=f.read()
+        assert len(raw)==before.st_size and f9(before)==f9(os.fstat(f.fileno()))==f9(p.lstat())
+    return raw
+def ref(p,digest=None):
+    raw=read(p); s=sha(raw)
+    if digest is not None:
+        assert s==digest
+    return dict(path=str(p),bytes=len(raw),sha256=s)
+def auth(x):
+    raw=read(Path(x["path"]))
+    assert (len(raw),sha(raw))==(x["bytes"],x["sha256"])
+    return raw
+def put(name,raw):
+    p=out/name
+    with os.fdopen(os.open(p,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400),"wb") as f:
+        f.write(raw);f.flush();os.fsync(f.fileno())
+    assert read(p)==raw
+    return ref(p)
+def obj(name,data):
+    return put(name,(json.dumps(data,indent=2,sort_keys=True)+"\n").encode())
+def get(code,key):
+    values=[n.value for n in ast.parse(code).body if isinstance(n,ast.Assign)
+            and len(n.targets)==1 and isinstance(n.targets[0],ast.Name) and n.targets[0].id==key]
+    assert len(values)==1,(key,len(values))
+    return ast.literal_eval(values[0])
+def assign(code,key,value):
+    n,=[n for n in ast.parse(code).body if isinstance(n,ast.Assign)
+        and len(n.targets)==1 and isinstance(n.targets[0],ast.Name) and n.targets[0].id==key]
+    lines=code.splitlines(keepends=True)
+    lines[n.lineno-1:n.end_lineno]=[f"{key} = {value!r}\n"]
+    return "".join(lines)
+def replace(code,a,b,count=1):
+    assert code.count(a)==count,(a,code.count(a))
+    return code.replace(a,b)
+env={**os.environ,"GIT_OPTIONAL_LOCKS":"0","GIT_NO_LAZY_FETCH":"1"}
+def git(*args):
+    return subprocess.check_output(["git","-c","core.preloadIndex=false","-c","index.threads=1","-C",str(d),*args],env=env)
+candidate_ref=ref(here/"SEALED-V4-ranked-context-query-count-exact-two.json",
+                   "830258edd624af25e432e7cb17aa3e896d15c6dc921541dbd0b76d62a4e25dae")
+candidate=json.loads(auth(candidate_ref))
+old_packet=ref(old/"READY-P4-extracted-view-ordinary9-existing-R2-INERT-RootNULL.json",
+               "53e6325a49d8b32a7e75c475f9f62828152a0ea93e28082e4542baafdbb980bd")
+prior=json.loads(auth(old_packet))
+old_recipe=json.loads(auth(prior["future_Root_bindings"]))
+old_specs=prior["controls"]
+head,tracking=git("rev-parse","HEAD","refs/remotes/origin/main").decode().splitlines()
+assert head==tracking==candidate["observed_local_tip_and_tracking_tip"]
+assert not git("status","--porcelain=v1","--untracked-files=all")
+base_source={k:auth(v).decode() for k,v in old_specs.items()}
+group="Phase4-ranked-context-query-bound-ordinary8"
+controls={k:v.replace(prior["group"],group) for k,v in base_source.items()}
+old_selection=get(controls["operator"],"SELECTION")
+owner_roles=get(controls["operator"],"MAINTAINED_OWNER_NAMES")
+test_modules=get(controls["operator"],"SELECTED_TEST_MODULES")
+owner_test=candidate["files"]["test"]["path"]
+assert list(test_modules)==[owner_test]
+names=candidate["static_ordinary_inputs"]["functions"]
+tree=ast.parse(auth(candidate["files"]["test"]["after"]))
+selected={n.name:n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in names}
+assert list(selected)==names
+cases={}
+for name,n in selected.items():
+    dec,=n.decorator_list
+    assert ast.unparse(dec.func)=="pytest.mark.parametrize"
+    cases[name]=ast.literal_eval(dec.args[1])
+assert list(cases.values())==[[None,"abstention","source","selected-body"],[0,1,32,33]]
+selectors=[owner_test+"::"+name for name in names]
+nodes=[owner_test+"::"+name+"["+str(v)+"]" for name,values in cases.items() for v in values]
+counts=dict.fromkeys(selectors,4)
+selection={**old_selection,"function_count":2,"literal_expected_cases":8,
+    "function_selectors":selectors,"literal_expected_nodeids":nodes,"expected_function_case_counts":counts}
+assert len(nodes)==len(set(nodes))==8
+o=assign(controls["operator"],"SELECTION",selection)
+o=assign(o,"EXPECTED_BRIDGE27_CASE_VECTOR",(4,4))
+for x,y in (("['function_count'] == 5","['function_count'] == 2"),
+            ("['literal_expected_cases'] == 9","['literal_expected_cases'] == 8"),
+            ("len(set(_selectors)) == 5","len(set(_selectors)) == 2"),
+            ("sum(_counts.values()) == 9","sum(_counts.values()) == 8"),
+            ("len(set(_literal_ids)) == 9","len(set(_literal_ids)) == 8"),
+            ("len(set(roster)) == 9","len(set(roster)) == 8"),
+            ("literal9 nodeid","literal8 nodeid")):
+    o=replace(o,x,y)
+b=controls["bootstrap"]
+for key,v in (("FUNCTION_SELECTORS",selectors),("EXPECTED_FUNCTION_CASE_COUNTS",counts),
+    ("EXPECTED_ORDERED_CASE_COUNTS",(4,4)),("EXPECTED_CASES",8)):
+    b=assign(b,key,v)
+for x,y in (("len(function_selectors) != 5","len(function_selectors) != 2"),
+            ("len(set(function_selectors)) != 5","len(set(function_selectors)) != 2"),
+            ("5 future-bound software functions/9","2 future-bound software functions/8"),
+            ("ordered5-selector case vector/9","ordered2-selector case vector/8")):
+    b=replace(b,x,y)
+f=replace(controls["factory"]," != 9"," != 8",2)
+f=replace(f,"literal9 nodeid","literal8 nodeid")
+f=replace(f,"5 independently selected software-function counts/9","2 independently selected software-function counts/8")
+fref=put("existing-v350-ordinary8-factory.INERT.py.DATA",f.encode())
+bref=put("existing-v350-ordinary8-bootstrap.INERT.py.DATA",b.encode())
+o=assign(o,"FACTORY_REFERENCE",fref)
+oref=put("existing-v350-ordinary8-operator.INERT.py.DATA",o.encode())
+for kind,src,file in (("operator",o,oref),("bootstrap",b,bref),("factory",f,fref)):
+    compile(src,file["path"],"exec",dont_inherit=True)
+    assert not re.search(r"(?:=|==|!=) 9\b|literal9\b|ordered5-selector",src)
+for key in old_recipe["operator_NULL_literal_slots"]:
+    assert get(o,key) is None,key
+for key in old_recipe["bootstrap_NULL_literal_slots"]:
+    assert get(b,key) is None,key
+
+tool_calls=[]
+def tool_request(**kwargs):
+    tool_calls.append(kwargs);return kwargs
+test_scope=dict(ROOT="/fictional/D",ADDITIONAL_A_ROOT="/fictional/A",EXPECTED_MODULES={},
+    MAINTAINED_OWNER_NAMES=owner_roles,SELECTED_TEST_MODULES=test_modules,
+    REQUIRED_CONFTESTS=["/fictional/D/conftest.py"],fixture=dict(pytest_inifile="/fictional/D/pytest.ini"),
+    OWNING_FILES=[owner_test],SELECTION=selection,H=sha,epoch_raw=b"[]",EPOCH=[],
+    SELECTED_TEST_REWRITE_POLICY=get(o,"SELECTED_TEST_REWRITE_POLICY"),ROOT_RUNTIME_SELECTION=None,
+    FINAL_D_PROVENANCE=None,FINAL_A_PROVENANCE=None,FINAL_BINDING_MANIFEST_REFERENCE=None,
+    D_READ_BINDING_REFERENCE=None,FINAL_ADMITTED_IO_PLAN_REFERENCE=None,FINAL_EFFECT_DECISION_REFERENCE=None,
+    BOOTSTRAP_REFERENCE=bref,read_private=lambda p,n,s: auth({"path":p,"bytes":n,"sha256":s}),
+    PY="/fictional/python",FLAGS={},sdk=SimpleNamespace(ToolRunRequest=tool_request,ToolRunLimits=lambda **kw:kw))
+exec(compile(f,fref["path"],"exec",dont_inherit=True),test_scope)
+call=test_scope["continuation_request"]
+target="frozen-local-D-"+group
+collect=call(target,"collect",group=group)
+run=call(target,"run",nodes,group=group)
+assert json.loads(run["input_files"]["request.json"])["actual_collected_roster"]==nodes
+assert json.loads(collect["input_files"]["request.json"])["expected_function_case_counts"]==counts
+assert run["limits"]["cpu_seconds"]==540 and run["limits"]["resident_memory_bytes"]==4294967296
+for broken in (nodes[:-1],[*nodes[:-1],nodes[0]],[*nodes[:-1],nodes[-1]+"foreign"]):
+    try:
+        call(target,"run",broken,group=group)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("invalid roster accepted by request factory")
+assert len(tool_calls)==2
+shape=ref(coord/"P2-retained-qualification-component-binding-private-pZ1QE2WG/existing-Source2-Guide570-INERT-v02/READY-Guide570-existing-Source2-exact-component-evidence-NONSELECTED.json",
+          "03cbb53316fc31a037fc95988aa06f8f03f8eb5147bc7c2dee325ec6b818a50a")
+guard_ref=json.loads(auth(shape))["actual_metadata_guards"]
+guard={row["path"]:row for row in json.loads(auth(guard_ref))["rows"]}
+assert len(guard)==1623
+for target in candidate["files"].values():
+    path=str(d/target["path"])
+    row=guard[path]
+    assert target["canonical_before_full9"]==row["full9"]==f9(Path(path).lstat())
+    assert row["sha256"]==target["before"]["sha256"] and row["bytes"]==target["before"]["bytes"]
+    assert auth(target["before"])==git("cat-file","blob",target["before"]["git_blob"])
+module_paths={k:k.replace(".","/")+".py" for k in owner_roles}
+module_paths.update({v:k for k,v in test_modules.items()})
+positive=json.loads(read(here/"after-adapter-positive.stdout"))
+required_roles={}
+for name,relative in module_paths.items():
+    row=guard[str(d/relative)]
+    assert row["full9"]==f9((d/relative).lstat()) and "sha256" in row
+    post=next((target["after"] for target in candidate["files"].values()
+                if target["path"]==relative),None)
+    if post is None:
+        proof=positive["read_only_project_module_sources"][name]
+        assert proof["relative_path"]==relative and proof["sha256"]==row["sha256"]
+        expected={k:row[k] for k in ("bytes","sha256")}
+    else:
+        expected={k:post[k] for k in ("bytes","sha256")}
+    required_roles[name]={"relative_path":relative,**expected,"actual_Source_full9":None}
+
+config_scope=json.loads(auth(prior["hard_roles_and_five_conftests"]))
+for name in ("after-None","full-evaluator-positive","full-exact-existing-profile"):
+    assert int(read(here/(name+".exit")))==152 and (here/(name+".stdout")).stat().st_size==0
+failures={name:{suffix:ref(here/(name+"."+suffix)) for suffix in ("stdout","stderr","exit")}
+          for name in ("after-None","full-evaluator-positive","full-exact-existing-profile")}
+config= {
+    "schema":"existing-v350-ordinary8-ranked-context-query-bound-inert/v1",
+    "candidate":candidate_ref,"prior_P4_ordinary9_control_root":old_packet,
+    "read_only_current_Guide570_guard_join":guard_ref,
+    "both_targets_match_Guide570_full9_SHA_bytes":True,"current_Git_tip":head,
+    "controls":{"operator":oref,"bootstrap":bref,"factory":fref},
+    "ordered_new8_selectors":selection,"seven_maintained_roles_plus_test":required_roles,
+    "five_conftests_and_pytest_ini_role_locator":prior["hard_roles_and_five_conftests"],
+    "prior_case_config_data_schema":config_scope.get("schema"),
+    "actual_factory_DATA_checks":{"collect":True,"exact8":True,"missing_refused":True,
+        "duplicate_refused":True,"foreign_refused":True,"SDK_calls":0},
+    "retained_full_fixture_CPU_cutoffs":failures,"actual_full_positive_completed":False,
+    "canonical_write_or_freeze_or_Source_READ":None,"live_clock_SDK_resource_and_IO":None,"actual_ordinary8":None,
+    "runtime_resource_contract_historical_only":{"collect_wall_s":120,"collect_CPU_s":110,
+        "run_wall_s":600,"run_CPU_s":540,"CPU_slots":1,"host_RSS_bytes":4294967296},
+    "init_after_SDK_bound_by_existing_owner":old_recipe["provenance_sequence"][:3],
+}
+print(json.dumps(obj("READY-existing-v350-ranked-context-ordinary8-INERT.json",config)))

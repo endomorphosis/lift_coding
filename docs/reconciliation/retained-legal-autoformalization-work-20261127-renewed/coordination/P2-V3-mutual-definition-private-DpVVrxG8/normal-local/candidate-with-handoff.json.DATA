@@ -1,0 +1,32 @@
+{
+  "Source42_SDK_Native_claim": false,
+  "actual_write_lease": {
+    "canonical_root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/checkout",
+    "cooperative": true,
+    "lock_path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/checkout/workspace/control-plane/source-leases/source.lock",
+    "mode": "write",
+    "schema_version": "autoencoder-source-lease/v1",
+    "waited_seconds": 3.9247795939445496e-05
+  },
+  "all137_tested_code_config_blobs_equal": true,
+  "candidate": "3bdfec5b148ad6c4ac53281ceb02ecd8377643e0",
+  "cooperative_document_write_closed": true,
+  "handoff": {
+    "bytes": 1104976,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/checkout/ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+    "sha256": "5ed1e1f0014a3bc97ba61fe70eaea58a919f8ee91cc537329289462de1ec1e26"
+  },
+  "handoff_original_prefix_bytes": 1103193,
+  "handoff_path": "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+  "only_document_changed_after_tested_commit": true,
+  "published": false,
+  "schema": "local-definition-binding-source-and-handoff-candidate/v1",
+  "shared_checkouts_modified": false,
+  "tested_code_commit": "e9586bf615b5b6525afd2cde163e70703b9909e2",
+  "tested_qualification": {
+    "bytes": 6069,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/actual-local-Source-V2-15-and-V3-46-qualified-closed.json",
+    "sha256": "a131e976e98bb528fdf38a2849bad184f835774c0458541093c3a28779017d47"
+  },
+  "tree": "2e8c465a708ffc4f2e564591477ce99730d74ba1"
+}

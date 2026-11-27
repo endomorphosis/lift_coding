@@ -1,0 +1,15 @@
+--- b/bind_existing_native_expected_policy.py
++++ a/bind_existing_native_expected_policy.py
+@@ -13,9 +13,9 @@
+ import sys
+ 
+ 
+-OWNING_TEST_SHA256 = "99e00363bbd1ea23d450af0912374fdbf4d30ab3b1802371fb8d237dccbf7da5"
+-OWNING_TEST_BYTES = 115566
+-LEAN_SHA256 = "c1050ad1ec067fc7f7c8fea08793e872511fe58029e9b1aa89ec90d2cb288313"
++OWNING_TEST_SHA256 = "0ad3389fce78ca14a68d1588ea9e3fa59f8bc377bf824f3b81b561b0665bbcb1"
++OWNING_TEST_BYTES = 108837
++LEAN_SHA256 = "260a6abeefe9410fb2f8c3ce25ccf9d37d720af6c9fac3c76f258d9d3eeab5c7"
+ TEST_NAME = "test_lean_native_v2_expected_type_and_dependency_policy"
+ FACTORY_NAME = "_phase1_caller_owned_runner_factory"
+ 

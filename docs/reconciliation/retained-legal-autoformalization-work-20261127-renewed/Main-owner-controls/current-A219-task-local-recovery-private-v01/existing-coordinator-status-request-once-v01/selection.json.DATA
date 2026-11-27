@@ -1,0 +1,17 @@
+{
+  "schema": "Main-existing-owner-status-only-selection/v1",
+  "Root_selected_metadata_request_only": true,
+  "no_Source_runtime_or_publication_selection": true,
+  "no_duplicate_or_replay": true,
+  "bindings": {
+    "Root_selected": true,
+    "message_path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/existing-coordinator-status-request-once-v01/message.txt",
+    "message_bytes": 922,
+    "message_sha256": "000b2fe7527036d6fbe05f967b186eaf8f63ceecde98e5c6540d976113f70463",
+    "private_root": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/existing-coordinator-status-request-once-v01",
+    "message_artifact_path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/existing-coordinator-status-request-once-v01/retained-message.json",
+    "unknown_reservation_path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/existing-coordinator-status-request-once-v01/unknown-before-mutation.json",
+    "sender_receipt_path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/existing-coordinator-status-request-once-v01/sender-receipt.json",
+    "result_path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/current-A219-task-local-recovery-private-v01/existing-coordinator-status-request-once-v01/result.json"
+  }
+}

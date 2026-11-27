@@ -1,0 +1,67 @@
+from pathlib import Path
+import ast,hashlib,sys
+
+d,p=map(Path,sys.argv[1:])
+a=(p/'test_legal_ir_evaluation_artifacts.after-v02.py.DATA').read_bytes()
+assert hashlib.sha256(a).hexdigest()=='5ba9fefe11606515a783981111c2c44c6aadfdf6cb1112acca55ba76d00913cb'
+s=a.decode()
+begin=s.index('    if split_overlap in ("unicode_unrelated", "unicode_alias"):\n')
+end=s.index('    bindings={}\n', begin)
+s=s[:begin]+'''    if split_overlap in ("unicode_unrelated", "unicode_alias", "unicode_second_alias"):
+        all_rows = [row for group in populations.values() for row in group]
+        manifest = _fixture_reprofile_unicode_split(ch.splits, manifest, all_rows)
+'''+s[end:]
+index=s.index('def _rich_v3_heldout_case(')
+s=s[:index]+'''def _fixture_reprofile_unicode_split(splits, manifest, rows):
+    import unicodedata
+
+    metadata = {"campaign_split_profile": splits.UNICODE_CAMPAIGN_SPLIT_PROFILE,
+                "unicode_data_version": unicodedata.unidata_version}
+    by_id = {row["id"]: row["source_text"] for row in rows}
+    for example in manifest["examples"]:
+        content_hash, fingerprint = splits.legal_ir_split_source_fingerprint(
+            by_id[example["sample_id"]], metadata=metadata)
+        assert example["content_hash"] == content_hash
+        example["token_fingerprint"] = list(fingerprint)
+    manifest["metadata"] = metadata
+    # Preserve the enrolled split identities without relying on frozen near keys.
+    resolved = splits.LegalIRSplitManifest.from_mapping(manifest)
+    assert resolved.guard_result().passed
+    return resolved.to_dict()
+
+
+'''+s[index:]
+before='        source_bindings = None\n        if shared_source_identity'
+after='''        if partition == "holdout" and split_overlap == "unicode_second_alias":
+            texts[2] = "SECXND permits inspectors to examine inventzries with assistants at a specified event and time."
+        source_bindings = None
+        if shared_source_identity'''
+assert s.count(before)==1
+s=s.replace(before,after)
+first=s.index('def _aggregate_v4_heldout_case():')
+last=s.index('\n\ndef test_aggregate_v4_actual_evaluator',first)
+body=s[first:last]
+patches=[
+('def _aggregate_v4_heldout_case():','def _aggregate_v4_heldout_case(*, split_overlap=None, defer_heldout_check=False):'),
+('    ch, options, populations, replays, _ = _rich_v3_heldout_case()',
+ '''    ch, options, populations, replays, _ = _rich_v3_heldout_case(
+        split_overlap=split_overlap, defer_heldout_check=defer_heldout_check)'''),
+('    components = []','''    if split_overlap in ("unicode_unrelated", "unicode_second_alias"):
+        manifest = _fixture_reprofile_unicode_split(ch.splits, manifest, all_rows)
+    components = []'''),
+('        consumer=lambda value:value,heldout_evaluation=query_binding.receipt()["heldout_evaluation"])',
+ '''        consumer=lambda value:value,
+        heldout_evaluation=None if defer_heldout_check else query_binding.receipt()["heldout_evaluation"])'''),
+]
+for old,new in patches:
+    assert body.count(old)==1,old
+    body=body.replace(old,new)
+s=s[:first]+body+s[last:]+(d/'aggregate-test.fragment.py.DATA').read_text()
+def functions(raw):
+    return {node.name:ast.dump(node) for node in ast.parse(raw).body if isinstance(node,(ast.FunctionDef,ast.ClassDef))}
+old,new=functions(a),functions(s)
+assert set(new)-set(old)=={'_fixture_reprofile_unicode_split','test_aggregate_v4_holds_out_unicode_near_duplicate_from_unselected_component'}
+assert {key for key in old if old[key]!=new[key]}=={'_rich_v3_heldout_case','_aggregate_v4_heldout_case'}
+test=d/'test_legal_ir_evaluation_artifacts.after-v03.py.DATA'
+test.write_text(s)
+print(len(test.read_bytes()),hashlib.sha256(test.read_bytes()).hexdigest())

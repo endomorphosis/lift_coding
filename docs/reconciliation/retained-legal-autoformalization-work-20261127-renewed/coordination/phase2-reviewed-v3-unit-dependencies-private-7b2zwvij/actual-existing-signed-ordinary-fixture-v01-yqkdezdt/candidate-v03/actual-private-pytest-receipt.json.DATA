@@ -1,0 +1,83 @@
+{
+  "JUnit": {
+    "bytes": 6370,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/candidate-v03/result.xml",
+    "sha256": "cbae89b2e957ae2317eaf4a76d9bccb11995eeb44e08fa8b9c5320eb079fa07e"
+  },
+  "argv": [
+    "/home/barberb/lift_coding/.venv/bin/python",
+    "-I",
+    "-B",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/invoke-existing-pytest-private-v02.py.DATA",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/candidate-v03",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/dataset",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+    "/home/barberb/lift_coding/external/ipfs_datasets",
+    "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_alternate_view_of_same_raw_paragraph_requires_distinct_use_witness",
+    "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_raw_repackaging_and_artifact_labels_do_not_create_legal_uses",
+    "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_alternate_view_of_same_raw_paragraph_requires_distinct_use_witness",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_cyclic_unit_dependencies",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_preserves_acyclic_overlapping_unit_dependencies"
+  ],
+  "rc": 0,
+  "runner": {
+    "bytes": 2733,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/invoke-existing-pytest-private-v02.py.DATA",
+    "sha256": "37b0cd50f0ce9d5ef5fd38e29d040211401365253595255b74fa60becba76132"
+  },
+  "schema": "private-actual-package-signed-fixtures/v3",
+  "source_addition": {
+    "bytes": 1677,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/one-proven-missing-fixture-tree-pin-addition-v03.json",
+    "sha256": "1243cb69c967d36577b0f60c37aa30b93649cbfd3c2e97200e66e5769033c303"
+  },
+  "stderr": {
+    "bytes": 0,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/candidate-v03/stderr.DATA",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 401,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/candidate-v03/stdout.DATA",
+    "sha256": "585132b93a40a370782d2f7a2f1af66d9d6df4836af7b7ac403bcd8082a6f582"
+  },
+  "tests": {
+    "nodes": [
+      "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_alternate_view_of_same_raw_paragraph_requires_distinct_use_witness",
+      "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[duplicate_repackage-logical source occurrence]",
+      "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[overlapping_repackage-overlapping logical source]",
+      "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[document_revision_label-logical source occurrence]",
+      "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_unaligned_view-unsupported source-view alignment]",
+      "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_view_and_document_revision_label-unsupported source-view alignment]",
+      "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[physical_alias-physical occurrence]",
+      "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[different_provision]",
+      "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[different_release]",
+      "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[different_edition]",
+      "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs]",
+      "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs_different_source_id]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_alternate_view_of_same_raw_paragraph_requires_distinct_use_witness",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[duplicate_repackage-logical source occurrence]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[overlapping_repackage-overlapping logical source]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[document_revision_label-logical source occurrence]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_unaligned_view-unsupported source-view alignment]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_view_and_document_revision_label-unsupported source-view alignment]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[physical_alias-physical occurrence]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_provision]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_release]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_edition]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs_different_source_id]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-cycle]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-definition-cycle]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_cyclic_unit_dependencies[longer-mixed-cycle]",
+      "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_preserves_acyclic_overlapping_unit_dependencies"
+    ],
+    "other": [],
+    "passed": 28
+  }
+}

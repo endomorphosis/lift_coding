@@ -1,0 +1,38 @@
+{
+  "schema": "private-existing-v433-local-freezer-exact1-LIR15-reuse/v1",
+  "status": "STATIC_READY_ROOT_SOURCE_TERMINAL_RECEIVED_STAGE_AUTHORIZED_NOT_YET_RUN",
+  "existing_freezer": {
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase3-candidate-inventory-exact2-local-freeze-v433/freeze_exact_phase3_inventory_two.py",
+    "bytes": 11192,
+    "sha256": "e379a2874500bdd18cd40cea0420dba3da0f67d4a2fc94cfa93eb5418eef4809"
+  },
+  "existing_one_test_antecedent": {
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/p1-lir15-native-test-exact1-local-freeze-v409/freeze_exact_native_failed_donor_test.py",
+    "bytes": 9642,
+    "sha256": "168c4643ce58b01c844b8ac49ba0eb52fc72badc814c4758db72bb029f2ca85d"
+  },
+  "program": {
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/p1-lir15-edition-exact1-local-freeze-v442/freeze_exact_lir15_edition_one.py",
+    "bytes": 12928,
+    "sha256": "5421baa5fcabff04c1010f63c9d5f6ffec1f2247e693ee30c187fb37d6297f63"
+  },
+  "forward_delta": {
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/p1-lir15-edition-exact1-local-freeze-v442/existing-v433-to-edition-exact1.diff.DATA",
+    "bytes": 10167,
+    "sha256": "31a293c4ccc32a0418f74d59d73aa154ea668d52df58cbb89fb056d7e9af0243"
+  },
+  "Source_terminal": {
+    "path": "/tmp/Root-P1-LIR15-edition-existing-Source1-v442-vCVPzhDr/actual-LIR15-source-edition-exact1-Source-closed-small-v442.json",
+    "bytes": 4733,
+    "sha256": "ba307fe9af4e3a8155baff8d69fcec36c5e79a77cf46e5ac9330f86741ded516"
+  },
+  "prior_Guide539": {
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-guide539-four-doc-three-FF-publication-small-v441.json",
+    "bytes": 13378,
+    "sha256": "0c41a15cb69673709ba75becf72a5598f4aceed4af5650cac42787b723413625"
+  },
+  "all_existing_freezer_function_AST_exact": true,
+  "expected_parent": "d60c456d6f522d074499bf861e5bb0227d5d8645",
+  "exact_test_post_blob": "808b589a20a8a82fb26292813fbb62feae188ef6",
+  "scope": "Only exact target Git stage and one local commit after all Source receipt/full9/privateblob/peer/index/cleanstatus/AST guards. No push/test/new Source API/lease/runtime/model action."
+}

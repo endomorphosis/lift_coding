@@ -1,0 +1,58 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr": "",
+      "stdout_bytes": 41
+    },
+    {
+      "argv": [
+        "diff",
+        "--cached",
+        "--name-only"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr": "",
+      "stdout_bytes": 0
+    },
+    {
+      "argv": [
+        "status",
+        "--porcelain=v1",
+        "-z",
+        "-uall"
+      ],
+      "returncode": 0,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr": "",
+      "stdout_bytes": 117
+    },
+    {
+      "argv": [
+        "ls-tree",
+        "-r",
+        "HEAD"
+      ],
+      "returncode": 128,
+      "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "stderr": "fatal: packfile /home/barberb/lift_coding/.git/modules/external/ipfs_accelerate/objects/pack/pack-7a9e351e8bf6571d17f310523dd215419cf1ffd1.pack cannot be mapped, check sys.vm.max_map_count and/or RLIMIT_DATA: Cannot allocate memory\n",
+      "stdout_bytes": 72
+    }
+  ],
+  "effects": {
+    "commit_returned": false,
+    "git_add_returned": false
+  },
+  "error": {
+    "message": "('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate', ['ls-tree', '-r', 'HEAD'], 128, 'fatal: packfile /home/barberb/lift_coding/.git/modules/external/ipfs_accelerate/objects/pack/pack-7a9e351e8bf6571d17f310523dd215419cf1ffd1.pack cannot be mapped, check sys.vm.max_map_count and/or RLIMIT_DATA: Cannot allocate memory\\n')",
+    "type": "AssertionError"
+  },
+  "other_roots_after": {},
+  "other_roots_before": {}
+}

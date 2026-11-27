@@ -1,0 +1,34 @@
+{
+  "actual_private_guard_controls": {
+    "alternate_git_index_refused": true,
+    "changed_provenance_bytes_refused": true,
+    "config_selector_drift_refused": true,
+    "dirty_worktree_refused": true,
+    "exact_pair_accepted": true,
+    "expired_guard_refused": true,
+    "git_index_digest_drift_refused": true,
+    "git_index_metadata_drift_refused": true,
+    "refs_drift_refused": true
+  },
+  "diff": {
+    "bytes": 5928,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase4-reviewed-lexical-tokenless-private-v01/phase4-v5-standalone-provenance-parent-v03.patch",
+    "sha256": "4bbab2463abd276b95388b86bfbfee2e324375f4f260529ad142d96ce1e04eed"
+  },
+  "fix": "Require Git actual index and exclude paths, and fresh HEAD/ref/config metadata around the Git checks. Existing deadline and custody branches remain exact.",
+  "inert_flags_retained": true,
+  "namespace_Source_and_actual_pytest_result": null,
+  "post": {
+    "bytes": 44572,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase4-reviewed-lexical-tokenless-private-v01/existing-v5-source-held-current-A-D-standalone-parent-INERT.v03.py.DATA",
+    "sha256": "8b6f935495b5c5c1461fc8bac849f7589b9d80845d1e1513651a7b0b59323b76"
+  },
+  "scheduler_authority": null,
+  "schema": "phase4-existing-v5-parent-standalone-provenance-INERT-v3",
+  "scope": "Actual new guard functions with fictional Git stdout and temporary files. No protected root, re-enrollment, Source lease or ordinary pytest effects.",
+  "supersedes": {
+    "bytes": 41284,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase4-reviewed-lexical-tokenless-private-v01/existing-v5-source-held-current-A-D-standalone-parent-INERT.v02.py.DATA",
+    "sha256": "66e2a66a3d4cce2ec6b7dacd63ec0270aa4d42d627d71c24e2fe715608b744b7"
+  }
+}

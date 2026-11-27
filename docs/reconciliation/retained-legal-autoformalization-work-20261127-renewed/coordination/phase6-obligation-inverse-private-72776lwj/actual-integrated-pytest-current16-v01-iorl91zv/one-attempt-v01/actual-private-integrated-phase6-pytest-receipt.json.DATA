@@ -1,0 +1,193 @@
+{
+  "JUnit": {
+    "bytes": 4099,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-obligation-inverse-private-72776lwj/actual-integrated-pytest-current16-v01-iorl91zv/one-attempt-v01/result.xml",
+    "sha256": "b2da075d18b593afe17f5326b56683dd4d0be373b813704f462ada46c09e9397"
+  },
+  "actual_private_integrated_pass": true,
+  "argv": [
+    "/home/barberb/lift_coding/.venv/bin/python",
+    "-I",
+    "-B",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/invoke-existing-pytest-private-v02.py.DATA",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-obligation-inverse-private-72776lwj/actual-integrated-pytest-current16-v01-iorl91zv/one-attempt-v01",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-obligation-inverse-private-72776lwj/actual-integrated-pytest-current16-v01-iorl91zv/dataset",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+    "/home/barberb/lift_coding/external/ipfs_datasets",
+    "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_separates_typed_structure_normalized_prose_and_original_bytes",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_original_byte_measurement_is_optional_and_same_row_joint",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_whole_input_abstentions_remain_in_denominator",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_never_passes_original_source_or_reference_to_inverse",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_requires_explicit_text_candidate",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_input_guards_run_before_any_reference_realization",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_distinguishes_obligation_from_bare_assertion",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py::test_relational_score_abstains_on_ordinary_past_tense_prose"
+  ],
+  "candidate_test_post": {
+    "bytes": 58044,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-obligation-inverse-private-72776lwj/current-owning-test-obligation-assertion-v01.after.py.DATA",
+    "sha256": "f918c5c29396beccf9119d41a4017763511a3abb737c4ce79f1f33c3eda50c72"
+  },
+  "cases": [
+    {
+      "classname": "tests.unit.logic.formalization.autoencoder.test_ir_legal_text_roundtrip",
+      "errors": 0,
+      "failures": 0,
+      "name": "test_relational_score_separates_typed_structure_normalized_prose_and_original_bytes",
+      "skips": 0
+    },
+    {
+      "classname": "tests.unit.logic.formalization.autoencoder.test_ir_legal_text_roundtrip",
+      "errors": 0,
+      "failures": 0,
+      "name": "test_relational_score_original_byte_measurement_is_optional_and_same_row_joint",
+      "skips": 0
+    },
+    {
+      "classname": "tests.unit.logic.formalization.autoencoder.test_ir_legal_text_roundtrip",
+      "errors": 0,
+      "failures": 0,
+      "name": "test_relational_score_whole_input_abstentions_remain_in_denominator[]",
+      "skips": 0
+    },
+    {
+      "classname": "tests.unit.logic.formalization.autoencoder.test_ir_legal_text_roundtrip",
+      "errors": 0,
+      "failures": 0,
+      "name": "test_relational_score_whole_input_abstentions_remain_in_denominator[   ]",
+      "skips": 0
+    },
+    {
+      "classname": "tests.unit.logic.formalization.autoencoder.test_ir_legal_text_roundtrip",
+      "errors": 0,
+      "failures": 0,
+      "name": "test_relational_score_whole_input_abstentions_remain_in_denominator[An officer must serve a person.]",
+      "skips": 0
+    },
+    {
+      "classname": "tests.unit.logic.formalization.autoencoder.test_ir_legal_text_roundtrip",
+      "errors": 0,
+      "failures": 0,
+      "name": "test_relational_score_whole_input_abstentions_remain_in_denominator[Typed legal rule: tdfol/tdfol_default.\\nTypes: Object.\\nPredicate Serve: server of type Object; addressee of type Object.\\nRule: (for every officer of type Object, (there exists person of type Object such that (it is obligatory that (Serve holds for server: officer of type Object; addressee: person of type Object)))). Further obligations apply.]",
+      "skips": 0
+    },
+    {
+      "classname": "tests.unit.logic.formalization.autoencoder.test_ir_legal_text_roundtrip",
+      "errors": 0,
+      "failures": 0,
+      "name": "test_relational_score_whole_input_abstentions_remain_in_denominator[Typed legal rule: tdfol/tdfol_default.\\nTypes: Object.\\nPredicate Serve: server of type Object; addressee of type Object.\\nRule: (for every officer of type Object, (there exists person of type Object such that (it is obligatory that (Serve holds for server: officer of type Object; server: person of type Object)))).]",
+      "skips": 0
+    },
+    {
+      "classname": "tests.unit.logic.formalization.autoencoder.test_ir_legal_text_roundtrip",
+      "errors": 0,
+      "failures": 0,
+      "name": "test_relational_score_never_passes_original_source_or_reference_to_inverse",
+      "skips": 0
+    },
+    {
+      "classname": "tests.unit.logic.formalization.autoencoder.test_ir_legal_text_roundtrip",
+      "errors": 0,
+      "failures": 0,
+      "name": "test_relational_score_requires_explicit_text_candidate[None]",
+      "skips": 0
+    },
+    {
+      "classname": "tests.unit.logic.formalization.autoencoder.test_ir_legal_text_roundtrip",
+      "errors": 0,
+      "failures": 0,
+      "name": "test_relational_score_requires_explicit_text_candidate[7]",
+      "skips": 0
+    },
+    {
+      "classname": "tests.unit.logic.formalization.autoencoder.test_ir_legal_text_roundtrip",
+      "errors": 0,
+      "failures": 0,
+      "name": "test_relational_score_requires_explicit_text_candidate[True]",
+      "skips": 0
+    },
+    {
+      "classname": "tests.unit.logic.formalization.autoencoder.test_ir_legal_text_roundtrip",
+      "errors": 0,
+      "failures": 0,
+      "name": "test_relational_score_input_guards_run_before_any_reference_realization[candidate_surrogate-valid UTF8 candidate and optional original text required]",
+      "skips": 0
+    },
+    {
+      "classname": "tests.unit.logic.formalization.autoencoder.test_ir_legal_text_roundtrip",
+      "errors": 0,
+      "failures": 0,
+      "name": "test_relational_score_input_guards_run_before_any_reference_realization[original_surrogate-valid UTF8 candidate and optional original text required]",
+      "skips": 0
+    },
+    {
+      "classname": "tests.unit.logic.formalization.autoencoder.test_ir_legal_text_roundtrip",
+      "errors": 0,
+      "failures": 0,
+      "name": "test_relational_score_input_guards_run_before_any_reference_realization[original_bool-optional original source text required]",
+      "skips": 0
+    },
+    {
+      "classname": "tests.unit.logic.formalization.autoencoder.test_ir_legal_text_roundtrip",
+      "errors": 0,
+      "failures": 0,
+      "name": "test_relational_score_distinguishes_obligation_from_bare_assertion",
+      "skips": 0
+    },
+    {
+      "classname": "tests.unit.logic.formalization.autoencoder.test_ir_legal_text_roundtrip",
+      "errors": 0,
+      "failures": 0,
+      "name": "test_relational_score_abstains_on_ordinary_past_tense_prose",
+      "skips": 0
+    }
+  ],
+  "errors": 0,
+  "exact_ordered_roster_and_JUnit_class_match": true,
+  "existing_runner": {
+    "bytes": 2733,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/invoke-existing-pytest-private-v02.py.DATA",
+    "sha256": "37b0cd50f0ce9d5ef5fd38e29d040211401365253595255b74fa60becba76132"
+  },
+  "exit_code": 0,
+  "failures": 0,
+  "git_revision": "017fb546935826d4e8f13d314395f6053cee4d3f",
+  "guarded_private_materialized_project_bytes": 4279526,
+  "guarded_private_materialized_python_files": 129,
+  "limits": {
+    "AS_bytes": 536870912,
+    "CPU_hard_seconds": 56,
+    "CPU_soft_seconds": 55,
+    "cpu": 1,
+    "wall_seconds": 60
+  },
+  "manifest": {
+    "bytes": 108091,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-obligation-inverse-private-72776lwj/actual-integrated-pytest-current16-v01-iorl91zv/private-integrated-phase6-16-exact-Git-inputs.json",
+    "sha256": "0a97fcd939621200b4303046d65829998a881f622dac89712253abfb294ac09a"
+  },
+  "new_Source_native_model_Learn_or_network": false,
+  "normal_Source_or_SDK_qualification": false,
+  "original_managed_ledger_or_managed_runtime_touched": false,
+  "physical": 16,
+  "reaped": true,
+  "schema": "actual-Phase6-private-integrated-pytest-16-based-on-current-Git/v1",
+  "skips": 0,
+  "stage_or_canonical_mutation": false,
+  "stderr": {
+    "bytes": 0,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-obligation-inverse-private-72776lwj/actual-integrated-pytest-current16-v01-iorl91zv/one-attempt-v01/retained-stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 386,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase6-obligation-inverse-private-72776lwj/actual-integrated-pytest-current16-v01-iorl91zv/one-attempt-v01/retained-stdout.txt",
+    "sha256": "a760e10e6aedcde6bf995044235558ea58b157376309d741c2c4b7be6bb2e813"
+  },
+  "timed_out": false,
+  "unique": 16,
+  "wall_seconds": 0.677445768378675,
+  "xml_error": null
+}

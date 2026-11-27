@@ -1,0 +1,45 @@
+{
+  "actual_runtime_bindings": null,
+  "all_previous_test_prefix_and_AST_exact": true,
+  "all_tests_unchanged": true,
+  "append": {
+    "bytes": 9755,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/generated-producer-owningtests.append.py.DATA",
+    "sha256": "900dfb5741730207691162f8e30e61db13ccb9504278972e7ea6ad09c01aa683"
+  },
+  "case_names": [
+    "test_actual_feedback_builder_preserves_legacy_obligation_digest_without_target",
+    "test_checked_target_uses_actual_feedback_builder_before_both_consumers",
+    "test_actual_feedback_builder_refuses_same_id_changed_obligation[statement]",
+    "test_actual_feedback_builder_refuses_same_id_changed_obligation[metadata]",
+    "test_actual_feedback_builder_refuses_unmatched_checked_receipt"
+  ],
+  "controls": {
+    "bytes": 5917,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/existing-maintained-generated-producer-five-controls.v02.py.DATA",
+    "sha256": "6fd02ef286311b96d976ec7358dccff727f4675a5cadc5b554402668ad5cd947"
+  },
+  "expected_missing_API": "build_legal_ir_proof_feedback_record(..., current_target=...)",
+  "overlay": {
+    "bytes": 350,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/same-consumer-v02-overlay.json",
+    "sha256": "843d9cc96eb21b3565589bbb64e7a42de29256e5cd11a07c1d65ba442b1a135a"
+  },
+  "product_code_unchanged": true,
+  "projection": {
+    "bytes": 63889,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/generated-producer-five-projection.json",
+    "sha256": "dd396d34033d2a61724ac026a299385aa6356454186a435c6dd6f04f27454fb2"
+  },
+  "retained_control_failure": "Reporter missing json in extracted function scope masked per-case diagnostics; add local stdlib import only. Earlier raw output preserved.",
+  "runner": {
+    "bytes": 16416,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/existing-rebased-generated-producer-five-runner.v02.py.DATA",
+    "sha256": "aca027a2a4482463f9edc039884b9f938afb4e05da42f34fd24cb1d702b23d85"
+  },
+  "test": {
+    "bytes": 65356,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/test_trusted_feedback_weight_updates.producer-acceptance.after.py.DATA",
+    "sha256": "2f056250c9fd6c8a54a299706af5357842f2ef3c00910354c09a72e043c3b3ac"
+  }
+}

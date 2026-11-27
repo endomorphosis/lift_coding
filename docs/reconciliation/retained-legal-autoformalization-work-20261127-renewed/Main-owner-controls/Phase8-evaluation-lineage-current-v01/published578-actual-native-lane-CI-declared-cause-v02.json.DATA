@@ -1,0 +1,32 @@
+{
+  "Source_or_Git_mutation_or_Native_or_model": false,
+  "aggregate_job_is_separate": true,
+  "all_prior_reads_truncations_and_failures_retained": true,
+  "annotations": [
+    {
+      "annotation_level": "failure",
+      "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/81ee859cd2bbd4872b0a2e3bc75e2994c14140fe/.github",
+      "end_column": null,
+      "end_line": 1,
+      "message": "The job was not started because your account is locked due to a billing issue.",
+      "path": ".github",
+      "raw_details": "",
+      "start_column": null,
+      "start_line": 1,
+      "title": ""
+    }
+  ],
+  "check_id": 140263689218,
+  "commit": "81ee859cd2bbd4872b0a2e3bc75e2994c14140fe",
+  "dispatch_or_rerun_or_billing_or_runtime_change": false,
+  "head_binding_evidence": {
+    "bytes": 16738,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/published577-578-CI-current-readonly-metadata-v01.json",
+    "sha256": "44493ca5a429242e5e8a5398333291b0a9dbfa11c9940d5b2e19f6ddc9ce7e9c"
+  },
+  "job_name": "Legal autoformal validation (native-lean)",
+  "raw_response_bytes": 352,
+  "raw_response_sha256": "794d8d7a019ca213f4b3897eae8d8f4dc2c72b5369d053ccbfbfdc1c30a8c98f",
+  "read_only_GETs": 1,
+  "status": "ACTUAL_NATIVE_MATRIX_LANE_DECLARED_START_BLOCK"
+}

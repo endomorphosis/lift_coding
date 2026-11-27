@@ -1,0 +1,144 @@
+{
+  "accounting": {
+    "actual_explicit_cached_input_bytes_before_output_readback": 245631,
+    "cached_input_cap": 1048576,
+    "conservative_budget_charge_retained_before_output_readback": 322874,
+    "implicit_library_IO_measured": false,
+    "prior_printed_counter_error": {
+      "actual_first_call": 80879,
+      "cause": "final metadata variable referred to owner instead of brief",
+      "no_Source_ledger_change_or_refund": true,
+      "printed_first_call": 158122
+    }
+  },
+  "brief": {
+    "bytes": 1818,
+    "path": "/tmp/Root-Advisory-current-intake-edition-collision-cached-unit-v01.json",
+    "sha256": "bb10fa6ac547565764ca16f41e81b141b1afe63540c4be7d40ed2cca7235d07b"
+  },
+  "effects": {
+    "Source_observations": 0,
+    "canonical_writes": 0,
+    "legal_admission": false,
+    "model_or_Native_execution": false,
+    "physical_join_trace_duplicated": false,
+    "project_imports": 0,
+    "tests_executed": 0
+  },
+  "execution_dependencies_not_authenticated_in_this_unit": [
+    {
+      "module": "ipfs_datasets_py.logic.autoformal.legal_semantic_graph",
+      "needed": [
+        "bind_scope",
+        "bind_source_occurrence",
+        "build_graph"
+      ]
+    },
+    {
+      "module": "ipfs_datasets_py.logic.autoformal.legal_statutory_context",
+      "needed": [
+        "normalized_document_view"
+      ]
+    },
+    {
+      "module": "ipfs_datasets_py.logic.autoformal.span_cache",
+      "needed": [
+        "SPAN_EXPORT_COLUMNS"
+      ]
+    },
+    {
+      "module": "ipfs_datasets_py.logic.legal_ir.canonical_contracts",
+      "needed": [
+        "CanonicalRoundTripIR"
+      ]
+    }
+  ],
+  "important_limits": [
+    "Row revision fields are optional; no standalone row-edition field is interpreted by _bound_source. This alone is not a demonstrated defect in an unreviewed-proposal API.",
+    "Local document/scope equality does not establish official edition correspondence, governing definition applicability or legal meaning.",
+    "No end-to-end collision fixture or normal owning test was executed. Static checks are not a runtime PASS.",
+    "Independent reviewer inspected the named core checks; truncated middle coordinate-wrapper output prevents a full wrapper-path coverage claim.",
+    "No patch is justified until an actual false acceptance is reproduced against the real existing API."
+  ],
+  "independent_review": {
+    "agent": "/root/intake_edition_static_review",
+    "agrees_no_patch_justified": true,
+    "imports_or_tests_executed": false,
+    "owner_bytes_read_once": 79061
+  },
+  "next_smallest_existing_owner_action": "If dynamic edition controls remain needed, first reuse authenticated direct dependency bodies and the existing owning-test body, then select the existing engineering or ordinary test path. Do not invent validators, a source registry or a legal approval.",
+  "owner": {
+    "bytes": 79061,
+    "cache_path": "/tmp/Root-current1199-LIR02-two-owner-Source-READ-actual-v28/raw/01-legal_span_cache_intake.py.DATA",
+    "capture_report": {
+      "bytes": 6630,
+      "path": "/tmp/Root-current1199-LIR02-two-owner-Source-READ-actual-v28/actual-D27-observed-D-root-initializer-Source-READ-v01-small-closeout.json",
+      "sha256": "c974924d2dd3f12e702c297a7ab986c22b9575755a42b8ee1982219c8b65857c"
+    },
+    "captured_HEAD": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+    "fresh_canonical_observation_by_this_unit": false,
+    "relative_path": "ipfs_datasets_py/logic/autoformal/legal_span_cache_intake.py",
+    "sha256": "e37cefaf27608856b94bac44135fdcc522f179b2d119dfef7fc7666f982f7743",
+    "source_capture_closed": true
+  },
+  "owning_test": {
+    "body_available": false,
+    "current_test_coverage_inferred": false,
+    "recorded_bytes": 89828,
+    "recorded_sha256": "c8ed369e42651bdad659b0d1b157e3d8017c2e1fc4ffb26e4371cf9f5b8027b3",
+    "relative_path": "tests/unit/logic/autoformal/test_legal_span_cache_intake.py"
+  },
+  "schema": "existing-intake-edition-collision-static-findings/v1",
+  "status": "NO_REPRODUCED_DEFECT_STATIC_BOUNDARY_PRESENT_EXECUTION_UNQUALIFIED",
+  "task": "LIR-02 existing source/intake edition-collision negative controls",
+  "verified_static_checks": [
+    {
+      "check": "Every supplied nonempty row source_revision and revision must equal independent binding.document_revision.",
+      "function": "_bound_source",
+      "lines": [
+        202,
+        206
+      ]
+    },
+    {
+      "check": "scope.edition must be an exact plain int equal to document.edition; complete scope is compared with graphs.bind_scope result.",
+      "function": "_bound_source",
+      "lines": [
+        212,
+        216
+      ]
+    },
+    {
+      "check": "Supplied legal_id must match the document; selected occurrence is bound to revision, exact complete source text and source hash.",
+      "function": "_bound_source",
+      "lines": [
+        218,
+        227
+      ]
+    },
+    {
+      "check": "Independent binding-map digest and complete ordered raw row/record pins are enforced.",
+      "function": "prepare_span_cache_intake",
+      "lines": [
+        272,
+        283
+      ]
+    },
+    {
+      "check": "Binding issues are retained; no graph is built for an unresolved row; graph proposals do not grant admission, training or proof authority.",
+      "function": "prepare_span_cache_intake",
+      "lines": [
+        292,
+        321
+      ]
+    },
+    {
+      "check": "Mixed source view/revision or scope populations remain unresolved.",
+      "function": "prepare_entity_cache_graphs",
+      "lines": [
+        354,
+        356
+      ]
+    }
+  ]
+}

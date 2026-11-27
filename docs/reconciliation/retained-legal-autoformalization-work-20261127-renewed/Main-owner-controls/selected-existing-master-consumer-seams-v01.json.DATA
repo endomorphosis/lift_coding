@@ -1,0 +1,1735 @@
+{
+  "schema": "private-existing-master-selected-seams@1",
+  "source": {
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/implementation_supervisor.published-21d7-e694.py.DATA",
+    "bytes": 1085194,
+    "sha256": "e6946466f9815284cd12ec2389c378c0bd9845a616db34ca23c805047cf63be0",
+    "published_commit": "21d7c7b2436a895c9615d7ed9866c5c27b8bb43b",
+    "full9": [
+      66306,
+      72388565,
+      33024,
+      1,
+      1000,
+      1000,
+      1085194,
+      1795679322314069181,
+      1795679322314069181
+    ],
+    "full_hash_verified_in_prior_materialization": true,
+    "this_read": "bounded-prefix-lines-not-new-full-hash"
+  },
+  "this_read_bytes": 475519,
+  "sections": {
+    "1-145": [
+      [
+        1,
+        "from __future__ import annotations\n"
+      ],
+      [
+        2,
+        "\n"
+      ],
+      [
+        3,
+        "from ipfs_accelerate_py.agent_supervisor.task_sources.taskboard_store import ProjectionDeltaCheckpointStore\n"
+      ],
+      [
+        4,
+        "from ..merge.workspace_quarantine import maintenance_boundary as _workspace_maintenance_boundary\n"
+      ],
+      [
+        5,
+        "from ..merge.workspace_quarantine import mutation_boundary as _workspace_mutation_boundary\n"
+      ],
+      [
+        6,
+        "\n"
+      ],
+      [
+        7,
+        "import argparse\n"
+      ],
+      [
+        8,
+        "import copy\n"
+      ],
+      [
+        9,
+        "import fcntl\n"
+      ],
+      [
+        10,
+        "import hashlib\n"
+      ],
+      [
+        11,
+        "import inspect\n"
+      ],
+      [
+        12,
+        "import json\n"
+      ],
+      [
+        13,
+        "import logging\n"
+      ],
+      [
+        14,
+        "import math\n"
+      ],
+      [
+        15,
+        "import os\n"
+      ],
+      [
+        16,
+        "import re\n"
+      ],
+      [
+        17,
+        "import shlex\n"
+      ],
+      [
+        18,
+        "import signal\n"
+      ],
+      [
+        19,
+        "import stat\n"
+      ],
+      [
+        20,
+        "import subprocess\n"
+      ],
+      [
+        21,
+        "import sys\n"
+      ],
+      [
+        22,
+        "import threading\n"
+      ],
+      [
+        23,
+        "import time\n"
+      ],
+      [
+        24,
+        "from dataclasses import asdict, dataclass, field, replace\n"
+      ],
+      [
+        25,
+        "from datetime import datetime, timezone\n"
+      ],
+      [
+        26,
+        "from hashlib import sha1, sha256\n"
+      ],
+      [
+        27,
+        "from pathlib import Path\n"
+      ],
+      [
+        28,
+        "from typing import Any, Callable, Mapping, Sequence\n"
+      ],
+      [
+        29,
+        "\n"
+      ],
+      [
+        30,
+        "from ...agent_implementation_route import (\n"
+      ],
+      [
+        31,
+        "    AgentSupervisorNativeDependencyLaunch,\n"
+      ],
+      [
+        32,
+        "    verify_agent_supervisor_native_dependency_sealed_fd,\n"
+      ],
+      [
+        33,
+        ")\n"
+      ],
+      [
+        34,
+        "from ...llm_router import (\n"
+      ],
+      [
+        35,
+        "    AgentImplementationControlPlanePin,\n"
+      ],
+      [
+        36,
+        "    AgentImplementationSealedControlPlane,\n"
+      ],
+      [
+        37,
+        "    verify_agent_implementation_sealed_control_plane,\n"
+      ],
+      [
+        38,
+        ")\n"
+      ],
+      [
+        39,
+        "from ..merge.checkout_lock import (\n"
+      ],
+      [
+        40,
+        "    BACKLOG_REFINERY_AUTHOR_EMAIL,\n"
+      ],
+      [
+        41,
+        "    CheckoutMutationLease,\n"
+      ],
+      [
+        42,
+        "    GENERATED_PROTECTED_BOARD_COMMIT_MARKER,\n"
+      ],
+      [
+        43,
+        "    adopt_inactive_checkout_mutation_lease,\n"
+      ],
+      [
+        44,
+        "    acquire_checkout_mutation_lease as acquire_atomic_checkout_mutation_lease,\n"
+      ],
+      [
+        45,
+        "    board_scoped_checkout_mutation_lock_path,\n"
+      ],
+      [
+        46,
+        "    checkout_lock_repository_matches,\n"
+      ],
+      [
+        47,
+        "    checkout_lock_metadata,\n"
+      ],
+      [
+        48,
+        "    checkout_lock_owner_is_active,\n"
+      ],
+      [
+        49,
+        "    checkout_mutation_lease_state,\n"
+      ],
+      [
+        50,
+        "    checkout_mutation_lock_path,\n"
+      ],
+      [
+        51,
+        "    generated_protected_board_commit_subject,\n"
+      ],
+      [
+        52,
+        "    read_checkout_mutation_lease,\n"
+      ],
+      [
+        53,
+        "    release_checkout_mutation_lease,\n"
+      ],
+      [
+        54,
+        "    serialized_lock_update,\n"
+      ],
+      [
+        55,
+        "    update_checkout_mutation_lease,\n"
+      ],
+      [
+        56,
+        ")\n"
+      ],
+      [
+        57,
+        "from ..task_sources.board_control_plane import (\n"
+      ],
+      [
+        58,
+        "    infer_board_namespace,\n"
+      ],
+      [
+        59,
+        "    isolate_board_runtime,\n"
+      ],
+      [
+        60,
+        ")\n"
+      ],
+      [
+        61,
+        "from ..control.plan_execution_store import (\n"
+      ],
+      [
+        62,
+        "    MAX_PLAN_BOUND_WAVE_TRANSFERS,\n"
+      ],
+      [
+        63,
+        "    PLAN_BOUND_MERGE_AUTHORIZATION_SCHEMA,\n"
+      ],
+      [
+        64,
+        "    PLAN_BOUND_MERGE_ENQUEUE_INTENT_SCHEMA,\n"
+      ],
+      [
+        65,
+        "    PLAN_BOUND_MERGE_QUEUE_RECEIPT_SCHEMA,\n"
+      ],
+      [
+        66,
+        "    PLAN_BOUND_MERGE_RECOVERY_BIRTH_SCHEMA,\n"
+      ],
+      [
+        67,
+        "    PLAN_BOUND_MERGE_TERMINAL_FAILURE_SCHEMA,\n"
+      ],
+      [
+        68,
+        "    PLAN_BOUND_PROPOSAL_HANDOFF_SCHEMA,\n"
+      ],
+      [
+        69,
+        "    ConfiguredBoardExecutionSlices,\n"
+      ],
+      [
+        70,
+        "    PlanBoundExecutionLease,\n"
+      ],
+      [
+        71,
+        "    PlanBoundProcessBirth,\n"
+      ],
+      [
+        72,
+        "    PlanBoundProposalDisposition,\n"
+      ],
+      [
+        73,
+        "    ProductionParallelPlanAdapter,\n"
+      ],
+      [
+        74,
+        "    _load_plan_bound_execution_lease_locked,\n"
+      ],
+      [
+        75,
+        "    _load_plan_bound_merge_terminal_failure_locked,\n"
+      ],
+      [
+        76,
+        "    _load_plan_bound_process_birth_chain_locked,\n"
+      ],
+      [
+        77,
+        "    _load_plan_bound_proposal_disposition_locked,\n"
+      ],
+      [
+        78,
+        "    _load_plan_revision_store_binding_locked,\n"
+      ],
+      [
+        79,
+        "    _publish_plan_bound_execution_lease_locked,\n"
+      ],
+      [
+        80,
+        "    _publish_plan_bound_merge_terminal_failure_locked,\n"
+      ],
+      [
+        81,
+        "    _publish_plan_bound_proposal_disposition_locked,\n"
+      ],
+      [
+        82,
+        "    _secure_store_active,\n"
+      ],
+      [
+        83,
+        "    _secure_store_cas,\n"
+      ],
+      [
+        84,
+        "    _secure_store_continuation,\n"
+      ],
+      [
+        85,
+        ")\n"
+      ],
+      [
+        86,
+        "from ..runtime.configured_board_live_capsule import (\n"
+      ],
+      [
+        87,
+        "    ConfiguredBoardLiveCapsuleAdmission,\n"
+      ],
+      [
+        88,
+        "    ConfiguredBoardLiveCapsuleError,\n"
+      ],
+      [
+        89,
+        "    parse_configured_board_live_capsule_admission,\n"
+      ],
+      [
+        90,
+        "    verify_configured_board_live_capsule,\n"
+      ],
+      [
+        91,
+        ")\n"
+      ],
+      [
+        92,
+        "from ..runtime.resource_scheduler import evaluate_capacity_drift\n"
+      ],
+      [
+        93,
+        "from ..task_sources.plan_revision_store import PlanRevisionStore\n"
+      ],
+      [
+        94,
+        "from ..proof.formal_verification_contracts import content_identity\n"
+      ],
+      [
+        95,
+        "from ..runtime.event_log import append_jsonl_event, repair_jsonl_event_log, unique_backup_path\n"
+      ],
+      [
+        96,
+        "from .implementation_supervisor_runner import (\n"
+      ],
+      [
+        97,
+        "    persist_goal_completion_projection,\n"
+      ],
+      [
+        98,
+        "    persist_supervisor_scan_receipt,\n"
+      ],
+      [
+        99,
+        ")\n"
+      ],
+      [
+        100,
+        "from ..runtime.multi_supervisor_runner import (\n"
+      ],
+      [
+        101,
+        "    AUTHORITY_MODE_LEGACY_MARKDOWN,\n"
+      ],
+      [
+        102,
+        "    DATABASE_PROGRAM_JSON_ENV,\n"
+      ],
+      [
+        103,
+        "    DatabaseProgramConfig,\n"
+      ],
+      [
+        104,
+        "    DatabaseProgramConfigError,\n"
+      ],
+      [
+        105,
+        "    FAILOVER_FAIL_CLOSED,\n"
+      ],
+      [
+        106,
+        "    TASK_SOURCE_LEGACY_MARKDOWN,\n"
+      ],
+      [
+        107,
+        "    parse_accepted_control_plane_pin,\n"
+      ],
+      [
+        108,
+        "    parse_native_dependency_launch_json,\n"
+      ],
+      [
+        109,
+        "    provider_subprocess_environment,\n"
+      ],
+      [
+        110,
+        ")\n"
+      ],
+      [
+        111,
+        "from ..merge.merge_conflict_repair import resolve_append_only_markdown_conflicts\n"
+      ],
+      [
+        112,
+        "from ..objectives.scan_receipts import (\n"
+      ],
+      [
+        113,
+        "    RefillScanResult,\n"
+      ],
+      [
+        114,
+        "    ScanTerminalReason,\n"
+      ],
+      [
+        115,
+        "    adapt_legacy_scan_result,\n"
+      ],
+      [
+        116,
+        "    build_scan_result,\n"
+      ],
+      [
+        117,
+        "    scan_identity,\n"
+      ],
+      [
+        118,
+        ")\n"
+      ],
+      [
+        119,
+        "from ..campaign_host_capability import host_has_snapshot_builder, should_retry_stalled_task\n"
+      ],
+      [
+        120,
+        "from ..prompt.prompt_workflow import RescueOperation, prompt_workflow_cid\n"
+      ],
+      [
+        121,
+        "from ..rescue.rescue_planner import RescuePlanner, RescuePlannerPolicy, RescuePlanningRequest\n"
+      ],
+      [
+        122,
+        "from ..rescue.supervisor_watchdog import (\n"
+      ],
+      [
+        123,
+        "    AUTONOMOUS_UNSTALL_STATE_SCHEMA,\n"
+      ],
+      [
+        124,
+        "    AutonomousUnstallCoordinator,\n"
+      ],
+      [
+        125,
+        "    AutonomousUnstallPolicy,\n"
+      ],
+      [
+        126,
+        ")\n"
+      ],
+      [
+        127,
+        "from .supervisor_activity import SupervisorMaintenanceWindow\n"
+      ],
+      [
+        128,
+        "from .core import ManagedDaemonSpec, terminate_pid_tree\n"
+      ],
+      [
+        129,
+        "from .production_provider_attestation import (\n"
+      ],
+      [
+        130,
+        "    production_provider_review_key_path,\n"
+      ],
+      [
+        131,
+        ")\n"
+      ],
+      [
+        132,
+        "from .production_provider_cli import (\n"
+      ],
+      [
+        133,
+        "    PRODUCTION_CLI_POLICY_NAME,\n"
+      ],
+      [
+        134,
+        "    DEFAULT_CONTEXT_BUDGET_TOKENS,\n"
+      ],
+      [
+        135,
+        "    DEFAULT_PROVIDER_TIMEOUT_SECONDS,\n"
+      ],
+      [
+        136,
+        "    ProductionCLIProviderPolicy,\n"
+      ],
+      [
+        137,
+        ")\n"
+      ],
+      [
+        138,
+        "from .implementation_daemon import (\n"
+      ],
+      [
+        139,
+        "    DATABASE_DAEMON_PASS_HEARTBEAT_SCHEMA,\n"
+      ],
+      [
+        140,
+        "    DEFAULT_TRACKS,\n"
+      ],
+      [
+        141,
+        "    automatic_retry_rearm_enabled,\n"
+      ],
+      [
+        142,
+        "    IMPLEMENTATION_PROTECTED_ACTIVE_SNAPSHOT_FILENAME,\n"
+      ],
+      [
+        143,
+        "    IMPLEMENTATION_PROTECTED_INCIDENT_FILENAME,\n"
+      ],
+      [
+        144,
+        "    IMPLEMENTATION_RUNNER_PROCESS_PATTERN,\n"
+      ],
+      [
+        145,
+        "    IMPLEMENTATION_DISPATCH_INTENT_LEASE_ROLE,\n"
+      ]
+    ],
+    "5100-5212": [
+      [
+        5100,
+        "                                ),\n"
+      ],
+      [
+        5101,
+        "                                \"prepared_at_ms\": authorized_at_ms,\n"
+      ],
+      [
+        5102,
+        "                            }\n"
+      ],
+      [
+        5103,
+        "                            intent_cid = store.put_cas(intent)\n"
+      ],
+      [
+        5104,
+        "                            if _secure_store_cas(store, intent_cid) != intent:\n"
+      ],
+      [
+        5105,
+        "                                raise PlanBoundDispatchError(\n"
+      ],
+      [
+        5106,
+        "                                    \"merge enqueue intent failed CAS round trip\"\n"
+      ],
+      [
+        5107,
+        "                                )\n"
+      ],
+      [
+        5108,
+        "                            prepared = replace(\n"
+      ],
+      [
+        5109,
+        "                                current,\n"
+      ],
+      [
+        5110,
+        "                                generation=current.generation + 1,\n"
+      ],
+      [
+        5111,
+        "                                phase=\"merge_enqueue_prepared\",\n"
+      ],
+      [
+        5112,
+        "                                prior_execution_lease_cid=current_cid,\n"
+      ],
+      [
+        5113,
+        "                                merge_enqueue_reached=True,\n"
+      ],
+      [
+        5114,
+        "                                merge_authorization_cid=authorization_cid,\n"
+      ],
+      [
+        5115,
+        "                                merge_enqueue_intent_cid=intent_cid,\n"
+      ],
+      [
+        5116,
+        "                            )\n"
+      ],
+      [
+        5117,
+        "                            prepared_cid = (\n"
+      ],
+      [
+        5118,
+        "                                _publish_plan_bound_execution_lease_locked(\n"
+      ],
+      [
+        5119,
+        "                                    store,\n"
+      ],
+      [
+        5120,
+        "                                    prepared,\n"
+      ],
+      [
+        5121,
+        "                                    expected_current_cid=current_cid,\n"
+      ],
+      [
+        5122,
+        "                                )\n"
+      ],
+      [
+        5123,
+        "                            )\n"
+      ],
+      [
+        5124,
+        "                            return prepared_cid, prepared\n"
+      ],
+      [
+        5125,
+        "\n"
+      ],
+      [
+        5126,
+        "        def _await_plan_bound_merge_turn(\n"
+      ],
+      [
+        5127,
+        "            self,\n"
+      ],
+      [
+        5128,
+        "            execution_lease: PlanBoundExecutionLease,\n"
+      ],
+      [
+        5129,
+        "        ) -> None:\n"
+      ],
+      [
+        5130,
+        "            \"\"\"Serialize canonical queue handoff in immutable manifest order.\n"
+      ],
+      [
+        5131,
+        "\n"
+      ],
+      [
+        5132,
+        "            Provider work and proposal validation remain parallel.  The merge\n"
+      ],
+      [
+        5133,
+        "            train is globally serialized, but it can otherwise dequeue a dead\n"
+      ],
+      [
+        5134,
+        "            sibling's newly committed row before that sibling's CAS-bound\n"
+      ],
+      [
+        5135,
+        "            recovery child adopts its SETTLING lifecycle.  Requiring every\n"
+      ],
+      [
+        5136,
+        "            earlier manifest slice to reach authoritative ``merge_completed``\n"
+      ],
+      [
+        5137,
+        "            keeps the canonical train on the row whose exact owner is alive;\n"
+      ],
+      [
+        5138,
+        "            a crashed predecessor is restarted by the outer runner while later\n"
+      ],
+      [
+        5139,
+        "            lanes wait outside every store/claim/lifecycle lock.\n"
+      ],
+      [
+        5140,
+        "            \"\"\"\n"
+      ],
+      [
+        5141,
+        "\n"
+      ],
+      [
+        5142,
+        "            timeout_ms = self._proposal_barrier_timeout_ms(execution_lease)\n"
+      ],
+      [
+        5143,
+        "            deadline = time.monotonic() + timeout_ms / 1000.0\n"
+      ],
+      [
+        5144,
+        "            adapter = ProductionParallelPlanAdapter(store)\n"
+      ],
+      [
+        5145,
+        "            while True:\n"
+      ],
+      [
+        5146,
+        "                pending: list[str] = []\n"
+      ],
+      [
+        5147,
+        "                with store._thread_lock:  # noqa: SLF001\n"
+      ],
+      [
+        5148,
+        "                    with store._guard():  # noqa: SLF001\n"
+      ],
+      [
+        5149,
+        "                        manifest_payload = _secure_store_cas(\n"
+      ],
+      [
+        5150,
+        "                            store,\n"
+      ],
+      [
+        5151,
+        "                            execution_lease.slice_manifest_cid,\n"
+      ],
+      [
+        5152,
+        "                        )\n"
+      ],
+      [
+        5153,
+        "                        manifest = ConfiguredBoardExecutionSlices.from_dict(\n"
+      ],
+      [
+        5154,
+        "                            manifest_payload\n"
+      ],
+      [
+        5155,
+        "                        )\n"
+      ],
+      [
+        5156,
+        "                        ordered = tuple(\n"
+      ],
+      [
+        5157,
+        "                            sorted(\n"
+      ],
+      [
+        5158,
+        "                                manifest.nonempty,\n"
+      ],
+      [
+        5159,
+        "                                key=lambda item: (item.lane_index, item.slice_id),\n"
+      ],
+      [
+        5160,
+        "                            )\n"
+      ],
+      [
+        5161,
+        "                        )\n"
+      ],
+      [
+        5162,
+        "                        terminal_failures = tuple(\n"
+      ],
+      [
+        5163,
+        "                            item.slice_id\n"
+      ],
+      [
+        5164,
+        "                            for item in ordered\n"
+      ],
+      [
+        5165,
+        "                            if _load_plan_bound_merge_terminal_failure_locked(\n"
+      ],
+      [
+        5166,
+        "                                store,\n"
+      ],
+      [
+        5167,
+        "                                revision_cid=execution_lease.revision_cid,\n"
+      ],
+      [
+        5168,
+        "                                slice_id=item.slice_id,\n"
+      ],
+      [
+        5169,
+        "                            )\n"
+      ],
+      [
+        5170,
+        "                            is not None\n"
+      ],
+      [
+        5171,
+        "                        )\n"
+      ],
+      [
+        5172,
+        "                        if terminal_failures:\n"
+      ],
+      [
+        5173,
+        "                            raise PlanBoundReplanRequired(\n"
+      ],
+      [
+        5174,
+        "                                \"wave contains terminal canonical merge failure: \"\n"
+      ],
+      [
+        5175,
+        "                                f\"{sorted(terminal_failures)!r}\"\n"
+      ],
+      [
+        5176,
+        "                            )\n"
+      ],
+      [
+        5177,
+        "                        current_indexes = tuple(\n"
+      ],
+      [
+        5178,
+        "                            index\n"
+      ],
+      [
+        5179,
+        "                            for index, item in enumerate(ordered)\n"
+      ],
+      [
+        5180,
+        "                            if item.slice_id == execution_lease.slice_id\n"
+      ],
+      [
+        5181,
+        "                        )\n"
+      ],
+      [
+        5182,
+        "                        if len(current_indexes) != 1:\n"
+      ],
+      [
+        5183,
+        "                            raise PlanBoundReplanRequired(\n"
+      ],
+      [
+        5184,
+        "                                \"merge turn lost its immutable manifest slice\"\n"
+      ],
+      [
+        5185,
+        "                            )\n"
+      ],
+      [
+        5186,
+        "                        for prior_slice in ordered[: current_indexes[0]]:\n"
+      ],
+      [
+        5187,
+        "                            reassignment = adapter._load_slice_reassignment_locked(  # noqa: SLF001\n"
+      ],
+      [
+        5188,
+        "                                revision_cid=execution_lease.revision_cid,\n"
+      ],
+      [
+        5189,
+        "                                slice_id=prior_slice.slice_id,\n"
+      ],
+      [
+        5190,
+        "                            )\n"
+      ],
+      [
+        5191,
+        "                            owner_lane = (\n"
+      ],
+      [
+        5192,
+        "                                prior_slice.lane_id\n"
+      ],
+      [
+        5193,
+        "                                if reassignment is None\n"
+      ],
+      [
+        5194,
+        "                                else reassignment[1].recipient_lane_id\n"
+      ],
+      [
+        5195,
+        "                            )\n"
+      ],
+      [
+        5196,
+        "                            prior = _load_plan_bound_execution_lease_locked(\n"
+      ],
+      [
+        5197,
+        "                                store,\n"
+      ],
+      [
+        5198,
+        "                                revision_cid=execution_lease.revision_cid,\n"
+      ],
+      [
+        5199,
+        "                                slice_id=prior_slice.slice_id,\n"
+      ],
+      [
+        5200,
+        "                                lane_id=owner_lane,\n"
+      ],
+      [
+        5201,
+        "                            )\n"
+      ],
+      [
+        5202,
+        "                            if prior is None or prior[1].phase != \"merge_completed\":\n"
+      ],
+      [
+        5203,
+        "                                pending.append(prior_slice.slice_id)\n"
+      ],
+      [
+        5204,
+        "                if not pending:\n"
+      ],
+      [
+        5205,
+        "                    return\n"
+      ],
+      [
+        5206,
+        "                if time.monotonic() >= deadline:\n"
+      ],
+      [
+        5207,
+        "                    raise PlanBoundReplanRequired(\n"
+      ],
+      [
+        5208,
+        "                        \"canonical merge turn exceeded its compiled execution \"\n"
+      ],
+      [
+        5209,
+        "                        f\"bound waiting for slices {sorted(pending)!r}\"\n"
+      ],
+      [
+        5210,
+        "                    )\n"
+      ],
+      [
+        5211,
+        "                time.sleep(0.05)\n"
+      ],
+      [
+        5212,
+        "\n"
+      ]
+    ],
+    "10290-10410": [
+      [
+        10290,
+        "        exact_task = active_task_id if (\n"
+      ],
+      [
+        10291,
+        "            active_task_id\n"
+      ],
+      [
+        10292,
+        "            and (\n"
+      ],
+      [
+        10293,
+        "                active_task_id in normalized_targets\n"
+      ],
+      [
+        10294,
+        "                or active_task_id in explicit_task_targets\n"
+      ],
+      [
+        10295,
+        "                or lane_scoped\n"
+      ],
+      [
+        10296,
+        "                or (\n"
+      ],
+      [
+        10297,
+        "                    existing_quarantine is not None\n"
+      ],
+      [
+        10298,
+        "                    and existing_quarantine.get(\"task_id\") == active_task_id\n"
+      ],
+      [
+        10299,
+        "                )\n"
+      ],
+      [
+        10300,
+        "            )\n"
+      ],
+      [
+        10301,
+        "        ) else \"\"\n"
+      ],
+      [
+        10302,
+        "        if existing_quarantine is not None and not exact_task:\n"
+      ],
+      [
+        10303,
+        "            return {\n"
+      ],
+      [
+        10304,
+        "                \"scope\": \"task\",\n"
+      ],
+      [
+        10305,
+        "                \"task_id\": str(existing_quarantine.get(\"task_id\") or \"\"),\n"
+      ],
+      [
+        10306,
+        "                \"target_ids\": list(\n"
+      ],
+      [
+        10307,
+        "                    existing_quarantine.get(\"target_ids\") or ()\n"
+      ],
+      [
+        10308,
+        "                ),\n"
+      ],
+      [
+        10309,
+        "                \"incident_cid\": incident_cid,\n"
+      ],
+      [
+        10310,
+        "                \"reason\": str(existing_quarantine.get(\"reason\") or reason),\n"
+      ],
+      [
+        10311,
+        "                \"attempt_recovery\": {\n"
+      ],
+      [
+        10312,
+        "                    \"consumed\": False,\n"
+      ],
+      [
+        10313,
+        "                    \"reason\": \"incident_already_quarantined\",\n"
+      ],
+      [
+        10314,
+        "                },\n"
+      ],
+      [
+        10315,
+        "                \"deduplicated\": True,\n"
+      ],
+      [
+        10316,
+        "                \"independent_work_preserved\": True,\n"
+      ],
+      [
+        10317,
+        "                \"completion_authority\": False,\n"
+      ],
+      [
+        10318,
+        "            }\n"
+      ],
+      [
+        10319,
+        "        blocked_tasks = [\n"
+      ],
+      [
+        10320,
+        "            str(item)\n"
+      ],
+      [
+        10321,
+        "            for item in strategy.get(\"blocked_tasks\", ())\n"
+      ],
+      [
+        10322,
+        "            if str(item).strip()\n"
+      ],
+      [
+        10323,
+        "        ]\n"
+      ],
+      [
+        10324,
+        "        if exact_task and exact_task not in blocked_tasks:\n"
+      ],
+      [
+        10325,
+        "            blocked_tasks.append(exact_task)\n"
+      ],
+      [
+        10326,
+        "        quarantines = [\n"
+      ],
+      [
+        10327,
+        "            dict(item)\n"
+      ],
+      [
+        10328,
+        "            for item in strategy.get(\"autonomous_unstall_quarantines\", ())\n"
+      ],
+      [
+        10329,
+        "            if isinstance(item, Mapping)\n"
+      ],
+      [
+        10330,
+        "            and item.get(\"incident_cid\") != incident_cid\n"
+      ],
+      [
+        10331,
+        "        ]\n"
+      ],
+      [
+        10332,
+        "        if existing_quarantine is not None:\n"
+      ],
+      [
+        10333,
+        "            quarantines.append(existing_quarantine)\n"
+      ],
+      [
+        10334,
+        "        else:\n"
+      ],
+      [
+        10335,
+        "            quarantines.append(\n"
+      ],
+      [
+        10336,
+        "                {\n"
+      ],
+      [
+        10337,
+        "                    \"incident_cid\": incident_cid,\n"
+      ],
+      [
+        10338,
+        "                    \"target_ids\": sorted(normalized_targets),\n"
+      ],
+      [
+        10339,
+        "                    \"task_id\": exact_task,\n"
+      ],
+      [
+        10340,
+        "                    \"reason\": reason,\n"
+      ],
+      [
+        10341,
+        "                    \"quarantined_at\": utc_now(),\n"
+      ],
+      [
+        10342,
+        "                }\n"
+      ],
+      [
+        10343,
+        "            )\n"
+      ],
+      [
+        10344,
+        "        strategy.update(\n"
+      ],
+      [
+        10345,
+        "            {\n"
+      ],
+      [
+        10346,
+        "                \"blocked_tasks\": blocked_tasks,\n"
+      ],
+      [
+        10347,
+        "                \"autonomous_unstall_quarantines\": quarantines[-128:],\n"
+      ],
+      [
+        10348,
+        "                \"last_rewrite_at\": utc_now(),\n"
+      ],
+      [
+        10349,
+        "                \"last_rewrite_reason\": (\n"
+      ],
+      [
+        10350,
+        "                    f\"autonomous unstall quarantine: {reason}\"\n"
+      ],
+      [
+        10351,
+        "                ),\n"
+      ],
+      [
+        10352,
+        "            }\n"
+      ],
+      [
+        10353,
+        "        )\n"
+      ],
+      [
+        10354,
+        "        attempt_recovery: dict[str, Any] = {\n"
+      ],
+      [
+        10355,
+        "            \"consumed\": False,\n"
+      ],
+      [
+        10356,
+        "            \"reason\": \"no_exact_active_task\",\n"
+      ],
+      [
+        10357,
+        "        }\n"
+      ],
+      [
+        10358,
+        "        if exact_task:\n"
+      ],
+      [
+        10359,
+        "            if state.implementation_in_progress:\n"
+      ],
+      [
+        10360,
+        "                attempt_recovery = consume_stale_active_attempt(state)\n"
+      ],
+      [
+        10361,
+        "            state.active_task_id = \"\"\n"
+      ],
+      [
+        10362,
+        "            state.active_task_key = \"\"\n"
+      ],
+      [
+        10363,
+        "            state.active_task_cid = \"\"\n"
+      ],
+      [
+        10364,
+        "            state.active_task_title = \"\"\n"
+      ],
+      [
+        10365,
+        "            state.active_task_track = \"\"\n"
+      ],
+      [
+        10366,
+        "            state.active_task_started_at = \"\"\n"
+      ],
+      [
+        10367,
+        "            state.active_attempt = 0\n"
+      ],
+      [
+        10368,
+        "            state.active_phase = \"\"\n"
+      ],
+      [
+        10369,
+        "            state.active_phase_started_at = \"\"\n"
+      ],
+      [
+        10370,
+        "            state.active_phase_detail = \"\"\n"
+      ],
+      [
+        10371,
+        "            state.active_log_path = \"\"\n"
+      ],
+      [
+        10372,
+        "            state.active_worktree_path = \"\"\n"
+      ],
+      [
+        10373,
+        "            state.active_branch = \"\"\n"
+      ],
+      [
+        10374,
+        "            state.implementation_in_progress = False\n"
+      ],
+      [
+        10375,
+        "            state.recommended_task_id = \"\"\n"
+      ],
+      [
+        10376,
+        "            state.recommended_actions = []\n"
+      ],
+      [
+        10377,
+        "            state.heartbeat_at = utc_now()\n"
+      ],
+      [
+        10378,
+        "            state.last_progress_at = state.heartbeat_at\n"
+      ],
+      [
+        10379,
+        "            if expected_recovery is not None:\n"
+      ],
+      [
+        10380,
+        "                saved = self._compare_and_save_stale_recovery(original_state, state, expected_recovery)\n"
+      ],
+      [
+        10381,
+        "                if saved.get(\"matched\") is not True:\n"
+      ],
+      [
+        10382,
+        "                    return {\"scope\": \"task\", \"quarantined\": False,\n"
+      ],
+      [
+        10383,
+        "                        \"reason\": \"stale_recovery_authority_changed\", \"completion_authority\": False}\n"
+      ],
+      [
+        10384,
+        "            else:\n"
+      ],
+      [
+        10385,
+        "                state.save(self.config.state_path)\n"
+      ],
+      [
+        10386,
+        "        write_json_atomic(self.config.strategy_path, strategy)\n"
+      ],
+      [
+        10387,
+        "        result = {\n"
+      ],
+      [
+        10388,
+        "            \"scope\": \"task\",\n"
+      ],
+      [
+        10389,
+        "            \"task_id\": exact_task,\n"
+      ],
+      [
+        10390,
+        "            \"target_ids\": sorted(normalized_targets),\n"
+      ],
+      [
+        10391,
+        "            \"incident_cid\": incident_cid,\n"
+      ],
+      [
+        10392,
+        "            \"reason\": reason,\n"
+      ],
+      [
+        10393,
+        "            \"attempt_recovery\": attempt_recovery,\n"
+      ],
+      [
+        10394,
+        "            \"deduplicated\": existing_quarantine is not None,\n"
+      ],
+      [
+        10395,
+        "            \"independent_work_preserved\": True,\n"
+      ],
+      [
+        10396,
+        "            \"completion_authority\": False,\n"
+      ],
+      [
+        10397,
+        "        }\n"
+      ],
+      [
+        10398,
+        "        self._record_event(\"autonomous_unstall_scope_quarantined\", result)\n"
+      ],
+      [
+        10399,
+        "        return result\n"
+      ],
+      [
+        10400,
+        "\n"
+      ],
+      [
+        10401,
+        "    @staticmethod\n"
+      ],
+      [
+        10402,
+        "    def _autonomous_unstall_evidence(\n"
+      ],
+      [
+        10403,
+        "        state: PortalTaskState,\n"
+      ],
+      [
+        10404,
+        "        reason: str,\n"
+      ],
+      [
+        10405,
+        "    ) -> dict[str, Any]:\n"
+      ],
+      [
+        10406,
+        "        target = state.active_task_id or \"lane:implementation\"\n"
+      ],
+      [
+        10407,
+        "        common = {\"task_id\": target, \"lane_id\": \"lane:implementation\"}\n"
+      ],
+      [
+        10408,
+        "        if state.active_task_id:\n"
+      ],
+      [
+        10409,
+        "            # Same-task faults in later attempts are distinct incidents. The\n"
+      ],
+      [
+        10410,
+        "            # epoch run root alone does not identify a provider invocation.\n"
+      ]
+    ],
+    "11040-11085": [
+      [
+        11040,
+        "                logger.warning(\n"
+      ],
+      [
+        11041,
+        "                    \"Bounded autonomous unstall failed closed\",\n"
+      ],
+      [
+        11042,
+        "                    exc_info=True,\n"
+      ],
+      [
+        11043,
+        "                )\n"
+      ],
+      [
+        11044,
+        "                snapshot, blocker = self._stale_recovery_snapshot(state)\n"
+      ],
+      [
+        11045,
+        "                quarantine = self._quarantine_autonomous_unstall_scope(\n"
+      ],
+      [
+        11046,
+        "                    (state.active_task_id or \"lane:implementation\",),\n"
+      ],
+      [
+        11047,
+        "                    prompt_workflow_cid(\n"
+      ],
+      [
+        11048,
+        "                        {\n"
+      ],
+      [
+        11049,
+        "                            \"autonomous-unstall-failure\": type(exc).__name__,\n"
+      ],
+      [
+        11050,
+        "                            \"reason\": reason,\n"
+      ],
+      [
+        11051,
+        "                            \"task_id\": state.active_task_id,\n"
+      ],
+      [
+        11052,
+        "                        }\n"
+      ],
+      [
+        11053,
+        "                    ),\n"
+      ],
+      [
+        11054,
+        "                    f\"autonomous_unstall_internal_error:{type(exc).__name__}\",\n"
+      ],
+      [
+        11055,
+        "                    expected_recovery=snapshot,\n"
+      ],
+      [
+        11056,
+        "                ) if snapshot is not None else {\"quarantined\": False, \"reason\": blocker}\n"
+      ],
+      [
+        11057,
+        "                quarantined = quarantine.get(\"quarantined\") is not False\n"
+      ],
+      [
+        11058,
+        "                autonomous_unstall = {\n"
+      ],
+      [
+        11059,
+        "                    \"schema\": (\n"
+      ],
+      [
+        11060,
+        "                        \"ipfs_accelerate_py/agent-supervisor/\"\n"
+      ],
+      [
+        11061,
+        "                        \"autonomous-unstall-result@1\"\n"
+      ],
+      [
+        11062,
+        "                    ),\n"
+      ],
+      [
+        11063,
+        "                    \"status\": \"quarantined\" if quarantined else \"deferred\",\n"
+      ],
+      [
+        11064,
+        "                    \"reason\": \"autonomous_unstall_internal_error\" if quarantined else str(quarantine.get(\"reason\") or \"stale_recovery_authority_changed\"),\n"
+      ],
+      [
+        11065,
+        "                    \"recovered\": False,\n"
+      ],
+      [
+        11066,
+        "                    \"quarantined\": quarantined,\n"
+      ],
+      [
+        11067,
+        "                    \"quarantine\": quarantine,\n"
+      ],
+      [
+        11068,
+        "                    \"independent_work_preserved\": True,\n"
+      ],
+      [
+        11069,
+        "                    \"completion_authority\": False,\n"
+      ],
+      [
+        11070,
+        "                    \"work_complete\": False,\n"
+      ],
+      [
+        11071,
+        "                }\n"
+      ],
+      [
+        11072,
+        "                self._record_event(\n"
+      ],
+      [
+        11073,
+        "                    \"autonomous_unstall_failed_closed\",\n"
+      ],
+      [
+        11074,
+        "                    {\n"
+      ],
+      [
+        11075,
+        "                        **autonomous_unstall,\n"
+      ],
+      [
+        11076,
+        "                        \"error_type\": type(exc).__name__,\n"
+      ],
+      [
+        11077,
+        "                        \"error\": str(exc)[:1000],\n"
+      ],
+      [
+        11078,
+        "                    },\n"
+      ],
+      [
+        11079,
+        "                )\n"
+      ],
+      [
+        11080,
+        "            retry_budget_findings = self.record_retry_budget_guardrails()\n"
+      ],
+      [
+        11081,
+        "            dependency_findings = self.record_dependency_guardrails()\n"
+      ],
+      [
+        11082,
+        "            if autonomous_unstall.get(\"status\") == \"disabled\":\n"
+      ],
+      [
+        11083,
+        "                state_repair = self.repair_blocked_progress_state(\n"
+      ],
+      [
+        11084,
+        "                    state, reason, now_ts=now_ts\n"
+      ],
+      [
+        11085,
+        "                )\n"
+      ]
+    ]
+  },
+  "execution": false,
+  "source_or_git_mutation": false
+}

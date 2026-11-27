@@ -1,0 +1,95 @@
+
+
+def _second_obligation_binding(artifact, first_binding, variant):
+    from ipfs_datasets_py.logic.backends.kernel.wasm import KernelToolchainBinding
+
+    context = deepcopy(first_binding["context"])
+    context["expected_declaration"] = "second_cache_fixture"
+    if variant == "interpretation":
+        context["interpretation_digest"] = stable_digest({"fictional_interpretation": 2})
+    if variant == "dependency":
+        context["dependency_versions"]["fictional-definition"] = stable_digest({"definition": 2})
+    if variant in {"toolchain", "numeric-toolchain-alias"}:
+        context["toolchain"]["metadata"]["native_resource_profile"]["cpu_slots"] = (
+            True if variant == "numeric-toolchain-alias" else 2
+        )
+    obligation = artifact.proof_obligations[1]
+    old_claim = IRClaim.from_dict(first_binding["claim"])
+    claim = replace(old_claim, claim_id="claim:second-fictional-cache",
+                    statement=obligation.statement, obligations=(obligation,),
+                    metadata={**old_claim.metadata.to_dict(),
+                              "proof_context_digest": stable_digest(context)})
+    old_request = BackendRequest.from_dict(first_binding["request"])
+    request = BackendRequest.for_claim(
+        claim, obligation.obligation_id, request_id="request:second-fictional-cache",
+        requested_backend_id="lean", bounds=old_request.bounds,
+        payload={"lean": "theorem second_cache_fixture : True := by trivial\n",
+                 "expected_declaration": context["expected_declaration"],
+                 "expected_proposition": context["expected_proposition"],
+                 "legal_proof_context": context},
+    )
+    kernel = _fictional_kernel_receipt(
+        request, toolchain=KernelToolchainBinding(**context["toolchain"]),
+    )
+    old_attempt = BackendAttempt.from_dict(first_binding["attempt"])
+    attempt = replace(old_attempt, attempt_id="attempt:second-fictional-cache",
+                      request_digest=request.digest,
+                      output_digest=stable_digest({"authored_kernel_fixture": kernel.to_dict()}))
+    old_result = ProofResult.from_dict(first_binding["result"])
+    result = ProofResult.for_attempt(
+        request, attempt, result_id="result:second-fictional-cache", status=ResultStatus.PROVED,
+        authority=replace(old_result.authority, scope_digest=request.digest,
+                          configuration_digest=stable_digest(context)),
+        payload={"kernel_receipt": kernel.to_dict(), "fixture_only": True},
+    )
+    receipt = ProofReceipt.issue(claim, request, attempt, result,
+                                 receipt_id="receipt:second-fictional-cache", verifier="fictional-test")
+    binding = build_legal_proof_binding(artifact, receipt, claim=claim, request=request,
+                                       attempt=attempt, result=result, context=context)
+    return receipt, binding, context
+
+
+@pytest.mark.parametrize("variant", [
+    "same", "interpretation", "dependency", "toolchain", "numeric-toolchain-alias",
+])
+@pytest.mark.parametrize("projection", ["shadow", "migration"])
+def test_artifact_coverage_requires_one_proof_context(variant, projection):
+    """Fictional receipt chains only, with no prover or database execution."""
+    artifact, first, first_binding, context = _bound_fixture(
+        extra_obligation=True, native_resource_profile={"cpu_slots": 1},
+    )
+    second, second_binding, second_context = _second_obligation_binding(artifact, first_binding, variant)
+    record = LegalProofRecord.build(
+        artifact, profile="fictional-two-proof-contexts", jurisdiction="fictional",
+        theorem_receipts=(first, second), proof_bindings=(second_binding, first_binding),
+    )
+    assert first.obligation_id != second.obligation_id
+    assert context["expected_declaration"] != second_context["expected_declaration"]
+    assert record.theorem_receipt_results(expected_context=context, obligation_id=first.obligation_id) == (first,)
+    assert record.theorem_receipt_results(expected_context=second_context, obligation_id=second.obligation_id) == (second,)
+    before = record.to_dict()
+    complete = variant == "same"
+    if projection == "shadow":
+        spy = _ShadowObservation()
+        cache = LegalProofCache()
+        cache.bind_shadow_repository(spy)
+        assert cache.put(record) is record
+        assert len(spy.writes) == 1
+        row = spy.writes[0]
+        assert row["status"] == ("proved" if complete else "unknown")
+        assert row["kernel_accepted"] is complete
+        assert row["trust_level"] == ("independently_checkable" if complete else "none")
+        assert row["legacy_payload"] == before
+    else:
+        from ipfs_datasets_py.logic.common.duckdb_proof_migration import (
+            ProofCacheFamily, RawLegacyRecord, normalize_legacy_record,
+        )
+        entry = normalize_legacy_record(
+            RawLegacyRecord(record_index=1, line_number=1, payload=before),
+            family=ProofCacheFamily.LEGAL_IR,
+        )
+        assert entry.status.value == ("proved" if complete else "candidate")
+        assert entry.trust_level.value == ("independently_checkable" if complete else "none")
+        assert entry.result_payload["theorem_receipts"] == before["theorem_receipts"]
+        assert entry.result_payload["proof_bindings"] == before["proof_bindings"]
+    assert record.to_dict() == before

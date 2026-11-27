@@ -1,0 +1,31 @@
+{
+  "all_owned_git_processes_reaped": true,
+  "baseline_membership": "UNKNOWN",
+  "counts": {
+    "completed_prefix_paths_not_restatted": 50284,
+    "continuation_new_lstat_attempts": 74871,
+    "continuation_new_processed_paths": 75049,
+    "duplicate_absolute_paths": 0,
+    "emitted_paths": 175617,
+    "excluded_generated_paths": 462,
+    "lstat_attempts": 124871,
+    "lstat_errors": 0,
+    "nonregular_paths": 298,
+    "prefix_revalidation_paths_counted": 50284,
+    "recent_regular_paths": 0,
+    "regular_before_cutoff": 124573,
+    "worktrees_completed": 115,
+    "worktrees_in_census": 118,
+    "worktrees_started": 117
+  },
+  "limit_or_refusal_messages": [],
+  "paths": [],
+  "report": {
+    "bytes": 98239,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/renewed-publication-recent-untracked-source-metadata-v02.json",
+    "sha256": "66fb3224a3288e0a300231af870c40f3e953480caede7f3eea06bdc1db794d0b"
+  },
+  "schema": "recent-untracked-source-candidate-paths-for-baseline-join/v2",
+  "scope_completed": true,
+  "source_bodies_read": 0
+}

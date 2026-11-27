@@ -1,0 +1,1 @@
+{"PID": 2011073, "command": ["git", "-c", "pack.threads=1", "-c", "pack.windowMemory=32m", "-c", "core.bigFileThreshold=8m", "-C", "/tmp/lift-sync-catalogue-main-20261109", "for-each-ref", "--format=%(refname) %(objectname)"], "started_ns": "1795481141397061302"}

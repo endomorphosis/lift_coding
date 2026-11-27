@@ -1,0 +1,283 @@
+"""One-shot private archive of already selected immutable Git objects.
+
+No source refs, worktrees, index, configuration, or object stores are modified.
+All output lives in a fresh private directory. This does not adopt archived code.
+"""
+import collections
+import hashlib
+import json
+import os
+from pathlib import Path
+import resource
+import stat
+import struct
+import subprocess
+import time
+
+BASE = Path(__file__).resolve().parent
+OUT = BASE / "exact-A81-D206-private-pack-and-restore-v01"
+PLAN = {
+    "path": str(BASE / "same-publisher-exact-A81-D206-object-input-plan-v07.json"),
+    "bytes": 20534,
+    "sha256": "640c61eeb6a4364fc38cd04547f88edb1d015a9250e5cc19047be668dfba2b07",
+}
+F9 = ("st_dev", "st_ino", "st_mode", "st_uid", "st_gid", "st_nlink", "st_size", "st_mtime_ns", "st_ctime_ns")
+READS = []
+RECEIPT = {
+    "schema": "exact-retained-history-private-pack-and-restore/v1",
+    "started_ns": str(time.time_ns()),
+    "existing_repositories_mutated": False,
+    "adoption_or_qualification": False,
+    "network": False,
+    "families": {},
+    "commands": [],
+    "explicit_private_control_reads": READS,
+    "publication_object_IO": "Selected immutable Git objects are read internally by pack/index/fsck; not represented as Source-review observations or a refund/reset of that ledger.",
+}
+
+
+def f9(value):
+    return {k: str(getattr(value, k)) for k in F9}
+
+
+def authenticate(ref):
+    p = Path(ref["path"])
+    before = p.lstat()
+    assert stat.S_ISREG(before.st_mode) and before.st_nlink == 1
+    fd = os.open(p, os.O_RDONLY | os.O_NOFOLLOW)
+    try:
+        assert f9(before) == f9(os.fstat(fd))
+        data = bytearray()
+        while len(data) <= ref["bytes"]:
+            part = os.read(fd, min(1048576, ref["bytes"] + 1 - len(data)))
+            if not part:
+                break
+            data.extend(part)
+        assert f9(before) == f9(os.fstat(fd)) == f9(p.lstat())
+    finally:
+        os.close(fd)
+    raw = bytes(data)
+    assert len(raw) == ref["bytes"] and hashlib.sha256(raw).hexdigest() == ref["sha256"]
+    READS.append({**ref, "full9": f9(before)})
+    return raw
+
+
+def write_new(path, data, mode=0o400):
+    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, mode)
+    try:
+        offset = 0
+        while offset < len(data):
+            offset += os.write(fd, data[offset:])
+        os.fsync(fd)
+    finally:
+        os.close(fd)
+
+
+def persist(name, data):
+    raw = (json.dumps(data, sort_keys=True, indent=2) + "\n").encode()
+    target = OUT / name
+    write_new(target, raw)
+    return {"path": str(target), "bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()}
+
+
+def child_limits():
+    os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
+    resource.setrlimit(resource.RLIMIT_CPU, (900, 900))
+    os.nice(10)
+
+
+def git(root, args, *, env=None, data=None, output=None, tag, timeout=1000):
+    stderr = OUT / (tag + ".stderr.DATA")
+    error_fd = os.open(stderr, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o400)
+    output_fd = None
+    if output is not None:
+        output_fd = os.open(output, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o400)
+    command = ["git", "-c", "pack.threads=1", "-c", "pack.windowMemory=32m", "-c", "core.bigFileThreshold=8m", "-C", str(root), *args]
+    started = time.monotonic()
+    process = None
+    try:
+        process = subprocess.Popen(command, stdin=subprocess.PIPE if data is not None else subprocess.DEVNULL,
+                                   stdout=output_fd if output_fd is not None else subprocess.PIPE,
+                                   stderr=error_fd, env=env, preexec_fn=child_limits)
+        write_new(OUT / (tag + ".owned-PID.json"), (json.dumps({"PID": process.pid, "command": command, "started_ns": str(time.time_ns())}) + "\n").encode())
+        try:
+            stdout, _ = process.communicate(data, timeout=timeout)
+        except subprocess.TimeoutExpired:
+            process.terminate()
+            try:
+                process.communicate(timeout=10)
+            except subprocess.TimeoutExpired:
+                process.kill()
+                process.communicate()
+            raise
+        if output_fd is not None:
+            os.fsync(output_fd)
+        os.fsync(error_fd)
+        row = {"tag": tag, "PID": process.pid, "argv": command, "returncode": process.returncode,
+               "wait_returned": True, "elapsed_seconds": time.monotonic() - started,
+               "stderr_path": str(stderr), "stdout_bytes": None if stdout is None else len(stdout),
+               "stdout_sha256": None if stdout is None else hashlib.sha256(stdout).hexdigest()}
+        RECEIPT["commands"].append(row)
+        assert process.returncode == 0, (tag, process.returncode, str(stderr))
+        return stdout
+    finally:
+        if process is not None and process.poll() is None:
+            process.terminate()
+            process.wait(timeout=10)
+        if output_fd is not None:
+            os.close(output_fd)
+        os.close(error_fd)
+
+
+def hash_and_chunk(pack, family):
+    digest = hashlib.sha256()
+    trailer_digest = hashlib.sha1()
+    chunks = []
+    total = pack.stat().st_size
+    chunk_size = 50 * 1024 * 1024
+    with pack.open("rb") as source:
+        prefix = source.read(12)
+        assert prefix[:4] == b"PACK" and struct.unpack(">I", prefix[4:8])[0] in (2, 3)
+        pack_count = struct.unpack(">I", prefix[8:12])[0]
+        source.seek(0)
+        i = 0
+        position = 0
+        while True:
+            data = source.read(chunk_size)
+            if not data:
+                break
+            digest.update(data)
+            cutoff = min(len(data), max(0, total - 20 - position))
+            trailer_digest.update(data[:cutoff])
+            position += len(data)
+            path = OUT / (family + ".pack.part-%04d.DATA" % i)
+            write_new(path, data)
+            chunks.append({"file": path.name, "bytes": len(data), "sha256": hashlib.sha256(data).hexdigest()})
+            i += 1
+        source.seek(-20, os.SEEK_END)
+        trailer = source.read(20)
+    assert trailer_digest.digest() == trailer
+    return {"pack_file": pack.name, "pack_bytes": total, "pack_sha256": digest.hexdigest(),
+            "pack_trailer_sha1": trailer.hex(), "pack_object_count": pack_count,
+            "chunks": chunks, "chunk_limit_bytes": chunk_size}
+
+
+def main():
+    os.mkdir(OUT, 0o700)
+    plan = json.loads(authenticate(PLAN))
+    full = json.loads(authenticate(plan["exact_full_report"]))
+    common_env = {**os.environ, "GIT_OPTIONAL_LOCKS": "0", "GIT_NO_LAZY_FETCH": "1", "GIT_TERMINAL_PROMPT": "0"}
+    for family in ("accelerate", "datasets"):
+        facts = full["results"][family]
+        ids_raw = authenticate(plan["exact_object_ID_lists"][family])
+        ids = ids_raw.decode("ascii").splitlines()
+        expected = {r["oid"]: r for r in facts["exact_unique_objects"]}
+        assert len(ids) == len(set(ids)) == facts["unique_object_count"] and set(ids) == set(expected)
+        root = Path(facts["target_store"])
+        env = dict(common_env)
+        alternatives = facts["read_only_alternate_object_directories"]
+        if alternatives:
+            assert all(Path(p).is_dir() for p in alternatives)
+            env["GIT_ALTERNATE_OBJECT_DIRECTORIES"] = os.pathsep.join(alternatives)
+        # Fresh metadata-only guards for every selected historical ref. Do not repin.
+        by_source = collections.defaultdict(dict)
+        for oid, sources in facts["sources_from_authenticated_Main_metadata"].items():
+            for source in sources:
+                prior = by_source[source["path"]].setdefault(source["ref"], oid)
+                assert prior == oid
+        for number, (source, refs) in enumerate(sorted(by_source.items())):
+            lines = git(source, ["for-each-ref", "--format=%(refname) %(objectname)"], env=env,
+                        tag=family + "-source-refs-%03d" % number).decode().splitlines()
+            current = dict(line.split(" ", 1) for line in lines)
+            assert all(current.get(ref) == oid for ref, oid in refs.items()), (source, "historical-ref drift")
+        values = git(root, ["cat-file", "--batch-check=%(objectname) %(objecttype) %(objectsize)"], env=env,
+                     data=ids_raw, tag=family + "-all-object-metadata").decode().splitlines()
+        assert len(values) == len(ids)
+        for line in values:
+            oid, kind, size = line.split()
+            assert expected[oid]["type"] == kind and int(expected[oid]["bytes"]) == int(size)
+        pack = OUT / (family + ".pack")
+        git(root, ["pack-objects", "--stdout", "--window=0", "--compression=6"], env=env,
+            data=ids_raw, output=pack, tag=family + "-pack")
+        details = hash_and_chunk(pack, family)
+        assert details["pack_object_count"] == len(ids)
+        bank = OUT / (family + "-restore.git")
+        os.mkdir(bank, 0o700)
+        git(bank, ["init", "--bare", "--initial-branch=preservation-only"], env=common_env, tag=family + "-init")
+        # Reassemble only authenticated chunk bytes, rather than trusting the original pack.
+        restore_pack = bank / "objects/pack/archive.pack"
+        fd = os.open(restore_pack, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o400)
+        joined = hashlib.sha256()
+        try:
+            for part in details["chunks"]:
+                path = OUT / part["file"]
+                before = path.lstat()
+                f = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+                try:
+                    assert f9(before) == f9(os.fstat(f))
+                    data = bytearray()
+                    while len(data) <= part["bytes"]:
+                        chunk = os.read(f, min(1048576, part["bytes"] + 1 - len(data)))
+                        if not chunk:
+                            break
+                        data.extend(chunk)
+                    assert f9(before) == f9(os.fstat(f)) == f9(path.lstat())
+                finally:
+                    os.close(f)
+                assert len(data) == part["bytes"] and hashlib.sha256(data).hexdigest() == part["sha256"]
+                joined.update(data)
+                offset = 0
+                while offset < len(data):
+                    offset += os.write(fd, data[offset:])
+            os.fsync(fd)
+        finally:
+            os.close(fd)
+        assert joined.hexdigest() == details["pack_sha256"]
+        base_objects = Path(git(root, ["rev-parse", "--path-format=absolute", "--git-common-dir"], env=env,
+                                tag=family + "-base-common-dir").decode().strip()) / "objects"
+        index_env = dict(common_env)
+        index_env["GIT_ALTERNATE_OBJECT_DIRECTORIES"] = str(base_objects)
+        git(bank, ["index-pack", "--strict", str(restore_pack)], env=index_env, tag=family + "-index-pack")
+        index = restore_pack.with_suffix(".idx")
+        verify = git(bank, ["verify-pack", "-v", str(index)], env=common_env, tag=family + "-verify-pack").decode()
+        actual = {row.split()[0] for row in verify.splitlines() if len(row.split()) >= 5 and len(row.split()[0]) == 40}
+        assert actual == set(ids), (family, "restored exact object inventory mismatch")
+        # Prove these are actual local pack objects, not satisfied from source alternates.
+        assert not (bank / "objects/info/alternates").exists()
+        own_env = dict(common_env)
+        own_env.pop("GIT_ALTERNATE_OBJECT_DIRECTORIES", None)
+        own_env.pop("GIT_OBJECT_DIRECTORY", None)
+        own = git(bank, ["cat-file", "--batch-check=%(objectname) %(objecttype) %(objectsize)"], env=own_env,
+                  data=ids_raw, tag=family + "-local-only-object-check").decode().splitlines()
+        assert own == values
+        write_new(bank / "objects/info/alternates", (str(base_objects) + "\n").encode(), 0o600)
+        heads = plan["all_selected_headIDs"][family]
+        assert heads == facts["selected_tip_OIDs"]
+        git(bank, ["fsck", "--connectivity-only", "--no-dangling", *heads], env=own_env,
+            tag=family + "-all-heads-connectivity")
+        details.update({"family": family, "published_base_commit": plan["current_snapshot_prerequisites"][family],
+                        "selected_heads": heads, "source_refs_freshly_matched": True,
+                        "source_ref_count": sum(map(len, by_source.values())),
+                        "exact_object_ID_list": plan["exact_object_ID_lists"][family],
+                        "raw_object_summary": plan["summary"][family],
+                        "local_only_exact_object_inventory_verified_before_alternates": True,
+                        "all_selected_heads_connectivity_verified": True,
+                        "base_object_store_used_for_prerequisites": str(base_objects),
+                        "restore_bank": str(bank), "code_adopted": False})
+        RECEIPT["families"][family] = details
+        progress = persist(family + "-closed-pack-and-restore.json", details)
+        print(json.dumps({"family_complete": family, "pack_bytes": details["pack_bytes"],
+                          "chunks": len(details["chunks"]), "receipt": progress}), flush=True)
+    RECEIPT["complete"] = True
+
+
+try:
+    main()
+except BaseException as error:
+    RECEIPT["error"] = {"type": type(error).__name__, "message": str(error)[:3000]}
+    raise
+finally:
+    if OUT.exists():
+        RECEIPT["finished_ns"] = str(time.time_ns())
+        ref = persist("actual-exact-A81-D206-private-pack-and-restore-receipt-v01.json", RECEIPT)
+        print(json.dumps({"receipt": ref, "complete": RECEIPT.get("complete", False), "error": RECEIPT.get("error")}), flush=True)

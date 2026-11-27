@@ -1,0 +1,78 @@
+{
+  "argv": [
+    "/home/barberb/lift_coding/.venv/bin/python",
+    "-I",
+    "-B",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/actual-existing-signed-ordinary-fixture-v01-yqkdezdt/invoke-existing-pytest-private-v02.py.DATA",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/reviewed-v2-cycle-boundary-private-v01/existing-mask-consumers-epoch-replay-v01/baseline",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/reviewed-v2-cycle-boundary-private-v01/existing-mask-consumers-epoch-replay-v01/project",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+    "/home/barberb/lift_coding/external/ipfs_datasets",
+    "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "tests/unit/logic/formalization/autoencoder/test_alignment_relation_mask_handoff.py::test_private_pair_consumer_preserves_fresh_signed_mask_semantics[v2]",
+    "tests/unit/logic/formalization/autoencoder/test_alignment_relation_mask_handoff.py::test_private_pair_consumer_preserves_fresh_signed_mask_semantics[v3]",
+    "tests/unit/logic/formalization/autoencoder/test_alignment_relation_mask_handoff.py::test_private_pair_consumer_preserves_fresh_signed_mask_semantics[v4]",
+    "tests/unit/logic/formalization/autoencoder/test_alignment_relation_mask_handoff.py::test_private_pair_consumer_refuses_exact_old_receipt_after_v2_epoch_change[v2]",
+    "tests/unit/logic/formalization/autoencoder/test_alignment_relation_mask_handoff.py::test_private_pair_consumer_refuses_exact_old_receipt_after_v2_epoch_change[v3]",
+    "tests/unit/logic/formalization/autoencoder/test_alignment_relation_mask_handoff.py::test_private_pair_consumer_refuses_exact_old_receipt_after_v2_epoch_change[v4]",
+    "tests/unit/logic/formalization/autoencoder/test_alignment_relation_mask_handoff.py::test_reviewed_pair_endpoint_admission_without_pair_reviews_remains_unavailable",
+    "tests/unit/logic/formalization/autoencoder/test_alignment_relation_mask_handoff.py::test_reviewed_pair_saved_report_cannot_turn_unknowns_or_analogies_into_negatives"
+  ],
+  "base": "5fae066b5871d3fdf0b63dfbc4339c199ca6ffc1",
+  "baseline_v2_sha256": "7350235f02340d2d2f0925d25399f614861c59b6faabcb1ebd427e2682a4f1fd",
+  "candidate_v2_sha256": "893ad3f353a77e33de33ae93e61b5c81957b40f09292d07c2dffab2c18ae620d",
+  "model_or_Native_selected": false,
+  "new_exact_Git_roles": {
+    "ipfs_datasets_py/logic/formalization/__init__.py": {
+      "bytes": 2073,
+      "sha256": "91c60c1dfbf9038b8271ae6b1495dbbaf0be8d6ce438524c33f4f7a586f17266"
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/__init__.py": {
+      "bytes": 97,
+      "sha256": "82206d6ca08b8626b2afd37534679ac3ea001005f934ed211aa0f1f4eb81f073"
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/alignment_lane_bundle.py": {
+      "bytes": 31225,
+      "sha256": "316d627fe20fecf6c5d5fe1c5fef98bb5a662ac48ef025c65b623affde282fce"
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/alignment_relation_declarations.py": {
+      "bytes": 41179,
+      "sha256": "e8fc5c15900fac19df46896a0bcb5c04b0cdd5533dc574d4d962b5fdf0e11662"
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/alignment_relation_mask_handoff.py": {
+      "bytes": 44296,
+      "sha256": "cd4b1e0f2e73a05e9d0f1c061239c5a3c1f532770f306e3c54313937ffe975f2"
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/alignment_stage_declarations.py": {
+      "bytes": 23074,
+      "sha256": "4e475329097a747f9ec1a635c58395209271eb9808dc5658e70f0bf7eebc1c0e"
+    },
+    "ipfs_datasets_py/optimizers/__init__.py": {
+      "bytes": 957,
+      "sha256": "a12bab3724da07be67b447719ace42fc1f480cb5635581f320a99a372f02f450"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/__init__.py": {
+      "bytes": 69336,
+      "sha256": "9d693fa576f00dc36899faad75ef3044c437e2bfec5c62306f7031236725bb0e"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py": {
+      "bytes": 58133,
+      "sha256": "7963ebcb291c0476f0cccc4123e28a519187970f02dbd9059fce78e661287c3c"
+    },
+    "tests/unit/logic/formalization/autoencoder/__init__.py": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/unit/logic/formalization/autoencoder/test_alignment_relation_declarations.py": {
+      "bytes": 61464,
+      "sha256": "5f62c07462cb6027b05fb3f75bc2d668d2d59e3d6c734465bcaa0de06068396b"
+    },
+    "tests/unit/logic/formalization/autoencoder/test_alignment_relation_mask_handoff.py": {
+      "bytes": 65438,
+      "sha256": "8e2b503c0c586b56215d26d63f3c17618ec9d47baa008c914d1f5eaad50aeedd"
+    }
+  },
+  "test_overlay_bytes": 69389,
+  "test_overlay_sha256": "bd1992ce931646aa93c0eeedae00e33e45a6e24584cea4f20139d2a92b173a6a"
+}

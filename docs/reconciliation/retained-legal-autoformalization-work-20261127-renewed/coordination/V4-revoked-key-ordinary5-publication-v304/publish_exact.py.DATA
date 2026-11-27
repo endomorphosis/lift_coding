@@ -1,0 +1,201 @@
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import time
+import xml.etree.ElementTree as ET
+
+work = Path(__file__).parent
+coord = work.parent
+repos = Path('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories')
+receipt_path = Path('/tmp/Root-P2-V4-revoked-key-ordinary5-v304-rcymoyx1/Root-public-V4-revoked-key-ordinary5-qualified-small-v304.json')
+output = coord / 'actual-P2-public-V4-revoked-key-ordinary5-three-FF-publication-v304.json'
+assert not output.exists()
+started = time.monotonic()
+base = {
+    'datasets': '8aebc34eb1e430b00c2b941cb256e853fe2adc02',
+    'hallucinate': '2a9aabdcf78695630446e08235f48a6e8ec90c18',
+    'root': 'fe7a01f5fd350f6ba425b0a463f80025a3404b59',
+    'accelerate': '88c0d9f82f66aaddbb01344c9f85236e92a5dc88',
+}
+target = '68e3739ffd64e54016133d3d1e0304c6302da1b1'
+urls = {
+    'datasets':'https://github.com/endomorphosis/ipfs_datasets_py',
+    'hallucinate':'https://github.com/endomorphosis/hallucinate_app',
+    'root':'https://github.com/endomorphosis/lift_coding',
+    'accelerate':'https://github.com/endomorphosis/ipfs_accelerate_py',
+}
+env = dict(os.environ, GIT_OPTIONAL_LOCKS='0', GIT_NO_LAZY_FETCH='1', GIT_TERMINAL_PROMPT='0')
+fields = ('st_ctime_ns','st_dev','st_gid','st_ino','st_mode','st_mtime_ns','st_nlink','st_size','st_uid')
+
+def checked(path, length, digest):
+    value = Path(path).read_bytes()
+    assert len(value) == length and hashlib.sha256(value).hexdigest() == digest, path
+    return value
+
+def checked_ref(row):
+    return checked(row['path'], row['bytes'], row['sha256'])
+
+def observe(role, *args, data=None):
+    result = subprocess.run(['git','-c','core.fsmonitor=false','-C',str(repos/role),*args],
+                            input=data, capture_output=True, env=env, timeout=90, check=True)
+    return result.stdout
+
+def record(event):
+    with (work/'actual-events.jsonl').open('a', encoding='utf-8') as file:
+        file.write(json.dumps(event, sort_keys=True)+'\n')
+        file.flush()
+        os.fsync(file.fileno())
+    print(json.dumps(event, sort_keys=True), flush=True)
+
+def revision(role, ref='HEAD'):
+    return observe(role,'rev-parse',ref).decode().strip()
+
+def origin(role):
+    raw = observe(role,'ls-remote','--exit-code','origin','refs/heads/main').decode().splitlines()
+    assert len(raw) == 1
+    oid, ref = raw[0].split('\t')
+    assert ref == 'refs/heads/main' and len(oid) == 40
+    return oid
+
+def clean(role):
+    assert observe(role,'status','--porcelain=v1','--untracked-files=all','--ignore-submodules=dirty') == b'', role
+    assert observe(role,'diff','--cached','--name-only','--ignore-submodules=none') == b'', role
+
+def rows_at(role, rev):
+    rows = {}
+    for line in observe(role,'ls-tree','-rz',rev).split(b'\0'):
+        if line:
+            metadata, path = line.decode().split('\t',1)
+            mode, kind, oid = metadata.split()
+            rows[path] = (mode,kind,oid)
+    return rows
+
+def exact_gitlinks(role, old, new, links):
+    before = rows_at(role, old)
+    after = rows_at(role, new)
+    assert set(before) == set(after)
+    assert {path for path in before if before[path] != after[path]} == set(links)
+    for path, oid in links.items():
+        assert before[path][:2] == ('160000','commit') and after[path] == ('160000','commit',oid)
+
+def gitlink_commit(role, updates, message):
+    assert revision(role) == base[role] and origin(role) == base[role], role
+    clean(role)
+    before = rows_at(role, base[role])
+    for path, (prior, _) in updates.items():
+        assert before[path] == ('160000','commit',prior)
+    links = {path: value for path, (_,value) in updates.items()}
+    data = ''.join(f'160000 {oid}\t{path}\n' for path,oid in links.items()).encode()
+    observe(role,'update-index','--index-info',data=data)
+    assert set(observe(role,'diff','--cached','--name-only').decode().splitlines()) == set(links)
+    observe(role,'commit','-m',message)
+    oid = revision(role)
+    assert revision(role,'HEAD^') == base[role]
+    exact_gitlinks(role,base[role],oid,links)
+    clean(role)
+    record({'local_commit':oid,'repository':role,'links':links})
+    return oid, links
+
+qualified = json.loads(checked(receipt_path,3483,'dc13b206148a64946916bc8a74d77613ff81747fc86fbad8078aca20dfbde467'))
+assert qualified['D_HEAD'] == target
+assert qualified['actual_ordinary_unique_PASS'] == 5
+assert qualified['case_vector'] == [1,2,1,1]
+assert all(qualified[key] is True for key in ('Source_closed','resource_cleanup_confirmed','actual_parent_release_return'))
+assert all(qualified[key] == 0 for key in ('owned_exit_code','errors','failures','skips','duplicates'))
+tests = list(ET.fromstring(checked_ref(qualified['raw_JUnit'])).iter('testcase'))
+assert len(tests) == len({(node.attrib['classname'],node.attrib['name']) for node in tests}) == 5
+assert not any(node.find(tag) is not None for node in tests for tag in ('failure','error','skipped'))
+assert any(node.attrib['name'] == 'test_physical_v4_current_replay_refuses_genuinely_revoked_reviewer' for node in tests)
+freeze = json.loads(checked_ref(qualified['local_freeze']))
+installed = json.loads(checked_ref(qualified['actual_Source_WRITE1']))
+assert installed['Source_closed'] and installed['module_closed'] and not installed['errors']
+row = freeze['only_committed_target']
+path = 'tests/unit/logic/autoformal/test_corpus_release_cli.py'
+assert row['relative_path'] == path and installed['only_worktree_deltas'] == [path]
+assert row['stage0_and_committed_blob'] == 'a1999199145789efcaaad5a1afac766072e07527'
+assert row['sha256'] == installed['installed'][0]['sha256']
+assert row['bytes'] == installed['installed'][0]['bytes'] == 211903
+assert row['full9'] == installed['installed'][0]['full9']
+for role, expected in base.items():
+    actual = target if role == 'datasets' else expected
+    assert revision(role) == actual
+    assert observe(role,'remote','get-url','origin').decode().strip().removesuffix('.git') == urls[role]
+    assert observe(role,'remote','get-url','--push','origin').decode().strip().removesuffix('.git') == urls[role]
+    assert origin(role) == expected
+    clean(role)
+assert revision('datasets','HEAD^') == base['datasets']
+assert revision('datasets','HEAD^{tree}') == qualified['D_tree']
+assert observe('datasets','diff-tree','--no-commit-id','--name-status','-r',target) == f'M\t{path}\n'.encode()
+actual = observe('datasets','cat-file','blob',target+':'+path)
+assert len(actual) == row['bytes'] and hashlib.sha256(actual).hexdigest() == row['sha256']
+stage = observe('datasets','ls-files','--stage','--',path).decode().rstrip('\n')
+assert stage == f"100644 {row['stage0_and_committed_blob']} 0\t{path}"
+index = freeze['D_index_frozen']
+index_path = Path(index['path'])
+assert {key:str(getattr(index_path.lstat(),key)) for key in fields} == index['full9']
+checked_ref(index)
+record({'preflight_exact':True,'before_remotes':base,'qualified_D':target})
+
+pushes = []
+def push(role, oid):
+    assert revision(role) == oid and origin(role) == base[role], role
+    observe(role,'merge-base','--is-ancestor',base[role],oid)
+    clean(role)
+    record({'push_start':role,'before':base[role],'target':oid})
+    porcelain = observe(role,'push','--porcelain','origin',oid+':refs/heads/main').decode()
+    result = next(line for line in porcelain.splitlines() if '\t' in line)
+    assert result.startswith(' \t') and origin(role) == oid and revision(role,'refs/remotes/origin/main') == oid
+    event = {'repository':role,'before':base[role],'after':oid,'normal_fast_forward':True,
+             'push_returncode':0,'porcelain':result}
+    pushes.append(event)
+    record(event)
+
+push('datasets',target)
+h, h_links = gitlink_commit('hallucinate',{'ipfs_datasets_py':(base['datasets'],target)},
+                           'Update datasets link for V4 revoked reviewer coverage')
+push('hallucinate',h)
+root, root_links = gitlink_commit('root',{
+    'external/ipfs_datasets':(base['datasets'],target),'hallucinate_app':(base['hallucinate'],h)},
+    'Update legal corpus revocation qualification links')
+push('root',root)
+final_heads = {'datasets':target,'hallucinate':h,'root':root,'accelerate':base['accelerate']}
+final_links = {'datasets':{},'hallucinate':h_links,'root':root_links,'accelerate':{}}
+repo_result = {}
+for role, oid in final_heads.items():
+    readback = origin(role)
+    assert readback == oid == revision(role) == revision(role,'refs/remotes/origin/main')
+    clean(role)
+    repo_result[role] = {'HEAD':oid,'tree':revision(role,'HEAD^{tree}'),'origin_main':readback,
+                         'origin':urls[role],'clean_worktree_and_index':True,
+                         'gitlinks_updated':final_links[role]}
+exact_gitlinks('hallucinate',base['hallucinate'],h,h_links)
+exact_gitlinks('root',base['root'],root,root_links)
+summary = {
+    'schema':'P2-public-V4-revoked-key-ordinary5-exact-three-FF-publication/v304',
+    'qualification':{'path':str(receipt_path),'bytes':3483,'sha256':'dc13b206148a64946916bc8a74d77613ff81747fc86fbad8078aca20dfbde467'},
+    'source_closed_install':qualified['actual_Source_WRITE1'],
+    'local_freeze':qualified['local_freeze'],
+    'independently_verified_JUnit':qualified['raw_JUnit'],
+    'unique_passes':len(tests),'case_vector':qualified['case_vector'],
+    'Source_resource_and_parent_cleanup_received':True,
+    'all_other_paths_and_gitlinks_preserved':True,
+    'committed_blob':{'path':path,'oid':row['stage0_and_committed_blob'],'size':row['bytes'],'sha256':row['sha256']},
+    'genuine_revocation_fixture':qualified['genuine_revocation'],
+    'repositories':repo_result,
+    'pushes_in_actual_order':pushes,
+    'elapsed_seconds':time.monotonic()-started,
+    'no_new_Source_test_CI_Lean_training_operation':True,
+    'child_CLI_compile_witness_unclaimed':True,
+    'real_legal_review_or_statutory_admission_claimed':False,
+    'active_eight_phase_goal_complete':False,
+}
+raw = (json.dumps(summary,sort_keys=True,indent=2)+'\n').encode()
+fd = os.open(output,os.O_CREAT|os.O_EXCL|os.O_WRONLY|os.O_NOFOLLOW,0o400)
+with os.fdopen(fd,'wb') as stream:
+    stream.write(raw)
+    stream.flush()
+    os.fsync(stream.fileno())
+assert output.read_bytes() == raw
+print(json.dumps({'receipt':str(output),'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest(),'heads':final_heads}),flush=True)

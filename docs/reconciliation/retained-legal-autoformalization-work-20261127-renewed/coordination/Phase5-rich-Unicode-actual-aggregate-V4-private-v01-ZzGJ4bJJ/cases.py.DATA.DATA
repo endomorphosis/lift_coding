@@ -1,0 +1,22 @@
+suite = sys.argv[9]
+assert suite in {"aggregate", "retained"}
+failures = 0
+if suite == "aggregate":
+    fn = tests.test_aggregate_v4_holds_out_unicode_near_duplicate_from_unselected_component
+    trials = [("aggregate_unrelated",fn,("unicode_unrelated",)),
+              ("aggregate_alias_unselected",fn,("unicode_second_alias",))]
+else:
+    fn = tests.test_rich_v3_heldout_replays_profile_near_duplicate_before_producer
+    trials = [(name,fn,(name,)) for name in ("legacy_alias","unicode_unrelated","unicode_alias")]
+    trials.append(("aggregate_default",tests.test_aggregate_v4_actual_evaluator_dispatches_both_complete_components_and_definitions,()))
+for label, function, arguments in trials:
+    try:
+        function(*arguments)
+    except (Exception, pytest.fail.Exception):
+        import traceback
+        traceback.print_exc()
+        print(label, "FAIL", flush=True)
+        failures += 1
+    else:
+        print(label, "PASS", flush=True)
+raise SystemExit(bool(failures))

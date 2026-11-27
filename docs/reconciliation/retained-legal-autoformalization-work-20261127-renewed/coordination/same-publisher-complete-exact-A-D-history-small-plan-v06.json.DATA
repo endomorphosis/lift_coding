@@ -1,0 +1,121 @@
+{
+  "accounting": {
+    "Git_internal_library_IO": "Not fully metered. No direct blob/module contents requested or printed.",
+    "all_prior_actual_costs_retained": true,
+    "cap": 67108864,
+    "cumulative_explicit_private_control_and_Git_stdout_stderr_bytes": 48919188
+  },
+  "current_scope": "Metadata COMPLETE; packing/restore/adoption/publication NOT selected/executed by this lane.",
+  "full_report": {
+    "bytes": 1209658,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/complete-exact-A81-D206-object-difference-metadata-v06.json",
+    "sha256": "258dcddfd29c0b1f9240ae37bb0bc68df4825cc79644f49480a59569fd642e73"
+  },
+  "next_existing_owner_action": [
+    "Choose explicit retention for two large historical A data artifacts before creating any claim of a self-contained all-history archive.",
+    "Existing archive owner can pack exact selected difference IDs and validate restore under declared Main prerequisites; no code overlay is needed.",
+    "Root baseline agent owns Kit/Swiss raw4 archival.",
+    "Only sole publisher may commit archive/manifest after Root releases Git/Source holds."
+  ],
+  "no_mutations_tests_blob_bodies_or_network": true,
+  "prerequisites": "Single publishedMain identity per family suffices; every external direct parent proved reachable in complete corresponding Main object set.",
+  "schema": "same-publisher-complete-exact-A-D-history-small-plan/v6",
+  "scope_exceptions": [
+    {
+      "bytes": 142880768,
+      "kind": "large historical generated data/runtime artifact by exact Git path, not inferred model",
+      "oid": "14d6706502842110d16161a81d168281d6989a1c",
+      "origin": "accelerate",
+      "path": "data/agent_supervisor/formal_verification_tactician_readiness/bundles/index.duckdb",
+      "scope": "Exact blob identity remains local; no upload/pack/decode/delete selected. Excluding it prevents a self-contained all-history archive, so no completeness claim may hide this prerequisite."
+    },
+    {
+      "bytes": 2022179327,
+      "kind": "large historical generated data/runtime artifact by exact Git path, not inferred model",
+      "oid": "9b6ded832adffea56cd1402bb08d1dca484eb3c8",
+      "origin": "accelerate",
+      "path": "data/agent_supervisor/proof_grounded_ir_learning/datasets/pgir-objective-ast.jsonl",
+      "scope": "Exact blob identity remains local; no upload/pack/decode/delete selected. Excluding it prevents a self-contained all-history archive, so no completeness claim may hide this prerequisite."
+    }
+  ],
+  "source_refs_and_ODBs": "All81A/206D headIDs, authenticated exact source refs, current common-dir metadata and exact unique object IDs/types/sizes in full_report. Source current refs must be checked by future archive operator.",
+  "summary": {
+    "accelerate": {
+      "selected_tip_count": 81,
+      "sufficient_single_prerequisite_commit": "de4d5a62b6fac2df61769a6461c2ada97f788208",
+      "total_raw_unique_object_bytes": 2212644642,
+      "unique_blobs_at_least_100MiB": [
+        {
+          "bytes": 142880768,
+          "oid": "14d6706502842110d16161a81d168281d6989a1c",
+          "type": "blob"
+        },
+        {
+          "bytes": 2022179327,
+          "oid": "9b6ded832adffea56cd1402bb08d1dca484eb3c8",
+          "type": "blob"
+        }
+      ],
+      "unique_object_count": 1876,
+      "unique_object_type_counts": {
+        "blob": 845,
+        "commit": 457,
+        "tree": 574
+      },
+      "unique_raw_object_bytes_by_type": {
+        "blob": 2208136763,
+        "commit": 198798,
+        "tree": 4309081
+      }
+    },
+    "datasets": {
+      "selected_tip_count": 206,
+      "sufficient_single_prerequisite_commit": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+      "total_raw_unique_object_bytes": 656449365,
+      "unique_blobs_at_least_100MiB": [
+        {
+          "bytes": 196205088,
+          "oid": "0be6b6e0639997edb9029c3e32700532c540c0f2",
+          "type": "blob"
+        },
+        {
+          "bytes": 106911344,
+          "oid": "3328ec7edccf75229b3d402d31a7af1fe8d1dfe5",
+          "type": "blob"
+        },
+        {
+          "bytes": 119263308,
+          "oid": "81530fd237ea4b1f929dd631cae0a6532d61c6bc",
+          "type": "blob"
+        },
+        {
+          "bytes": 203598796,
+          "oid": "ef215b8ffb1ed15505a0145a50dd080528fcdccf",
+          "type": "blob"
+        }
+      ],
+      "unique_object_count": 2380,
+      "unique_object_type_counts": {
+        "blob": 592,
+        "commit": 264,
+        "tree": 1524
+      },
+      "unique_raw_object_bytes_by_type": {
+        "blob": 651939946,
+        "commit": 121149,
+        "tree": 4388270
+      }
+    }
+  },
+  "unknown_origin_identity_check": [
+    {
+      "exact_identity_ancestor_of_published_A": true,
+      "oid": "8175d84ae2f751f8e59ddfdd709a2fd9ef8f2a7f",
+      "origin_unassigned": true,
+      "proof_returncode": 0,
+      "source_paths": [
+        "/tmp/lift-sync-candidate-pruning-merge-preview-20261111-v01/git"
+      ]
+    }
+  ]
+}

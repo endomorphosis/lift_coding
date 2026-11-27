@@ -1,0 +1,234 @@
+"""INERT Root one-off invocation; reuse exact existing functions, no daemon discovery/start."""
+from __future__ import annotations
+import __future__, argparse, ast, contextlib, hashlib, json, math, os, re, stat, sys, time, typing, uuid
+from pathlib import Path
+
+SOURCE = {"path":"/tmp/Main-Codex-durable-handoff-producer-private-v01-puhefwvb/openai_codex_cli_integration.strict-v02.after.py.DATA","bytes":51089,"sha256":"9496e744a6bb21befe520b327a6c6f90f0af2150b4fd4117c37a4f96adadf5f4"}
+SOCKET_PATH = '/tmp/codex-daemon-1000/4a34a63235610b8b5dfbba2a3d2f581a9704efefd90111e88b397bae279e1625'
+THREAD_ID = '01a15853-8d90-7881-815c-f23bd69098c2'
+PRIOR_MESSAGE_SHA256 = 'b71ef87a53c0587bdedd10d152884a3ed984ad9074af217fb5250f003e35d0af'
+EXPORT_NAMES = ('_open_codex_app_connection', 'send_codex_thread_message',
+                'read_codex_thread_state', 'read_codex_handoff_artifact', 'write_codex_handoff_artifact')
+TYPING_NAMES = ('Any', 'Dict', 'List', 'Optional', 'Sequence', 'Union')
+BINDINGS_TEMPLATE = {
+    'Root_selected': False, 'message_path': None, 'message_bytes': None,
+    'message_sha256': None, 'private_root': None, 'message_artifact_path': None,
+    'unknown_reservation_path': None, 'sender_receipt_path': None, 'result_path': None,
+}
+
+def full9(s):
+    return {k: str(getattr(s,k)) for k in ('st_dev','st_ino','st_mode','st_nlink',
+            'st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')}
+
+def bounded_owned_read(path, maximum, *, expected_bytes=None, expected_sha256=None):
+    p=Path(path);before=p.lstat()
+    if not (stat.S_ISREG(before.st_mode) and before.st_nlink==1 and before.st_uid==os.geteuid()
+            and 0<before.st_size<=maximum):
+        raise ValueError('owned bounded regular input required')
+    fd=os.open(p,os.O_RDONLY|os.O_NOFOLLOW|os.O_CLOEXEC)
+    try:
+        if full9(os.fstat(fd))!=full9(before):raise ValueError('input changed before read')
+        pieces=[];n=0
+        while True:
+            part=os.read(fd,min(65536,maximum+1-n))
+            n+=len(part)
+            if n>maximum:raise ValueError('input byte bound')
+            if not part:break
+            pieces.append(part)
+        raw=b''.join(pieces)
+        if n!=before.st_size or full9(os.fstat(fd))!=full9(before) or full9(p.lstat())!=full9(before):
+            raise ValueError('input changed during read')
+    finally:os.close(fd)
+    if expected_bytes is not None and len(raw)!=expected_bytes:raise ValueError('exact input length differs')
+    if expected_sha256 is not None and hashlib.sha256(raw).hexdigest()!=expected_sha256:raise ValueError('exact input digest differs')
+    return raw
+
+def load_existing_functions():
+    raw=bounded_owned_read(SOURCE['path'],SOURCE['bytes'],expected_bytes=SOURCE['bytes'],expected_sha256=SOURCE['sha256'])
+    original=ast.parse(raw)
+    selected=[n for n in original.body if isinstance(n,ast.FunctionDef) and n.name in EXPORT_NAMES]
+    if {n.name for n in selected}!=set(EXPORT_NAMES) or len(selected)!=len(EXPORT_NAMES):
+        raise ValueError('exact existing function roster differs')
+    ns={'__name__':'_Root_existing_durable_sender_exports','__file__':SOURCE['path'],
+        'contextlib':contextlib,'hashlib':hashlib,'json':json,'math':math,'os':os,
+        're':re,'stat':stat,'time':time,'uuid':uuid,'Path':Path}
+    for name in TYPING_NAMES:ns[name]=getattr(typing,name)
+    # Never ns.update(vars(typing)): typing.re must not overwrite stdlib re.
+    code=compile(ast.Module(body=selected,type_ignores=[]),SOURCE['path'],'exec',
+                 flags=__future__.annotations.compiler_flag,dont_inherit=True)
+    exec(code,ns)
+    if ns['re'] is not re:raise ValueError('stdlib re identity lost')
+    return ns
+
+def no_authority(state, reason, **extra):
+    return {'delivery_state':state,'reason':reason,'enqueue_acknowledged':False,
+            'processing_confirmed':False,'completion_eligible':False,
+            'execution_granted':False,'claim_granted':False,'retryable':False,**extra}
+
+def invoke_once(bindings):
+    if (type(bindings) is not dict or set(bindings)!=set(BINDINGS_TEMPLATE)
+            or bindings.get('Root_selected') is not True
+            or any(bindings.get(k) is None for k in BINDINGS_TEMPLATE if k!='Root_selected')):
+        return no_authority('refused','INERT_future_message_or_outputs_unbound')
+    if (type(bindings['message_bytes']) is not int or not 1<=bindings['message_bytes']<=1000
+            or type(bindings['message_sha256']) is not str
+            or re.fullmatch(r'[0-9a-f]{64}',bindings['message_sha256']) is None
+            or bindings['message_sha256']==PRIOR_MESSAGE_SHA256):
+        return no_authority('refused','new_exact_message_required')
+    private=Path(bindings['private_root'])
+    names=('message_artifact_path','unknown_reservation_path','sender_receipt_path','result_path')
+    outputs={key:Path(bindings[key]) for key in names}
+    if (not private.is_absolute() or '..' in private.parts
+            or len(set(map(str,outputs.values())))!=len(outputs)
+            or any(not p.is_absolute() or '..' in p.parts or p.parent!=private for p in outputs.values())
+            or Path(bindings['message_path']) in outputs.values()
+            or re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]{0,127}\.json',outputs['sender_receipt_path'].name) is None):
+        return no_authority('refused','exact_distinct_private_paths_required')
+    # Existing artifacts/UNKNOWN/accepted receipts are never reinterpreted as non-delivery.
+    if any(os.path.lexists(p) for p in outputs.values()) or os.path.lexists(str(outputs['sender_receipt_path'])+'.lock'):
+        return no_authority('refused','operation_namespace_already_used_no_replay')
+    raw=bounded_owned_read(bindings['message_path'],1000,expected_bytes=bindings['message_bytes'],
+                           expected_sha256=bindings['message_sha256'])
+    message=raw.decode('utf-8')
+    if message.encode('utf-8')!=raw:raise ValueError('message UTF8 identity differs')
+    ns=load_existing_functions()
+    retained=ns['write_codex_handoff_artifact'](private_root=str(private),
+        artifact_path=str(outputs['message_artifact_path']),payload=raw,max_bytes=1000)
+    if retained.get('artifact_state')!='retained':
+        return no_authority('delivery_unknown','identical_message_not_durable',
+                            current_call_mutation_started=False,artifact=retained)
+    def keep_json(path,value):
+        encoded=(json.dumps(value,sort_keys=True,separators=(',',':'),allow_nan=False)+'\n').encode()
+        return ns['write_codex_handoff_artifact'](private_root=str(private),artifact_path=str(path),payload=encoded)
+    def finish(value):
+        value.update(message_sha256=bindings['message_sha256'],thread_id=THREAD_ID,
+                     message_artifact=retained,no_replay=True)
+        saved=keep_json(outputs['result_path'],value)
+        if saved.get('artifact_state')!='retained':
+            return no_authority('delivery_unknown','result_not_durable',result_artifact=saved,no_replay=True)
+        return {**value,'result_artifact':saved}
+    state=ns['read_codex_thread_state'](socket_path=SOCKET_PATH,thread_id=THREAD_ID,
+                                      timeout_seconds=15.0,max_response_bytes=262144)
+    snapshot=state.get('thread_snapshot');turn=state.get('latest_turn')
+    if (state.get('observation_state')!='observed' or type(snapshot) is not dict
+            or snapshot.get('id')!=THREAD_ID or snapshot.get('can_accept_direct_input') is not True
+            or type(turn) is not dict):
+        return finish(no_authority('refused','current_thread_state_unverified',state_observation=state))
+    def reserve(method, expected):
+        row=no_authority('delivery_unknown','reserved_before_mutation',method=method,
+            expected_observed_turn=expected,message_sha256=bindings['message_sha256'],
+            thread_id=THREAD_ID,selected_existing_sender_source=SOURCE,enqueue_only=True)
+        saved=keep_json(outputs['unknown_reservation_path'],row)
+        if saved.get('artifact_state')!='retained':raise ValueError('UNKNOWN reservation not durable')
+        # Re-authenticate both immutable artifacts immediately before the mutation boundary.
+        for item in (retained,saved):
+            checked=ns['read_codex_handoff_artifact'](private_root=str(private),artifact_path=item['path'],
+                expected_bytes=item['bytes'],expected_sha256=item['sha256'])
+            if checked.get('artifact_state')!='verified' or checked.get('full9')!=item['full9']:
+                raise ValueError('durable pre-mutation artifact changed')
+        return saved
+    if turn.get('status')=='inProgress':
+        reservation=reserve('turn/steer',turn)
+        try:
+            outcome=ns['send_codex_thread_message'](socket_path=SOCKET_PATH,thread_id=THREAD_ID,
+                expected_turn_id=turn['id'],message=message,receipt_path=str(outputs['sender_receipt_path']),
+                timeout_seconds=15.0,max_attempts=1,prior_delivery_state='not_attempted')
+        except Exception:
+            return finish(no_authority('delivery_unknown','existing_sender_exception',
+                                       method='turn/steer',UNKNOWN_reservation=reservation))
+        accepted=type(outcome) is dict and outcome.get('delivery_state')=='accepted' and outcome.get('enqueue_acknowledged') is True
+        return finish({**no_authority('accepted_enqueue_only' if accepted else 'delivery_unknown',
+                     'existing_sender_result',method='turn/steer'),
+            'enqueue_acknowledged':accepted,'existing_sender_outcome':outcome,
+            'acknowledged_turn_id':turn['id'] if accepted else None,
+            'rpc_response_ids':None,'rpc_ids_scope':'Existing sender validates replies internally; IDs are not exposed.',
+            'UNKNOWN_reservation':reservation})
+    if turn.get('status') not in {'completed','failed','interrupted'}:
+        return finish(no_authority('refused','no_verified_idle_terminal_turn',state_observation=state))
+    # Root explicitly selected this bounded one-off idle turn/start orchestration.
+    # The existing transport opener is reused; this does not replace the production sender.
+    deadline=time.monotonic()+15.0;response_bytes=0;notifications=0;next_id=0;response_ids=[]
+    mutation_started=False;reservation=None
+    def remaining():
+        left=deadline-time.monotonic()
+        if left<=0:raise TimeoutError('Root_oneoff_start_deadline')
+        return left
+    def pairs(rows):
+        d={}
+        for key,value in rows:
+            if key in d:raise ValueError('duplicate_RPC_key')
+            d[key]=value
+        return d
+    try:
+        with ns['_open_codex_app_connection'](SOCKET_PATH,timeout_seconds=remaining(),
+                                              max_response_bytes=262144) as connection:
+            def send(value):
+                connection.socket.settimeout(remaining())
+                connection.send(json.dumps(value,allow_nan=False))
+            def rpc(method,params):
+                nonlocal next_id,response_bytes,notifications
+                next_id+=1;number=next_id
+                send({'jsonrpc':'2.0','id':number,'method':method,'params':params})
+                while True:
+                    frame=connection.recv(timeout=remaining())
+                    if type(frame) not in (str,bytes):raise ValueError('RPC_frame_type')
+                    response_bytes+=len(frame.encode('utf-8') if type(frame) is str else frame)
+                    if response_bytes>262144:raise ValueError('RPC_response_byte_bound')
+                    reply=json.loads(frame,object_pairs_hook=pairs,
+                        parse_constant=lambda _:(_ for _ in ()).throw(ValueError('nonfinite_RPC')))
+                    if type(reply) is not dict:raise ValueError('RPC_reply_shape')
+                    if 'id' in reply:
+                        if type(reply['id']) is not int or reply['id']!=number:raise ValueError('RPC_response_id_mismatch')
+                        if 'error' in reply or 'result' not in reply:raise ValueError('RPC_refused')
+                        response_ids.append(reply['id']);return reply['result']
+                    notifications+=1
+                    if notifications>32:raise ValueError('RPC_notification_bound')
+            rpc('initialize',{'clientInfo':{'name':'Root-oneoff-existing-handoff','version':'1'}})
+            send({'jsonrpc':'2.0','method':'initialized'})
+            again=rpc('thread/read',{'threadId':THREAD_ID,'includeTurns':False})
+            current=again.get('thread') if type(again) is dict else None
+            listing=rpc('thread/turns/list',{'threadId':THREAD_ID,'limit':1,'sortDirection':'desc'})
+            rows=listing.get('data') if type(listing) is dict else None
+            row=rows[0] if type(rows) is list and len(rows)==1 else None
+            latest=row.get('turn',row) if type(row) is dict else None
+            if (type(current) is not dict or current.get('id')!=THREAD_ID
+                    or current.get('canAcceptDirectInput') is not True
+                    or type(latest) is not dict or latest.get('id')!=turn['id']
+                    or latest.get('status')!=turn['status']
+                    or latest.get('status') not in {'completed','failed','interrupted'}):
+                return finish(no_authority('refused','idle_state_changed_no_dispatch',
+                                          method='turn/start',rpc_response_ids=response_ids))
+            reservation=reserve('turn/start',{'id':latest['id'],'status':latest['status']})
+            mutation_started=True  # Any send/ack failure from this durable point is UNKNOWN.
+            ack=rpc('turn/start',{'threadId':THREAD_ID,
+                                 'input':[{'type':'text','text':message,'text_elements':[]}]})
+            newturn=ack.get('turn') if type(ack) is dict else None
+            new_id=newturn.get('id') if type(newturn) is dict else None
+            if (type(new_id) is not str or re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}',new_id) is None
+                    or new_id==turn['id']):
+                raise ValueError('new_turn_enqueue_ack_invalid')
+            return finish({**no_authority('accepted_enqueue_only','turn_start_enqueue_ack',
+                            method='turn/start'),'enqueue_acknowledged':True,
+                'ack':{'turn_id':new_id,'status':newturn.get('status')},
+                'rpc_response_ids':response_ids,'UNKNOWN_reservation':reservation,
+                'state_reads_atomic':False})
+    except Exception as error:
+        return finish(no_authority('delivery_unknown' if mutation_started else 'refused',
+            'turn_start_unacknowledged' if mutation_started else 'idle_preflight_refused',
+            method='turn/start',error_type=type(error).__name__,rpc_response_ids=response_ids,
+            UNKNOWN_reservation=reservation,current_call_mutation_started=mutation_started))
+
+def main(argv=None):
+    parser=argparse.ArgumentParser(description='INERT until Root supplies one new message and fresh private outputs.')
+    parser.add_argument('--bindings');options=parser.parse_args(argv)
+    if options.bindings is None:
+        print(json.dumps(no_authority('refused','INERT_future_arguments_NULL')));return 2
+    bindings=json.loads(bounded_owned_read(options.bindings,8192))
+    result=invoke_once(bindings)
+    try:
+        print(json.dumps(result,sort_keys=True,allow_nan=False),flush=True)
+    except Exception:
+        return 3  # Durable reservation/result persists; never print/replay a second delivery.
+    return 0 if result.get('delivery_state')=='accepted_enqueue_only' else 3 if result.get('delivery_state')=='delivery_unknown' else 2
+
+if __name__=='__main__':raise SystemExit(main())

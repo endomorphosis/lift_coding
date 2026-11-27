@@ -1,0 +1,500 @@
+{
+  "SDK_managed": false,
+  "Source42_qualification": false,
+  "actual_lease": {
+    "canonical_root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/checkout",
+    "cooperative": true,
+    "lock_path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/checkout/workspace/control-plane/source-leases/source.lock",
+    "mode": "read",
+    "schema_version": "autoencoder-source-lease/v1",
+    "waited_seconds": 8.062459528446198e-05
+  },
+  "all_source_pins_verified_before_and_after": true,
+  "collected": [
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_full_fictional_definition_object_use_and_mixed_use_replay",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_saved_v2_preparation_signatures_and_assessment_survive_sibling_load",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_independently_valid_signatures_cannot_cross_domains[v2-claims-in-v3]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_independently_valid_signatures_cannot_cross_domains[v3-claims-in-v2]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_resealed_complete_transport_cannot_hide_semantic_contract_damage[typed-node-coverage-complete typed-node source correspondence required]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_resealed_complete_transport_cannot_hide_semantic_contract_damage[definition-use-target-complete ordered predicate definition-use targets required]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_resealed_complete_transport_cannot_hide_semantic_contract_damage[valid-mixed-sort-drift-governing predicate argument sorts differ]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_resealed_complete_transport_cannot_hide_semantic_contract_damage[overlapping-use-overlapping interpretations are not two distinct normative uses]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_current_trust_controls_reject_even_genuine_signatures[stale-policy-signature-signed_policy_sha256_differs]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_current_trust_controls_reject_even_genuine_signatures[expired-policy-policy_not_current]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_current_trust_controls_reject_even_genuine_signatures[revoked-key-key_revoked]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_current_trust_controls_reject_even_genuine_signatures[revoked-principal-principal_revoked]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_v3_sibling_preserves_v2_source_and_binds_current_producers",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_governing_definition_rejects_implication_instead_of_complete_equivalence",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[duplicate_repackage-logical source occurrence]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[overlapping_repackage-overlapping logical source]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[document_revision_label-logical source occurrence]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_unaligned_view-unsupported source-view alignment]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_view_and_document_revision_label-unsupported source-view alignment]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[physical_alias-physical occurrence]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_provision]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_release]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_edition]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs_different_source_id]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_old_generation_source_pin_cannot_be_rehashed_into_current_v2_preparation",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_alternate_view_of_same_raw_paragraph_requires_distinct_use_witness",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-cycle]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-definition-cycle]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_cyclic_unit_dependencies[longer-mixed-cycle]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_preserves_acyclic_overlapping_unit_dependencies",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_cross_reference_version_consistency[shared-forward-conflict]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_cross_reference_version_consistency[shared-reverse-conflict]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_cross_reference_version_consistency[shared-equal]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_cross_reference_version_consistency[distinct-identities]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_governing_definition_reusing_its_predicate[direct]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_governing_definition_reusing_its_predicate[nested]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_refuses_unbound_typed_definition_dependencies[mutual-cycle-v2]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_refuses_unbound_typed_definition_dependencies[mutual-cycle-v3]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_refuses_unbound_typed_definition_dependencies[acyclic-parent-missing-v2]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_refuses_unbound_typed_definition_dependencies[acyclic-parent-missing-v3]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_preserves_acyclic_typed_definition_dependency_in_graph[same]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_preserves_acyclic_typed_definition_dependency_in_graph[different-role]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_preserves_acyclic_typed_definition_dependency_in_graph[different-sort]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_same_typed_head_requires_one_declared_parent[one]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_same_typed_head_requires_one_declared_parent[both]"
+  ],
+  "commit": "e9586bf615b5b6525afd2cde163e70703b9909e2",
+  "compiled_at_collect": {
+    "conftest.py": [
+      "2eab130f3effda3737f25a1770ccd5f9d4955ba42c3d692d659801ffdc1035cf"
+    ],
+    "ipfs_datasets_py/__init__.py": [
+      "f258f8eada774251feacd8e2ee2048efe56c89a8ee88efd50e4271ea41d43dc9"
+    ],
+    "ipfs_datasets_py/logic/__init__.py": [
+      "f25a9702ddc282092dbae1bc1731afdcc35576c10745487dccedaa531ccc9e79"
+    ],
+    "ipfs_datasets_py/logic/autoformal/__init__.py": [
+      "375049ac8658847ef08a411660a3a0f7f452d211fb78df1399a387db4e0c065b"
+    ],
+    "ipfs_datasets_py/logic/autoformal/corpus_contracts.py": [
+      "0279ad9f7afeb2843aba5c1e0c5b9dd85da8037bd46fd90497f987b613d05982"
+    ],
+    "ipfs_datasets_py/logic/autoformal/corpus_source.py": [
+      "6e4be77cfc27a750b11aa57bb92baa92617c57d5c4a26316e25563aa715ec257"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_graph_dependencies.py": [
+      "eba3bc49bf9f88a660ce9d0d6947f99c603c44a8fc3379d001d31cfe77f98afa"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_graph_review.py": [
+      "32abecbf17bc3d10b59d1bd08fde3e8b6bfa58f73b17e31e817fe0f4e910af9e"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_norm_content_adjudication_v1.py": [
+      "2022e3760a3f3fc80fe4a9a9168193518b8f54f49e49841f167302d40a1bd0eb"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_norm_content_responses_v1.py": [
+      "c6f53e87191a417b2551233fca11b4324e7bb2a060fb540fa029048462fe25a1"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_norm_interpretation_review_v1.py": [
+      "bdb61ffa938b6d6b26fe81507f54f55263a81c8e38720d027c8d97ea754927b6"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_norm_scope_correspondence_v1.py": [
+      "731d4b6fa766ccf30f05339dc6d487c96a2e84a25dfbf0f995df647086591fa1"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_paired_manifest_inventory_v1.py": [
+      "f5778bbb6f2fef41a45057ce45ca2f409f0f27647c39e538b21909dd38a1990b"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py": [
+      "ff66f344c9cda788801a9fa2d3ef66afd7046d903a53d2bbf11f8dbfdf847ad2"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_semantic_graph.py": [
+      "b198d58209f5151081588fab914bedc7f15bbbd5d1a1717af98711aed031464c"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_statutory_context.py": [
+      "96bfd59e00771c77cfc045b9594f284a1ce95e968805764eb613a5b35ce065da"
+    ],
+    "ipfs_datasets_py/logic/families/namespaces.py": [
+      "ba097e653158a812d66ead978d6405d61adaa293521305333579b19bd69a432d"
+    ],
+    "ipfs_datasets_py/logic/legal_ir/__init__.py": [
+      "53ce51e56a292ea3210010fa17b352e9d40eb5b59cf15c5e732147000b40fee1"
+    ],
+    "ipfs_datasets_py/logic/legal_ir/canonical_contracts.py": [
+      "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+    ],
+    "ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py": [
+      "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a"
+    ],
+    "ipfs_datasets_py/logic/syntax_core/__init__.py": [
+      "20dd418d90360cdb42c64ba8b87bedcdb640228b460ef6c6ae60312365130e81"
+    ],
+    "ipfs_datasets_py/logic/syntax_core/ast.py": [
+      "4709513f18ab270858fe9595d88a847ddc52092606c52c7802947abed1ab9ac4"
+    ],
+    "ipfs_datasets_py/logic/syntax_core/contracts.py": [
+      "ce6d49e05ca2b09a84a3125ed6ad4c4aae4adf2c5943d3a4fd4eeeb057b444a8"
+    ],
+    "ipfs_datasets_py/logic/syntax_core/signatures.py": [
+      "49dd4fb0096661a05a15f056eb57248349e2b4e0b02e83239f36db36788c75bf"
+    ],
+    "ipfs_datasets_py/router_deps.py": [
+      "56f66dfff183d9d0ee7977a314c49adbaa181e6fe0087c8f1c581a7d2973bf4c"
+    ],
+    "ipfs_datasets_py/utils/__init__.py": [
+      "78f4cd7f8e14b4fff482c0c91ada5c49f8b9edf707bffd9cd58840b5503e66c2"
+    ],
+    "ipfs_datasets_py/utils/cid_utils.py": [
+      "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"
+    ],
+    "tests/__init__.py": [
+      "89588b0c2be9d872060e78aa68ccf95f94ca27ea6bcb79a43509d66c296c73ce"
+    ],
+    "tests/conftest.py": [
+      "0a255dc653799cb980d7edbb1d7b2e3c8f0d81b091d4986aa712e1e8e12b7f10"
+    ],
+    "tests/unit/__init__.py": [
+      "9d566025eaa21543b52722147774afc45981154f677dcc38078a2632e5b52947"
+    ],
+    "tests/unit/conftest.py": [
+      "2abb4618add06f636ab71406c19ccd828084a48ecf75448397ddb6cd2bca53a2"
+    ],
+    "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py": [
+      "91b0714f2a07c83dceb75fb803e21aa81e41806f6872947e2ed49318a6351965"
+    ],
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py": [
+      "d6180c3e711e5d795c9bea3c4a258ed8720e4a9d831f1426fa61b67322d8cbea"
+    ],
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py": [
+      "2bd042f47612b20a4c15b7b469bd82ff775655548bcdc312db1a5ecd5006bfde"
+    ]
+  },
+  "compiled_at_terminal": {
+    "conftest.py": [
+      "2eab130f3effda3737f25a1770ccd5f9d4955ba42c3d692d659801ffdc1035cf"
+    ],
+    "ipfs_datasets_py/__init__.py": [
+      "f258f8eada774251feacd8e2ee2048efe56c89a8ee88efd50e4271ea41d43dc9"
+    ],
+    "ipfs_datasets_py/logic/CEC/__init__.py": [
+      "8f4f1468b80c29eb7f6af4c02907adccc6bad5df1c7f22de5be7731a52b04b6b"
+    ],
+    "ipfs_datasets_py/logic/CEC/native/__init__.py": [
+      "ba830d1ab93bea301ead1b31a827878478c89d6c428dba4d0063ca4c6e69e947"
+    ],
+    "ipfs_datasets_py/logic/CEC/native/dcec_cleaning.py": [
+      "06517ecd30e4889d2a54db6732279e61a53945906860ef66378b5d707cca04b0"
+    ],
+    "ipfs_datasets_py/logic/CEC/native/dcec_core.py": [
+      "bb977f411605fc1f0715ed23c988102d55fa012029053c21c8fc5b14aea17e14"
+    ],
+    "ipfs_datasets_py/logic/CEC/native/dcec_integration.py": [
+      "f039af934dba224d6c4984e8840fd8a4de00fe5e69837b0678d1d670dc26ac82"
+    ],
+    "ipfs_datasets_py/logic/CEC/native/dcec_parsing.py": [
+      "2756e3c94acf902579bfc54d469e01ddd25b72f53d177b88921829d71df7da70"
+    ],
+    "ipfs_datasets_py/logic/CEC/native/dcec_prototypes.py": [
+      "0e0b231ed68c39054cfd2fd674780cb736fd258cde7570881cb3a41cb5d2680e"
+    ],
+    "ipfs_datasets_py/logic/CEC/native/exceptions.py": [
+      "cbbbafacf70d1c7355d7c930f48c5f71fc711765aa4789a817e5c229c8e60622"
+    ],
+    "ipfs_datasets_py/logic/TDFOL/__init__.py": [
+      "42c252ba4fb85301b649bc3afe497a2799d27460b9556e57c7398b5441ba13e8"
+    ],
+    "ipfs_datasets_py/logic/TDFOL/compiler_repairs.py": [
+      "248dd9a3c9be8b21fb75799415aa6a72c6d81d7c559ed7579fa3f4a69660b823"
+    ],
+    "ipfs_datasets_py/logic/TDFOL/tdfol_core.py": [
+      "67be350d1fb0422a64ab040349b2d51c4008fbeeb8b59a99b8901d681d7d71c7"
+    ],
+    "ipfs_datasets_py/logic/TDFOL/tdfol_parser.py": [
+      "8e1f8885be6dc2a7d692ecdf0364ccc4d01692c38c81137775d9d222d8b8d9d3"
+    ],
+    "ipfs_datasets_py/logic/__init__.py": [
+      "f25a9702ddc282092dbae1bc1731afdcc35576c10745487dccedaa531ccc9e79"
+    ],
+    "ipfs_datasets_py/logic/autoformal/__init__.py": [
+      "375049ac8658847ef08a411660a3a0f7f452d211fb78df1399a387db4e0c065b"
+    ],
+    "ipfs_datasets_py/logic/autoformal/corpus_contracts.py": [
+      "0279ad9f7afeb2843aba5c1e0c5b9dd85da8037bd46fd90497f987b613d05982"
+    ],
+    "ipfs_datasets_py/logic/autoformal/corpus_graph.py": [
+      "8a1dc03ee39962baf784ac780ed2c8286b8e2e3998ec6677db281e81adc04409"
+    ],
+    "ipfs_datasets_py/logic/autoformal/corpus_norm_definition_adapter.py": [
+      "0071cc56a8284bac64c49ee24d1f2b3030c2dc98302b964c7baefd39d526939a"
+    ],
+    "ipfs_datasets_py/logic/autoformal/corpus_source.py": [
+      "6e4be77cfc27a750b11aa57bb92baa92617c57d5c4a26316e25563aa715ec257"
+    ],
+    "ipfs_datasets_py/logic/autoformal/family_qualification.py": [
+      "4db56c904cce8a030e5889b5d14687f01e9348842093480dd699649ad96dc1a8"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_canonical_calendar.py": [
+      "b45d0ad9329e90e4b007885e201adf5b2602b2d789127555b35fdbe5b65bc1b5"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_canonical_qualified.py": [
+      "580544f2bf329c54832eee9b66042794bab2e6938bad142952aca9f4438f5902"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_context_obligations.py": [
+      "8b637a6c1947c152abefef3396b86b95739e214dde80e17739ad3f483e2c0482"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_family_routes.py": [
+      "5e997e84596c1875d0140573b33a08ff9c12902b003ed3669e1f7bf51aee7c2d"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_graph_dependencies.py": [
+      "eba3bc49bf9f88a660ce9d0d6947f99c603c44a8fc3379d001d31cfe77f98afa"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_graph_review.py": [
+      "32abecbf17bc3d10b59d1bd08fde3e8b6bfa58f73b17e31e817fe0f4e910af9e"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_norm_content_adjudication_v1.py": [
+      "2022e3760a3f3fc80fe4a9a9168193518b8f54f49e49841f167302d40a1bd0eb"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_norm_content_responses_v1.py": [
+      "c6f53e87191a417b2551233fca11b4324e7bb2a060fb540fa029048462fe25a1"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_norm_interpretation_review_v1.py": [
+      "bdb61ffa938b6d6b26fe81507f54f55263a81c8e38720d027c8d97ea754927b6"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_norm_scope_correspondence_v1.py": [
+      "731d4b6fa766ccf30f05339dc6d487c96a2e84a25dfbf0f995df647086591fa1"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_official_document_views.py": [
+      "e43e7e19c6d58ec179224128d9ceabe6a9bf0963db6b42e0c738419a110f00cb"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_official_source_custody.py": [
+      "876bb6618fd76f6be33b995e9597796e4a5b4d95fa6689129beb3fb918b796e7"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_paired_manifest_inventory_v1.py": [
+      "f5778bbb6f2fef41a45057ce45ca2f409f0f27647c39e538b21909dd38a1990b"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py": [
+      "ff66f344c9cda788801a9fa2d3ef66afd7046d903a53d2bbf11f8dbfdf847ad2"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py": [
+      "173cf611423f2b7e7f7cd2703a8a8a4c8b8a8c0db4db5a2f39734db501ca177c"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_semantic_graph.py": [
+      "b198d58209f5151081588fab914bedc7f15bbbd5d1a1717af98711aed031464c"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_source_norm_scope_v1.py": [
+      "9131a433da50e564412b73f77b36502fe43c72f46858c21a56f2c57cd178141d"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_source_sampling.py": [
+      "bdf8a76c13e5e3dd67e5cd2b18230726063d65a97c6db5a018c26dcadefc2489"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_source_sampling_review.py": [
+      "0434ee6773f68365598394a02d4130d89f18d5c822ea521fcfd5d381e2375e46"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_source_sampling_review_context.py": [
+      "d5422415f3311451259818f89928d62e69f0bbd9df70648290dbe4a84d4e0645"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_statutory_context.py": [
+      "96bfd59e00771c77cfc045b9594f284a1ce95e968805764eb613a5b35ce065da"
+    ],
+    "ipfs_datasets_py/logic/autoformal/legal_statutory_context_v2.py": [
+      "2f4e2895e29d6a7fcefdb240c73b732b8e0504b918af62994a04964bc572a13e"
+    ],
+    "ipfs_datasets_py/logic/autoformal/tree_pin.py": [
+      "ec43fd9379f3c9198451e8d62d98db53826dcf115e6858039a73c3da7d72a1c2"
+    ],
+    "ipfs_datasets_py/logic/families/namespaces.py": [
+      "ba097e653158a812d66ead978d6405d61adaa293521305333579b19bd69a432d"
+    ],
+    "ipfs_datasets_py/logic/formalization/__init__.py": [
+      "91c60c1dfbf9038b8271ae6b1495dbbaf0be8d6ce438524c33f4f7a586f17266"
+    ],
+    "ipfs_datasets_py/logic/formalization/autoencoder/__init__.py": [
+      "82206d6ca08b8626b2afd37534679ac3ea001005f934ed211aa0f1f4eb81f073"
+    ],
+    "ipfs_datasets_py/logic/formalization/autoencoder/native_family_lean_emitters.py": [
+      "dab6bbd4e17eef888f4181aab0c6ce3f087a717edc83a55befb7742fd1f598b1"
+    ],
+    "ipfs_datasets_py/logic/formalization/autoencoder/native_legal_qualified_lean.py": [
+      "5407ba7299b002048ff8f45dbea7295d3b210f41904f28a98684042d055d0b2a"
+    ],
+    "ipfs_datasets_py/logic/formalization/autoencoder/native_qualified_lean.py": [
+      "645d38508004833092cd5fd9870f29fdae34aa0e262471888973cb3203121408"
+    ],
+    "ipfs_datasets_py/logic/intent_ir/__init__.py": [
+      "acf68a7215af95b4a7d4e4dc883cb7577e2129e7bbadf49c1fc2c404848bc641"
+    ],
+    "ipfs_datasets_py/logic/intent_ir/autoencoder.py": [
+      "ff944970bd24db83b6851fe4b84db62fe00128ed6ee0019c17cd941f2feb2e91"
+    ],
+    "ipfs_datasets_py/logic/intent_ir/canonicalize.py": [
+      "3609047cc8c99437d77461b4f7ea0e05d193a31bf0d20a7e80b7b0c10a8cff87"
+    ],
+    "ipfs_datasets_py/logic/intent_ir/decoder.py": [
+      "7bab5781c07e00b54b0283d3a2962926f75935caedc80eceb23264cb388be257"
+    ],
+    "ipfs_datasets_py/logic/intent_ir/formalize/modal_projections.py": [
+      "7337b9266ed4f171ec7ee763828f8b637bf57930d8b89fa0d47139650996a14d"
+    ],
+    "ipfs_datasets_py/logic/intent_ir/protocols.py": [
+      "adb0ae8eaf2e55bf587ac76baa90d8303b61e0df246c03c30b56cb31a9643780"
+    ],
+    "ipfs_datasets_py/logic/intent_ir/schema.py": [
+      "93d38e4724c5f34aab7f39f050742e98ef0c8d80e2ff70459d2401541505fc56"
+    ],
+    "ipfs_datasets_py/logic/ir_core/__init__.py": [
+      "4c0070482e009dd7cb9875e91124d48683da37d53f691cccb306ec50f23c946c"
+    ],
+    "ipfs_datasets_py/logic/ir_core/canonical.py": [
+      "339b5778581c19525a7685edf432aaf124cd12e02d37cd0eca88cb25ab86c0d0"
+    ],
+    "ipfs_datasets_py/logic/ir_core/provenance.py": [
+      "16eaf7c258550e5625bc19e6e7468c94133aedd1e85e64075f057ab4e52c3efe"
+    ],
+    "ipfs_datasets_py/logic/ir_core/schema_registry.py": [
+      "1b214ea190a41c6a451377a03bc71ea84f6703314293ef78c5f269082eee4fbe"
+    ],
+    "ipfs_datasets_py/logic/legal_ir/__init__.py": [
+      "53ce51e56a292ea3210010fa17b352e9d40eb5b59cf15c5e732147000b40fee1"
+    ],
+    "ipfs_datasets_py/logic/legal_ir/canonical_contracts.py": [
+      "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+    ],
+    "ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py": [
+      "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a"
+    ],
+    "ipfs_datasets_py/logic/legal_ir/canonical_statement_scope_bridge.py": [
+      "7e74f5ea2230549165fd0cb0230b2b8baaa0016cc2352d5a422c70c20f5e4da8"
+    ],
+    "ipfs_datasets_py/logic/parsers/__init__.py": [
+      "e75f0c2ffea0f0706a3d1768a794849e6c013b6647dc59ba331f44797c233386"
+    ],
+    "ipfs_datasets_py/logic/parsers/event_calculus.py": [
+      "8bd7217febef6daf86f76bae7e03ab0cbf7eb22a1b64f3040fd26a3d2ebfc390"
+    ],
+    "ipfs_datasets_py/logic/parsers/legacy_modal.py": [
+      "7b18812ea6fcba8b65ed7dc5c3407e0ad06ac9760c5c66441e9677463f9eb66e"
+    ],
+    "ipfs_datasets_py/logic/parsers/modal.py": [
+      "3131ff1dd516ebdf52071215c2c7983f9cf317d86bb138ff9437faae9b227942"
+    ],
+    "ipfs_datasets_py/logic/profile_g.py": [
+      "4ca5dcc601f30c723467f425a6a03a7c5b1f644c2239a0f4a489705f1b715f03"
+    ],
+    "ipfs_datasets_py/logic/syntax_core/__init__.py": [
+      "20dd418d90360cdb42c64ba8b87bedcdb640228b460ef6c6ae60312365130e81"
+    ],
+    "ipfs_datasets_py/logic/syntax_core/algebra.py": [
+      "d3587e2270943167ebef226e03cbd70cfc8888d936647670a21cfa514240e6b7"
+    ],
+    "ipfs_datasets_py/logic/syntax_core/ast.py": [
+      "4709513f18ab270858fe9595d88a847ddc52092606c52c7802947abed1ab9ac4"
+    ],
+    "ipfs_datasets_py/logic/syntax_core/contracts.py": [
+      "ce6d49e05ca2b09a84a3125ed6ad4c4aae4adf2c5943d3a4fd4eeeb057b444a8"
+    ],
+    "ipfs_datasets_py/logic/syntax_core/diagnostics.py": [
+      "a291db3c2cea04ae8dd9221a5e5ddbebd419679c02a5a008034e3755e7650d8f"
+    ],
+    "ipfs_datasets_py/logic/syntax_core/lexer.py": [
+      "f666e9759323508f4e90964c0d71164645af9ce1de60bed778e5f64f7f4a3aea"
+    ],
+    "ipfs_datasets_py/logic/syntax_core/registry.py": [
+      "eff5ca12d748eff1e9463b737a8243c97d89cac51e1b604fe2c765aed885cb44"
+    ],
+    "ipfs_datasets_py/logic/syntax_core/signatures.py": [
+      "49dd4fb0096661a05a15f056eb57248349e2b4e0b02e83239f36db36788c75bf"
+    ],
+    "ipfs_datasets_py/router_deps.py": [
+      "56f66dfff183d9d0ee7977a314c49adbaa181e6fe0087c8f1c581a7d2973bf4c"
+    ],
+    "ipfs_datasets_py/utils/__init__.py": [
+      "78f4cd7f8e14b4fff482c0c91ada5c49f8b9edf707bffd9cd58840b5503e66c2"
+    ],
+    "ipfs_datasets_py/utils/cid_utils.py": [
+      "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"
+    ],
+    "tests/__init__.py": [
+      "89588b0c2be9d872060e78aa68ccf95f94ca27ea6bcb79a43509d66c296c73ce"
+    ],
+    "tests/conftest.py": [
+      "0a255dc653799cb980d7edbb1d7b2e3c8f0d81b091d4986aa712e1e8e12b7f10"
+    ],
+    "tests/unit/__init__.py": [
+      "9d566025eaa21543b52722147774afc45981154f677dcc38078a2632e5b52947"
+    ],
+    "tests/unit/conftest.py": [
+      "2abb4618add06f636ab71406c19ccd828084a48ecf75448397ddb6cd2bca53a2"
+    ],
+    "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py": [
+      "91b0714f2a07c83dceb75fb803e21aa81e41806f6872947e2ed49318a6351965"
+    ],
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py": [
+      "d6180c3e711e5d795c9bea3c4a258ed8720e4a9d831f1426fa61b67322d8cbea"
+    ],
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py": [
+      "2bd042f47612b20a4c15b7b469bd82ff775655548bcdc312db1a5ecd5006bfde"
+    ]
+  },
+  "conftest_origins": [
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/checkout/conftest.py",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/checkout/tests/conftest.py",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/checkout/tests/unit/conftest.py"
+  ],
+  "elapsed_seconds": 48.111697586253285,
+  "error": 0,
+  "executed": [
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_full_fictional_definition_object_use_and_mixed_use_replay",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_saved_v2_preparation_signatures_and_assessment_survive_sibling_load",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_independently_valid_signatures_cannot_cross_domains[v2-claims-in-v3]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_independently_valid_signatures_cannot_cross_domains[v3-claims-in-v2]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_resealed_complete_transport_cannot_hide_semantic_contract_damage[typed-node-coverage-complete typed-node source correspondence required]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_resealed_complete_transport_cannot_hide_semantic_contract_damage[definition-use-target-complete ordered predicate definition-use targets required]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_resealed_complete_transport_cannot_hide_semantic_contract_damage[valid-mixed-sort-drift-governing predicate argument sorts differ]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_resealed_complete_transport_cannot_hide_semantic_contract_damage[overlapping-use-overlapping interpretations are not two distinct normative uses]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_current_trust_controls_reject_even_genuine_signatures[stale-policy-signature-signed_policy_sha256_differs]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_current_trust_controls_reject_even_genuine_signatures[expired-policy-policy_not_current]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_current_trust_controls_reject_even_genuine_signatures[revoked-key-key_revoked]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_current_trust_controls_reject_even_genuine_signatures[revoked-principal-principal_revoked]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_v3_sibling_preserves_v2_source_and_binds_current_producers",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_governing_definition_rejects_implication_instead_of_complete_equivalence",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[duplicate_repackage-logical source occurrence]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[overlapping_repackage-overlapping logical source]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[document_revision_label-logical source occurrence]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_unaligned_view-unsupported source-view alignment]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_view_and_document_revision_label-unsupported source-view alignment]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[physical_alias-physical occurrence]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_provision]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_release]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_edition]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs_different_source_id]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_old_generation_source_pin_cannot_be_rehashed_into_current_v2_preparation",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_alternate_view_of_same_raw_paragraph_requires_distinct_use_witness",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-cycle]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-definition-cycle]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_cyclic_unit_dependencies[longer-mixed-cycle]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_preserves_acyclic_overlapping_unit_dependencies",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_cross_reference_version_consistency[shared-forward-conflict]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_cross_reference_version_consistency[shared-reverse-conflict]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_cross_reference_version_consistency[shared-equal]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_cross_reference_version_consistency[distinct-identities]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_governing_definition_reusing_its_predicate[direct]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_governing_definition_reusing_its_predicate[nested]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_refuses_unbound_typed_definition_dependencies[mutual-cycle-v2]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_refuses_unbound_typed_definition_dependencies[mutual-cycle-v3]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_refuses_unbound_typed_definition_dependencies[acyclic-parent-missing-v2]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_refuses_unbound_typed_definition_dependencies[acyclic-parent-missing-v3]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_preserves_acyclic_typed_definition_dependency_in_graph[same]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_preserves_acyclic_typed_definition_dependency_in_graph[different-role]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_preserves_acyclic_typed_definition_dependency_in_graph[different-sort]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_same_typed_head_requires_one_declared_parent[one]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_same_typed_head_requires_one_declared_parent[both]"
+  ],
+  "execution_scope": "local software fixture",
+  "failure": 0,
+  "group": "v3",
+  "junit": {
+    "bytes": 9581,
+    "cases": 46,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/v3/result.xml",
+    "sha256": "78467029cbb24161d533ef89fe92bf621603df485e115c40c70af27818469dc0"
+  },
+  "returncode": 0,
+  "same_collection_execution_xml": true,
+  "skipped": 0,
+  "source_read_closed": true
+}

@@ -1,0 +1,168 @@
+
+
+def _checked_current_feedback_fixture(train, versions):
+    """Author both sides of a fictional selection; this is not a Native proof."""
+    from dataclasses import replace
+
+    from ipfs_datasets_py.logic.backends.results import ResultAuthority, ResultStatus, TheoremResult
+    from ipfs_datasets_py.logic.bridge.proof_receipt_attestation import (
+        build_trusted_receipt_from_backend_result,
+    )
+    from ipfs_datasets_py.logic.families.models import EvidenceAuthority
+    from ipfs_datasets_py.logic.ir_core.claims import FrozenMap
+    from ipfs_datasets_py.logic.ir_core.protocols import ExecutionBounds
+
+    # These authored IDs agree with the existing fictional record fixture.
+    # Neither the offered receipt nor untrusted feedback supplies the expectation.
+    result = TheoremResult(
+        result_id="fictional-current-feedback-result",
+        backend_id="fictional-independent-checker",
+        backend_version="fictional-v1",
+        authority=ResultAuthority.THEOREM,
+        status=ResultStatus.PROVED,
+        assumptions=("fictional-reviewed-assumption",),
+        bounds=ExecutionBounds(timeout_ms=1000, max_steps=100),
+        translation_ceiling=EvidenceAuthority.INDEPENDENTLY_CHECKABLE,
+        metadata=FrozenMap({
+            "bounds": {"timeout_ms": 1000, "max_steps": 100},
+            "issued_at": "2026-01-01T00:00:00Z",
+            "expires_at": "2030-01-01T00:00:00Z",
+        }),
+    )
+    expected = build_trusted_receipt_from_backend_result(
+        result,
+        theorem_id="fictional-current-feedback-theorem",
+        property_id="fictional-current-feedback-property",
+        translation_receipt_id="fictional-current-feedback-translation",
+        tree_id="fictional-current-feedback-tree",
+        policy_id="fictional-current-feedback-policy",
+        receipt_id="proof-feedback-receipt",
+    )
+    record, selected = _current_feedback_fixture(train, versions)
+    expectation = {
+        "receipt_id": "proof-feedback-receipt",
+        "content_id": expected.content_id,
+        "source_result_digest": result.digest,
+        "property_id": "fictional-current-feedback-property",
+        "tree_id": "fictional-current-feedback-tree",
+        "backend_id": "fictional-independent-checker",
+        "authority": "theorem",
+        "assumptions": ["fictional-reviewed-assumption"],
+        "bounds": {"timeout_ms": 1000, "max_steps": 100},
+        "now": "2026-01-02T00:00:00Z",
+        "sample_sha256": selected.sample_sha256,
+        "formal_obligation_sha256": selected.formal_obligation_sha256,
+        "reviewed_target_sha256": selected.reviewed_target_sha256,
+        "dependency_manifest_sha256": selected.dependency_manifest_sha256,
+    }
+    target = replace(
+        selected, checked_proof_receipt=expected, checked_proof_expectation=expectation,
+    )
+    return record, target, expected, expectation
+
+
+@pytest.mark.parametrize("change", [
+    "matching", "tree", "property", "source_result", "content", "assumptions",
+    "bounds", "status", "expired", "formal_binding", "review_binding",
+    "dependency_binding", "sample_binding", "input_mutation",
+])
+def test_checked_current_receipt_gates_both_existing_consumers(samples, monkeypatch, change):
+    from dataclasses import replace
+
+    from ipfs_datasets_py.logic.backends.results import ResultStatus
+    from ipfs_datasets_py.logic.ir_core.claims import FrozenMap
+
+    train, holdout = samples
+    versions = _versions()
+    record, target, offered, expectation = _checked_current_feedback_fixture(train, versions)
+    if change == "tree":
+        offered = replace(offered, tree_id="fictional-other-tree")
+    elif change == "property":
+        offered = replace(offered, property_id="fictional-other-property")
+    elif change == "source_result":
+        offered = replace(offered, source_result_digest="fictional-other-source-result")
+    elif change == "content":
+        offered = replace(offered, backend_version="fictional-other-version")
+    elif change == "assumptions":
+        offered = replace(offered, assumptions=("fictional-other-assumption",))
+    elif change == "bounds":
+        metadata = offered.metadata.to_dict()
+        metadata["bounds"]["max_steps"] = 101
+        offered = replace(offered, metadata=FrozenMap(metadata))
+    elif change == "status":
+        offered = replace(offered, underlying_status=ResultStatus.UNSATISFIABLE)
+    elif change == "expired":
+        expectation = {**expectation, "now": "2031-01-01T00:00:00Z"}
+    elif change in {"formal_binding", "review_binding", "dependency_binding", "sample_binding"}:
+        field = {
+            "formal_binding": "formal_obligation_sha256",
+            "review_binding": "reviewed_target_sha256",
+            "dependency_binding": "dependency_manifest_sha256",
+            "sample_binding": "sample_sha256",
+        }[change]
+        expectation = {**expectation, field: proof_feedback_content_digest({"different": change})}
+    if change == "input_mutation":
+        # The selected expectation must not alias either mutable caller layer.
+        expectation["property_id"] = "fictional-mutated-after-selection"
+        expectation["bounds"]["max_steps"] = 101
+    else:
+        target = replace(
+            target, checked_proof_receipt=offered, checked_proof_expectation=expectation,
+        )
+    eligible = change in {"matching", "input_mutation"}
+    assert target.matches(record) is eligible
+
+    encoder = AdaptiveModalAutoencoder(compute_device="python")
+    before = encoder.state.to_dict()
+    trainer = TrustedFeedbackTrainer(
+        encoder, expected_versions=versions,
+        config=TrustedFeedbackTrainerConfig(production_weight_writes_enabled=True),
+    )
+    updates = []
+
+    def stop_before_update(*args, **kwargs):
+        updates.append(True)
+        return False
+
+    monkeypatch.setitem(trainer.train.__globals__, "_apply_bounded_sample_update", stop_before_update)
+    targets = {target.obligation_id: target}
+    report = trainer.train(
+        [record.to_dict()], {train.sample_id: train},
+        ablation_evidence=_ablation(train.sample_id, holdout.sample_id),
+        current_proof_targets=targets,
+    )
+    auxiliary = encoder.train_proof_auxiliary_heads(
+        [record], expected_versions=versions,
+        current_proof_targets=targets, learning_rate=0,
+    )
+    assert len(updates) == auxiliary["eligible_count"] == int(eligible)
+    assert report.applied_count == 0
+    assert encoder.state.to_dict() == before
+
+
+@pytest.mark.parametrize("change", [
+    "missing_receipt", "mapping_receipt", "empty_expectation", "missing_source_result",
+    "missing_formal", "missing_as_of",
+])
+def test_checked_current_target_refuses_incomplete_receipt_selection(samples, change):
+    from dataclasses import replace
+
+    from ipfs_datasets_py.logic.integration.reasoning.legal_ir_proof_feedback import ProofFeedbackError
+
+    train, _ = samples
+    _, target, offered, expectation = _checked_current_feedback_fixture(train, _versions())
+    if change == "missing_receipt":
+        offered = None
+    elif change == "mapping_receipt":
+        offered = offered.to_dict()
+    elif change == "empty_expectation":
+        expectation = {}
+    else:
+        field = {
+            "missing_source_result": "source_result_digest",
+            "missing_formal": "formal_obligation_sha256",
+            "missing_as_of": "now",
+        }[change]
+        expectation = {key: value for key, value in expectation.items() if key != field}
+    with pytest.raises(ProofFeedbackError):
+        replace(target, checked_proof_receipt=offered, checked_proof_expectation=expectation)

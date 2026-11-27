@@ -1,0 +1,110 @@
+{
+  "HEAD": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+  "diff_check_returncode": 0,
+  "publication_body_bytes_this_call": 9185555,
+  "retained_first_preflight_failure": {
+    "actual_body_bytes": 2755956,
+    "before_any_Git_mutation": true,
+    "correction": "Exact approved post SHA still mandatory; require every old object key/value and list prefix retained; report additive keys/records explicitly.",
+    "product_bytes_changed": false,
+    "reason": "Verification incorrectly allowed only array extensions; actual frozen BACKLOG adds a migration key.",
+    "returncode": 1,
+    "tool_chunk": "da75a3"
+  },
+  "rows": [
+    {
+      "HEAD_bytes": 1376476,
+      "HEAD_sha256": "4f22910225d6ee11c196467d023d0de0791216ba83d72da0a1ce0f017f0f49b8",
+      "JSON_changes": [
+        {
+          "change": "added_key",
+          "path": "$.migration.current_user_goal_current_D4cd_P1_Native3_and_normal35_milestone507_20261124"
+        }
+      ],
+      "all_old_JSON_values_preserved": true,
+      "bytes": 1379480,
+      "full9": {
+        "st_ctime_ns": "1795489713455392295",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70008151",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795489713170440651",
+        "st_nlink": "1",
+        "st_size": "1379480",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json",
+      "sha256": "fa259fc989bccf5f1a7e1729757205ef4c7908df9342eb2e6aec4d4a5623844a"
+    },
+    {
+      "HEAD_bytes": 1611332,
+      "HEAD_sha256": "dc3130143c51aa3d4833bf990409e88d1aaae4e5b6c077c5b2091abaddc2f3c1",
+      "JSON_changes": [
+        {
+          "after_count": 507,
+          "before_count": 506,
+          "change": "appended",
+          "path": "$.selected_evidence"
+        }
+      ],
+      "all_old_JSON_values_preserved": true,
+      "bytes": 1617695,
+      "full9": {
+        "st_ctime_ns": "1795489713730395688",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042505",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795489713176149810",
+        "st_nlink": "1",
+        "st_size": "1617695",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json",
+      "sha256": "6b69318198d55541880e8e7e6f153439761b27b516b520283d3d6e7426a6bec3"
+    },
+    {
+      "HEAD_bytes": 918239,
+      "HEAD_sha256": "2e93fbaafbc36c97c28a2bc5a439121848532a089a993c074855b7fc83dcfe87",
+      "appended_bytes": 3813,
+      "bytes": 922052,
+      "full9": {
+        "st_ctime_ns": "1795489713992398921",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042506",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795489713181612645",
+        "st_nlink": "1",
+        "st_size": "922052",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+      "sha256": "969ba712bfdf5c3fb930cc0f28efbde83960c2e0df17d158fc439912b420bc63",
+      "whole_old_prefix_preserved": true
+    },
+    {
+      "HEAD_bytes": 678234,
+      "HEAD_sha256": "b4b50ea49c30f5cdc74afc4c0a798baa68f2d973eb9d7c5d6213e912783af39d",
+      "appended_bytes": 3813,
+      "bytes": 682047,
+      "full9": {
+        "st_ctime_ns": "1795489714292402621",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042516",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795489713186003483",
+        "st_nlink": "1",
+        "st_size": "682047",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md",
+      "sha256": "b8e70e8bd0193abb9a88cd6901ce37b300e4fee886af5525907ebb526be7b7bd",
+      "whole_old_prefix_preserved": true
+    }
+  ],
+  "schema": "four-guide507-exact-post-publication-preflight/v2",
+  "scope": "exact adopted four guide507 posts only; no new qualification or content authoring"
+}

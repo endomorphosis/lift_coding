@@ -1,0 +1,70 @@
+{
+  "mode": "red",
+  "results": [
+    {
+      "projection": "shadow",
+      "variant": "same",
+      "passed": true
+    },
+    {
+      "projection": "shadow",
+      "variant": "interpretation",
+      "error": "AssertionError",
+      "message": ""
+    },
+    {
+      "projection": "shadow",
+      "variant": "dependency",
+      "error": "AssertionError",
+      "message": ""
+    },
+    {
+      "projection": "shadow",
+      "variant": "toolchain",
+      "error": "AssertionError",
+      "message": ""
+    },
+    {
+      "projection": "shadow",
+      "variant": "numeric-toolchain-alias",
+      "error": "AssertionError",
+      "message": ""
+    },
+    {
+      "projection": "migration",
+      "variant": "same",
+      "passed": true
+    },
+    {
+      "projection": "migration",
+      "variant": "interpretation",
+      "error": "AssertionError",
+      "message": ""
+    },
+    {
+      "projection": "migration",
+      "variant": "dependency",
+      "error": "AssertionError",
+      "message": ""
+    },
+    {
+      "projection": "migration",
+      "variant": "toolchain",
+      "error": "AssertionError",
+      "message": ""
+    },
+    {
+      "projection": "migration",
+      "variant": "numeric-toolchain-alias",
+      "error": "AssertionError",
+      "message": ""
+    }
+  ],
+  "guard_events": [],
+  "overrides": [
+    {
+      "module": "_private_context_aggregation_owning_test",
+      "actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/owning-test.after.py.DATA"
+    }
+  ]
+}

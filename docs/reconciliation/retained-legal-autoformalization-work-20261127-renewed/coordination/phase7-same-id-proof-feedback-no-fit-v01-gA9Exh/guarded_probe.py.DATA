@@ -1,0 +1,327 @@
+"""Focused private reproduction of the trainer's same-ID semantic guard."""
+from __future__ import annotations
+
+import ast
+import ctypes
+import errno
+import hashlib
+import importlib.abc
+import importlib.machinery
+import importlib.util
+import json
+import os
+from pathlib import Path
+import resource
+import stat
+import sys
+import traceback
+from dataclasses import replace
+
+ROOT = Path("/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets")
+FIXTURE = "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py"
+TRAINER = "ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py"
+EXPECTED = {
+    FIXTURE: "754d53a96072b21bcabb8a44a4fc615b4cf1152f",
+    TRAINER: "37265225393a19b2c58ee0ead946929090b51d23",
+}
+MAX_FILE = 2 * 1024 * 1024
+MAX_MODULE_BYTES = 8 * 1024 * 1024
+MAX_MODULES = 160
+compiled = {}
+compiled_total = 0
+denied = []
+blocked_imports = {
+    "torch", "torchvision", "torchaudio", "transformers", "sentence_transformers",
+    "duckdb", "sqlite3", "_sqlite3", "sqlalchemy",
+}
+guard = {}
+
+
+def install_kernel_guards():
+    if sys.platform != "linux" or os.uname().machine != "aarch64":
+        raise RuntimeError("guard is defined for the current Linux aarch64 host")
+    if any(int(fd) > 2 and Path(f"/proc/self/fd/{fd}").exists()
+           for fd in os.listdir("/proc/self/fd")):
+        raise RuntimeError("unexpected inherited file descriptor")
+    allowed = os.sched_getaffinity(0)
+    if len(allowed) != 1:
+        raise RuntimeError("expected one CPU from invoking affinity")
+    for name, limit in (("RLIMIT_AS", 512 * 1024 * 1024), ("RLIMIT_CPU", 25),
+                        ("RLIMIT_FSIZE", 128 * 1024), ("RLIMIT_NOFILE", 96),
+                        ("RLIMIT_CORE", 0)):
+        resource.setrlimit(getattr(resource, name), (limit, limit))
+
+    libc = ctypes.CDLL(None, use_errno=True)
+    libc.syscall.restype = ctypes.c_long
+    libc.prctl.argtypes = [ctypes.c_int] + [ctypes.c_ulong] * 4
+    if libc.prctl(38, 1, 0, 0, 0) != 0:  # PR_SET_NO_NEW_PRIVS
+        raise OSError(ctypes.get_errno(), "no_new_privs")
+    abi = libc.syscall(444, None, 0, 1)  # LANDLOCK_CREATE_RULESET_VERSION
+    if abi < 3:  # Mandatory truncate support.
+        raise RuntimeError(f"Landlock ABI {abi} lacks required file restrictions")
+    # Filesystem execute, write and mutation bits only. With zero allow rules
+    # the worker may read but cannot acquire a writable filesystem descriptor.
+    fs_rights = ctypes.c_uint64((1 << 0) | (1 << 1) | sum(1 << bit for bit in range(4, 15)))
+    fd = libc.syscall(444, ctypes.byref(fs_rights), ctypes.sizeof(fs_rights), 0)
+    if fd < 0:
+        raise OSError(ctypes.get_errno(), "landlock_create_ruleset")
+    try:
+        if libc.syscall(446, fd, 0) != 0:
+            raise OSError(ctypes.get_errno(), "landlock_restrict_self")
+    finally:
+        os.close(fd)
+
+    seccomp = ctypes.CDLL("/lib/aarch64-linux-gnu/libseccomp.so.2", use_errno=True)
+    seccomp.seccomp_init.argtypes = [ctypes.c_uint32]
+    seccomp.seccomp_init.restype = ctypes.c_void_p
+    seccomp.seccomp_rule_add.argtypes = [
+        ctypes.c_void_p, ctypes.c_uint32, ctypes.c_int, ctypes.c_uint
+    ]
+    seccomp.seccomp_load.argtypes = [ctypes.c_void_p]
+    seccomp.seccomp_release.argtypes = [ctypes.c_void_p]
+    seccomp.seccomp_syscall_resolve_name.argtypes = [ctypes.c_char_p]
+    rules = (
+        "socket", "socketpair", "connect", "accept", "accept4", "bind", "listen",
+        "clone", "clone3", "execve", "execveat",
+        "io_uring_setup", "io_uring_enter", "io_uring_register", "pidfd_getfd",
+        "ptrace", "process_vm_writev", "setns", "unshare", "mount", "umount2",
+        "truncate", "ftruncate", "fchmod", "fchmodat", "fchmodat2", "fchown", "fchownat",
+        "utimensat", "setxattr", "lsetxattr", "fsetxattr", "removexattr",
+        "lremovexattr", "fremovexattr",
+    )
+    action = 0x00050000 | errno.EACCES  # SCMP_ACT_ERRNO(EACCES)
+    ctx = seccomp.seccomp_init(0x7FFF0000)  # SCMP_ACT_ALLOW
+    if not ctx:
+        raise RuntimeError("seccomp_init failed")
+    numbers = {}
+    try:
+        for name in rules:
+            number = seccomp.seccomp_syscall_resolve_name(name.encode("ascii"))
+            if number < 0 or seccomp.seccomp_rule_add(ctx, action, number, 0) != 0:
+                raise RuntimeError(f"failed to bind seccomp syscall {name}")
+            numbers[name] = number
+        if seccomp.seccomp_load(ctx) != 0:
+            raise RuntimeError("seccomp_load failed")
+    finally:
+        seccomp.seccomp_release(ctx)
+
+    for name, args in (("socket", (2, 1, 0)), ("clone3", (None, 0))):
+        ctypes.set_errno(0)
+        if libc.syscall(numbers[name], *args) != -1 or ctypes.get_errno() != errno.EACCES:
+            raise RuntimeError(f"kernel {name} refusal probe failed")
+    try:
+        writable = os.open(__file__, os.O_WRONLY | os.O_NOFOLLOW)
+    except PermissionError as exc:
+        if exc.errno != errno.EACCES:
+            raise
+    else:
+        os.close(writable)
+        raise RuntimeError("kernel write refusal probe failed")
+    guard.update(landlock_abi=abi, syscall_denylist=list(rules),
+                 kernel_probes=["socket", "clone3", "write-open"],
+                 cpu_affinity=list(allowed), address_space_bytes=512 * 1024 * 1024,
+                 cpu_seconds=25, stdout_stderr_each_max_bytes=128 * 1024)
+
+
+def audit(event, args):
+    if event == "open":
+        flags = args[2]
+        if isinstance(flags, int) and flags & (
+            os.O_WRONLY | os.O_RDWR | os.O_CREAT | os.O_TRUNC | os.O_APPEND
+        ):
+            denied.append("python:write-open")
+            raise PermissionError("file writes blocked")
+    if event.startswith(("socket.", "subprocess.", "os.exec", "os.fork",
+                         "os.posix_spawn", "os.spawn")) or event in {
+        "os.system", "os.remove", "os.rename", "os.mkdir", "os.rmdir", "os.link",
+        "os.symlink", "os.chmod", "os.chown", "os.utime", "os.truncate",
+    }:
+        denied.append(f"python:{event}")
+        raise PermissionError(f"{event} blocked")
+
+
+class BoundSource(importlib.machinery.SourceFileLoader):
+    def get_code(self, fullname):
+        global compiled_total
+        path = Path(self.path).absolute()
+        relative = path.relative_to(ROOT).as_posix()
+        if path.resolve(strict=True) != path:
+            raise ImportError(f"symlinked project origin: {relative}")
+        if len(compiled) >= MAX_MODULES:
+            raise RuntimeError("project compile count budget exceeded")
+        fd = os.open(path, os.O_RDONLY | os.O_CLOEXEC | os.O_NOFOLLOW)
+        try:
+            before = os.fstat(fd)
+            if not stat.S_ISREG(before.st_mode) or before.st_size > MAX_FILE:
+                raise ImportError(f"project source outside file bound: {relative}")
+            compiled_total += before.st_size
+            if compiled_total > MAX_MODULE_BYTES:
+                raise RuntimeError("project compile byte budget exceeded")
+            with os.fdopen(fd, "rb", closefd=False) as stream:
+                body = stream.read(before.st_size + 1)
+            after = os.fstat(fd)
+            identity = lambda st: (st.st_dev, st.st_ino, st.st_size, st.st_mode,
+                                   st.st_uid, st.st_gid, st.st_nlink,
+                                   st.st_mtime_ns, st.st_ctime_ns)
+            if len(body) != before.st_size or identity(before) != identity(after):
+                raise RuntimeError(f"project source drift: {relative}")
+        finally:
+            os.close(fd)
+        git = hashlib.sha1(f"blob {len(body)}\0".encode() + body).hexdigest()
+        if relative in EXPECTED and git != EXPECTED[relative]:
+            raise RuntimeError(f"pinned project source changed: {relative}")
+        compiled[relative] = {"bytes": len(body), "sha256": hashlib.sha256(body).hexdigest(),
+                              "git_blob_sha1": git}
+        return compile(body, str(path), "exec", dont_inherit=True)
+
+
+class GuardedImports(importlib.abc.MetaPathFinder):
+    def find_spec(self, fullname, path=None, target=None):
+        family = fullname.split(".", 1)[0]
+        if family in blocked_imports:
+            denied.append(f"import:{family}")
+            raise ModuleNotFoundError(f"blocked optional runtime {family}", name=fullname)
+        if family != "ipfs_datasets_py":
+            return None
+        spec = importlib.machinery.PathFinder.find_spec(fullname, path, target)
+        if spec is None:
+            raise ModuleNotFoundError(f"published project dependency missing: {fullname}")
+        if spec.origin is None and spec.submodule_search_locations:
+            if all(Path(p).resolve().is_relative_to(ROOT) for p in spec.submodule_search_locations):
+                return spec
+        elif spec.origin and Path(spec.origin).is_relative_to(ROOT) and spec.origin.endswith(".py"):
+            spec.loader = BoundSource(fullname, spec.origin)
+            return spec
+        raise ImportError(f"unexpected project module origin: {fullname}")
+
+
+def record_constructor_call(body, definition):
+    functions = [node for node in ast.parse(body).body if isinstance(node, ast.FunctionDef)]
+    node = next(node for node in functions if node.name == definition)
+    return next(ast.dump(item, include_attributes=False) for item in ast.walk(node)
+                if isinstance(item, ast.Call)
+                and isinstance(item.func, ast.Attribute)
+                and item.func.attr == "create"
+                and isinstance(item.func.value, ast.Name)
+                and item.func.value.id == "LegalIRProofFeedbackRecord")
+
+
+def state_identity(model):
+    canonical = json.dumps(model.state.to_dict(), sort_keys=True, allow_nan=False,
+                           separators=(",", ":"))
+    return canonical, hashlib.sha256(canonical.encode()).hexdigest()
+
+
+def reproduce():
+    sys.path.insert(0, "/home/barberb/lift_coding/.venv/lib/python3.12/site-packages")
+    sys.path.insert(0, str(ROOT))
+    sys.meta_path.insert(0, GuardedImports())
+    sys.addaudithook(audit)
+    if any(name.split(".", 1)[0] in blocked_imports for name in sys.modules):
+        raise RuntimeError("blocked dependency loaded before guarded imports")
+    fixture_path = ROOT / FIXTURE
+    name = "_phase7_actual_owning_fixture"
+    spec = importlib.util.spec_from_file_location(
+        name, fixture_path, loader=BoundSource(name, str(fixture_path))
+    )
+    fixture = importlib.util.module_from_spec(spec)
+    sys.modules[name] = fixture
+    spec.loader.exec_module(fixture)
+    raw = fixture_path.read_bytes()
+    entry_constructor = record_constructor_call(
+        raw, "test_content_addressed_proof_feedback_updates_primary_and_auxiliary_heads")
+    helper_constructor = record_constructor_call(raw, "_trusted_feedback_record_for_nested_envelope")
+    assert entry_constructor == helper_constructor, "fixture constructor drift"
+    assert hashlib.sha256(raw).hexdigest() == compiled[FIXTURE]["sha256"], "fixture reread drift"
+
+    original, holdout = fixture.samples.__wrapped__()
+    versions = fixture._versions()
+    record = fixture._trusted_feedback_record_for_nested_envelope(original, versions)
+    from ipfs_datasets_py.logic.integration.reasoning.legal_ir_proof_feedback import (
+        proof_feedback_content_digest,
+    )
+    assert record.obligation_digest == proof_feedback_content_digest(
+        {"obligation_id": original.sample_id, "type": "exception_scope"})
+    original_formulas = original.modal_ir.formulas
+    selected_index = next(i for i, formula in enumerate(original_formulas) if formula.exceptions)
+    revised_formulas = list(original_formulas)
+    revised_formulas[selected_index] = replace(original_formulas[selected_index], exceptions=[])
+    revised = replace(original, modal_ir=replace(original.modal_ir, formulas=revised_formulas))
+    original.validate()
+    revised.validate()
+    original_ir = original.modal_ir.canonical_hash()
+    revised_ir = revised.modal_ir.canonical_hash()
+    assert revised.sample_id == original.sample_id == record.obligation_id
+    assert revised.text == original.text and revised.normalized_text == original.normalized_text
+    assert revised_ir != original_ir
+    assert original_formulas[selected_index].exceptions and not revised.modal_ir.formulas[selected_index].exceptions
+
+    results = []
+    for label, sample, expected_spy_calls in (("matching", original, 1), ("revised", revised, 0)):
+        model = fixture.AdaptiveModalAutoencoder(compute_device="python")
+        assert model.compute_backend == "python"
+        before, before_sha = state_identity(model)
+        trainer = fixture.TrustedFeedbackTrainer(
+            model, expected_versions=versions,
+            config=fixture.TrustedFeedbackTrainerConfig(production_weight_writes_enabled=True))
+        seen = []
+
+        def stop_before_nudge(model_arg, item_arg, sample_arg, *, feedback_id, learning_rate):
+            assert model_arg is model and sample_arg is sample
+            assert feedback_id == record.record_id
+            assert state_identity(model_arg)[0] == before
+            seen.append({"sample_ir_sha256": sample_arg.modal_ir.canonical_hash(),
+                         "feedback_record_id": feedback_id, "learning_rate": learning_rate})
+            return False
+
+        with fixture.pytest.MonkeyPatch.context() as monkeypatch:
+            monkeypatch.setitem(trainer.train.__globals__, "_apply_bounded_sample_update",
+                                stop_before_nudge)
+            report = trainer.train(
+                [record], {original.sample_id: sample},
+                ablation_evidence=fixture._ablation(original.sample_id, holdout.sample_id))
+        after, after_sha = state_identity(model)
+        assert before == after and report.applied_count == 0
+        assert len(seen) <= 1
+        assert not report.write_to_autoencoder_weights
+        assert not model.state.applied_leanstral_guidance_ids
+        assert not model.state.applied_proof_feedback_ids
+        if seen:
+            assert report.block_reasons == {"no_bounded_learning_target": 1}
+        results.append({
+            "case": label, "expected_spy_calls": expected_spy_calls, "actual_spy_calls": len(seen),
+            "passed_acceptance_expectation": len(seen) == expected_spy_calls,
+            "spy": seen, "state_before_sha256": before_sha, "state_after_sha256": after_sha,
+            "exact_state_unchanged": before == after, "applied_count": report.applied_count,
+            "weight_write_reported": report.write_to_autoencoder_weights,
+            "block_reasons": report.block_reasons,
+        })
+    if any(name.split(".", 1)[0] in blocked_imports for name in sys.modules):
+        raise RuntimeError("blocked dependency present after guarded imports")
+    return {
+        "cases": results, "record_obligation_digest": record.obligation_digest,
+        "record_digest_kind": "create fallback over obligation_id and type",
+        "original_document_sha256": original_ir, "revised_document_sha256": revised_ir,
+        "same_sample_id": True, "same_normalized_text": True,
+        "no_real_bounded_update_called": True, "no_fit": True,
+        "spy_bypass_reproduced": results[0]["actual_spy_calls"] == 1
+        and results[1]["actual_spy_calls"] == 1,
+    }
+
+
+if __name__ == "__main__":
+    result = {}
+    exit_code = 2
+    try:
+        install_kernel_guards()
+        result = reproduce()
+        exit_code = 0 if all(row["passed_acceptance_expectation"] for row in result["cases"]) else 1
+    except Exception as exc:
+        traceback.print_exc()
+        result["refused"] = f"{type(exc).__name__}: {exc}"
+    finally:
+        print(json.dumps({"outcome": result, "code": exit_code, "guard": guard,
+                          "scope": {"project_module_bytes": compiled_total,
+                                    "project_modules": compiled, "explicit_denials": denied}},
+                         sort_keys=True))
+    sys.exit(exit_code)

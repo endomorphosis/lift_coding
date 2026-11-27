@@ -1,0 +1,215 @@
+from pathlib import Path
+import ast
+import hashlib
+import json
+import os
+import stat
+import subprocess
+import xml.etree.ElementTree as ET
+
+here=Path(__file__).resolve().parent
+out=here/"existing-Source2-Guide570-INERT"
+out.mkdir(mode=0o700)
+coord=here.parent
+external=here/"current-external-benchmark-private-kgyIK94P"
+previous=coord/"P2-retained-qualification-component-binding-private-pZ1QE2WG/existing-Source2-Guide570-INERT-v02"
+def H(raw):
+    return hashlib.sha256(raw).hexdigest()
+def stamp(st):
+    return {k:str(getattr(st,k)) for k in (
+        "st_dev","st_ino","st_mode","st_nlink","st_uid","st_gid","st_size","st_mtime_ns","st_ctime_ns")}
+def read(path):
+    with os.fdopen(os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK),"rb") as f:
+        initial=os.fstat(f.fileno())
+        assert stat.S_ISREG(initial.st_mode) and initial.st_nlink==1
+        raw=f.read()
+        assert len(raw)==initial.st_size and stamp(initial)==stamp(os.fstat(f.fileno()))==stamp(path.lstat())
+    return raw
+def artifact(path,size=None,sha=None):
+    raw=read(path)
+    if size is not None:
+        assert len(raw)==size
+    if sha is not None:
+        assert H(raw)==sha
+    return {"path":str(path),"bytes":len(raw),"sha256":H(raw)}
+def auth(r):
+    raw=read(Path(r["path"]))
+    assert (len(raw),H(raw))==(r["bytes"],r["sha256"])
+    return raw
+def wire(r):
+    return json.loads(auth(r))
+def save(name,data):
+    p=out/name
+    raw=(json.dumps(data,indent=2,sort_keys=True)+"\n").encode()
+    with os.fdopen(os.open(p,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400),"wb") as f:
+        f.write(raw)
+        f.flush()
+        os.fsync(f.fileno())
+    observed=artifact(p,len(raw),H(raw))
+    return observed
+def git(root,*args):
+    return subprocess.check_output(["git","-c","core.preloadIndex=false","-c","index.threads=1","-C",str(root),*args],
+        env={**os.environ,"GIT_OPTIONAL_LOCKS":"0","GIT_NO_LAZY_FETCH":"1","GIT_TERMINAL_PROMPT":"0"},timeout=25)
+def minimal(row):
+    return {k:row[k] for k in ("path","bytes","sha256")}
+
+previous_ref=artifact(previous/"READY-Guide570-existing-Source2-exact-component-evidence-NONSELECTED.json",
+                      3498,"03cbb53316fc31a037fc95988aa06f8f03f8eb5147bc7c2dee325ec6b818a50a")
+old=wire(previous_ref)
+assert old["actual_Source_bootstrap_selection"] is None and old["authority_clock_ledger_output"] is None
+template=wire(old["structural_request_inputs"])
+d=Path(template["root"])
+a=Path(template["additional_A"]["root"])
+guide=wire(old["prior_published_Guide570"])
+for repo,details in guide["repositories"].items():
+    root=a if repo=="accelerate" else d.parent/repo
+    assert git(root,"rev-parse","HEAD","refs/remotes/origin/main","HEAD^{tree}").decode().splitlines()==[
+        details["HEAD"],details["origin_main"],details["tree"]],repo
+    assert not git(root,"status","--porcelain=v1","--untracked-files=all"),repo
+original_A=wire(template["original_A_preservation"])
+orig=Path(original_A["root"])
+assert git(orig,"rev-parse","HEAD").decode().strip()==original_A["HEAD"]
+assert H(git(orig,"status","--porcelain=v1","-z","--untracked-files=all"))==original_A["git_status_sha256"]
+assert all(stamp(Path(row["path"]).lstat())==row["full9"] for row in original_A["exact_three_rows"])
+
+guard_ref=old["actual_metadata_guards"]
+rows=wire(guard_ref)["rows"]
+ards={row["path"]:row for row in rows}
+assert len(ards)==len(rows)==1623
+assert all(stamp(Path(row["path"]).lstat())==row["full9"] for row in rows)
+
+candidate=artifact(here/"SEALED-legacy-counterexample-assignment-outcome-exact-two-v02.json",
+                   23561,"2ebd1cfe3721ea45dc028a95f641e94e8262393adb486b2bbd3f3d16dc7e74a4")
+packet=wire(candidate)
+assert packet["canonical_head_and_tracking_tip"]==template["root_expected"]["Git_HEAD"]
+assert packet["current_tree"]==template["root_expected"]["Git_tree"]
+assert packet["guide570_existing_guard"]==guard_ref
+assert packet["actual_observations"]["green"]["pass_count"]==37 and packet["actual_ordinary_validation"] is None
+
+targets=[]
+for item in packet["files"].values():
+    relative=item["canonical_path"]
+    path=str(d/relative)
+    obs=ards[path]
+    before,after=item["before"],item["after"]
+    old_raw,new_raw=auth(before),auth(after)
+    assert (len(old_raw), H(old_raw), before["canonical_full9"])==(obs["bytes"],obs["sha256"],obs["full9"])
+    assert git(d,"ls-tree","HEAD","--",relative).decode().strip()==f"100644 blob {before['git_blob']}\t{relative}"
+    assert git(d,"ls-files","--stage","--",relative).decode().strip()==f"100644 {before['git_blob']} 0\t{relative}"
+    assert hashlib.sha1(b"blob "+str(len(new_raw)).encode()+b"\0"+new_raw).hexdigest()==after["proposed_git_blob"]
+    targets.append(dict(obs,relative_path=relative,before_Git_blob_oid=before["git_blob"],
+                        post_Git_blob_oid=after["proposed_git_blob"],before_sha256=obs["sha256"],
+                        before_private=minimal(before),post_private=minimal(after)))
+assert len(targets)==2
+
+external_manifest=artifact(external/"published-inputs.json")
+benchmark=wire(external_manifest)
+assert benchmark["commit"]==packet["canonical_head_and_tracking_tip"]
+benchmark_path="ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py"
+fences=[]
+for relative in [item["canonical_path"] for item in packet["supporting_real_Git_blobs"]]+[benchmark_path]:
+    obs=ards[str(d/relative)]
+    pin=benchmark["files"][relative]
+    assert (obs["bytes"],obs["sha256"])==(pin["bytes"],pin["sha256"])
+    assert git(d,"rev-parse","HEAD:"+relative).decode().strip()==pin["git_blob"]
+    fences.append(dict(obs,relative_path=relative))
+assert len({row["path"] for row in [*targets,*fences]})==5
+assert not template["protected_completed_targets"]
+
+known_agents={row["path"]:row for row in template["AGENTS_chain_metadata"]}
+instructions={}
+for row in [*targets,*fences]:
+    for parent in Path(row["path"]).parents:
+        if not parent.is_relative_to(d):
+            break
+        for name in ("AGENTS.md","AGENTS.override.md"):
+            path=str(parent/name)
+            if os.path.lexists(path):
+                observed=known_agents[path]
+                assert observed["exists"] and stamp(Path(path).lstat())==observed["full9"]
+                auth(observed["reuse_captured_raw"])
+                instructions[path]=observed
+            else:
+                instructions[path]={"path":path,"exists":False,"full9":None}
+
+writer=old["existing_writer_inert"]
+script=ast.parse(auth(writer))
+assignments={n.targets[0].id:n.value for n in script.body if isinstance(n,ast.Assign)
+             and len(n.targets)==1 and isinstance(n.targets[0],ast.Name)}
+assert all(ast.literal_eval(assignments[name]) is None for name in ("SEL","REQ","PREBOUND_OUTPUT_NAMESPACE","before"))
+read_targets=[n for n in script.body if isinstance(n,ast.FunctionDef) and n.name=="prepare_python_records"]
+assert len(read_targets)==1
+ns={"Path":Path,"H":H,"ast":ast}
+exec(compile(ast.Module(body=read_targets,type_ignores=[]),writer["path"],"exec",dont_inherit=True),ns)
+assert len(ns["prepare_python_records"](targets,lambda r, _:auth(r),template["per_document_input_cap"],2))==2
+negative_targets=json.loads(json.dumps(targets))
+negative_targets[0]["before_sha256"]="0"*64
+try:
+    ns["prepare_python_records"](negative_targets,lambda r, _:auth(r),template["per_document_input_cap"],2)
+except AssertionError:
+    pass
+else:
+    raise AssertionError("existing writer admitted wrong preimage digest")
+
+def xml_roster(phase,exit_code,failure_count):
+    refs={suffix:artifact(external/(phase+"."+suffix)) for suffix in ("stdout","stderr","exit")}
+    assert int(auth(refs["exit"]))==exit_code
+    refs["report"]=artifact(external/(phase+"-confcut-tmp")/"junit.xml")
+    refs["run"]=artifact(external/(phase+"-confcut-tmp")/"run.json")
+    runner=wire(refs["run"])
+    assert runner["pytest_returncode"]==exit_code and len(runner["imported_modules"])==8
+    for module,got_sha in runner["imported_modules"].items():
+        rel=module.replace(".","/")+".py"
+        want_sha=benchmark["files"][rel]["sha256"]
+        if phase=="candidate" and rel==packet["files"]["owner"]["canonical_path"]:
+            want_sha=packet["files"]["owner"]["after"]["sha256"]
+        assert got_sha==want_sha
+    cases=ET.fromstring(auth(refs["report"])).findall(".//testcase")
+    names=[(case.attrib["classname"],case.attrib["name"]) for case in cases]
+    failed=[case for case in cases if case.find("failure") is not None]
+    assert len(names)==len(set(names))==45 and len(failed)==failure_count
+    assert all(case.find("error") is None and case.find("skipped") is None for case in cases)
+    if failed:
+        assert failed[0].attrib["name"]=="test_external_scenario_credit_requires_assignment_outcome_join[True]"
+        assert "assert True is False" in failed[0].find("failure").text
+    return names,{"returncode":exit_code,"passed":45-failure_count,"failed":failure_count,"errors":0,"skipped":0,
+                  "evidence":refs}
+ids_red,red=xml_roster("baseline",1,1)
+ids_green,green=xml_roster("candidate",0,0)
+assert ids_red==ids_green
+cross=save("actual-current-external-benchmark-private-same45.json",{
+    "schema":"current-external-benchmark-composition-pure-probe/v1",
+    "exact_two_file_candidate":candidate,"published_inputs":external_manifest,
+    "operator":artifact(external/"run-private-confcut.py"),
+    "private_composed_test":artifact(external/"test-cohort/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py"),
+    "baseline":red,"candidate":green,"same_ordered_cases":[name for _,name in ids_green],
+    "43_existing_and_2_fictional_scenario_controls":True,
+    "only_scorer_candidate_substituted":True,
+    "ordinary_qualification":False,"project_parent_initializers_and_conftests_executed":False,
+    "software_scoring_only":True,"proof_legal_training_authority":False,
+    "test_mutation_retained_as_private_evidence_only":True})
+
+template.update(schema="existing-phase8-counterexample-outcome-source2-structural-inputs/v1",
+    targets=targets, unchanged_fences=fences, AGENTS_chain_metadata=list(instructions.values()),
+    exact_private_candidate=candidate, exact_published_external_benchmark_composition=cross)
+del template["exact_ordinary28_static"]
+authority=("canonical_write_selected","actual_Source_lease","Root_selection","ledger_before","Source_envelope",
+           "complete_IO_upper","full_retained_charge","actual_clock","output_namespace")
+assert all(template[key] is None for key in authority)
+structure=save("existing-Source2-Phase8-structural-inputs-NONSELECTED.json",template)
+assert not git(d,"status","--porcelain=v1","--untracked-files=all")
+assert all(stamp(Path(row["path"]).lstat())==row["full9"] for row in rows)
+ready=save("READY-existing-Guide570-Phase8-Source2-exact-two-NONSELECTED.json",{
+    "schema":"existing-Guide570-Phase8-Source2-counterexample-exact-two-inert/v1",
+    "exact_two_file_candidate":candidate,
+    "actual_external_benchmark_private_same45":cross,
+    "prior_exact_installed_Guide570":old["prior_published_Guide570"],
+    "existing_epoch_and_structural_schema":previous_ref,
+    "matched_1623_live_metadata_only":guard_ref,
+    "writer_inert_unmodified":writer,
+    "structural_source2_request":structure,
+    "same_writer_pure_python_preflight_exact2_accept_and_bad_digest_refusal":True,
+    "canonical_adoption":None,"ordinary_qualification":None,"publication":None,"actual_authority":None,
+    "selection_scope":"Phase8 exact two scorer+owning test; external caller unchanged in candidate",
+})
+print(json.dumps(ready))

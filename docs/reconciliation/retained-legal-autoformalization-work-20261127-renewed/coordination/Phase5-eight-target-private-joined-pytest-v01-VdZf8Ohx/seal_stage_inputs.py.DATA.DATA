@@ -1,0 +1,51 @@
+from pathlib import Path
+import hashlib,json,subprocess,os,sys
+q,d=map(Path,sys.argv[1:])
+base=q/'Phase5-rich-Unicode-actual-aggregate-V4-private-v01-ZzGJ4bJJ'
+eight=base/'sealed-existing-split-and-rich-context-eight-targets-v01.json'
+raw=eight.read_bytes()
+assert hashlib.sha256(raw).hexdigest()=='9ea2b698b477c4a15b6e7aaa78afe24b3d69bf840d92ef480d28047470587524'
+spec=json.loads(raw)
+repo=Path('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets')
+historical=Path('/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/ipfs_datasets-lir14-consumer-regression-v01')
+def rev(where):
+    env=dict(os.environ,GIT_OPTIONAL_LOCKS='0',GIT_NO_LAZY_FETCH='1',GIT_TERMINAL_PROMPT='0')
+    return subprocess.check_output(['git','-c','core.fsmonitor=false','-C',str(repo),'rev-parse',where],env=env).decode().strip()
+def describe(body):
+    return {'bytes':len(body),'sha256':hashlib.sha256(body).hexdigest(),
+            'git_blob':hashlib.sha1(f'blob {len(body)}\0'.encode()+body).hexdigest()}
+stage=d/'stage'
+for rel,row in spec['targets'].items():
+    item=describe((stage/rel).read_bytes())
+    assert item['bytes']==row['after']['bytes'] and item['sha256']==row['after']['sha256']
+opt='ipfs_datasets_py/optimizers/logic_theorem_optimizer/'
+logic='ipfs_datasets_py/logic/integration/'
+paths=[opt+name for name in ('legal_ir_evaluation_artifacts.py','legal_ir_evaluation_cache.py','legal_ir_metric_lineage.py',
+    'legal_ir_uncertainty.py','legal_formula_codec.py','legal_ir_grammar_decoder.py','legal_joint_retrieval.py')]
+paths += [logic+'__init__.py']+[logic+'reasoning/'+name for name in ('__init__.py','legal_ir_view_contracts.py',
+    'legal_ir_obligations.py','legal_ir_temporal_authority.py','legal_ir_citations.py','legal_ir_source_maps.py')]
+support={}
+for rel in paths:
+    leaf=stage/rel
+    if leaf.exists():
+        raw=leaf.read_bytes()
+    else:
+        assert rel.endswith('/legal_ir_source_maps.py'),rel
+        raw=(historical/rel).read_bytes()
+        assert describe(raw)['git_blob']==rev('HEAD:'+rel)
+        with leaf.open('xb') as file:
+            file.write(raw)
+        assert leaf.read_bytes()==raw
+    item=describe(raw)
+    assert item['git_blob']==rev('HEAD:'+rel),rel
+    support[rel]=item
+assert sum(x['bytes'] for x in support.values())==856436
+summary={'current_baseline_commit':rev('HEAD'),'source_packet':str(eight),'physical_private_stage':str(stage),
+         'new_support_current_git_joined':support,'base_stage':'retained private pytest125 v02',
+         'early_preparation_history':['A projected 800000-byte estimate was short by 1012.',
+             'A wrong invocation of git rev-parse prevented manifest generation; the collector with empty arguments used default discovery and only collected, revealing missing legal_ir_source_maps.py. Added only that exact published owner.'],
+         'current_ordinary_qualification':False}
+with (d/'stage-inputs-v03.json').open('x') as file:
+    json.dump(summary,file,indent=2,sort_keys=True)
+with (d/'selectors.txt').open('xb') as file:
+    file.write((base/'candidate-ordinary-projected-131-selectors.txt').read_bytes())

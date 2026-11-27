@@ -1,0 +1,139 @@
+"""Run exact owning test functions using the existing guarded project loader."""
+
+import ast
+import hashlib
+import importlib
+import json
+import os
+from pathlib import Path
+import stat
+import sys
+import traceback
+from types import ModuleType, SimpleNamespace
+
+
+HERE = Path(__file__).resolve().parent
+COORD = HERE.parents[1]
+TEST = COORD / "Phase7-auto-default-no-torch-test-private-v01-alw9u698/test_modal_autoencoder.after.DATA"
+HARNESS = (
+    COORD / "Phase7-current-obligation-write-binding-private-ymey1qtf/"
+    "Phase7-rebased-exact-no-fit-router-discovery-v02-f_zjci9y"
+)
+MODAL = "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py"
+FLAG = "IPFS_DATASETS_MODAL_AUTOENCODER_AUTO_CUDA"
+REGRESSION = "test_auto_compute_without_cuda_opt_in_does_not_attempt_torch_import"
+ORIGINAL = "test_architecture_declares_all_bounded_isolated_heads"
+
+
+def stable(path, size, digest):
+    keys = ("st_dev", "st_ino", "st_mode", "st_nlink", "st_uid", "st_gid",
+            "st_size", "st_mtime_ns", "st_ctime_ns")
+    stamp = lambda s: tuple(getattr(s, k) for k in keys)
+    before = path.lstat()
+    assert stat.S_ISREG(before.st_mode) and before.st_size == size and before.st_nlink == 1
+    with os.fdopen(os.open(path, os.O_RDONLY | os.O_NOFOLLOW), "rb") as stream:
+        assert stamp(before) == stamp(os.fstat(stream.fileno()))
+        raw = stream.read(size + 1)
+        assert stamp(before) == stamp(os.fstat(stream.fileno())) == stamp(path.lstat())
+    assert len(raw) == size and hashlib.sha256(raw).hexdigest() == digest
+    return raw
+
+
+def run(mode, sha):
+    assert mode in ("before", "after") and sys.flags.isolated and sys.dont_write_bytecode
+    runner_path = HARNESS / "run-phase7-rebased-no-fit-router-discovery-v02.py"
+    raw = stable(runner_path, 16140, "f0fd9e854f5728c7d2eb8f3454bbc6b71730dfb177f0ee7ec60c86048c1e8023")
+    harness = ModuleType("_existing_guarded_phase7_loader")
+    harness.__file__ = str(runner_path)
+    sys.modules[harness.__name__] = harness
+    exec(compile(raw, str(runner_path), "exec", dont_inherit=True), harness.__dict__)
+    adapter = harness.load_adapter(harness.RETAINED_ADAPTER)
+    prior = adapter.load_prior()
+    prior.install_kernel_guards()
+    args = SimpleNamespace(
+        projection=HARNESS / "project",
+        projection_manifest=HARNESS / "projection-manifest.json",
+        projection_bytes=61124,
+        projection_sha256="d7748f714203c6c9503a432c9b4008306daf0f530b536385eaae0c03838993f1",
+        overlay_manifest=HERE / f"constructor-{mode}.manifest.json",
+        overlay_bytes=(HERE / f"constructor-{mode}.manifest.json").lstat().st_size,
+        overlay_sha256=sha,
+        mode="constructor",
+    )
+    projection = harness.manifest(args, prior)
+    discovery = harness.authenticate_discovery_only(projection, prior)
+    harness.ROLES = {"autoencoder": MODAL}
+    overlays = harness.bind_sources(args, prior, projection["sources"], projection["cohorts"]["retained"])
+    sys.path.insert(0, "/home/barberb/lift_coding/.venv/lib/python3.12/site-packages")
+    sys.path.insert(0, str(prior.ROOT))
+    sys.meta_path.insert(0, prior.GuardedImports())
+    sys.addaudithook(prior.audit)
+    modal = importlib.import_module("ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_autoencoder")
+    import pytest
+
+    assert MODAL in prior.compiled and prior.compiled[MODAL]["overlay_executed"] == overlays[MODAL]
+    assert not prior.denied
+    assert sys.modules["ipfs_datasets_py"].HAVE_IPFS is True
+    assert harness.ROUTER_PROBE_MODULE not in sys.modules
+    assert harness.ROUTER_PROBE_PATH not in prior.compiled
+    test_raw = harness.pinned_file(TEST, 541084, "a0b677e7092e35e978b13aed66b762c3bdf4efa81b080795b24bedd1ffb1dfb4",
+                                   prior.MAX_FILE)
+    test_body = ast.parse(test_raw).body
+    selected = harness.exact_function(test_body, REGRESSION)
+    args = selected.decorator_list[0].args
+    assert ast.literal_eval(args[0]) == "auto_cuda_flag"
+    flags = ast.literal_eval(args[1])
+    ids = ast.literal_eval(selected.decorator_list[0].keywords[0].value)
+    assert flags == (None, "0") and ids == ("unset", "disabled")
+    namespace = {"pytest": pytest, "AdaptiveModalAutoencoder": modal.AdaptiveModalAutoencoder}
+    exec(compile(ast.Module(body=[selected], type_ignores=[]), str(TEST), "exec", dont_inherit=True), namespace)
+
+    outcomes = []
+    expected_failure = selected.end_lineno
+    for case, value in zip(ids, flags, strict=True):
+        with pytest.MonkeyPatch.context() as env:
+            try:
+                namespace[REGRESSION](env, value)
+            except AssertionError as error:
+                at = traceback.extract_tb(error.__traceback__)[-1]
+                assert at.filename == str(TEST) and at.lineno == expected_failure
+                outcomes.append({"id": case, "passed": False, "assertion_line": at.lineno})
+            else:
+                outcomes.append({"id": case, "passed": True})
+    assert not prior.denied
+    old_test = HERE / "published-proof-head-architecture-owning-test.DATA"
+    old_raw = stable(old_test, 11156, "3445e906f9bdb8a4986489dc57bf0ab06773bcd074fba3edef7301023699743c")
+    architecture = harness.exact_function(ast.parse(old_raw).body, ORIGINAL)
+    arch_namespace = dict(vars(modal))
+    exec(compile(ast.Module(body=[architecture], type_ignores=[]), str(old_test), "exec",
+                 dont_inherit=True), arch_namespace)
+    with pytest.MonkeyPatch.context() as env:
+        env.delenv(FLAG, raising=False)
+        arch_namespace[ORIGINAL]()
+    assert "torch" not in sys.modules
+    assert set(prior.compiled) <= set(projection["cohorts"]["retained"]["paths"])
+    assert set(p for p, row in prior.compiled.items() if "overlay_executed" in row) == {MODAL}
+    assert all(family not in sys.modules for family in prior.blocked_imports)
+    reads = prior.compiled_total + discovery["bytes"] + len(test_raw) + len(old_raw)
+    assert reads <= 8 * 1024 ** 2
+    return {
+        "mode": mode, "exact_new_test_function": REGRESSION, "regression_cases": outcomes,
+        "existing_architecture_test": ORIGINAL, "architecture_assertions_passed": True,
+        "observed_guard_import_attempts_during_existing_architecture_test": prior.denied,
+        "guarded_architecture_ready": len(prior.denied) == 0, "real_torch_imported": False,
+        "guard": prior.guard, "compiled_project_source": prior.compiled,
+        "exact_owner_overlays": overlays, "body_reads_within_existing_8_MiB": reads,
+        "private_direct_owning_functions_not_ordinary_pytest": True,
+    }
+
+
+if __name__ == "__main__":
+    try:
+        result = run(sys.argv[1], sys.argv[2])
+    except Exception as error:
+        traceback.print_exc()
+        print(json.dumps({"infrastructure_error": f"{type(error).__name__}: {error}"}))
+        raise SystemExit(2) from error
+    print(json.dumps(result, sort_keys=True))
+    raise SystemExit(0 if all(case["passed"] for case in result["regression_cases"])
+                     and result["guarded_architecture_ready"] else 1)

@@ -1,0 +1,178 @@
+from pathlib import Path
+import ast
+import difflib
+import hashlib
+import json
+import os
+import stat
+import subprocess
+import xml.etree.ElementTree as ET
+
+w = Path(__file__).resolve().parent
+d = w.parents[2] / "repositories/datasets"
+env = {**os.environ, "GIT_OPTIONAL_LOCKS": "0", "GIT_NO_LAZY_FETCH": "1"}
+def git(*args):
+    return subprocess.check_output(
+        ["git", "-c", "core.preloadIndex=false", "-C", str(d), *args], env=env,
+    )
+
+def stamp(st):
+    return {k:str(getattr(st,k)) for k in (
+        "st_dev","st_ino","st_mode","st_nlink","st_uid","st_gid","st_size","st_mtime_ns","st_ctime_ns")}
+
+def read(path):
+    with os.fdopen(os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK),"rb") as f:
+        initial=os.fstat(f.fileno())
+        assert stat.S_ISREG(initial.st_mode) and initial.st_nlink==1
+        raw=f.read()
+        assert len(raw)==initial.st_size and stamp(initial)==stamp(os.fstat(f.fileno()))==stamp(path.lstat())
+    return raw
+
+def ref(path, raw=None):
+    if raw is None:
+        raw=read(path)
+    return {"path":str(path),"bytes":len(raw),"sha256":hashlib.sha256(raw).hexdigest()}
+
+def verify(reference):
+    p=Path(reference["path"])
+    raw=read(p)
+    assert ref(p,raw)=={k:reference[k] for k in ("path","bytes","sha256")}
+    return raw
+
+def seal(name,raw):
+    p=w/name
+    with os.fdopen(os.open(p,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400),"wb") as f:
+        f.write(raw)
+        f.flush()
+        os.fsync(f.fileno())
+    assert read(p)==raw
+    return ref(p,raw)
+
+base=json.loads(read(w/"exact-current-inputs.json"))
+head,tracking=git("rev-parse","HEAD","refs/remotes/origin/main").decode().splitlines()
+assert head==tracking==base["head"]
+assert not git("status","--porcelain=v1","--untracked-files=all")
+old_ready=w.parent/"P2-retained-qualification-component-binding-private-pZ1QE2WG/existing-Source2-Guide570-INERT-v02/READY-Guide570-existing-Source2-exact-component-evidence-NONSELECTED.json"
+ready_ref=ref(old_ready)
+assert (ready_ref["bytes"],ready_ref["sha256"])==(3498,"03cbb53316fc31a037fc95988aa06f8f03f8eb5147bc7c2dee325ec6b818a50a")
+guard_ref=json.loads(verify(ready_ref))["actual_metadata_guards"]
+guards={row["path"]:row for row in json.loads(verify(guard_ref))["rows"]}
+assert len(guards)==1623
+bound={}
+for name,role in base["files"].items():
+    raw=verify(role)
+    path=d/role["canonical_path"]
+    guard=guards[str(path)]
+    assert role["sha256"]==guard["sha256"] and role["bytes"]==guard["bytes"]
+    assert stamp(path.lstat())==guard["full9"]
+    assert git("rev-parse",head+":"+role["canonical_path"]).decode().strip()==role["git_blob"]
+    bound[name]={**role,"canonical_full9":guard["full9"]}
+
+files={}
+forward=[]
+inverse=[]
+for key,name,new_path in (("owner","metrics.before.py.DATA","metrics.after.py.DATA"),
+                          ("test","test.before.py.DATA","test_legal_ir_semantic_metrics.py")):
+    pre=bound[name]
+    before=verify(pre)
+    after=read(w/new_path)
+    source=pre["canonical_path"]
+    post=seal(source.rsplit("/",1)[1]+".after.py.DATA",after) if key=="test" else ref(w/new_path,after)
+    post["proposed_git_blob"]=hashlib.sha1(
+        b"blob "+str(len(after)).encode()+b"\0"+after,
+    ).hexdigest()
+    expected_path="a/"+source
+    new_label="b/"+source
+    def diff(a,b):
+        return difflib.unified_diff(a.decode().splitlines(keepends=True),b.decode().splitlines(keepends=True),
+                                    fromfile=expected_path,tofile=new_label)
+    forward.extend(diff(before,after))
+    inverse.extend(diff(after,before))
+    files[key]={"canonical_path":source,"before":pre,"after":post}
+    compile(after,source,"exec",dont_inherit=True)
+
+test_pre=verify(files["test"]["before"])
+test_post=verify(files["test"]["after"])
+assert test_post.startswith(test_pre)
+test_final_ast=ast.parse(test_post)
+assert [ast.dump(x) for x in test_final_ast.body[:-2]]==[ast.dump(x) for x in ast.parse(test_pre).body]
+assert [n.name for n in test_final_ast.body[-2:]]==[
+    "test_counterexample_scores_bind_assignments_to_reported_outcomes",
+    "test_malformed_raw_counterexample_cannot_supply_explicit_credit",
+]
+before_tree=ast.parse(verify(files["owner"]["before"]))
+after_tree=ast.parse(verify(files["owner"]["after"]))
+changes=[]
+for old,new in zip(before_tree.body,after_tree.body,strict=True):
+    if ast.dump(old)!=ast.dump(new):
+        assert old.name==new.name and isinstance(old,ast.FunctionDef) and isinstance(new,ast.FunctionDef)
+        changes.append(old.name)
+assert changes==["evaluate_legal_ir_semantic_equivalence","semantic_equivalence_from_metrics",
+                 "_legacy_raw_ir_unsupported_paths","_counterexample_signature"]
+
+rosters={}
+observations={}
+bad_suffixes={"[swapped_outcomes]","[assignment_value_type]","[blank_outcome]","[nested_assignment]"}
+new_prefix="test_counterexample_scores_bind_assignments_to_reported_outcomes"
+second_prefix="test_malformed_raw_counterexample_cannot_supply_explicit_credit"
+for phase,expected_code,expected_fails in (("red",1,6),("intermediate",1,2),("green",0,0)):
+    refs={k:ref(w/(phase+"."+k)) for k in ("stdout","stderr","exit","junit.xml")}
+    assert int(verify(refs["exit"]))==expected_code
+    xml=ET.fromstring(verify(refs["junit.xml"]))
+    cases=xml.findall(".//testcase")
+    nodes=[(case.attrib["classname"],case.attrib["name"]) for case in cases]
+    failures=[case.attrib["name"] for case in cases if case.find("failure") is not None]
+    assert len(nodes)==len(set(nodes))==37 and len(failures)==expected_fails
+    assert all(case.find("error") is None and case.find("skipped") is None for case in cases)
+    if phase=="red":
+        assert set(failures)==({new_prefix+suffix for suffix in bad_suffixes} |
+                               {second_prefix+"[scenario0]", second_prefix+"[scenario1]"})
+        for case in cases:
+            if case.attrib["name"] in {new_prefix+"[swapped_outcomes]",new_prefix+"[assignment_value_type]"}:
+                assert "assert True is False" in case.find("failure").text
+    if phase=="intermediate":
+        assert set(failures)=={second_prefix+"[scenario0]", second_prefix+"[scenario1]"}
+    rosters[phase]=nodes
+    observations[phase]={"case_count":37,"pass_count":37-len(failures),
+                         "failed_cases":failures,"errors":0,"skipped":0,
+                         "terminal_returncode":expected_code,"evidence":refs}
+assert rosters["red"]==rosters["intermediate"]==rosters["green"]
+assert sum(name.startswith(new_prefix) for _,name in rosters["green"])==5
+
+report={
+    "schema":"private-legacy-counterexample-assignment-outcome-fidelity-exact-two/v1",
+    "task_scope":"Phase8 deterministic benchmark and promotion-scoring software",
+    "canonical_head_and_tracking_tip":head,
+    "current_tree":git("rev-parse","HEAD^{tree}").decode().strip(),
+    "guide570_existing_guard":guard_ref,
+    "all_four_selected_cached_rows_match_current_bytes_SHA_and_decimal_full9":True,
+    "files":files,
+    "supporting_real_Git_blobs":[bound[n] for n in ("family.py.DATA","snapshot.py.DATA")],
+    "forward":seal("exact-two.patch.DATA","".join(forward).encode()),
+    "inverse":seal("exact-two.inverse.patch.DATA","".join(inverse).encode()),
+    "private_script":ref(w/"run-existing-owner-controls.py"),
+    "private_profile":{"cpu_slots":1,"cpu_soft_s":20,"cpu_hard_s":21,"wall_s":25,
+                       "address_space_bytes":512*1024**2,"pytest_plugin_autoload":False,
+                       "normal_parent_initializers_and_conftests_loaded":False},
+    "actual_observations":observations,
+    "exact_shared_private_testcase_order":[name for _,name in rosters["green"]],
+    "unchanged_retained_cases":30,
+    "new_cases":7,
+    "prior_seal_preserved":base["prior_seal"],
+    "retained_fixture_keyword_argument_error":{
+        "cause":"The added explicit-only positive initially omitted its required family keyword; program code was unchanged in the retry.",
+        "files":[ref(p) for p in sorted((w/"retained-fixture-family-argument-error").iterdir())],
+    },
+    "intermediate_owner":base["intermediate"],
+    "prior_green_test_source_prefix_identical":test_post.startswith(verify(
+        json.loads(verify(base["prior_seal"]))["files"]["test"]["after"])),
+
+    "changed_owner_function_ASTS_only":changes,
+    "prior_test_AST_and_byte_prefix_identical":True,
+    "canonical_adoption":None,"actual_ordinary_validation":None,"publication":None,
+    "actual_scenario_execution":False,"legal_source_correspondence_verified":False,
+    "claims":"Pairwise storage and comparison of caller-reported scenarios only. No independent scenario execution, statutory review, proof validity, model quality or runtime grant."
+}
+packet=seal("SEALED-legacy-counterexample-assignment-outcome-exact-two-v02.json",
+            (json.dumps(report,indent=2,sort_keys=True)+"\n").encode())
+print(json.dumps(packet))
