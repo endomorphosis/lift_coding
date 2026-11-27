@@ -1,0 +1,126 @@
+"""Rebase existing private pytest projection onto Guide580 and seal input bytes."""
+import ast
+import hashlib
+import json
+from pathlib import Path
+import runpy
+
+W = Path(__file__).resolve().parent
+P = Path('/tmp/P1-Guide571-Lean-routing-query-kind-native-composed-private-RXZkJ57d')
+D = Path('/tmp/P1-proof-cache-translation-current-6btZZr/datasets')
+HEAD = 'd067738daf11465f74a91c75165747d9db766cdc'
+M = Path('/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01')
+S = Path('/tmp/P1-Lean-dependency-report-severity-private-x22djkzw')
+helper = P / 'compose_and_verify.py'
+assert hashlib.sha256(helper.read_bytes()).hexdigest() == '630d3e34e026b3ed659ab5d71f796797a4e8452f61f41e6c0831d75e00b9a284'
+h = runpy.run_path(str(helper))
+g = h['save'].__globals__
+g.update(WORK=W, D=D, HEAD=HEAD)
+save, save_json, read, exact, bound, git, sha, blob, diff, apply_compare, ref = (
+    h[x] for x in ('save','save_json','readonly','exact','bound','git','sha','blob','diff','apply_compare','ref'))
+OWNER, TEST = h['OWNER'], h['TEST']
+assert git('rev-parse', 'HEAD').decode().strip() == HEAD
+
+prior_graph = P / 'software-private-project-roles.json'
+prior_raw = read(prior_graph)
+assert sha(prior_raw) == '422993839eb5ee78ac241f59414fb568f1207eea4afc5899eff0a1d3f35019d8'
+roles = json.loads(prior_raw)
+rels = [r['relative_path'] for r in roles]
+assert len(rels) == len(set(rels)) == 220
+assert sorted(p.relative_to(P / 'project').as_posix()
+              for p in (P / 'project').rglob('*') if p.is_file()) == sorted(rels)
+current = {}
+for entry in git('ls-tree', '-z', HEAD, '--', *rels).split(b'\0')[:-1]:
+    header, name = entry.decode().split('\t')
+    mode, kind, oid = header.split()
+    assert kind == 'blob' and mode in ('100644', '100755')
+    current[name] = (oid, mode)
+assert set(current) == set(rels)
+drift = []
+projection = {}
+for row in roles:
+    rel = row['relative_path']
+    assert row['path'] == str(P / 'project' / rel)
+    raw = bound(row)
+    oid, mode = current[rel]
+    previous = blob(raw)
+    if previous != oid:
+        raw = git('cat-file','blob',oid)
+        assert blob(raw) == oid
+        drift.append(dict(relative_path=rel, before=previous, current=oid, sha256=sha(raw), bytes=len(raw)))
+    projection[rel] = raw
+
+main_path = M / 'SEALED-private-existing-Lean-JSON-depth-recovery-two-file-v01.json'
+main_raw = exact(main_path,9410,'58543c307f928799fd9c2f44353e862b44c58b41ffeffd1b96d1268d60853693')
+main = json.loads(main_raw)
+files = {item['relative_path']: item for item in main['files']}
+before = {role:projection[role] for role in (OWNER, TEST)}
+assert before[OWNER] == bound(files[OWNER]['before'])
+main_before_test = bound(files[TEST]['before'])
+assert main_before_test.count(b'23543784354ebcc0c3b58860d14c80cc7171b0ed9e3f86a5b5ddcc70e63423ab') == 1
+current_fixture_pin = b'1d0e6bdb9da812904bc0b812385d1aa5b68267f1084a6fcf379652a05104b460'
+assert before[TEST] == main_before_test.replace(
+    b'23543784354ebcc0c3b58860d14c80cc7171b0ed9e3f86a5b5ddcc70e63423ab', current_fixture_pin)
+assert sha(git('show',HEAD+':tests/unit/logic/legal_ir/test_proof_cache.py')).encode() == current_fixture_pin
+depth_append = bound(files[TEST]['append'])
+severity_append_file = S / 'test_lean_report_severity.append.py.DATA'
+severity_append = exact(severity_append_file,613,'90d6f5a5cb88c46a5d895d1bbd621b0fec7532654084d29523a6f1d4e35eda07')
+product_file = S / 'lean.after-nested-json-and-severity.py.DATA'
+product = exact(product_file,104465,'de99fe31f53fb34bf247e5c24b4b1424ca06874f1da5dc8875b3dbf886d1e4cb')
+assert all(compile(raw, rel,'exec') for rel, raw in ((OWNER, product), (TEST, before[TEST]+depth_append+severity_append)))
+after = {OWNER:product, TEST:before[TEST]+depth_append+severity_append}
+assert after[TEST].startswith(before[TEST])
+nodes = {r:ast.parse(b).body for r,b in before.items()}
+owner_diff = [(getattr(l,'name',None),getattr(r,'name',None)) for l,r in zip(nodes[OWNER],ast.parse(after[OWNER]).body,strict=True)
+              if ast.dump(l) != ast.dump(r)]
+assert len(owner_diff) == 2 and ('_load_lean_json_line','_load_lean_json_line') in owner_diff, owner_diff
+after_test = ast.parse(after[TEST]).body
+assert [ast.dump(n) for n in after_test[:len(nodes[TEST])]] == [ast.dump(n) for n in nodes[TEST]]
+new_selectors = main['public_owning_selectors_UNRUN'] + [TEST+'::test_lean_rejects_non_text_dependency_report_severity']
+assert [n.name for n in after_test[len(nodes[TEST]):]] == [s.split('::')[1] for s in new_selectors]
+
+known = P / 'software92-termination.json'
+prior = json.loads(exact(known,4094,'b0e5b6549c12cb8e41ff78039c6e59851cf20d19961627cce5708df668589fb4'))
+argv = prior['argv']
+assert prior['returncode'] == 0 and len(argv[10:]) == 19
+selectors = argv[10:] + new_selectors
+assert len(selectors) == len(set(selectors)) == 24 and all(s.startswith(TEST+'::') for s in selectors)
+runner = Path(argv[3])
+guard = read(runner)
+assert guard.count(b'assert len(selectors) == 19') == 1
+guard_ref = save('existing-private-runner-twenty-four-selectors.py.DATA',
+    guard.replace(b'assert len(selectors) == 19',b'assert len(selectors) == 24'))
+base_rows, red_rows = [], []
+for rel, raw in projection.items():
+    oid, mode = current[rel]
+    base_rows.append(dict(relative_path=rel, bytes=len(raw), sha256=sha(raw), git_blob=oid, mode=mode))
+    red_rows.append(save('project/'+rel, after[TEST] if rel==TEST else raw) | dict(relative_path=rel))
+role_packet = {rel:dict(
+    before=save(Path(rel).name+'.before.DATA',before[rel]),
+    after=save(Path(rel).name+'.after.DATA',after[rel]),
+    parent_blob=blob(before[rel]), after_git_blob=blob(after[rel]),
+    before_git_blob=blob(before[rel]), mode=current[rel][1], git_mode=current[rel][1],
+) for rel in (OWNER,TEST)}
+forward = save('exact-two.forward.patch',b''.join(diff(rel,before[rel],after[rel]) for rel in before))
+inverse = save('exact-two.inverse.patch',b''.join(diff(rel,after[rel],before[rel]) for rel in before))
+apply_compare(forward,before,after,'verify-forward')
+apply_compare(inverse,after,before,'verify-inverse')
+assert git('rev-parse','HEAD').decode().strip() == HEAD
+print(json.dumps(save_json('exact-Guide580-99-private-inputs.json',dict(
+    schema='existing-guarded-private-Lean-99-Guide580-exact-two-inputs/v1',
+    baseline_HEAD=HEAD, baseline_tree=git('rev-parse', HEAD+'^{tree}').decode().strip(),
+    original_guard=ref(runner,guard), adapted_guard=guard_ref,
+    prior_runner_termination=ref(known,read(known)), prior_argv=argv,
+    main_packet=ref(main_path,main_raw),
+    exact_severity_append=ref(severity_append_file,severity_append),
+    exact_depth_append=files[TEST]['append'],
+    exact_product_composed=ref(product_file,product), changed_owner_functions=owner_diff,
+    current_fixture_sha256=current_fixture_pin.decode(),
+    prior_projection=ref(prior_graph,prior_raw),
+    current_Git_projection=save_json('Guide580-immutable-220-role-record.json',base_rows),
+    red_private_projection=save_json('red-private-project-220-role-record.json',red_rows),
+    immutable_Git_blob_drift=drift,
+    roles=role_packet, selectors=selectors, expected_cases=99, expected_functions=24,
+    forward_patch=forward,inverse_patch=inverse, exact_forward_and_inverse_applied=True,
+))))
+print(json.dumps(drift))

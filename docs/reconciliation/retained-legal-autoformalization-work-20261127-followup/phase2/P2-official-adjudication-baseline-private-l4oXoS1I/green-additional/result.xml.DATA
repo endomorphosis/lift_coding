@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="3" time="5.466" timestamp="2026-11-27T04:00:02.900308+00:00" hostname="spark-b271"><testcase classname="tests.unit.logic.autoformal.test_corpus_source_adjudication" name="test_official_adjudication_explicit_fictional_trust_keeps_meaning_unselected" time="4.843" /><testcase classname="tests.unit.logic.autoformal.test_corpus_source_adjudication" name="test_official_adjudication_rejects_resealed_other_subject[legacy_subject-legal-corpus-official-source-review-subject/v2]" time="0.022"><failure message="AssertionError: Regex pattern did not match.&#10; Regex: 'legal-corpus-official-source-review-subject/v2'&#10; Input: 'record schema or CID scope differs'">tests/unit/logic/autoformal/test_corpus_source_adjudication.py:1932: in test_official_adjudication_rejects_resealed_other_subject
+    author(owner, data)
+tests/unit/logic/autoformal/test_corpus_source_adjudication.py:208: in author
+    return owner.record_source_adjudication_declaration(
+ipfs_datasets_py/logic/autoformal/corpus_source_adjudication.py:147: in record_source_adjudication_declaration
+    request, subject, typed_group, slots, variants = _unit(request, subject, typed_group, pending_slots, answer_variants)
+ipfs_datasets_py/logic/autoformal/corpus_source_adjudication.py:101: in _unit
+    subject = contracts.validate_record(json.loads(base._plain(subject, contracts.MAX_RECORD_BYTES)),
+ipfs_datasets_py/logic/autoformal/corpus_contracts.py:143: in validate_record
+    raise CorpusContractError("record schema or CID scope differs")
+E   ipfs_datasets_py.logic.autoformal.corpus_contracts.CorpusContractError: record schema or CID scope differs
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/autoformal/test_corpus_source_adjudication.py:1931: in test_official_adjudication_rejects_resealed_other_subject
+    with pytest.raises(contracts.CorpusContractError, match=diagnostic):
+E   AssertionError: Regex pattern did not match.
+E    Regex: 'legal-corpus-official-source-review-subject/v2'
+E    Input: 'record schema or CID scope differs'</failure></testcase><testcase classname="tests.unit.logic.autoformal.test_corpus_source_adjudication" name="test_official_adjudication_rejects_resealed_other_subject[detached_subject_digest-exact official adjudication request, subject and source assessment required]" time="0.031" /></testsuite></testsuites>

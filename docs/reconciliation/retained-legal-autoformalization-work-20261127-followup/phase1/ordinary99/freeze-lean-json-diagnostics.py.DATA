@@ -1,0 +1,151 @@
+"""Install the privately verified Lean JSON diagnostic fixes in the isolated checkout."""
+from pathlib import Path
+import json
+import sys
+from xml.etree import ElementTree as ET
+
+HERE = Path(__file__).resolve().parent
+PRIOR = HERE.parent / 'cache-atomic-put'
+helper = PRIOR / 'freeze-cache-atomic-put.py'
+lean_diag_entry = __file__
+__file__ = str(helper)
+exec(compile(helper.read_text().split('\nif __name__==')[0], str(helper), 'exec'), globals())
+__file__ = lean_diag_entry
+HERE = Path(__file__).resolve().parent
+PRIOR = HERE.parent / "cache-atomic-put"
+W = HERE
+GUIDE_D = 'd067738daf11465f74a91c75165747d9db766cdc'
+BASE = '9a89672b4b3d32d6e83fbc29368b40e4cc033612'
+guide_freeze = dict(path=str(PRIOR/'actual-Guide580-four-docs-Source-closed-and-frozen.json'),bytes=6480,
+                    sha256='b186b5e0f2d914b5a9c99fd7b11053c5af02287e997795698c14eb38b688090e')
+guarded_guide = dict(path=str(PRIOR/'actual-Guide580-four-docs-three-FF-publication.json'),bytes=2991,
+                     sha256='12de3885bbfd86bc00dd792861c9f670af1bee590b0b8a996a9eae97cbbda9fc')
+guide, live = map(json_ref,(guide_freeze,guarded_guide))
+OBSERVED=dict(path=str(HERE/'actual-current-main-fast-forward-V2-independent-base.json'),bytes=2676,
+              sha256='b617595aa001310279a4f84ce4c23fa60512c4cd972112f93bb1e72f304713a2')
+observed_main=json_ref(OBSERVED)
+assert observed_main['previous_published_guide']==guarded_guide and observed_main['guide_main']==live['live_main_after']
+assert observed_main['live_main_after']['datasets']==BASE and observed_main['observed_base_is_direct_dataset_descendant']
+new_base_roles=observed_main['exact_D_delta']
+branch = 'refs/heads/isolated/phase1-lean-json-diagnostics'
+OWNER = 'ipfs_datasets_py/logic/backends/kernel/lean.py'
+FIXTURE = 'tests/unit/logic/legal_ir/test_proof_cache.py'
+TEST = 'tests/integration/logic/backends/test_kernel_backends.py'
+
+def proof_suite(reference):
+    suite, = ET.fromstring(load(reference)).findall('testsuite')
+    cases = suite.findall('testcase')
+    assert cases and len(cases) == int(suite.attrib['tests'])
+    return [(case.attrib['classname'],case.attrib['name']) for case in cases], suite
+
+def main():
+    assert __debug__ and len(sys.argv) == 5 and sys.argv[4] in ('--verify-only','--install-and-freeze')
+    candidate = dict(path=sys.argv[1],bytes=int(sys.argv[2]),sha256=sys.argv[3])
+    ready = json_ref(candidate)
+    assert ready['baseline_HEAD'] == GUIDE_D
+    assert live['terminal_returncode'] == 0 and live['evidence_ordinal'] == 580 and live['actual_doc_Source_closed'] == guide_freeze
+    assert guide['Source_closed'] and guide['module_closed'] and guide['HEAD'] == live['live_main_after']['datasets'] == GUIDE_D
+    assert rev(D,'HEAD') == GUIDE_D == rev(D,BASE+'^')
+    observed=git(D,'ls-remote','--exit-code','https://github.com/endomorphosis/ipfs_datasets_py.git','refs/heads/main').decode().split()
+    assert observed == [BASE,'refs/heads/main']
+    assert rev(A,'HEAD') == guide['A'] == live['live_main_after']['accelerate']
+    assert snapshot(D) == snapshot(A) == b''
+    initial_D_index = capture(D/'.git/index')[0]
+    assert small(initial_D_index) == small(guide['index'])
+    assert capture(A/'.git/index')[0] == guide['A_index']
+    red_ids, red = proof_suite(ready['raw_RED_JUnit'])
+    green_ids, green = proof_suite(ready['raw_GREEN_JUnit'])
+    assert red_ids == green_ids and len(red_ids) == len(set(red_ids)) == 99
+    assert int(red.attrib['failures']) == 6 and not int(red.attrib['errors'])
+    assert sum(case.find('failure') is not None for case in red.findall('testcase')) == 6
+    assert not any(int(green.attrib[key]) for key in ('failures','errors','skipped'))
+    proof_roles = ready['roles']
+    assert set(proof_roles) == {OWNER,TEST}
+    states, patches, inverse_patches, postimages = {}, [], [], {}
+    for relative in (OWNER,TEST):
+        role = proof_roles[relative]
+        state, before = capture(D/relative)
+        after = load(role['after'])
+        assert before == load(role['before']) and oid(before) == rev(D,'HEAD:'+relative) == rev(D,BASE+':'+relative)
+        assert oid(before)==observed_main['unchanged_D_git_blobs'][relative]
+        assert git(D,'ls-files','--stage','-z','--',relative) == f'100644 {oid(before)} 0\t{relative}\0'.encode()
+        assert before != after
+        compile(after,relative,'exec')
+        states[relative], postimages[relative] = state, after
+        patches.append(diff(before,after,relative))
+        inverse_patches.append(diff(after,before,relative))
+    before_test = load(proof_roles[TEST]['before'])
+    pin = b'_NATIVE_PROOF_CACHE_FIXTURE_SHA256 = "1d0e6bdb9da812904bc0b812385d1aa5b68267f1084a6fcf379652a05104b460"'
+    assert before_test.count(pin)==postimages[TEST].count(pin)==1
+    observed_fixture,_ = capture(D/FIXTURE)
+    assert observed_fixture['sha256'].encode() in pin
+    before_owner = load(proof_roles[OWNER]['before'])
+    author=Path('/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01')
+    depth_only=(author/'lean.after.py.DATA').read_bytes()
+    assert (author/'lean.py.DATA').read_bytes()==before_owner and depth_only!=before_owner
+    old_membership=b'message.get("severity") not in {"info", "information"}'
+    new_membership=b'message.get("severity") not in ("info", "information")'
+    assert depth_only.count(old_membership)==1 and postimages[OWNER]==depth_only.replace(old_membership,new_membership)
+    depth_fragment=(author/'owning-test-append.UNRUN.py.DATA').read_bytes()
+    severity_fragment=load(dict(path='/tmp/P1-Lean-dependency-report-severity-private-x22djkzw/test_lean_report_severity.append.py.DATA',
+                              bytes=613,sha256='90d6f5a5cb88c46a5d895d1bbd621b0fec7532654084d29523a6f1d4e35eda07'))
+    assert postimages[TEST]==before_test+depth_fragment+severity_fragment
+    forward, inverse = b''.join(patches), b''.join(inverse_patches)
+    assert forward == load(ready['forward_patch']) and inverse == load(ready['inverse_patch'])
+    git(D,'apply','--check',ready['forward_patch']['path'])
+    assert read_names('diff','--name-only','-z',GUIDE_D,BASE)==set(new_base_roles)
+    assert all(oid(capture(D/relative)[1])==entry['prior_blob'] for relative,entry in new_base_roles.items())
+    if sys.argv[4] == '--verify-only':
+        print(json.dumps(dict(preflight=True,case_count=len(green_ids),roles=sorted(proof_roles),selected=False)))
+        return
+
+    assert not (D/'.git'/branch).exists()
+    shared = snapshot(SHARED)
+    full_charge = charge('Source-only-lean-json-diagnostics-WRITE-full-retained.json',guide['full_charge'],32*1024**2)
+    source = source_control()
+    with source.source_lease(D,mode='write',timeout_seconds=30) as lease:
+        assert snapshot(D) == b'' and all(capture(D/rel)[0] == row for rel,row in states.items())
+        assert capture(D/'.git/index')[0] == initial_D_index
+        git(D,'switch','-c',branch.removeprefix('refs/heads/'),BASE)
+        assert snapshot(D)==b'' and all(capture(D/rel)[0]==row for rel,row in states.items())
+        installed_base={}
+        for path,identity in new_base_roles.items():
+            row,body=capture(D/path)
+            assert oid(body)==identity['observed_blob']==rev(D,'HEAD:'+path)
+            installed_base[path]=row | {'committed_blob':identity['observed_blob']}
+        git(D,'apply','--check',ready['forward_patch']['path'])
+        git(D,'apply',ready['forward_patch']['path'])
+        git(D,'apply','--check',ready['inverse_patch']['path'])
+        assert read_names('diff','--name-only','-z') == set(proof_roles)
+        installed = {}
+        for rel, after in postimages.items():
+            row, body = capture(D/rel)
+            assert body == after
+            installed[rel] = row | dict(stage0_and_committed_blob=oid(body),parent_blob=rev(D,'HEAD:'+rel),git_mode='100644')
+        git(D,'add','--',*sorted(proof_roles))
+        assert read_names('diff','--cached','--name-only','-z') == set(proof_roles)
+        git(D,'diff','--cached','--check','--',*sorted(proof_roles))
+        git(D,'commit','-m','Reject malformed Lean compiler diagnostics without aborting')
+        head, tree = rev(D,'HEAD'), rev(D,'HEAD^{tree}')
+        assert rev(D,'HEAD^') == BASE and read_names('diff','--name-only','-z','HEAD^','HEAD') == set(proof_roles)
+        for rel,row in installed.items():
+            post = row['stage0_and_committed_blob']
+            assert rev(D,'HEAD:'+rel) == post
+            assert git(D,'ls-files','--stage','-z','--',rel) == f'100644 {post} 0\t{rel}\0'.encode()
+            assert git(D,'cat-file','blob',post) == postimages[rel] and capture(D/rel)[0] == small(row) | {'full9':row['full9']}
+        final_index = capture(D/'.git/index')[0]
+        branch_row, actual_branch = capture(D/'.git'/branch)
+        assert actual_branch.decode().strip() == head and snapshot(D) == b''
+    assert snapshot(SHARED) == shared and capture(A/'.git/index')[0] == guide['A_index']
+    frozen = save('actual-isolated-Phase1-lean-json-diagnostics-exact-two-local-freeze.json',dict(
+        schema='actual-isolated-Phase1-lean-json-diagnostics-local-freeze/v1',root=str(D),parent=BASE,
+        frozen=dict(HEAD=head,tree=tree,index=final_index,branch=branch,branch_file=branch_row),
+        candidate=candidate,observed_base=OBSERVED,independent_current_base_roles=installed_base,actual_Source42=SOURCE,isolated_Source_context_closed=True,
+        actual_isolated_write_lease=lease.to_dict(),prior_targets=states,committed=installed,fixture_owner=observed_fixture,only_two_D_tree_entries_changed=True,
+        prior_D_index_readback=dict(captured=initial_D_index,previous_published=guide['index'],exact_bytes_preserved=True),
+        terminal_returncode=0,additional_A_index=guide['A_index'],full_charge=full_charge,local_clean=True,
+        shared_source_or_Git_mutation=False,pushed=False,ordinary_qualified=False,qualified_native=False))
+    print(json.dumps(frozen))
+
+if __name__=='__main__':
+    main()

@@ -1,0 +1,310 @@
+{
+  "actual_private_test": {
+    "driver": {
+      "bytes": 4527,
+      "full9": {
+        "st_ctime_ns": "1795637846356171569",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "64274035",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795637846356171569",
+        "st_nlink": "1",
+        "st_size": "4527",
+        "st_uid": "1000"
+      },
+      "git_blob_sha1": "8e6780b69430dd6f67fa8b734a1bd40416ce0897",
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/evaluate_manifest_fixture.py",
+      "sha256": "0f5bb15462e47979f3e189ad8f310e496456850e56c66eb70ae2bdc13ae98ea3"
+    },
+    "green": {
+      "bytes": 3465,
+      "full9": {
+        "st_ctime_ns": "1795637930927176569",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "64274042",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795637930927176569",
+        "st_nlink": "1",
+        "st_size": "3465",
+        "st_uid": "1000"
+      },
+      "git_blob_sha1": "be3e5d2f9ff2dba0984d9109506a3df3afc65898",
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/actual-same13-manifest-recovery-GREEN-v01.json",
+      "sha256": "be37dfe382f6fb98c513114adb366b3ff59c5f010ea83e51901c97232304f4b5"
+    },
+    "green_errors": 0,
+    "green_failures": 0,
+    "green_parents": 13,
+    "green_seconds": 0.014806062914431095,
+    "green_skips": 0,
+    "normal_package_import_or_runtime_qualification": false,
+    "raw_forbidden_effects": [],
+    "real_validator_and_FD_helpers_used": true,
+    "red": {
+      "bytes": 83258,
+      "full9": {
+        "st_ctime_ns": "1795637855124356442",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "64274039",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795637855124356442",
+        "st_nlink": "1",
+        "st_size": "83258",
+        "st_uid": "1000"
+      },
+      "git_blob_sha1": "ce89ae67de9b345091526debb232b2ae9f86ba99",
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/actual-same13-manifest-recovery-RED-v01.json",
+      "sha256": "ce901cf61eee380eb4aaf9a9505c804eb9da2b6f10914225600c59f3ce62fa4c"
+    },
+    "red_error_observations": 39,
+    "red_explanation": "Feature absent: resolver AttributeError and unrecognized CLI SystemExit; subtests create multiple error observations. No old guard weakened.",
+    "red_failures": 0,
+    "red_parents": 13,
+    "same_test_hash": "eb58b8c570c64c1b6e44bfc46f80174a592e3eb8937dab91626a9c90a3ecf585"
+  },
+  "base": {
+    "HEAD": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "canonical_Source_observed": false,
+    "private_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate"
+  },
+  "changes": [
+    "Add explicit pinned-manifest resolver, reusing existing private artifact reader twice.",
+    "Add opt-in read-manifest-artifact CLI branch and command handler; all old defaults and APIs unchanged.",
+    "Append13 real-file positive/adversarial test methods to existing87-method prefix; all old ASTs retained."
+  ],
+  "files": [
+    {
+      "after": {
+        "bytes": 58199,
+        "full9": {
+          "st_ctime_ns": "1795637925593113360",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "64274041",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795637925593113360",
+          "st_nlink": "1",
+          "st_size": "58199",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "a4bf128e48c7c8d71d431e93c89ae8f3bfb201a3",
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/openai_codex_cli_integration.manifest-recovery.after.py.DATA",
+        "sha256": "b39144457d813e1846362a54a638432b9406803a37fe94ccde4b9b93a33b3134"
+      },
+      "before": {
+        "bytes": 51089,
+        "full9": {
+          "st_ctime_ns": "1795637655444876322",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "64274031",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795637655444876322",
+          "st_nlink": "1",
+          "st_size": "51089",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "62d2e78f1bc676c52042c9d90c38ef018b01bd91",
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/openai_codex_cli_integration.before.py.DATA",
+        "sha256": "9496e744a6bb21befe520b327a6c6f90f0af2150b4fd4117c37a4f96adadf5f4"
+      },
+      "forward": {
+        "bytes": 8011,
+        "full9": {
+          "st_ctime_ns": "1795638068240834854",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "64274048",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795638068240834854",
+          "st_nlink": "1",
+          "st_size": "8011",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "315668657d760df28fce9215e4dce2f0b307dc5a",
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/openai_codex_cli_integration.forward-repo-relative-v02.patch",
+        "sha256": "aeba2fa4e352f2e773018ac58eebbc09a753006ee2688eb1e8669d831217b1f6"
+      },
+      "inverse": {
+        "bytes": 8011,
+        "full9": {
+          "st_ctime_ns": "1795638068254834623",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "64274049",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795638068254834623",
+          "st_nlink": "1",
+          "st_size": "8011",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "60411df0db40efb3ea5b7513403f7f7e91225b8e",
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/openai_codex_cli_integration.inverse-repo-relative-v02.patch",
+        "sha256": "bcaaf489a4db3f38c37098083d764fce66766a807925a619c6d9bd86075e211a"
+      },
+      "mode": "100755",
+      "relative_path": "ipfs_accelerate_py/cli_integrations/openai_codex_cli_integration.py"
+    },
+    {
+      "after": {
+        "bytes": 87543,
+        "full9": {
+          "st_ctime_ns": "1795637846328171235",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "64274038",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795637846328171235",
+          "st_nlink": "1",
+          "st_size": "87543",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "ba8bf6c372fe615c8dc8cbfafcececb5025f199a",
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/test_codex_thread_handoff.manifest-recovery.after.py.DATA",
+        "sha256": "eb58b8c570c64c1b6e44bfc46f80174a592e3eb8937dab91626a9c90a3ecf585"
+      },
+      "before": {
+        "bytes": 68663,
+        "full9": {
+          "st_ctime_ns": "1795637655457876480",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "64274032",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795637655457876480",
+          "st_nlink": "1",
+          "st_size": "68663",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "b3a8783f4cc5a92b16a60b4a072f0ffd757fd12c",
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/test_codex_thread_handoff.before.py.DATA",
+        "sha256": "bc1b83241b1212775a14049885fa674fa6c69455162f267238390e9e83661605"
+      },
+      "forward": {
+        "bytes": 19492,
+        "full9": {
+          "st_ctime_ns": "1795638068260834524",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "64274050",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795638068260834524",
+          "st_nlink": "1",
+          "st_size": "19492",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "639bfb2124b0c0f112f7fd92abab9bbc474bfb3e",
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/test_codex_thread_handoff.forward-repo-relative-v02.patch",
+        "sha256": "fb313b9d4da92d49d420e3b4e1a8cd690766f62645498afc0948b147f3df747e"
+      },
+      "inverse": {
+        "bytes": 19492,
+        "full9": {
+          "st_ctime_ns": "1795638068264834458",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "64274051",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795638068264834458",
+          "st_nlink": "1",
+          "st_size": "19492",
+          "st_uid": "1000"
+        },
+        "git_blob_sha1": "3986f47a73e1ff4a121fb83ba4628ffa73063bc6",
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/test_codex_thread_handoff.inverse-repo-relative-v02.patch",
+        "sha256": "ef54d3a5e3d6c282821082dec17be33e44d463a2c8547598a3d8e5dbbc326ebb"
+      },
+      "mode": "100644",
+      "relative_path": "test/api/test_codex_thread_handoff.py"
+    }
+  ],
+  "future_actual_bindings": {
+    "authority": null,
+    "clock": null,
+    "current_HEAD_and_tree_binding": null,
+    "deployment_or_publication_selection": null,
+    "ordinary100_collect_or_run": null,
+    "ordinary100_output": null,
+    "post_Source_receipt": null,
+    "post_epoch": null,
+    "post_full9": null
+  },
+  "integration_notes": {
+    "bytes": 2236,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/integration-notes.txt",
+    "sha256": "84970cdcca23c150aec2738fd47b4fd1c86789a34704144bcc91fccacd528052"
+  },
+  "operation_scope": {
+    "Git_mutation": false,
+    "Native": false,
+    "SDK": false,
+    "SQL": false,
+    "Source": false,
+    "canonical_worktree_mutation": false,
+    "live_RPC": false,
+    "model": false,
+    "new_interpretation_or_legal_review": false,
+    "service_or_board_mutation": false
+  },
+  "private_cost_accounting": {
+    "Source_or_SDK_caps_changed": false,
+    "all_earlier_unit_costs_and_failures_retained": true,
+    "conservative_charged_private_reads_and_readbacks_bytes": 6291456,
+    "exact_system_IO_claim": false,
+    "includes_child_map385440_and_review167487_and_all_repeats": true,
+    "new_unit_self_imposed_body_read_ceiling_bytes": 8388608
+  },
+  "purpose": "Replace a missing leaf-reference dead end with one explicit bounded offline dependency resolution through the existing reader and CLI.",
+  "retained_non_product_findings": [
+    "Current open_frontier helper did not establish a reachable current caller within bounded trace; not patched.",
+    "Initial JS orchestration SyntaxError occurred before any nested tool call.",
+    "Initial broad filename output was truncated; targeted filename scan replaced it, with no completeness claim.",
+    "Earlier generic-label patch variants retained; final packet uses repo-relative v02 forward/inverse patches.",
+    "Child fragment v01 retained/unexecuted; final v02 was composed before SAME13 RED and unchanged GREEN."
+  ],
+  "retention_and_independent_roster": {
+    "bytes": 13611,
+    "full9": {
+      "st_ctime_ns": "1795637986219360432",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "64274047",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795637986219360432",
+      "st_nlink": "1",
+      "st_size": "13611",
+      "st_uid": "1000"
+    },
+    "git_blob_sha1": "5e89706b5884c475be89dceb0545b3fef5284ed7",
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/static-retention-and-independent100-roster-v01.json",
+    "sha256": "89019691ddb07285c58608b0802b3e812234e330d2fec385cc74e548fc9b97cc"
+  },
+  "schema": "existing-CLI-pinned-manifest-handoff-recovery-private-two-file-proposal/v1",
+  "static_review": {
+    "bytes": 936,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/independent-narrow-delta-static-review-v01.json",
+    "sha256": "14659818c28dbb6ca75106df604b549958e1e46f67e10fae8a1cfd7c6df7fcb6"
+  },
+  "status": "PRIVATE_IMPLEMENTED_SAME13_GREEN_NOT_ADOPTED_OR_NORMAL100_QUALIFIED",
+  "unchanged_invariants": {
+    "all_authority_flags_false": true,
+    "existing_artifact_reader_AST_exact": true,
+    "new_queue_provider_registry_controller": false,
+    "no_artifact_directory_discovery_or_alias_fallback": true,
+    "no_scope_or_budget_granted_by_manifest": true,
+    "old87_test_prefix_and_AST_exact": true,
+    "old_transport_and_UNKNOWN_receipts_AST_exact": true,
+    "snapshot_atomic": false
+  },
+  "white_space_check": {
+    "commands": "git diff --no-index --no-ext-diff --no-textconv --check before after (both private pairs)",
+    "owner_exit_code": 1,
+    "scope": "No whitespace diagnostics; no-index differences return1. Not claimed rc0.",
+    "stderr_bytes": 0,
+    "stdout_bytes": 0,
+    "test_exit_code": 1
+  }
+}

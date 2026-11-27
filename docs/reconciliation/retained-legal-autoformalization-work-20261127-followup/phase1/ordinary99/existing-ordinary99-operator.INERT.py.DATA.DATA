@@ -1,0 +1,564 @@
+'INERT frozen-local-D phase1-lean-json-diagnostics-99 through the existing R2 Source42/SDK route.\nFinal Git/READ pins, fixture effects, IO plan and Root runtime selection are NULL.\nNo Source-WRITE installation or qualified statutory/Native result is asserted.\n'
+from __future__ import annotations
+import ast,base64,contextlib,dataclasses,hashlib,importlib,json,os,shutil,stat,subprocess,sys,time,traceback,types,zlib
+import xml.etree.ElementTree as ET
+from pathlib import Path
+ROOT_SELECTION = None
+ROOT_RUNTIME_SELECTION = None
+SELECTED_TEST_REWRITE_POLICY = {'cache_policy': 'bypass-read-only-for-selected-owning-test', 'required_compile_and_execution_witness': True, 'rewrite_policy': 'normal-pytest-assertion-rewrite', 'schema': 'selected-test-normal-pytest-source-AST-code-observation/v1', 'selected_test_binding_names': ['tests.integration.logic.backends.test_kernel_backends'], 'unobserved_or_cached_only_route': 'REFUSE'}
+FINAL_OUTPUT_PATH = None
+FINAL_D_ROOT = None
+FINAL_D_HEAD = None
+FINAL_D_TREE = None
+FINAL_A_ROOT = None
+FINAL_A_HEAD = None
+FINAL_A_TREE = None
+D_READ_BINDING_REFERENCE = None
+D_READ_BINDING_ABI = {'outer_count_key': 'outer_epoch_record_count', 'outer_epoch_key': 'outer_epoch_reference', 'protected_index_key': 'protected_index_reference', 'python_count_key': 'python_epoch_record_count', 'python_epoch_key': 'python_epoch_reference', 'required_true_keys': ['Root_selected', 'Source_closed', 'owned_module_closed'], 'schema': 'actual-D27-observed-D-root-initializer-READ-small-closeout/v1'}
+FINAL_BINDING_MANIFEST_REFERENCE = None
+FINAL_BINDING_MANIFEST = None
+FINAL_MODULE_BINDINGS = None
+FINAL_D_PROVENANCE = None
+FINAL_A_PROVENANCE = None
+FINAL_SOURCE_PROJECTS = None
+FINAL_SDK_BINDINGS = None
+FINAL_RESOURCE_STATE_PATH = None
+FINAL_EXPECTED_RESOURCE_CONFIG = None
+FINAL_EXPECTED_CAPACITY = None
+FINAL_FIXTURE_CLOSURE_REFERENCE = None
+FINAL_EFFECT_DECISION_REFERENCE = None
+FINAL_EFFECT_DECISION = None
+FINAL_ADMITTED_IO_PLAN_REFERENCE = None
+FINAL_ADDITIONAL_IMPORT_ROOTS = []
+SELECTED_TEST_MODULES = {'tests/integration/logic/backends/test_kernel_backends.py': 'tests.integration.logic.backends.test_kernel_backends'}
+MAINTAINED_OWNER_NAMES = ['ipfs_datasets_py.logic.backends.kernel.lean', 'ipfs_datasets_py.logic.backends.kernel.rocq', 'ipfs_datasets_py.logic.backends.kernel.wasm', 'ipfs_datasets_py.logic.backends.process', 'ipfs_datasets_py.logic.backends.results', 'ipfs_datasets_py.logic.ir_core.claims', 'ipfs_datasets_py.logic.ir_core.protocols', 'ipfs_datasets_py.logic.families.models', 'ipfs_datasets_py.logic.backends.resource_admission', 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler']
+SELECTION = {'function_selectors': ['tests/integration/logic/backends/test_kernel_backends.py::test_lean_verified_proof_binds_full_kernel_receipt', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_sorry_is_rejected_and_never_proved', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_sorry_can_explicitly_downgrade_authority', 'tests/integration/logic/backends/test_kernel_backends.py::test_unavailable_lean_kernel_never_passes', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_wasm_plane_is_probe_only_and_not_confused_with_native_success', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_binds_expected_goal_policy_and_round_trips_strictly', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_source_only_compilation_cannot_prove_an_opaque_request_obligation', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_precancelled_request_runs_no_identity_or_proof_callbacks', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_inconsistent_evidence', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_fields_from_another_request', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_malformed_or_failed_exit_status_cannot_establish_proof', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_preserves_default_and_supported_requested_backend_aliases', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_non_theorem_request_after_complete_rebind', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_recursion_exhausted_json_diagnostics_fail_closed', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_json_reader_skips_recursion_exhausted_records', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_json_decoder_normalizes_recursion_exhaustion_to_invalid_json', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_json_reader_preserves_ordinary_nested_diagnostic_metadata', 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_rejects_non_text_dependency_report_severity'], 'expected_function_case_counts': {'tests/integration/logic/backends/test_kernel_backends.py::test_lean_verified_proof_binds_full_kernel_receipt': 1, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_sorry_is_rejected_and_never_proved': 1, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_sorry_can_explicitly_downgrade_authority': 1, 'tests/integration/logic/backends/test_kernel_backends.py::test_unavailable_lean_kernel_never_passes': 1, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_wasm_plane_is_probe_only_and_not_confused_with_native_success': 1, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_binds_expected_goal_policy_and_round_trips_strictly': 1, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id': 21, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_source_only_compilation_cannot_prove_an_opaque_request_obligation': 1, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations': 16, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_precancelled_request_runs_no_identity_or_proof_callbacks': 1, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued': 12, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_inconsistent_evidence': 6, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_fields_from_another_request': 3, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_malformed_or_failed_exit_status_cannot_establish_proof': 6, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status': 2, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload': 7, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind': 3, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_preserves_default_and_supported_requested_backend_aliases': 4, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_non_theorem_request_after_complete_rebind': 4, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_recursion_exhausted_json_diagnostics_fail_closed': 2, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_json_reader_skips_recursion_exhausted_records': 1, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_json_decoder_normalizes_recursion_exhaustion_to_invalid_json': 1, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_json_reader_preserves_ordinary_nested_diagnostic_metadata': 1, 'tests/integration/logic/backends/test_kernel_backends.py::test_lean_rejects_non_text_dependency_report_severity': 2}, 'function_count': 24, 'literal_expected_cases': 99, 'owning_files': ['tests/integration/logic/backends/test_kernel_backends.py'], 'actual_COLLECT_is_count_and_order_authority': True, 'actual_collection_order': None, 'actual_expanded_node_ids': None}
+EXPECTED_BRIDGE27_CASE_VECTOR = (1, 1, 1, 1, 1, 1, 21, 1, 16, 1, 12, 6, 3, 6, 2, 7, 3, 4, 4, 2, 1, 1, 1, 2)
+if any(value is None for value in (ROOT_SELECTION,ROOT_RUNTIME_SELECTION,SELECTED_TEST_REWRITE_POLICY,FINAL_OUTPUT_PATH,FINAL_D_ROOT,FINAL_D_HEAD,FINAL_D_TREE,FINAL_A_ROOT,FINAL_A_HEAD,FINAL_A_TREE,D_READ_BINDING_REFERENCE,D_READ_BINDING_ABI,FINAL_BINDING_MANIFEST_REFERENCE,FINAL_BINDING_MANIFEST,FINAL_MODULE_BINDINGS,FINAL_D_PROVENANCE,FINAL_A_PROVENANCE,FINAL_SOURCE_PROJECTS,FINAL_SDK_BINDINGS,FINAL_RESOURCE_STATE_PATH,FINAL_EXPECTED_RESOURCE_CONFIG,FINAL_EXPECTED_CAPACITY,FINAL_FIXTURE_CLOSURE_REFERENCE,FINAL_EFFECT_DECISION_REFERENCE,FINAL_EFFECT_DECISION,FINAL_ADMITTED_IO_PLAN_REFERENCE,FINAL_ADDITIONAL_IMPORT_ROOTS,SELECTED_TEST_MODULES,MAINTAINED_OWNER_NAMES,SELECTION,)):
+    raise RuntimeError('INERT D27: current D/A Git READ bindings, fixture-effect decision, IO and Root authority remain NULL')
+PREP = '/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics'
+ROOT=Path(FINAL_D_ROOT); ADDITIONAL_A_ROOT=Path(FINAL_A_ROOT); RUN_OUTPUT=Path(FINAL_OUTPUT_PATH)
+PY='/home/barberb/.local/bin/python'
+PATH_SCOPE='/home/barberb/.local/bin:/usr/lib/git-core'
+STATE=Path(FINAL_RESOURCE_STATE_PATH)
+H=lambda raw:hashlib.sha256(raw).hexdigest()
+fields=('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
+f9=lambda info:{key:str(getattr(info,key))for key in fields}
+
+def read_private(path,size,digest):
+ path=Path(path);before=path.lstat();assert stat.S_ISREG(before.st_mode)and before.st_nlink==1
+ fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW)
+ try:
+  assert f9(before)==f9(os.fstat(fd));raw=bytearray()
+  while piece:=os.read(fd,1024**2):
+   raw.extend(piece);assert len(raw)<=size
+  assert f9(before)==f9(os.fstat(fd))==f9(path.lstat())
+ finally:os.close(fd)
+ raw=bytes(raw);assert len(raw)==size and H(raw)==digest,str(path)
+ return raw
+
+def validate_runtime_authority(authority, expected_authority, now_utc_ns):
+    keys={'schema','root_selection','launch_not_before_utc_ns','launch_deadline_utc_ns'}
+    for value in (authority,expected_authority):
+        if type(value) is not dict or set(value)!=keys or value['schema']!='Root-selected-normal-HOME-rescue-launch-authority/v1':
+            raise RuntimeError('closed Root runtime authority required')
+        reference=value['root_selection']
+        if type(reference) is not dict or set(reference)!={'path','bytes','sha256'}:
+            raise RuntimeError('one exact immutable Root selection reference required')
+        if type(reference['path']) is not str or not Path(reference['path']).is_absolute() or type(reference['bytes']) is not int or reference['bytes']<=0 or type(reference['sha256']) is not str or len(reference['sha256'])!=64 or any(c not in '0123456789abcdef' for c in reference['sha256']):
+            raise RuntimeError('invalid immutable Root selection reference')
+        start=value['launch_not_before_utc_ns'];deadline=value['launch_deadline_utc_ns']
+        if type(start) is not int or type(deadline) is not int or not 0<start<deadline:
+            raise RuntimeError('finite exact UTC nanosecond launch window required')
+    if authority!=expected_authority:
+        raise RuntimeError('Root runtime authority mismatch, including selection and clock')
+    if type(now_utc_ns) is not int or not authority['launch_not_before_utc_ns']<=now_utc_ns<authority['launch_deadline_utc_ns']:
+        raise RuntimeError('Root launch clock outside selected window')
+    return authority
+
+validate_runtime_authority(ROOT_RUNTIME_SELECTION,ROOT_RUNTIME_SELECTION,time.time_ns())
+assert ROOT_SELECTION==ROOT_RUNTIME_SELECTION['root_selection']
+assert ROOT.is_absolute() and ADDITIONAL_A_ROOT.is_absolute() and ROOT!=ADDITIONAL_A_ROOT
+assert all(type(v)is str and len(v)==40 and all(c in '0123456789abcdef'for c in v)for v in (FINAL_D_HEAD,FINAL_D_TREE,FINAL_A_HEAD,FINAL_A_TREE))
+BOOTSTRAP_REFERENCE = None
+_BOOTSTRAP_RAW=read_private(BOOTSTRAP_REFERENCE['path'],BOOTSTRAP_REFERENCE['bytes'],BOOTSTRAP_REFERENCE['sha256'])
+_BT=ast.parse(_BOOTSTRAP_RAW,filename=BOOTSTRAP_REFERENCE['path'])
+for _literal_name,_expected in (('ROOT_RUNTIME_SELECTION',ROOT_RUNTIME_SELECTION),('SELECTED_TEST_REWRITE_POLICY',SELECTED_TEST_REWRITE_POLICY)):
+ _matches=[n for n in _BT.body if isinstance(n,ast.Assign)and any(isinstance(t,ast.Name)and t.id==_literal_name for t in n.targets)]
+ assert len(_matches)==1 and ast.literal_eval(_matches[0].value)==_expected
+assert type(D_READ_BINDING_REFERENCE)is dict and set(D_READ_BINDING_REFERENCE)=={'path','bytes','sha256'}
+if len(sys.argv)!=4 or not sys.argv[2].isdigit()or not 0<int(sys.argv[2])<=65536 or len(sys.argv[3])!=64 or any(c not in '0123456789abcdef'for c in sys.argv[3]):
+ raise ValueError('existing ordinary entry requires exact bounded D READ binding path/bytes/SHA')
+ACTUAL_BINDING_REFERENCE=dict(path=sys.argv[1],bytes=int(sys.argv[2]),sha256=sys.argv[3])
+assert ACTUAL_BINDING_REFERENCE==D_READ_BINDING_REFERENCE
+actual_binding=json.loads(read_private(D_READ_BINDING_REFERENCE['path'],D_READ_BINDING_REFERENCE['bytes'],D_READ_BINDING_REFERENCE['sha256']))
+_abi=D_READ_BINDING_ABI
+assert type(_abi)is dict and set(_abi)=={'schema','required_true_keys','outer_epoch_key','outer_count_key','python_epoch_key','python_count_key','protected_index_key'}
+assert type(_abi['required_true_keys'])is list and 'Root_selected'in _abi['required_true_keys'] and all(type(k)is str and 'WRITE'not in k.upper()for k in _abi['required_true_keys'])
+assert actual_binding['schema']==_abi['schema']and all(actual_binding[k]is True for k in _abi['required_true_keys'])
+epoch_ref=actual_binding[_abi['outer_epoch_key']]
+epoch_raw=read_private(epoch_ref['path'],epoch_ref['bytes'],epoch_ref['sha256'])
+EPOCH=json.loads(epoch_raw);assert type(EPOCH)is list and len(EPOCH)==actual_binding[_abi['outer_count_key']]and 0<len(EPOCH)<=10000
+python_ref=actual_binding[_abi['python_epoch_key']]
+python_rows=json.loads(read_private(python_ref['path'],python_ref['bytes'],python_ref['sha256']))
+assert type(python_rows)is list and len(python_rows)==actual_binding[_abi['python_count_key']]and 0<len(python_rows)<=len(EPOCH)
+outer_rows={r['path']:r for r in EPOCH};assert len(outer_rows)==len(EPOCH)and len({r['path']for r in python_rows})==len(python_rows)and all(outer_rows[r['path']]==r for r in python_rows)
+EVIDENCE=actual_binding[_abi['protected_index_key']]
+assert type(EVIDENCE)is dict and type(EVIDENCE['sha256'])is str and len(EVIDENCE['sha256'])==64 and all(c in '0123456789abcdef'for c in EVIDENCE['sha256'])and Path(EVIDENCE['path']).is_absolute()and type(EVIDENCE['bytes'])is int and EVIDENCE['bytes']>0 and int(EVIDENCE['full9']['st_size'])==EVIDENCE['bytes']
+manifest=json.loads(read_private(FINAL_BINDING_MANIFEST_REFERENCE['path'],FINAL_BINDING_MANIFEST_REFERENCE['bytes'],FINAL_BINDING_MANIFEST_REFERENCE['sha256']))
+assert manifest==FINAL_BINDING_MANIFEST and manifest['Root_selected']is True and manifest['frozen_Git_candidates']is True and manifest['Source_WRITE_claimed']is False
+for name,want in (('D_provenance',FINAL_D_PROVENANCE),('A_provenance',FINAL_A_PROVENANCE),('modules',FINAL_MODULE_BINDINGS),('source_read_binding_reference',D_READ_BINDING_REFERENCE),('fixture_closure_reference',FINAL_FIXTURE_CLOSURE_REFERENCE),('effect_decision_reference',FINAL_EFFECT_DECISION_REFERENCE),('admitted_io_plan_reference',FINAL_ADMITTED_IO_PLAN_REFERENCE)):
+ assert manifest[name]==want
+assert FINAL_D_PROVENANCE['root']==str(ROOT)and FINAL_D_PROVENANCE['HEAD']==FINAL_D_HEAD and FINAL_D_PROVENANCE['tree']==FINAL_D_TREE
+assert FINAL_A_PROVENANCE['root']==str(ADDITIONAL_A_ROOT)and FINAL_A_PROVENANCE['HEAD']==FINAL_A_HEAD and FINAL_A_PROVENANCE['tree']==FINAL_A_TREE
+PROJECTS=FINAL_SOURCE_PROJECTS
+assert manifest['projects']==PROJECTS and {str(ROOT),str(ADDITIONAL_A_ROOT)}<={p['root']for p in PROJECTS}
+assert next(p for p in PROJECTS if p['root']==str(ROOT))['Git_HEAD']==FINAL_D_HEAD
+assert next(p for p in PROJECTS if p['root']==str(ADDITIONAL_A_ROOT))['Git_HEAD']==FINAL_A_HEAD
+fixture=json.loads(read_private(FINAL_FIXTURE_CLOSURE_REFERENCE['path'],FINAL_FIXTURE_CLOSURE_REFERENCE['bytes'],FINAL_FIXTURE_CLOSURE_REFERENCE['sha256']))
+for row in fixture['required_fixture_closure']:
+ physical=outer_rows[row['path']];assert all(physical[k]==row[k]for k in ('path','bytes','sha256','full9'))
+REQUIRED_CONFTESTS=fixture['required_normal_conftests']
+assert type(REQUIRED_CONFTESTS)is list and all(type(p)is str and p in outer_rows for p in REQUIRED_CONFTESTS)
+assert type(fixture['pytest_inifile'])is str and fixture['pytest_inifile']in outer_rows
+_effect=json.loads(read_private(FINAL_EFFECT_DECISION_REFERENCE['path'],FINAL_EFFECT_DECISION_REFERENCE['bytes'],FINAL_EFFECT_DECISION_REFERENCE['sha256']))
+assert _effect==FINAL_EFFECT_DECISION and _effect['Root_selected']is True and _effect['ordinary_SDK_execution_selected']is True
+read_private(FINAL_ADMITTED_IO_PLAN_REFERENCE['path'],FINAL_ADMITTED_IO_PLAN_REFERENCE['bytes'],FINAL_ADMITTED_IO_PLAN_REFERENCE['sha256'])
+assert type(SELECTION)is dict and SELECTION['function_count']==24 and SELECTION['literal_expected_cases']==99
+_selectors=SELECTION['function_selectors'];_counts=SELECTION['expected_function_case_counts']
+assert type(_selectors)is list and len(_selectors)==len(set(_selectors))==24 and all(type(n)is str and '::'in n and '['not in n for n in _selectors)
+assert type(_counts)is dict and set(_counts)==set(_selectors)and all(type(n)is int for n in _counts.values())and tuple(_counts[n]for n in _selectors)==EXPECTED_BRIDGE27_CASE_VECTOR and sum(_counts.values())==99
+OWNING_FILES=SELECTION['owning_files']
+assert type(OWNING_FILES)is list and len(OWNING_FILES)==len(set(OWNING_FILES))and set(OWNING_FILES)=={n.split('::',1)[0]for n in _selectors}
+assert type(SELECTED_TEST_MODULES)is dict and set(SELECTED_TEST_MODULES)==set(OWNING_FILES)
+assert type(MAINTAINED_OWNER_NAMES)is list and MAINTAINED_OWNER_NAMES and len(MAINTAINED_OWNER_NAMES)==len(set(MAINTAINED_OWNER_NAMES))
+assert not set(MAINTAINED_OWNER_NAMES).intersection(SELECTED_TEST_MODULES.values())
+assert set(FINAL_MODULE_BINDINGS)==set(MAINTAINED_OWNER_NAMES)|set(SELECTED_TEST_MODULES.values())
+EXPECTED_MODULES={}
+for name,row in FINAL_MODULE_BINDINGS.items():
+ relative=row['relative_path'];assert type(relative)is str and not Path(relative).is_absolute()and '..'not in Path(relative).parts
+ physical=outer_rows[str(ROOT/relative)]
+ assert all(physical[k]==row[k]for k in ('bytes','sha256','full9'))
+ assert set(row['full9'])==set(fields)and all(type(v)is str and v.isdigit()for v in row['full9'].values())
+ EXPECTED_MODULES[name]=dict(row,scope='frozen_git_D_source')
+assert {name:FINAL_MODULE_BINDINGS[name]['relative_path']for name in SELECTED_TEST_MODULES.values()}=={name:relative for relative,name in SELECTED_TEST_MODULES.items()}
+assert SELECTED_TEST_REWRITE_POLICY['selected_test_binding_names']==list(SELECTED_TEST_MODULES.values())
+EXPECTED_CONFIG=FINAL_EXPECTED_RESOURCE_CONFIG;EXPECTED_CAPACITY=FINAL_EXPECTED_CAPACITY
+ABSENT_PATHS = None
+source42={'bytes': 10375, 'encoding': 'zlib+base64', 'path': '/tmp/legal-ir-phase2-reviewed-admission-source-20261108-v01/resource-census-compatible-port-v01/runtime-owner-v4-trainer-compatibility-v01/current-published-cleanup71-original16MiB-input-v01/original42-frozen.py', 'raw_zlib_base64': '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', 'sha256': '42e9f07d0d458177079269d9f495f0b70512180c1adc2f7fe0bfdb05518a12f9'}
+source_raw=zlib.decompress(base64.b64decode(source42['raw_zlib_base64']))
+assert len(source_raw)==source42['bytes']and H(source_raw)==source42['sha256']
+FACTORY_REFERENCE = {'path': '/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/existing-ordinary99-factory.INERT.py.DATA', 'bytes': 3100, 'sha256': '3ae9f868b6a902816c38ac121939844d400348a9964e6dfbbcc290953e0ae5ee'}
+substitution=read_private(FACTORY_REFERENCE['path'],FACTORY_REFERENCE['bytes'],FACTORY_REFERENCE['sha256'])
+exec(compile(substitution,FACTORY_REFERENCE['path'],'exec'),globals())
+assert not RUN_OUTPUT.exists(),'fresh selected output required'
+RUN_OUTPUT.mkdir(mode=0o700);PARENT_HOME=RUN_OUTPUT/'parent-home';PARENT_HOME.mkdir(mode=0o700)
+FLAGS={'HF_HUB_OFFLINE': '1', 'IPFS_ACCELERATE_PYTEST_SEAL_DUCKDB': 'pytest_ast_seal.duckdb', 'IPFS_ACCEL_AUTO_INSTALL': '0', 'IPFS_ACCEL_RUN_INTEGRATION_TESTS': '0', 'IPFS_ACCEL_RUN_INTEGRATION_TESTS_SIMULATED': '0', 'IPFS_ACCEL_SKIP_CORE': '1', 'IPFS_DATASETS_AUTO_INSTALL_TEST_DEPS': '0', 'IPFS_DATASETS_PY_LAZY_INSTALL_ERGOAI': '0', 'IPFS_DATASETS_PY_MINIMAL_IMPORTS': '1', 'IPFS_TEST_PROOF_REUSE_AUTO_INSTALL': '0', 'PYTEST_DISABLE_PLUGIN_AUTOLOAD': '1', 'PYTHONDONTWRITEBYTECODE': '1', 'PYTHONPATH': None, 'PYTHONUSERBASE': '/home/barberb/.local', 'RUN_HEAVY_TESTS': '0', 'RUN_LLM_TESTS': '0', 'RUN_LONG_TESTS': '0', 'RUN_NETWORK_TESTS': '0', 'TRANSFORMERS_OFFLINE': '1', 'GIT_CONFIG_GLOBAL': '/dev/null', 'GIT_CONFIG_NOSYSTEM': '1', 'BLIS_NUM_THREADS': '1', 'CUDA_VISIBLE_DEVICES': '', 'MKL_NUM_THREADS': '1', 'NUMEXPR_NUM_THREADS': '1', 'OMP_NUM_THREADS': '1', 'OMP_THREAD_LIMIT': '1', 'OPENBLAS_NUM_THREADS': '1', 'TOKENIZERS_PARALLELISM': 'false', 'VECLIB_MAXIMUM_THREADS': '1'}
+FLAGS['PYTHONPATH']=os.pathsep.join([str(ROOT),str(ADDITIONAL_A_ROOT),*FINAL_ADDITIONAL_IMPORT_ROOTS,'/home/barberb/.local/lib/python3.12/site-packages'])
+assert '/home/barberb/lift_coding/external/ipfs_accelerate'not in FLAGS['PYTHONPATH'].split(os.pathsep)
+os.environ.clear();os.environ.update({'PATH':PATH_SCOPE,'LANG':'C.UTF-8','HOME':str(PARENT_HOME),'XDG_CONFIG_HOME':str(PARENT_HOME/'xdg-config'),'XDG_CACHE_HOME':str(PARENT_HOME/'xdg-cache'),'XDG_DATA_HOME':str(PARENT_HOME/'xdg-data'),'GH_CONFIG_DIR':str(PARENT_HOME/'gh-config'),'GIT_CONFIG_GLOBAL':'/dev/null','GIT_CONFIG_NOSYSTEM':'1'});os.environ.update(FLAGS);sys.dont_write_bytecode=True
+source=types.ModuleType('selected_focused31_existing_source42_owner');source.__file__=source42['path'];sys.modules[source.__name__]=source
+exec(compile(source_raw,source42['path'],'exec'),source.__dict__)
+report={'schema':'actual-frozen-local-D-phase1-lean-json-diagnostics-99-existing-owner/v1','selection':ROOT_SELECTION,'phase_order':[],'phases':{},'errors':[],'software_sequence_accepted':False,'qualification_complete':False,'resource_cleanup_confirmed':False,'Source_closed':False,'canonical_Source_application':False,'frozen_D_Git_READ_application':True,'Source_WRITE_claimed':False,'actual_collected_roster_is_count_authority':True,'case_count_hint':99,'statutory_or_modelquality_or_convergence_authority':False}
+report.update(git_candidate_provenance=FINAL_D_PROVENANCE,additional_A_provenance=FINAL_A_PROVENANCE,binding_manifest_reference=FINAL_BINDING_MANIFEST_REFERENCE,source_read_binding_reference=D_READ_BINDING_REFERENCE,admitted_io_plan_reference=FINAL_ADMITTED_IO_PLAN_REFERENCE,effect_decision_reference=FINAL_EFFECT_DECISION_REFERENCE,source_epoch_sha256=H(epoch_raw),source_epoch_records=len(EPOCH),request_substitution_sha256=H(substitution),actual_expected_modules=EXPECTED_MODULES)
+
+
+def metadata_guard():
+    for path in ABSENT_PATHS:
+        assert not os.path.lexists(path), ('declared namespace absence changed', path)
+    out = []
+    for row in EPOCH:
+        p = Path(row['path'])
+        a = os.lstat(p)
+        assert stat.S_ISREG(a.st_mode) and a.st_nlink == 1
+        fd = os.open(p, os.O_RDONLY | os.O_NOFOLLOW)
+        try:
+            assert f9(a) == f9(os.fstat(fd)) == f9(os.lstat(p)) == row['full9'], ('source metadata drift', str(p))
+        finally:
+            os.close(fd)
+        out.append({'path': str(p), 'bytes': row['bytes'], 'sha256': row['sha256'], 'full9': f9(a)})
+    heads = {}
+    for project in PROJECTS:
+        git = subprocess.run(['/usr/bin/git', '-C', project['root'], 'rev-parse', 'HEAD'], capture_output=True, text=True, timeout=10, check=True).stdout.strip()
+        assert git == project['Git_HEAD'], ('Git HEAD drift', project['root'])
+        heads[project['root']] = git
+    p = Path(EVIDENCE['path'])
+    a = os.lstat(p)
+    assert stat.S_ISREG(a.st_mode) and a.st_nlink == 1
+    fd = os.open(p, os.O_RDONLY | os.O_NOFOLLOW)
+    try:
+        assert f9(a) == f9(os.fstat(fd)) == f9(os.lstat(p)) == EVIDENCE['full9'], 'protected canonical evidence metadata changed'
+    finally:
+        os.close(fd)
+    return {'Git_HEADS': heads, 'records': out, 'protected_evidence': {'path': str(p), 'full9': f9(a)}, 'Source_body_read_bytes': 0, 'all_FDs_closed': True}
+
+
+def genuine(result):
+    d = result.to_dict()
+    assert not any((d[k] for k in ('timed_out', 'cancelled', 'unavailable', 'output_truncated', 'workspace_limit_exceeded', 'resource_exhausted'))), d
+    assert d['workspace_cleaned'] and (not d['error']), d
+    assert d.get('native_lifecycle', {}).get('cleanup_confirmed') is True, d
+    return d
+
+
+def observe_state():
+    for attempt in range(5):
+        before = STATE.lstat()
+        assert stat.S_ISREG(before.st_mode) and before.st_size < 65536
+        fd = os.open(STATE, os.O_RDONLY | os.O_NOFOLLOW)
+        try:
+            opened = os.fstat(fd)
+            raw = os.read(fd, 65537)
+            end = os.fstat(fd)
+        finally:
+            os.close(fd)
+        after = STATE.lstat()
+        if f9(before) == f9(opened) == f9(end) == f9(after) and len(raw) == before.st_size:
+            return {'full9': f9(after), 'bytes': len(raw), 'sha256': H(raw), 'state': json.loads(raw)}
+    raise RuntimeError('bounded resource snapshot identity changed')
+
+
+def run_phase_with_actual_custody(phase_name, request):
+    try:
+        result = runner.run(request)
+    except BaseException as error:
+        handle = error.cleanup_handle if type(error) is sdk.OwnedToolCleanupError else None
+        report['owned_cleanup_pending'] = {'owner': 'existing SDK ordinary owned-process cleanup', 'SDK_returned_result': False, 'observations': [], 'attempts': 0, 'original_error_type': type(error).__name__}
+        current = error.__traceback__
+        while current is not None:
+            if current.tb_frame.f_code is sdk.BoundedToolRunner.run.__code__:
+                value = current.tb_frame.f_locals.get('result')
+                if type(value) is sdk.ToolRunResult:
+                    retain_phase_result(phase_name, value, returned=False)
+                    report['owned_cleanup_pending']['SDK_result_origin'] = 'actual SDK run traceback local before error; not a successful return'
+                candidate = current.tb_frame.f_locals.get('owned_handle')
+                if handle is None and type(candidate) is sdk.NativeToolCleanupHandle:
+                    handle = candidate
+            current = current.tb_next
+        if handle is None:
+            report['owned_cleanup_pending']['ambiguous_without_actual_handle'] = True
+            while True:
+                try:
+                    print(json.dumps({'event': 'AMBIGUOUS_ORDINARY_CUSTODY_RETAINED', 'operator_pid': os.getpid(), 'Source_READ_still_held': True, 'new_test_dispatch': False}), flush=True)
+                    time.sleep(5)
+                except BaseException as hold_error:
+                    report['owned_cleanup_pending']['last_hold_error_type'] = type(hold_error).__name__
+        while True:
+            report['owned_cleanup_pending']['attempts'] += 1
+            confirmed = False
+            try:
+                observation = handle.retry_cleanup()
+                row = observation.to_dict()
+                report['owned_cleanup_pending']['observations'] = (report['owned_cleanup_pending']['observations'] + [row])[-32:]
+                confirmed = observation.cleanup_confirmed
+            except BaseException as retry_error:
+                report['owned_cleanup_pending']['last_retry_error_type'] = type(retry_error).__name__
+            if confirmed:
+                report['owned_cleanup_pending']['confirmed_after_error'] = True
+                raise error
+            try:
+                print(json.dumps({'event': 'ACTUAL_ORDINARY_CUSTODY_RETAINED', 'operator_pid': os.getpid(), 'attempts': report['owned_cleanup_pending']['attempts'], 'Source_READ_still_held': True, 'new_test_dispatch': False}), flush=True)
+                time.sleep(1)
+            except BaseException as hold_error:
+                report['owned_cleanup_pending']['last_hold_error_type'] = type(hold_error).__name__
+    retain_phase_result(phase_name, result, returned=True)
+    return result
+
+
+def retain_json(name, value):
+    return retain_bytes(name, (json.dumps(value, sort_keys=True, separators=(',', ':'), default=str) + '\n').encode())
+
+
+def retain_bytes(name, raw):
+    assert type(raw) is bytes and '/' not in name
+    path = RUN_OUTPUT / name
+    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o400)
+    with os.fdopen(fd, 'wb') as stream:
+        stream.write(raw)
+        stream.flush()
+        os.fsync(stream.fileno())
+    return {'path': str(path), 'bytes': len(raw), 'sha256': H(raw)}
+
+
+def retain_phase_result(phase_name, result, *, returned):
+    # Actual raw Mapping values precede checks, decoding and to_dict conversion.
+    from collections.abc import Mapping
+    output_files = result.output_files
+    if not isinstance(output_files, Mapping):
+        raise TypeError('actual SDK output_files Mapping required')
+    entry = report['phases'][phase_name]
+    number = len(entry['actual_results'])
+    refs = []
+    for index, (logical_name, raw) in enumerate(output_files.items()):
+        if type(logical_name) is not str or type(raw) is not bytes:
+            raise TypeError('actual SDK output filename and exact bytes required')
+        refs.append({'logical_name': logical_name, **retain_bytes(f'{phase_name}-result{number}-output{index}.bin', raw)})
+    row = {'SDK_returned_result': returned, 'raw_output_files': refs, 'result': result.to_dict()}
+    entry['actual_results'].append(row)
+    row['durable_result_record'] = retain_json(f'{phase_name}-result{number}-actual-record.json', row)
+
+
+def require_actual_rewrite_witness(row,path,want,witness):
+ assert row['rewritten_test_compiled_SHA_observed']is True and row['rewritten_test_compiled_SHA256']==want['sha256']
+ assert row['actual_rewrite_witness']==witness and witness['schema']=='actual-selected-test-source-AST-code-witness/v1'
+ assert witness['path']==witness['code_filename']==path and witness['source_bytes']==want['bytes']and witness['source_sha256']==witness['compile_source_sha256']==want['sha256']and witness['compile_source_full9']==want['full9']
+ assert all(witness[k]is True for k in ('source_to_AST_observed','AST_to_code_observed','returned_code_identity_matches','code_execution_observed'))
+ assert witness['source_before']==witness['source_after']=={'path':path,'bytes':want['bytes'],'sha256':want['sha256'],'full9':want['full9'],'stable_FD_path_before_after':True}
+ assert witness['cache_policy']=='bypass-read-only-for-selected-owning-test'and type(witness['selected_cache_reads_bypassed'])is int and witness['selected_cache_reads_bypassed']>=1
+ digest=witness['code_sha256'];assert type(digest)is str and len(digest)==64 and all(c in'0123456789abcdef'for c in digest)
+ return True
+
+
+def binding_for(phase_name,request,result):
+    raw=result.output_files.get('binding.json')
+    if raw is None:
+        report['phases'][phase_name]['missing_required_output']='binding.json'
+        raise RuntimeError('actual SDK result lacks binding.json; original outputs and custody retained')
+    binding=json.loads(raw);report['phases'][phase_name]['actual_binding']=binding
+    expected_request=json.loads(request.input_files['request.json'])
+    assert binding['schema']=='published-D-phase2-bridge27-binding/v1' and binding['canonical_application']is False and binding['frozen_D_Git_READ_application']is True and binding['Source_WRITE_claimed']is False
+    assert binding['actual_bootstrap_execution']is True and binding['phase']==expected_request['phase']and binding['operation']==expected_request['operation']
+    assert binding['collection_accepted']is True and binding['pytest_exit_code']==result.returncode
+    assert binding['normal_Source_loader_restored']is True and binding['normal_pytest_rewrite_observer_restored']is True
+    for field in ('git_candidate_provenance','additional_A_provenance','binding_manifest_reference','source_read_binding_reference','admitted_io_plan_reference','effect_decision_reference'):
+        assert binding[field]==expected_request[field]
+    for label in ('initial_body_bindings','loaded_bindings','collection_module_bindings','closing_module_bindings'):
+        rows=binding[label];byname={r['name']:r for r in rows}
+        assert len(rows)==len(byname)==len(EXPECTED_MODULES)and set(byname)==set(EXPECTED_MODULES)
+        for name,want in EXPECTED_MODULES.items():
+            row=byname[name];assert row['scope']=='frozen_git_D_source'and(row['path'],row['bytes'],row['sha256'],row['full9'])==(str(ROOT/want['relative_path']),want['bytes'],want['sha256'],want['full9'])
+    origins=binding['actual_maintained_owner_origins'];assert set(origins)==set(MAINTAINED_OWNER_NAMES)
+    for name in MAINTAINED_OWNER_NAMES:
+        row=origins[name];want=EXPECTED_MODULES[name];assert row['path']==row['spec_origin']==str(ROOT/want['relative_path'])and row['compiled_SHA256']==want['sha256']
+    test_paths={str(ROOT/relative):EXPECTED_MODULES[name]for relative,name in SELECTED_TEST_MODULES.items()}
+    assert set(binding['actual_test_module_origins'])==set(binding['actual_test_rewrite_source_to_code'])==set(test_paths)
+    for path,want in test_paths.items():
+        row=binding['actual_test_module_origins'][path];require_actual_rewrite_witness(row,path,want,binding['actual_test_rewrite_source_to_code'][path])
+        assert row['path']==row['spec_origin']==path and row['source_sha256']==want['sha256']and row['source_full9']==want['full9']
+    roster=binding['actual_collected_roster'];assert type(roster)is list and len(roster)==len(set(roster))==99 and all(type(n)is str and n.split('::',1)[0]in OWNING_FILES for n in roster)
+    assert binding['selection_group']==expected_request['selection_group']=='phase1-lean-json-diagnostics-99'
+    counts={}
+    for node in roster:
+        base=node.split('[',1)[0];counts[base]=counts.get(base,0)+1
+    assert counts==binding['actual_function_case_counts']==SELECTION['expected_function_case_counts']
+    assert tuple(counts[n]for n in SELECTION['function_selectors'])==EXPECTED_BRIDGE27_CASE_VECTOR
+    if expected_request['operation']=='run':assert roster==expected_request['actual_collected_roster']
+    items=binding['actual_test_item_origins'];assert [r['nodeid']for r in items]==roster
+    for row in items:
+        path=row['path'];want=test_paths[path];require_actual_rewrite_witness(row,path,want,binding['actual_test_rewrite_source_to_code'][path])
+        assert row['module_origin']==row['spec_origin']==row['item_code_filename']==path
+    assert set(binding['actual_conftest_paths'])==set(REQUIRED_CONFTESTS)and binding['actual_inifile']==fixture['pytest_inifile']
+    config_paths={fixture['pytest_inifile'],*REQUIRED_CONFTESTS}
+    for stage in ('initial_configuration_bindings','collection_configuration_bindings','closing_configuration_bindings'):
+        actual=binding[stage];observed={r['path']:r for r in actual}
+        assert len(actual)==len(observed)==len(config_paths)and set(observed)==config_paths
+        for path,row in observed.items():
+            assert all(row[k]==outer_rows[path][k]for k in ('path','bytes','sha256','full9'))and row['stable_FD_path_before_after']is True
+    assert set(binding['actual_compiled_current_Source'])<=set(outer_rows)and all(outer_rows[p]['sha256']==h for p,h in binding['actual_compiled_current_Source'].items())
+    return binding
+
+
+def reconcile_junit(phase_name, result, roster):
+    raw = result.output_files.get('junit.xml')
+    if raw is None:
+        report['phases'][phase_name]['missing_required_output']='junit.xml'
+        raise RuntimeError('actual SDK result lacks junit.xml; retained resource flags/results determine failure')
+    entry = report['phases'][phase_name]
+    try:
+        xml = ET.fromstring(raw)
+        cases = []
+        for case in xml.iter('testcase'):
+            cases.append({'classname': case.get('classname'), 'name': case.get('name'),
+                'failures': [{'type': item.get('type'), 'message': item.get('message'), 'text': item.text} for item in case.findall('failure')],
+                'errors': [{'type': item.get('type'), 'message': item.get('message'), 'text': item.text} for item in case.findall('error')],
+                'skipped': [{'type': item.get('type'), 'message': item.get('message'), 'text': item.text} for item in case.findall('skipped')]})
+        actual_pairs = [(case['classname'], case['name']) for case in cases]
+        expected_pairs = []
+        for node in roster:
+            owner_key, case_name = node.rsplit('::', 1)
+            filename, *class_names = owner_key.split('::')
+            expected_pairs.append(('.'.join([filename[:-3].replace('/', '.'), *class_names]), case_name))
+        missing = sorted(set(expected_pairs) - set(actual_pairs))
+        extra = sorted(set(actual_pairs) - set(expected_pairs), key=repr)
+        duplicates = sorted({pair for pair in actual_pairs if actual_pairs.count(pair) > 1}, key=repr)
+        summary = {'cases': cases, 'tests': len(cases), 'failures': sum(len(case['failures']) for case in cases),
+            'errors': sum(len(case['errors']) for case in cases), 'skipped': sum(len(case['skipped']) for case in cases),
+            'passed': sum(not (case['failures'] or case['errors'] or case['skipped']) for case in cases),
+            'missing_pairs': missing, 'unexpected_pairs': extra, 'duplicate_pairs': duplicates,
+            'actual_raw_junit_bytes': len(raw), 'actual_raw_junit_sha256': H(raw)}
+        entry['junit'] = summary
+    except BaseException as error:
+        entry['junit_parse_error'] = {'type': type(error).__name__, 'message': str(error), 'traceback': traceback.format_exc()}
+        raise
+    assert len(cases) == len(roster) and not missing and not extra and not duplicates
+    return summary
+
+
+def execute_phase(phase, operation, roster=None, *, group):
+    name = group + '-' + operation
+    entry = {'phase': phase, 'operation': operation, 'selection_group':group, 'actual_results': [], 'accepted': False, 'error': None}
+    report['phases'][name] = entry
+    report['phase_order'].append(name)
+    validate_runtime_authority(ROOT_RUNTIME_SELECTION,ROOT_RUNTIME_SELECTION,time.time_ns())
+    request = continuation_request(phase, operation, roster, group=group)
+    expected_count=None if operation=='collect'else len(roster)
+    entry['request'] = {'argv': list(request.argv), 'limits': dataclasses.asdict(request.limits),
+        'output_paths': list(request.output_paths), 'input_file_manifest': [{'path': key, 'bytes': len(value), 'sha256': H(value)} for key, value in request.input_files.items()]}
+    entry['source_before'] = retain_json(name + '-source-before.json', metadata_guard())
+    try:
+        print(json.dumps({'event': 'ACTUAL_FROZEN_LOCAL_D_PHASE1_ORDINARY99_PHASE_START', 'phase': name, 'operator_pid': os.getpid(), 'parent_lease_id': parent.lease_id}), flush=True)
+        result = run_phase_with_actual_custody(name, request)
+        entry['source_after'] = retain_json(name + '-source-after.json', metadata_guard())
+        # Raw SDK results are already durable; classify actual resource failures before requiring completion outputs.
+        entry['actual_SDK_resource_flags']={key:result.to_dict().get(key) for key in ('returncode','timed_out','cancelled','unavailable','output_truncated','workspace_limit_exceeded','resource_exhausted','workspace_cleaned','error','native_lifecycle')}
+        genuine(result)
+        if result.returncode != 0:
+            entry['primary_actual_phase_failure'] = {'actual_tool_returncode': result.returncode, 'success_binding_checks_skipped': True, 'partial_binding_retained_in_raw_outputs': 'binding.json' in result.output_files, 'raw_stdout_stderr_and_result_already_durable': True}
+            raise RuntimeError('Actual normal pytest phase exited nonzero before success-binding validation: ' + name + ' returncode=' + str(result.returncode))
+        binding = binding_for(name, request, result)
+        actual_roster = binding['actual_collected_roster']
+        junit = reconcile_junit(name, result, actual_roster) if operation == 'run' else None
+        genuine(result)
+        if operation == 'collect':
+            assert result.returncode == 0, ('actual collection/binding infeasibility', name, result.returncode)
+        else:
+            assert result.returncode == 0 and junit['tests'] == junit['passed'] == expected_count
+            assert junit['failures'] == junit['errors'] == junit['skipped'] == 0
+            actual_calls = binding['actual_called_roster']
+            terminal_reports = binding['actual_terminal_call_reports']
+            assert actual_calls == actual_roster and len(actual_calls) == len(set(actual_calls)) == expected_count
+            assert terminal_reports and all(type(row['is_subtest']) is bool and row['nodeid'] in actual_roster and row['outcome'] == 'passed' for row in terminal_reports)
+            parent_reports = [row for row in terminal_reports if not row['is_subtest']]
+            subtest_reports = [row for row in terminal_reports if row['is_subtest']]
+            assert [row['nodeid'] for row in parent_reports] == actual_roster and len(parent_reports) == expected_count
+            entry['terminal_report_accounting'] = dict(unique_actual_test_calls=len(actual_calls), terminal_reports=len(terminal_reports), parent_terminal_reports=len(parent_reports), passing_subtest_reports=len(subtest_reports), all_raw_reports_preserved=True)
+            entry['published_D_bridge_tests_PASS'] = True
+        entry['accepted'] = True
+        return actual_roster
+    except BaseException as error:
+        entry['error'] = {'type': type(error).__name__, 'message': str(error), 'traceback': traceback.format_exc()}
+        if 'source_after' not in entry:
+            try:
+                entry['source_after'] = retain_json(name + '-source-after-error.json', metadata_guard())
+            except BaseException as fence_error:
+                entry['source_after_error'] = {'type': type(fence_error).__name__, 'message': str(fence_error)}
+        raise
+
+
+@contextlib.contextmanager
+def tracked_source_read(project):
+    manager = source.source_lease(project['root'], mode='read', timeout_seconds=30)
+    lease = manager.__enter__()
+    observation = {'root': project['root'], 'entered': True, 'exit_returned': False}
+    report.setdefault('actual_Source_context_closure', []).append(observation)
+    try:
+        yield lease
+    except BaseException:
+        suppressed = manager.__exit__(*sys.exc_info())
+        observation['exit_returned'] = True
+        if not suppressed:
+            raise
+    else:
+        manager.__exit__(None, None, None)
+        observation['exit_returned'] = True
+
+
+parent = None
+try:
+    with contextlib.ExitStack() as stack:
+        leases = [stack.enter_context(tracked_source_read(project)) for project in sorted(PROJECTS, key=lambda row: str(source.canonical_source_root(row['root'])))]
+        report['Source_leases'] = [lease.to_dict() for lease in leases]
+        try:
+            report['source_opening'] = retain_json('source-opening.json', metadata_guard())
+            sys.path[:0] = FLAGS['PYTHONPATH'].split(os.pathsep)
+            sdk = importlib.import_module('ipfs_datasets_py.logic.backends.process')
+            admitted = importlib.import_module('ipfs_datasets_py.logic.backends.resource_admission')
+            resources = importlib.import_module('ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler')
+            assert sdk.ToolRunRequest is admitted.ToolRunRequest and sdk.ToolRunResult is admitted.ToolRunResult
+            assert admitted.GlobalResourceScheduler is resources.GlobalResourceScheduler
+            pins = FINAL_SDK_BINDINGS
+            report['canonical_module_bindings'] = {}
+            for name, (relative, digest) in pins.items():
+                path = ROOT / relative
+                row = next(row for row in EPOCH if row['path'] == str(path))
+                assert Path(sys.modules[name].__file__).resolve() == path.resolve() and row['sha256'] == digest and f9(path.lstat()) == row['full9']
+                report['canonical_module_bindings'][name] = {'path': str(path), 'sha256': digest, 'full9': row['full9']}
+            report['resource_before'] = observe_state()
+            assert report['resource_before']['state']['config'] == EXPECTED_CONFIG
+            assert report['resource_before']['state']['child_process_capacity'] == EXPECTED_CAPACITY
+            config = resources.ResourceSchedulerConfig(state_path=str(STATE), **report['resource_before']['state']['config'])
+            scheduler = resources.get_global_resource_scheduler(config=config)
+            parent = scheduler.try_acquire('validation', cpu_slots=1, memory_mb=4096, child_process_slots=1, requires_gpu=False, gpu_memory_mb=0, unified_memory_mb=0, parent_lease=None, request_id='frozen-local-D-phase1-lean-json-diagnostics-99:once')
+            if parent is None:
+                report['admission_refused'] = True
+                raise RuntimeError('Existing shared validation admission refused; no SDK dispatch or product RED')
+            report['actual_parent_lease'] = parent.to_dict()
+            runner = admitted.ResourceAdmittedToolRunner(parent_lease=parent, cpu_slots=1, child_process_slots=1, base_environment={'PATH': PATH_SCOPE, 'LANG': 'C.UTF-8'}, executable_roots=('/usr/bin', '/home/barberb/.local/bin'))
+            report['explicit_existing_D27_ordinary_budget']={'collect':{'wall_seconds':120,'cpu_seconds':110},'run': {'wall_seconds': 600, 'cpu_seconds': 540},'cpu_slots':1,'child_process_slots':1,'resident_memory_bytes':4294967296,'same_existing_direct_scheduler_no_Daemon_layer':True}
+            roster=execute_phase('frozen-local-D-phase1-lean-json-diagnostics-99','collect',group='phase1-lean-json-diagnostics-99')
+            execute_phase('frozen-local-D-phase1-lean-json-diagnostics-99','run',roster,group='phase1-lean-json-diagnostics-99')
+            report['software_sequence_accepted'] = True
+        finally:
+            if parent is not None:
+                attempt = 0
+                while True:
+                    attempt += 1
+                    try:
+                        snapshot = observe_state()
+                        rows = snapshot['state']['leases']
+                        descendants = {parent.lease_id}
+                        changed = True
+                        while changed:
+                            changed = False
+                            for lease_id, row in rows.items():
+                                if row.get('parent_lease_id') in descendants and lease_id not in descendants:
+                                    descendants.add(lease_id)
+                                    changed = True
+                        assert not descendants.intersection(rows) - {parent.lease_id}, 'actual managed descendants remain; retain own parent and Source custody'
+                        report['resource_before_parent_release'] = snapshot
+                        if not parent.released:
+                            report['actual_parent_release_return'] = parent.release()
+                        snapshot = observe_state()
+                        assert not descendants.intersection(snapshot['state']['leases'])
+                        report['resource_after_parent_release'] = snapshot
+                        report['resource_cleanup_confirmed'] = True
+                        break
+                    except BaseException as cleanup_error:
+                        report['resource_cleanup_last_error'] = {'type': type(cleanup_error).__name__, 'message': str(cleanup_error), 'attempt': attempt}
+                        try:
+                            print(json.dumps({'event': 'ACTUAL_FROZEN_LOCAL_D_PHASE1_ORDINARY99_CUSTODY_RETAINED', 'operator_pid': os.getpid(), 'attempt': attempt, 'Source_READ_held': True}), flush=True)
+                            time.sleep(1)
+                        except BaseException as hold_error:
+                            report['resource_hold_error'] = repr(hold_error)
+            else:
+                report['resource_after_predispatch'] = observe_state()
+                report['resource_cleanup_confirmed'] = True
+            report['source_closing'] = retain_json('source-closing.json', metadata_guard())
+except BaseException as error:
+    report['errors'].append({'type': type(error).__name__, 'message': str(error), 'traceback': traceback.format_exc()})
+    raise
+finally:
+    _finalizer_primary_error = sys.exc_info()[1]
+    _parent_home_cleanup_error = None
+    try:
+        shutil.rmtree(PARENT_HOME)
+    except BaseException as cleanup_error:
+        _parent_home_cleanup_error = cleanup_error
+        report['errors'].append({'stage': 'parent_home_cleanup', 'type': type(cleanup_error).__name__, 'message': str(cleanup_error), 'traceback': traceback.format_exc()})
+    report['Source_closed'] = all((row['exit_returned'] for row in report.get('actual_Source_context_closure', [])))
+    report['qualification_complete'] = report['software_sequence_accepted'] and report['Source_closed'] and report['resource_cleanup_confirmed'] and (not report['errors'])
+    try:
+        ref = retain_json('complete-frozen-local-D-phase1-lean-json-diagnostics-99-existing-owner-report.json', report)
+    except BaseException as final_report_error:
+        report['final_report_retention_error'] = {'type': type(final_report_error).__name__, 'message': str(final_report_error), 'traceback': traceback.format_exc()}
+        if _finalizer_primary_error is None and _parent_home_cleanup_error is None:
+            raise
+    else:
+        try:
+            print(json.dumps({'event': 'ACTUAL_FROZEN_LOCAL_D_PHASE1_ORDINARY99_CLOSED', 'report': ref, 'Source_closed': report['Source_closed'], 'resource_cleanup_confirmed': report['resource_cleanup_confirmed'], 'qualification_complete': report['qualification_complete'], 'errors': report['errors']}, sort_keys=True), flush=True)
+        except BaseException as final_print_error:
+            report['final_report_print_error'] = {'type': type(final_print_error).__name__, 'message': str(final_print_error)}
+            if _finalizer_primary_error is None and _parent_home_cleanup_error is None:
+                raise
+    if _finalizer_primary_error is None and _parent_home_cleanup_error is not None:
+        raise _parent_home_cleanup_error

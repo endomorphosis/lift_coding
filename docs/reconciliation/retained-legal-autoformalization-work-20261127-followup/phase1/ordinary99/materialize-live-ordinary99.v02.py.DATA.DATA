@@ -1,0 +1,229 @@
+import hashlib
+import json
+import os
+from pathlib import Path
+import stat
+import sys
+
+HERE = Path(__file__).resolve().parent
+keys = ('path', 'bytes', 'sha256')
+fields = ('st_dev', 'st_ino', 'st_mode', 'st_nlink', 'st_uid', 'st_gid', 'st_size', 'st_mtime_ns', 'st_ctime_ns')
+def stamp(s):
+    return {k: str(getattr(s, k)) for k in fields}
+def digest(b):
+    return hashlib.sha256(b).hexdigest()
+def read(ref):
+    p = Path(ref['path'])
+    assert p.is_absolute()
+    with os.fdopen(os.open(p, os.O_NOFOLLOW | os.O_RDONLY), 'rb') as f:
+        before = os.fstat(f.fileno())
+        assert stat.S_ISREG(before.st_mode) and before.st_nlink == 1 and before.st_size == ref['bytes']
+        b = f.read(ref['bytes'] + 1)
+        assert stamp(before) == stamp(os.fstat(f.fileno())) == stamp(p.lstat())
+    assert len(b) == ref['bytes'] and digest(b) == ref['sha256']
+    return b
+def load(ref):
+    return json.loads(read(ref))
+def seal(name, value):
+    path = HERE / name
+    raw = (json.dumps(value, sort_keys=True, indent=2) + '\n').encode()
+    with os.fdopen(os.open(path, os.O_CREAT | os.O_NOFOLLOW | os.O_WRONLY | os.O_EXCL, 0o400), 'wb') as f:
+        f.write(raw)
+        f.flush()
+        os.fsync(f.fileno())
+    return dict(path=str(path), bytes=len(raw), sha256=digest(raw))
+
+assert __debug__ and len(sys.argv) == 4
+closed_ref = dict(path=sys.argv[1], bytes=int(sys.argv[2]), sha256=sys.argv[3])
+controls_ref = dict(path=str(HERE/'READY-P1-existing-ordinary99-controls-INERT.json'), bytes=16781,
+    sha256='a10401245bb5ad6c26a84979d7ea62e509eaff917ef2d0bcc30981002ec01241')
+closed, controls = load(closed_ref), load(controls_ref)
+assert closed['terminal_returncode'] == 0 and closed['Source_closed'] is closed['module_closed'] is True
+assert closed['ordinary_phase_qualified'] is closed['Source_WRITE_claimed'] is closed['promotion_selected'] is False
+assert controls['selected_Git_candidate'] is controls['selected_Source'] is controls['selected_root_clock'] is controls['selected_runtime_bindings'] is None
+assert controls['ordinary_result'] is controls['native_result'] is None and controls['cases']==99 and controls['functions']==24
+freeze_ref = closed['exact_local_freeze']
+freeze = load(freeze_ref)
+candidate = load(freeze['candidate'])
+assert candidate['baseline_HEAD'] == controls['expected_D_publish_head']
+base_ref = dict(path=str(HERE/'actual-current-main-fast-forward-V2-independent-base.json'),
+                bytes=2676,sha256='b617595aa001310279a4f84ce4c23fa60512c4cd972112f93bb1e72f304713a2')
+assert freeze['observed_base']==base_ref
+base=load(base_ref)
+assert base['schema']=='observed-current-main-independent-V2-descendant-of-Guide580/v1'
+assert base['observed_base_is_direct_dataset_descendant'] is True and base['git_worktrees_changed'] is False
+assert base['guide_main']['datasets']==controls['expected_D_publish_head']
+assert base['live_main_after']['datasets']==freeze['parent']=='9a89672b4b3d32d6e83fbc29368b40e4cc033612'
+assert base['guide_main']['accelerate']==base['live_main_after']['accelerate']==controls['expected_A_publish_head']
+assert set(base['exact_D_delta'])=={
+    'ipfs_datasets_py/logic/autoformal/legal_norm_content_adjudication_v1.py',
+    'tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py'}
+assert all(base['unchanged_D_git_blobs'][path]==row['before_Gitblob']
+           for path,row in controls['expected_ownership_roles'].items())
+
+assert freeze['terminal_returncode'] == 0 and freeze['pushed'] is False
+assert freeze['isolated_Source_context_closed'] is freeze['local_clean'] is freeze['only_two_D_tree_entries_changed'] is True
+assert freeze['shared_source_or_Git_mutation'] is False
+assert freeze['ordinary_qualified'] is freeze['qualified_native'] is False
+assert len(closed['actual_closed_Source_read_leases'])==2
+assert all(row['mode']=='read' and row['cooperative'] is True for row in closed['actual_closed_Source_read_leases'])
+d_project, a_project = closed['projects']
+D, A = Path(d_project['root']), Path(a_project['root'])
+assert str(D) == freeze['root'] == controls['current_D_path'] and D.resolve(strict=True) == D
+assert str(A) == controls['current_additional_A_path'] and A.resolve(strict=True) == A
+frozen = freeze['frozen']
+assert (d_project['Git_HEAD'], d_project['Git_tree']) == (frozen['HEAD'], frozen['tree'])
+assert (a_project['Git_HEAD'], a_project['Git_tree']) == (controls['expected_A_publish_head'], controls['expected_A_tree'])
+didx = frozen['index']
+assert didx['path'] == str(D / '.git/index') and closed['protected_index_reference'] == didx
+branch = frozen['branch_file']
+assert stamp(Path(branch['path']).lstat()) == branch['full9']
+
+abi_ref = closed['ordinary_read_binding_abi']
+abi = load(abi_ref)
+assert abi['schema'] == 'actual-D27-observed-D-root-initializer-READ-small-closeout/v1'
+assert abi['Root_selected'] is abi['Source_closed'] is abi['owned_module_closed'] is True
+assert abi['exact_local_freeze'] == freeze_ref and abi['protected_index_reference'] == didx
+assert all(abi[k] == closed[k] for k in (
+    'actual_isolated_content_epoch','outer_epoch_reference','outer_epoch_record_count',
+    'python_epoch_reference','python_epoch_record_count'))
+actual_epoch=load(abi['actual_isolated_content_epoch'])
+assert actual_epoch['terminal_returncode']==0 and actual_epoch['Source_closed'] is actual_epoch['module_closed'] is True
+assert actual_epoch['outer_epoch_reference']==abi['outer_epoch_reference']
+assert actual_epoch['python_epoch_reference']==abi['python_epoch_reference']
+assert actual_epoch['exact_local_freeze']==freeze_ref and actual_epoch['prior_published_D']==freeze['parent']
+assert actual_epoch['full_charge']==closed['full_charge'] and actual_epoch['actual_ledger_after']==closed['actual_ledger_after']
+assert actual_epoch['previous_published_guide']==closed['previous_published_guide']
+assert actual_epoch['ordinary_phase_qualified'] is actual_epoch['shared_canonical_mutation'] is actual_epoch['published'] is False
+outer_ref, python_ref = abi['outer_epoch_reference'], abi['python_epoch_reference']
+outer, python = load(outer_ref), load(python_ref)
+current = {row['path']: row for row in outer}
+assert len(current) == len(outer) == abi['outer_epoch_record_count'] == controls['provisional_outer_count']
+assert len({row['path'] for row in python}) == len(python) == abi['python_epoch_record_count'] == controls['provisional_python_count']
+assert all(current[row['path']] == row for row in python)
+assert all(Path(row['path']).is_relative_to(D) or Path(row['path']).is_relative_to(A) for row in outer)
+assert all(stamp(Path(row['path']).lstat()) == row['full9'] for row in outer)
+aidx = current[str(A / '.git/index')]
+assert current[didx['path']] == didx and aidx == closed['actual_accelerate_index_metadata']
+
+guard_ref = closed['named_metadata_recheck_reference']
+guards = load(guard_ref)['rows']
+guard_map = {row['path']: row for row in guards}
+assert len(guards) == len(guard_map) == closed['named_metadata_count'] == controls['provisional_named_count']
+assert guard_map[didx['path']] == didx and guard_map[aidx['path']] == aidx
+assert all(stamp(Path(row['path']).lstat()) == row['full9'] for row in guards)
+captures = {row['path']: row for row in closed['individual_captures']}
+expected = set(controls['expected_ownership_roles'])
+assert set(candidate['roles'])==expected
+assert len(captures) == len(closed['individual_captures']) == 3
+assert set(captures) == {str(D/rel) for rel in expected} | {didx['path']}
+assert set(freeze['committed']) == expected
+for path, row in captures.items():
+    held = current[path]
+    assert all(held[k] == row[k] for k in ('path', 'bytes', 'sha256', 'full9'))
+    b = read(row['raw_reference'])
+    assert len(b) == held['bytes'] and digest(b) == held['sha256']
+    if path != didx['path']:
+        rel = Path(path).relative_to(D).as_posix()
+        role = candidate['roles'][rel]
+        target = controls['expected_ownership_roles'][rel]
+        installed = freeze['committed'][rel]
+        source_before=read(role['before'])
+        assert digest(source_before)==target['before_sha256']
+        assert b == read(role['after']) == read(target['expected_after'])
+        def git_blob(body):
+            return hashlib.sha1(f'blob {len(body)}\0'.encode()+body).hexdigest()
+        assert git_blob(source_before)==installed['parent_blob']==target['before_Gitblob']
+        assert git_blob(b)==installed['stage0_and_committed_blob']==target['expected_Gitblob']
+        assert all(held[k] == installed[k] for k in ('path', 'bytes', 'sha256', 'full9'))
+
+role_plan = controls['future_roles']['guarded_bootstrap_modules']
+images = controls['future_roles']['fixture_roles']
+assert len(images)==controls['fixture_closure_count']==32
+modules = {}
+for name, role in role_plan.items():
+    rel = role['relative_path']
+    row = current[str(D/rel)]
+    assert all(row[k] == images[rel][k] for k in ('bytes', 'sha256'))
+    modules[name] = dict(relative_path=rel, **{k: row[k] for k in ('bytes', 'sha256', 'full9')})
+assert len(modules) == 11
+charge_ref = closed['full_charge']
+charge = load(charge_ref)
+assert charge['all_prior_costs_retained'] is charge['resource_policy_capacity_unchanged'] is True
+guide_ref=dict(path=str(HERE.parent/'cache-atomic-put/actual-Guide580-four-docs-three-FF-publication.json'),
+               bytes=2991,sha256='12de3885bbfd86bc00dd792861c9f670af1bee590b0b8a996a9eae97cbbda9fc')
+assert closed['previous_published_guide']==guide_ref
+guide=load(guide_ref)
+assert guide['terminal_returncode']==0 and guide['evidence_ordinal']==580
+assert guide['live_main_after']==base['guide_main']
+assert base['previous_published_guide']==guide_ref
+assert base['live_main_after']['datasets']==freeze['parent']
+assert guide['live_main_after']['accelerate']==a_project['Git_HEAD']
+install=load(guide['actual_doc_Source_closed'])
+assert install['Source_closed'] is install['module_closed'] is True
+assert install['HEAD']==controls['expected_D_publish_head']
+guide_cap=load(install['full_charge'])
+write_cap=load(freeze['full_charge'])
+assert write_cap['previous_charge']==install['full_charge']
+assert charge['previous_charge']==freeze['full_charge']
+def ledger_join(prior_record, successor_record):
+    prior=prior_record['after_full_retained_precharge']; before=successor_record['prior']
+    after=successor_record['after_full_retained_precharge']
+    amount=successor_record['added_Source_only_envelope']
+    assert type(amount) is int and amount>0
+    for key in ('used','internal_used','global_cap','internal_cap'):
+        assert prior[key]==before[key] and after[key]==before[key]+amount
+    assert after['captures']>=before['captures']>=prior['captures']
+    assert successor_record['exact_human_affirmation']==prior_record['exact_human_affirmation']
+    assert successor_record['all_prior_costs_retained'] is successor_record['resource_policy_capacity_unchanged'] is True
+ledger_join(guide_cap,write_cap)
+ledger_join(write_cap,charge)
+read(charge['exact_human_affirmation'])
+ledger = charge['after_full_retained_precharge']
+assert ledger['global_cap'] >= ledger['used'] >= ledger['internal_used']
+assert ledger['internal_cap'] >= ledger['internal_used']
+assert all(closed['actual_ledger_after'][k]==ledger[k] for k in ('used','internal_used','global_cap','internal_cap'))
+old_D = Path(controls['historical_D_path'])
+old_fixture = load(controls['historical_fixture_reference'])
+def retarget_path(path):
+    return str(D / Path(path).relative_to(old_D))
+def retarget_row(row):
+    rel = Path(row['path']).relative_to(old_D).as_posix()
+    fresh = current[retarget_path(row['path'])]
+    expected = images[rel]
+    assert all(fresh[k] == expected[k] for k in ('bytes', 'sha256')), rel
+    return fresh
+rows = [retarget_row(row) for row in old_fixture['required_fixture_closure']]
+assert {Path(row['path']).relative_to(D).as_posix() for row in rows}==set(images)
+assert len(rows) == len({row['path'] for row in rows}) == controls['fixture_closure_count'] == 32
+absences = [retarget_path(path) for path in old_fixture['required_current_namespace_absences']]
+assert len(absences) == len(set(absences)) == 6 and all(not os.path.lexists(path) for path in absences)
+fixture_wire = old_fixture | dict(
+    schema='actual-existing-P1-ordinary99-protected-fixture-closure/v1',
+    actual_closed_Source_READ_reference=closed_ref, current_Source_absence_rows=None,
+    current_physical_integration_package_Source_row=retarget_row(old_fixture['current_physical_integration_package_Source_row']),
+    required_fixture_closure=rows, pytest_inifile=retarget_path(old_fixture['pytest_inifile']),
+    required_current_namespace_absences=absences,
+    required_normal_conftests=[retarget_path(path) for path in old_fixture['required_normal_conftests']])
+assert set(fixture_wire['required_normal_conftests']) == {str(D/'conftest.py'), str(D/'tests/conftest.py')}
+fixture = seal('actual-live-ordinary99-exact-32-fixture-wire.json', fixture_wire)
+proof = seal('actual-live-ordinary99-clean-D-A-index-provenance.json', dict(
+    D=didx, A=aidx, branch=branch, frozen=freeze_ref, actual_paired_D_A_READ3=closed_ref,
+    A_raw_Source_index_capture_claimed=False, A_index_metadata_verified_against_current_epoch=True))
+D_prov, A_prov = (
+    dict(root=p['root'], HEAD=p['Git_HEAD'], tree=p['Git_tree'], actual_closed_Source_READ=closed_ref,
+         clean_index_provenance_reference=proof, local_frozen_Git_metadata_reference=metadata,
+         clean_worktree_and_index=True, status_sha256=digest(b''))
+    for p, metadata in ((d_project, freeze_ref), (a_project, proof)))
+ready = seal('READY-live-ordinary99-actual-READ3-INERT.json', dict(
+    schema='actual-READ3-live-ordinary99-nonclock/v1', controls=controls_ref, read=abi_ref,
+    fixture=fixture, freeze=freeze_ref, read_close=closed_ref, modules=modules,
+    D_prov=D_prov, A_prov=A_prov, outer=outer_ref, python=python_ref,
+    expected_absent_paths=absences, latest_closed_Source_full_precharge=charge_ref,
+    read3_named_metadata_guard=guard_ref, named_metadata_count=len(guards),
+    isolated_frozen_local_git_candidate=True, canonical_source_application=False,
+    protected_guide_publication=guide_ref, protected_guide_full_charge=install['full_charge'],
+    observed_independent_base=base_ref,
+    exact_write_full_charge=freeze['full_charge'],
+    final_ordinary_runtime_qualification_eligibility_authority=None))
+print(json.dumps(ready, sort_keys=True))

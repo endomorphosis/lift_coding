@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="4" failures="1" skipped="0" tests="5" time="1.571" timestamp="2026-11-27T03:48:46.546570+00:00" hostname="spark-b271"><testcase classname="tests.unit.logic.autoformal.test_corpus_source_review_responses" name="test_official_v2_typed_responses_keep_all_blank_groups_pending" time="0.800"><failure message="ipfs_datasets_py.logic.autoformal.corpus_contracts.CorpusContractError: closed fixed complete source assessment inputs fields required">tests/unit/logic/autoformal/test_corpus_source_review_responses.py:1692: in test_official_v2_typed_responses_keep_all_blank_groups_pending
+    report = assess(owner, data)
+tests/unit/logic/autoformal/test_corpus_source_review_responses.py:228: in assess
+    return owner.assess_source_review_responses(
+ipfs_datasets_py/logic/autoformal/corpus_source_review_responses.py:327: in assess_source_review_responses
+    contracts.require_keys(source_inputs, required, "fixed complete source assessment inputs")
+ipfs_datasets_py/logic/autoformal/corpus_contracts.py:51: in require_keys
+    raise CorpusContractError(f"closed {label} fields required")
+E   ipfs_datasets_py.logic.autoformal.corpus_contracts.CorpusContractError: closed fixed complete source assessment inputs fields required</failure></testcase><testcase classname="tests.unit.logic.autoformal.test_corpus_source_review_responses" name="test_official_v2_typed_responses_authenticate_exact_fictional_answers" time="0.048"><error message="failed on setup with &quot;ipfs_datasets_py.logic.autoformal.corpus_contracts.CorpusContractError: closed legal-corpus-source-review-request/v1 fields required&quot;">tests/unit/logic/autoformal/test_corpus_source_review_responses.py:1685: in official_v2_signed_typed_data
+    return signed_typed_case(corpus_source_review_responses, data)
+tests/unit/logic/autoformal/test_corpus_source_review_responses.py:176: in signed_typed_case
+    record = author(owner, data, value, ordinal)
+tests/unit/logic/autoformal/test_corpus_source_review_responses.py:143: in author
+    return owner.record_source_review_response(
+ipfs_datasets_py/logic/autoformal/corpus_source_review_responses.py:183: in record_source_review_response
+    request, subject, response = _inputs(request, subject, response, expected_request_sha256,
+ipfs_datasets_py/logic/autoformal/corpus_source_review_responses.py:122: in _inputs
+    request = contracts.validate_record(json.loads(base._plain(request, contracts.MAX_RECORD_BYTES)),
+ipfs_datasets_py/logic/autoformal/corpus_contracts.py:141: in validate_record
+    require_keys(checked, {*fields, "schema", "record_cid", "cid_scope"}, schema)
+ipfs_datasets_py/logic/autoformal/corpus_contracts.py:51: in require_keys
+    raise CorpusContractError(f"closed {label} fields required")
+E   ipfs_datasets_py.logic.autoformal.corpus_contracts.CorpusContractError: closed legal-corpus-source-review-request/v1 fields required</error></testcase><testcase classname="tests.unit.logic.autoformal.test_corpus_source_review_responses" name="test_official_v2_typed_response_refuses_a_repinned_legacy_subject" time="0.000"><error message="failed on setup with &quot;ipfs_datasets_py.logic.autoformal.corpus_contracts.CorpusContractError: closed legal-corpus-source-review-request/v1 fields required&quot;">tests/unit/logic/autoformal/test_corpus_source_review_responses.py:1685: in official_v2_signed_typed_data
+    return signed_typed_case(corpus_source_review_responses, data)
+tests/unit/logic/autoformal/test_corpus_source_review_responses.py:176: in signed_typed_case
+    record = author(owner, data, value, ordinal)
+tests/unit/logic/autoformal/test_corpus_source_review_responses.py:143: in author
+    return owner.record_source_review_response(
+ipfs_datasets_py/logic/autoformal/corpus_source_review_responses.py:183: in record_source_review_response
+    request, subject, response = _inputs(request, subject, response, expected_request_sha256,
+ipfs_datasets_py/logic/autoformal/corpus_source_review_responses.py:122: in _inputs
+    request = contracts.validate_record(json.loads(base._plain(request, contracts.MAX_RECORD_BYTES)),
+ipfs_datasets_py/logic/autoformal/corpus_contracts.py:141: in validate_record
+    require_keys(checked, {*fields, "schema", "record_cid", "cid_scope"}, schema)
+ipfs_datasets_py/logic/autoformal/corpus_contracts.py:51: in require_keys
+    raise CorpusContractError(f"closed {label} fields required")
+E   ipfs_datasets_py.logic.autoformal.corpus_contracts.CorpusContractError: closed legal-corpus-source-review-request/v1 fields required</error></testcase><testcase classname="tests.unit.logic.autoformal.test_corpus_source_review_responses" name="test_official_v2_typed_response_assessment_requires_independent_pins[expected_preparation_manifest_sha256-independent typed source preparation root differs]" time="0.000"><error message="failed on setup with &quot;ipfs_datasets_py.logic.autoformal.corpus_contracts.CorpusContractError: closed legal-corpus-source-review-request/v1 fields required&quot;">tests/unit/logic/autoformal/test_corpus_source_review_responses.py:1685: in official_v2_signed_typed_data
+    return signed_typed_case(corpus_source_review_responses, data)
+tests/unit/logic/autoformal/test_corpus_source_review_responses.py:176: in signed_typed_case
+    record = author(owner, data, value, ordinal)
+tests/unit/logic/autoformal/test_corpus_source_review_responses.py:143: in author
+    return owner.record_source_review_response(
+ipfs_datasets_py/logic/autoformal/corpus_source_review_responses.py:183: in record_source_review_response
+    request, subject, response = _inputs(request, subject, response, expected_request_sha256,
+ipfs_datasets_py/logic/autoformal/corpus_source_review_responses.py:122: in _inputs
+    request = contracts.validate_record(json.loads(base._plain(request, contracts.MAX_RECORD_BYTES)),
+ipfs_datasets_py/logic/autoformal/corpus_contracts.py:141: in validate_record
+    require_keys(checked, {*fields, "schema", "record_cid", "cid_scope"}, schema)
+ipfs_datasets_py/logic/autoformal/corpus_contracts.py:51: in require_keys
+    raise CorpusContractError(f"closed {label} fields required")
+E   ipfs_datasets_py.logic.autoformal.corpus_contracts.CorpusContractError: closed legal-corpus-source-review-request/v1 fields required</error></testcase><testcase classname="tests.unit.logic.autoformal.test_corpus_source_review_responses" name="test_official_v2_typed_response_assessment_requires_independent_pins[expected_response_bindings_sha256-complete response binding population differs]" time="0.000"><error message="failed on setup with &quot;ipfs_datasets_py.logic.autoformal.corpus_contracts.CorpusContractError: closed legal-corpus-source-review-request/v1 fields required&quot;">tests/unit/logic/autoformal/test_corpus_source_review_responses.py:1685: in official_v2_signed_typed_data
+    return signed_typed_case(corpus_source_review_responses, data)
+tests/unit/logic/autoformal/test_corpus_source_review_responses.py:176: in signed_typed_case
+    record = author(owner, data, value, ordinal)
+tests/unit/logic/autoformal/test_corpus_source_review_responses.py:143: in author
+    return owner.record_source_review_response(
+ipfs_datasets_py/logic/autoformal/corpus_source_review_responses.py:183: in record_source_review_response
+    request, subject, response = _inputs(request, subject, response, expected_request_sha256,
+ipfs_datasets_py/logic/autoformal/corpus_source_review_responses.py:122: in _inputs
+    request = contracts.validate_record(json.loads(base._plain(request, contracts.MAX_RECORD_BYTES)),
+ipfs_datasets_py/logic/autoformal/corpus_contracts.py:141: in validate_record
+    require_keys(checked, {*fields, "schema", "record_cid", "cid_scope"}, schema)
+ipfs_datasets_py/logic/autoformal/corpus_contracts.py:51: in require_keys
+    raise CorpusContractError(f"closed {label} fields required")
+E   ipfs_datasets_py.logic.autoformal.corpus_contracts.CorpusContractError: closed legal-corpus-source-review-request/v1 fields required</error></testcase></testsuite></testsuites>

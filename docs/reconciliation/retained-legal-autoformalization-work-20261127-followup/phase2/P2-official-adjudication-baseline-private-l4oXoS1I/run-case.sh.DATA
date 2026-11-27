@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -eu
+cd "$(dirname "$0")"
+stage=$1
+shift
+mkdir -m 700 "$stage"
+export PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
+base=/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn
+set +e
+timeout 60 /home/barberb/lift_coding/.venv/bin/python -I -B existing-runner.py.DATA "$PWD/$stage" "$PWD/project" \
+  "$base/repositories/datasets" "$base/repositories/accelerate" /home/barberb/lift_coding/external/ipfs_datasets \
+  /home/barberb/lift_coding/external/ipfs_accelerate "$@" >"$stage/stdout.DATA" 2>"$stage/stderr.DATA"
+rc=$?
+printf '%s\n' "$rc" >"$stage/exit"
+tail -34 "$stage/stdout.DATA"
+tail -14 "$stage/stderr.DATA"
+exit "$rc"

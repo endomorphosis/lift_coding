@@ -1,0 +1,70 @@
+{
+  "cases": [
+    {
+      "failure": "closed typed source response input fields required",
+      "missing_answer_refused": true,
+      "reached_answer_validation": true,
+      "request_cid": "baguqeera3itqv7mggmeil5zzyd7sl45bcfdp3zq2pz2lv4z5crkz3jigi7wa",
+      "request_passed_official_shape_check": true
+    },
+    {
+      "failure": "closed typed source response input fields required",
+      "missing_answer_refused": true,
+      "reached_answer_validation": true,
+      "request_cid": "baguqeerawv3ejtoxc7img2m2nufbv23b4ojpwkqtlmdnm2ovtrat5pm74fla",
+      "request_passed_official_shape_check": true
+    },
+    {
+      "failure": "closed typed source response input fields required",
+      "missing_answer_refused": true,
+      "reached_answer_validation": true,
+      "request_cid": "baguqeeray5mpftk5d4qemysuyby2qzvmetlgljpickeyq7zulgv4ea2ddooa",
+      "request_passed_official_shape_check": true
+    },
+    {
+      "failure": "closed typed source response input fields required",
+      "missing_answer_refused": true,
+      "reached_answer_validation": true,
+      "request_cid": "baguqeeraunwr4mwexk3hpkehl5oows7ygslumczbq2npwurallgz5e7tsptq",
+      "request_passed_official_shape_check": true
+    }
+  ],
+  "compiled_module_origins": {
+    "ipfs_datasets_py/logic/autoformal/corpus_source_review.py": {
+      "bytes": 66620,
+      "sha256": "eca8f8aaad0ca02a7ac12f64ab2db24f4c0c857fde6600d6cf322602ec6bdcd8"
+    },
+    "ipfs_datasets_py/logic/autoformal/corpus_source_review_responses.py": {
+      "bytes": 33983,
+      "sha256": "7d8708aa8b11bb3f0dfac8f4773cd5201e9423dae0c3ad62ebb437d336fa9b4b"
+    }
+  },
+  "exact_saved_inputs": [
+    {
+      "bytes": 157823,
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/pilot-official-pending-PAV-output-v06/run.output.0.bin",
+      "sha256": "f207e00e0a7fc3a31689fb4349dd42b3491b8f117c80ef60de56759ebe10a9ad"
+    },
+    {
+      "bytes": 31452,
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/pilot-official-pending-PAV-output-v06/run.output.1.bin",
+      "sha256": "175b991c1b6631b523acd8b70bec26d3599d1417bb069ba82330d863a0ec1471"
+    },
+    {
+      "bytes": 31452,
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/pilot-official-pending-PAV-output-v06/run.output.2.bin",
+      "sha256": "175b991c1b6631b523acd8b70bec26d3599d1417bb069ba82330d863a0ec1471"
+    }
+  ],
+  "no_response_was_supplied_or_written": true,
+  "published_base": "9a89672b4b3d32d6e83fbc29368b40e4cc033612",
+  "real_review_or_admission": false,
+  "retained_group_counts": {
+    "authenticated_evidence": 0,
+    "deferred_questions": 28,
+    "groups": 4,
+    "pending_groups": 4,
+    "source_evidence_prerequisites_under_selected_trust": 0
+  },
+  "schema": "official-pilot-typed-intake-blank-input-probe/v1"
+}

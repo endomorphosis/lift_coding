@@ -1,0 +1,98 @@
+from pathlib import Path
+from subprocess import run
+import ast, difflib, hashlib, json, os
+import xml.etree.ElementTree as ET
+
+w=Path(__file__).resolve().parent
+epoch=json.loads((w/"current-input-epoch.json").read_bytes())
+store=w.parents[2]/"publish-all-20261126-nsFFGMUO/datasets.git"
+ref="refs/reconciliation/pending-official-typed-source-review-20261127"
+base=epoch["head"]
+env={**os.environ,"GIT_INDEX_FILE":str(w/"candidate.index"),"GIT_NO_LAZY_FETCH":"1","GIT_OPTIONAL_LOCKS":"0"}
+
+def git(*args, stdin=None):
+    return run(["git","--git-dir",str(store),"-c","index.threads=1",*args],input=stdin,
+               env=env,capture_output=True,check=True,timeout=30).stdout
+
+def sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+def file_ref(path):
+    data=path.read_bytes()
+    return {"path":str(path),"bytes":len(data),"sha256":sha(data)}
+
+for field in ("NAME","EMAIL"):
+    value=run(["git","-C","/home/barberb/lift_coding","config","--get","user."+field.lower()],
+              capture_output=True,check=True,timeout=10).stdout.decode().strip()
+    env["GIT_AUTHOR_"+field]=env["GIT_COMMITTER_"+field]=value
+assert git("rev-parse","refs/reconciliation/typed-intake-base-20261127").decode().strip()==base
+git("read-tree",base)
+edits, forward, inverse={}, [], []
+for role in ("owner","test","guide"):
+    path=epoch[role]
+    pre=w/(role+".before.DATA")
+    post=w/(role+".after.DATA")
+    old,new=pre.read_bytes(),post.read_bytes()
+    selected=epoch["roles"][path]
+    assert git("cat-file","blob",base+":"+path)==old
+    assert (len(old),sha(old))==(selected["bytes"],selected["sha256"])
+    assert (w/"project"/path).read_bytes()==new
+    if role=="test":
+        assert new.startswith(old)
+        ast_pre=ast.parse(old).body
+        assert [ast.dump(n) for n in ast.parse(new).body[:len(ast_pre)]]==[ast.dump(n) for n in ast_pre]
+    oid=git("hash-object","-w","--stdin",stdin=new).decode().strip()
+    assert git("cat-file","blob",oid)==new
+    git("update-index","--cacheinfo","100644,"+oid+","+path)
+    for a,b,patch in ((old,new,forward),(new,old,inverse)):
+        patch.extend(difflib.unified_diff(a.decode().splitlines(True),b.decode().splitlines(True),"a/"+path,"b/"+path))
+    edits[path]={"before":{**file_ref(pre),"git_blob":selected["blob"]},
+                 "after":{**file_ref(post),"git_blob":oid},"mode":"100644"}
+result_tree=git("write-tree").decode().strip()
+git("diff","--cached","--check",base)
+assert set(git("diff","--cached","--name-only",base).decode().splitlines())==set(edits)
+head=git("commit-tree",result_tree,"-p",base,
+         stdin=b"Accept official V2 typed source responses through existing review replay\n").decode().strip()
+git("update-ref",ref,head)
+for rel,pins in edits.items():
+    assert sha(git("cat-file","blob",head+":"+rel))==pins["after"]["sha256"]
+for name,body in (("forward",forward),("inverse",inverse)):
+    with (w/("exact-three."+name+".patch.DATA")).open("x") as f:f.writelines(body)
+
+def fixture(stage):
+    report=w/stage/"result.xml"
+    nodes=ET.fromstring(report.read_bytes()).findall(".//testcase")
+    assert len(nodes)==len({(n.get("classname"),n.get("name")) for n in nodes})
+    buckets={tag:sum(n.find(tag) is not None for n in nodes) for tag in ("failure","error","skipped")}
+    return {"junit":file_ref(report),"terminal_returncode":int((w/stage/"exit").read_text()),
+            "cases":len(nodes),"names":[n.get("name") for n in nodes],**buckets}
+
+red, green, legacy=map(fixture,("red","green","legacy-focused"))
+assert (red["terminal_returncode"],red["cases"],red["failure"],red["error"],red["skipped"])==(1,5,1,4,0)
+assert red["names"]==green["names"]
+assert (green["terminal_returncode"],green["cases"],green["failure"],green["error"],green["skipped"])==(0,5,0,0,0)
+assert (legacy["terminal_returncode"],legacy["cases"],legacy["failure"],legacy["error"],legacy["skipped"])==(0,19,0,0,0)
+probe=w/"actual-official-pilot-typed-intake-blank-input-refusal.json"
+probe_json=json.loads(probe.read_bytes())
+assert len(probe_json["cases"])==4 and all(
+    row["missing_answer_refused"] and row["reached_answer_validation"] for row in probe_json["cases"])
+assert probe_json["no_response_was_supplied_or_written"] and not probe_json["real_review_or_admission"]
+record={
+    "schema":"official-v2-typed-source-response-existing-owner-private-qualification/v1",
+    "candidate":{"isolated_store":str(store),"base":base,"oid":head,"tree":result_tree,"ref":ref},
+    "exact_three":edits,"current_inputs":file_ref(w/"current-input-epoch.json"),
+    "prior_official_pilot_refusal":file_ref(w.parent/"P2-official-typed-response-intake-red-z3mnOlRc/actual-official-typed-intake-legacy-gate-reproduction.json"),
+    "current_official_pilot_blank_input_probe":file_ref(probe),"claimed_real_review_or_admission":False,
+    "same_official_fictional_red":red,"same_official_fictional_green":green,"legacy_focused_fixtures":legacy,
+    "inert_import_assertions_direct_probe":file_ref(w/"actual-import-effect-probe.json"),
+    "superseded_retention_setup_refusal":file_ref(w/"retention/exit"),
+    "full_private_owning_file_CPU_limit_terminal":file_ref(w/"retention-v2/exit"),
+    "patches":{name:file_ref(w/("exact-three."+name+".patch.DATA")) for name in ("forward","inverse")},
+    "ordinary_source_bound":None,"canonical_installation":None,"publication":None,
+}
+sealed=w/"SEALED-official-V2-typed-source-response-existing-owner-exact3-private.json"
+with sealed.open("x") as f:
+    json.dump(record,f,indent=2,sort_keys=True);f.write("\n")
+sealed.chmod(0o400)
+print(json.dumps({"seal":file_ref(sealed),"candidate":record["candidate"],
+                  "roles":{p:{k:v[k] for k in ("bytes","sha256","git_blob")} for p,row in edits.items() for v in [row["after"]]}},indent=2))

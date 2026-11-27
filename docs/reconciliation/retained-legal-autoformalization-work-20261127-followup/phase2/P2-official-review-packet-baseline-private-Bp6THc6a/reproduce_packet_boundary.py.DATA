@@ -1,0 +1,133 @@
+from pathlib import Path
+import base64, copy, hashlib, importlib.util, json, os, resource, sys, zlib
+
+work=Path(__file__).resolve().parent
+metadata=json.loads((work/"published-source-pins.json").read_bytes())
+root=work/"project"
+commit=metadata["published"]
+resource.setrlimit(resource.RLIMIT_AS,(512*1024**2,)*2)
+resource.setrlimit(resource.RLIMIT_CPU,(45,46))
+os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})
+sys.path.insert(0,str(root))
+os.chdir(root)
+saved=Path("/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01")
+out=work/"red"
+out.mkdir(mode=0o700)
+def audit(event,args):
+    if event.startswith(("socket.","subprocess.")) or event in {"os.exec","os.fork","os.forkpty","os.posix_spawn","os.system"}:
+        raise PermissionError("closed replay process/network boundary")
+    if event=="import" and args[0].split(".")[0] in {"torch","transformers","tensorflow","jax","huggingface_hub"}:
+        raise ImportError("closed replay import boundary")
+    if event=="open" and not isinstance(args[0], int):
+        name=Path(os.fsdecode(args[0])).resolve()
+        flags=args[2] or 0
+        if flags & (os.O_WRONLY|os.O_RDWR|os.O_CREAT|os.O_TRUNC|os.O_APPEND):
+            if not name.is_relative_to(out):
+                raise PermissionError("closed replay write boundary")
+        if name.is_relative_to(Path("/home/barberb/lift_coding/external")):
+            raise PermissionError("use saved custody, never current project bodies")
+
+def sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+def read(path, length, digest):
+    raw=path.read_bytes()
+    assert (len(raw),sha(raw))==(length,digest),path
+    return json.loads(raw)
+
+def read_prior(i,n,digest):
+    return read(saved/"pilot-official-pending-PAV-output-v06"/f"run.output.{i}.bin",n,digest)
+
+def verify_source_paths():
+    for rel,pin in metadata["paths"].items():
+        raw=(root/rel).read_bytes()
+        assert (len(raw),sha(raw))==(pin["bytes"],pin["sha256"]),rel
+
+def write(name,data):
+    path=out/name
+    raw=(json.dumps(data,sort_keys=True,indent=2,ensure_ascii=False)+"\n").encode()
+    with path.open("xb") as f:
+        f.write(raw)
+    return {"path":str(path),"bytes":len(raw),"sha256":sha(raw)}
+
+cache=read(saved/"actual-official-pilot-nine-inputs-and-typed-owner-body-cache-v01.json",95573,
+           "350babadfc05044c85319d3bef7f177582245f7670b2683a05b13806a337e26c")
+historic_preparation=read_prior(0,157823,"f207e00e0a7fc3a31689fb4349dd42b3491b8f117c80ef60de56759ebe10a9ad")
+historic_assessment=read_prior(1,31452,"175b991c1b6631b523acd8b70bec26d3599d1417bb069ba82330d863a0ec1471")
+registry=read_prior(4,277,"7d723588b6508bae648fc676c8c76163ac5e6220a7184de083a335a5c7bef053")
+policy=read_prior(5,540,"8e5579d3252256fe0e6c596f32e68c665ddd46389c3cece6af7b2ac47e269d8e")
+assert registry["mode"]==policy["mode"]=="unavailable" and registry["keys"]==[]
+inputs={}
+for row in cache["records"]:
+    if row["role"]!="original_pilot_input":
+        continue
+    name=Path(row["path"]).name
+    obj=zlib.decompressobj()
+    raw=obj.decompress(base64.b64decode(row["raw_zlib_base64"],validate=True),row["bytes"]+1)
+    assert obj.eof and not obj.unused_data and (len(raw),sha(raw))==(row["bytes"],row["sha256"])
+    inputs[name]=raw
+assert len(inputs)==9
+
+verify_source_paths()
+sys.addaudithook(audit)
+from ipfs_datasets_py.logic.autoformal import corpus_source_review_packets as packets
+from ipfs_datasets_py.logic.autoformal import corpus_source_adjudication as adjudication
+from ipfs_datasets_py.logic.autoformal import corpus_source_review as source
+from ipfs_datasets_py.logic.autoformal import corpus_source_review_responses as responses
+from ipfs_datasets_py.logic.autoformal import legal_graph_dependencies as dependencies
+
+digest=source._digest
+bindings=historic_preparation["manifest"]["input_bindings"]
+documents=[]
+stored_documents=json.loads(inputs["documents.json"])
+for index,section in enumerate(("101","7213","7214")):
+    doc=stored_documents[section]
+    keys={"source_version":doc["source_version"],
+          "expected_raw_sha256":doc["raw_input_file"]["sha256"],
+          "expected_extracted_sha256":doc["extracted_input_file"]["sha256"]}
+    assert digest(keys)==bindings["official_documents"][str(index)]["raw_sha256"]
+    documents.append({**keys,"raw_bytes":inputs[f"{section}-source.html"],
+                      "extracted_text":inputs[f"{section}-extracted-view.txt"].decode()})
+occurrences=[{"source_occurrence":row["occurrence"],"context":row["context"],
+              "retained_unit_label":row["retained_unit_label"],
+              "unanswered_question_ids":row["unanswered_question_ids"]}
+             for row in json.loads(inputs["source-units-and-separate-crosswalk.json"])]
+alternatives=historic_preparation["requests"][0]["pending_interpretations"]
+assert len(occurrences)==4 and len(alternatives)==2
+replay={
+    "document_inputs":documents,
+    "expected_document_population_sha256":digest(
+        [{k:v for k,v in row.items() if k not in {"raw_bytes","extracted_text"}} for row in documents]),
+    "occurrence_inputs":occurrences,
+    "expected_occurrence_population_sha256":bindings["official_occurrences"]["complete"]["raw_sha256"],
+    "pending_interpretations":alternatives,
+    "expected_pending_interpretations_sha256":bindings["pending_interpretations"]["complete"]["raw_sha256"],
+}
+prepared=source.prepare_official_source_review_requests_v2(**replay)
+assert prepared["requests"]==historic_preparation["requests"]
+assert prepared["manifest"]["input_bindings"]==bindings
+assert all(row["governing_edition"] is None and row["applicability"] is None for row in prepared["requests"])
+
+
+owner_path=Path(packets.__file__).resolve()
+assert owner_path.is_relative_to(root)
+pin=metadata["paths"][owner_path.relative_to(root).as_posix()]
+assert pin["sha256"]=="c2a3a08963e32b7ef3371ae32ff1266ad6fe052c87a491857dcc720170367a29"
+try:
+    packets.prepare_source_review_packets(
+        expected_preparation_manifest_sha256=digest(prepared["manifest"]),**replay)
+except TypeError as exc:
+    diagnostic=str(exc)
+    assert "unexpected keyword argument 'document_inputs'" in diagnostic
+else:
+    raise AssertionError("legacy packet owner unexpectedly accepted the official replay profile")
+verify_source_paths()
+report={
+    "published":commit,"packet_source_pin":pin,"official_request_count":len(prepared["requests"]),
+    "exact_historical_request_records_preserved":True,"document_count":len(documents),
+    "active_slots":sum(len(r["context_slot_ids"]) for r in prepared["requests"]),
+    "deferred_slots":sum(len(r["deferred_review_slot_ids"]) for r in prepared["requests"]),
+    "supported_upstream_prepare_passed":True,
+    "public_packet_entrypoint":"prepare_source_review_packets","actual_diagnostic":diagnostic,
+    "answers_supplied":0,"signatures_created":0,"packets_returned":0}
+print(json.dumps(write("actual-official-review-packet-boundary-red.json",report)),flush=True)

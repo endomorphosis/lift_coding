@@ -1,0 +1,56 @@
+{
+  "adjudication_commit": "8003780e1ac5a2dd86c1a8df4cab34874f6eb1ab",
+  "adjudication_qualification": {
+    "bytes": 3633,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/actual-official-V2-adjudication-and-legacy-Source-closed.json",
+    "sha256": "3e9f1b5348ccacbd5a4d969257fe7b6f37c0eaf3e842b9314b3196520fea1383"
+  },
+  "application_owner": {
+    "bytes": 32104,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/project/ipfs_datasets_py/logic/autoformal/corpus_source_application.py",
+    "sha256": "2e11ca5f1f8c23b7d399e72c529432f611a94dcc4599c6f69025884e8219dc86"
+  },
+  "application_tests_before": {
+    "bytes": 69181,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/test.before.DATA",
+    "sha256": "51aed4dcc6115dba2513561a34295e853277cf752706bdc9b64c2761fbffdd67"
+  },
+  "cases": [
+    {
+      "diagnostic": "ipfs_datasets_py.logic.autoformal.corpus_contracts.CorpusContractError: closed legal-corpus-source-review-request/v1 fields required",
+      "name": "test_official_application_declaration_binds_exact_official_adjudication"
+    },
+    {
+      "diagnostic": "ipfs_datasets_py.logic.autoformal.corpus_contracts.CorpusContractError: closed complete adjudication replay input object required",
+      "name": "test_official_application_replays_complete_adjudication_without_application_bodies"
+    },
+    {
+      "diagnostic": "ipfs_datasets_py.logic.autoformal.corpus_contracts.CorpusContractError: closed legal-corpus-source-review-request/v1 fields required",
+      "name": "test_official_signed_application_activates_only_exact_candidate_answers"
+    }
+  ],
+  "exact_test_projection": {
+    "bytes": 75108,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/project/tests/unit/logic/autoformal/test_corpus_source_application.py",
+    "sha256": "5133369e10a7e4bc7e730218397d010173d64510c76c9b1833673132ad38796b"
+  },
+  "fictional_fixture_only": true,
+  "junit": {
+    "bytes": 4581,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/red/result.xml",
+    "sha256": "3f5e20f3330a9b952d14ba64617c41b1fe98cd1003a705ea30f410d2aff9a7f9"
+  },
+  "schema": "official-v2-source-application-existing-owner-legacy-reproduction/v1",
+  "source_application_or_meaning_admitted": false,
+  "stdout": {
+    "bytes": 4492,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/red/stdout.DATA",
+    "sha256": "4234f110a35ee76b800565b9b57d5a0a1af0dbf3c91c476bcc7035a203958ec2"
+  },
+  "terminal_returncode": 1,
+  "test_append": {
+    "bytes": 5927,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/official-test.py.fragment",
+    "sha256": "3682a7375f8a7af8f7b3f657080c800ca132f8a8dcef3db47d4b90a8cd95e5f8"
+  }
+}

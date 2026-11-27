@@ -1,0 +1,29 @@
+--- a/existing-namespaced-native2-operator.INERT.py.DATA
++++ b/existing-namespaced-native2-operator.INERT.py.DATA
+@@ -91,7 +91,7 @@
+     test_record = _binding['owning_test_record']
+     _ref = _binding['owning_test_raw']
+     test_raw = read_private(_ref['path'], _ref['bytes'], _ref['sha256'])
+-    assert len(test_raw) == 123945 and H(test_raw) == 'ab3718e38b87756b07be9052614d16171171d2a7c7217b6e17405895c21ac945'
++    assert len(test_raw) == 130553 and H(test_raw) == '8bca876c855d44df4d48cb909fc6a0e9a007480d61037831536e84a8cc68adf9'
+     assert test_record['path'] == str(W / 'tests/integration/logic/backends/test_kernel_backends.py')
+     epoch_test = next(row for row in EPOCH if row['path'] == test_record['path'])
+     assert all(epoch_test[key] == test_record[key] for key in ('bytes', 'sha256', 'full9'))
+@@ -99,7 +99,7 @@
+     _ref = _binding['binder_raw']
+     binder_path = Path(_ref['path'])
+     binder_raw = read_private(binder_path, _ref['bytes'], _ref['sha256'])
+-    assert len(binder_raw) == 5314 and H(binder_raw) == '6683b105998cba123ff7029cba67ab153d2622467b02eec30cc0e275ff9329d3'
++    assert len(binder_raw) == 5314 and H(binder_raw) == '6c692f2b88eeaa8a7a1c33825f2df6638d4cd4178f34f5a2e1e0c061d8350650'
+     assert not RUN_OUTPUT.exists(), 'distinct selected Native3 output must be absent'
+     RUN_OUTPUT.mkdir(mode=448)
+     PARENT_HOME = RUN_OUTPUT / 'parent-home'
+@@ -361,7 +361,7 @@
+                 assert sdk.ToolRunRequest is admitted.ToolRunRequest and sdk.ToolRunResult is admitted.ToolRunResult
+                 assert admitted.GlobalResourceScheduler is resources.GlobalResourceScheduler
+                 pins = _binding['current_SDK_source_pins']
+-                assert pins['ipfs_datasets_py.logic.backends.kernel.lean'] == ['ipfs_datasets_py/logic/backends/kernel/lean.py', '18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800']
++                assert pins['ipfs_datasets_py.logic.backends.kernel.lean'] == ['ipfs_datasets_py/logic/backends/kernel/lean.py', 'de99fe31f53fb34bf247e5c24b4b1424ca06874f1da5dc8875b3dbf886d1e4cb']
+                 report['canonical_module_bindings'] = {}
+                 for name, (relative, digest) in pins.items():
+                     module = sys.modules[name]

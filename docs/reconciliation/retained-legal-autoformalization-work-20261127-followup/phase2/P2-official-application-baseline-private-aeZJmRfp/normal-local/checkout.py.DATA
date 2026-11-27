@@ -1,0 +1,51 @@
+from pathlib import Path
+import hashlib,json,os,subprocess
+w=Path.cwd()
+verified=w.parent
+seal=verified/"SEALED-official-V2-source-application-local-candidate.json"
+raw=seal.read_bytes()
+seal_sha="fdad6e94121c3478f8c6c418027319c8e660dada93f373695605eaa083ce48c0"
+assert (len(raw),hashlib.sha256(raw).hexdigest())==(7994,seal_sha)
+evidence=json.loads(raw)
+ref=evidence["candidate"]
+p=w/"checkout"
+env={**os.environ,"GIT_OPTIONAL_LOCKS":"0","GIT_NO_LAZY_FETCH":"1","GIT_TERMINAL_PROMPT":"0"}
+def run(cmd):
+    return subprocess.check_output(cmd,env=env,timeout=35)
+def git(path,*args):
+    return run(["git","-C",str(path),*args])
+base=ref["oid"]
+assert base=="ff6e4326590bfaa593831df2d3c66b17e65ad418"
+run(["git","init","--quiet",str(p)])
+objects=(Path(ref["isolated_store"])/"objects").resolve()
+(p/".git/objects/info/alternates").write_text(str(objects)+"\n")
+assert git(p,"rev-parse",base+"^{tree}").decode().strip()==ref["tree"]
+roles=json.loads((verified/"current-input-epoch.json").read_bytes())["roles"]
+lease="ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_source_lease.py"
+config=["pytest.ini","conftest.py","tests/conftest.py","tests/unit/conftest.py"]
+policy="ipfs_datasets_py/logic/autoformal/AGENTS.md"
+paths=sorted(set(roles)|{lease,policy,*config})
+pins={}
+for path in paths:
+    row=git(p,"ls-tree","-l",base,"--",path).decode().split()
+    assert len(row)==5 and row[0] in {"100644","100755"} and row[1]=="blob" and row[-1]==path,(path,row)
+    pins[path]={"mode":row[0],"git_blob":row[2],"bytes":int(row[3])}
+git(p,"config","--local","core.sparseCheckout","true")
+git(p,"config","--local","core.sparseCheckoutCone","false")
+(p/".git/info/sparse-checkout").write_text("".join("/"+x+"\n" for x in paths))
+with (p/".git/info/exclude").open("a") as f:
+    f.write("\n/workspace/control-plane/source-leases/admission.lock\n/workspace/control-plane/source-leases/source.lock\n")
+git(p,"-c","advice.detachedHead=false","checkout","--detach","--quiet",base)
+assert git(p,"rev-parse","--show-toplevel").decode().strip()==str(p)
+assert git(p,"status","--porcelain=v1","--untracked-files=all")==b""
+materialized={a.relative_to(p).as_posix() for a in p.rglob("*") if a.is_file() and ".git" not in a.parts}
+assert materialized==set(paths),(set(paths)-materialized,materialized-set(paths))
+for path,row in pins.items():
+    raw=(p/path).read_bytes()
+    assert len(raw)==row["bytes"]
+    assert hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest()==row["git_blob"]
+    row["sha256"]=hashlib.sha256(raw).hexdigest()
+meta={"authored_candidate":ref,"selected_repo":str(p),"paths":pins,"lease_module":lease,"normal_config":config,
+      "private_seal":{"path":str(seal),"bytes":7994,"sha256":seal_sha}}
+with (w/"real-checkout-pins.json").open("x") as f:json.dump(meta,f,indent=2,sort_keys=True)
+print("Exact detached checkout",base,"regular worktree files",len(pins))

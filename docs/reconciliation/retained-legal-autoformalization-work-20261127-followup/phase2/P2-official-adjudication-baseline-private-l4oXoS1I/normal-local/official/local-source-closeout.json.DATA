@@ -1,0 +1,50 @@
+{
+  "actual_lease": {
+    "canonical_root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/checkout",
+    "cooperative": true,
+    "lock_path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/checkout/workspace/control-plane/source-leases/source.lock",
+    "mode": "read",
+    "schema_version": "autoencoder-source-lease/v1",
+    "waited_seconds": 9.252969175577164e-05
+  },
+  "all_source_pins_verified_before_and_after": true,
+  "collected": [
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_official_adjudication_declaration_binds_original_official_request",
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_official_adjudication_replays_signed_typed_population_without_adjudicators",
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_official_adjudication_authenticates_two_fresh_scoped_signers_without_application",
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_official_adjudication_retains_regenerated_context_availability",
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_official_adjudication_explicit_fictional_trust_keeps_meaning_unselected",
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_official_adjudication_rejects_resealed_other_subject[legacy_subject-^record schema or CID scope differs$]",
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_official_adjudication_rejects_resealed_other_subject[detached_subject_digest-exact official adjudication request, subject and source assessment required]"
+  ],
+  "commit": "8003780e1ac5a2dd86c1a8df4cab34874f6eb1ab",
+  "conftest_origins": [
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/checkout/conftest.py",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/checkout/tests/conftest.py",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/checkout/tests/unit/conftest.py"
+  ],
+  "elapsed_seconds": 13.676386340521276,
+  "error": 0,
+  "executed": [
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_official_adjudication_declaration_binds_original_official_request",
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_official_adjudication_replays_signed_typed_population_without_adjudicators",
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_official_adjudication_authenticates_two_fresh_scoped_signers_without_application",
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_official_adjudication_retains_regenerated_context_availability",
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_official_adjudication_explicit_fictional_trust_keeps_meaning_unselected",
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_official_adjudication_rejects_resealed_other_subject[legacy_subject-^record schema or CID scope differs$]",
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_official_adjudication_rejects_resealed_other_subject[detached_subject_digest-exact official adjudication request, subject and source assessment required]"
+  ],
+  "execution_scope": "local software fixture",
+  "failure": 0,
+  "group": "official",
+  "junit": {
+    "bytes": 1607,
+    "cases": 7,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/official/result.xml",
+    "sha256": "aba2cd6db6ca1312d09844dd6cac1470d9145fdec466a70541d381301f4c9c95"
+  },
+  "returncode": 0,
+  "same_collection_execution_xml": true,
+  "skipped": 0,
+  "source_read_closed": true
+}

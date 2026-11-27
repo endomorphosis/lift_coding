@@ -1,0 +1,27 @@
+{
+  "native_commands": 0,
+  "prior_candidate": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/lean.after.py.DATA",
+  "product_current_before": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/backends/kernel/lean.py",
+  "pytest_cases": 0,
+  "read_only_canonical": true,
+  "source_comparison": {
+    "lean.after-nested-json-and-severity.py.DATA": {
+      "information": "LeanAxiomReport",
+      "list": "NoneType",
+      "object": "NoneType",
+      "warning": "NoneType"
+    },
+    "lean.after.py.DATA": {
+      "information": "LeanAxiomReport",
+      "list": "TypeError: unhashable type: 'list'",
+      "object": "TypeError: unhashable type: 'dict'",
+      "warning": "NoneType"
+    },
+    "lean.py": {
+      "information": "LeanAxiomReport",
+      "list": "TypeError: unhashable type: 'list'",
+      "object": "TypeError: unhashable type: 'dict'",
+      "warning": "NoneType"
+    }
+  }
+}

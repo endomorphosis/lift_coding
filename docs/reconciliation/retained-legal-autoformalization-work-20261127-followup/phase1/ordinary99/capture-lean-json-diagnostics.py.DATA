@@ -1,0 +1,109 @@
+from pathlib import Path
+from contextlib import ExitStack
+import sys,json
+W=Path(__file__).resolve().parent
+helper=W/'freeze-lean-json-diagnostics.py'
+read_entry=__file__;__file__=str(helper)
+exec(compile(helper.read_text().split('\nif __name__==')[0],str(helper),'exec'),globals())
+__file__=read_entry
+W=Path(__file__).resolve().parent
+assert sys.argv[1:] in (['--verify-only'],['--capture'])
+freeze_ref=ref(W/'actual-isolated-Phase1-lean-json-diagnostics-exact-two-local-freeze.json')
+freeze=json_ref(freeze_ref)
+assert freeze['isolated_Source_context_closed'] and freeze['terminal_returncode']==0 and freeze['parent']==BASE
+head=freeze['frozen']['HEAD'];tree=freeze['frozen']['tree']
+assert rev(D,'HEAD')==head and rev(D,'HEAD^')==BASE and rev(D,'refs/remotes/live-observation/main')=='81ee859cd2bbd4872b0a2e3bc75e2994c14140fe'
+assert snapshot(D)==snapshot(A)==b''
+old_ref={'path': '/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-live-reconciled-Source42-content-epoch-closed.json', 'bytes': 6382, 'sha256': '747a2492f0d6ce993c1208fb74b71c330bd53bd87a676370d3e3b570134ced37'}
+old=json_ref(old_ref)
+assert freeze['full_charge'] and set(freeze['committed'])=={OWNER,TEST}
+old_rows=json_ref(old['outer_epoch_reference'])
+assert len(old_rows)==len({r['path'] for r in old_rows})==1618
+assert old['actual_A_index']==guide['A_index']
+changes=freeze['committed']|guide['committed_docs']|freeze['independent_current_base_roles']
+target={str(D/name) for name in (*changes,'.git/index')}
+assert len(target)==9 and target<={r['path'] for r in old_rows}
+selected_rows=old_rows
+names={D:('.git/HEAD','.git/config','.git/'+freeze['frozen']['branch'],'.git/refs/remotes/live-observation/main'),
+       A:('.git/HEAD','.git/config','.git/refs/remotes/live-observation/main')}
+projects=[dict(root=str(repo),Git_HEAD=rev(repo,'HEAD'),Git_tree=rev(repo,'HEAD^{tree}')) for repo in (D,A)]
+for r in old_rows:
+    assert Path(r['path']).is_relative_to(D) or Path(r['path']).is_relative_to(A)
+envelope=32*1024**2
+nbytes=sum(Path(s).lstat().st_size for s in target)
+assert nbytes+16*1024**2<=envelope
+def check_unchanged():
+    for row in old_rows:
+        p=Path(row['path'])
+        if row['path'] not in target:
+            assert stamp(p.lstat())==row['full9'],row['path']
+    assert all((repo/n).is_file() for repo,items in names.items() for n in items)
+check_unchanged()
+if sys.argv[1]=='--verify-only':
+    print(json.dumps(dict(selected=False,D=head,paths=sorted(target),nbytes=nbytes,total_epoch_rows=len(old_rows))))
+    raise SystemExit(0)
+charge_ref=charge('Source-only-Phase1-lean-json-diagnostics-READ-overlay-full-retained.json',freeze['full_charge'],envelope)
+ledger=json_ref(charge_ref)['after_full_retained_precharge']
+source=source_control()
+body_bytes=0; new={};exact=[];comparison={}
+with ExitStack() as stack:
+    leases=[stack.enter_context(source.source_lease(repo,mode='read',timeout_seconds=30)) for repo in sorted((D,A))]
+    check_unchanged()
+    for oldrow in selected_rows:
+        path=oldrow['path']
+        if path not in target:
+            continue
+        rel=Path(path).relative_to(D).as_posix()
+        row,raw=capture(path)
+        body_bytes+=len(raw)
+        assert body_bytes<=envelope-16*1024**2
+        if rel=='.git/index':
+            assert row==freeze['frozen']['index']
+        else:
+            spec=changes[rel]
+            assert (row['bytes'],row['sha256'],oid(raw))==(spec['bytes'],spec['sha256'],rev(D,'HEAD:'+rel))
+            assert row['full9']==spec['full9']
+            comparison[rel]=dict(from_sha256=oldrow['sha256'],to_sha256=row['sha256'],git_blob=oid(raw))
+        new[path]=row
+        if rel in freeze['committed'] or rel == '.git/index':
+            raw_ref=save('retained-Source-'+Path(rel).name+'.DATA',raw)
+            exact.append(row|dict(raw_reference=raw_ref))
+    check_unchanged()
+    extra=[dict(path=str(repo/n),full9=stamp((repo/n).lstat())) for repo,items in names.items() for n in items]
+    assert body_bytes==nbytes and set(new)==target and len(comparison)==8 and len(exact)==3
+    assert all(stamp(Path(r['path']).lstat())==r['full9'] for r in new.values())
+    assert rev(D,'HEAD')==head and rev(A,'HEAD')==A_HEAD and snapshot(D)==snapshot(A)==b''
+rows=[new.get(r['path'],r) for r in selected_rows]
+python_rows=[r for r in rows if r['path'].endswith('.py')]
+assert len(rows)==1618 and len(python_rows)==1605 and len({r['path'] for r in rows+extra})==1625
+outer=save('actual-live-reconciled-outer1618-epoch.json',rows)
+python=save('actual-live-reconciled-Python1605-epoch.json',python_rows)
+epoch=save('actual-live-reconciled-Source42-content-epoch-closed.json',dict(
+    schema='live-reconciled-isolated-frozen-ordinary-current-epoch-Source42/v1',
+    terminal_returncode=0,Source_closed=True,module_closed=True,actual_closed_Source_read_leases=[l.to_dict() for l in leases],
+    exact_local_freeze=freeze_ref,previous_published_guide=guarded_guide,actual_Source42=SOURCE,
+    prior_published_D=BASE,current_A_HEAD=A_HEAD,outer_epoch_reference=outer,outer_epoch_record_count=len(rows),
+    python_epoch_reference=python,python_epoch_record_count=len(python_rows),actual_A_index=old['actual_A_index'],
+    actual_A_index_raw_reference=old['actual_A_index_raw_reference'],current_retained_base_epoch=old_ref,observed_base=OBSERVED,
+    actual_FD_body_bytes=body_bytes,changed_current_live_role_comparison=comparison,full_charge=charge_ref,
+    actual_ledger_after=ledger,physical_IO_accounting_complete=False,ordinary_phase_qualified=False,
+    shared_canonical_mutation=False,published=False))
+guard=save('actual-isolated-1625-named-metadata-guard.json',dict(exact_frozen_Git=freeze_ref,outer_epoch_reference=outer,
+    prior_actual_content_EPOCH=epoch,rows=rows+extra))
+index=freeze['frozen']['index']
+abi=save('actual-isolated-ordinary99-D27-read-binding.json',dict(
+    schema='actual-D27-observed-D-root-initializer-READ-small-closeout/v1',
+    Root_selected=True,Source_closed=True,owned_module_closed=True,Source_WRITE_claimed=False,promotion_selected=False,
+    actual_isolated_content_epoch=epoch,exact_local_freeze=freeze_ref,outer_epoch_reference=outer,
+    outer_epoch_record_count=len(rows),python_epoch_reference=python,python_epoch_record_count=len(python_rows),
+    protected_index_reference=index))
+close=save('actual-isolated-Phase1-lean-json-diagnostics-READ3-closed.json',dict(
+    schema='actual-closed-Source42-epoch-and-exact-three-retained-reads/v1',
+    terminal_returncode=0,Source_closed=True,module_closed=True,Source_WRITE_claimed=False,
+    ordinary_read_binding_abi=abi,exact_local_freeze=freeze_ref,actual_isolated_content_epoch=epoch,full_charge=charge_ref,
+    actual_ledger_after=ledger,projects=projects,individual_captures=exact,protected_index_reference=index,
+    actual_accelerate_index_metadata=old['actual_A_index'],previous_published_guide=guarded_guide,
+    outer_epoch_reference=outer,outer_epoch_record_count=len(rows),python_epoch_reference=python,
+    python_epoch_record_count=len(python_rows),named_metadata_recheck_reference=guard,named_metadata_count=len(rows+extra),
+    actual_closed_Source_read_leases=[l.to_dict() for l in leases],ordinary_phase_qualified=False,promotion_selected=False))
+print(json.dumps(dict(read_closed=close,epoch=epoch,abi=abi,guard=guard,changed_payload_bytes=body_bytes)))

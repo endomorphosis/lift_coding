@@ -1,0 +1,111 @@
+from pathlib import Path
+import hashlib,importlib.util,json,os,resource,sys,tempfile,time
+import xml.etree.ElementTree as ET
+
+w=Path(__file__).resolve().parent
+meta=json.loads((w/"real-checkout-pins.json").read_bytes())
+root=Path(meta["selected_repo"])
+seal=json.loads(Path(meta["private_seal"]["path"]).read_bytes())
+group,=sys.argv[1:]
+assert group in {"official","legacy"}
+selectors=(w.parent/(group+".selectors")).read_text().splitlines()
+expected=seal["seven_official_controls"]["names"] if group=="official" else None
+out=w/group
+out.mkdir(mode=0o700)
+tempfile.tempdir=str(out)
+limit=512*1024**2
+resource.setrlimit(resource.RLIMIT_AS,(limit,limit))
+resource.setrlimit(resource.RLIMIT_CPU,(55,56))
+os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})
+os.chdir(root)
+sys.path.insert(0,str(root))
+os.environ.update(GIT_OPTIONAL_LOCKS="0", GIT_NO_LAZY_FETCH="1", GIT_TERMINAL_PROMPT="0",
+ IPFS_DATASETS_AUTO_INSTALL_TEST_DEPS="0", IPFS_DATASETS_PY_LAZY_INSTALL_ERGOAI="0",
+ PYTEST_DISABLE_PLUGIN_AUTOLOAD="1", GITHUB_TOKEN="fixture-no-network",
+ OPENBLAS_NUM_THREADS="1", OMP_NUM_THREADS="1", MKL_NUM_THREADS="1")
+for name in ("RUN_LLM_TESTS","RUN_NETWORK_TESTS","RUN_HEAVY_TESTS"):
+    os.environ.pop(name,None)
+def sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+def verify_paths():
+    for rel,row in meta["paths"].items():
+        payload=(root/rel).read_bytes()
+        assert (len(payload),sha(payload))==(row["bytes"],row["sha256"]),rel
+role=root/meta["lease_module"]
+spec=importlib.util.spec_from_file_location("local_source_locked_admission_profile",role)
+control=importlib.util.module_from_spec(spec)
+sys.modules[spec.name]=control
+spec.loader.exec_module(control)
+assert control.canonical_source_root(root)==root
+
+base=w.parents[3]
+forbidden_roots=[
+    base/"repositories/datasets",base/"repositories/accelerate",
+    Path("/home/barberb/lift_coding/external/ipfs_datasets"),
+    Path("/home/barberb/lift_coding/external/ipfs_accelerate"),
+]
+def audit(event,args):
+    if event.startswith("socket.") or event in ("os.exec","os.fork","os.forkpty","os.posix_spawn","os.system"):
+        raise PermissionError("Outside local software fixture effect scope")
+    if event=="subprocess.Popen":
+        argv=args[1]
+        allowed=(["git","rev-parse","HEAD"],["git","status","--porcelain"])
+        if not isinstance(argv,(list,tuple)) or list(argv) not in allowed or Path.cwd()!=root:
+            raise PermissionError("Outside local software fixture subprocess scope")
+    if event=="import" and args[0].split(".")[0] in {"torch","jax","tensorflow","transformers","huggingface_hub"}:
+        raise ImportError("Model import outside local software fixture scope")
+    if event=="open" and isinstance(args[0],(str,bytes,os.PathLike)):
+        path=Path(os.fsdecode(args[0])).resolve()
+        if any(path.is_relative_to(p) for p in forbidden_roots):
+            raise PermissionError("Live source tree reference outside isolated checkout")
+        flags=args[2] or 0
+        if flags & (os.O_WRONLY|os.O_RDWR|os.O_CREAT|os.O_TRUNC|os.O_APPEND) and not path.is_relative_to(out):
+            if str(path)!="/dev/null":
+                raise PermissionError("Fixture output must stay in its private receipt directory")
+
+class Observer:
+    def __init__(self):
+        self.collected=[]
+        self.executed=[]
+        self.configs=[]
+    def pytest_collection_finish(self,session):
+        self.collected=[item.nodeid for item in session.items]
+        self.configs=sorted(str(Path(p.__file__).resolve()) for p in session.config.pluginmanager.get_plugins()
+                            if getattr(p,"__file__",None) and Path(p.__file__).name=="conftest.py")
+    def pytest_runtest_logreport(self,report):
+        if report.when=="call":
+            self.executed.append(report.nodeid)
+
+observer=Observer()
+started=time.monotonic()
+xml=out/"result.xml"
+with control.source_lease(root,mode="read",timeout_seconds=30) as held:
+    lease=held.to_dict()
+    assert held.canonical_root==str(root) and held.mode=="read"
+    verify_paths()
+    sys.addaudithook(audit)
+    import pytest
+    code=int(pytest.main(["-c",str(root/"pytest.ini"),"--rootdir",str(root),"--color=no",
+                          "-o","cache_dir="+str(out/"cache"),"--basetemp",str(out/"pytest"),
+                          "--junitxml",str(xml),"-q",*selectors],plugins=[observer]))
+    verify_paths()
+summary={"group":group,"returncode":code,"source_read_closed":True,"actual_lease":lease,
+         "elapsed_seconds":time.monotonic()-started,"commit":meta["authored_candidate"]["oid"],
+         "collected":observer.collected,"executed":observer.executed,"conftest_origins":observer.configs,
+         "all_source_pins_verified_before_and_after":True,"execution_scope":"local software fixture"}
+if xml.exists():
+    nodes=ET.fromstring(xml.read_bytes()).findall(".//testcase")
+    summary["junit"]={"path":str(xml),"bytes":xml.stat().st_size,"sha256":sha(xml.read_bytes()),"cases":len(nodes)}
+    counts={status:sum(n.find(status) is not None for n in nodes) for status in ("failure","error","skipped")}
+    summary.update(counts)
+    summary["same_collection_execution_xml"]=(
+        observer.collected==observer.executed and
+        [n.get("name") for n in nodes]==[node.split("::")[-1] for node in observer.collected] and
+        (expected is None or [n.get("name") for n in nodes]==expected)
+    )
+report=out/"local-source-closeout.json"
+with report.open("x") as f:
+    json.dump(summary,f,indent=2,sort_keys=True)
+    f.write("\n")
+print("local Source",group,"terminal",code,"report",report,flush=True)
+raise SystemExit(code)

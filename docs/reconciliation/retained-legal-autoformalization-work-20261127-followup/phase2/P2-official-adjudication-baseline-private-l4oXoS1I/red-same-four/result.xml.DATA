@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="4" time="3.580" timestamp="2026-11-27T03:58:43.671591+00:00" hostname="spark-b271"><testcase classname="tests.unit.logic.autoformal.test_corpus_source_adjudication" name="test_official_adjudication_declaration_binds_original_official_request" time="1.497"><failure message="ipfs_datasets_py.logic.autoformal.corpus_contracts.CorpusContractError: closed legal-corpus-source-review-request/v1 fields required">tests/unit/logic/autoformal/test_corpus_source_adjudication.py:1749: in test_official_adjudication_declaration_binds_original_official_request
+    declaration = author(owner, data)
+tests/unit/logic/autoformal/test_corpus_source_adjudication.py:208: in author
+    return owner.record_source_adjudication_declaration(
+ipfs_datasets_py/logic/autoformal/corpus_source_adjudication.py:133: in record_source_adjudication_declaration
+    request, subject, typed_group, slots, variants = _unit(request, subject, typed_group, pending_slots, answer_variants)
+ipfs_datasets_py/logic/autoformal/corpus_source_adjudication.py:99: in _unit
+    checked.append(contracts.validate_record(json.loads(base._plain(record, contracts.MAX_RECORD_BYTES)), schema=schema, fields=fields))
+ipfs_datasets_py/logic/autoformal/corpus_contracts.py:141: in validate_record
+    require_keys(checked, {*fields, "schema", "record_cid", "cid_scope"}, schema)
+ipfs_datasets_py/logic/autoformal/corpus_contracts.py:51: in require_keys
+    raise CorpusContractError(f"closed {label} fields required")
+E   ipfs_datasets_py.logic.autoformal.corpus_contracts.CorpusContractError: closed legal-corpus-source-review-request/v1 fields required</failure></testcase><testcase classname="tests.unit.logic.autoformal.test_corpus_source_adjudication" name="test_official_adjudication_replays_signed_typed_population_without_adjudicators" time="0.087"><failure message="ipfs_datasets_py.logic.autoformal.corpus_contracts.CorpusContractError: closed complete typed source adjudication replay inputs required">tests/unit/logic/autoformal/test_corpus_source_adjudication.py:1774: in test_official_adjudication_replays_signed_typed_population_without_adjudicators
+    report = assess(owner, data)
+tests/unit/logic/autoformal/test_corpus_source_adjudication.py:331: in assess
+    return owner.assess_source_adjudications(
+ipfs_datasets_py/logic/autoformal/corpus_source_adjudication.py:330: in assess_source_adjudications
+    _fail('closed complete typed source adjudication replay inputs required')
+ipfs_datasets_py/logic/autoformal/corpus_source_adjudication.py:56: in _fail
+    raise contracts.CorpusContractError(message)
+E   ipfs_datasets_py.logic.autoformal.corpus_contracts.CorpusContractError: closed complete typed source adjudication replay inputs required</failure></testcase><testcase classname="tests.unit.logic.autoformal.test_corpus_source_adjudication" name="test_official_adjudication_authenticates_two_fresh_scoped_signers_without_application" time="0.050"><failure message="ipfs_datasets_py.logic.autoformal.corpus_contracts.CorpusContractError: closed legal-corpus-source-review-request/v1 fields required">tests/unit/logic/autoformal/test_corpus_source_adjudication.py:1786: in test_official_adjudication_authenticates_two_fresh_scoped_signers_without_application
+    data = signed_case(owner, original, original["typed_report"])
+tests/unit/logic/autoformal/test_corpus_source_adjudication.py:292: in signed_case
+    body = author(owner, data, choices(data, ordinal, select=select), ordinal)
+tests/unit/logic/autoformal/test_corpus_source_adjudication.py:208: in author
+    return owner.record_source_adjudication_declaration(
+ipfs_datasets_py/logic/autoformal/corpus_source_adjudication.py:133: in record_source_adjudication_declaration
+    request, subject, typed_group, slots, variants = _unit(request, subject, typed_group, pending_slots, answer_variants)
+ipfs_datasets_py/logic/autoformal/corpus_source_adjudication.py:99: in _unit
+    checked.append(contracts.validate_record(json.loads(base._plain(record, contracts.MAX_RECORD_BYTES)), schema=schema, fields=fields))
+ipfs_datasets_py/logic/autoformal/corpus_contracts.py:141: in validate_record
+    require_keys(checked, {*fields, "schema", "record_cid", "cid_scope"}, schema)
+ipfs_datasets_py/logic/autoformal/corpus_contracts.py:51: in require_keys
+    raise CorpusContractError(f"closed {label} fields required")
+E   ipfs_datasets_py.logic.autoformal.corpus_contracts.CorpusContractError: closed legal-corpus-source-review-request/v1 fields required</failure></testcase><testcase classname="tests.unit.logic.autoformal.test_corpus_source_adjudication" name="test_official_adjudication_retains_regenerated_context_availability" time="1.243"><failure message="ipfs_datasets_py.logic.autoformal.corpus_contracts.CorpusContractError: closed complete typed source adjudication replay inputs required">tests/unit/logic/autoformal/test_corpus_source_adjudication.py:1873: in test_official_adjudication_retains_regenerated_context_availability
+    report = assess(owner, data)
+tests/unit/logic/autoformal/test_corpus_source_adjudication.py:331: in assess
+    return owner.assess_source_adjudications(
+ipfs_datasets_py/logic/autoformal/corpus_source_adjudication.py:330: in assess_source_adjudications
+    _fail('closed complete typed source adjudication replay inputs required')
+ipfs_datasets_py/logic/autoformal/corpus_source_adjudication.py:56: in _fail
+    raise contracts.CorpusContractError(message)
+E   ipfs_datasets_py.logic.autoformal.corpus_contracts.CorpusContractError: closed complete typed source adjudication replay inputs required</failure></testcase></testsuite></testsuites>

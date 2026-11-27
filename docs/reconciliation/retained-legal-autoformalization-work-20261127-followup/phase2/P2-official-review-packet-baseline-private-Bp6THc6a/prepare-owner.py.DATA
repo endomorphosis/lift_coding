@@ -1,0 +1,74 @@
+from pathlib import Path
+import hashlib
+
+raw=Path("owner.before.DATA").read_bytes()
+assert hashlib.sha256(raw).hexdigest()=="c2a3a08963e32b7ef3371ae32ff1266ad6fe052c87a491857dcc720170367a29"
+code=raw.decode()
+
+def replace(old,new):
+    global code
+    assert code.count(old)==1,old
+    code=code.replace(old,new)
+
+replace('PROFILE = "complete-source-first-parent-grouped-review-packets/v1"\n',
+'''PROFILE = "complete-source-first-parent-grouped-review-packets/v1"
+OFFICIAL_PROFILE = "complete-source-first-official-occurrence-review-packets/v2"
+OFFICIAL_MANIFEST_SCHEMA = "legal-corpus-official-source-review-packets-manifest/v2"
+OFFICIAL_UNIT_SCHEMA = "legal-corpus-official-source-review-unit-packet/v2"
+OFFICIAL_DOCUMENT_SCHEMA = "legal-corpus-official-source-review-packet-document/v2"
+_LEGACY_REPLAY_FIELDS = {"alignment_corpus_bytes", "expected_alignment_corpus_pins", "alignment_replay_inputs",
+    "source_report_bytes", "expected_source_report_pins"}
+_OFFICIAL_REPLAY_FIELDS = {"document_inputs", "expected_document_population_sha256", "occurrence_inputs",
+    "expected_occurrence_population_sha256", "pending_interpretations", "expected_pending_interpretations_sha256"}
+''')
+replace('PROMPTS = {\n',
+'''_OFFICIAL_SCHEMAS = {**SCHEMAS, "manifest": OFFICIAL_MANIFEST_SCHEMA,
+    "unit_packets": OFFICIAL_UNIT_SCHEMA, "official_documents": OFFICIAL_DOCUMENT_SCHEMA}
+_OFFICIAL_FIELDS = {**FIELDS,
+    "official_documents": {"document_index", "source_version_ref", "source_view_ref", "raw_sha256",
+        "extracted_sha256", *COMMON_FIELDS},
+    "unit_packets": {"queue_ordinal", "source_review_request_ref", "source_review_subject_ref",
+        "dependency_manifest_sha256", "quoted_source_occurrence", "question_catalog_ref",
+        "candidate_interpretations_included", *COMMON_FIELDS},
+}
+PROMPTS = {
+''')
+replace('''def _pins():
+    result = reviews._pins(reviews._owners())
+''','''def _pins(*, official=False):
+    owners = reviews._owners()
+    result = reviews._official_pins(owners) if official else reviews._pins(owners)
+''')
+replace('def _catalog():\n','def _catalog(*, profile=PROFILE):\n')
+replace('return _candidate(CATALOG_SCHEMA, profile=PROFILE, questions=questions,',
+        'return _candidate(CATALOG_SCHEMA, profile=profile, questions=questions,')
+replace('def prepare_source_review_packets(*, expected_preparation_manifest_sha256, alignment_corpus_bytes,',
+        'def _prepare_legacy_packets(*, expected_preparation_manifest_sha256, alignment_corpus_bytes,')
+replace('def _detach(bundle, bounds):\n',
+        Path("official-owner.fragment").read_text()+'''def _detach(bundle, bounds, *, official=False):
+    schemas = _OFFICIAL_SCHEMAS if official else SCHEMAS
+    fields = _OFFICIAL_FIELDS if official else FIELDS
+''')
+replace("""    for group in COMPONENTS:
+        values = [bundle[group]] if group == 'manifest' else bundle[group]
+""","""    if official:
+        caps.update(dict.fromkeys(('parent_packets', 'document_parts', 'comparison_evidence', 'selector_projections'), 0))
+    for group in COMPONENTS:
+        values = [bundle[group]] if group == 'manifest' else bundle[group]
+""")
+replace('schema=SCHEMAS[group], fields=FIELDS[group]))','schema=schemas[group], fields=fields[group]))')
+replace("""    detached = _detach(bundle, _limits(inputs.get('limits')))
+    expected = prepare_source_review_packets(**inputs)
+    reviews._equal_components(detached, expected)
+    if _pins() != expected['manifest']['producer_pins']:
+""","""    official = _packet_uses_official_replay(inputs.keys() -
+        {'expected_preparation_manifest_sha256', 'source_review_limits', 'limits'})
+    detached = _detach(bundle, _limits(inputs.get('limits')), official=official)
+    expected = prepare_source_review_packets(**inputs)
+    reviews._equal_components(detached, expected)
+    current_pins = _pins(official=True) if official else _pins()
+    if current_pins != expected['manifest']['producer_pins']:
+""")
+compile(code,"corpus_source_review_packets.py","exec")
+with Path("owner.after.DATA").open("x") as f:
+    f.write(code)

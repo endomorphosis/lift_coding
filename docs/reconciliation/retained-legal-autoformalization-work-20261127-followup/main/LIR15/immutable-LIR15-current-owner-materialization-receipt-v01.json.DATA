@@ -1,0 +1,33 @@
+{
+  "Git_mutations": false,
+  "HEAD_stable_during_materialization": true,
+  "Source_entries": 0,
+  "all_prior_reads_and_charges_retained": true,
+  "canonical_worktree_body_reads": 0,
+  "current_HEAD_Git_blob": "e0d88cebe26ba6600db108ae39b5a7b039a71375",
+  "historical_Git_blob": "e0d88cebe26ba6600db108ae39b5a7b039a71375",
+  "historical_commit": "bda9f1fb146722e8b116cb0503880fb22e5291a4",
+  "historical_current_Git_blob_equal": true,
+  "imports_or_tests_or_Native_or_model": false,
+  "new_Git_object_body_bytes": 137040,
+  "observed_current_HEAD": "bda9f1fb146722e8b116cb0503880fb22e5291a4",
+  "private_copy": {
+    "bytes": 137040,
+    "full9": {
+      "st_ctime_ns": 1795671567549050543,
+      "st_dev": 66306,
+      "st_gid": 1000,
+      "st_ino": 64404728,
+      "st_mode": 33024,
+      "st_mtime_ns": 1795671567549050543,
+      "st_nlink": 1,
+      "st_size": 137040,
+      "st_uid": 1000
+    },
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/LIR15-source-version-private-v01/legal_corpus_incremental.published-bda9f1fb.py.DATA",
+    "sha256": "680af4fab491c868f5dd90ddb205797559385809d046c760365daecd7eb584a1"
+  },
+  "private_copy_readback_bytes": 137040,
+  "relative_path": "ipfs_datasets_py/logic/autoformal/legal_corpus_incremental.py",
+  "schema": "Root-selected-immutable-LIR15-owner-private-materialization/v1"
+}

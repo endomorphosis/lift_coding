@@ -1,0 +1,46 @@
+{
+  "actual_lease": {
+    "canonical_root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/normal-local/checkout",
+    "cooperative": true,
+    "lock_path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/normal-local/checkout/workspace/control-plane/source-leases/source.lock",
+    "mode": "read",
+    "schema_version": "autoencoder-source-lease/v1",
+    "waited_seconds": 8.225720375776291e-05
+  },
+  "all_source_pins_verified_before_and_after": true,
+  "collected": [
+    "tests/unit/logic/autoformal/test_corpus_source_review_responses.py::test_official_v2_typed_responses_keep_all_blank_groups_pending",
+    "tests/unit/logic/autoformal/test_corpus_source_review_responses.py::test_official_v2_typed_responses_authenticate_exact_fictional_answers",
+    "tests/unit/logic/autoformal/test_corpus_source_review_responses.py::test_official_v2_typed_response_refuses_a_repinned_legacy_subject",
+    "tests/unit/logic/autoformal/test_corpus_source_review_responses.py::test_official_v2_typed_response_assessment_requires_independent_pins[expected_preparation_manifest_sha256-independent typed source preparation root differs]",
+    "tests/unit/logic/autoformal/test_corpus_source_review_responses.py::test_official_v2_typed_response_assessment_requires_independent_pins[expected_response_bindings_sha256-complete response binding population differs]"
+  ],
+  "commit": "4de473b6f3aa5e3273d149f7677a43c690167c1d",
+  "conftest_origins": [
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/normal-local/checkout/conftest.py",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/normal-local/checkout/tests/conftest.py",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/normal-local/checkout/tests/unit/conftest.py"
+  ],
+  "elapsed_seconds": 4.872027212753892,
+  "error": 0,
+  "executed": [
+    "tests/unit/logic/autoformal/test_corpus_source_review_responses.py::test_official_v2_typed_responses_keep_all_blank_groups_pending",
+    "tests/unit/logic/autoformal/test_corpus_source_review_responses.py::test_official_v2_typed_responses_authenticate_exact_fictional_answers",
+    "tests/unit/logic/autoformal/test_corpus_source_review_responses.py::test_official_v2_typed_response_refuses_a_repinned_legacy_subject",
+    "tests/unit/logic/autoformal/test_corpus_source_review_responses.py::test_official_v2_typed_response_assessment_requires_independent_pins[expected_preparation_manifest_sha256-independent typed source preparation root differs]",
+    "tests/unit/logic/autoformal/test_corpus_source_review_responses.py::test_official_v2_typed_response_assessment_requires_independent_pins[expected_response_bindings_sha256-complete response binding population differs]"
+  ],
+  "execution_scope": "local software fixture",
+  "failure": 0,
+  "group": "official",
+  "junit": {
+    "bytes": 1271,
+    "cases": 5,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/normal-local/official/result.xml",
+    "sha256": "f6328b782a3b5ef19ef4592ded9f3ec98c1c44011bf45c1b66eaaaaf206451d4"
+  },
+  "returncode": 0,
+  "same_collection_execution_xml": true,
+  "skipped": 0,
+  "source_read_closed": true
+}

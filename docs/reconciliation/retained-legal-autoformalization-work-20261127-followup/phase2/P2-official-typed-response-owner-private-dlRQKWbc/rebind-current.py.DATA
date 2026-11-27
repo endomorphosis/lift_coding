@@ -1,0 +1,31 @@
+from pathlib import Path
+import hashlib, json, os, subprocess
+root=Path.cwd()
+store=root.parents[2]/"publish-all-20261126-nsFFGMUO/datasets.git"
+env={**os.environ,"GIT_OPTIONAL_LOCKS":"0","GIT_NO_LAZY_FETCH":"1"}
+def git(*args):
+    return subprocess.check_output(["git","--git-dir",str(store),*args],env=env,timeout=20)
+initial=json.loads(Path("input-epoch.json").read_bytes())
+head=git("rev-parse","refs/reconciliation/typed-intake-base-20261127").decode().strip()
+before=initial["head"]
+delta=git("diff-tree","-r","--no-commit-id","--name-only","-z",before,head).decode().rstrip("\0")
+rebound={}
+assert not ({initial["owner"],initial["test"],initial["guide"]}&set(delta.split("\0")))
+for rel in delta.split("\0"):
+    if rel not in initial["roles"]:
+        continue
+    file=Path("project")/rel
+    old_pin=initial["roles"][rel]
+    old=file.read_bytes()
+    assert (len(old),hashlib.sha256(old).hexdigest())==(old_pin["bytes"],old_pin["sha256"])
+    blob=git("rev-parse",head+":"+rel).decode().strip()
+    raw=git("cat-file","blob",blob)
+    assert hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest()==blob
+    new={"bytes":len(raw),"sha256":hashlib.sha256(raw).hexdigest(),"blob":blob}
+    file.write_bytes(raw)
+    initial["roles"][rel]=new
+    rebound[rel]={"previous":old_pin,"current":new}
+initial.update(head=head,initial_head=before,rebound=rebound)
+with Path("current-input-epoch.json").open("x") as f:
+    json.dump(initial,f,indent=2,sort_keys=True);f.write("\n")
+print("rebound",list(rebound))

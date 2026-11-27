@@ -1,0 +1,125 @@
+from pathlib import Path
+import hashlib
+
+before=Path("owner.before.DATA").read_bytes()
+assert hashlib.sha256(before).hexdigest()=="2e11ca5f1f8c23b7d399e72c529432f611a94dcc4599c6f69025884e8219dc86"
+code=before.decode()
+
+def replace(old, new):
+    global code
+    assert code.count(old)==1,old
+    code=code.replace(old,new)
+
+replace("""REPLAY_REQUIRED = {'preparation', 'source_registry', 'source_policy', 'source_review_groups',
+    'typed_response_report', 'adjudication_registry', 'adjudication_policy', 'adjudication_groups',
+    'expected_typed_response_manifest_sha256', 'expected_adjudication_registry_sha256',
+    'expected_adjudication_policy_sha256', 'expected_adjudication_group_pins', 'response_bindings',
+    'expected_response_bindings_sha256', 'expected_preparation_manifest_sha256', 'expected_registry_sha256',
+    'expected_policy_sha256', 'expected_review_group_pins', 'at_time_utc', 'alignment_corpus_bytes',
+    'expected_alignment_corpus_pins', 'alignment_replay_inputs', 'source_report_bytes', 'expected_source_report_pins'}
+""","""_COMMON_REPLAY_REQUIRED = {'preparation', 'source_registry', 'source_policy', 'source_review_groups',
+    'typed_response_report', 'adjudication_registry', 'adjudication_policy', 'adjudication_groups',
+    'expected_typed_response_manifest_sha256', 'expected_adjudication_registry_sha256',
+    'expected_adjudication_policy_sha256', 'expected_adjudication_group_pins', 'response_bindings',
+    'expected_response_bindings_sha256', 'expected_preparation_manifest_sha256', 'expected_registry_sha256',
+    'expected_policy_sha256', 'expected_review_group_pins', 'at_time_utc'}
+REPLAY_REQUIRED = _COMMON_REPLAY_REQUIRED | {'alignment_corpus_bytes', 'expected_alignment_corpus_pins',
+    'alignment_replay_inputs', 'source_report_bytes', 'expected_source_report_pins'}
+_OFFICIAL_REPLAY_REQUIRED = _COMMON_REPLAY_REQUIRED | {'document_inputs', 'expected_document_population_sha256',
+    'occurrence_inputs', 'expected_occurrence_population_sha256',
+    'pending_interpretations', 'expected_pending_interpretations_sha256'}
+""")
+replace("""def _pins():
+    result = adjudication._pins()
+""","""def _pins(*, official=False):
+    result = adjudication._pins(official=True) if official else adjudication._pins()
+""")
+replace("""    rows = []
+    for value, schema, fields in ((request, source.REQUEST_SCHEMA, source.REQUEST_FIELDS),
+            (subject, source.SUBJECT_SCHEMA, source.SUBJECT_FIELDS),
+            (group, adjudication.GROUP_SCHEMA, adjudication.GROUP_FIELDS)):
+        rows.append(contracts.validate_record(base._load(base._plain(value, contracts.MAX_RECORD_BYTES),
+            contracts.MAX_RECORD_BYTES), schema=schema, fields=fields))
+    request, subject, group = rows
+""","""    request = base._load(base._plain(request, contracts.MAX_RECORD_BYTES), contracts.MAX_RECORD_BYTES)
+    official = type(request) is dict and request.get('schema') == source.OFFICIAL_REQUEST_SCHEMA
+    request_schema = source.OFFICIAL_REQUEST_SCHEMA if official else source.REQUEST_SCHEMA
+    request_fields = source.OFFICIAL_REQUEST_FIELDS if official else source.REQUEST_FIELDS
+    subject_schema = source.OFFICIAL_SUBJECT_SCHEMA if official else source.SUBJECT_SCHEMA
+    request = contracts.validate_record(request, schema=request_schema, fields=request_fields)
+    subject = contracts.validate_record(base._load(base._plain(subject, contracts.MAX_RECORD_BYTES),
+        contracts.MAX_RECORD_BYTES), schema=subject_schema, fields=source.SUBJECT_FIELDS)
+    group = contracts.validate_record(base._load(base._plain(group, contracts.MAX_RECORD_BYTES),
+        contracts.MAX_RECORD_BYTES), schema=adjudication.GROUP_SCHEMA, fields=adjudication.GROUP_FIELDS)
+""")
+replace("""    choices = declaration['decisions']
+""","""    if official:
+        typed_group = contracts.validate_record(group['typed_response_group_record'],
+            schema=responses.GROUP_SCHEMA, fields=responses.FIELDS['records'])
+        raw_group = contracts.validate_record(typed_group['raw_source_assessment_record'],
+            schema=source.OFFICIAL_GROUP_SCHEMA, fields=source.GROUP_FIELDS)
+        deferred = request['deferred_review_slot_ids']
+        if (request['profile'] != source.OFFICIAL_PROFILE or subject['profile'] != source.OFFICIAL_PROFILE
+                or subject['graph_id'] != request['record_cid']
+                or subject['scope_id'] != request['review_scope_id']
+                or subject['ast_sha256'] != request['questions_sha256']
+                or subject['source_binding_sha256'] != request['source_binding_sha256']
+                or subject['context_slot_ids'] != request['context_slot_ids']
+                or declaration['typed_group_ref'] != _ref(typed_group)
+                or typed_group['request_cid'] != request['record_cid']
+                or typed_group['queue_ordinal'] != request['queue_ordinal']
+                or raw_group['review_request_cid'] != request['record_cid']
+                or raw_group['queue_ordinal'] != request['queue_ordinal']
+                or raw_group['subject_sha256'] != _digest(subject)
+                or any(row['deferred_review_slot_ids'] != deferred for row in (subject, group, typed_group, raw_group))):
+            _fail('exact official application request, subject and adjudicated source assessment required')
+    choices = declaration['decisions']
+""")
+replace("""    if type(values) is not dict or not REPLAY_REQUIRED <= set(values) or set(values) - REPLAY_REQUIRED - REPLAY_OPTIONAL:
+        _fail('closed complete adjudication replay input object required')
+""","""    if type(values) is not dict:
+        _fail('closed complete adjudication replay input object required')
+    preparation = values.get('preparation')
+    manifest = preparation.get('manifest') if type(preparation) is dict else None
+    official = type(manifest) is dict and manifest.get('schema') == source.OFFICIAL_MANIFEST_SCHEMA
+    required = _OFFICIAL_REPLAY_REQUIRED if official else REPLAY_REQUIRED
+    supplied = set(values)
+    if not required <= supplied <= required | REPLAY_OPTIONAL:
+        _fail('closed complete adjudication replay input object required')
+""")
+replace("    preparation = source._detach_preparation(result['preparation'], source_bounds)",
+        "    preparation = source._detach_preparation(result['preparation'], source_bounds, official=official)")
+replace("""    producer_pins = _pins()
+    checked = adjudication.validate_source_adjudications(offered, **replay)
+    preparation = replay['preparation']
+""","""    preparation = replay['preparation']
+    official = preparation['manifest']['schema'] == source.OFFICIAL_MANIFEST_SCHEMA
+    producer_pins = _pins(official=True) if official else _pins()
+    checked = adjudication.validate_source_adjudications(offered, **replay)
+""")
+replace("""    domain = auth._ReviewDomain(source.SUBJECT_SCHEMA, CLAIM_SCHEMA, ACTION, AUDIENCE, ASSESSMENT_SCHEMA, source._subject, source.ACTIVE_SLOT_COUNT)
+""","""    subject_schema = source.OFFICIAL_SUBJECT_SCHEMA if official else source.SUBJECT_SCHEMA
+    verify_subject = source._official_subject if official else source._subject
+    domain = auth._ReviewDomain(subject_schema, CLAIM_SCHEMA, ACTION, AUDIENCE, ASSESSMENT_SCHEMA,
+        verify_subject, source.ACTIVE_SLOT_COUNT)
+""")
+replace("""            deferred_review_slot_ids=request['deferred_review_slot_ids'], original_contexts_remain_required_unavailable=True)
+""","""            deferred_review_slot_ids=request['deferred_review_slot_ids'],
+            original_contexts_remain_required_unavailable=upstream['original_contexts_remain_required_unavailable'])
+""")
+replace("""    if _pins() != producer_pins:
+""","""    current_pins = _pins(official=True) if official else _pins()
+    if current_pins != producer_pins:
+""")
+replace("""    if _pins() != expected['manifest']['producer_pins']:
+""","""    official = False
+    if expected['records']:
+        adjudicated = expected['records'][0]['original_adjudication_group_record']
+        raw_group = adjudicated['typed_response_group_record']['raw_source_assessment_record']
+        official = raw_group['schema'] == source.OFFICIAL_GROUP_SCHEMA
+    current_pins = _pins(official=True) if official else _pins()
+    if current_pins != expected['manifest']['producer_pins']:
+""")
+compile(code,"corpus_source_application.py","exec")
+with Path("owner.after.DATA").open("x") as f:
+    f.write(code)

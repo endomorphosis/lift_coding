@@ -1,0 +1,85 @@
+{
+  "SDK_managed": false,
+  "actual_title10_blank_review_packet": {
+    "bytes": 3539,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/title10/actual-title10-official-review-packet-closed.json",
+    "sha256": "c927e1ff88fc0bea7c9dc101dbfa203b34b27d41751a7be9ac5e4afec7552be7"
+  },
+  "all_three_Source_READs_closed_and_locks_exclusive_probe_acquired": true,
+  "candidate": {
+    "isolated_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-all-20261126-nsFFGMUO/datasets.git",
+    "oid": "9b93d9ed54657ebeb611ec01527c0ab2ddd22e03",
+    "parent": "10bdbd38f30ea6b25c2ddec54802bed61d9fb48c",
+    "ref": "refs/reconciliation/pending-official-source-review-packets-20261127",
+    "tree": "1bc8a8808610b6ebd88de62a5ffdd79ac24dcdd9"
+  },
+  "exact_source_files_before_and_after_each": 230,
+  "isolated_checkout_role_map": {
+    "bytes": 62215,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/real-checkout-pins.json",
+    "sha256": "51b50866673f1731a115f913e2dca01f6b4800f219160c2f78b36b5941d4ffad"
+  },
+  "normal": {
+    "clean": true,
+    "fixture_scope": {
+      "legacy": {
+        "case_vector": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "cases": 5,
+        "functions": 5,
+        "junit": {
+          "bytes": 1150,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/legacy/result.xml",
+          "sha256": "d9ed880a8f25e9881df84ed3cd8ff66e25f65fb254d5a670ac5e9f9aa90f2d73"
+        },
+        "report": {
+          "bytes": 3746,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/legacy/local-source-closeout.json",
+          "sha256": "ac610303c26b8da97dd99e325564f684ea8e4b58a9c25b1d2b4b964e8932f4a5"
+        }
+      },
+      "official": {
+        "case_vector": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          4,
+          1
+        ],
+        "cases": 10,
+        "functions": 7,
+        "junit": {
+          "bytes": 1994,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/official/result.xml",
+          "sha256": "0c311e8d7f5592a9519aa97ec5de9503fad2d0752be40277a359bc9e231b78e7"
+        },
+        "report": {
+          "bytes": 5112,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/official/local-source-closeout.json",
+          "sha256": "dccc05e1bb0b5151ebb5b36ac8415804fa84ebe1a0da34550ed992e8f7ef1ef8"
+        }
+      }
+    },
+    "original_configs": [
+      "pytest.ini",
+      "conftest.py",
+      "tests/conftest.py",
+      "tests/unit/conftest.py"
+    ]
+  },
+  "owner_test_and_guide_seal": {
+    "bytes": 8205,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/SEALED-official-V2-source-review-packets-local-candidate.json",
+    "sha256": "4a019e65c4e827d4bc86f24eecae5d7367cc39e38b16364049bac975570d4a58"
+  },
+  "published": false,
+  "real_statutory_review": false,
+  "schema": "official-V2-source-review-packets-normal-local-qualification/v1"
+}

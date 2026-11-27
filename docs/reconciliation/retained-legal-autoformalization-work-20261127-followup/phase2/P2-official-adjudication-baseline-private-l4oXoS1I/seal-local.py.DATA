@@ -1,0 +1,105 @@
+from pathlib import Path
+import ast, difflib, hashlib, json, os, subprocess
+import xml.etree.ElementTree as ET
+
+w=Path(__file__).resolve().parent
+previous=w.parent/"P2-official-typed-response-owner-private-dlRQKWbc"
+qualification=previous/"normal-local/actual-official-V2-and-legacy-Source-closed.json"
+base="4de473b6f3aa5e3273d149f7677a43c690167c1d"
+store=w.parents[2]/"publish-all-20261126-nsFFGMUO/datasets.git"
+ref="refs/reconciliation/pending-official-source-adjudication-20261127"
+env={**os.environ,"GIT_INDEX_FILE":str(w/"candidate.index"),"GIT_NO_LAZY_FETCH":"1","GIT_OPTIONAL_LOCKS":"0"}
+
+def git(*args, raw=None):
+    return subprocess.run(["git","--git-dir",str(store),"-c","index.threads=1",*args],
+        input=raw,env=env,check=True,capture_output=True,timeout=30).stdout
+
+def sha(data):
+    return hashlib.sha256(data).hexdigest()
+
+def pin(path):
+    data=path.read_bytes()
+    return {"path":str(path),"bytes":len(data),"sha256":sha(data)}
+
+def write(path, value):
+    with path.open("x") as f:
+        json.dump(value,f,indent=2,sort_keys=True);f.write("\n")
+
+assert pin(qualification)["sha256"]=="23fd9dbf4cc2ed2327c5d294f92e1ec320dcfcd9bfe6ac53884c64e43249e5db"
+previous_closeout=json.loads(qualification.read_bytes())
+assert previous_closeout["candidate"]["oid"]==base
+for field in ("NAME","EMAIL"):
+    value=subprocess.check_output(["git","-C","/home/barberb/lift_coding","config","--get","user."+field.lower()],
+                                  env=env,timeout=10).decode().strip()
+    env["GIT_AUTHOR_"+field]=env["GIT_COMMITTER_"+field]=value
+root="ipfs_datasets_py/logic/autoformal/"
+files={
+    root+"corpus_source_adjudication.py":("owner.before.DATA","owner.after.DATA"),
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py":("test.before.DATA","test.final.DATA"),
+    root+"docs/guides/corpus_source_review_responses.md":("guide.before.DATA","guide.after.DATA")
+}
+original=json.loads((previous/"current-input-epoch.json").read_bytes())
+roles=set(original["roles"])|set(files)
+git("read-tree",base)
+edits, forward, inverse={}, [], []
+for rel,(before_name,after_name) in files.items():
+    before,after=w/before_name,w/after_name
+    old,new=before.read_bytes(),after.read_bytes()
+    assert git("cat-file","blob",base+":"+rel)==old
+    assert (w/"project"/rel).read_bytes()==new
+    if before_name=="test.before.DATA":
+        assert new.startswith(old)
+        nodes=ast.parse(old).body
+        assert [ast.dump(n) for n in ast.parse(new).body[:len(nodes)]]==[ast.dump(n) for n in nodes]
+    new_blob=git("hash-object","-w","--stdin",raw=new).decode().strip()
+    git("update-index","--cacheinfo",f"100644,{new_blob},{rel}")
+    for a,b,patch in ((old,new,forward),(new,old,inverse)):
+        patch.extend(difflib.unified_diff(a.decode().splitlines(True),b.decode().splitlines(True),"a/"+rel,"b/"+rel))
+    edits[rel]={"before":{**pin(before),"git_blob":git("rev-parse",base+":"+rel).decode().strip()},
+                "after":{**pin(after),"git_blob":new_blob}}
+tree=git("write-tree").decode().strip()
+git("diff","--cached","--check",base)
+assert set(git("diff","--cached","--name-only",base).decode().splitlines())==set(files)
+head=git("commit-tree",tree,"-p",base,
+    raw=b"Replay official V2 source adjudication with exact independent evidence\n").decode().strip()
+git("update-ref",ref,head)
+for name,parts in (("forward",forward),("inverse",inverse)):
+    with (w/("adjudication."+name+".patch.DATA")).open("x") as f:f.writelines(parts)
+role_map={}
+for path in sorted(roles):
+    data=(w/"project"/path).read_bytes()
+    blob=git("rev-parse",head+":"+path).decode().strip()
+    assert hashlib.sha1(f"blob {len(data)}\0".encode()+data).hexdigest()==blob,path
+    role_map[path]={"bytes":len(data),"sha256":sha(data),"blob":blob}
+assert len(role_map)==220
+epoch=w/"current-input-epoch.json"
+write(epoch,{"head":head,"roles":role_map})
+
+def fixture(stage, expected):
+    report=w/stage/"result.xml"
+    nodes=ET.fromstring(report.read_bytes()).findall(".//testcase")
+    assert len(nodes)==len({(n.get("classname"),n.get("name")) for n in nodes})
+    counts={tag:sum(n.find(tag) is not None for n in nodes) for tag in ("failure","error","skipped")}
+    assert (len(nodes),*counts.values())==expected
+    return {"junit":pin(report),"terminal_returncode":int((w/stage/"exit").read_text()),
+            "cases":len(nodes),"names":[n.get("name") for n in nodes],**counts}
+
+red=fixture("red-same-four",(4,4,0,0))
+green=fixture("green-same-four",(4,0,0,0))
+final=fixture("green-final-seven",(7,0,0,0))
+assert red["names"]==green["names"]==final["names"][:4]
+assert (red["terminal_returncode"],green["terminal_returncode"],final["terminal_returncode"])==(1,0,0)
+seal=w/"SEALED-official-V2-source-adjudication-local-candidate.json"
+write(seal,{
+    "schema":"official-v2-adjudication-private-candidate/v1",
+    "candidate":{"oid":head,"parent":base,"tree":tree,"ref":ref,"isolated_store":str(store)},
+    "exact_edits":edits,"source_fixture_paths":pin(epoch),
+    "intake_source_qualification":pin(qualification),
+    "source_legal_meaning_admitted":False,"source_decisions_applied":False,
+    "legacy_gate_original_two":pin(w/"actual-official-v2-adjudication-two-public-entrypoints-red.json"),
+    "same_four_fictional_before":red,"same_four_fictional_after":green,"seven_official_controls":final,
+    "first_extra_control_diagnostic_assertion_failure":pin(w/"green-additional/result.xml"),
+    "forward":pin(w/"adjudication.forward.patch.DATA"),"inverse":pin(w/"adjudication.inverse.patch.DATA")
+})
+seal.chmod(0o400)
+print(head,tree,json.dumps(pin(seal)))

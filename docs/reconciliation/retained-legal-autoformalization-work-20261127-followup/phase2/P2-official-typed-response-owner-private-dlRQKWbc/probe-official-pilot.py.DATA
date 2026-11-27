@@ -1,0 +1,67 @@
+from pathlib import Path
+import hashlib,json,os,resource,sys
+w=Path(__file__).resolve().parent
+p=w/"project"
+meta=json.loads((w/"current-input-epoch.json").read_bytes())
+resource.setrlimit(resource.RLIMIT_AS,(512*1024**2,512*1024**2))
+resource.setrlimit(resource.RLIMIT_CPU,(20,21))
+os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})
+def audit(event,args):
+    if event.startswith(("socket.","subprocess.")) or event in {"os.exec","os.fork","os.posix_spawn","os.system"}:
+        raise PermissionError("Outside pure review shape probe")
+    if event=="import" and args[0].split(".")[0] in {"torch","transformers","jax","tensorflow","huggingface_hub"}:
+        raise PermissionError("Outside pure review shape probe")
+sys.addaudithook(audit)
+sys.path.insert(0,str(p))
+from ipfs_datasets_py.logic.autoformal import corpus_source_review as source
+from ipfs_datasets_py.logic.autoformal import corpus_source_review_responses as responses
+folder=Path("/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/pilot-official-pending-PAV-output-v06")
+def read(n,length,expected):
+    path=folder/f"run.output.{n}.bin"
+    raw=path.read_bytes()
+    assert (len(raw),hashlib.sha256(raw).hexdigest())==(length,expected)
+    return json.loads(raw),{"path":str(path),"bytes":length,"sha256":expected}
+prep,e=read(0,157823,"f207e00e0a7fc3a31689fb4349dd42b3491b8f117c80ef60de56759ebe10a9ad")
+status,r=read(1,31452,"175b991c1b6631b523acd8b70bec26d3599d1417bb069ba82330d863a0ec1471")
+validated,v=read(2,31452,r["sha256"])
+assert status==validated
+counts=status["manifest"]["counts"]
+assert counts["groups"]==counts["pending_groups"]==4 and counts["authenticated_evidence"]==0
+assert counts["source_evidence_prerequisites_under_selected_trust"]==0
+official=source._detach_preparation(prep,source._limits(None),official=True)
+assert official==prep
+checks=[]
+for request,subject in zip(official["requests"],official["subjects"],strict=True):
+    kwargs={"expected_request_sha256":responses._digest(request),
+            "expected_subject_sha256":responses._digest(subject),
+            "expected_preparation_manifest_sha256":responses._digest(official["manifest"])}
+    assert (len(request["context_slot_ids"]),len(request["deferred_review_slot_ids"]))==(9,7)
+    try:
+        responses.record_source_review_response(request,subject,{},**kwargs)
+    except ValueError as exc:
+        text=str(exc)
+        assert type(exc) is responses.contracts.CorpusContractError
+        assert text == "closed typed source response input fields required"
+        checks.append({"request_cid":request["record_cid"],"failure":text,
+                       "request_passed_official_shape_check":True,"reached_answer_validation":True,"missing_answer_refused":True})
+    else:
+        raise AssertionError("Missing answer accepted")
+assert len(checks)==4
+origin={}
+for mod in (source,responses):
+    module_path=Path(mod.__file__).resolve()
+    assert module_path.is_relative_to(p)
+    key=module_path.relative_to(p).as_posix()
+    raw=module_path.read_bytes()
+    origin[key]={"bytes":len(raw),"sha256":hashlib.sha256(raw).hexdigest()}
+    if mod is source:
+        assert origin[key]=={k:meta["roles"][key][k] for k in ("bytes","sha256")}
+    else:
+        assert raw==(w/"owner.after.DATA").read_bytes()
+out={"schema":"official-pilot-typed-intake-blank-input-probe/v1","published_base":meta["head"],
+     "exact_saved_inputs":[e,r,v],"compiled_module_origins":origin,"retained_group_counts":counts,"cases":checks,
+     "no_response_was_supplied_or_written":True,"real_review_or_admission":False}
+path=w/"actual-official-pilot-typed-intake-blank-input-refusal.json"
+with path.open("x") as f:json.dump(out,f,sort_keys=True,indent=2);f.write("\n")
+raw=path.read_bytes()
+print(path,len(raw),hashlib.sha256(raw).hexdigest())

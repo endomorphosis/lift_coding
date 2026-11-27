@@ -1,0 +1,28 @@
+from pathlib import Path
+import ast, hashlib, json, os, resource, sys
+
+w=Path(__file__).resolve().parent
+root=w/"project"
+resource.setrlimit(resource.RLIMIT_AS,(512*1024**2,)*2)
+resource.setrlimit(resource.RLIMIT_CPU,(10,11))
+os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})
+sys.path.insert(0,str(root))
+os.environ.update(IPFS_DATASETS_PY_MINIMAL_IMPORTS="1",IPFS_DATASETS_PY_LAZY_INSTALL_ERGOAI="0")
+def audit(event,args):
+    if event.startswith(("socket.","subprocess.")) or event in {"os.exec","os.fork","os.posix_spawn","os.system"}:
+        raise PermissionError("private import scope")
+sys.addaudithook(audit)
+raw=(w/"test.before.DATA").read_bytes()
+test_function=next(n for n in ast.parse(raw).body
+                   if isinstance(n,ast.FunctionDef)
+                   and n.name=="test_public_import_does_not_load_models_source_decoders_crypto_or_clocks")
+program=ast.literal_eval(test_function.body[0].value)
+exec(compile(program,"existing-inert-import-probe","exec"),{})
+module=sys.modules["ipfs_datasets_py.logic.autoformal.corpus_source_review_responses"]
+owner=Path(module.__file__).resolve()
+assert owner.is_relative_to(root) and owner.read_bytes()==(w/"owner.after.DATA").read_bytes()
+record={"check":"existing import assertions evaluated in isolated interpreter","status":0,
+        "owner_sha256":hashlib.sha256(owner.read_bytes()).hexdigest(),
+        "test_program_sha256":hashlib.sha256(program.encode()).hexdigest()}
+with (w/"actual-import-effect-probe.json").open("x") as f:
+    json.dump(record,f,indent=2,sort_keys=True);f.write("\n")

@@ -1,0 +1,15 @@
+--- a/existing-namespaced-native2-binder.INERT.py.DATA
++++ b/existing-namespaced-native2-binder.INERT.py.DATA
+@@ -13,9 +13,9 @@
+ import sys
+ 
+ 
+-OWNING_TEST_SHA256 = '8bca876c855d44df4d48cb909fc6a0e9a007480d61037831536e84a8cc68adf9'
+-OWNING_TEST_BYTES = 130553
+-LEAN_SHA256 = 'de99fe31f53fb34bf247e5c24b4b1424ca06874f1da5dc8875b3dbf886d1e4cb'
++OWNING_TEST_SHA256 = 'ab3718e38b87756b07be9052614d16171171d2a7c7217b6e17405895c21ac945'
++OWNING_TEST_BYTES = 123945
++LEAN_SHA256 = '18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800'
+ TEST_NAME = "test_lean_native_v3_expected_declaration_distinguishes_namespaced_decoy"
+ FACTORY_NAME = "_phase1_caller_owned_runner_factory"
+ 

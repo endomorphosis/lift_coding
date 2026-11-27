@@ -1,0 +1,392 @@
+{
+  "Source_or_Native_or_SQL_or_model_or_SDK_execution": false,
+  "actual_GREEN": {
+    "actual_owning_roles": {
+      "ipfs_datasets_py/logic/backends/kernel/lean.py": {
+        "bytes": 104465,
+        "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/project/ipfs_datasets_py/logic/backends/kernel/lean.py",
+        "sha256": "de99fe31f53fb34bf247e5c24b4b1424ca06874f1da5dc8875b3dbf886d1e4cb"
+      },
+      "tests/integration/logic/backends/test_kernel_backends.py": {
+        "bytes": 130553,
+        "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/project/tests/integration/logic/backends/test_kernel_backends.py",
+        "sha256": "8bca876c855d44df4d48cb909fc6a0e9a007480d61037831536e84a8cc68adf9"
+      }
+    },
+    "counts": {
+      "errors": 0,
+      "failures": 0,
+      "functions": 24,
+      "passed": 99,
+      "skipped": 0,
+      "tests": 99
+    },
+    "failed_cases": [],
+    "raw_JUnit": {
+      "bytes": 18619,
+      "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/green/result.xml",
+      "sha256": "b761783dbf1a5e99ef140a65ba8111cbf0378cc409414011e5891e91d7ac77c9"
+    },
+    "terminal_returncode": 0,
+    "termination": {
+      "bytes": 4217,
+      "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/green-termination.json",
+      "sha256": "ca943daf07befaba17f8a62e4112e7c593b6474a0d19cbc645b5ded0b212052c"
+    }
+  },
+  "actual_RED": {
+    "actual_owning_roles": {
+      "ipfs_datasets_py/logic/backends/kernel/lean.py": {
+        "bytes": 104341,
+        "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/project/ipfs_datasets_py/logic/backends/kernel/lean.py",
+        "sha256": "18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800"
+      },
+      "tests/integration/logic/backends/test_kernel_backends.py": {
+        "bytes": 130553,
+        "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/project/tests/integration/logic/backends/test_kernel_backends.py",
+        "sha256": "8bca876c855d44df4d48cb909fc6a0e9a007480d61037831536e84a8cc68adf9"
+      }
+    },
+    "counts": {
+      "errors": 0,
+      "failures": 6,
+      "functions": 24,
+      "passed": 93,
+      "skipped": 0,
+      "tests": 99
+    },
+    "failed_cases": [
+      "test_lean_recursion_exhausted_json_diagnostics_fail_closed[stdout]",
+      "test_lean_recursion_exhausted_json_diagnostics_fail_closed[stderr]",
+      "test_lean_json_reader_skips_recursion_exhausted_records",
+      "test_lean_json_decoder_normalizes_recursion_exhaustion_to_invalid_json",
+      "test_lean_rejects_non_text_dependency_report_severity[list]",
+      "test_lean_rejects_non_text_dependency_report_severity[object]"
+    ],
+    "raw_JUnit": {
+      "bytes": 24117,
+      "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/red/result.xml",
+      "sha256": "09899979ed1987ddf29e7adac690d7296ff21313552a43a26476131e7f7fed75"
+    },
+    "terminal_returncode": 1,
+    "termination": {
+      "bytes": 4212,
+      "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/red-termination.json",
+      "sha256": "6b167cea9a40ddedcc7691ab5fec2fe5d7b69c3d9cb14176c84aa356a26ea806"
+    }
+  },
+  "actual_retained_92_matches_published_order": true,
+  "adapted_guard": {
+    "bytes": 2734,
+    "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/existing-private-runner-twenty-four-selectors.py.DATA",
+    "sha256": "a296ea4d20affa013c38452078c2fc6fa0f5913ab3f338e8a6ebf27288cfbc06"
+  },
+  "baseline_HEAD": "d067738daf11465f74a91c75165747d9db766cdc",
+  "baseline_tree": "c7c16234b49a23d51528362a1fa174427f7dae4f",
+  "canonical_Git_mutation": false,
+  "changed_owner_functions": [
+    [
+      "_load_lean_json_line",
+      "_load_lean_json_line"
+    ],
+    [
+      "parse_lean_axiom_report",
+      "parse_lean_axiom_report"
+    ]
+  ],
+  "current_Git_projection": {
+    "bytes": 60058,
+    "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/Guide580-immutable-220-role-record.json",
+    "sha256": "f19277c840793f9594beef98f9b9d2f9dd4885cb78bdd4ddbbe0962cf6a4b284"
+  },
+  "current_fixture_sha256": "1d0e6bdb9da812904bc0b812385d1aa5b68267f1084a6fcf379652a05104b460",
+  "exact_Fixture_pin_preserved": true,
+  "exact_depth_append": {
+    "Gitblob": "c99c541e85ad165452433d782632a8f3e306cc65",
+    "bytes": 1849,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/owning-test-append.UNRUN.py.DATA",
+    "sha256": "0241a0c2ddc06261e9da80ac8cf07be090e8400130a24fc09fcaf29d606ee961"
+  },
+  "exact_forward_and_inverse_applied": true,
+  "exact_product_composed": {
+    "bytes": 104465,
+    "path": "/tmp/P1-Lean-dependency-report-severity-private-x22djkzw/lean.after-nested-json-and-severity.py.DATA",
+    "sha256": "de99fe31f53fb34bf247e5c24b4b1424ca06874f1da5dc8875b3dbf886d1e4cb"
+  },
+  "exact_severity_append": {
+    "bytes": 613,
+    "path": "/tmp/P1-Lean-dependency-report-severity-private-x22djkzw/test_lean_report_severity.append.py.DATA",
+    "sha256": "90d6f5a5cb88c46a5d895d1bbd621b0fec7532654084d29523a6f1d4e35eda07"
+  },
+  "existing_guarded_private_pytest_only": true,
+  "expected_cases": 99,
+  "expected_functions": 24,
+  "forward_patch": {
+    "bytes": 4130,
+    "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/exact-two.forward.patch",
+    "sha256": "f0c2d50d08bd00e3b59f809e02c582f189ced61b1914186250947e855ade4a8d"
+  },
+  "immutable_Git_blob_drift": [
+    {
+      "before": "3bdae6f17f76e64c111d046ff4c3709984286145",
+      "bytes": 391589,
+      "current": "dffb6f619fbae577e284dca534611542e236cc6f",
+      "relative_path": "ipfs_datasets_py/logic/autoformal/legal_corpus_definition_use_native_v2.py",
+      "sha256": "b2480e02cc9593bd671b7563cc00096c83787168277b1ab3e7e2a6f2f87b57e3"
+    },
+    {
+      "before": "1cebb620d95be59f264dc46ceb88267ca42b815f",
+      "bytes": 46237,
+      "current": "6883f1b2418da72bc910707d2dc690ba1af93d31",
+      "relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_relation_mask_handoff.py",
+      "sha256": "c039572c8a83f8464d9b633b54c569ac170cfcad8f9b7fea55de6ede1c906e01"
+    },
+    {
+      "before": "005655a32c50d14e20a4a65b1bc7d3773d8061d6",
+      "bytes": 128091,
+      "current": "20f612f6c6a241804cdf71b09dc9a0a4f0c2e923",
+      "relative_path": "tests/integration/logic/backends/test_kernel_backends.py",
+      "sha256": "eac1d213b16ff2ef79f18269352648768d4e145b2b65fbb8c75c308bced98ea2"
+    }
+  ],
+  "inverse_patch": {
+    "bytes": 4130,
+    "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/exact-two.inverse.patch",
+    "sha256": "9376416c6bffa7bddc2c9ea01083e96ee478c21d43fac0bab2d1d423bbb0fd48"
+  },
+  "main_packet": {
+    "bytes": 9410,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/SEALED-private-existing-Lean-JSON-depth-recovery-two-file-v01.json",
+    "sha256": "58543c307f928799fd9c2f44353e862b44c58b41ffeffd1b96d1268d60853693"
+  },
+  "ordered_cases": [
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_verified_proof_binds_full_kernel_receipt",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_sorry_is_rejected_and_never_proved",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_sorry_can_explicitly_downgrade_authority",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_unavailable_lean_kernel_never_passes",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_wasm_plane_is_probe_only_and_not_confused_with_native_success",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_binds_expected_goal_policy_and_round_trips_strictly",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[missing_report]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_report_name]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[unapproved_dependency]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[missing_typecheck]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_proposition_digest]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[missing_compiled_source]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_source]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_proof]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_toolchain_policy]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[missing_report_position]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[unknown_field]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[legacy_schema]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[missing_source]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_submitted_source]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_compiled_recipe]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_selected_declaration]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_report_line]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[empty_report_text]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_declaration_report_text]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[hidden_sorry_report_text]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[hidden_dependency_report_text]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_source_only_compilation_cannot_prove_an_opaque_request_obligation",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[missing_guard]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[other_guard]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[original_report]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[identity_missing]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[identity_unchecked]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[changed_version]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[changed_executable]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[changed_executable_sha]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[changed_size]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[changed_stat]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[failed_version]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[stderr_version]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[other_version_command]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[identity_scope]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[unknown_identity_field]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[v2_schema]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_precancelled_request_runs_no_identity_or_proof_callbacks",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[{\"severity\": \"error\", \"data\": \"fictional unsolved goals\"}\\n-stdout]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[{\"severity\": \"error\", \"data\": \"fictional unsolved goals\"}\\n-stderr]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  {\"severity\": \"error\", \"data\": \"fictional type mismatch\"}\\n-stdout]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  {\"severity\": \"error\", \"data\": \"fictional type mismatch\"}\\n-stderr]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[error: fictional unsolved goals\\n-stdout]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[error: fictional unsolved goals\\n-stderr]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[Main.lean:1:0: error: fictional unsolved goals\\n-stdout]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[Main.lean:1:0: error: fictional unsolved goals\\n-stderr]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  \\tMain.lean:12:3: error: fictional unsolved goals\\n-stdout]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  \\tMain.lean:12:3: error: fictional unsolved goals\\n-stderr]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  ERROR: fictional unsolved goals\\n-stdout]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  ERROR: fictional unsolved goals\\n-stderr]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_inconsistent_evidence[different-result]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_inconsistent_evidence[different-source]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_inconsistent_evidence[contradictory-status]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_inconsistent_evidence[different-witness-receipt]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_inconsistent_evidence[different-witness-theorem]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_inconsistent_evidence[different-capability]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_fields_from_another_request[result_id]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_fields_from_another_request[assumptions]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_fields_from_another_request[bounds]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_malformed_or_failed_exit_status_cannot_establish_proof[False]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_malformed_or_failed_exit_status_cannot_establish_proof[0.0]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_malformed_or_failed_exit_status_cannot_establish_proof[True]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_malformed_or_failed_exit_status_cannot_establish_proof[0]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_malformed_or_failed_exit_status_cannot_establish_proof[None]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_malformed_or_failed_exit_status_cannot_establish_proof[1]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status[False]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status[0.0]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload[match]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload[equivalent-source-alias]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload[declaration]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload[proposition]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload[source]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload[translation]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload[missing-obligation]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind[rocq]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind[cvc5]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind[lean4-wasm]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_preserves_default_and_supported_requested_backend_aliases[]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_preserves_default_and_supported_requested_backend_aliases[lean]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_preserves_default_and_supported_requested_backend_aliases[lean4]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_preserves_default_and_supported_requested_backend_aliases[lean-kernel]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_non_theorem_request_after_complete_rebind[satisfiability]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_non_theorem_request_after_complete_rebind[runtime_monitor]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_non_theorem_request_after_complete_rebind[evidence_readiness]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_non_theorem_request_after_complete_rebind[policy_approval]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_recursion_exhausted_json_diagnostics_fail_closed[stdout]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_recursion_exhausted_json_diagnostics_fail_closed[stderr]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_json_reader_skips_recursion_exhausted_records",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_json_decoder_normalizes_recursion_exhaustion_to_invalid_json",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_json_reader_preserves_ordinary_nested_diagnostic_metadata",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_rejects_non_text_dependency_report_severity[list]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_rejects_non_text_dependency_report_severity[object]"
+  ],
+  "original_guard": {
+    "bytes": 2734,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-query-kind-private-v01/existing-private-runner-nineteen-selectors.py.DATA",
+    "sha256": "fdd6efc3f5b344b2de059dcee188081321ba7a832da9fdf7df5631dd51507653"
+  },
+  "prior_argv": [
+    "/home/barberb/lift_coding/.venv/bin/python",
+    "-I",
+    "-B",
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-query-kind-private-v01/existing-private-runner-nineteen-selectors.py.DATA",
+    "/tmp/P1-Guide571-Lean-routing-query-kind-native-composed-private-RXZkJ57d/same-software92-current-e2dd",
+    "/tmp/P1-Guide571-Lean-routing-query-kind-native-composed-private-RXZkJ57d/project",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+    "/home/barberb/lift_coding/external/ipfs_datasets",
+    "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_verified_proof_binds_full_kernel_receipt",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_sorry_is_rejected_and_never_proved",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_sorry_can_explicitly_downgrade_authority",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_unavailable_lean_kernel_never_passes",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_wasm_plane_is_probe_only_and_not_confused_with_native_success",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_binds_expected_goal_policy_and_round_trips_strictly",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_source_only_compilation_cannot_prove_an_opaque_request_obligation",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_precancelled_request_runs_no_identity_or_proof_callbacks",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_inconsistent_evidence",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_fields_from_another_request",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_malformed_or_failed_exit_status_cannot_establish_proof",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_preserves_default_and_supported_requested_backend_aliases",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_non_theorem_request_after_complete_rebind"
+  ],
+  "prior_projection": {
+    "bytes": 75930,
+    "path": "/tmp/P1-Guide571-Lean-routing-query-kind-native-composed-private-RXZkJ57d/software-private-project-roles.json",
+    "sha256": "422993839eb5ee78ac241f59414fb568f1207eea4afc5899eff0a1d3f35019d8"
+  },
+  "prior_runner_termination": {
+    "bytes": 4094,
+    "path": "/tmp/P1-Guide571-Lean-routing-query-kind-native-composed-private-RXZkJ57d/software92-termination.json",
+    "sha256": "b0e5b6549c12cb8e41ff78039c6e59851cf20d19961627cce5708df668589fb4"
+  },
+  "raw_GREEN_JUnit": {
+    "bytes": 18619,
+    "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/green/result.xml",
+    "sha256": "b761783dbf1a5e99ef140a65ba8111cbf0378cc409414011e5891e91d7ac77c9"
+  },
+  "raw_RED_JUnit": {
+    "bytes": 24117,
+    "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/red/result.xml",
+    "sha256": "09899979ed1987ddf29e7adac690d7296ff21313552a43a26476131e7f7fed75"
+  },
+  "red_private_projection": {
+    "bytes": 73070,
+    "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/red-private-project-220-role-record.json",
+    "sha256": "3080b936bc2fee5961c626b5bcf4a3d427339ff60010f20bfb37f15fedb105b3"
+  },
+  "roles": {
+    "ipfs_datasets_py/logic/backends/kernel/lean.py": {
+      "after": {
+        "bytes": 104465,
+        "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/lean.py.after.DATA",
+        "sha256": "de99fe31f53fb34bf247e5c24b4b1424ca06874f1da5dc8875b3dbf886d1e4cb"
+      },
+      "after_git_blob": "97c7e2b760f7775de3aae312557a8eccc82437ba",
+      "before": {
+        "bytes": 104341,
+        "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/lean.py.before.DATA",
+        "sha256": "18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800"
+      },
+      "before_git_blob": "7ee0cdb71958b052038fa467230dbf86dd0c3fb2",
+      "git_mode": "100644",
+      "mode": "100644",
+      "parent_blob": "7ee0cdb71958b052038fa467230dbf86dd0c3fb2"
+    },
+    "tests/integration/logic/backends/test_kernel_backends.py": {
+      "after": {
+        "bytes": 130553,
+        "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/test_kernel_backends.py.after.DATA",
+        "sha256": "8bca876c855d44df4d48cb909fc6a0e9a007480d61037831536e84a8cc68adf9"
+      },
+      "after_git_blob": "6568d9404adbe1a8439829321ade7588a150969e",
+      "before": {
+        "bytes": 128091,
+        "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/test_kernel_backends.py.before.DATA",
+        "sha256": "eac1d213b16ff2ef79f18269352648768d4e145b2b65fbb8c75c308bced98ea2"
+      },
+      "before_git_blob": "20f612f6c6a241804cdf71b09dc9a0a4f0c2e923",
+      "git_mode": "100644",
+      "mode": "100644",
+      "parent_blob": "20f612f6c6a241804cdf71b09dc9a0a4f0c2e923"
+    }
+  },
+  "schema": "existing-Lean-report-diagnostic-shape-and-json-depth-private-same99-exact-two/v1",
+  "sealed_inputs": {
+    "bytes": 12957,
+    "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/exact-Guide580-99-private-inputs.json",
+    "sha256": "7420488411feca17f5cf166019d86040bd6efdf5923ee94fb74c1a3077590d0a"
+  },
+  "selectors": [
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_verified_proof_binds_full_kernel_receipt",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_sorry_is_rejected_and_never_proved",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_sorry_can_explicitly_downgrade_authority",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_unavailable_lean_kernel_never_passes",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_wasm_plane_is_probe_only_and_not_confused_with_native_success",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_binds_expected_goal_policy_and_round_trips_strictly",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_source_only_compilation_cannot_prove_an_opaque_request_obligation",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_precancelled_request_runs_no_identity_or_proof_callbacks",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_inconsistent_evidence",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_fields_from_another_request",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_malformed_or_failed_exit_status_cannot_establish_proof",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_preserves_default_and_supported_requested_backend_aliases",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_non_theorem_request_after_complete_rebind",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_recursion_exhausted_json_diagnostics_fail_closed",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_json_reader_skips_recursion_exhausted_records",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_json_decoder_normalizes_recursion_exhaustion_to_invalid_json",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_json_reader_preserves_ordinary_nested_diagnostic_metadata",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_rejects_non_text_dependency_report_severity"
+  ]
+}

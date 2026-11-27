@@ -1,0 +1,69 @@
+
+
+def test_official_application_refuses_resealed_raw_assessment_for_another_subject(
+    owner, official_v2_adjudication_for_application
+):
+    data = clone_case(official_v2_adjudication_for_application)
+    _, subject, group = unit(data)
+    typed = group["typed_response_group_record"]
+    raw = typed["raw_source_assessment_record"]
+    assert raw["subject_sha256"] == ref(subject)["sha256"]
+    raw["subject_sha256"] = ref(data["preparation"]["subjects"][1])["sha256"]
+    typed["raw_source_assessment_record"] = reseal(raw)
+    group["typed_response_group_record"] = reseal(typed)
+    declaration = group["declaration_record"]
+    declaration["typed_group_ref"] = ref(group["typed_response_group_record"])
+    group["declaration_record"] = reseal(declaration)
+    data["adjudication_report"]["records"][0] = reseal(group)
+
+    with pytest.raises(ValueError, match="exact official application request, subject and adjudicated source assessment required"):
+        author(owner, data)
+
+
+def test_official_application_preserves_each_replayed_context_status(owner):
+    from ipfs_datasets_py.logic.autoformal import corpus_source
+
+    adjudication_fixture = helper()
+    response_fixture = adjudication_fixture.helper()
+    source_fixture = response_fixture.helper()
+    inputs = source_fixture.official_occurrence_case()
+    first = inputs["occurrence_inputs"][0]
+    occurrence = first["source_occurrence"]
+    first["context"] = corpus_source.build_context_declaration(
+        occurrence,
+        expected_occurrence_cid=occurrence["record_cid"],
+        availability="declared_context",
+        reason="Fictional context reference.",
+        context_references=first["context"]["context_references"],
+    )
+    source_fixture.repin_official_inputs(inputs)
+    preparation, registry, policy, groups, options, _ = source_fixture.official_pending_assessment(
+        source_owner, inputs
+    )
+    data = {
+        "data": {"arguments": inputs}, "preparation": preparation, "registry": registry,
+        "policy": policy, "groups": groups, "at_time_utc": options["at_time_utc"],
+        "response_bindings": [{"request_cid": row["request_cid"], "responses": []} for row in groups],
+        "descriptor": deepcopy(DESCRIPTOR),
+    }
+    data["typed_report"] = response_fixture.assess(response_owner, data)
+    data["adjudication_registry"], data["adjudication_policy"], data["adjudication_signers"] = (
+        adjudication_fixture.authority(adjudication_owner, data)
+    )
+    data["adjudication_groups"] = [
+        {**deepcopy(row), "declaration_artifact_id": None} for row in groups
+    ]
+    data["adjudication_report"] = adjudication_fixture.assess(adjudication_owner, data)
+    data["application_registry"], data["application_policy"], _ = authority(owner, data)
+    data["application_groups"] = [{**deepcopy(row), "app_artifact_id": None} for row in groups]
+
+    report = assess(owner, data)
+    contexts = [row["original_contexts_remain_required_unavailable"] for row in report["records"]]
+    assert contexts == [False, True, True, True]
+    assert [row["original_adjudication_group_record"] for row in report["records"]] == (
+        data["adjudication_report"]["records"]
+    )
+    assert report["manifest"]["counts"]["activated_candidate_answer_snapshots"] == 0
+    assert report["manifest"]["counts"]["source_decisions_applied"] == 0
+    assert all(report["manifest"][field] is False for field in owner.FALSE_FLAGS)
+    assert validate(owner, report, data) == report

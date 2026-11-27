@@ -1,0 +1,193 @@
+{
+  "actual_same28_GREEN": {
+    "bytes": 6762,
+    "full9": {
+      "st_ctime_ns": "1795622801376470715",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72109247",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795622801376470715",
+      "st_nlink": "1",
+      "st_size": "6762",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/active-preflight-outcome-private-v01/actual-same28-active-preflight-GREEN-v02.json",
+    "sha256": "ca6ba8ba991991b21d4c8c36708f52c16b3db8094cffc3c2d5d0935087313263"
+  },
+  "actual_same28_RED": {
+    "bytes": 14414,
+    "full9": {
+      "st_ctime_ns": "1795622720438503015",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72109226",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795622720438503015",
+      "st_nlink": "1",
+      "st_size": "14414",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/active-preflight-outcome-private-v01/actual-same28-active-preflight-RED-v01.json",
+    "sha256": "f7ba3e4f921ba7d0566d10674274afe9b9423896c3ef9325c7f297fe36c85721"
+  },
+  "caller_successor": {
+    "bytes": 19910,
+    "full9": {
+      "st_ctime_ns": "1795622772289124661",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72109231",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795622772289124661",
+      "st_nlink": "1",
+      "st_size": "19910",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/active-preflight-outcome-private-v01/invoke-existing-durable-handoff.active-preflight-outcome.after-v02.py.DATA",
+    "sha256": "343f7a442df0e0cbd5d04e6a28d1f355e177e44c753a3fb614339df7922a1701"
+  },
+  "counts": {
+    "GREEN": {
+      "errors": 0,
+      "failures": 0,
+      "parents": 28,
+      "passed": 28,
+      "returncode": 0,
+      "skips": 0,
+      "terminal_handle": "4c50b1"
+    },
+    "RED": {
+      "errors": 0,
+      "failures": 2,
+      "parents": 28,
+      "passed": 26,
+      "returncode": 1,
+      "skips": 0,
+      "terminal_handle": "7f5374"
+    },
+    "no_additive_credit_for_overlapping_cohorts": true,
+    "old24_plus_new4": true,
+    "same_test_bytes_both_runs": true
+  },
+  "fidelity": {
+    "actual_UNKNOWN_record_never_removed_overwritten_or_reinterpreted_as_retry_permission": true,
+    "all_old24_test_method_ASTs_exact": true,
+    "all_other_top_level_AST_exact": true,
+    "all_processing_completion_execution_claim_retry_authority_flags_remainFalse": true,
+    "only_invoke_once_callable_changed": true,
+    "original_test20569_prefix_exact": true,
+    "same_max_attempts1_current_turn_CAS_and_combined_UNKNOWN_fence": true,
+    "same_nine_binding_fields_and_Root_selected_defaultFalse": true,
+    "same_real_pinned51089_9496_export_loader_and_source": true
+  },
+  "forward_diff": {
+    "bytes": 1615,
+    "full9": {
+      "st_ctime_ns": "1795622772293124709",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72109232",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795622772293124709",
+      "st_nlink": "1",
+      "st_size": "1615",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/active-preflight-outcome-private-v01/active-preflight-outcome.forward.diff",
+    "sha256": "0854c43f77ad10a47b8911d684d14d842d674e2b85a485e8c887cc4c8b175989"
+  },
+  "full_eight_phase_goal_complete": false,
+  "implementation": "Move reservation into the existing try. Mark the sender boundary only immediately before its call. Pre-boundary errors persist REFUSED/current_call_mutation_started=false/error_type; failures after entering sender retain UNKNOWN. All occupied/tampered namespaces remain no-replay, retryable=false, and untouched.",
+  "inverse_diff": {
+    "bytes": 1615,
+    "full9": {
+      "st_ctime_ns": "1795622772296124745",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72109233",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795622772296124745",
+      "st_nlink": "1",
+      "st_size": "1615",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/active-preflight-outcome-private-v01/active-preflight-outcome.inverse.diff",
+    "sha256": "c44cc21366ebf0457af1ec1aedcd21ce7559b5920ec87efb0b2b2a72f30543ae"
+  },
+  "new_control_names": [
+    "test_active_reservation_collision_retains_a_durable_no_send_outcome",
+    "test_active_reservation_auth_failure_retains_unknown_and_no_send_outcome",
+    "test_active_sender_exception_stays_unknown_after_its_call_boundary",
+    "test_real_existing_sender_lost_active_ack_stays_unknown_without_replay"
+  ],
+  "owning_private_tests": {
+    "bytes": 26427,
+    "full9": {
+      "st_ctime_ns": "1795622670645899767",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72109220",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795622670645899767",
+      "st_nlink": "1",
+      "st_size": "26427",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/active-preflight-outcome-private-v01/test_existing_caller_active_preflight_outcome28.py.DATA",
+    "sha256": "20a92456b82751676ba685f532de778f2b52ef08b60122e5296d4e68af3da10a"
+  },
+  "private_budget": {
+    "additional_private_read_upper_bytes_including_exploration_repeats_fixture_exports_readbacks_and_child": 1048576,
+    "cumulative_conservative_upper_bytes": 6163533,
+    "new_cap_or_reset_or_Source_ledger_mutation": false,
+    "old_other_private_phases_and_failure_charges_retained": true,
+    "original_caller_phase_cap_bytes": 8388608,
+    "prior_caller_costs_retained_bytes": 5114957,
+    "this_seal_read_bytes": 110905
+  },
+  "problem": "Active-turn reserve/authentication was outside the existing exception handler, unlike idle dispatch. A reservation race or failed authentication raised before any sender call and before a durable result; an automated consumer received no disposition.",
+  "reviewed_caller_original": {
+    "bytes": 19593,
+    "full9": {
+      "st_ctime_ns": "1795582797637310890",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72102720",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795582797637310890",
+      "st_nlink": "1",
+      "st_size": "19593",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/invoke-existing-durable-handoff.unloaded-hydration.after.py.DATA",
+    "sha256": "00d26e75f8e84fe03364101fbbe1a88c32e4d4b02bd24dd92fd263adbc1da9ca"
+  },
+  "schema": "Main-existing-handoff-active-preflight-durable-outcome-correction/v1",
+  "scope": {
+    "actual_Source_SDK_SQL_Git_Native_model_or_appserver_RPC": false,
+    "canonical_or_published_cli_or_original_caller_changed": false,
+    "live_caller_currentness_claimed": false,
+    "new_queue_controller_provider_or_task_selection_authority": false,
+    "next_existing_owner_action": "Root can review and select this same-caller successor for future exact bindings. This packet itself selects no message, target, Source read, execution or retry.",
+    "production_or_normal_package_qualification": false,
+    "profile": "Private reviewed one-off caller00d26 lineage, actual pinned exports and fictional transport. One test deliberately substitutes an exceptional sender boundary; this is no live-delivery proof."
+  },
+  "status": "PRIVATE_IMPLEMENTED_SAME28_GREEN_NOT_ADOPTED_OR_LIVE_QUALIFIED",
+  "unchanged_original_private_tests": {
+    "bytes": 20569,
+    "full9": {
+      "st_ctime_ns": "1795582757531055718",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72102627",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795582757531055718",
+      "st_nlink": "1",
+      "st_size": "20569",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/test_existing_invoke_once_hydration.py",
+    "sha256": "f32c6dcd0f192dbdbe291f719749a233a9e1f682220e162a66065ae4543f2127"
+  }
+}

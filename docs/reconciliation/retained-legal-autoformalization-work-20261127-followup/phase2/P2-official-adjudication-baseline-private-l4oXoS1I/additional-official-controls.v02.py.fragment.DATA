@@ -1,0 +1,45 @@
+
+
+def test_official_adjudication_explicit_fictional_trust_keeps_meaning_unselected(
+    owner, official_typed_adjudication_data
+):
+    responses = helper()
+    original = responses.signed_typed_case(
+        response_owner, official_typed_adjudication_data, trust_mode="external_pinned_trust"
+    )
+    typed = responses.assess(response_owner, original)
+    data = signed_case(owner, original, typed, mode="external_pinned_trust")
+    report = assess(owner, data)
+    first = report["records"][0]
+    assert first["authority_prerequisites_satisfied_under_selected_trust"] is True
+    assert first["authority_assessment"]["authenticated_evidence_count"] == 2
+    assert first["authority_assessment"]["registry_identity_authenticated_by_this_api"] is False
+    assert first["authority_assessment"]["evaluation_clock_authenticated"] is False
+    assert first["typed_response_group_record"] == typed["records"][0]
+    assert report["manifest"]["counts"]["complete_declaration_authority_prerequisites_under_selected_trust"] == 1
+    assert_no_application(owner, report)
+    assert validate(owner, report, data) == report
+
+
+@pytest.mark.parametrize(
+    ("changed", "diagnostic"),
+    [
+        ("legacy_subject", "^record schema or CID scope differs$"),
+        ("detached_subject_digest", "exact official adjudication request, subject and source assessment required"),
+    ],
+)
+def test_official_adjudication_rejects_resealed_other_subject(
+    owner, official_typed_adjudication_data, changed, diagnostic
+):
+    data = clone_case(official_typed_adjudication_data)
+    if changed == "legacy_subject":
+        subject = data["preparation"]["subjects"][0]
+        data["preparation"]["subjects"][0] = reseal(
+            dict(subject, schema=source_owner.SUBJECT_SCHEMA, profile=source_owner.PROFILE)
+        )
+    else:
+        group = data["typed_report"]["records"][0]
+        raw_group = reseal(dict(group["raw_source_assessment_record"], subject_sha256="1" * 64))
+        data["typed_report"]["records"][0] = reseal(dict(group, raw_source_assessment_record=raw_group))
+    with pytest.raises(contracts.CorpusContractError, match=diagnostic):
+        author(owner, data)

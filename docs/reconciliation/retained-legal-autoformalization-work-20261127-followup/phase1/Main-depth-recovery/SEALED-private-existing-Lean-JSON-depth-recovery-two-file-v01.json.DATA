@@ -1,0 +1,165 @@
+{
+  "schema": "Main-private-existing-Lean-JSON-depth-recovery-two-file-proposal/v1",
+  "status": "PRIVATE_SAME6_GREEN__PUBLIC_OWNING5_UNRUN",
+  "task": "Phase1 generic Lean diagnostic rejection remains structured after JSON decoder recursion exhaustion",
+  "immutable_preimage_commit": "948bd49e5e182abf1c8f8398b70d45095c1923a9",
+  "input_source_kind": "Local immutable published Git objects; no canonical Source body reads.",
+  "files": [
+    {
+      "relative_path": "ipfs_datasets_py/logic/backends/kernel/lean.py",
+      "mode": "100644",
+      "before": {
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/lean.py.DATA",
+        "bytes": 104341,
+        "sha256": "18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800",
+        "Gitblob": "7ee0cdb71958b052038fa467230dbf86dd0c3fb2"
+      },
+      "post": {
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/lean.after.py.DATA",
+        "bytes": 104465,
+        "sha256": "d098cfe7e999b33f5bb1a674913d140228eaa6fe1bdae6abadacb0bf2f83bfab",
+        "Gitblob": "e7812188bba9da231f18842178c1f6e9544e7b27"
+      }
+    },
+    {
+      "relative_path": "tests/integration/logic/backends/test_kernel_backends.py",
+      "mode": "100644",
+      "before": {
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/test_kernel_backends.py.DATA",
+        "bytes": 128091,
+        "sha256": "b706ba0dddc5795055be378d8393c831e65fb7fbaf73a574fcee51227d3676b5",
+        "Gitblob": "a05d6360be0fcf61a75861c5f0ac8cd63a9d3533"
+      },
+      "post": {
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/test_kernel_backends.after.py.DATA",
+        "bytes": 129940,
+        "sha256": "848debae4851f0ab68e6f3f7cd1790d30a09f54bd4adc5397b2f827ca40426be",
+        "Gitblob": "cd75d1d2c9c62eede5515ebf1de80a017455cd4d"
+      },
+      "append": {
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/owning-test-append.UNRUN.py.DATA",
+        "bytes": 1849,
+        "sha256": "0241a0c2ddc06261e9da80ac8cf07be090e8400130a24fc09fcaf29d606ee961",
+        "Gitblob": "c99c541e85ad165452433d782632a8f3e306cc65"
+      }
+    }
+  ],
+  "change": "Normalize only json.loads RecursionError to ValueError, which existing diagnostic-rejection and graceful-collector callers already handle. Do not catch MemoryError or change accepted report/policy/source/axiom rules.",
+  "exact_retention": {
+    "only_changed_existing_top_level_AST": "_load_lean_json_line",
+    "all_other_owner_AST_exact": true,
+    "no_existing_top_level_add_remove": true,
+    "complete_original_test_byte_prefix_exact": true,
+    "all_existing_test_and_fixture_AST_exact": true,
+    "exact_owner_forward_and_reverse_literal_application": true,
+    "exact_test_append_and_inverse_removal": true,
+    "public_added_function_count": 4,
+    "public_added_static_case_count": 5,
+    "existing_public_fixtures_unchanged": [
+      "_lean_output",
+      "_bound_clean_lean_dependency_fixture"
+    ],
+    "verification_profile_unchanged": "No new accepted proof or evidence path; all trust-profile tokens and policy checks remain AST exact."
+  },
+  "actual_private_result": {
+    "RED": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/actual-same6-parser-RED-v02.json",
+      "bytes": 7449,
+      "sha256": "c4a461bc358f701e591d2c6436bfe9ce72e303f525e05007ca4f5f335b66d821"
+    },
+    "RED_counts": {
+      "methods": 6,
+      "passing_methods": 3,
+      "failure_observations": 0,
+      "error_observations": 4,
+      "error_methods": 3
+    },
+    "GREEN": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/actual-same6-parser-GREEN-v02.json",
+      "bytes": 2102,
+      "sha256": "c6d1535741ed70464b6eb8c6019e50361ba7e8110612ebd7c4df04371bb2effd"
+    },
+    "GREEN_counts": {
+      "methods": 6,
+      "passing_methods": 6,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "same_tests": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/same6-pure-parser-controls.v02.py.DATA",
+      "bytes": 1818,
+      "sha256": "ae759ad20b56b3d48363f5c18c008377c29c92ad3b4c92dd8a644d70c2a7c033"
+    },
+    "scope": "Actual pure parser/helper ASTs and stdlib; no parser/validator stubs. Not full evaluator or normal project qualification. Public owning five cases UNRUN.",
+    "limits": {
+      "CPU_seconds": 30,
+      "address_space_bytes": 536870912
+    },
+    "first_calibration": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/actual-same6-parser-RED.json",
+      "bytes": 2623,
+      "sha256": "947e18e076af1e72dd4f73a503b268e4d0428c6718f53e13a102a94efaeaee61"
+    },
+    "first_calibration_disposition": "6 methods:5pass/1failure. Fixture based only on Python recursion limit did not exhaust this JSON decoder. No product defect inferred from that run; original output and fragment retained."
+  },
+  "public_owning_selectors_UNRUN": [
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_recursion_exhausted_json_diagnostics_fail_closed",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_json_reader_skips_recursion_exhausted_records",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_json_decoder_normalizes_recursion_exhaustion_to_invalid_json",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_json_reader_preserves_ordinary_nested_diagnostic_metadata"
+  ],
+  "peer_delta_review": {
+    "owner": "existing /root/frontier_caller_map",
+    "read_bytes": 2553,
+    "scope": "Only704B productdiff and1849B appendedtests authenticated; no full-post or RED/GREEN reexecution.",
+    "result": "CLEAR: loader checks retained, no fallback parser or accepted-evidence broadening; four appended functions/five cases use real existing helpers; no concrete trust-profile version requirement."
+  },
+  "future_actual": {
+    "current_HEAD": null,
+    "tree": null,
+    "Source_epoch": null,
+    "Source_full9": null,
+    "clock": null,
+    "authority": null,
+    "ordinary_collect": null,
+    "ordinary_run": null,
+    "SDK": null,
+    "Native": null,
+    "publication": null
+  },
+  "authority_and_effects": {
+    "Source_reads": 0,
+    "canonical_writes": 0,
+    "Git_mutations": 0,
+    "SDK_calls": 0,
+    "Native_commands": 0,
+    "model_or_training": false,
+    "legal_or_corpus_admission": false,
+    "new_runner_registry_controller": false,
+    "resource_caps_changed": false
+  },
+  "next_owner_step": "Existing Root writer binds actual current preimages before adoption; reuse existing ordinary controls for exact normal owning selectors if selected. No live Native command needed for fictional diagnostic controls. Root retains disk-commit cache correction and Guide579.",
+  "patches": {
+    "lean_forward": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/lean.forward.diff",
+      "bytes": 704,
+      "sha256": "fee0c0d7f4409493791a1b1c882d8aaec108e4bc13c3b29c54978183403c409a"
+    },
+    "lean_inverse": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/lean.inverse.diff",
+      "bytes": 704,
+      "sha256": "1f1221b40e6d7c866e81bcdc308eefe52725a13ad94bb5c7079d4a0e68bfe81a"
+    },
+    "test_kernel_backends_forward": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/test_kernel_backends.forward.diff",
+      "bytes": 2142,
+      "sha256": "fda472e28085284e5b522f597c3bad39e19e871af06558763dd60b7a0cc99350"
+    },
+    "test_kernel_backends_inverse": {
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/test_kernel_backends.inverse.diff",
+      "bytes": 2142,
+      "sha256": "430dbdd114a06762def55eb94fcd16553f5a2a4c7ffe0a615532829d49dd56b6"
+    }
+  }
+}

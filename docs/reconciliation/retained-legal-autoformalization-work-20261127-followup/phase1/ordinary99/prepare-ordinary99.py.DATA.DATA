@@ -1,0 +1,241 @@
+"""Generate inert controls for the two confirmed Lean diagnostics corrections."""
+import ast
+from collections import Counter
+from hashlib import sha1, sha256
+import json
+from pathlib import Path
+import re
+import subprocess
+
+HERE=Path(__file__).resolve().parent
+W=HERE.parent
+D=W/'datasets'
+BASE='d067738daf11465f74a91c75165747d9db766cdc'
+OLD_D=Path('/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets')
+OLD=Path('/tmp/P1-Lean-live-ordinary92-controls-INERT-31cgkog4')
+MAIN=Path('/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01')
+REVIEW=Path('/tmp/P1-Lean-dependency-report-severity-private-x22djkzw')
+OWNER='ipfs_datasets_py/logic/backends/kernel/lean.py'
+TEST='tests/integration/logic/backends/test_kernel_backends.py'
+
+def reference(path,body):
+    return dict(path=str(path),bytes=len(body),sha256=sha256(body).hexdigest())
+
+def pinned(path,hash_value):
+    body=path.read_bytes()
+    observed=reference(path,body)
+    assert observed['sha256']==hash_value,(path,observed)
+    return observed,body
+
+def read(ref):
+    found,body=pinned(Path(ref['path']),ref['sha256'])
+    assert found=={k:ref[k] for k in ('path','bytes','sha256')},ref['path']
+    return body
+
+def save(name,value):
+    path=HERE/name
+    raw=value if type(value) is bytes else (json.dumps(value,sort_keys=True,indent=2)+'\n').encode()
+    if path.exists():
+        assert path.read_bytes()==raw
+    else:
+        with path.open('xb') as f:
+            f.write(raw)
+        path.chmod(0o400)
+    return reference(path,raw)
+
+def assign(source,name,value):
+    updated,count=re.subn(r'^'+name+r' = .+$',lambda _:name+' = '+repr(value),source,flags=re.M)
+    assert count==1,name
+    return updated
+
+def replace_one(source,old,new):
+    assert source.count(old)==1,old
+    return source.replace(old,new)
+
+def literals(source):
+    result={}
+    for item in ast.parse(source).body:
+        if isinstance(item,ast.Assign) and len(item.targets)==1 and isinstance(item.targets[0],ast.Name):
+            try:
+                result[item.targets[0].id]=ast.literal_eval(item.value)
+            except (ValueError,TypeError):
+                pass
+    return result
+
+def bodies(source):
+    return {n.name:ast.dump(n) for n in ast.parse(source).body if isinstance(n,(ast.FunctionDef,ast.ClassDef))}
+
+def git_body(relative):
+    return subprocess.check_output(['/usr/bin/git','--no-optional-locks','-C',str(D),'show',BASE+':'+relative])
+
+def git_blob(body):
+    return sha1(f'blob {len(body)}\0'.encode()+body).hexdigest()
+
+def parse_append(raw):
+    ret={}
+    for node in ast.parse(raw).body:
+        assert isinstance(node,ast.FunctionDef) and node.name.startswith('test_')
+        case=TEST+'::'+node.name
+        if not node.decorator_list:
+            ret[case]=[case]
+            continue
+        mark,=node.decorator_list
+        assert ast.unparse(mark.func)=='pytest.mark.parametrize'
+        parameter,values=mark.args
+        assert ast.literal_eval(parameter) in ('stream','severity')
+        assert not mark.keywords
+        ids=[]
+        for value in values.elts:
+            if isinstance(value,ast.Call):
+                assert ast.unparse(value.func)=='pytest.param'
+                (ident,)=value.keywords
+                assert ident.arg=='id'
+                ids.append(ast.literal_eval(ident.value))
+            else:
+                ids.append(ast.literal_eval(value))
+        ret[case]=[case+'['+test_id+']' for test_id in ids]
+    return ret
+
+main_ref,main_raw=pinned(MAIN/'SEALED-private-existing-Lean-JSON-depth-recovery-two-file-v01.json','58543c307f928799fd9c2f44353e862b44c58b41ffeffd1b96d1268d60853693')
+main=json.loads(main_raw)
+main_append=MAIN/'owning-test-append.UNRUN.py.DATA'
+main_test_ref=main['files'][1]['post']
+main_body=read(main_test_ref)
+main_before=read(main['files'][1]['before'])
+base_append=main_append.read_bytes()
+assert main_body==main_before+base_append and len(base_append)==1849
+severity_ref,severity=pinned(REVIEW/'test_lean_report_severity.append.py.DATA','90d6f5a5cb88c46a5d895d1bbd621b0fec7532654084d29523a6f1d4e35eda07')
+owner_post,after_owner=pinned(REVIEW/'lean.after-nested-json-and-severity.py.DATA','de99fe31f53fb34bf247e5c24b4b1424ca06874f1da5dc8875b3dbf886d1e4cb')
+current_owner=git_body(OWNER)
+current_test=git_body(TEST)
+assert current_owner==read(main['files'][0]['before'])
+assert len(current_test)==len(main_before)==128091
+assert sha256(current_test).hexdigest()=='eac1d213b16ff2ef79f18269352648768d4e145b2b65fbb8c75c308bced98ea2'
+append=base_append+severity
+after_test=current_test+append
+test_post=save('ordinary99-expected-test-owner-after.DATA',after_test)
+before_functions=bodies(current_test)
+after_functions=bodies(after_test)
+assert all(after_functions[name]==body for name,body in before_functions.items())
+new_functions=parse_append(append)
+assert set(after_functions)-set(before_functions)=={f.rsplit('::',1)[1] for f in new_functions}
+assert all('test_lean_native_' not in full for full in new_functions)
+historical_ref,historical_raw=pinned(OLD/'READY-P1-existing-ordinary92-controls-INERT.json','2e3a77309d66d9725b0ee4f00b2484650a315e5e58a7995de32a6e7e2fc59385')
+historical=json.loads(historical_raw)
+closed_ref,closed_raw=pinned(OLD_D.parent/'actual-live-reconciled-P1-Lean-ordinary92-closed.json','0e515a1f804ff04a70446d1fedeb27d0a63a73a030c4978bcac8bce767e7b5b5')
+closed=json.loads(closed_raw)
+assert closed['terminal_returncode']==0 and closed['Source_and_resource_and_parent_closed']
+assert closed['counts']==dict(tests=92,functions=19,passed=92,errors=0,failures=0,skipped=0)
+old_selectors=json.loads(read(historical['exact_function_selectors']))
+old_rows=json.loads(read(historical['expected_case_roster']))
+assert all(mod=='tests.integration.logic.backends.test_kernel_backends' for mod,name in old_rows)
+old_cases=[TEST+'::'+name for mod,name in old_rows]
+assert set(old_cases)==set(closed['ordered_cases']) and len(set(old_cases))==92
+old_counts=Counter(name.split('[',1)[0] for name in old_cases)
+assert [old_counts[name] for name in old_selectors]==historical['statically_ordered_vector']
+assert not set(new_functions).intersection(old_selectors)
+selectors=old_selectors+list(new_functions)
+cases=closed['ordered_cases']+[case for cases in new_functions.values() for case in cases]
+nf,nc=len(selectors),len(cases)
+assert nf==24 and nc==99 and len(set(cases))==nc
+counts=Counter(name.split('[',1)[0] for name in cases)
+ordered=tuple(counts[name] for name in selectors)
+selector_ref=save('exact-24-function-selectors.json',selectors)
+roster_ref=save('exact-99-case-roster.json',cases)
+group='phase1-lean-json-diagnostics-99'
+op_src=read(historical['controls']['operator']).decode()
+boot_src=read(historical['controls']['bootstrap']).decode()
+factory_src=read(historical['controls']['factory']).decode()
+old_op=literals(op_src)
+old_boot=literals(boot_src)
+def relabel(source):
+    return source.replace('phase1-lean-request-92',group).replace('ORDINARY92','ORDINARY99')
+factory=relabel(factory_src)
+assert factory.count('!=92')==2
+factory=factory.replace('!=92','!=99')
+factory=replace_one(factory,'19 independently selected public-function counts/92 cases','24 independently selected public-function counts/99 cases')
+factory_ref=save('existing-ordinary99-factory.INERT.py.DATA',factory.encode())
+op=relabel(op_src)
+selection=dict(old_op['SELECTION'],function_selectors=selectors,
+               expected_function_case_counts={name:counts[name] for name in selectors},
+               function_count=nf,literal_expected_cases=nc)
+op=assign(op,'SELECTION',selection)
+op=assign(op,'EXPECTED_BRIDGE27_CASE_VECTOR',ordered)
+op=assign(op,'PREP',str(HERE))
+op=assign(op,'FACTORY_REFERENCE',factory_ref)
+assert op.count('==19')==2 and op.count('==92')==3
+op=op.replace('==19','==24').replace('==92','==99')
+op=replace_one(op,"'case_count_hint':92","'case_count_hint':99")
+boot=relabel(boot_src)
+boot=assign(boot,'EXPECTED_ORDERED_CASE_COUNTS',ordered)
+boot=assign(boot,'EXPECTED_CASES',nc)
+assert boot.count('!= 19')==2
+boot=boot.replace('!= 19','!= 24')
+boot=replace_one(boot,'19 future-bound public functions/92 statically expected cases','24 future-bound public functions/99 statically expected cases')
+boot=replace_one(boot,'exact ordered19-selector case vector/92 required','exact ordered24-selector case vector/99 required')
+for fp,before,after,changes in (
+    ('operator',op_src,op,{'binding_for'}),
+    ('bootstrap',boot_src,boot,set()),
+    ('factory',factory_src,factory,{'continuation_request'}),
+):
+    compile(after,fp,'exec')
+    old_body=bodies(relabel(before)); new_body=bodies(after)
+    assert set(old_body)==set(new_body)
+    assert all(old_body[n]==new_body[n] for n in old_body if n not in changes),fp
+    assert all(not (isinstance(n,ast.Constant) and type(n.value) is int and n.value in (19,92)) for n in ast.walk(ast.parse(after)))
+for before,after in ((old_op,literals(op)),(old_boot,literals(boot))):
+    assert {k for k in before if before[k] is None}=={k for k in after if after[k] is None}
+assert literals(op)['D_READ_BINDING_ABI']==old_op['D_READ_BINDING_ABI']
+op_ref=save('existing-ordinary99-operator.INERT.py.DATA',op.encode())
+boot_ref=save('existing-ordinary99-bootstrap.INERT.py.DATA',boot.encode())
+fixture_ref,raw_fixture=pinned(OLD/'actual-live-ordinary92-exact-32-fixture-wire.json','039c4498c1980200109956fa0269bdce3f39b570c7c47ba1076e1c7b9a399789')
+fixture=json.loads(raw_fixture)
+read_ref,epoch_raw=pinned(W/'cache-atomic-put/actual-live-reconciled-Source42-content-epoch-closed.json','747a2492f0d6ce993c1208fb74b71c330bd53bd87a676370d3e3b570134ced37')
+epoch=json.loads(epoch_raw)
+epoch_rows=json.loads(read(epoch['outer_epoch_reference']))
+assert len(epoch_rows)==1618==epoch['outer_epoch_record_count'] and epoch['python_epoch_record_count']==1605
+by_path={row['path']:row for row in epoch_rows}
+assert len(by_path)==len(epoch_rows)
+changes={OWNER:(current_owner,after_owner,owner_post),TEST:(current_test,after_test,test_post)}
+targets={rel:dict(before_sha256=sha256(pre).hexdigest(),before_Gitblob=git_blob(pre),
+                 expected_after=post_ref,expected_Gitblob=git_blob(post))
+         for rel,(pre,post,post_ref) in changes.items()}
+module_roles={}
+for name,row in historical['future_roles']['guarded_bootstrap_modules'].items():
+    rel=row['relative_path']; prior=by_path[str(D/rel)]
+    expected=targets[rel]['expected_after'] if rel in targets else prior
+    module_roles[name]=dict(relative_path=rel,expected_after_adoption={k:expected[k] for k in ('bytes','sha256')},
+                            retained_pre_adoption_sha256=prior['sha256'],
+                            use_actual_frozen_READ3_post=rel in targets)
+fixture_roles={}
+for row in fixture['required_fixture_closure']:
+    rel=Path(row['path']).relative_to(OLD_D).as_posix()
+    retained=by_path[str(D/rel)]
+    if rel!=TEST:
+        assert all(retained[k]==row[k] for k in ('bytes','sha256')),rel
+    expected=targets[rel]['expected_after'] if rel in targets else retained
+    fixture_roles[rel]={k:expected[k] for k in ('bytes','sha256')}
+assert len(fixture_roles)==32
+for name in fixture['required_current_namespace_absences']:
+    rel=Path(name).relative_to(OLD_D)
+    assert not (D/rel).exists() and not (D/rel).is_symlink(),rel
+for rel,target in targets.items():
+    assert by_path[str(D/rel)]['sha256']==target['before_sha256']
+ready=dict(schema='existing-P1-Lean-ordinary99-inert-controls/v1',
+    cases=nc,functions=nf,statically_ordered_vector=list(ordered),selection_group=group,
+    fixture_closure_count=32,provisional_outer_count=1618,provisional_python_count=1605,provisional_named_count=1625,
+    controls=dict(operator=op_ref,bootstrap=boot_ref,factory=factory_ref),
+    exact_function_selectors=selector_ref,expected_case_roster=roster_ref,retained_actual_ordinary92=closed_ref,
+    old_ordinary92_static_reference=historical_ref,retained_fixture_basis=read_ref,
+    historical_D_path=str(OLD_D),historical_fixture_reference=fixture_ref,
+    expected_D_publish_head=BASE,expected_A_publish_head=historical['expected_A_publish_head'],
+    expected_A_tree=historical['expected_A_tree'],current_D_path=str(D),
+    current_additional_A_path=historical['current_additional_A_path'],
+    expected_ownership_roles=targets,Main_append_lineage=main_ref,severity_append_lineage=severity_ref,
+    retained_limits=historical['previous_limits'],
+    future_roles=dict(guarded_bootstrap_modules=module_roles,fixture_roles=fixture_roles,
+                      Source_READ3_paths=[OWNER,TEST,'.git/index']),
+    ordinary_result=None,native_result=None,selected_Git_candidate=None,selected_Source=None,
+    selected_root_clock=None,selected_runtime_bindings=None)
+ready_ref=save('READY-P1-existing-ordinary99-controls-INERT.json',ready)
+print(json.dumps(ready_ref))

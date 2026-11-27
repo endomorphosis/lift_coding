@@ -1,0 +1,83 @@
+from pathlib import Path
+s=Path("owner.before.DATA").read_text()
+def edit(a,b):
+    global s
+    assert s.count(a)==1,a
+    s=s.replace(a,b)
+
+edit("""def _pins():
+    pins = source._pins(source._owners())
+""","""def _pins(*, official=False):
+    owners = source._owners()
+    pins = source._official_pins(owners) if official else source._pins(owners)
+""")
+edit("""    request = contracts.validate_record(json.loads(base._plain(request, contracts.MAX_RECORD_BYTES)),
+        schema=source.REQUEST_SCHEMA, fields=source.REQUEST_FIELDS)
+    subject = contracts.validate_record(json.loads(base._plain(subject, contracts.MAX_RECORD_BYTES)),
+        schema=source.SUBJECT_SCHEMA, fields=source.SUBJECT_FIELDS)
+""","""    request = json.loads(base._plain(request, contracts.MAX_RECORD_BYTES))
+    subject = json.loads(base._plain(subject, contracts.MAX_RECORD_BYTES))
+    official = type(request) is dict and request.get('schema') == source.OFFICIAL_REQUEST_SCHEMA
+    request_schema = source.OFFICIAL_REQUEST_SCHEMA if official else source.REQUEST_SCHEMA
+    request_fields = source.OFFICIAL_REQUEST_FIELDS if official else source.REQUEST_FIELDS
+    subject_schema = source.OFFICIAL_SUBJECT_SCHEMA if official else source.SUBJECT_SCHEMA
+    request = contracts.validate_record(request, schema=request_schema, fields=request_fields)
+    subject = contracts.validate_record(subject, schema=subject_schema, fields=source.SUBJECT_FIELDS)
+    if official and (request['profile'] != source.OFFICIAL_PROFILE or subject['profile'] != source.OFFICIAL_PROFILE):
+        _fail("official typed response requires the exact official request and subject profile")
+""")
+edit("""        _fail("exact original sixteen questions and nine active slots required")
+    response =""","""        _fail("exact original sixteen questions and nine active slots required")
+    if official and request['deferred_review_slot_ids'] != [
+            row['slot_id'] for row in questions
+            if row['assessment_scope'] != 'source_context_evidence_declaration']:
+        _fail("exact original seven deferred questions required")
+    response =""")
+edit("""    required = {'expected_preparation_manifest_sha256', 'expected_registry_sha256', 'expected_policy_sha256',
+        'expected_review_group_pins', 'at_time_utc', 'alignment_corpus_bytes', 'expected_alignment_corpus_pins',
+        'alignment_replay_inputs', 'source_report_bytes', 'expected_source_report_pins'}
+    contracts.require_keys(source_inputs, required, "fixed complete source assessment inputs")
+    bounds, source_bounds = _limits(limits), source._limits(source_review_limits)
+    detached = source._detach_preparation(preparation, source_bounds)
+""","""    manifest = preparation.get('manifest') if type(preparation) is dict else None
+    official = type(manifest) is dict and manifest.get('schema') == source.OFFICIAL_MANIFEST_SCHEMA
+    required = {'expected_preparation_manifest_sha256', 'expected_registry_sha256',
+        'expected_policy_sha256', 'expected_review_group_pins', 'at_time_utc'}
+    if official:
+        required.update(('document_inputs', 'expected_document_population_sha256',
+            'occurrence_inputs', 'expected_occurrence_population_sha256',
+            'pending_interpretations', 'expected_pending_interpretations_sha256'))
+    else:
+        required.update(('alignment_corpus_bytes', 'expected_alignment_corpus_pins',
+            'alignment_replay_inputs', 'source_report_bytes', 'expected_source_report_pins'))
+    contracts.require_keys(source_inputs, required, "fixed complete source assessment inputs")
+    bounds, source_bounds = _limits(limits), source._limits(source_review_limits)
+    detached = source._detach_preparation(preparation, source_bounds, official=official)
+    if official and detached['manifest']['profile'] != source.OFFICIAL_PROFILE:
+        _fail("official typed response assessment requires the exact official preparation profile")
+""")
+edit("""    producer_pins = _pins()
+    raw_assessment = source.assess_source_review_groups(detached, registry, policy, groups,
+        **source_inputs, limits=source_review_limits)
+""","""    producer_pins = _pins(official=True) if official else _pins()
+    assess_source = source.assess_official_source_review_groups_v2 if official else source.assess_source_review_groups
+    raw_assessment = assess_source(detached, registry, policy, groups,
+        **source_inputs, limits=source_review_limits)
+""")
+edit("""    if _pins() != producer_pins:
+        _fail("typed or inherited source review producers changed during assessment")
+""","""    current_pins = _pins(official=True) if official else _pins()
+    if current_pins != producer_pins:
+        _fail("typed or inherited source review producers changed during assessment")
+""")
+edit("""    if _pins() != expected['manifest']['producer_pins']:
+        _fail("typed response producer pins changed during final comparison")
+""","""    raw_manifest_ref = expected['manifest']['raw_source_assessment_ref']
+    official = raw_manifest_ref['schema'] == source.OFFICIAL_GROUP_MANIFEST_SCHEMA
+    current_pins = _pins(official=True) if official else _pins()
+    if current_pins != expected['manifest']['producer_pins']:
+        _fail("typed response producer pins changed during final comparison")
+""")
+compile(s,"corpus_source_review_responses.py","exec")
+with Path("owner.after.DATA").open("x") as f:
+    f.write(s)

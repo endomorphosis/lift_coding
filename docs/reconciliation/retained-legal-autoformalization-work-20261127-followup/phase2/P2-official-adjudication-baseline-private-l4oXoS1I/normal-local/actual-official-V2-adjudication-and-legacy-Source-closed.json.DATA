@@ -1,0 +1,79 @@
+{
+  "SDK_managed": false,
+  "both_Source_READs_closed_and_locks_exclusive_probe_acquired": true,
+  "candidate": {
+    "isolated_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-all-20261126-nsFFGMUO/datasets.git",
+    "oid": "8003780e1ac5a2dd86c1a8df4cab34874f6eb1ab",
+    "parent": "4de473b6f3aa5e3273d149f7677a43c690167c1d",
+    "ref": "refs/reconciliation/pending-official-source-adjudication-20261127",
+    "tree": "665fb382fb5c961c73639b3808646f1164f18e1d"
+  },
+  "exact_source_files_before_and_after_each": 225,
+  "isolated_checkout_role_map": {
+    "bytes": 60840,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/real-checkout-pins.json",
+    "sha256": "c0448542b20c95daf11883c0ec2cb8b3b7cbc10b8bfb3e42799c6dd8668e0528"
+  },
+  "normal": {
+    "clean": true,
+    "fixture_scope": {
+      "legacy": {
+        "case_vector": [
+          1,
+          5,
+          1,
+          1,
+          1
+        ],
+        "cases": 9,
+        "functions": 5,
+        "junit": {
+          "bytes": 2222,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/legacy/result.xml",
+          "sha256": "bfaa0c4a28b386c55b9428dacbc6c085a0e5d9a552ca870511d46f2b4b0e492c"
+        },
+        "report": {
+          "bytes": 5622,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/legacy/local-source-closeout.json",
+          "sha256": "91f3addae2489200a8b8db78ddf5bac415b54fb825d08d34af85ae1aef718ce2"
+        }
+      },
+      "official": {
+        "case_vector": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          2
+        ],
+        "cases": 7,
+        "functions": 6,
+        "junit": {
+          "bytes": 1607,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/official/result.xml",
+          "sha256": "aba2cd6db6ca1312d09844dd6cac1470d9145fdec466a70541d381301f4c9c95"
+        },
+        "report": {
+          "bytes": 4530,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/official/local-source-closeout.json",
+          "sha256": "856b127f56f0971ab191d0b505ad64aa98b7a0e699215875d013cb683e9d3124"
+        }
+      }
+    },
+    "original_configs": [
+      "pytest.ini",
+      "conftest.py",
+      "tests/conftest.py",
+      "tests/unit/conftest.py"
+    ]
+  },
+  "owner_test_and_guide_seal": {
+    "bytes": 8693,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/SEALED-official-V2-source-adjudication-local-candidate.json",
+    "sha256": "4a30b4dccae9d54d076de114cb2a9c72264dc199ad3f9a1950f7b89f556347c2"
+  },
+  "published": false,
+  "real_statutory_review": false,
+  "schema": "official-V2-source-adjudication-normal-local-qualification/v1"
+}

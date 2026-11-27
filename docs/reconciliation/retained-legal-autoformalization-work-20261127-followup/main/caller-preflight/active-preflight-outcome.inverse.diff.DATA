@@ -1,0 +1,25 @@
+--- caller-active-preflight-v02
++++ caller00d26
+@@ -141,18 +141,14 @@
+         authenticate(saved)
+         return saved
+     if turn.get('status')=='inProgress':
+-        reservation=None;sender_called=False
++        reservation=reserve('turn/steer',turn)
+         try:
+-            reservation=reserve('turn/steer',turn)
+-            sender_called=True  # Once entered, an exceptional sender is UNKNOWN.
+             outcome=ns['send_codex_thread_message'](socket_path=SOCKET_PATH,thread_id=THREAD_ID,
+                 expected_turn_id=turn['id'],message=message,receipt_path=str(outputs['sender_receipt_path']),
+                 timeout_seconds=15.0,max_attempts=1,prior_delivery_state='not_attempted')
+-        except Exception as error:
+-            return finish(no_authority('delivery_unknown' if sender_called else 'refused',
+-                'existing_sender_exception' if sender_called else 'existing_sender_preflight_refused',
+-                method='turn/steer',UNKNOWN_reservation=reservation,
+-                current_call_mutation_started=sender_called,error_type=type(error).__name__))
++        except Exception:
++            return finish(no_authority('delivery_unknown','existing_sender_exception',
++                                       method='turn/steer',UNKNOWN_reservation=reservation))
+         accepted=type(outcome) is dict and outcome.get('delivery_state')=='accepted' and outcome.get('enqueue_acknowledged') is True
+         return finish({**no_authority('accepted_enqueue_only' if accepted else 'delivery_unknown',
+                      'existing_sender_result',method='turn/steer'),

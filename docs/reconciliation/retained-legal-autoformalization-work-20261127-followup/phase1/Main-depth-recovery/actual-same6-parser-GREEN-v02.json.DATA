@@ -1,0 +1,32 @@
+{
+  "schema": "Main-same6-pure-actual-Lean-parser-controls/v1",
+  "phase": "GREEN-same-v02-controls",
+  "source_sha256": "d098cfe7e999b33f5bb1a674913d140228eaa6fe1bdae6abadacb0bf2f83bfab",
+  "tests": 6,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "actual_result": "test_collector_skips_deep_record_and_keeps_real_warning (cached_lean_controls.ExistingLeanJSONFailureControls.test_collector_skips_deep_record_and_keeps_real_warning) ... ok\ntest_decoder_returns_controlled_invalid_json_error (cached_lean_controls.ExistingLeanJSONFailureControls.test_decoder_returns_controlled_invalid_json_error) ... ok\ntest_deep_diagnostic_is_rejected_on_both_streams (cached_lean_controls.ExistingLeanJSONFailureControls.test_deep_diagnostic_is_rejected_on_both_streams) ... ok\ntest_existing_duplicate_and_nonfinite_rejections_remain (cached_lean_controls.ExistingLeanJSONFailureControls.test_existing_duplicate_and_nonfinite_rejections_remain) ... ok\ntest_existing_plain_error_and_warning_classification_remains (cached_lean_controls.ExistingLeanJSONFailureControls.test_existing_plain_error_and_warning_classification_remains) ... ok\ntest_ordinary_nested_message_roundtrips (cached_lean_controls.ExistingLeanJSONFailureControls.test_ordinary_nested_message_roundtrips) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.002s\n\nOK\n",
+  "test_fragment_sha256": "ae759ad20b56b3d48363f5c18c008377c29c92ad3b4c92dd8a644d70c2a7c033",
+  "same_test_methods_assertions_and_fixture_as_corrected_RED": true,
+  "actual_functions": [
+    "_lean_diagnostic_lines",
+    "_lean_error_diagnostics",
+    "_load_lean_json_line",
+    "parse_lean_json_messages"
+  ],
+  "function_ASTs_extracted_exact": true,
+  "parser_or_validator_stubs": false,
+  "canonical_imports": 0,
+  "Source": 0,
+  "SDK": 0,
+  "Native": 0,
+  "Git_mutations": 0,
+  "public_owning_test_or_full_evaluator_qualified": false,
+  "python": "3.12.3 (main, Mar  3 2026, 12:15:18) [GCC 13.3.0]",
+  "fixture_nesting": 10000,
+  "process_limits": {
+    "CPU_seconds": 30,
+    "address_space_bytes": 536870912
+  }
+}

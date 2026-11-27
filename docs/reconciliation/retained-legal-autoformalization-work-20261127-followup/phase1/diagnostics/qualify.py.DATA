@@ -1,0 +1,145 @@
+"""Run the exact existing guarded private runner on one identical two-leg selection."""
+import json
+import os
+from pathlib import Path
+import runpy
+import subprocess
+import time
+import xml.etree.ElementTree as ET
+
+W = Path(__file__).resolve().parent
+P = Path('/tmp/P1-Guide571-Lean-routing-query-kind-native-composed-private-RXZkJ57d')
+D = Path('/tmp/P1-proof-cache-translation-current-6btZZr/datasets')
+H = runpy.run_path(str(P / 'compose_and_verify.py'))
+H['save'].__globals__.update(WORK=W,D=D)
+save, save_json, read, exact, bound, git, ref = (
+    H[x] for x in ('save','save_json','readonly','exact','bound','git','ref'))
+OWNER, TEST = H['OWNER'],H['TEST']
+input_path = W / 'exact-Guide580-99-private-inputs.json'
+payload = exact(input_path,12957,'7420488411feca17f5cf166019d86040bd6efdf5923ee94fb74c1a3077590d0a')
+inputs = json.loads(payload)
+prior_obj = P / 'SEALED-private-Lean-routing-query-kind-native-namespaced-exact-two.json'
+prior = json.loads(exact(prior_obj,9386,'d07b254324a63bb6c35ff9ee56d5f6f478fb69c4c91a668446e9eed66e3e0f32'))
+
+def summarize(raw):
+    suite, = ET.fromstring(raw).findall('testsuite')
+    tests = suite.findall('testcase')
+    result = {k:int(suite.attrib[k]) for k in ('tests', 'failures', 'errors', 'skipped')}
+    names = [(t.get('classname'),t.get('name')) for t in tests]
+    assert len(names) == len(set(names)) == result['tests']
+    categories = {k:[name for t, (_,name) in zip(tests,names) if t.find(k) is not None]
+                  for k in ('failure','error','skipped')}
+    for tag,key in (('failure','failures'),('error','errors'),('skipped','skipped')):
+        assert len(categories[tag]) == result[key]
+    return result, names, categories
+
+old_junit = bound(prior['actual_same92']['GREEN']['raw_JUnit'])
+counts_old,names_old,cats_old = summarize(old_junit)
+assert counts_old == {'tests':92,'failures':0,'errors':0,'skipped':0}
+published = json.loads(exact(
+    '/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-live-reconciled-P1-Lean-ordinary92-closed.json',
+    24231,'0e515a1f804ff04a70446d1fedeb27d0a63a73a030c4978bcac8bce767e7b5b5'))
+assert [TEST + '::' + n for _,n in names_old] == published['ordered_cases']
+owner_class = names_old[0][0]
+assert all(c==owner_class for c,_ in names_old)
+new_names = [
+    'test_lean_recursion_exhausted_json_diagnostics_fail_closed[stdout]',
+    'test_lean_recursion_exhausted_json_diagnostics_fail_closed[stderr]',
+    'test_lean_json_reader_skips_recursion_exhausted_records',
+    'test_lean_json_decoder_normalizes_recursion_exhaustion_to_invalid_json',
+    'test_lean_json_reader_preserves_ordinary_nested_diagnostic_metadata',
+    'test_lean_rejects_non_text_dependency_report_severity[list]',
+    'test_lean_rejects_non_text_dependency_report_severity[object]',
+]
+expected_names = names_old + [(owner_class,n) for n in new_names]
+assert len(expected_names) == inputs['expected_cases'] == 99
+red_projection = json.loads(bound(inputs['red_private_projection']))
+guard = bound(inputs['adapted_guard'])
+old_guard = bound(inputs['original_guard'])
+assert guard == old_guard.replace(b'assert len(selectors) == 19', b'assert len(selectors) == 24')
+
+def verify_projection(phase):
+    changed_owner = []
+    for entry in red_projection:
+        rel = entry['relative_path']
+        project_path = W / 'project' / rel
+        assert str(project_path)==entry['path']
+        if rel != OWNER or phase == 'RED':
+            bound(entry)
+        else:
+            owner = bound(inputs['roles'][OWNER]['after'])
+            assert read(project_path) == owner
+            changed_owner.append(ref(project_path,owner))
+    assert len(changed_owner)==(phase=='GREEN')
+
+def run(phase):
+    dest = W / phase.lower()
+    dest.mkdir(mode=0o700)
+    home = W / (phase.lower()+'-home')
+    home.mkdir(mode=0o700)
+    env = {
+        'PATH':'/home/barberb/lift_coding/.venv/bin:/usr/bin:/bin',
+        'HOME':str(home),
+        'XDG_CACHE_HOME':str(home / 'cache'),
+        'XDG_CONFIG_HOME':str(home / 'config'),
+        'XDG_DATA_HOME':str(home / 'data'),
+        'LANG':'C.UTF-8','LC_ALL':'C.UTF-8','PYTEST_DISABLE_PLUGIN_AUTOLOAD':'1',
+        'IPFS_DATASETS_RUN_NATIVE_LEAN':'0','OPENBLAS_NUM_THREADS':'1',
+        'OMP_NUM_THREADS':'1','MKL_NUM_THREADS':'1',
+    }
+    old = inputs['prior_argv']
+    argv = [*old[:3],inputs['adapted_guard']['path'],str(dest),str(W/'project'),*old[6:10],*inputs['selectors']]
+    verify_projection(phase)
+    start = time.monotonic()
+    stdout = dest / 'stdout.DATA'
+    stderr = dest / 'stderr.DATA'
+    with stdout.open('xb') as out, stderr.open('xb') as err:
+        result = subprocess.run(argv, cwd=dest, env=env, stdout=out, stderr=err, timeout=75,check=False)
+    finish = time.monotonic()
+    verify_projection(phase)
+    termination = save_json(phase.lower()+'-termination.json',dict(
+        argv=argv,returncode=result.returncode,elapsed_seconds=round(finish-start,6),
+        stdout=ref(stdout,read(stdout)),stderr=ref(stderr,read(stderr)),
+    ))
+    print(json.dumps(dict(phase=phase,termination=termination,returncode=result.returncode)),flush=True)
+    junit = dest / 'result.xml'
+    raw = read(junit)
+    counts,names,categories = summarize(raw)
+    assert not read(stderr)
+    assert names == expected_names
+    assert result.returncode == (1 if phase=='RED' else 0)
+    failed = new_names[:4] + new_names[5:] if phase == 'RED' else []
+    assert categories == {'failure':failed,'error':[],'skipped':[]}, categories
+    counts['passed'] = counts['tests'] - sum(counts[k] for k in ('failures','errors','skipped'))
+    counts['functions'] = len(inputs['selectors'])
+    packet = dict(raw_JUnit=ref(junit,raw), counts=counts, failed_cases=failed,
+                  terminal_returncode=result.returncode,termination=termination,
+                  actual_owning_roles={rel:ref(W/'project'/rel,read(W/'project'/rel))
+                                       for rel in (OWNER,TEST)})
+    print(json.dumps(dict(phase=phase, counts=counts,failed=failed)),flush=True)
+    return packet
+
+assert git('rev-parse','HEAD').decode().strip() == inputs['baseline_HEAD']
+red = run('RED')
+save_json('RED-actual-guarded-99.json',red)
+delta = W/'project'/OWNER
+assert read(delta) == bound(inputs['roles'][OWNER]['before'])
+temporary = save('private-green-owner-replacement.DATA',bound(inputs['roles'][OWNER]['after']))
+os.replace(temporary['path'],delta)
+verify_projection('GREEN')
+green = run('GREEN')
+save_json('GREEN-actual-guarded-99.json',green)
+assert git('rev-parse','HEAD').decode().strip() == inputs['baseline_HEAD']
+assert git('rev-parse',inputs['baseline_HEAD']+'^{tree}').decode().strip() == inputs['baseline_tree']
+packet = inputs | dict(
+    schema='existing-Lean-report-diagnostic-shape-and-json-depth-private-same99-exact-two/v1',
+    sealed_inputs=ref(input_path,payload),
+    raw_RED_JUnit=red['raw_JUnit'], raw_GREEN_JUnit=green['raw_JUnit'],
+    actual_RED=red,actual_GREEN=green,
+    actual_retained_92_matches_published_order=True,
+    ordered_cases=[TEST+'::'+n for _,n in expected_names],
+    canonical_Git_mutation=False, Source_or_Native_or_SQL_or_model_or_SDK_execution=False,
+    existing_guarded_private_pytest_only=True,
+    exact_Fixture_pin_preserved=True,
+)
+print(json.dumps(save_json('SEALED-private-Lean-diagnostics-current-Guide580-exact-two-same99.json',packet)),flush=True)

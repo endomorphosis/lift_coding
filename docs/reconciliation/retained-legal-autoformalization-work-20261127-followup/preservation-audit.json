@@ -1,0 +1,164 @@
+{
+  "coverage_limits": [
+    "Repository and temporary project scopes from prior inventory",
+    "System and dependency-cache exclusions in bounded tmp walk",
+    "Loose authored files selected through inventory source roots",
+    "Runtime artifacts and credentials excluded"
+  ],
+  "physical_indices_before": {
+    "accelerate": {
+      "HEAD": {
+        "full9": [
+          "66306",
+          "21897442",
+          "33204",
+          "1",
+          "1000",
+          "1000",
+          "21",
+          "1794192373012559514",
+          "1794192373012559514"
+        ],
+        "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_accelerate/HEAD",
+        "sha256": "28d25bf82af4c0e2b72f50959b2beb859e3e60b9630a5e8c603dad4ddb2b6e80"
+      },
+      "index": {
+        "full9": [
+          "66306",
+          "21920509",
+          "33204",
+          "1",
+          "1000",
+          "1000",
+          "4380394",
+          "1794383056933424587",
+          "1794383056934424634"
+        ],
+        "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_accelerate/index",
+        "sha256": "074c705c210ce30f8814809396f061b07ec7af2582eb81efa4f643e6dc04133f"
+      }
+    },
+    "datasets": {
+      "HEAD": {
+        "full9": [
+          "66306",
+          "21894847",
+          "33204",
+          "1",
+          "1000",
+          "1000",
+          "68",
+          "1794197244820531011",
+          "1794197244820531011"
+        ],
+        "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/HEAD",
+        "sha256": "304b7cc5ccc8fd8400f9fb1dc85ed7644e2bc7a5697ab1c55427d5559ea63093"
+      },
+      "index": {
+        "full9": [
+          "66306",
+          "21903661",
+          "33204",
+          "1",
+          "1000",
+          "1000",
+          "6909980",
+          "1794383057225438251",
+          "1794383057227036694"
+        ],
+        "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/index",
+        "sha256": "3e13127fa904266b31e999ff0b504655627a740e855b90263819933a165627f4"
+      }
+    },
+    "hallucinate": {
+      "HEAD": {
+        "full9": [
+          "66306",
+          "21918509",
+          "33204",
+          "1",
+          "1000",
+          "1000",
+          "21",
+          "1786002433004359228",
+          "1786002433004359228"
+        ],
+        "path": "/home/barberb/lift_coding/.git/modules/hallucinate_app/HEAD",
+        "sha256": "28d25bf82af4c0e2b72f50959b2beb859e3e60b9630a5e8c603dad4ddb2b6e80"
+      },
+      "index": {
+        "full9": [
+          "66306",
+          "21918790",
+          "33204",
+          "1",
+          "1000",
+          "1000",
+          "138750",
+          "1794190311696379611",
+          "1794190311697780616"
+        ],
+        "path": "/home/barberb/lift_coding/.git/modules/hallucinate_app/index",
+        "sha256": "3d5bd2612918d8411b4881faa9b94636abde6349ccfabc49567d38b2b279de19"
+      }
+    },
+    "root": {
+      "HEAD": {
+        "full9": [
+          "66306",
+          "4359629",
+          "33204",
+          "1",
+          "1000",
+          "1000",
+          "37",
+          "1785870500869348661",
+          "1785870500869348661"
+        ],
+        "path": "/home/barberb/lift_coding/.git/HEAD",
+        "sha256": "32a4e0619657da69ad525c8936b759693db31bc061488a69a547266919aac0c7"
+      },
+      "index": {
+        "full9": [
+          "66306",
+          "4358082",
+          "33204",
+          "1",
+          "1000",
+          "1000",
+          "692628",
+          "1790928958538606226",
+          "1790928958550606317"
+        ],
+        "path": "/home/barberb/lift_coding/.git/index",
+        "sha256": "80b0426031778d38c8b762a273739e08edbf2ce2b18690efb4f541fa6de120a4"
+      }
+    }
+  },
+  "qualification": {
+    "candidate_native_or_SQL_qualification_added": false,
+    "historical_results_retained_with_original_scope": true,
+    "publisher_tests_run": 0
+  },
+  "tmp": {
+    "common_stores": 2126,
+    "entries": 1615117,
+    "new_nonancestor_heads_found": 0,
+    "populated_recent_checkouts_with_clean_staging": 7,
+    "previously_archived_historical_worktree_versions": 15,
+    "previously_archived_nonancestor_branch_bundles": 2,
+    "recent_git_metadata_roots": 12,
+    "traversal_depth_limit": 8,
+    "valid_git_roots": 2739
+  },
+  "workspace": {
+    "additional_nested_checkouts": 122,
+    "changed_bodies_already_archived": true,
+    "common_stores": 64,
+    "local_branch_refs": 602,
+    "new_active_source_overlay_found": false,
+    "previous_snapshot_paths": 2793,
+    "prior_checkouts": 116,
+    "unchanged_full9": 2791
+  }
+}

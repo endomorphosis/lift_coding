@@ -1,0 +1,141 @@
+{
+  "actual_title10_packet_api_baseline": {
+    "bytes": 725,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/red/actual-official-review-packet-boundary-red.json",
+    "sha256": "d05ab59e5e355795ba781d00b78db036a48e26d0b5fe5e62682e84070f6da439"
+  },
+  "candidate": {
+    "isolated_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-all-20261126-nsFFGMUO/datasets.git",
+    "oid": "9b93d9ed54657ebeb611ec01527c0ab2ddd22e03",
+    "parent": "10bdbd38f30ea6b25c2ddec54802bed61d9fb48c",
+    "ref": "refs/reconciliation/pending-official-source-review-packets-20261127",
+    "tree": "1bc8a8808610b6ebd88de62a5ffdd79ac24dcdd9"
+  },
+  "exact_edits": {
+    "ipfs_datasets_py/logic/autoformal/corpus_source_review_packets.py": {
+      "after": {
+        "bytes": 44949,
+        "git_blob": "9cc75909574b045badfa5b42a01999e6b6e61170",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/owner.after.DATA",
+        "sha256": "8136af98ce2ba6bc6e56000e7ab8d3261d3f307c25b01dcd1780683cfa8ec764"
+      },
+      "before": {
+        "bytes": 36666,
+        "git_blob": "1c364f16a954806d27976b1fa8eb2c6028907f4a",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/owner.before.DATA",
+        "sha256": "c2a3a08963e32b7ef3371ae32ff1266ad6fe052c87a491857dcc720170367a29"
+      }
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/guides/corpus_source_review_packets.md": {
+      "after": {
+        "bytes": 10046,
+        "git_blob": "bfecf6aac8cfe8c58adc0dbc24640245ba3c9c4c",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/guide.after.DATA",
+        "sha256": "6715c4dd9cbe39553116cd4288cc0d0f027fae6a487550c6c6e0bc3382a9e7db"
+      },
+      "before": {
+        "bytes": 8443,
+        "git_blob": "09510ed55efbdb8482cc6f8ffd76b6e6bb720342",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/guide.before.DATA",
+        "sha256": "3265768bf94e54aca0102ff608efdeaf73ca0e41d6b0ad9c0b0cdfdd3a4fa341"
+      }
+    },
+    "tests/unit/logic/autoformal/test_corpus_source_review_packets.py": {
+      "after": {
+        "bytes": 61267,
+        "git_blob": "31ce911981fdb8df899c77130b5afa98d8aab412",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/test.final.DATA",
+        "sha256": "c2235c3a3f550f81e37c0a75562ae009f7e71c9a1aa8bb8979129e6c5f25dc22"
+      },
+      "before": {
+        "bytes": 51627,
+        "git_blob": "a7e731b5ff00ef053a2ea0efa45da5120cf74f54",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/test.before.DATA",
+        "sha256": "f1514dae7ee57c6ed47860d52e24fea8176d8f00992460ba906183d9d4e629a8"
+      }
+    }
+  },
+  "forward": {
+    "bytes": 26397,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/packets.forward.patch.DATA",
+    "sha256": "a9708e14b43c6a1930117c20607a1d7a6523b468148e8d98da3ba4825440a9e8"
+  },
+  "inverse": {
+    "bytes": 26397,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/packets.inverse.patch.DATA",
+    "sha256": "c006dcb4c7f3341dec0b86603f2bdc3df88726ec31bbb4dc02e651de6f6c2f5c"
+  },
+  "published_official_replay_qualification": {
+    "bytes": 4819,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-official-v2-current-zha9lelB/publication-final.json",
+    "sha256": "5d9103e42b66a9e19af9ae45ae78438ce1652225c20cf717336480130627daa6"
+  },
+  "same_four_fictional_after": {
+    "cases": 4,
+    "error": 0,
+    "failure": 0,
+    "junit": {
+      "bytes": 927,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/green-same-four/result.xml",
+      "sha256": "175bfad1048eef567c20c60cb40aeaf3355c103fb39a030ea3f9388386c7e513"
+    },
+    "names": [
+      "test_official_packet_preserves_complete_source_and_blank_guides",
+      "test_official_packet_requires_independent_preparation_root_before_guides",
+      "test_official_packet_refuses_changed_raw_transport_under_original_pin",
+      "test_official_packet_refuses_resealed_quote_bound_to_another_document"
+    ],
+    "skipped": 0,
+    "terminal_returncode": 0
+  },
+  "same_four_fictional_before": {
+    "cases": 4,
+    "error": 0,
+    "failure": 4,
+    "junit": {
+      "bytes": 3185,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/red-same-four/result.xml",
+      "sha256": "a7028f8a13eb61a6b864cba6c622fbc58b1fd9619aaae66ac252aa269c76890d"
+    },
+    "names": [
+      "test_official_packet_preserves_complete_source_and_blank_guides",
+      "test_official_packet_requires_independent_preparation_root_before_guides",
+      "test_official_packet_refuses_changed_raw_transport_under_original_pin",
+      "test_official_packet_refuses_resealed_quote_bound_to_another_document"
+    ],
+    "skipped": 0,
+    "terminal_returncode": 1
+  },
+  "schema": "official-v2-source-review-packets-private-candidate/v1",
+  "source_decisions_applied": false,
+  "source_fixture_paths": {
+    "bytes": 53559,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/current-input-epoch.json",
+    "sha256": "7886293673dc58878fd8ed0852553ec9e57ce742e24138bee919f93340412099"
+  },
+  "source_legal_meaning_admitted": false,
+  "ten_official_controls": {
+    "cases": 10,
+    "error": 0,
+    "failure": 0,
+    "junit": {
+      "bytes": 1994,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/green-final/result.xml",
+      "sha256": "58cc47d47f5d9aeead1d8a5574049b651a0d4fbc027dcfb91f3fa81d594713f5"
+    },
+    "names": [
+      "test_official_packet_preserves_complete_source_and_blank_guides",
+      "test_official_packet_requires_independent_preparation_root_before_guides",
+      "test_official_packet_refuses_changed_raw_transport_under_original_pin",
+      "test_official_packet_refuses_resealed_quote_bound_to_another_document",
+      "test_official_packet_paginates_all_requests_without_parent_inference",
+      "test_official_packet_refuses_instead_of_returning_a_prefix[max_units]",
+      "test_official_packet_refuses_instead_of_returning_a_prefix[max_source_views]",
+      "test_official_packet_refuses_instead_of_returning_a_prefix[max_collection_bytes]",
+      "test_official_packet_refuses_instead_of_returning_a_prefix[max_page_bytes]",
+      "test_official_packet_rejects_mixed_public_replay_profiles"
+    ],
+    "skipped": 0,
+    "terminal_returncode": 0
+  }
+}

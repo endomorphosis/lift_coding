@@ -1,0 +1,462 @@
+--- a/ipfs_datasets_py/logic/autoformal/corpus_source_review_packets.py
++++ b/ipfs_datasets_py/logic/autoformal/corpus_source_review_packets.py
+@@ -20,6 +20,14 @@
+ from . import corpus_source_review as reviews
+ 
+ PROFILE = "complete-source-first-parent-grouped-review-packets/v1"
++OFFICIAL_PROFILE = "complete-source-first-official-occurrence-review-packets/v2"
++OFFICIAL_MANIFEST_SCHEMA = "legal-corpus-official-source-review-packets-manifest/v2"
++OFFICIAL_UNIT_SCHEMA = "legal-corpus-official-source-review-unit-packet/v2"
++OFFICIAL_DOCUMENT_SCHEMA = "legal-corpus-official-source-review-packet-document/v2"
++_LEGACY_REPLAY_FIELDS = {"alignment_corpus_bytes", "expected_alignment_corpus_pins", "alignment_replay_inputs",
++    "source_report_bytes", "expected_source_report_pins"}
++_OFFICIAL_REPLAY_FIELDS = {"document_inputs", "expected_document_population_sha256", "occurrence_inputs",
++    "expected_occurrence_population_sha256", "pending_interpretations", "expected_pending_interpretations_sha256"}
+ MANIFEST_SCHEMA = "legal-corpus-source-review-packets-manifest/v1"
+ PAGE_SCHEMA = "legal-corpus-source-review-packets-page/v1"
+ VIEW_SCHEMA = "legal-corpus-source-review-packet-view/v1"
+@@ -69,6 +77,15 @@
+ }
+ SCHEMAS = dict(zip(COMPONENTS, (MANIFEST_SCHEMA, PAGE_SCHEMA, VIEW_SCHEMA, DOCUMENT_SCHEMA, DOCUMENT_PART_SCHEMA, PARENT_SCHEMA,
+                               UNIT_SCHEMA, GUIDE_SCHEMA, CATALOG_SCHEMA, PROJECTION_SCHEMA, COMPARISON_SCHEMA), strict=True))
++_OFFICIAL_SCHEMAS = {**SCHEMAS, "manifest": OFFICIAL_MANIFEST_SCHEMA,
++    "unit_packets": OFFICIAL_UNIT_SCHEMA, "official_documents": OFFICIAL_DOCUMENT_SCHEMA}
++_OFFICIAL_FIELDS = {**FIELDS,
++    "official_documents": {"document_index", "source_version_ref", "source_view_ref", "raw_sha256",
++        "extracted_sha256", *COMMON_FIELDS},
++    "unit_packets": {"queue_ordinal", "source_review_request_ref", "source_review_subject_ref",
++        "dependency_manifest_sha256", "quoted_source_occurrence", "question_catalog_ref",
++        "candidate_interpretations_included", *COMMON_FIELDS},
++}
+ PROMPTS = {
+     "definition": "Identify evidence for necessary definitions and their source/applicability, or record what is unavailable; do not assert definition closure.",
+     "authority": "Record the supplied authority/publication evidence and its limits; content hashes or a URL alone do not authenticate publisher or governing law.",
+@@ -131,8 +148,9 @@
+     return {"record_cid": record["record_cid"], "sha256": _digest(record), "schema": record["schema"]}
+ 
+ 
+-def _pins():
+-    result = reviews._pins(reviews._owners())
++def _pins(*, official=False):
++    owners = reviews._owners()
++    result = reviews._official_pins(owners) if official else reviews._pins(owners)
+     result[str(Path(__file__).resolve())] = _sha(Path(__file__).read_bytes())
+     return result
+ 
+@@ -234,13 +252,13 @@
+     return value
+ 
+ 
+-def _catalog():
++def _catalog(*, profile=PROFILE):
+     topics = [*(('context', kind) for kind in reviews.CONTEXT_KINDS), *(('handoff', kind) for kind in reviews.HANDOFF_KINDS)]
+     questions = [{"category": category, "kind": kind, "prompt": PROMPTS[kind],
+         "assessment_scope": "source_context_evidence_declaration" if index < 9 else "deferred_semantic_or_proof_review",
+         "status": "pending_independent_review", "verified": False, "closed": False}
+         for index, (category, kind) in enumerate(topics)]
+-    return _candidate(CATALOG_SCHEMA, profile=PROFILE, questions=questions,
++    return _candidate(CATALOG_SCHEMA, profile=profile, questions=questions,
+         answer_disposition_choices=["unresolved", "evidence_declared", "not_applicable"],
+         instructions=list(COMPLETION_INSTRUCTIONS))
+ 
+@@ -355,7 +373,7 @@
+         completion_instructions=list(COMPLETION_INSTRUCTIONS), status='blank_not_a_review')
+ 
+ 
+-def prepare_source_review_packets(*, expected_preparation_manifest_sha256, alignment_corpus_bytes,
++def _prepare_legacy_packets(*, expected_preparation_manifest_sha256, alignment_corpus_bytes,
+         expected_alignment_corpus_pins, alignment_replay_inputs, source_report_bytes,
+         expected_source_report_pins, source_review_limits=None, limits=None):
+     """Replay original sources once and retain every exact review request."""
+@@ -497,7 +515,109 @@
+     return result
+ 
+ 
+-def _detach(bundle, bounds):
++def _prepare_official_packets(expected_preparation_manifest_sha256, inputs, *, source_review_limits, limits):
++    bounds, source_bounds = _limits(limits), reviews._limits(source_review_limits)
++    contracts.require_sha256(expected_preparation_manifest_sha256, "independent complete source preparation hash")
++    producer_pins = _pins(official=True)
++    documents, occurrences, alternatives, _ = reviews._official_inputs(bounds=source_bounds, **inputs)
++    if len(documents) > bounds['max_source_views'] or len(occurrences) > bounds['max_units']:
++        _fail("complete official source view or review request population exceeds packet bound")
++    preparation = reviews.prepare_official_source_review_requests_v2(
++        **{**inputs, "document_inputs": documents, "occurrence_inputs": occurrences,
++            "pending_interpretations": alternatives}, limits=source_review_limits)
++    if _digest(preparation['manifest']) != expected_preparation_manifest_sha256:
++        _fail("independent complete source preparation root differs")
++
++    result = {component: [] for component in COMPONENTS}
++    retained = 0
++
++    def retain(component, row):
++        nonlocal retained
++        retained += len(base._plain(row, min(contracts.MAX_RECORD_BYTES,
++            bounds['max_collection_bytes'] - retained))) + 1
++        result[component].append(row)
++
++    input_bindings = preparation['manifest']['input_bindings']
++    views = {}
++    for index, document in enumerate(documents):
++        version, text = document['source_version'], document['extracted_text']
++        version_ref = _ref(version)
++        raw_text = text.encode('utf-8')
++        view = _candidate(VIEW_SCHEMA, origin_kind='official_extracted_view',
++            source_version_cid=version['record_cid'], source_version_record=version,
++            text=text, text_sha256=_sha(raw_text), text_cid=cid_for_bytes(raw_text),
++            char_count=len(text), utf8_bytes=len(raw_text), coordinate_system=version['extracted_view']['coordinate_system'],
++            original_field_bindings=[{"document_input_index": index,
++                "document_input_sha256": input_bindings['official_documents'][str(index)]['raw_sha256']}],
++            source_observation_memberships=[{"document_index": index, "source_version_ref": version_ref}])
++        views[version['record_cid']] = view
++        retain('source_views', view)
++        retain('official_documents', _candidate(OFFICIAL_DOCUMENT_SCHEMA, document_index=index,
++            source_version_ref=version_ref, source_view_ref=_ref(view), raw_sha256=document['expected_raw_sha256'],
++            extracted_sha256=document['expected_extracted_sha256']))
++
++    catalog = _catalog(profile=OFFICIAL_PROFILE)
++    retain('question_catalog', catalog)
++    catalog_ref = _ref(catalog)
++    entries = []
++    for request, subject, manifest in zip(preparation['requests'], preparation['subjects'],
++            preparation['dependency_manifests'], strict=True):
++        ordinal = request['queue_ordinal']
++        source_records = {request['source_occurrence_cid']: request['source_occurrence'],
++            request['context_cid']: request['context_declaration']}
++        unit = _candidate(OFFICIAL_UNIT_SCHEMA, queue_ordinal=ordinal,
++            source_review_request_ref=_ref(request), source_review_subject_ref=_ref(subject),
++            dependency_manifest_sha256=manifest['manifest_sha256'],
++            quoted_source_occurrence=_quote(request, source_records, views),
++            question_catalog_ref=catalog_ref, candidate_interpretations_included=False)
++        guide = _response_guide(unit, request, subject, manifest, catalog)
++        retain('unit_packets', unit)
++        retain('response_guides', guide)
++        entries.append({"ordinal": ordinal, "request_cid": request['record_cid'],
++            "unit_packet_ref": _ref(unit), "response_guide_ref": _ref(guide)})
++
++    result['pages'], page_refs = _pages(entries, bounds)
++    result['manifest'] = _candidate(OFFICIAL_MANIFEST_SCHEMA, profile=OFFICIAL_PROFILE,
++        limits=bounds, source_review_limits=source_bounds, source_preparation_ref=_ref(preparation['manifest']),
++        source_input_bindings=input_bindings, producer_pins=producer_pins, page_refs=page_refs,
++        source_view_refs=[_ref(row) for row in result['source_views']],
++        official_document_refs=[_ref(row) for row in result['official_documents']], parent_packet_refs=[],
++        question_catalog_ref=catalog_ref, selector_projection_refs=[], document_part_refs=[],
++        comparison_evidence_refs=[], original_context_authority=None, population_complete=True,
++        presentation_scope='all_original_official_occurrences_full_extracted_views_and_blank_evidence_guides',
++        counts={"parents": 0, "source_views": len(views), "source_view_kinds": {"official_extracted_view": len(views)},
++            "official_documents": len(documents), "units": len(entries), "response_guides": len(entries),
++            "pages": len(result['pages']), "selector_projections": 0, "comparison_evidence": 0, "document_parts": 0,
++            "parent_unit_counts": [], "retained_questions": len(entries) * 16, "blank_active_answers": len(entries) * 9,
++            "deferred_questions": len(entries) * 7, "recorded_reviews": 0})
++    if reviews._aggregate_size(result) > bounds['max_collection_bytes']:
++        _fail("complete source review packet collection exceeds byte bound")
++    if _pins(official=True) != producer_pins:
++        _fail("source packet or inherited producers changed during preparation")
++    return result
++
++
++def _packet_uses_official_replay(fields):
++    if fields == _OFFICIAL_REPLAY_FIELDS:
++        return True
++    if fields == _LEGACY_REPLAY_FIELDS:
++        return False
++    _fail("one complete source-review packet replay profile required")
++
++
++def prepare_source_review_packets(*, expected_preparation_manifest_sha256, source_review_limits=None,
++        limits=None, **inputs):
++    """Generate blank review packets from exact legacy or official source replay inputs."""
++    if _packet_uses_official_replay(inputs.keys()):
++        return _prepare_official_packets(expected_preparation_manifest_sha256, inputs,
++            source_review_limits=source_review_limits, limits=limits)
++    return _prepare_legacy_packets(expected_preparation_manifest_sha256=expected_preparation_manifest_sha256,
++        source_review_limits=source_review_limits, limits=limits, **inputs)
++
++
++def _detach(bundle, bounds, *, official=False):
++    schemas = _OFFICIAL_SCHEMAS if official else SCHEMAS
++    fields = _OFFICIAL_FIELDS if official else FIELDS
+     contracts.require_keys(bundle, COMPONENTS, "complete source review packet collection")
+     result, retained = {}, 0
+     caps = {"manifest": 1, "pages": bounds['max_pages'], "source_views": bounds['max_source_views'],
+@@ -505,6 +625,8 @@
+         "document_parts": bounds['max_document_parts'],
+         "response_guides": bounds['max_units'], "question_catalog": 1,
+         "selector_projections": bounds['max_selector_projections'], "comparison_evidence": bounds['max_parents'] * 10}
++    if official:
++        caps.update(dict.fromkeys(('parent_packets', 'document_parts', 'comparison_evidence', 'selector_projections'), 0))
+     for group in COMPONENTS:
+         values = [bundle[group]] if group == 'manifest' else bundle[group]
+         if type(values) is not list or len(values) > caps[group]:
+@@ -517,7 +639,7 @@
+             maximum = bounds['max_page_bytes'] if group == 'pages' else contracts.MAX_RECORD_BYTES
+             raw = base._plain(row, min(maximum, bounds['max_collection_bytes'] - retained))
+             retained += len(raw) + 1
+-            detached.append(contracts.validate_record(json.loads(raw), schema=SCHEMAS[group], fields=FIELDS[group]))
++            detached.append(contracts.validate_record(json.loads(raw), schema=schemas[group], fields=fields[group]))
+         result[group] = detached[0] if group == 'manifest' else detached
+     if reviews._aggregate_size(result) > bounds['max_collection_bytes']:
+         _fail("complete packet collection byte bound exceeded")
+@@ -526,10 +648,13 @@
+ 
+ def validate_source_review_packets(bundle, **inputs):
+     """Bound offered output first, then repeat complete original-source replay."""
+-    detached = _detach(bundle, _limits(inputs.get('limits')))
++    official = _packet_uses_official_replay(inputs.keys() -
++        {'expected_preparation_manifest_sha256', 'source_review_limits', 'limits'})
++    detached = _detach(bundle, _limits(inputs.get('limits')), official=official)
+     expected = prepare_source_review_packets(**inputs)
+     reviews._equal_components(detached, expected)
+-    if _pins() != expected['manifest']['producer_pins']:
++    current_pins = _pins(official=True) if official else _pins()
++    if current_pins != expected['manifest']['producer_pins']:
+         _fail("packet or inherited producers changed during final comparison")
+     return detached
+ 
+--- a/tests/unit/logic/autoformal/test_corpus_source_review_packets.py
++++ b/tests/unit/logic/autoformal/test_corpus_source_review_packets.py
+@@ -968,3 +968,193 @@
+         env=environment, capture_output=True, text=True, timeout=20, check=False,
+     )
+     assert result.returncode == 0, result.stdout + result.stderr
++
++
++@pytest.fixture(scope="module")
++def official_packet_case():
++    arguments = fixture_helper().official_occurrence_case()
++    preparation = source_review.prepare_official_source_review_requests_v2(**arguments)
++    return {
++        "preparation": preparation,
++        "arguments": {
++            **arguments,
++            "expected_preparation_manifest_sha256": ref(preparation["manifest"])["sha256"],
++        },
++    }
++
++
++def test_official_packet_preserves_complete_source_and_blank_guides(owner, official_packet_case):
++    data = official_packet_case
++    preparation = data["preparation"]
++    bundle = build(owner, data)
++    manifest = bundle["manifest"]
++    assert set(bundle) == set(owner.COMPONENTS)
++    assert manifest["profile"] == "complete-source-first-official-occurrence-review-packets/v2"
++    assert manifest["schema"] == owner.OFFICIAL_MANIFEST_SCHEMA
++    assert manifest["source_preparation_ref"] == ref(preparation["manifest"])
++    assert manifest["source_input_bindings"] == preparation["manifest"]["input_bindings"]
++    assert manifest["population_complete"] is True
++    for component in (
++        "parent_packets", "selector_projections", "comparison_evidence", "document_parts"
++    ):
++        assert bundle[component] == []
++
++    documents = data["arguments"]["document_inputs"]
++    assert len(bundle["source_views"]) == len(bundle["official_documents"]) == len(documents) == 3
++    views = {view["source_version_cid"]: view for view in bundle["source_views"]}
++    assert manifest["source_view_refs"] == [ref(view) for view in bundle["source_views"]]
++    assert manifest["official_document_refs"] == [ref(row) for row in bundle["official_documents"]]
++    for index, (document, descriptor) in enumerate(
++        zip(documents, bundle["official_documents"], strict=True)
++    ):
++        version = document["source_version"]
++        view = views[version["record_cid"]]
++        assert descriptor["schema"] == owner.OFFICIAL_DOCUMENT_SCHEMA
++        assert descriptor["document_index"] == index
++        assert descriptor["source_version_ref"] == ref(version)
++        assert descriptor["source_view_ref"] == ref(view)
++        assert descriptor["raw_sha256"] == sha(document["raw_bytes"])
++        assert descriptor["extracted_sha256"] == sha(document["extracted_text"].encode())
++        assert view["text"] == document["extracted_text"]
++        assert view["text_sha256"] == descriptor["extracted_sha256"]
++
++    assert len(bundle["unit_packets"]) == len(bundle["response_guides"]) == 4
++    catalog_ref = ref(bundle["question_catalog"][0])
++    for unit, guide, request, subject, dependency in zip(
++        bundle["unit_packets"], bundle["response_guides"], preparation["requests"],
++        preparation["subjects"], preparation["dependency_manifests"], strict=True,
++    ):
++        assert unit["schema"] == owner.OFFICIAL_UNIT_SCHEMA
++        assert unit["queue_ordinal"] == guide["queue_ordinal"] == request["queue_ordinal"]
++        assert unit["source_review_request_ref"] == ref(request)
++        assert unit["source_review_subject_ref"] == guide["subject_ref"] == ref(subject)
++        assert unit["dependency_manifest_sha256"] == guide["dependency_manifest_sha256"] == (
++            dependency["manifest_sha256"]
++        )
++        assert unit["question_catalog_ref"] == guide["question_catalog_ref"] == catalog_ref
++        assert unit["candidate_interpretations_included"] is False
++
++        quote = unit["quoted_source_occurrence"]
++        occurrence = request["source_occurrence"]
++        assert quote["source_occurrence_record"] == occurrence
++        assert quote["source_context_record"] == request["context_declaration"]
++        assert quote["coordinate_system"] == occurrence["coordinate_system"]
++        assert quote["raw_HTML_coordinate_mapping_verified"] is False
++        view = views[occurrence["source_version_cid"]]
++        assert quote["full_source_view_ref"] == ref(view)
++        text = view["text"]
++        start, end = occurrence["start_char"], occurrence["end_char"]
++        start_utf8, end_utf8 = occurrence["start_utf8"], occurrence["end_utf8"]
++        assert text[start:end] == occurrence["span_text"]
++        assert text.encode()[start_utf8:end_utf8] == occurrence["span_text"].encode()
++        assert (len(text[:start].encode()), len(text[:end].encode())) == (start_utf8, end_utf8)
++
++        assert guide["schema"] == owner.GUIDE_SCHEMA
++        assert guide["status"] == "blank_not_a_review"
++        assert guide["request_cid"] == request["record_cid"]
++        assert guide["request_sha256"] == ref(request)["sha256"]
++        assert guide["unit_packet_ref"] == ref(unit)
++        assert len(guide["answers"]) == 9
++        assert [answer["slot_id"] for answer in guide["answers"]] == request["context_slot_ids"]
++        assert all(
++            answer["disposition"] is answer["finding"] is answer["rationale"] is None
++            and answer["evidence_refs"] == []
++            for answer in guide["answers"]
++        )
++        assert len(guide["deferred_questions"]) == 7
++        assert [question["slot_id"] for question in guide["deferred_questions"]] == (
++            request["deferred_review_slot_ids"]
++        )
++        assert all(question["answer"] is None for question in guide["deferred_questions"])
++        assert guide["reviewer_declaration"] == {
++            "principal_id": None, "role": None, "issued_at_utc": None,
++            "identity_evidence_refs": [], "independence_evidence_refs": [],
++            "process_evidence_refs": [],
++        }
++        assert all(value is None for value in guide["exposure_declaration"].values())
++
++    entries = [entry for page in bundle["pages"] for entry in page["entries"]]
++    assert entries == [
++        {
++            "ordinal": request["queue_ordinal"],
++            "request_cid": request["record_cid"],
++            "unit_packet_ref": ref(unit),
++            "response_guide_ref": ref(guide),
++        }
++        for request, unit, guide in zip(
++            preparation["requests"], bundle["unit_packets"], bundle["response_guides"], strict=True
++        )
++    ]
++    counts = manifest["counts"]
++    assert counts["blank_active_answers"] == 36
++    assert counts["deferred_questions"] == 28
++    assert counts["recorded_reviews"] == 0
++    for record in records(bundle):
++        assert reseal(record) == record
++        assert record["selected_occurrence"] is record["governing_source_binding"] is None
++        assert all(record[flag] is False for flag in owner.FALSE_FLAGS)
++    output = canonical_dag_json_bytes(bundle)
++    for alternative in data["arguments"]["pending_interpretations"]:
++        assert alternative["alternative_id"].encode() not in output
++        assert alternative["typed_expression_sha256"].encode() not in output
++    assert validate(owner, bundle, data) == bundle
++
++
++def test_official_packet_requires_independent_preparation_root_before_guides(
++    owner, official_packet_case, monkeypatch
++):
++    data = deepcopy(official_packet_case)
++    data["arguments"]["expected_preparation_manifest_sha256"] = "0" * 64
++    monkeypatch.setattr(owner, "_response_guide", producer_refusal)
++    with pytest.raises(contracts.CorpusContractError, match="independent.*preparation.*differs"):
++        build(owner, data)
++
++
++def test_official_packet_refuses_changed_raw_transport_under_original_pin(
++    owner, official_packet_case
++):
++    data = deepcopy(official_packet_case)
++    document = data["arguments"]["document_inputs"][0]
++    original = document["raw_bytes"]
++    document["raw_bytes"] = b"[" + original[1:]
++    assert len(document["raw_bytes"]) == len(original)
++    assert sha(document["raw_bytes"]) != document["expected_raw_sha256"]
++    with pytest.raises(contracts.CorpusContractError, match="raw artifact bytes.*expected binding"):
++        build(owner, data)
++
++
++def test_official_packet_refuses_resealed_quote_bound_to_another_document(
++    owner, official_packet_case
++):
++    bundle = build(owner, official_packet_case)
++    quote = bundle["unit_packets"][0]["quoted_source_occurrence"]
++    sibling_view = bundle["source_views"][1]
++    assert quote["full_source_view_ref"] != ref(sibling_view)
++    quote["full_source_view_ref"] = ref(sibling_view)
++    repaired = rebind_bundle(bundle)
++    with pytest.raises(contracts.CorpusContractError, match="complete independent regeneration"):
++        validate(owner, repaired, official_packet_case)
++
++
++def test_official_packet_paginates_all_requests_without_parent_inference(owner, official_packet_case):
++    data = official_packet_case
++    limits = {"max_units_per_page": 1}
++    bundle = build(owner, data, limits=limits)
++    assert len(bundle["pages"]) == len(data["preparation"]["requests"])
++    for ordinal, (page, request) in enumerate(zip(bundle["pages"], data["preparation"]["requests"], strict=True)):
++        assert page["first_unit_ordinal"] == page["page_ordinal"] == ordinal
++        assert page["entries"][0]["ordinal"] == ordinal
++        assert page["entries"][0]["request_cid"] == request["record_cid"]
++    assert bundle["parent_packets"] == []
++    assert validate(owner, bundle, data, limits=limits) == bundle
++
++
++@pytest.mark.parametrize("limit", ["max_units", "max_source_views", "max_collection_bytes", "max_page_bytes"])
++def test_official_packet_refuses_instead_of_returning_a_prefix(owner, official_packet_case, limit):
++    with pytest.raises(contracts.CorpusContractError):
++        build(owner, official_packet_case, limits={limit: 1})
++
++
++def test_official_packet_rejects_mixed_public_replay_profiles(owner, official_packet_case):
++    with pytest.raises(contracts.CorpusContractError, match="one complete source-review packet replay profile"):
++        build(owner, official_packet_case, alignment_corpus_bytes={})
+--- a/ipfs_datasets_py/logic/autoformal/docs/guides/corpus_source_review_packets.md
++++ b/ipfs_datasets_py/logic/autoformal/docs/guides/corpus_source_review_packets.md
+@@ -8,9 +8,10 @@
+ 
+ ## Inputs and fixed replay
+ 
+-Call `prepare_source_review_packets` with the same five source-input arguments
+-as `prepare_source_review_requests`, plus independently selected
+-`expected_preparation_manifest_sha256`. That SHA256 is the FULL canonical hash
++Call `prepare_source_review_packets` with one complete replay profile and an
++independently selected `expected_preparation_manifest_sha256`. The legacy paired
++profile uses the same five source-input arguments as
++`prepare_source_review_requests`. That SHA256 is the FULL canonical hash
+ of the existing complete source-preparation manifest, including its record CID.
+ It is distinct from its payload CID and any pretty JSON transport hash.
+ 
+@@ -29,7 +30,33 @@
+ performs no source decoding, crypto verification, model, network or clock work.
+ Producer file pins are checked before preparation and after final comparison.
+ 
+-## Complete evidence and request identities
++## Official V2 review packets
++
++Use the same `document_inputs`, `occurrence_inputs` and
++`pending_interpretations` as `prepare_official_source_review_requests_v2`, with
++their independently selected `expected_document_population_sha256`,
++`expected_occurrence_population_sha256` and
++`expected_pending_interpretations_sha256` pins. The packet call requires the
++independent full official preparation-manifest hash. This argument set excludes
++paired replay arguments. Both profiles support the existing lower-only limits.
++
++Official packets retain the full extracted view of each supplied document and
++the original version, raw-input and extracted-view pins. Each unit retains the
++exact character and UTF-8 quotation, original context declaration, original
++request and subject references, and dependency-manifest hash. Resolve the
++request and subject in the independently pinned preparation when completing a
++response. The packet omits per-alternative identities and expression hashes.
++The source-input bindings retain their aggregate pin, and the guide leaves
++actual reviewer exposure unknown.
++
++The official manifest, document and unit records use official V2 schemas.
++Pages preserve queue order, including when several occurrences share one
++document. Paired parent, comparison, selector projection and document-part
++lists are empty. Guides retain nine blank answer slots and seven deferred
++questions per request. `validate_source_review_packets` takes the same official
++inputs and checks every offered record against complete regeneration.
++
++## Complete legacy evidence and request identities
+ 
+ The output has exactly eleven components: `manifest`, `pages`, `source_views`,
+ `official_documents`, `document_parts`, `parent_packets`, `unit_packets`, `response_guides`,

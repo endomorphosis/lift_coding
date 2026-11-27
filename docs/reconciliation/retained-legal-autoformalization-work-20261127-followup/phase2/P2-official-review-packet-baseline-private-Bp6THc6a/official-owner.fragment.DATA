@@ -1,0 +1,100 @@
+def _prepare_official_packets(expected_preparation_manifest_sha256, inputs, *, source_review_limits, limits):
+    bounds, source_bounds = _limits(limits), reviews._limits(source_review_limits)
+    contracts.require_sha256(expected_preparation_manifest_sha256, "independent complete source preparation hash")
+    producer_pins = _pins(official=True)
+    documents, occurrences, alternatives, _ = reviews._official_inputs(bounds=source_bounds, **inputs)
+    if len(documents) > bounds['max_source_views'] or len(occurrences) > bounds['max_units']:
+        _fail("complete official source view or review request population exceeds packet bound")
+    preparation = reviews.prepare_official_source_review_requests_v2(
+        **{**inputs, "document_inputs": documents, "occurrence_inputs": occurrences,
+            "pending_interpretations": alternatives}, limits=source_review_limits)
+    if _digest(preparation['manifest']) != expected_preparation_manifest_sha256:
+        _fail("independent complete source preparation root differs")
+
+    result = {component: [] for component in COMPONENTS}
+    retained = 0
+
+    def retain(component, row):
+        nonlocal retained
+        retained += len(base._plain(row, min(contracts.MAX_RECORD_BYTES,
+            bounds['max_collection_bytes'] - retained))) + 1
+        result[component].append(row)
+
+    input_bindings = preparation['manifest']['input_bindings']
+    views = {}
+    for index, document in enumerate(documents):
+        version, text = document['source_version'], document['extracted_text']
+        version_ref = _ref(version)
+        raw_text = text.encode('utf-8')
+        view = _candidate(VIEW_SCHEMA, origin_kind='official_extracted_view',
+            source_version_cid=version['record_cid'], source_version_record=version,
+            text=text, text_sha256=_sha(raw_text), text_cid=cid_for_bytes(raw_text),
+            char_count=len(text), utf8_bytes=len(raw_text), coordinate_system=version['extracted_view']['coordinate_system'],
+            original_field_bindings=[{"document_input_index": index,
+                "document_input_sha256": input_bindings['official_documents'][str(index)]['raw_sha256']}],
+            source_observation_memberships=[{"document_index": index, "source_version_ref": version_ref}])
+        views[version['record_cid']] = view
+        retain('source_views', view)
+        retain('official_documents', _candidate(OFFICIAL_DOCUMENT_SCHEMA, document_index=index,
+            source_version_ref=version_ref, source_view_ref=_ref(view), raw_sha256=document['expected_raw_sha256'],
+            extracted_sha256=document['expected_extracted_sha256']))
+
+    catalog = _catalog(profile=OFFICIAL_PROFILE)
+    retain('question_catalog', catalog)
+    catalog_ref = _ref(catalog)
+    entries = []
+    for request, subject, manifest in zip(preparation['requests'], preparation['subjects'],
+            preparation['dependency_manifests'], strict=True):
+        ordinal = request['queue_ordinal']
+        source_records = {request['source_occurrence_cid']: request['source_occurrence'],
+            request['context_cid']: request['context_declaration']}
+        unit = _candidate(OFFICIAL_UNIT_SCHEMA, queue_ordinal=ordinal,
+            source_review_request_ref=_ref(request), source_review_subject_ref=_ref(subject),
+            dependency_manifest_sha256=manifest['manifest_sha256'],
+            quoted_source_occurrence=_quote(request, source_records, views),
+            question_catalog_ref=catalog_ref, candidate_interpretations_included=False)
+        guide = _response_guide(unit, request, subject, manifest, catalog)
+        retain('unit_packets', unit)
+        retain('response_guides', guide)
+        entries.append({"ordinal": ordinal, "request_cid": request['record_cid'],
+            "unit_packet_ref": _ref(unit), "response_guide_ref": _ref(guide)})
+
+    result['pages'], page_refs = _pages(entries, bounds)
+    result['manifest'] = _candidate(OFFICIAL_MANIFEST_SCHEMA, profile=OFFICIAL_PROFILE,
+        limits=bounds, source_review_limits=source_bounds, source_preparation_ref=_ref(preparation['manifest']),
+        source_input_bindings=input_bindings, producer_pins=producer_pins, page_refs=page_refs,
+        source_view_refs=[_ref(row) for row in result['source_views']],
+        official_document_refs=[_ref(row) for row in result['official_documents']], parent_packet_refs=[],
+        question_catalog_ref=catalog_ref, selector_projection_refs=[], document_part_refs=[],
+        comparison_evidence_refs=[], original_context_authority=None, population_complete=True,
+        presentation_scope='all_original_official_occurrences_full_extracted_views_and_blank_evidence_guides',
+        counts={"parents": 0, "source_views": len(views), "source_view_kinds": {"official_extracted_view": len(views)},
+            "official_documents": len(documents), "units": len(entries), "response_guides": len(entries),
+            "pages": len(result['pages']), "selector_projections": 0, "comparison_evidence": 0, "document_parts": 0,
+            "parent_unit_counts": [], "retained_questions": len(entries) * 16, "blank_active_answers": len(entries) * 9,
+            "deferred_questions": len(entries) * 7, "recorded_reviews": 0})
+    if reviews._aggregate_size(result) > bounds['max_collection_bytes']:
+        _fail("complete source review packet collection exceeds byte bound")
+    if _pins(official=True) != producer_pins:
+        _fail("source packet or inherited producers changed during preparation")
+    return result
+
+
+def _packet_uses_official_replay(fields):
+    if fields == _OFFICIAL_REPLAY_FIELDS:
+        return True
+    if fields == _LEGACY_REPLAY_FIELDS:
+        return False
+    _fail("one complete source-review packet replay profile required")
+
+
+def prepare_source_review_packets(*, expected_preparation_manifest_sha256, source_review_limits=None,
+        limits=None, **inputs):
+    """Generate blank review packets from exact legacy or official source replay inputs."""
+    if _packet_uses_official_replay(inputs.keys()):
+        return _prepare_official_packets(expected_preparation_manifest_sha256, inputs,
+            source_review_limits=source_review_limits, limits=limits)
+    return _prepare_legacy_packets(expected_preparation_manifest_sha256=expected_preparation_manifest_sha256,
+        source_review_limits=source_review_limits, limits=limits, **inputs)
+
+

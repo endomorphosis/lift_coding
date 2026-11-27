@@ -1,0 +1,67 @@
+from pathlib import Path
+import fcntl, hashlib, json, os, subprocess
+import xml.etree.ElementTree as ET
+w=Path(__file__).resolve().parent
+def file_ref(path):
+    data=path.read_bytes()
+    return {"path":str(path),"bytes":len(data),"sha256":hashlib.sha256(data).hexdigest()}
+metadata=json.loads((w/"real-checkout-pins.json").read_bytes())
+src=Path(metadata["selected_repo"])
+seal=metadata["private_seal"]
+assert file_ref(Path(seal["path"]))==seal
+normal={}
+commit=metadata["authored_candidate"]["oid"]
+for name,count in (("official",10),("legacy",5)):
+    path=w/name/"local-source-closeout.json"
+    row=json.loads(path.read_bytes())
+    xml=Path(row["junit"]["path"])
+    pin=file_ref(xml)
+    assert pin=={key:row["junit"][key] for key in pin}
+    nodes=ET.fromstring(xml.read_bytes()).findall(".//testcase")
+    assert len(nodes)==count==len({(n.get("name"),n.get("classname")) for n in nodes})
+    assert all(node.find(tag) is None for node in nodes for tag in ("failure","error","skipped"))
+    assert row["returncode"]==0 and row["commit"]==commit and row["source_read_closed"]
+    assert row["same_collection_execution_xml"] and row["all_source_pins_verified_before_and_after"]
+    assert len(row["conftest_origins"])==3
+    actual_functions=[n.get("name").split("[",1)[0] for n in nodes]
+    assert [n.get("name") for n in nodes]==[entry.split("::")[-1] for entry in row["collected"]]
+    roster=[entry.split("::")[-1] for entry in (w.parent/("final-official.selectors" if name=="official" else "legacy.selectors")).read_text().splitlines()]
+    vector=[1,1,1,1,1,4,1] if name=="official" else [1]*len(roster)
+    assert actual_functions==[function for function,count in zip(roster,vector,strict=True) for _ in range(count)]
+    normal[name]={"cases":count,"functions":len(roster),"case_vector":vector,"report":file_ref(path),"junit":pin}
+for name in ("admission.lock","source.lock"):
+    path=src/"workspace/control-plane/source-leases"/name
+    with os.fdopen(os.open(path,os.O_RDONLY|os.O_NOFOLLOW),"rb") as fd:
+        fcntl.flock(fd,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        fcntl.flock(fd,fcntl.LOCK_UN)
+env={**os.environ,"GIT_OPTIONAL_LOCKS":"0","GIT_NO_LAZY_FETCH":"1"}
+def git(*args):
+    return subprocess.check_output(["git","-C",str(src),"-c","core.preloadIndex=false",*args],env=env,timeout=20)
+assert git("rev-parse","HEAD").decode().strip()==commit
+assert git("status","--porcelain=v1","--untracked-files=all")==b""
+title10=w/"title10/actual-title10-official-review-packet-closed.json"
+title_pin=file_ref(title10)
+assert title_pin["sha256"]=="c927e1ff88fc0bea7c9dc101dbfa203b34b27d41751a7be9ac5e4afec7552be7"
+pilot=json.loads(title10.read_bytes())
+assert pilot["candidate"]==commit and pilot["source_read_closed"]
+assert pilot["pinned_checkout_paths"]==len(metadata["paths"])
+assert pilot["all_records_independently_regenerated_equal"] and pilot["exact_four_historical_source_requests_preserved"]
+assert pilot["answers_supplied"]==pilot["signatures_created"]==pilot["reviewers_selected"]==0
+for key in ("review_packet","source_preparation_custody"):
+    assert file_ref(Path(pilot[key]["path"]))==pilot[key]
+counters=pilot["counts"]
+assert [counters[key] for key in ("official_documents","units","response_guides","blank_active_answers",
+    "deferred_questions","recorded_reviews")]==[3,4,4,36,28,0]
+record={"schema":"official-V2-source-review-packets-normal-local-qualification/v1",
+        "candidate":metadata["authored_candidate"],"owner_test_and_guide_seal":seal,
+        "normal":{"fixture_scope":normal,"original_configs":metadata["normal_config"],"clean":True},
+        "exact_source_files_before_and_after_each":len(metadata["paths"]),
+        "all_three_Source_READs_closed_and_locks_exclusive_probe_acquired":True,
+        "actual_title10_blank_review_packet":title_pin,
+        "SDK_managed":False,"published":False,"real_statutory_review":False,
+        "isolated_checkout_role_map":file_ref(w/"real-checkout-pins.json")}
+path=w/"actual-official-V2-review-packets-Title10-and-legacy-Source-closed.json"
+with path.open("x") as f:
+    json.dump(record,f,indent=2,sort_keys=True);f.write("\n")
+path.chmod(0o400)
+print(json.dumps(file_ref(path)))

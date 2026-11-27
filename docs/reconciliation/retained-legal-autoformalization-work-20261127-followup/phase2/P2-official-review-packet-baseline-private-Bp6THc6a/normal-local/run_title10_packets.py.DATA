@@ -1,0 +1,161 @@
+from pathlib import Path
+import base64, copy, hashlib, importlib.util, json, os, resource, sys, zlib
+
+work=Path(__file__).resolve().parent
+metadata=json.loads((work/"real-checkout-pins.json").read_bytes())
+root=Path(metadata["selected_repo"])
+commit=metadata["authored_candidate"]["oid"]
+assert commit=="9b93d9ed54657ebeb611ec01527c0ab2ddd22e03"
+resource.setrlimit(resource.RLIMIT_AS,(512*1024**2,)*2)
+resource.setrlimit(resource.RLIMIT_CPU,(45,46))
+os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})
+sys.path.insert(0,str(root))
+os.chdir(root)
+spec=importlib.util.spec_from_file_location("pending_title10_local_source",root/metadata["lease_module"])
+lease_module=importlib.util.module_from_spec(spec)
+sys.modules[spec.name]=lease_module
+spec.loader.exec_module(lease_module)
+assert lease_module.canonical_source_root(root)==root
+
+saved=Path("/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01")
+out=work/"title10"
+out.mkdir(mode=0o700)
+def audit(event,args):
+    if event.startswith(("socket.","subprocess.")) or event in {"os.exec","os.fork","os.forkpty","os.posix_spawn","os.system"}:
+        raise PermissionError("closed replay process/network boundary")
+    if event=="import" and args[0].split(".")[0] in {"torch","transformers","tensorflow","jax","huggingface_hub"}:
+        raise ImportError("closed replay import boundary")
+    if event=="open" and not isinstance(args[0], int):
+        name=Path(os.fsdecode(args[0])).resolve()
+        flags=args[2] or 0
+        if flags & (os.O_WRONLY|os.O_RDWR|os.O_CREAT|os.O_TRUNC|os.O_APPEND):
+            if not name.is_relative_to(out):
+                raise PermissionError("closed replay write boundary")
+        if name.is_relative_to(Path("/home/barberb/lift_coding/external")):
+            raise PermissionError("use saved custody, never current project bodies")
+
+def sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+def read(path, length, digest):
+    raw=path.read_bytes()
+    assert (len(raw),sha(raw))==(length,digest),path
+    return json.loads(raw)
+
+def read_prior(i,n,digest):
+    return read(saved/"pilot-official-pending-PAV-output-v06"/f"run.output.{i}.bin",n,digest)
+
+def verify_source_paths():
+    for rel,pin in metadata["paths"].items():
+        raw=(root/rel).read_bytes()
+        assert (len(raw),sha(raw))==(pin["bytes"],pin["sha256"]),rel
+
+def write(name,data):
+    path=out/name
+    raw=(json.dumps(data,sort_keys=True,indent=2,ensure_ascii=False)+"\n").encode()
+    with path.open("xb") as f:
+        f.write(raw)
+    return {"path":str(path),"bytes":len(raw),"sha256":sha(raw)}
+
+cache=read(saved/"actual-official-pilot-nine-inputs-and-typed-owner-body-cache-v01.json",95573,
+           "350babadfc05044c85319d3bef7f177582245f7670b2683a05b13806a337e26c")
+historic_preparation=read_prior(0,157823,"f207e00e0a7fc3a31689fb4349dd42b3491b8f117c80ef60de56759ebe10a9ad")
+historic_assessment=read_prior(1,31452,"175b991c1b6631b523acd8b70bec26d3599d1417bb069ba82330d863a0ec1471")
+registry=read_prior(4,277,"7d723588b6508bae648fc676c8c76163ac5e6220a7184de083a335a5c7bef053")
+policy=read_prior(5,540,"8e5579d3252256fe0e6c596f32e68c665ddd46389c3cece6af7b2ac47e269d8e")
+assert registry["mode"]==policy["mode"]=="unavailable" and registry["keys"]==[]
+inputs={}
+for row in cache["records"]:
+    if row["role"]!="original_pilot_input":
+        continue
+    name=Path(row["path"]).name
+    obj=zlib.decompressobj()
+    raw=obj.decompress(base64.b64decode(row["raw_zlib_base64"],validate=True),row["bytes"]+1)
+    assert obj.eof and not obj.unused_data and (len(raw),sha(raw))==(row["bytes"],row["sha256"])
+    inputs[name]=raw
+assert len(inputs)==9
+
+with lease_module.source_lease(root,mode="read",timeout_seconds=30) as held:
+    assert held.canonical_root==str(root)
+    verify_source_paths()
+    sys.addaudithook(audit)
+    from ipfs_datasets_py.logic.autoformal import corpus_source_review as source
+    from ipfs_datasets_py.logic.autoformal import corpus_source_review_packets as packets
+
+    digest=source._digest
+    bindings=historic_preparation["manifest"]["input_bindings"]
+    documents=[]
+    stored_documents=json.loads(inputs["documents.json"])
+    for index,section in enumerate(("101","7213","7214")):
+        doc=stored_documents[section]
+        keys={"source_version":doc["source_version"],
+              "expected_raw_sha256":doc["raw_input_file"]["sha256"],
+              "expected_extracted_sha256":doc["extracted_input_file"]["sha256"]}
+        assert digest(keys)==bindings["official_documents"][str(index)]["raw_sha256"]
+        documents.append({**keys,"raw_bytes":inputs[f"{section}-source.html"],
+                          "extracted_text":inputs[f"{section}-extracted-view.txt"].decode()})
+    occurrences=[{"source_occurrence":row["occurrence"],"context":row["context"],
+                  "retained_unit_label":row["retained_unit_label"],
+                  "unanswered_question_ids":row["unanswered_question_ids"]}
+                 for row in json.loads(inputs["source-units-and-separate-crosswalk.json"])]
+    alternatives=historic_preparation["requests"][0]["pending_interpretations"]
+    assert len(occurrences)==4 and len(alternatives)==2
+    replay={
+        "document_inputs":documents,
+        "expected_document_population_sha256":digest(
+            [{k:v for k,v in row.items() if k not in {"raw_bytes","extracted_text"}} for row in documents]),
+        "occurrence_inputs":occurrences,
+        "expected_occurrence_population_sha256":bindings["official_occurrences"]["complete"]["raw_sha256"],
+        "pending_interpretations":alternatives,
+        "expected_pending_interpretations_sha256":bindings["pending_interpretations"]["complete"]["raw_sha256"],
+    }
+    prepared=source.prepare_official_source_review_requests_v2(**replay)
+    assert prepared["requests"]==historic_preparation["requests"]
+    assert prepared["manifest"]["input_bindings"]==bindings
+    assert all(row["governing_edition"] is None and row["applicability"] is None for row in prepared["requests"])
+
+
+    kwargs=dict(replay,expected_preparation_manifest_sha256=digest(prepared["manifest"]))
+    bundle=packets.prepare_source_review_packets(**kwargs)
+    assert packets.validate_source_review_packets(bundle,**kwargs)==bundle
+    root_manifest=bundle["manifest"]
+    counts=root_manifest["counts"]
+    assert [counts[key] for key in ("official_documents","units","response_guides","blank_active_answers",
+                                    "deferred_questions","recorded_reviews")]==[3,4,4,36,28,0]
+    assert all(bundle[key]==[] for key in ("parent_packets","comparison_evidence","selector_projections","document_parts"))
+    assert root_manifest["population_complete"] and root_manifest["original_context_authority"] is None
+    request_refs=[]
+    for unit,guide,request,subject,dependency in zip(bundle["unit_packets"],bundle["response_guides"],prepared["requests"],
+            prepared["subjects"],prepared["dependency_manifests"],strict=True):
+        assert unit["source_review_request_ref"]==packets._ref(request)
+        assert unit["source_review_subject_ref"]==guide["subject_ref"]==packets._ref(subject)
+        assert unit["dependency_manifest_sha256"]==guide["dependency_manifest_sha256"]==dependency["manifest_sha256"]
+        assert guide["request_sha256"]==digest(request)
+        assert unit["quoted_source_occurrence"]["source_occurrence_record"]==request["source_occurrence"]
+        assert unit["quoted_source_occurrence"]["source_context_record"]==request["context_declaration"]
+        assert unit["quoted_source_occurrence"]["raw_HTML_coordinate_mapping_verified"] is False
+        assert unit["candidate_interpretations_included"] is False and guide["status"]=="blank_not_a_review"
+        assert [row["slot_id"] for row in guide["answers"]]==request["context_slot_ids"]
+        assert [row["slot_id"] for row in guide["deferred_questions"]]==request["deferred_review_slot_ids"]
+        assert all(row["finding"] is None and row["rationale"] is None and row["disposition"] is None
+                   for row in guide["answers"])
+        assert all(value is None for value in guide["exposure_declaration"].values())
+        request_refs.append(unit["source_review_request_ref"])
+    serialized=json.dumps(bundle,ensure_ascii=False)
+    assert all(alt[key] not in serialized for alt in alternatives for key in ("alternative_id","typed_expression_sha256"))
+    assert all(row[flag] is False for component in bundle for row in
+               ([bundle[component]] if component=="manifest" else bundle[component]) for flag in packets.FALSE_FLAGS)
+    verify_source_paths()
+    lease=held.to_dict()
+    reviewer_packet=write("title10-official-review-packet.json",bundle)
+    preparation_custody=write("title10-exact-source-preparation.json",prepared)
+
+receipt={
+    "schema":"official-title10-blank-review-packet-run/v1","candidate":commit,
+    "source_read_closed":True,"cooperative_source_read":lease,
+    "pinned_checkout_paths":len(metadata["paths"]),"all_records_independently_regenerated_equal":True,
+    "exact_four_historical_source_requests_preserved":True,"published_source_epoch_preimage":"10bdbd38f30ea6b25c2ddec54802bed61d9fb48c",
+    "review_packet":reviewer_packet,"source_preparation_custody":preparation_custody,
+    "requests":request_refs,"counts":counts,"answers_supplied":0,"reviewers_selected":0,"signatures_created":0,
+    "per_alternative_fields_excluded_from_reviewer_packet":True,"legal_or_semantic_authority":False}
+print(json.dumps(write("actual-title10-official-review-packet-closed.json",receipt)),flush=True)

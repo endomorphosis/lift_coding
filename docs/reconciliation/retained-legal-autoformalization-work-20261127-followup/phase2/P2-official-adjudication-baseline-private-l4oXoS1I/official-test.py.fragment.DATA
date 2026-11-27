@@ -1,0 +1,47 @@
+
+
+@pytest.fixture(scope="module")
+def official_typed_adjudication_data():
+    source_responses = helper()
+    pending = source_responses.official_v2_pending_typed_data.__wrapped__()
+    data = source_responses.official_v2_signed_typed_data.__wrapped__(pending)
+    data["typed_report"] = source_responses.assess(response_owner, data)
+    assert data["typed_report"]["manifest"]["counts"]["authenticated_typed_responses"] == 2
+    return data
+
+
+def test_official_adjudication_declaration_binds_original_official_request(
+    owner, official_typed_adjudication_data
+):
+    data = official_typed_adjudication_data
+    declaration = author(owner, data)
+    request, subject, group, *_ = unit(data)
+    assert declaration["request_ref"] == ref(request)
+    assert declaration["subject_ref"] == ref(subject)
+    assert declaration["typed_group_ref"] == ref(group)
+    assert declaration["status"] == "declared_unauthenticated_source_adjudication"
+    assert all(declaration[field] is False for field in owner.FALSE_FLAGS)
+
+
+def test_official_adjudication_replays_signed_typed_population_without_adjudicators(
+    owner, official_typed_adjudication_data
+):
+    data = clone_case(official_typed_adjudication_data)
+    (data["adjudication_registry"], data["adjudication_policy"], _) = authority(owner, data)
+    data["adjudication_groups"] = [
+        {
+            "request_cid": request["record_cid"],
+            "reviews": [],
+            "declaration_artifact_id": None,
+            "evidence_artifacts": {},
+            "observed_artifact_sha256s": deepcopy(group["observed_artifact_sha256s"]),
+            "observed_pins": deepcopy(group["observed_pins"]),
+        }
+        for request, group in zip(data["preparation"]["requests"], data["groups"], strict=True)
+    ]
+    report = assess(owner, data)
+    assert len(report["records"]) == len(data["preparation"]["requests"])
+    assert all(record["request_cid"] == request["record_cid"]
+               for record, request in zip(report["records"], data["preparation"]["requests"], strict=True))
+    assert all(report["manifest"][field] is False for field in owner.FALSE_FLAGS)
+    assert validate(owner, report, data) == report

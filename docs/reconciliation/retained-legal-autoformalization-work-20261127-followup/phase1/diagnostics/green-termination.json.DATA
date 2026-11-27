@@ -1,0 +1,50 @@
+{
+  "argv": [
+    "/home/barberb/lift_coding/.venv/bin/python",
+    "-I",
+    "-B",
+    "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/existing-private-runner-twenty-four-selectors.py.DATA",
+    "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/green",
+    "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/project",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+    "/home/barberb/lift_coding/external/ipfs_datasets",
+    "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_verified_proof_binds_full_kernel_receipt",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_sorry_is_rejected_and_never_proved",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_sorry_can_explicitly_downgrade_authority",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_unavailable_lean_kernel_never_passes",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_wasm_plane_is_probe_only_and_not_confused_with_native_success",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_binds_expected_goal_policy_and_round_trips_strictly",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_source_only_compilation_cannot_prove_an_opaque_request_obligation",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_precancelled_request_runs_no_identity_or_proof_callbacks",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_inconsistent_evidence",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_fields_from_another_request",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_malformed_or_failed_exit_status_cannot_establish_proof",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_preserves_default_and_supported_requested_backend_aliases",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_non_theorem_request_after_complete_rebind",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_recursion_exhausted_json_diagnostics_fail_closed",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_json_reader_skips_recursion_exhausted_records",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_json_decoder_normalizes_recursion_exhaustion_to_invalid_json",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_json_reader_preserves_ordinary_nested_diagnostic_metadata",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_rejects_non_text_dependency_report_severity"
+  ],
+  "elapsed_seconds": 2.872297,
+  "returncode": 0,
+  "stderr": {
+    "bytes": 0,
+    "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/green/stderr.DATA",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 712,
+    "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/green/stdout.DATA",
+    "sha256": "eba27aa9795ef96c8ec14a1c9e4dca81bbba86d5017a69b02c58b1144b224352"
+  }
+}

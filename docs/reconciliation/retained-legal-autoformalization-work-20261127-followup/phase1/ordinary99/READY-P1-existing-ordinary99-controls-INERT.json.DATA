@@ -1,0 +1,383 @@
+{
+  "Main_append_lineage": {
+    "bytes": 9410,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/SEALED-private-existing-Lean-JSON-depth-recovery-two-file-v01.json",
+    "sha256": "58543c307f928799fd9c2f44353e862b44c58b41ffeffd1b96d1268d60853693"
+  },
+  "cases": 99,
+  "controls": {
+    "bootstrap": {
+      "bytes": 39443,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/existing-ordinary99-bootstrap.INERT.py.DATA",
+      "sha256": "1ee6cdbf8abb5961b51ecd09c37dc42008eda8f8c4c6f2853ad5f4d6b449b5ce"
+    },
+    "factory": {
+      "bytes": 3100,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/existing-ordinary99-factory.INERT.py.DATA",
+      "sha256": "3ae9f868b6a902816c38ac121939844d400348a9964e6dfbbcc290953e0ae5ee"
+    },
+    "operator": {
+      "bytes": 56082,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/existing-ordinary99-operator.INERT.py.DATA",
+      "sha256": "2875cdac9843dc396d96bb5ef1d381e77328537781837b99cd1cee5fdb87cebf"
+    }
+  },
+  "current_D_path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets",
+  "current_additional_A_path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate",
+  "exact_function_selectors": {
+    "bytes": 3035,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/exact-24-function-selectors.json",
+    "sha256": "6189515405e67937748cd5ad6e5e641eda1b993b7d99dfbbb7312d86cb088d22"
+  },
+  "expected_A_publish_head": "219ba3da0f62f772801d71715e22c506faa21126",
+  "expected_A_tree": "c670052e6e12473d974382e455c7aef4adb6aebe",
+  "expected_D_publish_head": "d067738daf11465f74a91c75165747d9db766cdc",
+  "expected_case_roster": {
+    "bytes": 14816,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/exact-99-case-roster.json",
+    "sha256": "960eb03ad1af212ba93b0d9ea8b3de6e3db2dedca12f46d98a8023f3743a3732"
+  },
+  "expected_ownership_roles": {
+    "ipfs_datasets_py/logic/backends/kernel/lean.py": {
+      "before_Gitblob": "7ee0cdb71958b052038fa467230dbf86dd0c3fb2",
+      "before_sha256": "18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800",
+      "expected_Gitblob": "97c7e2b760f7775de3aae312557a8eccc82437ba",
+      "expected_after": {
+        "bytes": 104465,
+        "path": "/tmp/P1-Lean-dependency-report-severity-private-x22djkzw/lean.after-nested-json-and-severity.py.DATA",
+        "sha256": "de99fe31f53fb34bf247e5c24b4b1424ca06874f1da5dc8875b3dbf886d1e4cb"
+      }
+    },
+    "tests/integration/logic/backends/test_kernel_backends.py": {
+      "before_Gitblob": "20f612f6c6a241804cdf71b09dc9a0a4f0c2e923",
+      "before_sha256": "eac1d213b16ff2ef79f18269352648768d4e145b2b65fbb8c75c308bced98ea2",
+      "expected_Gitblob": "6568d9404adbe1a8439829321ade7588a150969e",
+      "expected_after": {
+        "bytes": 130553,
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/ordinary99-expected-test-owner-after.DATA",
+        "sha256": "8bca876c855d44df4d48cb909fc6a0e9a007480d61037831536e84a8cc68adf9"
+      }
+    }
+  },
+  "fixture_closure_count": 32,
+  "functions": 24,
+  "future_roles": {
+    "Source_READ3_paths": [
+      "ipfs_datasets_py/logic/backends/kernel/lean.py",
+      "tests/integration/logic/backends/test_kernel_backends.py",
+      ".git/index"
+    ],
+    "fixture_roles": {
+      "conftest.py": {
+        "bytes": 2054,
+        "sha256": "2eab130f3effda3737f25a1770ccd5f9d4955ba42c3d692d659801ffdc1035cf"
+      },
+      "ipfs_datasets_py/logic/backends/kernel/lean.py": {
+        "bytes": 104465,
+        "sha256": "de99fe31f53fb34bf247e5c24b4b1424ca06874f1da5dc8875b3dbf886d1e4cb"
+      },
+      "ipfs_datasets_py/logic/backends/kernel/rocq.py": {
+        "bytes": 41607,
+        "sha256": "7fd1b39643190277f00325dac59cf3923b24a3056963713bd7437a364b6a0f9a"
+      },
+      "ipfs_datasets_py/logic/backends/kernel/wasm.py": {
+        "bytes": 24933,
+        "sha256": "49cfdbc0108b43d45ab9f567b4153f384985563b075f369b32e37f855252d6cc"
+      },
+      "ipfs_datasets_py/logic/backends/process.py": {
+        "bytes": 109707,
+        "sha256": "370ba355be1da87814be4a117d2ce2a1cbc255064958d9ec64ada8e54521a7d7"
+      },
+      "ipfs_datasets_py/logic/backends/resource_admission.py": {
+        "bytes": 19806,
+        "sha256": "fda64e02042355fd0a0a3b75934b3d1c4ccb5efb42f0fe861876275ff8a5e1a8"
+      },
+      "ipfs_datasets_py/logic/backends/results.py": {
+        "bytes": 27160,
+        "sha256": "afda793472d3a6ba13f20bee13a992bfce68177388bdf338548157a5aa201458"
+      },
+      "ipfs_datasets_py/logic/families/models.py": {
+        "bytes": 36277,
+        "sha256": "1a92305ef498812e3757147179907d4ddf4a4518371034fc2363922d5d5fed3f"
+      },
+      "ipfs_datasets_py/logic/ir_core/claims.py": {
+        "bytes": 16176,
+        "sha256": "282cdd3a6ba18a90079886337d360bae44da172748faa3ad2715d2071070de3b"
+      },
+      "ipfs_datasets_py/logic/ir_core/protocols.py": {
+        "bytes": 57510,
+        "sha256": "e2dd1dc93d1efa15c7c4088145d32c52636c72e9230b16ade77ca6c6a0c2c336"
+      },
+      "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_resources.py": {
+        "bytes": 71686,
+        "sha256": "51bec0e627e266595229dee298f22c7bdcf82bb5876eb2da1efd5f3655fbe585"
+      },
+      "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_resource_recovery.py": {
+        "bytes": 264567,
+        "sha256": "ae5c1f9ada1d786e73568e948aacd17745603c2d0f3eab1b48243c933705ca3b"
+      },
+      "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_source_lease.py": {
+        "bytes": 10375,
+        "sha256": "42e9f07d0d458177079269d9f495f0b70512180c1adc2f7fe0bfdb05518a12f9"
+      },
+      "ipfs_datasets_py/optimizers/logic_theorem_optimizer/existing_resource_scheduler.py": {
+        "bytes": 25411,
+        "sha256": "b2b8022a1d1a10676fd809862ff1db069387c0619cadcb6731e37345e0a20114"
+      },
+      "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_resource_safety.py": {
+        "bytes": 15543,
+        "sha256": "3655923785cb99409171caaba8c523354f03dbe8d82b6deb45a7b46db8394633"
+      },
+      "ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py": {
+        "bytes": 151350,
+        "sha256": "7a0dac2d13b4be7775e278054e1a57808f5629d3c58952164b91514e6e2ae2d3"
+      },
+      "ipfs_datasets_py/optimizers/logic_theorem_optimizer/runtime_telemetry.py": {
+        "bytes": 53075,
+        "sha256": "542f705867b93fcb138a117e1f5c97a144ad6635dc92c37bc5034eee5065ef63"
+      },
+      "pytest.ini": {
+        "bytes": 1536,
+        "sha256": "01737eaafcd2b7e7e1a8db2368a93d4a28053ba44e611a10b1c87d2155dc65ff"
+      },
+      "scripts/__init__.py": {
+        "bytes": 46,
+        "sha256": "8bae0240c318680619db09765fadb6f8159d857d1ade30d030148a24da0c585e"
+      },
+      "scripts/ops/__init__.py": {
+        "bytes": 35,
+        "sha256": "4c9d3c43d6e3f9cf1ef247346a713679a5a93f3c4c47345ad8e2780983132a5a"
+      },
+      "scripts/ops/legal_ir/__init__.py": {
+        "bytes": 36,
+        "sha256": "f01f69ade8a699c97cfcad8ba04a79fab4b219f4ac39e3b5a47b0d4a8a4426c5"
+      },
+      "scripts/ops/legal_ir/run_autoformal_supervisor.py": {
+        "bytes": 279677,
+        "sha256": "d2d1ede812fb6ce8a1c656726d276b1ae681f5695d61269700ecbd798cf6cadf"
+      },
+      "tests/conftest.py": {
+        "bytes": 20716,
+        "sha256": "0a255dc653799cb980d7edbb1d7b2e3c8f0d81b091d4986aa712e1e8e12b7f10"
+      },
+      "tests/integration/__init__.py": {
+        "bytes": 46,
+        "sha256": "f81488e329268d54e4267e9728e98a864c6a626c8cce0aa055512e1de3d156c9"
+      },
+      "tests/integration/logic/backends/test_kernel_backends.py": {
+        "bytes": 130553,
+        "sha256": "8bca876c855d44df4d48cb909fc6a0e9a007480d61037831536e84a8cc68adf9"
+      },
+      "tests/unit/conftest.py": {
+        "bytes": 1204,
+        "sha256": "2abb4618add06f636ab71406c19ccd828084a48ecf75448397ddb6cd2bca53a2"
+      },
+      "tests/unit/optimizers/__init__.py": {
+        "bytes": 33,
+        "sha256": "a2915ce482d690b118753f039d6d394743a89b07fe4392781656952e584531c1"
+      },
+      "tests/unit/optimizers/conftest.py": {
+        "bytes": 39426,
+        "sha256": "44b5cc7d0f551c60e19d2ecaf824b07b01f1b40c8acb904fbabb4205e8abd97f"
+      },
+      "tests/unit/optimizers/logic_theorem_optimizer/conftest.py": {
+        "bytes": 5647,
+        "sha256": "28c6a027bf1dab9365f1b70f9b90428a136cb5e6436994176f5b6a9ddc6efc11"
+      },
+      "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_daemon_resources.py": {
+        "bytes": 109735,
+        "sha256": "b2f0f2d8651c39c4521eb30f44d6a12036c08df8efaa6b142fdeac6307a0e5fd"
+      },
+      "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_resource_recovery.py": {
+        "bytes": 648256,
+        "sha256": "ed337607e173ea972bd00bee74d9e1bcfa5ee98954504212c67cbedbc0ce3384"
+      },
+      "tests/unit/optimizers/logic_theorem_optimizer/test_retained_validation_capacity_recovery.py": {
+        "bytes": 291607,
+        "sha256": "693012bd11bef613cf0f0beba8133103f235eff1008e0607e6431b90051f7fab"
+      }
+    },
+    "guarded_bootstrap_modules": {
+      "ipfs_datasets_py.logic.backends.kernel.lean": {
+        "expected_after_adoption": {
+          "bytes": 104465,
+          "sha256": "de99fe31f53fb34bf247e5c24b4b1424ca06874f1da5dc8875b3dbf886d1e4cb"
+        },
+        "relative_path": "ipfs_datasets_py/logic/backends/kernel/lean.py",
+        "retained_pre_adoption_sha256": "18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800",
+        "use_actual_frozen_READ3_post": true
+      },
+      "ipfs_datasets_py.logic.backends.kernel.rocq": {
+        "expected_after_adoption": {
+          "bytes": 41607,
+          "sha256": "7fd1b39643190277f00325dac59cf3923b24a3056963713bd7437a364b6a0f9a"
+        },
+        "relative_path": "ipfs_datasets_py/logic/backends/kernel/rocq.py",
+        "retained_pre_adoption_sha256": "7fd1b39643190277f00325dac59cf3923b24a3056963713bd7437a364b6a0f9a",
+        "use_actual_frozen_READ3_post": false
+      },
+      "ipfs_datasets_py.logic.backends.kernel.wasm": {
+        "expected_after_adoption": {
+          "bytes": 24933,
+          "sha256": "49cfdbc0108b43d45ab9f567b4153f384985563b075f369b32e37f855252d6cc"
+        },
+        "relative_path": "ipfs_datasets_py/logic/backends/kernel/wasm.py",
+        "retained_pre_adoption_sha256": "49cfdbc0108b43d45ab9f567b4153f384985563b075f369b32e37f855252d6cc",
+        "use_actual_frozen_READ3_post": false
+      },
+      "ipfs_datasets_py.logic.backends.process": {
+        "expected_after_adoption": {
+          "bytes": 109707,
+          "sha256": "370ba355be1da87814be4a117d2ce2a1cbc255064958d9ec64ada8e54521a7d7"
+        },
+        "relative_path": "ipfs_datasets_py/logic/backends/process.py",
+        "retained_pre_adoption_sha256": "370ba355be1da87814be4a117d2ce2a1cbc255064958d9ec64ada8e54521a7d7",
+        "use_actual_frozen_READ3_post": false
+      },
+      "ipfs_datasets_py.logic.backends.resource_admission": {
+        "expected_after_adoption": {
+          "bytes": 19806,
+          "sha256": "fda64e02042355fd0a0a3b75934b3d1c4ccb5efb42f0fe861876275ff8a5e1a8"
+        },
+        "relative_path": "ipfs_datasets_py/logic/backends/resource_admission.py",
+        "retained_pre_adoption_sha256": "fda64e02042355fd0a0a3b75934b3d1c4ccb5efb42f0fe861876275ff8a5e1a8",
+        "use_actual_frozen_READ3_post": false
+      },
+      "ipfs_datasets_py.logic.backends.results": {
+        "expected_after_adoption": {
+          "bytes": 27160,
+          "sha256": "afda793472d3a6ba13f20bee13a992bfce68177388bdf338548157a5aa201458"
+        },
+        "relative_path": "ipfs_datasets_py/logic/backends/results.py",
+        "retained_pre_adoption_sha256": "afda793472d3a6ba13f20bee13a992bfce68177388bdf338548157a5aa201458",
+        "use_actual_frozen_READ3_post": false
+      },
+      "ipfs_datasets_py.logic.families.models": {
+        "expected_after_adoption": {
+          "bytes": 36277,
+          "sha256": "1a92305ef498812e3757147179907d4ddf4a4518371034fc2363922d5d5fed3f"
+        },
+        "relative_path": "ipfs_datasets_py/logic/families/models.py",
+        "retained_pre_adoption_sha256": "1a92305ef498812e3757147179907d4ddf4a4518371034fc2363922d5d5fed3f",
+        "use_actual_frozen_READ3_post": false
+      },
+      "ipfs_datasets_py.logic.ir_core.claims": {
+        "expected_after_adoption": {
+          "bytes": 16176,
+          "sha256": "282cdd3a6ba18a90079886337d360bae44da172748faa3ad2715d2071070de3b"
+        },
+        "relative_path": "ipfs_datasets_py/logic/ir_core/claims.py",
+        "retained_pre_adoption_sha256": "282cdd3a6ba18a90079886337d360bae44da172748faa3ad2715d2071070de3b",
+        "use_actual_frozen_READ3_post": false
+      },
+      "ipfs_datasets_py.logic.ir_core.protocols": {
+        "expected_after_adoption": {
+          "bytes": 57510,
+          "sha256": "e2dd1dc93d1efa15c7c4088145d32c52636c72e9230b16ade77ca6c6a0c2c336"
+        },
+        "relative_path": "ipfs_datasets_py/logic/ir_core/protocols.py",
+        "retained_pre_adoption_sha256": "e2dd1dc93d1efa15c7c4088145d32c52636c72e9230b16ade77ca6c6a0c2c336",
+        "use_actual_frozen_READ3_post": false
+      },
+      "ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler": {
+        "expected_after_adoption": {
+          "bytes": 151350,
+          "sha256": "7a0dac2d13b4be7775e278054e1a57808f5629d3c58952164b91514e6e2ae2d3"
+        },
+        "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py",
+        "retained_pre_adoption_sha256": "7a0dac2d13b4be7775e278054e1a57808f5629d3c58952164b91514e6e2ae2d3",
+        "use_actual_frozen_READ3_post": false
+      },
+      "tests.integration.logic.backends.test_kernel_backends": {
+        "expected_after_adoption": {
+          "bytes": 130553,
+          "sha256": "8bca876c855d44df4d48cb909fc6a0e9a007480d61037831536e84a8cc68adf9"
+        },
+        "relative_path": "tests/integration/logic/backends/test_kernel_backends.py",
+        "retained_pre_adoption_sha256": "eac1d213b16ff2ef79f18269352648768d4e145b2b65fbb8c75c308bced98ea2",
+        "use_actual_frozen_READ3_post": true
+      }
+    }
+  },
+  "historical_D_path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets",
+  "historical_fixture_reference": {
+    "bytes": 19693,
+    "path": "/tmp/P1-Lean-live-ordinary92-controls-INERT-31cgkog4/actual-live-ordinary92-exact-32-fixture-wire.json",
+    "sha256": "039c4498c1980200109956fa0269bdce3f39b570c7c47ba1076e1c7b9a399789"
+  },
+  "native_result": null,
+  "old_ordinary92_static_reference": {
+    "bytes": 10823,
+    "path": "/tmp/P1-Lean-live-ordinary92-controls-INERT-31cgkog4/READY-P1-existing-ordinary92-controls-INERT.json",
+    "sha256": "2e3a77309d66d9725b0ee4f00b2484650a315e5e58a7995de32a6e7e2fc59385"
+  },
+  "ordinary_result": null,
+  "provisional_named_count": 1625,
+  "provisional_outer_count": 1618,
+  "provisional_python_count": 1605,
+  "retained_actual_ordinary92": {
+    "bytes": 24231,
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-live-reconciled-P1-Lean-ordinary92-closed.json",
+    "sha256": "0e515a1f804ff04a70446d1fedeb27d0a63a73a030c4978bcac8bce767e7b5b5"
+  },
+  "retained_fixture_basis": {
+    "bytes": 6382,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-live-reconciled-Source42-content-epoch-closed.json",
+    "sha256": "747a2492f0d6ce993c1208fb74b71c330bd53bd87a676370d3e3b570134ced37"
+  },
+  "retained_limits": {
+    "AS_bytes": 8589934592,
+    "RSS_bytes": 4294967296,
+    "child_process_slots": 1,
+    "collect": {
+      "cpu_seconds": 110,
+      "wall_seconds": 120
+    },
+    "cpu_slots": 1,
+    "max_input_bytes": 4194304,
+    "max_output_bytes": 16777216,
+    "max_workspace_bytes": 67108864,
+    "run": {
+      "cpu_seconds": 540,
+      "wall_seconds": 600
+    },
+    "termination_grace_seconds": 5
+  },
+  "schema": "existing-P1-Lean-ordinary99-inert-controls/v1",
+  "selected_Git_candidate": null,
+  "selected_Source": null,
+  "selected_root_clock": null,
+  "selected_runtime_bindings": null,
+  "selection_group": "phase1-lean-json-diagnostics-99",
+  "severity_append_lineage": {
+    "bytes": 613,
+    "path": "/tmp/P1-Lean-dependency-report-severity-private-x22djkzw/test_lean_report_severity.append.py.DATA",
+    "sha256": "90d6f5a5cb88c46a5d895d1bbd621b0fec7532654084d29523a6f1d4e35eda07"
+  },
+  "statically_ordered_vector": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    21,
+    1,
+    16,
+    1,
+    12,
+    6,
+    3,
+    6,
+    2,
+    7,
+    3,
+    4,
+    4,
+    2,
+    1,
+    1,
+    1,
+    2
+  ]
+}

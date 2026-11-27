@@ -1,0 +1,360 @@
+--- a/ipfs_datasets_py/logic/autoformal/corpus_source_adjudication.py
++++ b/ipfs_datasets_py/logic/autoformal/corpus_source_adjudication.py
+@@ -85,33 +85,19 @@
+     return result
+ 
+ 
+-def _pins(*, official=False):
+-    result = responses._pins(official=True) if official else responses._pins()
++def _pins():
++    result = responses._pins()
+     result[str(Path(__file__).resolve())] = _sha(Path(__file__).read_bytes())
+     return result
+ 
+ 
+ def _unit(request, subject, typed_group, pending_slots, variants):
+-    request = json.loads(base._plain(request, contracts.MAX_RECORD_BYTES))
+-    official = type(request) is dict and request.get('schema') == source.OFFICIAL_REQUEST_SCHEMA
+-    request_schema = source.OFFICIAL_REQUEST_SCHEMA if official else source.REQUEST_SCHEMA
+-    request_fields = source.OFFICIAL_REQUEST_FIELDS if official else source.REQUEST_FIELDS
+-    subject_schema = source.OFFICIAL_SUBJECT_SCHEMA if official else source.SUBJECT_SCHEMA
+-    request = contracts.validate_record(request, schema=request_schema, fields=request_fields)
+-    subject = contracts.validate_record(json.loads(base._plain(subject, contracts.MAX_RECORD_BYTES)),
+-        schema=subject_schema, fields=source.SUBJECT_FIELDS)
+-    typed_group = contracts.validate_record(json.loads(base._plain(typed_group, contracts.MAX_RECORD_BYTES)),
+-        schema=responses.GROUP_SCHEMA, fields=responses.FIELDS['records'])
+-    if official:
+-        raw_group = contracts.validate_record(typed_group['raw_source_assessment_record'],
+-            schema=source.OFFICIAL_GROUP_SCHEMA, fields=source.GROUP_FIELDS)
+-        if (request['profile'] != source.OFFICIAL_PROFILE or subject['profile'] != source.OFFICIAL_PROFILE
+-                or raw_group['review_request_cid'] != request['record_cid']
+-                or raw_group['subject_sha256'] != _digest(subject)
+-                or raw_group['queue_ordinal'] != request['queue_ordinal']
+-                or raw_group['deferred_review_slot_ids'] != request['deferred_review_slot_ids']
+-                or typed_group['deferred_review_slot_ids'] != request['deferred_review_slot_ids']):
+-            _fail('exact official adjudication request, subject and source assessment required')
++    checked = []
++    for record, schema, fields in ((request, source.REQUEST_SCHEMA, source.REQUEST_FIELDS),
++            (subject, source.SUBJECT_SCHEMA, source.SUBJECT_FIELDS),
++            (typed_group, responses.GROUP_SCHEMA, responses.FIELDS['records'])):
++        checked.append(contracts.validate_record(json.loads(base._plain(record, contracts.MAX_RECORD_BYTES)), schema=schema, fields=fields))
++    request, subject, typed_group = checked
+     if (subject['review_request_cid'] != request['record_cid'] or subject['graph_sha256'] != _digest(request)
+             or typed_group['request_cid'] != request['record_cid']
+             or typed_group['queue_ordinal'] != request['queue_ordinal']):
+@@ -336,17 +322,10 @@
+         expected_adjudication_registry_sha256, expected_adjudication_policy_sha256, expected_adjudication_group_pins,
+         typed_response_limits=None, limits=None, **typed_response_inputs):
+     """Regenerate typed sources once, then authenticate a fixed adjudication domain."""
+-    manifest = preparation.get('manifest') if type(preparation) is dict else None
+-    official = type(manifest) is dict and manifest.get('schema') == source.OFFICIAL_MANIFEST_SCHEMA
+     required = {'response_bindings', 'expected_response_bindings_sha256', 'expected_preparation_manifest_sha256',
+-        'expected_registry_sha256', 'expected_policy_sha256', 'expected_review_group_pins', 'at_time_utc'}
+-    if official:
+-        required.update(('document_inputs', 'expected_document_population_sha256',
+-            'occurrence_inputs', 'expected_occurrence_population_sha256',
+-            'pending_interpretations', 'expected_pending_interpretations_sha256'))
+-    else:
+-        required.update(('alignment_corpus_bytes', 'expected_alignment_corpus_pins',
+-            'alignment_replay_inputs', 'source_report_bytes', 'expected_source_report_pins'))
++        'expected_registry_sha256', 'expected_policy_sha256', 'expected_review_group_pins', 'at_time_utc',
++        'alignment_corpus_bytes', 'expected_alignment_corpus_pins', 'alignment_replay_inputs',
++        'source_report_bytes', 'expected_source_report_pins'}
+     if set(typed_response_inputs) not in (required, required | {'source_review_limits'}):
+         _fail('closed complete typed source adjudication replay inputs required')
+     bounds = _limits(limits)
+@@ -356,7 +335,7 @@
+     if _digest(offered['manifest']) != expected_typed_response_manifest_sha256:
+         _fail('independent complete typed response root differs')
+     source_bounds = source._limits(typed_response_inputs.get('source_review_limits'))
+-    detached = source._detach_preparation(preparation, source_bounds, official=official)
++    detached = source._detach_preparation(preparation, source_bounds)
+     if len(detached['requests']) > bounds['max_groups']:
+         _fail('complete source adjudication group population exceeds bound')
+     source_pins = json.loads(base._plain(typed_response_inputs['expected_review_group_pins'], contracts.MAX_RECORD_BYTES))
+@@ -388,7 +367,7 @@
+         expected_adjudication_policy_sha256, action=ACTION, audience=AUDIENCE)
+     evaluation_time = typed_response_inputs['at_time_utc']
+     evaluation = auth._time(evaluation_time)
+-    producer_pins = _pins(official=True) if official else _pins()
++    producer_pins = _pins()
+     checked = responses.validate_source_review_responses(offered, detached, source_registry, source_policy, original_groups,
+         **typed_response_inputs, limits=typed_response_limits)
+     slots_by_cid = {row['record_cid']: row for row in checked['adjudication_requests']}
+@@ -399,10 +378,7 @@
+     authority_keys = {key['key_id']: key for key in adjudication_registry['keys']}
+     original_public_keys = {source_keys[claim['key_id']]['public_key_hex'] for group in original_groups
+         for claim in group['reviews'] if claim['key_id'] in source_keys}
+-    subject_schema = source.OFFICIAL_SUBJECT_SCHEMA if official else source.SUBJECT_SCHEMA
+-    verify_subject = source._official_subject if official else source._subject
+-    domain = auth._ReviewDomain(subject_schema, CLAIM_SCHEMA, ACTION, AUDIENCE, ASSESSMENT_SCHEMA,
+-        verify_subject, source.ACTIVE_SLOT_COUNT)
++    domain = auth._ReviewDomain(source.SUBJECT_SCHEMA, CLAIM_SCHEMA, ACTION, AUDIENCE, ASSESSMENT_SCHEMA, source._subject, source.ACTIVE_SLOT_COUNT)
+     records, entries, retained = [], [], 0
+     eligible, body_count, authenticated_count, selected_slots, unresolved_slots = 0, 0, 0, 0, 0
+     for ordinal, (request, subject, dependency_manifest, typed_group, original, group, pin) in enumerate(zip(detached['requests'],
+@@ -447,9 +423,7 @@
+             declaration_content_status='absent' if identity is None else 'valid_declared_content' if record is not None else 'rejected',
+             content_blockers=content_blockers, authority_assessment=assessment, separation_and_chronology_blockers=extra,
+             authority_prerequisites_satisfied_under_selected_trust=prerequisites,
+-            deferred_review_slot_ids=request['deferred_review_slot_ids'],
+-            original_contexts_remain_required_unavailable=(
+-                not official or request['context_declaration']['availability'] == 'required_unavailable'))
++            deferred_review_slot_ids=request['deferred_review_slot_ids'], original_contexts_remain_required_unavailable=True)
+         raw = base._plain(result, min(contracts.MAX_RECORD_BYTES, bounds['max_collection_bytes'] - retained))
+         retained += len(raw) + 1
+         records.append(result)
+@@ -474,8 +448,7 @@
+     result = {'manifest': manifest, 'pages': pages, 'records': records}
+     if source._aggregate_size(result) > bounds['max_collection_bytes']:
+         _fail('complete source adjudication collection exceeds bound')
+-    current_pins = _pins(official=True) if official else _pins()
+-    if current_pins != producer_pins:
++    if _pins() != producer_pins:
+         _fail('adjudication or inherited source producers changed during operation')
+     return result
+ 
+@@ -504,11 +477,7 @@
+     detached = _detach(report, _limits(kwargs.get('limits')))
+     expected = assess_source_adjudications(*args, **kwargs)
+     source._equal_components(detached, expected)
+-    official = bool(expected['records']) and (
+-        expected['records'][0]['typed_response_group_record']['raw_source_assessment_record']['schema']
+-        == source.OFFICIAL_GROUP_SCHEMA)
+-    current_pins = _pins(official=True) if official else _pins()
+-    if current_pins != expected['manifest']['producer_pins']:
++    if _pins() != expected['manifest']['producer_pins']:
+         _fail('source adjudication producer pins changed during final comparison')
+     return detached
+ 
+--- a/tests/unit/logic/autoformal/test_corpus_source_adjudication.py
++++ b/tests/unit/logic/autoformal/test_corpus_source_adjudication.py
+@@ -1730,203 +1730,3 @@
+     )
+     assert result.returncode == 0, result.stdout + result.stderr
+     assert result.stdout.strip() == "inert source adjudication import verified"
+-
+-
+-@pytest.fixture(scope="module")
+-def official_typed_adjudication_data():
+-    source_responses = helper()
+-    pending = source_responses.official_v2_pending_typed_data.__wrapped__()
+-    data = source_responses.official_v2_signed_typed_data.__wrapped__(pending)
+-    data["typed_report"] = source_responses.assess(response_owner, data)
+-    assert data["typed_report"]["manifest"]["counts"]["authenticated_typed_responses"] == 2
+-    return data
+-
+-
+-def test_official_adjudication_declaration_binds_original_official_request(
+-    owner, official_typed_adjudication_data
+-):
+-    data = official_typed_adjudication_data
+-    declaration = author(owner, data)
+-    request, subject, group, *_ = unit(data)
+-    assert declaration["request_ref"] == ref(request)
+-    assert declaration["subject_ref"] == ref(subject)
+-    assert declaration["typed_group_ref"] == ref(group)
+-    assert declaration["status"] == "declared_unauthenticated_source_adjudication"
+-    assert all(declaration[field] is False for field in owner.FALSE_FLAGS)
+-
+-
+-def test_official_adjudication_replays_signed_typed_population_without_adjudicators(
+-    owner, official_typed_adjudication_data
+-):
+-    data = clone_case(official_typed_adjudication_data)
+-    (data["adjudication_registry"], data["adjudication_policy"], _) = authority(owner, data)
+-    data["adjudication_groups"] = [
+-        {
+-            "request_cid": request["record_cid"],
+-            "reviews": [],
+-            "declaration_artifact_id": None,
+-            "evidence_artifacts": {},
+-            "observed_artifact_sha256s": deepcopy(group["observed_artifact_sha256s"]),
+-            "observed_pins": deepcopy(group["observed_pins"]),
+-        }
+-        for request, group in zip(data["preparation"]["requests"], data["groups"], strict=True)
+-    ]
+-    report = assess(owner, data)
+-    assert len(report["records"]) == len(data["preparation"]["requests"])
+-    assert all(record["request_cid"] == request["record_cid"]
+-               for record, request in zip(report["records"], data["preparation"]["requests"], strict=True))
+-    assert all(report["manifest"][field] is False for field in owner.FALSE_FLAGS)
+-    assert validate(owner, report, data) == report
+-
+-
+-def test_official_adjudication_authenticates_two_fresh_scoped_signers_without_application(
+-    owner, official_typed_adjudication_data
+-):
+-    original = official_typed_adjudication_data
+-    data = signed_case(owner, original, original["typed_report"])
+-    report = assess(owner, data)
+-    request, subject, typed_group, slots, variants = unit(data)
+-    group = data["adjudication_groups"][0]
+-    first = report["records"][0]
+-    declaration = first["declaration_record"]
+-    authority_report = first["authority_assessment"]
+-    keys = data["adjudication_registry"]["keys"]
+-    assert request["profile"] == subject["profile"] == source_owner.OFFICIAL_PROFILE
+-    assert declaration["request_ref"] == ref(request)
+-    assert declaration["subject_ref"] == ref(subject)
+-    assert declaration["typed_group_ref"] == ref(typed_group)
+-    assert declaration["pending_slot_refs"] == [ref(slot) for slot in slots]
+-    assert declaration["considered_answer_variant_refs"] == [ref(variant) for variant in variants]
+-    assert declaration["decisions"] == choices(data)
+-    assert first["declaration_content_status"] == "valid_declared_content"
+-    assert authority_report["subject_sha256"] == ref(subject)["sha256"]
+-    assert authority_report["trust_mode"] == "synthetic_fixture"
+-    assert authority_report["authenticated_evidence_count"] == 2
+-    for field in ("principal_id", "key_id", "signer_did", "public_key_hex"):
+-        declared_keys = {key[field] for key in keys}
+-        assert len(declared_keys) == 2
+-        assert declared_keys.isdisjoint(key[field] for key in original["registry"]["keys"])
+-    assert {review["role"] for review in authority_report["reviews"]} == set(trust_owner.ROLES)
+-    for claim, key, review in zip(group["reviews"], keys, authority_report["reviews"], strict=True):
+-        assert claim["subject"] == subject
+-        assert subject["scope_id"] in key["scope_ids"]
+-        assert review["review_id"] == claim["review_id"]
+-        assert review["principal_id"] == key["principal_id"]
+-        assert review["status"] == "authenticated"
+-        assert review["signature_status"] == "valid"
+-        assert review["signed_context_declaration_complete"] is True
+-    assert "production_trust_registry_unavailable" in authority_report["blockers"]
+-    assert first["authority_prerequisites_satisfied_under_selected_trust"] is False
+-    assert report["manifest"]["profile"] == declaration["profile"] == owner.PROFILE
+-    assert report["manifest"]["typed_response_manifest_ref"] == ref(original["typed_report"]["manifest"])
+-    assert [record["typed_response_group_record"] for record in report["records"]] == original[
+-        "typed_report"
+-    ]["records"]
+-    assert [record["deferred_review_slot_ids"] for record in report["records"]] == [
+-        request["deferred_review_slot_ids"] for request in original["preparation"]["requests"]
+-    ]
+-    counts = report["manifest"]["counts"]
+-    assert counts["declaration_bodies"] == 1
+-    assert counts["authenticated_authority_claims"] == 2
+-    assert counts["declared_selected_slots"] == 9
+-    assert counts["deferred_questions"] == 7 * len(original["preparation"]["requests"])
+-    assert_no_application(owner, report)
+-    assert validate(owner, report, data) == report
+-
+-
+-def test_official_adjudication_retains_regenerated_context_availability(owner):
+-    from ipfs_datasets_py.logic.autoformal import corpus_source
+-
+-    response_fixture = helper()
+-    source_fixture = response_fixture.helper()
+-    arguments = source_fixture.official_occurrence_case()
+-    first_input = arguments["occurrence_inputs"][0]
+-    occurrence = first_input["source_occurrence"]
+-    first_input["context"] = corpus_source.build_context_declaration(
+-        occurrence,
+-        expected_occurrence_cid=occurrence["record_cid"],
+-        availability="declared_context",
+-        reason="Fictional source-transport context reference.",
+-        context_references=deepcopy(first_input["context"]["context_references"]),
+-    )
+-    source_fixture.repin_official_inputs(arguments)
+-    preparation, registry, policy, groups, options, _ = (
+-        source_fixture.official_pending_assessment(source_owner, arguments)
+-    )
+-    data = {
+-        "data": {"arguments": arguments},
+-        "preparation": preparation,
+-        "registry": registry,
+-        "policy": policy,
+-        "groups": groups,
+-        "at_time_utc": options["at_time_utc"],
+-        "response_bindings": [
+-            {"request_cid": request["record_cid"], "responses": []}
+-            for request in preparation["requests"]
+-        ],
+-    }
+-    data["typed_report"] = response_fixture.assess(response_owner, data)
+-    data["adjudication_registry"], data["adjudication_policy"], _ = authority(owner, data)
+-    data["adjudication_groups"] = [
+-        {**deepcopy(group), "declaration_artifact_id": None} for group in groups
+-    ]
+-    report = assess(owner, data)
+-    assert [request["context_declaration"]["availability"] for request in preparation["requests"]] == [
+-        "declared_context", "required_unavailable", "required_unavailable", "required_unavailable"
+-    ]
+-    assert [row["original_contexts_remain_required_unavailable"] for row in report["records"]] == [
+-        False, True, True, True
+-    ]
+-    assert report["manifest"]["counts"]["adjudications_applied"] == 0
+-    assert report["manifest"]["counts"]["source_decisions_applied"] == 0
+-    assert all(report["manifest"][field] is False for field in owner.FALSE_FLAGS)
+-    assert all(
+-        row["declaration_record"] is None and all(row[field] is False for field in owner.FALSE_FLAGS)
+-        for row in report["records"]
+-    )
+-    assert validate(owner, report, data) == report
+-
+-
+-def test_official_adjudication_explicit_fictional_trust_keeps_meaning_unselected(
+-    owner, official_typed_adjudication_data
+-):
+-    responses = helper()
+-    original = responses.signed_typed_case(
+-        response_owner, official_typed_adjudication_data, trust_mode="external_pinned_trust"
+-    )
+-    typed = responses.assess(response_owner, original)
+-    data = signed_case(owner, original, typed, mode="external_pinned_trust")
+-    report = assess(owner, data)
+-    first = report["records"][0]
+-    assert first["authority_prerequisites_satisfied_under_selected_trust"] is True
+-    assert first["authority_assessment"]["authenticated_evidence_count"] == 2
+-    assert first["authority_assessment"]["registry_identity_authenticated_by_this_api"] is False
+-    assert first["authority_assessment"]["evaluation_clock_authenticated"] is False
+-    assert first["typed_response_group_record"] == typed["records"][0]
+-    assert report["manifest"]["counts"]["complete_declaration_authority_prerequisites_under_selected_trust"] == 1
+-    assert_no_application(owner, report)
+-    assert validate(owner, report, data) == report
+-
+-
+-@pytest.mark.parametrize(
+-    ("changed", "diagnostic"),
+-    [
+-        ("legacy_subject", "^record schema or CID scope differs$"),
+-        ("detached_subject_digest", "exact official adjudication request, subject and source assessment required"),
+-    ],
+-)
+-def test_official_adjudication_rejects_resealed_other_subject(
+-    owner, official_typed_adjudication_data, changed, diagnostic
+-):
+-    data = clone_case(official_typed_adjudication_data)
+-    if changed == "legacy_subject":
+-        subject = data["preparation"]["subjects"][0]
+-        data["preparation"]["subjects"][0] = reseal(
+-            dict(subject, schema=source_owner.SUBJECT_SCHEMA, profile=source_owner.PROFILE)
+-        )
+-    else:
+-        group = data["typed_report"]["records"][0]
+-        raw_group = reseal(dict(group["raw_source_assessment_record"], subject_sha256="1" * 64))
+-        data["typed_report"]["records"][0] = reseal(dict(group, raw_source_assessment_record=raw_group))
+-    with pytest.raises(contracts.CorpusContractError, match=diagnostic):
+-        author(owner, data)
+--- a/ipfs_datasets_py/logic/autoformal/docs/guides/corpus_source_review_responses.md
++++ b/ipfs_datasets_py/logic/autoformal/docs/guides/corpus_source_review_responses.md
+@@ -101,19 +101,9 @@
+ 
+ Optional `source_review_limits` lowers the inherited profile. `limits` lowers
+ the response profile. The saved typed report keeps the exact original raw
+-assessment reference. An official V2 response can enter the existing
+-`corpus_source_adjudication` owner as pending evidence. Its declaration and
+-assessment APIs keep the original request and subject references, replay the
+-same official population and authenticate signatures under a separately pinned
+-adjudication registry and policy. Each of the nine choices refers to a retained
+-answer variant or stays unresolved. The seven deferred questions and the
+-original context availability stay intact.
+-
+-Application, history and binding consumers still require legacy preparation.
+-An adjudication assessment retains evidence and declared choices for later
+-use. Its authority-prerequisite field reports the result under the caller's
+-selected trust inputs. Applying source decisions and qualifying reviewed legal
+-meaning remain separate operations.
++assessment reference. Adjudication, application, history and binding consumers
++currently require legacy preparation. An official V2 response can be
++authenticated here and carried forward as pending evidence.
+ 
+ Response bindings are a complete ordered list, one group per original request:
+ `{request_cid, responses: [{review_id, artifact_id, raw_sha256}]}`. Entries match

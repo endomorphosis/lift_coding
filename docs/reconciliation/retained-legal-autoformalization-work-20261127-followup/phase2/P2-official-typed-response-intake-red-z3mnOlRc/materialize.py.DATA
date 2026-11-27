@@ -1,0 +1,35 @@
+from pathlib import Path
+import hashlib,json,os,shutil,subprocess
+w=Path.cwd()
+c=w.parent
+s=c/"P2-V2-local-Source-qualified-checkout-YDJgv68G"
+repo=w.parents[2]/"publish-all-20261126-nsFFGMUO/datasets.git"
+head="81ee859cd2bbd4872b0a2e3bc75e2994c14140fe"
+meta=json.loads((s/"real-checkout-pins.json").read_bytes())
+base=json.loads((c/"P2-V2-governing-definition-current-private-3XJmqSnf/current-fixture-epoch.json").read_bytes())
+assert base["head"]==head
+prefix="ipfs_datasets_py/logic/autoformal/"
+names=("corpus_source_review_responses.py","corpus_source_review.py","corpus_parent_occurrence_adapter.py",
+       "corpus_parent_alignment_adapter.py","corpus_source.py","corpus_contracts.py")
+paths=set(base["roles"])|{prefix+n for n in names}
+p=w/"project"
+env={**os.environ,"GIT_OPTIONAL_LOCKS":"0","GIT_NO_LAZY_FETCH":"1"}
+def git(*args):
+    return subprocess.check_output(["git","--git-dir",str(repo),*args],env=env,timeout=20)
+pins={}
+for rel in sorted(paths):
+    sha1=git("rev-parse",head+":"+rel).decode().strip()
+    prior=meta["paths"].get(rel)
+    if prior is not None and prior["git_blob"]==sha1:
+        source=s/"checkout"/rel
+        raw=source.read_bytes()
+        assert hashlib.sha256(raw).hexdigest()==prior["sha256"]
+    else:
+        raw=git("cat-file","blob",sha1)
+    assert hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest()==sha1
+    x=p/rel
+    x.parent.mkdir(parents=True,exist_ok=True)
+    with x.open("xb") as f:f.write(raw)
+    pins[rel]={"size":len(raw),"sha256":hashlib.sha256(raw).hexdigest(),"git_blob":sha1}
+with (w/"exact-module-inputs.json").open("x") as f:json.dump({"published_tip":head,"pins":pins},f,indent=2)
+print("exact project inputs:",len(pins))

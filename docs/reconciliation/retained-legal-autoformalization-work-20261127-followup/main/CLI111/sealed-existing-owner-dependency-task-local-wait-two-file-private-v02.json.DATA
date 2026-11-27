@@ -1,0 +1,358 @@
+{
+  "files": [
+    {
+      "after": {
+        "Git_blob_sha1": "71b3779c2155a18b47f01f206491f91119beaa02",
+        "bytes": 64834,
+        "full9": {
+          "st_ctime_ns": "1795643820169254362",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72237210",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795643820169254362",
+          "st_nlink": "1",
+          "st_size": "64834",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/owner-dependency-wait-private-v01/owner.dependency-wait.after-v02.py.DATA",
+        "sha256": "c2e0ef8bff41d38396f407c304e4b103304170811837c9b6d130d8ce5013d513"
+      },
+      "before": {
+        "Git_blob_sha1": "a4bf128e48c7c8d71d431e93c89ae8f3bfb201a3",
+        "bytes": 58199,
+        "full9": {
+          "st_ctime_ns": "1795643549768723044",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72236869",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795643549768723044",
+          "st_nlink": "1",
+          "st_size": "58199",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/owner-dependency-wait-private-v01/owner.before.py.DATA",
+        "sha256": "b39144457d813e1846362a54a638432b9406803a37fe94ccde4b9b93a33b3134"
+      },
+      "forward": {
+        "Git_blob_sha1": "f8643268b9eaf2a1857d7342b348767144654a3d",
+        "bytes": 7468,
+        "full9": {
+          "st_ctime_ns": "1795643940677367747",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72237212",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795643940677367747",
+          "st_nlink": "1",
+          "st_size": "7468",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/owner-dependency-wait-private-v01/owner.forward-v02.patch",
+        "sha256": "7318bb122991b924460d478d59c9eb104b2b4bc686578a226d1dd6b217306f7b"
+      },
+      "inverse": {
+        "Git_blob_sha1": "87eceb1c14b5a2c3262228c4acf1a6ac307d2f07",
+        "bytes": 7468,
+        "full9": {
+          "st_ctime_ns": "1795643940700367959",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72237213",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795643940700367959",
+          "st_nlink": "1",
+          "st_size": "7468",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/owner-dependency-wait-private-v01/owner.inverse-v02.patch",
+        "sha256": "d4336e33800f6566dded059a509d014250832a3a21320640bf3546748320b4c0"
+      },
+      "relative_path": "ipfs_accelerate_py/cli_integrations/openai_codex_cli_integration.py",
+      "target_Git_mode": "100755",
+      "target_permission_mode": "0755"
+    },
+    {
+      "after": {
+        "Git_blob_sha1": "1d113ef704908d84dd8bc5ac7e1704702542e3b3",
+        "bytes": 102266,
+        "full9": {
+          "st_ctime_ns": "1795643790952983430",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72237208",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795643790952983430",
+          "st_nlink": "1",
+          "st_size": "102266",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/owner-dependency-wait-private-v01/owning-test.owner-wait.after-v02.py.DATA",
+        "sha256": "815bab014340e41d8bd963d105e4e03d5ae3ef80f54f0322a9cdbc432dd7ec54"
+      },
+      "before": {
+        "Git_blob_sha1": "ba8bf6c372fe615c8dc8cbfafcececb5025f199a",
+        "bytes": 87543,
+        "full9": {
+          "st_ctime_ns": "1795643549771727632",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72236870",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795643549771727632",
+          "st_nlink": "1",
+          "st_size": "87543",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/owner-dependency-wait-private-v01/owning-test.before.py.DATA",
+        "sha256": "eb58b8c570c64c1b6e44bfc46f80174a592e3eb8937dab91626a9c90a3ecf585"
+      },
+      "forward": {
+        "Git_blob_sha1": "0a407ecb5dbd2faaf6f6a8bcd23eede5b9addb77",
+        "bytes": 15299,
+        "full9": {
+          "st_ctime_ns": "1795643940705368005",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72237214",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795643940705368005",
+          "st_nlink": "1",
+          "st_size": "15299",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/owner-dependency-wait-private-v01/owning-test.forward-v02.patch",
+        "sha256": "96417049aa411fd65315e28bca3ebaffa768fc12423d6f75185532c55afa195e"
+      },
+      "inverse": {
+        "Git_blob_sha1": "f04d78c9a6a87871c26e555ea10ef0785652ebc7",
+        "bytes": 15299,
+        "full9": {
+          "st_ctime_ns": "1795643940710368051",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72237215",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795643940710368051",
+          "st_nlink": "1",
+          "st_size": "15299",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/owner-dependency-wait-private-v01/owning-test.inverse-v02.patch",
+        "sha256": "b72ab8b53a1d8791904e737374858d6ce72a7c335ce8e3b5d28124e7f1027e07"
+      },
+      "relative_path": "test/api/test_codex_thread_handoff.py",
+      "target_Git_mode": "100644",
+      "target_permission_mode": "0644"
+    }
+  ],
+  "future_actual_bindings": {
+    "actual_Git_HEAD_tree": null,
+    "actual_Source_adoption": null,
+    "actual_full9": null,
+    "actual_resource_enrollment": null,
+    "clock": null,
+    "current_SDK_and_importclosure": null,
+    "deployment_or_publication": null,
+    "live_socket_probe_selection": null,
+    "ordinary111_collect_RUN_JUnit": null,
+    "post_epoch": null,
+    "runtime_authority": null
+  },
+  "independent_review": {
+    "bytes": 1665,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/owner-dependency-wait-private-v01/independent-owner-dependency-delta-review-v02.json",
+    "sha256": "9a04fc08d3acde102c92b23dbf99ec3ca474fb6519d7fd26df37e2d7c8ece119"
+  },
+  "integration_notes": {
+    "bytes": 2593,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/owner-dependency-wait-private-v01/existing-owner-wait-caller-integration-notes.txt",
+    "sha256": "1959a525648fed96cd4d9d884cfe4db280205af7f6e3ce1271e9549478c0f38a"
+  },
+  "interfaces": {
+    "API": "read_codex_owner_dependency(*,socket_path,thread_id,expected_turn_id,timeout_seconds=15.0,max_response_bytes=262144)",
+    "CLI": "read-owner",
+    "bounded_observation": "One existing read_codex_thread_state call; existing timeout/response/close bounds unchanged.",
+    "live_scope": "Codexturn metadata only, no child/native/process/lease liveness inferred.",
+    "no_goal_status_API_mutation": true,
+    "unchanged_legacy_read_send_manifest_or_UNKNOWN_protocols": true
+  },
+  "operations": {
+    "Git_mutation": false,
+    "Native_or_model": false,
+    "SDK_or_SQL": false,
+    "canonical_Source_captured_or_changed": false,
+    "goal_state_changed": false,
+    "new_legal_interpretation_or_review": false,
+    "private_stdlib_fixture_executed": true,
+    "project_package_imported": false,
+    "real_RPC": false
+  },
+  "preserved_history": [
+    "Initialdriveromittedsender symbolneededforobservationalspies; correctedinterfaceonlybeforeproductcode.",
+    "Attemptedapply_patchtoprivatesealed0400driverfailedwithoutwriting; newv02drivercreatedO_EXCL, oldpreserved.",
+    "FeatureabsentRED67errorobservationsaremissingAPI/CLI observations, notfalseoldcontractacceptance.",
+    "Initial10GREENscope retained; expanded11includesoriginal10, notextra21tests.",
+    "Allold100prefixandAST, rawSource/qualification receipts, allpriorread/capturecharges andRootSource/runtimebudgets retained."
+  ],
+  "private_costs": {
+    "Source_or_runtime_caps_changed": false,
+    "conservative_charged_bytes_all_repeats_and_child_reviews": 6291456,
+    "exact_system_or_implicit_library_IO_claimed": false,
+    "self_imposed_cached_read_and_readback_ceiling_bytes": 8388608
+  },
+  "private_engineering": {
+    "actual_forbidden_effects": [],
+    "corrected_same10_RED_complete_old_interface": {
+      "Git_blob_sha1": "3c31fa34db21245883f1ced86973e22c84bb8065",
+      "bytes": 181222,
+      "full9": {
+        "st_ctime_ns": "1795643633501515155",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72236964",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795643633501515155",
+        "st_nlink": "1",
+        "st_size": "181222",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/owner-dependency-wait-private-v01/actual-SAME10-owner-dependency-RED-v02-complete-old-interface.json",
+      "sha256": "9b0bac2f7fc626658656df0be584ab41d9f7e3a5c4e364c777a28bd331ad4d93"
+    },
+    "driver": {
+      "Git_blob_sha1": "df6c494d67a11f9e5da9954f9e56132594031c78",
+      "bytes": 4572,
+      "full9": {
+        "st_ctime_ns": "1795643633355513787",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72236923",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795643633355513787",
+        "st_nlink": "1",
+        "st_size": "4572",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/owner-dependency-wait-private-v01/evaluate_owner_dependency_fixture.complete-interface-v02.py",
+      "sha256": "5488e6f4737adca0470271d731ec807a81a157efa3fc7aa4990753baf1b98666"
+    },
+    "expanded_GREEN_errors": 0,
+    "expanded_GREEN_failures": 0,
+    "expanded_GREEN_seconds": 0.01366286352276802,
+    "expanded_GREEN_skips": 0,
+    "expanded_RED_error_observations": 2,
+    "expanded_parent_methods": 11,
+    "expanded_same11_GREEN": {
+      "Git_blob_sha1": "9cbe443e6506d6244a21a973c5a9eefbba5d941c",
+      "bytes": 3314,
+      "full9": {
+        "st_ctime_ns": "1795643820293255511",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72237211",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795643820293255511",
+        "st_nlink": "1",
+        "st_size": "3314",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/owner-dependency-wait-private-v01/actual-expanded-SAME11-owner-dependency-GREEN-v02.json",
+      "sha256": "f6caf33b032c5701bc482257a58a544fc630ac0b0bcd0ab0b5257a1b7866da21"
+    },
+    "expanded_same11_RED": {
+      "Git_blob_sha1": "779103667887241282070f4bd4c921b33ab661d5",
+      "bytes": 9351,
+      "full9": {
+        "st_ctime_ns": "1795643791051984349",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72237209",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795643791051984349",
+        "st_nlink": "1",
+        "st_size": "9351",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/owner-dependency-wait-private-v01/actual-expanded-SAME11-unhashable-observation-RED-v01.json",
+      "sha256": "a4aa23827753f975a37373f273c516d47500545112c94ee8b36fa384135d84ef"
+    },
+    "final_source_sha256": "c2e0ef8bff41d38396f407c304e4b103304170811837c9b6d130d8ce5013d513",
+    "normal_package_or_live_qualification": false,
+    "old_driver": {
+      "Git_blob_sha1": "61f538366c6ba1d6fb2002383dfdf9a98f03934d",
+      "bytes": 4543,
+      "full9": {
+        "st_ctime_ns": "1795643594388147932",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72236878",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795643594388147932",
+        "st_nlink": "1",
+        "st_size": "4543",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/owner-dependency-wait-private-v01/evaluate_owner_dependency_fixture.py",
+      "sha256": "58770f38a859649af7358d1568880045fc16462b50c0a016fb6d3c10eba13e15"
+    },
+    "original_same10_RED_fixture_omission_retained": {
+      "Git_blob_sha1": "78c7ee8b6cc610325cf5d51b83bc3780405b94fa",
+      "bytes": 204840,
+      "full9": {
+        "st_ctime_ns": "1795643594517149145",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72236879",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795643594517149145",
+        "st_nlink": "1",
+        "st_size": "204840",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/owner-dependency-wait-private-v01/actual-SAME10-owner-dependency-RED-v01.json",
+      "sha256": "ffb6515b782cd8a667ed7ca7274c2f0168b51f1293e3c950853b82116b2e294a"
+    },
+    "overlapping_counts_not_pooled": true,
+    "same10_GREEN_initial_implementation": {
+      "Git_blob_sha1": "96a3c8af5e8d237b8173c3e4206b0a5133887cb4",
+      "bytes": 3151,
+      "full9": {
+        "st_ctime_ns": "1795643705174185362",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72237195",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795643705174185362",
+        "st_nlink": "1",
+        "st_size": "3151",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/owner-dependency-wait-private-v01/actual-SAME10-owner-dependency-GREEN-v01.json",
+      "sha256": "780043cae231bd9404608db9366951c3dbb2002abe27e5262dbd7e5c04c10bfa"
+    },
+    "same_expanded_test_sha256": "815bab014340e41d8bd963d105e4e03d5ae3ef80f54f0322a9cdbc432dd7ec54"
+  },
+  "purpose": "Represent verified selected coordinator-turn work as a task-local dependency observation, avoiding a blind no-assigned-input=>globalblocked inference while preserving unknown custody and all authority.",
+  "schema": "Main-existing-CLI-owner-dependency-task-local-wait-private-two-file-proposal/v1",
+  "scope_limit": "It cannot create a ready unit, authenticate legal meaning or infer native/SDK liveness; explicit goal-owner binding and bounded wait policy remain caller-owned.",
+  "static_retention_and_independent111_roster": {
+    "Git_blob_sha1": "93a9464ef3b43fe458d127efdb8efc275bff6874",
+    "bytes": 44658,
+    "full9": {
+      "st_ctime_ns": "1795643940713368078",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72237216",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795643940713368078",
+      "st_nlink": "1",
+      "st_size": "44658",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/owner-dependency-wait-private-v01/static-retention-and-independent111-roster-v01.json",
+    "sha256": "effc80b48f608667a109727384402daac6c1d2a4a46695188db4eb56f685da38"
+  },
+  "status": "PRIVATE_IMPLEMENTED_SAME11_GREEN_UNADOPTED_NORMAL111_UNRUN"
+}

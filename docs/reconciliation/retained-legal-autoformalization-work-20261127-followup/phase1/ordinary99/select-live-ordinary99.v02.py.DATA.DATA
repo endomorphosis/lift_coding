@@ -1,0 +1,195 @@
+import ast
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import stat
+import sys
+import time
+
+assert __debug__ and len(sys.argv)==8 and sys.argv[7] in ("--verify-only","--bind-only")
+out=Path(__file__).resolve().parent
+controls=Path(sys.argv[4])
+prior=Path("/tmp/Root-Phase6-effective-date-ordinary44-selected-v335-wrle9136/Root-selected-existing-effective-date-ordinary44-operator.py")
+
+H=lambda b:hashlib.sha256(b).hexdigest()
+f9=lambda s:tuple(getattr(s,k) for k in ("st_dev","st_ino","st_mode","st_nlink","st_uid","st_gid","st_size","st_mtime_ns","st_ctime_ns"))
+
+def read(ref):
+ p=Path(ref["path"]); s=p.lstat()
+ assert stat.S_ISREG(s.st_mode) and s.st_nlink==1
+ raw=p.read_bytes()
+ assert f9(s)==f9(p.lstat()) and len(raw)==ref["bytes"] and H(raw)==ref["sha256"]
+ return raw
+
+def identify(p):
+ raw=p.read_bytes()
+ return dict(path=str(p),bytes=len(raw),sha256=H(raw))
+
+def seal(name,value):
+ p=out/name
+ b=value if type(value) is bytes else (json.dumps(value,sort_keys=True,indent=2)+"\n").encode()
+ with p.open("xb") as stream: stream.write(b);stream.flush();os.fsync(stream.fileno())
+ p.chmod(0o400)
+ return dict(path=str(p),bytes=len(b),sha256=H(b))
+
+def literal_assignments(raw):
+ vals={}
+ for item in ast.parse(raw).body:
+  if isinstance(item,ast.Assign) and len(item.targets)==1 and isinstance(item.targets[0],ast.Name):
+   name=item.targets[0].id
+   try: vals[name]=ast.literal_eval(item.value)
+   except (TypeError,ValueError): pass
+ return vals
+
+def bind(raw,slots):
+ values=literal_assignments(raw)
+ assert all(name in values and values[name] is None for name in slots)
+ assert {name for name,value in values.items() if value is None and name not in {"parent","rewrite_observer"}}==set(slots)
+ source=raw.decode()
+ for name,value in slots.items():
+  source,n=re.subn(r"^"+name+r" = None$",lambda _:name+" = "+repr(value),source,flags=re.M)
+  assert n==1
+ compile(source,"phase1_lean_json_diagnostics_ordinary99_operator_bootstrap","exec",dont_inherit=True)
+ for name,value in slots.items():
+  assert literal_assignments(source)[name]==value
+ return source.encode()
+
+# All arguments are actual closed nonclock references. Reconcile role values from the caller's data partitions.
+descriptor=json.loads(read(dict(path=str(controls), bytes=int(sys.argv[5]), sha256=sys.argv[6])))
+s={"controls":{name:descriptor["controls"][name] for name in ("operator","bootstrap","factory")}}
+role_plan=descriptor["future_roles"]["guarded_bootstrap_modules"]
+assert descriptor["functions"]==24 and descriptor["cases"]==99
+assert descriptor["ordinary_result"] is descriptor["selected_Source"] is descriptor["native_result"] is None
+assert descriptor["selected_Git_candidate"] is descriptor["selected_root_clock"] is descriptor["selected_runtime_bindings"] is None
+inherit=literal_assignments(read(dict(path=str(prior),bytes=88637,sha256="cd109422f2bebc0ff76c6dafbaac7c2cef0620f44ac408e54edc6623060f8101")))
+role_ref=dict(path=sys.argv[1],bytes=int(sys.argv[2]),sha256=sys.argv[3])
+role=json.loads(read(role_ref))
+abi_ref=role["read"]
+abi=json.loads(read(abi_ref))
+fixture_ref=role["fixture"]
+fixture=json.loads(read(fixture_ref))
+assert type(fixture["required_fixture_closure"]) is list and len(fixture["required_fixture_closure"]) == 32
+modules=role["modules"]
+D_prov,A_prov=role["D_prov"],role["A_prov"]
+D,A=D_prov["root"],A_prov["root"]
+head,tree=D_prov["HEAD"],D_prov["tree"]
+projects=[dict(root=p["root"],Git_HEAD=p["HEAD"],Git_tree=p["tree"]) for p in (D_prov,A_prov)]
+frozen=json.loads(read(role["freeze"]))
+assert (head,tree)==(frozen["frozen"]["HEAD"],frozen["frozen"]["tree"]) and frozen["pushed"] is False
+base_ref=dict(path=str(out/'actual-current-main-fast-forward-V2-independent-base.json'),bytes=2676,
+    sha256='b617595aa001310279a4f84ce4c23fa60512c4cd972112f93bb1e72f304713a2')
+assert role["observed_independent_base"]==frozen["observed_base"]==base_ref
+base=json.loads(read(base_ref))
+assert base["guide_main"]["datasets"]==descriptor["expected_D_publish_head"]
+assert base["live_main_after"]["datasets"]==frozen["parent"]
+assert base["previous_published_guide"]==role["protected_guide_publication"]
+assert abi["Root_selected"] and abi["Source_closed"]
+controls_ref=dict(path=str(controls),bytes=int(sys.argv[5]),sha256=sys.argv[6])
+assert (controls_ref["bytes"],controls_ref["sha256"])==(16781,"a10401245bb5ad6c26a84979d7ea62e509eaff917ef2d0bcc30981002ec01241")
+assert role["schema"]=="actual-READ3-live-ordinary99-nonclock/v1"
+assert role["controls"]==controls_ref and role["isolated_frozen_local_git_candidate"] is True
+assert role["canonical_source_application"] is False and role["final_ordinary_runtime_qualification_eligibility_authority"] is None
+assert D==descriptor["current_D_path"] and A==descriptor["current_additional_A_path"]
+assert A_prov["HEAD"]==descriptor["expected_A_publish_head"] and A_prov["tree"]==descriptor["expected_A_tree"]
+assert role["freeze"]==abi["exact_local_freeze"] and fixture["actual_closed_Source_READ_reference"]==role["read_close"]
+assert role["outer"]==abi["outer_epoch_reference"] and role["python"]==abi["python_epoch_reference"]
+guard=json.loads(read(role["read3_named_metadata_guard"]))["rows"]
+assert len(guard)==len({row["path"] for row in guard})==role["named_metadata_count"]==descriptor["provisional_named_count"]
+for row in guard:
+ observed=Path(row["path"]).lstat()
+ assert all(str(getattr(observed,k))==v for k,v in row["full9"].items()),row["path"]
+abi_shape=inherit["D_READ_BINDING_ABI"]
+assert abi["schema"]==abi_shape["schema"] and all(abi[key] is True for key in abi_shape["required_true_keys"])
+outer_count=abi[abi_shape["outer_count_key"]]
+python_count=abi[abi_shape["python_count_key"]]
+assert outer_count==descriptor["provisional_outer_count"] and python_count==descriptor["provisional_python_count"]
+outer_ref=abi[abi_shape["outer_epoch_key"]]
+outer=json.loads(read(outer_ref)); physical={r["path"]:r for r in outer}
+assert len(physical)==len(outer)==outer_count and len(modules)==11 and set(modules)==set(role_plan)
+for name,row in modules.items():
+ assert row["relative_path"]==role_plan[name]["relative_path"]
+ assert {k:row[k] for k in ("bytes","sha256")}=={k:role_plan[name]["expected_after_adoption"][k] for k in ("bytes","sha256")}
+ check=physical[str(Path(D)/row["relative_path"])]
+ assert all(check[k]==row[k] for k in ("bytes","full9","sha256"))
+assert set(fixture["required_normal_conftests"])=={str(Path(D)/name) for name in ("conftest.py","tests/conftest.py")}
+assert fixture["pytest_inifile"]==str(Path(D)/"pytest.ini")
+assert len({r["path"] for r in fixture["required_fixture_closure"]})==32
+assert str(Path(D)/"tests/integration/__init__.py") in {r["path"] for r in fixture["required_fixture_closure"]}
+for row in fixture["required_fixture_closure"]:
+ assert all(row[k]==physical[row["path"]][k] for k in ("path","bytes","sha256","full9"))
+
+state_path=inherit["FINAL_RESOURCE_STATE_PATH"]
+config=inherit["FINAL_EXPECTED_RESOURCE_CONFIG"]
+capacity=inherit["FINAL_EXPECTED_CAPACITY"]
+state=Path(state_path)
+before=state.lstat(); assert before.st_size<65536 and stat.S_ISREG(before.st_mode) and before.st_nlink==1
+raw=state.read_bytes(); assert f9(before)==f9(state.lstat())
+state_obv=json.loads(raw)
+assert state_obv["config"]==config and state_obv["child_process_capacity"]==capacity
+for name,(rel,sha) in inherit["FINAL_SDK_BINDINGS"].items(): assert physical[str(Path(D)/rel)]["sha256"]==sha
+absences=role["expected_absent_paths"]
+assert len(absences)==len(set(absences))==6
+assert all(type(p) is str and p.startswith(D+"/") and not os.path.lexists(p) for p in absences)
+cap_ref_before=role["latest_closed_Source_full_precharge"]
+charge=Path(cap_ref_before["path"])
+source_only=json.loads(read(cap_ref_before))
+prior_read=json.loads(read(role["read_close"]))
+affirmation=source_only["exact_human_affirmation"]
+assert affirmation["sha256"]=="8fdf2d6c57542b3ce8e8a06773645487c39a3cb2a8a9929426cc785d3fc78dda"
+read(affirmation)
+ledger0=source_only["after_full_retained_precharge"]
+ledger0=dict(ledger0,captures=max(ledger0["captures"],prior_read["actual_ledger_after"]["captures"]))
+assert source_only["all_prior_costs_retained"] is source_only["resource_policy_capacity_unchanged"] is True
+assert prior_read["full_charge"]==cap_ref_before and prior_read["ordinary_read_binding_abi"]==abi_ref
+assert all(ledger0[k]>=prior_read["actual_ledger_after"][k] for k in ("used","internal_used","captures"))
+if sys.argv[7]=="--verify-only":
+ print(json.dumps(dict(D=head,outer=outer_count,python=python_count,cases=99,selected=False)))
+ raise SystemExit(0)
+envelope=134217728
+ledger=ledger0.copy()
+for k in ("global_cap","internal_cap"): ledger[k]+=envelope
+after=ledger.copy()
+for k in ("used","internal_used"): after[k]+=envelope
+after["captures"]+=1
+assert ledger["internal_cap"]-ledger["internal_used"]>=envelope
+cap_ref=seal("Source-only-authorized-P1-combined-Lean-ordinary99-cap-prior-retained.json",dict(prior=ledger0,selected=ledger,after_full_retained_precharge=after,added_Source_only_envelope=envelope,read3_full_retained_charge=identify(charge),exact_human_affirmation=source_only["exact_human_affirmation"],no_policy_capacity_or_model_change=True))
+effect=dict(Root_selected=True,ordinary_SDK_execution_selected=True,temporary_workspace_only=True,scope="Exact 99 Lean wrapper and kernel backend software fixture cases in the isolated live-main clone: 92 retained and 7 new malformed compiler JSON and severity cases. Published Accelerator companion is read context.", no_actual_DuckDB_SQL_or_Native_Lean_selected=True,no_model_training_or_prover_selected=True,no_legal_or_training_admission=True,no_live_managed_ledger_reconciliation_or_cap_change_selected=True)
+effect_ref=seal("Root-selected-effect.json",effect)
+io=seal("Root-selected-IO.json",dict(Root_selected=True,Source_envelope_bytes=envelope,admitted=True,all_prior_failed_attempts_and_Source_costs_retained=True,ledger_before=ledger,original_limits_and_guards_unchanged=True,physical_IO_accounting_complete=False,cap_reference=cap_ref))
+manifest=dict(Root_selected=True,frozen_Git_candidates=True,Source_WRITE_claimed=False,ordinary_execution_or_qualification=None,projects=projects,D_provenance=D_prov,A_provenance=A_prov,modules=modules,source_read_binding_reference=abi_ref,fixture_closure_reference=fixture_ref,effect_decision_reference=effect_ref,admitted_io_plan_reference=io)
+manifest_ref=seal("Root-selected-P1-combined-Lean-ordinary99-binding-manifest.json",manifest)
+output=str(out/"actual-output"); assert not Path(output).exists()
+now=time.time_ns()
+deadline=now+840_000_000_000
+selection=seal("Root-selected-existing-P1-combined-Lean-ordinary99.json",dict(schema="Root-selected-existing-P1-combined-Lean-frozen-local-ordinary99/v1",Root_selected=True,Source_READ_binding=abi_ref,IO_reference=io,effect_reference=effect_ref,Source_envelope_bytes=envelope,case_hint=99,actual_COLLECT_supplies_order=True,frozen_D_HEAD=head,frozen_D_tree=tree,launch_not_before_utc_ns=now,launch_deadline_utc_ns=deadline,ledger_before=ledger,output_namespace=output,actual_nonclock_handoff=role_ref))
+runtime=dict(schema="Root-selected-normal-HOME-rescue-launch-authority/v1",root_selection=selection,launch_not_before_utc_ns=now,launch_deadline_utc_ns=deadline)
+bootstrap=bind(read(s["controls"]["bootstrap"]),dict(ROOT=D,ADDITIONAL_A_ROOT=A,EXPECTED_MODULES={k:dict(v,scope="frozen_git_D_source") for k,v in modules.items()},REQUIRED_CANONICAL_CONFTESTS=fixture["required_normal_conftests"],PYTEST_INIFILE=fixture["pytest_inifile"],ROOT_RUNTIME_SELECTION=runtime,GIT_CANDIDATE_PROVENANCE=D_prov,ADDITIONAL_A_PROVENANCE=A_prov,BINDING_MANIFEST_REFERENCE=manifest_ref,SOURCE_READ_BINDING_REFERENCE=abi_ref,ADMITTED_IO_PLAN_REFERENCE=io,EFFECT_DECISION_REFERENCE=effect_ref,SOURCE_EPOCH_SHA256=outer_ref["sha256"],SOURCE_EPOCH_RECORD_COUNT=outer_count))
+bootstrap_ref=seal("Root-selected-bootstrap.py",bootstrap)
+old_keys=("FINAL_SDK_BINDINGS","FINAL_RESOURCE_STATE_PATH","FINAL_EXPECTED_RESOURCE_CONFIG","FINAL_EXPECTED_CAPACITY","FINAL_ADDITIONAL_IMPORT_ROOTS","PY","PATH_SCOPE","source42")
+op_slots={k:inherit[k] for k in old_keys}
+for entry in ast.parse(read(identify(prior))).body:
+ if isinstance(entry,ast.Assign) and len(entry.targets)==1 and isinstance(entry.targets[0],ast.Name) and entry.targets[0].id=="FLAGS":
+  op_slots["EXECUTION_PYTHONUSERBASE"]=next(ast.literal_eval(value) for key,value in zip(entry.value.keys,entry.value.values) if isinstance(key,ast.Constant) and key.value=="PYTHONUSERBASE")
+assert op_slots["EXECUTION_PYTHONUSERBASE"]=="/home/barberb/.local"
+op_slots.update(ROOT_SELECTION=selection,ROOT_RUNTIME_SELECTION=runtime,FINAL_OUTPUT_PATH=output,FINAL_D_ROOT=D,FINAL_D_HEAD=head,FINAL_D_TREE=tree,FINAL_A_ROOT=A,FINAL_A_HEAD=A_prov["HEAD"],FINAL_A_TREE=A_prov["tree"],D_READ_BINDING_REFERENCE=abi_ref,D_READ_BINDING_ABI=abi_shape,FINAL_BINDING_MANIFEST_REFERENCE=manifest_ref,FINAL_BINDING_MANIFEST=manifest,FINAL_MODULE_BINDINGS=modules,FINAL_D_PROVENANCE=D_prov,FINAL_A_PROVENANCE=A_prov,FINAL_SOURCE_PROJECTS=projects,FINAL_FIXTURE_CLOSURE_REFERENCE=fixture_ref,FINAL_EFFECT_DECISION_REFERENCE=effect_ref,FINAL_EFFECT_DECISION=effect,FINAL_ADMITTED_IO_PLAN_REFERENCE=io,BOOTSTRAP_REFERENCE=bootstrap_ref,ABSENT_PATHS=absences)
+
+op_template=read(s["controls"]["operator"])
+assert op_template.count(b"'case_count_hint':99")==1
+current_assignments=literal_assignments(op_template)
+assert current_assignments["BOOTSTRAP_REFERENCE"] is None
+assert current_assignments["D_READ_BINDING_ABI"]==abi_shape
+assert current_assignments["source42"]==op_slots["source42"]
+assert op_slots["PY"]=="/home/barberb/.local/bin/python" and op_slots["PATH_SCOPE"]=="/home/barberb/.local/bin:/usr/lib/git-core"
+assert op_slots["EXECUTION_PYTHONUSERBASE"]=="/home/barberb/.local"
+selected_operator=bind(op_template,{k:v for k,v in op_slots.items()
+                                   if k in current_assignments and current_assignments[k] is None})
+compile(selected_operator,"Phase1 Lean JSON diagnostics ordinary99","exec",dont_inherit=True)
+op=seal("Root-selected-existing-P1-combined-Lean99-operator.py",selected_operator)
+binding=seal("actual-P1-Lean-ordinary99-binding.json",dict(
+ operator=op,bootstrap=bootstrap_ref,factory=s["controls"]["factory"],controls=controls_ref,
+ manifest=manifest_ref,selection=selection,read_abi=abi_ref,full_charge=cap_ref,
+ exact_local_freeze=role["freeze"], exact_postfreeze_READ3=role["read_close"],actual_nonclock_handoff=role_ref))
+print(json.dumps(dict(exact_operator=op,actual_selected=selection,bound_bootstrap=bootstrap_ref,output=output,
+ binding=binding,run_argv=["/usr/bin/python3","-I","-B",op["path"],abi_ref["path"],str(abi_ref["bytes"]),abi_ref["sha256"]])),flush=True)

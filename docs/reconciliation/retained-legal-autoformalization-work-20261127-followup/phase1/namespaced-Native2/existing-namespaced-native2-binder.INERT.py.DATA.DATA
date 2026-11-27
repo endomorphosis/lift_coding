@@ -1,0 +1,111 @@
+"""Bind one existing Native Lean test to its caller-owned admitted runner.
+
+Preparation only. Importing this module does not import product modules, select
+resources, inspect Source/assets, or execute Native Lean. The existing Source
+and runtime owner supplies the authenticated owning-test namespace and runner.
+"""
+
+from __future__ import annotations
+
+import ast
+import copy
+import hashlib
+import sys
+
+
+OWNING_TEST_SHA256 = '8bca876c855d44df4d48cb909fc6a0e9a007480d61037831536e84a8cc68adf9'
+OWNING_TEST_BYTES = 130553
+LEAN_SHA256 = 'de99fe31f53fb34bf247e5c24b4b1424ca06874f1da5dc8875b3dbf886d1e4cb'
+TEST_NAME = "test_lean_native_v3_expected_declaration_distinguishes_namespaced_decoy"
+FACTORY_NAME = "_phase1_caller_owned_runner_factory"
+
+
+def bind_existing_native_expected_policy(
+    owning_test_namespace,
+    *,
+    owning_test_source_bytes,
+    caller_owned_runner,
+):
+    """Return the existing test with its one local runner import rebound.
+
+    This grants no dispatch or resource authority. Before calling the returned
+    test, the sole runtime owner must establish the bindings and actual-result
+    retention described in binding-requirements.json. No runner, scheduler,
+    lease, Source guard, or output-retention substitute is constructed here.
+    """
+    if type(owning_test_source_bytes) is not bytes:
+        raise TypeError("exact authenticated owning-test bytes required")
+    if (
+        len(owning_test_source_bytes) != OWNING_TEST_BYTES
+        or hashlib.sha256(owning_test_source_bytes).hexdigest() != OWNING_TEST_SHA256
+    ):
+        raise ValueError("owning-test source identity differs from prepared binding")
+    names = {
+        "sdk": "ipfs_datasets_py.logic.backends.process",
+        "admitted": "ipfs_datasets_py.logic.backends.resource_admission",
+        "lean": "ipfs_datasets_py.logic.backends.kernel.lean",
+        "resources": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler",
+    }
+    modules = {key: sys.modules.get(name) for key, name in names.items()}
+    if any(module is None for module in modules.values()):
+        raise ValueError("caller must load the existing normal canonical module graph")
+    sdk, admitted, lean, resources = (
+        modules[key] for key in ("sdk", "admitted", "lean", "resources")
+    )
+    if not (
+        sdk.ToolRunRequest is admitted.ToolRunRequest
+        and sdk.ToolRunResult is admitted.ToolRunResult
+        and admitted.GlobalResourceScheduler is resources.GlobalResourceScheduler
+        and owning_test_namespace["ToolRunRequest"] is sdk.ToolRunRequest
+        and owning_test_namespace["ToolRunLimits"] is sdk.ToolRunLimits
+        and owning_test_namespace["LeanKernelBackend"] is lean.LeanKernelBackend
+        and lean.ResourceAdmittedToolRunner is admitted.ResourceAdmittedToolRunner
+    ):
+        raise ValueError("caller-owned SDK, scheduler, or owning-test identities differ")
+    if not isinstance(caller_owned_runner, admitted.ResourceAdmittedToolRunner):
+        raise TypeError("existing actual ResourceAdmittedToolRunner instance required")
+    if caller_owned_runner.cpu_slots != 1 or caller_owned_runner.child_process_slots != 1:
+        raise ValueError("preserve the existing test's one-CPU/one-child profile")
+    environment = owning_test_namespace["os"].environ
+    if environment.get("IPFS_DATASETS_RUN_NATIVE_LEAN") != "1":
+        raise ValueError("existing explicit Native Lean opt-in must be selected by caller")
+
+    def factory(*, cpu_slots, child_process_slots):
+        if type(cpu_slots) is not int or type(child_process_slots) is not int:
+            raise TypeError("original exact integer runner arguments required")
+        if cpu_slots != 1 or child_process_slots != 1:
+            raise ValueError("unexpected change to original runner constructor arguments")
+        return caller_owned_runner
+
+    original = ast.parse(owning_test_source_bytes)
+    selected = [
+        node for node in original.body
+        if isinstance(node, ast.FunctionDef) and node.name == TEST_NAME
+    ]
+    if len(selected) != 1:
+        raise ValueError("expected exactly one existing owning-test function")
+    function = copy.deepcopy(selected[0])
+    changes = 0
+    for index, node in enumerate(function.body):
+        if (
+            isinstance(node, ast.ImportFrom)
+            and node.level == 0
+            and node.module == "ipfs_datasets_py.logic.backends.resource_admission"
+            and len(node.names) == 1
+            and node.names[0].name == "ResourceAdmittedToolRunner"
+            and node.names[0].asname is None
+        ):
+            replacement = ast.Assign(
+                targets=[ast.Name(id="ResourceAdmittedToolRunner", ctx=ast.Store())],
+                value=ast.Name(id=FACTORY_NAME, ctx=ast.Load()),
+            )
+            function.body[index] = ast.copy_location(replacement, node)
+            changes += 1
+    if changes != 1:
+        raise ValueError("the one reviewed local runner import did not match exactly")
+    namespace = dict(owning_test_namespace)
+    namespace[FACTORY_NAME] = factory
+    module = ast.fix_missing_locations(ast.Module(body=[function], type_ignores=[]))
+    filename = owning_test_namespace[TEST_NAME].__code__.co_filename
+    exec(compile(module, filename, "exec"), namespace)
+    return namespace[TEST_NAME]

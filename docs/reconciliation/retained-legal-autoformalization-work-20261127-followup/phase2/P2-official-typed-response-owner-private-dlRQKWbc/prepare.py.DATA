@@ -1,0 +1,60 @@
+from pathlib import Path
+import ast,hashlib,json,os,subprocess
+w=Path.cwd()
+old=w.parent/"P2-official-typed-response-intake-red-z3mnOlRc"
+store=w.parents[2]/"publish-all-20261126-nsFFGMUO/datasets.git"
+head="4bd600b83d5b9abd0a3f5c466677d40e42efddf3"
+env={**os.environ,"GIT_OPTIONAL_LOCKS":"0","GIT_NO_LAZY_FETCH":"1"}
+def git(*args):
+    return subprocess.check_output(["git","--git-dir",str(store),*args],env=env,timeout=20)
+assert git("rev-parse","refs/reconciliation/observed-main-20261127-c").decode().strip()==head
+before=json.loads((old/"exact-module-inputs.json").read_bytes())["pins"]
+prefix="ipfs_datasets_py/logic/autoformal/"
+testprefix="tests/unit/logic/autoformal/"
+owner=prefix+"corpus_source_review_responses.py"
+test=testprefix+"test_corpus_source_review_responses.py"
+guide=prefix+"docs/guides/corpus_source_review_responses.md"
+tests=("corpus_source_review_responses","corpus_source_review","corpus_parent_alignment_adapter",
+       "corpus_parent_occurrence_adapter","legal_official_document_views","legal_parent_source_alignment",
+       "legal_cache_parent_occurrences","legal_parent_sentence_candidates","legal_source_view_inventory",
+       "legal_statutory_context")
+paths=set(before)|{testprefix+"test_"+x+".py" for x in tests}|{guide}
+paths|={prefix+x+".py" for x in tests}
+available=set(git("ls-tree","-r","--name-only",head,"--",prefix,testprefix).decode().splitlines())
+paths &= available|set(before)
+seen={}
+p=w/"project"
+queue=sorted(paths)
+while queue:
+    path=queue.pop()
+    if path in seen:
+        continue
+    blob=git("rev-parse",head+":"+path).decode().strip()
+    previous=before.get(path)
+    if previous and blob==previous["git_blob"]:
+        raw=(old/"project"/path).read_bytes()
+        assert (len(raw),hashlib.sha256(raw).hexdigest())==(previous["size"],previous["sha256"])
+    else:
+        raw=git("cat-file","blob",blob)
+    assert hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest()==blob
+    out=p/path
+    out.parent.mkdir(parents=True,exist_ok=True)
+    with out.open("xb") as f:f.write(raw)
+    seen[path]={"bytes":len(raw),"sha256":hashlib.sha256(raw).hexdigest(),"blob":blob}
+    if path.startswith((prefix,testprefix)) and path.endswith(".py"):
+        for n in ast.walk(ast.parse(raw)):
+            more=[]
+            if isinstance(n,ast.ImportFrom):
+                if n.level==1 and path.startswith(prefix):
+                    more=[prefix+n.module.replace(".","/")+".py"] if n.module else [prefix+a.name+".py" for a in n.names]
+                if n.level==0 and n.module=="ipfs_datasets_py.logic.autoformal":
+                    more=[prefix+a.name+".py" for a in n.names]
+            if isinstance(n,ast.Constant) and isinstance(n.value,str) and n.value.startswith("test_") and n.value.endswith(".py"):
+                more+=[testprefix+n.value]
+            queue.extend(x for x in more if x in available and x not in seen)
+assert {owner,test,guide}<=set(seen)
+for label,path in (("owner",owner),("test",test),("guide",guide)):
+    (w/(label+".before.DATA")).write_bytes((p/path).read_bytes())
+with (w/"input-epoch.json").open("x") as f:
+    json.dump({"head":head,"roles":seen,"owner":owner,"test":test,"guide":guide},f,indent=2,sort_keys=True)
+print("Git-bound project and test files",len(seen),sum(row["bytes"] for row in seen.values()))

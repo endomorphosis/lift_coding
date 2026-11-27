@@ -1,0 +1,34 @@
+{
+  "actual_owning_roles": {
+    "ipfs_datasets_py/logic/backends/kernel/lean.py": {
+      "bytes": 104465,
+      "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/project/ipfs_datasets_py/logic/backends/kernel/lean.py",
+      "sha256": "de99fe31f53fb34bf247e5c24b4b1424ca06874f1da5dc8875b3dbf886d1e4cb"
+    },
+    "tests/integration/logic/backends/test_kernel_backends.py": {
+      "bytes": 130553,
+      "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/project/tests/integration/logic/backends/test_kernel_backends.py",
+      "sha256": "8bca876c855d44df4d48cb909fc6a0e9a007480d61037831536e84a8cc68adf9"
+    }
+  },
+  "counts": {
+    "errors": 0,
+    "failures": 0,
+    "functions": 24,
+    "passed": 99,
+    "skipped": 0,
+    "tests": 99
+  },
+  "failed_cases": [],
+  "raw_JUnit": {
+    "bytes": 18619,
+    "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/green/result.xml",
+    "sha256": "b761783dbf1a5e99ef140a65ba8111cbf0378cc409414011e5891e91d7ac77c9"
+  },
+  "terminal_returncode": 0,
+  "termination": {
+    "bytes": 4217,
+    "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/green-termination.json",
+    "sha256": "ca943daf07befaba17f8a62e4112e7c593b6474a0d19cbc645b5ded0b212052c"
+  }
+}

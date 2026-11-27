@@ -1,0 +1,84 @@
+{
+  "SDK_managed": false,
+  "actual_retained_title10_pending_replay": {
+    "bytes": 5474,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/normal-local/title10/actual-title10-complete-pending-three-stage-replay.json",
+    "sha256": "403de3e0afeae839d20f64270d04cacd6fd83a66d0f30c45ef9733b087489a37"
+  },
+  "all_three_Source_READs_closed_and_locks_exclusive_probe_acquired": true,
+  "candidate": {
+    "isolated_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-all-20261126-nsFFGMUO/datasets.git",
+    "oid": "ff6e4326590bfaa593831df2d3c66b17e65ad418",
+    "parent": "8003780e1ac5a2dd86c1a8df4cab34874f6eb1ab",
+    "ref": "refs/reconciliation/pending-official-source-application-20261127",
+    "tree": "12cf4937d62fe414764ec9c8008264d8468359fd"
+  },
+  "exact_source_files_before_and_after_each": 227,
+  "isolated_checkout_role_map": {
+    "bytes": 61375,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/normal-local/real-checkout-pins.json",
+    "sha256": "5c42880fe1dd8831c77b67b2f68c443204bf65aaa5bdce2bf8d6233568b28a2b"
+  },
+  "normal": {
+    "clean": true,
+    "fixture_scope": {
+      "legacy": {
+        "case_vector": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "cases": 4,
+        "functions": 4,
+        "junit": {
+          "bytes": 989,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/normal-local/legacy/result.xml",
+          "sha256": "a9b9e3f1c17e862d0255c85864c750ab972dd538a8f6c535b970651f9d01823d"
+        },
+        "report": {
+          "bytes": 3478,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/normal-local/legacy/local-source-closeout.json",
+          "sha256": "c6ab16c775a76670ab670c191a04a03ee173a3f9947243505a2474ad0b7225ef"
+        }
+      },
+      "official": {
+        "case_vector": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "cases": 7,
+        "functions": 7,
+        "junit": {
+          "bytes": 1477,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/normal-local/official/result.xml",
+          "sha256": "363715ea031f28ca47fd2a510010bdb9d09d32eedb219c80e912502ab5085b16"
+        },
+        "report": {
+          "bytes": 4264,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/normal-local/official/local-source-closeout.json",
+          "sha256": "a86d38bdb2e9697d4c13c87e390793e6a87545c49e6ad380294d4a8ce4565431"
+        }
+      }
+    },
+    "original_configs": [
+      "pytest.ini",
+      "conftest.py",
+      "tests/conftest.py",
+      "tests/unit/conftest.py"
+    ]
+  },
+  "owner_test_and_guide_seal": {
+    "bytes": 7994,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/SEALED-official-V2-source-application-local-candidate.json",
+    "sha256": "fdad6e94121c3478f8c6c418027319c8e660dada93f373695605eaa083ce48c0"
+  },
+  "published": false,
+  "real_statutory_review": false,
+  "schema": "official-V2-source-application-normal-local-qualification/v1"
+}

@@ -1,0 +1,89 @@
+{
+  "actual_current_root_observation_or_Source_or_SDK_or_Git_mutation": false,
+  "actual_current_toolchain_source_resource_clock_output_authority": null,
+  "binder": {
+    "bytes": 5314,
+    "path": "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/existing-namespaced-native2-binder.INERT.py.DATA",
+    "sha256": "6c692f2b88eeaa8a7a1c33825f2df6638d4cd4178f34f5a2e1e0c061d8350650"
+  },
+  "bindings_protocol": "Pass a supplied hash-pinned inputs manifest. Verify-only emits metadata. Bind-only seals selected operator/binding/fee; it never launches it.",
+  "inputs_template": {
+    "bytes": 223,
+    "path": "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/root-current-native2-inputs.INERT.json",
+    "sha256": "4f3129756d99b1c455cd6267a36d0f634252ffb94b30eb72a074eda84fdcfa1a"
+  },
+  "invocation": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/select-existing-namespaced-native2.INERT.py.DATA",
+    "--inputs",
+    "<Root input path>",
+    "<bytes>",
+    "<sha256>",
+    "--verify-only"
+  ],
+  "live_base_template": {
+    "bytes": 356,
+    "path": "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/root-observed-live-base.INERT.json",
+    "sha256": "15b7c7c133a8e51aee8ed6173dcaed9cb8ff40f98cf47db068114e2b9c9cbf3a"
+  },
+  "operator": {
+    "bytes": 43793,
+    "path": "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/existing-namespaced-native2-operator.INERT.py.DATA",
+    "sha256": "9230c2c8b9d10b88d90942999bf8944a45fe6d57c1c6b13d178b3b5a38258d41"
+  },
+  "original_selector": {
+    "bytes": 14067,
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/select-lean-namespaced.py",
+    "sha256": "f1872c1b038aa7431fc8c2089f46a0feaa780c938a317a7a1f59816f380f2141"
+  },
+  "output_expected_but_not_bound": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-namespaced-native2-output",
+  "pending_actual_primary": [
+    "observed live base attached to Guide580",
+    "exact local freeze and closed READ3/outer epoch",
+    "actual ordinary99 qualification and its latest retained cap",
+    "fresh namespace/host asset/resource observation",
+    "actual ROOT clock and owned output on bind-only"
+  ],
+  "previous_actual": {
+    "bytes": 111081,
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-native2-output/complete-native3-direct-existing-owner-report.json",
+    "sha256": "c617e83857ff671cd733c316519527256728bc2325043364253cbba7b5840f14"
+  },
+  "previous_actual_result": {
+    "Lean_version": "4.34.1",
+    "cleanup_verified": true,
+    "command_returncodes": [
+      0,
+      0,
+      1
+    ],
+    "compiler": 2,
+    "positive_declaration": "wanted",
+    "refused_wrong_type_declaration": "Law.wanted",
+    "version": 1
+  },
+  "schema": "P1-Lean-JSON-existing-namespaced-Native2-controls-INERT/v1",
+  "selector": {
+    "bytes": 17473,
+    "path": "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/select-existing-namespaced-native2.INERT.py.DATA",
+    "sha256": "5a9681d0956865124b1ae3caea2cf8fa33c100517269aa444972cd5f065bbd4b"
+  },
+  "static": {
+    "bytes": 7679,
+    "path": "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/static-namespaced-native2-repin.json",
+    "sha256": "eda4baba8ba4fc7c34291e754205e29aff6b2006d4fa7d63db8269e1abb23db5"
+  },
+  "successful_command_recipe": [
+    "Lean --version (0)",
+    "Lean --json Main.lean (0; wanted)",
+    "Lean --json Main.lean (1; Law.wanted)"
+  ],
+  "verifier": {
+    "bytes": 8986,
+    "path": "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/verify-retained-namespaced-native2.INERT.py.DATA",
+    "sha256": "01937f81b71480e4d0c18ab38ae6d18e8a3d590f4baf3dde02d51ab32781ee89"
+  },
+  "work": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics"
+}

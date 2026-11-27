@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="4" time="1.040" timestamp="2026-11-27T04:26:02.823625+00:00" hostname="spark-b271"><testcase classname="tests.unit.logic.autoformal.test_corpus_source_review_packets" name="test_official_packet_preserves_complete_source_and_blank_guides" time="0.513"><failure message="TypeError: prepare_source_review_packets() got an unexpected keyword argument 'document_inputs'">tests/unit/logic/autoformal/test_corpus_source_review_packets.py:989: in test_official_packet_preserves_complete_source_and_blank_guides
+    bundle = build(owner, data)
+tests/unit/logic/autoformal/test_corpus_source_review_packets.py:73: in build
+    return owner.prepare_source_review_packets(**data["arguments"], **options)
+E   TypeError: prepare_source_review_packets() got an unexpected keyword argument 'document_inputs'</failure></testcase><testcase classname="tests.unit.logic.autoformal.test_corpus_source_review_packets" name="test_official_packet_requires_independent_preparation_root_before_guides" time="0.006"><failure message="TypeError: prepare_source_review_packets() got an unexpected keyword argument 'document_inputs'">tests/unit/logic/autoformal/test_corpus_source_review_packets.py:1110: in test_official_packet_requires_independent_preparation_root_before_guides
+    build(owner, data)
+tests/unit/logic/autoformal/test_corpus_source_review_packets.py:73: in build
+    return owner.prepare_source_review_packets(**data["arguments"], **options)
+E   TypeError: prepare_source_review_packets() got an unexpected keyword argument 'document_inputs'</failure></testcase><testcase classname="tests.unit.logic.autoformal.test_corpus_source_review_packets" name="test_official_packet_refuses_changed_raw_transport_under_original_pin" time="0.006"><failure message="TypeError: prepare_source_review_packets() got an unexpected keyword argument 'document_inputs'">tests/unit/logic/autoformal/test_corpus_source_review_packets.py:1123: in test_official_packet_refuses_changed_raw_transport_under_original_pin
+    build(owner, data)
+tests/unit/logic/autoformal/test_corpus_source_review_packets.py:73: in build
+    return owner.prepare_source_review_packets(**data["arguments"], **options)
+E   TypeError: prepare_source_review_packets() got an unexpected keyword argument 'document_inputs'</failure></testcase><testcase classname="tests.unit.logic.autoformal.test_corpus_source_review_packets" name="test_official_packet_refuses_resealed_quote_bound_to_another_document" time="0.000"><failure message="TypeError: prepare_source_review_packets() got an unexpected keyword argument 'document_inputs'">tests/unit/logic/autoformal/test_corpus_source_review_packets.py:1129: in test_official_packet_refuses_resealed_quote_bound_to_another_document
+    bundle = build(owner, official_packet_case)
+tests/unit/logic/autoformal/test_corpus_source_review_packets.py:73: in build
+    return owner.prepare_source_review_packets(**data["arguments"], **options)
+E   TypeError: prepare_source_review_packets() got an unexpected keyword argument 'document_inputs'</failure></testcase></testsuite></testsuites>

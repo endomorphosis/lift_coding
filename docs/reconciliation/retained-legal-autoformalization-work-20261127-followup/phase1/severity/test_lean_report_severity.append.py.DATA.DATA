@@ -1,0 +1,12 @@
+
+
+@pytest.mark.parametrize("severity", [pytest.param([], id="list"), pytest.param({}, id="object")])
+def test_lean_rejects_non_text_dependency_report_severity(severity):
+    stdout, expected = _bound_clean_lean_dependency_fixture()
+    diagnostic = json.loads(stdout)
+    diagnostic["severity"] = severity
+    process = _lean_output(json.dumps(diagnostic) + "\n")
+    accepted, report, diagnostics = evaluate_lean_kernel_output(process, **expected)
+    assert accepted is False
+    assert report is None
+    assert any("incorrectly bound Lean declaration dependency report" in message for message in diagnostics)

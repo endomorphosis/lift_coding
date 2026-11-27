@@ -1,0 +1,53 @@
+from pathlib import Path
+import fcntl, hashlib, json, os, subprocess
+import xml.etree.ElementTree as ET
+w=Path(__file__).resolve().parent
+def file_ref(path):
+    data=path.read_bytes()
+    return {"path":str(path),"bytes":len(data),"sha256":hashlib.sha256(data).hexdigest()}
+metadata=json.loads((w/"real-checkout-pins.json").read_bytes())
+src=Path(metadata["selected_repo"])
+seal=metadata["private_seal"]
+assert file_ref(Path(seal["path"]))==seal
+normal={}
+commit=metadata["authored_candidate"]["oid"]
+for name,count in (("official",7),("legacy",9)):
+    path=w/name/"local-source-closeout.json"
+    row=json.loads(path.read_bytes())
+    xml=Path(row["junit"]["path"])
+    pin=file_ref(xml)
+    assert pin=={key:row["junit"][key] for key in pin}
+    nodes=ET.fromstring(xml.read_bytes()).findall(".//testcase")
+    assert len(nodes)==count==len({(n.get("name"),n.get("classname")) for n in nodes})
+    assert all(node.find(tag) is None for node in nodes for tag in ("failure","error","skipped"))
+    assert row["returncode"]==0 and row["commit"]==commit and row["source_read_closed"]
+    assert row["same_collection_execution_xml"] and row["all_source_pins_verified_before_and_after"]
+    assert len(row["conftest_origins"])==3
+    actual_functions=[n.get("name").split("[",1)[0] for n in nodes]
+    assert [n.get("name") for n in nodes]==[entry.split("::")[-1] for entry in row["collected"]]
+    roster=[entry.split("::")[-1] for entry in (w.parent/(name+".selectors")).read_text().splitlines()]
+    vector=[1,1,1,1,1,2] if name=="official" else [1,5,1,1,1]
+    assert actual_functions==[function for function,count in zip(roster,vector,strict=True) for _ in range(count)]
+    normal[name]={"cases":count,"functions":len(roster),"case_vector":vector,"report":file_ref(path),"junit":pin}
+for name in ("admission.lock","source.lock"):
+    path=src/"workspace/control-plane/source-leases"/name
+    with os.fdopen(os.open(path,os.O_RDONLY|os.O_NOFOLLOW),"rb") as fd:
+        fcntl.flock(fd,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        fcntl.flock(fd,fcntl.LOCK_UN)
+env={**os.environ,"GIT_OPTIONAL_LOCKS":"0","GIT_NO_LAZY_FETCH":"1"}
+def git(*args):
+    return subprocess.check_output(["git","-C",str(src),"-c","core.preloadIndex=false",*args],env=env,timeout=20)
+assert git("rev-parse","HEAD").decode().strip()==commit
+assert git("status","--porcelain=v1","--untracked-files=all")==b""
+record={"schema":"official-V2-source-adjudication-normal-local-qualification/v1",
+        "candidate":metadata["authored_candidate"],"owner_test_and_guide_seal":seal,
+        "normal":{"fixture_scope":normal,"original_configs":metadata["normal_config"],"clean":True},
+        "exact_source_files_before_and_after_each":len(metadata["paths"]),
+        "both_Source_READs_closed_and_locks_exclusive_probe_acquired":True,
+        "SDK_managed":False,"published":False,"real_statutory_review":False,
+        "isolated_checkout_role_map":file_ref(w/"real-checkout-pins.json")}
+path=w/"actual-official-V2-adjudication-and-legacy-Source-closed.json"
+with path.open("x") as f:
+    json.dump(record,f,indent=2,sort_keys=True);f.write("\n")
+path.chmod(0o400)
+print(json.dumps(file_ref(path)))

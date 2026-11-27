@@ -1,0 +1,41 @@
+{
+  "actual_owning_roles": {
+    "ipfs_datasets_py/logic/backends/kernel/lean.py": {
+      "bytes": 104341,
+      "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/project/ipfs_datasets_py/logic/backends/kernel/lean.py",
+      "sha256": "18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800"
+    },
+    "tests/integration/logic/backends/test_kernel_backends.py": {
+      "bytes": 130553,
+      "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/project/tests/integration/logic/backends/test_kernel_backends.py",
+      "sha256": "8bca876c855d44df4d48cb909fc6a0e9a007480d61037831536e84a8cc68adf9"
+    }
+  },
+  "counts": {
+    "errors": 0,
+    "failures": 6,
+    "functions": 24,
+    "passed": 93,
+    "skipped": 0,
+    "tests": 99
+  },
+  "failed_cases": [
+    "test_lean_recursion_exhausted_json_diagnostics_fail_closed[stdout]",
+    "test_lean_recursion_exhausted_json_diagnostics_fail_closed[stderr]",
+    "test_lean_json_reader_skips_recursion_exhausted_records",
+    "test_lean_json_decoder_normalizes_recursion_exhaustion_to_invalid_json",
+    "test_lean_rejects_non_text_dependency_report_severity[list]",
+    "test_lean_rejects_non_text_dependency_report_severity[object]"
+  ],
+  "raw_JUnit": {
+    "bytes": 24117,
+    "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/red/result.xml",
+    "sha256": "09899979ed1987ddf29e7adac690d7296ff21313552a43a26476131e7f7fed75"
+  },
+  "terminal_returncode": 1,
+  "termination": {
+    "bytes": 4212,
+    "path": "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/red-termination.json",
+    "sha256": "6b167cea9a40ddedcc7691ab5fec2fe5d7b69c3d9cb14176c84aa356a26ea806"
+  }
+}

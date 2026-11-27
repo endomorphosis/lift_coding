@@ -1,0 +1,230 @@
+"""Seal an appended test proposal; never import or execute the owning module."""
+import ast
+import difflib
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import stat
+
+HERE = Path(__file__).resolve().parent
+TARGET = 'tests/unit/logic/autoformal/test_legal_corpus_incremental.py'
+BEFORE = Path('/tmp/Root-P1-LIR15-exact-test-and-index-READ2-v410-rg1eejVd/actual-output/raw/00-test_legal_corpus_incremental.py.DATA')
+FRAGMENT = HERE / 'source_version_only_incremental_test_fragment.py.DATA'
+reads = []
+outputs = []
+prior_new_assignment_explicit_bytes = 7270732
+older_record_lookup_bytes_retained = 3509716
+
+def sha(d):
+    return hashlib.sha256(d).hexdigest()
+
+def f9(s):
+    return {k: getattr(s, k) for k in (
+        'st_dev', 'st_ino', 'st_mode', 'st_nlink', 'st_uid', 'st_gid',
+        'st_size', 'st_mtime_ns', 'st_ctime_ns')}
+
+def read(p, n, h):
+    fd = os.open(p, os.O_RDONLY | os.O_NOFOLLOW)
+    try:
+        a = os.fstat(fd)
+        assert stat.S_ISREG(a.st_mode) and a.st_size == n
+        chunks = []
+        while True:
+            c = os.read(fd, 65536)
+            if not c:
+                break
+            chunks.append(c)
+        d = b''.join(chunks)
+        z = os.fstat(fd)
+        assert f9(a) == f9(z) == f9(os.stat(p, follow_symlinks=False))
+        assert len(d) == n and sha(d) == h
+        reads.append({'path': str(p), 'bytes': n, 'sha256': h, 'full9': f9(z)})
+        return d
+    finally:
+        os.close(fd)
+
+def put(name, d):
+    if isinstance(d, str):
+        d = d.encode()
+    p = HERE / name
+    fd = os.open(p, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o400)
+    try:
+        v = memoryview(d)
+        while v:
+            v = v[os.write(fd, v):]
+        os.fsync(fd)
+    finally:
+        os.close(fd)
+    assert read(p, len(d), sha(d)) == d
+    ref = {'path': str(p), 'bytes': len(d), 'sha256': sha(d)}
+    outputs.append(ref)
+    return ref
+
+def jput(name, value):
+    return put(name, json.dumps(value, sort_keys=True, indent=2) + '\n')
+
+before = read(BEFORE, 188040, 'd774f0274f37a554da8f1bb9345b22c7f17ad12c6ed28ac350c6d473a2ce04c1')
+fragment = read(FRAGMENT, 5555, '412f3a930a40fdcb14fcccb8addd2fa403eb867d617816c0f3af085dd7afce10')
+assert before.endswith(b'\n') and fragment.startswith(b'\n\n')
+after = before + fragment
+bt, ft, at = ast.parse(before), ast.parse(fragment), ast.parse(after)
+assert len(ft.body) == 1 and isinstance(ft.body[0], ast.FunctionDef)
+new_name = ft.body[0].name
+assert new_name == 'test_source_edition_only_change_splits_shared_definition_cache_and_matches_clean'
+assert not ft.body[0].decorator_list
+assert ast.dump(bt, include_attributes=False) == ast.dump(
+    ast.Module(body=at.body[:len(bt.body)], type_ignores=[]), include_attributes=False)
+old_tests = [n.name for n in bt.body if isinstance(n, ast.FunctionDef) and n.name.startswith('test_')]
+new_tests = [n.name for n in at.body if isinstance(n, ast.FunctionDef) and n.name.startswith('test_')]
+assert new_tests == old_tests + [new_name] and len(new_tests) == len(set(new_tests))
+assert not [n for n in ast.walk(ft) if isinstance(n, (ast.Import, ast.ImportFrom))]
+assert [x.arg for x in ft.body[0].args.args] == ['runtime']
+# Builtin syntax compilation does not execute the module, fixtures or test.
+compile(after, TARGET, 'exec')
+
+post = put('test_legal_corpus_incremental.source-edition-only.after.py.DATA', after)
+post['Git_blob_sha1'] = hashlib.sha1(('blob ' + str(len(after)) + '\0').encode() + after).hexdigest()
+forward = ''.join(difflib.unified_diff(before.decode().splitlines(keepends=True),
+                                     after.decode().splitlines(keepends=True),
+                                     fromfile='a/' + TARGET, tofile='b/' + TARGET))
+inverse = ''.join(difflib.unified_diff(after.decode().splitlines(keepends=True),
+                                     before.decode().splitlines(keepends=True),
+                                     fromfile='a/' + TARGET, tofile='b/' + TARGET))
+
+def apply_exact(original, patch):
+    """Verify the generated unified data without Git, source imports or mutation."""
+    src = original.splitlines(keepends=True)
+    lines = patch.splitlines(keepends=True)
+    assert lines[0].startswith('--- ') and lines[1].startswith('+++ ')
+    result, pos, i = [], 0, 2
+    while i < len(lines):
+        header = re.fullmatch(r'@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@.*\n', lines[i])
+        assert header
+        start = int(header[1]) - 1
+        old_count = int(header[2] or '1')
+        new_count = int(header[4] or '1')
+        assert start >= pos
+        result.extend(src[pos:start])
+        pos, removed, added = start, 0, 0
+        i += 1
+        while i < len(lines) and not lines[i].startswith('@@ '):
+            line = lines[i]
+            assert line[:1] in (' ', '+', '-')
+            content = line[1:]
+            if line[0] in ' -':
+                assert src[pos] == content
+                pos += 1
+                removed += 1
+            if line[0] in ' +':
+                result.append(content)
+                added += 1
+            i += 1
+        assert (removed, added) == (old_count, new_count)
+    result.extend(src[pos:])
+    return ''.join(result)
+
+assert apply_exact(before.decode(), forward).encode() == after
+assert apply_exact(after.decode(), inverse).encode() == before
+forward_ref = put('test_legal_corpus_incremental.source-edition-only.forward.patch', forward)
+inverse_ref = put('test_legal_corpus_incremental.source-edition-only.inverse.patch', inverse)
+
+proof = {
+    'schema': 'LIR15-source-edition-only-test-static-preservation/v1',
+    'target': TARGET,
+    'old_prefix_bytes': len(before), 'old_prefix_sha256': sha(before),
+    'byte_prefix_exact': True, 'all_old_AST_and_assertions_exact': True,
+    'forward_and_inverse_replay_exact': True,
+    'original_test_function_names': old_tests,
+    'original_literal_test_function_count': len(old_tests),
+    'new_literal_test_function_count': len(new_tests),
+    'new_literal_function_selectors': [TARGET + '::' + new_name],
+    'additional_literal_parent_functions': 1,
+    'new_imports': [], 'fixture_arguments': ['runtime'],
+    'actual_collected_ids': None, 'actual_parent_test_results': None,
+    'source_version_and_candidate_records_resealed_by_existing_public_constructor': True,
+    'new_validator_compiler_or_fixture_implementation': False,
+    'unsupported_claims': ['original-parent coverage', 'installed Lean result',
+                           'statutory review', 'formal output bytes stay constant'],
+    'syntax_compile_only': True, 'project_imports_or_fixture_execution': False,
+}
+proof_ref = jput('static-prefix-roster-and-exact-inverse-proof-v01.json', proof)
+
+packet = {
+    'schema': 'LIR15-existing-shared-source-edition-only-test-proposal/v1',
+    'status': 'PRIVATE_TEST_ONLY_UNRUN',
+    'canonical_target': TARGET,
+    'preimage': {'path': str(BEFORE), 'bytes': len(before), 'sha256': sha(before)},
+    'fragment': {'path': str(FRAGMENT), 'bytes': len(fragment), 'sha256': sha(fragment)},
+    'postimage': post, 'forward': forward_ref, 'inverse': inverse_ref,
+    'static_preservation': proof_ref,
+    'selected_function': TARGET + '::' + new_name,
+    'literal_new_parent_functions': 1,
+    'existing_supported_route': {
+        'fixture_private_path': '/tmp/Root-P1-LIR15-existing-v355-managed-actual-v411-bJLSYiAv/exact-current-case-archive/tests/unit/logic/autoformal/test_legal_corpus_shared_lake.py',
+        'fixture_bytes': 204417, 'fixture_sha256': '25ed3e6a71adff8e80eb679324e4e1094d61e2bfef940b9ed0a2cc31682628bf',
+        'constructor': 'candidate(modality="O", edition=..., norm_id="versioned-A")',
+        'source_and_candidate_lines': [35, 160],
+        'existing_preparation_only_control_lines': [238, 245],
+        'owning_test_helpers': {'prepare': [89, 94], 'runtime': [200, 211],
+                                'build': [214, 236], 'artifacts': [239, 244], 'cache': [247, 248]},
+        'public_owner': 'ipfs_datasets_py.logic.autoformal.legal_corpus_incremental.build_incremental_shared_corpus',
+        'owner_published_commit': 'bda9f1fb146722e8b116cb0503880fb22e5291a4',
+        'owner_bytes': 137040, 'owner_sha256': '680af4fab491c868f5dd90ddb205797559385809d046c760365daecd7eb584a1',
+        'owner_historical_current_blob': 'e0d88cebe26ba6600db108ae39b5a7b039a71375',
+        'owner_private_path': str(HERE / 'legal_corpus_incremental.published-bda9f1fb.py.DATA'),
+        'owner_materialization_receipt': {'path': str(HERE / 'immutable-LIR15-current-owner-materialization-receipt-v01.json'),
+                                          'bytes': 1343, 'sha256': '15e84eccd6afac9c99866635bb26d3192587278899c016c0ce768d00c2960338'},
+    },
+    'coverage_comparison': {
+        'already_covered_lookup_only_lines': [940, 963],
+        'already_covered_compiler_library_only_lines': [988, 1003],
+        'coupled_body_and_identity_change_lines': [919, 937],
+        'physical_source_identity_existing_case_lines': [2313, 2332],
+        'failed_donor_v413_already_closed_not_duplicated': {
+            'path': '/tmp/Root-P1-LIR15-existing-v355-managed-actual-v413-Ozpo4FWZ/actual-current-LIR15-installed-Lean-failed-donor-closeout-v413.json',
+            'bytes': 4890, 'sha256': 'c78448b557ce1b533866493e07ed632f47c1b0a1da5ea222eb27bdcceff39152',
+            'pytest_case_credit': 0,
+        },
+    },
+    'independent_input_change': 'Only the first authored source edition changes2024→2025 through existing candidate(); its norm_id, raw/extracted content, declaration and selected norm-semantic fields stay fixed. The P2024 control remains the exact old candidate.',
+    'expected_checks_UNRUN': ['old shared definition group splits under edition change',
+        'only affected modules recompile; still-referenced old group and P norm reused',
+        'current cache population exact; removed old identities not resurrected',
+        'warm unchanged-version compile0 and no fresh theorem credit',
+        'incremental artifacts/rootCID equal clean rebuild',
+        'old cold receipt/cache/artifacts remain byte-exact'],
+    'no_product_patch_or_reproduced_product_defect_claim': True,
+    'Source_canonical_Git_mutations': False,
+    'Source_or_SQL_or_Native_or_model_or_real_RPC_or_SDK_execution': False,
+    'current_Source_epoch_clock_resource_authority_bindings': None,
+    'actual_collect_RUN_JUnit_subreports_results': None,
+    'real_legal_review_training_gold_or_corpus_admission': False,
+    'full_eight_phase_goal_complete': False,
+    'Root_qualification_next': 'Existing owner selects and source-binds this exact appended test before any execution. Static review is not a runtime PASS; no Native or parent-profile transfer.',
+    'private_read_accounting': {
+        'older_record_lookup_bytes_retained': older_record_lookup_bytes_retained,
+        'new_assignment_prior_explicit_input_and_readback_bytes': prior_new_assignment_explicit_bytes,
+        'assembler_reads_and_output_readbacks_before_packet': sum(r['bytes'] for r in reads),
+        'new_assignment_total_before_packet_readback': prior_new_assignment_explicit_bytes + sum(r['bytes'] for r in reads),
+        'private_unit_planning_bound_bytes': 8 * 1024 * 1024,
+        'all_prior_costs_failures_and_partial_searches_retained': True,
+        'implicit_Git_library_IO_not_claimed_measured': True,
+        'new_Source_charges_or_budget_reset': False,
+    },
+    'authenticated_assembler_reads_and_readbacks': reads,
+}
+ref = jput('sealed-existing-LIR15-source-edition-only-one-test-UNRUN-v01.json', packet)
+total = prior_new_assignment_explicit_bytes + sum(r['bytes'] for r in reads)
+assert total <= 8 * 1024 * 1024
+fd = os.open(HERE, os.O_RDONLY | os.O_DIRECTORY)
+try:
+    os.fsync(fd)
+finally:
+    os.close(fd)
+print(json.dumps({'packet': ref, 'postimage': post, 'fragment_bytes': len(fragment),
+                  'forward': forward_ref, 'inverse': inverse_ref, 'static_proof': proof_ref,
+                  'new_assignment_explicit_bytes_including_readbacks': total,
+                  'all_prior_record_lookup_bytes_retained': older_record_lookup_bytes_retained,
+                  'test_or_project_import_execution': False}, sort_keys=True))

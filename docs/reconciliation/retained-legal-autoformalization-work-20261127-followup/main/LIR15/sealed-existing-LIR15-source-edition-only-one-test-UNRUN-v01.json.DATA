@@ -1,0 +1,234 @@
+{
+  "Root_qualification_next": "Existing owner selects and source-binds this exact appended test before any execution. Static review is not a runtime PASS; no Native or parent-profile transfer.",
+  "Source_canonical_Git_mutations": false,
+  "Source_or_SQL_or_Native_or_model_or_real_RPC_or_SDK_execution": false,
+  "actual_collect_RUN_JUnit_subreports_results": null,
+  "authenticated_assembler_reads_and_readbacks": [
+    {
+      "bytes": 188040,
+      "full9": {
+        "st_ctime_ns": 1795650114056719622,
+        "st_dev": 66306,
+        "st_gid": 1000,
+        "st_ino": 72371803,
+        "st_mode": 33024,
+        "st_mtime_ns": 1795650114056719622,
+        "st_nlink": 1,
+        "st_size": 188040,
+        "st_uid": 1000
+      },
+      "path": "/tmp/Root-P1-LIR15-exact-test-and-index-READ2-v410-rg1eejVd/actual-output/raw/00-test_legal_corpus_incremental.py.DATA",
+      "sha256": "d774f0274f37a554da8f1bb9345b22c7f17ad12c6ed28ac350c6d473a2ce04c1"
+    },
+    {
+      "bytes": 5555,
+      "full9": {
+        "st_ctime_ns": 1795671825414271013,
+        "st_dev": 66306,
+        "st_gid": 1000,
+        "st_ino": 64404730,
+        "st_mode": 33204,
+        "st_mtime_ns": 1795671825414271013,
+        "st_nlink": 1,
+        "st_size": 5555,
+        "st_uid": 1000
+      },
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/LIR15-source-version-private-v01/source_version_only_incremental_test_fragment.py.DATA",
+      "sha256": "412f3a930a40fdcb14fcccb8addd2fa403eb867d617816c0f3af085dd7afce10"
+    },
+    {
+      "bytes": 193595,
+      "full9": {
+        "st_ctime_ns": 1795672003562256467,
+        "st_dev": 66306,
+        "st_gid": 1000,
+        "st_ino": 64404732,
+        "st_mode": 33024,
+        "st_mtime_ns": 1795672003562256467,
+        "st_nlink": 1,
+        "st_size": 193595,
+        "st_uid": 1000
+      },
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/LIR15-source-version-private-v01/test_legal_corpus_incremental.source-edition-only.after.py.DATA",
+      "sha256": "b9bf04fd80ada4c4f0194e0d2c8aea47cf43bfab925fed07c08d8b6a3de20a9e"
+    },
+    {
+      "bytes": 6001,
+      "full9": {
+        "st_ctime_ns": 1795672003598256675,
+        "st_dev": 66306,
+        "st_gid": 1000,
+        "st_ino": 64404733,
+        "st_mode": 33024,
+        "st_mtime_ns": 1795672003598256675,
+        "st_nlink": 1,
+        "st_size": 6001,
+        "st_uid": 1000
+      },
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/LIR15-source-version-private-v01/test_legal_corpus_incremental.source-edition-only.forward.patch",
+      "sha256": "d918c5fb2377ddf1ba4e34092a3700a783268bf2196d8be018ad198e18c0f120"
+    },
+    {
+      "bytes": 6001,
+      "full9": {
+        "st_ctime_ns": 1795672003603256704,
+        "st_dev": 66306,
+        "st_gid": 1000,
+        "st_ino": 64404734,
+        "st_mode": 33024,
+        "st_mtime_ns": 1795672003603256704,
+        "st_nlink": 1,
+        "st_size": 6001,
+        "st_uid": 1000
+      },
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/LIR15-source-version-private-v01/test_legal_corpus_incremental.source-edition-only.inverse.patch",
+      "sha256": "19a92e3adc5591ca4965048ecf3151a94937b104066919315cb73d8f998ef017"
+    },
+    {
+      "bytes": 6963,
+      "full9": {
+        "st_ctime_ns": 1795672003609256739,
+        "st_dev": 66306,
+        "st_gid": 1000,
+        "st_ino": 64404735,
+        "st_mode": 33024,
+        "st_mtime_ns": 1795672003609256739,
+        "st_nlink": 1,
+        "st_size": 6963,
+        "st_uid": 1000
+      },
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/LIR15-source-version-private-v01/static-prefix-roster-and-exact-inverse-proof-v01.json",
+      "sha256": "3dcff030b997acc1e078b3971e96fc68257db88716b9fde47159382f04b4840a"
+    }
+  ],
+  "canonical_target": "tests/unit/logic/autoformal/test_legal_corpus_incremental.py",
+  "coverage_comparison": {
+    "already_covered_compiler_library_only_lines": [
+      988,
+      1003
+    ],
+    "already_covered_lookup_only_lines": [
+      940,
+      963
+    ],
+    "coupled_body_and_identity_change_lines": [
+      919,
+      937
+    ],
+    "failed_donor_v413_already_closed_not_duplicated": {
+      "bytes": 4890,
+      "path": "/tmp/Root-P1-LIR15-existing-v355-managed-actual-v413-Ozpo4FWZ/actual-current-LIR15-installed-Lean-failed-donor-closeout-v413.json",
+      "pytest_case_credit": 0,
+      "sha256": "c78448b557ce1b533866493e07ed632f47c1b0a1da5ea222eb27bdcceff39152"
+    },
+    "physical_source_identity_existing_case_lines": [
+      2313,
+      2332
+    ]
+  },
+  "current_Source_epoch_clock_resource_authority_bindings": null,
+  "existing_supported_route": {
+    "constructor": "candidate(modality=\"O\", edition=..., norm_id=\"versioned-A\")",
+    "existing_preparation_only_control_lines": [
+      238,
+      245
+    ],
+    "fixture_bytes": 204417,
+    "fixture_private_path": "/tmp/Root-P1-LIR15-existing-v355-managed-actual-v411-bJLSYiAv/exact-current-case-archive/tests/unit/logic/autoformal/test_legal_corpus_shared_lake.py",
+    "fixture_sha256": "25ed3e6a71adff8e80eb679324e4e1094d61e2bfef940b9ed0a2cc31682628bf",
+    "owner_bytes": 137040,
+    "owner_historical_current_blob": "e0d88cebe26ba6600db108ae39b5a7b039a71375",
+    "owner_materialization_receipt": {
+      "bytes": 1343,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/LIR15-source-version-private-v01/immutable-LIR15-current-owner-materialization-receipt-v01.json",
+      "sha256": "15e84eccd6afac9c99866635bb26d3192587278899c016c0ce768d00c2960338"
+    },
+    "owner_private_path": "/tmp/Main-board-stall-evidence-refresh-private-v01/LIR15-source-version-private-v01/legal_corpus_incremental.published-bda9f1fb.py.DATA",
+    "owner_published_commit": "bda9f1fb146722e8b116cb0503880fb22e5291a4",
+    "owner_sha256": "680af4fab491c868f5dd90ddb205797559385809d046c760365daecd7eb584a1",
+    "owning_test_helpers": {
+      "artifacts": [
+        239,
+        244
+      ],
+      "build": [
+        214,
+        236
+      ],
+      "cache": [
+        247,
+        248
+      ],
+      "prepare": [
+        89,
+        94
+      ],
+      "runtime": [
+        200,
+        211
+      ]
+    },
+    "public_owner": "ipfs_datasets_py.logic.autoformal.legal_corpus_incremental.build_incremental_shared_corpus",
+    "source_and_candidate_lines": [
+      35,
+      160
+    ]
+  },
+  "expected_checks_UNRUN": [
+    "old shared definition group splits under edition change",
+    "only affected modules recompile; still-referenced old group and P norm reused",
+    "current cache population exact; removed old identities not resurrected",
+    "warm unchanged-version compile0 and no fresh theorem credit",
+    "incremental artifacts/rootCID equal clean rebuild",
+    "old cold receipt/cache/artifacts remain byte-exact"
+  ],
+  "forward": {
+    "bytes": 6001,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/LIR15-source-version-private-v01/test_legal_corpus_incremental.source-edition-only.forward.patch",
+    "sha256": "d918c5fb2377ddf1ba4e34092a3700a783268bf2196d8be018ad198e18c0f120"
+  },
+  "fragment": {
+    "bytes": 5555,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/LIR15-source-version-private-v01/source_version_only_incremental_test_fragment.py.DATA",
+    "sha256": "412f3a930a40fdcb14fcccb8addd2fa403eb867d617816c0f3af085dd7afce10"
+  },
+  "full_eight_phase_goal_complete": false,
+  "independent_input_change": "Only the first authored source edition changes2024\u21922025 through existing candidate(); its norm_id, raw/extracted content, declaration and selected norm-semantic fields stay fixed. The P2024 control remains the exact old candidate.",
+  "inverse": {
+    "bytes": 6001,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/LIR15-source-version-private-v01/test_legal_corpus_incremental.source-edition-only.inverse.patch",
+    "sha256": "19a92e3adc5591ca4965048ecf3151a94937b104066919315cb73d8f998ef017"
+  },
+  "literal_new_parent_functions": 1,
+  "no_product_patch_or_reproduced_product_defect_claim": true,
+  "postimage": {
+    "Git_blob_sha1": "808b589a20a8a82fb26292813fbb62feae188ef6",
+    "bytes": 193595,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/LIR15-source-version-private-v01/test_legal_corpus_incremental.source-edition-only.after.py.DATA",
+    "sha256": "b9bf04fd80ada4c4f0194e0d2c8aea47cf43bfab925fed07c08d8b6a3de20a9e"
+  },
+  "preimage": {
+    "bytes": 188040,
+    "path": "/tmp/Root-P1-LIR15-exact-test-and-index-READ2-v410-rg1eejVd/actual-output/raw/00-test_legal_corpus_incremental.py.DATA",
+    "sha256": "d774f0274f37a554da8f1bb9345b22c7f17ad12c6ed28ac350c6d473a2ce04c1"
+  },
+  "private_read_accounting": {
+    "all_prior_costs_failures_and_partial_searches_retained": true,
+    "assembler_reads_and_output_readbacks_before_packet": 406155,
+    "implicit_Git_library_IO_not_claimed_measured": true,
+    "new_Source_charges_or_budget_reset": false,
+    "new_assignment_prior_explicit_input_and_readback_bytes": 7270732,
+    "new_assignment_total_before_packet_readback": 7676887,
+    "older_record_lookup_bytes_retained": 3509716,
+    "private_unit_planning_bound_bytes": 8388608
+  },
+  "real_legal_review_training_gold_or_corpus_admission": false,
+  "schema": "LIR15-existing-shared-source-edition-only-test-proposal/v1",
+  "selected_function": "tests/unit/logic/autoformal/test_legal_corpus_incremental.py::test_source_edition_only_change_splits_shared_definition_cache_and_matches_clean",
+  "static_preservation": {
+    "bytes": 6963,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/LIR15-source-version-private-v01/static-prefix-roster-and-exact-inverse-proof-v01.json",
+    "sha256": "3dcff030b997acc1e078b3971e96fc68257db88716b9fde47159382f04b4840a"
+  },
+  "status": "PRIVATE_TEST_ONLY_UNRUN"
+}

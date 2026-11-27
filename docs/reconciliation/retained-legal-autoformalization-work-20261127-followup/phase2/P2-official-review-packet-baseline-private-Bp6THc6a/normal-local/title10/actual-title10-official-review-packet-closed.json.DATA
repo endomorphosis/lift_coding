@@ -1,0 +1,73 @@
+{
+  "all_records_independently_regenerated_equal": true,
+  "answers_supplied": 0,
+  "candidate": "9b93d9ed54657ebeb611ec01527c0ab2ddd22e03",
+  "cooperative_source_read": {
+    "canonical_root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/checkout",
+    "cooperative": true,
+    "lock_path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/checkout/workspace/control-plane/source-leases/source.lock",
+    "mode": "read",
+    "schema_version": "autoencoder-source-lease/v1",
+    "waited_seconds": 7.554981857538223e-05
+  },
+  "counts": {
+    "blank_active_answers": 36,
+    "comparison_evidence": 0,
+    "deferred_questions": 28,
+    "document_parts": 0,
+    "official_documents": 3,
+    "pages": 1,
+    "parent_unit_counts": [],
+    "parents": 0,
+    "recorded_reviews": 0,
+    "response_guides": 4,
+    "retained_questions": 64,
+    "selector_projections": 0,
+    "source_view_kinds": {
+      "official_extracted_view": 3
+    },
+    "source_views": 3,
+    "units": 4
+  },
+  "exact_four_historical_source_requests_preserved": true,
+  "legal_or_semantic_authority": false,
+  "per_alternative_fields_excluded_from_reviewer_packet": true,
+  "pinned_checkout_paths": 230,
+  "published_source_epoch_preimage": "10bdbd38f30ea6b25c2ddec54802bed61d9fb48c",
+  "requests": [
+    {
+      "record_cid": "baguqeera3itqv7mggmeil5zzyd7sl45bcfdp3zq2pz2lv4z5crkz3jigi7wa",
+      "schema": "legal-corpus-official-source-review-request/v2",
+      "sha256": "aac4299dea17b576849094ca2d11e722511fc59673aca5569314562115ab1553"
+    },
+    {
+      "record_cid": "baguqeerawv3ejtoxc7img2m2nufbv23b4ojpwkqtlmdnm2ovtrat5pm74fla",
+      "schema": "legal-corpus-official-source-review-request/v2",
+      "sha256": "5a9e122d6e46e98c3f965fd12756c7a4f4cb76d205d8cfafa4ada43f15ce2950"
+    },
+    {
+      "record_cid": "baguqeeray5mpftk5d4qemysuyby2qzvmetlgljpickeyq7zulgv4ea2ddooa",
+      "schema": "legal-corpus-official-source-review-request/v2",
+      "sha256": "0112a7e2cbf396b9edc819eb2a4a13b9adf777d00cd78adf339cd7a874c78d49"
+    },
+    {
+      "record_cid": "baguqeeraunwr4mwexk3hpkehl5oows7ygslumczbq2npwurallgz5e7tsptq",
+      "schema": "legal-corpus-official-source-review-request/v2",
+      "sha256": "3826d422f9416d8110cc7bd892d9b07773ba15cb08e70139274092b7bb65a654"
+    }
+  ],
+  "review_packet": {
+    "bytes": 196612,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/title10/title10-official-review-packet.json",
+    "sha256": "da8c0ab1306f5b0617ff968b5963705b8d7d3e1553b796762de8742935f3a5f2"
+  },
+  "reviewers_selected": 0,
+  "schema": "official-title10-blank-review-packet-run/v1",
+  "signatures_created": 0,
+  "source_preparation_custody": {
+    "bytes": 207465,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/title10/title10-exact-source-preparation.json",
+    "sha256": "b0a605a6aec22e1337db31168b85e7d9a31ad9a6d38dd81c20e981b8b5ec061e"
+  },
+  "source_read_closed": true
+}

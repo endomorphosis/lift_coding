@@ -1,0 +1,212 @@
+from pathlib import Path
+import base64, copy, hashlib, importlib.util, json, os, resource, sys, zlib
+
+work=Path(__file__).resolve().parent
+metadata=json.loads((work/"real-checkout-pins.json").read_bytes())
+root=Path(metadata["selected_repo"])
+commit=metadata["authored_candidate"]["oid"]
+assert commit=="ff6e4326590bfaa593831df2d3c66b17e65ad418"
+resource.setrlimit(resource.RLIMIT_AS,(512*1024**2,)*2)
+resource.setrlimit(resource.RLIMIT_CPU,(45,46))
+os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})
+sys.path.insert(0,str(root))
+os.chdir(root)
+spec=importlib.util.spec_from_file_location("pending_title10_local_source",root/metadata["lease_module"])
+lease_module=importlib.util.module_from_spec(spec)
+sys.modules[spec.name]=lease_module
+spec.loader.exec_module(lease_module)
+assert lease_module.canonical_source_root(root)==root
+
+saved=Path("/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01")
+out=work/"title10"
+out.mkdir(mode=0o700)
+def audit(event,args):
+    if event.startswith(("socket.","subprocess.")) or event in {"os.exec","os.fork","os.forkpty","os.posix_spawn","os.system"}:
+        raise PermissionError("closed replay process/network boundary")
+    if event=="import" and args[0].split(".")[0] in {"torch","transformers","tensorflow","jax","huggingface_hub"}:
+        raise ImportError("closed replay import boundary")
+    if event=="open" and not isinstance(args[0], int):
+        name=Path(os.fsdecode(args[0])).resolve()
+        flags=args[2] or 0
+        if flags & (os.O_WRONLY|os.O_RDWR|os.O_CREAT|os.O_TRUNC|os.O_APPEND):
+            if not name.is_relative_to(out):
+                raise PermissionError("closed replay write boundary")
+        if name.is_relative_to(Path("/home/barberb/lift_coding/external")):
+            raise PermissionError("use saved custody, never current project bodies")
+
+def sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+def read(path, length, digest):
+    raw=path.read_bytes()
+    assert (len(raw),sha(raw))==(length,digest),path
+    return json.loads(raw)
+
+def read_prior(i,n,digest):
+    return read(saved/"pilot-official-pending-PAV-output-v06"/f"run.output.{i}.bin",n,digest)
+
+def verify_source_paths():
+    for rel,pin in metadata["paths"].items():
+        raw=(root/rel).read_bytes()
+        assert (len(raw),sha(raw))==(pin["bytes"],pin["sha256"]),rel
+
+def write(name,data):
+    path=out/name
+    raw=(json.dumps(data,sort_keys=True,indent=2,ensure_ascii=False)+"\n").encode()
+    with path.open("xb") as f:
+        f.write(raw)
+    return {"path":str(path),"bytes":len(raw),"sha256":sha(raw)}
+
+cache=read(saved/"actual-official-pilot-nine-inputs-and-typed-owner-body-cache-v01.json",95573,
+           "350babadfc05044c85319d3bef7f177582245f7670b2683a05b13806a337e26c")
+historic_preparation=read_prior(0,157823,"f207e00e0a7fc3a31689fb4349dd42b3491b8f117c80ef60de56759ebe10a9ad")
+historic_assessment=read_prior(1,31452,"175b991c1b6631b523acd8b70bec26d3599d1417bb069ba82330d863a0ec1471")
+registry=read_prior(4,277,"7d723588b6508bae648fc676c8c76163ac5e6220a7184de083a335a5c7bef053")
+policy=read_prior(5,540,"8e5579d3252256fe0e6c596f32e68c665ddd46389c3cece6af7b2ac47e269d8e")
+assert registry["mode"]==policy["mode"]=="unavailable" and registry["keys"]==[]
+inputs={}
+for row in cache["records"]:
+    if row["role"]!="original_pilot_input":
+        continue
+    name=Path(row["path"]).name
+    obj=zlib.decompressobj()
+    raw=obj.decompress(base64.b64decode(row["raw_zlib_base64"],validate=True),row["bytes"]+1)
+    assert obj.eof and not obj.unused_data and (len(raw),sha(raw))==(row["bytes"],row["sha256"])
+    inputs[name]=raw
+assert len(inputs)==9
+
+with lease_module.source_lease(root,mode="read",timeout_seconds=30) as held:
+    assert held.canonical_root==str(root)
+    verify_source_paths()
+    sys.addaudithook(audit)
+    from ipfs_datasets_py.logic.autoformal import corpus_source_application as application
+    from ipfs_datasets_py.logic.autoformal import corpus_source_adjudication as adjudication
+    from ipfs_datasets_py.logic.autoformal import corpus_source_review as source
+    from ipfs_datasets_py.logic.autoformal import corpus_source_review_responses as responses
+    from ipfs_datasets_py.logic.autoformal import legal_graph_dependencies as dependencies
+
+    digest=source._digest
+    bindings=historic_preparation["manifest"]["input_bindings"]
+    documents=[]
+    stored_documents=json.loads(inputs["documents.json"])
+    for index,section in enumerate(("101","7213","7214")):
+        doc=stored_documents[section]
+        keys={"source_version":doc["source_version"],
+              "expected_raw_sha256":doc["raw_input_file"]["sha256"],
+              "expected_extracted_sha256":doc["extracted_input_file"]["sha256"]}
+        assert digest(keys)==bindings["official_documents"][str(index)]["raw_sha256"]
+        documents.append({**keys,"raw_bytes":inputs[f"{section}-source.html"],
+                          "extracted_text":inputs[f"{section}-extracted-view.txt"].decode()})
+    occurrences=[{"source_occurrence":row["occurrence"],"context":row["context"],
+                  "retained_unit_label":row["retained_unit_label"],
+                  "unanswered_question_ids":row["unanswered_question_ids"]}
+                 for row in json.loads(inputs["source-units-and-separate-crosswalk.json"])]
+    alternatives=historic_preparation["requests"][0]["pending_interpretations"]
+    assert len(occurrences)==4 and len(alternatives)==2
+    replay={
+        "document_inputs":documents,
+        "expected_document_population_sha256":digest(
+            [{k:v for k,v in row.items() if k not in {"raw_bytes","extracted_text"}} for row in documents]),
+        "occurrence_inputs":occurrences,
+        "expected_occurrence_population_sha256":bindings["official_occurrences"]["complete"]["raw_sha256"],
+        "pending_interpretations":alternatives,
+        "expected_pending_interpretations_sha256":bindings["pending_interpretations"]["complete"]["raw_sha256"],
+    }
+    prepared=source.prepare_official_source_review_requests_v2(**replay)
+    assert prepared["requests"]==historic_preparation["requests"]
+    assert prepared["manifest"]["input_bindings"]==bindings
+    assert all(row["governing_edition"] is None and row["applicability"] is None for row in prepared["requests"])
+
+    groups=[]
+    for row,manifest in zip(prepared["requests"],prepared["dependency_manifests"],strict=True):
+        groups.append({"request_cid":row["record_cid"],"reviews":[],"evidence_artifacts":{},
+            "observed_artifact_sha256s":{r["artifact_id"]:None for r in manifest["artifacts"]},
+            "observed_pins":{kind:{pin["key"]:None for r in manifest["artifacts"]
+                                 for pin in r["dependency_pins"][kind]} for kind in dependencies.PIN_KINDS}})
+
+    def group_pins(values, identity=None):
+        result=[]
+        for row in values:
+            current={"request_cid":row["request_cid"],"reviews_sha256":digest(row["reviews"]),
+                "evidence_sha256s":{key:sha(raw) for key,raw in row["evidence_artifacts"].items()},
+                "observed_artifacts_sha256":digest(row["observed_artifact_sha256s"]),
+                "observed_pins_sha256":digest(row["observed_pins"])}
+            if identity:
+                current[identity]=row[identity]
+            result.append(current)
+        return result
+
+    def unavailable_policy(owner,suffix):
+        return {**policy,"action":owner.ACTION,"audience":owner.AUDIENCE,
+                "policy_id":"source-review:title10-pending-"+suffix}
+
+    response_bindings=[{"request_cid":row["request_cid"],"responses":[]} for row in groups]
+    typed_args={**replay,
+        "expected_preparation_manifest_sha256":digest(prepared["manifest"]),
+        "expected_registry_sha256":digest(registry),"expected_policy_sha256":digest(policy),
+        "expected_review_group_pins":group_pins(groups),
+        "at_time_utc":historic_assessment["manifest"]["evaluation_time_utc"],
+        "response_bindings":response_bindings,
+        "expected_response_bindings_sha256":digest(response_bindings)}
+    typed=responses.assess_source_review_responses(prepared,registry,policy,groups,**typed_args)
+    assert responses.validate_source_review_responses(typed,prepared,registry,policy,groups,**typed_args)==typed
+    counters=typed["manifest"]["counts"]
+    assert [counters[x] for x in ("groups","pending_adjudication_slots","deferred_questions","authenticated_typed_responses")]==[4,36,28,0]
+    assert all(row["raw_source_assessment_record"]["assessment"]["authenticated_evidence_count"]==0 for row in typed["records"])
+
+    adjudication_policy=unavailable_policy(adjudication,"adjudication")
+    adjudication_groups=[{**copy.deepcopy(row),"declaration_artifact_id":None} for row in groups]
+    adjudication_args={**typed_args,
+        "expected_typed_response_manifest_sha256":digest(typed["manifest"]),
+        "expected_adjudication_registry_sha256":digest(registry),
+        "expected_adjudication_policy_sha256":digest(adjudication_policy),
+        "expected_adjudication_group_pins":group_pins(adjudication_groups,"declaration_artifact_id")}
+    args=(prepared,registry,policy,groups,typed,registry,adjudication_policy,adjudication_groups)
+    adjudicated=adjudication.assess_source_adjudications(*args,**adjudication_args)
+    assert adjudication.validate_source_adjudications(adjudicated,*args,**adjudication_args)==adjudicated
+    counters=adjudicated["manifest"]["counts"]
+    assert [counters[x] for x in ("groups","declaration_bodies","authenticated_authority_claims",
+        "complete_declaration_authority_prerequisites_under_selected_trust","source_decisions_applied")]==[4,0,0,0,0]
+
+    application_policy=unavailable_policy(application,"application")
+    application_groups=[{**copy.deepcopy(row),"app_artifact_id":None} for row in groups]
+    descriptor={"snapshot_id":"source-review:title10-pending-candidate","use_scope":application.USE_SCOPE,
+                "generation":1,"previous_snapshot_manifest_ref":None}
+    application_args={
+        "expected_adjudication_manifest_sha256":digest(adjudicated["manifest"]),
+        "expected_application_registry_sha256":digest(registry),
+        "expected_application_policy_sha256":digest(application_policy),
+        "expected_application_group_pins":group_pins(application_groups,"app_artifact_id"),
+        "adjudication_replay_inputs":{**adjudication_args,
+            "preparation":prepared,"source_registry":registry,"source_policy":policy,"source_review_groups":groups,
+            "typed_response_report":typed,"adjudication_registry":registry,"adjudication_policy":adjudication_policy,
+            "adjudication_groups":adjudication_groups}}
+    args=(adjudicated,registry,application_policy,application_groups,descriptor)
+    report=application.assess_source_applications(*args,**application_args)
+    assert application.validate_source_applications(report,*args,**application_args)==report
+    counters=report["manifest"]["counts"]
+    assert [counters[x] for x in ("groups","blocked_groups","deferred_questions","activated_candidate_answer_snapshots",
+        "activated_answer_slots","authenticated_application_claims","source_decisions_applied","physical_governing_bindings_applied")
+            ]==[4,4,28,0,0,0,0,0]
+    assert all(row["application_declaration_record"] is None and row["activated_answer_variant_refs"]==[]
+               for row in report["records"])
+    assert all(record[key] is False for record in (report["manifest"],*report["records"])
+               for key in application.FALSE_FLAGS)
+    lease=held.to_dict()
+    verify_source_paths()
+    evidence={name:write(name+".json",result)
+              for name,result in (("official-preparation",prepared),("typed-response-assessment",typed),
+                                  ("adjudication-assessment",adjudicated),("candidate-application-assessment",report))}
+selection={
+    "schema":"official-title10-three-stage-pending-replay/v1","candidate":commit,"cooperative_source_read":lease,
+    "source_read_closed":True,"path_pins_checked_before_and_after":len(metadata["paths"]),
+    "historical_exact_request_records_preserved":True,
+    "original_aggregate_manifest_REBUILT_for_current_producer_origins":True,
+    "request_cids":[row["record_cid"] for row in prepared["requests"]],
+    "retained_official_document_keys":list(stored_documents),
+    "retained_input_SHA256s":{name:sha(raw) for name,raw in sorted(inputs.items())},
+    "at_time_utc":typed_args["at_time_utc"],"selected_signing_keys":0,"answers_supplied":0,"signatures_created":0,
+    "typed_response_counts":typed["manifest"]["counts"],"adjudication_counts":adjudicated["manifest"]["counts"],
+    "candidate_application_counts":report["manifest"]["counts"],"independent_validation_equal":True,
+    "real_statutory_review_or_meaning_admission":False,"artifacts":evidence}
+print(json.dumps(write("actual-title10-complete-pending-three-stage-replay.json",selection)),flush=True)

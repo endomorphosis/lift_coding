@@ -1,0 +1,4 @@
+raise RuntimeError('must not execute')
+def literals():
+    rows = (('different','usc:us:9:9','Authored literal.'),)
+    return rows

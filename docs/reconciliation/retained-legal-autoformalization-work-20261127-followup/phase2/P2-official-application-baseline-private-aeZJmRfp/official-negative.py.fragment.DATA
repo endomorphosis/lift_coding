@@ -1,0 +1,33 @@
+
+
+def test_official_application_refuses_resealed_adjudication_for_another_subject(
+    owner, official_v2_adjudication_for_application
+):
+    data = clone_case(official_v2_adjudication_for_application)
+    _, subject, group = unit(data)
+    other_subject = data["preparation"]["subjects"][1]
+    declaration = group["declaration_record"]
+    assert declaration["subject_ref"] == ref(subject)
+    assert other_subject["record_cid"] != subject["record_cid"]
+    declaration["subject_ref"] = ref(other_subject)
+    group["declaration_record"] = reseal(declaration)
+    data["adjudication_report"]["records"][0] = reseal(group)
+
+    with pytest.raises(ValueError, match="application declaration must preserve exact adjudication source roots"):
+        author(owner, data)
+
+
+def test_official_application_refuses_a_different_binding_population_pin_before_replay(
+    owner, official_v2_adjudication_for_application, monkeypatch
+):
+    data = signed_case(owner, official_v2_adjudication_for_application)
+    replay = replay_inputs(data)
+    bindings = replay["response_bindings"]
+    subset_pin = sha(canonical(bindings[1:]))
+    assert len(bindings) == len(data["preparation"]["requests"]) > 1
+    assert subset_pin != replay["expected_response_bindings_sha256"]
+    replay["expected_response_bindings_sha256"] = subset_pin
+    monkeypatch.setattr(adjudication_owner, "validate_source_adjudications", refuse_replay)
+
+    with pytest.raises(ValueError, match="complete response binding population differs"):
+        assess(owner, data, adjudication_replay_inputs=replay)

@@ -1,0 +1,107 @@
+{
+  "adjudication_counts": {
+    "adjudications_applied": 0,
+    "authenticated_authority_claims": 0,
+    "complete_declaration_authority_prerequisites_under_selected_trust": 0,
+    "declaration_bodies": 0,
+    "declared_selected_slots": 0,
+    "deferred_questions": 28,
+    "groups": 4,
+    "pages": 1,
+    "source_decisions_applied": 0,
+    "unresolved_or_absent_slots": 36
+  },
+  "answers_supplied": 0,
+  "artifacts": {
+    "adjudication-assessment": {
+      "bytes": 92359,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/normal-local/title10/adjudication-assessment.json",
+      "sha256": "124ab4dee31aaa55e09594dec960415fa208b2ec3c53bc48b6f9918895ed647e"
+    },
+    "candidate-application-assessment": {
+      "bytes": 121669,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/normal-local/title10/candidate-application-assessment.json",
+      "sha256": "df193f883ab7b218cb6d84d073db74ce2bc5fb2272666f94264051f67e153634"
+    },
+    "official-preparation": {
+      "bytes": 207215,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/normal-local/title10/official-preparation.json",
+      "sha256": "30ca05179f728159c6d50dc5f2c30c679936a9614908e694e62bd2908ebecf6e"
+    },
+    "typed-response-assessment": {
+      "bytes": 173404,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/normal-local/title10/typed-response-assessment.json",
+      "sha256": "d2b7d0631e3d17cdd328a7f745e650c7f792c6fcc2bf2ac1811566413290cde4"
+    }
+  },
+  "at_time_utc": "2026-11-20T00:00:00Z",
+  "candidate": "ff6e4326590bfaa593831df2d3c66b17e65ad418",
+  "candidate_application_counts": {
+    "activated_answer_slots": 0,
+    "activated_candidate_answer_snapshots": 0,
+    "application_bodies": 0,
+    "authenticated_application_claims": 0,
+    "blocked_active_slots": 36,
+    "blocked_groups": 4,
+    "deferred_questions": 28,
+    "groups": 4,
+    "pages": 1,
+    "physical_governing_bindings_applied": 0,
+    "source_decisions_applied": 0
+  },
+  "cooperative_source_read": {
+    "canonical_root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/normal-local/checkout",
+    "cooperative": true,
+    "lock_path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/normal-local/checkout/workspace/control-plane/source-leases/source.lock",
+    "mode": "read",
+    "schema_version": "autoencoder-source-lease/v1",
+    "waited_seconds": 7.875263690948486e-05
+  },
+  "historical_exact_request_records_preserved": true,
+  "independent_validation_equal": true,
+  "original_aggregate_manifest_REBUILT_for_current_producer_origins": true,
+  "path_pins_checked_before_and_after": 227,
+  "real_statutory_review_or_meaning_admission": false,
+  "request_cids": [
+    "baguqeera3itqv7mggmeil5zzyd7sl45bcfdp3zq2pz2lv4z5crkz3jigi7wa",
+    "baguqeerawv3ejtoxc7img2m2nufbv23b4ojpwkqtlmdnm2ovtrat5pm74fla",
+    "baguqeeray5mpftk5d4qemysuyby2qzvmetlgljpickeyq7zulgv4ea2ddooa",
+    "baguqeeraunwr4mwexk3hpkehl5oows7ygslumczbq2npwurallgz5e7tsptq"
+  ],
+  "retained_input_SHA256s": {
+    "101-extracted-view.txt": "e16ca14e06034a08bc1e732cdb790c9ec5bbb96d3ba38ac3bee23367c8481851",
+    "101-source.html": "4e8d017794220f192668d5313fc537fbb7140652ac4a00faaf93a6c921c2c08b",
+    "7213-extracted-view.txt": "6b0c306698da9e5e44262e74e1f14dac151e0f7e84f466b44285bd544cd52963",
+    "7213-source.html": "671925114eada7731a355e33c8076baa6926fed1b7cb35c90a8c4c705c55b0ef",
+    "7214-extracted-view.txt": "58e446ec84d0d3cf42d4b322f0da06a16620c2621cfa29fab0f0c5ddbe834b64",
+    "7214-source.html": "9c33986e216e85dbae33e58a3201bf3c02d3c4ff887d48e5ec524f8813c5842e",
+    "documents.json": "fa57a9c4223a43da2f27d91a59d2cda17da69d1f00527fdeaab6d5d679f2d157",
+    "reviewed-admission-source-interface.json": "f1f32a6768787f907deede5c718eb1bb35726fdd95ed330fc0b7456595c15896",
+    "source-units-and-separate-crosswalk.json": "6465d9c2bfa27a1d1290d1a644c630411c0f4e9678bd753190e690e3bdbcde29"
+  },
+  "retained_official_document_keys": [
+    "101",
+    "7213",
+    "7214"
+  ],
+  "schema": "official-title10-three-stage-pending-replay/v1",
+  "selected_signing_keys": 0,
+  "signatures_created": 0,
+  "source_read_closed": true,
+  "typed_response_counts": {
+    "accepted_adjudications": 0,
+    "answer_variants": 0,
+    "applied_source_decisions": 0,
+    "authenticated_typed_responses": 0,
+    "deferred_questions": 28,
+    "different_answer_slots": 0,
+    "groups": 4,
+    "incomplete_typed_responses": 0,
+    "missing_authenticated_answer_slots": 36,
+    "pages": 1,
+    "pending_adjudication_slots": 36,
+    "rejected_content_responses": 0,
+    "responses": 0,
+    "unresolved_answer_slots": 0
+  }
+}

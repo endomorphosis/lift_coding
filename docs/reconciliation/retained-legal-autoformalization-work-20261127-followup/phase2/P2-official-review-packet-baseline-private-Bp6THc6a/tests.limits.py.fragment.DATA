@@ -1,0 +1,24 @@
+
+
+def test_official_packet_paginates_all_requests_without_parent_inference(owner, official_packet_case):
+    data = official_packet_case
+    limits = {"max_units_per_page": 1}
+    bundle = build(owner, data, limits=limits)
+    assert len(bundle["pages"]) == len(data["preparation"]["requests"])
+    for ordinal, (page, request) in enumerate(zip(bundle["pages"], data["preparation"]["requests"], strict=True)):
+        assert page["first_unit_ordinal"] == page["page_ordinal"] == ordinal
+        assert page["entries"][0]["ordinal"] == ordinal
+        assert page["entries"][0]["request_cid"] == request["record_cid"]
+    assert bundle["parent_packets"] == []
+    assert validate(owner, bundle, data, limits=limits) == bundle
+
+
+@pytest.mark.parametrize("limit", ["max_units", "max_source_views", "max_collection_bytes", "max_page_bytes"])
+def test_official_packet_refuses_instead_of_returning_a_prefix(owner, official_packet_case, limit):
+    with pytest.raises(contracts.CorpusContractError):
+        build(owner, official_packet_case, limits={limit: 1})
+
+
+def test_official_packet_rejects_mixed_public_replay_profiles(owner, official_packet_case):
+    with pytest.raises(contracts.CorpusContractError, match="one complete source-review packet replay profile"):
+        build(owner, official_packet_case, alignment_corpus_bytes={})

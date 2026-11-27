@@ -1,0 +1,47 @@
+"""Observe the independently published V2 base without changing any worktree."""
+from pathlib import Path
+from runpy import run_path
+import json
+
+here=Path(__file__).resolve().parent
+g=run_path(str(here/'freeze-lean-json-diagnostics.py'))
+git,rev,capture,save,load=(g[k] for k in ('git','rev','capture','save','load'))
+guide_ref=g['guarded_guide']
+guide=json.loads(load(guide_ref))
+peer=Path('/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0')
+repos={'datasets':g['D'],'accelerate':g['A'],'hallucinate':peer/'hallucinate','root':peer/'root'}
+names={'datasets':'ipfs_datasets_py','accelerate':'ipfs_accelerate_py','hallucinate':'hallucinate_app','root':'lift_coding'}
+expected=dict(datasets='9a89672b4b3d32d6e83fbc29368b40e4cc033612',accelerate='219ba3da0f62f772801d71715e22c506faa21126',
+              hallucinate='1e11c03956446e2fbf71b1784d1fb7a169c35fc1',root='54c824aa30f0db91baf85cc6b7144361a2385ac0')
+for role,repo in repos.items():
+    observed=git(repo,'ls-remote','--exit-code',f'https://github.com/endomorphosis/{names[role]}.git','refs/heads/main')
+    assert observed.decode().split()==[expected[role],'refs/heads/main']
+    if role!='accelerate':
+        assert rev(repo,'refs/remotes/lean-diag-observation/main')==expected[role]
+    git(repo,'merge-base','--is-ancestor',guide['live_main_after'][role],expected[role])
+d=repos['datasets']
+previous=guide['live_main_after']['datasets']
+assert rev(d,'HEAD')==previous==rev(d,expected['datasets']+'^')
+assert capture(d/'.git/index')[0]==g['guide']['index']
+changed=git(d,'diff','--name-only','-z',previous,expected['datasets']).decode().strip(chr(0)).split(chr(0))
+assert changed==['ipfs_datasets_py/logic/autoformal/legal_norm_content_adjudication_v1.py',
+                 'tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py']
+immutable_paths=[g[k] for k in ('OWNER','TEST','FIXTURE')]+guide['only_four_docs']
+retained={}
+for path in immutable_paths:
+    old=rev(d,previous+':'+path)
+    assert old==rev(d,expected['datasets']+':'+path)
+    retained[path]=old
+delta={path:dict(prior_blob=rev(d,previous+':'+path),observed_blob=rev(d,expected['datasets']+':'+path)) for path in changed}
+links={'hallucinate':{'ipfs_datasets_py':expected['datasets'],'ipfs_accelerate_py':expected['accelerate']},
+       'root':{'external/ipfs_datasets':expected['datasets'],'external/ipfs_accelerate':expected['accelerate'],
+               'hallucinate_app':expected['hallucinate']}}
+for role,paths in links.items():
+    for path,tip in paths.items():
+        assert git(repos[role],'ls-tree',expected[role],'--',path).decode().strip()==f'160000 commit {tip}\t{path}'
+r=save('actual-current-main-fast-forward-V2-independent-base.json',
+       dict(schema='observed-current-main-independent-V2-descendant-of-Guide580/v1',previous_published_guide=guide_ref,
+            guide_main=guide['live_main_after'],live_main_after=expected,observed_base_is_direct_dataset_descendant=True,
+            exact_D_delta=delta,unchanged_D_git_blobs=retained,current_gitlinks=links,
+            previous_author_qualification_claimed=False,git_worktrees_changed=False))
+print(json.dumps(r))

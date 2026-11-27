@@ -1,0 +1,88 @@
+from pathlib import Path
+import hashlib
+
+before=Path("owner.before.DATA").read_bytes()
+assert hashlib.sha256(before).hexdigest()=="0d658081521bc737ff17ec38f82d34122863b7b2b3094e8d1fabf4eef0caf2b9"
+code=before.decode()
+
+def replace(old, new):
+    global code
+    assert code.count(old)==1,old
+    code=code.replace(old,new)
+
+replace("""def _pins():
+    result = responses._pins()
+""","""def _pins(*, official=False):
+    result = responses._pins(official=True) if official else responses._pins()
+""")
+replace("""    checked = []
+    for record, schema, fields in ((request, source.REQUEST_SCHEMA, source.REQUEST_FIELDS),
+            (subject, source.SUBJECT_SCHEMA, source.SUBJECT_FIELDS),
+            (typed_group, responses.GROUP_SCHEMA, responses.FIELDS['records'])):
+        checked.append(contracts.validate_record(json.loads(base._plain(record, contracts.MAX_RECORD_BYTES)), schema=schema, fields=fields))
+    request, subject, typed_group = checked
+""","""    request = json.loads(base._plain(request, contracts.MAX_RECORD_BYTES))
+    official = type(request) is dict and request.get('schema') == source.OFFICIAL_REQUEST_SCHEMA
+    request_schema = source.OFFICIAL_REQUEST_SCHEMA if official else source.REQUEST_SCHEMA
+    request_fields = source.OFFICIAL_REQUEST_FIELDS if official else source.REQUEST_FIELDS
+    subject_schema = source.OFFICIAL_SUBJECT_SCHEMA if official else source.SUBJECT_SCHEMA
+    request = contracts.validate_record(request, schema=request_schema, fields=request_fields)
+    subject = contracts.validate_record(json.loads(base._plain(subject, contracts.MAX_RECORD_BYTES)),
+        schema=subject_schema, fields=source.SUBJECT_FIELDS)
+    typed_group = contracts.validate_record(json.loads(base._plain(typed_group, contracts.MAX_RECORD_BYTES)),
+        schema=responses.GROUP_SCHEMA, fields=responses.FIELDS['records'])
+    if official:
+        raw_group = contracts.validate_record(typed_group['raw_source_assessment_record'],
+            schema=source.OFFICIAL_GROUP_SCHEMA, fields=source.GROUP_FIELDS)
+        if (request['profile'] != source.OFFICIAL_PROFILE or subject['profile'] != source.OFFICIAL_PROFILE
+                or raw_group['review_request_cid'] != request['record_cid']
+                or raw_group['subject_sha256'] != _digest(subject)
+                or raw_group['queue_ordinal'] != request['queue_ordinal']
+                or raw_group['deferred_review_slot_ids'] != request['deferred_review_slot_ids']
+                or typed_group['deferred_review_slot_ids'] != request['deferred_review_slot_ids']):
+            _fail('exact official adjudication request, subject and source assessment required')
+""")
+replace("""    required = {'response_bindings', 'expected_response_bindings_sha256', 'expected_preparation_manifest_sha256',
+        'expected_registry_sha256', 'expected_policy_sha256', 'expected_review_group_pins', 'at_time_utc',
+        'alignment_corpus_bytes', 'expected_alignment_corpus_pins', 'alignment_replay_inputs',
+        'source_report_bytes', 'expected_source_report_pins'}
+""","""    manifest = preparation.get('manifest') if type(preparation) is dict else None
+    official = type(manifest) is dict and manifest.get('schema') == source.OFFICIAL_MANIFEST_SCHEMA
+    required = {'response_bindings', 'expected_response_bindings_sha256', 'expected_preparation_manifest_sha256',
+        'expected_registry_sha256', 'expected_policy_sha256', 'expected_review_group_pins', 'at_time_utc'}
+    if official:
+        required.update(('document_inputs', 'expected_document_population_sha256',
+            'occurrence_inputs', 'expected_occurrence_population_sha256',
+            'pending_interpretations', 'expected_pending_interpretations_sha256'))
+    else:
+        required.update(('alignment_corpus_bytes', 'expected_alignment_corpus_pins',
+            'alignment_replay_inputs', 'source_report_bytes', 'expected_source_report_pins'))
+""")
+replace("    detached = source._detach_preparation(preparation, source_bounds)",
+        "    detached = source._detach_preparation(preparation, source_bounds, official=official)")
+replace("    producer_pins = _pins()", "    producer_pins = _pins(official=True) if official else _pins()")
+replace("""    domain = auth._ReviewDomain(source.SUBJECT_SCHEMA, CLAIM_SCHEMA, ACTION, AUDIENCE, ASSESSMENT_SCHEMA, source._subject, source.ACTIVE_SLOT_COUNT)
+""","""    subject_schema = source.OFFICIAL_SUBJECT_SCHEMA if official else source.SUBJECT_SCHEMA
+    verify_subject = source._official_subject if official else source._subject
+    domain = auth._ReviewDomain(subject_schema, CLAIM_SCHEMA, ACTION, AUDIENCE, ASSESSMENT_SCHEMA,
+        verify_subject, source.ACTIVE_SLOT_COUNT)
+""")
+replace("""            deferred_review_slot_ids=request['deferred_review_slot_ids'], original_contexts_remain_required_unavailable=True)
+""","""            deferred_review_slot_ids=request['deferred_review_slot_ids'],
+            original_contexts_remain_required_unavailable=(
+                not official or request['context_declaration']['availability'] == 'required_unavailable'))
+""")
+replace("""    if _pins() != producer_pins:
+""","""    current_pins = _pins(official=True) if official else _pins()
+    if current_pins != producer_pins:
+""")
+replace("""    if _pins() != expected['manifest']['producer_pins']:
+""","""    official = bool(expected['records']) and (
+        expected['records'][0]['typed_response_group_record']['raw_source_assessment_record']['schema']
+        == source.OFFICIAL_GROUP_SCHEMA)
+    current_pins = _pins(official=True) if official else _pins()
+    if current_pins != expected['manifest']['producer_pins']:
+""")
+compile(code,"corpus_source_adjudication.py","exec")
+with Path("owner.after.DATA").open("x") as f:
+    f.write(code)

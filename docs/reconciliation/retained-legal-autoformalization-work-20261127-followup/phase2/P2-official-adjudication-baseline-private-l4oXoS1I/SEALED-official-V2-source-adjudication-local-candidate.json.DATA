@@ -1,0 +1,143 @@
+{
+  "candidate": {
+    "isolated_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-all-20261126-nsFFGMUO/datasets.git",
+    "oid": "8003780e1ac5a2dd86c1a8df4cab34874f6eb1ab",
+    "parent": "4de473b6f3aa5e3273d149f7677a43c690167c1d",
+    "ref": "refs/reconciliation/pending-official-source-adjudication-20261127",
+    "tree": "665fb382fb5c961c73639b3808646f1164f18e1d"
+  },
+  "exact_edits": {
+    "ipfs_datasets_py/logic/autoformal/corpus_source_adjudication.py": {
+      "after": {
+        "bytes": 34885,
+        "git_blob": "6b0a281866717d56a9cf793673c3c8d4f674b302",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/owner.after.DATA",
+        "sha256": "f98e5fd5e07942aeab7032d98378eed35b08fa263394e0b7bca9f2203f7eafb8"
+      },
+      "before": {
+        "bytes": 32429,
+        "git_blob": "41a44d2fc0bcb4f47d111c056d526493402880cc",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/owner.before.DATA",
+        "sha256": "0d658081521bc737ff17ec38f82d34122863b7b2b3094e8d1fabf4eef0caf2b9"
+      }
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/guides/corpus_source_review_responses.md": {
+      "after": {
+        "bytes": 10321,
+        "git_blob": "3e68282fd723e2a1a8dc02409f784c29ee8c6914",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/guide.after.DATA",
+        "sha256": "d229c70227d2f6c8e68e809576f6405d8baa4c05b5c7bd98a67682bfdc6c83dd"
+      },
+      "before": {
+        "bytes": 9688,
+        "git_blob": "d5970b6e5bf0fa5f93adde52b003850874b9037a",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/guide.before.DATA",
+        "sha256": "6da48c1efb992791375a7e88d388b6783ec0277d6cfe7a2550e9a2ee21c209d8"
+      }
+    },
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py": {
+      "after": {
+        "bytes": 79562,
+        "git_blob": "92255954ba6420db384ae19a8f70f09e5896b369",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/test.final.DATA",
+        "sha256": "56315c5e5ddd889aae739454b6006967783fdf76dde7f7ce35b0889e5aaa2e7d"
+      },
+      "before": {
+        "bytes": 69569,
+        "git_blob": "bc028c90d14268516e7c7845a761053419d180ec",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/test.before.DATA",
+        "sha256": "b9c47fab60a8089139e9c857bc82a541dc618991fad68938e652e6040c7dea4d"
+      }
+    }
+  },
+  "first_extra_control_diagnostic_assertion_failure": {
+    "bytes": 2477,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/green-additional/result.xml",
+    "sha256": "0b29a5ecb197e4f0deeed6d8d89dcc4686b5d770e5a82de25a16d7dc2f95e27b"
+  },
+  "forward": {
+    "bytes": 21016,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/adjudication.forward.patch.DATA",
+    "sha256": "e3a40496e896e725336dfa916f88b6bb93c41e27e13b6b7838c6edf392d4a2be"
+  },
+  "intake_source_qualification": {
+    "bytes": 3779,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/normal-local/actual-official-V2-and-legacy-Source-closed.json",
+    "sha256": "23fd9dbf4cc2ed2327c5d294f92e1ec320dcfcd9bfe6ac53884c64e43249e5db"
+  },
+  "inverse": {
+    "bytes": 21016,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/adjudication.inverse.patch.DATA",
+    "sha256": "588fd65aec3b57f4290e266c401727809491ebd35dcedff1fd0591d169736eb2"
+  },
+  "legacy_gate_original_two": {
+    "bytes": 3119,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/actual-official-v2-adjudication-two-public-entrypoints-red.json",
+    "sha256": "681b86b90796b775ec98becbfde0e4bbd1d4cc13eed9c1ae0c2b79c727849f43"
+  },
+  "same_four_fictional_after": {
+    "cases": 4,
+    "error": 0,
+    "failure": 0,
+    "junit": {
+      "bytes": 947,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/green-same-four/result.xml",
+      "sha256": "d984c1779e9eda48dedd1b750ba4a32e3d3d34df7ee75cd66ac9c3a43c10a8a7"
+    },
+    "names": [
+      "test_official_adjudication_declaration_binds_original_official_request",
+      "test_official_adjudication_replays_signed_typed_population_without_adjudicators",
+      "test_official_adjudication_authenticates_two_fresh_scoped_signers_without_application",
+      "test_official_adjudication_retains_regenerated_context_availability"
+    ],
+    "skipped": 0,
+    "terminal_returncode": 0
+  },
+  "same_four_fictional_before": {
+    "cases": 4,
+    "error": 0,
+    "failure": 4,
+    "junit": {
+      "bytes": 5734,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/red-same-four/result.xml",
+      "sha256": "db89afcf89d8f6b33e6834da4288b35282ee1f8226e0571b20ffa3ad471d830f"
+    },
+    "names": [
+      "test_official_adjudication_declaration_binds_original_official_request",
+      "test_official_adjudication_replays_signed_typed_population_without_adjudicators",
+      "test_official_adjudication_authenticates_two_fresh_scoped_signers_without_application",
+      "test_official_adjudication_retains_regenerated_context_availability"
+    ],
+    "skipped": 0,
+    "terminal_returncode": 1
+  },
+  "schema": "official-v2-adjudication-private-candidate/v1",
+  "seven_official_controls": {
+    "cases": 7,
+    "error": 0,
+    "failure": 0,
+    "junit": {
+      "bytes": 1607,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/green-final-seven/result.xml",
+      "sha256": "da7fe78e1e9cc71400b1a707f5ee46bd2e612ec49130a2de49cd51fc2e7d437c"
+    },
+    "names": [
+      "test_official_adjudication_declaration_binds_original_official_request",
+      "test_official_adjudication_replays_signed_typed_population_without_adjudicators",
+      "test_official_adjudication_authenticates_two_fresh_scoped_signers_without_application",
+      "test_official_adjudication_retains_regenerated_context_availability",
+      "test_official_adjudication_explicit_fictional_trust_keeps_meaning_unselected",
+      "test_official_adjudication_rejects_resealed_other_subject[legacy_subject-^record schema or CID scope differs$]",
+      "test_official_adjudication_rejects_resealed_other_subject[detached_subject_digest-exact official adjudication request, subject and source assessment required]"
+    ],
+    "skipped": 0,
+    "terminal_returncode": 0
+  },
+  "source_decisions_applied": false,
+  "source_fixture_paths": {
+    "bytes": 52330,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/current-input-epoch.json",
+    "sha256": "af711bd0268ea41331a5a093a2b97e705d6f6d56ab19d152f1bfcdfca0008a5f"
+  },
+  "source_legal_meaning_admitted": false
+}

@@ -1,0 +1,46 @@
+{
+  "actual_lease": {
+    "canonical_root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/checkout",
+    "cooperative": true,
+    "lock_path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/checkout/workspace/control-plane/source-leases/source.lock",
+    "mode": "read",
+    "schema_version": "autoencoder-source-lease/v1",
+    "waited_seconds": 7.729418575763702e-05
+  },
+  "all_source_pins_verified_before_and_after": true,
+  "collected": [
+    "tests/unit/logic/autoformal/test_corpus_source_review_packets.py::test_complete_packet_population_embeds_exact_unchanged_source_requests_and_origins",
+    "tests/unit/logic/autoformal/test_corpus_source_review_packets.py::test_every_quoted_occurrence_has_exact_full_view_unicode_and_utf8_geometry",
+    "tests/unit/logic/autoformal/test_corpus_source_review_packets.py::test_packet_prepare_and_validate_each_regenerate_original_source_preparation_once",
+    "tests/unit/logic/autoformal/test_corpus_source_review_packets.py::test_producer_drift_after_manifest_creation_refuses_the_complete_packet_return",
+    "tests/unit/logic/autoformal/test_corpus_source_review_packets.py::test_producer_drift_after_full_validator_comparison_refuses_consumption"
+  ],
+  "commit": "9b93d9ed54657ebeb611ec01527c0ab2ddd22e03",
+  "conftest_origins": [
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/checkout/conftest.py",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/checkout/tests/conftest.py",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/checkout/tests/unit/conftest.py"
+  ],
+  "elapsed_seconds": 39.996473832055926,
+  "error": 0,
+  "executed": [
+    "tests/unit/logic/autoformal/test_corpus_source_review_packets.py::test_complete_packet_population_embeds_exact_unchanged_source_requests_and_origins",
+    "tests/unit/logic/autoformal/test_corpus_source_review_packets.py::test_every_quoted_occurrence_has_exact_full_view_unicode_and_utf8_geometry",
+    "tests/unit/logic/autoformal/test_corpus_source_review_packets.py::test_packet_prepare_and_validate_each_regenerate_original_source_preparation_once",
+    "tests/unit/logic/autoformal/test_corpus_source_review_packets.py::test_producer_drift_after_manifest_creation_refuses_the_complete_packet_return",
+    "tests/unit/logic/autoformal/test_corpus_source_review_packets.py::test_producer_drift_after_full_validator_comparison_refuses_consumption"
+  ],
+  "execution_scope": "local software fixture",
+  "failure": 0,
+  "group": "legacy",
+  "junit": {
+    "bytes": 1150,
+    "cases": 5,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/legacy/result.xml",
+    "sha256": "d9ed880a8f25e9881df84ed3cd8ff66e25f65fb254d5a670ac5e9f9aa90f2d73"
+  },
+  "returncode": 0,
+  "same_collection_execution_xml": true,
+  "skipped": 0,
+  "source_read_closed": true
+}

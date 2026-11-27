@@ -1,0 +1,2078 @@
+{
+  "archived_candidates_adopted": false,
+  "exceptions": {},
+  "new_payload_bytes": 3657348,
+  "new_payload_count": 221,
+  "pending_title10": {
+    "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/title10/title10-official-review-packet.json.DATA",
+    "bytes": 196612,
+    "counts": {
+      "blank_active_answers": 36,
+      "comparison_evidence": 0,
+      "deferred_questions": 28,
+      "document_parts": 0,
+      "official_documents": 3,
+      "pages": 1,
+      "parent_unit_counts": [],
+      "parents": 0,
+      "recorded_reviews": 0,
+      "response_guides": 4,
+      "retained_questions": 64,
+      "selector_projections": 0,
+      "source_view_kinds": {
+        "official_extracted_view": 3
+      },
+      "source_views": 3,
+      "units": 4
+    },
+    "git_blob": "1788696424c5f04bafd3b9d8d738eba9a0ee0120",
+    "original_mode": "0o664",
+    "sha256": "da8c0ab1306f5b0617ff968b5963705b8d7d3e1553b796762de8742935f3a5f2"
+  },
+  "prior_Main_packet_readbacks": {
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/SEALED-private-Lean-outcome-backend-routing-two-file-proposal-v02-current-protocol.json": {
+      "bytes": 16570,
+      "published_path": "docs/reconciliation/retained-legal-autoformalization-work-20261126/main-work/Lean-outcome-backend-routing-private-v01/SEALED-private-Lean-outcome-backend-routing-two-file-proposal-v02-current-protocol.json.DATA",
+      "sha256": "66f37339b916a50f1c21e5c125fe43ba3810bc409d635b962ab1b7de17fd185f"
+    },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/SEALED-existing-Native3-custody-readback-correction-INERT-v01.json": {
+      "bytes": 12606,
+      "published_path": "docs/reconciliation/retained-legal-autoformalization-work-20261126/main-work/SEALED-existing-Native3-custody-readback-correction-INERT-v01.json.DATA",
+      "sha256": "037c872a4153ca43981bf8aae656fe4411de8e0d8137047e329812be0b1e40eb"
+    }
+  },
+  "prior_publication": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-official-v2-packets-current-Zs0jBQwr/publication-final.json",
+  "schema": "legal-autoformalization-retained-work-followup/v1",
+  "source_roots": {
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/LIR15-source-version-private-v01": "main/LIR15",
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01": "phase1/Main-depth-recovery",
+    "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/active-preflight-outcome-private-v01": "main/caller-preflight",
+    "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2": "phase1/namespaced-Native2",
+    "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ": "phase1/diagnostics",
+    "/tmp/P1-Lean-dependency-report-severity-private-x22djkzw": "phase1/severity",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics": "phase1/ordinary99",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp": "phase2/P2-official-application-baseline-private-aeZJmRfp",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-intake-red-z3mnOlRc": "phase2/P2-official-typed-response-intake-red-z3mnOlRc",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc": "phase2/P2-official-typed-response-owner-private-dlRQKWbc",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-tests-private-sElW4eXY": "phase2/P2-official-typed-response-tests-private-sElW4eXY",
+    "/tmp/phase2-official-v2-signed-adjudication-append-e849c2": "phase2/adjudication-fragments"
+  },
+  "sources": {
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/LIR15-source-version-private-v01/immutable-LIR15-current-owner-materialization-receipt-v01.json": {
+      "archive": "main/LIR15/immutable-LIR15-current-owner-materialization-receipt-v01.json.DATA",
+      "bytes": 1343,
+      "git_blob": "637bdca4cfec3a3758f8f4fb224895bd63230f07",
+      "original_mode": "0o400",
+      "sha256": "15e84eccd6afac9c99866635bb26d3192587278899c016c0ce768d00c2960338"
+    },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/LIR15-source-version-private-v01/legal_corpus_incremental.published-bda9f1fb.py.DATA": {
+      "bytes": 137040,
+      "git_blob": "e0d88cebe26ba6600db108ae39b5a7b039a71375",
+      "original_mode": "0o400",
+      "published": {
+        "path": "docs/reconciliation/retained-legal-autoformalization-work-20261126/phase-work/phase2-reviewed-v3-unit-dependencies-private-7b2zwvij/incremental.py.DATA.DATA",
+        "repo": "root"
+      },
+      "sha256": "680af4fab491c868f5dd90ddb205797559385809d046c760365daecd7eb584a1"
+    },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/LIR15-source-version-private-v01/seal_source_version_test_proposal.py": {
+      "archive": "main/LIR15/seal_source_version_test_proposal.py.DATA",
+      "bytes": 12176,
+      "git_blob": "89f95dc2ecd179c51517ffe6bbaeb8b0f37dddf8",
+      "original_mode": "0o664",
+      "sha256": "e717be54b8855e4571599647c0f22e3614a58c1cc445ee135eeb7c5ab9623f4e"
+    },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/LIR15-source-version-private-v01/sealed-existing-LIR15-source-edition-only-one-test-UNRUN-v01.json": {
+      "archive": "main/LIR15/sealed-existing-LIR15-source-edition-only-one-test-UNRUN-v01.json.DATA",
+      "bytes": 9807,
+      "git_blob": "1331a7090797dafa0ff7de9c492f0e22b8dd39b7",
+      "original_mode": "0o400",
+      "sha256": "81c12dc7656f40087815f2efffd7cb1316605d6d128b1452e637b045ad9ac4ba"
+    },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/LIR15-source-version-private-v01/source_version_only_incremental_test_fragment.py.DATA": {
+      "archive": "main/LIR15/source_version_only_incremental_test_fragment.py.DATA.DATA",
+      "bytes": 5555,
+      "git_blob": "24563adb8ff71c8c1edc89c12198eefa30c21c55",
+      "original_mode": "0o664",
+      "sha256": "412f3a930a40fdcb14fcccb8addd2fa403eb867d617816c0f3af085dd7afce10"
+    },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/LIR15-source-version-private-v01/static-prefix-roster-and-exact-inverse-proof-v01.json": {
+      "archive": "main/LIR15/static-prefix-roster-and-exact-inverse-proof-v01.json.DATA",
+      "bytes": 6963,
+      "git_blob": "8d950bd57865657c54c319cc7c1e331971ac0979",
+      "original_mode": "0o400",
+      "sha256": "3dcff030b997acc1e078b3971e96fc68257db88716b9fde47159382f04b4840a"
+    },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/LIR15-source-version-private-v01/test_legal_corpus_incremental.source-edition-only.after.py.DATA": {
+      "bytes": 193595,
+      "git_blob": "808b589a20a8a82fb26292813fbb62feae188ef6",
+      "original_mode": "0o400",
+      "published": {
+        "path": "docs/reconciliation/retained-legal-autoformalization-work-20261127/tmp-work/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/tests/unit/logic/autoformal/test_legal_corpus_incremental.py.DATA",
+        "repo": "root"
+      },
+      "sha256": "b9bf04fd80ada4c4f0194e0d2c8aea47cf43bfab925fed07c08d8b6a3de20a9e"
+    },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/LIR15-source-version-private-v01/test_legal_corpus_incremental.source-edition-only.forward.patch": {
+      "archive": "main/LIR15/test_legal_corpus_incremental.source-edition-only.forward.patch.DATA",
+      "bytes": 6001,
+      "git_blob": "688dd9d800163befe4d130dd155a6f5abf468c6c",
+      "original_mode": "0o400",
+      "sha256": "d918c5fb2377ddf1ba4e34092a3700a783268bf2196d8be018ad198e18c0f120"
+    },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/LIR15-source-version-private-v01/test_legal_corpus_incremental.source-edition-only.inverse.patch": {
+      "archive": "main/LIR15/test_legal_corpus_incremental.source-edition-only.inverse.patch.DATA",
+      "bytes": 6001,
+      "git_blob": "455290da5577076a8246c96af2a37f1dfb513f31",
+      "original_mode": "0o400",
+      "sha256": "19a92e3adc5591ca4965048ecf3151a94937b104066919315cb73d8f998ef017"
+    },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/owner-dependency-wait-private-v01/sealed-existing-owner-dependency-task-local-wait-two-file-private-v02.json": {
+      "archive": "main/CLI111/sealed-existing-owner-dependency-task-local-wait-two-file-private-v02.json.DATA",
+      "bytes": 15577,
+      "git_blob": "fc7bc0a8f0f443aec06919cd78c4ee6d3462d93a",
+      "original_mode": "0o400",
+      "sha256": "5ee7c95e1b688a881c10d1417943f5d6fc4fc9c9db152511e621555b1aa5d8ea"
+    },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/sealed-existing-CLI-manifest-handoff-recovery-two-file-private-v01.json": {
+      "archive": "main/CLI100/sealed-existing-CLI-manifest-handoff-recovery-two-file-private-v01.json.DATA",
+      "bytes": 12805,
+      "git_blob": "8c30e1f76233f3aa32c7773b69ea863b0e06a307",
+      "original_mode": "0o400",
+      "sha256": "a8d0d450e56472944891ed59cf4485f2c84a3c486d040d5d17b1c08fc4d20bdb"
+    },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/SEALED-private-existing-Lean-JSON-depth-recovery-two-file-v01.json": {
+      "archive": "phase1/Main-depth-recovery/SEALED-private-existing-Lean-JSON-depth-recovery-two-file-v01.json.DATA",
+      "bytes": 9410,
+      "git_blob": "63ce523d807ff6b6707d5d6d26ccc9fe9c479d32",
+      "original_mode": "0o400",
+      "sha256": "58543c307f928799fd9c2f44353e862b44c58b41ffeffd1b96d1268d60853693"
+    },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/actual-same6-parser-GREEN-v02.json": {
+      "archive": "phase1/Main-depth-recovery/actual-same6-parser-GREEN-v02.json.DATA",
+      "bytes": 2102,
+      "git_blob": "548b52f010756f64112cd603703c4a6b077123a6",
+      "original_mode": "0o400",
+      "sha256": "c6d1535741ed70464b6eb8c6019e50361ba7e8110612ebd7c4df04371bb2effd"
+    },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/actual-same6-parser-RED-v02.json": {
+      "bytes": 7449,
+      "git_blob": "0e481cce2048fbba10dcb5052c4e25e72350eeb6",
+      "original_mode": "0o400",
+      "published": {
+        "path": "docs/reconciliation/retained-legal-autoformalization-work-20261127/main-work/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/actual-same6-parser-RED-v02.json.DATA",
+        "repo": "root"
+      },
+      "sha256": "c4a461bc358f701e591d2c6436bfe9ce72e303f525e05007ca4f5f335b66d821"
+    },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/actual-same6-parser-RED.json": {
+      "bytes": 2623,
+      "git_blob": "c5e4473d047996cc7462a606240ad8f6087b5933",
+      "original_mode": "0o400",
+      "published": {
+        "path": "docs/reconciliation/retained-legal-autoformalization-work-20261127/main-work/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/actual-same6-parser-RED.json.DATA",
+        "repo": "root"
+      },
+      "sha256": "947e18e076af1e72dd4f73a503b268e4d0428c6718f53e13a102a94efaeaee61"
+    },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/immutable-published948-inputs.json": {
+      "archive": "phase1/Main-depth-recovery/immutable-published948-inputs.json.DATA",
+      "bytes": 1065,
+      "git_blob": "3021cd303b1ee33ae4756e2d3d6e52959f4bfc51",
+      "original_mode": "0o400",
+      "sha256": "89964ce13e6ebb4272258b6c915e282683e3d5bab9cc94a62d9e32433a1cb5ef"
+    },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/lean.after.py.DATA": {
+      "archive": "phase1/Main-depth-recovery/lean.after.py.DATA.DATA",
+      "bytes": 104465,
+      "git_blob": "e7812188bba9da231f18842178c1f6e9544e7b27",
+      "original_mode": "0o400",
+      "sha256": "d098cfe7e999b33f5bb1a674913d140228eaa6fe1bdae6abadacb0bf2f83bfab"
+    },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/lean.forward.diff": {
+      "archive": "phase1/Main-depth-recovery/lean.forward.diff.DATA",
+      "bytes": 704,
+      "git_blob": "193c821b6fce30b062692ea7e77eb3ee9c563168",
+      "original_mode": "0o400",
+      "sha256": "fee0c0d7f4409493791a1b1c882d8aaec108e4bc13c3b29c54978183403c409a"
+    },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/lean.inverse.diff": {
+      "archive": "phase1/Main-depth-recovery/lean.inverse.diff.DATA",
+      "bytes": 704,
+      "git_blob": "e52c70c9e47dc6eb41cb46420b4ea452d20153d0",
+      "original_mode": "0o400",
+      "sha256": "1f1221b40e6d7c866e81bcdc308eefe52725a13ad94bb5c7079d4a0e68bfe81a"
+    },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/lean.py.DATA": {
+      "bytes": 104341,
+      "git_blob": "7ee0cdb71958b052038fa467230dbf86dd0c3fb2",
+      "original_mode": "0o400",
+      "published": {
+        "path": "docs/reconciliation/retained-legal-autoformalization-work-20261127/tmp-work/P1-Guide571-Lean-routing-query-kind-native-composed-private-RXZkJ57d/lean.composed.py.DATA.DATA",
+        "repo": "root"
+      },
+      "sha256": "18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800"
+    },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/owning-test-append.UNRUN.py.DATA": {
+      "archive": "phase1/Main-depth-recovery/owning-test-append.UNRUN.py.DATA.DATA",
+      "bytes": 1849,
+      "git_blob": "c99c541e85ad165452433d782632a8f3e306cc65",
+      "original_mode": "0o400",
+      "sha256": "0241a0c2ddc06261e9da80ac8cf07be090e8400130a24fc09fcaf29d606ee961"
+    },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/same6-pure-parser-controls.py.DATA": {
+      "bytes": 1798,
+      "git_blob": "ca7039e5846e6ac8282ad1a4022ba3f6afbe46fd",
+      "original_mode": "0o400",
+      "published": {
+        "path": "docs/reconciliation/retained-legal-autoformalization-work-20261127/main-work/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/same6-pure-parser-controls.py.DATA.DATA",
+        "repo": "root"
+      },
+      "sha256": "d7909dc9b22b47d010861fe56810272a4250c25751a5fec08c156d1889a4d36d"
+    },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/same6-pure-parser-controls.v02.py.DATA": {
+      "bytes": 1818,
+      "git_blob": "27bf026437a935cdbf1db3f3d0ff8b076d5ff53a",
+      "original_mode": "0o400",
+      "published": {
+        "path": "docs/reconciliation/retained-legal-autoformalization-work-20261127/main-work/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/same6-pure-parser-controls.v02.py.DATA.DATA",
+        "repo": "root"
+      },
+      "sha256": "ae759ad20b56b3d48363f5c18c008377c29c92ad3b4c92dd8a644d70c2a7c033"
+    },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/test_kernel_backends.after.py.DATA": {
+      "archive": "phase1/Main-depth-recovery/test_kernel_backends.after.py.DATA.DATA",
+      "bytes": 129940,
+      "git_blob": "cd75d1d2c9c62eede5515ebf1de80a017455cd4d",
+      "original_mode": "0o400",
+      "sha256": "848debae4851f0ab68e6f3f7cd1790d30a09f54bd4adc5397b2f827ca40426be"
+    },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/test_kernel_backends.forward.diff": {
+      "archive": "phase1/Main-depth-recovery/test_kernel_backends.forward.diff.DATA",
+      "bytes": 2142,
+      "git_blob": "a087de8a0c69f06e98ddda7023e2924f93418de7",
+      "original_mode": "0o400",
+      "sha256": "fda472e28085284e5b522f597c3bad39e19e871af06558763dd60b7a0cc99350"
+    },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/test_kernel_backends.inverse.diff": {
+      "archive": "phase1/Main-depth-recovery/test_kernel_backends.inverse.diff.DATA",
+      "bytes": 2142,
+      "git_blob": "5c291aac308d46c29ebce0994c53e2af7827d4e0",
+      "original_mode": "0o400",
+      "sha256": "430dbdd114a06762def55eb94fcd16553f5a2a4c7ffe0a615532829d49dd56b6"
+    },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/test_kernel_backends.py.DATA": {
+      "bytes": 128091,
+      "git_blob": "a05d6360be0fcf61a75861c5f0ac8cd63a9d3533",
+      "original_mode": "0o400",
+      "published": {
+        "path": "docs/reconciliation/retained-legal-autoformalization-work-20261127/tmp-work/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/test_kernel_backends.py.before.DATA.DATA",
+        "repo": "root"
+      },
+      "sha256": "b706ba0dddc5795055be378d8393c831e65fb7fbaf73a574fcee51227d3676b5"
+    },
+    "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/active-preflight-outcome-private-v01/active-preflight-outcome.forward.diff": {
+      "archive": "main/caller-preflight/active-preflight-outcome.forward.diff.DATA",
+      "bytes": 1615,
+      "git_blob": "d87ee621d2affa4bf0cfc844c3bc273f856553b6",
+      "original_mode": "0o400",
+      "sha256": "0854c43f77ad10a47b8911d684d14d842d674e2b85a485e8c887cc4c8b175989"
+    },
+    "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/active-preflight-outcome-private-v01/active-preflight-outcome.inverse.diff": {
+      "archive": "main/caller-preflight/active-preflight-outcome.inverse.diff.DATA",
+      "bytes": 1615,
+      "git_blob": "9181357cb10a272df6b566df34dca9e00982debd",
+      "original_mode": "0o400",
+      "sha256": "c44cc21366ebf0457af1ec1aedcd21ce7559b5920ec87efb0b2b2a72f30543ae"
+    },
+    "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/active-preflight-outcome-private-v01/actual-same28-active-preflight-GREEN-v02.json": {
+      "archive": "main/caller-preflight/actual-same28-active-preflight-GREEN-v02.json.DATA",
+      "bytes": 6762,
+      "git_blob": "1df22278a7882f716e909bd3934d83ef004c91a2",
+      "original_mode": "0o400",
+      "sha256": "ca6ba8ba991991b21d4c8c36708f52c16b3db8094cffc3c2d5d0935087313263"
+    },
+    "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/active-preflight-outcome-private-v01/actual-same28-active-preflight-RED-v01.json": {
+      "archive": "main/caller-preflight/actual-same28-active-preflight-RED-v01.json.DATA",
+      "bytes": 14414,
+      "git_blob": "06a7d6fc256f81d19288f74d444a10187ca55346",
+      "original_mode": "0o400",
+      "sha256": "f7ba3e4f921ba7d0566d10674274afe9b9423896c3ef9325c7f297fe36c85721"
+    },
+    "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/active-preflight-outcome-private-v01/invoke-existing-durable-handoff.active-preflight-outcome.after-v02.py.DATA": {
+      "archive": "main/caller-preflight/invoke-existing-durable-handoff.active-preflight-outcome.after-v02.py.DATA.DATA",
+      "bytes": 19910,
+      "git_blob": "632fbc0515e436cabfd2f1b01d509a4caa76d21b",
+      "original_mode": "0o400",
+      "sha256": "343f7a442df0e0cbd5d04e6a28d1f355e177e44c753a3fb614339df7922a1701"
+    },
+    "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/active-preflight-outcome-private-v01/sealed-existing-caller-active-preflight-durable-outcome-successor-v02.json": {
+      "archive": "main/caller-preflight/sealed-existing-caller-active-preflight-durable-outcome-successor-v02.json.DATA",
+      "bytes": 8009,
+      "git_blob": "0d39174b75c1fb3f320ea09605f60cd2880f32ba",
+      "original_mode": "0o400",
+      "sha256": "06bafb42b7bdd18a9417227d48a4fd6f98b5d110f153d793faa064f14c65139c"
+    },
+    "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/active-preflight-outcome-private-v01/test_existing_caller_active_preflight_outcome28.py.DATA": {
+      "archive": "main/caller-preflight/test_existing_caller_active_preflight_outcome28.py.DATA.DATA",
+      "bytes": 26427,
+      "git_blob": "060e5e7def66faea5d12d041bc0a6f9c80e2d28b",
+      "original_mode": "0o400",
+      "sha256": "20a92456b82751676ba685f532de778f2b52ef08b60122e5296d4e68af3da10a"
+    },
+    "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/READY-existing-namespaced-Native2-lean-json-INERT.json": {
+      "archive": "phase1/namespaced-Native2/READY-existing-namespaced-Native2-lean-json-INERT.json.DATA",
+      "bytes": 3757,
+      "git_blob": "889fcd887b88fb7417b3f4427fef1e2ba374dd38",
+      "original_mode": "0o400",
+      "sha256": "3f7662071085e15f6440b252f7402f4c1a5997cded77d6b14bce0bbb3908122c"
+    },
+    "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/binder.forward.diff": {
+      "archive": "phase1/namespaced-Native2/binder.forward.diff.DATA",
+      "bytes": 685,
+      "git_blob": "98c1ecf50548db07d2833e8a9366115e4e103a14",
+      "original_mode": "0o400",
+      "sha256": "28d1b317962f0679c06b9292f3c344c42f77819a144a7ba2b9309a8b334a7645"
+    },
+    "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/binder.inverse.diff": {
+      "archive": "phase1/namespaced-Native2/binder.inverse.diff.DATA",
+      "bytes": 685,
+      "git_blob": "7b1171ae664da04546d57446635b1892b291111e",
+      "original_mode": "0o400",
+      "sha256": "69ea11299b7de6efb3410063387c36f1524e44a1c78cd2b672349ccf201a2d48"
+    },
+    "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/existing-namespaced-native2-binder.INERT.py.DATA": {
+      "archive": "phase1/namespaced-Native2/existing-namespaced-native2-binder.INERT.py.DATA.DATA",
+      "bytes": 5314,
+      "git_blob": "8fc29c6e85852e20375672aa0e679f65ab60ffbb",
+      "original_mode": "0o400",
+      "sha256": "6c692f2b88eeaa8a7a1c33825f2df6638d4cd4178f34f5a2e1e0c061d8350650"
+    },
+    "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/existing-namespaced-native2-operator.INERT.py.DATA": {
+      "archive": "phase1/namespaced-Native2/existing-namespaced-native2-operator.INERT.py.DATA.DATA",
+      "bytes": 43793,
+      "git_blob": "eca9c6c599e753f6515e6f33ebca39c885565f40",
+      "original_mode": "0o400",
+      "sha256": "9230c2c8b9d10b88d90942999bf8944a45fe6d57c1c6b13d178b3b5a38258d41"
+    },
+    "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/operator.forward.diff": {
+      "archive": "phase1/namespaced-Native2/operator.forward.diff.DATA",
+      "bytes": 2255,
+      "git_blob": "286ef8ef0233cf6275deaed61a994d6f2be584bb",
+      "original_mode": "0o400",
+      "sha256": "da5eed7aceb8eb4484b05e0b513416c710a26a3616a7e9961336c3554e22b0b7"
+    },
+    "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/operator.inverse.diff": {
+      "archive": "phase1/namespaced-Native2/operator.inverse.diff.DATA",
+      "bytes": 2255,
+      "git_blob": "8918316a75902931be6c3bbd6ab79973600b0674",
+      "original_mode": "0o400",
+      "sha256": "71c8c61d7e095964ce6d3100588c33fff9ad6d27d168143ce8126883f96fdabd"
+    },
+    "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/root-current-native2-inputs.INERT.json": {
+      "archive": "phase1/namespaced-Native2/root-current-native2-inputs.INERT.json.DATA",
+      "bytes": 223,
+      "git_blob": "94f54390a8a0b88a10cad540157e0f092177e870",
+      "original_mode": "0o400",
+      "sha256": "4f3129756d99b1c455cd6267a36d0f634252ffb94b30eb72a074eda84fdcfa1a"
+    },
+    "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/root-observed-live-base.INERT.json": {
+      "archive": "phase1/namespaced-Native2/root-observed-live-base.INERT.json.DATA",
+      "bytes": 356,
+      "git_blob": "c616dbce7919229732c34f35248282d15ed67b0d",
+      "original_mode": "0o400",
+      "sha256": "15b7c7c133a8e51aee8ed6173dcaed9cb8ff40f98cf47db068114e2b9c9cbf3a"
+    },
+    "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/select-existing-namespaced-native2.INERT.py.DATA": {
+      "archive": "phase1/namespaced-Native2/select-existing-namespaced-native2.INERT.py.DATA.DATA",
+      "bytes": 17473,
+      "git_blob": "b87fda7b814ca751cb7af6f49fdade857e472acf",
+      "original_mode": "0o400",
+      "sha256": "5a9681d0956865124b1ae3caea2cf8fa33c100517269aa444972cd5f065bbd4b"
+    },
+    "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/static-namespaced-native2-repin.json": {
+      "archive": "phase1/namespaced-Native2/static-namespaced-native2-repin.json.DATA",
+      "bytes": 7679,
+      "git_blob": "fb8340d9ab95c3f17c23b8cc35fedaa836cd0692",
+      "original_mode": "0o400",
+      "sha256": "eda4baba8ba4fc7c34291e754205e29aff6b2006d4fa7d63db8269e1abb23db5"
+    },
+    "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/verify-retained-namespaced-native2.INERT.py.DATA": {
+      "archive": "phase1/namespaced-Native2/verify-retained-namespaced-native2.INERT.py.DATA.DATA",
+      "bytes": 8986,
+      "git_blob": "358d9ecba40db1441764f5a5267452e823c985a3",
+      "original_mode": "0o400",
+      "sha256": "01937f81b71480e4d0c18ab38ae6d18e8a3d590f4baf3dde02d51ab32781ee89"
+    },
+    "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/GREEN-actual-guarded-99.json": {
+      "archive": "phase1/diagnostics/GREEN-actual-guarded-99.json.DATA",
+      "bytes": 1275,
+      "git_blob": "e7c3ea15cf9f31232d5636035ee18a272a30bad3",
+      "original_mode": "0o400",
+      "sha256": "6d46bc07b8d49a73e6e4c572c762bfb47e4f0686a5917c810ea7de8d4c062489"
+    },
+    "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/Guide580-immutable-220-role-record.json": {
+      "archive": "phase1/diagnostics/Guide580-immutable-220-role-record.json.DATA",
+      "bytes": 60058,
+      "git_blob": "5b87a89c583f5036487f0d45082e26e09ff95344",
+      "original_mode": "0o400",
+      "sha256": "f19277c840793f9594beef98f9b9d2f9dd4885cb78bdd4ddbbe0962cf6a4b284"
+    },
+    "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/RED-actual-guarded-99.json": {
+      "archive": "phase1/diagnostics/RED-actual-guarded-99.json.DATA",
+      "bytes": 1698,
+      "git_blob": "8d4b06b83f751613a6d53cde2d24eac8018e0ce4",
+      "original_mode": "0o400",
+      "sha256": "efda547e275ae7957b3caffabc4c9c959e6a64888fc7e7a7391d66447ce2b195"
+    },
+    "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/SEALED-private-Lean-diagnostics-current-Guide580-exact-two-same99.json": {
+      "archive": "phase1/diagnostics/SEALED-private-Lean-diagnostics-current-Guide580-exact-two-same99.json.DATA",
+      "bytes": 32086,
+      "git_blob": "e7f409f8a8c6adfdbbf825234d430084931ba1dc",
+      "original_mode": "0o400",
+      "sha256": "5cfa2809fbfc2c204e9fd28da81a21cf125f8fbd1537bee75a1bc3d67ccd28d1"
+    },
+    "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/exact-Guide580-99-private-inputs.json": {
+      "archive": "phase1/diagnostics/exact-Guide580-99-private-inputs.json.DATA",
+      "bytes": 12957,
+      "git_blob": "25a9c98b320d6fa0f7abbb56cf4b030d598d6f27",
+      "original_mode": "0o400",
+      "sha256": "7420488411feca17f5cf166019d86040bd6efdf5923ee94fb74c1a3077590d0a"
+    },
+    "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/exact-two.forward.patch": {
+      "archive": "phase1/diagnostics/exact-two.forward.patch.DATA",
+      "bytes": 4130,
+      "git_blob": "b592a59e6141eced5854083de04713b682e84f3e",
+      "original_mode": "0o400",
+      "sha256": "f0c2d50d08bd00e3b59f809e02c582f189ced61b1914186250947e855ade4a8d"
+    },
+    "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/exact-two.inverse.patch": {
+      "archive": "phase1/diagnostics/exact-two.inverse.patch.DATA",
+      "bytes": 4130,
+      "git_blob": "abf1bdcbbdd355ccf4d6a83216c2f054139784ba",
+      "original_mode": "0o400",
+      "sha256": "9376416c6bffa7bddc2c9ea01083e96ee478c21d43fac0bab2d1d423bbb0fd48"
+    },
+    "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/existing-private-runner-twenty-four-selectors.py.DATA": {
+      "archive": "phase1/diagnostics/existing-private-runner-twenty-four-selectors.py.DATA.DATA",
+      "bytes": 2734,
+      "git_blob": "960690f2fca1b59086c9312858000d2443552509",
+      "original_mode": "0o400",
+      "sha256": "a296ea4d20affa013c38452078c2fc6fa0f5913ab3f338e8a6ebf27288cfbc06"
+    },
+    "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/green-termination.json": {
+      "archive": "phase1/diagnostics/green-termination.json.DATA",
+      "bytes": 4217,
+      "git_blob": "bd4564ff2870ffdc49ac3638adb19914fb91ff2e",
+      "original_mode": "0o400",
+      "sha256": "ca943daf07befaba17f8a62e4112e7c593b6474a0d19cbc645b5ded0b212052c"
+    },
+    "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/green/result.xml": {
+      "archive": "phase1/diagnostics/green/result.xml.DATA",
+      "bytes": 18619,
+      "git_blob": "9c901b1bc448bf9fd65a29d677f4448cf5a7ce25",
+      "original_mode": "0o664",
+      "sha256": "b761783dbf1a5e99ef140a65ba8111cbf0378cc409414011e5891e91d7ac77c9"
+    },
+    "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/lean.py.after.DATA": {
+      "archive": "phase1/diagnostics/lean.py.after.DATA.DATA",
+      "bytes": 104465,
+      "git_blob": "97c7e2b760f7775de3aae312557a8eccc82437ba",
+      "original_mode": "0o400",
+      "sha256": "de99fe31f53fb34bf247e5c24b4b1424ca06874f1da5dc8875b3dbf886d1e4cb"
+    },
+    "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/lean.py.before.DATA": {
+      "bytes": 104341,
+      "git_blob": "7ee0cdb71958b052038fa467230dbf86dd0c3fb2",
+      "original_mode": "0o400",
+      "published": {
+        "path": "docs/reconciliation/retained-legal-autoformalization-work-20261127/tmp-work/P1-Guide571-Lean-routing-query-kind-native-composed-private-RXZkJ57d/lean.composed.py.DATA.DATA",
+        "repo": "root"
+      },
+      "sha256": "18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800"
+    },
+    "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/prepare.py": {
+      "archive": "phase1/diagnostics/prepare.py.DATA",
+      "bytes": 7351,
+      "git_blob": "75a0bb4f6f270b433b1fade0694e6194c53b763c",
+      "original_mode": "0o664",
+      "sha256": "1d181c2fa1eb189b0cf14fba85fc8c8139adb6560d582bc8b832ce1e659a94e6"
+    },
+    "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/qualify.py": {
+      "archive": "phase1/diagnostics/qualify.py.DATA",
+      "bytes": 7330,
+      "git_blob": "f78c04b4797456994e196bfd76104163adc7bd5a",
+      "original_mode": "0o664",
+      "sha256": "f4f773661a11f968c7f27c03e661776312baa85a38bc278b4042572f842041ef"
+    },
+    "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/red-private-project-220-role-record.json": {
+      "archive": "phase1/diagnostics/red-private-project-220-role-record.json.DATA",
+      "bytes": 73070,
+      "git_blob": "6a29e287b43c4805a6da25728b311129144e06c1",
+      "original_mode": "0o400",
+      "sha256": "3080b936bc2fee5961c626b5bcf4a3d427339ff60010f20bfb37f15fedb105b3"
+    },
+    "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/red-termination.json": {
+      "archive": "phase1/diagnostics/red-termination.json.DATA",
+      "bytes": 4212,
+      "git_blob": "21c7dce68d6dc9555bbda149994da6e7b0d6bfa2",
+      "original_mode": "0o400",
+      "sha256": "6b167cea9a40ddedcc7691ab5fec2fe5d7b69c3d9cb14176c84aa356a26ea806"
+    },
+    "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/red/result.xml": {
+      "archive": "phase1/diagnostics/red/result.xml.DATA",
+      "bytes": 24117,
+      "git_blob": "079c140b7096b2fed91a22be997603b5a2ae5640",
+      "original_mode": "0o664",
+      "sha256": "09899979ed1987ddf29e7adac690d7296ff21313552a43a26476131e7f7fed75"
+    },
+    "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/test_kernel_backends.py.after.DATA": {
+      "archive": "phase1/diagnostics/test_kernel_backends.py.after.DATA.DATA",
+      "bytes": 130553,
+      "git_blob": "6568d9404adbe1a8439829321ade7588a150969e",
+      "original_mode": "0o400",
+      "sha256": "8bca876c855d44df4d48cb909fc6a0e9a007480d61037831536e84a8cc68adf9"
+    },
+    "/tmp/P1-Lean-current580-diagnostics-guarded-private-jnBwI2TZ/test_kernel_backends.py.before.DATA": {
+      "bytes": 128091,
+      "git_blob": "20f612f6c6a241804cdf71b09dc9a0a4f0c2e923",
+      "original_mode": "0o400",
+      "published": {
+        "path": "docs/reconciliation/retained-legal-autoformalization-work-20261127/tmp-work/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/test_kernel_backends.py.after.DATA.DATA",
+        "repo": "root"
+      },
+      "sha256": "eac1d213b16ff2ef79f18269352648768d4e145b2b65fbb8c75c308bced98ea2"
+    },
+    "/tmp/P1-Lean-dependency-report-severity-private-x22djkzw/lean-report-severity.forward.diff": {
+      "archive": "phase1/severity/lean-report-severity.forward.diff.DATA",
+      "bytes": 613,
+      "git_blob": "75349275c919d444402afb1304c1fdb5232792c7",
+      "original_mode": "0o664",
+      "sha256": "80ee60eec25d22214619b65ff80479770c8d4debac6eb51d3f16c7548c61ea0f"
+    },
+    "/tmp/P1-Lean-dependency-report-severity-private-x22djkzw/lean.after-nested-json-and-severity.py.DATA": {
+      "archive": "phase1/diagnostics/lean.py.after.DATA.DATA",
+      "bytes": 104465,
+      "git_blob": "97c7e2b760f7775de3aae312557a8eccc82437ba",
+      "original_mode": "0o664",
+      "sha256": "de99fe31f53fb34bf247e5c24b4b1424ca06874f1da5dc8875b3dbf886d1e4cb"
+    },
+    "/tmp/P1-Lean-dependency-report-severity-private-x22djkzw/local-exact-evaluator-ToolRunResult-before-after.json": {
+      "archive": "phase1/severity/local-exact-evaluator-ToolRunResult-before-after.json.DATA",
+      "bytes": 2149,
+      "git_blob": "fe77432f49c5537cb4a98f70fe98a399679fc50c",
+      "original_mode": "0o664",
+      "sha256": "8a3264c68937b89e181fb463e488c008b49430af197321f0b02ef727ac71e427"
+    },
+    "/tmp/P1-Lean-dependency-report-severity-private-x22djkzw/local-stdlib-exact-ast-severity-delta.json": {
+      "archive": "phase1/severity/local-stdlib-exact-ast-severity-delta.json.DATA",
+      "bytes": 1058,
+      "git_blob": "0264235c89d6904b852a1370a8e311d4fa8d330f",
+      "original_mode": "0o664",
+      "sha256": "a2199faa08437b50ee1d3f92eef1a315394c6b4a9376c50d1ad1844b50120a93"
+    },
+    "/tmp/P1-Lean-dependency-report-severity-private-x22djkzw/test_lean_report_severity.append.py.DATA": {
+      "archive": "phase1/severity/test_lean_report_severity.append.py.DATA.DATA",
+      "bytes": 613,
+      "git_blob": "c8171de8baa1d43c08e0e4c695e264e4e392fb13",
+      "original_mode": "0o664",
+      "sha256": "90d6f5a5cb88c46a5d895d1bbd621b0fec7532654084d29523a6f1d4e35eda07"
+    },
+    "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/READY-P1-existing-ordinary99-controls-INERT.json": {
+      "archive": "phase1/ordinary99/READY-P1-existing-ordinary99-controls-INERT.json.DATA",
+      "bytes": 16781,
+      "git_blob": "803ae9aebc41369f8fab99234d266e2b830db65e",
+      "original_mode": "0o400",
+      "sha256": "a10401245bb5ad6c26a84979d7ea62e509eaff917ef2d0bcc30981002ec01241"
+    },
+    "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-current-main-fast-forward-V2-independent-base.json": {
+      "archive": "phase1/ordinary99/actual-current-main-fast-forward-V2-independent-base.json.DATA",
+      "bytes": 2676,
+      "git_blob": "11a5ea7d79e6ecb0038d92a54d568b0ffad5f1c1",
+      "original_mode": "0o400",
+      "sha256": "b617595aa001310279a4f84ce4c23fa60512c4cd972112f93bb1e72f304713a2"
+    },
+    "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/capture-lean-json-diagnostics.py": {
+      "archive": "phase1/ordinary99/capture-lean-json-diagnostics.py.DATA",
+      "bytes": 7341,
+      "git_blob": "4810703a46b49305009ef33e31d216dfdacc254a",
+      "original_mode": "0o664",
+      "sha256": "a77b41e9a98dd4d9b061df52cca331e07150b6005d7904a4636cf9dd73ba2553"
+    },
+    "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/capture-main-observation.py": {
+      "archive": "phase1/ordinary99/capture-main-observation.py.DATA",
+      "bytes": 3130,
+      "git_blob": "9b669a34746a41a186570f38d5e959ebe90c9abc",
+      "original_mode": "0o664",
+      "sha256": "003ca00c9b77687583795242cb4dbd816580df56f3999b635689d7e0c2a5e10d"
+    },
+    "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/exact-24-function-selectors.json": {
+      "archive": "phase1/ordinary99/exact-24-function-selectors.json.DATA",
+      "bytes": 3035,
+      "git_blob": "49af0c336ef74c3d8d07a50268e9702d339638d0",
+      "original_mode": "0o400",
+      "sha256": "6189515405e67937748cd5ad6e5e641eda1b993b7d99dfbbb7312d86cb088d22"
+    },
+    "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/exact-99-case-roster.json": {
+      "archive": "phase1/ordinary99/exact-99-case-roster.json.DATA",
+      "bytes": 14816,
+      "git_blob": "115e33ec070bac3dedef85d8a76676b6d72e3014",
+      "original_mode": "0o400",
+      "sha256": "960eb03ad1af212ba93b0d9ea8b3de6e3db2dedca12f46d98a8023f3743a3732"
+    },
+    "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/existing-ordinary99-bootstrap.INERT.py.DATA": {
+      "archive": "phase1/ordinary99/existing-ordinary99-bootstrap.INERT.py.DATA.DATA",
+      "bytes": 39443,
+      "git_blob": "264db2a741714fd1d30540f49c9ed3ddc95f44b5",
+      "original_mode": "0o400",
+      "sha256": "1ee6cdbf8abb5961b51ecd09c37dc42008eda8f8c4c6f2853ad5f4d6b449b5ce"
+    },
+    "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/existing-ordinary99-factory.INERT.py.DATA": {
+      "archive": "phase1/ordinary99/existing-ordinary99-factory.INERT.py.DATA.DATA",
+      "bytes": 3100,
+      "git_blob": "6769522c7d57553e103eaf7fef4963450e1feef2",
+      "original_mode": "0o400",
+      "sha256": "3ae9f868b6a902816c38ac121939844d400348a9964e6dfbbcc290953e0ae5ee"
+    },
+    "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/existing-ordinary99-operator.INERT.py.DATA": {
+      "archive": "phase1/ordinary99/existing-ordinary99-operator.INERT.py.DATA.DATA",
+      "bytes": 56082,
+      "git_blob": "f32f19d385f50a45794f74cd98cc3ebe7b0a5394",
+      "original_mode": "0o400",
+      "sha256": "2875cdac9843dc396d96bb5ef1d381e77328537781837b99cd1cee5fdb87cebf"
+    },
+    "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/freeze-lean-json-diagnostics.py": {
+      "archive": "phase1/ordinary99/freeze-lean-json-diagnostics.py.DATA",
+      "bytes": 10069,
+      "git_blob": "a4e7669737fcc1c309d56b7fbfdcda8dad9cf0b8",
+      "original_mode": "0o664",
+      "sha256": "40a5228840296863253ec492bdb99c2516c82a636a2efa62338501e835a652ca"
+    },
+    "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/materialize-live-ordinary99.py.DATA": {
+      "archive": "phase1/ordinary99/materialize-live-ordinary99.py.DATA.DATA",
+      "bytes": 13166,
+      "git_blob": "bfe33950b255e3ce9af5582b0a5675109fdd31dc",
+      "original_mode": "0o664",
+      "sha256": "4bb10426323315b08672450f65ff8703f249e23de167d615218ea9d881001b04"
+    },
+    "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/materialize-live-ordinary99.v02.py.DATA": {
+      "archive": "phase1/ordinary99/materialize-live-ordinary99.v02.py.DATA.DATA",
+      "bytes": 14374,
+      "git_blob": "53877185a73d7d231878a468708620081f4aaf77",
+      "original_mode": "0o664",
+      "sha256": "da5a25b0cf045b1bb20d05ed8d22046bcb14beb492dfb2114eb4ed40485ecd0c"
+    },
+    "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/ordinary99-expected-test-owner-after.DATA": {
+      "archive": "phase1/diagnostics/test_kernel_backends.py.after.DATA.DATA",
+      "bytes": 130553,
+      "git_blob": "6568d9404adbe1a8439829321ade7588a150969e",
+      "original_mode": "0o400",
+      "sha256": "8bca876c855d44df4d48cb909fc6a0e9a007480d61037831536e84a8cc68adf9"
+    },
+    "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/prepare-ordinary99.py.DATA": {
+      "archive": "phase1/ordinary99/prepare-ordinary99.py.DATA.DATA",
+      "bytes": 12884,
+      "git_blob": "52087f8ea5a2203524b24474ab8d9344798fa0dd",
+      "original_mode": "0o664",
+      "sha256": "5cd461aea172d81732f3ed57ca693e9f597e1eea45e8e44838bed8bf718c968d"
+    },
+    "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/select-live-ordinary99.py.DATA": {
+      "archive": "phase1/ordinary99/select-live-ordinary99.py.DATA.DATA",
+      "bytes": 14204,
+      "git_blob": "cfd08fcaa6c30c2c63b099dae1932b97612e75b6",
+      "original_mode": "0o664",
+      "sha256": "01b0ca34b813412641b41fb83d1ef036ea3c8ed014ac03a100600b52c9d3e895"
+    },
+    "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/select-live-ordinary99.v02.py.DATA": {
+      "archive": "phase1/ordinary99/select-live-ordinary99.v02.py.DATA.DATA",
+      "bytes": 14706,
+      "git_blob": "87a297b08ae516fe8fab4e1285098c7f5f863368",
+      "original_mode": "0o664",
+      "sha256": "a4304af9b19d2dbdb46669b8ef240bf06b0dcac84d24c46da1645652bfdad2e8"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/SEALED-official-V2-source-adjudication-local-candidate.json": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/SEALED-official-V2-source-adjudication-local-candidate.json.DATA",
+      "bytes": 8693,
+      "git_blob": "80f0214d724aed56ed19e9fa47d502376be47f58",
+      "original_mode": "0o400",
+      "sha256": "4a30b4dccae9d54d076de114cb2a9c72264dc199ad3f9a1950f7b89f556347c2"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/actual-official-v2-adjudication-two-public-entrypoints-red.json": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/actual-official-v2-adjudication-two-public-entrypoints-red.json.DATA",
+      "bytes": 3119,
+      "git_blob": "0de7e08bdb0d3ed09ba201435d5e540e00969f4b",
+      "original_mode": "0o400",
+      "sha256": "681b86b90796b775ec98becbfde0e4bbd1d4cc13eed9c1ae0c2b79c727849f43"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/additional-official-controls.py.fragment": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/additional-official-controls.py.fragment.DATA",
+      "bytes": 2179,
+      "git_blob": "5eed62fbd442fd9914673698dc29ec13699a3f07",
+      "original_mode": "0o664",
+      "sha256": "3945d8763d1dfdd2f055ca7d517ac11b855ae723890a9bfa55fb398b44e4dd50"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/additional-official-controls.v02.py.fragment": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/additional-official-controls.v02.py.fragment.DATA",
+      "bytes": 2169,
+      "git_blob": "ea22c78071f2c3dfcb0148cc3bc54ddd0fb797e9",
+      "original_mode": "0o664",
+      "sha256": "ed07e5fdb68496869e005b010bcdaa34f86a9cf7f81e3abea3b9258a24832d6f"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/additional.selectors": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/additional.selectors.DATA",
+      "bytes": 263,
+      "git_blob": "3d06a3ff04eaf678d1770410789757282975cf9f",
+      "original_mode": "0o664",
+      "sha256": "3692f373f026f52212e8d5648a3c573ff2d629d9c2fba145c69db10c3ac4d43d"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/adjudication.forward.patch.DATA": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/adjudication.forward.patch.DATA.DATA",
+      "bytes": 21016,
+      "git_blob": "d67b231fc09b5bf411310acf75f584b34415a56c",
+      "original_mode": "0o664",
+      "sha256": "e3a40496e896e725336dfa916f88b6bb93c41e27e13b6b7838c6edf392d4a2be"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/adjudication.inverse.patch.DATA": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/adjudication.inverse.patch.DATA.DATA",
+      "bytes": 21016,
+      "git_blob": "d370dcf83a088d155a1fe18aad463d21ef9f3a33",
+      "original_mode": "0o664",
+      "sha256": "588fd65aec3b57f4290e266c401727809491ebd35dcedff1fd0591d169736eb2"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/current-input-epoch.json": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/current-input-epoch.json.DATA",
+      "bytes": 52330,
+      "git_blob": "d488000737e7f2574a16667f0accc611faf6e620",
+      "original_mode": "0o664",
+      "sha256": "af711bd0268ea41331a5a093a2b97e705d6f6d56ab19d152f1bfcdfca0008a5f"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/existing-runner.py.DATA": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/existing-runner.py.DATA.DATA",
+      "bytes": 2723,
+      "git_blob": "0f1cfe52bde94289d2f5e9a9dd0844ca7ea6afa3",
+      "original_mode": "0o664",
+      "sha256": "30ceaca74e2a73ea3fdeaf6882bcba5fe76ce6ca9bbd748b311ba12bcf4069fd"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/green-additional/result.xml": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/green-additional/result.xml.DATA",
+      "bytes": 2477,
+      "git_blob": "cfa486b0b2bf2c5ff2a9a5074bed564eb104bbea",
+      "original_mode": "0o664",
+      "sha256": "0b29a5ecb197e4f0deeed6d8d89dcc4686b5d770e5a82de25a16d7dc2f95e27b"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/green-final-seven/result.xml": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/green-final-seven/result.xml.DATA",
+      "bytes": 1607,
+      "git_blob": "b4bd8521788979514abb644378a00e5e84ab5459",
+      "original_mode": "0o664",
+      "sha256": "da7fe78e1e9cc71400b1a707f5ee46bd2e612ec49130a2de49cd51fc2e7d437c"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/green-same-four/result.xml": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/green-same-four/result.xml.DATA",
+      "bytes": 947,
+      "git_blob": "aa0b676fed37e389b2f909248530de3d0c35dacf",
+      "original_mode": "0o664",
+      "sha256": "d984c1779e9eda48dedd1b750ba4a32e3d3d34df7ee75cd66ac9c3a43c10a8a7"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/green/result.xml": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/green/result.xml.DATA",
+      "bytes": 585,
+      "git_blob": "a33febdd27264fedac5ab2d76d277766c6a84fb6",
+      "original_mode": "0o664",
+      "sha256": "06518a02cc25e2a252fe695859a688b35617812cc1ea132d90694b12eace8715"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/guide.after.DATA": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/guide.after.DATA.DATA",
+      "bytes": 10321,
+      "git_blob": "3e68282fd723e2a1a8dc02409f784c29ee8c6914",
+      "original_mode": "0o664",
+      "sha256": "d229c70227d2f6c8e68e809576f6405d8baa4c05b5c7bd98a67682bfdc6c83dd"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/guide.before.DATA": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/guide.before.DATA.DATA",
+      "bytes": 9688,
+      "git_blob": "d5970b6e5bf0fa5f93adde52b003850874b9037a",
+      "original_mode": "0o664",
+      "sha256": "6da48c1efb992791375a7e88d388b6783ec0277d6cfe7a2550e9a2ee21c209d8"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/legacy.selectors": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/legacy.selectors.DATA",
+      "bytes": 786,
+      "git_blob": "a9de36b2f2e325eb76b6082fc62512cb662dc13f",
+      "original_mode": "0o664",
+      "sha256": "b2829cee331eb68410e3869cd7e538e00281dfbdf61e5702b7104a73f1800439"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/actual-official-V2-adjudication-and-legacy-Source-closed.json": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/actual-official-V2-adjudication-and-legacy-Source-closed.json.DATA",
+      "bytes": 3633,
+      "git_blob": "cbc0eb65dcec3e5c72ab01f631ca2bbda9e333e6",
+      "original_mode": "0o400",
+      "sha256": "3e9f1b5348ccacbd5a4d969257fe7b6f37c0eaf3e842b9314b3196520fea1383"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/checkout.py": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/checkout.py.DATA",
+      "bytes": 2900,
+      "git_blob": "a8d4b57fee8a4b80b4ad75ee6b4e376e13eab5e8",
+      "original_mode": "0o664",
+      "sha256": "b55327e40cfc51cb42b95abe4ba6d58e3ef944f227edd6ef7b155a3322b26e87"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/closeout.py": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/closeout.py.DATA",
+      "bytes": 3158,
+      "git_blob": "ddeba41044ffc7082860fb1ad8af2a0284d9423c",
+      "original_mode": "0o664",
+      "sha256": "43f610e5b821a5a9a86593c33549f535e5eb79d53825abc842c933c8cbd80a17"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/legacy/cache/README.md": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/legacy/cache/README.md.DATA",
+      "bytes": 302,
+      "git_blob": "b89018ced91c0a8af7f3f23ce8901870da89f3a0",
+      "original_mode": "0o664",
+      "sha256": "73fd6fccdd802c419a6b2d983d6c3173b7da97558ac4b589edec2dfe443db9ad"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/legacy/local-source-closeout.json": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/legacy/local-source-closeout.json.DATA",
+      "bytes": 5622,
+      "git_blob": "de0dea65965f07e24b7366c8fe968108166a64c2",
+      "original_mode": "0o664",
+      "sha256": "91f3addae2489200a8b8db78ddf5bac415b54fb825d08d34af85ae1aef718ce2"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/legacy/result.xml": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/legacy/result.xml.DATA",
+      "bytes": 2222,
+      "git_blob": "a2818bba1037c0b5c222976b536c20f4a5eeda6f",
+      "original_mode": "0o664",
+      "sha256": "bfaa0c4a28b386c55b9428dacbc6c085a0e5d9a552ca870511d46f2b4b0e492c"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/official/cache/README.md": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/legacy/cache/README.md.DATA",
+      "bytes": 302,
+      "git_blob": "b89018ced91c0a8af7f3f23ce8901870da89f3a0",
+      "original_mode": "0o664",
+      "sha256": "73fd6fccdd802c419a6b2d983d6c3173b7da97558ac4b589edec2dfe443db9ad"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/official/local-source-closeout.json": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/official/local-source-closeout.json.DATA",
+      "bytes": 4530,
+      "git_blob": "0ddd17664d1319cb6d70990f5782e40a4453236b",
+      "original_mode": "0o664",
+      "sha256": "856b127f56f0971ab191d0b505ad64aa98b7a0e699215875d013cb683e9d3124"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/official/result.xml": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/official/result.xml.DATA",
+      "bytes": 1607,
+      "git_blob": "aa5944aeb9ccdce47e535301bfca0789cb7eb890",
+      "original_mode": "0o664",
+      "sha256": "aba2cd6db6ca1312d09844dd6cac1470d9145fdec466a70541d381301f4c9c95"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/qualify_local_source.py": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/qualify_local_source.py.DATA",
+      "bytes": 5608,
+      "git_blob": "caa9ee6d2b012ade0557c99d1a2720a78ad5cbe2",
+      "original_mode": "0o664",
+      "sha256": "f46a84eb99ef7a497abf6e396c8d36d566a927dd5c55111da1cd929da49262fb"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/real-checkout-pins.json": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/real-checkout-pins.json.DATA",
+      "bytes": 60840,
+      "git_blob": "b1f7b3a2af2fc87b00f2046d6c84aaf00c0d0fae",
+      "original_mode": "0o664",
+      "sha256": "c0448542b20c95daf11883c0ec2cb8b3b7cbc10b8bfb3e42799c6dd8668e0528"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/official-four.selectors": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/official-four.selectors.DATA",
+      "bytes": 561,
+      "git_blob": "5d65793518a052411488d9d0a6adc2c6f8271494",
+      "original_mode": "0o664",
+      "sha256": "852b17f3146fd8d7c97a8c772716cab315def77aa45e64547ad667e45bbec879"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/official-test.py.fragment": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/official-test.py.fragment.DATA",
+      "bytes": 2177,
+      "git_blob": "0269fdce444a3cb4f1a921dd14a3e6f32d327509",
+      "original_mode": "0o664",
+      "sha256": "88814e87dd9ff8c21030aba43286d13f0e9afbe0c131621897343d1e46d2af45"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/official.selectors": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/official.selectors.DATA",
+      "bytes": 824,
+      "git_blob": "92997c68c1ceae21503f820bdab147c1caa077ff",
+      "original_mode": "0o664",
+      "sha256": "1fb55f775415c203781a92d0c379243d4a6c59154ced8ce585c78fb2da770ecd"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/owner.after.DATA": {
+      "bytes": 34885,
+      "git_blob": "6b0a281866717d56a9cf793673c3c8d4f674b302",
+      "original_mode": "0o664",
+      "published": {
+        "path": "ipfs_datasets_py/logic/autoformal/corpus_source_adjudication.py",
+        "repo": "datasets"
+      },
+      "sha256": "f98e5fd5e07942aeab7032d98378eed35b08fa263394e0b7bca9f2203f7eafb8"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/owner.before.DATA": {
+      "bytes": 32429,
+      "git_blob": "41a44d2fc0bcb4f47d111c056d526493402880cc",
+      "original_mode": "0o664",
+      "published": {
+        "path": "docs/reconciliation/retained-legal-autoformalization-work-20261127/tmp-work/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/ipfs_datasets_py/logic/autoformal/corpus_source_adjudication.py.DATA",
+        "repo": "root"
+      },
+      "sha256": "0d658081521bc737ff17ec38f82d34122863b7b2b3094e8d1fabf4eef0caf2b9"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/prepare-owner.py": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/prepare-owner.py.DATA",
+      "bytes": 5752,
+      "git_blob": "afabbc52b0df44a5808219c7821fe3faf88f78c4",
+      "original_mode": "0o664",
+      "sha256": "9dd6cb9fc188e6d25d579aea01cd40abe243cbe08f070b8061022801c46f9a27"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/red-same-four/result.xml": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/red-same-four/result.xml.DATA",
+      "bytes": 5734,
+      "git_blob": "3100b1f5013c4cbfe59bf273ee8efd82245f345d",
+      "original_mode": "0o664",
+      "sha256": "db89afcf89d8f6b33e6834da4288b35282ee1f8226e0571b20ffa3ad471d830f"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/red/result.xml": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/red/result.xml.DATA",
+      "bytes": 2882,
+      "git_blob": "d024f4b8bea6e9272224ea9859638a65b309b48d",
+      "original_mode": "0o664",
+      "sha256": "fb56091610f32fee055fdc09b094ecdc1269c218c1e24b816e098a5d0f41b699"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/run-case.sh": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/run-case.sh.DATA",
+      "bytes": 707,
+      "git_blob": "b9ee75700a8f7950e8361d12823b6fc69a82c36f",
+      "original_mode": "0o664",
+      "sha256": "4d9db4663609ed10dbce0ce19acb4eea72297c5fe18466878d0860a14a34f5e1"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/seal-local.py": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/seal-local.py.DATA",
+      "bytes": 5602,
+      "git_blob": "1ac653689b8c66abf1f66f3d02b5279239296261",
+      "original_mode": "0o664",
+      "sha256": "8e8c456f1fd6d98ab41988f7147b535631fad3585a8d8813815475d5e6e7ec49"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/signed-adjudication.py.fragment": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/signed-adjudication.py.fragment.DATA",
+      "bytes": 5647,
+      "git_blob": "afb23b74d5ea98e62c96afe4710c354f7a0f54f6",
+      "original_mode": "0o400",
+      "sha256": "1a3da2af06a60ba578dd8fab870064a258646007dd8f161dc0dccb59a77eb82d"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/test.after.DATA": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/test.after.DATA.DATA",
+      "bytes": 79572,
+      "git_blob": "e9becbf73a6f000d4e5c92596eb1c99013a657b5",
+      "original_mode": "0o664",
+      "sha256": "5c069329c9a7a2baff044affea86fadf745f1e9c3ba10a101ed443425ac187b8"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/test.before.DATA": {
+      "bytes": 69569,
+      "git_blob": "bc028c90d14268516e7c7845a761053419d180ec",
+      "original_mode": "0o664",
+      "published": {
+        "path": "docs/reconciliation/retained-legal-autoformalization-work-20261127/tmp-work/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/tests/unit/logic/autoformal/test_corpus_source_adjudication.py.DATA",
+        "repo": "root"
+      },
+      "sha256": "b9c47fab60a8089139e9c857bc82a541dc618991fad68938e652e6040c7dea4d"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/test.final.DATA": {
+      "bytes": 79562,
+      "git_blob": "92255954ba6420db384ae19a8f70f09e5896b369",
+      "original_mode": "0o664",
+      "published": {
+        "path": "tests/unit/logic/autoformal/test_corpus_source_adjudication.py",
+        "repo": "datasets"
+      },
+      "sha256": "56315c5e5ddd889aae739454b6006967783fdf76dde7f7ce35b0889e5aaa2e7d"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/test.initial-four.DATA": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/test.initial-four.DATA.DATA",
+      "bytes": 77393,
+      "git_blob": "224833c4b26b42ae25bf9dec86e56185bf192f3e",
+      "original_mode": "0o664",
+      "sha256": "59b49c3318117add94eb537674b0738f465e6822e222304d99044f028a5cfca0"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/SEALED-official-V2-source-application-local-candidate.json": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/SEALED-official-V2-source-application-local-candidate.json.DATA",
+      "bytes": 7994,
+      "git_blob": "5710e73182b1f191f216dce4b3b448c855890335",
+      "original_mode": "0o400",
+      "sha256": "fdad6e94121c3478f8c6c418027319c8e660dada93f373695605eaa083ce48c0"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/actual-official-V2-source-application-three-legacy-refusals.json": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/actual-official-V2-source-application-three-legacy-refusals.json.DATA",
+      "bytes": 3730,
+      "git_blob": "a5c33be9dcd1a6769b727c36a4fca8e84a2e63de",
+      "original_mode": "0o400",
+      "sha256": "08469b08bacd28ac2000c40b98c63499f0fa245d0cfe73c1fdbd49dfb0e6f217"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/additional.selectors": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/additional.selectors.DATA",
+      "bytes": 554,
+      "git_blob": "08519f26e90bdfd311d6af9820cc85bce58b0654",
+      "original_mode": "0o664",
+      "sha256": "cd7336057cbb776cc5ef1d311fddbf3b1e51057a607cc4f0e2657ffcca7e8533"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/application.forward.patch.DATA": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/application.forward.patch.DATA.DATA",
+      "bytes": 24592,
+      "git_blob": "d0ce8b210e4da84e2b5056f89e1a1ca05c44a51c",
+      "original_mode": "0o664",
+      "sha256": "98a9d3a59110a1fc18e6875048915c3046b0b4c5a765b36c3cd8076068babfa7"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/application.inverse.patch.DATA": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/application.inverse.patch.DATA.DATA",
+      "bytes": 24628,
+      "git_blob": "1a91a3eb91006e962c77b5f1fde0895a094ef62b",
+      "original_mode": "0o664",
+      "sha256": "ed7b2c18a3da9898626b2bde3dd326eabced291b4a5306180dbb3fa336fb4bc4"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/current-input-epoch.json": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/current-input-epoch.json.DATA",
+      "bytes": 52813,
+      "git_blob": "e199ada8bdceef6c2d0172d9884dfad08bfcff07",
+      "original_mode": "0o664",
+      "sha256": "a2c9a229b75e0e44e29914e0ff706a874c44a23f5f8ec46a0368c8e91156bb63"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/existing-runner.py.DATA": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/existing-runner.py.DATA.DATA",
+      "bytes": 2723,
+      "git_blob": "0f1cfe52bde94289d2f5e9a9dd0844ca7ea6afa3",
+      "original_mode": "0o664",
+      "sha256": "30ceaca74e2a73ea3fdeaf6882bcba5fe76ce6ca9bbd748b311ba12bcf4069fd"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/final-official.selectors": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/final-official.selectors.DATA",
+      "bytes": 970,
+      "git_blob": "fe7f19904621cac132ffd5d11d168a6577c1276e",
+      "original_mode": "0o664",
+      "sha256": "7ac8f1472111727f46fa05623821aeab545b635545321a143d60ac5638b2abc4"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/green-final-seven/result.xml": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/green-final-seven/result.xml.DATA",
+      "bytes": 1477,
+      "git_blob": "7db077a33d36a02384c770a4f952c7306b4241b5",
+      "original_mode": "0o664",
+      "sha256": "12bd3d384016caa8e58ea577d44d5f83f2f17bc39bb8940aa89ddb95a223465e"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/green-same-three/result.xml": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/green-same-three/result.xml.DATA",
+      "bytes": 763,
+      "git_blob": "4fa307a19741369dd9d486c207c15614225e20fb",
+      "original_mode": "0o664",
+      "sha256": "fe75367e68a84773ddd8aa51a54ea18c8c53199b9b59aadc82918d646796a498"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/guide.after.DATA": {
+      "bytes": 10806,
+      "git_blob": "d7626f9463323169d53cb6aba7ce626b5c8c61aa",
+      "original_mode": "0o664",
+      "published": {
+        "path": "ipfs_datasets_py/logic/autoformal/docs/guides/corpus_source_review_responses.md",
+        "repo": "datasets"
+      },
+      "sha256": "44e30303a071b630d5be00e8f6cc7943fcfb3a06f25e12c6d2771a0be05dfe84"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/guide.before.DATA": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/guide.after.DATA.DATA",
+      "bytes": 10321,
+      "git_blob": "3e68282fd723e2a1a8dc02409f784c29ee8c6914",
+      "original_mode": "0o664",
+      "sha256": "d229c70227d2f6c8e68e809576f6405d8baa4c05b5c7bd98a67682bfdc6c83dd"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/legacy.selectors": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/legacy.selectors.DATA",
+      "bytes": 601,
+      "git_blob": "f2f5eb7db1e91ab35bc8f742818ada39446b89c0",
+      "original_mode": "0o664",
+      "sha256": "f9c8304f9edcb550a66f9adcc6d5f896e7ae4929bce907d1c0609c5a1abdec73"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/normal-local/actual-official-V2-application-pending-Title10-and-legacy-Source-closed.json": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/normal-local/actual-official-V2-application-pending-Title10-and-legacy-Source-closed.json.DATA",
+      "bytes": 4066,
+      "git_blob": "b6d8d5cff7d3715c83fa397f98d0367c501edf31",
+      "original_mode": "0o400",
+      "sha256": "fd810f1393c7887d36128162c82d25d11dce4260ed1a1899870f39cebbf95ab0"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/normal-local/checkout.py": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/normal-local/checkout.py.DATA",
+      "bytes": 2899,
+      "git_blob": "5a331af6e8d2e17a1c67a7043fa0ca5b28e353e6",
+      "original_mode": "0o664",
+      "sha256": "557bc9609e77eea2dd3ddbd4dccd5f3469cf3e08b831383afa82ee4d7b238596"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/normal-local/closeout.py": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/normal-local/closeout.py.DATA",
+      "bytes": 4295,
+      "git_blob": "5a148d659f87561cbe9a12d2f04d52c8fa5124c9",
+      "original_mode": "0o664",
+      "sha256": "14a99d33f5417df4778c5512156902557d1e05a2c5a78f2e9dbd1eada5671426"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/normal-local/legacy/cache/README.md": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/legacy/cache/README.md.DATA",
+      "bytes": 302,
+      "git_blob": "b89018ced91c0a8af7f3f23ce8901870da89f3a0",
+      "original_mode": "0o664",
+      "sha256": "73fd6fccdd802c419a6b2d983d6c3173b7da97558ac4b589edec2dfe443db9ad"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/normal-local/legacy/local-source-closeout.json": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/normal-local/legacy/local-source-closeout.json.DATA",
+      "bytes": 3478,
+      "git_blob": "12752be0e90203cbcd698cc954b9f907ac5ef68c",
+      "original_mode": "0o664",
+      "sha256": "c6ab16c775a76670ab670c191a04a03ee173a3f9947243505a2474ad0b7225ef"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/normal-local/legacy/result.xml": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/normal-local/legacy/result.xml.DATA",
+      "bytes": 989,
+      "git_blob": "4dd1bf3570fc0fdd0f8c43fc51b3e2eb88ddb7dd",
+      "original_mode": "0o664",
+      "sha256": "a9b9e3f1c17e862d0255c85864c750ab972dd538a8f6c535b970651f9d01823d"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/normal-local/official/cache/README.md": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/legacy/cache/README.md.DATA",
+      "bytes": 302,
+      "git_blob": "b89018ced91c0a8af7f3f23ce8901870da89f3a0",
+      "original_mode": "0o664",
+      "sha256": "73fd6fccdd802c419a6b2d983d6c3173b7da97558ac4b589edec2dfe443db9ad"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/normal-local/official/local-source-closeout.json": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/normal-local/official/local-source-closeout.json.DATA",
+      "bytes": 4264,
+      "git_blob": "8139c129d34cb7f150e356f01270284dac060965",
+      "original_mode": "0o664",
+      "sha256": "a86d38bdb2e9697d4c13c87e390793e6a87545c49e6ad380294d4a8ce4565431"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/normal-local/official/result.xml": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/normal-local/official/result.xml.DATA",
+      "bytes": 1477,
+      "git_blob": "5b30d88f1a2d99f9a8d6bcd529be17604a804219",
+      "original_mode": "0o664",
+      "sha256": "363715ea031f28ca47fd2a510010bdb9d09d32eedb219c80e912502ab5085b16"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/normal-local/qualify_local_source.py": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/normal-local/qualify_local_source.py.DATA",
+      "bytes": 5661,
+      "git_blob": "eb479ba81078ae8c5376406c4ceaa52753a808a7",
+      "original_mode": "0o664",
+      "sha256": "0ae39d86d2837b892d750669c7d03a2d09aa7309aac210d05456a630d21785e1"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/normal-local/real-checkout-pins.json": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/normal-local/real-checkout-pins.json.DATA",
+      "bytes": 61375,
+      "git_blob": "5d2c0c8e040c7f21cfba27483f2f6d73f65e35be",
+      "original_mode": "0o664",
+      "sha256": "5c42880fe1dd8831c77b67b2f68c443204bf65aaa5bdce2bf8d6233568b28a2b"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/normal-local/replay-pending-title10.py": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/normal-local/replay-pending-title10.py.DATA",
+      "bytes": 13067,
+      "git_blob": "fedb23d18f0b453d2d260938fb585b88892e051d",
+      "original_mode": "0o664",
+      "sha256": "0883f22dd9024149411e95dbf8990af7fbe84a0a6de7b9399be4aeb4a6489765"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/normal-local/title10/actual-title10-complete-pending-three-stage-replay.json": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/normal-local/title10/actual-title10-complete-pending-three-stage-replay.json.DATA",
+      "bytes": 5474,
+      "git_blob": "d3572d2ba3119a0641d2a412c81b6eb634ee7c9e",
+      "original_mode": "0o664",
+      "sha256": "403de3e0afeae839d20f64270d04cacd6fd83a66d0f30c45ef9733b087489a37"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/normal-local/title10/adjudication-assessment.json": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/normal-local/title10/adjudication-assessment.json.DATA",
+      "bytes": 92359,
+      "git_blob": "d05f4dba8de1587f3a39ed6d2ff44cd53226b483",
+      "original_mode": "0o664",
+      "sha256": "124ab4dee31aaa55e09594dec960415fa208b2ec3c53bc48b6f9918895ed647e"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/normal-local/title10/candidate-application-assessment.json": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/normal-local/title10/candidate-application-assessment.json.DATA",
+      "bytes": 121669,
+      "git_blob": "5894c8e0de943fbf084fd5a48dd467909978f68f",
+      "original_mode": "0o664",
+      "sha256": "df193f883ab7b218cb6d84d073db74ce2bc5fb2272666f94264051f67e153634"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/normal-local/title10/official-preparation.json": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/normal-local/title10/official-preparation.json.DATA",
+      "bytes": 207215,
+      "git_blob": "7714711d23521b3c10aff463cc78383491694c8f",
+      "original_mode": "0o664",
+      "sha256": "30ca05179f728159c6d50dc5f2c30c679936a9614908e694e62bd2908ebecf6e"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/normal-local/title10/typed-response-assessment.json": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/normal-local/title10/typed-response-assessment.json.DATA",
+      "bytes": 173404,
+      "git_blob": "2fa8d411076b75f93697ef5ecbf15b8cc2e6fdb7",
+      "original_mode": "0o664",
+      "sha256": "d2b7d0631e3d17cdd328a7f745e650c7f792c6fcc2bf2ac1811566413290cde4"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/official-joins-context.py.fragment": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/official-joins-context.py.fragment.DATA",
+      "bytes": 3483,
+      "git_blob": "6a19c99c5bcd1a44235c40987bb56540154976a8",
+      "original_mode": "0o664",
+      "sha256": "722203c8ce47b485d9fb35630d8894fef5bcad98c9901259fb2fa39bad4c32f1"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/official-negative.py.fragment": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/official-negative.py.fragment.DATA",
+      "bytes": 1565,
+      "git_blob": "dcd7947180ff1f89989613fe14708c5e1841e13d",
+      "original_mode": "0o400",
+      "sha256": "8bc6e03d6b5c426117ec5d904c0159329b3370a2d0b4d32709a94c88d08fe7d0"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/official-test.py.fragment": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/official-test.py.fragment.DATA",
+      "bytes": 5927,
+      "git_blob": "0569c067776f51af51b24c9bab149c59ecd11938",
+      "original_mode": "0o400",
+      "sha256": "3682a7375f8a7af8f7b3f657080c800ca132f8a8dcef3db47d4b90a8cd95e5f8"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/official.selectors": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/official.selectors.DATA",
+      "bytes": 416,
+      "git_blob": "89c6507cf0a265b6c6d3627720103de3def1876d",
+      "original_mode": "0o664",
+      "sha256": "e6d92566af1b3606c1a412207f9e222a04612451f31edfe741e1047e54631c0a"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/owner.after.DATA": {
+      "bytes": 35715,
+      "git_blob": "7ad9016d73382232500ed085908b4f8603f10102",
+      "original_mode": "0o664",
+      "published": {
+        "path": "ipfs_datasets_py/logic/autoformal/corpus_source_application.py",
+        "repo": "datasets"
+      },
+      "sha256": "10169608d2ea7dad7f35d5cb0b35d2c66b2c8ae6a5c381720c1dcbbc7e69b5e6"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/owner.before.DATA": {
+      "bytes": 32104,
+      "git_blob": "199c88971a61d73692adb3112755c4304da0bf20",
+      "original_mode": "0o664",
+      "published": {
+        "path": "docs/reconciliation/retained-legal-autoformalization-work-20261127/tmp-work/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/ipfs_datasets_py/logic/autoformal/corpus_source_application.py.DATA",
+        "repo": "root"
+      },
+      "sha256": "2e11ca5f1f8c23b7d399e72c529432f611a94dcc4599c6f69025884e8219dc86"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/prepare-owner.py": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/prepare-owner.py.DATA",
+      "bytes": 8399,
+      "git_blob": "ba49a8edf5aa0ca45094ddac5306e5df4df94a2f",
+      "original_mode": "0o664",
+      "sha256": "7d8da7ff15dbd635f6ef56829a3e9e4b625244a1aff86ad932d084f7d64d0caf"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/red/result.xml": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/red/result.xml.DATA",
+      "bytes": 4581,
+      "git_blob": "f03414757d65f3252a2ec49fe0749f8c5d14f7a2",
+      "original_mode": "0o664",
+      "sha256": "3f5e20f3330a9b952d14ba64617c41b1fe98cd1003a705ea30f410d2aff9a7f9"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/run-case.sh": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/run-case.sh.DATA",
+      "bytes": 707,
+      "git_blob": "b9ee75700a8f7950e8361d12823b6fc69a82c36f",
+      "original_mode": "0o664",
+      "sha256": "4d9db4663609ed10dbce0ce19acb4eea72297c5fe18466878d0860a14a34f5e1"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/seal-local.py": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/seal-local.py.DATA",
+      "bytes": 5500,
+      "git_blob": "e0811ff7def18da0f4036706648db2970659dce2",
+      "original_mode": "0o664",
+      "sha256": "6fe01487a4f831508a35350588b05087303ecddb95e70b9862245b73e7a565a5"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/test.before.DATA": {
+      "bytes": 69181,
+      "git_blob": "ac7fb726bfdd73b7bd444124b24730a2e5e7ed13",
+      "original_mode": "0o664",
+      "published": {
+        "path": "docs/reconciliation/retained-legal-autoformalization-work-20261127/tmp-work/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/tests/unit/logic/autoformal/test_corpus_source_application.py.DATA",
+        "repo": "root"
+      },
+      "sha256": "51aed4dcc6115dba2513561a34295e853277cf752706bdc9b64c2761fbffdd67"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-application-baseline-private-aeZJmRfp/test.final.DATA": {
+      "bytes": 80156,
+      "git_blob": "06d4b999378311308f981eb4878e7ea3d52a3835",
+      "original_mode": "0o664",
+      "published": {
+        "path": "tests/unit/logic/autoformal/test_corpus_source_application.py",
+        "repo": "datasets"
+      },
+      "sha256": "a1898cc7f708c7bdd4d530b82ccb0482d267491dca89a9d996fddbb536e63de9"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/SEALED-official-V2-source-review-packets-local-candidate.json": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/SEALED-official-V2-source-review-packets-local-candidate.json.DATA",
+      "bytes": 8205,
+      "git_blob": "37b93386b3fc94c441cd76045d912ea0eb9337c2",
+      "original_mode": "0o400",
+      "sha256": "4a019e65c4e827d4bc86f24eecae5d7367cc39e38b16364049bac975570d4a58"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/bounds.selectors": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/bounds.selectors.DATA",
+      "bytes": 384,
+      "git_blob": "ed55083076bbfa455fdc45f50e5f902a2e4d706d",
+      "original_mode": "0o664",
+      "sha256": "33a0a61ba2df920a23666ccb09691f5eadfad7ae70fe36a53330b78ad4abfda7"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/current-input-epoch.json": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/current-input-epoch.json.DATA",
+      "bytes": 53559,
+      "git_blob": "7363281c94d7401b85c20f2269c766f6cd417e61",
+      "original_mode": "0o664",
+      "sha256": "7886293673dc58878fd8ed0852553ec9e57ce742e24138bee919f93340412099"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/existing-runner.py.DATA": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/existing-runner.py.DATA.DATA",
+      "bytes": 2723,
+      "git_blob": "0f1cfe52bde94289d2f5e9a9dd0844ca7ea6afa3",
+      "original_mode": "0o664",
+      "sha256": "30ceaca74e2a73ea3fdeaf6882bcba5fe76ce6ca9bbd748b311ba12bcf4069fd"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/final-official.selectors": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/final-official.selectors.DATA",
+      "bytes": 925,
+      "git_blob": "f9abc4fa8285f6294b4ffd88c1e1482ea90aa021",
+      "original_mode": "0o664",
+      "sha256": "a9537bfa7691adef34302755b71ee8b202c2169e73d12051a76285ac62499dbd"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/green-final/result.xml": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/green-final/result.xml.DATA",
+      "bytes": 1994,
+      "git_blob": "dd248e5c028daf1786ab0a6226b5b6d4baf58eda",
+      "original_mode": "0o664",
+      "sha256": "58cc47d47f5d9aeead1d8a5574049b651a0d4fbc027dcfb91f3fa81d594713f5"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/green-same-four/result.xml": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/green-same-four/result.xml.DATA",
+      "bytes": 927,
+      "git_blob": "17a578bea3768617bda73f1f2710bff5c1a102cd",
+      "original_mode": "0o664",
+      "sha256": "175bfad1048eef567c20c60cb40aeaf3355c103fb39a030ea3f9388386c7e513"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/guide.after.DATA": {
+      "bytes": 10046,
+      "git_blob": "bfecf6aac8cfe8c58adc0dbc24640245ba3c9c4c",
+      "original_mode": "0o664",
+      "published": {
+        "path": "ipfs_datasets_py/logic/autoformal/docs/guides/corpus_source_review_packets.md",
+        "repo": "datasets"
+      },
+      "sha256": "6715c4dd9cbe39553116cd4288cc0d0f027fae6a487550c6c6e0bc3382a9e7db"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/guide.before.DATA": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/guide.before.DATA.DATA",
+      "bytes": 8443,
+      "git_blob": "09510ed55efbdb8482cc6f8ffd76b6e6bb720342",
+      "original_mode": "0o664",
+      "sha256": "3265768bf94e54aca0102ff608efdeaf73ca0e41d6b0ad9c0b0cdfdd3a4fa341"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/legacy.selectors": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/legacy.selectors.DATA",
+      "bytes": 721,
+      "git_blob": "f9251761f6ad5e77ade3e6d123692edf1e671074",
+      "original_mode": "0o664",
+      "sha256": "581b31694a8efa0dd6bb8d8700f4654933bfbc9df04d1a184b0bbf6e5c2918e7"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/actual-official-V2-review-packets-Title10-and-legacy-Source-closed.json": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/actual-official-V2-review-packets-Title10-and-legacy-Source-closed.json.DATA",
+      "bytes": 4094,
+      "git_blob": "bdb4f57db89afce7ccca6c7b4987cbcae3e47b26",
+      "original_mode": "0o400",
+      "sha256": "df436ca39fe4b258e5aaf6556886603eea01c7ed9df3488f01f3174efa4869c7"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/checkout.py": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/checkout.py.DATA",
+      "bytes": 2902,
+      "git_blob": "c97159c348d06e12535d6209e2c61ee9806a9bc5",
+      "original_mode": "0o664",
+      "sha256": "839fffe66001c3fa73618416c937dd7bb5c4d5d8d10beec82e744ce7dd9ce48a"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/closeout.py": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/closeout.py.DATA",
+      "bytes": 4176,
+      "git_blob": "32d6c6bb65d28a370bc1546673339f224485bfa9",
+      "original_mode": "0o664",
+      "sha256": "745a3b96015b429d34efea61d063743319e77a3054a522e59d4ef0c99f0282a7"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/legacy/cache/README.md": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/legacy/cache/README.md.DATA",
+      "bytes": 302,
+      "git_blob": "b89018ced91c0a8af7f3f23ce8901870da89f3a0",
+      "original_mode": "0o664",
+      "sha256": "73fd6fccdd802c419a6b2d983d6c3173b7da97558ac4b589edec2dfe443db9ad"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/legacy/local-source-closeout.json": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/legacy/local-source-closeout.json.DATA",
+      "bytes": 3746,
+      "git_blob": "87241e66efa8ada4959a3d01adbb3df7f7cd042b",
+      "original_mode": "0o664",
+      "sha256": "ac610303c26b8da97dd99e325564f684ea8e4b58a9c25b1d2b4b964e8932f4a5"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/legacy/result.xml": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/legacy/result.xml.DATA",
+      "bytes": 1150,
+      "git_blob": "050d1bfc439f83619feee95f203699fb39428c4c",
+      "original_mode": "0o664",
+      "sha256": "d9ed880a8f25e9881df84ed3cd8ff66e25f65fb254d5a670ac5e9f9aa90f2d73"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/official/cache/README.md": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/legacy/cache/README.md.DATA",
+      "bytes": 302,
+      "git_blob": "b89018ced91c0a8af7f3f23ce8901870da89f3a0",
+      "original_mode": "0o664",
+      "sha256": "73fd6fccdd802c419a6b2d983d6c3173b7da97558ac4b589edec2dfe443db9ad"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/official/local-source-closeout.json": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/official/local-source-closeout.json.DATA",
+      "bytes": 5112,
+      "git_blob": "31788891866f7349233752ba93e2387fc20d524e",
+      "original_mode": "0o664",
+      "sha256": "dccc05e1bb0b5151ebb5b36ac8415804fa84ebe1a0da34550ed992e8f7ef1ef8"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/official/result.xml": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/official/result.xml.DATA",
+      "bytes": 1994,
+      "git_blob": "be3575a4d6cebcfe37a7dda3602e074e60a0f42d",
+      "original_mode": "0o664",
+      "sha256": "0c311e8d7f5592a9519aa97ec5de9503fad2d0752be40277a359bc9e231b78e7"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/qualify_local_source.py": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/qualify_local_source.py.DATA",
+      "bytes": 5659,
+      "git_blob": "9f7d87f4f5b905f8105638c05c7f045da72c87d2",
+      "original_mode": "0o664",
+      "sha256": "1cde867080c672488d0fbf8c49587e7b0251e6c8c3736c0c276ba3752e3ce054"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/real-checkout-pins.json": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/real-checkout-pins.json.DATA",
+      "bytes": 62215,
+      "git_blob": "0c5990846a137e69952ea3d8ccb77649e13d003f",
+      "original_mode": "0o664",
+      "sha256": "51b50866673f1731a115f913e2dca01f6b4800f219160c2f78b36b5941d4ffad"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/run_title10_packets.py": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/run_title10_packets.py.DATA",
+      "bytes": 9667,
+      "git_blob": "28c6abe2ba1a4cfdae24abf2d2bb9a337eeab59d",
+      "original_mode": "0o664",
+      "sha256": "e67758cb28b61ba9c0d55f426200a0e344797e52d71f4858562690da7b59e72b"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/title10/actual-title10-official-review-packet-closed.json": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/title10/actual-title10-official-review-packet-closed.json.DATA",
+      "bytes": 3539,
+      "git_blob": "82eb5b40fa2db5c5f23fa0d8586e3625da08a5b1",
+      "original_mode": "0o664",
+      "sha256": "c927e1ff88fc0bea7c9dc101dbfa203b34b27d41751a7be9ac5e4afec7552be7"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/title10/title10-exact-source-preparation.json": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/title10/title10-exact-source-preparation.json.DATA",
+      "bytes": 207465,
+      "git_blob": "af8d5b3dfd8f97e50c9cee838a19c7c23fbf25a2",
+      "original_mode": "0o664",
+      "sha256": "b0a605a6aec22e1337db31168b85e7d9a31ad9a6d38dd81c20e981b8b5ec061e"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/title10/title10-official-review-packet.json": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/title10/title10-official-review-packet.json.DATA",
+      "bytes": 196612,
+      "git_blob": "1788696424c5f04bafd3b9d8d738eba9a0ee0120",
+      "original_mode": "0o664",
+      "sha256": "da8c0ab1306f5b0617ff968b5963705b8d7d3e1553b796762de8742935f3a5f2"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/official-owner.fragment": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/official-owner.fragment.DATA",
+      "bytes": 6380,
+      "git_blob": "3665dd7e633d52a64f4042d1f436584f27718f84",
+      "original_mode": "0o664",
+      "sha256": "ecb8c9fb2c9ac1a32e20ca69249968b4ff7c109ddd12b9cce791d57e4da5c020"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/official.selectors": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/official.selectors.DATA",
+      "bytes": 541,
+      "git_blob": "28cd899906e23f707de5c3821dc2b6f0caaab88d",
+      "original_mode": "0o664",
+      "sha256": "74b3619f629a0771736eaf8255abac64e06cf6c3df2085800409c524d8eea768"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/owner.after.DATA": {
+      "bytes": 44949,
+      "git_blob": "9cc75909574b045badfa5b42a01999e6b6e61170",
+      "original_mode": "0o664",
+      "published": {
+        "path": "ipfs_datasets_py/logic/autoformal/corpus_source_review_packets.py",
+        "repo": "datasets"
+      },
+      "sha256": "8136af98ce2ba6bc6e56000e7ab8d3261d3f307c25b01dcd1780683cfa8ec764"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/owner.before.DATA": {
+      "bytes": 36666,
+      "git_blob": "1c364f16a954806d27976b1fa8eb2c6028907f4a",
+      "original_mode": "0o664",
+      "published": {
+        "path": "docs/reconciliation/retained-legal-autoformalization-work-20261127/tmp-work/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/ipfs_datasets_py/logic/autoformal/corpus_source_review_packets.py.DATA",
+        "repo": "root"
+      },
+      "sha256": "c2a3a08963e32b7ef3371ae32ff1266ad6fe052c87a491857dcc720170367a29"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/packets.forward.patch.DATA": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/packets.forward.patch.DATA.DATA",
+      "bytes": 26397,
+      "git_blob": "f93e7c54336b172d68484a87c565d6452e4fb1e4",
+      "original_mode": "0o664",
+      "sha256": "a9708e14b43c6a1930117c20607a1d7a6523b468148e8d98da3ba4825440a9e8"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/packets.inverse.patch.DATA": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/packets.inverse.patch.DATA.DATA",
+      "bytes": 26397,
+      "git_blob": "d081433ad7406731fe7ac70a7367e7198faa47a2",
+      "original_mode": "0o664",
+      "sha256": "c006dcb4c7f3341dec0b86603f2bdc3df88726ec31bbb4dc02e651de6f6c2f5c"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/prepare-owner.py": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/prepare-owner.py.DATA",
+      "bytes": 4050,
+      "git_blob": "320c295b74ab1fcc73602e1d5f279bde1dd232c9",
+      "original_mode": "0o664",
+      "sha256": "0616d4def366dabaf6609f83101926264f4128e032d559ce5b23a6bffb0a7bce"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/published-source-pins.json": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/published-source-pins.json.DATA",
+      "bytes": 59863,
+      "git_blob": "94f68f80b5d36f72f9e849608740f8300d88c5f6",
+      "original_mode": "0o664",
+      "sha256": "b97a7b974f67e915b769f08f0835756a813c44a7fedb5b5353e5617c67a2cd16"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/red-same-four/result.xml": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/red-same-four/result.xml.DATA",
+      "bytes": 3185,
+      "git_blob": "6c1b2d480a6db5f3aa37267657a8e612f28f8327",
+      "original_mode": "0o664",
+      "sha256": "a7028f8a13eb61a6b864cba6c622fbc58b1fd9619aaae66ac252aa269c76890d"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/red/actual-official-review-packet-boundary-red.json": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/red/actual-official-review-packet-boundary-red.json.DATA",
+      "bytes": 725,
+      "git_blob": "7567c2570dc6474813ad0821967b9d77a9e70183",
+      "original_mode": "0o664",
+      "sha256": "d05ab59e5e355795ba781d00b78db036a48e26d0b5fe5e62682e84070f6da439"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/reproduce_packet_boundary.py": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/reproduce_packet_boundary.py.DATA",
+      "bytes": 7027,
+      "git_blob": "043399e2f78f03ca1f8393a38dc284b40ed7df7e",
+      "original_mode": "0o664",
+      "sha256": "87b6d563cab54cf07bf591b214688ec80b7fd989f1836a273b1f6ba22cfbbe31"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/run-case.sh": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/run-case.sh.DATA",
+      "bytes": 707,
+      "git_blob": "b9ee75700a8f7950e8361d12823b6fc69a82c36f",
+      "original_mode": "0o664",
+      "sha256": "4d9db4663609ed10dbce0ce19acb4eea72297c5fe18466878d0860a14a34f5e1"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/seal-local.py": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/seal-local.py.DATA",
+      "bytes": 5518,
+      "git_blob": "ffd293fd4d816c6ef6dec1fcd9010c453247c74e",
+      "original_mode": "0o664",
+      "sha256": "9a65a59be888970aaa4c32425a857ae48892e6acdaa1ca6b06e6fe9c7cc71c33"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/test.after.DATA": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/test.after.DATA.DATA",
+      "bytes": 59935,
+      "git_blob": "6246775ef0087707d488f42ad92f94a14f8d8761",
+      "original_mode": "0o664",
+      "sha256": "de911af8d0916d543bb8d4adbb4d32cb8f2fc9c5afffe32d6312c2027ff1d4f3"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/test.before.DATA": {
+      "bytes": 51627,
+      "git_blob": "a7e731b5ff00ef053a2ea0efa45da5120cf74f54",
+      "original_mode": "0o664",
+      "published": {
+        "path": "docs/reconciliation/retained-legal-autoformalization-work-20261127/tmp-work/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/tests/unit/logic/autoformal/test_corpus_source_review_packets.py.DATA",
+        "repo": "root"
+      },
+      "sha256": "f1514dae7ee57c6ed47860d52e24fea8176d8f00992460ba906183d9d4e629a8"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/test.final.DATA": {
+      "bytes": 61267,
+      "git_blob": "31ce911981fdb8df899c77130b5afa98d8aab412",
+      "original_mode": "0o664",
+      "published": {
+        "path": "tests/unit/logic/autoformal/test_corpus_source_review_packets.py",
+        "repo": "datasets"
+      },
+      "sha256": "c2235c3a3f550f81e37c0a75562ae009f7e71c9a1aa8bb8979129e6c5f25dc22"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/tests.limits.py.fragment": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/tests.limits.py.fragment.DATA",
+      "bytes": 1332,
+      "git_blob": "056f7a5408211a00c1d0325cc88efb3d67f3f18e",
+      "original_mode": "0o664",
+      "sha256": "8582cbaeaa0916fe4614a5b298030643b504199af9dd317ed4b53faf53191cf8"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-review-packet-baseline-private-Bp6THc6a/tests.official.py.fragment": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/tests.official.py.fragment.DATA",
+      "bytes": 8308,
+      "git_blob": "049ded44b22cc63a5362298d3a72f95986a41f12",
+      "original_mode": "0o400",
+      "sha256": "77fc13470dcb140f50a41216468e91bfd714cdd4e17feba8a3dbd7bdbe9294e3"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-intake-red-z3mnOlRc/actual-official-typed-intake-legacy-gate-reproduction.json": {
+      "bytes": 3170,
+      "git_blob": "8359449246112da18786627a9f2cf5f19a485a06",
+      "original_mode": "0o664",
+      "published": {
+        "path": "docs/reconciliation/retained-legal-autoformalization-work-20261127/phase-work/P2-official-typed-response-intake-red-z3mnOlRc/actual-official-typed-intake-legacy-gate-reproduction.json.DATA",
+        "repo": "root"
+      },
+      "sha256": "387b081cd0838095dd7cb8175d8b7a7222e3175d20bad559f506768624987ec0"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-intake-red-z3mnOlRc/exact-module-inputs.json": {
+      "archive": "phase2/P2-official-typed-response-intake-red-z3mnOlRc/exact-module-inputs.json.DATA",
+      "bytes": 31906,
+      "git_blob": "1cab87a64aa198666d9f8ac4017bdcc10b5cd79b",
+      "original_mode": "0o664",
+      "sha256": "5b72242a4c46003edaf6fdd5d5641ef3bc7bcb02a8e9e82134f494191c70d7e4"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-intake-red-z3mnOlRc/materialize.py": {
+      "archive": "phase2/P2-official-typed-response-intake-red-z3mnOlRc/materialize.py.DATA",
+      "bytes": 1710,
+      "git_blob": "c9ccd60f3373465bf062e26e87f8c147197d1adb",
+      "original_mode": "0o664",
+      "sha256": "f911ad4bb243734557eb2abc2c425f961648e34351be825e4331a0aea21344df"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-intake-red-z3mnOlRc/reproduce_official_probe.py": {
+      "archive": "phase2/P2-official-typed-response-intake-red-z3mnOlRc/reproduce_official_probe.py.DATA",
+      "bytes": 3592,
+      "git_blob": "db3e0dc90ff662a2e2589868ac193284262ad610",
+      "original_mode": "0o664",
+      "sha256": "cdf8d9bea6f15b1c048b070ee8aac7fba6bc71b700c30dcbd7eb574d5f21bbb0"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/SEALED-official-V2-typed-source-response-existing-owner-exact3-private.json": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/SEALED-official-V2-typed-source-response-existing-owner-exact3-private.json.DATA",
+      "bytes": 11671,
+      "git_blob": "fdb39d9fae4e84dc89035397e2c0d5fe8ab81189",
+      "original_mode": "0o400",
+      "sha256": "a65c5f7430d5c07e2e3ed35ce75f89cd75520c48fa5e2a09489be3290801db4e"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/actual-import-effect-probe.json": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/actual-import-effect-probe.json.DATA",
+      "bytes": 272,
+      "git_blob": "f6f444e53accfa2911e545b9a368c8228e042ecf",
+      "original_mode": "0o664",
+      "sha256": "6b0dfb661ebe3eeb32897c862e584b1d34fc76e06de2253745caf5195afce1a8"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/actual-official-pilot-typed-intake-blank-input-refusal.json": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/actual-official-pilot-typed-intake-blank-input-refusal.json.DATA",
+      "bytes": 3150,
+      "git_blob": "0d2cba32b0ca39e00d7e3e1b827c5977c85a3873",
+      "original_mode": "0o664",
+      "sha256": "49a4936fcc1275da4b3173eb43c47f60ddcecd89652e075c6e5f6a5896bbafec"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/current-input-epoch.json": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/current-input-epoch.json.DATA",
+      "bytes": 53146,
+      "git_blob": "b7e95a30748e22fc38852e23d09451a154b3af4a",
+      "original_mode": "0o664",
+      "sha256": "8b02805b5e74bbcf8cd185c1ddf2d104fefd0fc1ffb320d96f0d5840fa366008"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/exact-three.forward.patch.DATA": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/exact-three.forward.patch.DATA.DATA",
+      "bytes": 18850,
+      "git_blob": "b72b63925ff1c3f7bc8bdfdf6b93a4e966b3c7af",
+      "original_mode": "0o664",
+      "sha256": "2ea5170cafb5a722683887ab3ae372901e326c3b2ad860b0100e5c6ebc6c3208"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/exact-three.inverse.patch.DATA": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/exact-three.inverse.patch.DATA.DATA",
+      "bytes": 18850,
+      "git_blob": "c890c8d8415cb4bf92ba044e2857b2da123cf5f2",
+      "original_mode": "0o664",
+      "sha256": "72f784e450033b27e14db9db90a6584bd3029f29f5e54fed7402e6330684ab04"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/existing-runner.py.DATA": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/existing-runner.py.DATA.DATA",
+      "bytes": 2723,
+      "git_blob": "0f1cfe52bde94289d2f5e9a9dd0844ca7ea6afa3",
+      "original_mode": "0o664",
+      "sha256": "30ceaca74e2a73ea3fdeaf6882bcba5fe76ce6ca9bbd748b311ba12bcf4069fd"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/green/result.xml": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/green/result.xml.DATA",
+      "bytes": 1271,
+      "git_blob": "bdb2d198001baef0af65cccb2c059603e7c2f188",
+      "original_mode": "0o664",
+      "sha256": "e01fb94280d606c24cc146da11cd03ebe8e42ef47c74643b124598eefc5df33e"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/guide.after.DATA": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/guide.before.DATA.DATA",
+      "bytes": 9688,
+      "git_blob": "d5970b6e5bf0fa5f93adde52b003850874b9037a",
+      "original_mode": "0o664",
+      "sha256": "6da48c1efb992791375a7e88d388b6783ec0277d6cfe7a2550e9a2ee21c209d8"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/guide.before.DATA": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/guide.before.DATA.DATA",
+      "bytes": 8957,
+      "git_blob": "0e37eb5274f93ee464e172e54ee1e5f7730bbff8",
+      "original_mode": "0o664",
+      "sha256": "fc2a57aeb496a063ba97e4b4109fb28dd232bfc728fad4205d4f119175c0a057"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/import-probe.py": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/import-probe.py.DATA",
+      "bytes": 1567,
+      "git_blob": "e54f7f9f2f115abbbe13a70760d5760e540d8bed",
+      "original_mode": "0o664",
+      "sha256": "65b492e97796e860213f90feefd7e6c5585530d36baf226d2a4b10403cb081e9"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/input-epoch.json": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/input-epoch.json.DATA",
+      "bytes": 52099,
+      "git_blob": "37e7e6c2c13074b6c4c5c11d7f0273d59df23426",
+      "original_mode": "0o664",
+      "sha256": "eaaf762ed9d5e50865519d72abf5daf2e71533ac6057365f8ae4e42b6ed45c3e"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/legacy-focused.selectors": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/legacy-focused.selectors.DATA",
+      "bytes": 793,
+      "git_blob": "05348f0035bbf29e412d89481c6798ffd9a6a86d",
+      "original_mode": "0o664",
+      "sha256": "92c50231bda986e359531a03a5b61c1737284fade30f958305e919717e8a80fb"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/legacy-focused/pytest/typed-source-response-inputs0/catalog.py": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/legacy-focused/pytest/typed-source-response-inputs0/catalog.py.DATA",
+      "bytes": 132,
+      "git_blob": "be160aa91576c7aa8dd3ecfc26f6021c2ab50883",
+      "original_mode": "0o664",
+      "sha256": "46b89659d61d17bcf0726bc7ade5294c8f0f212ca5bf546cf2d3895e3d32325b"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/legacy-focused/pytest/typed-source-response-inputs0/original.json": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/legacy-focused/pytest/typed-source-response-inputs0/original.json.DATA",
+      "bytes": 994,
+      "git_blob": "9c4136ad05ef962d801ea6ced41d7715c647b663",
+      "original_mode": "0o664",
+      "sha256": "fb6130c2763c88bc318f9060e671abe95d851a6c3957bbc125d8f82989278cfa"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/legacy-focused/result.xml": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/legacy-focused/result.xml.DATA",
+      "bytes": 4474,
+      "git_blob": "711ad1cc0d2fe45f805976fd91ce3b721c39407b",
+      "original_mode": "0o664",
+      "sha256": "9c82cff5007ab74a1f7708ebbd4e54d157be91ad1157e529c01d160dd5a4f575"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/normal-local/actual-official-V2-and-legacy-Source-closed.json": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/normal-local/actual-official-V2-and-legacy-Source-closed.json.DATA",
+      "bytes": 3779,
+      "git_blob": "5bcc1871fe772cd163550c2e596705bba112901e",
+      "original_mode": "0o400",
+      "sha256": "23fd9dbf4cc2ed2327c5d294f92e1ec320dcfcd9bfe6ac53884c64e43249e5db"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/normal-local/checkout.py": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/normal-local/checkout.py.DATA",
+      "bytes": 2918,
+      "git_blob": "8a039374bfeca4e89d27e613e9e3014e9a1dd2d9",
+      "original_mode": "0o664",
+      "sha256": "982a9cfe257084beeac574027d4c8e8227eab034326100b40c94e2be6ea36cc0"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/normal-local/closeout.py": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/normal-local/closeout.py.DATA",
+      "bytes": 2762,
+      "git_blob": "d7b1c9f651a67e6e075e8b08e5c5f2d9647fabb4",
+      "original_mode": "0o664",
+      "sha256": "cde489fe9110f27323f24cfe4f516bcd37e2407e7521c6113f9a0e890f1cbc7b"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/normal-local/legacy/cache/README.md": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/legacy/cache/README.md.DATA",
+      "bytes": 302,
+      "git_blob": "b89018ced91c0a8af7f3f23ce8901870da89f3a0",
+      "original_mode": "0o664",
+      "sha256": "73fd6fccdd802c419a6b2d983d6c3173b7da97558ac4b589edec2dfe443db9ad"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/normal-local/legacy/local-source-closeout.json": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/normal-local/legacy/local-source-closeout.json.DATA",
+      "bytes": 9461,
+      "git_blob": "a0b0c787cb9b8c7e6a28359e61451807a17043ae",
+      "original_mode": "0o664",
+      "sha256": "4d3952ece9ceeaf58eb8d03e416534d927654acfccf41225f632961b8ea235bf"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/normal-local/legacy/result.xml": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/normal-local/legacy/result.xml.DATA",
+      "bytes": 4474,
+      "git_blob": "28ec89fef2261016775b02b8ef59e107db72edcb",
+      "original_mode": "0o664",
+      "sha256": "fc62cfb4396dae264a7860a6b1a663720c0e250989be0788afb1c240ae0ff47b"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/normal-local/official/cache/README.md": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/legacy/cache/README.md.DATA",
+      "bytes": 302,
+      "git_blob": "b89018ced91c0a8af7f3f23ce8901870da89f3a0",
+      "original_mode": "0o664",
+      "sha256": "73fd6fccdd802c419a6b2d983d6c3173b7da97558ac4b589edec2dfe443db9ad"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/normal-local/official/local-source-closeout.json": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/normal-local/official/local-source-closeout.json.DATA",
+      "bytes": 3985,
+      "git_blob": "996c7ecd45427a59ca8d157f2d221cf265206d42",
+      "original_mode": "0o664",
+      "sha256": "bf056ba976a8133189593e5ef7f65a3a04bcf441bedf6760ee5e20771cf51990"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/normal-local/official/result.xml": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/normal-local/official/result.xml.DATA",
+      "bytes": 1271,
+      "git_blob": "9c5cfd02f2cbd8e56d4698bec5e6724f7c7ebcea",
+      "original_mode": "0o664",
+      "sha256": "f6328b782a3b5ef19ef4592ded9f3ec98c1c44011bf45c1b66eaaaaf206451d4"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/normal-local/qualify_local_source.py": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/normal-local/qualify_local_source.py.DATA",
+      "bytes": 5807,
+      "git_blob": "bd09db1046a4604d3dcebf6f0ab0248650172372",
+      "original_mode": "0o664",
+      "sha256": "00346013ce44b0169dabe7d1a25405396a986414cba9be6c470744ecaf5e6745"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/normal-local/real-checkout-pins.json": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/normal-local/real-checkout-pins.json.DATA",
+      "bytes": 60311,
+      "git_blob": "a4685a8eec714f0d7e4a84ee68db8fa98dca8b90",
+      "original_mode": "0o664",
+      "sha256": "ed158decd77cd5c0179ae2fa4ad53bf625b9ee6d25e6875d0c3ebc5f324dbbdc"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/official.selectors": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/official.selectors.DATA",
+      "bytes": 540,
+      "git_blob": "e1ff6a3b1839634281015b2ff362adad3b29e619",
+      "original_mode": "0o664",
+      "sha256": "b6429fc7a9bf1f505ec398ac29d7168d42ef080a931b9eb0fc715ef7c341139d"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/owner.after.DATA": {
+      "bytes": 33983,
+      "git_blob": "b9711610e8735e857054f4b293eb61009a2c4708",
+      "original_mode": "0o664",
+      "published": {
+        "path": "ipfs_datasets_py/logic/autoformal/corpus_source_review_responses.py",
+        "repo": "datasets"
+      },
+      "sha256": "7d8708aa8b11bb3f0dfac8f4773cd5201e9423dae0c3ad62ebb437d336fa9b4b"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/owner.before.DATA": {
+      "bytes": 31940,
+      "git_blob": "f48770f68e72fc55f2bdf9bd0226dcc4e5af361c",
+      "original_mode": "0o664",
+      "published": {
+        "path": "docs/reconciliation/retained-legal-autoformalization-work-20261127/tmp-work/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/ipfs_datasets_py/logic/autoformal/corpus_source_review_responses.py.DATA",
+        "repo": "root"
+      },
+      "sha256": "519f91a39f0f6f3fb0b7226042fe75642833588f31af8eeea9c5a488d603c7e9"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/prepare-owner.py": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/prepare-owner.py.DATA",
+      "bytes": 5394,
+      "git_blob": "d37270875c455ab16e92460634b2aba0dbd36182",
+      "original_mode": "0o664",
+      "sha256": "f95fbda7d499ac85b52e38a046e8732121b3bd324d5a131df1f390b43adabbc9"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/prepare.py": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/prepare.py.DATA",
+      "bytes": 3323,
+      "git_blob": "f9fe158f9a95f32e8fab8bd7f9a5af22510174af",
+      "original_mode": "0o664",
+      "sha256": "36bba336c4611c2f207ba5f36ac65836ac05c51c3bc069fde68133664318189f"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/probe-official-pilot.py": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/probe-official-pilot.py.DATA",
+      "bytes": 3905,
+      "git_blob": "9a5cf58bd400850c0575e62a725e0b0775f8c9d1",
+      "original_mode": "0o664",
+      "sha256": "c6c658c0ca9f65fb51a9e166aea844a855c0d8cba557e3716ccbdf4efd1e2920"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/rebind-current.py": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/rebind-current.py.DATA",
+      "bytes": 1526,
+      "git_blob": "c6f6d22f53088692998b39e0a795612eeafd961c",
+      "original_mode": "0o664",
+      "sha256": "cb7f1137f9c8df4617157261a3968115fbcea48094a2c0cf800457a33478a650"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/red/result.xml": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/red/result.xml.DATA",
+      "bytes": 8090,
+      "git_blob": "686e5de28f5715f37543d515356966606e6bb7d9",
+      "original_mode": "0o664",
+      "sha256": "912afc2342afb70fea3292f9c5a5f749860f173d39c277249f09d2651618be89"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/retention-v2/pytest/typed-source-response-inputs0/catalog.py": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/legacy-focused/pytest/typed-source-response-inputs0/catalog.py.DATA",
+      "bytes": 132,
+      "git_blob": "be160aa91576c7aa8dd3ecfc26f6021c2ab50883",
+      "original_mode": "0o664",
+      "sha256": "46b89659d61d17bcf0726bc7ade5294c8f0f212ca5bf546cf2d3895e3d32325b"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/retention-v2/pytest/typed-source-response-inputs0/original.json": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/legacy-focused/pytest/typed-source-response-inputs0/original.json.DATA",
+      "bytes": 994,
+      "git_blob": "9c4136ad05ef962d801ea6ced41d7715c647b663",
+      "original_mode": "0o664",
+      "sha256": "fb6130c2763c88bc318f9060e671abe95d851a6c3957bbc125d8f82989278cfa"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/retention.selectors": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/retention.selectors.DATA",
+      "bytes": 6177,
+      "git_blob": "a3bb3d6ff0c045881a34975af2e646bba3ba2b8b",
+      "original_mode": "0o664",
+      "sha256": "0718fd91b66d03afce4811eb0e04d791ec7b7d560e3a1723786db2b4f3ceb070"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/retention/result.xml": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/retention/result.xml.DATA",
+      "bytes": 216,
+      "git_blob": "d9fb625831170a42b2c2dac7639a4a7683ba90f8",
+      "original_mode": "0o664",
+      "sha256": "0723459510164ad249fd90e94b0298c6be1dd85a31e5fcac72d60bdc5c119115"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/run-case.sh": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/run-case.sh.DATA",
+      "bytes": 707,
+      "git_blob": "b9ee75700a8f7950e8361d12823b6fc69a82c36f",
+      "original_mode": "0o664",
+      "sha256": "4d9db4663609ed10dbce0ce19acb4eea72297c5fe18466878d0860a14a34f5e1"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/seal-local.py": {
+      "archive": "phase2/P2-official-typed-response-owner-private-dlRQKWbc/seal-local.py.DATA",
+      "bytes": 5746,
+      "git_blob": "898ae6c9ec12db51b33088db9032b00d338a88d2",
+      "original_mode": "0o664",
+      "sha256": "fd12fef7683cb3b6354463803b114725a79e9020c455bfdf152de924f78fad26"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/test.after.DATA": {
+      "bytes": 70310,
+      "git_blob": "df57931491ad9ec491e25aa32ba425b752845e69",
+      "original_mode": "0o664",
+      "published": {
+        "path": "tests/unit/logic/autoformal/test_corpus_source_review_responses.py",
+        "repo": "datasets"
+      },
+      "sha256": "89f4da8752574ce6b77bd8ce0ffe45af9550e106e0198037350a1b1ca8526491"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-owner-private-dlRQKWbc/test.before.DATA": {
+      "bytes": 61814,
+      "git_blob": "5200c3d6e97021518052f4cc3eae2757f17d223d",
+      "original_mode": "0o664",
+      "published": {
+        "path": "docs/reconciliation/retained-legal-autoformalization-work-20261127/tmp-work/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/tests/unit/logic/autoformal/test_corpus_source_review_responses.py.DATA",
+        "repo": "root"
+      },
+      "sha256": "aa3b15977f14c61a929bf98999c4fca39ca5869a62b003df6b565a329f5b4560"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-tests-private-sElW4eXY/official-v2-typed-source-responses.py.fragment": {
+      "archive": "phase2/P2-official-typed-response-tests-private-sElW4eXY/official-v2-typed-source-responses.py.fragment.DATA",
+      "bytes": 7279,
+      "git_blob": "7ca408728152ae2ecbe1f6226abec8c338d44123",
+      "original_mode": "0o400",
+      "sha256": "2a184ad25f995e15ecd5c7ca9ec35ad0d9201753694eecf32d96316a46c6982a"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-typed-response-tests-private-sElW4eXY/official-v2-typed-source-responses.v02.py.fragment": {
+      "bytes": 8496,
+      "git_blob": "4d10d79da4e6004843d1732ef26435744dcaeb1c",
+      "original_mode": "0o400",
+      "published": {
+        "path": "docs/reconciliation/retained-legal-autoformalization-work-20261127/phase-work/P2-official-typed-response-tests-private-sElW4eXY/official-v2-typed-source-responses.v02.py.fragment.DATA",
+        "repo": "root"
+      },
+      "sha256": "69be2c272eecf1a9b6bdc8cdd14cbc09702a54de71023204ebf71ec05f9fc912"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-official-v2-current-zha9lelB/handoff-write.json": {
+      "archive": "published/publish-official-v2-current-zha9lelB/handoff-write.json.DATA",
+      "bytes": 1229,
+      "git_blob": "085cff30de450e440f12e19c118bf8972d00f57f",
+      "original_mode": "0o664",
+      "sha256": "d3fa855082616e7d24f53b7354828aa0e6d16253311db66712c0a72d0b1570ff"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-official-v2-current-zha9lelB/handoff.addendum.md": {
+      "archive": "published/publish-official-v2-current-zha9lelB/handoff.addendum.md.DATA",
+      "bytes": 1644,
+      "git_blob": "991dd6bde937fc81be51bfcc981d5f3edae908b5",
+      "original_mode": "0o664",
+      "sha256": "428de2084938ba232a4d30c7e43bbbe9e455a52774a82cc566119e85e9fb150a"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-official-v2-current-zha9lelB/publication-final.json": {
+      "archive": "published/publish-official-v2-current-zha9lelB/publication-final.json.DATA",
+      "bytes": 4819,
+      "git_blob": "75a5dc89ede2219be6106adce2094c29a12bd515",
+      "original_mode": "0o664",
+      "sha256": "5d9103e42b66a9e19af9ae45ae78438ce1652225c20cf717336480130627daa6"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-official-v2-current-zha9lelB/ready.json": {
+      "archive": "published/publish-official-v2-current-zha9lelB/ready.json.DATA",
+      "bytes": 3818,
+      "git_blob": "984c56f0c5595b11f6f530f4ade62ef3b2dc6af9",
+      "original_mode": "0o664",
+      "sha256": "74af481d389fc8d58a97a2bd1a4631b0e26e8aaddbce664a1817aa19eaf9ec9e"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-official-v2-packets-current-Zs0jBQwr/handoff-write.json": {
+      "archive": "published/publish-official-v2-packets-current-Zs0jBQwr/handoff-write.json.DATA",
+      "bytes": 1252,
+      "git_blob": "69f6778b7820f2992358c3750ae81bbb53049006",
+      "original_mode": "0o664",
+      "sha256": "7ac12fb0b6c00571e6e327c1af2c7b58f11f389fa7bb613b17cf5fe880b86c52"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-official-v2-packets-current-Zs0jBQwr/handoff.addendum.md": {
+      "archive": "published/publish-official-v2-packets-current-Zs0jBQwr/handoff.addendum.md.DATA",
+      "bytes": 1353,
+      "git_blob": "790e79ff50fb12598de4b5312a741e48ad1920de",
+      "original_mode": "0o664",
+      "sha256": "cabdcbe81c9580ee8f59185b41f9fc1f201ec6029ec8d5b549f5f1893a452c05"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-official-v2-packets-current-Zs0jBQwr/publication-final.json": {
+      "archive": "published/publish-official-v2-packets-current-Zs0jBQwr/publication-final.json.DATA",
+      "bytes": 3803,
+      "git_blob": "7e7273460cc1c7a426b45a61c48a5a2a2ddc29dc",
+      "original_mode": "0o664",
+      "sha256": "789b67da8a4dfc864cee829022234c8dc0ae91e6381c1f3ef044a62cb531bb70"
+    },
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-official-v2-packets-current-Zs0jBQwr/ready.json": {
+      "archive": "published/publish-official-v2-packets-current-Zs0jBQwr/ready.json.DATA",
+      "bytes": 2802,
+      "git_blob": "efb13fa09471df6f00d01896e957a6f6030a977a",
+      "original_mode": "0o664",
+      "sha256": "25a36c77ad08e892ca80cee90b34a20912a11c2d5a363ef2adf45ee3f698f257"
+    },
+    "/tmp/phase2-official-v2-signed-adjudication-append-e849c2/official-v2-signed-adjudication.py.fragment": {
+      "archive": "phase2/P2-official-adjudication-baseline-private-l4oXoS1I/signed-adjudication.py.fragment.DATA",
+      "bytes": 5647,
+      "git_blob": "afb23b74d5ea98e62c96afe4710c354f7a0f54f6",
+      "original_mode": "0o400",
+      "sha256": "1a3da2af06a60ba578dd8fab870064a258646007dd8f161dc0dccb59a77eb82d"
+    },
+    "/tmp/phase2-official-v2-signed-adjudication-append-e849c2/official-v2-source-application-negative.py.fragment": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/official-negative.py.fragment.DATA",
+      "bytes": 1565,
+      "git_blob": "dcd7947180ff1f89989613fe14708c5e1841e13d",
+      "original_mode": "0o400",
+      "sha256": "8bc6e03d6b5c426117ec5d904c0159329b3370a2d0b4d32709a94c88d08fe7d0"
+    },
+    "/tmp/phase2-official-v2-signed-adjudication-append-e849c2/official-v2-source-application.py.fragment": {
+      "archive": "phase2/P2-official-application-baseline-private-aeZJmRfp/official-test.py.fragment.DATA",
+      "bytes": 5927,
+      "git_blob": "0569c067776f51af51b24c9bab149c59ecd11938",
+      "original_mode": "0o400",
+      "sha256": "3682a7375f8a7af8f7b3f657080c800ca132f8a8dcef3db47d4b90a8cd95e5f8"
+    },
+    "/tmp/phase2-official-v2-signed-adjudication-append-e849c2/official-v2-source-review-packets.py.fragment": {
+      "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/tests.official.py.fragment.DATA",
+      "bytes": 8308,
+      "git_blob": "049ded44b22cc63a5362298d3a72f95986a41f12",
+      "original_mode": "0o400",
+      "sha256": "77fc13470dcb140f50a41216468e91bfd714cdd4e17feba8a3dbd7bdbe9294e3"
+    }
+  },
+  "verified_base_heads": {
+    "accelerate": "219ba3da0f62f772801d71715e22c506faa21126",
+    "datasets": "7c0d40925436665bd90f62941d66ec63edadfb5b",
+    "hallucinate": "d5d8e4ad1aeb62de43c9921943e6f004249fe2fd",
+    "root": "a013cb437b56ff3cdc14540460a34727f4b57d0e"
+  }
+}

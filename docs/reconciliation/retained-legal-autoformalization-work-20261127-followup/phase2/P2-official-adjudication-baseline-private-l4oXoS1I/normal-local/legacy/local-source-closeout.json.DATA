@@ -1,0 +1,54 @@
+{
+  "actual_lease": {
+    "canonical_root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/checkout",
+    "cooperative": true,
+    "lock_path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/checkout/workspace/control-plane/source-leases/source.lock",
+    "mode": "read",
+    "schema_version": "autoencoder-source-lease/v1",
+    "waited_seconds": 7.311999797821045e-05
+  },
+  "all_source_pins_verified_before_and_after": true,
+  "collected": [
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_shared_body_authenticates_two_new_roles_and_preserves_every_original_group",
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_original_or_graph_domains_and_unrecognized_roles_cannot_supply_adjudication_authority[schema-legal-corpus-source-context-review-signed-claim/v1]",
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_original_or_graph_domains_and_unrecognized_roles_cannot_supply_adjudication_authority[schema-legal-graph-review-signed-claim/v1]",
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_original_or_graph_domains_and_unrecognized_roles_cannot_supply_adjudication_authority[action-record_source_context_review_evidence/v1]",
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_original_or_graph_domains_and_unrecognized_roles_cannot_supply_adjudication_authority[audience-legal-autoformalization-source-context-review/v1]",
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_original_or_graph_domains_and_unrecognized_roles_cannot_supply_adjudication_authority[role-adjudicator]",
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_external_shaped_fixture_can_satisfy_declared_authority_only_while_source_disagreement_and_admission_flags_remain",
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_existing_typed_response_owner_regenerates_once_for_the_complete_ordered_batch",
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_producer_drift_during_existing_authority_signature_verification_refuses_whole_collection"
+  ],
+  "commit": "8003780e1ac5a2dd86c1a8df4cab34874f6eb1ab",
+  "conftest_origins": [
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/checkout/conftest.py",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/checkout/tests/conftest.py",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/checkout/tests/unit/conftest.py"
+  ],
+  "elapsed_seconds": 50.058291429653764,
+  "error": 0,
+  "executed": [
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_shared_body_authenticates_two_new_roles_and_preserves_every_original_group",
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_original_or_graph_domains_and_unrecognized_roles_cannot_supply_adjudication_authority[schema-legal-corpus-source-context-review-signed-claim/v1]",
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_original_or_graph_domains_and_unrecognized_roles_cannot_supply_adjudication_authority[schema-legal-graph-review-signed-claim/v1]",
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_original_or_graph_domains_and_unrecognized_roles_cannot_supply_adjudication_authority[action-record_source_context_review_evidence/v1]",
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_original_or_graph_domains_and_unrecognized_roles_cannot_supply_adjudication_authority[audience-legal-autoformalization-source-context-review/v1]",
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_original_or_graph_domains_and_unrecognized_roles_cannot_supply_adjudication_authority[role-adjudicator]",
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_external_shaped_fixture_can_satisfy_declared_authority_only_while_source_disagreement_and_admission_flags_remain",
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_existing_typed_response_owner_regenerates_once_for_the_complete_ordered_batch",
+    "tests/unit/logic/autoformal/test_corpus_source_adjudication.py::test_producer_drift_during_existing_authority_signature_verification_refuses_whole_collection"
+  ],
+  "execution_scope": "local software fixture",
+  "failure": 0,
+  "group": "legacy",
+  "junit": {
+    "bytes": 2222,
+    "cases": 9,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-official-adjudication-baseline-private-l4oXoS1I/normal-local/legacy/result.xml",
+    "sha256": "bfaa0c4a28b386c55b9428dacbc6c085a0e5d9a552ca870511d46f2b4b0e492c"
+  },
+  "returncode": 0,
+  "same_collection_execution_xml": true,
+  "skipped": 0,
+  "source_read_closed": true
+}

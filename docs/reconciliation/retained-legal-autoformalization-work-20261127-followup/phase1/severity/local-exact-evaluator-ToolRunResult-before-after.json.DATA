@@ -1,0 +1,85 @@
+{
+  "after": {
+    "info": {
+      "accepted": true,
+      "diagnostics": [],
+      "has_report": true
+    },
+    "information": {
+      "accepted": true,
+      "diagnostics": [],
+      "has_report": true
+    },
+    "list_severity": {
+      "accepted": false,
+      "diagnostics": [
+        "missing, ambiguous or incorrectly bound Lean declaration dependency report"
+      ],
+      "has_report": false
+    },
+    "object_severity": {
+      "accepted": false,
+      "diagnostics": [
+        "missing, ambiguous or incorrectly bound Lean declaration dependency report"
+      ],
+      "has_report": false
+    },
+    "stderr_nested_record": {
+      "accepted": false,
+      "diagnostics": [
+        "lean reported error diagnostics: malformed Lean JSON diagnostic on stderr"
+      ],
+      "has_report": false
+    },
+    "stdout_nested_record": {
+      "accepted": false,
+      "diagnostics": [
+        "lean reported error diagnostics: malformed Lean JSON diagnostic on stdout"
+      ],
+      "has_report": false
+    },
+    "warning": {
+      "accepted": false,
+      "diagnostics": [
+        "missing, ambiguous or incorrectly bound Lean declaration dependency report"
+      ],
+      "has_report": false
+    }
+  },
+  "after_sha256": "de99fe31f53fb34bf247e5c24b4b1424ca06874f1da5dc8875b3dbf886d1e4cb",
+  "before": {
+    "info": {
+      "accepted": true,
+      "diagnostics": [],
+      "has_report": true
+    },
+    "information": {
+      "accepted": true,
+      "diagnostics": [],
+      "has_report": true
+    },
+    "list_severity": {
+      "error": "TypeError"
+    },
+    "object_severity": {
+      "error": "TypeError"
+    },
+    "stderr_nested_record": {
+      "error": "RecursionError"
+    },
+    "stdout_nested_record": {
+      "error": "RecursionError"
+    },
+    "warning": {
+      "accepted": false,
+      "diagnostics": [
+        "missing, ambiguous or incorrectly bound Lean declaration dependency report"
+      ],
+      "has_report": false
+    }
+  },
+  "before_sha256": "18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800",
+  "existing_ToolRunResult_AST_used": true,
+  "native_invocations": 0,
+  "ordinary_pytest_cases": 0
+}

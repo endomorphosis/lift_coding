@@ -1,0 +1,504 @@
+"""Same caller and pinned exports; only transport replies are fictional."""
+import contextlib
+import hashlib
+import json
+from pathlib import Path
+import tempfile
+import types
+import unittest
+
+CALLER_RAW = None
+WORKDIR = None
+ROOT_CAUSE = []
+EXPORT_CACHE = None
+
+
+class FictionalConnection:
+    def __init__(self, backend, number):
+        self.backend, self.number = backend, number
+        self.socket = self
+        self.queue = []
+
+    def settimeout(self, seconds):
+        assert 0 < seconds <= 15.0
+
+    def send(self, raw):
+        request = json.loads(raw)
+        self.backend.sent.append(request)
+        method = request.get("method")
+        if "id" not in request:
+            assert method == "initialized"
+            return
+        result = self.backend.respond(method, request["params"], self.number)
+        reply = {"jsonrpc": "2.0", "id": request["id"], "result": result}
+        fault = self.backend.fault
+        if method == "thread/resume":
+            if fault == "resume_refused":
+                reply = {"jsonrpc": "2.0", "id": request["id"], "error": {"code": -32000, "message": "fictional refusal"}}
+            if fault == "resume_lost_ack":
+                self.queue.append(TimeoutError("fictional lost resume acknowledgement")); return
+            if fault == "resume_send_error":
+                raise OSError("fictional ambiguous send failure")
+            if fault == "resume_id_mismatch":
+                reply["id"] += 1
+            if fault == "resume_duplicate_keys":
+                encoded = json.dumps(reply)
+                self.queue.append('{"id":' + str(request["id"]) + ',' + encoded[1:]); return
+            if fault == "resume_byte_cap":
+                self.queue.append(" " * 262145 + json.dumps(reply)); return
+            if fault == "resume_notification_cap":
+                self.queue.extend(json.dumps({"method": "fictional_notification"}) for _ in range(33))
+        if method == "thread/read" and self.backend.resumed and fault == "post_resume_duplicate_keys":
+            encoded = json.dumps(reply)
+            self.queue.append('{"id":' + str(request["id"]) + ',' + encoded[1:]); return
+        if method == "turn/start" and fault == "start_lost_ack":
+            self.queue.append(TimeoutError("fictional lost start acknowledgement")); return
+        self.queue.append(json.dumps(reply))
+
+    def recv(self, *, timeout):
+        assert 0 < timeout <= 15.0
+        assert self.queue, "fictional server received an unexpected receive"
+        value = self.queue.pop(0)
+        if isinstance(value, BaseException):
+            raise value
+        return value
+
+
+class FictionalBackend:
+    def __init__(self, caller, paths, *, loaded=False, active=False, fault=None, terminal="completed"):
+        self.caller, self.paths = caller, paths
+        self.loaded, self.active, self.fault = loaded, active, fault
+        self.terminal = terminal
+        self.resumed = False
+        self.sent = []
+        self.opened = self.closed = 0
+        self.mutation_checks = []
+        self.tampered = False
+
+    @contextlib.contextmanager
+    def open(self, socket_path, *, timeout_seconds, max_response_bytes):
+        assert socket_path == self.caller.SOCKET_PATH
+        # Preserve the existing sender's 4MiB cap; read/idle RPC uses256KiB.
+        assert 0 < timeout_seconds <= 15.0 and max_response_bytes in (262144, 4194304)
+        self.opened += 1
+        try:
+            yield FictionalConnection(self, self.opened)
+        finally:
+            self.closed += 1
+
+    def methods(self):
+        return [value.get("method") for value in self.sent]
+
+    def _thread(self, number):
+        loaded = self.loaded or self.resumed
+        status = "active" if self.active and loaded else "idle" if loaded else "notLoaded"
+        accepts = True if loaded else None
+        identity = self.caller.THREAD_ID
+        if self.fault == "initial_wrong_thread" and number == 1:
+            identity = "fictional-other-thread"
+        if self.fault == "initial_bad_accept_type" and number == 1:
+            accepts = 1
+        if self.fault == "loaded_no_direct_input" and loaded:
+            accepts = False
+        if number > 1 and not self.resumed:
+            if self.fault == "before_wrong_thread":
+                identity = "fictional-other-thread"
+            if self.fault == "before_became_loaded":
+                status, accepts = "idle", True
+        if self.resumed:
+            if self.fault == "after_wrong_thread":
+                identity = "fictional-other-thread"
+            if self.fault == "after_no_direct_input":
+                accepts = False
+            if self.fault == "after_active":
+                status = "active"
+            if self.fault in {"message_tamper", "reservation_tamper"} and not self.tampered:
+                name = "message_artifact_path" if self.fault == "message_tamper" else "unknown_reservation_path"
+                p = Path(self.paths[name]); p.chmod(0o600); p.write_bytes(b"fictional changed artifact")
+                self.tampered = True
+        return {"id": identity, "status": {"type": status}, "canAcceptDirectInput": accepts}
+
+    def _turn(self, number):
+        identity = "fictional-original-turn"
+        status = "inProgress" if self.active else self.terminal
+        if self.fault == "initial_missing_turn" and number == 1:
+            return None
+        if number > 1 and not self.resumed:
+            if self.fault == "before_turn_changed":
+                identity = "fictional-changed-turn"
+            if self.fault == "before_active":
+                status = "inProgress"
+        if self.resumed:
+            if self.fault == "after_turn_changed":
+                identity = "fictional-changed-turn"
+            if self.fault == "after_status_changed":
+                status = "failed" if self.terminal != "failed" else "interrupted"
+            if self.fault == "after_active":
+                status = "inProgress"
+        return {"id": identity, "status": status}
+
+    def respond(self, method, params, number):
+        if method == "initialize":
+            return {}
+        assert params.get("threadId") == self.caller.THREAD_ID
+        if method == "thread/read":
+            assert params == {"threadId": self.caller.THREAD_ID, "includeTurns": False}
+            return {"thread": self._thread(number)}
+        if method == "thread/turns/list":
+            assert params == {"threadId": self.caller.THREAD_ID, "limit": 1, "sortDirection": "desc"}
+            turn = self._turn(number)
+            if number > 1 and self.fault == "reservation_race" and not self.resumed:
+                Path(self.paths["unknown_reservation_path"]).write_text("fictional preexisting namespace")
+            return {"data": [] if turn is None else [turn]}
+        if method in {"thread/resume", "turn/start", "turn/steer"}:
+            # Actual artifact writer/fsync/readback must precede every mutation.
+            message = Path(self.paths["message_artifact_path"])
+            unknown = Path(self.paths["unknown_reservation_path"])
+            assert message.read_bytes() == b"A fictional newly selected bounded handoff."
+            assert unknown.is_file()
+            row = json.loads(unknown.read_bytes())
+            assert row["delivery_state"] == "delivery_unknown"
+            assert row["thread_id"] == self.caller.THREAD_ID
+            assert row["expected_observed_turn"] == {"id": "fictional-original-turn", "status": "inProgress" if self.active else self.terminal}
+            assert row["message_sha256"] == self.paths["message_sha256"]
+            self.mutation_checks.append(method)
+        if method == "thread/resume":
+            assert params == {"threadId": self.caller.THREAD_ID, "excludeTurns": True}
+            self.resumed = True
+            if self.fault == "resume_wrong_ack_thread":
+                return {"thread": {"id": "fictional-other-thread", "status": {"type": "idle"}, "canAcceptDirectInput": True}}
+            if self.fault == "resume_bad_ack":
+                return {"thread": []}
+            return {"thread": {"id": self.caller.THREAD_ID, "status": {"type": "idle"}, "canAcceptDirectInput": True}}
+        if method == "turn/start":
+            assert set(params) == {"threadId", "input"}
+            assert params["input"] == [{"type": "text", "text": "A fictional newly selected bounded handoff.", "text_elements": []}]
+            return {"turn": {"id": "fictional-new-turn", "status": "inProgress"}}
+        if method == "turn/steer":
+            assert params["expectedTurnId"] == "fictional-original-turn"
+            return {"turnId": "fictional-original-turn"}
+        raise AssertionError("unselected fictional method " + method)
+
+
+class CallerFixture:
+    def __init__(self, *, loaded=False, active=False, fault=None, terminal="completed"):
+        self.temp = tempfile.TemporaryDirectory(prefix="owned-fictional-", dir=WORKDIR)
+        root = Path(self.temp.name)
+        message = b"A fictional newly selected bounded handoff."
+        (root / "input.DATA").write_bytes(message)
+        self.caller = types.ModuleType("_private_existing_invoke_once")
+        self.caller.__file__ = str(Path(WORKDIR) / "selected-caller.py.DATA")
+        exec(compile(CALLER_RAW, self.caller.__file__, "exec"), self.caller.__dict__)
+        self.bindings = dict(Root_selected=True, message_path=str(root / "input.DATA"),
+            message_bytes=len(message), message_sha256=hashlib.sha256(message).hexdigest(),
+            private_root=str(root), message_artifact_path=str(root / "retained.DATA"),
+            unknown_reservation_path=str(root / "unknown.json"), sender_receipt_path=str(root / "sender.json"),
+            result_path=str(root / "result.json"))
+        self.backend = FictionalBackend(self.caller, self.bindings, loaded=loaded, active=active,
+                                        fault=fault, terminal=terminal)
+        original = self.caller.load_existing_functions
+        def actual_exports_with_only_fictional_transport():
+            global EXPORT_CACHE
+            # The immutable pinned exports are loaded by the actual source
+            # verifier once per cohort. Reuse their real function objects;
+            # only the transport binding changes between sequential fixtures.
+            if EXPORT_CACHE is None:
+                EXPORT_CACHE = original()
+            ns = EXPORT_CACHE
+            ns["_open_codex_app_connection"] = self.backend.open
+            return ns
+        self.caller.load_existing_functions = actual_exports_with_only_fictional_transport
+
+    def invoke(self):
+        value = self.caller.invoke_once(self.bindings)
+        for name in ("processing_confirmed", "completion_eligible", "execution_granted", "claim_granted", "retryable"):
+            assert value.get(name) is False, (name,value)
+        assert self.backend.opened == self.backend.closed
+        return value
+
+    def no_replay(self, test):
+        prior = len(self.backend.sent)
+        again = self.invoke()
+        test.assertEqual(again["reason"], "operation_namespace_already_used_no_replay")
+        test.assertEqual(len(self.backend.sent), prior)
+
+    def close(self):
+        assert self.backend.opened == self.backend.closed
+        self.temp.cleanup()
+
+
+class ExistingCallerHydrationTests(unittest.TestCase):
+    def case(self, **kwargs):
+        value = CallerFixture(**kwargs)
+        self.addCleanup(value.close)
+        return value
+
+    def assert_no_dispatch(self, f):
+        self.assertNotIn("turn/start", f.backend.methods())
+        self.assertNotIn("turn/steer", f.backend.methods())
+
+    def test_actual_unloaded_terminal_root_cause_then_same_caller_can_enqueue(self):
+        f = self.case()
+        result = f.invoke()
+        ROOT_CAUSE.append({"result":result["delivery_state"],"reason":result["reason"],
+            "read_snapshot":result.get("state_observation",{}).get("thread_snapshot"),
+            "methods":f.backend.methods()})
+        self.assertEqual(result["delivery_state"], "accepted_enqueue_only")
+        self.assertTrue(result["enqueue_acknowledged"])
+        self.assertEqual(f.backend.methods().count("thread/resume"), 1)
+        self.assertEqual(f.backend.methods().count("turn/start"), 1)
+
+    def test_all_three_original_terminal_statuses_can_hydrate(self):
+        for status in ("completed", "failed", "interrupted"):
+            with self.subTest(status=status):
+                f = self.case(terminal=status)
+                self.assertEqual(f.invoke()["delivery_state"], "accepted_enqueue_only")
+                self.assertEqual(f.backend.mutation_checks, ["thread/resume", "turn/start"])
+
+    def test_metadata_only_resume_has_exact_two_params_and_durable_unknown(self):
+        f = self.case(); result = f.invoke()
+        self.assertEqual(result["delivery_state"], "accepted_enqueue_only")
+        resume = [r for r in f.backend.sent if r.get("method") == "thread/resume"]
+        self.assertEqual(len(resume), 1)
+        self.assertEqual(resume[0]["params"], {"threadId":f.caller.THREAD_ID,"excludeTurns":True})
+        self.assertEqual(f.backend.mutation_checks, ["thread/resume", "turn/start"])
+        self.assertEqual(f.backend.methods().count("thread/read"), 3)
+        self.assertEqual(f.backend.methods().count("thread/turns/list"), 3)
+        self.assertNotIn("thread/start", f.backend.methods())
+
+    def test_existing_loaded_terminal_starts_without_resume(self):
+        f = self.case(loaded=True)
+        self.assertEqual(f.invoke()["delivery_state"], "accepted_enqueue_only")
+        self.assertNotIn("thread/resume", f.backend.methods())
+        self.assertEqual(f.backend.mutation_checks, ["turn/start"])
+
+    def test_existing_loaded_active_steers_without_resume_or_start(self):
+        f = self.case(loaded=True, active=True)
+        self.assertEqual(f.invoke()["delivery_state"], "accepted_enqueue_only")
+        self.assertEqual(f.backend.mutation_checks, ["turn/steer"])
+
+    def test_unloaded_active_is_not_resumed_or_dispatched(self):
+        f = self.case(active=True)
+        self.assertEqual(f.invoke()["delivery_state"], "refused")
+        self.assertEqual(f.backend.mutation_checks, [])
+
+    def test_wrong_initial_thread_and_bad_schema_never_mutate(self):
+        for fault in ("initial_wrong_thread", "initial_bad_accept_type", "initial_missing_turn"):
+            with self.subTest(fault=fault):
+                f=self.case(fault=fault);self.assertEqual(f.invoke()["delivery_state"],"refused")
+                self.assertEqual(f.backend.mutation_checks, [])
+
+    def test_before_resume_identity_or_terminal_drift_never_mutates(self):
+        for fault in ("before_wrong_thread", "before_turn_changed", "before_active", "before_became_loaded"):
+            with self.subTest(fault=fault):
+                f=self.case(fault=fault);self.assertEqual(f.invoke()["delivery_state"],"refused")
+                self.assertEqual(f.backend.mutation_checks, [])
+
+    def test_loaded_thread_refusing_input_is_not_hydrated(self):
+        f=self.case(loaded=True,fault="loaded_no_direct_input")
+        self.assertEqual(f.invoke()["delivery_state"],"refused")
+        self.assertEqual(f.backend.mutation_checks, [])
+
+    def test_after_resume_thread_turn_and_capability_drift_never_dispatches(self):
+        for fault in ("after_wrong_thread","after_turn_changed","after_status_changed","after_active","after_no_direct_input"):
+            with self.subTest(fault=fault):
+                f=self.case(fault=fault); result=f.invoke()
+                self.assertEqual(result["delivery_state"],"refused")
+                self.assertEqual(f.backend.mutation_checks,["thread/resume"])
+                self.assert_no_dispatch(f)
+                self.assertTrue(Path(f.bindings["unknown_reservation_path"]).is_file())
+                f.no_replay(self)
+
+    def test_resume_lost_ack_is_unknown_and_never_replayed(self):
+        f=self.case(fault="resume_lost_ack"); result=f.invoke()
+        self.assertEqual(result["delivery_state"],"delivery_unknown")
+        self.assertEqual(f.backend.mutation_checks,["thread/resume"])
+        self.assert_no_dispatch(f); f.no_replay(self)
+
+    def test_resume_send_error_is_unknown_and_never_replayed(self):
+        f=self.case(fault="resume_send_error"); result=f.invoke()
+        self.assertEqual(result["delivery_state"],"delivery_unknown")
+        self.assertEqual(f.backend.mutation_checks,["thread/resume"])
+        self.assert_no_dispatch(f); f.no_replay(self)
+
+    def test_explicit_resume_refusal_never_dispatches_or_replays(self):
+        f=self.case(fault="resume_refused"); result=f.invoke()
+        self.assertEqual(result["delivery_state"],"delivery_unknown")
+        self.assertEqual(f.backend.mutation_checks,["thread/resume"])
+        self.assert_no_dispatch(f); f.no_replay(self)
+
+    def test_resume_wrong_identity_and_malformed_ack_are_unknown(self):
+        for fault in ("resume_wrong_ack_thread","resume_bad_ack"):
+            with self.subTest(fault=fault):
+                f=self.case(fault=fault);self.assertEqual(f.invoke()["delivery_state"],"delivery_unknown")
+                self.assertEqual(f.backend.mutation_checks,["thread/resume"])
+                self.assert_no_dispatch(f); f.no_replay(self)
+
+    def test_resume_response_id_and_duplicate_json_refuse(self):
+        for fault in ("resume_id_mismatch","resume_duplicate_keys"):
+            with self.subTest(fault=fault):
+                f=self.case(fault=fault);self.assertEqual(f.invoke()["delivery_state"],"delivery_unknown")
+                self.assertEqual(f.backend.mutation_checks,["thread/resume"])
+                self.assert_no_dispatch(f); f.no_replay(self)
+
+    def test_resume_response_caps_fail_closed_without_dispatch(self):
+        for fault in ("resume_byte_cap","resume_notification_cap"):
+            with self.subTest(fault=fault):
+                f=self.case(fault=fault);self.assertEqual(f.invoke()["delivery_state"],"delivery_unknown")
+                self.assertEqual(f.backend.mutation_checks,["thread/resume"])
+                self.assert_no_dispatch(f); f.no_replay(self)
+
+    def test_post_resume_duplicate_json_fails_without_message(self):
+        f=self.case(fault="post_resume_duplicate_keys"); result=f.invoke()
+        self.assertEqual(result["delivery_state"],"refused")
+        self.assertEqual(f.backend.mutation_checks,["thread/resume"])
+        self.assert_no_dispatch(f); f.no_replay(self)
+
+    def test_start_lost_ack_after_resume_is_unknown_and_never_replayed(self):
+        f=self.case(fault="start_lost_ack"); result=f.invoke()
+        self.assertEqual(result["delivery_state"],"delivery_unknown")
+        self.assertEqual(f.backend.mutation_checks,["thread/resume","turn/start"])
+        f.no_replay(self)
+
+    def test_accepted_enqueue_is_not_replayed(self):
+        f=self.case();self.assertEqual(f.invoke()["delivery_state"],"accepted_enqueue_only")
+        f.no_replay(self)
+
+    def test_existing_unknown_namespace_is_not_delivery_proof_or_retry_permission(self):
+        f=self.case();Path(f.bindings["unknown_reservation_path"]).write_bytes(b"fictional UNKNOWN")
+        self.assertEqual(f.invoke()["reason"],"operation_namespace_already_used_no_replay")
+        self.assertEqual(f.backend.sent, [])
+
+    def test_root_unselected_and_oversized_message_create_no_output_or_rpc(self):
+        for change in ({"Root_selected":False},{"message_bytes":1001}):
+            with self.subTest(change=change):
+                f=self.case();f.bindings.update(change);self.assertEqual(f.invoke()["delivery_state"],"refused")
+                self.assertEqual(f.backend.sent, [])
+                self.assertFalse(Path(f.bindings["message_artifact_path"]).exists())
+
+    def test_unknown_reservation_race_prevents_resume_send(self):
+        f=self.case(fault="reservation_race");self.assertEqual(f.invoke()["delivery_state"],"refused")
+        self.assertEqual(f.backend.mutation_checks, [])
+        f.no_replay(self)
+
+    def test_changed_message_or_unknown_after_resume_prevents_start(self):
+        for fault in ("message_tamper","reservation_tamper"):
+            with self.subTest(fault=fault):
+                f=self.case(fault=fault);self.assertEqual(f.invoke()["delivery_state"],"refused")
+                self.assertEqual(f.backend.mutation_checks,["thread/resume"])
+                self.assert_no_dispatch(f);f.no_replay(self)
+
+    def test_unsupported_original_terminal_status_is_not_hydrated(self):
+        f=self.case(terminal="unknown")
+        self.assertEqual(f.invoke()["delivery_state"],"refused")
+        self.assertEqual(f.backend.mutation_checks, [])
+
+
+    def test_active_reservation_collision_retains_a_durable_no_send_outcome(self):
+        f = self.case(loaded=True, active=True)
+        prior_turn = f.backend._turn
+        occupied = b'{"delivery_state":"delivery_unknown","fictional_other_owner":true}\n'
+        def concurrent_reservation(number):
+            value = prior_turn(number)
+            if number == 1:
+                path = Path(f.bindings["unknown_reservation_path"])
+                path.write_bytes(occupied)
+                path.chmod(0o400)
+            return value
+        f.backend._turn = concurrent_reservation
+        try:
+            result = f.invoke()
+        except Exception as error:
+            self.fail("active reservation refusal lost its durable outcome: " + type(error).__name__)
+        self.assertEqual(result["delivery_state"], "refused")
+        self.assertEqual(result["reason"], "existing_sender_preflight_refused")
+        self.assertIs(result["current_call_mutation_started"], False)
+        self.assertEqual(result["error_type"], "ValueError")
+        self.assertTrue(Path(f.bindings["result_path"]).is_file())
+        saved = json.loads(Path(f.bindings["result_path"]).read_bytes())
+        self.assertEqual(saved["delivery_state"], "refused")
+        self.assertIs(saved["enqueue_acknowledged"], False)
+        self.assertEqual(Path(f.bindings["unknown_reservation_path"]).read_bytes(), occupied)
+        self.assertEqual(f.backend.mutation_checks, [])
+        self.assertNotIn("turn/steer", f.backend.methods())
+        f.no_replay(self)
+
+    def test_active_reservation_auth_failure_retains_unknown_and_no_send_outcome(self):
+        f = self.case(loaded=True, active=True)
+        loader = f.caller.load_existing_functions
+        tampered = b"fictional changed reservation; never retry\n"
+        def exports_with_reservation_tamper():
+            exports = dict(loader())
+            writer = exports["write_codex_handoff_artifact"]
+            def write_then_compete(**kwargs):
+                retained = writer(**kwargs)
+                if kwargs["artifact_path"] == f.bindings["unknown_reservation_path"] and retained.get("artifact_state") == "retained":
+                    path = Path(kwargs["artifact_path"])
+                    path.chmod(0o600)
+                    path.write_bytes(tampered)
+                    path.chmod(0o400)
+                return retained
+            exports["write_codex_handoff_artifact"] = write_then_compete
+            return exports
+        f.caller.load_existing_functions = exports_with_reservation_tamper
+        try:
+            result = f.invoke()
+        except Exception as error:
+            self.fail("active reservation authentication failure lost its outcome: " + type(error).__name__)
+        self.assertEqual(result["delivery_state"], "refused")
+        self.assertEqual(result["reason"], "existing_sender_preflight_refused")
+        self.assertIs(result["current_call_mutation_started"], False)
+        self.assertEqual(result["error_type"], "ValueError")
+        self.assertEqual(Path(f.bindings["unknown_reservation_path"]).read_bytes(), tampered)
+        self.assertEqual(f.backend.mutation_checks, [])
+        self.assertNotIn("turn/steer", f.backend.methods())
+        saved = json.loads(Path(f.bindings["result_path"]).read_bytes())
+        self.assertEqual(saved["delivery_state"], "refused")
+        self.assertIs(saved["retryable"], False)
+        f.no_replay(self)
+
+    def test_active_sender_exception_stays_unknown_after_its_call_boundary(self):
+        f = self.case(loaded=True, active=True)
+        loader = f.caller.load_existing_functions
+        invoked = []
+        def exports_with_exceptional_sender():
+            exports = dict(loader())
+            def exceptional_sender(**kwargs):
+                invoked.append(dict(kwargs))
+                self.assertTrue(Path(f.bindings["unknown_reservation_path"]).is_file())
+                raise TimeoutError("fictional exceptional sender boundary; enqueue unknown")
+            exports["send_codex_thread_message"] = exceptional_sender
+            return exports
+        f.caller.load_existing_functions = exports_with_exceptional_sender
+        result = f.invoke()
+        self.assertEqual(result["delivery_state"], "delivery_unknown")
+        self.assertEqual(result["reason"], "existing_sender_exception")
+        self.assertEqual(len(invoked), 1)
+        self.assertEqual(invoked[0]["expected_turn_id"], "fictional-original-turn")
+        self.assertEqual(invoked[0]["max_attempts"], 1)
+        self.assertIs(result["enqueue_acknowledged"], False)
+        self.assertIs(result["retryable"], False)
+        self.assertTrue(Path(f.bindings["unknown_reservation_path"]).is_file())
+        f.no_replay(self)
+
+    def test_real_existing_sender_lost_active_ack_stays_unknown_without_replay(self):
+        f = self.case(loaded=True, active=True)
+        previous_open = f.backend.open
+        @contextlib.contextmanager
+        def lose_steer_reply(*args, **kwargs):
+            with previous_open(*args, **kwargs) as connection:
+                previous_recv = connection.recv
+                def receive(*, timeout):
+                    if f.backend.sent[-1].get("method") == "turn/steer":
+                        raise TimeoutError("fictional lost steer acknowledgement")
+                    return previous_recv(timeout=timeout)
+                connection.recv = receive
+                yield connection
+        f.backend.open = lose_steer_reply
+        result = f.invoke()
+        self.assertEqual(result["delivery_state"], "delivery_unknown")
+        self.assertIs(result["enqueue_acknowledged"], False)
+        self.assertEqual(f.backend.mutation_checks, ["turn/steer"])
+        self.assertIs(result["retryable"], False)
+        self.assertTrue(Path(f.bindings["unknown_reservation_path"]).is_file())
+        f.no_replay(self)
