@@ -1,0 +1,1242 @@
+{
+  "schema": "renewed-all-work-git-reconciliation/v1",
+  "observed_utc": "2026-11-27T17:30:56.498392+00:00",
+  "prior_permission_paths": 176,
+  "still_denied": 176,
+  "now_readable": [],
+  "absent": [],
+  "paths": [
+    {
+      "path": "/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-colord.service-Ow83Hr",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-openvpn@spark.service-fOE2G3",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-bluetooth.service-e88rKg",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-switcheroo-control.service-oh1Img",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-srp_daemon.service-iutvGn",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/tmp/snap-private-tmp",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-openvpn@hallucinate.service-OECtAQ",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-polkit.service-yUiBP7",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-systemd-resolved.service-EjSfxD",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-systemd-logind.service-W4DSWa",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-fwupd.service-IINF0D",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-upower.service-QxudLG",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-ModemManager.service-ColTFJ",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-systemd-timesyncd.service-K6jmbU",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/supervisor-ranked-successor-20261012/live-instruction-census-03/archived-cli-02/results/sample",
+      "uid": 100999,
+      "gid": 100999,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/launch",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/doctor-index",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/owner",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/doctor/worktrees",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/vectors/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/repository/.runtime/initial/semantic/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/repository/.runtime/initial/semantic/world-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/repository/.runtime/initial/world/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/repository/.runtime/initial/world/world-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/repository/.runtime/published-context/admitted-4375c7e4f7664c26b6de47adabd55fa0/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/retrieval-metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/repository/.runtime/published-context/admitted-4375c7e4f7664c26b6de47adabd55fa0/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/semantic/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/repository/.runtime/published-context/admitted-4375c7e4f7664c26b6de47adabd55fa0/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/semantic/world-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/repository/.runtime/published-context/admitted-4375c7e4f7664c26b6de47adabd55fa0/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/world/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/repository/.runtime/published-context/admitted-4375c7e4f7664c26b6de47adabd55fa0/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/world/world-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/policy/lifecycle",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/policy/profile",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/launch",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/doctor-index",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/owner",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/doctor/worktrees",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/vectors/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/repository/.runtime/initial/semantic/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/repository/.runtime/initial/semantic/world-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/repository/.runtime/initial/world/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/repository/.runtime/initial/world/world-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/repository/.runtime/published-context/admitted-ec320813e24d466fbe4c098b75e71cc4/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/retrieval-metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/repository/.runtime/published-context/admitted-ec320813e24d466fbe4c098b75e71cc4/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/semantic/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/repository/.runtime/published-context/admitted-ec320813e24d466fbe4c098b75e71cc4/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/semantic/world-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/repository/.runtime/published-context/admitted-ec320813e24d466fbe4c098b75e71cc4/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/world/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/repository/.runtime/published-context/admitted-ec320813e24d466fbe4c098b75e71cc4/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/world/world-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/policy/lifecycle",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/policy/profile",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/launch",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/doctor-index",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/owner",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/doctor/worktrees",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/vectors/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/repository/.runtime/initial/semantic/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/repository/.runtime/initial/semantic/world-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/repository/.runtime/initial/world/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/repository/.runtime/initial/world/world-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/policy/lifecycle",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/policy/profile",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/launch",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/doctor-index",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/owner",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/doctor/worktrees",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/vectors/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/repository/.runtime/initial/semantic/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/repository/.runtime/initial/semantic/world-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/repository/.runtime/initial/world/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/repository/.runtime/initial/world/world-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/repository/.runtime/published-context/admitted-2fac54aff47c4b51b1298e6a7e79356d/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/retrieval-metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/repository/.runtime/published-context/admitted-2fac54aff47c4b51b1298e6a7e79356d/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/semantic/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/repository/.runtime/published-context/admitted-2fac54aff47c4b51b1298e6a7e79356d/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/semantic/world-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/repository/.runtime/published-context/admitted-2fac54aff47c4b51b1298e6a7e79356d/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/world/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/repository/.runtime/published-context/admitted-2fac54aff47c4b51b1298e6a7e79356d/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/world/world-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/policy/lifecycle",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/policy/profile",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/launch",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/doctor-index",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/owner",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/doctor/worktrees",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/vectors/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/repository/.runtime/initial/semantic/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/repository/.runtime/initial/semantic/world-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/repository/.runtime/initial/world/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/repository/.runtime/initial/world/world-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/repository/.runtime/published-context/admitted-adfbdb69237e4bab87bd800f99a62419/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/retrieval-metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/repository/.runtime/published-context/admitted-adfbdb69237e4bab87bd800f99a62419/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/semantic/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/repository/.runtime/published-context/admitted-adfbdb69237e4bab87bd800f99a62419/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/semantic/world-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/repository/.runtime/published-context/admitted-adfbdb69237e4bab87bd800f99a62419/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/world/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/repository/.runtime/published-context/admitted-adfbdb69237e4bab87bd800f99a62419/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/world/world-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/policy/lifecycle",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/policy/profile",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/docker-runtime08-qualification/pytest-temp",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/docker-symbolic-learned-supplement-02/pytest-temp",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/docker-symbolic-learned-gate-01/pytest-temp",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/security-checkpoint-integration-20260929/native-docker-01/pytest-temp",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/no-index-diagnosis-20260929/docker-corrected-qualification-01/pytest-temp",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/docker-nonroot-doctor/indexes",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/docker-nonroot-doctor/worktrees",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified/doctor/indexes",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified/doctor/worktrees",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v2/doctor/indexes",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v2/doctor/worktrees",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v3/doctor/indexes",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v3/doctor/worktrees",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v3/vector/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/indexes",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/worktrees",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/checkout/.runtime/before/semantic/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/checkout/.runtime/before/semantic/world-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/checkout/.runtime/before/world/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/checkout/.runtime/before/world/world-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/checkout/.runtime/after/semantic/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/checkout/.runtime/after/semantic/world-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/checkout/.runtime/after/world/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/checkout/.runtime/after/world/world-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/vectors-before/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/local-policy/lifecycle",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/local-policy/profile",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/vectors-after/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/vector/metadata-lake",
+      "uid": 100999,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-dBzNaA",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-DtkpNH",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-VmoNED",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-7OYOPu",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-xb85he",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-goYTlr",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-KkOwOL",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-agykcE",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-GZUuK0",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-X4g0g5",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-SsFmpu",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-vhcYJK",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-fg9GGG",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-1dP4k3",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-i9BLlm",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-yZvODI",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-DoNaF0",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-Bztulc",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-Gqp30Y",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-9v7iai",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-FVYOpM",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-PBZLUg",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-vYwoKW",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-Zp0CNp",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-KAW0jn",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-xSyt73",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-WrlNIt",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-ZoF45P",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-mIfbGV",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-wAfcxz",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-JaKI8w",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-WrlevM",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-4koQgU",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-gIpJCr",
+      "uid": 0,
+      "gid": 0,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7451/work/work",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o0",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7446/work/work",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o0",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7465/work/work",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o0",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7448/fs/var/cache/apt/archives/partial",
+      "uid": 100041,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7448/fs/var/lib/apt/lists/partial",
+      "uid": 100041,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7448/work/work",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o0",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7452/work/work",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o0",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7455/work/work",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o0",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7471/work/work",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o0",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7468/work/work",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o0",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7467/work/work",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o0",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7470/work/work",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o0",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7466/work/work",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o0",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7454/work/work",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o0",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7449/work/work",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o0",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7472/work/work",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o0",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7447/work/work",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o0",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7469/work/work",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o0",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7453/work/work",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o0",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7445/fs/var/cache/apt/archives/partial",
+      "uid": 100041,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7445/fs/var/lib/apt/lists/partial",
+      "uid": 100041,
+      "gid": 1000,
+      "mode": "0o700",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7445/work/work",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o0",
+      "readable_now": false
+    },
+    {
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7450/work/work",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o0",
+      "readable_now": false
+    }
+  ]
+}

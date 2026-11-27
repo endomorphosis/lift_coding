@@ -1,0 +1,248 @@
+"""Late-bind the proven result-cache READ4 entry for P1. This binder does not dispatch."""
+import ast
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import stat
+import sys
+import time
+
+BASE = Path('/tmp/Root-P1-cache-reload-owned-existing-route-wK9s5mUF')
+A_COMPANION = Path("/tmp/Root-result-cache-owned-existing-route-L4Wyme59/accelerate")
+ORIGINAL = {
+    "path": "/tmp/Root-result-cache-owned-existing-route-L4Wyme59/read4-controls/Root-selected-existing-result-cache-READ4-entry.py",
+    "bytes": 23776,
+    "sha256": "7ff056f593c20c3fa016d692cf3153bfa78bbc4d106fe6899693eb0c39985af7",
+}
+PACKET = {
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/Phase1-proof-cache-reload-filename-private-v01-rdtjc1jx/SEALED-Phase1-cache-reload-filename-binding-exact2-private-v01.json",
+    "bytes": 16931,
+    "sha256": "d754b5b134f3116aeac0efdc04b515e006140e41cc4f9f80eed2e7b55d8c834d",
+}
+INDEX_REL = ".git/index"
+INDEX_KIND = "selected_actual_Git_index"
+ENVELOPE = 64 * 1024 * 1024
+HEAD_A = "fae7981fa576817536a3c7aa62c5d28dc417f214"
+HEAD_D_BEFORE = "937ad474d2d8650e3ccee16c10319a9c72d4429a"
+FIELDS = ("st_dev", "st_ino", "st_mode", "st_nlink", "st_uid", "st_gid", "st_size", "st_mtime_ns", "st_ctime_ns")
+
+
+def full9(status):
+    return {name: str(getattr(status, name)) for name in FIELDS}
+
+
+def read_pin(ref):
+    path = Path(ref["path"])
+    assert type(ref["bytes"]) is int and 0 < ref["bytes"] <= 8 * 1024 * 1024
+    assert re.fullmatch("[0-9a-f]{64}", ref["sha256"])
+    assert path.is_absolute()
+    first = path.lstat()
+    assert stat.S_ISREG(first.st_mode) and first.st_nlink == 1
+    assert first.st_uid == os.getuid() and first.st_size == ref["bytes"]
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+    with os.fdopen(fd, "rb") as stream:
+        assert full9(os.fstat(stream.fileno())) == full9(first)
+        raw = stream.read(ref["bytes"] + 1)
+        assert full9(os.fstat(stream.fileno())) == full9(first) == full9(path.lstat())
+    assert len(raw) == ref["bytes"] and hashlib.sha256(raw).hexdigest() == ref["sha256"]
+    return raw
+
+
+def retain(path, data):
+    raw = data if type(data) is bytes else (json.dumps(data, sort_keys=True, indent=2) + "\n").encode()
+    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o400)
+    with os.fdopen(fd, "wb") as stream:
+        stream.write(raw)
+        stream.flush()
+        os.fsync(stream.fileno())
+    return {"path": str(path), "bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()}
+
+
+def verify_root(root):
+    assert set(root) == {"root", "Git_HEAD", "Git_tree"}
+    for field in ("Git_HEAD", "Git_tree"):
+        assert re.fullmatch("[0-9a-f]{40}", root[field])
+    fs = Path(root["root"])
+    assert fs.is_dir() and fs.resolve() == fs
+
+
+def main():
+    # All paths except the original evidence references are selected by the existing Root.
+    assert len(sys.argv) == 5, "handoff path, bytes, SHA-256, new private output directory"
+    handoff_ref = {"path": sys.argv[1], "bytes": int(sys.argv[2]), "sha256": sys.argv[3]}
+    handoff = json.loads(read_pin(handoff_ref))
+    assert handoff["Root_selected"] is True
+    closed_write = json.loads(read_pin(handoff["closed_write"]))
+    assert closed_write["write_complete"] is True and closed_write["Source_closed"] is True
+    assert closed_write["module_closed"] is True
+    freeze = json.loads(read_pin(handoff["local_freeze"]))
+    assert freeze["local_clean"] is True and freeze["exact_changes_only"] is True
+    assert freeze["pushed"] is False
+    assert freeze["source_closed"] == handoff["closed_write"]
+    assert len(handoff["frozen_roots"]) == 2
+    candidate, companion = handoff["frozen_roots"]
+    verify_root(candidate)
+    verify_root(companion)
+    candidate_root, companion_root = (Path(row["root"]) for row in (candidate, companion))
+    assert candidate_root == BASE / "datasets" and companion_root == A_COMPANION
+    assert companion["Git_HEAD"] == HEAD_A
+    assert candidate["Git_HEAD"] == freeze["frozen"]["HEAD"] and candidate["Git_HEAD"] != HEAD_D_BEFORE
+    assert candidate["Git_tree"] == freeze["frozen"]["tree"]
+    assert freeze["frozen_roots"] == handoff["frozen_roots"]
+
+    packet = json.loads(read_pin(PACKET))
+    posts = {entry["repo_relative_path"]: entry["postimage"] for entry in packet["files"]}
+    installed = {str(Path(entry["path"]).relative_to(candidate["root"])): entry for entry in closed_write["installed"]}
+    assert set(freeze["committed"]) == set(installed) == set(posts)
+    for rel, pin in posts.items():
+        actually_installed = installed[rel]
+        committed = freeze["committed"][rel]
+        assert all(actually_installed[field] == committed[field] for field in ("bytes", "sha256", "full9"))
+        assert actually_installed["bytes"] == pin["bytes"] and actually_installed["sha256"] == pin["sha256"]
+        assert committed["committed_blob"] == pin["git_blob"]
+        assert committed["stage0_matches"] is True and committed["raw_bytes_bound"] is True
+        assert actually_installed["path"] == str(Path(candidate["root"]) / rel)
+
+    epoch = json.loads(read_pin(handoff["full_epoch"]))
+    rows = epoch["rows"]
+    by_path = {row["path"]: row for row in rows}
+    assert 10 <= len(rows) == len(by_path)
+    for path, row in by_path.items():
+        file = Path(path)
+        assert file.is_absolute()
+        assert any(file.is_relative_to(root["root"]) for root in handoff["frozen_roots"])
+        status = file.lstat()
+        assert stat.S_ISREG(status.st_mode) and status.st_nlink == 1 and status.st_size == row["bytes"]
+        assert full9(status) == row["full9"]
+        if row.get("sha256") is None:
+            assert file.is_relative_to(Path(candidate["root"]) / ".git") or file.is_relative_to(Path(companion["root"]) / ".git")
+            assert file.name != "index"
+        else:
+            assert re.fullmatch("[0-9a-f]{64}", row["sha256"])
+
+    # Lock both roots, capture both protected indexes, and capture exactly the two D posts.
+    targets = []
+    for root, rel in [
+        (candidate_root, INDEX_REL),
+        (companion_root, INDEX_REL),
+        *((candidate_root, rel) for rel in posts),
+    ]:
+        path = str(root / rel)
+        row = by_path[path]
+        kind = INDEX_KIND if rel == INDEX_REL else "proof_cache_existing_normal_role"
+        if rel == INDEX_REL:
+            blob = None
+            if root == candidate_root:
+                index = freeze["frozen"]["stage0_index"]
+                assert all(row[field] == index[field] for field in ("path", "bytes", "sha256", "full9"))
+            else:
+                assert row["sha256"] == "cfb5f870e52cd089eb6d2d26baf646f9f3e4ffd4bf59e36ea28fee05372c1ef5"
+        else:
+            blob = posts[rel]["git_blob"]
+            assert all(row[field] == installed[rel][field] for field in ("path", "bytes", "sha256", "full9"))
+        assert 0 < row["bytes"] <= 8 * 1024 * 1024
+        assert re.fullmatch("[0-9a-f]{64}", row["sha256"])
+        targets.append({
+            "path": path,
+            "root": str(root),
+            "relative_path": rel,
+            "kind": kind,
+            "exists": True,
+            "bytes": row["bytes"],
+            "expected_bytes": row["bytes"],
+            "body_cap": row["bytes"],
+            "expected_sha256": row["sha256"],
+            "full9": row["full9"],
+            "expected_git_blob_oid": blob,
+        })
+    assert len(targets) == len({target["path"] for target in targets}) == 4
+    assert sum(t["bytes"] for t in targets) * 2 + 28 * 1024 * 1024 < ENVELOPE
+
+    agents = handoff["AGENTS_chain_metadata"]
+    assert agents and len(agents) == len({row["path"] for row in agents})
+    for row in agents:
+        path = Path(row["path"])
+        assert path.is_absolute() and type(row["exists"]) is bool
+        if row["exists"]:
+            assert any(path.is_relative_to(root["root"]) for root in handoff["frozen_roots"])
+            assert full9(path.lstat()) == row["full9"]
+            read_pin(row["reuse_captured_raw"])
+        else:
+            assert not os.path.lexists(path)
+    assert set(handoff["approved_Source42_owner"]) == {"path", "bytes", "sha256"}
+    read_pin(handoff["approved_Source42_owner"])
+
+    cap = json.loads(read_pin(handoff["cap"]))
+    ledger = cap["selected"]
+    assert "capturesComplete" in ledger and "captures" in ledger
+    assert cap["added_Source_envelope"] == ENVELOPE
+    retained = cap["after_full_precharge"]
+    for ceiling, used in (("global_cap", "used"), ("internal_cap", "internal_used")):
+        assert type(ledger[ceiling]) is int and type(ledger[used]) is int
+        assert ledger[ceiling] - ledger[used] >= ENVELOPE
+        assert retained[ceiling] == ledger[ceiling] and retained[used] == ledger[used] + ENVELOPE
+    assert retained["captures"] >= ledger["captures"] + 1
+    start = handoff["launch_not_before_utc_ns"]
+    end = handoff["launch_deadline_utc_ns"]
+    assert type(start) is int and type(end) is int
+    assert start <= time.time_ns() < end and 0 < end - start <= 60 * 10**9
+
+    # Retain the genuine selected-read ABI. This is preparation for Root's separate launch.
+    out = Path(sys.argv[4]).absolute()
+    assert out.parent.resolve() == out.parent and not out.exists()
+    assert out.is_relative_to(BASE)
+    entry = read_pin(ORIGINAL).decode()
+    out.mkdir(mode=0o700)
+    request = retain(out / "Root-current-P1-cache-reload-existing-READ4-request.json", {
+        "schema": "current-P1-cache-reload-D-local-A-published-READ4-existing-Source42/v1",
+        "Source_READ_selected": True,
+        "ledger_before": ledger,
+        "exact_new_body_targets": targets,
+        "all_candidate_metadata": targets,
+        "literal_metadata_candidate_count": len(targets),
+        "target_count": len(targets),
+        "frozen_roots": handoff["frozen_roots"],
+        "approved_current_Source42_owner_binding": handoff["approved_Source42_owner"],
+        "AGENTS_chain_metadata": agents,
+        "named_metadata_recheck_reference": handoff["full_epoch"],
+        "named_metadata_count": len(rows),
+        "namespace_metadata": handoff.get("namespace_metadata", []),
+        "closed_D_write_reference_separate": handoff["closed_write"],
+        "current_D_local_freeze": handoff["local_freeze"],
+        "exact_A_only_companion": True,
+        "Source_or_SDK_effects_pending": "fresh Source READ only",
+        "sealed_exact_P1_cache_reload_unit": PACKET,
+    })
+    selection = retain(out / "Root-selected-existing-P1-cache-reload-READ4.json", {
+        "Root_selected": True,
+        "Source_operation_max_bytes": ENVELOPE,
+        "ledger_before": ledger,
+        "request": request,
+        "fresh_output_namespace": str(out / "actual-output"),
+        "launch_not_before_utc_ns": start,
+        "launch_deadline_utc_ns": end,
+        "cap": handoff["cap"],
+        "ref_current_route": ORIGINAL,
+    })
+    slot_values = {
+        "SEL": repr(selection),
+        "REQ": repr(request),
+        "OUT": f"Path({str(out / 'actual-output')!r})",
+        "before": repr(ledger),
+    }
+    for slot, value in slot_values.items():
+        entry, matches = re.subn(r"^" + slot + r" = .*$", lambda _: slot + " = " + value, entry, flags=re.M)
+        assert matches == 1
+    entry = entry.replace("RESULT_CACHE_CURRENT_D_FROZEN_READ4", "P1_CACHE_RELOAD_CURRENT_D_FROZEN_READ4")
+    ast.parse(entry)
+    entries = ast.parse(entry)
+    carries = {stmt.targets[0].id: stmt.value.value for stmt in entries.body if isinstance(stmt, ast.Assign) and isinstance(stmt.targets[0], ast.Name) and stmt.targets[0].id in ("CARRIED_OPERATOR_BYTES", "CARRIED_OPERATOR_CAPTURES")}
+    assert carries == {"CARRIED_OPERATOR_BYTES": 16777216, "CARRIED_OPERATOR_CAPTURES": 2048}
+    operator = retain(out / "Root-selected-existing-P1-cache-reload-READ4-entry.py", entry.encode())
+    print(json.dumps({"operator": operator, "selection": selection, "request": request, "targets": len(targets)}))
+
+
+if __name__ == "__main__":
+    main()

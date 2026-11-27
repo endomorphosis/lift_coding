@@ -1,0 +1,70 @@
+import ast,hashlib,json,os,stat,subprocess,time
+from pathlib import Path
+base=Path(__file__).resolve().parent
+def defs(path, funcs, names):
+    tree=ast.parse(Path(path).read_bytes())
+    nodes=[x for x in tree.body if ((isinstance(x,ast.FunctionDef) and (funcs is None or x.name in funcs)) or
+            (isinstance(x,ast.Assign) and getattr(x.targets[0],'id',None) in names))]
+    return compile(ast.Module(body=nodes,type_ignores=[]),str(path),'exec')
+exec(defs('/tmp/Root-P2-whole-component-managed-R5-n8Fkdm2q/run-read3.py',None,{'policy'}))
+exec(defs(base/'run-source1.py',{'ack'},{'status'}))
+read4,_=read(base/'native-READ4-terminal.json',2363,'8f94b366ee390e0acf5e1bd4381eb30f61d735ddea87c7492e1f1325df4f1507')
+r=val(read4)
+assert r['returncode']==0 and r['Source_closed'] and r['owned_module_closed'] and r['handle'] is None
+inp=r['native_input_tuple']
+assert inp['sha256']=='e3d64019443773e883e60081289b2634a3df6c70b37c72c58228d54d19156df7'
+material=Path('/tmp/P1-Guide583-existing-Native2-prepared-INERT-iDXkyN/native2-current-controls-v02.py.DATA')
+read(material,22252,'0bac75b1a97a9e205bf3c04ccf84b467597837f2624302589a35e6479c656716')
+history,_=read('/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/Root-current-existing-translated-cache-Native2-binding-v02.json',30017)
+resource=val(history)['resource']
+state_ref,b=read(resource['state_path'])
+assert len(b)<65536
+state=json.loads(b)
+assert state['config']==resource['expected_config'] and state['child_process_capacity']==resource['expected_capacity']
+before=r['fully_retained_ledger']
+n=160*1024**2
+chosen={**before,'global_cap':before['global_cap']+n,'internal_cap':before['internal_cap']+n}
+paid={**chosen,'used':chosen['used']+n,'internal_used':chosen['internal_used']+n,'captures':chosen['captures']+1}
+assert paid['global_cap']-paid['used']==paid['internal_cap']-paid['internal_used']==6356992
+assert paid['global_cap']-paid['internal_cap']==190591874
+human=val(val(r['cap'])['authority'])
+cap=keep('Source-only-current-Native2-full-retained-cap.json',{'previous_charge':read4,'prior':before,'selected':chosen,
+ 'after_full_retained_precharge':paid,'added_Source_only_envelope':n,'exact_human_affirmation':human['human_authorization'],
+ 'all_prior_costs_retained':True,'resource_policy_capacity_unchanged':True,'physical_IO_accounting_complete':False})
+now=time.time_ns()
+sel=keep('Root-selected-current-Native2-once.json',{'Root_selected':True,'case_profile':'P1-native-cache-controlled-translation/v1',
+ 'input_tuple':inp,'clock_scope':{'kind':'exact submission window for existing validation profile',
+ 'not_before_utc_ns':now,'submit_deadline_utc_ns':now+180*10**9},'full_charge':cap,
+ 'current_resource_state':state_ref,'output_namespace':str(base/'actual-current-native2-output')})
+def argv(pin):return [pin['path'],str(pin['bytes']),pin['sha256']]
+stage=subprocess.run(['/usr/bin/python3','-I','-B',str(material),'stage',*argv(inp),*argv(sel)],capture_output=True,timeout=35)
+if stage.returncode:
+    err=keep('native2-stage-preeffect-refusal.json',{'returncode':stage.returncode,'selection':sel,'precharge':cap,
+        'fully_retained_ledger':paid,'native_dispatched':False,'stderr':stage.stderr.decode()})
+    ack('native2_staging_refusal',native_handle=None,stage_refusal=err)
+    print(stage.stderr.decode(),json.dumps(err),flush=True)
+    raise SystemExit(stage.returncode)
+bref=json.loads(stage.stdout)
+bound=val(bref)
+assert bound['selection']==sel and bound['input_tuple']==inp and bound['SDK_or_Native_dispatched'] is False
+assert bound['run_argv']==['/usr/bin/python3','-I','-B',bound['operator']['path']]
+read(*[bound['operator'][k] for k in ('path','bytes','sha256')])
+with (base/'native2.stdout').open('xb') as so,(base/'native2.stderr').open('xb') as se:
+    process=subprocess.Popen(bound['run_argv'],stdout=so,stderr=se)
+    live=keep('native2-actual-owner-live.json',{'owner':'Root','pid':process.pid,'selection':sel,'binding':bound['binding'],
+        'bound':bref,'precharge':cap,'profile':'P1-native-cache-controlled-translation/v1'})
+    ack('native2_actual_selected_existing_profile',native_handle=live,current_binding=bound['binding'])
+    print(json.dumps(live),flush=True)
+    rc=process.wait()
+report=Path(bound['output_namespace'])/'complete-native3-direct-existing-owner-report.json'
+terminal={'owner':'Root','pid':process.pid,'returncode':rc,'reaped':True,'native_handle':None,'selection':sel,
+    'bound':bref,'live':live,'precharge':cap,'fully_retained_ledger':paid,
+    'stdout':read(base/'native2.stdout')[0],'stderr':read(base/'native2.stderr')[0]}
+if report.exists():
+    rep,_=read(report);res=val(rep)
+    terminal.update(report=rep,Source_closed=res['Source_closed'],resource_cleanup_confirmed=res['resource_cleanup_confirmed'],
+          parent_home_cleanup_confirmed=res['parent_home_cleanup_confirmed'],actual_native_qualification=res['actual_native_qualification'])
+record=keep('native2-parent-terminal.json',terminal)
+ack('native2_runtime_closed_awaiting_detached_verification' if rc==0 else 'native2_terminal_refusal',native_handle=None,native_terminal=record)
+print(json.dumps(record),flush=True)
+raise SystemExit(rc)

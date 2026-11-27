@@ -1,0 +1,78 @@
+import ast, hashlib, json, os, stat, subprocess, sys, time
+from pathlib import Path
+
+work=Path(__file__).resolve().parent
+ordinary=Path(sys.argv[1])
+base=Path(sys.argv[2])
+assert ordinary.parent.parent==work and base.parent==work and not base.exists()
+base.mkdir(mode=0o700)
+helper=ast.parse((work/'run-read3.py').read_bytes())
+defs=[s for s in helper.body if isinstance(s,ast.FunctionDef) or (isinstance(s,ast.Assign) and getattr(s.targets[0],'id',None)=='policy')]
+exec(compile(ast.Module(body=defs,type_ignores=[]),'guarded retention helpers','exec'))
+old=Path('/tmp/Root-Phase2-V4-checked-native-complete-archive-existing-R5-v563-dPdI5ec9')
+plan_ref,b=read(old/'actual-request-bound-original-R5-binding.json',9433,'05e16dbc4979d2ca0c3d607cf72237455bfc6743288a499396bcfdd8f2ad2991')
+plan=json.loads(b)
+oref,b=read(ordinary)
+o=json.loads(b)
+assert o['terminal_returncode']==0 and o['Source_closed'] and o['resource_cleanup_confirmed'] and o['counts']['passed']==62
+exact_src,b=read(work/'P2-READ3-existing-Source-terminal.json',3142,'0474185aa79ed412c809f50afeb3badde97e89d39df6aef1390f5c6d937dcd76')
+assert o['exact_closed_READ3']==exact_src
+resource=plan['resource']
+state_path=Path(resource['state_path'])
+first=state_path.lstat()
+state_ref,b=read(state_path)
+assert full9(first)==full9(state_path.lstat()) and len(b)<65536
+state=json.loads(b)
+assert state['config']==resource['expected_config'] and state['child_process_capacity']==resource['expected_capacity']
+sref=keep('current-existing-R5-resource-policy-preselection.json',{**state_ref,'full9':full9(first),'existing_policy_matched':True})
+native_ref=plan['native_data']
+assets=val(native_ref)
+assert len(assets)==8
+for row in assets:
+    asset=Path(row['path'])
+    first=asset.lstat()
+    assert stat.S_ISREG(first.st_mode) and first.st_nlink==1
+    fd=os.open(asset,os.O_RDONLY|os.O_NOFOLLOW)
+    try:
+        assert full9(first)==full9(os.fstat(fd))==full9(asset.lstat())==row['actual_full9']
+        assert first.st_size==row['bytes']
+    finally:
+        os.close(fd)
+prior=o['fully_retained_ledger'] if len(sys.argv)==3 else val({'path':sys.argv[3],'bytes':int(sys.argv[4]),'sha256':sys.argv[5]})['fully_retained_ledger']
+n=128*1024**2
+selected={**prior,'global_cap':prior['global_cap']+n,'internal_cap':prior['internal_cap']+n}
+after={**selected,'used':selected['used']+n,'internal_used':selected['internal_used']+n,'captures':selected['captures']+1}
+assert selected['global_cap']-selected['internal_cap']==190591874
+source_precharge=keep('Source-only-R5-whole-project-full-precharge.json', {
+    'prior':prior,'selected':selected,'after_full_retained_precharge':after,
+    'prior_managed_ordinary62':oref,'prior_actual_READ3':exact_src,
+    'authority':val(val(exact_src)['cap'])['standing_authority'],'all_prior_costs_retained':True,
+    'conservative_Source_only_precharge':n,'physical_IO_total_known':False,'resource_profile_changed':False})
+binder=Path('/tmp/P2-current-existing-R5-v563-nonclock-bind-MuqubV/materialize-current-P2-existing-R5-v04.py.DATA')
+bref,b=read(binder,24421,'ab42bbde9d08f61d754c40587e08d3c8fd01d5a5dec72316567901718e1e6105')
+t=time.time_ns()
+late=keep('Root-current-R5-fresh-handoff.json',{
+    'Root_selected':True,'ordinary62':oref,'source_precharge':source_precharge,'toolchain_observation':native_ref,
+    'scheduler_observation':sref,'clock':{'start':t,'end':t+60*10**9},
+    'output_namespace':str(base/'launch'/'actual-output'),
+    'selected_scope':'Controlled fictional V4 physical whole-component observation: one existing R5 build, exact whole-project positive and wrong compiled-artifact pin refusal with the same freshly issued handle, six retained outputs'})
+stage=subprocess.run(['/usr/bin/python3','-I','-B',str(binder),late['path'],str(late['bytes']),late['sha256'],str(base/'launch')],capture_output=True,timeout=45)
+if stage.returncode:
+    r=keep('Root-R5-preeffect-staging-refusal.json',{'returncode':stage.returncode,'stderr':stage.stderr.decode(),'precharge':source_precharge,'actual_process_dispatched':False,'fully_retained_ledger':after})
+    print(stage.stderr.decode(),json.dumps(r),flush=True)
+    raise SystemExit(stage.returncode)
+manifest_ref=json.loads(stage.stdout)
+manifest=val(manifest_ref)
+assert manifest['ordinary62']==oref and manifest['actual_READ3']==exact_src and manifest['cap']==source_precharge
+out=Path(manifest_ref['path']).parent
+stdout,stderr=out/'operator.stdout',out/'operator.stderr'
+with stdout.open('xb') as so,stderr.open('xb') as se:
+    process=subprocess.Popen(manifest['parent_argv'],stdout=so,stderr=se)
+    live=keep('Root-current-R5-owner-live.json',{'owner':'Root','pid':process.pid,'selection':manifest['selection'],
+                  'launcher':manifest_ref,'precharge':source_precharge,'output_namespace':manifest['output_namespace']})
+    print(json.dumps(live),flush=True)
+    rc=process.wait()
+term=keep('Root-R5-actual-parent-terminal.json',{'pid':process.pid,'returncode':rc,'reaped':True,'selection':manifest['selection'],
+        'stdout':str(stdout),'stderr':str(stderr),'ordinary62':oref,'actual_handle':None,'fully_retained_ledger':after})
+print(json.dumps(term),flush=True)
+raise SystemExit(rc)

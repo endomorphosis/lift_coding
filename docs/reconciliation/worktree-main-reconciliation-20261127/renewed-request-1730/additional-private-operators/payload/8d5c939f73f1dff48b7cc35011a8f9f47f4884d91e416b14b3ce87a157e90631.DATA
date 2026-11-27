@@ -1,0 +1,70 @@
+"""Read back the existing managed234 result and its raw JUnit without dispatching tests."""
+import ast,hashlib,json,os,stat,sys,xml.etree.ElementTree as ET
+from pathlib import Path
+base=Path(__file__).resolve().parent
+helper=Path('/tmp/Root-P2-whole-component-managed-R5-n8Fkdm2q/run-read3.py')
+tree=ast.parse(helper.read_bytes())
+names={'full9','read','val','keep'}
+exec(compile(ast.Module([n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in names or isinstance(n,ast.Assign) and getattr(n.targets[0],'id',None)=='policy'],[]),str(helper),'exec'))
+assert len(sys.argv)==4
+tref,b=read(sys.argv[1],int(sys.argv[2]),sys.argv[3])
+t=json.loads(b)
+assert t['ordinary234_parent_terminal_returncode']==0 and t['actual_handle'] is None and t['reaped']
+assert t['qualification_complete'] and t['Source_closed'] and t['resource_cleanup_confirmed'] and t['parent_home_absent'] and not t['errors']
+r=val(t['ordinary_report'])
+assert r['qualification_complete'] and r['software_sequence_accepted'] and r['actual_parent_release_return']
+assert len(r['actual_Source_context_closure'])==2
+assert all(x['entered'] and x['exit_returned'] for x in r['actual_Source_context_closure'])
+assert r['resource_cleanup_confirmed'] and r['Source_closed'] and not r['errors']
+assert r['Source_WRITE_claimed'] is False and r['statutory_or_modelquality_or_convergence_authority'] is False
+parent=r['actual_parent_lease']
+state=r['resource_after_parent_release']['state']
+assert parent['lease_id'] not in state['leases']
+assert all(child.get('parent_lease_id')!=parent['lease_id'] for child in state['leases'].values())
+phases={p['operation']:p for p in r['phases'].values()}
+assert set(phases)=={'collect','run'}
+collect,run=(phases[k] for k in ('collect','run'))
+assert all(p['accepted'] and p['error'] is None for p in (collect,run))
+c,b=(p['actual_binding'] for p in (collect,run))
+ids=c['actual_collected_roster']
+assert len(ids)==len(set(ids))==234 and ids==b['actual_collected_roster']==b['actual_called_roster']
+assert len({n.split('[',1)[0] for n in ids})==65
+roster=read('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V4-checked-whole-project-private-yI1zwigi/current-main-reconciliation-v01/ordinary234-composed-INERT-v01/exact62-plus159-plus13-234-roster-DATA.json',
+    55513,'c1791e19adf3f3e95cf94f2941d72faa58c6c6f052eff132c8b466fd17f7995f')[0]
+assert set(val(roster)['literal_expected_nodeids'])==set(ids)
+for phase in (collect,run):
+    result,=phase['actual_results']
+    flags=result['result']
+    assert flags['returncode']==0 and flags['workspace_cleaned']
+    cleanup=flags['native_lifecycle']
+    assert cleanup['cleanup_confirmed'] and cleanup['leader_reaped']
+junit,=(x for x in run['actual_results'][0]['raw_output_files'] if x['logical_name']=='junit.xml')
+xml_pin,raw=read(junit['path'],junit['bytes'],junit['sha256'])
+cases=list(ET.fromstring(raw).iter('testcase'))
+assert len(cases)==234 and not any(x.find(k) is not None for x in cases for k in ('failure','error','skipped'))
+def identity(node):
+    suite,name=node.rsplit('::',1)
+    filename,*names=suite.split('::')
+    return '.'.join([filename[:-3].replace('/','.'),*names]),name
+assert [(x.attrib['classname'],x.attrib['name']) for x in cases]==list(map(identity,ids))
+source=val(r['source_read_binding_reference'])
+source3=val(t['Source3'])
+assert source3['returncode']==0 and source3['Source_closed'] and source3['owned_module_closed']
+assert source['actual_closed_READ3']==source3['actual_compact']
+f=val(t['freeze'])
+assert [f[k] for k in ('Git_HEAD','Git_tree')]==[r['git_candidate_provenance'][k] for k in ('HEAD','tree')]
+for rel,row in f['exact_posts'].items():
+    p=str(Path(f['root'])/rel)
+    if rel.startswith('tests/'):
+        assert all(binding['actual_test_rewrite_source_to_code'][p]['compile_source_sha256']==row['sha256'] for binding in (c,b))
+    else:
+        assert b['actual_compiled_current_Source'][p]==row['sha256']
+out=keep('actual-managed-composed234-qualified.json',{
+    'schema':'actual-current-P2-composed234-existing-R2-qualification-closed/v1','terminal_returncode':0,
+    'terminal':tref,'Source_closed':True,'resource_cleanup_confirmed':True,'parent_home_cleanup_confirmed':True,
+    'counts':{'tests':234,'passed':234,'failures':0,'errors':0,'skipped':0,'functions':65,'duplicates':0},
+    'subcohorts':{'P2_whole_project':62,'P1_Lean_parser':159,'P1_cache_filename':13},
+    'frozen_execution':t['freeze'],'exact_closed_READ3':t['Source3'],'exact_ordinary_report':t['ordinary_report'],
+    'raw_JUnit':xml_pin,'actual_COLLECT_RUN_JUnit_order_identical':True,
+    'Native_qualification_or_legal_model_admission':False,'fully_retained_ledger':t['fully_retained_ledger']})
+print(json.dumps(out),flush=True)

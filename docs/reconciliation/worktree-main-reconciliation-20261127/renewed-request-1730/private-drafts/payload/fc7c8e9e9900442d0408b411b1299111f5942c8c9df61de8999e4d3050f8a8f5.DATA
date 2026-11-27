@@ -1,0 +1,161 @@
+"""Prepare the existing private Datasets, Hallucinate and Root normal fast-forward pins."""
+import hashlib
+import json
+import os
+from pathlib import Path
+from runpy import run_path
+import sys
+from xml.etree import ElementTree
+
+HERE=Path(__file__).resolve().parent
+OWNED=Path('/tmp/Root-P1-cache-reload-owned-existing-route-wK9s5mUF')
+STORE=Path('/tmp/result-cache-existing-guide582-compose-QvKKkYWq/combined-publication')
+HELPER=Path('/tmp/watchdog-f7c3-existing-parent-pins-PO2BmHqy/prepare-parent-pins.py')
+KNOWN_ORIGINS={'datasets':'937ad474d2d8650e3ccee16c10319a9c72d4429a','accelerate':'fae7981fa576817536a3c7aa62c5d28dc417f214',
+      'hallucinate':'e81d2238467805afbe47e0afc96d0d18527363df','root':'f7f1760a7511cdbbdb029aca4fb2fe30df4bc1d7'}
+KNOWN_ORIGIN_OBSERVATION={'path':str(OWNED/'P1-before-Source2-fresh-origin-heads.json'),'bytes':322,
+      'sha256':'e25a57abb9742ce8cdc4e3b7f4841d28bb32d4aafaa6a827561a639ddad7ff4d'}
+ARCHIVE='docs/reconciliation'
+RENEWED=ARCHIVE+'/retained-legal-autoformalization-work-20261127-renewed'
+FOLLOWUP=ARCHIVE+'/retained-legal-autoformalization-work-20261127-followup'
+CODE={'ipfs_datasets_py/logic/legal_ir/proof_cache.py','tests/unit/logic/legal_ir/test_proof_cache.py'}
+GUIDES={'ipfs_datasets_py/logic/autoformal/docs/'+name for name in ('BACKLOG.json','work_catalog.json','HANDOFF.md','TRAINING_HISTORY.md')}
+assert __debug__ and hashlib.sha256(HELPER.read_bytes()).hexdigest()=='d38cdc213ed74d01d4951408e6b3a2fb9ce4d00ac841ccd8ffabaf25a672c4e3'
+shared=run_path(str(HELPER))
+git,invoke,delta,tree,link_commit=(shared[k] for k in ('git','invoke','delta','tree','link_commit'))
+g=git.__globals__
+URLS,FLAGS,E=(shared[k] for k in ('URLS','FLAGS','E'))
+
+def pin(path):
+    b=path.read_bytes()
+    return {'path':str(path),'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest()}
+
+def read(ref):
+    path=Path(ref['path'])
+    assert path.is_absolute() and type(ref['bytes']) is int and 0 < ref['bytes'] <= 16 * 1024 * 1024
+    with path.open('rb') as stream:
+        body=stream.read(ref['bytes']+1)
+    assert len(body)==ref['bytes'] and hashlib.sha256(body).hexdigest()==ref['sha256']
+    return body
+
+def load(ref):
+    return json.loads(read(ref))
+
+def verify_ordinary(docs,code,qual):
+    assert qual['terminal_returncode']==0
+    actual=load(qual['actual_report'])
+    assert actual['schema']=='actual-frozen-local-D-phase1-proof-cache-reload-filename13-existing-owner/v1'
+    assert actual['Source_closed'] and actual['qualification_complete'] and actual['resource_cleanup_confirmed']
+    assert actual['actual_parent_release_return'] and actual['software_sequence_accepted'] and not actual['errors']
+    origins=actual['git_candidate_provenance']
+    assert origins['HEAD']==code['frozen']['HEAD'] and origins['tree']==code['frozen']['tree']
+    assert origins['local_frozen_Git_metadata_reference']==docs['qualified_code_before_docs']
+    assert actual['additional_A_provenance']['HEAD']==KNOWN_ORIGINS['accelerate']
+    phases={phase['operation']:phase for phase in actual['phases'].values()}
+    assert len(actual['phases'])==2 and set(phases)=={'collect','run'}
+    assert all(phase['accepted'] is True and not phase['error'] for phase in phases.values())
+    ids=phases['collect']['actual_binding']['actual_collected_roster']
+    assert ids==phases['run']['actual_binding']['actual_called_roster']
+    assert len(ids)==len(set(ids))==13 and len({item.split('[',1)[0] for item in ids})==8
+    suite,=ElementTree.fromstring(read(qual['ordinary_raw_JUnit'])).findall('testsuite')
+    cases=suite.findall('testcase')
+    assert len(cases)==int(suite.attrib['tests'])==13
+    assert all(int(suite.attrib[key])==0 for key in ('failures','errors','skipped'))
+    assert [case.attrib['name'] for case in cases]==[node.rsplit('::',1)[1] for node in ids]
+    assert not any(case.find(key) is not None for case in cases for key in ('failure','error','skipped'))
+
+def main():
+    assert len(sys.argv)==8
+    receipt={'path':sys.argv[1],'bytes':int(sys.argv[2]),'sha256':sys.argv[3]}
+    origin_ref={'path':sys.argv[4],'bytes':int(sys.argv[5]),'sha256':sys.argv[6]}
+    known=load(KNOWN_ORIGIN_OBSERVATION)
+    assert known['heads']==KNOWN_ORIGINS and known['direct_read_only'] is True
+    origin=load(origin_ref)
+    BASE=origin['heads']
+    assert origin['direct_read_only'] is True and origin['utc_ns']>=known['utc_ns']
+    assert BASE.keys()==KNOWN_ORIGINS.keys()
+    assert all(BASE[k]==KNOWN_ORIGINS[k] for k in ('datasets','accelerate'))
+    g.update(MAIN=BASE)
+    docs=load(receipt)
+    assert docs['schema']=='actual-guide583-exact-four-isolated-Source-freeze/v1' and docs['evidence_ordinal']==583
+    assert docs['terminal_returncode']==0 and docs['Source_closed'] and docs['module_closed'] and docs['write_complete']
+    assert docs['only_four_Git_changes'] and docs['exact_forward_and_inverse_verified'] and docs['pushed'] is False
+    code=load(docs['qualified_code_before_docs'])
+    ready=load(docs['composer_READY'])
+    qual=load(docs['ordinary_qualification'])
+    verify_ordinary(docs,code,qual)
+    assert docs['prior_values_preserved']=={'tasks':24,'components':126,'evidence_records':582,'Markdown_prefixes_exact':True}
+    assert set(code['committed'])==CODE and set(docs['committed_docs'])==GUIDES
+    assert code['local_clean'] and code['exact_changes_only'] and code['pushed'] is False
+    assert docs['prior_public_D']==BASE['datasets'] and docs['prior_D']==code['frozen']['HEAD']
+    assert docs['A']==BASE['accelerate']
+    assert ready['actual_ordinary_qualification']==docs['ordinary_qualification']
+    assert ready['qualified_code_before_docs']==docs['qualified_code_before_docs']
+    out=Path(sys.argv[7])
+    assert out.is_absolute() and out.parent==HERE
+    out.mkdir(mode=0o700,exist_ok=False)
+    g.update(WORK=out)
+    for field in ('NAME','EMAIL'):
+        value=invoke('-C','/home/barberb/lift_coding','config','--get','user.'+field.lower()).decode().strip()
+        E['GIT_AUTHOR_'+field]=E['GIT_COMMITTER_'+field]=value
+    alternatives={'datasets':OWNED/'datasets/.git/objects','hallucinate':STORE/'hallucinate.git/objects','root':STORE/'root.git/objects'}
+    for role,alternate in alternatives.items():
+        repository=out/(role+'.git')
+        invoke('init','--bare',str(repository))
+        assert alternate.is_dir()
+        (repository/'objects/info/alternates').write_text(str(alternate)+'\n')
+        assert git(role,'cat-file','-t',BASE[role]).strip()==b'commit'
+    git('root','merge-base','--is-ancestor',KNOWN_ORIGINS['root'],BASE['root'])
+    git('hallucinate','merge-base','--is-ancestor',KNOWN_ORIGINS['hallucinate'],BASE['hallucinate'])
+    d=docs['HEAD']
+    code_head=code['frozen']['HEAD']
+    assert git('datasets','rev-parse',d+'^{tree}').decode().strip()==docs['tree']
+    assert git('datasets','rev-parse',d+'^',d+'^^').decode().splitlines()==[code_head,BASE['datasets']]
+    assert delta('datasets',BASE['datasets'],code_head)==set(code['committed']) and len(code['committed'])==2
+    assert delta('datasets',code_head,d)==set(docs['committed_docs']) and len(docs['committed_docs'])==4
+    joined=code['committed']|docs['committed_docs']
+    assert len(joined)==6
+    for rel,row in joined.items():
+        assert tree('datasets',d,[rel])=={rel:['100644','blob',row['committed_blob']]}
+        body=git('datasets','cat-file','blob',row['committed_blob'])
+        assert len(body)==row['bytes'] and hashlib.sha256(body).hexdigest()==row['sha256']
+    git('datasets','update-ref','refs/heads/guide583-publication',d)
+    ph=['ipfs_accelerate_py','ipfs_datasets_py']
+    pr=['external/ipfs_accelerate','external/ipfs_datasets','hallucinate_app']
+    old_h,old_r=tree('hallucinate',BASE['hallucinate'],ph),tree('root',BASE['root'],pr)
+    assert old_h=={ph[0]:['160000','commit',BASE['accelerate']],ph[1]:['160000','commit',BASE['datasets']]}
+    assert old_r=={pr[0]:['160000','commit',BASE['accelerate']],pr[1]:['160000','commit',BASE['datasets']],pr[2]:['160000','commit',BASE['hallucinate']]}
+    h,th=link_commit('hallucinate',{ph[1]:d},'Pin Datasets proof-cache qualification and guide')
+    r,tr=link_commit('root',{pr[1]:d,pr[2]:h},'Update proof-cache evidence gitlinks')
+    new_h,new_r=tree('hallucinate',h,ph),tree('root',r,pr)
+    assert new_h=={**old_h,ph[1]:['160000','commit',d]}
+    assert new_r=={**old_r,pr[1]:['160000','commit',d],pr[2]:['160000','commit',h]}
+    archive=tree('root',BASE['root'],[ARCHIVE],dirs=True)
+    retained_archives=tree('root',BASE['root'],[RENEWED,FOLLOWUP],dirs=True)
+    assert len(archive)==1 and len(retained_archives)==2
+    assert tree('root',r,[ARCHIVE],dirs=True)==archive
+    assert tree('root',r,[RENEWED,FOLLOWUP],dirs=True)==retained_archives
+    assert delta('hallucinate',BASE['hallucinate'],h)=={ph[1]}
+    assert delta('root',BASE['root'],r)=={pr[1],pr[2]}
+    wanted=BASE|{'datasets':d,'hallucinate':h,'root':r}
+    for role in ('datasets','hallucinate','root'):
+        git(role,'merge-base','--is-ancestor',BASE[role],wanted[role])
+    plan={'schema':'private-existing-guide583-combined-code-and-docs-normal-FF-sequence/v1',
+        'base_origin_main':BASE,'prepared_origin_main':wanted,'planned_normal_ff_order':['datasets','hallucinate','root'],
+        'isolated_git_dir':{role:str(out/(role+'.git')) for role in alternatives},'urls':URLS,
+        'git_arguments_preserve_bounded_pack_settings':FLAGS,
+        'exact_qualified_code_before_docs':docs['qualified_code_before_docs'],'actual_ordinary_qualification':docs['ordinary_qualification'],
+        'actual_closed_document_freeze':receipt,'candidate_trees':{'datasets':docs['tree'],'hallucinate':th,'root':tr},
+        'gitlink_before':{'hallucinate':old_h,'root':old_r},'gitlink_after':{'hallucinate':new_h,'root':new_r},
+        'root_archive_preserved':archive,'retained_archives':retained_archives,
+        'preparation_origin_observation':origin_ref,'fresh_origin_reflection_before_push_required':True,
+        'accelerate_changed':False,'pushed':False,'publication_window_selected':False}
+    output=out/'READY-guide583-combined-code-and-docs-parent-pins.json'
+    with output.open('x') as f:
+        f.write(json.dumps(plan,indent=2,sort_keys=True)+'\n')
+        f.flush()
+        os.fsync(f.fileno())
+    print(json.dumps(pin(output)))
+
+if __name__=='__main__':
+    main()

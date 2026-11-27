@@ -1,0 +1,64 @@
+{
+  "bounded_known_roster": {
+    "bytes": 9176641,
+    "field": "bounded_marker_scan.discovered_markers",
+    "marker_count": 97,
+    "path": "/tmp/git-reconciliation-renewed-metadata-20261127-5SzmmTn1/metadata-delta.json",
+    "sha256": "246d75816edfde3d6f6b479ca6dd49edcc05bbbadbf2d6cce190b44ebee5fca0"
+  },
+  "bounded_markers_not_in_prior_new_delta": 1,
+  "directories_visited": 3620895,
+  "filesystem_error_count": 176,
+  "filesystem_error_kinds": {
+    "PermissionError": 176
+  },
+  "filesystem_scan_closed": true,
+  "missing_prior_marker_count": 0,
+  "new_markers": [
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/datasets.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/hallucinate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/root.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-diagnostic-record-shape-current-private-geNe2MoA/normal-local/publication/hallucinate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-diagnostic-record-shape-current-private-geNe2MoA/normal-local/publication/root.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/publication/hallucinate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/publication/root.git"
+    },
+    {
+      "kind": "ordinary_git_marker",
+      "marker": "/tmp/git-renewed-all-work-20261127-17pd2xkd/datasets-integration/.git"
+    }
+  ],
+  "new_vs_prior": 104,
+  "new_vs_prior_already_seen_by_bounded_scan": 96,
+  "new_vs_prior_and_bounded_scan": 8,
+  "observed_markers": 22602,
+  "primary_report": {
+    "bytes": 85255,
+    "path": "/tmp/git-renewed-all-work-20261127-17pd2xkd/filesystem-marker-rescan-v01.json",
+    "sha256": "aa1519867527d6cb3c4ed07a9ac0f2eda839579e3f820fe2349b96d69cc2ff8e"
+  },
+  "prior_comparison_marker_count": 22498,
+  "scan_elapsed_seconds": 114.517,
+  "schema": "filesystem-only-git-marker-rescan-known-delta/v1",
+  "scope": "Cross-checks marker paths using held snapshots. No repository identity, branch, source, integration or worktree status is inferred."
+}

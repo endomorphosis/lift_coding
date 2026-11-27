@@ -1,0 +1,247 @@
+"""Compile-only adaptation of the retained P1 ordinary10 retry controls."""
+import ast
+import collections
+import difflib
+import hashlib
+import json
+from pathlib import Path
+import re
+import xml.etree.ElementTree as ET
+
+OUT = Path(__file__).resolve().parent
+PRIOR = Path("/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put")
+BASE = PRIOR / "ordinary10-retry-v02"
+PACKET_PATH = Path("/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/Phase1-proof-cache-reload-filename-private-v01-rdtjc1jx/SEALED-Phase1-cache-reload-filename-binding-exact2-private-v01.json")
+ROLE_LEAN = "ipfs_datasets_py.logic.backends.kernel.lean"
+OLD_GROUP = "phase1-proof-cache-atomic-put10"
+GROUP = "phase1-proof-cache-reload-filename13"
+HEAD = "937ad474d2d8650e3ccee16c10319a9c72d4429a"
+A = "fae7981fa576817536a3c7aa62c5d28dc417f214"
+BASE_PACKET = {"path": str(PACKET_PATH), "bytes": 16931, "sha256": "d754b5b134f3116aeac0efdc04b515e006140e41cc4f9f80eed2e7b55d8c834d"}
+CONTROL_PACKET = {"path": str(BASE / "READY-ordinary10-final-static-INERT-v02.json"), "bytes": 4747, "sha256": "a775a12f979e7cd7ceba1ca8942ca3f39d006dcc82d3cb9ccbeb86fa3df59bf3"}
+PRIOR_ACTUAL = {"path": str(PRIOR / "actual-Phase1-current-cache-atomic-put-ordinary10-closed.json"), "bytes": 3865, "sha256": "5bb09cf899098870073e07fa2e16258d51d2f01372315d4dba785992823a9dc2"}
+READS = collections.Counter()
+
+
+def digest(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def read(ref):
+    raw = Path(ref["path"]).read_bytes()
+    assert (len(raw), digest(raw)) == (ref["bytes"], ref["sha256"])
+    if "git_blob" in ref:
+        assert hashlib.sha1(f"blob {len(raw)}\0".encode() + raw).hexdigest() == ref["git_blob"]
+    READS["bytes"] += len(raw)
+    READS["captures"] += 1
+    return raw
+
+
+def write(name, payload):
+    path = OUT / name
+    raw = payload if isinstance(payload, bytes) else (json.dumps(payload, indent=2, sort_keys=True) + "\n").encode()
+    with path.open("xb") as stream:
+        stream.write(raw)
+    path.chmod(0o400)
+    return {"path": str(path), "bytes": len(raw), "sha256": digest(raw)}
+
+
+def assignments(source):
+    return {
+        node.targets[0].id: node.value
+        for node in ast.parse(source).body
+        if isinstance(node, ast.Assign) and len(node.targets) == 1 and isinstance(node.targets[0], ast.Name)
+    }
+
+
+def replace_assign(source, settings):
+    for key, value in settings.items():
+        source, count = re.subn(r"^" + key + r" = .*$", lambda _: f"{key} = {value!r}", source, flags=re.M)
+        assert count == 1, key
+    return source
+
+
+def replace_once_each(source, changes):
+    for old, new in changes:
+        assert source.count(old) == 1, old
+        source = source.replace(old, new)
+    return source
+
+
+def guard_reversibility(old, new, attrs, changes, former_label, next_label):
+    restored = new
+    for before, after in reversed(changes):
+        assert restored.count(after) == 1, after
+        restored = restored.replace(after, before)
+    restored = restored.replace(next_label, former_label).replace("ordinary13", "ordinary10")
+    historical = assignments(old)
+    restored = replace_assign(restored, {key: ast.literal_eval(historical[key]) for key in attrs})
+    assert ast.dump(ast.parse(restored)) == ast.dump(ast.parse(old))
+
+
+unit = json.loads(read(BASE_PACKET))
+assert unit["current_immutable_baseline"] == HEAD
+roles_at_candidate = {}
+for role in unit["files"]:
+    before, after = (read(role[name]) for name in ("preimage", "postimage"))
+    ast.parse(before)
+    ast.parse(after)
+    roles_at_candidate[role["repo_relative_path"]] = {
+        "published_preimage": role["preimage"], "private_postimage": role["postimage"], "mode": role["git_mode"]
+    }
+    if role["role"] == "owning_test":
+        test_file = role["repo_relative_path"]
+        old_tree, new_tree = ast.parse(before).body, ast.parse(after).body
+        assert after.startswith(before)
+        assert list(map(ast.dump, old_tree)) == list(map(ast.dump, new_tree[:len(old_tree)]))
+
+historical = json.loads(read(CONTROL_PACKET))
+previous = json.loads(read(PRIOR_ACTUAL))
+assert previous["terminal_returncode"] == 0 and previous["Source_lease_and_resource_cleanup_closed"]
+assert previous["actual_ordinary_counts"] == dict(tests=10, passed=10, failures=0, errors=0, skipped=0, functions=6)
+pre_raw = read(previous["ordinary_raw_JUnit"])
+pre_cases = [row.get("name") for row in ET.fromstring(pre_raw).findall(".//testcase")]
+pre_ids = [f"{test_file}::{case}" for case in pre_cases]
+assert pre_ids == previous["ordered_cases"]
+
+private_xml = read(unit["private_engineering"]["GREEN"]["raw_JUnit"])
+desired = unit["new_owning_test_functions"]
+new_cases = [
+    row.get("name") for row in ET.fromstring(private_xml).findall(".//testcase")
+    if row.get("name").split("[", 1)[0] in desired
+]
+assert new_cases == [
+    f"{desired[0]}[with-index]",
+    f"{desired[0]}[without-index]",
+    desired[1],
+]
+new_ids = [f"{test_file}::{case}" for case in new_cases]
+exact_ids = pre_ids + new_ids
+counts = collections.Counter(case.split("[", 1)[0] for case in exact_ids)
+functions = list(counts)
+vector = tuple(counts.values())
+assert len(exact_ids) == len(set(exact_ids)) == 13 and len(functions) == 8
+assert vector == (5, 1, 1, 1, 1, 1, 2, 1)
+selectors = write("exact-8-function-13-case-roster-INERT.json", {
+    "schema": "existing-P1-ordinary13-static-roster/v1",
+    "owning_test": test_file,
+    "function_selectors": functions,
+    "expected_function_case_counts": dict(counts),
+    "case_vector": vector,
+    "literal_case_ids": exact_ids,
+    "prior_actual_ten_ids": pre_ids,
+    "new_three_ids": new_ids,
+    "actual_COLLECT_is_count_and_order_authority": True,
+    "actual_EXPANDED": None,
+    "actual_RUN": None,
+    "prior_actual_ordinary10_JUnit": previous["ordinary_raw_JUnit"],
+    "new_private_GREEN_JUnit": unit["private_engineering"]["GREEN"]["raw_JUnit"],
+})
+old = {key: read(ref).decode() for key, ref in historical["controls"].items()}
+op_attrs = assignments(old["operator"])
+bt_attrs = assignments(old["bootstrap"])
+selec = ast.literal_eval(op_attrs["SELECTION"])
+assert selec["function_count"] == 6 and selec["literal_expected_cases"] == 10
+assert selec["actual_collect_is_count_and_order_authority" if "actual_collect_is_count_and_order_authority" in selec else "actual_COLLECT_is_count_and_order_authority"]
+assert list(ast.literal_eval(op_attrs["EXPECTED_CASE_IDS"])) == pre_ids
+assert list(ast.literal_eval(bt_attrs["EXPECTED_CASE_IDS"])) == pre_ids
+selec.update(function_selectors=functions, expected_function_case_counts=dict(counts), function_count=8, literal_expected_cases=13)
+op_changes = [
+    ("SELECTION['function_count']==6 and SELECTION['literal_expected_cases']==10",
+     "SELECTION['function_count']==8 and SELECTION['literal_expected_cases']==13"),
+    ("len(_selectors)==len(set(_selectors))==6", "len(_selectors)==len(set(_selectors))==8"),
+    ("sum(_counts.values())==10", "sum(_counts.values())==13"),
+    ("'case_count_hint':10", "'case_count_hint':13"),
+    ("len(roster)==len(set(roster))==10", "len(roster)==len(set(roster))==13"),
+]
+bt_changes = [
+    ("6 future-bound public functions/10 statically expected cases", "8 future-bound public functions/13 statically expected cases"),
+    ("len(function_selectors) != 6", "len(function_selectors) != 8"),
+    ("len(set(function_selectors)) != 6", "len(set(function_selectors)) != 8"),
+    ("exact ordered6-selector case vector/10 required", "exact ordered8-selector case vector/13 required"),
+]
+fa_changes = [
+    ("len(actual_collected_roster)!=10 or len(set(actual_collected_roster))!=10",
+     "len(actual_collected_roster)!=13 or len(set(actual_collected_roster))!=13"),
+    ("6 independently selected public-function counts/10 cases", "8 independently selected public-function counts/13 cases"),
+]
+preps = {
+    "factory": replace_once_each(old["factory"].replace(OLD_GROUP, GROUP).replace("ordinary10", "ordinary13"), fa_changes),
+    "bootstrap": replace_once_each(old["bootstrap"].replace(OLD_GROUP, GROUP).replace("ordinary10", "ordinary13"), bt_changes),
+    "operator": replace_once_each(old["operator"].replace(OLD_GROUP, GROUP).replace("ordinary10", "ordinary13"), op_changes),
+}
+guard_reversibility(old["factory"], preps["factory"], [], fa_changes, OLD_GROUP, GROUP)
+compile(preps["factory"], "<ordinary13 factory>", "exec")
+factory = write("existing-ordinary13-factory.INERT.py.DATA", preps["factory"].encode())
+op_patch = {
+    "SELECTION": selec,
+    "EXPECTED_BRIDGE27_CASE_VECTOR": vector,
+    "EXPECTED_CASE_IDS": tuple(exact_ids),
+    "FACTORY_REFERENCE": factory,
+}
+bt_patch = {
+    "FUNCTION_SELECTORS": functions,
+    "EXPECTED_FUNCTION_CASE_COUNTS": dict(counts),
+    "EXPECTED_ORDERED_CASE_COUNTS": vector,
+    "EXPECTED_CASES": 13,
+    "EXPECTED_CASE_IDS": tuple(exact_ids),
+}
+controls = {"factory": factory}
+diff = []
+for kind, patch, changes, historic_attrs in (
+    ("operator", op_patch, op_changes, op_attrs),
+    ("bootstrap", bt_patch, bt_changes, bt_attrs),
+):
+    successor = replace_assign(preps[kind], patch)
+    assert all(ast.literal_eval(assignments(successor)[key]) == value for key, value in patch.items())
+    guard_reversibility(old[kind], successor, patch, changes, OLD_GROUP, GROUP)
+    compile(successor, f"<ordinary13 {kind}>", "exec")
+    for key in historical[f"{kind}_future_NULL_bindings"]:
+        assert isinstance(historic_attrs[key], ast.Constant) and historic_attrs[key].value is None
+        candidate_attr = assignments(successor)[key]
+        assert isinstance(candidate_attr, ast.Constant) and candidate_attr.value is None
+    controls[kind] = write(f"existing-ordinary13-{kind}.INERT.py.DATA", successor.encode())
+    diff.extend(difflib.unified_diff(old[kind].splitlines(True), successor.splitlines(True), fromfile=f"{kind}-ordinary10", tofile=f"{kind}-ordinary13"))
+diff.extend(difflib.unified_diff(old["factory"].splitlines(True), preps["factory"].splitlines(True), fromfile="factory-ordinary10", tofile="factory-ordinary13"))
+delta = write("existing-three-controls-ordinary10-to-ordinary13.diff", "".join(diff).encode())
+assert ast.literal_eval(op_attrs["MAINTAINED_OWNER_NAMES"]) == [
+    "ipfs_datasets_py.logic.legal_ir.proof_cache", ROLE_LEAN
+]
+roles = write("ordinary13-current-role-plan-INERT.json", {
+    "schema": "existing-P1-ordinary13-static-role-vector/v1",
+    "published_D_preimage": HEAD,
+    "published_A_companion": A,
+    "exact_two_roles": roles_at_candidate,
+    "unchanged_python_Lean_role_to_repin": {
+        "name": ROLE_LEAN, "relative_path": "ipfs_datasets_py/logic/backends/kernel/lean.py",
+        "bytes": 105071, "git_blob": "232b6a719aeedd9a18e40f3697afc78315430263",
+        "sha256": "a36a8ae2c304dc439e6bf32d1a0481b5fc8dab592e26a7dae40cda0a28b8a274",
+        "execution_scope": "Loaded Python helper as in ordinary10",
+    },
+    "normal_fixture_ini": "pytest.ini",
+    "normal_loaded_conftests": ["conftest.py", "tests/conftest.py", "tests/unit/conftest.py"],
+    "other_protected_test_roles": ["tests/__init__.py", "tests/unit/__init__.py"],
+    "actual_phase_controls_required": "Fresh Source4 post owner/test plus candidate D index and current A index when isolated physical roots change; require distinct actual bound A and D READ/guard, full9, compile and selected pytest rewrite witness.",
+    "new_three_fixture_effect": "Existing tmp_path and pytest only, no additional package/fixture row or subprocess action from new cases.",
+    "actual_Source_Git_full9_clock_IO_effect_admission_and_results": None,
+})
+ready = write("READY-existing-P1-proof-cache-reload-ordinary13-INERT.json", {
+    "schema": "existing-R2-P1-proof-cache-reload-ordinary13-compile-only/v1",
+    "controls": controls,
+    "older_actual_retry10": PRIOR_ACTUAL,
+    "older_inert_retry10": CONTROL_PACKET,
+    "exact_candidate": BASE_PACKET,
+    "exact_control_diff": delta,
+    "selector_roster": selectors,
+    "role_plan": roles,
+    "prospective_phase_group": GROUP,
+    "prospective_report_name": f"complete-frozen-local-D-{GROUP}-existing-owner-report.json",
+    "counts": {"functions": 8, "cases": 13, "old": 10, "new": 3},
+    "preserved_by_reverse_AST_comparison": ["Source42 READ guards", "SDK contract and constraints", "fallback and cleanup", "fixture normal pytest configuration", "Source to AST to Code witness", "runtime authority", "actual COLLECT order into RUN"],
+    "operator_future_NULL_bindings": historical["operator_future_NULL_bindings"],
+    "bootstrap_future_NULL_bindings": historical["bootstrap_future_NULL_bindings"],
+    "actual_Git_Source_runtime_or_publication_effect": False,
+    "actual_Git_Source_clock_IO_effect_admission_and_results": None,
+    "private_cached_readback": dict(READS),
+})
+print(json.dumps(ready, sort_keys=True))

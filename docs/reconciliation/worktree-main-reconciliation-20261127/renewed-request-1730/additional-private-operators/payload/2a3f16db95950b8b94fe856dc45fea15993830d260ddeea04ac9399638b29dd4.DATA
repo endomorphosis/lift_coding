@@ -1,0 +1,229 @@
+from hashlib import sha1, sha256
+import json, os, stat, subprocess
+from pathlib import Path
+
+w=Path(__file__).resolve().parent
+pub=Path('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn')
+c=pub/'Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V4-checked-whole-project-private-yI1zwigi'
+orig=c/'normal-current/checkout'
+prior=Path('/tmp/Root-result-cache-owned-existing-route-L4Wyme59')
+d,a=w/'datasets',prior/'accelerate'
+D='d2ddb5fc873c38370268975f4e76a80ff427c87c'
+A='fae7981fa576817536a3c7aa62c5d28dc417f214'
+base='937ad474d2d8650e3ccee16c10319a9c72d4429a'
+fields=('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
+io={'direct_bytes':0,'git_stdout_bytes':0,'current_uncached_git_body_bytes':0}
+env=os.environ|{'GIT_CONFIG_NOSYSTEM':'1','GIT_CONFIG_GLOBAL':'/dev/null','GIT_LFS_SKIP_SMUDGE':'1','GIT_NO_LAZY_FETCH':'1','GIT_TERMINAL_PROMPT':'0','GIT_OPTIONAL_LOCKS':'0'}
+
+def f9(st):return {key:str(getattr(st,key)) for key in fields}
+
+def facts(path):
+    st=path.lstat()
+    assert stat.S_ISREG(st.st_mode) and st.st_nlink==1 and st.st_uid==os.getuid(),path
+    return {'path':str(path),'bytes':st.st_size,'full9':f9(st)}
+
+def ref(row):return {k:row[k] for k in ('path','bytes','sha256')}
+
+def capture(path,size=None,hash=None):
+    row=facts(path)
+    assert row['bytes']<=8*1024**2 and (size is None or row['bytes']==size),path
+    with os.fdopen(os.open(path,os.O_RDONLY|os.O_NOFOLLOW),'rb') as stream:
+        assert f9(os.fstat(stream.fileno()))==row['full9']
+        raw=stream.read(row['bytes']+1)
+        assert f9(os.fstat(stream.fileno()))==row['full9']==facts(path)['full9']
+    io['direct_bytes']+=len(raw)
+    row['sha256']=sha256(raw).hexdigest()
+    assert len(raw)==row['bytes'] and (hash is None or row['sha256']==hash),path
+    return row,raw
+
+def obj(path,size,hash):
+    row,raw=capture(path,size,hash)
+    return ref(row),json.loads(raw)
+
+def put(name,obj):
+    path=w/name
+    raw=obj if type(obj) is bytes else (json.dumps(obj,indent=2,sort_keys=True)+'\n').encode()
+    with os.fdopen(os.open(path,os.O_WRONLY|os.O_CREAT|os.O_NOFOLLOW|os.O_EXCL,0o400),'wb') as stream:
+        stream.write(raw)
+        stream.flush()
+        os.fsync(stream.fileno())
+    return {'path':str(path),'bytes':len(raw),'sha256':sha256(raw).hexdigest()}
+
+def git(repo,*args,bound=1024**2):
+    cmd=['/usr/bin/git','--no-optional-locks','-C',str(repo),'-c','index.threads=1','-c','pack.threads=1','-c','core.preloadIndex=false','-c','core.hooksPath=/dev/null',*args]
+    raw=subprocess.run(cmd,capture_output=True,check=True,env=env,timeout=75).stdout
+    assert len(raw)<=bound,(args[0],len(raw))
+    io['git_stdout_bytes']+=len(raw)
+    return raw
+
+def tree(repo,oid,names):
+    out={}
+    for row in git(repo,'ls-tree','-lrz',oid,'--',*sorted(names)).split(b'\0'):
+        if row:
+            hdr,rel=row.split(b'\t',1)
+            mode,kind,blob,size=hdr.decode().split()
+            assert kind=='blob' and mode in ('100644','100755')
+            out[rel.decode()]=(mode,blob,int(size))
+    return out
+
+def clean(root,oid):
+    assert git(root,'rev-parse','HEAD').decode().strip()==oid
+    assert not git(root,'status','--porcelain=v1','--untracked-files=all'),root
+
+def mapped(rows,roots):
+    out={}
+    for row in rows:
+        path=Path(row['path'])
+        side,=(side for side,root in roots.items() if path.is_relative_to(root))
+        key=side,str(path.relative_to(roots[side]))
+        assert key not in out
+        out[key]=row
+    return out
+
+fref,f=obj(c/'normal-current/actual-current-local-Source-whole-component-nine-qualified-frozen.json',3978,'e35ef752ba725f8457b8d44e229838f3b33f477e41402c9743d3704d1c3aed3b')
+qref,q=obj(c/'READY-existing-R5-whole-project-v03-current-local-frozen-nonclock-INERT-v02.json',7130,'aad130667f20516920b508346e1ba7d27cf62f51515125f6aa7a79d05b3eca5b')
+gref,guide=obj(prior/'actual-Phase8-result-cache-Source2-READ4-ordinary11-Guide582-publication.json',5773,'a1283734a9520e9e32a5f8ec4d8bf2b766586e162e81621de91a37caeeb83a62')
+sref,seed=obj(prior/'current-frozen-full9-hash-epoch.json',922486,'d5bebc252d1bf5cca22f4a9d3730c3fae14a5cb8f36d765509987c2b6c1508c8')
+old=Path('/tmp/Root-Phase2-V4-paired-replay-existing-READ4-candidate-v558-QXzRpAa7')
+pref,py=obj(old/'current-v558-Python-epoch.json',889219,'86b01202e837f46e3392507aa7073042966457269f7fd3c8c6b6e140544e1d1f')
+hist=Path('/tmp/Root-Phase2-V4-checked-native-complete-archive-existing-R5-v563-dPdI5ec9')
+nref,nat=obj(hist/'current-v563-exact-1610-outer-epoch.json',896136,'32d31d7911e1fe5095b3425bd31d742b7cd94be7fbe023f3a406e9f0c1e6c388')
+doc=guide['guide582_Source_closed']
+_,docs=obj(Path(doc['path']),doc['bytes'],doc['sha256'])
+run=f['run']
+_,local=obj(Path(run['path']),run['bytes'],run['sha256'])
+assert q['normal_local_software_nine']==fref and f['candidate']['oid']==D and f['candidate']['parent']==base
+assert guide['fresh_origin_main']['datasets']==base and guide['fresh_origin_main']['accelerate']==A
+clean(orig,D)
+clean(a,A)
+for field in ('index','branch_ref'):
+    row=f[field]
+    obs,_=capture(Path(row['path']),row['bytes'],row['sha256'])
+    assert list(obs['full9'].values())==row['full9']
+a_index=docs['A_index']
+assert facts(a/'.git/index')=={key:a_index[key] for key in ('path','bytes','full9')}
+historical={'D':pub/'repositories/datasets','A':Path('/tmp/A21d7-A4-existing-qualifier-sparse-companion-odzgyALT/accelerate')}
+past=mapped(seed['rows'],{'D':prior/'datasets','A':a})
+old_py=mapped(py,historical)
+old_native=mapped(nat,historical)
+assert len(old_py)==1597 and len(old_native)==1610 and set(old_py)<=set(old_native)
+keys=list(dict.fromkeys((*old_native,*(('D',r) for r in local['compiled_at_terminal']),('D','ipfs_datasets_py/logic/autoformal/AGENTS.md'))))
+roots={'D':d,'A':a}
+tracked={side:{rel for owner,rel in keys if owner==side and not rel.startswith('.git/')} for side in roots}
+current={'D':tree(orig,D,tracked['D']),'A':tree(a,A,tracked['A'])}
+assert all(set(current[side])==tracked[side] for side in roots)
+assert sum(row[2] for row in current['D'].values())<96*1024**2
+cli=['scripts/__init__.py','scripts/ops/__init__.py','scripts/ops/legal_ir/__init__.py','scripts/ops/legal_ir/validate_uscode_corpus_release.py']
+assert all(not (orig/rel).is_file() and rel in current['D'] for rel in cli)
+assert not d.exists()
+subprocess.run(['/usr/bin/git','init','--quiet',str(d)],check=True,env=env,timeout=20)
+stores=[]
+todo=[(orig/'.git/objects').resolve()]
+while todo:
+    path=todo.pop(0)
+    if path in stores:
+        continue
+    assert path.is_dir()
+    stores.append(path)
+    alts=path/'info/alternates'
+    if alts.is_file():
+        todo.extend((path/r).resolve() for r in alts.read_text().splitlines() if r)
+(d/'.git/objects/info/alternates').write_text(''.join(str(p)+'\n' for p in reversed(stores)))
+git(d,'config','--local','core.sparseCheckout','true')
+git(d,'config','--local','core.sparseCheckoutCone','false')
+(d/'.git/info/sparse-checkout').write_text(''.join('/'+r+'\n' for r in sorted(current['D'])))
+exclude=d/'.git/info/exclude'
+exclude.write_text(exclude.read_text()+'\n/workspace/control-plane/source-leases/admission.lock\n/workspace/control-plane/source-leases/source.lock\n')
+git(d,'-c','advice.detachedHead=false','checkout','--detach','--quiet',D)
+clean(d,D)
+assert git(d,'rev-parse','HEAD^{tree}','HEAD^').decode().split()==[f['candidate']['tree'],base]
+assert set(git(d,'diff-tree','--no-commit-id','--name-only','-r','HEAD').decode().splitlines())==set(q['exact_roles'])
+d_index,_=capture(d/'.git/index')
+prior_tree=tree(prior/'datasets','72e5160bf588f8c689ecbb11c658acc2bc3c9a97',tracked['D'])
+rows={}
+unreused={}
+for side,rel in keys:
+    path=roots[side]/rel
+    item=facts(path)
+    previous=past.get((side,rel))
+    if rel=='.git/index':
+        item=d_index if side=='D' else a_index
+    elif rel.startswith('.git/'):
+        if side=='D':
+            item,_=capture(path)
+        else:
+            assert previous['full9']==item['full9']
+            item['sha256']=previous.get('sha256')
+    else:
+        mode,blob,size=current[side][rel]
+        assert (item['bytes'],bool(int(item['full9']['st_mode']) & stat.S_IXUSR))==(size,mode=='100755'),path
+        if previous and previous['bytes']==size and (side=='A' or current[side][rel]==prior_tree.get(rel)):
+            if side=='A':
+                assert previous['full9']==item['full9']
+            item['sha256']=previous['sha256']
+        elif side=='D' and rel in q['exact_roles']:
+            post=q['exact_roles'][rel]['after']
+            assert (post['git_blob'],post['bytes'])==(blob,size)
+            item['sha256']=post['sha256']
+        else:
+            unreused[side,rel]=(blob,size)
+    rows[side,rel]=item
+assert sum(size for _,size in unreused.values())<=8*1024**2
+for key,(blob,size) in unreused.items():
+    raw=git(roots[key[0]],'cat-file','blob',blob,bound=size)
+    assert len(raw)==size and sha1(f'blob {size}\0'.encode()+raw).hexdigest()==blob
+    rows[key]['sha256']=sha256(raw).hexdigest()
+    io['current_uncached_git_body_bytes']+=size
+posts={}
+for rel,role in q['exact_roles'].items():
+    row=rows['D',rel]
+    post=role['after']
+    assert (row['bytes'],row['sha256'],current['D'][rel][1])==(post['bytes'],post['sha256'],post['git_blob'])
+    assert git(d,'ls-files','--stage','-z','--',rel)==f"100644 {post['git_blob']} 0\t{rel}\0".encode()
+    posts[rel]=row|{'git_blob':post['git_blob'],'mode':role['mode']}
+
+absent=tuple('ipfs_datasets_py/'+part for part in (
+    'conftest.py','optimizers/conftest.py','optimizers/logic_theorem_optimizer/conftest.py',
+    'logic/backends/__init__.py','logic/families/__init__.py','logic/intent_ir/formalize/__init__.py',
+))+tuple('tests/unit/logic/'+part for part in (
+    '__init__.py','conftest.py','integration/__init__.py','integration/conftest.py','autoformal/__init__.py','autoformal/conftest.py',
+))
+assert not tree(orig,D,absent) and all(not os.path.lexists(d/name) for name in absent)
+agents=[]
+dirs={p for row in rows.values() for p in Path(row['path']).parents if any(p.is_relative_to(root) for root in roots.values())}
+for folder in sorted(dirs):
+    for name in ('AGENTS.md','AGENTS.override.md'):
+        path=folder/name
+        if not os.path.lexists(path):
+            agents.append({'path':str(path),'exists':False})
+            continue
+        side,=(side for side,root in roots.items() if path.is_relative_to(root))
+        rel=str(path.relative_to(roots[side]))
+        mode,blob,size=tree(roots[side],D if side=='D' else A,{rel})[rel]
+        raw=git(roots[side],'cat-file','blob',blob,bound=65536)
+        assert len(raw)==size and sha1(f'blob {size}\0'.encode()+raw).hexdigest()==blob
+        proof=put('retained-AGENTS-'+side+'-'+sha256(str(path).encode()).hexdigest()[:12]+'.DATA',raw)
+        assert facts(path)['bytes']==size
+        agents.append({'path':str(path),'exists':True,'full9':facts(path)['full9'],'reuse_captured_raw':proof})
+rootfacts=[{'root':str(root),'Git_HEAD':oid,'Git_tree':git(root,'rev-parse','HEAD^{tree}').decode().strip()} for root,oid in ((d,D),(a,A))]
+for root,oid in ((orig,D),(d,D),(a,A)):
+    clean(root,oid)
+for row in rows.values():
+    assert facts(Path(row['path']))=={key:row[key] for key in ('path','bytes','full9')}
+for field in ('index','branch_ref'):
+    pin=f[field]
+    assert list(facts(Path(pin['path']))['full9'].values())==pin['full9']
+outer=put('P2-current-outer-epoch.json',list(rows.values()))
+named=put('P2-current-named-metadata-epoch.json',{'rows':list(rows.values())})
+python=put('P2-current-Python-epoch.json',[rows[key] for key in old_py])
+fence=put('P2-current-namespace-and-AGENTS.json',{'AGENTS_chain_metadata':agents,'absent':[str(d/name) for name in absent]})
+record=put('P2-current-execution-freeze.json',{
+    'schema':'P2-same-commit-isolated-execution-freeze/v1','original_cooperative_freeze':fref,
+    'root':str(d),'Git_HEAD':D,'Git_tree':f['candidate']['tree'],'local_clean':True,'pushed':False,
+    'frozen_roots':rootfacts,'index':d_index,'companion_index':a_index,'exact_posts':posts,'execution_D_parent':base,
+    'original_D_index_unchanged':True,'original_A_index_unchanged':True,'managed_write_claimed':False,
+    'restored_existing_CLI_roles':cli,'provenance_refs':[qref,gref,sref,pref,nref,run],
+    'epochs':{'outer':outer,'named':named,'python':python,'counts':{'outer':len(rows),'python':len(old_py)},'instructions':fence},
+    'metadata_and_Git_provenance_accounting':io,'charged_existing_managed_Source_bytes':0,'managed_dispatches':0,
+})
+print(json.dumps({'execution_freeze':record,'archived_roles':len(rows),'python_roles':len(old_py),'io':io},sort_keys=True),flush=True)

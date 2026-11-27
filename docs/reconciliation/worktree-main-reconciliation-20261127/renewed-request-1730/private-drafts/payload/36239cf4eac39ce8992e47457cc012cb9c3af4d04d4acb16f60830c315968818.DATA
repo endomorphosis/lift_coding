@@ -1,0 +1,92 @@
+"""Finite stdlib controls; only extracted actual pure validators execute.
+All Source/root/resource/asset boundaries below are fictional DATA, never IO.
+"""
+import ast,copy,hashlib,json,os,re,resource,signal,unittest
+from pathlib import Path
+import xml.etree.ElementTree as ET
+resource.setrlimit(resource.RLIMIT_CPU,(60,60))
+resource.setrlimit(resource.RLIMIT_AS,(536870912,536870912))
+os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})
+signal.alarm(60)
+D=Path(__file__).parent
+reads=[]
+def read(p,n=None,h=None):
+ b=Path(p).read_bytes();reads.append(dict(path=str(p),bytes=len(b),sha256=hashlib.sha256(b).hexdigest()))
+ assert n is None or len(b)==n
+ assert h is None or hashlib.sha256(b).hexdigest()==h
+ return b
+def objref(r):return json.loads(read(r['path'],r['bytes'],r['sha256']))
+c=json.loads(read(D/'ROOT-current-Guide585-namespaced-Native2-selector-physical-contract-v01.json',16146,'6d26fa3baa3fa9db4b60fc9c6e062477622fe6965fcfcd4c59679765a6df2a22'))
+sr=read(D/'select-existing-namespaced-native2.current234-INERT.v03.py.DATA');tree=ast.parse(sr)
+functions={'stable','artifact_ref','validate_inputs','validate_managed234','ledger_value','validate_precharge','keyed_rows','exact_row','validate_source_objects','validate_runtime_binding'}
+constants={'SCHEMA_V2','PROFILE','LEAN_REL','TEST_REL','PROTOCOL_REL','LEAN_SHA','TEST_SHA','F9_FIELDS'}
+body=[n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in functions or isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id in constants for t in n.targets)]
+ns=dict(Path=Path,hashlib=hashlib,json=json,re=re,ET=ET,CONTRACT=c)
+exec(compile(ast.Module(body=body,type_ignores=[]),'actual-extracted-pure-validators','exec'),ns)
+vr=read(D/'verify-retained-namespaced-native2.current234-INERT.v02.py.DATA');v=ast.parse(vr)
+exec(compile(ast.Module(body=[n for n in v.body if isinstance(n,ast.FunctionDef) and n.name=='validate_identity'],type_ignores=[]),'actual-pure-verifier-identity','exec'),ns)
+refs=c['evidence_and_controls']['managed234_refs']
+q=objref(refs['current_result']);su=objref(refs['actual_source_execution_summary']);de=objref(refs['actual_source_execution_compact']);pr=objref(refs['already_prepared_prefix_DATA']);xml=read(q['raw_JUnit']['path'],q['raw_JUnit']['bytes'],q['raw_JUnit']['sha256'])
+# Authenticated precedence supplies literal wire/SDK field shapes; values below
+# are deliberately fictional and cannot establish Source or runtime authority.
+shape=objref({'path':'/tmp/Root-P1-Guide584-generic-Native3-N3iAXWzm/Root-current-existing-generic-Native3-binding.json','bytes':28824,'sha256':'081b27277e65292f46eefafd9fa3422218773940d3d497c559884b668953afd3'})
+def ref(path='/fictional/ref.json',size=1,sha='f'*64):return dict(path=path,bytes=size,sha256=sha)
+def row(path,size=1,sha='f'*64):return dict(ref(path,size,sha),full9={k:('33204' if k=='st_mode' else str(size) if k=='st_size' else '1') for k in ns['F9_FIELDS']})
+i=dict(c['selector_input']['prepared_fields'],schema=ns['SCHEMA_V2']);i.update(freeze=ref('/fictional/freeze.json'),source_read4=ref('/fictional/source4.json'),prior_source_ledger=ref('/fictional/prior.json'))
+tips=c['published_freeze']['expected_main_tips'];roots=[dict(root='/fictional/D',Git_HEAD=tips['datasets'],Git_tree='a'*40),dict(root='/fictional/A',Git_HEAD=tips['accelerate'],Git_tree='b'*40)]
+pub=dict(terminal_returncode=0,errors=[],all4_remote_main_exact=True,fresh_origin_main=tips,repositories={'datasets':{'tree':'a'*40}},gitlinks={'hallucinate':{'ipfs_datasets_py':['160000','commit',tips['datasets']],'ipfs_accelerate_py':['160000','commit',tips['accelerate']]},'root':{'external/ipfs_datasets':['160000','commit',tips['datasets']],'external/ipfs_accelerate':['160000','commit',tips['accelerate']],'hallucinate_app':['160000','commit',tips['hallucinate']]}})
+pins=shape['current_SDK_source_pins'];roles={r for r,s in pins.values()}|{ns['TEST_REL'],'ipfs_datasets_py/logic/legal_ir/proof_cache.py','tests/unit/logic/legal_ir/test_proof_cache.py'}
+roles.update('fictional/support_%02d.py'%x for x in range(27-len(roles)))
+epoch={str(Path('/fictional/D')/r):row(str(Path('/fictional/D')/r)) for r in roles}
+for rel,sha in pins.values():epoch['/fictional/D/'+rel]['sha256']=sha
+for rel,sha in {'ipfs_datasets_py/logic/legal_ir/proof_cache.py':'744148b296cfc60656a199847fa1136dc72e28e7b79e0415fd1a069f09605c97','tests/unit/logic/legal_ir/test_proof_cache.py':'5dd25588275d79434a28780370a65fb32a1d93dd9d01656f8a78d00328be769b'}.items():epoch['/fictional/D/'+rel]['sha256']=sha
+for rel,expected in c['source_read4']['captures_by_D_relative_path'].items():
+ if expected is not None:epoch['/fictional/D/'+rel]=row('/fictional/D/'+rel,expected['bytes'],expected['sha256'])
+for path in ('/fictional/D/.git/index','/fictional/A/.git/index','/fictional/D/.git/config'):epoch[path]=row(path)
+freeze=dict(current_publication=i['current_publication'],frozen_roots=roots,local_clean=True,current_local_checkout_no_Git_changes=True,original_D_and_A_full9_aux_unchanged=True,pushed=False,frozen=dict(HEAD=tips['datasets'],tree='a'*40,branch='refs/heads/fixture',stage0_index=epoch['/fictional/D/.git/index']),frozen_branch_ref=row('/fictional/D/.git/refs/heads/fixture'),exact_A_index=epoch['/fictional/A/.git/index'])
+mat=dict(local_freeze=i['freeze'],outer_epoch=ref('/fictional/outer.json'),python_epoch=ref('/fictional/python.json'),named_epoch=ref('/fictional/named.json'),guard_counts=dict(outer=len(epoch),python=27,named=len(epoch)),index=freeze['frozen']['stage0_index'],protected_A_index=freeze['exact_A_index'])
+prior=c['ledger']['last_authenticated_ledger'];amount=67108864;selected=dict(prior,global_cap=prior['global_cap']+amount,internal_cap=prior['internal_cap']+amount);after=dict(selected,used=prior['used']+amount,internal_used=prior['internal_used']+amount,captures=prior['captures']+1)
+cap=dict(prior=prior,selected=selected,after_full_precharge=after,all_prior_costs_retained=True,resource_policy_capacity_unchanged=True,physical_IO_accounting_complete=False,authority=c['ledger']['source_only_authority'],added_Source_envelope=amount,prior_closeout=i['prior_source_ledger'],projection=ref('/fictional/mat.json'))
+term=dict(c['source_read4']['terminal_required_state'],publication=i['current_publication'],materialization=cap['projection'],frozen_roots=roots,outer_epoch=mat['outer_epoch'],python_epoch=mat['python_epoch'],named_epoch=mat['named_epoch'],raw_captures={},read_close=ref('/fictional/close.json'),namespace_metadata=[],current_Source42_owner_binding=ref('/fictional/owner.json'),cap=ref('/fictional/cap.json'),fully_retained_ledger=after)
+for rel in ('ipfs_datasets_py/logic/backends','ipfs_datasets_py/logic/families','ipfs_datasets_py/logic/intent_ir/formalize'):
+ term['namespace_metadata'].append(dict(path='/fictional/D/'+rel,initializer_path='/fictional/D/'+rel+'/__init__.py',full9=row('/fictional/x')['full9']))
+clean={r['root']:dict(HEAD=r['Git_HEAD'],tree=r['Git_tree'],clean_worktree_and_index=True,cached_diff_returncode=0,working_diff_returncode=0) for r in roots}
+close=dict(status='PASS',errors=[],Source_closed=True,owned_module_closed=True,SDK_Native_compiler_or_project_execution=False,previous_D_Source42_WRITE_claimed=False,previous_D_publication_receipt=i['current_publication'],execution_freeze=term['materialization'],roots_before=clean,roots_after=copy.deepcopy(clean),captures=[],ledger_after=after)
+for k in ('A_index_shared_guard_before','A_index_shared_guard_after'):close[k]=dict(freeze['exact_A_index'],exact_HASH_and_full9_reverified=True,stored_as_numbered_capture=False)
+for rel in c['source_read4']['captures_by_D_relative_path']:
+ r=epoch['/fictional/D/'+rel];raw=ref('/fictional/raw/'+rel.replace('/','-'),r['bytes'],r['sha256']);term['raw_captures'][rel]=raw;close['captures'].append(dict(r,root='/fictional/D',relative_path=rel,raw_reference=raw))
+args=[i,pub,freeze,term,mat,close,list(epoch.values()),[epoch['/fictional/D/'+r] for r in roles],list(epoch.values()),cap,prior,roles,pins]
+state=ns['validate_source_objects'](*args);state['Source_owner']={'code_reference':ref('/fictional/source42.DATA',10375,'4'*64)}
+b={k:None for k in c['evidence_and_controls']['operator_binding_keys']};clock=dict(kind='fictional-clock',not_before_utc_ns=100,submit_deadline_utc_ns=200);selection_ref=ref('/fictional/Root-selection.json');inputs_ref=ref('/fictional/inputs.json');charge_ref=ref('/fictional/native-charge.json')
+b.update(schema=c['evidence_and_controls']['operator_binding_schema'],live_bindings_currently_unbound=False,native_case_profile=ns['PROFILE'],Root_selection=selection_ref['path'],Source_epoch=term['outer_epoch'],PROJECTS=roots,W_INDEX=freeze['frozen']['stage0_index'],owning_test_record=epoch['/fictional/D/'+ns['TEST_REL']],owning_test_raw=term['raw_captures'][ns['TEST_REL']],current_protocol_raw_source=term['raw_captures'][ns['PROTOCOL_REL']],binder_raw=c['evidence_and_controls']['current_operator_and_binder']['binder'],current_SDK_source_pins=pins,Source42_current_owner_binding=dict(existing_Source42_binding_verified=True,current_publication=i['current_publication'],actual_read4=i['source_read4'],current_read_guard_pair=roots,current_owner=term['current_Source42_owner_binding']),Source42_record=state['Source_owner']['code_reference'],Source42_raw=state['Source_owner']['code_reference'],Source_composition_proof=dict(current_read=i['source_read4'],current_materialized_projection=term['materialization'],current_protocol_owner=epoch['/fictional/D/'+ns['PROTOCOL_REL']],prior_direct_binding_historical=ref()),current_D_config=epoch['/fictional/D/.git/config'],normal_namespaces=term['namespace_metadata'],clock_scope=clock,resource=dict(expected_capacity={'base_config_sha256':'a'*64},expected_policy_sha256='a'*64,state_path='/fictional/state.json'),Native=[dict(path='/fictional/asset%d'%n,bytes=1,sha256='a'*64,actual_full9=row('/fictional/a')['full9']) for n in range(8)],lean_executable='/fictional/asset2',Source_IO_allocation=dict(debit_even_on_failure=True,actual_total_runtime_bytes='UNKNOWN',additional_private_readback_upper=33554432,debit_bytes=167772160,explicit_ledger_increase_and_charge_reference=charge_ref))
+b['Native_enrollment']=dict(Root_selection=selection_ref,case_profile=ns['PROFILE'],clock_scope=clock,current_toolchain_assets_exact=True,parent_request=dict(workload='validation',cpu_slots=1,memory_mb=8192,child_process_slots=1,requires_gpu=False,gpu_memory_mb=0,unified_memory_mb=0,parent_lease=None),expected_policy_sha256='a'*64,state_path='/fictional/state.json',current_resource_state_observation=ref('/fictional/state.json'))
+selection=dict(Root_selected=True,case_profile=ns['PROFILE'],actual_root_input_surface=inputs_ref,current_Source_epoch=term['outer_epoch'],clock_scope=clock,allowed_real_commands=dict(Lean_version_observations=1,Lean_compile_calls=2,expected_compiler_statuses=[0,1]),output_namespace='/fictional/output',cap_and_IO=charge_ref)
+results=[]
+def check(name,fn,refused=False):
+ try:fn()
+ except (AssertionError,KeyError,TypeError,ValueError):
+  if not refused:raise
+  results.append(dict(name=name,outcome='PASS',expected='refusal'))
+ else:
+  assert not refused,name+' unexpectedly accepted'
+  results.append(dict(name=name,outcome='PASS',expected='acceptance'))
+def softmut(fn):
+ a=copy.deepcopy([q,su,de,pr,xml]);fn(a);return ns['validate_managed234'](*a)
+def srcmut(fn):
+ a=copy.deepcopy(args);fn(a);return ns['validate_source_objects'](*a)
+def runmut(fn,now=150):
+ a=copy.deepcopy([b,selection,state,inputs_ref]);fn(a);return ns['validate_runtime_binding'](*a,now_ns=now)
+check('actual_closed_managed234_159_99_positive',lambda:ns['validate_managed234'](q,su,de,pr,xml))
+for name,fn in [('wrong234count',lambda a:a[0]['counts'].update(tests=233)),('wrong99prefix',lambda a:a[3]['observed_historical_software'].update(old99_prefix_ordered_nodeids_hash_canonical_JSON='0'*64)),('false_standalone99',lambda a:a[3]['observed_historical_software'].update(separate_current_ordinary99_run=True)),('wrong159count',lambda a:a[3]['observed_historical_software'].update(kernel_159_case_count=158)),('wrong_Lean_compile_pin',lambda a:a[2]['phases']['run']['maintained_owners']['ipfs_datasets_py.logic.backends.kernel.lean'].update(compiled_source_sha256='0'*64)),('wrong_test_rewrite_pin',lambda a:a[2]['phases']['run']['rewritten_test_modules'][0].update(source_sha256='0'*64)),('unclosed_parent',lambda a:a[0].update(parent_home_cleanup_confirmed=False))]:check(name,lambda fn=fn:softmut(fn),True)
+check('fictional_current_Source4_positive',lambda:ns['validate_source_objects'](*copy.deepcopy(args)))
+for name,fn in [('Source_open',lambda a:a[3].update(Source_closed=False)),('wrong_current_publication',lambda a:a[3].update(publication=ref('/fictional/wrong.json'))),('wrong_current_D_HEAD',lambda a:a[2]['frozen_roots'][0].update(Git_HEAD='0'*40)),('wrong_index_full9',lambda a:(a[2]['frozen'].__setitem__('stage0_index',copy.deepcopy(a[2]['frozen']['stage0_index'])),a[2]['frozen']['stage0_index']['full9'].update(st_ino='99'))),('python_subset_changed',lambda a:(a[7].__setitem__(0,copy.deepcopy(a[7][0])),a[7][0].update(sha256='0'*64))),('prior_ledger_refund',lambda a:a[10].update(used=1))]:check(name,lambda fn=fn:srcmut(fn),True)
+check('fictional_complete_Runtime_positive',lambda:runmut(lambda a:None))
+for name,fn in [('not_Root_selected',lambda a:a[1].update(Root_selected=False)),('selection_reference_mismatch',lambda a:a[0].update(Root_selection='/fictional/wrong.json')),('wrong_current_Source_epoch',lambda a:a[0].update(Source_epoch=ref('/fictional/old.json'))),('wrong_native_profile',lambda a:a[0].update(native_case_profile='wrong')),('wrong_binder_pin',lambda a:a[0]['binder_raw'].update(sha256='0'*64)),('wrong_parent_limit',lambda a:a[0]['Native_enrollment']['parent_request'].update(cpu_slots=2)),('extra_compile',lambda a:a[1]['allowed_real_commands'].update(Lean_compile_calls=3)),('missing_binding',lambda a:a.__setitem__(0,None))]:check(name,lambda fn=fn:runmut(fn),True)
+check('expired_clock',lambda:runmut(lambda a:None,now=201),True)
+old_test='8bca876c855d44df4d48cb909fc6a0e9a007480d61037831536e84a8cc68adf9';old_binder='6c692f2b88eeaa8a7a1c33825f2df6638d4cd4178f34f5a2e1e0c061d8350650';new_binder=c['evidence_and_controls']['current_operator_and_binder']['binder']['sha256']
+def ident(t,h,report_t=None):return ns['validate_identity'](dict(test_source_sha256=report_t or t,binder_sha256=h),dict(owning_test_record={'sha256':t},binder_raw={'sha256':h}))
+check('retained_v1_identity_positive',lambda:ident(old_test,old_binder));check('current_v2_identity_positive',lambda:ident(ns['TEST_SHA'],new_binder));check('mixed_identity_refused',lambda:ident(old_test,new_binder),True);check('detached_report_test_substitution',lambda:ident(ns['TEST_SHA'],new_binder,'0'*64),True)
+report=dict(schema='actual-finite-extracted-Native2-pure-guard-controls/v1',scope='actual_changed_pure_validators_only; Source/runtime/assets are fictional; no control main/import/Source/SDK/Native/Git/network',results=results,passed=len(results),failures=0,explicit_cached_reads=reads,explicit_cached_read_bytes=sum(r['bytes'] for r in reads),one_cpu=True,CPU_seconds=60,address_space_bytes=536870912,wall_alarm_seconds=60)
+p=D/'actual-pure-guard-controls-v02.json';raw=(json.dumps(report,indent=2,sort_keys=True)+'\n').encode()
+with os.fdopen(os.open(p,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400),'wb') as f:f.write(raw);f.flush();os.fsync(f.fileno())
+print(json.dumps(dict(report=dict(path=str(p),bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest()),passed=len(results),failures=0,explicit_cached_read_bytes=report['explicit_cached_read_bytes'])))

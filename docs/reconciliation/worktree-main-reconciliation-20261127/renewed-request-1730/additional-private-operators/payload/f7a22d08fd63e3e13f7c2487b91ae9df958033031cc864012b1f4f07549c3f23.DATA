@@ -1,0 +1,151 @@
+import hashlib
+import json
+import os
+from pathlib import Path
+import stat
+import subprocess
+import time
+
+base = Path(__file__).resolve().parent
+prior = Path('/tmp/Root-result-cache-owned-existing-route-L4Wyme59')
+controls = base / 'read3-controls'
+binder = Path('/tmp/Root-P2-V4-current-cooperative-freeze-READ3-INERT-QfDTlRCC/bind-existing-P2-V4-current-READ3.py.DATA')
+policy = ('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
+def full9(st):
+    return {key:str(getattr(st,key)) for key in policy}
+
+def read(path, size=None, digest=None):
+    path = Path(path)
+    first=path.lstat()
+    assert stat.S_ISREG(first.st_mode) and first.st_uid==os.getuid() and first.st_nlink==1
+    assert first.st_size<=16*1024**2 and (size is None or first.st_size==size)
+    with os.fdopen(os.open(path, os.O_RDONLY|os.O_NOFOLLOW), 'rb') as stream:
+        assert full9(os.fstat(stream.fileno()))==full9(first)
+        raw=stream.read(first.st_size+1)
+        assert full9(os.fstat(stream.fileno()))==full9(first)==full9(path.lstat())
+    assert len(raw)==first.st_size
+    actual=hashlib.sha256(raw).hexdigest()
+    assert digest is None or digest==actual,path
+    return {'path':str(path),'bytes':len(raw),'sha256':actual},raw
+
+def val(ref):
+    return json.loads(read(ref['path'],ref['bytes'],ref['sha256'])[1])
+
+def keep(name, obj):
+    path=base/name
+    data=(json.dumps(obj,sort_keys=True,indent=2)+'\n').encode()
+    with os.fdopen(os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400),'wb') as f:
+        f.write(data)
+        f.flush()
+        os.fsync(f.fileno())
+    return {'path':str(path),'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()}
+
+guide_ref,gr=read(prior/'actual-Phase8-result-cache-Source2-READ4-ordinary11-Guide582-publication.json',5773,'a1283734a9520e9e32a5f8ec4d8bf2b766586e162e81621de91a37caeeb83a62')
+guide=json.loads(gr)
+fr_ref,fr=read(base/'P2-current-execution-freeze.json',7054,'b60f9cc09c5d08eafb86a736dda223d22fd58bcebcec72c90b982a65201fdab9')
+freeze=json.loads(fr)
+original=val(freeze['original_cooperative_freeze'])
+assert original['candidate']['oid']==freeze['Git_HEAD'] and original['candidate']['tree']==freeze['Git_tree']
+assert original['SDK_managed'] is False and original['Source42_qualification'] is False
+guide_frozen=guide['guide582_Source_closed']
+assert val(guide_frozen)['A_index']==freeze['companion_index']
+authority,hu=read('/tmp/Root-authorized-Source-review-plus64MiB-for-normal51-v01.json',2377,'2e26fec63362aa01e0e1d475398261a13211016446ea1557a207f4a3956d55ea')
+human=json.loads(hu)
+for key in ('human_authorization','immediate_context'):
+    pin=human[key]
+    read(pin['path'],pin['bytes'],pin['sha256'])
+assert human['human_authorization']['role']=='user'
+owner= {'path':'/tmp/Reader-P1-current-published-Source-and-assets-read-preparation-private-v01/actual-Source42-doc-owner-current-control-binding-v01.json','bytes':2297,'sha256':'43c18000562ed03baf5df2d0cea8260682063078822ed7ff23208ba47c4ea674'}
+val(owner)
+fences=val(freeze['epochs']['instructions'])
+prior_ledger=guide['fully_retained_ledger']
+projection=freeze['metadata_and_Git_provenance_accounting']
+observed_projection_reads=projection['direct_bytes']+projection['git_stdout_bytes']
+assert observed_projection_reads==23199514
+reserve=prior_ledger['global_cap']-prior_ledger['internal_cap']
+assert reserve==190591874
+
+# Preserve the observed preparation reads and conservatively reserve one full existing 64-MiB Reader envelope.
+envelope=64*1024**2
+increment=envelope+observed_projection_reads
+selected={**prior_ledger,'global_cap':prior_ledger['global_cap']+increment,
+          'internal_cap':prior_ledger['internal_cap']+increment,'used':prior_ledger['used']+observed_projection_reads,
+          'internal_used':prior_ledger['internal_used']+observed_projection_reads}
+prepaid={**selected,'used':selected['used']+envelope,'internal_used':selected['internal_used']+envelope,
+         'captures':selected['captures']+1}
+assert prepaid['global_cap']-prepaid['used']==prepaid['internal_cap']-prepaid['internal_used']==6356992
+assert selected['global_cap']-selected['internal_cap']==reserve
+cap=keep('P2-READ3-Source-only-selection-and-full-precharge.json',{
+    'Root_selected':True,'prior_publication':guide_ref,'prior_fully_retained_ledger':prior_ledger,'selected':selected,
+    'after_full_precharge':prepaid,'added_Source_envelope':envelope,'increase_EACH_Source_cap':increment,
+    'separately_retained_observed_projection_input_bytes':observed_projection_reads,'physical_IO_total_known':False,
+    'managed_read_precharge_retained_on_failure':True,'standing_authority':authority,'accounting_execution_freeze':fr_ref,
+    'reserve_gap_B':reserve,'SDK_runtime_or_admission_scope_changed':False,'all_prior_costs_and_captures_retained':True})
+r, body=read(binder,14094,'cc72e03ddac4d857b5cdbca4ec35bb9d5307b390270c9229400a918c48b08175')
+d=Path(freeze['root'])
+namespace=[]
+for rel in ('logic/backends/__init__.py','logic/families/__init__.py','logic/intent_ir/formalize/__init__.py'):
+    absent=d/'ipfs_datasets_py'/rel
+    assert str(absent) in fences['absent'] and not os.path.lexists(absent)
+    p=absent.parent
+    assert stat.S_ISDIR(p.lstat().st_mode)
+    namespace.append({'path':str(p),'full9':full9(p.lstat()),'initializer_path':str(absent)})
+now=time.time_ns()
+hand=keep('P2-READ3-fresh-Root-handoff.json',{
+    'Root_selected':True,'local_freeze':freeze['original_cooperative_freeze'],'execution_freeze':fr_ref,
+    'proposal':original['proposal'],'guide582_frozen':guide_frozen,'frozen_roots':freeze['frozen_roots'],
+    'full_epoch':freeze['epochs']['named'],'AGENTS_chain_metadata':fences['AGENTS_chain_metadata'],
+    'approved_Source42_owner':owner,'cap':cap,'namespace_metadata':namespace,
+    'launch_not_before_utc_ns':now,'launch_deadline_utc_ns':now+60_000_000_000})
+env=os.environ|{'GIT_OPTIONAL_LOCKS':'0','GIT_NO_LAZY_FETCH':'1','GIT_TERMINAL_PROMPT':'0'}
+cfg={'core.preloadIndex':'false','index.threads':'1','core.fsmonitor':'false',
+     'core.packedGitWindowSize':'1m','core.packedGitLimit':'16m'}
+env['GIT_CONFIG_COUNT']=str(len(cfg))
+for i,(key,value) in enumerate(cfg.items()):
+    env.update({f'GIT_CONFIG_KEY_{i}':key,f'GIT_CONFIG_VALUE_{i}':value})
+build=subprocess.run(['/usr/bin/python3','-I','-B',str(binder),hand['path'],str(hand['bytes']),hand['sha256'],str(controls)],
+                     env=env,capture_output=True,timeout=25)
+if build.returncode:
+    print(build.stderr.decode(),flush=True)
+    fail=keep('P2-READ3-binder-preeffect-refusal.json',{'returncode':build.returncode,'physical_dispatch':False,'cap':cap,'handoff':hand,
+                                                       'no_Source_enrollment_confirmed_from_binder_only':True,'stderr':build.stderr.decode()})
+    print(json.dumps(fail),flush=True)
+    raise SystemExit(build.returncode)
+bound=json.loads(build.stdout)
+assert bound['targets']==3
+argv=['/usr/bin/timeout','--signal=TERM','--kill-after=5s','65s','/usr/bin/taskset','-c',str(min(os.sched_getaffinity(0))),
+      '/usr/bin/prlimit','--as=536870912','--cpu=60','--','/usr/bin/python3','-I','-B',bound['operator']['path']]
+with (controls/'stdout').open('xb') as stdout,(controls/'stderr').open('xb') as stderr:
+    process=subprocess.Popen(argv,stdout=stdout,stderr=stderr,env=env)
+    live=keep('P2-READ3-owner-selected-live.json',{'owner':'Root','scope':'P2 exact Source3 current observation','pid':process.pid,
+                  'selection':bound['selection'],'request':bound['request'],'execution_freeze':fr_ref,'cap':cap})
+    print(json.dumps(live),flush=True)
+    rc=process.wait()
+report=controls/'actual-output/actual-D27-observed-D-root-initializer-Source-READ-v01-small-closeout.json'
+terminal={'phase':'existing managed P2 Source3','owner':'Root','returncode':rc,'operator_controls':bound,'closed_process_pid':process.pid,
+          'execution_freeze':fr_ref,'cap':cap,'actual_handle':None,'stdout':read(controls/'stdout')[0],'stderr':read(controls/'stderr')[0]}
+if report.exists():
+    terminal['actual_compact']=read(report)[0]
+    close=val(terminal['actual_compact'])
+    terminal.update({k:close[k] for k in ('status','Source_closed','owned_module_closed','actual_IO','ledger_after','full_report_reference')})
+    terminal['fully_retained_ledger']={**prepaid,'captures':max(prepaid['captures'],close['ledger_after']['captures'])}
+    assert close['ledger_after']['used']<=prepaid['used'] and close['ledger_after']['internal_used']<=prepaid['internal_used']
+if rc==0:
+    assert close['status']=='PASS' and close['Source_closed'] and close['owned_module_closed'] and close['roots_before']==close['roots_after']
+    assert close['A_index_shared_guard_before']==close['A_index_shared_guard_after']
+    assert len(close['captures'])==3 and close['previous_D_Source42_WRITE_claimed'] is False
+    joined={row['path']:row for row in [freeze['index'],*freeze['exact_posts'].values()]}
+    for c in close['captures']:
+        row=joined.pop(c['path'])
+        assert all(row[k]==c[k] for k in ('bytes','sha256','full9'))
+        raw=read(c['raw_reference']['path'],c['raw_reference']['bytes'],c['raw_reference']['sha256'])[1]
+        if 'git_blob' in row:
+            assert hashlib.sha1(f'blob {len(raw)}\0'.encode()+raw).hexdigest()==row['git_blob']
+    assert not joined
+    terminal['exact_3_snapshot_and_Git_joins_verified']=True
+    terminal['A_index_SHA_and_full9_preserved']=True
+    terminal['ordinary62_dispatched']=False
+    terminal['R5_dispatched']=False
+term=keep('P2-READ3-existing-Source-terminal.json',terminal)
+print(json.dumps(term),flush=True)
+raise SystemExit(rc)

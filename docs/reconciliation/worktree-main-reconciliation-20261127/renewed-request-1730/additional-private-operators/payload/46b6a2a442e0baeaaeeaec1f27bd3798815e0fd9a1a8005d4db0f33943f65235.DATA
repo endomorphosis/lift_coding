@@ -1,0 +1,73 @@
+import ast,hashlib,json,os,stat,subprocess,time
+from pathlib import Path
+base=Path(__file__).resolve().parent
+tree=ast.parse(Path('/tmp/Root-P2-whole-component-managed-R5-n8Fkdm2q/run-read3.py').read_bytes())
+exec(compile(ast.Module(body=[s for s in tree.body if isinstance(s,ast.FunctionDef) or (isinstance(s,ast.Assign) and getattr(s.targets[0],'id',None)=='policy')],type_ignores=[]),'guarded existing reader helpers','exec'))
+def call(path,ref,*tail):
+    return ['/usr/bin/python3','-I','-B',str(path),ref['path'],str(ref['bytes']),ref['sha256'],*tail]
+source,_=read(base/'source2-terminal.json',2432,'28950d1753ab1450d1d87db963284cb15c28244936ce15ba81c4085537e898d8')
+t=val(source)
+assert t['Source_closed'] and t['module_closed'] and t['write_complete'] and t['returncode']==0
+frozen,_=read(base/'source2-freeze.json',3756,'8f72dd369c0d01829ba1fd9309b756680fd4e1c6c0560be74e2b72ce19fabdb9')
+f=val(frozen)
+assert f['source_closed']==t['closed_write'] and len(f['committed'])==2
+guard,_=read(base/'source2-nonclock-full9-with-selected-hashes.json',791122,'74c0b56f9659b8fd966d99b2baec9db59dd6533b2e429c2a598f2d16d7d25dcd')
+roles,_=read(base/'materialized-path-roles.json')
+proj_in=keep('P1-after-freeze-projector-handoff.json',{'guard':guard,'roles':roles,'freeze':frozen,'write':t['closed_write']})
+projector=base/'project-P1-cache-reload-current-git-sha.py.DATA'
+read(projector,12634,'c2fffd0f61c7f5822f21774158c971223ac606aaf86b8d81b88b474728af70cb')
+env=os.environ|{'GIT_OPTIONAL_LOCKS':'0','GIT_NO_LAZY_FETCH':'1','GIT_TERMINAL_PROMPT':'0'}
+cfg={'core.preloadIndex':'false','index.threads':'1','core.fsmonitor':'false','core.packedGitWindowSize':'1m','core.packedGitLimit':'16m'}
+env['GIT_CONFIG_COUNT']=str(len(cfg))
+for i,(k,v) in enumerate(cfg.items()):env.update({f'GIT_CONFIG_KEY_{i}':k,f'GIT_CONFIG_VALUE_{i}':v})
+preview=json.loads(subprocess.check_output(call(projector,proj_in,'--plan'),env=env,timeout=45))
+need=preview['planned_unique_immutable_blob_bytes']
+assert type(need) is int and need<=8*1024**2
+projection=json.loads(subprocess.check_output(call(projector,proj_in,str(need),str(32*1024**2),str(base/'current-frozen-full9-hash-epoch.json')),env=env,timeout=80))
+epoch=projection['epoch']
+assert len(val(epoch)['rows'])==1633
+request=val(t['controls']['request'])
+before=t['fully_retained_ledger']
+n=64*1024**2
+selected={**before,'global_cap':before['global_cap']+n,'internal_cap':before['internal_cap']+n}
+paid={**selected,'used':selected['used']+n,'internal_used':selected['internal_used']+n,'captures':selected['captures']+1}
+cap=keep('P1-READ4-Source-only-full-precharge.json',{'prior':before,'selected':selected,'after_full_precharge':paid,
+  'added_Source_envelope':n,'prior_actual_Source2':source,'projection':projection,'authority':val(t['precharge'])['standing_authority'],
+  'no_SDK_or_admission_capacity_change':True,'all_prior_costs_retained':True})
+now=time.time_ns()
+hand=keep('P1-READ4-Root-handoff.json',{'Root_selected':True,'closed_write':t['closed_write'],'local_freeze':frozen,
+ 'frozen_roots':f['frozen_roots'],'full_epoch':epoch,'AGENTS_chain_metadata':request['AGENTS_chain_metadata'],
+ 'approved_Source42_owner':request['approved_Source42_binding'],'cap':cap,
+ 'launch_not_before_utc_ns':now,'launch_deadline_utc_ns':now+60*10**9})
+binder=base/'bind-existing-P1-cache-reload-READ4.py.DATA'
+read(binder,12057,'498e0092e8abd6096f433feb3dfc51fb349030104ffc59898f2dd55b5512cbea')
+out=base/'read4-controls'
+binding=json.loads(subprocess.check_output(call(binder,hand,str(out)),env=env,timeout=25))
+assert binding['targets']==4
+argv=['/usr/bin/timeout','--signal=TERM','--kill-after=5s','65s','/usr/bin/taskset','-c',str(min(os.sched_getaffinity(0))),
+      '/usr/bin/prlimit','--as=536870912','--cpu=60','--','/usr/bin/python3','-I','-B',binding['operator']['path']]
+with (out/'stdout').open('xb') as so,(out/'stderr').open('xb') as se:
+    process=subprocess.Popen(argv,stdout=so,stderr=se,env=env)
+    live=keep('P1-READ4-owner-live.json',{'owner':'Root','pid':process.pid,'controls':binding,'cap':cap})
+    print(json.dumps(live),flush=True)
+    rc=process.wait()
+j=out/'actual-output/actual-D27-observed-D-root-initializer-Source-READ-v01-small-closeout.json'
+terminal={'owner':'Root','pid':process.pid,'returncode':rc,'actual_handle':None,'controls':binding,'cap':cap,
+          'full_epoch':epoch,'freeze':frozen,'prior_source2':source,'fully_retained_ledger':paid}
+if j.exists():
+    jref,_=read(j)
+    r=val(jref)
+    terminal['read_close']=jref
+    terminal.update({k:r[k] for k in ('status','Source_closed','owned_module_closed','ledger_after')})
+    terminal['fully_retained_ledger']={**paid,'captures':max(paid['captures'],r['ledger_after']['captures'])}
+if rc==0:
+    assert r['status']=='PASS' and r['Source_closed'] and r['owned_module_closed'] and len(r['captures'])==4
+    final=keep('P1-ordinary13-epoch-projection-handoff.json',{'freeze':frozen,'read_close':jref,'full_epoch':epoch})
+    verify=base/'verify-P1-READ4-and-project-ordinary13-epochs.py.DATA'
+    read(verify,3801)
+    projected=json.loads(subprocess.check_output(call(verify,final,str(base/'ordinary13-current-epoch')),env=env,timeout=35))
+    assert projected['READ_captures']==4 and projected['outer_rows']==1624 and projected['Python_rows']==1613
+    terminal['ordinary13_inputs']=projected
+r=keep('read4-terminal.json',terminal)
+print(json.dumps(r),flush=True)
+raise SystemExit(rc)

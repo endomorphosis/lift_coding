@@ -1,0 +1,313 @@
+{
+  "D687_now_ancestor_of_published_D344": true,
+  "all_eight_graph_queries_rc0_and_complete": true,
+  "all_ref_queries_rc0": true,
+  "covered_by_previous_nested_main_proof": [
+    {
+      "family": "common_crawl_search_engine",
+      "oid": "248f17f19e6f3e4b326f651e7a64a6f69cf5be3b",
+      "proof_path": "/tmp/git-owned-nested-scope-20261127-bEPSL04F/nested-owned-final-proof.json",
+      "proof_sha256": "25b4756f979b6718b31e6857efb9c496f62d302c36b2282a0747b1da66b8f8eb",
+      "verified_origin_main": "248f17f19e6f3e4b326f651e7a64a6f69cf5be3b"
+    },
+    {
+      "family": "Eng-DCEC",
+      "oid": "51a91c7b5e41ece82e085061796584863d91210e",
+      "proof_path": "/tmp/git-owned-nested-scope-20261127-bEPSL04F/nested-owned-final-proof.json",
+      "proof_sha256": "25b4756f979b6718b31e6857efb9c496f62d302c36b2282a0747b1da66b8f8eb",
+      "verified_origin_main": "51a91c7b5e41ece82e085061796584863d91210e"
+    },
+    {
+      "family": "convert_to_txt_based_on_mime_type",
+      "oid": "5756a6158eba5907cf0ddbd42637ef4668bb0307",
+      "proof_path": "/tmp/git-owned-nested-scope-20261127-bEPSL04F/nested-owned-final-proof.json",
+      "proof_sha256": "25b4756f979b6718b31e6857efb9c496f62d302c36b2282a0747b1da66b8f8eb",
+      "verified_origin_main": "5756a6158eba5907cf0ddbd42637ef4668bb0307"
+    },
+    {
+      "family": "omni_converter_mk2",
+      "oid": "72f459942dd781cbffcffb0e29a84e445273159c",
+      "proof_path": "/tmp/git-owned-nested-scope-20261127-bEPSL04F/nested-owned-final-proof.json",
+      "proof_sha256": "25b4756f979b6718b31e6857efb9c496f62d302c36b2282a0747b1da66b8f8eb",
+      "verified_origin_main": "72f459942dd781cbffcffb0e29a84e445273159c"
+    },
+    {
+      "family": "DCEC_Library",
+      "oid": "c6b42b02d3dc7d7e5d6281ea1a8cc6e806092da0",
+      "proof_path": "/tmp/git-owned-nested-scope-20261127-bEPSL04F/nested-owned-final-proof.json",
+      "proof_sha256": "25b4756f979b6718b31e6857efb9c496f62d302c36b2282a0747b1da66b8f8eb",
+      "verified_origin_main": "c6b42b02d3dc7d7e5d6281ea1a8cc6e806092da0"
+    },
+    {
+      "family": "Talos",
+      "oid": "f8fb0714f4abcc5eb981d7dd7623763d39fed995",
+      "proof_path": "/tmp/git-owned-nested-scope-20261127-bEPSL04F/nested-owned-final-proof.json",
+      "proof_sha256": "25b4756f979b6718b31e6857efb9c496f62d302c36b2282a0747b1da66b8f8eb",
+      "verified_origin_main": "f8fb0714f4abcc5eb981d7dd7623763d39fed995"
+    }
+  ],
+  "covered_by_primary_main_or_previous_inventory": 7815,
+  "execution_scope": "Read-only Git/commit and heldJSON metadata, no newfilesystem scan after suppliedmarkers, source/blob bodies, keys, Sourcelease, model/runtime/network or Git mutation. Earlier slowmetadata attempt genuinelyclosed143; finalfinitejoin closed0.",
+  "existing_recovery_mapping": {
+    "actual_completed_main_readback": "/tmp/git-main-followup-20261127-zYjieLmd/actual-final-main-readback.json",
+    "completed_main": "9804b07e5094d6c35da4509fb18802d5b44393b3",
+    "completed_nested_pairs": 73,
+    "completed_primary_pairs": 10087,
+    "source_restore_123": "/tmp/additional-worktree-source-retention-20261127-ofnpftDm/restore-v02.json"
+  },
+  "graph_join": {
+    "bytes": 7833685,
+    "path": "/tmp/git-reconciliation-renewed-metadata-20261127-5SzmmTn1/finite-graph-metadata-join.json",
+    "sha256": "5f44ad292023b17fb2ec4793eef5a4fdf39916445444f9ca523de3e0e64f654b"
+  },
+  "limitations": [
+    "Seven primary history candidates remain unproven in this metadata join; not allcovered.",
+    "Unknown preparation/qualification history does not authorize maintained-code adoption.",
+    "Current versus priorworking-copy source-byte differences were not inspected here.",
+    "No dangling-object enumeration; permission-denied176and prior scope exclusions retained."
+  ],
+  "main_graphs": {
+    "hallucinate_app": {
+      "commit_count": 3313,
+      "error": null,
+      "main": "126fed117ffc82ef809cb1ec2c213405a4a0fc3f",
+      "missing_commits": [],
+      "rc": 0,
+      "scope": "Actualremote observation in existing receipt; D updated to actualpublished344",
+      "verification_database": "/tmp/git-recovery-current-remote-audit-20261127-YjjrUOhv/hallucinate_app.git"
+    },
+    "ipfs_accelerate_py": {
+      "commit_count": 18790,
+      "error": null,
+      "main": "fae7981fa576817536a3c7aa62c5d28dc417f214",
+      "missing_commits": [],
+      "rc": 0,
+      "scope": "Actualremote observation in existing receipt; D updated to actualpublished344",
+      "verification_database": "/tmp/git-recovery-current-remote-audit-20261127-YjjrUOhv/ipfs_accelerate_py.git"
+    },
+    "ipfs_datasets_py": {
+      "commit_count": 14962,
+      "error": null,
+      "main": "344d3282d2d268505211f8dcf60e98b5306fcd4f",
+      "missing_commits": [],
+      "rc": 0,
+      "scope": "Actualremote observation in existing receipt; D updated to actualpublished344",
+      "verification_database": "/tmp/git-renewed-all-work-20261127-17pd2xkd/datasets-integration/.git"
+    },
+    "ipfs_kit_py": {
+      "commit_count": 8744,
+      "error": null,
+      "main": "b15442e490dc39d046a911ea663c73c99ed3c755",
+      "missing_commits": [],
+      "rc": 0,
+      "scope": "Actualremote observation in existing receipt; D updated to actualpublished344",
+      "verification_database": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/kit/.git"
+    },
+    "jevops": {
+      "commit_count": 37,
+      "error": null,
+      "main": "810e8bd91b14fd945e086840ccd0e2874a7910c3",
+      "missing_commits": [],
+      "rc": 0,
+      "scope": "Actualremote observation in existing receipt; D updated to actualpublished344",
+      "verification_database": "/home/barberb/lift_coding/JevOps/.git"
+    },
+    "lift_coding": {
+      "commit_count": 28682,
+      "error": null,
+      "main": "5fd4dc22e50b4a8dac0f9222348f9db77c12cb6b",
+      "missing_commits": [],
+      "rc": 0,
+      "scope": "Actualremote observation in existing receipt; D updated to actualpublished344",
+      "verification_database": "/tmp/lift-origin-main-reconcile-private-A8hmZDEd/root/.git"
+    },
+    "mcp-plus-plus": {
+      "commit_count": 308,
+      "error": null,
+      "main": "33c0c56e9423e11945837657e3a82fe865c60f91",
+      "missing_commits": [],
+      "rc": 0,
+      "scope": "Actualremote observation in existing receipt; D updated to actualpublished344",
+      "verification_database": "/tmp/git-main-followup-20261127-zYjieLmd/mcp-main-proof.git"
+    },
+    "swissknife": {
+      "commit_count": 2163,
+      "error": null,
+      "main": "453a30b01e62b6acdd1c54070821dbacfbf7908e",
+      "missing_commits": [],
+      "rc": 0,
+      "scope": "Actualremote observation in existing receipt; D updated to actualpublished344",
+      "verification_database": "/tmp/git-main-followup-20261127-zYjieLmd/swissknife-main-proof.git"
+    }
+  },
+  "metadata_stores": 105,
+  "outside_project_scope": [
+    {
+      "current_main_membership": [],
+      "oid": "981b02c0c44058b595f3b4180002c3ae3c806d40",
+      "previous_recovery_inventory_membership": [],
+      "reason": "Codex installed-tooling dependency namespace outside primary project families",
+      "sightings": [
+        {
+          "oid": "981b02c0c44058b595f3b4180002c3ae3c806d40",
+          "path": "/home/barberb/.codex/.tmp/plugins",
+          "ref": "refs/codex/curated-sync",
+          "repo": "/home/barberb/.codex/.tmp/plugins/.git",
+          "type": "commit"
+        },
+        {
+          "oid": "981b02c0c44058b595f3b4180002c3ae3c806d40",
+          "path": "/home/barberb/.codex/.tmp/plugins",
+          "ref": "refs/heads/master",
+          "repo": "/home/barberb/.codex/.tmp/plugins/.git",
+          "type": "commit"
+        }
+      ]
+    }
+  ],
+  "remaining_primary_history_candidates": [
+    {
+      "current_main_membership": [],
+      "oid": "17be501a290c65556ab1d1038f47d76ea5bab6a8",
+      "previous_recovery_inventory_membership": [],
+      "sightings": [
+        {
+          "oid": "17be501a290c65556ab1d1038f47d76ea5bab6a8",
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V4-checked-whole-project-private-yI1zwigi/normal-local/checkout",
+          "ref": "refs/heads/work/p2-whole-component-preservation-observation",
+          "repo": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V4-checked-whole-project-private-yI1zwigi/normal-local/checkout/.git",
+          "type": "commit"
+        }
+      ]
+    },
+    {
+      "current_main_membership": [],
+      "oid": "37cfa9523b3df28fe5c8d989e872c1cc20bb4538",
+      "previous_recovery_inventory_membership": [],
+      "sightings": [
+        {
+          "oid": "37cfa9523b3df28fe5c8d989e872c1cc20bb4538",
+          "path": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/hallucinate.git",
+          "ref": "refs/heads/guide586-recovery-publication",
+          "repo": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/hallucinate.git",
+          "type": "commit"
+        },
+        {
+          "oid": "37cfa9523b3df28fe5c8d989e872c1cc20bb4538",
+          "path": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/hallucinate.git",
+          "ref": "refs/heads/watchdog-f7c3-publication",
+          "repo": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/hallucinate.git",
+          "type": "commit"
+        }
+      ]
+    },
+    {
+      "current_main_membership": [],
+      "oid": "3b6c6c4252bae5c5209da7116f3c97e01cf7f629",
+      "previous_recovery_inventory_membership": [],
+      "sightings": [
+        {
+          "oid": "3b6c6c4252bae5c5209da7116f3c97e01cf7f629",
+          "path": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/datasets.git",
+          "ref": "refs/heads/guide586-recovery-private",
+          "repo": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/datasets.git",
+          "type": "commit"
+        },
+        {
+          "oid": "3b6c6c4252bae5c5209da7116f3c97e01cf7f629",
+          "path": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/datasets.git",
+          "ref": "refs/heads/guide586-recovery-publication",
+          "repo": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/datasets.git",
+          "type": "commit"
+        }
+      ]
+    },
+    {
+      "current_main_membership": [],
+      "oid": "401ef025b051d9b6332e244a8a0e87315d3382fc",
+      "previous_recovery_inventory_membership": [],
+      "sightings": [
+        {
+          "oid": "401ef025b051d9b6332e244a8a0e87315d3382fc",
+          "path": "/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/archive-path-query-preflight/root.git",
+          "ref": "refs/heads/p1-native2-code-publication",
+          "repo": "/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/archive-path-query-preflight/root.git",
+          "type": "commit"
+        },
+        {
+          "oid": "401ef025b051d9b6332e244a8a0e87315d3382fc",
+          "path": "/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/archive-path-query-preflight/root.git",
+          "ref": "refs/heads/watchdog-f7c3-publication",
+          "repo": "/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/archive-path-query-preflight/root.git",
+          "type": "commit"
+        }
+      ]
+    },
+    {
+      "current_main_membership": [],
+      "oid": "6774922fe38d3e961f07e6ff4a866d40d3d48f97",
+      "previous_recovery_inventory_membership": [],
+      "sightings": [
+        {
+          "oid": "6774922fe38d3e961f07e6ff4a866d40d3d48f97",
+          "path": "/tmp/Root-f7c3-owned-existing-route-tdyKlZHW/accelerate",
+          "ref": "refs/remotes/origin/codex/board-monitor-declared-validation-20261127",
+          "repo": "/tmp/Root-f7c3-owned-existing-route-tdyKlZHW/accelerate/.git",
+          "type": "commit"
+        }
+      ]
+    },
+    {
+      "current_main_membership": [],
+      "oid": "94b78a7ef6fc500e62f764e4a0c140b95b007811",
+      "previous_recovery_inventory_membership": [],
+      "sightings": [
+        {
+          "oid": "94b78a7ef6fc500e62f764e4a0c140b95b007811",
+          "path": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/root.git",
+          "ref": "refs/heads/guide586-recovery-publication",
+          "repo": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/root.git",
+          "type": "commit"
+        },
+        {
+          "oid": "94b78a7ef6fc500e62f764e4a0c140b95b007811",
+          "path": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/root.git",
+          "ref": "refs/heads/watchdog-f7c3-publication",
+          "repo": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/root.git",
+          "type": "commit"
+        }
+      ]
+    },
+    {
+      "current_main_membership": [],
+      "oid": "c667d98928216a5466df5f47cf834f6d4c3d3093",
+      "previous_recovery_inventory_membership": [],
+      "sightings": [
+        {
+          "oid": "c667d98928216a5466df5f47cf834f6d4c3d3093",
+          "path": "/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/archive-path-query-preflight/hallucinate.git",
+          "ref": "refs/heads/p1-native2-code-publication",
+          "repo": "/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/archive-path-query-preflight/hallucinate.git",
+          "type": "commit"
+        },
+        {
+          "oid": "c667d98928216a5466df5f47cf834f6d4c3d3093",
+          "path": "/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/archive-path-query-preflight/hallucinate.git",
+          "ref": "refs/heads/watchdog-f7c3-publication",
+          "repo": "/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/archive-path-query-preflight/hallucinate.git",
+          "type": "commit"
+        }
+      ]
+    }
+  ],
+  "root_remote_metadata": {
+    "path": "/tmp/git-recovery-current-remote-audit-20261127-YjjrUOhv/current-remote-recovery-ancestry.json",
+    "sha256": "6f8190fccee5ee1f9a6a4b799a5877e9d37e83ce4f5d5600dab4e45a86dfb7ed"
+  },
+  "schema": "renewed-primary-metadata-audit-closeout/v1",
+  "top_file_stat_delta": {
+    "path": "/tmp/git-reconciliation-renewed-metadata-20261127-5SzmmTn1/top-level-file-metadata.json",
+    "sha256": "7054015280c99c7f917804c587b19d59a68f651cad26f92c0b513b146e77149b"
+  },
+  "unique_commit_oids": 7829
+}

@@ -1,0 +1,226 @@
+import ast,hashlib,json,os,re,runpy,stat,subprocess,time
+from pathlib import Path
+base=Path(__file__).resolve().parent
+def take(path,methods,names):
+    tree=ast.parse(Path(path).read_bytes())
+    out=[]
+    for node in tree.body:
+        if isinstance(node,ast.FunctionDef) and (methods is None or node.name in methods):
+            out.append(node)
+        if isinstance(node,ast.Assign) and getattr(node.targets[0],'id',None) in names:
+            out.append(node)
+    return compile(ast.Module(body=out,type_ignores=[]),str(path),'exec')
+exec(take('/tmp/Root-P2-whole-component-managed-R5-n8Fkdm2q/run-read3.py',None,{'policy'}))
+exec(take(base/'freeze-repin.py',{'git','head','data_row'},{'D','A','D_PARENT','A_HEAD','ROLE','POST_SHA','POST_BLOB','OWNER','FIXTURE','env'}))
+exec(take(base/'run-source1.py',{'ack'},{'status'}))
+first_keep=keep
+def keep(name,obj):
+    path=base/name
+    if name.startswith('native-current-') and path.is_file():
+        record,b=read(path)
+        assert json.loads(b)==obj
+        return record
+    return first_keep(name,obj)
+
+prior=Path('/tmp/Root-P1-cache-reload-owned-existing-route-wK9s5mUF')
+pubref,_=read(prior/'actual-P1-reload-filename-Source2-READ4-ordinary13-Guide583-publication.json',4923,'5171ea1f895771d6552f484461e708cce80dde8de2963039348801bc01a58834')
+pub=val(pubref)
+doc=val(pub['exact_Guide583_closed'])
+source,_=read(base/'source1-terminal.json')
+t=val(source)
+freeze,_=read(base/'source1-freeze.json')
+f=val(freeze)
+assert t['Source_closed'] and t['module_closed'] and t['write_complete'] and t['returncode']==0
+assert f['source_closed']==t['closed_write'] and f['source1_terminal']==source
+assert f['local_clean'] and f['exact_changes_only'] and not f['pushed'] and f['published_base']==D_PARENT
+root_ref,_=read(base/'private-D-and-existing-A-nonclock-full9-guard.json',785135)
+assert root_ref['sha256'].startswith('f5acc2ca')
+allrows=val(root_ref)['rows']
+assert len(allrows)==len({r['path'] for r in allrows})==1633
+previous=val(read(prior/'read4-terminal.json',3006,'454666c4714f1778bba2c1ab7ebcff8c39ccf47ebdf5a455aeea40f08a7529db')[0])['full_epoch']
+previous_rows={r['path']:r for r in val(previous)['rows']}
+old=prior/'datasets'
+assert len(previous_rows)==len(allrows)
+roots=f['frozen_roots']
+assert [(p['root'],p['Git_HEAD'],p['Git_tree']) for p in roots]==[
+ (str(D),head(D),head(D,'HEAD^{tree}')),(str(A),head(A),head(A,'HEAD^{tree}'))]
+assert head(D,'HEAD^')==D_PARENT and head(A)==A_HEAD and doc['HEAD']==D_PARENT
+assert not git(D,'status','--porcelain=v1') and not git(A,'status','--porcelain=v1')
+
+def gitrows(root,oid,names):
+    out={}
+    raw=git(root,'ls-tree','-lrz',oid,'--',*sorted(names))
+    assert len(raw)<1024**2
+    for line in raw.split(b'\0'):
+        if line:
+            hdr,p=line.split(b'\t',1);mode,kind,blob,size=hdr.decode().split()
+            assert kind=='blob' and mode in ('100644','100755')
+            out[p.decode()]=(mode,blob,int(size))
+    assert set(out)==names
+    return out
+locations={}
+for row in allrows:
+    path=Path(row['path'])
+    root,=(r for r in (D,A) if path.is_relative_to(r))
+    locations[str(path)]=root,str(path.relative_to(root))
+names={r:{rel for root,rel in locations.values() if root==r and not rel.startswith('.git/')} for r in (D,A)}
+curr={r:gitrows(r,head(r),names[r]) for r in (D,A)}
+q=val(pub['qualification'])
+oldf=val(q['exact_local_freeze'])
+historical=gitrows(D,oldf['frozen']['HEAD'],names[D])
+aidx=doc['A_index']
+didx=f['frozen']['stage0_index']
+branch=f['frozen_branch_ref']
+changed_doc=doc['committed_docs']
+assert len(changed_doc)==4
+rows=[]
+for row in allrows:
+    p=Path(row['path'])
+    root,rel=locations[str(p)]
+    meta={'path':str(p),'bytes':p.lstat().st_size,'full9':full9(p.lstat())}
+    if str(p) in (aidx['path'],didx['path'],branch['path']):
+        pointer=next(q for q in (aidx,didx,branch) if q['path']==str(p))
+        assert meta=={k:pointer[k] for k in meta}
+        rows.append(pointer);continue
+    if rel.startswith('.git/'):
+        assert all(row[k]==meta[k] for k in meta)
+        rows.append({**meta,'sha256':None});continue
+    assert curr[root][rel][2]==meta['bytes']
+    assert bool(int(meta['full9']['st_mode'])&stat.S_IXUSR)==(curr[root][rel][0]=='100755')
+    if root==D and rel==ROLE:
+        actual=f['committed'][rel]
+        assert all(actual[k]==meta[k] for k in meta) and curr[root][rel][1]==POST_BLOB
+        digest=actual['sha256']
+    elif root==D and rel in changed_doc:
+        actual=changed_doc[rel]
+        assert ('100644',actual['committed_blob'],actual['bytes'])==curr[root][rel]
+        digest=actual['sha256']
+    else:
+        earlier=previous_rows[str((old if root==D else A)/rel)]
+        assert earlier['bytes']==meta['bytes'] and (root==A or curr[root][rel]==historical[rel]),rel
+        if root==A:assert earlier['full9']==meta['full9']
+        digest=earlier['sha256']
+    assert type(digest) is str and len(digest)==64
+    rows.append({**meta,'sha256':digest})
+by_path={r['path']:r for r in rows}
+assert len(by_path)==1633
+selected_paths=('.git/index',ROLE,FIXTURE,OWNER)
+assert [by_path[str(D/p)]['sha256'][:6] for p in selected_paths[1:]]==['5f4b3c','5dd255','744148']
+outer=[r for r in rows if '/.git/' not in r['path'] or r['path'].endswith('/.git/index')]
+python=[r for r in outer if Path(r['path']).suffix in ('.py','.pyi')]
+assert (len(outer),len(python))==(1624,1613)
+outer_ref=keep('native-current-outer-epoch.json',outer)
+python_ref=keep('native-current-python-epoch.json',python)
+named=keep('native-current-named-epoch.json',{'rows':rows})
+
+writer=val(t['controls']['request'])
+owner=writer['approved_Source42_binding']
+previous_guide_req=val(val(read(prior/'read4-terminal.json')[0])['controls']['request'])
+assert owner==previous_guide_req['approved_current_Source42_owner_binding']
+old_agents={r['path']:r for r in previous_guide_req['AGENTS_chain_metadata']}
+agents=[]
+dirs={p for row in rows for p in Path(row['path']).parents if p.is_relative_to(D) or p.is_relative_to(A)}
+for di in sorted(dirs):
+    for basename in ('AGENTS.md','AGENTS.override.md'):
+        p=di/basename
+        here={'path':str(p),'exists':os.path.lexists(p)}
+        if here['exists']:
+            root=D if p.is_relative_to(D) else A
+            rel=str(p.relative_to(root))
+            previous_pin=old_agents.get(str((old if root==D else A)/rel))
+            if previous_pin:
+                assert previous_pin['exists']
+                linked=previous_pin['reuse_captured_raw']
+            else:
+                assert root==D and rel=='ipfs_datasets_py/logic/autoformal/AGENTS.md'
+                linked,_=read('/tmp/Root-result-cache-owned-existing-route-L4Wyme59/read4-retained-current-AGENTS.DATA',1686)
+            r,data=read(linked['path'],linked['bytes'],linked['sha256'])
+            blob=hashlib.sha1(f'blob {len(data)}\0'.encode()+data).hexdigest()
+            assert head(root,'HEAD:'+rel)==blob and p.lstat().st_size==len(data)
+            here.update(full9=full9(p.lstat()),reuse_captured_raw=linked)
+        agents.append(here)
+ns=[]
+for rel in ('ipfs_datasets_py/logic/backends','ipfs_datasets_py/logic/families','ipfs_datasets_py/logic/intent_ir/formalize'):
+    d=D/rel
+    assert d.is_dir() and not os.path.lexists(d/'__init__.py')
+    ns.append({'path':str(d),'initializer_path':str(d/'__init__.py'),'full9':full9(d.lstat())})
+targets=[]
+for rel in selected_paths:
+    path=str(D/rel); p=by_path[path]
+    targets.append({**p,'root':str(D),'relative_path':rel,'exists':True,
+      'kind':'selected_actual_Git_index' if rel=='.git/index' else 'P1_native_exact_current_role',
+      'expected_bytes':p['bytes'],'expected_sha256':p['sha256'],'body_cap':p['bytes'],
+      'expected_git_blob_oid':None if rel=='.git/index' else curr[D][rel][1]})
+assert 2*sum(r['bytes'] for r in targets)+2*aidx['bytes']+28*1024**2<64*1024**2
+before=t['fully_retained_ledger']
+n=64*1024**2
+ledger={**before,'global_cap':before['global_cap']+n,'internal_cap':before['internal_cap']+n}
+paid={**ledger,'used':ledger['used']+n,'internal_used':ledger['internal_used']+n,'captures':ledger['captures']+1}
+assert paid['global_cap']-paid['used']==6356992 and paid['global_cap']-paid['internal_cap']==190591874
+cap=keep('native-READ4-Source-only-full-precharge.json',{'prior':before,'selected':ledger,'after_full_precharge':paid,
+ 'added_Source_envelope':n,'previous_Source1':source,'authority':val(t['precharge'])['standing_authority'],
+ 'all_prior_costs_retained':True,'resource_policy_capacity_unchanged':True,'runtime_IO_accounting_complete':False})
+out=base/'native-read4-output'
+assert not out.exists()
+request=keep('native-READ4-existing-request.json',{'schema':'P1-native2-current-four-target-existing-Source42/v1',
+ 'Source_READ_selected':True,'ledger_before':ledger,'exact_new_body_targets':targets,'all_candidate_metadata':targets,
+ 'literal_metadata_candidate_count':4,'target_count':4,'frozen_roots':roots,
+ 'approved_current_Source42_owner_binding':owner,'AGENTS_chain_metadata':agents,'named_metadata_recheck_reference':named,
+ 'named_metadata_count':len(rows),'namespace_metadata':ns,'A_index_shared_guard_guide582':{'root':str(A),**aidx},
+ 'previous_D_closed_managed_Source1':source,'execution_freeze':freeze,'published_Guide583':pubref})
+now=time.time_ns()
+selection=keep('native-READ4-existing-selection.json',{'Root_selected':True,'Source_operation_max_bytes':n,
+ 'ledger_before':ledger,'request':request,'cap':cap,'fresh_output_namespace':str(out),
+ 'launch_not_before_utc_ns':now,'launch_deadline_utc_ns':now+60*10**9})
+entry=Path('/tmp/Root-result-cache-owned-existing-route-L4Wyme59/read4-controls/Root-selected-existing-result-cache-READ4-entry.py')
+_,raw=read(entry,23776,'7ff056f593c20c3fa016d692cf3153bfa78bbc4d106fe6899693eb0c39985af7')
+template=Path('/tmp/Root-P2-V4-current-cooperative-freeze-READ3-INERT-QfDTlRCC/bind-existing-P2-V4-current-READ3.py.DATA')
+read(template,14094,'cc72e03ddac4d857b5cdbca4ec35bb9d5307b390270c9229400a918c48b08175')
+reuse=runpy.run_path(str(template))
+op=reuse['adapt_entry'](raw.decode(),selection,request,out,ledger)
+assert op.count("request['target_count'] == 3")==1 and op.count('P2_V4_CURRENT_D_FROZEN_READ3')==4
+op=op.replace("request['target_count'] == 3","request['target_count'] == 4").replace('P2_V4_CURRENT_D_FROZEN_READ3','P1_NATIVE2_CURRENT_D_FROZEN_READ4')
+op=op.replace('previous_D_cooperative_freeze','previous_D_closed_managed_Source1').replace("report['previous_D_Source42_WRITE_claimed'] = False","report['previous_D_Source42_WRITE_claimed'] = True").replace("'previous_D_Source42_WRITE_claimed': False","'previous_D_Source42_WRITE_claimed': True")
+compile(op,'existing managed D27 READ4 exact Native2 inputs','exec')
+control=base/'Root-selected-existing-native2-READ4.py'
+with os.fdopen(os.open(control,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400),'wb') as stream:
+    stream.write(op.encode());stream.flush();os.fsync(stream.fileno())
+ctrl,_=read(control)
+cfg={'core.preloadIndex':'false','index.threads':'1','core.fsmonitor':'false','core.packedGitWindowSize':'1m','core.packedGitLimit':'16m'}
+env['GIT_CONFIG_COUNT']=str(len(cfg))
+for i,(k,v) in enumerate(cfg.items()):env.update({f'GIT_CONFIG_KEY_{i}':k,f'GIT_CONFIG_VALUE_{i}':v})
+cmd=['/usr/bin/timeout','--signal=TERM','--kill-after=5s','65s','/usr/bin/taskset','-c',str(min(os.sched_getaffinity(0))),
+    '/usr/bin/prlimit','--as=536870912','--cpu=60','--','/usr/bin/python3','-I','-B',str(control)]
+with (base/'native-READ4.stdout').open('xb') as so,(base/'native-READ4.stderr').open('xb') as se:
+    child=subprocess.Popen(cmd,stdout=so,stderr=se,env=env)
+    live=keep('native-READ4-owner-live.json',{'pid':child.pid,'operator':ctrl,'selection':selection,'full_charge':cap})
+    ack('native2_current_roles_existing_READ4_running',Source_handle=live,local_freeze=freeze)
+    print(json.dumps(live),flush=True)
+    rc=child.wait()
+compact=out/'actual-D27-observed-D-root-initializer-Source-READ-v01-small-closeout.json'
+close={'returncode':rc,'handle':None,'owner':'Root','selection':selection,'cap':cap,'freeze':freeze,
+       'source1_terminal':source,'fully_retained_ledger':paid,'named_epoch':named,
+       'stdout':read(base/'native-READ4.stdout')[0],'stderr':read(base/'native-READ4.stderr')[0]}
+if compact.exists():
+    ref,_=read(compact); d=val(ref)
+    close.update(read_close=ref,Source_closed=d['Source_closed'],owned_module_closed=d['owned_module_closed'],
+      fully_retained_ledger={**paid,'captures':max(paid['captures'],d['ledger_after']['captures'])})
+if rc==0:
+    assert d['status']=='PASS' and d['Source_closed'] and d['owned_module_closed'] and not d['errors']
+    assert d['roots_before']==d['roots_after'] and d['A_index_shared_guard_before']==d['A_index_shared_guard_after']
+    assert d['A_index_shared_guard_before']['sha256']==aidx['sha256']
+    captures={}
+    for row in d['captures']:
+        p=row['path']; role=str(Path(p).relative_to(D))
+        assert all(by_path[p][k]==row[k] for k in ('path','bytes','sha256','full9'))
+        r,b=read(row['raw_reference']['path'],row['raw_reference']['bytes'],row['raw_reference']['sha256'])
+        if role!='.git/index':assert hashlib.sha1(f'blob {len(b)}\0'.encode()+b).hexdigest()==curr[D][role][1]
+        captures[role]=r
+    assert set(captures)==set(selected_paths)
+    close['native_input_tuple']=keep('native2-current-input-tuple.json',{
+      'guide_publication':pubref,'ordinary13':pub['qualification'],'source1_terminal':source,'freeze':freeze,
+      'read_close':ref,'outer_epoch':outer_ref,'python_epoch':python_ref,'raw_captures':captures})
+terminal=keep('native-READ4-terminal.json',close)
+ack('native2_READ4_closed_awaiting_runtime_binding' if rc==0 else 'native2_READ4_terminal_refusal',Source_handle=None,READ4=terminal)
+print(json.dumps(terminal),flush=True)
+raise SystemExit(rc)

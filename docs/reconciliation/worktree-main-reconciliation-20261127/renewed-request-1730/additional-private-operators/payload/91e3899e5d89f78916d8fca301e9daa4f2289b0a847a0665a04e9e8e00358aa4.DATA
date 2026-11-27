@@ -1,0 +1,617 @@
+diff --git a/ipfs_datasets_py/logic/autoformal/README.md b/ipfs_datasets_py/logic/autoformal/README.md
+index 19b8b71f38..a479884449 100644
+--- a/ipfs_datasets_py/logic/autoformal/README.md
++++ b/ipfs_datasets_py/logic/autoformal/README.md
+@@ -2,7 +2,7 @@
+ 
+ ## Agent continuation recovery
+ 
+-The existing supervisor now has goal-aware recovery metadata for stale saved pauses, independent authorized work, exact owner polling and durable attempt/reconciliation history. Explicit pauses and execution holds remain effective; it does not issue execution or goal-resume authority. See [operations](docs/OPERATIONS.md#agent-owner-pauses-and-independent-continuations).
++The existing supervisor now has goal-aware recovery metadata for stale saved pauses, independent authorized work, exact owner polling and durable attempt/reconciliation history. Explicit pauses and execution holds remain effective; it does not issue execution or goal-resume authority. See [operations](docs/OPERATIONS.md#agent-owner-pauses-and-independent-continuations). Exact provider-turn observations can now be ingested into a durable continuation checkpoint, retaining refusal evidence, spent attempts and both histories. The local owning suite passed 95 tests and 171 subtests; rejected operations remain held.
+ 
+ ## AArch64 Native policy fixtures — 2026-11-16
+ 
+diff --git a/ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md b/ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md
+index 6beff52203..a13b20c807 100644
+--- a/ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md
++++ b/ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md
+@@ -1,5 +1,17 @@
+ # Current handoff
+ 
++
++## Provider-turn continuation checkpoint — local software change
++
++The existing `agent-turn-recovery` command now accepts `--observation` for an already charged task and its exact original thread/turn. It preserves provider errors/evidence and emits `next_frontier` with policy holds and both histories. Cleanup and acceptance require explicit independent evidence; terminal provider status does not release an unknown Source/process/resource scope. Rejected operations, aliases and unaccepted dependents remain held, while independent already-authorized tasks retain existing scope, capacity and pause/usage checks. Dispatch, retry, resume, goal mutation and admission flags remain false.
++
++Observation mode requires an exclusive checkpoint output. Success follows file and directory fsync plus identity rechecks. Failed writes preserve partial artifacts and return failure; filename existence alone is not commit. The caller retains the whole checkpoint and compares its consumed-frontier digest before existing atomic claim/admission.
++
++All 95 local owning unit/CLI tests and 171 subtests passed, zero failures/errors/skips: 67 retained tests plus 28 new controls. Source hashes remained unchanged and the Source READ closed. Limits were one CPU, 60 CPU/wall seconds and 512MiB address space. Independent static review found three issues fixed before qualification: digesting mutable input twice, allowing refusal-evidence rewrites, and missing post-directory-sync identity checks. The tests cover those findings, duplicate events, wrong owners, unknown cleanup, failed syncs and retained budget/policy barriers. This isolated branch is not published and does not execute a live provider request, replay a rejected operation, change a host goal, or qualify Native Lean, statutory meaning, model training or corpus admission. The earlier 67-test record and broader failed runs remain historical.
++
++Local evidence: `/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-agent-turn-observation-checkpoint-local95-v01.json` (2438 bytes / SHA256 `7287b4e19cebb8d8fea57f6fc23246d3e2f9a0d54586f8a901fdc76906c7089d`).
++
++
+ ## Agent-owner continuation recovery — local software change
+ 
+ The current supervisor owner adds versioned goal-control reconciliation and independent scheduling through `agent-turn-recovery`. The original private turn-only draft ignored supplied pause metadata; this was reproduced before modification. V1 now rejects goal-aware fields, and V2 requires the same-goal authority/order domain, retained operation and reconciliation histories, an exact observed owner and explicit run-wide execution-hold data. Older paused state under a newer active directive can yield one owner reconciliation request without suppressing independent authorized work. Explicit pause, blocked/unknown/completed state, policy holds and usage restrictions remain barriers. No owner restart, runtime, legal, model or corpus authority is granted.
+diff --git a/ipfs_datasets_py/logic/autoformal/docs/OPERATIONS.md b/ipfs_datasets_py/logic/autoformal/docs/OPERATIONS.md
+index 7714c4015c..421186ccbf 100644
+--- a/ipfs_datasets_py/logic/autoformal/docs/OPERATIONS.md
++++ b/ipfs_datasets_py/logic/autoformal/docs/OPERATIONS.md
+@@ -51,6 +51,54 @@ selected work. No request authorizes an explicit user pause override, quota
+ bypass, legal approval or corpus admission. Input and output files must differ;
+ output creation is exclusive and existing evidence is never overwritten.
+ 
++### Ingest an observed provider turn
++
++Use the same owner and existing V2 frontier:
++
++```sh
++python scripts/ops/legal_ir/run_autoformal_supervisor.py agent-turn-recovery \
++  --inputs frontier.json --observation owner-turn.json --output checkpoint.json
++```
++
++`owner-turn.json` has exactly these fields, using actual original IDs/error and
++saved evidence references:
++
++```json
++{
++  "schema": "legal-ir-agent-turn-observation/v1",
++  "task_id": "existing-task",
++  "thread_id": "existing-thread",
++  "turn": {"id": "existing-turn", "status": "failed", "error": {"code": "policy_refusal", "message": "Original refusal"}},
++  "cleanup_confirmed": false,
++  "accepted": false,
++  "evidence_refs": []
++}
++```
++
++The task must already have a charged attempt and a matching current or retained
++owner observation. Supported provider states are `inProgress`, `completed`,
++`failed` and `interrupted`; absent/ambiguous state is not terminal. Cleanup and
++acceptance are never inferred. Keep them false without the existing owner's
++independent evidence. Live owners remain exact polling targets. A refusal and its
++original evidence stay held across aliases, resume directives and duplicate
++delivery; explicit pauses and run-wide usage/resource holds remain effective.
++
++Retain the whole output and pass its `next_frontier` into the next existing
++scheduling call. It includes the updated observation, policy holds and both
++histories; exact duplicate events preserve spent counters and the next frontier.
++Verify `observation_checkpoint.input_frontier_sha256` against the current immutable
++frontier before existing atomic claim/admission. Event and next-frontier digests
++are also included. This adapter does not authenticate its own provider metadata
++or mutate the task/goal store.
++
++Observation mode requires `--output`; the three paths must differ. Output creation
++is exclusive, with file and directory fsync and post-sync identity checks before
++success. Failure returns code 2, starts no work and may leave a partial output.
++Preserve it: existence alone is not a successful commit, and failed output must
++not drive a claim or automatic repeat. Existing planning-only stdout mode remains
++unchanged when `--observation` is absent. Local software qualification passed 95
++tests and 171 subtests; no live provider recovery was performed.
++
+ ## CLI4 separate original custody and retained failures — 2026-11-15
+ 
+ The audited corrected Source5 operation installed two changed bodies and recaptured three same-byte bodies with fresh identities; its separate readback closed. Separate original A144v02 and H34 cohorts passed independent audits: 144 selected cases in 3.934s and 34 new health cases in 1.413s, each with zero failures/errors/skips. Their original Source R+A, Native-resource, sampled-process and genuine-wait custody closed separately in 168.173s and 168.301s before each initial 420s cutoff.
+diff --git a/ipfs_datasets_py/logic/autoformal/docs/work_catalog.json b/ipfs_datasets_py/logic/autoformal/docs/work_catalog.json
+index 25f6876dcd..cd6546ebb2 100644
+--- a/ipfs_datasets_py/logic/autoformal/docs/work_catalog.json
++++ b/ipfs_datasets_py/logic/autoformal/docs/work_catalog.json
+@@ -5821,6 +5821,19 @@
+         "scope": "Local metadata scheduling and owner-reconciliation requests only; no live goal mutation, dispatch, retry, Native Lean, legal or corpus admission.",
+         "publication_status": "local_uncommitted",
+         "task_and_component_population_unchanged": true
++      },
++      "agent_turn_observation_checkpoint_v1": {
++        "api": "prepare_agent_turn_recovery_checkpoint_v1",
++        "cli": "scripts/ops/legal_ir/run_autoformal_supervisor.py agent-turn-recovery --inputs frontier.json --observation owner-turn.json --output checkpoint.json",
++        "evidence": {
++          "bytes": 2438,
++          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-agent-turn-observation-checkpoint-local95-v01.json",
++          "sha256": "7287b4e19cebb8d8fea57f6fc23246d3e2f9a0d54586f8a901fdc76906c7089d"
++        },
++        "publication_status": "local_branch_not_published",
++        "qualification": "95 local owning tests and 171 subtests passed; Source READ closed.",
++        "scope": "Existing-turn metadata ingestion and durable checkpoint only; no provider authentication, retry, dispatch, goal mutation, runtime or legal admission.",
++        "task_component_selected_evidence_populations_unchanged": true
+       }
+     },
+     {
+diff --git a/ipfs_datasets_py/logic/autoformal/supervisor_loop.py b/ipfs_datasets_py/logic/autoformal/supervisor_loop.py
+index f753156fb7..aa84acbff0 100644
+--- a/ipfs_datasets_py/logic/autoformal/supervisor_loop.py
++++ b/ipfs_datasets_py/logic/autoformal/supervisor_loop.py
+@@ -4631,3 +4631,88 @@ def plan_agent_turn_recovery_v2(snapshot: Mapping[str, Any]) -> dict[str, Any]:
+         "goal_mutation_authorized": False, "owner_resume_authorized": False,
+     })
+     return report
++
++
++def prepare_agent_turn_recovery_checkpoint_v1(
++    snapshot: Mapping[str, Any], event: Mapping[str, Any],
++) -> dict[str, Any]:
++    """Bind an existing provider turn to a durable continuation checkpoint.
++
++    The caller authenticates the provider observation and supplies independent
++    cleanup/acceptance evidence. A terminal turn is not evidence of cleanup.
++    This adapter performs no I/O, claims, retries, dispatch or goal mutation.
++    Persist the returned checkpoint before using selections with the existing
++    atomic claim/admission owner, comparing the original frontier digest.
++    """
++    input_raw = _handoff_reconciliation_bytes_v2(snapshot)
++    frame = json.loads(input_raw)
++    incoming = json.loads(_handoff_reconciliation_bytes_v2(event))
++    prior = plan_agent_turn_recovery_v2(frame)
++
++    def need(value: bool, reason: str) -> None:
++        if not value:
++            raise ValueError(reason)
++
++    need(type(incoming) is dict and set(incoming) == {
++        "schema", "task_id", "thread_id", "turn", "cleanup_confirmed",
++        "accepted", "evidence_refs",
++    } and incoming["schema"] == "legal-ir-agent-turn-observation/v1",
++         "closed provider turn observation schema required")
++    turn = incoming["turn"]
++    need(type(turn) is dict and set(turn) == {"id", "status", "error"},
++         "exact provider turn identity, status and original error required")
++    need(turn["status"] in ("inProgress", "completed", "failed", "interrupted"),
++         "an observed provider turn is required; unavailable is not terminal")
++    need(type(incoming["cleanup_confirmed"]) is bool
++         and type(incoming["accepted"]) is bool,
++         "independent explicit cleanup and acceptance observations required")
++    need(turn["status"] != "inProgress" or
++         (not incoming["cleanup_confirmed"] and not incoming["accepted"]),
++         "a live provider turn cannot establish cleanup or acceptance")
++    originals = {entry["task"]["task_id"]: entry for entry in prior["operation_history"]}
++    need(type(incoming["task_id"]) is str and incoming["task_id"] in originals,
++         "an already observed original task is required")
++    entry = originals[incoming["task_id"]]
++    task, previous = entry["task"], entry["observation"]
++    need(task["attempts_used"] > 0, "existing claimed attempt must remain charged")
++    need(incoming["thread_id"] == previous["thread_id"]
++         and turn["id"] == previous["turn_id"],
++         "provider event must match the original thread and turn")
++    for hold in prior["policy_holds"]:
++        if (hold["operation_key"] == task["operation_key"]
++                and hold["thread_id"] == incoming["thread_id"]
++                and hold["turn_id"] == turn["id"] and turn["error"] is not None):
++            need(turn["error"] == hold["error"]
++                 and incoming["evidence_refs"] == hold["evidence_refs"],
++                 "original refusal error and evidence cannot be rewritten")
++    observation = {
++        "task_id": task["task_id"], "thread_id": incoming["thread_id"],
++        "turn_id": turn["id"], "status": turn["status"], "error": turn["error"],
++        "cleanup_confirmed": incoming["cleanup_confirmed"],
++        "accepted": incoming["accepted"], "evidence_refs": incoming["evidence_refs"],
++    }
++    # Retain the pre-event history, including any earlier refusal, before
++    # validating a transition. Replaying a terminal event cannot rewrite it.
++    frame["operation_history"] = prior["operation_history"]
++    frame["policy_holds"] = prior["policy_holds"]
++    if not any(item["task_id"] == task["task_id"] for item in frame["tasks"]):
++        frame["tasks"].append(task)
++    frame["observations"] = [item for item in frame["observations"]
++                             if item["task_id"] != task["task_id"]] + [observation]
++    report = plan_agent_turn_recovery_v2(frame)
++    following = json.loads(_handoff_reconciliation_bytes_v2(frame))
++    for key in ("operation_history", "policy_holds", "reconciliation_history"):
++        following[key] = report[key]
++    report["next_frontier"] = following
++    report["observation_checkpoint"] = {
++        "schema": "legal-ir-agent-turn-observation-checkpoint/v1",
++        "operation_key": task["operation_key"], "event": incoming,
++        "input_frontier_sha256": hashlib.sha256(input_raw).hexdigest(),
++        "event_sha256": hashlib.sha256(
++            _handoff_reconciliation_bytes_v2(incoming)).hexdigest(),
++        "next_frontier_sha256": hashlib.sha256(
++            _handoff_reconciliation_bytes_v2(following)).hexdigest(),
++    }
++    report["requires_durable_checkpoint_before_claim"] = True
++    _handoff_reconciliation_bytes_v2(report)
++    return report
+\ No newline at end of file
+diff --git a/scripts/ops/legal_ir/run_autoformal_supervisor.py b/scripts/ops/legal_ir/run_autoformal_supervisor.py
+index 71939f8771..e1aaacdec9 100644
+--- a/scripts/ops/legal_ir/run_autoformal_supervisor.py
++++ b/scripts/ops/legal_ir/run_autoformal_supervisor.py
+@@ -4239,29 +4239,78 @@ def main(argv: list[str] | None = None) -> int:
+     return 0
+ 
+ 
++def _write_agent_turn_checkpoint_v1(path: Path, raw: bytes) -> None:
++    """Exclusively retain a recovery checkpoint before acknowledging it."""
++    import stat
++
++    directory = os.open(path.parent, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
++    try:
++        parent = os.fstat(directory)
++        fd = os.open(path.name, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW,
++                     0o600, dir_fd=directory)
++        try:
++            view = memoryview(raw)
++            while view:
++                count = os.write(fd, view)
++                if count <= 0:
++                    raise OSError("short recovery checkpoint write")
++                view = view[count:]
++            os.fsync(fd)
++            written = os.fstat(fd)
++            installed = os.stat(path.name, dir_fd=directory, follow_symlinks=False)
++            stamp = lambda st: (st.st_dev, st.st_ino, st.st_mode, st.st_nlink,
++                                st.st_size, st.st_mtime_ns, st.st_ctime_ns)
++            if (not stat.S_ISREG(written.st_mode) or written.st_nlink != 1
++                    or written.st_size != len(raw) or stamp(written) != stamp(installed)):
++                raise ValueError("recovery checkpoint identity changed")
++        finally:
++            os.close(fd)
++        selected = path.parent.lstat()
++        if (parent.st_dev, parent.st_ino) != (selected.st_dev, selected.st_ino):
++            raise ValueError("recovery checkpoint directory changed")
++        os.fsync(directory)
++        selected = path.parent.lstat()
++        installed = os.stat(path.name, dir_fd=directory, follow_symlinks=False)
++        if ((parent.st_dev, parent.st_ino) != (selected.st_dev, selected.st_ino)
++                or stamp(written) != stamp(installed)):
++            raise ValueError("recovery checkpoint changed during directory sync")
++    finally:
++        os.close(directory)
++
+ def agent_turn_recovery_main_v1(argv: list[str]) -> int:
+     """Plan independent continuations from saved agent metadata; start no work."""
+     parser = argparse.ArgumentParser(description=agent_turn_recovery_main_v1.__doc__)
+     parser.add_argument("--inputs", type=Path, required=True)
+     parser.add_argument("--output", type=Path)
++    parser.add_argument("--observation", type=Path)
+     args = parser.parse_args(argv)
+-    if args.output is not None and args.inputs.resolve() == args.output.resolve():
+-        parser.error("agent frontier input and output must be distinct")
++    if args.observation is not None and args.output is None:
++        parser.error("provider observation ingestion requires a durable --output checkpoint")
++    paths = [p.resolve() for p in (args.inputs, args.observation, args.output) if p is not None]
++    if len(paths) != len(set(paths)):
++        parser.error("agent frontier, observation and output must be distinct")
+     if str(ROOT) not in sys.path:
+         sys.path.insert(0, str(ROOT))
+     from ipfs_datasets_py.logic.autoformal.supervisor_loop import (
+         _handoff_reconciliation_bytes_v2,
++        prepare_agent_turn_recovery_checkpoint_v1,
+         plan_agent_turn_recovery_v1,
+         plan_agent_turn_recovery_v2,
+     )
+     try:
+         snapshot = _read_handoff_metadata_v2(args.inputs)
+-        planner = (plan_agent_turn_recovery_v2 if snapshot.get("schema") == "legal-ir-agent-turn-frontier/v2"
+-                   else plan_agent_turn_recovery_v1)
+-        result = planner(snapshot)
++        if args.observation is not None:
++            result = prepare_agent_turn_recovery_checkpoint_v1(
++                snapshot, _read_handoff_metadata_v2(args.observation))
++        else:
++            planner = (plan_agent_turn_recovery_v2 if snapshot.get("schema") == "legal-ir-agent-turn-frontier/v2"
++                       else plan_agent_turn_recovery_v1)
++            result = planner(snapshot)
+         raw = _handoff_reconciliation_bytes_v2(result)
+         if args.output is None:
+             sys.stdout.write(raw.decode("utf-8"))
++        elif args.observation is not None:
++            _write_agent_turn_checkpoint_v1(args.output, raw)
+         else:
+             _write_handoff_metadata_v2(args.output, raw)
+     except (OSError, ValueError) as exc:
+diff --git a/tests/unit/logic/test_supervisor_agent_turn_recovery.py b/tests/unit/logic/test_supervisor_agent_turn_recovery.py
+index 9eff69aca0..12025abf6e 100644
+--- a/tests/unit/logic/test_supervisor_agent_turn_recovery.py
++++ b/tests/unit/logic/test_supervisor_agent_turn_recovery.py
+@@ -1108,3 +1108,312 @@ class GoalAwareRecoveryCliTests(unittest.TestCase):
+ 
+ if __name__ == "__main__":
+     unittest.main()
++
++
++class AgentTurnObservationCheckpointTests(unittest.TestCase):
++    def snapshot(self):
++        result = paused_owner_frontier(observations=[
++            observation('owner', status='inProgress', cleanup=False)])
++        result['goal_control']['observed'] = deepcopy(result['goal_control']['intent'])
++        return result
++
++    def event(self, *, cleanup=True):
++        return {
++            'schema': 'legal-ir-agent-turn-observation/v1', 'task_id': 'owner',
++            'thread_id': 'original-thread:owner',
++            'turn': {'id': 'original-turn:owner', 'status': 'failed',
++                     'error': {'message': 'This content was flagged for possible cybersecurity risk.',
++                               'details': {'original': ['preserved']}}},
++            'cleanup_confirmed': cleanup, 'accepted': False,
++            'evidence_refs': [{'path': 'saved/owner-turn.json', 'sha256': 'b' * 64}],
++        }
++
++    def prepare(self, snapshot=None, event=None):
++        result = supervisor_loop.prepare_agent_turn_recovery_checkpoint_v1(
++            self.snapshot() if snapshot is None else snapshot,
++            self.event() if event is None else event)
++        for key in ('dispatch_authorized', 'retries_authorized', 'attempt_budgets_reset',
++                    'workers_started', 'owner_resume_authorized', 'goal_mutation_authorized',
++                    'goal_complete', 'admitted'):
++            self.assertIs(result[key], False, key)
++        self.assertIs(result['requires_durable_checkpoint_before_claim'], True)
++        return result
++
++    def test_actual_refusal_holds_aliases_and_dependents_but_not_independent_work(self):
++        snapshot = self.snapshot()
++        snapshot['tasks'] += [task('alias', operation='operation:owner'),
++                              task('dependent', dependencies=['owner']),
++                              task('unauthorized', authorized=False)]
++        result = self.prepare(snapshot)
++        self.assertEqual(result['selected_task_ids'], ['independent'])
++        self.assertEqual(result['policy_holds'][0]['error'], self.event()['turn']['error'])
++        self.assertEqual(result['policy_holds'][0]['evidence_refs'], self.event()['evidence_refs'])
++        self.assertIn('policy_refusal_requires_review', decision(result, 'alias')['reasons'])
++        self.assertEqual(decision(result, 'dependent')['unaccepted_dependencies'], ['owner'])
++
++    def test_checkpoint_preserves_inputs_and_binds_exact_json(self):
++        snapshot, event = self.snapshot(), self.event()
++        originals = deepcopy((snapshot, event))
++        result = self.prepare(snapshot, event)
++        self.assertEqual((snapshot, event), originals)
++        checkpoint = result['observation_checkpoint']
++        self.assertEqual(checkpoint['event'], event)
++        for key, value in [('input_frontier_sha256', snapshot), ('event_sha256', event),
++                           ('next_frontier_sha256', result['next_frontier'])]:
++            self.assertEqual(checkpoint[key], hashlib.sha256(
++                supervisor_loop._handoff_reconciliation_bytes_v2(value)).hexdigest())
++
++    def test_duplicate_delivery_preserves_counters_holds_and_next_frontier(self):
++        first = self.prepare()
++        second = self.prepare(first['next_frontier'])
++        self.assertEqual(first['next_frontier'], second['next_frontier'])
++        self.assertEqual(len(second['policy_holds']), 1)
++        self.assertEqual(second['owner_reconciliation_requests'], [])
++        self.assertEqual(second['next_frontier']['tasks'][0]['attempts_used'], 1)
++
++    def test_digest_binds_consumed_snapshot_despite_later_caller_mutation(self):
++        snapshot = self.snapshot()
++        serializer = supervisor_loop._handoff_reconciliation_bytes_v2
++        original = serializer(snapshot)
++        def mutate_after_serialization(value):
++            raw = serializer(value)
++            if value is snapshot: snapshot['frontier_id'] = 'caller-mutated-after-read'
++            return raw
++        with patch.object(supervisor_loop, '_handoff_reconciliation_bytes_v2',
++                          side_effect=mutate_after_serialization):
++            result = self.prepare(snapshot)
++        self.assertEqual(result['observation_checkpoint']['input_frontier_sha256'],
++                         hashlib.sha256(original).hexdigest())
++        self.assertEqual(result['next_frontier']['frontier_id'], 'frontier:original')
++
++    def test_refusal_evidence_cannot_be_rewritten_into_unreplayable_checkpoint(self):
++        first = self.prepare(); event = self.event()
++        event['evidence_refs'] = [{'path': 'replacement.json', 'sha256': 'c' * 64}]
++        with self.assertRaisesRegex(ValueError, 'evidence cannot be rewritten'):
++            self.prepare(first['next_frontier'], event)
++
++    def test_wrong_task_thread_or_turn_refused(self):
++        for field in ('task_id', 'thread_id', 'turn'):
++            event = self.event()
++            if field == 'turn': event['turn']['id'] = 'replacement-turn'
++            else: event[field] = 'replacement-owner'
++            with self.subTest(field=field), self.assertRaises(ValueError):
++                self.prepare(event=event)
++
++    def test_missing_or_unavailable_provider_turn_refused(self):
++        for value in (None, {}, {'id': 'original-turn:owner',
++                                 'status': 'observation_unavailable', 'error': None}):
++            event = self.event(); event['turn'] = value
++            with self.subTest(value=value), self.assertRaises(ValueError):
++                self.prepare(event=event)
++
++    def test_existing_attempt_must_remain_charged(self):
++        snapshot = self.snapshot(); snapshot['tasks'][0]['attempts_used'] = 0
++        with self.assertRaisesRegex(ValueError, 'charged'):
++            self.prepare(snapshot)
++
++    def test_terminal_status_does_not_infer_cleanup(self):
++        snapshot = self.snapshot()
++        snapshot['tasks'].append(task('overlap', keys=['scope:owner']))
++        result = self.prepare(snapshot, self.event(cleanup=False))
++        self.assertEqual(result['cleanup_required'], ['owner'])
++        self.assertEqual(result['occupied_slots'], 1)
++        self.assertEqual(result['selected_task_ids'], ['independent'])
++        self.assertIn('exclusive_scope_held', decision(result, 'overlap')['reasons'])
++
++    def test_live_owner_keeps_original_poll_target(self):
++        event = self.event(cleanup=False)
++        event['turn'].update(status='inProgress', error=None)
++        result = self.prepare(event=event)
++        self.assertEqual(result['poll_targets'], [{
++            'task_id': 'owner', 'thread_id': event['thread_id'],
++            'turn_id': event['turn']['id'], 'status': 'inProgress'}])
++
++    def test_live_owner_cannot_claim_cleanup_or_acceptance(self):
++        for field in ('cleanup_confirmed', 'accepted'):
++            event = self.event(cleanup=False)
++            event['turn'].update(status='inProgress', error=None); event[field] = True
++            with self.subTest(field=field), self.assertRaises(ValueError):
++                self.prepare(event=event)
++
++    def test_refusal_cannot_be_accepted(self):
++        event = self.event(); event['accepted'] = True
++        with self.assertRaises(ValueError): self.prepare(event=event)
++
++    def test_terminal_error_or_status_cannot_be_rewritten(self):
++        first = self.prepare()
++        for change in ('error', 'status'):
++            event = self.event()
++            if change == 'error': event['turn']['error'] = None
++            else: event['turn']['status'] = 'completed'
++            with self.subTest(change=change), self.assertRaises(ValueError):
++                self.prepare(first['next_frontier'], event)
++
++    def test_later_cleanup_evidence_preserves_refusal_and_spent_attempt(self):
++        first = self.prepare(event=self.event(cleanup=False))
++        second = self.prepare(first['next_frontier'])
++        self.assertEqual(second['cleanup_required'], [])
++        self.assertEqual(second['policy_holds'], first['policy_holds'])
++        self.assertEqual(second['next_frontier']['tasks'][0]['attempts_used'], 1)
++
++    def test_explicit_pause_and_runwide_hold_block_independent_selection(self):
++        for mode in ('pause', 'hold'):
++            snapshot = self.snapshot()
++            if mode == 'pause': snapshot['goal_control']['intent']['state'] = 'paused'
++            else: snapshot['execution_hold'] = {
++                'kind': 'usage_limit', 'reason': 'original restriction', 'evidence_refs': []}
++            result = self.prepare(snapshot)
++            with self.subTest(mode=mode):
++                self.assertEqual(result['selected_task_ids'], [])
++                self.assertEqual(len(result['policy_holds']), 1)
++
++    def test_original_omitted_from_frontier_is_recovered_only_from_retained_history(self):
++        first = self.prepare()
++        snapshot = deepcopy(first['next_frontier'])
++        snapshot['tasks'] = [row for row in snapshot['tasks'] if row['task_id'] != 'owner']
++        snapshot['observations'] = []
++        snapshot['tasks'].append(task('renamed', operation='operation:owner'))
++        result = self.prepare(snapshot)
++        self.assertEqual(result['policy_holds'], first['policy_holds'])
++        self.assertIn('policy_refusal_requires_review', decision(result, 'renamed')['reasons'])
++
++    def test_completed_provider_turn_alone_is_not_task_acceptance(self):
++        event = self.event(); event['turn'].update(status='completed', error=None)
++        snapshot = self.snapshot(); snapshot['tasks'].append(task('dependent', dependencies=['owner']))
++        result = self.prepare(snapshot, event)
++        self.assertEqual(decision(result, 'dependent')['unaccepted_dependencies'], ['owner'])
++
++    def test_malformed_event_is_rejected(self):
++        for change in ('extra', 'schema', 'cleanup_confirmed', 'evidence_refs'):
++            event = self.event()
++            event[change] = {'extra': True} if change == 'extra' else 'invalid'
++            with self.subTest(change=change), self.assertRaises(ValueError):
++                self.prepare(event=event)
++
++    def test_observation_ingestion_is_metadata_only(self):
++        snapshot, event = self.snapshot(), self.event()
++        with ExitStack() as stack:
++            guards = [stack.enter_context(patch.object(Path, name,
++                      side_effect=AssertionError('filesystem access'))) for name in ('open', 'read_bytes')]
++            guards += [stack.enter_context(patch.object(subprocess, name,
++                       side_effect=AssertionError('process call'))) for name in ('Popen', 'run')]
++            guards.append(stack.enter_context(patch.object(socket, 'create_connection',
++                          side_effect=AssertionError('network call'))))
++            self.prepare(snapshot, event)
++            for guard in guards: guard.assert_not_called()
++
++
++class AgentTurnObservationCheckpointCliTests(unittest.TestCase):
++    @classmethod
++    def setUpClass(cls):
++        AgentTurnRecoveryCliTests.setUpClass()
++        cls.cli = AgentTurnRecoveryCliTests.cli
++
++    invoke = AgentTurnRecoveryCliTests.invoke
++
++    def inputs(self, root):
++        fixture = AgentTurnObservationCheckpointTests()
++        source, event = root/'frontier.json', root/'turn.json'
++        source.write_text(json.dumps(fixture.snapshot()))
++        event.write_text(json.dumps(fixture.event()))
++        return source, event, root/'checkpoint.json'
++
++    def argv(self, source, event, output):
++        return ['agent-turn-recovery', '--inputs', str(source), '--observation', str(event),
++                '--output', str(output)]
++
++    def test_cli_ingests_refusal_and_syncs_checkpoint_and_directory(self):
++        import os
++        with tempfile.TemporaryDirectory() as directory:
++            source, event, output = self.inputs(Path(directory))
++            original = (source.read_bytes(), event.read_bytes())
++            with patch.object(self.cli.os, 'fsync', wraps=os.fsync) as synced:
++                code, stdout, stderr = self.invoke(self.argv(source, event, output))
++            self.assertEqual((code, stdout, stderr), (0, '', ''))
++            self.assertEqual(synced.call_count, 2)
++            result = json.loads(output.read_bytes())
++            self.assertEqual(result['selected_task_ids'], ['independent'])
++            self.assertEqual(len(result['next_frontier']['policy_holds']), 1)
++            self.assertEqual((source.read_bytes(), event.read_bytes()), original)
++            self.assertEqual(output.stat().st_mode & 0o777, 0o600)
++
++    def test_observation_mode_requires_output_before_any_input_read(self):
++        with patch.object(self.cli, '_read_handoff_metadata_v2') as read:
++            with redirect_stderr(io.StringIO()), self.assertRaises(SystemExit) as stopped:
++                self.cli.main(['agent-turn-recovery', '--inputs', 'frontier.json',
++                               '--observation', 'turn.json'])
++        self.assertEqual(stopped.exception.code, 2); read.assert_not_called()
++
++    def test_existing_checkpoint_is_not_overwritten(self):
++        with tempfile.TemporaryDirectory() as directory:
++            source, event, output = self.inputs(Path(directory)); output.write_bytes(b'original evidence')
++            code, stdout, stderr = self.invoke(self.argv(source, event, output))
++            self.assertEqual((code, stdout), (2, ''))
++            self.assertEqual(output.read_bytes(), b'original evidence')
++            self.assertIs(json.loads(stderr)['workers_started'], False)
++
++    def test_output_cannot_alias_event_input(self):
++        with tempfile.TemporaryDirectory() as directory:
++            source, event, output = self.inputs(Path(directory)); original = event.read_bytes()
++            with redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
++                self.cli.main(self.argv(source, event, event))
++            self.assertEqual(event.read_bytes(), original)
++
++    def test_bad_owner_event_creates_no_checkpoint(self):
++        with tempfile.TemporaryDirectory() as directory:
++            source, event, output = self.inputs(Path(directory))
++            data = json.loads(event.read_bytes()); data['turn']['id'] = 'wrong-turn'
++            event.write_text(json.dumps(data))
++            code, stdout, stderr = self.invoke(self.argv(source, event, output))
++            self.assertEqual((code, stdout), (2, '')); self.assertFalse(output.exists())
++
++    def test_file_or_directory_sync_failure_preserves_partial_and_refuses_success(self):
++        for failure in (1, 2):
++            with self.subTest(failure=failure), tempfile.TemporaryDirectory() as directory:
++                source, event, output = self.inputs(Path(directory))
++                calls = 0
++                def fail_at(fd):
++                    nonlocal calls
++                    calls += 1
++                    if calls == failure: raise OSError('injected checkpoint sync failure')
++                with patch.object(self.cli.os, 'fsync', side_effect=fail_at):
++                    code, stdout, stderr = self.invoke(self.argv(source, event, output))
++                self.assertEqual((code, stdout), (2, '')); self.assertTrue(output.exists())
++                self.assertIn('injected checkpoint sync failure', json.loads(stderr)['error'])
++                self.assertEqual(len(json.loads(output.read_bytes())['policy_holds']), 1)
++
++    def test_symlink_observation_is_rejected(self):
++        with tempfile.TemporaryDirectory() as directory:
++            source, event, output = self.inputs(Path(directory)); link = event.with_name('turn-link.json')
++            link.symlink_to(event)
++            code, stdout, stderr = self.invoke(self.argv(source, link, output))
++            self.assertEqual((code, stdout), (2, '')); self.assertFalse(output.exists())
++
++    def test_symlink_output_directory_is_rejected(self):
++        with tempfile.TemporaryDirectory() as directory:
++            root = Path(directory); source, event, output = self.inputs(root)
++            target = root/'real'; target.mkdir(); link = root/'link'; link.symlink_to(target, target_is_directory=True)
++            code, stdout, stderr = self.invoke(self.argv(source, event, link/'checkpoint.json'))
++            self.assertEqual((code, stdout), (2, '')); self.assertEqual(list(target.iterdir()), [])
++
++    def test_replacement_during_directory_sync_cannot_acknowledge_checkpoint(self):
++        import os
++        for replace_parent in (False, True):
++            with self.subTest(replace_parent=replace_parent), tempfile.TemporaryDirectory() as directory:
++                root = Path(directory); parent = root/'output'; parent.mkdir()
++                source, event, unused = self.inputs(root); output = parent/'checkpoint.json'
++                original_sync = os.fsync; calls = 0
++                def replace_at_sync(fd):
++                    nonlocal calls
++                    calls += 1
++                    original_sync(fd)
++                    if calls == 2:
++                        if replace_parent:
++                            parent.rename(root/'retained-output'); parent.mkdir()
++                        else:
++                            output.rename(parent/'retained-checkpoint.json')
++                        output.write_bytes(b'replacement must not be acknowledged')
++                with patch.object(self.cli.os, 'fsync', side_effect=replace_at_sync):
++                    code, stdout, stderr = self.invoke(self.argv(source, event, output))
++                self.assertEqual((code, stdout), (2, ''))
++                self.assertIn('changed during directory sync', json.loads(stderr)['error'])

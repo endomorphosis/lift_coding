@@ -1,0 +1,5 @@
+
+
+## Evidence583 — Validate proof-cache record filenames on reload
+
+Reload checks that each validated proof record uses its content-addressed filename before it publishes the rebuilt indexes. It rejects renamed records with or without a persisted index and preserves the previously verified indexes on failure. A canonical record still reloads without a persisted index. The guarded ordinary run passed all 13 cases across eight functions, with ten retained cases and three new cases. Collection, execution and JUnit order matched. Source, resources and the parent process closed. The evidence covers software qualification for reload. [Ordinary qualification](/tmp/Root-P1-cache-reload-owned-existing-route-wK9s5mUF/ordinary13-first/actual-ordinary13-qualified.json) · [Exact qualified code freeze](/tmp/Root-P1-cache-reload-owned-existing-route-wK9s5mUF/source2-freeze.json)

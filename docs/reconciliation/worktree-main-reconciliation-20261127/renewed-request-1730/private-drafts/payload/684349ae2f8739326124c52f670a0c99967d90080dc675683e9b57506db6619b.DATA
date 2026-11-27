@@ -1,0 +1,269 @@
+"""Bind the existing four-guide Source42 apply-and-freeze sequence to Guide583."""
+from contextlib import ExitStack, contextmanager
+import hashlib
+import json
+import os
+from pathlib import Path
+import stat
+import subprocess
+import sys
+import time
+
+HERE=Path(__file__).resolve().parent
+D=Path('/tmp/Root-P1-cache-reload-owned-existing-route-wK9s5mUF/datasets')
+A=Path('/tmp/Root-result-cache-owned-existing-route-L4Wyme59/accelerate')
+ROOTS={'datasets':D,'accelerate':A}
+PREFIX='ipfs_datasets_py/logic/autoformal/docs/'
+ROLES={PREFIX+n for n in ('BACKLOG.json','work_catalog.json','HANDOFF.md','TRAINING_HISTORY.md')}
+LOADER={'path':'/tmp/Reader-Source42-owned-module-loader-fix-private-v01/owned-source42-module-loader.py.DATA',
+        'bytes':1104,'sha256':'e4dc161c1553b21ee1dd69521f4f49ad0878122fae2b0d66041c22030a4053c7'}
+OWNER={'path':'/tmp/Reader-P1-current-published-Source-and-assets-read-preparation-private-v01/actual-Source42-doc-owner-current-control-binding-v01.json',
+       'bytes':2297,'sha256':'43c18000562ed03baf5df2d0cea8260682063078822ed7ff23208ba47c4ea674'}
+FIELDS=('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
+ENV=os.environ | {'GIT_OPTIONAL_LOCKS':'0','GIT_NO_LAZY_FETCH':'1','GIT_TERMINAL_PROMPT':'0'}
+for key in ('GIT_DIR','GIT_WORK_TREE','GIT_INDEX_FILE','GIT_ALTERNATE_OBJECT_DIRECTORIES','GIT_COMMON_DIR'):
+    ENV.pop(key,None)
+GIT_FLAGS=['-c','index.threads=1','-c','core.preloadIndex=false','-c','core.fsmonitor=false',
+           '-c','core.packedGitLimit=16m','-c','core.packedGitWindowSize=1m']
+SPENT={'bytes':0,'captures':0}
+FUND=None
+CLOCK=None
+
+def digest(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+def blob(raw):
+    return hashlib.sha1(f'blob {len(raw)}\0'.encode()+raw).hexdigest()
+
+def f9(info):
+    return {key:str(getattr(info,key)) for key in FIELDS}
+
+def admit(size):
+    if FUND is not None:
+        assert SPENT['bytes']+size<=FUND['added_Source_only_envelope']
+        assert FUND['selected']['used']+SPENT['bytes']+size<=FUND['selected']['global_cap']
+        assert FUND['selected']['internal_used']+SPENT['bytes']+size<=FUND['selected']['internal_cap']
+
+def capture(path):
+    path=Path(path)
+    first=path.lstat()
+    assert stat.S_ISREG(first.st_mode) and first.st_nlink==1 and first.st_uid==os.getuid()
+    admit(first.st_size+1)
+    fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW)
+    with os.fdopen(fd,'rb') as stream:
+        assert f9(os.fstat(fd))==f9(first)
+        raw=stream.read(first.st_size+1)
+        assert f9(os.fstat(fd))==f9(first)==f9(path.lstat())
+    assert len(raw)==first.st_size
+    SPENT['bytes']+=len(raw); SPENT['captures']+=1
+    return {'path':str(path),'bytes':len(raw),'sha256':digest(raw),'full9':f9(first)},raw
+
+def small(row):
+    return {key:row[key] for key in ('path','bytes','sha256')}
+
+def load(pin):
+    row,raw=capture(pin['path'])
+    assert small(row)==small(pin)
+    return raw
+
+def data(pin):
+    return json.loads(load(pin))
+
+def git(root,*args):
+    admit(262144)
+    output=subprocess.run(['git',*GIT_FLAGS,'-C',str(root),*args],env=ENV,check=True,capture_output=True,timeout=40).stdout
+    assert len(output)<=262144
+    SPENT['bytes']+=len(output); SPENT['captures']+=1
+    return output
+
+def rev(root,expr):
+    return git(root,'rev-parse',expr).decode().strip()
+
+def clean(root):
+    assert not git(root,'status','--porcelain=v1','-z','-uall')
+
+def write(name,row):
+    path=HERE/name
+    with os.fdopen(os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400),'wb') as stream:
+        stream.write((json.dumps(row,indent=2,sort_keys=True)+'\n').encode())
+        stream.flush()
+        os.fsync(stream.fileno())
+    return small(capture(path)[0])
+
+def clock():
+    assert CLOCK['launch_not_before_utc_ns']<=time.time_ns()<CLOCK['launch_deadline_utc_ns']
+
+def no_resources_added(prior,current):
+    return all(current[key]==prior[key] for key in ('captures','capturesComplete','used','internal_used'))
+
+def validate_charge(binding,evidence):
+    selected=binding['full_charge']
+    fund=data(selected)
+    assert fund['ordinary13']==evidence['actual_ordinary13']
+    assert fund['all_prior_costs_retained'] and fund['resource_policy_capacity_unchanged']
+    original=data(fund['prior_cap'])
+    retained_once=original.get('after_full_retained_precharge') or original['after_full_precharge']
+    prior,current,after=(fund[k] for k in ('prior','selected','after_full_retained_precharge'))
+    for key,value in retained_once.items():
+        if key=='captures':
+            assert prior[key]>=value
+        else:
+            assert prior[key]==value
+    assert no_resources_added(prior,current)
+    extra=fund['added_Source_only_envelope']
+    assert extra==144*1024**2
+    assert current['global_cap']-prior['global_cap']==current['internal_cap']-prior['internal_cap'] in (0,extra)
+    assert all(after[key]==current[key]+extra for key in ('used','internal_used'))
+    assert after['captures']==current['captures']+1
+    assert after['global_cap']==current['global_cap'] and after['internal_cap']==current['internal_cap']
+    assert after['used']<=current['global_cap'] and after['internal_used']<=current['internal_cap']
+    assert digest(load(fund['exact_human_affirmation']))=='8fdf2d6c57542b3ce8e8a06773645487c39a3cb2a8a9929426cc785d3fc78dda'
+    return fund
+
+def preflight(ready,freeze):
+    assert ready['evidence_ordinal']==583 and ready['schema']=='one-existing-guide583-four-private-posts/v1'
+    assert ready['exact_all4_inverse_removal_complete'] and ready['all_previous_guide_data_preserved']
+    assert (rev(D,'HEAD'),rev(D,'HEAD^{tree}'))==(ready['expected_current_D_HEAD'],ready['expected_current_D_tree'])
+    assert rev(A,'HEAD')==ready['expected_current_A_HEAD']
+    assert (rev(D,'HEAD^'),rev(D,'HEAD'))==('937ad474d2d8650e3ccee16c10319a9c72d4429a',freeze['frozen']['HEAD'])
+    clean(D); clean(A)
+    assert capture(D/'.git/index')[0]==freeze['frozen']['stage0_index']
+    files={row['relative_path']:row for row in ready['files']}
+    assert len(files)==len(ready['files'])==4 and set(files)==ROLES
+    joint=data(ready['joint_facts'])
+    states={}
+    for rel,row in files.items():
+        se,before=capture(D/rel)
+        after=load(row['post_private'])
+        assert before==load(row['before_private']) and se['full9']==row['before_full9']
+        assert blob(before)==row['before_Git_blob_oid']==rev(D,'HEAD:'+rel)
+        insert=row['surgical_insertion']
+        off,length=insert['offset'],insert['inserted_bytes']
+        assert digest(after[off:off+length])==insert['inserted_sha256'] and after[:off]+after[off+length:]==before
+        if rel.endswith('.md'):
+            assert after.startswith(before) and b'## Evidence583' in after[len(before):]
+        else:
+            old,new=json.loads(before),json.loads(after)
+            if rel.endswith('BACKLOG.json'):
+                assert len(old['tasks'])==24 and len(old['migration'])==95
+                assert new['migration'].pop(joint['migration_key'])==joint['backlog_record']
+            else:
+                assert len(old['components'])==126 and len(old['selected_evidence'])==582
+                assert new['selected_evidence'].pop()==joint['catalog_record']
+            assert old==new
+        states[rel]=se
+    load(ready['forward_patch']); load(ready['inverse_patch'])
+    git(D,'apply','--check',ready['forward_patch']['path'])
+    return files,states
+
+@contextmanager
+def observed_lease(source,root,mode,rows):
+    context=source.source_lease(root,mode=mode,timeout_seconds=30)
+    lease=context.__enter__()
+    row={'repo':str(root),'mode':mode,'entered':True,'exit_returned':False,'lease':lease.to_dict()}
+    rows.append(row)
+    try:
+        yield
+    finally:
+        context.__exit__(*sys.exc_info())
+        row['exit_returned']=True
+
+def install(selection,ready,freeze,evidence,files,states):
+    report=dict(schema='actual-guide583-exact-four-isolated-Source-freeze/v1',evidence_ordinal=583,
+        terminal_returncode=None,Source_closed=False,module_closed=False,pushed=False,
+        composer_READY=selection['composer_READY'],qualified_code_before_docs=ready['qualified_code_before_docs'],
+        ordinary_qualification=ready['actual_ordinary_qualification'],full_charge=selection['full_charge'],
+        prior_D=freeze['frozen']['HEAD'],prior_public_D='937ad474d2d8650e3ccee16c10319a9c72d4429a',
+        A=ready['expected_current_A_HEAD'],committed_docs={},actual_Source_leases=[],write_complete=False)
+    owner=data(OWNER)
+    source_info,before_raw=capture(owner['code_reference']['path'])
+    assert source_info==owner['code_reference']
+    namespace={}
+    exec(compile(load(LOADER),LOADER['path'],'exec'),namespace)
+    source=namespace['load_owned_source42_module'](before_raw,owner['original_module_path'])
+    error=None
+    try:
+        for root in (D,A):
+            assert str(source.canonical_source_root(root))==str(root)
+        read4=data(evidence['closed_READ4'])
+        assert read4['Source_closed'] and read4['owned_module_closed']
+        pinned_A,=(row for row in read4['captures'] if row['path']==str(A/'.git/index'))
+        initial_A=capture(A/'.git/index')[0]
+        assert all(initial_A[k]==pinned_A[k] for k in ('path','bytes','sha256','full9'))
+        with ExitStack() as stack:
+            for root,mode in sorted(((D,'write'),(A,'read'))):
+                stack.enter_context(observed_lease(source,root,mode,report['actual_Source_leases']))
+            clock()
+            clean(D); clean(A)
+            assert rev(D,'HEAD')==freeze['frozen']['HEAD'] and rev(A,'HEAD')==report['A']
+            assert capture(D/'.git/index')[0]==freeze['frozen']['stage0_index']
+            assert capture(A/'.git/index')[0]==initial_A
+            assert all(capture(D/rel)[0]==row for rel,row in states.items())
+            clock()
+            git(D,'apply',ready['forward_patch']['path'])
+            git(D,'apply','--check',ready['inverse_patch']['path'])
+            names=lambda raw:{part.decode() for part in raw.split(b'\0') if part}
+            assert names(git(D,'diff','--name-only','-z'))==ROLES
+            for rel,row in files.items():
+                actual,raw=capture(D/rel)
+                assert raw==load(row['post_private'])
+                report['committed_docs'][rel]=actual|{'committed_blob':blob(raw)}
+            git(D,'add','--',*sorted(ROLES))
+            assert names(git(D,'diff','--cached','--name-only','-z'))==ROLES
+            git(D,'-c','core.whitespace=-blank-at-eof','diff','--cached','--check','--',*sorted(ROLES))
+            clock()
+            git(D,'-c','commit.gpgSign=false','-c','core.hooksPath=/dev/null','commit','-m','Record legal autoformalization evidence 583')
+            head=rev(D,'HEAD')
+            assert rev(D,'HEAD^')==freeze['frozen']['HEAD']
+            assert names(git(D,'diff-tree','--no-commit-id','-r','--no-renames','--name-only','-z','HEAD^',head))==ROLES
+            for rel,row in report['committed_docs'].items():
+                oid=row['committed_blob']
+                assert rev(D,'HEAD:'+rel)==oid
+                assert git(D,'ls-files','--stage','-z','--',rel)==f'100644 {oid} 0\t{rel}\0'.encode()
+            assert all(rev(D,'HEAD:'+path)==row['committed_blob'] for path,row in freeze['committed'].items())
+            clean(D); clean(A)
+            assert capture(A/'.git/index')[0]==initial_A
+            report.update(HEAD=head,tree=rev(D,'HEAD^{tree}'),index=capture(D/'.git/index')[0],A_index=initial_A,
+                exact_forward_and_inverse_verified=True,only_four_Git_changes=True,write_complete=True,
+                prior_values_preserved=dict(tasks=24,components=126,evidence_records=582,Markdown_prefixes_exact=True))
+    except Exception as exc:
+        error=exc
+    finally:
+        report['Source_closed']=len(report['actual_Source_leases'])==2 and all(row['exit_returned'] for row in report['actual_Source_leases'])
+        report['module_closed']=namespace['cleanup_owned_source42_module'](source)
+        report['actual_IO_wrapper_coverage']=dict(SPENT)
+        report['physical_IO_accounting_complete']=False
+        report['terminal_returncode']=0 if error is None and report['Source_closed'] and report['module_closed'] and report['write_complete'] else 1
+        report['error']=repr(error) if error else None
+        print(json.dumps(write('actual-Guide583-four-docs-Source-closed-and-frozen.json',report),sort_keys=True))
+    if error is not None:
+        raise error
+    assert report['terminal_returncode']==0
+
+def main():
+    global FUND,CLOCK
+    assert __debug__ and len(sys.argv) in (4,8) and (len(sys.argv)==4 or sys.argv[7]=='--install-and-freeze')
+    ready_ref=dict(path=sys.argv[1],bytes=int(sys.argv[2]),sha256=sys.argv[3])
+    ready=data(ready_ref)
+    evidence=data(ready['ordinary_evidence_bundle'])
+    freeze=data(ready['qualified_code_before_docs'])
+    assert evidence['exact_local_freeze']==ready['qualified_code_before_docs']
+    if len(sys.argv)==8:
+        selected=dict(path=sys.argv[4],bytes=int(sys.argv[5]),sha256=sys.argv[6])
+        binding=data(selected)
+        assert binding['Root_selected'] and binding['phase']=='existing_four_document_Source42_apply_and_freeze'
+        assert binding['composer_READY']==ready_ref and binding['qualified_code_before_docs']==evidence['exact_local_freeze']
+        assert binding['actual_ordinary13']==evidence['actual_ordinary13']
+        CLOCK=binding
+        assert 0<CLOCK['launch_deadline_utc_ns']-CLOCK['launch_not_before_utc_ns']<=120_000_000_000
+        clock()
+        FUND=validate_charge(binding,evidence)
+        admit(0)
+    files,states=preflight(ready,freeze)
+    if len(sys.argv)==4:
+        print(json.dumps(dict(preflight=True,docs=sorted(files),new_evidence=583,selected=False)))
+    else:
+        install(binding,ready,freeze,evidence,files,states)
+
+if __name__=='__main__':
+    main()

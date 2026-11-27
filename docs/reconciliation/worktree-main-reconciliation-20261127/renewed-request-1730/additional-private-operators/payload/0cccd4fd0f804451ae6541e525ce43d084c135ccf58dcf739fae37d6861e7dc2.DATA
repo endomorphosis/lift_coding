@@ -1,0 +1,143 @@
+"""Bind the maintained paired Source42 READ3 control to the frozen P2 candidate."""
+import ast,hashlib,json,os,runpy,stat,subprocess,sys,time
+from pathlib import Path
+base=Path(__file__).resolve().parent
+prior=Path('/tmp/Root-P2-whole-component-managed-R5-n8Fkdm2q')
+helper=prior/'run-read3.py'
+tree=ast.parse(helper.read_bytes())
+names={'full9','read','val','keep'}
+exec(compile(ast.Module([n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in names or isinstance(n,ast.Assign) and getattr(n.targets[0],'id',None)=='policy'],[]),str(helper),'exec'))
+env=os.environ|{'GIT_OPTIONAL_LOCKS':'0','GIT_NO_LAZY_FETCH':'1','GIT_TERMINAL_PROMPT':'0'}
+for key in ('GIT_DIR','GIT_WORK_TREE','GIT_INDEX_FILE','GIT_COMMON_DIR','GIT_ALTERNATE_OBJECT_DIRECTORIES'):
+    env.pop(key,None)
+cfg={'core.preloadIndex':'false','index.threads':'1','core.fsmonitor':'false','core.packedGitWindowSize':'1m','core.packedGitLimit':'16m'}
+env['GIT_CONFIG_COUNT']=str(len(cfg))
+for i,(key,value) in enumerate(cfg.items()):
+    env.update({f'GIT_CONFIG_KEY_{i}':key,f'GIT_CONFIG_VALUE_{i}':value})
+def git(root,*args):
+    return subprocess.check_output(['/usr/bin/git','-C',str(root),*args],env=env,timeout=35)
+assert __debug__ and len(sys.argv)==5 and sys.argv[4]=='--run-existing-READ3'
+projection=read(sys.argv[1],int(sys.argv[2]),sys.argv[3])[0]
+p=val(projection)
+fr_ref=p['local_freeze']
+freeze=val(fr_ref)
+roots=p['roots']
+D,A=(Path(row['root']) for row in roots)
+guide_ref=read('/tmp/P1-Guide584-doc-parent-pins-INERT-gEfofBbw/isolated/actual-Guide584-docs-normal-FF-publication.json',9671,
+               '37694f771f10a8bf671df43b008f802cc8b243114d079430936d9d9a07d2ab6e')[0]
+guide=val(guide_ref)
+base_head=guide['fresh_origin_main']['datasets']
+assert roots[1]['Git_HEAD']==guide['fresh_origin_main']['accelerate']
+assert base_head in git(D,'rev-parse','HEAD^@').decode().splitlines()
+for root in roots:
+    where=root['root']
+    assert git(where,'rev-parse','HEAD','HEAD^{tree}').decode().splitlines()==[root['Git_HEAD'],root['Git_tree']]
+    assert not git(where,'status','--porcelain=v1','-z','-uall')
+slots={'.git/index','ipfs_datasets_py/logic/autoformal/legal_release_coordinator_v1.py',
+       'tests/unit/logic/autoformal/test_legal_corpus_definition_use_native_v2.py'}
+assert set(git(D,'diff','--no-renames','--name-only','-z',base_head,'HEAD').decode().split('\0'))-{''}==slots-{'.git/index'}
+named,outer,python=(p[k] for k in ('named_epoch','outer_epoch','python_epoch'))
+rows=val(named)['rows']
+by={row['path']:row for row in rows}
+assert len(by)==len(rows) and all(by[r['path']]==r for e in (outer,python) for r in val(e))
+for path,row in by.items():
+    assert full9(Path(path).lstat())==row['full9'],path
+fences=val(p['AGENTS_and_namespaces'])
+agents=fences['AGENTS_chain_metadata']
+namespace=fences['namespace_metadata']
+targets=p['exact_new_body_targets']
+assert len(targets)==3 and {r['relative_path'] for r in targets}==slots
+for r in targets:
+    same=by[r['path']]
+    assert r['path']==str(D/r['relative_path']) and r['root']==str(D)
+    assert same['sha256']==r['expected_sha256'] and same['full9']==r['full9']
+    assert same['bytes']==r['bytes']==r['expected_bytes']
+    if r['relative_path']!='.git/index':
+        assert git(D,'rev-parse','HEAD:'+r['relative_path']).decode().strip()==r['expected_git_blob_oid']
+aidx=p['protected_A_index']
+assert aidx==by[str(A/'.git/index')]
+native=read('/tmp/Root-P1-Guide584-generic-Native3-N3iAXWzm/actual-current-Guide584-generic-Native3-expected-policy-qualification-closed.json',24131,
+            'e68520d6b4688e1e480301bc4b1d0e1118ab99dcf3814f6b38ddb86585b15766')[0]
+before=val(native)['fully_retained_ledger']
+authority=read('/tmp/Root-authorized-Source-review-plus64MiB-for-normal51-v01.json',2377,
+               '2e26fec63362aa01e0e1d475398261a13211016446ea1557a207f4a3956d55ea')[0]
+human=val(authority)['human_authorization']
+assert human['role']=='user'
+read(human['path'],human['bytes'],human['sha256'])
+envelope=64*1024**2
+assert 2*sum(t['bytes'] for t in targets)+2*aidx['bytes']+28*1024**2<envelope
+observed=p['observed_projection_input_bytes']
+assert all(type(observed[k]) is int and observed[k]>=0 for k in ('private_direct_bytes_read','git_stdout_bytes'))
+prep=observed['private_direct_bytes_read']+observed['git_stdout_bytes']
+funded={**before,'global_cap':before['global_cap']+envelope+prep,
+        'internal_cap':before['internal_cap']+envelope+prep,'used':before['used']+prep,'internal_used':before['internal_used']+prep}
+paid={**funded,'used':funded['used']+envelope,'internal_used':funded['internal_used']+envelope,'captures':funded['captures']+1}
+assert paid['global_cap']-paid['used']==paid['internal_cap']-paid['internal_used']==6356992
+assert funded['global_cap']-funded['internal_cap']==190591874
+cap=keep('P2-current-composed234-READ3-Source-only-full-precharge.json',dict(
+    prior=before,selected=funded,after_full_precharge=paid,added_Source_envelope=envelope,
+    observed_projection_input_bytes=prep,projection=projection,standing_authority=authority,prior_closeout=native,
+    all_prior_costs_retained=True,resource_policy_capacity_unchanged=True,physical_IO_accounting_complete=False))
+older=val(read(prior/'P2-READ3-existing-Source-terminal.json',3142,'0474185aa79ed412c809f50afeb3badde97e89d39df6aef1390f5c6d937dcd76')[0])
+assert older['returncode']==0 and older['Source_closed'] and older['owned_module_closed']
+owner=val(older['operator_controls']['request'])['approved_current_Source42_owner_binding']
+val(owner)
+out=base/'actual-p2-composed234-source3-output'
+request=keep('P2-current-composed234-READ3-existing-request.json',dict(
+    schema='P2-current-Guide584-composed234-READ3-existing-Source42/v1',Source_READ_selected=True,
+    ledger_before=funded,exact_new_body_targets=targets,all_candidate_metadata=targets,literal_metadata_candidate_count=3,target_count=3,
+    frozen_roots=roots,approved_current_Source42_owner_binding=owner,
+    AGENTS_chain_metadata=agents,named_metadata_recheck_reference=named,named_metadata_count=len(rows),namespace_metadata=namespace,
+    A_index_shared_guard_guide582={**aidx,'root':str(A)},previous_D_cooperative_freeze=fr_ref,
+    execution_freeze=fr_ref,published_current_guide=guide_ref))
+now=time.time_ns()
+selection=keep('Root-selected-current-P2-composed234-READ3.json',dict(
+    Root_selected=True,Source_operation_max_bytes=envelope,ledger_before=funded,request=request,cap=cap,
+    fresh_output_namespace=str(out),launch_not_before_utc_ns=now,launch_deadline_utc_ns=now+60*10**9))
+original,raw=read('/tmp/Root-result-cache-owned-existing-route-L4Wyme59/read4-controls/Root-selected-existing-result-cache-READ4-entry.py',
+    23776,'7ff056f593c20c3fa016d692cf3153bfa78bbc4d106fe6899693eb0c39985af7')
+adapter=Path('/tmp/Root-P2-V4-current-cooperative-freeze-READ3-INERT-QfDTlRCC/bind-existing-P2-V4-current-READ3.py.DATA')
+read(adapter,14094,'cc72e03ddac4d857b5cdbca4ec35bb9d5307b390270c9229400a918c48b08175')
+op=runpy.run_path(str(adapter))['adapt_entry'](raw.decode(),selection,request,out,funded)
+assert op.count('P2_V4_CURRENT_D_FROZEN_READ3')==4
+op=op.replace('P2_V4_CURRENT_D_FROZEN_READ3','P2_COMPOSED234_CURRENT_D_FROZEN_READ3')
+compile(op,'existing paired Source42 READ3 current P2 integration', 'exec')
+control=base/'Root-selected-existing-P2-composed234-READ3.py'
+with os.fdopen(os.open(control,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400),'wb') as stream:
+    stream.write(op.encode());stream.flush();os.fsync(stream.fileno())
+operator=read(control)[0]
+cmd=['/usr/bin/timeout','--signal=TERM','--kill-after=5s','65s','/usr/bin/taskset','-c',str(min(os.sched_getaffinity(0))),
+     '/usr/bin/prlimit','--as=536870912','--cpu=60','--','/usr/bin/python3','-I','-B',str(control)]
+with (base/'source3.stdout').open('xb') as so,(base/'source3.stderr').open('xb') as se:
+    child=subprocess.Popen(cmd,stdout=so,stderr=se,env=env)
+    live=keep('P2-composed234-READ3-owner-live.json',dict(owner='Root',pid=child.pid,operator=operator,selection=selection,cap=cap))
+    print(json.dumps(live),flush=True)
+    rc=child.wait()
+term=dict(owner='Root',returncode=rc,reaped=True,actual_handle=None,closed_process_pid=child.pid,phase='current merged P2 Source42 READ3',
+    operator_controls=dict(operator=operator,request=request,selection=selection,targets=3),
+    execution_freeze=fr_ref,projection=projection,publication=guide_ref,frozen_roots=roots,cap=cap,fully_retained_ledger=paid,
+    stdout=read(base/'source3.stdout')[0],stderr=read(base/'source3.stderr')[0],Source_closed=False,owned_module_closed=False)
+compact=out/'actual-D27-observed-D-root-initializer-Source-READ-v01-small-closeout.json'
+if compact.is_file():
+    compact_ref,d=read(compact);d=json.loads(d)
+    term.update(actual_compact=compact_ref,**{k:d[k] for k in ('status','Source_closed','owned_module_closed','actual_IO','ledger_after','full_report_reference')})
+    assert d['ledger_after']['used']<=paid['used'] and d['ledger_after']['internal_used']<=paid['internal_used']
+    term['fully_retained_ledger']={**paid,'captures':max(paid['captures'],d['ledger_after']['captures'])}
+if rc==0:
+    assert d['status']=='PASS' and not d['errors'] and d['Source_closed'] and d['owned_module_closed']
+    assert d['roots_before']==d['roots_after'] and d['A_index_shared_guard_before']==d['A_index_shared_guard_after']
+    wanted={r['path']:r for r in targets}
+    captures={}
+    for row in d['captures']:
+        target=wanted.pop(row['path'])
+        role=target['relative_path']
+        assert all(row[k]==by[row['path']][k] for k in ('path','bytes','sha256','full9'))
+        rawref,body=read(row['raw_reference']['path'],row['raw_reference']['bytes'],row['raw_reference']['sha256'])
+        if role!='.git/index':
+            assert hashlib.sha1(f'blob {len(body)}\0'.encode()+body).hexdigest()==target['expected_git_blob_oid']
+        captures[role]=rawref
+    assert not wanted and d['previous_D_Source42_WRITE_claimed'] is False
+    term.update(raw_captures=captures,exact_3_snapshot_and_Git_joins_verified=True,A_index_SHA_and_full9_preserved=True)
+terminal=keep('P2-current-composed234-READ3-terminal.json',term)
+print(json.dumps(terminal),flush=True)
+raise SystemExit(rc)

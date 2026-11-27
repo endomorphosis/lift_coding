@@ -1,0 +1,261 @@
+"""Bind a verified proof-cache reload qualification to one additive four-guide update."""
+import hashlib
+import json
+from pathlib import Path
+from runpy import run_path
+import sys
+from xml.etree import ElementTree as ET
+
+HERE = Path(__file__).resolve().parent
+D = Path('/tmp/Root-P1-cache-reload-owned-existing-route-wK9s5mUF/datasets')
+A = Path('/tmp/Root-result-cache-owned-existing-route-L4Wyme59/accelerate')
+BASE_D = '937ad474d2d8650e3ccee16c10319a9c72d4429a'
+HEAD_A = 'fae7981fa576817536a3c7aa62c5d28dc417f214'
+OWNER = 'ipfs_datasets_py/logic/legal_ir/proof_cache.py'
+TEST = 'tests/unit/logic/legal_ir/test_proof_cache.py'
+EXPECTED = {
+    OWNER: ('a171ee9794439540c924a2288e4ebb9262a2c859', 62998,
+            '744148b296cfc60656a199847fa1136dc72e28e7b79e0415fd1a069f09605c97'),
+    TEST: ('91abcac246b2f30d9554d88d74ded0b54b1f34ed', 108929,
+           '5dd25588275d79434a28780370a65fb32a1d93dd9d01656f8a78d00328be769b'),
+}
+NAMES = ('BACKLOG.json','work_catalog.json','HANDOFF.md','TRAINING_HISTORY.md')
+PREIMAGE = dict(zip(NAMES, (
+    '39d221f62c98f02df4cc754784d1e81be66f7a92', '341f58eeffd1c06058179e6bde11ea663f636936',
+    '2626743b96cd1a303f617d6d55c4dac076e64ea3', 'c5f7c2afacf1be8ddd60cb96361be6a287cf1ed4',
+)))
+ANCESTOR = Path('/tmp/P2-live-V4-CLI-evidence-composer-INERT-aMJ0GRii/compose-live-v4-cli-evidence.v02.py.DATA')
+assert __debug__ and hashlib.sha256(ANCESTOR.read_bytes()).hexdigest()=='a41cc18ff1e4f4c14eb0848eeba83641aa94e1a7b941bfd4bcb5b33729d32a4b'
+previous = run_path(str(ANCESTOR))
+put, load, read, ref, digest, blob, link, git, observed_file, insertion_for, offset_for = (
+    previous[key] for key in ('put','load','read','ref','digest','blob','link','git','observed_file','insertion_for','collection_insertion_offset'))
+put.__globals__['HERE'] = HERE
+DOCS=previous['DOC_DIRECTORY']
+PRIOR_PUBLICATION = ref(Path(
+    '/tmp/Root-result-cache-owned-existing-route-L4Wyme59/actual-Phase8-result-cache-Source2-READ4-ordinary11-Guide582-publication.json'),
+    5773, 'a1283734a9520e9e32a5f8ec4d8bf2b766586e162e81621de91a37caeeb83a62')
+PREVIOUS_DOCUMENTS = ref(Path(
+    '/tmp/result-cache-existing-guide582-compose-QvKKkYWq/actual-Guide582-four-docs-Source-closed-and-frozen.json'),
+    6766, 'b71ff867f370f90b9a327186e76c0f503f429706eab3ecfb3ff8c0b4889465a4')
+STATIC_ROSTER = ref(Path(
+    '/tmp/Root-proof-cache-reload-ordinary13-INERT-RYtARgph/exact-8-function-13-case-roster-INERT.json'),
+    6587, '9aabb24917f9dbb0661dc548c41a1d4b38ccfbcee2fabb9e1ee9cbe6f52988a8')
+TASK = 'LIR-14'
+COMPONENT = 'kernel-proof-evidence-integrity'
+
+def minimal_ref(row):
+    return {key: row[key] for key in ('path', 'bytes', 'sha256')}
+
+def clean(repo):
+    return git(repo,'status','--porcelain=v1','-z','-uall')==b''
+
+def revision(root,expr):
+    return git(root,'rev-parse',expr).decode().strip()
+
+def bind(bundle):
+    env = load(bundle, 'guide583_authenticated_closed_evidence_inputs')
+    assert set(env) == {'exact_local_freeze', 'actual_ordinary13', 'closed_READ4'}
+    freeze_ref, qual_ref, read_ref = (env[k] for k in ('exact_local_freeze', 'actual_ordinary13', 'closed_READ4'))
+    freeze = load(freeze_ref, 'guide583_exact2_frozen_candidate')
+    qual = load(qual_ref, 'guide583_ordinary13_exact_terminal_receipt')
+    src = load(read_ref, 'guide583_exact_READ4')
+    write_ref = freeze['source_closed']
+    write = load(write_ref, 'guide583_exact2_closed_Source2')
+    write_terminal = load(freeze['source2_terminal'], 'guide583_exact2_Source2_terminal')
+    report_ref, raw_ref = qual['actual_report'], qual['ordinary_raw_JUnit']
+    run = load(report_ref, 'guide583_ordinary13_full_report')
+    roster = load(STATIC_ROSTER, 'guide583_independently_pinned_ordinary13_roster')
+
+    assert qual['terminal_returncode'] == 0
+    assert all(write[k] is True for k in ('Source_closed', 'module_closed', 'write_complete', 'qualification_complete'))
+    assert not write['errors']
+    assert write_terminal['returncode'] == 0 and write_terminal['closed_write'] == write_ref
+    assert all(write_terminal[k] is True for k in ('Source_closed', 'module_closed', 'write_complete'))
+    assert {(c['root'], c['mode']) for c in write['Source_contexts']} == {(str(D), 'write'), (str(A), 'read')}
+    assert len(write['Source_contexts']) == 2
+    assert all(c['entered'] is True and c['exit_returned'] is True for c in write['Source_contexts'])
+    assert src['status'] == 'PASS' and not src['errors']
+    assert src['Source_closed'] is src['owned_module_closed'] is True
+    assert src['SDK_Native_compiler_or_project_execution'] is False
+    assert freeze['local_clean'] is freeze['exact_changes_only'] is True and freeze['pushed'] is False
+    assert set(freeze['committed']) == set(EXPECTED)
+    head, tree = (freeze['frozen'][k] for k in ('HEAD', 'tree'))
+    assert (revision(D, 'HEAD^'), revision(D, 'HEAD'), revision(D, 'HEAD^{tree}')) == (BASE_D, head, tree)
+    assert revision(A, 'HEAD') == HEAD_A and clean(D) and clean(A)
+    delta = git(D, 'diff-tree', '-r', '--no-commit-id', '--no-renames', '--name-only', '-z', BASE_D, head)
+    assert {p.decode() for p in delta.split(b'\x00') if p} == set(EXPECTED)
+    assert src['roots_before'] == src['roots_after']
+    assert set(src['roots_after']) == {str(D), str(A)}
+    for root, expected_head, expected_tree in ((D, head, tree), (A, HEAD_A, revision(A, 'HEAD^{tree}'))):
+        seen = src['roots_after'][str(root)]
+        assert (seen['HEAD'], seen['tree']) == (expected_head, expected_tree)
+        assert seen['clean_worktree_and_index'] is True
+
+    selected_paths = {str(D/p) for p in EXPECTED}
+    proven = {row['path']: row for row in write['installed']}
+    seen_read = {row['path']: row for row in src['captures']}
+    assert len(proven) == len(write['installed']) == 2 and set(proven) == selected_paths
+    assert len(seen_read) == len(src['captures']) == 4
+    assert set(seen_read) == selected_paths | {str(root/'.git/index') for root in (D, A)}
+    physical_fields = ('path', 'bytes', 'sha256', 'full9')
+    assert all(seen_read[str(D/'.git/index')][k] == freeze['frozen']['stage0_index'][k] for k in physical_fields)
+    for path, (oid, size, sha) in EXPECTED.items():
+        row = freeze['committed'][path]
+        assert all(proven[str(D/path)][k] == row[k] == seen_read[str(D/path)][k] for k in physical_fields)
+        assert (row['committed_blob'], row['bytes'], row['sha256'], row['mode']) == (oid, size, sha, '100644')
+        assert row['raw_bytes_bound'] is row['stage0_matches'] is True and revision(D, 'HEAD:'+path) == oid
+
+    assert run['schema'] == 'actual-frozen-local-D-phase1-proof-cache-reload-filename13-existing-owner/v1'
+    assert all(run[k] is True for k in ('Source_closed', 'qualification_complete', 'resource_cleanup_confirmed',
+        'actual_parent_release_return', 'software_sequence_accepted', 'frozen_D_Git_READ_application'))
+    assert not run['errors'] and run['Source_WRITE_claimed'] is False
+    assert run['statutory_or_modelquality_or_convergence_authority'] is False
+    provenance = run['git_candidate_provenance']
+    assert (provenance['HEAD'], provenance['tree'], provenance['root']) == (head, tree, str(D))
+    assert provenance['actual_closed_Source_READ'] == read_ref
+    assert provenance['local_frozen_Git_metadata_reference'] == freeze_ref
+    assert run['additional_A_provenance']['HEAD'] == HEAD_A
+    assert run['additional_A_provenance']['root'] == str(A)
+    assert run['additional_A_provenance']['actual_closed_Source_READ'] == read_ref
+    phases = {phase['operation']: phase for phase in run['phases'].values()}
+    assert len(run['phases']) == len(phases) == 2 and set(phases) == {'collect', 'run'}
+    assert all(phase['accepted'] is True and not phase['error'] for phase in phases.values())
+    for phase in phases.values():
+        sdk = phase['actual_SDK_resource_flags']
+        assert sdk['returncode'] == 0 and sdk['workspace_cleaned'] is True and not sdk['error']
+        assert sdk['native_lifecycle']['cleanup_confirmed'] is True
+    collect, execute = (phases[k]['actual_binding'] for k in ('collect', 'run'))
+    ids = collect['actual_collected_roster']
+    assert ids == execute['actual_collected_roster'] == execute['actual_called_roster']
+    assert len(ids) == len(set(ids)) == 13 and set(ids) == set(roster['literal_case_ids'])
+    assert len({node.split('[', 1)[0] for node in ids}) == 8
+    assert [node for node in ids if node not in roster['new_three_ids']] == roster['prior_actual_ten_ids']
+    raw = read(raw_ref, 'guide583_actual_XML')
+    suite, = ET.fromstring(raw).findall('testsuite')
+    cases = suite.findall('testcase')
+    assert len(cases) == int(suite.attrib['tests']) == 13
+    assert all(int(suite.attrib[k]) == 0 for k in ('failures', 'errors', 'skipped'))
+    assert [case.attrib['name'] for case in cases] == [node.rsplit('::', 1)[1] for node in ids]
+    assert all(case.attrib['classname'] == TEST[:-3].replace('/', '.') for case in cases)
+    assert not any(case.find(k) is not None for case in cases for k in ('failure', 'error', 'skipped'))
+    result, = phases['run']['actual_results']
+    junit_ref, = (item for item in result['raw_output_files'] if item['logical_name'] == 'junit.xml')
+    assert result['SDK_returned_result'] is True and minimal_ref(junit_ref) == minimal_ref(raw_ref)
+    assert phases['run']['junit']['actual_raw_junit_sha256'] == digest(raw)
+    assert phases['run']['junit']['actual_raw_junit_bytes'] == len(raw)
+    for phase in (collect, execute):
+        assert phase['actual_compiled_current_Source'][str(D/OWNER)] == EXPECTED[OWNER][2]
+        witness = phase['actual_test_rewrite_source_to_code'][str(D/TEST)]
+        assert all(witness[k] is True for k in ('source_to_AST_observed', 'AST_to_code_observed',
+                                               'returned_code_identity_matches', 'code_execution_observed'))
+        assert witness['source_sha256'] == witness['compile_source_sha256'] == EXPECTED[TEST][2]
+        assert witness['compile_source_full9'] == freeze['committed'][TEST]['full9']
+    return env | {'closed_Source2': write_ref, 'full_ordinary13_report': report_ref, 'raw_JUnit': raw_ref}, freeze, ids
+
+def documentary_parents():
+    prior = load(PRIOR_PUBLICATION, 'prior_Guide582_publication')
+    docs = load(PREVIOUS_DOCUMENTS, 'prior_Guide582_exact_four_Source_close')
+    assert prior['qualification_complete'] is True and prior['fresh_origin_main']['datasets'] == BASE_D
+    assert prior['fresh_origin_main']['accelerate'] == HEAD_A and prior['guide582_Source_closed'] == PREVIOUS_DOCUMENTS
+    assert docs['terminal_returncode'] == 0 and docs['evidence_ordinal'] == 582 and docs['HEAD'] == BASE_D
+    assert docs['exact_forward_and_inverse_verified'] is True
+    parents=[]
+    for name in NAMES:
+        path=str(DOCS/name)
+        raw,f9=observed_file(D/path)
+        assert all(revision(D,rev+':'+path)==blob(raw)==PREIMAGE[name] for rev in ('HEAD','HEAD^'))
+        saved = docs['committed_docs'][path]
+        assert (saved['bytes'], saved['sha256'], saved['committed_blob']) == (len(raw), digest(raw), PREIMAGE[name])
+        offset=len(raw)
+        if name.endswith('.json'):
+            old=json.loads(raw)
+            if name=='BACKLOG.json':
+                assert len(old['tasks'])==24 and len(old['migration'])==95
+                assert next(row for row in old['tasks'] if row['id']==TASK)['title']=='Run source-bound corpus builds and obligations'
+                key='migration'
+            else:
+                assert len(old['components'])==126 and len(old['selected_evidence'])==582
+                assert old['selected_evidence'][-1]['evidence_ordinal']==582
+                assert sum(row['id']==COMPONENT for row in old['components'])==1
+                key='selected_evidence'
+            offset=offset_for(raw,key,old[key])
+        else:
+            assert raw.count(b'## Evidence582')==1 and b'## Evidence583' not in raw
+        parents.append((raw,dict(file_name=name,relative_path=path,insertion_offset=offset),f9))
+    return parents
+
+def main():
+    assert len(sys.argv)==4
+    bundle=ref(Path(sys.argv[1]),int(sys.argv[2]),sys.argv[3])
+    env,freeze,ids=bind(bundle)
+    parents=documentary_parents()
+    migration='phase1_proof_cache_reload_filename_binding_ordinary13_20261127'
+    record='phase1-proof-cache-reload-filename-binding-ordinary13-evidence583-20261127'
+    head,tree=(freeze['frozen'][k] for k in ('HEAD','tree'))
+    q=env['actual_ordinary13']
+    facts=dict(schema='phase1-proof-cache-reload-filename-binding-engineering-evidence/v1',
+        evidence_ordinal=583,task=TASK,related_catalog_component=COMPONENT,
+        actual_ordinary_qualification=q,actual_ordinary_report=env['full_ordinary13_report'],
+        actual_raw_JUnit=env['raw_JUnit'],actual_Source2=env['closed_Source2'],actual_READ4=env['closed_READ4'],
+        exact_local_freeze=env['exact_local_freeze'],prior_verified_guide=PRIOR_PUBLICATION,
+        ordinary_cases=len(ids),ordinary_test_functions=8,prior_cases=10,new_cases=3,
+        failures=0,errors=0,skipped=0,collect_call_JUnit_order_match=True,Source_resource_parent_closed=True,
+        qualified_D_head=head,qualified_D_tree=tree,qualified_A_head=HEAD_A,
+        qualified_commit_blobs={path:row['committed_blob'] for path,row in freeze['committed'].items()},
+        reload_requires_content_addressed_record_filename=True,
+        renamed_record_refused_with_or_without_persisted_index=True,
+        failed_reload_preserves_verified_indexes=True,canonical_record_reloads_without_persisted_index=True,
+        Native_qualification=False,task_status_changed=False)
+    facts_ref=put('guide583-proof-cache-reload-scoped-facts.json',facts)
+    backlog=dict(record_id=record,evidence_ordinal=583,task=TASK,related_catalog_component=COMPONENT,
+       facts=facts_ref,status='closed_controlled_engineering_evidence_only_no_task_status_change',actual_ordinary_qualification=q)
+    catalog=dict(id=record,evidence_ordinal=583,path=facts_ref['path'],root='artifact_workspace',
+       observed_bytes=facts_ref['bytes'],observed_sha256=facts_ref['sha256'],status='CLOSED_CONTROLLED_ENGINEERING_EVIDENCE_ONLY',
+       required_for_catalog_check=False,backlog_crosslink='BACKLOG.json#/migration/'+migration,
+       scope='Software qualification of content-addressed proof-cache filenames and reload rollback.',
+       closed_runtime_facts=facts)
+    joint=dict(backlog_container='migration',backlog_record=backlog,catalog_record=catalog,evidence_ordinal=583,migration_key=migration,record_id=record)
+    assert set(joint)==previous['JOINT_KEYS']
+    joint_ref=put('guide583-existing-actuator-six-key-joint-facts.json',joint)
+    md=(
+        '\n\n## Evidence583 — Validate proof-cache record filenames on reload\n\n'
+        'Reload checks that each validated proof record uses its content-addressed filename before it publishes '
+        'the rebuilt indexes. It rejects renamed records with or without a persisted index and preserves '
+        'the previously verified indexes on failure. A canonical record still reloads without a persisted index. '
+        'The guarded ordinary run passed all 13 cases across eight functions, with ten retained cases and three '
+        'new cases. Collection, execution and JUnit order matched. Source, resources and the parent process '
+        'closed. The evidence covers software qualification for reload. '
+        + link('Ordinary qualification',q) + ' · ' + link('Exact qualified code freeze',env['exact_local_freeze']) + '\n').encode()
+    md_ref=put('guide583-shared-Markdown-append.DATA',md)
+    insert=insertion_for(583)
+    files,proofs,forward,inverse=[],[],[],[]
+    for before,plan,f9 in parents:
+        name,rel=plan['file_name'],plan['relative_path']
+        change=insert(before,plan,joint,md)
+        frag=put(f'{name}.guide583.only-insertion.DATA',change['fragment'])
+        files.append(dict(file_name=name,relative_path=rel,before_private=put(f'{name}.captured-current-parent.DATA',before),
+            before_Git_blob_oid=blob(before),before_full9=f9,
+            post_private=put(f'{name}.guide583.after.DATA',change['post']),
+            forward_patch=put(f'{name}.guide583.forward.patch',change['forward']),
+            inverse_patch=put(f'{name}.guide583.inverse.patch',change['inverse']),
+            surgical_insertion=change['surgical_insertion']|dict(fragment_reference=frag,inverse_removal_recovers_entire_old_file=True)))
+        proofs.append(dict(relative_path=rel,before_SHA256=digest(before),after_SHA256=digest(change['post']),
+            after_Git_blob=blob(change['post']),insertion_offset=plan['insertion_offset'],inserted_bytes=frag['bytes']))
+        forward.append(change['forward'])
+        inverse.append(change['inverse'])
+    preservation=put('guide583-four-guides-preservation-and-inverse-proof.json',dict(tasks=24,components=126,
+       previous_catalog_records=582,new_catalog_records=1,previous_migrations=95,new_migrations=1,
+       prior_structured_values_exact=True,both_Markdown_prefixes_exact=True,records=proofs))
+    ready=dict(schema='one-existing-guide583-four-private-posts/v1',evidence_ordinal=583,migration_key=migration,record_id=record,
+        qualified_code_before_docs=env['exact_local_freeze'],ordinary_evidence_bundle=bundle,
+        actual_ordinary_qualification=q,prior_verified_guide582_publication=PRIOR_PUBLICATION,
+        expected_current_D_HEAD=head,expected_current_D_tree=tree,expected_current_A_HEAD=HEAD_A,
+        facts=facts_ref,joint_facts=joint_ref,shared_Markdown_append=md_ref,files=files,preservation_proof=preservation,
+        forward_patch=put('guide583-four-insertions.forward.patch',b''.join(forward)),
+        inverse_patch=put('guide583-four-insertions.inverse.patch',b''.join(inverse)),
+        all_previous_guide_data_preserved=True,exact_all4_inverse_removal_complete=True,
+        canonical_adoption_or_publication_performed=False,Root_Source_clock_selection_ledger_IO_output_effect_authority=None)
+    print(json.dumps(put('READY-one-existing-guide583-four-guides.json',ready),sort_keys=True))
+
+if __name__=='__main__':
+    main()

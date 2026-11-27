@@ -1,0 +1,139 @@
+"""Reconcile the two existing publisher receipts and the observed GitHub main heads."""
+from concurrent.futures import ThreadPoolExecutor
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import time
+
+BASE=Path(__file__).resolve().parent
+ROOT_STATUS=BASE/'Root-Native2-owner-status.json'
+MAIN=Path('/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/Phase1-proof-cache-reload-filename-private-v01-rdtjc1jx/Root-owner-status.json')
+ORDER=['datasets','hallucinate','root']
+ENV=os.environ|{'GIT_OPTIONAL_LOCKS':'0','GIT_NO_LAZY_FETCH':'1','GIT_TERMINAL_PROMPT':'0'}
+for name in ('GIT_DIR','GIT_INDEX_FILE','GIT_WORK_TREE','GIT_COMMON_DIR','GIT_ALTERNATE_OBJECT_DIRECTORIES'):
+    ENV.pop(name,None)
+
+def pin(path,raw):
+    return dict(path=str(path),bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())
+
+def document(reference):
+    p=Path(reference['path'])
+    b=p.read_bytes()
+    assert pin(p,b)=={k:reference[k] for k in ('path','bytes','sha256')}
+    return json.loads(b)
+
+def persist(path,value,replace=False):
+    raw=(json.dumps(value,indent=2,sort_keys=True)+'\n').encode()
+    out=path.with_name(path.name+f'.{os.getpid()}.tmp') if replace else path
+    with out.open('xb') as f:
+        f.write(raw)
+        f.flush()
+        os.fsync(f.fileno())
+    if replace:
+        os.replace(out,path)
+    fd=os.open(path.parent,os.O_DIRECTORY)
+    try:os.fsync(fd)
+    finally:os.close(fd)
+    assert path.read_bytes()==raw
+    return pin(path,raw)
+
+def git(*args):
+    return subprocess.check_output(['/usr/bin/git',*args],env=ENV,timeout=35)
+
+p=Path(sys.argv[1])
+raw=p.read_bytes()
+guide_receipt=pin(p,raw)
+assert (guide_receipt['bytes'],guide_receipt['sha256'])==(int(sys.argv[2]),sys.argv[3])
+published=json.loads(raw)
+s=json.loads(ROOT_STATUS.read_bytes())
+actual=s['actual']
+assert s['phase']=='exact_repin_published_Guide584_enqueued_to_existing_publisher'
+code=document(actual['publication'])
+plan=document(actual['guide584_parent_pin_plan'])
+exact=document(actual['guide584_exact_private_commit'])
+joined=document(plan['actual_code_publication'])
+native=document(actual['qualification'])
+terminal=document(actual['native_terminal'])
+assert code['terminal_returncode']==published['terminal_returncode']==native['terminal_returncode']==terminal['returncode']==0
+assert published['prior_origin_main']==plan['base_origin_main']==code['fresh_origin_main']
+after=published['fresh_origin_main']
+assert after==plan['prepared_origin_main'] and after['accelerate']==code['fresh_origin_main']['accelerate']
+assert joined['actual_existing_publisher_code_receipt']==actual['publication']
+assert exact['actual_code_publication']==plan['actual_code_publication']
+assert len(published['normal_fast_forward_steps'])==3 and len(code['normal_fast_forward_steps'])==3
+for role,step_ref in zip(ORDER,published['normal_fast_forward_steps'],strict=True):
+    step=document(step_ref)
+    assert step['role']==role and step['normal_fast_forward'] is True and step['returncode']==0
+    assert step['before']==code['fresh_origin_main'][role] and step['after']==after[role]
+def local(role,*args):
+    return git('--git-dir='+plan['isolated_git_dir'][role],*plan['git_arguments_preserve_bounded_pack_settings'],*args)
+def entry(role,commit,rel):
+    row=local(role,'ls-tree','-z',commit,'--',rel)
+    meta,found=row.rstrip(b'\0').split(b'\t')
+    assert found.decode()==rel
+    return meta.decode().split()
+for role in ORDER:
+    actual_parent_and_tree=local(role,'rev-parse',after[role]+'^',after[role]+'^{tree}').decode().splitlines()
+    assert actual_parent_and_tree==[code['fresh_origin_main'][role],plan['candidate_trees'][role]]
+for role,entries in plan['gitlink_after'].items():
+    for rel,row in entries.items():
+        assert entry(role,after[role],rel)==row
+for rel,row in (plan['root_archive_preserved']|plan['retained_archives']).items():
+    assert entry('root',after['root'],rel)==row
+assert exact['evidence_ordinal']==584 and exact['only_four_Git_changes']
+preservation=exact['preservation']
+assert preservation['prior_evidence_records']==583 and preservation['new_evidence_records']==1
+assert all(preservation[key] for key in ('previous_structured_values_exact','both_Markdown_prefixes_exact','exact_all4_inverse_removal_complete'))
+docs=exact['private_Git_commit']['committed_docs']
+changed=local('datasets','diff-tree','--no-commit-id','--no-renames','--name-only','-r','-z',code['fresh_origin_main']['datasets'],after['datasets']).decode().split('\0')
+assert set(changed)-{''}==set(docs) and len(docs)==4
+for name,row in docs.items():
+    pick=entry('datasets',after['datasets'],name)
+    assert pick==[row['mode'],'blob',row['committed_blob']]
+    data=local('datasets','cat-file','blob',pick[-1])
+    assert len(data)==row['bytes'] and hashlib.sha256(data).hexdigest()==row['sha256']
+frozen=document(actual['local_freeze'])
+for path,row in frozen['committed'].items():
+    assert entry('datasets',after['datasets'],path)==[row['mode'],'blob',row['committed_blob']]
+for row in frozen['frozen_roots']:
+    root=row['root']
+    assert git('-C',root,'rev-parse','HEAD','HEAD^{tree}').decode().splitlines()==[row['Git_HEAD'],row['Git_tree']]
+    assert not git('-C',root,'status','--porcelain=v1','--untracked-files=all')
+for row in (frozen['frozen']['stage0_index'],frozen['frozen_branch_ref'],*frozen['committed'].values()):
+    path=Path(row['path'])
+    st=path.lstat()
+    assert {k:str(getattr(st,k)) for k in row['full9']}==row['full9']
+    assert pin(path,path.read_bytes())=={k:row[k] for k in ('path','bytes','sha256')}
+def observe(item):
+    role,url=item
+    oid,branch=git('ls-remote','--exit-code',url,'refs/heads/main').decode().split()
+    assert branch=='refs/heads/main'
+    return role,oid
+with ThreadPoolExecutor(max_workers=4) as pool:
+    assert dict(pool.map(observe,plan['urls'].items()))==after
+closeout=persist(BASE/'actual-Native2-repin-and-Guide584-published-closeout.json',dict(
+    terminal_returncode=0,owner='Root',existing_sole_publisher=actual['publication_publisher'],
+    code_commit='457653e9ab7743b64633e1a0ed8f6c8e1ea2f513',code_publication=actual['publication'],
+    retained_first_credential_helper_refusal=actual['code_publication_first_normal_ff_refusal'],
+    exact_Guide584=actual['guide584_exact_private_commit'],Guide584_publication=guide_receipt,
+    verified_GitHub_origin_main=after,verified_archive_and_gitlinks=True,original_frozen_roots_unchanged=True,
+    actual_Native2=actual['qualification'],actual_Native2_terminal=actual['native_terminal'],
+    independent_command_readback=actual['independent_saved_Native2'],
+    independent_cache_control_readback=actual['independent_saved_Native2_cache_controls'],
+    actual_Native_commands=native['actual_command_counts'],Native_processes_during_replay=native['native_processes_during_replay'],
+    Native_pytest_case_credit=native['pytest_case_credit'],fictional_fixture_only=True,
+    legal_or_corpus_or_model_admission=False,Source_or_Native_replayed=False,
+    fully_retained_Source_ledger=terminal['fully_retained_ledger'],live_handles=None))
+s.update(phase='exact_current_native2_repin_and_Guide584_published_closed',timestamp_utc_ns=time.time_ns())
+actual.update(maintained_guide_publication=guide_receipt,consolidated_closeout=closeout,actual_origin_after_guide=after)
+print('Root',persist(ROOT_STATUS,s,True),flush=True)
+m=json.loads(MAIN.read_bytes())
+sub=m['actual']['current_cache_Native2']
+assert sub['closeout']==actual['qualification'] and sub['terminal']==actual['native_terminal']
+sub.update(phase='exact_current_native2_repin_and_Guide584_published_closed',repin_published=True,
+    code_publication=actual['publication'],guide584_publication=guide_receipt,combined_closeout=closeout,live_handle=None)
+print('Main',persist(MAIN,m,True),flush=True)
+print('Closure',closeout,flush=True)

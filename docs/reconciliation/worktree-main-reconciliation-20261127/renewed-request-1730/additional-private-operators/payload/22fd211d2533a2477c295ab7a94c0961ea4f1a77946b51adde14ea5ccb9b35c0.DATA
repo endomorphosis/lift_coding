@@ -1,0 +1,109 @@
+"""Resolve already-discovered local/originless Git copies by commit metadata."""
+from concurrent.futures import ThreadPoolExecutor
+from collections import defaultdict,Counter
+from datetime import datetime
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+import re
+import subprocess
+
+OUT=Path(__file__).parent
+BASE=OUT/'metadata-delta.json'
+OLD=Path('/tmp/fresh-git-discovery-20261127-1vX4ddBA')
+ENV=dict(os.environ,GIT_OPTIONAL_LOCKS='0',GIT_TERMINAL_PROMPT='0',GIT_NO_LAZY_FETCH='1')
+ANCHORS={
+ 'ipfs_datasets_py':['3f1691d59cc0a310750c0b441b51d3528b17eb85','7c0d40925436665bd90f62941d66ec63edadfb5b','5bf57f390a12621a40716595fe261c35d2741e12','3bdfec5b148ad6c4ac53281ceb02ecd8377643e0'],
+ 'ipfs_accelerate_py':['81b5e11f3c6063486a7cadc6c3d4c6ea50e85bb2','219ba3da0f62f772801d71715e22c506faa21126','64a8649952bed66a457d7b87bf6dced9fadab8d4'],
+ 'ipfs_kit_py':['f5de9ad4a52b37cc771a0d904b91da746e825553','b15442e490dc39d046a911ea663c73c99ed3c755'],
+ 'lift_coding':['fe18069df4203da9bddfb77b1ed41748f4d5fb4d','93edf9895e09ffa873a7eb65634a1c0ed27d297d','9804b07e5094d6c35da4509fb18802d5b44393b3'],
+ 'hallucinate_app':['16d73f200ba972af595c1116be690e973fe1c3d3','cd31ee793f829af78634d624a2d4ab3b963e993c'],
+ 'swissknife':['e3e1e771400a6c2b51c7eff325871769e4436ebb','453a30b01e62b6acdd1c54070821dbacfbf7908e'],
+ 'mcp-plus-plus':['628bb6e7b01867f3bc252a3c276c0e6ef6acd5b0','33c0c56e9423e11945837657e3a82fe865c60f91'],
+ 'jevops':['0491349bd3e92e02dc50992e79b0c0a97a521ede','810e8bd91b14fd945e086840ccd0e2874a7910c3'],
+}
+
+def git(common,*args):
+    return subprocess.run(['git','-c','core.fsmonitor=false','-c','core.hooksPath=/dev/null','-c','protocol.allow=never','--git-dir',common,*args],capture_output=True,env=ENV,timeout=20)
+
+def main():
+    previous=json.loads((OLD/'per-family-tip-metadata.json').read_text())
+    corrected=json.loads(Path('/tmp/git-final-branch-retention-20261127-lmljw4GB/additional-head-classification.json').read_text())
+    known=defaultdict(set)
+    for family,rows in previous['families'].items():known[family].update(r['oid'] for r in rows)
+    for family,groups in corrected['classification'].items():
+        for values in groups.values():
+            if isinstance(values,list):
+                for r in values:
+                    oid=r if isinstance(r,str) else r.get('oid') if isinstance(r,dict) else None
+                    if oid and re.fullmatch('[0-9a-f]{40}',oid):known[family].add(oid)
+    actual=json.loads(Path('/tmp/git-main-followup-20261127-zYjieLmd/actual-final-archive-publication.json').read_text())
+    known['lift_coding'].update([actual['initial_main'],actual['published_main'],'9804b07e5094d6c35da4509fb18802d5b44393b3',*(r['commit'] for r in actual['batches']),*(r['commit'] for r in actual['main_attempts'])])
+    base=json.loads(BASE.read_text())
+    rows=[r for r in base['bounded_marker_scan']['discovered_markers'] if r.get('valid')]
+    common_rows={r['common_dir']:r for r in rows}
+    # Exact already-known path origins resolve local clones without basename guessing.
+    path_family={r['common_dir']:r['family'] for r in base['current_family_git_metadata']}
+    discovery=json.loads((OLD/'discovery.json').read_text())
+    for r in discovery['repositories']:
+        if r.get('valid') and r['common_dir'] in path_family:path_family[r['path']]=path_family[r['common_dir']]
+
+    def inspect(item):
+        common,row=item
+        p=git(common,'for-each-ref','--format=%(refname)%00%(objectname)')
+        refs=[]
+        for line in p.stdout.decode('utf-8','replace').splitlines():
+            fields=line.split('\0')
+            if len(fields)==2:refs.append({'ref':fields[0],'oid':fields[1]})
+        wt=git(common,'worktree','list','--porcelain')
+        # Record only HEADs/path metadata already rendered by Git.
+        work=[];record=None
+        for line in wt.stdout.decode('utf-8','replace').splitlines():
+            if line.startswith('worktree '):record={'path':line[9:]};work.append(record)
+            elif record is not None and line:
+                k,_,v=line.partition(' ');record[k]=v or True
+        observed={r['oid'] for r in refs}
+        if row.get('head'):observed.add(row['head'])
+        observed.update(r['HEAD'] for r in work if r.get('HEAD'))
+        family_hint=row['family'] if row.get('family') in ANCHORS else path_family.get(row.get('origin'))
+        out=[]
+        for oid in sorted(observed):
+            direct=[f for f in ANCHORS if oid in known[f]]
+            family=direct[0] if len(direct)==1 else family_hint
+            evidence='exact previously accounted repository/OID' if len(direct)==1 else 'explicit remote family or exact known origin path' if family else None
+            witness=None
+            if family is None:
+                matches=[]
+                for f,anchors in ANCHORS.items():
+                    for anchor in anchors:
+                        check=git(common,'merge-base','--is-ancestor',anchor,oid)
+                        if check.returncode==0:
+                            matches.append(f);witness=anchor;break
+                if len(matches)==1:family=matches[0];evidence='known family anchor is actual commit ancestor'
+            metadata=None
+            if not direct:
+                p=git(common,'show','-s','--format=%H%x00%ct%x00%ci%x00%P%x00%s',oid)
+                fields=p.stdout.decode('utf-8','replace').rstrip('\n').split('\0')
+                if p.returncode==0 and len(fields)==5:
+                    metadata={'oid':fields[0],'committer_timestamp':int(fields[1]),'date':fields[2],'parents':fields[3].split(),'subject':fields[4],'after_completed_recovery':int(fields[1])>datetime.fromisoformat(base['completed_recovery_cutoff']).timestamp()}
+            out.append({'oid':oid,'family':family,'family_evidence':evidence,'ancestor_witness':witness if evidence=='known family anchor is actual commit ancestor' else None,'already_in_recovery_inventory':bool(family and oid in known[family]),'refs':[r['ref'] for r in refs if r['oid']==oid],'observed_HEAD':row.get('head')==oid,'commit_metadata':metadata})
+        return {'path':row['path'],'common_dir':common,'declared_origin':row.get('origin'),'origin_family_field':row.get('family'),'refs_rc':p.returncode if not refs else 0,'all_refs':refs,'worktrees':work,'tip_classifications':out}
+
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        results=list(pool.map(inspect,sorted(common_rows.items())))
+    new=[]
+    for r in results:
+        for tip in r['tip_classifications']:
+            if tip['family'] and not tip['already_in_recovery_inventory']:
+                new.append({'path':r['path'],'common_dir':r['common_dir'],**tip})
+    unique=defaultdict(list)
+    for row in new:unique[(row['family'],row['oid'])].append(row)
+    candidates=[]
+    for (family,oid),sight in sorted(unique.items()):
+        candidates.append({'family':family,'oid':oid,'commit_metadata':next((r['commit_metadata'] for r in sight if r['commit_metadata']),None),'sightings':[{k:r[k] for k in ('path','common_dir','refs','observed_HEAD','family_evidence','ancestor_witness')} for r in sight]})
+    report={'schema':'new-local-origin-git-copy-resolution/v1','base_metadata':str(BASE),'base_metadata_sha256':sha256(BASE.read_bytes()).hexdigest(),'scope':'Only97already-discovered Gitmarkers. No new filesystem scan, source bodies, Git mutation, network, keys, model/runtime execution. Allrefs/HEADs and commit ancestry are metadata only.','stores_queried':len(results),'new_associated_tip_candidates':candidates,'all_store_metadata':results,'unresolved_nonempty_stores':[{'path':r['path'],'tips':[t['oid'] for t in r['tip_classifications'] if not t['family']]} for r in results if any(not t['family'] for t in r['tip_classifications'])],'limits':['A family inferred from commit ancestry is a Git-history/preservation association, not Source/runtime authority.','New-versus-inventory does not imply missing from current published main; root performs fresh remote and ancestor proof.','Originless stores with unbornHEAD and no refs have no advertised branch work to classify. Dangling objects are not enumerated.']}
+    p=OUT/'local-origin-copy-delta.json';b=(json.dumps(report,indent=2,sort_keys=True)+'\n').encode();p.write_bytes(b)
+    print(json.dumps({'report':str(p),'bytes':len(b),'sha256':sha256(b).hexdigest(),'stores':len(results),'new_associated_unique_tip_candidates':len(candidates),'candidates':candidates,'unresolved_nonempty':report['unresolved_nonempty_stores']},indent=2))
+
+if __name__=='__main__':main()

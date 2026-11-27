@@ -1,0 +1,301 @@
+"""Stage the current exact six-output R5 route. Existing parent performs all execution."""
+import ast, base64, hashlib, json, os, stat, sys
+from pathlib import Path
+import time
+import xml.etree.ElementTree as ET
+
+R=Path('/tmp/Root-P2-whole-component-managed-R5-n8Fkdm2q')
+C=Path('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V4-checked-whole-project-private-yI1zwigi')
+H=Path('/tmp/Root-Phase2-V4-checked-native-complete-archive-existing-R5-v563-dPdI5ec9')
+D=str(R/'datasets')
+A='/tmp/Root-result-cache-owned-existing-route-L4Wyme59/accelerate'
+CASE='controlled-reviewed-physical-V4-direct-Native-R5/v1'
+CAP=134217728
+F9='st_dev st_ino st_mode st_nlink st_uid st_gid st_size st_mtime_ns st_ctime_ns'.split()
+ROLE=('path','bytes','sha256','full9')
+OUTPUT='actual-R5-physical-v4-checked-whole-project-current.json'
+D_HEAD='d2ddb5fc873c38370268975f4e76a80ff427c87c'
+A_HEAD='fae7981fa576817536a3c7aa62c5d28dc417f214'
+D_TREE='7f668c3ebb11734d725565401f459111c58df9f6'
+A_TREE='70e66c5b1f5d2438eab0b18e45687b98613f5416'
+
+def h(raw): return hashlib.sha256(raw).hexdigest()
+def pin(path,bytes_,sha256): return dict(path=str(path),bytes=bytes_,sha256=sha256)
+def identity(st): return {k:str(getattr(st,k)) for k in F9}
+def read(ref):
+    path,n=Path(ref['path']),ref['bytes']
+    s=path.lstat()
+    assert path.is_absolute() and path.resolve()==path and type(n) is int and 0<n<=64*1024**2
+    assert stat.S_ISREG(s.st_mode) and s.st_uid==os.geteuid() and s.st_nlink==1 and s.st_size==n
+    with os.fdopen(os.open(path,os.O_RDONLY|os.O_NOFOLLOW),'rb') as f:
+        assert identity(s)==identity(os.fstat(f.fileno()))
+        b=f.read(n+1)
+        assert identity(s)==identity(os.fstat(f.fileno()))==identity(path.lstat())
+    assert len(b)==n and h(b)==ref['sha256'],path
+    return b
+def obj(ref): return json.loads(read(ref))
+def save(root,name,v):
+    path=root/name
+    raw=v if isinstance(v,bytes) else (json.dumps(v,sort_keys=True,indent=2)+'\n').encode()
+    with os.fdopen(os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400),'wb') as f:
+        f.write(raw);f.flush();os.fsync(f.fileno())
+    ref=pin(path,len(raw),h(raw));assert read(ref)==raw
+    return ref
+def core(row): return {k:row[k] for k in ROLE}
+def f9check(row,field='full9'):
+    p=Path(row['path']); s=p.lstat()
+    assert stat.S_ISREG(s.st_mode) and s.st_nlink==1 and s.st_size==row['bytes']
+    with os.fdopen(os.open(p,os.O_RDONLY|os.O_NOFOLLOW),'rb') as f:
+        assert identity(s)==identity(os.fstat(f.fileno()))==identity(p.lstat())==row[field], p
+def inside(ref,root):
+    assert Path(ref['path']).is_relative_to(root),ref
+def read_current_source():
+    terminal_ref=pin(R/'P2-READ3-existing-Source-terminal.json',3142,'0474185aa79ed412c809f50afeb3badde97e89d39df6aef1390f5c6d937dcd76')
+    freeze_ref=pin(R/'P2-current-execution-freeze.json',7054,'b60f9cc09c5d08eafb86a736dda223d22fd58bcebcec72c90b982a65201fdab9')
+    seal_ref=pin(C/'SEALED-existing-R5-six-output-collector-and-verifier-whole-project-v03-INERT.json',14465,'c4adc418a1d1d8e3f15070b36e04a47a0ec0afdbff851b57d2acc71d668d1bd4')
+    ordinary_plan_ref=pin(C/'ordinary62-current-D-INERT-v01/SEALED-existing-P2-managed-ordinary62-nonclock-INERT-handoff-v01.json',10731,'4daa68d6bc9eeca5394cb905c5341dd2d11cb09efcfb136f899d8f32aebbc132')
+    terminal,freeze,controls,ordinary_plan=(obj(x) for x in (terminal_ref,freeze_ref,seal_ref,ordinary_plan_ref))
+    assert terminal['returncode']==0 and terminal['status']=='PASS' and terminal['Source_closed'] is terminal['owned_module_closed'] is terminal['exact_3_snapshot_and_Git_joins_verified'] is terminal['A_index_SHA_and_full9_preserved'] is True
+    assert terminal['execution_freeze']==freeze_ref and freeze['Git_HEAD']==D_HEAD and freeze['Git_tree']==D_TREE
+    assert freeze['local_clean'] is True and freeze['pushed'] is False
+    roots=freeze['frozen_roots']
+    assert [(r['root'],r['Git_HEAD'],r['Git_tree']) for r in roots]==[(D,D_HEAD,D_TREE),(A,A_HEAD,A_TREE)]
+    compact=obj(terminal['actual_compact']);full=obj(terminal['full_report_reference'])
+    assert compact['Source_closed'] is compact['owned_module_closed'] is True and compact['status']=='PASS' and not compact['errors']
+    assert full['Source_closed'] is full['module_closed'] is full['snapshot_complete'] is True and not full['errors']
+    assert compact['full_report_reference']==terminal['full_report_reference'] and compact['captures']==full['captures']
+    assert compact['roots_before']==compact['roots_after']==full['before']==full['after']
+    contexts=full['Source_contexts']; assert len(contexts)==2 and {row['root'] for row in contexts}=={D,A}
+    assert all(row['entered'] is row['exit_returned'] is True and row['lease']['mode']=='read' for row in contexts)
+    for root in roots:
+        current=full['after'][root['root']]
+        assert current['HEAD']==root['Git_HEAD'] and current['tree']==root['Git_tree'] and current['clean_worktree_and_index'] is True
+    request=obj(full['request_reference'])
+    assert request['named_metadata_recheck_reference']==freeze['epochs']['named']
+    outer_ref=freeze['epochs']['outer']; outer=obj(outer_ref); outer_by={r['path']:r for r in outer}
+    assert len(outer)==len(outer_by)==freeze['epochs']['counts']['outer']==1611
+    named=obj(freeze['epochs']['named'])['rows']; mapping={v['path']:v for v in named}
+    assert len(mapping)==len(named) and set(mapping)==set(full['named_metadata_before']) and full['named_metadata_before']==full['named_metadata_after']
+    assert all(v==mapping[k] and v['full9']==full['named_metadata_after'][k] for k,v in outer_by.items())
+    for row in outer: f9check(row)
+    current_post=freeze['exact_posts']; opens={v['path']:v for v in compact['captures']}
+    assert len(opens)==3 and set(opens)=={freeze['index']['path']}|{v['path'] for v in current_post.values()}
+    assert outer_by[freeze['index']['path']]==freeze['index'] and outer_by[freeze['companion_index']['path']]==freeze['companion_index']
+    for path,row in opens.items():
+        assert core(row)==outer_by[path] and all(row['raw_reference'][k]==row[k] for k in ('bytes','sha256'))
+    for rel,row in current_post.items():
+        post=controls['exact_candidate_source_roles'][rel]['after']
+        assert all(row[k]==post[k] for k in ('sha256','bytes','git_blob')) and row['mode']=='100644' and core(row)==outer_by[row['path']]
+    guide_ref=next(v for v in freeze['provenance_refs'] if 'Guide582-publication' in v['path'])
+    guide=obj(guide_ref); assert freeze['execution_D_parent']=='937ad474d2d8650e3ccee16c10319a9c72d4429a'
+    assert D_HEAD!=freeze['execution_D_parent']
+    return (terminal_ref,terminal,freeze_ref,freeze,outer_ref,outer_by,controls,ordinary_plan_ref,ordinary_plan,guide_ref)
+
+def verify_ordinary62(ordinary_ref, plan, freeze, terminal_ref, terminal):
+    ordinary=obj(ordinary_ref)
+    assert ordinary['terminal_returncode']==0 and ordinary['Source_closed'] is ordinary['resource_cleanup_confirmed'] is True
+    counts=ordinary['counts']
+    assert all(counts[k]==n for k,n in (('tests',62),('passed',62),('failures',0),('errors',0),('skipped',0)))
+    assert counts.get('functions',25)==25 and counts.get('duplicates',0)==0
+    report_ref=ordinary.get('exact_ordinary_report',ordinary.get('actual_report',ordinary.get('operator_report')))
+    junit_ref=ordinary.get('raw_JUnit',ordinary.get('raw_junit'))
+    report=obj(report_ref)
+    assert report['Source_closed'] is report['resource_cleanup_confirmed'] is report['actual_parent_release_return'] is report['qualification_complete'] is True
+    assert not report['errors'] and not report['Source_WRITE_claimed']
+    assert (report['git_candidate_provenance']['root'],report['git_candidate_provenance']['HEAD'],report['git_candidate_provenance']['tree'])==(D,D_HEAD,D_TREE)
+    assert (report['additional_A_provenance']['root'],report['additional_A_provenance']['HEAD'],report['additional_A_provenance']['tree'])==(A,A_HEAD,A_TREE)
+    closed_read=obj(report['source_read_binding_reference'])
+    assert closed_read['outer_epoch_reference']==freeze['epochs']['outer']
+    assert closed_read['python_epoch_reference']==freeze['epochs']['python']
+    assert closed_read['protected_index_reference']==freeze['index']
+    recorded_read=ordinary.get('exact_closed_READ3',ordinary.get('exact_postfreeze_READ3',ordinary.get('Source_READ3')))
+    if recorded_read is not None:
+        assert recorded_read in (terminal_ref,terminal['actual_compact'])
+    roots=report['actual_Source_context_closure']
+    assert len(roots)==2 and {r['root'] for r in roots}=={D,A} and all(r['entered'] is r['exit_returned'] is True for r in roots)
+    parent=report['actual_parent_lease']['lease_id']
+    assert parent not in report['resource_after_parent_release']['state']['leases']
+    assert not (Path(report_ref['path']).parent/'parent-home').exists()
+    phases={r['operation']:r for r in report['phases'].values()}
+    assert set(phases)=={'collect','run'} and len(report['phases'])==2
+    c,r=(phases[k]['actual_binding'] for k in ('collect','run'))
+    ids=c['actual_collected_roster']
+    assert ids==r['actual_collected_roster']==r['actual_called_roster'] and len(ids)==len(set(ids))==62
+    exact=obj(plan['roster'])
+    assert set(ids)==set(exact['literal_expected_nodeids']) and len(exact['function_selectors'])==25
+    assert len(set(ids)&set(exact['retained_v559_nodes']))==53 and len(set(ids)&set(exact['new_whole_project_members']))==9
+    assert {n:sum(x.split('[',1)[0]==n for x in ids) for n in exact['function_selectors']}==exact['expected_function_case_counts']
+    for phase in phases.values():
+        assert phase['accepted'] is True and phase['error'] is None
+        [obs]=phase['actual_results']; result=obs['result']; life=result['native_lifecycle']
+        assert obs['SDK_returned_result'] is True and result['returncode']==0 and result['workspace_cleaned'] is True
+        assert life['cleanup_confirmed'] is life['leader_reaped'] is life['descendant_tracking_complete'] is True
+        assert not any(life[k] for k in ('remaining_group_members','remaining_tracked_descendants','observation_errors'))
+        [bound]=[x for x in obs['raw_output_files'] if x['logical_name']=='binding.json']
+        assert obj(bound)==phase['actual_binding']
+    [j_actual]=[x for x in phases['run']['actual_results'][0]['raw_output_files'] if x['logical_name']=='junit.xml']
+    assert all(j_actual[k]==junit_ref[k] for k in ('bytes','sha256','path'))
+    xml=ET.fromstring(read(junit_ref))
+    suites=xml.findall('testsuite') if xml.tag=='testsuites' else [xml]
+    items=[x for suite in suites for x in suite.findall('testcase')]
+    assert len(items)==62 and not any(x.find(k) is not None for x in items for k in ('failure','error','skipped'))
+    assert [(x.attrib['classname'],x.attrib['name']) for x in items]==[tuple(p) for p in r['junit_expected_pairs']]
+    assert [x.attrib['name'] for x in items]==[n.rsplit('::',1)[1] for n in ids]
+    for rel,v in freeze['exact_posts'].items():
+        path=str(Path(D)/rel)
+        if rel.startswith('tests/'):
+            witness=r['actual_test_rewrite_source_to_code'][path]
+            assert witness['source_sha256']==witness['compile_source_sha256']==v['sha256']
+            assert all(witness[k] is True for k in ('source_to_AST_observed','AST_to_code_observed','code_execution_observed','returned_code_identity_matches'))
+        else:
+            assert r['actual_compiled_current_Source'][path]==v['sha256']
+    return report_ref,junit_ref
+
+def prepare_runtime(hand,out):
+    term_ref,term,freeze_ref,freeze,epoch,roles,control,plan_ref,plan,guide_ref=read_current_source()
+    assert hand['Root_selected'] is True
+    ordinary_ref=hand['ordinary62']
+    ordinary_report,junit_ref=verify_ordinary62(ordinary_ref,plan,freeze,term_ref,term)
+    charge_ref=hand['source_precharge']; charge=obj(charge_ref)
+    before=charge['selected']; after=charge.get('after_full_retained_precharge',charge.get('after_full_precharge'))
+    assert before['global_cap']==after['global_cap'] and before['internal_cap']==after['internal_cap']
+    for spent,cap in (('used','global_cap'),('internal_used','internal_cap')):
+        assert after[spent]-before[spent]==CAP and after[spent]<=after[cap]
+        assert before[spent]>=term['fully_retained_ledger'][spent]
+    assert before['captures']>=term['fully_retained_ledger']['captures'] and after['captures']>=before['captures']+1
+    assert before['capturesComplete'] is after['capturesComplete'] is False
+    assert charge['prior_managed_ordinary62']==ordinary_ref and charge['prior_actual_READ3']==term_ref
+    template_ref=control['unchanged_parent_operator_reference']; template=read(template_ref).decode()
+    [old]=[line for line in template.splitlines() if line.startswith('CURRENT_BINDING = ')]
+    historical=ast.literal_eval(old.split(' = ',1)[1])
+    assert historical['case_profile']==CASE
+    for rel,digest in historical['current_SDK_source_pins'].values(): assert roles[str(Path(D)/rel)]['sha256']==digest,rel
+    tool_ref=hand['toolchain_observation']; native=obj(tool_ref)
+    assert tuple(Path(r['path']).name for r in native)==('prlimit','lake','lean','libLake_shared.so','libInit_shared.so','libleanshared_1.so','libleanshared_2.so','libleanshared.so')
+    assert native==obj(historical['native_data'])
+    for row in native: f9check(row,'actual_full9')
+    state_ref=hand['scheduler_observation']; state_pin=obj(state_ref)
+    resource=historical['resource']; st=Path(resource['state_path'])
+    assert state_pin['path']==str(st) and state_pin['existing_policy_matched'] is True
+    state=obj(state_pin); f9check(state_pin)
+    assert state['config']==resource['expected_config'] and state['child_process_capacity']==resource['expected_capacity']
+    t=hand['clock']; assert type(t['start']) is type(t['end']) is int and t['start']<=time.time_ns()<t['end'] and 0<t['end']-t['start']<=60*10**9
+    assert set(t)=={'start','end'}
+    output=Path(hand['output_namespace'])
+    assert output==out/'actual-output' and not output.exists()
+    scopes=hand['selected_scope']
+    assert isinstance(scopes,str) and scopes and 'PENDING' not in scopes
+    original_d=historical['D_root']
+    absents=[str(Path(D)/Path(p).relative_to(original_d)) for p in historical['ABSENT_PATHS']]
+    assert length_unchanged(historical['ABSENT_PATHS'],absents) and all(not os.path.lexists(p) and Path(p).parent.is_dir() for p in absents)
+    worker_ref=control['collector']['after']; worker=read(worker_ref)
+    assert len(worker)+tool_ref['bytes']<=control['existing_worker_input_max_bytes']
+    assert normal_codec_pin(roles)
+    payload=save(out,'existing-R5-whole-project-current-worker-packet.json',
+        {'collector.py':base64.b64encode(worker).decode(),'native-data.json':base64.b64encode(read(tool_ref)).decode()})
+    source_owner=dict(actual_current_READ3=term_ref,execution_freeze=freeze_ref,last_published_guide582=guide_ref,managed_ordinary62=ordinary_ref,
+        ordinary62_report=ordinary_report,ordinary62_raw_JUnit=junit_ref,ordinary62_plan=plan_ref,exact_outer_epoch=epoch,
+        existing_Source_control_byte_identity_verified=True,same_original_file_identity=historical['Source42_record'],fresh_shared_READ_leases_required=True)
+    read(historical['Source42_record'])
+    selected=save(out,'Root-selected-current-whole-project-R5.json',dict(Root_selected=True,case_profile=CASE,
+        selected_scope=scopes,current_source=source_owner,resource_policy=resource,read_only_pre_state=state_ref,
+        project_heads=freeze['frozen_roots'],asset_snapshot=tool_ref,worker_payload=payload,output_namespace=str(output),clock=t,Source_precharge=charge_ref,
+        ProofReceipt_or_legal_release_or_model_operation_selected=False))
+    binding=dict(historical,D_root=D,D_index=freeze['index'],PROJECTS=freeze['frozen_roots'],PYTHONPATH=D+':'+A,Root_selection=scopes,
+        Native_enrollment=dict(historical['Native_enrollment'],current_selection=selected,read_only_pre_state=state_ref),
+        Source42_current_owner_binding=source_owner,Source_IO_allocation=dict(historical['Source_IO_allocation'],explicit_ledger_increase_and_charge_reference=charge_ref),
+        Source_epoch={**epoch,'rows':len(roles)},ABSENT_PATHS=absents,clock=t,output_namespace=str(output),worker_payload=payload,native_data=tool_ref)
+    marker='assert (len(input_files["collector.py"]),H(input_files["collector.py"]))=='+repr((42327,'d7fff7512ec7643bd58455b7da80985f3c760b287504a540157f5d1680359ad0'))
+    assert template.count(old)==template.count(marker)==1
+    operator=template.replace(old,'CURRENT_BINDING = '+repr(binding)).replace(marker,'assert (len(input_files["collector.py"]),H(input_files["collector.py"]))=='+repr((worker_ref['bytes'],worker_ref['sha256'])))
+    compile(operator,'existing-R5-v563-parent-current-whole-project','exec',dont_inherit=True)
+    op=save(out,'Root-selected-late-bound-existing-R5-parent.py',operator.encode())
+    bound=save(out,'actual-current-R5-binding.json',binding)
+    verifier=stage_verifier(out,control['verifier']['after'])
+    print(json.dumps(save(out,'READY-current-R5-existing-ops-six-output-launch.json',dict(
+        operator=op,verifier=verifier,selection=selected,binding=bound,output_namespace=str(output),runtime_launched=False,
+        ordinary62=ordinary_ref,actual_READ3=term_ref,cap=charge_ref,
+        parent_argv=['/usr/bin/python3','-I','-B',op['path']],verifier_argv_prefix=['/usr/bin/python3','-I','-B',verifier['path']]))))
+def normal_codec_pin(roles):
+    row=roles[str(Path(D)/'ipfs_datasets_py/logic/autoformal/legal_corpus_definition_use_lake_v2.py')]
+    return (row['bytes'],row['sha256'])==(95493,'5c98152db328b75583f6c0cd181e2724ca5f7392870ec0faf1e4d870cbb76b32')
+def length_unchanged(a,b): return len(a)==len(b) and len(set(b))==len(b)==3
+
+def stage_verifier(out,verifier_ref):
+    source=read(verifier_ref).decode()
+    helper_path=Path(__file__).resolve()
+    helper_bytes=helper_path.read_bytes()
+    helper_ref=pin(helper_path,len(helper_bytes),h(helper_bytes))
+    start=source.index("selected_source=selection['current_source']")
+    stop=source.index("codec_row,=(row for row in outer_rows",start)
+    current_anchors="""
+selected_source=selection['current_source']
+owned_terminal=obj(dict(path=sys.argv[5],bytes=int(sys.argv[6]),sha256=sys.argv[7]))
+assert owned_terminal['returncode']==0 and owned_terminal['reaped'] is True
+assert owned_terminal['selection']==chosen
+assert owned_terminal.get('operator_pid',owned_terminal['pid'])==msg[0]['operator_pid']
+assert owned_terminal['stdout']==str(work/'operator.stdout')
+assert r['selection']==selection['selected_scope'] and Path(selection['output_namespace'])==work/'actual-output'
+assert Path(report_ref['path'])==work/'actual-output/complete-direct-current-R5-physical-native-report.json'
+assert r['actual_parent_lease']['lease_id'] not in r['resource_after_parent_release']['state']['leases']
+assert {(item['canonical_root'],item['mode']) for item in r['Source_leases']}=={
+     (root['root'],'read') for root in selection['project_heads']}
+assert len(r['Source_leases'])==2
+assert selection['case_profile']=='controlled-reviewed-physical-V4-direct-Native-R5/v1'
+assert r['actual_parent_lease']['cpu_slots']==12 and r['actual_parent_lease']['memory_mb']==8192 and r['actual_parent_lease']['child_process_slots']==16
+checked_enrollment={'path':__HELPER_PATH__,'bytes':__HELPER_BYTES__,'sha256':__HELPER_HASH__}
+owned_helpers={'__name__':'existing_R5_nonclock_custody_verifier'}
+exec(compile(read(checked_enrollment['path'])[1],checked_enrollment['path'],'exec'),owned_helpers) if False else None
+raw_helper=read(checked_enrollment['path'])[1]
+assert len(raw_helper)==checked_enrollment['bytes'] and h(raw_helper)==checked_enrollment['sha256']
+exec(compile(raw_helper,checked_enrollment['path'],'exec'),owned_helpers)
+source_ref,source,freeze_ref,freeze,outer,_,_,plan_ref,plan,guide_ref=owned_helpers['read_current_source']()
+ordinary_ref=selected_source['managed_ordinary62']
+ordinary_report,junit_ref=owned_helpers['verify_ordinary62'](ordinary_ref,plan,freeze,source_ref,source)
+assert selected_source['actual_current_READ3']==source_ref and selected_source['execution_freeze']==freeze_ref
+assert selected_source['last_published_guide582']==guide_ref and selected_source['ordinary62_plan']==plan_ref
+assert selected_source['ordinary62_report']==ordinary_report and selected_source['ordinary62_raw_JUnit']==junit_ref
+assert selection['project_heads']==freeze['frozen_roots']
+roots={row['root']:row for row in freeze['frozen_roots']}
+assert len(roots)==len(freeze['frozen_roots'])==2
+assert r['source_after']['Git_HEADS']=={root:row['Git_HEAD'] for root,row in roots.items()}
+index=freeze['index']
+droot=str(Path(index['path']).parent.parent)
+assert index['path']==str(Path(droot)/'.git/index')
+assert selected_source['exact_outer_epoch']==outer
+outer_rows=obj(outer)
+assert type(outer_rows) is list and len(outer_rows)==len({row['path'] for row in outer_rows})==freeze['epochs']['counts']['outer']==1611
+assert next(row for row in outer_rows if row['path']==index['path'])==index
+assert next(row for row in outer_rows if row['path']==freeze['companion_index']['path'])==freeze['companion_index']
+assert r['source_after']['records']==outer_rows
+"""
+    current_anchors=current_anchors.replace("__HELPER_PATH__",repr(helper_ref['path'])).replace("__HELPER_BYTES__",repr(helper_ref['bytes'])).replace("__HELPER_HASH__",repr(helper_ref['sha256']))
+    current_anchors=current_anchors.replace("exec(compile(read(checked_enrollment['path'])[1],checked_enrollment['path'],'exec'),owned_helpers) if False else None\n","")
+    result=source[:start]+current_anchors.lstrip()+"\n"+source[stop:]
+    for before,after in (
+        ("len(sys.argv)==5, 'owned terminal session and exact Root selection PATH/BYTES/SHA required'","len(sys.argv)==8, 'owned terminal session, exact Root selection PATH/BYTES/SHA, actual reaped terminal PATH/BYTES/SHA required'"),
+        ("schema='actual-R5-physical-v4-checked-release-retained-request-and-paired-cache-v563'","schema='actual-R5-physical-v4-checked-whole-project-current/v1'"),
+        ("current_Guide563=guide_ref,prior_ordinary53=ordinary_ref","last_published_Guide582=guide_ref,prior_managed_ordinary62=ordinary_ref,exact_owned_terminal=dict(path=sys.argv[5],bytes=int(sys.argv[6]),sha256=sys.argv[7])"),
+        ("out=work/'actual-R5-physical-v4-checked-release-retained-request-and-paired-cache-v563.json'",f"out=work/{OUTPUT!r}"),
+    ):
+        assert result.count(before)==1,before
+        result=result.replace(before,after)
+    compile(result,'existing-R5-current-six-output-closure-verifier','exec',dont_inherit=True)
+    return save(out,'verify-current-P2-six-output-R5.py',result.encode())
+
+def main():
+    assert __debug__ and len(sys.argv) in (2,5)
+    if sys.argv[1]=='--verify-nonclock':
+        a,b,c,d,e,rows,controls,f,g,guide=read_current_source()
+        assert normal_codec_pin(rows)
+        print(json.dumps(dict(READ3=a,freeze=c,outer=e,ordinary62_plan=f,last_guide=guide,
+            collector=controls['collector']['after'],epoch_rows=len(rows),dispatch=False)))
+        return
+    hand=pin(sys.argv[1],int(sys.argv[2]),sys.argv[3]); out=Path(sys.argv[4])
+    assert out.is_absolute() and not out.exists() and out.parent.resolve()==out.parent
+    assert not any(out.is_relative_to(x) for x in (Path(D),Path(A)))
+    out.mkdir(mode=0o700)
+    prepare_runtime(obj(hand),out)
+
+if __name__=='__main__':
+    main()

@@ -1,0 +1,39 @@
+import ast,hashlib,json,os,stat,subprocess,sys
+from pathlib import Path
+work=Path(__file__).resolve().parent
+base=Path(sys.argv[1])
+assert base.parent==work
+tree=ast.parse((work/'run-read3.py').read_bytes())
+exec(compile(ast.Module(body=[x for x in tree.body if isinstance(x,ast.FunctionDef) or (isinstance(x,ast.Assign) and getattr(x.targets[0],'id',None)=='policy')],type_ignores=[]),'guarded I/O helpers','exec'))
+term,b=read(base/'Root-R5-actual-parent-terminal.json')
+t=json.loads(b)
+assert t['returncode']==0 and t['reaped'] is True and t['actual_handle'] is None
+manifest,_=read(base/'launch/READY-current-R5-existing-ops-six-output-launch.json')
+m=val(manifest)
+assert t['selection']==m['selection']
+sel=t['selection']
+stage=m['verifier_argv_prefix']
+assert stage==['/usr/bin/python3','-I','-B',m['verifier']['path']]
+read(m['verifier']['path'],m['verifier']['bytes'],m['verifier']['sha256'])
+argv=stage+[sys.argv[2],sel['path'],str(sel['bytes']),sel['sha256'],term['path'],str(term['bytes']),term['sha256']]
+with (base/'verifier.stdout').open('xb') as so,(base/'verifier.stderr').open('xb') as se:
+    rc=subprocess.run(argv,stdout=so,stderr=se,check=False).returncode
+std,_=read(base/'verifier.stdout')
+err,_=read(base/'verifier.stderr')
+post={'returncode':rc,'actual_parent_terminal':term,'actual_PARENT_selection':sel,'actual_ordinary62':t['ordinary62'],
+      'detached_verifier':m['verifier'],'stdout':std,'stderr':err,'precharge':m['cap'],'fully_retained_ledger':t['fully_retained_ledger']}
+if rc==0:
+    lines=read(base/'verifier.stdout')[1].splitlines()
+    parsed=[json.loads(line) for line in lines]
+    assert parsed
+    assert len(parsed)==2
+    post['actual_verifier_closeout']=parsed[0]
+    post['detached_output_measurements']=parsed[1]
+    outputs=Path(m['output_namespace'])
+    assert not (outputs/'parent-home').exists()
+    post['custody_closed']=True
+else:
+    print(read(base/'verifier.stderr')[1].decode(errors='replace')[-3600:],flush=True)
+final=keep('Root-current-R5-detached-verifier-terminal.json',post)
+print(json.dumps(final),flush=True)
+raise SystemExit(rc)

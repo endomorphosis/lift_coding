@@ -1,0 +1,86 @@
+--- select-existing-namespaced-native2.INERT.py.DATA
++++ select-existing-namespaced-native2.INERT.v02.py.DATA
+@@ -75,10 +75,11 @@
+ assert prior_guide['Source_closed'] and prior_guide['module_closed']
+ observed_base_ref=inputs['observed_live_base']
+ observed_base=obj(observed_base_ref)
+-assert set(observed_base)=={'schema','guide580_ancestor','actual_observed_origin_main'}
+-assert observed_base['schema']=='P1-Lean-JSON-live-base-observation/v1'
+-assert observed_base['guide580_ancestor']==guide_ref
+-base=observed_base['actual_observed_origin_main']
++assert observed_base['schema']=='observed-current-main-official-V2-series-descendant-of-Guide580/v1'
++assert observed_base['previous_published_guide']==guide_ref
++assert observed_base['guide_main']==guide['live_main_after']
++assert observed_base['observed_base_is_dataset_descendant'] is True
++base=observed_base['live_main_after']
+ assert set(base)=={'datasets','hallucinate','root','accelerate'}
+ assert all(type(value) is str and re.fullmatch(r'[a-f0-9]{40}',value) for value in base.values())
+ assert base['accelerate']==guide['live_main_after']['accelerate']
+@@ -89,7 +90,9 @@
+ op_ref=controls['operator']
+ op_raw=checked(op_ref)
+ freeze,closed,read3,binding=map(obj,(freeze_ref,epoch_close_ref,read_ref,history))
++assert freeze['observed_base']==closed['observed_base']==observed_base_ref
+ assert freeze['parent']==base['datasets']==closed['prior_published_D']
++assert closed['current_A_HEAD']==base['accelerate']
+ git(D,'merge-base','--is-ancestor',guide['live_main_after']['datasets'],base['datasets'])
+ assert closed['exact_local_freeze']==read3['exact_local_freeze']==freeze_ref
+ assert read3['actual_isolated_content_epoch']==epoch_close_ref
+@@ -98,9 +101,16 @@
+ assert freeze['terminal_returncode']==0 and freeze['isolated_Source_context_closed'] and freeze['local_clean']
+ assert freeze['only_two_D_tree_entries_changed'] and not (freeze['pushed'] or freeze['shared_source_or_Git_mutation'])
+ retained_write=obj(freeze['full_charge'])
+-assert retained_write['previous_charge']==prior_guide['full_charge']
++first_write_ref=freeze['retained_first_write_charge']
++first_write=obj(first_write_ref)
++first_write_refusal_ref=freeze['retained_first_write_refusal']
++checked(first_write_refusal_ref)
++assert first_write['previous_charge']==prior_guide['full_charge']
++assert retained_write['previous_charge']==first_write_ref
++assert retained_write['prior']==first_write['after_full_retained_precharge']
+ retained_read=obj(read3['full_charge'])
+ assert retained_read['previous_charge']==freeze['full_charge'] and closed['full_charge']==read3['full_charge']
++assert retained_read['prior']==retained_write['after_full_retained_precharge']
+ roots=read3['projects']
+ for repo,row in zip((D,A),roots,strict=True):
+     assert str(repo)==row['root'] and not git(repo,'status','--porcelain=v1','-z','-uall')
+@@ -219,14 +229,32 @@
+ old_charge=ordinary_binding['full_charge']; prev=obj(old_charge)
+ auth=prev['exact_human_affirmation'];checked(auth)
+ assert auth['sha256']=='8fdf2d6c57542b3ce8e8a06773645487c39a3cb2a8a9929426cc785d3fc78dda'
+-assert prev['no_policy_capacity_or_model_change'] and prev['read3_full_retained_charge']==read3['full_charge']
+-assert retained_read['all_prior_costs_retained']
+-assert prev['prior']==dict(retained_read['after_full_retained_precharge'],captures=max(
++prior_ordinary_ref=prev['prior_closed_ordinary_full_charge']
++prior_ordinary=obj(prior_ordinary_ref)
++prior_refusal=obj(prev['retained_prior_closed_ordinary_refusal'])
++assert prior_refusal['schema']=='actual-existing-Phase1-ordinary99-prior-closed-collector-refusal/v1'
++assert prior_refusal['exact_full_retained_charge']==prior_ordinary_ref
++assert prior_refusal['inherited_first_Source_write_refusal']==first_write_refusal_ref
++assert prior_refusal['terminal_returncode']==1 and prior_refusal['Source_and_parent_and_resource_closed'] is True
++assert prior_refusal['collect_exited_nonzero'] is True
++assert prior_refusal['actual_RUN_entered'] is prior_refusal['qualification_complete'] is False
++assert prior_ordinary['prior']==dict(retained_read['after_full_retained_precharge'],captures=max(
+     retained_read['after_full_retained_precharge']['captures'],read3['actual_ledger_after']['captures']))
+-ordinary_envelope=prev['added_Source_only_envelope']
+-assert prev['after_full_retained_precharge']==dict(prev['selected'],
+-    used=prev['prior']['used']+ordinary_envelope,internal_used=prev['prior']['internal_used']+ordinary_envelope,
+-    captures=prev['prior']['captures']+1)
++assert prev['prior']==prior_ordinary['after_full_retained_precharge']
++assert all(charge['all_prior_costs_retained'] is True for charge in (first_write,retained_write,retained_read))
++for charge in (prior_ordinary,prev):
++    assert charge['no_policy_capacity_or_model_change'] is True
++    assert charge['exact_human_affirmation']==auth
++    assert charge['read3_full_retained_charge']==read3['full_charge']
++    assert charge['retained_first_write_charge']==first_write_ref
++    assert charge['retained_first_write_refusal']==first_write_refusal_ref
++    ordinary_envelope=charge['added_Source_only_envelope']
++    assert ordinary_envelope==134217728
++    assert charge['selected']==dict(charge['prior'],global_cap=charge['prior']['global_cap']+ordinary_envelope,
++        internal_cap=charge['prior']['internal_cap']+ordinary_envelope)
++    assert charge['after_full_retained_precharge']==dict(charge['selected'],
++        used=charge['prior']['used']+ordinary_envelope,internal_used=charge['prior']['internal_used']+ordinary_envelope,
++        captures=charge['prior']['captures']+1)
+ prior=prev['after_full_retained_precharge']
+ assert all(prior[k]>=read3['actual_ledger_after'][k] for k in ('used','internal_used'))
+ allowance=33554432

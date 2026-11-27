@@ -1,0 +1,103 @@
+import ast,hashlib,json,os,stat,subprocess,time
+from pathlib import Path
+base=Path(__file__).resolve().parent
+tree=ast.parse(Path('/tmp/Root-P2-whole-component-managed-R5-n8Fkdm2q/run-read3.py').read_bytes())
+exec(compile(ast.Module(body=[x for x in tree.body if isinstance(x,ast.FunctionDef) or (isinstance(x,ast.Assign) and getattr(x.targets[0],'id',None)=='policy')],type_ignores=[]),'guarded I/O helpers','exec'))
+tree=ast.parse((base/'run-source2.py').read_bytes())
+exec(compile(ast.Module(body=[x for x in tree.body if (isinstance(x,ast.FunctionDef) and x.name=='ack') or (isinstance(x,ast.Assign) and getattr(x.targets[0],'id',None)=='status')],type_ignores=[]),'owner status helper','exec'))
+stage,_=read(base/'guide583-terminal.json')
+stage_term=val(stage)
+assert stage_term['returncode']==0 and stage_term['actual_handle'] is None
+docs_ref=stage_term['closed_docs']
+docs=val(docs_ref)
+assert all(docs[k] for k in ('Source_closed','module_closed','write_complete','only_four_Git_changes','exact_forward_and_inverse_verified'))
+assert docs['terminal_returncode']==0
+qref=stage_term['ordinary']
+q=val(qref)
+assert q['qualification_complete'] and q['Source_closed'] and q['resource_cleanup_confirmed'] and q['actual_ordinary_counts']['passed']==13
+assert docs['ordinary_qualification']==qref and docs['qualified_code_before_docs']==q['exact_local_freeze']
+previous={'path':'/tmp/result-cache-existing-guide582-compose-QvKKkYWq/combined-publication/READY-guide582-combined-code-and-docs-parent-pins.json','bytes':4423,'sha256':'ae541d6c45efa5e5fdf5bd044699a1488cba96b624e3db80b98a943540b4cece'}
+urls=val(previous)['urls']
+env=os.environ|{'GIT_OPTIONAL_LOCKS':'0','GIT_NO_LAZY_FETCH':'1','GIT_TERMINAL_PROMPT':'0'}
+def call(*args,timeout=45):
+    return subprocess.run(['/usr/bin/git',*args],env=env,capture_output=True,timeout=timeout)
+def observe():
+    out={}
+    for name,url in urls.items():
+        r=call('ls-remote','--exit-code',url,'refs/heads/main')
+        assert r.returncode==0,name
+        oid,branch=r.stdout.decode().strip().split()
+        assert branch=='refs/heads/main' and len(oid)==40
+        out[name]=oid
+    return out
+heads=observe()
+assert heads['datasets']=='937ad474d2d8650e3ccee16c10319a9c72d4429a' and heads['accelerate']=='fae7981fa576817536a3c7aa62c5d28dc417f214'
+origin=keep('Guide583-fresh-origin-before-parent-pins.json',{'heads':heads,'utc_ns':time.time_ns(),'direct_read_only':True})
+binder=Path('/tmp/P1-existing-guide583-compose-INERT-mXQQ8I/prepare-combined-guide583-pins.py.DATA')
+read(binder,10310,'fc7c8e9e9900442d0408b411b1299111f5942c8c9df61de8999e4d3050f8a8f5')
+pins=subprocess.run(['/usr/bin/python3','-I','-B',str(binder),docs_ref['path'],str(docs_ref['bytes']),docs_ref['sha256'],
+    origin['path'],str(origin['bytes']),origin['sha256'],str(binder.parent/'guide583-parent-pins-isolated')],
+    capture_output=True,env=env,timeout=70)
+if pins.returncode:
+    fail=keep('Guide583-parent-pin-preflight-refusal.json',{'returncode':pins.returncode,'stderr':pins.stderr.decode(),'origin':origin,'push_attempted':False})
+    print(pins.stderr.decode(),json.dumps(fail),flush=True)
+    raise SystemExit(pins.returncode)
+pref=json.loads(pins.stdout)
+p=val(pref)
+assert p['base_origin_main']==heads and p['urls']==urls and p['actual_ordinary_qualification']==qref and p['actual_closed_document_freeze']==docs_ref
+assert p['prepared_origin_main']['datasets']==docs['HEAD'] and not p['pushed'] and not p['accelerate_changed']
+assert p['planned_normal_ff_order']==['datasets','hallucinate','root']
+def local(role,*args,timeout=90):
+    return call('--git-dir='+p['isolated_git_dir'][role],*p['git_arguments_preserve_bounded_pack_settings'],*args,timeout=timeout)
+assert observe()==heads
+window=keep('Guide583-normal-FF-publication-window.json',{'owner':'Root','ordinary13':qref,'prepared':pref,
+ 'all_origin_main_before':heads,'normal_fast_forward_only':True,'utc_ns':time.time_ns()})
+wanted=p['prepared_origin_main']
+before=heads.copy()
+ack('Guide583_normal_fast_forward_publication_running',publication_window=window)
+steps=[]
+for role in p['planned_normal_ff_order']:
+    assert observe()==before,('main changed before normal push',role)
+    after=wanted[role]
+    assert local(role,'merge-base','--is-ancestor',before[role],after).returncode==0
+    rev=local(role,'rev-parse',after+'^{tree}',after+('^^' if role=='datasets' else '^'))
+    assert rev.returncode==0 and rev.stdout.decode().splitlines()==[p['candidate_trees'][role],before[role]]
+    cmd=local(role,'push','--porcelain',p['urls'][role],after+':refs/heads/main',timeout=120)
+    step=keep('Guide583-push-'+role+'.json',{'role':role,'before':before[role],'after':after,'returncode':cmd.returncode,
+        'stdout':cmd.stdout.decode(errors='replace'),'stderr':cmd.stderr.decode(errors='replace'),'normal_fast_forward':True})
+    steps.append(step)
+    if cmd.returncode:
+        ack('Guide583_normal_fast_forward_terminal_refusal',publication_completed_steps=steps,actual_origin_after=observe())
+        print(json.dumps(step),flush=True)
+        raise SystemExit(cmd.returncode)
+    before[role]=after
+    assert observe()==before
+assert before==wanted
+for role in ('hallucinate','root'):
+    for rel,expected in p['gitlink_after'][role].items():
+        x=local(role,'ls-tree',wanted[role],'--',rel)
+        assert x.returncode==0 and x.stdout.decode().split()[:3]==expected
+for rel,expected in (p['root_archive_preserved']|p['retained_archives']).items():
+    x=local('root','ls-tree','-d',wanted['root'],'--',rel)
+    assert x.returncode==0 and x.stdout.decode().split()[:3]==expected
+assert observe()==wanted
+for root,h in ((base/'datasets',wanted['datasets']),(Path('/tmp/Root-result-cache-owned-existing-route-L4Wyme59/accelerate'),wanted['accelerate'])):
+    args=['--no-optional-locks','-C',str(root)]
+    current=call(*args,'rev-parse','HEAD')
+    assert current.returncode==0 and current.stdout.decode().strip()==h
+    assert call(*args,'status','--porcelain=v1','--untracked-files=all').stdout==b''
+for idx in (docs['index'],docs['A_index']):
+    path=Path(idx['path'])
+    assert full9(path.lstat())==idx['full9']
+    read(path,idx['bytes'],idx['sha256'])
+result=keep('actual-P1-reload-filename-Source2-READ4-ordinary13-Guide583-publication.json',{
+    'owner':'Root','terminal_returncode':0,'scope':'Phase1 direct proof-cache reload filename binding and Guide583',
+    'qualification':qref,'counts':q['actual_ordinary_counts'],'functions':q['test_functions'],
+    'exact_Source2':q['source2_terminal'],'exact_READ4':q['actual_closed_READ4'],'exact_local_code_freeze':q['exact_local_freeze'],
+    'exact_Guide583_closed':docs_ref,'maintained_guide_terminal':stage,'parent_pin_preparation':pref,
+    'normal_fast_forward_steps':steps,'fresh_origin_main':wanted,'prior_origin_main':heads,
+    'all_gitlinks_verified':p['gitlink_after'],'all_archives_preserved':p['root_archive_preserved']|p['retained_archives'],
+    'previous_guide_values':docs['prior_values_preserved'],'fully_retained_ledger':stage_term['fully_retained_ledger'],
+    'runtime_caps_unchanged':True,'P1_Native_qualification':False,'live_handles':None})
+ack('closed_qualified_published_Guide583',Source_handle=None,ordinary_handle=None,publication=result,actual_origin_after=wanted)
+print(json.dumps(result),flush=True)

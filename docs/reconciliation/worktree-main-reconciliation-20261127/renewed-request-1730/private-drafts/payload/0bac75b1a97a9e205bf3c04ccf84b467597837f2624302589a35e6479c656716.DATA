@@ -1,0 +1,361 @@
+"""Validate current inputs and stage the existing translated-cache Native2 operator."""
+import ast
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import stat
+import subprocess
+import sys
+import time
+
+HERE = Path(__file__).resolve().parent
+LANE = Path('/tmp/Root-P1-Guide583-Native2-exact-current-owXwGME8')
+D = LANE/'datasets'
+A = Path('/tmp/Root-result-cache-owned-existing-route-L4Wyme59/accelerate')
+Q = Path('/tmp/Root-P1-cache-reload-owned-existing-route-wK9s5mUF')
+HIST = Path('/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put')
+TEMPLATES = Path('/tmp/P1-persist-before-index-Native2-repin-INERT-x73eyygv')
+BASE = '73660a6f7e3f1d091829c71daa04cc1f5651410b'
+A_HEAD = 'fae7981fa576817536a3c7aa62c5d28dc417f214'
+PROFILE = 'P1-native-cache-controlled-translation/v1'
+OWNER = 'ipfs_datasets_py/logic/legal_ir/proof_cache.py'
+UNIT = 'tests/unit/logic/legal_ir/test_proof_cache.py'
+TEST = 'tests/integration/logic/backends/test_kernel_backends.py'
+LEAN = 'ipfs_datasets_py/logic/backends/kernel/lean.py'
+INDEX = '.git/index'
+FIELDS = ('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
+POST = {
+    OWNER: (62998, '744148b296cfc60656a199847fa1136dc72e28e7b79e0415fd1a069f09605c97','a171ee9794439540c924a2288e4ebb9262a2c859'),
+    UNIT: (108929, '5dd25588275d79434a28780370a65fb32a1d93dd9d01656f8a78d00328be769b','91abcac246b2f30d9554d88d74ded0b54b1f34ed'),
+    TEST: (135080, '5f4b3c5e6ae4e27676b0b99df368cf8ae32b6ebd5ffce7cfc8f7955435e5a80a','6ada487237ea2e85c4ba19ea6b723ab6c8db3a77'),
+    LEAN: (105071, 'a36a8ae2c304dc439e6bf32d1a0481b5fc8dab592e26a7dae40cda0a28b8a274','232b6a719aeedd9a18e40f3697afc78315430263'),
+}
+PRE_TEST = (135080,'975021fb2701a78ba7159952cd141d9c5f2ad3595b9c6368dc5b59b656eaa9f1')
+PRE_UNIT = '1d0e6bdb9da812904bc0b812385d1aa5b68267f1084a6fcf379652a05104b460'
+ALLOWANCE = 160*1024**2
+GIT_ENV = os.environ | {'GIT_OPTIONAL_LOCKS':'0','GIT_NO_LAZY_FETCH':'1','GIT_TERMINAL_PROMPT':'0'}
+for name in ('GIT_DIR','GIT_WORK_TREE','GIT_INDEX_FILE','GIT_ALTERNATE_OBJECT_DIRECTORIES','GIT_COMMON_DIR'):
+    GIT_ENV.pop(name,None)
+GIT = ('/usr/bin/git','-c','index.threads=1','-c','core.preloadIndex=false','-c','core.fsmonitor=false',
+       '-c','core.packedGitLimit=16m','-c','core.packedGitWindowSize=1m')
+
+def ref(path,size,sha):
+    return dict(path=str(path),bytes=int(size),sha256=sha)
+
+def small(row):
+    return {k:row[k] for k in ('path','bytes','sha256')}
+
+def role(row):
+    return small(row)|{'full9':row['full9']}
+
+def digest(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+def blob(raw):
+    return hashlib.sha1(f'blob {len(raw)}\x00'.encode()+raw).hexdigest()
+
+def stamp(one):
+    return {k:str(getattr(one,k)) for k in FIELDS}
+
+def read(pin):
+    p,n,h=Path(pin['path']),pin['bytes'],pin['sha256']
+    assert p.is_absolute() and p.resolve()==p and type(n) is int and 0<=n<=32*1024**2 and re.fullmatch('[0-9a-f]{64}',h)
+    info=p.lstat()
+    assert stat.S_ISREG(info.st_mode) and info.st_nlink==1 and info.st_size==n
+    with os.fdopen(os.open(p,os.O_RDONLY|os.O_NOFOLLOW),'rb') as stream:
+        assert stamp(os.fstat(stream.fileno()))==stamp(info)
+        raw=stream.read(n+1)
+        assert stamp(os.fstat(stream.fileno()))==stamp(info)==stamp(p.lstat())
+    assert (len(raw),digest(raw))==(n,h),str(p)
+    return raw
+
+def data(pin):
+    return json.loads(read(pin))
+
+def seal(name,value):
+    p=HERE/name
+    raw=value if isinstance(value,bytes) else (json.dumps(value,sort_keys=True,indent=2)+'\n').encode()
+    with os.fdopen(os.open(p,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400),'wb') as stream:
+        stream.write(raw)
+        stream.flush()
+        os.fsync(stream.fileno())
+    pin=ref(p,len(raw),digest(raw))
+    assert read(pin)==raw
+    return pin
+
+def git(root,*args):
+    raw=subprocess.run([*GIT,'-C',str(root),*args],env=GIT_ENV,check=True,capture_output=True,timeout=40).stdout
+    assert len(raw)<=1024**2
+    return raw
+
+def rev(root,expression):
+    return git(root,'rev-parse',expression).decode().strip()
+
+def named_rows(pin):
+    records=data(pin)
+    records=records['rows'] if isinstance(records,dict) else records
+    index={r['path']:r for r in records}
+    assert records and len(index)==len(records)
+    return index
+
+def functions(raw):
+    return [ast.dump(n) for n in ast.parse(raw).body if isinstance(n,(ast.FunctionDef,ast.ClassDef))]
+
+GUIDE=ref(Q/'actual-P1-reload-filename-Source2-READ4-ordinary13-Guide583-publication.json',4923,'5171ea1f895771d6552f484461e708cce80dde8de2963039348801bc01a58834')
+ORDINARY=ref(Q/'ordinary13-first/actual-ordinary13-qualified.json',2571,'9fdd726486d8ca371573dcb92083765b2eeb5c424602deeec5adbb5fb0d64235')
+CONTROLS=ref(TEMPLATES/'READY-existing-Native2-persist-before-index-repin-INERT.json',23272,'4bed8efe01491df66d452d3ee4ce07560a9da79ea1f2fe662b46ccf81ed18ad7')
+HISTORY=ref(HIST/'Root-current-existing-translated-cache-Native2-binding-v02.json',30017,'ed5da76ac7aa69e7a358277406d75b11cfd4cfbd54273e6ac486a2071003a0a1')
+PRIOR_NATIVE=ref(HIST/'actual-Phase1-cache-atomic-put-native-translated-proof-cache-closed.json',7608,'e9c514309530265844294bf24c8266af7606fdb819a406417925c321f993eee1')
+GENERATION=ref('/tmp/P1-native-translated-cache-input-private-yI6YGH/actual-generation.stdout.json',44719,'cd35151537fdef8e6fcf621cf66382e806dd11eac93704965a2acff9c4e29f5c')
+
+def adapted_controls(ctrl):
+    assert ctrl['native_case_profile']==PROFILE and ctrl['reuse_native_commands']==0
+    assert ctrl['actual_parent_resource_profile']==dict(cpu_slots=1,memory_mb=8192,child_process_slots=1,requires_gpu=False)
+    assert ctrl['predicted_sdk_events']==[dict(argv_tail=tail,expected_rc=0,index=i,program='Lean4')
+        for i,tail in enumerate((['--version'],['--json','Main.lean'],['--json','Main.lean']))]
+    old_fixture,old_test=ctrl['owning_cache_support_fixture'], ctrl['owning_test_post']
+    replacements=((old_test['sha256'],POST[TEST][1]),(str(old_test['bytes']),str(POST[TEST][0])),
+                  (old_fixture['sha256'],POST[UNIT][1]))
+    def patch(raw,changes):
+        for old,new in changes:
+            assert raw.count(old.encode())==1,old
+            raw=raw.replace(old.encode(),new.encode())
+        return raw
+    old_binder=read(ctrl['binder'])
+    binder=patch(old_binder,replacements)
+    assert functions(old_binder)==functions(binder)
+    assert len(old_binder)==len(binder)==ctrl['binder']['bytes']
+    more=((str(old_fixture['bytes']),str(POST[UNIT][0])),
+          (ctrl['SDK_source_pins']['ipfs_datasets_py.logic.backends.kernel.lean'][1],POST[LEAN][1]),
+          (ctrl['owning_product_source']['sha256'],POST[OWNER][1]),(ctrl['binder']['sha256'],digest(binder)))
+    original=read(ctrl['operator'])
+    operator=patch(original,replacements+more)
+    assert patch(operator,tuple((n,o) for o,n in replacements+more))==original
+    compile(binder,'<existing translated-cache binder>','exec',dont_inherit=True)
+    compile(operator,'<existing translated-cache parent>','exec',dont_inherit=True)
+    return binder,operator
+
+def reconcile(input_pin):
+    h=data(input_pin)
+    assert set(h)=={'guide_publication','ordinary13','source1_terminal','freeze','read_close','outer_epoch','python_epoch','raw_captures'}
+    assert h['guide_publication']==GUIDE and h['ordinary13']==ORDINARY
+    guide,ordinary,terminal,freeze,close=(data(h[key]) for key in ('guide_publication','ordinary13','source1_terminal','freeze','read_close'))
+    assert guide['terminal_returncode']==0 and guide['fresh_origin_main']['datasets']==BASE
+    assert guide['fresh_origin_main']['accelerate']==A_HEAD and guide['qualification']==ORDINARY
+    assert guide['P1_Native_qualification'] is False and guide['live_handles'] is None
+    docs=data(guide['exact_Guide583_closed'])
+    assert docs['HEAD']==BASE and docs['terminal_returncode']==0
+    assert all(docs[k] is True for k in ('Source_closed','module_closed','write_complete'))
+    assert ordinary['terminal_returncode']==0 and ordinary['test_functions']==8
+    assert all(ordinary[k] is True for k in ('qualification_complete','Source_closed','resource_cleanup_confirmed','Source_Ast_Code_and_order_verified'))
+    assert ordinary['actual_ordinary_counts']==dict(tests=13,passed=13,failures=0,errors=0,skipped=0,retained=10,added=3)
+    assert guide['exact_local_code_freeze']==ordinary['exact_local_freeze'] and guide['exact_READ4']==ordinary['actual_closed_READ4']
+    qfreeze=data(ordinary['exact_local_freeze'])
+    assert set(qfreeze['committed'])=={OWNER,UNIT} and rev(D,BASE+'^')==qfreeze['frozen']['HEAD']
+    for relative in (OWNER,UNIT):
+        assert tuple(qfreeze['committed'][relative][k] for k in ('bytes','sha256','committed_blob'))==POST[relative]
+    report=data(ordinary['actual_report'])
+    assert all(report[k] is True for k in ('Source_closed','qualification_complete','resource_cleanup_confirmed',
+                                          'software_sequence_accepted','actual_parent_release_return'))
+    assert not report['errors']
+    qp=report['git_candidate_provenance']
+    assert qp['HEAD']==qfreeze['frozen']['HEAD'] and qp['actual_closed_Source_READ']==ordinary['actual_closed_READ4']
+    qterm=data(ordinary['actual_terminal'])
+    assert qterm['returncode']==0 and qterm['report']==ordinary['actual_report']
+    read(ordinary['ordinary_raw_JUnit'])
+
+    assert terminal['returncode']==0 and terminal['closed_write']==freeze['source_closed']
+    assert all(terminal[k] is True for k in ('Source_closed','module_closed','write_complete'))
+    write=data(terminal['closed_write'])
+    assert all(write[k] is True for k in ('Source_closed','module_closed','write_complete')) and not write['errors']
+    if 'Source_contexts' in write:
+        assert {(r['root'],r['mode']) for r in write['Source_contexts']}=={(str(D),'write'),(str(A),'read')}
+        assert len(write['Source_contexts'])==2 and all(r['entered'] and r['exit_returned'] for r in write['Source_contexts'])
+    assert freeze['local_clean'] is freeze['exact_changes_only'] is True and freeze['pushed'] is False
+    assert set(freeze['committed'])=={TEST} and rev(D,'HEAD^')==BASE
+    assert git(D,'diff-tree','--no-commit-id','-r','--no-renames','--name-only','-z',BASE,'HEAD')==TEST.encode()+b'\0'
+    assert close['status']=='PASS' and not close['errors']
+    assert close['Source_closed'] is close['owned_module_closed'] is True
+    assert close['SDK_Native_compiler_or_project_execution'] is False
+    current=close['roots_after']
+    assert current==close['roots_before'] and set(current)=={str(D),str(A)}
+    projects=[]
+    for root in (D,A):
+        host=current[str(root)]
+        assert host['clean_worktree_and_index'] and (host['HEAD'],host['tree'])==(rev(root,'HEAD'),rev(root,'HEAD^{tree}'))
+        assert not git(root,'status','--porcelain=v1','-z','-uall')
+        projects.append(dict(root=str(root),Git_HEAD=host['HEAD'],Git_tree=host['tree']))
+    assert projects==freeze['frozen_roots'] and projects[1]['Git_HEAD']==A_HEAD
+    assert (projects[0]['Git_HEAD'],projects[0]['Git_tree'])==(freeze['frozen']['HEAD'],freeze['frozen']['tree'])
+
+    outer,python=(named_rows(h[k]) for k in ('outer_epoch','python_epoch'))
+    assert set(python)=={path for path in outer if path.endswith('.py')}
+    assert all(role(r)==role(outer[p]) for p,r in python.items())
+    for path,row in outer.items():
+        file=Path(path)
+        assert file.resolve()==file and any(file.is_relative_to(root) for root in (D,A))
+        sha=row.get('sha256')
+        assert (isinstance(sha,str) and re.fullmatch('[0-9a-f]{64}',sha)) or (
+            sha is None and file.name!='index' and any(file.is_relative_to(root/'.git') for root in (D,A)))
+        info=file.lstat()
+        assert stat.S_ISREG(info.st_mode) and info.st_nlink==1 and info.st_size==row['bytes'] and stamp(info)==row['full9'],path
+    assert role(outer[str(A/INDEX)])==role(docs['A_index'])
+    assert role(outer[str(D/INDEX)])==role(freeze['frozen']['stage0_index'])
+    for relative,row in docs['committed_docs'].items():
+        observed=outer[str(D/relative)]
+        assert (observed['bytes'],observed['sha256'])==(row['bytes'],row['sha256'])
+        assert rev(D,'HEAD:'+relative)==rev(D,BASE+':'+relative)==row['committed_blob']
+    raw_pins=h['raw_captures']
+    assert set(raw_pins)=={TEST,UNIT,OWNER,INDEX}
+    captures={row['path']:row for row in close['captures']}
+    assert len(captures)==len(close['captures'])==4 and set(captures)=={str(D/p) for p in raw_pins}
+    actual={}
+    for relative,pin in raw_pins.items():
+        capture=captures[str(D/relative)]
+        assert small(pin)==small(capture['raw_reference'])
+        assert role(capture)==role(outer[str(D/relative)])
+        raw=read(pin)
+        assert (len(raw),digest(raw))==(capture['bytes'],capture['sha256'])
+        if relative!=INDEX:
+            assert (len(raw),digest(raw),blob(raw))==POST[relative]
+            assert rev(D,'HEAD:'+relative)==POST[relative][2]
+            assert git(D,'ls-files','--stage','-z','--',relative)==f'100644 {POST[relative][2]} 0\t{relative}\0'.encode()
+        actual[relative]=raw
+    installed,=write['installed']
+    item=freeze['committed'][TEST]
+    assert role(installed)==role(item)==role(captures[str(D/TEST)])
+    assert item['committed_blob']==POST[TEST][2] and item['mode']=='100644' and item['stage0_matches'] and item['raw_bytes_bound']
+    before=git(D,'cat-file','blob',BASE+':'+TEST)
+    old,new=(f'_NATIVE_PROOF_CACHE_FIXTURE_SHA256 = "{sha}"'.encode() for sha in (PRE_UNIT,POST[UNIT][1]))
+    assert (len(before),digest(before))==PRE_TEST and before.count(old)==1
+    assert before.replace(old,new)==actual[TEST] and functions(before)==functions(actual[TEST])
+    for relative in (OWNER,UNIT,LEAN):
+        assert rev(D,'HEAD:'+relative)==rev(D,BASE+':'+relative)==POST[relative][2]
+
+    ctrl,history=data(CONTROLS),data(HISTORY)
+    pins={key:[relative,POST[relative][1] if relative in (LEAN,OWNER) else sha]
+          for key,(relative,sha) in ctrl['SDK_source_pins'].items()}
+    assert len(pins)==8
+    for relative,sha in pins.values():
+        row=outer[str(D/relative)]
+        assert row['sha256']==sha
+        raw=git(D,'cat-file','blob','HEAD:'+relative)
+        assert (len(raw),digest(raw))==(row['bytes'],sha)
+    protocol=history['current_protocol_raw_source']
+    assert len(read(protocol))==57510 and protocol['sha256']==outer[str(D/'ipfs_datasets_py/logic/ir_core/protocols.py')]['sha256']
+    read(history['Source42_raw'])
+    generation=data(GENERATION)
+    assert generation['proof_setup_only'] is True and generation['native_Lean_executed'] is False
+    assert generation['generated']['theorem_identity']['statement']=='True'
+    read(PRIOR_NATIVE)
+    host=data(history['native_asset_content_review'])
+    assert host['complete'] and host['all8_asset_FDs_closed'] and not host['errors']
+    assert len(history['Native'])==len(host['assets'])==8
+    for row in history['Native']:
+        p=Path(row['path'])
+        first=p.lstat()
+        assert stat.S_ISREG(first.st_mode) and first.st_nlink==1 and first.st_size==row['bytes']
+        fd=os.open(p,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK)
+        try:
+            assert stamp(first)==stamp(os.fstat(fd))==stamp(p.lstat())==row['actual_full9']
+        finally:
+            os.close(fd)
+    namespaces=[]
+    prior_root=Path(history['PROJECTS'][0]['root'])
+    for row in history['normal_namespaces']:
+        p=D/Path(row['path']).relative_to(prior_root)
+        init=p/'__init__.py'
+        info=p.lstat()
+        assert stat.S_ISDIR(info.st_mode) and not os.path.lexists(init)
+        fd=os.open(p,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
+        try:
+            assert stamp(info)==stamp(os.fstat(fd))==stamp(p.lstat()) and not os.path.lexists(init)
+        finally:
+            os.close(fd)
+        namespaces.append(dict(row,path=str(p),initializer_path=str(init),full9=stamp(info),device=info.st_dev,inode=info.st_ino,FD_closed=True))
+    assert len(namespaces)==3
+    binder,template=adapted_controls(ctrl)
+    return dict(h=h,guide=guide,terminal=terminal,close=close,outer=outer,python=python,projects=projects,
+                history=history,pins=pins,namespaces=namespaces,binder=binder,template=template)
+
+def stage(input_pin,selection_pin,v):
+    selection=data(selection_pin)
+    assert set(selection)=={'Root_selected','case_profile','input_tuple','clock_scope','full_charge','current_resource_state','output_namespace'}
+    assert selection['Root_selected'] is True and selection['case_profile']==PROFILE and selection['input_tuple']==input_pin
+    clock=selection['clock_scope']
+    start,stop=(clock[k] for k in ('not_before_utc_ns','submit_deadline_utc_ns'))
+    assert type(start) is int and type(stop) is int and 0<stop-start<=180_000_000_000
+    assert start<=time.time_ns()<stop
+    output=Path(selection['output_namespace'])
+    assert output.parent==LANE and output!=D and not os.path.lexists(output)
+    charge=data(selection['full_charge'])
+    assert charge['all_prior_costs_retained'] is charge['resource_policy_capacity_unchanged'] is True
+    assert charge['physical_IO_accounting_complete'] is False and charge['added_Source_only_envelope']==ALLOWANCE
+    previous=data(charge['previous_charge'])
+    previous_cutoff=previous.get('fully_retained_ledger') or previous.get('after_full_retained_precharge') or previous['after_full_precharge']
+    prior,chosen,after=(charge[k] for k in ('prior','selected','after_full_retained_precharge'))
+    assert prior==previous_cutoff
+    for retained in (v['guide']['fully_retained_ledger'],v['terminal']['fully_retained_ledger'],v['close']['ledger_after']):
+        assert all(prior[k]>=retained[k] for k in ('used','internal_used','captures'))
+    assert all(chosen[k]==prior[k] for k in ('used','internal_used','captures','capturesComplete'))
+    assert chosen['global_cap']-prior['global_cap']==chosen['internal_cap']-prior['internal_cap'] in (0,ALLOWANCE)
+    assert after==dict(chosen,used=chosen['used']+ALLOWANCE,internal_used=chosen['internal_used']+ALLOWANCE,
+                       captures=chosen['captures']+1)
+    assert after['used']<=after['global_cap'] and after['internal_used']<=after['internal_cap']
+    assert digest(read(charge['exact_human_affirmation']))=='8fdf2d6c57542b3ce8e8a06773645487c39a3cb2a8a9929426cc785d3fc78dda'
+    history,h,outer=v['history'],v['h'],v['outer']
+    resource=history['resource']
+    state_pin=selection['current_resource_state']
+    assert state_pin['path']==resource['state_path'] and state_pin['bytes']<65536
+    state=data(state_pin)
+    assert state['config']==resource['expected_config'] and state['child_process_capacity']==resource['expected_capacity']
+    assert resource['expected_capacity']['base_config_sha256']==resource['expected_policy_sha256']
+    binder=seal('existing-translated-cache-current-binder.py.DATA',v['binder'])
+    source_epoch=h['outer_epoch']
+    if isinstance(data(source_epoch),dict):
+        source_epoch=seal('native2-existing-operator-outer-epoch.json',list(outer.values()))
+    binding=dict(history,native_case_profile=PROFILE,Root_selection=selection_pin['path'],W_INDEX=role(outer[str(D/INDEX)]),
+        PROJECTS=v['projects'],Source_epoch=source_epoch,clock_scope=clock,binder_raw=binder,
+        normal_namespaces=v['namespaces'],current_SDK_source_pins=v['pins'],owning_test_raw=h['raw_captures'][TEST],
+        owning_test_record=role(outer[str(D/TEST)]),current_D_config=dict(status='config not a selected read role'),
+        Source_composition_proof=dict(current_prepared_scope=h['read_close'],exact_current_freeze=h['freeze'],
+            prior_direct_runtime=HISTORY,current_translated_emitter_and_cache_roles_in_epoch=True,
+            current_proof_protocol_owner_binding=role(outer[str(D/'ipfs_datasets_py/logic/ir_core/protocols.py')])),
+        Source42_current_owner_binding=dict(existing_Source42_binding_verified=True,current_published_parent=GUIDE,
+            current_read_guard_pair=v['projects'],actual_index_and_targets_READ4=h['read_close']),
+        Native_enrollment=dict(history['Native_enrollment'],Root_selection=selection_pin,case_profile=PROFILE,
+            current_toolchain_assets_exact=True,current_resource_state_observation=state_pin,clock_scope=clock,
+            authority='Root selected this exact admitted validation invocation'),
+        Source_IO_allocation=dict(history['Source_IO_allocation'],debit_bytes=ALLOWANCE,
+            explicit_ledger_increase_and_charge_reference=selection['full_charge'],additional_private_readback_upper=32*1024**2),
+        live_bindings_currently_unbound=False)
+    bound=seal('Root-current-existing-translated-cache-Native2-binding.json',binding)
+    slots=dict(W=f'Path({str(D)!r})',A=f'Path({str(A)!r})',RUN_OUTPUT=f'Path({str(output)!r})',
+        PATH_SCOPE=repr('/home/barberb/.local/bin:/usr/lib/git-core'),
+        ROOT_SELECTION=repr(selection_pin['path']),CURRENT_BINDING_REF=repr(bound))
+    template=v['template'].decode()
+    for name,value in slots.items():
+        template,count=re.subn(rf'(?m)^{name} = None$',lambda _:f'{name} = {value}',template)
+        assert count==1
+    compile(template,'<existing admitted translated cache Native2>','exec',dont_inherit=True)
+    operator=seal('Root-selected-existing-translated-cache-Native2-operator.py',template.encode())
+    assert start<=time.time_ns()<stop
+    return seal('READY-current-Native2-staged-operator.json',
+        dict(input_tuple=input_pin,selection=selection_pin,binding=bound,operator=operator,binder=binder,
+             run_argv=['/usr/bin/python3','-I','-B',operator['path']],output_namespace=str(output),SDK_or_Native_dispatched=False))
+
+def main():
+    action,path,n,sha,*late=sys.argv[1:]
+    assert (action=='verify-nonclock' and not late) or (action=='stage' and len(late)==3)
+    input_pin=ref(path,n,sha)
+    verified=reconcile(input_pin)
+    result=(stage(input_pin,ref(*late),verified) if late else
+        dict(D=verified['projects'][0]['Git_HEAD'],A=A_HEAD,outer=len(verified['outer']),
+            Python=len(verified['python']),supported_live_roles=len(verified['pins']),Native_selected=False))
+    print(json.dumps(result,sort_keys=True))
+
+if __name__=='__main__':
+    assert __debug__
+    main()

@@ -1,0 +1,141 @@
+"""Materialize only the private current-base D checkout and collect nonclock role identities."""
+from collections import defaultdict
+import hashlib
+import json
+import os
+from pathlib import Path
+import stat
+import subprocess
+
+BASE=Path(__file__).resolve().parent
+D=BASE/'datasets'
+PRIOR=Path('/tmp/Root-result-cache-owned-existing-route-L4Wyme59')
+A=PRIOR/'accelerate'
+P1=Path('/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put')
+OLD_D=P1.parent/'datasets'
+OLD_A=Path('/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate')
+HEADS={'datasets':'937ad474d2d8650e3ccee16c10319a9c72d4429a','accelerate':'fae7981fa576817536a3c7aa62c5d28dc417f214'}
+TREES={'datasets':'12155c759db48366d21555b1539f89b2f5b29214','accelerate':'70e66c5b1f5d2438eab0b18e45687b98613f5416'}
+SEEDS=(
+    (PRIOR/'current-frozen-full9-hash-epoch.json',922486,'d5bebc252d1bf5cca22f4a9d3730c3fae14a5cb8f36d765509987c2b6c1508c8','rows'),
+    (P1/'actual-isolated-1625-named-metadata-guard.json',907991,'94a95a51b26600dbbe0d940457af87e673c6fb147e9dccb99b5b65209751b79e','rows'),
+    (P1/'actual-live-reconciled-outer1618-epoch.json',852469,'a250df914df7b03b8362891c3013cce373e2a65e7a083a1f1521d7e9279b165d',None),
+    (P1/'actual-live-reconciled-Python1605-epoch.json',845899,'bf7a6ba977ede10974c16d506304f67492e14b168dff1d9651d1d465d24c7934',None),
+)
+TARGETS=('ipfs_datasets_py/logic/legal_ir/proof_cache.py','tests/unit/logic/legal_ir/test_proof_cache.py')
+FENCES=('ipfs_datasets_py/logic/backends/kernel/lean.py','tests/integration/logic/backends/test_kernel_backends.py',
+        'ipfs_datasets_py/logic/backends/process.py')
+E=os.environ|{'GIT_NO_LAZY_FETCH':'1','GIT_OPTIONAL_LOCKS':'0','GIT_TERMINAL_PROMPT':'0'}
+for key in ('GIT_DIR','GIT_WORK_TREE','GIT_INDEX_FILE','GIT_COMMON_DIR','GIT_ALTERNATE_OBJECT_DIRECTORIES'):
+    E.pop(key,None)
+FLAGS=['-c','index.threads=1','-c','core.preloadIndex=false','-c','core.fsmonitor=false',
+       '-c','core.packedGitLimit=16m','-c','core.packedGitWindowSize=1m']
+sha=lambda b:hashlib.sha256(b).hexdigest()
+F9=('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
+
+def git(path,*args,raw=None):
+    return subprocess.run(['/usr/bin/git',*FLAGS,'-C',str(path),*args],env=E,input=raw,
+         check=True,capture_output=True,timeout=90).stdout
+
+def file_meta(path):
+    st=path.lstat()
+    assert stat.S_ISREG(st.st_mode) and st.st_nlink==1 and st.st_uid==os.getuid(),path
+    return {'path':str(path),'bytes':st.st_size,'full9':{k:str(getattr(st,k)) for k in F9}}
+
+def save(path,data):
+    raw=(json.dumps(data,indent=2,sort_keys=True)+'\n').encode()
+    with os.fdopen(os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400),'wb') as f:
+        f.write(raw); f.flush(); os.fsync(f.fileno())
+    return {'path':str(path),'bytes':len(raw),'sha256':sha(raw)}
+
+def rev(path,expr):
+    return git(path,'rev-parse',expr).decode().strip()
+
+def all_roles():
+    selected=defaultdict(set)
+    by_root={PRIOR/'datasets':'datasets',A:'accelerate',OLD_D:'datasets',OLD_A:'accelerate'}
+    for path,size,digest,key in SEEDS:
+        raw=path.read_bytes()
+        assert (len(raw),sha(raw))==(size,digest)
+        data=json.loads(raw)
+        for row in data if key is None else data[key]:
+            p=Path(row['path'])
+            source,=tuple(prefix for prefix in by_root if p.is_relative_to(prefix))
+            relative=p.relative_to(source)
+            if relative.parts[0]!='.git':
+                selected[by_root[source]].add(str(relative))
+    selected['datasets'].update((*TARGETS,*FENCES))
+    return selected
+
+def inventory(root,proposed):
+    result={}
+    raw=git(root,'ls-tree','-r','-z','HEAD','--',*sorted(proposed))
+    for entry in raw.split(b'\0'):
+        if entry:
+            fields,path=entry.decode().split('\t',1)
+            mode,kind,blob=fields.split()
+            if kind=='blob' and mode in ('100644','100755'):
+                result[path]=[mode,blob]
+    return result
+
+def main():
+    assert __debug__ and BASE.resolve()==BASE and BASE.stat().st_uid==os.getuid()
+    assert rev(PRIOR/'datasets','HEAD')==HEADS['datasets'] and rev(A,'HEAD')==HEADS['accelerate']
+    assert rev(PRIOR/'datasets','HEAD^{tree}')==TREES['datasets'] and rev(A,'HEAD^{tree}')==TREES['accelerate']
+    # A remains the exact existing read-only companion throughout preparation.
+    a_initial={p:file_meta(A/p) for p in ('.git/HEAD','.git/index','.git/config','.git/info/exclude','.git/info/sparse-checkout')}
+    a_index=(A/'.git/index').read_bytes()
+    assert len(a_index)==4457305 and sha(a_index)=='cfb5f870e52cd089eb6d2d26baf646f9f3e4ffd4bf59e36ea28fee05372c1ef5'
+    assert git(A,'status','--porcelain=v1','-z','-uall')==b''
+    roles=all_roles()
+    branch='work/p1-cache-reload-filename'
+    old_mask=os.umask(0o002)
+    try:
+        D.mkdir(mode=0o700,exist_ok=False)
+        git(D,'init','-b',branch)
+        (D/'.git/objects/info/alternates').write_text(str(PRIOR/'datasets/.git/objects')+'\n')
+        git(D,'update-ref','refs/heads/'+branch,HEADS['datasets'])
+        git(D,'config','core.sparseCheckout','true')
+        git(D,'config','core.sparseCheckoutCone','false')
+        selected=inventory(D,roles['datasets'])
+        inherited=(PRIOR/'datasets/.git/info/sparse-checkout').read_text().splitlines()
+        patterns=list(dict.fromkeys(inherited+['/'+p for p in sorted(selected)]))
+        (D/'.git/info/sparse-checkout').write_text('\n'.join(patterns)+'\n')
+        excludes=(PRIOR/'datasets/.git/info/exclude').read_bytes()
+        assert excludes.splitlines().count(b'/workspace/control-plane/source-leases/')==1
+        (D/'.git/info/exclude').write_bytes(excludes)
+        git(D,'read-tree','-m','-u','HEAD')
+    finally:
+        os.umask(old_mask)
+
+    result={}
+    rows=[]
+    for role,root in (('datasets',D),('accelerate',A)):
+        assert rev(root,'HEAD')==HEADS[role] and rev(root,'HEAD^{tree}')==TREES[role]
+        assert not git(root,'status','--porcelain=v1','-z','-uall')
+        physical=inventory(root,roles[role])
+        missing=set(roles[role])-set(physical)
+        assert not missing,(role,sorted(missing))
+        result[role]={'root':str(root),'tracked':physical,'historical_unbound':[]}
+        auxiliaries=['.git/HEAD','.git/index','.git/config','.git/info/exclude','.git/info/sparse-checkout']
+        if role=='datasets':
+            auxiliaries.append('.git/refs/heads/'+branch)
+        for relative in sorted(physical)+auxiliaries:
+            rows.append(file_meta(root/relative))
+    assert {p:file_meta(A/p) for p in a_initial}==a_initial and (A/'.git/index').read_bytes()==a_index
+    for relative in TARGETS:
+        assert (D/relative).stat().st_mode&0o777==0o664
+    paths=save(BASE/'materialized-path-roles.json',result)
+    guard=save(BASE/'private-D-and-existing-A-nonclock-full9-guard.json',{'rows':rows})
+    report=save(BASE/'actual-private-exact-current-base-D-materialized.json',{
+        'schema':'existing-Source2-private-exact-current-base-D-materialization/v1',
+        'heads':HEADS,'trees':TREES,'D':str(D),'A':str(A),'D_branch':'refs/heads/'+branch,
+        'D_private_I_O_only':True,'local_A_and_published_D_preserved':True,'A_Guide582_index_SHA256':sha(a_index),
+        'guard':guard,'role_inventory':paths,'row_count':len(rows),
+        'tracked_counts':{k:len(v['tracked']) for k,v in result.items()},
+        'Source_selection':None,'Source_enrollment':None,'SDK_or_Native_dispatch':None,'runtime_clock':None,'funding':None,
+        'remote_or_push_performed':False})
+    print(json.dumps(report))
+
+if __name__=='__main__':
+    main()

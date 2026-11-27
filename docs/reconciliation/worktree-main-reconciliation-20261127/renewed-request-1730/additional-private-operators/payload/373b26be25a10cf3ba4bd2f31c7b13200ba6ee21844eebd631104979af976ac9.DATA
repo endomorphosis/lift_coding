@@ -1,0 +1,65 @@
+import ast,hashlib,json,os,stat,subprocess,sys,time
+from pathlib import Path
+base=Path(__file__).resolve().parent
+tree=ast.parse(Path('/tmp/Root-P2-whole-component-managed-R5-n8Fkdm2q/run-read3.py').read_bytes())
+exec(compile(ast.Module(body=[x for x in tree.body if isinstance(x,ast.FunctionDef) or (isinstance(x,ast.Assign) and getattr(x.targets[0],'id',None)=='policy')],type_ignores=[]),'guarded I/O helpers','exec'))
+tree=ast.parse((base/'run-source2.py').read_bytes())
+exec(compile(ast.Module(body=[x for x in tree.body if (isinstance(x,ast.FunctionDef) and x.name=='ack') or (isinstance(x,ast.Assign) and getattr(x.targets[0],'id',None)=='status')],type_ignores=[]),'existing owner status helper','exec'))
+g=Path('/tmp/P1-existing-guide583-compose-INERT-mXQQ8I')
+stage=g/'stage-guide583.py.DATA'
+read(stage,13877,'684349ae2f8739326124c52f670a0c99967d90080dc675683e9b57506db6619b')
+ready,_=read(g/'READY-one-existing-guide583-four-guides.json',11285,'5fdec1e73c9b27a551750114971860ede066471a1a2e774265702d56bff3224c')
+e=val(ready)
+qref=e['actual_ordinary_qualification']
+q=val(qref)
+assert q['qualification_complete'] and q['Source_closed'] and q['resource_cleanup_confirmed'] and q['actual_ordinary_counts']['passed']==13
+previous={'path':sys.argv[1],'bytes':int(sys.argv[2]),'sha256':sys.argv[3]}
+p=val(previous)
+before=p['fully_retained_ledger']
+previous_cap={'path':sys.argv[4],'bytes':int(sys.argv[5]),'sha256':sys.argv[6]}
+prior_paid=val(previous_cap)['after_full_retained_precharge']
+assert all(before[k]==prior_paid[k] for k in ('used','internal_used','global_cap','internal_cap','capturesComplete'))
+assert before['captures']>=prior_paid['captures']
+n=144*1024**2
+selected={**before,'global_cap':before['global_cap']+n,'internal_cap':before['internal_cap']+n}
+paid={**selected,'used':selected['used']+n,'internal_used':selected['internal_used']+n,'captures':selected['captures']+1}
+auth=val(val(val(q['source2_terminal'])['precharge'])['standing_authority'])
+cap=keep('Source-only-Guide583-full-retained-cap.json',{'Root_selected':True,'ordinary13':qref,'prior_cap':previous_cap,
+   'prior_terminal':previous,'prior':before,'selected':selected,'after_full_retained_precharge':paid,'added_Source_only_envelope':n,
+   'exact_human_affirmation':auth['human_authorization'],'all_prior_costs_retained':True,'resource_policy_capacity_unchanged':True,
+   'physical_IO_accounting_complete':False})
+now=time.time_ns()
+sel=keep('guide583-existing-Source42-selection.json',{'Root_selected':True,'phase':'existing_four_document_Source42_apply_and_freeze',
+   'composer_READY':ready,'qualified_code_before_docs':q['exact_local_freeze'],'actual_ordinary13':qref,'full_charge':cap,
+   'launch_not_before_utc_ns':now,'launch_deadline_utc_ns':now+120*10**9})
+env=os.environ|{'GIT_OPTIONAL_LOCKS':'0','GIT_NO_LAZY_FETCH':'1','GIT_TERMINAL_PROMPT':'0'}
+cfg={'core.preloadIndex':'false','index.threads':'1','core.fsmonitor':'false','core.packedGitWindowSize':'1m','core.packedGitLimit':'16m'}
+env['GIT_CONFIG_COUNT']=str(len(cfg))
+for i,(k,v) in enumerate(cfg.items()):env.update({f'GIT_CONFIG_KEY_{i}':k,f'GIT_CONFIG_VALUE_{i}':v})
+cmd=['/usr/bin/taskset','-c',str(min(os.sched_getaffinity(0))),'/usr/bin/prlimit','--as=536870912','--cpu=100','--',
+ '/usr/bin/python3','-I','-B',str(stage),ready['path'],str(ready['bytes']),ready['sha256'],sel['path'],str(sel['bytes']),sel['sha256'],'--install-and-freeze']
+with (base/'guide583-stage.stdout').open('xb') as so,(base/'guide583-stage.stderr').open('xb') as se:
+    process=subprocess.Popen(cmd,stdout=so,stderr=se,env=env)
+    live=keep('guide583-owner-live.json',{'owner':'Root','pid':process.pid,'selection':sel,'Source_cap':cap})
+    ack('Guide583_existing_Source42_running',Source_handle=live)
+    print(json.dumps(live),flush=True)
+    rc=process.wait()
+result={'returncode':rc,'actual_handle':None,'pid':process.pid,'live':live,'ready':ready,'selection':sel,
+ 'ordinary':qref,'full_charge':cap,'fully_retained_ledger':paid,'stderr':read(base/'guide583-stage.stderr')[0]}
+close=g/'actual-Guide583-four-docs-Source-closed-and-frozen.json'
+if close.exists():
+    r,_=read(close)
+    report=val(r)
+    result['closed_docs']=r
+    assert report['terminal_returncode']==rc
+    observed=report['actual_IO_wrapper_coverage']
+    result['fully_retained_ledger']={**paid,'captures':max(paid['captures'],selected['captures']+observed['captures'])}
+    if rc==0:
+        assert all(report[k] for k in ('Source_closed','module_closed','write_complete','only_four_Git_changes','exact_forward_and_inverse_verified'))
+        assert len(report['committed_docs'])==4
+elif rc==0:
+    raise RuntimeError('No Guide583 Source closeout')
+done=keep('guide583-terminal.json',result)
+ack('Guide583_Source_closed_normal_fast_forward_pending' if rc==0 else 'Guide583_Source_terminal_refusal',Source_handle=None,maintained_update=done)
+print(json.dumps(done),flush=True)
+raise SystemExit(rc)

@@ -1,0 +1,178 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:decoder-training:contracts:draft:0.1.0",
+  "title": "Proposed decoder training record contracts",
+  "description": "DESIGN ONLY. Structural validation cannot establish truth of evidence, identity freshness, semantic correctness, legal eligibility, or execution authority. Not integrated into project code.",
+  "oneOf": [
+    {"$ref": "#/$defs/unresolvedTeacher"},
+    {"$ref": "#/$defs/teacherProfile"},
+    {"$ref": "#/$defs/capabilityReport"}
+  ],
+  "$defs": {
+    "digest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "hex"],
+      "properties": {"algorithm": {"const": "sha256"}, "hex": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+    },
+    "evidenceReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifact_id", "digest", "claim_scope", "verification_status"],
+      "properties": {
+        "artifact_id": {"type": "string", "minLength": 1},
+        "digest": {"$ref": "#/$defs/digest"},
+        "claim_scope": {"type": "string", "minLength": 1},
+        "verification_status": {"enum": ["unverified", "content_authenticated", "independently_reviewed"]},
+        "locator": {"type": "string", "minLength": 1}
+      }
+    },
+    "neuralProducer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "code_digest", "model_id", "checkpoint_digest", "training_objective_identity"],
+      "properties": {
+        "kind": {"const": "learned_embedding"},
+        "code_digest": {"$ref": "#/$defs/digest"},
+        "model_id": {"type": "string", "minLength": 1},
+        "checkpoint_digest": {"$ref": "#/$defs/digest"},
+        "training_objective_identity": {"type": "string", "minLength": 1}
+      }
+    },
+    "deterministicProducer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "code_digest", "feature_definition_digest", "checkpoint_not_applicable_reason"],
+      "properties": {
+        "kind": {"const": "deterministic_features"},
+        "code_digest": {"$ref": "#/$defs/digest"},
+        "feature_definition_digest": {"$ref": "#/$defs/digest"},
+        "checkpoint_not_applicable_reason": {"type": "string", "minLength": 1}
+      }
+    },
+    "noCompression": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method"],
+      "properties": {"method": {"const": "none"}}
+    },
+    "declaredCompression": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "configuration_digest", "input_profile_id", "fit_population_id", "compatibility_evidence"],
+      "properties": {
+        "method": {"enum": ["learned_projection", "pca", "validated_nested_prefix", "other_declared"]},
+        "configuration_digest": {"$ref": "#/$defs/digest"},
+        "input_profile_id": {"type": "string", "minLength": 1},
+        "fit_population_id": {"type": "string", "minLength": 1},
+        "compatibility_evidence": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/evidenceReference"}}
+      }
+    },
+    "unresolvedTeacher": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["record_kind", "schema_version", "slot_id", "requested_dimension", "status", "reason", "eligible_for_execution"],
+      "properties": {
+        "record_kind": {"const": "unresolved_teacher_requirement"},
+        "schema_version": {"const": "0.1.0"},
+        "slot_id": {"type": "string", "minLength": 1},
+        "requested_dimension": {"enum": [8, 384, 768, 4096]},
+        "status": {"const": "unresolved"},
+        "reason": {"type": "string", "minLength": 1},
+        "eligible_for_execution": {"const": false},
+        "received_evidence": {"type": "array", "items": {"$ref": "#/$defs/evidenceReference"}}
+      }
+    },
+    "teacherProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["record_kind", "schema_version", "profile_id", "resolution_status", "producer", "output", "input_contract_digest", "pooling_policy", "layer_selection", "normalization", "compression", "permitted_uses", "availability", "license_and_use_evidence", "provenance"],
+      "properties": {
+        "record_kind": {"const": "resolved_teacher_profile"},
+        "schema_version": {"const": "0.1.0"},
+        "profile_id": {"type": "string", "minLength": 1},
+        "resolution_status": {"const": "resolved"},
+        "producer": {"oneOf": [{"$ref": "#/$defs/neuralProducer"}, {"$ref": "#/$defs/deterministicProducer"}]},
+        "output": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["dimension", "layout", "dtype"],
+          "properties": {
+            "dimension": {"type": "integer", "minimum": 1},
+            "layout": {"enum": ["example_vector", "span_vectors", "token_vectors"]},
+            "dtype": {"enum": ["float32", "float16", "bfloat16", "float64", "declared_quantized"]},
+            "quantization_profile_digest": {"$ref": "#/$defs/digest"}
+          },
+          "allOf": [{"if": {"properties": {"dtype": {"const": "declared_quantized"}}}, "then": {"required": ["quantization_profile_digest"]}, "else": {"not": {"required": ["quantization_profile_digest"]}}}]
+        },
+        "input_contract_digest": {"$ref": "#/$defs/digest"},
+        "pooling_policy": {"type": "string", "minLength": 1},
+        "layer_selection": {"type": "string", "minLength": 1},
+        "normalization": {"type": "string", "minLength": 1},
+        "compression": {"oneOf": [{"$ref": "#/$defs/noCompression"}, {"$ref": "#/$defs/declaredCompression"}]},
+        "permitted_uses": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["conditioning", "feature_distillation", "relational_distillation", "retrieval"]}},
+        "availability": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["training", "inference", "missing_policy"],
+          "properties": {
+            "training": {"enum": ["available", "unavailable", "conditional"]},
+            "inference": {"enum": ["available", "unavailable", "conditional"]},
+            "missing_policy": {"enum": ["refuse", "qualified_fallback", "training_only"]}
+          }
+        },
+        "license_and_use_evidence": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/evidenceReference"}},
+        "provenance": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/evidenceReference"}}
+      }
+    },
+    "capabilityEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "status", "constraints", "evidence"],
+      "properties": {
+        "name": {"enum": ["generate", "score_actions", "train_supervised", "train_policy", "observe_activations", "intervene_activations", "enumerate_update_targets", "apply_reversible_update"]},
+        "status": {"enum": ["supported", "unsupported", "unverified"]},
+        "constraints": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidenceReference"}},
+        "probability_contract_digest": {"$ref": "#/$defs/digest"},
+        "intervention_contract_digest": {"$ref": "#/$defs/digest"},
+        "update_contract_digest": {"$ref": "#/$defs/digest"},
+        "policy_algorithm_contract_digest": {"$ref": "#/$defs/digest"}
+      },
+      "allOf": [
+        {"if": {"properties": {"status": {"const": "supported"}}}, "then": {"properties": {"evidence": {"minItems": 1}}}},
+        {"if": {"properties": {"name": {"const": "score_actions"}, "status": {"const": "supported"}}}, "then": {"required": ["probability_contract_digest"]}},
+        {"if": {"properties": {"name": {"const": "intervene_activations"}, "status": {"const": "supported"}}}, "then": {"required": ["intervention_contract_digest"]}},
+        {"if": {"properties": {"name": {"const": "apply_reversible_update"}, "status": {"const": "supported"}}}, "then": {"required": ["update_contract_digest"]}},
+        {"if": {"properties": {"name": {"const": "train_policy"}, "status": {"const": "supported"}}}, "then": {"required": ["policy_algorithm_contract_digest"]}}
+      ]
+    },
+    "capabilityReport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["record_kind", "schema_version", "decoder_profile_id", "decoder_binding_digest", "capabilities", "claim_boundary"],
+      "properties": {
+        "record_kind": {"const": "decoder_capability_report"},
+        "schema_version": {"const": "0.1.0"},
+        "decoder_profile_id": {"type": "string", "minLength": 1},
+        "decoder_binding_digest": {"$ref": "#/$defs/digest"},
+        "capabilities": {
+          "type": "array", "minItems": 8, "maxItems": 8,
+          "items": {"$ref": "#/$defs/capabilityEntry"},
+          "allOf": [
+            {"contains": {"properties": {"name": {"const": "generate"}}, "required": ["name"]}, "minContains": 1, "maxContains": 1},
+            {"contains": {"properties": {"name": {"const": "score_actions"}}, "required": ["name"]}, "minContains": 1, "maxContains": 1},
+            {"contains": {"properties": {"name": {"const": "train_supervised"}}, "required": ["name"]}, "minContains": 1, "maxContains": 1},
+            {"contains": {"properties": {"name": {"const": "train_policy"}}, "required": ["name"]}, "minContains": 1, "maxContains": 1},
+            {"contains": {"properties": {"name": {"const": "observe_activations"}}, "required": ["name"]}, "minContains": 1, "maxContains": 1},
+            {"contains": {"properties": {"name": {"const": "intervene_activations"}}, "required": ["name"]}, "minContains": 1, "maxContains": 1},
+            {"contains": {"properties": {"name": {"const": "enumerate_update_targets"}}, "required": ["name"]}, "minContains": 1, "maxContains": 1},
+            {"contains": {"properties": {"name": {"const": "apply_reversible_update"}}, "required": ["name"]}, "minContains": 1, "maxContains": 1}
+          ]
+        },
+        "claim_boundary": {"const": "structural_record_only_not_execution_admission"}
+      }
+    }
+  },
+  "$comment": "Semantic checks still required: referenced digests resolve to authenticated compatible artifacts; source/input identity matches observations; permissions and qualified fallbacks exist; no unknown marker is smuggled into resolved free-text fields; profile IDs bind canonical serialization. This schema is a draft and has not been run under a JSON Schema validator."
+}

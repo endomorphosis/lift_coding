@@ -1,0 +1,704 @@
+import base64
+import hashlib
+import io
+import math
+import json
+import os
+import re
+from pathlib import Path
+import stat
+import sys
+import zipfile
+
+work=Path(__file__).resolve().parent
+def canonical(v):
+    return json.dumps(v,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False).encode()
+def h(raw):
+    return hashlib.sha256(raw).hexdigest()
+fields=('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
+def full9(s):
+    return {k:str(getattr(s,k)) for k in fields}
+def read(p,limit=64*1024**2):
+    p=Path(p); start=p.lstat()
+    assert stat.S_ISREG(start.st_mode) and start.st_nlink==1 and 0<=start.st_size<=limit
+    with os.fdopen(os.open(p,os.O_RDONLY|os.O_NOFOLLOW),'rb') as stream:
+        assert full9(os.fstat(stream.fileno()))==full9(start)
+        body=stream.read(start.st_size+1)
+        assert full9(os.fstat(stream.fileno()))==full9(start)
+    assert len(body)==start.st_size and full9(p.lstat())==full9(start)
+    return dict(path=str(p),bytes=len(body),sha256=h(body)),body
+def obj(r):
+    o,data=read(r['path'])
+    assert o=={k:r[k] for k in ('path','bytes','sha256')},r['path']
+    return json.loads(data)
+
+# Exact typed framing codec bodies retained from the pinned existing Lake owner.
+# These wire checks are local and use the standard library only.
+def _fail(message):
+    raise ValueError(message)
+
+def _need(condition, message):
+    if not condition:
+        _fail(message)
+
+_sha = h
+
+MAX_INPUT_BYTES = 48 * 1024 * 1024
+
+MAX_PARENT_REPLAY_BYTES = 64 * 1024 * 1024
+
+class _ParentInputBudget:
+    """Bound and detach an expanded mixed caller graph before any body hash."""
+    def __init__(self):
+        self.remaining = MAX_INPUT_BYTES
+        self.nodes = 1_000_000
+        self.active = set()
+
+    def charge(self, size):
+        _need(size <= self.remaining, "complete parent Lake input budget exceeded")
+        self.remaining -= size
+
+    def copy(self, value, depth=0):
+        self.nodes -= 1
+        _need(self.nodes >= 0 and depth <= 48, "parent Lake input node/depth bound exceeded")
+        kind = type(value)
+        if kind is bytes:
+            self.charge(len(value)); return value
+        if kind is str:
+            _need(len(value) <= self.remaining, "parent Lake string exceeds remaining input budget")
+            try:
+                raw = json.dumps(value, ensure_ascii=False, allow_nan=False).encode("utf-8")
+            except (UnicodeError, ValueError) as error:
+                _fail("ordinary parent Lake UTF8 string required")
+            self.charge(len(raw)); return value
+        if value is None or kind is bool:
+            self.charge(5); return value
+        if kind is int:
+            _need(-(2**63) <= value < 2**63, "signed64 parent Lake integer required")
+            self.charge(len(str(value))); return value
+        if kind is float:
+            _need(math.isfinite(value), "finite parent Lake float required")
+            self.charge(len(json.dumps(value, allow_nan=False))); return value
+        _need(kind in (dict, list), "plain parent Lake JSON or immutable bytes required")
+        _need(len(value) <= self.nodes, "parent Lake input collection node bound exceeded")
+        identity = id(value)
+        _need(identity not in self.active, "cyclic parent Lake input refused")
+        self.active.add(identity)
+        try:
+            self.charge(2 + max(0, len(value) - 1))
+            if kind is list:
+                return [self.copy(child, depth + 1) for child in value]
+            result = {}
+            for key, child in value.items():
+                _need(type(key) is str and len(key) <= 4096, "bounded plain parent Lake key required")
+                self.charge(1)
+                result[self.copy(key, depth + 1)] = self.copy(child, depth + 1)
+            return result
+        finally:
+            self.active.remove(identity)
+
+def _emit_parent_replay_value(value, emit):
+    """Emit the original typed commitment frames for an already bounded tree."""
+    def frame(tag, raw):
+        emit(tag + str(len(raw)).encode("ascii") + b":")
+        emit(raw)
+
+    def visit(item):
+        kind = type(item)
+        if kind in (dict, list):
+            emit((b"d" if kind is dict else b"l") + str(len(item)).encode("ascii") + b":")
+            if kind is dict:
+                for key in sorted(item):
+                    visit(key); visit(item[key])
+            else:
+                for child in item:
+                    visit(child)
+        elif kind is bytes:
+            frame(b"b", item)
+        elif kind is str:
+            frame(b"s", item.encode("utf-8"))
+        elif item is None:
+            emit(b"n")
+        elif kind is bool:
+            emit(b"t" if item else b"f")
+        elif kind is int:
+            frame(b"i", str(item).encode("ascii"))
+        elif kind is float:
+            frame(b"r", json.dumps(item, allow_nan=False).encode("ascii"))
+        else:
+            _fail("bounded parent commitment scalar required")
+
+    visit(value)
+
+def _parent_replay_maximum(max_bytes):
+    _need(type(max_bytes) is int and 1 <= max_bytes <= MAX_PARENT_REPLAY_BYTES,
+          "parent replay byte maximum must be an integer from one through 64 MiB")
+    return max_bytes
+
+class _ParentReplayValueDecoder:
+    """Bounded parser for the original typed frames, never arbitrary objects."""
+    def __init__(self, payload, maximum):
+        self.payload = payload
+        self.view = memoryview(payload)
+        self.maximum = maximum
+        self.position = 0
+        self.budget = _ParentInputBudget()
+
+    def header(self, limit):
+        start = self.position
+        number = 0
+        while True:
+            _need(self.position < len(self.payload), "truncated parent replay header")
+            byte = self.payload[self.position]
+            if byte == 58:
+                _need(self.position > start, "empty parent replay header")
+                self.position += 1
+                return number
+            _need(48 <= byte <= 57, "decimal parent replay header required")
+            _need(self.position == start or self.payload[start] != 48,
+                  "leading zero in parent replay header")
+            digit = byte - 48
+            _need(number <= (limit - digit) // 10, "parent replay header bound exceeded")
+            number = number * 10 + digit
+            self.position += 1
+
+    def body_end(self, length):
+        _need(length <= len(self.payload) - self.position, "truncated parent replay body")
+        return self.position + length
+
+    def scalar(self, tag, *, key):
+        limit = self.maximum
+        if key:
+            limit = min(limit, 4 * 4096)
+        elif tag == 105:
+            limit = min(limit, 20)
+        elif tag == 114:
+            limit = min(limit, 32)
+        length = self.header(limit)
+        start = self.position
+        end = self.body_end(length)
+        if tag == 115:
+            # JSON ensure_ascii=False retains UTF8 and adds quotes/escapes.
+            # Charge that exact expanded cost before slicing or decoding a body.
+            self.budget.charge(length + 2)
+            extra = 0
+            for byte in self.view[start:end]:
+                if byte in (34, 92, 8, 9, 10, 12, 13):
+                    extra += 1
+                elif byte < 32:
+                    extra += 5
+                _need(extra <= self.budget.remaining,
+                      "complete parent Lake input budget exceeded")
+            self.budget.charge(extra)
+            try:
+                result = self.payload[start:end].decode("utf-8")
+            except UnicodeError:
+                _fail("ordinary parent replay UTF8 string required")
+            _need(not key or len(result) <= 4096, "bounded plain parent Lake key required")
+        else:
+            self.budget.charge(length)
+            raw = self.payload[start:end]
+            if tag == 98:
+                result = raw
+            elif tag == 105:
+                _need(re.fullmatch(rb"-?(?:0|[1-9][0-9]*)", raw) is not None,
+                      "canonical parent replay integer required")
+                result = int(raw)
+                _need(-(2**63) <= result < 2**63 and raw == str(result).encode("ascii"),
+                      "signed64 canonical parent replay integer required")
+            else:
+                try:
+                    result = float(raw)
+                except (ValueError, OverflowError):
+                    _fail("canonical finite parent replay float required")
+                _need(math.isfinite(result) and
+                      raw == json.dumps(result, allow_nan=False).encode("ascii"),
+                      "canonical finite parent replay float required")
+        self.position = end
+        return result
+
+    def value(self, depth=0, *, key=False):
+        self.budget.nodes -= 1
+        _need(self.budget.nodes >= 0 and depth <= 48,
+              "parent Lake input node/depth bound exceeded")
+        _need(self.position < len(self.payload), "truncated parent replay value")
+        tag = self.payload[self.position]
+        self.position += 1
+        _need(not key or tag == 115, "plain parent replay string key required")
+        if tag in (98, 115, 105, 114):
+            return self.scalar(tag, key=key)
+        if tag in (110, 116, 102):
+            self.budget.charge(5)
+            return None if tag == 110 else tag == 116
+        _need(tag in (100, 108), "unsupported parent replay tag")
+        count = self.header(self.budget.nodes)
+        _need(count <= self.budget.nodes // (2 if tag == 100 else 1),
+              "parent Lake input collection node bound exceeded")
+        self.budget.charge(2 + max(0, count - 1))
+        if tag == 108:
+            result = []
+            for _ in range(count):
+                result.append(self.value(depth + 1))
+            return result
+        result = {}
+        previous = None
+        for _ in range(count):
+            self.budget.charge(1)
+            name = self.value(depth + 1, key=True)
+            _need(previous is None or previous < name,
+                  "sorted unique parent replay dictionary keys required")
+            previous = name
+            result[name] = self.value(depth + 1)
+        return result
+
+    def canonical(self, value):
+        position = 0
+
+        def compare(raw):
+            nonlocal position
+            end = position + len(raw)
+            _need(end <= len(self.payload) and self.view[position:end] == raw,
+                  "canonical parent replay encoding required")
+            position = end
+
+        _emit_parent_replay_value(value, compare)
+        _need(position == len(self.payload), "canonical complete parent replay encoding required")
+
+def decode_parent_replay_value_v1(payload, *, expected_payload_sha256,
+                                  max_bytes=MAX_PARENT_REPLAY_BYTES):
+    """Decode only bounded canonical typed bytes under an independent SHA256.
+
+    Nodes, nesting, scalar expansion and keys are charged while parsing, before
+    body allocation or collection growth. The returned tree contains only plain
+    dict/list/string/bytes/int/float/bool/None values, never replay capabilities.
+    """
+    maximum = _parent_replay_maximum(max_bytes)
+    _need(type(payload) is bytes and 0 < len(payload) <= maximum,
+          "bounded immutable nonempty parent replay bytes required")
+    _need(type(expected_payload_sha256) is str and
+          re.fullmatch(r"[0-9a-f]{64}", expected_payload_sha256) is not None,
+          "independent lowercase SHA256 parent replay pin required")
+    _need(_sha(payload) == expected_payload_sha256, "parent replay payload SHA256 mismatch")
+    parser = _ParentReplayValueDecoder(payload, maximum)
+    result = parser.value()
+    _need(parser.position == len(payload), "trailing parent replay bytes refused")
+    parser.canonical(result)
+    return result
+
+assert __debug__ and len(sys.argv)==8, 'owned terminal session, exact Root selection PATH/BYTES/SHA, actual reaped terminal PATH/BYTES/SHA required'
+session=int(sys.argv[1])
+assert session>0
+msg=[json.loads(line) for line in (work/'operator.stdout').read_text().splitlines()]
+assert msg[0]['event']=='ACTUAL_MANAGED_R5_PHYSICAL_NATIVE_START'
+terminal=msg[-1]
+assert terminal['event']=='ACTUAL_MANAGED_R5_PHYSICAL_NATIVE_CLOSED'
+assert terminal['Source_closed'] and terminal['resource_cleanup_confirmed'] and not terminal['errors']
+report_ref=terminal['report']
+r=obj(report_ref)
+assert r['Source_closed'] and r['resource_cleanup_confirmed'] and r['actual_parent_release_return'] and not r['errors']
+assert not (work/'actual-output/parent-home').exists()
+assert r['workers_dispatched']==['existing managed physical Native R5 worker']
+assert r['source_before']==r['source_after']==r['source_after_run'] and r['source_after']['all_FDs_closed']
+runs=r['run']; life=runs['native_lifecycle']
+assert runs['returncode']==0 and runs['workspace_cleaned'] and life['cleanup_confirmed']
+assert life['leader_reaped'] and life['descendant_tracking_complete'] and not life['remaining_group_members']
+assert not life['remaining_tracked_descendants'] and not life['observation_errors']
+chosen={'path':sys.argv[2],'bytes':int(sys.argv[3]),'sha256':sys.argv[4]}
+selection=obj(chosen)
+assert selection['Root_selected'] is True
+assert selection['ProofReceipt_or_legal_release_or_model_operation_selected'] is False
+payload=obj(selection['worker_payload'])
+assert set(payload)=={'collector.py','native-data.json'}
+collector_bytes=base64.b64decode(payload['collector.py'],validate=True)
+assert (len(collector_bytes),h(collector_bytes))==(49067,'359d2fc523df43fbb363f722b641465de3698272d219cd29ab16df57f1d23e2a')
+selected_source=selection['current_source']
+owned_terminal=obj(dict(path=sys.argv[5],bytes=int(sys.argv[6]),sha256=sys.argv[7]))
+assert owned_terminal['returncode']==0 and owned_terminal['reaped'] is True
+assert owned_terminal['selection']==chosen
+assert owned_terminal.get('operator_pid',owned_terminal['pid'])==msg[0]['operator_pid']
+assert owned_terminal['stdout']==str(work/'operator.stdout')
+assert r['selection']==selection['selected_scope'] and Path(selection['output_namespace'])==work/'actual-output'
+assert Path(report_ref['path'])==work/'actual-output/complete-direct-current-R5-physical-native-report.json'
+assert r['actual_parent_lease']['lease_id'] not in r['resource_after_parent_release']['state']['leases']
+assert {(item['canonical_root'],item['mode']) for item in r['Source_leases']}=={
+     (root['root'],'read') for root in selection['project_heads']}
+assert len(r['Source_leases'])==2
+assert selection['case_profile']=='controlled-reviewed-physical-V4-direct-Native-R5/v1'
+assert r['actual_parent_lease']['cpu_slots']==12 and r['actual_parent_lease']['memory_mb']==8192 and r['actual_parent_lease']['child_process_slots']==16
+checked_enrollment={'path':'/tmp/P2-current-existing-R5-v563-nonclock-bind-MuqubV/materialize-current-P2-existing-R5.py.DATA','bytes':23592,'sha256':'7b7f11e358347a0f8c806f2d2066ed88ea862b4fdd00bfaa09122a25fbfc6e7b'}
+owned_helpers={'__name__':'existing_R5_nonclock_custody_verifier'}
+raw_helper=read(checked_enrollment['path'])[1]
+assert len(raw_helper)==checked_enrollment['bytes'] and h(raw_helper)==checked_enrollment['sha256']
+exec(compile(raw_helper,checked_enrollment['path'],'exec'),owned_helpers)
+source_ref,source,freeze_ref,freeze,outer,_,_,plan_ref,plan,guide_ref=owned_helpers['read_current_source']()
+ordinary_ref=selected_source['managed_ordinary62']
+ordinary_report,junit_ref=owned_helpers['verify_ordinary62'](ordinary_ref,plan,freeze,source_ref,source)
+assert selected_source['actual_current_READ3']==source_ref and selected_source['execution_freeze']==freeze_ref
+assert selected_source['last_published_guide582']==guide_ref and selected_source['ordinary62_plan']==plan_ref
+assert selected_source['ordinary62_report']==ordinary_report and selected_source['ordinary62_raw_JUnit']==junit_ref
+assert selection['project_heads']==freeze['frozen_roots']
+roots={row['root']:row for row in freeze['frozen_roots']}
+assert len(roots)==len(freeze['frozen_roots'])==2
+assert r['source_after']['Git_HEADS']=={root:row['Git_HEAD'] for root,row in roots.items()}
+index=freeze['index']
+droot=str(Path(index['path']).parent.parent)
+assert index['path']==str(Path(droot)/'.git/index')
+assert selected_source['exact_outer_epoch']==outer
+outer_rows=obj(outer)
+assert type(outer_rows) is list and len(outer_rows)==len({row['path'] for row in outer_rows})==freeze['epochs']['counts']['outer']==1611
+assert next(row for row in outer_rows if row['path']==index['path'])==index
+assert next(row for row in outer_rows if row['path']==freeze['companion_index']['path'])==freeze['companion_index']
+assert r['source_after']['records']==outer_rows
+
+codec_row,=(row for row in outer_rows if row['path']==str(Path(droot)/'ipfs_datasets_py/logic/autoformal/legal_corpus_definition_use_lake_v2.py'))
+assert (codec_row['bytes'],codec_row['sha256'])==(95493,'5c98152db328b75583f6c0cd181e2724ca5f7392870ec0faf1e4d870cbb76b32')
+assert r['source_epoch_binding']=={**outer,'rows':len(outer_rows)}
+files={row['logical_name']:row for row in r['run_raw_output_files']}
+assert len(files)==len(r['run_raw_output_files'])
+assert set(files)=={'native-packet.zip','native-packet-members.json','summary.json','opening.json','physical-request.bin','paired-cache.bin'}
+for name,row in files.items():
+    if name not in {'physical-request.bin','paired-cache.bin'}:
+        assert read(row['path'])[0]=={k:row[k] for k in ('path','bytes','sha256')}
+summary=obj(files['summary.json']); opening=obj(files['opening.json']); members=obj(files['native-packet-members.json'])
+assert summary==r['actual_direct_R5_summary'] and opening==r['actual_direct_R5_opening'] and members==r['actual_packet_members']
+assert summary['status']=='direct_R5_native_and_same_c_consumer_complete' and summary['consumer_callback_executed'] is True
+assert not summary['A4_parent_executed'] and not summary['original_R_handle_reconstructed']
+result=summary['actual_native_result']
+assert result['live_native_success_authenticated'] is result['native_execution_authenticated'] is True
+assert result['original_success_authenticated'] is result['original_admitted_parent_custody_authenticated'] is False
+assert all(v is False for v in result['authority'].values()) and result['training_mask']==result['evaluation_gold_mask']==0
+plan=opening['selected_planned_whole_norm']
+req=plan['request']; claim=plan['claim']; theorem=plan['declaration']
+opt=plan['request_sha256']
+assert h(canonical(req))==opt
+assert h(canonical(claim))==plan['claim_sha256']==req['claim_digest']
+obl,=claim['obligations']
+assert h(canonical(obl))==plan['obligation_sha256']==req['obligation_digest']
+assert claim['declaration_id']==req['declaration_id']==theorem
+p=req['payload']; sent=p['context']
+assert p['schema']=='legal-corpus-v4-planned-physical-whole-norm-request/v2'
+assert p['resource_profile']=='physical-whole-project-output/v1'
+assert req['bounds']['max_output_bytes']==8*1024**2
+assert h(canonical(sent))==p['context_sha256']
+assert sent['unit']['unit_id']==plan['unit_id']=='fixture:physical-crosswalk/unit-2'
+assert h(p['proposition_source'].encode())==sent['proposition_utf8_sha256']
+assert 'roleDenote' in p['proposition_source'] and ' →\n' in p['proposition_source']
+assert sent['theorem_binding']['premise_kind']=='independently_denoted_source_definition'
+assert sent['theorem_binding']['desired_equivalence_hypothesis'] is False
+checks=summary['planned_load_refusals']
+assert [row['case'] for row in checks]==['omitted-plan','other-exact-request-id']
+assert all(row['refusal']=='exact issued live success original inputs required' for row in checks)
+assert checks[0]['offered_request_sha256'] is None and checks[1]['offered_request_sha256']!=opt
+assert len(checks[1]['offered_request_sha256'])==64
+v=summary['planned_whole_norm_observation']
+assert v==result['planned_whole_norm_observation']
+assert v['request_sha256']==opt and v['claim_digest']==req['claim_digest'] and v['obligation_digest']==req['obligation_digest']
+assert v['declaration']==theorem and v['request_id']==req['request_id']
+assert v['proposition_utf8_sha256']==sent['proposition_utf8_sha256'] and v['request_context_sha256']==p['context_sha256']
+assert v['scope']=='original_whole_project_build' and v['axiom_dependencies']==[]
+assert v['checked_under_explicit_hypotheses'] and v['premise_remains_quantified']
+assert all(v[name] is False for name in ('qualified_request_execution','request_bounds_qualified','backend_attempt_created','proof_receipt_issued'))
+assert members['status']=='complete_bounded_opening_packet_bytes_retained' and not members['errors']
+opened_packet=read(files['native-packet.zip']['path'])[1]
+data={}
+with zipfile.ZipFile(io.BytesIO(opened_packet)) as z:
+    infos=z.infolist()
+    assert len(infos)==members['member_count']
+    assert sum(i.file_size for i in infos)<=48*1024**2
+    for item in infos:
+        assert item.filename not in data and 0<=item.file_size<=8*1024**2
+        data[item.filename]=z.read(item)
+inventory=[dict(path=name,bytes=len(body),sha256=h(body)) for name,body in sorted(data.items())]
+acc=v['output_accounting']
+assert v['proposition_source']==p['proposition_source']
+raw_live=canonical(result)
+packet_bytes=sum(x['bytes'] for x in inventory)
+assert acc==dict(profile=p['resource_profile'],retained_packet_member_count=len(inventory),
+    retained_packet_bytes=packet_bytes,canonical_live_result_bytes=len(raw_live),
+    total_bytes=packet_bytes+len(raw_live),requested_limit_bytes=8*1024**2,
+    within_requested_limit=True,full_elaborated_type_payload_available=False)
+assert 4*1024**2 < acc['total_bytes'] <= acc['requested_limit_bytes']
+assert inventory==[{k:row[k] for k in ('path','bytes','sha256')} for row in sorted(members['members'],key=lambda m:m['path'])]
+assert h(canonical(inventory))==v['retained_packet_sha256']
+raw=data['build-receipt.json']
+assert h(raw)==v['retained_receipt_sha256']
+receipt=json.loads(raw)
+assert 'planned_whole_norm_observation' not in receipt
+assert receipt['build_passed'] and receipt['conditional_kernel_status']=='checked_under_explicit_hypotheses'
+assert receipt['conditional_theorems'].count(theorem)==1 and receipt['theorem_axiom_dependencies'][theorem]==[]
+manifest=opening['manifest']
+assert manifest['physical_context']['physical_request_sha256']==opening['physical_request_sha256']==sent['physical_request_sha256']
+assert receipt['conditional_theorems']==manifest['preservation_obligations']
+assert len(receipt['conditional_theorems'])==len(set(receipt['conditional_theorems']))>0
+assert receipt['compiled_modules']==p['project']['expected_modules']==manifest['expected_modules']
+assert len(receipt['compiled_modules'])==len(set(receipt['compiled_modules']))>0
+assert len(manifest['units'])==3
+assert any(node['theorem']==theorem and node['binding']==sent['theorem_binding'] for node in manifest['theorem_bindings'])
+for item in p['project']['files']:
+    name=item['path']; raw=data['executed-inputs/'+name]
+    assert raw==data['project/'+name] and h(raw)==manifest['file_sha256'][name]==item['sha256'] and len(raw)==item['bytes']
+text=data['executed-inputs/'+sent['source_path']].decode()
+assert text.count('\nexample : '+p['proposition_source']+' := @'+theorem.rsplit('.',1)[-1]+'\n')==1
+m=v['original_result_observation']
+origin=receipt['reviewed_execution_evidence']
+assert m['output_file_bytes']==sum(row['bytes'] for row in origin['output_file_refs'].values())
+assert m['raw_log_bytes']==sum(row['bytes'] for row in origin['raw_logs'].values())
+assert m['elapsed_seconds']==origin['result']['elapsed_seconds']==receipt['elapsed_seconds']>0
+assert m['exact_aggregate_peak_memory_bytes'] is m['verified_steps'] is None
+assert all(x is None or (type(x) is int and x>=0) for x in m['rss'].values())
+joined=summary['checked_release_report']
+anchors=summary['checked_release_anchors']
+current=joined['current_review_observation']
+checked=joined['checked_native_observation']
+evidence=joined['declared_eligibility_evidence']
+# Independently recompute CIDv1 dag-json+sha2-256 from the exact saved wire.
+def verify_seal(value):
+    body=dict(value)
+    digest=body.pop("record_cid")
+    assert body["cid_scope"]=="payload_without_record_cid/v1"
+    prefix=bytes((1,0xA9,2,0x12,0x20))
+    calculated="b"+base64.b32encode(prefix+hashlib.sha256(canonical(body)).digest()).decode().lower().rstrip("=")
+    assert digest==calculated
+for sealed in (result,current,checked,evidence,joined['declared_qualification'],joined['declared_eligibility']):
+    verify_seal(sealed)
+assert anchors['checked_release_report_sha256']==h(canonical(joined))
+assert anchors['checked_release_report_bytes']==len(canonical(joined))
+assert anchors['same_original_handle_and_caller_thread'] is True
+assert anchors['extra_native_builds']==anchors['extra_compiler_commands']==0
+assert anchors['semantic_source_or_corpus_admission_claimed'] is False
+assert anchors['planned_request_sha256']==checked['planned_request_sha256']==v['request_sha256']==opt
+assert anchors['physical_request_sha256']==checked['physical_request_sha256']==opening['physical_request_sha256']
+physical_output=files['physical-request.bin']
+physical_ref={k:physical_output[k] for k in ('path','bytes','sha256')}
+retained_raw_ref,retained_raw=read(physical_ref['path'],64*1024**2)
+assert retained_raw_ref==physical_ref and physical_ref['bytes']>0
+worker_output=summary['retained_physical_request']
+assert set(worker_output)=={'path','bytes','sha256','full9'}
+assert Path(worker_output['path']).name=='physical-request.bin'
+assert set(worker_output['full9'])==set(fields) and all(type(v) is int and v>=0 for v in worker_output['full9'].values())
+assert worker_output['full9']['st_size']==physical_ref['bytes'] and worker_output['full9']['st_nlink']==1
+assert {k:worker_output[k] for k in ('bytes','sha256')}=={k:physical_ref[k] for k in ('bytes','sha256')}
+assert physical_ref['sha256']==sent['physical_request_sha256']==manifest['physical_context']['physical_request_sha256']
+assert physical_ref['sha256']==anchors['physical_request_sha256']==joined['request_sha256']==current['request_sha256']
+assert h(retained_raw)==physical_ref['sha256']
+
+paired_output=files['paired-cache.bin']
+paired_ref={k:paired_output[k] for k in ('path','bytes','sha256')}
+retained_archive_ref,retained_archive=read(paired_ref['path'],MAX_PARENT_REPLAY_BYTES)
+assert retained_archive_ref==paired_ref and paired_ref['bytes']>0
+worker_paired_output=summary['retained_paired_cache_archive']
+assert set(worker_paired_output)=={'path','bytes','sha256','full9'}
+worker_paired_path=Path(worker_paired_output['path'])
+worker_request_path=Path(worker_output['path'])
+assert worker_paired_path.is_absolute() and '..' not in worker_paired_path.parts
+assert worker_paired_path.name=='paired-cache.bin' and worker_paired_path.parent==worker_request_path.parent
+assert not os.path.lexists(worker_paired_path.parent)
+assert set(worker_paired_output['full9'])==set(fields)
+assert all(type(value) is int and value>=0 for value in worker_paired_output['full9'].values())
+assert worker_paired_output['full9']['st_size']==paired_ref['bytes'] and worker_paired_output['full9']['st_nlink']==1
+assert stat.S_ISREG(worker_paired_output['full9']['st_mode'])
+assert stat.S_IMODE(worker_paired_output['full9']['st_mode'])==0o400
+assert all(worker_paired_output[k]==paired_ref[k] for k in ('bytes','sha256'))
+assert Path(physical_ref['path'])!=Path(paired_ref['path'])
+
+request_value=decode_parent_replay_value_v1(retained_raw,expected_payload_sha256=physical_ref['sha256'])
+assert request_value['schema']=='legal-uscode-release-closure-request/v4'
+assert request_value['profile']=='reviewed-source-use-whole-norm-physical-source-replay/v1'
+assert request_value['native'] is None
+request_artifacts={row['artifact_id']:row for row in request_value['artifacts']}
+assert len(request_artifacts)==len(request_value['artifacts'])
+replay_row=request_artifacts[request_value['component']['replay']]
+assert replay_row['family']=='replay' and len(replay_row['payload'])==replay_row['bytes']
+replay_args=decode_parent_replay_value_v1(replay_row['payload'],expected_payload_sha256=replay_row['sha256'])['join_args']
+assert type(replay_args) is list and len(replay_args)==6
+pairing,=json.loads(replay_args[0])['paired_bundles']
+manifest_path=pairing['manifest_path_in_repo']
+relative_manifest=Path(manifest_path)
+assert not relative_manifest.is_absolute() and '..' not in relative_manifest.parts
+assert str(relative_manifest)==manifest_path and relative_manifest.suffix=='.json'
+historical_repo=Path(pairing['repository_root'])
+assert historical_repo.is_absolute() and '..' not in historical_repo.parts
+assert historical_repo.is_relative_to(worker_paired_path.parent/'material') and not os.path.lexists(historical_repo)
+original_paths=request_value['physical_inputs']
+assert set(original_paths)=={'law_path','entity_path'}
+assert all(Path(path).is_relative_to(worker_paired_path.parent/'material') and not os.path.lexists(path)
+           for path in original_paths.values())
+assert set(replay_args[4])=={manifest_path}
+manifest_bytes=replay_args[4][manifest_path]
+paired_manifest_ref=dict(path_in_repo=manifest_path,bytes=len(manifest_bytes),sha256=h(manifest_bytes))
+assert summary['retained_paired_cache_manifest']==paired_manifest_ref
+manifest_descriptor,=json.loads(replay_args[3])['manifests']
+assert all(manifest_descriptor[k]==paired_manifest_ref[k] for k in ('path_in_repo','bytes','sha256'))
+bundle_manifest=json.loads(manifest_bytes)
+assert bundle_manifest['path_in_repo']==manifest_path
+assert set(bundle_manifest['tables'])=={'artifacts','goals','paired_spans'}
+archive=decode_parent_replay_value_v1(retained_archive,expected_payload_sha256=paired_ref['sha256'])
+assert type(archive) is dict and len(archive)==3
+archive_tables={}
+for role, table in bundle_manifest['tables'].items():
+    name=table['path_in_repo']
+    relative=Path(name)
+    assert not relative.is_absolute() and '..' not in relative.parts
+    assert str(relative)==name and relative.suffix=='.parquet'
+    body=archive[name]
+    assert type(body) is bytes and body[:4]==body[-4:]==b'PAR1'
+    assert type(table['bytes']) is int and 0<len(body)==table['bytes'] and h(body)==table['sha256']
+    archive_tables[role]={k:table[k] for k in ('path_in_repo','bytes','sha256')}
+assert set(archive)=={row['path_in_repo'] for row in archive_tables.values()}
+assert len(manifest_bytes)+sum(row['bytes'] for row in archive_tables.values())<=MAX_PARENT_REPLAY_BYTES
+
+source_only=summary['source_only_original_path_projection']
+source_only_raw=canonical(source_only)
+source_only_projection={
+    'canonical_bytes':summary['source_only_original_path_projection_canonical_bytes'],
+    'sha256':summary['source_only_original_path_projection_sha256'],
+}
+assert source_only_projection=={'canonical_bytes':len(source_only_raw),'sha256':h(source_only_raw)}
+observation_keys={'current_review_observation','checked_native_observation'}
+declaration_keys={'declared_eligibility_evidence','declared_qualification','declared_eligibility'}
+assert not (observation_keys & source_only.keys())
+assert set(joined)==set(source_only)|observation_keys
+assert {key:value for key,value in joined.items() if key not in observation_keys|declaration_keys}=={
+    key:value for key,value in source_only.items() if key not in declaration_keys}
+assert source_only['request_sha256']==physical_ref['sha256']
+source_evidence=source_only['declared_eligibility_evidence']
+assert source_evidence=={key:value for key,value in evidence.items() if key not in observation_keys|{'record_cid'}} | {
+    'record_cid':source_evidence['record_cid']}
+for key in declaration_keys:
+    verify_seal(source_only[key])
+assert source_only['fixture_only'] is source_only['local_replay_complete'] is True
+assert source_only['declared_qualification']['dimensions']['proof']['status']=='pending'
+assert source_only['declared_eligibility']['views']['reviewed_graph']['declared_eligible'] is True
+assert source_only['declared_eligibility']['views']['checked_lean']['declared_eligible'] is False
+assert all(source_only[key] is False for key in (
+    'admitted','formalized','source_semantics_verified','source_authenticity_verified','proof_verified',
+    'native_receipt_replayed','release_ready'))
+assert all(type(source_only[key]) is int and source_only[key]==0 for key in (
+    'admission_mask','release_mask','gold_mask','training_mask','evaluation_gold_mask'))
+assert anchors['native_live_result_cid']==checked['live_result_cid']==result['record_cid']
+assert anchors['current_review_observation_cid']==checked['current_review_observation_cid']==current['record_cid']
+assert anchors['checked_native_observation_cid']==checked['record_cid']
+assert checked['unit']==sent['unit'] and checked['source_definition']==sent['source_definition']
+assert checked['graph_sha256']==sent['graph_sha256']==joined['graph_sha256']
+assert checked['admission_sha256']==sent['admission_sha256']==joined['admission_sha256']
+assert checked['preservation_sha256']==sent['preservation_sha256']==joined['preservation_sha256']
+assert checked['realization_sha256']==sent['realization_sha256']==result['preparation_sha256']
+assert checked['declaration']==theorem and checked['claim_digest']==req['claim_digest']
+assert checked['obligation_digest']==req['obligation_digest']
+assert checked['proposition_utf8_sha256']==sent['proposition_utf8_sha256']
+assert all(checked[name]==v[name] for name in ('retained_receipt_sha256','retained_packet_sha256'))
+assert checked['checked_under_explicit_hypotheses'] is checked['premise_remains_quantified'] is True
+assert checked['proof_receipt_issued'] is checked['qualified_request_execution'] is False
+assert checked['axiom_dependencies']==[]
+assert evidence['checked_native_observation']==checked and evidence['current_review_observation']==current
+assert joined['declared_qualification']['dimensions']['proof']['status']=='pending'
+assert joined['declared_eligibility']['views']['reviewed_graph']['declared_eligible'] is True
+assert joined['declared_eligibility']['views']['checked_lean']['declared_eligible'] is False
+assert joined['proof_verified'] is joined['admitted'] is joined['original_native_parent_custody_verified'] is False
+assert all(type(joined[k]) is int and joined[k]==0 for k in ('admission_mask','release_mask','gold_mask','training_mask','evaluation_gold_mask'))
+bridge_refusals=summary['checked_release_refusals']
+assert [entry['case'] for entry in bridge_refusals]==[
+    'checked-native-without-current-review','same-live-handle-other-exact-request-id','same-live-handle-revoked-current-registry']
+assert [entry['refusal'] for entry in bridge_refusals]==[
+    'checked Native requires independently selected current review','exact issued live success original inputs required',
+    'current review trust pins differ from the signed replay trust']
+assert bridge_refusals[1]['offered_request_sha256']==checks[1]['offered_request_sha256']!=opt
+revoked = bridge_refusals[2]
+assert revoked['independently_assessed_reviewer_revoked'] is True
+assert revoked['selected_registry_sha256'] != revoked['historical_registry_sha256'] == current['registry_sha256']
+assert revoked['selected_policy_sha256'] != revoked['historical_policy_sha256'] == current['policy_sha256']
+whole_summary=summary['checked_whole_project']
+assert set(whole_summary)=={'report_extension','full_report_bytes','full_report_sha256','wrong_artifact_pin_refusal'}
+extension=whole_summary['report_extension']
+assert set(extension)=={'checked_whole_project_observation','declared_whole_project_qualification',
+                        'declared_whole_project_eligibility'}
+assert not set(extension).intersection(joined) and not set(extension).intersection(source_only)
+whole_raw=canonical(joined|extension)
+assert (len(whole_raw),h(whole_raw))==(whole_summary['full_report_bytes'],whole_summary['full_report_sha256'])
+whole=extension['checked_whole_project_observation']
+whole_qualification=extension['declared_whole_project_qualification']
+whole_eligibility=extension['declared_whole_project_eligibility']
+for sealed in extension.values():
+    verify_seal(sealed)
+assert whole['schema']=='legal-corpus-physical-v4-checked-whole-project-observation/v1'
+obligations=manifest['preservation_obligations']
+assert result['obligations']==result['preservation_obligations']==receipt['conditional_theorems']==obligations
+assert set(receipt['theorem_axiom_dependencies'])==set(obligations)
+assert all(receipt['theorem_axiom_dependencies'][name]==[] for name in obligations)
+assert whole['obligations']==[dict(declaration=name,axiom_dependencies=[]) for name in obligations]
+norm_ids=[row['unit_id'] for row in manifest['units'] if row['kind']=='norm']
+whole_norms=[row for row in manifest['theorem_bindings']
+             if row['binding']['kind']=='whole_norm_definition_expansion']
+assert len(norm_ids)==len(set(norm_ids))==2
+assert [row['binding']['unit_id'] for row in whole_norms]==norm_ids
+assert all(row['theorem'] in obligations for row in whole_norms)
+assert whole['definition_application_obligations']==manifest['definition_application_obligations']
+assert whole['ordered_unit_ids']==[row['unit_id'] for row in manifest['units']]
+
+compiled={row['path']:row for row in inventory if row['path'].startswith('compiled/')}
+assert whole['compiled_modules']==manifest['expected_modules']==receipt['compiled_modules']
+assert whole['executed_source_sha256']==manifest['file_sha256']==receipt['executed_project_sha256']
+assert whole['compiled_artifacts']==[compiled['compiled/'+module.replace('.','/')+'.olean']
+                                     for module in manifest['expected_modules']]
+assert len(whole['compiled_artifacts'])==len(compiled)
+assert whole['toolchain']==manifest['toolchain']==receipt['toolchain']==p['project']['toolchain']
+assert whole['compiler_binary_sha256']==receipt['binary_sha256']
+assert all(whole[key]==checked[key] for key in (
+    'physical_request_sha256','graph_sha256','admission_sha256','preservation_sha256',
+    'realization_sha256','planned_request_sha256','retained_receipt_sha256','retained_packet_sha256',
+    'current_review_observation_cid','live_result_cid'))
+assert whole['selected_native_observation_cid']==checked['record_cid']
+assert whole['native_execution_authenticated'] is whole['checked_under_explicit_hypotheses'] is True
+assert whole['source_definition_premise_required'] is True
+assert whole['formal_assumptions']==receipt['formal_assumptions']==[]
+assert all(whole[key] is False for key in ('proof_receipt_issued','qualified_request_execution',
+    'proof_authority','original_admitted_parent_custody_authenticated'))
+
+declared=joined['declared_qualification']
+expected_dimensions={**declared['dimensions'], **{
+    name: {'status':'passed','evidence_cids':[whole['record_cid']]}
+    for name in ('native_translation','lean_compilation')}}
+assert {key:value for key,value in whole_qualification.items() if key not in {'record_cid','dimensions'}}=={
+    key:value for key,value in declared.items() if key not in {'record_cid','dimensions'}}
+assert whole_qualification['dimensions']==expected_dimensions
+assert whole_qualification['dimensions']['proof']['status']=='pending'
+assert whole_eligibility['artifact_cid']==declared['artifact_cid']
+assert whole_eligibility['profile']==declared['profile']
+assert whole_eligibility['qualification_cid']==whole_qualification['record_cid']
+assert whole_eligibility['views']==(joined['declared_eligibility']['views'] | {
+    'checked_lean': {'declared_eligible':False,'blockers':[
+        {'dimension':'proof','observed_status':'pending','required_statuses':['discharged']}]}})
+assert all(whole_qualification[key] is whole_eligibility[key] is False
+           for key in ('admitted','formalized','proof_authority','source_semantics_verified',
+                       'evidence_authenticated','reviewer_authenticated'))
+wrong_pin=whole_summary['wrong_artifact_pin_refusal']
+assert set(wrong_pin)=={'case','path','original_sha256','offered_sha256','refusal'}
+assert wrong_pin['case']=='same-live-handle-wrong-compiled-artifact-pin'
+assert wrong_pin['path']==min(compiled)
+assert wrong_pin['original_sha256']==compiled[wrong_pin['path']]['sha256']
+assert wrong_pin['offered_sha256']==h(b'fictional different compiled artifact DATA')!=wrong_pin['original_sha256']
+assert wrong_pin['refusal']=='whole-project compiled artifact differs from the independent pin'
+scope=dict(schema='actual-R5-physical-v4-checked-whole-project-current/v1',
+    terminal_returncode=0,terminal_session=session,full_report=report_ref,current_Source_read=source_ref,
+    last_published_Guide582=guide_ref,prior_managed_ordinary62=ordinary_ref,exact_owned_terminal=dict(path=sys.argv[5],bytes=int(sys.argv[6]),sha256=sys.argv[7]),root_selection=chosen,raw_outputs=files,
+    retained_physical_request=physical_ref,original_planned_physical_request_sha256=sent['physical_request_sha256'],
+    retained_request_transport_bytes=physical_ref['bytes'],
+    retained_paired_cache_archive=paired_ref,retained_paired_cache_manifest=paired_manifest_ref,
+    retained_paired_cache_verified_tables=archive_tables,
+    exact_paired_archive_joined_to_three_request_embedded_manifest_descriptors=True,
+    original_fixture_paths_and_workspace_absent=True,
+    exact_three_source_only_dag_json_record_CIDs_recomputed=True,
+    source_only_original_path_projection=source_only_projection,
+    after_close_portable_replay_executed=False,
+    full_retained_precharge=selection['Source_precharge'],Source_closed=True,resource_and_parent_closed=True,
+    receipt_observation=v,refused_joins=checks,checked_release_anchors=anchors,checked_native_observation=checked,
+    current_review_observation=current,checked_release_refusals=bridge_refusals,exact_six_dag_json_record_CIDs_recomputed=True,exact_compiled_modules=len(receipt['compiled_modules']),exact_conditional_obligations=len(obligations),
+    checked_whole_project=whole_summary,exact_whole_project_dag_json_record_CIDs_recomputed=True,
+    fixture='signed fictional source and review',A4_original_parent_admission=False,proof_receipt_or_corpus_admission=False,
+    exact_logical_output=acc,transport_wrapper_bytes=sum(f['bytes'] for f in files.values()))
+out=work/'actual-R5-physical-v4-checked-whole-project-current.json'
+body=(json.dumps(scope,indent=2,sort_keys=True)+'\n').encode()
+with os.fdopen(os.open(out,os.O_CREAT|os.O_EXCL|os.O_WRONLY|os.O_NOFOLLOW,0o400),'wb') as f:
+    f.write(body);f.flush();os.fsync(f.fileno())
+print(json.dumps(read(out)[0],sort_keys=True))
+print(json.dumps(dict(measurements=m,exact_logical_output=acc)))

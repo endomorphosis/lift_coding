@@ -1,0 +1,231 @@
+{
+  "Git_parent_RLIMIT_AS_observed": [
+    -1,
+    -1
+  ],
+  "Source_Native_tests_replayed": false,
+  "accelerate_unchanged": true,
+  "actual_recovery_publication": {
+    "bytes": 1133,
+    "path": "/tmp/git-renewed-all-work-20261127-17pd2xkd/actual-datasets-publication.json",
+    "sha256": "540870f28af17a20dfb4808de1406dbdf4045f7fbd9d74bf04532ede81b4b880"
+  },
+  "all4_remote_main_exact": true,
+  "all_owned_publication_commands_closed": true,
+  "archive_owner_release": {
+    "bytes": 1296,
+    "path": "/tmp/git-renewed-all-work-20261127-17pd2xkd/PUBLICATION-CUSTODY-RELEASE-TO-GUIDE586.json",
+    "sha256": "bc5d95f19f386c986690808927a0cb9c3d6df1bfd34d9dd5a0eabc0426245b98"
+  },
+  "archives_retained": {
+    "docs/reconciliation": [
+      "040000",
+      "tree",
+      "0c74bd2052e134ac3c95128cf0f38acb4bf61571"
+    ],
+    "docs/reconciliation/retained-legal-autoformalization-work-20261127-followup": [
+      "040000",
+      "tree",
+      "6001629ffc66e09857ec40023e755f9c8d12d7fc"
+    ],
+    "docs/reconciliation/retained-legal-autoformalization-work-20261127-renewed": [
+      "040000",
+      "tree",
+      "bdc374a73587dd1242f7bdbbb7a44d898930ffed"
+    ]
+  },
+  "commands": {
+    "bytes": 39446,
+    "path": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/actual-Guide586-publication-owned-Git-commands-v02.json",
+    "sha256": "9b9cdff5083b00a4f94154098b59f53220a2cd78034115fea032f766d99a48b2"
+  },
+  "current_base_receipt": {
+    "bytes": 7580,
+    "path": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/reconciled-current-main-mzcWsJTx/actual-reconciled-Guide586-current-D-private.json",
+    "sha256": "89a15c961ec29377ccb43b4b402b34d46a05093684b7457086997f3c87e78168"
+  },
+  "errors": [],
+  "exact_four_guide_blobs": {
+    "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json": {
+      "bytes": 1562821,
+      "committed_blob": "af6e94a65ec4c9ed3385f909ac86f49fd7e69a8d",
+      "mode": "100644",
+      "sha256": "273e5d19f45e7dc7b2ddc3115facd966eb02a67e0daed1769b4b274ecee075f4"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md": {
+      "bytes": 1114702,
+      "committed_blob": "678c56071e08f08c7ee89d653b7d26458422fb08",
+      "mode": "100644",
+      "sha256": "74f3ad40a8ae3225ac7576975f0df102aca3a462afda91bfdeb17e0ae0071f50"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md": {
+      "bytes": 863096,
+      "committed_blob": "b884734f684219f4562370f48b9b5468544b0eb8",
+      "mode": "100644",
+      "sha256": "865d811440cbf4bc2ddcb71e6e82b5add452ff04b45924fce6fd9eac8b069b56"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json": {
+      "bytes": 2420837,
+      "committed_blob": "929622ee630f98b6625f31bdd4bf3271b92c47a3",
+      "mode": "100644",
+      "sha256": "4621088569b1d4b455eddf87087d00349d0bb075eeb826aefb5cb369a373b34a"
+    }
+  },
+  "exact_private_integration": {
+    "bytes": 5591,
+    "path": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/Guide586-current-base-exact-integration-adapter-v02.json",
+    "sha256": "cbbe2508aa38fbfa0b2fceb7e9930713a8165eba3163ff6f22c03a039d8f0165"
+  },
+  "exact_recovery_blobs": {
+    "ipfs_datasets_py/logic/autoformal/supervisor_loop.py": "aa84acbff0f0c146e1f1ad760fa55097267e4f2f",
+    "scripts/ops/legal_ir/run_autoformal_supervisor.py": "e1aaacdec99ece173e07341f2d2b03e81f3a3382",
+    "tests/unit/logic/test_supervisor_agent_turn_recovery.py": "12025abf6e636a065d23300f514e49a4b6b0acd4"
+  },
+  "extra_document_wave": false,
+  "force_used": false,
+  "fresh_origin_main": {
+    "accelerate": "fae7981fa576817536a3c7aa62c5d28dc417f214",
+    "datasets": "10a3dac4d863b44eb848dfc9f6f91a925e4e1c13",
+    "hallucinate": "f41eef8e6978807553ec7c000688be61fed1863e",
+    "root": "9577abf26d4e236709d11a0f39402cdd986da267"
+  },
+  "hosted_CI_observed": false,
+  "independent_content_preflight": {
+    "bytes": 19594,
+    "path": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/independent-read-only-Guide586-current-base-preflight-v02.json",
+    "sha256": "c0376154c31a5e6894d3d9bdaaa22af81490479631b23583c56faa98b05b022b"
+  },
+  "intended_gitlinks": {
+    "hallucinate": {
+      "ipfs_accelerate_py": [
+        "160000",
+        "commit",
+        "fae7981fa576817536a3c7aa62c5d28dc417f214"
+      ],
+      "ipfs_datasets_py": [
+        "160000",
+        "commit",
+        "10a3dac4d863b44eb848dfc9f6f91a925e4e1c13"
+      ]
+    },
+    "root": {
+      "external/ipfs_accelerate": [
+        "160000",
+        "commit",
+        "fae7981fa576817536a3c7aa62c5d28dc417f214"
+      ],
+      "external/ipfs_datasets": [
+        "160000",
+        "commit",
+        "10a3dac4d863b44eb848dfc9f6f91a925e4e1c13"
+      ],
+      "hallucinate_app": [
+        "160000",
+        "commit",
+        "f41eef8e6978807553ec7c000688be61fed1863e"
+      ]
+    }
+  },
+  "no_added_Git_RLIMIT_AS": true,
+  "normal_fast_forward_steps": [
+    {
+      "bytes": 1517,
+      "path": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/actual-Guide586-normal-FF-step-v02-01-datasets.json",
+      "sha256": "4259f10a8ce8880c6a14cf37ae5f1809f8d2e2e2648be821de27d6e37b0a673f"
+    },
+    {
+      "bytes": 1236,
+      "path": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/actual-Guide586-normal-FF-step-v02-02-hallucinate.json",
+      "sha256": "3c8b27458f30b807a4b1fb98b56da6c09e3e98b7421dbd794ed3a46e155c9a12"
+    },
+    {
+      "bytes": 1218,
+      "path": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/actual-Guide586-normal-FF-step-v02-03-root.json",
+      "sha256": "ad00f2c08383824c4cf28d2b503c6dd72cf48807d4fcc5b3be81e53176a1fd85"
+    }
+  ],
+  "original_root_writes": false,
+  "pending_archive_adoption_selected": false,
+  "prior_origin_main": {
+    "accelerate": "fae7981fa576817536a3c7aa62c5d28dc417f214",
+    "datasets": "344d3282d2d268505211f8dcf60e98b5306fcd4f",
+    "hallucinate": "126fed117ffc82ef809cb1ec2c213405a4a0fc3f",
+    "root": "5fd4dc22e50b4a8dac0f9222348f9db77c12cb6b"
+  },
+  "qualification": {
+    "namespaced_Native2_separate": {
+      "bytes": 5520,
+      "path": "/tmp/Root-P1-Guide585-namespaced-Native2-Source4-vydep2ma/actual-current-Guide585-namespaced-Native2-qualification-closed.json",
+      "sha256": "a263d3bf50afc2b8541f939c3eb3aace36a3034492b76e7d10f2ecf2c630fb18"
+    },
+    "recovery": {
+      "bytes": 1436,
+      "path": "/tmp/git-renewed-all-work-20261127-17pd2xkd/current-base-test-result.json",
+      "sha256": "3a3a1d015e5df27eed577f7851c7495b904ad6fb7ae3517d3b493e377a5b692c"
+    }
+  },
+  "recovery_original_author_commit": "68718850a6a29dcac368d7587d9bef95adb22420",
+  "repositories": {
+    "datasets": {
+      "HEAD_selected_commit": "10a3dac4d863b44eb848dfc9f6f91a925e4e1c13",
+      "bare_repository": true,
+      "exact_changed_paths": [
+        "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json",
+        "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+        "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md",
+        "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json"
+      ],
+      "isolated_git_dir": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/reconciled-current-main-mzcWsJTx/datasets.git",
+      "no_worktree_or_index_mutation": true,
+      "prepared_ref": "refs/heads/guide586-current-base-publication-v02",
+      "prepared_ref_unchanged": true,
+      "refs_after_sha256": "13a62b083f7588a94ccbbc4d8f943b38ea93bca6752dbf94982b233d854bb5e8",
+      "refs_before_sha256": "13a62b083f7588a94ccbbc4d8f943b38ea93bca6752dbf94982b233d854bb5e8",
+      "tree": "da78f7506611ad2ce50305675fdd8b635f7a40f9",
+      "worktree_applicable": false
+    },
+    "hallucinate": {
+      "HEAD_selected_commit": "f41eef8e6978807553ec7c000688be61fed1863e",
+      "bare_repository": true,
+      "exact_changed_paths": [
+        "ipfs_datasets_py"
+      ],
+      "isolated_git_dir": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/hallucinate.git",
+      "no_worktree_or_index_mutation": true,
+      "prepared_ref": "refs/heads/guide586-current-base-publication-v02",
+      "prepared_ref_unchanged": true,
+      "refs_after_sha256": "73e38a9e6fb5a700be3539a5e7faa30420eed38a9e29d081a105afe289c83315",
+      "refs_before_sha256": "73e38a9e6fb5a700be3539a5e7faa30420eed38a9e29d081a105afe289c83315",
+      "tree": "5d281766c3ac03ebd16dbf14a90d6276be668f79",
+      "worktree_applicable": false
+    },
+    "root": {
+      "HEAD_selected_commit": "9577abf26d4e236709d11a0f39402cdd986da267",
+      "bare_repository": true,
+      "exact_changed_paths": [
+        "external/ipfs_datasets",
+        "hallucinate_app"
+      ],
+      "isolated_git_dir": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/root.git",
+      "no_worktree_or_index_mutation": true,
+      "prepared_ref": "refs/heads/guide586-current-base-publication-v02",
+      "prepared_ref_unchanged": true,
+      "refs_after_sha256": "6f205df518ec4a7e1e101a5aa0108aebfaa1ca813f9278e7a3a21a917b5ad797",
+      "refs_before_sha256": "6f205df518ec4a7e1e101a5aa0108aebfaa1ca813f9278e7a3a21a917b5ad797",
+      "tree": "89e56e280edadff930991527123f389cf39b80bc",
+      "worktree_applicable": false
+    }
+  },
+  "retained_failed_attempt": {
+    "bytes": 7563,
+    "path": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/actual-Guide586-and-recovery-normal-FF-publication.json",
+    "sha256": "5f5bfb24114f7d1bba9d33268206b1f3ec0e75894e201b78a7e22c6f66a3b6df"
+  },
+  "schema": "actual-Guide586-and-recovery-normal-FF-publication/v1",
+  "selected_plan": {
+    "bytes": 7938,
+    "path": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/READY-Guide586-current-base-normal-parent-pins-v02.json",
+    "sha256": "27433ab1fbcc0e00c42c37944b08f0b94bfcc8a67770c15b0546aba78e7d5f5c"
+  },
+  "terminal_returncode": 0
+}

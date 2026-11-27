@@ -1,0 +1,258 @@
+"""Late bind the prepared P1 cache reload request to the existing Source42 CAS."""
+import argparse
+import ast
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import runpy
+import time
+
+
+BASE = Path(__file__).resolve().parent
+PREVIOUS = Path('/tmp/Root-result-cache-owned-existing-route-L4Wyme59')
+EXISTING_CONTROLS = Path('/tmp/watchdog-owning-normal-existing-control-INERT-v01-ulvhamz1/Main2-two-code-CAS-INERT-v06-dyo6fp5l')
+PACKET = Path('/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/Phase1-proof-cache-reload-filename-private-v01-rdtjc1jx/SEALED-Phase1-cache-reload-filename-binding-exact2-private-v01.json')
+UNIT = 'Phase 1 proof-cache reload filename binding'
+ENVELOPE = 67108864
+CARRY_BYTES = 33554432
+CARRY_CAPTURES = 4096
+TARGETS = (
+    'ipfs_datasets_py/logic/legal_ir/proof_cache.py',
+    'tests/unit/logic/legal_ir/test_proof_cache.py',
+)
+FENCES = (
+    'ipfs_datasets_py/logic/backends/kernel/lean.py',
+    'tests/integration/logic/backends/test_kernel_backends.py',
+    'ipfs_datasets_py/logic/backends/process.py',
+)
+MATERIALIZATION_SHA = 'da7e3ccb5622a3654280e564494dd13bc12eda0cb7c2a98eb1f6a9d96021d549'
+CAS_SHA = '243a28116c2a472d9590a7ef120abeddd62e9d41c843a4625ece2343f32bd4bd'
+EXPECTED_HEADS = {
+    'accelerate': 'fae7981fa576817536a3c7aa62c5d28dc417f214',
+    'datasets': '937ad474d2d8650e3ccee16c10319a9c72d4429a',
+}
+
+
+def read_pinned(path, size, digest):
+    with path.open('rb') as stream:
+        raw = stream.read(size + 1)
+    assert len(raw) == size and hashlib.sha256(raw).hexdigest() == digest, path
+    return raw
+
+
+def reference(path, size, digest):
+    return {'path': str(path), 'bytes': size, 'sha256': digest}
+
+
+def read_ref(ref):
+    path = Path(ref['path'])
+    assert path.is_absolute() and type(ref['bytes']) is int and ref['bytes'] >= 0
+    return read_pinned(path, ref['bytes'], ref['sha256'])
+
+
+def seal(path, obj):
+    raw = obj if isinstance(obj, bytes) else (json.dumps(obj, indent=2, sort_keys=True) + '\n').encode()
+    with path.open('xb') as f:
+        f.write(raw)
+        f.flush()
+        os.fsync(f.fileno())
+    path.chmod(0o400)
+    return reference(path, len(raw), hashlib.sha256(raw).hexdigest())
+
+
+def existing_git_meta():
+    path = PREVIOUS / 'bind-source2.py'
+    read_pinned(path, 8712, '4b446e280dd1c40404acef11f8baee7d0e7ba8f14d9dd0d31dcdda74f38bd342')
+    bindings = runpy.run_path(str(path), run_name='existing_Source2_nonlaunch_bindings')
+    return bindings['git'], bindings['meta']
+
+
+def root_and_guard(material, git, meta):
+    roles = json.loads(read_ref(material['role_inventory']))
+    rows = json.loads(read_ref(material['guard']))['rows']
+    guard = {r['path']: r for r in rows}
+    assert len(rows) == len(guard) == material['row_count'] == 1633
+    assert material['heads'] == EXPECTED_HEADS
+    roots = {}
+    for name, abbreviation in (('datasets', 'D'), ('accelerate', 'A')):
+        root = Path(material[abbreviation])
+        assert roles[name]['root'] == str(root)
+        head = git(root, 'rev-parse', 'HEAD').decode().strip()
+        tree = git(root, 'rev-parse', 'HEAD^{tree}').decode().strip()
+        assert (head, tree) == (material['heads'][name], material['trees'][name])
+        assert not git(root, 'status', '--porcelain=v1')
+        roots[name] = {'root': str(root), 'Git_HEAD': head, 'Git_tree': tree}
+    for row in rows:
+        assert meta(Path(row['path'])) == row, row['path']
+    return roots, roles, guard
+
+
+def prepare_targets(dataset, items, tracked, guard, meta):
+    assert tuple(row['repo_relative_path'] for row in items) == TARGETS
+    targets = []
+    for item in items:
+        rel = item['repo_relative_path']
+        before, after = item['preimage'], item['postimage']
+        for version in (before, after):
+            raw = read_ref(version)
+            git_header = b'blob ' + str(len(raw)).encode() + b'\0'
+            assert hashlib.sha1(git_header + raw).hexdigest() == version['git_blob']
+            compile(ast.parse(raw, filename=rel), rel, 'exec', dont_inherit=True)
+        assert tracked[rel] == [item['git_mode'], before['git_blob']]
+        row = meta(dataset / rel, before['sha256'])
+        assert row['bytes'] == before['bytes'] and row['full9'] == guard[row['path']]['full9']
+        guard[row['path']] = row
+        targets.append({
+            'path': row['path'], 'relative_path': rel, 'bytes': row['bytes'], 'full9': row['full9'],
+            'before_Git_blob_oid': before['git_blob'], 'before_sha256': before['sha256'],
+            'before_private': reference(Path(before['path']), before['bytes'], before['sha256']),
+            'post_private': reference(Path(after['path']), after['bytes'], after['sha256']),
+        })
+    return targets
+
+
+def prepare_nonclock():
+    assert not (BASE / 'source2-output').exists()
+    material_ref = reference(BASE / 'actual-private-exact-current-base-D-materialized.json', 1475, MATERIALIZATION_SHA)
+    material = json.loads(read_ref(material_ref))
+    packet = json.loads(read_pinned(PACKET, 16931, 'd754b5b134f3116aeac0efdc04b515e006140e41cc4f9f80eed2e7b55d8c834d'))
+    predecessor_request = json.loads(read_pinned(
+        EXISTING_CONTROLS / 'current-Main2-two-Python-code-CAS-request-INERT-v06.json',
+        9683, '48ab37a233a01079621450cf0cb8ac2f82b46a9f2ac19ad1eedd26a7134d211d'))
+    git, meta = existing_git_meta()
+    roots, roles, guard = root_and_guard(material, git, meta)
+    dataset = Path(material['D'])
+    accelerate = Path(material['A'])
+    tracked = roles['datasets']['tracked']
+    targets = prepare_targets(dataset, packet['files'], tracked, guard, meta)
+    fences = []
+    for rel in FENCES:
+        body = git(dataset, 'cat-file', 'blob', tracked[rel][1])
+        row = meta(dataset / rel, hashlib.sha256(body).hexdigest())
+        assert row['bytes'] == len(body) and row['full9'] == guard[row['path']]['full9']
+        row['relative_path'] = rel
+        guard[row['path']] = row
+        fences.append(row)
+    aux = []
+    for root in (dataset, accelerate):
+        for rel in ('.git/index', '.git/config'):
+            path = root / rel
+            pinned = guard[str(path)]
+            raw = path.read_bytes()
+            row = meta(path, hashlib.sha256(raw).hexdigest())
+            assert row['full9'] == pinned['full9'] and len(raw) == pinned['bytes']
+            guard[str(path)] = row
+            if root == dataset:
+                aux.append(row)
+            elif rel == '.git/index':
+                assert row['sha256'] == material['A_Guide582_index_SHA256']
+    dirs = {dataset, dataset / '.git', accelerate, accelerate / '.git', BASE, BASE.parent, Path('/')}
+    for row in (*targets, *fences):
+        dirs.update(Path(row['path']).parents)
+    agents_rows = []
+    for directory in sorted(dirs):
+        for name in ('AGENTS.md', 'AGENTS.override.md'):
+            path = directory / name
+            assert not os.path.lexists(path), path
+            agents_rows.append({'path': str(path), 'exists': False})
+    current_guard = seal(BASE / 'source2-nonclock-full9-with-selected-hashes.json', {'rows': list(guard.values()), 'roots': roots})
+    request = {k: predecessor_request[k] for k in ('approved_Source42_binding', 'stage_helper', 'per_document_input_cap')}
+    request.update(
+        targets=targets, target_count=2, root=str(dataset), root_expected=roots['datasets'],
+        additional_A=roots['accelerate'], Source_envelope=ENVELOPE, ledger_before=None,
+        full_metadata_guard=current_guard, expected_guard_row_count_after_scope_extension=len(guard),
+        Git_aux=aux, AGENTS_chain_metadata=agents_rows, unchanged_fences=fences,
+        protected_completed_targets=[],
+    )
+    return seal(BASE / 'P1-two-code-CAS-request-INERT.json', request)
+
+
+def adapt_existing_cas(selection, request, before, output, guard_count):
+    cas = EXISTING_CONTROLS / 'execute-Main2-two-Python-code-CAS-INERT-v06.py.DATA'
+    source = read_pinned(cas, cas.stat().st_size, CAS_SHA).decode()
+    for name, value in {'SEL': selection, 'REQ': request, 'before': before, 'PREBOUND_OUTPUT_NAMESPACE': str(output)}.items():
+        source, count = re.subn(r'^' + name + r' ?= ?.*$', lambda _: name + ' = ' + repr(value), source, flags=re.M)
+        assert count == 1, (name, count)
+    source, old_count = re.subn(r'\b1199\b', str(guard_count), source)
+    source, new_count = re.subn(r'\b1205\b', str(guard_count), source)
+    assert (old_count, new_count) == (2, 1)
+    source = f'CARRIED_OPERATOR_BYTES = {CARRY_BYTES}\nCARRIED_OPERATOR_CAPTURES = {CARRY_CAPTURES}\n' + source
+    compile(source, str(cas), 'exec')
+    return source.encode()
+
+
+def late_bind(handoff_ref):
+    handoff = json.loads(read_ref(handoff_ref))
+    assert handoff['Root_selected'] is True and handoff['unit'] == UNIT
+    request_ref = handoff['inert_request']
+    assert Path(request_ref['path']) == BASE / 'P1-two-code-CAS-request-INERT.json'
+    request = json.loads(read_ref(request_ref))
+    assert request['ledger_before'] is None and request['Source_envelope'] == ENVELOPE
+    assert request['expected_guard_row_count_after_scope_extension'] == 1633
+    remote = json.loads(read_ref(handoff['remote_observation']))
+    assert remote['heads']['datasets'] == EXPECTED_HEADS['datasets']
+    assert remote['heads']['accelerate'] == EXPECTED_HEADS['accelerate']
+    precharge = json.loads(read_ref(handoff['full_precharge']))
+    assert precharge['added_Source_envelope'] == ENVELOPE
+    before, debit = precharge['selected'], precharge['after_full_precharge']
+    assert debit == {**before, 'used': before['used'] + ENVELOPE,
+                     'internal_used': before['internal_used'] + ENVELOPE,
+                     'captures': before['captures'] + 1}
+    assert debit['used'] <= debit['global_cap'] and debit['internal_used'] <= debit['internal_cap']
+    start, end = handoff['launch_not_before_utc_ns'], handoff['launch_deadline_utc_ns']
+    assert type(start) is int and type(end) is int and end - start == 60_000_000_000
+    assert start <= time.time_ns() < end
+    output = BASE / 'source2-output'
+    assert not os.path.lexists(output)
+    git, meta = existing_git_meta()
+    for root in (request['root_expected'], request['additional_A']):
+        path = Path(root['root'])
+        assert git(path, 'rev-parse', 'HEAD').decode().strip() == root['Git_HEAD']
+        assert git(path, 'rev-parse', 'HEAD^{tree}').decode().strip() == root['Git_tree']
+        assert not git(path, 'status', '--porcelain=v1')
+    rows = json.loads(read_ref(request['full_metadata_guard']))['rows']
+    for row in rows:
+        expected = {k: row[k] for k in ('path', 'bytes', 'full9')}
+        assert meta(Path(row['path'])) == expected, row['path']
+    control = Path(handoff['fresh_controls_dir'])
+    assert control.parent == BASE and control.name not in ('datasets', 'source2-output')
+    assert start <= time.time_ns() < end
+    control.mkdir(mode=0o700)
+    request['ledger_before'] = before
+    request_pin = seal(control / 'source2-request.json', request)
+    roots = {'datasets': request['root_expected'], 'accelerate': request['additional_A']}
+    selection = seal(control / 'source2-selection.json', {
+        'Root_selected': True, 'request': request_pin, 'ledger_before': before,
+        'Source_operation_max_bytes': ENVELOPE, 'fresh_output_namespace': str(output),
+        'launch_not_before_utc_ns': start, 'launch_deadline_utc_ns': end, 'full_precharge': handoff['full_precharge'],
+        'root_git': roots, 'CPU': 1, 'AS': 536870912, 'wall_seconds': 60,
+        'Root_bound_handoff': handoff_ref, 'remote_observation': handoff['remote_observation'],
+    })
+    operator_body = adapt_existing_cas(selection, request_pin, before, output, len(rows))
+    operator = seal(control / 'selected-existing-P1-cache-reload-Source2.py', operator_body)
+    return seal(control / 'source2-bound-no-dispatch.json', {
+        'controls': {'selection': selection, 'request': request_pin, 'operator': operator},
+        'guard_rows': len(rows), 'carry_bytes': CARRY_BYTES, 'carry_captures': CARRY_CAPTURES,
+        'Source_or_SDK_dispatched': False, 'existing_cas_qualification': None, 'runtime_handle': None,
+        'output': str(output), 'Root_bound_handoff': handoff_ref,
+    })
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--prepare-nonclock', action='store_true')
+    parser.add_argument('--ROOT-bound', nargs=3, metavar=('PATH', 'BYTES', 'SHA256'))
+    args = parser.parse_args()
+    assert args.prepare_nonclock != bool(args.ROOT_bound)
+    if args.prepare_nonclock:
+        result = prepare_nonclock()
+    else:
+        path, size, sha = args.ROOT_bound
+        result = late_bind(reference(Path(path), int(size), sha))
+    print(json.dumps(result, sort_keys=True))
+
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,296 @@
+"""Prepare the Guide584 sparse physical Datasets sibling and current paired role epochs."""
+import hashlib
+import json
+import os
+from pathlib import Path
+import runpy
+import stat
+import subprocess
+
+WORK = Path(__file__).resolve().parent
+OLD = Path('/tmp/Root-P1-Guide584-generic-Native3-N3iAXWzm')
+OLD_D = OLD/'datasets'
+D = WORK/'datasets'
+A = Path('/tmp/Root-result-cache-owned-existing-route-L4Wyme59/accelerate')
+BARE = Path('/tmp/Root-P2-existing-owner-Guide584-reconciliation-hxm7h07u/guides-preparation-INERT/actual-Guide585-docs-only-parent-pins/datasets.git')
+PUBLICATION = BARE.parent/'actual-Guide585-docs-normal-FF-publication.json'
+CODE = OLD/'current-published-Guide584-physical-freeze.json'
+SUPPORT = Path('/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/prepare-P1-Native2-code-only-parent-pins.py.DATA')
+assert hashlib.sha256(SUPPORT.read_bytes()).hexdigest() == 'a243350c951dd863c0ecb2e58db78a7621e37ec40de068037212d333e45455db'
+helpers = runpy.run_path(str(SUPPORT))
+pin, read, document, sha, flat_git_alternates = (
+    helpers[k] for k in ('pin','read','document','sha','flat_git_alternates'))
+BRANCH = 'refs/heads/work/p1-guide585-namespaced-native2'
+FULL9 = ('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
+ENV = os.environ | {'GIT_OPTIONAL_LOCKS':'0','GIT_NO_LAZY_FETCH':'1','GIT_TERMINAL_PROMPT':'0'}
+for name in ('GIT_DIR','GIT_WORK_TREE','GIT_INDEX_FILE','GIT_COMMON_DIR','GIT_ALTERNATE_OBJECT_DIRECTORIES','GIT_OBJECT_DIRECTORY'):
+    ENV.pop(name,None)
+GIT = ['/usr/bin/git','--no-optional-locks','-c','index.threads=1','-c','core.preloadIndex=false',
+       '-c','core.fsmonitor=false','-c','core.packedGitWindowSize=1m','-c','core.packedGitLimit=16m']
+
+
+def git(root,*arguments,bare=False):
+    args = ['--git-dir='+str(root)] if bare else ['-C',str(root)]
+    result = subprocess.run([*GIT,*args,*arguments], env=ENV,capture_output=True,check=True,timeout=90)
+    assert not result.stderr,(arguments,result.stderr[:1000])
+    return result.stdout
+
+
+def f9(status):
+    return {key:str(getattr(status,key)) for key in FULL9}
+
+
+def path_row(path,digest):
+    first = path.lstat()
+    assert stat.S_ISREG(first.st_mode) and first.st_nlink == 1 and first.st_uid == os.getuid(),path
+    return {'path':str(path),'bytes':first.st_size,'sha256':digest,'full9':f9(first)}
+
+
+def physical_hash(path, limit):
+    first = path.lstat()
+    assert stat.S_ISREG(first.st_mode) and first.st_nlink == 1 and first.st_size <= limit
+    with os.fdopen(os.open(path,os.O_RDONLY|os.O_NOFOLLOW),'rb') as stream:
+        assert f9(first) == f9(os.fstat(stream.fileno()))
+        body = stream.read(first.st_size+1)
+        assert f9(first) == f9(os.fstat(stream.fileno())) == f9(path.lstat())
+    assert len(body) == first.st_size
+    return path_row(path,sha(body))
+
+
+def emit(name,obj):
+    path = WORK/name
+    raw = (json.dumps(obj,sort_keys=True,indent=2)+'\n').encode()
+    with os.fdopen(os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400),'wb') as f:
+        f.write(raw)
+        f.flush()
+        os.fsync(f.fileno())
+    return pin(path,len(raw),sha(raw))
+
+
+def blob_rows(root,head,paths,bare=False):
+    raw = git(root,'ls-tree','-lr','-z',head,'--',*sorted(paths),bare=bare)
+    rows = {}
+    for line in raw.split(b'\0'):
+        if line:
+            header, rel = line.split(b'\t',1)
+            mode, kind, oid, bytes_text = header.decode().split()
+            assert kind == 'blob' and mode in ('100644','100755')
+            rows[rel.decode()] = (mode,oid,int(bytes_text))
+    assert rows.keys() == paths
+    return rows
+
+
+def checkout(ref,paths):
+    assert not os.path.lexists(D) and not os.path.lexists(WORK/'git-object-views')
+    previous_umask = os.umask(0o002)
+    try:
+        D.mkdir(mode=0o700)
+        git(D,'init','--initial-branch=work/p1-guide585-namespaced-native2','--template=')
+        (D/'.git/info').mkdir(exist_ok=True)
+        stores = flat_git_alternates(BARE/'objects',WORK/'git-object-views')
+        (D/'.git/objects/info/alternates').write_text(''.join(str(store)+'\n' for store in stores))
+        git(D,'update-ref',BRANCH,ref)
+        git(D,'config','core.sparseCheckout','true')
+        git(D,'config','core.sparseCheckoutCone','false')
+        patterns = (OLD_D/'.git/info/sparse-checkout').read_text().splitlines()
+        patterns = list(dict.fromkeys([*patterns,*('/'+rel for rel in sorted(paths))]))
+        (D/'.git/info/sparse-checkout').write_text('\n'.join(patterns)+'\n')
+        exclude = (OLD_D/'.git/info/exclude').read_bytes()
+        assert exclude.splitlines().count(b'/workspace/control-plane/source-leases/') == 1
+        (D/'.git/info/exclude').write_bytes(exclude)
+        git(D,'read-tree','-m','-u','HEAD')
+    finally:
+        os.umask(previous_umask)
+    return len(stores)
+
+
+def named_namespaces(request):
+    result = []
+    for previous in request['namespace_metadata']:
+        path = D/Path(previous['path']).relative_to(OLD_D)
+        initializer = path/'__init__.py'
+        first = path.lstat()
+        assert stat.S_ISDIR(first.st_mode) and not os.path.lexists(initializer)
+        fd = os.open(path,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
+        try:
+            assert f9(first) == f9(os.fstat(fd)) == f9(path.lstat())
+            assert not os.path.lexists(initializer)
+        finally:
+            os.close(fd)
+        result.append({'path':str(path),'initializer_path':str(initializer),'full9':f9(first)})
+    assert len(result) == 3
+    return result
+
+
+def remap_agents(request, rows, git_rows):
+    agents = {}
+    for previous in request['AGENTS_chain_metadata']:
+        path = Path(previous['path'])
+        if path.is_relative_to(OLD_D):
+            path = D/path.relative_to(OLD_D)
+        elif path == OLD/'AGENTS.md' or path == OLD/'AGENTS.override.md':
+            path = WORK/path.name
+        current = {**previous,'path':str(path)}
+        if current['exists']:
+            assert path.is_relative_to(D)
+            body = read(current['reuse_captured_raw'])
+            rel = str(path.relative_to(D))
+            git_row = git_rows.get(rel)
+            if git_row is None:
+                git_row = blob_rows(D,git(D,'rev-parse','HEAD').decode().strip(),{rel})[rel]
+            raw_blob = hashlib.sha1(b'blob '+str(len(body)).encode()+b'\0'+body).hexdigest()
+            row = rows.get(str(path)) or path_row(path,sha(body))
+            assert (raw_blob,len(body)) == git_row[1:] and sha(body) == row['sha256']
+            current['full9'] = row['full9']
+        else:
+            assert not os.path.lexists(path),path
+        assert str(path) not in agents
+        agents[str(path)] = current
+    return list(agents.values())
+
+
+def main():
+    pub_ref = pin(PUBLICATION,47147,'7997ab39a3cb621d2e8a0a3c74ae9e9163dab46131be197efd222eb6acc13c39')
+    pub = document(pub_ref)
+    assert pub['terminal_returncode'] == 0 and pub['all_owned_publication_commands_closed']
+    assert pub['all4_remote_main_exact'] and not pub['original_root_writes'] and not pub['force_used']
+    published = pub['fresh_origin_main']
+    docs = pub['exact_docs_commit']
+    code = document(pin(CODE,4363,'4b259cf6b73250293ae480ea9fc0b345126af1a83240aecb98dca341e7a9a564'))
+    assert code['frozen']['HEAD'] == '793b93c8e67ae0da830e8b323430965b55b610fc' and pub['prior_origin_main']['datasets'] == docs['parent']
+    assert docs['commit'] == published['datasets'] == '25bbaf0ed1ff45b4dee97b77b58c2349b5351990'
+    assert docs['tree'] == 'ced4c78bc816d18d1ad31d5074291c113aa35b57'
+    assert git(BARE,'rev-parse',docs['commit']+'^',docs['commit']+'^{tree}',bare=True).decode().splitlines() == [docs['parent'],docs['tree']]
+    for root,old_root in zip((OLD_D,A),code['frozen_roots'],strict=True):
+        assert str(root) == old_root['root']
+        assert git(root,'rev-parse','HEAD','HEAD^{tree}').decode().splitlines() == [old_root['Git_HEAD'],old_root['Git_tree']]
+        assert not git(root,'status','--porcelain=v1','-z','-uall')
+    track_ref = pin(OLD/'current-Git-role-inventory.json',268143,'ad86a481b34840daba0d7105a5dea8ed53a027fdf1da5c023e876438d4fbf40d')
+    tracked = document(track_ref)
+    names_ref = pin(OLD/'current-named-epoch.json',912963,'eadebcbd2bc076d127f97686a9c47b3362eb6b5908d22b530a5dba861a818d78')
+    outer_ref = pin(OLD/'current-outer-epoch.json',856568,'289f92b965f7a00479dbd6e787b85f4c30c47e3f11461ac3f7d32ce1b664c846')
+    python_ref = pin(OLD/'current-Python-epoch.json',850945,'1921e01b479c1b74546c2896d392531af4170003295c2da15aca0bc93a626cec')
+    old_named = document(names_ref)['rows']
+    old_outer = document(outer_ref)
+    old_python = document(python_ref)
+    prior_by_path = {row['path']:row for row in old_named}
+    assert len(prior_by_path) == len(old_named) == 1633 and len(old_outer) == 1624 and len(old_python) == 1613
+    assert all(row == prior_by_path[row['path']] for row in old_outer+old_python)
+    old_D_tree = blob_rows(OLD_D,code['frozen']['HEAD'],set(tracked['datasets']['tracked']))
+    current_D_tree = blob_rows(BARE,docs['commit'],set(old_D_tree),bare=True)
+    current_A_tree = blob_rows(A,published['accelerate'],set(tracked['accelerate']['tracked']))
+    code_pub = document(pub['prior_code_publication'])
+    assert code_pub['terminal_returncode'] == 0 and code_pub['fresh_origin_main'] == pub['prior_origin_main']
+    changed = dict(docs['four_blobs'])
+    for rel, row in code_pub['exact_two_code_roles'].items():
+        assert rel not in changed
+        changed[rel] = dict(row, committed_blob=row['git_blob'])
+    assert len(docs['four_blobs']) == 4 and len(changed) == 6
+    delta = git(BARE,'diff-tree','--no-commit-id','--name-only','-z','-r',code['frozen']['HEAD'],docs['commit'],bare=True)
+    assert {p.decode() for p in delta.split(bytes(1)) if p} == set(changed)
+    assert {rel for rel,old in old_D_tree.items() if current_D_tree[rel]!=old} == set(changed) & set(old_D_tree)
+    a_index = prior_by_path[str(A/'.git/index')]
+    assert a_index == physical_hash(A/'.git/index',8*1024*1024)
+    assert a_index['sha256'] == 'cfb5f870e52cd089eb6d2d26baf646f9f3e4ffd4bf59e36ea28fee05372c1ef5'
+    watched = {path: f9(path.lstat()) for root in (OLD_D,A) for path in
+        (root/'.git/HEAD',root/'.git/index',root/'.git/config')}
+    if D.is_dir():
+        assert not (WORK/'current-named-epoch.json').exists()
+        views = (D/'.git/objects/info/alternates').read_text().splitlines()
+        assert views and all(Path(item).parent == WORK/'git-object-views' and Path(item).is_dir() for item in views)
+        alternates_views = len(views)
+    else:
+        alternates_views = checkout(docs['commit'],current_D_tree)
+    assert git(D,'rev-parse','HEAD','HEAD^{tree}').decode().splitlines() == [docs['commit'],docs['tree']]
+    assert git(D,'symbolic-ref','HEAD').decode().strip() == BRANCH
+    assert not git(D,'status','--porcelain=v1','-z','-uall')
+    assert git(D,'ls-files','--stage','-z','--',*sorted(current_D_tree)).count(b'\0') == len(current_D_tree)
+    rows = {}
+    new_paths = {}
+    for old in old_named:
+        path = Path(old['path'])
+        if path.is_relative_to(OLD_D):
+            rel = str(path.relative_to(OLD_D))
+            new = D/rel
+            if rel.startswith('.git/refs/heads/'):
+                new = D/'.git'/BRANCH
+                assert new.read_bytes() == (docs['commit']+'\n').encode()
+            if rel.startswith('.git/'):
+                row = physical_hash(new,8*1024*1024)
+            else:
+                mode,blob,size = current_D_tree[rel]
+                digest = old['sha256']
+                if rel in changed:
+                    doc = changed[rel]
+                    assert (mode,blob,size) == (doc['mode'],doc['committed_blob'],doc['bytes'])
+                    assert sha(git(BARE,'cat-file','blob',blob,bare=True)) == doc['sha256']
+                    digest = doc['sha256']
+                else:
+                    assert current_D_tree[rel] == old_D_tree[rel] and size == old['bytes']
+                row = path_row(new,digest)
+                assert row['bytes'] == size and bool(int(row['full9']['st_mode']) & 0o111) == (mode == '100755')
+        else:
+            assert path.is_relative_to(A)
+            row = path_row(path,old['sha256'])
+            assert row == old
+            rel = str(path.relative_to(A))
+            if not rel.startswith('.git/'):
+                assert current_A_tree[rel] == tuple(tracked['accelerate']['tracked'][rel])
+        assert row['path'] not in rows
+        rows[row['path']] = row
+        new_paths[old['path']] = row
+    assert watched == {path:f9(path.lstat()) for path in watched}
+    assert not git(D,'status','--porcelain=v1','-z','-uall')
+    assert not git(A,'status','--porcelain=v1','-z','-uall')
+    request_ref = pin(OLD/'current-Native3-Source4-existing-request.json',63483,'a08343152628d124e9af7e1eda20b5fe13d2bd52b0b431928371ca8d900df713')
+    request = document(request_ref)
+    namespaces = named_namespaces(request)
+    agents = remap_agents(request,rows,current_D_tree)
+    assert sum(bool(r['exists']) for r in agents)==1
+    roots = [{'root':str(D),'Git_HEAD':docs['commit'],'Git_tree':docs['tree']},code['frozen_roots'][1]]
+    index = rows[str(D/'.git/index')]
+    outer = [new_paths[row['path']] for row in old_outer]
+    python = [new_paths[row['path']] for row in old_python]
+    assert python == [row for row in outer if Path(row['path']).suffix in ('.py','.pyi')]
+    assert all(new['sha256']==old['sha256'] or (Path(new['path']).is_relative_to(D) and str(Path(new['path']).relative_to(D)) in changed) for old,new in zip(old_python,python,strict=True))
+    targets=[]
+    for previous in request['exact_new_body_targets']:
+        new = new_paths[previous['path']]
+        relative = previous['relative_path']
+        target = {**previous,**new,'root':str(D),'bytes':new['bytes'],'expected_bytes':new['bytes'],
+            'expected_sha256':new['sha256'],'body_cap':new['bytes']}
+        assert relative == '.git/index' or new['sha256'] == previous['expected_sha256']
+        target['expected_git_blob_oid'] = None if relative=='.git/index' else current_D_tree[relative][1]
+        targets.append(target)
+    assert len(targets)==4
+    named = emit('current-named-epoch.json',{'rows':list(rows.values())})
+    outer_pin = emit('current-outer-epoch.json',outer)
+    python_pin = emit('current-Python-epoch.json',python)
+    names = emit('current-namespaces-and-AGENTS.json',{'namespace_metadata':namespaces,'AGENTS_chain_metadata':agents})
+    role_inventory = emit('current-Git-role-inventory.json',{
+        'datasets':{'root':str(D),'tracked':current_D_tree},
+        'accelerate':{'root':str(A),'tracked':current_A_tree},
+    })
+    freeze = emit('current-published-Guide585-physical-freeze.json',{
+        'schema':'current-published-Guide585-private-physical-materialization/v1',
+        'current_publication':pub_ref,'Guide585_docs_commit':docs,'current_local_checkout_no_Git_changes':True,
+        'local_clean':True,'exact_changes_only':True,'pushed':False,'frozen_roots':roots,
+        'frozen':{'HEAD':docs['commit'],'tree':docs['tree'],'stage0_index':index,'branch':BRANCH},
+        'frozen_branch_ref':rows[str(D/'.git'/BRANCH)],'exact_A_index':a_index,
+        'original_D_and_A_full9_aux_unchanged':True,'private_D_git_alternate_views':alternates_views,
+    })
+    data = emit('READY-existing-Guide585-namespaced-Native2-Source4-nonclock.json',{
+        'schema':'existing-Guide585-namespaced-Native2-Source4-physical-role-preparation/v1',
+        'local_freeze':freeze,'current_publication':pub_ref,'roots':roots,'index':index,
+        'protected_A_index':a_index,'named_epoch':named,'outer_epoch':outer_pin,'python_epoch':python_pin,
+        'AGENTS_and_namespaces':names,'role_inventory':role_inventory,
+        'guard_counts':{'named':len(rows),'outer':len(outer),'python':len(python)},
+        'predecessor':{'materialized_roles':track_ref,'named_epoch':names_ref,'outer_epoch':outer_ref,'python_epoch':python_ref,'READ4_request':request_ref},
+        'exact_new_body_targets':targets,'expected_same_old_Git_blob_or_Guide584_docs_receipt':True,
+        'new_D_checkout_only':True,'Source':None,'SDK':None,'Native':None,'funding':None,'clock':None,'remote':None,
+    })
+    print(json.dumps(data,sort_keys=True))
+
+
+if __name__=='__main__':
+    main()

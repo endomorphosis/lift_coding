@@ -1,0 +1,98 @@
+"""Exact local P1 freeze, selected by Root after the existing Source2 has closed."""
+import hashlib
+import json
+import os
+from pathlib import Path
+import runpy
+import sys
+
+BASE = Path(__file__).resolve().parent
+BINDER = BASE / 'bind-existing-P1-cache-reload-Source2.py.DATA'
+assert hashlib.sha256(BINDER.read_bytes()).hexdigest() == 'c1703fd1c418f0c7cb3af802119fd88d69abb8279650c0a3d5a4293fe6e62100'
+support = runpy.run_path(str(BINDER))
+read_ref = support['read_ref']
+seal = support['seal']
+git, meta = support['existing_git_meta']()
+H = lambda body: hashlib.sha256(body).hexdigest()
+
+
+def freeze(terminal_ref):
+    terminal = json.loads(read_ref(terminal_ref))
+    assert terminal['returncode'] == 0
+    write_ref = terminal['closed_write']
+    assert Path(write_ref['path']) == BASE / 'source2-output/actual-existing-two-Python-code-CAS-receipt.json'
+    write = json.loads(read_ref(write_ref))
+    assert all(write[k] is True for k in ('Source_closed', 'module_closed', 'write_complete', 'qualification_complete'))
+    assert write['errors'] == []
+    assert len(write['Source_contexts']) == 2
+    assert all(c['entered'] is True and c['exit_returned'] is True for c in write['Source_contexts'])
+    material = json.loads(read_ref(support['reference'](
+        BASE / 'actual-private-exact-current-base-D-materialized.json', 1475, support['MATERIALIZATION_SHA'])))
+    packet = json.loads(support['read_pinned'](support['PACKET'], 16931,
+        'd754b5b134f3116aeac0efdc04b515e006140e41cc4f9f80eed2e7b55d8c834d'))
+    candidate, companion = Path(material['D']), Path(material['A'])
+    assert {(r['root'], r['mode']) for r in write['Source_contexts']} == {(str(candidate), 'write'), (str(companion), 'read')}
+    roots = []
+    for name, root in (('datasets', candidate), ('accelerate', companion)):
+        head, tree = tuple(x.decode() for x in git(root, 'rev-parse', 'HEAD', 'HEAD^{tree}').splitlines())
+        assert (head, tree) == (material['heads'][name], material['trees'][name])
+        roots.append({'root': str(root), 'Git_HEAD': head, 'Git_tree': tree})
+    candidate_base = roots[0]['Git_HEAD']
+    posts = {entry['repo_relative_path']: entry['postimage'] for entry in packet['files']}
+    assert tuple(posts) == support['TARGETS']
+    assert write['before_root']['HEAD'] == write['after_root']['HEAD'] == candidate_base
+    assert write['additional_A_before'] == write['additional_A_after']
+    assert not git(companion, 'status', '--porcelain=v1')
+    status = set(git(candidate, 'status', '--porcelain=v1', '-z').split(b'\0'))
+    assert status == {b'', *(b' M ' + rel.encode() for rel in posts)}
+    assert not git(candidate, 'diff', '--cached', '--name-only', '-z')
+    installed = {str(Path(row['path']).relative_to(candidate)): row for row in write['installed']}
+    assert len(installed) == len(write['installed']) == 2 and installed.keys() == posts.keys()
+    for rel, post in posts.items():
+        physical = candidate / rel
+        row = installed[rel]
+        assert physical.stat().st_mode & 0o777 in (0o644, 0o664)
+        assert row['sha256'] == post['sha256'] and row['bytes'] == post['bytes']
+        assert meta(physical) == {k: row[k] for k in ('path', 'bytes', 'full9')}
+        assert H(physical.read_bytes()) == post['sha256']
+    output = BASE / 'source2-freeze.json'
+    assert not os.path.lexists(output)
+    git(candidate, 'add', '--', *posts)
+    assert set(git(candidate, 'diff', '--cached', '--name-only', '-z').split(b'\0')) == {
+        b'', *(rel.encode() for rel in posts)}
+    for rel, post in posts.items():
+        fields = git(candidate, 'ls-files', '--stage', '--', rel).decode().split()
+        assert fields == ['100644', post['git_blob'], '0', rel]
+        assert H(git(candidate, 'cat-file', 'blob', fields[1])) == post['sha256']
+    git(candidate, '-c', 'core.hooksPath=/dev/null', '-c', 'commit.gpgSign=false', 'commit', '-m',
+        'Validate proof cache filenames on reload')
+    assert git(candidate, 'rev-parse', 'HEAD^').decode().strip() == candidate_base
+    assert not git(candidate, 'status', '--porcelain=v1')
+    assert set(git(candidate, 'diff-tree', '--no-commit-id', '--name-only', '-r', '-z', 'HEAD').split(b'\0')) == {
+        b'', *(rel.encode() for rel in posts)}
+    for rel, post in posts.items():
+        mode, kind, blob, name = git(candidate, 'ls-tree', 'HEAD', '--', rel).decode().split()
+        assert (mode, kind, blob, name) == ('100644', 'blob', post['git_blob'], rel)
+        assert meta(candidate / rel) == {k: installed[rel][k] for k in ('path', 'bytes', 'full9')}
+        installed[rel].update(committed_blob=blob, stage0_matches=True, raw_bytes_bound=True, mode=mode)
+    index_path = candidate / '.git/index'
+    index = meta(index_path, H(index_path.read_bytes()))
+    head, tree = (x.decode() for x in git(candidate, 'rev-parse', 'HEAD', 'HEAD^{tree}').splitlines())
+    branch = candidate / '.git' / git(candidate, 'symbolic-ref', 'HEAD').decode().strip()
+    branch_data = branch.read_bytes()
+    assert branch_data == head.encode() + b'\n'
+    roots[0].update(Git_HEAD=head, Git_tree=tree)
+    assert not git(companion, 'status', '--porcelain=v1')
+    assert git(companion, 'rev-parse', 'HEAD', 'HEAD^{tree}').splitlines() == [
+        roots[1]['Git_HEAD'].encode(), roots[1]['Git_tree'].encode()]
+    return seal(output, {
+        'local_clean': True, 'exact_changes_only': True, 'pushed': False, 'source_closed': write_ref,
+        'source2_terminal': terminal_ref, 'frozen': {'HEAD': head, 'tree': tree, 'stage0_index': index},
+        'frozen_roots': roots, 'committed': installed, 'frozen_branch_ref': meta(branch, H(branch_data)),
+    })
+
+
+if __name__ == '__main__':
+    assert len(sys.argv) == 5 and sys.argv[1] == '--ROOT-bound'
+    selected = support['reference'](Path(sys.argv[2]), int(sys.argv[3]), sys.argv[4])
+    print(json.dumps({'freeze': freeze(selected)}, sort_keys=True))

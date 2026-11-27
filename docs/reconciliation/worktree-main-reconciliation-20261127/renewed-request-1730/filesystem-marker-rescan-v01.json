@@ -1,0 +1,1386 @@
+{
+  "directory_count": 3620895,
+  "exact_scan_source": {
+    "bytes": 8538,
+    "executed_definition": "scan",
+    "path": "/tmp/git-main-followup-20261127-zYjieLmd/publication/docs/reconciliation/worktree-main-reconciliation-20261127/followup-complete-scan/full-depth-discovery.py.DATA",
+    "sha256": "8bde0b89c624e3428aaabb3fc58d51049ec07869c6307f0873d943ea1f5c2c6d"
+  },
+  "excluded_directory_counts": {
+    "codex:archived_sessions": 1,
+    "codex:log": 1,
+    "codex:plugins": 4,
+    "codex:sessions": 1,
+    "codex:shell_snapshots": 1,
+    "codex:skills": 3,
+    "name:.cache": 114,
+    "name:.cargo": 343,
+    "name:.gradle": 1,
+    "name:.npm": 1,
+    "name:.rustup": 1,
+    "name:.venv": 12,
+    "name:__pycache__": 15646,
+    "name:dist-packages": 4,
+    "name:env": 1,
+    "name:huggingface": 1512,
+    "name:model-cache": 1,
+    "name:node_modules": 170,
+    "name:site-packages": 55,
+    "name:venv": 630,
+    "pyvenv.cfg": 659,
+    "symlink_git_marker": 12
+  },
+  "excluded_root_entry_names": [
+    ".cache",
+    ".cargo",
+    ".gradle",
+    ".m2",
+    ".nox",
+    ".npm",
+    ".pnpm-store",
+    ".rustup",
+    ".tox",
+    ".venv",
+    ".yarn",
+    "__pycache__",
+    "dist-packages",
+    "env",
+    "huggingface",
+    "model-cache",
+    "model_cache",
+    "node_modules",
+    "site-packages",
+    "transformers_cache",
+    "venv"
+  ],
+  "filesystem_error_count": 176,
+  "filesystem_errors": [
+    {
+      "detail": "[Errno 13] Permission denied: '/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-colord.service-Ow83Hr/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-colord.service-Ow83Hr"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-openvpn@spark.service-fOE2G3/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-openvpn@spark.service-fOE2G3"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-bluetooth.service-e88rKg/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-bluetooth.service-e88rKg"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-switcheroo-control.service-oh1Img/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-switcheroo-control.service-oh1Img"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-srp_daemon.service-iutvGn/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-srp_daemon.service-iutvGn"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/tmp/snap-private-tmp/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/tmp/snap-private-tmp"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-openvpn@hallucinate.service-OECtAQ/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-openvpn@hallucinate.service-OECtAQ"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-polkit.service-yUiBP7/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-polkit.service-yUiBP7"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-systemd-resolved.service-EjSfxD/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-systemd-resolved.service-EjSfxD"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-systemd-logind.service-W4DSWa/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-systemd-logind.service-W4DSWa"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-fwupd.service-IINF0D/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-fwupd.service-IINF0D"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-upower.service-QxudLG/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-upower.service-QxudLG"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-ModemManager.service-ColTFJ/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-ModemManager.service-ColTFJ"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-systemd-timesyncd.service-K6jmbU/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/tmp/systemd-private-82e446b4557247d2a5ea4259f31bb2d9-systemd-timesyncd.service-K6jmbU"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/supervisor-ranked-successor-20261012/live-instruction-census-03/archived-cli-02/results/sampl",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/supervisor-ranked-successor-20261012/live-instruction-census-03/archived-cli-02/results/sample"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/launch/pyvenv.",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/launch"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/doctor-index/p",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/doctor-index"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/owner/pyvenv.c",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/owner"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/doctor/worktre",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/doctor/worktrees"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/vectors/metada",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/vectors/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/repository/.ru",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/repository/.runtime/initial/semantic/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/repository/.ru",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/repository/.runtime/initial/semantic/world-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/repository/.ru",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/repository/.runtime/initial/world/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/repository/.ru",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/repository/.runtime/initial/world/world-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/repository/.ru",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/repository/.runtime/published-context/admitted-4375c7e4f7664c26b6de47adabd55fa0/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/retrieval-metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/repository/.ru",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/repository/.runtime/published-context/admitted-4375c7e4f7664c26b6de47adabd55fa0/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/semantic/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/repository/.ru",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/repository/.runtime/published-context/admitted-4375c7e4f7664c26b6de47adabd55fa0/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/semantic/world-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/repository/.ru",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/repository/.runtime/published-context/admitted-4375c7e4f7664c26b6de47adabd55fa0/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/world/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/repository/.ru",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/repository/.runtime/published-context/admitted-4375c7e4f7664c26b6de47adabd55fa0/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/world/world-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/policy/lifecyc",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/policy/lifecycle"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/policy/profile",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-02/run/policy/profile"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/launch"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/doctor-index"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/owner"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/doctor/worktrees"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/vectors/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/repository/.runtime/initial/semantic/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/repository/.runtime/initial/semantic/world-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/repository/.runtime/initial/world/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/repository/.runtime/initial/world/world-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/repository/.runtime/published-context/admitted-ec320813e24d466fbe4c098b75e71cc4/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/retrieval-metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/repository/.runtime/published-context/admitted-ec320813e24d466fbe4c098b75e71cc4/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/semantic/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/repository/.runtime/published-context/admitted-ec320813e24d466fbe4c098b75e71cc4/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/semantic/world-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/repository/.runtime/published-context/admitted-ec320813e24d466fbe4c098b75e71cc4/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/world/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/repository/.runtime/published-context/admitted-ec320813e24d466fbe4c098b75e71cc4/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/world/world-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/policy/lifecycle"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-04/native-doctor/policy/profile"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/launch/pyvenv.",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/launch"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/doctor-index/p",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/doctor-index"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/owner/pyvenv.c",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/owner"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/doctor/worktre",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/doctor/worktrees"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/vectors/metada",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/vectors/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/repository/.ru",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/repository/.runtime/initial/semantic/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/repository/.ru",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/repository/.runtime/initial/semantic/world-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/repository/.ru",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/repository/.runtime/initial/world/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/repository/.ru",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/repository/.runtime/initial/world/world-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/policy/lifecyc",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/policy/lifecycle"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/policy/profile",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-native-01/run/policy/profile"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/launch"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/doctor-index"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/owner"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/doctor/worktrees"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/vectors/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/repository/.runtime/initial/semantic/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/repository/.runtime/initial/semantic/world-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/repository/.runtime/initial/world/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/repository/.runtime/initial/world/world-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/repository/.runtime/published-context/admitted-2fac54aff47c4b51b1298e6a7e79356d/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/retrieval-metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/repository/.runtime/published-context/admitted-2fac54aff47c4b51b1298e6a7e79356d/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/semantic/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/repository/.runtime/published-context/admitted-2fac54aff47c4b51b1298e6a7e79356d/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/semantic/world-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/repository/.runtime/published-context/admitted-2fac54aff47c4b51b1298e6a7e79356d/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/world/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/repository/.runtime/published-context/admitted-2fac54aff47c4b51b1298e6a7e79356d/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/world/world-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/policy/lifecycle"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-01/native-doctor/policy/profile"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/launch"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/doctor-index"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/owner"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/doctor/worktrees"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/vectors/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/repository/.runtime/initial/semantic/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/repository/.runtime/initial/semantic/world-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/repository/.runtime/initial/world/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/repository/.runtime/initial/world/world-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/repository/.runtime/published-context/admitted-adfbdb69237e4bab87bd800f99a62419/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/retrieval-metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/repository/.runtime/published-context/admitted-adfbdb69237e4bab87bd800f99a62419/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/semantic/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/repository/.runtime/published-context/admitted-adfbdb69237e4bab87bd800f99a62419/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/semantic/world-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/repository/.runtime/published-context/admitted-adfbdb69237e4bab87bd800f99a62419/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/world/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/repository/.runtime/published-context/admitted-adfbdb69237e4bab87bd800f99a62419/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/world/world-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/policy/lifecycle"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-do",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/policy/profile"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/docker-runtime08-qualification/pytest-te",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/docker-runtime08-qualification/pytest-temp"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/docker-symbolic-learned-supplement-02/py",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/docker-symbolic-learned-supplement-02/pytest-temp"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/docker-symbolic-learned-gate-01/pytest-t",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/docker-symbolic-learned-gate-01/pytest-temp"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/security-checkpoint-integration-20260929/native-docker-01/pytest-te",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/security-checkpoint-integration-20260929/native-docker-01/pytest-temp"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/no-index-diagnosis-20260929/docker-corrected-qualification-01/pytes",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/no-index-diagnosis-20260929/docker-corrected-qualification-01/pytest-temp"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/docker-nonroot-doctor/indexes/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/docker-nonroot-doctor/indexes"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/docker-nonroot-doctor/worktrees/pyvenv.cf",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/docker-nonroot-doctor/worktrees"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified/doctor/indexes/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified/doctor/indexes"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified/doctor/worktrees/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified/doctor/worktrees"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v2/doctor/indexes/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v2/doctor/indexes"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v2/doctor/worktrees/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v2/doctor/worktrees"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v3/doctor/indexes/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v3/doctor/indexes"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v3/doctor/worktrees/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v3/doctor/worktrees"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v3/vector/metadata-lake/pyvenv.",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v3/vector/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/ind",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/indexes"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/wor",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/worktrees"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/che",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/checkout/.runtime/before/semantic/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/che",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/checkout/.runtime/before/semantic/world-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/che",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/checkout/.runtime/before/world/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/che",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/checkout/.runtime/before/world/world-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/che",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/checkout/.runtime/after/semantic/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/che",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/checkout/.runtime/after/semantic/world-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/che",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/checkout/.runtime/after/world/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/che",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/doctor/checkout/.runtime/after/world/world-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/vectors-be",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/vectors-before/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/local-poli",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/local-policy/lifecycle"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/local-poli",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/local-policy/profile"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/vectors-af",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/indexed-lifecycle/vectors-after/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/vector/metadata-lake/pyvenv.",
+      "kind": "PermissionError",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/qualified-v4/vector/metadata-lake"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-dBzNaA/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-dBzNaA"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-DtkpNH/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-DtkpNH"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-VmoNED/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-VmoNED"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-7OYOPu/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-7OYOPu"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-xb85he/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-xb85he"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-goYTlr/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-goYTlr"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-KkOwOL/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-KkOwOL"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-agykcE/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-agykcE"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-GZUuK0/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-GZUuK0"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-X4g0g5/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-X4g0g5"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-SsFmpu/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-SsFmpu"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-vhcYJK/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-vhcYJK"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-fg9GGG/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-fg9GGG"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-1dP4k3/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-1dP4k3"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-i9BLlm/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-i9BLlm"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-yZvODI/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-yZvODI"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-DoNaF0/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-DoNaF0"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-Bztulc/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-Bztulc"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-Gqp30Y/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-Gqp30Y"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-9v7iai/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-9v7iai"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-FVYOpM/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-FVYOpM"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-PBZLUg/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-PBZLUg"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-vYwoKW/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-vYwoKW"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-Zp0CNp/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-Zp0CNp"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-KAW0jn/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-KAW0jn"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-xSyt73/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-xSyt73"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-WrlNIt/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-WrlNIt"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-ZoF45P/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-ZoF45P"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-mIfbGV/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-mIfbGV"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-wAfcxz/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-wAfcxz"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-JaKI8w/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-JaKI8w"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-WrlevM/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-WrlevM"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-4koQgU/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-4koQgU"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-gIpJCr/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.vscode-server-insiders/tmp/tmp_vscode_5/claude-empty-gIpJCr"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7451/work/work/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7451/work/work"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7446/work/work/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7446/work/work"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7465/work/work/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7465/work/work"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7448/fs/var/cache/apt/archiv",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7448/fs/var/cache/apt/archives/partial"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7448/fs/var/lib/apt/lists/pa",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7448/fs/var/lib/apt/lists/partial"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7448/work/work/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7448/work/work"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7452/work/work/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7452/work/work"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7455/work/work/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7455/work/work"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7471/work/work/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7471/work/work"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7468/work/work/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7468/work/work"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7467/work/work/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7467/work/work"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7470/work/work/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7470/work/work"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7466/work/work/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7466/work/work"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7454/work/work/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7454/work/work"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7449/work/work/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7449/work/work"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7472/work/work/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7472/work/work"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7447/work/work/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7447/work/work"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7469/work/work/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7469/work/work"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7453/work/work/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7453/work/work"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7445/fs/var/cache/apt/archiv",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7445/fs/var/cache/apt/archives/partial"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7445/fs/var/lib/apt/lists/pa",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7445/fs/var/lib/apt/lists/partial"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7445/work/work/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7445/work/work"
+    },
+    {
+      "detail": "[Errno 13] Permission denied: '/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7450/work/work/pyvenv.cfg'",
+      "kind": "PermissionError",
+      "path": "/home/barberb/.local/share/docker/containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/7450/work/work"
+    }
+  ],
+  "finished_utc": "2026-11-27T17:46:06.039555+00:00",
+  "inside_codex_excluded_names": [
+    "archived_sessions",
+    "log",
+    "logs",
+    "plugins",
+    "sessions",
+    "shell_snapshots",
+    "skills"
+  ],
+  "marker_count": 22602,
+  "marker_kind_change_count": 0,
+  "marker_kind_changes": [],
+  "missing_prior_marker_count": 0,
+  "new_marker_count": 104,
+  "new_markers": [
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/P1-Guide584-doc-parent-pins-INERT-gEfofBbw/isolated/datasets.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/P1-Guide584-doc-parent-pins-INERT-gEfofBbw/isolated/hallucinate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/P1-Guide584-doc-parent-pins-INERT-gEfofBbw/isolated/root.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/P1-Guide584-existing-private-exact-docs-idlpq6/datasets.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/archive-path-query-preflight/datasets.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/archive-path-query-preflight/hallucinate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/archive-path-query-preflight/root.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/initial-isolated-attempt/datasets.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/initial-isolated-attempt/hallucinate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/initial-isolated-attempt/root.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/isolated/datasets.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/isolated/hallucinate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/isolated/root.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/P1-existing-guide583-compose-INERT-mXQQ8I/guide583-parent-pins-isolated/datasets.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/P1-existing-guide583-compose-INERT-mXQQ8I/guide583-parent-pins-isolated/hallucinate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/P1-existing-guide583-compose-INERT-mXQQ8I/guide583-parent-pins-isolated/root.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/datasets.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/datasets.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/hallucinate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/root.git"
+    },
+    {
+      "kind": "ordinary_git_marker",
+      "marker": "/tmp/Root-P1-Guide583-Native2-exact-current-owXwGME8/datasets/.git"
+    },
+    {
+      "kind": "ordinary_git_marker",
+      "marker": "/tmp/Root-P1-Guide584-generic-Native3-N3iAXWzm/datasets/.git"
+    },
+    {
+      "kind": "ordinary_git_marker",
+      "marker": "/tmp/Root-P1-Guide584-generic-Native3-N3iAXWzm/initial-empty-template-retry/datasets/.git"
+    },
+    {
+      "kind": "ordinary_git_marker",
+      "marker": "/tmp/Root-P1-Guide585-namespaced-Native2-Source4-vydep2ma/datasets/.git"
+    },
+    {
+      "kind": "ordinary_git_marker",
+      "marker": "/tmp/Root-P1-cache-reload-owned-existing-route-wK9s5mUF/datasets/.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/Root-P2-existing-owner-Guide584-reconciliation-hxm7h07u/guides-preparation-INERT/actual-Guide585-docs-only-parent-pins/datasets.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/Root-P2-existing-owner-Guide584-reconciliation-hxm7h07u/guides-preparation-INERT/actual-Guide585-docs-only-parent-pins/hallucinate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/Root-P2-existing-owner-Guide584-reconciliation-hxm7h07u/guides-preparation-INERT/actual-Guide585-docs-only-parent-pins/root.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/Root-P2-existing-owner-Guide584-reconciliation-hxm7h07u/guides-preparation-INERT/actual-Guide585-four-doc-composition/datasets.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/Root-P2-existing-owner-Guide584-reconciliation-hxm7h07u/guides-preparation-INERT/code-only-actual-parent-pins/datasets.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/Root-P2-existing-owner-Guide584-reconciliation-hxm7h07u/guides-preparation-INERT/code-only-actual-parent-pins/hallucinate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/Root-P2-existing-owner-Guide584-reconciliation-hxm7h07u/guides-preparation-INERT/code-only-actual-parent-pins/root.git"
+    },
+    {
+      "kind": "ordinary_git_marker",
+      "marker": "/tmp/Root-P2-existing-owner-Guide584-reconciliation-hxm7h07u/physical-projection-private/datasets/.git"
+    },
+    {
+      "kind": "ordinary_git_marker",
+      "marker": "/tmp/Root-P2-whole-component-managed-R5-n8Fkdm2q/datasets/.git"
+    },
+    {
+      "kind": "ordinary_git_marker",
+      "marker": "/tmp/Root-f7c3-owned-existing-route-tdyKlZHW/accelerate/.git"
+    },
+    {
+      "kind": "ordinary_git_marker",
+      "marker": "/tmp/Root-f7c3-owned-existing-route-tdyKlZHW/datasets/.git"
+    },
+    {
+      "kind": "ordinary_git_marker",
+      "marker": "/tmp/Root-result-cache-owned-existing-route-L4Wyme59/accelerate/.git"
+    },
+    {
+      "kind": "ordinary_git_marker",
+      "marker": "/tmp/Root-result-cache-owned-existing-route-L4Wyme59/datasets/.git"
+    },
+    {
+      "kind": "ordinary_git_marker",
+      "marker": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-diagnostic-record-shape-current-private-geNe2MoA/normal-local/checkout/.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-diagnostic-record-shape-current-private-geNe2MoA/normal-local/publication/hallucinate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-Lean-diagnostic-record-shape-current-private-geNe2MoA/normal-local/publication/root.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/publication/hallucinate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V3-mutual-definition-private-DpVVrxG8/normal-local/publication/root.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V4-checked-whole-project-private-yI1zwigi/current-main-readback.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V4-checked-whole-project-private-yI1zwigi/current-main-reconciliation-v01/datasets.git"
+    },
+    {
+      "kind": "ordinary_git_marker",
+      "marker": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V4-checked-whole-project-private-yI1zwigi/normal-current/checkout/.git"
+    },
+    {
+      "kind": "ordinary_git_marker",
+      "marker": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V4-checked-whole-project-private-yI1zwigi/normal-local/checkout/.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-all-renewed-20261127-ygf45pp5/accelerate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-all-renewed-20261127-ygf45pp5/datasets.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-all-renewed-20261127-ygf45pp5/fresh-branch-restores/accelerate_scanned_subset-ipfs_accelerate_py.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-all-renewed-20261127-ygf45pp5/fresh-branch-restores/ipfs_kit_py.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-all-renewed-20261127-ygf45pp5/fresh-branch-restores/nonthin_recovery-lift_coding.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-all-renewed-20261127-ygf45pp5/fresh-branch-restores/nonthin_recovery-swissknife.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-all-renewed-20261127-ygf45pp5/fresh-branch-restores/recovery-ipfs_accelerate_py_detached.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-all-renewed-20261127-ygf45pp5/fresh-branch-restores/recovery-ipfs_datasets_py.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-all-renewed-20261127-ygf45pp5/hallucinate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-all-renewed-20261127-ygf45pp5/root.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-final-branch-retention-20261127-lmljw4GB/accelerate_scanned_subset/ipfs_accelerate_py/aggregate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-final-branch-retention-20261127-lmljw4GB/accelerate_scanned_subset/ipfs_accelerate_py/materialized.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-final-branch-retention-20261127-lmljw4GB/accelerate_scanned_subset/ipfs_accelerate_py/restore.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-final-branch-retention-20261127-lmljw4GB/accelerate_single_private/ipfs_accelerate_py/aggregate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-final-branch-retention-20261127-lmljw4GB/accelerate_single_private/ipfs_accelerate_py/restore.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-final-branch-retention-20261127-lmljw4GB/ipfs_accelerate_py/aggregate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-final-branch-retention-20261127-lmljw4GB/ipfs_accelerate_py/restore.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-final-branch-retention-20261127-lmljw4GB/ipfs_datasets_py/aggregate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-final-branch-retention-20261127-lmljw4GB/ipfs_kit_py/aggregate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-final-branch-retention-20261127-lmljw4GB/ipfs_kit_py/restore.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-final-branch-retention-20261127-lmljw4GB/lift_coding/aggregate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/lift_coding/aggregate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/lift_coding/materialized.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/lift_coding/restore.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/swissknife/aggregate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/swissknife/materialized.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/swissknife/restore.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/ipfs_accelerate_py_detached/aggregate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/ipfs_accelerate_py_detached/restore.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/ipfs_datasets_py/aggregate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/ipfs_datasets_py/restore.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/lift_coding/aggregate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/lift_coding/restore.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/swissknife/aggregate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/swissknife/restore.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-final-branch-retention-20261127-lmljw4GB/swissknife/aggregate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-main-followup-20261127-zYjieLmd/datasets-current-main-proof.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-main-followup-20261127-zYjieLmd/datasets-restore-proof.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-main-followup-20261127-zYjieLmd/hallucinate-main-proof.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-main-followup-20261127-zYjieLmd/mcp-main-proof.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-main-followup-20261127-zYjieLmd/swissknife-main-proof.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-owned-nested-scope-20261127-bEPSL04F/DCEC_Library-commit-graph.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-owned-nested-scope-20261127-bEPSL04F/Eng-DCEC-commit-graph.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-owned-nested-scope-20261127-bEPSL04F/Talos-commit-graph.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-owned-nested-scope-20261127-bEPSL04F/common_crawl_search_engine-commit-graph.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-owned-nested-scope-20261127-bEPSL04F/convert_to_txt_based_on_mime_type-commit-graph.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-owned-nested-scope-20261127-bEPSL04F/omni_converter_mk2-commit-graph.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-recovery-current-remote-audit-20261127-YjjrUOhv/hallucinate_app.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-recovery-current-remote-audit-20261127-YjjrUOhv/ipfs_accelerate_py.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/git-recovery-current-remote-audit-20261127-YjjrUOhv/ipfs_datasets_py.git"
+    },
+    {
+      "kind": "ordinary_git_marker",
+      "marker": "/tmp/git-renewed-all-work-20261127-17pd2xkd/datasets-integration/.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/result-cache-existing-guide582-compose-QvKKkYWq/combined-publication/datasets.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/result-cache-existing-guide582-compose-QvKKkYWq/combined-publication/hallucinate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/result-cache-existing-guide582-compose-QvKKkYWq/combined-publication/root.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/watchdog-f7c3-existing-parent-pins-PO2BmHqy/accelerate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/watchdog-f7c3-existing-parent-pins-PO2BmHqy/hallucinate.git"
+    },
+    {
+      "kind": "bare_or_gitdir",
+      "marker": "/tmp/watchdog-f7c3-existing-parent-pins-PO2BmHqy/root.git"
+    }
+  ],
+  "prior_marker_inventory": {
+    "bytes": 65633400,
+    "marker_count": 22498,
+    "path": "/tmp/fresh-git-discovery-20261127-1vX4ddBA/discovery.json",
+    "sha256": "57c4c69dc6e6adb4348f8184fab1f0780f0eb398ae1843333bbaa97e88798f78"
+  },
+  "roots": [
+    "/tmp",
+    "/home/barberb"
+  ],
+  "scan_closed": true,
+  "scan_elapsed_seconds": 114.517,
+  "schema": "filesystem-only-git-marker-rescan/v1",
+  "scope": "Filesystem marker observations only. No Symlink traversal, Git commands, project source reads, models, runtime, or network. New markers have no branch or repository identity qualification."
+}

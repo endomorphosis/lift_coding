@@ -1,0 +1,615 @@
+"""Selected Native3 operator; only Reader executes this private program."""
+from __future__ import annotations
+import ast
+import base64
+import contextlib
+import dataclasses
+import hashlib
+import importlib
+import json
+import os
+from pathlib import Path
+import shutil
+import stat
+import subprocess
+import sys
+import time
+import traceback
+import types
+import zlib
+N = None
+HERE = None
+RUN_OUTPUT = Path('/tmp/Root-P1-Guide585-namespaced-Native2-Source4-vydep2ma/actual-namespaced-native2-output')
+W = Path('/tmp/Root-P1-Guide585-namespaced-Native2-Source4-vydep2ma/datasets')
+A = Path('/tmp/Root-result-cache-owned-existing-route-L4Wyme59/accelerate')
+STATE = None
+LEAN = None
+LEAN_BIN = None
+PATH_SCOPE = '/home/barberb/.local/bin:/usr/lib/git-core'
+ROOT_SELECTION = '/tmp/Root-P1-Guide585-namespaced-Native2-Source4-vydep2ma/Root-selected-current-namespaced-Native2-once.json'
+CURRENT_BINDING_REF = {'path': '/tmp/Root-P1-Guide585-namespaced-Native2-Source4-vydep2ma/Root-current-existing-namespaced-Native2-binding.json', 'bytes': 29278, 'sha256': '48012052430b164c5296e5c62028f2ec1d9165c88c3f955c0f29478c16346c11'}
+NATIVE_CASE_PROFILE = 'P1-native-namespaced-expected-declaration/v1'
+MAX_DIAGNOSTIC_BYTES = 16 * 1024 ** 2
+FIELDS = ('st_dev', 'st_ino', 'st_mode', 'st_nlink', 'st_uid', 'st_gid', 'st_size', 'st_mtime_ns', 'st_ctime_ns')
+f9 = lambda value: {key: str(getattr(value, key)) for key in FIELDS}
+H = lambda raw: hashlib.sha256(raw).hexdigest()
+
+def read_private(path, size, digest):
+    path = Path(path)
+    before = path.lstat()
+    assert stat.S_ISREG(before.st_mode) and before.st_nlink == 1
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+    try:
+        assert f9(before) == f9(os.fstat(fd))
+        raw = bytearray()
+        while (piece := os.read(fd, 1024 ** 2)):
+            raw.extend(piece)
+            assert len(raw) <= size
+        assert f9(before) == f9(os.fstat(fd)) == f9(path.lstat())
+    finally:
+        os.close(fd)
+    raw = bytes(raw)
+    assert len(raw) == size and H(raw) == digest, str(path)
+    return raw
+assert (type(ROOT_SELECTION) is str and ROOT_SELECTION and type(CURRENT_BINDING_REF) is dict
+        and isinstance(RUN_OUTPUT, Path) and RUN_OUTPUT.is_absolute()
+        and isinstance(W, Path) and W.is_absolute() and isinstance(A, Path) and A.is_absolute()
+        and type(PATH_SCOPE) is str and PATH_SCOPE), 'current Native3 operation is unbound and not selected'
+try:
+    _binding = json.loads(read_private(CURRENT_BINDING_REF['path'], CURRENT_BINDING_REF['bytes'], CURRENT_BINDING_REF['sha256']))
+    assert _binding['schema'] == 'existing-direct-Native3-current-bindings/v1' and _binding['Root_selection'] == ROOT_SELECTION
+    assert _binding['Source42_current_owner_binding'] and _binding['Native_enrollment'] and _binding['Source_IO_allocation'], 'actual current owner/enrollment/allocation bindings required'
+    assert _binding['native_case_profile'] == NATIVE_CASE_PROFILE
+    assert _binding['Native_enrollment']['case_profile'] == NATIVE_CASE_PROFILE, 'fresh case-specific Native enrollment required; no old scope transfer'
+    _clock = _binding['clock_scope']
+    assert (type(_clock) is dict and type(_clock.get('not_before_utc_ns')) is int
+            and type(_clock.get('submit_deadline_utc_ns')) is int
+            and _clock['not_before_utc_ns'] <= time.time_ns() <= _clock['submit_deadline_utc_ns']), 'fresh selected submission window required'
+    source_record = _binding['Source42_record']
+    _ref = _binding['Source42_raw']
+    source_raw = read_private(_ref['path'], _ref['bytes'], _ref['sha256'])
+    assert len(source_raw) == 10375 and H(source_raw) == '42e9f07d0d458177079269d9f495f0b70512180c1adc2f7fe0bfdb05518a12f9'
+    _ref = _binding['Source_epoch']
+    epoch_raw = read_private(_ref['path'], _ref['bytes'], _ref['sha256'])
+    EPOCH = json.loads(epoch_raw)
+    assert type(EPOCH) is list and len({row['path'] for row in EPOCH}) == len(EPOCH)
+    W_INDEX = _binding['W_INDEX']
+    PROJECTS = _binding['PROJECTS']
+    NATIVE = _binding['Native']
+    NAMESPACES = _binding['normal_namespaces']
+    assert type(NATIVE) is list and len(NATIVE) == 8 and (type(NAMESPACES) is list) and (len(NAMESPACES) == 3)
+    LEAN = _binding['lean_executable']
+    assert type(LEAN) is str and Path(LEAN).is_absolute()
+    LEAN_BIN = str(Path(LEAN).parent)
+    _resource = _binding['resource']
+    assert type(_resource) is dict
+    STATE = Path(_resource['state_path'])
+    EXPECTED_CONFIG = _resource['expected_config']
+    EXPECTED_CAPACITY = _resource['expected_capacity']
+    assert type(EXPECTED_CONFIG) is dict and type(EXPECTED_CAPACITY) is dict
+    assert EXPECTED_CAPACITY['base_config_sha256'] == _resource['expected_policy_sha256']
+    test_record = _binding['owning_test_record']
+    _ref = _binding['owning_test_raw']
+    test_raw = read_private(_ref['path'], _ref['bytes'], _ref['sha256'])
+    assert len(test_raw) == 135080 and H(test_raw) == '5f4b3c5e6ae4e27676b0b99df368cf8ae32b6ebd5ffce7cfc8f7955435e5a80a'
+    assert test_record['path'] == str(W / 'tests/integration/logic/backends/test_kernel_backends.py')
+    epoch_test = next(row for row in EPOCH if row['path'] == test_record['path'])
+    assert all(epoch_test[key] == test_record[key] for key in ('bytes', 'sha256', 'full9'))
+    assert test_record['sha256'] == H(test_raw) and test_record['bytes'] == len(test_raw)
+    _ref = _binding['binder_raw']
+    binder_path = Path(_ref['path'])
+    binder_raw = read_private(binder_path, _ref['bytes'], _ref['sha256'])
+    assert len(binder_raw) == 5314 and H(binder_raw) == '01a15f30132f9d2b90782646f668fb8ac6d423f3f5b4510a5f2920222f88dad3'
+    assert not RUN_OUTPUT.exists(), 'distinct selected Native3 output must be absent'
+    RUN_OUTPUT.mkdir(mode=448)
+    PARENT_HOME = RUN_OUTPUT / 'parent-home'
+    PARENT_HOME.mkdir(mode=448)
+    TMP = RUN_OUTPUT / 'original-test-temp'
+    TMP.mkdir(mode=448)
+    FLAGS = {'IPFS_DATASETS_PY_MINIMAL_IMPORTS': '1', 'IPFS_DATASETS_AUTO_INSTALL_TEST_DEPS': '0', 'IPFS_DATASETS_PY_LAZY_INSTALL_ERGOAI': '0', 'IPFS_TEST_PROOF_REUSE_AUTO_INSTALL': '0', 'IPFS_ACCEL_AUTO_INSTALL': '0', 'IPFS_ACCEL_SKIP_CORE': '1', 'IPFS_ACCEL_RUN_INTEGRATION_TESTS': '0', 'IPFS_ACCEL_RUN_INTEGRATION_TESTS_SIMULATED': '0', 'PYTEST_DISABLE_PLUGIN_AUTOLOAD': '1', 'PYTHONDONTWRITEBYTECODE': '1', 'RUN_HEAVY_TESTS': '0', 'RUN_LLM_TESTS': '0', 'RUN_LONG_TESTS': '0', 'RUN_NETWORK_TESTS': '0', 'HF_HUB_OFFLINE': '1', 'TRANSFORMERS_OFFLINE': '1', 'CUDA_VISIBLE_DEVICES': '', 'IPFS_DATASETS_RUN_NATIVE_LEAN': '1', 'IPFS_DATASETS_LEAN_EXECUTABLE': LEAN, 'IPFS_DATASETS_LEAN_VERSION': '4.34.1', 'IPFS_DATASETS_NATIVE_LEAN_REPORT': str(TMP / 'native-lean-v3-namespaced-declaration-result.json'), 'PYTHONPATH': str(A) + ':' + str(W) + ':/home/barberb/.local/lib/python3.12/site-packages', 'PYTHONUSERBASE': '/home/barberb/.local'}
+    os.environ.clear()
+    os.environ.update({'PATH': PATH_SCOPE, 'LANG': 'C.UTF-8', 'HOME': str(PARENT_HOME), 'XDG_CONFIG_HOME': str(PARENT_HOME / 'xdg-config'), 'XDG_CACHE_HOME': str(PARENT_HOME / 'xdg-cache'), 'XDG_DATA_HOME': str(PARENT_HOME / 'xdg-data'), 'GH_CONFIG_DIR': str(PARENT_HOME / 'gh-config'), 'GIT_CONFIG_GLOBAL': '/dev/null', 'GIT_CONFIG_NOSYSTEM': '1'})
+    os.environ.update(FLAGS)
+    sys.dont_write_bytecode = True
+    _private_import_cache_prefix = PARENT_HOME / 'python-source-cache-isolation'
+    assert not os.path.lexists(_private_import_cache_prefix), 'fresh private import-cache namespace required'
+    sys.pycache_prefix = str(_private_import_cache_prefix)
+    source = types.ModuleType('selected_native3_existing_source42_owner')
+    source.__file__ = source_record['path']
+    sys.modules[source.__name__] = source
+    exec(compile(source_raw, source_record['path'], 'exec'), source.__dict__)
+    report = {'schema': 'actual-current-native3-case-caller-owned-validation/v1', 'selection': ROOT_SELECTION, 'source_epoch_sha256': H(epoch_raw), 'source_epoch_rows': len(EPOCH), 'source_body_reads_by_metadata_fences': 0, 'native_asset_body_reads_by_metadata_fences': 0, 'test_source_sha256': H(test_raw), 'binder_sha256': H(binder_raw), 'native_attempts': [], 'errors': [], 'actual_native_qualification': False, 'full_Phase1_complete': False, 'pytest_case_credit': 0, 'statutory_or_model_or_corpus_admission': False, 'resource_cleanup_confirmed': False, 'Source_closed': False, 'diagnostic_bytes_written': 0, 'actual_test_function_entered': False}
+
+    def retain_bytes(name, raw):
+        assert type(raw) is bytes
+        assert '/' not in name and name not in {'', '.', '..'}
+        assert report['diagnostic_bytes_written'] + len(raw) <= MAX_DIAGNOSTIC_BYTES
+        path = RUN_OUTPUT / name
+        fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 256)
+        with os.fdopen(fd, 'wb') as stream:
+            stream.write(raw)
+            stream.flush()
+            os.fsync(stream.fileno())
+        report['diagnostic_bytes_written'] += len(raw)
+        read_private(path, len(raw), H(raw))
+        return {'path': str(path), 'bytes': len(raw), 'sha256': H(raw)}
+
+    def retain_json(name, value):
+        return retain_bytes(name, (json.dumps(value, sort_keys=True, separators=(',', ':'), default=str) + '\n').encode())
+
+    def native_guard():
+        seen = []
+        for row in NATIVE:
+            path = Path(row['path'])
+            expected = row['actual_full9']
+            before = path.lstat()
+            assert stat.S_ISREG(before.st_mode) and before.st_nlink == 1
+            fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+            try:
+                assert f9(before) == f9(os.fstat(fd)) == f9(path.lstat()) == expected, ('Native asset metadata drift', str(path))
+            finally:
+                os.close(fd)
+            seen.append({'path': str(path), 'bytes': row['bytes'], 'sha256': row['sha256'], 'full9': expected, 'body_read_bytes': 0})
+        return seen
+
+    def metadata_guard():
+        records = []
+        for row in EPOCH:
+            path = Path(row['path'])
+            before = path.lstat()
+            assert stat.S_ISREG(before.st_mode) and before.st_nlink == 1
+            fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+            try:
+                assert f9(before) == f9(os.fstat(fd)) == f9(path.lstat()) == row['full9'], ('Source metadata drift', str(path))
+            finally:
+                os.close(fd)
+            records.append(row)
+        for row in NAMESPACES:
+            path = Path(row['path'])
+            observed = path.lstat()
+            assert stat.S_ISDIR(observed.st_mode) and (observed.st_dev, observed.st_ino) == (row['device'], row['inode'])
+            assert not os.path.lexists(path / '__init__.py')
+        heads = {}
+        for project in PROJECTS:
+            value = subprocess.run(['/usr/bin/git', '-C', project['root'], 'rev-parse', 'HEAD'], capture_output=True, text=True, timeout=10, check=True).stdout.strip()
+            assert value == project['Git_HEAD'], ('Git HEAD drift', project['root'])
+            heads[project['root']] = value
+        path = Path(W_INDEX['path'])
+        fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+        try:
+            assert f9(path.lstat()) == f9(os.fstat(fd)) == W_INDEX['full9']
+        finally:
+            os.close(fd)
+        return {'records': records, 'Git_HEADS': heads, 'current_authorized_post_doc_W_index': W_INDEX, 'namespaces': NAMESPACES, 'native_assets': native_guard(), 'body_read_bytes': 0, 'all_FDs_closed': True}
+
+    def observe_state():
+        for _ in range(5):
+            before = STATE.lstat()
+            assert stat.S_ISREG(before.st_mode) and before.st_size < 65536
+            fd = os.open(STATE, os.O_RDONLY | os.O_NOFOLLOW)
+            try:
+                opened = os.fstat(fd)
+                raw = os.read(fd, 65537)
+                end = os.fstat(fd)
+            finally:
+                os.close(fd)
+            after = STATE.lstat()
+            if f9(before) == f9(opened) == f9(end) == f9(after) and len(raw) == before.st_size:
+                return {'full9': f9(after), 'bytes': len(raw), 'sha256': H(raw), 'state': json.loads(raw)}
+        raise RuntimeError('bounded existing resource-state snapshot changed')
+
+    def retain_sdk_result(result, request, *, returned):
+        from collections.abc import Mapping
+        outputs = result.output_files
+        assert isinstance(outputs, Mapping)
+        index = len(report['native_attempts'])
+        raw_refs = []
+        for number, (logical_name, raw) in enumerate(outputs.items()):
+            assert type(logical_name) is str and type(raw) is bytes
+            raw_refs.append({'logical_name': logical_name, **retain_bytes(f'native-{index}-output-{number}.bin', raw)})
+        input_refs = []
+        for number, (logical_name, value) in enumerate(request.input_files.items()):
+            assert type(logical_name) is str and type(value) in (str, bytes)
+            raw = value.encode() if type(value) is str else value
+            input_refs.append({'logical_name': logical_name, 'original_type': type(value).__name__, **retain_bytes(f'native-{index}-input-{number}.bin', raw)})
+        row = {'index': index, 'SDK_returned_result': returned, 'request': {'argv': list(request.argv), 'runtime': str(request.runtime), 'limits': dataclasses.asdict(request.limits), 'input_files': input_refs, 'environment': dict(request.environment)}, 'raw_output_files': raw_refs, 'result': result.to_dict()}
+        report['native_attempts'].append(row)
+        row['durable_actual_event'] = retain_json(f'native-{index}-actual-event.json', row)
+
+    def run_with_actual_custody(method, request, **kwargs):
+        native_guard()
+        returned_result = None
+        retained_result = None
+        try:
+            result = method(request, **kwargs)
+            returned_result = result
+            retain_sdk_result(result, request, returned=True)
+            retained_result = result
+            native_guard()
+            return result
+        except BaseException as error:
+            # Keep the actual primary exception and exact result objects alive in this frame.
+            actual_result = returned_result if type(returned_result) is sdk.ToolRunResult else None
+            secondary_errors = []
+            handle = error.cleanup_handle if type(error) is sdk.OwnedToolCleanupError else None
+            if type(handle) is not sdk.NativeToolCleanupHandle:
+                handle = None
+            pending = {'owner': 'existing SDK ordinary owned-process cleanup',
+                       'SDK_returned_result': returned_result is not None,
+                       'observations': [], 'attempts': 0,
+                       'original_error_type': type(error).__name__}
+            report['owned_cleanup_pending'] = pending
+            current = error.__traceback__
+            while current is not None:
+                code = current.tb_frame.f_code
+                if code is sdk.BoundedToolRunner.run.__code__ or code is admitted.ResourceAdmittedToolRunner.run.__code__:
+                    value = current.tb_frame.f_locals.get('result')
+                    if actual_result is None and type(value) is sdk.ToolRunResult:
+                        actual_result = value
+                        pending['SDK_result_origin'] = ('actual canonical managed traceback local before error'
+                            if code is admitted.ResourceAdmittedToolRunner.run.__code__
+                            else 'actual canonical SDK traceback local before error')
+                if code is sdk.BoundedToolRunner.run.__code__:
+                    candidate = current.tb_frame.f_locals.get('owned_handle')
+                    if handle is None and type(candidate) is sdk.NativeToolCleanupHandle:
+                        handle = candidate
+                current = current.tb_next
+            if actual_result is not None and retained_result is not actual_result:
+                try:
+                    retain_sdk_result(actual_result, request, returned=actual_result is returned_result)
+                    retained_result = actual_result
+                except BaseException as retention_error:
+                    secondary_errors.append(retention_error)
+                    pending['raw_result_retention_error'] = {'type': type(retention_error).__name__, 'message': str(retention_error)}
+            result_state = None
+            if actual_result is not None and retained_result is actual_result:
+                try:
+                    result_state = actual_result.to_dict()
+                    assert type(result_state) is dict
+                except BaseException as view_error:
+                    secondary_errors.append(view_error)
+                    result_state = None
+                    pending['result_view_error'] = {'type': type(view_error).__name__, 'message': str(view_error)}
+            lifecycle = result_state.get('native_lifecycle') if result_state is not None else None
+            native_closed = (result_state is not None and result_state.get('workspace_cleaned') is True
+                             and type(lifecycle) is dict and lifecycle.get('cleanup_confirmed') is True)
+            no_child = (result_state is not None and result_state.get('workspace_cleaned') is True
+                        and actual_result.pid is None and actual_result.native_lifecycle is None
+                        and actual_result.returncode is None)
+            if retained_result is actual_result and actual_result is not None and (native_closed or no_child):
+                report['post_closed_SDK_result_error'] = {'type': type(error).__name__, 'message': str(error),
+                    'cleanup_basis': 'FAILED_NO_CHILD' if no_child else 'actual SDK process/workspace cleanup confirmed'}
+                # A known no-child result is a failure; parent subtree/release checks still run.
+                raise
+            # One durable diagnostic before either custody loop. Failure to write cannot
+            # replace the primary exception, discard the actual result or release custody.
+            checkpoint = {'schema': 'native3-existing-custody-error-checkpoint/v1',
+                'failure': {'type': type(error).__name__, 'message': str(error),
+                            'traceback': ''.join(traceback.format_exception(type(error), error, error.__traceback__))},
+                'actual_result_present': actual_result is not None,
+                'raw_result_retention_complete': actual_result is not None and retained_result is actual_result,
+                'new_dispatch': False, 'actual_native_qualification': False, 'current_report': report}
+            try:
+                checkpoint_ref = retain_json('native3-custody-pending-checkpoint.json', checkpoint)
+                read_private(checkpoint_ref['path'], checkpoint_ref['bytes'], checkpoint_ref['sha256'])
+                report['custody_checkpoint'] = checkpoint_ref
+            except BaseException as diagnostic_error:
+                secondary_errors.append(diagnostic_error)
+                report['custody_checkpoint_error'] = {'type': type(diagnostic_error).__name__, 'message': str(diagnostic_error)}
+            if handle is None:
+                pending['ambiguous_without_actual_handle'] = True
+                while True:
+                    try:
+                        print(json.dumps({'event': 'AMBIGUOUS_NATIVE3_CUSTODY_RETAINED', 'operator_pid': os.getpid(), 'Source_READ_still_held': True, 'new_dispatch': False}), flush=True)
+                        time.sleep(5)
+                    except BaseException as hold_error:
+                        pending['last_hold_error_type'] = type(hold_error).__name__
+            while True:
+                pending['attempts'] += 1
+                confirmed = False
+                try:
+                    observation = handle.retry_cleanup()
+                    pending['observations'] = (pending['observations'] + [observation.to_dict()])[-32:]
+                    confirmed = observation.cleanup_confirmed
+                except BaseException as retry_error:
+                    pending['last_retry_error_type'] = type(retry_error).__name__
+                if confirmed:
+                    pending['confirmed_after_error'] = True
+                    if actual_result is not None and (retained_result is not actual_result or result_state is None):
+                        pending['process_clean_but_result_custody_retained'] = True
+                        while True:
+                            try:
+                                print(json.dumps({'event': 'ACTUAL_NATIVE3_RESULT_CUSTODY_RETAINED', 'operator_pid': os.getpid(), 'Source_READ_still_held': True, 'new_dispatch': False}), flush=True)
+                                time.sleep(5)
+                            except BaseException as hold_error:
+                                pending['last_hold_error_type'] = type(hold_error).__name__
+                    raise error
+                try:
+                    print(json.dumps({'event': 'ACTUAL_NATIVE3_CUSTODY_RETAINED', 'operator_pid': os.getpid(), 'attempts': pending['attempts'], 'Source_READ_still_held': True, 'new_dispatch': False}), flush=True)
+                    time.sleep(1)
+                except BaseException as hold_error:
+                    pending['last_hold_error_type'] = type(hold_error).__name__
+
+    @contextlib.contextmanager
+    def tracked_source_read(project):
+        manager = source.source_lease(project['root'], mode='read', timeout_seconds=30)
+        lease = manager.__enter__()
+        observation = {'root': project['root'], 'entered': True, 'exit_returned': False}
+        report.setdefault('actual_Source_context_closure', []).append(observation)
+        try:
+            yield lease
+        except BaseException:
+            suppressed = manager.__exit__(*sys.exc_info())
+            observation['exit_returned'] = True
+            if not suppressed:
+                raise
+        else:
+            manager.__exit__(None, None, None)
+            observation['exit_returned'] = True
+    parent = None
+    try:
+        with contextlib.ExitStack() as stack:
+            leases = [stack.enter_context(tracked_source_read(project)) for project in sorted(PROJECTS, key=lambda row: str(source.canonical_source_root(row['root'])))]
+            report['Source_leases'] = [lease.to_dict() for lease in leases]
+            try:
+                report['source_before'] = retain_json('source-before.json', metadata_guard())
+                sys.path[:0] = FLAGS['PYTHONPATH'].split(os.pathsep)
+                sdk = importlib.import_module('ipfs_datasets_py.logic.backends.process')
+                admitted = importlib.import_module('ipfs_datasets_py.logic.backends.resource_admission')
+                resources = importlib.import_module('ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler')
+                lean = importlib.import_module('ipfs_datasets_py.logic.backends.kernel.lean')
+                assert sdk.ToolRunRequest is admitted.ToolRunRequest and sdk.ToolRunResult is admitted.ToolRunResult
+                assert admitted.GlobalResourceScheduler is resources.GlobalResourceScheduler
+                pins = _binding['current_SDK_source_pins']
+                assert pins['ipfs_datasets_py.logic.backends.kernel.lean'] == ['ipfs_datasets_py/logic/backends/kernel/lean.py', 'a36a8ae2c304dc439e6bf32d1a0481b5fc8dab592e26a7dae40cda0a28b8a274']
+                report['canonical_module_bindings'] = {}
+                for name, (relative, digest) in pins.items():
+                    module = sys.modules[name]
+                    path = W / relative
+                    row = next((row for row in EPOCH if row['path'] == str(path)))
+                    assert Path(module.__file__).resolve() == path.resolve() and row['sha256'] == digest and (f9(path.lstat()) == row['full9'])
+                    report['canonical_module_bindings'][name] = {'path': str(path), 'sha256': digest, 'full9': row['full9']}
+                current_protocol = sys.modules['ipfs_datasets_py.logic.ir_core.protocols']
+                current_path = str(Path(current_protocol.__file__).resolve())
+                held_protocol = _binding['current_protocol_raw_source']
+                protocol_bytes = read_private(held_protocol['path'], held_protocol['bytes'], held_protocol['sha256'])
+                assert current_path == str(W / 'ipfs_datasets_py/logic/ir_core/protocols.py') and H(protocol_bytes) == 'e2dd1dc93d1efa15c7c4088145d32c52636c72e9230b16ade77ca6c6a0c2c336'
+                protocol_body = compile(protocol_bytes, current_path, 'exec', dont_inherit=True, optimize=0)
+                compared_protocol_methods = []
+                for class_name, method_names in {'ExecutionBounds': ('to_dict',), 'ResourceUsage': ('exceeds',), 'BackendRequest': ('to_dict',), 'BackendAttempt': ('__post_init__',), 'ResultAuthority': ('__post_init__',), 'BoundedResult': ('__post_init__', 'to_dict'), 'ProofReceipt': ('__post_init__', 'issue', 'from_dict')}.items():
+                    compiled_class, = [code for code in protocol_body.co_consts
+                                      if type(code) is types.CodeType and code.co_name == class_name]
+                    for method_name in method_names:
+                        declared_code, = [code for code in compiled_class.co_consts
+                                          if type(code) is types.CodeType and code.co_name == method_name]
+                        current_method = vars(vars(current_protocol)[class_name])[method_name]
+                        if type(current_method) in (classmethod, staticmethod):
+                            current_method = current_method.__func__
+                        assert current_method.__code__ == declared_code and current_method.__code__.co_filename == current_path
+                        compared_protocol_methods.append(class_name + '.' + method_name)
+                assert current_protocol.BoundedResult in current_protocol.ProofResult.__mro__
+                report['current_protocol_code_binding'] = dict(raw_source=held_protocol,
+                    module='ipfs_datasets_py.logic.ir_core.protocols', canonical_path=current_path,
+                    exact_compiled_function_code=compared_protocol_methods, ProofResult_uses_current_BoundedResult=True)
+                report['resource_before'] = observe_state()
+                assert report['resource_before']['state']['config'] == EXPECTED_CONFIG
+                assert report['resource_before']['state']['child_process_capacity'] == EXPECTED_CAPACITY
+                config = resources.ResourceSchedulerConfig(state_path=str(STATE), **report['resource_before']['state']['config'])
+                scheduler = resources.get_global_resource_scheduler(config=config)
+                parent = scheduler.try_acquire('validation', cpu_slots=1, memory_mb=8192, child_process_slots=1, requires_gpu=False, gpu_memory_mb=0, unified_memory_mb=0, parent_lease=None, request_id='phase1:native:namespaced-expected-declaration')
+                if parent is None:
+                    report['admission_refused'] = True
+                    raise RuntimeError('Existing shared namespace refused genuine validation CPU1/memory8192/child1 admission; no Native dispatch')
+                report['actual_parent_lease'] = parent.to_dict()
+
+                cache_processes = []
+                class ObservedNativeRunner(admitted.ResourceAdmittedToolRunner):
+
+                    def run(self, request, **kwargs):
+                        result = run_with_actual_custody(super().run, request, **kwargs)
+                        cache_processes.append(result.to_dict())
+                        return result
+                runner = ObservedNativeRunner(parent_lease=parent, cpu_slots=1, child_process_slots=1, base_environment={'PATH': PATH_SCOPE, 'LANG': 'C.UTF-8'}, executable_roots=(LEAN_BIN, '/usr/bin'))
+                test_namespace = {'__name__': 'selected_existing_kernel_test_native3', '__file__': test_record['path']}
+                exec(compile(test_raw, test_record['path'], 'exec'), test_namespace)
+                binder_namespace = {'__name__': 'selected_existing_native3_caller_binding', '__file__': str(binder_path)}
+                exec(compile(binder_raw, str(binder_path), 'exec'), binder_namespace)
+                bound = binder_namespace['bind_existing_native_expected_policy'](test_namespace, owning_test_source_bytes=test_raw, caller_owned_runner=runner)
+                assert bound.__name__ == 'test_lean_native_v3_expected_declaration_distinguishes_namespaced_decoy'
+                report['actual_test_function_entered'] = True
+                print(json.dumps({'event': 'ACTUAL_NATIVE3_EXISTING_TEST_START', 'operator_pid': os.getpid(), 'parent_lease_id': parent.lease_id, 'test': bound.__name__}), flush=True)
+                try:
+                    test_return = bound(TMP)
+                except BaseException as error:
+                    frame = error.__traceback__
+                    while frame is not None:
+                        if frame.tb_frame.f_code is bound.__code__:
+                            values = frame.tb_frame.f_locals
+                            partial = {key: values[key] for key in ('rows', 'name', 'source', 'proposition', 'report') if key in values}
+                            for key in ('probe', 'outcome'):
+                                if key in values:
+                                    partial[key] = values[key].to_dict()
+                            report['actual_original_test_partial_failure_state'] = retain_json('original-test-partial-failure-state.json', partial)
+                        frame = frame.tb_next
+                    raise
+                original_path = Path(FLAGS['IPFS_DATASETS_NATIVE_LEAN_REPORT'])
+                original_fd = os.open(original_path, os.O_RDONLY | os.O_NOFOLLOW)
+                try:
+                    original_before = os.fstat(original_fd)
+                    assert stat.S_ISREG(original_before.st_mode) and original_before.st_nlink == 1 and (original_before.st_size <= 1024 ** 2)
+                    original_raw = os.read(original_fd, 1024 ** 2 + 1)
+                    os.fsync(original_fd)
+                    assert len(original_raw) == original_before.st_size and f9(original_before) == f9(os.fstat(original_fd)) == f9(original_path.lstat())
+                finally:
+                    os.close(original_fd)
+                report['diagnostic_bytes_written'] += len(original_raw)
+                assert report['diagnostic_bytes_written'] <= MAX_DIAGNOSTIC_BYTES
+                original = json.loads(original_raw)
+                assert test_return is None, 'maintained Native3 test must return None; saved report is read independently'
+                report['original_test_report'] = {'path': str(original_path), 'bytes': len(original_raw), 'sha256': H(original_raw)}
+                attempts = report['native_attempts']
+                versions = [row for row in attempts if row['request']['argv'][-1:] == ['--version']]
+                compiled = [row for row in attempts if '--json' in row['request']['argv']]
+                report['actual_command_counts'] = {'all': len(attempts), 'version': len(versions), 'compiler': len(compiled), 'unclassified': len(attempts) - len(versions) - len(compiled)}
+                assert [row['index'] for row in attempts] == [0, 1, 2]
+                assert versions + compiled == attempts and len(versions) == 1 and len(compiled) == 2
+                assert report['actual_command_counts']['unclassified'] == 0
+                for row in attempts:
+                    value = row['result']
+                    assert row['SDK_returned_result'] is True
+                    assert value['workspace_cleaned'] and value.get('native_lifecycle', {}).get('cleanup_confirmed') is True
+                    assert not any(value[key] for key in ('timed_out', 'cancelled', 'unavailable', 'output_truncated', 'workspace_limit_exceeded', 'resource_exhausted'))
+                assert original['schema'] == 'native-lean-v3-namespaced-declaration-check/v1'
+                assert original['native_Lean_executed'] is True
+                assert original['toolchain_version'] == FLAGS['IPFS_DATASETS_LEAN_VERSION']
+                assert original['statutory_or_source_semantic_admission'] is False
+                version, = versions
+                assert version['request']['argv'] == [LEAN, '--version'] and version['request']['input_files'] == []
+                result = version['result']
+                assert type(result['returncode']) is int and result['returncode'] == 0
+                assert result['command'] == version['request']['argv'] and not result['stderr']
+                cases = original['cases']
+                assert [row['case'] for row in cases] == ['root_positive', 'namespaced_wrong_type']
+                expected_source = 'theorem wanted : True := by trivial\nnamespace Law\ntheorem wanted : False → False := fun h => h\nend Law\n'
+                declarations = []
+                evidence = []
+                executable, = [asset for asset in NATIVE if asset['path'] == LEAN]
+                for row, command, declaration, accepted, rc in zip(
+                        cases, compiled, ('wanted', 'Law.wanted'), (True, False), (0, 1), strict=True):
+                    outcome = row['outcome']
+                    receipt = outcome['receipt']
+                    identity = receipt['native_identity']
+                    assert receipt['theorem_name'] == declaration and receipt['submitted_source'] == expected_source
+                    assert receipt['expected_proposition'] == 'True' and receipt['accepted'] is accepted
+                    assert receipt['native_identity_checked_after_compile'] is True and receipt['approved_axioms'] == []
+                    assert receipt['expected_proposition_checked'] is accepted
+                    assert identity['observation_kind'] == 'bounded_native_version_probe'
+                    assert identity['resolved_executable'] == LEAN and identity['actual_version'] == original['toolchain_version']
+                    assert identity['executable_sha256'] == executable['sha256'] and identity['executable_bytes'] == executable['bytes']
+                    assert identity['version_command'] == result['command'] and identity['version_returncode'] == result['returncode']
+                    assert identity['version_stdout'] == result['stdout'].strip() and identity['version_stderr'] == result['stderr']
+                    actual = command['result']
+                    assert type(actual['returncode']) is int and actual['returncode'] == rc
+                    assert command['request']['argv'] == actual['command']
+                    assert actual['command'][0] == LEAN and actual['command'][-2:] == ['--json', 'Main.lean']
+                    source_ref, = command['request']['input_files']
+                    assert source_ref['logical_name'] == 'Main.lean' and source_ref['original_type'] == 'str'
+                    actual_input = read_private(source_ref['path'], source_ref['bytes'], source_ref['sha256']).decode('utf-8')
+                    goal = receipt['expected_obligation_declaration']
+                    assert goal == lean.lean_expected_obligation_declaration(expected_source, declaration, 'True')
+                    expected_input = (expected_source.rstrip() + "\n\nset_option pp.fullNames true\n"
+                        + "set_option autoImplicit false in\n"
+                        + f"theorem {goal} : (True) := _root_.{declaration}\n\n"
+                        + f"#print axioms _root_.{goal}\n")
+                    assert actual_input == expected_input and receipt['compiled_source_digest'] == lean.content_digest(actual_input)
+                    declarations.append(goal)
+                    if accepted:
+                        assert outcome['result']['status'] == 'proved'
+                        axiom_report = receipt['axiom_report']
+                        assert axiom_report['axioms'] == [] and axiom_report['declaration'] == goal
+                    else:
+                        assert outcome['result']['status'] == 'error' and receipt['axiom_report'] is None
+                        diagnostics = lean._lean_error_diagnostics(actual['stdout'], actual['stderr'])
+                        assert any('type mismatch' in value.lower() for value in diagnostics), diagnostics
+                        assert any('type mismatch' in value.lower() for value in receipt['diagnostics'])
+                    evidence.append(dict(case=row['case'], declaration=declaration, compiler_returncode=rc,
+                        expected_obligation_declaration=goal, accepted=accepted,
+                        version_event_index=version['index'], compiler_event_index=command['index'],
+                        compiler_input_sha256=source_ref['sha256']))
+                assert len(set(declarations)) == 2
+                report['actual_namespaced_cases'] = evidence
+                report['actual_native_qualification'] = True
+                report['qualification_scope'] = 'Actual root expected-declaration proof accepted and fully qualified Law.wanted wrong type rejected on identical source and proposition'
+            finally:
+                if parent is not None:
+                    attempt = 0
+                    while True:
+                        attempt += 1
+                        try:
+                            snapshot = observe_state()
+                            rows = snapshot['state']['leases']
+                            descendants = {parent.lease_id}
+                            changed = True
+                            while changed:
+                                changed = False
+                                for lease_id, row in rows.items():
+                                    if row.get('parent_lease_id') in descendants and lease_id not in descendants:
+                                        descendants.add(lease_id)
+                                        changed = True
+                            assert not descendants.intersection(rows) - {parent.lease_id}, 'actual managed Native3 descendants remain; retain parent and Source custody'
+                            report['resource_before_parent_release'] = snapshot
+                            if not parent.released:
+                                report['actual_parent_release_return'] = parent.release()
+                            snapshot = observe_state()
+                            assert not descendants.intersection(snapshot['state']['leases'])
+                            report['resource_after_parent_release'] = snapshot
+                            report['resource_cleanup_confirmed'] = True
+                            break
+                        except BaseException as cleanup_error:
+                            report['resource_cleanup_last_error'] = {'type': type(cleanup_error).__name__, 'message': str(cleanup_error), 'attempt': attempt}
+                            try:
+                                print(json.dumps({'event': 'ACTUAL_NATIVE3_RESOURCE_CUSTODY_RETAINED', 'operator_pid': os.getpid(), 'attempt': attempt, 'Source_READ_held': True}), flush=True)
+                                time.sleep(1)
+                            except BaseException as hold_error:
+                                report['resource_hold_error'] = repr(hold_error)
+                else:
+                    report['resource_after_predispatch'] = observe_state()
+                    report['resource_cleanup_confirmed'] = True
+                report['source_after'] = retain_json('source-after.json', metadata_guard())
+    except BaseException as error:
+        report['errors'].append({'type': type(error).__name__, 'message': str(error), 'traceback': traceback.format_exc()})
+        raise
+    finally:
+        _primary_phase_exception = sys.exc_info()[1]
+        _closure_rows = report.get('actual_Source_context_closure', [])
+        report['Source_entry_observed'] = bool(_closure_rows)
+        report['Source_closed'] = bool(_closure_rows) and all((row['exit_returned'] for row in _closure_rows))
+        report['resource_cleanup_before_parent_home'] = report['resource_cleanup_confirmed']
+        _parent_cleanup_exception = None
+        try:
+            shutil.rmtree(PARENT_HOME)
+        except BaseException as _cleanup_error:
+            _parent_cleanup_exception = _cleanup_error
+            report['parent_home_cleanup_confirmed'] = False
+            report['resource_cleanup_confirmed'] = False
+            report['errors'].append({'phase': 'parent_home_cleanup', 'type': type(_cleanup_error).__name__, 'message': str(_cleanup_error), 'traceback': traceback.format_exc()})
+        else:
+            report['parent_home_cleanup_confirmed'] = True
+        report['actual_native_qualification'] = bool(report['actual_native_qualification'] and report['Source_closed'] and report['resource_cleanup_confirmed'] and report['parent_home_cleanup_confirmed'])
+        final_ref = None
+        try:
+            final_ref = retain_json('complete-native3-direct-existing-owner-report.json', report)
+        except BaseException as _publication_error:
+            if _primary_phase_exception is None and _parent_cleanup_exception is None:
+                raise
+            print(json.dumps({'event': 'ACTUAL_NATIVE3_FINAL_REPORT_PUBLICATION_FAILED', 'type': type(_publication_error).__name__, 'message': str(_publication_error)}), flush=True)
+        print(json.dumps({'event': 'ACTUAL_NATIVE3_CLOSED', 'report': final_ref, 'Source_entry_observed': report['Source_entry_observed'], 'Source_closed': report['Source_closed'], 'resource_cleanup_confirmed': report['resource_cleanup_confirmed'], 'parent_home_cleanup_confirmed': report['parent_home_cleanup_confirmed'], 'actual_native_qualification': report['actual_native_qualification'], 'errors': report['errors']}, sort_keys=True), flush=True)
+        if _primary_phase_exception is None and _parent_cleanup_exception is not None:
+            raise _parent_cleanup_exception
+except BaseException as _selected_setup_error:
+    if 'report' not in globals():
+        _setup_failure = {'schema': 'actual-current-native3-case-selected-prelude-refusal/v1', 'selection': ROOT_SELECTION, 'actual_native_qualification': False, 'full_Phase1_complete': False, 'Source_entry_observed': False, 'Source_closed': False, 'resource_cleanup_confirmed': False, 'resource_parent_acquisition_attempted': False, 'errors': [{'phase': 'selected_pre_Source_setup', 'type': type(_selected_setup_error).__name__, 'message': str(_selected_setup_error), 'traceback': traceback.format_exc()}]}
+        try:
+            RUN_OUTPUT.mkdir(mode=448, parents=False, exist_ok=True)
+            if 'PARENT_HOME' in globals() and PARENT_HOME.exists():
+                try:
+                    shutil.rmtree(PARENT_HOME)
+                    _setup_failure['parent_home_cleanup_confirmed'] = True
+                except BaseException as _setup_cleanup_error:
+                    _setup_failure['parent_home_cleanup_confirmed'] = False
+                    _setup_failure['errors'].append({'phase': 'parent_home_cleanup', 'type': type(_setup_cleanup_error).__name__, 'message': str(_setup_cleanup_error)})
+            _setup_bytes = (json.dumps(_setup_failure, sort_keys=True, separators=(',', ':')) + '\n').encode()
+            _setup_path = RUN_OUTPUT / 'complete-native3-direct-existing-owner-report.json'
+            _setup_fd = os.open(_setup_path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 256)
+            try:
+                _setup_rest = memoryview(_setup_bytes)
+                while _setup_rest:
+                    _setup_written = os.write(_setup_fd, _setup_rest)
+                    _setup_rest = _setup_rest[_setup_written:]
+                os.fsync(_setup_fd)
+            finally:
+                os.close(_setup_fd)
+            print(json.dumps({'event': 'ACTUAL_NATIVE3_SELECTED_PRELUDE_REFUSAL', 'report': {'path': str(_setup_path), 'bytes': len(_setup_bytes), 'sha256': H(_setup_bytes)}, 'actual_native_qualification': False, 'Source_entry_observed': False}), flush=True)
+        except BaseException as _setup_publication_error:
+            print(json.dumps({'event': 'ACTUAL_NATIVE3_SELECTED_PRELUDE_REFUSAL_PUBLICATION_FAILED', 'type': type(_setup_publication_error).__name__, 'message': str(_setup_publication_error)}), flush=True)
+    raise

@@ -1,0 +1,68 @@
+import ast,hashlib,json,os,stat,subprocess,sys,time,xml.etree.ElementTree as ET
+from pathlib import Path
+work=Path(__file__).resolve().parent
+base=work/('ordinary13-first' if len(sys.argv)==1 else sys.argv[1])
+assert base.parent==work and not base.exists()
+base.mkdir(mode=0o700)
+tree=ast.parse(Path('/tmp/Root-P2-whole-component-managed-R5-n8Fkdm2q/run-read3.py').read_bytes())
+exec(compile(ast.Module(body=[x for x in tree.body if isinstance(x,ast.FunctionDef) or (isinstance(x,ast.Assign) and getattr(x.targets[0],'id',None)=='policy')],type_ignores=[]),'exact guarded helpers','exec'))
+tree=ast.parse((work/'run-source2.py').read_bytes())
+exec(compile(ast.Module(body=[x for x in tree.body if (isinstance(x,ast.FunctionDef) and x.name=='ack') or (isinstance(x,ast.Assign) and getattr(x.targets[0],'id',None)=='status')],type_ignores=[]),'existing owner status helper','exec'))
+read_ref,_=read(work/'read4-terminal.json',3006,'454666c4714f1778bba2c1ab7ebcff8c39ccf47ebdf5a455aeea40f08a7529db')
+reader=val(read_ref)
+assert reader['returncode']==0 and reader['Source_closed'] and reader['owned_module_closed']
+inputs=reader['ordinary13_inputs']['abi']
+dir=Path('/tmp/Root-proof-cache-reload-ordinary13-late-INERT-TbJNvxlS')
+binder=dir/'bind-existing-ordinary13.py.DATA'
+read(binder,24332,'3098de911c97adb2ac0cf4dc57e6101700e16aac4d0d44076eba984f460c2956')
+def call(ref,*args):
+    return json.loads(subprocess.check_output(['/usr/bin/python3','-I','-B',str(binder),ref['path'],str(ref['bytes']),ref['sha256'],*args],timeout=35))
+nc=call(inputs)
+nc_obj=val(nc)
+D=nc_obj['D_prov']
+predecessor=read_ref if len(sys.argv)==1 else {'path':sys.argv[2],'bytes':int(sys.argv[3]),'sha256':sys.argv[4]}
+previous=val(predecessor)['fully_retained_ledger']
+n=128*1024**2
+ledger={**previous,'global_cap':previous['global_cap']+n,'internal_cap':previous['internal_cap']+n}
+paid={**ledger,'used':ledger['used']+n,'internal_used':ledger['internal_used']+n,'captures':ledger['captures']+1}
+assert paid['global_cap']-paid['used']==6356992 and paid['global_cap']-paid['internal_cap']==190591874
+precharge=keep('P1-ordinary13-Source-full-precharge.json',{'prior':previous,'selected':ledger,'after_full_retained_precharge':paid,
+   'added_Source_only_envelope':n,'previous_qualified_READ4':read_ref,'preceding_actual_ledger_terminal':predecessor,
+   'authority':val(reader['cap'])['authority'],'all_prior_costs_retained':True,'SDK_profile_capacity_unchanged':True})
+io=keep('P1-ordinary13-selected-IO.json',{'Root_selected':True,'Source_envelope_bytes':n,'admitted':True,
+   'all_prior_failed_attempts_and_Source_costs_retained':True,'ledger_before':ledger,'original_limits_and_guards_unchanged':True,
+   'physical_IO_accounting_complete':False,'cap_reference':precharge})
+effect=keep('P1-ordinary13-selected-effect.json',{'Root_selected':True,'ordinary_SDK_execution_selected':True,
+  'temporary_workspace_only':True,'scope':'Phase 1 proof-cache reload filename binding, 10 retained cases and 3 current regressions',
+  'no_actual_DuckDB_SQL_or_Native_Lean_selected':True,'no_epoch_fit_external_models_or_prover_selected':True,
+  'no_legal_or_training_admission':True,'no_live_managed_ledger_reconciliation_or_cap_change_selected':True})
+now=time.time_ns()
+out=dir/base.name
+assert not out.exists()
+selection=keep('Root-selected-existing-P1-ordinary13.json',{'schema':'Root-selected-existing-Phase1-proof-cache-reload-ordinary13/v1',
+   'Root_selected':True,'Source_READ_binding':nc_obj['read'],'IO_reference':io,'effect_reference':effect,'Source_envelope_bytes':n,
+   'case_hint':13,'actual_COLLECT_supplies_order':True,'frozen_D_HEAD':D['HEAD'],'frozen_D_tree':D['tree'],
+   'launch_not_before_utc_ns':now,'launch_deadline_utc_ns':now+840*10**9,'ledger_before':ledger,'output_namespace':str(out),
+   'actual_nonclock_handoff':nc})
+hand=keep('P1-ordinary13-fresh-handoff.json',{'nonclock':nc,'selection':selection,'io':io,'effect':effect})
+bound_ref=call(hand,'--hydrate')
+bound=val(bound_ref)
+assert bound['no_launch'] and bound['actual_selected']==selection and Path(bound['output_namespace'])==out
+with (base/'operator.stdout').open('xb') as so,(base/'operator.stderr').open('xb') as se:
+    process=subprocess.Popen(bound['run_argv'],stdout=so,stderr=se)
+    live=keep('P1-ordinary13-owner-live.json',{'owner':'Root','pid':process.pid,'selection':selection,'bound':bound_ref,'precharge':precharge})
+    ack('managed_ordinary13_running',ordinary_handle=live,SDK_selection=selection,READ4_terminal=read_ref,local_freeze=reader['freeze'])
+    print(json.dumps(live),flush=True)
+    rc=process.wait()
+r=out/bound['report_name']
+terminal={'owner':'Root','returncode':rc,'handle':None,'live':live,'precharge':precharge,'fully_retained_ledger':paid,
+          'stdout':read(base/'operator.stdout')[0],'stderr':read(base/'operator.stderr')[0],'READ4_terminal':read_ref}
+if r.exists():
+    report_ref,_=read(r)
+    report=val(report_ref)
+    terminal['report']=report_ref
+    terminal.update({k:report[k] for k in ('Source_closed','resource_cleanup_confirmed','qualification_complete','errors')})
+term=keep('P1-ordinary13-managed-terminal.json',terminal)
+ack('managed_ordinary13_closed' if rc==0 else 'managed_ordinary13_terminal_refusal',ordinary_handle=None,ordinary_terminal=term)
+print(json.dumps(term),flush=True)
+raise SystemExit(rc)

@@ -1,0 +1,59 @@
+import ast,hashlib,json,os,stat,subprocess
+from pathlib import Path
+base=Path(__file__).resolve().parent
+tree=ast.parse(Path('/tmp/Root-P2-whole-component-managed-R5-n8Fkdm2q/run-read3.py').read_bytes())
+exec(compile(ast.Module(body=[x for x in tree.body if isinstance(x,ast.FunctionDef) or (isinstance(x,ast.Assign) and getattr(x.targets[0],'id',None)=='policy')],type_ignores=[]),'guarded Source helpers','exec'))
+D=base/'datasets'
+A=Path('/tmp/Root-result-cache-owned-existing-route-L4Wyme59/accelerate')
+D_PARENT='73660a6f7e3f1d091829c71daa04cc1f5651410b'
+A_HEAD='fae7981fa576817536a3c7aa62c5d28dc417f214'
+ROLE='tests/integration/logic/backends/test_kernel_backends.py'
+POST_SHA='5f4b3c5e6ae4e27676b0b99df368cf8ae32b6ebd5ffce7cfc8f7955435e5a80a'
+POST_BLOB='6ada487237ea2e85c4ba19ea6b723ab6c8db3a77'
+FIXTURE='tests/unit/logic/legal_ir/test_proof_cache.py'
+OWNER='ipfs_datasets_py/logic/legal_ir/proof_cache.py'
+env=os.environ|{'GIT_OPTIONAL_LOCKS':'0','GIT_NO_LAZY_FETCH':'1','GIT_TERMINAL_PROMPT':'0'}
+def git(root,*args):
+    argv=['/usr/bin/git','--no-optional-locks','-C',str(root),'-c','core.hooksPath=/dev/null','-c','commit.gpgSign=false',
+          '-c','index.threads=1','-c','core.preloadIndex=false','-c','pack.threads=1',*args]
+    return subprocess.check_output(argv,env=env,timeout=40)
+def head(root,rev='HEAD'):return git(root,'rev-parse',rev).decode().strip()
+def data_row(path,pin=None):
+    r,_=read(path,None if pin is None else pin['bytes'],None if pin is None else pin['sha256'])
+    return {**r,'full9':full9(Path(path).lstat())}
+closed,_=read(base/'source1-terminal.json')
+t=val(closed)
+assert t['returncode']==0 and all(t[k] for k in ('Source_closed','module_closed','write_complete'))
+wr=val(t['closed_write'])
+assert all(wr[k] for k in ('Source_closed','module_closed','write_complete','qualification_complete')) and not wr['errors']
+assert all(c['entered'] and c['exit_returned'] for c in wr['Source_contexts'])
+installed,=wr['installed']
+assert (installed['path'],installed['bytes'],installed['sha256'])==(str(D/ROLE),135080,POST_SHA)
+assert data_row(D/ROLE,installed)=={k:installed[k] for k in ('path','bytes','sha256','full9')}
+assert head(D)==D_PARENT and head(A)==A_HEAD
+assert not git(A,'status','--porcelain=v1','--untracked-files=all')
+assert git(D,'status','--porcelain=v1','-z','--untracked-files=all')==(b' M '+ROLE.encode()+b'\0')
+assert not git(D,'diff','--cached','--name-only','-z')
+for rel,blob in ((OWNER,'a171ee9794439540c924a2288e4ebb9262a2c859'),(FIXTURE,'91abcac246b2f30d9554d88d74ded0b54b1f34ed')):
+    assert head(D,'HEAD:'+rel)==blob
+git(D,'add','--',ROLE)
+assert git(D,'diff','--cached','--name-only','-z')==ROLE.encode()+b'\0'
+assert git(D,'ls-files','--stage','-z','--',ROLE)==f'100644 {POST_BLOB} 0\t{ROLE}\0'.encode()
+assert hashlib.sha256(git(D,'cat-file','blob',POST_BLOB)).hexdigest()==POST_SHA
+git(D,'commit','--quiet','-m','Bind Native proof-cache validation to the current fixture')
+assert head(D,'HEAD^')==D_PARENT and head(D,'HEAD:'+ROLE)==POST_BLOB
+assert not git(D,'status','--porcelain=v1','--untracked-files=all')
+assert git(D,'diff-tree','--no-commit-id','--name-only','-r','-z','HEAD')==ROLE.encode()+b'\0'
+assert data_row(D/ROLE,installed)=={k:installed[k] for k in ('path','bytes','sha256','full9')}
+new=head(D)
+roots=[{'root':str(r),'Git_HEAD':head(r),'Git_tree':head(r,'HEAD^{tree}')} for r in (D,A)]
+idx=data_row(D/'.git/index')
+branch=git(D,'symbolic-ref','-q','HEAD').decode().strip()
+branch_row=data_row(D/'.git'/branch)
+assert (D/'.git'/branch).read_bytes()==new.encode()+b'\n'
+f=keep('source1-freeze.json',{'local_clean':True,'exact_changes_only':True,'pushed':False,
+ 'source_closed':t['closed_write'],'source1_terminal':closed,'published_base':D_PARENT,
+ 'frozen':{'HEAD':new,'tree':roots[0]['Git_tree'],'stage0_index':idx,'branch':branch},'frozen_roots':roots,
+ 'committed':{ROLE:{**installed,'committed_blob':POST_BLOB,'stage0_matches':True,'raw_bytes_bound':True,'mode':'100644'}},
+ 'frozen_branch_ref':branch_row})
+print(json.dumps(f),flush=True)

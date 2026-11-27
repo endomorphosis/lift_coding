@@ -1,0 +1,313 @@
+import ast
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+import re
+import stat
+import subprocess
+import sys
+import time
+
+work = Path('/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics')
+D = work.parent/'datasets'
+A = Path('/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate')
+fields = ('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
+def f9(info):
+    return {k:str(getattr(info,k)) for k in fields}
+
+def ref(path, size=None, digest=None, *, limit=16*1024**2):
+    p=Path(path)
+    a=p.lstat()
+    assert stat.S_ISREG(a.st_mode) and a.st_nlink==1 and a.st_size<=limit,p
+    with os.fdopen(os.open(p,os.O_RDONLY|os.O_NOFOLLOW),'rb') as source:
+        assert f9(os.fstat(source.fileno()))==f9(a)
+        raw=source.read(a.st_size+1)
+        assert f9(os.fstat(source.fileno()))==f9(a)
+    assert f9(p.lstat())==f9(a) and len(raw)==a.st_size
+    observed=dict(path=str(p),bytes=len(raw),sha256=sha256(raw).hexdigest())
+    assert size is None or size==observed['bytes'],p
+    assert digest is None or digest==observed['sha256'],p
+    return observed,raw
+
+def checked(r):
+    return ref(r['path'],r['bytes'],r['sha256'])[1]
+
+def obj(r):
+    return json.loads(checked(r))
+
+def seal(name,data):
+    p=work/name
+    if type(data) is not bytes:
+        data=(json.dumps(data,indent=2,sort_keys=True)+'\n').encode()
+    with os.fdopen(os.open(p,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400),'wb') as f:
+        f.write(data);f.flush();os.fsync(f.fileno())
+    return ref(p)[0]
+
+def git(repo,*argv):
+    return subprocess.check_output(['/usr/bin/git','--no-optional-locks','-C',str(repo),*argv],
+        env=os.environ|{'GIT_NO_LAZY_FETCH':'1','GIT_TERMINAL_PROMPT':'0'},timeout=20)
+
+def exact_keys(row):
+    return {k:row[k] for k in ('path','bytes','sha256','full9')}
+
+
+
+# Caller supplies one authenticated manifest of actual closures. Without it no
+# Source/assets/clock/output selection runs. This selector only binds; it
+# never launches the operator or changes repository refs.
+assert __debug__ and len(sys.argv)==6 and sys.argv[1]=='--inputs'
+assert sys.argv[5] in ('--verify-only','--bind-only')
+assert sys.argv[3].isdecimal() and len(sys.argv[4])==64
+inputs_ref=ref(sys.argv[2],int(sys.argv[3]),sys.argv[4])[0]
+inputs=obj(inputs_ref)
+assert set(inputs)=={'schema','observed_live_base','freeze','source_epoch_closure','read3','ordinary99','ordinary99_binding'}
+assert inputs['schema']=='P1-Lean-JSON-existing-namespaced-Native2-root-inputs/v1'
+assert all(type(inputs[k]) is dict and set(inputs[k])=={'path','bytes','sha256'} for k in inputs if k!='schema')
+controls_ref={'path': '/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/static-namespaced-native2-repin.json', 'bytes': 7679, 'sha256': 'eda4baba8ba4fc7c34291e754205e29aff6b2006d4fa7d63db8269e1abb23db5'}
+controls=obj(controls_ref)
+assert controls['current_toolchain_source_clock_resource_output_and_authority'] is None
+guide_ref=controls['published_guide']
+guide=obj(guide_ref)
+assert guide['actual_doc_Source_closed']==controls['published_guide_freeze']
+prior_guide=obj(controls['published_guide_freeze'])
+assert guide['evidence_ordinal']==580 and guide['terminal_returncode']==prior_guide['terminal_returncode']==0
+assert prior_guide['Source_closed'] and prior_guide['module_closed']
+observed_base_ref=inputs['observed_live_base']
+observed_base=obj(observed_base_ref)
+assert observed_base['schema']=='observed-current-main-official-V2-series-descendant-of-Guide580/v1'
+assert observed_base['previous_published_guide']==guide_ref
+assert observed_base['guide_main']==guide['live_main_after']
+assert observed_base['observed_base_is_dataset_descendant'] is True
+base=observed_base['live_main_after']
+assert set(base)=={'datasets','hallucinate','root','accelerate'}
+assert all(type(value) is str and re.fullmatch(r'[a-f0-9]{40}',value) for value in base.values())
+assert base['accelerate']==guide['live_main_after']['accelerate']
+freeze_ref=inputs['freeze']
+epoch_close_ref=inputs['source_epoch_closure']
+read_ref=inputs['read3']
+history=controls['historical_binding']
+op_ref=controls['operator']
+op_raw=checked(op_ref)
+freeze,closed,read3,binding=map(obj,(freeze_ref,epoch_close_ref,read_ref,history))
+assert freeze['observed_base']==closed['observed_base']==observed_base_ref
+assert freeze['parent']==base['datasets']==closed['prior_published_D']
+assert closed['current_A_HEAD']==base['accelerate']
+git(D,'merge-base','--is-ancestor',guide['live_main_after']['datasets'],base['datasets'])
+assert closed['exact_local_freeze']==read3['exact_local_freeze']==freeze_ref
+assert read3['actual_isolated_content_epoch']==epoch_close_ref
+assert all(row['Source_closed'] and row['module_closed'] and row['terminal_returncode']==0 for row in (read3,closed))
+assert read3['previous_published_guide']==closed['previous_published_guide']==guide_ref
+assert freeze['terminal_returncode']==0 and freeze['isolated_Source_context_closed'] and freeze['local_clean']
+assert freeze['only_two_D_tree_entries_changed'] and not (freeze['pushed'] or freeze['shared_source_or_Git_mutation'])
+retained_write=obj(freeze['full_charge'])
+first_write_ref=freeze['retained_first_write_charge']
+first_write=obj(first_write_ref)
+first_write_refusal_ref=freeze['retained_first_write_refusal']
+checked(first_write_refusal_ref)
+assert first_write['previous_charge']==prior_guide['full_charge']
+assert retained_write['previous_charge']==first_write_ref
+assert retained_write['prior']==first_write['after_full_retained_precharge']
+retained_read=obj(read3['full_charge'])
+assert retained_read['previous_charge']==freeze['full_charge'] and closed['full_charge']==read3['full_charge']
+assert retained_read['prior']==retained_write['after_full_retained_precharge']
+roots=read3['projects']
+for repo,row in zip((D,A),roots,strict=True):
+    assert str(repo)==row['root'] and not git(repo,'status','--porcelain=v1','-z','-uall')
+    assert git(repo,'rev-parse','HEAD','HEAD^{tree}').decode().split()==[row['Git_HEAD'],row['Git_tree']]
+assert roots[0]['Git_HEAD']==freeze['frozen']['HEAD'] and roots[0]['Git_tree']==freeze['frozen']['tree']
+assert roots[1]['Git_HEAD']==base['accelerate']
+assert git(D,'rev-parse','HEAD^').decode().strip()==base['datasets']
+epoch_ref=closed['outer_epoch_reference']
+python_ref=closed['python_epoch_reference']
+rows,py=map(obj,(epoch_ref,python_ref))
+epoch={row['path']:row for row in rows}
+assert len(epoch)==len(rows)==1618 and len(py)==1605
+assert all(epoch[row['path']]==row for row in py)
+assert all(f9(Path(row['path']).lstat())==row['full9'] for row in rows)
+guard=obj(read3['named_metadata_recheck_reference'])
+assert (len(guard['rows'])==1625 and all(f9(Path(row['path']).lstat())==row['full9'] for row in guard['rows']))
+w_index=read3['protected_index_reference']
+assert w_index==epoch[str(D/'.git/index')]==freeze['frozen']['index']
+assert epoch[str(A/'.git/index')]==read3['actual_accelerate_index_metadata']
+lean=str(D/'ipfs_datasets_py/logic/backends/kernel/lean.py')
+test=str(D/'tests/integration/logic/backends/test_kernel_backends.py')
+proto=str(D/'ipfs_datasets_py/logic/ir_core/protocols.py')
+caps={r['path']:r for r in read3['individual_captures']}
+assert set(caps)=={lean,test,w_index['path']}
+assert all(exact_keys(r)==epoch[path] and len(checked(r['raw_reference']))==r['bytes'] for path,r in caps.items())
+assert set(freeze['committed'])=={str(Path(path).relative_to(D)) for path in (lean,test)}
+for path,key in ((lean,'owning_lean'),(test,'owning_test')):
+    raw=checked(caps[path]['raw_reference'])
+    assert raw==checked(controls[key])
+    current_role=freeze['committed'][str(Path(path).relative_to(D))]
+    assert all(current_role[k]==epoch[path][k] for k in ('path','bytes','sha256','full9'))
+
+proof_ref=binding['Source_composition_proof']['prior_direct_roles']
+proof=obj(proof_ref)['current_frozen']
+earlier_binding=obj(binding['Source_composition_proof']['prior_direct_runtime'])
+earlier_d=Path(earlier_binding['PROJECTS'][0]['root'])
+role_paths={row['path'] for row in proof['unchanged_direct13_module_rows'].values()}
+role_paths.update(proof['historical_support16_current_paths'])
+role_paths.update(str(earlier_d/rel) for rel in proof['core14_same_F9_SHA_bytes_as_v323_and_v328'])
+relative={str(Path(path).relative_to(earlier_d)) for path in role_paths}
+assert len(relative)==controls['source_role_count']==27
+old_d=Path(binding['PROJECTS'][0]['root'])
+old_epoch={row['path']:row for row in obj(binding['Source_epoch'])}
+cache_epoch_close=obj(controls['prior_closed_current_root_cache_epoch'])
+cache_read=obj(controls['prior_closed_current_root_cache_READ4'])
+assert cache_read['actual_isolated_content_epoch']==controls['prior_closed_current_root_cache_epoch']
+closed_cache_epoch={row['path']:row for row in obj(cache_epoch_close['outer_epoch_reference'])}
+assert cache_read['Source_closed'] and cache_epoch_close['Source_closed'] and cache_read['projects'][0]['root']==str(D)
+changed_cache={
+    'ipfs_datasets_py/logic/legal_ir/proof_cache.py':'cf414d3c',
+    'tests/unit/logic/legal_ir/test_proof_cache.py':'1d0e6bdb',
+}
+for rel in sorted(relative):
+    old_row=old_epoch[str(old_d/rel)]
+    current_row=epoch[str(D/rel)]
+    git_blob=git(D,'cat-file','blob','HEAD:'+rel)
+    assert (len(git_blob),sha256(git_blob).hexdigest())==(current_row['bytes'],current_row['sha256']),rel
+    if str(D/rel) in (test,lean):
+        continue
+    if rel in changed_cache:
+        expected=closed_cache_epoch[str(D/rel)]
+        assert expected['sha256'].startswith(changed_cache[rel])
+    else:
+        expected=old_row
+    assert (expected['bytes'],expected['sha256'])==(current_row['bytes'],current_row['sha256']),rel
+for name,(rel,digest) in controls['current_SDK_source_pins'].items():
+    assert epoch[str(D/rel)]['sha256']==digest,name
+assert len(checked(binding['current_protocol_raw_source']))==57510 and binding['current_protocol_raw_source']['sha256']==epoch[proto]['sha256']
+assert len(checked(binding['Source42_raw']))==10375 and binding['Source42_raw']['sha256']==closed['actual_Source42']['sha256']
+host=obj(binding['native_asset_content_review'])
+assert host['complete'] and host['all8_asset_FDs_closed'] and not host['errors']
+assert len(binding['Native'])==len(host['assets'])==8
+for row in binding['Native']:
+    path=Path(row['path'])
+    before=path.lstat()
+    assert stat.S_ISREG(before.st_mode) and before.st_nlink==1 and before.st_size==row['bytes']
+    fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK)
+    try:
+        assert f9(os.fstat(fd))==f9(before)==f9(path.lstat())==row['actual_full9']
+    finally:
+        os.close(fd)
+assert Path(binding['lean_executable']).is_file()
+namespaces=[]
+old_d=Path(binding['PROJECTS'][0]['root'])
+for row in binding['normal_namespaces']:
+    path=D/Path(row['path']).relative_to(old_d)
+    init=path/'__init__.py'
+    before=path.lstat()
+    assert path.is_relative_to(D) and stat.S_ISDIR(before.st_mode) and not os.path.lexists(init)
+    fd=os.open(path,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
+    try:
+        assert f9(before)==f9(os.fstat(fd))==f9(path.lstat()) and not os.path.lexists(init)
+    finally:
+        os.close(fd)
+    # Capture duplicate top-level directory identity from the same observation.
+    namespaces.append(dict(row,path=str(path),initializer_path=str(init),full9=f9(before),
+        device=before.st_dev,inode=before.st_ino,FD_closed=True))
+assert len(namespaces)==3
+resource=binding['resource']
+state_ref,state_raw=ref(resource['state_path'],limit=65535)
+state=json.loads(state_raw)
+assert state['config']==resource['expected_config'] and state['child_process_capacity']==resource['expected_capacity']
+assert resource['expected_capacity']['base_config_sha256']==resource['expected_policy_sha256']
+binder=controls['binder']
+checked(binder)
+ordinary=inputs['ordinary99']
+q=obj(ordinary)
+assert q['terminal_returncode']==0 and q['counts']==dict(tests=99,passed=99,functions=24,failures=0,errors=0,skipped=0)
+assert q['Source_and_resource_and_parent_closed'] and q['isolated_freeze']==freeze_ref
+assert q['Source_READ3']==read3['ordinary_read_binding_abi']
+assert q['Lean_owner_normal_RUN_source_compile_sha256']==controls['owning_lean']['sha256']
+assert q['statutory_admission_or_model_or_Native_qualification'] is False
+ordinary_binding=obj(inputs['ordinary99_binding'])
+assert ordinary_binding['exact_local_freeze']==freeze_ref and ordinary_binding['exact_postfreeze_READ3']==read_ref
+assert ordinary_binding['read_abi']==read3['ordinary_read_binding_abi']
+old_charge=ordinary_binding['full_charge']; prev=obj(old_charge)
+auth=prev['exact_human_affirmation'];checked(auth)
+assert auth['sha256']=='8fdf2d6c57542b3ce8e8a06773645487c39a3cb2a8a9929426cc785d3fc78dda'
+prior_ordinary_ref=prev['prior_closed_ordinary_full_charge']
+prior_ordinary=obj(prior_ordinary_ref)
+prior_refusal=obj(prev['retained_prior_closed_ordinary_refusal'])
+assert prior_refusal['schema']=='actual-existing-Phase1-ordinary99-prior-closed-collector-refusal/v1'
+assert prior_refusal['exact_full_retained_charge']==prior_ordinary_ref
+assert prior_refusal['inherited_first_Source_write_refusal']==first_write_refusal_ref
+assert prior_refusal['terminal_returncode']==1 and prior_refusal['Source_and_parent_and_resource_closed'] is True
+assert prior_refusal['collect_exited_nonzero'] is True
+assert prior_refusal['actual_RUN_entered'] is prior_refusal['qualification_complete'] is False
+assert prior_ordinary['prior']==dict(retained_read['after_full_retained_precharge'],captures=max(
+    retained_read['after_full_retained_precharge']['captures'],read3['actual_ledger_after']['captures']))
+assert prev['prior']==prior_ordinary['after_full_retained_precharge']
+assert all(charge['all_prior_costs_retained'] is True for charge in (first_write,retained_write,retained_read))
+for charge in (prior_ordinary,prev):
+    assert charge['no_policy_capacity_or_model_change'] is True
+    assert charge['exact_human_affirmation']==auth
+    assert charge['read3_full_retained_charge']==read3['full_charge']
+    assert charge['retained_first_write_charge']==first_write_ref
+    assert charge['retained_first_write_refusal']==first_write_refusal_ref
+    ordinary_envelope=charge['added_Source_only_envelope']
+    assert ordinary_envelope==134217728
+    assert charge['selected']==dict(charge['prior'],global_cap=charge['prior']['global_cap']+ordinary_envelope,
+        internal_cap=charge['prior']['internal_cap']+ordinary_envelope)
+    assert charge['after_full_retained_precharge']==dict(charge['selected'],
+        used=charge['prior']['used']+ordinary_envelope,internal_used=charge['prior']['internal_used']+ordinary_envelope,
+        captures=charge['prior']['captures']+1)
+prior=prev['after_full_retained_precharge']
+assert all(prior[k]>=read3['actual_ledger_after'][k] for k in ('used','internal_used'))
+allowance=33554432
+envelope=134217728+allowance
+out=work/'actual-namespaced-native2-output'
+assert not os.path.lexists(out)
+print(json.dumps(dict(Native_selected=False,projects=roots,roles=len(relative),assets=len(binding['Native']),
+    namespaces=len(namespaces),ordinary_cases=99)),flush=True)
+if sys.argv[5]=='--verify-only':
+    raise SystemExit(0)
+before=dict(prior,global_cap=prior['global_cap']+envelope,internal_cap=prior['internal_cap']+envelope)
+after=dict(before,used=before['used']+envelope,internal_used=before['internal_used']+envelope,captures=before['captures']+1)
+charge=seal('Source-only-lean-json-diagnostics-namespaced-Native2-full-retained-cap.json',dict(
+    prior=prior,selected=before,after_full_retained_precharge=after,added_Source_only_envelope=envelope,
+    prior_native_envelope_bytes=134217728,extra_private_readback_upper=allowance,
+    previous_charge=old_charge,prior_cap=old_charge,exact_human_affirmation=auth,all_prior_costs_retained=True,
+    resource_policy_capacity_unchanged=True,no_policy_capacity_or_model_change=True,physical_IO_accounting_complete=False))
+now=time.time_ns()
+profile='P1-native-namespaced-expected-declaration/v1'
+clock=dict(kind='exact submission window for existing validation profile',not_before_utc_ns=now,submit_deadline_utc_ns=now+180_000_000_000)
+selection=seal('Root-selected-lean-json-diagnostics-namespaced-Native2-once.json',dict(
+    Root_selected=True,case_profile=profile,clock_scope=clock,current_published_parent=observed_base_ref,
+    existing_current_preflight_controls=controls_ref,actual_root_input_surface=inputs_ref,
+    output_namespace=str(out),current_Source_epoch=epoch_ref,current_Python_epoch=python_ref,
+    exact_current_index_and_targets_READ3=read_ref,exact_local_freeze=freeze_ref,
+    prior_code_and_fixture_role_provenance=history,ordinary99=ordinary,
+    current_namespaces=namespaces,current_expected_policy_binder=binder,operator_template=op_ref,
+    current_owning_test_source=caps[test]['raw_reference'],current_proof_protocol_owner_binding=epoch[proto],
+    no_statutory_or_model_qualification=True,cap_and_IO=charge,
+    allowed_real_commands=dict(Lean_version_observations=1,Lean_compile_calls=2,expected_compiler_statuses=[0,1]),
+    policy_and_state=state_ref,unchanged_exact_host_asset_metadata=binding['Native']))
+binding.update(native_case_profile=profile,Root_selection=selection['path'],W_INDEX=w_index,PROJECTS=roots,
+    Source_epoch=epoch_ref,clock_scope=clock,binder_raw=binder,normal_namespaces=namespaces,
+    current_SDK_source_pins=controls['current_SDK_source_pins'],owning_test_raw=caps[test]['raw_reference'],
+    owning_test_record=epoch[test],current_D_config=dict(status='config not a selected read role'),
+    Source_composition_proof=dict(current_prepared_scope=read_ref,exact_current_freeze=freeze_ref,
+        prior_direct_roles=proof_ref,prior_direct_runtime=history,current_27_all_in_epoch=True,current_proof_protocol_owner_binding=epoch[proto]),
+    Source42_current_owner_binding=dict(existing_Source42_binding_verified=True,current_published_parent=observed_base_ref,
+        current_read_guard_pair=roots,actual_index_and_targets_READ3=read_ref),
+    Native_enrollment=dict(binding['Native_enrollment'],Root_selection=selection,case_profile=profile,
+        current_toolchain_assets_exact=True,current_resource_state_observation=state_ref,clock_scope=clock),
+    Source_IO_allocation=dict(binding['Source_IO_allocation'],debit_bytes=envelope,
+        explicit_ledger_increase_and_charge_reference=charge,additional_private_readback_upper=allowance),
+    live_bindings_currently_unbound=False)
+bound=seal('Root-current-lean-json-diagnostics-namespaced-Native2-binding.json',binding)
+path_scope='/home/barberb/.local/bin:/usr/lib/git-core'
+op=op_raw.decode()
+for name,value in dict(W=f'Path({str(D)!r})',A=f'Path({str(A)!r})',RUN_OUTPUT=f'Path({str(out)!r})',
+                       PATH_SCOPE=repr(path_scope),ROOT_SELECTION=repr(selection['path']),CURRENT_BINDING_REF=repr(bound)).items():
+    op,count=re.subn(rf'(?m)^{name} = None$',lambda _: name+' = '+value,op)
+    assert count==1,name
+compile(op,'existing maintained Native expected declaration caller','exec',dont_inherit=True)
+operator=seal('Root-selected-lean-json-diagnostics-namespaced-Native2-operator.py',op.encode())
+assert now<=time.time_ns()<clock['submit_deadline_utc_ns']
+print(json.dumps(dict(operator=operator,selection=selection,binding=bound,charge=charge,output=str(out),
+    run_argv=['/usr/bin/python3','-I','-B',operator['path'] ])),flush=True)

@@ -1,0 +1,381 @@
+CARRIED_OPERATOR_BYTES = 16777216
+CARRIED_OPERATOR_CAPTURES = 2048
+import os, sys, stat, json, hashlib, traceback, subprocess, contextlib, base64, zlib
+from pathlib import Path
+SEL = {'path': '/tmp/Root-P2-existing-owner-Guide584-reconciliation-hxm7h07u/Root-selected-current-P2-composed234-READ3.json', 'bytes': 1003, 'sha256': 'fa7118a3bdebca78554a2e13bdeacfa1d590e5c40d2f4e4d6ce7e85ec45a2030'}
+REQ = {'path': '/tmp/Root-P2-existing-owner-Guide584-reconciliation-hxm7h07u/P2-current-composed234-READ3-existing-request.json', 'bytes': 76834, 'sha256': '17c22c611045ca79435fda221777160a3fae58ecac0a0b0c8e5f323ca8a2f898'}
+BASE = Path('/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01')
+N = BASE / 'Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01'
+OUT = Path('/tmp/Root-P2-existing-owner-Guide584-reconciliation-hxm7h07u/actual-p2-composed234-source3-output')
+FIELDS = ('st_dev', 'st_ino', 'st_mode', 'st_nlink', 'st_uid', 'st_gid', 'st_size', 'st_mtime_ns', 'st_ctime_ns')
+f9 = lambda s: {k: str(getattr(s, k)) for k in FIELDS}
+H = lambda raw: hashlib.sha256(raw).hexdigest()
+spent = {'bytes': (SEL['bytes'] if SEL is not None else 0) + globals().get('CARRIED_OPERATOR_BYTES', 0), 'captures': (1 if SEL is not None else 0) + globals().get('CARRIED_OPERATOR_CAPTURES', 0)}
+report = {'schema': 'actual-frozen-A-D-existing-READ-operation/v1', 'inputs': [], 'captures': [], 'Source_contexts': [], 'errors': [], 'Source_closed': False, 'module_closed': False, 'prelaunch_carried': dict(spent), 'selected_reference': SEL, 'request_reference': REQ}
+before = {'captures': 577049, 'capturesComplete': False, 'global_cap': 62715306524, 'internal_cap': 62524714650, 'internal_used': 62451248794, 'used': 62641840668}
+VERIFIED_SELECTED_SOURCE_ROWS = {}
+ledger = dict(before)
+source = None
+cleanup_owned_source42_module = None
+
+def admit(n):
+    if type(n) is not int or n < 0 or spent['bytes'] + n > 67108864:
+        raise RuntimeError('selected READ envelope insufficient before read')
+    if before['used'] + spent['bytes'] + n > before['global_cap'] or before['internal_used'] + spent['bytes'] + n > before['internal_cap']:
+        raise RuntimeError('shared Source allowance insufficient before read')
+
+def control_read(ref, kind='private_control'):
+    p = Path(ref['path'])
+    a = p.lstat()
+    assert stat.S_ISREG(a.st_mode) and a.st_nlink == 1 and (a.st_uid == os.getuid())
+    assert a.st_size == ref['bytes']
+    admit(ref['bytes'] + 1)
+    fd = os.open(p, os.O_RDONLY | os.O_NOFOLLOW)
+    parts = []
+    total = 0
+    report['inputs'].append({'path': str(p), 'kind': kind, 'actual_bytes': 0})
+    row = report['inputs'][-1]
+    try:
+        assert f9(os.fstat(fd)) == f9(a)
+        spent['captures'] += 1
+        while total <= ref['bytes']:
+            part = os.read(fd, min(1048576, ref['bytes'] + 1 - total))
+            total += len(part)
+            spent['bytes'] += len(part)
+            row['actual_bytes'] += len(part)
+            if not part:
+                break
+            parts.append(part)
+        assert f9(a) == f9(os.fstat(fd)) == f9(p.lstat())
+    finally:
+        os.close(fd)
+    raw = b''.join(parts)
+    assert len(raw) == ref['bytes']
+    assert 'sha256' not in ref or H(raw) == ref['sha256']
+    return raw
+
+def seal(path, raw):
+    assert type(raw) is bytes
+    p = Path(path)
+    fd = os.open(p, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 256)
+    with os.fdopen(fd, 'wb') as stream:
+        stream.write(raw)
+        stream.flush()
+        os.fsync(stream.fileno())
+    return {'path': str(p), 'bytes': len(raw), 'sha256': H(raw)}
+
+def js(path, obj):
+    return seal(path, (json.dumps(obj, sort_keys=True, indent=2) + '\n').encode())
+
+def git(root, *args, allow_nonzero=False):
+    env = dict(os.environ, GIT_OPTIONAL_LOCKS='0', GIT_NO_LAZY_FETCH='1', GIT_TERMINAL_PROMPT='0')
+    admit(262144)
+    p = subprocess.run(['/usr/bin/git', '-C', root, *args], env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=20)
+    spent['captures'] += 1
+    spent['bytes'] += len(p.stdout) + len(p.stderr)
+    assert len(p.stdout) + len(p.stderr) <= 262144
+    report.setdefault('Git_calls', []).append({'root': root, 'args': args, 'returncode': p.returncode, 'stdout_bytes': len(p.stdout), 'stderr_bytes': len(p.stderr)})
+    if not allow_nonzero and p.returncode:
+        raise RuntimeError(('read-only Git failed', root, args, p.returncode, p.stderr.decode(errors='replace')))
+    return p
+
+def root_facts(root, expected):
+    head = git(root, 'rev-parse', 'HEAD').stdout.decode().strip()
+    tree = git(root, 'rev-parse', 'HEAD^{tree}').stdout.decode().strip()
+    assert (head, tree) == (expected['Git_HEAD'], expected['Git_tree'])
+    status = git(root, 'status', '--porcelain=v1', '-z', '--untracked-files=normal').stdout
+    cached = git(root, 'diff', '--cached', '--quiet', 'HEAD', '--', allow_nonzero=True).returncode
+    working = git(root, 'diff', '--quiet', '--', allow_nonzero=True).returncode
+    assert status == b'' and cached == working == 0, ('frozen candidate no longer clean', root, status, cached, working)
+    return {'HEAD': head, 'tree': tree, 'clean_worktree_and_index': True, 'status_sha256': H(status), 'cached_diff_returncode': cached, 'working_diff_returncode': working}
+
+def parents(path):
+    out = []
+    for p in reversed(Path(path).parents):
+        s = p.lstat()
+        assert stat.S_ISDIR(s.st_mode) and (not stat.S_ISLNK(s.st_mode))
+        fd = os.open(p, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+        try:
+            assert f9(s) == f9(os.fstat(fd)) == f9(p.lstat())
+        finally:
+            os.close(fd)
+        out.append({'path': str(p), 'full9': f9(s)})
+    return out
+
+def leaf(t):
+    p = Path(t['path'])
+    s = p.lstat()
+    assert stat.S_ISREG(s.st_mode) and s.st_nlink == 1
+    assert f9(s) == t['full9'] and s.st_size == t['bytes']
+
+def check_shared_A_index(row):
+    root, path = row['root'], row['path']
+    ip = git(root, 'rev-parse', '--path-format=absolute', '--git-path', 'index').stdout.decode().strip()
+    common = git(root, 'rev-parse', '--path-format=absolute', '--git-common-dir').stdout.decode().strip()
+    assert Path(ip).is_absolute() and Path(ip).is_relative_to(Path(common))
+    assert path == ip and path == str(Path(root) / '.git/index')
+    parents(path)
+    leaf(row)
+    raw = control_read({k: row[k] for k in ('path','bytes','sha256')}, 'shared_A_index_hash_guard_without_raw_capture')
+    leaf(row)
+    assert H(raw) == row['sha256']
+    return dict(row, exact_HASH_and_full9_reverified=True, stored_as_numbered_capture=False)
+
+if SEL is None:
+    raise RuntimeError('INERT: fresh Root selection is unbound')
+OUT.mkdir(mode=448)
+(OUT / 'raw').mkdir(mode=448)
+(OUT / 'matrices').mkdir(mode=448)
+print(json.dumps({'event': 'SELECTED_P2_COMPOSED234_CURRENT_D_FROZEN_READ3_READ_STARTED', 'pid': os.getpid(), 'output_namespace': str(OUT)}), flush=True)
+try:
+    selected = json.loads(control_read(SEL))
+    request = json.loads(control_read(REQ))
+    assert selected['Root_selected'] is True
+    assert selected['request'] == REQ and selected['ledger_before'] == before and selected['fresh_output_namespace'] == str(OUT)
+    import time
+    assert selected['launch_not_before_utc_ns'] <= time.time_ns() < selected['launch_deadline_utc_ns']
+    request['roots'] = request['frozen_roots']
+    request['targets'] = [dict(r, relative_path=str(Path(r['path']).relative_to(r['root'])), kind=r.get('kind', 'R2_actual_guard_observed_import_only_initializer')) for r in request['exact_new_body_targets']]
+    assert type(request['target_count']) is int and request['target_count'] > 0
+    assert len(request['targets']) == request['target_count']
+    assert request['target_count'] == 3
+    guard_A = request['A_index_shared_guard_guide582']
+    assert guard_A['root'] == request['roots'][1]['root']
+    assert all(t['root'] == request['roots'][0]['root'] and t['path'] != guard_A['path'] for t in request['targets'])
+    report['previous_D_cooperative_freeze'] = request['previous_D_cooperative_freeze']
+    report['execution_freeze'] = request['execution_freeze']
+    report['previous_D_Source42_WRITE_claimed'] = False
+    assert len({row['path'] for row in request['targets']}) == request['target_count']
+    declared_candidate_rows = json.loads(json.dumps(request['all_candidate_metadata']))
+    assert len(declared_candidate_rows) == request['literal_metadata_candidate_count']
+    assert all((isinstance(row, dict) and isinstance(row.get('path'), str) and (type(row.get('exists')) is bool) for row in declared_candidate_rows))
+    assert len({row['path'] for row in declared_candidate_rows}) == len(declared_candidate_rows)
+    declared_AGENTS_rows = json.loads(json.dumps(request['AGENTS_chain_metadata']))
+    assert all((isinstance(row, dict) and isinstance(row.get('path'), str) and (type(row.get('exists')) is bool) for row in declared_AGENTS_rows))
+    assert len({row['path'] for row in declared_AGENTS_rows}) == len(declared_AGENTS_rows)
+    request['AGENTS_exact_chain_metadata'] = json.loads(json.dumps(declared_AGENTS_rows))
+    for ar in request['AGENTS_exact_chain_metadata']:
+        if ar['exists']:
+            assert isinstance(ar.get('reuse_captured_raw'), dict), ('present AGENTS needs its exact authenticated retained raw reference', ar['path'])
+
+    def check_candidate_absences():
+        actual_rows = request['all_candidate_metadata']
+        assert len(actual_rows) == len(declared_candidate_rows)
+        assert len({row['path'] for row in actual_rows}) == len(actual_rows)
+        assert {row['path']: row for row in actual_rows} == {row['path']: row for row in declared_candidate_rows}
+        absent = [row['path'] for row in actual_rows if not row['exists']]
+        for path in absent:
+            assert not os.path.lexists(path), ('candidate namespace absence changed', path)
+        assert set(absent) == {row['path'] for row in declared_candidate_rows if not row['exists']}
+        return absent
+
+    def check_exact_AGENTS():
+        actual_rows = request['AGENTS_exact_chain_metadata']
+        assert len(actual_rows) == len(declared_AGENTS_rows)
+        assert len({row['path'] for row in actual_rows}) == len(actual_rows)
+        assert {row['path']: row for row in actual_rows} == {row['path']: row for row in declared_AGENTS_rows}
+        absent = []
+        present = []
+        for row in actual_rows:
+            if not row['exists']:
+                assert not os.path.lexists(row['path']), ('AGENTS absence changed', row['path'])
+                absent.append(row['path'])
+            else:
+                s = Path(row['path']).lstat()
+                assert f9(s) == row['full9'] and stat.S_ISREG(s.st_mode) and (s.st_nlink == 1)
+                fd = os.open(row['path'], os.O_RDONLY | os.O_NOFOLLOW)
+                try:
+                    assert f9(os.fstat(fd)) == row['full9'] == f9(Path(row['path']).lstat())
+                finally:
+                    os.close(fd)
+                present.append(row['path'])
+        assert set(absent) == {row['path'] for row in declared_AGENTS_rows if not row['exists']}
+        assert set(present) == {row['path'] for row in declared_AGENTS_rows if row['exists']}
+        return {'absent': absent, 'present_metadata_only': present}
+    assert request['ledger_before'] == before
+    named_meta = json.loads(control_read(request['named_metadata_recheck_reference']))['rows']
+    assert len(named_meta) == request['named_metadata_count'] and len({r['path'] for r in named_meta}) == request['named_metadata_count']
+    helper_refs = {'owner_branch': {'path': '/tmp/Reader-remaining-canonical-owner-guard-fix-and2570-private-v01/existing-read-helper-selected-source-owner-fix.py.DATA', 'bytes': 1283, 'sha256': 'c605501a8673714725e18dc90f49c0dc680b957420866357a892d122d463163b'}, 'Source_IO_boundary': {'path': '/tmp/Reader-parent-matrix-publication-after-Source-IO-private-v03-qp1u81n7/boundary.after.py.DATA', 'bytes': 4208, 'sha256': '64c726cde30beb825dacf042c82aaea7d7e653b34c743c664c99f22db3d084ba'}, 'owned_Source42_loader': {'path': '/tmp/Reader-Source42-owned-module-loader-fix-private-v01/owned-source42-module-loader.py.DATA', 'bytes': 1104, 'sha256': 'e4dc161c1553b21ee1dd69521f4f49ad0878122fae2b0d66041c22030a4053c7'}}
+    for key, ref in helper_refs.items():
+        raw = control_read(ref)
+        exec(compile(raw, ref['path'], 'exec'), globals())
+    owner_reference = request['approved_current_Source42_owner_binding']
+    owner = json.loads(control_read(owner_reference, 'actual_approved_Source42_owner_binding'))
+    control = owner['code_reference']
+    assert f9(Path(control['path']).lstat()) == control['full9']
+    source_raw = control_read(control, 'actual_doc_owner_approved_Source42_code')
+    assert f9(Path(control['path']).lstat()) == control['full9']
+    source = load_owned_source42_module(source_raw, owner['original_module_path'])
+    roots = {r['root']: r for r in request['roots']}
+    with contextlib.ExitStack() as stack:
+        for root in sorted(roots):
+            assert str(source.canonical_source_root(root)) == root
+
+            @contextlib.contextmanager
+            def tracked_source_context(root):
+                cm = source.source_lease(root, mode='read')
+                lease = cm.__enter__()
+                row = {'root': root, 'entered': True, 'exit_returned': False, 'lease': lease.to_dict()}
+                report['Source_contexts'].append(row)
+                try:
+                    yield lease
+                finally:
+                    row['exit_started'] = True
+                    result = cm.__exit__(*sys.exc_info())
+                    row['exit_returned'] = True
+                    row['exit_return'] = result
+            stack.enter_context(tracked_source_context(root))
+        try:
+            report['before'] = {r: root_facts(r, e) for r, e in roots.items()}
+            report['A_index_shared_guard_before'] = check_shared_A_index(guard_A)
+            report['named_metadata_before'] = {}
+            for metadata_row in named_meta:
+                leaf(metadata_row)
+                fd = os.open(metadata_row['path'], os.O_RDONLY | os.O_NOFOLLOW)
+                try:
+                    assert f9(os.fstat(fd)) == metadata_row['full9'] == f9(Path(metadata_row['path']).lstat())
+                finally:
+                    os.close(fd)
+                report['named_metadata_before'][metadata_row['path']] = metadata_row['full9']
+            namespace_observations = []
+            for namespace in request['namespace_metadata']:
+                path = Path(namespace['path'])
+                parents(path)
+                observed = path.lstat()
+                assert stat.S_ISDIR(observed.st_mode) and f9(observed) == namespace['full9']
+                fd = os.open(path, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+                try:
+                    assert f9(os.fstat(fd)) == namespace['full9'] == f9(path.lstat())
+                finally:
+                    os.close(fd)
+                assert not os.path.lexists(namespace['initializer_path'])
+                namespace_observations.append({'path': str(path), 'full9': namespace['full9'], 'initializer_absent': True})
+            report['namespace_metadata_before'] = namespace_observations
+            report['published_D_refs_before'] = git(request['roots'][0]['root'], 'for-each-ref', '--format=%(refname) %(objectname)').stdout.decode()
+            report['AGENTS_before'] = check_exact_AGENTS()
+            report['candidate_absences_before'] = check_candidate_absences()
+            report['retained_AGENTS_reuse'] = []
+            for ar in request['AGENTS_exact_chain_metadata']:
+                if ar['exists']:
+                    cached = control_read(ar['reuse_captured_raw'], 'authenticated_retained_AGENTS_cache')
+                    ar_root = next((r['root'] for r in request['roots'] if Path(ar['path']).is_relative_to(Path(r['root']))))
+                    rel = str(Path(ar['path']).relative_to(ar_root))
+                    bb = git(ar_root, 'ls-tree', '-z', 'HEAD', '--', rel).stdout
+                    pair = bb.rstrip(b'\x00').split(b'\t')
+                    assert len(pair) == 2 and pair[1].decode() == rel
+                    mode, kind, oid = pair[0].decode().split()
+                    assert kind == 'blob' and hashlib.sha1(b'blob ' + str(len(cached)).encode() + b'\x00' + cached).hexdigest() == oid
+                    report['retained_AGENTS_reuse'].append({'path': ar['path'], 'raw_reference': ar['reuse_captured_raw'], 'current_metadata': ar['full9'], 'tracked_HEAD_blob': oid, 'retained_content_authenticated': True, 'fresh_canonical_body_read': False})
+            for i, target in enumerate(request['targets']):
+                t = dict(target)
+                root = t['root']
+                if t['kind'] in ('selected_actual_Git_index', 'selected_actual_Git_config'):
+                    ip = git(root, 'rev-parse', '--path-format=absolute', '--git-path', 'index' if t['kind'] == 'selected_actual_Git_index' else 'config').stdout.decode().strip()
+                    common = git(root, 'rev-parse', '--path-format=absolute', '--git-common-dir').stdout.decode().strip()
+                    assert Path(ip).is_absolute() and Path(ip).is_relative_to(Path(common))
+                    assert ip == t['path'], ('Git administrative identity changed', ip, t['path'])
+                else:
+                    blob = git(root, 'ls-tree', '-z', 'HEAD', '--', t['relative_path']).stdout
+                    fields = blob.rstrip(b'\x00').split(b'\t')
+                    assert len(fields) == 2 and fields[1].decode() == t['relative_path']
+                    mode, kind, oid = fields[0].decode().split()
+                    assert kind == 'blob' and mode in ('100644', '100755')
+                    t['observed_git_blob_oid'] = oid
+                    t['observed_git_mode'] = mode
+                    assert not t.get('expected_git_blob_oid') or t['expected_git_blob_oid'] == oid
+                    actual_size = int(git(root, 'cat-file', '-s', oid).stdout)
+                    assert actual_size <= t['body_cap']
+                p = Path(t['path'])
+                s = p.lstat()
+                assert stat.S_ISREG(s.st_mode) and s.st_nlink == 1 and (s.st_size <= t['body_cap'])
+                if 'full9' in t:
+                    assert f9(s) == t['full9']
+                assert not t.get('expected_bytes') or s.st_size == t['expected_bytes']
+                if t['kind'] not in ('selected_actual_Git_index', 'selected_actual_Git_config'):
+                    assert s.st_size == actual_size
+                t['bytes'] = s.st_size
+                t['full9'] = f9(s)
+                VERIFIED_SELECTED_SOURCE_ROWS[t['path']] = t
+                record = {'index': i, 'target': t}
+                report.setdefault('attempted', []).append(record)
+
+                def archive_matrix(label, value):
+                    return js(OUT / 'matrices' / f'{i:02d}-{label}.json', value)
+                held = {}
+
+                def seal_and_hold(path, raw):
+                    held['raw'] = raw
+                    return seal(path, raw)
+                rr, actual9 = capture_one_at_source_IO_end(t, OUT / 'raw' / f'{i:02d}-{p.name}.DATA', record, parents_fn=parents, leaf_fn=leaf, read_fn=read, seal_fn=seal_and_hold, archive_matrix_fn=archive_matrix, caller_uid=os.getuid())
+                back = held.pop('raw')
+                assert not t.get('expected_sha256') or H(back) == t['expected_sha256']
+                if 'observed_git_blob_oid' in t:
+                    actual_oid = hashlib.sha1(b'blob ' + str(len(back)).encode() + b'\x00' + back).hexdigest()
+                    assert actual_oid == t['observed_git_blob_oid']
+                    record['Git_blob_verified'] = True
+                row = {'path': t['path'], 'bytes': t['bytes'], 'sha256': H(back), 'full9': actual9, 'kind': t['kind'], 'root': root, 'raw_reference': rr}
+                if 'relative_path' in t:
+                    row['relative_path'] = t['relative_path']
+                report['captures'].append(row)
+                print(json.dumps({'event': 'P2_COMPOSED234_CURRENT_D_FROZEN_READ3_CAPTURED', 'index': i, 'path': t['path'], 'bytes': t['bytes']}), flush=True)
+            report['after'] = {r: root_facts(r, e) for r, e in roots.items()}
+            report['A_index_shared_guard_after'] = check_shared_A_index(guard_A)
+            assert report['A_index_shared_guard_after'] == report['A_index_shared_guard_before']
+            report['named_metadata_after'] = {}
+            for metadata_row in named_meta:
+                leaf(metadata_row)
+                fd = os.open(metadata_row['path'], os.O_RDONLY | os.O_NOFOLLOW)
+                try:
+                    assert f9(os.fstat(fd)) == metadata_row['full9'] == f9(Path(metadata_row['path']).lstat())
+                finally:
+                    os.close(fd)
+                report['named_metadata_after'][metadata_row['path']] = metadata_row['full9']
+            assert report['named_metadata_after'] == report['named_metadata_before']
+            namespace_observations = []
+            for namespace in request['namespace_metadata']:
+                path = Path(namespace['path'])
+                parents(path)
+                observed = path.lstat()
+                assert stat.S_ISDIR(observed.st_mode) and f9(observed) == namespace['full9']
+                fd = os.open(path, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+                try:
+                    assert f9(os.fstat(fd)) == namespace['full9'] == f9(path.lstat())
+                finally:
+                    os.close(fd)
+                assert not os.path.lexists(namespace['initializer_path'])
+                namespace_observations.append({'path': str(path), 'full9': namespace['full9'], 'initializer_absent': True})
+            report['namespace_metadata_after'] = namespace_observations
+            assert report['namespace_metadata_after'] == report['namespace_metadata_before']
+            report['published_D_refs_after'] = git(request['roots'][0]['root'], 'for-each-ref', '--format=%(refname) %(objectname)').stdout.decode()
+            assert report['published_D_refs_after'] == report['published_D_refs_before']
+            report['AGENTS_after'] = check_exact_AGENTS()
+            report['candidate_absences_after'] = check_candidate_absences()
+            for row in report['captures']:
+                assert f9(Path(row['path']).lstat()) == row['full9']
+            report['snapshot_complete'] = len(report['captures']) == request['target_count'] and {row['path'] for row in report['captures']} == {row['path'] for row in request['targets']}
+        finally:
+            pass
+    report['Source_closed'] = all((row['exit_returned'] for row in report['Source_contexts']))
+except BaseException as error:
+    report['errors'].append({'type': type(error).__name__, 'message': str(error), 'traceback': traceback.format_exc()})
+    report['Source_closed'] = all((row['exit_returned'] for row in report['Source_contexts']))
+finally:
+    if source is not None and report['Source_closed']:
+        report['module_closed'] = cleanup_owned_source42_module(source)
+    elif source is None:
+        report['module_closed'] = True
+    else:
+        report['module_closed'] = False
+    report['actual_operation_IO'] = dict(spent)
+    if ledger is not None:
+        ledger['captures'] += spent['captures']
+        ledger['used'] += spent['bytes']
+        ledger['internal_used'] += spent['bytes']
+        assert ledger['used'] <= ledger['global_cap'] and ledger['internal_used'] <= ledger['internal_cap']
+        report['ledger_after'] = {k: ledger[k] for k in before}
+    ref = js(OUT / 'actual-D27-observed-D-root-initializer-Source-READ-v01-closed-report.json', report)
+    compact = js(OUT / 'actual-D27-observed-D-root-initializer-Source-READ-v01-small-closeout.json', {'schema': 'actual-D27-observed-D-root-initializer-READ-small-closeout/v1', 'status': 'PASS' if not report['errors'] and report.get('snapshot_complete') else 'FAILED', 'Source_closed': report['Source_closed'], 'owned_module_closed': report['module_closed'], 'errors': report['errors'], 'roots_before': report.get('before'), 'roots_after': report.get('after'), 'AGENTS_reuse': report.get('retained_AGENTS_reuse'), 'AGENTS_named_absences': len(report.get('AGENTS_after', {}).get('absent', [])), 'captures': report['captures'], 'A_index_shared_guard_before': report.get('A_index_shared_guard_before'), 'A_index_shared_guard_after': report.get('A_index_shared_guard_after'), 'previous_D_cooperative_freeze': report.get('previous_D_cooperative_freeze'), 'execution_freeze': report.get('execution_freeze'), 'previous_D_Source42_WRITE_claimed': False, 'actual_IO': spent, 'ledger_after': report.get('ledger_after'), 'full_report_reference': ref, 'SDK_Native_compiler_or_project_execution': False, 'cohort_process_free_or_positive_handle_qualified': False})
+    print(json.dumps({'event': 'P2_COMPOSED234_CURRENT_D_FROZEN_READ3_CLOSED_COMPACT', 'compact': compact}, sort_keys=True), flush=True)
+    print(json.dumps({'event': 'P2_COMPOSED234_CURRENT_D_FROZEN_READ3_READ_CLOSED', 'report': ref, 'completed': len(report['captures']), 'Source_closed': report['Source_closed'], 'module_closed': report['module_closed'], 'ledger_after': report.get('ledger_after'), 'errors': report['errors']}, sort_keys=True), flush=True)
+if report['errors']:
+    sys.exit(1)

@@ -1,0 +1,79 @@
+# Decoder training decision protocol v0.2
+
+This is a design artifact accompanying the integration specification and inert JSON manifest. It grants no Source I/O, CI execution, imports, training, or budget expansion.
+
+## Comparison unit
+
+The experimental unit is one declared recipe, decoder binding, population split, and seed. A single best candidate selected from many trials is not comparable to one untuned baseline trial. Record candidate-selection budgets for every branch.
+
+Distinguish example-level statistical uncertainty from seed-to-seed training uncertainty. Use paired source/dependency groups when comparing outputs on the same cases. Predeclare aggregation and confidence procedures rather than selecting whichever analysis favors an intervention.
+
+Do not declare broad benefit from a mean gain that hides regression in a critical semantic facet. Retention and required fidelity facets are constraints, not optional explanatory plots.
+
+## Teacher selection
+
+1. Authenticate the producer and exact input route.
+2. Measure coverage, cost, shape, normalization, and actual availability.
+3. Train/evaluate each profile independently under the fixed comparison protocol.
+4. Examine error overlap on development groups to identify complementarity.
+5. Select a bounded number of fusion candidates using a predeclared rule.
+6. Charge the selection cost to the resulting recipe.
+
+Report conditioning and inference-only information separately from training-only distillation. Do not infer that the largest vector is the strongest teacher. Do not make a teacher's own similarity score the sole judge of its student.
+
+## Curriculum and data credit
+
+Use existing replay scheduling. A curriculum policy may select from eligible examples using failure facets, novelty, uncertainty, or measured learning progress. Bind its version and selection probabilities where required.
+
+Retain a fixed reference replay fraction and dependency-group coverage policy, with numeric values chosen from admitted baseline evidence. Do not drop difficult examples to improve apparent acceptance. Unreviewed cases may be diagnostics but cannot silently become reviewed targets.
+
+Compare curriculum policies using the same overall sample, verification, and optimization budgets. Record whether improvements reflect better allocation or extra observations.
+
+## Mechanistic findings
+
+A candidate finding records a specific hypothesis, model/checkpoint, source population, hook semantics, intervention, and observed semantic effect.
+
+Accept it as a development finding only when no-op/sham controls, matched random interventions, held-out semantic pairs, unrelated-facet checks, and activation-distribution checks support the limited claim. Store contrary and failed interventions.
+
+Before using the finding to choose training examples or parameters, define the downstream intervention and its matched control. Evaluate on cases not used to discover the mechanism. Improved probe accuracy is not downstream legal fidelity.
+
+## Policy credit
+
+Choose the policy algorithm before constructing its credit records. Record which reward dimensions are observed and which are predicted. Refuse unsupported action-probability semantics.
+
+For sequence-level credit, report group composition and constant-reward groups. For structured credit, retain unmapped decisions and uncertain token/AST links. For counterfactual credit, declare continuation sampling and alternatives, and measure sensitivity to those choices.
+
+For return redistribution, validate the selected conservation convention and report the residual. Conservation does not establish a causal interpretation. For potential shaping, bind the potential and terminal treatment appropriate to the discount convention.
+
+Use the fixed independent evaluator for acceptance. A learned reward or return model may guide training, but its own prediction is not proof of correctness.
+
+## Weight proposals
+
+Use an isolated candidate with exact parent lineage. Bound affected parameter groups and proposal search. Equalize comparison budgets with supervised, random-edit, and applicable rule baselines.
+
+Explicitly handle tied parameters, optimizer moments, precision, quantization, and rollback. A successful one-step edit cannot be promoted as a reusable cross-architecture patch.
+
+Development acceptance requires the predefined improvement and retention criteria. Final testing occurs under the declared protocol; it is not an unlimited loop of edits and retests. Rejected proposals remain in the cost ledger.
+
+## Success, failure, and stopping
+
+Before launch, freeze the panel and the threshold policy together. The panel binds dependency-group IDs, split and legal-review policy, source languages, admissible context, complete case IDs, granularity and supported coverage. The threshold policy binds independent source fidelity, formal validity, retention, abstention and coverage cutoffs, seed roster, evaluation cadence, required consecutive passes and comparable resource ceilings. Numeric thresholds remain unbound until there is evidence to set them. A panel with no baseline successes cannot satisfy a defined retention-rate requirement.
+
+### Paired denominators
+
+At each look, compare the same row IDs under the pinned generation and verification policies. Preserve incomplete, invalid, error and abstained results in the original coverage denominator. Keep legally unresolved cases visible, outside the reviewed-fidelity estimate. Publish the complete eligibility counts so a change in reviewed coverage cannot masquerade as improved accuracy. Store paired gains, losses, retained successes and still-incorrect cases. Retention is retained successes divided by baseline successes. An empty baseline-success set yields an unavailable retention estimate. A transition table still reports the observed gains and losses.
+
+Report row-weighted performance and the prespecified component-weighted primary comparison separately. Resample or randomize whole independent dependency components for paired uncertainty, including the complete within-component outcome vector. Keep distinct repeated seeds paired across methods. Predeclare a method that accounts for both sources of variation when components and seeds are reused. This does not replace a separately preserved final test panel or justify uncertainty estimates on a single diagnostic component.
+
+### Measure cost to a sustained threshold
+
+1. At every scheduled checkpoint, evaluate the frozen conjunction of quality and coverage gates. An unavailable gate or unverified result cannot qualify. Retain the reason, and never select an unscored checkpoint as a pass.
+2. Record reach at the cost clock of the checkpoint that confirms the required consecutive passes, including its evaluation. Preserve the first passing checkpoint and the size of the evaluation interval. This measures discovery at scheduled evaluations. It does not interpolate a continuous time of improvement.
+3. Keep cumulative elapsed wall time and charged CPU/GPU time as separate measurements. Count each actual event once in resource accounting. Sum neither overlapping intervals into wall time nor configured ceilings into consumed resources. Include teacher generation and retrieval, inference, evaluator and verifier calls, all development proposals and failed attempts. If reusable assets are shared, report first-use and measured amortized costs under a stated reuse count. Mark missing measures unavailable.
+4. For valid runs that exhaust a fixed budget without reaching the threshold, report the censoring budget and achieved gate values. Report identity, custody and evaluation failures separately, alongside their costs and achieved evidence. At the same prespecified budget, show threshold attainment by method and keep every admitted attempt visible. Speed among successful seeds alone does not establish an efficiency gain.
+
+Stop for proven budget exhaustion, invalid identity binding, ineligible data, semantic-evaluator corruption, or unresolved custody according to the existing owner. Do not automatically retry, reset charges, switch teachers, or adopt new checkpoints.
+
+### Apply the rule to the saved Qwen2 panel
+
+Step zero and step three each produced **0/3 exact** on three paired rows of one frozen fictional dependency group (`9b626665…`). Exact payload agreement is a structural result. The transition table has no gained or lost exact results, and retention is unavailable because no baseline case was exact. Reusing the panel at a longer budget can diagnose time limits and output validity on that component. A fidelity and retention claim across components requires a separately bound reviewed panel with independent groups and a baseline that supplies eligible correct cases. [Authenticated saved comparison](/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/saved-BEFORE-AFTER-retention-private-owner-existing-SDK-preparation-v01/actual-closed-Source50-SAVED-only-private-owner-retention-authenticated-readback-v01.json)

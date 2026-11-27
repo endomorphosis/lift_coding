@@ -1,0 +1,31 @@
+{
+  "schema": "actual-agent-turn-normal-main-merge/v1",
+  "commit": "344d3282d2d268505211f8dcf60e98b5306fcd4f",
+  "parents": [
+    "25bbaf0ed1ff45b4dee97b77b58c2349b5351990",
+    "68718850a6a29dcac368d7587d9bef95adb22420"
+  ],
+  "push_returncode": 0,
+  "remote_main": "344d3282d2d268505211f8dcf60e98b5306fcd4f",
+  "normal_push": true,
+  "force": false,
+  "Source_WRITE_closed": true,
+  "lease": {
+    "canonical_root": "/tmp/git-renewed-all-work-20261127-17pd2xkd/datasets-integration",
+    "mode": "write",
+    "lock_path": "/tmp/git-renewed-all-work-20261127-17pd2xkd/datasets-integration/workspace/control-plane/source-leases/source.lock",
+    "waited_seconds": 3.155320882797241e-05,
+    "schema_version": "autoencoder-source-lease/v1",
+    "cooperative": true
+  },
+  "source_owner_sha256": "42e9f07d0d458177079269d9f495f0b70512180c1adc2f7fe0bfdb05518a12f9",
+  "local_tests": {
+    "tests": 95,
+    "subtests": 171,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  },
+  "qualification": "local metadata checkpoint software; no live provider/worker/model/legal admission",
+  "closed_utc": "2026-11-27T17:44:04.710535+00:00"
+}

@@ -1,0 +1,156 @@
+"""Bind the existing four-target Source42 read to the published generic Native3 inputs."""
+import ast,hashlib,json,os,runpy,stat,subprocess,sys,time
+from pathlib import Path
+base=Path(__file__).resolve().parent
+past=Path('/tmp/Root-P1-Guide583-Native2-exact-current-owXwGME8')
+D=base/'datasets'
+A=Path('/tmp/Root-result-cache-owned-existing-route-L4Wyme59/accelerate')
+guide_path=Path('/tmp/P1-Guide584-doc-parent-pins-INERT-gEfofBbw/isolated/actual-Guide584-docs-normal-FF-publication.json')
+helper=Path('/tmp/Root-P2-whole-component-managed-R5-n8Fkdm2q/run-read3.py')
+tree=ast.parse(helper.read_bytes())
+names={'full9','read','val','keep'}
+exec(compile(ast.Module([n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in names or isinstance(n,ast.Assign) and getattr(n.targets[0],'id',None)=='policy'],[]),str(helper),'exec'))
+env=os.environ|{'GIT_OPTIONAL_LOCKS':'0','GIT_NO_LAZY_FETCH':'1','GIT_TERMINAL_PROMPT':'0'}
+for k in ('GIT_DIR','GIT_WORK_TREE','GIT_INDEX_FILE','GIT_COMMON_DIR','GIT_ALTERNATE_OBJECT_DIRECTORIES'):
+    env.pop(k,None)
+config={'core.preloadIndex':'false','index.threads':'1','core.fsmonitor':'false','core.packedGitWindowSize':'1m','core.packedGitLimit':'16m'}
+env['GIT_CONFIG_COUNT']=str(len(config))
+for i,(k,v) in enumerate(config.items()):
+    env.update({f'GIT_CONFIG_KEY_{i}':k,f'GIT_CONFIG_VALUE_{i}':v})
+def git(root,*args):
+    return subprocess.check_output(['/usr/bin/git','-C',str(root),*args],env=env,timeout=35)
+
+assert __debug__ and len(sys.argv)==14
+named,outer,python,projection=(read(sys.argv[i],int(sys.argv[i+1]),sys.argv[i+2])[0] for i in (1,4,7,10))
+assert sys.argv[13]=='--run-existing-Source4'
+guide=read(guide_path,9671,'37694f771f10a8bf671df43b008f802cc8b243114d079430936d9d9a07d2ab6e')[0]
+pub=val(guide)
+close=read(past/'actual-Native2-repin-and-Guide584-published-closeout.json',3428,'f018bf848a1c64a1cb065742089d94550a2e5ae8e1573c8492c0e431ebf20083')[0]
+assert val(close)['Guide584_publication']==guide
+before=val(close)['fully_retained_Source_ledger']
+heads=pub['fresh_origin_main']
+rows=val(named)['rows']
+by={row['path']:row for row in rows}
+assert len(rows)==len(by)
+assert all(by[row['path']]==row for row in val(outer))
+assert all(by[row['path']]==row for row in val(python))
+for row in rows:
+    assert full9(Path(row['path']).lstat())==row['full9'],row['path']
+roots=[]
+for role,root in (('datasets',D),('accelerate',A)):
+    h,t=git(root,'rev-parse','HEAD','HEAD^{tree}').decode().splitlines()
+    assert h==heads[role] and not git(root,'status','--porcelain=v1','-z','-uall')
+    roots.append({'root':str(root),'Git_HEAD':h,'Git_tree':t})
+prior=val(read(past/'native-READ4-existing-request.json',64672)[0])
+def translated(path):
+    p=Path(path)
+    return D/p.relative_to(past/'datasets') if p.is_relative_to(past/'datasets') else p
+agents=[]
+for row in prior['AGENTS_chain_metadata']:
+    p=translated(row['path'])
+    assert os.path.lexists(p)==row['exists'],p
+    updated={'path':str(p),'exists':row['exists']}
+    if row['exists']:
+        ptr=row['reuse_captured_raw']
+        _,raw=read(ptr['path'],ptr['bytes'],ptr['sha256'])
+        root=D if p.is_relative_to(D) else A
+        blob=hashlib.sha1(f'blob {len(raw)}\0'.encode()+raw).hexdigest()
+        assert git(root,'rev-parse','HEAD:'+str(p.relative_to(root))).decode().strip()==blob
+        assert p.lstat().st_size==len(raw)
+        updated.update(full9=full9(p.lstat()),reuse_captured_raw=ptr)
+    agents.append(updated)
+namespace=[]
+for row in prior['namespace_metadata']:
+    path,init=(translated(row[k]) for k in ('path','initializer_path'))
+    assert path.is_dir() and not os.path.lexists(init)
+    namespace.append({'path':str(path),'full9':full9(path.lstat()),'initializer_path':str(init)})
+aidx=by[str(A/'.git/index')]
+assert aidx['sha256']==prior['A_index_shared_guard_guide582']['sha256']
+target_digests={
+    '.git/index':None,
+    'ipfs_datasets_py/logic/backends/kernel/lean.py':'a36a8ae2c304dc439e6bf32d1a0481b5fc8dab592e26a7dae40cda0a28b8a274',
+    'tests/integration/logic/backends/test_kernel_backends.py':'5f4b3c5e6ae4e27676b0b99df368cf8ae32b6ebd5ffce7cfc8f7955435e5a80a',
+    'ipfs_datasets_py/logic/ir_core/protocols.py':'e2dd1dc93d1efa15c7c4088145d32c52636c72e9230b16ade77ca6c6a0c2c336'}
+targets=[]
+for rel,sha in target_digests.items():
+    row=by[str(D/rel)]
+    assert type(row['sha256']) is str and (sha is None or row['sha256']==sha)
+    blob=None if sha is None else git(D,'rev-parse','HEAD:'+rel).decode().strip()
+    targets.append({**row,'root':str(D),'relative_path':rel,'exists':True,
+       'kind':'selected_actual_Git_index' if blob is None else 'P1_Generic_Native3_exact_current_role',
+       'expected_bytes':row['bytes'],'expected_sha256':row['sha256'],'body_cap':row['bytes'],'expected_git_blob_oid':blob})
+authority=read('/tmp/Root-authorized-Source-review-plus64MiB-for-normal51-v01.json',2377,'2e26fec63362aa01e0e1d475398261a13211016446ea1557a207f4a3956d55ea')[0]
+human=val(authority)['human_authorization']
+assert human['role']=='user'
+read(human['path'],human['bytes'],human['sha256'])
+clarification=read('/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/current-generic-Native3-existing-profile-INERT-v01-cza5xria/published-snapshot-existing-Native3-profile-and-selector-INERT-v02.json',7294,
+    '4d8f3b9f2e07858206444e91a0dab4c97babeb5b356058f503a2d6899f655784')[0]
+envelope=64*1024**2
+assert 2*sum(t['bytes'] for t in targets)+2*aidx['bytes']+28*1024**2<envelope
+funded={**before,'global_cap':before['global_cap']+envelope,'internal_cap':before['internal_cap']+envelope}
+paid={**funded,'used':funded['used']+envelope,'internal_used':funded['internal_used']+envelope,'captures':funded['captures']+1}
+assert paid['global_cap']-paid['used']==paid['internal_cap']-paid['internal_used']==6356992
+cap=keep('current-Native3-Source4-full-retained-precharge.json',dict(
+    prior=before,selected=funded,after_full_precharge=paid,added_Source_envelope=envelope,projection=projection,
+    authority=authority,prior_closeout=close,all_prior_costs_retained=True,resource_policy_capacity_unchanged=True,physical_IO_accounting_complete=False))
+out=base/'actual-source4-output'
+request=keep('current-Native3-Source4-existing-request.json',dict(
+    schema='P1-generic-Native3-current-Source4-existing-Source42/v1',Source_READ_selected=True,
+    ledger_before=funded,exact_new_body_targets=targets,all_candidate_metadata=targets,literal_metadata_candidate_count=4,target_count=4,
+    frozen_roots=roots,approved_current_Source42_owner_binding=prior['approved_current_Source42_owner_binding'],
+    AGENTS_chain_metadata=agents,named_metadata_recheck_reference=named,named_metadata_count=len(rows),
+    namespace_metadata=namespace,A_index_shared_guard_guide582={**aidx,'root':str(A)},
+    previous_D_publication_receipt=guide,execution_freeze=projection,published_Guide584=guide,
+    verified_published_snapshot_profile_metadata=clarification))
+now=time.time_ns()
+selection=keep('Root-selected-current-Native3-Source4.json',dict(Root_selected=True,Source_operation_max_bytes=envelope,
+    ledger_before=funded,request=request,cap=cap,fresh_output_namespace=str(out),launch_not_before_utc_ns=now,
+    launch_deadline_utc_ns=now+60*10**9))
+entry,raw=read('/tmp/Root-result-cache-owned-existing-route-L4Wyme59/read4-controls/Root-selected-existing-result-cache-READ4-entry.py',23776,
+    '7ff056f593c20c3fa016d692cf3153bfa78bbc4d106fe6899693eb0c39985af7')
+adapter=Path('/tmp/Root-P2-V4-current-cooperative-freeze-READ3-INERT-QfDTlRCC/bind-existing-P2-V4-current-READ3.py.DATA')
+read(adapter,14094,'cc72e03ddac4d857b5cdbca4ec35bb9d5307b390270c9229400a918c48b08175')
+op=runpy.run_path(str(adapter))['adapt_entry'](raw.decode(),selection,request,out,funded)
+assert op.count("request['target_count'] == 3")==1 and op.count('P2_V4_CURRENT_D_FROZEN_READ3')==4
+op=op.replace("request['target_count'] == 3","request['target_count'] == 4").replace(
+    'P2_V4_CURRENT_D_FROZEN_READ3','P1_NATIVE3_CURRENT_D_PUBLISHED_SOURCE4').replace(
+    'previous_D_cooperative_freeze','previous_D_publication_receipt')
+compile(op,'existing D27 Source42 read current Native3 inputs','exec')
+control=base/'Root-selected-existing-Native3-Source4.py'
+with os.fdopen(os.open(control,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400),'wb') as stream:
+    stream.write(op.encode());stream.flush();os.fsync(stream.fileno())
+ctrl,_=read(control)
+cmd=['/usr/bin/timeout','--signal=TERM','--kill-after=5s','65s','/usr/bin/taskset','-c',str(min(os.sched_getaffinity(0))),
+     '/usr/bin/prlimit','--as=536870912','--cpu=60','--','/usr/bin/python3','-I','-B',str(control)]
+with (base/'source4.stdout').open('xb') as so,(base/'source4.stderr').open('xb') as se:
+    child=subprocess.Popen(cmd,stdout=so,stderr=se,env=env)
+    live=keep('source4-owner-live.json',dict(owner='Root',pid=child.pid,operator=ctrl,selection=selection,full_charge=cap))
+    print(json.dumps(live),flush=True)
+    rc=child.wait()
+record=dict(owner='Root',pid=child.pid,returncode=rc,reaped=True,handle=None,Source_closed=False,owned_module_closed=False,
+     selection=selection,cap=cap,publication=guide,materialization=projection,named_epoch=named,outer_epoch=outer,python_epoch=python,
+     current_Source42_owner_binding=prior['approved_current_Source42_owner_binding'],namespace_metadata=namespace,
+     frozen_roots=roots,source4_targets=targets,fully_retained_ledger=paid,stdout=read(base/'source4.stdout')[0],stderr=read(base/'source4.stderr')[0])
+compact=out/'actual-D27-observed-D-root-initializer-Source-READ-v01-small-closeout.json'
+if compact.is_file():
+    compact_ref,d=read(compact)
+    d=json.loads(d)
+    record.update(read_close=compact_ref,Source_closed=d['Source_closed'],owned_module_closed=d['owned_module_closed'],
+         fully_retained_ledger={**paid,'captures':max(paid['captures'],d['ledger_after']['captures'])})
+if rc==0:
+    assert d['status']=='PASS' and not d['errors'] and d['Source_closed'] and d['owned_module_closed']
+    assert d['roots_before']==d['roots_after'] and d['A_index_shared_guard_before']==d['A_index_shared_guard_after']
+    captures={}
+    for row in d['captures']:
+        p=row['path']; role=str(Path(p).relative_to(D))
+        assert all(row[k]==by[p][k] for k in ('path','bytes','sha256','full9'))
+        rr,body=read(row['raw_reference']['path'],row['raw_reference']['bytes'],row['raw_reference']['sha256'])
+        if role!='.git/index':
+            target=next(t for t in targets if t['relative_path']==role)
+            assert hashlib.sha1(f'blob {len(body)}\0'.encode()+body).hexdigest()==target['expected_git_blob_oid']
+        captures[role]=rr
+    assert set(captures)==set(target_digests)
+    record.update(raw_captures=captures)
+terminal=keep('current-Native3-Source4-terminal.json',record)
+print(json.dumps(terminal),flush=True)
+raise SystemExit(rc)

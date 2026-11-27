@@ -1,0 +1,128 @@
+import ast, hashlib, json, os, stat, subprocess, sys, time
+from pathlib import Path
+base=Path(__file__).resolve().parent
+controls,history=map(Path,sys.argv[1:3])
+helper=Path('/tmp/Root-P2-whole-component-managed-R5-n8Fkdm2q/run-read3.py')
+tree=ast.parse(helper.read_bytes())
+names={'full9','read','val','keep'}
+exec(compile(ast.Module([n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in names or isinstance(n,ast.Assign) and getattr(n.targets[0],'id',None)=='policy'],[]),str(helper),'exec'))
+assert len(sys.argv)==3
+pref=read(base/'Root-current-Guide585-namespaced-Native2-selector-inputs.v2.json',1796,
+    '14efb0e91a9ada894c2aba6e86049b9d9a76ce7ca7c0240d9cf78e14f8b4ad30')[0]
+inp=val(pref)
+cfg=val(read(controls/'ROOT-current-Guide585-namespaced-Native2-selector-physical-contract-v01.json',16146,
+    '6d26fa3baa3fa9db4b60fc9c6e062477622fe6965fcfcd4c59679765a6df2a22')[0])
+selector=read(controls/'select-existing-namespaced-native2.current234-INERT.v03.py.DATA',29046,
+    '0ea1c37d6ca6a1bc8f88ea8b54b9d682f4e7a1707a3e179dfa7784772a6ffeb9')[0]
+t=val(inp['source_read4'])
+fr=val(inp['freeze'])
+assert t['returncode']==0 and t['reaped'] and t['Source_closed'] and t['owned_module_closed'] and t['handle'] is None
+assert t['publication']==inp['current_publication'] and t['frozen_roots']==fr['frozen_roots']
+cap=val(t['cap'])
+assert cap['prior_closeout']==inp['prior_source_ledger']
+old=read(history/'Root-current-existing-generic-Native3-binding.json',28824,
+    '081b27277e65292f46eefafd9fa3422218773940d3d497c559884b668953afd3')[0]
+binding=val(old)
+resource=binding['resource']
+resref,raw=read(resource['state_path'])
+res=json.loads(raw)
+assert res['config']==resource['expected_config'] and res['child_process_capacity']==resource['expected_capacity']
+assert not res['leases'] and not res['waiters']
+assets=val(binding['native_asset_content_review'])
+assert assets['complete'] and assets['all8_asset_FDs_closed'] and not assets['errors']
+assert len(binding['Native'])==len(assets['assets'])==8
+for row in binding['Native']:
+    oldrow,=[r for r in assets['assets'] if r['path']==row['path']]
+    assert all(oldrow[k]==row[k] for k in ('bytes','sha256','actual_full9'))
+    f=Path(row['path'])
+    first=f.lstat()
+    assert stat.S_ISREG(first.st_mode) and first.st_nlink==1 and first.st_size==row['bytes']
+    fd=os.open(f,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK)
+    try: assert full9(first)==full9(os.fstat(fd))==full9(f.lstat())==row['actual_full9']
+    finally: os.close(fd)
+asset_recheck=keep('current-Native2-toolchain-F9-recheck.json',dict(assets=binding['Native'],
+    retained_content_review=binding['native_asset_content_review'],all8_FDs_closed=True,asset_body_reread=False,
+    current_resource_state_observation=resref))
+D=Path(t['frozen_roots'][0]['root'])
+epoch={r['path']:r for r in val(t['outer_epoch'])}
+named={r['path']:r for r in val(t['named_epoch'])['rows']}
+TEST='tests/integration/logic/backends/test_kernel_backends.py'
+PROTOCOL='ipfs_datasets_py/logic/ir_core/protocols.py'
+pins={name:[rel,epoch[str(D/rel)]['sha256']] for name,(rel,digest) in binding['current_SDK_source_pins'].items()}
+assert pins==binding['current_SDK_source_pins']
+assert val(t['current_Source42_owner_binding'])['code_reference']==binding['Source42_raw']
+namespaces=[dict(row,device=int(row['full9']['st_dev']),inode=int(row['full9']['st_ino'])) for row in t['namespace_metadata']]
+auth=cap['authority']
+assert auth==cfg['ledger']['source_only_authority'] and val(auth)['human_authorization']['role']=='user'
+prior=t['fully_retained_ledger']
+amount=160*1024**2
+funded=dict(prior,global_cap=prior['global_cap']+amount,internal_cap=prior['internal_cap']+amount)
+paid=dict(funded,used=prior['used']+amount,internal_used=prior['internal_used']+amount,captures=prior['captures']+1)
+out=base/'actual-namespaced-native2-output'
+assert not os.path.lexists(out)
+charge=keep('Source-only-current-namespaced-Native2-full-retained-cap.json',dict(
+    prior=prior,selected=funded,after_full_retained_precharge=paid,added_Source_only_envelope=amount,
+    prior_native_envelope_bytes=134217728,extra_private_readback_upper=33554432,
+    previous_charge=t['cap'],prior_cap=t['cap'],exact_human_affirmation=auth,all_prior_costs_retained=True,
+    resource_policy_capacity_unchanged=True,no_policy_capacity_or_model_change=True,physical_IO_accounting_complete=False))
+now=time.time_ns()
+clock=dict(kind='exact submission window for existing validation profile',not_before_utc_ns=now,
+    submit_deadline_utc_ns=now+180_000_000_000)
+profile='P1-native-namespaced-expected-declaration/v1'
+binder=cfg['evidence_and_controls']['current_operator_and_binder']['binder']
+select=keep('Root-selected-current-namespaced-Native2-once.json',dict(Root_selected=True,case_profile=profile,
+    actual_root_input_surface=pref,current_publication=inp['current_publication'],
+    exact_current_freeze=inp['freeze'],exact_current_read4=inp['source_read4'],
+    current_Source_epoch=t['outer_epoch'],current_Python_epoch=t['python_epoch'],
+    current_expected_policy_binder=binder,current_owning_test_source=t['raw_captures'][TEST],
+    output_namespace=str(out),cap_and_IO=charge,policy_and_state=resref,clock_scope=clock,toolchain_recheck=asset_recheck,
+    allowed_real_commands=dict(Lean_version_observations=1,Lean_compile_calls=2,expected_compiler_statuses=[0,1]),
+    no_statutory_or_model_qualification=True))
+enrollment=dict(binding['Native_enrollment'],Root_selection=select,case_profile=profile,clock_scope=clock,
+    current_toolchain_assets_exact=True,current_resource_state_observation=resref)
+binding.update(native_case_profile=profile,Root_selection=select['path'],PROJECTS=t['frozen_roots'],
+    Source_epoch=t['outer_epoch'],W_INDEX=fr['frozen']['stage0_index'],clock_scope=clock,binder_raw=binder,
+    normal_namespaces=namespaces,current_SDK_source_pins=pins,current_protocol_raw_source=t['raw_captures'][PROTOCOL],
+    owning_test_record=epoch[str(D/TEST)],owning_test_raw=t['raw_captures'][TEST],
+    current_D_config=named[str(D/'.git/config')],closed_current_core_Source_role_reference=inp['source_read4'],
+    Source42_current_owner_binding=dict(existing_Source42_binding_verified=True,
+        current_publication=inp['current_publication'],actual_read4=inp['source_read4'],
+        current_read_guard_pair=t['frozen_roots'],current_owner=t['current_Source42_owner_binding']),
+    Source_composition_proof=dict(current_read=inp['source_read4'],current_materialized_projection=t['materialization'],
+        current_protocol_owner=epoch[str(D/PROTOCOL)],prior_direct_binding_historical=old),
+    Native_enrollment=enrollment,Source_IO_allocation=dict(binding['Source_IO_allocation'],
+        debit_bytes=amount,explicit_ledger_increase_and_charge_reference=charge),
+    live_bindings_currently_unbound=False)
+bref=keep('Root-current-existing-namespaced-Native2-binding.json',binding)
+def argv_ref(ref): return [ref['path'],str(ref['bytes']),ref['sha256']]
+try:
+    sealed=subprocess.run(['/usr/bin/python3','-I','-B',selector['path'],'--inputs',*argv_ref(pref),
+        '--bind-only','--current-binding',*argv_ref(bref)],check=True,capture_output=True,timeout=60)
+except subprocess.CalledProcessError as e:
+    refusal=keep('current-namespaced-Native2-selector-bind-refusal.json',dict(returncode=e.returncode,binding=bref,
+        selection=select,precharge=charge,fully_retained_ledger=paid,selector_stderr=e.stderr.decode(errors='replace'),
+        dispatched=False))
+    print(json.dumps(refusal),flush=True)
+    raise SystemExit(e.returncode)
+bound=json.loads(sealed.stdout)
+assert bound['binding']==bref and bound['selection']==select and not bound['Native_dispatched']
+op=bound['operator']
+read(op['path'],op['bytes'],op['sha256'])
+assert clock['not_before_utc_ns']<=time.time_ns()<clock['submit_deadline_utc_ns']
+with (base/'namespaced-native2.stdout').open('xb') as stdout,(base/'namespaced-native2.stderr').open('xb') as stderr:
+    child=subprocess.Popen(['/usr/bin/python3','-I','-B',op['path']],stdout=stdout,stderr=stderr)
+    live=keep('namespaced-native2-owner-live.json',dict(owner='Root',pid=child.pid,profile=profile,operator=op,
+        binding=bref,selection=select,precharge=charge,current_Source4=inp['source_read4']))
+    print(json.dumps(live),flush=True)
+    rc=child.wait()
+terminal=dict(owner='Root',pid=child.pid,returncode=rc,reaped=True,live=False,native_handle=None,selection=select,
+    binding=bref,operator=op,actual_live_handle=live,precharge=charge,fully_retained_ledger=paid,
+    stdout=read(base/'namespaced-native2.stdout')[0],stderr=read(base/'namespaced-native2.stderr')[0])
+report=out/'complete-native3-direct-existing-owner-report.json'
+if report.is_file():
+    terminal['report']=read(report)[0]
+    actual=val(terminal['report'])
+    for key in ('Source_closed','resource_cleanup_confirmed','parent_home_cleanup_confirmed','actual_native_qualification'):
+        terminal[key]=actual.get(key)
+print(json.dumps(keep('current-namespaced-Native2-parent-terminal.json',terminal)),flush=True)
+raise SystemExit(rc)

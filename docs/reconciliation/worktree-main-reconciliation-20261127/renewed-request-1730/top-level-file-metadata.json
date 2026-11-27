@@ -1,0 +1,82 @@
+{
+  "conservative_lower_bound_utc": "2026-11-27T05:00:00+00:00",
+  "counts": {
+    "after_completed_recovery": 5,
+    "all_after_lower_bound": 7,
+    "suffix_counts_after_recovery": {
+      ".json": 1,
+      ".md": 3,
+      ".txt": 1
+    }
+  },
+  "cutoff_utc": "2026-11-27T06:20:04.666445+00:00",
+  "files": [
+    {
+      "after_completed_recovery": false,
+      "bytes": 34326,
+      "ctime_ns": 1795755606751575236,
+      "mode": 33152,
+      "mtime_ns": 1795755606750554047,
+      "path": "/home/barberb/.bash_history",
+      "suffix": ""
+    },
+    {
+      "after_completed_recovery": true,
+      "bytes": 44,
+      "ctime_ns": 1795800656499348942,
+      "mode": 33204,
+      "mtime_ns": 1795800656499348942,
+      "path": "/tmp/current-git-renewed-audit-path.txt",
+      "suffix": ".txt"
+    },
+    {
+      "after_completed_recovery": false,
+      "bytes": 835559,
+      "ctime_ns": 1795756711098374005,
+      "mode": 33204,
+      "mtime_ns": 1795756711098374005,
+      "path": "/tmp/decoder-training-experiment-manifest-v407.json",
+      "suffix": ".json"
+    },
+    {
+      "after_completed_recovery": true,
+      "bytes": 1790,
+      "ctime_ns": 1795762697313696077,
+      "mode": 33204,
+      "mtime_ns": 1795762697313696077,
+      "path": "/tmp/decoder-training-goal-blocked-audit-v01.json",
+      "suffix": ".json"
+    },
+    {
+      "after_completed_recovery": true,
+      "bytes": 1827729,
+      "ctime_ns": 1795761370517669440,
+      "mode": 33204,
+      "mtime_ns": 1795761370517669440,
+      "path": "/tmp/decoder-training-integration-plan.md",
+      "suffix": ".md"
+    },
+    {
+      "after_completed_recovery": true,
+      "bytes": 67587,
+      "ctime_ns": 1795761370511669386,
+      "mode": 33204,
+      "mtime_ns": 1795761370511669386,
+      "path": "/tmp/decoder-training-integration-specification-v01.md",
+      "suffix": ".md"
+    },
+    {
+      "after_completed_recovery": true,
+      "bytes": 7033,
+      "ctime_ns": 1795761247024542824,
+      "mode": 33204,
+      "mtime_ns": 1795761247024542824,
+      "path": "/tmp/decoder-training-operator-handoff-v45.md",
+      "suffix": ".md"
+    }
+  ],
+  "key_named_paths_excluded": [],
+  "limitation": "Changes to files deeply inside preexisting unregistered repositories are outside this top-level metadata supplement.",
+  "schema": "renewed-top-level-file-metadata/v1",
+  "scope": "Names and stat only under /tmp and /home/barberb. No body reads and no authorship, missing-publication, or eligibility inferred."
+}

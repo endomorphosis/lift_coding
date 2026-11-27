@@ -1,0 +1,3043 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:decoder-training:contracts:draft:0.2.1",
+  "title": "Proposed versioned decoder training records",
+  "description": "Structural draft. Credit assignment v0.2.1 replaces the v0.2.0 credit shape. Other record versions remain unchanged. No runtime or legal authority.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/unresolvedTeacher"
+    },
+    {
+      "$ref": "#/$defs/teacherProfile"
+    },
+    {
+      "$ref": "#/$defs/capabilityReport"
+    },
+    {
+      "$ref": "#/$defs/costRecord"
+    },
+    {
+      "$ref": "#/$defs/decoderProfileV2"
+    },
+    {
+      "$ref": "#/$defs/actionScoringProfile"
+    },
+    {
+      "$ref": "#/$defs/teacherObservation"
+    },
+    {
+      "$ref": "#/$defs/conditioningProfile"
+    },
+    {
+      "$ref": "#/$defs/evaluationPopulation"
+    },
+    {
+      "$ref": "#/$defs/trajectory"
+    },
+    {
+      "$ref": "#/$defs/evaluationRecord"
+    },
+    {
+      "$ref": "#/$defs/rewardPolicy"
+    },
+    {
+      "$ref": "#/$defs/creditAssignment"
+    },
+    {
+      "$ref": "#/$defs/interventionProfile"
+    },
+    {
+      "$ref": "#/$defs/interventionResult"
+    },
+    {
+      "$ref": "#/$defs/updateProposal"
+    },
+    {
+      "$ref": "#/$defs/updateOutcome"
+    },
+    {
+      "$ref": "#/$defs/experimentRecord"
+    }
+  ],
+  "$defs": {
+    "digest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "hex"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "sha256"
+        },
+        "hex": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "evidenceReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_id",
+        "digest",
+        "claim_scope",
+        "verification_status"
+      ],
+      "properties": {
+        "artifact_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "claim_scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "verification_status": {
+          "enum": [
+            "unverified",
+            "content_authenticated",
+            "independently_reviewed"
+          ]
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "neuralProducer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "code_digest",
+        "model_id",
+        "checkpoint_digest",
+        "training_objective_identity"
+      ],
+      "properties": {
+        "kind": {
+          "const": "learned_embedding"
+        },
+        "code_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "model_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "checkpoint_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "training_objective_identity": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "deterministicProducer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "code_digest",
+        "feature_definition_digest",
+        "checkpoint_not_applicable_reason"
+      ],
+      "properties": {
+        "kind": {
+          "const": "deterministic_features"
+        },
+        "code_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "feature_definition_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "checkpoint_not_applicable_reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "noCompression": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method"
+      ],
+      "properties": {
+        "method": {
+          "const": "none"
+        }
+      }
+    },
+    "declaredCompression": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method",
+        "configuration_digest",
+        "input_profile_id",
+        "fit_population_id",
+        "compatibility_evidence"
+      ],
+      "properties": {
+        "method": {
+          "enum": [
+            "learned_projection",
+            "pca",
+            "validated_nested_prefix",
+            "other_declared"
+          ]
+        },
+        "configuration_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "input_profile_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "fit_population_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "compatibility_evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/evidenceReference"
+          }
+        }
+      }
+    },
+    "unresolvedTeacher": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_kind",
+        "schema_version",
+        "slot_id",
+        "requested_dimension",
+        "status",
+        "reason",
+        "eligible_for_execution"
+      ],
+      "properties": {
+        "record_kind": {
+          "const": "unresolved_teacher_requirement"
+        },
+        "schema_version": {
+          "const": "0.1.0"
+        },
+        "slot_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requested_dimension": {
+          "enum": [
+            8,
+            384,
+            768,
+            4096
+          ]
+        },
+        "status": {
+          "const": "unresolved"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "eligible_for_execution": {
+          "const": false
+        },
+        "received_evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidenceReference"
+          }
+        }
+      }
+    },
+    "teacherProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_kind",
+        "schema_version",
+        "profile_id",
+        "resolution_status",
+        "producer",
+        "output",
+        "input_contract_digest",
+        "pooling_policy",
+        "layer_selection",
+        "normalization",
+        "compression",
+        "permitted_uses",
+        "availability",
+        "license_and_use_evidence",
+        "provenance"
+      ],
+      "properties": {
+        "record_kind": {
+          "const": "resolved_teacher_profile"
+        },
+        "schema_version": {
+          "const": "0.1.0"
+        },
+        "profile_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resolution_status": {
+          "const": "resolved"
+        },
+        "producer": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/neuralProducer"
+            },
+            {
+              "$ref": "#/$defs/deterministicProducer"
+            }
+          ]
+        },
+        "output": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "dimension",
+            "layout",
+            "dtype"
+          ],
+          "properties": {
+            "dimension": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "layout": {
+              "enum": [
+                "example_vector",
+                "span_vectors",
+                "token_vectors"
+              ]
+            },
+            "dtype": {
+              "enum": [
+                "float32",
+                "float16",
+                "bfloat16",
+                "float64",
+                "declared_quantized"
+              ]
+            },
+            "quantization_profile_digest": {
+              "$ref": "#/$defs/digest"
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "dtype": {
+                    "const": "declared_quantized"
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "quantization_profile_digest"
+                ]
+              },
+              "else": {
+                "not": {
+                  "required": [
+                    "quantization_profile_digest"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "input_contract_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "pooling_policy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "layer_selection": {
+          "type": "string",
+          "minLength": 1
+        },
+        "normalization": {
+          "type": "string",
+          "minLength": 1
+        },
+        "compression": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/noCompression"
+            },
+            {
+              "$ref": "#/$defs/declaredCompression"
+            }
+          ]
+        },
+        "permitted_uses": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "conditioning",
+              "feature_distillation",
+              "relational_distillation",
+              "retrieval"
+            ]
+          }
+        },
+        "availability": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "training",
+            "inference",
+            "missing_policy"
+          ],
+          "properties": {
+            "training": {
+              "enum": [
+                "available",
+                "unavailable",
+                "conditional"
+              ]
+            },
+            "inference": {
+              "enum": [
+                "available",
+                "unavailable",
+                "conditional"
+              ]
+            },
+            "missing_policy": {
+              "enum": [
+                "refuse",
+                "qualified_fallback",
+                "training_only"
+              ]
+            }
+          }
+        },
+        "license_and_use_evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/evidenceReference"
+          }
+        },
+        "provenance": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/evidenceReference"
+          }
+        }
+      }
+    },
+    "capabilityEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "status",
+        "constraints",
+        "evidence"
+      ],
+      "properties": {
+        "name": {
+          "enum": [
+            "generate",
+            "score_actions",
+            "train_supervised",
+            "train_policy",
+            "observe_activations",
+            "intervene_activations",
+            "enumerate_update_targets",
+            "apply_reversible_update"
+          ]
+        },
+        "status": {
+          "enum": [
+            "supported",
+            "unsupported",
+            "unverified"
+          ]
+        },
+        "constraints": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidenceReference"
+          }
+        },
+        "probability_contract_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "intervention_contract_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "update_contract_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "policy_algorithm_contract_digest": {
+          "$ref": "#/$defs/digest"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "supported"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evidence": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "score_actions"
+              },
+              "status": {
+                "const": "supported"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "probability_contract_digest"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "intervene_activations"
+              },
+              "status": {
+                "const": "supported"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "intervention_contract_digest"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "apply_reversible_update"
+              },
+              "status": {
+                "const": "supported"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "update_contract_digest"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "train_policy"
+              },
+              "status": {
+                "const": "supported"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "policy_algorithm_contract_digest"
+            ]
+          }
+        }
+      ]
+    },
+    "capabilityReport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_kind",
+        "schema_version",
+        "decoder_profile_id",
+        "decoder_binding_digest",
+        "capabilities",
+        "claim_boundary"
+      ],
+      "properties": {
+        "record_kind": {
+          "const": "decoder_capability_report"
+        },
+        "schema_version": {
+          "const": "0.1.0"
+        },
+        "decoder_profile_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "decoder_binding_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "capabilities": {
+          "type": "array",
+          "minItems": 8,
+          "maxItems": 8,
+          "items": {
+            "$ref": "#/$defs/capabilityEntry"
+          },
+          "allOf": [
+            {
+              "contains": {
+                "properties": {
+                  "name": {
+                    "const": "generate"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "properties": {
+                  "name": {
+                    "const": "score_actions"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "properties": {
+                  "name": {
+                    "const": "train_supervised"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "properties": {
+                  "name": {
+                    "const": "train_policy"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "properties": {
+                  "name": {
+                    "const": "observe_activations"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "properties": {
+                  "name": {
+                    "const": "intervene_activations"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "properties": {
+                  "name": {
+                    "const": "enumerate_update_targets"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "properties": {
+                  "name": {
+                    "const": "apply_reversible_update"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            }
+          ]
+        },
+        "claim_boundary": {
+          "const": "structural_record_only_not_execution_admission"
+        }
+      }
+    },
+    "measurement": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "value",
+            "meter_evidence"
+          ],
+          "properties": {
+            "status": {
+              "const": "measured"
+            },
+            "value": {
+              "type": "number",
+              "minimum": 0
+            },
+            "meter_evidence": {
+              "$ref": "#/$defs/evidenceReference"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "reason"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "unavailable",
+                "unsupported",
+                "error"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      ]
+    },
+    "sourceRowBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "population_digest",
+        "split_manifest_digest",
+        "dependency_group_id",
+        "row_id",
+        "source_revision_id",
+        "source_span_digest",
+        "permitted_context_digest"
+      ],
+      "properties": {
+        "population_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "split_manifest_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "dependency_group_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "row_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_revision_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_span_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "permitted_context_digest": {
+          "$ref": "#/$defs/digest"
+        }
+      }
+    },
+    "costRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_kind",
+        "schema_version",
+        "claim_boundary",
+        "scope",
+        "scope_id",
+        "meter_interval_manifest",
+        "charged_event_manifest",
+        "budget_policy_digest",
+        "wall_seconds",
+        "cpu_seconds",
+        "gpu_seconds",
+        "peak_memory_bytes",
+        "io_bytes",
+        "includes_failed_attempts"
+      ],
+      "properties": {
+        "record_kind": {
+          "const": "cost_record"
+        },
+        "schema_version": {
+          "const": "0.2.0"
+        },
+        "claim_boundary": {
+          "const": "structural_record_only_not_execution_admission"
+        },
+        "scope": {
+          "enum": [
+            "execution",
+            "arm",
+            "campaign"
+          ]
+        },
+        "scope_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "meter_interval_manifest": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "charged_event_manifest": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "budget_policy_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "wall_seconds": {
+          "$ref": "#/$defs/measurement"
+        },
+        "cpu_seconds": {
+          "$ref": "#/$defs/measurement"
+        },
+        "gpu_seconds": {
+          "$ref": "#/$defs/measurement"
+        },
+        "peak_memory_bytes": {
+          "$ref": "#/$defs/measurement"
+        },
+        "io_bytes": {
+          "$ref": "#/$defs/measurement"
+        },
+        "includes_failed_attempts": {
+          "type": "boolean"
+        }
+      }
+    },
+    "decoderProfileV2": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_kind",
+        "schema_version",
+        "claim_boundary",
+        "profile_id",
+        "architecture_id",
+        "architecture_implementation_digest",
+        "configuration_digest",
+        "model_checkpoint",
+        "tokenizer_contract_digest",
+        "output_protocol_digest",
+        "numerical_profile_digest",
+        "context_capacity_contract_digest",
+        "environment_digest",
+        "capability_report"
+      ],
+      "properties": {
+        "record_kind": {
+          "const": "decoder_profile"
+        },
+        "schema_version": {
+          "const": "0.2.0"
+        },
+        "claim_boundary": {
+          "const": "structural_record_only_not_execution_admission"
+        },
+        "profile_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "architecture_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "architecture_implementation_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "configuration_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "model_checkpoint": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "tokenizer_contract_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "output_protocol_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "numerical_profile_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "context_capacity_contract_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "environment_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "capability_report": {
+          "$ref": "#/$defs/evidenceReference"
+        }
+      }
+    },
+    "actionScoringProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_kind",
+        "schema_version",
+        "claim_boundary",
+        "profile_id",
+        "decoder_binding_digest",
+        "action_space_contract_digest",
+        "probability_measure",
+        "score_scale",
+        "support_mask_contract_digest",
+        "sampling_transforms_digest",
+        "eos_and_special_action_policy_digest",
+        "scoring_reduction_digest",
+        "capability_evidence"
+      ],
+      "properties": {
+        "record_kind": {
+          "const": "action_scoring_profile"
+        },
+        "schema_version": {
+          "const": "0.2.0"
+        },
+        "claim_boundary": {
+          "const": "structural_record_only_not_execution_admission"
+        },
+        "profile_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "decoder_binding_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "action_space_contract_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "probability_measure": {
+          "enum": [
+            "post_mask_behavior_distribution",
+            "declared_target_distribution"
+          ]
+        },
+        "score_scale": {
+          "const": "natural_log_probability"
+        },
+        "support_mask_contract_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "sampling_transforms_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "eos_and_special_action_policy_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "scoring_reduction_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "capability_evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidenceReference"
+          },
+          "minItems": 1,
+          "uniqueItems": false
+        }
+      }
+    },
+    "teacherObservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_kind",
+        "schema_version",
+        "claim_boundary",
+        "teacher_profile",
+        "source",
+        "observed_input_digest",
+        "preprocessing_digest",
+        "producer_runtime_evidence",
+        "input_scope",
+        "observation",
+        "token_count_including_special_tokens",
+        "cost_reference",
+        "closeout_evidence"
+      ],
+      "properties": {
+        "record_kind": {
+          "const": "teacher_observation"
+        },
+        "schema_version": {
+          "const": "0.2.0"
+        },
+        "claim_boundary": {
+          "const": "structural_record_only_not_execution_admission"
+        },
+        "teacher_profile": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "source": {
+          "$ref": "#/$defs/sourceRowBinding"
+        },
+        "observed_input_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "preprocessing_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "producer_runtime_evidence": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/evidenceReference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "input_scope": {
+          "enum": [
+            "source_only",
+            "training_reference_context"
+          ]
+        },
+        "observation": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "status",
+                "vector",
+                "shape",
+                "dtype"
+              ],
+              "properties": {
+                "status": {
+                  "const": "produced"
+                },
+                "vector": {
+                  "$ref": "#/$defs/evidenceReference"
+                },
+                "shape": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "minItems": 1,
+                  "uniqueItems": false
+                },
+                "dtype": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "status",
+                "reason"
+              ],
+              "properties": {
+                "status": {
+                  "enum": [
+                    "unavailable",
+                    "unsupported",
+                    "overlength",
+                    "error"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          ]
+        },
+        "token_count_including_special_tokens": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cost_reference": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "closeout_evidence": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/evidenceReference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "observation": {
+                "properties": {
+                  "status": {
+                    "const": "produced"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "producer_runtime_evidence": {
+                "$ref": "#/$defs/evidenceReference"
+              },
+              "closeout_evidence": {
+                "$ref": "#/$defs/evidenceReference"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "conditioningProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_kind",
+        "schema_version",
+        "claim_boundary",
+        "profile_id",
+        "decoder_binding_digest",
+        "mode",
+        "teacher_profiles",
+        "projection_or_retrieval_contract",
+        "input_route_digest",
+        "missing_teacher_policy_digest",
+        "train_and_inference_availability_digest",
+        "capacity_and_cost_baseline"
+      ],
+      "properties": {
+        "record_kind": {
+          "const": "conditioning_profile"
+        },
+        "schema_version": {
+          "const": "0.2.0"
+        },
+        "claim_boundary": {
+          "const": "structural_record_only_not_execution_admission"
+        },
+        "profile_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "decoder_binding_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "mode": {
+          "enum": [
+            "source_only",
+            "conditioned",
+            "training_only_distillation",
+            "retrieval"
+          ]
+        },
+        "teacher_profiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidenceReference"
+          },
+          "minItems": 0,
+          "uniqueItems": false
+        },
+        "projection_or_retrieval_contract": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/evidenceReference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "input_route_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "missing_teacher_policy_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "train_and_inference_availability_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "capacity_and_cost_baseline": {
+          "$ref": "#/$defs/evidenceReference"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "mode": {
+                "const": "source_only"
+              }
+            },
+            "required": [
+              "mode"
+            ]
+          },
+          "then": {
+            "properties": {
+              "teacher_profiles": {
+                "maxItems": 0
+              },
+              "projection_or_retrieval_contract": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "teacher_profiles": {
+                "minItems": 1
+              },
+              "projection_or_retrieval_contract": {
+                "$ref": "#/$defs/evidenceReference"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "evaluationPopulation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_kind",
+        "schema_version",
+        "claim_boundary",
+        "population_id",
+        "row_and_reference_manifest",
+        "split_manifest",
+        "dependency_group_manifest",
+        "source_and_context_policy_digest",
+        "interpretation_definition_and_revocation_manifest",
+        "review_scope",
+        "permitted_uses",
+        "pretraining_overlap_status"
+      ],
+      "properties": {
+        "record_kind": {
+          "const": "evaluation_population"
+        },
+        "schema_version": {
+          "const": "0.2.0"
+        },
+        "claim_boundary": {
+          "const": "structural_record_only_not_execution_admission"
+        },
+        "population_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "row_and_reference_manifest": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "split_manifest": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "dependency_group_manifest": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "source_and_context_policy_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "interpretation_definition_and_revocation_manifest": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "review_scope": {
+          "enum": [
+            "fictional_fixture",
+            "independently_reviewed",
+            "mixed_declared_by_row"
+          ]
+        },
+        "permitted_uses": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "train",
+              "development",
+              "final_test",
+              "retention"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "pretraining_overlap_status": {
+          "enum": [
+            "unknown",
+            "disclosed_intersection",
+            "checked_for_declared_exposure_only"
+          ]
+        }
+      }
+    },
+    "trajectoryScore": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "reason"
+          ],
+          "properties": {
+            "status": {
+              "const": "unavailable"
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "measure",
+            "scale",
+            "behavior_checkpoint_digest",
+            "action_scoring_profile",
+            "sampler_contract_digest",
+            "conditioned_mask_trace",
+            "ordered_scores",
+            "score_count"
+          ],
+          "properties": {
+            "status": {
+              "const": "observed_behavior"
+            },
+            "measure": {
+              "const": "post_mask_behavior_distribution"
+            },
+            "scale": {
+              "const": "natural_log_probability"
+            },
+            "behavior_checkpoint_digest": {
+              "$ref": "#/$defs/digest"
+            },
+            "action_scoring_profile": {
+              "$ref": "#/$defs/evidenceReference"
+            },
+            "sampler_contract_digest": {
+              "$ref": "#/$defs/digest"
+            },
+            "conditioned_mask_trace": {
+              "$ref": "#/$defs/evidenceReference"
+            },
+            "ordered_scores": {
+              "$ref": "#/$defs/evidenceReference"
+            },
+            "score_count": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        }
+      ]
+    },
+    "trajectory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_kind",
+        "schema_version",
+        "claim_boundary",
+        "trajectory_id",
+        "source",
+        "decoder_binding_digest",
+        "conditioning_profile",
+        "behavior_policy_digest",
+        "randomness_contract_digest",
+        "action_space_contract_digest",
+        "ordered_generated_actions",
+        "action_count",
+        "output",
+        "decision_alignment_trace",
+        "action_scores",
+        "evaluation_role",
+        "termination",
+        "cost_reference"
+      ],
+      "properties": {
+        "record_kind": {
+          "const": "trajectory"
+        },
+        "schema_version": {
+          "const": "0.2.0"
+        },
+        "claim_boundary": {
+          "const": "structural_record_only_not_execution_admission"
+        },
+        "trajectory_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "$ref": "#/$defs/sourceRowBinding"
+        },
+        "decoder_binding_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "conditioning_profile": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "behavior_policy_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "randomness_contract_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "action_space_contract_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "ordered_generated_actions": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "action_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "output": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/evidenceReference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "decision_alignment_trace": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/evidenceReference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "action_scores": {
+          "$ref": "#/$defs/trajectoryScore"
+        },
+        "evaluation_role": {
+          "enum": [
+            "train_rollout",
+            "development",
+            "final_test",
+            "retention"
+          ]
+        },
+        "termination": {
+          "enum": [
+            "eos",
+            "time_limit",
+            "output_limit",
+            "invalid_output",
+            "abstained",
+            "unsupported",
+            "model_error",
+            "evaluator_error",
+            "resource_interruption"
+          ]
+        },
+        "cost_reference": {
+          "$ref": "#/$defs/evidenceReference"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "action_scores": {
+                "properties": {
+                  "status": {
+                    "const": "observed_behavior"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "action_count": {
+                "minimum": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "facetObservation": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "value",
+            "measurement_policy_digest",
+            "uncertainty",
+            "evidence"
+          ],
+          "properties": {
+            "status": {
+              "const": "measured"
+            },
+            "value": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "measurement_policy_digest": {
+              "$ref": "#/$defs/digest"
+            },
+            "uncertainty": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/evidenceReference"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/evidenceReference"
+              },
+              "minItems": 1,
+              "uniqueItems": false
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "reason",
+            "evidence"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "unknown",
+                "unsupported",
+                "error"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/evidenceReference"
+              },
+              "minItems": 0,
+              "uniqueItems": false
+            }
+          }
+        }
+      ]
+    },
+    "evaluationRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_kind",
+        "schema_version",
+        "claim_boundary",
+        "evaluation_id",
+        "trajectory_digest",
+        "observed_output_digest",
+        "population_and_reference_binding",
+        "evaluator_identity_digest",
+        "independent_review_boundary_digest",
+        "facets",
+        "formal_check",
+        "source_review_state",
+        "cost_reference"
+      ],
+      "properties": {
+        "record_kind": {
+          "const": "evaluation_record"
+        },
+        "schema_version": {
+          "const": "0.2.0"
+        },
+        "claim_boundary": {
+          "const": "structural_record_only_not_execution_admission"
+        },
+        "evaluation_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "trajectory_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "observed_output_digest": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/digest"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "population_and_reference_binding": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "evaluator_identity_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "independent_review_boundary_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "facets": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "structure",
+            "actor_arguments",
+            "modality",
+            "conditions_exceptions",
+            "temporal_cardinality",
+            "definitions_scope",
+            "source_correspondence",
+            "formal_validity",
+            "abstention_calibration",
+            "retention"
+          ],
+          "properties": {
+            "structure": {
+              "$ref": "#/$defs/facetObservation"
+            },
+            "actor_arguments": {
+              "$ref": "#/$defs/facetObservation"
+            },
+            "modality": {
+              "$ref": "#/$defs/facetObservation"
+            },
+            "conditions_exceptions": {
+              "$ref": "#/$defs/facetObservation"
+            },
+            "temporal_cardinality": {
+              "$ref": "#/$defs/facetObservation"
+            },
+            "definitions_scope": {
+              "$ref": "#/$defs/facetObservation"
+            },
+            "source_correspondence": {
+              "$ref": "#/$defs/facetObservation"
+            },
+            "formal_validity": {
+              "$ref": "#/$defs/facetObservation"
+            },
+            "abstention_calibration": {
+              "$ref": "#/$defs/facetObservation"
+            },
+            "retention": {
+              "$ref": "#/$defs/facetObservation"
+            }
+          }
+        },
+        "formal_check": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "status",
+                "obligation_digest",
+                "toolchain_digest",
+                "receipt"
+              ],
+              "properties": {
+                "status": {
+                  "enum": [
+                    "verified",
+                    "invalid",
+                    "timeout",
+                    "error"
+                  ]
+                },
+                "obligation_digest": {
+                  "$ref": "#/$defs/digest"
+                },
+                "toolchain_digest": {
+                  "$ref": "#/$defs/digest"
+                },
+                "receipt": {
+                  "$ref": "#/$defs/evidenceReference"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "status",
+                "reason"
+              ],
+              "properties": {
+                "status": {
+                  "enum": [
+                    "unrun",
+                    "unsupported"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          ]
+        },
+        "source_review_state": {
+          "enum": [
+            "reviewed",
+            "unknown",
+            "refused",
+            "fictional_fixture"
+          ]
+        },
+        "cost_reference": {
+          "$ref": "#/$defs/evidenceReference"
+        }
+      }
+    },
+    "rewardPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_kind",
+        "schema_version",
+        "claim_boundary",
+        "policy_id",
+        "policy_implementation_digest",
+        "scalarization_configuration_digest",
+        "eligible_facets",
+        "unknown_treatment",
+        "error_and_abstention_policy_digest",
+        "cost_policy_digest",
+        "independent_acceptance_policy",
+        "grants_corpus_admission",
+        "proof_cannot_override_known_mistranslation"
+      ],
+      "properties": {
+        "record_kind": {
+          "const": "reward_policy"
+        },
+        "schema_version": {
+          "const": "0.2.0"
+        },
+        "claim_boundary": {
+          "const": "structural_record_only_not_execution_admission"
+        },
+        "policy_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "policy_implementation_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "scalarization_configuration_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "eligible_facets": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "structure",
+              "actor_arguments",
+              "modality",
+              "conditions_exceptions",
+              "temporal_cardinality",
+              "definitions_scope",
+              "source_correspondence",
+              "formal_validity",
+              "abstention_calibration",
+              "retention"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "unknown_treatment": {
+          "enum": [
+            "exclude",
+            "defer_for_review",
+            "record_separate_diagnostic_penalty"
+          ]
+        },
+        "error_and_abstention_policy_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "cost_policy_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "independent_acceptance_policy": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "grants_corpus_admission": {
+          "const": false
+        },
+        "proof_cannot_override_known_mistranslation": {
+          "const": true
+        }
+      }
+    },
+    "creditSignal": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "values",
+            "eligibility_mask",
+            "reward_policy_digest"
+          ],
+          "properties": {
+            "kind": {
+              "const": "observed_reward"
+            },
+            "values": {
+              "$ref": "#/$defs/evidenceReference"
+            },
+            "eligibility_mask": {
+              "$ref": "#/$defs/evidenceReference"
+            },
+            "reward_policy_digest": {
+              "$ref": "#/$defs/digest"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "values",
+            "eligibility_mask",
+            "predictor_checkpoint_digest"
+          ],
+          "properties": {
+            "kind": {
+              "const": "learned_prediction"
+            },
+            "values": {
+              "$ref": "#/$defs/evidenceReference"
+            },
+            "eligibility_mask": {
+              "$ref": "#/$defs/evidenceReference"
+            },
+            "predictor_checkpoint_digest": {
+              "$ref": "#/$defs/digest"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "values",
+            "eligibility_mask",
+            "estimator_digest"
+          ],
+          "properties": {
+            "kind": {
+              "const": "advantage_estimate"
+            },
+            "values": {
+              "$ref": "#/$defs/evidenceReference"
+            },
+            "eligibility_mask": {
+              "$ref": "#/$defs/evidenceReference"
+            },
+            "estimator_digest": {
+              "$ref": "#/$defs/digest"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "values",
+            "eligibility_mask",
+            "intervention_result"
+          ],
+          "properties": {
+            "kind": {
+              "const": "counterfactual_effect"
+            },
+            "values": {
+              "$ref": "#/$defs/evidenceReference"
+            },
+            "eligibility_mask": {
+              "$ref": "#/$defs/evidenceReference"
+            },
+            "intervention_result": {
+              "$ref": "#/$defs/evidenceReference"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "values",
+            "eligibility_mask",
+            "diagnostic_profile_digest"
+          ],
+          "properties": {
+            "kind": {
+              "const": "mechanistic_diagnostic"
+            },
+            "values": {
+              "$ref": "#/$defs/evidenceReference"
+            },
+            "eligibility_mask": {
+              "$ref": "#/$defs/evidenceReference"
+            },
+            "diagnostic_profile_digest": {
+              "$ref": "#/$defs/digest"
+            }
+          }
+        }
+      ]
+    },
+    "creditAssignment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_kind",
+        "schema_version",
+        "claim_boundary",
+        "assignment_id",
+        "trajectory_digest",
+        "evaluation_digest",
+        "reward_policy_digest",
+        "algorithm_contract_digest",
+        "training_distribution_digest",
+        "credit_granularity",
+        "signals",
+        "optimization_use",
+        "estimator_assumptions_digest",
+        "mask_and_alignment_evidence",
+        "group_and_off_policy_evidence",
+        "estimator_profile",
+        "trajectory_origin"
+      ],
+      "properties": {
+        "record_kind": {
+          "const": "credit_assignment"
+        },
+        "schema_version": {
+          "const": "0.2.1"
+        },
+        "claim_boundary": {
+          "const": "structural_record_only_not_execution_admission"
+        },
+        "assignment_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "trajectory_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "evaluation_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "reward_policy_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "algorithm_contract_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "training_distribution_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "credit_granularity": {
+          "enum": [
+            "sequence",
+            "token",
+            "ast_decision",
+            "example"
+          ]
+        },
+        "signals": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/creditSignal"
+          },
+          "minItems": 1,
+          "uniqueItems": false
+        },
+        "optimization_use": {
+          "enum": [
+            "diagnostic_only",
+            "sample_allocation",
+            "policy_gradient_update",
+            "preference_update"
+          ]
+        },
+        "estimator_assumptions_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "mask_and_alignment_evidence": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "group_and_off_policy_evidence": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/evidenceReference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "policy_update_evidence": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "preference_pair_evidence": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "estimator_profile": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "declared_other"
+                },
+                "contract": {
+                  "$ref": "#/$defs/evidenceReference"
+                }
+              },
+              "required": [
+                "kind",
+                "contract"
+              ]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "group_relative"
+                },
+                "group_manifest": {
+                  "$ref": "#/$defs/evidenceReference"
+                },
+                "constant_reward_treatment": {
+                  "enum": [
+                    "zero_signal",
+                    "exclude_and_record"
+                  ]
+                },
+                "normalization_policy_digest": {
+                  "$ref": "#/$defs/digest"
+                }
+              },
+              "required": [
+                "kind",
+                "group_manifest",
+                "constant_reward_treatment",
+                "normalization_policy_digest"
+              ]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "return_redistribution"
+                },
+                "contract": {
+                  "$ref": "#/$defs/evidenceReference"
+                },
+                "discount": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "conservation_definition_digest": {
+                  "$ref": "#/$defs/digest"
+                },
+                "terminal_residual_evidence": {
+                  "$ref": "#/$defs/evidenceReference"
+                }
+              },
+              "required": [
+                "kind",
+                "contract",
+                "discount",
+                "conservation_definition_digest",
+                "terminal_residual_evidence"
+              ]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "potential_shaping"
+                },
+                "contract": {
+                  "$ref": "#/$defs/evidenceReference"
+                },
+                "discount": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "state_definition_digest": {
+                  "$ref": "#/$defs/digest"
+                },
+                "frozen_potential_digest": {
+                  "$ref": "#/$defs/digest"
+                },
+                "terminal_policy_digest": {
+                  "$ref": "#/$defs/digest"
+                }
+              },
+              "required": [
+                "kind",
+                "contract",
+                "discount",
+                "state_definition_digest",
+                "frozen_potential_digest",
+                "terminal_policy_digest"
+              ]
+            }
+          ]
+        },
+        "off_policy_evidence": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "trajectory_origin": {
+          "enum": [
+            "current_policy",
+            "replayed",
+            "diagnostic_not_used_for_update"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "optimization_use": {
+                "const": "policy_gradient_update"
+              }
+            },
+            "required": [
+              "optimization_use"
+            ]
+          },
+          "then": {
+            "required": [
+              "policy_update_evidence"
+            ],
+            "properties": {
+              "signals": {
+                "contains": {
+                  "properties": {
+                    "kind": {
+                      "const": "advantage_estimate"
+                    }
+                  },
+                  "required": [
+                    "kind"
+                  ]
+                }
+              },
+              "trajectory_origin": {
+                "enum": [
+                  "current_policy",
+                  "replayed"
+                ]
+              }
+            }
+          },
+          "else": {
+            "not": {
+              "required": [
+                "policy_update_evidence"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "optimization_use": {
+                "const": "preference_update"
+              }
+            },
+            "required": [
+              "optimization_use"
+            ]
+          },
+          "then": {
+            "required": [
+              "preference_pair_evidence"
+            ],
+            "properties": {
+              "trajectory_origin": {
+                "enum": [
+                  "current_policy",
+                  "replayed"
+                ]
+              }
+            }
+          },
+          "else": {
+            "not": {
+              "required": [
+                "preference_pair_evidence"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "optimization_use": {
+                "const": "policy_gradient_update"
+              },
+              "trajectory_origin": {
+                "const": "replayed"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "off_policy_evidence"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "off_policy_evidence"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "interventionProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_kind",
+        "schema_version",
+        "claim_boundary",
+        "profile_id",
+        "decoder_binding_digest",
+        "model_checkpoint_digest",
+        "activation_contract_digest",
+        "intervention_procedure_digest",
+        "counterfactual_pair_manifest",
+        "outcome_policy_digest",
+        "controls",
+        "hypothesis_digest",
+        "capture_and_resource_policy_digest",
+        "state_restoration_contract"
+      ],
+      "properties": {
+        "record_kind": {
+          "const": "intervention_profile"
+        },
+        "schema_version": {
+          "const": "0.2.0"
+        },
+        "claim_boundary": {
+          "const": "structural_record_only_not_execution_admission"
+        },
+        "profile_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "decoder_binding_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "model_checkpoint_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "activation_contract_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "intervention_procedure_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "counterfactual_pair_manifest": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "outcome_policy_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "controls": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "no_op",
+              "sham",
+              "random_matched",
+              "irrelevant_facet",
+              "heldout_pair",
+              "distribution_check"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "allOf": [
+            {
+              "contains": {
+                "const": "no_op"
+              }
+            },
+            {
+              "contains": {
+                "const": "sham"
+              }
+            },
+            {
+              "contains": {
+                "const": "random_matched"
+              }
+            },
+            {
+              "contains": {
+                "const": "irrelevant_facet"
+              }
+            },
+            {
+              "contains": {
+                "const": "heldout_pair"
+              }
+            },
+            {
+              "contains": {
+                "const": "distribution_check"
+              }
+            }
+          ]
+        },
+        "hypothesis_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "capture_and_resource_policy_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "state_restoration_contract": {
+          "$ref": "#/$defs/evidenceReference"
+        }
+      }
+    },
+    "interventionResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_kind",
+        "schema_version",
+        "claim_boundary",
+        "profile_digest",
+        "checkpoint_before_digest",
+        "observed_condition_digest",
+        "status",
+        "case_outcome_evidence",
+        "probe_metric_evidence",
+        "controlled_effect_evidence",
+        "cleanup_state",
+        "state_readback_evidence",
+        "cost_reference"
+      ],
+      "properties": {
+        "record_kind": {
+          "const": "intervention_result"
+        },
+        "schema_version": {
+          "const": "0.2.0"
+        },
+        "claim_boundary": {
+          "const": "structural_record_only_not_execution_admission"
+        },
+        "profile_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "checkpoint_before_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "observed_condition_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "status": {
+          "enum": [
+            "completed",
+            "refused",
+            "failed"
+          ]
+        },
+        "case_outcome_evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidenceReference"
+          },
+          "minItems": 0,
+          "uniqueItems": false
+        },
+        "probe_metric_evidence": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/evidenceReference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "controlled_effect_evidence": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/evidenceReference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cleanup_state": {
+          "enum": [
+            "verified",
+            "unavailable",
+            "failed"
+          ]
+        },
+        "state_readback_evidence": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/evidenceReference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cost_reference": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "retained_failed_observation": {
+          "$ref": "#/$defs/evidenceReference"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "completed"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "case_outcome_evidence": {
+                "minItems": 1
+              },
+              "cleanup_state": {
+                "const": "verified"
+              },
+              "state_readback_evidence": {
+                "$ref": "#/$defs/evidenceReference"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "controlled_effect_evidence": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "updateProposal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_kind",
+        "schema_version",
+        "claim_boundary",
+        "proposal_id",
+        "architecture_binding_digest",
+        "parent_model_checkpoint",
+        "parent_optimizer_binding",
+        "target_tensor_manifest",
+        "explicit_delta_artifact",
+        "proposer_identity_digest",
+        "delta_and_tie_constraints_digest",
+        "precision_and_quantization_policy_digest",
+        "randomness_contract_digest",
+        "optimizer_state_policy",
+        "optimizer_policy_details",
+        "isolation_and_rollback_contract",
+        "motivating_evidence"
+      ],
+      "properties": {
+        "record_kind": {
+          "const": "update_proposal"
+        },
+        "schema_version": {
+          "const": "0.2.0"
+        },
+        "claim_boundary": {
+          "const": "structural_record_only_not_execution_admission"
+        },
+        "proposal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "architecture_binding_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "parent_model_checkpoint": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "parent_optimizer_binding": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/evidenceReference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "target_tensor_manifest": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "explicit_delta_artifact": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "proposer_identity_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "delta_and_tie_constraints_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "precision_and_quantization_policy_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "randomness_contract_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "optimizer_state_policy": {
+          "enum": [
+            "preserve_with_compatibility",
+            "reset_affected",
+            "rebuild",
+            "resume_unavailable"
+          ]
+        },
+        "optimizer_policy_details": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "isolation_and_rollback_contract": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "motivating_evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidenceReference"
+          },
+          "minItems": 1,
+          "uniqueItems": false
+        },
+        "affected_optimizer_group_manifest": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "optimizer_rebuild_procedure": {
+          "$ref": "#/$defs/evidenceReference"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "optimizer_state_policy": {
+                "const": "preserve_with_compatibility"
+              }
+            },
+            "required": [
+              "optimizer_state_policy"
+            ]
+          },
+          "then": {
+            "properties": {
+              "parent_optimizer_binding": {
+                "$ref": "#/$defs/evidenceReference"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "optimizer_state_policy": {
+                "const": "reset_affected"
+              }
+            },
+            "required": [
+              "optimizer_state_policy"
+            ]
+          },
+          "then": {
+            "required": [
+              "affected_optimizer_group_manifest"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "affected_optimizer_group_manifest"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "optimizer_state_policy": {
+                "const": "rebuild"
+              }
+            },
+            "required": [
+              "optimizer_state_policy"
+            ]
+          },
+          "then": {
+            "required": [
+              "optimizer_rebuild_procedure"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "optimizer_rebuild_procedure"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "updateOutcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_kind",
+        "schema_version",
+        "claim_boundary",
+        "proposal_digest",
+        "parent_before_after_readback",
+        "disposition",
+        "matched_development_and_retention_evidence",
+        "candidate_checkpoint",
+        "rejected_candidate_restoration",
+        "cost_reference",
+        "canonical_promotion_claimed"
+      ],
+      "properties": {
+        "record_kind": {
+          "const": "update_outcome"
+        },
+        "schema_version": {
+          "const": "0.2.0"
+        },
+        "claim_boundary": {
+          "const": "structural_record_only_not_execution_admission"
+        },
+        "proposal_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "parent_before_after_readback": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/evidenceReference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "disposition": {
+          "enum": [
+            "accepted_candidate",
+            "rejected_restored",
+            "refused_before_edit",
+            "failed_custody"
+          ]
+        },
+        "matched_development_and_retention_evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidenceReference"
+          },
+          "minItems": 0,
+          "uniqueItems": false
+        },
+        "candidate_checkpoint": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/evidenceReference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rejected_candidate_restoration": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/evidenceReference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cost_reference": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "canonical_promotion_claimed": {
+          "const": false
+        },
+        "retained_candidate_observation": {
+          "$ref": "#/$defs/evidenceReference"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "disposition": {
+                "const": "accepted_candidate"
+              }
+            },
+            "required": [
+              "disposition"
+            ]
+          },
+          "then": {
+            "properties": {
+              "candidate_checkpoint": {
+                "$ref": "#/$defs/evidenceReference"
+              },
+              "matched_development_and_retention_evidence": {
+                "minItems": 1
+              },
+              "parent_before_after_readback": {
+                "$ref": "#/$defs/evidenceReference"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "candidate_checkpoint": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "disposition": {
+                "const": "rejected_restored"
+              }
+            },
+            "required": [
+              "disposition"
+            ]
+          },
+          "then": {
+            "properties": {
+              "rejected_candidate_restoration": {
+                "$ref": "#/$defs/evidenceReference"
+              },
+              "parent_before_after_readback": {
+                "$ref": "#/$defs/evidenceReference"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "rejected_candidate_restoration": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "experimentRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_kind",
+        "schema_version",
+        "claim_boundary",
+        "experiment_id",
+        "design_policy_digest",
+        "arm_and_seed_manifest",
+        "decoder_and_teacher_binding_manifest",
+        "population_and_split_manifest",
+        "selection_phase",
+        "matched_control_manifest",
+        "threshold_policy",
+        "retained_outcome_manifest",
+        "evaluation_and_retention_refs",
+        "legal_review_and_proof_refs",
+        "cost_reference",
+        "disposition"
+      ],
+      "properties": {
+        "record_kind": {
+          "const": "experiment_record"
+        },
+        "schema_version": {
+          "const": "0.2.0"
+        },
+        "claim_boundary": {
+          "const": "structural_record_only_not_execution_admission"
+        },
+        "experiment_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "design_policy_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "arm_and_seed_manifest": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "decoder_and_teacher_binding_manifest": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "population_and_split_manifest": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "selection_phase": {
+          "enum": [
+            "development",
+            "final_test",
+            "diagnostic"
+          ]
+        },
+        "matched_control_manifest": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "threshold_policy": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/evidenceReference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "retained_outcome_manifest": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "evaluation_and_retention_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidenceReference"
+          },
+          "minItems": 0,
+          "uniqueItems": false
+        },
+        "legal_review_and_proof_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidenceReference"
+          },
+          "minItems": 0,
+          "uniqueItems": false
+        },
+        "cost_reference": {
+          "$ref": "#/$defs/evidenceReference"
+        },
+        "disposition": {
+          "enum": [
+            "threshold_observed",
+            "budget_without_threshold",
+            "integrity_failure",
+            "diagnostic_only"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "disposition": {
+                "enum": [
+                  "threshold_observed",
+                  "budget_without_threshold"
+                ]
+              }
+            },
+            "required": [
+              "disposition"
+            ]
+          },
+          "then": {
+            "properties": {
+              "threshold_policy": {
+                "$ref": "#/$defs/evidenceReference"
+              },
+              "evaluation_and_retention_refs": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "$comment": "Owning validators authenticate artifact contents, cross-record identity and extent, split membership, probability semantics, finite numerics, exact state restoration, costs, and legal review. JSON Schema only validates record shape. Legacy record versions stay unchanged."
+}

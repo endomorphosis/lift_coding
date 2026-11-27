@@ -1,0 +1,34 @@
+{
+  "Source_READ_closed": true,
+  "details": [],
+  "errors": [],
+  "failures": 0,
+  "lease": {
+    "canonical_root": "/tmp/git-renewed-all-work-20261127-17pd2xkd/datasets-integration",
+    "cooperative": true,
+    "lock_path": "/tmp/git-renewed-all-work-20261127-17pd2xkd/datasets-integration/workspace/control-plane/source-leases/source.lock",
+    "mode": "read",
+    "schema_version": "autoencoder-source-lease/v1",
+    "waited_seconds": 7.897615432739258e-05
+  },
+  "native_or_model_executed": false,
+  "passed": true,
+  "profile": {
+    "AS_bytes": 536870912,
+    "CPU": 1,
+    "CPU_seconds": 60,
+    "wall_seconds": 60
+  },
+  "schema": "legal-ir-agent-turn-observation-checkpoint-local-tests/v1",
+  "seconds": 0.4401267943903804,
+  "skips": 0,
+  "source_sha256": {
+    "/tmp/git-renewed-all-work-20261127-17pd2xkd/datasets-integration/ipfs_datasets_py/logic/autoformal/supervisor_loop.py": "c2022b4ac640ad67e09ecddf86b8f7ee1854c98c936cb0be643ec7ad6a5ea2c1",
+    "/tmp/git-renewed-all-work-20261127-17pd2xkd/datasets-integration/scripts/ops/legal_ir/run_autoformal_supervisor.py": "0259393ad5f0177d93147c39b8be3640755b8415177ac731b5f60384180f5d06",
+    "/tmp/git-renewed-all-work-20261127-17pd2xkd/datasets-integration/tests/unit/logic/test_supervisor_agent_turn_recovery.py": "fc96432ba7df1d9f6b9c079f461ce5c914f9dd5a184826de5f2f77b9c73979de"
+  },
+  "subtests": 171,
+  "test_errors": 0,
+  "tests": 95,
+  "workers_started": false
+}

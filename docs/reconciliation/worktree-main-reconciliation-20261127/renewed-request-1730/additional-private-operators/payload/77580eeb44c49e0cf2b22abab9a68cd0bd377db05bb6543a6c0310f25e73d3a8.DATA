@@ -1,0 +1,132 @@
+"""Read back the exact P2 and one-guide fast-forwards, joining the small qualification witnesses."""
+from concurrent.futures import ThreadPoolExecutor
+import hashlib,json,os,subprocess,sys
+from pathlib import Path
+
+base=Path(__file__).resolve().parent
+guides=base/'guides-preparation-INERT'
+code_dir=guides/'code-only-actual-parent-pins'
+docs_dir=guides/'actual-Guide585-docs-only-parent-pins'
+order=('datasets','hallucinate','root')
+env=os.environ|{'GIT_OPTIONAL_LOCKS':'0','GIT_NO_LAZY_FETCH':'1','GIT_TERMINAL_PROMPT':'0'}
+for key in ('GIT_DIR','GIT_WORK_TREE','GIT_INDEX_FILE','GIT_COMMON_DIR','GIT_ALTERNATE_OBJECT_DIRECTORIES'):
+    env.pop(key,None)
+
+def pinned(path,expected_digest=None,expected_bytes=None):
+    path=Path(path); raw=path.read_bytes(); digest=hashlib.sha256(raw).hexdigest()
+    assert expected_digest is None or digest==expected_digest
+    assert expected_bytes is None or len(raw)==expected_bytes
+    return {'path':str(path),'bytes':len(raw),'sha256':digest}
+def obj(pin):
+    path=Path(pin['path']); pinned(path,pin['sha256'],pin['bytes'])
+    return json.loads(path.read_bytes())
+def write(path,body):
+    path=Path(path)
+    raw=(json.dumps(body,indent=2,sort_keys=True)+'\n').encode()
+    with path.open('xb') as f:
+        f.write(raw);f.flush();os.fsync(f.fileno())
+    assert path.read_bytes()==raw
+    return pinned(path)
+def git(*args):
+    return subprocess.check_output(['/usr/bin/git',*args],env=env,timeout=35)
+def local(plan,role,*args):
+    return git('--git-dir='+plan['isolated_git_dir'][role],*plan['git_arguments_preserve_bounded_pack_settings'],*args)
+def entry(plan,role,commit,relative):
+    raw=local(plan,role,'ls-tree','-z',commit,'--',relative)
+    meta,found=raw.rstrip(b'\0').split(b'\t')
+    assert found.decode()==relative
+    return meta.decode().split()
+def verify_publication(receipt,plan_ref):
+    pub,plan=map(obj,(receipt,plan_ref))
+    assert pub['terminal_returncode']==0 and not pub['errors'] and pub['force_used'] is False
+    assert pub['all4_remote_main_exact'] and pub['all_owned_publication_commands_closed']
+    assert any(pub.get(k)==plan_ref for k in ('selected_plan','parent_pin_preparation','publication_plan'))
+    old,new=pub['prior_origin_main'],pub['fresh_origin_main']
+    assert (old,new)==(plan['base_origin_main'],plan['prepared_origin_main'])
+    assert old['accelerate']==new['accelerate']
+    for role,step_ref in zip(order,pub['normal_fast_forward_steps'],strict=True):
+        step=obj(step_ref)
+        assert (step['role'],step['before'],step['after'])==(role,old[role],new[role])
+        assert step['returncode']==0 and step['normal_fast_forward'] is True
+        assert local(plan,role,'rev-parse',new[role]+'^{tree}').decode().strip()==plan['candidate_trees'][role]
+        local(plan,role,'merge-base','--is-ancestor',old[role],new[role])
+    for role,links in plan['gitlink_after'].items():
+        for rel,row in links.items():
+            assert entry(plan,role,new[role],rel)==row
+    for rel,row in (plan['root_archive_preserved']|plan['retained_archives']).items():
+        assert entry(plan,'root',new['root'],rel)==row
+    return pub,plan
+assert len(sys.argv)==7
+docs=pinned(sys.argv[1],sys.argv[3],int(sys.argv[2]))
+witness=pinned(sys.argv[4],sys.argv[6],int(sys.argv[5]))
+dref=pinned(docs_dir/'READY-Guide585-docs-only-parent-pins.json','7793e0b161feb889550bfa4972c868e1830b3977e43d8ec76f64a7c4ff76d461',8188)
+cref=pinned(code_dir/'READY-P2-Guide584-managed234-code-only-parent-pins.json','de21d201a38117821b4fa5be2b4952346702574b76305a4fde22e16572c29f37',9793)
+code=pinned(code_dir/'actual-P2-managed234-code-normal-FF-publication.json','deda922e3bfc29030e6e601c535c6f04f7df6c9a1448d20477f78f52d5da27de',51608)
+q=pinned(base/'actual-managed-composed234-qualified.json','f350f2dda46a38cd7e4bd3821c520b6071f18112cafda068dc350fd8292f9cfc',2301)
+audit=pinned('/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/catalog-existing-test-links-private-v01-cwzfy8ie/independent-saved-P2-composed234-JUnit-counts-readback-v01.json',
+             'aa0459525b49f1c6a2908a64c34e205b635c002edcaa9c184a71bd47ea7f6813',4447)
+code_pub,cp=verify_publication(code,cref)
+doc_pub,dp=verify_publication(docs,dref)
+facts=obj(q); actual_witness=obj(witness)
+assert actual_witness['qualification']==q and actual_witness['terminal']==facts['terminal']
+assert actual_witness['counts']==facts['counts'] and actual_witness['subcohorts']==facts['subcohorts']
+assert actual_witness['actual_COLLECT_RUN_JUnit_order_identical'] and actual_witness['all_6_Source_fence_bytes_identical']
+assert actual_witness['full_original_report_bytes_read']==0
+assert set(actual_witness['phases'])=={'collect','run'} and len(actual_witness['Source_fences'])==6
+assert len({row['sha256'] for row in actual_witness['Source_fences'].values()})==1
+assert actual_witness['raw_JUnit']['sha256']==facts['raw_JUnit']['sha256']
+assert code_pub['fresh_origin_main']==doc_pub['prior_origin_main']
+assert dp['actual_code_publication']==code and dp['actual_managed234']==q
+last=doc_pub['fresh_origin_main']
+d=last['datasets']
+prior=code_pub['fresh_origin_main']['datasets']
+assert prior=='868925f044004da79b08adc9608bada01fd00733'
+assert local(dp,'datasets','rev-parse',d+'^').decode().strip()==prior
+guide=obj(dp['actual_Guide585_private_commit'])
+assert guide['evidence_ordinal']==585 and guide['only_four_Git_changes']
+assert guide['preservation']['prior_evidence_records']==584
+assert guide['preservation']['exact_catalog_owning_tests_operations']==2 and guide['preservation']['all4_inverse_exact']
+changed=local(dp,'datasets','diff-tree','--no-renames','--name-only','--no-commit-id','-r','-z',prior,d).decode().split('\0')
+assert set(changed)-{''}==set(dp['exact_four_docs']) and len(dp['exact_four_docs'])==4
+for rel,row in dp['exact_four_docs'].items():
+    assert entry(dp,'datasets',d,rel)==[row['mode'],'blob',row['committed_blob']]
+    raw=local(dp,'datasets','cat-file','blob',row['committed_blob'])
+    assert len(raw)==row['bytes'] and hashlib.sha256(raw).hexdigest()==row['sha256']
+for rel,row in dp['code_blobs_preserved'].items():
+    assert entry(dp,'datasets',d,rel)==row
+def see(item):
+    role,url=item
+    oid,branch=git('ls-remote','--exit-code',url,'refs/heads/main').decode().split()
+    assert branch=='refs/heads/main'
+    return role,oid
+with ThreadPoolExecutor(max_workers=4) as pool: heads=dict(pool.map(see,dp['urls'].items()))
+assert heads==last
+native=dp['actual_generic_Native3']
+n=obj(native)
+assert n['actual_native_qualification'] and n['Source_and_resource_and_parent_closed']
+freeze=obj(facts['frozen_execution'])
+for role in freeze['frozen_roots']:
+    root=role['root']
+    assert git('-C',root,'rev-parse','HEAD','HEAD^{tree}').decode().splitlines()==[role['Git_HEAD'],role['Git_tree']]
+    assert not git('-C',root,'status','--porcelain=v1','-z','-uall')
+for row in (freeze['index'],freeze['protected_A_index'],*freeze['exact_posts'].values()):
+    p=Path(row['path']); meta=p.lstat()
+    assert {k:str(getattr(meta,k)) for k in row['full9']}==row['full9']
+    pinned(p,row['sha256'],row['bytes'])
+ref=write(base/'actual-P2-and-single-Guide585-published-closeout.json',dict(
+    schema='actual-current-P2-code-and-one-Guide585-publication-closed/v1',owner='Root',
+    sole_existing_publisher='01a15853-8d90-7881-815c-f23bd69098c2',terminal_returncode=0,
+    code_commit=prior,managed234=q,managed_counts=facts['counts'],managed_subcohorts=facts['subcohorts'],
+    Source_AST_rewrite_Code_execution_and_fence_summary=witness,independent_saved_JUnit_counts=audit,
+    closed_Source3=facts['exact_closed_READ3'],
+    first_bootstrap_collect_refusal_closed=pinned(base/'P2-current-composed234-managed-terminal.json',
+        'f74cd27c17e9487d0ea9423d2ecf971d696540aff6ece344c2bb6a9dcde97f49',3571),
+    recovered_bootstrap_binding_order=True,code_publication=code,guide585_publication=docs,
+    exact_guide_ordinal=585,guide585_private_commit=dp['actual_Guide585_private_commit'],
+    catalog_exact_two_owning_tests=guide['catalog_owning_tests_exact2'],actual_generic_Native3=native,
+    historical_R5_qualification_scoped_to_d2ddb=dp['historical_R5_local'],
+    final_GitHub_origin_main=heads,only_one_docs_publication_wave=True,
+    Source_resource_parent_cleanup_verified=True,original_frozen_roots_preserved=True,
+    fully_retained_ledger=facts['fully_retained_ledger'],live_handles=None))
+print(json.dumps(ref),flush=True)
+print(json.dumps(heads,sort_keys=True),flush=True)

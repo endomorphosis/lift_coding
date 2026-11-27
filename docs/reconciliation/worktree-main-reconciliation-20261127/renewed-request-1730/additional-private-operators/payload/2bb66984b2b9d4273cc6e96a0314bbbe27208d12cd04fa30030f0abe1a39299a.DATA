@@ -1,0 +1,103 @@
+"""Select the existing R2 composed234 control, retaining its admitted process and terminal."""
+import ast,hashlib,json,os,stat,subprocess,sys,time
+from pathlib import Path
+work=Path(__file__).resolve().parent
+base=work
+helper=Path('/tmp/Root-P2-whole-component-managed-R5-n8Fkdm2q/run-read3.py')
+tree=ast.parse(helper.read_bytes())
+names={'full9','read','val','keep'}
+exec(compile(ast.Module([n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in names or isinstance(n,ast.Assign) and getattr(n.targets[0],'id',None)=='policy'],[]),str(helper),'exec'))
+def pin_args(pin):
+    return [pin['path'],str(pin['bytes']),pin['sha256']]
+def control(*argv):
+    p=subprocess.run(['/usr/bin/python3','-I','-B',*[str(v) for v in argv]],capture_output=True,timeout=90)
+    if p.returncode:
+        print(p.stderr.decode(errors='replace'),flush=True)
+        raise RuntimeError(f'Existing control binding returned {p.returncode}')
+    return json.loads(p.stdout)
+assert __debug__ and len(sys.argv)==8 and sys.argv[-1]=='--run-existing-composed234'
+href=read(sys.argv[1],int(sys.argv[2]),sys.argv[3])[0]
+stager=read(sys.argv[4],int(sys.argv[5]),sys.argv[6])[0]
+h=val(href)
+sref=read(work/'P2-current-composed234-READ3-terminal.json',5247,
+          '72deb9a37074c13de9eee909a49e0473996b325ca9e11660789471b19f9dc026')[0]
+s=val(sref)
+assert s['returncode']==0 and s['Source_closed'] and s['owned_module_closed'] and s['actual_handle'] is None
+assert s['exact_3_snapshot_and_Git_joins_verified'] and s['A_index_SHA_and_full9_preserved']
+fr=val(s['execution_freeze'])
+d,a=s['frozen_roots']
+assert d['Git_HEAD']==fr['Git_HEAD'] and d['Git_tree']==fr['Git_tree']
+n=128*1024**2
+retained_first=read(work/'P2-current-composed234-managed-terminal.json',3571,
+    'f74cd27c17e9487d0ea9423d2ecf971d696540aff6ece344c2bb6a9dcde97f49')[0]
+first=val(retained_first)
+assert first['ordinary234_parent_terminal_returncode']==1 and first['reaped'] and first['actual_handle'] is None
+assert first['Source_closed'] and first['resource_cleanup_confirmed'] and first['parent_home_absent']
+assert first['Source3']==sref and first['qualification_complete'] is False
+first_report=val(first['ordinary_report'])
+phase,=first_report['phases'].values()
+assert phase['operation']=='collect' and 'exact future-bound D owning files required' in phase['actual_results'][0]['result']['stderr']
+previous=first['fully_retained_ledger']
+ledger={**previous,'global_cap':previous['global_cap']+n,'internal_cap':previous['internal_cap']+n}
+paid={**ledger,'used':ledger['used']+n,'internal_used':ledger['internal_used']+n,'captures':ledger['captures']+1}
+assert paid['global_cap']-paid['used']==paid['internal_cap']-paid['internal_used']==6356992
+native_binding=val(read('/tmp/Root-P1-Guide584-generic-Native3-N3iAXWzm/Root-current-existing-generic-Native3-binding.json')[0])
+resource=native_binding['resource']
+state,raw=read(resource['state_path'])
+actual=json.loads(raw)
+assert actual['config']==resource['expected_config'] and actual['child_process_capacity']==resource['expected_capacity']
+cap=keep('P2-current-composed234-Source-full-precharge-retry.json',dict(
+    prior=previous,selected=ledger,after_full_retained_precharge=paid,added_Source_only_envelope=n,
+    previous_closed_READ3=sref,previous_closed_failed_collect=retained_first,authority=val(s['cap'])['standing_authority'],
+    all_prior_failed_attempts_and_Source_costs_retained=True,SDK_profile_capacity_unchanged=True))
+effect=keep('Root-selected-composed234-effect-retry.json',dict(
+    Root_selected=True,ordinary_SDK_execution_selected=True,temporary_workspace_only=True,
+    scope='Current P2 candidate composed234; exact62+159+13',
+    no_actual_DuckDB_SQL_or_Native_Lean_selected=True,no_model_training_or_prover_selected=True,
+    no_legal_or_training_admission=True,no_live_managed_ledger_reconciliation_or_cap_change_selected=True))
+io=keep('Root-selected-composed234-IO-retry.json',dict(
+    Root_selected=True,Source_envelope_bytes=n,admitted=True,all_prior_failed_attempts_and_Source_costs_retained=True,
+    ledger_before=ledger,original_limits_and_guards_unchanged=True,physical_IO_accounting_complete=False,cap_reference=cap))
+stage_dir=Path(stager['path']).parent/'Root-composed234-late-selected-retry'
+out=stage_dir/'actual-output'
+assert not stage_dir.exists()
+now=time.time_ns()
+end=now+840*10**9
+selection=keep('Root-selected-existing-composed234-retry.json',dict(
+    schema='Root-selected-existing-Phase1-Phase2-composed234/v1',Root_selected=True,Source_READ_binding=h['read'],
+    IO_reference=io,effect_reference=effect,Source_envelope_bytes=n,case_hint=234,
+    actual_COLLECT_supplies_order=True,frozen_D_HEAD=d['Git_HEAD'],frozen_D_tree=d['Git_tree'],
+    launch_not_before_utc_ns=now,launch_deadline_utc_ns=end,ledger_before=ledger,output_namespace=str(out),
+    actual_nonclock_handoff=href,resource_preadmission_readback=state))
+late=keep('Root-selected-existing-composed234-late-binding-retry.json',dict(selection=selection,effect=effect,io=io,state=state))
+try:
+    staged=control(stager['path'],'stage',*pin_args(href),*pin_args(late),stage_dir)
+except RuntimeError as e:
+    blocked=keep('P2-current-composed234-late-preeffect-refusal-retry.json',dict(
+        error=str(e),selection=selection,cap=cap,fully_retained_ledger=paid,actual_dispatched=False))
+    print(json.dumps(blocked),flush=True)
+    raise
+bound=val(staged)
+assert bound['actual_launch_or_SDK_or_Source_dispatch'] is False and bound['output_namespace']==str(out)
+assert bound['selection']==selection and bound['source_read']==h['read']
+assert bound['run_argv']==['/usr/bin/python3','-I','-B',bound['operator']['path'],*pin_args(h['read'])]
+read(*[bound['operator'][k] for k in ('path','bytes','sha256')])
+assert now<=time.time_ns()<end
+with (base/'composed234-retry.stdout').open('xb') as so,(base/'composed234-retry.stderr').open('xb') as se:
+    child=subprocess.Popen(bound['run_argv'],stdout=so,stderr=se)
+    live=keep('P2-current-composed234-managed-dispatched-retry.json',dict(owner='Root',pid=child.pid,selection=selection,operator=bound['operator'],
+        bootstrap=bound['bootstrap'],actual_Source3=sref,precharge=cap,output_namespace=str(out),bound=staged))
+    print(json.dumps(live),flush=True)
+    rc=child.wait()
+full=out/'complete-frozen-local-D-phase1-phase2-current-composed-ordinary234-existing-owner-report.json'
+term=dict(owner='Root',ordinary234_parent_terminal_returncode=rc,reaped=True,actual_handle=None,selected_dispatch=live,
+          cap=cap,fully_retained_ledger=paid,Source3=sref,freeze=s['execution_freeze'],qualification_complete=False,
+          stderr=read(base/'composed234-retry.stderr')[0],stdout=read(base/'composed234-retry.stdout')[0])
+if full.is_file():
+    report_pin,raw=read(full)
+    report=json.loads(raw)
+    term.update(ordinary_report=report_pin,parent_home_absent=not (out/'parent-home').exists())
+    term.update({key:report[key] for key in ('qualification_complete','Source_closed','resource_cleanup_confirmed','errors')})
+terminal=keep('P2-current-composed234-managed-terminal-retry.json',term)
+print(json.dumps(terminal),flush=True)
+raise SystemExit(rc)

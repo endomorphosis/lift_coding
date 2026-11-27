@@ -1,0 +1,1004 @@
+{
+  "audit_classification": {
+    "alias_duplicates": 2,
+    "already_reachable_exact_files": 8,
+    "candidate_files_reviewed": 53,
+    "decoder_package_inputs": 6,
+    "inert_origin_path_mappings": 45,
+    "marker_flags_in_selected_payloads": 0,
+    "unique_payloads": 43
+  },
+  "comparison": {
+    "additional_historical_accelerate_tip": "e55316f48847b17a8b4041a2da30bcaa0ba6eb90",
+    "additional_historical_datasets_tip": "5bf57f390a12621a40716595fe261c35d2741e12",
+    "latest_submodule_history_exhaustive": false,
+    "reviewed_published_root": "5fd4dc22e50b4a8dac0f9222348f9db77c12cb6b"
+  },
+  "disposition": "Inert archival preparation. The records preserve historical bytes and their observed paths. They convey no maintained integration, execution authority, runtime qualification or scientific outcome.",
+  "excluded_scopes": [
+    "Operational coordinator exchanges and receipts in the three named Root handoff directories, plus the decoder blocked-turn audit.",
+    "All credential recovery material and keys.",
+    "Source4 material and active operation custody records in Root-P1-Guide585-namespaced-Native2-Source4-vydep2ma.",
+    "Full Guide583 documentation preimages and postimages, with published postimages already bound by the Datasets receipt."
+  ],
+  "files": [
+    {
+      "bytes": 42571,
+      "git_blob": "6069a5c77b6c4db1ad80b75a5c58a6484e7afcc4",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795763467123175457",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "48279394",
+            "st_mode": "33024",
+            "st_mtime_ns": "1795763467123175457",
+            "st_nlink": "1",
+            "st_size": "42571",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P2-current-existing-R5-v563-nonclock-bind-MuqubV/stage-verifier-static-check/verify-current-P2-six-output-R5.py"
+        }
+      ],
+      "payload": "payload/06f232e97a49063074bba7fac5decbb62c40bfb6a38d95ee1281d14f55f98a81.DATA",
+      "sha256": "06f232e97a49063074bba7fac5decbb62c40bfb6a38d95ee1281d14f55f98a81"
+    },
+    {
+      "bytes": 5770,
+      "git_blob": "63e6e1cebb716e81e07f2af468dd5b6c70c0d7e9",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795755341245327929",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "38060847",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795755341245327929",
+            "st_nlink": "1",
+            "st_size": "5770",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/exact-v01-to-v02-receipt-and-cap-selector.patch"
+        }
+      ],
+      "payload": "payload/0b4f8559c606649446b146e065ce8d7dd7602d669d6b595c1b3bc334e84f3609.DATA",
+      "sha256": "0b4f8559c606649446b146e065ce8d7dd7602d669d6b595c1b3bc334e84f3609"
+    },
+    {
+      "bytes": 22252,
+      "git_blob": "44b4799a31e9f0870dc16b9a2676f189e37f6e23",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795765905582899147",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "17351611",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795765905582899147",
+            "st_nlink": "1",
+            "st_size": "22252",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-Guide583-existing-Native2-prepared-INERT-iDXkyN/native2-current-controls-v02.py.DATA"
+        }
+      ],
+      "payload": "payload/0bac75b1a97a9e205bf3c04ccf84b467597837f2624302589a35e6479c656716.DATA",
+      "sha256": "0bac75b1a97a9e205bf3c04ccf84b467597837f2624302589a35e6479c656716"
+    },
+    {
+      "bytes": 15504,
+      "git_blob": "5b41172eee72862908967d2171eb144355de16da",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795776637089032724",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "38580445",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795776637089032724",
+            "st_nlink": "1",
+            "st_size": "15504",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/Native2-current234-control-compatibility-private-v01/pure-guard-controls-v01.py.DATA"
+        }
+      ],
+      "payload": "payload/0df5df0975ec05536a2e1e0d88e691fa0aff62ec3d961bb182dda44a7ba1b0ab.DATA",
+      "sha256": "0df5df0975ec05536a2e1e0d88e691fa0aff62ec3d961bb182dda44a7ba1b0ab"
+    },
+    {
+      "bytes": 29046,
+      "git_blob": "8c4c14a23fb16f4476492fdd18a693c86d92abd9",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795776873480045895",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "38580443",
+            "st_mode": "33024",
+            "st_mtime_ns": "1795776693470844823",
+            "st_nlink": "1",
+            "st_size": "29046",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/Native2-current234-control-compatibility-private-v01/select-existing-namespaced-native2.current234-INERT.v03.py.DATA"
+        }
+      ],
+      "payload": "payload/0ea1c37d6ca6a1bc8f88ea8b54b9d682f4e7a1707a3e179dfa7784772a6ffeb9.DATA",
+      "sha256": "0ea1c37d6ca6a1bc8f88ea8b54b9d682f4e7a1707a3e179dfa7784772a6ffeb9"
+    },
+    {
+      "bytes": 45526,
+      "git_blob": "668e18bdfbef081979a613f2407b60404cdcc5b7",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795764120342721886",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "55886854",
+            "st_mode": "33024",
+            "st_mtime_ns": "1795764120342721886",
+            "st_nlink": "1",
+            "st_size": "45526",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P2-current-existing-R5-v563-nonclock-bind-MuqubV/stage-verifier-v04-static-check/verify-current-P2-six-output-R5.py"
+        }
+      ],
+      "payload": "payload/10d32a8d482cc6c28c3c6a157f908ffd4562e38af7e0c77c0a1c940b2ce80c68.DATA",
+      "sha256": "10d32a8d482cc6c28c3c6a157f908ffd4562e38af7e0c77c0a1c940b2ce80c68"
+    },
+    {
+      "bytes": 77021,
+      "git_blob": "7b42811a5534e308db119e533091d2a00f005b63",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795338241878527531",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "579065",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795338241878527531",
+            "st_nlink": "1",
+            "st_size": "77021",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/decoder-training-contracts-draft-v03.schema.json"
+        }
+      ],
+      "payload": "payload/134e5abf22f2581572aac279a1533d85c4d00d06cca13790236b331bcb575e09.DATA",
+      "sha256": "134e5abf22f2581572aac279a1533d85c4d00d06cca13790236b331bcb575e09"
+    },
+    {
+      "bytes": 1793,
+      "git_blob": "956d9dded49a9516b9d43946a272311de0184dbf",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795764487353643374",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72901422",
+            "st_mode": "33024",
+            "st_mtime_ns": "1795764487353643374",
+            "st_nlink": "1",
+            "st_size": "1793",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-existing-guide583-compose-INERT-mXQQ8I/HANDOFF.md.guide583.inverse.patch"
+        }
+      ],
+      "payload": "payload/16afb3d5c64d4a22dc1b12ae9ba72d8a326081863ac285358e11a64a536bd48f.DATA",
+      "sha256": "16afb3d5c64d4a22dc1b12ae9ba72d8a326081863ac285358e11a64a536bd48f"
+    },
+    {
+      "bytes": 12804,
+      "git_blob": "d5003b1f3c4509da529614f7ef93407669b09d3d",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795776873521618299",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "38580450",
+            "st_mode": "33024",
+            "st_mtime_ns": "1795776873521618299",
+            "st_nlink": "1",
+            "st_size": "12804",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/Native2-current234-control-compatibility-private-v01/selector.inverse.diff.xz.DATA"
+        }
+      ],
+      "payload": "payload/19c55a6fb31a3b18111e14bd5f466f4b975bf165b217db704e9e4046054a3f1f.DATA",
+      "sha256": "19c55a6fb31a3b18111e14bd5f466f4b975bf165b217db704e9e4046054a3f1f"
+    },
+    {
+      "bytes": 1299,
+      "git_blob": "1e7643cbbabee53ea55f2150536a8c6d6df765de",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795764487087645816",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72901411",
+            "st_mode": "33024",
+            "st_mtime_ns": "1795764487087645816",
+            "st_nlink": "1",
+            "st_size": "1299",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-existing-guide583-compose-INERT-mXQQ8I/BACKLOG.json.guide583.forward.patch"
+        }
+      ],
+      "payload": "payload/1c90f61fa0df3117711e865955c0c168174e01b488c1584c384c9b51481a98ce.DATA",
+      "sha256": "1c90f61fa0df3117711e865955c0c168174e01b488c1584c384c9b51481a98ce"
+    },
+    {
+      "bytes": 914,
+      "git_blob": "a7b4bd2eb890dffce7caa4b558f8b77b858c29d5",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795764487058409317",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72901408",
+            "st_mode": "33024",
+            "st_mtime_ns": "1795764487058409317",
+            "st_nlink": "1",
+            "st_size": "914",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-existing-guide583-compose-INERT-mXQQ8I/BACKLOG.json.guide583.only-insertion.DATA"
+        }
+      ],
+      "payload": "payload/2bf835cc9c404598c29687747b7070ae54eb3014ee73a4e40a515323a68ba1be.DATA",
+      "sha256": "2bf835cc9c404598c29687747b7070ae54eb3014ee73a4e40a515323a68ba1be"
+    },
+    {
+      "bytes": 15640,
+      "git_blob": "1095be9f9651e5136684016e4d360b949b7b434c",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795776693471049367",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "38580446",
+            "st_mode": "33024",
+            "st_mtime_ns": "1795776693471049367",
+            "st_nlink": "1",
+            "st_size": "15640",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/Native2-current234-control-compatibility-private-v01/pure-guard-controls-v02.py.DATA"
+        }
+      ],
+      "payload": "payload/36239cf4eac39ce8992e47457cc012cb9c3af4d04d4acb16f60830c315968818.DATA",
+      "sha256": "36239cf4eac39ce8992e47457cc012cb9c3af4d04d4acb16f60830c315968818"
+    },
+    {
+      "bytes": 4661,
+      "git_blob": "09d5c422230c69942213f8321b313926dc9613e9",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795764487313533320",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72901417",
+            "st_mode": "33024",
+            "st_mtime_ns": "1795764487313533320",
+            "st_nlink": "1",
+            "st_size": "4661",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-existing-guide583-compose-INERT-mXQQ8I/work_catalog.json.guide583.inverse.patch"
+        }
+      ],
+      "payload": "payload/3e8c642785b4a47a2d074f6c266171154b71dfe1e426297ba48ebab6c5d6f420.DATA",
+      "sha256": "3e8c642785b4a47a2d074f6c266171154b71dfe1e426297ba48ebab6c5d6f420"
+    },
+    {
+      "bytes": 47386,
+      "git_blob": "72eb98c42ab5bbb19628ddf39ff9919d66e37da6",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795766072492601584",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "17351616",
+            "st_mode": "33024",
+            "st_mtime_ns": "1795766072492601584",
+            "st_nlink": "1",
+            "st_size": "47386",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-Guide583-existing-Native2-prepared-INERT-iDXkyN/Root-selected-existing-translated-cache-Native2-operator.py"
+        }
+      ],
+      "payload": "payload/434a64bf01575ced936d1f1d1fc3cdbfca5161e51c24649d52071a7ab4ce4f88.DATA",
+      "sha256": "434a64bf01575ced936d1f1d1fc3cdbfca5161e51c24649d52071a7ab4ce4f88"
+    },
+    {
+      "bytes": 22085,
+      "git_blob": "3d8501abfdebf93477816f4a7f7ba2c3098920b8",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795765877795954514",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "17351610",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795765877795954514",
+            "st_nlink": "1",
+            "st_size": "22085",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-Guide583-existing-Native2-prepared-INERT-iDXkyN/native2-current-controls.py.DATA"
+        }
+      ],
+      "payload": "payload/531d8bb6222e29442ff3132a5662d497126e4e32dc61c759e4ee830864f683a6.DATA",
+      "sha256": "531d8bb6222e29442ff3132a5662d497126e4e32dc61c759e4ee830864f683a6"
+    },
+    {
+      "bytes": 26629,
+      "git_blob": "3337a711cc274115bcaed259a20394a508308399",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795074952557146846",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "525696",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795074952557146846",
+            "st_nlink": "1",
+            "st_size": "26629",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/decoder-training-prior-work-research-v01.md"
+        }
+      ],
+      "payload": "payload/5b9560780c70ab37f8e69dbcaaf33ceb0f1a973f0e1972b137bbb144b1f72e55.DATA",
+      "sha256": "5b9560780c70ab37f8e69dbcaaf33ceb0f1a973f0e1972b137bbb144b1f72e55"
+    },
+    {
+      "bytes": 19395,
+      "git_blob": "9c2973d7b92298860531a5f832c1ec6613887301",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795755341245260328",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "38060846",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795755341245260328",
+            "st_nlink": "1",
+            "st_size": "19395",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/select-existing-namespaced-native2.INERT.v02.py.DATA"
+        }
+      ],
+      "payload": "payload/5b986be98f857bb6e91b95930d6b21da8d64d10434934d7c4cc9742ab8681f99.DATA",
+      "sha256": "5b986be98f857bb6e91b95930d6b21da8d64d10434934d7c4cc9742ab8681f99"
+    },
+    {
+      "bytes": 11301,
+      "git_blob": "dcdfd0a7dec93d7710e5d6f551329af9891561f4",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795776873485045904",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "38580444",
+            "st_mode": "33024",
+            "st_mtime_ns": "1795776693470958231",
+            "st_nlink": "1",
+            "st_size": "11301",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/Native2-current234-control-compatibility-private-v01/verify-retained-namespaced-native2.current234-INERT.v02.py.DATA"
+        }
+      ],
+      "payload": "payload/5f8aa9fee08aa30b8623cf5a134e385273d652419aae369eed299573b1384fdb.DATA",
+      "sha256": "5f8aa9fee08aa30b8623cf5a134e385273d652419aae369eed299573b1384fdb"
+    },
+    {
+      "bytes": 1760,
+      "git_blob": "6934453feb8ae4a04c05cad58b9e3b69e1c8aacf",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795776873526320067",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "38580451",
+            "st_mode": "33024",
+            "st_mtime_ns": "1795776873526320067",
+            "st_nlink": "1",
+            "st_size": "1760",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/Native2-current234-control-compatibility-private-v01/verifier.forward.diff.xz.DATA"
+        }
+      ],
+      "payload": "payload/635a088e2812c20fa21d7a72a9c41dc077aa76ebe2c03f8f1ed9913b7171ca3e.DATA",
+      "sha256": "635a088e2812c20fa21d7a72a9c41dc077aa76ebe2c03f8f1ed9913b7171ca3e"
+    },
+    {
+      "bytes": 9564,
+      "git_blob": "c0fc035655a60b8873fa5bb78955dd2c68b3a531",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795764487394432739",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72901429",
+            "st_mode": "33024",
+            "st_mtime_ns": "1795764487394432739",
+            "st_nlink": "1",
+            "st_size": "9564",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-existing-guide583-compose-INERT-mXQQ8I/guide583-four-insertions.forward.patch"
+        }
+      ],
+      "payload": "payload/680f7fc63434bf0d49a784c75bbe012d1656b7fa54c0863db193702ece047178.DATA",
+      "sha256": "680f7fc63434bf0d49a784c75bbe012d1656b7fa54c0863db193702ece047178"
+    },
+    {
+      "bytes": 13877,
+      "git_blob": "8c0095f0115b6ee4501e55f8fa2facedae256a62",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795764372887454791",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72901355",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795764372887454791",
+            "st_nlink": "1",
+            "st_size": "13877",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-existing-guide583-compose-INERT-mXQQ8I/stage-guide583.py.DATA"
+        }
+      ],
+      "payload": "payload/684349ae2f8739326124c52f670a0c99967d90080dc675683e9b57506db6619b.DATA",
+      "sha256": "684349ae2f8739326124c52f670a0c99967d90080dc675683e9b57506db6619b"
+    },
+    {
+      "bytes": 1299,
+      "git_blob": "a230d8e98f3d1a26e42af0bac442b8dccbc85cbc",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795764487090993519",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72901412",
+            "st_mode": "33024",
+            "st_mtime_ns": "1795764487090993519",
+            "st_nlink": "1",
+            "st_size": "1299",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-existing-guide583-compose-INERT-mXQQ8I/BACKLOG.json.guide583.inverse.patch"
+        }
+      ],
+      "payload": "payload/75a92976d46e72ac0822b17ed6e6903a62fd19a45258763dbef813851b4edf52.DATA",
+      "sha256": "75a92976d46e72ac0822b17ed6e6903a62fd19a45258763dbef813851b4edf52"
+    },
+    {
+      "bytes": 23592,
+      "git_blob": "a379ed384906fd171b095872e3614c29781753da",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795763452930138571",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "48279392",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795763452930138571",
+            "st_nlink": "1",
+            "st_size": "23592",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P2-current-existing-R5-v563-nonclock-bind-MuqubV/materialize-current-P2-existing-R5.py.DATA"
+        }
+      ],
+      "payload": "payload/7b7f11e358347a0f8c806f2d2066ed88ea862b4fdd00bfaa09122a25fbfc6e7b.DATA",
+      "sha256": "7b7f11e358347a0f8c806f2d2066ed88ea862b4fdd00bfaa09122a25fbfc6e7b"
+    },
+    {
+      "bytes": 9529,
+      "git_blob": "08f17c6f947c6f3c0776fda1d31181cbf696c474",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795074974684037327",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "525694",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795074974684037327",
+            "st_nlink": "1",
+            "st_size": "9529",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/decoder-training-prior-work-source-observations-v01.json"
+        }
+      ],
+      "payload": "payload/7cce37c0deb4f0702c9eddaceea573d4586e8fa8f76555ab2fa0134a7ad02790.DATA",
+      "sha256": "7cce37c0deb4f0702c9eddaceea573d4586e8fa8f76555ab2fa0134a7ad02790"
+    },
+    {
+      "bytes": 5646,
+      "git_blob": "7aec5e904dbd80630bd695053c1cce66782ef98a",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795766072467755426",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "17351614",
+            "st_mode": "33024",
+            "st_mtime_ns": "1795766072467755426",
+            "st_nlink": "1",
+            "st_size": "5646",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-Guide583-existing-Native2-prepared-INERT-iDXkyN/existing-translated-cache-current-binder.py.DATA"
+        }
+      ],
+      "payload": "payload/7e4fd2025de40bbdee5db4040a4ddf9d4ed903ea93c0656ec5d8d3c20e7ae152.DATA",
+      "sha256": "7e4fd2025de40bbdee5db4040a4ddf9d4ed903ea93c0656ec5d8d3c20e7ae152"
+    },
+    {
+      "bytes": 17712,
+      "git_blob": "768d1c28e2ad2553670d0d799f1f1b53e1a1fd5e",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795764372855259485",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72901354",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795764372855259485",
+            "st_nlink": "1",
+            "st_size": "17712",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-existing-guide583-compose-INERT-mXQQ8I/derive-controls.py.DATA"
+        }
+      ],
+      "payload": "payload/80c5bca94ac35db19b86b4c03ac71e5f88bd58452cf229d503fc8edb9d12949a.DATA",
+      "sha256": "80c5bca94ac35db19b86b4c03ac71e5f88bd58452cf229d503fc8edb9d12949a"
+    },
+    {
+      "bytes": 880,
+      "git_blob": "2c71ca55432f254145f748cb8cd2101b86cd7d1f",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795764487334526113",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72901418",
+            "st_mode": "33024",
+            "st_mtime_ns": "1795764487334526113",
+            "st_nlink": "1",
+            "st_size": "880",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-existing-guide583-compose-INERT-mXQQ8I/HANDOFF.md.guide583.only-insertion.DATA"
+        },
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795764487367751065",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72901423",
+            "st_mode": "33024",
+            "st_mtime_ns": "1795764487367751065",
+            "st_nlink": "1",
+            "st_size": "880",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-existing-guide583-compose-INERT-mXQQ8I/TRAINING_HISTORY.md.guide583.only-insertion.DATA"
+        },
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795764486940000636",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72901407",
+            "st_mode": "33024",
+            "st_mtime_ns": "1795764486940000636",
+            "st_nlink": "1",
+            "st_size": "880",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-existing-guide583-compose-INERT-mXQQ8I/guide583-shared-Markdown-append.DATA"
+        }
+      ],
+      "payload": "payload/837eeceafe0febde5761b395392ee84e0ab046f12dff3a0430f0ad7e191c4d78.DATA",
+      "sha256": "837eeceafe0febde5761b395392ee84e0ab046f12dff3a0430f0ad7e191c4d78"
+    },
+    {
+      "bytes": 4214,
+      "git_blob": "cbdac7fc4431944f53411d7d2e26d6edc7231cfa",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795764487275769835",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72901413",
+            "st_mode": "33024",
+            "st_mtime_ns": "1795764487275769835",
+            "st_nlink": "1",
+            "st_size": "4214",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-existing-guide583-compose-INERT-mXQQ8I/work_catalog.json.guide583.only-insertion.DATA"
+        }
+      ],
+      "payload": "payload/88bed4de7df095279f31ebcf3de42392ea1b9c13b68372c35224592dcadf54f1.DATA",
+      "sha256": "88bed4de7df095279f31ebcf3de42392ea1b9c13b68372c35224592dcadf54f1"
+    },
+    {
+      "bytes": 4661,
+      "git_blob": "c2a2cce49af3f343bca0bc289e9b22d27e0a6ef3",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795764487308497013",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72901416",
+            "st_mode": "33024",
+            "st_mtime_ns": "1795764487308497013",
+            "st_nlink": "1",
+            "st_size": "4661",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-existing-guide583-compose-INERT-mXQQ8I/work_catalog.json.guide583.forward.patch"
+        }
+      ],
+      "payload": "payload/8af3e802a402c9e0a318f56048ddf13df71c9653346e12f488b978fdfa37f21b.DATA",
+      "sha256": "8af3e802a402c9e0a318f56048ddf13df71c9653346e12f488b978fdfa37f21b"
+    },
+    {
+      "bytes": 1811,
+      "git_blob": "b41b40d3cfb942f0220620305f37d39e18cf42b0",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795764487385938362",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72901427",
+            "st_mode": "33024",
+            "st_mtime_ns": "1795764487385938362",
+            "st_nlink": "1",
+            "st_size": "1811",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-existing-guide583-compose-INERT-mXQQ8I/TRAINING_HISTORY.md.guide583.inverse.patch"
+        }
+      ],
+      "payload": "payload/99b921475ead760dd1c1a5c0978704f38eab6f090b005858e5f44df324973db2.DATA",
+      "sha256": "99b921475ead760dd1c1a5c0978704f38eab6f090b005858e5f44df324973db2"
+    },
+    {
+      "bytes": 18090,
+      "git_blob": "4ab89ae086e4a570cce87b323a8d9cfb0ca98da4",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795764372884244407",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72901353",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795764372884244407",
+            "st_nlink": "1",
+            "st_size": "18090",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-existing-guide583-compose-INERT-mXQQ8I/compose-guide583.py.DATA"
+        }
+      ],
+      "payload": "payload/9da7844c4f48977911adde9fb405f3afab37b0908d90368db925cdd685d6c669.DATA",
+      "sha256": "9da7844c4f48977911adde9fb405f3afab37b0908d90368db925cdd685d6c669"
+    },
+    {
+      "bytes": 12812,
+      "git_blob": "5f31f6538a2899fdf2c598fb6130508526332573",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795776873506782659",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "38580449",
+            "st_mode": "33024",
+            "st_mtime_ns": "1795776873506782659",
+            "st_nlink": "1",
+            "st_size": "12812",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/Native2-current234-control-compatibility-private-v01/selector.forward.diff.xz.DATA"
+        }
+      ],
+      "payload": "payload/aad214108fa6a343d50d6b3c804a149bd9037eba82b43cd58d8fbec469f36e10.DATA",
+      "sha256": "aad214108fa6a343d50d6b3c804a149bd9037eba82b43cd58d8fbec469f36e10"
+    },
+    {
+      "bytes": 24421,
+      "git_blob": "04e8869e6b52203cb8f4b15f08358114c2938a9c",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795764120223063897",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "48279395",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795764120223063897",
+            "st_nlink": "1",
+            "st_size": "24421",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P2-current-existing-R5-v563-nonclock-bind-MuqubV/materialize-current-P2-existing-R5-v04.py.DATA"
+        }
+      ],
+      "payload": "payload/ab42bbde9d08f61d754c40587e08d3c8fd01d5a5dec72316567901718e1e6105.DATA",
+      "sha256": "ab42bbde9d08f61d754c40587e08d3c8fd01d5a5dec72316567901718e1e6105"
+    },
+    {
+      "bytes": 1793,
+      "git_blob": "f1f262dd49a30c1d6ee0bffddf85138c10b888a0",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795764487349915432",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72901421",
+            "st_mode": "33024",
+            "st_mtime_ns": "1795764487349915432",
+            "st_nlink": "1",
+            "st_size": "1793",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-existing-guide583-compose-INERT-mXQQ8I/HANDOFF.md.guide583.forward.patch"
+        }
+      ],
+      "payload": "payload/ae152068d8d166ea0e17b657f15d286b7894c8b833755f82d2baeb6ac77e5244.DATA",
+      "sha256": "ae152068d8d166ea0e17b657f15d286b7894c8b833755f82d2baeb6ac77e5244"
+    },
+    {
+      "bytes": 1768,
+      "git_blob": "d59afcb8cf1e0ed5aa99da4d36f05ef731821c26",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795776873531344747",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "38580452",
+            "st_mode": "33024",
+            "st_mtime_ns": "1795776873531344747",
+            "st_nlink": "1",
+            "st_size": "1768",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/Native2-current234-control-compatibility-private-v01/verifier.inverse.diff.xz.DATA"
+        }
+      ],
+      "payload": "payload/b8bc5ade745400d6c92b7bb1592f2e99eae605abfd5fda4138fdc8d8a2f5379a.DATA",
+      "sha256": "b8bc5ade745400d6c92b7bb1592f2e99eae605abfd5fda4138fdc8d8a2f5379a"
+    },
+    {
+      "bytes": 9564,
+      "git_blob": "cf3232c3937ff79b687916a133cc94554227f5b9",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795764487398269337",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72901430",
+            "st_mode": "33024",
+            "st_mtime_ns": "1795764487398269337",
+            "st_nlink": "1",
+            "st_size": "9564",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-existing-guide583-compose-INERT-mXQQ8I/guide583-four-insertions.inverse.patch"
+        }
+      ],
+      "payload": "payload/c39bfcfa7117f64592d20fb133626b26060dce219f82305b7bca5d34a5ce8fae.DATA",
+      "sha256": "c39bfcfa7117f64592d20fb133626b26060dce219f82305b7bca5d34a5ce8fae"
+    },
+    {
+      "bytes": 8380,
+      "git_blob": "842bf1f73fb4e38d4717d51b8cab03bdec617cca",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795765960851086950",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "17351612",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795765960851086950",
+            "st_nlink": "1",
+            "st_size": "8380",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-Guide583-existing-Native2-prepared-INERT-iDXkyN/derive-verifier.py.DATA"
+        }
+      ],
+      "payload": "payload/c9613a1429520498ba487d660456950d974f79aea8bd28c082b2fad0a8c927b7.DATA",
+      "sha256": "c9613a1429520498ba487d660456950d974f79aea8bd28c082b2fad0a8c927b7"
+    },
+    {
+      "bytes": 67587,
+      "git_blob": "42d209572bf85c17e92b724d3578bd9557ed4176",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795761370511669386",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "525680",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795761370511669386",
+            "st_nlink": "1",
+            "st_size": "67587",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/decoder-training-integration-specification-v01.md"
+        }
+      ],
+      "payload": "payload/d9545137291c7876c6c5a1e308a30429806040248b577eb662e356f95aa512e5.DATA",
+      "sha256": "d9545137291c7876c6c5a1e308a30429806040248b577eb662e356f95aa512e5"
+    },
+    {
+      "bytes": 9189,
+      "git_blob": "e2a8cfae610b3f967e07263fde02453191a2139d",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795337451853862912",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "579048",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795337451853862912",
+            "st_nlink": "1",
+            "st_size": "9189",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/decoder-training-decision-protocol-v02.md"
+        }
+      ],
+      "payload": "payload/db093263714b0e41e06633f4fc1dbe883bb9b531050690178bd557ba2d6b6b52.DATA",
+      "sha256": "db093263714b0e41e06633f4fc1dbe883bb9b531050690178bd557ba2d6b6b52"
+    },
+    {
+      "bytes": 1811,
+      "git_blob": "b4516f8626e94af9a089c46718c6e3078f4d6008",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795764487380955911",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72901426",
+            "st_mode": "33024",
+            "st_mtime_ns": "1795764487380955911",
+            "st_nlink": "1",
+            "st_size": "1811",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-existing-guide583-compose-INERT-mXQQ8I/TRAINING_HISTORY.md.guide583.forward.patch"
+        }
+      ],
+      "payload": "payload/de57a50797c5fde8efce0d6dd84b34116b5fb19a5d78520c332c7295c88cfd1a.DATA",
+      "sha256": "de57a50797c5fde8efce0d6dd84b34116b5fb19a5d78520c332c7295c88cfd1a"
+    },
+    {
+      "bytes": 10541,
+      "git_blob": "fcfba5be0f21e74c5fb46d599bde2b218c487e7b",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795029424108144400",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "525683",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795029424108144400",
+            "st_nlink": "1",
+            "st_size": "10541",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/decoder-training-contracts-draft-v01.schema.json"
+        }
+      ],
+      "payload": "payload/f0053d32463fe79cfe0d8b1d600ea4de11ad11e375eea78498a38837398241ca.DATA",
+      "sha256": "f0053d32463fe79cfe0d8b1d600ea4de11ad11e375eea78498a38837398241ca"
+    },
+    {
+      "bytes": 14095,
+      "git_blob": "4974bdbcd96edcca9ed0d5cdc1b2ef6d67696cdc",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795765960866710849",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "17351613",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795765960866710849",
+            "st_nlink": "1",
+            "st_size": "14095",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-Guide583-existing-Native2-prepared-INERT-iDXkyN/verify-native2-current.py.DATA"
+        }
+      ],
+      "payload": "payload/f425b0c72cb8284d2635fc27f547d05c7c2c57b987c05781c8fbb9a67a85807a.DATA",
+      "sha256": "f425b0c72cb8284d2635fc27f547d05c7c2c57b987c05781c8fbb9a67a85807a"
+    },
+    {
+      "bytes": 10310,
+      "git_blob": "41192ae65a7f2055a20be5e967f654042a7e54c7",
+      "originals": [
+        {
+          "full9_before_and_after": {
+            "st_ctime_ns": "1795764557798577625",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72901540",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795764557798577625",
+            "st_nlink": "1",
+            "st_size": "10310",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/P1-existing-guide583-compose-INERT-mXQQ8I/prepare-combined-guide583-pins.py.DATA"
+        }
+      ],
+      "payload": "payload/fc7c8e9e9900442d0408b411b1299111f5942c8c9df61de8999e4d3050f8a8f5.DATA",
+      "sha256": "fc7c8e9e9900442d0408b411b1299111f5942c8c9df61de8999e4d3050f8a8f5"
+    }
+  ],
+  "schema": "private-authored-draft-recovery/v1",
+  "scope": "Exact authored source, patch, test and documentation artifacts identified in the bounded post-f7f1760a audit. Six older decoder inputs complete the linked planning package.",
+  "source_integrity": "Every original was read through a non-following file descriptor. Exact extent and full9 matched before and after both reads. Original and staged SHA-256 matched the reviewed bytes.",
+  "unique_payload_bytes": 686503
+}

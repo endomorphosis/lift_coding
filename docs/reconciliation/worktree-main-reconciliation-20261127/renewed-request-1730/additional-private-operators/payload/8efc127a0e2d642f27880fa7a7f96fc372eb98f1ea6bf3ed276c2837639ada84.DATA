@@ -1,0 +1,72 @@
+"""Join the existing READ4 closeout and prepare the two ordinary13 epoch arrays."""
+import json
+import os
+from pathlib import Path
+import sys
+import runpy
+
+BASE = Path(__file__).resolve().parent
+BIND = runpy.run_path(str(BASE / 'bind-existing-P1-cache-reload-READ4.py.DATA'))
+read_pin = BIND['read_pin']
+retain = BIND['retain']
+full9 = BIND['full9']
+
+
+def project(handoff_ref, out):
+    handoff = json.loads(read_pin(handoff_ref))
+    assert set(handoff) == {'freeze', 'read_close', 'full_epoch'}
+    freeze = json.loads(read_pin(handoff['freeze']))
+    read = json.loads(read_pin(handoff['read_close']))
+    epoch = json.loads(read_pin(handoff['full_epoch']))
+    assert freeze['local_clean'] is True and freeze['exact_changes_only'] is True and freeze['pushed'] is False
+    assert read['status'] == 'PASS' and read['Source_closed'] is True and read['owned_module_closed'] is True
+    assert read['roots_before'] == read['roots_after'] and read['errors'] == []
+    assert read['SDK_Native_compiler_or_project_execution'] is False
+    roots = {root['root']: root for root in freeze['frozen_roots']}
+    assert set(roots) == set(read['roots_after']) == {str(BASE / 'datasets'), str(BIND['A_COMPANION'])}
+    for path, root in roots.items():
+        observed = read['roots_after'][path]
+        assert (root['Git_HEAD'], root['Git_tree']) == (observed['HEAD'], observed['tree'])
+        assert observed['clean_worktree_and_index'] is True
+    assert len(freeze['committed']) == 2
+    a_index = str(BIND['A_COMPANION'] / '.git/index')
+    d_index = freeze['frozen']['stage0_index']['path']
+    posts = {post['path']: post for post in freeze['committed'].values()}
+    rows = epoch['rows']
+    by_path = {row['path']: row for row in rows}
+    captures = {row['path']: row for row in read['captures']}
+    assert len(rows) == len(by_path) == 1633
+    assert len(captures) == len(read['captures']) == 4 and captures.keys() == {a_index, d_index, *posts}
+    for path, capture in captures.items():
+        assert all(capture[k] == by_path[path][k] for k in ('path', 'bytes', 'sha256', 'full9'))
+    for path, post in posts.items():
+        assert all(post[k] == captures[path][k] for k in ('path', 'bytes', 'sha256', 'full9'))
+    assert all(freeze['frozen']['stage0_index'][k] == captures[d_index][k] for k in ('path', 'bytes', 'sha256', 'full9'))
+    assert captures[a_index]['sha256'] == 'cfb5f870e52cd089eb6d2d26baf646f9f3e4ffd4bf59e36ea28fee05372c1ef5'
+    outer = []
+    for row in rows:
+        path = Path(row['path'])
+        assert full9(path.lstat()) == row['full9']
+        if '.git' in path.parts and str(path) not in {a_index, d_index}:
+            continue
+        assert isinstance(row['sha256'], str) and len(row['sha256']) == 64
+        outer.append({k: row[k] for k in ('path', 'bytes', 'sha256', 'full9')})
+    assert len(outer) == 1624
+    python = [row for row in outer if Path(row['path']).suffix in {'.py', '.pyi'}]
+    assert 0 < len(python) < len(outer)
+    assert out.parent == BASE and not os.path.lexists(out)
+    out.mkdir(mode=0o700)
+    outer_ref = retain(out / 'actual-current-P1-ordinary13-outer-epoch.json', outer)
+    python_ref = retain(out / 'actual-current-P1-ordinary13-Python-epoch.json', python)
+    abi = {'freeze': handoff['freeze'], 'read_close': handoff['read_close'], 'outer': outer_ref, 'python': python_ref}
+    return {
+        'abi': retain(out / 'actual-P1-ordinary13-late-inputs.json', abi),
+        'outer_rows': len(outer), 'Python_rows': len(python), 'READ_captures': len(captures),
+        'ordinary_dispatch': None,
+    }
+
+
+if __name__ == '__main__':
+    assert len(sys.argv) == 5
+    handoff_ref = {'path': sys.argv[1], 'bytes': int(sys.argv[2]), 'sha256': sys.argv[3]}
+    print(json.dumps(project(handoff_ref, Path(sys.argv[4])), sort_keys=True))

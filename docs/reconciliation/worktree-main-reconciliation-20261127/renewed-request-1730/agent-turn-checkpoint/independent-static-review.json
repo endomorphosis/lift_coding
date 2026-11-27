@@ -1,0 +1,18 @@
+{
+  "schema": "independent-agent-turn-merge-static-review/v1",
+  "reviewer": "/root/guide574_source_frontier",
+  "scope": "staged seven paths on current Dmain25bb plus original687",
+  "result": "PASS",
+  "diff_bytes": 38026,
+  "diff_sha256": "04da87d3fe22f11d1c5be339423e646676faf3c8a558598c03f20b1379277838",
+  "checks": [
+    "Guide585 existing lines retained",
+    "existing catalog populations preserved structurally",
+    "five nonconflicted posts byte-identical to687",
+    "public API signatures preserved",
+    "three tested body hashes exactly matched",
+    "95 tests and171subtests, Source read closed",
+    "git diff --cached --check clean"
+  ],
+  "runtime_run_by_reviewer": false
+}

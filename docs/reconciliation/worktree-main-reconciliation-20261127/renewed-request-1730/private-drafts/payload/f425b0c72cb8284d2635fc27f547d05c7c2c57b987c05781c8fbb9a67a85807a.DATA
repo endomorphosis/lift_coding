@@ -1,0 +1,197 @@
+"""Reconcile one actual translated-cache Native2 run against the Guide583 Source1/READ4 and genuine ordinary13."""
+from base64 import b32encode
+from hashlib import sha256
+import json
+from pathlib import Path
+from runpy import run_path
+import stat
+import sys
+
+HERE=Path(__file__).resolve().parent
+CONTROLLER=HERE/'native2-current-controls-v02.py.DATA'
+assert __debug__ and sha256(CONTROLLER.read_bytes()).hexdigest()=='0bac75b1a97a9e205bf3c04ccf84b467597837f2624302589a35e6479c656716'
+ns=run_path(str(CONTROLLER))
+read,load,ref,seal,stamp=(ns[x] for x in ('read','data','ref','seal','stamp'))
+
+def ref_actual(path):
+    first=path.lstat()
+    assert stat.S_ISREG(first.st_mode) and first.st_nlink==1 and first.st_size<=32*1024**2
+    raw=path.read_bytes()
+    assert stamp(first)==stamp(path.lstat()) and len(raw)==first.st_size
+    pin=ref(path,len(raw),sha256(raw).hexdigest())
+    assert read(pin)==raw
+    return pin
+
+def digest(value):
+    return sha256(json.dumps(value,ensure_ascii=False,allow_nan=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+
+assert len(sys.argv)==10
+staged_pin,terminal,full=(ref(*sys.argv[k:k+3]) for k in (1,4,7))
+staged=load(staged_pin)
+assert staged['SDK_or_Native_dispatched'] is False
+selection=load(staged['selection'])
+assert selection['Root_selected'] is True and selection['case_profile']==ns['PROFILE']
+assert selection['input_tuple']==staged['input_tuple']
+inputs=load(staged['input_tuple'])
+assert inputs['guide_publication']==ns['GUIDE'] and inputs['ordinary13']==ns['ORDINARY']
+guide,ordinary,frozen,read4=(load(inputs[k]) for k in ('guide_publication','ordinary13','freeze','read_close'))
+assert guide['terminal_returncode']==ordinary['terminal_returncode']==0
+assert ordinary['actual_ordinary_counts']==dict(tests=13,passed=13,failures=0,errors=0,skipped=0,retained=10,added=3)
+assert ordinary['test_functions']==8 and ordinary['qualification_complete']
+assert read4['Source_closed'] is read4['owned_module_closed'] is True
+assert read4['status']=='PASS' and not read4['errors']
+binding=load(staged['binding'])
+assert binding['Root_selection']==staged['selection']['path'] and binding['native_case_profile']==ns['PROFILE']
+assert binding['Native_enrollment']['Root_selection']==staged['selection']
+assert binding['binder_raw']==staged['binder']
+assert binding['Source_composition_proof']['exact_current_freeze']==inputs['freeze']
+assert binding['Source_composition_proof']['current_prepared_scope']==inputs['read_close']
+assert binding['Source42_current_owner_binding']['current_published_parent']==inputs['guide_publication']
+assert binding['PROJECTS']==frozen['frozen_roots']
+assert ns['named_rows'](binding['Source_epoch'])==ns['named_rows'](inputs['outer_epoch'])
+for role in ('operator','binder'):
+    read(staged[role])
+ACTUAL=Path(staged['output_namespace'])
+assert ACTUAL==Path(selection['output_namespace']) and ACTUAL.parent==ns['LANE']
+assert Path(full['path'])==ACTUAL/'complete-native3-direct-existing-owner-report.json'
+terminal_report=load(terminal)
+assert terminal_report['returncode']==0 and type(terminal_report['pid']) is int and terminal_report['pid']>0
+assert terminal_report.get('report',full)==full
+full_report=load(full)
+assert full_report['selection']==staged['selection']['path']
+assert full_report['Source_closed'] and full_report['resource_cleanup_confirmed'] and full_report['parent_home_cleanup_confirmed']
+contexts=full_report['actual_Source_context_closure']
+assert len(contexts)==2 and {r['root'] for r in contexts}=={r['root'] for r in binding['PROJECTS']}
+assert all(r['entered'] and r['exit_returned'] for r in contexts)
+assert full_report['actual_native_qualification'] and full_report['actual_test_function_entered']
+assert full_report['actual_parent_release_return'] and not full_report['errors']
+assert full_report['source_epoch_sha256']==binding['Source_epoch']['sha256']
+assert full_report['binder_sha256']==staged['binder']['sha256']
+source_before,source_after=(read(full_report[k]) for k in ('source_before','source_after'))
+assert source_before==source_after
+source=json.loads(source_before)
+assert source['all_FDs_closed'] and source['body_read_bytes']==0
+assert source['Git_HEADS']=={r['root']:r['Git_HEAD'] for r in binding['PROJECTS']}
+assert source['current_authorized_post_doc_W_index']==frozen['frozen']['stage0_index']
+assert source['records']==load(binding['Source_epoch'])
+assert set(frozen['committed'])=={ns['TEST']} and frozen['exact_changes_only'] and frozen['local_clean']
+for relative,pin in inputs['raw_captures'].items():
+    raw=read(pin)
+    capture,=(r for r in read4['captures'] if r['relative_path']==relative)
+    assert ns['small'](capture['raw_reference'])==ns['small'](pin)
+    if relative!=ns['INDEX']:
+        assert (len(raw),sha256(raw).hexdigest(),ns['blob'](raw))==ns['POST'][relative]
+assert full_report['test_source_sha256']==frozen['committed'][ns['TEST']]['sha256']==ns['POST'][ns['TEST']][1]
+assert full_report['canonical_module_bindings']['ipfs_datasets_py.logic.backends.kernel.lean']['sha256']==ns['POST'][ns['LEAN']][1]
+assert full_report['canonical_module_bindings']['ipfs_datasets_py.logic.legal_ir.proof_cache']['sha256']==ns['POST'][ns['OWNER']][1]
+generation_ref,prior_ref=ns['GENERATION'],ns['PRIOR_NATIVE']
+prior_native=load(prior_ref)
+
+owning = load(full_report['original_test_report'])
+generation = load(generation_ref)
+wire = owning['controlled_translation']
+assert generation['proof_setup_only'] and not generation['native_Lean_executed']
+assert wire['generated_source'] == generation['generated'] and wire['target_theory'] == generation['target_theory']
+assert wire['generated_source']['theorem_identity']['statement'] == 'True'
+expected = dict(generation['translation'])
+meta = expected.pop('metadata')
+assert expected | meta == wire['request_translation'] == owning['request']['payload']['translation']
+assert digest(wire['generated_source']) == expected['translation_digest']
+submitted = wire['generated_source']['source']
+submitted_digest = digest({'content': submitted})
+assert submitted_digest == wire['generated_source']['source_digest'] == meta['generated_source_digest']
+assert wire['target_theory']['document_id'] == meta['target_theory_document_id']
+assert owning['request']['payload']['source'] == submitted
+assert owning['request']['payload']['legal_proof_context']['dependency_versions']['fictional-translation'] == expected['translation_digest']
+assert owning['request']['obligation_digest'] == owning['receipt']['obligation_digest'] == meta['proof_obligation_digest']
+assert owning['request']['obligation_id'] == owning['receipt']['obligation_id'] == generation['obligation']['obligation_id']
+assert owning['proof_binding']['context'] == owning['request']['payload']['legal_proof_context']
+receipt = owning['bound_outcome']['receipt']
+receipts = [result['receipt'] for result in (owning['profile_discovery_outcome'], owning['bound_outcome'])]
+assert receipt == owning['result']['payload']['kernel_receipt']
+assert digest(owning['request']) == receipt['request_digest'] == owning['receipt']['request_digest']
+assert digest(owning['receipt']) == owning['proof_binding']['receipt_digest']
+assert receipt['translation'] == generation['translation'] and receipt['plane'] == 'native'
+assert receipt['native_identity']['actual_version'] == '4.34.1'
+assert owning['native_Lean_executed'] and owning['fictional_source_fixture_only'] and not owning['compiler_output_mocked']
+assert owning['disk_round_trip_and_exact_reuse_passed'] and owning['cache_source_profile_and_obligation_mismatches_rejected']
+assert owning['actual_cache_native_command_count'] == 3 and full_report['pytest_case_credit'] == owning['pytest_case_credit_claimed_by_helper'] == 0
+assert all(owning[key] == 0 for key in ('native_processes_during_reuse_or_mismatch_checks', 'actual_native_commands_for_version_mutation_controls'))
+assert len(owning['backend_version_mutation_controls']) == 2
+assert all(item['cache_binding_rejected'] and item['native_processes_added'] == 0
+           for item in owning['backend_version_mutation_controls'])
+
+assert full_report['actual_command_counts'] == {'all': 3, 'compiler': 2, 'unclassified': 0, 'version': 1}
+commands, instrumented_inputs, event_refs = [], [], []
+for position, (attempt, process) in enumerate(zip(full_report['native_attempts'], owning['actual_process_results'], strict=True)):
+    event_ref = attempt['durable_actual_event']
+    assert load(event_ref) == {k: v for k, v in attempt.items() if k != 'durable_actual_event'}
+    assert attempt['index'] == position and attempt['SDK_returned_result'] and attempt['result'] == process
+    assert type(process['returncode']) is int and process['returncode'] == 0
+    assert not any(process[key] for key in ('timed_out', 'cancelled', 'unavailable', 'resource_exhausted',
+                                            'output_truncated', 'workspace_limit_exceeded'))
+    life = process['native_lifecycle']
+    assert life['cleanup_confirmed'] and life['leader_reaped'] and life['workspace']['removed'] and process['workspace_cleaned']
+    assert not life['remaining_group_members'] and not life['remaining_tracked_descendants'] and not life['observation_errors']
+    assert life['parent']['pid'] == load(terminal)['pid']
+    argv = attempt['request']['argv']
+    assert argv == process['command'] and argv[0] == receipt['native_identity']['resolved_executable']
+    if position == 0:
+        assert argv[1:] == ['--version'] and not attempt['request']['input_files']
+        assert 'version 4.34.1' in process['stdout']
+    else:
+        assert argv[1:] == ['-s65536', '-j1', '--json', 'Main.lean']
+        raw, = attempt['request']['input_files']
+        assert raw['logical_name'] == 'Main.lean'
+        input_text = read(raw).decode()
+        checked = receipts[position - 1]
+        assert digest({'content': input_text}) == checked['compiled_source_digest'] == generation['instrumented_source_sha256']
+        assert input_text.startswith(submitted) and checked['submitted_source'] == submitted
+        assert checked['source_binding']['source_digest'] == submitted_digest
+        assert checked['source_tree']['files'] == {'Main.lean': submitted_digest}
+        assert checked['accepted'] and checked['expected_proposition_checked'] and checked['expected_proposition'] == 'True'
+        assert checked['axiom_report']['axioms'] == [] and not checked['axiom_report']['contains_sorry_ax']
+        assert checked['axiom_report']['report_text'] in process['stdout']
+        instrumented_inputs.append(raw)
+    commands.append({'argv': argv, 'returncode': process['returncode'], 'workspace_cleaned': True})
+    event_refs.append(event_ref)
+assert read(instrumented_inputs[0]) == read(instrumented_inputs[1])
+
+cache = ACTUAL / 'original-test-temp/native-proof-cache'
+record_path, = (cache / 'records').glob('*.json')
+record_ref, index_ref = ref_actual(record_path), ref_actual(cache / 'index.json')
+record, index = map(load, (record_ref, index_ref))
+cid = owning['cache_record_cid']
+identity = {k: v for k, v in record.items() if k not in ('content_cid', 'content_digest')}
+record_digest = digest(identity)
+assert record['content_digest'] == 'sha256:' + record_digest
+expected_cid = 'b' + b32encode(bytes.fromhex('01551220' + record_digest)).decode().lower().rstrip('=')
+assert record_path.stem == expected_cid == cid == record['content_cid'] == full_report['controlled_translation']['cache_record_cid']
+assert record['artifact'] == generation['proof_fixture'] and record['artifact_digest'] == meta['formal_artifact_digest']
+assert record['theorem_receipts'] == [owning['receipt']] and record['proof_bindings'] == [owning['proof_binding']]
+assert record['proof_bindings'][0]['result']['payload']['kernel_receipt'] == receipt
+assert index['record_cids'] == [cid] and index['profiles'] == {record['profile']: cid}
+assert index['source_digests'][record['source_digest']] == {record['profile']: cid}
+
+cap=selection['full_charge']
+assert binding['Source_IO_allocation']['explicit_ledger_increase_and_charge_reference']==cap
+later=load(cap)
+previous=load(later['previous_charge'])
+cutoff=previous.get('fully_retained_ledger') or previous.get('after_full_retained_precharge') or previous['after_full_precharge']
+assert later['prior']==cutoff and later['added_Source_only_envelope']==ns['ALLOWANCE']
+assert all(v==prior_native['controlled_translation'][k] for k,v in full_report['controlled_translation'].items() if k!='cache_record_cid')
+summary=dict(schema='actual-Guide583-current-translated-proof-cache-Native2-closed/v1',terminal_returncode=0,
+    Source_lease_and_resource_cleanup_closed=True,exact_freeze=inputs['freeze'],exact_READ4=inputs['read_close'],
+    actual_Source1=inputs['source1_terminal'],guide583_publication=inputs['guide_publication'],
+    actual_report=full,original_test_report=full_report['original_test_report'],
+    guarded_software_generation=generation_ref,operator_terminal=terminal,current_ordinary_qualification=inputs['ordinary13'],
+    actual_command_counts=full_report['actual_command_counts'],actual_commands=commands,actual_event_refs=event_refs,
+    prior_native_translated_cache=prior_ref,full_retained_Source_cap=cap,previous_retained_Source_cap=later['previous_charge'],
+    actual_source_before=full_report['source_before'],actual_source_after=full_report['source_after'],
+    instrumented_inputs=instrumented_inputs,actual_cache_record=record_ref,actual_cache_index=index_ref,
+    controlled_translation=full_report['controlled_translation'],lean_version='4.34.1',
+    rejected_artifact_facets=owning['rejected_artifact_facets'],rejected_context_facets=owning['rejected_context_facets'],
+    software_reissued_backend_version_control_count=2,disk_reopen_and_exact_reuse=True,native_processes_during_replay=0,
+    pytest_case_credit=0,public_test_functions_unchanged=True,fictional_typed_True_fixture_only=True,
+    real_statute_review_or_corpus_admission_or_model_training=False,physical_IO_accounting_complete=False)
+print(json.dumps(seal('actual-Guide583-translated-proof-cache-Native2-closed.json',summary),sort_keys=True))

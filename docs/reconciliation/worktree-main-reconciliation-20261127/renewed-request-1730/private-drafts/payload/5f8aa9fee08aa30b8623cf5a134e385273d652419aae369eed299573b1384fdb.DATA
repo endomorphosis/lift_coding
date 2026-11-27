@@ -1,0 +1,181 @@
+"""Read only authenticated retained outputs after the existing operator closes."""
+import ast
+import hashlib
+import json
+import os
+from pathlib import Path
+import stat
+import sys
+
+
+def digest(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def stable(value):
+    return digest(json.dumps(value, ensure_ascii=False, separators=(',', ':'),
+                             sort_keys=True, allow_nan=False).encode('utf-8'))
+
+
+def read(ref, ceiling, *, under=None):
+    path = Path(ref['path'])
+    assert path.is_absolute() and path.resolve() == path
+    if under is not None:
+        assert path.is_relative_to(under) and path != under
+    assert type(ref['bytes']) is int and 0 < ref['bytes'] <= ceiling
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+    with os.fdopen(fd, 'rb') as stream:
+        before = os.fstat(stream.fileno())
+        assert stat.S_ISREG(before.st_mode) and before.st_nlink == 1 and before.st_size == ref['bytes']
+        raw = stream.read(ref['bytes'] + 1)
+        after = os.fstat(stream.fileno())
+        stamp = lambda attrs: (attrs.st_dev,attrs.st_ino,attrs.st_mode,attrs.st_nlink,
+            attrs.st_uid,attrs.st_gid,attrs.st_size,attrs.st_mtime_ns,attrs.st_ctime_ns)
+        assert stamp(before) == stamp(after) == stamp(path.lstat())
+    assert len(raw) == ref['bytes'] and digest(raw) == ref['sha256']
+    return raw
+
+
+def checked(ref, ceiling, **kwargs):
+    return json.loads(read(ref, ceiling, **kwargs))
+
+
+def _verify_retained_core(report_ref, binding_ref, operator_exit_code):
+    assert type(operator_exit_code) is int and operator_exit_code == 0
+    report = checked(report_ref, 16*1024**2)
+    output = Path(report_ref['path']).parent
+    binding = checked(binding_ref, 2*1024**2)
+    assert binding['native_case_profile'] == 'P1-native-namespaced-expected-declaration/v1'
+    assert report['selection'] == binding['Root_selection']
+    assert report['source_epoch_sha256'] == binding['Source_epoch']['sha256']
+    validate_identity(report, binding)
+    assert report['errors'] == []
+    for key in ['actual_native_qualification','Source_closed','Source_entry_observed','resource_cleanup_confirmed',
+                'resource_cleanup_before_parent_home','parent_home_cleanup_confirmed','actual_test_function_entered']:
+        assert report[key] is True
+    assert report['full_Phase1_complete'] is False and report['pytest_case_credit'] == 0
+    assert report['statutory_or_model_or_corpus_admission'] is False
+    roots = {project['root']: project['Git_HEAD'] for project in binding['PROJECTS']}
+    assert len(roots) == 2
+    assert {row['root'] for row in report['actual_Source_context_closure']} == roots.keys()
+    assert all(row['entered'] is True and row['exit_returned'] is True for row in report['actual_Source_context_closure'])
+    for name in ('source_before','source_after'):
+        guard = checked(report[name], 16*1024**2, under=output)
+        assert guard['Git_HEADS'] == roots and guard['all_FDs_closed'] is True and guard['body_read_bytes'] == 0
+        assert len(guard['native_assets']) == 8 and guard['current_authorized_post_doc_W_index'] == binding['W_INDEX']
+        assert guard['namespaces'] == binding['normal_namespaces']
+        assert len(guard['records']) == report['source_epoch_rows']
+    lease = report['actual_parent_lease']
+    assert (lease['cpu_slots'],lease['memory_mb'],lease['child_process_slots']) == (1,8192,1)
+    assert lease['requires_gpu'] is False
+    after = report['resource_after_parent_release']['state']['leases']
+    assert lease['lease_id'] not in after and not any(
+        row.get('parent_lease_id') == lease['lease_id'] for row in after.values())
+    assert not os.path.lexists(output/'parent-home')
+
+    saved = checked(report['original_test_report'], 1024**2, under=output)
+    assert saved['schema'] == 'native-lean-v3-namespaced-declaration-check/v1'
+    assert saved['native_Lean_executed'] is True and saved['statutory_or_source_semantic_admission'] is False
+    attempts = report['native_attempts']
+    assert report['actual_command_counts'] == dict(all=3,version=1,compiler=2,unclassified=0)
+    lean = binding['lean_executable']
+    for index, row in enumerate(attempts):
+        assert row['index'] == index and row['SDK_returned_result'] is True
+        assert checked(row['durable_actual_event'], 1024**2, under=output) == {
+            key:value for key,value in row.items() if key != 'durable_actual_event'}
+        actual = row['result']
+        argv = row['request']['argv']
+        assert argv == actual['command'] and argv[0] == lean
+        assert argv == [lean,'--version'] if index == 0 else argv[-2:] == ['--json','Main.lean']
+        assert type(actual['returncode']) is int and actual['returncode'] == (0,0,1)[index]
+        life = actual['native_lifecycle']
+        assert all(life[k] is True for k in ('cleanup_confirmed','leader_reaped','group_scan_complete','descendant_tracking_complete'))
+        assert life['workspace']['removed'] is True and actual['workspace_cleaned'] is True
+        assert life['remaining_group_members'] == life['remaining_tracked_descendants'] == []
+    version = attempts[0]
+    assert version['request']['input_files'] == []
+    result = version['result']
+    test = read(binding['owning_test_raw'], 256*1024)
+    function, = [node for node in ast.parse(test).body if isinstance(node,ast.FunctionDef)
+        and node.name=='test_lean_native_v3_expected_declaration_distinguishes_namespaced_decoy']
+    source, = [ast.literal_eval(node.value) for node in function.body if isinstance(node,ast.Assign)
+        and len(node.targets)==1 and isinstance(node.targets[0],ast.Name) and node.targets[0].id=='source']
+    assert len(saved['cases']) == len(report['actual_namespaced_cases']) == 2
+    for i,(name,declaration,accepted) in enumerate((('root_positive','wanted',True),
+                                                   ('namespaced_wrong_type','Law.wanted',False)),start=1):
+        row = saved['cases'][i-1]
+        assert row['case'] == name
+        out = row['outcome']
+        receipt = out['receipt']
+        assert receipt['submitted_source'] == source and receipt['expected_proposition'] == 'True'
+        goal = '_ipfs_expected_obligation_' + stable(dict(source=source,declaration=declaration,proposition='True'))
+        assert receipt['expected_obligation_declaration'] == goal and receipt['theorem_name'] == declaration
+        assert receipt['accepted'] is accepted and receipt['expected_proposition_checked'] is accepted
+        assert receipt['native_identity_checked_after_compile'] is True and receipt['approved_axioms'] == []
+        identity = receipt['native_identity']
+        assert identity['observation_kind'] == 'bounded_native_version_probe'
+        assert identity['version_command'] == result['command'] and identity['version_returncode'] == 0
+        assert identity['version_stdout'] == result['stdout'].strip() and identity['version_stderr'] == result['stderr']
+        assert identity['actual_version'] == saved['toolchain_version'] == '4.34.1'
+        attempt = attempts[i]
+        ref, = attempt['request']['input_files']
+        assert ref['logical_name'] == 'Main.lean'
+        raw = read(ref,65536,under=output)
+        expected = (source.rstrip() + "\n\nset_option pp.fullNames true\nset_option autoImplicit false in\n"
+            + f"theorem {goal} : (True) := _root_.{declaration}\n\n#print axioms _root_.{goal}\n")
+        assert raw == expected.encode() and receipt['compiled_source_digest'] == stable(dict(content=expected))
+        assert report['actual_namespaced_cases'][i-1] == dict(
+            case=name,declaration=declaration,compiler_returncode=0 if accepted else 1,
+            expected_obligation_declaration=goal,accepted=accepted,version_event_index=0,
+            compiler_event_index=i,compiler_input_sha256=ref['sha256'])
+        if accepted:
+            assert out['result']['status'] == 'proved' and receipt['axiom_report']['axioms'] == []
+            assert receipt['axiom_report']['declaration'] == goal
+        else:
+            assert out['result']['status'] == 'error' and receipt['axiom_report'] is None
+            assert any('type mismatch' in message.lower() for message in receipt['diagnostics'])
+            assert 'type mismatch' in (attempt['result']['stdout'] + attempt['result']['stderr']).lower()
+    return dict(native_cases=2,compiler_rc=[0,1],version_rc=0,full_Phase1_complete=False,
+        pytest_case_credit=0,cleanup_verified=True,report=report_ref)
+
+
+def validate_identity(report, binding):
+    old_test = '8bca876c855d44df4d48cb909fc6a0e9a007480d61037831536e84a8cc68adf9'
+    old_binder = '6c692f2b88eeaa8a7a1c33825f2df6638d4cd4178f34f5a2e1e0c061d8350650'
+    new_test = '5f4b3c5e6ae4e27676b0b99df368cf8ae32b6ebd5ffce7cfc8f7955435e5a80a'
+    new_binder = '01a15f30132f9d2b90782646f668fb8ac6d423f3f5b4510a5f2920222f88dad3'
+    pair = (binding['owning_test_record']['sha256'], binding['binder_raw']['sha256'])
+    assert pair in ((old_test, old_binder), (new_test, new_binder))
+    assert (report['test_source_sha256'], report['binder_sha256']) == pair
+    return 'v1' if pair == (old_test, old_binder) else 'v2'
+
+
+def verify(report_ref, binding_ref, operator_exit_code):
+    binding = checked(binding_ref, 2*1024**2)
+    current = binding['binder_raw']['sha256'] == '01a15f30132f9d2b90782646f668fb8ac6d423f3f5b4510a5f2920222f88dad3'
+    if current:
+        # Authenticated inert selector library; no main/physical observer is run.
+        selector_ref = {'path': '/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/Native2-current234-control-compatibility-private-v01/select-existing-namespaced-native2.current234-INERT.v03.py.DATA', 'bytes': 29046, 'sha256': '0ea1c37d6ca6a1bc8f88ea8b54b9d682f4e7a1707a3e179dfa7784772a6ffeb9'}
+        library = {'__name__': 'retained_current_native2_guard_library'}
+        exec(compile(read(selector_ref, 128*1024), selector_ref['path'], 'exec'), library)
+        library['CONTRACT'] = library['obj'](library['CONTRACT_REF'])
+        selection = checked(binding['Native_enrollment']['Root_selection'], 1024**2)
+        inputs_ref = selection['actual_root_input_surface']
+        inputs = checked(inputs_ref, 1024**2)
+        state = library['load_v2_receipts'](inputs)
+        library['validate_runtime_binding'](binding, selection, state, inputs_ref)
+        charge = checked(binding['Source_IO_allocation']['explicit_ledger_increase_and_charge_reference'], 1024**2)
+        library['validate_precharge'](charge, state['ledger'], source=False)
+        assert charge['previous_charge'] == state['terminal']['cap']
+        assert charge['added_Source_only_envelope'] == binding['Source_IO_allocation']['debit_bytes']
+        read(charge['exact_human_affirmation'], 65536)
+    result = _verify_retained_core(report_ref, binding_ref, operator_exit_code)
+    result['prerequisite'] = ('actual_managed234_with_kernel159_and_historical99_prefix' if current else 'historical_v1')
+    result['separate_current_ordinary99_run'] = False if current else None
+    return result
+
+
+if __name__ == '__main__':
+    # Caller supplies actual externally authenticated size/digest refs and exit code.
+    result = verify(json.loads(sys.argv[1]),json.loads(sys.argv[2]),int(sys.argv[3]))
+    print(json.dumps(result,sort_keys=True))

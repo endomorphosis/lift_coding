@@ -1,0 +1,62 @@
+from pathlib import Path
+import hashlib
+import importlib.util
+import json
+import os
+import resource
+import signal
+import sys
+import time
+import traceback
+import unittest
+
+ROOT=Path('/tmp/git-renewed-all-work-20261127-17pd2xkd/datasets-integration')
+OUT=ROOT.parent/'current-base-test-result.json'
+os.environ['IPFS_DATASETS_PY_MINIMAL_IMPORTS']='1'
+os.environ['PYTHONDONTWRITEBYTECODE']='1'
+resource.setrlimit(resource.RLIMIT_CPU,(60,60))
+resource.setrlimit(resource.RLIMIT_AS,(512*1024*1024,512*1024*1024))
+os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})
+signal.alarm(60)
+sys.path.insert(0,str(ROOT))
+control=ROOT/'ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_source_lease.py'
+spec=importlib.util.spec_from_file_location('checkpoint_test_source_control',control)
+lease_module=importlib.util.module_from_spec(spec);sys.modules[spec.name]=lease_module
+spec.loader.exec_module(lease_module)
+paths=[ROOT/'ipfs_datasets_py/logic/autoformal/supervisor_loop.py',
+       ROOT/'scripts/ops/legal_ir/run_autoformal_supervisor.py',
+       ROOT/'tests/unit/logic/test_supervisor_agent_turn_recovery.py']
+report={'schema':'legal-ir-agent-turn-observation-checkpoint-local-tests/v1',
+        'Source_READ_closed':False,'workers_started':False,'native_or_model_executed':False,
+        'profile':{'CPU':1,'CPU_seconds':60,'wall_seconds':60,'AS_bytes':512*1024*1024},
+        'errors':[]}
+class Result(unittest.TextTestResult):
+    subtests=0
+    def addSubTest(self,*args,**kwargs):
+        self.subtests+=1
+        return super().addSubTest(*args,**kwargs)
+started=time.monotonic();result=None
+try:
+ with lease_module.source_lease(ROOT,mode='read',timeout_seconds=30) as held:
+  before={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}
+  test_spec=importlib.util.spec_from_file_location('checkpoint_owning_tests',paths[2])
+  test_module=importlib.util.module_from_spec(test_spec);sys.modules[test_spec.name]=test_module
+  test_spec.loader.exec_module(test_module)
+  suite=unittest.defaultTestLoader.loadTestsFromModule(test_module)
+  result=unittest.TextTestRunner(verbosity=1,resultclass=Result).run(suite)
+  after={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}
+  assert before==after,'qualified source changed'
+  report.update(lease=held.to_dict(),source_sha256=after)
+ report['Source_READ_closed']=True
+except BaseException as exc:
+ report['errors'].append({'type':type(exc).__name__,'message':str(exc)})
+ traceback.print_exc()
+if result is not None:
+ report.update(tests=result.testsRun,subtests=result.subtests,failures=len(result.failures),
+               test_errors=len(result.errors),skips=len(result.skipped),
+               details=[{'test':str(t),'traceback':trace} for t,trace in result.failures+result.errors])
+report['seconds']=time.monotonic()-started
+report['passed']=bool(result is not None and result.wasSuccessful() and not report['errors'] and report['Source_READ_closed'])
+with OUT.open('x') as f:json.dump(report,f,sort_keys=True,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
+print(json.dumps(report))
+sys.exit(0 if report['passed'] else 1)

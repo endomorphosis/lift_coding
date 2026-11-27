@@ -1,0 +1,180 @@
+# Existing decoder and four-teacher work: read-only research
+
+Research date: 2026-11-19. This report records source/doc inspection, not new model execution or reproduction of historical results.
+
+## Checkout and evidence scope
+
+Repository: `/home/barberb/lift_coding/external/ipfs_datasets`.
+
+Observed HEAD: `3f1691d59cc0a310750c0b441b51d3528b17eb85`, branch `feat/legal-relational-counted-preservation-20261109`, with 130 tracked dirty paths at the recorded observation. Existing work was preserved. HEAD alone does not identify these working-file bytes.
+
+[Source observations](/tmp/decoder-training-prior-work-source-observations-v01.json) bind 24 relevant file snapshots by byte length and SHA-256. Their per-file stat identities were stable during those reads; this is not an atomic whole-repository snapshot or complete dependency closure.
+
+The user's instruction to research the submodule authorizes these new read-only inspections. Earlier statements that only cached metadata could be read are historical constraints, superseded for this research. No permission to train, import models, install, mutate project files, or run new CI is inferred.
+
+Applicable [AGENTS.md](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/autoformal/AGENTS.md) requires existing numerical/model owners, preserved receipts, and one maintained catalog. The README, current handoff, catalog, ownership docs, code, and selected historical evidence were inspected. Large indexes were filtered for the relevant components rather than loaded wholesale into the report.
+
+## 1. The four widths already have distinct implementations
+
+### spaCy / 8D
+
+- [SpaCyModalDecoder.decode_embedding](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/spacy_modal_codec.py:2087) hashes the linguistic feature stream into a configurable number of bins, default 8; sums contributions; normalizes; and rounds coordinates to six decimals.
+- [_feature_stream](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/spacy_modal_codec.py:2182) includes document length, eligible lemmas, POS/dependency tags, modal cues, and modal-family counts. These are hash buckets with collisions, not eight separately named semantic coordinates.
+- [LinguisticAutoencoder](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_lineages/legacy_v1/linguistic.py:100) preserves separate `historical_blank_en` and `local_en_core_web_sm` backends. The local richer backend refuses fallback. It binds pipeline/package/codec identity into `linguistic:spacy-feature-hash8d:<digest>`.
+- The explicit legacy profile refuses attaching a learned formula head through its constructor. Do not erase that boundary to fit the new plan.
+
+The meaning of this source-defined 8D producer is now identified. Which retained/runtime instance the next experiment selects still needs exact identity and admission.
+
+### GTE-small / 384D
+
+- [autoencoder_embedding_production](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_production.py:26) pins `thenlper/gte-small` revision `17e1f347d17fe144873b1201da91788898c639cd`, dimension 384, mean pooling, L2 normalization, CPU float32, and a 512-token ceiling without truncation.
+- [autoencoder_embedding_runtime](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_runtime.py:298) owns bounded offline native receipt production.
+- [source_embeddings_384.embed_texts](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_384.py:53) reuses verified cached assets and explicitly checks full token count; its inference path can use an available CUDA device, separate from the receipt producer's CPU contract.
+- [artifacts_and_inputs.md](/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/artifacts_and_inputs.md) already specifies verified manifests, source selectors, split identities, exact float32 values, retained rejection dispositions, and the no-mock/no-download rule.
+
+This is a concrete pinned producer contract, not merely a public-model candidate. Local assets and receipts were not replayed in this research.
+
+### Multilingual GTE / 768D
+
+- [gte_multilingual_profile](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/gte_multilingual_profile.py:17) pins model `Alibaba-NLP/gte-multilingual-base` at `9bbca17d9273fd0d03d5725c7a4b0f6b45142062` and code `Alibaba-NLP/new-impl` at `40ced75c3017eb27626c9d4ea981bde21a2662f4`.
+- The declared producer uses 768D, CLS pooling, L2 normalization, CPU float32, eager attention, 8192 tokens, and rejection of overlength inputs. Published file hashes and code identities are already part of asset admission.
+- [source_embeddings_768](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768.py:1) is a separate offline producer. Its module explicitly distinguishes producing source vectors from training a 768D decoder.
+
+Do not substitute a generic `trust_remote_code=True` download recipe for this existing pinned local code/asset contract.
+
+### Leanstral / 4096D
+
+- The older [discovery owner](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_4096.py:21) declares `Leanstral-1.5-119B-A6B-NVFP4.gguf`, content SHA-256 `4668fd2a6d2764de250489852230e96238eb5c0d7495866eb3b9c6c4fac5c7da`, CID `bafkreicgnd6su3jhmtpckbejqurdb2lchdvvydluswdg5m5zy3cpvroh3i`, and a last-pooling/L2/512-token profile.
+- Its `embed_rows` remains explicitly refused pending trusted integration. This is not evidence that every 4096D route is unavailable.
+- A separate [source_embeddings_4096_full_owner.run_full_forward](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_4096_full_owner.py:602) already implements operation-bound CPU native forward ownership. It requires external resource admission and a dedicated cgroup, hashes the held model FD, pins worker/libraries, and distinguishes live results from diagnostic receipts.
+- [source_embeddings_4096_native_owner.run_vocab_probe](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_4096_native_owner.py:187) is tokenizer preflight only, not a forward/weight-load witness.
+
+Select the existing full-forward/native-binding contracts if a later experiment requires real vectors. Do not bypass them through metadata or the shared service. Model tensors were not opened in this research.
+
+## 2. There are already multiple learned-decoder families
+
+### Reviewed pretrained Torch route
+
+The actual canonical file is [autoencoder_training_worker.py](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_worker.py:657), not the Intent IR wire parser.
+
+The current observed worker is 312136 bytes, SHA-256 `f1d6369a6f07bb5d42b4695af9c7a1595a2b68eae217529173a7f0787ce13c0a`. This differs from the earlier held 316963-byte metadata; preserve both source epochs rather than silently rebinding old checkpoints.
+
+- `ReviewedDecoderTrainingJobSpec` binds source/stage/exposure/model/tokenizer/license artifacts, base model and optimizer checkpoints, parent checkpoint, input/split hashes, backend identity, and source pins.
+- `ReviewedMixedDecoderTrainingJobSpec` adds explicit mixed admission.
+- `ReviewedDecoderRuntime` requires caller-owned admission, execution and asset-policy guards plus existing registry and backend methods.
+- [TorchReviewedDecoderBackend](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_worker.py:2706) accepts injected model/optimizer/tokenizer, supports explicit `encoder_decoder` and `causal_lm` architectures, and rejects unsupported device/layout combinations. It does not fetch or admit models.
+- It exposes `identity`, `validate_training_records`, `inspect_checkpoint`, `restore_checkpoint`, `restored_checkpoint_matches`, `snapshot_checkpoint`, `train_batch`, and `generate_batch`.
+- [train_batch](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_worker.py:3174) implements supervised updates with finite-loss/gradient checks, clipping, optimizer progress, and tokenization/conditioning identity checks. This is not a generic RL or embedding-distillation interface.
+
+The [current handoff](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md:6) records explicit Qwen2 prompt/body/EOS matching, recipe/checkpoint separation, fixture state/resume qualification, and an open gate for current-source actual pretrained pair/capacity qualification before separately admitted fitting. Its recorded 93-case result is historical engineering evidence, not a test rerun here or a pretrained-convergence result.
+
+### Retained compact source384 routes
+
+- [source_training_v2](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/source_training_v2.py:267) exposes `train`, `Runtime`, `evaluate`, and `load_checkpoint` for an experimental source384-to-typed-IR route. Baseline and semantic strategies share inherited weights, vocabulary, transform, and batching; semantic selection uses free-running tuning predictions.
+- [structured_source_384](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/structured_source_384.py:195) is a different fixed-schema decoder: a frozen inherited residual projection feeds learned scalar classifiers. Variable schemas, array lengths, and unseen classes are explicit frontiers.
+- These are existing baselines with distinct representational capacity. Do not label them interchangeable with complete variable-structure autoregressive decoding.
+
+The [checkpoint representation study](/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_checkpoint_representations.md) documents a selected trained 384D residual projector and formula conditioning state, with three projection-only endpoints. Its 8D residual branch requires a 384D skip input; it is not the separate spaCy8 representation or a complete 8D compressed code. The selected 32D condition is not a proof embedding. Its full donor loader has a source-pin compatibility refusal that a separate projection-only reader does not override.
+
+## 3. Relevant learning infrastructure already exists
+
+| Proposed new-plan responsibility | Existing implementation to reuse | Important limit |
+|---|---|---|
+| Masked contrastive objective | [alignment_masked_contrastive](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_masked_contrastive.py:103) | Unknown pairs contribute neither objective nor pair-logit gradient; masks alone are not authenticated semantic labels |
+| Reviewed relation handoff | [alignment_relation_mask_handoff](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_relation_mask_handoff.py:145) | Keep actual admission and source/context bindings; do not rebuild mask authority |
+| Private optimizer-step replay | [decoder_gradient_replay.replay_event](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/decoder_gradient_replay.py:244) | Exact combined AdamW replay precedes approximate gradient attribution; diagnostic scope, no extra backward in live training |
+| Mixed replay and retention | [legal_span_mixed_replay](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_mixed_replay.py:372) | Existing balanced earlier/new pools, persistent permutations and Adam state belong to this profile |
+| Trusted proof-feedback updates | [trusted_feedback_trainer](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py:200) | Frozen holdout exclusion, receipt deduplication and held-out ablation precede persistent changes; no prover/model call in this owner |
+| Fresh proof-feedback eligibility | [legal_ir_proof_feedback_replay](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_proof_feedback_replay.py:1552) | Historical verdicts are discarded; require current obligation/policy/toolchain/checker/native evidence |
+| Sparse update transport | [modal_autoencoder_patch_codec](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_patch_codec.py:159) | Typed touched-row/replaced-component postimages, existing state identity; not a generic dense Torch edit format or execution grant |
+| Versioned checkpoints and promotion | [formalization/checkpoints.py](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/checkpoints.py:48) | Domain-separated manifests and lifecycle contracts; weights remain opaque and candidate correctness is separate |
+
+These sources establish existing API/implementation responsibilities, not fresh execution qualification. They do not prove an integrated policy-gradient credit loop or causal mechanistic analysis. Their existing profile-specific contracts should constrain the proposed extensions.
+
+## 4. Prior four-width evidence already states its limitations
+
+[legal-ir-retained-four-width-alignment-20261022.json](/home/barberb/lift_coding/external/ipfs_datasets/docs/autoformalization/evidence/legal-ir-retained-four-width-alignment-20261022.json) records two literal source subsections and eight retained vectors across four lanes. This is a saved alignment inspection:
+
+- 8D: target-aware linguistic feature reconstruction, not formula fidelity.
+- 384D and 768D: selected raw vectors are distinct from historical decoder transforms; the alignment's measurement scope is identity-by-construction, not learned reconstruction. Original producer/cache/closeout evidence for those old observations is missing in this specific retained packet.
+- 4096D: a retained full-forward source-repeatability capture with producer and native closeout evidence reported as retained; not learned reconstruction.
+- Training and evaluation-gold masks are zero. The record explicitly denies source meaning, reviewed statutory fidelity, model convergence, and proof authority.
+
+Do not generalize these missing historical receipts to every producer profile, or transfer the retained 4096D scope into current execution authority. Conversely, do not claim there was no prior actual native vector work.
+
+The representation study separately records a selected spaCy checkpoint with empty vector-weight tables and populated categorical logits, and a selected multilingual source lane without a trained autoencoder checkpoint. Those are selection-specific observations, not repository-wide absence findings.
+
+## 5. Revised implementation order
+
+1. Reuse exact existing producer profiles and source/input receipt validation. Bind the next selected 8D backend and existing GTE/Leanstral profiles; no fresh model-family guessing.
+2. Choose an existing decoder baseline: retained source384 sequence/structured profile versus reviewed pretrained Torch route. Keep complete output capacity and current checkpoint/source compatibility explicit.
+3. Reuse existing masked relation and retrieval machinery for representation objectives rather than creating a parallel trainer.
+4. Start gradient-credit diagnosis with `decoder_gradient_replay` on authorized captured events; establish exact replay before new approximate or causal-attribution methods. Add no backward passes to live training by default.
+5. Keep existing trusted-feedback admission/deduplication and mixed-replay state as boundaries around proposed preference/RL objectives. A proof signal cannot replace legal source correspondence.
+6. Treat sparse patch transport as reusable only within its declared lineage. Dense adapter edits require exact tensor/checkpoint/optimizer compatibility in the reviewed backend, not an assumed sparse-codec conversion.
+7. Map new protocol capabilities onto actual methods; action scoring, interventions, policy credit, and dense reversible edits need explicit supported implementations and conformance evidence before use.
+8. Measure incremental benefit over these actual baselines under equal compute, complete targets, source-grouped splits and retention constraints. Do not restart from a fictional blank training stack.
+
+## Changes made by this research
+
+Only standalone planning/research artifacts under `/tmp` were written. No submodule file, checkpoint, registry, source lease state, model asset, runtime process, CI job, or remote was modified by this research. No training, model/prover execution, or tests were run. Source/doc reads and Git metadata inspection are real new research observations, not Source0 cached-only claims.
+
+## Follow-up: existing distillation and weight-transfer experiments
+
+Further read-only inspection located these exact integration points:
+
+- [decoder_distillation_experiment.run_trial](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/decoder_distillation_experiment.py:414) already supports private development-only same-codec continuation/distillation. `_loss` at line206 computes masked reference-prefix CE plus alpha-weighted KL from detached teacher logits. Teacher/student logits must have identical support. It neither qualifies teachers nor emits production checkpoints; a fresh optimizer is part of its declared trial semantics.
+- [gte_decoder_warm_start.create_warm_start](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/gte_decoder_warm_start.py:350) copies the complete learned384D decoder into a private768-input student and introduces only a768-to384 boundary. Its intermediate384D state is an adapted latent, not a GTE-small vector. `create_fresh_optimizer` starts empty Adam state and transfers no8D/384D moments.
+- [gte_decoder_transfer_replay.export_decoder_transfer_batch](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/gte_decoder_transfer_replay.py:340) preserves original384D/8D donor behavior and emits reference-prefix logits as unqualified preparation. It bypasses new interfaces and does not create768D inputs or complete KD.
+- [source_checkpoint_continuation_numeric_v1.run](/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/source_checkpoint_continuation_numeric_v1.py:21) continues a compatible authenticated saved decoder. Adam starts empty because the saved source-v2 checkpoint lacks optimizer state. Selection uses supplied original validation rows, keeps the parent as initial best, and accepts no test rows.
+
+The existing [decoder-length/distillation guide](/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/decoder_length_distillation.md:17) explicitly distinguishes a single-rule384D donor, fixed-schema sidecars, and factorized768D interfaces. Increasing output cap on the same40-token targets is not long-target learning. It reports a particular768D preparation with zero ready rows and zero optimizer updates; that observation does not prove no other768D experiment exists.
+
+### Existing gradient diagnosis is a useful starting failure, not a new success
+
+The guide's [exact gradient-spike replay section](/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/decoder_length_distillation.md:842) records four historical fits with340 updates each, eight deliberately tail-selected captured events, and exact combined optimizer-step replay followed by separate private token/count gradient reconciliation. The largest recorded preclip norm is7599.256; the token branch dominates, while the projection MSE is frozen and supplies no trainable gradient.
+
+The same documented experiment reports0/48 exact validation paragraphs in every arm, selected epoch0, and no promotion. It explicitly does not prove a recurrent-Jacobian mechanism, monotonic sequence-length instability, fresh heldout improvement, or actual768D training. These are reported historical results, not independently replayed in this research.
+
+This negative result changes the proposed next experiment: diagnose the known transition/spike and shared-condition interactions using the existing captured-event owners before claiming a new universal credit method. A large gradient is a localization observation, not proof that editing the corresponding tensors will improve source-faithful decoding.
+
+### Later historical results supersede the early numerical frontier
+
+The early0/48 result is not the latest result in the same guide. The later [generated-field/cadence study](/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/decoder_length_distillation.md:3361) includes actual numerical fits on8D/384D/768D inputs and substantially better final candidate outputs. Its saved [results.json](/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/reports/evidence/decoder-generated-field-training-r2-20261003/results.json) was directly read in this research:3425258 bytes, SHA-256 `149996bb6ce3b73b96cfc2b5f52eb310bc0d754713875b7e132d2d52d512cb3b`. The associated [manifest.json](/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/reports/evidence/decoder-generated-field-training-r2-20261003/manifest.json) is746329 bytes, SHA-256 `6c9819f5968d430070dc7e3dc1bdb9a5954da6d900857d7fa1c00db6b65bd8b7`.
+
+For width768/seed2718, the saved last-attempt validation summaries report:
+
+| Historical arm | Exact documents /48 | Extra / missing whole rules | Recorded fit seconds | Selected epoch |
+|---|---:|---:|---:|---:|
+| boundary-first-last |42|7 /7|87.174|0|
+| generated-fields |42|7 /7|94.090|0|
+| generated-fields-every2 |41|7 /6|58.957|0|
+
+All three summaries record source-only generation,48 parsed/syntax-valid outputs and EOS48. The every2 arm has one duplicate; the others zero. The saved results contain18 fits; every selected epoch is0. The artifact records `training_executed=true`, but `qualified`, `admitted`, `checkpoint_promoted`, `fresh_holdout`, `source_semantics_verified`, `convergence_proven` and `proof_authority` are false.
+
+These results concern repeatedly exposed authored development paragraphs, not fresh legal gold. The same48 examples recur across width/seed arms; aggregate scores over288 presentations are not288 independent cases. Fixed340 updates and differing auxiliary cadence are not an equal-wall-time convergence comparison. The faster every2 arm changes supervision exposure as well as cost.
+
+The historical zero-ready768 preparation and earlier0/48 fits remain valid within their original selections. They cannot support a claim that no768D training happened later. This saved metadata read is not an independent neural/optimizer reproduction or current-source checkpoint admission.
+
+The revised plan must investigate both learning and selection: strong private final candidates coexist with epoch0 selection because unchanged nonregression gates reject extra whole rules. Do not discard the gate or silently promote candidates; preserve strict acceptance and separately analyze the complete coverage/error/cost frontier.
+
+### Source-head follow-up: stronger candidates and an important lifecycle failure
+
+The [source-head training guide](/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/source_head_training.md:327) records a later matched comparison. Direct inspection of its [saved results](/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/reports/evidence/decoder-source-head-lr-20261003/results.json) confirms2328474 bytes / SHA-256 `1be4ee7a7caac9551d738be3b609664e07325eab02882d823c7719d18f549a0a`. The [manifest](/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/reports/evidence/decoder-source-head-lr-20261003/manifest.json) is545606 bytes / `cb65058088900611c3eb6e599a08a0db32f3fba59643d87368ddaba2b288148d`.
+
+| Final LR10 candidate | Exact /48 | Extra / missing | Selected epoch | Selected exact /48 |
+|---|---:|---:|---:|---:|
+|384D /1729|47|1 /1|0|0|
+|384D /2718|47|1 /1|0|0|
+|768D /1729|46|2 /2|0|0|
+|768D /2718|45|3 /3|52|14|
+
+All final candidate panels above have48 syntax-valid outputs. The selected768D/2718 state instead has17 syntax-valid outputs,19 generated rules and161 missing rules. Thus the all-epoch0 statement belongs to the preceding18-fit generated-field study, not every later run.
+
+The guide reports perfect raw field readouts in the four larger-width candidates but remaining generated `approve`/`examine` substitutions. A readout can therefore contain the correct answer while the recurrent/prefix-conditioned output path fails. That supports investigating the readout-to-generation boundary; it does not prove which contribution causes the substitutions.
+
+For one training-only8D diagnostic,113 distinct transformed vectors had no contradictory-label collision groups. Nearby vectors and limited head capacity/optimization remain issues; the observations do not prove that8D inevitably loses those labels. The standalone probe has9.5625 times the clause exposure of the full decoder at the same update count. Its learning-rate change also changes decoupled AdamW shrinkage, so it is not an isolated gradient-scale intervention.
+
+The saved result records `training_executed=true`, `guardian_succeeded=false`, and `resource_receipt_reconciled_after_guardian_failure=true`; qualification, fresh-holdout, promotion, convergence, semantics and proof flags remain false. The guide describes a numerical child exit0 followed by guardian exit1 during scheduler release. Read-only reconciliation found released disk accounting and no remaining lease, but did not reconstruct continuous coverage or rewrite the failure. Preserve this as a separate readiness gate for any unattended continuation.
+
+This is saved historical metadata inspection, not new neural execution or resource reconciliation. The fair baseline set includes these stronger unpromoted attempts and their failures, rather than stopping at0/48 or42/48.

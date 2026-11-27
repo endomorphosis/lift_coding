@@ -1,0 +1,279 @@
+"""Project tracked content from immutable Git trees into the actual frozen full9 rows."""
+import collections
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import stat
+import subprocess
+import sys
+
+BASE = Path('/tmp/Root-P1-cache-reload-owned-existing-route-wK9s5mUF')
+PREVIOUS = Path("/tmp/Root-result-cache-owned-existing-route-L4Wyme59")
+ROOTS_BY_NAME = {"datasets": BASE / "datasets", "accelerate": PREVIOUS / "accelerate"}
+PREVIOUS_EPOCH = (
+    PREVIOUS / "current-frozen-full9-hash-epoch.json",
+    922486,
+    "d5bebc252d1bf5cca22f4a9d3730c3fae14a5cb8f36d765509987c2b6c1508c8",
+)
+PREVIOUS_READ = (
+    PREVIOUS / "read4-controls/actual-output/actual-D27-observed-D-root-initializer-Source-READ-v01-small-closeout.json",
+    8850,
+    "ee3d2db43d42c04e529b071ad9b927c590b551322b5a6b71400858fdb9361b88",
+)
+HEAD_A = "fae7981fa576817536a3c7aa62c5d28dc417f214"
+HEAD_D_BEFORE = "937ad474d2d8650e3ccee16c10319a9c72d4429a"
+PREVIOUS_D = "72e5160bf588f8c689ecbb11c658acc2bc3c9a97"
+FIELDS = ("st_dev", "st_ino", "st_mode", "st_nlink", "st_uid", "st_gid", "st_size", "st_mtime_ns", "st_ctime_ns")
+ENV = os.environ | {"GIT_NO_LAZY_FETCH": "1", "GIT_OPTIONAL_LOCKS": "0", "GIT_TERMINAL_PROMPT": "0"}
+SHA256 = re.compile("[0-9a-f]{64}")
+
+
+def full9(status):
+    return {name: str(getattr(status, name)) for name in FIELDS}
+
+
+def read_private(ref):
+    path, size, want = ref
+    before = path.lstat()
+    assert stat.S_ISREG(before.st_mode) and before.st_nlink == 1 and before.st_uid == os.getuid()
+    assert before.st_size == size
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+    with os.fdopen(fd, "rb") as stream:
+        assert full9(os.fstat(stream.fileno())) == full9(before)
+        raw = stream.read(size + 1)
+        assert full9(os.fstat(stream.fileno())) == full9(path.lstat()) == full9(before)
+    assert len(raw) == size and hashlib.sha256(raw).hexdigest() == want
+    return json.loads(raw)
+
+
+def git(root, arguments, bound):
+    command = ["/usr/bin/git", "--no-optional-locks", "-C", str(root), *arguments]
+    with subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=ENV) as run:
+        try:
+            raw = run.stdout.read(bound + 1)
+            assert len(raw) <= bound, (root, "Git stdout bound")
+            err = run.stderr.read(4097)
+            assert len(err) <= 4096
+            assert run.wait(timeout=20) == 0 and not err, (root, err)
+        except BaseException:
+            if run.poll() is None:
+                run.kill()
+            raise
+    return raw
+
+
+def git_tree(root, commit, paths, spent):
+    assert re.fullmatch("[0-9a-f]{40}", commit)
+    raw = git(root, ["ls-tree", "-lrz", commit, "--", *sorted(paths)], 768 * 1024)
+    spent["Git_metadata_stdout_bytes"] += len(raw)
+    result = {}
+    for line in raw.split(b"\0"):
+        if not line:
+            continue
+        header, path = line.split(b"\t", 1)
+        mode, kind, blob, size = header.decode().split()
+        assert kind == "blob" and mode in ("100644", "100755")
+        result[path.decode()] = (mode, blob, int(size))
+    return result
+
+
+def immutable_blobs(root, blob_sizes, spent):
+    if not blob_sizes:
+        return {}
+    command = ["/usr/bin/git", "--no-optional-locks", "-C", str(root), "cat-file", "--batch"]
+    hashes = {}
+    with subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=ENV) as run:
+        try:
+            for blob, size in sorted(blob_sizes.items()):
+                run.stdin.write((blob + "\n").encode())
+                run.stdin.flush()
+                header = run.stdout.readline(128)
+                assert header.decode().split() == [blob, "blob", str(size)]
+                raw = run.stdout.read(size + 1)
+                assert len(raw) == size + 1 and raw[-1:] == b"\n"
+                body = raw[:-1]
+                assert hashlib.sha1(f"blob {size}\0".encode() + body).hexdigest() == blob
+                hashes[blob] = hashlib.sha256(body).hexdigest()
+                spent["Git_changed_blob_content_bytes"] += size
+                spent["Git_changed_blob_protocol_bytes"] += len(header) + 1
+            run.stdin.close()
+            err = run.stderr.read(4097)
+            assert len(err) <= 4096
+            assert run.wait(timeout=20) == 0 and not err, (root, err)
+        except BaseException:
+            if run.poll() is None:
+                run.kill()
+            raise
+    return hashes
+
+
+def emit(path, data):
+    raw = (json.dumps(data, sort_keys=True, indent=2) + "\n").encode()
+    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o400)
+    with os.fdopen(fd, "wb") as stream:
+        stream.write(raw)
+        stream.flush()
+        os.fsync(stream.fileno())
+    return {"path": str(path), "bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()}
+
+
+def main():
+    assert len(sys.argv) in (5, 7)
+    handoff_ref = (Path(sys.argv[1]), int(sys.argv[2]), sys.argv[3])
+    handoff = read_private(handoff_ref)
+    assert set(handoff) == {"guard", "roles", "freeze", "write"}
+    refs = {}
+    for key, value in handoff.items():
+        path = Path(value["path"])
+        assert path.is_relative_to(BASE) and path.resolve() == path
+        assert 0 < value["bytes"] <= 8 * 1024 * 1024
+        assert SHA256.fullmatch(value["sha256"])
+        refs[key] = (path, value["bytes"], value["sha256"])
+
+    plan_only = len(sys.argv) == 5 and sys.argv[4] == "--plan"
+    assert plan_only or len(sys.argv) == 7
+    body_cap = 0 if plan_only else int(sys.argv[4])
+    total_cap = None if plan_only else int(sys.argv[5])
+    spent = collections.Counter(
+        private_retained_control_bytes=sum(
+            ref[1] for ref in (handoff_ref, *refs.values(), PREVIOUS_EPOCH, PREVIOUS_READ)
+        )
+    )
+    guard = read_private(refs["guard"])
+    roles = read_private(refs["roles"])
+    frozen = read_private(refs["freeze"])
+    write = read_private(refs["write"])
+    assert frozen["source_closed"] == handoff["write"]
+    assert frozen["local_clean"] is True and frozen["exact_changes_only"] is True and frozen["pushed"] is False
+    assert write["write_complete"] is True and write["Source_closed"] is True and write["module_closed"] is True
+    roots = {Path(row["root"]): row["Git_HEAD"] for row in frozen["frozen_roots"]}
+    assert set(roots) == set(ROOTS_BY_NAME.values())
+    assert roots[ROOTS_BY_NAME["accelerate"]] == HEAD_A
+    assert roots[BASE / "datasets"] == frozen["frozen"]["HEAD"] != HEAD_D_BEFORE
+    current = {root: git_tree(root, head, roles[root.name]["tracked"], spent) for root, head in roots.items()}
+    for root, objects in current.items():
+        assert set(objects) == set(roles[root.name]["tracked"])
+
+    old_read = read_private(PREVIOUS_READ)
+    assert old_read["Source_closed"] is True and old_read["owned_module_closed"] is True
+    assert old_read["status"] == "PASS" and old_read["roots_before"] == old_read["roots_after"]
+    assert len(old_read["captures"]) == 4
+    old_rows = read_private(PREVIOUS_EPOCH)["rows"]
+    stable = {row["path"]: row for row in old_rows}
+    assert len(stable) == len(old_rows) == 1632
+    for actual in old_read["captures"]:
+        assert all(actual[key] == stable[actual["path"]][key] for key in ("bytes", "sha256", "full9"))
+
+    old_by_blob = collections.defaultdict(set)
+    for repo, expected_head in (("accelerate", HEAD_A), ("datasets", PREVIOUS_D)):
+        source = PREVIOUS / repo
+        assert old_read["roots_after"][str(source)]["HEAD"] == expected_head
+        relevant = {}
+        for row in old_rows:
+            leaf = Path(row["path"])
+            if leaf.is_relative_to(source):
+                rel = str(leaf.relative_to(source))
+                if rel in current[ROOTS_BY_NAME[repo]]:
+                    relevant[rel] = row
+        historical = git_tree(source, expected_head, relevant, spent)
+        assert set(historical) == set(relevant)
+        for rel, (_, blob, size) in historical.items():
+            row = relevant[rel]
+            if row["bytes"] == size and type(row.get("sha256")) is str and SHA256.fullmatch(row["sha256"]):
+                old_by_blob[(blob, size)].add(row["sha256"])
+    assert all(len(values) == 1 for values in old_by_blob.values())
+
+    installed = {row["path"]: row for row in write["installed"]}
+    committed_posts = {str(BASE / "datasets" / rel): row for rel, row in frozen["committed"].items()}
+    assert installed.keys() == committed_posts.keys() and len(installed) == 2
+    for path, row in installed.items():
+        assert all(row[field] == committed_posts[path][field] for field in ("path", "bytes", "sha256", "full9"))
+    index = frozen["frozen"]["stage0_index"]
+    branch = frozen["frozen_branch_ref"]
+    assert Path(branch["path"]).is_relative_to(ROOTS_BY_NAME["datasets"] / ".git/refs/heads")
+    rows = []
+    to_read = collections.defaultdict(dict)
+    waiting = []
+    counts = collections.Counter()
+    for before in guard["rows"]:
+        leaf = Path(before["path"])
+        root, = (item for item in roots if leaf.is_relative_to(item))
+        rel = str(leaf.relative_to(root))
+        row = dict(before)
+        if row["path"] in installed:
+            row.update(installed[row["path"]])
+        if row["path"] == index["path"]:
+            row.update(index)
+        status = leaf.lstat()
+        assert stat.S_ISREG(status.st_mode) and status.st_nlink == 1
+        if row["path"] == branch["path"]:
+            row.update(branch)
+        assert (status.st_size, full9(status)) == (row["bytes"], row["full9"]), leaf
+        rows.append(row)
+        if rel.startswith(".git/"):
+            if rel == ".git/index":
+                assert SHA256.fullmatch(row["sha256"])
+                counts["actual_protected_indexes"] += 1
+            elif row.get("sha256"):
+                assert SHA256.fullmatch(row["sha256"])
+                counts["protected_aux_content"] += 1
+            else:
+                row["sha256"] = None
+                counts["protected_aux_metadata_only"] += 1
+            continue
+
+        mode, blob, size = current[root][rel]
+        assert size == row["bytes"]
+        assert (mode == "100755") == bool(status.st_mode & stat.S_IXUSR)
+        if row["path"] in committed_posts:
+            assert blob == committed_posts[row["path"]]["committed_blob"]
+            assert mode == committed_posts[row["path"]]["mode"]
+            assert SHA256.fullmatch(row["sha256"])
+            counts["actual_Source2_posts"] += 1
+        elif (blob, size) in old_by_blob:
+            row["sha256"], = old_by_blob[(blob, size)]
+            counts["reused_same_Git_blob_and_size"] += 1
+        else:
+            to_read[root][blob] = size
+            waiting.append((row, root, blob))
+            counts["new_or_changed_Git_body_paths"] += 1
+
+    assert len(rows) == len({r["path"] for r in rows}) == len(guard["rows"])
+    assert sum(len(items) for items in current.values()) == (
+        counts["actual_Source2_posts"] + counts["reused_same_Git_blob_and_size"] + counts["new_or_changed_Git_body_paths"]
+    )
+    assert counts["actual_protected_indexes"] == 2
+    assert len(rows) == 1633
+    body_bytes = sum(sum(blobs.values()) for blobs in to_read.values())
+    unique_blobs = sum(len(blobs) for blobs in to_read.values())
+    summary = {
+        "counts": dict(counts), "planned_unique_immutable_blob_bytes": body_bytes,
+        "planned_unique_immutable_blobs": unique_blobs, "reads": dict(spent),
+        "working_Source_bodies_read": 0, "physical_Git_IO_complete": False,
+    }
+    if plan_only:
+        print(json.dumps(summary, sort_keys=True))
+        return
+
+    # Keep the externally selected envelope invariant. Account a ceiling before any new body read.
+    assert body_cap >= body_bytes
+    assert total_cap >= sum(spent.values()) + body_bytes + 128 * unique_blobs
+    complements = {root: immutable_blobs(root, blobs, spent) for root, blobs in to_read.items()}
+    for row, root, blob in waiting:
+        row["sha256"] = complements[root][blob]
+    assert sum(spent.values()) <= total_cap
+    summary["reads"] = dict(spent)
+    summary["recorded_total_read_bytes"] = sum(spent.values())
+    summary["selected_read_cap"] = total_cap
+    summary["selected_immutable_body_cap"] = body_cap
+    epoch = Path(sys.argv[6])
+    assert epoch.is_absolute() and epoch.parent.resolve() == epoch.parent
+    assert epoch.is_relative_to(BASE) and not any(epoch.is_relative_to(root) for root in roots)
+    result = emit(epoch, {"rows": rows, "content_projection": summary})
+    print(json.dumps({"epoch": result, **summary}, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()

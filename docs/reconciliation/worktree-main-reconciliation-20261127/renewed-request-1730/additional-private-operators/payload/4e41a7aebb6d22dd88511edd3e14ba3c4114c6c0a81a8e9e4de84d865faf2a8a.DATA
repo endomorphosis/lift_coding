@@ -1,0 +1,48 @@
+"""Bind the existing publisher's closed result and separate ordinary evidence to Guide584."""
+import hashlib
+import json
+import os
+from pathlib import Path
+import sys
+
+BASE=Path(__file__).resolve().parent
+PLAN=Path('/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/READY-P1-Native2-code-only-parent-pins.json')
+def ref(path,body):
+    return dict(path=str(path),bytes=len(body),sha256=hashlib.sha256(body).hexdigest())
+def read(pin):
+    p=Path(pin['path'])
+    raw=p.read_bytes()
+    assert ref(p,raw)=={k:pin[k] for k in ('path','bytes','sha256')}
+    return json.loads(raw)
+source=Path(sys.argv[1])
+raw=source.read_bytes()
+assert (len(raw),hashlib.sha256(raw).hexdigest())==(int(sys.argv[2]),sys.argv[3])
+pub=json.loads(raw)
+plan_raw=PLAN.read_bytes()
+assert (len(plan_raw),hashlib.sha256(plan_raw).hexdigest())==(7557,'200d0795b62b5d8f847b4f5320b7339d6a7cc2831f84d31fb505f40f58dcb09d')
+plan=json.loads(plan_raw)
+assert pub['terminal_returncode']==0 and pub['prior_origin_main']==plan['base_origin_main']
+assert pub['fresh_origin_main']==plan['prepared_origin_main'] and pub['force_used'] is False
+assert not any(pub[k] for k in ('P2_pushed','Source_or_Native_or_tests_rerun','accelerate_changed','documentation_changed'))
+assert pub['actual_Native2']==plan['actual_Native2_qualification']
+native=read(pub['actual_Native2'])
+for k,v in {'exact_local_code_freeze':'exact_freeze','exact_Source1':'actual_Source1','exact_READ4':'exact_READ4'}.items():
+    assert pub[k]==native[v]
+    read(pub[k])
+assert native['terminal_returncode']==0 and native['disk_reopen_and_exact_reuse'] and native['native_processes_during_replay']==0
+for role,hop in zip(plan['planned_normal_ff_order'],pub['normal_fast_forward_steps'],strict=True):
+    step=read(hop)
+    assert step['role']==role and step['returncode']==0 and step['normal_fast_forward'] is True
+    assert step['before']==pub['prior_origin_main'][role] and step['after']==pub['fresh_origin_main'][role]
+ordinary=native['current_ordinary_qualification']
+assert read(ordinary)['actual_ordinary_counts']['passed']==13
+out=BASE/'actual-code-publication-joined-to-Guide584-evidence.json'
+joined={**pub,'actual_existing_publisher_code_receipt':ref(source,raw),
+        'actual_native_qualification_as_published':pub['qualification'],'qualification':ordinary}
+data=(json.dumps(joined,indent=2,sort_keys=True)+'\n').encode()
+with out.open('xb') as f:
+    f.write(data)
+    f.flush()
+    os.fsync(f.fileno())
+assert out.read_bytes()==data
+print(json.dumps(ref(out,data)))

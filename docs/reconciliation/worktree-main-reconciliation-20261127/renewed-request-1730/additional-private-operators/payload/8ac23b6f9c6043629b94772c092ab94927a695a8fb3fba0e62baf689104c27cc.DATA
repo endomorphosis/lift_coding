@@ -1,0 +1,87 @@
+import ast,hashlib,json,os,stat,subprocess,sys,time
+from pathlib import Path
+base=Path(__file__).resolve().parent
+tree=ast.parse(Path('/tmp/Root-P2-whole-component-managed-R5-n8Fkdm2q/run-read3.py').read_bytes())
+body=[s for s in tree.body if isinstance(s,ast.FunctionDef) or (isinstance(s,ast.Assign) and getattr(s.targets[0],'id',None)=='policy')]
+exec(compile(ast.Module(body=body,type_ignores=[]),'existing guarded I/O helpers','exec'))
+predecessor={'path':sys.argv[1],'bytes':int(sys.argv[2]),'sha256':sys.argv[3]}
+ledger=val(predecessor)['fully_retained_ledger']
+publication={'path':'/tmp/result-cache-existing-guide582-compose-QvKKkYWq/combined-publication/READY-guide582-combined-code-and-docs-parent-pins.json','bytes':4423,'sha256':'ae541d6c45efa5e5fdf5bd044699a1488cba96b624e3db80b98a943540b4cece'}
+heads={}
+for name,url in val(publication)['urls'].items():
+    oid,branch=subprocess.check_output(['/usr/bin/git','ls-remote','--exit-code',url,'refs/heads/main'],timeout=25).decode().strip().split()
+    assert branch=='refs/heads/main' and len(oid)==40
+    heads[name]=oid
+assert heads['datasets']=='937ad474d2d8650e3ccee16c10319a9c72d4429a' and heads['accelerate']=='fae7981fa576817536a3c7aa62c5d28dc417f214'
+remote=keep('P1-before-Source2-fresh-origin-heads.json',{'heads':heads,'utc_ns':time.time_ns(),'direct_read_only':True})
+authority,_=read('/tmp/Root-authorized-Source-review-plus64MiB-for-normal51-v01.json',2377,'2e26fec63362aa01e0e1d475398261a13211016446ea1557a207f4a3956d55ea')
+human=val(authority)
+for key in ('human_authorization','immediate_context'):
+    p=human[key]
+    read(p['path'],p['bytes'],p['sha256'])
+n=64*1024**2
+selected={**ledger,'global_cap':ledger['global_cap']+n,'internal_cap':ledger['internal_cap']+n}
+paid={**selected,'used':selected['used']+n,'internal_used':selected['internal_used']+n,'captures':selected['captures']+1}
+assert paid['global_cap']-paid['used']==6356992 and paid['global_cap']-paid['internal_cap']==190591874
+cap=keep('P1-Source2-Source-only-full-precharge.json',{'prior':ledger,'selected':selected,'after_full_precharge':paid,
+          'prior_actual_P2_or_ledger_terminal':predecessor,'added_Source_envelope':n,'standing_authority':authority,
+          'all_prior_costs_retained':True,'runtime_policy_changed':False})
+inert,_=read(base/'P1-two-code-CAS-request-INERT.json',12630,'0c6815897bea8dbdbdb54a0fead61335f9c93bb5a5dec4f6d6352a3bb9ec5a37')
+binder=base/'bind-existing-P1-cache-reload-Source2.py.DATA'
+read(binder,12851,'c1703fd1c418f0c7cb3af802119fd88d69abb8279650c0a3d5a4293fe6e62100')
+now=time.time_ns()
+handoff=keep('P1-Source2-Root-handoff.json',{'Root_selected':True,'unit':'Phase 1 proof-cache reload filename binding',
+    'inert_request':inert,'remote_observation':remote,'full_precharge':cap,'launch_not_before_utc_ns':now,
+    'launch_deadline_utc_ns':now+60*10**9,'fresh_controls_dir':str(base/'source2-controls')})
+env=os.environ|{'GIT_OPTIONAL_LOCKS':'0','GIT_NO_LAZY_FETCH':'1','GIT_TERMINAL_PROMPT':'0'}
+cfg={'core.preloadIndex':'false','index.threads':'1','core.fsmonitor':'false','core.packedGitWindowSize':'1m','core.packedGitLimit':'16m'}
+env['GIT_CONFIG_COUNT']=str(len(cfg))
+for i,(k,v) in enumerate(cfg.items()):env.update({f'GIT_CONFIG_KEY_{i}':k,f'GIT_CONFIG_VALUE_{i}':v})
+p=subprocess.run(['/usr/bin/python3','-I','-B',str(binder),'--ROOT-bound',handoff['path'],str(handoff['bytes']),handoff['sha256']],
+                 capture_output=True,timeout=25,env=env)
+if p.returncode:
+    print(p.stderr.decode(),flush=True)
+    terminal=keep('P1-Source2-preeffect-refusal.json',{'returncode':p.returncode,'precharge':cap,'fully_retained_ledger':paid,
+                                                     'actual_dispatched':False,'stderr':p.stderr.decode()})
+    print(json.dumps(terminal),flush=True)
+    raise SystemExit(p.returncode)
+bound_ref=json.loads(p.stdout)
+bound=val(bound_ref)
+status=Path('/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/Phase1-proof-cache-reload-filename-private-v01-rdtjc1jx/Root-owner-status.json')
+def ack(phase,**actual_fields):
+    _,raw=read(status)
+    state=json.loads(raw)
+    assert state['owner']=='Root'
+    state['phase']=phase
+    state['timestamp_utc_ns']=time.time_ns()
+    state['actual'].update(actual_fields)
+    temp=status.with_name(f'.Root-owner-status-{os.getpid()}')
+    with temp.open('x') as stream:
+        json.dump(state,stream,indent=2,sort_keys=True)
+        stream.write('\n')
+        stream.flush();os.fsync(stream.fileno())
+    os.replace(temp,status)
+argv=['/usr/bin/timeout','--signal=TERM','--kill-after=5s','65s','/usr/bin/taskset','-c',str(min(os.sched_getaffinity(0))),
+      '/usr/bin/prlimit','--as=536870912','--cpu=60','--','/usr/bin/python3','-I','-B',bound['controls']['operator']['path']]
+with (base/'source2.stdout').open('xb') as so,(base/'source2.stderr').open('xb') as se:
+    child=subprocess.Popen(argv,stdout=so,stderr=se,env=env)
+    handle={'pid':child.pid,'selection':bound['controls']['selection'],'request':bound['controls']['request']}
+    ack('guarded_Source2_existing_writer_running',Source_handle=handle,Source_selection=bound['controls']['selection'],precharge=cap)
+    print(json.dumps(handle),flush=True)
+    rc=child.wait()
+result={'returncode':rc,'pid':child.pid,'selection':bound['controls']['selection'],'precharge':cap,'controls':bound['controls'],
+        'stdout':read(base/'source2.stdout')[0],'stderr':read(base/'source2.stderr')[0],'fully_retained_ledger':paid}
+output=Path(bound['output'])/'actual-existing-two-Python-code-CAS-receipt.json'
+if output.exists():
+    write_ref,b=read(output)
+    write=json.loads(b)
+    result['closed_write']=write_ref
+    for key in ('Source_closed','module_closed','write_complete','ledger_after'):
+        result[key]=write[key]
+    result['fully_retained_ledger']={**paid,'captures':max(paid['captures'],write['ledger_after']['captures'])}
+if rc==0:
+    assert all(result[k] for k in ('Source_closed','module_closed','write_complete')) and len(write['installed'])==2
+terminal=keep('source2-terminal.json',result)
+ack('Source2_closed_exact_freeze_pending' if rc==0 else 'Source2_terminal_refusal',Source_handle=None,Source2_terminal=terminal)
+print(json.dumps(terminal),flush=True)
+raise SystemExit(rc)

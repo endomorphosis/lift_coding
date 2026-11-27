@@ -1,0 +1,176 @@
+"""Bounded read-only metadata delta against completed November27 recovery."""
+from concurrent.futures import ThreadPoolExecutor
+from collections import Counter,defaultdict
+from datetime import datetime, timezone
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+import re
+import subprocess
+import time
+
+OUT=Path(__file__).parent
+OLD=Path('/tmp/fresh-git-discovery-20261127-1vX4ddBA')
+RECOVERY=Path('/tmp/git-main-followup-20261127-zYjieLmd')
+BASE=Path('/home/barberb/lift_coding')
+CANONICAL={'lift_coding':BASE,'ipfs_datasets_py':BASE/'external/ipfs_datasets','ipfs_accelerate_py':BASE/'external/ipfs_accelerate','ipfs_kit_py':BASE/'external/ipfs_kit','hallucinate_app':BASE/'hallucinate_app','swissknife':BASE/'swissknife','mcp-plus-plus':BASE/'Mcp-Plus-Plus','jevops':BASE/'JevOps'}
+ENV=dict(os.environ,GIT_OPTIONAL_LOCKS='0',GIT_TERMINAL_PROMPT='0',GIT_NO_LAZY_FETCH='1')
+SKIP={'.git','__pycache__','.cache','node_modules','.venv','venv','.cargo','.rustup','.npm','sessions','archived_sessions','logs','log','models','weights','checkpoints','checkpoint','lift-coding-git-recovery'}
+MAX_DIRS=25000
+MAX_DEPTH=5
+
+def git(prefix,*args,timeout=20):
+    return subprocess.run(['git','-c','core.fsmonitor=false','-c','core.hooksPath=/dev/null','-c','protocol.allow=never',*prefix,*args],capture_output=True,env=ENV,timeout=timeout)
+
+def clean_url(raw):
+    raw=raw.strip()
+    if '://' in raw:
+        from urllib.parse import urlsplit
+        v=urlsplit(raw);return (v.hostname or '')+v.path
+    if re.match(r'[^/@:]+@[^/:]+:',raw):return raw.split('@',1)[1].replace(':','/',1)
+    return raw
+
+def parse_worktrees(raw):
+    records=[];record=None
+    for line in raw.decode('utf-8','replace').splitlines():
+        if line.startswith('worktree '):record={'path':line[9:]};records.append(record)
+        elif record is not None and line:
+            key,_,value=line.partition(' ');record[key]=value or True
+    return records
+
+def inspect_common(item):
+    common,family=item
+    prefix=['--git-dir',common]
+    try:
+        refs=git(prefix,'for-each-ref','--format=%(refname)%00%(objectname)','refs/heads/','refs/remotes/origin/main')
+        work=git(prefix,'worktree','list','--porcelain')
+        parsed=[]
+        for line in refs.stdout.decode('utf-8','replace').splitlines():
+            fields=line.split('\0')
+            if len(fields)==2:parsed.append({'ref':fields[0],'oid':fields[1]})
+        return {'common_dir':common,'family':family,'refs_rc':refs.returncode,'refs':parsed,'refs_error':refs.stderr.decode('utf-8','replace')[:500] if refs.returncode else None,'worktrees_rc':work.returncode,'worktrees':parse_worktrees(work.stdout),'worktrees_error':work.stderr.decode('utf-8','replace')[:500] if work.returncode else None}
+    except subprocess.TimeoutExpired:
+        return {'common_dir':common,'family':family,'error':'bounded20second metadata timeout','refs':[],'worktrees':[]}
+
+def main():
+    started=time.monotonic()
+    raw=json.loads((OLD/'discovery.json').read_text())
+    previous=json.loads((OLD/'recent-associated-metadata.json').read_text())
+    tips=json.loads((OLD/'per-family-tip-metadata.json').read_text())
+    corrected=json.loads(Path('/tmp/git-final-branch-retention-20261127-lmljw4GB/additional-head-classification.json').read_text())
+    closure=json.loads((RECOVERY/'actual-final-main-readback.json').read_text())
+    archive=json.loads((RECOVERY/'actual-final-archive-publication.json').read_text())
+    publication_cutoff=datetime.fromisoformat(closure['verified_utc']).timestamp()
+    # Conservative lower temporal boundary also covers the original05-ish discovery.
+    directory_cutoff=datetime(2026,11,27,5,0,tzinfo=timezone.utc).timestamp()
+    known=defaultdict(set)
+    for family,rows in tips['families'].items():known[family].update(row['oid'] for row in rows)
+    for family,group in corrected['classification'].items():
+        for kind,rows in group.items():
+            if isinstance(rows,list):
+                for row in rows:
+                    if isinstance(row,str) and re.fullmatch('[0-9a-f]{40}',row):known[family].add(row)
+                    elif isinstance(row,dict) and re.fullmatch('[0-9a-f]{40}',str(row.get('oid',''))):known[family].add(row['oid'])
+    for family,oid in corrected['baseline_heads'].items():known[family].add(oid)
+    root_publication_ids={archive['initial_main'],archive['published_main'],closure['main'],*(r['commit'] for r in archive['batches']),*(r['commit'] for r in archive['main_attempts'])}
+    known['lift_coding'].update(root_publication_ids)
+    common_family={row['common_dir']:row['family'] for row in previous['all_related_ref_metadata']}
+    oldcommon=set(common_family)
+    old_physical={row['path'] for row in raw['repositories'] if row.get('valid')}
+    old_registered={(group['common_dir'],row['path']) for group in raw['registered_worktrees'] for row in group['worktrees']}
+    for family,path in CANONICAL.items():
+        p=git(['-C',str(path)],'rev-parse','--path-format=absolute','--git-common-dir')
+        if p.returncode==0:common_family[p.stdout.decode().strip()]=family
+    newer_top=[]
+    top_errors=[]
+    for parent in (Path('/tmp'),Path('/home/barberb')):
+        for ent in os.scandir(parent):
+            try:
+                if ent.is_symlink() or not ent.is_dir(follow_symlinks=False):continue
+                st=ent.stat(follow_symlinks=False)
+                if max(st.st_mtime,st.st_ctime)>=directory_cutoff:
+                    newer_top.append({'path':ent.path,'mtime_ns':st.st_mtime_ns,'ctime_ns':st.st_ctime_ns,'known_physical_git_root':ent.path in old_physical})
+            except OSError as exc:top_errors.append({'path':ent.path,'error':type(exc).__name__})
+    discovered=[];scan_exclusions=[];scanned=0;seen=set();limit=False
+    for top in sorted(newer_top,key=lambda row:row['path']):
+        path=Path(top['path'])
+        if path.name in SKIP or path.name.startswith(('pytest-','systemd-private-','pip-','uv-')) or 'gnupg' in path.name:
+            scan_exclusions.append({'path':str(path),'reason':'explicit runtime/dependency/service/fixture/key-storage namespace'});continue
+        if str(path) in old_physical or str(path) in oldcommon:
+            scan_exclusions.append({'path':str(path),'reason':'known Git root; current refs/registered-worktrees queried separately'});continue
+        stack=[(path,0)]
+        while stack:
+            current,depth=stack.pop()
+            if str(current) in seen:continue
+            seen.add(str(current));scanned+=1
+            if scanned>MAX_DIRS:limit=True;break
+            try:
+                with os.scandir(current) as stream:entries=list(stream)
+            except OSError as exc:
+                scan_exclusions.append({'path':str(current),'reason':type(exc).__name__});continue
+            names={ent.name for ent in entries}
+            if {'HEAD','config','objects'}<=names:
+                discovered.append({'path':str(current),'kind':'bare_or_gitdir'});continue
+            if '.git' in names:
+                marker=current/'.git'
+                if not marker.is_symlink():discovered.append({'path':str(current),'kind':'ordinary_git_root'})
+                continue
+            if depth>=MAX_DEPTH:
+                if any(e.is_dir(follow_symlinks=False) for e in entries):scan_exclusions.append({'path':str(current),'reason':'bounded5directory-level depth boundary'})
+                continue
+            for ent in entries:
+                if not ent.is_dir(follow_symlinks=False):continue
+                child=Path(ent.path)
+                if ent.name in SKIP or ent.name.startswith('pytest-') or 'gnupg' in ent.name:
+                    scan_exclusions.append({'path':str(child),'reason':'explicit runtime/dependency/fixture/key-storage namespace'});continue
+                if str(child) in old_physical or str(child) in oldcommon:
+                    scan_exclusions.append({'path':str(child),'reason':'known Git root handled by metadata query'});continue
+                stack.append((child,depth+1))
+        if limit:break
+    new_markers=[]
+    for row in discovered:
+        prefix=['-C',row['path']] if row['kind']=='ordinary_git_root' else ['--git-dir',row['path']]
+        p=git(prefix,'rev-parse','--path-format=absolute','--git-dir','--git-common-dir','--is-bare-repository')
+        values=p.stdout.decode('utf-8','replace').splitlines()
+        if p.returncode or len(values)!=3:
+            new_markers.append(dict(row,valid=False,rc=p.returncode));continue
+        gitdir,common,bare=values
+        origin=git(['--git-dir',common],'config','--local','--get','remote.origin.url')
+        remote=clean_url(origin.stdout.decode('utf-8','replace'))
+        family=remote.lower().rstrip('/').rsplit('/',1)[-1].removesuffix('.git')
+        head=git(prefix,'rev-parse','--verify','HEAD')
+        st=Path(gitdir).stat()
+        record=dict(row,valid=True,git_dir=gitdir,common_dir=common,bare=bare=='true',origin=remote,family=family,head=head.stdout.decode().strip() or None,gitdir_mtime_ns=st.st_mtime_ns,gitdir_ctime_ns=st.st_ctime_ns)
+        if family in CANONICAL:
+            common_family[common]=family
+        new_markers.append(record)
+    with ThreadPoolExecutor(max_workers=12) as pool:
+        results=list(pool.map(inspect_common,sorted(common_family.items())))
+    new_oids=defaultdict(list);new_paths=[];counts=Counter()
+    for group in results:
+        family=group['family'];common=group['common_dir']
+        for row in group['refs']:
+            counts['ref_rows']+=1
+            if row['oid'] not in known[family]:new_oids[(family,row['oid'])].append({'common_dir':common,'ref':row['ref']})
+        for row in group['worktrees']:
+            counts['registered_rows']+=1
+            if row.get('HEAD') and row['HEAD'] not in known[family]:new_oids[(family,row['HEAD'])].append({'common_dir':common,'worktree':row['path'],'kind':'registered_HEAD','prunable':row.get('prunable')})
+            if (common,row['path']) not in old_registered:
+                new_paths.append(dict(row,family=family,common_dir=common,exists=Path(row['path']).exists(),gitdir_only_entry=row['path']==common))
+    candidates=[]
+    for (family,oid),sightings in sorted(new_oids.items()):
+        metadata=None
+        for sighting in sightings:
+            p=git(['--git-dir',sighting['common_dir']],'show','-s','--format=%H%x00%ct%x00%ci%x00%P%x00%s',oid)
+            if p.returncode==0:
+                values=p.stdout.decode('utf-8','replace').rstrip('\n').split('\0')
+                if len(values)==5:
+                    metadata={'oid':values[0],'committer_timestamp':int(values[1]),'committer_date':values[2],'parents':values[3].split(),'subject':values[4],'committed_after_recovery_cutoff':int(values[1])>publication_cutoff}
+                    break
+        candidates.append({'family':family,'oid':oid,'sightings':sightings,'commit_metadata':metadata,'already_observed_root_remote_by_parent':family=='lift_coding' and oid=='5fd4dc22e50b4a8dac0f9222348f9db77c12cb6b'})
+    report={'schema':'renewed-git-metadata-delta/v1','observed_utc':datetime.now(timezone.utc).isoformat(),'read_only':True,'source_bodies_read':False,'network':False,'git_mutations':False,'keys_inspected':False,'completed_recovery_cutoff':closure['verified_utc'],'completed_recovery_main':closure['main'],'completed_archive_merge':archive['published_main'],'existing_recovery_accounting':{'primary_pairs':10087,'other_nested_pairs':73,'owned_total':closure['all_observed_owned_repository_commit_pairs_accounted'],'permission_denied_paths':closure['remaining_permission_denied_paths']},'prior_evidence':{'actual_archive_publication':str(RECOVERY/'actual-final-archive-publication.json'),'actual_main_readback':str(RECOVERY/'actual-final-main-readback.json'),'final_report':str(RECOVERY/'publication/docs/reconciliation/worktree-main-reconciliation-20261127/followup-complete-scan/FINAL-REPORT.json'),'per_family_tip_packet':str(OLD/'per-family-tip-metadata.json'),'corrected_heads':'/tmp/git-final-branch-retention-20261127-lmljw4GB/additional-head-classification.json','source_restore_123':'/tmp/additional-worktree-source-retention-20261127-ofnpftDm/restore-v02.json'},'known_common_dirs_queried':len(results),'newer_top_level_directory_cutoff':'2026-11-27T05:00:00+00:00','newer_top_level_directories':newer_top,'bounded_marker_scan':{'max_directories':MAX_DIRS,'max_depth':MAX_DEPTH,'directories_scanned':scanned,'limit_reached':limit,'exclusions':scan_exclusions,'top_errors':top_errors,'discovered_markers':new_markers},'new_common_dirs':[{'common_dir':c,'family':f} for c,f in sorted(common_family.items()) if c not in oldcommon],'new_registered_worktree_paths':new_paths,'new_oid_candidates':candidates,'current_family_git_metadata':results,'counts':dict(counts),'limitations':['Local refs do not prove current GitHub remote state. No fetch or network lookup was performed.','Newly observed refs/OIDs are compared with completed recovery metadata; they may already be published or be older recoverable history.','New top-level directory timestamps are conservative metadata leads, not proof of authorship.','Only bounded markers in newer top-level directories and all known associated common dirs were inspected; no new uncontrolled full-depth source scan.','New unregistered Git roots deeply inside old unchanged parent directories can remain outside this delta scope.','Working-copy contents and staged-only versions require a separate owner comparison if new paths or source changes are selected.','Prior176permission-denied and other source/fixture/provenance exclusions remain intact.'],'elapsed_seconds':round(time.monotonic()-started,3)}
+    p=OUT/'metadata-delta.json';b=(json.dumps(report,indent=2,sort_keys=True)+'\n').encode();p.write_bytes(b)
+    print(json.dumps({'report':str(p),'bytes':len(b),'sha256':sha256(b).hexdigest(),'common_dirs':len(results),'top_level_newer_directories':len(newer_top),'bounded_directories_scanned':scanned,'marker_scan_limit':limit,'new_marker_count':len(new_markers),'new_primary_common_dirs':report['new_common_dirs'],'new_registered_path_count':len(new_paths),'new_oid_candidate_count':len(candidates),'new_oids':[{k:row[k] for k in ('family','oid','commit_metadata','already_observed_root_remote_by_parent')} for row in candidates],'metadata_errors':sum(bool(r.get('error')) or r.get('refs_rc',0)!=0 or r.get('worktrees_rc',0)!=0 for r in results),'elapsed_seconds':report['elapsed_seconds']},indent=2),flush=True)
+
+if __name__=='__main__':main()

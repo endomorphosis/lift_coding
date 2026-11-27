@@ -1,0 +1,244 @@
+"""Prepare a late-bound private READ3 operator without launching it or enrolling a Source lease."""
+import ast
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+from runpy import run_path
+import stat
+import sys
+import time
+
+PREVIOUS=Path('/tmp/Root-result-cache-READ4-existing-INERT-M38BJTO0/bind-existing-result-cache-READ4.py.DATA')
+PREVIOUS_SHA='dd1c5cac7c47ebe5cca2302d4b3e1188a380dacf9f8d01efca769df0a7d2c164'
+ORIGINAL={'path':'/tmp/Root-result-cache-owned-existing-route-L4Wyme59/read4-controls/Root-selected-existing-result-cache-READ4-entry.py',
+          'bytes':23776,'sha256':'7ff056f593c20c3fa016d692cf3153bfa78bbc4d106fe6899693eb0c39985af7'}
+COORD=Path('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V4-checked-whole-project-private-yI1zwigi')
+FREEZE={'path':str(COORD/'normal-current/actual-current-local-Source-whole-component-nine-qualified-frozen.json'),
+        'bytes':3978,'sha256':'e35ef752ba725f8457b8d44e229838f3b33f477e41402c9743d3704d1c3aed3b'}
+PROPOSAL={'path':str(COORD/'SEALED-private-P2-V4-whole-project-exact-two-source-proposal-v03.json'),
+          'bytes':16114,'sha256':'cd67c7b31ed9bd9bcb0942e17e197b891acdbeb83f99effa26e1ac219ea95655'}
+GUIDE={'path':'/tmp/result-cache-existing-guide582-compose-QvKKkYWq/actual-Guide582-four-docs-Source-closed-and-frozen.json',
+       'bytes':6766,'sha256':'b71ff867f370f90b9a327186e76c0f503f429706eab3ecfb3ff8c0b4889465a4'}
+A=Path('/tmp/Root-result-cache-owned-existing-route-L4Wyme59/accelerate')
+ORIGINAL_D=COORD/'normal-current/checkout'
+D_HEAD='d2ddb5fc873c38370268975f4e76a80ff427c87c'
+D_TREE='7f668c3ebb11734d725565401f459111c58df9f6'
+D_PARENT='937ad474d2d8650e3ccee16c10319a9c72d4429a'
+A_HEAD='fae7981fa576817536a3c7aa62c5d28dc417f214'
+A_TREE='70e66c5b1f5d2438eab0b18e45687b98613f5416'
+POSTS=('ipfs_datasets_py/logic/autoformal/legal_release_coordinator_v1.py',
+       'tests/unit/logic/autoformal/test_legal_corpus_definition_use_native_v2.py')
+F9=('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
+INDEX='.git/index'
+ENVELOPE=64*1024*1024
+assert __debug__ and hashlib.sha256(PREVIOUS.read_bytes()).hexdigest()==PREVIOUS_SHA
+shared=run_path(str(PREVIOUS))
+full9,read_pin,retain,verify_root=(shared[k] for k in ('full9','read_pin','retain','verify_root'))
+
+def data(pin):
+    return json.loads(read_pin(pin))
+
+def fingerprint_fields(row):
+    fields=row['full9']
+    if type(fields) is list:
+        assert len(fields)==len(F9) and all(type(v) is str for v in fields)
+        fields=dict(zip(F9,fields))
+    assert type(fields) is dict and set(fields)==set(F9) and all(type(v) is str for v in fields.values())
+    return {'path':row['path'],'bytes':row['bytes'],'sha256':row['sha256'],'full9':fields}
+
+def verify_fingerprint(row):
+    path=Path(row['path'])
+    assert path.is_absolute()
+    state=path.lstat()
+    assert stat.S_ISREG(state.st_mode) and state.st_nlink==1 and state.st_uid==os.getuid()
+    assert state.st_size==row['bytes'] and full9(state)==row['full9']
+
+def execution_root(handoff,original):
+    ref=handoff.get('execution_freeze')
+    if ref is None:
+        return ORIGINAL_D,fingerprint_fields(original['index'])
+    freeze=data(ref)
+    assert freeze['original_cooperative_freeze']==FREEZE and freeze['local_clean'] is True
+    assert (freeze['Git_HEAD'],freeze['Git_tree'])==(D_HEAD,D_TREE)
+    root=Path(freeze['root'])
+    assert root.is_absolute() and root.resolve()==root and root.is_dir()
+    assert root not in (A,ORIGINAL_D) and root.stat().st_uid==os.getuid()
+    assert not root.is_relative_to(A) and not root.is_relative_to(ORIGINAL_D)
+    index=fingerprint_fields(freeze['index'])
+    assert index['path']==str(root/INDEX)
+    return root,index
+
+def check_bindings(handoff):
+    assert handoff['Root_selected'] is True and handoff['local_freeze']==FREEZE
+    assert handoff['proposal']==PROPOSAL and handoff['guide582_frozen']==GUIDE
+    original=data(FREEZE)
+    proposal=data(PROPOSAL)
+    guide=data(GUIDE)
+    assert original['terminal_returncode']==0 and original['local_clean'] and original['all_pins_checked_before_and_after']
+    assert original['cooperative_write_and_read_closed_and_locks_free'] and original['published'] is False
+    assert original['Source42_qualification'] is False and original['SDK_managed'] is False and original['proposal']==PROPOSAL
+    assert original['candidate']=={'isolated_store':str(ORIGINAL_D/'.git'),'oid':D_HEAD,'tree':D_TREE,'parent':D_PARENT}
+    assert guide['terminal_returncode']==0 and guide['Source_closed'] and guide['module_closed']
+    assert guide['write_complete'] and guide['HEAD']==D_PARENT and guide['A']==A_HEAD
+    d,frozen_index=execution_root(handoff,original)
+    roots=[{'root':str(d),'Git_HEAD':D_HEAD,'Git_tree':D_TREE},
+           {'root':str(A),'Git_HEAD':A_HEAD,'Git_tree':A_TREE}]
+    assert handoff['frozen_roots']==roots
+    for root in roots:
+        verify_root(root)
+    guide_index=fingerprint_fields(guide['A_index'])
+    assert frozen_index['path']==str(d/INDEX) and guide_index['path']==str(A/INDEX)
+    assert set(proposal['roles'])==set(POSTS)
+    named=data(handoff['full_epoch'])['rows']
+    rows={row['path']:row for row in named}
+    assert 10<=len(rows)==len(named)
+    for path,row in rows.items():
+        candidate=Path(path)
+        assert any(candidate.is_relative_to(root) for root in (d,A))
+        verify_fingerprint(row)
+        sha=row.get('sha256')
+        if sha is None:
+            assert any(candidate.is_relative_to(root/'.git') for root in (d,A)) and candidate.name!='index'
+        else:
+            assert re.fullmatch('[0-9a-f]{64}',sha)
+    assert fingerprint_fields(rows[str(d/INDEX)])==frozen_index
+    assert fingerprint_fields(rows[str(A/INDEX)])==guide_index
+    targets=[]
+    for rel in (INDEX,*POSTS):
+        path=d/rel
+        row=fingerprint_fields(rows[str(path)])
+        git_blob=None
+        if rel!=INDEX:
+            role=proposal['roles'][rel]
+            assert role['mode']=='100644'
+            after=role['after']
+            raw=read_pin(after)
+            assert hashlib.sha1(f'blob {len(raw)}\0'.encode()+raw).hexdigest()==after['git_blob']
+            assert row['bytes']==after['bytes'] and row['sha256']==after['sha256']
+            assert int(row['full9']['st_mode'])&0o111==0
+            git_blob=after['git_blob']
+        assert 0<row['bytes']<=8*1024*1024
+        targets.append({'path':str(path),'root':str(d),'relative_path':rel,'exists':True,
+            'kind':'selected_actual_Git_index' if rel==INDEX else 'P2_V4_current_exact_post',
+            'bytes':row['bytes'],'expected_bytes':row['bytes'],'body_cap':row['bytes'],
+            'expected_sha256':row['sha256'],'expected_git_blob_oid':git_blob,'full9':row['full9']})
+    assert len(targets)==len({row['path'] for row in targets})==3
+    assert sum(t['bytes'] for t in targets)*2+guide_index['bytes']*2+28*1024*1024<ENVELOPE
+    return d,named,targets,{'root':str(A),**guide_index}
+
+def verify_agents(agents,d):
+    assert agents and len(agents)==len({row['path'] for row in agents})
+    for row in agents:
+        path=Path(row['path'])
+        assert path.is_absolute() and type(row['exists']) is bool
+        if row['exists']:
+            assert any(path.is_relative_to(root) for root in (d,A))
+            assert full9(path.lstat())==row['full9']
+            read_pin(row['reuse_captured_raw'])
+        else:
+            assert not os.path.lexists(path)
+
+def verify_cap_and_clock(handoff):
+    cap=data(handoff['cap'])
+    ledger=cap['selected']
+    assert 'capturesComplete' in ledger and type(ledger['captures']) is int
+    assert cap['added_Source_envelope']==ENVELOPE
+    retained=cap['after_full_precharge']
+    for ceiling,used in (('global_cap','used'),('internal_cap','internal_used')):
+        assert type(ledger[ceiling]) is int and type(ledger[used]) is int
+        assert ledger[ceiling]-ledger[used]>=ENVELOPE
+        assert retained[ceiling]==ledger[ceiling] and retained[used]==ledger[used]+ENVELOPE
+    assert retained['captures']>=ledger['captures']+1
+    start,end=(handoff[key] for key in ('launch_not_before_utc_ns','launch_deadline_utc_ns'))
+    assert type(start) is type(end) is int and start<=time.time_ns()<end and 0<end-start<=60*10**9
+    return ledger,start,end
+
+A_GUARD_FUNCTION = '''
+def check_shared_A_index(row):
+    root, path = row['root'], row['path']
+    ip = git(root, 'rev-parse', '--path-format=absolute', '--git-path', 'index').stdout.decode().strip()
+    common = git(root, 'rev-parse', '--path-format=absolute', '--git-common-dir').stdout.decode().strip()
+    assert Path(ip).is_absolute() and Path(ip).is_relative_to(Path(common))
+    assert path == ip and path == str(Path(root) / '.git/index')
+    parents(path)
+    leaf(row)
+    raw = control_read({k: row[k] for k in ('path','bytes','sha256')}, 'shared_A_index_hash_guard_without_raw_capture')
+    leaf(row)
+    assert H(raw) == row['sha256']
+    return dict(row, exact_HASH_and_full9_reverified=True, stored_as_numbered_capture=False)
+
+'''
+
+def replace_once(text,before,after):
+    assert text.count(before)==1,before
+    return text.replace(before,after,1)
+
+def adapt_entry(original,selection,request,output,ledger):
+    entry=original
+    for slot,value in {'SEL':repr(selection),'REQ':repr(request),'OUT':f'Path({str(output)!r})','before':repr(ledger)}.items():
+        entry,n=re.subn(r'^'+slot+r' = .*$',lambda _:slot+' = '+value,entry,flags=re.M)
+        assert n==1,slot
+    label='RESULT_CACHE_CURRENT_D_FROZEN_READ4'
+    assert entry.count(label)==4
+    entry=entry.replace(label,'P2_V4_CURRENT_D_FROZEN_READ3')
+    entry=replace_once(entry,'if SEL is None:',A_GUARD_FUNCTION+'if SEL is None:')
+    needle="    assert len(request['targets']) == request['target_count']"
+    entry=replace_once(entry,needle,needle+"""
+    assert request['target_count'] == 3
+    guard_A = request['A_index_shared_guard_guide582']
+    assert guard_A['root'] == request['roots'][1]['root']
+    assert all(t['root'] == request['roots'][0]['root'] and t['path'] != guard_A['path'] for t in request['targets'])
+    report['previous_D_cooperative_freeze'] = request['previous_D_cooperative_freeze']
+    report['execution_freeze'] = request['execution_freeze']
+    report['previous_D_Source42_WRITE_claimed'] = False""")
+    needle="            report['before'] = {r: root_facts(r, e) for r, e in roots.items()}"
+    entry=replace_once(entry,needle,needle+"\n            report['A_index_shared_guard_before'] = check_shared_A_index(guard_A)")
+    needle="            report['after'] = {r: root_facts(r, e) for r, e in roots.items()}"
+    entry=replace_once(entry,needle,needle+"""
+            report['A_index_shared_guard_after'] = check_shared_A_index(guard_A)
+            assert report['A_index_shared_guard_after'] == report['A_index_shared_guard_before']""")
+    needle="'captures': report['captures'], 'actual_IO': spent"
+    entry=replace_once(entry,needle,"'captures': report['captures'], 'A_index_shared_guard_before': report.get('A_index_shared_guard_before'), 'A_index_shared_guard_after': report.get('A_index_shared_guard_after'), 'previous_D_cooperative_freeze': report.get('previous_D_cooperative_freeze'), 'execution_freeze': report.get('execution_freeze'), 'previous_D_Source42_WRITE_claimed': False, 'actual_IO': spent")
+    functions=lambda s:{n.name:ast.dump(n) for n in ast.walk(ast.parse(s)) if isinstance(n,ast.FunctionDef)}
+    before,after=functions(original),functions(entry)
+    assert set(after)-set(before)=={'check_shared_A_index'}
+    assert all(after[name]==body for name,body in before.items())
+    return entry
+
+def main():
+    assert len(sys.argv)==5, 'pinned handoff path, bytes, SHA256, fresh private controls path'
+    handoff=data({'path':sys.argv[1],'bytes':int(sys.argv[2]),'sha256':sys.argv[3]})
+    d,named,targets,index=check_bindings(handoff)
+    agents=handoff['AGENTS_chain_metadata']
+    verify_agents(agents,d)
+    owner=handoff['approved_Source42_owner']
+    assert set(owner)=={'path','bytes','sha256'}
+    read_pin(owner)
+    ledger,start,end=verify_cap_and_clock(handoff)
+    output=Path(sys.argv[4])
+    assert output.is_absolute() and output.parent.resolve()==output.parent
+    assert not any(output.is_relative_to(root) for root in (A,d,ORIGINAL_D))
+    output.mkdir(mode=0o700,exist_ok=False)
+    request=retain(output/'Root-current-P2-V4-existing-READ3-request.json',{
+        'schema':'current-P2-V4-D-local-A-published-READ3-existing-Source42/v1',
+        'Source_READ_selected':True,'ledger_before':ledger,'exact_new_body_targets':targets,
+        'all_candidate_metadata':targets,'literal_metadata_candidate_count':3,'target_count':3,
+        'frozen_roots':handoff['frozen_roots'],'approved_current_Source42_owner_binding':owner,
+        'AGENTS_chain_metadata':agents,'named_metadata_recheck_reference':handoff['full_epoch'],
+        'named_metadata_count':len(named),'namespace_metadata':handoff.get('namespace_metadata',[]),
+        'previous_D_cooperative_freeze':FREEZE,'execution_freeze':handoff.get('execution_freeze'),
+        'previous_D_Source42_WRITE_claimed':False,'A_index_shared_guard_guide582':index,
+        'Guide582_closed_document_freeze':GUIDE,'sealed_exact_P2_V4_postimages':PROPOSAL,'exact_A_only_companion':True})
+    selection=retain(output/'Root-selected-existing-current-P2-V4-READ3.json',{
+        'Root_selected':True,'Source_operation_max_bytes':ENVELOPE,'ledger_before':ledger,
+        'request':request,'fresh_output_namespace':str(output/'actual-output'),
+        'launch_not_before_utc_ns':start,'launch_deadline_utc_ns':end,
+        'cap':handoff['cap'],'ref_current_route':ORIGINAL})
+    entry=adapt_entry(read_pin(ORIGINAL).decode(),selection,request,output/'actual-output',ledger)
+    operator=retain(output/'Root-selected-existing-current-P2-V4-READ3-entry.py',entry.encode())
+    print(json.dumps({'operator':operator,'selection':selection,'request':request,'targets':3},sort_keys=True))
+
+if __name__=='__main__':
+    main()

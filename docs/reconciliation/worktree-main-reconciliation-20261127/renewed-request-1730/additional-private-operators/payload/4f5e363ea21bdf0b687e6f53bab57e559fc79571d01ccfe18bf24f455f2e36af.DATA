@@ -1,0 +1,50 @@
+"""Use the existing exact four-document guide controls after the P2 code publication."""
+from concurrent.futures import ThreadPoolExecutor
+import hashlib,json,os,subprocess,sys
+from pathlib import Path
+base=Path(__file__).resolve().parent
+g=base/'guides-preparation-INERT'
+plan=g/'code-only-actual-parent-pins/READY-P2-Guide584-managed234-code-only-parent-pins.json'
+managed=base/'actual-managed-composed234-qualified.json'
+def ref(path,expected_sha=None,expected_bytes=None):
+    p=Path(path);raw=p.read_bytes();sha=hashlib.sha256(raw).hexdigest()
+    assert expected_sha is None or sha==expected_sha
+    assert expected_bytes is None or len(raw)==expected_bytes
+    return dict(path=str(p),bytes=len(raw),sha256=sha)
+def load(pin):
+    ref(pin['path'],pin['sha256'],pin['bytes'])
+    return json.loads(Path(pin['path']).read_bytes())
+def argv(pin):
+    return [pin['path'],str(pin['bytes']),pin['sha256']]
+def invoke(script,digest,pin,out):
+    ref(script,digest)
+    r=subprocess.run([sys.executable,'-I','-B',str(script),*argv(pin),str(out)],capture_output=True,timeout=120)
+    if r.returncode:
+        print(r.stderr.decode(errors='replace'),flush=True)
+        raise SystemExit(r.returncode)
+    result=json.loads(r.stdout)
+    load(result)
+    print(json.dumps(result),flush=True)
+    return result
+
+assert len(sys.argv)==4
+cp=ref(sys.argv[1],sys.argv[3],int(sys.argv[2]))
+selected=ref(plan,'de21d201a38117821b4fa5be2b4952346702574b76305a4fde22e16572c29f37',9793)
+q=ref(managed,'f350f2dda46a38cd7e4bd3821c520b6071f18112cafda068dc350fd8292f9cfc',2301)
+code,planned=map(load,(cp,selected))
+assert code['terminal_returncode']==0 and code['fresh_origin_main']==planned['prepared_origin_main']
+def observe(item):
+    role,url=item
+    oid,branch=subprocess.check_output(['/usr/bin/git','ls-remote','--exit-code',url,'refs/heads/main'],timeout=30).decode().split()
+    assert branch=='refs/heads/main'
+    return role,oid
+with ThreadPoolExecutor(max_workers=4) as pool:
+    assert dict(pool.map(observe,planned['urls'].items()))==code['fresh_origin_main']
+handoff=base/'actual-Guide585-composer-handoff.json'
+with handoff.open('x') as f:
+    json.dump(dict(managed234=q,code_publication=cp,code_plan=selected),f,indent=2,sort_keys=True)
+    f.write('\n');f.flush();os.fsync(f.fileno())
+guide=invoke(g/'compose-existing-Guide585-with-catalog-links-v02.py.DATA',
+    '56ef6c9edff386588b33ee112635a079db7f5088f87166b54b1a1569dc600e14',ref(handoff),g/'actual-Guide585-four-doc-composition')
+invoke(g/'bind-existing-Guide585-docs-only-parent-pins-with-catalog-links-v02.py.DATA',
+    '5d2f96fb2e5ff4296be892284b0a9ff2f553636a04e64b5ef7a326b82f301f74',guide,g/'actual-Guide585-docs-only-parent-pins')

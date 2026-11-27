@@ -1,0 +1,76 @@
+import hashlib,json,os,runpy,sys
+from pathlib import Path
+here=Path(__file__).resolve().parent
+previous=Path(sys.argv[1])/'guides-preparation-INERT'
+previous_store=previous/'actual-Guide585-docs-only-parent-pins'
+lib=runpy.run_path(str(previous/'compose-existing-Guide585-with-catalog-links-v02.py.DATA'))
+support=lib['support']
+pin,obj,H,flat,write=(lib[k] for k in ('pin','obj','H','flat','write'))
+ref=pin(here/'actual-Guide586-and-recovery-private-integration.json',7089,
+    'b899e3ac17858c5fefc598ecaff18e9be3752578f971702e868c3407724bb35c')
+meta=obj(ref)
+prior=obj(meta['prior_publication'])
+before=prior['fresh_origin_main']
+assert before==meta['prior_remote_heads'] and not meta['pushed']
+order=lib['ORDER']
+helper=support['HELPER']
+assert H(helper.read_bytes())=='d38cdc213ed74d01d4951408e6b3a2fb9ce4d00ac841ccd8ffabaf25a672c4e3'
+publisher=runpy.run_path(str(helper))
+git,invoke,delta,tree,link_commit=(publisher[k] for k in ('git','invoke','delta','tree','link_commit'))
+d=meta['datasets']
+assert d['before']==before['datasets'] and meta['after_counts']==dict(evidence=586,migrations=99,tasks=24,components=126)
+out=here/'parent-pins'
+out.mkdir(mode=0o700)
+git.__globals__.update(MAIN=before,WORK=out)
+name,email=lib['git'](Path(d['git_dir']),'show','-s','--format=%an%x00%ae',before['datasets']).decode().rstrip('\n').split('\x00')
+publisher['E'].update(GIT_AUTHOR_NAME=name,GIT_COMMITTER_NAME=name,GIT_AUTHOR_EMAIL=email,GIT_COMMITTER_EMAIL=email)
+stores={}
+for role in order:
+    upstream=Path(d['git_dir']) if role=='datasets' else previous_store/(role+'.git')
+    path=out/(role+'.git')
+    invoke('init','--bare',str(path))
+    views=flat(upstream/'objects',out/(role+'-object-views'))
+    (path/'objects/info/alternates').write_text(''.join(str(view)+'\n' for view in views))
+    assert git(role,'cat-file','-t',before[role]).strip()==b'commit'
+    stores[role]=str(path)
+assert git('datasets','rev-parse',d['after']+'^1',d['after']+'^2',d['after']+'^{tree}').decode().splitlines()==[
+    before['datasets'],meta['recovery_original'],d['tree']]
+assert delta('datasets',before['datasets'],d['after'])==set(d['exact_changed_paths'])
+for rel,oid in meta['verified_code_blobs'].items():
+    assert tree('datasets',d['after'],[rel])=={rel:['100644','blob',oid]}
+for rel,row in meta['guide_four_docs'].items():
+    assert tree('datasets',d['after'],[rel])=={rel:['100644','blob',row['committed_blob']]}
+    raw=git('datasets','cat-file','blob',row['committed_blob'])
+    assert (len(raw),H(raw))==(row['bytes'],row['sha256'])
+PH,PR=support['LINK_H'],support['LINK_R']
+old_h,old_r=tree('hallucinate',before['hallucinate'],PH),tree('root',before['root'],PR)
+assert old_h==dict(zip(PH,[['160000','commit',before[k]] for k in ('accelerate','datasets')],strict=True))
+assert old_r==dict(zip(PR,[['160000','commit',before[k]] for k in ('accelerate','datasets','hallucinate')],strict=True))
+h,ht=link_commit('hallucinate',{PH[1]:d['after']},'Pin Datasets evidence 586')
+r,rt=link_commit('root',{PR[1]:d['after'],PR[2]:h},'Update evidence 586 gitlinks')
+new_h,new_r=tree('hallucinate',h,PH),tree('root',r,PR)
+assert new_h=={**old_h,PH[1]:['160000','commit',d['after']]}
+assert new_r=={**old_r,PR[1]:['160000','commit',d['after']],PR[2]:['160000','commit',h]}
+assert delta('hallucinate',before['hallucinate'],h)=={PH[1]}
+assert delta('root',before['root'],r)=={PR[1],PR[2]}
+archives=prior['root_archive_retained']|prior['archives_retained']
+for path,expected in archives.items():
+    assert tree('root',r,[path],dirs=True)=={path:expected}
+after=before|{'datasets':d['after'],'hallucinate':h,'root':r}
+prepared='refs/heads/guide586-recovery-publication'
+closure={}
+for role in order:
+    git(role,'merge-base','--is-ancestor',before[role],after[role])
+    git(role,'update-ref',prepared,after[role])
+    closure[role]=len(git(role,'rev-list','--objects','--missing=error',prepared,'^'+before[role]).splitlines())
+    assert closure[role]>0
+result=write(out,'READY-Guide586-and-recovery-normal-parent-pins.json',dict(
+    schema='private-existing-Guide586-and-exact-recovery-normal-fast-forward/v1',formula='D then H then Root',
+    base_origin_main=before,prepared_origin_main=after,isolated_git_dir=stores,prepared_ref=prepared,
+    planned_normal_ff_order=order,urls=publisher['URLS'],git_arguments_preserve_bounded_pack_settings=publisher['FLAGS'],
+    new_object_closure_count=closure,candidate_trees={'datasets':d['tree'],'hallucinate':ht,'root':rt},
+    gitlink_before=dict(hallucinate=old_h,root=old_r),gitlink_after=dict(hallucinate=new_h,root=new_r),
+    archives_retained=archives,actual_private_integration=ref,exact_changed_D_paths=d['exact_changed_paths'],
+    exact_recovery_source=meta['recovery_qualified_source'],actual_namespaced_Native2=meta['namespaced_native2'],
+    accelerate_changed=False,pushed=False,publication_window_selected=False,Source_or_runtime_selected=False))
+print(json.dumps(result))

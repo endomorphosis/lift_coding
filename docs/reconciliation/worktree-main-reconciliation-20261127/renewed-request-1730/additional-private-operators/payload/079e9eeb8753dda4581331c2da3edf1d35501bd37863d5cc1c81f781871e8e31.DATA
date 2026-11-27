@@ -1,0 +1,215 @@
+"""Prepare Guide584 parent pins after independent code-publication and docs-commit receipts."""
+import hashlib
+import json
+import os
+from pathlib import Path
+import runpy
+import sys
+
+WORK = Path(__file__).resolve().parent
+CODE_WORK = Path('/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP')
+CODE_PREPARER = CODE_WORK / 'prepare-P1-Native2-code-only-parent-pins.py.DATA'
+assert __debug__ and hashlib.sha256(CODE_PREPARER.read_bytes()).hexdigest() == 'a243350c951dd863c0ecb2e58db78a7621e37ec40de068037212d333e45455db'
+code_support = runpy.run_path(str(CODE_PREPARER))
+pin, read, document, sha, flat_git_alternates = (code_support[k] for k in
+    ('pin', 'read', 'document', 'sha', 'flat_git_alternates'))
+CODE_PLAN = pin(CODE_WORK / 'READY-P1-Native2-code-only-parent-pins.json', 7557,
+    '200d0795b62b5d8f847b4f5320b7339d6a7cc2831f84d31fb505f40f58dcb09d')
+DOC_WORK = Path('/tmp/P1-Guide584-existing-private-exact-docs-idlpq6')
+DOC_READY = DOC_WORK / 'READY-existing-Guide584-four-doc-private-commit.json'
+DOCS = {f'ipfs_datasets_py/logic/autoformal/docs/{name}' for name in
+    ('BACKLOG.json', 'HANDOFF.md', 'TRAINING_HISTORY.md', 'work_catalog.json')}
+ORDER = ['datasets', 'hallucinate', 'root']
+KEEP = {
+    code_support['ROLE']: code_support['NEW_BLOB'],
+    code_support['CACHE']: 'a171ee9794439540c924a2288e4ebb9262a2c859',
+    code_support['FIXTURE']: '91abcac246b2f30d9554d88d74ded0b54b1f34ed',
+}
+PH, PR = code_support['LINK_H'], code_support['LINK_R']
+
+
+def match_pin(left, right):
+    keys = ('path','bytes','sha256')
+    return all(left[key] == right[key] for key in keys)
+
+
+def published_code(code_reference, prepared, native):
+    publication = document(code_reference)
+    assert publication['terminal_returncode'] == 0
+    assert publication['prior_origin_main'] == prepared['base_origin_main']
+    assert publication['fresh_origin_main'] == prepared['prepared_origin_main']
+    assert len(publication['normal_fast_forward_steps']) == 3
+    for role, step in zip(ORDER, publication['normal_fast_forward_steps'], strict=True):
+        actual = document(step)
+        assert actual['role'] == role and actual['returncode'] == 0 and actual['normal_fast_forward'] is True
+        assert actual['before'] == prepared['base_origin_main'][role]
+        assert actual['after'] == prepared['prepared_origin_main'][role]
+    expected = (
+        (('exact_local_code_freeze','exact_freeze','source1_freeze'), prepared['exact_local_freeze']),
+        (('exact_Source1','actual_Source1','source1_terminal'), prepared['actual_Source1']),
+        (('exact_READ4','actual_READ4','read4'), prepared['exact_READ4']),
+        (('qualification','ordinary13','current_ordinary_qualification'), native['current_ordinary_qualification']),
+        (('actual_Native2','Native2','native2','native'), prepared['actual_Native2_qualification']),
+    )
+    for aliases, wanted in expected:
+        supplied = [publication[key] for key in aliases if key in publication]
+        assert supplied and all(match_pin(found, wanted) for found in supplied),aliases
+    return publication
+
+
+def check_docs(ready, local, prepared, native):
+    assert ready['schema'] == 'one-existing-guide584-exact-four-private-Git-commit/v1'
+    assert ready['terminal_returncode'] == 0 and ready['evidence_ordinal'] == 584
+    assert ready['only_four_Git_changes'] and ready['pushed'] is False
+    assert ready['existing_refs_changed'] is False and ready['Source_or_runtime_dispatch'] is False
+    assert ready['expected_origin_main_before_guide'] == prepared['prepared_origin_main']
+    assert match_pin(ready['actual_native_closeout'], prepared['actual_Native2_qualification'])
+    assert match_pin(ready['actual_source1'], prepared['actual_Source1'])
+    assert match_pin(ready['actual_read4'], prepared['exact_READ4'])
+    assert match_pin(ready['actual_ordinary13'], native['current_ordinary_qualification'])
+    assert match_pin(ready['prior_verified_guide583_publication'], prepared['exact_Guide583_publication'])
+    assert local['parent'] == prepared['prepared_origin_main']['datasets']
+    assert Path(local['git_dir']) == DOC_WORK/'datasets.git'
+    assert set(local['committed_docs']) == DOCS
+    assert ready['preservation'] == {'tasks':24,'components':126,'prior_evidence_records':583,
+        'new_evidence_records':1,'prior_migrations':96,'new_migrations':1,
+        'previous_structured_values_exact':True,'both_Markdown_prefixes_exact':True,
+        'exact_all4_inverse_removal_complete':True}
+    files = {row['relative_path']: row for row in ready['files']}
+    assert len(ready['files']) == 4 and set(files) == DOCS
+    for rel,row in files.items():
+        before = read(row['before_private'])
+        after = read(row['post_private'])
+        insert = read(row['surgical_insertion']['fragment_reference'])
+        pos = after.find(insert)
+        assert pos >= 0 and after.count(insert) == 1 and after[:pos] + after[pos+len(insert):] == before
+        if rel.endswith('.md'):
+            assert pos == len(before) and after.count(b'## Evidence584') == 1
+    return files
+
+
+def checks_only(reference):
+    assert Path(reference['path']) == DOC_READY
+    ready = document(reference)
+    code_plan = document(CODE_PLAN)
+    native = document(code_plan['actual_Native2_qualification'])
+    assert ready['actual_code_publication']['path'] != CODE_PLAN['path']
+    public = published_code(ready['actual_code_publication'], code_plan, native)
+    local = ready['private_Git_commit']
+    files = check_docs(ready, local, code_plan, native)
+    return ready, code_plan, public, local, files
+
+
+def bind(reference, out):
+    ready, code_plan, publication, local, files = checks_only(reference)
+    before = publication['fresh_origin_main']
+    helper = code_support['HELPER']
+    assert sha(helper.read_bytes()) == 'd38cdc213ed74d01d4951408e6b3a2fb9ce4d00ac841ccd8ffabaf25a672c4e3'
+    tools = runpy.run_path(str(helper))
+    git, invoke, delta, tree, link_commit = (tools[k] for k in ('git','invoke','delta','tree','link_commit'))
+    assert tools['URLS'] == code_plan['urls'] and tools['FLAGS'] == code_plan['git_arguments_preserve_bounded_pack_settings']
+    d0 = code_support['D']
+    a0 = code_support['A']
+    for repo, role in ((d0,'datasets'),(a0,'accelerate')):
+        assert invoke('-C',str(repo),'rev-parse','HEAD').decode().strip() == before[role]
+        assert not invoke('-C',str(repo),'status','--porcelain=v1','-z')
+    watched = [root/relative for root in (d0,a0) for relative in ('.git/HEAD','.git/index','.git/config')]
+    watched.extend(Path(code_plan['isolated_git_dir'][role])/'refs/heads/p1-native2-code-publication' for role in ORDER)
+    watched.extend([Path(local['git_dir'])/'refs/heads/guide584-private',Path(local['private_stage0_index'])])
+    snap = {path: path.stat() for path in watched}
+    assert out.is_absolute() and out.parent == WORK and not os.path.lexists(out)
+    out.mkdir(mode=0o700)
+    git.__globals__.update(MAIN=before,WORK=out)
+    env = tools['E']
+    for key in ('NAME','EMAIL'):
+        value = invoke('-C',str(d0),'config','--get','user.'+key.lower()).decode().strip()
+        assert value
+        env['GIT_AUTHOR_'+key] = env['GIT_COMMITTER_'+key] = value
+    alternatives = {
+        'datasets': Path(local['git_dir'])/'objects',
+        **{role:Path(code_plan['isolated_git_dir'][role])/'objects' for role in ('hallucinate','root')},
+    }
+    output_git = {}
+    views = {}
+    for role, upstream in alternatives.items():
+        target = out/(role+'.git')
+        invoke('init','--bare',str(target))
+        stores = flat_git_alternates(upstream,out/(role+'-object-views'))
+        (target/'objects/info/alternates').write_text(''.join(str(store)+'\n' for store in stores))
+        views[role] = len(stores)
+        output_git[role] = str(target)
+        assert git(role,'cat-file','-t',before[role]).strip() == b'commit'
+    d = local['HEAD']
+    assert git('datasets','rev-parse',d+'^',d+'^{tree}').decode().splitlines() == [before['datasets'],local['tree']]
+    assert delta('datasets',before['datasets'],d) == DOCS
+    for rel,row in files.items():
+        old_blob = row['before_Git_blob_oid']
+        new_blob = row['after_Git_blob_oid']
+        rec = local['committed_docs'][rel]
+        assert tree('datasets',before['datasets'],[rel]) == {rel:['100644','blob',old_blob]}
+        assert tree('datasets',d,[rel]) == {rel:['100644','blob',new_blob]}
+        assert git('datasets','cat-file','blob',old_blob) == read(row['before_private'])
+        raw = git('datasets','cat-file','blob',new_blob)
+        assert raw == read(row['post_private'])
+        assert rec == {'bytes':len(raw),'sha256':sha(raw),'committed_blob':new_blob,'mode':'100644'}
+    assert tree('datasets',d,KEEP) == tree('datasets',before['datasets'],KEEP) == {
+        rel:['100644','blob',oid] for rel,oid in KEEP.items()}
+
+    old_h = tree('hallucinate',before['hallucinate'],PH)
+    old_r = tree('root',before['root'],PR)
+    assert {'hallucinate':old_h,'root':old_r} == code_plan['gitlink_after']
+    h, h_tree = link_commit('hallucinate',{PH[1]:d},'Pin Datasets evidence 584')
+    r, r_tree = link_commit('root',{PR[1]:d,PR[2]:h},'Update evidence 584 gitlinks')
+    new_h, new_r = tree('hallucinate',h,PH), tree('root',r,PR)
+    assert new_h == {**old_h,PH[1]:['160000','commit',d]}
+    assert new_r == {**old_r,PR[1]:['160000','commit',d],PR[2]:['160000','commit',h]}
+    assert delta('hallucinate',before['hallucinate'],h) == {PH[1]}
+    assert delta('root',before['root'],r) == {PR[1],PR[2]}
+    archives = code_plan['root_archive_preserved'] | code_plan['retained_archives']
+    for path,expected in archives.items():
+        assert tree('root',before['root'],[path],dirs=True) == tree('root',r,[path],dirs=True) == {path:expected}
+    after = {**before,'datasets':d,'hallucinate':h,'root':r}
+    final_ref = 'refs/heads/guide584-docs-publication'
+    objects = {}
+    for role in ORDER:
+        git(role,'merge-base','--is-ancestor',before[role],after[role])
+        git(role,'update-ref',final_ref,after[role])
+        closure = git(role,'rev-list','--objects','--missing=error',final_ref,'^'+before[role])
+        objects[role] = len(closure.splitlines())
+        assert objects[role]>0
+    assert snap == {path:path.stat() for path in watched}
+    report = {
+        'schema':'private-existing-Guide584-docs-only-normal-fast-forward/v1',
+        'base_origin_main':before,'prepared_origin_main':after,'planned_normal_ff_order':ORDER,
+        'urls':code_plan['urls'],'git_arguments_preserve_bounded_pack_settings':code_plan['git_arguments_preserve_bounded_pack_settings'],
+        'isolated_git_dir':output_git,'prepared_ref':final_ref,'private_flattened_object_views_per_role':views,
+        'new_object_closure_count':objects,'candidate_trees':{'datasets':local['tree'],'hallucinate':h_tree,'root':r_tree},
+        'gitlink_before':{'hallucinate':old_h,'root':old_r},'gitlink_after':{'hallucinate':new_h,'root':new_r},
+        'root_archive_preserved':code_plan['root_archive_preserved'],'retained_archives':code_plan['retained_archives'],
+        'exact_four_docs':local['committed_docs'],'code_blobs_preserved':KEEP,
+        'parent_D_already_published':before['datasets'],'prior_code_not_reselected':True,
+        'actual_code_publication':ready['actual_code_publication'],'actual_Guide584_private_commit':reference,
+        'prior_code_parent_pins':CODE_PLAN,'actual_Source1':ready['actual_source1'],'exact_READ4':ready['actual_read4'],
+        'actual_Native2_qualification':ready['actual_native_closeout'],
+        'original_checkout_and_prior_publication_indices_unchanged':True,'accelerate_changed':False,
+        'source_or_runtime_selected':False,'publication_window_selected':False,'pushed':False,
+        'current_origins_must_be_reverified_by_existing_publisher_before_push':True,
+    }
+    data = (json.dumps(report,sort_keys=True,indent=2)+'\n').encode()
+    target = out/'READY-Guide584-docs-only-parent-pins.json'
+    with target.open('xb') as stream:
+        stream.write(data)
+        stream.flush()
+        os.fsync(stream.fileno())
+    target.chmod(0o400)
+    return pin(target,len(data),sha(data))
+
+
+def main():
+    assert len(sys.argv) == 5
+    reference = pin(Path(sys.argv[1]),int(sys.argv[2]),sys.argv[3])
+    print(json.dumps(bind(reference,Path(sys.argv[4])),sort_keys=True))
+
+
+if __name__ == '__main__':
+    main()

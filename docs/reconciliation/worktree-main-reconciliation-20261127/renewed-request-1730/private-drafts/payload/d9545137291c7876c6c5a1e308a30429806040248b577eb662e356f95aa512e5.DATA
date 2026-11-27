@@ -1,0 +1,723 @@
+# Decoder training integration specification v0.1
+
+Status: DESIGN ONLY. No implementation, training, model convergence, teacher-width qualification, or new execution authority is asserted.
+
+Research status update, 2026-11-19: the user explicitly authorized researching the submodule. New read-only code/doc inspection is recorded in section 16 and the linked research report. Earlier cached-only limits and unresolved-owner statements in sections 12-15 retain their historical cutoffs; section 16 supersedes them where current source evidence is available. Training, model loading, new CI execution, installs and project writes remain unselected.
+
+Parent objective: `/home/barberb/.codex/attachments/198ce801-199a-411b-85de-228dde81e251/pasted-text-1.txt`.
+
+Companion overview: `/tmp/decoder-training-integration-plan.md`.
+
+## 1. Evidence boundary and deliverable
+
+The coordinator acknowledged this parallel planning lane. Already-held Source32/98 owner metadata has been requested through the existing soleReader; no new capture is requested. Until supplied, canonical symbols, their exact interfaces, and model identities remain unresolved.
+
+Separate engineering qualification: R110 release, A290 supervisor, Kit183. These are not model-training, representation-equivalence, mechanistic-interpretability, or convergence measurements.
+
+The immediate deliverable is a reviewable interface and experiment specification. Execution requires the existing owners and admission procedures after the coordination hold clears. All CI remains local.
+
+### Unresolved integration map
+
+| Responsibility | Required current-owner evidence | Current status |
+|---|---|---|
+| Intent IR wire decoding and migration | Authenticated held `ipfs_datasets_py/logic/intent_ir/decoder.py`, 24220 bytes, SHA-256 `7bab5781c07e00b54b0283d3a2962926f75935caedc80eceb23264cb388be257`; public `decode_intent_ir`, `migrate_intent_ir`, `decode_intent_ir_with_migration` | Static body inspected; serialization/validation boundary, NOT a neural trainer; current identity unverified |
+| Reviewed decoder numerical training candidate | Relayed held `optimizer/autoencoder_training_worker.py`, 316963 bytes, SHA-256 `7e930f3037146d74f7bb16eb283ba54a3ab7c122214d933094a64f3fd629e2d5`; catalog owner `reviewed-decoder-numerical-worker`, symbols `TorchReviewedDecoderBackend`, `ReviewedMixedDecoderTrainingJobSpec` | Metadata only; exact methods, qualification scope, complete path, and current identity unresolved |
+| 8D producer | User identifies spaCy; exact pipeline, features/extractor, input and provenance still required | Family known; 8D meaning unresolved; width pairing inferred from list order |
+| 384D producer | User identifies GTE-small; public candidate `thenlper/gte-small`; exact local revision and extraction still required | Family known; deployed profile unresolved |
+| 768D producer | User identifies GTE-base-multilingual; public candidate `Alibaba-NLP/gte-multilingual-base` | Family known; deployed profile unresolved |
+| 4096D producer | User identifies Leanstral; exact version, layer selection, pooled/token-level extraction still required | Family known; 4096D teacher observation unverified |
+| Retrieval and contrastive objective | Current canonical producer/consumer and masking contract | Awaiting held mapping |
+| Semantic evaluator and admission | Existing facet/source/legal-review contracts | Awaiting held mapping |
+| Formal verification and proof feedback | Existing compiler, evidence-binding, failure contracts | Awaiting held mapping |
+| Replay and curriculum | Existing population eligibility and scheduling contract | Awaiting held mapping |
+| Optimizer and checkpoint | State/resume/lineage compatibility and exact update API | Awaiting held mapping |
+| Model registry | Artifact identity, registration, promotion, invalidation | Awaiting held mapping |
+
+Candidate paths in the old architecture objective are leads, not inspected owner mappings. Do not invent file/symbol names to fill this table.
+
+## 2. Shared record rules
+
+Names below are logical contracts, not proposed duplicate implementation modules. Map them onto existing owners before deciding whether new types are necessary.
+
+All records include `schema_id`, `schema_version`, `record_id`, `producer_code_id`, and `provenance`. IDs bind immutable content, not mutable paths. The implementation must select and test one canonical serialization with domain-separated hashes. Do not assume ordinary JSON stringification is canonical across languages.
+
+Represent unsupported, unknown, and failed separately. Missing evidence must not be coerced into false, zero reward, a negative semantic relation, or a successful verification.
+
+Schema changes, evaluator changes, and artifact changes have separate identities. A semantic change requires explicit compatibility review regardless of the package's version number.
+
+### TeacherProfile
+
+Required fields:
+
+```text
+profile_id
+representation_kind: learned_embedding | deterministic_features | other_declared
+producer_code_id
+model_id / checkpoint_digest: explicit value or not_applicable with reason
+output_dimension: positive integer
+output_layout: example_vector | span_vectors | token_vectors | other_declared
+input_contract: source/span identity, context policy, preprocessing identity
+pooling_policy, layer_selection, normalization, dtype
+compression: method/config/fit_population_id or explicit none
+training_objective_identity: value or unknown
+permitted_uses: conditioning / feature_distillation / retrieval / other_declared
+license_and_use_evidence
+training_availability, inference_availability
+provenance
+```
+
+Dimensions 8/384/768/4096 are profile requirements to investigate, not authenticated teacher profiles. Unknown model identities cannot be replaced by plausible model names. A deterministic 8D representation need not have a neural checkpoint. No claim of a shared semantic space follows from equal dimensions.
+
+### TeacherObservation
+
+Bind profile, exact input/context IDs, vector artifact digest/shape/dtype, source span alignment, producer revision, and measured generation cost. Validate finiteness and shape, but do not treat those checks as semantic qualification. An observation made with target-containing context is ineligible for a source-only experiment.
+
+### DecoderProfile and CapabilityReport
+
+Bind architecture implementation, configuration, checkpoint, tokenizer/output vocabulary, output schema, precision/quantization, context limit, conditioning mechanisms, and environment.
+
+Each capability entry records `supported`, `unsupported`, or `unverified`, evidence identity, and constraints. Capabilities include generate, score_actions, train_supervised, train_policy, observe_activations, intervene_activations, enumerate_update_targets, apply_reversible_update.
+
+`score_actions` must declare the probability measure, valid-action mask, temperature/transforms, reduction, EOS treatment, and whether scores match the behavior policy. Diffusion or other non-autoregressive models require their own declared action-space adapter; token-policy algorithms cannot assume compatibility.
+
+`train_policy` additionally declares algorithm-specific requirements. Generation support alone does not satisfy them.
+
+### ConditioningProfile
+
+Bind teacher profiles, projection topology and weights, decoder binding, source-input route, fusion/gating policy, dropout/missing-teacher policy, and train/inference availability. Declare capacity and inference-cost differences relative to the baseline.
+
+A shared bottleneck is an experiment choice, not a required universal latent space. Learned projectors cannot transfer between teacher checkpoints or decoder layouts without a separately validated compatibility mapping.
+
+### EvaluationPopulation
+
+Bind exact eligible examples, independently reviewed targets or explicit fictional status, source/dependency groups, interpretation/definition versions, permitted uses, split assignment, and revocation dependencies.
+
+Fit projections, normalization statistics, reward models, and retrieval indexes on allowed training populations only. Group linked statutes, definitions, duplicate paraphrases, and related fixtures before splitting. Declare pretraining-overlap uncertainty rather than claiming its absence.
+
+## 3. Generation, evaluation, and credit contracts
+
+### Trajectory
+
+Bind population/example/source IDs; selected interpretation and reference eligibility; decoder, teacher, conditioning, retrieval, and policy IDs; RNG/sampling settings; complete generated actions; termination state; costs; and observed outputs.
+
+Record action probabilities only when actually supported. Bind the behavior-policy checkpoint, transforms, and action masks used to generate them. Never reconstruct missing behavior scores under a different policy and label them original observations.
+
+Token/action-to-AST alignment records confidence, unmapped spans, and truncation. It is an observation, not a causal explanation. Store hidden-state snapshots only under an explicit sampling/storage policy, including dtype and checkpoint identity.
+
+Terminal states distinguish EOS completion, maximum-length truncation, abstention, unsupported construct, model error, evaluator error, and resource interruption.
+
+### EvaluationRecord
+
+Bind the exact trajectory/output, reference and source evidence, evaluator code/configuration, and independent validation receipts. Each facet records status, value if measured, evidence, and uncertainty:
+
+```text
+status: measured | unknown | unsupported | error
+facets: structure, actor_arguments, modality, conditions_exceptions,
+        temporal_cardinality, definitions_scope, source_correspondence,
+        formal_validity, abstention_calibration, retention
+```
+
+Keep compiler timeout/error separate from proved invalidity. Legal uncertainty remains unknown. Formal evidence must bind the exact obligation and toolchain. The evaluator must be outside the policy's mutable parameter boundary.
+
+### RewardPolicy
+
+Bind the eligible evaluation facets, scalarization, hard acceptance gates, uncertainty treatment, abstention policy, cost terms, and version. Separate training reward from final corpus admission.
+
+Specify treatment of unknown/error outcomes before an experiment. Unknowns must not silently become zero-valued negative examples. Exclusion, deferred adjudication, and explicit diagnostic penalties have different meanings and must be recorded.
+
+No positive proof score can override an independently established mistranslation for acceptance. Reward hacking controls include semantically vacuous outputs, omitted exceptions, invented assumptions, needless abstention, reward-verifier exploitation, and formatting shortcuts.
+
+### CreditAssignmentRecord
+
+Bind trajectory, evaluation, reward policy, algorithm/version, training distribution, credit granularity, and estimator assumptions. Distinguish:
+
+- Observed outcome reward.
+- Learned outcome prediction.
+- Advantage estimate used by a named optimizer.
+- Counterfactual effect estimate under a declared intervention.
+- Mechanistic attribution diagnostic.
+
+These fields are not interchangeable. Store any clipping, normalization, group composition, importance ratios, and eligibility masks. Group-relative credit records group identities and explicitly handles constant-reward groups without inventing information.
+
+For learned return redistribution, record a terminal residual so the declared undiscounted redistributed sum matches the original return, if that is the intended contract. Discounted settings need their own consistency equation. Empirical conservation alone does not prove useful or unbiased action credit.
+
+For potential shaping, bind discount, state definition, fixed potential during the compared rollout, and terminal treatment. Do not claim policy invariance without satisfying the applicable assumptions.
+
+For policy updates on replayed trajectories, require the named algorithm's behavior-policy and off-policy conditions. Supervised replay eligibility is not automatic policy-gradient eligibility.
+
+## 4. Interpretability protocol
+
+### InterventionProfile
+
+Bind model/checkpoint, target hook semantics, input/counterfactual populations, intervention values, baselines, causal hypothesis, outcome metric, control conditions, sampling, and resource/storage budget.
+
+Required controls:
+
+1. No-op and sham interventions.
+2. Matched random target/value interventions.
+3. Multiple source-preserving and semantic-changing pairs.
+4. Held-out examples and unrelated semantic facets.
+5. Ablation and restoration where meaningful.
+6. Distribution-shift checks for patched activations.
+
+Report probe accuracy separately from intervention effects. Avoid interpreting out-of-distribution activation damage as evidence for a specific legal mechanism. Register hypotheses before inspecting the final test population. Account for repeated search and multiple comparisons.
+
+A finding attaches to an exact checkpoint and hook specification. A checkpoint update invalidates automatic reuse; use a declared revalidation protocol. Feature indexes, neuron IDs, and learned dictionaries are not portable semantic IDs across architectures.
+
+Interpretability-guided curricula or updates require a downstream experiment against equal-budget controls. Do not optimize a probe and then use that same probe as independent proof of semantic improvement.
+
+## 5. Update proposal and promotion transaction
+
+### UpdateProposal
+
+Bind parent checkpoint, parent optimizer state, architecture and parameter manifest, proposer/version, exact delta artifact, motivating evidence, update constraints, RNG, and intended experiment branch.
+
+Targets may include small projectors, routing/ranking modules, semantic heads, decoder adapters, or compatible LoRA modules. Declare tensor shapes, tied parameters, precision, quantization handling, and whether the update is reversible without loss. Unsupported targets refuse before mutation.
+
+Optimizer-state policy is one of: preserved with compatibility evidence; reset for affected groups; rebuilt by a declared procedure; or unavailable for resumed optimization. Never silently retain stale momentum after arbitrary parameter edits.
+
+Transaction:
+
+```text
+verify parent/config identities
+-> create isolated candidate checkpoint
+-> apply proposed change
+-> run declared development and retention evaluation
+-> compare matched controls under equal budget
+-> accept or reject with immutable evidence
+-> register candidate lineage
+```
+
+Keep the accepted parent unchanged until promotion. A rejected candidate remains a costed historical result. Check checkpoint, optimizer, tokenizer, teacher, reward, replay, and evaluator compatibility on resume. Failed checks must not silently retarget to new parents.
+
+Repeated candidate selection uses development data; final test data is reserved for the declared comparison, not an unlimited edit oracle.
+
+## 6. Experiment specification
+
+### Initial matrix
+
+Stage A: one smallest suitable decoder; source-only and each of the four independent teacher profiles. Do not choose model size or hardware requirements before current-owner evidence and resource admission.
+
+Stage B: direct conditioning versus distillation and a controlled bottleneck for promising profiles. Match added parameters/context where possible; otherwise report the differences.
+
+Stage C: selected complementary teacher combinations, missing-teacher controls, teacher dropout, and disagreement diagnostics. Do not begin with a full combinatorial fusion search.
+
+Stage D: SFT versus justified preference training and one declared outcome-policy baseline. Add structured credit only after the baseline is reproducible.
+
+Stage E: interpretability-guided example/update selection versus matched noninterpretability controls. Include the analysis overhead.
+
+Stage F: bounded weight proposals versus supervised updates, matched random edits, and applicable explicit rules. All branches receive comparable candidate-selection budgets.
+
+Stage G: repeat selected recipes on another decoder size and a second architecture; preserve evaluator meaning and output requirements.
+
+### Convergence and retention measurements
+
+Define threshold values and confidence/retention criteria before comparing methods. No numeric thresholds are currently justified by measured baselines.
+
+Primary endpoint: cost/time to first evaluation checkpoint that satisfies all fidelity, validity, and retention criteria under the declared sustained-pass rule. Report evaluation cadence and uncertainty in crossing time.
+
+If no crossing occurs within budget, report right-censored time-to-threshold and achieved quality; do not omit that run. Include all seeds, interrupted runs, failed proposals, embedding production, search, retrieval, verification, and analysis costs. Separate first-use and amortized costs.
+
+Also report quality at fixed compute, accepted examples per verifier call, memory peaks, throughput, abstention/unsupported rates, and semantic facet performance. Keep pass@1 separate from pass@k and fix sampling budgets.
+
+For teacher-width comparisons, architecture, data, allowed source context, output schema, and tuning policy are controlled or their differences disclosed. A richer teacher may require more inference information; do not label that pure training acceleration.
+
+### Local validation plan, not execution authority
+
+- Contract fixtures: missing/unknown statuses; shape and probability-measure mismatch; unsupported capabilities; teacher/checkpoint drift; target/context leakage; stale interventions; incompatible resume.
+- Reward fixtures: semantic failure with proof success; unknown legal review; evaluator error; all-equal reward group; truncation and abstention.
+- Update fixtures: tied-parameter mismatch; quantization refusal; parent identity drift; optimizer-state mismatch; rejected promotion; rollback equality.
+- Credit fixtures: conservation under the declared return convention; off-policy refusal; complete action/AST alignment uncertainty.
+- Portability conformance: at least two actual adapters before claiming multi-architecture qualification.
+
+These are proposed meaningful checks, not new CI callers selected to run now.
+
+## 7. Execution gates and next action
+
+Planning can proceed from held evidence. Project inspection, implementation, imports, training, and local test execution remain subject to the existing Source/resource owners and coordination hold.
+
+Before execution: complete the owner map; authenticate teacher identities and permitted uses; identify actual local model assets; define eligible populations; bind evaluation thresholds and budgets; confirm adapter support; obtain the existing workflow's concrete execution selection.
+
+Next bounded planning action: incorporate already-held owner metadata when relayed, preserving every unknown. Then produce one owner-specific integration diff proposal against the actual existing contracts, without implementing it until the hold clears.
+
+## 8. Completion audit for this goal
+
+The attached goal spans design and eventual qualification deliverables. This specification alone does not prove them complete.
+
+| Requirement | Current evidence | Remaining work |
+|---|---|---|
+| Comprehensive design | Overview plus this specification | Owner review and evidence-grounded refinement |
+| Existing-owner map | Held Intent IR wire parser authenticated and inspected; trainer and other training owners unresolved | Authenticate learned decoder/trainer and remaining owner mappings |
+| Four authenticated teachers | Dimensions requested by user | Actual identities, semantics, roles, permitted uses |
+| Versioned implementation | Proposed contracts only | Existing-owner integration after hold |
+| Local conformance tests | Proposed test cases only | Implement/select/run under existing owners |
+| Measured convergence/retention | None claimed | Admitted controlled experiments |
+| Reversible update artifacts | Proposed transaction only | Actual compatible implementation and evidence |
+| Architecture portability | Interface design only | Two actual qualified adapters and comparisons |
+
+Keep design completion, implementation completion, and scientific qualification as separate claims. Do not mark the entire goal achieved from this planning artifact.
+
+## 9. Proposed training objectives and gradient boundaries
+
+The following equations are proposed experiment definitions, not claims about current canonical APIs. Each actual run binds a named loss implementation and its normalization. Numeric coefficients remain unset until the admitted baseline and budget are known.
+
+### Supervised foundation
+
+For eligible source/context x and reviewed or explicitly fictional target actions y, use the decoder's supported supervised objective. For an autoregressive adapter:
+
+```text
+L_SFT = - sum_t mask_t * log p_theta(y_t | x, y_<t) / sum_t mask_t
+```
+
+The mask includes intended target actions and EOS; padding, source context, and unsupported spans are treated under a declared policy. Record whether normalization is per token, per example, or per semantic decision. Truncated examples must not be passed off as complete targets. A nonautoregressive decoder declares its own supervised objective rather than fabricating this probability factorization.
+
+### Representation and relational distillation
+
+For frozen teacher observation e_d, student source-derived representation h_theta(x), and compatible projection heads P_d and Q_a:
+
+```text
+L_feature,d = distance(Q_a(h_theta(x)), stop_gradient(P_d(e_d)))
+```
+
+For this equation, P_d is fitted on the allowed training population under a separately declared objective, then frozen for the matching term; stop-gradient also prevents this term from fitting P_d. If a separate experiment fits both sides jointly, it must explicitly change that gradient boundary and add its own anchored objective and collapse controls. Include variance/collapse diagnostics and independent downstream fidelity checks. A source encoder state is a clearer initial alignment target than a decoder state that already contains the full teacher-forced answer. If target-conditioned states are investigated, label that separate experiment and test source-only inference explicitly.
+
+Teacher and student dimensions need not match before projection. Euclidean feature matching requires an actual learned/aligned coordinate mapping; equal vector sizes do not supply one.
+
+For relational distillation, compare pairwise relations among examples within the eligible population. Derive each teacher's relationship matrix in its own coordinate space and calibrate its scale under the training-only policy. Do not average raw distances from unrelated teacher spaces.
+
+The masked multi-positive contrastive route, if supported by the current owner, must use admitted relation labels. Explicitly positive pairs, explicitly incompatible pairs, analogies, and unknown pairs are distinct. Unknown relationships do not enter the negative set by default.
+
+### Semantic-facet auxiliaries
+
+An auxiliary head may predict reviewed actor/modality/scope/temporal facets from source-derived state. Mask unknown labels out of the relevant supervised term, retaining their status in the record. Auxiliary predictions cannot substitute for independent evaluation. Fit the head on training groups and evaluate on held-out groups.
+
+An initial composite supervised objective can compare:
+
+```text
+L = L_SFT
+  + sum_d alpha_d * eligible_d * L_feature,d
+  + beta * L_relational
+  + eta * L_facet
+```
+
+Treat this as an ablation family, not a requirement to enable every term. Track per-term scale, gradient norms, and gradient conflict on shared parameters. Changing weights to resolve a conflict is a versioned training-policy change, not an undocumented repair. Do not optimize away the source-to-complete-IR task merely to improve representation matching.
+
+### Policy learning
+
+Conceptually optimize expected declared reward while constraining drift from the reference policy and retaining supervised/replay behavior. The concrete PPO/GRPO/other algorithm must bind its own objective, support, masks, reference checkpoint, normalization, and estimator assumptions.
+
+For a simple on-policy outcome baseline, the log-probability score-function gradient uses a return/advantage estimate attached to sampled actions. A baseline must satisfy the algorithm's assumptions. A fitted attribution map is not automatically a valid replacement for that estimate.
+
+All policy credit is computed from immutable evaluations of the sampled output under the declared evaluator. Detach reward/advantage values in the policy-gradient computation unless the explicitly selected algorithm defines another justified pathway. Compiler/kernel outcomes are discrete observations; no gradient through a compiler is assumed.
+
+Retain separate observed reward, prediction, advantage, and intervention effect. If a learned credit model is updated during training, record which frozen version generated each batch's credit and how stale-policy data is handled.
+
+## 10. One proposed update-cycle recipe
+
+This is descriptive pseudocode only. It is not a new runner, supervisor, callable, or permission to execute.
+
+```text
+existing owner admits exact recipe, resources, and eligible population
+verify checkpoint / tokenizer / teacher / evaluator / replay bindings
+
+for each admitted cycle:
+    select eligible examples through existing replay/curriculum owner
+    fetch source-bound teacher observations or declare them unavailable
+    generate complete outputs using the selected behavior policy
+    preserve every output, failure, abstention, and actual sampling cost
+    evaluate with independent fixed semantic and formal owners
+
+    if supervised branch:
+        build only eligible supervised/distillation terms
+    if policy branch:
+        build algorithm-compatible credit from exact observed trajectories
+        refuse incompatible action support or missing behavior identities
+
+    propose conventional update in an isolated checkpoint lineage
+    evaluate development/retention at the predeclared cadence
+    commit or reject through the existing checkpoint/registry contract
+
+    at separately budgeted diagnostic checkpoints:
+        test registered mechanistic hypotheses on development groups
+        optionally propose bounded adapter/weight edits
+        compare against equal-budget controls
+        record optimizer-state disposition before any resumed optimization
+
+    stop on existing-owner budget, identity, eligibility, or custody rules
+
+apply untouched final evaluation only under the registered protocol
+publish exact costs, failures, limitations, and checkpoint ancestry
+```
+
+The existing owner should preserve interruption/resume state; this pseudocode does not introduce a competing loop scheduler. No diagnostic result can mutate the independent evaluator, legal acceptance rules, final split, or source population.
+
+## 11. Adapter portability conformance design
+
+| Model family | Likely reusable surface | Evidence needed; do not assume support |
+|---|---|---|
+| Autoregressive transformer | Sequence generation/scoring, supported conditioning adapters | Exact tokenizer/action measure, masks, hook semantics, compatible update modules |
+| Encoder-decoder model | Conditional generation and supervised loss | Source/target boundaries, cross-attention or supported conditioning, label/shift semantics |
+| Recurrent/state-space decoder | Sequential actions and supervised objective | Hidden-state reset/carry rules, recurrent intervention semantics, truncation/backpropagation policy |
+| Fixed-output structured decoder | Typed field/AST predictions | Field dependency order, completeness, joint versus factorized scoring, legal action masks |
+| Nonautoregressive/diffusion decoder | Generation and family-specific training | Native stochastic action/trajectory measure and objective; token-policy compatibility unproven |
+| Remote/generation-only model | Output generation and external evaluation | No training, weight edit, activation, or policy-scoring support unless separately demonstrated |
+
+For each adapter, declare parameter count, trainable parameter count, context/output limits, native representation sizes, and conditioning capacity. A small fixed-output model cannot qualify by omitting clauses that a larger decoder must express. Keep the complete required LegalIR schema constant or report explicit unsupported coverage.
+
+A portable recipe is accepted only when capability refusals are correct as well as successful calls. An adapter that silently drops interventions, treats hidden states with incompatible semantics as equivalent, or ignores unknown teacher fields fails conformance.
+
+## 12. Outstanding evidence after cache-only review
+
+The bounded cache review located earlier Source32/98-related legal-parent and execution-control metadata, but did not establish decoder/teacher/optimizer owner bindings. This is not proof that no relevant cached records exist; it is insufficient evidence for filling the integration map.
+
+The coordinator has already requested the appropriate held mappings. Do not duplicate the reader request, infer model IDs from dimensions, or start a fresh repository census. Continue planning from the explicit unknowns until the held evidence is relayed.
+
+### Corrected held-metadata handoff
+
+The coordinator relayed a Source32/98 metadata slice identifying the direct intent decoder:
+
+```text
+/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/decoder.py
+bytes: 24220
+sha256: 7bab5781c07e00b54b0283d3a2962926f75935caedc80eceb23264cb388be257
+evidence level: raw held record subsequently authenticated and statically inspected; see section 13
+```
+
+The held scope also includes formalization/autoencoder native-family Lean emitters and qualified Lean material. Proof emitters are not evidence of a trainer.
+
+No teacher/replay/evaluator/checkpoint/trainer/latent basename hit was reported within these 98 records. This is a limitation of that captured scope, not a repository-wide absence finding. The meaning of 8D remains unresolved.
+
+Locator correction: the previously supplied older turn `01a1eee3-aee1-77a2-99c0-fc52029b524c` was an unconfirmed inference. A bounded lookup did not find the named index there. Do not repeat that lookup or use the guessed turn as evidence. The soleReader is re-exporting the exact held decoder and full index provenance in a small current-turn packet; wait for its explicit locator. This is not a new Source capture request.
+
+## 13. Authenticated first owner: wire decoder, not learned generator
+
+### Evidence and scope
+
+The exact cache re-export was read and authenticated without importing or executing its project code:
+
+```text
+Reader thread: 01a1ed56-e938-7fb2-9df0-ca83f4e5daaf
+turn: 01a1ef24-53b4-7d71-a812-05c0666e6769
+item: exec-553c6f46-3be3-4eb9-a943-9d0679869565
+outer stdout: 8932 bytes
+outer SHA-256: 3c5d7e1b2b43566955714a5952851059cc17085f7d9f3eceed03dc6033ac613e
+record.raw_zlib_base64 -> 24220 bytes
+body SHA-256: 7bab5781c07e00b54b0283d3a2962926f75935caedc80eceb23264cb388be257
+review command: d528a3, exit 0
+new project Source reads: 0
+project imports/execution: 0
+```
+
+The packet reports the corrected original index provenance:
+
+```text
+turn: 01a1ed93-61be-7fd1-8534-2d20311a8366
+item: exec-4fcd5d2a-f449-418f-9375-bb06a9e2e9bb
+stdout: 6059 bytes
+stdout SHA-256: 076d31c7ce5f1953c30045f0972f23aa6fb8cae445f38ffe87504126d1960cb2
+whole cache: 981358 bytes
+whole cache SHA-256: 5a1cab5bd88d750dddf6e8db5c97e704bcb173dc3a83c1dc748831af48e81fa9
+```
+
+The outer packet and decoder body were authenticated here. The full original index/cache were not independently reread in this review; their identities are reported by the authenticated re-export. This is held-snapshot evidence, not current-worktree validation.
+
+### Actual public interface in the held file
+
+| Symbol | Held lines | Observed purpose |
+|---|---|---|
+| `decode_intent_ir(payload)` | 199-217 | Parse exact current-version wire data into an immutable typed document; refuse other versions |
+| `migrate_intent_ir(payload, *, allow_lossy=True)` | 220-269 | Explicit legacy migration with diagnostics and a registry receipt |
+| `decode_intent_ir_with_migration(...)` | 272-279 | Named migration alias |
+| `_decode_v1` | 282-316 | Construct the document and call imported `validate_intent_ir` |
+| `_load_payload` | 548-569 | UTF-8/JSON or mapping ingestion |
+| `INTENT_IR_SCHEMA_REGISTRY` | 684-708 | Existing schema/migration registry instance |
+
+`IntentIRDecodeError` is the declared refusal type. The file imports schema records and `validate_intent_ir` from `.schema`, and registry types from `..ir_core.schema_registry`. Those imported owners were not inspected here, so their full semantic contracts remain unqualified.
+
+No neural model, teacher embedding production, gradient update, checkpoint training API, or training loop is defined in this file. This is a bounded statement about the authenticated file, not repository-wide absence.
+
+### Correct integration placement
+
+For an experiment whose declared output target is Intent IR:
+
+```text
+learned generator (owner unresolved)
+-> exact generated wire artifact
+-> existing decode_intent_ir
+-> independent source/review/semantic checks
+-> separately qualified downstream consumers
+```
+
+For an experiment targeting LegalIR, use its actual canonical decoder/validator once identified. Intent IR is not automatically equivalent to LegalIR, and this file does not prove a bridge, Lean compilation, or statutory acceptance path. Do not replace the complete legal target with the easier wire format to claim success.
+
+The parser does not implement `ModelAdapter.generate`, `score_actions`, or `train_supervised`. Keep its existing API and attach an evaluator wrapper through the existing owner after authorization; do not retrofit a trainer into this parser because of its filename.
+
+### Constraints this owner adds to the plan
+
+1. Parse the exact generated bytes. `_load_payload` uses duplicate-key and nonfinite-number rejection. Do not pre-normalize model JSON through a permissive loader and erase those diagnostics before calling the owner.
+2. Preserve raw output separately from typed/canonical forms. Parsing success is a structural result, not semantic or legal correctness.
+3. Use the strict current-version route for new training outputs. Migration is a separate recorded operation; `allow_lossy=True` is the migration API default and must not silently turn an old target into an accepted current one.
+4. Legacy grounding ambiguity is explicitly marked lossy at held lines 502-513. A migrated record cannot manufacture the missing original authorial distinction. Training eligibility must adjudicate that loss separately.
+5. `_check_fields` rejects unknown fields. Store teacher profiles, activations, credit, checkpoint IDs, and training receipts in sidecar records bound to the exact output digest; do not inject them into the closed Intent IR wire object without an authorized schema change.
+6. `SourceSpan` is built from `start_char`/`end_char`, not UTF-8 byte offsets. The training provenance interface must label units and bind exact text. Do not relabel character offsets as bytes.
+7. Held source review defaults to `UNREVIEWED`, while statement review defaults to `MACHINE_EXTRACTED`. Preserve provenance status; do not promote generated review fields into independent approval.
+8. Held statement confidence defaults to 1.0. This is a parser default, not measured calibration or a training reward. Distinguish raw supplied fields from defaults and independently assessed uncertainty.
+9. The declared default does not establish any particular enum's full meaning or allowed legal use. Inspect actual schema/admission owners before claiming those properties.
+
+### Owner-specific integration proposal, inert
+
+Keep this file unchanged unless a separately reproduced defect justifies modification. At the future evaluation boundary, invoke its public strict decoder on exact Intent IR outputs, preserve typed refusal diagnostics, and then pass successful documents to the independently qualified semantic owner. Bind both raw and typed identities in the trajectory record.
+
+Proposed local regression cases: duplicate keys; nonfinite numeric forms; invalid UTF-8; unknown fields; missing/unknown version; a generated review claim without external approval; migration loss; character/byte offset mismatch; and a structurally valid but semantically wrong output. These are test-design cases, not executed results or newly selected callers.
+
+Next missing evidence remains the learned decoder/trainer owner and the actual teacher producers. The authenticated wire parser does not resolve 8D meaning, larger-width model IDs, replay/checkpoint ownership, or mechanistic/RL feasibility.
+
+## 14. Subsequent held trainer metadata relay
+
+An authorized one-time relay from thread `01a0faea-6fb5-70a2-a4d5-d8fcc1f93b49` supplied the following already-held metadata. No new Source read, model action, admission, or runtime is implied:
+
+```text
+held reference: 041770b3 (relay label; full cache locator not supplied here)
+reported path: optimizer/autoencoder_training_worker.py
+reported bytes: 316963
+reported SHA-256: 7e930f3037146d74f7bb16eb283ba54a3ab7c122214d933094a64f3fd629e2d5
+existing catalog owner: reviewed-decoder-numerical-worker
+reported symbols: TorchReviewedDecoderBackend
+                  ReviewedMixedDecoderTrainingJobSpec
+reported versions: producer v3 / localruntime v3
+evidence level: relayed held owner metadata, not body inspection
+```
+
+The supplied path is relative and must not be expanded to an invented canonical module path. The relay did not provide concrete producer/localruntime symbol names, complete version contracts, or method signatures. Do not infer those from the version labels.
+
+### Revised integration route
+
+Before adding any separate model/training implementation, inspect the held contract for this existing numerical-worker owner when an exact authorized cache locator is supplied. Candidate roles to investigate are:
+
+| Proposed contract | Existing candidate to inspect | Still required |
+|---|---|---|
+| Model adapter and supported operations | `TorchReviewedDecoderBackend` | Actual methods, state/score semantics, shapes, refusal behavior, supported model families |
+| Training recipe binding | `ReviewedMixedDecoderTrainingJobSpec` | Actual fields, data eligibility, parameter groups, loss/optimizer/replay/checkpoint bindings |
+| Experiment/output provenance | Existing producer v3 | Exact producer identity, emitted fields and evidence binding |
+| Local execution and custody | Existing localruntime v3 | Exact runtime identity, resource admission, interruption/resume and closure contracts |
+
+These are planning questions, not assertions that all proposed capabilities exist. The name `TorchReviewedDecoderBackend` does not establish installed PyTorch, available checkpoints, trainability of a chosen model, activation hooks, policy-scoring support, reversible weight edits, or architecture portability.
+
+The metadata narrows the next integration review from an unknown trainer to a specific existing-owner candidate. It does not establish the meaning of 8D or any 384D/768D/4096D encoder/checkpoint identity. No model convergence or training outcome is claimed.
+
+Holds remain unchanged: no new Source/capture/runtime/models/install/project writes. Foreign live handles remain with their original owners; this lane neither polls them nor treats their status as training admission. The standalone planning files are the only documents changed here.
+
+## 15. User-supplied teacher identities
+
+The user directly identified the teacher families as `spacy`, `gte-small`, `gte-base-multilingual`, and `leanstral`. This resolves family naming, not checkpoint/extractor provenance or semantic qualification. The width pairing below follows the order of the user's four names and earlier four dimensions; that pairing is an explicit inference rather than inspected local-profile evidence.
+
+| Planned width | Intended teacher | What is established | What must still be bound |
+|---|---|---|---|
+| 8D | spaCy | User-supplied family | Pipeline package/version, component configuration, exact eight features or projection, units/normalization, source alignment |
+| 384D | GTE-small | User-supplied family; publisher `thenlper/gte-small` documents 384D | Exact selected local model/revision and digest, tokenizer, input window, pooling/normalization and allowed uses |
+| 768D | GTE-base-multilingual | User-supplied family; publisher `Alibaba-NLP/gte-multilingual-base` documents 768D | Whether this exact public ID is the selected local producer, pinned revision/code, tokenizer and extraction policy |
+| 4096D | Leanstral | User-supplied family; publisher `mistralai/Leanstral-2603` parameters include `dim: 4096` | Exact intended version, local assets, layer/tensor, token/span alignment, pooling, quantization, and teacher role |
+
+Public references checked on 2026-11-19:
+
+- GTE-small publisher model card: https://huggingface.co/thenlper/gte-small
+- GTE-small configuration: https://huggingface.co/thenlper/gte-small/blob/main/config.json
+- Multilingual GTE publisher model card: https://huggingface.co/Alibaba-NLP/gte-multilingual-base
+- Leanstral publisher parameters: https://huggingface.co/mistralai/Leanstral-2603/blob/main/params.json
+- spaCy representation documentation: https://spacy.io/usage/embeddings-transformers
+- spaCy pipeline identity documentation: https://spacy.io/models/
+
+These are public reference candidates, not authenticated identities of local assets. Mutable `main` links are not checkpoint pins. No weights, model code, tokenizer, or package were downloaded, loaded, installed, or executed.
+
+### Teacher-specific integration decisions
+
+1. spaCy may provide linguistic features, contextual vectors, or a derived representation depending on its actual pipeline. Do not label an 8D feature vector a native spaCy embedding without the producer contract. If the eight coordinates are explicit features, preserve their names and units; if compressed, bind the compression fit population and weights.
+2. GTE-small and multilingual GTE can be investigated as separate semantic-conditioning, relational-distillation, and retrieval teachers. Matching dimensions or family branding does not align their vector coordinates. Use separate profiles and projectors.
+3. Leanstral is a formal-proof/code model family. A 4096-wide internal state is not by itself a calibrated sentence embedding or legal semantic target. Source-conditioned hidden-state extraction and generated formalization/proof demonstrations are different teacher routes and must be evaluated separately.
+4. For hidden-state extraction, specify exact prompt/source context, layer, token selection, pooling, and whether generated continuation is present. No target/reference-only information may enter a source-only experiment.
+5. For generated demonstrations, preserve licenses, provenance, decoding budget, formal checks, independent source correspondence, and uncertainty. Teacher-generated proofs or IR do not become gold legal interpretations by generation or compilation alone.
+6. Output-logit distillation from Leanstral requires actual probability access and an explicit output-vocabulary/action alignment. The embedding profile alone does not supply this capability.
+7. Do not silently replace one Leanstral version with another. Bind the user's actual intended local checkpoint even when public model catalogs name multiple versions.
+8. All four families remain hypotheses about useful supervision. No causal MI effect, RL gain, cross-teacher equivalence, or improved convergence has been measured here.
+
+The inert manifest records `family_identity_status=user_identified` while leaving each actual `TeacherProfile` unresolved. This permits planning progress without promoting family names into qualified execution inputs.
+
+## 16. Repository-grounded owner integration, 2026-11-19
+
+The user instructed this lane to research the `ipfs_datasets_py` submodule for prior work. The resulting [research report](/tmp/decoder-training-prior-work-research-v01.md) and [24-file source observations](/tmp/decoder-training-prior-work-source-observations-v01.json) distinguish current working-file inspection, documented historical observations, and runtime qualification.
+
+Observed repository HEAD remains `3f1691d59cc0a310750c0b441b51d3528b17eb85`, with 130 tracked dirty paths. Current worker bytes are 312136 / `f1d6369a6f07bb5d42b4695af9c7a1595a2b68eae217529173a7f0787ce13c0a`; do not silently reuse the older held 316963-byte source identity.
+
+### Actual integration owners
+
+| Proposed contract | Inspected existing owner | Concrete reuse or extension boundary |
+|---|---|---|
+| 8D representation | `optimizers/logic_theorem_optimizer/spacy_modal_codec.py`, `autoencoder_lineages/legacy_v1/linguistic.py` | Feature-stream hashing, L2, six-decimal rounding, explicit blank-en/local-en_core_web_sm profiles; preserve pipeline/codec identity |
+| 384D teacher observation | `autoencoder_embedding_production.py`, `autoencoder_embedding_runtime.py`, `formalization/autoencoder/source_embeddings_384.py` | Existing exact source/token/vector receipts and offline GTE-small profile |
+| 768D teacher observation | `formalization/autoencoder/gte_multilingual_profile.py`, `source_embeddings_768.py` | Existing pinned model and custom-code asset admission; CLS/L2/CPU-float32/reject-overlength |
+| 4096D teacher operation | `source_embeddings_4096_full_owner.py`, native binding/numerical owners | Existing operation-bound full-forward owner; do not call the separate discovery gate as a substitute |
+| Supervised pretrained model adapter | `optimizers/logic_theorem_optimizer/autoencoder_training_worker.py::TorchReviewedDecoderBackend` | Existing model/optimizer/tokenizer injection; identity, record validation, pair restore/match/snapshot, supervised train and generation methods |
+| Recipe and execution envelope | `ReviewedDecoderTrainingJobSpec`, `ReviewedMixedDecoderTrainingJobSpec`, `ReviewedDecoderRuntime` | Existing artifact/source/admission/registry/guard binding; no parallel training scheduler |
+| Compact decoder baselines | `source_training_v2.py`, `structured_source_384.py` | Existing sequence versus fixed-schema capacities must remain explicit |
+| Relation loss and admission | `alignment_masked_contrastive.py`, `alignment_relation_mask_handoff.py` | Reuse masked objective and review handoff; do not generate unknown negatives |
+| Gradient diagnostics | `decoder_gradient_replay.py` | Exact committed-step replay before approximate attribution, privately and outside live training |
+| Retention and feedback | `legal_span_mixed_replay.py`, `trusted_feedback_trainer.py`, `legal_ir_proof_feedback_replay.py` | Existing pool state, current-proof eligibility, deduplication and ablation boundaries |
+| Sparse update artifact | `modal_autoencoder_patch_codec.py` | Existing typed sparse postimages; dense Torch deltas need a separately explicit compatible contract |
+| Checkpoint identities/lifecycle | `logic/formalization/checkpoints.py` | Extend existing manifests and promotion rules instead of new incompatible registries |
+
+Paths without a package prefix in this table are expanded in the research report. These are inspected source responsibilities, not a blanket qualification of every current method.
+
+### Source-established producer identities
+
+- 384D: `thenlper/gte-small@17e1f347d17fe144873b1201da91788898c639cd`; existing receipt profile mean-pooling/L2/CPU-float32, 512 tokens, no truncation.
+- 768D: `Alibaba-NLP/gte-multilingual-base@9bbca17d9273fd0d03d5725c7a4b0f6b45142062`, custom code `Alibaba-NLP/new-impl@40ced75c3017eb27626c9d4ea981bde21a2662f4`; CLS/L2/CPU-float32, 8192 tokens, no truncation.
+- 4096D: existing source profile declares `Leanstral-1.5-119B-A6B-NVFP4.gguf`, SHA-256 `4668fd2a6d2764de250489852230e96238eb5c0d7495866eb3b9c6c4fac5c7da`, last pooling/L2 and 512-token context. The full-forward route has additional operation-bound requirements; a constant is not actual asset verification.
+- 8D: deterministic hashing of the spaCy linguistic feature stream, not eight independently named semantic axes and not an arbitrary compression of the other teachers. Exact selected backend/package identity remains to be bound per run.
+
+### Design changes required by prior work
+
+1. Replace speculative public-model selection with the existing pinned local producer contracts, unless a separately versioned experiment intentionally selects a new producer.
+2. Reuse the reviewed backend's explicit encoder-decoder/causal-LM support, finite gradient/clipping and optimizer/RNG state boundaries. It does not currently expose a generic policy-scoring or mechanistic-intervention API by the inspected method inventory; add only separately qualified capabilities when needed.
+3. Preserve explicit Qwen2 training-conditioning recipe identity. The current handoff records fictional-fixture mechanics and open actual-tokenizer/pair/capacity gates; this research neither reruns them nor grants actual pretrained fitting.
+4. Begin diagnostics with existing captured-event gradient replay, not a second live-training backward loop. Its alpha=0 and frozen-projection-MSE constraints cannot be silently generalized to every decoder/teacher objective.
+5. Use the already-implemented mixed replay, trusted-feedback training boundary, and current proof replay. Policy-gradient credit and causal interventions remain proposed integrations, not conclusions inferred from those filenames.
+6. Distinguish spaCy8, the source384 residual branch of width8, the formula conditioning state of width32, and native4096. Only the latter widths describe their declared tensors; equal widths do not imply equivalent semantic representations.
+7. Keep prior four-width metadata alignment and identity-by-construction reconstruction outside the learned-convergence evidence pool. Reuse raw source/vector provenance where eligible, with all missing historical receipts and zero training/gold masks preserved.
+
+The next practical task is an owner-specific adapter/conformance proposal against these actual methods and selected current checkpoint pairs, followed by the existing admission process when runtime work is authorized. Fresh training and model execution remain outside this research.
+
+## 17. Concrete change sets against existing owners
+
+These are proposed changes for later review and selection, not implemented edits, new task queues, or runtime grants. Reconcile each with the maintained catalog before assigning repository task IDs.
+
+### Capability description without changing historical identities
+
+Owner: `autoencoder_training_worker.py::TorchReviewedDecoderBackend` and existing reviewed job/runtime contracts.
+
+Propose an additive, opt-in capability description derived from the exact selected backend configuration. Map existing `train_batch`, `generate_batch`, restore/match/snapshot methods honestly. Keep score-actions, policy training, activation intervention, and arbitrary reversible edits unverified until separately implemented and tested. Preserve default recipe/checkpoint identities; new opt-ins must bind a new explicit configuration identity.
+
+Proposed owning regressions: default identity unchanged; unsupported architecture/device refused; capability constraints agree with actual methods; no capability object grants resource or asset authority; historical checkpoint source mismatch remains refused.
+
+### Teacher-profile view over existing producer receipts
+
+Owners: `autoencoder_embedding_production`, `autoencoder_embedding_runtime`, `gte_multilingual_profile`, `source_embeddings_768`, linguistic profile and native4096 owners.
+
+Map the proposed logical TeacherProfile onto existing producer/receipt objects rather than introducing a competing provenance system. Separate inspected source-declared identity from observed selected local asset/runtime identity. Preserve mean-versus-CLS-versus-last pooling, input limits, token evidence, normalization, precision, source selection and every rejection disposition.
+
+Proposed owning regressions: mean/CLS mismatch; spaCy bucket vector mistaken for residual branch; missing source context; preserved overlength refusal; actual-output versus advertised-width mismatch; discovery receipt mistaken for a full-forward live result.
+
+### Distillation extension in the existing development owner
+
+Owner: `decoder_distillation_experiment.py`, with relevant existing masked-relation/projection owners.
+
+Its current objective already implements masked same-codec teacher-logit KL. Reuse that baseline rather than reimplementing KD. Feature and relational distillation require separately named objectives and an explicit gradient boundary; embeddings cannot be substituted into the logit KL input. Preserve original complete target IDs and reference-prefix teacher forcing as training-only information, never inference context.
+
+Any extension must retain the default loss/profile unchanged, record enabled objective identities and compatible teacher evidence, and produce an experimental state under its own lineage. Do not relabel an experimental state as a production checkpoint or inherit teacher qualification from a hash field alone.
+
+Proposed owning regressions: identical support/codec required; embedding-as-logits refused; alpha0 path unchanged; padded labels excluded; gradients finite; complete output budget accounted; unsupported target grammar remains explicit; teacher qualification absent remains absent.
+
+### Mechanistic and gradient-credit instrumentation
+
+Owners: `long_span_gradient_trace_training.py`, `decoder_gradient_replay.py`, and actual model implementation exposing the selected tensor interfaces.
+
+The prior gradient-spike study supplies a concrete diagnostic problem. First preserve exact event capture/replay: pre-step weights, Adam groups/moments, RNG, modes, ordered batches, target weights, clipping and exact post-step digests. Only then add separately named approximate diagnostics or registered interventions.
+
+Current `replay_event` requires alpha0 and a frozen projection-MSE branch. Distillation-enabled events or different model families need an explicit new event schema/recipe and separate parity evidence. Do not relax the old validator to pretend it already covers those cases. Keep diagnostic backward passes private, costed and outside live training.
+
+For causal MI, add an intervention record with exact checkpoint/hook semantics, sham/random controls, and heldout semantic effects. Gradient-branch norms, cosines, and spike localization remain diagnostics rather than causal credit or legal acceptance.
+
+Proposed owning regressions: trace-on/off update parity; corrupted Adam/RNG/batch fails replay; clipped and unclipped gradients distinguished; tail-selected events labeled as selected; no live state mutation; out-of-scope objectives refused; diagnostic overhead included in cost.
+
+### Bounded weight-space proposals and initialization
+
+Owners: `gte_decoder_warm_start`, `gte_decoder_transfer_replay`, `modal_autoencoder_patch_codec`, and existing checkpoint/registry owners.
+
+Use the existing exact donor-copy and private new-boundary initialization as a baseline for proposed programmatic updates. The copied384D latent is not native GTE384. Transfer replay can establish preserved donor behavior in its declared scope; its reference-prefix logits are not completed distillation or new768D source observations.
+
+Compare boundary-only gradient updates with bounded proposed boundary edits using the same donor, data and search budget. Sparse postimage transport is reusable only for compatible sparse state; do not serialize arbitrary dense Torch edits through that contract. Dense adapter proposals require exact tensor/optimizer/RNG state and rollback checks in a compatible checkpoint format.
+
+Proposed owning regressions: donor byte equality; only declared new tensors differ; no optimizer moments silently transferred; selected-codec mismatch refused; RNG restoration; replay/input provenance preserved; rejected proposal leaves parent unchanged.
+
+### Policy credit under the reviewed execution envelope
+
+Owners: reviewed numerical/runtime/input owners, `trusted_feedback_trainer`, `legal_ir_proof_feedback_replay`, and `legal_span_mixed_replay` where profile-compatible.
+
+The inspected numerical training is supervised; do not call it RL because it consumes proof feedback or gradients. Before a policy objective, define action probabilities and behavior-policy identity in the actual backend. Introduce the selected algorithm through a new explicit recipe, preserve existing admission and complete-output checks, and retain supervised/mixed-replay comparisons.
+
+Proposed owning regressions: exact behavior-policy binding; missing action probabilities refuse; unknown semantic labels excluded under a declared policy; proof-success/mistranslation cannot gain acceptance; current proof receipt required; heldout exclusion and deduplication retained; constant-reward group handled; policy and supervised replay eligibility remain distinct.
+
+### Ordered first experiment after authorization
+
+1. Choose a current-compatible retained decoder and exact complete target population using existing owners; do not force a single-rule donor to represent a complete multi-clause target it cannot express.
+2. Freeze source-only SFT/continuation and current same-codec distillation baselines with original identities and costs.
+3. Use existing saved gradient events if eligible; otherwise obtain a separately admitted trace-on/off parity run. Investigate the documented curriculum-transition/token-branch spike without assuming a causal mechanism.
+4. Compare one diagnostic-guided intervention with a matched control under fixed budgets; reject it if source fidelity/retention does not improve.
+5. Add one bounded boundary-edit comparison only after donor-copy/parity/rollback requirements are met.
+6. Add policy-gradient credit after actual action-scoring support and independent reward evidence exist. Do not enable all techniques at once and make attribution impossible.
+
+Numbers from historical guides remain baseline investigation evidence, not new convergence measurements. Each actual comparison needs a newly bound recipe, current-source/checkpoint compatibility, admitted resources, and fresh local receipts.
+
+## 18. Baseline chronology and selection diagnosis
+
+The later generated-field study has actual8D/384D/768D numerical fits; do not treat its earlier zero-ready768 preparation as the current historical frontier. A direct saved-result read confirms width768/seed2718 final candidates at42/48 exact development outputs for two arms,41/48 for the every2 arm, with all18 fits still selecting epoch0. Exact saved-artifact identities and fields are in the research report. No model was replayed.
+
+Consequences for the first experiment:
+
+1. Preserve chronological baseline identities. The early0/48 gradient study is a useful mechanistic-diagnostic source, not the strongest known output baseline.
+2. Include the stronger later candidate family as a potential comparator only after current-source/checkpoint eligibility is established. Do not assert that a new method improves over previous work by comparing only against the weaker early fit.
+3. Keep the original selected checkpoint distinct from the last attempted state and the best diagnostic candidate. Report all three where available; use none of them as a newly promoted model without admission.
+4. Diagnose the selection frontier separately: epoch0's low extra-rule count can coexist with unusable/no valid outputs, while a trained candidate improves coverage and still violates an unchanged extra-rule gate. Report syntax, complete coverage, missing/extra whole-rule content, facets, retention, exactness and cost together.
+5. Never remove an old criterion to pass an experiment. A proposed alternative development selector requires a new version, prospective criteria, independent review and untouched evaluation data. It must not change legal/corpus admission or retrofit approval to the historical42/48 outputs.
+6. Test every2 or other auxiliary cadence against fixed-compute and fixed-example controls separately. Reducing supervision exposure can reduce time without improving convergence. Count source-only collection, graph replay, retry work and failed attempts.
+7. Do not pool the repeated48 development cases as independent observations. Use dependency-grouped new heldout data for any new generalization or convergence claim.
+
+This is now a two-part research question: what improves source-faithful learning, and which predeclared selector can recognize a useful qualified candidate without rewarding empty output or overlooking harmful errors? Neither is solved by decreasing CE alone.
+
+## 19. Feasibility and causal-hypothesis gates before new optimization
+
+Later source-head results strengthen the candidate baseline to47/48 exact development outputs for two384D final attempts and46/48,45/48 for768D attempts. The selected states remain separate, including one epoch52 state with14/48 exact and161 missing rules. See the research report for inspected saved-artifact identities, retained guardian failure, and limits. No new convergence result is claimed.
+
+### Effective-input identifiability
+
+Before optimizing, group examples by the exact information actually observable to the selected decoder after preprocessing: source bytes, permitted governing context, embeddings, masks, transforms, prefix availability, and selected interpretation. Inspect TRAIN only when diagnosing curriculum/fit. Do not inspect heldout target labels to choose a recipe.
+
+If an observable input is identical but genuinely incompatible accepted meanings require different outputs, the route lacks an input distinction or an explicit output-set contract. No optimization method can choose a uniquely correct deterministic answer from unavailable information. Equivalent formalizations, multiple accepted targets, and unknown interpretations must not be mislabeled as contradictions merely because serialized targets differ.
+
+Embedding collisions alone are not a whole-decoder impossibility result when raw text or other context remains available. Conversely, distinct vectors do not establish that a finite selected head can separate labels or learn them within budget. Repeat checks at the actual float precision and normalization used by the decoder.
+
+### Expressivity and output completeness
+
+Check that the chosen codec, target grammar, context ceiling and complete output budget can express the entire selected norm, including conditions, exceptions and definitions. A one-rule decoder or fixed-array classifier cannot qualify by deleting difficult clauses. An output-cap experiment with unchanged short targets measures stopping/readout behavior, not long-target learning.
+
+### Testable hypotheses and matched controls
+
+| Hypothesis | Existing evidence motivating it | Proposed discriminating comparison | Claims it cannot establish alone |
+|---|---|---|---|
+| Training exposure or optimizer groups limit8D readout | Probe/full-decoder exposure and rate differences | Equal clause/token exposure with matched optimizer and shrinkage; preserve all other losses | Fresh legal generalization or representation equivalence |
+| Recurrent/prefix pathway overrides correct source fields | Perfect raw larger-width readouts coexist with generated action errors | Exact observed prefix/state tracing, sham versus localized intervention, full-vocabulary outputs and independent fidelity | A probe score is not proof of causal use |
+| Shared objectives conflict near curriculum transition | Exact replay localizes token-dominated spikes | Replay original state; examine shared-parameter gradients; separately controlled objective/clip interventions | Spike magnitude alone does not identify a recurrent-Jacobian cause |
+| Auxiliary cadence improves total efficiency | Every2 historical arms reduce cost and exposure | Equal-compute and equal-exposure comparisons with all retry/generation costs | Fixed-update fit time is not fastest convergence |
+| Bounded boundary edits improve adaptation | Existing donor-copy/new-boundary warm start | Same donor and input profile, bounded edit versus gradient/random/rule controls, equal selection budget | Raw deltas do not transfer across unrelated architectures |
+| Structured policy credit helps residual decisions | Existing generated-site diagnostics can localize observed errors | Independently verified action scores and outcomes; policy baseline versus declared credit method | Reference-prefix teacher forcing is not autonomous policy rollout |
+
+These hypotheses are proposed, not explanations already proved. Use the unchanged current gates for acceptance. Any prospective development-selector alternative needs independent versioning and review and cannot change legal admission.
+
+### Resource and state feasibility
+
+Audit selected current checkpoint, complete tokenizer prompts/labels, model/optimizer precision, full state footprint, output/storage budget, runtime import identity, and closure under the existing owners before an admitted fit. Preserve explicit fresh-optimizer versus exact-resume semantics. Repairing a lifecycle failure requires its own qualification; successful numerical outputs do not erase an original guardian failure.
+
+## 20. Planning completion audit and execution boundary
+
+| Deliverable | Current planning evidence | Actual implementation/qualification status |
+|---|---|---|
+| Existing-owner integration map | Direct submodule research, method inventory, links and source hashes | Existing owners identified; new integrations not implemented |
+| Four teacher profiles | Actual spaCy hashing and pinned384/768/4096 source contracts | Next run's local assets/runtime and selected8D backend not admitted here |
+| Versioned interface schemas | Logical contracts, draft structural schema, existing-manifest reuse map | Draft covers only teacher/capability shapes; not a complete deployed schema suite |
+| Mechanistic integration | Existing trace/replay owner, causal controls and explicit hypotheses | No new intervention or causal result |
+| Weight-space integration | Existing warm start, donor replay, sparse patch and dense-update boundaries | No new edit artifact or accepted update |
+| RL credit integration | Objective/trajectory/reward/algorithm contracts and actual supervised boundary | No new score-actions/policy implementation or RL run |
+| Convergence experiments | Eleven staged design entries, strong historical comparators, costs and refusal rules | No new equal-budget heldout convergence measurement |
+| Portability and retention | Architecture capability/refusal design and existing mixed replay/checkpoint owners | New adapters, conformance runs and retention results pending |
+| Local validation | Owner-specific regression designs; planning JSON parsing/link checks only | No new project tests or hosted CI |
+
+The comprehensive plan and research package are reviewable. The broader attached deliverables remain unproven where they require implemented integrations or actual measurements. Do not mark the entire goal complete from document length, parsed JSON, or preserved historical results. The runtime/project-write hold remains the next operational boundary; read-only research authorization does not lift it.

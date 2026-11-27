@@ -1,0 +1,382 @@
+"""Private data binder for the existing ordinary13 operator. Never runs its products."""
+import argparse
+import ast
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import stat
+import tempfile
+
+BASE = Path(__file__).resolve().parent
+STATIC = Path("/tmp/Root-proof-cache-reload-ordinary13-INERT-RYtARgph")
+D = Path("/tmp/Root-P1-cache-reload-owned-existing-route-wK9s5mUF/datasets")
+A = Path("/tmp/Root-result-cache-owned-existing-route-L4Wyme59/accelerate")
+A_HEAD = "fae7981fa576817536a3c7aa62c5d28dc417f214"
+A_TREE = "70e66c5b1f5d2438eab0b18e45687b98613f5416"
+A_PRIOR_READ = A.parent / "read4-controls/actual-output/actual-D27-observed-D-root-initializer-Source-READ-v01-small-closeout.json"
+OLD_OPERATOR = Path("/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/ordinary10-retry-v02/Root-selected-existing-Phase1-proof-cache-atomic-put-ordinary10-operator.py")
+GUARD = D.parent / "private-D-and-existing-A-nonclock-full9-guard.json"
+EMPTY_SHA256 = hashlib.sha256(b"").hexdigest()
+FULL9 = ("st_dev", "st_ino", "st_size", "st_mode", "st_uid", "st_gid", "st_nlink", "st_mtime_ns", "st_ctime_ns")
+KEYS = ("path", "bytes", "sha256", "full9")
+ABSENCES = (
+    "tests/unit/logic/__init__.py",
+    "tests/unit/logic/conftest.py",
+    "tests/unit/logic/legal_ir/__init__.py",
+    "tests/unit/logic/legal_ir/conftest.py",
+)
+GROUP = "phase1-proof-cache-reload-filename13"
+
+
+def require(condition, message):
+    if not condition:
+        raise ValueError(message)
+
+
+def ref(path, size, digest):
+    return {"path": str(path), "bytes": size, "sha256": digest}
+
+
+def digest(value):
+    return hashlib.sha256(value).hexdigest()
+
+
+def full9(info):
+    return {field: str(getattr(info, field)) for field in FULL9}
+
+
+def hexpin(value, length):
+    return isinstance(value, str) and re.fullmatch(r"[0-9a-f]{%d}" % length, value) is not None
+
+
+def read(reference):
+    path = Path(reference["path"])
+    require(path.is_absolute() and path.resolve() == path, f"Nonphysical ref: {path}")
+    require(type(reference["bytes"]) is int and 0 < reference["bytes"] <= 32 * 1024 * 1024
+            and hexpin(reference["sha256"], 64), f"Invalid bounded ref: {path}")
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+    with os.fdopen(fd, "rb") as stream:
+        start = os.fstat(stream.fileno())
+        require(stat.S_ISREG(start.st_mode) and start.st_nlink == 1 and start.st_size == reference["bytes"],
+                f"Wrong ref attributes: {path}")
+        raw = stream.read(reference["bytes"] + 1)
+        require(full9(start) == full9(os.fstat(stream.fileno())) == full9(path.lstat())
+                and len(raw) == reference["bytes"] and digest(raw) == reference["sha256"], f"Ref drift: {path}")
+    return raw
+
+
+def js(reference):
+    return json.loads(read(reference))
+
+
+def seal(out, name, value):
+    path = out / name
+    raw = value if isinstance(value, bytes) else (json.dumps(value, sort_keys=True, indent=2) + "\n").encode()
+    with path.open("xb") as stream:
+        stream.write(raw)
+        stream.flush()
+        os.fchmod(stream.fileno(), 0o400)
+        os.fsync(stream.fileno())
+    result = ref(path, len(raw), digest(raw))
+    require(read(result) == raw, f"Readback failed: {path}")
+    return result
+
+
+def literals(raw):
+    result = {}
+    for node in ast.parse(raw).body:
+        if isinstance(node, ast.Assign) and len(node.targets) == 1 and isinstance(node.targets[0], ast.Name):
+            try:
+                result[node.targets[0].id] = ast.literal_eval(node.value)
+            except (TypeError, ValueError):
+                pass
+    return result
+
+
+def bind(raw, slots, local_null):
+    old = literals(raw)
+    require({k for k, v in old.items() if v is None} == set(slots) | {local_null}, "Template NULL roles differ")
+    source = raw.decode()
+    for name, value in slots.items():
+        require(value is not None, f"Actual binding missing: {name}")
+        source, count = re.subn(r"^" + name + r" = None$", lambda _: f"{name} = {value!r}", source, flags=re.M)
+        require(count == 1, f"Nonunique exact NULL assignment: {name}")
+    compile(source, "<existing ordinary13>", "exec", dont_inherit=True)
+    after = literals(source)
+    require(all(after[k] == v for k, v in (old | slots).items()), "Unexpected literal change")
+    return source.encode()
+
+
+def rows_by_path(value):
+    rows = value["rows"] if isinstance(value, dict) else value
+    indexed = {row["path"]: row for row in rows}
+    require(len(indexed) == len(rows) and rows, "Empty or duplicate epoch rows")
+    return indexed
+
+
+def project(row):
+    physical = {key: row[key] for key in KEYS}
+    require(type(physical["bytes"]) is int and physical["bytes"] >= 0
+            and hexpin(physical["sha256"], 64)
+            and set(physical["full9"]) == set(FULL9)
+            and all(isinstance(n, str) and n.isdecimal() for n in physical["full9"].values())
+            and int(physical["full9"]["st_size"]) == physical["bytes"], f"Invalid epoch row: {row['path']}")
+    return physical
+
+
+def same_row(left, right, label):
+    require(project(left) == project(right), f"Evidence mismatch: {label}")
+
+
+def file_stamp(path, size, stamp):
+    info = Path(path).lstat()
+    require(stat.S_ISREG(info.st_mode) and info.st_nlink == 1 and info.st_size == size
+            and full9(info) == stamp, f"Named metadata drift: {path}")
+
+
+def exact_static():
+    control_ref = ref(STATIC / "READY-existing-P1-proof-cache-reload-ordinary13-INERT.json", 4533,
+                      "c021cfcffd6737e68487b30a467014c77392e930c14b66fd5ad57992a67c359a")
+    descriptor = js(control_ref)
+    controls = {name: read(reference) for name, reference in descriptor["controls"].items()}
+    plan = js(descriptor["role_plan"])
+    roster = js(descriptor["selector_roster"])
+    operator, bootstrap = (literals(controls[name]) for name in ("operator", "bootstrap"))
+    require(operator["EXPECTED_BRIDGE27_CASE_VECTOR"] == tuple(roster["case_vector"])
+            and bootstrap["EXPECTED_ORDERED_CASE_COUNTS"] == tuple(roster["case_vector"])
+            and list(bootstrap["EXPECTED_CASE_IDS"]) == roster["literal_case_ids"]
+            and list(bootstrap["EXPECTED_CASE_IDS"]) == list(operator["EXPECTED_CASE_IDS"])
+            and operator["SELECTION"]["function_selectors"] == roster["function_selectors"]
+            and operator["SELECTION"]["expected_function_case_counts"] == roster["expected_function_case_counts"]
+            and len(set(roster["literal_case_ids"])) == 13, "Exact ordinary13 selection changed")
+    return control_ref, descriptor, controls, plan, operator, bootstrap
+
+
+def validate_nonclock(handoff):
+    seal_ref, descriptor, controls, plan, operator, bootstrap = exact_static()
+    freeze, read_close, source_outer, source_python = (js(handoff[name]) for name in ("freeze", "read_close", "outer", "python"))
+    committed = freeze["committed"]
+    paths = plan["exact_two_roles"]
+    require(freeze["local_clean"] is freeze["exact_changes_only"] is True and freeze["pushed"] is False
+            and set(committed) == set(paths), "Local exact two-path freeze required")
+    source = js(freeze["source_closed"])
+    terminal = js(freeze["source2_terminal"])
+    require(source["Source_closed"] is source["module_closed"] is source["write_complete"] is True
+            and source["errors"] == [] and set(source["only_worktree_deltas"]) == set(paths)
+            and terminal["returncode"] == 0 and terminal["closed_write"] == freeze["source_closed"]
+            and terminal["Source_closed"] is terminal["module_closed"] is terminal["write_complete"] is True,
+            "Exact Source2 custody is not closed")
+    installed = rows_by_path(source["installed"])
+    require(set(installed) == {str(D / relative) for relative in paths}, "Source2 installed roles differ")
+    require(read_close["status"] == "PASS" and read_close["errors"] == []
+            and read_close["Source_closed"] is read_close["owned_module_closed"] is True
+            and read_close["SDK_Native_compiler_or_project_execution"] is False, "Closed successful existing Source READ required")
+    require(read_close["roots_before"] == read_close["roots_after"]
+            and set(read_close["roots_after"]) == {str(D), str(A)}, "Paired read roots differ")
+    frozen = freeze["frozen"]
+    current = read_close["roots_after"]
+    expected = ((D, frozen["HEAD"], frozen["tree"]), (A, A_HEAD, A_TREE))
+    for root, head, tree in expected:
+        observed = current[str(root)]
+        require(hexpin(head, 40) and hexpin(tree, 40) and observed["HEAD"] == head and observed["tree"] == tree
+                and observed["clean_worktree_and_index"] is True and observed["status_sha256"] == EMPTY_SHA256
+                and observed["cached_diff_returncode"] == observed["working_diff_returncode"] == 0,
+                f"Clean freeze/READ Git join differs: {root}")
+    projects = [dict(root=str(root), Git_HEAD=head, Git_tree=tree) for root, head, tree in expected]
+    require(projects == freeze["frozen_roots"], "Freeze scope differs from current paired READ")
+    outer_in = rows_by_path(source_outer)
+    python_in = rows_by_path(source_python)
+    outer = {path: project(row) for path, row in outer_in.items()}
+    python = {path: project(row) for path, row in python_in.items()}
+    guard = rows_by_path(js(ref(GUARD, 789663, "e321e1e1558b82ca8adb6064b5a4d31471e5b00b110a40e814d411d458eebda5")))
+    dindex, aindex = str(D / ".git/index"), str(A / ".git/index")
+    expected_outer = {path for path in guard if "/.git/" not in path or path in (dindex, aindex)}
+    require(set(outer) == expected_outer, "Epoch must contain the exact materialized source and paired index scope")
+    require(python == {path: row for path, row in outer.items() if Path(path).suffix in (".py", ".pyi")},
+            "Exact authorized Python epoch is not the Python subset of outer")
+    mutable = {dindex, *installed}
+    metadata_advanced = {str(D / ".git/refs/heads/work/p1-cache-reload-filename")}
+    for path, row in guard.items():
+        if path in metadata_advanced:
+            # The current loose branch row advances at local commit and is outside the ordinary digest ABI.
+            continue
+        selected = outer[path] if path in outer else row
+        file_stamp(path, selected["bytes"], selected["full9"])
+        if path not in mutable:
+            require((row["bytes"], row["full9"]) == (selected["bytes"], selected["full9"]),
+                    f"Unselected guard row changed: {path}")
+    captures = rows_by_path(read_close["captures"])
+    required_d = {dindex, *installed}
+    require(set(captures) in (required_d, required_d | {aindex}), "READ must capture exact selected D roles and optional paired A index")
+    if aindex not in captures:
+        previous_a = rows_by_path(js(ref(A_PRIOR_READ, 8850, "ee3d2db43d42c04e529b071ad9b927c590b551322b5a6b71400858fdb9361b88"))["captures"])
+        same_row(previous_a[aindex], outer[aindex], "retained exact A index")
+    for path, capture in captures.items():
+        same_row(capture, outer[path], path)
+        raw = capture["raw_reference"]
+        require(raw["bytes"] == capture["bytes"] and raw["sha256"] == capture["sha256"],
+                f"READ archive binding differs: {path}")
+    same_row(frozen["stage0_index"], outer[dindex], "frozen D index")
+    modules = {}
+    for name in (*operator["MAINTAINED_OWNER_NAMES"], *operator["SELECTED_TEST_MODULES"].values()):
+        relative = name.replace(".", "/") + ".py"
+        path = str(D / relative)
+        row = outer[path]
+        target = paths[relative]["private_postimage"] if relative in paths else plan["unchanged_python_Lean_role_to_repin"]
+        require((row["bytes"], row["sha256"]) == (target["bytes"], target["sha256"]), f"Wrong current body: {name}")
+        if relative in paths:
+            item = committed[relative]
+            require(item["mode"] == paths[relative]["mode"] and item["committed_blob"] == target["git_blob"]
+                    and item["stage0_matches"] is item["raw_bytes_bound"] is True, f"Unqualified stage/blob join: {relative}")
+            same_row(item, row, "stage0 and READ postimage")
+            same_row(installed[path], row, "Source2 and READ postimage")
+        modules[name] = dict(relative_path=relative, **{key: row[key] for key in ("bytes", "sha256", "full9")})
+    conf = [str(D / p) for p in plan["normal_loaded_conftests"]]
+    ini = str(D / plan["normal_fixture_ini"])
+    absence_paths = [str(D / path) for path in ABSENCES]
+    require(all(not os.path.lexists(path) for path in absence_paths), "Original four pytest namespace absences changed")
+    fixture = [outer[path] for path in [*conf, ini, *(str(D / p) for p in plan["other_protected_test_roles"]),
+                                       *(str(D / row["relative_path"]) for row in reversed(tuple(modules.values())))]]
+    require(len(fixture) == len({row["path"] for row in fixture}) == 9, "Original nine-role fixture closure differs")
+    inherit = literals(read(ref(OLD_OPERATOR, 66155, "67db68b819f2e4cc278b1a6c387566d6fa1c98c6b88e6140e1505327824b193e")))
+    # The existing SDK module identities stay fixed; bytes come from the current paired epoch.
+    sdk = {name: [relative, outer[str(D / relative)]["sha256"]]
+           for name, (relative, _) in inherit["FINAL_SDK_BINDINGS"].items()}
+    require(inherit["PY"] == operator["PY"] and inherit["PATH_SCOPE"] == operator["PATH_SCOPE"]
+            and inherit["D_READ_BINDING_ABI"] == operator["D_READ_BINDING_ABI"]
+            and inherit["source42"] == operator["source42"], "Original request/source/ABI differs")
+    return (seal_ref, descriptor, controls, operator, bootstrap, inherit, current, projects,
+            outer, python, dindex, aindex, modules, fixture, conf, ini, absence_paths, sdk)
+
+
+def prepare(handoff_ref, handoff):
+    (seal_ref, descriptor, _, operator, _, _, current, projects, outer, python,
+     dindex, aindex, modules, fixture_rows, conf, ini, absences, sdk) = validate_nonclock(handoff)
+    out = Path(tempfile.mkdtemp(prefix="nonclock-", dir=BASE))
+    outer_ref = seal(out, "ordinary13-current-outer-epoch.json", list(outer.values()))
+    python_ref = seal(out, "ordinary13-current-Python-epoch.json", list(python.values()))
+    shape = operator["D_READ_BINDING_ABI"]
+    abi = {"schema": shape["schema"], **dict.fromkeys(shape["required_true_keys"], True),
+           "Source_WRITE_claimed": False, "actual_closed_Source_READ": handoff["read_close"],
+           "exact_local_freeze": handoff["freeze"], shape["outer_epoch_key"]: outer_ref,
+           shape["outer_count_key"]: len(outer), shape["python_epoch_key"]: python_ref,
+           shape["python_count_key"]: len(python), shape["protected_index_key"]: outer[dindex]}
+    read_ref = seal(out, "ordinary13-existing-D27-READ-ABI.json", abi)
+    clean = seal(out, "ordinary13-paired-index-provenance.json",
+                 dict(actual_closed_Source_READ=handoff["read_close"], exact_freeze=handoff["freeze"],
+                      D_index=outer[dindex], A_index=outer[aindex], roots=current))
+    D_prov, A_prov = (dict(current[str(root)], root=str(root), actual_closed_Source_READ=handoff["read_close"],
+                          clean_index_provenance_reference=clean, local_frozen_Git_metadata_reference=binding)
+                      for root, binding in ((D, handoff["freeze"]), (A, clean)))
+    fixture = seal(out, "ordinary13-existing-nine-role-fixture-wire.json",
+                   dict(required_fixture_closure=fixture_rows, actual_closed_Source_READ_reference=handoff["read_close"],
+                        required_normal_conftests=conf, pytest_inifile=ini, required_current_namespace_absences=absences,
+                        role_count=len(fixture_rows)))
+    return seal(out, "READY-existing-ordinary13-actual-nonclock-INERT.json",
+                dict(schema="actual-Source-READ-existing-ordinary13-nonclock/v1", actual_handoff=handoff_ref,
+                     controls=descriptor["controls"], controls_seal=seal_ref, read=read_ref, D_prov=D_prov,
+                     A_prov=A_prov, fixture=fixture, modules=modules, sdk_bindings=sdk, source_projects=projects,
+                     freeze=handoff["freeze"], read_close=handoff["read_close"], outer=outer_ref, python=python_ref,
+                     expected_absent_paths=absences, root_selection=None, clock=None, cap=None, IO=None,
+                     effect=None, admission=None, actual_COLLECT=None, actual_RUN=None, qualification=None))
+
+
+def hydrate(handoff):
+    prepared = js(handoff["nonclock"])
+    require(Path(handoff["nonclock"]["path"]).is_relative_to(BASE), "Private nonclock binder output required")
+    actual_handoff = js(prepared["actual_handoff"])
+    (seal_ref, descriptor, controls, operator, _, inherit, current, projects, outer, python,
+     dindex, aindex, modules, fixture_rows, conf, ini, absences, sdk) = validate_nonclock(actual_handoff)
+    abi = js(prepared["read"])
+    fixture = js(prepared["fixture"])
+    D_prov, A_prov = prepared["D_prov"], prepared["A_prov"]
+    require(prepared["controls_seal"] == seal_ref and prepared["controls"] == descriptor["controls"]
+            and prepared["modules"] == modules and prepared["sdk_bindings"] == sdk and prepared["source_projects"] == projects
+            and abi["outer_epoch_reference"] == prepared["outer"] and abi["python_epoch_reference"] == prepared["python"]
+            and rows_by_path(js(prepared["outer"])) == outer and rows_by_path(js(prepared["python"])) == python
+            and abi["protected_index_reference"] == outer[dindex]
+            and abi["exact_local_freeze"] == actual_handoff["freeze"]
+            and abi["actual_closed_Source_READ"] == actual_handoff["read_close"]
+            and fixture["required_fixture_closure"] == fixture_rows and fixture["required_normal_conftests"] == conf
+            and fixture["pytest_inifile"] == ini and fixture["required_current_namespace_absences"] == absences,
+            "Authenticated nonclock handoff differs from current exact evidence")
+    for root, provenance in ((D, D_prov), (A, A_prov)):
+        require(provenance["root"] == str(root) and all(provenance[key] == value for key, value in current[str(root)].items()),
+                f"Wrong current provenance: {root}")
+    selected_ref, io_ref, effect_ref = (handoff[name] for name in ("selection", "io", "effect"))
+    selected, io, effect = (js(x) for x in (selected_ref, io_ref, effect_ref))
+    require(selected["Root_selected"] is io["Root_selected"] is effect["Root_selected"] is True
+            and selected["Source_READ_binding"] == prepared["read"]
+            and selected["IO_reference"] == io_ref and selected["effect_reference"] == effect_ref
+            and selected["frozen_D_HEAD"] == D_prov["HEAD"] and selected["frozen_D_tree"] == D_prov["tree"]
+            and selected["case_hint"] == 13 and selected["actual_COLLECT_supplies_order"] is True
+            and io["admitted"] is io["original_limits_and_guards_unchanged"] is True
+            and selected["Source_envelope_bytes"] == io["Source_envelope_bytes"]
+            and effect["ordinary_SDK_execution_selected"] is effect["temporary_workspace_only"] is True
+            and effect["no_actual_DuckDB_SQL_or_Native_Lean_selected"] is True
+            and effect["no_epoch_fit_external_models_or_prover_selected"] is True, "Separate actual Root selection/IO/effect required")
+    start, end = (selected[name] for name in ("launch_not_before_utc_ns", "launch_deadline_utc_ns"))
+    require(type(start) is type(end) is int and 0 < start < end and end - start <= 840 * 10**9,
+            "Original bounded clock shape required")
+    # Runtime checks actual UTC validity; this materializer neither selects nor extends the windows.
+    output = Path(selected["output_namespace"])
+    require(output.is_absolute() and output.is_relative_to(BASE) and output.parent.resolve() == output.parent
+            and output.parent.is_dir() and not os.path.lexists(output), "Fresh private output namespace required")
+    runtime = dict(schema="Root-selected-normal-HOME-rescue-launch-authority/v1", root_selection=selected_ref,
+                   launch_not_before_utc_ns=start, launch_deadline_utc_ns=end)
+    manifest = dict(Root_selected=True, frozen_Git_candidates=True, Source_WRITE_claimed=False,
+                    ordinary_execution_or_qualification=None, projects=projects, D_provenance=D_prov,
+                    A_provenance=A_prov, modules=modules, source_read_binding_reference=prepared["read"],
+                    fixture_closure_reference=prepared["fixture"], effect_decision_reference=effect_ref,
+                    admitted_io_plan_reference=io_ref)
+    out = Path(tempfile.mkdtemp(prefix="bound-private-", dir=BASE))
+    manifest_ref = seal(out, "Root-selected-existing-ordinary13-binding-manifest.json", manifest)
+    bootstrap_slots = dict(ROOT=str(D), ADDITIONAL_A_ROOT=str(A),
+                           EXPECTED_MODULES={name: dict(row, scope="frozen_git_D_source") for name, row in modules.items()},
+                           REQUIRED_CANONICAL_CONFTESTS=conf, PYTEST_INIFILE=ini, ROOT_RUNTIME_SELECTION=runtime,
+                           GIT_CANDIDATE_PROVENANCE=D_prov, ADDITIONAL_A_PROVENANCE=A_prov,
+                           BINDING_MANIFEST_REFERENCE=manifest_ref, SOURCE_READ_BINDING_REFERENCE=prepared["read"],
+                           ADMITTED_IO_PLAN_REFERENCE=io_ref, EFFECT_DECISION_REFERENCE=effect_ref,
+                           SOURCE_EPOCH_SHA256=prepared["outer"]["sha256"], SOURCE_EPOCH_RECORD_COUNT=len(outer))
+    bootstrap = seal(out, "Root-selected-existing-ordinary13-bootstrap.py.DATA", bind(controls["bootstrap"], bootstrap_slots, "rewrite_observer"))
+    require(operator["FACTORY_REFERENCE"] == descriptor["controls"]["factory"], "Factory ref changed")
+    resource_keys = ("FINAL_RESOURCE_STATE_PATH", "FINAL_EXPECTED_RESOURCE_CONFIG", "FINAL_EXPECTED_CAPACITY")
+    slots = {key: inherit[key] for key in resource_keys}
+    slots.update(ROOT_SELECTION=selected_ref, ROOT_RUNTIME_SELECTION=runtime, FINAL_OUTPUT_PATH=str(output),
+                 FINAL_D_ROOT=str(D), FINAL_D_HEAD=D_prov["HEAD"], FINAL_D_TREE=D_prov["tree"],
+                 FINAL_A_ROOT=str(A), FINAL_A_HEAD=A_prov["HEAD"], FINAL_A_TREE=A_prov["tree"],
+                 D_READ_BINDING_REFERENCE=prepared["read"], FINAL_BINDING_MANIFEST_REFERENCE=manifest_ref,
+                 FINAL_BINDING_MANIFEST=manifest, FINAL_MODULE_BINDINGS=modules, FINAL_D_PROVENANCE=D_prov,
+                 FINAL_A_PROVENANCE=A_prov, FINAL_SOURCE_PROJECTS=projects, FINAL_SDK_BINDINGS=sdk,
+                 FINAL_FIXTURE_CLOSURE_REFERENCE=prepared["fixture"], FINAL_EFFECT_DECISION_REFERENCE=effect_ref,
+                 FINAL_EFFECT_DECISION=effect, FINAL_ADMITTED_IO_PLAN_REFERENCE=io_ref, BOOTSTRAP_REFERENCE=bootstrap,
+                 ABSENT_PATHS=absences)
+    bound = seal(out, "Root-selected-existing-ordinary13-operator.py.DATA", bind(controls["operator"], slots, "parent"))
+    abi_ref = prepared["read"]
+    return seal(out, "actual-existing-ordinary13-bound-controls-no-launch.json",
+                dict(exact_operator=bound, bootstrap=bootstrap, factory=descriptor["controls"]["factory"],
+                     binding_manifest=manifest_ref, actual_nonclock=handoff["nonclock"], actual_selected=selected_ref,
+                     read_binding=abi_ref, exact_local_freeze=actual_handoff["freeze"], output_namespace=str(output),
+                     report_name=f"complete-frozen-local-D-{GROUP}-existing-owner-report.json", no_launch=True,
+                     actual_COLLECT=None, actual_RUN=None, qualification=None,
+                     run_argv=["/usr/bin/python3", "-I", "-B", bound["path"], abi_ref["path"],
+                               str(abi_ref["bytes"]), abi_ref["sha256"]]))
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("path")
+    parser.add_argument("bytes", type=int)
+    parser.add_argument("sha256")
+    parser.add_argument("--hydrate", action="store_true")
+    args = parser.parse_args()
+    reference = ref(args.path, args.bytes, args.sha256)
+    handoff = js(reference)
+    result = hydrate(handoff) if args.hydrate else prepare(reference, handoff)
+    print(json.dumps(result, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()

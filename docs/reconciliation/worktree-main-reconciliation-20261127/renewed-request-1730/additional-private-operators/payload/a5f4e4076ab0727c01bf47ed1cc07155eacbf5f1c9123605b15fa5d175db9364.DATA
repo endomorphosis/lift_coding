@@ -1,0 +1,168 @@
+import hashlib,json,os,runpy,sys
+from pathlib import Path
+out=Path(__file__).resolve().parent
+guide_base=Path(sys.argv[1])/'guides-preparation-INERT'
+prior_dir=guide_base/'actual-Guide585-docs-only-parent-pins'
+origin=prior_dir/'datasets.git'
+previous=guide_base/'actual-Guide585-four-doc-composition'
+recovery=Path('/tmp/legal-refusal-recovery-j_10md5l')
+observer=recovery/'repo/.git'
+lib=runpy.run_path(str(guide_base/'compose-existing-Guide585-with-catalog-links-v02.py.DATA'))
+git,delta,write,obj,pin,read,flat,H,blob,link,insert_for,offset_for=(lib[k] for k in
+    ('git','delta','write','obj','pin','read','flat','H','blob','link','insert_for','offset_for'))
+guide=pin(prior_dir/'actual-Guide585-docs-normal-FF-publication.json',47147,
+    '7997ab39a3cb621d2e8a0a3c74ae9e9163dab46131be197efd222eb6acc13c39')
+pub=obj(guide)
+assert pub['all4_remote_main_exact'] and pub['terminal_returncode']==0 and not pub['errors']
+head=pub['fresh_origin_main']['datasets']
+assert head=='25bbaf0ed1ff45b4dee97b77b58c2349b5351990'
+assert git(origin,'rev-parse',head+'^{tree}').decode().strip()==pub['exact_docs_commit']['tree']
+native=pin(Path(sys.argv[2])/'actual-current-Guide585-namespaced-Native2-qualification-closed.json',5520,
+    'a263d3bf50afc2b8541f939c3eb3aace36a3034492b76e7d10f2ecf2c630fb18')
+n=obj(native)
+assert obj(n['freeze'])['frozen']['HEAD']==head
+assert n['actual_native_qualification'] and n['terminal_returncode']==0 and n['live_handles'] is None
+assert n['Source_closed'] and n['resource_cleanup_confirmed'] and n['parent_home_cleanup_confirmed'] and n['source_metadata_bytes_equal']
+assert n['pytest_case_credit']==0 and n['actual_command_counts']==dict(all=3,compiler=2,unclassified=0,version=1)
+assert [(x['declaration'],x['accepted'],x['compiler_returncode']) for x in n['cases']]==[('wanted',True,0),('Law.wanted',False,1)]
+proposal='68718850a6a29dcac368d7587d9bef95adb22420'
+oparent='7c0d40925436665bd90f62941d66ec63edadfb5b'
+assert git(observer,'rev-parse',proposal+'^').decode().strip()==oparent
+evidence=obj(pin(recovery/'evidence-descriptor.json',308,'ec385d4acc8679bd0131b75156ee7b7608bea62c96c7920ee68b2dac8064e014'))
+assert evidence['bytes']==2438 and evidence['sha256']=='7287b4e19cebb8d8fea57f6fc23246d3e2f9a0d54586f8a901fdc76906c7089d'
+saved=obj(evidence)
+test_ref=pin(recovery/'test-result-v1.json',1321,'b9cb3387b98d342769072f85febbfacf51c09626d6fda51ed6af7bb937a4a5f8')
+tested=obj(test_ref)
+assert tested['tests']==95 and tested['subtests']==171 and tested['passed'] is True
+assert tested['failures']==tested['test_errors']==tested['skips']==0 and tested['errors']==[]
+assert tested['Source_READ_closed'] is True and tested['workers_started'] is False and tested['native_or_model_executed'] is False
+code={
+'ipfs_datasets_py/logic/autoformal/supervisor_loop.py',
+'scripts/ops/legal_ir/run_autoformal_supervisor.py',
+'tests/unit/logic/test_supervisor_agent_turn_recovery.py',
+}
+docs_root=Path('ipfs_datasets_py/logic/autoformal/docs')
+catalog=str(docs_root/'work_catalog.json')
+hand=str(docs_root/'HANDOFF.md')
+recovery_docs={catalog,hand,str(docs_root/'OPERATIONS.md'),'ipfs_datasets_py/logic/autoformal/README.md'}
+assert delta(observer,oparent,proposal)==code|recovery_docs
+def oid(repo,commit,rel):
+    return git(repo,'rev-parse',commit+':'+rel).decode().strip()
+for rel in sorted(code|{str(docs_root/'OPERATIONS.md'),'ipfs_datasets_py/logic/autoformal/README.md'}):
+    assert oid(origin,head,rel)==oid(observer,oparent,rel)
+bare=out/'datasets.git'
+index=out/'guide586-private.index'
+git(None,'init','--bare','--quiet','--template=',str(bare))
+views=flat(origin/'objects',out/'datasets-object-views')+flat(observer/'objects',out/'recovery-object-views')
+(bare/'objects/info/alternates').write_text(''.join(str(view)+'\n' for view in views))
+assert git(bare,'merge-base',head,proposal).decode().strip()==oparent
+author,email=git(origin,'show','-s','--format=%an%x00%ae',head).decode().rstrip('\n').split('\x00')
+env=lib['ENV']|dict(GIT_INDEX_FILE=str(index),GIT_AUTHOR_NAME=author,GIT_COMMITTER_NAME=author,
+    GIT_AUTHOR_EMAIL=email,GIT_COMMITTER_EMAIL=email)
+git(bare,'read-tree',head,env=env)
+patch=git(observer,'diff','--binary','--no-renames',oparent,proposal)
+patch_ref=write(out,'retained-recovery-source-and-docs.patch',patch)
+git(bare,'apply','--cached','--check','--whitespace=nowarn',data=patch,env=env)
+git(bare,'apply','--cached','--whitespace=nowarn',data=patch,env=env)
+staged_diff=git(bare,'diff','--cached','--name-only','-z',head,env=env)
+assert {r.decode() for r in staged_diff.split(b'\0') if r}==code|recovery_docs
+staged_tree=git(bare,'write-tree',env=env).decode().strip()
+for rel in sorted(code):
+    assert oid(observer,proposal,rel)==oid(bare,staged_tree,rel)
+    assert H(git(bare,'cat-file','blob',oid(bare,staged_tree,rel)))==tested['source_sha256'][str(recovery/'repo'/rel)]
+ORD=586
+record='phase1-namespaced-lean-and-agent-turn-checkpoint-evidence586-20261127'
+migration='phase1_namespaced_lean_and_agent_turn_checkpoint_20261127'
+facts=write(out,'guide586-scoped-facts.json',dict(
+    schema='namespaced-lean-and-saved-agent-turn-checkpoint-evidence/v1',evidence_ordinal=ORD,
+    namespaced_Native2=dict(closeout=native,source4=n['Source4'],detached_verification=n['detached_verification'],
+        datasets_head=head,commands=n['actual_command_counts'],cases=n['cases'],
+        Source_resource_parent_closed=True,pytest_case_credit=0,scope='Fictional proposition and declaration-selection qualification'),
+    local_agent_turn_checkpoint=dict(original_code_snapshot=proposal,saved_local_evidence=evidence,
+        tests=95,subtests=171,failures=0,errors=0,skips=0,cooperative_source_read_closed=True,
+        live_provider_or_worker_execution=False,managed_pytest_qualification=False),
+    task_status_changed=False,real_review_corpus_or_model_authority=False,full_eight_phase_goal_complete=False))
+backlog=dict(record_id=record,evidence_ordinal=ORD,facts=facts,status='closed_controlled_engineering_evidence_only_no_task_status_change')
+cat=dict(id=record,evidence_ordinal=ORD,path=facts['path'],root='artifact_workspace',observed_bytes=facts['bytes'],
+    observed_sha256=facts['sha256'],status='CLOSED_CONTROLLED_ENGINEERING_EVIDENCE_ONLY',
+    required_for_catalog_check=False,backlog_crosslink='BACKLOG.json#/migration/'+migration,
+    scope='Exact Lean declaration selection and separate local agent-turn checkpoint tests.',closed_runtime_facts=obj(facts))
+joint=dict(backlog_container='migration',backlog_record=backlog,catalog_record=cat,evidence_ordinal=ORD,
+    migration_key=migration,record_id=record)
+joint_ref=write(out,'guide586-existing-actuator-six-key-joint-facts.json',joint)
+md=('\n\n## Evidence586 — Check Lean declaration selection and saved provider observations\n\n'
+    'On Guide 585 source, Lean 4.34.1 accepted the root declaration `wanted` and rejected `Law.wanted` for the expected '
+    'type mismatch. The run used one version probe and two compilations. The detached verifier checked both '
+    'cases, unchanged Source metadata and complete cleanup. The run earned zero pytest cases. '
+    +link('Namespaced Native2 qualification',native)+'\n\n'
+    'Separately, the existing supervisor can save exact provider-turn observations in a durable continuation checkpoint, '
+    'retaining refusal evidence and spent attempts. Its local cooperative Source read closed after 95 owning tests '
+    'and 171 subtests passed. The tests exercised saved observations and performed no live provider or worker operation. '
+    +link('Local checkpoint tests',evidence)+'\n').encode()
+prior_catalog=json.loads(git(origin,'cat-file','blob',oid(origin,head,catalog)))
+insert=insert_for(ORD)
+all_docs={}
+for rel in sorted(lib['DOCS']):
+    name=Path(rel).name
+    staged=git(bare,'cat-file','blob',oid(bare,staged_tree,rel))
+    current_base=git(origin,'cat-file','blob',oid(origin,head,rel))
+    if name=='work_catalog.json':
+        expected=json.loads(staged)
+        checkpoint=[v['agent_turn_observation_checkpoint_v1'] for v in expected['components']
+                    if 'agent_turn_observation_checkpoint_v1' in v]
+        assert len(checkpoint)==1
+        info=checkpoint[0]
+        assert info['publication_status']=='local_branch_not_published' and info['evidence']==evidence
+        assert staged.count(b'"publication_status": "local_branch_not_published"')==1
+        staged=staged.replace(b'"publication_status": "local_branch_not_published"',b'"publication_status": "recorded_in_evidence586"',1)
+        current=json.loads(staged)
+        assert len(current['components'])==126 and len(current['selected_evidence'])==585
+        assert current['selected_evidence']==prior_catalog['selected_evidence']
+        for comp in current['components']:
+            comp.pop('agent_turn_observation_checkpoint_v1',None)
+        assert current==prior_catalog
+        base_obj=json.loads(staged)
+        pos=offset_for(staged,'selected_evidence',base_obj['selected_evidence'])
+    elif name=='BACKLOG.json':
+        assert staged==current_base
+        base_obj=json.loads(staged)
+        assert len(base_obj['tasks'])==24 and len(base_obj['migration'])==98
+        pos=offset_for(staged,'migration',base_obj['migration'])
+    else:
+        assert b'## Evidence586' not in staged
+        pos=len(staged)
+    change=insert(staged,dict(file_name=name,relative_path=rel,insertion_offset=pos),joint,md)
+    post,frag=change['post'],change['fragment']
+    assert post[:pos]+post[pos+len(frag):]==staged
+    if name=='BACKLOG.json':
+        doc=json.loads(post); assert len(doc['migration'])==99 and doc['migration'].pop(migration)==backlog and doc==base_obj
+    elif name=='work_catalog.json':
+        doc=json.loads(post); assert len(doc['selected_evidence'])==586 and doc['selected_evidence'].pop()==cat and doc==base_obj
+    else:
+        assert post==staged+md and post.count(b'## Evidence586')==1
+    o=git(bare,'hash-object','-t','blob','-w','--stdin',data=post,env=env).decode().strip()
+    assert o==blob(post)
+    git(bare,'update-index','--cacheinfo','100644',o,rel,env=env)
+    all_docs[rel]=dict(mode='100644',bytes=len(post),sha256=H(post),committed_blob=o,
+        before_Git_blob_oid=oid(origin,head,rel),after_private=write(out,name+'.guide586.after.DATA',post),
+        insertion=write(out,name+'.guide586.insertion.DATA',frag))
+git(bare,'-c','core.whitespace=-blank-at-eof','diff','--cached','--check',head,env=env)
+tree=git(bare,'write-tree',env=env).decode().strip()
+candidate=git(bare,'commit-tree',tree,'-p',head,'-p',proposal,
+    data=b'Integrate provider-turn checkpoints and record Native2 evidence 586\n',env=env).decode().strip()
+assert git(bare,'rev-parse',candidate+'^1',candidate+'^2',candidate+'^{tree}').decode().splitlines()==[head,proposal,tree]
+assert delta(bare,head,candidate)==code|recovery_docs|lib['DOCS']
+for rel in code:
+    assert oid(bare,candidate,rel)==oid(observer,proposal,rel)
+git(bare,'update-ref','refs/heads/guide586-recovery-private',candidate,env=env)
+result=write(out,'actual-Guide586-and-recovery-private-integration.json',dict(
+    schema='Guide586-with-exact-recovery-source-private-integration/v1',prior_publication=guide,
+    datasets=dict(git_dir=str(bare),before=head,after=candidate,tree=tree,local_ref='refs/heads/guide586-recovery-private',
+                  exact_changed_paths=sorted(code|recovery_docs|lib['DOCS']), private_stage0_index=str(index)),
+    prior_remote_heads=pub['fresh_origin_main'],recovery_original=proposal,recovery_qualified_source=evidence,
+    recovery_patch=patch_ref,verified_code_blobs={rel:oid(bare,candidate,rel) for rel in sorted(code)},
+    namespaced_native2=native,guide_facts=facts,joint_facts=joint_ref,guide_four_docs=all_docs,
+    prior_counts=dict(tasks=24,components=126,evidence=585,migrations=98),
+    after_counts=dict(tasks=24,components=126,evidence=586,migrations=99),
+    existing_refs_changed=False,Source_or_runtime_dispatch=False,pushed=False))
+print(json.dumps(result))

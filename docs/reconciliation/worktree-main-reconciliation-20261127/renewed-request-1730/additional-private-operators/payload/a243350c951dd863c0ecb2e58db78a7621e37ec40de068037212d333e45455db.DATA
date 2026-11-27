@@ -1,0 +1,298 @@
+"""Prepare code-only parent pin commits in private stores from the closed Native2 receipts."""
+import hashlib
+import json
+import os
+from pathlib import Path
+import runpy
+import re
+import stat
+
+WORK = Path(__file__).resolve().parent
+NATIVE = Path('/tmp/Root-P1-Guide583-Native2-exact-current-owXwGME8')
+D = NATIVE / 'datasets'
+A = Path('/tmp/Root-result-cache-owned-existing-route-L4Wyme59/accelerate')
+PREVIOUS_PLAN = Path('/tmp/P1-existing-guide583-compose-INERT-mXQQ8I/guide583-parent-pins-isolated/READY-guide583-combined-code-and-docs-parent-pins.json')
+GUIDE = Path('/tmp/Root-P1-cache-reload-owned-existing-route-wK9s5mUF/actual-P1-reload-filename-Source2-READ4-ordinary13-Guide583-publication.json')
+QUALIFICATION = Path('/tmp/P1-Guide583-existing-Native2-prepared-INERT-iDXkyN/actual-Guide583-translated-proof-cache-Native2-closed.json')
+HELPER = Path('/tmp/watchdog-f7c3-existing-parent-pins-PO2BmHqy/prepare-parent-pins.py')
+BEFORE = {
+    'accelerate': 'fae7981fa576817536a3c7aa62c5d28dc417f214',
+    'datasets': '73660a6f7e3f1d091829c71daa04cc1f5651410b',
+    'hallucinate': 'b212ad2d8a490a2bb134021fac5bbfd8ea76533b',
+    'root': '34be93762a13bdc5e1e5b9cbd7c55ce4c8ec276b',
+}
+CANDIDATE = '457653e9ab7743b64633e1a0ed8f6c8e1ea2f513'
+CANDIDATE_TREE = '4a59af25fb34dc8622763262d8331cc7421ea18d'
+ROLE = 'tests/integration/logic/backends/test_kernel_backends.py'
+CACHE = 'ipfs_datasets_py/logic/legal_ir/proof_cache.py'
+FIXTURE = 'tests/unit/logic/legal_ir/test_proof_cache.py'
+OLD_BLOB = 'd3d7e8b0505aea69125fd0b1fcd48ba16fdb67f1'
+NEW_BLOB = '6ada487237ea2e85c4ba19ea6b723ab6c8db3a77'
+NEW_SHA = '5f4b3c5e6ae4e27676b0b99df368cf8ae32b6ebd5ffce7cfc8f7955435e5a80a'
+CACHE_SHA = '744148b296cfc60656a199847fa1136dc72e28e7b79e0415fd1a069f09605c97'
+FIXTURE_SHA = '5dd25588275d79434a28780370a65fb32a1d93dd9d01656f8a78d00328be769b'
+OLD_FIXTURE_SHA = '1d0e6bdb9da812904bc0b812385d1aa5b68267f1084a6fcf379652a05104b460'
+INDEX_SHA = 'f326d696b50dbcc7ca1aba3548da23c7190f861632a120dcf34ac3d236beb454'
+A_INDEX_SHA = 'cfb5f870e52cd089eb6d2d26baf646f9f3e4ffd4bf59e36ea28fee05372c1ef5'
+LINK_H = ['ipfs_accelerate_py', 'ipfs_datasets_py']
+LINK_R = ['external/ipfs_accelerate', 'external/ipfs_datasets', 'hallucinate_app']
+
+
+def pin(path, size, sha):
+    return {'path': str(path), 'bytes': size, 'sha256': sha}
+
+
+def read(reference):
+    path = Path(reference['path'])
+    assert path.is_absolute() and 0 < reference['bytes'] < 16 * 1024 * 1024
+    first = path.lstat()
+    assert stat.S_ISREG(first.st_mode) and first.st_nlink == 1 and first.st_size == reference['bytes']
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+    with os.fdopen(fd, 'rb') as stream:
+        assert os.fstat(stream.fileno()) == first
+        raw = stream.read(reference['bytes'] + 1)
+        last_fd = os.fstat(stream.fileno())
+        last_path = path.lstat()
+    for current in (last_fd, last_path):
+        assert (first.st_dev, first.st_ino, first.st_nlink, first.st_size, first.st_mtime_ns, first.st_ctime_ns) == (
+            current.st_dev, current.st_ino, current.st_nlink, current.st_size, current.st_mtime_ns, current.st_ctime_ns)
+    assert len(raw) == reference['bytes'] and hashlib.sha256(raw).hexdigest() == reference['sha256']
+    return raw
+
+
+def document(reference):
+    return json.loads(read(reference))
+
+
+def sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def body_fields(row):
+    return {name: row[name] for name in ('path', 'bytes', 'sha256', 'full9')}
+
+
+def check_f9(row):
+    status = Path(row['path']).lstat()
+    assert stat.S_ISREG(status.st_mode) and status.st_nlink == 1
+    assert {key: str(getattr(status, key)) for key in row['full9']} == row['full9']
+
+
+def verify_native():
+    qual_ref = pin(QUALIFICATION, 7684, 'e19745863f704b614f6254fda8c5f3eac66b301c9394ade6b1e1768212343e82')
+    qual = document(qual_ref)
+    assert qual['terminal_returncode'] == 0 and qual['Source_lease_and_resource_cleanup_closed'] is True
+    assert qual['fictional_typed_True_fixture_only'] is True
+    assert qual['actual_command_counts'] == {'all': 3, 'compiler': 2, 'unclassified': 0, 'version': 1}
+    assert qual['disk_reopen_and_exact_reuse'] is True and qual['native_processes_during_replay'] == 0
+    assert qual['pytest_case_credit'] == 0 and qual['real_statute_review_or_corpus_admission_or_model_training'] is False
+    terminal = document(qual['operator_terminal'])
+    assert terminal['returncode'] == 0 and terminal['actual_native_qualification'] is True
+    assert terminal['reaped'] and terminal['native_handle'] is None
+    assert all(terminal[name] is True for name in ('Source_closed', 'resource_cleanup_confirmed', 'parent_home_cleanup_confirmed'))
+    assert terminal['report'] == qual['actual_report']
+    report = document(qual['actual_report'])
+    assert all(report[name] is True for name in ('actual_native_qualification', 'Source_closed',
+        'resource_cleanup_confirmed', 'actual_parent_release_return', 'actual_test_function_entered',
+        'parent_home_cleanup_confirmed'))
+    assert report['errors'] == [] and report['test_source_sha256'] == NEW_SHA
+    assert report['actual_command_counts'] == qual['actual_command_counts']
+    assert report['pytest_case_credit'] == 0 and report['statutory_or_model_or_corpus_admission'] is False
+    freeze = document(qual['exact_freeze'])
+    assert freeze['source1_terminal'] == qual['actual_Source1']
+    assert freeze['local_clean'] and freeze['exact_changes_only'] and freeze['pushed'] is False
+    assert freeze['published_base'] == BEFORE['datasets']
+    assert freeze['frozen']['HEAD'] == CANDIDATE and freeze['frozen']['tree'] == CANDIDATE_TREE
+    index = freeze['frozen']['stage0_index']
+    assert index['sha256'] == INDEX_SHA
+    assert set(freeze['committed']) == {ROLE}
+    selected = freeze['committed'][ROLE]
+    assert selected['committed_blob'] == NEW_BLOB and selected['sha256'] == NEW_SHA
+    assert selected['bytes'] == 135080 and selected['mode'] == '100644'
+    assert selected['stage0_matches'] and selected['raw_bytes_bound']
+    source_terminal = document(qual['actual_Source1'])
+    assert source_terminal['returncode'] == 0 and source_terminal['closed_write'] == freeze['source_closed']
+    assert all(source_terminal[name] is True for name in ('Source_closed','module_closed','write_complete'))
+    source = document(freeze['source_closed'])
+    assert source['errors'] == [] and source['only_worktree_deltas'] == [ROLE]
+    assert all(source[name] is True for name in ('Source_closed','module_closed','write_complete','qualification_complete'))
+    assert len(source['Source_contexts']) == 2
+    assert {(row['root'], row['mode']) for row in source['Source_contexts']} == {(str(D), 'write'), (str(A), 'read')}
+    assert all(row['entered'] and row['exit_returned'] for row in source['Source_contexts'])
+    installed, = source['installed']
+    assert body_fields(installed) == body_fields(selected)
+    read4 = document(qual['exact_READ4'])
+    assert read4['status'] == 'PASS' and read4['Source_closed'] and read4['owned_module_closed']
+    assert read4['roots_before'] == read4['roots_after'] and not read4['errors']
+    captures = {row['path']: row for row in read4['captures']}
+    assert len(captures) == len(read4['captures']) == 4
+    assert captures.keys() == {index['path'], str(D/ROLE), str(D/CACHE), str(D/FIXTURE)}
+    assert body_fields(captures[index['path']]) == index
+    assert body_fields(captures[str(D/ROLE)]) == body_fields(selected)
+    assert captures[str(D/CACHE)]['sha256'] == CACHE_SHA
+    assert captures[str(D/FIXTURE)]['sha256'] == FIXTURE_SHA
+    native_before, native_after = map(document, (qual['actual_source_before'], qual['actual_source_after']))
+    for manifest in (native_before, native_after):
+        assert manifest['Git_HEADS'] == {str(D): CANDIDATE, str(A): BEFORE['accelerate']}
+        assert manifest['alive_native_processes'] == [] if 'alive_native_processes' in manifest else manifest['all_FDs_closed']
+        assert manifest['current_authorized_post_doc_W_index'] == index
+    check_f9(index)
+    check_f9(selected)
+    check_f9(freeze['frozen_branch_ref'])
+    for row in captures.values():
+        check_f9(row)
+    return qual_ref, qual, freeze, selected
+
+
+
+def flat_git_alternates(source, destination):
+    """Expose object directories without inheriting their nested alternate chains."""
+    stores = {}
+
+    def collect(root):
+        root = root.resolve(strict=True)
+        if root in stores:
+            return
+        stores[root] = None
+        file = root/'info/alternates'
+        if file.is_file():
+            raw = file.read_bytes()
+            assert len(raw) <= 16384
+            for path in map(Path, raw.decode().splitlines()):
+                if path != Path('.'):
+                    collect(path if path.is_absolute() else root/path)
+
+    collect(source)
+    assert 0 < len(stores) < 64
+    destination.mkdir(mode=0o700)
+    for index, root in enumerate(stores):
+        view = destination/f'{index:02d}'
+        view.mkdir(mode=0o700)
+        for entry in root.iterdir():
+            if entry.name == 'pack' or re.fullmatch('[0-9a-f]{2}',entry.name):
+                assert entry.is_dir()
+                (view/entry.name).symlink_to(entry,target_is_directory=True)
+        stores[root] = view
+    return list(stores.values())
+
+
+def main():
+    assert __debug__
+    previous_ref = pin(PREVIOUS_PLAN, 5079, '3827b2439f09b9b58e8bc36ed973802ef2b00842171dc753480e7fbb368c4f17')
+    previous = document(previous_ref)
+    guide_ref = pin(GUIDE, 4923, '5171ea1f895771d6552f484461e708cce80dde8de2963039348801bc01a58834')
+    guide = document(guide_ref)
+    assert previous['prepared_origin_main'] == guide['fresh_origin_main'] == BEFORE
+    assert guide['terminal_returncode'] == 0
+    assert guide['all_archives_preserved'] == previous['root_archive_preserved'] | previous['retained_archives']
+    qual_ref, qual, freeze, selected = verify_native()
+    assert qual['guide583_publication'] == guide_ref
+    assert sha(HELPER.read_bytes()) == 'd38cdc213ed74d01d4951408e6b3a2fb9ce4d00ac841ccd8ffabaf25a672c4e3'
+    inherited = runpy.run_path(str(HELPER))
+    git, invoke, delta, tree, link_commit = (inherited[key] for key in ('git','invoke','delta','tree','link_commit'))
+    git.__globals__.update(WORK=WORK, MAIN=BEFORE)
+    env = inherited['E']
+    urls, flags = inherited['URLS'], inherited['FLAGS']
+    assert urls == previous['urls'] and flags == previous['git_arguments_preserve_bounded_pack_settings']
+    for key in ('NAME', 'EMAIL'):
+        value = invoke('-C', str(D), 'config', '--get', 'user.' + key.lower()).decode().strip()
+        assert value
+        env['GIT_AUTHOR_' + key] = env['GIT_COMMITTER_' + key] = value
+    for root, head in ((D,CANDIDATE),(A,BEFORE['accelerate'])):
+        assert invoke('-C',str(root),'rev-parse','HEAD').decode().strip() == head
+        assert invoke('-C',str(root),'status','--porcelain=v1','-z') == b''
+    assert sha((A/'.git/index').read_bytes()) == A_INDEX_SHA
+    alternatives = {
+        'datasets': D/'.git/objects',
+        'hallucinate': Path(previous['isolated_git_dir']['hallucinate'])/'objects',
+        'root': Path(previous['isolated_git_dir']['root'])/'objects',
+    }
+    watched = [D/'.git/index', D/'.git/HEAD', D/'.git/config', A/'.git/index', A/'.git/HEAD', A/'.git/config']
+    before_physical = {str(path): path.stat() for path in watched}
+    isolated = WORK/'isolated'
+    assert not os.path.lexists(isolated)
+    isolated.mkdir(mode=0o700)
+    git.__globals__['WORK'] = isolated
+    views_by_role = {}
+    for role,alternate in alternatives.items():
+        assert alternate.is_dir()
+        repository = isolated/(role+'.git')
+        invoke('init','--bare',str(repository))
+        views = flat_git_alternates(alternate,isolated/(role+'-object-views'))
+        (repository/'objects/info/alternates').write_text(''.join(str(view)+'\n' for view in views))
+        views_by_role[role] = len(views)
+        assert git(role,'cat-file','-t',BEFORE[role]).strip() == b'commit'
+    assert git('datasets','rev-parse',CANDIDATE+'^',CANDIDATE+'^{tree}').decode().splitlines() == [BEFORE['datasets'],CANDIDATE_TREE]
+    assert delta('datasets',BEFORE['datasets'],CANDIDATE) == {ROLE}
+    for head, blob in ((BEFORE['datasets'],OLD_BLOB),(CANDIDATE,NEW_BLOB)):
+        assert tree('datasets',head,[ROLE]) == {ROLE:['100644','blob',blob]}
+    prior_body = git('datasets','cat-file','blob',OLD_BLOB)
+    body = git('datasets','cat-file','blob',NEW_BLOB)
+    assert len(body) == selected['bytes'] and sha(body) == selected['sha256']
+    assert prior_body.count(OLD_FIXTURE_SHA.encode()) == 1
+    assert prior_body.replace(OLD_FIXTURE_SHA.encode(),FIXTURE_SHA.encode(),1) == body
+    for relative,digest in ((CACHE,CACHE_SHA),(FIXTURE,FIXTURE_SHA)):
+        prior_row = tree('datasets',BEFORE['datasets'],[relative])
+        assert prior_row == tree('datasets',CANDIDATE,[relative])
+        assert sha(git('datasets','cat-file','blob',prior_row[relative][2])) == digest
+    git('datasets','update-ref','refs/heads/p1-native2-code-publication',CANDIDATE)
+
+    old_h = tree('hallucinate',BEFORE['hallucinate'],LINK_H)
+    old_r = tree('root',BEFORE['root'],LINK_R)
+    assert {'hallucinate':old_h,'root':old_r} == guide['all_gitlinks_verified'] == previous['gitlink_after']
+    h,h_tree = link_commit('hallucinate',{LINK_H[1]:CANDIDATE},'Pin Datasets translated proof-cache Native2 fixture')
+    r,r_tree = link_commit('root',{LINK_R[1]:CANDIDATE,LINK_R[2]:h},'Update translated proof-cache Native2 gitlinks')
+    git('hallucinate','update-ref','refs/heads/p1-native2-code-publication',h)
+    git('root','update-ref','refs/heads/p1-native2-code-publication',r)
+    new_h,new_r = tree('hallucinate',h,LINK_H),tree('root',r,LINK_R)
+    assert new_h == {**old_h,LINK_H[1]:['160000','commit',CANDIDATE]}
+    assert new_r == {**old_r,LINK_R[1]:['160000','commit',CANDIDATE],LINK_R[2]:['160000','commit',h]}
+    assert delta('hallucinate',BEFORE['hallucinate'],h) == {LINK_H[1]}
+    assert delta('root',BEFORE['root'],r) == {LINK_R[1],LINK_R[2]}
+    archive_pins = guide['all_archives_preserved']
+    # A parent tree path can hide a nested path in one nonrecursive ls-tree call.
+    for path,pin_value in archive_pins.items():
+        required={path:pin_value}
+        assert tree('root',BEFORE['root'],[path],dirs=True) == required
+        assert tree('root',r,[path],dirs=True) == required
+    assert before_physical == {str(path): path.stat() for path in watched}
+    expected = {**BEFORE,'datasets':CANDIDATE,'hallucinate':h,'root':r}
+    for role in alternatives:
+        git(role,'merge-base','--is-ancestor',BEFORE[role],expected[role])
+    plan = {
+        'schema':'private-existing-P1-Native2-code-only-normal-fast-forward/v1',
+        'base_origin_main':BEFORE,'prepared_origin_main':expected,
+        'planned_normal_ff_order':['datasets','hallucinate','root'],
+        'isolated_git_dir':{role:str(isolated/(role+'.git')) for role in alternatives},
+        'prepared_ref':'refs/heads/p1-native2-code-publication',
+        'private_flattened_object_views_per_role':views_by_role,
+        'retained_initial_isolated_attempt':str(WORK/'initial-isolated-attempt'),
+        'retained_archive_path_query_preflight':str(WORK/'archive-path-query-preflight'),
+        'urls':urls,'git_arguments_preserve_bounded_pack_settings':flags,
+        'candidate_trees':{'datasets':CANDIDATE_TREE,'hallucinate':h_tree,'root':r_tree},
+        'gitlink_before':{'hallucinate':old_h,'root':old_r},'gitlink_after':{'hallucinate':new_h,'root':new_r},
+        'root_archive_preserved':previous['root_archive_preserved'],'retained_archives':previous['retained_archives'],
+        'exact_Guide583_publication':guide_ref,'preceding_parent_pin_preparation':previous_ref,
+        'exact_D_code_commit':{'parent':BEFORE['datasets'],'commit':CANDIDATE,'tree':CANDIDATE_TREE,
+            'path':ROLE,'mode':'100644','prior_blob':OLD_BLOB,'blob':NEW_BLOB,'sha256':NEW_SHA,'bytes':selected['bytes'],
+            'only_fixture_digest_literal_changed':True},
+        'actual_Source1':qual['actual_Source1'],'actual_Source1_write':freeze['source_closed'],
+        'exact_local_freeze':qual['exact_freeze'],'exact_READ4':qual['exact_READ4'],
+        'actual_Native2_terminal':qual['operator_terminal'],'actual_Native2_report':qual['actual_report'],
+        'actual_Native2_qualification':qual_ref,'actual_SDK_command_counts':qual['actual_command_counts'],
+        'ordinary_pytest_credit':0,'accelerate_changed':False,'guide584_selected':False,
+        'source_or_runtime_selected':False,'pushed':False,'publication_window_selected':False,
+        'current_origins_must_be_reverified_by_existing_publisher_before_push':True,
+    }
+    raw = (json.dumps(plan,indent=2,sort_keys=True)+'\n').encode()
+    output = WORK/'READY-P1-Native2-code-only-parent-pins.json'
+    with output.open('xb') as stream:
+        stream.write(raw)
+        stream.flush()
+        os.fsync(stream.fileno())
+    output.chmod(0o400)
+    print(json.dumps({'plan':pin(output,len(raw),sha(raw)),'expected':expected},sort_keys=True))
+
+
+if __name__ == '__main__':
+    main()

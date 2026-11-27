@@ -1,0 +1,17 @@
+{
+  "existing_profile_recipe": "/tmp/legal-refusal-recovery-j_10md5l/run_tests.py",
+  "source_sha256": "c1d91edcb841ef223d5e6a3f7b5f81e95f5b9feb87dc82a31ee4e7793e7bba8b",
+  "adapter": "/tmp/git-renewed-all-work-20261127-17pd2xkd/run-current-base-tests.py",
+  "adapter_sha256": "8c9f911f4223e915b8bc9652e664f3850de54ceb7f04cd3ab77585c2bad18f19",
+  "only_changes": [
+    "private_checkout_ROOT",
+    "new_result_OUT"
+  ],
+  "same_limits": {
+    "cpu_count": 1,
+    "cpu_seconds": 60,
+    "wall_seconds": 60,
+    "address_space_bytes": 536870912
+  },
+  "no_model_or_native": true
+}

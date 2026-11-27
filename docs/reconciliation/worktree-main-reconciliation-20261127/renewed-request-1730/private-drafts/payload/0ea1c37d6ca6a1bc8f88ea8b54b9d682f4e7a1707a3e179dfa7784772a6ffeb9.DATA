@@ -1,0 +1,386 @@
+"""INERT current234 successor; original v1 controls remain unchanged."""
+import ast
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import stat
+import subprocess
+import sys
+import time
+import xml.etree.ElementTree as ET
+
+CONTRACT_REF = {'path': '/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/Native2-current234-control-compatibility-private-v01/ROOT-current-Guide585-namespaced-Native2-selector-physical-contract-v01.json', 'bytes': 16146, 'sha256': '6d26fa3baa3fa9db4b60fc9c6e062477622fe6965fcfcd4c59679765a6df2a22'}
+LEGACY_SELECTOR_REF = {'path': '/tmp/P1-Lean-JSON-Native2-namespaced-INERT-x98x7ef2/select-existing-namespaced-native2.INERT.v02.py.DATA', 'bytes': 19395, 'sha256': '5b986be98f857bb6e91b95930d6b21da8d64d10434934d7c4cc9742ab8681f99'}
+CONTRACT = None
+SCHEMA_V1 = 'P1-Lean-JSON-existing-namespaced-Native2-root-inputs/v1'
+SCHEMA_V2 = 'P1-Lean-JSON-existing-namespaced-Native2-root-inputs/v2'
+PROFILE = 'P1-native-namespaced-expected-declaration/v1'
+LEAN_REL = 'ipfs_datasets_py/logic/backends/kernel/lean.py'
+TEST_REL = 'tests/integration/logic/backends/test_kernel_backends.py'
+PROTOCOL_REL = 'ipfs_datasets_py/logic/ir_core/protocols.py'
+LEAN_SHA = 'a36a8ae2c304dc439e6bf32d1a0481b5fc8dab592e26a7dae40cda0a28b8a274'
+TEST_SHA = '5f4b3c5e6ae4e27676b0b99df368cf8ae32b6ebd5ffce7cfc8f7955435e5a80a'
+F9_FIELDS = ('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
+
+
+def stable(value):
+    return hashlib.sha256(json.dumps(value,ensure_ascii=False,separators=(',',':'),sort_keys=True,allow_nan=False).encode()).hexdigest()
+
+
+def f9(info):
+    return {k:str(getattr(info,k)) for k in F9_FIELDS}
+
+
+def artifact_ref(row):
+    assert type(row) is dict and {'path','bytes','sha256'} <= row.keys()
+    assert type(row['path']) is str and Path(row['path']).is_absolute()
+    assert type(row['bytes']) is int and row['bytes']>0
+    assert type(row['sha256']) is str and re.fullmatch('[a-f0-9]{64}',row['sha256'])
+    return {k:row[k] for k in ('path','bytes','sha256')}
+
+
+def read_ref(row,ceiling=16*1024**2):
+    artifact_ref(row)
+    p=Path(row['path']);assert p.resolve()==p and row['bytes']<=ceiling
+    a=p.lstat();assert stat.S_ISREG(a.st_mode) and a.st_nlink==1 and a.st_size==row['bytes']
+    with os.fdopen(os.open(p,os.O_RDONLY|os.O_NOFOLLOW),'rb') as stream:
+        assert f9(os.fstat(stream.fileno()))==f9(a)
+        raw=stream.read(row['bytes']+1)
+        assert f9(os.fstat(stream.fileno()))==f9(a)==f9(p.lstat())
+    assert len(raw)==row['bytes'] and hashlib.sha256(raw).hexdigest()==row['sha256']
+    if 'full9' in row:assert f9(a)==row['full9']
+    return raw
+
+
+def obj(row):
+    return json.loads(read_ref(row))
+
+
+def validate_inputs(inputs):
+    assert type(inputs) is dict and set(inputs)==set(CONTRACT['selector_input']['exact_keys'])
+    assert inputs['schema']==SCHEMA_V2
+    for key in set(inputs)-{'schema'}:
+        assert type(inputs[key]) is dict and set(inputs[key])=={'path','bytes','sha256'}
+        artifact_ref(inputs[key])
+    for key in ('current_publication','managed234','managed234_prefix'):
+        assert inputs[key]==CONTRACT['selector_input']['prepared_fields'][key]
+
+
+def validate_managed234(q,summary,detail,prefix,xml_raw):
+    expected=dict(tests=234,passed=234,functions=65,duplicates=0,failures=0,errors=0,skipped=0)
+    assert q['terminal_returncode']==0 and q['counts']==summary['counts']==detail['counts']==expected
+    for row in (q,summary,detail):
+        assert row['Source_closed'] is row['resource_cleanup_confirmed'] is True
+        assert row['actual_COLLECT_RUN_JUnit_order_identical'] is True
+        assert row['Native_qualification_or_legal_model_admission'] is False
+    assert q['parent_home_cleanup_confirmed'] is summary['parent_home_absent'] is detail['parent_home_absent'] is True
+    assert summary['Source_fence_all_FDs_closed'] is detail['Source_fence_all_FDs_closed'] is True
+    assert summary['all_6_Source_fence_bytes_identical'] is detail['all_6_Source_fence_bytes_identical'] is True
+    fences=detail['Source_fences'];assert len(fences)==6 and len({(r['bytes'],r['sha256']) for r in fences.values()})==1
+    assert q['frozen_execution']==summary['frozen_execution']==detail['frozen_execution']
+    assert q['exact_closed_READ3']==summary['actual_READ3']==detail['actual_READ3']
+    assert q['exact_ordinary_report']==summary['original_report_reference_only']==detail['original_report_reference_only']
+    old=prefix['observed_historical_software']
+    assert old['phase_counts']==expected and old['software_execution_freeze']==q['frozen_execution']
+    assert old['separate_current_ordinary99_run'] is False and old['former_99_contained_as_exact_prefix_of_kernel_subset'] is True
+    assert (old['kernel_159_case_count'],old['kernel_159_function_count'])==(159,32)
+    assert (old['old99_prefix_case_count'],old['old99_prefix_function_count'])==(99,24)
+    root=ET.fromstring(xml_raw);cases=root.findall('.//testcase')
+    assert len(cases)==234 and not any(root.findall('.//'+tag) for tag in ('failure','error','skipped'))
+    nodeids=[c.attrib['classname'].replace('.','/')+'.py::'+c.attrib['name'] for c in cases]
+    assert len(set(nodeids))==234 and len({n.split('[')[0] for n in nodeids})==65
+    assert hashlib.sha256(xml_raw).hexdigest()==q['raw_JUnit']['sha256']==old['exact_raw_JUnit']['sha256']
+    assert len(xml_raw)==q['raw_JUnit']['bytes']==old['exact_raw_JUnit']['bytes']
+    assert stable(nodeids)==detail['phases']['collect']['collected_order_sha256']==detail['phases']['run']['collected_order_sha256']
+    kernel=[n for n in nodeids if n.startswith(TEST_REL+'::')]
+    assert nodeids[62:221]==kernel and len(kernel)==159
+    assert len({n.split('[')[0] for n in kernel})==32
+    assert stable(kernel)==old['kernel_159_ordered_nodeids_hash_canonical_JSON']
+    assert stable(kernel[:99])==old['old99_prefix_ordered_nodeids_hash_canonical_JSON']
+    assert len({n.split('[')[0] for n in kernel[:99]})==24
+    for phase in ('collect','run'):
+        p=detail['phases'][phase]
+        assert p['SDK_authenticated_binding_bytes_equal'] is p['normal_import_and_rewrite_hooks_restored'] is True
+        assert p['collected_count']==234 and p['actual_called_count']==(0 if phase=='collect' else 234)
+        lean=p['maintained_owners']['ipfs_datasets_py.logic.backends.kernel.lean']
+        assert lean['path']==LEAN_REL and lean['compiled_source_sha256']==LEAN_SHA
+        assert lean['collection_status']==lean['terminal_status']=='loaded'
+        test,=[r for r in p['rewritten_test_modules'] if r['path']==TEST_REL]
+        assert test['source_sha256']==TEST_SHA and test['source_bytes']==135080
+        for k in ('AST_to_code_observed','code_execution_observed','returned_code_identity_matches','source_to_AST_observed'):
+            assert test[k] is True
+        assert test['selected_cache_reads_bypassed']==1 and set(test['source_full9'])==set(F9_FIELDS)
+        life=p['observer']
+        for k in ('cleanup_confirmed','descendant_tracking_complete','group_scan_complete','leader_reaped','workspace_removed'):
+            assert life[k] is True
+        assert life['returncode']==0 and life['remaining_group_members']==life['remaining_tracked_descendants']==[]
+    return dict(managed_tests=234,kernel_tests=159,historical_prefix_tests=99,separate_ordinary99_run=False)
+
+
+def ledger_value(row):
+    if {'used','internal_used','captures','global_cap','internal_cap'}<=row.keys():value=row
+    elif 'fully_retained_ledger' in row:value=row['fully_retained_ledger']
+    elif 'after_full_precharge' in row:value=row['after_full_precharge']
+    else:value=row['after_full_retained_precharge']
+    for k in ('used','internal_used','captures','global_cap','internal_cap'):assert type(value[k]) is int and value[k]>=0
+    assert value['capturesComplete'] is False
+    assert value['used']<=value['global_cap'] and value['internal_used']<=value['internal_cap']
+    return value
+
+
+def validate_precharge(cap,prior,*,source):
+    p=ledger_value(prior);assert cap['prior']==p and cap['all_prior_costs_retained'] is True
+    assert cap.get('resource_policy_capacity_unchanged',cap.get('no_policy_capacity_or_model_change')) is True
+    assert cap.get('physical_IO_accounting_complete',False) is False
+    auth=cap['authority'] if source else cap['exact_human_affirmation']
+    assert artifact_ref(auth)==CONTRACT['ledger']['source_only_authority']
+    amount=cap['added_Source_envelope'] if source else cap['added_Source_only_envelope']
+    assert type(amount) is int and amount>0
+    selected=cap['selected'];after=cap['after_full_precharge'] if source else cap['after_full_retained_precharge']
+    assert selected==dict(p,global_cap=p['global_cap']+amount,internal_cap=p['internal_cap']+amount)
+    assert after==dict(selected,used=p['used']+amount,internal_used=p['internal_used']+amount,captures=p['captures']+1)
+    return after
+
+
+def keyed_rows(rows):
+    assert type(rows) is list and rows
+    assert all(type(r) is dict and type(r.get('path')) is str for r in rows)
+    result={r['path']:r for r in rows};assert len(result)==len(rows)
+    return result
+
+
+def exact_row(row):
+    assert {'path','bytes','sha256','full9'}<=row.keys()
+    return {k:row[k] for k in ('path','bytes','sha256','full9')}
+
+
+def validate_source_objects(inputs,publication,freeze,terminal,materialization,close,outer_rows,python_rows,named_rows,cap,prior,roles,sdk_pins):
+    assert publication['terminal_returncode']==0 and publication['errors']==[] and publication['all4_remote_main_exact'] is True
+    assert publication['fresh_origin_main']==CONTRACT['published_freeze']['expected_main_tips']
+    tips=publication['fresh_origin_main']
+    links={'hallucinate':{'ipfs_datasets_py':'datasets','ipfs_accelerate_py':'accelerate'},'root':{'external/ipfs_datasets':'datasets','external/ipfs_accelerate':'accelerate','hallucinate_app':'hallucinate'}}
+    for repo,paths in links.items():
+        for rel,name in paths.items():assert publication['gitlinks'][repo][rel]==['160000','commit',tips[name]]
+    assert freeze['current_publication']==inputs['current_publication']
+    for key in ('local_clean','current_local_checkout_no_Git_changes','original_D_and_A_full9_aux_unchanged'):assert freeze[key] is True
+    assert freeze['pushed'] is False
+    roots=freeze['frozen_roots'];assert len(roots)==2 and len({r['root'] for r in roots})==2
+    assert roots[0]['Git_HEAD']==tips['datasets'] and roots[1]['Git_HEAD']==tips['accelerate']
+    assert roots[0]['Git_tree']==publication['repositories']['datasets']['tree']
+    assert freeze['frozen']['HEAD']==roots[0]['Git_HEAD'] and freeze['frozen']['tree']==roots[0]['Git_tree']
+    assert type(freeze['frozen']['branch']) is str and freeze['frozen']['branch'].startswith('refs/heads/')
+    assert freeze['frozen_branch_ref']['path']==str(Path(roots[0]['root'])/'.git'/freeze['frozen']['branch'])
+    assert set(CONTRACT['source_read4']['terminal_required_fields'])<=terminal.keys()
+    for key,value in CONTRACT['source_read4']['terminal_required_state'].items():assert terminal[key]==value
+    assert terminal['publication']==inputs['current_publication'] and terminal['frozen_roots']==roots
+    assert materialization['local_freeze']==inputs['freeze']
+    for key in ('outer_epoch','python_epoch','named_epoch'):assert materialization[key]==terminal[key]
+    assert close['status']=='PASS' and close['errors']==[] and close['Source_closed'] is close['owned_module_closed'] is True
+    assert close['SDK_Native_compiler_or_project_execution'] is False and close['previous_D_Source42_WRITE_claimed'] is False
+    assert close['previous_D_publication_receipt']==inputs['current_publication']
+    assert close['execution_freeze']==terminal['materialization'] and close['roots_before']==close['roots_after']
+    assert set(close['roots_before'])=={r['root'] for r in roots}
+    for row in roots:
+        r=close['roots_before'][row['root']]
+        assert r['HEAD']==row['Git_HEAD'] and r['tree']==row['Git_tree'] and r['clean_worktree_and_index'] is True
+        assert r['cached_diff_returncode']==r['working_diff_returncode']==0
+    epoch,py,named=map(keyed_rows,(outer_rows,python_rows,named_rows))
+    assert all(epoch.get(path)==row for path,row in py.items())
+    assert all(path in named and exact_row(named[path])==exact_row(row) for path,row in epoch.items())
+    counts=materialization['guard_counts'];assert (counts['outer'],counts['python'],counts['named'])==(len(epoch),len(py),len(named))
+    D,A=(Path(r['root']) for r in roots)
+    index=freeze['frozen']['stage0_index'];assert index==exact_row(epoch[str(D/'.git/index')])
+    assert freeze['exact_A_index']==exact_row(epoch[str(A/'.git/index')])
+    assert materialization['index']==index and materialization['protected_A_index']==freeze['exact_A_index']
+    for key in ('A_index_shared_guard_before','A_index_shared_guard_after'):
+        r=close[key];assert exact_row(r)==freeze['exact_A_index'] and r['exact_HASH_and_full9_reverified'] is True and r['stored_as_numbered_capture'] is False
+    captures={r['relative_path']:r for r in close['captures']};expected=CONTRACT['source_read4']['captures_by_D_relative_path']
+    assert len(captures)==4 and set(captures)==set(terminal['raw_captures'])==set(expected)
+    for rel,row in captures.items():
+        assert row['root']==str(D) and row['path']==str(D/rel) and exact_row(row)==exact_row(epoch[row['path']])
+        assert artifact_ref(row['raw_reference'])==terminal['raw_captures'][rel]
+        assert (row['bytes'],row['sha256'])==(row['raw_reference']['bytes'],row['raw_reference']['sha256'])
+        if rel=='.git/index':assert exact_row(row)==index
+        else:assert (row['bytes'],row['sha256'])==(expected[rel]['bytes'],expected[rel]['sha256'])
+    ns=terminal['namespace_metadata'];assert len(ns)==3
+    assert {str(Path(r['path']).relative_to(D)) for r in ns}=={'ipfs_datasets_py/logic/backends','ipfs_datasets_py/logic/families','ipfs_datasets_py/logic/intent_ir/formalize'}
+    for r in ns:assert r['initializer_path']==str(Path(r['path'])/'__init__.py') and set(r['full9'])==set(F9_FIELDS)
+    assert len(sdk_pins)==5 and sdk_pins['ipfs_datasets_py.logic.backends.kernel.lean']==[LEAN_REL,LEAN_SHA]
+    assert sdk_pins['ipfs_datasets_py.logic.ir_core.protocols']==[PROTOCOL_REL,expected[PROTOCOL_REL]['sha256']]
+    for rel,sha in sdk_pins.values():assert epoch[str(D/rel)]['sha256']==sha
+    for rel,sha in {'ipfs_datasets_py/logic/legal_ir/proof_cache.py':'744148b296cfc60656a199847fa1136dc72e28e7b79e0415fd1a069f09605c97','tests/unit/logic/legal_ir/test_proof_cache.py':'5dd25588275d79434a28780370a65fb32a1d93dd9d01656f8a78d00328be769b'}.items():assert epoch[str(D/rel)]['sha256']==sha
+    assert len(roles)==27 and all(str(D/rel) in epoch for rel in roles)
+    assert cap['prior_closeout']==inputs['prior_source_ledger'] and cap['projection']==terminal['materialization']
+    floor=CONTRACT['ledger']['last_authenticated_ledger'];p=ledger_value(prior)
+    assert all(p[k]>=floor[k] for k in ('used','internal_used','captures','global_cap','internal_cap'))
+    assert p['global_cap']-p['internal_cap']==floor['global_cap']-floor['internal_cap']
+    charged=validate_precharge(cap,prior,source=True);retained=ledger_value(terminal)
+    assert all(retained[k]==charged[k] for k in ('used','internal_used','global_cap','internal_cap')) and retained['captures']>=charged['captures']
+    actual=ledger_value(close['ledger_after']);assert all(actual[k]<=retained[k] for k in ('used','internal_used','captures'))
+    assert all(actual[k]==retained[k] for k in ('global_cap','internal_cap'))
+    return dict(roots=roots,epoch=epoch,named=named,python=py,freeze=freeze,terminal=terminal,read_close=close,ledger=retained,roles=roles,sdk_pins=sdk_pins,inputs=inputs)
+
+
+def load_v2_receipts(inputs):
+    validate_inputs(inputs)
+    publication,freeze,terminal=(obj(inputs[k]) for k in ('current_publication','freeze','source_read4'))
+    materialization,close=obj(terminal['materialization']),obj(terminal['read_close'])
+    outer,py,named=(obj(terminal[k]) for k in ('outer_epoch','python_epoch','named_epoch'))
+    if type(named) is dict:named=named['rows']
+    # Authenticated historical wire supplies names/shape, never current F9/assets.
+    precedent={'path':'/tmp/Root-P1-Guide584-generic-Native3-N3iAXWzm/Root-current-existing-generic-Native3-binding.json','bytes':28824,'sha256':'081b27277e65292f46eefafd9fa3422218773940d3d497c559884b668953afd3'}
+    shape=obj(precedent);pins=shape['current_SDK_source_pins']
+    proof=obj({'path':'/tmp/Phase1-Native-cache-current-v385-boundary-DATA-wrklbsta/READY-current-Phase1-Native-cache-existing-owner-v385-DATA-only.json','bytes':71656,'sha256':'a1fe5853ef4765978557d7d5ed46698258a4d49c2106735cb4acdcc39c2051dc'})['current_frozen']
+    old_D=Path('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets')
+    roles={str(Path(r['path']).relative_to(old_D)) for r in proof['unchanged_direct13_module_rows'].values()}
+    roles.update(str(Path(p).relative_to(old_D)) for p in proof['historical_support16_current_paths']);roles.update(proof['core14_same_F9_SHA_bytes_as_v323_and_v328'])
+    state=validate_source_objects(inputs,publication,freeze,terminal,materialization,close,outer,py,named,obj(terminal['cap']),obj(inputs['prior_source_ledger']),roles,pins)
+    refs=CONTRACT['evidence_and_controls']['managed234_refs'];q=obj(inputs['managed234'])
+    state['software']=validate_managed234(q,obj(refs['actual_source_execution_summary']),obj(refs['actual_source_execution_compact']),obj(inputs['managed234_prefix']),read_ref(q['raw_JUnit']))
+    for row in close['captures']:
+        raw=read_ref(row['raw_reference']);assert (len(raw),hashlib.sha256(raw).hexdigest())==(row['bytes'],row['sha256'])
+    owner=obj(terminal['current_Source42_owner_binding']);assert owner['schema']=='actual-approved-Source42-owner-code-and-closed-operation-binding/v1'
+    assert owner['actual_closed_use']['Source_closed'] is owner['actual_closed_use']['owned_module_closed'] is True and owner['Native_selected'] is False
+    state['Source_owner']=owner;read_ref(CONTRACT['ledger']['source_only_authority'])
+    return state
+
+
+def git(repo,*argv):
+    return subprocess.check_output(['/usr/bin/git','--no-optional-locks','-C',str(repo),*argv],env=os.environ|{'GIT_NO_LAZY_FETCH':'1','GIT_TERMINAL_PROMPT':'0'},timeout=20)
+
+
+def observe_row(row):
+    p=Path(row['path']);assert p.is_absolute() and p.resolve()==p
+    if row.get('exists') is False:assert not os.path.lexists(p);return
+    before=p.lstat();assert f9(before)==row['full9']
+    flags=os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK
+    if stat.S_ISDIR(before.st_mode):flags|=os.O_DIRECTORY
+    else:assert stat.S_ISREG(before.st_mode) and before.st_nlink==1
+    fd=os.open(p,flags)
+    try:assert f9(before)==f9(os.fstat(fd))==f9(p.lstat())
+    finally:os.close(fd)
+
+
+def check_physical(state):
+    for row in state['named'].values():observe_row(row)
+    for row in state['epoch'].values():observe_row(row)
+    for root in state['roots']:
+        assert not git(root['root'],'status','--porcelain=v1','-z','-uall')
+        assert git(root['root'],'rev-parse','HEAD','HEAD^{tree}').decode().split()==[root['Git_HEAD'],root['Git_tree']]
+    D=Path(state['roots'][0]['root']);freeze=state['freeze']
+    assert git(D,'symbolic-ref','HEAD').decode().strip()==freeze['frozen']['branch']
+    for row in (freeze['frozen']['stage0_index'],freeze['exact_A_index'],freeze['frozen_branch_ref']):read_ref(row)
+    for rel in sorted(state['roles']):
+        current=state['epoch'][str(D/rel)];stage=git(D,'ls-files','--stage','--',rel).decode().split()
+        assert len(stage)==4 and stage[2]=='0' and stage[3]==rel
+        assert git(D,'rev-parse','HEAD:'+rel).decode().strip()==stage[1]
+        blob=git(D,'cat-file','blob','HEAD:'+rel)
+        assert (len(blob),hashlib.sha256(blob).hexdigest())==(current['bytes'],current['sha256'])
+    for row in state['terminal']['namespace_metadata']:
+        assert not os.path.lexists(row['initializer_path']);observe_row(row);assert not os.path.lexists(row['initializer_path'])
+
+
+def validate_runtime_binding(binding,selection,state,inputs_ref,*,now_ns=None):
+    assert type(binding) is dict and set(binding)==set(CONTRACT['evidence_and_controls']['operator_binding_keys'])
+    assert binding['schema']==CONTRACT['evidence_and_controls']['operator_binding_schema']
+    assert binding['live_bindings_currently_unbound'] is False and binding['native_case_profile']==PROFILE
+    assert type(binding['Root_selection']) is str and binding['Root_selection']
+    enrollment=binding['Native_enrollment'];assert artifact_ref(enrollment['Root_selection'])['path']==binding['Root_selection']
+    assert selection['Root_selected'] is True and selection['case_profile']==PROFILE
+    assert selection['actual_root_input_surface']==inputs_ref
+    assert selection['current_Source_epoch']==binding['Source_epoch']==state['terminal']['outer_epoch']
+    assert binding['PROJECTS']==state['roots'] and binding['W_INDEX']==state['freeze']['frozen']['stage0_index']
+    D,epoch=Path(state['roots'][0]['root']),state['epoch']
+    assert binding['owning_test_record']==exact_row(epoch[str(D/TEST_REL)])
+    assert artifact_ref(binding['owning_test_raw'])==state['terminal']['raw_captures'][TEST_REL]
+    assert artifact_ref(binding['current_protocol_raw_source'])==state['terminal']['raw_captures'][PROTOCOL_REL]
+    assert artifact_ref(binding['binder_raw'])==CONTRACT['evidence_and_controls']['current_operator_and_binder']['binder']
+    assert binding['current_SDK_source_pins']==state['sdk_pins']
+    owner=binding['Source42_current_owner_binding'];assert set(owner)==set(CONTRACT['source_read4']['existing_wire_nested_fields']['Source42_current_owner_binding'])
+    assert owner['existing_Source42_binding_verified'] is True
+    assert owner['current_publication']==state['inputs']['current_publication'] and owner['actual_read4']==state['inputs']['source_read4']
+    assert owner['current_read_guard_pair']==state['roots'] and owner['current_owner']==state['terminal']['current_Source42_owner_binding']
+    assert binding['Source42_record']['sha256']==binding['Source42_raw']['sha256']==state['Source_owner']['code_reference']['sha256']
+    assert artifact_ref(binding['Source42_raw'])==artifact_ref(state['Source_owner']['code_reference'])
+    composition=binding['Source_composition_proof'];assert set(composition)==set(CONTRACT['source_read4']['existing_wire_nested_fields']['Source_composition_proof'])
+    assert composition['current_read']==state['inputs']['source_read4'] and composition['current_materialized_projection']==state['terminal']['materialization']
+    assert composition['current_protocol_owner']==exact_row(epoch[str(D/PROTOCOL_REL)])
+    assert binding['current_D_config']==exact_row(state['named'][str(D/'.git/config')])
+    ns=binding['normal_namespaces'];assert len(ns)==3
+    assert [{k:r[k] for k in ('path','initializer_path','full9')} for r in ns]==state['terminal']['namespace_metadata']
+    clock=binding['clock_scope'];assert clock==selection['clock_scope']==enrollment['clock_scope']
+    assert set(clock)=={'kind','not_before_utc_ns','submit_deadline_utc_ns'}
+    assert all(type(clock[k]) is int for k in ('not_before_utc_ns','submit_deadline_utc_ns'))
+    assert 0<clock['not_before_utc_ns']<clock['submit_deadline_utc_ns']
+    assert clock['submit_deadline_utc_ns']-clock['not_before_utc_ns']<=180_000_000_000
+    if now_ns is not None:assert clock['not_before_utc_ns']<=now_ns<clock['submit_deadline_utc_ns']
+    assert enrollment['case_profile']==PROFILE and enrollment['current_toolchain_assets_exact'] is True
+    assert enrollment['parent_request']==dict(workload='validation',cpu_slots=1,memory_mb=8192,child_process_slots=1,requires_gpu=False,gpu_memory_mb=0,unified_memory_mb=0,parent_lease=None)
+    resource=binding['resource'];assert resource['expected_capacity']['base_config_sha256']==resource['expected_policy_sha256']==enrollment['expected_policy_sha256']
+    assert enrollment['state_path']==resource['state_path']==enrollment['current_resource_state_observation']['path']
+    assert len(binding['Native'])==8 and len({r['path'] for r in binding['Native']})==8
+    assert binding['lean_executable'] in {r['path'] for r in binding['Native']}
+    assert selection['allowed_real_commands']==dict(Lean_version_observations=1,Lean_compile_calls=2,expected_compiler_statuses=[0,1])
+    assert type(selection['output_namespace']) is str and Path(selection['output_namespace']).is_absolute()
+    allocation=binding['Source_IO_allocation'];assert allocation['debit_even_on_failure'] is True and allocation['actual_total_runtime_bytes']=='UNKNOWN'
+    assert type(allocation['additional_private_readback_upper']) is int and 0<=allocation['additional_private_readback_upper']<=33554432
+    assert allocation['debit_bytes']==134217728+allocation['additional_private_readback_upper']
+    assert allocation['explicit_ledger_increase_and_charge_reference']==selection['cap_and_IO']
+    return selection['output_namespace']
+
+
+def check_runtime_physical(binding,state,selection,inputs_ref):
+    validate_runtime_binding(binding,selection,state,inputs_ref,now_ns=time.time_ns())
+    controls=CONTRACT['evidence_and_controls']['current_operator_and_binder']
+    read_ref(controls['binder']);read_ref(controls['operator']);read_ref(binding['Source42_raw'])
+    assets=obj(binding['native_asset_content_review'])
+    assert assets['complete'] is assets['all8_asset_FDs_closed'] is True and assets['errors']==[] and len(assets['assets'])==8
+    for row in binding['Native']:
+        observed,=[r for r in assets['assets'] if r['path']==row['path']]
+        assert (observed['sha256'],observed['bytes'])==(row['sha256'],row['bytes'])
+        observe_row(dict(path=row['path'],full9=row['actual_full9']))
+    resource=binding['resource'];observed=obj(binding['Native_enrollment']['current_resource_state_observation'])
+    assert observed['config']==resource['expected_config'] and observed['child_process_capacity']==resource['expected_capacity']
+    charge=obj(binding['Source_IO_allocation']['explicit_ledger_increase_and_charge_reference'])
+    validate_precharge(charge,state['ledger'],source=False)
+    assert charge['previous_charge']==state['terminal']['cap']
+    assert charge['added_Source_only_envelope']==binding['Source_IO_allocation']['debit_bytes']
+    read_ref(charge['exact_human_affirmation']);assert not os.path.lexists(selection['output_namespace'])
+
+
+def seal_operator(path,raw):
+    p=Path(path);assert p.is_absolute() and p.parent.resolve()==p.parent
+    with os.fdopen(os.open(p,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400),'wb') as f:f.write(raw);f.flush();os.fsync(f.fileno())
+    ref=dict(path=str(p),bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest());assert read_ref(ref)==raw
+    return ref
+
+
+def main(argv=None):
+    global CONTRACT
+    argv=sys.argv if argv is None else argv
+    assert __debug__ and len(argv) in (6,10) and argv[1]=='--inputs' and argv[5] in ('--verify-only','--bind-only')
+    inputs_ref=dict(path=argv[2],bytes=int(argv[3]),sha256=argv[4]);inputs=obj(inputs_ref)
+    if inputs.get('schema')==SCHEMA_V1:
+        assert len(argv)==6
+        exec(compile(read_ref(LEGACY_SELECTOR_REF),LEGACY_SELECTOR_REF['path'],'exec'),{'__name__':'__main__'});return
+    CONTRACT=obj(CONTRACT_REF);validate_inputs(inputs)
+    if argv[5]=='--verify-only':assert len(argv)==6
+    else:assert len(argv)==10 and argv[6]=='--current-binding'
+    state=load_v2_receipts(inputs);check_physical(state)
+    if argv[5]=='--verify-only':print(json.dumps(dict(Native_selected=False,verified=True,software=state['software'],writes=0,dispatch=False),sort_keys=True));return
+    runtime_ref=dict(path=argv[7],bytes=int(argv[8]),sha256=argv[9]);binding=obj(runtime_ref)
+    selection=obj(binding['Native_enrollment']['Root_selection']);check_runtime_physical(binding,state,selection,inputs_ref)
+    op=read_ref(CONTRACT['evidence_and_controls']['current_operator_and_binder']['operator']).decode();D,A=(r['root'] for r in state['roots'])
+    values=dict(W=f'Path({D!r})',A=f'Path({A!r})',RUN_OUTPUT=f"Path({selection['output_namespace']!r})",PATH_SCOPE=repr('/home/barberb/.local/bin:/usr/lib/git-core'),ROOT_SELECTION=repr(binding['Root_selection']),CURRENT_BINDING_REF=repr(runtime_ref))
+    for name,value in values.items():
+        op,count=re.subn(rf'(?m)^{name} = None$',lambda _:name+' = '+value,op);assert count==1,name
+    compile(op,'existing Native2 selected operator','exec',dont_inherit=True)
+    validate_runtime_binding(binding,selection,state,inputs_ref,now_ns=time.time_ns())
+    output=Path(runtime_ref['path']).with_name('Root-selected-current-namespaced-Native2-operator.py')
+    operator=seal_operator(output,op.encode())
+    print(json.dumps(dict(operator=operator,binding=runtime_ref,selection=binding['Native_enrollment']['Root_selection'],Native_dispatched=False),sort_keys=True))
+
+
+if __name__=='__main__':main()

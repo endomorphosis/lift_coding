@@ -1,0 +1,229 @@
+{
+  "schema": "decoder-prior-work-read-only-research/v1",
+  "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+  "head": "3f1691d59cc0a310750c0b441b51d3528b17eb85",
+  "branch": "feat/legal-relational-counted-preservation-20261109",
+  "dirty_tracked_path_count": 130,
+  "scope": "current file snapshots; no model or receipt replay; no atomic whole-repository snapshot",
+  "project_modified_by_this_research": false,
+  "models_loaded": 0,
+  "training_runs": 0,
+  "tests_run": 0,
+  "records": [
+    {
+      "path": "ipfs_datasets_py/logic/autoformal/AGENTS.md",
+      "bytes": 1686,
+      "sha256": "1a5224005bb2a37763b3a707a7ce055c03aed42a33f07225d8015762d57236b7",
+      "stable_stat_during_this_read": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/autoformal/README.md",
+      "bytes": 38408,
+      "sha256": "ee7e92de61a8d75be2f921a1682a4257979a0bbc4659fe0bd025059bfdfceeca",
+      "stable_stat_during_this_read": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+      "bytes": 658067,
+      "sha256": "9ea752a889fdd66e1265af3f74cae16af5ee3037d8505921139c216e4e9d0033",
+      "stable_stat_during_this_read": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json",
+      "bytes": 1011530,
+      "sha256": "48e78a13890bece85b2529dabdac90471c224364bc1e1301f7e9d8f364fb9224",
+      "stable_stat_during_this_read": true
+    },
+    {
+      "path": "docs/autoencoder_ownership.md",
+      "bytes": 10952,
+      "sha256": "16225c17e79966d4e5c333e8c1e8cec4710c5af714fc54c754cc960545ecf872",
+      "stable_stat_during_this_read": true
+    },
+    {
+      "path": "docs/autoencoders/artifacts_and_inputs.md",
+      "bytes": 12129,
+      "sha256": "b93f189459c1962ac9dd541486b56ffa94824b39b2b88d3c01b8ce04fd418e69",
+      "stable_stat_during_this_read": true
+    },
+    {
+      "path": "docs/autoencoders/alignment_checkpoint_representations.md",
+      "bytes": 9094,
+      "sha256": "437c5af32595c85a2197850d22fd3fa64e9ee2feb47fc5a01ad37db124424567",
+      "stable_stat_during_this_read": true
+    },
+    {
+      "path": "docs/autoformalization/evidence/legal-ir-retained-four-width-alignment-20261022.json",
+      "bytes": 11702,
+      "sha256": "9cab9c0270ba20571de75aec88b86a52a8a537943badd8e6e11166359dd851de",
+      "stable_stat_during_this_read": true
+    },
+    {
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/spacy_modal_codec.py",
+      "bytes": 306359,
+      "sha256": "49446ed1e1289ac5cf8cc07e65f67968adc12666ebb66cf951107c9d8c591617",
+      "stable_stat_during_this_read": true
+    },
+    {
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_lineages/legacy_v1/linguistic.py",
+      "bytes": 21063,
+      "sha256": "baca84b44f7eda33466ffdc75170d904f480aafb47a779131337d90ed9a7bca3",
+      "stable_stat_during_this_read": true
+    },
+    {
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_production.py",
+      "bytes": 34371,
+      "sha256": "9a269fab7e5f65cd34e45132e23fa15dbae133b28d605575fdfd9b8dfe1bc048",
+      "stable_stat_during_this_read": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/gte_multilingual_profile.py",
+      "bytes": 15959,
+      "sha256": "d6d6069c98c7f15bd4c6f8a43bd9ffb72032e04a452419a3ff5d9bd95bb06e8e",
+      "stable_stat_during_this_read": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_4096.py",
+      "bytes": 15554,
+      "sha256": "18f889fff917c80fdf42724e434a2bd806ddec5a25a5ab217fed4c4888f78cb6",
+      "stable_stat_during_this_read": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_4096_full_owner.py",
+      "bytes": 52313,
+      "sha256": "326ab8504f16d0ec55d8635e620efbe47a826ddca35bb5d0aff1e05143dbb14e",
+      "stable_stat_during_this_read": true
+    },
+    {
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_worker.py",
+      "bytes": 312136,
+      "sha256": "f1d6369a6f07bb5d42b4695af9c7a1595a2b68eae217529173a7f0787ce13c0a",
+      "stable_stat_during_this_read": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_training_v2.py",
+      "bytes": 31851,
+      "sha256": "8de8096e895de9df08ccf5352dfd704806823296821d98b5badf08bb553a52e4",
+      "stable_stat_during_this_read": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/structured_source_384.py",
+      "bytes": 27328,
+      "sha256": "3f9ca9ce7b4cf2a2d10d6aeb1fae78543c468133d2fa0df9fcb32f63f89e90f7",
+      "stable_stat_during_this_read": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_masked_contrastive.py",
+      "bytes": 9479,
+      "sha256": "913033528d04602fe60e941ee78cfd8d8b7a898bc0803c02e9b60531bd2aa89f",
+      "stable_stat_during_this_read": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/decoder_gradient_replay.py",
+      "bytes": 23136,
+      "sha256": "b2fd4dfed5050b020afeda957d96857ad92f9343c6fcf3e3edaa36c8eca37811",
+      "stable_stat_during_this_read": true
+    },
+    {
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_patch_codec.py",
+      "bytes": 18953,
+      "sha256": "0a3f18c9ef8e7589cd0a880e4b89b6f4f53d37af7602a63f315595e692d1fb96",
+      "stable_stat_during_this_read": true
+    },
+    {
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py",
+      "bytes": 38195,
+      "sha256": "d09519f8cd7ff07f1c272bb29fa730d101f54390d33a43096dcf78e1e6a86536",
+      "stable_stat_during_this_read": true
+    },
+    {
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_mixed_replay.py",
+      "bytes": 33528,
+      "sha256": "776c4d636bc769cc8df9b994f14fea71599c26087d67eaee7434c401cd3b4b1c",
+      "stable_stat_during_this_read": true
+    },
+    {
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_proof_feedback_replay.py",
+      "bytes": 73493,
+      "sha256": "d7478370a4a39a16e3b5932f3a0974cc99b8ceb117e7fbd1ac166a58fa16ce84",
+      "stable_stat_during_this_read": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/checkpoints.py",
+      "bytes": 54378,
+      "sha256": "96aa08e22eb99bebc0b0f84019227f0a504ca67aa2252fbf3253850343e95f46",
+      "stable_stat_during_this_read": true
+    }
+  ],
+  "followup_records": [
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/decoder_distillation_experiment.py",
+      "bytes": 37989,
+      "sha256": "76252ad397492762d4fc41915afd1051a93a11b74994655326fe56fa722e3b61",
+      "stable_stat_during_this_read": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/gte_decoder_warm_start.py",
+      "bytes": 26165,
+      "sha256": "2d8bc4a22718392b250e777bba192512d1fcf60973bfa7e615a409c22fb7e6e3",
+      "stable_stat_during_this_read": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/gte_decoder_transfer_replay.py",
+      "bytes": 25011,
+      "sha256": "0cff6e50bcf996dd70bbf3c63fcfe3a6875a177db87bdcdb4fba5c4d5dfdac88",
+      "stable_stat_during_this_read": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_checkpoint_continuation_numeric_v1.py",
+      "bytes": 17217,
+      "sha256": "ca1652fe21cb595c4ea3c9c15068ec52a418daab50aa2bfd942e37ddfa870742",
+      "stable_stat_during_this_read": true
+    },
+    {
+      "path": "docs/autoencoders/decoder_length_distillation.md",
+      "bytes": 270985,
+      "sha256": "a921887debfe6a8b003e17405936ba695d2e9b3c1f96936f0faffab11add5e1a",
+      "stable_stat_during_this_read": true
+    }
+  ],
+  "retained_result_observations": [
+    {
+      "path": "docs/implementation/reports/evidence/decoder-generated-field-training-r2-20261003/results.json",
+      "bytes": 3425258,
+      "sha256": "149996bb6ce3b73b96cfc2b5f52eb310bc0d754713875b7e132d2d52d512cb3b",
+      "stable_stat_during_this_read": true,
+      "scope": "saved historical artifact inspection; no neural replay"
+    },
+    {
+      "path": "docs/implementation/reports/evidence/decoder-generated-field-training-r2-20261003/manifest.json",
+      "bytes": 746329,
+      "sha256": "6c9819f5968d430070dc7e3dc1bdb9a5954da6d900857d7fa1c00db6b65bd8b7",
+      "stable_stat_during_this_read": true,
+      "scope": "saved historical artifact inspection; no neural replay"
+    }
+  ],
+  "source_head_followup_observations": [
+    {
+      "path": "docs/autoencoders/source_head_training.md",
+      "bytes": 41223,
+      "sha256": "2a1a4b69f864d39fb7cc156805f09d71566f681461e1dd29b1112fa532dbb53f",
+      "stable_stat_during_this_read": true,
+      "scope": "saved source/head study inspection, no model replay"
+    },
+    {
+      "path": "docs/implementation/reports/evidence/decoder-source-head-lr-20261003/results.json",
+      "bytes": 2328474,
+      "sha256": "1be4ee7a7caac9551d738be3b609664e07325eab02882d823c7719d18f549a0a",
+      "stable_stat_during_this_read": true,
+      "scope": "saved source/head study inspection, no model replay"
+    },
+    {
+      "path": "docs/implementation/reports/evidence/decoder-source-head-lr-20261003/manifest.json",
+      "bytes": 545606,
+      "sha256": "cb65058088900611c3eb6e599a08a0db32f3fba59643d87368ddaba2b288148d",
+      "stable_stat_during_this_read": true,
+      "scope": "saved source/head study inspection, no model replay"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+import ast,hashlib,json,os,stat,sys,xml.etree.ElementTree as ET
+from pathlib import Path
+work=Path(__file__).resolve().parent
+base=Path(sys.argv[1])
+assert base.parent==work
+tree=ast.parse(Path('/tmp/Root-P2-whole-component-managed-R5-n8Fkdm2q/run-read3.py').read_bytes())
+exec(compile(ast.Module(body=[x for x in tree.body if isinstance(x,ast.FunctionDef) or (isinstance(x,ast.Assign) and getattr(x.targets[0],'id',None)=='policy')],type_ignores=[]),'guarded I/O helpers','exec'))
+term,b=read(base/'P1-ordinary13-managed-terminal.json')
+t=json.loads(b)
+assert t['returncode']==0 and t['handle'] is None and t['Source_closed'] and t['resource_cleanup_confirmed'] and t['qualification_complete']
+actual=val(t['report'])
+assert actual['actual_parent_release_return'] and not actual['errors'] and not actual['Source_WRITE_claimed']
+assert len(actual['actual_Source_context_closure'])==2 and all(r['exit_returned'] for r in actual['actual_Source_context_closure'])
+phases={r['operation']:r for r in actual['phases'].values()}
+assert set(phases)=={'collect','run'} and all(r['accepted'] and r['error'] is None for r in phases.values())
+c,r=(phases[mode]['actual_binding'] for mode in ('collect','run'))
+ids=c['actual_collected_roster']
+assert len(ids)==len(set(ids))==13 and ids==r['actual_collected_roster']==r['actual_called_roster']
+scope=Path('/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/Phase1-proof-cache-reload-filename-private-v01-rdtjc1jx')
+data,b=read(scope/'INERT-independent-owning-proof-cache-selector-union13-v01.json',4558,'1a15be11c96cdc1df81ed04c6f3b65df851595fe66ade1d336493aedfbf5b284')
+expected=json.loads(b)['exact_case_ids']
+if isinstance(expected,dict):expected=[x for values in expected.values() for x in values]
+assert len(expected)==len(set(expected))==13 and set(expected)==set(ids)
+assert len({n.split('[',1)[0] for n in ids})==8
+for phase in phases.values():
+    item,=phase['actual_results']
+    sdk=item['result']; life=sdk['native_lifecycle']
+    assert sdk['returncode']==0 and sdk['workspace_cleaned'] and life['cleanup_confirmed'] and life['leader_reaped']
+    assert life['descendant_tracking_complete'] and not life['remaining_tracked_descendants'] and not life['remaining_group_members']
+assert not (Path(t['report']['path']).parent/'parent-home').exists()
+raw,=(j for j in phases['run']['actual_results'][0]['raw_output_files'] if j['logical_name']=='junit.xml')
+xml,b=read(raw['path'],raw['bytes'],raw['sha256'])
+cases=list(ET.fromstring(b).iter('testcase'))
+assert len(cases)==13 and [x.attrib['name'] for x in cases]==[n.rsplit('::',1)[1] for n in ids]
+assert not any(x.find(k) is not None for x in cases for k in ('failure','error','skipped'))
+ro=val(t['READ4_terminal'])
+frozen=val(ro['freeze'])
+for rel,post in frozen['committed'].items():
+    path=post['path']
+    assert path==str(Path(actual['git_candidate_provenance']['root'])/rel)
+    if rel.startswith('tests/'):
+        for phase in (c,r):
+            witness=phase['actual_test_rewrite_source_to_code'][path]
+            assert witness['compile_source_sha256']==post['sha256']
+            assert all(witness[key] for key in ('source_to_AST_observed','AST_to_code_observed','code_execution_observed'))
+    else:assert r['actual_compiled_current_Source'][path]==post['sha256']
+rec=keep('actual-ordinary13-qualified.json',{'terminal_returncode':0,'qualification_complete':True,'Source_closed':True,
+ 'resource_cleanup_confirmed':True,'ordinary_raw_JUnit':xml,'actual_report':t['report'],'exact_local_freeze':ro['freeze'],
+ 'actual_closed_READ4':ro['read_close'],'source2_terminal':ro['prior_source2'],
+ 'actual_ordinary_counts':{'tests':13,'passed':13,'failures':0,'errors':0,'skipped':0,'retained':10,'added':3},
+ 'test_functions':8,'Source_Ast_Code_and_order_verified':True,'actual_terminal':term,
+ 'independent_selector_evidence':data,'fully_retained_ledger':t['fully_retained_ledger']})
+print(json.dumps(rec),flush=True)

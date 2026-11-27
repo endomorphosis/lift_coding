@@ -1,0 +1,150 @@
+"""Select the maintained Native3 expected-policy operator with fresh Source and resource receipts."""
+import ast,hashlib,json,os,re,stat,subprocess,sys,time
+from pathlib import Path
+base=Path(__file__).resolve().parent
+past=Path('/tmp/Root-P1-Guide570-existing-Native3-expected-policy-v594-ichhgq4e')
+preps=Path('/tmp/P1-Guide584-native3-exact-fresh-controls-INERT-rppiF2')
+helper=Path('/tmp/Root-P2-whole-component-managed-R5-n8Fkdm2q/run-read3.py')
+tree=ast.parse(helper.read_bytes())
+names={'full9','read','val','keep'}
+exec(compile(ast.Module([n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in names or isinstance(n,ast.Assign) and getattr(n.targets[0],'id',None)=='policy'],[]),str(helper),'exec'))
+def check(ref):
+    return read(ref['path'],ref['bytes'],ref['sha256'])[1]
+def same(a,b):
+    return all(a[k]==b[k] for k in ('path','bytes','sha256'))
+assert __debug__ and sys.argv[1:]==['--run-selected-existing-generic-Native3']
+s4,_=read(base/'current-Native3-Source4-terminal.json',10100,'0658244d167de01debe84615f4ef8d5492a19419a250ebf7b822de89a2f091e3')
+s=val(s4)
+compact=val(s['read_close'])
+assert s['returncode']==0 and s['reaped'] and s['Source_closed'] and s['owned_module_closed'] and s['handle'] is None
+assert compact['status']=='PASS' and not compact['errors'] and compact['roots_before']==compact['roots_after']
+assert compact['SDK_Native_compiler_or_project_execution'] is False
+guide=s['publication']
+published=val(guide)
+roots=s['frozen_roots']
+assert [r['Git_HEAD'] for r in roots]==[published['fresh_origin_main'][r] for r in ('datasets','accelerate')]
+D,A=(Path(p['root']) for p in roots)
+outer=s['outer_epoch']
+python=s['python_epoch']
+rows=val(outer)
+by={r['path']:r for r in rows}
+assert len(rows)==len(by) and all(by[r['path']]==r for r in val(python))
+PROTOCOL='ipfs_datasets_py/logic/ir_core/protocols.py'
+TEST='tests/integration/logic/backends/test_kernel_backends.py'
+LEAN='ipfs_datasets_py/logic/backends/kernel/lean.py'
+assert set(s['raw_captures'])=={'.git/index',PROTOCOL,TEST,LEAN}
+for role,reference in s['raw_captures'].items():
+    check(reference)
+    assert reference['sha256']==by[str(D/role)]['sha256']
+    assert by[str(D/role)]['full9']==full9((D/role).lstat())
+assert s['raw_captures'][LEAN]['sha256']=='a36a8ae2c304dc439e6bf32d1a0481b5fc8dab592e26a7dae40cda0a28b8a274'
+old_binding=read(past/'Root-current-existing-Native3-binding.json',31785,'737c81a692fcc42b28d398b8090b2383429137bf8064372c89aafbfa5bdba159')[0]
+binding=val(old_binding)
+resource=binding['resource']
+latest=val(read('/tmp/P1-Guide583-existing-Native2-prepared-INERT-iDXkyN/Root-current-existing-translated-cache-Native2-binding.json',29721,
+    'c4ae3f08c374950e9c9d2f9b1d15fa8050953d5bd958c324807b9f3ebdc0316e')[0])
+assert latest['resource']==resource and latest['Source42_raw']==binding['Source42_raw']
+check(binding['Source42_raw'])
+state_ref,raw=read(resource['state_path'])
+state=json.loads(raw)
+assert state['config']==resource['expected_config'] and state['child_process_capacity']==resource['expected_capacity']
+assert state['child_process_capacity']['base_config_sha256']==resource['expected_policy_sha256']
+assert len(binding['Native'])==len(latest['Native'])==8
+for row in latest['Native']:
+    p=Path(row['path'])
+    fd=os.open(p,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK)
+    try:
+        st=os.fstat(fd)
+        assert stat.S_ISREG(st.st_mode) and full9(st)==full9(p.lstat())==row['actual_full9'] and st.st_size==row['bytes']
+    finally:os.close(fd)
+namespace=[]
+for row in s['namespace_metadata']:
+    p=Path(row['path'])
+    st=p.lstat()
+    assert stat.S_ISDIR(st.st_mode) and full9(st)==row['full9'] and not os.path.lexists(row['initializer_path'])
+    namespace.append({**row,'device':st.st_dev,'inode':st.st_ino})
+pins={name:[rel,by[str(D/rel)]['sha256']] for name,(rel,digest) in binding['current_SDK_source_pins'].items()}
+assert pins=={name:latest['current_SDK_source_pins'][name] for name in pins}
+sealed=read(preps/'SEALED-existing-Native3-Guide584-exact-inert-controls.json',5300,
+    '5ea2ecdfe9aaf2bbe2292b878861e0e4b829e89db85f26760a22635fc1692d6c')[0]
+binder=read(preps/'bind-existing-current-Guide584-native3-expected-policy.INERT.py.DATA',5298,
+    '79e21daa390416aaac8776bc6861d3cd2165c1baad4c81668503f4003189e005')[0]
+inert,op_bytes=read(preps/'existing-current-Guide584-native3-expected-policy-operator.INERT.py.DATA',40089,
+    '30a4b6ea362e2ea8f8ad51b37e09f185b0a4d927e44fe9da3b0673a00006e984')
+op=op_bytes.decode()
+# Keep the exact canonical-protocol path assertion, binding it to this physical checkout.
+old_protocol=str(Path(binding['PROJECTS'][0]['root'])/PROTOCOL)
+assert op.count(repr(old_protocol))==1
+op=op.replace(repr(old_protocol),repr(str(D/PROTOCOL)))
+out=base/'actual-generic-native3-output'
+assert not out.exists()
+prior=s['fully_retained_ledger']
+read_cap=val(s['cap'])
+authority=val(read_cap['authority'])['human_authorization']
+check(authority)
+n=160*1024**2
+before={**prior,'global_cap':prior['global_cap']+n,'internal_cap':prior['internal_cap']+n}
+after={**before,'used':before['used']+n,'internal_used':before['internal_used']+n,'captures':before['captures']+1}
+assert after['global_cap']-after['used']==after['internal_cap']-after['internal_used']==6356992
+charge=keep('Source-only-current-generic-Native3-full-retained-cap.json',dict(prior=prior,selected=before,
+    after_full_retained_precharge=after,added_Source_only_envelope=n,prior_native_envelope_bytes=128*1024**2,
+    extra_private_readback_IO_upper=32*1024**2,prior_cap=s['cap'],exact_human_affirmation=authority,
+    all_prior_costs_retained=True,resource_policy_capacity_unchanged=True,physical_IO_accounting_complete=False))
+profile='P1-native3-expected-type-dependency/v1'
+now=time.time_ns()
+clock=dict(kind='exact submission window for existing validation profile',not_before_utc_ns=now,
+           submit_deadline_utc_ns=now+180*10**9)
+select=keep('Root-selected-current-generic-Native3-once.json',dict(Root_selected=True,case_profile=profile,
+    current_publication=guide,output_namespace=str(out),current_Source_epoch=outer,current_Python_epoch=python,
+    exact_current_read4=s4,current_expected_policy_binder=binder,current_owning_test_source=s['raw_captures'][TEST],
+    cap_and_IO=charge,policy_and_state=state_ref,clock_scope=clock,current_controls=sealed,
+    allowed_real_commands={'Lean_version_observations':'via existing helper','Lean_compile_calls':3,
+                           'expected_compiler_statuses':[0,1,0]},
+    unchanged_exact_host_asset_metadata=latest['Native'],no_statutory_or_model_qualification=True))
+enrollment=dict(binding['Native_enrollment'],Root_selection=select,case_profile=profile,
+    current_toolchain_assets_exact=True,current_resource_state_observation=state_ref,clock_scope=clock)
+binding.update(schema='existing-direct-Native3-current-bindings/v1',native_case_profile=profile,
+    Root_selection=select['path'],PROJECTS=roots,Source_epoch=outer,W_INDEX=by[str(D/'.git/index')],
+    Source42_current_owner_binding=dict(existing_Source42_binding_verified=True,current_publication=guide,actual_read4=s4,
+        current_read_guard_pair=roots,current_owner=s['current_Source42_owner_binding']),
+    Source_composition_proof=dict(current_read=s4,current_materialized_projection=s['materialization'],
+        prior_direct_binding_historical=old_binding,current_protocol_owner=by[str(D/PROTOCOL)]),
+    Source_IO_allocation=dict(binding['Source_IO_allocation'],debit_bytes=n,
+        explicit_ledger_increase_and_charge_reference=charge),
+    Native_enrollment=enrollment,clock_scope=clock,Native=latest['Native'],normal_namespaces=namespace,
+    current_SDK_source_pins=pins,current_protocol_raw_source=s['raw_captures'][PROTOCOL],
+    owning_test_record=by[str(D/TEST)],owning_test_raw=s['raw_captures'][TEST],
+    current_D_config=next(r for r in val(s['named_epoch'])['rows'] if r['path']==str(D/'.git/config')),
+    closed_current_core_Source_role_reference=s4,binder_raw=binder,live_bindings_currently_unbound=False)
+bref=keep('Root-current-existing-generic-Native3-binding.json',binding)
+for slot,value in dict(W=f'Path({str(D)!r})',A=f'Path({str(A)!r})',RUN_OUTPUT=f'Path({str(out)!r})',
+    PATH_SCOPE=repr('/home/barberb/.local/bin:/usr/lib/git-core'),ROOT_SELECTION=repr(select['path']),
+    CURRENT_BINDING_REF=repr(bref)).items():
+    op,count=re.subn(rf'(?m)^{slot} = None$',lambda _:slot+' = '+value,op)
+    assert count==1,slot
+compile(op,'existing Native3 expected type and dependency policy operator','exec',dont_inherit=True)
+operator=base/'Root-selected-existing-generic-Native3-operator.py'
+with os.fdopen(os.open(operator,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400),'wb') as stream:
+    stream.write(op.encode());stream.flush();os.fsync(stream.fileno())
+oref=read(operator)[0]
+assert clock['not_before_utc_ns']<=time.time_ns()<clock['submit_deadline_utc_ns']
+with (base/'native3.stdout').open('xb') as stdout,(base/'native3.stderr').open('xb') as stderr:
+    child=subprocess.Popen(['/usr/bin/python3','-I','-B',str(operator)],stdout=stdout,stderr=stderr)
+    live=keep('native3-owner-live.json',dict(owner='Root',pid=child.pid,profile=profile,operator=oref,
+        binding=bref,selection=select,precharge=charge,current_Source4=s4))
+    print(json.dumps(live),flush=True)
+    rc=child.wait()
+terminal=dict(owner='Root',pid=child.pid,returncode=rc,reaped=True,live=False,native_handle=None,
+    selection=select,binding=bref,operator=oref,actual_live_handle=live,precharge=charge,fully_retained_ledger=after,
+    stdout=read(base/'native3.stdout')[0],stderr=read(base/'native3.stderr')[0])
+report=out/'complete-native3-direct-existing-owner-report.json'
+if report.is_file():
+    terminal['report']=read(report)[0]
+    actual=val(terminal['report'])
+    for key in ('Source_closed','resource_cleanup_confirmed','parent_home_cleanup_confirmed','actual_native_qualification'):
+        terminal[key]=actual.get(key)
+tref=keep('current-generic-Native3-parent-terminal.json',terminal)
+ready=keep('actual-detached-generic-Native3-verification-input.json',dict(terminal=tref,selection=select,
+    binding=bref,operator=oref,source4=s4,publication=guide,charge=charge,outer=outer,python=python))
+print(json.dumps(dict(terminal=tref,verification_input=ready)),flush=True)
+raise SystemExit(rc)

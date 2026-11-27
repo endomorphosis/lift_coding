@@ -1,0 +1,48 @@
+import ast,hashlib,json,os,stat,sys,xml.etree.ElementTree as ET
+from pathlib import Path
+work=Path(__file__).resolve().parent
+base=Path(sys.argv[1])
+assert base.parent==work
+helper=ast.parse((work/'run-read3.py').read_bytes())
+defs=[s for s in helper.body if isinstance(s,ast.FunctionDef) or (isinstance(s,ast.Assign) and getattr(s.targets[0],'id',None)=='policy')]
+exec(compile(ast.Module(body=defs,type_ignores=[]),'existing guarded helpers','exec'))
+terminal_ref,b=read(base/'ordinary62-managed-terminal.json')
+t=json.loads(b)
+assert t['ordinary62_parent_terminal_returncode']==0 and t['actual_handle'] is None
+assert t['qualification_complete'] and t['Source_closed'] and t['resource_cleanup_confirmed'] and t['parent_home_absent'] and not t['errors']
+report=val(t['ordinary_report'])
+assert report['actual_parent_release_return'] and len(report['actual_Source_context_closure'])==2
+assert all(row['exit_returned'] for row in report['actual_Source_context_closure'])
+phases={r['operation']:r for r in report['phases'].values()}
+collect,run=(phases[mode] for mode in ('collect','run'))
+assert all(r['accepted'] and r['error'] is None for r in (collect,run))
+c,r=(phase['actual_binding'] for phase in (collect,run))
+ids=c['actual_collected_roster']
+assert len(ids)==len(set(ids))==62 and ids==r['actual_collected_roster']==r['actual_called_roster']
+ph=run['actual_results'][0]
+junit,=(x for x in ph['raw_output_files'] if x['logical_name']=='junit.xml')
+xml_pin,b=read(junit['path'],junit['bytes'],junit['sha256'])
+cases=list(ET.fromstring(b).iter('testcase'))
+assert len(cases)==62 and not any(x.find(k) is not None for x in cases for k in ('failure','error','skipped'))
+def identity(node):
+    suite,name=node.rsplit('::',1)
+    filename,*names=suite.split('::')
+    return '.'.join([filename[:-3].replace('/','.'),*names]),name
+assert [(x.attrib['classname'],x.attrib['name']) for x in cases]==list(map(identity,ids))
+assert len({n.split('[',1)[0] for n in ids})==25
+source=val(report['source_read_binding_reference'])
+assert source['actual_closed_READ3']==val(t['Source3'])['actual_compact']
+f=val(t['freeze'])
+for rel,row in f['exact_posts'].items():
+    p=str(Path(f['root'])/rel)
+    if rel.startswith('tests/'):
+        assert all(binding['actual_test_rewrite_source_to_code'][p]['compile_source_sha256']==row['sha256'] for binding in (c,r))
+    else:
+        assert r['actual_compiled_current_Source'][p]==row['sha256']
+p=keep('actual-managed-ordinary62-qualified.json',{
+ 'terminal_returncode':0,'terminal':terminal_ref,'Source_closed':True,'resource_cleanup_confirmed':True,
+ 'counts':{'tests':62,'passed':62,'failures':0,'errors':0,'skipped':0,'functions':25,'duplicates':0},
+ 'subcohorts':{'retained53':53,'new9':9},'frozen_execution':t['freeze'],'exact_closed_READ3':t['Source3'],
+ 'exact_ordinary_report':t['ordinary_report'],'raw_JUnit':xml_pin,'actual_COLLECT_RUN_JUnit_order_identical':True,
+ 'actual_checked_fixture_Native_not_exercised':True,'fully_retained_ledger':t['fully_retained_ledger']})
+print(json.dumps(p),flush=True)
