@@ -1,0 +1,111 @@
+import OriginalComputedSourceUpdate
+import ObjectiveContainerEvaluationBridge
+import RealGapContraction
+
+set_option backward.isDefEq.respectTransparency false
+
+/-!
+SOURCE-ONLY, UNCOMPILED, UNQUALIFIED CANDIDATE.
+
+Decode the actual successfully returned source-update list into a finite
+vector only after checking its actual length. The vector adapter reads that
+list; it never substitutes the mathematical model as its implementation.
+Then perform exactly the caller's finite number of evaluator steps, threading
+Except success/error in order, and join the independently defined recurrence.
+
+The parameter/data projection remains the recorded fixed exact-real profile.
+The counter below is a fresh bounded evaluator helper, not a translation of
+the original Python loop, its guards, trace, preparation or finite epochs.
+No Float/refinement/training/asymptotic/global convergence authority is granted.
+Parent actual prefix/update theorems remain prospective until root qualification.
+-/
+
+namespace RankerObjectiveOriginalComputedFiniteIteration
+
+noncomputable section
+
+open RankerObjectiveIR (SliceError applyOne)
+open RankerObjectiveContainerLanguage (vectorOfList)
+open RankerObjectiveContainerEvaluationBridge (vectorOfList_ofFn)
+open RankerObjectiveOriginalComputedSourceUpdate (actualComputedUpdate actual_computed_update_eq)
+
+/-- The length check precedes finite indexing of the actual successful list.
+Its proof is produced from the check, not accepted as a caller certificate. -/
+def checkedVectorOfList (length : ℕ) (values : List ℝ) :
+    Except SliceError (Fin length → ℝ) :=
+  if sameLength : values.length = length then
+    .ok (vectorOfList values sameLength)
+  else .error (.unsupportedNode "updateLengthMismatch")
+
+theorem checked_vector_ofFn_success {length : ℕ} (values : Fin length → ℝ) :
+    checkedVectorOfList length (List.ofFn values) = .ok values := by
+  unfold checkedVectorOfList
+  split
+  · rename_i sameLength
+    exact congrArg (Except.ok : (Fin length → ℝ) → Except SliceError (Fin length → ℝ))
+      (vectorOfList_ofFn values sameLength)
+  · rename_i differentLength
+    exact False.elim (differentLength (List.length_ofFn (f := values)))
+
+theorem checked_vector_refuses_wrong_length (length : ℕ) (values : List ℝ)
+    (differentLength : values.length ≠ length) :
+    checkedVectorOfList length values = .error (.unsupportedNode "updateLengthMismatch") := by
+  unfold checkedVectorOfList
+  exact dif_neg differentLength
+
+/-- Apply the adapter to the actual source computation. In particular, an
+earlier evaluator error is preserved and no model vector bypasses decoding. -/
+def actualComputedVectorUpdate (weights : Fin 80 → ℝ) :
+    Except SliceError (Fin 80 → ℝ) :=
+  applyOne (checkedVectorOfList 80) (actualComputedUpdate weights)
+
+theorem actual_computed_vector_update_eq (weights : Fin 80 → ℝ) :
+    actualComputedVectorUpdate weights =
+      .ok (RankerRealCurvature.realGradientStep RankerRealCurvature.originalRealMu
+        RankerRealCurvature.originalRealEta RankerRealCurvature.originalRealDifferences weights) := by
+  unfold actualComputedVectorUpdate
+  rw [actual_computed_update_eq]
+  change checkedVectorOfList 80 (List.ofFn (RankerRealCurvature.realGradientStep
+    RankerRealCurvature.originalRealMu RankerRealCurvature.originalRealEta
+    RankerRealCurvature.originalRealDifferences weights)) = _
+  exact checked_vector_ofFn_success _
+
+/-- Structurally bounded by steps; its successor branch evaluates the actual
+update only after the preceding successful state. No source loop is asserted. -/
+def sourceIterate : ℕ → (Fin 80 → ℝ) → Except SliceError (Fin 80 → ℝ)
+  | 0, initial => .ok initial
+  | steps + 1, initial => applyOne actualComputedVectorUpdate (sourceIterate steps initial)
+
+theorem source_iterate_eq_model (steps : ℕ) (initial : Fin 80 → ℝ) :
+    sourceIterate steps initial = .ok (RankerRealCurvature.originalRealIterate initial steps) := by
+  induction steps with
+  | zero => rfl
+  | succ steps previous =>
+    change applyOne actualComputedVectorUpdate (sourceIterate steps initial) =
+      .ok (RankerRealCurvature.originalRealIterate initial (steps + 1))
+    rw [previous]
+    change actualComputedVectorUpdate (RankerRealCurvature.originalRealIterate initial steps) = _
+    exact actual_computed_vector_update_eq (RankerRealCurvature.originalRealIterate initial steps)
+
+/-- Finite model-gap upper bound at the actual successful evaluator state.
+The reference is an ordinary vector; no minimizer/convergence premise is used.
+This is not a Python rounding-error or original runtime-loop bound. -/
+theorem source_iterate_finite_gap_bound (steps : ℕ) (initial reference : Fin 80 → ℝ) :
+    ∃ result : Fin 80 → ℝ,
+      sourceIterate steps initial = .ok result ∧
+      RankerRealCurvature.originalRealGap result reference ≤
+        RankerRealCurvature.originalRealRho ^ steps *
+          RankerRealCurvature.originalRealGap initial reference := by
+  refine ⟨RankerRealCurvature.originalRealIterate initial steps,
+    source_iterate_eq_model steps initial, ?_⟩
+  exact RankerRealCurvature.originalReal_iterate_gap_le initial reference steps
+
+#print axioms checked_vector_ofFn_success
+#print axioms checked_vector_refuses_wrong_length
+#print axioms actual_computed_vector_update_eq
+#print axioms source_iterate_eq_model
+#print axioms source_iterate_finite_gap_bound
+
+end
+
+end RankerObjectiveOriginalComputedFiniteIteration

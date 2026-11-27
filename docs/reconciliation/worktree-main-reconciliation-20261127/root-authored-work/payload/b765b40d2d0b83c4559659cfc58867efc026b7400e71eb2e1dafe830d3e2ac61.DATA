@@ -1,0 +1,159 @@
+"""Native Groth16 development profile; preserve keys, real outputs and failures."""
+from __future__ import annotations
+import argparse
+import copy
+import hashlib
+import json
+import os
+import platform
+import shutil
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parents[4]
+BACKEND = ROOT / "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend"
+FR = 21888242871839275222246405745257275088548364400416034343698204186575808495617
+
+
+def save(path, value):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(value, indent=2, sort_keys=True)+"\n")
+
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def run(output, binary, keys, label, args):
+    folder = output / "invocations" / label
+    folder.mkdir(parents=True, exist_ok=False)
+    env = {"PATH": "/usr/local/bin:/usr/bin:/bin", "LANG": "C.UTF-8", "LC_ALL": "C.UTF-8", "GROTH16_BACKEND_ARTIFACTS_ROOT": str(keys), "RAYON_NUM_THREADS": "2"}
+    command = [str(binary), *map(str, args)]
+    save(folder / "started.json", {"command": command, "environment": env, "started_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())})
+    before = time.perf_counter()
+    try:
+        proc = subprocess.run(command, cwd=output, env=env, capture_output=True, timeout=300)
+        stdout, stderr, code, timed_out = proc.stdout, proc.stderr, proc.returncode, False
+    except subprocess.TimeoutExpired as exc:
+        stdout, stderr, code, timed_out = exc.stdout or b"", exc.stderr or b"", None, True
+    seconds = time.perf_counter()-before
+    (folder / "stdout.log").write_bytes(stdout)
+    (folder / "stderr.log").write_bytes(stderr)
+    try:
+        response = json.loads(stdout)
+    except (json.JSONDecodeError, UnicodeDecodeError):
+        response = None
+    result = {"label": label, "command": command, "wall_seconds": seconds, "returncode": code, "timed_out": timed_out,
+        "response": response, "stdout_sha256": sha(folder / "stdout.log"), "stderr_sha256": sha(folder / "stderr.log")}
+    save(folder / "result.json", result)
+    print(json.dumps({"label": label, "returncode": code, "wall_seconds": seconds, "response": response if code != 0 else None}), flush=True)
+    return result
+
+
+def tree(digests):
+    level = [hashlib.sha256(value).digest() for value in digests + [bytes(32)]*(4-len(digests))]
+    while len(level) > 1:
+        level = [hashlib.sha256(level[i]+level[i+1]).digest() for i in range(0,len(level),2)]
+    return level[0].hex()
+
+
+def witness(count):
+    events = [f"frozen-development-event-{i}" for i in range(count)]
+    digests = [hashlib.sha256(value.encode()).digest() for value in events]
+    return {"private_axioms": [], "theorem": "", "intermediate_steps": [], "axioms_commitment_hex": "00"*32,
+        "theorem_hash_hex": "00"*32, "circuit_version": 3, "ruleset_id": "MCP++_EventDAG_Compaction_v1",
+        "event_digests_hex": [value.hex() for value in digests], "event_count": count, "event_dag_merkle_root_hex": tree(digests)}
+
+
+def statement_binding(proof, expected, binary, keys, pins):
+    return proof.get("version") == 3 and proof.get("public_inputs") == [expected["event_dag_merkle_root_hex"], str(expected["event_count"])] and sha(binary) == pins["binary_sha256"] and sha(keys / "v3/verifying_key.bin") == pins["verifying_key_sha256"]
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--run-id", required=True)
+    parser.add_argument("--binary", type=Path, default=BACKEND / "bin/linux-aarch64/groth16")
+    args = parser.parse_args()
+    binary = args.binary.resolve()
+    output = HERE / "runs" / args.run_id
+    output.mkdir(parents=True, exist_ok=False)
+    for name in ["protocol.json", "run.py"]:
+        shutil.copyfile(HERE / name, output / name)
+    sources = [*sorted((BACKEND / "src").rglob("*.rs")), BACKEND / "Cargo.toml", BACKEND / "Cargo.lock"]
+    freeze = {"created_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "binary": str(binary), "binary_sha256": sha(binary), "binary_bytes": binary.stat().st_size,
+        "platform": platform.platform(), "python": sys.version, "source_head": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=BACKEND, text=True).strip(),
+        "source_hashes": {str(p.relative_to(BACKEND)): sha(p) for p in sources}, "input_hashes": {name: sha(HERE / name) for name in ["protocol.json", "run.py"]},
+        "bundled_binary_source_equivalence_claim": False, "rayon_threads": 2}
+    save(output / "freeze.json", freeze)
+    for p in sources:
+        dest = output / "source_snapshot" / p.relative_to(BACKEND)
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(p, dest)
+    keys = output / "keys_primary"
+    unsupported = run(output, binary, output / "keys_v5_probe", "setup_v5_probe", ["setup", "--version", "5"])
+    setup = run(output, binary, keys, "setup_v3_primary", ["setup", "--version", "3"])
+    if setup["returncode"] != 0:
+        save(output / "summary.json", {"status": "v3_setup_unavailable", "setup": setup, "v5_probe": unsupported, "real_proofs": 0})
+        return
+    pins = {"binary_sha256": sha(binary), "verifying_key_sha256": sha(keys / "v3/verifying_key.bin"), "proving_key_sha256": sha(keys / "v3/proving_key.bin")}
+    save(output / "pins.json", pins)
+    positives = []
+    for count in [1,2,4]:
+        value = witness(count)
+        input_path, proof_path = output / f"witness_{count}.json", output / f"proof_{count}.json"
+        save(input_path,value)
+        proved = run(output,binary,keys,f"prove_count_{count}",["prove","--input",input_path,"--output",proof_path])
+        verified = run(output,binary,keys,f"verify_count_{count}",["verify","--proof",proof_path,"--json"]) if proof_path.exists() else None
+        binding = statement_binding(json.loads(proof_path.read_text()),value,binary,keys,pins) if proof_path.exists() else False
+        row = {"count":count,"prove":proved,"verify":verified,"statement_binding":binding,"proof_bytes":proof_path.stat().st_size if proof_path.exists() else 0}
+        positives.append(row)
+        save(output / "positives.json", positives)
+    if not all(p["prove"]["returncode"]==0 and p["verify"] and p["verify"]["returncode"]==0 and p["statement_binding"] for p in positives):
+        save(output / "summary.json", {"status":"positive_failure","positives":positives})
+        return
+    expected = witness(2)
+    original = json.loads((output / "proof_2.json").read_text())
+    negatives=[]
+    for name in ["private_digest", "witness_length"]:
+        bad=copy.deepcopy(expected)
+        if name=="private_digest": bad["event_digests_hex"][0]="ff"*32
+        else: bad["event_digests_hex"].pop()
+        path=output/f"bad_{name}.json";save(path,bad)
+        r=run(output,binary,keys,name,["prove","--input",path,"--output",output/f"bad_{name}_proof.json"])
+        negatives.append({"case":name,"result":r,"rejected":r["returncode"] not in (None,0),"proof_created":(output/f"bad_{name}_proof.json").exists()})
+    for name in ["public_root", "public_count", "evm_public_input", "proof_point", "field_equivalent_root"]:
+        bad=copy.deepcopy(original)
+        if name=="public_root": bad["public_inputs"][0]=f'{int(bad["public_inputs"][0],16)^1:064x}'
+        elif name=="public_count": bad["public_inputs"][1]="3"
+        elif name=="evm_public_input": bad["evm_public_inputs"][0]="0x"+"00"*32
+        elif name=="proof_point": bad["evm_proof"][0]="0x"+"00"*32
+        else:
+            value=int(bad["public_inputs"][0],16); reduced=value%FR
+            bad["public_inputs"][0]=f'{reduced+FR if value==reduced else reduced:064x}'
+        path=output/f"bad_{name}.json";save(path,bad)
+        r=run(output,binary,keys,name,["verify","--proof",path,"--json"])
+        negatives.append({"case":name,"result":r,"rejected":r["returncode"] not in (None,0),"exact_statement_binder_accepts":statement_binding(bad,expected,binary,keys,pins)})
+    other=output/"keys_alternate"
+    other_setup=run(output,binary,other,"setup_v3_alternate",["setup","--version","3"])
+    wrong=run(output,binary,other,"wrong_valid_key",["verify","--proof",output/"proof_2.json","--json"])
+    negatives.append({"case":"wrong_valid_key","result":wrong,"rejected":wrong["returncode"] not in (None,0),"exact_statement_binder_accepts":statement_binding(original,expected,binary,other,pins)})
+    broken=output/"keys_truncated/v3";broken.mkdir(parents=True)
+    (broken/"verifying_key.bin").write_bytes((keys/"v3/verifying_key.bin").read_bytes()[:-1])
+    result=run(output,binary,broken.parent,"truncated_key",["verify","--proof",output/"proof_2.json","--json"])
+    negatives.append({"case":"truncated_key","result":result,"rejected":result["returncode"] not in (None,0),"exact_statement_binder_accepts":statement_binding(original,expected,binary,broken.parent,pins)})
+    save(output/"negatives.json",negatives)
+    artifacts={str(p.relative_to(output)):{"bytes":p.stat().st_size,"sha256":sha(p)}for p in output.glob("keys_*/v3/*.bin")}
+    save(output/"key_artifacts.json",artifacts)
+    ordinary=[p for p in negatives if p["case"]!="field_equivalent_root"]
+    summary={"status":"qualified_named_relation" if all(p["rejected"] for p in ordinary) else "rejection_failure", "positive_proofs":len(positives),"ordinary_mutation_controls":len(ordinary),"ordinary_rejections":sum(p["rejected"]for p in ordinary),
+        "setup_primary_seconds":setup["wall_seconds"],"setup_alternate_seconds":other_setup["wall_seconds"],"prove_wall_seconds":[p["prove"]["wall_seconds"]for p in positives],"verify_wall_seconds":[p["verify"]["wall_seconds"]for p in positives],"proof_json_bytes":[p["proof_bytes"]for p in positives],
+        "field_alias_native_verified":next(p["result"]["returncode"]==0 for p in negatives if p["case"]=="field_equivalent_root"),"field_alias_exact_statement_binder_rejected":next(not p["exact_statement_binder_accepts"]for p in negatives if p["case"]=="field_equivalent_root"),
+        "production_admission":False,"pytest_execution_proven":False,"model_calls":0,"token_savings_claim":False}
+    save(output/"summary.json",summary)
+    print(json.dumps(summary,indent=2),flush=True)
+
+
+if __name__=="__main__": main()

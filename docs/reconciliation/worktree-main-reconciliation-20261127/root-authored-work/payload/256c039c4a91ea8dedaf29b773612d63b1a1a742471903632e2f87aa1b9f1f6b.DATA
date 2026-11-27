@@ -1,0 +1,40 @@
+"""Exact public original-adapter inventory codec; no registry/oracle access."""
+from pathlib import Path,PurePosixPath
+import hashlib,json,os,stat
+MAX_BYTES=64*1024*1024
+def require(ok,message):
+ if not ok:raise ValueError(message)
+def canonical(x):return json.dumps(x,sort_keys=True,separators=(',',':')).encode()
+def digest(x):return hashlib.sha256(canonical(x)).hexdigest()
+def read(path,limit=MAX_BYTES):
+ p=Path(path);require(p.is_absolute() and p.resolve()==p,'noncanonical private input')
+ fd=os.open(p,os.O_RDONLY|os.O_NOFOLLOW)
+ try:
+  s=os.fstat(fd);require(stat.S_ISREG(s.st_mode) and s.st_size<=limit,'nonregular/oversized input')
+  with os.fdopen(fd,'rb',closefd=False) as h:data=h.read(limit+1)
+  require(len(data)<=limit,'oversized input');return data
+ finally:os.close(fd)
+def sha(path):return hashlib.sha256(read(path)).hexdigest()
+def write(path,data,mode=0o600):
+ p=Path(path);require(p.parent.resolve()==p.parent,'unsafe write parent');fd=os.open(p,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,mode)
+ try:
+  with os.fdopen(fd,'wb',closefd=False) as h:h.write(data);h.flush();os.fsync(h.fileno())
+ finally:os.close(fd)
+def safe_rel(value):
+ require(type(value)is str and value and '\\'not in value and not any(ord(c)<32 or ord(c)==127 for c in value),'unsafe relative path')
+ p=PurePosixPath(value);require(not p.is_absolute() and str(p)==value and not any(x in ('.','..','.git') for x in p.parts),'unsafe relative path');return value
+
+def inventory(root):
+ root=Path(root);require(root.is_absolute() and root.resolve()==root and root.is_dir(),'unsafe tree')
+ result={};total=0
+ for p in sorted(root.rglob('*')):
+  rel=safe_rel(p.relative_to(root).as_posix());s=p.lstat()
+  if p.is_symlink():
+   require(not os.path.isabs(os.readlink(p)) and p.resolve(strict=True).is_relative_to(root) and p.resolve().is_file(),'escaping/non-file source symlink')
+   result[rel]={'kind':'symlink','target':os.readlink(p)};continue
+  require(stat.S_ISDIR(s.st_mode)or stat.S_ISREG(s.st_mode),'special file in export')
+  if p.is_file():
+   require(s.st_nlink==1,'multiply linked export file');total+=s.st_size;require(total<=MAX_BYTES and len(result)<20000,'tree exceeds bound')
+   result[rel]={'kind':'file','sha256':sha(p),'bytes':s.st_size,'mode':stat.S_IMODE(s.st_mode)}
+ return result
+

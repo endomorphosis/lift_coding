@@ -1,0 +1,23 @@
+{
+  "delivery_commit": "537492f7f076837fb67a419ba1a6ebd15ccdf9fa",
+  "source_commit": "dcbc6433e78728a42ebc84b10341b4b1dc35201e",
+  "branch": "refs/heads/reconcile/candidate-owner-current-main-20261109",
+  "capsule_path": "docs/agent_supervisor/evidence/candidate-owner-permission-fixture-preparation-20261109.json",
+  "capsule_sha256": "157d3d3e16bb85b85c645ab9d4320b9dc33f790dbf99151d46baf38ce26ba8ab",
+  "source_lease": {
+    "canonical_root": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "mode": "write",
+    "lock_path": "/home/barberb/lift_coding/external/ipfs_accelerate/workspace/control-plane/source-leases/source.lock",
+    "waited_seconds": 44.497739281039685,
+    "schema_version": "autoencoder-source-lease/v1",
+    "cooperative": true
+  },
+  "qualified": false,
+  "remaining_owning_files": 14,
+  "all_prior_qualified_accelerate_buffers_unchanged": true,
+  "published": true,
+  "remote_head_verified": "537492f7f076837fb67a419ba1a6ebd15ccdf9fa",
+  "pr": "https://github.com/endomorphosis/ipfs_accelerate_py/pull/326",
+  "approved_protected_profile_supplied": false,
+  "user_response": "No existing approved protected profile known to the user."
+}

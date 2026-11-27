@@ -1,0 +1,31 @@
+# Additional repository candidates and temporal custody
+
+The pinned public SWE-bench Verified dataset supplies 500 candidate repairs from 12 repositories. These are newly inspected candidates for this research program, not newly created benchmark problems or evidence of absence from model training. The dataset describes human validation and unit-test evaluation in its [official card](https://huggingface.co/datasets/SWE-bench/SWE-bench_Verified/blob/78f471bf655a3137b2e8a75af1501690ec009ec3/README.md).
+
+`verified_metadata_v1/` retains the acquisition freeze, raw-byte download receipt and a projection of nine approved metadata fields. The Parquet file contains reference and test columns and is stored in `curator_custody/`; those columns were not decoded or emitted by the metadata projector. Candidate selection has not read issue bodies, reference patches, test names or model outcomes. Raw custody bytes must never be mounted into a proposal/context process. Future qualification programs may decode protected fields only within the separate curator/scorer process and emit aggregate readiness outcomes.
+
+`repository_identity_v2/` compares current GitHub identities for all twelve candidates and sixteen original repositories. All 28 metadata observations are available; none of the 192 candidate/original comparisons shares a repository ID or a GitHub-declared parent/source fork identity. The old `sdispater/tomlkit` name resolves to `python-poetry/tomlkit`. Flask shares the Pallets owner with original Click/Jinja, and pytest shares its owner with original iniconfig. These two groups remain conservatively flagged for split review; shared ownership alone does not prove shared source or statistically dependent authors. Historical code ancestry, dependency overlap and related-paper exposures remain unaudited. No candidate is enrolled as confirmatory, and foundation-model training contamination is not ruled out. Four initial transient network failures remain in `repository_identity_v1/`; v2 retained its 24 successful observations and fetched only those four missing records.
+
+`ancestry_v1/` freezes the two latest PR creation dates in each of the eleven repositories with at least two records, before querying their graphs. Native Git fetches use `blob:none`, and the checker inspects commit ancestry without reading source or patch blobs. Ten pairs prove forward ancestry in that date order. Django's pair proves the reverse order, showing why PR creation time alone is not an execution chronology. Both observations remain retained; any trajectory ordering must follow verified source ancestry and be frozen before model outcomes.
+
+| Recruitment stage | Observed count |
+| --- | ---: |
+| Metadata candidates | 500 repairs / 12 repository names |
+| Frozen two-issue candidate pairs | 11 |
+| Forward base-commit ancestry proved | 10 |
+| Reverse base-commit ancestry proved | 1 |
+| Candidate/original current identity comparisons checked | 192 |
+| Candidates sharing an original repository owner | 2 |
+| Nodes with designated gold/unfixed checks qualified | 1 |
+| Fully qualified natural trajectories | 0 |
+| Confirmatory families enrolled | 0 |
+
+Ancestry alone does not establish a usable trajectory. Each node still needs source inventory, an executable environment, nonempty gold-versus-unfixed scorer qualification, public task authority and declared allowed edits. The trajectory must specify intervening upstream changes and retain earlier failed tasks; receiving a later public source snapshot cannot retroactively count a failed earlier repair as solved. All phases require the same information and acceptance conditions across arms.
+
+The official evaluation code is pinned in `harness_source/` at `02e7a74ffd0b707aab73d203fe87bdc7c76afc8e` (version 5.0.2). Its [README](https://github.com/SWE-bench/SWE-bench/blob/02e7a74ffd0b707aab73d203fe87bdc7c76afc8e/README.md) recommends a task checkout for local ARM builds. The official task checkout at `3d07b464b7b311a0cbfb5ed5b2d8a3b96f84a33d` is kept in curator custody. Inspection of the public Requests environment recipe found hard-coded x86 image/installer and binary dependency builds. The current host is aarch64, without an x86 binfmt registration, and had about 53 GiB free when checked. The bounded environment work retains its own images and local environment; no global pruning occurred.
+
+`arm64_qualification/REPORT.md` reports the first Requests node, `psf__requests-6028`. Under an explicit ARM port preserving Python 3.9.20 and all thirteen listed Python package versions, both controls complete all 187 designated checks. Unfixed source passes 185 and fails both required failing checks; reference source passes 187. The unchanged native grader resolves only the reference. Both collected outputs also contain eight missing-fixture errors outside the designated set; the original script has no test-exit marker. This is designated-check qualification, not an error-free full-suite result or standard leaderboard run. Initial import and decoding failures remain retained. The paired earlier Requests node has a separate qualification underway, with no trajectory enrollment inferred. No provider/model calls were made during this recruitment work.
+
+The broader A–D/cache/one-factor experiment still requires the unified caller and its prospective run freeze in `../next_stage_protocol.md`. Metadata discovery and infrastructure qualification do not supply model-quality or token-savings observations.
+
+The February 23, 2026 [primary benchmark audit](https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/) reports test-specification flaws in a selected difficult subset and evidence of solution exposure in the tested frontier models. Its subset rate is not a whole-dataset defect estimate, and it does not test our Grok profile. This literature lookup returned public example details for three tasks; `literature_exposure_v1.json` records them and conservatively excludes Django, pylint and SymPy from a development-independent split in this program. Additional families must fill the breadth requirement; reducing the denominator is not completion. The qualified Requests workload remains useful for infrastructure and a clearly bounded known-benchmark comparison, without a novel-task generalization claim.

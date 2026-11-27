@@ -1,0 +1,52 @@
+"""Materialize new public development objectives from retained public examples."""
+import hashlib
+import json
+from pathlib import Path
+import time
+
+HERE = Path(__file__).resolve().parent
+
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def main():
+    freeze = json.loads((HERE / "run-v2/freeze.json").read_text())
+    audit = json.loads((HERE / "audit-v1.json").read_text())
+    assert audit["passed"] and audit["checks"] == 545
+    texts = {
+        "ns-hist-01-xmltodict": "When process_namespaces=True, retain namespace declarations as @xmlns on their declaring element even when that element has no ordinary attributes. Do not transfer declarations onto a descendant. Preserve existing behavior when the declaring element has ordinary attributes and when namespace processing is disabled.",
+        "ns-hist-03-oauthlib": "MetadataEndpoint must construct and return metadata for actual AuthorizationEndpoint, TokenEndpoint, and combined Server instances. Derive supported response types from the supplied authorization endpoint; honor a caller-supplied response_types_supported list. Preserve token-only metadata. In the provided combined Server configuration, the supported response-type keys are code, token, and none.",
+        "ns-hist-04-click": "A Choice option with show_choices=False must not enumerate its choices in --help, including case-insensitive choices. Keep ordinary show_choices=True help and an explicit metavar working. This contract does not require a particular replacement placeholder.",
+    }
+    paths = {
+        "ns-hist-01-xmltodict": ["xmltodict.py"],
+        "ns-hist-03-oauthlib": ["oauthlib/oauth2/rfc6749/endpoints/metadata.py", "oauthlib/oauth2/rfc6749/endpoints/authorization.py", "oauthlib/oauth2/rfc6749/endpoints/token.py", "oauthlib/oauth2/rfc6749/endpoints/pre_configured.py"],
+        "ns-hist-04-click": ["src/click/core.py", "src/click/types.py"],
+    }
+    tasks = []
+    for task_id, task in freeze["tasks"].items():
+        tree = Path(task["tree"])
+        row = {"task_id": task_id, "base_commit": task["base_commit"],
+               "public_source_tree": str(tree), "public_title": task["public_title"],
+               "new_public_objective": texts[task_id], "repair_surface": task["repair_surface"],
+               "public_examples": freeze["cases"][task_id],
+               "source_authority": [{"path": path, "sha256": sha(tree/path)} for path in paths[task_id]],
+               "issue_text_historical_verification": False,
+               "authority": "New author-specified development contract based on the retained public title and prefix-source API, authored after existing development results. Not recovered upstream issue wording.",
+               "independent_acceptance": "Requires separately admitted scorer-only checks; these exposed examples alone are not full repair acceptance."}
+        row["objective_sha256"] = hashlib.sha256(json.dumps(row, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+        tasks.append(row)
+    manifest = {"schema": "ns-explicit-public-development-objectives/v1", "created_at_ns": time.time_ns(),
+                "tasks": tasks, "input_sha256": {name: sha(HERE/name) for name in ("run-v2/freeze.json", "run-v2/summary.json", "audit-v1.json", "build_objectives.py")},
+                "source_mutations": 0, "provider_calls": 0, "hidden_or_reference_calls": 0,
+                "confirmatory_families": 0, "ready_for_live_matrix": False}
+    with (HERE / "objectives-v1.json").open("x") as stream:
+        json.dump(manifest, stream, indent=2, sort_keys=True)
+        stream.write("\n")
+    print(json.dumps({"tasks": len(tasks), "manifest_sha256": sha(HERE/"objectives-v1.json")}))
+
+
+if __name__ == "__main__":
+    main()

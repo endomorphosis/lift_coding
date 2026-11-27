@@ -1,0 +1,65 @@
+#!/usr/bin/env python3
+"""Audit terminal v12 service receipts without inferring success from partial files."""
+import hashlib
+import json
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+def sha(body): return hashlib.sha256(body).hexdigest()
+def read(path): return json.loads(path.read_text())
+
+def main():
+    out = HERE / "results_v12_full_state_identity"
+    profile = read(out / "runtime_source_manifest.json")
+    assert all(sha(Path(path).read_bytes()) == digest for path, digest in profile["files"].items())
+    frozen = read(out / "freeze.json")
+    assert frozen["semantic_scope"] == "all" and not frozen["identity_checks"]
+    assert sha((out / "runtime_source_manifest.json").read_bytes()) == frozen["runtime_manifest_sha256"]
+    rows = []; inputs = {"results_v12_full_state_identity/freeze.json": sha((out / "freeze.json").read_bytes())}
+    for task in ("ns-hist-01-xmltodict", "ns-hist-02-pyparsing"):
+        folder = out / task
+        process = read(folder / "produce_process.json")
+        assert process.get("timed_out") or isinstance(process.get("returncode"), int)
+        producer = read(folder / "producer.json") if (folder / "producer.json").exists() else None
+        consumer = read(folder / "consumer.json") if (folder / "consumer.json").exists() else None
+        complete = process.get("returncode") == 0 and consumer is not None
+        if complete:
+            assert read(folder / "consume_process.json")["returncode"] == 0
+            assert consumer["all_checks_passed"]
+            assert producer["raw_substitutions"] == consumer["raw_substitutions"] == 0
+            assert producer["declared_files"] == consumer["raw_files_materialized_from_kit"]
+            assert producer["declared_bytes"] == consumer["raw_bytes_materialized_from_kit"]
+        previous = read(HERE / "results_v11_full_literal_union" / task / "producer.json")
+        if producer:
+            for field in ("native_state_cid", "native_semantic_root_cid", "declared_files", "declared_bytes", "native_symbols", "native_edges"):
+                assert producer[field] == previous[field]
+        scope = read(folder / "semantic_scope.json")
+        assert scope["all_source_bytes_retained"] and not scope["unparsed_raw_python_paths"]
+        source = read(folder / "public_source_manifest.json")
+        assert set(scope["analyzed_python_paths"]) == {p for p in source["files"] if p.endswith(".py")}
+        for name in ("produce_process.json", "consume_process.json", "producer.json", "consumer.json", "semantic_scope.json", "public_source_manifest.json"):
+            path = folder / name
+            if path.exists(): inputs[str(path.relative_to(HERE))] = sha(path.read_bytes())
+        rows.append({"task": task, "native_roundtrip_complete": complete, "producer_process": process,
+                     "producer": producer, "consumer": consumer, "full_declared_python_source_scanned": True,
+                     "root_and_state_equal_prior_full_profile": producer is not None})
+    validation = read(HERE / "state_identity_validation_v5/summary.json")
+    assert validation["all_checks_passed"] and validation["all_state_root_block_and_serialized_identities_equal"]
+    regression = read(HERE / "state_identity_native_regression_v5/result.json")
+    assert regression["returncode"] == 0
+    assert "159 passed" in (HERE / "state_identity_native_regression_v5/stdout.log").read_text()
+    for name in ("state_identity_validation_v5/summary.json", "state_identity_native_regression_v5/result.json", "state_identity_native_regression_v5/stdout.log", "runtime_state_identity_v5_manifest.json", "state_identity_v5.patch", "state_identity_cache_design_v5.md"):
+        inputs[name] = sha((HERE / name).read_bytes())
+    result = {"schema": "ns-full-source-immutable-state-audit/v12", "rows": rows,
+              "runtime_files_rehashed": len(profile["files"]), "runtime_unchanged": True,
+              "all_roundtrips_complete": all(r["native_roundtrip_complete"] for r in rows),
+              "profile_identity_controls": validation, "native_regressions_passed": 159,
+              "input_sha256": inputs, "audit_source_sha256": sha(Path(__file__).read_bytes()),
+              "provider_calls": 0, "raw_substitutions": 0, "all_audit_checks_passed": True,
+              "scope_limit": "One full-source run per repository/profile on shared host; no quality/token-savings claim or execution/proof reuse."}
+    target = HERE / "full_state_identity_v12_audit.json"
+    if target.exists(): raise SystemExit("audit exists; preserve completed result")
+    target.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
+    print(json.dumps({"all_roundtrips_complete": result["all_roundtrips_complete"], "runtime_files_rehashed": len(profile["files"]), "provider_calls": 0}))
+
+if __name__ == "__main__": main()

@@ -1,0 +1,96 @@
+`service.py` is a local development operation for an integrated evaluation
+controller. It uses the isolated `compiler_identity_v1` source profile and
+normal package imports. Invoke it in a fresh process for every request:
+
+```python
+completed = subprocess.run(
+    [str(repo / ".venv/bin/python"), str(eval_dir / "service.py")],
+    input=json.dumps(request), text=True, capture_output=True, check=True,
+    env={"PATH": os.environ["PATH"], "LANG": "C.UTF-8",
+         "PYTHONDONTWRITEBYTECODE": "1"},
+)
+response = json.loads(completed.stdout)
+```
+
+The request schema is:
+
+```json
+{
+  "schema": "world-memory-service-request@1",
+  "operation": "propose",
+  "request_id": "task-2-next-action",
+  "store_dir": "/absolute/path/to/revision/evals/integrated_v1/world_memory",
+  "context": {
+    "subject": {"name": "task-family-or-subject"},
+    "source": {"files": {"service.py": {"sha256": "actual hash", "text": "actual source"}}},
+    "environment": {"declared_runtime_and_configuration": "actual values"},
+    "state": {"current_task_input": "actual input"},
+    "policy": {"validation_policy": "current policy and version"}
+  },
+  "actions": [{"name": "action-a"}, {"name": "action-b"}]
+}
+```
+
+`store_dir` must be inside this revision's `evals` directory. Context must
+contain exactly the five shown keys. Values and action descriptors are
+canonical JSON data; action names must be distinct. The service content-addresses
+the complete supplied values, so source/environment/state/policy/catalog
+changes alter the native query binding. The controller must supply the actual
+dependencies it wants bound; the service does not discover undeclared ones.
+The native query family is `next_call`, language `python`, with a closed catalog.
+
+`propose` returns either `status: "proposal"` with `selected_action`, or
+`status: "fallback"` with `selected_action: null` and a reason such as `empty`,
+`stale`, or `abstain`. A proposal is obtained by resolving the **native
+compiler's** `candidate_cid` and `observation_cid` through verified storage,
+then checking native current bindings. It is always an unadmitted proposal.
+The response exposes both compilation and resolved IDs, source/import hashes,
+service PID and measured elapsed time. A fallback requires ordinary current
+planning/search; it is not a declaration that the task is impossible.
+
+The controller must execute a proposed action and independently assess the
+current behavior before recording success. After that actual execution, send
+the same context and catalog with `operation: "record"` and:
+
+```json
+{
+  "execution": {
+    "selected_action": "action-b",
+    "passed": true,
+    "output": {"actual_output": "actual value"},
+    "producer_pid": 12345,
+    "evidence": [{"actual_process_receipt": "stdout, status, source and environment evidence"}]
+  },
+  "observation_status": "observed"
+}
+```
+
+The illustrative strings above must be replaced by real controller evidence.
+`record` checks that the action belongs to the catalog and receives a successful
+declaration plus nonempty evidence, then persists native candidate, observation,
+admission, receipt and log records. It does not independently interpret arbitrary
+task outputs. This is a **local evaluation-controller trust boundary**, with no
+runner signature, cryptographic execution proof, production admission or
+authority to bypass later validation. `inferred_untrusted` is also accepted as
+an observation status for explicit weak-evidence controls; it cannot enable
+planning through the native observation gate.
+
+All controller requests, responses, execution results and actual source hashes
+should be retained by the caller. Pin this service, its isolated compiler
+profile and its native imports when enrolling it in an integrated run. Errors
+produce a JSON error response and nonzero process exit status; they do not
+silently supply a candidate. There are no provider/model calls in either
+operation. The service uses an evaluation-owned exact-query index to locate
+native records; it performs no learned prediction, semantic generalization or
+cross-family retrieval.
+
+The original full serialized candidate mapping remains rejected by an existing
+adapter `rank` guard. The service reconstructs typed records through datasets
+codecs before citation and uses rank-zero candidates. Minimal public citation
+views with schema and identity fields are covered by the identity tests. Broader
+candidate ranks and generic public payload citation remain outside this
+qualification.
+
+Executed examples, including all source/state/environment and weak-observation
+controls, are in `runs/compiler-continuation-v1/service_operations/`. Exact
+entrypoint/profile pins and evidence paths are in `service_operation.json`.

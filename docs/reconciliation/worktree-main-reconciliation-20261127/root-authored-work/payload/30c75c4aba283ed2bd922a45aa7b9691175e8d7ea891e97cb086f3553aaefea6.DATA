@@ -1,0 +1,78 @@
+# Full original-frontend observation comparison v15
+
+The isolated v7 profile completes full native cold/incremental equality while
+actually reusing original frontend observations for **153 of 154 Python files**.
+Only the authored comment change in `pyparsing/helpers.py` is reanalyzed. It
+reuses **3,885 original symbols and 52,977 original edges**, extracting 772 edges
+from the changed file. Pytest analysis/unification and whole-inventory graph
+resolution rerun.
+
+The independent audit compares exact serialized state and root, all **67,872
+actual blocks / 112,728,034 bytes per output**, and the complete original
+observation sidecar. Changed cold and incremental outputs agree exactly. The
+state, root and every block also equal the retained v13 cold output. Native
+scope remains **286 regular files, 154 Python files, one opaque symlink,
+11,701,447 changed-source bytes, 3,957 symbols and 55,859 graph edges**. Ten native
+source-read controls pass across the three workers. No source omissions,
+provider calls, token savings or execution reuse are claimed.
+
+Each original-observation sidecar contains **53,753,923 bytes**, separate from
+the native bundle. The exact bound parent sidecar is read and decoded by the
+incremental worker; the returned changed sidecar is byte-identical to cold. Only
+the changed file's original observations differ from the parent. Its additional
+storage and preparation work are material costs.
+
+| Work | Process wall seconds |
+|---|---:|
+| Original v13 baseline preparation, retained paid receipt | 656.008467 |
+| New full baseline observation bootstrap | 231.354099 |
+| Changed cold, v7 | 440.275719 |
+| Changed incremental, v7 | 607.970902 |
+
+All three new workers finish within their prospective **900-second** bounds.
+Bootstrap and changed cold start concurrently on the shared host; incremental
+starts after successful bootstrap and exact parent binding. New worker schedule
+wall time is 839.327665 seconds, with 0.533272 seconds of separately measured
+enrollment/copy/guard/freeze setup. Overlapping process times must not be summed
+as elapsed time, and nested stages must not be added again to process totals.
+
+The new baseline bootstrap scans all original source and emits its sidecar,
+then restores the exact original baseline state and all blocks, proves its new
+state serialization identical, and fully verifies the bundle before reuse.
+That native restoration/full verification takes 115.553456 seconds; the worker
+also retains its subsequent 46.176903-second full verification and persistence.
+The original 656.008467-second preparation is not treated as free.
+
+Incremental includes **105.261605 seconds** of actual state/bundle restoration
+and full re-verification. Reading the parent sidecar takes 0.024210 seconds;
+typed observation restoration, native scanning, current graph resolution and
+sidecar encoding are included together in the **55.519689-second** scan stage.
+The concurrent cold scan stage takes **64.576213 seconds**. Incremental bundle
+build takes 390.254414 seconds, full verification 48.819131 seconds and
+persistence 4.726581 seconds. Cold process time remains lower than incremental
+process time in this observation. No general incremental speedup is inferred.
+
+`frontend_observations_validation_v7/summary.json` contains ten full-output
+equality cases and sixteen rejection/fallback checks, including inventory
+changes, original exact confidence restoration, pytest changes and stale source
+bytes. An independent read-only review is retained in
+`frontend_observations_v7_independent_review.json`. Runtime profile admission is
+external: the native cache helper receives its declared profile hash, while the
+full worker independently hashes every enrolled runtime source before and after
+execution. Expected sidecar CIDs must come from accepted honest producer
+receipts; no theorem that arbitrary cached observations follow from source is
+claimed.
+
+The separately retained `unresolved_import_reuse_v6_v7/summary.json` narrows the
+older guard's scope: adding a previously missing imported module leaves v6
+incremental confidence conservative while cold becomes exact. V7 preserves the
+original observation and equals cold. This does not alter v14's completed exact
+comment-only comparison; v6 is not a general lossless incremental solution.
+Neither discrepancy establishes an execution-soundness failure.
+
+Authoritative outputs are `results_v15_full_pyparsing_frontend_observations/summary.json`,
+`full_pyparsing_frontend_observations_v15_audit.json`,
+`FULL_PYPARSING_ORIGINAL_FRONTENDS_PROTOCOL_V15.md`,
+`runtime_frontend_observations_v7_manifest.json`, and the versioned driver,
+materializer, patch and source-observation design memo. All earlier profiles and
+failures remain unchanged.

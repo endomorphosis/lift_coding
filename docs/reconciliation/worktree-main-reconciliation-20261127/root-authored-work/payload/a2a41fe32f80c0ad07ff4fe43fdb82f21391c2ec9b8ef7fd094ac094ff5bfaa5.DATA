@@ -1,0 +1,387 @@
+"""Build matched configurations and observe current offline archive gates.
+
+Root executes this artifact after reviewing its source and input pins. It never
+prepares a Harbor job, launches a provider, reads credentials, or edits source.
+Generated commands describe future work; their presence is not authorization.
+"""
+from __future__ import annotations
+
+import argparse
+from copy import deepcopy
+import hashlib
+import json
+import os
+from pathlib import Path
+import stat
+import sys
+
+
+SCHEMA = "matched-evaluation-preflight@1"
+ASSET_SCHEMA = "matched-evaluation-preflight-assets@1"
+TASK = "fix-code-vulnerability"
+MAX_JSON_BYTES = 32 * 1024 * 1024
+MAX_ASSET_BYTES = 16 * 1024**3
+MODULE = "benchmarks.agent_supervisor.container_coding.full_supervisor_benchmark"
+GROK_PROFILE = "grok-4.7-cli-1.0.46@1"
+CODEX_PROFILE = "codex-gpt-6.1-sol-0.160.0@1"
+
+
+def _need(condition, reason):
+    if not condition:
+        raise ValueError(reason)
+
+
+def _wire(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"),
+                      ensure_ascii=False, allow_nan=False).encode("utf-8")
+
+
+def _sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def _pairs(pairs):
+    result = {}
+    for key, value in pairs:
+        _need(key not in result, "duplicate JSON key")
+        result[key] = value
+    return result
+
+
+def _load(path):
+    path = Path(path)
+    info = path.lstat()
+    _need(stat.S_ISREG(info.st_mode) and path.resolve() == path
+          and info.st_size <= MAX_JSON_BYTES, "bounded canonical JSON required")
+    raw = path.read_bytes()
+    _need(len(raw) <= MAX_JSON_BYTES, "JSON exceeds bound")
+    return json.loads(raw, object_pairs_hook=_pairs,
+        parse_constant=lambda _: (_ for _ in ()).throw(ValueError("nonfinite JSON")))
+
+
+def _row(path):
+    path = Path(path)
+    _need(path.is_absolute() and path.resolve(strict=True) == path, "canonical asset path required")
+    before = path.lstat()
+    _need(stat.S_ISREG(before.st_mode) and before.st_size <= MAX_ASSET_BYTES,
+          "bounded regular asset required")
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+    try:
+        opened = os.fstat(fd)
+        _need((before.st_dev, before.st_ino, before.st_size, before.st_mode)
+              == (opened.st_dev, opened.st_ino, opened.st_size, opened.st_mode), "asset changed while opening")
+        digest = hashlib.sha256()
+        size = 0
+        while block := os.read(fd, 1024 * 1024):
+            size += len(block)
+            _need(size <= MAX_ASSET_BYTES, "asset exceeds bound")
+            digest.update(block)
+        closed = os.fstat(fd)
+    finally:
+        os.close(fd)
+    after = path.lstat()
+    signature = lambda s: (s.st_dev, s.st_ino, s.st_size, s.st_mode, s.st_mtime_ns, s.st_ctime_ns)
+    _need(signature(before) == signature(closed) == signature(after) and size == before.st_size,
+          "asset changed while hashing")
+    return dict(path=str(path), sha256=digest.hexdigest(), bytes=size, mode=stat.S_IMODE(before.st_mode))
+
+
+def _assets(value):
+    if type(value) is dict:
+        _need(set(value) == {"schema", "rows"} and value["schema"] == ASSET_SCHEMA,
+              "closed root asset manifest required")
+        value = value["rows"]
+    _need(type(value) is list and 2 <= len(value) <= 250000, "bounded root asset rows required")
+    rows, seen = [], set()
+    for item in value:
+        _need(type(item) is dict and set(item) == {"path", "sha256", "bytes", "mode"},
+              "closed root asset row required")
+        _need(type(item["path"]) is str and item["path"] not in seen
+              and type(item["sha256"]) is str and len(item["sha256"]) == 64
+              and all(c in "0123456789abcdef" for c in item["sha256"])
+              and type(item["bytes"]) is int and 0 <= item["bytes"] <= MAX_ASSET_BYTES
+              and type(item["mode"]) is int and 0 <= item["mode"] <= 0o7777,
+              "invalid root asset row")
+        seen.add(item["path"])
+        _need(_row(Path(item["path"])) == item, "root asset pin mismatch")
+        rows.append(dict(item))
+    return sorted(rows, key=lambda row: row["path"])
+
+
+def _write(path, value):
+    raw = _wire(value) + b"\n"
+    _need(len(raw) <= MAX_JSON_BYTES, "output JSON exceeds bound")
+    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
+    try:
+        with os.fdopen(fd, "wb") as stream:
+            stream.write(raw)
+    except BaseException:
+        raise
+    return _row(path)
+
+
+def _diff(left, right, path=()):
+    """Exact recursive comparison: omission, type, list order and defaults matter."""
+    if type(left) is dict and type(right) is dict:
+        rows = []
+        for key in sorted(set(left) | set(right)):
+            if key not in left or key not in right:
+                row = dict(path=list(path + (key,)), left_present=key in left, right_present=key in right)
+                if key in left:
+                    row["left_sha256"] = _sha(_wire(left[key]))
+                if key in right:
+                    row["right_sha256"] = _sha(_wire(right[key]))
+                rows.append(row)
+            else:
+                rows.extend(_diff(left[key], right[key], path + (key,)))
+        return rows
+    if type(left) is list and type(right) is list and len(left) == len(right):
+        return [row for index, (a, b) in enumerate(zip(left, right, strict=True))
+                for row in _diff(a, b, path + (index,))]
+    return [] if type(left) is type(right) and left == right else [dict(
+        path=list(path), left_present=True, right_present=True,
+        left_sha256=_sha(_wire(left)), right_sha256=_sha(_wire(right)))]
+
+
+def _normalized(config):
+    result = deepcopy(config)
+    result["jobs_dir"] = "<arm-owned-jobs-directory>"
+    return result
+
+
+def _selected_kwargs(config, raw, options):
+    actual = config["agents"][0]["kwargs"]
+    _need(actual == raw["agents"][0]["kwargs"], "serialized arm options changed")
+    defaults = dict(planning_mode="model", doctor_dispatch_policy="auto",
+                    source_view_profile="disabled", repository_source_policy="legacy",
+                    semantic_working_set="legacy")
+    for key, value in options.items():
+        if key in defaults and value == defaults[key]:
+            _need(key not in actual, "default arm option unexpectedly explicit")
+        else:
+            _need(key in actual and actual[key] == value, "selected arm option changed")
+    _need(config["verifier"]["disable"] is False and not config["agents"][0].get("env"),
+          "ordinary verifier and credential-free configuration required")
+
+
+def _project_rows():
+    # Observed module files only; this is not a complete dependency closure claim.
+    paths = set()
+    for name, module in tuple(sys.modules.items()):
+        if name == "benchmarks" or name.startswith(("benchmarks.", "ipfs_accelerate_py", "ipfs_datasets_py", "ipfs_kit_py")):
+            raw = getattr(module, "__file__", None)
+            if raw and str(raw).endswith(".py"):
+                paths.add(Path(raw).absolute())
+    return [_row(path) for path in sorted(paths)]
+
+
+def _matrix():
+    common = dict(provider_profile=GROK_PROFILE, source_view_profile="identity@1",
+                  planning_mode="model", doctor_dispatch_policy="model-only")
+    result = {"grok-R": dict(common), "grok-P": dict(common, planning_mode="declared-contract@1"),
+        "grok-PD": dict(common, planning_mode="declared-contract@1", doctor_dispatch_policy="auto"),
+        "grok-D": dict(common, doctor_dispatch_policy="auto"),
+        "grok-Q": dict(common, semantic_working_set="capsule-references@1")}
+    for label, policy in (("A", "legacy"), ("B", "repository-source-raw@1"),
+                          ("C", "repository-source-compact@1")):
+        result["codex-" + label] = dict(provider_profile=CODEX_PROFILE,
+            planning_mode="model", doctor_dispatch_policy="model-only",
+            source_view_profile="disabled", repository_source_policy=policy)
+    return result
+
+
+def _commands(output, dataset, archive, options):
+    base = [sys.executable, "-m", MODULE]
+    prepare = base + ["prepare", "--dataset", str(dataset), "--archive", str(archive),
+                      "--output", str(output), "--arm", "full", "--task", TASK]
+    for key, value in options.items():
+        prepare += ["--" + key.replace("_", "-"), str(value)]
+    return dict(prepare=prepare, execute=base + ["execute", "--output", str(output), "--task", TASK],
+                collect=base + ["collect", "--output", str(output), "--task", TASK], executed=False)
+
+
+def _gates(bench, manifest, archive, options):
+    from benchmarks.agent_supervisor.container_coding.terminal_worker_capability import require_worker_capability
+    from benchmarks.agent_supervisor.container_coding.terminal_grok_deployment import verify_grok_archive
+    from benchmarks.agent_supervisor.container_coding.terminal_deployment import (
+        verify_intent_action_384_archive, verify_source384_archive)
+    from benchmarks.agent_supervisor.container_coding.terminal_numerical_selection_deployment import verify_numerical_selection_archive
+
+    profile = options["provider_profile"]
+    operations = [
+        ("current_timeout_runtime", lambda: bench._require_current_timeout_runtime(archive, manifest)),
+        ("worker_capability", lambda: require_worker_capability(manifest, None)),
+        ("provider_profile", lambda: bench.require_runtime_provider_profile(manifest, profile)),
+        ("retrieval_revision", lambda: bench.selected_retrieval_revision(manifest, "full")),
+        ("semantic_transport", lambda: bench.require_semantic_transport_archive(manifest, "supervisor-semantic-router-input@1")),
+        ("coding_reply", lambda: bench.require_coding_reply_archive(manifest, "legacy")),
+        ("tool_output", lambda: bench.require_tool_output_archive(manifest, "legacy")),
+        ("source_view_advisory", lambda: bench.require_source_view_advisory_archive(manifest, "legacy")),
+        ("repository_source", lambda: bench.require_repository_source_archive(manifest,
+            options.get("repository_source_policy", "legacy"), archive=archive / "runtime.tar.gz")),
+        ("source_input", lambda: bench.require_source_input_archive(manifest, "legacy")),
+        ("query_reference", lambda: bench.require_query_reference_archive(manifest, "legacy")),
+        ("semantic_metadata", lambda: bench.require_semantic_metadata_archive(manifest, "legacy")),
+        ("semantic_working_set", lambda: bench.require_semantic_working_set_archive(manifest,
+            options.get("semantic_working_set", "legacy"))),
+        ("grok_coding", lambda: bench.require_grok_coding_archive(manifest, 128)),
+        ("capsule_selection", lambda: bench.require_capsule_selection_archive(manifest, "lexical-query-symbol-name@1")),
+        ("capsule_budget", lambda: bench.require_capsule_budget_archive(manifest, "legacy")),
+        ("source_view", lambda: bench.require_source_view_archive(manifest, options["source_view_profile"], None)),
+        ("source_edit", lambda: bench.require_source_edit_archive(manifest, "disabled")),
+        ("semantic_context", lambda: bench.require_semantic_context_archive(manifest, "legacy-bounded@1")),
+        ("numerical", lambda: bench.require_numerical_archive(manifest, None)),
+        ("planning", lambda: bench.require_planning_archive(manifest, options["planning_mode"])),
+        ("intent_assets", lambda: verify_intent_action_384_archive(archive / "runtime.tar.gz", manifest)),
+        ("source384_assets", lambda: verify_source384_archive(archive / "runtime.tar.gz", manifest)),
+        ("numerical_selection_assets", lambda: verify_numerical_selection_archive(archive / "runtime.tar.gz", manifest)),
+    ]
+    if profile == GROK_PROFILE:
+        operations.append(("grok_binary_archive", lambda: verify_grok_archive(
+            archive / "runtime.tar.gz", manifest, required=True)))
+    results = []
+    for name, operation in operations:
+        try:
+            operation()
+        except Exception as error:
+            results.append(dict(gate=name, passed=False, reason="existing_gate_refused",
+                error_type=type(error).__name__, refusal_text_exported=False))
+        else:
+            results.append(dict(gate=name, passed=True, reason=None))
+    return results
+
+
+def run_experiment(*, output_dir, dataset: Path, archive: Path, asset_manifest):
+    """Observe exact real configuration and offline gates; never launch a trial."""
+    output = Path(output_dir).absolute()
+    dataset, archive = Path(dataset).absolute(), Path(archive).absolute()
+    _need(not output.exists() and output.resolve() == output and output.parent.is_dir(),
+          "fresh canonical output directory required")
+    _need(dataset.resolve(strict=True) == dataset and archive.resolve(strict=True) == archive
+          and dataset.is_dir() and archive.is_dir(), "canonical input directories required")
+    _need(not output.is_relative_to(dataset) and not output.is_relative_to(archive)
+          and not dataset.is_relative_to(output) and not archive.is_relative_to(output),
+          "output must be disjoint from inputs")
+    assets = _assets(asset_manifest)
+    by_path = {row["path"]: row for row in assets}
+    _need({str(archive / "runtime.tar.gz"), str(archive / "manifest.json")} <= set(by_path),
+          "archive and manifest must be root pinned")
+    manifest = _load(archive / "manifest.json")
+    _need(type(manifest) is dict and manifest.get("archive_sha256")
+          == by_path[str(archive / "runtime.tar.gz")]["sha256"], "archive manifest digest mismatch")
+
+    from harbor.models.job.config import JobConfig
+    from benchmarks.agent_supervisor.container_coding import full_supervisor_benchmark as bench
+    from benchmarks.agent_supervisor.container_coding import benchmark_controls as controls
+
+    source_before = _project_rows()
+    task = bench._task_path(dataset, TASK)
+    task_hashes = bench._task_hashes(task)  # Integrity hashes only; no oracle parsing.
+    _need(all(str(task / name) in by_path and by_path[str(task / name)]["sha256"] == digest
+              for name, digest in task_hashes.items()), "complete task inputs must be root pinned")
+    revision = ""
+    revision_problem = None
+    try:
+        revision = bench.selected_retrieval_revision(manifest, "full")
+    except Exception as error:
+        revision_problem = dict(gate="retrieval_revision", passed=False,
+            reason="existing_gate_refused", error_type=type(error).__name__)
+    output.mkdir(mode=0o700)
+    (output / "configs").mkdir(mode=0o700)
+    arms, configs, observed = {}, {}, {}
+    for label, options in _matrix().items():
+        future_output = output / "future-trials" / label
+        arm = dict(label=label, selection=dict(options), future_output=str(future_output),
+                   prepare_api_options=dict(dataset=str(dataset), output=str(future_output),
+                       archive=str(archive), arm="full", task_name=TASK, **options),
+                   commands=_commands(future_output, dataset, archive, options))
+        try:
+            raw = bench.config_for(dataset, future_output, archive, "full", model_revision=revision, **options)
+            config = controls.canonicalize_serialized_retry_sets(JobConfig.model_validate(
+                raw, extra="forbid").model_dump(mode="json", context={"redact_sensitive_env": False}))
+            _selected_kwargs(config, raw, options)
+            identity = bench.resolve_provider_profile(options["provider_profile"])
+            declared = controls.build_controls(config, task_input_sha256=task_hashes, task=TASK,
+                **{key: identity[key] for key in ("model", "reasoning_effort", "cli_version")})
+            _need(controls.validate_controls(declared), "native control declaration invalid")
+            observation = controls.observe_controls({"comparison_controls": declared}, config,
+                                                   current_task_hashes=task_hashes)
+            _need(observation.get("configuration_unchanged") is True, "native control observation differs")
+            configs[label], observed[label] = config, observation
+            arm.update(configuration_valid=True, config_file=_write(output / "configs" / (label + ".json"), config),
+                       comparison_controls=observation, raw_configuration_sha256=_sha(_wire(raw)))
+        except Exception as error:
+            arm.update(configuration_valid=False, configuration_refusal=dict(
+                reason="existing_configuration_api_refused", error_type=type(error).__name__))
+        arm["archive_gates"] = _gates(bench, manifest, archive, options)
+        if revision_problem is not None:
+            arm["archive_gates"].append(dict(revision_problem))
+        arm["offline_configuration_and_archive_ready"] = arm["configuration_valid"] and all(
+            row["passed"] for row in arm["archive_gates"])
+        arm.update(deployment_qualified=False, credentials_checked=False, model_available=None,
+                   provider_invoked=False, task_acceptance_observed=None)
+        arms[label] = arm
+
+    comparisons = []
+    for left, right, name in (("grok-R", "grok-P", "planning_mode"),
+        ("grok-P", "grok-PD", "doctor_dispatch_policy"), ("grok-R", "grok-D", "doctor_dispatch_policy"),
+        ("grok-D", "grok-PD", "planning_mode"),
+        ("grok-R", "grok-Q", "semantic_working_set"), ("codex-A", "codex-B", "repository_source_policy"),
+        ("codex-A", "codex-C", "repository_source_policy"), ("codex-B", "codex-C", "repository_source_policy")):
+        allowed = ["agents", 0, "kwargs", name]
+        pair = dict(baseline=left, candidate=right, allowed_changed_paths=[allowed],
+            nuisance_normalized_paths=[["jobs_dir"]], all_other_configuration_fields_held_fixed=False,
+            original_control_comparison=None)
+        if left in configs and right in configs:
+            actual = _diff(_normalized(configs[left]), _normalized(configs[right]))
+            pair.update(exact_configuration_differences=actual,
+                raw_configuration_difference_paths=[row["path"] for row in _diff(configs[left], configs[right])],
+                all_other_configuration_fields_held_fixed=len(actual) == 1 and actual[0]["path"] == allowed,
+                original_control_comparison=controls.compare_controls(observed[left], observed[right]))
+        comparisons.append(pair)
+
+    _need(bench._task_hashes(task) == task_hashes, "task inputs changed during preflight")
+    _need(_assets(assets) == assets, "root assets changed during preflight")
+    source_after = _project_rows()
+    after_by_path = {row["path"]: row for row in source_after}
+    _need(all(after_by_path.get(row["path"]) == row for row in source_before), "imported source changed during preflight")
+    result = dict(schema=SCHEMA, task=TASK, dataset=str(dataset), archive=str(archive),
+        root_assets=assets, root_assets_sha256=_sha(_wire(assets)), task_input_sha256=task_hashes,
+        task_inputs_unchanged=True, root_assets_unchanged=True, arms=arms, comparisons=comparisons,
+        exact_pair_configuration_differences_verified=all(
+            row["all_other_configuration_fields_held_fixed"] for row in comparisons),
+        all_arms_offline_configuration_and_archive_ready=all(
+            arm["offline_configuration_and_archive_ready"] for arm in arms.values()),
+        imported_source_rows_before=source_before, imported_source_rows_after=source_after,
+        imported_source_rows_unchanged=True, imported_source_inventory_is_complete_closure=False,
+        integration_gaps=[dict(arm="D-world-exact-source", supported=False,
+                              reason="no_full_benchmark_current_world_context_selection"),
+                          dict(arm="E-world-compact-source", supported=False,
+                              reason="no_full_benchmark_current_world_context_selection")],
+        native_dispatch_population_complete=None, whole_task_native_usage_complete=None,
+        provider_ingestion_verified=False, credentials_read=False, provider_calls=0,
+        commands_executed=False, harbor_preparation_performed=False, official_verifier_unchanged=True,
+        no_learned_treatment=True, no_source_edits=True,
+        no_new_minification_implementation=True, source_compact_treatment_requested=True,
+        token_savings_established=False, billing_total_verified=False,
+        execution_authority=False, completion_authority=False)
+    _write(output / "result.json", result)
+    return result
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--dataset", type=Path, required=True)
+    parser.add_argument("--archive", type=Path, required=True)
+    parser.add_argument("--asset-manifest", type=Path, required=True)
+    args = parser.parse_args()
+    result = run_experiment(output_dir=args.output, dataset=args.dataset,
+        archive=args.archive, asset_manifest=_load(args.asset_manifest.absolute()))
+    print(json.dumps(dict(schema=SCHEMA, arms=len(result["arms"]), provider_calls=0,
+        configuration_differences_verified=result["exact_pair_configuration_differences_verified"],
+        all_arms_ready=result["all_arms_offline_configuration_and_archive_ready"])))
+
+
+if __name__ == "__main__":
+    main()

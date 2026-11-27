@@ -1,0 +1,33 @@
+{
+  "schema": "terminal-codebase-intent-ir-improvement-plan@3",
+  "completed_milestone": "Native current CodebaseIR for five unchanged public sources; source-bound conditional alignment model; native partial IntentIR coverage refusal; exact historical conditional proof cache with source/head invalidation",
+  "next_work": [
+    {
+      "id": "train-richer-typed-ir-heads",
+      "work": "Use native typed AST, symbol, call, interface, effect, reference, source-span and contract inventories as explicit source-bound targets. Train encoder/decoder heads with unchanged task-exclusive splits, actual parameter/checkpoint updates and heldout metrics. Keep unsupported native parent regions and opaque behaviors as mandatory residual targets.",
+      "acceptance": "Measure exact typed reconstruction, contract/intent recall and planning usefulness against 44-feature, untrained, lexical and graph controls. Learned formulas remain candidates until closed projection validation and actual checker evidence. No silent source/function omission or evaluation-task checkpoint selection."
+    },
+    {
+      "id": "expand-semantic-profiles",
+      "work": "Extend supported source grammar through explicitly qualified positive division, bitwise, control-flow and effect profiles. Retain separate logic-family backend coverage and fail closed outside each profile. Register the alignment profile in a native successor evidence index only after retaining its full canonical source/head/compiler/theory/backend/assumption bindings.",
+      "acceptance": "Each claimed semantic profile has actual source-bound lowerings, checked mathematical preservation theorems, independent target joins, positive and negative checks, exact parser/CPython trust boundaries and source/version invalidation. Native integer-offset receipts cannot be relabeled as another profile."
+    },
+    {
+      "id": "ground-full-intent-and-plan",
+      "work": "Replace manually authored partial headless-terminal labels with a source-preserving IntentIR decoding and review pipeline for the complete public instruction. Model mandatory goals, guards, prohibitions, effects, action/control context and numeric bounds without flattening unsupported semantics. Ground proposals against the actual current typed source/contract/proof index.",
+      "acceptance": "Every non-whitespace instruction span survives source accounting; unresolved requirements block full coverage. Measure contract recall and planner usefulness through the actual ipfs_accelerate_py supervisor. Structural interface existence or a conditional alignment theorem cannot discharge behavioral task requirements."
+    },
+    {
+      "id": "capsules-and-token-evaluation",
+      "work": "Build semantic capsules from exact queried typed rows, source spans, residuals, contracts and conditional proofs. Use reversible aliases and supported code minification with explicit fetch/expansion references. Compare paired full-context/capsule/minified arms on actual Terminal Bench tasks.",
+      "acceptance": "Run the original admitted supervisor and official task harness; count every prompt/history/retrieval/expansion/retry/output/setup token and actual provider usage separately. Report success and coverage with training/proving/storage resource costs. Rich metadata hydration alone is not evidence of token reduction."
+    },
+    {
+      "id": "durable-budget-and-convergence",
+      "work": "Connect online training and proving to durable global task reservations and original source/attempt/run leases. Separate measured finite learning/stability from any conditional mathematical optimizer theorem and state exact objective, optimizer and arithmetic assumptions.",
+      "acceptance": "Concurrent/restart/failure accounting retains consumed work. No public cached record grants admission. Recorded endpoint ordering or a deterministic source-fragment theorem does not prove model convergence, whole-program equivalence or complete task satisfaction."
+    }
+  ],
+  "unproved": ["Whole-source runtime equivalence", "Learned typed-IR decoder", "Asymptotic optimizer convergence", "Full benchmark task satisfaction", "Provider token savings", "Durable global task budgets"],
+  "scope": "Isolated experimental source/evidence; previous sealed stages, production settings and upstream repositories remain unchanged."
+}

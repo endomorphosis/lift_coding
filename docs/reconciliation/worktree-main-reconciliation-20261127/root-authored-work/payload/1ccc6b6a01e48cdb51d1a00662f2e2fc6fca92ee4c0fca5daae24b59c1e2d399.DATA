@@ -1,0 +1,247 @@
+#!/usr/bin/env python3
+"""Full public Pyparsing cold/incremental equality with durable native reverify."""
+import argparse
+import concurrent.futures
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+import sqlite3
+import subprocess
+import sys
+import time
+
+HERE = Path(__file__).resolve().parent
+OUT = HERE / "results_v14_full_pyparsing_resolution_guard"
+TASK = "ns-hist-02-pyparsing"
+ROLES = ("baseline", "changed_cold", "changed_incremental")
+BOUND = 900
+def sha(body): return hashlib.sha256(body).hexdigest()
+def read(path): return json.loads(path.read_text())
+def canonical(value): return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()
+def write(path, value): path.write_bytes(canonical(value) + b"\n")
+
+def capture(source):
+    tree = Path(source["tree"])
+    regular = {str(p.relative_to(tree)) for p in tree.rglob("*") if p.is_file() and not p.is_symlink()}
+    links = {str(p.relative_to(tree)) for p in tree.rglob("*") if p.is_symlink()}
+    assert regular == set(source["files"]) and links == set(source["opaque_symlinks"])
+    bodies = {}
+    for path, expected in source["files"].items():
+        actual = tree / path; body = actual.read_bytes()
+        assert sha(body) == expected["sha256"] and len(body) == expected["bytes"]
+        assert bool(actual.stat().st_mode & 0o111) == expected["executable"]
+        bodies[path] = body
+    for path, expected in source["opaque_symlinks"].items():
+        assert os.readlink(tree / path) == expected["link_target"]
+    return bodies
+
+def worker(role):
+    folder = OUT / role
+    start = time.perf_counter(); cpu_start = time.process_time()
+    frozen = read(OUT / "freeze.json")
+    assert sha(Path(__file__).read_bytes()) == frozen["driver_sha256"]
+    profile = read(OUT / "runtime_source_manifest.json")
+    assert sha((OUT / "runtime_source_manifest.json").read_bytes()) == frozen["runtime_manifest_sha256"]
+    assert all(sha(Path(p).read_bytes()) == digest for p, digest in profile["files"].items())
+    from ipfs_datasets_py.logic.software_contracts.semantic_index.models import RepositoryState
+    from ipfs_datasets_py.logic.software_contracts.semantic_index.scanner import RepositoryScanner
+    from ipfs_datasets_py.logic.software_contracts.semantic_index.snapshot import snapshot_repository
+    from ipfs_datasets_py.logic.software_contracts.semantic_state import build_semantic_state, verify_semantic_state_bundle, read_required_source
+    from ipfs_datasets_py.logic.software_contracts.semantic_state.models import SemanticStateBundle, SemanticStateRoot
+    from ipfs_datasets_py.logic.software_contracts.semantic_state.source import SourceWrongStateError, SourceCorruptError, SourceBindingMismatchError
+    import_seconds = time.perf_counter() - start
+    stages = []
+    def stage(name, fn):
+        tick = time.perf_counter(); cpu = time.process_time()
+        with (folder / "stages.jsonl").open("a") as stream:
+            stream.write(json.dumps({"stage": name, "event": "enter", "elapsed": tick - start}) + "\n")
+        result = fn()
+        item = {"stage": name, "wall_seconds": time.perf_counter() - tick, "cpu_seconds": time.process_time() - cpu}
+        stages.append(item)
+        with (folder / "stages.jsonl").open("a") as stream:
+            stream.write(json.dumps({**item, "event": "exit", "elapsed": time.perf_counter() - start}) + "\n")
+        return result
+    source_name = "baseline_source.json" if role == "baseline" else "changed_source.json"
+    assert sha((OUT / source_name).read_bytes()) == frozen["source_manifest_sha256"][source_name]
+    source = read(OUT / source_name); raw = stage("capture_complete_public_source", lambda: capture(source))
+    snapshot = stage("native_snapshot", lambda: snapshot_repository(source["tree"], repository_id=frozen["repository_id"], exclusions=()))
+    assert {e.path for e in snapshot.entries} == set(source["files"]) | set(source["opaque_symlinks"])
+    previous_state = previous_bundle = None
+    if role == "changed_incremental":
+        binding = read(folder / "parent_binding.json")
+        assert binding["parent_role"] == "baseline"
+        for name, digest in binding["parent_artifact_sha256"].items():
+            assert sha((OUT / "baseline" / name).read_bytes()) == digest
+        def restore():
+            state = RepositoryState.from_dict(read(OUT / "baseline/state.json"))
+            root = SemanticStateRoot.from_dict(read(OUT / "baseline/root.json"))
+            conn = sqlite3.connect((OUT / "baseline/blocks.sqlite").as_uri() + "?mode=ro", uri=True)
+            blocks = {cid: bytes(body) for cid, body in conn.execute("SELECT cid, body FROM blocks ORDER BY cid")}
+            conn.close()
+            bundle = SemanticStateBundle(root=root, blocks=blocks)
+            verify_semantic_state_bundle(bundle)
+            assert state.state_cid == binding["state_cid"] and root.root_cid == binding["root_cid"]
+            return state, bundle
+        previous_state, previous_bundle = stage("native_restore_and_full_reverify", restore)
+    scanner = RepositoryScanner(repository_id=frozen["repository_id"])
+    state = stage("native_full_scan", lambda: scanner.scan_snapshot(snapshot, raw, previous_state=previous_state))
+    write(folder / "scan_reuse_diagnostics.json", scanner.last_reuse_diagnostics.to_dict())
+    assert all(s.module_path in raw for s in state.symbols)
+    bundle = stage("native_full_bundle_build", lambda: build_semantic_state(state, previous_bundle=previous_bundle))
+    stage("native_full_bundle_verify", lambda: verify_semantic_state_bundle(bundle))
+    target = frozen["mutation"]["path"]
+    controls = []
+    symbol = next(s for s in sorted(state.symbols, key=lambda s: s.stable_id) if s.module_path == target and s.source_cid is not None)
+    materialized = stage("native_fresh_source_read", lambda: read_required_source(
+        state, symbol.stable_id, expected_producer_state_cid=state.state_cid,
+        read_source_blob=lambda cid: raw[target]))
+    assert materialized.source_bytes == raw[target]
+    controls.append("fresh source accepted with exact current state")
+    if role != "baseline":
+        old = capture(read(OUT / "baseline_source.json"))[target]
+        for label, expected, reader, error in (
+            ("stale expected state rejected", frozen["expected_baseline_state_cid"], lambda cid: raw[target], SourceWrongStateError),
+            ("changed state rejects old bytes", state.state_cid, lambda cid: old, SourceCorruptError),
+        ):
+            try: read_required_source(state, symbol.stable_id, expected_producer_state_cid=expected, read_source_blob=reader)
+            except error: controls.append(label)
+            else: raise AssertionError(label)
+        reads = [raw[target], old]
+        try: read_required_source(state, symbol.stable_id, expected_producer_state_cid=state.state_cid, read_source_blob=lambda cid: reads.pop(0))
+        except SourceBindingMismatchError: controls.append("between-read source change rejected")
+        else: raise AssertionError("TOCTOU source change admitted")
+        if previous_state is not None:
+            try: read_required_source(previous_state, symbol.stable_id, expected_producer_state_cid=previous_state.state_cid, read_source_blob=lambda cid: raw[target])
+            except SourceCorruptError: controls.append("old state rejects changed bytes")
+            else: raise AssertionError("old state admitted changed source")
+    if role == "baseline":
+        assert state.state_cid == frozen["expected_baseline_state_cid"]
+        assert bundle.root.root_cid == frozen["expected_baseline_root_cid"]
+    else:
+        assert state.state_cid != frozen["expected_baseline_state_cid"]
+        assert bundle.root.root_cid != frozen["expected_baseline_root_cid"]
+    def persist():
+        write(folder / "state.json", state.to_dict()); write(folder / "root.json", bundle.root.to_dict())
+        conn = sqlite3.connect(folder / "blocks.sqlite")
+        conn.execute("PRAGMA synchronous=FULL")
+        conn.execute("CREATE TABLE blocks (cid TEXT PRIMARY KEY NOT NULL, body BLOB NOT NULL) WITHOUT ROWID")
+        conn.executemany("INSERT INTO blocks(cid,body) VALUES (?,?)", sorted(bundle.blocks.items()))
+        conn.commit(); conn.close()
+    stage("persist_exact_state_and_all_blocks", persist)
+    capture(source)
+    assert all(sha(Path(p).read_bytes()) == digest for p, digest in profile["files"].items())
+    result = {"role": role, "state_cid": state.state_cid, "root_cid": bundle.root.root_cid,
+              "snapshot_cid": snapshot.snapshot_cid, "regular_files": len(raw),
+              "raw_bytes": sum(map(len, raw.values())), "opaque_symlinks": len(source["opaque_symlinks"]),
+              "python_files": sum(p.endswith(".py") for p in raw), "symbols": len(state.symbols),
+              "edges": len(state.edges), "blocks": len(bundle.blocks), "block_bytes": sum(map(len, bundle.blocks.values())),
+              "source_controls": controls, "full_scope_scan": True, "raw_substitutions": 0, "scan_reuse_diagnostics": scanner.last_reuse_diagnostics.to_dict(),
+              "previous_state_and_bundle_actually_supplied": role == "changed_incremental",
+              "import_and_initial_profile_guard_seconds": import_seconds, "stages": stages,
+              "wall_seconds_including_guards_and_persistence": time.perf_counter() - start,
+              "cpu_seconds_including_guards_and_persistence": time.process_time() - cpu_start,
+              "artifact_sha256": {name: sha((folder / name).read_bytes()) for name in ("state.json", "root.json", "blocks.sqlite")},
+              "all_checks_passed": True, "provider_calls": 0}
+    write(folder / "result.json", result)
+    print(json.dumps({"role": role, "state_cid": state.state_cid, "root_cid": bundle.root.root_cid, "blocks": len(bundle.blocks), "complete": True}), flush=True)
+
+def invoke(role, env):
+    command = [sys.executable, "-B", str(Path(__file__)), "--worker", role]
+    folder = OUT / role; tick = time.perf_counter()
+    with (folder / "stdout.log").open("wb") as stdout, (folder / "stderr.log").open("wb") as stderr:
+        try:
+            proc = subprocess.run(command, env=env, cwd="/tmp", stdout=stdout, stderr=stderr, timeout=BOUND)
+            receipt = {"role": role, "command": command, "returncode": proc.returncode, "timed_out": False}
+        except subprocess.TimeoutExpired:
+            receipt = {"role": role, "command": command, "returncode": None, "timed_out": True}
+    receipt.update(wall_seconds=time.perf_counter() - tick, bound_seconds=BOUND)
+    write(folder / "process.json", receipt); print(json.dumps(receipt), flush=True)
+    return receipt
+
+def compare():
+    results = {role: read(OUT / role / "result.json") for role in ROLES}
+    cold, inc = results["changed_cold"], results["changed_incremental"]
+    for name in ("state_cid", "root_cid", "snapshot_cid", "regular_files", "raw_bytes", "opaque_symlinks", "python_files", "symbols", "edges", "blocks", "block_bytes"):
+        assert cold[name] == inc[name]
+    assert (OUT / "changed_cold/state.json").read_bytes() == (OUT / "changed_incremental/state.json").read_bytes()
+    assert (OUT / "changed_cold/root.json").read_bytes() == (OUT / "changed_incremental/root.json").read_bytes()
+    a = sqlite3.connect((OUT / "changed_cold/blocks.sqlite").as_uri() + "?mode=ro", uri=True)
+    b = sqlite3.connect((OUT / "changed_incremental/blocks.sqlite").as_uri() + "?mode=ro", uri=True)
+    aa = a.execute("SELECT cid,body FROM blocks ORDER BY cid"); bb = b.execute("SELECT cid,body FROM blocks ORDER BY cid")
+    count = total = 0; digest = hashlib.sha256()
+    while True:
+        left, right = aa.fetchone(), bb.fetchone()
+        assert (left is None) == (right is None)
+        if left is None: break
+        assert left == right
+        cid, body = left; count += 1; total += len(body)
+        digest.update(cid.encode()); digest.update(len(body).to_bytes(8, "big")); digest.update(body)
+    a.close(); b.close()
+    assert count == cold["blocks"] and total == cold["block_bytes"]
+    return {"results": results, "every_actual_block_byte_equal": True, "blocks_compared": count,
+            "block_bytes_compared": total, "ordered_block_fingerprint": digest.hexdigest(),
+            "state_and_root_serialized_bytes_equal": True, "all_checks_passed": True}
+
+def main():
+    parser = argparse.ArgumentParser(); parser.add_argument("--worker", choices=ROLES)
+    args = parser.parse_args()
+    if args.worker: return worker(args.worker)
+    if OUT.exists(): raise SystemExit("output exists; preserve previous run")
+    OUT.mkdir()
+    prior = HERE / "results_v13_full_pyparsing_incremental"
+    for role in ROLES: (OUT / role).mkdir()
+    for name in ("state.json", "root.json", "blocks.sqlite", "result.json", "process.json", "stages.jsonl", "stdout.log", "stderr.log"):
+        shutil.copyfile(prior / "baseline" / name, OUT / "baseline" / name)
+    baseline_result = read(OUT / "baseline/result.json")
+    for name, digest in baseline_result["artifact_sha256"].items():
+        assert sha((OUT / "baseline" / name).read_bytes()) == digest
+    for name in ("baseline_source.json", "changed_source.json"):
+        shutil.copyfile(prior / name, OUT / name)
+        capture(read(OUT / name))
+    oldprofile = read(prior / "runtime_source_manifest.json")
+    profile = json.loads(json.dumps(oldprofile))
+    oldroot = str(HERE / "runtime_state_identity_v5")
+    newroot = str(HERE / "runtime_resolution_reuse_v6")
+    profile["roots"]["ipfs_datasets_py"] = newroot
+    profile["pythonpath"][0] = newroot
+    profile["files"] = {path.replace(oldroot, newroot): sha(Path(path.replace(oldroot, newroot)).read_bytes()) for path in oldprofile["files"]}
+    profile["datasets_variant_manifest_sha256"] = sha((HERE / "runtime_resolution_reuse_v6_manifest.json").read_bytes())
+    write(OUT / "runtime_source_manifest.json", profile)
+    frozen = read(prior / "freeze.json")
+    frozen.update(schema="ns-full-pyparsing-resolution-guard-freeze/v14", frozen_at_unix=time.time(),
+                  driver_sha256=sha(Path(__file__).read_bytes()), runtime_manifest_sha256=sha((OUT / "runtime_source_manifest.json").read_bytes()),
+                  source_manifest_sha256={name: sha((OUT / name).read_bytes()) for name in ("baseline_source.json", "changed_source.json")},
+                  parent_freeze_sha256=sha((prior / "freeze.json").read_bytes()),
+                  source_profile_change="only per-path reuse admission guard; previous public baseline state/block artifacts independently reverified in actual incremental worker",
+                  baseline_reused_from=str(prior / "baseline"),
+                  new_worker_roles=["changed_cold", "changed_incremental"],
+                  comparison="fresh cold and incremental workers run concurrently; immutable full v13 baseline artifacts retained with original preparation costs")
+    write(OUT / "freeze.json", frozen)
+    write(OUT / "changed_incremental/parent_binding.json", {"parent_role": "baseline", "state_cid": baseline_result["state_cid"], "root_cid": baseline_result["root_cid"],
+          "parent_artifact_sha256": {**baseline_result["artifact_sha256"], "result.json": sha((OUT / "baseline/result.json").read_bytes())}})
+    env = {k: os.environ[k] for k in ("PATH", "LANG", "LC_ALL", "HOME") if k in os.environ}
+    env.update(PYTHONPATH=":".join(profile["pythonpath"]), IPFS_ACCEL_SKIP_CORE="1", PYTHONDONTWRITEBYTECODE="1",
+               GIT_CEILING_DIRECTORIES=":".join([str(HERE.parents[5] / "papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache"), str(prior)]))
+    tick = time.perf_counter()
+    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
+        futures = [pool.submit(invoke, role, env) for role in ("changed_cold", "changed_incremental")]
+        processes = [future.result() for future in futures]
+    complete = all(row["returncode"] == 0 for row in processes)
+    result = {"schema": "ns-full-pyparsing-resolution-guard-result/v14", "workers_complete": complete,
+              "processes": processes, "baseline_preparation_receipt_reused_from_v13": read(OUT / "baseline/process.json"),
+              "new_workers_wall_seconds": time.perf_counter() - tick,
+              "freeze_sha256": sha((OUT / "freeze.json").read_bytes()), "provider_calls": 0, "raw_substitutions": 0,
+              "timing_scope": "two new900-second workers run concurrently on shared host; full prior baseline656.008seconds already paid in v13; actual restore/reverify included in incremental worker; driver enrollment copy/freeze setup not separately timed",
+              "claim_limit": "correctness fallback qualification; no incremental economy, execution reuse or token-savings claim"}
+    if complete:
+        try:
+            result.update(compare()); result["cold_incremental_equivalence_passed"] = True
+        except AssertionError:
+            result["cold_incremental_equivalence_passed"] = False
+            result["failure_kind"] = "full byte identity comparison assertion"
+    write(OUT / "summary.json", result)
+    print(json.dumps({"workers_complete": complete, "equivalence_passed": result.get("cold_incremental_equivalence_passed"), "provider_calls": 0}), flush=True)
+
+if __name__ == "__main__": main()

@@ -1,0 +1,153 @@
+"""Freeze and run a new evidence-backed publication sequence; never overwrite."""
+import copy
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+import time
+
+import lifecycle as L
+
+HERE=Path(__file__).resolve().parent
+
+
+def sub(output,tag,args,expected=0):
+    started=time.perf_counter()
+    r=subprocess.run([sys.executable,str(HERE/'lifecycle.py'),*args],capture_output=True,timeout=30,
+        env={'PATH':os.environ['PATH'],'PYTHONHASHSEED':'0'})
+    receipt={'argv':args,'returncode':r.returncode,'elapsed_seconds':time.perf_counter()-started,
+             'expected_returncode':expected,'passed':r.returncode==expected}
+    (output/'logs').mkdir(exist_ok=True)
+    (output/'logs'/(tag+'.stdout')).write_bytes(r.stdout)
+    (output/'logs'/(tag+'.stderr')).write_bytes(r.stderr)
+    L.save(output/'logs'/(tag+'.json'),receipt)
+    assert receipt['passed'], receipt
+    return receipt
+
+
+def freeze(output):
+    snapshots=output/'snapshots'
+    for revision,lower in L.PROTOCOL['revisions'].items():
+        folder=snapshots/revision
+        folder.mkdir(parents=True)
+        (folder/'clamp.py').write_text(f'def compute(value):\n    return min(3, max({lower}, value))\n')
+        (folder/'energy.py').write_text('def compute(values):\n    return sum(value * value for value in values)\n')
+    (snapshots/'bad').mkdir()
+    (snapshots/'bad/clamp.py').write_text('def compute(value):\n    return 99\n')
+    local={str(p.relative_to(HERE)):hashlib.sha256(p.read_bytes()).hexdigest()
+           for p in [HERE/'run.py',HERE/'lifecycle.py',HERE/'computation_worker.py',HERE/'protocol.json',
+                     *snapshots.rglob('*.py')]}
+    source_dirs=[L.SOURCE/'ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing',
+        L.SOURCE/'ipfs_datasets_py/ipfs_datasets_py/logic/zkp/incremental_sealing',
+        L.SOURCE/'ipfs_kit_py/ipfs_kit_py/proof_seal_store']
+    source={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for folder in source_dirs for p in folder.rglob('*.py')}
+    L.save(output/'freeze.json',{'schema':'ns-seal-lifecycle-freeze/v1','frozen_at_ns':time.time_ns(),
+        'local_files':local,'native_files':source,'source_roots':[str(L.SOURCE),str(L.SOURCE/'ipfs_datasets_py'),str(L.SOURCE/'ipfs_kit_py')],
+        'protocol':L.PROTOCOL,'provider_calls':0})
+
+
+def controls(output,store,full,delta):
+    outcomes=[]
+    originals=copy.deepcopy(full)
+    raw={u:L.encoded(r) for u,r in full['receipts'].items()}
+    raw['clamp']=raw['clamp']+b' '
+    native=L.native_verify(output,full,receipt_bytes=raw)
+    outcomes.append({'id':'receipt_byte_mutation','native':native.to_canonical(),
+        'caller_accepted':False,'caller_reason':'bytes fail expected committed digest',
+        'changed_receipt_sha256':L.digest(raw['clamp']),'seal_cid':full['seal_cid']})
+    assert not native.accepted
+    corrupted=copy.deepcopy(full)
+    corrupted['receipts']['clamp']['outputs'][0]=99
+    verdict,*_=L.admit(output,corrupted)
+    outcomes.append({'id':'rehash_wrong_output','candidate':corrupted,'caller':verdict})
+    assert not verdict['accepted']
+    sealer=L.IncrementalProofSealer(store)
+    before=sealer.get_current_seal(L.state(output,'r0').repository_id).to_dict()
+    missing={'clamp':full['receipts']['clamp']}
+    seal,units,_,checks=L.build(output,'r0',missing)
+    result=sealer.publish_full_checkpoint(L.state(output,'r0'),L.policy(),units=units,
+        expected_unit_ids=L.IDS,transition_id='e08:missing-manifest')
+    after=sealer.get_current_seal(L.state(output,'r0').repository_id).to_dict()
+    sealer.close()
+    outcomes.append({'id':'missing_manifest_unit','publication':result.to_canonical(),
+                     'before':before,'after':after,'remaining_receipt_checks':checks})
+    assert not result.published and before==after and result.status.value=='incomplete_manifest'
+    stale=copy.deepcopy(delta)
+    stale['receipts']=copy.deepcopy(full['receipts'])
+    verdict,*_=L.admit(output,stale,full)
+    outcomes.append({'id':'stale_source_receipt','candidate':stale,'caller':verdict})
+    assert not verdict['accepted']
+    bad=copy.deepcopy(full)
+    bad['receipts']['clamp'],measurement=L.produce(output,'r0','clamp',output/'snapshots/bad/clamp.py')
+    verdict,*_=L.admit(output,bad)
+    outcomes.append({'id':'executed_wrong_source','candidate':bad,'caller':verdict,'measurement':measurement})
+    assert not verdict['accepted']
+    assert full==originals
+    L.save(output/'results/controls.json',outcomes)
+    return outcomes
+
+
+def main():
+    output=HERE/(sys.argv[1] if len(sys.argv)>1 else 'run-v1')
+    output.mkdir()
+    freeze(output)
+    sequence=[]
+    full=L.prepare(output,'r0',tid='e08:full-r0')
+    result=L.publish(output,output/'main-store',full)
+    sequence.append(result)
+    assert result['publication']['published']
+    delta=L.prepare(output,'r1',full,tid='e08:delta-r1')
+    result=L.publish(output,output/'main-store',delta,full)
+    sequence.append(result)
+    assert result['publication']['published']
+    expected=L.CurrentSealPointer.from_dict(result['pointer'])
+    checks=controls(output,output/'main-store',full,delta)
+    # Clone closed native store bytes, before any competing writer changes r1.
+    for boundary in L.PROTOCOL['crashes']:
+        shutil.copytree(output/'main-store',output/('store-'+boundary))
+    winner=L.prepare(output,'r2a',delta,tid='e08:delta-r2a')
+    loser=L.prepare(output,'r2b',delta,tid='e08:delta-r2b')
+    result=L.publish(output,output/'main-store',winner,delta,expected=expected)
+    sequence.append(result)
+    assert result['publication']['published']
+    result=L.publish(output,output/'main-store',loser,delta,expected=expected)
+    sequence.append(result)
+    assert not result['publication']['published'] and result['publication']['reason']=='stale_parent'
+    assert result['publication']['phase_reached']=='seal_persistence'
+    L.save(output/'results/sequence.json',sequence)
+    sub(output,'main-fresh-audit',['audit',str(output),str(output/'main-store'),'main-fresh-audit'])
+    crashes=[]
+    for boundary in L.PROTOCOL['crashes']:
+        store=output/('store-'+boundary)
+        receipt=sub(output,'crash-'+boundary,['crash',str(output),boundary,str(store)],91)
+        recovery=[]
+        for i in range(L.PROTOCOL['recovery_repeats']):
+            tag=boundary+'-recover-'+str(i)
+            sub(output,tag,['recover',str(output),str(store),tag])
+            recovery.append(json.loads((output/'results'/(tag+'.json')).read_text()))
+        expected_cid=delta['seal_cid'] if boundary=='after_seal_persistence' else winner['seal_cid']
+        assert all(r['before']['seal_cid']==expected_cid and r['after']['seal_cid']==expected_cid for r in recovery)
+        crashes.append({'boundary':boundary,'process':receipt,'expected_current_seal_cid':expected_cid,
+                        'recovery_pointer_stable':True,'recovery_records':[boundary+'-recover-'+str(i) for i in range(3)]})
+    L.save(output/'loaded_sources.json',L.loaded_sources())
+    packages=list((output/'packs').glob('*.json'))
+    measurements=[m for p in packages for m in json.loads(p.read_text())['operation_measurements'].values()]
+    summary={'schema':'ns-seal-lifecycle-summary/v1','complete':True,'provider_requests':0,'provider_tokens':0,
+        'honest_prepared_states':len(packages),'main_publications':sum(r['publication']['published'] for r in sequence),
+        'stale_cas_rejected':1,'controlled_mutations_rejected':len(checks),
+        'operation_processes_preparing_honest_states':sum(m['operation_processes'] for m in measurements),
+        'operation_calls_preparing_honest_states':sum(m['operation_calls'] for m in measurements),
+        'operation_processes_invalid_source_control':1,'operation_calls_invalid_source_control':len(L.inputs('clamp')),
+        'reused_receipts_preparing_honest_states':sum(m.get('receipt_reused',False) for m in measurements),
+        'independent_oracle_inputs_per_state':sum(len(L.inputs(u)) for u in L.IDS),
+        'crash_scenarios':crashes,'native_proof_mode':'integrity_only',
+        'scope':L.PROTOCOL['scope']}
+    L.save(output/'summary.json',summary)
+    print(json.dumps(summary,sort_keys=True))
+
+
+if __name__=='__main__':
+    main()

@@ -1,0 +1,9 @@
+import Std
+set_option autoImplicit false
+namespace RevisionCacheModel
+def increment (n : Int) : Int := n + 1
+def twice (n : Int) : Int := increment (increment n)
+theorem twice_model (n : Int) : twice n = n + 2 := by
+  simp [twice, increment, Int.add_assoc]
+#print axioms twice_model
+end RevisionCacheModel

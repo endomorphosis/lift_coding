@@ -1,0 +1,266 @@
+"""Freeze a provider-disabled original six-event caller profile. No dispatch."""
+import argparse
+import json
+import shutil
+import subprocess
+from pathlib import Path
+import time
+
+HERE = Path(__file__).resolve().parent
+EVALS = HERE.parent.parent
+ACCEPT = EVALS / "recruitment" / "original_acceptance_v1"
+CORPUS = HERE / "original-corpus-v3" / "corpus.json"
+CODEC = ACCEPT / "public_bases_v1" / "inventory_codec_v1.py"
+ENDPOINT = ACCEPT / "endpoint_declaration_v4.json"
+ADMISSION = ACCEPT / "candidate_endpoint_v2" / "admission_v2.json"
+SCORER_PROFILE = ACCEPT / "candidate_endpoint_v2" / "profile.json"
+SCORER = ACCEPT / "candidate_endpoint_v2" / "service_v2.py"
+CONTEXT = EVALS / "integrated_v1" / "context_qualification"
+PROCEDURE = EVALS / "procedures" / "original_repository_validation_v1" / "native_profiles" / "v2"
+ROOT = HERE.parents[4]
+
+import sys
+sys.path.insert(0, str(HERE))
+import repository_runtime_v2 as R
+
+FEATURES = {
+    "A": {
+        "native_context": False,
+        "symbolic_routing": False,
+        "world_memory": False,
+        "procedures": False,
+        "native_publication": False,
+        "lifecycle_reuse": False,
+        "persistent_semantic_state": False,
+    },
+    "D": {
+        "native_context": True,
+        "symbolic_routing": True,
+        "world_memory": True,
+        "procedures": True,
+        "native_publication": False,
+        "lifecycle_reuse": False,
+        "persistent_semantic_state": True,
+    },
+}
+
+
+def save(path, value):
+    path.write_bytes(R.canonical(value) + b"\n")
+
+
+def snapshot_context_runtime(destination):
+    source = CONTEXT / "repository_service_qualification_v1/baseline/runtime_source_manifest.json"
+    manifest = json.loads(source.read_bytes())
+    worktree = Path("/home/barberb/lift_coding/.worktrees/agent-supervisor-efficiency-and-state-hardening-v1")
+    files = {}
+    for path, expected in manifest["files"].items():
+        original = Path(path)
+        if original.is_relative_to(worktree):
+            target = destination / original.relative_to(worktree)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(original, target)
+            files[str(target.resolve())] = R.sha(target.read_bytes())
+        else:
+            if R.sha(original.read_bytes()) != expected:
+                raise ValueError("already-snapshotted context runtime file changed: " + path)
+            files[str(original.resolve())] = expected
+    pythonpath = []
+    for entry in manifest["pythonpath"]:
+        root = Path(entry)
+        pythonpath.append(str((destination / root.relative_to(worktree)).resolve()) if root.is_relative_to(worktree) else entry)
+    roots = {}
+    for name, entry in manifest["roots"].items():
+        root = Path(entry)
+        roots[name] = str((destination / root.relative_to(worktree)).resolve()) if root.is_relative_to(worktree) else entry
+    rewritten = {**manifest, "files": files, "pythonpath": pythonpath, "roots": roots,
+                 "isolated_from_live_worktree": True, "source_manifest": str(source.resolve())}
+    path = destination / "runtime_source_manifest.json"
+    save(path, rewritten)
+    return path
+
+
+def symbolic_imports(task):
+    name = task["source_policy"]["edit_paths"][0]
+    text = (Path(task["source_root"]) / name).read_bytes()
+    request = {"schema": "ns-repository-native-analysis-request@1", "event_id": "freeze-symbolic",
+               "objective": "freeze native import inventory", "candidate_budget": 0,
+               "context_token_estimate": (len(text) + 3) // 4,
+               "sources": [{"path": name, "source": text.decode(), "sha256": R.sha(text)}]}
+    process = subprocess.run(["/usr/bin/python3", "-B", str(HERE / "repository_worker_v1.py")],
+                             input=json.dumps(request).encode(), capture_output=True, timeout=60)
+    if process.returncode != 0:
+        raise RuntimeError(process.stderr.decode()[-1500:])
+    response = json.loads(process.stdout)
+    return {path: row["sha256"] for path, row in response["imports"].items()}
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--run-id", required=True)
+    parser.add_argument("--task-id", default="ns-hist-01-xmltodict")
+    parser.add_argument("--arm", default="A")
+    parser.add_argument("--cache-profile", default="cold")
+    args = parser.parse_args()
+    if args.arm not in FEATURES:
+        raise ValueError("this freeze admits arms A and D only")
+    if args.cache_profile != "cold":
+        raise ValueError("this freeze only admits a cold namespace")
+    out = HERE / args.run_id
+    out.mkdir(exist_ok=False)
+    corpus = json.loads(CORPUS.read_bytes())
+    if R.sha(CORPUS.read_bytes()) != corpus.get("input_sha256", {}).get(str(CORPUS)) and R.sha(CORPUS.read_bytes()) != "d1d9171feab96665d0b3a4eb72b0c929414e6a37493475d203544fe0326a7299":
+        raise ValueError("original corpus identity changed")
+    if R.sha(CORPUS.read_bytes()) != "d1d9171feab96665d0b3a4eb72b0c929414e6a37493475d203544fe0326a7299":
+        raise ValueError("original corpus v3 digest changed")
+    task = next(row for row in corpus["tasks"] if row["task_id"] == args.task_id)
+    for index, configuration in enumerate(task["configurations"]):
+        expected = task["events"][4 if index == 1 else 0]["configuration_sha256"]
+        if R.sha(R.canonical(configuration)) != expected:
+            raise ValueError("configuration digest drifted")
+    objective = json.loads((CORPUS.parent / args.task_id / "objective_record.json").read_bytes())
+    trajectory_id = args.run_id + "--" + args.task_id + "--" + args.arm + "--" + args.cache_profile + "--primary"
+    events = []
+    for horizon in range(7):
+        events.append({"event_id": trajectory_id + "--h" + str(horizon).zfill(2), "trajectory_id": trajectory_id,
+                       "horizon": horizon, "task_id": args.task_id, "arm": args.arm,
+                       "cache_profile": args.cache_profile, "control": "primary",
+                       "publication_phases": ["main", "recover_target", "stale_parent", "continuation"]})
+    call_ids = ["nsorig-" + R.sha(R.canonical({"trajectory_id": trajectory_id, "slot": ordinal}))[:40] for ordinal in range(4)]
+    provider = {"schema": "ns-development-provider/v1", "model": "grok-4.6", "call_ids": call_ids,
+                "max_output_tokens": 2048, "timeout_seconds": 240, "max_request_bytes": 65536,
+                "reasoning_effort": "low", "response_format": {"type": "json_object"},
+                "workflow_scope": "Original provider-disabled six-event caller qualification. Call IDs are reserved; providers remain disabled."}
+    save(out / "provider_profile.json", provider)
+    admission = json.loads(ADMISSION.read_bytes())
+    endpoint = json.loads(ENDPOINT.read_bytes())
+    task = dict(task)
+    native_files = {}
+    context_template = None
+    if FEATURES[args.arm]["native_context"]:
+        context_template = out / "context_request_template.json"
+        authority = objective.get("authority") or objective.get("authority_scope")
+        if not authority:
+            raise ValueError("objective record lacks authority or authority_scope")
+        save(context_template, {"schema": "ns-repository-context-request/v1", "task_id": args.task_id,
+                                "repository_id": "original-development:" + args.task_id,
+                                "repository_root": task["source_root"],
+                                "public_source_paths": task["source_policy"]["read_paths"],
+                                "target_paths": task["source_policy"]["edit_paths"],
+                                "objective": {"title": objective.get("public_title") or args.task_id,
+                                              "text": (CORPUS.parent / args.task_id / "objective.txt").read_text(),
+                                              "authority": authority},
+                                "provenance": "Original public-base enrollment for provider-disabled caller qualification"})
+        task["context_request_template"] = str(context_template.resolve())
+    if FEATURES[args.arm]["symbolic_routing"]:
+        native_files.update(symbolic_imports(task))
+    files = [HERE / "original_controller_v1.py", HERE / "original_services_v1.py", HERE / "original_messages_v1.py",
+             HERE / "original_sequence_v1.py", HERE / "repository_runtime_v2.py", HERE / "repository_retrieval_v2.py",
+             HERE / "original_caller_output_contract_v2.json", HERE.parent / "controller.py",
+             EVALS / "metered_provider.py", CORPUS, CODEC, ENDPOINT, ADMISSION, SCORER_PROFILE, SCORER,
+             Path(__file__).resolve(), HERE / "run_original_offline_v1.py",
+             CORPUS.parent / args.task_id / "objective_record.json",
+             CORPUS.parent / args.task_id / "objective.txt", CORPUS.parent / args.task_id / "configuration_0.json",
+             CORPUS.parent / args.task_id / "configuration_1.json"]
+    runtime_manifest = CONTEXT / "repository_service_qualification_v1/baseline/runtime_source_manifest.json"
+    if FEATURES[args.arm]["native_context"]:
+        runtime_manifest = snapshot_context_runtime(out / "context_runtime")
+        files += [CONTEXT / "repository_context_v1.py", CONTEXT / "native_service.py", runtime_manifest, context_template]
+    if FEATURES[args.arm]["procedures"]:
+        files += [PROCEDURE / "service.py", PROCEDURE / "profile.json", PROCEDURE / "request_contract.py",
+                  PROCEDURE / "procedure.py", PROCEDURE / "evidence.py", PROCEDURE / "runtime.py"]
+    if FEATURES[args.arm]["world_memory"]:
+        files.append(EVALS / "world_memory_development" / "service.py")
+    if FEATURES[args.arm]["symbolic_routing"]:
+        files.append(HERE / "repository_worker_v1.py")
+        files += [Path(path) for path in native_files]
+    files += list((Path(task["source_root"])).rglob("*"))
+    files = [path.resolve() for path in files if path.is_file()]
+    profile = {
+        "schema": "ns-original-controller-profile/v1",
+        "created_at_ns": time.time_ns(),
+        "run_id": args.run_id,
+        "output_root": str(out / "state"),
+        "corpus_path": str(CORPUS.resolve()),
+        "corpus_sha256": R.sha(CORPUS.read_bytes()),
+        "original_inventory_codec": {"path": str(CODEC.resolve()), "sha256": R.sha(CODEC.read_bytes())},
+        "tasks": [task],
+        "trajectories": [{"trajectory_id": trajectory_id, "task_id": args.task_id, "arm": args.arm,
+                          "cache_profile": args.cache_profile, "control": "primary", "features": FEATURES[args.arm]}],
+        "events": events,
+        "max_provider_slots_per_trajectory": 4,
+        "retrieval": {"max_files": 3, "max_source_bytes": 48000},
+        "provider": {"enabled": False, "profile_path": str((out / "provider_profile.json").resolve()),
+                     "profile_sha256": R.sha((out / "provider_profile.json").read_bytes()),
+                     "transport_path": str((EVALS / "metered_provider.py").resolve())},
+        "scorer_services": {
+            "cold": {
+                "qualified": True,
+                "python": "/usr/bin/python3",
+                "entrypoint": str(SCORER.resolve()),
+                "profile_path": str(SCORER_PROFILE.resolve()),
+                "profile_sha256": admission["profile_sha256"],
+                "admission_path": str(ADMISSION.resolve()),
+                "admission_sha256": R.sha(ADMISSION.read_bytes()),
+                "timeout_seconds": 240,
+            }
+        },
+        "native_files": native_files,
+        "sealing_native_files": {},
+        "public_plan_obligations": {
+            args.task_id: ["public_example:" + row["id"] for row in objective.get("public_examples", [])]
+            + ["original_visible_and_hidden_acceptance", "exact_current_api_configuration"]
+        },
+        "native_route_provider_map": {name: "grok-4.6" for name in ("small_local_model", "medium_model", "frontier_model")},
+        "evaluation_files": {str(path): R.sha(path.read_bytes()) for path in files},
+        "scope": "Provider-disabled original six-event caller. Arm " + args.arm + " on " + args.task_id + ". Not a token-savings or confirmatory result. Native publication and CALL reuse remain unenrolled.",
+        "provider_enabled": False,
+        "qualification_results_are_not_live_outcomes": True,
+    }
+    if R.sha(SCORER_PROFILE.read_bytes()) != admission["profile_sha256"]:
+        raise ValueError("scorer profile digest drifted from admission")
+    if FEATURES[args.arm]["native_context"]:
+        profile["context_service"] = {"python": "/usr/bin/python3", "entrypoint": str((CONTEXT / "repository_context_v1.py").resolve()),
+                                      "runtime_profile": str(runtime_manifest.resolve()),
+                                      "runtime_profile_sha256": R.sha(runtime_manifest.read_bytes()),
+                                      "timeout_seconds": 600}
+    if FEATURES[args.arm]["procedures"]:
+        profile["procedure_service"] = {"qualified": True, "python": "/usr/bin/python3.12",
+                                        "entrypoint": str((PROCEDURE / "service.py").resolve()),
+                                        "profile_path": str((PROCEDURE / "profile.json").resolve()),
+                                        "endpoint_path": str(ENDPOINT.resolve()), "endpoint_sha256": admission["endpoint_declaration_sha256"],
+                                        "environment_profile_sha256": endpoint["environment_profile_sha256"], "timeout_seconds": 120}
+    if FEATURES[args.arm]["world_memory"]:
+        profile["world_memory_service"] = str((EVALS / "world_memory_development" / "service.py").resolve())
+    if FEATURES[args.arm]["symbolic_routing"]:
+        profile["symbolic_service"] = str((HERE / "repository_worker_v1.py").resolve())
+    save(out / "profile.json", profile)
+    archived = []
+    for path in sorted(set(files)):
+        try:
+            rel = path.relative_to(ROOT)
+        except ValueError:
+            rel = Path("outside") / path.name
+        target = out / "frozen_sources" / rel
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(path, target)
+        archived.append({"original_path": str(path), "snapshot_path": str(target.relative_to(out)),
+                         "sha256": R.sha(path.read_bytes()), "bytes": path.stat().st_size})
+    save(out / "frozen_source_manifest.json", {"schema": "ns-original-caller-source-closure/v1", "sources": archived})
+    freeze = {"schema": "ns-original-caller-freeze/v1", "run_id": args.run_id, "task_id": args.task_id,
+              "arm": args.arm, "cache_profile": args.cache_profile, "trajectory_id": trajectory_id,
+              "profile_sha256": R.sha((out / "profile.json").read_bytes()),
+              "provider_profile_sha256": R.sha((out / "provider_profile.json").read_bytes()),
+              "script_sha256": R.sha(Path(__file__).read_bytes()), "provider_enabled": False,
+              "effects_dispatched": False, "expected_event_ids": [row["event_id"] for row in events],
+              "expected_statuses": {"h00": "setup_complete", "h01": "plan_projected",
+                                    "h02": "residual_pending", "h03": "residual_pending",
+                                    "h04": "residual_pending", "h05": "residual_pending",
+                                    "h06": "recovery_obligations_unresolved"}}
+    save(out / "freeze.json", freeze)
+    print(json.dumps({"run": str(out), "profile_sha256": freeze["profile_sha256"],
+                      "trajectory_id": trajectory_id, "provider_enabled": False, "events": 7}, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()

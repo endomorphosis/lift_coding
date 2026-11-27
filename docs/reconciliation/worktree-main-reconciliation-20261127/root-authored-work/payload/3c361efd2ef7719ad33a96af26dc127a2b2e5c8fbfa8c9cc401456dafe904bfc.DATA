@@ -1,0 +1,81 @@
+"""Read-only unique scorer accounting across direct effects and native seal replays."""
+import argparse
+import hashlib
+import json
+import time
+from collections import Counter
+from pathlib import Path
+
+H = Path(__file__).resolve().parent
+R = H.parents[2]
+def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
+def canonical(x): return json.dumps(x, sort_keys=True, separators=(',', ':')).encode()
+def read(p): return json.loads(p.read_text()) if p.exists() else None
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--output', required=True)
+    args = parser.parse_args()
+    output = Path(args.output)
+    assert not output.exists()
+    cohort = R / 'evals/integrated_v1/controller_qualification/requests-cold-v1'
+    state = cohort / 'state'
+    started = time.time_ns()
+    evidence = {}
+    rows = []
+    for kind, directory in [('direct', state / 'effects'), ('replay', state / 'native_repository_sealing/replays')]:
+        for request_path in sorted(directory.glob('*/request.json')):
+            request = read(request_path)
+            if request.get('operation') != 'score': continue
+            identifier = request['evaluation_id']
+            digest = hashlib.sha256(canonical(request)).hexdigest()
+            completion_path = request_path.parent / 'completion.json'
+            completion = read(completion_path)
+            receipt_path = H / 'results-v3' / identifier / 'receipt.json'
+            receipt = read(receipt_path)
+            dispatch_path = receipt_path.parent / 'dispatch_intent.json'
+            dispatch = read(dispatch_path)
+            outer_intent_path = request_path.parent / 'dispatch_intent.json'
+            outer_intent = read(outer_intent_path)
+            for path in [request_path, completion_path, receipt_path, dispatch_path, outer_intent_path]:
+                if path.exists(): evidence[str(path)] = sha(path)
+            if dispatch: assert dispatch['request_sha256'] == digest
+            if receipt: assert receipt['request_sha256'] == digest and receipt['evaluation_id'] == identifier
+            response = (completion or {}).get('response')
+            if response: assert receipt == response
+            if completion: assert completion.get('request_hash', completion.get('request_sha256')) == digest
+            if outer_intent: assert outer_intent['request_sha256'] == digest
+            rows.append({'evaluation_id': identifier, 'kind': kind, 'instance_id': request['instance_id'],
+                'event_id': (completion or {}).get('event_id'), 'stage': (completion or {}).get('stage'),
+                'request_sha256': digest, 'outer_completion_present': completion is not None,
+                'replay_dispatch_intent_present': outer_intent is not None,
+                'service_dispatch_intent_present': dispatch is not None,
+                'receipt_present': receipt is not None, 'receipt_status': (receipt or {}).get('status'),
+                'grade': (receipt or {}).get('passed') if (receipt or {}).get('status') == 'completed' else None,
+                'service_container_elapsed_seconds': (receipt or {}).get('elapsed_seconds'),
+                'outer_service_elapsed_seconds': (completion or {}).get('elapsed_seconds'),
+                'status': 'terminal' if completion and receipt else 'pending_or_unknown',
+                'outer_returncode': (completion or {}).get('returncode')})
+    identifiers = [x['evaluation_id'] for x in rows]
+    assert len(set(identifiers)) == len(identifiers)
+    summary = {'schema': 'ns-requests-live-scorer-accounting-audit/v1', 'snapshot_started_at_ns': started,
+        'snapshot_finished_at_ns': time.time_ns(), 'live_snapshot_not_terminal_cohort_audit': True,
+        'cohort_profile_sha256': sha(cohort / 'profile.json'), 'auditor_sha256': sha(Path(__file__)),
+        'unique_evaluation_ids': identifiers, 'unique_request_count': len(rows),
+        'request_counts_by_kind': dict(Counter(x['kind'] for x in rows)),
+        'service_dispatch_intent_count': sum(x['service_dispatch_intent_present'] for x in rows),
+        'receipt_count': sum(x['receipt_present'] for x in rows),
+        'outer_completion_count': sum(x['outer_completion_present'] for x in rows),
+        'pending_or_unknown_count': sum(x['status'] != 'terminal' for x in rows),
+        'completed_grades': dict(Counter(str(x['grade']) for x in rows)),
+        'container_elapsed_seconds_sum': sum(x['service_container_elapsed_seconds'] or 0 for x in rows),
+        'outer_service_elapsed_seconds_sum': sum(x['outer_service_elapsed_seconds'] or 0 for x in rows),
+        'elapsed_sums_overlap_do_not_add': True, 'rows': rows, 'evidence_sha256': evidence,
+        'join_rule': 'Union direct score requests and seal replay requests by unique evaluation_id; retain prepared, dispatched and incomplete states; join exact canonical request hash to service dispatch and receipt, then exact receipt to outer completion. Count each evaluation once even when receipt is referenced by multiple seals or response artifacts.',
+        'unknown_policy': 'Missing completion is pending during the live cohort; at terminal audit it remains unknown unless an exact service receipt establishes a grade. Missing elapsed values are unknown, never zero-cost success.',
+        'new_scorer_calls': 0, 'source_or_profile_mutations': False}
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(summary, sort_keys=True, indent=2) + '\n')
+    print(json.dumps({k: v for k, v in summary.items() if k not in {'rows', 'evidence_sha256', 'unique_evaluation_ids'}}, sort_keys=True))
+
+if __name__ == '__main__': main()

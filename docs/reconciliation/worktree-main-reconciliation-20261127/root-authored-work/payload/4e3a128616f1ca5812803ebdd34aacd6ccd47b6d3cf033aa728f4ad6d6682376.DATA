@@ -1,0 +1,67 @@
+# Native signed TEST procedure integration v1
+
+This is a new prospective integration of the exact surviving saved candidate in
+`../results/cold_synthesis-prime.json`, `synthesis.candidate_artifacts[0]`. Its
+procedure bytes must equal the saved successful procedure and its native
+counterexample-set CID must rederive from the saved synthesis counterexamples.
+The source catalog and all native sources are unchanged. Original episode
+identifiers are retained as legacy aliases with exact saved source/artifact
+bindings; they are not silently converted into newly executed episodes.
+
+Before new evaluation, the complete scripts, source identities, fresh input
+corpora, evidence contracts, key commitment and runtime identities are frozen.
+New test, adversarial, held-out and shadow inputs are disjoint from the original
+training and exposed query pool. They are authored after the original
+development and held apart for this integration only; they are not a recruited
+population or evidence of generalization beyond this bounded task.
+
+The proof producer asks Z3 whether the selected operation-contract conjunction
+differs from an independently encoded bounded sequence decision specification,
+for lengths zero through six, supported JSON value classes, bounded integer
+values and budgets. It preserves SMT statements and solver results. A separate
+concrete bridge checks the actual frozen catalog and selected graph on the
+declared finite corpus. This is a proof of the explicit symbolic decision
+contract plus measured source bridge; it is not a theorem for arbitrary Python
+or a proof that an asserted receipt is true merely because it has a CID.
+
+Separate concrete test, adversarial, held-out and pre-certificate shadow
+evaluators run the saved candidate graph, retain individual observed results
+and compare an independent predicate. The admission adapter verifies the actual
+artifact bytes, source/input/contract identities, complete result coverage and
+computed results before constructing native `AdmittedReceipt` values. It
+rechecks the proof statements/results and rejects missing, changed, stale or
+cross-kind artifacts. No unconditional successful evidence producer is used.
+
+A locally generated test-only HMAC key, held outside published evidence,
+instantiates the native signer registry in nonproduction mode. Native
+`ProcedureVerifier`, `ProcedureCertificateIssuer` and
+`ProcedureCertificateVerifier` consume the evidence in that order. All runtime
+certificate and authority admission is restricted to TEST/read-only execution;
+LIVE admission is rejected. No registry promotion or production authority is
+created. An immutable test selection receipt occupies the explicit runtime
+registry-revision binding without being called a promoted native registry.
+
+Each public query is an immutable content-addressed artifact. A separate
+authority record binds it to exact procedure/certificate/source/policy/scope and
+test mode. The native invocation commits that authority CID; its exact CID is
+then mapped to the immutable record before execution. The no-input READ_STATE
+handler resolves only that exact invocation mapping. It never reads an unbound
+global query. Query corruption, substitution or cross-invocation reuse rejects.
+
+Six concrete typed handlers preserve the saved contracts: read state, selected
+tests, static analysis, type checking, postcondition and receipt emission.
+Operation completion is distinct from the computed decision. False decisions
+can be correct completed computations. Independent native observation,
+validation and postcondition admission checks current-invocation receipts and
+all three check values; it does not rely on the saved postcondition's single
+test-result input to imply the other checks ran. The procedure causes no
+filesystem/network/model effects. Immutable diagnostic artifacts are persisted
+by the surrounding harness after read-only execution.
+
+The run has a fixed outer process limit, per-invocation native resource limits,
+actual bounded local isolation/budget reservations, native idempotency and
+checkpoint stores. Every attempted invocation, positive/negative control,
+process timing and terminal disposition is retained. Provider calls and model
+tokens are zero. Signing, runtime execution and native receipts establish this
+specific integration only. External promotion-gate evidence and native registry
+promotion remain a separate open layer.

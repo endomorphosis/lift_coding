@@ -1,0 +1,5 @@
+# Canonical comment remains outside the edit.
+def increment(value):
+    return value + 2
+
+SENTINEL = 'unchanged'

@@ -1,0 +1,108 @@
+"""Freeze a reviewable Requests A-D development enrollment without dispatch."""
+import argparse,hashlib,json,shutil,time
+from pathlib import Path
+H=Path(__file__).resolve().parent;I=H.parent;E=I.parent;ROOT=H.parents[5]
+def sha(path): return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+def canonical(v): return json.dumps(v,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()
+def save(p,v): p.write_text(json.dumps(v,indent=2,sort_keys=True)+'\n')
+def make(run_id,enabled=False,qualification_path=None,retrieval_qualification=None):
+    if enabled and qualification_path is None: raise ValueError('enabled freeze requires passed repository publication qualification')
+    if enabled and retrieval_qualification is None: raise ValueError('enabled freeze requires passed complete-wire retrieval qualification')
+    out=H/run_id;out.mkdir(exist_ok=False)
+    service=E/'recruitment/candidate_scoring_v1';registry=service/'registry_v3.json';reg=json.loads(registry.read_text())
+    q=json.loads((service/'qualification-v3/summary.json').read_text())
+    if not q['qualified']: raise ValueError('scorer unqualified')
+    previous=json.loads((H/'development-v3-attempt2/profile.json').read_text());tasks={}
+    world_roots=[ROOT/'.worktrees/semantic-addressed-world-model-r2/ipfs_accelerate_py',ROOT/'.worktrees/semantic-addressed-world-model-r2/ipfs_datasets_py',ROOT/'.worktrees/semantic-addressed-world-model-r2/ipfs_kit_py',E/'world_memory_development/source_profiles/compiler_identity_v1']
+    previous['world_memory_files'].update({str(p.resolve()):sha(p) for root in world_roots for p in root.rglob('*.py') if p.is_file() and '__pycache__' not in p.parts})
+    context=I/'context_qualification';runtime=context/'requests_public_enrollment_v1/psf__requests-5414/runtime_source_manifest.json'
+    for n in ['5414','6028']:
+        instance='psf__requests-'+n;public=service/'public_inputs'/instance;obj=json.loads((public/'objective.json').read_text());cfg=reg['profiles'][instance]
+        tasks[instance]={k:cfg[k] for k in ('base_commit','image_id','qualification_profile_sha256','public_base_tree_sha256','objective_sha256')}
+        tasks[instance].update(source_root=str(public/'source'),objective_path=str(public/'objective.md'),objective_authority=str(public/'objective.json'),context_request_template=str(context/'requests_public_enrollment_v1'/(instance+'.request.json')))
+    seed='ns-requests-cold-development-20260914-v1';order=sorted('ABCD',key=lambda arm:hashlib.sha256((seed+'\n'+arm).encode()).hexdigest());events=[]
+    for arm in order:
+        trajectory='requests-'+arm.lower()+'-cold'
+        for n in ['5414','6028']:
+            event_id=run_id+'-'+arm.lower()+'-'+n
+            events.append({'event_id':event_id,'trajectory':trajectory,'instance_id':'psf__requests-'+n,'arm':arm,'parent_event':None if n=='5414' else run_id+'-'+arm.lower()+'-5414'})
+    ids=[];call_catalog=[]
+    for event in events:
+        for ordinal in range(2 if event['instance_id'].endswith('5414') else 4):
+            for purpose in ['proposal','source_expansion','retry','recovery']:
+                event_id=event['event_id']+'-residual-'+str(ordinal);cid='integrated-'+hashlib.sha256(canonical({'event_id':event_id,'purpose':purpose})).hexdigest()[:32]
+                ids.append(cid);call_catalog.append({'call_id':cid,'event_id':event_id,'purpose':purpose,'conditional':True})
+    provider=json.loads((E/'routing_v2/provider_profile.json').read_text());provider.update(call_ids=ids,workflow_scope='Requests natural public development: all proposal/expansion/retry/merge purposes share four requests per trajectory; first node cap two, unused slots roll forward; no hidden proposer inputs')
+    save(out/'provider_profile.json',provider);save(out/'call_catalog.json',call_catalog)
+    files=[H/'repository_controller_v3.py',H/'repository_worker_v1.py',H/'repository_retrieval_v1.py',H/'repository_runtime_v1.py',H/'repository_sealing_v1.py',H/'sealing_service_v1.py',I/'controller.py',E/'metered_provider.py',E/'world_memory_development/service.py',context/'repository_context_v1.py',context/'native_service.py',runtime,registry,service/'service_v3.py',service/'inventory_v3.py',Path(__file__).resolve()]
+    # Preserve the transitively admitted scorer helpers and ordinary native
+    # grader import closure. Protected task payloads remain curator custody.
+    for name,expected in reg['service_sources'].items():
+        path=service/name
+        if sha(path)!=expected: raise ValueError('transitive scorer source changed')
+        files.append(path)
+    for cfg in reg['profiles'].values():
+        qualified_profile=E/'recruitment'/cfg['qualification_profile']
+        if sha(qualified_profile)!=cfg['qualification_profile_sha256']: raise ValueError('scorer qualification profile changed')
+        for row in json.loads(qualified_profile.read_text())['native_loaded_sources'].values():
+            path=Path(row['path'])
+            if sha(path)!=row['sha256']: raise ValueError('ordinary native grader source changed')
+            files.append(path)
+    # Archive the actual loaded native closure from the public offline caller;
+    # the allowed inventory is larger and remains separately hash-bound.
+    offline=H/'repository-offline-v4/state'
+    for completion in (offline/'effects').glob('*/completion.json'):
+        response=json.loads(completion.read_text())['response']
+        observed=[{'path':p,'sha256':row['sha256']} for p,row in response.get('imports',{}).items()]
+        observed += response.get('runtime_profile',{}).get('imports',[])
+        for row in observed:
+            path=Path(row['path'])
+            if sha(path)!=row['sha256']: raise ValueError('offline loaded native source changed')
+            files.append(path)
+    for imports in (offline/'events').glob('*/*_prepared/*/*imports.json'):
+        for row in json.loads(imports.read_text()).values():
+            if isinstance(row,dict) and 'path' in row and 'sha256' in row:
+                path=Path(row['path'])
+                if sha(path)!=row['sha256']: raise ValueError('offline loaded context source changed')
+                files.append(path)
+    for task in tasks.values(): files += [Path(task['objective_path']),Path(task['objective_authority']),Path(task['context_request_template'])]
+    profile={'schema':'ns-repository-controller-development-profile@2','created_at_ns':time.time_ns(),'output_root':str(out/'state'),'tasks':tasks,'events':events,'scope':'Four cold development trajectories on two natural Requests issues with explicit exogenous upstream update; A ordinary raw, B qualified context with exact raw fallback (zero omissions), C adds native IPA/CEGIS/routing, partial D adds qualified native memory/publication. Lifecycle reuse, certified procedures and learned world utility remain absent; this is not held-out/general token-savings evidence.','max_provider_calls_per_trajectory':4,'first_node_call_cap':2,'scheduling':{'seed':seed,'arm_order':order,'mode':'sequential whole trajectories','cache_policy':'fresh local stores/context per trajectory; provider cache not controllable, report cached tokens'},'retrieval':{'max_files':3,'max_source_bytes':48000,'public_expansion':'replace current module selection with requested complete existing production files, same provider byte cap'},'provider':{'enabled':enabled,'profile_path':str(out/'provider_profile.json'),'profile_sha256':sha(out/'provider_profile.json')},'scorer_service':{'entrypoint':str(service/'service_v3.py'),'python':str(E/'recruitment/arm64_qualification/grader_venv/bin/python'),'profile_sha256':sha(registry),'qualification_summary_sha256':sha(service/'qualification-v3/summary.json')},'context_service':{'entrypoint':str(context/'repository_context_v1.py'),'python':'/usr/bin/python3','runtime_profile':str(runtime),'runtime_profile_sha256':sha(runtime)},'native_files':previous['native_files'],'world_memory_files':previous['world_memory_files'],'sealing_native_files':previous['sealing_native_files'],'world_memory_service':str(E/'world_memory_development/service.py'),'native_repository_sealing_enrolled':True,'repository_sealing_service':str(H/'repository_sealing_v1.py'),'sealing_required_units':sorted(['accepted_source','semantic_preparation','effect_inventory','behavior_native']),'public_graph_git':str(E/'recruitment/ancestry_v1/psf__requests/graph.git'),'evaluation_files':{str(p):sha(p) for p in files},'call_catalog_sha256':sha(out/'call_catalog.json'),'maximum_actual_provider_posts':16,'prompt_hash_policy':'Freeze prompt policy and all public base/source/profile hashes before first dispatch. Data-dependent exact prompt/request hashes are durably frozen before their individual effect; future model output cannot be prehashed.'}
+    profile['controller_entrypoint']=str(H/'repository_controller_v3.py')
+    profile['driver_entrypoint']=str(H/'run_repository_v2.py')
+    for launch in [H/'run_repository_v2.py',H/'launch_repository_v1.py']:
+        files.append(launch);profile['evaluation_files'][str(launch)]=sha(launch)
+    profile['retrieval'].update(policy='complete mandatory conflict modules first; optional lexical modules admitted only while all file/raw/actual-wire bounds hold',mandatory_overflow='source_context_unresolved; retain all mandatory source bytes and dispatch no request',public_expansion='requested complete existing modules replace optional selection; complete unresolved conflict modules remain mandatory; max8 requested paths, same actual provider wire cap')
+    profile['development_predecessor']={'profile_sha256':sha(H/'requests-cold-v1/profile.json'),'outcomes_used_for_adaptive_retriever_fix':True,'new_cohort_is_not_independent_confirmatory_replication':True,'prior_model_source_or_history_loaded_by_caller':False}
+    if retrieval_qualification is not None:
+        retrieval_qualification=Path(retrieval_qualification).resolve();controls=json.loads(retrieval_qualification.read_text())
+        if controls.get('passed') is not True:raise ValueError('retrieval controls did not pass')
+        for name in ('repository_controller_v3.py','repository_retrieval_v1.py','repository_runtime_v1.py'):
+            if controls['implementation_sources'].get(str(H/name))!=sha(H/name):raise ValueError('retrieval implementation changed after qualification')
+        profile['retrieval_qualification']={'summary_path':str(retrieval_qualification),'summary_sha256':sha(retrieval_qualification)};profile['evaluation_files'][str(retrieval_qualification)]=sha(retrieval_qualification);files.append(retrieval_qualification)
+        if enabled:
+            for name in ['repository-retrieval-caller-controls-v1','repository-contract-controls-v2']:
+                path=H/name/'summary.json';value=json.loads(path.read_text())
+                if value.get('passed') is not True:raise ValueError('caller controls did not pass')
+                if name.startswith('repository-retrieval-caller') and (value['controller_sha256']!=sha(H/'repository_controller_v3.py') or value['retrieval_helper_sha256']!=sha(H/'repository_retrieval_v1.py')):raise ValueError('caller changed after admission controls')
+                profile['retrieval_qualification'][name]={'summary_path':str(path),'summary_sha256':sha(path)};profile['evaluation_files'][str(path)]=sha(path);files.append(path)
+    profile['native_route_provider_map']={name:'grok-4.6' for name in ('small_local_model','medium_model','frontier_model')}
+    profile['infrastructure_policy']='Incomplete/error scorer results retain infrastructure_unresolved and all costs; no repair inference or retry. Complete failed grades permit bounded ordinary retry.'
+    if qualification_path is not None:
+        qualification_path=Path(qualification_path).resolve();qualification=json.loads(qualification_path.read_text())
+        if not qualification.get('qualified'): raise ValueError('repository publication qualification did not pass')
+        profile['repository_sealing_qualification']={'summary_path':str(qualification_path),'summary_sha256':sha(qualification_path)}
+        profile['evaluation_files'][str(qualification_path)]=sha(qualification_path)
+        files.append(qualification_path)
+        import importlib.util
+        spec=importlib.util.spec_from_file_location('repository_freeze_admission',H/'repository_controller_v3.py');module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module);module.qualified_sealing(profile)
+        files += [Path(path) for path in qualification['native_loaded_sources']]
+    save(out/'profile.json',profile)
+    archived=[]
+    for p in sorted(set(files)):
+        target=out/'frozen_sources'/p.relative_to(ROOT);target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(p,target)
+        archived.append({'original_path':str(p),'snapshot_path':str(target.relative_to(out)),'sha256':sha(p),'bytes':p.stat().st_size})
+    save(out/'frozen_source_manifest.json',{'schema':'ns-repository-source-closure@1','sources':archived,'scope':'exact evaluation metadata and actual public offline/curator loaded native source closure; live imports must also satisfy the frozen allowed source manifests'})
+    save(out/'freeze.json',{'profile_sha256':sha(out/'profile.json'),'provider_profile_sha256':sha(out/'provider_profile.json'),'call_catalog_sha256':sha(out/'call_catalog.json'),'script_sha256':sha(__file__),'provider_enabled':enabled,'effects_dispatched':False})
+    print(json.dumps({'run':str(out),'profile_sha256':sha(out/'profile.json'),'provider_enabled':enabled,'arm_order':order,'conditional_call_ids':len(ids),'max_actual_posts':16}));return out
+if __name__=='__main__':
+    parser=argparse.ArgumentParser();parser.add_argument('--run-id',required=True);parser.add_argument('--provider-enabled',action='store_true');parser.add_argument('--qualification-path',type=Path);parser.add_argument('--retrieval-qualification',type=Path);args=parser.parse_args();make(args.run_id,args.provider_enabled,args.qualification_path,args.retrieval_qualification)

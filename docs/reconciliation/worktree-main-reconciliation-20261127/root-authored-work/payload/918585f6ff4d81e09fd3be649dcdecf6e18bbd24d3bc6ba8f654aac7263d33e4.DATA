@@ -1,0 +1,32 @@
+{
+  "schema": "ranker-objective-container-language-source-review-plan@1",
+  "status": "SOURCE_REVIEW_PENDING_NEW_SOURCE",
+  "review_method": "Read source files as data; no target imports, tests, native proof calls, training, metadata writes, or repository publication.",
+  "scope": [
+    "Fresh recursive container language must express nested scalar, sum, indexing and container bodies; no objective, gradient or convergence opcode.",
+    "Named-source evaluation and typed-slot evaluation must recurse independently; successful compilation must not contain semantic proof fields or desired-result premises.",
+    "All new binders are fresh in the active mixed context; zip right binder precedes left binder in both named extension and typed environment extension.",
+    "Conditional syntax compiles both branches; evaluation visits the selected branch only after the condition.",
+    "Map and zip use the qualified ordered partial list backend, preserving first error and unequal-length zip truncation.",
+    "A successful list length theorem precedes finite-vector conversion; no arbitrary resizing, padding, default indexed value, or unproved indexing cast.",
+    "Range evaluates its established vector before enumerating ascending finite indices, including empty bounds.",
+    "The host emitter preserves every actual decoded node and explicitly retains source/P7/same-buffer receipt pins.",
+    "Host decoding controls and typed literal compilation do not close the formal JSON parser correctness, original Python Float/libm/fsum refinement, or full objective/gradient equivalence obligations."
+  ],
+  "qualification_boundary": {
+    "new_source_proofs_compiled_by_reviewer": false,
+    "new_qualified_queries": 0,
+    "new_native_calls": 0,
+    "new_test_jobs": 0,
+    "new_training_jobs": 0,
+    "new_metadata_hydration_jobs": 0,
+    "new_GitHub_writes": 0,
+    "new_HuggingFace_writes": 0,
+    "full_task_satisfaction": "unknown",
+    "strict_proof_cache_admission": false
+  },
+  "proof_authority": false,
+  "execution_authority": false,
+  "planner_activation": false,
+  "completion_authority": false
+}

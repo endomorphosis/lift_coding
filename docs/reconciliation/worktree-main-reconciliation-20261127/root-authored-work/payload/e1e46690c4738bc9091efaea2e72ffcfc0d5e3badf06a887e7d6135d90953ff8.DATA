@@ -1,0 +1,16 @@
+{
+  "schema": "law-model-interface-offline-plan-check/v1",
+  "status": "PASS_OFFLINE_PLAN_ONLY",
+  "requests": 8,
+  "frozen_unique_ids": 8,
+  "all_three_seeds": true,
+  "identical_repeat_body": true,
+  "maximum_call_seconds": 60,
+  "maximum_workload_seconds": 600,
+  "planned_overflow_not_yet_tokenized": true,
+  "normalization_controls": 4,
+  "model_calls": 0,
+  "candidate_executions": 0,
+  "worker_sha256": "e9939d9181310008872f7d5bb139f4b9cbdb00d0f8dc68297534b985a0365888",
+  "plan_sha256": "ee8236b2893f6b23ce419a9aaea3ba1acb426cf2ff245fe0f923a1120ffcfcd8"
+}

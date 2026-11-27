@@ -1,0 +1,48 @@
+# Fixed-profile CID encoding source variant
+
+This follows the two preserved 600-second full pyparsing preparation failures. The
+hoist-only XML profile still spends 41.59 of 106.32 cumulative profiled seconds in
+49,019 `validate_cid` calls and 49.85 seconds in 76,022 CID generation calls. Those
+times overlap; they must not be added. Generic base32 encoding invokes dynamic type
+validation for each character. The trace is `profile_diagnostic_v2_index`.
+
+The second native source variant retains the verified Merkle membership hoist and
+changes only fixed-profile CID string encoding. `fixed_cid_encoding_v2.patch`
+continues to call native `multihash.digest` on every input. It does not cache source
+bytes, digests, canonical payloads, proof results, or read-path success. The existing
+source type, structured-value, codec, and read-path decode/recompute guards remain.
+
+For CIDv1/base32/sha2-256 with an exact 32-byte digest, the binary prefixes are
+`01 55 12 20` for raw and `01 a9 02 12 20` for dag-json. The latter codec is unsigned
+varint 0x129. Canonical strings use multibase `b`, lowercase RFC4648 base32 and no
+padding. The implementation checks the native registered codec numbers, profile
+constants and multihash envelope, and delegates to the original generic constructor
+otherwise. The native hash implementation remains authoritative on every call.
+
+The admitted runtime uses the normal registered base32 codec semantics. Arbitrary
+runtime replacement of multibase encoders is outside this closed source profile;
+this change is not advertised as a drop-in implementation for arbitrary dynamic
+registry mutations. All consumer verification still uses the existing native
+decoder and canonicality checks.
+
+`materialize_fastcid_v2.py` constructs the variant through hardlinks and atomically
+replaces only the changed `content.py` inode. Original/parent source files remain
+unchanged. `runtime_merkle_fastcid_v2_manifest.json` binds the exact source hashes and
+parent patch; `run_qualification_v2.py` freezes the actual complete source profile.
+The historical and routing services continue using their previous frozen profiles.
+
+Validation before the full run: 2,600 native/generic reference-vector equalities,
+50 changed-source rejections, 7 invalid source-type rejections, 5 invalid structured
+type rejections, and 3 unsupported-codec rejections. All 64 original content-identity,
+Merkle, source-admission, and freshness tests pass. These results are in
+`fastcid_validation_v2` and `fastcid_native_regression_v2`.
+
+The first full XML run preserves exactly the baseline state CID and semantic root;
+preparation excluding import is 16.731 seconds, versus 64.838 unmodified and 26.296
+with the hoist alone. These are one local run per profile. Full pyparsing scanning
+is 57.949 seconds with the same 3,957 symbols, 55,859 edges and state CID. Full bundle
+completion and any further identity/admission checks must be reported from the
+terminal versioned run; the scan result alone is not whole-repository qualification.
+
+No source omission, provider call, repair acceptance, model-token reduction, or
+general workload speedup is established by these preparation experiments.

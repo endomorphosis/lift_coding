@@ -1,0 +1,484 @@
+{
+  "canonical_task_mutated": false,
+  "completion_authority": false,
+  "event_watermark": 4,
+  "execution_authority": false,
+  "metadata": {
+    "Semantic context artifact": ".runtime/native-fixture/context/semantic/worker-context.json",
+    "Semantic context refresh": "true",
+    "Semantic context sha256": "e6f8a1141b4951abcc0b6b465c4d8c2727411a6611745bd46cbcfafef2398bdf",
+    "World context artifact": ".runtime/native-fixture/context/world/intent-world.json",
+    "World context repository": "bafkreieyqmswye62evgvr64s4faqwsartfxrz3vpro4nyzepniyo7jw4km",
+    "World context sha256": "eedd43b53db62b2b755048c3e1fe81d3caca0e591149cc4ae909591987ae7211"
+  },
+  "plan_projection_cid": "baguqeeralotqsnygasxjunm3wazaowesak6ravsuwji2lvbnrwgu5piylcaq",
+  "repository_id": "bafkreieyqmswye62evgvr64s4faqwsartfxrz3vpro4nyzepniyo7jw4km",
+  "retrieval": null,
+  "schema": "supervisor-task-context-preparation@1",
+  "semantic": {
+    "capsules": 6,
+    "compact_bytes": 28589,
+    "completion_authority": false,
+    "doctor_findings": 2,
+    "ducklake": {
+      "authoritative": false,
+      "completion_authority": false,
+      "status": "projected",
+      "stored_bindings": 0,
+      "stored_catalogs": 2,
+      "stored_links": 2
+    },
+    "full_supervisor_qualified": false,
+    "minification": "lossless JSON whitespace removal only",
+    "pack_cid": "bafkreifmtkgff7ueuonceamttve2ba25m6jxri4bje5s4s2vutjdzfwfh4",
+    "pretty_json_bytes": 40509,
+    "provider_token_usage": null,
+    "reconstruction": {
+      "completion_authority": false,
+      "full_repository": false,
+      "nomination_matched": true,
+      "reuse": "cold",
+      "schema": "supervisor-scoped-semantic-reconstruction@1",
+      "scope_cid": "bafkreic56jinsrbiseb2zr277ubyew37ygdw6qx52z3pk2gaf6yapxrh6u",
+      "semantic_acceptance_authority": false,
+      "semantic_root_cid": "baguqeeraxwsygetpn7ozlnlrrkvrnltqvbg3gp3zntqwbximwdjuaf7a32yq"
+    },
+    "refresh_lineage": null,
+    "schema": "supervisor-semantic-context-preparation@1",
+    "scope_cid": "bafkreic56jinsrbiseb2zr277ubyew37ygdw6qx52z3pk2gaf6yapxrh6u",
+    "semantic_root_cid": "baguqeeraxwsygetpn7ozlnlrrkvrnltqvbg3gp3zntqwbximwdjuaf7a32yq",
+    "task_id": "AA-CLOSED-CALLER-TASK",
+    "worker_capsules": 6,
+    "worker_payload_sha256": "e6f8a1141b4951abcc0b6b465c4d8c2727411a6611745bd46cbcfafef2398bdf",
+    "worker_projection": null
+  },
+  "semantic_root_cid": "baguqeeraxwsygetpn7ozlnlrrkvrnltqvbg3gp3zntqwbximwdjuaf7a32yq",
+  "task_cid": "baguqeeradkjwoxjzbiwdtkq5jbhyw7dga7xqximbvoljvgrjax3lo5yximfq",
+  "task_id": "AA-CLOSED-CALLER-TASK",
+  "task_revision": 1,
+  "task_title": "Under closed-caller-model@1, caller.py::twice(n) must return n + 2.",
+  "world": {
+    "artifact": "/app/.runtime/native-fixture/context/world/intent-world.json",
+    "artifact_sha256": "eedd43b53db62b2b755048c3e1fe81d3caca0e591149cc4ae909591987ae7211",
+    "capture_cid": "baguqeera3xktgd4mp26u4kx3zg6ff7syzgrbtag77nkdm3ofdfu4xg6gvagq",
+    "completion_authority": false,
+    "execution_authority": false,
+    "metadata": {
+      "authoritative": false,
+      "completion_authority": false,
+      "status": "projected",
+      "stored_bindings": 0,
+      "stored_catalogs": 2,
+      "stored_links": 2
+    },
+    "planning_context": {
+      "active_plan_heads": [
+        {
+          "continuation_of": "",
+          "goal_cid": "baguqeerahf6r3pcnuvpaxwt2s26nrkjqeq3rwjttmfpr5rbpwd6ymfwioqsa",
+          "plan_cid": "baguqeerancvis4xeng3qa6pisopix2afdtq6hn4opws3ulosjjuuwtvbnoaq",
+          "revision": 1,
+          "schema": "ipfs_accelerate_py/agent-supervisor/intent-plan-head@1",
+          "status": "active",
+          "superseded_by": ""
+        }
+      ],
+      "completion_authority": false,
+      "component_status": {
+        "accepted_plan_root": "current",
+        "capability_snapshot": "unavailable",
+        "capsule_index": "current",
+        "claims": "unavailable",
+        "completion_root": "current",
+        "contract_root": "unavailable",
+        "datasets_repository": "current",
+        "datasets_semantic_state_root": "current",
+        "environment_bindings": "current",
+        "event_cursor": "current",
+        "goal_population": "current",
+        "merge_root": "unavailable",
+        "objectives": "current",
+        "obligation_set": "unavailable",
+        "plan_revision": "current",
+        "policy_root": "unavailable",
+        "repository": "current",
+        "repository_tree": "unavailable",
+        "resource_snapshot": "unavailable",
+        "subgoal_population": "current",
+        "symbol_root": "current",
+        "task_population": "current",
+        "unresolved_gaps": "unavailable"
+      },
+      "event_watermark": 4,
+      "execution_authority": false,
+      "goal_edges": [],
+      "goals": [
+        {
+          "body": {
+            "local_manifest_cid": "baguqeeranzg7tiseobdjfu2vslqmrnpysi7iglkbzvucpzooq5cldnybxotq"
+          },
+          "goal_alias": "AA-CLOSED-CALLER-GOAL",
+          "goal_cid": "baguqeerahf6r3pcnuvpaxwt2s26nrkjqeq3rwjttmfpr5rbpwd6ymfwioqsa",
+          "objective_id": "baguqeeraefho6dpmrfpktzsolut2vvxmj6m4mhzg7deggi2nwwvf5qulu34q",
+          "ordinal": 0,
+          "parent_goal_cid": "",
+          "revision": 1,
+          "status": "open",
+          "title": "Review the declared conditional caller model"
+        }
+      ],
+      "objectives": [
+        {
+          "body": {},
+          "extension": {},
+          "extension_schema": "",
+          "objective_alias": "LOCAL-OBJECTIVE-wwvf5qulu34q",
+          "objective_id": "baguqeeraefho6dpmrfpktzsolut2vvxmj6m4mhzg7deggi2nwwvf5qulu34q",
+          "parent_objective_id": "",
+          "priority": "P2",
+          "revision": 1,
+          "status": "open",
+          "title": "Under closed-caller-model@1, caller.py::twice(n) must return n + 2."
+        }
+      ],
+      "plan_projection_cid": "baguqeeralotqsnygasxjunm3wazaowesak6ravsuwji2lvbnrwgu5piylcaq",
+      "repository_id": "bafkreieyqmswye62evgvr64s4faqwsartfxrz3vpro4nyzepniyo7jw4km",
+      "schedulable": false,
+      "schema": "supervisor-intent-world-planning-context@1",
+      "semantic_root_cid": "baguqeeraxwsygetpn7ozlnlrrkvrnltqvbg3gp3zntqwbximwdjuaf7a32yq",
+      "tasks": [
+        {
+          "acceptance": [
+            {
+              "criterion": "Conditional arithmetic/source review remains pending. Declared static whitespace validation alone establishes no behavioral or source equivalence.",
+              "evidence_policy": {
+                "criterion": "Conditional arithmetic/source review remains pending. Declared static whitespace validation alone establishes no behavioral or source equivalence.",
+                "criterion_key": "conditional-review-pending",
+                "evidence_cids": [],
+                "validation_keys": [
+                  "static-git-diff-check"
+                ]
+              },
+              "ordinal": 0
+            }
+          ],
+          "body": {
+            "local_planning_contract": {
+              "binding": {
+                "identity": "did:key:z6Mkp1XfLQZ7cSyJHuhnS4GdKmNAugZkwMPJ5KGQeoojADxD",
+                "profile_id": "21a1932bcf04d1cc1ba3afc408873bf7",
+                "signature": "UClZ0AAaqmmY9iAkgjClpioJvas25sctZEl32c1xbnSCF8qWNvJEC7DZucIY84ILXjSHTVvKayDpqTxUhcCFDQ=="
+              },
+              "payload": {
+                "dependencies": [],
+                "graph_cid": "baguqeeraaghxihvapxzvbfkoixqotv7fbl4tlwkuurchby6whh4cuw3x2wtq",
+                "intent_owner_id": "intent-repository:local",
+                "manifest": {
+                  "binding": {
+                    "identity": "did:key:z6Mkp1XfLQZ7cSyJHuhnS4GdKmNAugZkwMPJ5KGQeoojADxD",
+                    "profile_id": "21a1932bcf04d1cc1ba3afc408873bf7",
+                    "signature": "AeCSSx6hJuJuOJ0Vf5FUAg5YOiRvL3/sf+XRdj6KKln+BKYvZMwAsO9IM4+p/C1Xxg4kpIzGkRCUwnbGpa/KCQ=="
+                  },
+                  "payload": {
+                    "baseline_commit": "08c1deb2d4d3ec84bdca0028e400c2185faefb72",
+                    "lifecycle_dir": "/opt/ipfs-supervisor/state/native-fixture-aa08/lifecycle",
+                    "planning_roots": {
+                      "program_root": "baguqeerarjxs5rvwssls5cj2q74nkqrtja63ldlloykcue64n3xtsqvxbtfq",
+                      "request_cid": "baguqeeraqbvdfiommshndbr7kkyusyajvabdzcncmlskwsr2etcvbn4cz2qq",
+                      "scan_cid": "baguqeerapytjtuee26wlt6r5iumpp5vox7rx5oszi56bqlhs5viz7zlqafzq"
+                    },
+                    "policy": {
+                      "explicit_proof_obligations": [],
+                      "external_ir_roots": [],
+                      "pending_assurance": "candidate",
+                      "production_activation": false,
+                      "schema": "supervisor-isolated-benchmark-planning-policy@1",
+                      "scope": "signed-local-benchmark-only"
+                    },
+                    "profile_content_id": "sha256:ecac45ceea05b00b91d6f0b9b081dacb3fd9eaf90054176b21711cc6fa7a2754",
+                    "profile_dir": "/opt/ipfs-supervisor/state/native-fixture-aa08/profile",
+                    "repository": "/app",
+                    "repository_cid": "baguqeerasudhoywfgl5x54xcax7i42wj25xmzp2jzoxoalq6pyisg3ukf4ka",
+                    "schema": "supervisor-local-benchmark-manifest@1",
+                    "sources": {
+                      "build/task-instruction.txt": {
+                        "executable": false,
+                        "sha256": "0c959eb0e11faa0d41af334d857eef69ecd5044e249dd8f579430998323a5e55"
+                      },
+                      "callee.py": {
+                        "executable": false,
+                        "sha256": "dab1f2e184164f685f25b7b514b053e3c3cdcc7ddff0e36389072bae85b2b3ac"
+                      },
+                      "caller.py": {
+                        "executable": false,
+                        "sha256": "b43ad9f27ac95c56efa0f950f2ce82511fa1f7cf7c292e90c5d97a27521f6aa9"
+                      },
+                      "dynamic.py": {
+                        "executable": false,
+                        "sha256": "bcfc5c6dfc5c19e40728fc860bc5756acddb9cba8aeec2ec82fce450a64d355c"
+                      }
+                    },
+                    "tasks": [
+                      {
+                        "acceptance": [
+                          {
+                            "criterion": "Conditional arithmetic/source review remains pending. Declared static whitespace validation alone establishes no behavioral or source equivalence.",
+                            "criterion_key": "conditional-review-pending",
+                            "evidence_cids": [],
+                            "validation_keys": [
+                              "static-git-diff-check"
+                            ]
+                          }
+                        ],
+                        "dependencies": [],
+                        "outputs": [
+                          {
+                            "effect": "modify",
+                            "media_type": "text/x-python",
+                            "path": "caller.py"
+                          }
+                        ],
+                        "scope_paths": [
+                          "build/task-instruction.txt",
+                          "callee.py",
+                          "caller.py",
+                          "dynamic.py"
+                        ],
+                        "task_key": "AA-CLOSED-CALLER-TASK",
+                        "validations": [
+                          {
+                            "argv": [
+                              "/usr/bin/git",
+                              "diff",
+                              "--check"
+                            ],
+                            "cwd": ".",
+                            "expected_exit_codes": [
+                              0
+                            ],
+                            "policy_cid": "baguqeerayn4yn2izc5hvbqdfjdypup57qru47v7epple6rurmr63infnmfja",
+                            "validation_key": "static-git-diff-check"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "manifest_cid": "baguqeeranzg7tiseobdjfu2vslqmrnpysi7iglkbzvucpzooq5cldnybxotq",
+                "pending_cid": "baguqeera4zfo7ju7qrbgvxvhbzwhbgtdemml6wnzbprcvlzptoys73ofgu7a",
+                "pending_requirements": [
+                  {
+                    "contract_version": 1,
+                    "fallback_check_ids": [
+                      "static-git-diff-check",
+                      "{\"argv\":[\"/usr/bin/git\",\"diff\",\"--check\"],\"cwd\":\".\",\"expected_exit_codes\":[0],\"policy_cid\":\"baguqeerayn4yn2izc5hvbqdfjdypup57qru47v7epple6rurmr63infnmfja\",\"validation_key\":\"static-git-diff-check\"}"
+                    ],
+                    "freshness_seconds": null,
+                    "kind": "test",
+                    "metadata": {
+                      "criterion": {
+                        "check_ids": [
+                          "static-git-diff-check"
+                        ],
+                        "id": "conditional-review-pending",
+                        "kind": "test",
+                        "source_scope_ids": [
+                          "build/task-instruction.txt",
+                          "callee.py",
+                          "caller.py",
+                          "dynamic.py"
+                        ]
+                      },
+                      "policy_ids": [
+                        "baguqeerahp34ofmflvbiac2qwkvcvssmzle4rpo4bni7375d5yhw6zb3cmla"
+                      ]
+                    },
+                    "minimum_code_assurance": "candidate",
+                    "phase": "post_execution",
+                    "required": true,
+                    "requirement_id": "baguqeeraxksjjdz37c5qylt462q5bxri6naecqwpz3e66vapsejuc6hdn6ha",
+                    "schema": "ipfs_accelerate_py/agent-supervisor/formal-plan-evidence-requirement@1",
+                    "source_scope_ids": [
+                      "path:caller.py"
+                    ],
+                    "subject_ids": [
+                      "baguqeeradkjwoxjzbiwdtkq5jbhyw7dga7xqximbvoljvgrjax3lo5yximfq"
+                    ]
+                  },
+                  {
+                    "contract_version": 1,
+                    "fallback_check_ids": [
+                      "static-git-diff-check"
+                    ],
+                    "freshness_seconds": null,
+                    "kind": "review",
+                    "metadata": {
+                      "criterion": {
+                        "check_ids": [
+                          "static-git-diff-check"
+                        ],
+                        "id": "conditional-review-pending",
+                        "kind": "review",
+                        "source_scope_ids": [
+                          "build/task-instruction.txt",
+                          "callee.py",
+                          "caller.py",
+                          "dynamic.py"
+                        ]
+                      },
+                      "policy_ids": [
+                        "baguqeerahp34ofmflvbiac2qwkvcvssmzle4rpo4bni7375d5yhw6zb3cmla"
+                      ]
+                    },
+                    "minimum_code_assurance": "candidate",
+                    "phase": "post_execution",
+                    "required": true,
+                    "requirement_id": "baguqeerazphpg436tnlfudfrke2cmxnbz7xodq4whwmv7vyotczo7eqvpqza",
+                    "schema": "ipfs_accelerate_py/agent-supervisor/formal-plan-evidence-requirement@1",
+                    "source_scope_ids": [
+                      "build/task-instruction.txt",
+                      "callee.py",
+                      "caller.py",
+                      "dynamic.py"
+                    ],
+                    "subject_ids": [
+                      "baguqeerahf6r3pcnuvpaxwt2s26nrkjqeq3rwjttmfpr5rbpwd6ymfwioqsa"
+                    ]
+                  }
+                ],
+                "plan_id": "baguqeerancvis4xeng3qa6pisopix2afdtq6hn4opws3ulosjjuuwtvbnoaq",
+                "planning_receipt_cid": "baguqeerac6ck65hjggtqjyfxletyx3eb47ndiysroykp45gz3vrs3kowppla",
+                "schema": "supervisor-local-pending-completion@1",
+                "task_cid": "baguqeeradkjwoxjzbiwdtkq5jbhyw7dga7xqximbvoljvgrjax3lo5yximfq",
+                "task_key": "AA-CLOSED-CALLER-TASK",
+                "task_spec": {
+                  "acceptance": [
+                    {
+                      "criterion": "Conditional arithmetic/source review remains pending. Declared static whitespace validation alone establishes no behavioral or source equivalence.",
+                      "criterion_key": "conditional-review-pending",
+                      "evidence_cids": [],
+                      "validation_keys": [
+                        "static-git-diff-check"
+                      ]
+                    }
+                  ],
+                  "dependencies": [],
+                  "outputs": [
+                    {
+                      "effect": "modify",
+                      "media_type": "text/x-python",
+                      "path": "caller.py"
+                    }
+                  ],
+                  "scope_paths": [
+                    "build/task-instruction.txt",
+                    "callee.py",
+                    "caller.py",
+                    "dynamic.py"
+                  ],
+                  "task_key": "AA-CLOSED-CALLER-TASK",
+                  "validations": [
+                    {
+                      "argv": [
+                        "/usr/bin/git",
+                        "diff",
+                        "--check"
+                      ],
+                      "cwd": ".",
+                      "expected_exit_codes": [
+                        0
+                      ],
+                      "policy_cid": "baguqeerayn4yn2izc5hvbqdfjdypup57qru47v7epple6rurmr63infnmfja",
+                      "validation_key": "static-git-diff-check"
+                    }
+                  ]
+                }
+              }
+            },
+            "title": "Under closed-caller-model@1, caller.py::twice(n) must return n + 2."
+          },
+          "dependencies": [],
+          "extension": {},
+          "extension_schema": "",
+          "goal_cid": "baguqeerahf6r3pcnuvpaxwt2s26nrkjqeq3rwjttmfpr5rbpwd6ymfwioqsa",
+          "identity": {
+            "local_contract_cid": "baguqeera4grzdlnurtxadhgply7mao5lmxc66u5m7fy75joz3qnuvmipfcqa",
+            "repository_tree_id": "baguqeera2pbky7egduqpiwehbdvv3iapgx5lkjtfwoc4aftc4d4nzempynxq",
+            "task_alias": "AA-CLOSED-CALLER-TASK",
+            "task_cid": "baguqeeradkjwoxjzbiwdtkq5jbhyw7dga7xqximbvoljvgrjax3lo5yximfq"
+          },
+          "objective_id": "baguqeeraefho6dpmrfpktzsolut2vvxmj6m4mhzg7deggi2nwwvf5qulu34q",
+          "ordinal": 0,
+          "outputs": [
+            {
+              "effect": {
+                "effect": "modify",
+                "media_type": "text/x-python",
+                "path": "caller.py"
+              },
+              "ordinal": 0,
+              "path": "caller.py"
+            }
+          ],
+          "plan_cid": "baguqeerancvis4xeng3qa6pisopix2afdtq6hn4opws3ulosjjuuwtvbnoaq",
+          "priority": "P2",
+          "revision": 1,
+          "spec_cid": "baguqeerayz32zsajvzyakwqgnabcdq2kwd7ohx7fy4crf7unqjbsa4fiqr3a",
+          "status": "ready",
+          "task_alias": "AA-CLOSED-CALLER-TASK",
+          "task_cid": "baguqeeradkjwoxjzbiwdtkq5jbhyw7dga7xqximbvoljvgrjax3lo5yximfq",
+          "validations": [
+            {
+              "argv": [
+                "/usr/bin/git",
+                "diff",
+                "--check"
+              ],
+              "ordinal": 0,
+              "policy": {
+                "cwd": ".",
+                "expected_exit_codes": [
+                  0
+                ],
+                "policy_cid": "baguqeerayn4yn2izc5hvbqdfjdypup57qru47v7epple6rurmr63infnmfja",
+                "validation_key": "static-git-diff-check"
+              }
+            }
+          ]
+        }
+      ],
+      "unavailable_components": [
+        "repository_tree",
+        "contract_root",
+        "obligation_set",
+        "claims",
+        "resource_snapshot",
+        "capability_snapshot",
+        "merge_root",
+        "unresolved_gaps",
+        "policy_root"
+      ],
+      "world_snapshot_cid": "sha256:821fb4efdd4b6a53b90e2053452963cb0ef754c646d79b166e94dcd536a60478"
+    },
+    "world_record": {
+      "completion_authority": false,
+      "ducklake": {
+        "authoritative": false,
+        "completion_authority": false,
+        "status": "projected",
+        "stored_records": 1
+      },
+      "interface": "ProgramWorldDatabase@1",
+      "meta_index": {
+        "completion_authority": false,
+        "link_cid": "bafkreibeyi4byach4zpag37c4tasvemvuk7ki5py4bvzmpnshtlmszgkge",
+        "link_id": "link:bafkreibeyi4byach4zpag37c4tasvemvuk7ki5py4bvzmpnshtlmszgkge",
+        "schema": "ipfs_accelerate_py/supervisor-meta-index@1"
+      },
+      "record_cid": "bafkreidgfcanl5vae6fvzmwbl27ob2dn4ryxkb6qdnz3plmcnk4ya24gju",
+      "schema": "ipfs_accelerate_py/program-world-database@1",
+      "stored": true
+    }
+  },
+  "world_snapshot_cid": "sha256:821fb4efdd4b6a53b90e2053452963cb0ef754c646d79b166e94dcd536a60478"
+}

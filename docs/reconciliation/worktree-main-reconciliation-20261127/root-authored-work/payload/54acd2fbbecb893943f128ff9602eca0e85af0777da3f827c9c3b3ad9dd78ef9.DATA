@@ -1,0 +1,6 @@
+set_option maxHeartbeats 200000
+set_option maxRecDepth 512
+theorem empirical_goal : ∀ {α3 : Type} (x3 y3 : α3), x3 = x3 := by
+  intro α3 x3 y3
+  rfl
+#print axioms empirical_goal

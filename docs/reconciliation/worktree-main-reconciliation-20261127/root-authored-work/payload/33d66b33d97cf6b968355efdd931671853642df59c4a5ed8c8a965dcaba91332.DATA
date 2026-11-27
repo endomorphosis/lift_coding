@@ -1,0 +1,6 @@
+set_option maxHeartbeats 200000
+set_option maxRecDepth 512
+theorem empirical_goal : ∀ {α2 : Type} (x2 y2 : α2), x2 = x2 := by
+  intro α2 x2 y2
+  rfl
+#print axioms empirical_goal

@@ -1,0 +1,342 @@
+"""Exact caller/native/lexical preparation controls; no checker or target jobs."""
+from contextlib import contextmanager
+from copy import deepcopy
+from dataclasses import replace
+import hashlib
+import json
+import os
+from types import SimpleNamespace
+
+import pytest
+
+from benchmarks.agent_supervisor.container_coding import terminal_call_ir_projection as projection
+from benchmarks.agent_supervisor.container_coding import terminal_revision_metadata as custody
+from ipfs_datasets_py.duckdb_control.codebase_catalog import CodebaseHead
+from ipfs_datasets_py.logic.software_contracts import codebase_integer_profile as integer, content, python_frontend, resolver
+from ipfs_datasets_py.logic.software_verification import codebase_source_adapters as adapter, program
+
+
+def _head():
+    repository = "public:call-projection-tests"
+    snapshot = content.cid_for_structured({"snapshot": "synthetic-public-call-fixture"})
+    return CodebaseHead(repository_id=repository, generation=1,
+        manifest_cid=content.cid_for_structured({"manifest": "synthetic-public-call-fixture"}),
+        snapshot_cid=snapshot, ast_revision_id="rev:" + repository + ":snapshot:" + snapshot,
+        receipt_cid=content.cid_for_structured({"receipt": "synthetic-public-call-fixture"})).to_dict()
+
+
+def _sources(count=2, expression="n + 1", caller=None):
+    chain = "n"
+    for _ in range(count):
+        chain = "increment(" + chain + ")"
+    return {"callee.py": ("def increment(n: int) -> int:\n    return " + expression + "\n").encode("ascii"),
+        "caller.py": caller if caller is not None else
+            ("from callee import increment\n\ndef twice(n: int) -> int:\n    return " + chain + "\n").encode("ascii")}
+
+
+def _arguments(count=2, expression="n + 1", offset=1, requested=None, caller=None):
+    return {"sources": _sources(count, expression, caller),
+        "callee_contract": integer.IntegerOffsetContract("callee.py", "increment", "n", offset).to_dict(),
+        "caller_contract": integer.IntegerOffsetContract("caller.py", "twice", "n", count * offset if requested is None else requested).to_dict(),
+        "head": _head()}
+
+
+def _build(**kwargs):
+    return projection.build_call_ir_projection(**_arguments(**kwargs))
+
+
+@pytest.mark.parametrize("count", range(1, 9))
+def test_all_eight_native_call_depths_preserve_exact_tree_and_definite_bindings(count):
+    result = _build(count=count)
+    expected = {"kind": "parameter"}
+    for _ in range(count):
+        expected = {"kind": "call", "argument": expected}
+    assert result["source_call_syntax"] == result["native_call_syntax"] == expected
+    assert result["call_count"] == count and result["actual_offset"] == result["requested_offset"] == count
+    assert result["caller_compilation"]["program"] == result["caller_native_program"]
+    assert result["caller_compilation"]["status"] == "success"
+    calls = [row for row in result["caller_native_program"]["expressions"] if row["kind"] == "call"]
+    assert len(calls) == count
+    assert all(row["attributes"] == {"opaque": True, "callee": "increment"}
+               and row["type_ref"] == "any" and row["evaluation_order"] == row["operand_ids"] for row in calls)
+    bindings = result["lexical_bindings"]
+    assert bindings["import_edge"]["resolution"]["status"] == "definite"
+    assert len(bindings["call_bindings"]) == count
+    assert all(row["resolution"]["status"] == "definite" and len(row["resolution"]["candidates"]) == 1
+               for row in bindings["call_bindings"])
+    assert bindings["target"]["path"] == "callee.py"
+    assert bindings["target"]["qualified_name"] == "callee.increment"
+    assert len(result["dependency_edges"]) == count + 1
+    assert result["opaque_call_model_assumption"] is True
+    assert result["checker_invocations"] == result["training_steps"] == 0
+    assert all(result[key] is False for key in projection.AUTHORITY)
+
+
+@pytest.mark.parametrize("expression,offset", [
+    ("n", 0), ("n + 7", 7), ("n + +7", 7), ("n + -7", -7),
+    ("n - 7", -7), ("n - +7", -7), ("n - -7", 7),
+])
+def test_native_callee_signed_grammar_drives_actual_offset_without_proof_claim(expression, offset):
+    result = _build(count=3, expression=expression, offset=offset, requested=2)
+    assert result["callee_projection"]["compiled"]["body_offset"] == offset
+    assert result["actual_offset"] == 3 * offset and result["requested_offset"] == 2
+    assert result["requested_model_theorem_proved"] is False
+
+
+def test_complete_replay_is_deterministic_and_every_source_and_record_is_bound():
+    result = _build()
+    assert result == _build()
+    body = {key: value for key, value in result.items() if key != "projection_id"}
+    assert result["projection_id"] == content.cid_for_structured(body)
+    assert json.loads(projection._wire(result)) == result
+    for row in result["sources"]:
+        raw = result["source_texts"][row["path"]].encode("ascii")
+        assert row == {"path": row["path"], "bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest(),
+                       "cid": content.cid_for_bytes(raw)}
+        provenance = result["lexical_bindings"]["ast_records"][row["path"]]["provenance"]
+        assert provenance["source_cid"] == row["cid"]
+        assert provenance["repository_tree_cid"] == result["head"]["snapshot_cid"]
+        assert provenance["revision"] == "snapshot:" + result["head"]["snapshot_cid"]
+    assert result["caller_source_decode_check"]["original_and_decoded_ast_equal"] is True
+    pins = result["producer"]["files"]
+    assert any(row["path"].endswith("terminal_call_ir_projection.py") for row in pins)
+    assert any(row["path"].endswith("terminal_source_ir_projection.py") for row in pins)
+    assert any(row["path"].endswith("resolver.py") for row in pins)
+    assert result["producer"]["loaded_module_code_attested"] is False
+
+
+def test_callee_change_and_caller_edge_change_produce_distinct_preparations():
+    original = _build()
+    callee_change = _build(expression="n - 1", offset=-1)
+    edge_change = _build(count=3)
+    assert len({row["projection_id"] for row in (original, callee_change, edge_change)}) == 3
+    assert original["caller_native_program"] == callee_change["caller_native_program"]
+    assert original["lexical_bindings"]["target"]["record_cid"] != callee_change["lexical_bindings"]["target"]["record_cid"]
+    assert original["caller_native_program"]["program_id"] != edge_change["caller_native_program"]["program_id"]
+
+
+@pytest.mark.parametrize("caller", [
+    b"from callee import increment as inc\n\ndef twice(n: int) -> int:\n    return inc(n)\n",
+    b"from .callee import increment\n\ndef twice(n: int) -> int:\n    return increment(n)\n",
+    b"import callee\n\ndef twice(n: int) -> int:\n    return callee.increment(n)\n",
+    b"from callee import increment, other\n\ndef twice(n: int) -> int:\n    return increment(n)\n",
+    b"from callee import *\n\ndef twice(n: int) -> int:\n    return increment(n)\n",
+    b"from other import increment\n\ndef twice(n: int) -> int:\n    return increment(n)\n",
+    b"from callee import increment\n\ndef twice(n: int) -> int:\n    return increment(n=n)\n",
+    b"from callee import increment\n\ndef twice(n: int) -> int:\n    return increment(*n)\n",
+    b"from callee import increment\n\ndef twice(n: int) -> int:\n    return increment(**n)\n",
+    b"from callee import increment\n\ndef twice(n: int) -> int:\n    return increment(n, n)\n",
+    b"from callee import increment\n\ndef twice(n: int) -> int:\n    return increment()\n",
+    b"from callee import increment\n\ndef twice(n: int) -> int:\n    return n\n",
+    b"from callee import increment\n\ndef twice(n: int) -> int:\n    return increment(n + 1)\n",
+    b"from callee import increment\n\ndef twice(n: int) -> int:\n    return eval(n)\n",
+    b"from callee import increment\n\ndef twice(n: int) -> int:\n    increment = n\n    return increment(n)\n",
+    b"from callee import increment\n\ndef twice(n: int) -> int:\n    return increment(n)\n\ndef other(n):\n    return n\n",
+    b"from callee import increment\n\n@decorate\ndef twice(n: int) -> int:\n    return increment(n)\n",
+    b"from callee import increment\n\nasync def twice(n: int) -> int:\n    return increment(n)\n",
+    b"from callee import increment\n\ndef twice(n: int = 1) -> int:\n    return increment(n)\n",
+    b"from callee import increment\n\ndef twice(n: int, /) -> int:\n    return increment(n)\n",
+    b"from callee import increment\n\ndef twice(*, n: int) -> int:\n    return increment(n)\n",
+    b"from callee import increment\n\ndef twice(n) -> int:\n    return increment(n)\n",
+    b"from callee import increment\n\ndef twice(n: bool) -> int:\n    return increment(n)\n",
+    b"from callee import increment\n\ndef twice(n: 'int') -> int:\n    return increment(n)\n",
+    b"from callee import increment\n\ndef twice(n: int):\n    return increment(n)\n",
+    b"from callee import increment\n\ndef twice(n: int) -> int:\n    'docstring'\n    return increment(n)\n",
+    b"from callee import increment\n\ndef twice(n: int) -> int:\n    if n:\n        return increment(n)\n",
+    b"from callee import increment\n\ndef twice(n: int) -> int:\n    return (lambda x: increment(x))(n)\n",
+    b"# coding: latin1\nfrom callee import increment\n\ndef twice(n: int) -> int:\n    return increment(n)\n",
+    b"# coding: utf-16\nfrom callee import increment\n\ndef twice(n: int) -> int:\n    return increment(n)\n",
+    b"from callee import increment\r\n\r\ndef twice(n: int) -> int:\r\n    return increment(n)\r\n",
+    b"from callee import increment\n\ndef twice(n: int) -> int:\n    return (\n",
+])
+def test_unmodeled_caller_syntax_is_refused_before_it_can_hide_in_native_success(caller):
+    with pytest.raises(ValueError):
+        _build(caller=caller)
+
+
+@pytest.mark.parametrize("count", [0, 9])
+def test_call_depth_bounds_are_closed(count):
+    with pytest.raises(ValueError):
+        _build(count=count)
+
+
+def test_imported_name_cannot_be_shadowed_by_parameter_or_caller_definition():
+    args = _arguments()
+    args["caller_contract"] = integer.IntegerOffsetContract("caller.py", "twice", "increment", 2).to_dict()
+    args["sources"]["caller.py"] = b"from callee import increment\n\ndef twice(increment: int) -> int:\n    return increment(increment)\n"
+    with pytest.raises(ValueError):
+        projection.build_call_ir_projection(**args)
+    args["caller_contract"] = integer.IntegerOffsetContract("caller.py", "increment", "n", 2).to_dict()
+    args["sources"]["caller.py"] = b"from callee import increment\n\ndef increment(n: int) -> int:\n    return increment(n)\n"
+    with pytest.raises(ValueError):
+        projection.build_call_ir_projection(**args)
+
+
+def test_imported_int_cannot_shadow_caller_builtin_annotation_binding():
+    args = _arguments()
+    args["callee_contract"] = integer.IntegerOffsetContract("callee.py", "int", "n", 1).to_dict()
+    args["sources"]["callee.py"] = b"def int(n: int) -> int:\n    return n + 1\n"
+    args["sources"]["caller.py"] = b"from callee import int\n\ndef twice(n: int) -> int:\n    return int(int(n))\n"
+    with pytest.raises(ValueError, match="shadow int annotations"):
+        projection.build_call_ir_projection(**args)
+
+
+def test_caller_function_and_parameter_cannot_share_a_name():
+    args = _arguments()
+    args["caller_contract"]["parameter"] = "twice"
+    args["caller_contract"]["offset"] = 1
+    args["sources"]["caller.py"] = b"from callee import increment\n\ndef twice(twice: int) -> int:\n    return increment(twice)\n"
+    with pytest.raises(ValueError):
+        projection.build_call_ir_projection(**args)
+
+
+@pytest.mark.parametrize("case", ["extra_source", "missing_source", "same_contract_path", "nested_path", "bad_identifier", "source_text", "empty_bytes", "too_large", "bool_offset", "foreign_field", "forged_head"])
+def test_exact_input_scope_types_contracts_and_bounds(case):
+    args = _arguments()
+    if case == "extra_source": args["sources"]["other.py"] = b"x = 1\n"
+    elif case == "missing_source": del args["sources"]["callee.py"]
+    elif case == "same_contract_path": args["caller_contract"]["path"] = "callee.py"
+    elif case == "nested_path": args["sources"]["pkg/caller.py"] = args["sources"].pop("caller.py")
+    elif case == "bad_identifier": args["sources"]["bad-name.py"] = args["sources"].pop("caller.py")
+    elif case == "source_text": args["sources"]["caller.py"] = args["sources"]["caller.py"].decode()
+    elif case == "empty_bytes": args["sources"]["caller.py"] = b""
+    elif case == "too_large": args["sources"]["caller.py"] = b"#" * (projection.MAX_SOURCE_BYTES + 1)
+    elif case == "bool_offset": args["caller_contract"]["offset"] = True
+    elif case == "foreign_field": args["callee_contract"]["proved"] = True
+    elif case == "forged_head": args["head"]["ast_revision_id"] = "rev:forged"
+    with pytest.raises(ValueError):
+        projection.build_call_ir_projection(**args)
+
+
+@pytest.mark.parametrize("mutation", ["opacity", "type", "callee", "leaf_binding", "edge", "order", "span", "function_type", "command_effect", "unused_expression"])
+def test_native_ir_mutations_are_refused_even_with_recomputed_native_identity(monkeypatch, mutation):
+    original = adapter.adapt_source_to_software_verification
+
+    def changed(*args, **kwargs):
+        result = original(*args, **kwargs)
+        native = deepcopy(result.program.to_dict())
+        native.pop("program_id")
+        calls = [row for row in native["expressions"] if row["kind"] == "call"]
+        leaf = next(row for row in native["expressions"] if row["kind"] == "symbol")
+        outer = next(row for row in calls if row["expression_id"] == native["commands"][0]["expression_ids"][0])
+        if mutation == "opacity": outer["attributes"]["opaque"] = False
+        elif mutation == "type": outer["type_ref"] = "int"
+        elif mutation == "callee": outer["operator"] = outer["attributes"]["callee"] = "other"
+        elif mutation == "leaf_binding": leaf["symbol_ids"] = [native["functions"][0]["result_symbol_id"]]
+        elif mutation == "edge": outer["operand_ids"] = outer["evaluation_order"] = [leaf["expression_id"]]
+        elif mutation == "order":
+            outer["operand_ids"] = [outer["operand_ids"][0], leaf["expression_id"]]
+            outer["evaluation_order"] = list(reversed(outer["operand_ids"]))
+        elif mutation == "span": native["spans"][0]["start_byte"] += 1
+        elif mutation == "function_type": native["functions"][0]["return_type"] = "any"
+        elif mutation == "command_effect": native["commands"][0]["effects"]["raises"] = ["ValueError"]
+        elif mutation == "unused_expression":
+            extra = deepcopy(leaf)
+            extra["expression_id"] = "expr:unused"
+            native["expressions"].append(extra)
+        return replace(result, program=program.ProgramIR.from_dict(native))
+
+    monkeypatch.setattr(adapter, "adapt_source_to_software_verification", changed)
+    with pytest.raises(ValueError):
+        _build()
+
+
+@pytest.mark.parametrize("method,mutation", [("resolve_import", "unresolved"), ("resolve_import", "finite_may"),
+    ("resolve_import", "revision"), ("resolve_reference", "target"), ("resolve_reference", "optional")])
+def test_native_lexical_resolution_must_be_definite_and_exact(monkeypatch, method, mutation):
+    original = getattr(resolver.SymbolResolver, method)
+
+    def changed(*args, **kwargs):
+        result = original(*args, **kwargs)
+        resolution = result.resolution if method == "resolve_import" else result
+        if mutation == "unresolved": resolution = replace(resolution, status="unresolved")
+        elif mutation == "finite_may": resolution = replace(resolution, status="finite_may", candidates=(
+            resolution.candidates[0], replace(resolution.candidates[0], symbol_id="symbol:other", qualified_name="callee.other")))
+        elif mutation == "revision": resolution = replace(resolution, candidates=(replace(resolution.candidates[0], revision="snapshot:other"),))
+        elif mutation == "target": resolution = replace(resolution, candidates=(replace(resolution.candidates[0], record_cid=content.cid_for_structured({"other": True})),))
+        elif mutation == "optional": resolution = replace(resolution, is_optional=True)
+        return replace(result, resolution=resolution) if method == "resolve_import" else resolution
+
+    monkeypatch.setattr(resolver.SymbolResolver, method, changed)
+    with pytest.raises(ValueError):
+        _build()
+
+
+@pytest.mark.parametrize("mutation", ["source_cid", "call_arguments", "call_bytes", "reference", "import_alias", "callee_qualified_name"])
+def test_native_lexical_records_are_joined_back_to_original_source(monkeypatch, mutation):
+    original = python_frontend.PythonASTExtractor.extract
+
+    def changed(self, source, **kwargs):
+        record = original(self, source, **kwargs)
+        if kwargs["path"] == "caller.py":
+            if mutation == "source_cid": return replace(record, provenance=replace(record.provenance, source_cid=content.cid_for_bytes(b"other")))
+            if mutation == "call_arguments": return replace(record, calls=(replace(record.calls[0], argument_count=2), *record.calls[1:]))
+            if mutation == "call_bytes": return replace(record, calls=(replace(record.calls[0], span=replace(record.calls[0].span, start_byte=record.calls[0].span.start_byte + 1)), *record.calls[1:]))
+            if mutation == "reference":
+                selected = record.calls[0].callee_reference_id
+                return replace(record, references=tuple(replace(row, is_qualified=True) if row.reference_id == selected else row for row in record.references))
+            if mutation == "import_alias": return replace(record, imports=(replace(record.imports[0], local_name="other"),))
+        if kwargs["path"] == "callee.py" and mutation == "callee_qualified_name":
+            return replace(record, symbols=tuple(replace(row, qualified_name="callee.other") if row.kind == "function" else row for row in record.symbols))
+        return record
+
+    monkeypatch.setattr(python_frontend.PythonASTExtractor, "extract", changed)
+    with pytest.raises(ValueError):
+        _build()
+
+
+def test_native_callback_cannot_mutate_input_contracts_during_preparation(monkeypatch):
+    args = _arguments()
+    original = adapter.adapt_source_to_software_verification
+
+    def changed(*values, **kwargs):
+        result = original(*values, **kwargs)
+        args["caller_contract"]["offset"] = 3
+        return result
+
+    monkeypatch.setattr(adapter, "adapt_source_to_software_verification", changed)
+    with pytest.raises(ValueError, match="changed during projection"):
+        projection.build_call_ir_projection(**args)
+
+
+def test_retained_producer_stat_refuses_same_byte_write_and_restore(monkeypatch, tmp_path):
+    synthetic = tmp_path / "selected_producer.py"
+    synthetic.write_bytes(b"# public synthetic custody witness\n")
+    original_producer = custody._producer
+    original_adapter = adapter.adapt_source_to_software_verification
+
+    @contextmanager
+    def extended(modules):
+        with original_producer((*modules, SimpleNamespace(__file__=str(synthetic)))) as value:
+            yield value
+
+    def changed(*args, **kwargs):
+        result = original_adapter(*args, **kwargs)
+        before = synthetic.stat()
+        raw = synthetic.read_bytes()
+        synthetic.write_bytes(raw)
+        os.utime(synthetic, ns=(before.st_atime_ns, before.st_mtime_ns + 1))
+        synthetic.write_bytes(raw)
+        os.utime(synthetic, ns=(before.st_atime_ns, before.st_mtime_ns))
+        return result
+
+    monkeypatch.setattr(custody, "_producer", extended)
+    monkeypatch.setattr(adapter, "adapt_source_to_software_verification", changed)
+    with pytest.raises(ValueError, match="producer changed"):
+        _build()
+
+
+def test_whole_public_preparation_suppresses_metadata_and_restores_owner(monkeypatch):
+    from ipfs_accelerate_py.agent_supervisor.runtime import supervisor_meta_index
+    original = adapter.adapt_source_to_software_verification
+    observed = []
+
+    def changed(*args, **kwargs):
+        observed.append(supervisor_meta_index._active())
+        return original(*args, **kwargs)
+
+    monkeypatch.setattr(adapter, "adapt_source_to_software_verification", changed)
+    before = supervisor_meta_index._PUBLIC_REPLAY_OWNER.get()
+    _build()
+    assert observed == [None]
+    assert supervisor_meta_index._PUBLIC_REPLAY_OWNER.get() == before

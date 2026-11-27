@@ -1,0 +1,62 @@
+# Original frontend observations, isolated profile v7
+
+The v13 discrepancy comes from using graph-projected edges as if they were
+original frontend observations. `scanner._reusable_path_edges` selects a previous
+public edge; `symbol_graph._candidate_ids` recognizes its concrete target CID as
+one current candidate; `resolve_edge_targets` writes `resolution=definite` over
+the earlier `finite_may` value. A new inventory also requires recomputing the
+candidate set from its original lexical or module spelling. Reconstructing that
+spelling alone is insufficient: graph projection can degrade original exact
+confidence, and pytest unification can change original symbol identity/facets.
+
+The immediate observed consumer is `_edge_limitations` in `semantic_index/explain.py`:
+the v13 mismatch omits the specific `finite_may_target:<edge_id>` explanation,
+while retaining `confidence:conservative`. Edge and derived-edge CIDs change,
+which changes actual Merkle blocks and roots. These observations do not establish
+an execution-authorization or execution-soundness failure.
+
+The v6 guard rescans a file when an eligible prior edge was projected from a
+lexical/module/fixture spelling to a different concrete target. Its full v14
+comparison and native regression remain separate, including the intentionally
+failed expectation that an unchanged projected path would skip analysis.
+
+Profile v7 adds `frontend_observations.py` and changes only its isolated scanner.
+Before pytest unification and graph projection, a producer records the original
+Python symbol records and edges actually consumed by the scanner, or its fatal
+diagnostics. It stores all parsed source paths in a canonical JSON sidecar.
+Unconsumed frontend convenience fields are not claimed to be archived. The
+sidecar is excluded from the public semantic state and bundle identity.
+
+An incremental caller must provide exact sidecar bytes, their expected native
+content CID from the accepted producer receipt, an accepted parent state and an
+explicit frozen runtime-profile SHA-256. The closed envelope also binds parent
+state CID, repository, namespace, scanner/schema identity and per-path source
+CID. Typed native symbol/edge restoration rechecks native identities and source
+ownership. The caller must independently enforce the declared runtime manifest;
+the full qualification hashes every enrolled runtime source before and after
+each worker. A CID is an integrity binding to this honest producer artifact,
+not a proof that arbitrary supplied observations follow from source bytes.
+
+The scanner verifies every current supplied source against the current snapshot
+before consulting cached observations. Changed files are reanalyzed. Missing
+per-path observations trigger reanalysis. Present but incorrectly bound or
+malformed sidecars fail closed. Pytest analysis/unification and whole-inventory
+graph resolution always rerun. Original confidence, lexical targets and metadata
+are retained instead of being guessed from graph output. Enabling sidecar
+production without an original sidecar performs fresh Python analysis, including
+previously reusable paths; this bootstrap cost is charged. Callers that do not
+enable the sidecar continue to use the v6 guard.
+
+`frontend_observations_validation_v7/summary.json` contains ten sequential
+inventory/source transitions, fresh native state restoration, full native bundle
+verification and byte equality for every actual block and sidecar. It also
+contains sixteen custody/source negatives or explicit safe fallbacks. In every
+inventory transition the unchanged ambiguous caller is actually reused. The
+import control loses its target and becomes conservative, then regains an exact
+target and exact confidence from the retained original observation. Pytest
+fixture/configuration and opaque-source changes are included. These constructed
+controls qualify the mechanism; they do not measure full-repository economy.
+
+The source profile, materializer, driver, protocol and runtime manifest are
+versioned independently of v5/v6, retained v13/v14, and live Requests profiles.
+No provider calls or protected task payloads are used.

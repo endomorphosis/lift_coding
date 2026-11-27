@@ -1,0 +1,89 @@
+"""Curator controls for the immutable JSON endpoint. Never prints hidden fields."""
+import hashlib,json,subprocess,sys,time,traceback,shutil
+from pathlib import Path
+H=Path(__file__).resolve().parent;R=H.parent;A=R/'arm64_qualification'
+O=H/'qualification-v1';C=O/'curator_custody'
+P=A/'grader_venv/bin/python'
+def sha(data):return hashlib.sha256(data).hexdigest()
+def dump(p,v):p.write_text(json.dumps(v,indent=2,sort_keys=True)+'\n')
+def call(req,tag):
+    raw=json.dumps(req,sort_keys=True).encode()
+    dump(C/(tag+'-request.json'),req)
+    with (C/(tag+'-stderr.log')).open('wb') as err:
+        p=subprocess.run([str(P),str(H/'service.py')],input=raw,stdout=subprocess.PIPE,stderr=err,timeout=230)
+    (C/(tag+'-stdout.json')).write_bytes(p.stdout)
+    try:result=json.loads(p.stdout)
+    except Exception: raise RuntimeError('service_response_not_single_json')
+    assert p.returncode==0
+    dump(O/(tag+'-response.json'),result)
+    return result
+
+def main():
+    O.mkdir();C.mkdir(mode=0o700)
+    registry=json.loads((H/'registry.json').read_text());regsha=sha((H/'registry.json').read_bytes())
+    dump(O/'freeze.json',{'schema':'ns-candidate-service-qualification-freeze/v1','frozen_at_ns':time.time_ns(),
+        'qualifier_sha256':sha(Path(__file__).read_bytes()),'service_profile_sha256':regsha,
+        'matrix_sha256':sha((H/'qualification_matrix.json').read_bytes()),'provider_calls':0})
+    shutil.copyfile(__file__,O/'qualifier_snapshot.py')
+    controls=[];base_request=None;empty_path=None
+    for instance,cfg in registry['profiles'].items():
+        for arm in ['empty','curator_reference']:
+            name=instance.split('-')[-1]+'-'+arm
+            patch=C/(name+'.patch');data=b'' if arm=='empty' else (R/cfg['custody']/'gold.patch').read_bytes()
+            patch.write_bytes(data);patch.chmod(0o444)
+            req={'schema':'ns-curator-candidate-score/v1','operation':'score','instance_id':instance,
+                'base_commit':cfg['base_commit'],'image_id':cfg['image_id'],
+                'qualification_profile_sha256':cfg['qualification_profile_sha256'],'service_profile_sha256':regsha,
+                'objective_sha256':cfg['objective_sha256'],'candidate_patch_sha256':sha(data),
+                'sealed_candidate_patch_path':str(patch),'evaluation_id':'qualification-'+name}
+            result=call(req,name)
+            expected=arm=='curator_reference'
+            ok=result['status']=='completed' and result['passed']==expected
+            if arm=='empty':
+                ok=ok and result['candidate_source_tree_sha256']==cfg['public_base_tree_sha256']
+            controls.append({'instance_id':instance,'control':arm,'expected_passed':expected,'control_passed':ok,
+                'actual_passed':result['passed'],'status':result['status'],'designated_total':result.get('designated_total'),
+                'designated_completed':result.get('designated_completed'),'outside_designated_status_counts':result.get('outside_designated_status_counts'),
+                'receipt_path':result.get('receipt_path')})
+            print(json.dumps({'control':name,'qualification_control_passed':ok,'actual_passed':result['passed'],'status':result['status'],'designated_completed':result.get('designated_completed')},sort_keys=True),flush=True)
+            if arm=='empty' and base_request is None:base_request=req;empty_path=patch
+    negatives=[]
+    cases=[('wrong_candidate_hash',{'candidate_patch_sha256':'0'*64}),('wrong_base_commit',{'base_commit':'0'*40}),('wrong_service_profile',{'service_profile_sha256':'0'*64})]
+    for name,updates in cases:
+        req=dict(base_request,**updates,evaluation_id='qualification-negative-'+name)
+        result=call(req,name)
+        negatives.append({'case':name,'passed':result['status']=='rejected' and not (H/'results'/req['evaluation_id']/'dispatch_intent.json').exists(),'reason':result.get('reason')})
+    patches={
+        'path_traversal':b'diff --git a/../outside.py b/../outside.py\n--- a/../outside.py\n+++ b/../outside.py\n@@ -1 +1 @@\n-x\n+y\n',
+        'test_file_modification':b'diff --git a/tests/probe.py b/tests/probe.py\n--- a/tests/probe.py\n+++ b/tests/probe.py\n@@ -1 +1 @@\n-x\n+y\n',
+        'symlink_mode':b'diff --git a/requests/probe.py b/requests/probe.py\nnew file mode 120000\n--- /dev/null\n+++ b/requests/probe.py\n@@ -0,0 +1 @@\n+/curator/eval-arm.sh\n'}
+    for name,data in patches.items():
+        p=C/(name+'.patch');p.write_bytes(data);p.chmod(0o444)
+        req=dict(base_request,sealed_candidate_patch_path=str(p),candidate_patch_sha256=sha(data),evaluation_id='qualification-negative-'+name)
+        result=call(req,name)
+        negatives.append({'case':name,'passed':result['status']=='rejected' and not (H/'results'/req['evaluation_id']/'dispatch_intent.json').exists(),'reason':result.get('reason')})
+    original=Path(controls[0]['receipt_path']);before=sha(original.read_bytes())
+    repeated=call(base_request,'duplicate_evaluation_id')
+    negatives.append({'case':'duplicate_evaluation_id','passed':repeated.get('reason')=='duplicate_evaluation_id' and before==sha(original.read_bytes()),'reason':repeated.get('reason')})
+    # Exercise an actual proposal process with only a pristine public projection.
+    cfg=next(iter(registry['profiles'].values()))
+    probe='import json; from pathlib import Path; p=Path("/proposal_public"); print(json.dumps({"public_source_present":(p/"source").is_dir(),"public_objective_present":(p/"objective.md").is_file(),"oracle_mount_present":Path("/curator").exists(),"host_workspace_present":Path("/home/barberb/lift_coding").exists()}))'
+    with (C/'proposer-mount-stderr.log').open('wb') as err:
+        p=subprocess.run(['docker','run','--rm','--read-only','--network','none','--cpus','2','--memory','2g','--pids-limit','128',
+            '--security-opt','no-new-privileges','--mount','type=bind,src='+str(H/cfg['public_projection'])+',dst=/proposal_public,readonly',
+            cfg['image_id'],'python','-c',probe],stdout=subprocess.PIPE,stderr=err,timeout=30)
+    boundary=json.loads(p.stdout);boundary['process_exit_code']=p.returncode
+    assert p.returncode==0 and boundary['public_source_present'] and boundary['public_objective_present'] and not boundary['oracle_mount_present'] and not boundary['host_workspace_present']
+    dump(O/'proposer_mount_boundary.json',boundary)
+    summary={'schema':'ns-candidate-service-qualification-results/v1','qualified':all(x['control_passed'] for x in controls) and all(x['passed'] for x in negatives),
+        'native_controls':controls,'negative_controls':negatives,'proposal_mount_boundary':boundary,
+        'provider_calls':0,'adversarial_candidate_oracle_integrity_qualified':False,'protected_values_emitted':False}
+    dump(O/'summary.json',summary)
+    print(json.dumps({'qualified':summary['qualified'],'native_controls':len(controls),'negative_controls':len(negatives),'provider_calls':0},sort_keys=True))
+if __name__=='__main__':
+    try:main()
+    except BaseException as exc:
+        C.mkdir(parents=True,exist_ok=True,mode=0o700)
+        (C/'qualifier-exception.txt').write_text(traceback.format_exc())
+        print(json.dumps({'qualification_status':'error','exception_type':type(exc).__name__,'details_retained_in_custody':True,'protected_values_emitted':False}))
+        raise SystemExit(1)

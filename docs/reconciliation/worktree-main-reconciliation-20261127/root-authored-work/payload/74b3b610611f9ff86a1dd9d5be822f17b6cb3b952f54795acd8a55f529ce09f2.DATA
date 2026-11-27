@@ -1,0 +1,88 @@
+# Second Requests cold development cohort
+
+All eight frozen events completed. Each arm accepted issue 5414 and failed to
+accept issue 6028: four accepted nodes, zero complete two-node trajectories.
+This cohort did not show token savings. B, C and partial D consumed more tokens
+than A at the same observed accepted-node count. The experiment remains a single
+exposed development family with one trajectory per arm; it does not identify a
+causal mechanism effect or support population confidence intervals.
+
+| Arm | Calls, first + second node | Total tokens | Cached input tokens | Outer wall (s) | Native grader calls |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| A | 2 + 2 | 56,543 | 1,024 | 227.882 | 5 |
+| B | 1 + 3 | 62,439 | 30,976 | 249.385 | 3 |
+| C | 1 + 3 | 63,336 | 14,720 | 415.743 | 6 |
+| partial D | 1 + 3 | 60,937 | 1,024 | 489.516 | 7 |
+
+Total provider work is 16 requests and 243,255 provider-reported tokens, including
+all proposals, expansion, retries and locally rejected outputs. Components are
+227,336 input tokens, 1,804 visible output tokens and 14,115 reasoning tokens;
+47,744 cached input tokens are a subset of input, not an additional component.
+Returned API charges total $0.1627138000; account settlement is not measured.
+All 21 native grader invocations completed: 19 direct and 2 native publication/read
+replays, with 6 passing grades and 15 failing grades. Repeated receipt appearances
+are counted once. Tokens per complete trajectory are undefined because none
+completed both nodes.
+
+The conventional retrieval correction worked on actual B/D continuations:
+their complete `models.py` conflict plus two optional modules fit in 47,424 raw
+bytes and a 54,773-byte request, under the unchanged 3-file/48,000-raw/65,536-wire
+bounds. Accepted predecessor source was carried with a real Git merge. A/C's
+different accepted first edits merged without conflict. All four initial model
+requests were byte-identical (SHA256
+`a6b0e1bf11fc3a8ae6897371812e12d6be9d365de21f269dc1cbca9ac1436c7a`),
+yet model outputs and subsequent source branches differed.
+
+Every failure remains in the denominator:
+
+- A5414's first candidate scored 123/131 designated checks; its second passed.
+  A6028 then used its remaining two calls for expansion and one candidate, which
+  scored 185/187.
+- C6028 used expansion and two candidate proposals; both candidates scored
+  185/187. Its current-source grade was also 185/187.
+- D6028's first and third candidates had byte-identical 428-byte cumulative
+  patches and each scored 185/187. Its second candidate was rejected before
+  grading for a mode-only source difference.
+- B6028's first candidate scored 185/187; its second and third candidates were
+  rejected for the same mode-only transport condition.
+
+The three mode-only failures (D ordinal 1; B ordinals 1 and 2) restore all 97 files'
+pristine content bytes. Only `models.py` retains mode 0644 instead of the public
+base's 0664. The frozen text-replacement interface has no mode channel, and its
+cumulative patch routine rejects that difference. All three provider calls are
+charged; no grader was invoked for those candidates, and counterfactual grades
+remain unknown. `all_mode_transport_failures_v1.json` records exact inventories,
+mode differences and retained failures. The current cohort was not repaired or
+rerun after observing this limitation.
+
+The 53 unique outer effects have complete elapsed measurements. Total enclosing
+invocation wall is 1,382.526 seconds. Nested native context costs are 106.468 seconds
+for B, 211.192 for C and 213.978 for D. D's publication/read effects, including their
+grader replays, took 78.228 seconds. These are components of invocation wall and
+must not be added again. The curator's 509.499 seconds of container grading are
+nested in 544.910 seconds of outer grader work, themselves nested in the workflow.
+Docker CPU, physical deduplicated storage and separately measured driver-preflight
+CPU remain unavailable. The logical runtime-state snapshot contains 5,495 file
+entries totaling 297,870,884 bytes; qualification and private scorer stores are
+separate. Unlike the first cohort, the detached driver completed without a lost
+outer timer, restart or pending effect.
+
+The final ledger audit (`final_ledger_audit_v3.json`) passes 3,698 checks, including
+exact source inventories, provider receipt/intent/event joins, all node and
+trajectory budgets, and the curator's 21 unique scorer request/receipt joins.
+`final_runtime_components_v1.json` records components and storage. All 310 observed
+worker/world/sealing code imports match the 510-file frozen source archive.
+Native context expansion lacks a separately recorded actual-import receipt;
+observed producer/consumer receipts cover the selected native project prefixes,
+not every Python standard-library or third-party dependency. No exhaustive import
+closure claim is made.
+
+B still performs exact raw fallback with zero qualified source omissions. C/D
+invoke native symbolic analysis, bounded CEGIS and routing where source is
+parseable; eligible model tiers all map to the same fixed Grok profile. D adds
+actual native memory, publication and verified accepted-source read. Its seal leaf
+covers observed non-sealing effects; the outer workflow also charges publication,
+read and replay. Qualified lifecycle reuse, certified procedures and learned world
+utility remain absent from partial D. The first cohort's failures, costs and
+missing timing remain preserved. This adaptive follow-up is not pooled as an
+independent confirmatory replication.

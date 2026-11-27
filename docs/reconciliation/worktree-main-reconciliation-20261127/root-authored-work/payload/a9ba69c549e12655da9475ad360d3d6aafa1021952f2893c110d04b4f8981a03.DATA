@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+"""Enroll only the two independently exported public Requests bases/objectives."""
+import hashlib
+import json
+from pathlib import Path
+import subprocess
+import time
+
+HERE = Path(__file__).resolve().parent
+PUBLIC = HERE.parents[1] / "recruitment/candidate_scoring_v1/public_inputs"
+OUT = HERE / "requests_public_enrollment_v1"
+def sha(body): return hashlib.sha256(body).hexdigest()
+def read(path): return json.loads(path.read_text())
+def write(path, value): path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+
+def main():
+    OUT.mkdir(); jobs = []
+    for instance in ("psf__requests-6028", "psf__requests-5414"):
+        folder = PUBLIC / instance
+        objective = read(folder / "objective.json"); inventory = read(folder / "source_inventory.json")
+        assert objective["instance_id"] == instance
+        assert sha(objective["problem_statement"].encode()) == objective["objective_sha256"]
+        entries = inventory["entries"]
+        assert all(item["kind"] == "file" for item in entries)
+        tree = folder / "source"
+        assert all(sha((tree / item["path"]).read_bytes()) == item["sha256"] for item in entries)
+        request = {"schema": "ns-repository-context-request/v1", "task_id": instance.replace("__", "-"), "repository_id": objective["repository"], "repository_root": str(tree), "public_source_paths": sorted(item["path"] for item in entries), "target_paths": sorted(item["path"] for item in entries if item["path"].startswith("requests/") and item["path"].endswith(".py")), "objective": {"title": objective["problem_statement"].splitlines()[0], "text": objective["problem_statement"], "authority": {"public_objective_path": str(folder / "objective.json"), "public_objective_sha256": sha((folder / "objective.json").read_bytes()), "public_source_inventory_sha256": sha((folder / "source_inventory.json").read_bytes()), "dataset_revision": objective["dataset_revision"], "dataset_sha256": objective["dataset_sha256"], "base_commit": objective["base_commit"]}}, "provenance": "Public-only benchmark objective and pristine base export from runtime inventory agent; independent development base, not a composed multi-issue trajectory"}
+        request_path = OUT / (instance + ".request.json"); write(request_path, request)
+        jobs.append({"id": instance, "request": str(request_path), "request_sha256": sha(request_path.read_bytes()), "source_files": len(entries), "target_paths": len(request["target_paths"]), "run": str(OUT / instance)})
+    write(OUT / "enrollment.json", {"schema": "ns-requests-public-context-enrollment/v1", "driver_sha256": sha(Path(__file__).read_bytes()), "service_sha256": sha((HERE / "repository_context_v1.py").read_bytes()), "runtime_profile_manifest_sha256": sha((HERE / "results_v11_full_literal_union/runtime_source_manifest.json").read_bytes()), "jobs": jobs, "hidden_fields_read": False, "provider_calls": 0, "natural_multi_issue_trajectory": False})
+    results = []
+    for job in jobs:
+        command = ["/usr/bin/python3", "-B", str(HERE / "repository_context_v1.py"), "prepare", "--request", job["request"], "--profile", str(HERE / "results_v11_full_literal_union/runtime_source_manifest.json"), "--run", job["run"]]
+        started = time.perf_counter(); process = subprocess.run(command, capture_output=True, timeout=660)
+        (OUT / (job["id"] + ".stdout")).write_bytes(process.stdout); (OUT / (job["id"] + ".stderr")).write_bytes(process.stderr)
+        result = {"id": job["id"], "command": command, "returncode": process.returncode, "wall_seconds": time.perf_counter() - started}
+        results.append(result); write(OUT / "processes.json", results); print(json.dumps(result), flush=True)
+        if process.returncode: raise SystemExit("native preparation failed; preserve attempt")
+    write(OUT / "summary.json", {"schema": "ns-requests-public-context-qualification/v1", "rows": [{"id": j["id"], "summary": read(Path(j["run"]) / "summary.json")} for j in jobs], "all_roundtrips_passed": True, "provider_calls": 0, "source_substitutions": 0, "quality_or_token_savings_claim": False})
+
+if __name__ == "__main__": main()

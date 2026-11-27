@@ -1,0 +1,107 @@
+"""Closed public input boundary for original repository validation nomination."""
+from __future__ import annotations
+import hashlib
+import json
+from pathlib import Path
+import re
+import sys
+from collections.abc import Mapping
+
+HERE=Path(__file__).resolve().parent
+EVALS=next(p for p in HERE.parents if (p/'integrated_v1/controller_qualification').is_dir())
+CONTROLLER=EVALS/'integrated_v1/controller_qualification'
+CORPUS=CONTROLLER/'original-corpus-v3/corpus.json'
+CORPUS_SHA256='d1d9171feab96665d0b3a4eb72b0c929414e6a37493475d203544fe0326a7299'
+sys.path.insert(0,str(CONTROLLER/'generic-transport-controls-v2'))
+import repository_runtime_v2 as source_runtime
+
+SCORER_FIELDS={'protocol','operation','evaluation_id','task_id','base_commit','objective_record_sha256','objective_text_sha256',
+               'configuration_sha256','sealed_candidate_tree_path','expected_candidate_source_tree_sha256','scorer_profile_sha256'}
+REQUEST_FIELDS={'schema','operation','corpus_sha256','trajectory_id','arm','cache_profile','cache_namespace','operation_id',
+                'task_id','event_index','scorer_request','source_inventory_format','source_inventory_sha256',
+                'generic_source_tree_sha256','environment_profile_sha256','endpoint_contract_sha256','expected_publication_parent'}
+
+def plain(value):
+    if isinstance(value,Mapping):return {key:plain(item) for key,item in value.items()}
+    if isinstance(value,(tuple,list)):return [plain(item) for item in value]
+    return value
+def canonical(value):return json.dumps(plain(value),sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False).encode()
+def sha(body):return hashlib.sha256(body).hexdigest()
+def read(path):return json.loads(Path(path).read_bytes())
+def require(ok,reason):
+    if not ok:raise ValueError(reason)
+def digest(value):return type(value)is str and re.fullmatch('[0-9a-f]{64}',value) is not None
+def identifier(value):return type(value)is str and re.fullmatch('[A-Za-z0-9][A-Za-z0-9_.:-]{0,191}',value) is not None
+
+def validate_request(request, endpoint_contract_path):
+    """Read only public source and metadata; never invoke the scorer."""
+    require(type(request)is dict and set(request)==REQUEST_FIELDS,'closed validation-plan request required')
+    require(request['schema']=='ns-original-validation-plan-request/v1' and request['operation']=='plan_validation','unsupported validation plan operation')
+    require(sha(CORPUS.read_bytes())==CORPUS_SHA256==request['corpus_sha256'],'original frozen corpus changed')
+    require(request['arm'] in ('A','B','C','D') and request['cache_profile'] in ('cold','warm'),'unsupported trajectory arm/cache profile')
+    for key in ('trajectory_id','cache_namespace','operation_id'):require(identifier(request[key]),'invalid '+key)
+    require(type(request['event_index'])is int and request['event_index'] in (0,2,3,4,5,6),'repository validation is warm priming or events two through six')
+    if request['event_index']==0:require(request['cache_profile']=='warm' and request['expected_publication_parent'] is None,'warm prime requires warm namespace and no publication parent')
+    corpus=read(CORPUS);matches=[task for task in corpus['tasks'] if task['task_id']==request['task_id']]
+    require(len(matches)==1,'task outside original frozen four-family corpus');task=matches[0]
+    scorer=request['scorer_request']
+    require(type(scorer)is dict and set(scorer)==SCORER_FIELDS,'closed current scorer request required')
+    require(scorer['protocol']=='ns-original-candidate-score/v1' and scorer['operation']=='score','unknown original scorer operation')
+    require(identifier(scorer['evaluation_id']),'invalid evaluation identity')
+    for key in ('task_id','base_commit','objective_record_sha256','objective_text_sha256'):require(scorer[key]==task[key],'current original scorer '+key+' mismatch')
+    configuration_event=0 if request['event_index']==0 else request['event_index']-1
+    require(scorer['configuration_sha256']==task['events'][configuration_event]['configuration_sha256'],'current API configuration mismatch')
+    for key in ('source_inventory_sha256','generic_source_tree_sha256','environment_profile_sha256','endpoint_contract_sha256'):require(digest(request[key]),'invalid '+key)
+    require((scorer['scorer_profile_sha256'] is None or digest(scorer['scorer_profile_sha256'])) and digest(scorer['expected_candidate_source_tree_sha256']),'invalid scorer source/profile digest')
+    require(request['source_inventory_format']=='original-adapter-path-keyed/v1','source inventory representation must be explicit')
+    root=Path(scorer['sealed_candidate_tree_path'])
+    require(root.is_absolute() and not root.is_symlink() and root.is_dir(),'scorer candidate must be an actual absolute source directory')
+    base=Path(task['source_root'])
+    require(source_runtime.inventory(base)['tree_sha256']==task['source_tree_sha256']==task['source_policy']['base_tree_sha256'],'frozen original public base changed')
+    base_inventory=source_runtime.original_adapter_inventory(base)
+    current=source_runtime.original_adapter_inventory(root)
+    require(set(current)==set(base_inventory),'complete original source population required')
+    admitted=set(task['source_policy']['edit_paths'])
+    for name,item in current.items():
+        prior=base_inventory[name]
+        require(item['kind']==prior['kind'],'original source kind changed')
+        if item['kind']=='file':require(item['mode']==prior['mode'],'original preserve-base-modes policy violated')
+        if name not in admitted:require(item==prior,'source outside original public repair surface changed')
+    source_digest=sha(canonical(current));generic_digest=source_runtime.inventory(root)['tree_sha256']
+    require(source_digest==request['source_inventory_sha256']==scorer['expected_candidate_source_tree_sha256'],'actual current original source receipt mismatch')
+    require(generic_digest==request['generic_source_tree_sha256'],'generic source inventory identity mismatch')
+    if request['event_index']==0:require(current==base_inventory,'warm prime must use exact unfixed original public base')
+    parent=request['expected_publication_parent']
+    if parent is not None:
+        require(type(parent)is dict and set(parent)=={'trajectory_id','event_id','generation','seal_cid'},'closed expected publication parent required')
+        require(parent['trajectory_id']==request['trajectory_id'] and identifier(parent['event_id']),'parent trajectory/event mismatch')
+        require(type(parent['generation'])is int and parent['generation']>=0 and type(parent['seal_cid'])is str and re.fullmatch('sha256:[0-9a-f]{64}',parent['seal_cid']) is not None,'invalid actual native Kit parent generation/seal')
+    endpoint_path=Path(endpoint_contract_path);endpoint_bytes=endpoint_path.read_bytes()
+    require(sha(endpoint_bytes)==request['endpoint_contract_sha256'],'endpoint declaration changed')
+    endpoint=json.loads(endpoint_bytes)
+    require(endpoint['schema']=='ns-original-scorer-endpoint-declaration/v4' and endpoint['protocol']=='ns-original-candidate-score/v1','unknown strict sanitized endpoint contract')
+    require(set(endpoint['required_request_fields'])==SCORER_FIELDS,'endpoint scorer request vocabulary changed')
+    require(endpoint['scorer_profile_sha256']==scorer['scorer_profile_sha256'],'endpoint scorer profile mismatch')
+    require(request['task_id'] in endpoint['supported_task_ids'],'task not declared by current endpoint')
+    records=[item for item in endpoint['tasks'] if item['task_id']==request['task_id']]
+    require(len(records)==1,'endpoint task identity not unique');endpoint_task=records[0]
+    require(endpoint_task['environment_profile_sha256']==request['environment_profile_sha256'],'endpoint environment mismatch')
+    require(digest(endpoint_task['original_test_selection_sha256']),'opaque original test selection identity required')
+    lifecycle=endpoint['lifecycle']
+    require(lifecycle['native_setup_teardown_unchanged'] is True and lifecycle['native_visible_before_designated_hidden'] is True and lifecycle['new_native_container_per_call'] is True,'endpoint must preserve original native lifecycle')
+    require(lifecycle['ordinary_visible_failure_still_attempts_hidden'] is True and lifecycle['original_visible_failure_may_skip_hidden'] is False and lifecycle['required_hidden_population_complete_even_when_visible_fails'] is True,'strict complete original hidden population required')
+    require(endpoint['corpus_sha256']==CORPUS_SHA256 and endpoint['environment_profile_sha256']==request['environment_profile_sha256'],'endpoint corpus/environment mismatch')
+    require(sha(canonical(endpoint['environment_profile']))==endpoint['environment_profile_sha256'],'full endpoint environment identity changed')
+    require(scorer['configuration_sha256'] in endpoint_task['configuration_sha256s'],'configuration outside endpoint qualification')
+    require(lifecycle['whole_grader_cache_allowed'] is False,'whole-grader caching is outside this contract')
+    require(endpoint['status'] in ('pending','qualified'),'unknown endpoint admission status')
+    if endpoint['status']=='qualified':
+        require(digest(scorer['scorer_profile_sha256']) and endpoint['callable_endpoint'] is not None,'qualified endpoint must have an exact callable profile')
+        require(request['task_id'] in endpoint['qualified_task_ids'] and endpoint_task['endpoint_qualified'] is True,'task endpoint is not qualified')
+        for key in ('base_commit','objective_record_sha256','objective_text_sha256'):require(endpoint_task[key]==task[key],'qualified endpoint '+key+' mismatch')
+        require(endpoint_task['base_original_adapter_inventory_sha256']==sha(canonical(base_inventory)),'qualified endpoint original inventory codec mismatch')
+    return {'request_sha256':sha(canonical(request)),'scorer_request_sha256':sha(canonical(scorer)),
+            'corpus_sha256':request['corpus_sha256'],'endpoint_contract_sha256':request['endpoint_contract_sha256'],
+            'source_inventory_sha256':source_digest,'generic_source_tree_sha256':generic_digest,
+            'endpoint_status':endpoint['status'],'scorer_request':scorer,'task':task,
+            'endpoint':endpoint,'endpoint_task':endpoint_task,'publication_authority':False,'scoring_passed':False}

@@ -1,0 +1,244 @@
+"""Curator-only natural repository sealing controls. Never emit oracle payloads."""
+import hashlib
+import importlib.util
+import json
+import os
+import shutil
+import subprocess
+import sys
+import time
+import traceback
+from pathlib import Path
+
+H = Path(__file__).resolve().parent
+E = H.parent.parent
+I = E / 'integrated_v1'
+SERVICES = I / 'controller_qualification'
+O = H / 'repository_sealing_qualification_v1'
+CUSTODY = O / 'curator_custody'
+sys.path.insert(0, str(SERVICES))
+import repository_runtime_v1 as R
+spec = importlib.util.spec_from_file_location('qualified_controller', I / 'controller.py')
+C = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(C)
+
+def sha(path): return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+def dump(path, value):
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
+    Path(path).write_text(json.dumps(value, sort_keys=True, indent=2) + '\n')
+
+def main():
+    O.mkdir()
+    CUSTODY.mkdir(mode=0o700)
+    profile = json.loads((SERVICES / 'repository-offline-v4/profile.json').read_text())
+    profile['output_root'] = str(CUSTODY / 'state')
+    profile['provider']['enabled'] = False
+    profile['events'] = [{'arm': 'D', 'event_id': 'curator-seal6028-v1-' + str(i),
+                          'instance_id': 'psf__requests-6028', 'trajectory': 'curator-seal6028-v1',
+                          'parent_event': None if i == 0 else 'curator-seal6028-v1-' + str(i - 1)}
+                         for i in range(3)]
+    profile_path = CUSTODY / 'profile.json'
+    dump(profile_path, profile)
+    profile_hash = sha(profile_path)
+    freeze = {'schema': 'ns-curator-repository-seal-control/v1', 'frozen_at_ns': time.time_ns(),
+              'runner_sha256': sha(__file__), 'profile_sha256': profile_hash,
+              'maximum_fresh_native_scorer_invocations': 6, 'provider_calls': 0, 'automatic_retries': 0,
+              'positive_sequence': ['actual reference score, native context, world evidence and publish',
+                                    'reference plus neutral comment, score/context/world and actual exit94 after seal persistence',
+                                    'fresh recovery replay and CAS', 'fresh next-event native read replay and exact source restoration'],
+              'negative_controls': ['wrong_tree', 'wrong_receipt', 'source_drift', 'incomplete_effect'],
+              'scope': 'Unsigned curator qualification of ordinary native scoring and integrity seals; not a model result or adversarial oracle proof'}
+    dump(O / 'freeze.json', freeze)
+    ledger = C.Ledger(profile['output_root'])
+    task = profile['tasks']['psf__requests-6028']
+    scorer = profile['scorer_service']
+    registry = json.loads((H / 'registry_v3.json').read_text())
+    reference = (H.parent / registry['profiles']['psf__requests-6028']['custody'] / 'gold.patch').read_bytes()
+    native_operations = []
+    prepared_cases = []
+
+    def effect(event, stage, request, command, timeout=240):
+        return ledger.effect(event['event_id'], stage, request,
+                             lambda directory: C.subprocess_json(command, request, directory, timeout=timeout))
+
+    def memory(event, operation, tree, receipt=None):
+        stage = 'world_' + operation
+        state = R.inventory(tree)
+        request = {'schema': 'world-memory-service-request@1', 'operation': operation,
+                   'request_id': event['event_id'] + '-' + stage,
+                   'store_dir': str(Path(profile['output_root']) / 'world_memory' / event['trajectory']),
+                   'context': {'subject': {'repository': 'psf/requests'}, 'source': {'tree_sha256': state['tree_sha256']},
+                               'environment': {'image': task['image_id'], 'scorer_profile_sha256': scorer['profile_sha256']},
+                               'state': {'instance_id': event['instance_id'], 'objective_sha256': task['objective_sha256']},
+                               'policy': {'profile_sha256': profile_hash, 'requires_current_execution': True}},
+                   'actions': [{'name': 'validate_current_source'}]}
+        if receipt is not None:
+            request['execution'] = {'selected_action': 'validate_current_source', 'passed': True,
+                                    'evidence': [{'receipt_path': receipt['receipt_path'], 'receipt_sha256': sha(receipt['receipt_path'])}],
+                                    'output': {'passed': True, 'candidate_tree_sha256': state['tree_sha256']}, 'producer_pid': os.getpid()}
+        return effect(event, stage, request, [sys.executable, profile['world_memory_service']])
+
+    def prepare(index):
+        event = profile['events'][index]
+        directory = CUSTODY / ('case-' + str(index))
+        directory.mkdir()
+        tree = directory / 'accepted_source'
+        R.materialize(task['source_root'], tree, reference)
+        if index:
+            path = tree / 'requests/__init__.py'
+            path.write_bytes(path.read_bytes() + b'\n# Curator source-continuation qualification.\n')
+            path.chmod(0o644)
+        patch = directory / 'accepted.patch'
+        patch.write_bytes(R.cumulative_patch(Path(task['source_root']), tree))
+        patch.chmod(0o444)
+        inv = R.inventory(tree)
+        memory(event, 'propose', tree)
+        request = {'schema': 'ns-curator-candidate-score/v1', 'operation': 'score', 'instance_id': event['instance_id'],
+                   'evaluation_id': 'curator-native-seal-v1-source-' + str(index),
+                   'service_profile_sha256': scorer['profile_sha256'], 'sealed_candidate_patch_path': str(patch),
+                   'candidate_patch_sha256': sha(patch), 'expected_candidate_source_tree_sha256': inv['tree_sha256'],
+                   **{name: task[name] for name in ['base_commit', 'image_id', 'qualification_profile_sha256', 'objective_sha256']}}
+        receipt = effect(event, 'accepted_check', request, [scorer['python'], scorer['entrypoint']])
+        if receipt.get('status') != 'completed' or receipt.get('passed') is not True:
+            raise ValueError('curator positive candidate native grading failed')
+        template = json.loads(Path(task['context_request_template']).read_text())
+        template['repository_root'] = str(tree)
+        template['public_source_paths'] = [x['path'] for x in inv['entries']]
+        request_path = directory / 'context_request.json'
+        dump(request_path, template)
+        run = directory / 'context_run'
+        service = profile['context_service']
+        summary = effect(event, 'accepted_context_prepare',
+                         {'request_path': str(request_path), 'request_sha256': sha(request_path),
+                          'source_tree_sha256': inv['tree_sha256'], 'runtime_profile_sha256': service['runtime_profile_sha256']},
+                         [service['python'], '-B', service['entrypoint'], 'prepare', '--request', str(request_path),
+                          '--profile', service['runtime_profile'], '--run', str(run)], timeout=650)
+        if not summary.get('complete') or not summary['consumer']['all_checks_passed']:
+            raise ValueError('curator accepted-source native context incomplete')
+        context = {'run': str(run), 'request_sha256': summary['request_sha256'],
+                   'freeze_sha256': summary['context_freeze_sha256'], 'source_tree_sha256': inv['tree_sha256'],
+                   'semantic_root_cid': summary['producer']['native_semantic_root_cid'],
+                   'semantic_pack_cid': summary['producer']['semantic_pack_cid']}
+        memory(event, 'record', tree, receipt)
+        result = {'operation': 'publish', 'profile_path': str(profile_path), 'profile_sha256': profile_hash,
+                  'event_id': event['event_id'], 'parent_seal_cid': None, 'accepted_tree_path': str(tree),
+                  'accepted_patch_path': str(patch), 'scorer_receipt_path': receipt['receipt_path'], 'context': context}
+        prepared_cases.append({'event_id': event['event_id'], 'source_tree_sha256': inv['tree_sha256'],
+                               'source_file_count': len(inv['entries']), 'native_designated_total': receipt['designated_total'],
+                               'context_complete': summary['complete']})
+        dump(CUSTODY / 'progress.json', {'prepared': prepared_cases})
+        print(json.dumps({'stage': 'private_candidate_context_prepared', 'ordinal': index, 'provider_calls': 0}), flush=True)
+        return result
+
+    def invoke(request, name, expected_code=0, expected_error=None):
+        directory = CUSTODY / 'operations' / name
+        directory.mkdir(parents=True)
+        dump(directory / 'request.json', request)
+        started = time.perf_counter()
+        with (directory / 'stdout').open('wb') as out, (directory / 'stderr').open('wb') as err:
+            process = subprocess.run([sys.executable, profile['repository_sealing_service']],
+                                     input=C.canonical(request), stdout=out, stderr=err, timeout=240)
+        row = {'operation': name, 'returncode': process.returncode, 'elapsed_seconds': time.perf_counter() - started,
+               'stdout_sha256': sha(directory / 'stdout'), 'stderr_sha256': sha(directory / 'stderr')}
+        if process.returncode != expected_code:
+            dump(directory / 'execution.json', row)
+            raise ValueError('unexpected native sealing process exit for ' + name)
+        if expected_error is not None:
+            if expected_error not in (directory / 'stderr').read_text():
+                raise ValueError('negative failed for unintended reason: ' + name)
+            row['expected_rejection_observed'] = True
+        if process.returncode == 0:
+            response = json.loads((directory / 'stdout').read_text())
+            dump(directory / 'response.json', response)
+            row['fresh_scorer_replay_count'] = len(response['independent_replays'])
+            row['published'] = response.get('published')
+            row['generation'] = response['pointer']['generation']
+        else:
+            response = None
+        native_operations.append(row)
+        dump(directory / 'execution.json', row)
+        return response
+
+    first = prepare(0)
+    replay_root = Path(profile['output_root']) / 'native_repository_sealing/replays'
+    def replay_count(): return len(list(replay_root.glob('*'))) if replay_root.exists() else 0
+    negatives = []
+    for name in ['wrong_tree', 'wrong_receipt', 'source_drift', 'incomplete_effect']:
+        request = dict(first)
+        before = replay_count()
+        restoration = None
+        if name == 'wrong_tree':
+            request['accepted_tree_path'] = task['source_root']
+            expected = 'accepted patch does not represent full resulting source'
+        elif name == 'wrong_receipt':
+            p = CUSTODY / 'negative_receipt.json'
+            fake = json.loads(Path(first['scorer_receipt_path']).read_text())
+            fake['candidate_source_tree_sha256'] = '0' * 64
+            dump(p, fake)
+            request['scorer_receipt_path'] = str(p)
+            expected = 'accepted scorer receipt not source-bound'
+        elif name == 'source_drift':
+            p = Path(first['accepted_tree_path']) / 'requests/__init__.py'
+            restoration = (p, p.read_bytes(), p.stat().st_mode & 0o777)
+            p.write_bytes(p.read_bytes() + b'\n# Deliberate private source drift control.\n')
+            expected = 'accepted patch does not represent full resulting source'
+        else:
+            ledger.db.execute("UPDATE effects SET state='dispatching' WHERE event_id=? AND stage='world_propose'", (first['event_id'],))
+            expected = 'incomplete/changed controller effect'
+        try:
+            invoke(request, 'negative-' + name, 1, expected)
+        finally:
+            if restoration:
+                restoration[0].write_bytes(restoration[1]); restoration[0].chmod(restoration[2])
+            if name == 'incomplete_effect':
+                ledger.db.execute("UPDATE effects SET state='terminal' WHERE event_id=? AND stage='world_propose'", (first['event_id'],))
+        if replay_count() != before:
+            raise ValueError('negative control unexpectedly replayed native grader')
+        negatives.append({'case': name, 'rejected_before_scorer_replay': True})
+    published = invoke(first, 'first-publish')
+    if not published['published'] or published['pointer']['generation'] != 0:
+        raise ValueError('first native publication failed')
+    second = prepare(1)
+    second['parent_seal_cid'] = published['seal_cid']
+    invoke({**second, 'crash_at': 'after_seal_persistence'}, 'second-pre-cas-crash', 94)
+    recovered = invoke({**second, 'operation': 'recover'}, 'second-recover')
+    if not recovered['published'] or not recovered['cas_swapped'] or recovered['pointer']['generation'] != 1:
+        raise ValueError('native recovery did not advance exactly one generation')
+    read = invoke({'operation': 'read', 'profile_path': str(profile_path), 'profile_sha256': profile_hash,
+                   'event_id': profile['events'][2]['event_id'], 'expected_event_id': second['event_id'],
+                   'expected_seal_cid': recovered['seal_cid']}, 'third-read')
+    if read['source_tree_sha256'] != second['context']['source_tree_sha256'] or not read['recursive_native_chain_verified']:
+        raise ValueError('native accepted source read differs')
+    if R.inventory(read['restored_source_path']) != R.inventory(second['accepted_tree_path']):
+        raise ValueError('full restored source inventory differs')
+    crash = json.loads((Path(profile['output_root']) / 'native_repository_sealing/crashes' / (second['event_id'] + '.json')).read_text())
+    replay_calls = sum(row.get('fresh_scorer_replay_count', 0) for row in native_operations) + len(crash['replays'])
+    if replay_calls != 4:
+        raise ValueError('unexpected fresh replay count')
+    summary = {'schema': 'ns-curator-repository-seal-control-result/v1', 'qualified': True,
+               'reference_candidate_scores': 2, 'fresh_publication_recovery_read_scorer_replays': replay_calls,
+               'actual_native_scorer_invocations': 2 + replay_calls, 'provider_calls': 0,
+               'native_context_preparations': 2, 'complete_source_files_each': [x['source_file_count'] for x in prepared_cases],
+               'native_world_service_calls': 4, 'negative_controls': negatives,
+               'actual_crash_exit': 94, 'crash_boundary': crash['boundary'],
+               'native_publications': 2, 'recovery_cas_swapped': True, 'final_generation': 1,
+               'fresh_native_parent_read_and_exact_source_restoration': True,
+               'required_leaves': profile['sealing_required_units'], 'all_leaves_replaced_on_transition': True,
+               'proof_mode': 'integrity_only', 'signed_receipts': False,
+               'adversarial_candidate_oracle_integrity_qualified': False,
+               'profile_sha256': profile_hash, 'freeze_sha256': sha(O / 'freeze.json'),
+               'private_artifact_root': 'curator custody; reference-derived payloads not exported',
+               'operations': native_operations, 'hidden_or_reference_payloads_emitted': False}
+    dump(O / 'summary.json', summary)
+    print(json.dumps({k: v for k, v in summary.items() if k != 'operations'}, sort_keys=True))
+
+if __name__ == '__main__':
+    try:
+        main()
+    except BaseException as exc:
+        CUSTODY.mkdir(parents=True, exist_ok=True, mode=0o700)
+        (CUSTODY / 'exception.txt').write_text(traceback.format_exc())
+        dump(O / 'terminal_failure.json', {'qualified': False, 'exception_type': type(exc).__name__,
+                                         'details_retained_in_custody': True, 'provider_calls': 0})
+        print(json.dumps({'qualified': False, 'exception_type': type(exc).__name__, 'details_retained_in_custody': True, 'provider_calls': 0}))
+        raise SystemExit(1)

@@ -1,0 +1,685 @@
+"""Explicit admitted task bindings for an advisory checked audit suffix.
+
+The immutable artifact carries data, not a live index, capacity reservation or
+budget owner. The supervisor separately checks current proof/index custody.
+The worker joins this data to its existing signed instruction, native semantic
+input and allocated worktree. No source body or proof checker executes here.
+"""
+from __future__ import annotations
+
+import hashlib
+from functools import wraps
+import json
+import os
+from pathlib import Path
+import re
+import stat
+from types import SimpleNamespace
+
+from ..proof.formal_verification_contracts import content_identity
+from ..prompt.prompt_workflow import PromptGoalGraph
+from . import local_planning_admission as local
+from . import router_public_instruction as instructions
+from .code_source_inspection import _relative, _without_metadata
+
+SCHEMA = "supervisor-checked-audit-context@1"
+INCLUSION_SCHEMA = "supervisor-checked-audit-context-inclusion@1"
+DIRECTORY = ".runtime/checked-audit-context"
+MAX_ARTIFACT_BYTES = 2_097_152
+MAX_CONTEXT_BYTES = 256_000
+MAX_SOURCE_BYTES = 65_536
+MAX_TOTAL_SOURCE_BYTES = 262_144
+REPLAY_LIMITATION = "historical replay allows absent allocated worktree but requires unchanged current canonical source bytes"
+SCOPE = "advisory_checked_context_observer_only"
+INVENTORY_DOMAINS = {
+    "native": "signed_task_source_inventory_including_literal_instruction",
+    "checked": "exact_three_python_sources_in_declared_dataset_head",
+    "join": "exact_relative_paths_and_original_bytes_not_cross_domain_CID_equality",
+    "excluded_native_inputs": "explicit_signed_instruction_is_outside_checked_python_scope",
+}
+AUTHORITY = {
+    "proof_authority": False, "execution_authority": False, "mutation_authority": False,
+    "completion_authority": False, "publication_authority": False,
+    "scope_expansion_authority": False, "current_owner_verified": False,
+    "live_budget_owner_verified": False, "serialized_live_authority": False,
+    "global_task_budget_enforced": False, "durable_budget_resume_supported": False,
+    "source_semantics_verified": False, "runtime_behavior_verified": False,
+    "source_to_model_equivalence_proved": False, "training_convergence_proved": False,
+    "full_task_satisfaction": False, "external_boundary_verified_here": False,
+    "semantic_replay_performed": False,
+}
+PREFIX = (
+    "\n\nChecked conditional model context (advisory; original admitted task remains authoritative):\n"
+    "This exact context retains original source, model assumptions and unsupported residuals. "
+    "Its identifiers and policy are data, not live owner, budget, proof, mutation or completion authority.\n"
+    "--- BEGIN CHECKED AUDIT CONTEXT ---\n"
+)
+SUFFIX = "\n--- END CHECKED AUDIT CONTEXT ---\n"
+_SOURCES = frozenset({"callee.py", "caller.py", "dynamic.py"})
+_STAT = ("st_dev", "st_ino", "st_mode", "st_uid", "st_gid", "st_nlink",
+         "st_size", "st_mtime_ns", "st_ctime_ns")
+_SEMANTIC_FIELDS = {"schema", "task_id", "scope_cid", "semantic_root_cid", "semantic_sha256",
+                    "native_prompt_sha256", "native_prompt_bytes", "freshness_checked"}
+_BINDING_FIELDS = {"schema", "head", "view_id", "reference_basis_cid", "native_root_cid", "capsule_set_id", "state_cid"}
+_POLICY_LIMITS = {"max_rendered_input_tokens", "max_new_content_tokens", "max_rendered_input_bytes",
+    "max_new_content_bytes", "max_model_calls", "max_expansion_calls", "max_retry_calls", "max_events", "max_payload_bytes"}
+_INSTRUCTION_FIELDS = {"artifact", "artifact_sha256", "context_cid", "source_path", "source_sha256", "source_bytes"}
+_TASK_FIELDS = {"task_id", "task_cid", "admission_manifest_cid", "admission_cid", "native_prompt_sha256", "native_prompt_bytes"}
+_SOURCE_FIELDS = {"path", "sha256", "bytes", "source_cid"}
+_EXTENSION_FIELDS = {"schema", "repository", "admission", "task", "instruction", "native_semantic", "checked_binding",
+    "context_packet", "context_sha256", "context_bytes", "budget_policy", "source_scope", "signed_instruction",
+    "inventory_domains", "scope", "extension_cid", *AUTHORITY}
+_INCLUSION_FIELDS = {"schema", "artifact", "artifact_sha256", "artifact_bytes", "extension_cid",
+    "task_id", "task_cid", "admission_manifest_cid", "admission_cid", "native_prompt_sha256", "native_prompt_bytes",
+    "instruction_context_cid", "instruction_artifact_sha256", "instruction_source_path", "instruction_source_sha256",
+    "instruction_source_bytes", "checked_binding", "native_semantic", "budget_policy", "context_sha256", "context_bytes",
+    "suffix_sha256", "suffix_bytes", "source_scope", "signed_instruction", "worker_binding", "inventory_domains", "scope",
+    "manifest_signature_verified", "source_inventory_join_verified", "packet_bytes_bound", *AUTHORITY}
+
+
+class CheckedAuditContextError(ValueError):
+    """Bounded identity, data or retained public custody disagrees."""
+
+
+def _need(condition, message):
+    if not condition:
+        raise CheckedAuditContextError(message)
+
+
+def _bounded_errors(function):
+    @wraps(function)
+    def guarded(*args, **kwargs):
+        try:
+            return function(*args, **kwargs)
+        except CheckedAuditContextError:
+            raise
+        except (KeyError, TypeError, AttributeError, IndexError, UnicodeError, RecursionError, OSError) as exc:
+            raise CheckedAuditContextError("checked data or public custody is unavailable") from exc
+    return guarded
+
+
+def _wire(value):
+    nodes = 0
+    def check(item, depth=0):
+        nonlocal nodes
+        nodes += 1
+        _need(depth <= 48 and nodes <= 200_000, "bounded checked context JSON required")
+        if type(item) is dict:
+            _need(all(type(key) is str for key in item), "exact checked context keys required")
+            for child in item.values(): check(child, depth + 1)
+        elif type(item) is list:
+            for child in item: check(child, depth + 1)
+        else:
+            _need(item is None or type(item) in {str, int, bool}, "exact finite checked context values required")
+    check(value)
+    try:
+        raw = json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False).encode("utf-8")
+    except (ValueError, TypeError, UnicodeError, RecursionError) as exc:
+        raise CheckedAuditContextError("canonical UTF-8 checked context required") from exc
+    _need(len(raw) <= MAX_ARTIFACT_BYTES, "checked artifact byte bound exceeded")
+    return raw
+
+
+def _pairs(pairs):
+    result = {}
+    for key, value in pairs:
+        _need(key not in result, "duplicate checked context field")
+        result[key] = value
+    return result
+
+
+def _parse(raw, *, canonical=True):
+    _need(type(raw) is bytes and 0 < len(raw) <= MAX_ARTIFACT_BYTES, "bounded complete checked JSON required")
+    try:
+        value = json.loads(raw, object_pairs_hook=_pairs)
+    except (ValueError, UnicodeError, RecursionError) as exc:
+        raise CheckedAuditContextError("complete checked context JSON required") from exc
+    encoded = _wire(value)
+    _need(not canonical or encoded == raw, "exact canonical checked context required")
+    return value
+
+
+def _sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def _digest(value):
+    _need(type(value) is str and re.fullmatch(r"[0-9a-f]{64}", value) is not None, "exact SHA-256 required")
+
+
+def _int(value, minimum=0, maximum=MAX_ARTIFACT_BYTES):
+    _need(type(value) is int and minimum <= value <= maximum, "bounded exact checked integer required")
+
+
+def _text(value, maximum=4096):
+    _need(type(value) is str and 0 < len(value.encode("utf-8")) <= maximum and "\0" not in value,
+          "bounded exact checked text required")
+
+
+def _path(value):
+    _need(type(value) is type(Path()) and value.is_absolute() and value.resolve(strict=True) == value,
+          "exact canonical existing checked path required")
+    return value
+
+
+def _historical_workspace(value):
+    _need(type(value) is type(Path()) and value.is_absolute() and ".." not in value.parts
+        and value.resolve() == value, "canonical recorded allocated workspace required")
+    return value
+
+
+def _cid(value):
+    from ipfs_datasets_py.logic.software_contracts.content import validate_cid
+    validate_cid(value, codecs={"dag-json"})
+
+
+def _binding(value):
+    from ipfs_datasets_py.duckdb_control.codebase_catalog import CodebaseHead
+    _need(type(value) is dict and set(value) == _BINDING_FIELDS
+        and value["schema"] == "terminal-semantic-context-budget-binding@1", "closed checked binding required")
+    _int(value["head"]["generation"], 1, 2**63 - 1)
+    head = CodebaseHead.from_dict(value["head"])
+    _need(_wire(head.to_dict()) == _wire(value["head"]), "exact complete checked head required")
+    for key in _BINDING_FIELDS - {"schema", "head"}: _cid(value[key])
+    return json.loads(_wire(value))
+
+
+def _policy(value):
+    _need(type(value) is dict and set(value) == {"schema", *_POLICY_LIMITS}
+        and value["schema"] == "terminal-semantic-context-budget-policy@1", "closed checked budget policy required")
+    for key in _POLICY_LIMITS:
+        upper = 64 if key.endswith("calls") or key == "max_events" else 1_048_576 if key == "max_payload_bytes" else 16_777_216
+        _int(value[key], 0, upper)
+    return json.loads(_wire(value))
+
+
+def _boundary(value):
+    fields = {"schema", "container_id", "image_id", "namespaces", "owner_uid", "worker_uid", "purpose", "manifest_sha256", "completion_authority"}
+    _need(type(value) is dict and set(value) == fields and value["schema"] == "supervisor-container-worker-boundary@1"
+        and value["purpose"] == "coding" and value["completion_authority"] is False, "closed coding boundary data required")
+    for key in ("owner_uid", "worker_uid"): _int(value[key], 1, 2**31 - 1)
+    _need(value["owner_uid"] != value["worker_uid"], "separate declared worker identity required")
+    _need(re.fullmatch(r"[0-9a-f]{64}", value["container_id"]) is not None
+        and re.fullmatch(r"sha256:[0-9a-f]{64}", value["image_id"]) is not None, "exact container identities required")
+    _digest(value["manifest_sha256"])
+    _need(type(value["namespaces"]) is dict and set(value["namespaces"]) == {"pid", "mnt", "net"}, "complete boundary namespace data required")
+    for key, item in value["namespaces"].items():
+        _need(type(item) is str and re.fullmatch(re.escape(key) + r":\[[0-9]+\]", item) is not None, "exact namespace witness required")
+    return json.loads(_wire(value))
+
+
+def _semantic(value, task_id, native_prompt):
+    _need(type(value) is dict and set(value) == _SEMANTIC_FIELDS
+        and value["schema"] == "semantic-router-source-verification@1"
+        and value["freshness_checked"] is True and value["task_id"] == task_id
+        and value["native_prompt_sha256"] == _sha(native_prompt.encode())
+        and type(value["native_prompt_bytes"]) is int and value["native_prompt_bytes"] == len(native_prompt.encode()),
+        "native semantic input binding differs")
+    for key in ("semantic_sha256", "native_prompt_sha256"): _digest(value[key])
+    for key in ("scope_cid", "semantic_root_cid"): _text(value[key])
+    return json.loads(_wire(value))
+
+
+def _source_scope(value):
+    from ipfs_datasets_py.logic.software_contracts.content import validate_cid
+    _need(type(value) is list and len(value) == 3, "exact three-source checked scope required")
+    for row in value:
+        _need(type(row) is dict and set(row) == _SOURCE_FIELDS, "closed original source binding required")
+        local._path(row["path"]); _digest(row["sha256"]); _int(row["bytes"], 1, MAX_SOURCE_BYTES)
+        validate_cid(row["source_cid"], codecs={"raw"})
+    _need([row["path"] for row in value] == sorted(_SOURCES), "complete ordered checked source population required")
+    _need(sum(row["bytes"] for row in value) <= MAX_TOTAL_SOURCE_BYTES, "whole checked source bound exceeded")
+
+
+def _packet(text, binding, instruction_raw):
+    from ipfs_datasets_py.logic.software_contracts.content import cid_for_bytes, cid_for_structured
+    _need(type(text) is str and 0 < len(text.encode()) <= MAX_CONTEXT_BYTES, "bounded exact checked packet required")
+    packet = _parse(text.encode())
+    packet_flags = {"caller_record_origin_verified", "completion_authority", "context_sufficiency_proved", "convergence_proved",
+        "current_owner_verified", "execution_authority", "full_task_satisfaction", "mutation_authority", "native_governor_qualified",
+        "network_isolation_enforced", "omission_authority", "original_task_budget_satisfied", "production_admitted",
+        "production_context_pack_qualified", "proof_authority", "proof_transfer_to_display_or_dictionary", "public_terminal_bench_task_satisfied",
+        "review_task_completion_proved", "runtime_behavior_verified", "source_body_executed", "source_origin_verified",
+        "source_semantics_verified", "training_executed", "worker_launched"}
+    _need(type(packet) is dict and set(packet) == {"schema", "representation", "head", "audit_view_id", "scope", "provider_calls", "training_steps", "payload", *packet_flags}
+        and packet["schema"] == "terminal-semantic-audit-context-packet@1" and packet["representation"] == "view"
+        and packet["scope"] == "representation_only_unchanged_native_semantic_planning_basis"
+        and _wire(packet["head"]) == _wire(binding["head"]) and packet["audit_view_id"] == binding["view_id"]
+        and all(packet[key] is False for key in packet_flags)
+        and type(packet["provider_calls"]) is int and packet["provider_calls"] == 0
+        and type(packet["training_steps"]) is int and packet["training_steps"] == 0
+        and type(packet["payload"]) is dict and set(packet["payload"]) == {"model_view"}, "closed advisory view packet required")
+    view = packet["payload"]["model_view"]
+    view_flags = {"completion_authority", "convergence_proved", "current_owner_verified", "database_accessed",
+        "execution_authority", "full_task_satisfaction", "mutation_authority", "omission_authority", "production_admitted",
+        "proof_authority", "proof_transfer", "provider_savings_measured", "runtime_behavior_verified", "source_body_executed",
+        "source_omission_authority", "source_origin_verified", "source_semantics_verified"}
+    view_required = {"all_native_capsule_facts_direct", "all_native_dependencies_direct", "all_native_limitations_direct",
+        "all_original_source_bytes_direct", "checked_call_context_unchanged", "host_complete_native_replay_required", "snapshot_artifact_only_deferral"}
+    view_fields = {"schema", "head", "view_id", "native_root_cid", "capsule_set_id", "state_cid", "native_view", "original_sources",
+        "checked_call_context", "checked_call_context_bytes", "checked_call_context_sha256", "code_views", "code_views_cid",
+        "expansion_directory", "guidance", "limits", "projection_scope", "prover_invocations", "provider_calls", "training_steps", *view_flags, *view_required}
+    _need(type(view) is dict and set(view) == view_fields and view.get("schema") == "terminal-semantic-audit-view@1"
+        and cid_for_structured({k: v for k, v in view.items() if k != "view_id"}) == view.get("view_id") == binding["view_id"],
+        "complete checked view identity differs")
+    for key in ("head", "native_root_cid", "capsule_set_id", "state_cid"):
+        _need(_wire(view[key]) == _wire(binding[key]), "complete checked view binding differs")
+    for key in view_required:
+        _need(view.get(key) is True, "required original checked context cannot be omitted")
+    for key in view_flags:
+        _need(view.get(key) is False, "checked view cannot promote authority")
+    for key in ("prover_invocations", "provider_calls", "training_steps"):
+        _need(type(view[key]) is int and view[key] == 0, "checked view cannot claim checker, provider or training jobs")
+    directory = view["expansion_directory"]
+    reference = directory["reference_basis"]
+    _need(cid_for_structured(reference) == directory["reference_basis_cid"] == binding["reference_basis_cid"],
+        "complete reference basis differs")
+    for key, other in (("head", "head"), ("native_root_cid", "native_root_cid"), ("capsule_set_id", "capsule_set_id"), ("repository_state_cid", "state_cid")):
+        _need(_wire(reference[key]) == _wire(binding[other]), "reference basis head or source state differs")
+    rows = view["original_sources"]
+    _need(type(rows) is list and [row["path"] for row in rows] == sorted(_SOURCES), "all original checked sources required")
+    sources = []
+    for row in rows:
+        raw = row["text"].encode("utf-8")
+        _need(row["raw_source_required"] is True and row["proof_basis"] == "original_source_bytes_only"
+            and row["encoding"] == "utf-8" and type(row["bytes"]) is int and row["bytes"] == len(raw)
+            and row["sha256"] == _sha(raw) and row["source_cid"] == cid_for_bytes(raw)
+            and row["ast_revision_id"] == binding["head"]["ast_revision_id"], "exact original checked source bytes differ")
+        sources.append({key: row[key] for key in _SOURCE_FIELDS})
+    _source_scope(sources)
+    _need(reference["original_sources_cid"] == cid_for_structured(rows), "original source reference identity differs")
+    context_text = view["checked_call_context"]
+    _need(type(context_text) is str and len(context_text.encode()) <= MAX_CONTEXT_BYTES
+        and view["checked_call_context_sha256"] == _sha(context_text.encode())
+        and type(view["checked_call_context_bytes"]) is int and view["checked_call_context_bytes"] == len(context_text.encode())
+        and reference["checked_call_context_sha256"] == _sha(context_text.encode()), "whole checked call context differs")
+    context = _parse(context_text.encode())
+    _need(type(context) is dict and set(context) == {"schema", "head", "representation", "context", "capsule_id", "user_prompt", "review_forecast_context"}
+        and context["schema"] == "terminal-call-review-context-packet@1" and context["representation"] == "capsule"
+        and _wire(context["head"]) == _wire(binding["head"]) and context["user_prompt"].encode() == instruction_raw
+        and set(context["context"]) == {"capsule"}, "literal original instruction must match checked intent")
+    capsule = context["context"]["capsule"]
+    _need(capsule["schema"] == "terminal-call-proof-capsule@1"
+        and cid_for_structured({k: v for k, v in capsule.items() if k != "capsule_id"}) == capsule["capsule_id"] == context["capsule_id"]
+        and _wire(capsule["head"]) == _wire(binding["head"]), "checked caller capsule identity differs")
+    capsule_flags = {"callee_record_origin_verified", "caller_record_origin_verified", "catalog_custody_verified", "checker_reinvoked",
+        "cold_validation_performed", "completion_authority", "cpython_equivalence_proved", "current_head_verified", "execution_authority",
+        "formal_proof_independently_validated", "full_task_satisfaction", "live_admission_granted", "loaded_module_code_attested",
+        "mutation_authority", "network_isolation_enforced", "original_task_budget_qualified", "production_activated", "proof_authority",
+        "python_import_resolution_proved", "query_origin_verified", "runtime_behavior_verified", "source_body_executed",
+        "source_equivalence_proved", "source_origin_proved", "source_parser_correctness_proved", "source_semantics_verified",
+        "token_savings_measured", "training_convergence_proved", "transitive_dependency_closure_attested", "whole_program_semantics_verified"}
+    capsule_positive = {"conditional_model_claim", "native_call_opacity_preserved", "opaque_call_model_assumption"}
+    _need(set(capsule) == {"schema", "capsule_id", "head", "intent", "model", "assumptions", "checker_dependencies", "coverage", "residuals",
+        "expansion", "producer", "scope", "source_closure", "new_prover_invocations", "provider_calls", "training_steps", *capsule_flags, *capsule_positive},
+        "closed full caller capsule required")
+    for key in capsule_flags:
+        _need(capsule.get(key) is False, "caller capsule cannot promote proof or runtime authority")
+    for key in capsule_positive:
+        _need(capsule[key] is True, "conditional caller model assumptions must remain explicit")
+    for key in ("new_prover_invocations", "provider_calls", "training_steps"):
+        _need(type(capsule[key]) is int and capsule[key] == 0, "caller capsule cannot claim native jobs")
+    intent = capsule["intent"]
+    prompt_pin = {"encoding": "utf-8", "bytes": len(instruction_raw), "characters": len(instruction_raw.decode()), "sha256": _sha(instruction_raw)}
+    _need(_wire(intent["prompt"]) == _wire(prompt_pin), "whole admitted instruction digest differs from checked intent")
+    from ipfs_datasets_py.logic.software_contracts.codebase_integer_profile import IntegerOffsetContract
+    contract = IntegerOffsetContract.from_dict(intent["caller_contract"])
+    _need(_wire(contract.to_dict()) == _wire(intent["caller_contract"]), "exact conditional caller contract required")
+    offset = contract.offset
+    sentence = f"Under closed-caller-model@1, {contract.path}::{contract.function_name}({contract.parameter}) must return {contract.parameter} {'+' if offset >= 0 else '-'} {abs(offset)}."
+    _need(sentence.encode() == instruction_raw and intent["predicate"] == "closed_caller_model_integer_offset"
+        and intent["interpretation_scope"] == "exact_closed_CNL_conditional_caller_model_only"
+        and _wire(intent["mathematical_domain"]) == _wire({"kind": "unbounded_mathematical_integer",
+            "python_input_assumption": "exact_builtin_int_excluding_bool_and_subclasses", "runtime_equivalence_proved": False}),
+        "exact whole conditional caller instruction required")
+    _need(_wire(capsule["model"]["caller_contract"]) == _wire(intent["caller_contract"])
+        and type(capsule["model"]["requested_offset"]) is int and capsule["model"]["requested_offset"] == offset,
+        "caller model must retain the exact admitted mathematical target")
+    closure = capsule["source_closure"]
+    _need(closure["paths"] == sorted(_SOURCES) and closure["repository_id"] == binding["head"]["repository_id"]
+        and _wire(closure["sources"]) == _wire([{k: row[k] for k in ("path", "sha256", "bytes")}for row in sources]),
+        "checked source closure differs from visible original bytes")
+    _need(type(capsule["assumptions"]) is dict and set(capsule["assumptions"]) == {"callee_compilation", "callee_translation", "caller"}
+        and all(type(rows) is list and bool(rows) for rows in capsule["assumptions"].values())
+        and type(capsule["residuals"]) is list and any(row.get("path") == "dynamic.py" and row.get("source_sha256") == sources[2]["sha256"] for row in capsule["residuals"])
+        and bool(capsule["checker_dependencies"]) and bool(capsule["expansion"]), "conditional assumptions, dependencies and unsupported residuals must remain")
+    retained = view["native_view"]["retained_fields"]
+    _need(type(retained["capsules"]) is list and len(retained["capsules"]) == 6
+        and bool(retained["analysis_limitations"]) and "semantic_links" in retained and "environment_bindings" in retained,
+        "all native facts and limitations must remain directly visible")
+    return sources
+
+
+class _RetainedFile:
+    def __init__(self, root, name, maximum, *, readonly=False, owner_uid=None, allocated_input=False):
+        relative = _relative(name)
+        self.path, self.maximum, self.fds, self.parents, self.closed = root / str(relative), maximum, [], [], False
+        try:
+            current = root
+            fd = os.open(root, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+            self.fds.append(fd); self.parents.append((current, os.fstat(fd)))
+            for part in relative.parts[:-1]:
+                current /= part
+                fd = os.open(part, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=fd)
+                self.fds.append(fd); self.parents.append((current, os.fstat(fd)))
+            write_mask = 0o002 if allocated_input else 0o022
+            for _, info in self.parents:
+                read_mask = 0o050 if allocated_input else 0o005
+                _need(stat.S_ISDIR(info.st_mode) and not info.st_mode & write_mask and info.st_mode & read_mask == read_mask,
+                    "protected worker-readable checked parent required")
+                _need(owner_uid is None or info.st_uid in {0, owner_uid}, "checked parent belongs to another owner")
+            self.fd = os.open(relative.name, os.O_RDONLY | os.O_NONBLOCK | os.O_NOFOLLOW, dir_fd=fd)
+            self.fds.append(self.fd); self.info = os.fstat(self.fd)
+            _need(stat.S_ISREG(self.info.st_mode) and self.info.st_nlink == 1 and 0 < self.info.st_size <= maximum
+                and not self.info.st_mode & write_mask and (allocated_input or bool(self.info.st_mode & 0o004)),
+                "bounded protected single-link checked file required")
+            _need(not readonly or not self.info.st_mode & 0o222, "checked artifact must be immutable")
+            _need(owner_uid is None or self.info.st_uid == owner_uid, "checked artifact belongs to another owner")
+            self.raw = os.pread(self.fd, maximum + 1, 0)
+            self.verify()
+        except BaseException:
+            self.close(); raise
+
+    def verify(self):
+        _need(not self.closed, "checked custody is closed")
+        for (path, before), fd in zip(self.parents, self.fds):
+            _need(tuple(getattr(before, k) for k in _STAT) == tuple(getattr(os.fstat(fd), k) for k in _STAT)
+                == tuple(getattr(path.lstat(), k) for k in _STAT) and path.resolve(strict=True) == path,
+                "checked parent custody changed")
+        expected = tuple(getattr(self.info, k) for k in _STAT)
+        _need(expected == tuple(getattr(os.fstat(self.fd), k) for k in _STAT)
+            == tuple(getattr(self.path.lstat(), k) for k in _STAT)
+            and self.path.resolve(strict=True) == self.path and os.pread(self.fd, self.maximum + 1, 0) == self.raw,
+            "checked file custody changed")
+        fresh = os.open(self.path.name, os.O_RDONLY | os.O_NONBLOCK | os.O_NOFOLLOW, dir_fd=self.fds[len(self.parents) - 1])
+        try:
+            _need(expected == tuple(getattr(os.fstat(fresh), k) for k in _STAT)
+                and os.pread(fresh, self.maximum + 1, 0) == self.raw
+                and expected == tuple(getattr(os.fstat(fresh), k) for k in _STAT)
+                == tuple(getattr(os.fstat(self.fd), k) for k in _STAT)
+                == tuple(getattr(self.path.lstat(), k) for k in _STAT), "fresh checked file custody changed")
+        finally:
+            os.close(fresh)
+        for (path, before), fd in zip(self.parents, self.fds):
+            _need(tuple(getattr(before, k) for k in _STAT) == tuple(getattr(os.fstat(fd), k) for k in _STAT)
+                == tuple(getattr(path.lstat(), k) for k in _STAT), "checked parent custody changed after read")
+
+    def close(self):
+        if not self.closed:
+            self.closed = True
+            for fd in reversed(self.fds): os.close(fd)
+            self.fds.clear()
+
+
+class _Custody:
+    def __init__(self): self.files, self.closed = [], False
+    def read(self, root, name, maximum, **kwargs):
+        item = _RetainedFile(root, name, maximum, **kwargs); self.files.append(item); return item.raw
+    def __call__(self):
+        _need(not self.closed, "checked custody is closed")
+        for item in self.files: item.verify()
+    def close(self):
+        if not self.closed:
+            self.closed = True
+            for item in reversed(self.files): item.close()
+
+
+def _instruction(root, descriptor, guard, *, owner_uid=None):
+    required = {"artifact", "sha256", "task_cid", "context_cid", "manifest_cid", "source_path", "source_sha256", "source_bytes", "completion_authority", "scope_expansion_authority"}
+    _need(type(descriptor) is dict and required <= set(descriptor)
+        and descriptor["completion_authority"] is descriptor["scope_expansion_authority"] is False,
+        "explicit native instruction descriptor required")
+    artifact = _path(Path(descriptor["artifact"]))
+    _need(artifact.parent == root / instructions.DIRECTORY, "instruction artifact belongs to another repository")
+    raw = guard.read(root, artifact.relative_to(root).as_posix(), MAX_ARTIFACT_BYTES, readonly=True, owner_uid=owner_uid)
+    _need(_sha(raw) == descriptor["sha256"], "native instruction artifact digest differs")
+    public = _parse(raw, canonical=False)
+    manifest = instructions._selection(public)
+    _need(public["repository"] == str(root) and public["task_cid"] == descriptor["task_cid"]
+        and public["context_cid"] == descriptor["context_cid"]
+        and public["manifest_cid"] == descriptor["manifest_cid"]
+        and content_identity({k: v for k, v in public.items() if k != "context_cid"}) == public["context_cid"],
+        "native instruction descriptor identity differs")
+    for key in ("source_path", "source_sha256", "source_bytes"):
+        _need(_wire(public[key]) == _wire(descriptor[key]), "native instruction source binding differs")
+    binding = {"artifact": str(artifact), "artifact_sha256": descriptor["sha256"], "context_cid": public["context_cid"],
+        **{k: public[k] for k in ("source_path", "source_sha256", "source_bytes")}}
+    return public, manifest, binding
+
+
+def _admission(admission, public, manifest, task_cid, native_prompt, instruction_raw):
+    _need(type(admission) is dict and set(admission) in ({"manifest", "graph", "receipt"}, {"manifest", "graph", "receipt", "requirement_bindings"})
+        and _wire(admission["manifest"]) == _wire(public["manifest"]), "exact signed admission join required")
+    graph = PromptGoalGraph.from_dict(admission["graph"])
+    profile = SimpleNamespace(identity_did=public["owner_identity"], profile_id=public["owner_profile_id"],
+        content_id=manifest["profile_content_id"], baseline_commit=manifest["baseline_commit"])
+    signed = local._verify_signature(admission["receipt"], profile)
+    expected = local._plain(local._planning_payload(graph, admission["manifest"], manifest, profile, manifest["sources"],
+        admission.get("requirement_bindings"), requirement_source_text=instruction_raw.decode()))
+    _need(_wire(signed) == _wire(expected), "signed admission graph or planning receipt differs")
+    tasks = [task for task in graph.tasks if task.task_cid == task_cid]
+    _need(len(tasks) == 1 and tasks[0].task_key == public["task_id"], "checked extension requires exact admitted task")
+    _need(type(native_prompt) is str and 0 < len(native_prompt.encode()) <= MAX_CONTEXT_BYTES, "bounded native task prompt required")
+    from .compact_code_retrieval import _native
+    capsule, _ = _native(native_prompt)
+    _need(capsule["objective_id"] == tasks[0].task_key, "native prompt belongs to another task")
+    return tasks[0]
+
+
+def _join_sources(root, workspace, guard, manifest, task, instruction, source_scope):
+    required = {row["path"] for row in source_scope} | {instruction["source_path"]}
+    _need(required <= set(task.scope_paths) and required <= set(manifest["sources"])
+        and instruction["source_path"] not in _SOURCES, "checked sources and separate instruction require signed task scope")
+    source_rows = [*source_scope, {"path": instruction["source_path"], "sha256": instruction["source_sha256"], "bytes": instruction["source_bytes"]}]
+    for row in source_rows:
+        selected = manifest["sources"][row["path"]]
+        _need(selected["sha256"] == row["sha256"], "checked source differs from signed native inventory")
+        for location in (root,) if workspace is None else (root, workspace):
+            # The existing boundary deliberately grants group writes inside
+            # the allocated candidate. Preserve its exact original witnesses;
+            # only canonical inputs and immutable artifacts require no group
+            # writes. This never enlarges the admitted worktree/output scope.
+            raw = guard.read(location, row["path"], MAX_SOURCE_BYTES, allocated_input=location != root)
+            _need(_sha(raw) == row["sha256"] and len(raw) == row["bytes"], "original checked or instruction source bytes differ")
+
+
+def _directory(root):
+    current = root
+    for part in Path(DIRECTORY).parts:
+        current /= part
+        try: current.mkdir(mode=0o755)
+        except FileExistsError: pass
+        info = current.lstat()
+        _need(stat.S_ISDIR(info.st_mode) and current.resolve(strict=True) == current
+            and info.st_uid == os.geteuid() and not info.st_mode & 0o022 and info.st_mode & 0o005 == 0o005,
+            "owner-controlled worker-readable checked storage required")
+    return current
+
+
+@_without_metadata
+@_bounded_errors
+def prepare_checked_context_extension(*, repository, admission, task_cid, native_prompt,
+        public_instruction, context_packet, checked_binding, budget_policy):
+    root = _path(repository)
+    # Native typed graph serializers retain tuples before their JSON boundary.
+    admission = local._plain(admission)
+    verified = local.verify_local_benchmark_admission(admission, initial=True)
+    _need(str(root) == verified["manifest"]["repository"], "checked context requires the admitted repository")
+    binding, policy = _binding(checked_binding), _policy(budget_policy)
+    parent = _directory(root)
+    guard = _Custody()
+    try:
+        public, manifest, instruction = _instruction(root, public_instruction, guard, owner_uid=os.geteuid())
+        _need(public["task_cid"] == task_cid, "instruction belongs to another admitted task")
+        literal = guard.read(root, instruction["source_path"], MAX_SOURCE_BYTES)
+        task = _admission(admission, public, manifest, task_cid, native_prompt, literal)
+        sources = _packet(context_packet, binding, literal)
+        _join_sources(root, None, guard, manifest, task, instruction, sources)
+        from .semantic_router_translation import encode_semantic_router_prompt
+        semantic = encode_semantic_router_prompt(prompt=native_prompt, repository=root).receipt
+        semantic = _semantic({"schema": "semantic-router-source-verification@1", **{k: semantic[k] for k in _SEMANTIC_FIELDS - {"schema"}}}, task.task_key, native_prompt)
+        task_binding = {"task_id": task.task_key, "task_cid": task_cid,
+            "admission_manifest_cid": content_identity(admission["manifest"]), "admission_cid": content_identity(admission),
+            "native_prompt_sha256": _sha(native_prompt.encode()), "native_prompt_bytes": len(native_prompt.encode())}
+        payload = {"schema": SCHEMA, "repository": str(root), "admission": admission,
+            "task": task_binding, "instruction": instruction, "native_semantic": semantic,
+            "checked_binding": binding, "context_packet": context_packet, "context_sha256": _sha(context_packet.encode()),
+            "context_bytes": len(context_packet.encode()), "budget_policy": policy, "source_scope": sources,
+            "signed_instruction": {"path": instruction["source_path"], "sha256": instruction["source_sha256"], "bytes": instruction["source_bytes"]},
+            "inventory_domains": INVENTORY_DOMAINS, "scope": SCOPE, **AUTHORITY}
+        payload["extension_cid"] = content_identity(payload)
+        raw = _wire(payload); artifact = parent / (_sha(raw) + ".json")
+        guard()
+        try:
+            with artifact.open("xb") as stream:
+                stream.write(raw); stream.flush(); os.fchmod(stream.fileno(), 0o444); os.fsync(stream.fileno())
+        except FileExistsError:
+            retained = _RetainedFile(root, artifact.relative_to(root).as_posix(), MAX_ARTIFACT_BYTES, readonly=True, owner_uid=os.geteuid())
+            try: _need(retained.raw == raw, "existing immutable checked artifact differs")
+            finally: retained.close()
+        guard()
+        return {"schema": "supervisor-checked-audit-context-descriptor@1", "artifact": str(artifact), "sha256": _sha(raw),
+            "bytes": len(raw), "extension_cid": payload["extension_cid"], "task_cid": task_cid,
+            "context_sha256": payload["context_sha256"], "context_bytes": payload["context_bytes"], **AUTHORITY}
+    finally:
+        guard.close()
+
+
+def _load(*, artifact, expected_sha256, task_cid, native_prompt,
+        instruction_receipt, semantic_verification, workspace, boundary, repository, historical):
+    root = _path(repository)
+    workspace = _historical_workspace(workspace) if historical else _path(workspace)
+    _need(root != workspace, "checked context requires a separate allocated worktree")
+    boundary = _boundary(boundary); _digest(expected_sha256)
+    artifact = _path(artifact)
+    _need(artifact.parent == root / DIRECTORY, "checked artifact belongs to another repository")
+    guard = _Custody()
+    try:
+        raw = guard.read(root, artifact.relative_to(root).as_posix(), MAX_ARTIFACT_BYTES, readonly=True, owner_uid=boundary["owner_uid"])
+        _need(_sha(raw) == expected_sha256, "checked artifact digest differs")
+        payload = _parse(raw)
+        _need(type(payload) is dict and set(payload) == _EXTENSION_FIELDS and payload["schema"] == SCHEMA
+            and payload["scope"] == SCOPE and _wire(payload["inventory_domains"]) == _wire(INVENTORY_DOMAINS)
+            and all(payload[key] is False for key in AUTHORITY)
+            and content_identity({k: v for k, v in payload.items() if k != "extension_cid"}) == payload["extension_cid"]
+            and payload["repository"] == str(root), "closed checked artifact identity or authority differs")
+        binding, policy = _binding(payload["checked_binding"]), _policy(payload["budget_policy"])
+        instruction = payload["instruction"]
+        _need(type(instruction) is dict and set(instruction) == _INSTRUCTION_FIELDS, "closed native instruction binding required")
+        descriptor = {"artifact": instruction["artifact"], "sha256": instruction["artifact_sha256"],
+            "task_cid": task_cid, "context_cid": instruction["context_cid"],
+            "manifest_cid": payload["task"]["admission_manifest_cid"],
+            **{k: instruction[k] for k in ("source_path", "source_sha256", "source_bytes")},
+            "completion_authority": False, "scope_expansion_authority": False}
+        public, manifest, actual_instruction = _instruction(root, descriptor, guard, owner_uid=boundary["owner_uid"])
+        _need(_wire(actual_instruction) == _wire(instruction), "original instruction declaration differs")
+        literal = guard.read(root, instruction["source_path"], MAX_SOURCE_BYTES)
+        task = _admission(payload["admission"], public, manifest, task_cid, native_prompt, literal)
+        task_binding = {"task_id": task.task_key, "task_cid": task_cid,
+            "admission_manifest_cid": content_identity(payload["admission"]["manifest"]), "admission_cid": content_identity(payload["admission"]),
+            "native_prompt_sha256": _sha(native_prompt.encode()), "native_prompt_bytes": len(native_prompt.encode())}
+        _need(_wire(task_binding) == _wire(payload["task"]), "complete original native task binding differs")
+        semantic = _semantic(semantic_verification, task.task_key, native_prompt)
+        _need(_wire(semantic) == _wire(payload["native_semantic"]), "selected native semantic verification differs")
+        _, actual_receipt = instructions.load_public_instruction(artifact=Path(instruction["artifact"]),
+            expected_sha256=instruction["artifact_sha256"], task_cid=task_cid, prompt=native_prompt,
+            workspace=None if historical else workspace, repository=root,
+            require_current_source=not historical, requirements_transport="expanded")
+        if historical:
+            replay_flags = {"source_freshness_verified", "historical_replay"}
+            _need(instruction_receipt.get("source_freshness_verified") is True
+                and instruction_receipt.get("historical_replay") is False
+                and _wire({k: v for k, v in actual_receipt.items() if k not in replay_flags})
+                == _wire({k: v for k, v in instruction_receipt.items() if k not in replay_flags}),
+                "recorded native instruction inclusion differs from historical replay")
+        else:
+            _need(_wire(actual_receipt) == _wire(instruction_receipt), "exact native instruction inclusion differs")
+        sources = _packet(payload["context_packet"], binding, literal)
+        _need(_wire(sources) == _wire(payload["source_scope"]), "complete checked source declaration differs")
+        _join_sources(root, None if historical else workspace, guard, manifest, task, instruction, sources)
+        _need(_wire(payload["signed_instruction"]) == _wire({"path": instruction["source_path"], "sha256": instruction["source_sha256"], "bytes": instruction["source_bytes"]}),
+            "separate signed instruction inventory differs")
+        text = payload["context_packet"]
+        _need(type(payload["context_bytes"]) is int and payload["context_bytes"] == len(text.encode())
+            and payload["context_sha256"] == _sha(text.encode()), "whole checked packet pin differs")
+        suffix = PREFIX + text + SUFFIX
+        receipt = {"schema": INCLUSION_SCHEMA, "artifact": str(artifact), "artifact_sha256": expected_sha256,
+            "artifact_bytes": len(raw), "extension_cid": payload["extension_cid"], **task_binding,
+            "instruction_context_cid": instruction["context_cid"], "instruction_artifact_sha256": instruction["artifact_sha256"],
+            "instruction_source_path": instruction["source_path"], "instruction_source_sha256": instruction["source_sha256"],
+            "instruction_source_bytes": instruction["source_bytes"], "checked_binding": binding, "native_semantic": semantic,
+            "budget_policy": policy, "context_sha256": payload["context_sha256"], "context_bytes": payload["context_bytes"],
+            "suffix_sha256": _sha(suffix.encode()), "suffix_bytes": len(suffix.encode()), "source_scope": sources,
+            "signed_instruction": payload["signed_instruction"], "worker_binding": {"workspace": str(workspace), "boundary": boundary},
+            "inventory_domains": INVENTORY_DOMAINS, "scope": SCOPE, "manifest_signature_verified": True,
+            "source_inventory_join_verified": True, "packet_bytes_bound": True, **AUTHORITY}
+        receipt = validate_checked_audit_context_inclusion(receipt)
+        guard()
+        return suffix, receipt, guard
+    except BaseException:
+        guard.close(); raise
+
+
+@_without_metadata
+@_bounded_errors
+def load_checked_context_extension(*, artifact, expected_sha256, task_cid, native_prompt,
+        instruction_receipt, semantic_verification, workspace, boundary, repository):
+    return _load(artifact=artifact, expected_sha256=expected_sha256, task_cid=task_cid,
+        native_prompt=native_prompt, instruction_receipt=instruction_receipt,
+        semantic_verification=semantic_verification, workspace=workspace, boundary=boundary,
+        repository=repository, historical=False)
+
+
+@_without_metadata
+@_bounded_errors
+def replay_checked_context_extension(*, artifact, expected_sha256, task_cid, native_prompt,
+        instruction_receipt, semantic_verification, workspace, boundary, repository):
+    """Explicit data replay, including after allocated-worktree removal.
+
+    This conservative profile still requires unchanged canonical original source
+    files. It neither creates live worker authority nor resumes any budget.
+    """
+    return _load(artifact=artifact, expected_sha256=expected_sha256, task_cid=task_cid,
+        native_prompt=native_prompt, instruction_receipt=instruction_receipt,
+        semantic_verification=semantic_verification, workspace=workspace, boundary=boundary,
+        repository=repository, historical=True)
+
+
+@_without_metadata
+@_bounded_errors
+def validate_checked_audit_context_inclusion(receipt):
+    """Validate bounded data only; no files, live budget or current owner opened."""
+    value = json.loads(_wire(receipt))
+    _need(type(value) is dict and set(value) == _INCLUSION_FIELDS and value["schema"] == INCLUSION_SCHEMA
+        and value["scope"] == SCOPE and _wire(value["inventory_domains"]) == _wire(INVENTORY_DOMAINS)
+        and all(value[key] is False for key in AUTHORITY)
+        and all(value[key] is True for key in ("manifest_signature_verified", "source_inventory_join_verified", "packet_bytes_bound")),
+        "closed advisory checked inclusion required")
+    for key in ("artifact_sha256", "native_prompt_sha256", "instruction_artifact_sha256", "instruction_source_sha256", "context_sha256", "suffix_sha256"):
+        _digest(value[key])
+    for key in ("artifact_bytes", "native_prompt_bytes", "instruction_source_bytes", "context_bytes", "suffix_bytes"):
+        _int(value[key], 1, MAX_ARTIFACT_BYTES if key == "artifact_bytes" else MAX_CONTEXT_BYTES + 4096)
+    _text(value["task_id"])
+    for key in ("task_cid", "admission_manifest_cid", "admission_cid", "extension_cid", "instruction_context_cid"):
+        _cid(value[key])
+    _binding(value["checked_binding"]); _policy(value["budget_policy"]); _source_scope(value["source_scope"])
+    semantic = value["native_semantic"]
+    _need(type(semantic) is dict and set(semantic) == _SEMANTIC_FIELDS
+        and semantic["schema"] == "semantic-router-source-verification@1" and semantic["freshness_checked"] is True
+        and semantic["task_id"] == value["task_id"] and semantic["native_prompt_sha256"] == value["native_prompt_sha256"]
+        and type(semantic["native_prompt_bytes"]) is int and semantic["native_prompt_bytes"] == value["native_prompt_bytes"],
+        "inclusion native semantic identity differs")
+    _digest(semantic["semantic_sha256"])
+    for key in ("scope_cid", "semantic_root_cid"): _text(semantic[key])
+    worker = value["worker_binding"]
+    _need(type(worker) is dict and set(worker) == {"workspace", "boundary"}, "closed worker binding data required")
+    from pathlib import PurePosixPath
+    for path in (value["artifact"], worker["workspace"]):
+        _text(path); parsed = PurePosixPath(path)
+        _need(parsed.is_absolute() and str(parsed) == path and ".." not in parsed.parts, "canonical absolute inclusion path required")
+    _boundary(worker["boundary"])
+    local._path(value["instruction_source_path"])
+    _need(_wire(value["signed_instruction"]) == _wire({"path": value["instruction_source_path"],
+        "sha256": value["instruction_source_sha256"], "bytes": value["instruction_source_bytes"]})
+        and value["instruction_source_path"] not in _SOURCES, "separate signed instruction binding differs")
+    return value

@@ -1,0 +1,22 @@
+"""Exact missing native certificate dependencies as a read-only module extension."""
+import hashlib,json,os,shutil,subprocess,time
+from pathlib import Path
+H=Path(__file__).resolve().parent;IMAGE='sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6'
+PINS=['dag-cbor==0.3.3','multiformats==0.3.1.post4','cryptography==49.0.0','typing-validation==1.2.12','bases==0.3.0','multiformats-config==0.3.1']
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def dump(p,x):
+ with Path(p).open('x') as f:f.write(json.dumps(x,sort_keys=True,indent=2)+'\n')
+def main():
+ out=H/'runtime_extension_v1';out.mkdir();wheels=out/'wheels';wheels.mkdir();target=out/'modules';target.mkdir();free=shutil.disk_usage(out).free;assert free>30*1024**3
+ dump(out/'acquisition_freeze.json',{'schema':'ns-original-native-module-extension/v1','frozen_at_ns':time.time_ns(),'pins':PINS,'original_image_id':IMAGE,'original_distribution_versions_preserved':True,'existing_satisfying_dependencies':{'typing_extensions':'4.15.0','cffi':'2.0.0','pycparser':'2.23'},'install_mode':'Separate read-only module directory mounted only into native lifecycle visible child; no original image/source/global package mutation.','maximum_download_bytes':100*1024**2,'maximum_download_seconds':180,'maximum_install_seconds':60,'maximum_download_attempts':1,'maximum_install_attempts':1,'automatic_retries':0,'free_storage_bytes_before_acquisition':free,'native_grader_calls':0,'provider_calls':0})
+ t=time.monotonic();argv=['/usr/bin/python3','-m','pip','download','--no-deps','--only-binary=:all:','--dest',str(wheels),*PINS]
+ with (out/'download.stdout').open('xb') as stdout,(out/'download.stderr').open('xb') as stderr:r=subprocess.run(argv,stdout=stdout,stderr=stderr,timeout=180)
+ download={'returncode':r.returncode,'elapsed_seconds':time.monotonic()-t,'stdout_sha256':sha(out/'download.stdout'),'stderr_sha256':sha(out/'download.stderr'),'wheels':{p.name:{'sha256':sha(p),'bytes':p.stat().st_size} for p in wheels.iterdir() if p.is_file()}};dump(out/'download.json',download)
+ if r.returncode:print(json.dumps({'stage':'download_failed','returncode':r.returncode}));return
+ assert len(download['wheels'])==len(PINS) and sum(x['bytes'] for x in download['wheels'].values())<100*1024**2
+ dump(out/'install_freeze.json',{'download_receipt_sha256':sha(out/'download.json'),'wheels_sha256':{p.name:sha(p) for p in wheels.iterdir()},'network':'none','image_id':IMAGE,'pins':PINS,'original_environment_mutations':0})
+ argv=['docker','--host=unix:///var/run/docker.sock','run','--rm','--network=none','--read-only','--cap-drop=ALL','--security-opt=no-new-privileges','--cpus=1','--memory=2g','--pids-limit=32','--user',str(os.getuid())+':'+str(os.getgid()),'--tmpfs','/tmp:rw,nosuid,nodev,size=268435456','--mount','type=bind,src='+str(wheels)+',dst=/wheels,readonly','--mount','type=bind,src='+str(target)+',dst=/extension','--entrypoint=/usr/bin/env',IMAGE,'-i','HOME=/tmp','PATH=/usr/local/bin:/usr/bin:/bin','PYTHONDONTWRITEBYTECODE=1','python3','-m','pip','install','--no-deps','--no-compile','--no-index','--find-links=/wheels','--target=/extension',*PINS]
+ t=time.monotonic()
+ with (out/'install.stdout').open('xb') as stdout,(out/'install.stderr').open('xb') as stderr:r=subprocess.run(argv,stdout=stdout,stderr=stderr,timeout=60)
+ receipt={'returncode':r.returncode,'elapsed_seconds':time.monotonic()-t,'stdout_sha256':sha(out/'install.stdout'),'stderr_sha256':sha(out/'install.stderr'),'module_files':{str(p.relative_to(target)):sha(p) for p in sorted(target.rglob('*')) if p.is_file()}};dump(out/'install.json',receipt);print(json.dumps({'installed':r.returncode==0,'download_seconds':download['elapsed_seconds'],'install_seconds':receipt['elapsed_seconds'],'wheel_bytes':sum(x['bytes'] for x in download['wheels'].values()),'module_files':len(receipt['module_files'])}))
+if __name__=='__main__':main()

@@ -1,0 +1,113 @@
+The frozen `development-v1` run qualifies a small native transition-storage path
+and an explicit evaluation dispatcher. All 44 case/arm tasks passed independent
+checks of actual subprocess output. Native memory reduced action executions from
+27 to 16; exact JSON retrieval and full-condition templates also used 16. Native
+memory was slightly slower in total process time. These results support an
+exact-lookup mechanism, with no demonstrated learned world-model advantage.
+
+This is one constructed development sequence in a closed, three-action integer
+service. It is not a benchmark of repository repair, cross-family transfer,
+token savings, or a production-integrated world model. Full-scope E05 remains
+open. No providers or models were called and no production source was changed.
+
+`protocol.json` was persisted before execution; the run preserves its hash and
+the hashes of the executable evaluation code in `prerun_freeze.json`. The common
+seed executed three actions, then published its successful transition. All four
+arms received byte-identical copies of that history and the same current task
+evidence. No-memory deliberately does not consult the previously selected
+action. The exact JSON control compares the entire query. The template control
+compares the entire source/environment/state/policy condition tuple; it has no
+generalized rule or extra label.
+
+Each subsequent case/arm started in a new interpreter, reopened its isolated
+SQLite/block store, and executed its selected action in another subprocess.
+The action process received the action and input integer; it did not receive
+the expected output. The separate consumer compared actual output to the task's
+target. Successful later observations were persisted for the next process. No
+stored output replaced current execution or validation.
+
+| Frozen development sequence, 11 tasks per arm | Native memory | No memory | Exact JSON | Condition template |
+| --- | ---: | ---: | ---: | ---: |
+| Correct tasks | 11 | 11 | 11 | 11 |
+| Actual action subprocesses | 16 | 27 | 16 | 16 |
+| Actions including common seed | 19 | 30 | 19 | 19 |
+| Total process seconds | 8.947150 | 8.739228 | 8.352039 | 8.547626 |
+| Process seconds including common seed | 10.126975 | 9.919054 | 9.531865 | 9.727451 |
+| Action subprocess seconds | 0.327071 | 0.486259 | 0.287187 | 0.312338 |
+| Retrieval/admission seconds | 0.223937 | 0.000010 | 0.013139 | 0.009495 |
+| Final persistent store bytes | 261587 | 273938 | 260706 | 260706 |
+
+The shared seed cost 1.179825 process seconds, including 0.053549 action seconds
+and 0.200312 publication seconds. The 40.7% reduction in later action calls
+(36.7% charging the seed to every arm) is a descriptive result of this chosen
+sequence. All arms import the same native packages and publish the same kind of
+evidence, so the timings include substantial common import/storage overhead.
+They are not population estimates or optimized standalone baseline timings.
+The native arm took 0.207921 more total process seconds than no-memory in this
+single run. All 78 executed action attempts, including ordinary failed search
+attempts, have preserved stdout, stderr, return code and elapsed time.
+
+Changed state, changed source and changed declared environment were isolated
+separately: each changed only its corresponding query field and query CID.
+Native admission returned `stale` and native candidate binding rejected the old
+candidate in all three cases. Actual fallback search succeeded with two action
+calls. Each immediate repeat then used its newly stored observation in one
+call. An `inferred_untrusted` observation produced `abstain`, triggered three
+actual search calls, and its fresh observed replacement supported the next
+process. This is conservative invalidation of declared bindings; it does not
+establish complete environmental dependency discovery.
+
+The unmodified profile is `.worktrees/semantic-addressed-world-model-r2`, clean
+at commit `40451b52c133b943818515a86e0deb95d9fab812`. Imports used its normal
+accelerate/datasets/kit package roots with supported minimal-import flags. The
+actual subprocess profile records Python, platform, executable hash and 166
+imported source-module paths/hashes. Important source pins are:
+
+| Native source | SHA-256 |
+| --- | --- |
+| `program_transition.py` | `fd6cacb79b4500b1481b1173cab8d6455c73dce45e3075a3f5263cc73daaad91` |
+| `graph_history.py` | `3fbfe98f47218625476449a8036d7bd8ef6898970c92d925cce294965e9f020a` |
+| `coordination_storage.py` | `6c5adeeee8fb5be606392636f2b2ccfcff660ba6323271d35bf1e34022fdc8bb` |
+| `program_world_adapters.py` | `ac947158c66729fd63333cfebf82886a887ac7683e9a515a1f293357104e7788` |
+
+The native path is `observe_program_transition` →
+`ProgramTransitionLog.append_transition_receipt` →
+`DurableCoordinationStore` → new-process verified query/candidate/observation
+retrieval → `admit_program_transition` and `bind_candidate_to_query`. Native
+store bytes and record identities are content-verified. The `observed` status
+is a declaration by this local evaluation producer; these records carry no
+runner signature or cryptographic execution proof. The producer, retrieval
+index, catalog search, dispatcher and output checker in
+`evaluation_consumer.py` are newly written evaluation integration. No learned
+predictor, automatic semantic updater or production planner was exercised.
+
+The native `ExecutionTransitionCompiler` emitted unadmitted proposals throughout.
+A post-run audit also found that all 11 compilations put the query CID into
+both `candidate_cid` and `observation_cid`, rather than preserving their distinct
+record identities. `DatasetsProgramWorldAdapter.cite_transition` searches for
+`query_cid` before the other identity fields. The frozen consumer selected
+actions using the separately retrieved typed candidate, never those compiler
+fields. Thus the successful action sequence does not qualify compiler-mediated
+dispatch. The exact receipts and expected/actual IDs are preserved in
+`runs/development-v1/compiler_identity_audit.json`. Any subsequent source fix and
+compiler-consuming run must use a separately versioned isolated profile.
+
+`validate.py` independently checked the frozen raw outputs, process counts,
+fresh-process provenance, exact shared evidence, declared-binding changes,
+source hashes and preregistered outcomes: **893/893 checks passed**. That audit
+does not certify the compiler identity fields; their separate audit records
+11/11 candidate and 11/11 observation identity mismatches. There were no failed
+evaluation-process iterations to omit. Both adverse timing and compiler
+findings are retained.
+
+Reproduce in a new, unused run directory:
+
+```sh
+.venv/bin/python papers/revisions/neurosymbolic_system_scope_20260914/evals/world_memory_development/run.py --run-id development-next
+.venv/bin/python papers/revisions/neurosymbolic_system_scope_20260914/evals/world_memory_development/validate.py --run-id development-next
+.venv/bin/python papers/revisions/neurosymbolic_system_scope_20260914/evals/world_memory_development/audit_compiler_identity.py --run-id development-next
+```
+
+Primary evidence: `runs/development-v1/summary.json`, `execution_log.json`,
+`validation.json`, `compiler_identity_audit.json`, each process's `result.json`,
+raw action outputs, and the actual local `seed_store/` and `stores/` artifacts.

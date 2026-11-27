@@ -1,0 +1,17 @@
+"""Trusted pre-oracle source snapshot inside the isolated evaluation container."""
+import hashlib,json,os,stat,subprocess
+from pathlib import Path
+root=Path('/testbed')
+paths=subprocess.check_output(['git','ls-files','--cached','--others','--exclude-standard','-z'],cwd=root).split(b'\0')
+entries=[]
+for raw in sorted(set(paths)):
+    if not raw: continue
+    name=raw.decode('utf-8'); path=root/name
+    if not path.exists() and not path.is_symlink(): continue
+    mode=path.lstat().st_mode
+    if stat.S_ISLNK(mode): data=os.readlink(path).encode();kind='symlink'
+    elif stat.S_ISREG(mode): data=path.read_bytes();kind='file'
+    else: raise ValueError('unsupported_source_entry')
+    entries.append({'path':name,'kind':kind,'mode':stat.S_IMODE(mode),'sha256':hashlib.sha256(data).hexdigest()})
+encoded=json.dumps(entries,sort_keys=True,separators=(',',':')).encode()
+Path('/tmp/ns-candidate-state.json').write_text(json.dumps({'schema':'ns-candidate-source-tree/v1','base_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=root).decode().strip(),'file_count':len(entries),'tree_sha256':hashlib.sha256(encoded).hexdigest(),'entries':entries},sort_keys=True)+'\n')

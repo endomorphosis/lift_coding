@@ -1,0 +1,46 @@
+"""Execute the prospectively frozen event order; no cross-arm adaptation."""
+import argparse,hashlib,importlib.util,json,os,resource,subprocess,time
+from pathlib import Path
+H=Path(__file__).resolve().parent
+
+def sha(path): return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+def save_new(path,value):
+    path.parent.mkdir(parents=True,exist_ok=True);data=json.dumps(value,sort_keys=True,indent=2).encode()+b'\n'
+    with path.open('xb') as stream: stream.write(data);stream.flush();os.fsync(stream.fileno())
+def main():
+    parser=argparse.ArgumentParser();parser.add_argument('--profile',type=Path,required=True);parser.add_argument('--expected-profile-sha256',required=True);args=parser.parse_args();p=args.profile.resolve()
+    if sha(p)!=args.expected_profile_sha256: raise ValueError('profile changed before dispatch')
+    profile=json.loads(p.read_text());run=p.parent
+    if not profile['provider']['enabled'] or profile['maximum_actual_provider_posts']!=16: raise ValueError('bounded enabled enrollment required')
+    spec=importlib.util.spec_from_file_location('repository_run_admission',profile['controller_entrypoint']);controller=importlib.util.module_from_spec(spec);spec.loader.exec_module(controller);controller.qualified_sealing(profile)
+    transport=controller.C.load_module('repository_credential_preflight',H.parents[1]/'metered_provider.py');credential=transport.credential_metadata()
+    expiry=transport._expiry_seconds(credential['expires_at'])
+    if not credential['present'] or (expiry is not None and expiry-time.time()<270): raise ValueError('provider credential unavailable or too near expiry before cohort dispatch')
+    freeze=run/'driver_freeze.json';save_new(freeze,{'schema':'ns-repository-driver-freeze@1','profile_sha256':sha(p),'driver_sha256':sha(__file__),'event_order':[e['event_id'] for e in profile['events']],'event_deadline_seconds':3600,'max_actual_provider_posts':16,'credential_metadata':credential,'created_at_ns':time.time_ns()});(run/'frozen_driver.py').write_bytes(Path(__file__).read_bytes())
+    invocations=run/'invocations';invocations.mkdir(exist_ok=False);rows=[]
+    for event in profile['events']:
+        if sha(p)!=args.expected_profile_sha256: raise ValueError('frozen profile changed')
+        command=['/usr/bin/python3','-B',profile['controller_entrypoint'],'--profile',str(p),'--event',event['event_id']]
+        before=resource.getrusage(resource.RUSAGE_CHILDREN);started=time.perf_counter();directory=invocations/event['event_id'];directory.mkdir()
+        with (directory/'stdout').open('wb') as stdout,(directory/'stderr').open('wb') as stderr:
+            save_new(directory/'invocation_started.json',{'event_id':event['event_id'],'driver_pid':os.getpid(),'command':command,'started_at_ns':time.time_ns(),'monotonic_started':started,'waited_children_user_seconds_before':before.ru_utime,'waited_children_system_seconds_before':before.ru_stime,'profile_sha256':sha(p)})
+            process=subprocess.Popen(command,stdout=stdout,stderr=stderr,start_new_session=True)
+            save_new(directory/'worker_started.json',{'worker_pid':process.pid,'driver_pid':os.getpid(),'observed_at_ns':time.time_ns(),'event_id':event['event_id']})
+            try: code=process.wait(timeout=3600);timed_out=False
+            except subprocess.TimeoutExpired:
+                import signal
+                os.killpg(process.pid,signal.SIGTERM);code=process.wait(timeout=30);timed_out=True
+        after=resource.getrusage(resource.RUSAGE_CHILDREN);row={'event_id':event['event_id'],'arm':event['arm'],'instance_id':event['instance_id'],'command':command,'returncode':code,'timed_out':timed_out,'elapsed_seconds':time.perf_counter()-started,'host_process_cpu_seconds':(after.ru_utime+after.ru_stime)-(before.ru_utime+before.ru_stime),'cpu_scope':'controller and waited local descendants; Docker container workload CPU unavailable','container_cpu_seconds':None}
+        if code==0:
+            result=json.loads((directory/'stdout').read_text());row.update(status=result['status'],accepted=result['accepted'],candidate_grading_passed=result['candidate_grading_passed'],provider_calls=result['provider_calls'],provider_total_tokens=result['provider_total_tokens'])
+        save_new(directory/'process.json',row);rows.append(row);print(json.dumps(row),flush=True)
+        # A dead/unknown invocation is never automatically restarted. Immutable
+        # task failures and infrastructure-unresolved terminal events continue in
+        # the frozen order with their original costs and histories retained.
+        if code!=0 or timed_out: raise RuntimeError('nonterminal invocation retained; inspect its actual process/effect state before continuation')
+        observed=[]
+        for receipt in (Path(profile['output_root'])/'provider').glob('*/result.json'):
+            value=json.loads(receipt.read_text());observed.append(value)
+        if sum(value.get('attempted_posts',0) for value in observed)>16: raise AssertionError('frozen provider post budget exceeded')
+    save_new(run/'invocation_summary.json',{'schema':'ns-repository-cold-invocations@1','profile_sha256':sha(p),'invocations':rows,'provider_receipt_aggregation_required':True,'scope':profile['scope']})
+if __name__=='__main__': main()

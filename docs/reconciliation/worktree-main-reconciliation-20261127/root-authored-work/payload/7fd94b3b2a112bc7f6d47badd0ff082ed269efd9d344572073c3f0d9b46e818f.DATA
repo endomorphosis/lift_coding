@@ -1,0 +1,32 @@
+"""Supplemental read-only log encoding audit; no hidden payloads emitted."""
+from pathlib import Path
+import hashlib,json
+H=Path(__file__).resolve().parent
+ref=(H/'run-v1/curator_custody/git-show-reproduction.raw').read_bytes()
+rows=[]
+for instance,run,folder in [('6028','run-v1','native-v2-'),('5414','requests5414/run-v1','native-')]:
+    for arm in ['unfixed','gold']:
+        d=H/run/'curator_custody'/(folder+arm)
+        info=json.loads((d/'log-decoding.json').read_text())
+        raw=Path(info['raw_path']).read_bytes() if 'raw_path' in info else (d/'evaluation.log').read_bytes()
+        start=raw.find(b'>>>>> Start Test Output')
+        end=raw.find(b'>>>>> End Test Output',start)
+        assert 0<=start<end
+        region=raw[start:end]
+        region.decode('utf-8')
+        total=raw.decode(errors='replace').count(chr(65533))
+        exact=raw.find(ref)
+        assert 0<=exact<start and exact+len(ref)<=start
+        assert ref.decode(errors='replace').count(chr(65533))==total
+        rows.append(dict(instance=instance,control=arm,raw_sha256=hashlib.sha256(raw).hexdigest(),
+            raw_bytes=len(raw),start_test_marker_offset=start,test_region_bytes=len(region),
+            test_region_valid_utf8=True,test_region_replacement_characters=0,
+            replacement_characters=total,git_show_reproduction_exact_match=True,
+            git_show_byte_offset=exact,git_show_bytes=len(ref)))
+audit=dict(schema='ns-arm64-log-origin-audit/v1',controls=rows,
+    reproduction_sha256=hashlib.sha256(ref).hexdigest(),
+    cause='Original bare git show command in shallow single-commit source checkout emits binary-containing root diff before test marker.',
+    transport_contamination_observed=False,qualified_test_regions_valid_utf8=True,
+    source_history_port_difference=True,protected_values_emitted=False,provider_calls=0)
+(H/'encoding_audit_v2.json').write_text(json.dumps(audit,indent=2)+'\n')
+print(json.dumps(dict(controls=len(rows),all_exact_git_show_matches=True,all_test_regions_valid_utf8=True,protected_values_emitted=False)))

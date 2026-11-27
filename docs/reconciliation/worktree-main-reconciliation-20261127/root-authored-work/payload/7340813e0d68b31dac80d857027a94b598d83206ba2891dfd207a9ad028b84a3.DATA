@@ -1,0 +1,81 @@
+"""One frozen public-only cumulative-patch endpoint control; no model calls."""
+import hashlib
+import json
+import os
+import shutil
+import stat
+import subprocess
+import time
+from pathlib import Path
+
+H = Path(__file__).resolve().parent
+O = H / 'cumulative_source_qualification_v1'
+O.mkdir()
+C = O / 'curator_custody'
+C.mkdir(mode=0o700)
+registry = json.loads((H / 'registry_v3.json').read_text())
+cfg = registry['profiles']['psf__requests-6028']
+def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
+def dump(path, value): path.write_text(json.dumps(value, sort_keys=True, indent=2) + '\n')
+freeze = {'schema': 'ns-cumulative-public-source-control/v1', 'frozen_at_ns': time.time_ns(),
+          'runner_sha256': sha(Path(__file__)), 'service_profile_sha256': sha(H / 'registry_v3.json'),
+          'control': 'Two existing production files receive neutral comments; one Git-ignored production Python file is added',
+          'expected_changed_paths': 3, 'expected_source_files': 98,
+          'expected_grade_passed': False, 'expected_designated_passed': 185,
+          'expected_designated_failed': 2, 'expected_source_admission': True,
+          'native_scorer_calls': 1, 'provider_calls': 0, 'retries': 0}
+dump(O / 'freeze.json', freeze)
+work = C / 'public_source'
+shutil.copytree(H / cfg['public_projection'] / 'source', work)
+for argv in [['git', 'init', '--quiet'], ['git', 'add', '--all', '--force']]:
+    subprocess.run(argv, cwd=work, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+for name in ['requests/__init__.py', 'requests/api.py']:
+    path = work / name
+    path.write_bytes(path.read_bytes() + b'\n# Public cumulative-source transport control.\n')
+    path.chmod(0o644)
+added = work / 'requests/t.py'
+assert not added.exists()
+added.write_bytes(b'# Public source transport control; no executable statements.\n')
+added.chmod(0o644)
+ignored = subprocess.run(['git', 'check-ignore', '--quiet', 'requests/t.py'], cwd=work).returncode == 0
+assert ignored
+subprocess.run(['git', 'add', '--intent-to-add', '--force', 'requests/t.py'], cwd=work, check=True)
+patch = C / 'candidate.patch'
+patch.write_bytes(subprocess.check_output(['git', 'diff', '--no-ext-diff', '--no-renames', '--'], cwd=work))
+patch.chmod(0o444)
+entries = []
+for path in work.rglob('*'):
+    if not path.is_file() or '.git' in path.relative_to(work).parts:
+        continue
+    entries.append({'path': path.relative_to(work).as_posix(), 'kind': 'file',
+                    'mode': stat.S_IMODE(path.stat().st_mode), 'sha256': sha(path)})
+entries.sort(key=lambda x: x['path'])
+tree = hashlib.sha256(json.dumps(entries, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+dump(C / 'expected_source.json', {'tree_sha256': tree, 'entries': entries})
+req = {'schema': 'ns-curator-candidate-score/v1', 'operation': 'score',
+       'evaluation_id': 'public-cumulative-source-v1', 'instance_id': 'psf__requests-6028',
+       'service_profile_sha256': sha(H / 'registry_v3.json'),
+       'sealed_candidate_patch_path': str(patch), 'candidate_patch_sha256': sha(patch),
+       'expected_candidate_source_tree_sha256': tree,
+       **{name: cfg[name] for name in ['base_commit', 'image_id', 'qualification_profile_sha256', 'objective_sha256']}}
+dump(C / 'request.json', req)
+with (C / 'service.stderr').open('wb') as err:
+    process = subprocess.run([str(H.parent / 'arm64_qualification/grader_venv/bin/python'), str(H / 'service_v3.py')],
+                             input=json.dumps(req).encode(), stdout=subprocess.PIPE, stderr=err, timeout=230)
+(C / 'service.stdout').write_bytes(process.stdout)
+receipt = json.loads(process.stdout)
+ok = (process.returncode == 0 and receipt['status'] == 'completed' and not receipt['passed']
+      and receipt['candidate_changed_path_count'] == 3 and receipt['candidate_source_file_count'] == 98
+      and receipt['candidate_source_tree_sha256'] == tree and receipt['resulting_tree_admission']['accepted']
+      and receipt['designated_status_counts']['PASSED'] == 185 and receipt['designated_status_counts']['FAILED'] == 2)
+summary = {'schema': 'ns-cumulative-public-source-control-result/v1', 'qualified': ok,
+           'ordinary_git_ignore_would_omit_new_file': ignored, 'source_files': receipt.get('candidate_source_file_count'),
+           'changed_paths': receipt.get('candidate_changed_path_count'), 'actual_source_tree_matches_expected': receipt.get('candidate_source_tree_sha256') == tree,
+           'status': receipt['status'], 'actual_grade_passed': receipt['passed'],
+           'designated_status_counts': receipt.get('designated_status_counts'),
+           'native_scorer_calls': 1, 'provider_calls': 0, 'receipt_path': receipt['receipt_path'],
+           'elapsed_seconds': receipt.get('elapsed_seconds'), 'reference_patch_read': False,
+           'hidden_test_payload_emitted': False}
+dump(O / 'summary.json', summary)
+print(json.dumps(summary, sort_keys=True))
+raise SystemExit(0 if ok else 1)

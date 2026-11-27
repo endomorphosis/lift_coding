@@ -1,0 +1,41 @@
+# CID syntax cache v3
+
+This isolated source profile adds a bounded, process-local cache only for the
+syntax validation of an exact immutable CID string. It does not cache source
+bytes, content digests, proof outcomes, current-source membership, or admission.
+The cache key includes the allowed codec set and native version/base/hash
+constants. The original decoder, canonicality, version, codec and hash guards
+run on every miss; public type, lower-case, and allowed-codec guards run on each
+call. String subclasses retain the uncached path. The caller's original string
+object is returned. Registry mutation is outside this frozen runtime profile.
+
+`cid_parse_cache_validation_v3/controls.json` retains 2,600 reference equalities,
+50 changed-source rejections, invalid-type and unsupported-codec controls, and a
+separate source-reader spy: twenty matching reads and twenty changed-body reads
+perform forty native multihashes even with thirty-nine CID syntax cache hits.
+All 64 original content identity, Merkle, source, and freshness tests pass.
+The exact source diff and parent hashes are recorded in
+`cid_syntax_cache_v3.patch` and `runtime_cid_parse_cache_v3_manifest.json`.
+
+The parent fast-CID encoder is scoped to the existing raw/dag-json allowlist and
+normal registered base32 semantics. Its generic fallback does not promise support
+for expanding that allowlist at runtime: the parent implementation indexes the
+two-codec prefix map before testing the fallback. This limitation is admitted
+explicitly; neither frozen parent nor current runtime changes the allowlist.
+
+`results_v9_full_syntax_cache/outcome.json` retains the full XML completion with
+exact baseline native state/root identities and 7.793 seconds of preparation
+excluding import. Full Pyparsing scanning completes with the same 3,957 symbols,
+55,859 edges and state CID in 53.641 seconds, but the producer reaches its original
+600-second bound. The experiment does not qualify full Pyparsing preparation.
+
+The actual full-Pyparsing bundle was separately profiled for a 120-second window
+in `profile_diagnostic_v3_full_py`. The profile is censored and incurs profiler
+overhead: its early costs cannot be interpreted as a complete workload timing.
+An attempted non-profiling periodic stack diagnostic exits 139 in the environment
+interpreter trampoline; `profile_diagnostic_v4_full_stages/outcome.json` retains
+that failure. The original native trials are unchanged. A separately versioned
+stage-only diagnostic removes the stack sampler.
+
+All of these are local preparation measurements. No source omission, model
+request, token saving, signed trust, or repair-correctness result follows from them.

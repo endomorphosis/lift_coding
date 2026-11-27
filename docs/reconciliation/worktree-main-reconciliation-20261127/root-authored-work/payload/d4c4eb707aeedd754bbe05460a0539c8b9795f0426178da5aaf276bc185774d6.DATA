@@ -1,0 +1,275 @@
+"""Paired local token counts of one verified historical task input.
+
+The compact packet is an observation. The expanded packet is a counterfactual
+replay of the same signed inputs, never an observation or a provider invocation.
+Only digests, byte counts and whole-string tokenizer counts leave this module.
+"""
+from __future__ import annotations
+
+from copy import deepcopy
+import base64
+import hashlib
+import importlib.metadata
+import json
+import os
+from pathlib import Path
+import stat
+
+from . import terminal_context_audit as context
+from .terminal_model_input_observation_audit import (
+    _observation_bindings, audit_terminal_model_input_observations,
+)
+from .terminal_observer_stop import verified_observation_audit
+from ipfs_accelerate_py.agent_supervisor.runtime.model_input_observation_receipt import validate_model_input_observation
+from ipfs_accelerate_py.agent_supervisor.runtime.supervisor_meta_index import public_replay_without_metadata
+
+SCHEMA = "terminal-input-token-comparison@1"
+TOKENIZER_VERSION = "0.13.0"
+ENCODING = "o200k_base"
+TOKENIZER_SHA256 = "a6557bbd3ceb299981ac87fd86a51fa8f0e9505be18ed608c5ada94bdfd0f63f"
+BPE_SHA256 = "446a9538cb6c348e3516120d7c08b09f57c36495e2acfffe59a5bf8b0cfb1a2d"
+BPE_URL = "https://openaipublic.blob.core.windows.net/encodings/o200k_base.tiktoken"
+_PATTERN = "|".join([
+    r"[^\r\n\p{L}\p{N}]?[\p{Lu}\p{Lt}\p{Lm}\p{Lo}\p{M}]*[\p{Ll}\p{Lm}\p{Lo}\p{M}]+(?i:'s|'t|'re|'ve|'m|'ll|'d)?",
+    r"[^\r\n\p{L}\p{N}]?[\p{Lu}\p{Lt}\p{Lm}\p{Lo}\p{M}]+[\p{Ll}\p{Lm}\p{Lo}\p{M}]*(?i:'s|'t|'re|'ve|'m|'ll|'d)?",
+    r"\p{N}{1,3}", r" ?[^\s\p{L}\p{N}]+[\r\n/]*", r"\s*[\r\n]+", r"\s+(?!\S)", r"\s+",
+])
+
+
+def _sha(raw):
+    return hashlib.sha256(raw.encode("utf-8") if type(raw) is str else raw).hexdigest()
+
+
+def _canonical(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False).encode()
+
+
+def _tokenizer_digest(encoding):
+    digest = hashlib.sha256(_canonical({"name": encoding.name, "pattern": encoding._pat_str,
+        "special_tokens": encoding._special_tokens}))
+    for token, rank in sorted(encoding._mergeable_ranks.items(), key=lambda item: item[1]):
+        digest.update(rank.to_bytes(4, "big"))
+        digest.update(len(token).to_bytes(4, "big"))
+        digest.update(token)
+    return digest.hexdigest()
+
+
+def _load_tokenizer():
+    # Refuse a missing/unpinned local asset before tiktoken can fetch anything.
+    if importlib.metadata.version("tiktoken") != TOKENIZER_VERSION:
+        raise ValueError("paired token count requires the pinned tokenizer version")
+    cache = os.environ.get("TIKTOKEN_CACHE_DIR")
+    if not cache:
+        raise ValueError("explicit offline tokenizer cache required")
+    path = Path(cache) / hashlib.sha1(BPE_URL.encode()).hexdigest()
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
+    try:
+        before = os.fstat(fd)
+        if not stat.S_ISREG(before.st_mode) or before.st_nlink != 1 or not 0 < before.st_size <= 8_000_000:
+            raise ValueError("bounded regular tokenizer asset required")
+        with os.fdopen(fd, "rb", closefd=False) as stream:
+            raw = stream.read(8_000_001)
+        if len(raw) != before.st_size or _sha(raw) != BPE_SHA256 or _stat(before) != _stat(os.fstat(fd)):
+            raise ValueError("local tokenizer asset differs from its pin")
+        if _stat(before) != _stat(path.lstat()):
+            raise ValueError("local tokenizer asset changed")
+    finally:
+        os.close(fd)
+    import tiktoken
+    # Construct directly from the bytes already checked above. No lazy
+    # registry/cache reopen or network fallback is involved, even on a race.
+    ranks = {}
+    for line in raw.splitlines():
+        token, rank = line.split()
+        ranks[base64.b64decode(token, validate=True)] = int(rank)
+    encoding = tiktoken.Encoding(ENCODING, pat_str=_PATTERN, mergeable_ranks=ranks,
+        special_tokens={"<|endoftext|>": 199999, "<|endofprompt|>": 200018})
+    if _tokenizer_digest(encoding) != TOKENIZER_SHA256:
+        raise ValueError("tokenizer vocabulary, pattern or special-token table differs")
+    return encoding
+
+
+def _stat(info):
+    return tuple(getattr(info, key) for key in
+        ("st_dev", "st_ino", "st_mode", "st_uid", "st_gid", "st_nlink", "st_size", "st_mtime_ns", "st_ctime_ns"))
+
+
+class _StateCapture:
+    """Retain the exact named state files and their directory witnesses."""
+    def __init__(self, state):
+        self.root = Path(state).absolute()
+        self.fd = context._open_directory(self.root)
+        self.files, self.directories = {}, {}
+
+    def _parents(self, relative):
+        for path in [self.root, *(self.root / relative).parents]:
+            if not path.is_relative_to(self.root):
+                continue
+            info = path.lstat()
+            if not stat.S_ISDIR(info.st_mode) or info.st_uid != os.getuid() or info.st_mode & 0o022:
+                raise ValueError("protected observer state directory required")
+            witness = _stat(info)
+            if path in self.directories and self.directories[path] != witness:
+                raise ValueError("observer state directory changed")
+            self.directories[path] = witness
+
+    def read(self, relative):
+        self._parents(relative)
+        path = self.root / relative
+        before = path.lstat()
+        if (not stat.S_ISREG(before.st_mode) or before.st_uid != os.getuid()
+                or before.st_nlink != 1 or before.st_mode & 0o022):
+            raise ValueError("protected observer state file required")
+        raw = context._read_at(self.fd, relative)
+        if _stat(before) != _stat(path.lstat()):
+            raise ValueError("observer state file changed")
+        row = (_stat(before), _sha(raw))
+        if relative in self.files and self.files[relative] != row:
+            raise ValueError("observer state witness changed")
+        self.files[relative] = row
+        self._parents(relative)
+        return raw
+
+    def verify(self):
+        for relative in tuple(self.files):
+            self.read(relative)
+        for path, witness in self.directories.items():
+            if _stat(path.lstat()) != witness:
+                raise ValueError("observer state directory changed after counting")
+
+    def close(self):
+        os.close(self.fd)
+
+
+def _measure(text, encoding):
+    if type(text) is not str or not 0 < len(text.encode()) <= 256_000:
+        raise ValueError("bounded complete model packet required")
+    # Ordinary user bytes, including spellings such as <|endoftext|>, remain
+    # ordinary text. Counts are of the complete envelope, never summed chunks.
+    tokens = encoding.encode(text, allowed_special=set(), disallowed_special=())
+    if encoding.decode(tokens) != text:
+        raise ValueError("tokenizer must roundtrip the complete UTF-8 packet")
+    return {"sha256": _sha(text), "bytes": len(text.encode()), "tokens": len(tokens)}
+
+
+def compare_terminal_input_tokens(*, state: Path, observations: list[dict], workspace_root: Path):
+    """Compare one observed compact packet with a checked expanded replay.
+
+    Errors refuse the comparison. No input text, receipt population, owner
+    authority or provider usage is created or exported.
+    """
+    if type(observations) is not list or len(observations) != 1:
+        raise ValueError("exactly one explicit current observation required")
+    observation = validate_model_input_observation(observations[0])
+    if (observation["status"] != "observed" or observation["semantic_transport"] != "native"
+            or observation["code_retrieval_codec"] != "compact"
+            or observation["intent_requirements_transport"] != "compact"
+            or observation["code_retrieval_wire_delivery"] != "inline"
+            or observation["reviewed_source_nomination_context"] is None):
+        raise ValueError("paired comparison requires the explicit native compact observer profile")
+    with public_replay_without_metadata():
+        capture = _StateCapture(state)
+        try:
+            expected_raw, prepared_raw = capture.read("context-result.json"), capture.read("prepared.json")
+            expected, prepared = context._json(expected_raw), context._json(prepared_raw)
+            paths = context._capsule_paths(capture.fd)
+            capsules = [(path, capture.read(path)) for path in paths]
+            audit = audit_terminal_model_input_observations(state=state, observations=[observation], workspace_root=workspace_root)
+            if not verified_observation_audit(audit, observation):
+                raise ValueError("exact independent compact observation replay required")
+            if (audit["context_result_sha256"] != _sha(expected_raw)
+                    or audit["prepared_state_sha256"] != _sha(prepared_raw)):
+                raise ValueError("independent replay used different captured state")
+            facts = _observation_bindings(observation, workspace_root)
+            matches = []
+            for path, raw in capsules:
+                capsule, rendered = context._capsule(raw, expected=expected, prepared=prepared)
+                if (capsule["all_context_checks_passed"] is True
+                        and capsule["native_prompt_sha256"] == observation["native_prompt_sha256"]
+                        and capsule["native_prompt_bytes"] == observation["native_prompt_bytes"]):
+                    matches.append((capsule, rendered))
+            if len(matches) != 1:
+                raise ValueError("one exact captured native capsule required")
+            capsule, native = matches[0]
+            repository = Path(prepared["repository"])
+            compact = {}
+            context._model_projection(rendered=native, receipt=facts, repository=repository,
+                prepared=prepared, expected=expected, _capture=compact)
+            from ipfs_accelerate_py.agent_supervisor.runtime.router_public_instruction import load_public_instruction
+            instruction = observation["public_instruction"]
+            expanded_block, expanded_instruction = load_public_instruction(artifact=Path(instruction["artifact"]),
+                expected_sha256=instruction["artifact_sha256"], task_cid=instruction["task_cid"],
+                prompt=native, repository=repository, require_current_source=False, requirements_transport="expanded")
+            for key in ("artifact_sha256", "context_cid", "manifest_cid", "task_cid", "task_id",
+                    "source_path", "source_sha256", "source_bytes", "intent_requirements"):
+                if expanded_instruction[key] != compact["instruction_receipt"][key]:
+                    raise ValueError("paired public requirement binding differs")
+            from ipfs_accelerate_py.agent_supervisor.runtime.verified_code_retrieval_projection import extract_verified_public_instruction_source
+            literal = context._historical_instruction_source(expanded_block, expanded_instruction)
+            if literal != extract_verified_public_instruction_source(compact["instruction"], instruction):
+                raise ValueError("paired literal public source differs")
+            from ipfs_accelerate_py.agent_supervisor.runtime.router_implementation_runner import render_model_prompt
+            expanded_router = native + compact["residual"] + compact["catalog"] + expanded_block
+            expanded_model, expanded_advisory = render_model_prompt(prompt=expanded_router,
+                purpose="coding", workspace=Path(facts["workspace"]))
+            # A private replay fact map, not a synthetic observation or provider
+            # receipt. No counterfactual is added to either population.
+            alternative = deepcopy(facts)
+            alternative.update(schema="terminal-input-counterfactual-facts@1", code_retrieval_codec="expanded",
+                public_instruction=expanded_instruction, router_prompt_sha256=_sha(expanded_router),
+                router_prompt_bytes=len(expanded_router.encode()), model_prompt_sha256=_sha(expanded_model),
+                model_prompt_bytes=len(expanded_model.encode()), workspace_advisory_sha256=_sha(expanded_advisory),
+                workspace_advisory_bytes=len(expanded_advisory.encode()))
+            alternative.pop("code_retrieval_projection", None)
+            expanded = {}
+            context._model_projection(rendered=native, receipt=alternative, repository=repository,
+                prepared=prepared, expected=expected, _capture=expanded)
+            if (expanded["model"] != expanded_model or expanded["catalog"] != compact["catalog"]
+                    or expanded["residual"] != compact["residual"]):
+                raise ValueError("independent expanded replay changed a shared appendix")
+            encoding = _load_tokenizer()
+            measurements = {"expanded": _measure(expanded["model"], encoding),
+                "compact": _measure(compact["model"], encoding)}
+            if _tokenizer_digest(encoding) != TOKENIZER_SHA256:
+                raise ValueError("tokenizer changed during the paired count")
+            for packet in (compact, expanded):
+                for guard in packet["final_guards"]:
+                    guard()
+            capture.verify()
+            if context._capsule_paths(capture.fd) != paths:
+                raise ValueError("captured capsule population changed")
+            gain = measurements["expanded"]["tokens"] - measurements["compact"]["tokens"]
+            return {"schema": SCHEMA, "qualified": True, "observed_arm": "compact",
+                "counterfactual_arm": "expanded", "observed_records_seen": 1,
+                "transports": {"compact": {"requested_intent": "compact", "requested_retrieval": "compact",
+                    "selected_intent": instruction["intent_requirements_projection"]["transport"],
+                    "selected_retrieval": observation["code_retrieval_projection"]["selected_transport"]},
+                    "expanded": {"requested_intent": "expanded", "requested_retrieval": "expanded",
+                        "selected_intent": "expanded", "selected_retrieval": "expanded"}},
+                "tokenizer": {"library": "tiktoken", "version": TOKENIZER_VERSION, "encoding": ENCODING,
+                    "vocabulary_pattern_special_tokens_sha256": TOKENIZER_SHA256, "bpe_asset_sha256": BPE_SHA256,
+                    "provider_tokenizer_equivalence_established": False},
+                "measurements": measurements, "tokens_saved": gain,
+                "token_reduction_fraction": gain / measurements["expanded"]["tokens"],
+                "byte_savings": measurements["expanded"]["bytes"] - measurements["compact"]["bytes"],
+                "bindings": {"observation_id": observation["observation_id"],
+                    "native_prompt_sha256": _sha(native), "context_result_sha256": _sha(expected_raw),
+                    "prepared_state_sha256": _sha(prepared_raw), "task_cid": capsule["task_cid"],
+                    "source_sha256": capsule["source_sha256"], "public_instruction_sha256": _sha(literal),
+                    "requirements_context_cid": expanded_instruction["intent_requirements"]["requirements_context_cid"],
+                    "requirement_ids": expanded_instruction["intent_requirements"]["requirement_ids"],
+                    "catalog_sha256": _sha(compact["catalog"]), "residual_sha256": _sha(compact["residual"]),
+                    "workspace_sha256": _sha(facts["workspace"])},
+                "checks": {"observed_compact_replay_verified": True, "expanded_counterfactual_replay_verified": True,
+                    "identical_public_requirement_bindings": True, "literal_public_source_preserved": True,
+                    "shared_catalog_and_residual_preserved": True, "whole_packet_tokenization": True,
+                    "tokenizer_roundtrip_verified": True, "capture_unchanged_after_counting": True},
+                "input_scope": "complete rendered router task input including workspace advisory and all appendices",
+                "excluded_usage": ["provider harness and system", "tool messages", "retries", "output", "other session turns"],
+                "provider_invocations_created": 0, "provider_usage_measured": False,
+                "provider_total_session_token_savings_established": False, "current_freshness_verified": False,
+                "source_equivalence_proved": False, "full_task_satisfaction_established": False,
+                "global_model_convergence_proved": False, "raw_prompts_exported": False,
+                "proof_authority": False, "execution_authority": False, "completion_authority": False}
+        finally:
+            capture.close()

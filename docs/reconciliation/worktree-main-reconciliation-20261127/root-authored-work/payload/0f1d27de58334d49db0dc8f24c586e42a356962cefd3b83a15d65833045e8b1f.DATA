@@ -1,0 +1,191 @@
+{
+  "schema": "skill-preparation-file-inventory/v1",
+  "status": "FROZEN_CANDIDATE_PREPARATION_ONLY",
+  "created_at": "2026-09-14T10:36:13.270105+00:00",
+  "files": {
+    "prepare_skill_candidates.py": {
+      "sha256": "f83430729667d3ca11bb50195d0bb294146a75705d1ad18a877da23eae59d275",
+      "bytes": 13121
+    },
+    "prepare_skill_cases.py": {
+      "sha256": "29a14d1a658db62372763c047671ad6eb612e2f1cd22c1c32aae763b7d8320ba",
+      "bytes": 16102
+    },
+    "skill_oracles.py": {
+      "sha256": "889eba4156e7891e210da7b77bc3b415191c514d76012760d5da0d2074e3e4a3",
+      "bytes": 9391
+    },
+    "verify_skill_preparation.py": {
+      "sha256": "5593726f7bb504dfc3a55e09083fc4dd7e92a88ec6f0d305dabcb68f24f724ed",
+      "bytes": 9557
+    },
+    "skill_candidates_v1/README.md": {
+      "sha256": "99aaa85626e2ed74ab2bba53888a0b00db68cf27f3888ecc4f1fddf4b0368513",
+      "bytes": 5163
+    },
+    "skill_candidates_v1/contract_validation.json": {
+      "sha256": "5b5232c7694a87d08d9895a3f640b300a5f823a7e4a1169b368c65521b706d3d",
+      "bytes": 23729
+    },
+    "skill_candidates_v1/inspection_audit.json": {
+      "sha256": "604e3e5bd67004a4cf044c5b7ac8283996867fc1b1e1734fed5b9c1efd78c9be",
+      "bytes": 32213
+    },
+    "skill_candidates_v1/paired_case_specifications.json": {
+      "sha256": "7f3e57f4209324f0822a1e951ce036296152eeaadd08b1a9e802f755b5214991",
+      "bytes": 61899
+    },
+    "skill_candidates_v1/procedures/02dc482edfed9db13c20e71711871d550b9f16b58665826a994de810ccee176f.md": {
+      "sha256": "5a2bc8005064cf007d896476bcf6616fb4232201ee8c34c7b29efae26d339b86",
+      "bytes": 3058
+    },
+    "skill_candidates_v1/procedures/02dc482edfed9db13c20e71711871d550b9f16b58665826a994de810ccee176f.metadata.yaml": {
+      "sha256": "4356b7147a3ceb68a134c744fd7bc7e091d94bf6c8bb82992cd85ed0161c6e28",
+      "bytes": 1381
+    },
+    "skill_candidates_v1/procedures/03c1fadaa9018abfba09be64c1a9fbbcb54b891d2a77037d0ba78e5d3716a3c2.md": {
+      "sha256": "87e2d510ac3510a4202337a003559d3fdafbdcd140bc299af5e6af22644fe71e",
+      "bytes": 5227
+    },
+    "skill_candidates_v1/procedures/03c1fadaa9018abfba09be64c1a9fbbcb54b891d2a77037d0ba78e5d3716a3c2.metadata.yaml": {
+      "sha256": "17e088211e2708d687db6ca0221b12039a35ce7067b419d5da6e56c700c2fa6c",
+      "bytes": 1393
+    },
+    "skill_candidates_v1/procedures/03f699303b6eaebbf95a53071d46223981b564ecf9c1592bed96c70f7ab3bb34.md": {
+      "sha256": "eb5d44bd4259b62f2121a2c574e8422878a395439c8cc75a9b69830d880c561e",
+      "bytes": 4438
+    },
+    "skill_candidates_v1/procedures/03f699303b6eaebbf95a53071d46223981b564ecf9c1592bed96c70f7ab3bb34.metadata.yaml": {
+      "sha256": "ffe5686c220106f8e0f2a7b88481ab6a7e65018ff0b6531cdb5c095907c4cb05",
+      "bytes": 1424
+    },
+    "skill_candidates_v1/procedures/041c29b895bdfce58f0f9a1656169d898ed2b7c9a995b33bd79caf3d6a3f8a02.md": {
+      "sha256": "c4ef062f930d93305c91ce74e98954a1eb5c80f6fd740759249dbefde0ac4c8c",
+      "bytes": 2446
+    },
+    "skill_candidates_v1/procedures/041c29b895bdfce58f0f9a1656169d898ed2b7c9a995b33bd79caf3d6a3f8a02.metadata.yaml": {
+      "sha256": "b88dd98e8715d13e71ffec1c48d8be38c1d7a84dcd88df63ed26c4acb5f802ed",
+      "bytes": 1370
+    },
+    "skill_candidates_v1/procedures/0505908bc61005292484e021628afc9f83f778e50c993a9e27e2e6ea26eca783.md": {
+      "sha256": "94c7b96920267c4c3941e0869f28f683127b1711af5e4f95e28eb0ac5845f6bc",
+      "bytes": 3475
+    },
+    "skill_candidates_v1/procedures/0505908bc61005292484e021628afc9f83f778e50c993a9e27e2e6ea26eca783.metadata.yaml": {
+      "sha256": "0b3abc2fff3c048d81c0806111295291fdb96fb7482af88cf4978e40565a1bee",
+      "bytes": 1392
+    },
+    "skill_candidates_v1/procedures/05f1ec76dc871ef860da3bd0bfb3bc5d5fbd56a0acc37640502221cd22191550.md": {
+      "sha256": "dbdd78556fd9aaa3d8ad92185741fa8d1591af7cd95cac8773c62a176638cab5",
+      "bytes": 4052
+    },
+    "skill_candidates_v1/procedures/05f1ec76dc871ef860da3bd0bfb3bc5d5fbd56a0acc37640502221cd22191550.metadata.yaml": {
+      "sha256": "7199f9bd2a771f038264d9cae05aacdd81135750b26479d8c7dae702681e1762",
+      "bytes": 1423
+    },
+    "skill_candidates_v1/procedures/062b6005ebd08f91dd63ad63b7fb94083f1a82584d7a8ecdb1c089fba3d132d2.md": {
+      "sha256": "6c1a473a91cf90b17f04cd3d893b75934b87759539c461e407c013133a7ab561",
+      "bytes": 4505
+    },
+    "skill_candidates_v1/procedures/062b6005ebd08f91dd63ad63b7fb94083f1a82584d7a8ecdb1c089fba3d132d2.metadata.yaml": {
+      "sha256": "5bd514856854b82694bebd323eae6483d7aba26dcba12e130a0c5bfc4c92af1d",
+      "bytes": 1421
+    },
+    "skill_candidates_v1/procedures/0631aa7cba85730cccd04af4d887002f82b7db655b41fe46f4f107dcd980a275.md": {
+      "sha256": "b4cf0e09b23728cbeb40748516e64b0ac59032ffd5bd5167f5f8877f8752aeae",
+      "bytes": 3806
+    },
+    "skill_candidates_v1/procedures/0631aa7cba85730cccd04af4d887002f82b7db655b41fe46f4f107dcd980a275.metadata.yaml": {
+      "sha256": "676770a5f465cfd4b29a1e21cff559460a6f636ed3ce2f2378bff1587d34ec60",
+      "bytes": 1392
+    },
+    "skill_candidates_v1/procedures/06f2c6d82f0f4a5218f8dcc746871f9fb51bed76c6d2ffc4e77251a0b8db871e.md": {
+      "sha256": "6f32eb4be71f8cbc1862f46520b4b40c12fa3ca865b5de958d15c47b5866a635",
+      "bytes": 4536
+    },
+    "skill_candidates_v1/procedures/06f2c6d82f0f4a5218f8dcc746871f9fb51bed76c6d2ffc4e77251a0b8db871e.metadata.yaml": {
+      "sha256": "b971acee72c3a86419b13533e3c47474e196678085a7365b20f35226d19a490a",
+      "bytes": 1360
+    },
+    "skill_candidates_v1/procedures/075223420c40e25eb150a5315af78ba2ec143435b285e8690db8fe4db582adde.md": {
+      "sha256": "9df261babc1e9ed5b9f5582d41117f535cc10cfbb18850890b7cde5680148297",
+      "bytes": 4802
+    },
+    "skill_candidates_v1/procedures/075223420c40e25eb150a5315af78ba2ec143435b285e8690db8fe4db582adde.metadata.yaml": {
+      "sha256": "39c82a4df2783ae8f408dce2fcf9922bc434914e4f6a0a738cff75857358b5ef",
+      "bytes": 1387
+    },
+    "skill_candidates_v1/procedures/07663fa3791b39ca919277b30ebff035545c04548cdd973fae78a0b8bd0e3d22.md": {
+      "sha256": "e42a230018165c9ef75e99a35b6c0933465a34004083c6b3e07da66275b76d30",
+      "bytes": 4456
+    },
+    "skill_candidates_v1/procedures/07663fa3791b39ca919277b30ebff035545c04548cdd973fae78a0b8bd0e3d22.metadata.yaml": {
+      "sha256": "20221d3dd7f3b77bd4f1b7343b369d243189feff5c894ad5374a294a37d6e726",
+      "bytes": 1412
+    },
+    "skill_candidates_v1/procedures/085b46719494303d1c5a40955b3e75d8a31f80abda8d1536573882efb3d02f0e.md": {
+      "sha256": "3632adf7529f6a0bdbdd1e4b0e51f10381afe1b1639beb082d761359ed0d06f3",
+      "bytes": 4265
+    },
+    "skill_candidates_v1/procedures/085b46719494303d1c5a40955b3e75d8a31f80abda8d1536573882efb3d02f0e.metadata.yaml": {
+      "sha256": "95bf58f1b7719ae60fc16f099c2f7b0899c68ce0a7cf85821ec92e112e4aad35",
+      "bytes": 1392
+    },
+    "skill_candidates_v1/source_manifest.json": {
+      "sha256": "2043615515b424d168057e68b079dd07bbfa0bc9efbbe5b26b5c9d76d3a7465f",
+      "bytes": 33489
+    },
+    "skill_candidates_v1/source_rows/02dc482edfed9db13c20e71711871d550b9f16b58665826a994de810ccee176f.json": {
+      "sha256": "6b1d5a1f2fd6fbba8f8b6ccab31244acec06deb98d0f579848b81bd63be2c8d3",
+      "bytes": 5209
+    },
+    "skill_candidates_v1/source_rows/03c1fadaa9018abfba09be64c1a9fbbcb54b891d2a77037d0ba78e5d3716a3c2.json": {
+      "sha256": "88bfabd035a67133da8935ff25ee0de0dc12833a965f6a46c7d437de250d09f8",
+      "bytes": 7562
+    },
+    "skill_candidates_v1/source_rows/03f699303b6eaebbf95a53071d46223981b564ecf9c1592bed96c70f7ab3bb34.json": {
+      "sha256": "fc6e2aa9410c1555e2e6078a389928f65ad9d21d049bef1a06687db848cafc3e",
+      "bytes": 6668
+    },
+    "skill_candidates_v1/source_rows/041c29b895bdfce58f0f9a1656169d898ed2b7c9a995b33bd79caf3d6a3f8a02.json": {
+      "sha256": "178148dff2e8e70313a230e72fea771a030fb205f6f046bb32ccbe60f210a658",
+      "bytes": 4585
+    },
+    "skill_candidates_v1/source_rows/0505908bc61005292484e021628afc9f83f778e50c993a9e27e2e6ea26eca783.json": {
+      "sha256": "7cf105353aac4ebfdfa88b95d6a2ed5f51ea48299d0db181a31c7e2830e3d1bf",
+      "bytes": 5684
+    },
+    "skill_candidates_v1/source_rows/05f1ec76dc871ef860da3bd0bfb3bc5d5fbd56a0acc37640502221cd22191550.json": {
+      "sha256": "cf2425582ffb72276caf35df87ece25ab514d97a6f8c3ad0ebee20782ffab2ff",
+      "bytes": 6287
+    },
+    "skill_candidates_v1/source_rows/062b6005ebd08f91dd63ad63b7fb94083f1a82584d7a8ecdb1c089fba3d132d2.json": {
+      "sha256": "fff78120dc3f7a291b7cc332527d492149d1ac36d6db1509da905357c973531c",
+      "bytes": 6738
+    },
+    "skill_candidates_v1/source_rows/0631aa7cba85730cccd04af4d887002f82b7db655b41fe46f4f107dcd980a275.json": {
+      "sha256": "77adad304d94ce9facce95b6680c276de920c0d06b9da79d6d200fb6569b7219",
+      "bytes": 5968
+    },
+    "skill_candidates_v1/source_rows/06f2c6d82f0f4a5218f8dcc746871f9fb51bed76c6d2ffc4e77251a0b8db871e.json": {
+      "sha256": "ca6223375b28835542a8be7cd68b4f968a6b66567aab15daec4e8629ecc031f7",
+      "bytes": 6672
+    },
+    "skill_candidates_v1/source_rows/075223420c40e25eb150a5315af78ba2ec143435b285e8690db8fe4db582adde.json": {
+      "sha256": "40ab83f1a19abaa04f69ec72d56e355557118e7e22bb0b9ddf3e7beaf9cb4fed",
+      "bytes": 7051
+    },
+    "skill_candidates_v1/source_rows/07663fa3791b39ca919277b30ebff035545c04548cdd973fae78a0b8bd0e3d22.json": {
+      "sha256": "5785337aeb0b447384d2e1296a2d99dcec71e3b721d1683a6e4816402f32261d",
+      "bytes": 6679
+    },
+    "skill_candidates_v1/source_rows/085b46719494303d1c5a40955b3e75d8a31f80abda8d1536573882efb3d02f0e.json": {
+      "sha256": "f59a0d1979f517c2fcb2abe08e0c37fb87952611d182568ca5c9b1f680de3c15",
+      "bytes": 6482
+    }
+  },
+  "file_count": 45,
+  "self_excluded": "skill_candidates_v1/preparation_inventory.json",
+  "scientific_release": false,
+  "model_calls": 0
+}

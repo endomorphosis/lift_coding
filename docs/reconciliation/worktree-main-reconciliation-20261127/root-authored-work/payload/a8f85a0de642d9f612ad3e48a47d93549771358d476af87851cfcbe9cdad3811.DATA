@@ -1,0 +1,270 @@
+{
+  "Float_refinement_proved": false,
+  "all32_governing_RPI_exits": "OPEN",
+  "boundaries": {
+    "Float": "Exact Real scalar coercion/ordered addition supplies no binary64/libm/math.fsum refinement, signed-zero/overflow/error bound or Python result-tag/effect timing theorem.",
+    "convergence": "No new convergence claim. Separate exact-real IR convergence does not prove Python training or global codebase autoencoder convergence.",
+    "global_purity": "Immutable fixed builtin/math binding model remains explicit; actual dynamic global binding/purity is unproved.",
+    "source_parser": "Declared CPython/host receipt evidence does not prove source parsing or lexical resolution.",
+    "whole_program": "Full five assignments still need own ordered assignment semantics, raw normalization joins and actual model composition. Original guard/return/preparation/finite Python loop and all32 task/cache/planner exits remain open."
+  },
+  "caps_and_admission": {
+    "complete_object_bytes_max": 3997696,
+    "native_CPU_wall_seconds": 20,
+    "native_stdout_bytes": 65536,
+    "outer_wall_seconds": 120,
+    "policy": "Each small new module gets its own frozen finite queries/source/tooling gate and root-owned stage, with actual Std2 reports (empty sets allowed), complete objects/chunks, unchanged profile/admission/lease-finally-drain/physical census. No aggregate Mathlib.Tactic, environment widening, heartbeat or timeout increase. All proposed queries/checks are currently unimplemented/unexecuted.",
+    "raw_chunk_bytes": 65536,
+    "raw_chunks_max": 61,
+    "workspace_bytes": 16777216
+  },
+  "completion_authority": false,
+  "container_semantics_proved": false,
+  "date_utc": "2026-10-07",
+  "execution_authority": false,
+  "executions": 0,
+  "full_source_semantics_proved": false,
+  "full_task_satisfaction": "unknown",
+  "future_checks_that_expose_wrong_implementations": [
+    {
+      "case": "captured_vs_inner_z",
+      "failure_detected": "Give outer z and inner target z distinct identities/values; body reads the inner binding while iterable setup reads outer names. Using spelling-only lookup or installing target before setup must fail the source/shape join or derived result."
+    },
+    {
+      "case": "wrong_tuple_order",
+      "failure_detected": "Use ordinary asymmetric pair1,2 and body left-right. Correct output is-1; reversed bindings give1. This validates binding order without commutative dot/fsum hiding the error."
+    },
+    {
+      "case": "wrong_iteration_order",
+      "failure_detected": "Use generic identity body over ordinary list[1,2,3] and check ordered list/vector result, not only its commutative sum. Reversal must fail."
+    },
+    {
+      "case": "first_error",
+      "failure_detected": "Use distinguishable first/second body errors; own traversal and target observation select the first consumed error. A generator setup unknown-name error takes precedence before any body."
+    },
+    {
+      "case": "lazy_generator_and_if",
+      "failure_detected": "Generator setup leaves an invalid-domain body unconsumed; immediate fsum later reports the error. Accepted IfExp ignores the invalid-domain dead branch at runtime but statically refuses unsupported dead syntax."
+    },
+    {
+      "case": "empty_mean",
+      "failure_detected": "Empty factors remain an empty successful list; exact fsum0/len0 mean yields divisionByZero. A hidden nonempty premise or eager divide bypass must fail."
+    },
+    {
+      "case": "shorter_zip",
+      "failure_detected": "Lengths2/1 and0/k yield min lengths1/0; unmatched tail body errors are not consumed. Equal-length-only lowering must refuse a case its generic contract promises."
+    },
+    {
+      "case": "range_bound_source",
+      "failure_detected": "Even bound0 must resolve the actual source vector. Forged binder provenance, substituted unrelated name or descending order fails lowering/observation."
+    },
+    {
+      "case": "wrong_row_shape",
+      "failure_detected": "weights width80 with row width79, ragged rows, negative indices and unproved named indices must refuse structural transport/lowering; no unsafe Fin cast or metadata-only shape assertion."
+    },
+    {
+      "case": "stale_raw_source",
+      "failure_detected": "Changed source/binder/source token/callee or stale receipt fails complete source/subtree/API pin joins before proof admission."
+    }
+  ],
+  "global_autoencoder_convergence_proved": false,
+  "global_purity_proved": false,
+  "independent_source_extension": {
+    "comprehensions": "Prepare iterable in the outer environment before installing the fresh target binding. ListComp traverses bodies eagerly in input order. GeneratorExp captures the own immutable environment and prepared iterable; body evaluation is deferred to consumption.",
+    "errors": "Own runtime unknownName/wrongKind/tuple/index/division/log errors are distinct from static lowering refusal. A static refusal, including an unsupported dead branch, is not asserted to be a runtime exception.",
+    "generator": "Admit only immediate math.fsum consumption in this increment. A prepared generator stores syntax, captured own bindings and finite inputs, never target IR, desired output vectors or semantic proof fields. Reject escaping/resumed/effectful generators and other consumers.",
+    "len": "Own len reads actual finite list length and returns an integer. Lower to lengthVector/lengthMatrix and explicit natToScalar when used in scalar arithmetic. len must evaluate its input even at length0.",
+    "reuse": "Reuse immutable PyExpr/PyArgs/PyComprehension/PyTarget syntax. Add fresh own finite value/environment/interpreter modules; do not mutate prior qualified modules.",
+    "scalar_compatibility": "Prove own numeric lookup/interpreter compatibility with the accepted scalar interpreter for structurally admitted scalar-body bindings. Reuse its own primitive arithmetic if useful. Neither interpreter calls SourceExpr/target evaluators or a mathematical objective.",
+    "sum": "Own ordered exact-Real fold has total addition; prove equivalence to eager materialization for successful values and the first selected body error. Preserve generator setup error versus body-consumption error. No CPython fsum rounding, effect timing or allocation trace claim.",
+    "values": "Own tagged numeric value, numeric sequence and later rectangular numeric rows/pairs. PyName(scope,spelling) identifies a binding; own first-binding lookup checks value kind. Do not filter wrong-typed bindings and accidentally fall through to an older value."
+  },
+  "input_pins": [
+    {
+      "bytes": 6295,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-next-source-bridge-gaps-20261006-03/gaps-01.json",
+      "sha256": "9bb0d63766c883cf92f3c3299eb375469f7ca1d084cda3312013e72c4dd1df1c"
+    },
+    {
+      "bytes": 44852,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-supported-python-ast-container-extension-design-20261006-01/design-01.json",
+      "sha256": "814ccc88c1f87de6cc99467419d1fb0a6eb99bb616763dce386f85c4b7e64b59"
+    },
+    {
+      "bytes": 3916,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-candidate-20261006-01/math/PyAstNumericSubset.lean",
+      "sha256": "11baa458c201926c3a6e02b8ec7ca35213c336a30da199ce0390e3f1d7972faf"
+    },
+    {
+      "bytes": 6314,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-candidate-20261006-01/math/PyAstNumericSemantics.lean",
+      "sha256": "3ce628f904f57b800f67b7a739f04e3adf72e0888b1689e23f7cef3e1ac2a2b8"
+    },
+    {
+      "bytes": 21942,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-candidate-20261006-05/math/PyAstNumericPreservation.lean",
+      "sha256": "5c6c65dc530540030fe3edf82be868ede8fd675236078dd0714ddb6bfb159b2a"
+    },
+    {
+      "bytes": 4355,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-original-scalar-bodies-candidate-20261007-01/math/PyAstOriginalScalarBodies.lean",
+      "sha256": "0835433cae2f47ec1117ece4d73ac7218da63c68b1f72f48a1fdd00cec7273da"
+    },
+    {
+      "bytes": 5988,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-original-scalar-bodies-candidate-20261007-01/math/PyAstOriginalScalarFormulas.lean",
+      "sha256": "121d848e1fd29282e7f95a6333079d8417156f4cb1ec29f737538fbeded6e8ed"
+    },
+    {
+      "bytes": 4447,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-original-scalar-bodies-qualification-20261007-01/qualified-review-01.json",
+      "sha256": "574da413d45ec38d4e4917994b256d0da67914dbb4dde7539255774d4df5f06f"
+    },
+    {
+      "bytes": 427948,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-scalar-source-host-result-20261007-02/prefix-transport-receipt-01.json",
+      "sha256": "edf3ec4f4c1b8ea81a6d3d6a14fda3d06b6a6b1a5912fddc142becc8e94b4dbb"
+    },
+    {
+      "bytes": 3060,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-language-candidate-20261006-02/math/ObjectiveContainerSource.lean",
+      "sha256": "fc01f1d99e348e79f9cc9fdaf35cbbdb29d0c0963e88b4b984fde469e2eee410"
+    },
+    {
+      "bytes": 11695,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-language-candidate-20261006-02/math/ObjectiveContainerSemantics.lean",
+      "sha256": "23bf7349c698832ad088adc68b41913a88affafff235008b38ef6688079b5ec8"
+    },
+    {
+      "bytes": 7680,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-eval-bridge-candidate-20261006-01/math/ObjectiveContainerEvaluationBridge.lean",
+      "sha256": "b39d3c585c5cbbe9da30f932000ce2428d2cc754849e1c9dbd43b6912c3a4587"
+    }
+  ],
+  "jobs": {
+    "host_helper_imports": 0,
+    "metadata": 0,
+    "native": 0,
+    "target_imports": 0,
+    "tests": 0,
+    "training": 0
+  },
+  "metadata_hydration": false,
+  "new_qualified_queries": 0,
+  "next_milestone": {
+    "actual_dimensions": "Generic n allows empty/multiple values. The actual cohort uses n=4; a later fixed4 model observation derives its nonzero denominator internally.",
+    "data_body_raw_path": "module.body[24].body[1].value.left.args[0].elt",
+    "data_raw_path": "$.raw_program[1].rhs",
+    "expected_targets": {
+      "data": "div(fsumExact(mapVector(lossBinder.spelling, marginsVar, lossTarget)), natToScalar(lengthVector(marginsVar)))",
+      "factors": "mapVector(factorBinder.spelling, marginsVar, factorTarget)"
+    },
+    "factor_body_raw_path": "module.body[24].body[3].value.elt",
+    "factors_raw_path": "$.raw_program[3].rhs",
+    "name": "Actual raw data-loss generator and factors list comprehension over supplied margins",
+    "ordinary_result": "Derive ordered factor list and exact loss mean from ordinary margins. Do not take their desired outputs, successful evaluations or margins=dot(weights,row) as premises.",
+    "scope": "Own pure finite ideal-real interpretation and structural lowering of the actual data RHS and factors RHS, with ordinary numeric margins supplied as input. This does not yet prove how margins were computed by the first assignment.",
+    "source_join": "Fresh bounded source literal emission from the actual raw prefix receipt, preserving actual margins identity and both distinct z scopes. Require kernel structural joins from enclosing map bodies to accepted actualLossBody/actualFactorBody; their textual identity alone is insufficient."
+  },
+  "next_zip_range_index_split": {
+    "index": "Own list indexing checks integer and actual bounds independently. Accept only proven nonnegative literal index or range-origin binder; compare row width with range bound BEFORE constructing Fin. i<weights.length alone does not prove i<row.length.",
+    "proofs": "Separate own min/order laws, syntactic bound/shape refusal and generic zip/range/index preservation. Only then instantiate the actual gradient nested generator graph.",
+    "range": "Own range(len(namedVector)) resolves the bound source first, then ascending integer0..n-1. Retain exact bound-name provenance rather than trusting a host Fin annotation.",
+    "scope": "These are subsequent increments; no zip/range/index Lean source or proof is authored by this plan.",
+    "target": "rangeMap and indexVector with explicit τ scalar/vector/index binder types; source/target length and row-shape relation are ordinary input transport.",
+    "target_routes": "numeric pair comprehension -> zipMap; scalar,row pair -> zipRowsMap; row iterable -> mapRows. Generic preservation must not impose equal lengths.",
+    "zip": "Own binary zip evaluates left/right setup in order and consumes exactly min(m,n) pairs, including zero/unequal lengths and no unused tail body. Tuple assignment binds left then right, yielding right::left::outer as existing target extension does."
+  },
+  "normalization_separation": {
+    "first_milestone": "Raw data/factors RHSs need no dot/L2 normalization. Keep current scalar raw-source provenance and generator kind.",
+    "gradient": "Raw L2 binding or a separately proved projection remains required before joining the entire gradient; do not silently use normalized metadata as accepted source semantics.",
+    "later_margins_regularizer": "Prove the actual pinned _dot body hygienic Name-only argument-once inlining in own Py semantics; separately prove raw L2 binding to exact5764607523034235/576460752303423488 literal projection. Host rule logs/source hashes alone are not semantic proofs."
+  },
+  "planner_activation": false,
+  "practical_first_proof_split": [
+    {
+      "direct_imports": [
+        "PyAstNumericSemantics"
+      ],
+      "module": "PyFiniteBindings",
+      "prospective_queries": [
+        "own_first_binding_checks_kind",
+        "scalar_projection_preserves_admitted_lookup"
+      ],
+      "purpose": "Own mixed finite values, first-binding/type-sensitive lookup, scalar-binding compatibility and binder extension; no target import."
+    },
+    {
+      "direct_imports": [
+        "PyFiniteBindings"
+      ],
+      "module": "PyOwnNumericComprehensions",
+      "prospective_queries": [
+        "generator_setup_precedes_target_binding",
+        "ordered_body_first_error",
+        "pure_immediate_fsum_materialization"
+      ],
+      "purpose": "Own outer iterable setup, fresh binding, eager list traversal, suspended generator and ordered immediate fsum."
+    },
+    {
+      "direct_imports": [
+        "PyOwnNumericComprehensions",
+        "PyAstNumericLowering",
+        "ObjectiveContainerSource"
+      ],
+      "module": "PyNumericMapLowering",
+      "prospective_queries": [
+        "map_lowering_refuses_filter_async_or_collision",
+        "accepted_map_lowering_has_structural_derivation"
+      ],
+      "purpose": "Structural expected-shape mapVector/len/fsum lowering and actual compiler-success typing extraction."
+    },
+    {
+      "direct_imports": [
+        "PyNumericMapLowering",
+        "PyAstNumericPreservation",
+        "ObjectiveContainerSemantics"
+      ],
+      "module": "PyNumericMapPreservation",
+      "prospective_queries": [
+        "numeric_list_comprehension_observation_preserved",
+        "numeric_generator_sum_observation_preserved"
+      ],
+      "purpose": "Derive generic own list-map/consumed-generator value and selected-error observations via source typing/binder induction and actual length before Fin."
+    },
+    {
+      "direct_imports": [
+        "PyNumericMapPreservation",
+        "PyAstOriginalScalarFormulas",
+        "fresh_actual_raw_container_syntax_module"
+      ],
+      "module": "ActualPyDataFactors",
+      "prospective_queries": [
+        "actual_data_factors_RHSs_lower",
+        "actual_data_factors_observation",
+        "empty_margin_mean_error_and_empty_factors_success"
+      ],
+      "purpose": "Actual enclosing RHS/inner-body joins, actual compiler equations, and ideal-real data/factors observations over ordinary supplied margins."
+    }
+  ],
+  "proof_authority": false,
+  "schema": "ranker-supported-python-ast-next-container-semantics-design@1",
+  "snapshot": {
+    "actual_generated_scalar_syntax": "Three genuinely accepted binding queries; parser/global purity are still excluded.",
+    "actual_scalar_body_AST_to_IR": "Three Body queries genuinely native/root-readback passed.",
+    "actual_scalar_formula_queries": "Root native stage next/pending at this source-only design cut; require genuine acceptance before using their formula conclusions.",
+    "old_gap_and_container_design": "Historical immutable snapshots. Their scalar-status fields may predate these actual results; preserve them rather than relabel old reports."
+  },
+  "source_parser_correctness_proved": false,
+  "status": "SOURCE_DATA_ONLY_PLAN_NO_CANDIDATE_AUTHORITY",
+  "strict_cache_admission": false,
+  "structural_target_extension": {
+    "collision_policy": "Own lexical scopes remain distinct. Reject active projected spelling collisions and tuple duplicate names until a separately proved renaming stage is supplied. Fixed abs/max/math/len/fsum bindings cannot be rebound by admitted locals.",
+    "finite_conversion": "Own output list length is checked/derived from actual successful traversal before Fin conversion. Reuse actual target mapToVector/zipToVector success-length proofs, including proof irrelevance; no desired vector result may supply length.",
+    "first_lowerer": "Expected-shape scalar/vector lowering accepts one unfiltered synchronous forIn and immediate fsum of that generator. It recomputes callee/arity/name/freshness/body shape and lowers both IfExp branches.",
+    "general_contract": "StructuralFiniteEnvRel context ownEnv targetEnv AND actual lowerContainerAst(context,shape,expr)=ok target -> shapeObservation(ownEval expr)=evalSourceExpr targetEnv target.",
+    "induction": "Derive any structural typing/constructor judgement internally from actual compiler success, then induct with strengthened binder relations. Do not require a caller-supplied pointwise output/semantic preservation certificate.",
+    "new_target_opcodes": 0,
+    "relation": "Only ordinary input lookup/value/order/length/rectangular-shape and fixed binding specification. No expression evaluation, desired body outputs, model result or successful evaluation fields.",
+    "reuse": "Existing SourceExpr mapVector/mapRows/zipMap/zipRowsMap/rangeMap/indexVector/lengthVector/lengthMatrix/natToScalar/fsumExact plus scalar composition are sufficient for this numeric milestone."
+  }
+}

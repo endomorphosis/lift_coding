@@ -1,0 +1,133 @@
+"""Curator-only pytest hooks using native post-setup lifecycle decisions.
+
+No protected pytest payload, node ID or fixture value is exported publicly.
+This initial profile has no admitted CALL-reuse population. Native eligibility
+is observed; all original setup, call and teardown obligations remain current.
+"""
+from __future__ import annotations
+import collections
+import hashlib
+import json
+import os
+from pathlib import Path
+import sys
+import time
+import pytest
+
+STATE='_ns_original_repository_lifecycle'
+PUBLIC_REASONS=frozenset({'native_lifecycle_unavailable','native_candidate_outside_qualified_call_population',
+    'setup_bound_execution_key_missing','current_setup_not_executed','full_execution_required','call_certificate_missing',
+    'call_certificate_not_admitted','execution_key_mismatch','locator_mismatch','reuse_phase_not_call_only',
+    'call_phase_not_pass','admitted_call_certificate','signature_not_verified','composite_not_admitted',
+    'execution_key_unbound','certificate_cid_missing','attestation_result_invalid','attestation_not_verified','composite_authorizes_skip'})
+FIELDS={'schema','validation_request_sha256','scorer_profile_sha256','source_inventory_sha256',
+        'objective_record_sha256','objective_text_sha256','configuration_sha256','environment_profile_sha256',
+        'test_selection_sha256','trajectory_namespace_sha256','phase_population','native_profile_sha256',
+        'allow_call_reuse','eligible_call_case_cids','private_observation_path'}
+
+def canonical(value):return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False).encode()
+def sha(body):return hashlib.sha256(body).hexdigest()
+def native():
+    from ipfs_accelerate_py.testing.proof_reuse import setup_bound_execution_key as assembly
+    from ipfs_accelerate_py.testing.proof_reuse import post_setup_call_reuse as reuse
+    return assembly,reuse
+
+def state(item):return getattr(item.config,STATE)
+def fault(item,phase,exc):state(item)['faults'].append({'phase':phase,'exception_type':type(exc).__name__})
+
+def pytest_configure(config):
+    path=Path(os.environ['NS_ORIGINAL_LIFECYCLE_BINDING'])
+    binding_bytes=path.read_bytes();binding=json.loads(binding_bytes)
+    if sha(binding_bytes)!=os.environ['NS_ORIGINAL_LIFECYCLE_BINDING_SHA256']:raise ValueError('curator lifecycle request commitment mismatch')
+    if type(binding)is not dict or set(binding)!=FIELDS or binding['schema']!='ns-original-curator-lifecycle-binding/v1':raise ValueError('closed curator lifecycle binding required')
+    if binding['allow_call_reuse'] is not False or binding['eligible_call_case_cids']!=[]:raise ValueError('this initial native profile has no admitted CALL-reuse population')
+    if binding['phase_population'] not in ('visible','hidden','public_contract','offline_control'):raise ValueError('unknown scorer test population')
+    for key,value in binding.items():
+        if key.endswith('_sha256') and (type(value)is not str or len(value)!=64 or any(c not in '0123456789abcdef' for c in value)):raise ValueError('malformed lifecycle binding digest')
+    setattr(config,STATE,{'binding':binding,'binding_file_sha256':sha(binding_bytes),'started_ns':time.perf_counter_ns(),
+        'phase_invocations':collections.Counter(),'reports':[],'native_decisions':[],'faults':[],'native_seconds_ns':0,'call_reused':0})
+
+@pytest.hookimpl(hookwrapper=True,tryfirst=True)
+def pytest_runtest_setup(item):
+    current=state(item);current['phase_invocations']['setup']+=1;tick=time.perf_counter_ns()
+    try:
+        assembly,reuse=native();probe=reuse.attach_phase_probe(item);probe.record_setup();assembly.before_runtest_setup(item)
+    except Exception as exc:fault(item,'before_setup',exc)
+    current['native_seconds_ns']+=time.perf_counter_ns()-tick
+    outcome=yield
+    tick=time.perf_counter_ns()
+    try:
+        assembly,reuse=native()
+        # No invented complete fixture/environment/dependency identity. The
+        # actual native assembler reports its real unavailable components.
+        assembly.after_runtest_setup(item,setup_failed=bool(outcome.excinfo))
+    except Exception as exc:fault(item,'after_setup',exc)
+    current['native_seconds_ns']+=time.perf_counter_ns()-tick
+
+@pytest.hookimpl(hookwrapper=True,tryfirst=True)
+def pytest_runtest_call(item):
+    current=state(item);current['phase_invocations']['call']+=1;tick=time.perf_counter_ns()
+    reason='native_lifecycle_unavailable';native_action='RUN';key_identity=''
+    try:
+        assembly,reuse=native();assembly.before_runtest_call(item)
+        decision=reuse.evaluate_post_setup_call_reuse(item)
+        reuse.attach_call_reuse_result(item,decision)
+        reason=decision.reason;native_action='REUSE_CALL' if decision.reuses_call else 'RUN'
+        key_identity=decision.execution_key_cid
+        # Even an item-attached certificate is insufficient for this empty
+        # externally qualified enrollment. Do not mutate item.runtest.
+        if decision.reuses_call:reason='native_candidate_outside_qualified_call_population'
+        probe=reuse.get_phase_probe(item)
+        if probe is not None:probe.record_call()
+    except Exception as exc:fault(item,'before_call',exc)
+    current['native_seconds_ns']+=time.perf_counter_ns()-tick
+    current['native_decisions'].append({'opaque_item_sha256':sha(item.nodeid.encode()),'native_action':native_action,
+        'actual_action':'RUN','reason':reason,'execution_key_cid':key_identity,'current_binding_sha256':current['binding_file_sha256']})
+    yield
+
+@pytest.hookimpl(hookwrapper=True,tryfirst=True)
+def pytest_runtest_teardown(item,nextitem):
+    current=state(item);current['phase_invocations']['teardown']+=1;tick=time.perf_counter_ns()
+    try:native()[1].before_runtest_teardown(item)
+    except Exception as exc:fault(item,'before_teardown',exc)
+    current['native_seconds_ns']+=time.perf_counter_ns()-tick
+    yield
+    tick=time.perf_counter_ns()
+    try:native()[1].after_runtest_teardown(item)
+    except Exception as exc:fault(item,'after_teardown',exc)
+    current['native_seconds_ns']+=time.perf_counter_ns()-tick
+
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item,call):
+    outcome=yield;report=outcome.get_result()
+    state(item)['reports'].append({'opaque_item_sha256':sha(report.nodeid.encode()),'phase':report.when,
+        'outcome':report.outcome,'duration_seconds':report.duration})
+
+def pytest_sessionfinish(session,exitstatus):
+    current=getattr(session.config,STATE);current['exitstatus']=int(exitstatus)
+    current['enclosing_session_seconds']=(time.perf_counter_ns()-current.pop('started_ns'))/1e9
+    current['native_callback_seconds']=current.pop('native_seconds_ns')/1e9
+    current['phase_invocations']=dict(current['phase_invocations'])
+    current['native_loaded_sources']={}
+    for name,module in tuple(sys.modules.items()):
+        if name.startswith(('ipfs_accelerate_py.','ipfs_datasets_py.')) and getattr(module,'__file__',None):
+            path=Path(module.__file__).resolve()
+            if path.is_file():current['native_loaded_sources'][name]={'path':str(path),'sha256':sha(path.read_bytes())}
+    output=Path(current['binding']['private_observation_path']);output.parent.mkdir(parents=True,exist_ok=True)
+    with output.open('xb') as stream:stream.write(canonical(current)+b'\n')
+
+def public_observation(private_path):
+    """Curator calls this after execution; no individual test identities leave."""
+    body=Path(private_path).read_bytes();observed=json.loads(body)
+    return {'schema':'ns-original-curator-lifecycle-public-observation/v1','private_observation_sha256':sha(body),
+        'binding_file_sha256':observed['binding_file_sha256'],'phase_population':observed['binding']['phase_population'],
+        'phase_invocations':observed['phase_invocations'],'phase_outcomes':dict(collections.Counter(row['phase']+':'+row['outcome'] for row in observed['reports'])),
+        'native_decisions':dict(collections.Counter(row['native_action'] for row in observed['native_decisions'])),
+        'actual_call_decisions':dict(collections.Counter(row['actual_action'] for row in observed['native_decisions'])),
+        'fallback_reasons':dict(collections.Counter(row['reason'] if row['reason'] in PUBLIC_REASONS else 'other_native_diagnostic' for row in observed['native_decisions'])),
+        'native_fault_types':dict(collections.Counter(row['phase']+':'+row['exception_type'] for row in observed['faults'])),
+        'call_reused':observed['call_reused'],'exitstatus':observed['exitstatus'],
+        'enclosing_session_seconds':observed['enclosing_session_seconds'],'native_callback_seconds':observed['native_callback_seconds'],
+        'actual_native_import_count':len(observed['native_loaded_sources']),
+        'actual_native_import_manifest_sha256':sha(canonical(observed['native_loaded_sources'])),
+        'all_current_setup_and_teardown_required':True,'qualified_call_reuse_population':0,'whole_grader_reused':False}

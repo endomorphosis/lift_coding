@@ -1,0 +1,81 @@
+import OriginalComputedFiniteIteration
+import OriginalRealConvergenceV2
+import OriginalPrefixModelProjection
+
+set_option backward.isDefEq.respectTransparency false
+
+/-!
+SOURCE-ONLY, UNCOMPILED, UNQUALIFIED CANDIDATE.
+
+Convergence of the separately named infinite extension of the fresh exact-real
+source evaluator. Every state and every objective observation in the conclusion
+is an actual successful evaluator result. The numeric-prefix observation is
+derived from actual source-record projection, not merely assigned a model cost.
+Minimizer existence/uniqueness comes from the historically qualified model
+theorem through its required fresh modern owned relay, not a desired premise.
+
+This does not remove MAX_EPOCHS from the original Python program or translate
+its preparation, guards, return, mutation, trace or Float/libm/math.fsum. The
+source evaluator is extended over all natural counters as a distinct exact-real
+construction. No original-runtime, global-autoencoder or full-task claim is
+made; this source body awaits genuine parent and root native qualification.
+-/
+
+namespace RankerObjectiveSourceEvaluatorInfiniteExtension
+
+noncomputable section
+
+open Filter
+open scoped Topology
+open RankerObjectiveOriginalComputedFiniteIteration (sourceIterate source_iterate_eq_model)
+open RankerObjectiveOriginalModelProjection (numericObjectiveResult
+  actual_numeric_objective_projection_eq source_L2_eq_originalRealMu)
+
+/-- Actual successful source states AND numeric-prefix objective observations
+tend to the unique model minimum. All semantic/convergence facts are conclusions;
+no trajectory, observation, desired gradient or convergence certificate is an input. -/
+theorem infinite_exact_real_source_evaluator_converges :
+    ∃! limit : Fin 80 → ℝ,
+      (∀ weights : Fin 80 → ℝ,
+        RankerRealCurvature.realObjective RankerRealCurvature.originalRealMu
+            RankerRealCurvature.originalRealDifferences limit ≤
+          RankerRealCurvature.realObjective RankerRealCurvature.originalRealMu
+            RankerRealCurvature.originalRealDifferences weights) ∧
+      (∀ initial : Fin 80 → ℝ,
+        ∃ states : ℕ → (Fin 80 → ℝ), ∃ objectives : ℕ → ℝ,
+          (∀ steps : ℕ, sourceIterate steps initial = .ok (states steps)) ∧
+          (∀ steps : ℕ, numericObjectiveResult (states steps)
+            RankerRealCurvature.originalRealDifferences = .ok (objectives steps)) ∧
+          Tendsto states atTop (𝓝 limit) ∧
+          Tendsto objectives atTop
+            (𝓝 (RankerRealCurvature.realObjective RankerRealCurvature.originalRealMu
+              RankerRealCurvature.originalRealDifferences limit))) := by
+  obtain ⟨limit, modelConclusion, uniqueModel⟩ := RankerRealCurvature.originalReal_model_converges
+  refine ⟨limit, ?_, ?_⟩
+  · refine ⟨modelConclusion.1, ?_⟩
+    intro initial
+    refine ⟨RankerRealCurvature.originalRealIterate initial,
+      (fun steps => RankerRealCurvature.realObjective RankerRealCurvature.originalRealMu
+        RankerRealCurvature.originalRealDifferences
+        (RankerRealCurvature.originalRealIterate initial steps)),
+      ?_, ?_, (modelConclusion.2 initial).1, (modelConclusion.2 initial).2⟩
+    · intro steps
+      exact source_iterate_eq_model steps initial
+    · intro steps
+      simpa only [source_L2_eq_originalRealMu] using actual_numeric_objective_projection_eq
+        (RankerRealCurvature.originalRealIterate initial steps)
+        RankerRealCurvature.originalRealDifferences
+  · intro alternative alternativeConclusion
+    apply uniqueModel alternative
+    refine ⟨alternativeConclusion.1, ?_⟩
+    intro initial
+    exact ⟨RankerRealCurvature.originalReal_iterate_weights_tendsto
+        initial alternative alternativeConclusion.1,
+      RankerRealCurvature.originalReal_iterate_objective_tendsto
+        initial alternative alternativeConclusion.1⟩
+
+#print axioms infinite_exact_real_source_evaluator_converges
+
+end
+
+end RankerObjectiveSourceEvaluatorInfiniteExtension

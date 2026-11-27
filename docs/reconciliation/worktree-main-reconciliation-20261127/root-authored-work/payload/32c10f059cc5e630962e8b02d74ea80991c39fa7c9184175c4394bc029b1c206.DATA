@@ -1,0 +1,155 @@
+"""Read a terminal frozen cohort without conditioning analysis on its outcomes.
+
+Makes no provider/scorer calls. Full source/journal/native-replay audit is separate.
+Unknown usage remains unknown; actual zero-post failures contribute zero remote use.
+"""
+import argparse
+import hashlib
+import json
+from pathlib import Path
+
+
+FIELDS = ("input_tokens", "output_tokens", "reasoning_tokens", "cached_input_tokens",
+          "total_tokens", "api_reported_cost_ticks")
+
+
+def canonical(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()
+
+
+def known_sum(values):
+    values = list(values)
+    return None if any(value is None for value in values) else sum(values)
+
+
+def analyze(run, contract_name):
+    inputs = {}
+
+    def read(path):
+        body = path.read_bytes()
+        inputs[str(path.relative_to(run))] = hashlib.sha256(body).hexdigest()
+        return json.loads(body)
+
+    profile = read(run / "profile.json")
+    contract = read(run / contract_name)
+    assert contract["profile_sha256"] == inputs["profile.json"]
+    provider = read(run / "provider_profile.json")
+    assert inputs["provider_profile.json"] == profile["provider"]["profile_sha256"]
+    invocation = read(run / "invocation_summary.json")
+    assert invocation["profile_sha256"] == inputs["profile.json"]
+    processes = {row["event_id"]: row for row in invocation["invocations"]}
+    assert len(processes) == len(invocation["invocations"]) == len(profile["events"])
+    transports, intents = {}, {}
+    for path in sorted((run / "state/provider").glob("*/dispatch_intent.json")):
+        intent = read(path)
+        assert intent["call_id"] == path.parent.name
+        intents[intent["call_id"]] = intent
+    for path in sorted((run / "state/provider").glob("*/result.json")):
+        row = read(path)
+        key = row["call_id"]
+        assert key == path.parent.name and key not in transports and key in provider["call_ids"]
+        assert row["profile_sha256"] == inputs["provider_profile.json"]
+        assert type(row["attempted_posts"]) is int and row["attempted_posts"] in (0, 1)
+        wire = read(path.parent / "request.json")
+        digest = hashlib.sha256(canonical(wire)).hexdigest()
+        assert digest == row["request_sha256"]
+        assert len(canonical(wire)) == row["request_bytes"] <= provider["max_request_bytes"]
+        if row["attempted_posts"]:
+            assert key in intents and intents[key]["request_sha256"] == digest
+        for field in FIELDS:
+            value = row["normalized_usage"].get(field)
+            assert value is None or type(value) is int and value >= 0
+        transports[key] = row
+
+    used, events, results, first_requests = set(), [], {}, {}
+    for event in profile["events"]:
+        result = read(run / "state/events" / event["event_id"] / "result.json")
+        assert result["event_id"] == event["event_id"] and result["profile_sha256"] == inputs["profile.json"]
+        process = processes[event["event_id"]]
+        assert process["status"] == result["status"]
+        calls = result["provider_receipts"]
+        for call in calls:
+            key = call["call_id"]
+            assert key not in used and canonical(call) == canonical(transports[key])
+            used.add(key)
+        slots = result["provider_slots_used"]
+        assert type(slots) is int and slots >= len(calls)
+        unknown_slots = slots - len(calls)
+        posts = sum(call["attempted_posts"] for call in calls)
+        assert result["provider_calls"] == (None if unknown_slots else posts)
+        usage = {field: None if unknown_slots else known_sum(
+            call["normalized_usage"].get(field) if call["attempted_posts"] else 0 for call in calls)
+            for field in FIELDS}
+        assert usage["total_tokens"] == result["provider_total_tokens"]
+        parent = event["parent_event"]
+        expected_history = ([] if parent is None else results[parent]["public_history"]) + [result["public_history"][-1]]
+        assert result["public_history"] == expected_history
+        assert result["complete_prior_and_current_repairs"] == all(row["accepted"] for row in expected_history)
+        prior_slots = 0 if parent is None else results[parent]["trajectory_provider_slots_used"]
+        assert result["trajectory_provider_slots_used"] == slots + prior_slots <= profile["max_provider_calls_per_trajectory"]
+        if parent is None:
+            assert slots <= profile["first_node_call_cap"]
+            first_requests[event["arm"]] = calls[0]["request_sha256"] if calls else None
+        results[event["event_id"]] = result
+        scores = [{key: score.get(key) for key in ("evaluation_id", "passed", "status", "designated_total", "designated_status_counts")}
+                  | {"stage": stage} for stage, score in result["evidence"].items()
+                  if score.get("schema") == "ns-curator-candidate-score-receipt/v1"]
+        events.append({"event_id": event["event_id"], "trajectory": event["trajectory"], "arm": event["arm"],
+                       "instance_id": event["instance_id"], "status": result["status"],
+                       "accepted": result["accepted_for_next_state"], "candidate_grading_passed": result["candidate_grading_passed"],
+                       "complete_prior_and_current_repairs": result["complete_prior_and_current_repairs"],
+                       "provider_posts_known": posts, "unknown_provider_slots": unknown_slots, "usage": usage,
+                       "call_ids": [call["call_id"] for call in calls], "controller_seconds": result["elapsed_seconds"],
+                       "invocation_seconds": process["elapsed_seconds"], "host_process_cpu_seconds": process["host_process_cpu_seconds"],
+                       "merge_conflicts": result["source_transition"]["conflicts"],
+                       "source_tree_sha256": result["source_transition"]["source_tree_sha256"],
+                       "failure_reasons": result["local_failures"], "direct_scorer_results": scores})
+    assert used == set(transports)
+    unknown_intents = sorted(set(intents) - set(transports))
+    assert len(unknown_intents) <= sum(row["unknown_provider_slots"] for row in events)
+    arms = []
+    for arm in sorted(set(event["arm"] for event in events)):
+        rows = [row for row in events if row["arm"] == arm]
+        assert len(set(row["trajectory"] for row in rows)) == 1
+        usage = {field: known_sum(row["usage"][field] for row in rows) for field in FIELDS}
+        accepted = sum(row["accepted"] for row in rows)
+        complete = all(row["accepted"] for row in rows)
+        arms.append({"arm": arm, "scheduled_nodes": len(rows), "accepted_nodes": accepted,
+                     "complete_trajectory": complete, "provider_posts_known": sum(row["provider_posts_known"] for row in rows),
+                     "unknown_provider_slots": sum(row["unknown_provider_slots"] for row in rows), "usage": usage,
+                     "tokens_per_accepted_node": None if not accepted or usage["total_tokens"] is None else usage["total_tokens"] / accepted,
+                     "tokens_per_complete_trajectory": usage["total_tokens"] if complete else None,
+                     "invocation_seconds": known_sum(row["invocation_seconds"] for row in rows),
+                     "controller_seconds": known_sum(row["controller_seconds"] for row in rows),
+                     "observed_horizons": [{"issue_nodes": i + 1, "accepted_nodes": sum(row["accepted"] for row in rows[:i + 1]),
+                         "total_tokens": known_sum(row["usage"]["total_tokens"] for row in rows[:i + 1])} for i in range(len(rows))]})
+    known_posts = sum(row["provider_posts_known"] for row in events)
+    assert known_posts <= profile["maximum_actual_provider_posts"]
+    return {"schema": "ns-root-repository-fixed-cohort-projection/v2", "all_checks_passed": True,
+            "events": events, "arms": arms, "actual_provider_posts_known": known_posts,
+            "unknown_provider_slots": sum(row["unknown_provider_slots"] for row in events),
+            "unknown_dispatch_intents": unknown_intents,
+            "provider_total_tokens": known_sum(arm["usage"]["total_tokens"] for arm in arms),
+            "first_request_sha256_by_arm": first_requests,
+            "first_requests_equal_all_arms": bool(first_requests) and None not in first_requests.values() and len(set(first_requests.values())) == 1,
+            "all_total_token_usage_complete": all(arm["usage"]["total_tokens"] is not None for arm in arms),
+            "all_invocation_timing_complete": all(arm["invocation_seconds"] is not None for arm in arms),
+            "inputs_sha256": inputs, "analysis_source_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+            "scope": "Fixed exposed development cohort. No outcome-selection, family-level inference, pooled component percentage or general savings claim. Complete native replay/source/journal accounting is a separate audit.",
+            "accounting": "All frozen events and incurred provider costs retained. Provider total authoritative; components and cached subset separate. Nested service time is not added to outer invocation time. Missing usage/timing is null. Zero-completion trajectory ratio is undefined."}
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--run", type=Path, required=True)
+    parser.add_argument("--contract", default="root_analysis_contract_v1.json")
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    result = analyze(args.run.resolve(), args.contract)
+    with args.output.open("x") as stream:
+        stream.write(json.dumps(result, indent=2, sort_keys=True) + "\n")
+    print(json.dumps({key: result[key] for key in ("actual_provider_posts_known", "provider_total_tokens", "unknown_provider_slots", "arms")}))
+
+
+if __name__ == "__main__":
+    main()

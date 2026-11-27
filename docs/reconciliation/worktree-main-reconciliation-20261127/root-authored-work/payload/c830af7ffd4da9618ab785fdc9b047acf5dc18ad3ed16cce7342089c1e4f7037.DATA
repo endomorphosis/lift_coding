@@ -1,0 +1,71 @@
+{
+  "containers_started": 0,
+  "decision": "Keep source-input policies opt-in. The current public cases do not show a net complete-input proxy reduction; do not launch another source-minification live trial.",
+  "evidence": {
+    "batching_facet_ast_bytes": 215,
+    "batching_worker_payload_bytes": 27825,
+    "component_census": "census-final/qualification.json",
+    "interpretation": "worker_projection.query repeats the required inline instruction exactly; optional program raw source is already omitted. Repeated JSON bytes are candidates, not a guarantee of token savings.",
+    "mjcf_facet_ast_bytes": 2714,
+    "mjcf_worker_payload_bytes": 28925,
+    "repeated_instruction_json_value_bytes": {
+      "llm-inference-batching-scheduler": 4463,
+      "tune-mjcf": 643
+    },
+    "source_input_comparison": "public-input-comparison-final/qualification.json"
+  },
+  "further_gaps": [
+    "Evaluate source-selection quality separately: current batching selects one assignment and MJCF includes module/assignment records.",
+    "Account for repeated metadata/pack records without assuming they are full source duplication or deleting required evidence.",
+    "If broader read/edit integration is pursued, keep canonical source authoritative, refresh all stale source/proof identities, and preserve exact raw expansion before edits.",
+    "A compact view is not a reversible whole-codebase encoding by itself; original comments/formatting remain in retained canonical bytes."
+  ],
+  "implemented_query_reference": false,
+  "next_implementation": {
+    "eligible_slot": [
+      "translated_semantic",
+      "worker_projection",
+      "query"
+    ],
+    "live_gate": [
+      "Freeze clean source commit, archive inventory and hashes, model/provider/native CLI versions and all policies before launch.",
+      "Use a fresh capped serial paired campaign with unchanged CPU/memory/container bounds and host pressure preflight/backoff.",
+      "Honor the shared provider cooldown and typed auth/billing/quota/rate-limit stops. Do not reset the gate or auto-retry failed tasks.",
+      "Retain all requested arms, failures and missing counters; compare total native input plus output per official success, with cached input counted as a subset.",
+      "Official rewards and native cumulative usage are required; proxy counts alone do not establish billing or task-performance benefit."
+    ],
+    "preconditions": [
+      "Begin with a fully verified existing semantic transport and its canonical producer/manifest bindings.",
+      "The nonempty query string must match exactly one required raw_sources value byte for byte; no whitespace normalization or substring matching.",
+      "The required source remains present inline with unchanged bytes, source CID and manifest SHA256.",
+      "Ambiguous, absent, unsupported, stale or unprofitable cases retain original input or explicitly refuse the requested experiment; never fabricate a successful treatment."
+    ],
+    "public_comparison": [
+      "Use exact reviewed Terminal Bench COPY inputs, canonical profile/smoke/instruction, production indexed-default selection and pinned dependencies.",
+      "Compare legacy indexed input versus query-reference input on the same frozen source selection. Keep source-input/AST modes on a separate axis.",
+      "Do not change retrieval to prefer functions just to create favorable minification results.",
+      "Only consider a fresh live campaign after positive actual inclusion, exact audit correlation and measured complete-input improvement."
+    ],
+    "representation": [
+      "Replace that one query slot with a reserved, versioned reference to the exact still-inline required raw source.",
+      "Leave canonical worker payload, capsule/proof/cache identities, admissions, constraints, required source and pack unchanged.",
+      "Keep short readable reference instructions inline; retain receipt/provenance outside the model input.",
+      "Bind original/candidate transport hashes, allowed slot, source path/hash/bytes, schema and codec identity.",
+      "Restore using the same wire's literal required raw source, then require byte-exact equality with the original complete transport.",
+      "Compose in a fixed order with identifier aliasing, metadata factoring and later wrappers. Native tokenizer fallback must explicitly record whether the reference was selected."
+    ],
+    "required_qualification": [
+      "Real-producer authored positive and negative cases; no mocked capsule or source identity validation.",
+      "Exact canonical round trip and complete captured model-input replay, including Doctor/public-instruction/reply/tool guidance.",
+      "Reject altered query/source/hash/scope/task/codec, marker collisions, ambiguous matches, null/missing/malformed/oversized inputs and stale complete source inventories.",
+      "Correlate collection to a digest of the exact bounded audited receipt projection; coherent receipt mutation cannot reuse an old audit.",
+      "Preserve literal required instruction and all proof/admission/raw expansion constraints; representation equality grants no execution, editing or completion authority.",
+      "Measure complete input with all wrappers; report bytes and locally pinned tokenizer proxy separately from native provider usage.",
+      "Keep unsupported and unprofitable requested cases in denominator; zero effective references cannot qualify treatment."
+    ],
+    "target": "Versioned provider presentation for exact required-instruction/query references, independent of source rendering and AST factoring."
+  },
+  "provider_calls": 0,
+  "schema": "terminal-token-reduction-next-phase@1",
+  "status": "planned_not_implemented"
+}

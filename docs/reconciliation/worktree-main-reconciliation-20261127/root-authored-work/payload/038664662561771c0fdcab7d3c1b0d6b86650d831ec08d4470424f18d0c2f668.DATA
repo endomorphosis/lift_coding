@@ -1,0 +1,99 @@
+import ObjectiveSourceScalarLift
+
+set_option backward.isDefEq.respectTransparency false
+
+/-!
+SOURCE-ONLY, UNCOMPILED, UNQUALIFIED CANDIDATE.
+
+Five RHS/body aliases copied by file-only lexical decomposition from the exact
+actual generated whole prefix. Kernel structural equality below, once checked,
+will join every alias and the complete record to that imported emittedPrefix.
+This does not assume their semantic objective/gradient values. It does not
+prove container evaluation, preparation, Python arithmetic, or convergence.
+Original generated source8046B SHA256
+31bc24c08296302aa15c8067df2cae7e7aa9f3d3b28b63145d661f82f1d3ccbb.
+-/
+
+namespace RankerObjectiveOriginalPrefixParts
+
+noncomputable section
+
+open RankerObjectivePrefixIR (Ty Schema)
+open RankerObjectiveContainerLanguage (SourceExpr)
+open RankerObjectiveSourceScalarLift (liftSourceScalar oldStableLossSource oldStableFactorSource)
+
+def resultSchema : Schema := [("margins", .vector 4), ("data", .scalar), ("regularizer", .scalar), ("factors", .vector 4), ("gradient", .vector 80)]
+
+def lossBodySource : SourceExpr .scalar :=
+  (SourceExpr.scalarBinary .add (SourceExpr.scalarBinary .max (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.scalarLiteral ((0 : ℚ) / (1 : ℚ)))) (SourceExpr.scalarUnary .neg (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := .scalar) "z")))) (SourceExpr.scalarUnary .log1p (SourceExpr.scalarUnary .exp (SourceExpr.scalarUnary .neg (SourceExpr.scalarUnary .abs (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := .scalar) "z")))))))
+
+def factorBodySource : SourceExpr .scalar :=
+  (SourceExpr.ifNonneg (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := .scalar) "z")) (SourceExpr.scalarBinary .div (SourceExpr.scalarUnary .exp (SourceExpr.scalarUnary .neg (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := .scalar) "z")))) (SourceExpr.scalarBinary .add (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.scalarLiteral ((1 : ℚ) / (1 : ℚ)))) (SourceExpr.scalarUnary .exp (SourceExpr.scalarUnary .neg (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := .scalar) "z")))))) (SourceExpr.scalarBinary .div (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.scalarLiteral ((1 : ℚ) / (1 : ℚ)))) (SourceExpr.scalarBinary .add (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.scalarLiteral ((1 : ℚ) / (1 : ℚ)))) (SourceExpr.scalarUnary .exp (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := .scalar) "z"))))))
+
+def marginsSource : SourceExpr (.vector 4) :=
+  (SourceExpr.mapRows "row" (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.matrix 4 80)) "differences")) (SourceExpr.fsumExact (SourceExpr.zipMap "x" "y" (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.vector 80)) "weights")) (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.vector 80)) "row")) (SourceExpr.scalarBinary .mul (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := .scalar) "x")) (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := .scalar) "y"))))))
+
+def dataSource : SourceExpr (.scalar) :=
+  (SourceExpr.scalarBinary .div (SourceExpr.fsumExact (SourceExpr.mapVector "z" (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.vector 4)) "margins")) lossBodySource)) (SourceExpr.natToScalar (SourceExpr.lengthVector (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.vector 4)) "margins")))))
+
+def regularizerSource : SourceExpr (.scalar) :=
+  (SourceExpr.scalarBinary .div (SourceExpr.scalarBinary .mul (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.scalarLiteral ((5764607523034235 : ℚ) / (576460752303423488 : ℚ)))) (SourceExpr.fsumExact (SourceExpr.zipMap "x" "y" (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.vector 80)) "weights")) (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.vector 80)) "weights")) (SourceExpr.scalarBinary .mul (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := .scalar) "x")) (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := .scalar) "y")))))) (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.scalarLiteral ((2 : ℚ) / (1 : ℚ)))))
+
+def factorsSource : SourceExpr (.vector 4) :=
+  (SourceExpr.mapVector "z" (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.vector 4)) "margins")) factorBodySource)
+
+def gradientSource : SourceExpr (.vector 80) :=
+  (SourceExpr.rangeMap "i" (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.vector 80)) "weights")) (SourceExpr.scalarBinary .sub (SourceExpr.scalarBinary .mul (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.scalarLiteral ((5764607523034235 : ℚ) / (576460752303423488 : ℚ)))) (SourceExpr.indexVector (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.vector 80)) "weights")) (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.index 80)) "i")))) (SourceExpr.scalarBinary .div (SourceExpr.fsumExact (SourceExpr.zipRowsMap "f" "row" (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.vector 4)) "factors")) (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.matrix 4 80)) "differences")) (SourceExpr.scalarBinary .mul (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := .scalar) "f")) (SourceExpr.indexVector (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.vector 80)) "row")) (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.index 80)) "i")))))) (SourceExpr.natToScalar (SourceExpr.lengthMatrix (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.matrix 4 80)) "differences")))))))
+
+def recordSourceFields : RankerObjectiveContainerLanguage.SourceFields resultSchema :=
+  (RankerObjectiveContainerLanguage.SourceFields.cons (name := "margins") (τ := (.vector 4)) (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.vector 4)) "margins")) (RankerObjectiveContainerLanguage.SourceFields.cons (name := "data") (τ := .scalar) (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := .scalar) "data")) (RankerObjectiveContainerLanguage.SourceFields.cons (name := "regularizer") (τ := .scalar) (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := .scalar) "regularizer")) (RankerObjectiveContainerLanguage.SourceFields.cons (name := "factors") (τ := (.vector 4)) (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.vector 4)) "factors")) (RankerObjectiveContainerLanguage.SourceFields.cons (name := "gradient") (τ := (.vector 80)) (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.vector 80)) "gradient")) RankerObjectiveContainerLanguage.SourceFields.nil)))))
+
+theorem emitted_prefix_decomposition :
+    GeneratedOriginalObjectiveContainerPrefix.emittedPrefix =
+      RankerObjectiveContainerLanguage.SourcePrefix.letBind "margins" marginsSource
+        (RankerObjectiveContainerLanguage.SourcePrefix.letBind "data" dataSource
+          (RankerObjectiveContainerLanguage.SourcePrefix.letBind "regularizer" regularizerSource
+            (RankerObjectiveContainerLanguage.SourcePrefix.letBind "factors" factorsSource
+              (RankerObjectiveContainerLanguage.SourcePrefix.letBind "gradient" gradientSource
+                (RankerObjectiveContainerLanguage.SourcePrefix.record recordSourceFields))))) := by
+  rfl
+
+theorem emitted_loss_body_scalar_injection :
+    lossBodySource = liftSourceScalar oldStableLossSource := by
+  rfl
+
+theorem emitted_factor_body_scalar_injection :
+    factorBodySource = liftSourceScalar oldStableFactorSource := by
+  rfl
+
+/-- Actual emitted loss scalar body, under a primitive named scalar binding.
+The complete enclosing map/data/prefix is not evaluated by this theorem. -/
+theorem emitted_loss_body_success (environment : RankerObjectivePrefixIR.NamedEnvironment)
+    (margin : ℝ) (binding : environment "z" .scalar = .ok margin) :
+    RankerObjectiveContainerLanguage.evalSourceExpr environment lossBodySource =
+      .ok (RankerRealCurvature.realStablePairLoss margin) := by
+  rw [emitted_loss_body_scalar_injection]
+  exact RankerObjectiveSourceScalarLift.named_stable_loss_success environment margin binding
+
+theorem emitted_factor_body_success (environment : RankerObjectivePrefixIR.NamedEnvironment)
+    (margin : ℝ) (binding : environment "z" .scalar = .ok margin) :
+    RankerObjectiveContainerLanguage.evalSourceExpr environment factorBodySource =
+      .ok (RankerRealCurvature.realStableLogisticP margin) := by
+  rw [emitted_factor_body_scalar_injection]
+  exact RankerObjectiveSourceScalarLift.named_stable_factor_success environment margin binding
+
+#print axioms emitted_prefix_decomposition
+#print axioms emitted_loss_body_scalar_injection
+#print axioms emitted_factor_body_scalar_injection
+#print axioms emitted_loss_body_success
+#print axioms emitted_factor_body_success
+
+end
+
+end RankerObjectiveOriginalPrefixParts
+
+#print axioms _root_.RankerObjectiveOriginalPrefixParts.emitted_prefix_decomposition
+#print axioms _root_.RankerObjectiveOriginalPrefixParts.emitted_loss_body_scalar_injection
+#print axioms _root_.RankerObjectiveOriginalPrefixParts.emitted_factor_body_scalar_injection
+#print axioms _root_.RankerObjectiveOriginalPrefixParts.emitted_loss_body_success
+#print axioms _root_.RankerObjectiveOriginalPrefixParts.emitted_factor_body_success

@@ -1,0 +1,21 @@
+-- Generated candidate embedding. No semantic axioms or program proofs are asserted.
+namespace IntentProjection
+
+structure Interpretation where
+  atom : String → List String → Prop
+  intended : Prop → Prop
+  required : Prop → Prop
+  prohibited : Prop → Prop
+  permitted : Prop → Prop
+  recommended : Prop → Prop
+
+def statement_b7a22ef5d4b67d43b358899120f9f8bfe41f917c95f18e2050911104c32ac57a (i : Interpretation) : Prop :=
+  i.required (i.atom "implement_interface" ["agent", "BaseTerminal"])
+
+def statement_83faef9be1ea309c944b35995d7a849c8ad3c826738909cc36d9aad844340021 (i : Interpretation) : Prop :=
+  i.required (i.atom "install_dependencies" ["agent", "system_python"])
+
+def statement_5fc00d994f3450ec8a4816374ff3cea57833116c63c587bff453b8c25b46fe3d (i : Interpretation) : Prop :=
+  i.required (i.atom "support_interactive_programs" ["HeadlessTerminal", "interactive_programs"])
+
+end IntentProjection

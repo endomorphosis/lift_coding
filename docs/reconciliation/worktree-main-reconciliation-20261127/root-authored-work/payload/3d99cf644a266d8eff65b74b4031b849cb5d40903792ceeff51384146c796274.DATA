@@ -1,0 +1,17 @@
+"""Frozen development service; actions are executed, never looked up as outputs."""
+import json
+import os
+import sys
+
+action, raw_value = sys.argv[1:]
+value = int(raw_value)
+delta = 2 * int(os.environ["WORLD_MEMORY_EVAL_SIGN"])
+if action == "identity":
+    result = value
+elif action == "subtract":
+    result = value - delta
+elif action == "add":
+    result = value + delta
+else:
+    raise ValueError(action)
+print(json.dumps({"value": result, "action": action}))

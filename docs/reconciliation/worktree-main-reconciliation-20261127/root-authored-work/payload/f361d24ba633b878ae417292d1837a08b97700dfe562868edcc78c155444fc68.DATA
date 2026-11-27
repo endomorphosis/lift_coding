@@ -1,0 +1,59 @@
+from pathlib import Path
+import hashlib
+import json
+import subprocess
+import time
+
+ROOT = Path('/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets')
+CHECKOUT = ROOT / 'checkout'
+OUT = ROOT / 'publication-02'
+EXPECTED_BASE = 'aa586a9b91b583a2ac5d867bd107ba0c5a4762d5'
+
+def run(receipt, label, argv, timeout=180):
+    started = time.monotonic()
+    row = {'label': label, 'argv': argv, 'returncode': None, 'exception': None}
+    try:
+        with (OUT / (label + '.stdout')).open('xb') as stdout, (OUT / (label + '.stderr')).open('xb') as stderr:
+            result = subprocess.run(argv, cwd=CHECKOUT, stdout=stdout, stderr=stderr, timeout=timeout, check=False)
+        row['returncode'] = result.returncode
+    except BaseException as error:
+        row['exception'] = {'type': type(error).__name__, 'message': str(error)}
+        raise
+    finally:
+        row['actual_outer_elapsed_seconds'] = time.monotonic() - started
+        receipt['operations'].append(row)
+        (OUT / 'progress.json').write_text(json.dumps(receipt, indent=2) + '\n')
+    if row['returncode']:
+        raise RuntimeError(label + ' failed returncode=' + str(row['returncode']))
+    return (OUT / (label + '.stdout')).read_text()
+
+def main():
+    OUT.mkdir()
+    started = time.monotonic()
+    receipt = {'schema': 'datasets-isolated-ordinary-main-publication@1', 'status': 'running', 'operations': [], 'expected_base': EXPECTED_BASE, 'LIVE_git_mutations': False, 'force_push': False, 'qualified_scope': 'selected meaningful source/docs/tests and published canonical child gitlinks; generated/binary assets separately preserved for HF; exact already-published path/blob versions excluded, all dirty child variants preserved in separate safe review archive', 'validation_scope': {'first_run': '504 passed/1 failed (retained stale wall-clock expectation)', 'corrected_timeout_file': '11 passed after exact upstream-contract correction; not a fresh 505-case rerun', 'staged_python_AST': 300, 'secret_pattern_scan': '0 selected staged byte-pattern findings, not whole history assurance', 'diff_check': 'three original extra EOF blank lines retained; no trailing whitespace warning'}}
+    try:
+        base = run(receipt, 'base-head', ['git', 'rev-parse', 'HEAD']).strip()
+        if run(receipt, 'head-parent', ['git', 'rev-parse', 'HEAD^']).strip() != EXPECTED_BASE:
+            raise RuntimeError('isolated HEAD differs from expected fetched main')
+        if run(receipt, 'unmerged', ['git', 'diff', '--name-only', '--diff-filter=U']).strip():
+            raise RuntimeError('unresolved index conflicts')
+        remote = run(receipt, 'remote-before', ['git', 'ls-remote', 'origin', 'refs/heads/main']).split()[0]
+        if remote != EXPECTED_BASE:
+            raise RuntimeError('remote main advanced; rebase/review required')
+        receipt['commit'] = run(receipt, 'new-head', ['git', 'rev-parse', 'HEAD']).strip()
+        run(receipt, 'push', ['git', 'push', 'origin', 'HEAD:refs/heads/main'])
+        receipt['verified_remote_main'] = run(receipt, 'remote-after', ['git', 'ls-remote', 'origin', 'refs/heads/main']).split()[0]
+        if receipt['verified_remote_main'] != receipt['commit']:
+            raise RuntimeError('remote verification differs from published commit')
+        receipt['status'] = 'published_and_remote_verified'
+    except BaseException as error:
+        receipt['status'] = 'failed'
+        receipt['error'] = {'type': type(error).__name__, 'message': str(error)}
+        raise
+    finally:
+        receipt['actual_outer_elapsed_seconds'] = time.monotonic() - started
+        (OUT / 'closed-attempt.json').write_text(json.dumps(receipt, indent=2, sort_keys=True) + '\n')
+    print(json.dumps({key: receipt[key] for key in ['status', 'commit', 'verified_remote_main', 'actual_outer_elapsed_seconds']}))
+
+if __name__ == '__main__':
+    main()

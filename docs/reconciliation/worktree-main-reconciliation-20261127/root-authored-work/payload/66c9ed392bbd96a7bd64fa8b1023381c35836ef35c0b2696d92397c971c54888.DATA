@@ -1,0 +1,39 @@
+{
+  "schema": "terminal-call-ir-composition-experiment-plan@1",
+  "source_scope": ["callee.py", "caller.py", "dynamic.py"],
+  "formal_closure": ["callee.py", "caller.py"],
+  "scope": "closed_caller_AST_composition_under_captured_callee_binding",
+  "grammar": "One unaliased absolute import of one captured root-module function, followed by one int-annotated function returning a chain of one through eight positional calls ending at its sole parameter.",
+  "callee_dependency": "Fresh native integer AST lowering proof at this complete repository head; exact compiled callee object imported unchanged.",
+  "formal_claims": [
+    "Generic call-expression lowering preserves the separately defined source evaluation under the imported callee equivalence theorem.",
+    "Independently extracted captured caller AST and native ProgramIR call trees correspond.",
+    "The concrete closed call model satisfies or refutes the requested integer offset."
+  ],
+  "required_controls": [
+    "Actual successful native callee and caller compilation.",
+    "Actual refutation of caller offset three against two calls adding one.",
+    "Actual Lean rejection after removing one native target call while preserving source caller syntax.",
+    "Separate exact-object imported axiom inventory without modifying native proof artifacts.",
+    "Callee, caller and import source edits refuse cold validation and miss the advisory cache.",
+    "Rebound execution counters and contradictory child proof-integration records reject.",
+    "Same-byte source replacement during a native metadata callback rejects the original custody witness.",
+    "A self-consistent rewritten native metadata index cannot replace the regenerated semantic population.",
+    "New-process current-owner, proof-dependency, metadata and cache readback with no new Lean invocation."
+  ],
+  "native_CALL_opacity_preserved": true,
+  "lexical_resolution_only": true,
+  "python_import_resolution_proved": false,
+  "source_parser_correctness_proved": false,
+  "cpython_equivalence_proved": false,
+  "whole_program_semantics_verified": false,
+  "full_task_satisfaction": false,
+  "training_steps": 0,
+  "provider_calls": 0,
+  "source_body_executed": false,
+  "network_isolation_enforced": false,
+  "original_task_budget_qualified": false,
+  "production_activated": false,
+  "benchmark_oracle_used": false,
+  "private_data_used": false
+}

@@ -1,0 +1,141 @@
+#!/usr/bin/env python3
+"""Bounded authored hook regressions, separate from original scorer admission."""
+from __future__ import annotations
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import shutil
+import subprocess
+import sys
+import time
+
+HERE=Path(__file__).resolve().parent
+WORKSPACE=next(p for p in HERE.parents if (p/'.worktrees/pctdd-g9-reviewed-deploy').is_dir())
+NATIVE=WORKSPACE/'.worktrees/pctdd-g9-reviewed-deploy/external'
+
+def canonical(value):return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()
+def sha(body):return hashlib.sha256(body).hexdigest()
+def save(path,value):
+    with Path(path).open('xb') as stream:stream.write(canonical(value)+b'\n')
+def check(ok,message):
+    if not ok:raise ValueError(message)
+def guard(freeze):
+    for path,digest in freeze['source_sha256'].items():check(sha(Path(path).read_bytes())==digest,'frozen source changed: '+path)
+
+TEST_SOURCE='''import os
+import pytest
+
+@pytest.fixture
+def current_fixture():
+    print("ORIGINAL_SETUP")
+    if os.environ["CONTROL_CASE"] == "setup_failure":
+        raise RuntimeError("authored setup failure")
+    yield object()
+    print("ORIGINAL_TEARDOWN")
+    if os.environ["CONTROL_CASE"] == "teardown_failure":
+        raise RuntimeError("authored teardown failure")
+
+def test_current_lifecycle(current_fixture):
+    print("ORIGINAL_CALL")
+    assert os.environ["CONTROL_CASE"] != "call_failure"
+'''
+OBSERVER_SOURCE='''import json,os
+from pathlib import Path
+import pytest
+rows=[]
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item,call):
+    result=yield
+    report=result.get_result()
+    rows.append({"phase":report.when,"outcome":report.outcome})
+def pytest_sessionfinish(session,exitstatus):
+    Path(os.environ["CONTROL_OBSERVER"]).write_text(json.dumps({"reports":rows,"exitstatus":int(exitstatus)}))
+'''
+
+def main():
+    enclosing_start=time.perf_counter()
+    parser=argparse.ArgumentParser();parser.add_argument('--run',type=Path,required=True);args=parser.parse_args();run=args.run.resolve()
+    check(HERE.parent.name=='lifecycle_profiles','execute an immutable lifecycle_profiles/<version> snapshot')
+    run.mkdir();project=run/'authored_controls';project.mkdir()
+    (project/'test_lifecycle.py').write_text(TEST_SOURCE);(project/'phase_observer.py').write_text(OBSERVER_SOURCE)
+    source_paths=set(HERE.glob('*.py'))|{project/'test_lifecycle.py',project/'phase_observer.py'}
+    for package in ('ipfs_accelerate','ipfs_datasets'):
+        package_root=NATIVE/package/('ipfs_accelerate_py' if package=='ipfs_accelerate' else 'ipfs_datasets_py')
+        source_paths.update(p.resolve() for p in package_root.rglob('*.py') if p.is_file())
+    source_hashes={str(p.resolve()):sha(p.read_bytes()) for p in sorted(source_paths)}
+    profile_sha=sha(canonical(source_hashes));freeze={'schema':'ns-original-lifecycle-hook-freeze/v1','source_sha256':source_hashes,
+        'native_profile_sha256':profile_sha,'cases':['pass','call_failure','setup_failure','teardown_failure'],
+        'request_negatives':['changed_binding_bytes','unqualified_reuse_enabled'],'process_bound_seconds':30,
+        'original_scorer_calls':0,'provider_calls':0,'qualification_scope':'Authored native hook regression only; original repositories still require curator execution under exact endpoint profile.'}
+    save(run/'freeze.json',freeze);rows=[];processes=[]
+    def execute(case,arm,negative=None):
+        directory=run/(case+'-'+arm+(('-'+negative) if negative else ''));directory.mkdir()
+        observation=directory/'observer.json';private=directory/'private_observation.json'
+        binding={'schema':'ns-original-curator-lifecycle-binding/v1','phase_population':'offline_control','allow_call_reuse':False,'eligible_call_case_cids':[],
+            'private_observation_path':str(private)}
+        for key in ('validation_request_sha256','scorer_profile_sha256','source_inventory_sha256','objective_record_sha256','objective_text_sha256',
+            'configuration_sha256','environment_profile_sha256','test_selection_sha256','trajectory_namespace_sha256'):
+            binding[key]=sha(('authored-offline-control:'+key+':'+case).encode())
+        binding['native_profile_sha256']=profile_sha
+        if negative=='unqualified_reuse_enabled':binding['allow_call_reuse']=True
+        binding_path=directory/'binding.json';save(binding_path,binding);binding_sha=sha(binding_path.read_bytes())
+        if negative=='changed_binding_bytes':binding_sha='0'*64
+        command=[sys.executable,'-B','-m','pytest','-p','phase_observer','-p','no:cacheprovider','-s','-q','test_lifecycle.py']
+        if arm=='native':command.extend(['-p','curator_lifecycle'])
+        env={k:v for k,v in os.environ.items() if k not in ('PYTHONPATH','PYTEST_ADDOPTS') and not k.startswith(('IPFS_','NS_'))}
+        env.update(PYTHONPATH=os.pathsep.join([str(HERE),str(project),str(NATIVE/'ipfs_accelerate'),str(NATIVE/'ipfs_datasets'),str(NATIVE/'ipfs_kit')]),
+            PYTHONDONTWRITEBYTECODE='1',PYTEST_DISABLE_PLUGIN_AUTOLOAD='1',IPFS_ACCEL_SKIP_CORE='1',IPFS_ACCEL_AUTO_INSTALL='0',
+            IPFS_TEST_PROOF_REUSE_AUTO_INSTALL='0',IPFS_DATASETS_PY_AUTO_GROTH16_BUILD='0',CONTROL_CASE=case,
+            CONTROL_OBSERVER=str(observation),NS_ORIGINAL_LIFECYCLE_BINDING=str(binding_path),NS_ORIGINAL_LIFECYCLE_BINDING_SHA256=binding_sha)
+        guard(freeze);tick=time.perf_counter()
+        try:
+            proc=subprocess.run(command,cwd=project,env=env,capture_output=True,timeout=30);out,err=proc.stdout,proc.stderr;returncode=proc.returncode;timed_out=False
+        except subprocess.TimeoutExpired as exc:out,err=exc.stdout or b'',exc.stderr or b'';returncode=None;timed_out=True
+        elapsed=time.perf_counter()-tick;(directory/'stdout').write_bytes(out);(directory/'stderr').write_bytes(err)
+        receipt={'case':case,'arm':arm,'negative':negative,'command':command,'returncode':returncode,'timed_out':timed_out,'wall_seconds':elapsed,'bound_seconds':30,
+            'markers':{name:len(re.findall(r'^[.FE]*ORIGINAL_'+name+r'$',out.decode(errors='replace'),re.MULTILINE)) for name in ('SETUP','CALL','TEARDOWN')},
+            'observer':json.loads(observation.read_bytes()) if observation.exists() else None,
+            'stdout_sha256':sha(out),'stderr_sha256':sha(err),'binding_sha256':sha(binding_path.read_bytes())}
+        if private.exists():
+            sys.path.insert(0,str(HERE));from curator_lifecycle import public_observation
+            receipt['native_lifecycle']=public_observation(private)
+        save(directory/'process.json',receipt);processes.append(receipt);guard(freeze)
+        return receipt
+    for case in freeze['cases']:
+        cold=execute(case,'baseline');native=execute(case,'native')
+        same=cold['returncode']==native['returncode'] and cold['observer']==native['observer'] and cold['markers']==native['markers']
+        check(same,'native adapter changed authored original lifecycle: '+case)
+        observation=native['native_lifecycle']
+        check(observation['call_reused']==0 and not observation['whole_grader_reused'],'unqualified native call reused')
+        check(not observation['native_fault_types'],'native source unavailable or hook failed')
+        check(observation['actual_native_import_count']>0,'native code not actually imported')
+        rows.append({'case':case,'passed':True,'same_original_reports_markers_exit':same,'native_lifecycle':observation})
+        save(run/('case_'+case+'.json'),rows[-1])
+    for negative in freeze['request_negatives']:
+        result=execute('pass','native',negative)
+        check(result['returncode'] not in (0,None) and result['markers']['CALL']==0,'invalid curator request reached CALL')
+        rows.append({'case':negative,'passed':True,'rejected_before_call':True})
+    actual_imports={}
+    for path in run.glob('*/private_observation.json'):
+        for name,item in json.loads(path.read_bytes())['native_loaded_sources'].items():
+            check(source_hashes.get(item['path'])==item['sha256'],'actually loaded native source is not frozen')
+            actual_imports[item['path']]=item['sha256']
+    summary={'schema':'ns-original-native-lifecycle-hook-qualification/v1','all_controls_passed':True,'controls':rows,'processes':processes,
+        'enclosing_process_seconds':sum(p['wall_seconds'] for p in processes),'native_profile_sha256':profile_sha,
+        'actual_native_import_count':len(actual_imports),'actual_native_import_sha256':actual_imports,'freeze_sha256':sha((run/'freeze.json').read_bytes()),
+        'qualified_call_reuse_population':0,'original_scorer_calls':0,'provider_calls':0,'original_endpoint_qualification_complete':False,
+        'scope':freeze['qualification_scope'],'enclosing_driver_seconds':time.perf_counter()-enclosing_start,
+        'cost_scope':'Driver includes authored fixture creation, full source manifest hashing/guards, all subprocesses and observation aggregation; process and callback times are nested. Profile copy before driver is not timed.'}
+    save(run/'summary.json',summary);print(json.dumps({k:summary[k] for k in ('all_controls_passed','enclosing_process_seconds','actual_native_import_count','qualified_call_reuse_population')}))
+
+if __name__=='__main__':
+    try:main()
+    except Exception as exc:
+        if '--run' in sys.argv:
+            root=Path(sys.argv[sys.argv.index('--run')+1])
+            if root.is_dir() and not (root/'terminal_failure.json').exists():
+                save(root/'terminal_failure.json',{'schema':'ns-original-lifecycle-qualification-failure/v1','exception_type':type(exc).__name__,'message':str(exc),'rerun_authorized_by_this_receipt':False})
+        raise

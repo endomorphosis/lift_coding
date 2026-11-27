@@ -1,0 +1,43 @@
+# Full-source context qualification through v11
+
+`full_context_profiles_v11_audit.json` is the additive cross-profile audit. It binds
+41 retained evidence files and checks the results without changing earlier runs.
+
+| Native source profile | Full XML preparation, seconds | Full Pyparsing producer process |
+| --- | ---: | --- |
+| Unmodified v5 | 64.838 | Deadline at 600.203 seconds |
+| Hoisted node CID index v7 | 26.296 | Deadline at 600.197 seconds |
+| Fixed CID encoding v8 | 16.731 | Deadline at 600.196 seconds |
+| CID syntax validation cache v9 | 7.793 | Deadline at 600.211 seconds |
+| Escaped literal union v11 | 7.937 | Deadline at 600.202 seconds |
+
+All five full XML native producer/consumer roundtrips pass, with exactly the same
+state and semantic root. All five Pyparsing scans have the same state CID. The
+table reports individual shared-host runs; it is not a replicated speedup estimate.
+
+The deadline means the producer process did not finish. It does not establish
+that bundle construction failed. In the separate v5 stage diagnostic the full
+bundle was assembled and verified before the source-read stage. In v11 the producer
+even wrote its result at 597.222 seconds before the 600-second process deadline.
+Its full semantic root matches the independently built and verified full bundle.
+No Pyparsing consumer was dispatched in these deadline runs, so no full Pyparsing
+roundtrip is admitted through v11.
+
+The literal-union change preserves the predicate that any ASCII node CID occurs
+anywhere as a byte substring in the canonical link payload. Its 1,235 constructed
+controls include embedded strings, escaped metacharacters, overlaps and empty
+sets. An actual full-repository audit compares both predicates on all 55,859 links
+against 3,957 node CIDs: every result is equal, and an embedded actual CID is
+rejected. That audit also builds and verifies all 67,872 native bundle blocks.
+The legacy and union predicates take 72.358 and 2.834 seconds within this diagnostic;
+those subsets cannot be substituted for end-to-end service cost. All 64 existing
+native content, Merkle, source and freshness regressions pass under this profile.
+
+`requests_public_enrollment_v1/summary.json` separately qualifies both newly
+exported public Requests development nodes. Each captures 97 files and scans all
+35 Python files, yielding 863 symbols. The older and newer nodes retain 5,129,625
+and 5,131,808 raw bytes respectively. Each native consumer materializes every raw
+file and passes eleven binding/tampering controls. There are zero source omissions,
+zero provider calls, no signed execution evidence and no token-savings result.
+The generic repository-context API is available to the repair controller, but
+changed accepted source needs a new capture and preparation.

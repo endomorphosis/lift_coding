@@ -1,0 +1,118 @@
+"""Proposed evaluation-only adapter; closed source enrollment, real native cache.
+
+This is not the default production proof-reuse plugin. Its trace contract is a
+bounded current-state snapshot under exact reviewed pure source enrollment; it
+does not claim to discover arbitrary Python runtime dependencies or side effects.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+import platform
+import sys
+import time
+from pathlib import Path
+
+import pytest
+from ipfs_accelerate_py.agent_supervisor.proof import test_execution_contracts as contracts
+from ipfs_accelerate_py.agent_supervisor.proof import test_proof_cache as cache_module
+from ipfs_accelerate_py.testing.proof_reuse import runner_pass_attestation as attest
+
+
+def digest(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def cid(value):
+    encoded = json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()
+    return attest.dag_cbor_cid({"canonical_json_sha256": hashlib.sha256(encoded).hexdigest()})
+
+
+def immutable(value):
+    if type(value) in (str, int, bool, type(None)):
+        return value
+    if type(value) is tuple:
+        return [immutable(v) for v in value]
+    raise ValueError("fixture value is outside the enrolled immutable profile")
+
+
+def pytest_configure(config):
+    spec = json.loads(Path(os.environ["NS_REUSE_SPEC"]).read_text())
+    config._ns_reuse = {"spec": spec, "reports": [], "decision": "NOT_REACHED", "body_calls": 0}
+
+
+def snapshot(item, spec):
+    root = Path(str(item.config.rootpath))
+    files = {str(p.relative_to(root)): digest(p) for p in sorted(root.rglob("*")) if p.is_file() and ".pytest_cache" not in p.parts and "__pycache__" not in p.parts and ".git" not in p.parts}
+    arguments = {name: immutable(item.funcargs[name]) for name in item._fixtureinfo.argnames}
+    env = {name: os.environ.get(name) for name in ["NS_REUSE_FACTOR", "PYTHONHASHSEED", "LANG", "LC_ALL"]}
+    source_enrolled = all(files.get(name) == sha for name, sha in spec["enrollment"].items())
+    binding = {"files": files, "fixture_values": arguments, "environment": env, "python": sys.version, "pytest": pytest.__version__, "platform": platform.platform(), "adapter_sha256": digest(__file__)}
+    locator = contracts.TestLocatorKey(repository_id="ns-reuse-enrolled-arithmetic-v1", package_identity="bounded-arithmetic", node_id=item.nodeid)
+    forest = cid(files)
+    static = cid({"kind": "enrolled-source-manifest", "files": files})
+    runtime = cid({"kind": "observed-post-setup-bounded-state", "binding": binding})
+    key = contracts.TestExecutionKey(locator_cid=locator.locator_id, repository_forest_cid=forest,
+        test_module_cid=cid(files["test_work.py"]), test_function_cid=cid(files["test_work.py"]),
+        fixture_cids=(cid(arguments), cid(files["conftest.py"])), conftest_closure_cid=cid(files["conftest.py"]),
+        hook_plugin_cids=(cid(digest(__file__)),), static_trace_root_cid=static, runtime_trace_root_cid=runtime,
+        runtime_completeness_policy="enrolled-pure-call-state-snapshot-v1", pytest_version=pytest.__version__, python_version=sys.version,
+        environment_cid=cid(env), config_cid=cid(files["settings.json"]), dependency_lock_cid=cid(files["requirements.lock"]),
+        policy_cid=spec["cache_policy"]["policy_cid"], eligibility_class=(contracts.EligibilityClass.SNAPSHOT_BOUND if source_enrolled else contracts.EligibilityClass.NON_REUSABLE))
+    return locator, key, binding
+
+
+@pytest.hookimpl(tryfirst=True)
+def pytest_pyfunc_call(pyfuncitem):
+    state = pyfuncitem.config._ns_reuse
+    spec = state["spec"]
+    try:
+        locator, key, binding = snapshot(pyfuncitem, spec)
+        state.update(locator=locator.to_dict(), execution_key=key.to_dict(), binding=binding)
+        if spec["mode"] == "warm":
+            bundle = json.loads(Path(spec["candidate"]).read_text()) if spec.get("candidate") else None
+            policy = attest.RunnerTrustPolicy.from_bytes(bytes.fromhex(spec["trust_policy_hex"]))
+            def verify(certificate, receipt, current_policy):
+                encoded = bytes.fromhex(bundle["attestation_hex"])
+                if certificate.proof_digest != hashlib.sha256(encoded).hexdigest():
+                    return False
+                result = attest.verify_runner_pass_attestation(encoded, receipt=receipt, policy=policy,
+                    pinned_policy_cid=current_policy["policy_cid"], current_execution_key_cid=key.execution_key_id,
+                    current_candidate_context_cid=cid({"profile": "enrolled-pure-call-v1", "key": key.execution_key_id}))
+                state["attestation_verification"] = {"valid": result.valid, "reason": result.reason}
+                return result.valid
+            candidates = []
+            if bundle:
+                receipt = contracts.TestPassReceipt.from_dict(bundle["receipt"])
+                certificate = contracts.TestProofCertificate.from_dict(bundle["certificate"])
+                candidates = [cache_module.TestProofCache.candidate(receipt, certificate)]
+            start = time.perf_counter()
+            result = cache_module.TestProofCache(current_policy=spec["cache_policy"], verifier=verify).lookup(locator, key, candidates=candidates)
+            state.update(lookup_wall_seconds=time.perf_counter()-start, decision=result.decision.action.value, reason=result.reason_code.value)
+            if result.hit:
+                print("NS_CALL_REUSED", flush=True)
+                return True
+        else:
+            state.update(decision="RUN", reason="independent_cold_execution")
+    except (ValueError, TypeError) as exc:
+        state.update(decision="RUN", reason="unsupported_fixture_or_candidate", detail=str(exc))
+    state["body_calls"] += 1
+    print("NS_BODY_EXECUTED", flush=True)
+    return None
+
+
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    report = outcome.get_result()
+    item.config._ns_reuse["reports"].append({"nodeid": report.nodeid, "phase": report.when, "outcome": report.outcome, "duration_seconds": report.duration})
+
+
+def pytest_sessionfinish(session, exitstatus):
+    state = session.config._ns_reuse
+    state["exitstatus"] = int(exitstatus)
+    state["imports"] = {m.__name__: {"path": str(Path(m.__file__).resolve()), "sha256": digest(m.__file__)} for m in [contracts, cache_module, attest]}
+    output = Path(state["spec"]["observation"])
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(state, indent=2, sort_keys=True) + "\n")

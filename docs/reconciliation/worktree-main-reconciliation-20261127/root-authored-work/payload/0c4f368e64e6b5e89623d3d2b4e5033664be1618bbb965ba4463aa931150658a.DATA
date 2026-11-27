@@ -1,0 +1,92 @@
+"""Freeze an outcome-blind queue for additional repository qualification."""
+import hashlib
+import json
+from pathlib import Path
+import re
+import time
+
+ROOT = Path(__file__).resolve().parent
+SEED = "neurosymbolic-system-family-screen-20260914-v1"
+
+
+def dump(path, value):
+    path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+
+
+def main():
+    output = ROOT / "rebench_screen_v1"
+    output.mkdir()
+    metadata = ROOT / "additional_metadata_v1/nebius__SWE-rebench.public_metadata.json"
+    historical = ROOT.parent / "next_stage_candidate_registry.json"
+    verified = ROOT / "verified_metadata_v1/summary.json"
+    rows = json.loads(metadata.read_text())
+    excluded = {r["family_id"].removeprefix("upstream:").casefold()
+                for r in json.loads(historical.read_text())["historical_candidates"]}
+    excluded.update(r["repo"].casefold() for r in json.loads(verified.read_text())["families"])
+    owners = {repo.split("/")[0] for repo in excluded}
+    rule = {"cutoff": "2025-01-01", "required_fields": ["docker_image", "image_name", "base_commit"],
+            "distinct_base_commits_per_repository": 2,
+            "exclude_repository_names": sorted(excluded), "exclude_owner_names": sorted(owners),
+            "family_order": "Ascending SHA256(seed + newline + casefolded repository name), tie by repository name.",
+            "family_seed": SEED, "within_family": "Two latest metadata-created rows with different base commits; tie by instance_id. This date's upstream event/timezone semantics remain unverified; Git ancestry determines eventual source order.",
+            "primary_screen_count": 16,
+            "reserve_policy": "Retain all remaining ranked eligible repositories. Any infrastructure/identity failure and subsequent use of a reserve must be recorded; no selection on treatment/provider outcomes.",
+            "source_novelty": "Dates and public dataset membership do not establish model-training novelty.",
+            "owner_policy": "At most one candidate per casefolded owner in this queue; current GitHub identity/fork verification remains necessary."}
+    freeze = {"schema": "ns-rebench-screen-freeze/v1", "frozen_at_ns": time.time_ns(), "rule": rule,
+              "inputs": {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in (metadata, historical, verified)},
+              "script_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+              "provider_calls": 0, "scorer_calls": 0, "protected_fields_decoded": False}
+    dump(output / "freeze.json", freeze)
+    (output / Path(__file__).name).write_bytes(Path(__file__).read_bytes())
+    groups, excluded_counts = {}, {}
+    for row in rows:
+        repo = row["repo"]
+        if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repo):
+            reason = "invalid_repository_identity"
+        elif repo.casefold() in excluded or repo.split("/")[0].casefold() in owners:
+            reason = "prior_repository_or_owner_exclusion"
+        elif row["created_at"] < rule["cutoff"]:
+            reason = "metadata_date_before_cutoff"
+        elif not all(row.get(k) for k in rule["required_fields"]):
+            reason = "no_published_environment_metadata"
+        elif not re.fullmatch(r"[0-9a-f]{40}", row["base_commit"]):
+            reason = "invalid_base_commit"
+        else:
+            groups.setdefault(repo, []).append(row)
+            continue
+        excluded_counts[reason] = excluded_counts.get(reason, 0) + 1
+    candidates = []
+    for repo, members in groups.items():
+        distinct = {}
+        for row in sorted(members, key=lambda r: (r["created_at"], r["instance_id"]), reverse=True):
+            distinct.setdefault(row["base_commit"], row)
+        if len(distinct) < 2:
+            continue
+        pair = sorted(list(distinct.values())[:2], key=lambda r: (r["created_at"], r["instance_id"]))
+        candidates.append({"repo": repo, "tasks": pair, "metadata_eligible_rows": len(members),
+                           "ranking_sha256": hashlib.sha256((SEED + "\n" + repo.casefold()).encode()).hexdigest(),
+                           "confirmatory_enrolled": False, "source_scorer_qualified": False})
+    ordered = sorted(candidates, key=lambda r: (r["ranking_sha256"], r["repo"]))
+    selected, owner_suppressed, seen = [], [], set()
+    for row in ordered:
+        owner = row["repo"].split("/")[0].casefold()
+        if owner in seen:
+            owner_suppressed.append(row["repo"])
+            continue
+        seen.add(owner)
+        selected.append({"rank": len(selected) + 1, **row})
+    value = {"schema": "ns-rebench-screen-queue/v1", "ranked_candidates": selected,
+             "primary_count": min(16, len(selected)), "metadata_pair_candidates": len(candidates),
+             "owner_suppressed": owner_suppressed, "input_row_count": len(rows),
+             "excluded_row_counts": excluded_counts, "confirmatory_enrolled_families": 0,
+             "model_calls": 0, "scorer_calls": 0}
+    dump(output / "queue.json", value)
+    dump(output / "artifact_manifest.json", {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+         for p in sorted(output.iterdir()) if p.is_file()})
+    print(json.dumps({k:v for k,v in value.items() if k != "ranked_candidates"}, indent=2))
+    print(json.dumps({"primary_repositories": [r["repo"] for r in selected[:16]]}, indent=2))
+
+
+if __name__ == "__main__":
+    main()

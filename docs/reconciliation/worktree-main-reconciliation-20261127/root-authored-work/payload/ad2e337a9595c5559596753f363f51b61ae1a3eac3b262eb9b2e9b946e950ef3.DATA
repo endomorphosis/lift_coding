@@ -1,0 +1,411 @@
+"""Complete historical model ordering with a separately nominated catalog.
+
+Native code/semantic compilation, codec projection and protected captured task
+bundle are real generated fixtures. Literal admission and catalog historical
+replay are explicit stubs in ordering cases; genuine historical producer replay
+has its own independent tests. No provider, existing owner or target execution.
+"""
+from copy import deepcopy
+import hashlib
+import json
+import os
+from pathlib import Path
+from types import SimpleNamespace
+
+import pytest
+
+from benchmarks.agent_supervisor.container_coding import terminal_context_audit as audit
+from benchmarks.agent_supervisor.container_coding.test_terminal_context_audit import (
+    captured_nomination, compiled, retrieval_projection_case, observe,
+)
+from ipfs_accelerate_py.agent_supervisor.context.context_compiler import ContextCompiler, render_context_capsule
+from ipfs_accelerate_py.agent_supervisor.context.context_contracts import ContextBudget, ContextReference
+from ipfs_accelerate_py.agent_supervisor.runtime import compact_code_retrieval as codec
+from ipfs_accelerate_py.agent_supervisor.runtime import reviewed_source_nomination_context as catalog
+from ipfs_accelerate_py.agent_supervisor.runtime import reviewed_source_nomination_audit as historical
+from ipfs_accelerate_py.agent_supervisor.runtime import router_public_instruction as public
+from ipfs_accelerate_py.agent_supervisor.runtime import semantic_router_translation as semantic
+from ipfs_accelerate_py.agent_supervisor.runtime import task_context_bundle as bundles
+from ipfs_accelerate_py.agent_supervisor.runtime import verified_code_retrieval_projection as verified
+from ipfs_accelerate_py.agent_supervisor.runtime.router_implementation_runner import render_model_prompt
+from ipfs_accelerate_py.agent_supervisor.runtime.supervisor_meta_index import public_replay_without_metadata
+
+
+def wire(value):
+    return json.dumps(value, sort_keys=True, separators=(',', ':'), ensure_ascii=False, allow_nan=False).encode('utf-8')
+
+
+def sha(value):
+    return hashlib.sha256(value.encode('utf-8') if type(value) is str else value).hexdigest()
+
+
+@pytest.fixture(autouse=True)
+def fresh_namespaces(tmp_path, monkeypatch):
+    monkeypatch.setenv('IPFS_ACCELERATE_META_INDEX_DUCKDB', str(tmp_path / 'fresh-local-metadata.duckdb'))
+    monkeypatch.delenv('IPFS_ACCELERATE_META_INDEX_DUCKLAKE', raising=False)
+    monkeypatch.setenv('IPFS_ACCELERATE_AGENT_ORCHESTRATION_DIR', str(tmp_path / 'fresh-orchestration'))
+    previous = os.umask(0o022)
+    try:
+        yield
+    finally:
+        os.umask(previous)
+
+
+def requirement_receipt():
+    return {'admission_graph_verified': True, 'native_persistence_verified_here': False,
+        'source_semantics_verified': False, 'semantic_alignment_verified': False, 'proof_authority': False,
+        'execution_authority': False, 'completion_authority': False, 'requirements_context_cid': 'cid:req',
+        'contract_cid': 'cid:contract', 'graph_cid': 'cid:graph', 'coverage_cid': 'cid:coverage',
+        'planning_receipt_cid': 'cid:planning', 'ledger_sha256': 'd' * 64,
+        'requirement_ids': ['req:pending'], 'dependency_requirement_ids': [], 'prohibition_requirement_ids': []}
+
+
+def inclusion(case):
+    return {'schema': catalog.RECEIPT_SCHEMA, 'artifact': '.runtime/nominated/nomination.json',
+        'artifact_sha256': 'c' * 64, 'native_prompt_sha256': sha(case['prompt']),
+        'native_prompt_bytes': len(case['prompt'].encode()), 'block_sha256': sha(case['catalog']),
+        'block_bytes': len(case['catalog'].encode()), 'task_id': 'FRONTIER-001', 'task_cid': 'cid:task',
+        'contract_cid': 'cid:contract', 'ledger_sha256': 'd' * 64, 'source_sha256': sha(case['query']),
+        'row_count': 0, 'residual_requirement_count': 1,
+        **{key: True for key in historical.TRUE_FIELDS}, **{key: False for key in historical.FALSE_FIELDS}}
+
+
+@pytest.fixture
+def appendix_case(retrieval_projection_case, monkeypatch):
+    case = retrieval_projection_case
+    capsule, _ = codec._native(case['prompt'])
+    refs = [ContextReference.from_dict(row) for row in capsule['evidence']]
+    refs += list(catalog.build_nomination_reference(artifact='.runtime/nominated/nomination.json',
+        sha256='c' * 64, repository_id=capsule['repository_id'], tree_id=capsule['tree_id']))
+    with public_replay_without_metadata():
+        built = ContextCompiler(ContextBudget(max_input_tokens=65536, max_items=128)).compile(
+            repository_id=capsule['repository_id'], tree_id=capsule['tree_id'], objective_id='FRONTIER-001',
+            objective_revision='cid:task', policy_id='policy:fixture', policy_revision='sha256:fixture',
+            caller='supervisor:fixture', stage='implementation', goal={'id': 'FRONTIER-001'},
+            authority={'mode': 'candidate'}, scope={'paths': ['bottle.py']}, acceptance={'criteria': ['pending']}, evidence=refs)
+        case['prompt'] = render_context_capsule(built.capsule)
+        case['capsule'].write_text(built.capsule.to_json())
+        case['encoded'] = semantic.encode_semantic_router_prompt(prompt=case['prompt'], repository=case['repository'])
+    case['public']['schema'] = 'supervisor-public-instruction-inclusion@2'
+    case['public']['intent_requirements'] = requirement_receipt()
+    original = case['native']['source_prepared']['metadata']
+    metadata = {**original, 'Code source nomination artifact': '.runtime/nominated/nomination.json',
+                'Code source nomination sha256': 'c' * 64}
+    bundle = bundles.write_task_context_bundle(repository=case['repository'], prepared=[{
+        'schema': 'supervisor-task-context-preparation@1', 'task_id': 'FRONTIER-001', 'task_cid': 'cid:task',
+        'metadata': metadata}], output=case['repository'] / '.runtime/nominated-task-bundle.json')
+    case['expected']['context_bundle'] = bundle
+    case['expected']['source_nomination'] = {'artifact': metadata['Code source nomination artifact'], 'sha256': 'c' * 64}
+    case['catalog'] = catalog.HEADER + '{"unit_ordering_stub":"α雪","behavioral_requirements_satisfied":false}\n'
+    case['catalog_calls'] = []
+    case['guard_calls'] = []
+    def replay(**kwargs):
+        case['catalog_calls'].append(kwargs)
+        assert kwargs['prompt'] == case['prompt'] and kwargs['source_text'] == case['query']
+        assert kwargs['nominations'] == metadata
+        assert kwargs['baseline_commit'] == case['prepared']['manifest']['payload']['baseline_commit']
+        scalar = kwargs['receipt']
+        observed = {'schema': historical.HISTORICAL_SCHEMA, 'present': True, 'catalog_bytes_exact': True,
+            'native_query_and_ast_replayed': True, 'original_signed_source_hashes_matched': True,
+            'metadata_original_witnesses_rechecked': True, 'same_trusted_runtime_command_prefix': True,
+            **{key: scalar[key] for key in ('block_sha256', 'block_bytes', 'row_count', 'residual_requirement_count')},
+            **{key: False for key in ('current_worktree_sources_read', 'current_owner_database_read',
+                'current_dispatch_authority', 'current_freshness_verified', 'review_authentication_claimed',
+                'source_authentication_claimed', 'semantic_equivalence_verified', 'behavioral_requirements_satisfied',
+                'proof_authority', 'execution_authority', 'completion_authority')}}
+        return case['catalog'], observed, lambda: case['guard_calls'].append(True)
+    monkeypatch.setattr(historical, 'replay_reviewed_source_nomination_context', replay)
+    case['write_receipt'] = lambda mode='expanded': write_receipt(case, mode)
+    write_receipt(case)
+    return case
+
+
+def write_receipt(case, mode='expanded'):
+    prompt = case['prompt']; workspace = case['workspace_root'] / 'removed'
+    selected, projection = prompt, None
+    decoder = verified.decoder_command_prefix(repository=case['repository'], source_path='requirements.md',
+        source_sha256=sha(case['query']), native_prompt_sha256=sha(prompt))
+    if mode in {'compact_v2', 'legacy_v1'}:
+        selected, raw = codec.project_code_retrieval_prompt(prompt, case['query'], decoder_command=decoder,
+            guidance_version=1 if mode == 'legacy_v1' else 2)
+        assert raw['selected_transport'] == 'compact'
+        with public_replay_without_metadata():
+            _, trusted = verified.project_verified_code_retrieval_prompt(prompt=prompt,
+                repository=case['repository'], source_text=case['query'], decoder_command=decoder)
+        projection = {**raw, 'native_verification': trusted['native_verification'], 'decoder_command': decoder}
+    if mode == 'identifiers': selected = case['encoded'].provider_prompt
+    router = selected + case.get('residual', '') + case['catalog'] + case['block']
+    model, advisory = render_model_prompt(prompt=router, purpose='coding', workspace=workspace,
+        semantic_transport=mode == 'identifiers', code_retrieval_projected=projection is not None)
+    semantic_verification = {'schema': 'semantic-router-source-verification@1', 'freshness_checked': True,
+        **{key: case['encoded'].receipt[key] for key in audit.SEMANTIC_BINDINGS},
+        'native_prompt_sha256': sha(prompt), 'native_prompt_bytes': len(prompt.encode())}
+    receipt = {'schema': 'router-implementation-invocation@1', 'phase': 'coding', 'purpose': 'coding',
+        'invocation_id': 'unit-catalog-' + mode, 'workspace': str(workspace), 'prompt_sha256': sha(prompt),
+        'prompt_bytes': len(prompt.encode()), 'native_prompt_sha256': sha(prompt), 'native_prompt_bytes': len(prompt.encode()),
+        'router_prompt_sha256': sha(router), 'router_prompt_bytes': len(router.encode()), 'model_prompt_sha256': sha(model),
+        'model_prompt_bytes': len(model.encode()), 'workspace_advisory_sha256': sha(advisory),
+        'workspace_advisory_bytes': len(advisory.encode()), 'semantic_transport': 'identifiers' if mode == 'identifiers' else 'native',
+        'semantic_translation': case['encoded'].receipt if mode == 'identifiers' else None,
+        'semantic_context_verification': semantic_verification, 'public_instruction': case['public'],
+        'reviewed_source_nomination_context': inclusion(case), 'code_retrieval_codec': 'compact' if projection else 'expanded'}
+    if projection is not None: receipt['code_retrieval_projection'] = projection
+    case.update(model=model, router=router, selected=selected, receipts=[receipt])
+    (case['state'] / 'prepared.json').write_bytes(wire(case['prepared']))
+    (case['state'] / 'context-result.json').write_bytes(wire(case['expected']))
+
+
+@pytest.mark.parametrize('mode', ['expanded', 'compact_v2', 'legacy_v1', 'identifiers'])
+def test_catalog_whole_model_order_replays_after_retirement_and_current_publication(appendix_case, mode):
+    case = appendix_case
+    case['write_receipt'](mode)
+    # Different published source bytes are not the captured baseline; no live source read is authorized here.
+    (case['repository'] / 'bottle.py').write_text('def published_later():\n    return None\n')
+    audited_receipt = audit._receipt(case['receipts'][0], case['workspace_root'])
+    replayed, _, checks = audit._model_projection(rendered=case['prompt'], receipt=audited_receipt,
+        repository=case['repository'], prepared=case['prepared'], expected=case['expected'])
+    assert replayed == case['model'] and all(checks.values()), checks
+    case['guard_calls'].clear()
+    result = observe(case)
+    assert result['status'] == 'verified_all_observed_model_inputs', result
+    assert result['all_observed_coding_inputs_verified'] is True and case['guard_calls'] == [True]
+    assert case['model'].index(case['catalog']) < case['model'].index(case['block'])
+    assert not case['workspace_root'].exists()
+    assert case['query'] not in json.dumps(result) and case['catalog'] not in json.dumps(result)
+    assert result['completion_authority'] is result['task_correctness_established'] is False
+
+
+@pytest.mark.parametrize('invalid', ['null', 'extra', 'bool_bytes', 'authority_alias', 'native_hash',
+                                    'native_bytes', 'foreign_task', 'ledger', 'orphan_receipt'])
+def test_closed_optional_receipt_refuses_malformed_or_unjoined_fields(appendix_case, invalid):
+    case = appendix_case; receipt = deepcopy(case['receipts'][0]); value = receipt['reviewed_source_nomination_context']
+    if invalid == 'null': receipt['reviewed_source_nomination_context'] = None
+    elif invalid == 'extra': value['hidden_extra'] = False
+    elif invalid == 'bool_bytes': value['block_bytes'] = True
+    elif invalid == 'authority_alias': value['completion_authority'] = 0
+    elif invalid == 'native_hash': value['native_prompt_sha256'] = 'f' * 64
+    elif invalid == 'native_bytes': value['native_prompt_bytes'] += 1
+    elif invalid == 'foreign_task': value['task_cid'] = 'cid:foreign'
+    elif invalid == 'ledger': value['ledger_sha256'] = 'f' * 64
+    elif invalid == 'orphan_receipt': receipt.pop('public_instruction')
+    with pytest.raises(ValueError): audit._receipt(receipt, case['workspace_root'])
+
+
+def test_missing_receipt_cannot_silently_downgrade_a_present_required_pointer(appendix_case):
+    case = appendix_case
+    case['receipts'][0].pop('reviewed_source_nomination_context')
+    result = observe(case)
+    assert result['all_observed_coding_inputs_verified'] is False and not result['matches']
+    assert case['catalog_calls'] == []
+
+
+def test_missing_genuine_bundle_refuses_even_invented_redundant_nomination_metadata(appendix_case):
+    case = appendix_case
+    case['expected'].pop('context_bundle')
+    case['expected']['metadata'] = {**case['native']['source_prepared']['metadata'],
+        'Code source nomination artifact': '.runtime/nominated/nomination.json', 'Code source nomination sha256': 'c' * 64}
+    (case['state'] / 'context-result.json').write_bytes(wire(case['expected']))
+    result = observe(case)
+    assert result['all_observed_coding_inputs_verified'] is False and case['catalog_calls'] == []
+
+
+def test_marked_context_with_dropped_pointer_and_receipt_refuses_producer_omission(retrieval_projection_case):
+    case = retrieval_projection_case
+    case['expected']['source_nomination'] = {'requested': True}
+    (case['state'] / 'context-result.json').write_bytes(wire(case['expected']))
+    result = observe(case)
+    assert result['all_observed_coding_inputs_verified'] is False and not result['matches']
+
+
+def test_default_absence_keeps_exact_legacy_metadata_and_model(compiled, captured_nomination, monkeypatch):
+    monkeypatch.setattr(historical, 'replay_reviewed_source_nomination_context', lambda **_: pytest.fail('default replayed catalog'))
+    assert audit._captured_code_nomination(repository=captured_nomination['repository'],
+        prepared=captured_nomination['prepared'], expected=captured_nomination['expected']) == captured_nomination['metadata']
+    result = observe(compiled)
+    assert result['status'] == 'verified_all_observed_model_inputs'
+    assert not any('reviewed_source' in name for name in result['matches'][0]['model_input_checks'])
+
+
+def test_child_request_keeps_optional_scalar_receipt_and_whole_request_budget(appendix_case, monkeypatch):
+    case = appendix_case; sent = []
+    def child(argv, **kwargs):
+        sent.append(json.loads(kwargs['input']))
+        return SimpleNamespace(returncode=0, stdout=wire(audit._base()), stderr=b'')
+    monkeypatch.setattr(audit.subprocess, 'run', child)
+    audit.collect_terminal_context_audit(state=case['state'], receipts=case['receipts'],
+        workspace_root=case['workspace_root'], timeout_seconds=1)
+    assert sent[0][0]['reviewed_source_nomination_context'] == case['receipts'][0]['reviewed_source_nomination_context']
+    oversized = deepcopy(case['receipts'])
+    oversized[0]['reviewed_source_nomination_context']['extra'] = 'x' * audit.MAX_REQUEST_BYTES
+    result = audit.collect_terminal_context_audit(state=case['state'], receipts=oversized,
+        workspace_root=case['workspace_root'], timeout_seconds=1)
+    assert result['reason'] == 'audit_request_exceeds_bound' and len(sent) == 1
+
+
+@pytest.mark.parametrize('catalog_present,requested,expected_timeout', [
+    (False, 3.0, 3.0), (False, 30.0, 10.0), (True, 3.0, 3.0), (True, 30.0, 30.0), (True, 1e9, 30.0),
+])
+def test_explicit_catalog_audit_budget_extends_only_to_bounded_thirty_seconds(
+        compiled, monkeypatch, catalog_present, requested, expected_timeout):
+    # Presence selects a CPU budget only; the child still validates every
+    # scalar field and all historical joins before granting any audit result.
+    receipts = deepcopy(compiled['receipts'])
+    if catalog_present: receipts[0]['reviewed_source_nomination_context'] = {'invalid': 'explicit unit budget selector'}
+    seen = []
+    def child(*args, **kwargs):
+        seen.append(kwargs['timeout'])
+        return SimpleNamespace(returncode=0, stdout=wire(audit._base()), stderr=b'')
+    monkeypatch.setattr(audit.subprocess, 'run', child)
+    result = audit.collect_terminal_context_audit(state=compiled['state'], receipts=receipts,
+        workspace_root=compiled['workspace_root'], timeout_seconds=requested)
+    assert seen == [expected_timeout] and result['all_observed_coding_inputs_verified'] is None
+
+
+@pytest.mark.parametrize('remaining_seconds', [0.0, .75, 1.0, 1.05, 6.0, 11.0, 40.0, 1e9])
+def test_driver_catalog_budget_keeps_deadline_reserve_and_preserves_accounting(
+        monkeypatch, tmp_path, remaining_seconds):
+    from benchmarks.agent_supervisor.container_coding import terminal_container_supervisor as driver
+    from benchmarks.agent_supervisor.container_coding.test_terminal_context_audit_budget import report_for
+    report = report_for('compact')
+    report['provider_invocations'][1]['reviewed_source_nomination_context'] = {'invalid': 'budget selector only'}
+    prior = deepcopy(report)
+    seen = []
+    monkeypatch.setattr(driver, 'time', SimpleNamespace(monotonic=lambda: 1000.0))
+    def collect(**kwargs):
+        seen.append(kwargs)
+        return audit._base(reason='audit_budget_unavailable' if kwargs['timeout_seconds'] < .1 else 'unit_observation')
+    monkeypatch.setattr(audit, 'collect_terminal_context_audit', collect)
+    driver._final_context_audit(report, state=tmp_path / 'state', deadline=1000.0 + remaining_seconds)
+    assert len(seen) == 1
+    assert seen[0]['state'] == tmp_path / 'state' and seen[0]['workspace_root'] == driver.WORKTREES
+    assert seen[0]['receipts'] == prior['provider_invocations']
+    allocated = seen[0]['timeout_seconds']
+    assert allocated == pytest.approx(max(0.0, min(30.0, remaining_seconds - 1.0)))
+    assert 0 <= allocated <= 30
+    if remaining_seconds >= 1:
+        assert remaining_seconds - allocated >= 1 - 1e-10
+    assert {key: report[key] for key in prior} == prior
+    assert report['context_input_audit']['all_observed_coding_inputs_verified'] is None
+    assert report['context_input_audit']['provider_calls'] == 0
+    assert report['context_input_audit']['completion_authority'] is False
+
+
+def test_planning_only_catalog_does_not_extend_driver_coding_audit_budget(monkeypatch, tmp_path):
+    from benchmarks.agent_supervisor.container_coding import terminal_container_supervisor as driver
+    from benchmarks.agent_supervisor.container_coding.test_terminal_context_audit_budget import report_for
+    report = report_for('expanded')
+    report['provider_invocations'][0]['reviewed_source_nomination_context'] = {'invalid': 'planning-only selector'}
+    prior = deepcopy(report)
+    seen = []
+    monkeypatch.setattr(driver, 'time', SimpleNamespace(monotonic=lambda: 1000.0))
+    monkeypatch.setattr(audit, 'collect_terminal_context_audit', lambda **kwargs: (
+        seen.append(kwargs) or audit._base(reason='unit_observation')))
+    driver._final_context_audit(report, state=tmp_path / 'state', deadline=1040.0)
+    assert len(seen) == 1 and seen[0]['timeout_seconds'] == 10.0
+    assert {key: report[key] for key in prior} == prior
+    assert report['context_input_audit']['all_observed_coding_inputs_verified'] is None
+
+
+@pytest.mark.parametrize('restore', [False, True])
+def test_captured_bundle_final_witness_is_checked_after_whole_model_render(appendix_case, monkeypatch, restore):
+    case = appendix_case
+    import ipfs_accelerate_py.agent_supervisor.runtime.router_implementation_runner as runner
+    original = runner.render_model_prompt
+    def mutate(**kwargs):
+        result = original(**kwargs)
+        path = case['repository'] / case['expected']['context_bundle']['artifact']
+        raw = path.read_bytes(); path.write_bytes(raw + b' ')
+        if restore: path.write_bytes(raw)
+        return result
+    monkeypatch.setattr(runner, 'render_model_prompt', mutate)
+    result = observe(case)
+    assert result['all_observed_coding_inputs_verified'] is False and not result['matches']
+
+
+def test_complete_hash_refuses_catalog_literal_order_swap(appendix_case):
+    case = appendix_case; receipt = case['receipts'][0]
+    wrong = case['selected'] + case['block'] + case['catalog']
+    model, _ = render_model_prompt(prompt=wrong, purpose='coding', workspace=Path(receipt['workspace']))
+    receipt.update(router_prompt_sha256=sha(wrong), model_prompt_sha256=sha(model))
+    result = observe(case)
+    assert result['all_observed_coding_inputs_verified'] is False
+    assert result['matches'][0]['model_input_checks']['router_prompt_sha256'] is False
+
+
+def test_doctor_residual_catalog_literal_and_workspace_order_all_enter_complete_hash(appendix_case, monkeypatch):
+    from ipfs_accelerate_py.agent_supervisor.runtime import doctor_residual_context as doctor
+    case = appendix_case
+    case['residual'] = '\nDoctor candidate-only residual α雪; requirements remain pending.\n'
+    case['write_receipt']('compact_v2')
+    residual = {'schema': 'doctor-residual-router-context@1', 'candidate_only': True,
+        'artifact': str(case['repository'] / 'residual.json'), 'artifact_sha256': 'e' * 64,
+        'task_cid': 'cid:task', 'context_cid': 'cid:residual', 'native_capsule_id': 'cid:capsule',
+        'advisory_sha256': sha(case['residual']), 'advisory_bytes': len(case['residual'].encode())}
+    case['receipts'][0]['doctor_residual_context'] = residual
+    def load(**kwargs):
+        assert kwargs['require_current_source'] is False and kwargs['prompt'] == case['prompt']
+        return case['residual'], residual
+    monkeypatch.setattr(doctor, 'load_doctor_residual_advisory', load)
+    result = observe(case)
+    assert result['all_observed_coding_inputs_verified'] is True, result
+    assert case['model'].index(case['residual']) < case['model'].index(case['catalog']) < case['model'].index(case['block'])
+
+
+def test_duplicate_native_pointer_refuses_before_any_catalog_replay(appendix_case):
+    case = appendix_case; capsule, suffix = codec._native(case['prompt'])
+    pointer = next(row for row in capsule['evidence'] if row['kind'] == catalog.KIND)
+    capsule['evidence'].append(deepcopy(pointer))
+    prompt = wire(capsule).decode() + suffix
+    with pytest.raises(ValueError, match='unique required nomination pointer'):
+        audit._model_projection(rendered=prompt, receipt=case['receipts'][0], repository=case['repository'],
+            prepared=case['prepared'], expected=case['expected'])
+    assert case['catalog_calls'] == []
+
+
+def test_optional_catalog_cannot_expand_complete_live_model_byte_cap(appendix_case):
+    case = appendix_case; receipt = case['receipts'][0]
+    receipt['model_prompt_bytes'] = 256001
+    with pytest.raises(ValueError, match='live router bound'):
+        audit._receipt(receipt, case['workspace_root'])
+
+
+@pytest.mark.parametrize('empty', [False, True])
+def test_genuine_historical_catalog_integration_uses_actual_captured_bundle_and_false_authority_observations(
+        tmp_path, monkeypatch, empty):
+    from test.api.test_reviewed_source_nomination_audit import historical_case
+    case = historical_case(tmp_path, empty=empty)
+    args = case['arguments']; root = case['root']; prompt = case['prompt']
+    # The pointer comes from a real native capsule. Its independently saved
+    # task bundle supplies both nomination and original retrieval pins.
+    bundle = bundles.write_task_context_bundle(repository=root, prepared=[{
+        'schema': 'supervisor-task-context-preparation@1', 'task_cid': args['instruction_receipt']['task_cid'],
+        'task_id': args['instruction_receipt']['task_id'], 'metadata': args['nominations']}],
+        output=root / 'historical-task-context-bundle.json')
+    prepared = {'repository': str(root), 'query': args['source_text'],
+        'spec': {'task_key': args['instruction_receipt']['task_id']},
+        'manifest': {'payload': {'baseline_commit': args['baseline_commit']}}}
+    expected = {'task_cid': args['instruction_receipt']['task_cid'], 'context_bundle': bundle,
+                'source_nomination': {'artifact': args['receipt']['artifact']}}
+    scalar = args['instruction_receipt']
+    block = verified.SOURCE_PREFIX + args['source_text'] + verified.SOURCE_SUFFIX
+    literal = {**scalar, 'schema': 'supervisor-public-instruction-inclusion@2',
+        'context_cid': 'cid:literal-fixture', 'manifest_cid': 'cid:manifest-fixture',
+        'source_path': 'instruction.md', 'block_sha256': sha(block), 'block_bytes': len(block.encode())}
+    monkeypatch.setattr(public, 'load_public_instruction', lambda **kwargs: (block, literal))
+    monkeypatch.setattr(audit, '_native_semantic_bindings', lambda **kwargs: args['semantic_verification'])
+    workspace = case['retired_workspace']
+    router = prompt + case['block_expected'] + block
+    model, advisory = render_model_prompt(prompt=router, purpose='coding', workspace=workspace)
+    receipt = {'native_prompt_sha256': sha(prompt), 'native_prompt_bytes': len(prompt.encode()),
+        'router_prompt_sha256': sha(router), 'router_prompt_bytes': len(router.encode()),
+        'model_prompt_sha256': sha(model), 'model_prompt_bytes': len(model.encode()),
+        'workspace_advisory_sha256': sha(advisory), 'workspace_advisory_bytes': len(advisory.encode()),
+        'workspace': str(workspace), 'semantic_context_verification': args['semantic_verification'],
+        'public_instruction': literal, 'reviewed_source_nomination_context': args['receipt']}
+    replayed, _, checks = audit._model_projection(rendered=prompt, receipt=receipt, repository=root,
+        prepared=prepared, expected=expected)
+    assert replayed == model and all(checks.values()), checks
+    assert checks['reviewed_source_proof_authority_false'] is True
+    assert checks['reviewed_source_current_freshness_verified_false'] is True
+    if empty: assert checks['reviewed_source_row_count'] is True and args['receipt']['row_count'] == 0
+    assert not workspace.exists()

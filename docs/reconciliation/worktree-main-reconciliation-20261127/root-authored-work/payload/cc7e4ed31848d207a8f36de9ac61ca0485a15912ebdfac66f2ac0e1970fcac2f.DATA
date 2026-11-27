@@ -1,0 +1,6 @@
+set_option maxHeartbeats 200000
+set_option maxRecDepth 512
+theorem empirical_goal (P1 Q1 R1 S1 : Prop) : (P1 → Q1) → (Q1 → R1) → P1 → R1 := by
+  intro hPQ hQR hP
+  exact hQR (hPQ hP)
+#print axioms empirical_goal

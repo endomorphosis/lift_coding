@@ -1,0 +1,448 @@
+"""Twenty unexecuted SOURCE-ONLY control groups for the prefix draft.
+
+Future file-pinned pytest harness supplies RANKER_AST_SOURCE and
+RANKER_PREFIX_BINDINGS. These tests do not import the ranker or run its source.
+The tiny arithmetic oracle in control 17 tests a policy independently; it is
+neither a kernel semantics implementation nor a Python/Float equivalence proof.
+No tests in this source draft have been imported or executed.
+"""
+import ast
+import copy
+import hashlib
+import json
+import os
+from fractions import Fraction
+from pathlib import Path
+
+import pytest
+import objective_prefix_compiler as compiler
+
+
+@pytest.fixture
+def buffers():
+    source = Path(os.environ['RANKER_AST_SOURCE']).read_bytes()
+    bindings = Path(os.environ['RANKER_PREFIX_BINDINGS']).read_bytes()
+    assert len(source) == compiler.SOURCE_BYTES
+    assert hashlib.sha256(source).hexdigest() == compiler.SOURCE_SHA256
+    assert len(bindings) == compiler.BINDINGS_BYTES
+    assert hashlib.sha256(bindings).hexdigest() == compiler.BINDINGS_SHA256
+    return source, bindings
+
+
+def _context(buffers):
+    module = ast.parse(buffers[0].decode('utf-8'))
+    return module.body[24], module.body[23], module.body[11].value
+
+
+def _lower(buffers, change=None):
+    objective, dot, l2 = _context(buffers)
+    statements = objective.body[:5]
+    if change is not None:
+        change(statements)
+    return compiler.lower_unbound_numeric_prefix(statements, dot, l2,
+        {'weights': 80, 'rows': 4, 'columns': 80})
+
+
+def _expression(text, lexical_types, **options):
+    return compiler.lower_generic_expression(ast.parse(text, mode='eval').body, lexical_types, **options)
+
+
+def _refuses(code, action):
+    with pytest.raises(compiler.CompileRefusal) as caught:
+        action()
+    assert caught.value.reason_code == code
+    return caught.value
+
+
+def _walk(value):
+    if type(value) is dict:
+        yield value
+        for child in value.values():
+            yield from _walk(child)
+    elif type(value) is list:
+        for child in value:
+            yield from _walk(child)
+
+
+def _assigned_tree(result, name):
+    tree = result['tree']
+    while tree['kind'] == 'letBind':
+        if tree['binder'] == name:
+            return tree['value']
+        tree = tree['body']
+    raise AssertionError('missing assignment')
+
+
+def test_01_pinned_source_seventeen_bindings_generic_tree_and_no_io(buffers, monkeypatch):
+    def forbidden(*args, **kwargs):
+        raise AssertionError('compiler attempted file access or source evaluation')
+    monkeypatch.setattr('builtins.open', forbidden)
+    monkeypatch.setattr('builtins.eval', forbidden)
+    monkeypatch.setattr('builtins.exec', forbidden)
+    result = compiler.compile_objective_numeric_prefix(*buffers)
+    assert result['checked_context_statements'] == 7
+    assert result['accepted_numeric_statements'] == 5
+    assert set(result['checked_bindings']) == compiler.ALL_BINDING_NAMES
+    assert [item['name'] for item in result['assignments']] == list(compiler.PREFIX_NAMES)
+    assert result['callee_AST_inline_calls'] == 2
+    assert result['L2_exact_ratio'] == {'numerator': '5764607523034235', 'denominator': '576460752303423488'}
+    assert result['source_AST_parse_calls'] == 1
+    assert result['source_function_execution_calls'] == 0
+    assert result['kernel_checked'] is False
+    assert result['proof_authority'] is False
+    assert result['full_objective_semantics_proved'] is False
+    forbidden_kinds = {'objective', 'gradient', 'dot', 'logisticLoss', 'sigmoid', 'descent', 'convergence'}
+    assert not forbidden_kinds.intersection(node.get('kind') for node in _walk(result['tree']))
+    assert any(node.get('kind') == 'zipMap' for node in _walk(result['tree']))
+    assert any(node.get('kind') == 'zipRowsMap' for node in _walk(result['tree']))
+
+
+def test_02_gradient_sign_mutation_changes_unbound_tree_original_pin_refuses(buffers):
+    original = _lower(buffers)
+    def change(statements):
+        statements[4].value.elt.op = ast.Add()
+    mutated = _lower(buffers, change)
+    assert _assigned_tree(original, 'gradient')['body']['operator'] == 'sub'
+    assert _assigned_tree(mutated, 'gradient')['body']['operator'] == 'add'
+    assert mutated['original_source_bridge'] is False
+    changed = buffers[0].replace(b'L2 * weights[i] - math.fsum', b'L2 * weights[i] + math.fsum')
+    assert changed != buffers[0]
+    _refuses('sourcePinMismatch', lambda: compiler.compile_objective_numeric_prefix(changed, buffers[1]))
+
+
+def test_03_data_denominator_mutation_is_not_silently_normalized(buffers):
+    def change(statements):
+        statements[1].value.right = ast.parse('len(weights)', mode='eval').body
+    result = _lower(buffers, change)
+    denominator = _assigned_tree(result, 'data')['arguments'][1]
+    assert denominator['kind'] == 'natToScalar'
+    assert denominator['value']['source']['name'] == 'weights'
+    assert result['assignments'][1]['assignment_AST_sha256'] != _lower(buffers)['assignments'][1]['assignment_AST_sha256']
+    changed = buffers[0].replace(b'/ len(margins)', b'/ len(weights)')
+    _refuses('sourcePinMismatch', lambda: compiler.compile_objective_numeric_prefix(changed, buffers[1]))
+
+
+def test_04_gradient_denominator_mutation_retains_source_operation(buffers):
+    def change(statements):
+        statements[4].value.elt.right.right = ast.parse('len(weights)', mode='eval').body
+    result = _lower(buffers, change)
+    denominator = _assigned_tree(result, 'gradient')['body']['arguments'][1]['arguments'][1]
+    assert denominator['kind'] == 'natToScalar'
+    assert denominator['value']['source']['name'] == 'weights'
+    changed = buffers[0].replace(b'/ len(differences)', b'/ len(weights)')
+    _refuses('sourcePinMismatch', lambda: compiler.compile_objective_numeric_prefix(changed, buffers[1]))
+
+
+def test_05_zip_order_and_binder_roles_are_checked(buffers):
+    def reverse_arguments(statements):
+        iterator = statements[4].value.elt.right.left.args[0].generators[0].iter
+        iterator.args.reverse()
+    _refuses('typeMismatch', lambda: _lower(buffers, reverse_arguments))
+    def reverse_binders(statements):
+        target = statements[4].value.elt.right.left.args[0].generators[0].target
+        target.elts.reverse()
+    _refuses('typeMismatch', lambda: _lower(buffers, reverse_binders))
+    def singleton_binder(statements):
+        statements[4].value.elt.right.left.args[0].generators[0].target = ast.Name(id='f', ctx=ast.Store())
+    _refuses('binderShape', lambda: _lower(buffers, singleton_binder))
+
+
+def test_06_replacing_gradient_with_scalar_is_structured_type_refusal(buffers):
+    def change(statements):
+        statements[4].value = ast.Constant(value=0)
+    refusal = _refuses('typeMismatch', lambda: _lower(buffers, change))
+    assert refusal.node_kind == 'Assign'
+
+
+def test_07_multiple_filtered_async_and_malformed_comprehensions_refuse(buffers):
+    def multiple(statements):
+        statements[0].value.generators.append(ast.comprehension(target=ast.Name(id='other', ctx=ast.Store()),
+            iter=ast.Name(id='differences', ctx=ast.Load()), ifs=[], is_async=0))
+    def filtered(statements):
+        statements[0].value.generators[0].ifs = [ast.Constant(value=True)]
+    def asynchronous(statements):
+        statements[0].value.generators[0].is_async = 1
+    for change in (multiple, filtered, asynchronous):
+        _refuses('binderShape', lambda change=change: _lower(buffers, change))
+    malformed = ast.BinOp(left=ast.Constant(value=1), op=ast.Add())
+    _refuses('unsupportedNode', lambda: compiler.lower_generic_expression(malformed, {'z': {'kind': 'scalar'}}))
+    scope = {'z': {'kind': 'scalar'}}
+    # ASDL collection fields are exact lists, not universally optional None.
+    for bad_collection in (None, 0, 'not_a_list', ast.Constant(value=0)):
+        malformed_nodes = [
+            ast.ListComp(elt=ast.Constant(value=0), generators=bad_collection),
+            ast.GeneratorExp(elt=ast.Constant(value=0), generators=bad_collection),
+            ast.Call(func=ast.Name(id='abs', ctx=ast.Load()), args=bad_collection, keywords=[]),
+            ast.Call(func=ast.Name(id='abs', ctx=ast.Load()), args=[], keywords=bad_collection),
+            ast.Compare(left=ast.Name(id='z', ctx=ast.Load()), ops=bad_collection,
+                        comparators=[ast.Constant(value=0)]),
+            ast.Compare(left=ast.Name(id='z', ctx=ast.Load()), ops=[ast.GtE()],
+                        comparators=bad_collection),
+        ]
+        for node in malformed_nodes:
+            _refuses('unsupportedNode', lambda node=node: compiler.lower_generic_expression(node, scope))
+        def bad_targets(statements, bad_collection=bad_collection):
+            statements[0].targets = bad_collection
+        _refuses('unsupportedNode', lambda: _lower(buffers, bad_targets))
+        def bad_zip_tuple(statements, bad_collection=bad_collection):
+            statements[4].value.elt.right.left.args[0].generators[0].target.elts = bad_collection
+        _refuses('unsupportedNode', lambda: _lower(buffers, bad_zip_tuple))
+    for bad_elements in ([None], ['not_an_expr'], [ast.Load()]):
+        node = ast.Call(func=ast.Name(id='abs', ctx=ast.Load()), args=bad_elements, keywords=[])
+        _refuses('unsupportedNode', lambda node=node: compiler.lower_generic_expression(node, scope))
+    for node in (
+        ast.ListComp(elt=ast.Constant(value=0), generators=[ast.Constant(value=0)]),
+        ast.Compare(left=ast.Constant(value=0), ops=[ast.Add()], comparators=[ast.Constant(value=0)]),
+        ast.Compare(left=ast.Constant(value=0), ops=[ast.GtE()], comparators=[]),
+        ast.Dict(keys=[ast.Constant(value='x')], values=[]),
+        ast.Name(id='z', ctx=None),
+    ):
+        _refuses('unsupportedNode', lambda node=node: compiler.lower_generic_expression(node, scope))
+    objective, dot, _ = _context(buffers)
+    for literal in (ast.Constant(), ast.Constant(value=[0.01])):
+        _refuses('unsupportedNode', lambda literal=literal: compiler.lower_unbound_numeric_prefix(
+            objective.body[:5], dot, literal, {'weights': 80, 'rows': 4, 'columns': 80}))
+    # Optional None stays valid in original-module context and argument defaults.
+    context = ast.parse('def helper(*, required):\n    return None\n').body[0]
+    compiler._ast_bounds(context, max_nodes=compiler.MAX_MODULE_NODES,
+                         max_depth=compiler.MAX_MODULE_DEPTH)
+    assert context.args.kw_defaults == [None]
+    context.args.kw_defaults = []
+    _refuses('unsupportedNode', lambda: compiler._ast_bounds(context,
+        max_nodes=compiler.MAX_MODULE_NODES, max_depth=compiler.MAX_MODULE_DEPTH))
+
+
+def test_08_fixed_shape_and_ragged_input_refuse_without_generic_equality_assumption(buffers):
+    for weights, rows, columns in ((79, 4, 79), (81, 4, 81), (80, 3, 80), (80, 5, 80), (80, 4, 79)):
+        _refuses('shapeMismatch', lambda weights=weights, rows=rows, columns=columns:
+            compiler.compile_objective_numeric_prefix(*buffers,
+                shape_specification={'weights': weights, 'rows': rows, 'columns': columns}))
+    _refuses('shapeMismatch', lambda: compiler.admit_original_numeric_domain([0.0] * 80,
+        [[0.0] * 80, [0.0] * 79, [0.0] * 80, [0.0] * 80]))
+    objective, dot, l2 = _context(buffers)
+    generic = compiler.lower_unbound_numeric_prefix(objective.body[:5], dot, l2,
+        {'weights': 3, 'rows': 2, 'columns': 3})
+    assert generic['original_source_bridge'] is False
+    assert generic['shape'] == {'weights': 3, 'rows': 2, 'columns': 3}
+
+
+def test_09_empty_mean_is_error_and_not_total_real_division(buffers):
+    _refuses('divisionByZero', lambda: compiler.compile_objective_numeric_prefix(*buffers,
+        shape_specification={'weights': 80, 'rows': 0, 'columns': 80}))
+    _refuses('divisionByZero', lambda: compiler.admit_original_numeric_domain([0.0] * 80, []))
+    objective, dot, l2 = _context(buffers)
+    _refuses('divisionByZero', lambda: compiler.lower_unbound_numeric_prefix(objective.body[:5], dot, l2,
+        {'weights': 80, 'rows': 0, 'columns': 80}))
+
+
+def test_10_negative_out_of_range_and_wrong_bound_indices_refuse():
+    scope = {'weights': {'kind': 'vector', 'length': 3}, 'i': {'kind': 'index', 'bound': 4}}
+    for text in ('weights[-1]', 'weights[3]', 'weights[99]', 'weights[i]'):
+        _refuses('indexOutOfBounds', lambda text=text: _expression(text, scope))
+    _refuses('unsupportedNode', lambda: _expression('weights[0]', scope))
+
+
+def test_11_range_is_ascending_established_vector_length_only(buffers):
+    value = _assigned_tree(_lower(buffers), 'gradient')
+    assert value['kind'] == 'rangeMap'
+    assert value['length'] == value['index_bound'] == 80
+    assert value['order'] == 'ascending_zero_to_bound_exclusive'
+    indices = [node for node in _walk(value) if node.get('kind') == 'indexVector']
+    assert len(indices) == 2
+    assert all(node['index']['type'] == {'kind': 'index', 'bound': 80} for node in indices)
+    scope = {'weights': {'kind': 'vector', 'length': 3}}
+    for text in ('[weights[i] for i in range(-1)]', '[weights[i] for i in range(0, len(weights))]',
+                 '[weights[i] for i in range(len(weights), 0, -1)]'):
+        _refuses('unsupportedNode', lambda text=text: _expression(text, scope))
+
+
+def test_12_unequal_and_zero_zip_lengths_use_minimum_and_exact_order():
+    text = 'math.fsum(x * y for x, y in zip(a, b))'
+    for left, right in ((3, 2), (2, 3), (0, 3), (3, 0)):
+        result = _expression(text, {'a': {'kind': 'vector', 'length': left},
+                                   'b': {'kind': 'vector', 'length': right}})
+        assert result['original_source_bridge'] is False
+        assert result['tree']['kind'] == 'fsumExact'
+        assert result['tree']['order'] == 'ascending_exact_real_addition'
+        zipped = result['tree']['values']
+        assert zipped['kind'] == 'zipMap'
+        assert zipped['type'] == {'kind': 'vector', 'length': min(left, right)}
+        assert zipped['truncation'] == 'minimum_length'
+        assert zipped['body']['operator'] == 'mul'
+
+
+def test_13_return_tuple_keys_order_and_full_function_boundary_are_not_accepted(buffers):
+    _refuses('unsupportedNode', lambda: compiler.compile_full_objective(*buffers))
+    replacements = ((b'"pair_logistic_loss": data', b'"changed_loss": data'),
+                    (b'"gradient_norm": math.sqrt', b'"other_norm": math.sqrt'),
+                    (b'return {"objective": data + regularizer, "pair_logistic_loss": data,',
+                     b'return {"pair_logistic_loss": data, "objective": data + regularizer,'),
+                    (b'}, gradient\n', b'}, gradient, gradient\n'))
+    for before, after in replacements:
+        changed = buffers[0].replace(before, after)
+        assert changed != buffers[0]
+        _refuses('sourcePinMismatch', lambda changed=changed: compiler.compile_objective_numeric_prefix(changed, buffers[1]))
+
+
+def test_14_nonfinite_guard_side_effect_and_new_shadowed_global_are_context_pinned(buffers):
+    replacements = ((b'all(math.isfinite(x)', b'any(math.isfinite(x)'),
+                    (b'    margins = [_dot', b'    print(weights)\n    margins = [_dot'),
+                    (b'L2 = 0.01', b'math = object()\nL2 = 0.01'))
+    for before, after in replacements:
+        changed = buffers[0].replace(before, after)
+        assert changed != buffers[0]
+        _refuses('sourcePinMismatch', lambda changed=changed: compiler.compile_objective_numeric_prefix(changed, buffers[1]))
+    _refuses('unsupportedNode', lambda: _expression('(z := 1)', {'z': {'kind': 'scalar'}}))
+
+
+def test_15_nonfinite_and_bool_inputs_refuse_and_source_l2_is_binary_ratio():
+    for value in (float('nan'), float('inf'), float('-inf')):
+        weights = [0.0] * 80
+        weights[11] = value
+        _refuses('nonfiniteInput', lambda weights=weights:
+            compiler.admit_original_numeric_domain(weights, [[0.0] * 80 for _ in range(4)]))
+        _refuses('nonfiniteInput', lambda value=value:
+            compiler.lower_generic_expression(ast.Constant(value=value), {'z': {'kind': 'scalar'}}))
+        rows = [[0.0] * 80 for _ in range(4)]
+        rows[2][11] = value
+        _refuses('nonfiniteInput', lambda rows=rows: compiler.admit_original_numeric_domain([0.0] * 80, rows))
+    _refuses('unsupportedLiteral', lambda: compiler.admit_original_numeric_domain([True] * 80,
+        [[0.0] * 80 for _ in range(4)]))
+    ratio = _expression('0.01', {'z': {'kind': 'scalar'}})['tree']['ratio']
+    assert Fraction(int(ratio['numerator']), int(ratio['denominator'])) != Fraction(1, 100)
+    assert ratio == {'numerator': compiler.L2_NUMERATOR, 'denominator': compiler.L2_DENOMINATOR}
+    _refuses('budget', lambda: compiler.admit_original_numeric_domain([5e-324] * 80,
+        [[0.0] * 80 for _ in range(4)]))
+
+
+def test_16_dead_branch_unsupported_syntax_is_checked_eagerly(buffers):
+    scope = {'z': {'kind': 'scalar'}}
+    for text, code in (('1 if z >= 0 else forbidden(z)', 'unknownName'),
+                       ('1 if z >= 0 else z ** 2', 'unsupportedNode'),
+                       ('1 if z >= 0 else math.sqrt(z)', 'unknownName'),
+                       ('1 if z > 0 else 2', 'unsupportedComparison')):
+        _refuses(code, lambda text=text: _expression(text, scope))
+    forged = compiler.compile_objective_numeric_prefix(*buffers)
+    _assigned_tree(forged, 'factors')['body']['arguments'][2] = {'kind': 'malformed_dead_branch'}
+    _refuses('irForgery', lambda: compiler.render_generated_objective_prefix(forged, *buffers))
+
+
+class _OracleDomainError(ValueError):
+    pass
+
+
+def _independent_arithmetic_oracle(tree, scalars):
+    """Small test oracle only: no source execution, libm, container or proof API."""
+    if tree['kind'] == 'scalarLiteral':
+        return Fraction(int(tree['ratio']['numerator']), int(tree['ratio']['denominator']))
+    if tree['kind'] == 'var':
+        return scalars[tree['name']]
+    assert tree['kind'] == 'scalarOp'
+    operator, arguments = tree['operator'], tree['arguments']
+    if operator == 'ifNonneg':
+        condition = _independent_arithmetic_oracle(arguments[0], scalars)
+        return _independent_arithmetic_oracle(arguments[1 if condition >= 0 else 2], scalars)
+    values = [_independent_arithmetic_oracle(argument, scalars) for argument in arguments]
+    if operator == 'neg':
+        return -values[0]
+    if operator == 'div':
+        if values[1] == 0:
+            raise _OracleDomainError('divisionByZero')
+        return values[0] / values[1]
+    if operator == 'log1p' and values[0] <= -1:
+        raise _OracleDomainError('log1pDomain')
+    raise AssertionError('oracle intentionally does not implement other operations')
+
+
+def test_17_valid_dead_domain_errors_are_not_host_evaluated_and_selected_branch_is_lazy():
+    scope = {'z': {'kind': 'scalar'}}
+    for text, error in (('1 if z >= 0 else 1 / 0', 'divisionByZero'),
+                        ('1 if z >= 0 else math.log1p(-1)', 'log1pDomain')):
+        tree = _expression(text, scope)['tree']
+        assert tree['operator'] == 'ifNonneg'
+        assert tree['syntax_policy'] == 'both_branches_checked'
+        assert tree['evaluation_policy'] == 'only_selected_branch'
+        assert _independent_arithmetic_oracle(tree, {'z': Fraction(0)}) == 1
+        with pytest.raises(_OracleDomainError, match=error):
+            _independent_arithmetic_oracle(tree, {'z': Fraction(-1)})
+    assert _expression('1 / 0', scope)['tree']['operator'] == 'div'
+
+
+def test_18_unknown_shadowed_global_roles_and_callee_forgery_refuse(buffers):
+    for name in ('math', 'abs', 'max', 'len', 'zip', 'range', '_dot', 'L2'):
+        _refuses('unknownName', lambda name=name: _expression('z',
+            {'z': {'kind': 'scalar'}, name: {'kind': 'scalar'}}))
+    roles = dict(compiler._GLOBALS)
+    roles['math'] = 'module:forged'
+    _refuses('unknownName', lambda: _expression('math.exp(z)', {'z': {'kind': 'scalar'}}, lexical_globals=roles))
+    _refuses('unknownName', lambda: _expression('unknown', {'z': {'kind': 'scalar'}}))
+    objective, dot, l2 = _context(buffers)
+    dot.body[0].value.args[0].elt.op = ast.Add()
+    _refuses('contextHashMismatch', lambda: compiler.lower_unbound_numeric_prefix(objective.body[:5], dot, l2,
+        {'weights': 80, 'rows': 4, 'columns': 80}))
+
+
+def test_19_wide_cyclic_deep_integer_and_hash_budgets_precede_unbounded_work(buffers):
+    scope = {'z': {'kind': 'scalar'}}
+    wide = ast.Call(func=ast.Name(id='abs', ctx=ast.Load()), args=[ast.Constant(value=0) for _ in range(600)], keywords=[])
+    _refuses('budget', lambda: compiler.lower_generic_expression(wide, scope))
+    cycle = ast.BinOp(op=ast.Add(), right=ast.Constant(value=1))
+    cycle.left = cycle
+    _refuses('budget', lambda: compiler.lower_generic_expression(cycle, scope))
+    deep = ast.Name(id='z', ctx=ast.Load())
+    for _ in range(70):
+        deep = ast.UnaryOp(op=ast.USub(), operand=deep)
+    _refuses('budget', lambda: compiler.lower_generic_expression(deep, scope))
+    _refuses('budget', lambda: compiler.lower_generic_expression(ast.Constant(value=1 << 1024), scope))
+    _refuses('sourcePinMismatch', lambda: compiler.compile_objective_numeric_prefix(*buffers,
+        expected_source_sha256='f' * 1000000))
+    _refuses('typeMismatch', lambda: _expression('z', {'z': {'kind': 's' * 1000000}}))
+    _refuses('typeMismatch', lambda: _expression('z', {'z': {'kind': []}}))
+    cyclic_json = {}
+    cyclic_json['tree'] = cyclic_json
+    _refuses('budget', lambda: compiler.render_generated_objective_prefix(cyclic_json, *buffers))
+    _refuses('budget', lambda: compiler.render_generated_objective_prefix({'tree': [None] * 20000}, *buffers))
+    _refuses('budget', lambda: compiler.render_generated_objective_prefix(
+        {'tree': {'kind': 'scalarLiteral', 'ratio': {'numerator': '9' * 1000000, 'denominator': '1'}}}, *buffers))
+    _refuses('budget', lambda: compiler.render_generated_objective_prefix({'schema': 's' * 1000000}, *buffers))
+    objective, dot, _ = _context(buffers)
+    _refuses('budget', lambda: compiler.lower_unbound_numeric_prefix(objective.body[:5], dot,
+        ast.Constant(value=1 << 1024), {'weights': 80, 'rows': 4, 'columns': 80}))
+    _refuses('budget', lambda: compiler.lower_unbound_numeric_prefix(objective.body[:5], dot,
+        ast.Constant(value=0.01, kind='x' * 1000000), {'weights': 80, 'rows': 4, 'columns': 80}))
+    altered_fields = ast.Constant(value=0)
+    altered_fields._fields = ()
+    _refuses('unsupportedNode', lambda: compiler.lower_generic_expression(altered_fields, scope))
+    wide_generator_field = ast.ListComp(elt=ast.Constant(value=0),
+        generators=[ast.comprehension(target=ast.Name(id='x', ctx=ast.Store()),
+             iter=ast.Name(id='z', ctx=ast.Load()), ifs=[], is_async=0) for _ in range(600)])
+    _refuses('budget', lambda: compiler.lower_generic_expression(wide_generator_field, scope))
+
+
+def test_20_renderer_reextracts_same_buffer_and_rejects_complete_receipt_forgery(buffers, monkeypatch):
+    original_parse = compiler.ast.parse
+    calls = []
+    def counted_parse(*arguments, **keywords):
+        calls.append(arguments[0])
+        return original_parse(*arguments, **keywords)
+    monkeypatch.setattr(compiler.ast, 'parse', counted_parse)
+    result = compiler.compile_objective_numeric_prefix(*buffers)
+    assert len(calls) == 1
+    rendered = compiler.render_generated_objective_prefix(result, *buffers)
+    assert len(calls) == 2
+    assert calls[0] == calls[1] == buffers[0].decode('utf-8')
+    assert rendered['renderer_additional_source_AST_parse_calls'] == 1
+    assert rendered['typed_Lean_SourcePrefix_exists'] is False
+    assert json.loads(rendered['text']) == result
+    assert hashlib.sha256(rendered['text'].encode('utf-8')).hexdigest() == rendered['text_sha256']
+    for field, value in (('proof_authority', True), ('source_AST_parse_calls', 0),
+                         ('accepted_numeric_statements', 7), ('extra_field', 'forged')):
+        forged = copy.deepcopy(result)
+        forged[field] = value
+        _refuses('irForgery', lambda forged=forged: compiler.render_generated_objective_prefix(forged, *buffers))
+    forged = copy.deepcopy(result)
+    forged['tree']['value']['body']['values']['body']['operator'] = 'add'
+    _refuses('irForgery', lambda: compiler.render_generated_objective_prefix(forged, *buffers))
+    _refuses('sourcePinMismatch', lambda: compiler.render_generated_objective_prefix(result, buffers[0] + b'\n', buffers[1]))
+    _refuses('sourcePinMismatch', lambda: compiler.render_generated_objective_prefix(result, buffers[0], buffers[1] + b'\n'))
+    _refuses('irSchema', lambda: compiler.render_generated_objective_prefix(_lower(buffers), *buffers))

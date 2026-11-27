@@ -1,0 +1,157 @@
+"""TEST-only native interpreter ports for exact repository scorer nomination."""
+from dataclasses import asdict
+import json
+import time
+from request_contract import canonical, plain, sha, require
+from procedure import C, cid, expected_action
+from evidence import independent_action_check
+from ipfs_accelerate_py.agent_supervisor.procedure_compiler.certificate import CurrentCertificateContext
+from ipfs_accelerate_py.agent_supervisor.procedure_compiler.interpreter import (
+    AdmissionDecision,AdmissionKind,BudgetReservation,ExecutionMode,InMemoryCheckpointStore,InMemoryIdempotencyStore,
+    InterpreterAdmissionPorts,IsolationReservation,OperationResult,ProcedureInterpreter,RuntimeCost,RuntimeIdentity,
+    TrustedOperation,TrustedOperationCatalog)
+
+class MemoryArtifacts:
+    def __init__(self):self.bodies={}
+    def put(self,value):
+        value=plain(value);identity=cid(value);body=canonical(value)
+        require(identity not in self.bodies or self.bodies[identity]==body,'CID/body collision')
+        self.bodies[identity]=body;return identity
+    def get(self,identity):
+        body=self.bodies[identity];value=json.loads(body)
+        require(canonical(value)==body and cid(value)==identity,'changed native artifact bytes')
+        return value
+
+class Reservations:
+    """Real trusted-process immutable-input ownership, not hostile-code isolation."""
+    def __init__(self,owner):self.owner=owner;self.active={};self.budgets={}
+    def acquire(self,request):
+        self.owner.input_for(request.invocation_cid)
+        require(request.read_only and not request.worktree_required and not request.lease_id and not request.fencing_token and tuple(request.scope_paths)==('.validation',),'unsupported isolation request')
+        require(request.invocation_cid not in self.active,'input reservation already active')
+        identity=self.owner.store.put({'schema':'ns-original-local-input-reservation/v1','request':asdict(request)})
+        result=IsolationReservation(identity,'',0,('.validation',),'immutable-request:'+self.owner.request_sha,True,identity)
+        self.active[request.invocation_cid]=result;return result
+    def reserve(self,request):
+        self.owner.input_for(request.invocation_cid)
+        require(request.token_limit==0 and request.resource_limit<=60000 and request.time_limit_ms<=60000,'resource request exceeds profile')
+        identity=self.owner.store.put({'schema':'ns-original-local-budget/v1','request':asdict(request)})
+        require(identity not in self.budgets,'budget already reserved')
+        result=BudgetReservation(identity,0,request.resource_limit,request.time_limit_ms,identity);self.budgets[identity]=result;return result
+    def release(self,reservation,*,consumed=None):
+        if consumed is not None:
+            require(reservation.reservation_id in self.budgets and not consumed.token_count and consumed.resource_units<=reservation.resource_limit and consumed.elapsed_ms<=reservation.time_limit_ms,'budget release invalid')
+            del self.budgets[reservation.reservation_id]
+        else:
+            identities=[key for key,value in self.active.items() if value==reservation];require(len(identities)==1,'unknown input reservation');del self.active[identities[0]]
+    def compensate(self,reservation,*,reason_code):raise ValueError('read-only nomination has no source mutation to compensate')
+
+class NativeNominationRuntime:
+    def __init__(self,candidate,certificate,verifier,policy,validated,request,profile_sha,*,fault=None):
+        self.candidate=candidate;self.procedure=candidate.procedure;self.certificate=certificate;self.verifier=verifier;self.policy=policy
+        self.validated=validated;self.request_sha=sha(canonical(request));self.profile_sha=profile_sha;self.fault=fault
+        self.store=MemoryArtifacts();self.invocations={};self.bindings={};self.actions={};self.policy_checked=set();self.completed=set();self.dispatches=[];self.admissions=[]
+        # Only this immutable descriptor is exposed inside declared native reads.
+        # Whole public source observation occurred before interpreter creation.
+        self.query=self.store.put({'schema':'ns-original-current-request-json/v1','request_json':canonical(request).decode(),
+            'source_inventory_sha256':validated['source_inventory_sha256'],'endpoint_contract_sha256':validated['endpoint_contract_sha256']})
+        self.selection=self.store.put({'schema':'ns-original-test-only-selection/v1','procedure_cid':self.procedure.content_id,'certificate_cid':certificate.content_id,
+            'bindings':self.procedure.bindings.to_dict(),'profile_sha256':profile_sha,'registry_promoted':False})
+        operations=[TrustedOperation(step.operation.value,step.operation_contract,self.handle,allowed_effect_ids=tuple(step.declared_effect_ids),
+            read_only=True,maximum_timeout_ms=30000,input_types={key:C.ValueType.STRUCTURED for key in step.input_bindings},
+            output_types={key:C.ValueType.STRUCTURED for key in step.output_bindings}) for step in self.procedure.steps]
+        reservations=Reservations(self);self.reservations=reservations;self.checkpoints=InMemoryCheckpointStore()
+        self.interpreter=ProcedureInterpreter(operation_catalog=TrustedOperationCatalog(policy.operation_catalog_revision,operations),
+            admissions=InterpreterAdmissionPorts(certificate=self,compatibility=self,authority=self,evidence=self),
+            isolation=reservations,budget_reservations=reservations,checkpoints=self.checkpoints,idempotency=InMemoryIdempotencyStore())
+    def prepare(self,ordinal=0):
+        now=int(time.time()*1000)
+        authority=self.store.put({'schema':'ns-original-nomination-authority/v1','query_cid':self.query,'procedure_cid':self.procedure.content_id,
+            'certificate_cid':self.certificate.content_id,'bindings':self.procedure.bindings.to_dict(),'profile_sha256':self.profile_sha,
+            'mode':'test','scope':['.validation'],'capability':'capability.validation-nomination','observed_at_ms':now,'expires_at_ms':now+60000,'ordinal':ordinal})
+        invocation=C.ProcedureInvocation(bindings=self.procedure.bindings,procedure_cid=self.procedure.content_id,certificate_cid=self.certificate.content_id,
+            registry_revision=self.selection,parameters={'request-cid':self.query},requested_scope=('.validation',),authority_receipt_cids=(authority,),
+            idempotency_key=cid({'query':self.query,'authority':authority,'ordinal':ordinal}),dry_run=False,requested_at_ms=now)
+        self.invocations[invocation.content_id]=invocation
+        self.bindings[invocation.content_id]=self.store.put({'schema':'ns-original-invocation-input-binding/v1','invocation_cid':invocation.content_id,'query_cid':self.query,'authority_cid':authority})
+        runtime=RuntimeIdentity(**{key:getattr(self.procedure.bindings,key) for key in ('repository_id','repository_commit','tree_id','objective_id','task_id','contract_revision','policy_revision','environment_id')},
+            registry_revision=self.selection,operation_catalog_revision=self.policy.operation_catalog_revision,now_ms=now)
+        return invocation,runtime
+    def input_for(self,identity):
+        invocation=self.invocations[identity];require(invocation.content_id==identity,'invocation bytes changed')
+        binding=self.store.get(self.bindings[identity]);authority=self.store.get(binding['authority_cid'])
+        require(binding['invocation_cid']==identity and binding['query_cid']==self.query and tuple(invocation.authority_receipt_cids)==(binding['authority_cid'],),'input/authority invocation mismatch')
+        require(dict(invocation.parameters)=={'request-cid':self.query} and authority['query_cid']==self.query,'query descriptor substitution')
+        require(authority['procedure_cid']==self.procedure.content_id and authority['certificate_cid']==self.certificate.content_id and authority['bindings']==plain(self.procedure.bindings.to_dict()),'stale authority bindings')
+        require(authority['profile_sha256']==self.profile_sha and authority['mode']=='test' and authority['scope']==['.validation'] and authority['capability']=='capability.validation-nomination','invalid nomination authority')
+        require(authority['observed_at_ms']<=int(time.time()*1000)<authority['expires_at_ms'],'authority expired')
+        record=self.store.get(self.query);request=json.loads(record['request_json'])
+        require(canonical(request).decode()==record['request_json'] and sha(canonical(request))==self.request_sha,'request bytes changed')
+        require(record['source_inventory_sha256']==self.validated['source_inventory_sha256']==self.procedure.bindings.tree_id and record['endpoint_contract_sha256']==self.validated['endpoint_contract_sha256'],'source observation mismatch')
+        return request,binding
+    def checked_action(self,identity,variables=None):
+        request,_=self.input_for(identity);require(identity in self.policy_checked,'policy operation missing')
+        descriptor=self.actions.get(identity) if variables is None else variables.get('action')
+        require(descriptor is not None and dict(descriptor)==self.actions.get(identity),'action descriptor changed or from another invocation')
+        record=self.store.get(descriptor['action_cid']);require(record['invocation_cid']==identity and record['query_cid']==self.query,'action belongs to different invocation')
+        action=json.loads(record['action_json']);require(canonical(action).decode()==record['action_json'],'action encoding changed');independent_action_check(action,request)
+        return action,descriptor['action_cid']
+    def handle(self,request):
+        tick=time.perf_counter();require(request.mode is ExecutionMode.TEST and not request.dry_run and request.scope_paths==('.validation',),'TEST-only nomination handler')
+        payload,binding=self.input_for(request.invocation_cid);step=next(s for s in self.procedure.steps if s.step_id==request.step_id)
+        require(request.operation==step.operation.value and request.operation_contract==step.operation_contract and request.procedure_cid==self.procedure.content_id,'operation identity drift')
+        outputs={};receipts=[];reads=();identity=request.invocation_cid
+        if request.operation=='READ_STATE':
+            outputs={'request':{'request_cid':self.query}};reads=('.validation/request.json',)
+            if self.fault=='changed_descriptor':outputs={'request':{'request_cid':cid({'changed':True})}}
+        else:
+            require(dict(request.inputs['request'])=={'request_cid':self.query},'operation descriptor differs from current invocation')
+            if request.operation=='CHECK_POLICY':
+                require(self.validated['request_sha256']==self.request_sha and self.validated['scorer_request']==payload['scorer_request'],'independent observer/current request mismatch')
+                self.policy_checked.add(identity)
+            elif request.operation=='SELECT_EVIDENCE':
+                require(identity in self.policy_checked,'nomination before policy check');action=expected_action(payload)
+                if self.fault=='changed_scorer_request':action['scorer_request']['evaluation_id']='substituted'
+                if self.fault=='scoring_authority':action['scoring_passed']=True
+                record={'schema':'ns-original-native-nominated-action/v1','invocation_cid':identity,'query_cid':self.query,'action_json':canonical(action).decode()}
+                action_cid=self.store.put(record);self.actions[identity]={'action_cid':action_cid};outputs={'action':{'action_cid':action_cid}};receipts=[action_cid]
+            elif request.operation=='CHECK_POSTCONDITION':
+                require(dict(request.inputs['action'])==self.actions.get(identity),'postcondition action descriptor mismatch')
+                _,action_cid=self.checked_action(identity);self.completed.add(identity);receipts=[action_cid]
+            elif request.operation=='EMIT_RECEIPT':
+                action,action_cid=self.checked_action(identity);require(identity in self.completed,'receipt before actual postcondition')
+                receipts=[self.store.put({'schema':'ns-original-native-nomination-receipt/v1','invocation_cid':identity,'query_cid':self.query,
+                    'action_cid':action_cid,'action_sha256':sha(canonical(action)),'scoring_passed':False,'publication_authority':False})]
+            else:raise ValueError('unknown nominated operation')
+        self.dispatches.append({'invocation_cid':identity,'step_id':step.step_id,'operation':request.operation})
+        return OperationResult(True,outputs=outputs,observed_effect_ids=tuple(step.declared_effect_ids),read_paths=reads,evidence_cids=tuple(receipts),
+            cost=RuntimeCost(elapsed_ms=int((time.perf_counter()-tick)*1000)),new_evidence=bool(receipts))
+    def admit(self,request):
+        try:
+            require(request.mode is ExecutionMode.TEST,'no LIVE/production authority');identity=request.invocation.content_id;payload,binding=self.input_for(identity)
+            require(request.procedure.content_id==self.procedure.content_id and request.certificate.content_id==self.certificate.content_id and request.invocation.registry_revision==request.runtime.registry_revision==self.selection,'runtime identity drift')
+            receipts=[]
+            if request.kind is AdmissionKind.TEST_CERTIFICATE:
+                verdict=self.verifier.verify(request.certificate,CurrentCertificateContext.from_policy(self.policy,now_ms=int(time.time()*1000)))
+                require(verdict.accepted and verdict.usable and not verdict.grants_authority and not verdict.grants_promotion,'native TEST certificate rejected');receipts=[self.certificate.content_id]
+            elif request.kind is AdmissionKind.COMPATIBILITY:
+                selection=self.store.get(self.selection);require(selection['registry_promoted']is False and selection['procedure_cid']==self.procedure.content_id and selection['certificate_cid']==self.certificate.content_id,'selection changed');receipts=[self.selection]
+            elif request.kind is AdmissionKind.AUTHORITY:receipts=[binding['authority_cid']]
+            elif request.kind is AdmissionKind.PRECONDITION:
+                require(request.subject.condition_id=='current-public-bindings' and request.subject.binding=='binding:tree_id','unknown source precondition');receipts=[self.bindings[identity]]
+            elif request.kind in (AdmissionKind.OBSERVATION,AdmissionKind.POSTCONDITION,AdmissionKind.VALIDATION,AdmissionKind.CHECKPOINT):
+                if request.kind is AdmissionKind.OBSERVATION:require(request.subject.observation_id=='observation.nomination','unknown observation contract')
+                variables=request.subject.variables if request.kind is AdmissionKind.CHECKPOINT else request.variables
+                _,action_cid=self.checked_action(identity,variables);require(identity in self.completed,'postcondition never computed');receipts=[action_cid]
+            else:raise ValueError('unsupported admission kind')
+            receipt=self.store.put({'schema':'ns-original-native-admission/v1','invocation_cid':identity,'query_cid':self.query,'kind':request.kind.value,'checked_receipt_cids':receipts})
+            self.admissions.append({'kind':request.kind.value,'invocation_cid':identity,'admitted':True,'receipt_cid':receipt})
+            return AdmissionDecision(True,request.kind,(receipt,),'actual-current-nomination-checked',int(time.time()*1000),True)
+        except (ValueError,KeyError,TypeError) as exc:
+            self.admissions.append({'kind':request.kind.value,'invocation_cid':request.invocation.content_id,'admitted':False,'reason':str(exc)})
+            return AdmissionDecision(False,request.kind,reason_code=str(exc),observed_at_ms=int(time.time()*1000),predicate_value=False)
+    def execute(self,ordinal=0):
+        invocation,current=self.prepare(ordinal);result=self.interpreter.execute(self.procedure,invocation,self.certificate,current,mode=ExecutionMode.TEST)
+        action=self.checked_action(invocation.content_id)[0] if result.outcome.status.value=='succeeded' else None
+        require(not self.reservations.active and not self.reservations.budgets,'native reservations not released')
+        return invocation,result,action

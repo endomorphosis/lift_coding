@@ -1,0 +1,150 @@
+"""Real sequential/parallel preparation timing, with observed process resources.
+
+Both arms execute both r1 operations cold, then run the identical finite oracle
+and native seal construction/integrity check. No seal is published here.
+"""
+from concurrent.futures import ThreadPoolExecutor
+import hashlib
+import json
+import os
+from pathlib import Path
+import resource
+import shutil
+import statistics
+import subprocess
+import sys
+import time
+
+import lifecycle as L
+
+HERE=Path(__file__).resolve().parent
+
+
+def cpu_usage():
+    own=resource.getrusage(resource.RUSAGE_SELF)
+    kids=resource.getrusage(resource.RUSAGE_CHILDREN)
+    return own.ru_utime+own.ru_stime+kids.ru_utime+kids.ru_stime
+
+
+def run_child(output,arm):
+    started=time.perf_counter()
+    cpu_started=cpu_usage()
+    if arm=='sequential':
+        made={u:L.produce(output,'r1',u) for u in L.IDS}
+    else:
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            futures={u:pool.submit(L.produce,output,'r1',u) for u in L.IDS}
+            made={u:f.result() for u,f in futures.items()}
+    receipts={u:value[0] for u,value in made.items()}
+    seal,units,transition,checks=L.build(output,'r1',receipts)
+    pack={'revision':'r1','parent_pack':None,'seal':seal.to_canonical(),
+          'seal_cid':seal.seal_cid(),'receipts':receipts,'transition_id':''}
+    verdict,*_=L.admit(output,pack)
+    assert verdict['accepted'],verdict
+    elapsed=time.perf_counter()-started
+    cpu=cpu_usage()-cpu_started
+    print(json.dumps({'arm':arm,'pid':os.getpid(),'prepare_seconds':elapsed,
+        'prepare_cpu_seconds_self_and_children':cpu,
+        'process_lifetime_self_peak_rss_kib':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+        'largest_completed_worker_peak_rss_kib':resource.getrusage(resource.RUSAGE_CHILDREN).ru_maxrss,
+        'operation_processes':2,'operation_calls':sum(v[1]['operation_calls'] for v in made.values()),
+        'worker_measurements':{u:v[1] for u,v in made.items()},'accepted':verdict['accepted'],
+        'prepared_seal_cid':pack['seal_cid'],'receipts':receipts,'provider_requests':0},sort_keys=True))
+
+
+def sample_group(pgid):
+    total=0
+    members=[]
+    for entry in Path('/proc').iterdir():
+        if not entry.name.isdigit():
+            continue
+        try:
+            stat=(entry/'stat').read_text()
+            fields=stat[stat.rfind(')')+2:].split()
+            if int(fields[2])!=pgid:
+                continue
+            rss=int((entry/'statm').read_text().split()[1])*os.sysconf('SC_PAGE_SIZE')
+            total+=rss
+            members.append(int(entry.name))
+        except (OSError,ValueError,IndexError):
+            continue
+    return {'rss_bytes_sum':total,'members':members}
+
+
+def run_measured(output,arm,index):
+    tag=f'{index:02d}-{arm}'
+    logroot=output/'results'
+    logroot.mkdir(exist_ok=True)
+    started=time.perf_counter()
+    samples=[]
+    with (logroot/(tag+'.stdout')).open('w') as stdout,(logroot/(tag+'.stderr')).open('w') as stderr:
+        process=subprocess.Popen([sys.executable,str(Path(__file__)),'child',str(output),arm],
+            stdout=stdout,stderr=stderr,start_new_session=True,
+            env={'PATH':os.environ['PATH'],'PYTHONHASHSEED':'0'})
+        while process.poll() is None:
+            samples.append({'elapsed_seconds':time.perf_counter()-started,**sample_group(process.pid)})
+            if time.perf_counter()-started>15:
+                process.kill()
+                process.wait()
+                raise TimeoutError(tag)
+            time.sleep(0.002)
+    finished=time.perf_counter()-started
+    assert process.returncode==0,(tag,(logroot/(tag+'.stderr')).read_text())
+    result=json.loads((logroot/(tag+'.stdout')).read_text())
+    result.update(trial_index=index,returncode=process.returncode,
+        invocation_elapsed_seconds_including_imports=finished,
+        sampled_process_group_peak_aggregate_rss_bytes=max(s['rss_bytes_sum'] for s in samples),
+        sampled_max_process_group_members=max(len(s['members']) for s in samples),
+        resource_samples=len(samples))
+    L.save(logroot/(tag+'.json'),result)
+    L.save(logroot/(tag+'-rss-samples.json'),samples)
+    return result
+
+
+def main():
+    if len(sys.argv)>1:
+        run_child(Path(sys.argv[2]),sys.argv[3])
+        return
+    output=HERE/'preparation-timing-v1'
+    output.mkdir()
+    shutil.copytree(HERE/'run-v1/snapshots',output/'snapshots')
+    manifest={'schema':'ns-real-preparation-timing-freeze/v1','frozen_at_ns':time.time_ns(),
+        'source_profile':'complete_aseh','pair_count':4,
+        'orders':[['sequential','parallel'],['parallel','sequential'],['sequential','parallel'],['parallel','sequential']],
+        'operations_per_arm':2,'execution_inputs_per_arm':175,'revision':'r1','all_arms_cold_receipts':True,
+        'parallel_workers':2,'resource_sampling_target_interval_seconds':0.002,
+        'rss_metric':'Sampled sum of per-process RSS for driver plus workers in isolated process group, over whole invocation including imports; shared pages counted in each process. Not PSS or a continuous high-water mark.',
+        'cpu_metric':'Actual RUSAGE_SELF plus RUSAGE_CHILDREN user/system CPU delta during measured preparation.',
+        'timing_metric':'Monotonic elapsed operation execution plus independent receipt replay and native seal build/integrity check; excludes interpreter/native imports and output serialization.',
+        'worker_sha256':hashlib.sha256((HERE/'computation_worker.py').read_bytes()).hexdigest(),
+        'lifecycle_sha256':hashlib.sha256((HERE/'lifecycle.py').read_bytes()).hexdigest(),
+        'runner_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        'snapshot_sha256':{str(p.relative_to(output)):hashlib.sha256(p.read_bytes()).hexdigest()
+            for p in (output/'snapshots').rglob('*.py')},'provider_requests':0,'native_publications':0}
+    L.save(output/'freeze.json',manifest)
+    shutil.copyfile(__file__,output/'runner_snapshot.py')
+    rows=[]
+    for i,order in enumerate(manifest['orders']):
+        for arm in order:
+            rows.append(run_measured(output,arm,i))
+    assert len({r['prepared_seal_cid'] for r in rows})==1
+    assert all(r['accepted'] and r['operation_calls']==175 and r['operation_processes']==2 for r in rows)
+    arms={}
+    for arm in ('sequential','parallel'):
+        selected=[r for r in rows if r['arm']==arm]
+        arms[arm]={'trials':len(selected),'accepted':sum(r['accepted'] for r in selected),
+            'prepare_seconds':[r['prepare_seconds'] for r in selected],
+            'median_prepare_seconds':statistics.median(r['prepare_seconds'] for r in selected),
+            'median_cpu_seconds':statistics.median(r['prepare_cpu_seconds_self_and_children'] for r in selected),
+            'max_sampled_aggregate_rss_bytes':max(r['sampled_process_group_peak_aggregate_rss_bytes'] for r in selected),
+            'max_observed_group_members':max(r['sampled_max_process_group_members'] for r in selected)}
+    summary={'schema':'ns-real-preparation-timing-result/v1','arms':arms,'all_evidence_content_identical':True,
+        'measured_median_sequential_over_parallel':arms['sequential']['median_prepare_seconds']/arms['parallel']['median_prepare_seconds'],
+        'total_operation_processes':16,'total_operation_inputs':1400,'provider_requests':0,'provider_tokens':0,
+        'native_publications':0,'scope':'Four constructed paired trials of two tiny cold operations; host not exclusive, sampled RSS includes shared-page duplication. No population latency/speedup or full-system performance claim.'}
+    L.save(output/'summary.json',summary)
+    print(json.dumps(summary,sort_keys=True))
+
+
+if __name__=='__main__':
+    main()

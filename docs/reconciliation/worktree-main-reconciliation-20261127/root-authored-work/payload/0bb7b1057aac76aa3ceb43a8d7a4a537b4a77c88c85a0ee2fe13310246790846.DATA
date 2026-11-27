@@ -1,0 +1,95 @@
+import ObjectivePrefixIR
+
+namespace RankerObjectivePrefixProjections
+
+noncomputable section
+open RankerObjectivePrefixIR
+
+def loss_denominator_scope : Context := [("margins", (.vector 4))]
+def loss_denominator_source : SourceTerm .scalar := (SourceTerm.natToScalar (SourceTerm.lengthVector (SourceTerm.var (τ := (.vector 4)) "margins")))
+
+def gradient_denominator_scope : Context := [("differences", (.matrix 4 80))]
+def gradient_denominator_source : SourceTerm .scalar := (SourceTerm.natToScalar (SourceTerm.lengthMatrix (SourceTerm.var (τ := (.matrix 4 80)) "differences")))
+
+def weight_coordinate_scope : Context := [("weights", (.vector 80)), ("i", (.index 80))]
+def weight_coordinate_source : SourceTerm .scalar := (SourceTerm.indexVector (SourceTerm.var (τ := (.vector 80)) "weights") (SourceTerm.var (τ := (.index 80)) "i"))
+
+def source_L2_scope : Context := []
+def source_L2_source : SourceTerm .scalar := (SourceTerm.scalarLiteral ((5764607523034235 : ℚ) / 576460752303423488))
+
+-- Source literals only: generated compilation/evaluation proofs are a later batch.
+
+-- This separate batch checks the emitted literals. These scoped values do not
+-- prove construction of margins, range indices, the full objective or gradient.
+open RankerObjectiveIR (mapOne mapTwo)
+
+def loss_denominator_term : Term loss_denominator_scope .scalar :=
+  .natToScalar (.lengthVector (.var .here))
+def gradient_denominator_term : Term gradient_denominator_scope .scalar :=
+  .natToScalar (.lengthMatrix (.var .here))
+def weight_coordinate_term : Term weight_coordinate_scope .scalar :=
+  .indexVector (.var .here) (.var (.there .here))
+def source_L2_term : Term source_L2_scope .scalar :=
+  .scalarLiteral ((5764607523034235 : ℚ) / 576460752303423488)
+
+theorem loss_denominator_compiles :
+    compileTerm loss_denominator_scope loss_denominator_source = .ok loss_denominator_term := by
+  simp [compileTerm, contextUnique, contextNames, compileTermAux, lookupSlot, castSlot,
+    mapOne, loss_denominator_scope, loss_denominator_source, loss_denominator_term]
+
+theorem gradient_denominator_compiles :
+    compileTerm gradient_denominator_scope gradient_denominator_source = .ok gradient_denominator_term := by
+  simp [compileTerm, contextUnique, contextNames, compileTermAux, lookupSlot, castSlot,
+    mapOne, gradient_denominator_scope, gradient_denominator_source, gradient_denominator_term]
+
+theorem weight_coordinate_compiles :
+    compileTerm weight_coordinate_scope weight_coordinate_source = .ok weight_coordinate_term := by
+  simp [compileTerm, contextUnique, contextNames, compileTermAux, lookupSlot, castSlot,
+    mapOne, mapTwo, weight_coordinate_scope, weight_coordinate_source, weight_coordinate_term]
+
+theorem source_L2_compiles :
+    compileTerm source_L2_scope source_L2_source = .ok source_L2_term := by
+  simp [compileTerm, contextUnique, contextNames, compileTermAux,
+    source_L2_scope, source_L2_source, source_L2_term]
+
+theorem loss_denominator_source_eval (margins : Fin 4 → ℝ) :
+    evalSourceTerm (namesFromScope (Environment.cons (name := "margins") margins .nil))
+      loss_denominator_source = .ok (4 : ℝ) := by
+  rw [compile_term_sound loss_denominator_scope
+    (Environment.cons (name := "margins") margins .nil)
+    loss_denominator_source loss_denominator_term loss_denominator_compiles]
+  rfl
+
+theorem gradient_denominator_source_eval (differences : Fin 4 → Fin 80 → ℝ) :
+    evalSourceTerm (namesFromScope (Environment.cons (name := "differences") differences .nil))
+      gradient_denominator_source = .ok (4 : ℝ) := by
+  rw [compile_term_sound gradient_denominator_scope
+    (Environment.cons (name := "differences") differences .nil)
+    gradient_denominator_source gradient_denominator_term gradient_denominator_compiles]
+  rfl
+
+theorem weight_coordinate_source_eval (weights : Fin 80 → ℝ) (i : Fin 80) :
+    evalSourceTerm (namesFromScope (Environment.cons (name := "weights") weights
+      (Environment.cons (name := "i") i .nil))) weight_coordinate_source = .ok (weights i) := by
+  rw [compile_term_sound weight_coordinate_scope
+    (Environment.cons (name := "weights") weights (Environment.cons (name := "i") i .nil))
+    weight_coordinate_source weight_coordinate_term weight_coordinate_compiles]
+  rfl
+
+theorem source_L2_source_eval :
+    evalSourceTerm (namesFromScope (Environment.nil : Environment source_L2_scope)) source_L2_source =
+      .ok (((5764607523034235 : ℚ) / 576460752303423488 : ℚ) : ℝ) := by
+  rw [compile_term_sound source_L2_scope .nil source_L2_source source_L2_term source_L2_compiles]
+  rfl
+
+#print axioms loss_denominator_compiles
+#print axioms gradient_denominator_compiles
+#print axioms weight_coordinate_compiles
+#print axioms source_L2_compiles
+#print axioms loss_denominator_source_eval
+#print axioms gradient_denominator_source_eval
+#print axioms weight_coordinate_source_eval
+#print axioms source_L2_source_eval
+
+end
+end RankerObjectivePrefixProjections

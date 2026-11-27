@@ -1,0 +1,97 @@
+#!/usr/bin/env python3
+"""Read-only point-in-time context accounting from the real Requests effect ledger."""
+import argparse
+import hashlib
+import json
+from pathlib import Path
+import sqlite3
+import time
+
+HERE = Path(__file__).resolve().parent
+def sha(body): return hashlib.sha256(body).hexdigest()
+def canonical(value): return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()
+def read(path): return json.loads(path.read_text())
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--run", type=Path, default=HERE.parent / "controller_qualification/requests-cold-v1")
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args(); run = args.run.resolve()
+    if args.output.exists(): raise SystemExit("output exists; retain earlier observation")
+    profile = read(run / "profile.json")
+    archive = read(run / "frozen_source_manifest.json")
+    pins = {r["original_path"]: r["sha256"] for r in archive["sources"]}
+    conn = sqlite3.connect((run / "state/ledger.sqlite3").as_uri() + "?mode=ro", uri=True)
+    conn.execute("BEGIN")
+    journal = conn.execute("SELECT seq,record_hash FROM journal ORDER BY seq DESC LIMIT 1").fetchone()
+    event_rows = conn.execute("SELECT event_id,status FROM events ORDER BY event_id").fetchall()
+    effects = conn.execute("SELECT effect_id,event_id,stage,request_hash,state,result_path,result_hash FROM effects WHERE stage IN ('input_context_prepare','input_context_read','accepted_context_prepare','accepted_context_read') ORDER BY event_id,stage").fetchall()
+    conn.rollback(); conn.close()
+    rows = []; inputs = {}; observed_imports = {}; observed_receipts = []
+    for effect_id, event, stage, request_hash, state, result_path, result_hash in effects:
+        row = {"effect_id": effect_id, "event_id": event, "stage": stage, "ledger_state": state,
+               "enclosing_elapsed_seconds": None, "complete_timing": False}
+        if state == "terminal":
+            path = Path(result_path); body = path.read_bytes()
+            assert sha(body) == result_hash
+            completion = json.loads(body)
+            assert completion["effect_id"] == effect_id and completion["event_id"] == event and completion["stage"] == stage
+            assert completion["request_hash"] == request_hash
+            expected_id = sha(canonical({"event_id": event, "stage": stage, "request_hash": request_hash}))
+            assert effect_id == expected_id
+            request_body = (path.parent / "request.json").read_bytes(); request = json.loads(request_body)
+            assert sha(canonical(request)) == request_hash
+            inputs[str(path)] = sha(body); inputs[str(path.parent / "request.json")] = sha(request_body)
+            seconds = completion.get("elapsed_seconds")
+            assert seconds is None or isinstance(seconds, (float, int)) and seconds >= 0
+            row.update(enclosing_elapsed_seconds=seconds, complete_timing=seconds is not None)
+            response = completion["response"]
+            if stage.endswith("_prepare"):
+                assert response["complete"] and response["raw_substitutions"] == 0
+                row["nested_producer_consumer_process_seconds"] = [p["wall_seconds"] for p in response["processes"]]
+                row["nested_preparation_wall_excluding_import"] = response["producer"]["preparation_wall_seconds_excluding_import"]
+                process = read(path.parent / "process.json"); command = process["command"]
+                assert process["returncode"] == 0 and "prepare" in command
+                prepared = Path(command[command.index("--run") + 1])
+                for role in ("produce", "consume"):
+                    receipt_path = prepared / response["producer"]["task_id"] / (role + "_imports.json")
+                    receipt_body = receipt_path.read_bytes(); receipt = json.loads(receipt_body)
+                    inputs[str(receipt_path)] = sha(receipt_body); observed_receipts.append(str(receipt_path))
+                    for module, value in receipt.items():
+                        key = value["path"]
+                        if key in observed_imports: assert observed_imports[key]["sha256"] == value["sha256"]
+                        observed_imports[key] = {"sha256": value["sha256"], "module": module}
+            else:
+                row["nested_expansion_seconds"] = sum(x["native_expansion_seconds"] for x in response["sources"])
+                row["source_expansions"] = len(response["sources"])
+        rows.append(row)
+    assert len({r["effect_id"] for r in rows}) == len(rows)
+    missing = {path: item for path, item in observed_imports.items() if path not in pins}
+    mismatched = {path: {**item, "frozen_sha256": pins[path]} for path, item in observed_imports.items() if path in pins and pins[path] != item["sha256"]}
+    by_event = {}
+    for row in rows:
+        target = by_event.setdefault(row["event_id"], {"prepare_seconds": 0., "read_seconds": 0., "unknown_effect_ids": []})
+        if row["complete_timing"]:
+            field = "prepare_seconds" if row["stage"].endswith("_prepare") else "read_seconds"
+            target[field] += row["enclosing_elapsed_seconds"]
+        else: target["unknown_effect_ids"].append(row["effect_id"])
+    expected_events = {e["event_id"] for e in profile["events"]}
+    statuses = dict(event_rows)
+    all_events_terminal = all(event in statuses and statuses[event] != "started" for event in expected_events)
+    result = {"schema": "ns-requests-context-accounting-observation/v1", "observed_at_unix": time.time(),
+              "run": str(run), "ledger_journal_tip": journal, "all_profile_events_terminal_at_ledger_snapshot": all_events_terminal,
+              "context_effects": rows, "per_event": by_event,
+              "known_context_effect_seconds": sum(r["enclosing_elapsed_seconds"] for r in rows if r["complete_timing"]),
+              "all_observed_context_effect_timings_complete": all(r["complete_timing"] for r in rows),
+              "actual_native_import_receipts": observed_receipts, "actual_unique_native_import_paths": len(observed_imports),
+              "frozen_source_paths": len(pins), "actual_native_imports_missing_from_frozen_archive": missing,
+              "actual_native_import_sha_mismatches": mismatched,
+              "accounting_rule": "Sum enclosing completion.elapsed_seconds once per effect_id; nested process/preparation/expansion times are diagnostic subsets. Unknown timing is not zero. Event elapsed includes these effects and must not be added again.",
+              "import_scope_limit": "Actual produce/consume receipts only, restricted to three native project prefixes. Native expand returns before import receipt generation, so read actual imports are not separately recorded. Stdlib and other third-party imports are outside these receipts; broad frozen-runtime guards do not replace actual import observation.",
+              "inputs_sha256": {**inputs, str(run / 'profile.json'): sha((run / 'profile.json').read_bytes()), str(run / 'frozen_source_manifest.json'): sha((run / 'frozen_source_manifest.json').read_bytes())},
+              "auditor_sha256": sha(Path(__file__).read_bytes()), "new_context_or_provider_calls": 0}
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
+    print(json.dumps({"effects": len(rows), "known_seconds": result["known_context_effect_seconds"], "import_paths": len(observed_imports), "missing_import_paths": len(missing), "mismatched_import_paths": len(mismatched), "all_events_terminal": all_events_terminal}))
+
+if __name__ == "__main__": main()

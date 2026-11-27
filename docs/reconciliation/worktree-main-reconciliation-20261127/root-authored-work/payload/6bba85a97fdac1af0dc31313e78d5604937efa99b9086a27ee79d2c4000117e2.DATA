@@ -1,0 +1,150 @@
+"""Native checked transport and replay with real public data contracts.
+
+Kernel identity is explicitly stubbed in these unit controls. They establish no
+actual worker birth, current proof owner, provider use or task completion.
+"""
+from copy import deepcopy
+import hashlib
+import json
+from pathlib import Path
+
+import pytest
+
+from test.api.test_terminal_semantic_call_review import case as coherent_case
+from test.api.test_checked_audit_context import selected
+from test.api.test_router_model_input_observation import forbid_provider_apis
+from ipfs_accelerate_py.agent_supervisor.runtime import router_implementation_runner as runner
+from ipfs_accelerate_py.agent_supervisor.runtime import model_input_observation_receipt as records
+from ipfs_accelerate_py.agent_supervisor.entrypoints.admitted_benchmark_runtime import _require_observer_diagnostic_command
+from benchmarks.agent_supervisor.container_coding import terminal_context_audit as audit
+from benchmarks.agent_supervisor.container_coding import terminal_model_input_observation_audit as observation_audit
+
+
+def sha(text):
+    return hashlib.sha256(text.encode()).hexdigest()
+
+
+def options(case, monkeypatch):
+    from ipfs_accelerate_py.agent_supervisor.runtime import container_worker_boundary as kernel
+    from ipfs_accelerate_py.agent_supervisor.runtime.multi_supervisor_runner import DATABASE_PROGRAM_ENV_NAMES, STATE_CREDENTIAL_ENV_NAMES
+    for key in (*DATABASE_PROGRAM_ENV_NAMES, *STATE_CREDENTIAL_ENV_NAMES, "IPFS_ACCELERATE_AGENT_STATE_OWNER_TOKEN"):
+        monkeypatch.delenv(key, raising=False)
+    monkeypatch.chdir(case["workspace"])
+    monkeypatch.setattr(kernel, "verify_container_worker_boundary", lambda **kwargs: deepcopy(case["load"]["boundary"]))
+    forbid_provider_apis(monkeypatch)
+    public = case["prepare"]["public_instruction"]
+    descriptor = case["descriptor"]
+    return dict(prompt=case["prepare"]["native_prompt"], provider="codex_cli", model="authored-no-provider-model",
+        timeout=10, max_output_tokens=128, purpose="coding", semantic_repository=case["root"],
+        semantic_transport="native", public_instruction_artifact=Path(public["artifact"]),
+        public_instruction_sha256=public["sha256"], public_instruction_task_cid=public["task_cid"],
+        container_boundary=case["root"]/"declared-unit-boundary.json",
+        container_boundary_sha256=case["load"]["boundary"]["manifest_sha256"],
+        observe_model_input_only=True, checked_context_artifact=Path(descriptor["artifact"]),
+        checked_context_sha256=descriptor["sha256"], checked_context_task_cid=descriptor["task_cid"])
+
+
+def test_actual_native_coding_render_keeps_original_capsule_literal_and_exact_checked_suffix(selected, monkeypatch, capsys):
+    kwargs = options(selected, monkeypatch)
+    renders = []
+    original = runner.render_model_prompt
+    def capture(**args):
+        value = original(**args); renders.append((args, value)); return value
+    monkeypatch.setattr(runner, "render_model_prompt", capture)
+    output, value = runner.run(**kwargs)
+    assert output == "" and value["schema"] == records.CHECKED_SCHEMA
+    assert set(value) == records.CHECKED_OBSERVATION_FIELDS
+    assert value["status"] == "observed" and value["final_custody_guard_verified"] is True
+    assert value["provider_attempted"] is False and value["router_calls"] == 0 and value["usage"] is None
+    assert value["native_prompt_sha256"] == sha(kwargs["prompt"])
+    assert renders[0][0]["prompt"].startswith(kwargs["prompt"])
+    assert renders[0][0]["prompt"].endswith(selected["module"].PREFIX + selected["prepare"]["context_packet"] + selected["module"].SUFFIX)
+    assert value["model_prompt_sha256"] == sha(renders[0][1][0])
+    assert value["model_prompt_bytes"] == len(renders[0][1][0].encode())
+    assert value["checked_context"]["checked_binding"] == selected["prepare"]["checked_binding"]
+    assert records.validate_model_input_observation(value) == value
+    assert json.loads(capsys.readouterr().out) == value
+
+
+def test_distinct_observation_replay_reconstructs_checked_suffix_after_worktree_removal(selected, monkeypatch):
+    kwargs = options(selected, monkeypatch)
+    _, value = runner.run(**kwargs)
+    facts = observation_audit._observation_bindings(value, selected["workspace"].parent)
+    before, _, checks = audit._model_projection(rendered=kwargs["prompt"], receipt=facts, repository=selected["root"])
+    assert all(checks.values()) and checks["checked_audit_complete_suffix_replayed"] is True
+    monkeypatch.chdir(selected["root"])
+    selected["git"]("worktree", "remove", "--force", str(selected["workspace"]))
+    after, _, checks = audit._model_projection(rendered=kwargs["prompt"], receipt=facts, repository=selected["root"])
+    assert after == before and sha(after) == value["model_prompt_sha256"] and all(checks.values())
+
+
+@pytest.mark.parametrize("field", ["schema", "checked_context", "worker_boundary", "worker_workspace", "instruction", "native_prompt"])
+def test_closed_versioned_receipt_rejects_detached_or_cross_bound_extension(selected, monkeypatch, field):
+    _, value = runner.run(**options(selected, monkeypatch))
+    bad = deepcopy(value)
+    if field == "schema": bad["schema"] = records.SCHEMA
+    elif field == "checked_context": bad.pop("checked_context")
+    elif field == "worker_boundary": bad["checked_context"]["worker_binding"]["boundary"]["container_id"] = "e"*64
+    elif field == "worker_workspace": bad["checked_context"]["worker_binding"]["workspace"] += "-foreign"
+    elif field == "instruction": bad["checked_context"]["instruction_context_cid"] = bad["checked_context"]["extension_cid"]
+    else: bad["checked_context"]["native_prompt_sha256"] = "d"*64
+    with pytest.raises(ValueError): records.validate_model_input_observation(bad)
+
+
+def test_same_byte_extension_replaced_by_render_callback_refuses_original_custody(selected, monkeypatch, capsys):
+    kwargs = options(selected, monkeypatch)
+    original = runner.render_model_prompt
+    path = kwargs["checked_context_artifact"]; raw = path.read_bytes(); held = path.with_suffix(".held")
+    def replace(**args):
+        path.rename(held);path.write_bytes(raw);path.chmod(0o444)
+        return original(**args)
+    monkeypatch.setattr(runner, "render_model_prompt", replace)
+    try:
+        with pytest.raises(ValueError): runner.run(**kwargs)
+        value = json.loads(capsys.readouterr().out)
+        assert value["schema"] == records.CHECKED_SCHEMA and value["status"] == "refused"
+        assert value["final_custody_guard_verified"] is False and value["provider_attempted"] is False
+    finally:
+        if held.exists():path.unlink();held.rename(path)
+
+
+@pytest.mark.parametrize("change", ["provider", "planning", "identifiers", "compact_intent", "compact_code", "materialized", "partial"])
+def test_checked_route_refuses_incompatible_or_partial_controls_before_kernel_access(monkeypatch, change):
+    from ipfs_accelerate_py.agent_supervisor.runtime import container_worker_boundary
+    monkeypatch.setattr(container_worker_boundary, "verify_container_worker_boundary", lambda **_: pytest.fail("invalid checked route read kernel boundary"))
+    kwargs = dict(prompt="unadmitted", provider="codex_cli", model="pinned", timeout=1, max_output_tokens=1,
+        semantic_repository=Path("/nonexistent"), semantic_transport="native", observe_model_input_only=True,
+        public_instruction_artifact=Path("/instruction"),public_instruction_sha256="a"*64,public_instruction_task_cid="cid:task",
+        checked_context_artifact=Path("/checked"),checked_context_sha256="b"*64,checked_context_task_cid="cid:task")
+    key, value = {"provider":("observe_model_input_only",False),"planning":("purpose","planning"),
+        "identifiers":("semantic_transport","identifiers"),"compact_intent":("intent_requirements_transport","compact"),
+        "compact_code":("code_retrieval_codec","compact"),"materialized":("code_retrieval_wire_delivery","materialized"),
+        "partial":("checked_context_sha256","")}[change]
+    kwargs[key] = value
+    with pytest.raises(ValueError, match="checked audit context"): runner.run(**kwargs)
+
+
+def command():
+    return ["/opt/ipfs-supervisor/bin/router-worker","--observe-model-input-only","--purpose","coding",
+        "--semantic-repository","/app","--semantic-transport","native",
+        "--public-instruction-artifact","/app/.runtime/instruction.json","--public-instruction-sha256","a"*64,
+        "--public-instruction-task-cid","cid:task","--checked-context-artifact","/app/.runtime/checked.json",
+        "--checked-context-sha256","b"*64,"--checked-context-task-cid","cid:task"]
+
+
+@pytest.mark.parametrize("change", [None,"partial","duplicate","equals","task","transport","compact","residual"])
+def test_signed_observer_diagnostic_whitelist_preserves_closed_checked_flag_population(change):
+    import shlex
+    args = command()
+    if change == "partial":args = args[:-2]
+    elif change == "duplicate":args += ["--checked-context-sha256","b"*64]
+    elif change == "equals":args[-2:] = ["--checked-context-task-cid=cid:task"]
+    elif change == "task":args[-1] = "cid:foreign"
+    elif change == "transport":args[args.index("--semantic-transport")+1] = "identifiers"
+    elif change == "compact":args += ["--code-retrieval-codec","compact"]
+    elif change == "residual":args += ["--doctor-residual-artifact","/app/.runtime/residual.json"]
+    if change is not None:
+        with pytest.raises(ValueError):_require_observer_diagnostic_command(shlex.join(args),implement=True,context_bundle={},candidate_runner={})
+    else:
+        result = _require_observer_diagnostic_command(shlex.join(args),implement=True,context_bundle={},candidate_runner={})
+        assert result["--checked-context-task-cid"] == "cid:task"

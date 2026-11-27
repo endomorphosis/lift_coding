@@ -1,0 +1,444 @@
+import PyAstNumericSemantics
+import PyAstNumericLowering
+import ObjectiveContainerSemantics
+
+set_option backward.isDefEq.respectTransparency false
+
+/-!
+SOURCE-ONLY, UNCOMPILED, UNQUALIFIED.
+
+General scalar observation preservation from the independent Python-shaped
+numeric interpreter to the existing named SourceExpr interpreter. The only
+public preservation premises are actual successful structural lowering and
+ordinary scoped variable/value transport. No successful source evaluation,
+desired expression/model equation, compiled objective or convergence result
+is an input. Integers are compared through explicit Real coercion, not by
+claiming identical runtime number tags.
+
+This is not the parser theorem, dot normalization, comprehension/generator
+materialization, first-five assignment lowering, whole objective, guard/return,
+original finite loop, Float/libm/fsum, cache/planner or full-task proof.
+-/
+
+namespace RankerSupportedPythonAstReal
+
+noncomputable section
+
+open RankerObjectiveIR (SliceError mapTwo applyOne applyTwo)
+open RankerObjectivePrefixIR (NamedEnvironment evalUnary evalBinary)
+open RankerObjectiveContainerLanguage (SourceExpr evalSourceExpr)
+
+def translatePyError : PyEvalError → SliceError
+  | .unknownName spelling => .unknownName spelling
+  | .unsupported tag => .unsupportedNode tag
+  | .divisionByZero => .divisionByZero
+  | .logDomain => .logDomain
+
+def observePy {α β : Type} (projection : α → β) : Except PyEvalError α → Except SliceError β
+  | .error problem => .error (translatePyError problem)
+  | .ok value => .ok (projection value)
+
+abbrev observeNumber := observePy PyNumber.toReal
+abbrev observeNumbers := observePy (List.map PyNumber.toReal)
+
+/-- Structural scoped lookup/value transport, not an expression equation.
+All local binding identities belong to the checked lexical scope. Together
+with accepted scope validity this excludes rebinding fixed pure globals. -/
+structure StructuralEnvRel (scope : List PyName) (source : PyEnvironment)
+    (target : NamedEnvironment) : Prop where
+  lookup : ∀ identifier ∈ scope,
+    target identifier.spelling .scalar = observeNumber (lookupNumber source identifier)
+  localBindings : ∀ binding ∈ source, binding.1 ∈ scope
+
+def evalTargetArguments (environment : NamedEnvironment) :
+    List (SourceExpr .scalar) → Except SliceError (List ℝ)
+  | [] => .ok []
+  | first :: rest => mapTwo List.cons (evalSourceExpr environment first)
+      (evalTargetArguments environment rest)
+
+def invokeTargetPrimitive : PyPrimitive → List ℝ → Except SliceError ℝ
+  | .abs, [value] => evalUnary .abs value
+  | .max, [left, right] => evalBinary .max left right
+  | .exp, [value] => evalUnary .exp value
+  | .log1p, [value] => evalUnary .log1p value
+  | _, _ => .error (.unsupportedNode "primitiveArity")
+
+private theorem oneAccepted {α β : Type} (f : α → β)
+    (value : Except PyLowerError α) (program : β)
+    (accepted : lowerOne f value = .ok program) :
+    ∃ input, value = .ok input ∧ program = f input := by
+  cases value with
+  | error problem => simp [lowerOne] at accepted
+  | ok input => exact ⟨input, rfl, (Except.ok.inj accepted).symm⟩
+
+private theorem twoAccepted {α β γ : Type} (f : α → β → γ)
+    (left : Except PyLowerError α) (right : Except PyLowerError β) (program : γ)
+    (accepted : lowerTwo f left right = .ok program) :
+    ∃ a b, left = .ok a ∧ right = .ok b ∧ program = f a b := by
+  cases left with
+  | error problem => simp [lowerTwo] at accepted
+  | ok a =>
+    cases right with
+    | error problem => simp [lowerTwo] at accepted
+    | ok b => exact ⟨a, b, rfl, rfl, (Except.ok.inj accepted).symm⟩
+
+private theorem threeAccepted {α β γ δ : Type} (f : α → β → γ → δ)
+    (first : Except PyLowerError α) (second : Except PyLowerError β)
+    (third : Except PyLowerError γ) (program : δ)
+    (accepted : lowerThree f first second third = .ok program) :
+    ∃ a b c, first = .ok a ∧ second = .ok b ∧ third = .ok c ∧ program = f a b c := by
+  cases first with
+  | error problem => simp [lowerThree] at accepted
+  | ok a =>
+    cases second with
+    | error problem => simp [lowerThree] at accepted
+    | ok b =>
+      cases third with
+      | error problem => simp [lowerThree] at accepted
+      | ok c => exact ⟨a, b, c, rfl, rfl, rfl, (Except.ok.inj accepted).symm⟩
+
+private theorem observe_negation (result : Except PyEvalError PyNumber) :
+    observeNumber (pyBind result (fun value => .ok (negateNumber value))) =
+      applyOne (evalUnary .neg) (observeNumber result) := by
+  cases result with
+  | error problem => rfl
+  | ok number => cases number <;>
+      simp [observePy, pyBind, negateNumber, PyNumber.toReal, applyOne, evalUnary]
+
+private theorem observe_binary (op : PyBinary)
+    (left right : Except PyEvalError PyNumber) :
+    observeNumber (pyBind left (fun a => pyBind right (fun b => numericBinary op a b))) =
+      applyTwo (evalBinary (lowerBinaryOpcode op)) (observeNumber left) (observeNumber right) := by
+  cases left with
+  | error problem => rfl
+  | ok a =>
+    cases right with
+    | error problem => rfl
+    | ok b =>
+      cases op with
+      | add => rfl
+      | sub => rfl
+      | mul => rfl
+      | div =>
+        by_cases denominatorZero : b.toReal = 0
+        · simp only [pyBind, numericBinary, lowerBinaryOpcode, applyTwo, evalBinary,
+            RankerObjectiveIR.exactDivision, if_pos denominatorZero, observePy,
+            translatePyError] <;> rfl
+        · simp only [pyBind, numericBinary, lowerBinaryOpcode, applyTwo, evalBinary,
+            RankerObjectiveIR.exactDivision, if_neg denominatorZero, observePy,
+            translatePyError] <;> rfl
+
+private theorem observe_arguments_cons (first : Except PyEvalError PyNumber)
+    (rest : Except PyEvalError (List PyNumber)) :
+    observeNumbers (pyBind first (fun value => pyBind rest (fun values => .ok (value :: values)))) =
+      mapTwo List.cons (observeNumber first) (observeNumbers rest) := by
+  cases first <;> cases rest <;> rfl
+
+private theorem observe_primitive (primitive : PyPrimitive) (values : List PyNumber) :
+    observeNumber (invokePrimitive primitive values) =
+      invokeTargetPrimitive primitive (values.map PyNumber.toReal) := by
+  cases primitive <;> cases values with
+  | nil => rfl
+  | cons first rest =>
+    cases rest with
+    | nil =>
+      all_goals
+        first
+        | rfl
+        | by_cases domain : 0 < 1 + first.toReal
+          · simp only [invokePrimitive, invokeTargetPrimitive, List.map_cons, List.map_nil,
+              evalUnary, RankerObjectiveIR.exactLog1p, if_pos domain, observePy,
+              translatePyError] <;> rfl
+          · simp only [invokePrimitive, invokeTargetPrimitive, List.map_cons, List.map_nil,
+              evalUnary, RankerObjectiveIR.exactLog1p, if_neg domain, observePy,
+              translatePyError] <;> rfl
+    | cons second tail =>
+      cases tail with
+      | nil => rfl
+      | cons third remainder => rfl
+
+private theorem observe_primitive_bind (primitive : PyPrimitive)
+    (result : Except PyEvalError (List PyNumber)) :
+    observeNumber (pyBind result (invokePrimitive primitive)) =
+      applyOne (invokeTargetPrimitive primitive) (observeNumbers result) := by
+  cases result with
+  | error problem => rfl
+  | ok values => exact observe_primitive primitive values
+
+private theorem lower_primitive_evaluation (environment : NamedEnvironment)
+    (primitive : PyPrimitive) (arguments : List (SourceExpr .scalar))
+    (program : SourceExpr .scalar) (accepted : lowerPrimitive primitive arguments = .ok program) :
+    evalSourceExpr environment program =
+      applyOne (invokeTargetPrimitive primitive) (evalTargetArguments environment arguments) := by
+  cases primitive <;> cases arguments with
+  | nil => simp [lowerPrimitive] at accepted
+  | cons first rest =>
+    cases rest with
+    | nil =>
+      all_goals simp [lowerPrimitive] at accepted
+      all_goals cases accepted
+      all_goals simp only [evalSourceExpr, evalTargetArguments]
+      all_goals cases evalSourceExpr environment first <;> rfl
+    | cons second tail =>
+      cases tail with
+      | nil =>
+        all_goals simp [lowerPrimitive] at accepted
+        all_goals cases accepted
+        all_goals simp only [evalSourceExpr, evalTargetArguments]
+        all_goals cases evalSourceExpr environment first <;>
+          cases evalSourceExpr environment second <;> rfl
+      | cons third remainder => simp [lowerPrimitive] at accepted
+
+/-- Own Boolean interpretation of the accepted source comparison. The right
+integer zero is evaluated as an integer then explicitly coerced for comparison. -/
+private theorem observe_conditional (environment : PyEnvironment) (condition body otherwise : PyExpr) :
+    observeNumber (evalSupportedAstReal environment
+      (.ifExp (.compare .ge condition (.integer 0)) body otherwise)) =
+    applyOne (fun value : ℝ => if 0 ≤ value
+      then observeNumber (evalSupportedAstReal environment body)
+      else observeNumber (evalSupportedAstReal environment otherwise))
+      (observeNumber (evalSupportedAstReal environment condition)) := by
+  cases evaluated : evalSupportedAstReal environment condition with
+  | error problem => simp [evalSupportedAstReal, evalSupportedAstTest, evaluated,
+      pyBind, observePy, applyOne]
+  | ok value =>
+    by_cases nonnegative : 0 ≤ value.toReal
+    · simp only [PyNumber.toReal] at nonnegative
+      simp [evalSupportedAstReal, evalSupportedAstTest, evaluated, pyBind,
+        observePy, PyNumber.toReal, applyOne, nonnegative]
+    · simp only [PyNumber.toReal] at nonnegative
+      simp [evalSupportedAstReal, evalSupportedAstTest, evaluated, pyBind,
+        observePy, PyNumber.toReal, applyOne, nonnegative]
+
+mutual
+  private theorem lower_aux_observation_preserved (scope : List PyName)
+      (sourceEnvironment : PyEnvironment) (targetEnvironment : NamedEnvironment)
+      (related : StructuralEnvRel scope sourceEnvironment targetEnvironment)
+      (expression : PyExpr) (program : SourceExpr .scalar)
+      (accepted : lowerSupportedAstAux scope expression = .ok program) :
+      observeNumber (evalSupportedAstReal sourceEnvironment expression) =
+        evalSourceExpr targetEnvironment program := by
+    cases expressionEquation : expression with
+    | name identifier =>
+      rw [expressionEquation] at accepted
+      by_cases present : identifier ∈ scope
+      · have programEquation := Except.ok.inj
+          (by simpa only [lowerSupportedAstAux, if_pos present] using accepted)
+        cases programEquation
+        exact (related.lookup identifier present).symm
+      · simp only [lowerSupportedAstAux, if_neg present] at accepted
+        cases accepted
+    | integer value =>
+      rw [expressionEquation] at accepted
+      have programEquation := Except.ok.inj accepted
+      cases programEquation
+      simp [evalSupportedAstReal, observePy, PyNumber.toReal, evalSourceExpr,
+        RankerObjectivePrefixIR.evalSourceTerm]
+    | floatLiteral token ratio =>
+      rw [expressionEquation] at accepted
+      have programEquation := Except.ok.inj accepted
+      cases programEquation
+      rfl
+    | unary op operand =>
+      rw [expressionEquation] at accepted
+      cases op with
+      | unsupported tag => simp [lowerSupportedAstAux] at accepted
+      | usub =>
+        rcases oneAccepted _ _ _ accepted with ⟨childProgram, childAccepted, rfl⟩
+        simp only [evalSupportedAstReal, evalSourceExpr]
+        rw [observe_negation]
+        rw [lower_aux_observation_preserved scope sourceEnvironment targetEnvironment
+          related operand childProgram childAccepted]
+    | binary op left right =>
+      rw [expressionEquation] at accepted
+      rcases twoAccepted _ _ _ _ accepted with
+        ⟨leftProgram, rightProgram, leftAccepted, rightAccepted, rfl⟩
+      simp only [evalSupportedAstReal, evalSourceExpr]
+      rw [observe_binary]
+      rw [lower_aux_observation_preserved scope sourceEnvironment targetEnvironment
+        related left leftProgram leftAccepted]
+      rw [lower_aux_observation_preserved scope sourceEnvironment targetEnvironment
+        related right rightProgram rightAccepted]
+    | call callee arguments =>
+      rw [expressionEquation] at accepted
+      cases binding : resolveFixedCallee callee with
+      | none => simp [lowerSupportedAstAux, binding] at accepted
+      | some primitive =>
+        cases argumentsAccepted : lowerSupportedArguments scope arguments with
+        | error problem => simp [lowerSupportedAstAux, binding, argumentsAccepted] at accepted
+        | ok argumentPrograms =>
+          have primitiveAccepted : lowerPrimitive primitive argumentPrograms = .ok program := by
+            simpa only [lowerSupportedAstAux, binding, argumentsAccepted] using accepted
+          have argumentObservation := lower_arguments_observation_preserved scope
+            sourceEnvironment targetEnvironment related arguments argumentPrograms argumentsAccepted
+          simp only [evalSupportedAstReal, binding]
+          rw [observe_primitive_bind, argumentObservation]
+          exact (lower_primitive_evaluation targetEnvironment primitive argumentPrograms
+            program primitiveAccepted).symm
+    | ifExp test body otherwise =>
+      rw [expressionEquation] at accepted
+      cases test with
+      | compare comparison condition right =>
+        cases comparison with
+        | unsupported tag => simp [lowerSupportedAstAux] at accepted
+        | ge =>
+          cases right with
+          | integer value =>
+            cases value with
+            | negSucc value => simp [lowerSupportedAstAux] at accepted
+            | ofNat value =>
+              cases value with
+              | succ value =>
+                change (Except.error (.unsupported "ifTestMustBeGeIntegerZero") :
+                  Except PyLowerError (SourceExpr .scalar)) = .ok program at accepted
+                cases accepted
+              | zero =>
+                rcases threeAccepted _ _ _ _ _ accepted with
+                  ⟨conditionProgram, bodyProgram, otherwiseProgram,
+                    conditionAccepted, bodyAccepted, otherwiseAccepted, rfl⟩
+                change observeNumber (evalSupportedAstReal sourceEnvironment
+                  (.ifExp (.compare .ge condition (.integer 0)) body otherwise)) =
+                  evalSourceExpr targetEnvironment
+                    (.ifNonneg conditionProgram bodyProgram otherwiseProgram)
+                rw [observe_conditional]
+                simp only [evalSourceExpr]
+                rw [lower_aux_observation_preserved scope sourceEnvironment targetEnvironment
+                  related condition conditionProgram conditionAccepted]
+                cases conditionResult : evalSourceExpr targetEnvironment conditionProgram with
+                | error problem => rfl
+                | ok value =>
+                  by_cases nonnegative : 0 ≤ value
+                  · simp only [applyOne, if_pos nonnegative]
+                    exact lower_aux_observation_preserved scope sourceEnvironment targetEnvironment
+                      related body bodyProgram bodyAccepted
+                  · simp only [applyOne, if_neg nonnegative]
+                    exact lower_aux_observation_preserved scope sourceEnvironment targetEnvironment
+                      related otherwise otherwiseProgram otherwiseAccepted
+          | name identifier => simp [lowerSupportedAstAux] at accepted
+          | floatLiteral token ratio => simp [lowerSupportedAstAux] at accepted
+          | unary op operand => simp [lowerSupportedAstAux] at accepted
+          | binary op left right => simp [lowerSupportedAstAux] at accepted
+          | call callee arguments => simp [lowerSupportedAstAux] at accepted
+          | compare op left right => simp [lowerSupportedAstAux] at accepted
+          | ifExp condition thenBranch elseBranch => simp [lowerSupportedAstAux] at accepted
+          | subscript value index => simp [lowerSupportedAstAux] at accepted
+          | listComp body generators => simp [lowerSupportedAstAux] at accepted
+          | generatorExp body generators => simp [lowerSupportedAstAux] at accepted
+          | unsupported tag => simp [lowerSupportedAstAux] at accepted
+      | name identifier => simp [lowerSupportedAstAux] at accepted
+      | integer value => simp [lowerSupportedAstAux] at accepted
+      | floatLiteral token ratio => simp [lowerSupportedAstAux] at accepted
+      | unary op operand => simp [lowerSupportedAstAux] at accepted
+      | binary op left right => simp [lowerSupportedAstAux] at accepted
+      | call callee arguments => simp [lowerSupportedAstAux] at accepted
+      | ifExp condition thenBranch elseBranch => simp [lowerSupportedAstAux] at accepted
+      | subscript value index => simp [lowerSupportedAstAux] at accepted
+      | listComp body generators => simp [lowerSupportedAstAux] at accepted
+      | generatorExp body generators => simp [lowerSupportedAstAux] at accepted
+      | unsupported tag => simp [lowerSupportedAstAux] at accepted
+    | compare comparison left right =>
+      rw [expressionEquation] at accepted
+      simp [lowerSupportedAstAux] at accepted
+    | subscript value index =>
+      rw [expressionEquation] at accepted
+      simp [lowerSupportedAstAux] at accepted
+    | listComp body generators =>
+      rw [expressionEquation] at accepted
+      simp [lowerSupportedAstAux] at accepted
+    | generatorExp body generators =>
+      rw [expressionEquation] at accepted
+      simp [lowerSupportedAstAux] at accepted
+    | unsupported tag =>
+      rw [expressionEquation] at accepted
+      simp [lowerSupportedAstAux] at accepted
+  termination_by sizeOf expression
+  decreasing_by
+    all_goals
+      simp only [expressionEquation, PyExpr.unary.sizeOf_spec,
+        PyExpr.binary.sizeOf_spec, PyExpr.call.sizeOf_spec,
+        PyExpr.ifExp.sizeOf_spec, PyExpr.compare.sizeOf_spec]
+      omega
+
+  private theorem lower_arguments_observation_preserved (scope : List PyName)
+      (sourceEnvironment : PyEnvironment) (targetEnvironment : NamedEnvironment)
+      (related : StructuralEnvRel scope sourceEnvironment targetEnvironment)
+      (arguments : PyArgs) (programs : List (SourceExpr .scalar))
+      (accepted : lowerSupportedArguments scope arguments = .ok programs) :
+      observeNumbers (evalSupportedArguments sourceEnvironment arguments) =
+        evalTargetArguments targetEnvironment programs := by
+    cases argumentEquation : arguments with
+    | nil =>
+      rw [argumentEquation] at accepted
+      have programEquation := Except.ok.inj accepted
+      cases programEquation
+      rfl
+    | cons first rest =>
+      rw [argumentEquation] at accepted
+      rcases twoAccepted _ _ _ _ accepted with
+        ⟨firstProgram, restPrograms, firstAccepted, restAccepted, rfl⟩
+      simp only [evalSupportedArguments, evalTargetArguments]
+      rw [observe_arguments_cons]
+      rw [lower_aux_observation_preserved scope sourceEnvironment targetEnvironment
+        related first firstProgram firstAccepted]
+      rw [lower_arguments_observation_preserved scope sourceEnvironment targetEnvironment
+        related rest restPrograms restAccepted]
+  termination_by sizeOf arguments
+  decreasing_by
+    all_goals
+      simp only [argumentEquation, PyArgs.cons.sizeOf_spec]
+      omega
+end
+
+/-- General value AND selected-error observation equality. Actual structural
+lowering success is the only semantic-program admission premise. -/
+theorem lower_supported_ast_observation_preserved (scope : List PyName)
+    (sourceEnvironment : PyEnvironment) (targetEnvironment : NamedEnvironment)
+    (related : StructuralEnvRel scope sourceEnvironment targetEnvironment)
+    (expression : PyExpr) (program : SourceExpr .scalar)
+    (accepted : lowerSupportedAst scope expression = .ok program) :
+    observeNumber (evalSupportedAstReal sourceEnvironment expression) =
+      evalSourceExpr targetEnvironment program := by
+  unfold lowerSupportedAst at accepted
+  split at accepted
+  · exact lower_aux_observation_preserved scope sourceEnvironment targetEnvironment
+      related expression program accepted
+  · cases accepted
+
+/-- A success equivalence is a conclusion; no successful evaluation is assumed. -/
+theorem lower_supported_ast_success_observation (scope : List PyName)
+    (sourceEnvironment : PyEnvironment) (targetEnvironment : NamedEnvironment)
+    (related : StructuralEnvRel scope sourceEnvironment targetEnvironment)
+    (expression : PyExpr) (program : SourceExpr .scalar)
+    (accepted : lowerSupportedAst scope expression = .ok program) :
+    ∀ value : ℝ,
+      observeNumber (evalSupportedAstReal sourceEnvironment expression) = .ok value ↔
+        evalSourceExpr targetEnvironment program = .ok value := by
+  intro value
+  rw [lower_supported_ast_observation_preserved scope sourceEnvironment targetEnvironment
+    related expression program accepted]
+
+/-- Common selected-error equivalence, also without an evaluation premise.
+The translation names every own runtime error explicitly. -/
+theorem lower_supported_ast_error_observation (scope : List PyName)
+    (sourceEnvironment : PyEnvironment) (targetEnvironment : NamedEnvironment)
+    (related : StructuralEnvRel scope sourceEnvironment targetEnvironment)
+    (expression : PyExpr) (program : SourceExpr .scalar)
+    (accepted : lowerSupportedAst scope expression = .ok program) :
+    ∀ problem : PyEvalError,
+      observeNumber (evalSupportedAstReal sourceEnvironment expression) = .error (translatePyError problem) ↔
+        evalSourceExpr targetEnvironment program = .error (translatePyError problem) := by
+  intro problem
+  rw [lower_supported_ast_observation_preserved scope sourceEnvironment targetEnvironment
+    related expression program accepted]
+
+#print axioms lower_supported_ast_observation_preserved
+#print axioms lower_supported_ast_success_observation
+#print axioms lower_supported_ast_error_observation
+
+end
+
+end RankerSupportedPythonAstReal
+
+#print axioms _root_.RankerSupportedPythonAstReal.lower_supported_ast_observation_preserved
+#print axioms _root_.RankerSupportedPythonAstReal.lower_supported_ast_success_observation
+#print axioms _root_.RankerSupportedPythonAstReal.lower_supported_ast_error_observation

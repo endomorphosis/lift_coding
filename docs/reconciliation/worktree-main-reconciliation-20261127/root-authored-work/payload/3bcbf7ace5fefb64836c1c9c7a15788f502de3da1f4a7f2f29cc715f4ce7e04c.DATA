@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+"""Repeatable verified raw context/objective read for the integrated controller."""
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+
+HERE = Path(__file__).resolve().parent
+def sha(data): return hashlib.sha256(data).hexdigest()
+def read(path): return json.loads(path.read_text())
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--run", type=Path, default=HERE / "routing_enrollment_v1")
+    parser.add_argument("--case", required=True)
+    parser.add_argument("--expected-source-sha256")
+    parser.add_argument("--expected-objective-sha256")
+    args = parser.parse_args()
+    freeze = read(args.run / "freeze.json")
+    assert sha(Path(__file__).read_bytes()) == freeze["evaluation_sources"]["context_read_v1.py"]
+    assert sha((args.run / "public_projection.json").read_bytes()) == freeze["public_projection_sha256"]
+    projected = next(r for r in read(args.run / "public_projection.json") if r["id"] == args.case)
+    assert set(projected) == {"id", "source", "objective", "visible_validation"}
+    profile = read(args.run / "runtime_source_manifest.json")
+    assert sha((args.run / "runtime_source_manifest.json").read_bytes()) == freeze["runtime_manifest_sha256"]
+    env = {k: os.environ[k] for k in ("PATH", "LANG", "HOME") if k in os.environ}
+    env.update(PYTHONPATH=":".join(profile["pythonpath"]), PYTHONDONTWRITEBYTECODE="1", IPFS_ACCEL_SKIP_CORE="1")
+    materialized = {}
+    for path, key in (("target.py", "source"), ("test_visible.py", "visible_validation")):
+        command = ["/usr/bin/python3", "-B", str(HERE / "native_service.py"), "expand", "--run", str(args.run.resolve()), "--case", args.case, "--path", path]
+        process = subprocess.run(command, cwd="/tmp", env=env, capture_output=True, timeout=30)
+        if process.returncode: raise RuntimeError("native context expansion rejected: " + process.stderr.decode(errors="replace")[-1200:])
+        assert process.stdout == projected[key].encode(), "materialized raw source differs from frozen public authority"
+        materialized[key] = process.stdout.decode()
+    job = next(j for j in freeze["jobs"] if j["task_id"] == args.case)
+    folder = args.run / args.case
+    assert sha((folder / "case.json").read_bytes()) == job["case_sha256"]
+    case = read(folder / "case.json")
+    assert case["public_specification"] == projected["objective"]
+    source_sha = sha(materialized["source"].encode()); objective_sha = sha(projected["objective"].encode())
+    if args.expected_source_sha256 and args.expected_source_sha256 != source_sha: raise ValueError("controller source hash mismatch")
+    if args.expected_objective_sha256 and args.expected_objective_sha256 != objective_sha: raise ValueError("controller objective hash mismatch")
+    result = {"schema": "ns-verified-native-context-read/v1", "id": args.case, **materialized, "objective": projected["objective"], "source_sha256": source_sha, "objective_sha256": objective_sha, "visible_validation_sha256": sha(materialized["visible_validation"].encode()), "semantic_pack_cid": read(folder / "pack_ref.json")["semantic_pack_cid"], "context_freeze_sha256": sha((args.run / "freeze.json").read_bytes()), "raw_source_retained": True, "native_expansion_calls": 2, "heldback_fields_projected_to_producer": False, "execution_reuse_authorized": False, "provider_calls": 0}
+    print(json.dumps(result))
+
+if __name__ == "__main__": main()

@@ -1,0 +1,377 @@
+"""Generic public-source transport with immutable-base content reconstruction.
+
+This successor does not change any frozen Requests caller. Text proposals have
+no mode channel: the resulting candidate is reconstructed from the authoritative
+base plus its complete cumulative content patch under a named scorer mode policy.
+All current bytes must already have an exact source receipt before editing.
+"""
+from __future__ import annotations
+
+import difflib
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import shutil
+import stat
+import subprocess
+import tempfile
+
+MODE_POLICIES = {"preserve_base_modes", "git_apply_umask_0022"}
+
+
+def canonical(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()
+
+
+def sha(value):
+    return hashlib.sha256(value).hexdigest()
+
+
+def text(path):
+    return Path(path).read_bytes().decode("utf-8")
+
+
+def normalized(name):
+    if (not isinstance(name, str) or not name or Path(name).is_absolute()
+            or "\\" in name or re.search(r"[\x00-\x1f\x7f]", name)
+            or ".." in Path(name).parts or ".git" in Path(name).parts
+            or Path(name).as_posix() != name):
+        raise ValueError("invalid public relative path")
+    return name
+
+
+def public_file(root, name):
+    normalized(name)
+    root = Path(root)
+    if root.is_symlink() or not root.is_dir():
+        raise ValueError("source root must be a real directory")
+    current = root
+    for component in Path(name).parts:
+        current = current / component
+        if current.is_symlink():
+            raise ValueError("source path has a symlink component")
+    if not current.is_file() or not current.resolve().is_relative_to(root.resolve()):
+        raise ValueError("source is not a contained regular file")
+    return current
+
+
+def inventory(root):
+    root = Path(root)
+    if root.is_symlink() or not root.is_dir():
+        raise ValueError("source root must be a real directory")
+    entries = []
+    for directory, dirs, files in os.walk(root, followlinks=False):
+        if Path(directory) == root and ".git" in dirs:
+            dirs.remove(".git")
+        for name in list(dirs):
+            if (Path(directory) / name).is_symlink():
+                files.append(name)
+                dirs.remove(name)
+        for name in files:
+            path = Path(directory) / name
+            if path == root / ".git":
+                continue
+            relative = normalized(path.relative_to(root).as_posix())
+            mode = stat.S_IMODE(path.lstat().st_mode)
+            if path.is_symlink():
+                target = os.readlink(path)
+                if not path.resolve().is_relative_to(root.resolve()):
+                    raise ValueError("public symlink escapes source root")
+                body, kind = target.encode(), "symlink"
+            elif path.is_file():
+                body, kind = path.read_bytes(), "file"
+            else:
+                raise ValueError("unsupported source file kind")
+            entries.append({"path": relative, "kind": kind, "mode": mode, "sha256": sha(body)})
+    entries.sort(key=lambda row: row["path"])
+    # Preserve the Requests/Zarr endpoint's canonical inventory identity.
+    return {"entries": entries, "tree_sha256": sha(json.dumps(entries, sort_keys=True, separators=(",", ":")).encode())}
+
+
+def original_adapter_inventory(root):
+    """Explicit alternate wire format; never confuse this hash with tree_sha256."""
+    result = {}
+    for row in inventory(root)["entries"]:
+        path = Path(root) / row["path"]
+        result[row["path"]] = ({"kind": "symlink", "target": os.readlink(path)}
+                               if row["kind"] == "symlink" else
+                               {"kind": "file", "sha256": row["sha256"],
+                                "bytes": path.stat().st_size, "mode": row["mode"]})
+    return result
+
+
+def raw_stat_inventory(root):
+    """Zarr endpoint representation, including file-kind bits in each mode."""
+    entries = []
+    for row in inventory(root)["entries"]:
+        entries.append({**row, "mode": (Path(root) / row["path"]).lstat().st_mode})
+    return {"entries": entries, "tree_sha256": sha(json.dumps(entries, sort_keys=True, separators=(",", ":")).encode())}
+
+
+def policy_for(root, read_paths, edit_paths, *, mode_policy):
+    if mode_policy not in MODE_POLICIES:
+        raise ValueError("unsupported scorer mode policy")
+    for values in (read_paths, edit_paths):
+        if not isinstance(values, list) or not values or any(not isinstance(v, str) for v in values):
+            raise ValueError("explicit nonempty public path lists required")
+        if len(values) != len(set(values)):
+            raise ValueError("duplicate policy path")
+        for name in values:
+            public_file(root, name)
+    if not set(edit_paths) <= set(read_paths):
+        raise ValueError("repair surface must be admitted for reading")
+    return {"schema": "ns-public-source-policy/v2", "read_paths": sorted(read_paths),
+            "edit_paths": sorted(edit_paths), "mode_policy": mode_policy,
+            "base_tree_sha256": inventory(root)["tree_sha256"],
+            "new_paths_allowed": False, "mode_changes_via_model": False}
+
+
+def production(root, name, policy, *, edit=False):
+    normalized(name)
+    if name not in policy["edit_paths" if edit else "read_paths"]:
+        raise ValueError("path outside frozen public source policy")
+    return public_file(root, name)
+
+
+def lexical_sources(root, objective, policy):
+    objective = objective.split("## System Information", 1)[0]
+    words = set(re.findall(r"[a-zA-Z_][a-zA-Z_0-9]{3,}", objective.lower()))
+    words -= set("this that with from when have should using results raises actual expected version requests python http https example code works other error".split())
+    ranked = []
+    for name in policy["read_paths"]:
+        body = text(production(root, name, policy))
+        score = sum(min(body.lower().count(word), 20) for word in words)
+        score += 100 * sum(name.lower() in token.lower() for token in re.findall(r"\S+", objective))
+        ranked.append((-score, name, body))
+    return [{"path": name, "source": body, "sha256": sha(body.encode())}
+            for _, name, body in sorted(ranked)]
+
+
+def replacement_edits(root, edits, policy):
+    if not isinstance(edits, list) or not edits or len(edits) > 8:
+        raise ValueError("invalid edit count")
+    bodies = {}
+    for edit in edits:
+        if not isinstance(edit, dict) or set(edit) != {"path", "old", "new"}:
+            raise ValueError("closed exact replacement schema required")
+        path = production(root, edit["path"], policy, edit=True)
+        old, new = edit["old"], edit["new"]
+        if not isinstance(old, str) or not isinstance(new, str) or not old or old == new:
+            raise ValueError("invalid replacement")
+        source = bodies.get(edit["path"], text(path))
+        if source.count(old) != 1:
+            raise ValueError("old text must occur exactly once")
+        changed = source.replace(old, new, 1)
+        if len(changed.encode()) > 131072:
+            raise ValueError("candidate module exceeds frozen edit bound")
+        bodies[edit["path"]] = changed
+    return bodies
+
+
+def copy_public(source, destination):
+    source = Path(source)
+    shutil.copytree(source, destination, symlinks=True,
+                    ignore=lambda directory, names: [".git"] if Path(directory) == source and ".git" in names else [])
+
+
+def git(root, args, *, data=None, allow_failure=False):
+    env = {key: value for key, value in os.environ.items() if not key.startswith("GIT_")}
+    env.update(GIT_CONFIG_NOSYSTEM="1", GIT_CONFIG_GLOBAL="/dev/null",
+               GIT_CEILING_DIRECTORIES=str(Path(root).resolve().parent), GIT_NO_LAZY_FETCH="1",
+               GIT_TERMINAL_PROMPT="0", GIT_AUTHOR_NAME="NS Development Evaluation",
+               GIT_AUTHOR_EMAIL="ns-eval@localhost", GIT_COMMITTER_NAME="NS Development Evaluation",
+               GIT_COMMITTER_EMAIL="ns-eval@localhost", GIT_AUTHOR_DATE="2026-09-14T00:00:00+00:00",
+               GIT_COMMITTER_DATE="2026-09-14T00:00:00+00:00")
+    command = ["git", "-c", "core.hooksPath=/dev/null", "-c", "core.autocrlf=false", "-C", str(root), *args]
+    process = subprocess.run(command, input=data, capture_output=True, timeout=60, env=env, umask=0o022)
+    result = {"command": command, "returncode": process.returncode,
+              "stdout": process.stdout.decode(errors="replace"), "stderr": process.stderr.decode(errors="replace")}
+    if process.returncode and not allow_failure:
+        raise ValueError("Git operation failed: " + json.dumps(result))
+    return result
+
+
+def diff_text(name, old, new):
+    # A tab terminates filenames unambiguously; missing EOF newlines are exact.
+    lines = difflib.unified_diff(old.splitlines(keepends=True), new.splitlines(keepends=True),
+                                 fromfile="a/" + name + "\t", tofile="b/" + name + "\t")
+    output = []
+    for line in lines:
+        output.append(line)
+        if not line.endswith("\n"):
+            output.append("\n\\ No newline at end of file\n")
+    return "".join(output)
+
+
+def content_patch(base, current, policy, replacements=None):
+    if inventory(base)["tree_sha256"] != policy["base_tree_sha256"]:
+        raise ValueError("authoritative public base changed")
+    old = {row["path"]: row for row in inventory(base)["entries"]}
+    new = {row["path"]: row for row in inventory(current)["entries"]}
+    if set(old) != set(new):
+        raise ValueError("profile permits existing files only")
+    replacements = replacements or {}
+    if not set(replacements) <= set(policy["edit_paths"]):
+        raise ValueError("replacement outside repair surface")
+    parts = []
+    for name in sorted(old):
+        if old[name]["kind"] != new[name]["kind"]:
+            raise ValueError("source kind changed")
+        if name not in policy["edit_paths"]:
+            if old[name] != new[name]:
+                raise ValueError("unadmitted source or mode changed")
+            continue
+        production(current, name, policy, edit=True)
+        body = replacements.get(name, text(Path(current) / name))
+        if not isinstance(body, str):
+            raise ValueError("text-only candidate required")
+        if body != text(Path(base) / name):
+            parts.append(diff_text(name, text(Path(base) / name), body))
+    return "".join(parts).encode()
+
+
+def replay(base, destination, patch, policy):
+    if inventory(base)["tree_sha256"] != policy["base_tree_sha256"]:
+        raise ValueError("authoritative public base changed")
+    copy_public(base, destination)
+    if patch:
+        git(destination, ["apply", "--check", "-"], data=patch)
+        git(destination, ["apply", "-"], data=patch)
+    if policy["mode_policy"] == "preserve_base_modes":
+        for row in inventory(base)["entries"]:
+            if row["kind"] == "file":
+                (Path(destination) / row["path"]).chmod(row["mode"])
+    elif policy["mode_policy"] != "git_apply_umask_0022":
+        raise ValueError("unsupported scorer mode policy")
+    # Replay accepts only this exact complete production-content transport.
+    if content_patch(base, destination, policy) != patch:
+        raise ValueError("patch is not the canonical complete content transport")
+    return inventory(destination)
+
+
+def materialize_candidate(base, current, destination, policy, *, expected_current_tree_sha256, edits=None):
+    if inventory(current)["tree_sha256"] != expected_current_tree_sha256:
+        raise ValueError("current source receipt does not match exact source")
+    replacements = replacement_edits(current, edits, policy) if edits is not None else {}
+    patch = content_patch(base, current, policy, replacements)
+    destination = Path(destination)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix="ns-content-replay-", dir=destination.parent) as temporary:
+        expected = Path(temporary) / "source"
+        result = replay(base, expected, patch, policy)
+        if destination.exists():
+            if inventory(destination) != result:
+                raise ValueError("retained candidate differs from complete content replay")
+        else:
+            shutil.move(str(expected), destination)
+    return {"schema": "ns-cumulative-content-candidate/v2", "patch": patch.decode(),
+            "patch_sha256": sha(patch), "source_tree": result,
+            "input_tree_sha256": expected_current_tree_sha256,
+            "base_tree_sha256": policy["base_tree_sha256"], "mode_policy": policy["mode_policy"],
+            "source_policy_sha256": sha(canonical(policy)),
+            "mode_channel": "none; exact immutable-base replay is authoritative"}
+
+
+def seed_public_git(task, destination, graph, public_tasks):
+    """Authenticate upstream tracked trees using public exports only.
+
+    Generated image modules remain exact, separately bound overlays. They are
+    never falsely asserted to be tracked upstream Git content.
+    """
+    copy_public(task["source_root"], destination)
+    shutil.copytree(graph, Path(destination) / ".git")
+    git(destination, ["config", "core.bare", "false"])
+    git(destination, ["config", "--remove-section", "remote.origin"], allow_failure=True)
+    git(destination, ["read-tree", task["base_commit"]])
+    for value in public_tasks:
+        for row in inventory(value["source_root"])["entries"]:
+            path = Path(value["source_root"]) / row["path"]
+            body = os.readlink(path).encode() if row["kind"] == "symlink" else path.read_bytes()
+            git(destination, ["hash-object", "-w", "--stdin"], data=body)
+    git(destination, ["add", "--all", "--force", "."])
+    generated = task.get("generated_paths", [])
+    for name in generated:
+        public_file(destination, name)
+        git(destination, ["update-index", "--force-remove", "--", name])
+    actual = git(destination, ["write-tree"])["stdout"].strip()
+    expected = git(destination, ["rev-parse", task["base_commit"] + "^{tree}"])["stdout"].strip()
+    if actual != expected:
+        raise ValueError("public tracked projection differs from actual upstream Git tree")
+    git(destination, ["update-ref", "refs/heads/evaluation", task["base_commit"]])
+    git(destination, ["symbolic-ref", "HEAD", "refs/heads/evaluation"])
+    return {"base_commit": task["base_commit"], "upstream_tree_oid": actual,
+            "full_public_tree_sha256": inventory(destination)["tree_sha256"],
+            "generated_overlays": [{"path": name, "sha256": sha((Path(destination) / name).read_bytes()),
+                                     "mode": stat.S_IMODE((Path(destination) / name).stat().st_mode)} for name in generated]}
+
+
+def advance_source(old_task, new_task, parent, destination, *, graph, old_policy, new_policy):
+    """Actual Git three-way accepted-source carry, with explicit failed branch."""
+    if inventory(new_task["source_root"])["tree_sha256"] != new_policy["base_tree_sha256"]:
+        raise ValueError("new authoritative public base changed")
+    destination = Path(destination)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    # Merely loading new public blobs into the old index does not authenticate
+    # their claimed commit. Independently reconstruct the new tracked tree too.
+    new_auth = seed_public_git(new_task, destination.parent / (destination.name + "_new_base_auth"),
+                               graph, [old_task, new_task])
+    if parent is None or not parent["accepted"]:
+        copy_public(new_task["source_root"], destination)
+        return {"kind": "exogenous_public_base_update", "prior_accepted": False,
+                "prior_outcome_preserved": True, "new_base_commit": new_task["base_commit"],
+                "new_public_source_authentication": new_auth,
+                "conflicts": [], "source_tree_sha256": inventory(destination)["tree_sha256"]}
+    accepted = Path(parent["accepted_tree_path"])
+    if inventory(accepted)["tree_sha256"] != parent["accepted_tree_sha256"]:
+        raise ValueError("accepted source receipt changed")
+    # Validate entire accepted content population and permitted edit surface.
+    content_patch(old_task["source_root"], accepted, old_policy)
+    for name in old_task.get("generated_paths", []):
+        if (accepted / name).read_bytes() != (Path(old_task["source_root"]) / name).read_bytes():
+            raise ValueError("generated overlay edits not enrolled for upstream carry")
+    working = destination.parent / (destination.name + "_git_worktree")
+    auth = seed_public_git(old_task, working, graph, [old_task, new_task])
+    for row in inventory(accepted)["entries"]:
+        if row["kind"] == "file":
+            target = working / row["path"]
+            body = (accepted / row["path"]).read_bytes()
+            if target.read_bytes() != body:
+                target.write_bytes(body)
+                target.chmod(row["mode"])
+    git(working, ["add", "--all", "--force", "."])
+    for name in old_task.get("generated_paths", []):
+        git(working, ["update-index", "--force-remove", "--", name])
+    tree = git(working, ["write-tree"])["stdout"].strip()
+    commit = git(working, ["commit-tree", tree, "-p", old_task["base_commit"]], data=b"Accepted evaluation source\n")["stdout"].strip()
+    git(working, ["update-ref", "refs/heads/evaluation", commit])
+    ancestry = git(working, ["merge-base", "--is-ancestor", old_task["base_commit"], new_task["base_commit"]])
+    merged = git(working, ["merge", "--no-commit", "--no-ff", new_task["base_commit"]], allow_failure=True)
+    conflicts = git(working, ["diff", "--name-only", "--diff-filter=U"])["stdout"].splitlines()
+    if merged["returncode"] not in (0, 1) or (merged["returncode"] == 1 and not conflicts):
+        raise ValueError("merge failed outside enrolled conflict handling")
+    new_base = Path(new_task["source_root"])
+    for name in set(old_task.get("generated_paths", [])) - set(new_task.get("generated_paths", [])):
+        (working / name).unlink()
+    for name in new_task.get("generated_paths", []):
+        path = public_file(new_base, name)
+        target = working / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(path.read_bytes())
+        target.chmod(stat.S_IMODE(path.stat().st_mode))
+    # Git checkout raw modes are incidental. Build the authoritative transport
+    # on the new immutable base, retaining complete conflict-marker bytes.
+    for row in inventory(new_base)["entries"]:
+        if row["kind"] == "file":
+            (working / row["path"]).chmod(row["mode"])
+    result = materialize_candidate(new_base, working, destination, new_policy,
+                                   expected_current_tree_sha256=inventory(working)["tree_sha256"])
+    return {"kind": "actual_git_three_way_merge", "prior_accepted": True, "prior_outcome_preserved": True,
+            "old_base_commit": old_task["base_commit"], "new_base_commit": new_task["base_commit"],
+            "accepted_parent_commit": commit, "accepted_parent_tree_oid": tree,
+            "public_source_authentication": auth, "new_public_source_authentication": new_auth,
+            "ancestry": ancestry, "merge": merged,
+            "conflicts": conflicts, "source_tree_sha256": result["source_tree"]["tree_sha256"],
+            "canonical_content_transport": {key: value for key, value in result.items() if key != "patch"},
+            "new_generated_paths": new_task.get("generated_paths", [])}

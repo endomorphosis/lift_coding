@@ -1,0 +1,413 @@
+"""Fresh public revision/cache custody tests; fixture artifacts are not proofs.
+
+The native persistence case hydrates real isolated DuckDB/DuckLake stores and
+checks their restart report. Arithmetic examples exercise capture, graph, and
+identity boundaries only; no authored fixture claims a checker invocation.
+"""
+from copy import deepcopy
+import hashlib
+import importlib
+import json
+from pathlib import Path
+
+import pytest
+
+
+REPOSITORY = "public-revision-cache-fixture"
+PATHS = ["callee.py", "caller.py"]
+CALLEE = b"def increment(value):\n    return value + 1\n"
+CALLER = (
+    "from callee import increment\n\n"
+    "def twice(value):\n    return increment(increment(value))\n\n"
+    "def unsupported(expression):\n    return eval(expression)\n\n"
+    "DESCRIPTION = 'révision λ'\n"
+).encode("utf-8")
+AUTHORITY_FIELDS = (
+    "proof_authority", "execution_authority", "completion_authority",
+    "source_semantics_verified", "behavioral_satisfaction", "production_activated",
+)
+
+
+def _sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def _dimensions():
+    return {
+        "source": {"fixture_source_role": "public_two_module_repository"},
+        "expression": {"operator": "twice_increment", "domain": "mathematical_integers"},
+        "formalization": {"schema": "fixture-increment-projection@1", "checked": False},
+        "slice": {"paths": list(PATHS), "symbol": "caller.twice"},
+        "obligation": {"id": "fixture:twice", "property": "result = value + 2"},
+        "assumptions": [{"domain": "mathematical_integers", "python_binding_proven": False}],
+        "bounds": {"source_bytes": 1048576, "checker_seconds": 5},
+        "translation": {"id": "fixture-static-adapter", "sha256": "a" * 64},
+        "provider": "fixture-candidate-producer",
+        "environment": {"id": "fixture-toolchain", "sha256": "b" * 64},
+        "policy": {"id": "public-candidate-only", "source_execution": False},
+        "schema": {"projection": "fixture-codebase-ir@1"},
+        "checker": "fixture-no-checker-invocation",
+        "network_policy": {"network": "disabled", "provider_calls": 0},
+        "evidence_kind": "candidate",
+        "authority_ceiling": "bounded",
+        "kernel": {"id": "fixture-no-kernel-invocation"},
+        "theorem_registry": {"id": "fixture-no-registered-theorem"},
+    }
+
+
+@pytest.fixture(autouse=True)
+def fresh_namespaces(tmp_path, monkeypatch):
+    monkeypatch.setenv("IPFS_ACCELERATE_META_INDEX_DUCKDB", str(tmp_path / "fresh-meta.duckdb"))
+    monkeypatch.delenv("IPFS_ACCELERATE_META_INDEX_DUCKLAKE", raising=False)
+    monkeypatch.setenv("IPFS_ACCELERATE_AGENT_ORCHESTRATION_DIR", str(tmp_path / "orchestration"))
+    yield
+
+
+@pytest.fixture
+def cache(fresh_namespaces):
+    return importlib.import_module(
+        "benchmarks.agent_supervisor.container_coding.terminal_revision_proof_cache"
+    )
+
+
+@pytest.fixture
+def repository(tmp_path):
+    root = tmp_path / "repository"
+    root.mkdir(mode=0o755)
+    (root / "callee.py").write_bytes(CALLEE)
+    (root / "caller.py").write_bytes(CALLER)
+    for name in PATHS:
+        (root / name).chmod(0o644)
+    return root
+
+
+def _capture(cache, root, **changes):
+    return cache.capture_revision(**{
+        "root": root, "paths": list(PATHS), "repository_id": REPOSITORY, **changes,
+    })
+
+
+def _lookup(cache, root, output, expected, **changes):
+    return cache.lookup_revision_candidate(**{
+        "output": output, "expected": expected, "root": root,
+        "paths": list(PATHS), "repository_id": REPOSITORY,
+        "dimensions": _dimensions(), **changes,
+    })
+
+
+def _assert_candidate(value):
+    for name in AUTHORITY_FIELDS:
+        assert value[name] is False, name
+
+
+def test_capture_is_deterministic_scope_order_independent_and_unicode_exact(cache, repository):
+    snapshot = _capture(cache, repository)
+    again = _capture(cache, repository, paths=list(reversed(PATHS)))
+    assert snapshot == again
+    assert snapshot["scope"] == sorted(PATHS)
+    assert snapshot["root"] == str(repository)
+    assert snapshot["revision_id"]
+    assert "révision λ" in (repository / "caller.py").read_text()
+    dimensions = _dimensions()
+    frozen = deepcopy(dimensions)
+    relationship = cache.build_revision_key(snapshot=snapshot, dimensions=dimensions)
+    assert dimensions == frozen
+    assert relationship == cache.build_revision_key(snapshot=again, dimensions=dimensions)
+    assert relationship["dimensions"]["source"] != dimensions["source"]
+    assert relationship["datasets_key_id"] and relationship["accelerate_key_id"]
+
+
+@pytest.mark.parametrize("field", [
+    "source", "expression", "formalization", "slice", "obligation", "assumptions",
+    "bounds", "translation", "provider", "environment", "policy", "schema",
+    "checker", "network_policy", "kernel", "theorem_registry",
+])
+def test_each_semantic_dimension_changes_the_full_relationship(cache, repository, field):
+    snapshot = _capture(cache, repository)
+    dimensions = _dimensions()
+    original = cache.build_revision_key(snapshot=snapshot, dimensions=dimensions)
+    altered = deepcopy(dimensions)
+    if field in {"provider", "checker"}:
+        altered[field] += "-changed"
+    elif field == "assumptions":
+        altered[field].append({"additional_unproved_assumption": True})
+    else:
+        altered[field] = {"independent_change": altered[field]}
+    changed = cache.build_revision_key(snapshot=snapshot, dimensions=altered)
+    assert changed["relationship_id"] != original["relationship_id"]
+    assert changed["accelerate_key_id"] != original["accelerate_key_id"]
+    if field not in {"kernel", "theorem_registry"}:
+        assert changed["datasets_key_id"] != original["datasets_key_id"]
+
+
+@pytest.mark.parametrize("field", ["translation", "assumptions", "environment", "schema"])
+def test_nonfile_dimensions_are_retained_after_native_scope_restart(cache, repository, field):
+    snapshot = _capture(cache, repository)
+    index = cache.build_revision_scope_index(snapshot=snapshot, dimensions=_dimensions())
+    restarted = type(index).from_dict(index.to_dict(), canonical_artifacts=index.artifacts)
+    assert restarted.index_id == index.index_id
+    dimensions = _dimensions()
+    dimensions[field] = [{"changed": True}] if field == "assumptions" else {"changed": True}
+    other = cache.build_revision_scope_index(snapshot=snapshot, dimensions=dimensions)
+    assert other.index_id != index.index_id
+
+
+@pytest.mark.parametrize("mutation", ["caller", "callee", "dependency_edge", "repository_identity"])
+def test_source_and_dependency_identity_changes_are_not_name_based(cache, repository, mutation):
+    before = _capture(cache, repository)
+    original = cache.build_revision_key(snapshot=before, dimensions=_dimensions())
+    if mutation == "repository_identity":
+        after = _capture(cache, repository, repository_id=REPOSITORY + "-different")
+    else:
+        name = "callee.py" if mutation == "callee" else "caller.py"
+        path = repository / name
+        if mutation == "dependency_edge":
+            path.write_bytes(CALLER.replace(
+                b"return increment(increment(value))", b"return increment(value)"
+            ))
+        else:
+            path.write_bytes(path.read_bytes() + b"\n# new exact revision\n")
+        after = _capture(cache, repository)
+    changed = cache.build_revision_key(snapshot=after, dimensions=_dimensions())
+    assert changed["relationship_id"] != original["relationship_id"]
+    assert after["revision_id"] != before["revision_id"]
+    if mutation == "callee":
+        assert (repository / "caller.py").read_bytes() == CALLER
+
+
+def test_old_capture_cannot_be_reused_after_callee_changes(cache, repository):
+    snapshot = _capture(cache, repository)
+    (repository / "callee.py").write_bytes(CALLEE.replace(b"value + 1", b"value + 2"))
+    with pytest.raises(ValueError):
+        cache.build_revision_key(snapshot=snapshot, dimensions=_dimensions())
+    fresh = _capture(cache, repository)
+    assert cache.build_revision_key(snapshot=fresh, dimensions=_dimensions())["relationship_id"]
+
+
+def test_explicit_capture_scope_does_not_scan_unselected_files(cache, repository):
+    before = _capture(cache, repository)
+    (repository / "unselected.py").write_bytes(b"intentionally invalid unselected syntax !")
+    after = _capture(cache, repository)
+    assert after == before
+    assert after["scope"] == sorted(PATHS)
+
+
+@pytest.mark.parametrize("paths", [
+    [], ["caller.py", "caller.py"], ["../caller.py"], ["/tmp/caller.py"],
+    ["./caller.py"], ["missing.py"], ["caller.py", "callee.py", "missing.py"],
+])
+def test_invalid_explicit_capture_scope_is_rejected(cache, repository, paths):
+    with pytest.raises(ValueError):
+        _capture(cache, repository, paths=paths)
+
+
+def test_symlink_and_hardlink_sources_cannot_enter_a_capture(cache, repository, tmp_path):
+    original = repository / "callee.py"
+    original.unlink()
+    outside = tmp_path / "outside.py"
+    outside.write_bytes(CALLEE)
+    original.symlink_to(outside)
+    with pytest.raises(ValueError):
+        _capture(cache, repository)
+    original.unlink()
+    original.hardlink_to(outside)
+    with pytest.raises(ValueError):
+        _capture(cache, repository)
+
+
+@pytest.mark.parametrize("field", ["revision_id", "scope", "root", "metadata"])
+def test_forged_capture_body_is_not_accepted_as_a_revision(cache, repository, field):
+    snapshot = _capture(cache, repository)
+    forged = deepcopy(snapshot)
+    if field == "revision_id":
+        forged[field] = "sha256:" + "0" * 64
+    elif field == "scope":
+        forged[field] = ["caller.py"]
+    elif field == "root":
+        forged[field] = str(repository.parent)
+    else:
+        forged[field] = {"claimed_valid": True}
+    with pytest.raises(ValueError):
+        cache.build_revision_key(snapshot=forged, dimensions=_dimensions())
+
+
+def test_closed_key_dimensions_reject_missing_or_extra_semantics(cache, repository):
+    snapshot = _capture(cache, repository)
+    dimensions = _dimensions()
+    del dimensions["translation"]
+    with pytest.raises(ValueError):
+        cache.build_revision_key(snapshot=snapshot, dimensions=dimensions)
+    dimensions = _dimensions()
+    dimensions["unbound_extra"] = True
+    with pytest.raises(ValueError):
+        cache.build_revision_key(snapshot=snapshot, dimensions=dimensions)
+
+
+def test_source_write_and_restore_during_key_generation_is_rejected(cache, repository, monkeypatch):
+    snapshot = _capture(cache, repository)
+    native_builder = cache.build_terminal_codebase_proof_key_relationship
+    calls = []
+
+    def write_and_restore(**kwargs):
+        result = native_builder(**kwargs)
+        path = repository / "callee.py"
+        raw = path.read_bytes()
+        path.write_bytes(raw + b"\n# transient mutation\n")
+        path.write_bytes(raw)
+        calls.append(True)
+        return result
+
+    monkeypatch.setattr(cache, "build_terminal_codebase_proof_key_relationship", write_and_restore)
+    with pytest.raises(ValueError):
+        cache.build_revision_key(snapshot=snapshot, dimensions=_dimensions())
+    assert calls == [True]
+    assert (repository / "callee.py").read_bytes() == CALLEE
+
+
+def test_adapter_write_and_restore_during_key_generation_is_rejected_using_a_disposable_copy(
+    cache, repository, tmp_path, monkeypatch,
+):
+    snapshot = _capture(cache, repository)
+    copied_adapter = tmp_path / "copied-revision-adapter.py"
+    copied_adapter.write_bytes(Path(cache.__file__).read_bytes())
+    copied_adapter.chmod(0o644)
+    monkeypatch.setattr(cache, "__file__", str(copied_adapter))
+    native_builder = cache.build_terminal_codebase_proof_key_relationship
+    calls = []
+
+    def write_and_restore(**kwargs):
+        result = native_builder(**kwargs)
+        raw = copied_adapter.read_bytes()
+        copied_adapter.write_bytes(raw + b"\n# transient adapter mutation\n")
+        copied_adapter.write_bytes(raw)
+        calls.append(True)
+        return result
+
+    monkeypatch.setattr(cache, "build_terminal_codebase_proof_key_relationship", write_and_restore)
+    with pytest.raises(ValueError):
+        cache.build_revision_key(snapshot=snapshot, dimensions=_dimensions())
+    assert calls == [True]
+
+
+def test_changed_disposable_adapter_bytes_change_key_without_source_changes(cache, repository, tmp_path, monkeypatch):
+    snapshot = _capture(cache, repository)
+    copied_adapter = tmp_path / "copied-revision-adapter.py"
+    copied_adapter.write_bytes(Path(cache.__file__).read_bytes())
+    copied_adapter.chmod(0o644)
+    monkeypatch.setattr(cache, "__file__", str(copied_adapter))
+    original = cache.build_revision_key(snapshot=snapshot, dimensions=_dimensions())
+    copied_adapter.write_bytes(copied_adapter.read_bytes() + b"\n# changed adapter identity\n")
+    changed = cache.build_revision_key(snapshot=snapshot, dimensions=_dimensions())
+    assert changed["relationship_id"] != original["relationship_id"]
+    assert changed["dimensions"]["source"]["cache_adapter_sha256"] == _sha(copied_adapter.read_bytes())
+
+
+def test_unsupported_dynamic_source_stays_bound_and_does_not_create_proof_authority(cache, repository):
+    snapshot = _capture(cache, repository)
+    rows = snapshot["metadata"]["records"]["unsupported"]
+    assert rows, "the eval site cannot disappear from the captured scope"
+    _assert_candidate(snapshot)
+    relationship = cache.build_revision_key(snapshot=snapshot, dimensions=_dimensions())
+    before = relationship["relationship_id"]
+    path = repository / "caller.py"
+    path.write_bytes(CALLER.replace(b"eval(expression)", b"eval(expression, {})"))
+    changed = cache.build_revision_key(snapshot=_capture(cache, repository), dimensions=_dimensions())
+    assert changed["relationship_id"] != before
+
+
+def test_callee_invalidation_reaches_caller_claim_and_cache_without_creating_proofs(cache, repository):
+    index = cache.build_revision_scope_index(snapshot=_capture(cache, repository), dimensions=_dimensions())
+    assert index.receipts == ()
+    assert index.active_receipt_ids == ()
+    assert index.artifacts_by_kind("proof") == ()
+    assert set(index.active_artifact_ids) == {
+        "module:callee.py", "module:caller.py", "claim:repository", "cache:candidate",
+    }
+    caller = next(item for item in index.artifacts if item.artifact_id == "module:caller.py")
+    assert "module:callee.py" in caller.dependency_ids
+    assert set(dict(caller.dependency_versions)) == set(caller.dependency_ids)
+    changed = index.invalidate([("file", "callee.py")], max_reason_chain=3)
+    assert set(changed.stale_artifact_ids) == set(index.active_artifact_ids)
+    assert changed.active_artifact_ids == ()
+    assert changed.invalidate([("file", "callee.py")], max_reason_chain=3) == changed
+    assert changed.reasons_for("module:caller.py")[0].reason_code == "dependency_invalidated"
+    assert changed.reasons_for("cache:candidate")[0].chain_truncated is True
+    assert all(len(reason.reason_chain) <= 3 for reason in changed.invalidations)
+
+
+def test_caller_invalidation_retains_unchanged_callee(cache, repository):
+    index = cache.build_revision_scope_index(snapshot=_capture(cache, repository), dimensions=_dimensions())
+    changed = index.invalidate([("file", "caller.py")])
+    assert changed.active_artifact_ids == ("module:callee.py",)
+    assert set(changed.stale_artifact_ids) == {
+        "module:caller.py", "claim:repository", "cache:candidate",
+    }
+
+
+def test_native_hydration_exact_lookup_stale_inputs_and_tamper_fail_closed(cache, repository, tmp_path):
+    artifact = tmp_path / "candidate.json"
+    artifact.write_text(json.dumps({
+        "schema": "authored-cache-test-candidate@1", "fixture_only": True,
+        "checked": False, "proof_authority": False,
+    }, sort_keys=True), encoding="utf-8")
+    artifact.chmod(0o644)
+    output = tmp_path / "revision-cache"
+    snapshot = _capture(cache, repository)
+    report = cache.persist_revision_candidate(
+        output=output, snapshot=snapshot, dimensions=_dimensions(), artifact=artifact,
+    )
+    _assert_candidate(report)
+    assert report["metadata"]["fresh_process_readback"]["verified"] is True
+    assert report["metadata"]["qualification"]["proof_authority"] is False
+    assert report["artifact"]["sha256"] == _sha(artifact.read_bytes())
+    assert report["manifest_sha256"]
+    hit = _lookup(cache, repository, output, report)
+    assert hit["status"] == "hit" and hit["reason"] == "exact_current_inputs"
+    assert hit["relationship"]["relationship_id"] == report["relationship_id"]
+    _assert_candidate(hit)
+
+    for field in ("translation", "assumptions", "environment", "schema"):
+        dimensions = _dimensions()
+        dimensions[field] = [{"changed": True}] if field == "assumptions" else {"changed": True}
+        miss = _lookup(cache, repository, output, report, dimensions=dimensions)
+        assert miss["status"] == "miss" and miss["reason"] == "key_changed", field
+        _assert_candidate(miss)
+
+    callee = repository / "callee.py"
+    callee.write_bytes(CALLEE.replace(b"value + 1", b"value + 2"))
+    source_miss = _lookup(cache, repository, output, report)
+    assert source_miss["status"] == "miss" and source_miss["reason"] == "source_changed"
+    assert (repository / "caller.py").read_bytes() == CALLER
+    _assert_candidate(source_miss)
+    callee.write_bytes(CALLEE)
+
+    for forged_flag in (True, 0):
+        forged = deepcopy(report)
+        forged["proof_authority"] = forged_flag
+        with pytest.raises(ValueError):
+            _lookup(cache, repository, output, forged)
+
+    retained_artifact = output / "artifact.bin"
+    original_artifact = retained_artifact.read_bytes()
+    retained_artifact.write_bytes(original_artifact + b" ")
+    with pytest.raises(ValueError):
+        _lookup(cache, repository, output, report)
+    retained_artifact.write_bytes(original_artifact)
+
+    manifest = output / "manifest.json"
+    original_manifest = manifest.read_bytes()
+    manifest.write_bytes(b"{}")
+    with pytest.raises(ValueError):
+        _lookup(cache, repository, output, report)
+    manifest.write_bytes(original_manifest)
+
+    # Retain all original identity columns and corrupt only a native payload.
+    # A valid external manifest cannot make that database row trustworthy.
+    import duckdb
+    with duckdb.connect(str(output / "metadata" / "metadata.duckdb")) as connection:
+        connection.execute(
+            "UPDATE metadata_rows SET payload_json='{}' WHERE family='ast'"
+        )
+    with pytest.raises(ValueError):
+        _lookup(cache, repository, output, report)
+

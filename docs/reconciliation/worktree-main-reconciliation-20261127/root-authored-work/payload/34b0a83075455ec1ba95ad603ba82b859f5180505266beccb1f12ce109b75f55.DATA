@@ -1,0 +1,416 @@
+"""Public capture/native AST replay qualifies a pure representation boundary.
+
+Code fixtures use genuine AST/vector builders. Their semantic scope declarations
+are authored, so these cases do not claim signed semantic admission. One source
+extraction case separately uses the actual signed public-instruction fixture.
+"""
+import copy
+import hashlib
+import json
+import os
+from pathlib import Path
+import shlex
+import subprocess
+import sys
+
+import pytest
+
+from test.api.test_router_public_instruction import selected, scenario  # noqa: F401
+from ipfs_accelerate_py.agent_supervisor.analysis.program_ast_adapters import build_program_evidence_index
+from ipfs_accelerate_py.agent_supervisor.analysis.code_symbol_vector_index import build_code_symbol_vector_index
+from ipfs_accelerate_py.agent_supervisor.context.context_compiler import (
+    ContextCompiler, build_text_context_references, render_context_capsule,
+)
+from ipfs_accelerate_py.agent_supervisor.context.context_contracts import ContextBudget, ContextReference
+from ipfs_accelerate_py.agent_supervisor.runtime import compact_code_retrieval as codec
+from ipfs_accelerate_py.agent_supervisor.runtime import verified_code_retrieval_projection as wrapper
+from ipfs_accelerate_py.agent_supervisor.runtime import code_retrieval_context as native
+from ipfs_accelerate_py.agent_supervisor.runtime import router_public_instruction as public
+from ipfs_accelerate_py.agent_supervisor.runtime import supervisor_meta_index as metadata
+
+
+def sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def wire(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False)
+
+
+@pytest.fixture(autouse=True)
+def isolated_metadata(tmp_path, monkeypatch):
+    monkeypatch.setenv(metadata.ENV_DUCKDB, str(tmp_path / "fresh-metadata.duckdb"))
+    monkeypatch.delenv(metadata.ENV_DUCKLAKE, raising=False)
+    monkeypatch.setenv("IPFS_ACCELERATE_AGENT_SEAL_DB_PATH", str(tmp_path / "fresh-seal.duckdb"))
+    monkeypatch.setenv("PYTHONDONTWRITEBYTECODE", "1")
+
+
+def prompt_for(code_text, *, artifact="retrieval.json", scope=None, source_hash=None):
+    scope = scope or {"mod.py": {"sha256": source_hash, "source_cid": "source:authored-public-fixture"}}
+    semantic = wire({"schema": "supervisor-semantic-worker-context@1", "task_id": "CODE-1",
+                     "manifest": scope, "completion_authority": False})
+    refs = build_text_context_references(semantic, reference_prefix="semantic", kind="semantic-context",
+        path="semantic.json", repository_id="repo:test", tree_id="tree:test", required=True, chunk_bytes=350)
+    refs += build_text_context_references(code_text, reference_prefix="code-retrieval", kind="code-retrieval-context",
+        path=artifact, repository_id="repo:test", tree_id="tree:test", required=True, chunk_bytes=1000)
+    refs += (ContextReference(reference_id="other", kind="literal-advisory", summary="Literal code and $public_source remain unchanged.",
+                             repository_id="repo:test", tree_id="tree:test"),)
+    result = ContextCompiler(ContextBudget(max_input_tokens=32768, max_items=128, max_item_bytes=16384,
+        max_serialized_bytes=262144)).compile(repository_id="repo:test", tree_id="tree:test", objective_id="CODE-1",
+        objective_revision="revision:public", policy_id="policy:fixture", policy_revision="revision:policy",
+        caller="supervisor:fixture", stage="implementation", goal={"id": "CODE-1"},
+        authority={"mode": "candidate_only", "completion_authority": False}, scope={"allowed_paths": ["mod.py"]},
+        acceptance={"criteria": ["public checks remain pending"]}, evidence=refs)
+    return render_context_capsule(result.capsule) + "\nNative suffix remains exactly unchanged.\n"
+
+
+@pytest.fixture
+def native_case(tmp_path):
+    repo = tmp_path / "public-repository"
+    repo.mkdir()
+    repo.chmod(0o755)
+    source = "\n\n".join("def function_%d(value):\n    return helper(value)" % number for number in range(5)) + "\n"
+    (repo / "mod.py").write_bytes(source.encode())
+    (repo / "mod.py").chmod(0o644)
+    literal = "Inspect the exact public code, preserve all source facts and report required outputs.\r\n" * 50
+    (repo / "instruction.md").write_bytes(literal.encode())
+    (repo / "instruction.md").chmod(0o644)
+    ast = build_program_evidence_index({"mod.py": source}).ast_index
+    index = build_code_symbol_vector_index(ast, forest_id="forest:authored", tree_id="tree:authored",
+        coverage_id=ast.index_id, dimensions=2, model_id="authored-vectors", model_revision="1",
+        configuration_id="configuration:2d", vectors=lambda row: (1.0, 0.0))
+    result = index.search((1.0, 0.0), max_results=5)
+    prepared = native.prepare_code_retrieval_context(repository=repo, task_id="CODE-1", query_text=literal,
+        snapshot=index, result=result, output=repo / "retrieval.json")
+    (repo / "retrieval.json").chmod(0o644)
+    text = native.load_code_retrieval_context(repository=repo, artifact="retrieval.json",
+        expected_sha256=prepared["sha256"], task_id="CODE-1")
+    prompt = prompt_for(text, source_hash=sha(source.encode()))
+    return {"repository": repo, "source_text": literal, "source": source, "code_text": text,
+            "prompt": prompt, "prepared": prepared, "index": index, "result": result}
+
+
+def request(case, **extra):
+    return {"prompt": case["prompt"], "repository": case["repository"], "source_text": case["source_text"], **extra}
+
+
+def inventory(path):
+    if not path.exists():
+        return None
+    info = path.stat()
+    return (sha(path.read_bytes()), info.st_dev, info.st_ino, info.st_mode, info.st_size,
+            info.st_mtime_ns, info.st_ctime_ns)
+
+
+def inclusion(source, *, tail=""):
+    block = wrapper.SOURCE_PREFIX + source + wrapper.SOURCE_SUFFIX + tail
+    receipt = {"schema": "supervisor-public-instruction-inclusion@1", "artifact": "/public/instruction.json",
+        "artifact_sha256": "a" * 64, "context_cid": "context:fixture", "task_cid": "task:fixture",
+        "task_id": "CODE-1", "manifest_cid": "manifest:fixture", "source_path": "instruction.md",
+        "source_sha256": sha(source.encode()), "source_bytes": len(source.encode()), "block_sha256": sha(block.encode()),
+        "block_bytes": len(block.encode()), "manifest_signature_verified": True, "verbatim_utf8": True,
+        "semantic_minification_applied": False, "source_freshness_verified": True, "historical_replay": False,
+        "completion_authority": False, "scope_expansion_authority": False, "extra_provider_calls": 0}
+    return block, receipt
+
+
+def test_exact_extraction_preserves_unicode_crlf_embedded_end_markers_and_appendices():
+    source = "é漢字\r\n" + wrapper.SOURCE_SUFFIX + "Literal source continues.\n"
+    block, receipt = inclusion(source, tail="\nVerified IntentIR and inventory appendices follow.\n")
+    assert wrapper.extract_verified_public_instruction_source(block, receipt) == source
+    assert block.encode()[:receipt["source_bytes"]] != source.encode()
+
+
+def test_extraction_accepts_actual_signed_loader_receipt(selected):
+    _, _, source, _, arguments = selected
+    block, receipt = public.load_public_instruction(**arguments)
+    assert wrapper.extract_verified_public_instruction_source(block, receipt).encode() == source
+
+
+@pytest.mark.parametrize("field,value", [
+    ("manifest_signature_verified", 1), ("verbatim_utf8", 1), ("source_freshness_verified", False),
+    ("completion_authority", 0), ("scope_expansion_authority", True), ("historical_replay", True),
+    ("extra_provider_calls", False), ("source_bytes", True), ("block_bytes", True),
+    ("source_sha256", "f" * 64), ("block_sha256", "f" * 64), ("source_path", "state/key.json"),
+])
+def test_extraction_rejects_wrong_source_binding_or_boolean_authority_alias(field, value):
+    block, receipt = inclusion("Literal public instruction.\n")
+    receipt[field] = value
+    with pytest.raises(ValueError):
+        wrapper.extract_verified_public_instruction_source(block, receipt)
+
+
+@pytest.mark.parametrize("mutation", ["prefix", "suffix", "utf8_length", "unknown_field"])
+def test_resigned_rendering_receipt_does_not_allow_relocated_source(mutation):
+    block, receipt = inclusion("é public instruction\n")
+    if mutation == "prefix":
+        block = "Forged header" + block[len(wrapper.SOURCE_PREFIX):]
+    elif mutation == "suffix":
+        block = block.replace(wrapper.SOURCE_SUFFIX, "\nWrong exact suffix\n")
+    elif mutation == "utf8_length":
+        receipt["source_bytes"] -= 1
+    else:
+        receipt["source_text"] = "forged"
+    receipt.update(block_sha256=sha(block.encode()), block_bytes=len(block.encode()))
+    with pytest.raises(ValueError):
+        wrapper.extract_verified_public_instruction_source(block, receipt)
+
+
+def test_genuine_native_ast_query_replay_and_projection_preserve_all_five_hits(native_case):
+    receipt = wrapper.verify_code_retrieval_prompt(**request(native_case))
+    assert receipt["code_hit_count"] == 5 and receipt["code_chunk_count"] > 1
+    assert receipt["observed_artifact_sha256"] == native_case["prepared"]["sha256"]
+    assert receipt["captured_public_native_replay_verified"] is True
+    assert receipt["artifact_nomination_signature_verified"] is False
+    assert receipt["semantic_producer_authentication_claimed"] is False
+    assert all(receipt[key] is False for key in wrapper.AUTHORITY)
+    provider, projected = wrapper.project_verified_code_retrieval_prompt(**request(native_case))
+    assert projected["selected_transport"] == "compact" and projected["native_verification"] == receipt
+    assert projected["decoder_command"] is None
+    packet = codec.parse_code_retrieval_prompt(provider)
+    assert codec.decode_code_retrieval_prompt(packet, native_case["source_text"]) == native_case["prompt"]
+    original = json.loads(native_case["code_text"])
+    assert packet["code_context"]["hits"] == original["hits"]
+    assert projected["native_prompt_sha256"] == sha(native_case["prompt"].encode())
+
+
+def test_optional_independent_semantic_source_hashes_are_enforced(native_case):
+    expected = {"mod.py": sha(native_case["source"].encode())}
+    receipt = wrapper.verify_code_retrieval_prompt(**request(native_case, expected_source_hashes=expected))
+    assert receipt["expected_source_scope_supplied"] is True
+    with pytest.raises(ValueError, match="semantic source scope"):
+        wrapper.verify_code_retrieval_prompt(**request(native_case, expected_source_hashes={"mod.py": "0" * 64}))
+
+
+@pytest.mark.parametrize("mutation", ["rank", "score", "line", "symbol", "effect", "extra_hit", "unknown_field", "task"])
+def test_rehashed_chunk_forgery_cannot_replace_native_ast_query_replay(native_case, mutation):
+    context = json.loads(native_case["code_text"])
+    hit = context["hits"][0]
+    if mutation == "rank":
+        hit["rank"] += 1
+    elif mutation == "score":
+        hit["score"] = 0.125
+    elif mutation == "line":
+        hit["line_start"] += 1
+    elif mutation == "symbol":
+        hit["symbol"] = "mod.forged"
+    elif mutation == "effect":
+        hit["effect_refs"] = ["forged semantic effect"]
+    elif mutation == "extra_hit":
+        context["hits"].append(copy.deepcopy(hit))
+    elif mutation == "unknown_field":
+        context["owner_authority"] = True
+    else:
+        context["task_id"] = "FOREIGN"
+    prompt = prompt_for(wire(context), source_hash=sha(native_case["source"].encode()))
+    with pytest.raises(ValueError):
+        wrapper.verify_code_retrieval_prompt(**request(native_case, prompt=prompt))
+
+
+@pytest.mark.parametrize("mutation", ["reorder", "missing", "index_bool", "count_bool", "parent_repo", "parent_tree", "core_bool"])
+def test_chunk_and_parent_bindings_reject_changed_native_core(native_case, mutation):
+    capsule, suffix = codec._native(native_case["prompt"])
+    positions = [i for i, row in enumerate(capsule["evidence"]) if row["kind"] == "code-retrieval-context"]
+    if mutation == "reorder":
+        capsule["evidence"][positions[0]], capsule["evidence"][positions[1]] = capsule["evidence"][positions[1]], capsule["evidence"][positions[0]]
+    elif mutation == "missing":
+        capsule["evidence"].pop(positions[-1])
+    elif mutation == "core_bool":
+        capsule["contract_version"] = True
+    else:
+        row = capsule["evidence"][positions[0]]
+        row.pop("content_id")
+        if mutation == "index_bool":
+            row["metadata"]["chunk_index"] = False
+        elif mutation == "count_bool":
+            row["metadata"]["chunk_count"] = True
+        elif mutation == "parent_repo":
+            row["repository_id"] = "repo:foreign"
+        else:
+            row["tree_id"] = "tree:foreign"
+        # Recompute reference identity; strict typed selectors/parent checks
+        # must reject even independently rehashed reference records.
+        capsule["evidence"][positions[0]] = ContextReference.from_dict(row).to_record()
+    with pytest.raises(ValueError):
+        wrapper.verify_code_retrieval_prompt(**request(native_case, prompt=wire(capsule) + suffix))
+
+
+@pytest.mark.parametrize("mutation", ["changed_source", "deleted_source", "stale_context", "frontier", "query"])
+def test_freshness_full_profile_and_literal_query_fail_closed(native_case, mutation):
+    request_args = request(native_case)
+    context = json.loads(native_case["code_text"])
+    if mutation == "changed_source":
+        (native_case["repository"] / "mod.py").write_text("def changed():\n    return 0\n")
+    elif mutation == "deleted_source":
+        (native_case["repository"] / "mod.py").unlink()
+    elif mutation == "stale_context":
+        context.update(status="stale", stale_paths=["mod.py"], hits=[])
+    elif mutation == "frontier":
+        context = {"schema": "supervisor-code-retrieval-frontier-context@1", "retrieval": context,
+                   "proof_authority": False, "execution_authority": False, "completion_authority": False}
+    else:
+        request_args["source_text"] = native_case["source_text"].replace("\r\n", "\n")
+    request_args["prompt"] = prompt_for(wire(context), source_hash=sha(native_case["source"].encode()))
+    with pytest.raises((ValueError, OSError)):
+        wrapper.verify_code_retrieval_prompt(**request_args)
+
+
+@pytest.mark.parametrize("target,mutation", [("retrieval.json", "symlink"), ("retrieval.json", "hardlink"),
+    ("retrieval.json", "fifo"), ("retrieval.json", "writable"), ("retrieval.json", "private"),
+    ("mod.py", "symlink"), ("mod.py", "hardlink"), ("mod.py", "fifo"), ("mod.py", "writable")])
+def test_nonregular_or_unprotected_originals_are_rejected_before_replay(native_case, monkeypatch, target, mutation):
+    path = native_case["repository"] / target
+    if mutation == "symlink":
+        moved = path.with_name(path.name + ".original")
+        path.rename(moved)
+        path.symlink_to(moved)
+    elif mutation == "hardlink":
+        path.with_name(path.name + ".link").hardlink_to(path)
+    elif mutation == "fifo":
+        path.unlink()
+        os.mkfifo(path)
+    elif mutation == "private":
+        path.chmod(0o600)
+    else:
+        path.chmod(0o666)
+    calls = []
+    monkeypatch.setattr(native, "load_code_retrieval_context", lambda **kwargs: calls.append(kwargs))
+    with pytest.raises(ValueError):
+        wrapper.verify_code_retrieval_prompt(**request(native_case))
+    assert calls == []
+
+
+def test_private_nomination_is_refused_before_opening_owner_named_files(native_case, monkeypatch):
+    prompt = prompt_for(native_case["code_text"], artifact="state/private-key.json",
+                        source_hash=sha(native_case["source"].encode()))
+    calls = []
+    original = wrapper._capture
+    def observed(*args):
+        calls.append(args[1])
+        return original(*args)
+    monkeypatch.setattr(wrapper, "_capture", observed)
+    monkeypatch.setattr(wrapper.os, "open", lambda *args, **kwargs: pytest.fail("private nomination opened a file"))
+    with pytest.raises(ValueError, match="private"):
+        wrapper.verify_code_retrieval_prompt(**request(native_case, prompt=prompt))
+    # The public relative-name guard runs inside _capture, before any os.open.
+    assert calls == ["state/private-key.json"]
+
+
+@pytest.mark.parametrize("mutation", ["source_replace", "artifact_replace", "write_restore", "directory_replace"])
+def test_same_byte_inode_or_write_restore_races_refuse_after_captured_native_replay(native_case, monkeypatch, mutation):
+    original = native.load_code_retrieval_context
+    def raced(**kwargs):
+        assert kwargs["repository"] != native_case["repository"]
+        result = original(**kwargs)
+        target = native_case["repository"] / ("mod.py" if mutation != "artifact_replace" else "retrieval.json")
+        raw = target.read_bytes()
+        if mutation == "write_restore":
+            target.write_bytes(raw + b" ")
+            target.write_bytes(raw)
+        elif mutation == "directory_replace":
+            repo = native_case["repository"]
+            moved = repo.with_name(repo.name + "-old")
+            repo.rename(moved)
+            import shutil
+            shutil.copytree(moved, repo)
+        else:
+            replacement = target.with_name(target.name + ".replacement")
+            replacement.write_bytes(raw)
+            replacement.replace(target)
+        return result
+    monkeypatch.setattr(native, "load_code_retrieval_context", raced)
+    with pytest.raises(ValueError, match="custody changed"):
+        wrapper.verify_code_retrieval_prompt(**request(native_case))
+
+
+def test_success_and_failure_suppress_metadata_owner_and_restore_suppression(native_case, monkeypatch, tmp_path):
+    database = Path(os.environ[metadata.ENV_DUCKDB])
+    lake = tmp_path / "fresh-lake"
+    lake.mkdir()
+    sentinel = lake / "sentinel"
+    sentinel.write_text("public isolated witness")
+    monkeypatch.setenv(metadata.ENV_DUCKLAKE, str(lake))
+    before = inventory(database), inventory(sentinel)
+    owner_calls = []
+    monkeypatch.setattr(metadata, "_connect", lambda *args: owner_calls.append(args))
+    wrapper.verify_code_retrieval_prompt(**request(native_case))
+    assert owner_calls == [] and (inventory(database), inventory(sentinel)) == before
+    assert metadata._PUBLIC_REPLAY_OWNER.get() is None
+    original = native.load_code_retrieval_context
+    def failure(**kwargs):
+        assert metadata._PUBLIC_REPLAY_OWNER.get() is not None
+        original(**kwargs)
+        raise RuntimeError("authored failure after native replay")
+    monkeypatch.setattr(native, "load_code_retrieval_context", failure)
+    with pytest.raises(RuntimeError):
+        wrapper.verify_code_retrieval_prompt(**request(native_case))
+    assert owner_calls == [] and metadata._PUBLIC_REPLAY_OWNER.get() is None
+    assert (inventory(database), inventory(sentinel)) == before
+
+
+def test_spilled_snapshot_receives_protected_capture_and_native_replay(native_case, monkeypatch):
+    root = native_case["repository"]
+    original_limit = native.MAX_ARTIFACT_BYTES
+    payload = json.loads((root / "retrieval.json").read_bytes())
+    small_limit = len(wire(payload).encode()) - len(wire(payload["snapshot"]).encode()) // 2
+    monkeypatch.setattr(native, "MAX_ARTIFACT_BYTES", small_limit)
+    prepared = native.prepare_code_retrieval_context(repository=root, task_id="CODE-1", query_text=native_case["source_text"],
+        snapshot=native_case["index"], result=native_case["result"], output=root / "spilled.json")
+    monkeypatch.setattr(native, "MAX_ARTIFACT_BYTES", original_limit)
+    spilled = json.loads((root / "spilled.json").read_bytes())
+    (root / "spilled.json").chmod(0o644)
+    (root / spilled["snapshot_ref"]["path"]).chmod(0o644)
+    assert spilled["schema"] == native.REFERENCED_SCHEMA
+    prompt = prompt_for(native_case["code_text"], artifact="spilled.json", source_hash=sha(native_case["source"].encode()))
+    receipt = wrapper.verify_code_retrieval_prompt(**request(native_case, prompt=prompt))
+    assert receipt["observed_artifact_sha256"] == prepared["sha256"]
+    assert "file:" + spilled["snapshot_ref"]["path"] in receipt["input_witnesses"]
+
+
+def test_trusted_decoder_prefix_executes_from_different_cwd_with_no_inherited_pythonpath(native_case, tmp_path):
+    source = native_case["repository"] / "instruction.md"
+    source.chmod(0o444)
+    prefix = wrapper.decoder_command_prefix(repository=native_case["repository"], source_path="instruction.md",
+        source_sha256=sha(native_case["source_text"].encode()), native_prompt_sha256=sha(native_case["prompt"].encode()))
+    provider, receipt = wrapper.project_verified_code_retrieval_prompt(**request(native_case, decoder_command=prefix))
+    assert receipt["decoder_command"] == prefix
+    packet = codec.parse_code_retrieval_prompt(provider, decoder_command=prefix)
+    path = tmp_path / "wire.json"
+    path.write_text(wire(packet))
+    before = inventory(source), inventory(native_case["repository"] / "retrieval.json")
+    observed = subprocess.run(shlex.split(prefix) + ["--wire", str(path), "--expected-wire-sha256", receipt["wire_sha256"]],
+        cwd=tmp_path, env={"PATH": "/usr/bin:/bin", "PYTHONDONTWRITEBYTECODE": "1"}, capture_output=True, timeout=30)
+    assert observed.returncode == 0, observed.stderr.decode()
+    assert observed.stdout == native_case["prompt"].encode()
+    assert (inventory(source), inventory(native_case["repository"] / "retrieval.json")) == before
+    assert shlex.split(prefix)[0] == "/usr/bin/env" and sys.executable in shlex.split(prefix)
+
+
+def test_complete_decoder_overhead_can_fall_back_to_exact_original(native_case):
+    provider, receipt = wrapper.project_verified_code_retrieval_prompt(**request(native_case, decoder_command="x" * 8000))
+    assert receipt["selected_transport"] == "expanded" and provider == native_case["prompt"]
+    assert receipt["native_verification"]["captured_public_native_replay_verified"] is True
+
+
+@pytest.mark.parametrize("limit", ["MAX_FILES", "MAX_TOTAL_BYTES", "MAX_DIRECTORIES"])
+def test_global_capture_limits_refuse_before_native_replay(native_case, monkeypatch, limit):
+    monkeypatch.setattr(wrapper, limit, 0)
+    calls = []
+    monkeypatch.setattr(native, "load_code_retrieval_context", lambda **kwargs: calls.append(kwargs))
+    with pytest.raises(ValueError, match="bound"):
+        wrapper.verify_code_retrieval_prompt(**request(native_case))
+    assert calls == []
+
+
+def test_rehashed_semantic_scope_cannot_narrow_or_change_source_digest(native_case):
+    prompt = prompt_for(native_case["code_text"], scope={"other.py": {
+        "sha256": "0" * 64, "source_cid": "source:authored-other"}})
+    with pytest.raises(ValueError, match="semantic source scope"):
+        wrapper.verify_code_retrieval_prompt(**request(native_case, prompt=prompt))
+
+
+def test_decoder_prefix_refuses_private_known_owner_root_before_open(monkeypatch):
+    monkeypatch.setattr(wrapper.os, "open", lambda *args, **kwargs: pytest.fail("private root opened"))
+    with pytest.raises(ValueError, match="public repository"):
+        wrapper.decoder_command_prefix(repository=Path("/opt/ipfs-supervisor/home"), source_path="auth.json",
+            source_sha256="0" * 64, native_prompt_sha256="0" * 64)

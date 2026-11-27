@@ -1,0 +1,13 @@
+# Independent transport and frozen-run review
+
+Review performed after the six response receipts completed. No transport or frozen-run source was edited during the run.
+
+- The transport binds profile bytes and its own source hash, creates each call directory exclusively, writes the request and dispatch intent before HTTP, and refuses a repeated identity. An interrupted/unknown effect cannot silently retry in the same output root.
+- All six generation-2 responses have one attempted POST and complete provider totals. API total tokens are authoritative; cached and reasoning fields are retained without assuming disjointness. Input/output components alone would undercount these particular provider totals.
+- HTTP errors, malformed responses, missing credentials and absolute deadlines remain explicit outcomes. The preceding expired-credential run made no POST. Its `complete` field refers only to terminal rows and is not a complete scientific comparison.
+- Authorization is sent only to the hardcoded xAI HTTPS endpoint, redirects are disabled, no credential is persisted in request/response artifacts, and arbitrary exception messages are not serialized. The bounded profile has exactly six call IDs and no retries.
+- The frozen routing source/cases/native-file mapping is checked on entry and all cells remain in the aggregate. The same objective/source/public-validation prompt builder serves baseline and residual calls. A model proposal is executed only in the pinned isolated Docker oracle, with no host mounts or network.
+
+Future hardening should occur in a newly versioned transport/profile. The current `_credential` helper selects the first key in the primary auth file and does not reproduce the historical loader's canonical-path, ownership, private-mode or unique-key checks. Use explicit credential selection and reject ambiguous files; do not print their contents. Profile validation currently uses Python assertions, which `python -O` can disable; explicit exceptions would make the bounds independent of interpreter optimization. A richer status can distinguish known zero remote expenditure before dispatch from missing usage after an attempted POST without conflating failed work with savings. Persisting a sanitized full provider response can strengthen receipt auditability beyond its saved response hash and selected fields.
+
+These are forward-looking transport improvements. The observed run used ordinary system Python, the current intended credential and the frozen explicit profile. The review found no evidence that a request exceeded the declared effect count or that a known remote failure was dropped from this comparison. Source-review assurance is bounded and is not a general production-security certification.

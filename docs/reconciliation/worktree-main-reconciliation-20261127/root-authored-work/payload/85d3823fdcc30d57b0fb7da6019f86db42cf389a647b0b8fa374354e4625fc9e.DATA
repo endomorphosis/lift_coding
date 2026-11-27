@@ -1,0 +1,32 @@
+{
+  "all_checks_passed": true,
+  "archive_sha256": "82c4893088339bdede7d473f1598059861650f203c60a2215e347bb0fe447f5d",
+  "check_count": 20,
+  "checks": {
+    "abba_order": true,
+    "clean_source": true,
+    "mjcf-compact-01.frozen_config": true,
+    "mjcf-compact-01.frozen_input_pins": true,
+    "mjcf-compact-01.normalized_controls": true,
+    "mjcf-compact-01.policy": true,
+    "mjcf-compact-02.frozen_config": true,
+    "mjcf-compact-02.frozen_input_pins": true,
+    "mjcf-compact-02.normalized_controls": true,
+    "mjcf-compact-02.policy": true,
+    "mjcf-legacy-01.frozen_config": true,
+    "mjcf-legacy-01.frozen_input_pins": true,
+    "mjcf-legacy-01.normalized_controls": true,
+    "mjcf-legacy-01.policy": true,
+    "mjcf-legacy-02.frozen_config": true,
+    "mjcf-legacy-02.frozen_input_pins": true,
+    "mjcf-legacy-02.normalized_controls": true,
+    "mjcf-legacy-02.policy": true,
+    "protocol_archive": true,
+    "protocol_source": true
+  },
+  "protocol_sha256": "12a4893793fc5322030923a9a39ddfd9b2922e5d6ce15626d2e9fe389fb7e598",
+  "provider_calls": 0,
+  "raw_provider_data_exported": false,
+  "schema": "independent-compact-preparation-review@1",
+  "source_commit": "4185bcabd7580a59d4afe34663df02158f693ba5"
+}

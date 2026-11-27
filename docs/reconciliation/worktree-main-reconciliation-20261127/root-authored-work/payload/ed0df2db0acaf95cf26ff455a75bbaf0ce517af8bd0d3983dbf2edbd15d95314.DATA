@@ -1,0 +1,85 @@
+"""Honest native Horn controls and exact caller binding, separate v2 keys."""
+import argparse
+import copy
+import hashlib
+import json
+import shutil
+from pathlib import Path
+from run import HERE, FR, run, save, sha
+
+
+def hashed(atom): return int.from_bytes(hashlib.sha256(atom.encode()).digest(),"big")%FR
+
+
+def make_witness(length):
+    axioms=["P0"]+[f"P{i} -> P{i+1}" for i in range(length)]
+    pairs=[(0,hashed("P0"))]+[(hashed(f"P{i}"),hashed(f"P{i+1}"))for i in range(length)]
+    commitment=sum((cons+7*ant)*pow(13,i,FR) for i,(ant,cons)in enumerate(pairs))%FR
+    theorem=f"P{length}"
+    return {"private_axioms":axioms,"theorem":theorem,"intermediate_steps":[f"P{i}"for i in range(1,length+1)],"axioms_commitment_hex":f"{commitment:064x}","theorem_hash_hex":hashlib.sha256(theorem.encode()).hexdigest(),"circuit_version":2,"ruleset_id":"TDFOL_v1"}
+
+
+def expected_inputs(w):
+    wire=[w["theorem_hash_hex"],w["axioms_commitment_hex"],"2",w["ruleset_id"]]
+    scalar=[int(wire[0],16)%FR,int(wire[1],16)%FR,2,hashed(wire[3])]
+    return wire,[f"0x{x:064x}"for x in scalar]
+
+
+def binding(proof,w,binary,keys,pins):
+    wire,evm=expected_inputs(w)
+    return proof.get("version")==2 and proof.get("public_inputs")==wire and proof.get("evm_public_inputs")==evm and sha(binary)==pins["binary_sha256"] and sha(keys/"v2/verifying_key.bin")==pins["verifying_key_sha256"]
+
+
+def checked(output,binary,keys,name,path,w,pins):
+    if not binding(json.loads(path.read_text()),w,binary,keys,pins):
+        return {"accepted":False,"native_calls":0,"reason":"exact_statement_or_pin_mismatch"}
+    result=run(output,binary,keys,name,["verify","--proof",path,"--json"])
+    return {"accepted":result["returncode"]==0 and result["response"]=={"valid":True},"native_calls":1,"result":result}
+
+
+def main():
+    parser=argparse.ArgumentParser();parser.add_argument("--run-id",required=True);args=parser.parse_args()
+    output=HERE/"runs"/args.run_id;output.mkdir(parents=True,exist_ok=False)
+    for name in ["horn_protocol.json","run_horn.py","run.py"]:shutil.copyfile(HERE/name,output/name)
+    binary=HERE/"bin/groth16";keys=output/"keys"
+    save(output/"freeze.json",{"input_hashes":{name:sha(HERE/name)for name in ["horn_protocol.json","run_horn.py","run.py"]},"binary_sha256":sha(binary),"binary":str(binary),"build_manifest_sha256":sha(HERE/"build_manifest.json")})
+    setup=run(output,binary,keys,"setup_v2",["setup","--version","2"])
+    assert setup["returncode"]==0
+    pins={"binary_sha256":sha(binary),"verifying_key_sha256":sha(keys/"v2/verifying_key.bin"),"proving_key_sha256":sha(keys/"v2/proving_key.bin")};save(output/"pins.json",pins)
+    positives=[]
+    for length in [1,2,4]:
+        w=make_witness(length);path=output/f"witness_{length}.json";save(path,w);proof=output/f"proof_{length}.json"
+        p=run(output,binary,keys,f"prove_{length}",["prove","--input",path,"--output",proof]);assert p["returncode"]==0
+        v=checked(output,binary,keys,f"verify_{length}",proof,w,pins)
+        positives.append({"implications":length,"prove":p,"admission":v,"proof_bytes":proof.stat().st_size});save(output/"positives.json",positives)
+    controls=[]
+    for name in ["missing_predecessor","unsupported_theorem","changed_axiom_same_commitment"]:
+        w=make_witness(2)
+        if name=="missing_predecessor":w["intermediate_steps"]=["P2"]
+        elif name=="unsupported_theorem":w["theorem"]="Z";w["theorem_hash_hex"]=hashlib.sha256(b"Z").hexdigest()
+        else:w["private_axioms"][0]="Bad"
+        path=output/f"{name}.json";save(path,w);proof=output/f"{name}_proof.json"
+        result=run(output,binary,keys,name,["prove","--input",path,"--output",proof])
+        controls.append({"case":name,"result":result,"proof_created":proof.exists()})
+    original=json.loads((output/"proof_1.json").read_text());expected=make_witness(1)
+    for name in ["wire_theorem_hash","wire_axiom_commitment","wire_ruleset","evm_theorem_scalar"]:
+        bad=copy.deepcopy(original)
+        if name=="wire_theorem_hash":bad["public_inputs"][0]=hashlib.sha256(b"Z").hexdigest()
+        elif name=="wire_axiom_commitment":bad["public_inputs"][1]="00"*32
+        elif name=="wire_ruleset":bad["public_inputs"][3]="UNREVIEWED_RULESET"
+        else:bad["evm_public_inputs"][0]="0x"+"00"*32
+        path=output/f"{name}.json";save(path,bad)
+        result=run(output,binary,keys,name,["verify","--proof",path,"--json"])
+        bound=checked(output,binary,keys,f"bound_{name}",path,expected,pins)
+        controls.append({"case":name,"result":result,"bound_admission":bound})
+    save(output/"controls.json",controls)
+    # Freeze the externally expected text statement for the separate alternate
+    # field-witness prover. This theorem is false under these actual axioms.
+    attack=make_witness(1);attack["theorem"]="Z";attack["theorem_hash_hex"]=hashlib.sha256(b"Z").hexdigest();attack["intermediate_steps"]=["Z"]
+    save(output/"attack_expected_statement.json",attack)
+    result=run(output,binary,keys,"honest_prover_rejects_attack_statement",["prove","--input",output/"attack_expected_statement.json","--output",output/"honest_attack_proof.json"])
+    controls.append({"case":"honest_attack_statement","result":result,"proof_created":(output/"honest_attack_proof.json").exists()});save(output/"controls.json",controls)
+    save(output/"honest_summary.json",{"setup_seconds":setup["wall_seconds"],"valid_proofs":len(positives),"all_valid_accepted":all(p["admission"]["accepted"]for p in positives),"proving_key_bytes":(keys/"v2/proving_key.bin").stat().st_size,"verifying_key_bytes":(keys/"v2/verifying_key.bin").stat().st_size,"adversarial_field_witness_pending":True,"textual_binding_soundness_claim":False})
+
+
+if __name__=="__main__":main()

@@ -1,0 +1,702 @@
+{
+  "actual_source_occurrence_context": [
+    {
+      "ast_path": "module.body[24].body[0]",
+      "ast_sha256": "3e132b195b19b366ff4f1372a697a26c2c932f863b7e3434e1b5fc8f3f9940e5",
+      "name": "margins",
+      "node_kind": "Assign",
+      "source_segment": "margins = [_dot(weights, row) for row in differences]",
+      "source_segment_utf8_sha256": "3c0a0ba2d056671eb2378aaeeeb784909b40e74e47039069dcc2d406efdbf587",
+      "span": [
+        124,
+        4,
+        124,
+        57
+      ]
+    },
+    {
+      "ast_path": "module.body[24].body[1]",
+      "ast_sha256": "927f4266c7270e16b2210417e75b320041330678069ecfa3475424a0eed8b0de",
+      "name": "data",
+      "node_kind": "Assign",
+      "source_segment": "data = math.fsum(max(0.0, -z) + math.log1p(math.exp(-abs(z))) for z in margins) / len(margins)",
+      "source_segment_utf8_sha256": "b01195690bdfb572f7b0573e752eaf0c64c28cf69c38070b207cb237fd8d6d55",
+      "span": [
+        125,
+        4,
+        125,
+        98
+      ]
+    },
+    {
+      "ast_path": "module.body[24].body[2]",
+      "ast_sha256": "00ff1da391f81ad1e8d7228e8a964e31e962a844a5c66d64c631e55fe6fca656",
+      "name": "regularizer",
+      "node_kind": "Assign",
+      "source_segment": "regularizer = L2 * _dot(weights, weights) / 2",
+      "source_segment_utf8_sha256": "7a318e9c8b5e633e266bc00f0b165cf55b7cf0734427b24c0532fbeb00225ae1",
+      "span": [
+        126,
+        4,
+        126,
+        49
+      ]
+    },
+    {
+      "ast_path": "module.body[24].body[3]",
+      "ast_sha256": "5015fd0ebc131c731d7c6807c8a229dfab8d079f466b089da551173e195f3318",
+      "name": "factors",
+      "node_kind": "Assign",
+      "source_segment": "factors = [math.exp(-z) / (1 + math.exp(-z)) if z >= 0 else 1 / (1 + math.exp(z))\n               for z in margins]",
+      "source_segment_utf8_sha256": "4a8de8191c554678ef05b86dad7d78510fcae7e1c44fdb3d82a559a6e754fb7e",
+      "span": [
+        127,
+        4,
+        128,
+        32
+      ]
+    },
+    {
+      "ast_path": "module.body[24].body[4]",
+      "ast_sha256": "1c711c9a58b9006091e229025d59c5ae1fa58eb78bb90fcdcec31ef7f108d36a",
+      "name": "gradient",
+      "node_kind": "Assign",
+      "source_segment": "gradient = [L2 * weights[i] - math.fsum(f * row[i] for f, row in zip(factors, differences))\n                / len(differences) for i in range(len(weights))]",
+      "source_segment_utf8_sha256": "e19fec18b94c002952819141a94ff236db8b25bdac5200ded3a5cbe9c78b3bac",
+      "span": [
+        129,
+        4,
+        130,
+        64
+      ]
+    },
+    {
+      "ast_path": "under module.body[24] / loss_body",
+      "ast_sha256": "b71027e5d37d1a5b5b574a4b880a0857f0885dbc19c81dff3e652f8f7c76287e",
+      "name": "loss_body",
+      "node_kind": "BinOp",
+      "source_segment": "max(0.0, -z) + math.log1p(math.exp(-abs(z)))",
+      "source_segment_utf8_sha256": "19d0e597f98e72c80f09d2f7411d17bc2c6748d720fc902a4c1c3c4135b1465c",
+      "span": [
+        125,
+        21,
+        125,
+        65
+      ]
+    },
+    {
+      "ast_path": "under module.body[24] / factor_body",
+      "ast_sha256": "a5f60c17cb8efc0869ec1ac4001c04c1b43f67d7d38bc025cbb87061247d70aa",
+      "name": "factor_body",
+      "node_kind": "IfExp",
+      "source_segment": "math.exp(-z) / (1 + math.exp(-z)) if z >= 0 else 1 / (1 + math.exp(z))",
+      "source_segment_utf8_sha256": "3b606e9946648df65b1ba914efbc05a84f11fe1b49bef6d9073349076e6894c9",
+      "span": [
+        127,
+        15,
+        127,
+        85
+      ]
+    },
+    {
+      "ast_path": "under module.body[24] / gradient_sum_body",
+      "ast_sha256": "31912ce60eb59b47d405812a331426c7971383214edfa438595512be2a21b321",
+      "name": "gradient_sum_body",
+      "node_kind": "BinOp",
+      "source_segment": "f * row[i]",
+      "source_segment_utf8_sha256": "348ae3ca52eddc86fc9fe5f3237624ff9d9bc798b66a4571ec3cfefc6f9a9139",
+      "span": [
+        129,
+        44,
+        129,
+        54
+      ]
+    },
+    {
+      "ast_path": "under module.body[24] / coordinate_range",
+      "ast_sha256": "b24a81000131f5bbcd38dd6d806153d9178158999c9eabdd3a01249ef7552964",
+      "name": "coordinate_range",
+      "node_kind": "Call",
+      "source_segment": "range(len(weights))",
+      "source_segment_utf8_sha256": "951c748b33bae8025e361d7d14886f39f907901822bf33f1d94801da4c47f2d2",
+      "span": [
+        130,
+        44,
+        130,
+        63
+      ]
+    }
+  ],
+  "all32_governing_RPI_exits": "OPEN",
+  "authority": {
+    "completion_authority": false,
+    "execution_authority": false,
+    "metadata_hydration": false,
+    "mutation_authority": false,
+    "planner_activation": false,
+    "proof_authority": false,
+    "strict_cache_admission": false
+  },
+  "batch_and_dependency_policy": {
+    "frozen_environment": "Reuse exact base20184 profile and already accepted local modules with complete source/object/chunk matches. No Mathlib.Tactic aggregate, environment expansion, cap relaxation or fake newer evidence for old transitive one-report supports. Missing local imports require genuine modern relay rather than source-only presence.",
+    "native_limits": {
+      "CPU_seconds": 20,
+      "complete_object_bytes_max": 3997696,
+      "outer_wall_seconds": 120,
+      "raw_chunk_bytes": 65536,
+      "raw_chunks_max": 61,
+      "stdout_bytes": 65536,
+      "wall_seconds": 20,
+      "workspace_bytes": 16777216
+    },
+    "qualification": "Root alone invokes native stages after source/tooling gates and exact source/environment/dependency readback. Required two Standard-axiom reports per current query, return0, actual modern owned/outer/spec/checker attempts/root leases and finally drain/closure. No arbitrary check descriptors or historical namespace overrides.",
+    "qualification_cost": "Retain fresh checkpoint body replay and every current scope census/boundary check; avoid duplicate recursive historical traversal through a standalone exact manifest, without caching physical populations or bypassing ownership joins.",
+    "query_status": "All proposed names/statements/interfaces must be finalized and independently source-gated before a finite module map is frozen. These prospective lists are not executed/native evidence.",
+    "reuse": "C01 AST grammar/semantics/lowering first3 modules have five actual support queries. Reuse those exact owned objects. Use final genuinely qualified scalar-preservation successor only after root acceptance; C04 is not admitted by this plan.",
+    "split": "Qualify one new module per owned native stage in dependency order; use two or three substantive declared queries per module. Keep syntax/data, own semantics, structural compiler, map/zip/index preservation and actual-source joins separate, rather than one giant olean."
+  },
+  "callee_context": {
+    "ast_path": "module.body[23]",
+    "ast_sha256": "3ff8d47ab6f2e375b3bd4b81c6a39e364cd5a15ec859ca383b5e41504250de1e",
+    "node_kind": "FunctionDef",
+    "source_segment": "def _dot(a, b):\n    return math.fsum(x * y for x, y in zip(a, b))",
+    "source_segment_utf8_sha256": "3e1b32e89343283305172699d08fc7bdcf3e34a3eb9f627d838552f7a6dbb2eb",
+    "span": [
+      119,
+      0,
+      120,
+      49
+    ]
+  },
+  "created_at_utc": "2026-10-06T16:01:45.169919+00:00",
+  "evidence_snapshot": {
+    "accepted_scalar_AST_support_queries": 5,
+    "all_proposed_module_queries": "prospective_unimplemented_unqualified",
+    "generic_scalar_AST_preservation_queries": 3,
+    "generic_scalar_AST_preservation_status": "C04 source-gated; native qualification pending at design cut; no accepted C04 claim",
+    "host_controls_prove_parser_or_normalization_or_container_semantics": false,
+    "host_transport_controls_passed": 20,
+    "new_qualified_queries_from_this_design": 0,
+    "numeric_IR_primary_checks": 86,
+    "numeric_IR_progress07_total_checks": 96,
+    "unchanged_historical_owned_relay_checks": 10
+  },
+  "exact_target_first_five": [
+    {
+      "binding": "margins",
+      "needed": "Name-only pinned _dot inline, own zip/generator materialization, row shape80 and outer order4",
+      "route": "mapRows row differences (fsumExact (zipMap x y weights row (x*y)))",
+      "type": "vector4"
+    },
+    {
+      "binding": "data",
+      "needed": "Float0.0 projection remains syntax-distinct; old scalar preservation derives body; generator setup/consumption, exact ordered sum and len coercion",
+      "route": "fsumExact(mapVector z margins (max(0,-z)+log1p(exp(-abs(z))))) / natToScalar(lengthVector margins)",
+      "type": "scalar"
+    },
+    {
+      "binding": "regularizer",
+      "needed": "Original L2 Name transport and _dot inline; literal Integer2, no rational1/100 replacement",
+      "route": "(exactL2Rat*fsumExact(zipMap x y weights weights (x*y)))/2",
+      "type": "scalar"
+    },
+    {
+      "binding": "factors",
+      "needed": "Integer0 and1 coercion, both branches structurally checked, selected branch only at runtime, repeated exp(-z) retained as two occurrences",
+      "route": "mapVector z margins (ifNonneg z (exp(-z)/(1+exp(-z))) (1/(1+exp(z))))",
+      "type": "vector4"
+    },
+    {
+      "binding": "gradient",
+      "needed": "Ascending range bound from actual weights, row.width80 equality, ordered f,row binding, minimum4/4 zip and division length4",
+      "route": "rangeMap i weights (exactL2Rat*indexVector(weights,i)-fsumExact(zipRowsMap f row factors differences (f*indexVector(row,i)))/natToScalar(lengthMatrix differences))",
+      "type": "vector80"
+    }
+  ],
+  "flags": {
+    "Python_Float_refinement_proved": false,
+    "container_AST_preservation_proved": false,
+    "five_assignment_source_semantics_proved": false,
+    "global_autoencoder_convergence_proved": false,
+    "original_Python_loop_alignment_proved": false,
+    "original_Python_training_source_convergence_proved": false,
+    "original_suffix_compiled": false,
+    "raw_to_normalized_semantics_proved": false,
+    "source_parser_correctness_proved": false
+  },
+  "full_task_satisfaction": "unknown",
+  "gaps_before_full_source_and_task": [
+    {
+      "gap": "parser_and_environment",
+      "needed": "Prove or explicitly account for source bytes->CPython AST/scoped identities/callee/global registry and runtime input shape; hashes/source controls alone do not close this."
+    },
+    {
+      "gap": "original_suffix",
+      "needed": "Fresh checked guard/Boolean/list-star/all/isfinite, sqrt self-dot and actual ordered dictionary-plus-gradient tuple return preservation. The internal five-binding record is not that return."
+    },
+    {
+      "gap": "preparation",
+      "needed": "Actual corpus/feature hashing/pairs/differences/profile/rounded step transport and zero initialization, rather than assumed rectangular exact-real input."
+    },
+    {
+      "gap": "original_loop",
+      "needed": "Actual E in1..128, E updates/E+1 observations, source mutation/trace/guards/final output and termination correspondence; independent sourceIterate and separately named infinite extension are not this Python loop."
+    },
+    {
+      "gap": "Float",
+      "needed": "Binary64 operations/overflow/underflow/libm/fSum/sqrt refinement or explicit error bounds and finite guards. Ideal-real convergence is not a CPython guarantee."
+    },
+    {
+      "gap": "task_and_storage",
+      "needed": "Source/version/proof cohort admission to DuckDB/DuckLake AST/KG/vectors/contracts plus independent full TerminalBench task contracts/IntentIR planner result evidence; no cache hydration/planner authority now."
+    },
+    {
+      "gap": "global_autoencoder",
+      "needed": "Separate training/model assumptions and appropriate codebase_IR/global AE convergence evidence; the scoped convex ranker minimizer theorem does not supply them."
+    }
+  ],
+  "generic_preservation_contract": {
+    "observations": "Scalar uses integer/real toReal coercion; Nat/Index use independently checked own integers; vectors/matrices preserve list order and actual lengths before Fin conversion. Runtime error translation is explicit. Wrong-type/out-of-bounds errors are independently modeled and proved unreachable for accepted lowering plus related inputs, not erased by target type annotations.",
+    "premises_allowed": [
+      "ordinary finite exact-real input values and structural lookup/order/rectangular-shape relation",
+      "fixed pure callee/global specification",
+      "actual successful structural lowering"
+    ],
+    "premises_forbidden": [
+      "successful source/target whole-expression evaluation",
+      "desired list/vector/objective/gradient result",
+      "model trajectory equality, minimizer or convergence",
+      "pointwise desired body outputs as a caller admission premise",
+      "semantic proof field in syntax/lowered program"
+    ],
+    "selected_error_equivalence": "State separate success/error equivalences as conclusions from the general observation equality. Source left-to-right traversal and first selected error correspond to target ordered applicative/list observation; do not assert identical evaluation traces or later-operand nonexecution in Lean.",
+    "statement": "StructuralContainerEnvRel context pyEnv targetEnv -> lowerContainerAst context shape expr = .ok sourceExpr -> observeAtShape shape (evalNumericContainerAst pureRegistry pyEnv expr) = evalSourceExpr targetEnv sourceExpr."
+  },
+  "grammar_policy": {
+    "generator_representation": "PreparedGenerator contains only raw body/target syntax, captured immutable own data environment and a separately prepared finite iterable. No SourceExpr, target evaluator, output vector, desired numerical result or preservation proof field.",
+    "iterable_representation": "Own finite numeric/row sequence, ordered binary zip descriptor and ascending range descriptor. Preparing a generator resolves/evaluates its outer iterable before installing the target binder and does not evaluate body elements.",
+    "list_meaning": "Finite immutable ordinary numeric list/rectangular list-of-lists data. Original syntax has ListComp and GeneratorExp, not an arbitrary List literal in the first five; arbitrary list construction remains refused.",
+    "pure_callee_registry": "Retain full PyCalleeRef.name/attribute syntax. Admit only exact immutable builtin abs/max/len/zip/range, math.exp/log1p/fsum and the explicit pinned user-function _dot model. Reject aliases, shadowed/rebound global identities, arbitrary attributes and callable protocols. Source hashes alone do not establish runtime purity/bindings.",
+    "reuse": "Existing immutable PyExpr/PyArgs/PyComprehension/PyTarget/PyStmt and scoped PyName; do not replace them with SourceTerm leaves or embed target evaluation/model opcodes.",
+    "runtime_errors": "Fresh own runtime error family preserves inherited unknownName/divisionByZero/logDomain/unsupported tags and explicitly adds wrongValueKind, indexOutOfBounds and malformedTupleBinding. Static LowerError is a separate datatype, with source path/reason only; refusal is not a runtime exception claim.",
+    "runtime_values": "Fresh independent PyDataValue(number PyNumber, boolean Bool, sequence List PyDataValue, pair PyDataValue PyDataValue) and PyDataEnvironment List(PyName×PyDataValue). Preserve source number integer/real tags internally; observations explicitly coerce both to Real. Do not edit old scalar PyValue/PyEnvironment.",
+    "scalar_compatibility": "Fresh recursive own container interpreter calls only its own scalar primitive implementations/independent arithmetic (reuse numericBinary/invokePrimitive is allowed); never call evalSourceExpr/evalSourceTerm/lowerSupportedAst or model objective. Prove agreement on admitted old scalar syntax under the structurally projected scalar environment, rather than assuming an evaluation equation."
+  },
+  "independent_interpreter": {
+    "definitions": [
+      "lookupData",
+      "bindTarget",
+      "checkedDataIndex",
+      "prepareIterable",
+      "prepareGenerator",
+      "consumeGenerator",
+      "evalNumericContainerAst",
+      "evalContainerTest",
+      "evalContainerArguments",
+      "evalUniqueAssignments"
+    ],
+    "evaluation_order": [
+      "Resolve fixed callee binding before its positional arguments; read operands and arguments in source order",
+      "Evaluate comprehension iterable in outer scope; then bind targets in the fresh inner scope",
+      "ListComp evaluates each selected body eagerly in input order; GeneratorExp setup captures environment and defers bodies",
+      "Binary zip prepares left then right and yields only min(left.length,right.length) pairs in order",
+      "Tuple target binds left then right; own resulting environment is right::left::outer, matching target extendNames nesting",
+      "range(len(weights)) resolves/evaluates the actual weights list even if empty; produce ascending integer0..n-1",
+      "Subscript evaluates list then index; checks own integer and actual list bound before lookup",
+      "IfExp lowers both branches, but own interpreter evaluates only condition and selected branch",
+      "Each assignment evaluates RHS before binding; first RHS error stops later assignments"
+    ],
+    "generator_consumption": "math.fsum immediate consumption folds exact Real addition in source order. Body error ends consumption at the first selected error. No escape, resume, send/throw, generator identity, consumption by any other callee or nested mutable source effect is accepted.",
+    "materialization_theorem": "For the same prepared finite iterable, captured environment, target and pure body, observeNumber(consumeGenerator g) equals the exact ordered sum observation of eager own body traversal. Prove by list induction for success and first error. Addition is total exact Real arithmetic; this does not assert CPython math.fsum rounding, effect traces or exception timing.",
+    "termination": "Syntax recursion and finite list/range consumption supply only local evaluator termination. Bounded original training-loop correspondence and convergence remain separate."
+  },
+  "input_pins": [
+    {
+      "bytes": 43972,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-supported-python-ast-lowering-design-20261006-01/design-01.json",
+      "sha256": "507e985defdb3e078b2e2f4ce75f67fd68c20e60ca3cd28b93ae6a1a8f2bf016"
+    },
+    {
+      "bytes": 17195,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-source-model-progress-20261006-01/progress-07.json",
+      "sha256": "13a0f5ff272c818894253a657caeb25dbd73f6af7b9a8f497a4546f4aaa13799"
+    },
+    {
+      "bytes": 16391,
+      "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_training.py",
+      "sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a"
+    },
+    {
+      "bytes": 25170,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-source-plan-20261005-01/source-bindings.json",
+      "sha256": "d6cb9f35169351848198d3919a7e794cee89429b07a2879ea680cb8511bfa8b8"
+    },
+    {
+      "bytes": 13910,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-prefix-host-result-20261005-01/objective-prefix-draft.json",
+      "sha256": "4a7067a4797891740734fa7eae9ad46c02bc3410a4d4fff73ba43445a5a4ae17"
+    },
+    {
+      "bytes": 43572,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-source-transport-candidate-20261006-01/python_ast_transport.py",
+      "sha256": "adb876326a54fde0481b52c838815c1cae65f62e918025e7444bc285a6854c0d"
+    },
+    {
+      "bytes": 10390,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-source-transport-candidate-20261006-01/candidate-interface.json",
+      "sha256": "edb98ff591ec2b9a3aeb816ebcf32e67006ea8288aa55d4ec1b14a4f80ff5f77"
+    },
+    {
+      "bytes": 1105,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-source-transport-candidate-20261006-01/qualified-host-controls-review-01.json",
+      "sha256": "17f00db84eeb3bf0e195e52d8edeae217d2bdc5f91fcc73d78a1b732e4118f7d"
+    },
+    {
+      "bytes": 12547,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-supported-python-ast-transport-controls-20261006-03/run-01/closed.json",
+      "sha256": "12b436ee2403012aa8e133b3ccb0ea7bc7044ef321120f284d1155d3b6b62712"
+    },
+    {
+      "bytes": 3916,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-candidate-20261006-01/math/PyAstNumericSubset.lean",
+      "sha256": "11baa458c201926c3a6e02b8ec7ca35213c336a30da199ce0390e3f1d7972faf"
+    },
+    {
+      "bytes": 6314,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-candidate-20261006-01/math/PyAstNumericSemantics.lean",
+      "sha256": "3ce628f904f57b800f67b7a739f04e3adf72e0888b1689e23f7cef3e1ac2a2b8"
+    },
+    {
+      "bytes": 5287,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-candidate-20261006-01/math/PyAstNumericLowering.lean",
+      "sha256": "9694b40446f7c8661e183b9d137bf936642940f879227c8373d2a3bdf627b881"
+    },
+    {
+      "bytes": 21727,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-candidate-20261006-04/math/PyAstNumericPreservation.lean",
+      "sha256": "b044ec40e61b94a7dbed739b5e437774a28f361d0e324434df81f430b519b5df"
+    },
+    {
+      "bytes": 2704,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-candidate-20261006-04/candidate-interface.json",
+      "sha256": "5dadcd18248f72ed663ef028cb4b35c2462d55105e86e2c2835d21edf433503e"
+    },
+    {
+      "bytes": 7820,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-supported-python-ast-math-source-review-20261006-04/review-receipt-01.json",
+      "sha256": "9a0be40fc729a9d4333efd4308b1442644f5834f1949fb8a8e8896e208bb76cf"
+    },
+    {
+      "bytes": 28749,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-prefix-kernel-candidate-20261006-02/math/ObjectivePrefixIR.lean",
+      "sha256": "0b5960fc6f7376ca14ae698dea773f1d4ef163f5f4c3c76f46cddb927518d824"
+    },
+    {
+      "bytes": 3060,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-language-candidate-20261006-02/math/ObjectiveContainerSource.lean",
+      "sha256": "fc01f1d99e348e79f9cc9fdaf35cbbdb29d0c0963e88b4b984fde469e2eee410"
+    },
+    {
+      "bytes": 3583,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-language-candidate-20261006-02/math/ObjectiveContainerTyped.lean",
+      "sha256": "bdb3140f15e51c5f52c37f2326ef7dcb2ebbdf372720915202eb13c1701cda67"
+    },
+    {
+      "bytes": 11695,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-language-candidate-20261006-02/math/ObjectiveContainerSemantics.lean",
+      "sha256": "23bf7349c698832ad088adc68b41913a88affafff235008b38ef6688079b5ec8"
+    },
+    {
+      "bytes": 7680,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-eval-bridge-candidate-20261006-01/math/ObjectiveContainerEvaluationBridge.lean",
+      "sha256": "b39d3c585c5cbbe9da30f932000ce2428d2cc754849e1c9dbd43b6912c3a4587"
+    },
+    {
+      "bytes": 8191,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-prefix-evaluation-candidate-20261006-01/math/ObjectiveSourceContainerSuccess.lean",
+      "sha256": "860982d7e67954d782d776915f5d06bb0fe51de0c03763c10e23c524a750f7a2"
+    },
+    {
+      "bytes": 8046,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-prefix-host-result-20261006-01/ObjectiveContainerPrefixGenerated.lean",
+      "sha256": "31bc24c08296302aa15c8067df2cae7e7aa9f3d3b28b63145d661f82f1d3ccbb"
+    },
+    {
+      "bytes": 5735,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-source-model-candidate-20261006-03/math/ObjectiveSourceScalarLift.lean",
+      "sha256": "0ecadf24c5e8d23f4904da8fbd4260b8b0488d90fae9643d6dc8bfab14dae89e"
+    },
+    {
+      "bytes": 8913,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-source-model-candidate-20261006-03/math/ObjectiveOriginalPrefixParts.lean",
+      "sha256": "a8921ca1035c71f5aa22066777084f27a85dc5f71e8200469f7c9e61b322cf08"
+    },
+    {
+      "bytes": 5170,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-prefix-tail-evaluation-candidate-20261006-03/math/OriginalPrefixModelProjection.lean",
+      "sha256": "bb11d4d91d3d613ba5e373f7702be26c270d5d7f2aabec50b77629966befafd6"
+    },
+    {
+      "bytes": 10974,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-language-qualification-20261006-02/qualified-review-01.json",
+      "sha256": "37df4b286e44246faf1f45cbdb07edf167b7d5d120b4b162ce0ea4bf588af39a"
+    },
+    {
+      "bytes": 14254,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-source-model-qualification-20261006-02/qualified-review-01.json",
+      "sha256": "fb15c83d77fc7a2609568272aae1c7d8e0bcb080c31d5c8e38e8f39f86fd1de3"
+    },
+    {
+      "bytes": 12308,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-prefix-tail-evaluation-qualification-20261006-01/qualified-review-01.json",
+      "sha256": "f0cc293cecad16fa3617c3e61b6587b86a3f6b1c6bedc7b374076a6874ae5567"
+    },
+    {
+      "bytes": 7469,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-supported-python-ast-input-review-20261006-01/lean-python-ast-subset-01-completed-readback-01.json",
+      "sha256": "c249dcd38f3b688614d1810a3036e851a64db0f7c42860a89055685ac89991ad"
+    },
+    {
+      "bytes": 6617,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-supported-python-ast-input-review-20261006-01/lean-python-ast-semantics-01-completed-readback-01.json",
+      "sha256": "c8c52ee20fddfaa77d7d1b1ed89dd0ba579f240f2d1d0251ea72385e90eed90d"
+    },
+    {
+      "bytes": 6579,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-supported-python-ast-input-review-20261006-01/lean-python-ast-lowering-01-completed-readback-01.json",
+      "sha256": "1921c4ac3655132e0e4685c109309b5671f3ff76013bc7734726fa10b6b2c9eb"
+    }
+  ],
+  "jobs_this_design": {
+    "git": 0,
+    "helper_execution": 0,
+    "metadata": 0,
+    "model": 0,
+    "native": 0,
+    "target_import": 0,
+    "tests": 0,
+    "training": 0
+  },
+  "literal_context": {
+    "ast_path": "module.body[11]",
+    "ast_sha256": "791882c75bb080d1ea081d4689f765d92b9269255a66d4fb4bca50fba6153a2c",
+    "exact_binary64_ratio": {
+      "denominator": "576460752303423488",
+      "numerator": "5764607523034235"
+    },
+    "node_kind": "Assign",
+    "original_token": "0.01",
+    "rational_1_over_100_is_not_used": true,
+    "source_segment": "L2 = 0.01",
+    "source_segment_utf8_sha256": "e7ec14a0312ff031cf1e169643babdbfe068880a61575895e4090f9518bf8c04",
+    "span": [
+      21,
+      0,
+      21,
+      9
+    ]
+  },
+  "normalization_preservation": {
+    "L2": "Raw L2 own registry lookup yields the explicit Real projection of the pinned binary64 literal token0.01. Normalization replaces its two actual Name occurrences with that exact Rat floatLiteral. Prove lookup-to-literal observation using the structural global binding specification; literal parsing/CPython global immutability remain separate.",
+    "dot": "Use the exact original two-parameter Return body fsum(x*y for x,y in zip(a,b)) as independent Py syntax in a pure function registry. Raw call interpretation evaluates Name arguments once in positional order, binds fresh own formals, then interprets that body. Hygienic substitution renames scoped callee/comprehension identities and substitutes only immutable caller Name references. Prove scoped-lookup/substitution lemma and call observation equality, including unknown-left/right argument error ordering. Do not infer this theorem from source hashes or host test05.",
+    "generator": "No host rewrite changes GeneratorExp into ListComp. The semantic consumer-specific materialization theorem is used by the structural lowerer at immediate fsum only; four descriptors correspond to two inlined dot consumers, loss sum and gradient sum.",
+    "raw_to_normalized_block": "Lift the two Py-to-Py rules through the actual five Assign trees, preserving original assignment order and own bindings. No successful result or model equation premise is allowed."
+  },
+  "proposed_modules": [
+    {
+      "claim": "Join the two actual independent Py subtrees, including their distinct scoped z identities, to the existing target aliases; then derive their own scalar observations from general preservation and accepted stable-loss/factor bodies. No body-evaluation equation is assumed.",
+      "direct_imports": [
+        "PyAstNumericPreservation",
+        "GeneratedSupportedPythonAstPrefix",
+        "ObjectiveOriginalPrefixParts"
+      ],
+      "module": "PyAstScalarOccurrenceJoins",
+      "prerequisites": [
+        "Actual final scalar-preservation module accepted; C04 is pending in this design",
+        "Actual emitted independent Py syntax module exists and is accepted against the complete transport receipt; no future source pin is invented"
+      ],
+      "queries": [
+        "actual_loss_ast_lowers_to_source_body",
+        "actual_factor_ast_lowers_to_source_body",
+        "actual_scalar_bodies_observed_exact_real"
+      ]
+    },
+    {
+      "claim": "Independent finite data values, scoped data environment, tuple binding, len, checked integer indexing and ordered list traversal; no target IR or target evaluator import.",
+      "direct_imports": [
+        "PyAstNumericSemantics"
+      ],
+      "module": "PyAstContainerValues",
+      "queries": [
+        "own_scoped_binding_first_lookup",
+        "checked_index_uses_actual_list_bound"
+      ]
+    },
+    {
+      "claim": "Independent Python-shaped ideal-real numeric/container interpretation; iterable setup and suspended generator body consumption remain distinct. Prove consumption versus eager materialization for the same pure finite body, not Python effect/timing/Float equivalence.",
+      "direct_imports": [
+        "PyAstContainerValues"
+      ],
+      "module": "PyAstIterableSemantics",
+      "queries": [
+        "own_zip_consumes_minimum_pairs",
+        "own_ordered_consumption_first_error",
+        "immediate_fsum_generator_materialization"
+      ]
+    },
+    {
+      "claim": "Structural expected-shape lowering on existing PyExpr with deterministic static refusal and a separate syntactic derivation extracted from actual compiler success. Derivations contain only constructor/type/name/dimension/provenance facts, no evaluation equations or semantic certificates.",
+      "direct_imports": [
+        "PyAstNumericLowering",
+        "PyAstContainerValues",
+        "ObjectiveContainerSource"
+      ],
+      "module": "PyAstContainerLowering",
+      "queries": [
+        "container_lowering_refuses_unproved_index",
+        "container_lowering_refuses_shadowed_or_colliding_binding",
+        "accepted_container_lowering_has_structural_derivation"
+      ]
+    },
+    {
+      "claim": "Generic independent scalar-vector and row-matrix comprehension observations, under structurally related finite input values and actual lowering success. Body preservation is obtained internally from the structural induction, not supplied as a desired caller result.",
+      "direct_imports": [
+        "PyAstIterableSemantics",
+        "PyAstContainerLowering",
+        "ObjectiveContainerSemantics"
+      ],
+      "module": "PyAstMapPreservation",
+      "queries": [
+        "scalar_list_map_observation_preserved",
+        "row_list_map_observation_preserved"
+      ]
+    },
+    {
+      "claim": "Unequal zip length and first-error observations plus ascending range(len(vector)) and checked subscript; shape equality is established statically before constructing Fin, and source errors remain independently interpreted.",
+      "direct_imports": [
+        "PyAstMapPreservation"
+      ],
+      "module": "PyAstZipIndexPreservation",
+      "queries": [
+        "zip_comprehension_minimum_observation_preserved",
+        "range_origin_subscript_observation_preserved"
+      ]
+    },
+    {
+      "claim": "General accepted-lowering equality of shape-directed value/error observations to evalSourceExpr. It includes nested scalar operations, selected IfExp, immediate fsum generators and all five container constructors; standalone escaping generators are not accepted.",
+      "direct_imports": [
+        "PyAstZipIndexPreservation"
+      ],
+      "module": "PyAstContainerPreservation",
+      "queries": [
+        "lower_container_ast_observation_preserved",
+        "lower_container_ast_success_observation",
+        "lower_container_ast_error_observation"
+      ]
+    },
+    {
+      "claim": "Independent Py-to-Py normalization only. Use the explicit original function body and source global constant in a fixed pure binding specification; no SourceExpr/evaluator/model import, no high-level dot opcode and no semantic proof fields.",
+      "direct_imports": [
+        "PyAstIterableSemantics"
+      ],
+      "module": "PyAstPinnedNormalization",
+      "queries": [
+        "name_only_dot_hygienic_inline_observation_preserved",
+        "pinned_l2_literal_projection_observation_preserved"
+      ]
+    },
+    {
+      "claim": "Own source-order first-five Assign interpreter with RHS-before-binding, compared with SourcePrefix letBind and an explicitly ordered intermediate-binding observation; this is not Python return/guard or repeated-state mutation.",
+      "direct_imports": [
+        "PyAstContainerPreservation",
+        "PyAstPinnedNormalization"
+      ],
+      "module": "PyAstAssignmentPreservation",
+      "queries": [
+        "ordered_unique_assignments_observation_preserved",
+        "assignment_rhs_error_prevents_later_binding"
+      ]
+    },
+    {
+      "claim": "Compute structural lowering of the actual independent normalized AST and prove equality to the already accepted emittedPrefix; derive the actual raw independent AST numeric observation via normalization and general preservation, with ordinary exact-real vector80/matrix4x80 inputs only.",
+      "direct_imports": [
+        "PyAstAssignmentPreservation",
+        "PyAstScalarOccurrenceJoins",
+        "GeneratedSupportedPythonAstPrefix",
+        "ObjectiveContainerPrefixGenerated",
+        "OriginalPrefixModelProjection"
+      ],
+      "module": "ActualPyObjectivePrefixJoin",
+      "queries": [
+        "actual_normalized_five_assignments_lower_to_emitted_prefix",
+        "actual_raw_five_assignments_exact_real_observation"
+      ]
+    }
+  ],
+  "prospective_namespace": "RankerSupportedPythonAstContainers",
+  "readback": "All declared source/data input bodies were read and pinned by a standard-library-only script; no imported helper/target/source/prover was executed. The original immutable bodies must compare equal after plan creation.",
+  "refused_scope": [
+    "Multiple generators, filters, async comprehensions, starred or keyword calls, arbitrary callable attributes/global aliases or mutation",
+    "Escaping generators, non-fsum consumers, generator resumptions/effects, arbitrary iterators and Python numeric protocols",
+    "Target spelling collisions without proved rename, wrong/unbound scoped names and reserved/callee rebinding",
+    "Negative/slice/arbitrary-expression indices or range shapes without accepted bound-source provenance; ragged/wrong-width matrix inputs",
+    "List/dict/tuple construction beyond the internal pair target and numeric input data, guards/all/isfinite/sqrt/actual Return",
+    "Reassignment/repeated weights mutation and original training control, preparation, Float/libm/fsum approximation, official benchmark/task or global AE claims"
+  ],
+  "scalar_formula_coverage": {
+    "factor": "The actual IfExp compares z>=Integer0. The nonnegative tree contains two distinct exp(-z) occurrences; the negative tree contains exp(z). Integers1 and division denominators are explicitly coerced. Their positive denominators are derived; no high-level stableFactor opcode replaces the tree.",
+    "loss": "The actual max(0.0,-z)+log1p(exp(-abs(z))) tree is interpreted independently. Original float token0.0/ratio0, unary nesting and builtin/math references are source-joined; positivity1+exp(-abs z)>0 is derived from Real.exp_pos, not a successful-result premise.",
+    "model_join": "Only after actual body structural lowering equality is proved may accepted ObjectiveOriginalPrefixParts.emitted_loss_body_success/emitted_factor_body_success be used to identify model formulas. Those historical body theorems alone do not prove independent raw AST provenance or lowering.",
+    "present_status": "C04 general scalar proof is still pending. No source-specific scalar occurrence theorem is claimed in this artifact."
+  },
+  "schema": "ranker-supported-python-ast-container-extension-design@1",
+  "scope": "Smallest compositional extension needed for the original five numeric _objective assignments, interpreted as a pure immutable finite ideal-real Python-shaped subset. The original seven-statement function, CPython execution and full task are not covered.",
+  "smallest_next_increment": {
+    "all_future_Lean_files_authored_now": false,
+    "first": "After actual scalar preservation succeeds, source-join actual loss/factor AST bodies before expanding container semantics.",
+    "first_useful_container_result": "For any structurally related numeric input list of length n and accepted body lowering, derive listComp or immediate fsum observations from actual traversal; instantiate actual source loss and factor subtrees. Empty-list mean remains divisionByZero, not a nonempty premise hidden in the generic theorem.",
+    "later_increments": [
+      "row map plus Name-only _dot inlining and numeric zip: margins and regularizer",
+      "range-origin index plus scalar/row zip: gradient",
+      "five unique assignments and actual raw-to-normalized-to-emitted-prefix join"
+    ],
+    "then": "Author only the independent values/bindings and ordered one-generator semantics required for scalar-vector ListComp and immediate fsum(GeneratorExp). This supplies the generic mapVector/data/factors step; do not implement all of Python."
+  },
+  "source_transport_join_requirements": {
+    "actual_factor_output_path": "normalized_program[3].rhs.body",
+    "actual_loss_output_path": "normalized_program[1].rhs.left.arguments[0].body",
+    "already_present": "Pinned source, complete CPython field AST/segment spans and hashes,7 objective context statements,17 selected component descriptors,5assignment order joins, original _dot/L2 definitions, scoped output occurrence hashes, rule digest,2dot/2L2 provenance steps and4unperformed materialization descriptors. Host20 controls exercise recomputation/refusals only.",
+    "binder_join": "Use each actual generators[0].target.identifier to recover scoped z identity; loss/factor scopes differ even though spelling is z. Do not hard-code a shared scope or collapse lexical identity to spelling.",
+    "no_old_IR_as_input": "Old draft and existing emittedPrefix are independent comparison endpoints/context; never use old SourceExpr tree or old decoder/emitter to build the independent raw/normalized Py syntax.",
+    "parser_boundary": "Actual ast.parse and source-bound hashes are evidence under a declared CPython3.12 parser. They do not constitute a Lean proof of parsing, AST lexical resolution or host normalization correctness; those remain explicit parser/host trusted-boundary obligations.",
+    "raw_factor_occurrence": "module.body[24].body[3].value.elt",
+    "raw_loss_occurrence": "module.body[24].body[1].value.left.args[0].elt",
+    "required_root_materialization": "Root may emit a fresh rawPrefix/normalizedPrefix Py syntax module and full receipt from actual pinned buffers. Before admission, revalidate the whole receipt and source grammar/API pin, then own native-qualify its syntax and structural occurrence equalities. No generated output source exists or is fabricated by this design."
+  },
+  "status": "SOURCE_DATA_ONLY_IMPLEMENTATION_DESIGN_NO_FUTURE_LEAN_AUTHORED",
+  "structural_input_transport": {
+    "conversion_order": "Successful own list traversal supplies actual output length before any observation vectorOfList/Fin conversion. Target mapToVector/zipToVector likewise obtains actual successful-traversal length; never supply an output gradient/equality premise to make conversion work.",
+    "environment_relation": "For each scoped identity in the accepted type/dimension context, own first-binding lookup has the structurally related bound value to the target spelling/type lookup; local bindings lie in the context. Fixed globals have explicit immutable registry identities. This is input binding transport, not desired semantic output.",
+    "hygiene": "Own semantics retain scope identity and lexical shadowing. The first lowerer rejects active projected spelling collisions and duplicate tuple names. Proved hygienic _dot substitution uses fresh scoped binders. A later alpha-renaming stage is unnecessary for the actual first-five spelling graph and remains out of scope.",
+    "index_origin": "A range binder is linked structurally to range(len(namedVector)) and that vector width n. For row[i], the accepted matrix row width must equal n before constructing SourceTerm.var(.index n) or Fin n. Knowing only i<weights.length is insufficient for an unrelated row width.",
+    "literal_index": "Accept only exact integer literals with derived0≤i<n, or the proven range-origin binder of width n. Negative literal/name provenance, slices and arbitrary arithmetic indices are statically refused. The own interpreter still checks actual list bounds independently.",
+    "shape_family": "Scalar, Nat/integer observation, Index n, Vector n, Matrix rows columns; matrix shape is rectangular row-by-row and includes zero sizes.",
+    "value_relation": "DataValueRel shape ownValue targetDenote compares only number-toReal, integer-toNat/Fin bounds and ordered input sequence/row representation (List.ofFn pointwise data). No output expression evaluation, objective, gradient, optimum or convergence fields."
+  },
+  "structural_lowering": {
+    "API": "lowerContainerAst(context, expectedShape, PyExpr) : Except PyContainerLowerError (SourceExpr (shapeTy expectedShape)); inferContainerAst may return Sigma Ty SourceExpr only where unique inference is required. lowerUniqueAssignments produces an existing SourcePrefix for an explicitly ordered binding schema.",
+    "comprehension_routes": [
+      "Name iterable of vector n + scalar target -> mapVector",
+      "Name iterable of matrix rows columns + row target -> mapRows",
+      "Binary zip vectors m,n + ordered pair scalar targets -> zipMap",
+      "Binary zip scalar vector m and matrix rows columns + scalar,row targets -> zipRowsMap",
+      "range(len(namedVector n)) + integer index binder -> rangeMap",
+      "Immediate math.fsum(generator body) -> corresponding eager typed vector map plus fsumExact only after generator materialization preservation"
+    ],
+    "conditional": "Accept compare ge(condition,Integer0) only; compile test and both branches. Runtime source and target remain selected-branch lazy. Preserve Integer0 distinct from Float0.0 syntax and explicit coercion.",
+    "no_intrinsic_whole_operation": "No stable-loss, factor, dot, objective, gradient, update or convergence opcode; every original arithmetic occurrence remains in the graph.",
+    "scalar_routes": "Names/literals/unary/binop/calls/IfExp route recursively so scalar arithmetic can enclose fsum/index expressions. len returns own integer length and lowers to lengthVector/lengthMatrix; a scalar arithmetic context adds explicit natToScalar. Do not reuse only old scalar leaves around nested unsupported containers.",
+    "typing_derivation": "Derive a constructor-only LowerRule judgement from actual lowerer success. Use that derived judgement for structural induction with strengthened binder environments. It carries shape/name/freshness/callee/range provenance facts but no source or target evaluation equations. Main public preservation premise remains actual lowerer success, not a caller-supplied semantic derivation.",
+    "zip": "Never require equal lengths generically. Output is Fin(min m n); prove source ordered min truncation and ignored tail behavior. Actual fixed4/4 and80/80 joins may simplify afterward with a typed global min width equality and kernel-definitional reduction, preserving previous diagnostic lesson."
+  }
+}

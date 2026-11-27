@@ -10,7 +10,7 @@
   "discovery": {
     "associated_common_dirs": 384,
     "unique_local_or_origin_main_tips": 9929,
-    "older_tip_equivalence": "separate audit in progress; recent timestamp is not integration proof",
+    "older_tip_equivalence": "Closed for all observed owned repository/commit pairs. Primary eight-family count10087 plus nine ancillary-family count73. Permission-denied paths remain unverified.",
     "filesystem_errors": 176,
     "exclusions": [
       "dependency/install caches",
@@ -32,202 +32,16 @@
   "hosted_ci_dispatched": false,
   "original_worktree_changes": false,
   "source_runtime_or_model_qualification_added": false,
-  "payload": [
-    {
-      "path": "README.md",
-      "bytes": 1282,
-      "sha256": "15f4dd5281527d2e9cf13d2f2e185d7e963bfd3e7d11e17c11b444211cad4970"
-    },
-    {
-      "path": "all-associated-ref-metadata.json",
-      "bytes": 7980358,
-      "sha256": "d23d87a2f8fb8078460e1273045f10cff41f98bab5363e270ba746806f917983"
-    },
-    {
-      "path": "audit.py.DATA",
-      "bytes": 4563,
-      "sha256": "cf09eb1bf12da3e6e54f7b24134818be7bdf6c6ad32299c88b18120423b3c354"
-    },
-    {
-      "path": "compact-metadata-refresh.json",
-      "bytes": 898658,
-      "sha256": "b2eb8cd39f1af9714fada8b5b0bafd1663febc7273bf6f4c40cd0f219e4dc9b6"
-    },
-    {
-      "path": "compare_working_files.py.DATA",
-      "bytes": 4991,
-      "sha256": "4c614f706b16f105d5051a3fb1ed93a628e462efc384b4986d7de8d01396d5b0"
-    },
-    {
-      "path": "current-remote-mains.json",
-      "bytes": 1769,
-      "sha256": "e25ee3b5cf8c44d24b61fb671806440fef1d5ec2d27167504d343a449f6de01d"
-    },
-    {
-      "path": "full-depth-discovery-metadata.json",
-      "bytes": 3197488,
-      "sha256": "ed6460388ff36f9de8be48b6b36ae527c4d4cd0358c48c672cb4b53a20b68483"
-    },
-    {
-      "path": "full-depth-discovery-summary.json",
-      "bytes": 55995,
-      "sha256": "3e96f8b2152977bcf0eeaadba32022e2d9ea0db5160f422e9bdebb8d2d830f15"
-    },
-    {
-      "path": "full-depth-discovery.py.DATA",
-      "bytes": 8538,
-      "sha256": "8bde0b89c624e3428aaabb3fc58d51049ec07869c6307f0873d943ea1f5c2c6d"
-    },
-    {
-      "path": "maintained-comparison.json",
-      "bytes": 2041,
-      "sha256": "979db868bc5231fb23a58bf919e84e9d5b91495e10f03a678d0aa2bc5145c4b4"
-    },
-    {
-      "path": "preserve_unique_files.py.DATA",
-      "bytes": 2540,
-      "sha256": "5468cc08969f0465fe7b726df8422fc286410f592b8fbac057502e62596bfda9"
-    },
-    {
-      "path": "recent_metadata.py.DATA",
-      "bytes": 4870,
-      "sha256": "bd8027040f3bd72c9db69a685cdc0322c759079bbe39d0eb9ec4dc191063bbe5"
-    },
-    {
-      "path": "recursive-submodules.txt",
-      "bytes": 52457,
-      "sha256": "8bf79b3e24ef87c992c7784cc35ccfa04a2acfecbc43f84ae3d8d15360e5e624"
-    },
-    {
-      "path": "retained/ipfs_accelerate_py/artifacts/container_coding_qualification/image-id.txt.DATA",
-      "bytes": 72,
-      "sha256": "da9fe706bb67dbcaaec4b31405e43cf15b2f8740a57f96ddece0a2cf251a8746"
-    },
-    {
-      "path": "retained/ipfs_accelerate_py/artifacts/container_coding_qualification/source-head.txt.DATA",
-      "bytes": 41,
-      "sha256": "9017b319407eddfdc15eb3ca337fd737d0153bd6e5bd025e335dc0fa7ecc7bd1"
-    },
-    {
-      "path": "retained/ipfs_accelerate_py/artifacts/container_coding_qualification/source-status.txt.DATA",
-      "bytes": 765,
-      "sha256": "7d9488e5d5425e65cc11ff0e19509bf914b8610c0f1c85aeaafba410282de360"
-    },
-    {
-      "path": "retained/ipfs_accelerate_py/docs/agent_supervisor/evidence/baseline-session-overlap-20261015/junit.xml.DATA",
-      "bytes": 107903,
-      "sha256": "6d368258f25523ded34503d7f36e69797a3aa48d89f019f1004107b1c21626c4"
-    },
-    {
-      "path": "retained/ipfs_accelerate_py/docs/agent_supervisor/evidence/codex-lifecycle-20261016/junit.xml.DATA",
-      "bytes": 189353,
-      "sha256": "675f84f0b2c7cda98648285aebe5417a6c7e3a0cb6c3b0dd4a5bc29de4c507b3"
-    },
-    {
-      "path": "retained/ipfs_accelerate_py/docs/agent_supervisor/evidence/matched-preflight-20261016/junit.xml.DATA",
-      "bytes": 284064,
-      "sha256": "f0004f03fb54e12d57959132042997e334b2f42992723d61b3a6bb1e0fa5de9b"
-    },
-    {
-      "path": "retained/ipfs_accelerate_py/docs/agent_supervisor/evidence/native-session-accounting-20261015/junit.xml.DATA",
-      "bytes": 95555,
-      "sha256": "5badabf22c6d6a03111aa8fa9eb79d65ec764294e8cd2e6c655afd0dfa39bebb"
-    },
-    {
-      "path": "retained/ipfs_accelerate_py/docs/agent_supervisor/evidence/source-adoption-20261015/junit.xml.DATA",
-      "bytes": 6458613,
-      "sha256": "bd50ee7cdcf01412cf31f263908e5252603f4ee9a84ff6550774dfa78f02fbb3"
-    },
-    {
-      "path": "retained/ipfs_accelerate_py/docs/agent_supervisor/evidence/source-working-set-20261015/junit.xml.DATA",
-      "bytes": 6362732,
-      "sha256": "2ed8b1f95137b761c7c1de160969acb90c271a8d759bdb45b720b78daf5527a9"
-    },
-    {
-      "path": "retained/ipfs_accelerate_py/docs/agent_supervisor/evidence/usage-coverage-20261015/junit.xml.DATA",
-      "bytes": 148513,
-      "sha256": "c03d0eba8606863b88555d131c5a5a72370b37caa8cb8311dfa4e0793ba2c2e1"
-    },
-    {
-      "path": "retained/ipfs_accelerate_py/docs/agent_supervisor/evidence/world-prompt-compaction-20261016/junit.xml.DATA",
-      "bytes": 98697,
-      "sha256": "96613c9c0a31b9289c6689c0e812f9735e4315b05d969f969af462595c3f73c0"
-    },
-    {
-      "path": "retained/ipfs_accelerate_py/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor.py.DATA",
-      "bytes": 1083858,
-      "sha256": "88a249daa5ac52eeb196b3a81358885ba803f1b57bced217582ccde091b62a88"
-    },
-    {
-      "path": "retained/ipfs_accelerate_py/ipfs_accelerate_py/cli_integrations/openai_codex_cli_integration.py.DATA",
-      "bytes": 28607,
-      "sha256": "bf84858bd0f32d8660765921720c43d56462cdd3efca5657b038bdd7ad38dffa"
-    },
-    {
-      "path": "retained/ipfs_accelerate_py/test/api/test_codex_thread_handoff.py.DATA",
-      "bytes": 33896,
-      "sha256": "850c8b2b64c504b3f7d95c8f0475592a5393c90729c45ab77842e7ca4fba1c31"
-    },
-    {
-      "path": "retained/ipfs_datasets_py/.github/workflows/legal-v2-reasoner-ci.yml.DATA",
-      "bytes": 57300,
-      "sha256": "63839489b0f30d0554cbe175f2c2b1d166cb483ea16637bf50b0d285fa6a29af"
-    },
-    {
-      "path": "retained/ipfs_datasets_py/data/agent_supervisor/knowledge_graphs_production_hardening/objective_graph.json.DATA",
-      "bytes": 60999,
-      "sha256": "b2e473fba32fc7ad0035f0c29f424b193ce120f83c1e5a2ee752003c13d28be9"
-    },
-    {
-      "path": "retained/ipfs_datasets_py/data/agent_supervisor/objective_generation.json.DATA",
-      "bytes": 324754,
-      "sha256": "8cfd14db135d51b9d2ad9d898940ce0777fbee185a937f8bf3e3f1422d40d60e"
-    },
-    {
-      "path": "retained/ipfs_datasets_py/data/agent_supervisor/plan_evaluations.json.DATA",
-      "bytes": 21252,
-      "sha256": "d4cf720283eab0132925ce720d94ce7d73fbe6dd45283b17e5ab62c05e5ecc19"
-    },
-    {
-      "path": "retained/ipfs_datasets_py/sparse-6668bcfbb5b5497f.DATA",
-      "bytes": 131,
-      "sha256": "6b8c0d202ccfe87128b28f43a18dc514b5178a19d8c66ce12bceb0630e5c0d18"
-    },
-    {
-      "path": "retained/ipfs_datasets_py/tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py.DATA",
-      "bytes": 38869,
-      "sha256": "53ae06bb399e3c44a85ebff4d91f80bb72c47fcda61c955093c2482761118648"
-    },
-    {
-      "path": "retained/lift_coding/.gitignore.DATA",
-      "bytes": 8323,
-      "sha256": "7880d33565e60ba275c183824ce0c87269cc9a61546b8202ec5b7cd78f8c7ef9"
-    },
-    {
-      "path": "retained/lift_coding/.pgir_campaign/runtime/parallel/objective_generation.json.DATA",
-      "bytes": 1168,
-      "sha256": "e8e50a5e079eb8b380951938bad74e6910adca1d631273ed23e29c700eff9b24"
-    },
-    {
-      "path": "retained-versions.json",
-      "bytes": 15268,
-      "sha256": "5c70264e094890b5b9d49040ad073eabf49ad2027325e136c016e9ac7582a9b4"
-    },
-    {
-      "path": "working-file-history-comparison.json",
-      "bytes": 1404420,
-      "sha256": "6df508c65d65a6d299af19d559131205fffd6ef639add256c00f9c77bf822b2e"
-    },
-    {
-      "path": "working-variant-static-review.json",
-      "bytes": 4078,
-      "sha256": "abc36ba3f9e8b59e168f02250ec72fc64d8c3f2b2affa031de6714613d3b3ed3"
-    }
-  ],
   "static_review": {
     "path": "working-variant-static-review.json",
     "bytes": 4078,
     "sha256": "abc36ba3f9e8b59e168f02250ec72fc64d8c3f2b2affa031de6714613d3b3ed3",
     "maintained_port_items": 0
-  }
+  },
+  "final_report": "FINAL-REPORT.json",
+  "final_report_sha256": "24928ad4f0e2868249de87538d9c6b3639e0743b7fa2f6feb45d4f1c2d82f23d",
+  "complete_publication": true,
+  "payload_roster": "final-payload-roster.json",
+  "payload_roster_sha256": "8bf553f86d4780616b943a25e8889e0724f4beb311d9d4faa1b0a276e099cda4",
+  "payload_files_listed": 2285
 }

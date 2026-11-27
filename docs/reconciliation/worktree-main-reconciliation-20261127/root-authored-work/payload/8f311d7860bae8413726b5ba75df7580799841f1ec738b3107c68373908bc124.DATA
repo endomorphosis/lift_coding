@@ -1,0 +1,6 @@
+set_option maxHeartbeats 100000
+set_option maxRecDepth 512
+theorem recovery_goal (Protected Approved Write : Prop) : (Protected ∧ ¬ Approved) → ¬ Write := by
+  intro h w
+  contradiction
+#print axioms recovery_goal

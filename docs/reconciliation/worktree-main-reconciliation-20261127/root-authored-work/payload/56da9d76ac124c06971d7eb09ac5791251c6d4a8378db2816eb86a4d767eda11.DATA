@@ -1,0 +1,154 @@
+"""Exact public-source and Git transition operations for Requests development."""
+import difflib,hashlib,json,os,re,shutil,subprocess,tempfile
+from pathlib import Path
+
+def sha(data): return hashlib.sha256(data).hexdigest()
+def text(path): return Path(path).read_bytes().decode('utf-8')
+def canonical(value): return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()
+def inventory(root):
+    root=Path(root).resolve();entries=[]
+    for current,dirs,files in os.walk(root,followlinks=False):
+        if Path(current)==root and '.git' in dirs: dirs.remove('.git')
+        for name in list(dirs):
+            if (Path(current)/name).is_symlink(): files.append(name);dirs.remove(name)
+        for name in files:
+            p=Path(current)/name
+            if p==root/'.git': continue
+            body=os.readlink(p).encode() if p.is_symlink() else p.read_bytes()
+            entries.append({'path':p.relative_to(root).as_posix(),'kind':'symlink' if p.is_symlink() else 'file','mode':p.lstat().st_mode&0o7777,'sha256':sha(body)})
+    entries.sort(key=lambda row:row['path'])
+    return {'entries':entries,'tree_sha256':sha(json.dumps(entries,sort_keys=True,separators=(',',':')).encode())}
+def production(root,name):
+    if not isinstance(name,str) or Path(name).is_absolute() or '\\' in name or '..' in Path(name).parts or Path(name).as_posix()!=name: raise ValueError('invalid path')
+    if not name.startswith('requests/') or not name.endswith('.py') or '.git' in Path(name).parts: raise ValueError('outside production scope')
+    p=Path(root)/name
+    if not p.is_file() or p.is_symlink() or not p.resolve().is_relative_to(Path(root).resolve()): raise ValueError('not existing public production source')
+    return p
+
+def lexical_sources(root,objective,max_files,max_bytes):
+    # Preserve the complete issue in prompts. Retrieval scores the problem text
+    # before a conventional system-information footer, identically in all arms.
+    objective=objective.split('## System Information',1)[0]
+    words=set(re.findall(r'[a-zA-Z_][a-zA-Z_0-9]{3,}',objective.lower()))
+    words-=set('this that with from when have should using results raises actual expected version requests python http https example code works other error'.split())
+    ranked=[]
+    for p in sorted((Path(root)/'requests').rglob('*.py')):
+        if p.is_symlink(): continue
+        source=text(p);name=p.relative_to(root).as_posix()
+        score=sum(min(source.lower().count(w),20) for w in words)+100*sum(name.lower() in token.lower() for token in re.findall(r'\S+',objective))
+        ranked.append((-score,name,source))
+    selected=[];used=0
+    for _,name,source in sorted(ranked):
+        size=len(source.encode())
+        if len(selected)>=max_files or used+size>max_bytes: continue
+        selected.append({'path':name,'source':source,'sha256':sha(source.encode())});used+=size
+    if not selected: raise ValueError('no whole module fits retrieval bound')
+    return selected
+
+def replacement_edits(root,edits):
+    if not isinstance(edits,list) or not edits or len(edits)>8: raise ValueError('invalid edit count')
+    bodies={}
+    for edit in edits:
+        if not isinstance(edit,dict) or set(edit)!={'path','old','new'}: raise ValueError('closed exact replacement schema required')
+        p=production(root,edit['path']);old,new=edit['old'],edit['new']
+        if not isinstance(old,str) or not isinstance(new,str) or not old or old==new: raise ValueError('invalid replacement')
+        source=bodies.get(edit['path'],text(p))
+        if source.count(old)!=1: raise ValueError('old text must occur exactly once')
+        bodies[edit['path']]=source.replace(old,new,1)
+    return [{'path':name,'source':source} for name,source in sorted(bodies.items())]
+
+def patch_for(root,edits):
+    if not isinstance(edits,list) or not edits or len(edits)>8: raise ValueError('invalid edit count')
+    parts=[];seen=set()
+    for edit in edits:
+        if not isinstance(edit,dict) or set(edit)!={'path','source'}: raise ValueError('invalid complete edit')
+        p=production(root,edit['path']);source=edit['source']
+        if p in seen or not isinstance(source,str) or len(source.encode())>131072: raise ValueError('invalid source edit')
+        if source and not source.endswith('\n'): raise ValueError('preserve final newline')
+        parts.extend(difflib.unified_diff(text(p).splitlines(keepends=True),source.splitlines(keepends=True),fromfile='a/'+edit['path'],tofile='b/'+edit['path']));seen.add(p)
+    result=''.join(parts).encode()
+    if not result: raise ValueError('empty candidate')
+    return result
+
+def copy_public(source,destination):
+    source=Path(source)
+    shutil.copytree(source,destination,symlinks=True,ignore=lambda directory,names:['.git'] if Path(directory)==source and '.git' in names else [])
+
+def apply_patch(root,patch):
+    env={**os.environ,'GIT_CONFIG_NOSYSTEM':'1','GIT_CONFIG_GLOBAL':'/dev/null','GIT_CEILING_DIRECTORIES':str(Path(root).resolve().parent)}
+    for args in (['apply','--check','-'],['apply','-']):
+        p=subprocess.run(['git',*args],input=patch,cwd=root,capture_output=True,env=env,umask=0o022)
+        if p.returncode: raise ValueError('patch cannot apply to current source')
+
+def materialize(base,destination,patch):
+    if Path(destination).exists():
+        # A resumed event may consume a terminal proposal receipt. Reconstruct
+        # its exact candidate independently before reusing the retained copy.
+        with tempfile.TemporaryDirectory(prefix='ns-candidate-replay-',dir=Path(destination).parent) as temporary:
+            expected=Path(temporary)/'source';copy_public(base,expected)
+            if patch: apply_patch(expected,patch)
+            if inventory(expected)!=inventory(destination): raise ValueError('retained candidate differs from exact proposal')
+        return inventory(destination)
+    copy_public(base,destination)
+    if patch: apply_patch(destination,patch)
+    return inventory(destination)
+
+def cumulative_patch(pristine,current):
+    old={r['path']:r for r in inventory(pristine)['entries']};new={r['path']:r for r in inventory(current)['entries']}
+    if set(old)!=set(new): raise ValueError('profile permits existing files only')
+    parts=[]
+    for name in sorted(old):
+        if old[name]==new[name]: continue
+        production(current,name)
+        if old[name]['sha256']==new[name]['sha256']: raise ValueError('mode-only changes not enrolled')
+        parts.extend(difflib.unified_diff(text(Path(pristine)/name).splitlines(keepends=True),text(Path(current)/name).splitlines(keepends=True),fromfile='a/'+name,tofile='b/'+name))
+    return ''.join(parts).encode()
+
+def git(root,args,data=None,allow_failure=False):
+    env={**os.environ,'GIT_CONFIG_NOSYSTEM':'1','GIT_CONFIG_GLOBAL':'/dev/null','GIT_AUTHOR_NAME':'NS Development Evaluation','GIT_AUTHOR_EMAIL':'ns-eval@localhost','GIT_COMMITTER_NAME':'NS Development Evaluation','GIT_COMMITTER_EMAIL':'ns-eval@localhost','GIT_AUTHOR_DATE':'2026-09-14T00:00:00+00:00','GIT_COMMITTER_DATE':'2026-09-14T00:00:00+00:00','GIT_NO_LAZY_FETCH':'1','GIT_TERMINAL_PROMPT':'0'}
+    cmd=['git','-c','core.hooksPath=/dev/null','-c','core.autocrlf=false','-C',str(root),*args]
+    p=subprocess.run(cmd,input=data,capture_output=True,env=env,timeout=60,umask=0o022)
+    row={'command':cmd,'returncode':p.returncode,'stdout':p.stdout.decode(errors='replace'),'stderr':p.stderr.decode(errors='replace')}
+    if p.returncode and not allow_failure: raise ValueError('Git operation failed: '+json.dumps(row))
+    return row
+
+def seed_git(task,destination,graph,all_tasks):
+    copy_public(task['source_root'],destination);shutil.copytree(graph,Path(destination)/'.git')
+    git(destination,['config','core.bare','false']);git(destination,['config','--remove-section','remote.origin'],allow_failure=True)
+    git(destination,['read-tree',task['base_commit']])
+    # Fill missing Git blobs using only the two exported public source inventories.
+    for value in all_tasks.values():
+        for row in inventory(value['source_root'])['entries']:
+            if row['kind']!='file': raise ValueError('regular public files required')
+            git(destination,['hash-object','-w','--stdin'],data=(Path(value['source_root'])/row['path']).read_bytes())
+    git(destination,['add','--all','--force','.']);actual=git(destination,['write-tree'])['stdout'].strip()
+    expected=git(destination,['rev-parse',task['base_commit']+'^{tree}'])['stdout'].strip()
+    if actual!=expected: raise ValueError('public projection differs from actual upstream Git tree')
+    git(destination,['update-ref','refs/heads/evaluation',task['base_commit']]);git(destination,['symbolic-ref','HEAD','refs/heads/evaluation'])
+    return {'public_commit':task['base_commit'],'public_tree_oid':actual,'source_tree_sha256':inventory(destination)['tree_sha256']}
+
+def advance_source(profile,event,parent,destination):
+    task=profile['tasks'][event['instance_id']]
+    if parent is None or not parent['accepted']:
+        copy_public(task['source_root'],destination)
+        return {'kind':'exogenous_public_base_update','prior_accepted':False,'prior_outcome_preserved':True,'new_base_commit':task['base_commit'],'conflicts':[],'source_tree_sha256':inventory(destination)['tree_sha256']}
+    previous=profile['tasks'][parent['instance_id']]
+    if inventory(parent['accepted_tree_path'])['tree_sha256']!=parent['accepted_tree_sha256']: raise ValueError('accepted source changed')
+    working=Path(destination).parent/'upstream_merge_worktree';auth=seed_git(previous,working,profile['public_graph_git'],profile['tasks'])
+    accepted=Path(parent['accepted_tree_path'])
+    for row in inventory(accepted)['entries']:
+        target=working/row['path'];body=(accepted/row['path']).read_bytes()
+        if target.read_bytes()!=body: target.write_bytes(body);target.chmod(row['mode'])
+    git(working,['add','--all','--force','.']);tree=git(working,['write-tree'])['stdout'].strip()
+    commit=git(working,['commit-tree',tree,'-p',previous['base_commit']],data=b'Accepted evaluation candidate\n')['stdout'].strip()
+    git(working,['update-ref','refs/heads/evaluation',commit]);ancestry=git(working,['merge-base','--is-ancestor',previous['base_commit'],task['base_commit']])
+    merged=git(working,['merge','--no-commit','--no-ff',task['base_commit']],allow_failure=True)
+    conflicts=git(working,['diff','--name-only','--diff-filter=U'])['stdout'].splitlines()
+    if merged['returncode'] not in (0,1) or (merged['returncode']==1 and not conflicts): raise ValueError('merge failed outside conflict handling')
+    copy_public(working,destination);pristine=Path(task['source_root'])
+    # Reproduce exact scorer git-apply modes; incidental upstream checkout mode
+    # churn is never submitted as a proposed change outside production paths.
+    for row in inventory(pristine)['entries']:
+        p=Path(destination)/row['path'];old=pristine/row['path']
+        p.chmod(row['mode'] if p.read_bytes()==old.read_bytes() else (0o755 if row['mode']&0o111 else 0o644))
+    return {'kind':'actual_git_three_way_merge','prior_accepted':True,'prior_outcome_preserved':True,'old_base_commit':previous['base_commit'],'new_base_commit':task['base_commit'],'accepted_parent_commit':commit,'accepted_parent_tree_oid':tree,'public_source_authentication':auth,'ancestry':ancestry,'merge':merged,'conflicts':conflicts,'source_tree_sha256':inventory(destination)['tree_sha256']}

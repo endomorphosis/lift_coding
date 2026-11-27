@@ -1,0 +1,265 @@
+"""Source/IR/Lean binding tests; authored proof-shaped fixtures are untrusted.
+
+The projection and native source compiler are real. No unit fixture invokes a
+checker or attests that a proof record was produced by one. The separate fresh
+qualification exercises actual native proving and cold validation.
+"""
+from copy import deepcopy
+import importlib
+
+import pytest
+
+
+SOURCE = b"def increment(n: int) -> int:\n    return n + 1\n"
+REPOSITORY_ID = "repository:source-ir-lowering-fixture"
+FALSE_AUTHORITY = (
+    "proof_authority", "execution_authority", "completion_authority",
+    "source_semantics_verified", "cpython_equivalence_proved", "source_parser_correctness_proved",
+    "whole_program_semantics_verified", "training_convergence_proved", "production_activated",
+)
+
+
+@pytest.fixture(autouse=True)
+def fresh_namespaces(tmp_path, monkeypatch):
+    monkeypatch.setenv("IPFS_ACCELERATE_META_INDEX_DUCKDB", str(tmp_path / "fresh-meta.duckdb"))
+    monkeypatch.delenv("IPFS_ACCELERATE_META_INDEX_DUCKLAKE", raising=False)
+    monkeypatch.setenv("IPFS_ACCELERATE_AGENT_ORCHESTRATION_DIR", str(tmp_path / "orchestration"))
+
+
+@pytest.fixture
+def lowering(fresh_namespaces):
+    return importlib.import_module(
+        "benchmarks.agent_supervisor.container_coding.terminal_source_ir_lowering"
+    )
+
+
+@pytest.fixture
+def projection_module(fresh_namespaces):
+    return importlib.import_module(
+        "benchmarks.agent_supervisor.container_coding.terminal_source_ir_projection"
+    )
+
+
+@pytest.fixture
+def native(fresh_namespaces):
+    from ipfs_datasets_py.duckdb_control.codebase_catalog import CodebaseHead
+    from ipfs_datasets_py.logic.software_contracts import codebase_integer_lowering_lean
+    from ipfs_datasets_py.logic.software_contracts.codebase_integer_profile import IntegerOffsetContract
+    from ipfs_datasets_py.logic.software_contracts.content import cid_for_bytes, cid_for_structured
+    snapshot_cid = cid_for_structured({"snapshot": "authored fixture; no durable owner"})
+    head = CodebaseHead(
+        repository_id=REPOSITORY_ID, generation=1,
+        manifest_cid=cid_for_structured({"manifest": "authored fixture"}),
+        snapshot_cid=snapshot_cid,
+        ast_revision_id=f"rev:{REPOSITORY_ID}:snapshot:{snapshot_cid}",
+        receipt_cid=cid_for_structured({"receipt": "authored fixture; no publication"}),
+    )
+    contract = IntegerOffsetContract(path="callee.py", function_name="increment", parameter="n", offset=1)
+    return {
+        "head": head, "contract": contract, "lowering": codebase_integer_lowering_lean,
+        "cid": cid_for_structured, "bytes_cid": cid_for_bytes,
+    }
+
+
+@pytest.fixture
+def projection(projection_module, native):
+    return projection_module.build_source_ir_projection(
+        source=SOURCE, contract=native["contract"].to_dict(), head=native["head"].to_dict(),
+    )
+
+
+def _assert_no_authority(value):
+    for field in FALSE_AUTHORITY:
+        assert value[field] is False, field
+
+
+def _proof_shape(projection, native):
+    """Untrusted caller metadata only; no checker/process/artifact origin claim.
+
+    True native claim fields below are authored inputs to a pure join checker.
+    Passing their structural joins must never promote them to proof authority.
+    """
+    module = native["lowering"]
+    body_offset = projection["compiled"]["body_offset"]
+    requested_offset = projection["contract"]["offset"]
+    matches = body_offset == requested_offset
+    proof = {name: None for name in module._RECORD_FIELDS}
+    proof.update(module._FALSE)
+    proof.update({
+        "schema": module.SCHEMA, "profile": module.PROFILE, "scope": module.SCOPE,
+        "status": "model_proved" if matches else "model_refuted", "head": deepcopy(projection["head"]),
+        "manifest_cid": projection["head"]["manifest_cid"],
+        "source_path": projection["contract"]["path"],
+        "source_cid": projection["source_cid"], "source_sha256": projection["source_sha256"],
+        "compiled_cid": native["cid"](projection["compiled"]),
+        "contract": deepcopy(projection["contract"]), "contract_cid": native["cid"](projection["contract"]),
+        "translation": deepcopy(projection["translation"]),
+        "translation_cid": native["cid"](projection["translation"]),
+        "lean_certificate": {
+            "scope": module.SCOPE, "theorems": deepcopy(projection["theorems"]),
+            "translation_cid": native["cid"](projection["translation"]),
+        },
+        "source_ast_semantics_defined": True, "source_ast_lowering_proved": True,
+        "native_target_correspondence_proved": True, "requested_model_theorem_proved": matches,
+        "kernel_checked_model": True, "model_counterexample": None if matches else {
+            "input": 0, "model_output": body_offset, "required_output": requested_offset,
+        },
+        "artifacts": {}, "output": "authored-fixture-no-native-proof-invocation",
+    })
+    proof["result_cid"] = native["cid"]({name: value for name, value in proof.items() if name != "result_cid"})
+    return proof
+
+
+@pytest.fixture
+def proof_shape(projection, native):
+    return _proof_shape(projection, native)
+
+
+def _rebind_fixture_claim(proof, native, *, translation=False, contract=False):
+    if translation:
+        proof["translation_cid"] = native["cid"](proof["translation"])
+    if contract:
+        proof["contract_cid"] = native["cid"](proof["contract"])
+    proof["result_cid"] = native["cid"]({name: value for name, value in proof.items() if name != "result_cid"})
+
+
+def test_pure_join_preserves_provenance_limit_and_never_authenticates_fixture_claims(
+    lowering, projection, proof_shape,
+):
+    frozen_projection, frozen_proof = deepcopy(projection), deepcopy(proof_shape)
+    result = lowering.join_source_ir_lowering(projection=projection, proof=proof_shape)
+    _assert_no_authority(result)
+    assert result["caller_record_origin_verified"] is False
+    assert projection == frozen_projection and proof_shape == frozen_proof
+
+
+@pytest.mark.parametrize("field", [
+    "source_sha256", "source_cid", "source_path", "compiled_cid", "contract_cid",
+    "translation_cid", "manifest_cid",
+])
+def test_mismatched_native_identity_is_rejected(lowering, projection, proof_shape, native, field):
+    proof = deepcopy(proof_shape)
+    proof[field] = "independently-changed-identity"
+    _rebind_fixture_claim(proof, native)
+    with pytest.raises(ValueError):
+        lowering.join_source_ir_lowering(projection=projection, proof=proof)
+
+
+@pytest.mark.parametrize("mutation", [
+    "head", "contract", "native_program", "source_ast", "native_target",
+    "assumptions", "type_mapping", "effect_mapping", "theorem_missing", "theorem_extra",
+])
+def test_semantic_translation_and_theorem_joins_are_complete(lowering, projection, proof_shape, native, mutation):
+    proof = deepcopy(proof_shape)
+    if mutation == "head":
+        proof["head"]["generation"] += 1
+    elif mutation == "contract":
+        proof["contract"]["offset"] += 1
+    elif mutation in {"theorem_missing", "theorem_extra"}:
+        if mutation == "theorem_missing":
+            proof["lean_certificate"]["theorems"].pop()
+        else:
+            proof["lean_certificate"]["theorems"].append("invented_theorem")
+    else:
+        key = {"source_ast": "source_ast_syntax", "native_target": "native_target_syntax"}.get(mutation, mutation)
+        proof["translation"][key] = {"independently_corrupted": True}
+    _rebind_fixture_claim(proof, native, translation=True, contract=mutation == "contract")
+    with pytest.raises(ValueError):
+        lowering.join_source_ir_lowering(projection=projection, proof=proof)
+
+
+@pytest.mark.parametrize("field", [
+    "source_ast_semantics_defined", "source_ast_lowering_proved",
+    "native_target_correspondence_proved", "kernel_checked_model",
+])
+@pytest.mark.parametrize("value", [False, 1])
+def test_claim_flags_require_exact_true_without_granting_authority(
+    lowering, projection, proof_shape, native, field, value,
+):
+    proof = deepcopy(proof_shape)
+    proof[field] = value
+    _rebind_fixture_claim(proof, native)
+    with pytest.raises(ValueError):
+        lowering.join_source_ir_lowering(projection=projection, proof=proof)
+
+
+@pytest.mark.parametrize("field", [
+    "proof_authority", "execution_authority", "completion_authority",
+    "source_semantics_verified", "cpython_equivalence_proved", "whole_program_semantics_verified",
+    "source_parser_correctness_proved", "training_convergence_proved",
+])
+@pytest.mark.parametrize("value", [True, 0])
+def test_authority_or_runtime_equivalence_claims_are_not_promoted(
+    lowering, projection, proof_shape, native, field, value,
+):
+    proof = deepcopy(proof_shape)
+    proof[field] = value
+    _rebind_fixture_claim(proof, native)
+    with pytest.raises(ValueError):
+        lowering.join_source_ir_lowering(projection=projection, proof=proof)
+
+
+@pytest.mark.parametrize("mutation", ["status", "requested_goal", "counterexample"])
+def test_goal_verdict_cannot_drift_from_the_captured_offset(lowering, projection, proof_shape, native, mutation):
+    proof = deepcopy(proof_shape)
+    if mutation == "status":
+        proof["status"] = "model_refuted"
+    elif mutation == "requested_goal":
+        proof["requested_model_theorem_proved"] = False
+    else:
+        proof["model_counterexample"] = {"input": 0, "model_output": 1, "required_output": 2}
+    _rebind_fixture_claim(proof, native)
+    with pytest.raises(ValueError):
+        lowering.join_source_ir_lowering(projection=projection, proof=proof)
+
+
+def test_refuted_requested_offset_keeps_translation_binding_without_authority(
+    lowering, projection_module, native,
+):
+    contract = native["contract"].to_dict()
+    contract["offset"] = 2
+    projection = projection_module.build_source_ir_projection(
+        source=SOURCE, contract=contract, head=native["head"].to_dict(),
+    )
+    proof = _proof_shape(projection, native)
+    assert proof["requested_model_theorem_proved"] is False
+    assert proof["status"] == "model_refuted"
+    assert proof["model_counterexample"] == {"input": 0, "model_output": 1, "required_output": 2}
+    assert proof["source_ast_lowering_proved"] is True
+    result = lowering.join_source_ir_lowering(projection=projection, proof=proof)
+    _assert_no_authority(result)
+    assert result["caller_record_origin_verified"] is False
+
+
+@pytest.mark.parametrize("field", ["schema", "profile", "scope"])
+def test_model_family_and_scope_cannot_be_relabelled(lowering, projection, proof_shape, native, field):
+    proof = deepcopy(proof_shape)
+    proof[field] = "invented-whole-program-runtime-scope"
+    _rebind_fixture_claim(proof, native)
+    with pytest.raises(ValueError):
+        lowering.join_source_ir_lowering(projection=projection, proof=proof)
+
+
+def test_record_body_and_result_cid_must_agree(lowering, projection, proof_shape):
+    proof = deepcopy(proof_shape)
+    proof["result_cid"] = "invented-result-cid"
+    with pytest.raises(ValueError):
+        lowering.join_source_ir_lowering(projection=projection, proof=proof)
+
+
+@pytest.mark.parametrize("mutation", ["extra_record_field", "missing_translation", "missing_theorems"])
+def test_incomplete_or_extra_caller_record_is_not_a_bound_native_shape(
+    lowering, projection, proof_shape, native, mutation,
+):
+    proof = deepcopy(proof_shape)
+    if mutation == "extra_record_field":
+        proof["unverified_origin_attestation"] = True
+    elif mutation == "missing_translation":
+        del proof["translation"]
+    else:
+        del proof["lean_certificate"]["theorems"]
+    _rebind_fixture_claim(proof, native)
+    with pytest.raises(ValueError):
+        lowering.join_source_ir_lowering(projection=projection, proof=proof)
+
+

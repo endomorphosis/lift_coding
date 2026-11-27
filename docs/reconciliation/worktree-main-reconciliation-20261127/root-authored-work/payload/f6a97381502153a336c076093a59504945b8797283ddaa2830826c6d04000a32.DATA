@@ -1,0 +1,263 @@
+"""Fresh bounded whole-prefix emitter; source-only until root qualification.
+
+All public APIs re-read caller byte buffers.  The independently qualified
+host decoder is loaded only after its immutable whole-source pin matches.
+The ranker source is parsed as data by that decoder, never executed.  Generated
+Lean source is a candidate literal; a host receipt never grants proof authority.
+"""
+import hashlib
+
+DECODER_PIN = (43818, '4939b0257334dabe239085946c8bc1a5706805df2b39f2f8108ea05ccf965965')
+MAX_LEAN_BYTES = 262144
+KERNEL_MODULE = 'ObjectiveContainerPreservation'
+KERNEL_NAMESPACE = 'RankerObjectiveContainerLanguage'
+AUTHORITY = {'proof_authority': False, 'execution_authority': False,
+             'planner_activation': False, 'completion_authority': False}
+PREFIX_NAMES = ('margins', 'data', 'regularizer', 'factors', 'gradient')
+LEAN_KEYWORDS = frozenset({'_', 'Type', 'Prop', 'Sort', 'abbrev', 'axiom', 'by',
+    'class', 'def', 'deriving', 'do', 'else', 'end', 'example', 'export', 'if',
+    'import', 'in', 'inductive', 'instance', 'let', 'local', 'macro', 'match',
+    'mutual', 'namespace', 'noncomputable', 'notation', 'opaque', 'open',
+    'private', 'protected', 'rec', 'scoped', 'section', 'set_option', 'structure',
+    'syntax', 'then', 'theorem', 'universe', 'universes', 'unsafe', 'variable',
+    'variables', 'where', 'with'})
+CONSTRUCTOR_MAP = {
+    'var': 'SourceExpr.leaf/SourceTerm.var',
+    'scalarLiteral': 'SourceExpr.leaf/SourceTerm.scalarLiteral',
+    'scalarOp': 'SourceExpr.scalarUnary/scalarBinary/ifNonneg',
+    'mapRows': 'SourceExpr.mapRows', 'mapVector': 'SourceExpr.mapVector',
+    'zipMap': 'SourceExpr.zipMap', 'zipRowsMap': 'SourceExpr.zipRowsMap',
+    'rangeMap': 'SourceExpr.rangeMap', 'indexVector': 'SourceExpr.indexVector',
+    'length': 'SourceExpr.lengthVector/lengthMatrix',
+    'natToScalar': 'SourceExpr.natToScalar', 'fsumExact': 'SourceExpr.fsumExact',
+    'letBind': 'RankerObjectiveContainerLanguage.SourcePrefix.letBind',
+    'prefixRecord': 'RankerObjectiveContainerLanguage.SourcePrefix.record',
+}
+
+
+class EmissionRefusal(ValueError):
+    def __init__(self, reason_code, message):
+        self.reason_code = reason_code
+        super().__init__(message)
+
+
+def _need(ok, reason, message):
+    if ok is not True:
+        raise EmissionRefusal(reason, message)
+
+
+def _decoder(raw):
+    """Only exact already-qualified host definitions may enter this adapter.
+
+    The parent runner pins this fresh emitter too.  Neither file imports the
+    original ranker, starts model work, or accepts caller-defined executable
+    dependencies.  The old decoder itself pins its compiler definition buffer.
+    """
+    _need(type(raw) is bytes and len(raw) == DECODER_PIN[0]
+          and hashlib.sha256(raw).hexdigest() == DECODER_PIN[1],
+          'decoderPinMismatch', 'immutable host decoder source pin mismatch')
+    namespace = {'__name__': '_exact_pinned_prefix_decoder', '__builtins__': __builtins__}
+    try:
+        exec(compile(raw, '<exact-pinned-objective-prefix-decoder>', 'exec'), namespace, namespace)
+    except Exception as error:
+        raise EmissionRefusal('decoderAdapter', 'pinned decoder loading refused: ' + type(error).__name__) from None
+    return namespace
+
+
+def _call_decoder(api, function, *arguments, **keywords):
+    try:
+        return api[function](*arguments, **keywords)
+    except api['DecodeRefusal'] as error:
+        raise EmissionRefusal(error.reason_code, str(error)) from None
+    except (KeyError, TypeError, ValueError, RecursionError) as error:
+        raise EmissionRefusal('decoderAdapter', 'pinned decoder refused: ' + type(error).__name__) from None
+
+
+def _lean_name(api, name):
+    try:
+        return '"' + api['_name'](name) + '"'
+    except api['DecodeRefusal'] as error:
+        raise EmissionRefusal(error.reason_code, str(error)) from None
+
+
+def _lean_type(annotation):
+    if annotation[0] in ('scalar', 'nat'):
+        return '.' + annotation[0]
+    if annotation[0] in ('vector', 'index'):
+        return '(.' + annotation[0] + ' ' + str(annotation[1]) + ')'
+    _need(annotation[0] == 'matrix', 'kernelUnsupported', 'records use the prefix schema')
+    return '(.matrix ' + str(annotation[1]) + ' ' + str(annotation[2]) + ')'
+
+
+def _expr(api, node):
+    kind = node['kind']
+    if kind == 'var':
+        return ('(SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := '
+            + _lean_type(node['inferred_type']) + ') ' + _lean_name(api, node['name']) + '))')
+    if kind == 'scalarLiteral':
+        n, den = node['ratio']
+        return ('(SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.scalarLiteral (('
+            + str(n) + ' : ℚ) / (' + str(den) + ' : ℚ))))')
+    if kind == 'scalarOp':
+        children = [_expr(api, child) for child in node['arguments']]
+        operator = node['operator']
+        if operator == 'ifNonneg':
+            constructor = 'SourceExpr.ifNonneg'
+        else:
+            constructor = ('SourceExpr.scalarUnary' if len(children) == 1 else 'SourceExpr.scalarBinary') + ' .' + operator
+        return '(' + constructor + ' ' + ' '.join(children) + ')'
+    if kind in ('mapRows', 'mapVector'):
+        return ('(SourceExpr.' + kind + ' ' + _lean_name(api, node['binder']) + ' '
+            + _expr(api, node['source']) + ' ' + _expr(api, node['body']) + ')')
+    if kind in ('zipMap', 'zipRowsMap'):
+        names = ' '.join(_lean_name(api, name) for name in node['binders'])
+        return ('(SourceExpr.' + kind + ' ' + names + ' ' + _expr(api, node['left'])
+            + ' ' + _expr(api, node['right']) + ' ' + _expr(api, node['body']) + ')')
+    if kind == 'rangeMap':
+        # This lexical source was independently rejoined from range(len(v)).
+        # A numeric dimension alone cannot produce the bound-vector operand.
+        bound_vector = {'kind': 'var', 'name': node['range_source'],
+                        'inferred_type': node['inferred_type']}
+        return ('(SourceExpr.rangeMap ' + _lean_name(api, node['binder']) + ' '
+            + _expr(api, bound_vector) + ' ' + _expr(api, node['body']) + ')')
+    if kind == 'length':
+        constructor = 'lengthVector' if node['source']['inferred_type'][0] == 'vector' else 'lengthMatrix'
+        return '(SourceExpr.' + constructor + ' ' + _expr(api, node['source']) + ')'
+    if kind in ('natToScalar', 'fsumExact'):
+        key = 'value' if kind == 'natToScalar' else 'values'
+        return '(SourceExpr.' + kind + ' ' + _expr(api, node[key]) + ')'
+    if kind == 'indexVector':
+        return '(SourceExpr.indexVector ' + _expr(api, node['vector']) + ' ' + _expr(api, node['index']) + ')'
+    raise EmissionRefusal('kernelUnsupported', 'record/let or unknown term outside SourceExpr')
+
+
+def _fields(api, node):
+    _need(node['kind'] == 'prefixRecord', 'kernelUnsupported', 'ordered record terminator required')
+    text = KERNEL_NAMESPACE + '.SourceFields.nil'
+    for field in reversed(node['fields']):
+        value = field['value']
+        text = ('(' + KERNEL_NAMESPACE + '.SourceFields.cons (name := ' + _lean_name(api, field['name'])
+            + ') (τ := ' + _lean_type(value['inferred_type']) + ') ' + _expr(api, value) + ' ' + text + ')')
+    return text
+
+
+def _prefix(api, node):
+    if node['kind'] == 'prefixRecord':
+        return '(' + KERNEL_NAMESPACE + '.SourcePrefix.record ' + _fields(api, node) + ')'
+    _need(node['kind'] == 'letBind', 'kernelUnsupported', 'SourcePrefix requires lets followed by record')
+    return ('(' + KERNEL_NAMESPACE + '.SourcePrefix.letBind (τ := '
+        + _lean_type(node['value']['inferred_type']) + ') ' + _lean_name(api, node['binder'])
+        + ' ' + _expr(api, node['value']) + ' ' + _prefix(api, node['body']) + ')')
+
+
+def _schema(api, annotation):
+    _need(annotation[0] == 'record', 'recordShape', 'SourcePrefix record result required')
+    return '[' + ', '.join('(' + _lean_name(api, name) + ', ' + _lean_type(t) + ')'
+        for name, t in annotation[1]) + ']'
+
+
+def _receipt(text, decoded, *, schema, prefix):
+    raw = text.encode('utf-8')
+    _need(len(raw) <= MAX_LEAN_BYTES, 'budget', 'generated Lean byte budget exceeded')
+    return {'schema': schema, 'status': 'SOURCE_LITERAL_UNCOMPILED_UNQUALIFIED',
+            'text': text, 'text_utf8_bytes': len(raw), 'text_sha256': hashlib.sha256(raw).hexdigest(),
+            'kernel_module': KERNEL_MODULE, 'kernel_namespace': KERNEL_NAMESPACE,
+            'decoder_source_sha256': DECODER_PIN[1], 'operation_counts': dict(decoded['operation_counts']),
+            'inferred_type': decoded['tree']['inferred_type'], 'source_prefix_literal': prefix,
+            'original_source_rejoined': False, 'kernel_checked': False, 'theorem_qualified': False,
+            'Lean_SourcePrefix_literal_emitted': prefix, 'Lean_SourcePrefix_literal_typechecked': False,
+            'typed_Lean_SourcePrefix_exists': False, 'whole_five_assignment_prefix_emitted': False,
+            'strict_cache_admission': False, 'source_semantic_equivalence_proved': False,
+            'whole_objective_semantics_proved': False, 'computed_gradient_semantics_proved': False,
+            'source_error_order_equivalence_proved': False, 'host_decoder_formal_preservation_proved': False,
+            'Python_Float_semantics_proved': False, 'CPython_math_fsum_semantics_proved': False,
+            'Python_libm_semantics_proved': False, 'optimizer_source_convergence_proved': False,
+            'global_autoencoder_convergence_proved': False, 'new_native_jobs': 0,
+            'new_training_jobs': 0, 'new_metadata_hydration_jobs': 0,
+            'full_task_satisfaction': 'unknown', **AUTHORITY}
+
+
+def emit_generic_literal(tree_bytes, lexical_types, decoder_source_bytes, *,
+                         range_sources=None, record_shape=None):
+    """Unbound candidate literal. Numeric dimensions confer no source proof."""
+    api = _decoder(decoder_source_bytes)
+    decoded = _call_decoder(api, 'decode_generic_tree', tree_bytes, lexical_types,
+        range_sources=range_sources, record_shape=record_shape)
+    prefix = decoded['tree']['kind'] in ('letBind', 'prefixRecord')
+    text = _prefix(api, decoded['tree']) if prefix else _expr(api, decoded['tree'])
+    return _receipt(text, decoded, schema='ranker-objective-container-literal@1', prefix=prefix)
+
+
+def _module(api, decoded, lexical_types, namespace_name):
+    namespace = _lean_name(api, namespace_name)[1:-1]
+    _need(namespace not in LEAN_KEYWORDS, 'namespaceShape', 'Lean keyword is not a generated namespace')
+    # Quote every accepted identifier too: the finite convenience refusal list
+    # above is not the parser's authority. The ASCII grammar forbids quote
+    # delimiters, and quoted Lean names preserve the underlying query name.
+    quoted_namespace = '«' + namespace + '»'
+    scope = api['_scope'](lexical_types)
+    context = '[' + ', '.join('(' + _lean_name(api, name) + ', ' + _lean_type(t) + ')'
+        for name, t in scope.items()) + ']'
+    schema = _schema(api, decoded['tree']['inferred_type'])
+    text = ('import ' + KERNEL_MODULE + '\n\nnamespace ' + quoted_namespace + '\n\n'
+        'open RankerObjectivePrefixIR\nopen ' + KERNEL_NAMESPACE + '\n\n'
+        'noncomputable section\n\n'
+        'def emittedContext : Context := ' + context + '\n\n'
+        'def emittedPrefix : ' + KERNEL_NAMESPACE + '.SourcePrefix ' + schema + ' :=\n  '
+        + _prefix(api, decoded['tree']) + '\n\nend\nend ' + quoted_namespace + '\n')
+    result = _receipt(text, decoded, schema='ranker-objective-container-prefix-Lean-emission@1', prefix=True)
+    result['emitted_namespace'] = namespace
+    return result
+
+
+def emit_generic_source_prefix(tree_bytes, lexical_types, decoder_source_bytes, *,
+                               range_sources=None, record_shape=None,
+                               namespace_name='GeneratedObjectiveContainerPrefix'):
+    """Re-decode complete generic prefix bytes before emitting a module."""
+    api = _decoder(decoder_source_bytes)
+    decoded = _call_decoder(api, 'decode_generic_tree', tree_bytes, lexical_types,
+        range_sources=range_sources, record_shape=record_shape)
+    return _module(api, decoded, lexical_types, namespace_name)
+
+
+def emit_source_bound_prefix(draft_bytes, source_bytes, bindings_bytes,
+                             materialization_receipt_bytes, compiler_source_bytes,
+                             decoder_source_bytes, *,
+                             namespace_name='GeneratedOriginalObjectiveContainerPrefix'):
+    """Emit the complete actual five-assignment prefix; rejoin every buffer.
+
+    The admitted shapes are four rows and eighty columns. There are no supplied
+    numeric coordinates, and the Python guard/return suffix remains context
+    only. Exact-real compilation/evaluation must be qualified separately.
+    """
+    api = _decoder(decoder_source_bytes)
+    decoded = _call_decoder(api, 'decode_source_bound_prefix', draft_bytes,
+        source_bytes, bindings_bytes, materialization_receipt_bytes, compiler_source_bytes)
+    lexical_types = {'weights': {'kind': 'vector', 'length': 80},
+                     'differences': {'kind': 'matrix', 'rows': 4, 'columns': 80}}
+    result = _module(api, decoded, lexical_types, namespace_name)
+    assignments, cursor = [], decoded['tree']
+    while cursor['kind'] == 'letBind':
+        literal = _expr(api, cursor['value'])
+        assignments.append({'name': cursor['binder'], 'inferred_type': cursor['value']['inferred_type'],
+            'RHS_literal_sha256': hashlib.sha256(literal.encode('utf-8')).hexdigest(),
+            'RHS_literal_utf8_bytes': len(literal.encode('utf-8'))})
+        cursor = cursor['body']
+    _need(tuple(item['name'] for item in assignments) == PREFIX_NAMES,
+          'sourceJoin', 'all five original assignment names and order required')
+    result.update(original_source_rejoined=True, same_buffer_compiler_receipt_rejoined=True,
+        whole_five_assignment_prefix_emitted=True, source_bound_assignments=assignments,
+        source_context_statements_rejoined=decoded['source_context_statements_rejoined'],
+        source_binding_records_rejoined=decoded['source_binding_records_rejoined'],
+        numeric_assignments_decoded=decoded['numeric_assignments_decoded'],
+        source_input_sha256=decoded['source_input_sha256'],
+        draft_input_sha256=decoded['draft_input_sha256'],
+        bindings_input_sha256=decoded['bindings_input_sha256'],
+        compiler_source_sha256=decoded['compiler_source_sha256'],
+        materialization_receipt_sha256=decoded['materialization_receipt_sha256'],
+        decoder_source_AST_parse_calls=decoded['decoder_source_AST_parse_calls'],
+        compiler_source_AST_parse_calls_declared=decoded['compiler_source_AST_parse_calls_declared'],
+        actual_numeric_coordinates_supplied=decoded['actual_numeric_coordinates_supplied'],
+        original_ranker_execution_calls=0, source_suffix_compiled=False,
+        source_L2_exact_ratio=('5764607523034235', '576460752303423488'))
+    return result

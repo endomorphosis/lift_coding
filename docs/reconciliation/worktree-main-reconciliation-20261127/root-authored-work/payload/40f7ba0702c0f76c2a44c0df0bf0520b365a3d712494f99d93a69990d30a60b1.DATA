@@ -1,0 +1,143 @@
+#!/usr/bin/env python3
+"""Fresh reader and meaningful current-binding/native tamper controls."""
+from __future__ import annotations
+import argparse
+from copy import deepcopy
+from dataclasses import replace
+import json
+import os
+from pathlib import Path
+import shutil
+import sys
+import tempfile
+import time
+
+def main():
+    started=time.perf_counter();parser=argparse.ArgumentParser();parser.add_argument('--profile',type=Path,required=True)
+    parser.add_argument('--run',type=Path,required=True);parser.add_argument('--out',type=Path,required=True);args=parser.parse_args()
+    require=lambda ok,message:None if ok else (_ for _ in ()).throw(ValueError(message))
+    require(not args.out.exists(),'new independent audit directory required');args.out.mkdir()
+    sys.path.insert(0,str(args.profile.parent.resolve()));os.environ.setdefault('IPFS_ACCEL_SKIP_CORE','1')
+    from request_contract import canonical,sha,read,validate_request,source_runtime
+    from service import save,guard
+    from evidence import KINDS,expected_artifacts,candidate_for,policy_family,independent_action_check
+    from procedure import C,build,cid
+    from runtime import NativeNominationRuntime
+    from ipfs_accelerate_py.agent_supervisor.procedure_compiler.certificate import CertificateKeyRing,ProcedureCertificateVerifier,CurrentCertificateContext
+    from ipfs_accelerate_py.agent_supervisor.proof.incremental_sealing.trust import SignerTrustRecord,SignerTrustRegistry
+    from ipfs_accelerate_py.agent_supervisor.procedure_compiler.interpreter import ExecutionMode,ProcedureInterpreterError
+    profile=read(args.profile);guard(profile);profile_sha=sha(args.profile.read_bytes());freeze=read(args.run/'freeze.json')
+    require(freeze['profile_sha256']==profile_sha,'qualification profile mismatch');requests=read(args.run/'prospective_requests.json')
+    require(sha(canonical(requests))==freeze['request_list_sha256'],'frozen request list changed')
+    issuer=profile['test_signer_id'];key=Path(profile['test_signer_key_path']).read_bytes();require(sha(key)==profile['test_signer_key_sha256'],'key bytes changed')
+    trust=SignerTrustRegistry((SignerTrustRecord(issuer,frozenset({'procedure-certificate'}),trusted=True,test_only=True),),production=False)
+    verifier=ProcedureCertificateVerifier(trust,CertificateKeyRing({issuer:key}));positives=[];negatives=[];owner_inputs=None
+    def reject(name,fn):
+        tick=time.perf_counter()
+        try:fn()
+        except (ValueError,KeyError,TypeError,FileNotFoundError,ProcedureInterpreterError) as exc:
+            negatives.append({'control':name,'rejected':True,'exception_type':type(exc).__name__,'wall_seconds':time.perf_counter()-tick})
+        else:raise ValueError('negative admitted: '+name)
+    for ordinal,request in enumerate(requests):
+        case=args.run/f'case_{ordinal}';process=read(args.run/f'process_{ordinal}.json');summary=read(case/'summary.json')
+        endpoint=Path(process['command'][process['command'].index('--endpoint')+1]);require(sha(endpoint.read_bytes())==profile['endpoint_contract_sha256'],'endpoint bytes changed')
+        require(process['returncode']==0 and not process['timed_out'] and process['enclosing_process_seconds']<=process['bound_seconds'],'worker unsuccessful or beyond frozen bound')
+        require(sha((args.run/f'process_{ordinal}.stdout').read_bytes())==process['stdout_sha256'] and sha((args.run/f'process_{ordinal}.stderr').read_bytes())==process['stderr_sha256'],'process log changed')
+        require(json.loads((args.run/f'process_{ordinal}.stdout').read_bytes())==summary,'stdout/summary mismatch')
+        validated=validate_request(request,endpoint);procedure=build(validated,profile_sha);corpus=read(case/'prospective_evidence_corpus.json')
+        expected=expected_artifacts(request,validated,procedure,endpoint,profile_sha,corpus)
+        for kind in KINDS:require((case/'evidence'/f'{kind}.json').read_bytes()==canonical(expected[kind])+b'\n','independent actual evidence mismatch')
+        candidate=candidate_for(procedure,expected);require(candidate.to_dict()==C.ProcedureCandidate.from_dict(read(case/'native_candidate.json')).to_dict(),'candidate binding mismatch')
+        policy,family=policy_family(candidate,profile_sha,expected);certificate=C.ProcedureCertificate.from_dict(read(case/'native_certificate.json'))
+        verdict=verifier.verify(certificate,CurrentCertificateContext.from_policy(policy,now_ms=int(time.time()*1000)))
+        require(verdict.accepted and verdict.usable and not verdict.grants_authority and not verdict.grants_promotion,'signed TEST certificate not usable')
+        invocation=C.ProcedureInvocation.from_dict(read(case/'native_invocation.json'))
+        require(invocation.content_id==summary['native_invocation_cid'] and invocation.procedure_cid==procedure.content_id and invocation.certificate_cid==certificate.content_id,'native invocation identity mismatch')
+        store={}
+        for path in (case/'native_objects').glob('*.json'):
+            body=path.read_bytes();value=json.loads(body);require(body==canonical(value) and path.stem==cid(value),'native artifact CID/bytes mismatch');store[path.stem]=value
+        authority=store[invocation.authority_receipt_cids[0]];query=store[authority['query_cid']]
+        require(query['request_json']==canonical(request).decode() and dict(invocation.parameters)=={'request-cid':authority['query_cid']},'actual retained native input differs')
+        action_records=[v for v in store.values() if v.get('schema')=='ns-original-native-nominated-action/v1']
+        require(len(action_records)==1 and action_records[0]['invocation_cid']==invocation.content_id,'missing actual native action')
+        independent_action_check(json.loads(action_records[0]['action_json']),request)
+        require(json.loads(action_records[0]['action_json'])==summary['action'],'native emitted action differs from service')
+        emitted=[v for v in store.values() if v.get('schema')=='ns-original-native-nomination-receipt/v1']
+        require(len(emitted)==1 and emitted[0]['action_cid']==cid(action_records[0]) and emitted[0]['invocation_cid']==invocation.content_id,'emitted receipt binding mismatch')
+        admissions=read(case/'native_admissions.json');require(all(row['admitted'] for row in admissions),'negative admission in successful native run')
+        require(len(read(case/'native_dispatches.json'))==5,'native actual graph incomplete')
+        loaded=read(case/'actual_loaded_source_manifest.json');require(all(profile['sources_sha256'].get(path)==digest for path,digest in loaded.items()),'actually imported source outside freeze')
+        require(summary['native_status']=='succeeded' and not summary['scoring_passed'] and summary['provider_calls']==summary['scorer_calls']==0,'nomination improperly claimed score')
+        positives.append({'ordinal':ordinal,'task_id':request['task_id'],'profile_sha256':profile_sha,'native_invocation_cid':invocation.content_id,
+            'evidence_payloads_independently_reexecuted':8,'native_objects':len(store),'actual_imports':len(loaded),'enclosing_process_seconds':process['enclosing_process_seconds']})
+        if owner_inputs is None and request['event_index']==2:owner_inputs=(candidate,certificate,policy,validated,request,endpoint)
+    candidate,certificate,policy,validated,request,endpoint=owner_inputs
+    fixture=read(args.run/'actual_parent_fixture.json')
+    require(sha((args.run/'actual_parent_fixture.json').read_bytes())==freeze['actual_parent_fixture_sha256'],'actual parent fixture changed')
+    for path,digest in fixture['source_sha256'].items():require(sha(Path(path).read_bytes())==digest,'retained real native pointer source changed')
+    parent_request=requests[-1];require(parent_request['expected_publication_parent']==fixture['projection'],'actual parent wire projection changed')
+    validate_request(parent_request,endpoint)
+    for field,value in (('seal_cid','b'+'a'*40),('seal_cid','sha256:'+'0'*63),('seal_cid','SHA256:'+'0'*64),('generation',True),('generation',-1),('event_id','../stale'),('trajectory_id','mismatched-trajectory')):
+        changed=deepcopy(parent_request);changed['expected_publication_parent'][field]=value
+        reject('actual-parent-malformed-or-mismatched-'+field+'-'+str(value)[:12],lambda x=changed:validate_request(x,endpoint))
+    from procedure import expected_action
+    changed_action=expected_action(deepcopy(parent_request));changed_action['expected_publication_parent']['generation']+=1
+    reject('reminted-action-parent-generation-mismatch',lambda:independent_action_check(changed_action,parent_request))
+    # A well-formed caller-supplied descriptor does not prove current pointer
+    # freshness. Preserve this limit instead of inventing a store-read guard.
+    other_parent=deepcopy(parent_request);other_parent['expected_publication_parent']['generation']+=1
+    validate_request(other_parent,endpoint)
+    warm=next(deepcopy(item) for item in requests if item['event_index']==0)
+    warm['expected_publication_parent']=fixture['projection'];reject('warm-prime-parent-present',lambda:validate_request(warm,endpoint))
+    warm=next(deepcopy(item) for item in requests if item['event_index']==0);warm['cache_profile']='cold';reject('h0-in-cold-namespace',lambda:validate_request(warm,endpoint))
+    for field in ('corpus_sha256','source_inventory_sha256','generic_source_tree_sha256','environment_profile_sha256','endpoint_contract_sha256'):
+        altered=deepcopy(request);altered[field]='0'*64;reject('changed-'+field,lambda x=altered:validate_request(x,endpoint))
+    for field in ('base_commit','objective_record_sha256','objective_text_sha256','configuration_sha256','expected_candidate_source_tree_sha256','scorer_profile_sha256'):
+        altered=deepcopy(request);altered['scorer_request'][field]='0'*64;reject('changed-scorer-'+field,lambda x=altered:validate_request(x,endpoint))
+    for field in ('arm','cache_profile','cache_namespace','operation_id','trajectory_id'):
+        altered=deepcopy(request);altered[field]='../invalid';reject('malformed-'+field,lambda x=altered:validate_request(x,endpoint))
+    for field in ('scoring_passed','publication_authority','whole_grader_reused'):
+        from procedure import expected_action
+        action=expected_action(deepcopy(request));action[field]=True;reject('forged-action-'+field,lambda x=action:independent_action_check(x,request))
+    altered=deepcopy(request);altered['expected_publication_parent']={'trajectory_id':'other','event_id':'older','generation':0,'seal_cid':'b'+'a'*40}
+    reject('cross-trajectory-parent',lambda:validate_request(altered,endpoint))
+    # Actual public source edits stay in an isolated authored clone.
+    with tempfile.TemporaryDirectory(prefix='original-nomination-source-control-') as scratch:
+        root=Path(scratch)/'source';shutil.copytree(request['scorer_request']['sealed_candidate_tree_path'],root,symlinks=True)
+        altered=deepcopy(request);altered['scorer_request']['sealed_candidate_tree_path']=str(root)
+        validate_request(altered,endpoint)
+        target=root/validated['task']['source_policy']['edit_paths'][0];prior=target.read_bytes();target.write_bytes(prior+b'\n# authored current-source binding control\n')
+        reject('actual-allowed-source-change-stale-receipt',lambda:validate_request(altered,endpoint))
+        inv=source_runtime.original_adapter_inventory(root);altered['source_inventory_sha256']=sha(canonical(inv));altered['scorer_request']['expected_candidate_source_tree_sha256']=altered['source_inventory_sha256'];altered['generic_source_tree_sha256']=source_runtime.inventory(root)['tree_sha256']
+        fresh=validate_request(altered,endpoint);require(fresh['source_inventory_sha256']!=validated['source_inventory_sha256'],'fresh source did not update binding')
+        prime_changed=deepcopy(altered);prime_changed['event_index']=0;prime_changed['cache_profile']='warm'
+        reject('warm-prime-refreshed-changed-source-disallowed',lambda:validate_request(prime_changed,endpoint))
+        (root/'unexpected.py').write_text('# authored extra path\n');reject('unexpected-source-population',lambda:validate_request(altered,endpoint));(root/'unexpected.py').unlink()
+        mode=target.stat().st_mode;target.chmod(0o777);reject('actual-mode-change',lambda:validate_request(altered,endpoint));target.chmod(mode)
+    def cert_bad(changed):
+        verdict=verifier.verify(changed,CurrentCertificateContext.from_policy(policy,now_ms=int(time.time()*1000)))
+        require(verdict.accepted,'native certificate rejected')
+    forged=replace(certificate,signature=certificate.signature[:-1]+('0' if certificate.signature[-1]!='0' else '1'))
+    reject('native-forged-signature',lambda:cert_bad(forged))
+    reject('native-expired-certificate',lambda:require(verifier.verify(certificate,CurrentCertificateContext.from_policy(policy,now_ms=certificate.expires_at_ms)).accepted,'expired native certificate rejected'))
+    controls=[]
+    for fault in ('changed_descriptor','changed_scorer_request','scoring_authority'):
+        owner=NativeNominationRuntime(candidate,certificate,verifier,policy,validated,deepcopy(request),profile_sha,fault=fault)
+        inv,outcome,action=owner.execute(9000+len(controls));require(outcome.outcome.status.value!='succeeded' and action is None,'runtime authority tamper succeeded')
+        controls.append({'control':fault,'outcome':outcome.outcome.to_dict(),'trace':outcome.trace.to_dict(),'admissions':owner.admissions,'dispatches':owner.dispatches})
+    owner=NativeNominationRuntime(candidate,certificate,verifier,policy,validated,deepcopy(request),profile_sha);inv,current=owner.prepare(9010)
+    reject('native-LIVE-authority',lambda:require(owner.interpreter.execute(owner.procedure,inv,certificate,current,mode=ExecutionMode.LIVE).outcome.status.value=='succeeded','LIVE authority rejected'))
+    require(not owner.dispatches,'LIVE negative reached operation dispatch')
+    query=owner.query;owner.store.bodies[query]+=b' '
+    reject('actual-immutable-query-bytes-tamper',lambda:owner.input_for(inv.content_id))
+    guard(profile);save(args.out/'native_negative_controls.json',controls)
+    result={'schema':'ns-original-nomination-independent-audit/v1','passed':True,'positive_cases':positives,'request_and_signature_negatives':negatives,
+        'native_runtime_negative_count':len(controls),'profile_sha256':profile_sha,'run_freeze_sha256':sha((args.run/'freeze.json').read_bytes()),
+        'qualification_summary_sha256':sha((args.run/'summary.json').read_bytes()),'audit_source_sha256':sha(Path(__file__).read_bytes()),
+        'actual_source_change_stale_rejected_fresh_accepted':True,'enclosing_audit_seconds':time.perf_counter()-started,
+        'actual_nonnull_native_parent_descriptor_qualified':True,'well_formed_parent_descriptor_is_not_a_current_store_freshness_check':True,
+        'warm_prime_exact_original_base_only':True,
+        'provider_calls':0,'scorer_calls':0,'scope':'Native current-scorer nomination only; no scorer execution, CALL reuse, registry promotion or production authority.'}
+    save(args.out/'audit.json',result);print(json.dumps({'passed':True,'positives':len(positives),'negatives':len(negatives)+len(controls),'enclosing_audit_seconds':result['enclosing_audit_seconds']}))
+
+if __name__=='__main__':main()

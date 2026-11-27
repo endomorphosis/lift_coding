@@ -1,0 +1,372 @@
+"""Cold replay of explicitly pinned retained metadata; never dispatch a model.
+
+The root supplies the exact input manifest and a fresh private output directory.
+This driver reads no raw prompt, source, native JSONL, or credential file. It
+does not infer an exhaustive dispatch census from a clean stop or reward.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+import math
+import os
+from pathlib import Path
+import re
+import stat
+
+SCHEMA = "retained-terminal-token-evidence-replay@1"
+MANIFEST_SCHEMA = "retained-terminal-token-evidence-inputs@1"
+MAX_FILE_BYTES = 32 * 1024 * 1024
+MAX_TOTAL_BYTES = 128 * 1024 * 1024
+MAX_OUTPUT_BYTES = 8 * 1024 * 1024
+RUNS = ("codex_native", "codex_packet", "grok_identity", "grok_comments", "grok_metadata")
+_ID = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.:/@+-]{0,255}\Z")
+_SHA = re.compile(r"[0-9a-f]{64}\Z")
+
+
+class ReplayRefusal(ValueError):
+    """A closed metadata-custody or population refusal."""
+
+
+def _need(condition, reason):
+    if not condition:
+        raise ReplayRefusal(reason)
+
+
+def _json(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"),
+        ensure_ascii=True, allow_nan=False).encode("utf-8") + b"\n"
+
+
+def _sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def _directory(path):
+    descriptor = os.open("/", os.O_RDONLY | os.O_DIRECTORY)
+    try:
+        for part in path.parts[1:]:
+            child = os.open(part, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=descriptor)
+            os.close(descriptor)
+            descriptor = child
+        return descriptor
+    except BaseException:
+        os.close(descriptor)
+        raise
+
+
+def _capture(row):
+    path = Path(row["path"])
+    parent = _directory(path.parent)
+    try:
+        descriptor = os.open(path.name, os.O_RDONLY | os.O_NONBLOCK | os.O_NOFOLLOW, dir_fd=parent)
+        try:
+            before = os.fstat(descriptor)
+            _need(stat.S_ISREG(before.st_mode) and before.st_nlink == 1
+                and before.st_size == row["bytes"] and stat.S_IMODE(before.st_mode) == row["mode"],
+                "input_file_custody_differs")
+            chunks, size = [], 0
+            while size <= row["bytes"]:
+                chunk = os.read(descriptor, min(1024 * 1024, row["bytes"] + 1 - size))
+                if not chunk:
+                    break
+                chunks.append(chunk)
+                size += len(chunk)
+            after = os.fstat(descriptor)
+            visible = os.stat(path.name, dir_fd=parent, follow_symlinks=False)
+            witness = lambda item: tuple(getattr(item, key) for key in (
+                "st_dev", "st_ino", "st_mode", "st_nlink", "st_size", "st_mtime_ns", "st_ctime_ns"))
+            _need(size == row["bytes"] and witness(before) == witness(after) == witness(visible),
+                "input_changed_during_capture")
+            raw = b"".join(chunks)
+            _need(_sha(raw) == row["sha256"], "input_sha256_differs")
+            return raw, dict(sha256=_sha(raw), bytes=size, mode=stat.S_IMODE(after.st_mode),
+                device=after.st_dev, inode=after.st_ino, mtime_ns=after.st_mtime_ns, ctime_ns=after.st_ctime_ns)
+        finally:
+            os.close(descriptor)
+    finally:
+        os.close(parent)
+
+
+def _pairs(items):
+    result = {}
+    for key, value in items:
+        _need(key not in result, "duplicate_json_key")
+        result[key] = value
+    return result
+
+
+def _decode(raw):
+    def constant(_value):
+        raise ReplayRefusal("nonfinite_json")
+    value = json.loads(raw, object_pairs_hook=_pairs, parse_constant=constant)
+    pending, nodes = [(value, 0)], 0
+    while pending:
+        item, depth = pending.pop()
+        nodes += 1
+        _need(nodes <= 400000 and depth <= 64, "metadata_structure_bound")
+        if type(item) is dict:
+            pending.extend((child, depth + 1) for child in item.values())
+        elif type(item) is list:
+            pending.extend((child, depth + 1) for child in item)
+        elif type(item) is int:
+            _need(item.bit_length() <= 64, "metadata_integer_bound")
+        elif type(item) is float:
+            _need(math.isfinite(item), "nonfinite_json")
+        else:
+            _need(item is None or type(item) in (str, bool), "non_json_metadata")
+    return value
+
+
+def _manifest(value):
+    _need(type(value) is dict and value.get("schema") == MANIFEST_SCHEMA
+        and value.get("metadata_only") is True and type(value.get("inputs")) is list
+        and 6 <= len(value["inputs"]) <= 64, "explicit_metadata_manifest_required")
+    rows, identities, roles, paths = [], set(), set(), set()
+    for supplied in value["inputs"]:
+        _need(type(supplied) is dict and set(supplied) == {"id", "role", "path", "sha256", "bytes", "mode"},
+            "closed_input_pin_required")
+        row = dict(supplied)
+        for key in ("id", "role"):
+            _need(type(row[key]) is str and _ID.fullmatch(row[key]), "bounded_input_identity_required")
+        path = Path(row["path"])
+        _need(type(row["path"]) is str and path.is_absolute() and str(path) == row["path"]
+            and ".." not in path.parts and len(row["path"].encode()) <= 4096,
+            "canonical_input_path_required")
+        _need(path.suffix == ".json" or row["role"].endswith("_reward") and path.name == "reward.txt",
+            "metadata_file_type_required")
+        _need(type(row["sha256"]) is str and _SHA.fullmatch(row["sha256"])
+            and type(row["bytes"]) is int and 1 <= row["bytes"] <= MAX_FILE_BYTES
+            and type(row["mode"]) is int and 0 <= row["mode"] <= 0o777,
+            "exact_input_pin_required")
+        _need(row["id"] not in identities and row["role"] not in roles and row["path"] not in paths,
+            "unique_input_population_required")
+        identities.add(row["id"]); roles.add(row["role"]); paths.add(row["path"])
+        rows.append(row)
+    _need(sum(row["bytes"] for row in rows) <= MAX_TOTAL_BYTES, "aggregate_input_bound")
+    _need({*(name + "_receipt" for name in RUNS), "historical_pair"} <= roles,
+        "required_metadata_roles_missing")
+    return rows
+
+
+def _trial(receipt):
+    _need(type(receipt) is dict and receipt.get("schema") == "terminal-full-supervisor-receipt@1"
+        and receipt.get("arm") == "full" and receipt.get("trial_count") == 1
+        and type(receipt.get("trials")) is list and len(receipt["trials"]) == 1,
+        "original_full_supervisor_receipt_required")
+    trial = receipt["trials"][0]
+    _need(type(trial) is dict and type(trial.get("supervisor")) is dict, "original_supervisor_report_required")
+    return trial, trial["supervisor"]
+
+
+def _reward(value):
+    return value if type(value) in (int, float) and math.isfinite(value) else None
+
+
+def _count(value):
+    return value if type(value) is int and 0 <= value < (1 << 63) else None
+
+
+def _controls(receipt, trial):
+    controls = receipt.get("comparison_controls")
+    declared = controls.get("declared") if type(controls) is dict else None
+    inputs = declared.get("task_input_sha256") if type(declared) is dict else None
+    metadata = (trial.get("agent_context") or {}).get("metadata") or {}
+    archive = metadata.get("runtime_archive_sha256")
+    return dict(declared_controls_present=type(controls) is dict,
+        declared_controls_sha256=_sha(_json(controls)) if type(controls) is dict else None,
+        declared_task_input_population_sha256=_sha(_json(inputs)) if type(inputs) is dict else None,
+        declared_task_input_count=len(inputs) if type(inputs) is dict else None,
+        runtime_archive_sha256=archive if type(archive) is str and _SHA.fullmatch(archive) else None,
+        original_task_inputs_unchanged=(receipt.get("original_task_inputs_unchanged")
+            if type(receipt.get("original_task_inputs_unchanged")) is bool else None),
+        reported_cli_version=receipt.get("cli_version") if receipt.get("cli_version") in ("0.158.0", "1.0.46") else None,
+        reported_reasoning_effort=receipt.get("reasoning_effort") if receipt.get("reasoning_effort") in ("low", "medium", "high") else None,
+        runtime_archive_authenticated=False, task_text_reopened=False,
+        declaration_is_runtime_authentication=False)
+
+
+def _invocation_details(report, observation):
+    details = []
+    for original, projected in zip(report.get("provider_invocations", []),
+            observation["native_invocations"]["observations"], strict=True):
+        diagnostics = (original.get("native_rollout_usage") or {}).get("tool_diagnostics") or {}
+        details.append(dict(invocation_id=projected["invocation_id"], provider=projected["provider"],
+            model=projected["model"], phase=projected["phase"], status=projected["status"],
+            initial_rendered_prompt_bytes=projected["model_prompt"]["bytes"],
+            native_identity_kind=projected["native_usage"]["identity_kind"],
+            native_session_identity_sha256=projected["native_usage"]["session_id_sha256"],
+            native_scope_complete=projected["native_usage"]["complete"],
+            normalized_native_counts=projected["native_usage"]["normalized_counts"],
+            reported_native_turns=_count((original.get("usage") or {}).get("num_turns")),
+            observed_tool_call_events=_count(diagnostics.get("observed_tool_call_events")),
+            observed_tool_output_events=_count(diagnostics.get("observed_tool_output_events")),
+            tool_event_counts_complete=diagnostics.get("tool_event_counts_complete") is True,
+            reported_turns_are_independent_provider_request_counts=False))
+    return details
+
+
+def _outcome(prefix, trial, report, parsed, pins):
+    reward = _reward(trial.get("reward", {}).get("reward"))
+    result_role, reward_role = prefix + "_result", prefix + "_reward"
+    result_reward, file_reward, result_join = None, None, None
+    if result_role in parsed:
+        result = parsed[result_role]
+        _need(type(result) is dict, "harbor_result_mapping_required")
+        result_reward = _reward((result.get("verifier_result") or {}).get("rewards", {}).get("reward"))
+        result_join = trial.get("native_result_sha256") == pins[result_role]["sha256"]
+        _need(result_join, "original_harbor_result_sha256_differs")
+        _need(result.get("trial_name") == trial.get("trial"), "original_harbor_trial_differs")
+        _need(result_reward == reward, "original_harbor_reward_differs")
+    if reward_role in parsed:
+        raw = parsed[reward_role]
+        _need(raw.strip() in (b"0", b"1"), "literal_verifier_reward_required")
+        file_reward = int(raw.strip())
+        _need(file_reward == reward, "literal_verifier_reward_differs")
+    return dict(official_reward=reward, harbor_result_reward=result_reward,
+        literal_verifier_reward=file_reward, harbor_result_hash_join=result_join,
+        supervisor_task_completed=report.get("task_completed") is True,
+        accepted_observed=reward == 1 and report.get("task_completed") is True,
+        acceptance_verified=False)
+
+
+def _publish(output, result):
+    raw = _json(result)
+    _need(len(raw) <= MAX_OUTPUT_BYTES, "output_projection_bound")
+    directory = _directory(output)
+    try:
+        info = os.fstat(directory)
+        _need(info.st_uid == os.getuid() and stat.S_IMODE(info.st_mode) == 0o700,
+            "private_output_directory_required")
+        descriptor = os.open("report.json", os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600, dir_fd=directory)
+        try:
+            remaining = memoryview(raw)
+            while remaining:
+                count = os.write(descriptor, remaining)
+                _need(count > 0, "output_write_refused")
+                remaining = remaining[count:]
+            os.fsync(descriptor)
+        finally:
+            os.close(descriptor)
+        os.fsync(directory)
+    finally:
+        os.close(directory)
+    return dict(schema=SCHEMA, report_sha256=_sha(raw), report_bytes=len(raw),
+        qualified=result["qualified"], provider_calls=0, raw_content_exported=False)
+
+
+def run_experiment(output_dir, evidence_manifest):
+    """Replay the root's exact metadata population using genuine public owners."""
+    rows = _manifest(evidence_manifest)
+    output = Path(output_dir)
+    _need(output.is_absolute() and ".." not in output.parts, "absolute_output_directory_required")
+    before, after, parsed, pins = {}, {}, {}, {}
+    result = dict(schema=SCHEMA, qualified=False, failure_reason=None, inputs_before=before,
+        inputs_after=after, all_inputs_unchanged=False, runs={}, strict_pair=None,
+        evidence_manifest_canonical_sha256=_sha(_json(evidence_manifest)),
+        historical_declared_pair=None, historical_declared_pair_recomputed=None,
+        strict_pair_independent_dispatch_census_verified=False,
+        provider_calls=0, source_files_read=0, raw_prompt_files_read=0, native_jsonl_files_read=0,
+        credentials_read=False, original_receipts_modified=False, raw_content_exported=False,
+        tokenizer_recounts_performed=False, task_acceptance_verified=False,
+        campaign_usage_complete=None, causal_savings_established=False,
+        billing_total_verified=False, native_cumulative_cap_enforced=False,
+        whole_task_token_savings=None, completion_authority=False)
+    error = None
+    try:
+        for row in rows:
+            raw, observation = _capture(row)
+            before[row["id"]] = observation
+            pins[row["role"]] = observation
+            parsed[row["role"]] = raw if row["role"].endswith("_reward") else _decode(raw)
+        from benchmarks.agent_supervisor.container_coding import terminal_context_delivery_observation as delivery
+        from benchmarks.agent_supervisor.container_coding.native_usage_accounting import provider_receipt_collection_observation
+        from ipfs_accelerate_py.agent_supervisor.runtime.semantic_decision_usage import semantic_decision_accounting_inputs
+        from ipfs_accelerate_py.agent_supervisor.runtime.context_projection_comparison import compare_context_projection
+        from ipfs_accelerate_py.agent_supervisor.runtime.context_delivery_accounting import summarize_invocations
+        original_reports, native_inputs, outcomes = {}, {}, {}
+        for prefix in RUNS:
+            receipt = parsed[prefix + "_receipt"]
+            trial, report = _trial(receipt)
+            original_reports[prefix] = report
+            retained, coverage = semantic_decision_accounting_inputs(report)
+            native_inputs[prefix] = retained
+            outcomes[prefix] = _outcome(prefix, trial, report, parsed, pins)
+            collection = provider_receipt_collection_observation(report.get("provider_receipt_collection"))
+            observed = delivery.collect(report=report)  # ORIGINAL object; never fill absent census fields.
+            expected_model = "gpt-5.6-sol" if prefix.startswith("codex_") else "grok-4.7"
+            expected_provider = "codex_cli" if prefix.startswith("codex_") else "grok_cli"
+            _need(receipt.get("model") == expected_model and all(row.get("provider") == expected_provider
+                and row.get("model") == expected_model for row in retained), "retained_run_route_differs")
+            result["runs"][prefix] = dict(original_schema=receipt["schema"], original_arm=receipt["arm"],
+                native_harness_baseline=False, official_outcome=outcomes[prefix],
+                provider=expected_provider, declared_controls=_controls(receipt, trial),
+                original_task_inputs_unchanged=receipt.get("original_task_inputs_unchanged") is True,
+                model=receipt.get("model") if receipt.get("model") in ("gpt-5.6-sol", "grok-4.7") else None,
+                wrapper_invocation_count=len(report.get("provider_invocations", [])),
+                joined_native_receipt_count=len(retained), semantic_coverage=coverage,
+                explicit_no_unreceipted_attempt=report.get("unreceipted_provider_attempt") is False,
+                collection_metadata_present="provider_receipt_collection" in report,
+                collection_observation=collection, native_observation=observed,
+                invocation_observations=_invocation_details(report, observed),
+                worker_stop_succeeded=(report.get("stop") or {}).get("status") == "succeeded",
+                worker_old_tree_fenced=((report.get("stop") or {}).get("data") or {}).get("old_tree_fenced") is True,
+                observed_remaining_processes=report.get("remaining_processes") if type(report.get("remaining_processes")) is int else None,
+                cleanup_is_dispatch_census=False)
+        result["supplied_native_population"] = summarize_invocations(
+            [row for prefix in RUNS for row in result["runs"][prefix]["native_observation"]["native_invocations"]["observations"]],
+            unreceipted_provider_attempt=None)
+        result["supplied_native_population_scope"] = "five explicitly supplied retained runs; exhaustive task population unknown"
+        historical = parsed["historical_pair"]
+        _need(type(historical) is dict and historical.get("schema") == "supervisor-context-projection-comparison@1"
+            and type(historical.get("assigned_tasks")) is list and len(historical["assigned_tasks"]) == 1,
+            "historical_paired_binding_required")
+        assigned = historical["assigned_tasks"]
+        binding = assigned[0]
+        _need(type(binding) is dict and set(binding) == {"task_id", "provider", "model", "tree_id", "acceptance_binding"}
+            and binding.get("task_id") == "fix-code-vulnerability" and binding.get("provider") == "codex_cli"
+            and binding.get("model") == "gpt-5.6-sol", "historical_task_route_differs")
+        arms = []
+        for prefix in RUNS[:2]:
+            _need(parsed[prefix + "_receipt"].get("task") == binding["task_id"], "original_task_differs")
+            accepted = outcomes[prefix]["accepted_observed"]
+            attempts = [dict(attempt_id=f"{prefix}-observation-{index}-{row['invocation_id']}",
+                kind=row.get("phase", row.get("purpose", "coding")), receipt=row)
+                for index, row in enumerate(native_inputs[prefix])]
+            arms.append([{**binding, "outcome": "accepted" if accepted else "failed", "accepted": accepted, "attempts": attempts}])
+        local_conditions = all(result["runs"][prefix]["explicit_no_unreceipted_attempt"]
+            and result["runs"][prefix]["semantic_coverage"]["authoritative_usage_coverage_complete"]
+            and result["runs"][prefix]["native_observation"]["native_invocations"]["complete_supplied_native_usage"]
+            for prefix in RUNS[:2])
+        result["strict_pair"] = compare_context_projection(assigned_tasks=assigned,
+            baseline=arms[0], candidate=arms[1], population_complete=False)
+        result["local_coverage_conditions_satisfied"] = bool(local_conditions)
+        result["historical_declared_pair_recomputed"] = compare_context_projection(assigned_tasks=assigned,
+            baseline=arms[0], candidate=arms[1], population_complete=historical.get("population_complete_declared") is True)
+        metrics = historical.get("paired_metrics")
+        _need(type(metrics) is dict and metrics == result["historical_declared_pair_recomputed"]["paired_metrics"],
+            "historical_declared_metrics_not_reproduced")
+        result["historical_declared_pair"] = dict(input_sha256=pins["historical_pair"]["sha256"],
+            population_complete_declared=historical.get("population_complete_declared") is True,
+            paired_metrics=metrics, declaration_reproduced=True, independent_dispatch_census_verified=False,
+            descriptive_only=True, causal_claim=False, billing_total_verified=False,
+            campaign_usage_complete=None)
+        result["qualified"] = True
+    except Exception as caught:
+        error = caught
+        result["failure_reason"] = caught.args[0] if type(caught) is ReplayRefusal else "retained_evidence_replay_failed"
+    finally:
+        for row in rows:
+            try:
+                _, observation = _capture(row)
+                after[row["id"]] = observation
+            except Exception:
+                after[row["id"]] = None
+        result["all_inputs_unchanged"] = len(before) == len(rows) and before == after
+        result["qualified"] = result["qualified"] and result["all_inputs_unchanged"]
+        if not result["all_inputs_unchanged"]:
+            result["failure_reason"] = "closing_input_custody_differs"
+    summary = _publish(output, result)
+    if error is not None or not result["qualified"]:
+        raise ReplayRefusal(result["failure_reason"]) from None
+    return summary

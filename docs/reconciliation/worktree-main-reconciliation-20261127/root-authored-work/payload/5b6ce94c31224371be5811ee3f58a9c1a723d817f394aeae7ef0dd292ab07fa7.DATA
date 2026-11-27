@@ -1,0 +1,99 @@
+#!/usr/bin/env python3
+"""Independently reread all persisted v13 blocks and frozen worker evidence."""
+import hashlib
+import json
+from pathlib import Path
+import sqlite3
+
+HERE = Path(__file__).resolve().parent
+OUT = HERE / "results_v13_full_pyparsing_incremental"
+def sha(body): return hashlib.sha256(body).hexdigest()
+def read(path): return json.loads(path.read_text())
+
+def main():
+    summary = read(OUT / "summary.json")
+    frozen = read(OUT / "freeze.json")
+    assert summary["freeze_sha256"] == sha((OUT / "freeze.json").read_bytes())
+    assert frozen["driver_sha256"] == sha((HERE / "full_pyparsing_incremental_v13.py").read_bytes())
+    assert frozen["worker_bound_seconds"] == 900
+    profile = read(OUT / "runtime_source_manifest.json")
+    assert sha((OUT / "runtime_source_manifest.json").read_bytes()) == frozen["runtime_manifest_sha256"]
+    assert all(sha(Path(path).read_bytes()) == digest for path, digest in profile["files"].items())
+    assert summary["provider_calls"] == summary["raw_substitutions"] == 0
+    inputs = {"freeze.json": sha((OUT / "freeze.json").read_bytes()), "summary.json": sha((OUT / "summary.json").read_bytes())}
+    for name, digest in frozen["source_manifest_sha256"].items():
+        assert sha((OUT / name).read_bytes()) == digest
+        inputs[name] = digest
+    previous = read(OUT / "baseline_source.json"); changed = read(OUT / "changed_source.json")
+    assert set(previous["files"]) == set(changed["files"])
+    assert previous["opaque_symlinks"] == changed["opaque_symlinks"]
+    altered = [p for p in previous["files"] if previous["files"][p] != changed["files"][p]]
+    assert altered == [frozen["mutation"]["path"]]
+    process_receipts = []
+    for role in frozen["roles"]:
+        path = OUT / role / "process.json"
+        if path.exists():
+            receipt = read(path)
+            assert receipt["bound_seconds"] == 900
+            assert receipt["command"][-2:] == ["--worker", role]
+            assert receipt.get("timed_out") or isinstance(receipt.get("returncode"), int)
+            inputs[str(path.relative_to(OUT))] = sha(path.read_bytes())
+            process_receipts.append(receipt)
+    complete = len(process_receipts) == 3 and all(p["returncode"] == 0 for p in process_receipts)
+    assert complete == summary["complete"]
+    results = {}
+    block_count = byte_count = 0
+    if complete:
+        for role in frozen["roles"]:
+            folder = OUT / role; result = read(folder / "result.json")
+            assert result["all_checks_passed"] and result["full_scope_scan"]
+            assert result["regular_files"] == 286 and result["python_files"] == 154
+            assert result["opaque_symlinks"] == 1
+            assert result["symbols"] == 3957 and result["edges"] == 55859
+            assert result["previous_state_and_bundle_actually_supplied"] == (role == "changed_incremental")
+            for name, digest in result["artifact_sha256"].items():
+                assert sha((folder / name).read_bytes()) == digest
+                inputs[str((folder / name).relative_to(OUT))] = digest
+            for name in ("result.json", "stages.jsonl", "stdout.log", "stderr.log"):
+                inputs[str((folder / name).relative_to(OUT))] = sha((folder / name).read_bytes())
+            results[role] = result
+        base = results["baseline"]; cold = results["changed_cold"]; inc = results["changed_incremental"]
+        assert base["state_cid"] == frozen["expected_baseline_state_cid"]
+        assert base["root_cid"] == frozen["expected_baseline_root_cid"]
+        assert cold["state_cid"] == inc["state_cid"] != base["state_cid"]
+        assert cold["root_cid"] == inc["root_cid"] != base["root_cid"]
+        assert len(base["source_controls"]) == 1 and len(cold["source_controls"]) == 4 and len(inc["source_controls"]) == 5
+        assert "native_restore_and_full_reverify" in {s["stage"] for s in inc["stages"]}
+        parent = read(OUT / "changed_incremental/parent_binding.json")
+        assert parent["state_cid"] == base["state_cid"] and parent["root_cid"] == base["root_cid"]
+        for name, digest in parent["parent_artifact_sha256"].items():
+            assert sha((OUT / "baseline" / name).read_bytes()) == digest
+        for name in ("state.json", "root.json"):
+            assert (OUT / "changed_cold" / name).read_bytes() == (OUT / "changed_incremental" / name).read_bytes()
+        a = sqlite3.connect((OUT / "changed_cold/blocks.sqlite").as_uri() + "?mode=ro", uri=True)
+        b = sqlite3.connect((OUT / "changed_incremental/blocks.sqlite").as_uri() + "?mode=ro", uri=True)
+        aa = a.execute("SELECT cid,body FROM blocks ORDER BY cid")
+        bb = b.execute("SELECT cid,body FROM blocks ORDER BY cid")
+        while True:
+            left, right = aa.fetchone(), bb.fetchone()
+            assert left == right
+            if left is None: break
+            block_count += 1; byte_count += len(left[1])
+        a.close(); b.close()
+        assert block_count == cold["blocks"] == inc["blocks"] == summary["blocks_compared"]
+        assert byte_count == cold["block_bytes"] == inc["block_bytes"] == summary["block_bytes_compared"]
+    result = {"schema": "ns-full-pyparsing-incremental-independent-audit/v13",
+              "qualification_complete": complete, "all_audit_checks_passed": True,
+              "runtime_source_files_rehashed": len(profile["files"]),
+              "actual_block_rows_compared": block_count, "actual_block_bytes_compared": byte_count,
+              "source_control_cases": sum(len(r["source_controls"]) for r in results.values()),
+              "worker_results": results, "processes": process_receipts, "input_sha256": inputs,
+              "provider_calls": 0, "raw_substitutions": 0,
+              "auditor_sha256": sha(Path(__file__).read_bytes()),
+              "scope": "One full public repository with one authored comment-only revision under exact frozen v5 runtime; no execution/proof reuse or repair/token advantage."}
+    target = HERE / "full_pyparsing_incremental_v13_audit.json"
+    if target.exists(): raise SystemExit("preserve completed audit")
+    target.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
+    print(json.dumps({"complete": complete, "block_rows_compared": block_count, "source_controls": result["source_control_cases"]}))
+
+if __name__ == "__main__": main()

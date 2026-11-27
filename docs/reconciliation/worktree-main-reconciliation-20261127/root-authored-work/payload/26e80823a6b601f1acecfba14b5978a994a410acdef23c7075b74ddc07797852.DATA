@@ -1,0 +1,58 @@
+"""Public source/carry and exact-wire controls; never dispatch a model or grader."""
+import argparse,hashlib,importlib.util,json,sys
+from pathlib import Path
+H=Path(__file__).resolve().parent;sys.path.insert(0,str(H));import repository_runtime_v1 as R;import repository_retrieval_v1 as Q
+spec=importlib.util.spec_from_file_location('qualified_retrieval_caller',H/'repository_controller_v3.py');controller=importlib.util.module_from_spec(spec);spec.loader.exec_module(controller);C=controller.C
+
+def main():
+    parser=argparse.ArgumentParser();parser.add_argument('--profile',type=Path,required=True);parser.add_argument('--output',type=Path,required=True);args=parser.parse_args();profile=json.loads(args.profile.read_text());run=args.profile.resolve().parent;out=args.output.resolve();out.mkdir(exist_ok=False);checks=[];observations=[];provider=json.loads(Path(profile['provider']['profile_path']).read_text())
+    (out/'frozen_sources').mkdir()
+    for name in ['repository_controller_v3.py','repository_retrieval_v1.py','repository_runtime_v1.py',Path(__file__).name]:(out/'frozen_sources'/name).write_bytes((H/name).read_bytes())
+    def check(name,value):
+        checks.append({'name':name,'passed':bool(value)})
+        if not value:raise AssertionError(name)
+    def rejects(name,operation):
+        try:operation()
+        except (ValueError,TypeError):check(name,True)
+        else:check(name,False)
+    def wire(objective,history,current,conflicts,feedback=None):
+        return lambda sources:C.canonical({'model':provider['model'],'messages':controller.messages_for(objective,sources,history,current,conflicts,feedback),'max_tokens':provider['max_output_tokens'],'reasoning_effort':provider['reasoning_effort'],'stream':False,'response_format':provider['response_format']})
+    for event in profile['events']:
+        directory=Path(profile['output_root'])/'events'/event['event_id'];tree=directory/'input_tree';before=R.inventory(tree);task=profile['tasks'][event['instance_id']];objective=R.text(task['objective_path']);prompt=json.loads((directory/'prompt_0.json').read_text());body=json.loads(prompt['messages'][1]['content']);conflicts=body['merge_conflicts'];serialize=wire(objective,body['public_history'],body['current_check'],conflicts)
+        selected=Q.select(tree,objective,conflicts,3,48000,65536,serialize)
+        check(event['event_id']+':whole_wire_admitted',selected['admitted'] and selected['source_count']<=3 and selected['source_bytes']<=48000 and selected['wire_bytes']<=65536)
+        check(event['event_id']+':mandatory_complete',set(conflicts)<={s['path'] for s in selected['sources']})
+        for source in selected['sources']:check(event['event_id']+':exact:'+source['path'],source['source'].encode()==(tree/source['path']).read_bytes() and source['sha256']==R.sha((tree/source['path']).read_bytes()))
+        check(event['event_id']+':objective_exact',objective.encode()==Path(task['objective_path']).read_bytes() and R.sha(objective.encode())==task['objective_sha256'] and '\r\n' in objective)
+        check(event['event_id']+':deterministic',selected==Q.select(tree,objective,conflicts,3,48000,65536,serialize))
+        check(event['event_id']+':source_unchanged',before==R.inventory(tree))
+        if not conflicts:check(event['event_id']+':unconflicted_selection_identity',selected['sources']==R.lexical_sources(tree,objective,3,48000))
+        oldwire={'model':provider['model'],'messages':prompt['messages'],'max_tokens':provider['max_output_tokens'],'reasoning_effort':provider['reasoning_effort'],'stream':False,'response_format':provider['response_format']}
+        observations.append({'event_id':event['event_id'],'source_tree_sha256':before['tree_sha256'],'conflicts':conflicts,'old_wire_bytes':len(C.canonical(oldwire)),'new_wire_bytes':selected['wire_bytes'],'source_bytes':selected['source_bytes'],'source_paths':[s['path'] for s in selected['sources']],'wire_sha256':selected['wire_sha256']})
+        (out/(event['event_id']+'_request.json')).write_bytes(serialize(selected['sources'])+b'\n')
+    old=profile['tasks']['psf__requests-5414'];new=profile['tasks']['psf__requests-6028'];oldroot=Path(old['source_root']);newroot=Path(new['source_root']);name='requests/models.py';source=R.text(oldroot/name);changed=source.replace('from .compat import (','from .compat import (\n# Public qualification marker forcing an upstream merge conflict.',1)
+    check('authored_existing_public_edit',changed!=source);accepted=out/'authored_accepted';R.materialize(oldroot,accepted,R.patch_for(oldroot,[{'path':name,'source':changed}]))
+    parent={'accepted':True,'instance_id':'psf__requests-5414','accepted_tree_path':str(accepted),'accepted_tree_sha256':R.inventory(accepted)['tree_sha256']};target=out/'authored_merged';target.mkdir();transition=R.advance_source(profile,{'instance_id':'psf__requests-6028'},parent,target/'tree');check('actual_git_source_carry',transition['kind']=='actual_git_three_way_merge');check('authored_accepted_marker_retained','Public qualification marker' in R.text(target/'tree'/name))
+    serialize=wire(R.text(new['objective_path']),[],{'status':'merge_conflict','passed':False},transition['conflicts']);selected=Q.select(target/'tree',R.text(new['objective_path']),transition['conflicts'],3,48000,65536,serialize);check('authored_merge_wire_admitted',selected['admitted']);check('authored_conflicts_never_dropped',set(transition['conflicts'])<={s['path'] for s in selected['sources']})
+    failed=out/'failed_parent';advance=R.advance_source(profile,{'instance_id':'psf__requests-6028'},{'accepted':False},failed);check('failed_parent_only_public_update',advance['prior_outcome_preserved'] and R.inventory(failed)==R.inventory(newroot))
+    fixture=out/'boundary_fixture';(fixture/'requests').mkdir(parents=True)
+    for index in range(4):(fixture/'requests'/('m'+str(index)+'.py')).write_bytes(('x = '+repr('λ"\\\r\n'+str(index))+'\n').encode())
+    names=['requests/m'+str(index)+'.py' for index in range(4)];serialize=wire('public Ω issue\r\n',[],{'status':'merge_conflict','passed':False},names[:3]);mandatory=Q.sources_for(fixture,names[:3]);raw=sum(len(s['source'].encode()) for s in mandatory);size=len(serialize(mandatory))
+    exact=Q.select(fixture,'public',names[:3],3,raw,size,serialize);check('all_three_exact_bounds',exact['admitted'] and exact['source_count']==3 and exact['source_bytes']==raw and exact['wire_bytes']==size)
+    check('raw_bound_plus_one_rejected',not Q.select(fixture,'public',names[:3],3,raw-1,size,serialize)['admitted']);check('wire_bound_plus_one_rejected',not Q.select(fixture,'public',names[:3],3,raw,size-1,serialize)['admitted']);check('four_mandatory_rejected',not Q.select(fixture,'public',names,3,48000,65536,serialize)['admitted'])
+    duplicate=Q.select(fixture,'public',[names[0],names[0]],3,48000,65536,serialize);check('mandatory_and_lexical_deduplicated',len({s['path'] for s in duplicate['sources']})==len(duplicate['sources']) and duplicate['mandatory_paths']==[names[0]])
+    check('utf8_byte_count_not_character_count',sum(len(s['source']) for s in mandatory)<raw);check('json_escape_overhead_measured',size>raw)
+    expanded=Q.expand(fixture,[names[1]],[names[0]],65536,serialize);check('expansion_retains_complete_conflict',expanded['admitted'] and {s['path'] for s in expanded['sources']}==set(names[:2]));check('expansion_rejected_without_truncation',not Q.expand(fixture,[names[1]],[names[0]],expanded['wire_bytes']-1,serialize)['admitted'])
+    inflated=wire('public Ω issue\r\n',[],{'status':'merge_conflict','passed':False},names[:1],{'assistant_output':'x'*65536});check('feedback_fixed_content_rejected',not Q.select(fixture,'public',names[:1],3,48000,65536,inflated)['admitted'])
+    exactwire=wire('x'*(65536-len(wire('',[],{'status':'merge_conflict'},names[:3])(mandatory))),[],{'status':'merge_conflict'},names[:3]);check('actual_65536_wire_admitted',Q.select(fixture,'public',names[:3],3,48000,65536,exactwire)['wire_bytes']==65536);check('actual_65536_plus_one_wire_rejected',not Q.select(fixture,'public',names[:3],3,48000,65535,exactwire)['admitted'])
+    large=out/'raw_boundary_fixture';(large/'requests').mkdir(parents=True);(large/'requests/large.py').write_bytes(b'#'+b'x'*47998+b'\n');large_wire=wire('public',[],{'status':'merge_conflict'},['requests/large.py']);check('actual_48000_raw_admitted',Q.select(large,'public',['requests/large.py'],3,48000,65536,large_wire)['admitted']);(large/'requests/large.py').write_bytes(b'#'+b'x'*47999+b'\n');check('actual_48001_raw_rejected',not Q.select(large,'public',['requests/large.py'],3,48000,65536,large_wire)['admitted'])
+    (fixture/'requests/link.py').symlink_to('m0.py')
+    for value in ['requests/missing.py','requests/link.py','requests/../setup.py','tests/a.py','/tmp/a.py']:
+        rejects('invalid_mandatory:'+value,lambda value=value:Q.select(fixture,'public',[value],3,48000,65536,serialize))
+    rejects('duplicate_expansion',lambda:Q.expand(fixture,[names[0],names[0]],[],65536,serialize))
+    rejects('malformed_expansion_path',lambda:Q.expand(fixture,[{}],[],65536,serialize));rejects('nonpositive_expansion_bound',lambda:Q.expand(fixture,[names[0]],[],0,serialize))
+    linked=out/'linked_optional_fixture';linked.mkdir();(linked/'requests').symlink_to(fixture/'requests',target_is_directory=True);rejects('optional_symlink_ancestor',lambda:Q.select(linked,'public',[],3,48000,65536,serialize))
+    trap='HIDDEN_ASSERTION_SENTINEL_7320';safe=controller.messages_for('public',[],[],{'status':'completed','passed':False,'designated_total':1,'designated_status_counts':{'FAILED':1},'test_names':[trap],'reference_patch':trap,'log':trap});check('hidden_fields_excluded_from_wire',trap not in C.canonical(safe).decode())
+    summary={'schema':'ns-repository-mandatory-retrieval-qualification@1','passed':True,'checks':checks,'observations':observations,'implementation_sources':{str(H/name):R.sha((H/name).read_bytes()) for name in ['repository_controller_v3.py','repository_retrieval_v1.py','repository_runtime_v1.py']},'qualification_source_sha256':R.sha(Path(__file__).read_bytes()),'prior_cohort_profile_sha256':R.sha(args.profile.read_bytes()),'provider_calls':0,'native_grader_calls':0,'scope':'Offline admission controls on complete public prior-cohort source states plus authored boundary/carry fixtures. Prior failures remain unchanged; no new repair success is claimed.'}
+    (out/'summary.json').write_text(json.dumps(summary,indent=2,sort_keys=True)+'\n');print(json.dumps({'passed':True,'checks':len(checks),'observations':observations,'provider_calls':0,'native_grader_calls':0}))
+if __name__=='__main__':main()

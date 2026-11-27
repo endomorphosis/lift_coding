@@ -1,0 +1,29 @@
+"""A real equivalent source rewrite; old exact source bindings must invalidate."""
+def run(operation, payload, maximum):
+    values = payload['values']
+    if operation == 'RUN_SELECTED_TESTS':
+        try:
+            total = 0
+            for item in values:
+                total += item
+            return total <= payload['budget']
+        except (TypeError, ValueError):
+            return False
+    if operation == 'RUN_STATIC_ANALYSIS':
+        try:
+            for item in values:
+                if item < 0 or item > maximum:
+                    return False
+            return True
+        except (TypeError, ValueError):
+            return False
+    if operation == 'RUN_TYPE_CHECK':
+        for item in values:
+            if type(item) is not int:
+                return False
+        return True
+    if operation == 'RUN_ADVERSARIAL_ASSURANCE':
+        return isinstance(values, list) and type(payload['budget']) is int
+    if operation == 'CHECK_SCOPE':
+        return set(payload) == {'values', 'budget'}
+    raise ValueError('operation unavailable in bounded operation catalog')

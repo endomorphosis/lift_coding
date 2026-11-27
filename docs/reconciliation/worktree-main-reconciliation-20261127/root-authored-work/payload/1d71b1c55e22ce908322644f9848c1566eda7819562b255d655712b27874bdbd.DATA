@@ -1,0 +1,77 @@
+# Native proof over accepted controller history
+
+This development profile joins the existing honest v3 archive circuit to the
+actual accepted native history of `development-v3-attempt2`. It follows the
+native generation-3 pointer through its four accepted seals, each with five
+required receipt units. The original controller's stale unaccepted branch is
+not included. Its separate ordinary trajectory is not pooled into this proof.
+
+The producer and a fresh consumer use native Kit verified reads and the
+existing full/delta integrity-admission code on separate exact archive clones.
+They reconstruct receipts from the original immutable local effect evidence,
+check source and parent bindings, and verify the complete required unit sets.
+The original store and ledger remain unchanged. This reader does not rerun the
+original behavioral checks: their truth still depends on the original trusted
+local execution. This is an archive-consumer integration, not a theorem that
+tests executed correctly or a production trust admission.
+
+Each canonical event commits its accepted seal/parent, source and original
+binding, complete receipt-CID map and complete verified pack digest. Its SHA256
+digest is passed to the standard four-slot v3 circuit. The native relation uses
+SHA256 leaves/parents and a scalar-reduced public root. The added consumer
+therefore checks the externally expected full root bytes, count, accepted
+pointer, chain, binary and verifying key before native verification. The
+already retained scalar-alias limitation still applies to a raw proof alone.
+
+`run-v1/freeze.json` pins the selected chain, original archive/profile/ledger,
+reader/service and existing source-built backend/keys before the run. The
+statement is frozen after native source admission and before honest proving.
+Only the original standard v3 binary is executed. The stopped custom v2
+investigation is not imported or resumed.
+
+The single observation completes with one honest proof and one runtime native
+pairing verification. A separate audit adds one fresh verification, as allowed
+by the freeze. No model or new behavioral-scorer calls occur.
+
+| Observed work | Seconds |
+| --- | ---: |
+| Producer native archive read | 0.325531 |
+| Fresh consumer native archive read | 0.342170 |
+| Honest proof generation | 12.617511 |
+| Runtime native verification | 0.006725 |
+| Full measured driver | 14.749495 |
+| Additional audit verification | 0.006085 |
+
+The measured driver includes source/key/archive hashing, clones, reads, proof,
+verification and mutation controls. The listed runtime phases are nested in
+that driver interval and are not added again. Earlier backend compilation,
+the 7.810198-second original key setup, historical controller work and the later
+audit are outside that interval. This is one shared-host observation with
+existing development keys. It establishes no direct-hashing speed advantage,
+execution reuse, provider-token savings or amortized deployment benefit.
+
+The proof JSON is 1,484 bytes. The source archive has 69 files / 2,010,722 bytes;
+this includes other retained store records, whereas the selected proof covers
+only its four accepted native events. Small proof bytes do not replace the
+source/receipt custody the consumer still reads. The 154,403,632-byte proving
+key and 648-byte verifying key are existing separately pinned setup artifacts.
+
+All seven prospectively listed mutation controls reject: missing or corrupt
+receipt bytes, incomplete leaf inventory, stale parent, reordered events,
+changed event source commitment and changed full root. The first four execute
+the actual native reader and preserve their specific rejection errors; the last
+three are rejected by exact expected-statement binding before pairing. These
+are bounded controls, not a general soundness rate.
+
+`validate.py` recomputes event digests and the complete four-leaf Merkle root,
+checks native read results/source imports and exact keys, checks specific
+mutation failures, verifies unchanged original state and performs the second
+actual pairing check. Its 218 checks pass; 34 observed source files are copied
+to `run-v1/audited_source_archive/`. Cryptographic verification uses the same
+native backend, not an independently implemented verifier.
+
+The execution and audit are retained in `run-v1/{freeze,statement_freeze,
+statement,events,summary,audit}.json`, with native commands and full process
+outputs in `invocations/` and `reads/`. The scripts intentionally refuse to
+overwrite the completed run. Another measurement requires an unused output
+directory and a new recorded freeze; the old run must remain unchanged.

@@ -1,0 +1,184 @@
+"""Exact-byte preparation of existing native integer IR and logic projections.
+
+This prepares the native closed integer-offset lowering and its Lean source.
+It runs no checker or target code. A caller-supplied head is structurally
+validated, without establishing catalog custody, currentness, or proof origin.
+"""
+from __future__ import annotations
+
+import ast
+import codecs
+from functools import wraps
+import hashlib
+import importlib
+import io
+import json
+import sys
+import tokenize
+
+
+SCHEMA = "terminal-source-ir-projection@1"
+MAX_JSON_BYTES = 4 * 1024**2
+FINITE_INPUTS = (-2, -1, 0, 1, 2)
+AUTHORITY = {name: False for name in (
+    "proof_authority", "execution_authority", "completion_authority", "mutation_authority",
+    "source_semantics_verified", "runtime_behavior_verified", "source_equivalence_proved",
+    "cpython_equivalence_proved", "source_parser_correctness_proved",
+    "source_origin_proved", "current_head_verified", "catalog_custody_verified",
+    "kernel_checked", "source_ast_lowering_proved", "native_target_correspondence_proved",
+    "requested_model_theorem_proved", "training_executed", "training_convergence_proved",
+    "whole_program_semantics_verified", "source_body_executed", "checker_executed",
+)}
+
+
+class SourceIRProjectionError(ValueError):
+    """The exact source, native projection, or selected custody differs."""
+
+
+def _require(condition, message):
+    if not condition:
+        raise SourceIRProjectionError(message)
+
+
+def _wire(value):
+    from .codebase_ir_metadata import _json
+    raw = _json(value)
+    _require(len(raw) <= MAX_JSON_BYTES, "projection JSON byte bound exceeded")
+    return raw
+
+
+def _without_metadata(function):
+    @wraps(function)
+    def wrapped(*args, **kwargs):
+        from ipfs_accelerate_py.agent_supervisor.runtime.supervisor_meta_index import public_replay_without_metadata
+        with public_replay_without_metadata():
+            return function(*args, **kwargs)
+    return wrapped
+
+
+def _source_preflight(source, maximum):
+    _require(type(source) is bytes and 0 < len(source) <= maximum,
+             "bounded nonempty exact source bytes required")
+    try:
+        detected, _ = tokenize.detect_encoding(io.BytesIO(source).readline)
+        canonical = codecs.lookup(detected).name
+    except (LookupError, SyntaxError, UnicodeError) as error:
+        raise SourceIRProjectionError("invalid Python source encoding") from error
+    _require(canonical in {"utf-8", "ascii"}, "only canonical UTF8 or ASCII source encoding is admitted")
+    try:
+        original = ast.parse(source, type_comments=True)
+        decoded = source.decode("ascii")
+        reconstructed = ast.parse(decoded, type_comments=True)
+    except (SyntaxError, UnicodeError, ValueError, RecursionError) as error:
+        raise SourceIRProjectionError("source is outside the exact ASCII Python grammar") from error
+    original_dump = ast.dump(original, include_attributes=True)
+    reconstructed_dump = ast.dump(reconstructed, include_attributes=True)
+    _require(original_dump == reconstructed_dump, "original-byte and decoded source ASTs differ")
+    return {"schema": "terminal-source-decode-check@1", "detected_encoding": detected,
+        "canonical_encoding": canonical, "original_byte_ast_parsed": True,
+        "decoded_ascii_ast_parsed": True, "original_and_decoded_ast_equal": True,
+        "ast_sha256": hashlib.sha256(original_dump.encode("utf-8")).hexdigest(),
+        "python_parser_correctness_proved": False, "physical_source_origin_proved": False}
+
+
+def _families(compiled, family, content):
+    # Construction independently replays the complete native compilation.
+    # Only the finite TLA projection may be unavailable for an otherwise valid
+    # 64-bit mathematical offset; this must not erase the native integer model.
+    bundle = family.CodebaseFamilyBundle(compiled, FINITE_INPUTS)
+    sources = {"smt_lia": bundle.smt_source(),
+               **{name: bundle.kernel_source(name) for name in ("lean4", "rocq", "isabelle_hol")}}
+    projections = {name: {"status": "projected", "source": text,
+        "source_cid": content.cid_for_bytes(text.encode("utf-8")), "checker_executed": False,
+        "proof_claimed": False} for name, text in sources.items()}
+    try:
+        document, artifacts = bundle.tla()
+        public = bundle.to_dict()
+    except family.CodebaseFamilyError as error:
+        public = None
+        projections["tla_plus"] = {"status": "unsupported", "reason": str(error),
+            "error_type": type(error).__name__, "checker_executed": False, "proof_claimed": False,
+            "mathematical_integer_projection_discarded": False}
+    else:
+        projections["tla_plus"] = {"status": "projected", "state_ir": document.to_dict(),
+            "artifacts": artifacts.to_dict(), "checker_executed": False, "proof_claimed": False,
+            "scope": family.BRIDGE_SCOPE}
+    statuses = [{"family": name, "status": projections[name]["status"],
+                 "checker_executed": False, "proof_claimed": False} for name in family.FAMILIES]
+    return public, projections, statuses
+
+
+@_without_metadata
+def build_source_ir_projection(*, source: bytes, contract: dict, head: dict) -> dict:
+    """Build replayable native IR and generated theorem source without proving.
+
+    The native guard admits one synchronous, exactly annotated int-to-int
+    function returning its parameter or the parameter plus/minus a literal.
+    Source-body and target expressions are independently reconstructed by the
+    native lowering owner. Unsupported constructs fail without a projection.
+    """
+    from ipfs_datasets_py.duckdb_control import codebase_catalog
+    from ipfs_datasets_py.logic.software_contracts import (
+        codebase_integer_profile as integer, codebase_integer_lowering_lean as lowering,
+        codebase_family_lowering as family, content,
+    )
+    from ipfs_datasets_py.logic.software_verification import state, transitions
+    from ipfs_datasets_py.logic.backends.tla import compiler as tla_compiler
+    from . import terminal_revision_metadata as custody
+
+    _require(type(contract) is dict and type(head) is dict, "exact contract and head dictionaries required")
+    contract_wire, head_wire = _wire(contract), _wire(head)
+    declared = integer.IntegerOffsetContract.from_dict(json.loads(contract_wire))
+    bound_head = codebase_catalog.CodebaseHead.from_dict(json.loads(head_wire))
+    _require(_wire(declared.to_dict()) == contract_wire and _wire(bound_head.to_dict()) == head_wire,
+             "native contract or head normalization differs")
+    decode_check = _source_preflight(source, integer.MAX_SOURCE_BYTES)
+
+    # This first call selects the native owner's declared implementation
+    # inventory. Its contents are recaptured under retained stat witnesses;
+    # it is not used as evidence of loaded-code or transitive attestation.
+    selection = lowering._implementation()
+    selected = [importlib.import_module(name) for name in sorted(selection["source_sha256"])]
+    modules = (sys.modules[__name__], codebase_catalog, family, state, transitions,
+               tla_compiler, *selected)
+    with custody._producer(modules) as (producer, unchanged):
+        implementation = lowering._implementation()
+        _require(_wire(implementation) == _wire(selection), "selected native frontend changed before capture")
+        compiled = integer.compile_integer_offset(source, declared,
+            revision="snapshot:" + bound_head.snapshot_cid, mirror=False)
+        translation = lowering._translation(compiled, bound_head, implementation)
+        text, names = lowering._lean(translation)
+        _require(type(text) is bytes and type(names) is list and all(type(name) is str for name in names),
+                 "native Lean projection shape differs")
+        family_bundle, family_projections, family_statuses = _families(compiled, family, content)
+        body = {"schema": SCHEMA, "contract": declared.to_dict(), "head": bound_head.to_dict(),
+            "source_sha256": hashlib.sha256(source).hexdigest(), "source_cid": content.cid_for_bytes(source),
+            "compiled": compiled.to_dict(), "native_program": compiled.pipeline.program.to_dict(),
+            "native_contracts": [value.to_dict() for value in compiled.pipeline.contracts],
+            "native_vc_sets": [value.to_dict() for value in compiled.pipeline.vc_sets],
+            "source_correspondence": compiled.pipeline.bindings.to_dict(),
+            "translation": translation, "lean_source": text.decode("utf-8"), "theorems": names,
+            "family_bundle": family_bundle, "family_projections": family_projections,
+            "family_statuses": family_statuses,
+            "source_ast_syntax": translation["source_ast_syntax"],
+            "native_target_syntax": translation["native_target_syntax"],
+            "source_decode_check": decode_check, "producer": producer,
+            "scope": "native_closed_integer_source_AST_and_mathematical_target_preparation",
+            "current_head_status": "caller_supplied_typed_identity_only;catalog_not_opened",
+            "producer_loaded_code_attested": False,
+            "producer_transitive_dependency_closure_attested": False,
+            "training_steps": 0, "checker_invocations": 0, **AUTHORITY}
+        _wire(body)
+        _require(_wire(body["native_program"]) == _wire(translation["native_program"]),
+                 "native program projection differs")
+        _require(_wire(contract) == contract_wire and _wire(head) == head_wire,
+                 "caller declaration changed during projection")
+        _require(_wire(lowering._implementation()) == _wire(implementation),
+                 "native frontend changed during projection")
+        unchanged()
+        result = {**body, "projection_id": content.cid_for_structured(body)}
+        # Identity calculation/serialization happens before the last custody
+        # check; no unchecked native callback follows it.
+        result = json.loads(_wire(result))
+        unchanged()
+        return result

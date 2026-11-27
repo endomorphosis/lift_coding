@@ -1,0 +1,61 @@
+#!/usr/bin/env python3
+"""Isolated bounded cache for CID syntax, never source or proof acceptance."""
+import ast
+import difflib
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+
+HERE = Path(__file__).resolve().parent
+def sha(b): return hashlib.sha256(b).hexdigest()
+
+def main():
+    source = HERE / "runtime_merkle_fastcid_v2/ipfs_datasets_py"
+    destination = HERE / "runtime_cid_parse_cache_v3"
+    if destination.exists(): raise SystemExit("variant exists; never overwrite")
+    relative = Path("logic/software_contracts/content.py")
+    before = (source / relative).read_text()
+    node = next(n for n in ast.parse(before).body if isinstance(n, ast.FunctionDef) and n.name == "validate_cid")
+    lines = before.splitlines(True); original = "".join(lines[node.lineno - 1:node.end_lineno])
+    marker = "    from multiformats import CID, multihash\n"
+    assert original.count(marker) == 1
+    guards, decoded = original.split(marker)
+    replacement = guards + '''    if type(value) is str:
+        _validate_cid_syntax_cached(value, allowed, CID_VERSION, CID_BASE, MULTIHASH_TYPE)
+    else:
+        # Preserve the uncached behavior of str subclasses and their methods.
+        _validate_cid_syntax_uncached(value, allowed)
+    return value
+
+
+@lru_cache(maxsize=65_536)
+def _validate_cid_syntax_cached(value: str, allowed: frozenset[str],
+                                version: int, base: str, hash_type: str) -> None:
+    """Memoize syntax only within one frozen registry profile/process.
+
+    Native source and structured payload digests are recomputed on every read.
+    Profile constants and allowed codecs are cache-key inputs. Runtime replacement
+    of multiformats registries is outside this explicitly qualified profile.
+    """
+    _validate_cid_syntax_uncached(value, allowed)
+
+
+def _validate_cid_syntax_uncached(value: str, allowed: frozenset[str]) -> str:
+''' + marker + decoded
+    after = before.replace(original, replacement).replace("import json\n", "import json\nfrom functools import lru_cache\n", 1)
+    compile(after, str(destination / "ipfs_datasets_py" / relative), "exec")
+    destination.mkdir()
+    shutil.copytree(source, destination / "ipfs_datasets_py", copy_function=os.link, symlinks=True, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
+    target = destination / "ipfs_datasets_py" / relative
+    temporary = target.with_suffix(".py.new"); temporary.write_text(after); os.replace(temporary, target)
+    assert (source / relative).read_text() == before
+    assert os.stat(source / relative).st_ino != os.stat(target).st_ino
+    patch = "".join(difflib.unified_diff(before.splitlines(True), after.splitlines(True), fromfile="a/ipfs_datasets_py/" + str(relative), tofile="b/ipfs_datasets_py/" + str(relative)))
+    (HERE / "cid_syntax_cache_v3.patch").write_text(patch)
+    receipt = {"schema": "ns-context-native-source-variant/v3", "variant_package": str(destination / "ipfs_datasets_py"), "parent_variant": str(HERE / "runtime_merkle_fastcid_v2_manifest.json"), "parent_variant_sha256": sha((HERE / "runtime_merkle_fastcid_v2_manifest.json").read_bytes()), "changed_file": str(relative), "original_sha256": sha(before.encode()), "variant_sha256": sha(after.encode()), "materializer_sha256": sha(Path(__file__).read_bytes()), "upstream_files_modified": False, "cache_max_entries": 65536, "cache_key": "exact immutable string, allowed codecs, CID version/base/hash constants", "cache_scope": "syntactic CID validation in one fresh process with frozen native registries; no persisted trust", "source_bytes_digests_proof_results_cached": False, "native_multihash_recomputed_every_read": True, "validation_status_at_materialization": "not yet executed", "provider_calls": 0}
+    (HERE / "runtime_cid_parse_cache_v3_manifest.json").write_text(json.dumps(receipt, indent=2) + "\n")
+    print(json.dumps(receipt, indent=2))
+
+if __name__ == "__main__": main()

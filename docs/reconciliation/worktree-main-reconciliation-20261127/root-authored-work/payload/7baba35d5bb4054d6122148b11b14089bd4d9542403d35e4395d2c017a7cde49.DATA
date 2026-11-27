@@ -1,0 +1,31 @@
+"""Controller branch controls with a declared response stub; no native quality claim.
+
+The optional transport boundary is replaced in this control process with a guard
+that cannot make a network call. Production controller/transport files are intact.
+"""
+import argparse,hashlib,importlib.util,json,sys,types
+from pathlib import Path
+H=Path(__file__).resolve().parent
+spec=importlib.util.spec_from_file_location('repository_controller',H/'repository_controller_v1.py');M=importlib.util.module_from_spec(spec);spec.loader.exec_module(M);C=M.C;R=M.R
+
+def save(p,v): p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(v,indent=2,sort_keys=True)+'\n')
+def main():
+    ap=argparse.ArgumentParser();ap.add_argument('--profile',type=Path,required=True);ap.add_argument('--output',type=Path,required=True);args=ap.parse_args();out=args.output.resolve();out.mkdir(exist_ok=False);base=json.loads(args.profile.read_text());event=next(e for e in base['events'] if e['arm']=='A' and e['parent_event'] is None);rows=[]
+    transport_invocations=[]
+    def forbidden_transport(*args): transport_invocations.append(True);raise AssertionError('network-free control boundary invoked unexpectedly')
+    original_loader=C.load_module
+    C.load_module=lambda name,path:types.SimpleNamespace(call=forbidden_transport) if name=='integrated_metered_provider' else original_loader(name,path)
+    for label,status,passed,wrongtree,seed_unknown in [('incomplete_grade','incomplete',False,False,False),('wrong_tree_pass','completed',True,True,False),('unknown_provider','completed',False,False,True)]:
+        folder=out/label;folder.mkdir();stub=folder/'declared_response_stub.py'
+        stub.write_text('import json,sys\nr=json.load(sys.stdin)\n'+"v={k:r[k] for k in ['instance_id','base_commit','image_id','objective_sha256','candidate_patch_sha256','service_profile_sha256']}\n"+f"v.update(status={status!r},passed={passed!r},candidate_source_tree_sha256={'\"0\"*64' if wrongtree else 'r[\"expected_candidate_source_tree_sha256\"]'},designated_total=131,designated_status_counts={{'PASSED':130,'FAILED':1}},receipt_path='declared-stub-only')\n"+'print(json.dumps(v))\n')
+        profile={**base,'output_root':str(folder/'state'),'events':[event],'provider':{**base['provider'],'enabled':bool(seed_unknown)},'scorer_service':{**base['scorer_service'],'entrypoint':str(stub),'python':sys.executable}}
+        profile['evaluation_files']={**base['evaluation_files'],str(stub):R.sha(stub.read_bytes())};p=folder/'profile.json';save(p,profile);profile_hash=R.sha(p.read_bytes())
+        if seed_unknown:
+            task=profile['tasks'][event['instance_id']];selected=R.lexical_sources(task['source_root'],R.text(task['objective_path']),3,48000);current={'status':'completed','passed':False,'designated_total':131,'designated_status_counts':{'PASSED':130,'FAILED':1}};messages=M.messages_for(R.text(task['objective_path']),selected,[],current)
+            residual_event=event['event_id']+'-residual-0';purpose='proposal';cid='integrated-'+R.sha(C.canonical({'event_id':residual_event,'purpose':purpose}))[:32];request={'call_id':cid,'purpose':purpose,'messages':messages,'unified_profile_sha256':profile_hash};rh=R.sha(C.canonical(request));effect_id=R.sha(C.canonical({'event_id':residual_event,'stage':'provider_proposal','request_hash':rh}));ledger=C.Ledger(profile['output_root']);C.write_new(Path(profile['output_root'])/'effects'/effect_id/'request.json',request);ledger.db.execute('INSERT INTO effects VALUES(?,?,?,?,?,?,?)',(effect_id,residual_event,'provider_proposal',rh,'dispatching',None,None));ledger.append('authored_unknown_boundary',{'effect_id':effect_id,'scope':'control only; no actual provider was called'});ledger.db.close()
+        result=M.execute(p,event['event_id']);expected='effect_unknown' if seed_unknown else 'controller_error' if wrongtree else 'infrastructure_unresolved';row={'case':label,'status':result['status'],'expected_status':expected,'provider_calls':result['provider_calls'],'provider_total_tokens':result['provider_total_tokens'],'transport_guard_invocations':len(transport_invocations),'passed':result['status']==expected and not transport_invocations and not result['accepted']}
+        if seed_unknown: row['passed'] &= result['provider_calls'] is None and result['provider_total_tokens'] is None and result['trajectory_provider_slots_used']==1
+        else: row['passed'] &= result['provider_calls']==0 and not (Path(profile['output_root'])/'pending_residuals').exists()
+        rows.append(row);save(folder/'control.json',row)
+    save(out/'summary.json',{'schema':'ns-repository-controller-declared-response-controls@1','cases':rows,'passed':all(r['passed'] for r in rows),'provider_calls':0,'native_scoring_calls':0,'stubbed_branch_controls_not_task_outcomes':True});print(json.dumps({'cases':rows,'passed':all(r['passed'] for r in rows)}))
+if __name__=='__main__': main()

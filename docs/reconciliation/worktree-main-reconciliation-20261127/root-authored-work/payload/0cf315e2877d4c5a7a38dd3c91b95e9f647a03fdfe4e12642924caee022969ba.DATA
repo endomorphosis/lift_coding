@@ -1,0 +1,25 @@
+{
+  "allowed_hosts": [
+    "api.github.com",
+    "raw.githubusercontent.com"
+  ],
+  "before_downloads": true,
+  "execution": "Inert source inspection only; no upstream builds/tests, model, paid service or scientific execution.",
+  "files": "Exact-commit root README and up to two root license files, verified against Git tree blob IDs.",
+  "frozen_source_mutations": 0,
+  "maximum_parallel_repositories": 3,
+  "maximum_request_seconds": 15,
+  "maximum_retained_response_bytes": 33554432,
+  "maximum_single_response_bytes": 1048576,
+  "maximum_source_file_bytes": 524288,
+  "native_mutations": 0,
+  "no_replacements_on_download_failure": true,
+  "not_original_capture_proof": true,
+  "schema": "skill-upstream-historical-candidate-pin-policy/v1",
+  "selection": "Keep the exact12 existing source candidates. Select latest reachable current-default-branch commit before each row source_fetched_at; no outcome/performance selection.",
+  "source_manifest": {
+    "bytes": 33489,
+    "path": "/home/barberb/lift_coding/papers/revisions/law_study_preparation_20260914/skill_candidates_v1/source_manifest.json",
+    "sha256": "2043615515b424d168057e68b079dd07bbfa0bc9efbbe5b26b5c9d76d3a7465f"
+  }
+}

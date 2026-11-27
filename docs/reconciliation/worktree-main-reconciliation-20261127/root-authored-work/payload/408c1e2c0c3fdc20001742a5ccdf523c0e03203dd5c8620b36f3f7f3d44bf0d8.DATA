@@ -1,0 +1,22 @@
+{
+  "previous_commit": "6f374f022c5230786cba3be0b8ae81bf1339d579",
+  "commit": "2753b34c679915aee00c5290ac7900891d996d8c",
+  "changed_paths": [
+    "test/api/test_owner_provider_deadline.py"
+  ],
+  "product_implementation_changed": false,
+  "fixture_change": "The inert -I wrapper disables bytecode before project imports because -I ignores inherited PYTHONDONTWRITEBYTECODE.",
+  "preserved_cache_manifest": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/federal-corpus-audits/legal-ir-peer-revision-reconciliation-20261109-v01/candidate-owner-child-bytecode-observation-v01/manifest.json",
+  "preserved_cache_bytes": 1243192,
+  "original_retained_claims_unchanged": true,
+  "source_lease": {
+    "canonical_root": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "mode": "write",
+    "lock_path": "/home/barberb/lift_coding/external/ipfs_accelerate/workspace/control-plane/source-leases/source.lock",
+    "waited_seconds": 4.7137029469013214e-05,
+    "schema_version": "autoencoder-source-lease/v1",
+    "cooperative": true
+  },
+  "fresh_validation_pending": true,
+  "published": false
+}

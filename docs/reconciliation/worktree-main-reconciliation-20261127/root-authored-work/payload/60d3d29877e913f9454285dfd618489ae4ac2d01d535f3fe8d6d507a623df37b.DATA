@@ -1,0 +1,47 @@
+{
+  "schema": "terminal-codebase-intent-ir-improvement-plan@2",
+  "current_milestone": "Genuine bounded structural autoencoder training and task-exclusive development holdout",
+  "baseline_scope": "Five public Python files, four Terminal Bench tasks, eight training functions, one validation function, nineteen evaluation functions. No hidden tests or solutions are training inputs.",
+  "priority_order": [
+    {
+      "id": "repository-scale-typed-ir",
+      "work": "Expand explicitly permitted repository snapshots. Use native CodebaseIR source/CID/version identities and account for every input through AST, symbols, imports, calls, graph edges, contracts, parse diagnostics, opaque inputs and unsupported syntax. Retain the lossy 44-feature model as an advisory baseline while training encoder/decoder heads for richer typed IR.",
+      "acceptance": "Task-exclusive train/validation/evaluation manifests are fixed before learning, source/AST clones are rejected, feature collisions are disclosed, every selected file and symbol is covered or has an explicit residual, and no repository body is executed during extraction. Include independently selected task holdouts and record whether historical campaign exposure is known."
+    },
+    {
+      "id": "checked-source-to-logic-and-proof-index",
+      "work": "Add supported AST-to-typed-IR operational semantics and native logic-family lowering adapters. Learned decoders propose formulas with source spans and assumptions; trusted checkers decide their status. Index proof certificates separately from candidates and unresolved obligations in DuckDB. Mirror history into DuckLake with source, IR, compiler, checker, theorem, assumptions and certificate fingerprints. Evaluate Quack/native typed-vector integration explicitly rather than assuming it from JSON metadata hydration.",
+      "acceptance": "Compile each advertised family through its actual supported backend, retain failing and unsupported projections, check negative counterexamples, and invalidate dependent facts/plans/proofs when source or checker versions change. Demonstrate equivalence only for explicitly supported source fragments under checked assumptions; do not infer executable semantics from AST counts, vector similarity or successful loss-ordering theorems."
+    },
+    {
+      "id": "intent-grounding-and-symbolic-planning",
+      "work": "Join the complete prompt's IntentIR requirements against the current CodebaseIR source snapshot and structural/contract/proof index. Use vectors for nominations followed by exact source, graph, contract and symbolic checks. Preserve opaque prompt clauses and unresolved behavior. Compare learned nominations with model-off, untrained, lexical and graph controls through the admitted supervisor.",
+      "acceptance": "Measure contract and intent recall, obligation coverage, planning usefulness and budgeted execution outcomes. Candidate ranks cannot omit source functions or discharge requirements. A plan may claim satisfaction only when every requirement has a checked witness or remains visibly unresolved."
+    },
+    {
+      "id": "durable-online-training-and-native-budget",
+      "work": "Connect bounded incremental training to original supervisor task admission, current source/attempt/run leases and durable task-wide resource accounting. Store checkpoints and optimizer state in isolated immutable training generations; use DuckDB transactions for shared budget reservations and conservative crash charges, with DuckLake as history rather than authority.",
+      "acceptance": "Count preprocessing, import, training, inference, compiler checks, retries and failed attempts. Test concurrent reservation, source drift, interrupted publication, lease expiry and reboot recovery without refunds that erase consumed work. Public checkpoint or database snapshots cannot create admission authority."
+    },
+    {
+      "id": "empirical-stability-and-conditional-convergence",
+      "work": "Record fixed-seed repeated parameter updates, objective and gradient histories, task-heldout reconstruction and richer IR/contract metrics. Keep finite empirical improvement separate from any mathematical optimizer theorem. State exact optimizer, objective, arithmetic model and hypotheses for a proposed convergence proof; retain unknown or unverified hypotheses.",
+      "acceptance": "Predeclare seeds, epoch budgets and checkpoint selection without tuning against evaluation tasks. Compare loss histories within the same native objective, preserve nonmonotonic updates, and reject the substitution of finite decimal endpoint ordering for asymptotic convergence or source equivalence."
+    },
+    {
+      "id": "paired-terminal-bench-token-and-task-evaluation",
+      "work": "Run the actual Terminal Bench harness and original supervisor on paired full-context and indexed capsule/minified-context arms. Include AST/graph/contracts/proofs as source-bound semantic capsules, dictionary aliases with reversible expansion and supported code minification. Keep original prompt residuals and fetch references available.",
+      "acceptance": "Compare official task satisfaction with identical task budgets and fixed allocation policies. Count all prompt/history/retrieval/expansion/retry/output/setup tokens and report tokenizer estimates separately from actual provider usage and billing. Report storage, training and proving resource cost separately. Token reductions qualify only with the measured task-success and coverage results."
+    }
+  ],
+  "claims_not_established": [
+    "Source-to-model operational equivalence",
+    "Learned typed logic-family decoding",
+    "Asymptotic optimizer convergence",
+    "Complete prompt or benchmark task satisfaction",
+    "Historically unseen task generalization",
+    "Native global durable training admission",
+    "Provider token or billing savings"
+  ],
+  "promotion": "Experimental source and evidence remain isolated. No production promotion or upstream pushes in this milestone."
+}

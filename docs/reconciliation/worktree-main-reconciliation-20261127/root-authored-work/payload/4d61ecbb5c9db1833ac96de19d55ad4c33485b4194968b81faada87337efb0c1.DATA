@@ -1,0 +1,57 @@
+#!/usr/bin/env python3
+"""Read-only independent freeze, transport, usage and candidate audit."""
+import datetime
+import importlib.util
+import json
+from pathlib import Path
+import sys
+
+sys.dont_write_bytecode = True
+HERE = Path(__file__).resolve().parent
+spec = importlib.util.spec_from_file_location("frozen_live_context", HERE / "run_live_context.py")
+module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+
+
+def main():
+    destination = HERE / "audit.json"
+    if destination.exists(): raise SystemExit("audit already exists")
+    frozen = json.loads((HERE / "freeze.json").read_text())
+    summary = json.loads((HERE / "summary.json").read_text())
+    assert frozen["files"] == module.input_files()
+    assert summary["freeze_sha256"] == module.digest((HERE / "freeze.json").read_bytes())
+    assert set(p.name for p in (HERE / "results/provider").iterdir() if p.is_dir()) == set(module.ORDER)
+    freeze_time = datetime.datetime.fromisoformat(frozen["created_at"].replace("Z", "+00:00"))
+    rows = []
+    rescored = []
+    for name in module.ORDER:
+        row = json.loads((HERE / "results" / (name + ".json")).read_text())
+        request = json.loads((HERE / "results/provider" / name / "request.json").read_text())
+        transport_path = HERE / "results/provider" / name / "result.json"
+        transport = json.loads(transport_path.read_text())
+        assert transport["attempted_posts"] == 1 and transport["status"] == "response" and transport["served_model"] == "grok-4.6"
+        assert transport["normalized_usage"] == row["normalized_usage"]
+        assert transport["request_sha256"] == module.digest(module.canonical(request))
+        assert row["provider_result_sha256"] == module.digest(transport_path.read_bytes())
+        assert module.digest(module.canonical(request["messages"])) == frozen["messages_sha256"][name] == row["messages_sha256"]
+        assert datetime.datetime.fromisoformat(transport["started_at"]) >= freeze_time
+        public = json.loads(request["messages"][1]["content"])
+        sources = json.loads((module.NATIVE / row["family"] / "sources/unchanged.json").read_text())
+        assert public["required_source"] == {p: sources[p] for p in ("target.py", "test_target.py")}
+        assert module.ORACLES[row["family"]] not in request["messages"][1]["content"]
+        assert row["cold_scorer"]["passed"] and row["cold_scorer"]["candidate_sha256"] == module.digest(row["candidate_source"].encode())
+        new_score = module.score(row["candidate_source"], sources["dependency.py"], module.ORACLES[row["family"]])
+        assert new_score["passed"]
+        rescored.append({"call_id": name, "independent_repeat_cold_scorer": new_score})
+        rows.append(row)
+    for arm in ("raw", "compact"):
+        subset = [row for row in rows if row["arm"] == arm]
+        assert summary["arms"][arm]["successes"] == sum(row["success"] for row in subset) == 3
+        for field, total in summary["arms"][arm]["usage_totals"].items():
+            assert total == sum(row["normalized_usage"][field] for row in subset)
+    result = {"schema": "ns-live-context-independent-audit/v1", "audit_source_sha256": module.digest(Path(__file__).read_bytes()), "freeze_sha256": summary["freeze_sha256"], "summary_sha256": module.digest((HERE / "summary.json").read_bytes()), "all_current_frozen_input_hashes_match": True, "all_requests_match_prefrozen_messages": True, "freeze_precedes_all_calls": True, "exactly_six_provider_calls": True, "complete_usage_records": 6, "provider_reported_model": "grok-4.6", "held_back_oracle_not_in_prompts": True, "exact_target_and_test_bytes_in_both_arms": True, "all_candidates_repeat_cold_validation": True, "rescoring": rescored, "all_checks_passed": True, "new_provider_calls": 0}
+    module.write_new(destination, result)
+    print(json.dumps({k: v for k, v in result.items() if k != "rescoring"}, indent=2))
+
+
+if __name__ == "__main__": main()

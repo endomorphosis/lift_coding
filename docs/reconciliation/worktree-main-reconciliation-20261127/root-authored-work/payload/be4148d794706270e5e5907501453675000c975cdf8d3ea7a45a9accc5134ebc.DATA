@@ -1,0 +1,79 @@
+"""Read-only audit of continuation and real preparation measurements."""
+import hashlib
+import json
+from pathlib import Path
+import statistics
+
+HERE=Path(__file__).resolve().parent
+
+
+def hash_file(p):
+    return hashlib.sha256(p.read_bytes()).hexdigest()
+
+
+def main():
+    checks=[]
+    def check(name,condition):
+        checks.append({'check':name,'passed':bool(condition)})
+        assert condition,name
+    continuation=HERE/'continuation-v1'
+    f=json.loads((continuation/'freeze.json').read_text())
+    for name,h in f['original_run_files'].items():
+        check('original run preserved '+name,hash_file(HERE/'run-v1'/name)==h)
+    check('continuation code frozen',hash_file(HERE/'continue_pending.py')==f['runner_sha256']==hash_file(continuation/'runner_snapshot.py'))
+    check('continuation dependency frozen',hash_file(HERE/'lifecycle.py')==f['dependency_sha256'])
+    retry=json.loads((continuation/'results/native-retry.json').read_text())
+    resume=json.loads((continuation/'results/resume.json').read_text())
+    nxt=json.loads((continuation/'results/next-event.json').read_text())
+    check('native retry actually failed',retry['result']['publication']['diagnostics']['error']=='begin_transition rejected: already_exists' and not retry['result']['publication']['published'])
+    check('native retry aborted only its isolated transition',retry['transition_after']['state']=='aborted')
+    check('development caller consumes pending phase',resume['pending_before']['phase']=='seal_persistence' and resume['pending_before']['state']=='in_progress')
+    check('development caller completes actual CAS',resume['cas_swapped'] and resume['after_chain']['pointer']['generation']==2 and resume['committed']['state']=='committed')
+    check('continuation performs no operation replay process',resume['operation_processes']==0 and resume['operation_calls']==0)
+    check('next process consumes recovered root',nxt['consumed_pointer']==resume['after_chain']['pointer'])
+    check('next event is accepted generation3',nxt['verified_chain']['accepted'] and nxt['verified_chain']['pointer']['generation']==3)
+    check('next event verifies four accepted seals',len(nxt['verified_chain']['verified_chain'])==4)
+    check('next event freshly executes changed unit',nxt['prepared']['clamp']['operation_calls']==19 and nxt['prepared']['energy']['operation_processes']==0)
+    check('all three phases fresh processes',len({retry['pid'],resume['pid'],nxt['pid']})==3)
+    for phase in ('native_retry','resume','next_event'):
+        check(phase+' process receipt success',json.loads((continuation/'logs'/(phase+'.json')).read_text())['returncode']==0)
+    for name,entry in resume['sources'].items():
+        check('continuation loaded module '+name,hash_file(Path(entry['path']))==entry['sha256'])
+    for p in (continuation/'packs').glob('*.json'):
+        pack=json.loads(p.read_text())
+        check('continuation accepted pack '+p.stem,pack['admission']['accepted'])
+        for u,receipt in pack['receipts'].items():
+            lower={'r0':-2,'r1':-3,'r2a':-4,'r2b':-5}[p.stem]
+            expected=[max(lower,min(v,3)) for v in receipt['inputs']] if u=='clamp' else [sum(v*v for v in row) for row in receipt['inputs']]
+            check(p.stem+'/'+u+' independent output replay',expected==receipt['outputs'])
+    bench=HERE/'preparation-timing-v1'
+    f=json.loads((bench/'freeze.json').read_text())
+    check('timing runner frozen',hash_file(HERE/'prepare_benchmark.py')==f['runner_sha256']==hash_file(bench/'runner_snapshot.py'))
+    check('timing dependencies frozen',hash_file(HERE/'lifecycle.py')==f['lifecycle_sha256'] and hash_file(HERE/'computation_worker.py')==f['worker_sha256'])
+    for path,h in f['snapshot_sha256'].items():
+        check('timing snapshot '+path,hash_file(bench/path)==h)
+    rows=[]
+    for i,order in enumerate(f['orders']):
+        for arm in order:
+            tag=f'{i:02d}-{arm}'
+            r=json.loads((bench/'results'/(tag+'.json')).read_text())
+            samples=json.loads((bench/'results'/(tag+'-rss-samples.json')).read_text())
+            check(tag+' actual matching measurements',r['accepted'] and r['operation_processes']==2 and r['operation_calls']==175 and r['returncode']==0)
+            check(tag+' RSS from retained samples',r['sampled_process_group_peak_aggregate_rss_bytes']==max(s['rss_bytes_sum'] for s in samples))
+            check(tag+' CPU observed positive',r['prepare_cpu_seconds_self_and_children']>0)
+            check(tag+' timing within whole invocation',0<r['prepare_seconds']<r['invocation_elapsed_seconds_including_imports'])
+            rows.append(r)
+    check('all prepared evidence byte-identical',len({json.dumps(r['receipts'],sort_keys=True) for r in rows})==1 and len({r['prepared_seal_cid'] for r in rows})==1)
+    summary=json.loads((bench/'summary.json').read_text())
+    for arm in ('sequential','parallel'):
+        check(arm+' summary derived median',summary['arms'][arm]['median_prepare_seconds']==statistics.median(r['prepare_seconds'] for r in rows if r['arm']==arm))
+    check('all 16 actual subprocesses counted',sum(r['operation_processes'] for r in rows)==summary['total_operation_processes']==16)
+    check('all 1400 operation inputs counted',sum(r['operation_calls'] for r in rows)==summary['total_operation_inputs']==1400)
+    result={'schema':'ns-seal-later-phase-artifact-audit/v1','checks_passed':len(checks),'checks':checks,
+            'audit_sha256':hash_file(Path(__file__)),'provider_calls':0,'native_publication_calls':0}
+    (HERE/'phase_artifact_audit.json').write_text(json.dumps(result,indent=2)+'\n')
+    print(json.dumps({k:v for k,v in result.items() if k!='checks'},sort_keys=True))
+
+
+if __name__=='__main__':
+    main()

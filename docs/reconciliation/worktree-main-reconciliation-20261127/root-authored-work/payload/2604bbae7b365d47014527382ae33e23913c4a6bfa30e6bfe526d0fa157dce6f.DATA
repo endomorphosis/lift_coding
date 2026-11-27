@@ -1,0 +1,270 @@
+#!/usr/bin/env python3
+"""Evaluation-only adapter around native ASEH context authorities. No providers."""
+import argparse
+from dataclasses import replace
+import hashlib
+import importlib
+import json
+import os
+from pathlib import Path
+import platform
+import sys
+import time
+
+def sha(data): return hashlib.sha256(data).hexdigest()
+def canon(obj): return json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()
+def write(path, obj): path.write_text(json.dumps(obj, indent=2, sort_keys=True) + "\n")
+def read(path): return json.loads(path.read_text())
+def is_test(path):
+    p = Path(path)
+    return p.name.startswith("test_") or p.name == "conftest.py" or any(part in ("test", "tests", "testing") for part in p.parts[:-1])
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("role", choices=("produce", "consume", "expand"))
+    parser.add_argument("--run", type=Path, required=True)
+    parser.add_argument("--case", required=True)
+    parser.add_argument("--path")
+    args = parser.parse_args()
+    folder = args.run / args.case
+    freeze = read(args.run / "freeze.json")
+    assert sha(Path(__file__).read_bytes()) == freeze["evaluation_sources"]["native_service.py"]
+    profile = read(args.run / "runtime_source_manifest.json")
+    assert sha((args.run / "runtime_source_manifest.json").read_bytes()) == freeze["runtime_manifest_sha256"]
+    job = next(j for j in freeze["jobs"] if j["task_id"] == args.case)
+    assert sha((folder / "case.json").read_bytes()) == job["case_sha256"]
+    assert sha((folder / "public_source_manifest.json").read_bytes()) == job["source_manifest_sha256"]
+    source = read(folder / "public_source_manifest.json"); case = read(folder / "case.json")
+    import_started = time.perf_counter()
+    from ipfs_datasets_py.logic.software_contracts.content import cid_for_bytes, cid_for_structured
+    from ipfs_datasets_py.logic.software_contracts.semantic_index.snapshot import snapshot_repository
+    from ipfs_datasets_py.logic.software_contracts.semantic_index.scanner import RepositoryScanner
+    from ipfs_datasets_py.logic.software_contracts.semantic_state import build_semantic_state, verify_semantic_state_bundle, view_semantic_state_bundle, assess_capsule_freshness, read_required_source
+    from ipfs_datasets_py.proof_context import context_pack as authority
+    from ipfs_accelerate_py.agent_supervisor.semantic_state import context_pack as consumer
+    from ipfs_accelerate_py.agent_supervisor.semantic_state.capsules import admit_capsule
+    from ipfs_accelerate_py.agent_supervisor.context.context_contracts import ContextBudget
+    from ipfs_kit_py.proof_context.state_store import open_context_pack_store
+    from ipfs_kit_py.proof_seal_store.contracts import ArtifactKind, ArtifactReference
+    import_seconds = time.perf_counter() - import_started
+    kind = ArtifactKind.CHECKPOINT_SEAL
+    store = open_context_pack_store(folder / "kit_store")
+    def put(raw): return store.put_verified_bytes(raw, kind=kind).cid
+    def get(cid): return consumer.load_verified_kit_bytes(store, kit_cid=cid, kind=kind)
+    def source_bytes(path):
+        if path not in source["files"]: raise ValueError("path outside declared public source scope")
+        actual = Path(source["tree"]) / path
+        if actual.is_symlink(): raise ValueError("symlink outside admitted profile")
+        body = actual.read_bytes()
+        if sha(body) != source["files"][path]["sha256"]: raise ValueError("current source changed")
+        return body
+    def current_inputs():
+        objective = {"schema": "ns-eval-public-objective/v1", "task_id": case["task_id"], "issue_title": case["issue_title"], "public_specification": case["public_specification"], "admitted_paths": case["admitted_paths"]}
+        policy = {"schema": "ns-eval-source-preserving-policy/v1", "declared_source_manifest_sha256": job["source_manifest_sha256"], "required_raw": "every declared source file", "semantic_scope": freeze.get("semantic_scope", "all"), "capsule_omission_permission": False, "admitted_paths": case["admitted_paths"], "acceptance": "not run; context freshness is not correctness", "signing": "none"}
+        toolchain = {"schema": "ns-eval-native-toolchain/v1", "source_manifest_sha256": freeze["runtime_manifest_sha256"], "service_sha256": freeze["evaluation_sources"]["native_service.py"]}
+        environment = {"schema": "ns-eval-context-environment/v1", "python_version": platform.python_version(), "implementation": platform.python_implementation(), "python_executable": str(Path(sys.executable).resolve()), "python_executable_sha256": sha(Path(sys.executable).resolve().read_bytes()), "platform": platform.platform(), "execution": "read-only public-source static analysis; no repository code execution; no model; local unsigned candidate storage"}
+        return {"objective": objective, "policy": policy, "toolchain": toolchain, "environment": environment}
+    def current_identity(required):
+        values = current_inputs()
+        return consumer.CurrentPackIdentity(tree=source["computed_git_tree_oid"], objective_identity=cid_for_structured(values["objective"]), objective_revision=job["case_sha256"], policy_identity=cid_for_structured(values["policy"]), interface_identities=tuple(sorted({authority.INTERFACE, authority.CONTEXT_PACK_SCHEMA, "ns-integrated-context-qualification/v1"})), toolchain_identities=(cid_for_structured(values["toolchain"]),), environment_requirements=(cid_for_structured(values["environment"]),), required_source_cids=required)
+    def enforce_sources(envelope, current):
+        # Explicit caller guard: native evaluate_exact_freshness does not compare this mapping.
+        if envelope["required_source_cids"] != dict(current.required_source_cids):
+            raise ValueError("required source CID mapping mismatch")
+    def imports_receipt():
+        result = {}
+        for name, module in sorted(sys.modules.items()):
+            owner = next((key for key in profile["roots"] if name == key or name.startswith(key + ".")), None)
+            if owner is None: continue
+            path = getattr(module, "__file__", None)
+            if not path: continue
+            actual = Path(path).resolve()
+            expected_root = Path(profile["roots"][owner]) / owner
+            assert actual.is_relative_to(expected_root), (name, str(actual), str(expected_root))
+            assert str(actual) in profile["files"] and sha(actual.read_bytes()) == profile["files"][str(actual)]
+            result[name] = {"path": str(actual), "sha256": profile["files"][str(actual)]}
+        return result
+    if args.role == "produce":
+        assert not (folder / "producer.json").exists()
+        started, cpu = time.perf_counter(), time.process_time()
+        raw_files = {path: source_bytes(path) for path in source["files"]}
+        snapshot = snapshot_repository(source["tree"], repository_id=case["family_id"], exclusions=())
+        assert snapshot.mode == "filesystem", "declared public source scan escaped into enclosing Git worktree"
+        assert {e.path for e in snapshot.entries} == set(raw_files) | set(source["opaque_symlinks"])
+        assert all(e.source_cid == cid_for_bytes(raw_files[e.path]) for e in snapshot.entries if e.path in raw_files)
+        assert all(e.is_opaque for e in snapshot.entries if e.path in source["opaque_symlinks"])
+        opaque_snapshot = [e.to_dict() for e in snapshot.entries if e.is_opaque]
+        write(folder / "native_opaque_snapshot.json", opaque_snapshot)
+        scanner = RepositoryScanner(repository_id=case["family_id"])
+        print(json.dumps({"stage": "snapshot_complete", "seconds": time.perf_counter() - started, "entries": len(snapshot.entries)}), flush=True)
+        semantic_paths = set(raw_files) if freeze.get("semantic_scope", "all") == "all" else set(case["admitted_paths"] + sorted(case["unchanged_package_python_candidates"])[:4])
+        scan_sources = {p: b for p, b in raw_files.items() if p in semantic_paths or not p.endswith(".py")}
+        excluded_python = sorted(p for p in raw_files if p.endswith(".py") and p not in semantic_paths)
+        write(folder / "semantic_scope.json", {"policy": freeze.get("semantic_scope", "all"), "analyzed_python_paths": sorted(p for p in semantic_paths if p.endswith(".py")), "unparsed_raw_python_paths": excluded_python, "all_source_bytes_retained": True})
+        state = scanner.scan_snapshot(snapshot, scan_sources)
+        assert {s.module_path for s in state.symbols} <= set(raw_files)
+        write(folder / "scan_stage.json", {"seconds": time.perf_counter() - started, "native_symbols": len(state.symbols), "native_edges": len(state.edges), "native_state_cid": state.state_cid})
+        print(json.dumps({"stage": "scan_complete", "seconds": time.perf_counter() - started, "symbols": len(state.symbols)}), flush=True)
+        bundle = build_semantic_state(state)
+        verify_semantic_state_bundle(bundle)
+        view = view_semantic_state_bundle(bundle)
+        scan_seconds = time.perf_counter() - started
+        identity_checks = []
+        if freeze.get("identity_checks"):
+            for change in ("unchanged", "target_comment"):
+                altered_raw = dict(scan_sources); altered_snapshot = snapshot
+                if change == "target_comment":
+                    target = case["admitted_paths"][0]
+                    body = raw_files[target] + b"\n# authored context identity qualification mutation\n"
+                    altered_raw[target] = body
+                    altered_snapshot = replace(snapshot, entries=tuple(replace(e, source_cid=cid_for_bytes(body), size_bytes=len(body), captured_bytes=body, witness=None) if e.path == target else e for e in snapshot.entries))
+                check_started = time.perf_counter()
+                cold = scanner.scan_snapshot(altered_snapshot, altered_raw)
+                cold_bundle = build_semantic_state(cold); verify_semantic_state_bundle(cold_bundle)
+                incremental = scanner.scan_snapshot(altered_snapshot, altered_raw, previous_state=state)
+                inc_bundle = build_semantic_state(incremental, previous_bundle=bundle); verify_semantic_state_bundle(inc_bundle)
+                assert cold.state_cid == incremental.state_cid
+                assert cold_bundle.root.root_cid == inc_bundle.root.root_cid and dict(cold_bundle.blocks) == dict(inc_bundle.blocks)
+                if change == "unchanged": assert cold_bundle.root.root_cid == bundle.root.root_cid
+                identity_checks.append({"change": change, "cold_state_cid": cold.state_cid, "incremental_state_cid": incremental.state_cid, "cold_root_cid": cold_bundle.root.root_cid, "incremental_root_cid": inc_bundle.root.root_cid, "reachable_blocks_equal": True, "wall_seconds": time.perf_counter() - check_started})
+            write(folder / "cold_incremental_identity_checks.json", identity_checks)
+        symbol_ids = {s.stable_id for s in state.symbols}
+        unknown = [e for e in state.edges if e.target_id not in symbol_ids]
+        unknown_records = [e.to_dict() for e in unknown]
+        write(folder / "unknown_frontier.json", unknown_records)
+        unknown_cid = cid_for_structured(unknown_records)
+        raw_ledger = {path: {**source["files"][path], "source_cid": cid_for_bytes(body), "kit_cid": put(body)} for path, body in raw_files.items()}
+        groups = {"target_source": {p: v for p, v in raw_ledger.items() if p in case["admitted_paths"]}, "test_source": {p: v for p, v in raw_ledger.items() if p not in case["admitted_paths"] and is_test(p)}, "surrounding_source": {p: v for p, v in raw_ledger.items() if p not in case["admitted_paths"] and not is_test(p)}}
+        assert set().union(*(set(g) for g in groups.values())) == set(raw_files)
+        required = {}; group_refs = {}
+        for name, group in groups.items():
+            body = canon({"schema": "ns-eval-resolvable-source-bundle/v1", "role": name, "sources": group})
+            required[name] = cid_for_bytes(body)
+            group_refs[name] = {"source_cid": required[name], "kit_cid": put(body), "files": len(group)}
+        write(folder / "source_bundle_refs.json", group_refs)
+        selected = sorted((s for s in state.symbols if s.module_path in case["unchanged_package_python_candidates"] and s.kind == "function"), key=lambda s: (s.module_path, s.qualified_name, s.stable_id))[:4]
+        capsules = []; dependencies = []; expansions = []
+        blobs = {cid_for_bytes(body): body for body in raw_files.values()}
+        expand_symbols = list(selected)
+        for path in case["admitted_paths"]:
+            matches = sorted((s for s in state.symbols if s.module_path == path), key=lambda s: s.stable_id)
+            if matches: expand_symbols.append(matches[0])
+        for symbol in expand_symbols:
+            materialized = read_required_source(state, symbol.stable_id, expected_producer_state_cid=state.state_cid, read_source_blob=lambda cid: blobs[cid])
+            assert materialized.source_bytes == raw_files[symbol.module_path]
+            expansions.append({"symbol_id": symbol.stable_id, "path": symbol.module_path, "source_sha256": sha(materialized.source_bytes), "native_evidence": materialized.evidence.to_dict()})
+        for symbol in selected:
+            capsule = view.capsule(symbol.stable_id)
+            assessment = assess_capsule_freshness(capsule, current_state=view)
+            admission = admit_capsule(capsule, semantic_state_root_cid=bundle.root.root_cid, assessment=assessment)
+            data = capsule.to_dict()
+            capsules.append({"symbol_id": symbol.stable_id, "path": symbol.module_path, "admission": admission.to_dict(), "capsule": data, "kit_cid": put(canon(data))})
+            dependencies.append({"symbol": symbol.stable_id, "cid": capsule.capsule_cid, "path": symbol.module_path, "meaning": "native descriptive capsule; complete source retained; no behavioral proof or omission permission"})
+        write(folder / "capsules.json", capsules)
+        write(folder / "native_source_expansions.json", expansions)
+        values = current_inputs(); write(folder / "independent_bindings.json", values)
+        current = current_identity(required)
+        obligation = "public-issue-acceptance-not-yet-executed:" + cid_for_structured(values["objective"])
+        missing = ["external-or-dynamic-dependency-semantics:" + unknown_cid, obligation] + ["opaque-symlink:" + p for p in source["opaque_symlinks"]] + ["native-opaque-source:" + e["path"] for e in opaque_snapshot if e["path"] not in source["opaque_symlinks"]] + ["unparsed-raw-python:" + p for p in excluded_python]
+        inputs = dict(repository_state_cid=state.state_cid, task_id=case["task_id"], target_source_cid=required["target_source"], surrounding_source_cid=required["surrounding_source"], test_source_cid=required["test_source"], scanned_tree_oid=source["computed_git_tree_oid"], source_tree_oid=source["computed_git_tree_oid"], repository_identity=case["upstream_repo"], commit=None, objective_identity=current.objective_identity, objective_revision=current.objective_revision, policy_identity=current.policy_identity, creation_time="frozen-service-profile-v1", opaque=True)
+        fresh = {field: [] for field in authority.FRESHNESS_BINDING_FIELDS}
+        fresh.update(schema_identities=["ns-integrated-context-qualification/v1"], toolchain_identities=list(current.toolchain_identities), environment_requirements=list(current.environment_requirements), reusable_until_conditions=["all independently bound source/objective/policy/interface/environment identities remain equal"])
+        contracts = {field: [] for field in authority.CONTRACT_FIELDS}
+        contracts.update(allowed_mutation_scope=case["admitted_paths"], assumptions_and_guarantees=["evaluation caller retains every raw source; native capsule freshness is not a behavioral correctness proof"], security_constraints=["unsigned metadata never authorizes execution reuse"])
+        validation = {field: [] for field in authority.VALIDATION_FIELDS}
+        validation.update(known_tests=sorted(groups["test_source"]), required_full_suite_conditions=["context qualification has not executed public or hidden acceptance"])
+        lineage = [{"path": "source-bundles/" + role + ".json", "symbol": role, "cid": cid, "kind": role} for role, cid in required.items()]
+        lineage.extend({"path": d["path"], "symbol": d["symbol"], "cid": d["cid"], "kind": "dependency"} for d in dependencies)
+        record = authority.get_authority().build_minimal(**inputs, dependencies=dependencies, lineage=lineage, obligations=[obligation], missing_evidence=missing, expansion_references=missing, named_unresolved_questions=["all source retained; unresolved semantics remain; no completeness witness"], contracts=contracts, validation=validation, freshness_bindings=fresh)
+        envelope = record.to_dict()
+        assert record.verify_identity() == record.pack_cid
+        # The accelerator compatibility entry point must delegate the same closed sections unchanged.
+        delegated_inputs = dict(inputs)
+        delegated_inputs.update({section: envelope[section] for section in ("scope", "contracts", "validation", "history", "questions", "budgets", "freshness_bindings", "invalidation")})
+        delegated_inputs["capsule_cids"] = list(record.capsule_cids)
+        delegated = consumer.ContextPacker(budget=ContextBudget(max_input_tokens=1000000, reserved_output_tokens=2048, reserved_tool_tokens=0)).pack_v01(**delegated_inputs)
+        assert delegated.pack_cid == record.pack_cid
+        consumer.require_exact_freshness(envelope, current); enforce_sources(envelope, current)
+        wire = consumer.encode_context_pack_envelope(envelope)
+        kit_cid = put(wire)
+        assert get(kit_cid) == wire
+        write(folder / "envelope.json", envelope)
+        write(folder / "pack_ref.json", {"kit_cid": kit_cid, "semantic_pack_cid": record.pack_cid, "envelope_sha256": sha(wire), "bytes": len(wire), "source_bundle_refs_sha256": sha((folder / "source_bundle_refs.json").read_bytes())})
+        commands = []
+        for path in sorted(set(case["admitted_paths"] + [s.module_path for s in selected])):
+            commands.append({"path": path, "command": ["env", "PYTHONPATH=" + ":".join(profile["pythonpath"]), "IPFS_ACCEL_SKIP_CORE=1", "PYTHONDONTWRITEBYTECODE=1", "/usr/bin/python3", "-B", str(Path(__file__)), "expand", "--run", str(args.run), "--case", args.case, "--path", path]})
+        write(folder / "expansion_commands.json", commands)
+        assert store.current_root() is None
+        result = {"task_id": args.case, "snapshot_cid": snapshot.snapshot_cid, "snapshot_mode": snapshot.mode, "computed_git_tree_oid": source["computed_git_tree_oid"], "native_state_cid": state.state_cid, "native_semantic_root_cid": bundle.root.root_cid, "declared_files": len(raw_files), "declared_bytes": sum(map(len, raw_files.values())), "python_files": sum(p.endswith(".py") for p in raw_files), "native_symbols": len(state.symbols), "native_edges": len(state.edges), "unknown_edge_occurrences": len(unknown), "unknown_source_files": len({s.module_path for s in state.symbols if s.stable_id in {e.source_id for e in unknown}}), "selected_dependency_capsules": len(capsules), "native_admission_counts": {a: sum(c["admission"]["admission"] == a for c in capsules) for a in sorted({c["admission"]["admission"] for c in capsules})}, "actual_native_expansions": len(expansions), "raw_substitutions": 0, "semantic_pack_cid": record.pack_cid, "delegated_pack_matches": True, "native_sufficiency_state_untrusted_for_execution": record.sufficiency_state, "native_expansion_required_flag": record.expansion_required, "missing_evidence_count": len(missing), "completeness_witness": None, "native_fixed_token_costs_used_as_measurement": False, "current_root_published": False, "import_seconds": import_seconds, "snapshot_scan_bundle_wall_seconds": scan_seconds, "preparation_wall_seconds_excluding_import": time.perf_counter() - started, "preparation_cpu_seconds_excluding_import": time.process_time() - cpu, "provider_calls": 0}
+        write(folder / "produce_imports.json", imports_receipt()); write(folder / "producer.json", result)
+        print(json.dumps(result))
+    else:
+        refs = read(folder / "source_bundle_refs.json"); pack_ref = read(folder / "pack_ref.json")
+        assert sha((folder / "source_bundle_refs.json").read_bytes()) == pack_ref["source_bundle_refs_sha256"]
+        wire = get(pack_ref["kit_cid"])
+        assert sha(wire) == pack_ref["envelope_sha256"]
+        envelope = consumer.decode_context_pack_envelope(wire)
+        assert envelope["pack_cid"] == pack_ref["semantic_pack_cid"]
+        # Recompute all expected source bundle CIDs from CURRENT public source, independently of pack fields.
+        raw_ledger = {p: {**source["files"][p], "source_cid": cid_for_bytes(source_bytes(p)), "kit_cid": store.cid_for(source_bytes(p))} for p in source["files"]}
+        groups = {"target_source": {p: v for p, v in raw_ledger.items() if p in case["admitted_paths"]}, "test_source": {p: v for p, v in raw_ledger.items() if p not in case["admitted_paths"] and is_test(p)}, "surrounding_source": {p: v for p, v in raw_ledger.items() if p not in case["admitted_paths"] and not is_test(p)}}
+        expected = {role: cid_for_bytes(canon({"schema": "ns-eval-resolvable-source-bundle/v1", "role": role, "sources": items})) for role, items in groups.items()}
+        current = current_identity(expected)
+        consumer.require_exact_freshness(envelope, current); enforce_sources(envelope, current)
+        retained = {}
+        for role, reference in refs.items():
+            body = get(reference["kit_cid"])
+            assert cid_for_bytes(body) == expected[role] == envelope["required_source_cids"][role]
+            group = json.loads(body)
+            assert group["sources"] == groups[role]
+            for path, source_ref in group["sources"].items():
+                raw = get(source_ref["kit_cid"])
+                assert cid_for_bytes(raw) == source_ref["source_cid"] and sha(raw) == source_ref["sha256"]
+                assert raw == source_bytes(path)
+                retained[path] = raw
+        assert set(retained) == set(source["files"])
+        for path, link in source["opaque_symlinks"].items():
+            assert os.readlink(Path(source["tree"]) / path) == link["link_target"]
+            assert "opaque-symlink:" + path in envelope["questions"]["missing_evidence"]
+        if args.role == "expand":
+            if args.path not in retained: raise ValueError("requested expansion is outside declared current source")
+            sys.stdout.buffer.write(retained[args.path]); store.close(); return
+        assert not (folder / "consumer.json").exists()
+        checks = []
+        altered = {
+            "tree": replace(current, tree="0" * 40),
+            "objective": replace(current, objective_identity=current.objective_identity + "-changed"),
+            "objective_revision": replace(current, objective_revision=current.objective_revision + "-changed"),
+            "policy": replace(current, policy_identity=cid_for_bytes(b"changed-policy")),
+            "interface": replace(current, interface_identities=current.interface_identities + ("changed-interface",)),
+            "toolchain": replace(current, toolchain_identities=("changed-toolchain",)),
+            "environment": replace(current, environment_requirements=("changed-environment",)),
+        }
+        for name, wrong in altered.items():
+            verdict = consumer.evaluate_exact_freshness(envelope, wrong)
+            assert not verdict.fresh
+            checks.append({"case": name, "native_rejected": True, "stale_fields": list(verdict.stale_fields)})
+        wrong_sources = replace(current, required_source_cids={**expected, "target_source": cid_for_bytes(b"wrong-source-bundle")})
+        native_misses = consumer.evaluate_exact_freshness(envelope, wrong_sources).fresh
+        try: enforce_sources(envelope, wrong_sources)
+        except ValueError: checks.append({"case": "required_source_cid", "native_freshness_alone_misses_change": native_misses, "caller_rejected": True})
+        else: raise AssertionError("caller accepted changed source CID")
+        forged = dict(envelope); forged["task_id"] += "-changed"
+        try: consumer.decode_context_pack_envelope(consumer.encode_context_pack_envelope(forged))
+        except Exception as exc: checks.append({"case": "semantic_payload_tampering", "native_rejected": True, "error_type": type(exc).__name__})
+        else: raise AssertionError("tampered pack admitted")
+        try: consumer.verify_kit_bytes(store, wire + b" ", claimed_cid=pack_ref["kit_cid"])
+        except Exception as exc: checks.append({"case": "stored_byte_tampering", "native_rejected": True, "error_type": type(exc).__name__})
+        else: raise AssertionError("tampered bytes admitted")
+        try: consumer.verify_kit_current_root(store, pack_ref["kit_cid"])
+        except Exception as exc: checks.append({"case": "unpublished_candidate_root", "native_rejected": True, "error_type": type(exc).__name__})
+        else: raise AssertionError("candidate bytes became execution-authoritative root")
+        assert envelope["questions"]["missing_evidence"] and envelope["questions"]["completeness_witness"] is None
+        assert envelope["validation"]["proof_obligations"]
+        write(folder / "retained_raw_inventory.json", {p: {"bytes": len(b), "sha256": sha(b)} for p, b in retained.items()})
+        result = {"task_id": args.case, "separate_process_native_roundtrip": True, "required_bundle_cids_independently_recomputed": True, "raw_files_materialized_from_kit": len(retained), "raw_bytes_materialized_from_kit": sum(map(len, retained.values())), "all_declared_source_retained": True, "unresolved_semantics_retained": True, "locally_authored_acceptance_obligation_retained": True, "raw_substitutions": 0, "signed_receipts": 0, "current_root_published": False, "negative_controls": checks, "all_checks_passed": True, "import_seconds": import_seconds, "provider_calls": 0, "ready_full_caller": False}
+        write(folder / "consume_imports.json", imports_receipt()); write(folder / "consumer.json", result)
+        print(json.dumps(result))
+    store.close()
+
+if __name__ == "__main__": main()

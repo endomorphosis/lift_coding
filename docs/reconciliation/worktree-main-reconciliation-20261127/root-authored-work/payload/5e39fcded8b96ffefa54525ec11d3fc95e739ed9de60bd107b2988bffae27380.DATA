@@ -1,0 +1,42 @@
+# Immutable state identity profile v5
+
+The full Pyparsing stage trace reaches repeated `RepositoryState.state_cid`
+serialization during native source binding. A state contains 3,957 symbols and
+55,859 edges. The native property serializes every record on every access;
+`_state_cid_of` accesses the property for both `hasattr` and retrieval. No source
+bytes change during this immutable-state operation.
+
+The isolated profile adds one private, nonconstructor, noncomparing field to
+`RepositoryState`. It memoizes the canonical CID only for the exact native state
+class containing exact native symbol, artifact, edge and span records. These
+constructors copy structured input into recursive mapping proxies/tuples and
+freeze their fields. Subclasses retain the original uncached property behavior.
+Every access still checks the exact record types, and replacing the codec
+function invalidates the process-local memo. The cache is absent from all durable
+schemas and identity payloads. A new state or `dataclasses.replace` starts empty;
+restoration still independently computes identity and rejects a claimed mismatch.
+
+This assumes the existing closed native value-object discipline: source and codec
+configuration remain frozen, and no code bypasses dataclass immutability through
+reflection or `object.__setattr__`. It is not a defense against arbitrary code
+execution in the native interpreter. The runtime source inventory is checked by
+the context service before and after its operations. The previous profile remains
+unchanged. This is explicitly a different measured implementation profile.
+
+Native source retrieval is unchanged. It binds the caller's expected state CID,
+resolves the actual symbol, retrieves source twice, recomputes its content CID,
+checks the reads agree, and verifies source spans. No source bytes, execution
+results, proof results, or admission decisions are cached. Changed source requires
+new source capture, scan, state, bundle and context pack.
+
+Qualification is recorded separately in `state_identity_validation_v5/`: fresh
+processes using the parent and new profiles compare complete XML states, serialized
+identities, semantic roots and all reachable block bytes for unchanged source and
+an authored comment change with cold and incremental scanning. Additional controls
+check detached serialization, frozen fields, changed-state reconstruction,
+tampered restore, dynamic subclass behavior, and repeated native materialization
+with corrupt source rejection. `state_identity_native_regression_v5/` runs the
+159 existing content, state, source, freshness, model, scanner, identity and
+snapshot authority tests. `results_v12_full_state_identity/` is a distinct full
+XML/Pyparsing producer/consumer run under the existing 600-second process bound.
+None of these operations sends provider requests or establishes token savings.

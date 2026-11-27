@@ -1,0 +1,13 @@
+import hashlib,json,sys,time
+from pathlib import Path
+from ipfs_accelerate_py.agent_supervisor.validation.compositional_verification_vertical import run_compositional_verification_vertical_slice
+started=time.perf_counter()
+result=run_compositional_verification_vertical_slice(output_path=Path(sys.argv[1]),keep_workdir=True)
+source=Path(sys.argv[2]).resolve()
+files={}
+for mod in tuple(sys.modules.values()):
+    p=getattr(mod,'__file__',None)
+    if p and Path(p).is_file() and Path(p).resolve().is_relative_to(source):
+        files[str(Path(p).resolve())]=hashlib.sha256(Path(p).read_bytes()).hexdigest()
+Path(sys.argv[3]).write_text(json.dumps(files,indent=2,sort_keys=True)+'\n')
+print(json.dumps({'status':result['status'],'route_elapsed_seconds':time.perf_counter()-started,'artifact_valid':result['artifact_verification']['valid']}))

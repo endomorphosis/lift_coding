@@ -1,0 +1,153 @@
+"""Supplementary bounded scorer: separate oracle process and candidate worker.
+
+Runs in the same pinned outer Docker sandbox. The candidate worker receives
+source, trusted dependency and actual function-call inputs, never oracle source.
+Only typed serialized observations cross back to the oracle process.
+"""
+import hashlib,json,subprocess,time,uuid
+IMAGE='sha256:7a8b475003c4fe15a2cd4e55e5cfc2f3560bdc9333d624f24cdd6d4340fd7a17'
+WORKER=r'''
+import ast,builtins,json,sys,types
+
+def encode(value,depth=0):
+    if depth>16:raise ValueError('value depth')
+    if value is None or type(value) in (bool,int,float,str):return {'type':type(value).__name__,'value':value}
+    if type(value) is bytes:return {'type':'bytes','value':value.hex()}
+    if type(value) in (list,tuple):
+        if len(value)>10000:raise ValueError('value length')
+        return {'type':type(value).__name__,'value':[encode(v,depth+1) for v in value]}
+    if type(value) is dict:
+        if len(value)>10000:raise ValueError('value length')
+        return {'type':'dict','value':[[encode(k,depth+1),encode(v,depth+1)] for k,v in value.items()]}
+    raise ValueError('unsupported result value')
+
+def decode(value):
+    kind=value['type'];body=value['value']
+    if kind in ('NoneType','bool','int','float','str'):return body
+    if kind=='bytes':return bytes.fromhex(body)
+    if kind=='list':return [decode(v) for v in body]
+    if kind=='tuple':return tuple(decode(v) for v in body)
+    if kind=='dict':return {decode(k):decode(v) for k,v in body}
+    raise ValueError('unsupported argument')
+
+def emit(value):
+    sys.stdout.write(json.dumps(value,separators=(',',':'),allow_nan=False)+'\n');sys.stdout.flush()
+
+request=json.loads(sys.stdin.readline())
+source=request['source'];tree=ast.parse(source)
+exports=set()
+if request.get('dependency') is not None:
+    dep_tree=ast.parse(request['dependency']);exports={node.name for node in dep_tree.body if isinstance(node,ast.FunctionDef) and not node.name.startswith('_')}
+for node in ast.walk(tree):
+    if isinstance(node,(ast.Import,ast.ClassDef,ast.Global,ast.Nonlocal,ast.AsyncFunctionDef,ast.With,ast.AsyncWith)):
+        raise ValueError('candidate outside bounded profile')
+    if isinstance(node,ast.ImportFrom):
+        if request['profile']!='context' or node.module!='dependency' or node.level:
+            raise ValueError('import outside dependency authority')
+        if any(a.name not in exports or a.name.startswith('_') or (a.asname and a.asname.startswith('_')) for a in node.names):
+            raise ValueError('private or undeclared dependency import')
+    if isinstance(node,ast.Name) and node.id.startswith('_'):raise ValueError('private identifier')
+    if isinstance(node,ast.Attribute) and node.attr.startswith('_'):raise ValueError('private attribute')
+    if isinstance(node,ast.FunctionDef) and node.decorator_list:raise ValueError('decorator')
+allowed_names=['RuntimeError','ValueError','TypeError','Exception','AssertionError','dict','list','set','tuple','str','int','bool','len','range','enumerate','min','max','sorted','isinstance','abs','sum','zip']
+allowed={name:getattr(builtins,name) for name in allowed_names}
+if request.get('dependency') is not None:
+    dependency=types.ModuleType('dependency');dependency.__dict__['__builtins__']=dict(allowed)
+    exec(compile(dep_tree,'dependency.py','exec'),dependency.__dict__)
+    def import_dependency(name,globals=None,locals=None,fromlist=(),level=0):
+        if name!='dependency' or level or any(n not in exports for n in fromlist):raise ValueError('import outside declared exports')
+        return dependency
+    allowed['__import__']=import_dependency
+namespace={'__builtins__':allowed}
+exec(compile(tree,'candidate.py','exec'),namespace)
+for name in request['entrypoints']:
+    if not isinstance(namespace.get(name),types.FunctionType):raise ValueError('missing public function')
+emit({'status':'ready'})
+for line in sys.stdin:
+    call=json.loads(line)
+    if call.get('stop'):break
+    name=call['function']
+    if name not in request['entrypoints']:raise ValueError('undeclared public function')
+    args=decode(call['args']);kwargs=decode(call['kwargs'])
+    try:
+        result=namespace[name](*args,**kwargs)
+        emit({'status':'return','value':encode(result),'args_after':encode(args),'identity_args':[i for i,arg in enumerate(args) if result is arg]})
+    except BaseException as error:
+        emit({'status':'exception','exception_type':type(error).__name__,'message':str(error),'args_after':encode(args)})
+'''
+PARENT=r'''
+import builtins,json,subprocess,sys
+request=json.load(sys.stdin)
+worker=subprocess.Popen([sys.executable,'-I','-c',request['worker_source']],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,bufsize=1)
+
+def send(value):
+    worker.stdin.write(json.dumps(value,separators=(',',':'),allow_nan=False)+'\n');worker.stdin.flush()
+
+def receive():
+    line=worker.stdout.readline(1048577)
+    if not line or len(line)>1048576:raise ValueError('worker missing or oversized observation')
+    result=json.loads(line)
+    if not isinstance(result,dict):raise ValueError('worker observation is not object')
+    return result
+
+# Trusted serializer code is shared with the worker as code, not state.
+serializers=request['serialization_source'];sandbox={};exec(serializers,sandbox)
+encode=sandbox['encode'];decode=sandbox['decode']
+child_request={k:request[k] for k in ['source','dependency','profile','entrypoints']}
+send(child_request)
+if receive()!={'status':'ready'}:raise ValueError('worker admission failed')
+calls=0
+
+def proxy(name):
+    def invoke(*args,**kwargs):
+        global calls
+        calls+=1
+        if calls>20000:raise ValueError('call budget')
+        send({'function':name,'args':encode(args),'kwargs':encode(kwargs)})
+        observed=receive()
+        after=decode(observed['args_after'])
+        if len(after)!=len(args):raise ValueError('invalid mutation observation')
+        for before,current in zip(args,after):
+            if type(before) is list and type(current) is list:before[:]=current
+            elif type(before) is dict and type(current) is dict:before.clear();before.update(current)
+        if observed['status']=='exception':
+            exception_type=observed['exception_type']
+            if exception_type not in ['RuntimeError','ValueError','TypeError','Exception','AssertionError','KeyError','IndexError','ZeroDivisionError']:
+                raise RuntimeError('candidate raised unsupported exception type')
+            raise getattr(builtins,exception_type)(observed['message'])
+        if observed['status']!='return':raise ValueError('invalid worker return status')
+        identities=observed['identity_args']
+        if identities:
+            index=identities[0]
+            if type(index) is not int or not 0<=index<len(args):raise ValueError('invalid identity observation')
+            return args[index]
+        return decode(observed['value'])
+    return invoke
+
+oracle_globals={name:proxy(name) for name in request['entrypoints']}
+try:
+    exec(compile(request['validation'],'oracle.py','exec'),oracle_globals)
+    send({'stop':True});worker.wait(timeout=2)
+    if worker.returncode!=0:raise ValueError('worker ended unsuccessfully')
+    print(json.dumps({'passed':True,'observed_calls':calls,'worker_returncode':worker.returncode}))
+finally:
+    if worker.poll() is None:worker.kill()
+'''
+SERIALIZATION=WORKER[WORKER.index('def encode'):WORKER.index('def emit')]
+
+def score(source,validation,*,profile,entrypoints,dependency=None):
+    name='ns-isolated-oracle-'+uuid.uuid4().hex
+    payload={'source':source,'validation':validation,'profile':profile,'entrypoints':entrypoints,'dependency':dependency,'worker_source':WORKER,'serialization_source':SERIALIZATION}
+    command=['docker','run','--name',name,'--rm','-i','--network','none','--read-only','--cap-drop','ALL','--security-opt','no-new-privileges','--pids-limit','32','--memory','128m','--cpus','1','--user','65534:65534',IMAGE,'python','-I','-c',PARENT]
+    start=time.monotonic()
+    try:
+        run=subprocess.run(command,input=json.dumps(payload).encode(),capture_output=True,timeout=20)
+        parsed=None
+        try:parsed=json.loads(run.stdout)
+        except (ValueError,TypeError):pass
+        passed=run.returncode==0 and type(parsed)is dict and parsed.get('passed') is True and type(parsed.get('observed_calls')) is int and parsed['observed_calls']>0 and parsed.get('worker_returncode')==0
+        result={'passed':passed,'returncode':run.returncode,'stdout':run.stdout.decode(errors='replace')[-3000:],'stderr':run.stderr.decode(errors='replace')[-3000:],'observation':parsed}
+    except subprocess.TimeoutExpired:result={'passed':False,'returncode':None,'error':'scorer timeout'}
+    finally:subprocess.run(['docker','rm','-f',name],capture_output=True,timeout=10)
+    result.update(elapsed_seconds=time.monotonic()-start,candidate_sha256=hashlib.sha256(source.encode()).hexdigest(),validation_sha256=hashlib.sha256(validation.encode()).hexdigest())
+    return result

@@ -1,0 +1,50 @@
+# E05: Native procedure synthesis and stored-plan consumption
+
+The native `ProcedureCegis` synthesized a validation plan whose inserted operations changed its behavior on fresh inputs. Persisting the candidate avoided two later synthesis calls in this eight-unit constructed sequence while preserving the same decisions. **A simple complete template matched the quality with no synthesis**, so this experiment does not show a benefit over a suitable template library.
+
+| Arm | Successful units | Native synthesis calls | Candidates evaluated | Fresh-input decisions agreeing with oracle | Abstentions | False admissions |
+|---|---:|---:|---:|---:|---:|---:|
+| Cold synthesis | 7/8 | 8 | 29 | 3,883 | 554 | 0 |
+| Stored synthesized candidate | 7/8 | 6 | 23 | 3,883 | 554 | 0 |
+| Fixed complete template control | 7/8 | 0 | 0 | 3,883 | 554 | 0 |
+
+The fixed-template control was specified and frozen **after** the initial development outcomes. It is a development comparison, not a preregistered confirmatory result. All arms used zero provider calls and zero model tokens. Their token-reduction ratio is undefined because the denominator is zero.
+
+## Implemented mechanism and boundary
+
+The explicit original `.worktrees/proof-carrying-procedure-compiler-v1` supplies the actual `ProcedureCegis`, ProcedureIR contracts/parser, candidate enumeration, counterexample tracking and exact binding checks. The ASEH profile inspected here contains the P0 interpreter/runtime but not this CEGIS module. All 14 loaded procedure modules resolved to the original profile (`runtime_profile.json`).
+
+The native enumerator generates bounded validation-plan variants by inserting operations into a scaffold. It does not synthesize arbitrary Python algorithms. Our starting plan read state, ran a budget check, checked its accumulated result and emitted a receipt. Real replay counterexamples required it to add range analysis and exact-integer type checking. Every candidate's chosen next-step graph was executed; the validator never supplied a canned success. The original incomplete scaffold disagreed with the independent predicate on 1,461 fresh inputs.
+
+No native procedure-body store or procedure-specific applicability module was located in either inspected profile. The native `ProcedureRegistry` stores lifecycle metadata rather than bodies, and requires independently current certificates. This experiment therefore uses an **explicit new development body-store and bounded execution adapter**. Bodies are serialized native candidate IR, hashed, reloaded and checked; native `SynthesisRequest` exact-binding validation is reused as the development applicability check. The operation catalog actually computes numerical/type/scope checks. An independently coded predicate receives only input and policy, never the plan or reported result.
+
+This is not execution through the signed native `ProcedureInterpreter`, native registry promotion, certificate issuance or a claim of production authority. All procedures remain candidates. The P0 facade's unavailable synthesis capability was not relabeled; the separate real `ProcedureCegis` interface performed synthesis.
+
+## Sequence and observations
+
+| Unit | Stored-plan action | Result |
+|---|---|---|
+| Prime | Empty store; synthesize and save candidate | Correct on 555 fresh inputs |
+| Fresh inputs 1 | Read saved bytes; native bindings match; consume plan | Correct on 555 different inputs; no synthesis |
+| Fresh inputs 2 | Read saved bytes; native bindings match; consume same plan | Correct on 555 different inputs; no synthesis |
+| Changed operation source | Native exact-binding rejection; synthesize again | Correct on 555 inputs |
+| Changed numeric policy | Native exact-binding rejection; synthesize again | Correct on 555 inputs |
+| Changed task family | Native family rejection; synthesize again | Correct on 554 inputs |
+| Corrupted persisted body | Content-digest mismatch; synthesize again | Correct on 554 inputs |
+| Unsupported parity policy | Stale bindings rejected; available grammar has no adequate candidate | Abstain on all 554 inputs in both primary arms |
+
+The source mutation is an actual switch between frozen `catalog_v1.py` and equivalent rewritten `catalog_v2.py`, bound by their file bytes. It tests conservative invalidation, not recognition of semantic equivalence. The policy mutation changes the admissible numeric maximum. The unsupported policy additionally requires an even total, which this closed operation catalog cannot compute; failed synthesis remains visible rather than being counted as solved by low expenditure.
+
+The pool contains 4,437 fresh inputs after excluding exact training inputs, partitioned across the eight units. It is an enumerated constructed domain of short sequences and budgets, not 4,437 independent task families. The primary arms each return 3,883 correct decisions on seven supported units and abstain on the eighth. A separate fresh process loaded the final applicable stored candidate, without synthesizing, and correctly evaluated all 4,437 pool inputs under its own supported policy. This demonstrates actual persisted-body consumption; it does not imply that results for those inputs were cached. Every input still executes the procedure's checks.
+
+The separately frozen complete-template control inserts the same two known check operations using the native insertion function, then applies the same training acceptance criterion. It also rejects the unsupported parity profile. Matching this simple control limits the synthesis-benefit claim: the result shows that a saved synthesized plan can displace repeated deterministic search, not that synthesis or learned procedures outperform templates.
+
+## Evidence, failures and remaining evaluations
+
+`matrix.json` and `freeze.json` bind the primary sequence, source/profile changes, budgets and implementation before the current outcomes. `results/` retains every candidate/evaluated counterexample, parsed procedure, individual audit decision, stored body and lookup reason. `control_freeze.json`, `control_results/` and `control_summary.json` retain the later replay/template control. All 16 primary cells were independently reconstructed from saved ProcedureIR and replayed, and their recorded decisions matched exactly.
+
+`attempts/` preserves an initial native-usage serialization error, an earlier version that used declared source identities instead of actual catalog bytes, and a control-summary error that incorrectly expected serialized ProcedureIR to contain its computed content identifier. These harness issues were corrected in fresh frozen runs. They did not trigger provider effects or alter native modules.
+
+This closes a bounded development witness for candidate synthesis, persisted consumption, exact-binding rejection, corruption fallback and unsupported-grammar abstention. It leaves native signed execution, integrated body storage/registry, learned acquisition costs, realistic task-family transfer, useful world-model consumption, multi-task repository trajectories and comparative model-token savings open. Deterministic search counts exclude storage and validation overhead and must not be reported as measured host-compute savings.
+
+The runners create output directories exclusively. Reproduce in a fresh copied evaluation directory; preserve the recorded primary and control directories. No experiment in this directory makes a provider request.

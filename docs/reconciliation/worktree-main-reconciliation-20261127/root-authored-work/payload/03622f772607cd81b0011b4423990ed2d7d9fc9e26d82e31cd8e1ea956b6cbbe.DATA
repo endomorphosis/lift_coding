@@ -1,0 +1,141 @@
+{
+  "accepted_protocol": {
+    "canonical_K_receipt_and_block_bytes_preserved": true,
+    "cross_runtime_historical_replay_supported": false,
+    "historical_prefix_policy": "Reconstruct from the same trusted runtime and all independently joined inspector pins, then require exact recorded complete block SHA256 and byte count. Refuse interpreter/import-root/prefix drift.",
+    "historical_replay_is_current_admission_or_freshness": false,
+    "legacy_absence": "Unmarked pointerless inputs retain the previous no-appendix route and require no new nomination metadata reads.",
+    "missing_downgrade": "A required typed pointer and inclusion receipt must occur together. A captured source_nomination marker requires its genuine digest-bound native context bundle and refuses dropped nomination input.",
+    "receipt_schema": "supervisor-reviewed-source-nomination-inclusion@1"
+  },
+  "auditor_correction_observed_pin": {
+    "bytes": 82115,
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_context_audit.py",
+    "sha256": "c444f8666fa9d8e6ef2ce588984acd9b3350caead795a3afba07064cb58d266e",
+    "source_only_not_final_frozen_suite_qualification": true
+  },
+  "baseline": {
+    "all_match": true,
+    "artifact": "beginning-source-pins.json",
+    "prior_K_manifest": {
+      "path": "/home/barberb/lift_coding/maintenance/terminal-nomination-worker-20261012-01/evidence-manifest.json",
+      "sha256": "ad571285402ec92f8c1042109ba2da9de36605b3a5a123bb035a279aa14dbe6c"
+    },
+    "prior_K_manifest_matches": true,
+    "retained_copies_checked": 9,
+    "sha256": "8485300551d90d672d93e5663da066f17e8945a46ca2fba76dcc9b796175889c"
+  },
+  "blocking_findings": [],
+  "candidate_source_pins": [
+    {
+      "bytes": 23053,
+      "candidate_not_final_freeze": true,
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/reviewed_source_nomination_audit.py",
+      "sha256": "c75522b97fcbb7773853d97dccee638c118cd13820cdaaa5479f7ec950b88942"
+    },
+    {
+      "bytes": 12565,
+      "candidate_not_final_freeze": true,
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/reviewed_source_nomination_context.py",
+      "sha256": "e6baf39c4fcd285171663fcec5884771a2f29d95816a683ca5d4eb214228b493"
+    },
+    {
+      "bytes": 79729,
+      "candidate_not_final_freeze": true,
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_context_audit.py",
+      "sha256": "3a2d3c7ba9a8fdea2f74e3524c7e43ed1c488c9b3c62c291c674f4387a872436"
+    },
+    {
+      "bytes": 12365,
+      "candidate_not_final_freeze": true,
+      "path": "test/api/test_reviewed_source_nomination_audit.py",
+      "sha256": "024a8bdf3c2fe9d2348fecafaf1c539c1afec07178d5777922311799e6b7e81a"
+    }
+  ],
+  "final_qualification_pending": true,
+  "helper_final_source_pins": [
+    {
+      "bytes": 12565,
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/reviewed_source_nomination_context.py",
+      "sha256": "e6baf39c4fcd285171663fcec5884771a2f29d95816a683ca5d4eb214228b493"
+    },
+    {
+      "bytes": 23053,
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/reviewed_source_nomination_audit.py",
+      "sha256": "c75522b97fcbb7773853d97dccee638c118cd13820cdaaa5479f7ec950b88942"
+    },
+    {
+      "bytes": 12365,
+      "path": "test/api/test_reviewed_source_nomination_audit.py",
+      "sha256": "024a8bdf3c2fe9d2348fecafaf1c539c1afec07178d5777922311799e6b7e81a"
+    }
+  ],
+  "limits": {
+    "Python_behavior_equivalence_proved": false,
+    "actual_imported_producer_provenance_qualified_in_this_review": false,
+    "autoencoder_convergence_proved": false,
+    "completion_authority": false,
+    "execution_authority": false,
+    "native_replays_executed_by_reviewer": 0,
+    "prior_K_imported_producer_join_retroactively_qualified": false,
+    "proof_authority": false,
+    "provider_calls": 0,
+    "review_is_final_installed_or_live_provider_qualification": false,
+    "source_to_formal_equivalence_proved": false,
+    "task_completion_or_reviewer_relevance_proved": false,
+    "tests_executed_by_reviewer": 0,
+    "whole_session_total_token_reduction_proved": false
+  },
+  "passed_source_checks": [
+    "Closed scalar receipt field set, exact Boolean identity, non-Boolean integer counts, bounded paths/digests/counts, and task/native-prompt/source/contract/ledger joins.",
+    "Protected genuine task context bundle supplies independent nomination/retrieval path and SHA pairs; the projection cannot nominate itself.",
+    "Nomination wrapper, fixed contract/instruction/review siblings, native retrieval/snapshot, frontier specification and sibling manifest are captured under no-follow public-file custody and aggregate limits.",
+    "Original signed Git baseline sources are read by cat-file size preflight plus bounded max-plus-one pipe reads/timeouts, compared against the native and original semantic source SHA census, and replayed in fresh private scratch.",
+    "Published working-tree source, retired candidate worktree, live materialized wire, and current owner database are unnecessary for original prompt reconstruction.",
+    "Outer daemon Git repository/tree/task identities remain distinct from original datasets repository ID, semantic scope ID, and native task revision.",
+    "Full native query and AST facts are independently replayed; source selectors and native rows do not become behavioral requirement satisfaction.",
+    "Catalog renderer factoring retains the existing shape and order: native or projected code, residual appendix, nomination catalog, literal signed public instruction, complete workspace guidance.",
+    "Returned protected metadata witness guard is available after all prefix, CID, codec and complete-model rendering callbacks."
+  ],
+  "required_acceptance_controls": [
+    "Exact K renderer/receipt golden bytes and absent-route compatibility; malformed/unknown/missing receipt or pointer and marked producer-drop refusal.",
+    "Genuine protected production context_bundle without invented expected.metadata, independent task/contract/ledger/source/tree/index/row joins, and protected bundle mutation refusal.",
+    "Failed/no-publication and successful-publication plus retired-worktree cases, with original Git source reconstruction and no current source fallback.",
+    "Both full and frontier native query/AST replay; all residual requirements retained; receipt count/hash tamper and namespace mismatch refusal.",
+    "Bounded Git oversized/foreign source refusal, metadata factory bypass/restoration, and final callback inode replacement or write-restore refusal.",
+    "Same-runtime exact block reconstruction and explicit interpreter/import-root/prefix drift refusal.",
+    "New installed runtime captures actual imported producer module origins and file SHA/bytes joined to its protected runtime manifest; archive verification alone must not be described as this extra join."
+  ],
+  "resolved_findings": [
+    {
+      "id": "descriptive-false-flags-in-success-conjunction",
+      "observation": "Candidate _replay_model_projection updates model-input checks with raw historical helper observations, including required False authority/freshness/current-read flags. _audit_terminal_context later uses all(checks.values()), making valid nomination input unverified.",
+      "recommended_fix": "Retain descriptive observations separately, or convert exact schema/count/digest/True/False expectations to Boolean assertions before including them in the success conjunction. Keep the truthful false authority fields unchanged.",
+      "reported_to_parent_and_helper_owner": true,
+      "source": "benchmarks/agent_supervisor/container_coding/terminal_context_audit.py",
+      "status_at_capture": "Owner correction independently inspected: descriptive observations are converted to explicit exact expected-value Boolean assertions before the success conjunction.",
+      "truthful_false_authority_and_current_freshness_fields_preserved": true,
+      "zero_count_preserved": true
+    }
+  ],
+  "retained_helper_tests_independently_parsed": {
+    "actual_genuine_bundle_signed_preparation_and_installed_full_input_audit_pending": true,
+    "distinct_union": 92,
+    "duplicate_keys": 0,
+    "errors": 0,
+    "failures": 0,
+    "helper_cases": 55,
+    "live_regression_cases": 37,
+    "metadata_semantic_admission_unit_statements_authored": true,
+    "reviewer_did_not_execute_tests": true,
+    "selected_reports": [
+      "audit-helper-validation-02.xml",
+      "audit-live-regression-01.xml"
+    ],
+    "skips": 0
+  },
+  "review_decision": "No remaining concrete source-only design blocker in the inspected helper/renderer and corrected auditor seam. Final frozen auditor suite, genuine producer fixture, and installed imported-origin/full-input qualification remain separate pending evidence.",
+  "review_passed": true,
+  "schema": "reviewed-source-nomination-historical-audit-design-review@1",
+  "scope": "Read-only review of explicitly named baseline captures and candidate source/tests. No tests, native replay, provider calls, source imports under test, target execution, training, proof calls, database body reads, credentials, or raw transcripts."
+}

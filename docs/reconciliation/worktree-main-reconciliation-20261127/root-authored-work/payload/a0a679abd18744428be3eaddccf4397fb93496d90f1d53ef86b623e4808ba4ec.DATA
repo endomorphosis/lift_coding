@@ -1,0 +1,355 @@
+"""Twenty fresh emitter controls; root alone may run in bounded isolation.
+
+They load the pinned host decoder, never the repository ranker.  Successful
+host emission does not mean the generated Lean module compiled or evaluated.
+"""
+import copy
+import json
+import os
+from pathlib import Path
+
+import pytest
+
+import objective_container_emitter as e
+
+
+def wire(value):
+    return json.dumps(value, sort_keys=True, separators=(',', ':')).encode('utf-8')
+
+
+def scalar(n=0, den=1):
+    return {'kind': 'scalarLiteral', 'ratio': {'numerator': str(n), 'denominator': str(den)},
+            'type': {'kind': 'scalar'}}
+
+
+def var(name, kind='scalar', **dimensions):
+    return {'kind': 'var', 'name': name, 'type': {'kind': kind, **dimensions}}
+
+
+def op(operator, *arguments):
+    out = {'kind': 'scalarOp', 'operator': operator, 'arguments': list(arguments), 'type': {'kind': 'scalar'}}
+    if operator == 'ifNonneg':
+        out.update(syntax_policy='both_branches_checked', evaluation_policy='only_selected_branch')
+    return out
+
+
+def record(fields):
+    return {'kind': 'prefixRecord', 'fields': [{'name': name, 'value': value} for name, value in fields],
+            'type': {'kind': 'record', 'fields': [{'name': name, 'type': value['type']} for name, value in fields]}}
+
+
+def map_vector(source, binder, body, length):
+    return {'kind': 'mapVector', 'source': source, 'binder': binder, 'body': body,
+            'order': 'ascending', 'type': {'kind': 'vector', 'length': length}}
+
+
+def map_rows(source, binder, body, rows):
+    return {'kind': 'mapRows', 'source': source, 'binder': binder, 'body': body,
+            'order': 'ascending', 'type': {'kind': 'vector', 'length': rows}}
+
+
+def exact_sum(values):
+    return {'kind': 'fsumExact', 'values': values, 'order': 'ascending_exact_real_addition',
+            'type': {'kind': 'scalar'}}
+
+
+def zip_map(left, right, names, body, length, kind='zipMap'):
+    return {'kind': kind, 'left': left, 'right': right, 'binders': names, 'body': body,
+            'truncation': 'minimum_length', 'type': {'kind': 'vector', 'length': length}}
+
+
+def range_map(length=3, source='w', index='i'):
+    return {'kind': 'rangeMap', 'length': length, 'index_bound': length, 'binder': index,
+            'body': {'kind': 'indexVector', 'vector': var(source, 'vector', length=length),
+                     'index': var(index, 'index', bound=length), 'type': {'kind': 'scalar'}},
+            'order': 'ascending_zero_to_bound_exclusive', 'type': {'kind': 'vector', 'length': length}}
+
+
+@pytest.fixture(scope='module')
+def buffers():
+    keys = ('RANKER_PREFIX_DRAFT', 'RANKER_AST_SOURCE', 'RANKER_PREFIX_BINDINGS',
+            'RANKER_PREFIX_RECEIPT', 'RANKER_PREFIX_COMPILER', 'RANKER_PREFIX_DECODER')
+    return tuple(Path(os.environ[key]).read_bytes() for key in keys)
+
+
+@pytest.fixture(scope='module')
+def decoder(buffers):
+    return buffers[5]
+
+
+@pytest.fixture(scope='module')
+def actual(buffers):
+    return e.emit_source_bound_prefix(*buffers)
+
+
+def literal(decoder, node, scope=None, **keywords):
+    return e.emit_generic_literal(wire(node), {} if scope is None else scope, decoder, **keywords)
+
+
+def reject(decoder, reason, node, scope=None, **keywords):
+    with pytest.raises(e.EmissionRefusal) as error:
+        literal(decoder, node, scope, **keywords)
+    assert error.value.reason_code == reason
+
+
+def test_01_actual_whole_source_prefix_is_emitted(actual):
+    assert actual['whole_five_assignment_prefix_emitted'] is True
+    assert actual['original_source_rejoined'] is True
+    assert actual['same_buffer_compiler_receipt_rejoined'] is True
+    assert actual['numeric_assignments_decoded'] == 5
+    assert actual['source_context_statements_rejoined'] == 7
+    assert actual['source_binding_records_rejoined'] == 17
+    assert actual['actual_numeric_coordinates_supplied'] == 0
+    assert actual['original_ranker_execution_calls'] == 0
+    assert actual['source_suffix_compiled'] is False
+    assert [x['name'] for x in actual['source_bound_assignments']] == list(e.PREFIX_NAMES)
+    assert 'def emittedPrefix : RankerObjectiveContainerLanguage.SourcePrefix' in actual['text']
+    assert actual['text'].count('RankerObjectiveContainerLanguage.SourcePrefix.letBind') == 5
+
+
+def test_02_all_six_exact_buffers_refuse_substitution(buffers):
+    for i, raw in enumerate(buffers):
+        altered = list(buffers)
+        altered[i] = raw[:-1] + bytes((raw[-1] ^ 1,))
+        with pytest.raises(e.EmissionRefusal) as error:
+            e.emit_source_bound_prefix(*altered)
+        assert error.value.reason_code == ('decoderPinMismatch' if i == 5 else 'inputPinMismatch')
+    with pytest.raises(e.EmissionRefusal) as error:
+        e.emit_generic_literal(wire(scalar()), {}, buffers[5].decode('utf-8'))
+    assert error.value.reason_code == 'decoderPinMismatch'
+
+
+def test_03_all_actual_constructor_counts_join(actual):
+    assert actual['operation_counts'] == {'letBind': 5, 'var': 31, 'scalarLiteral': 7,
+        'scalarOp': 26, 'mapRows': 1, 'mapVector': 2, 'zipMap': 2, 'zipRowsMap': 1,
+        'rangeMap': 1, 'indexVector': 2, 'length': 2, 'natToScalar': 2,
+        'fsumExact': 4, 'prefixRecord': 1}
+    for constructor, count in (('mapRows', 1), ('mapVector', 2), ('zipMap', 2),
+                                ('zipRowsMap', 1), ('rangeMap', 1), ('indexVector', 2),
+                                ('natToScalar', 2), ('fsumExact', 4)):
+        assert actual['text'].count('SourceExpr.' + constructor + ' ') == count
+    assert set(e.CONSTRUCTOR_MAP) == set(actual['operation_counts'])
+
+
+def test_04_map_rows_binder_receives_actual_row_width(decoder):
+    scope = {'m': {'kind': 'matrix', 'rows': 2, 'columns': 7}}
+    node = map_rows(var('m', 'matrix', rows=2, columns=7), 'row', exact_sum(var('row', 'vector', length=7)), 2)
+    out = literal(decoder, node, scope)
+    assert '(SourceExpr.mapRows "row" ' in out['text']
+    assert '(τ := (.matrix 2 7)) "m"' in out['text']
+    assert '(τ := (.vector 7)) "row"' in out['text']
+    bad = copy.deepcopy(node)
+    bad['body']['values']['type']['length'] = 2
+    reject(decoder, 'typeMismatch', bad, scope)
+    node['type']['length'] = 7
+    reject(decoder, 'typeMismatch', node, scope)
+
+
+def test_05_map_vector_zero_length_preserves_body_syntax(decoder):
+    scope = {'v': {'kind': 'vector', 'length': 0}}
+    node = map_vector(var('v', 'vector', length=0), 'x', op('div', var('x'), scalar()), 0)
+    out = literal(decoder, node, scope)
+    assert '(SourceExpr.mapVector "x" ' in out['text']
+    assert '(τ := (.vector 0)) "v"' in out['text']
+    assert 'SourceExpr.scalarBinary .div' in out['text']
+    node['body'] = var('unknown')
+    reject(decoder, 'unknownName', node, scope)
+
+
+def test_06_shorter_zip_emission_keeps_both_original_dimensions(decoder):
+    scope = {'a': {'kind': 'vector', 'length': 2}, 'b': {'kind': 'vector', 'length': 5}}
+    node = zip_map(var('a', 'vector', length=2), var('b', 'vector', length=5),
+                   ['x', 'y'], op('sub', var('x'), var('y')), 2)
+    out = literal(decoder, node, scope)
+    assert out['inferred_type'] == ('vector', 2)
+    assert '(SourceExpr.zipMap "x" "y" ' in out['text']
+    assert '(τ := (.vector 2)) "a"' in out['text']
+    assert '(τ := (.vector 5)) "b"' in out['text']
+    node['type']['length'] = 5
+    reject(decoder, 'typeMismatch', node, scope)
+
+
+def test_07_row_zip_pairs_scalar_and_row_not_equal_lengths(decoder):
+    scope = {'a': {'kind': 'vector', 'length': 5}, 'm': {'kind': 'matrix', 'rows': 2, 'columns': 7}}
+    node = zip_map(var('a', 'vector', length=5), var('m', 'matrix', rows=2, columns=7),
+        ['f', 'row'], op('mul', var('f'), exact_sum(var('row', 'vector', length=7))), 2, kind='zipRowsMap')
+    out = literal(decoder, node, scope)
+    assert '(SourceExpr.zipRowsMap "f" "row" ' in out['text']
+    assert '(τ := .scalar) "f"' in out['text']
+    assert '(τ := (.vector 7)) "row"' in out['text']
+    node['body']['arguments'][0] = var('f', 'vector', length=7)
+    reject(decoder, 'typeMismatch', node, scope)
+
+
+def test_08_range_emits_bound_vector_instead_of_standalone_nat(decoder):
+    scope = {'w': {'kind': 'vector', 'length': 3}}
+    node = range_map()
+    out = literal(decoder, node, scope, range_sources={'$': 'w'})
+    assert out['text'].startswith('(SourceExpr.rangeMap "i" (SourceExpr.leaf ')
+    assert '(τ := (.vector 3)) "w"' in out['text']
+    assert '(τ := (.index 3)) "i"' in out['text']
+    assert 'natLiteral' not in out['text']
+    assert out['original_source_rejoined'] is False
+    reject(decoder, 'rangeProvenance', node, scope)
+    reject(decoder, 'rangeProvenance', node, scope, range_sources={'$': 'missing'})
+    node['index_bound'] = 4
+    reject(decoder, 'dimensionMismatch', node, scope, range_sources={'$': 'w'})
+
+
+def test_09_lexical_scope_refuses_capture_shadow_and_pair_aliases(decoder):
+    scope = {'v': {'kind': 'vector', 'length': 3}, 'x': {'kind': 'scalar'}}
+    reject(decoder, 'binderRole', map_vector(var('v', 'vector', length=3), 'x', scalar(), 3), scope)
+    pairs = zip_map(var('v', 'vector', length=3), var('v', 'vector', length=3), ['x', 'x'], scalar(), 3)
+    reject(decoder, 'binderRole', pairs, {'v': {'kind': 'vector', 'length': 3}})
+    pairs['binders'] = ['left', 'math']
+    reject(decoder, 'binderRole', pairs, {'v': {'kind': 'vector', 'length': 3}})
+    node = map_vector(var('v', 'vector', length=3), 'x', var('y'), 3)
+    reject(decoder, 'unknownName', node, {'v': {'kind': 'vector', 'length': 3}})
+
+
+def test_10_all_container_policies_refuse_loss_of_source_order(decoder):
+    scope = {'v': {'kind': 'vector', 'length': 3}, 'm': {'kind': 'matrix', 'rows': 3, 'columns': 3}}
+    nodes = [map_vector(var('v', 'vector', length=3), 'x', scalar(), 3),
+             map_rows(var('m', 'matrix', rows=3, columns=3), 'row', scalar(), 3),
+             range_map(source='v')]
+    for node in nodes:
+        node['order'] = 'parallel_unordered'
+        reject(decoder, 'evaluationPolicy', node, scope, range_sources={'$': 'v'} if node['kind'] == 'rangeMap' else None)
+    for kind, right in (('zipMap', var('v', 'vector', length=3)),
+                        ('zipRowsMap', var('m', 'matrix', rows=3, columns=3))):
+        node = zip_map(var('v', 'vector', length=3), right, ['x', 'y'], scalar(), 3, kind=kind)
+        node['truncation'] = 'require_equal_lengths'
+        reject(decoder, 'evaluationPolicy', node, scope)
+
+
+def test_11_dead_branch_domain_error_is_emitted_but_bad_syntax_refuses(decoder):
+    node = op('ifNonneg', scalar(1), scalar(2), op('div', scalar(1), scalar()))
+    out = literal(decoder, node)
+    assert 'SourceExpr.ifNonneg' in out['text']
+    assert 'SourceExpr.scalarBinary .div' in out['text']
+    node['arguments'][2] = var('invalid_dead_branch')
+    reject(decoder, 'unknownName', node)
+    node = op('ifNonneg', scalar(1), scalar(2), scalar(3))
+    node['evaluation_policy'] = 'evaluate_both'
+    reject(decoder, 'evaluationPolicy', node)
+
+
+def test_12_mean_remains_sum_divided_by_lexical_length(decoder):
+    scope = {'v': {'kind': 'vector', 'length': 0}}
+    length = {'kind': 'length', 'source': var('v', 'vector', length=0), 'type': {'kind': 'nat'}}
+    cast = {'kind': 'natToScalar', 'value': length, 'type': {'kind': 'scalar'}}
+    out = literal(decoder, op('div', exact_sum(var('v', 'vector', length=0)), cast), scope)
+    assert 'SourceExpr.scalarBinary .div' in out['text']
+    assert 'SourceExpr.fsumExact' in out['text']
+    assert 'SourceExpr.lengthVector' in out['text']
+    assert 'mean' not in out['text']
+    reject(decoder, 'unsupportedOpcode', {'kind': 'meanExact', 'type': {'kind': 'scalar'}})
+
+
+def test_13_fin_index_dimensions_cannot_be_retyped(decoder):
+    scope = {'v': {'kind': 'vector', 'length': 3}, 'i': {'kind': 'index', 'bound': 3},
+             'j': {'kind': 'index', 'bound': 4}, 'n': {'kind': 'nat'}}
+    node = {'kind': 'indexVector', 'vector': var('v', 'vector', length=3),
+            'index': var('i', 'index', bound=3), 'type': {'kind': 'scalar'}}
+    assert 'SourceExpr.indexVector' in literal(decoder, node, scope)['text']
+    for bad in (var('j', 'index', bound=4), var('n', 'nat')):
+        node['index'] = bad
+        reject(decoder, 'indexBound', node, scope)
+
+
+def test_14_ordered_generic_record_and_let_rhs_are_emitted(decoder):
+    fields = [('zeta', scalar(7)), ('alpha', scalar(8))]
+    out = e.emit_generic_source_prefix(wire(record(fields)), {}, decoder)
+    assert out['text'].index('(name := "zeta")') < out['text'].index('(name := "alpha")')
+    assert out['text'].index('("zeta", .scalar)') < out['text'].index('("alpha", .scalar)')
+    end = record([('result', var('x'))])
+    node = {'kind': 'letBind', 'binder': 'x', 'value': op('div', scalar(1), scalar()),
+            'body': end, 'evaluation_order': 'rhs_then_body', 'type': end['type']}
+    out = e.emit_generic_source_prefix(wire(node), {}, decoder)
+    assert out['text'].index('SourceExpr.scalarBinary .div') < out['text'].index('SourcePrefix.record')
+    node['value'] = var('x')
+    reject(decoder, 'unknownName', node)
+    duplicate = record(fields)
+    duplicate['fields'][1]['name'] = 'zeta'
+    reject(decoder, 'recordShape', duplicate)
+
+
+def test_15_source_binary64_l2_is_not_ideal_decimal(actual, decoder):
+    ratio = '(5764607523034235 : ℚ) / (576460752303423488 : ℚ)'
+    assert actual['source_L2_exact_ratio'] == ('5764607523034235', '576460752303423488')
+    assert actual['text'].count(ratio) == 2
+    assert '(1 : ℚ) / (100 : ℚ)' not in actual['text']
+    for bad in (scalar(2, 4), scalar(1, 0)):
+        reject(decoder, 'ratioShape', bad)
+    node = scalar()
+    node['ratio']['numerator'] = '01'
+    reject(decoder, 'ratioShape', node)
+
+
+def test_16_namespace_and_name_text_cannot_inject_lean(decoder):
+    base = record([('value', scalar())])
+    for name in ('x"; sorry', 'x\nend', 'x.y', 'é', 'a' * 65):
+        with pytest.raises(e.EmissionRefusal) as error:
+            e.emit_generic_source_prefix(wire(base), {}, decoder, namespace_name=name)
+        assert error.value.reason_code == 'nameShape'
+    for name in ('end', 'namespace', 'Type', '_'):
+        with pytest.raises(e.EmissionRefusal) as error:
+            e.emit_generic_source_prefix(wire(base), {}, decoder, namespace_name=name)
+        assert error.value.reason_code == 'namespaceShape'
+    quoted = e.emit_generic_source_prefix(wire(base), {}, decoder, namespace_name='fun')
+    assert 'namespace «fun»' in quoted['text'] and 'end «fun»' in quoted['text']
+    assert quoted['emitted_namespace'] == 'fun'
+    reject(decoder, 'nameShape', var('x"; sorry'), {'x': {'kind': 'scalar'}})
+
+
+def test_17_duplicate_json_and_unknown_fields_have_no_emission(decoder):
+    for raw, reason in ((b'{"kind":"var","kind":"scalarLiteral"}', 'duplicateKey'),
+                        (b'{"x":NaN}', 'schema'), (b'{"x":1.0}', 'schema')):
+        with pytest.raises(e.EmissionRefusal) as error:
+            e.emit_generic_literal(raw, {}, decoder)
+        assert error.value.reason_code == reason
+    node = scalar()
+    node['proof_authority'] = True
+    reject(decoder, 'schema', node)
+    for kind in ('objective', 'gradient', 'dot', 'loss', 'convergence'):
+        reject(decoder, 'unsupportedOpcode', {'kind': kind, 'type': {'kind': 'scalar'}})
+
+
+def test_18_mutable_decoded_receipts_cannot_become_emitter_inputs(actual, decoder):
+    forged = dict(actual, kernel_checked=True, proof_authority=True, planner_activation=True)
+    with pytest.raises(e.EmissionRefusal) as error:
+        e.emit_generic_literal(forged, {}, decoder)
+    assert error.value.reason_code == 'budget'
+    ordinary = literal(decoder, record([('result', scalar())]))
+    assert ordinary['original_source_rejoined'] is False
+    assert ordinary['whole_five_assignment_prefix_emitted'] is False
+    assert ordinary['kernel_checked'] is False
+
+
+def test_19_byte_budgets_and_nested_term_let_refuse_atomically(decoder):
+    for raw in (b' ' * 262145, b'[' * 97 + b'0' + b']' * 97, b'9' * 80):
+        with pytest.raises(e.EmissionRefusal) as error:
+            e.emit_generic_literal(raw, {}, decoder)
+        assert error.value.reason_code == 'budget'
+    # Prefix lets are supported; no SourceExpr let opcode is invented for a
+    # let-shaped scalar subexpression absent from the typed container language.
+    nested = {'kind': 'letBind', 'binder': 'x', 'value': scalar(1), 'body': var('x'),
+              'evaluation_order': 'rhs_then_body', 'type': {'kind': 'scalar'}}
+    node = op('add', nested, scalar())
+    reject(decoder, 'kernelUnsupported', node)
+
+
+def test_20_host_success_keeps_qualification_training_and_task_open(actual):
+    for key in ('proof_authority', 'execution_authority', 'planner_activation', 'completion_authority',
+                'kernel_checked', 'theorem_qualified', 'strict_cache_admission',
+                'Lean_SourcePrefix_literal_typechecked', 'typed_Lean_SourcePrefix_exists',
+                'source_semantic_equivalence_proved', 'whole_objective_semantics_proved',
+                'computed_gradient_semantics_proved', 'source_error_order_equivalence_proved',
+                'host_decoder_formal_preservation_proved', 'Python_Float_semantics_proved',
+                'CPython_math_fsum_semantics_proved', 'Python_libm_semantics_proved',
+                'optimizer_source_convergence_proved', 'global_autoencoder_convergence_proved'):
+        assert actual[key] is False
+    assert actual['new_native_jobs'] == actual['new_training_jobs'] == actual['new_metadata_hydration_jobs'] == 0
+    assert actual['full_task_satisfaction'] == 'unknown'
+    assert actual['decoder_source_AST_parse_calls'] == 1
+    assert actual['compiler_source_AST_parse_calls_declared'] == 2

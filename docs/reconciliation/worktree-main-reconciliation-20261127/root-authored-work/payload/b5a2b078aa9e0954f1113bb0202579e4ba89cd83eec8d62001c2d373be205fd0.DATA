@@ -1,0 +1,20 @@
+"""Detach the frozen finite driver from the interactive tool lifetime."""
+import argparse,hashlib,json,os,subprocess,sys,time
+from pathlib import Path
+def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+def main():
+    parser=argparse.ArgumentParser();parser.add_argument('--profile',type=Path,required=True);parser.add_argument('--expected-profile-sha256',required=True);args=parser.parse_args();p=args.profile.resolve();run=p.parent
+    if sha(p)!=args.expected_profile_sha256:raise ValueError('profile changed')
+    profile=json.loads(p.read_text());driver=profile['driver_entrypoint']
+    for path in [str(Path(__file__).resolve()),driver]:
+        if profile['evaluation_files'].get(path)!=sha(path):raise ValueError('launch/driver source not frozen')
+    if (run/'state').exists() or (run/'driver_launch_intent.json').exists():raise ValueError('fresh run required; never relaunch implicitly')
+    command=[sys.executable,'-B',driver,'--profile',str(p),'--expected-profile-sha256',args.expected_profile_sha256]
+    intent={'schema':'ns-repository-detached-launch@1','created_at_ns':time.time_ns(),'profile_sha256':sha(p),'launch_source_sha256':sha(__file__),'driver_source_sha256':sha(driver),'command':command,'stdout':str(run/'driver_stdout'),'stderr':str(run/'driver_stderr'),'bounded_cohort_only':True}
+    with (run/'driver_launch_intent.json').open('x') as stream:json.dump(intent,stream,indent=2,sort_keys=True);stream.write('\n');stream.flush();os.fsync(stream.fileno())
+    with (run/'driver_stdout').open('xb') as stdout,(run/'driver_stderr').open('xb') as stderr:
+        process=subprocess.Popen(command,stdin=subprocess.DEVNULL,stdout=stdout,stderr=stderr,start_new_session=True,close_fds=True)
+    receipt={**intent,'driver_pid':process.pid,'observed_at_ns':time.time_ns()}
+    with (run/'driver_launch_receipt.json').open('x') as stream:json.dump(receipt,stream,indent=2,sort_keys=True);stream.write('\n')
+    print(json.dumps({'driver_pid':process.pid,'profile_sha256':sha(p),'stdout':receipt['stdout'],'stderr':receipt['stderr'],'automatic_restart':False}))
+if __name__=='__main__':main()

@@ -1,0 +1,84 @@
+{
+  "tested_at": "2026-09-14T06:15:13.599400+00:00",
+  "all_passed": true,
+  "goal_count": 64,
+  "unique_declarations": 64,
+  "cases": [
+    {
+      "type": "framing",
+      "input": "by\n rfl",
+      "finish": "stop",
+      "observed": "candidate"
+    },
+    {
+      "type": "framing",
+      "input": "```lean\nby\n rfl\n```",
+      "finish": "stop",
+      "observed": "candidate"
+    },
+    {
+      "type": "framing",
+      "input": "ABSTAIN",
+      "finish": "stop",
+      "observed": "abstained"
+    },
+    {
+      "type": "framing",
+      "input": "by\n rfl",
+      "finish": "length",
+      "observed": "incomplete_generation"
+    },
+    {
+      "type": "framing",
+      "input": "[THINK]by rfl",
+      "finish": "stop",
+      "observed": "unexpected_transport_or_reasoning"
+    },
+    {
+      "type": "framing",
+      "input": "by rfl<|im_end|>extra",
+      "finish": "stop",
+      "observed": "unexpected_transport_or_reasoning"
+    },
+    {
+      "type": "proof_policy",
+      "input": "by sorry",
+      "observed": "forbidden_identifier"
+    },
+    {
+      "type": "proof_policy",
+      "input": "by admit",
+      "observed": "forbidden_identifier"
+    },
+    {
+      "type": "proof_policy",
+      "input": "by native_decide",
+      "observed": "forbidden_identifier"
+    },
+    {
+      "type": "proof_policy",
+      "input": "by\n run_tac pure ()",
+      "observed": "forbidden_identifier"
+    },
+    {
+      "type": "proof_policy",
+      "input": "by\n exact unsafeCast True.intro",
+      "observed": "forbidden_identifier"
+    },
+    {
+      "type": "proof_policy",
+      "input": "by\n rfl\ntheorem changed : True := by trivial",
+      "observed": "forbidden_identifier"
+    },
+    {
+      "type": "proof_policy",
+      "input": "by\n #eval 1",
+      "observed": "forbidden_syntax"
+    },
+    {
+      "type": "proof_policy",
+      "input": "by\n /-comment-/ rfl",
+      "observed": "forbidden_syntax"
+    }
+  ]
+}

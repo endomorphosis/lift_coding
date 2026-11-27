@@ -1,0 +1,36 @@
+"""Observation only: no identity, service, verifier, or audit-policy injection."""
+import json
+import os
+from pathlib import Path
+
+import pytest
+from ipfs_accelerate_py.testing.proof_reuse import plugin
+
+
+def pytest_configure(config):
+    config._ns_observer = {"reports": [], "body_calls": 0}
+
+
+@pytest.hookimpl(hookwrapper=True)
+def pytest_pyfunc_call(pyfuncitem):
+    pyfuncitem.config._ns_observer["body_calls"] += 1
+    print("NS_BODY_EXECUTED", flush=True)
+    yield
+
+
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    result = yield
+    report = result.get_result()
+    item.config._ns_observer["reports"].append({"phase": report.when, "outcome": report.outcome, "duration_seconds": report.duration})
+
+
+def pytest_sessionfinish(session, exitstatus):
+    state = session.config._ns_observer
+    resolved = plugin.get_proof_reuse_config(session.config)
+    metrics = getattr(session.config, plugin.METRICS_ATTRIBUTE, None)
+    state.update(exitstatus=int(exitstatus), resolved_mode=resolved.mode.value, configuration_error=resolved.configuration_error,
+        metrics=metrics.to_dict() if metrics is not None else None, native_plugin_path=plugin.__file__)
+    state["decision"] = "RUN" if state["body_calls"] else "NO_BODY_OBSERVED"
+    spec = json.loads(Path(os.environ["NS_REUSE_SPEC"]).read_text())
+    Path(spec["observation"]).write_text(json.dumps(state, indent=2, sort_keys=True) + "\n")

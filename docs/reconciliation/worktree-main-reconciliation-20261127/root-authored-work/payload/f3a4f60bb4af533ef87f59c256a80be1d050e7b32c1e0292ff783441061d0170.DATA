@@ -1,0 +1,338 @@
+"""Evaluation admission adapter over unmodified native ASEH sealing/storage.
+
+JSON stdin operations publish/read/recover. Native integrity verification is
+combined with complete local effect inventory and fresh isolated behavioral
+execution. These are unsigned local development receipts, not theorem proofs.
+"""
+import ast
+import hashlib
+import importlib.util
+import json
+import os
+from pathlib import Path
+import sqlite3
+import subprocess
+import sys
+import time
+
+HERE = Path(__file__).resolve().parent
+INTEGRATED = HERE.parent
+EVALS = INTEGRATED.parent
+ROOT = INTEGRATED.parents[4]
+SOURCE = ROOT / '.worktrees/agent-supervisor-efficiency-and-state-hardening-v1'
+sys.path[:0] = [str(SOURCE), str(SOURCE/'ipfs_datasets_py'), str(SOURCE/'ipfs_kit_py')]
+from ipfs_accelerate_py.agent_supervisor.proof.incremental_sealing.full_checkpoint import RepositoryStateView, VerificationPolicyView, RequiredUnitEvidence, create_full_checkpoint
+from ipfs_accelerate_py.agent_supervisor.proof.incremental_sealing.delta_seal import ParentSealView, DeltaUnitEvidence, DeltaTransitionStatement, DiffCommitmentView, build_delta_seal, TRANSITION_SCHEMA
+from ipfs_accelerate_py.agent_supervisor.proof.incremental_sealing.sealer import IncrementalProofSealer
+from ipfs_accelerate_py.agent_supervisor.proof.incremental_sealing.verification import verify_seal, UnitProofView
+from ipfs_kit_py.proof_seal_store.contracts import ArtifactKind, ArtifactReference, CurrentSealPointer, SealTransitionPhase, SealTransitionState
+from ipfs_kit_py.proof_seal_store.wal import record_phase, commit_transition
+
+UNITS = {'accepted_source': 'source_integrity', 'semantic_preparation': 'static_analysis', 'effect_inventory': 'release_invariant', 'behavior_visible': 'unit_test', 'behavior_audit': 'integration_test'}
+IDS = tuple(sorted(UNITS))
+REPLAYS = []
+
+
+def encoded(value):
+    return json.dumps(value, sort_keys=True, separators=(',', ':'), ensure_ascii=True).encode()
+
+
+def digest(value):
+    return 'sha256:' + hashlib.sha256(value if isinstance(value, bytes) else encoded(value)).hexdigest()
+
+
+def fhash(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def save_new(path, value):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    data = encoded(value) + b'\n'
+    try:
+        with path.open('xb') as handle:
+            handle.write(data); handle.flush(); os.fsync(handle.fileno())
+    except FileExistsError:
+        if path.read_bytes() != data:
+            raise ValueError('immutable service metadata differs: ' + str(path))
+    fd = os.open(path.parent, os.O_RDONLY)
+    try:
+        os.fsync(fd)
+    finally:
+        os.close(fd)
+
+
+def loaded_sources():
+    return {str(Path(m.__file__).resolve()): {'module': name, 'sha256': fhash(m.__file__)}
+        for name, m in sorted(sys.modules.copy().items())
+        if name.startswith(('ipfs_accelerate_py', 'ipfs_datasets_py', 'ipfs_kit_py'))
+        and getattr(m, '__file__', None) and Path(m.__file__).is_file()}
+
+
+def profile_for(request):
+    path = Path(request['profile_path'])
+    profile = json.loads(path.read_text())
+    if fhash(path) != request['profile_sha256']:
+        raise ValueError('profile identity mismatch')
+    if not profile.get('native_sealing_enrolled'):
+        raise ValueError('native sealing absent from frozen profile')
+    if profile['sealing_service']['required_unit_ids'] != list(IDS):
+        raise ValueError('external complete required set mismatch')
+    for filename, expected in profile['evaluation_files'].items():
+        if fhash(filename) != expected:
+            raise ValueError('evaluation source identity mismatch: ' + filename)
+    for filename, record in loaded_sources().items():
+        if profile['sealing_native_files'].get(filename) != record['sha256']:
+            raise ValueError('unfrozen native sealing import: ' + filename)
+    return profile
+
+
+def case_for(case_id):
+    return next(c for c in json.loads((EVALS/'routing_v2/cases.json').read_text())['cases'] if c['id'] == case_id)
+
+
+def state(pack):
+    b = pack['binding']
+    return RepositoryStateView(repository_id=b['repository_id'], revision=b['event_id'],
+        source_root_cid=digest({'target.py': digest(pack['source'].encode())}),
+        repository_state_cid=digest(b), environment_cid=digest(b['environment']),
+        parent_revision_ids=() if b['parent_event'] is None else (b['parent_event'],))
+
+
+def policy(pack):
+    return VerificationPolicyView(policy_cid=digest({'profile_sha256': pack['binding']['profile_sha256'],
+        'required_unit_ids': IDS, 'admission': 'unsigned-local-complete-effects-and-fresh-isolated-behavior-v1', 'mode': 'integrity_only'}))
+
+
+def parent_view(pack):
+    s = pack['seal']
+    return ParentSealView(seal_cid=pack['seal_cid'], accepted=True, seal_status=s['seal_status'],
+        repository_id=s['repository_id'], branch_id='main', revision=s['revision'],
+        source_root_cid=s['source_root_cid'], repository_state_cid=s['repository_state_cid'],
+        environment_cid=s['environment_cid'], policy_cid=s['policy_cid'],
+        manifest_root_cid=s.get('manifest_root_cid', s.get('new_manifest_root_cid')),
+        forest_root_cid=s.get('repository_proof_root', s.get('new_forest_root_cid')),
+        aggregation_root=s.get('aggregation_root', s.get('new_aggregation_root')),
+        required_unit_ids=tuple(s['required_unit_ids']),
+        unit_proof_cids={u: digest(r) for u, r in pack['receipts'].items()}, logical_epoch=s.get('logical_epoch', 0))
+
+
+def build(pack, parent):
+    units = []
+    for unit, receipt in sorted(pack['receipts'].items()):
+        args = dict(unit_id=unit, proof_object_cid=digest(receipt), category=UNITS[unit], freshly_verified=True)
+        units.append(RequiredUnitEvidence(**args) if parent is None else DeltaUnitEvidence(**args,
+            disposition='replace', parent_proof_object_cid=digest(parent['receipts'][unit]),
+            newly_admitted=True, cache_key_unchanged=False))
+    if parent is None:
+        return create_full_checkpoint(state(pack), policy(pack), units=units, expected_unit_ids=IDS), units, None
+    p, new = parent_view(parent), state(pack)
+    changes = {} if parent['source'] == pack['source'] else {'target.py': {'old': digest(parent['source'].encode()), 'new': digest(pack['source'].encode())}}
+    statement = DeltaTransitionStatement(schema=TRANSITION_SCHEMA, parent_seal_cid=p.seal_cid,
+        branch_id='main', old_source_root_cid=p.source_root_cid, old_repository_state_cid=p.repository_state_cid,
+        old_manifest_root_cid=p.manifest_root_cid, old_forest_root_cid=p.forest_root_cid, old_aggregation_root=p.aggregation_root,
+        new_source_root_cid=new.source_root_cid, new_repository_state_cid=new.repository_state_cid,
+        new_revision=new.revision, parent_revision_ids=(p.revision,),
+        diff=DiffCommitmentView(diff_algorithm='ns-development/exact-file-map-sha256@1', changed_artifact_commitment=digest(changes), complete=True, changed_paths=tuple(sorted(changes))),
+        expected_manifest_unit_ids=IDS, expected_surviving_leaf_ids=IDS, forest_rebuilt=True,
+        aggregation_rebuilt=True, logical_epoch=p.logical_epoch+1, transition_id=pack['transition_id'])
+    return build_delta_seal(p, new, policy(pack), statement, units=units), units, statement
+
+
+def inventory(profile, event_id):
+    root = Path(profile['output_root'])
+    db = sqlite3.connect('file:' + str(root/'ledger.sqlite3') + '?mode=ro', uri=True)
+    rows = db.execute("SELECT effect_id,stage,state,result_path,result_hash FROM effects WHERE event_id=? AND stage NOT IN ('seal_publish','seal_recover') ORDER BY stage", (event_id,)).fetchall()
+    db.close()
+    result = {}
+    for effect_id, stage, status, path, expected in rows:
+        if status != 'terminal' or fhash(path) != expected:
+            raise ValueError('incomplete or changed event evidence: ' + stage)
+        saved = json.loads(Path(path).read_text())
+        req = json.loads((Path(path).parent/'request.json').read_text())
+        if saved['effect_id'] != effect_id or saved['event_id'] != event_id or saved['stage'] != stage:
+            raise ValueError('effect completion identity mismatch')
+        result[stage] = {'effect_id': effect_id, 'result_sha256': expected, 'request': req, 'completion': saved}
+    return result
+
+
+def produce(profile, request):
+    event = next(e for e in profile['events'] if e['event_id'] == request['event_id'])
+    case = case_for(event['case_id'])
+    inv = inventory(profile, event['event_id'])
+    prep_stage = 'prepare_accepted' if 'prepare_accepted' in inv else 'prepare'
+    prep = inv[prep_stage]['completion']['response']
+    source = request['source']
+    visible_stage = next((v for v in ('residual_visible', 'candidate_visible', 'current_visible') if v in inv and inv[v]['request']['source'] == source and inv[v]['completion']['response']['result']['passed']), None)
+    if visible_stage is None or 'candidate_audit' not in inv or not {'prepare', 'route'} <= set(inv):
+        raise ValueError('required controller execution stages absent')
+    if event['memory'] == 'native' and not {'world_propose', 'world_record'} <= set(inv):
+        raise ValueError('required world-memory stages absent')
+    binding = {'repository_id': 'ns-controller-development/' + event['trajectory'], 'event_id': event['event_id'],
+        'parent_event': event.get('parent_event'), 'case_id': case['id'], 'profile_sha256': request['profile_sha256'],
+        'source_sha256': hashlib.sha256(source.encode()).hexdigest(), 'objective_sha256': hashlib.sha256(case['objective'].encode()).hexdigest(),
+        'visible_validation_sha256': hashlib.sha256(case['visible_validation'].encode()).hexdigest(),
+        'semantic_root_cid': prep['semantic_root_cid'], 'obligation_cid': prep['obligation_cid'],
+        'environment': {'image': profile['scorer_image'], 'scorer_sha256': profile['evaluation_files'][str(EVALS/'scorer_integrity/isolated_scorer.py')]}}
+    receipts = {
+        'accepted_source': {'binding': binding, 'source': source},
+        'semantic_preparation': {'binding': binding, 'preparation_stage': prep_stage, 'preparation': prep},
+        'effect_inventory': {'binding': binding, 'effects': inv},
+        'behavior_visible': {'binding': binding, 'stage': visible_stage, 'evidence': inv[visible_stage]},
+        'behavior_audit': {'binding': binding, 'stage': 'candidate_audit', 'evidence': inv['candidate_audit']}}
+    return {'binding': binding, 'source': source, 'receipts': receipts, 'parent_seal_cid': request.get('parent_seal_cid'),
+        'transition_id': 'ns-controller:' + event['event_id']}
+
+
+def check_pack(profile, pack, parent, *, replay):
+    if set(pack['receipts']) != set(IDS):
+        raise ValueError('incomplete external required unit inventory')
+    b = pack['binding']
+    request = {'event_id': b['event_id'], 'source': pack['source'], 'profile_sha256': b['profile_sha256'], 'parent_seal_cid': pack['parent_seal_cid']}
+    rebuilt_inputs = produce(profile, request)
+    if any(pack[key] != rebuilt_inputs[key] for key in ('binding', 'source', 'receipts', 'transition_id', 'parent_seal_cid')):
+        raise ValueError('stored receipts differ from complete current local effect evidence')
+    prep = pack['receipts']['semantic_preparation']['preparation']
+    if prep['source_sha256'] != b['source_sha256'] or prep['source_preserved'] != pack['source'] or prep['obligation']['source_sha256'] != b['source_sha256']:
+        raise ValueError('accepted source is not the scanned obligation source')
+    for unit in ('behavior_visible', 'behavior_audit'):
+        evidence = pack['receipts'][unit]['evidence']
+        if evidence['request']['source'] != pack['source'] or not evidence['completion']['response']['result']['passed']:
+            raise ValueError('execution evidence does not cover accepted source')
+    if parent is None:
+        if b['parent_event'] is not None or pack['parent_seal_cid'] is not None:
+            raise ValueError('parent declaration mismatch')
+    elif parent['binding']['event_id'] != b['parent_event'] or parent['seal_cid'] != pack['parent_seal_cid']:
+        raise ValueError('accepted parent identity mismatch')
+    if replay:
+        for kind in ('visible_validation', 'audit_validation'):
+            started = time.perf_counter()
+            process = subprocess.run([sys.executable, str(INTEGRATED/'controller.py'), 'worker'],
+                input=encoded({'role': 'score', 'case_id': b['case_id'], 'source': pack['source'], 'validation_kind': kind}), capture_output=True, timeout=45)
+            response = json.loads(process.stdout) if process.returncode == 0 else None
+            row = {'event_id': b['event_id'], 'validation_kind': kind, 'elapsed_seconds': time.perf_counter()-started,
+                'returncode': process.returncode, 'stdout': process.stdout.decode(errors='replace'), 'stderr': process.stderr.decode(errors='replace'),
+                'passed': bool(response and response['result']['passed'])}
+            REPLAYS.append(row)
+            if not row['passed']:
+                raise ValueError('fresh independent behavioral replay rejected source')
+    seal, units, statement = build(pack, parent)
+    if 'seal' in pack and (seal.to_canonical() != pack['seal'] or seal.seal_cid() != pack['seal_cid']):
+        raise ValueError('independently rebuilt seal differs')
+    if not seal.sealed:
+        raise ValueError('native seal construction did not seal')
+    s = seal.to_canonical()
+    proofs = [UnitProofView(unit_id=u, proof_object_cid=digest(r), proof_bytes=encoded(r), public_input_cid=digest(b), observed_public_input_cid=digest(b), proof_system_id='integrity', freshly_verified=True) for u, r in pack['receipts'].items()]
+    verdict = verify_seal(s, trusted_keys=['n/a'], verification_policy=policy(pack), parent_seal=None if parent is None else parent_view(parent),
+        parent_chain=() if parent is None else (parent['seal_cid'],), unit_proofs=proofs,
+        expected_source_root_cid=state(pack).source_root_cid, expected_repository_state_cid=state(pack).repository_state_cid,
+        expected_manifest_root_cid=s.get('manifest_root_cid', s.get('new_manifest_root_cid')), expected_forest_root_cid=s.get('repository_proof_root', s.get('new_forest_root_cid')))
+    if not verdict.accepted:
+        raise ValueError('native integrity verifier rejected seal: ' + str(verdict.to_canonical()))
+    return seal, units, statement, verdict.to_canonical()
+
+
+def persist(sealer, pack):
+    s = pack['seal']; full = 'repository_proof_root' in s
+    prefix = 'ips.full_checkpoint' if full else 'ips.delta_seal'
+    keys = ('repository_id', 'revision', 'source_root_cid', 'repository_state_cid', 'environment_cid', 'policy_cid', 'proof_schema_version', 'canonicalization_version', 'dependency_graph_schema_version', 'circuit_id', 'verification_key_id', 'parent_seal_cid', 'parent_revision_ids')
+    forest = {k: s[k] for k in keys}
+    forest.update(domain=prefix+('.repository.v1' if full else '.forest.v1'), manifest_root_cid=s.get('manifest_root_cid', s.get('new_manifest_root_cid')), category_roots=s['category_roots'])
+    if not full:
+        forest.update(branch_id=s['branch_id'], logical_epoch=s['logical_epoch'])
+    aggregate = {'domain': prefix+'.aggregation.v1', 'label': 'manifest_aggregation', 'required_unit_ids': s['required_unit_ids'], 'category_roots': s['category_roots']}
+    assert digest(forest) == s.get('repository_proof_root', s.get('new_forest_root_cid'))
+    assert digest(aggregate) == s.get('aggregation_root', s.get('new_aggregation_root'))
+    refs = []
+    for value, kind in [(r, ArtifactKind.PROOF_OBJECT) for r in pack['receipts'].values()] + [(forest, ArtifactKind.MERKLE_NODE), (aggregate, ArtifactKind.PROOF_MANIFEST)]:
+        raw = encoded(value)
+        ref = sealer.store.put_immutable(kind, raw, claimed_cid=digest(raw))
+        assert sealer.store.get_verified_bytes(ref) == raw
+        refs.append(ref.to_dict())
+    return refs
+
+
+def load_pack(profile, sealer, directory, cid, *, replay=False, seen=()):
+    if cid in seen or len(seen) >= 32:
+        raise ValueError('cyclic or excessive development chain')
+    metadata = json.loads((directory/'packs'/(cid.split(':')[1]+'.json')).read_text())
+    kind = ArtifactKind.CHECKPOINT_SEAL if metadata['parent_seal_cid'] is None else ArtifactKind.DELTA_SEAL
+    raw = sealer.store.get_verified_bytes(ArtifactReference(cid=cid, kind=kind))
+    if digest(raw) != cid:
+        raise ValueError('native stored seal identity mismatch')
+    pack = {**metadata, 'seal': json.loads(raw)['payload'], 'seal_cid': cid, 'receipts': {}}
+    for unit, receipt_cid in metadata['receipt_cids'].items():
+        data = sealer.store.get_verified_bytes(ArtifactReference(cid=receipt_cid, kind=ArtifactKind.PROOF_OBJECT))
+        pack['receipts'][unit] = json.loads(data)
+    pack['source'] = pack['receipts']['accepted_source']['source']
+    parent = None if metadata['parent_seal_cid'] is None else load_pack(profile, sealer, directory, metadata['parent_seal_cid'], seen=seen+(cid,))
+    check_pack(profile, pack, parent, replay=replay)
+    return pack
+
+
+def execute(request):
+    started = time.perf_counter(); profile = profile_for(request)
+    directory = Path(profile['output_root'])/'native_sealing'
+    event = next(e for e in profile['events'] if e['event_id'] == request['event_id'])
+    repo = 'ns-controller-development/' + event['trajectory']
+    def crash_at(name, *args):
+        if request.get('crash_at') == name:
+            save_new(directory/'crashes'/(event['event_id']+'.json'), {'boundary': name, 'pid': os.getpid(), 'replays': REPLAYS})
+            os._exit(94)
+    sealer = IncrementalProofSealer(directory/'store', crash_injector=crash_at if request.get('crash_at') else None)
+    current = sealer.get_current_seal(repo)
+    operation = request['operation']
+    if operation == 'read':
+        if current is None:
+            raise ValueError('no native accepted root exists')
+        if current.seal_cid != request['expected_seal_cid'] or request['expected_event_id'] != event['parent_event']:
+            raise ValueError('native accepted current root differs from declared parent')
+        pack = load_pack(profile, sealer, directory, current.seal_cid, replay=True)
+        if pack['binding']['event_id'] != request['expected_event_id']:
+            raise ValueError('native current revision mismatch')
+        result = {'operation': operation, 'source': pack['source'], 'source_sha256': pack['binding']['source_sha256'], 'pointer': current.to_dict(), 'seal_cid': pack['seal_cid'], 'recursive_chain_verified': True}
+    elif operation in ('publish', 'recover'):
+        parent_cid = request.get('parent_seal_cid')
+        parent = None if parent_cid is None else load_pack(profile, sealer, directory, parent_cid)
+        expected = None if parent is None else CurrentSealPointer(repository_id=repo, branch_id='main', seal_cid=parent_cid,
+            seal_kind=ArtifactKind.CHECKPOINT_SEAL if parent['parent_seal_cid'] is None else ArtifactKind.DELTA_SEAL,
+            generation=parent['seal'].get('logical_epoch', 0), parent_seal_cid=parent['parent_seal_cid'] or '')
+        if operation == 'publish':
+            pack = produce(profile, request)
+            seal, units, statement, verdict = check_pack(profile, pack, parent, replay=True)
+            pack.update(seal=seal.to_canonical(), seal_cid=seal.seal_cid())
+            refs = persist(sealer, pack)
+            save_new(directory/'packs'/(pack['seal_cid'].split(':')[1]+'.json'), {k: pack[k] for k in ('binding', 'parent_seal_cid', 'transition_id')} | {'receipt_cids': {u: digest(r) for u, r in pack['receipts'].items()}})
+            args = dict(units=units, transition_id=pack['transition_id'], expected_current=expected)
+            publication = sealer.publish_full_checkpoint(state(pack), policy(pack), expected_unit_ids=IDS, **args) if parent is None else sealer.publish_delta_seal(parent_view(parent), state(pack), policy(pack), statement, **args)
+            result = {'operation': operation, 'published': publication.published, 'publication': publication.to_canonical(), 'seal_cid': pack['seal_cid'], 'admission': verdict, 'persisted_artifacts': refs}
+        else:
+            pending = sealer.wal.get_transition('ns-controller:' + event['event_id'])
+            if pending is None or pending.state is not SealTransitionState.IN_PROGRESS or pending.phase is not SealTransitionPhase.SEAL_PERSISTENCE:
+                raise ValueError('pending transition is not at the qualified pre-CAS recovery boundary')
+            if current != expected or current is None or pending.expected_parent_seal_cid != current.seal_cid or pending.generation != current.generation+1:
+                raise ValueError('pending/current parent binding mismatch')
+            pack = load_pack(profile, sealer, directory, pending.new_seal_cid, replay=True)
+            if pack['binding']['event_id'] != event['event_id'] or pack['source'] != request['source'] or pack['parent_seal_cid'] != parent_cid:
+                raise ValueError('pending seal is not the declared source/event')
+            pointer = CurrentSealPointer(repository_id=repo, branch_id='main', seal_cid=pending.new_seal_cid,
+                seal_kind=pending.new_seal_kind, generation=pending.generation, parent_seal_cid=current.seal_cid)
+            cas = sealer.pointers.compare_and_swap_current_seal_result(current, pointer)
+            if not cas.swapped:
+                raise ValueError('pending native root CAS lost')
+            args = dict(new_seal_cid=pending.new_seal_cid, new_seal_kind=pending.new_seal_kind, generation=pending.generation)
+            record_phase(sealer.wal, pending.transition_id, SealTransitionPhase.CURRENT_ROOT_CAS, **args)
+            committed = commit_transition(sealer.wal, pending.transition_id, phase=SealTransitionPhase.CLEANUP, **args)
+            result = {'operation': operation, 'published': True, 'seal_cid': pending.new_seal_cid,
+                'recovery_caller_is_new': True, 'pending_before': pending.to_dict(), 'cas_swapped': cas.swapped, 'committed': committed.to_dict()}
+        observed = sealer.get_current_seal(repo)
+        result['pointer'] = None if observed is None else observed.to_dict()
+    else:
+        raise ValueError('unsupported operation')
+    sealer.close()
+    result.update(schema='ns-native-sealing-development-service@1', pid=os.getpid(), elapsed_seconds=time.perf_counter()-started,
+        imports=loaded_sources(), independent_replays=REPLAYS, provider_calls=0, proof_mode='integrity_only', signed_receipts=False)
+    return result
+
+
+if __name__ == '__main__':
+    print(json.dumps(execute(json.load(sys.stdin)), sort_keys=True))

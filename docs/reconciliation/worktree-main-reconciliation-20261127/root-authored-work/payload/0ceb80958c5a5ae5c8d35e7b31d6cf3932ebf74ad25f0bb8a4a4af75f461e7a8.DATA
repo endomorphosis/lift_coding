@@ -1,0 +1,125 @@
+# Signed native TEST procedure integration
+
+The exact surviving saved candidate now completes actual native signed TEST
+execution. The authoritative completed source profile is `profiles/v4`; the
+unchanged run is `results_attempt4`. Its independent retained-artifact audit is
+`native_test_integration_attempt4_audit_v1.json`.
+
+The run executes 136 fresh, prospectively frozen inputs: 32 test, 24 adversarial,
+48 held-out and 32 shadow inputs. All complete correctly through the native
+interpreter's six handlers: 13 true decisions and 123 false decisions. False is
+a computed answer, rather than an operational failure. There are 816 native
+handler dispatches, 408 distinct current-invocation check receipts and 136
+distinct emitted decision receipts. The audit restores all 408 native trace,
+outcome and invocation-receipt objects, checks their exact CID joins and verifies
+all three check receipts at postcondition and final validation. The 136 original
+invocation bodies are exactly reconstructed from retained query/authority records
+and checked against their original native CIDs; this reconstruction is separately
+retained, rather than described as an original checkpoint archive.
+
+Thirty pre-issuer evidence negatives and thirteen native/runtime controls pass.
+The latter include forged/expired/catalog-mismatched certificates, LIVE denial,
+changed observations, cross-invocation observations, substituted query
+descriptors, changed query bytes, swapped invocation bindings and out-of-domain
+inputs. Exact invocation checkpoint reuse succeeds without redispatch within
+the same interpreter process. Cross-process checkpoint restoration is not tested.
+
+Eight separate evidence artifacts precede native verification and signing. The
+proof checks seven bounded logical decision contracts in Z3 and bridges them to
+4,100 concrete source executions. Separate concrete test/adversarial/held-out/
+shadow results are independently recomputed against an oracle before native
+`AdmittedReceipt` values are created. Native seven-layer verification, certificate
+issuance and certificate admission all pass. The proof is a bounded logical
+operation-contract result plus a measured source bridge; it is not an arbitrary
+Python theorem. The exact saved IR has an empty required-proof-contract list,
+which remains unchanged. The adapter enforces the named proof payload; this is
+not native contract-specific proof coverage.
+
+Concrete float adversaries remain included. Native canonical values reject
+floats, so the v4 transport commits exact canonical JSON text and exposes a typed
+query-CID descriptor to native values. Each handler checks descriptor identity,
+decodes canonical bytes and resolves the exact invocation-bound query before
+calling the original catalog. Across the complete evidence corpus, 1,192 inputs
+contain floats. Original training and exposed inputs are excluded from all five
+new partitions; these are author-constructed inputs prepared after development,
+not a population generalization test.
+
+| Charged stage | Wall seconds |
+| --- | ---: |
+| Preparation and prospective freeze | 1.402121482 |
+| Fresh evidence producer process | 1.521004141 |
+| Independent artifact reader, controls, native verifier and issuer process | 6.902932652 |
+| Native TEST runtime and controls process | 8.819003316 |
+| Independent retained-artifact audit | 2.929697514 |
+
+Each original worker was bounded at 120 seconds and exited zero. The three
+worker times total 17.242940109 seconds; preparation adds 1.402121482 seconds.
+The 136 native prepare-and-execute calls total 6.771036383 seconds inside the
+runtime process. The evidence controls consume 5.127013646 seconds inside the
+verification process. These nested values must not be added again. Artifact
+admission repeats the concrete evidence evaluations, and runtime observation/
+validation recomputes catalog results; this experiment does not establish
+receipt-only execution or computational savings. Handler-reported integer
+millisecond costs cover less than the complete runtime, so enclosing measured
+times are the accounting boundary. Immutable source-profile copying before the
+driver and the small v3 serialization diagnostic were separate preparation work;
+profile-copy wall time was not instrumented, and the diagnostic's measured time
+is retained in `proof_smt_identity_diagnostic_v3.json`.
+
+Evidence object storage is 2,373,459 bytes in 12 objects, including the task-family
+and three example bodies. Native runtime object storage is 2,704,141 bytes in
+2,998 objects. These are payload-storage counts, excluding source snapshots,
+corpora, logs, summaries and the additive audit.
+
+The prospective source manifest pins 10,736 paths. Actual module-import receipts
+record 156 loaded file paths; every actual native source is in the freeze and
+matches its hash. The audit lists 112 observed standard-library or other loaded
+dependency paths outside the native source freeze. The Python executable is
+pinned, but an observed module receipt is not complete transitive shared-library
+closure.
+
+Earlier attempts remain unchanged. V1 stopped during evidence production because
+native CID serialization rejects floats; this was a transport limitation, not a
+procedure decision failure. V2 preserved float input bytes but stopped while
+serializing native immutable mappings. V3 produced evidence but rejected repeated
+SMT serialization because Z3's context-local auxiliary names changed. V4 uses
+fresh solver contexts and lossless mapping normalization. Original bounds,
+failures, source profiles, process costs and freezes for all attempts are retained
+in the audit. No previous failure was overwritten or treated as a timeout.
+
+This is a bounded sequence-decision integration with a TEST-only signer and
+trusted local immutable-input custody. The local reservation adapter does not
+provide OS isolation against hostile Python. The runtime selection receipt is
+explicitly unpromoted; no native registry promotion, production authority,
+repository-repair generalization, provider call or model-token saving is claimed.
+
+Exact identities:
+
+- Candidate: `baguqeeraizc4hikroraayhqsjjenxca2prl433u4udecoeczznqeqf2scbnq`
+- Procedure: `baguqeerajt3lci3cj3knc6hyawy6xihnrv7ovhx5whkdxq4fd5owf3k7gfxa`
+- Certificate: `baguqeerazekatcqsrr3ej22mohwqd6wl6di2kpkndeelzjya3oc5ehjhjara`
+- Freeze SHA-256: `742f2fbd823ec1b27d2d544b00fe65a574f6e081ca27b75ad14b6e68853f1b45`
+- Audit SHA-256: `b3e653f3dff152f5d2f544b22bab859d368f5d9be8361ce722924ec9b91f25eb`
+
+## Exact integration contract
+
+Use `profiles/v4` as the explicit import root in a new caller process. Read the
+retained run, call `common.frozen_guard(run)` and `evidence.admit_artifacts(run)`,
+reconstruct policy/family with `run.policy_and_family(run, candidate)`, and load
+the native typed certificate from `results_attempt4/certificate.json`.
+`run.trust_for(run)` creates the native verifier against the externally retained
+test-only key commitment. A caller must check actual-current-time certificate
+admission before dispatch; the audit's historical-time verification is only an
+audit of the earlier execution. Do not edit the original certificate's expiry,
+bindings or payload. The private test key is outside published evidence.
+
+Construct `runtime.NativeTestRuntime(candidate, certificate, verifier, policy)`.
+Its `execute(payload, ordinal)` returns the actual native invocation, execution
+and computed decision. Inputs are closed objects with `values` and `budget`:
+length zero through six, exact integer budget -1 through 25, values consisting
+of integers -2 through 9, booleans, floats 1.25/2.5, or the string `x`. The
+decision checks exact integers in 0 through 7 with total at most the budget.
+The adapter is bound to the original catalog/source, policy, task, environment
+and exact selected IR. It is not a generic source-change or registry-reuse API.
+Any original-matrix caller needs its own source/profile freeze, real input and
+publication identity joins, actual timing, and applicable lifecycle controls.

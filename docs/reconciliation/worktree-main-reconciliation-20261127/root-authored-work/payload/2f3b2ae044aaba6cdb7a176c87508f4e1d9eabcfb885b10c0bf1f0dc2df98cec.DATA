@@ -1,0 +1,179 @@
+"""Offline matched serialization of the complete public Bottle IntentIR.
+
+The instruction is real public input; its reviewed interpretation and tiny
+repository are authored fixtures. These checks do not establish software
+correctness, natural-language equivalence, provider savings or benchmark reward.
+"""
+from __future__ import annotations
+
+from copy import deepcopy
+import hashlib
+import json
+from pathlib import Path
+import subprocess
+
+import pytest
+
+PUBLIC_FIXTURE = Path(__file__).parent / "fixtures/public-bottle-instruction.md"
+
+
+def canonical_bytes(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"),
+                      ensure_ascii=False, allow_nan=False).encode("utf-8")
+
+
+def build_public_case(directory, *, bottle_source=None):
+    """Build actual scanner/planner/admission/context objects in fresh state."""
+    from benchmarks.agent_supervisor.container_coding import terminal_indexed_preparation as prep
+    from benchmarks.agent_supervisor.container_coding.terminal_public_intent_contract import (
+        PUBLIC_INSTRUCTION_SHA256, build_terminal_public_intent_profile,
+    )
+    from ipfs_accelerate_py.agent_supervisor.planning.intent_symbolic_planning import build_intent_symbolic_plan
+    from ipfs_accelerate_py.agent_supervisor.prompt.intent_plan_coverage import check_intent_plan_coverage
+    from ipfs_accelerate_py.agent_supervisor.runtime import local_planning_admission as local
+    from ipfs_accelerate_py.agent_supervisor.runtime.intent_requirement_context import build_task_intent_context
+
+    directory = Path(directory).absolute()
+    directory.mkdir(parents=True, exist_ok=False)
+    root = directory / "authored-repository"
+    root.mkdir()
+    if bottle_source is not None and (type(bottle_source) is not bytes or not 1 <= len(bottle_source) <= 262144):
+        raise ValueError("bounded captured public Bottle bytes required")
+    original = bottle_source if bottle_source is not None else b"def application():\n    return 'authored fixture, no solution'\n"
+    (root / "bottle.py").write_bytes(original)
+    for args in (("init", "-q"), ("add", "."), ("-c", "user.name=Offline public fixture", "-c",
+        "user.email=offline@example.invalid", "commit", "-qm", "Offline public repository fixture")):
+        subprocess.run(["git", "-C", str(root), *args], check=True, capture_output=True)
+    source = PUBLIC_FIXTURE.read_bytes()
+    assert len(source) == 3873 and hashlib.sha256(source).hexdigest() == PUBLIC_INSTRUCTION_SHA256
+    text = source.decode("utf-8")
+    instruction = directory / "public-instruction.md"
+    instruction.write_bytes(source)
+    profile = build_terminal_public_intent_profile(source_text=text)
+    contract_path = directory / "authored-reviewed-contract.json"
+    contract_path.write_bytes(canonical_bytes(profile["contract"]))
+    prepared = prep.prepare(repository=root, instruction=instruction, state=directory / "state",
+        disable_intent_autoencoder=True, enable_source_unit_autoencoder=False,
+        intent_requirement_contract=contract_path)
+    if prepared["planning_strategy"] != "intent_symbolic" or prepared["request"]["planning_policy"]["allow_model"] is not False:
+        raise AssertionError("public fixture must select the actual model-free symbolic path")
+    planned = build_intent_symbolic_plan(profile["contract"], manifest=prepared["manifest"])
+    coverage = check_intent_plan_coverage(profile["contract"], graph=planned["graph"],
+        bindings=planned["requirement_bindings"])
+    assert coverage == planned["coverage"] and coverage["accepted"] is True
+    admission = local.admit_local_benchmark_plan(graph=planned["graph"], manifest=prepared["manifest"],
+        requirement_bindings=planned["requirement_bindings"])
+    local.verify_local_benchmark_admission(admission)
+    task = planned["graph"].tasks[0]
+    checked_coverage = admission["receipt"]["payload"]["requirement_coverage"]
+    assert checked_coverage == coverage
+    context = build_task_intent_context(contract=profile["contract"], graph=planned["graph"],
+        coverage=checked_coverage, task_cid=task.task_cid)
+    assert (root / "bottle.py").read_bytes() == original and not (root / "report.jsonl").exists()
+    return dict(directory=directory, repository=root, source=source, source_text=text,
+        profile=profile, prepared=prepared, planned=planned, admission=admission,
+        coverage=checked_coverage, task=task, context=context,
+        code_fixture_scope="captured public before/bottle.py" if bottle_source is not None else "authored tiny repository")
+
+
+@pytest.fixture(scope="module")
+def public_case(tmp_path_factory):
+    return build_public_case(tmp_path_factory.mktemp("public-compact") / "fresh")
+
+
+def test_real_public_graph_covers_seventeen_required_and_retains_two_permissions(public_case):
+    case = public_case
+    rows = case["profile"]["ledger"]["requirements"]
+    mandatory = {row["requirement_id"] for row in rows if row["modality"] == "required"}
+    permissions = {row["requirement_id"] for row in rows if row["modality"] == "permitted"}
+    assert len(rows) == 19 and len(mandatory) == 17 and len(permissions) == 2
+    assert set(case["context"]["requirement_ids"]) == mandatory
+    assert not permissions & set(case["context"]["requirement_ids"])
+    assert len(case["planned"]["graph"].tasks) == 1
+    assert case["planned"]["receipt"]["provider_calls"] == 0
+    assert case["coverage"]["accepted"] is True
+    assert case["coverage"]["semantic_alignment_verified"] is False
+
+
+def test_real_public_context_has_exact_canonical_compact_roundtrip(public_case):
+    from ipfs_accelerate_py.agent_supervisor.runtime.compact_intent_requirements import (
+        encode_task_intent_requirements, decode_task_intent_requirements,
+    )
+    case = public_case
+    before = canonical_bytes(case["context"])
+    compact = encode_task_intent_requirements(case["context"], source_text=case["source_text"])
+    decoded = decode_task_intent_requirements(compact, source_text=case["source_text"])
+    assert canonical_bytes(decoded) == before == canonical_bytes(case["context"])
+    assert compact["requirements_context_cid"] == case["context"]["requirements_context_cid"]
+    assert decoded["source_sha256"] == hashlib.sha256(case["source"]).hexdigest()
+    for key in ("requirements", "dependency_requirements", "global_prohibitions", "operations", "task_contract"):
+        assert decoded[key] == case["context"][key]
+
+
+def test_public_source_selectors_and_unresolved_three_key_statement_survive(public_case):
+    from ipfs_accelerate_py.agent_supervisor.runtime.compact_intent_requirements import (
+        encode_task_intent_requirements, decode_task_intent_requirements,
+    )
+    case = public_case
+    decoded = decode_task_intent_requirements(
+        encode_task_intent_requirements(case["context"], source_text=case["source_text"]),
+        source_text=case["source_text"])
+    for row in decoded["requirements"]:
+        source = row["source_unit"]
+        assert case["source_text"][source["start_char"]:source["end_char"]] == source["text"]
+        assert case["source"][source["start_byte"]:source["end_byte"]] == source["text"].encode()
+        assert hashlib.sha256(source["text"].encode()).hexdigest() == source["sha256"]
+    count = next(row for row in decoded["requirements"]
+                 if row["native_atom"]["predicate"] == "vulnerable_item_key_count")
+    assert count["modality"] == "required"
+    assert count["native_atom"]["arguments"] == ["each_vulnerable_item", "3"]
+    ambiguity = next(row for row in case["profile"]["ambiguities"]
+                     if row["ambiguity_id"] == "report-item-key-count")
+    assert ambiguity["resolution"] is None and ambiguity["third_key_invented"] is False
+
+
+def test_actual_signed_loader_preserves_literal_public_source_and_context(public_case, tmp_path):
+    from benchmarks.agent_supervisor.container_coding import terminal_indexed_preparation as prep
+    from ipfs_accelerate_py.agent_supervisor.runtime import router_public_instruction as public
+    case = public_case
+    descriptor = public.prepare_public_instruction_context(repository=case["repository"],
+        admission=case["admission"], task_cid=case["task"].task_cid,
+        source_path=prep.INSTRUCTION, expected_source_sha256=hashlib.sha256(case["source"]).hexdigest())
+    workspace = tmp_path / "matching-allocated-worktree"
+    subprocess.run(["git", "-C", str(case["repository"]), "worktree", "add", "--detach", "-q", str(workspace)],
+                   check=True, capture_output=True)
+    request = dict(artifact=Path(descriptor["artifact"]), expected_sha256=descriptor["sha256"],
+        task_cid=case["task"].task_cid,
+        prompt=json.dumps({"objective_id": case["task"].task_key}), workspace=workspace)
+    expanded, expanded_receipt = public.load_public_instruction(**request, requirements_transport="expanded")
+    compact, compact_receipt = public.load_public_instruction(**request, requirements_transport="compact")
+    old_appendix, _ = public.render_task_intent_requirements(case["context"], source_text=case["source_text"],
+        requirements_transport="expanded")
+    new_appendix, _ = public.render_task_intent_requirements(case["context"], source_text=case["source_text"],
+        requirements_transport="compact")
+    assert expanded.endswith(old_appendix) and compact.endswith(new_appendix)
+    assert expanded[:-len(old_appendix)] == compact[:-len(new_appendix)]
+    assert expanded.count(case["source_text"]) == compact.count(case["source_text"]) == 1
+    assert expanded_receipt["intent_requirements"] == compact_receipt["intent_requirements"]
+    assert expanded_receipt["manifest_signature_verified"] is compact_receipt["manifest_signature_verified"] is True
+    assert expanded_receipt["source_freshness_verified"] is compact_receipt["source_freshness_verified"] is True
+    assert expanded_receipt["extra_provider_calls"] == compact_receipt["extra_provider_calls"] == 0
+    assert expanded_receipt["intent_requirements"]["requirements_context_cid"] == case["context"]["requirements_context_cid"]
+    assert len(new_appendix.encode()) <= len(old_appendix.encode())
+
+
+@pytest.mark.parametrize("change", ["source", "context-cid"])
+def test_real_public_compact_context_cannot_be_replayed_against_changed_input(public_case, change):
+    from ipfs_accelerate_py.agent_supervisor.runtime.compact_intent_requirements import (
+        CompactIntentRequirementsError, encode_task_intent_requirements, decode_task_intent_requirements,
+    )
+    case = public_case
+    compact = encode_task_intent_requirements(case["context"], source_text=case["source_text"])
+    source = case["source_text"]
+    if change == "source":
+        source = source.replace("three keys", "two keys")
+    else:
+        compact = deepcopy(compact)
+        compact["requirements_context_cid"] = "sha256:" + "0" * 64
+    with pytest.raises(CompactIntentRequirementsError):
+        decode_task_intent_requirements(compact, source_text=source)

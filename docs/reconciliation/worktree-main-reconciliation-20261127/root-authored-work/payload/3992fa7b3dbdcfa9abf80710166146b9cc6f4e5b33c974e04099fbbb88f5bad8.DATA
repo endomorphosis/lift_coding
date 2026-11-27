@@ -1,0 +1,82 @@
+"""Freeze then execute a small joined native-publication controller sequence."""
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+import sqlite3
+import subprocess
+import sys
+import time
+
+HERE = Path(__file__).resolve().parent
+INTEGRATED = HERE.parent
+ROOT = INTEGRATED.parents[4]
+
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def save(path, value):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(value, indent=2, sort_keys=True)+'\n')
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--run-id', required=True)
+    args = parser.parse_args()
+    run = HERE/args.run_id
+    run.mkdir(exist_ok=False)
+    protocol = json.loads((HERE/'protocol_v3.json').read_text())
+    profile = json.loads((HERE/'development-v2/profile.json').read_text())
+    profile.update(output_root=str(run/'state'), events=protocol['events'], scope=protocol['scope'], created_at_ns=time.time_ns(), native_sealing_enrolled=True)
+    service = HERE/'sealing_service_v1.py'
+    profile['evaluation_files'] = {p: sha(p) for p in profile['evaluation_files']}
+    for p in (INTEGRATED/'controller.py', Path(__file__).resolve(), HERE/'protocol_v3.json', service):
+        profile['evaluation_files'][str(p)] = sha(p)
+    native = ROOT/'.worktrees/agent-supervisor-efficiency-and-state-hardening-v1'
+    roots = (native/'ipfs_accelerate_py', native/'ipfs_datasets_py/ipfs_datasets_py', native/'ipfs_kit_py/ipfs_kit_py')
+    profile['sealing_native_files'] = {str(p.resolve()): sha(p) for r in roots for p in sorted(r.rglob('*.py')) if p.is_file() and '__pycache__' not in p.parts}
+    profile['sealing_service'] = {'entrypoint': str(service), 'required_unit_ids': protocol['required_unit_ids'], 'source_root': str(native), 'git_head': subprocess.check_output(['git','-C',str(native),'rev-parse','HEAD'],text=True).strip(), 'proof_mode':'integrity_only'}
+    save(run/'profile.json', profile)
+    for path in (INTEGRATED/'controller.py', service, Path(__file__).resolve(), HERE/'protocol_v3.json'):
+        shutil.copyfile(path, run/('frozen_'+path.name))
+    calls=[]
+    for event in profile['events']:
+        for index, fault in enumerate([True, False] if 'fault_point' in event else [False]):
+            command=[sys.executable,str(INTEGRATED/'controller.py'),'run','--profile',str(run/'profile.json'),'--event',event['event_id']]
+            if fault:
+                command.append('--fault')
+            started=time.perf_counter()
+            process=subprocess.run(command,capture_output=True,text=True,env={'PATH':os.environ['PATH'],'LANG':'C.UTF-8','PYTHONDONTWRITEBYTECODE':'1'},timeout=240)
+            directory=run/'invocations'/(event['event_id']+'-'+str(index))
+            directory.mkdir(parents=True)
+            (directory/'stdout').write_text(process.stdout); (directory/'stderr').write_text(process.stderr)
+            row={'event_id':event['event_id'],'fault':fault,'returncode':process.returncode,'elapsed_seconds':time.perf_counter()-started,'command':command}
+            if process.returncode==0:
+                result=json.loads(process.stdout)
+                row.update(status=result['status'],accepted=result['accepted'])
+            calls.append(row); save(run/'invocations.json',calls)
+            print(json.dumps(row),flush=True)
+            if process.returncode != (event['expected_first_exit'] if fault else 0) or (not fault and row.get('status')!=event['expected_status']):
+                raise RuntimeError('unexpected qualification outcome; frozen inputs and failure retained')
+    db=sqlite3.connect(run/'state/ledger.sqlite3')
+    effects=list(db.execute('SELECT event_id,stage,state FROM effects'))
+    events=list(db.execute('SELECT event_id,status FROM events'))
+    totals={stage:{'effects':sum(r[1]==stage for r in effects),'terminal':sum(r[1]==stage and r[2]=='terminal' for r in effects)} for stage in sorted({r[1] for r in effects})}
+    replays=[]
+    for path in (run/'state/effects').glob('*/completion.json'):
+        saved=json.loads(path.read_text())
+        if saved['stage'] in ('seal_read','seal_publish','seal_recover') and not saved.get('reconciled_from_native_recovery'):
+            replays.extend(saved['response']['independent_replays'])
+    for path in (run/'state/native_sealing/crashes').glob('*.json'):
+        replays.extend(json.loads(path.read_text())['replays'])
+    save(run/'summary.json',{'schema':'ns-controller-native-sealing-qualification-summary@1','events':len(events),'status_counts':{s:sum(r[1]==s for r in events) for s in sorted({r[1] for r in events})},'controller_invocations':len(calls),'controller_elapsed_seconds':sum(r['elapsed_seconds'] for r in calls),'effect_count':len(effects),'effects_by_stage':totals,'additional_sealing_behavioral_replays':len(replays),'additional_replay_elapsed_seconds':sum(r['elapsed_seconds'] for r in replays),'native_publication_attempts':totals.get('seal_publish',{}).get('effects',0),'native_recovery_CAS_calls':totals.get('seal_recover',{}).get('effects',0),'provider_dispatches':0,'provider_tokens':0,'scope':protocol['scope']})
+    db.close()
+
+
+if __name__=='__main__':
+    main()

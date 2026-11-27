@@ -1,0 +1,166 @@
+import ObjectiveSourceContainerSuccess
+import ObjectiveOriginalPrefixParts
+
+set_option backward.isDefEq.respectTransparency false
+
+/-!
+SOURCE-ONLY, UNCOMPILED, UNQUALIFIED CANDIDATE.
+
+Actual fixed-four-row/eighty-coordinate source dot and margins evaluation.
+The ordinary weights/differences are the only inputs to the final theorem;
+no desired dot/margins/gradient evaluation is a premise. Every primitive pair
+body succeeds from its actual scalar bindings. The named source environment
+is projected from the actual generated typed Context, not a decoder annotation.
+
+Explicit structural links join actual data/factors to the scalar-body aliases.
+Complete data/regularizer/factor/gradient/record evaluation, source preparation,
+guard/return suffix, Python Float/libm/fsum and convergence remain open here.
+-/
+
+namespace RankerObjectiveOriginalMarginsEvaluation
+
+noncomputable section
+
+open scoped BigOperators
+open RankerObjectiveIR (SliceError mapOne applyTwo)
+open RankerObjectivePrefixIR (Ty Environment NamedEnvironment namesFromScope
+  extendNames evalSourceTerm evalBinary castValue lookupSlot castSlot readSlot)
+open RankerObjectiveContainerLanguage (SourceExpr evalSourceExpr)
+open RankerObjectiveContainerEvaluationBridge (leftZipIndex rightZipIndex)
+open RankerObjectiveSourceContainerSuccess (eval_source_zipMap_min_success
+  eval_source_mapRows_success eval_source_fsum_success)
+
+def pairMultiplySource : SourceExpr .scalar :=
+  .scalarBinary .mul
+    (.leaf (.var (τ := .scalar) "x"))
+    (.leaf (.var (τ := .scalar) "y"))
+
+def dotSource (leftName rightName : String) : SourceExpr .scalar :=
+  .fsumExact (.zipMap "x" "y"
+    (.leaf (.var (τ := .vector 80) leftName))
+    (.leaf (.var (τ := .vector 80) rightName)) pairMultiplySource)
+
+def exactDot (left right : Fin 80 → ℝ) : ℝ := ∑ index, left index * right index
+
+def exactMargins (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) : Fin 4 → ℝ :=
+  fun index => exactDot weights (differences index)
+
+theorem actual_margins_source_decomposition :
+    RankerObjectiveOriginalPrefixParts.marginsSource =
+      SourceExpr.mapRows "row" (.leaf (.var (τ := .matrix 4 80) "differences"))
+        (dotSource "weights" "row") := by
+  rfl
+
+/-- Explicit subtree provenance: applying scalar-body success to the data map
+must pass through this structural equality, not a textual coincidence. -/
+theorem actual_data_source_scalar_body_join :
+    RankerObjectiveOriginalPrefixParts.dataSource =
+      SourceExpr.scalarBinary .div
+        (.fsumExact (.mapVector "z" (.leaf (.var (τ := .vector 4) "margins"))
+          RankerObjectiveOriginalPrefixParts.lossBodySource))
+        (.natToScalar (.lengthVector (.leaf (.var (τ := .vector 4) "margins")))) := by
+  rfl
+
+theorem actual_factors_source_scalar_body_join :
+    RankerObjectiveOriginalPrefixParts.factorsSource =
+      SourceExpr.mapVector "z" (.leaf (.var (τ := .vector 4) "margins"))
+        RankerObjectiveOriginalPrefixParts.factorBodySource := by
+  rfl
+
+theorem dot_source_success (environment : NamedEnvironment) (leftName rightName : String)
+    (left right : Fin 80 → ℝ)
+    (leftBinding : environment leftName (.vector 80) = .ok left)
+    (rightBinding : environment rightName (.vector 80) = .ok right) :
+    evalSourceExpr environment (dotSource leftName rightName) = .ok (exactDot left right) := by
+  let outputs : Fin (min 80 80) → ℝ :=
+    fun index => left (leftZipIndex index) * right (rightZipIndex index)
+  have pairSuccess : ∀ index : Fin (min 80 80), evalSourceExpr
+      (extendNames (τ := .scalar) "y" (right (rightZipIndex index))
+        (extendNames (τ := .scalar) "x" (left (leftZipIndex index)) environment))
+      pairMultiplySource = .ok (outputs index) := by
+    intro index
+    simp [pairMultiplySource, outputs, evalSourceExpr, evalSourceTerm, evalBinary,
+      extendNames, castValue, applyTwo]
+  have leftSuccess : evalSourceExpr environment
+      (.leaf (.var (τ := .vector 80) leftName)) = .ok left := by
+    exact leftBinding
+  have rightSuccess : evalSourceExpr environment
+      (.leaf (.var (τ := .vector 80) rightName)) = .ok right := by
+    exact rightBinding
+  have zipSuccess := eval_source_zipMap_min_success environment "x" "y"
+    (.leaf (.var (τ := .vector 80) leftName))
+    (.leaf (.var (τ := .vector 80) rightName)) pairMultiplySource
+    left right outputs leftSuccess rightSuccess pairSuccess
+  have sumSuccess := eval_source_fsum_success environment
+    (.zipMap "x" "y" (.leaf (.var (τ := .vector 80) leftName))
+      (.leaf (.var (τ := .vector 80) rightName)) pairMultiplySource) outputs zipSuccess
+  simpa only [dotSource, exactDot, outputs, leftZipIndex, rightZipIndex] using sumSuccess
+
+theorem margins_source_success (environment : NamedEnvironment)
+    (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ)
+    (weightsBinding : environment "weights" (.vector 80) = .ok weights)
+    (differencesBinding : environment "differences" (.matrix 4 80) = .ok differences) :
+    evalSourceExpr environment RankerObjectiveOriginalPrefixParts.marginsSource =
+      .ok (exactMargins weights differences) := by
+  rw [actual_margins_source_decomposition]
+  have inputSuccess : evalSourceExpr environment
+      (.leaf (.var (τ := .matrix 4 80) "differences")) = .ok differences := by
+    exact differencesBinding
+  have rowSuccess : ∀ index : Fin 4, evalSourceExpr
+      (extendNames (τ := .vector 80) "row" (differences index) environment)
+      (dotSource "weights" "row") = .ok (exactMargins weights differences index) := by
+    intro index
+    apply dot_source_success
+    · simpa [extendNames] using weightsBinding
+    · simp [extendNames, castValue]
+  exact eval_source_mapRows_success environment "row"
+    (.leaf (.var (τ := .matrix 4 80) "differences")) (dotSource "weights" "row")
+    differences (exactMargins weights differences) inputSuccess rowSuccess
+
+/-- The actual generated Context fixes field ordering and all dimensions. -/
+def actualEnvironment (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) :
+    Environment GeneratedOriginalObjectiveContainerPrefix.emittedContext :=
+  .cons (name := "weights") (τ := .vector 80) weights
+    (.cons (name := "differences") (τ := .matrix 4 80) differences .nil)
+
+theorem actual_weights_binding (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) :
+    namesFromScope (actualEnvironment weights differences) "weights" (.vector 80) = .ok weights := by
+  simp [actualEnvironment, namesFromScope, GeneratedOriginalObjectiveContainerPrefix.emittedContext,
+    lookupSlot, castSlot, readSlot, mapOne]
+
+theorem actual_differences_binding (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) :
+    namesFromScope (actualEnvironment weights differences) "differences" (.matrix 4 80) =
+      .ok differences := by
+  simp [actualEnvironment, namesFromScope, GeneratedOriginalObjectiveContainerPrefix.emittedContext,
+    lookupSlot, castSlot, readSlot, mapOne]
+
+/-- Complete computation of the actual first assignment for arbitrary exact
+real input vectors/matrix. No semantic result is assumed. -/
+theorem actual_margins_eval_success (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) :
+    evalSourceExpr (namesFromScope (actualEnvironment weights differences))
+      RankerObjectiveOriginalPrefixParts.marginsSource = .ok (exactMargins weights differences) := by
+  exact margins_source_success (namesFromScope (actualEnvironment weights differences))
+    weights differences (actual_weights_binding weights differences)
+    (actual_differences_binding weights differences)
+
+#print axioms actual_margins_source_decomposition
+#print axioms actual_data_source_scalar_body_join
+#print axioms actual_factors_source_scalar_body_join
+#print axioms dot_source_success
+#print axioms margins_source_success
+#print axioms actual_weights_binding
+#print axioms actual_differences_binding
+#print axioms actual_margins_eval_success
+
+end
+
+end RankerObjectiveOriginalMarginsEvaluation
+
+#print axioms _root_.RankerObjectiveOriginalMarginsEvaluation.actual_margins_source_decomposition
+#print axioms _root_.RankerObjectiveOriginalMarginsEvaluation.actual_data_source_scalar_body_join
+#print axioms _root_.RankerObjectiveOriginalMarginsEvaluation.actual_factors_source_scalar_body_join
+#print axioms _root_.RankerObjectiveOriginalMarginsEvaluation.dot_source_success
+#print axioms _root_.RankerObjectiveOriginalMarginsEvaluation.margins_source_success
+#print axioms _root_.RankerObjectiveOriginalMarginsEvaluation.actual_weights_binding
+#print axioms _root_.RankerObjectiveOriginalMarginsEvaluation.actual_differences_binding
+#print axioms _root_.RankerObjectiveOriginalMarginsEvaluation.actual_margins_eval_success

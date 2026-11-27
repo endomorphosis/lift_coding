@@ -1,0 +1,802 @@
+{
+  "Python_Float_refinement_proved": false,
+  "actual_existing_evidence": {
+    "Python_AST_to_SourceExpr_preservation_qualified": false,
+    "actual_exact_real_numeric_prefix_record_and_model_projections_qualified": true,
+    "current_owned_checks_before_new_update_work": 83,
+    "historical_update_relay_checks": 7,
+    "primary_scoped_queries_before_new_update_work": 76,
+    "tail_queries": 29
+  },
+  "actual_finite_loop_context_descriptors": {
+    "training_epoch_guard": {
+      "AST_sha256": "db95049229bb26bfb5f78a55b035f10e5e17d950492558d47d3021565baa6085",
+      "ast_path": "module.body[28].body[1]",
+      "node_kind": "Expr",
+      "segment_sha256": "6fa45b666a6038b26b30267d8bf248c7f27749db5ad7c66200b6656de4df4fe6",
+      "source_segment": "_need(type(epochs) is int and 1 <= epochs <= MAX_EPOCHS, \"1..128 fixed epochs required\")",
+      "span": [
+        193,
+        4,
+        193,
+        92
+      ]
+    },
+    "training_initialization": {
+      "AST_sha256": "0d1e76d49b32ef9e28cf28d0f83b006ce50968e036b8e553857c7068adaa95a3",
+      "ast_path": "module.body[28].body[4]",
+      "node_kind": "Assign",
+      "segment_sha256": "bc939590329106e351e0059a5a577fff9ded312554c319d7b897dfbadf64934b",
+      "source_segment": "weights, trace = [0.0] * len(_FEATURE_NAMES), []",
+      "span": [
+        196,
+        4,
+        196,
+        52
+      ]
+    },
+    "training_range": {
+      "AST_sha256": "1398dbe3cf4f7f435b6194ac68f617ad80872bec35687d55800f8b9bd3744f81",
+      "ast_path": "module.body[28].body[5].iter",
+      "node_kind": "Call",
+      "segment_sha256": "fa889930b4c4c2de1bd82c7b95da9e04c29833d2e7f06af7cca857453efbca2c",
+      "source_segment": "range(epochs + 1)",
+      "span": [
+        197,
+        17,
+        197,
+        34
+      ]
+    },
+    "training_update": {
+      "AST_sha256": "18f6dae8d8b26c08e101018837033db979d20c4bb5b65cb80119a4fd03084c4b",
+      "ast_path": "module.body[28].body[5].body[2].body[0]",
+      "node_kind": "Assign",
+      "segment_sha256": "8f4a0865e2a3d5b777f33e0a984f4aa8f1c65edbfdd8a0401a4f2a8fffa7af5f",
+      "source_segment": "weights = [w - step * g for w, g in zip(weights, gradient)]",
+      "span": [
+        201,
+        12,
+        201,
+        71
+      ]
+    },
+    "training_weight_guard": {
+      "AST_sha256": "a7e25d3159b186822638b7b167e30f66a5fa40ad595fdcfe377b4fb8440664bb",
+      "ast_path": "module.body[28].body[5].body[2].body[1]",
+      "node_kind": "Expr",
+      "segment_sha256": "bffdf0f9d4721a2b7b1e02271be3964eff1dcfd69c815ad66879226928b6e372",
+      "source_segment": "_need(all(math.isfinite(x) for x in weights), \"nonfinite fitted head weights\")",
+      "span": [
+        202,
+        12,
+        202,
+        90
+      ]
+    }
+  },
+  "all32_governing_RPI_exits": "OPEN",
+  "completion_authority": false,
+  "context_only_suffix_descriptors": [
+    {
+      "AST_sha256": "0eed0cf256be52c514cca904f20ea7a4471883611ec4bb1e1cc3cc1712be4bd6",
+      "ast_path": "module.body[24].body[5]",
+      "node_kind": "Expr",
+      "segment_sha256": "182989095aa28859e84c7d735bb1332c9d9ecd5c8d426b474057ac2d0899b343",
+      "source_segment": "_need(all(math.isfinite(x) for x in [data, regularizer, *gradient]),\n          \"nonfinite scratch-head objective or gradient\")",
+      "span": [
+        131,
+        4,
+        132,
+        57
+      ]
+    },
+    {
+      "AST_sha256": "b5fa0702d20f2801c2c375de0f2189561ca7adea484634701ab0e13c0a335115",
+      "ast_path": "module.body[24].body[6]",
+      "node_kind": "Return",
+      "segment_sha256": "064bdc2495e9ca707023200ab4ac481be3062281d32d600522a8522343a58105",
+      "source_segment": "return {\"objective\": data + regularizer, \"pair_logistic_loss\": data,\n            \"L2_penalty\": regularizer, \"gradient_norm\": math.sqrt(_dot(gradient, gradient))}, gradient",
+      "span": [
+        133,
+        4,
+        134,
+        102
+      ]
+    }
+  ],
+  "created_at_utc": "2026-10-06T12:09:54.548919+00:00",
+  "execution_authority": false,
+  "existing_generated_prefix_definition": "GeneratedOriginalObjectiveContainerPrefix.emittedPrefix",
+  "existing_generated_prefix_literal": {
+    "bytes": 8046,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-prefix-host-result-20261006-01/ObjectiveContainerPrefixGenerated.lean",
+    "sha256": "31bc24c08296302aa15c8067df2cae7e7aa9f3d3b28b63145d661f82f1d3ccbb"
+  },
+  "formalization_authority": false,
+  "full_task_satisfaction": "unknown",
+  "future_controls": {
+    "cases": [
+      "01 exact same-buffer first5/7-context/17-binding/callee/L2 source joins and actual RHS constructor hashes",
+      "02 changed source byte/RHS grouping/sign/denominator and stale spans or AST hashes refuse",
+      "03 forged parser/schema/version/duplicate JSON key/unknown field/normalization occurrence or rule digest refuse",
+      "04 wrong callee/global aliases, _dot body or lexical binding provenance refuse",
+      "05 capture and tuple binder reversal; arguments evaluated once/in order under pure Name-only inlining restriction",
+      "06 original L2 binary64 ratio vs1/100, literal token-kind mismatch, bool/nonfinite/numeric protocol refusal",
+      "07 accepted left/right simultaneous domain errors preserve observed left error precedence only",
+      "08 accepted divisionByZero/logDomain and empty mean preserve error result",
+      "09 accepted valid conditional with invalid-domain dead branch succeeds; unsupported dead syntax statically refuses",
+      "10 ListComp vs GeneratorExp generator setup/body order and pure exact sum materialization proof",
+      "11 filtered/asynchronous/multiple generators, keyword/starred calls and arbitrary attributes refuse",
+      "12 unequal/zero zip truncation and first paired-body error; unused tail body not part of observation",
+      "13 wrong/negative/unproved indices, ragged rows, stale Fin/dimension annotations refuse",
+      "14 range(len(weights)) provenance, ascending index order and right width joins",
+      "15 active scope collision/unknown name/forged callee or L2 binder and stale environment transport refuse",
+      "16 source assignment RHS error stops later state updates in own semantics; target error observation matches",
+      "17 depth/width/node/ratio-size/shape/byte/cycle bounds enforced before decoding or emitting",
+      "18 whole objective requested while guard/return unsupported refuses; no prefix-record relabeling",
+      "19 original repeated weights mutation/loop/trace update refuses until separately proved state or SSA lowering",
+      "20 stale output literal/full receipt/environment/premise/snapshot cannot admit proof/cache/planner state"
+    ],
+    "status": "PLANNED_NOT_EXECUTED"
+  },
+  "future_finite_loop_requirements": {
+    "infinite_extension": "Keep separately named infinite exact-real evaluator/model extension distinct from original bounded source control. No source convergence claim from fixed trace alone.",
+    "preparation": "Bind actual _prepare and corpus/helper source grammar separately; shape and recorded eta/profile do not prove preparation or Float-to-real transport.",
+    "required_observation": "Exactly E updates, E+1 observations at epochs0..E and final finite state, including guard/error/return behavior; do not infer this from the standalone mathematical finite iterator.",
+    "semantics": "Use independently interpreted state-threaded finite control or proved fresh SSA scopes. Existing unique-name letBind cannot represent repeated weights mutation.",
+    "source_binding": "Join actual epoch strict-built-in-int guard1<=E<=128, _prepare result unpacking, zero80 initialization, range(E+1), observation/trace append before conditional update, weights reassignment and subsequent finite-weight guard.",
+    "status": "OPEN_UNIMPLEMENTED",
+    "termination": "Finite range provides source-loop termination; the actual source has no gradient threshold or early convergence break."
+  },
+  "future_storage_and_task_policy": {
+    "admission": "Future cache keys include exact source/AST/Py grammar/lowerer/IR/body/compiler/backend/environment/query/premise/full-object/chunk hashes; changed dependencies invalidate reuse. Joint committed cohort/readback policies remain required.",
+    "status": "OPEN_NO_CURRENT_ADMISSION",
+    "storage": "All decoder/normalization/proof evidence remains staged and snapshot/version-bound. Keep prior 4458 payloads/32 families/vectors/contracts. No DuckDB/DuckLake writes, hydration or cache activation now.",
+    "task": "IntentIR and learned retrieval remain hypotheses until independent complete contract evidence; AST preservation does not imply task satisfaction or global AE convergence."
+  },
+  "future_suffix_requirements": {
+    "IR_extension": "Existing Ty/SourceExpr cannot express Boolean/guard/dictionary/tuple/sqrt effects. Refuse whole-objective lowering until a fresh versioned suffix IR/evaluator and preservation theorem exist.",
+    "guard": "Interpret _need's condition-is-True policy, list construction [data,regularizer,*gradient], ordered short-circuit all(isfinite) and guard-before-return; no separate margin/factor/final-objective/norm guard is present in the source.",
+    "return": "Ordered dictionary keys objective,pair_logistic_loss,L2_penalty,gradient_norm then gradient in a two-tuple; preserve data+regularizer before checked sqrt(_dot(gradient,gradient)). The five-binding internal prefix record is not this return.",
+    "sqrt": "Add independent checked sqrt semantics and prove nonnegative actual gradient self-dot before a successful exact-real sqrt relation. Binary64 sqrt/libm refinement remains separate.",
+    "status": "OPEN_UNIMPLEMENTED"
+  },
+  "global_autoencoder_convergence_proved": false,
+  "historical_gap_artifact": {
+    "bytes": 20586,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-next-source-bridge-gaps-20261006-01/gaps-01.json",
+    "sha256": "029b59fa63008745b95c4b97ffc1c8ea2fd096fbf6ba4123849ce2d2b410ff90"
+  },
+  "historical_gap_scope_sentence_is_stale_after_Tail_qualification": true,
+  "independent_interpreter": {
+    "arithmetic": "Explicit exact-real add/sub/mul/div, exact-real exp/log1p/abs/max, checked divisionByZero and logDomain, explicit integer-to-real coercion; float source literals project their original binary64 value to Rat then Real.",
+    "assignments": "Evaluate RHS and then update the own local environment in source order; observed output is the ordered five intermediate bindings, explicitly distinct from Python's actual return.",
+    "generator_policy": "Model GeneratorExp body consumption separately from eager ListComp; prove ordered pure total-addition materialization before using eager target vector map+fsum. This lemma supplies no CPython fsum/Float/effect equivalence.",
+    "global_environment": "Immutable pinned _dot/L2 and explicitly specified builtin/math bindings; no shadowing, rebound globals, runtime protocols or callbacks. This is an admitted exact-real model environment, not inferred from source hashes.",
+    "independence": "Interpret PyExpr/PyStmt directly; never call lowerSupportedAst, an emitter, evalSourceTerm/evalSourceExpr/evalPrefix, or a model objective/gradient evaluator.",
+    "name": "evalSupportedAstReal and evalSupportedAstAssignments",
+    "observation_limit": "Preserve common successful values and first selected error code/precedence. Do not claim operational exception timing, effect traces, allocation/cost equality, or that applicative target evaluation never evaluates a later operand.",
+    "ordering": "Resolve and evaluate callees/arguments and operands in source order; evaluate iterable setup before each comprehension body; preserve ascending traversal and tuple binding order; selected conditional branch only.",
+    "value_domain": "Own PyValue with exact-real scalar, integer/Nat numeric value, Boolean test value, immutable finite numeric lists/rectangular rows and comprehension iterator descriptions. Use its own PyEvalError.",
+    "zip_and_index": "Evaluate zip arguments in order and consume only minimum-length pairs; check list indexing in own semantics. Accepted target Fin indices require independent rectangular input transport and range provenance."
+  },
+  "independent_namespace": "RankerSupportedPythonAstReal",
+  "input_pin_count": 25,
+  "lowerer": {
+    "error_distinction": "PyLowerError is static refusal. Its failure does not imply a Py runtime error; unsupported dead syntax can be refused even when the selected source path succeeds.",
+    "hygiene": "Resolve each comprehension/function binder by scope identity. Retain source shadowing in Py semantics; target collisions either require proved fresh renaming or static refusal. Repeated spelling in different scopes is not variable identity.",
+    "input": "Independent PyExpr/PyStmt plus checked lexical name/type/dimension context and pinned callee/global registry; host annotations are recomputed.",
+    "name": "lowerSupportedAst and lowerSupportedAssignments",
+    "normalization": "Use a versioned explicit occurrence rule log. _dot call normalization first operates on independent PyExpr with hygienic callee substitution and a separate interpretation-preservation proof.",
+    "output": "Except PyLowerError (Sigma tau, SourceExpr tau), with SourceTerm leaves for scalar literals/names and checked scalar/container constructors; assignment block lowers to existing SourcePrefix.",
+    "purity": "Structural syntax/type transformation only. No source execution, target evaluator execution, high-level objective/gradient/dot/loss/convergence opcode, or semantic certificate.",
+    "refusal_order": "Define deterministic validation phases and AST-field traversal, including both IfExp branches; record first refusal path/span/reason. Do not equate ast.walk field order with runtime order."
+  },
+  "metadata_hydration": false,
+  "mutation_authority": false,
+  "new_grammar": {
+    "callee_policy": [
+      "abs,max,len,zip,range as explicitly bound builtins",
+      "math.exp,math.log1p,math.fsum as explicitly bound pure exact-real primitive specifications",
+      "_dot as the exact pinned source function with its own body semantics"
+    ],
+    "expressions": [
+      "Name(identifier)",
+      "Integer(value, source-token-kind)",
+      "FloatLiteral(spelling, finite-binary64-projection-ratio)",
+      "UnaryOp(USub, operand)",
+      "BinOp(Add/Sub/Mult/Div, left, right)",
+      "Call(callee, ordered positional arguments)",
+      "Attribute(base-name, member-name) as checked callee syntax only",
+      "Compare(GtE, left, Integer(0)) as the restricted IfExp test",
+      "IfExp(test, body, orelse)",
+      "Subscript(value, index)",
+      "ListComp(body, one synchronous unfiltered comprehension)",
+      "GeneratorExp(body, one synchronous unfiltered comprehension)"
+    ],
+    "future_suffix_and_loop_syntax_not_in_phase1": [
+      "Boolean/all/isfinite/_need",
+      "ordered Dict and Return(Tuple(...))",
+      "checked sqrt",
+      "stateful assignment/For/If/trace append/initialization/epoch guards"
+    ],
+    "iterables": [
+      "Name bound to immutable list/rows",
+      "Call(zip,[left,right])",
+      "Call(range,[Call(len,[bound-vector])])"
+    ],
+    "retained_distinctions": "Keep integer vs projected float literals, ListComp vs GeneratorExp, actual call/attribute syntax, operand grouping, repeated scalar occurrences, tuple target order and distinct lexical scope identities.",
+    "statements": [
+      "Assign([Name],rhs) for the five-statement block"
+    ],
+    "syntax": "A separately declared untyped PyExpr/PyStmt/PyTarget/PyComprehension/PyCalleeRef family; no constructor contains SourceTerm, SourceExpr, desired equality, model objective/gradient, or a proof certificate.",
+    "targets": [
+      "Name",
+      "Tuple(Name,Name) for an admitted zip generator only"
+    ],
+    "unsupported": "Keep raw unsupported syntax/tag/field records for deterministic static refusal; do not translate unsupported nodes into expected mathematical values."
+  },
+  "new_metadata_jobs": 0,
+  "new_model_jobs": 0,
+  "new_native_jobs": 0,
+  "new_qualified_queries": 0,
+  "new_test_jobs": 0,
+  "normalization_manifest": {
+    "L2_use_occurrences": [
+      "module.body[24].body[2].value.left.left",
+      "module.body[24].body[4].value.elt.left.left"
+    ],
+    "canonical_host_RHS_hash_rule": "SHA256 UTF-8 json.dumps(rhs,sort_keys=True,separators=(',',':')); existing host annotation/type fields are included and must later be recomputed.",
+    "dot_call_instances": [
+      {
+        "a": "weights",
+        "b": "row",
+        "scope": "margins/row; fresh callee x,y",
+        "source_call": "module.body[24].body[0].value.elt"
+      },
+      {
+        "a": "weights",
+        "b": "weights",
+        "scope": "regularizer; fresh callee x,y",
+        "source_call": "module.body[24].body[2].value.left.right"
+      }
+    ],
+    "dot_callee": {
+      "ast_path": "module.body[23]",
+      "ast_sha256": "3ff8d47ab6f2e375b3bd4b81c6a39e364cd5a15ec859ca383b5e41504250de1e",
+      "source_segment_utf8_sha256": "3e1b32e89343283305172699d08fc7bdcf3e34a3eb9f627d838552f7a6dbb2eb",
+      "span": [
+        119,
+        0,
+        120,
+        49
+      ]
+    },
+    "five_record_is_internal_projection": true,
+    "global_bindings": [
+      "weights: vector80 immutable exact-real input",
+      "differences: matrix4x80 immutable exact-real input",
+      "math/abs/max/len/zip/range: pinned intended primitive specifications",
+      "_dot: exact pinned source body",
+      "L2: exact pinned literal projection"
+    ],
+    "module_AST_sha256": "61ae9578f4a087b1b181af6fe4f78c3d811bbaa09368f833f6240384d085407b",
+    "objective": {
+      "ast_path": "module.body[24]",
+      "ast_sha256": "129da31ae6856167478c7f030a059d0f477b8362bb8fa478221eac7bac6031c2",
+      "source_segment_utf8_sha256": "1036faf2d13d39ffc7bb86f7a8b39fad320cd3ad1ced3864d13eaa02498f56c9",
+      "span": [
+        123,
+        0,
+        134,
+        102
+      ]
+    },
+    "ordered_assignments": [
+      {
+        "host_RHS_node_counts": {
+          "fsumExact": 1,
+          "mapRows": 1,
+          "scalarOp": 1,
+          "var": 5,
+          "zipMap": 1
+        },
+        "host_RHS_path": "$.value",
+        "host_RHS_sha256": "2562191d2dd2f91a41a1805e8da57ca539cc712805e76843412a801872671171",
+        "host_RHS_type": {
+          "kind": "vector",
+          "length": 4
+        },
+        "ordinal": 0,
+        "required_normalization_rules": [
+          {
+            "output_occurrence": "$.value",
+            "rule_id": "map_rows",
+            "side_conditions": "Resolve differences as rectangular matrix; row is a fresh comprehension-local vector.",
+            "source_occurrence": "module.body[24].body[0].value",
+            "status": "REQUIRED_FUTURE_RULE_LOG_NOT_EMITTED_OR_PROVED"
+          },
+          {
+            "output_occurrence": "$.value.body",
+            "rule_id": "inline_dot",
+            "side_conditions": "Bind the two actual Name arguments once/in order; hygienic x,y scopes; pinned _dot body.",
+            "source_occurrence": "module.body[24].body[0].value.elt",
+            "status": "REQUIRED_FUTURE_RULE_LOG_NOT_EMITTED_OR_PROVED"
+          },
+          {
+            "output_occurrence": "$.value.body",
+            "rule_id": "sum_zip_mul",
+            "side_conditions": "Ordered pure generator and minimum-length zip; each scalar multiplication retains operand order.",
+            "source_occurrence": "module.body[23].body[0].value",
+            "status": "REQUIRED_FUTURE_RULE_LOG_NOT_EMITTED_OR_PROVED"
+          }
+        ],
+        "rhs_source": {
+          "AST_sha256": "4f1eafd41e562226818564971d0ce0eec9b6599c79be36d782dd5dc56ed11cb1",
+          "ast_path": "module.body[24].body[0].value",
+          "name": "margins",
+          "node_kind": "ListComp",
+          "segment_sha256": "770a2011ab4e317545d745c71f6538c190bdccdd2f77b239550afaba76f41e1e",
+          "source_segment_utf8_bytes": 43,
+          "span": [
+            124,
+            14,
+            124,
+            57
+          ]
+        },
+        "statement_AST_sha256": "3e132b195b19b366ff4f1372a697a26c2c932f863b7e3434e1b5fc8f3f9940e5",
+        "statement_ast_path": "module.body[24].body[0]",
+        "target": "margins"
+      },
+      {
+        "host_RHS_node_counts": {
+          "fsumExact": 1,
+          "length": 1,
+          "mapVector": 1,
+          "natToScalar": 1,
+          "scalarLiteral": 1,
+          "scalarOp": 8,
+          "var": 4
+        },
+        "host_RHS_path": "$.body.value",
+        "host_RHS_sha256": "0211633b5cb285424a3ec385b02f29c9aeebbc92182fd96cc453a403b9499da8",
+        "host_RHS_type": {
+          "kind": "scalar"
+        },
+        "ordinal": 1,
+        "required_normalization_rules": [
+          {
+            "output_occurrence": "$.body.value.arguments[0]",
+            "rule_id": "ordered_generator_map_sum",
+            "side_conditions": "Distinguish GeneratorExp from ListComp; prove pure ordered exact-real materialization lemma.",
+            "source_occurrence": "module.body[24].body[1].value.left",
+            "status": "REQUIRED_FUTURE_RULE_LOG_NOT_EMITTED_OR_PROVED"
+          },
+          {
+            "output_occurrence": "$.body.value.arguments[0].values.body",
+            "rule_id": "scalar_tree",
+            "side_conditions": "Preserve max(0,-z)+log1p(exp(-abs(z))) without high-level loss operation.",
+            "source_occurrence": "module.body[24].body[1].value.left.args[0].elt",
+            "status": "REQUIRED_FUTURE_RULE_LOG_NOT_EMITTED_OR_PROVED"
+          },
+          {
+            "output_occurrence": "$.body.value.arguments[1]",
+            "rule_id": "len_to_real",
+            "side_conditions": "Read actual margins binding before deriving its Nat length; explicit Nat-to-Real coercion; empty denominator error.",
+            "source_occurrence": "module.body[24].body[1].value.right",
+            "status": "REQUIRED_FUTURE_RULE_LOG_NOT_EMITTED_OR_PROVED"
+          }
+        ],
+        "rhs_source": {
+          "AST_sha256": "3977f07b246e636923653e8b08317a792cdc46c1268a94f59d29bbbee985d6cc",
+          "ast_path": "module.body[24].body[1].value",
+          "name": "data",
+          "node_kind": "BinOp",
+          "segment_sha256": "7c4ddb7d285bd801ea33036d01dd2bd258862ef5513ce0490135d1d0129fa800",
+          "source_segment_utf8_bytes": 87,
+          "span": [
+            125,
+            11,
+            125,
+            98
+          ]
+        },
+        "statement_AST_sha256": "927f4266c7270e16b2210417e75b320041330678069ecfa3475424a0eed8b0de",
+        "statement_ast_path": "module.body[24].body[1]",
+        "target": "data"
+      },
+      {
+        "host_RHS_node_counts": {
+          "fsumExact": 1,
+          "scalarLiteral": 2,
+          "scalarOp": 3,
+          "var": 4,
+          "zipMap": 1
+        },
+        "host_RHS_path": "$.body.body.value",
+        "host_RHS_sha256": "7a63a58aad30a23a1cbbc4a373774163e476a0681d5c3f1d15aa65f243176571",
+        "host_RHS_type": {
+          "kind": "scalar"
+        },
+        "ordinal": 2,
+        "required_normalization_rules": [
+          {
+            "output_occurrence": "$.body.body.value.arguments[0].arguments[0]",
+            "rule_id": "literal_binding_projection",
+            "side_conditions": "Join original L2 definition and exact binary64 ratio; no decimal rational substitution.",
+            "source_occurrence": "module.body[24].body[2].value.left.left",
+            "status": "REQUIRED_FUTURE_RULE_LOG_NOT_EMITTED_OR_PROVED"
+          },
+          {
+            "output_occurrence": "$.body.body.value.arguments[0].arguments[1]",
+            "rule_id": "inline_dot",
+            "side_conditions": "a and b alias weights; preserve argument reads and scoped x,y.",
+            "source_occurrence": "module.body[24].body[2].value.left.right",
+            "status": "REQUIRED_FUTURE_RULE_LOG_NOT_EMITTED_OR_PROVED"
+          },
+          {
+            "output_occurrence": "$.body.body.value",
+            "rule_id": "scalar_grouping",
+            "side_conditions": "Retain (L2*dot(weights,weights))/2, including multiplication before division.",
+            "source_occurrence": "module.body[24].body[2].value",
+            "status": "REQUIRED_FUTURE_RULE_LOG_NOT_EMITTED_OR_PROVED"
+          }
+        ],
+        "rhs_source": {
+          "AST_sha256": "a95e226bf9e0415badda45df50cb9b723046b3eb376e1782579801fe8d2de04c",
+          "ast_path": "module.body[24].body[2].value",
+          "name": "regularizer",
+          "node_kind": "BinOp",
+          "segment_sha256": "08beaa98ebffab187aa78ff73a9b42f26d7a23f7338150b065e2e0e953a2cf18",
+          "source_segment_utf8_bytes": 31,
+          "span": [
+            126,
+            18,
+            126,
+            49
+          ]
+        },
+        "statement_AST_sha256": "00ff1da391f81ad1e8d7228e8a964e31e962a844a5c66d64c631e55fe6fca656",
+        "statement_ast_path": "module.body[24].body[2]",
+        "target": "regularizer"
+      },
+      {
+        "host_RHS_node_counts": {
+          "mapVector": 1,
+          "scalarLiteral": 3,
+          "scalarOp": 10,
+          "var": 5
+        },
+        "host_RHS_path": "$.body.body.body.value",
+        "host_RHS_sha256": "c086dffd872948165e6d58f4207cafc94e78a0e16a2f79a40aceb898a883ebe7",
+        "host_RHS_type": {
+          "kind": "vector",
+          "length": 4
+        },
+        "ordinal": 3,
+        "required_normalization_rules": [
+          {
+            "output_occurrence": "$.body.body.body.value",
+            "rule_id": "map_vector",
+            "side_conditions": "z has its own fresh comprehension scope; retain order.",
+            "source_occurrence": "module.body[24].body[3].value",
+            "status": "REQUIRED_FUTURE_RULE_LOG_NOT_EMITTED_OR_PROVED"
+          },
+          {
+            "output_occurrence": "$.body.body.body.value.body",
+            "rule_id": "if_compare_nonnegative",
+            "side_conditions": "Only Compare(z,[GtE],[Integer(0)]) admits this rule; check both branch syntax, evaluate selected branch.",
+            "source_occurrence": "module.body[24].body[3].value.elt.test",
+            "status": "REQUIRED_FUTURE_RULE_LOG_NOT_EMITTED_OR_PROVED"
+          },
+          {
+            "output_occurrence": "$.body.body.body.value.body",
+            "rule_id": "branch_scalar_trees",
+            "side_conditions": "Preserve both actual branches and both separate exp(-z) occurrences; no common-subexpression transformation.",
+            "source_occurrence": "module.body[24].body[3].value.elt",
+            "status": "REQUIRED_FUTURE_RULE_LOG_NOT_EMITTED_OR_PROVED"
+          }
+        ],
+        "rhs_source": {
+          "AST_sha256": "78e9623fe9dbff307c8441038bdc1fa90e2f505eb43ed03f5ed0ea938dcbdc66",
+          "ast_path": "module.body[24].body[3].value",
+          "name": "factors",
+          "node_kind": "ListComp",
+          "segment_sha256": "a14eff2e27db120c9d4d87f5a606b2b13eac311f278ec7b7929780b6f2f3593f",
+          "source_segment_utf8_bytes": 104,
+          "span": [
+            127,
+            14,
+            128,
+            32
+          ]
+        },
+        "statement_AST_sha256": "5015fd0ebc131c731d7c6807c8a229dfab8d079f466b089da551173e195f3318",
+        "statement_ast_path": "module.body[24].body[3]",
+        "target": "factors"
+      },
+      {
+        "host_RHS_node_counts": {
+          "fsumExact": 1,
+          "indexVector": 2,
+          "length": 1,
+          "natToScalar": 1,
+          "rangeMap": 1,
+          "scalarLiteral": 1,
+          "scalarOp": 4,
+          "var": 8,
+          "zipRowsMap": 1
+        },
+        "host_RHS_path": "$.body.body.body.body.value",
+        "host_RHS_sha256": "7dd3f752bd52c704662fc6b6dfb46d93c817ac165534eb996dc385ddc00abd6b",
+        "host_RHS_type": {
+          "kind": "vector",
+          "length": 80
+        },
+        "ordinal": 4,
+        "required_normalization_rules": [
+          {
+            "output_occurrence": "$.body.body.body.body.value",
+            "rule_id": "range_len_provenance",
+            "side_conditions": "Rejoin range(len(weights)); infer ascending i and dimension from the weights binding, never a supplied 80.",
+            "source_occurrence": "module.body[24].body[4].value.generators[0].iter",
+            "status": "REQUIRED_FUTURE_RULE_LOG_NOT_EMITTED_OR_PROVED"
+          },
+          {
+            "output_occurrence": "$.body.body.body.body.value.body",
+            "rule_id": "scalar_sub_div",
+            "side_conditions": "Retain left L2*weights[i] before right fsum(...)/len(differences), with original grouping.",
+            "source_occurrence": "module.body[24].body[4].value.elt",
+            "status": "REQUIRED_FUTURE_RULE_LOG_NOT_EMITTED_OR_PROVED"
+          },
+          {
+            "output_occurrence": "$.body.body.body.body.value.body.arguments[1].arguments[0].values",
+            "rule_id": "zip_rows_generator",
+            "side_conditions": "Preserve zip(factors,differences) minimum length, tuple binder order f,row, and source-order products.",
+            "source_occurrence": "module.body[24].body[4].value.elt.right.left.args[0]",
+            "status": "REQUIRED_FUTURE_RULE_LOG_NOT_EMITTED_OR_PROVED"
+          },
+          {
+            "output_occurrence": "$.body.body.body.body.value.body",
+            "rule_id": "bounded_subscripts",
+            "side_conditions": "Separate weights[i] and row[i] occurrence joins; Fin bounds derive from actual range and independently admitted equal width.",
+            "source_occurrence": "module.body[24].body[4].value.elt",
+            "status": "REQUIRED_FUTURE_RULE_LOG_NOT_EMITTED_OR_PROVED"
+          }
+        ],
+        "rhs_source": {
+          "AST_sha256": "ae29d6b2d965b6d283d11b1260e0f3fec7714245c9889085121e1c1dd06e36e0",
+          "ast_path": "module.body[24].body[4].value",
+          "name": "gradient",
+          "node_kind": "ListComp",
+          "segment_sha256": "89ca0e75216838eef78b11295457497db38cc0587266a143bd8d903e45fffc23",
+          "source_segment_utf8_bytes": 145,
+          "span": [
+            129,
+            15,
+            130,
+            64
+          ]
+        },
+        "statement_AST_sha256": "1c711c9a58b9006091e229025d59c5ae1fa58eb78bb90fcdcec31ef7f108d36a",
+        "statement_ast_path": "module.body[24].body[4]",
+        "target": "gradient"
+      }
+    ],
+    "output_join": "The actual existing GeneratedOriginalObjectiveContainerPrefix.emittedPrefix literal is the comparison target; infer/recompute the output, do not manufacture it as a semantic premise.",
+    "required_fields_beyond_current_descriptors": [
+      "source/parser/schema/version/input pin inventory",
+      "raw AST literal bytes/hash",
+      "normalizer/lowerer source version/hash and decoder trust boundary",
+      "ordered occurrence ids, source paths/spans/AST and source segment hashes",
+      "rule id/source occurrence/output occurrence and syntactic type/binding side conditions",
+      "unique lexical scope map and capture-avoidance witnesses",
+      "actual inferred dimensions and range/zip/index provenance",
+      "canonical normalized PyAst and SourceExpr literal bytes/hash",
+      "actual matching generated Lean prefix definition pin",
+      "all seven statement context joins and explicit omitted-suffix descriptors",
+      "exact receipts/query/premise context only after separately genuine qualification"
+    ],
+    "schema": "ranker-supported-python-ast-normalization-manifest@1 (PROPOSED)",
+    "source_L2": {
+      "ast_path": "module.body[11]",
+      "ast_sha256": "791882c75bb080d1ea081d4689f765d92b9269255a66d4fb4bca50fba6153a2c",
+      "literal_exact_ratio": {
+        "denominator": "576460752303423488",
+        "numerator": "5764607523034235"
+      },
+      "source_segment_utf8_sha256": "e7ec14a0312ff031cf1e169643babdbfe068880a61575895e4090f9518bf8c04",
+      "span": [
+        21,
+        0,
+        21,
+        9
+      ]
+    },
+    "status": "DESCRIPTOR_DESIGN_ONLY_NO_NEW_PyAst_OR_NORMALIZATION_RULE_LOG_EMITTED"
+  },
+  "official_benchmark_score": null,
+  "omission_authority": false,
+  "original_preparation_equivalence_proved": false,
+  "parser_and_literal_boundary": {
+    "formal_parser_option": "A future independently specified source/token grammar with verified parser refinement is required before claiming a source-bytes theorem; syntactic AST record equality and host parse receipts alone cannot discharge it.",
+    "literal_policy": "Capture token spelling/kind and separately bound finite binary64 bits/exact ratio, including L2=5764607523034235/576460752303423488. Retain 0.0 vs0,1,2 provenance; reject Boolean constants as numbers. Exact-real projection does not establish CPython arithmetic refinement.",
+    "new_planned_PyAst_parser_decoder_or_lowerer_calls": 0,
+    "no_tautology": "Do not define PyAst as a SourceTerm wrapper, normalize it by target evaluation, or accept a supplied eval equality as parsing/lowering evidence.",
+    "raw_AST_to_PyExpr": "Use a fresh bounded validating decoder with exact constructors, all fields, occurrence ids and source spans. Its syntactic correctness theorem must be independent of host lowering.",
+    "read_only_peer_AST_parsing_is_not_formal_parser_evidence": true,
+    "source_bytes_to_raw_AST": "Pin exact UTF-8 source buffer, parser executable/version/flags/AST schema, ast.dump policy, filename normalization, locations and complete outputs. Current CPython parsing is an explicitly open trusted preprocessing boundary."
+  },
+  "planned_files": [
+    "PyAstNumericSubset.lean",
+    "PyAstNumericSemantics.lean",
+    "PyAstNumericLowering.lean",
+    "PyAstNumericPreservation.lean",
+    "OriginalNumericAstManifest.json",
+    "OriginalNumericAstGenerated.lean"
+  ],
+  "planner_activation": false,
+  "proof_authority": false,
+  "proof_contracts": {
+    "actual_five_rhs_lowering_join": "Actual separately emitted PyAst literals and source-joined manifest lower structurally to the actual existing five SourceExpr RHSs and ordered SourcePrefix. Derive observations by the generic preservation theorem.",
+    "all_new_proofs_status": "UNIMPLEMENTED_UNCOMPILED_UNQUALIFIED",
+    "compose_with_existing_compiler": "Only after the AST-lowering theorem, compose with qualified emitted_prefix_preserves/compile_prefix_sound and existing exact-real numeric model projections.",
+    "dot_inline_interpretation_preserved": "Pinned pure function registry and actual immutable Name arguments imply interpretation of actual _dot Call equals interpretation of its hygienically normalized PyExpr. Bind arguments once and preserve order.",
+    "generator_materialization_preserved": "Ordered pure generator consumption with a total exact-real addition fold equals observation of ordered mapped list materialization followed by the same fold, including first body error.",
+    "lower_assignments_observation_preserved": "Accepted lowering of a supported assignment block and structural initial environment imply equality between its independently interpreted ordered internal binding observation and existing SourcePrefix evaluation.",
+    "lower_expr_error_preserved": "Under the same accepted-lowering/structural-environment hypotheses, an observed PyEvalError in the admitted fragment maps through the proved fixed error translation to the same SliceError returned by evalSourceExpr; include success and error corollaries.",
+    "lower_expr_observation_preserved": "lowerSupportedAst Gamma ast = ok <tau,expr> AND StructuralEnvRel Gamma pyEnv irNames -> observePy(evalSupportedAstReal pyEnv ast) = observeIR tau(evalSourceExpr irNames expr).",
+    "premises_allowed": [
+      "supported syntax and accepted lowering",
+      "ordinary structural name/value/list-order/shape correspondence",
+      "fixed pure callee/global bindings and explicit exact-real domain facts",
+      "proved normalization side conditions"
+    ],
+    "premises_forbidden": [
+      "desired AST/IR evaluation equality",
+      "desired objective/gradient/update/convergence/task result",
+      "assumed successful evaluation",
+      "desired compiler output as a premise",
+      "pins or passing controls treated as preservation evidence"
+    ],
+    "wire_decode_preserves_py_syntax": "Future bounded canonical raw-AST JSON decoder acceptance preserves all independent PyExpr constructor/field/occurrence content. This is syntax transport only and does not prove CPython source parsing."
+  },
+  "purpose": "Add a narrow independent supported-Python-AST exact-real preservation bridge into the existing SourceTerm/SourceExpr compiler chain; preserve every prior architecture artifact.",
+  "read_input_pins": [
+    {
+      "bytes": 16391,
+      "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_training.py",
+      "sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a"
+    },
+    {
+      "bytes": 25170,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-source-plan-20261005-01/source-bindings.json",
+      "sha256": "d6cb9f35169351848198d3919a7e794cee89429b07a2879ea680cb8511bfa8b8"
+    },
+    {
+      "bytes": 13910,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-prefix-host-result-20261005-01/objective-prefix-draft.json",
+      "sha256": "4a7067a4797891740734fa7eae9ad46c02bc3410a4d4fff73ba43445a5a4ae17"
+    },
+    {
+      "bytes": 43818,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-prefix-decoder-candidate-20261006-01/source-v1/objective_prefix_decoder.py",
+      "sha256": "4939b0257334dabe239085946c8bc1a5706805df2b39f2f8108ea05ccf965965"
+    },
+    {
+      "bytes": 14989,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-emitter-candidate-20261006-01/source-v1/objective_container_emitter.py",
+      "sha256": "f6a97381502153a336c076093a59504945b8797283ddaa2830826c6d04000a32"
+    },
+    {
+      "bytes": 28749,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-prefix-kernel-candidate-20261006-02/math/ObjectivePrefixIR.lean",
+      "sha256": "0b5960fc6f7376ca14ae698dea773f1d4ef163f5f4c3c76f46cddb927518d824"
+    },
+    {
+      "bytes": 8046,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-prefix-host-result-20261006-01/ObjectiveContainerPrefixGenerated.lean",
+      "sha256": "31bc24c08296302aa15c8067df2cae7e7aa9f3d3b28b63145d661f82f1d3ccbb"
+    },
+    {
+      "bytes": 5170,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-prefix-tail-evaluation-candidate-20261006-02/math/OriginalPrefixModelProjection.lean",
+      "sha256": "bb11d4d91d3d613ba5e373f7702be26c270d5d7f2aabec50b77629966befafd6"
+    },
+    {
+      "bytes": 3681,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/lean/GeneratedNumericSlices.lean",
+      "sha256": "2d7c2170195275e2bbecc687dd942ebd2d82d5d2819dfe85d9b99f32fb9bc6e6"
+    },
+    {
+      "bytes": 11597,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/check-result.json",
+      "sha256": "2261dc8f8effc5449c7b37db95f8a3f834c9e4b14135d6ea2d5df62563188a7b"
+    },
+    {
+      "bytes": 11197,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/math-v2/TypedNumericSlice.lean",
+      "sha256": "bd65d5d0c5ba08dfe4523db151ac5e6075d5abb2f54b26e8007b0926b82f335d"
+    },
+    {
+      "bytes": 19104,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/check-result.json",
+      "sha256": "1e11d2917e3087dc2e231bdf6b329416518eb74542d6e83074d000ee7f8a0e23"
+    },
+    {
+      "bytes": 6088,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/OriginalRealProfile.lean",
+      "sha256": "52eecc62595596545013a7ec4f2cfc70e4b4c2b9f1607ff5db7237b46be3d196"
+    },
+    {
+      "bytes": 9638,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-profile-02/check-result.json",
+      "sha256": "d2d8e94548fb71b2f09f39770c856c2ce2ef17fa769000d875ac6b5b67e806ec"
+    },
+    {
+      "bytes": 8657,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-gradient-01/check-result.json",
+      "sha256": "315826ae63c23849542259cd613f70f7f2fa2a0e0b57a57a629880bf9ece1920"
+    },
+    {
+      "bytes": 1469,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/OriginalRealDescent.lean",
+      "sha256": "0acf2608c7d7cb5f3628a30f39f0f9a0c0990a29d831ec9266e970c6d1766526"
+    },
+    {
+      "bytes": 5799,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/math/RealGapContraction.lean",
+      "sha256": "f548594b460e63c288f28fefd681224ae9fa598e545f2bca5d5f1a77b7aee8b3"
+    },
+    {
+      "bytes": 4827,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/math/OriginalRealConvergenceV2.lean",
+      "sha256": "c423d7114996e9f6d1785684b291ca09fde589ae8006d846cdbcd6feb8405469"
+    },
+    {
+      "bytes": 20586,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-next-source-bridge-gaps-20261006-01/gaps-01.json",
+      "sha256": "029b59fa63008745b95c4b97ffc1c8ea2fd096fbf6ba4123849ce2d2b410ff90"
+    },
+    {
+      "bytes": 12308,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-prefix-tail-evaluation-qualification-20261006-01/qualified-review-01.json",
+      "sha256": "f0cc293cecad16fa3617c3e61b6587b86a3f6b1c6bedc7b374076a6874ae5567"
+    },
+    {
+      "bytes": 2306,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-update-owned-relay-qualification-20261006-01/qualified-review-01.json",
+      "sha256": "8f9ab7a416ac01447fb15d0c1378cf4449418e8eaf7df445e932e1dc7bff632c"
+    },
+    {
+      "bytes": 3060,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-language-candidate-20261006-01/math/ObjectiveContainerSource.lean",
+      "sha256": "fc01f1d99e348e79f9cc9fdaf35cbbdb29d0c0963e88b4b984fde469e2eee410"
+    },
+    {
+      "bytes": 11085,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-language-candidate-20261006-01/math/ObjectiveContainerSemantics.lean",
+      "sha256": "452b72dc798b4136a29ff01813110dd3430789a6b514660001889c4a2d6b1d06"
+    },
+    {
+      "bytes": 17527,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-prefix-kernel-plan-20261005-01/plan-02.json",
+      "sha256": "e03bd094708da43ba6a56339506e0b4009884c67bdb50ff2c093c7ea7944d1e4"
+    },
+    {
+      "bytes": 55068,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-tail-relay-native-readback-review-20261006-01/review-receipt-01.json",
+      "sha256": "675c62cc5b24fae79d5493b6343acad8bffaff8cd548abfb202f647622888d80"
+    }
+  ],
+  "schema": "ranker-supported-python-ast-lowering-preservation-design@1",
+  "scope": "The actual first five _objective assignments and their ordered internal numeric observation, under explicit immutable exact-real input and global-binding relations.",
+  "source_AST_lowering_proved": false,
+  "source_parser_correctness_proved": false,
+  "status": "SOURCE_ONLY_ALL_NEW_AST_SEMANTICS_LOWERING_MANIFESTS_AND_PROOFS_UNIMPLEMENTED_UNCOMPILED_UNQUALIFIED",
+  "strict_cache_admission": false,
+  "target_or_helper_execution_calls": 0,
+  "whole_guard_return_or_original_loop_equivalence_proved": false
+}

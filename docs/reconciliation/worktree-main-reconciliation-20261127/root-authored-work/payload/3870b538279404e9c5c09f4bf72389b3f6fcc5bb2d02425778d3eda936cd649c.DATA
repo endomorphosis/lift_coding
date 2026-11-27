@@ -1,0 +1,35 @@
+{
+  "body_alias_counts_independently_supported_by_physical_path_classification_counts": true,
+  "closed_exception_summary": {
+    "bytes": 12891,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/classification-closed-exceptions-01.json",
+    "sha256": "a746a31b4fcebc9d75bdae1b237357acc63e0907670c30ac40a8a0a82bdb5e1b"
+  },
+  "excluded_paths": 8,
+  "included_logical_bytes": 111967916066,
+  "included_paths": 2449876,
+  "independent_physical_review": {
+    "bytes": 2780,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/root-physical-review-01/review.json",
+    "sha256": "e6c703e2c3a8082f38b8e63f9a6582d0c2f14a61f479bc8501a84bf6047e1b67"
+  },
+  "original_classifier_manifest": {
+    "bytes": 38301,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/archive-classification-01/public/archive-manifest.json",
+    "sha256": "d2e355c7f5a467a9e93abad1919a726ad57c605006d6eceacaf56377bba45b67"
+  },
+  "original_classifier_upload_qualified": false,
+  "original_denied_count": 4,
+  "original_unresolved_count": 4,
+  "payload_data_and_indexes_bytes": 6836535692,
+  "preparation_enclosing_outer_duration": null,
+  "schema": "terminal-ir-explicitly-excluded-public-subset-manifest-preparation@1",
+  "scoped_manifest": {
+    "bytes": 46546,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/archive-public-scoped-01/archive-manifest.json",
+    "sha256": "9e5ba6e6c595ec1519c5669e7ccb4853e4b1c629abec0b1cbda4607b25adc354"
+  },
+  "status": "READY_FOR_EXACT_ROOT_PUBLICATION_REVIEW",
+  "uploader_files": 76,
+  "uploads_performed": 0
+}

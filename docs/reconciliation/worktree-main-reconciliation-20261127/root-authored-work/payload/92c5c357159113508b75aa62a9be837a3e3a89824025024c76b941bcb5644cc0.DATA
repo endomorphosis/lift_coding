@@ -1,0 +1,10 @@
+#!/bin/bash
+set -euo pipefail
+cd /testbed
+git apply --check /curator/gold.patch
+git apply /curator/gold.patch
+set +e
+bash /curator/eval-arm.sh
+control_status=$?
+python -m pip list --format=json > /tmp/ns-packages-after.json
+exit "$control_status"

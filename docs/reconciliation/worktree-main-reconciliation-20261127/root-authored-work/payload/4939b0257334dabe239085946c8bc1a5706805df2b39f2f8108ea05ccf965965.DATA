@@ -1,0 +1,790 @@
+"""Bounded draft decoder and exact-buffer join; initially source-only.
+
+This module never executes the repository under test.  The source-bound API
+executes only the separately qualified, exact-byte-pinned host compiler in an
+isolated namespace; its input ranker is parsed as data.  A successful decode is
+not a kernel proof, Python Float equivalence, a trained model, or a task result.
+"""
+import ast
+import hashlib
+import json
+import math
+import re
+
+MAX_JSON_BYTES = 262144
+MAX_JSON_NODES = 16384
+MAX_JSON_DEPTH = 96
+MAX_STRING_BYTES = 16384
+MAX_INTEGER_BITS = 256
+MAX_DIMENSION = 4096
+MAX_MODULE_NODES = 4096
+MAX_MODULE_DEPTH = 96
+MAX_LEAN_BYTES = 262144
+SOURCE_PIN = (16391, '3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a')
+BINDINGS_PIN = (25170, 'd6cb9f35169351848198d3919a7e794cee89429b07a2879ea680cb8511bfa8b8')
+DRAFT_PIN = (13910, '4a7067a4797891740734fa7eae9ad46c02bc3410a4d4fff73ba43445a5a4ae17')
+RECEIPT_PIN = (2426, 'e846d7ab984a14e1d279965364360e9e8f72ab1ab0408ddff66cfefe09440430')
+COMPILER_PIN = (48095, 'd4aec9ef8f239314c48ca2d2e0a70495be6d2df4c79329e338d9a96c26ee196c')
+MODULE_AST_PIN = '61ae9578f4a087b1b181af6fe4f78c3d811bbaa09368f833f6240384d085407b'
+PREFIX_NAMES = ('margins', 'data', 'regularizer', 'factors', 'gradient')
+OPERATORS = {'neg': 1, 'abs': 1, 'exp': 1, 'log1p': 1, 'add': 2,
+             'sub': 2, 'mul': 2, 'div': 2, 'max': 2, 'ifNonneg': 3}
+RESERVED = frozenset({'math', 'abs', 'max', 'len', 'zip', 'range', '_dot', 'L2'})
+_IDENTIFIER = re.compile(r'[A-Za-z_][A-Za-z_0-9]{0,63}\Z')
+_INTEGER = re.compile(r'(?:0|-[1-9][0-9]*|[1-9][0-9]*)\Z')
+_NAT = re.compile(r'(?:0|[1-9][0-9]*)\Z')
+SCALAR = ('scalar',)
+NAT = ('nat',)
+AUTHORITY = {'proof_authority': False, 'execution_authority': False,
+             'planner_activation': False, 'completion_authority': False}
+
+
+class DecodeRefusal(ValueError):
+    def __init__(self, reason_code, message):
+        self.reason_code = reason_code
+        super().__init__(message)
+
+
+def _need(ok, reason, message):
+    if ok is not True:
+        raise DecodeRefusal(reason, message)
+
+
+def _name(value):
+    _need(type(value) is str and _IDENTIFIER.fullmatch(value) is not None,
+          'nameShape', 'bounded ASCII identifier required')
+    return value
+
+
+def _dimension(value):
+    _need(type(value) is int and 0 <= value <= MAX_DIMENSION,
+          'dimensionShape', 'bounded natural dimension required')
+    return value
+
+
+def _keys(value, expected):
+    _need(type(value) is dict and set(value) == set(expected),
+          'schema', 'closed object fields required')
+
+
+def _bounded(value):
+    pending, count, text = [(value, 1, ())], 0, 0
+    while pending:
+        current, depth, lineage = pending.pop()
+        count += 1
+        _need(count <= MAX_JSON_NODES and depth <= MAX_JSON_DEPTH,
+              'budget', 'JSON node or depth budget exceeded')
+        if type(current) is str:
+            try:
+                size = len(current.encode('utf-8'))
+            except UnicodeError:
+                raise DecodeRefusal('schema', 'invalid UTF8 string') from None
+            _need(size <= MAX_STRING_BYTES, 'budget', 'string budget exceeded')
+            text += size
+            _need(text <= MAX_JSON_BYTES, 'budget', 'aggregate string budget exceeded')
+        elif type(current) is int:
+            _need(abs(current).bit_length() <= MAX_INTEGER_BITS, 'budget', 'integer budget exceeded')
+        elif current is None or type(current) is bool:
+            pass
+        elif type(current) in (dict, list):
+            _need(id(current) not in lineage, 'budget', 'cyclic object refused')
+            width = 2 * len(current) if type(current) is dict else len(current)
+            _need(count + len(pending) + width <= MAX_JSON_NODES, 'budget', 'wide object refused')
+            descendants = lineage + (id(current),)
+            if type(current) is dict:
+                for key, item in current.items():
+                    _need(type(key) is str, 'schema', 'string object keys required')
+                    pending.append((key, depth + 1, descendants))
+                    pending.append((item, depth + 1, descendants))
+            else:
+                pending.extend((item, depth + 1, descendants) for item in current)
+        else:
+            raise DecodeRefusal('schema', 'only JSON primitives accepted')
+
+
+def _pairs(pairs):
+    out = {}
+    for key, value in pairs:
+        _need(key not in out, 'duplicateKey', 'duplicate JSON key refused')
+        out[key] = value
+    return out
+
+
+def _parse_integer(value):
+    _need(len(value) <= 79, 'budget', 'JSON integer text budget exceeded')
+    parsed = int(value)
+    _need(abs(parsed).bit_length() <= MAX_INTEGER_BITS, 'budget', 'JSON integer budget exceeded')
+    return parsed
+
+
+def _no_float(value):
+    raise DecodeRefusal('schema', 'JSON floating point numbers refused')
+
+
+def parse_bounded_json(raw):
+    _need(type(raw) is bytes and len(raw) <= MAX_JSON_BYTES, 'budget', 'bounded byte buffer required')
+    try:
+        value = json.loads(raw.decode('utf-8'), object_pairs_hook=_pairs,
+                           parse_int=_parse_integer, parse_float=_no_float,
+                           parse_constant=_no_float)
+    except DecodeRefusal:
+        raise
+    except (ValueError, UnicodeError, RecursionError):
+        raise DecodeRefusal('schema', 'bounded JSON syntax required') from None
+    _bounded(value)
+    return value
+
+
+def canonical_bytes(value):
+    _bounded(value)
+    raw = json.dumps(value, sort_keys=True, separators=(',', ':'), allow_nan=False).encode('utf-8')
+    _need(len(raw) <= MAX_JSON_BYTES, 'budget', 'serialized JSON byte budget exceeded')
+    return raw
+
+
+def _type(value):
+    _need(type(value) is dict and type(value.get('kind')) is str, 'typeShape', 'type object required')
+    kind = value['kind']
+    fields = {'scalar': ('kind',), 'nat': ('kind',), 'vector': ('kind', 'length'),
+              'matrix': ('kind', 'rows', 'columns'), 'index': ('kind', 'bound')}
+    _need(kind in fields, 'typeShape', 'ordinary value type required')
+    _keys(value, fields[kind])
+    if kind in ('scalar', 'nat'):
+        return (kind,)
+    if kind == 'vector':
+        return (kind, _dimension(value['length']))
+    if kind == 'index':
+        return (kind, _dimension(value['bound']))
+    return (kind, _dimension(value['rows']), _dimension(value['columns']))
+
+
+def _ratio(value):
+    _keys(value, ('numerator', 'denominator'))
+    n, d = value['numerator'], value['denominator']
+    _need(type(n) is str and type(d) is str and len(n) <= 79 and len(d) <= 78,
+          'ratioShape', 'bounded ratio strings required')
+    _need(_INTEGER.fullmatch(n) is not None and _NAT.fullmatch(d) is not None,
+          'ratioShape', 'canonical decimal ratio strings required')
+    ni, di = int(n), int(d)
+    _need(abs(ni).bit_length() <= MAX_INTEGER_BITS and di.bit_length() <= MAX_INTEGER_BITS,
+          'budget', 'ratio integer budget exceeded')
+    _need(di > 0 and math.gcd(abs(ni), di) == 1,
+          'ratioShape', 'positive denominator and reduced ratio required')
+    return ni, di
+
+
+def _scope(value):
+    _need(type(value) is dict and len(value) <= 64, 'scopeShape', 'bounded scope required')
+    out = {}
+    for name, annotation in value.items():
+        _name(name)
+        _need(name not in RESERVED, 'unknownName', 'reserved name in value scope')
+        out[name] = _type(annotation)
+    return out
+
+
+def _extend(scope, name, annotation):
+    _name(name)
+    _need(name not in scope and name not in RESERVED, 'binderRole', 'active or reserved binder refused')
+    out = dict(scope)
+    out[name] = annotation
+    return out
+
+
+def _annotation(node, inferred, record_shape):
+    annotation = node['type']
+    if inferred[0] != 'record':
+        _need(_type(annotation) == inferred, 'typeMismatch', 'annotation differs from independently inferred type')
+    elif type(annotation) is dict and annotation.get('kind') == 'numericPrefixRecord':
+        _keys(annotation, ('kind', 'rows', 'columns'))
+        dims = (_dimension(annotation['rows']), _dimension(annotation['columns']))
+        _need(record_shape is not None and dims == record_shape,
+              'typeMismatch', 'legacy record marker requires established input dimensions')
+    else:
+        _keys(annotation, ('kind', 'fields'))
+        _need(annotation['kind'] == 'record' and type(annotation['fields']) is list,
+              'typeShape', 'ordered record annotation required')
+        annotated = []
+        for field in annotation['fields']:
+            _keys(field, ('name', 'type'))
+            annotated.append((_name(field['name']), _type(field['type'])))
+        _need(tuple(annotated) == inferred[1], 'typeMismatch', 'ordered record annotation mismatch')
+
+
+def _decode(node, scope, path, range_sources, record_shape, counts):
+    _need(type(node) is dict and type(node.get('kind')) is str, 'schema', 'term object required')
+    kind = node['kind']
+    counts[kind] = counts.get(kind, 0) + 1
+    basic = ('kind', 'type')
+    fields = {
+        'var': ('name',), 'scalarLiteral': ('ratio',),
+        'scalarOp': ('operator', 'arguments'), 'letBind': ('binder', 'value', 'body', 'evaluation_order'),
+        'mapVector': ('source', 'binder', 'body', 'order'), 'mapRows': ('source', 'binder', 'body', 'order'),
+        'zipMap': ('left', 'right', 'binders', 'body', 'truncation'),
+        'zipRowsMap': ('left', 'right', 'binders', 'body', 'truncation'),
+        'rangeMap': ('length', 'index_bound', 'binder', 'body', 'order'),
+        'indexVector': ('vector', 'index'), 'length': ('source',),
+        'natToScalar': ('value',), 'fsumExact': ('values', 'order'), 'prefixRecord': ('fields',)}
+    _need(kind in fields, 'unsupportedOpcode', 'unknown term constructor refused')
+    if kind == 'scalarOp' and node.get('operator') == 'ifNonneg':
+        _keys(node, basic + fields[kind] + ('syntax_policy', 'evaluation_policy'))
+        _need(node['syntax_policy'] == 'both_branches_checked'
+              and node['evaluation_policy'] == 'only_selected_branch', 'evaluationPolicy', 'conditional policy mismatch')
+    else:
+        _keys(node, basic + fields[kind])
+    decoded = {'kind': kind}
+
+    def child(key, local=scope):
+        return _decode(node[key], local, path + '.' + key, range_sources, record_shape, counts)
+
+    if kind == 'var':
+        name = _name(node['name'])
+        _need(name in scope and name not in RESERVED, 'unknownName', 'unresolved value name')
+        inferred = scope[name]
+        decoded['name'] = name
+    elif kind == 'scalarLiteral':
+        decoded['ratio'] = _ratio(node['ratio'])
+        inferred = SCALAR
+    elif kind == 'scalarOp':
+        op = node['operator']
+        _need(type(op) is str and op in OPERATORS, 'unsupportedOpcode', 'unknown scalar operator')
+        args = node['arguments']
+        _need(type(args) is list and len(args) == OPERATORS[op], 'wrongArity', 'scalar operation arity mismatch')
+        lowered = [_decode(a, scope, path + '.arguments[' + str(i) + ']', range_sources, record_shape, counts)
+                   for i, a in enumerate(args)]
+        _need(all(a['inferred_type'] == SCALAR for a in lowered), 'typeMismatch', 'scalar arguments required')
+        decoded.update(operator=op, arguments=lowered)
+        inferred = SCALAR
+    elif kind == 'letBind':
+        _need(node['evaluation_order'] == 'rhs_then_body', 'evaluationPolicy', 'let evaluation order mismatch')
+        value = child('value')
+        _need(value['inferred_type'][0] != 'record', 'typeMismatch', 'record let values are outside this draft language')
+        local = _extend(scope, node['binder'], value['inferred_type'])
+        body = child('body', local)
+        decoded.update(binder=node['binder'], value=value, body=body)
+        inferred = body['inferred_type']
+    elif kind in ('mapRows', 'mapVector'):
+        _need(node['order'] == 'ascending', 'evaluationPolicy', 'map order mismatch')
+        source = child('source')
+        t = source['inferred_type']
+        expected = 'matrix' if kind == 'mapRows' else 'vector'
+        _need(t[0] == expected, 'typeMismatch', 'map container type mismatch')
+        binder_type = ('vector', t[2]) if kind == 'mapRows' else SCALAR
+        body = child('body', _extend(scope, node['binder'], binder_type))
+        _need(body['inferred_type'] == SCALAR, 'typeMismatch', 'map body must be scalar')
+        decoded.update(source=source, binder=node['binder'], body=body)
+        inferred = ('vector', t[1])
+    elif kind in ('zipMap', 'zipRowsMap'):
+        _need(node['truncation'] == 'minimum_length', 'evaluationPolicy', 'zip truncation mismatch')
+        left, right = child('left'), child('right')
+        lt, rt = left['inferred_type'], right['inferred_type']
+        _need(lt[0] == 'vector' and rt[0] == ('matrix' if kind == 'zipRowsMap' else 'vector'),
+              'typeMismatch', 'zip input type mismatch')
+        binders = node['binders']
+        _need(type(binders) is list and len(binders) == 2, 'wrongArity', 'zip pair binders required')
+        local = _extend(scope, binders[0], SCALAR)
+        local = _extend(local, binders[1], ('vector', rt[2]) if kind == 'zipRowsMap' else SCALAR)
+        body = child('body', local)
+        _need(body['inferred_type'] == SCALAR, 'typeMismatch', 'zip body must be scalar')
+        decoded.update(left=left, right=right, binders=tuple(binders), body=body)
+        inferred = ('vector', min(lt[1], rt[1]))
+    elif kind == 'rangeMap':
+        _need(node['order'] == 'ascending_zero_to_bound_exclusive', 'evaluationPolicy', 'range order mismatch')
+        _need(path in range_sources, 'rangeProvenance', 'rangeMap requires separately rejoined vector source')
+        source_name = _name(range_sources[path])
+        _need(source_name in scope and scope[source_name][0] == 'vector', 'rangeProvenance', 'established range vector required')
+        length = scope[source_name][1]
+        _need(_dimension(node['length']) == length and _dimension(node['index_bound']) == length,
+              'dimensionMismatch', 'range annotations differ from established vector length')
+        body = child('body', _extend(scope, node['binder'], ('index', length)))
+        _need(body['inferred_type'] == SCALAR, 'typeMismatch', 'range body must be scalar')
+        decoded.update(binder=node['binder'], range_source=source_name, body=body)
+        inferred = ('vector', length)
+    elif kind == 'indexVector':
+        vector, index = child('vector'), child('index')
+        vt, it = vector['inferred_type'], index['inferred_type']
+        _need(vt[0] == 'vector' and it == ('index', vt[1]), 'indexBound', 'Fin index must match vector dimension')
+        decoded.update(vector=vector, index=index)
+        inferred = SCALAR
+    elif kind == 'length':
+        source = child('source')
+        _need(source['kind'] == 'var' and source['inferred_type'][0] in ('vector', 'matrix'),
+              'typeMismatch', 'length must read an established lexical container')
+        decoded['source'] = source
+        decoded['dimension'] = source['inferred_type'][1]
+        inferred = NAT
+    elif kind == 'natToScalar':
+        value = child('value')
+        _need(value['inferred_type'] == NAT, 'typeMismatch', 'natural operand required')
+        decoded['value'] = value
+        inferred = SCALAR
+    elif kind == 'fsumExact':
+        _need(node['order'] == 'ascending_exact_real_addition', 'evaluationPolicy', 'exact sum order mismatch')
+        values = child('values')
+        _need(values['inferred_type'][0] == 'vector', 'typeMismatch', 'exact sum requires scalar vector')
+        decoded['values'] = values
+        inferred = SCALAR
+    else:
+        entries = node['fields']
+        _need(type(entries) is list and len(entries) <= 64, 'recordShape', 'bounded ordered record required')
+        seen, lowered, types = set(), [], []
+        for i, field in enumerate(entries):
+            _keys(field, ('name', 'value'))
+            name = _name(field['name'])
+            _need(name not in seen, 'recordShape', 'duplicate record field')
+            seen.add(name)
+            value = _decode(field['value'], scope, path + '.fields[' + str(i) + '].value', range_sources, record_shape, counts)
+            _need(value['inferred_type'][0] != 'record', 'recordShape', 'nested draft record not supported')
+            lowered.append({'name': name, 'value': value})
+            types.append((name, value['inferred_type']))
+        decoded['fields'] = lowered
+        inferred = ('record', tuple(types))
+    _annotation(node, inferred, record_shape)
+    decoded['inferred_type'] = inferred
+    return decoded
+
+
+def decode_generic_tree(tree_bytes, lexical_types, *, range_sources=None, record_shape=None):
+    """Unbound host type checking; caller range annotations confer no source proof."""
+    tree = parse_bounded_json(tree_bytes)
+    scope = _scope(lexical_types)
+    if range_sources is None:
+        range_sources = {}
+    _need(type(range_sources) is dict and len(range_sources) <= 64,
+          'rangeProvenance', 'bounded path-to-vector map required')
+    for path, name in range_sources.items():
+        _need(type(path) is str and len(path) <= 2048 and path.startswith('$'),
+              'rangeProvenance', 'bounded range path required')
+        _name(name)
+    if record_shape is not None:
+        _need(type(record_shape) is tuple and len(record_shape) == 2, 'typeShape', 'two record dimensions required')
+        record_shape = tuple(_dimension(x) for x in record_shape)
+    counts = {}
+    decoded = _decode(tree, scope, '$', range_sources, record_shape, counts)
+    _need(set(range_sources) == {p for p in _range_paths(tree)},
+          'rangeProvenance', 'missing or unused range provenance paths')
+    return {'schema': 'ranker-objective-prefix-decoded@1', 'status': 'HOST_DECODE_UNQUALIFIED',
+            'tree': decoded, 'operation_counts': counts, 'original_source_rejoined': False,
+            'kernel_checked': False, 'strict_cache_admission': False,
+            'source_semantic_equivalence_proved': False, **AUTHORITY}
+
+
+def _range_paths(value, path='$'):
+    if type(value) is dict:
+        if value.get('kind') == 'rangeMap':
+            yield path
+        for key, child in value.items():
+            if type(child) in (dict, list):
+                yield from _range_paths(child, path + '.' + key)
+    elif type(value) is list:
+        for i, child in enumerate(value):
+            yield from _range_paths(child, path + '[' + str(i) + ']')
+
+
+def _pin(raw, expected, role):
+    _need(type(raw) is bytes and len(raw) == expected[0]
+          and hashlib.sha256(raw).hexdigest() == expected[1], 'inputPinMismatch', role + ' exact byte pin mismatch')
+
+
+def _ast_sha(node):
+    return hashlib.sha256(ast.dump(node, annotate_fields=True, include_attributes=False).encode('utf-8')).hexdigest()
+
+
+def _source_record(node, source, path, role):
+    segment = ast.get_source_segment(source, node)
+    _need(type(segment) is str, 'sourceJoin', 'source segment missing')
+    raw = segment.encode('utf-8')
+    return {'ast_dump': ast.dump(node, annotate_fields=True, include_attributes=False),
+            'ast_path': path, 'ast_sha256': _ast_sha(node), 'node_kind': type(node).__name__,
+            'role': role, 'source_segment': segment, 'source_segment_utf8_bytes': len(raw),
+            'source_segment_utf8_sha256': hashlib.sha256(raw).hexdigest(),
+            'span': [node.lineno, node.col_offset, node.end_lineno, node.end_col_offset]}
+
+
+def _rejoin_ast(source_bytes, bindings, draft):
+    try:
+        source = source_bytes.decode('utf-8')
+        module = ast.parse(source)
+    except (UnicodeError, ValueError, SyntaxError, RecursionError):
+        raise DecodeRefusal('sourceJoin', 'source AST parse failed') from None
+    pending, count = [(module, 1)], 0
+    while pending:
+        node, depth = pending.pop()
+        count += 1
+        _need(count <= MAX_MODULE_NODES and depth <= MAX_MODULE_DEPTH, 'budget', 'source AST budget exceeded')
+        children = list(ast.iter_child_nodes(node))
+        _need(count + len(pending) + len(children) <= MAX_MODULE_NODES, 'budget', 'source AST width exceeded')
+        pending.extend((child, depth + 1) for child in children)
+    _need(_ast_sha(module) == MODULE_AST_PIN == bindings['module_ast_sha256'] == draft['module_AST_sha256'],
+          'sourceJoin', 'whole source module AST mismatch')
+    objective, dot, l2 = module.body[24], module.body[23], module.body[11]
+    expected_objective = _source_record(objective, source, 'module.body[24]', 'whole_context_pin_only')
+    expected_dot = _source_record(dot, source, 'module.body[23]',
+        'existing Q4 admitted callee source; future inlining must join actual literal and all lexical names')
+    expected_l2 = _source_record(l2, source, 'module.body[11]',
+        'exact literal source binding; float-to-exact-real projection only')
+    ni, di = l2.value.value.as_integer_ratio()
+    expected_l2['literal_exact_ratio'] = {'numerator': str(ni), 'denominator': str(di)}
+    _need(bindings['objective'] == expected_objective and bindings['dot_callee'] == expected_dot
+          and bindings['source_L2'] == expected_l2 and draft['L2_exact_ratio'] == expected_l2['literal_exact_ratio'],
+          'sourceJoin', 'objective/callee/L2 source records mismatch')
+    numeric = dict(zip(PREFIX_NAMES, objective.body[:5]))
+    gradient = numeric['gradient'].value.elt
+    gradient_sum = gradient.right.left.args[0]
+    components = {'margin_body': numeric['margins'].value.elt,
+        'loss_body': numeric['data'].value.left.args[0].elt, 'loss_denominator': numeric['data'].value.right,
+        'regularizer_body': numeric['regularizer'].value, 'factor_body': numeric['factors'].value.elt,
+        'gradient_coordinate': gradient, 'gradient_denominator': gradient.right.right,
+        'gradient_sum_body': gradient_sum.elt, 'gradient_sum_zip': gradient_sum.generators[0].iter,
+        'coordinate_range': numeric['gradient'].value.generators[0].iter}
+    records = {name: _source_record(numeric[name], source, 'module.body[24].body[' + str(i) + ']',
+                                  'numeric_prefix_candidate') for i, name in enumerate(PREFIX_NAMES)}
+    for i, name in ((5, 'nonfinite_guard'), (6, 'return_tuple')):
+        records[name] = _source_record(objective.body[i], source, 'module.body[24].body[' + str(i) + ']',
+                                      'context_only_not_accepted_in_first_stage')
+    records.update({name: _source_record(node, source, 'under module.body[24] / ' + name,
+                                       'exact_AST_component_candidate') for name, node in components.items()})
+    _need(bindings['bindings'] == records and len(records) == 17, 'sourceJoin', 'all seventeen source records must join')
+    checked = {name: {'AST_sha256': record['ast_sha256'], 'segment_sha256': record['source_segment_utf8_sha256'],
+                      'span': record['span']} for name, record in records.items()}
+    _need(draft['checked_bindings'] == checked and draft['module_AST_nodes_checked'] == count,
+          'sourceJoin', 'entire draft source-binding summary must join')
+    coordinate_range = components['coordinate_range']
+    _need(ast.dump(coordinate_range, include_attributes=False) ==
+          "Call(func=Name(id='range', ctx=Load()), args=[Call(func=Name(id='len', ctx=Load()), args=[Name(id='weights', ctx=Load())], keywords=[])], keywords=[])",
+          'rangeProvenance', 'actual source range(len(weights)) required')
+    ranges = list(_range_paths(draft['tree']))
+    _need(len(ranges) == 1 and ranges[0] == '$.body.body.body.body.value',
+          'rangeProvenance', 'range must be the actual fifth assignment value')
+    return {ranges[0]: 'weights'}, count
+
+
+def _recompile_same_buffers(compiler_source_bytes, source_bytes, bindings_bytes, supplied):
+    """Run exact pinned host compiler definitions; never the source ranker."""
+    _pin(compiler_source_bytes, COMPILER_PIN, 'host compiler')
+    namespace = {'__name__': '_ranker_prefix_pinned_host_compiler', '__builtins__': __builtins__}
+    try:
+        code = compile(compiler_source_bytes, '<exact-pinned-objective-prefix-compiler>', 'exec')
+        exec(code, namespace, namespace)
+        fresh = namespace['compile_objective_numeric_prefix'](source_bytes, bindings_bytes)
+        rendered = namespace['render_generated_objective_prefix'](fresh, source_bytes, bindings_bytes)
+    except Exception as error:
+        raise DecodeRefusal('compilerAdapter', 'pinned host compilation refused: ' + type(error).__name__) from None
+    _need(canonical_bytes(supplied) == canonical_bytes(fresh), 'receiptForgery', 'entire fresh compiler receipt/tree differs')
+    _need(rendered['text'].encode('utf-8') == canonical_bytes(fresh) + b'\n'
+          and rendered['text_utf8_bytes'] == len(rendered['text'].encode('utf-8'))
+          and rendered['text_sha256'] == hashlib.sha256(rendered['text'].encode('utf-8')).hexdigest(),
+          'compilerAdapter', 'compiler renderer whole-buffer join failed')
+    return fresh
+
+
+def decode_source_bound_prefix(draft_bytes, source_bytes, bindings_bytes, materialization_receipt_bytes,
+                               compiler_source_bytes):
+    """Exact snapshot only. Caller cannot redefine pins or forge a source receipt."""
+    for raw, pin, role in ((draft_bytes, DRAFT_PIN, 'actual draft'), (source_bytes, SOURCE_PIN, 'ranker source'),
+                           (bindings_bytes, BINDINGS_PIN, 'P7 bindings'),
+                           (materialization_receipt_bytes, RECEIPT_PIN, 'materialization receipt'),
+                           (compiler_source_bytes, COMPILER_PIN, 'host compiler')):
+        _pin(raw, pin, role)
+    draft = parse_bounded_json(draft_bytes)
+    bindings = parse_bounded_json(bindings_bytes)
+    receipt = parse_bounded_json(materialization_receipt_bytes)
+    _need(receipt['output']['bytes'] == len(draft_bytes) and receipt['output']['sha256'] == hashlib.sha256(draft_bytes).hexdigest()
+          and receipt['original_source']['sha256'] == SOURCE_PIN[1] and receipt['bindings']['sha256'] == BINDINGS_PIN[1]
+          and receipt['compiler']['sha256'] == COMPILER_PIN[1], 'sourceJoin', 'materialization input/output descriptors mismatch')
+    fresh = _recompile_same_buffers(compiler_source_bytes, source_bytes, bindings_bytes, draft)
+    ranges, count = _rejoin_ast(source_bytes, bindings, fresh)
+    _need(fresh['shape'] == {'weights': 80, 'rows': 4, 'columns': 80}, 'dimensionMismatch', 'actual fixed shape mismatch')
+    decoded = decode_generic_tree(canonical_bytes(fresh['tree']),
+        {'weights': {'kind': 'vector', 'length': 80}, 'differences': {'kind': 'matrix', 'rows': 4, 'columns': 80}},
+        range_sources=ranges, record_shape=(4, 80))
+    assignments, cursor = [], decoded['tree']
+    while cursor['kind'] == 'letBind':
+        assignments.append((cursor['binder'], cursor['value']['inferred_type']))
+        cursor = cursor['body']
+    expected = [('margins', ('vector', 4)), ('data', SCALAR), ('regularizer', SCALAR),
+                ('factors', ('vector', 4)), ('gradient', ('vector', 80))]
+    _need(assignments == expected and tuple(name for name, _ in cursor['inferred_type'][1]) == PREFIX_NAMES,
+          'sourceJoin', 'source assignment order or ordered record fields mismatch')
+    decoded.update(original_source_rejoined=True, same_buffer_compiler_receipt_rejoined=True,
+                   source_input_sha256=SOURCE_PIN[1], draft_input_sha256=DRAFT_PIN[1],
+                   bindings_input_sha256=BINDINGS_PIN[1], compiler_source_sha256=COMPILER_PIN[1],
+                   materialization_receipt_sha256=RECEIPT_PIN[1], source_binding_records_rejoined=17,
+                   source_context_statements_rejoined=7, numeric_assignments_decoded=5,
+                   decoder_source_AST_parse_calls=1, compiler_source_AST_parse_calls_declared=2,
+                   source_module_AST_nodes_rejoined=count, actual_numeric_coordinates_supplied=0,
+                   Python_Float_semantics_proved=False, CPython_math_fsum_semantics_proved=False,
+                   Python_libm_semantics_proved=False, full_task_satisfaction='unknown',
+                   optimizer_source_convergence_proved=False, global_autoencoder_convergence_proved=False)
+    return decoded
+
+
+def _lean_type(t):
+    if t[0] in ('scalar', 'nat'):
+        return '.' + t[0]
+    if t[0] in ('vector', 'index'):
+        return '(' + '.' + t[0] + ' ' + str(t[1]) + ')'
+    _need(t[0] == 'matrix', 'kernelUnsupported', 'record is not an ordinary term type')
+    return '(.matrix ' + str(t[1]) + ' ' + str(t[2]) + ')'
+
+
+def _lean_name(name):
+    # All emitted names passed the bounded ASCII identifier grammar. Quotes
+    # and control characters cannot enter a Lean string or identifier.
+    return '"' + _name(name) + '"'
+
+
+def _emit_term(node):
+    kind = node['kind']
+    if kind == 'var':
+        return '(SourceTerm.var (τ := ' + _lean_type(node['inferred_type']) + ') ' + _lean_name(node['name']) + ')'
+    if kind == 'scalarLiteral':
+        n, den = node['ratio']
+        return '(SourceTerm.scalarLiteral ((' + str(n) + ' : ℚ) / ' + str(den) + '))'
+    if kind == 'scalarOp':
+        children = [_emit_term(x) for x in node['arguments']]
+        op = node['operator']
+        if op == 'ifNonneg':
+            constructor = 'SourceTerm.ifNonneg'
+        else:
+            constructor = ('SourceTerm.scalarUnary' if len(children) == 1 else 'SourceTerm.scalarBinary') + ' .' + op
+        return '(' + constructor + ' ' + ' '.join(children) + ')'
+    if kind == 'length':
+        constructor = 'lengthVector' if node['source']['inferred_type'][0] == 'vector' else 'lengthMatrix'
+        return '(SourceTerm.' + constructor + ' ' + _emit_term(node['source']) + ')'
+    if kind in ('natToScalar', 'fsumExact'):
+        key = 'value' if kind == 'natToScalar' else 'values'
+        return '(SourceTerm.' + kind + ' ' + _emit_term(node[key]) + ')'
+    if kind == 'indexVector':
+        return '(SourceTerm.indexVector ' + _emit_term(node['vector']) + ' ' + _emit_term(node['index']) + ')'
+    raise DecodeRefusal('kernelUnsupported', 'kernel foundation does not compile ' + kind)
+
+
+def _emit_fields(node):
+    _need(node['kind'] == 'prefixRecord', 'kernelUnsupported', 'prefix must end in a record')
+    text = 'SourceFields.nil'
+    for field in reversed(node['fields']):
+        text = '(SourceFields.cons (name := ' + _lean_name(field['name']) + ') ' + _emit_term(field['value']) + ' ' + text + ')'
+    return text
+
+
+def _emit_prefix(node):
+    if node['kind'] == 'prefixRecord':
+        return '(SourcePrefix.record ' + _emit_fields(node) + ')'
+    _need(node['kind'] == 'letBind', 'kernelUnsupported', 'prefix requires let bindings or record')
+    return '(SourcePrefix.letBind ' + _lean_name(node['binder']) + ' ' + _emit_term(node['value']) + ' ' + _emit_prefix(node['body']) + ')'
+
+
+def emit_generic_foundation(tree_bytes, lexical_types, *, record_shape=None, range_sources=None):
+    """Re-decode caller bytes; mutable decoded stamps never enter this API.
+
+    This emits a checked-by-constructor *candidate* literal. Lean compilation
+    is a later qualification; source provenance remains false here.
+    """
+    decoded = decode_generic_tree(tree_bytes, lexical_types, record_shape=record_shape, range_sources=range_sources)
+    node = decoded['tree']
+    prefix = node['kind'] in ('letBind', 'prefixRecord')
+    text = _emit_prefix(node) if prefix else _emit_term(node)
+    _need(len(text.encode()) <= MAX_LEAN_BYTES, 'budget', 'Lean literal budget exceeded')
+    return {'schema': 'ranker-objective-prefix-foundation-literal@1', 'text': text,
+            'text_sha256': hashlib.sha256(text.encode()).hexdigest(),
+            'text_utf8_bytes': len(text.encode()), 'inferred_type': node['inferred_type'],
+            'source_prefix_literal': prefix, 'original_source_rejoined': False,
+            'kernel_checked': False, 'strict_cache_admission': False, **AUTHORITY}
+
+
+def emit_source_bound_supported_projections(draft_bytes, source_bytes, bindings_bytes,
+                                          materialization_receipt_bytes, compiler_source_bytes):
+    """Rejoin all buffers at emission; emit four actual scoped source leaves.
+
+    The margins vector and coordinate index are supplied typed values. This
+    does not prove their construction by the still-open container compiler.
+    The original full five-assignment prefix deliberately refuses emission.
+    """
+    buffers = (draft_bytes, source_bytes, bindings_bytes, materialization_receipt_bytes, compiler_source_bytes)
+    decoded = decode_source_bound_prefix(*buffers)
+    tree = decoded['tree']
+    data = tree['body']['value']
+    gradient = tree['body']['body']['body']['body']['value']['body']
+    leaves = [
+        ('loss_denominator', data['arguments'][1], [('margins', ('vector', 4))]),
+        ('gradient_denominator', gradient['arguments'][1]['arguments'][1], [('differences', ('matrix', 4, 80))]),
+        ('weight_coordinate', gradient['arguments'][0]['arguments'][1], [('weights', ('vector', 80)), ('i', ('index', 80))]),
+        ('source_L2', gradient['arguments'][0]['arguments'][0], []),
+    ]
+    _need(leaves[3][1]['kind'] == 'scalarLiteral'
+          and leaves[3][1]['ratio'] == (5764607523034235, 576460752303423488),
+          'sourceJoin', 'actual source L2 binary ratio must join')
+    text = 'import ObjectivePrefixIR\n\nnamespace RankerObjectivePrefixProjections\n\nnoncomputable section\nopen RankerObjectivePrefixIR\n\n'
+    projections = []
+    for name, leaf, scope in leaves:
+        literal = _emit_term(leaf)
+        context = '[' + ', '.join('(' + _lean_name(n) + ', ' + _lean_type(t) + ')' for n, t in scope) + ']'
+        text += 'def ' + name + '_scope : Context := ' + context + '\n'
+        text += 'def ' + name + '_source : SourceTerm .scalar := ' + literal + '\n\n'
+        projections.append({'name': name, 'source_literal_sha256': hashlib.sha256(literal.encode()).hexdigest(),
+                            'scope': tuple(scope), 'type': ('scalar',), 'source_bound': True})
+    text += '-- Source literals only: generated compilation/evaluation proofs are a later batch.\nend\nend RankerObjectivePrefixProjections\n'
+    raw = text.encode()
+    _need(len(raw) <= MAX_LEAN_BYTES, 'budget', 'Lean source budget exceeded')
+    return {'schema': 'ranker-objective-prefix-supported-projections@1', 'text': text,
+            'text_utf8_bytes': len(raw), 'text_sha256': hashlib.sha256(raw).hexdigest(),
+            'projections': projections, 'projection_count': 4, 'original_source_rejoined': True,
+            'complete_original_prefix_emitted': False, 'kernel_checked': False,
+            'strict_cache_admission': False, 'actual_numeric_coordinates_supplied': 0,
+            'whole_objective_semantics_proved': False, 'full_task_satisfaction': 'unknown', **AUTHORITY}
+
+
+def _lean_type(annotation):
+    kind = annotation[0]
+    if kind in ('scalar', 'nat'):
+        return '.' + kind
+    if kind in ('vector', 'index'):
+        return '(.' + kind + ' ' + str(annotation[1]) + ')'
+    if kind == 'matrix':
+        return '(.matrix ' + str(annotation[1]) + ' ' + str(annotation[2]) + ')'
+    raise DecodeRefusal('unsupportedKernelConstructor', 'record term types are represented by SourcePrefix schema')
+
+
+def _lean_string(value):
+    # Every emitted name passes the ASCII identifier grammar before escaping.
+    return json.dumps(_name(value), ensure_ascii=True)
+
+
+def _lean_term(node):
+    kind = node['kind']
+    if kind == 'var':
+        return '(SourceTerm.var ' + _lean_string(node['name']) + ')'
+    if kind == 'scalarLiteral':
+        n, den = node['ratio']
+        return '(SourceTerm.scalarLiteral ((' + str(n) + ' : ℚ) / (' + str(den) + ' : ℚ)))'
+    if kind == 'scalarOp':
+        operator, arguments = node['operator'], node['arguments']
+        rendered = [_lean_term(argument) for argument in arguments]
+        if operator == 'ifNonneg':
+            return '(SourceTerm.ifNonneg ' + ' '.join(rendered) + ')'
+        if len(arguments) == 1:
+            return '(SourceTerm.scalarUnary .' + operator + ' ' + rendered[0] + ')'
+        return '(SourceTerm.scalarBinary .' + operator + ' ' + ' '.join(rendered) + ')'
+    if kind == 'length':
+        dimensions = node['source']['inferred_type']
+        if dimensions[0] == 'vector':
+            return '(SourceTerm.lengthVector (n := ' + str(dimensions[1]) + ') ' + _lean_term(node['source']) + ')'
+        return '(SourceTerm.lengthMatrix (r := ' + str(dimensions[1]) + ') (c := ' + str(dimensions[2]) + ') ' + _lean_term(node['source']) + ')'
+    if kind == 'natToScalar':
+        return '(SourceTerm.natToScalar ' + _lean_term(node['value']) + ')'
+    if kind == 'indexVector':
+        return '(SourceTerm.indexVector (n := ' + str(node['vector']['inferred_type'][1]) + ') ' + _lean_term(node['vector']) + ' ' + _lean_term(node['index']) + ')'
+    if kind == 'fsumExact':
+        return '(SourceTerm.fsumExact (n := ' + str(node['values']['inferred_type'][1]) + ') ' + _lean_term(node['values']) + ')'
+    raise DecodeRefusal('unsupportedKernelConstructor', 'grounded kernel currently has no ' + kind + ' constructor')
+
+
+def _lean_fields(fields):
+    rendered = 'SourceFields.nil'
+    for field in reversed(fields):
+        value = field['value']
+        rendered = '(SourceFields.cons (name := ' + _lean_string(field['name']) + ') (τ := ' + _lean_type(value['inferred_type']) + ') ' + _lean_term(value) + ' ' + rendered + ')'
+    return rendered
+
+
+def _lean_prefix(node):
+    if node['kind'] == 'letBind':
+        return '(SourcePrefix.letBind (τ := ' + _lean_type(node['value']['inferred_type']) + ') ' + _lean_string(node['binder']) + ' ' + _lean_term(node['value']) + ' ' + _lean_prefix(node['body']) + ')'
+    if node['kind'] == 'prefixRecord':
+        return '(SourcePrefix.record ' + _lean_fields(node['fields']) + ')'
+    raise DecodeRefusal('unsupportedKernelConstructor', 'SourcePrefix requires ordered lets followed by a record')
+
+
+def _schema(annotation):
+    _need(annotation[0] == 'record', 'recordShape', 'SourcePrefix record result required')
+    return '[' + ', '.join('(' + _lean_string(name) + ', ' + _lean_type(t) + ')' for name, t in annotation[1]) + ']'
+
+
+def _emit_decoded_prefix(tree, lexical_types, *, namespace_name='GeneratedObjectivePrefix'):
+    namespace_name = _name(namespace_name)
+    scope = _scope(lexical_types)
+    schema = _schema(tree['inferred_type'])
+    context = '[' + ', '.join('(' + _lean_string(name) + ', ' + _lean_type(t) + ')' for name, t in scope.items()) + ']'
+    literal = _lean_prefix(tree)
+    text = ('import ObjectivePrefixIR\n\n'
+            'namespace ' + namespace_name + '\n\n'
+            'open RankerObjectivePrefixIR\n\n'
+            'def emittedContext : Context := ' + context + '\n\n'
+            'def emittedPrefix : SourcePrefix ' + schema + ' :=\n  ' + literal + '\n\n'
+            'end ' + namespace_name + '\n')
+    raw = text.encode('utf-8')
+    _need(len(raw) <= MAX_LEAN_BYTES, 'budget', 'Lean source byte budget exceeded')
+    return {'schema': 'ranker-objective-prefix-Lean-emission@1', 'status': 'SOURCE_LITERAL_UNCOMPILED_UNQUALIFIED',
+            'text': text, 'text_utf8_bytes': len(raw), 'text_sha256': hashlib.sha256(raw).hexdigest(),
+            'kernel_module': 'ObjectivePrefixIR', 'Lean_SourcePrefix_literal_emitted': True,
+            'Lean_SourcePrefix_literal_typechecked': False, 'typed_Lean_SourcePrefix_exists': False,
+            'kernel_checked': False, 'theorem_qualified': False, 'strict_cache_admission': False,
+            'whole_five_assignment_prefix_emitted': False, 'source_semantic_equivalence_proved': False,
+            'new_native_jobs': 0, 'full_task_satisfaction': 'unknown', **AUTHORITY}
+
+
+def emit_generic_source_prefix(tree_bytes, lexical_types, *, range_sources=None,
+                               record_shape=None, namespace_name='GeneratedObjectivePrefix'):
+    """Emit supported generic constructors; refuse maps/zips/ranges atomically."""
+    decoded = decode_generic_tree(tree_bytes, lexical_types, range_sources=range_sources,
+                                  record_shape=record_shape)
+    result = _emit_decoded_prefix(decoded['tree'], lexical_types, namespace_name=namespace_name)
+    result['original_source_rejoined'] = False
+    return result
+
+
+def emit_source_bound_projection(draft_bytes, source_bytes, bindings_bytes, materialization_receipt_bytes,
+                                 compiler_source_bytes, *, projection,
+                                 namespace_name='GeneratedObjectivePrefix'):
+    """Emit an actual supported subtree as a generic one-field SourcePrefix.
+
+    The full five-assignment prefix is decoded, but its container constructors
+    are absent from the foundational kernel. No unsupported term is replaced
+    by a desired value, a name-specific operation, or an assumed theorem.
+    """
+    decoded = decode_source_bound_prefix(draft_bytes, source_bytes, bindings_bytes,
+                                        materialization_receipt_bytes, compiler_source_bytes)
+    tree = decoded['tree']
+    assignments = {}
+    cursor = tree
+    while cursor['kind'] == 'letBind':
+        assignments[cursor['binder']] = cursor['value']
+        cursor = cursor['body']
+    lexical_types = {'weights': {'kind': 'vector', 'length': 80},
+                     'differences': {'kind': 'matrix', 'rows': 4, 'columns': 80}}
+    if projection == 'whole_prefix':
+        # This intentionally refuses mapRows in the first RHS. There is no
+        # successful emission receipt for a partial or replaced whole prefix.
+        return _emit_decoded_prefix(tree, lexical_types, namespace_name=namespace_name)
+    if projection == 'gradient_denominator':
+        selected = assignments['gradient']['body']['arguments'][1]['arguments'][1]
+        binding_name = 'gradient_denominator'
+    elif projection == 'weights_index':
+        selected = assignments['gradient']['body']['arguments'][0]['arguments'][1]
+        lexical_types['i'] = {'kind': 'index', 'bound': 80}
+        binding_name = 'gradient_coordinate'
+    elif projection == 'source_L2':
+        selected = assignments['gradient']['body']['arguments'][0]['arguments'][0]
+        binding_name = 'source_L2'
+    elif projection == 'margins_denominator':
+        selected = assignments['data']['arguments'][1]
+        lexical_types['margins'] = {'kind': 'vector', 'length': 4}
+        binding_name = 'loss_denominator'
+    else:
+        raise DecodeRefusal('unknownProjection', 'only explicitly sourced projection selections admitted')
+    _need(selected['inferred_type'] == SCALAR, 'typeMismatch', 'selected exact-real projection must be scalar')
+    record = {'kind': 'prefixRecord', 'fields': [{'name': 'projection', 'value': selected}],
+              'inferred_type': ('record', (('projection', SCALAR),))}
+    result = _emit_decoded_prefix(record, lexical_types, namespace_name=namespace_name)
+    result.update(original_source_rejoined=True, same_buffer_compiler_receipt_rejoined=True,
+                  projection_selection=projection, source_binding_name=binding_name,
+                  source_input_sha256=SOURCE_PIN[1], draft_input_sha256=DRAFT_PIN[1],
+                  bindings_input_sha256=BINDINGS_PIN[1], compiler_source_sha256=COMPILER_PIN[1],
+                  materialization_receipt_sha256=RECEIPT_PIN[1], numeric_assignments_decoded=5,
+                  source_binding_records_rejoined=17, decoder_source_AST_parse_calls=1,
+                  compiler_source_AST_parse_calls_declared=2, original_ranker_execution_calls=0,
+                  Python_Float_semantics_proved=False, CPython_math_fsum_semantics_proved=False,
+                  Python_libm_semantics_proved=False, optimizer_source_convergence_proved=False,
+                  global_autoencoder_convergence_proved=False)
+    return result

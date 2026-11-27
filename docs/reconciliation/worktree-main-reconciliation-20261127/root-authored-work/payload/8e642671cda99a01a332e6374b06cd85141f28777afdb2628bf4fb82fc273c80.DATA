@@ -1,0 +1,91 @@
+"""Freeze and execute the fixed provider-disabled controller matrix."""
+import argparse
+from datetime import datetime, timezone
+import hashlib
+import json
+import os
+from pathlib import Path
+import sqlite3
+import subprocess
+import sys
+import time
+
+HERE = Path(__file__).resolve().parent
+INTEGRATED = HERE.parent
+EVALS = INTEGRATED.parent
+ROOT = INTEGRATED.parents[4]
+
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def write(path, value):
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
+    Path(path).write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--run-id", required=True)
+    parser.add_argument("--context-entrypoint", type=Path, required=True)
+    parser.add_argument("--context-run", type=Path, required=True)
+    parser.add_argument("--context-contract", type=Path, required=True)
+    args = parser.parse_args()
+    run = HERE / args.run_id
+    run.mkdir(parents=True, exist_ok=False)
+    protocol = json.loads((HERE / "protocol.json").read_text())
+    files = [INTEGRATED / "controller.py", Path(__file__).resolve(), HERE / "protocol.json", EVALS / "metered_provider.py", EVALS / "routing_v2/cases.json", EVALS / "scorer_integrity/isolated_scorer.py", EVALS / "world_memory_development/service.py", EVALS / "world_memory_development/service_operation.json", args.context_entrypoint.resolve(), args.context_contract.resolve()]
+    native_files = {}
+    heads = {}
+    for external, package in (("ipfs_accelerate", "ipfs_accelerate_py"), ("ipfs_datasets", "ipfs_datasets_py"), ("ipfs_kit", "ipfs_kit_py")):
+        root = ROOT / "external" / external
+        heads[external] = subprocess.check_output(["git", "-C", str(root), "rev-parse", "HEAD"], text=True).strip()
+        for path in sorted((root / package).rglob("*.py")):
+            if "__pycache__" not in path.parts:
+                native_files[str(path.resolve())] = sha(path)
+    world_audit = json.loads((EVALS / "world_memory_development/runs/compiler-continuation-v1/validation.json").read_text())
+    world_files = {row["path"]: row["sha256"] for row in world_audit["runtime_sources"]}
+    profile = {"schema": "ns-unified-development-controller-profile@1", "created_utc": datetime.now(timezone.utc).isoformat(), "output_root": str(run / "state"), "evaluation_files": {str(path): sha(path) for path in files}, "native_files": native_files, "native_heads": heads, "world_memory_files": world_files, "world_memory_service": str(EVALS / "world_memory_development/service.py"), "context_service": {"entrypoint": str(args.context_entrypoint.resolve()), "run": str(args.context_run.resolve()), "contract": str(args.context_contract.resolve()), "scope": "initial enrolled fixtures; accepted parent source stays raw and is rescanned by native semantic worker"}, "scorer_image": "sha256:7a8b475003c4fe15a2cd4e55e5cfc2f3560bdc9333d624f24cdd6d4340fd7a17", "provider": {"enabled": False, "profile_path": None, "all_purposes_share_metered_transport": True}, "events": protocol["events"], "native_sealing_enrolled": False, "scope": protocol["scope"]}
+    write(run / "profile.json", profile)
+    (run / "frozen_controller.py").write_bytes((INTEGRATED / "controller.py").read_bytes())
+    calls = []
+    environment = {"PATH": os.environ.get("PATH", ""), "LANG": "C.UTF-8", "PYTHONDONTWRITEBYTECODE": "1"}
+    for event in profile["events"]:
+        invocations = [True, False] if "fault_point" in event else [False]
+        for number, fault in enumerate(invocations):
+            command = [sys.executable, str(INTEGRATED / "controller.py"), "run", "--profile", str(run / "profile.json"), "--event", event["event_id"]]
+            if fault:
+                command.append("--fault")
+            started = time.perf_counter()
+            process = subprocess.run(command, capture_output=True, text=True, env=environment, timeout=180)
+            directory = run / "invocations" / (event["event_id"] + "-" + str(number))
+            directory.mkdir(parents=True)
+            (directory / "stdout").write_text(process.stdout)
+            (directory / "stderr").write_text(process.stderr)
+            row = {"event_id": event["event_id"], "fault": fault, "command": command, "returncode": process.returncode, "elapsed_seconds": time.perf_counter() - started, "stdout": str(directory / "stdout"), "stderr": str(directory / "stderr")}
+            if process.returncode == 0:
+                result = json.loads(process.stdout)
+                row.update({"status": result["status"], "accepted": result["accepted"]})
+            calls.append(row)
+            write(run / "invocations.json", calls)
+            print(json.dumps({key: row.get(key) for key in ("event_id", "fault", "returncode", "status", "accepted")}), flush=True)
+            expected_exit = event["expected_first_exit"] if fault else 0
+            if process.returncode != expected_exit:
+                raise RuntimeError("preserved unexpected controller process outcome")
+            if not fault and row["status"] != event["expected_status"]:
+                raise RuntimeError("preserved unexpected event status")
+    db = sqlite3.connect(run / "state/ledger.sqlite3")
+    effects = list(db.execute("SELECT event_id,stage,state FROM effects ORDER BY event_id,stage"))
+    totals = {}
+    for _, stage, state in effects:
+        totals.setdefault(stage, {"effects": 0, "terminal": 0, "unknown": 0})
+        totals[stage]["effects"] += 1
+        totals[stage]["terminal" if state == "terminal" else "unknown"] += 1
+    terminal = list(db.execute("SELECT event_id,status FROM events ORDER BY event_id"))
+    db.close()
+    write(run / "summary.json", {"schema": "ns-controller-qualification-summary@1", "event_count": len(terminal), "terminal_status_counts": {status: sum(row[1] == status for row in terminal) for status in sorted({row[1] for row in terminal})}, "controller_invocations": len(calls), "controller_elapsed_seconds": sum(row["elapsed_seconds"] for row in calls), "effect_count": len(effects), "effect_counts_by_stage": totals, "provider_dispatches": 0, "provider_tokens": 0, "native_sealing_calls": 0, "scope": protocol["scope"]})
+
+
+if __name__ == "__main__":
+    main()

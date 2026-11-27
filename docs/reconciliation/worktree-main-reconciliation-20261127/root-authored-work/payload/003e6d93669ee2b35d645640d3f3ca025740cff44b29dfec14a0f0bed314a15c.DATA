@@ -1,0 +1,41 @@
+"""Read-only runtime component/storage inventory; nested wall is never added twice."""
+import argparse,hashlib,json,os,sqlite3,time
+from collections import defaultdict
+from pathlib import Path
+
+def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+def category(stage):
+    if stage.startswith('seal_'):return 'native_sealing_including_replay'
+    if '_context_' in stage:return 'native_context'
+    if stage.startswith('world_'):return 'native_world_memory'
+    if stage=='native_symbolic':return 'native_symbolic'
+    if stage.startswith('provider_'):return 'provider_boundary'
+    if stage=='current_check' or stage=='native_candidate_check' or stage.startswith('residual_check_'):return 'direct_scorer'
+    return 'other'
+def main():
+    parser=argparse.ArgumentParser();parser.add_argument('--profile',type=Path,required=True);parser.add_argument('--output',type=Path,required=True);args=parser.parse_args();profile=json.loads(args.profile.read_text());state=Path(profile['output_root']);run=args.profile.resolve().parent;start=time.time_ns();db=sqlite3.connect('file:'+str(state/'ledger.sqlite3')+'?mode=ro',uri=True);db.execute('BEGIN');effects=db.execute('SELECT effect_id,event_id,stage,state,result_path,result_hash FROM effects').fetchall();events=db.execute('SELECT event_id,status,result_path FROM events').fetchall();tip=db.execute('SELECT record_hash FROM journal ORDER BY seq DESC LIMIT 1').fetchone();db.close();owners={e['event_id']:e for e in profile['events']};rows=[];groups=defaultdict(list)
+    for effect_id,event_id,stage,status,path,digest in effects:
+        event=event_id.split('-residual-',1)[0]
+        if event not in owners:raise ValueError('unattributed effect')
+        saved=json.loads(Path(path).read_text()) if status=='terminal' else None
+        if saved is not None and (sha(path)!=digest or saved['effect_id']!=effect_id):raise ValueError('effect digest/binding drift')
+        row={'effect_id':effect_id,'event_id':event,'stage':stage,'category':category(stage),'state':status,'elapsed_seconds':saved.get('elapsed_seconds') if saved else None};rows.append(row);groups[(owners[event]['arm'],row['category'])].append(row)
+    components=[]
+    for (arm,kind),items in sorted(groups.items()):
+        known=[row['elapsed_seconds'] for row in items if row['elapsed_seconds'] is not None];missing=[row['effect_id'] for row in items if row['elapsed_seconds'] is None]
+        components.append({'arm':arm,'category':kind,'unique_effects':len(items),'elapsed_seconds':sum(known) if not missing else None,'observed_known_elapsed_seconds':sum(known),'missing_elapsed_effect_ids':missing,'nested_in_invocation_wall':True})
+    storage=[]
+    for label,root in [('runtime_state',state),('frozen_source_archive',run/'frozen_sources')]:
+        files=0;apparent=0;symlinks=0;allocated=0
+        for current,dirs,names in os.walk(root,followlinks=False):
+            for directory in list(dirs):
+                path=Path(current)/directory
+                if path.is_symlink():dirs.remove(directory);names.append(directory)
+            for name in names:
+                path=Path(current)/name;stat=path.lstat();files+=1;apparent+=stat.st_size;allocated+=stat.st_blocks*512;symlinks+=path.is_symlink()
+        storage.append({'scope':label,'file_entries':files,'symlinks':symlinks,'apparent_file_bytes':apparent,'filesystem_reported_allocated_bytes':allocated,'physical_deduplicated_or_billable_bytes':None})
+    complete=len(events)==len(profile['events']) and all(status!='started' for _,status,_ in events)
+    value={'schema':'ns-repository-runtime-components@1','profile_sha256':sha(args.profile),'analysis_source_sha256':sha(__file__),'snapshot_started_at_ns':start,'snapshot_finished_at_ns':time.time_ns(),'journal_tip_sha256':tip[0] if tip else None,'all_events_terminal':complete,'components':components,'effects':rows,'storage':storage,'accounting_policy':'Effect timers are nested components of enclosing invocation wall. Native sealing includes any grader replay; dedicated grader/replay timers overlap and must not be added. Missing timings remain null. Storage reports a point-in-time logical/filesystem allocation snapshot, not deduplicated physical usage or cost. Qualification/private scorer stores are outside this live runtime state.','qualification_costs_included':False,'driver_preflight_cpu_seconds':None,'docker_container_cpu_seconds':None,'provider_or_grader_dispatches_by_auditor':0}
+    with args.output.open('x') as stream:json.dump(value,stream,indent=2,sort_keys=True);stream.write('\n')
+    print(json.dumps({'all_events_terminal':complete,'unique_effects':len(rows),'component_groups':len(components),'storage':storage}))
+if __name__=='__main__':main()

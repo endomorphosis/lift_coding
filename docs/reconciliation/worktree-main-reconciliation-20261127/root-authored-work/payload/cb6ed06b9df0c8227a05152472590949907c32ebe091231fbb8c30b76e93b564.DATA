@@ -1,0 +1,52 @@
+# Per-call native Merkle membership index
+
+The full unmodified pyparsing preparation reached 3,957 symbols and 55,859 edges in
+145.51 seconds, then exceeded the 600-second producer bound during semantic bundle
+construction/verification (`results_v5/outcome.json`). Its full bundle root is not
+available; no successful whole-repository qualification is inferred from that run.
+
+The XML diagnostic in `profile_diagnostic_v1` profiles the same unmodified native
+service. Profiling overhead makes its wall time unsuitable as a normal benchmark.
+Of 264.10 profiled seconds, `verify_symbol_merkle_dag` accounts for 179.00 cumulative
+seconds. `SymbolMerkleNode.node_cid` is called 242,190 times, accounting for 159.83
+cumulative seconds; these times overlap and must not be summed. The verifier
+recomputes the complete node-CID set inside each link iteration. The existing DAG
+constructor already constructs this same membership set once for its own layering
+check.
+
+`merkle_node_index_v1.patch` moves that set construction before the verifier's link
+loop. It changes neither content serialization nor CID algorithms, and retains
+every block read, canonicality check, CID recomputation, record roundtrip, link
+layering check, and index-membership check. It is a local index within one verifier
+call, with no global cache, persistent trust, or cached read-path success.
+
+The reviewed native builder constructs `SymbolMerkleDag.symbol_nodes` as a tuple of
+concrete `SymbolMerkleNode` values. Both dataclasses are frozen. Node initialization
+normalizes incoming/outgoing CID collections and raw-source reasons to tuples;
+`node_cid` deterministically hashes an identity payload of those immutable fields.
+Thus recomputing that set for every link adds work without changing the result for
+these native-built DAGs. The public dataclass's Python annotations do not themselves
+prohibit callers from manually supplying mutable collections. This experiment
+qualifies native builder outputs and does not authorize concurrent mutation,
+hostile subclasses, or arbitrary manually constructed DAG implementations.
+
+The versioned Datasets package uses hardlinks for unchanged package files. The one
+changed file is written to a new inode and atomically replaces its variant path;
+the original file's hash and inode separation are checked. Bytecode generation is
+disabled. The exact source diff, original/variant hashes, and complete runtime
+manifest are retained. Normal imports use one selected Datasets package alongside
+the complete ASEH Accelerator and Kit, with no duplicate namespace injection.
+
+Required validation is: original native Merkle tamper/layering tests; identical
+native XML full-state/bundle roots relative to the completed baseline; cold versus
+incremental state/root/reachable-block equality for unchanged and authored source
+mutation controls; real capsule freshness/admission and native source expansion;
+and the source/objective/policy/environment/byte/current-root guard checks. A changed
+toolchain profile intentionally changes a ContextPack's bound toolchain identity,
+so an old/new pack CID comparison is not a semantic-root equivalence test.
+
+The bounded profile analyzes the admitted target plus the first four unchanged
+package Python paths in fixed registry order. Every other Python file is explicitly
+unparsed/raw-required, and all regular-file bytes plus opaque metadata remain
+retained. The full profile remains separately attempted. The two scopes must never
+be pooled as a single coverage or efficacy denominator.

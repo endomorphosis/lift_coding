@@ -1,0 +1,150 @@
+"""Separately frozen continuation experiment; original run-v1 remains intact."""
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+import time
+
+import lifecycle as L
+from ipfs_kit_py.proof_seal_store.contracts import SealTransitionPhase, SealTransitionState
+from ipfs_kit_py.proof_seal_store.wal import record_phase, commit_transition
+
+HERE=Path(__file__).resolve().parent
+ORIGINAL=HERE/'run-v1'
+
+
+def pack(output,revision):
+    return json.loads((output/'packs'/(revision+'.json')).read_text())
+
+
+def resume(output):
+    """New development caller, using actual native CAS and WAL primitives."""
+    store=output/'continuation-store'
+    parent=pack(output,'r1')
+    target=pack(output,'r2a')
+    # Check the entire accepted chain from the native store first.
+    old_chain=L.verify_persisted(output,store)
+    sealer=L.IncrementalProofSealer(store)
+    current=sealer.get_current_seal(L.state(output,'r0').repository_id)
+    pending=sealer.wal.get_transition(target['transition_id'])
+    assert pending.state is SealTransitionState.IN_PROGRESS
+    assert pending.phase is SealTransitionPhase.SEAL_PERSISTENCE
+    assert pending.expected_parent_seal_cid==current.seal_cid==parent['seal_cid']
+    assert pending.new_seal_cid==target['seal_cid'] and pending.generation==current.generation+1
+    # Consume stored bytes, including the pending seal that is not current yet.
+    raw=sealer.store.get_verified_bytes(L.ArtifactReference(cid=pending.new_seal_cid,kind=L.ArtifactKind.DELTA_SEAL))
+    assert L.digest(raw)==target['seal_cid'] and json.loads(raw)['payload']==target['seal']
+    observed=json.loads(json.dumps(target))
+    for unit,receipt in target['receipts'].items():
+        raw=sealer.store.get_verified_bytes(L.ArtifactReference(cid=L.digest(receipt),kind=L.ArtifactKind.PROOF_OBJECT))
+        observed['receipts'][unit]=json.loads(raw)
+    verdict,*_=L.admit(output,observed,parent)
+    assert verdict['accepted'],verdict
+    pointer=L.CurrentSealPointer(repository_id=current.repository_id,branch_id=current.branch_id,
+        seal_cid=pending.new_seal_cid,seal_kind=pending.new_seal_kind,generation=pending.generation,
+        parent_seal_cid=current.seal_cid)
+    cas=sealer.pointers.compare_and_swap_current_seal_result(current,pointer)
+    assert cas.swapped and cas.pointer==pointer
+    record_phase(sealer.wal,pending.transition_id,SealTransitionPhase.CURRENT_ROOT_CAS,
+        new_seal_cid=pending.new_seal_cid,new_seal_kind=pending.new_seal_kind,generation=pending.generation)
+    committed=commit_transition(sealer.wal,pending.transition_id,phase=SealTransitionPhase.CLEANUP,
+        new_seal_cid=pending.new_seal_cid,new_seal_kind=pending.new_seal_kind,generation=pending.generation)
+    sealer.close()
+    result={'schema':'ns-development-recovery-caller/v1','caller_is_new':True,'pid':os.getpid(),
+        'before':old_chain['pointer'],'pending_before':pending.to_dict(),'admission':verdict,
+        'cas_swapped':cas.swapped,'cas_reason':cas.reason.value,'committed':committed.to_dict(),
+        'after_chain':L.verify_persisted(output,store),'operation_processes':0,'operation_calls':0,
+        'provider_requests':0,'sources':L.loaded_sources()}
+    L.save(output/'results/resume.json',result)
+
+
+def next_event(output):
+    # This fresh process discovers the accepted root from the native store.
+    chain=L.verify_persisted(output,output/'continuation-store')
+    current=chain['pointer']
+    assert current['seal_cid']==pack(output,'r2a')['seal_cid']
+    parent=pack(output,'r2a')
+    following=L.prepare(output,'r2b',parent,tid='e08:next-event-after-recovery')
+    result=L.publish(output,output/'continuation-store',following,parent,
+        expected=L.CurrentSealPointer.from_dict(current))
+    assert result['publication']['published'] and result['pointer']['generation']==3
+    L.save(output/'results/next-event.json',{'pid':os.getpid(),'consumed_pointer':current,
+        'prepared':following['operation_measurements'],'result':result,
+        'verified_chain':L.verify_persisted(output,output/'continuation-store')})
+
+
+def native_retry(output):
+    store=output/'native-retry-store'
+    target,parent=pack(output,'r2a'),pack(output,'r1')
+    result=L.publish(output,store,target,parent)
+    sealer=L.IncrementalProofSealer(store)
+    record=sealer.wal.get_transition(target['transition_id'])
+    sealer.close()
+    L.save(output/'results/native-retry.json',{'pid':os.getpid(),'result':result,'transition_after':record.to_dict()})
+
+
+def child(output,mode):
+    r=subprocess.run([sys.executable,str(Path(__file__)),mode,str(output)],capture_output=True,timeout=30,
+        env={'PATH':os.environ['PATH'],'PYTHONHASHSEED':'0'})
+    (output/'logs').mkdir(exist_ok=True)
+    (output/'logs'/(mode+'.stdout')).write_bytes(r.stdout)
+    (output/'logs'/(mode+'.stderr')).write_bytes(r.stderr)
+    L.save(output/'logs'/(mode+'.json'),{'returncode':r.returncode,'argv':[mode,str(output)]})
+    assert r.returncode==0,(mode,r.stderr.decode())
+
+
+def main():
+    if len(sys.argv)>1:
+        mode,output=sys.argv[1],Path(sys.argv[2])
+        {'resume':resume,'next_event':next_event,'native_retry':native_retry}[mode](output)
+        return
+    output=HERE/'continuation-v1'
+    output.mkdir()
+    for name in ('snapshots','frozen_runner'):
+        shutil.copytree(ORIGINAL/name,output/name)
+    (output/'packs').mkdir()
+    for revision in ('r0','r1','r2a'):
+        shutil.copyfile(ORIGINAL/'packs'/(revision+'.json'),output/'packs'/(revision+'.json'))
+    original_store=ORIGINAL/'store-after_seal_persistence'
+    for name in ('continuation-store','native-retry-store'):
+        shutil.copytree(original_store,output/name)
+    inputs={str(p.relative_to(ORIGINAL)):hashlib.sha256(p.read_bytes()).hexdigest()
+        for p in ORIGINAL.rglob('*') if p.is_file() and '__pycache__' not in str(p)}
+    frozen={'schema':'ns-seal-continuation-freeze/v1','frozen_at_ns':time.time_ns(),
+        'original_run_files':inputs,'runner_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        'dependency_sha256':hashlib.sha256((HERE/'lifecycle.py').read_bytes()).hexdigest(),
+        'sequence':['native same-transition retry on isolated copy','new caller revalidates stored bytes and finishes native CAS/WAL',
+            'fresh process consumes recovered root to handle next source revision'],
+        'native_retry_store_separate':True,'provider_requests':0}
+    L.save(output/'freeze.json',frozen)
+    shutil.copyfile(__file__,output/'runner_snapshot.py')
+    child(output,'native_retry')
+    child(output,'resume')
+    child(output,'next_event')
+    retry=json.loads((output/'results/native-retry.json').read_text())
+    resumed=json.loads((output/'results/resume.json').read_text())
+    following=json.loads((output/'results/next-event.json').read_text())
+    assert not retry['result']['publication']['published']
+    assert resumed['cas_swapped'] and resumed['after_chain']['pointer']['generation']==2
+    assert following['consumed_pointer']==resumed['after_chain']['pointer']
+    assert following['verified_chain']['pointer']['generation']==3
+    assert len({retry['pid'],resumed['pid'],following['pid']})==3
+    unchanged=all(hashlib.sha256((ORIGINAL/name).read_bytes()).hexdigest()==h for name,h in inputs.items())
+    assert unchanged
+    summary={'schema':'ns-seal-continuation-result/v1','complete':True,
+        'native_same_transition_retry_published':retry['result']['publication']['published'],
+        'native_same_transition_retry_reason':retry['result']['publication']['diagnostics'],
+        'native_retry_pending_state_after':retry['transition_after']['state'],
+        'new_development_caller_finished_pending_CAS':True,'continued_generation':2,
+        'continuation_new_operation_calls':0,'fresh_next_event_consumed_recovered_root':True,
+        'next_event_generation':3,'next_event_new_operation_calls':19,'next_event_reused_receipts':1,
+        'distinct_phase_processes':3,'original_run_unchanged':unchanged,'provider_requests':0,'provider_tokens':0}
+    L.save(output/'summary.json',summary)
+    print(json.dumps(summary,sort_keys=True))
+
+
+if __name__=='__main__':
+    main()

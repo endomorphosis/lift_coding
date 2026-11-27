@@ -1,0 +1,75 @@
+"""Read a frozen accepted controller chain through native Kit and admission.
+
+This is an archive consumer, not a fresh execution oracle. The original local
+behavioral receipts remain the authority for their recorded observations.
+"""
+import hashlib
+import importlib.util
+import json
+from pathlib import Path
+import sys
+import time
+
+
+def canonical(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=True).encode()
+
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def main():
+    started = time.perf_counter()
+    request = json.load(sys.stdin)
+    freeze_path = Path(request["freeze_path"])
+    if sha(freeze_path) != request["freeze_sha256"]:
+        raise ValueError("archive freeze mismatch")
+    frozen = json.loads(freeze_path.read_text())
+    for path, digest in frozen["source_pins"].items():
+        if sha(path) != digest:
+            raise ValueError("source identity mismatch")
+    service_path = Path(frozen["sealing_service"])
+    spec = importlib.util.spec_from_file_location("archive_native_sealing", service_path)
+    service = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(service)
+    profile = service.profile_for({"profile_path": frozen["controller_profile"],
+                                   "profile_sha256": frozen["controller_profile_sha256"]})
+    if sha(Path(profile["output_root"]) / "ledger.sqlite3") != frozen["controller_ledger_sha256"]:
+        raise ValueError("original event ledger changed")
+    directory = Path(request["archive_path"])
+    sealer = service.IncrementalProofSealer(directory / "store")
+    observed = sealer.get_current_seal(frozen["expected_pointer"]["repository_id"])
+    if observed is None or observed.to_dict() != frozen["expected_pointer"]:
+        raise ValueError("archive accepted pointer differs")
+    tip = service.load_pack(profile, sealer, directory, observed.seal_cid, replay=False)
+    chain = []
+    while tip is not None:
+        if set(tip["receipts"]) != set(frozen["required_units"]):
+            raise ValueError("complete leaf inventory differs")
+        chain.append({"schema": "ns-accepted-controller-archive-event/v1",
+                      "seal_cid": tip["seal_cid"], "parent_seal_cid": tip["parent_seal_cid"],
+                      "binding": tip["binding"], "source_sha256": hashlib.sha256(tip["source"].encode()).hexdigest(),
+                      "receipt_cids": {unit: service.digest(receipt) for unit, receipt in sorted(tip["receipts"].items())},
+                      "complete_pack_sha256": hashlib.sha256(canonical(tip)).hexdigest()})
+        tip = None if tip["parent_seal_cid"] is None else service.load_pack(
+            profile, sealer, directory, tip["parent_seal_cid"], replay=False)
+    chain.reverse()
+    if [row["seal_cid"] for row in chain] != frozen["expected_ordered_seals"]:
+        raise ValueError("archive chain differs from frozen accepted history")
+    if service.REPLAYS:
+        raise ValueError("archive read unexpectedly dispatched behavioral checks")
+    sealer.close()
+    imported = service.loaded_sources()
+    if any(profile["sealing_native_files"].get(path) != row["sha256"] for path, row in imported.items()):
+        raise ValueError("unfrozen native import")
+    print(json.dumps({"schema": "ns-native-archive-read/v1", "accepted": True,
+                      "events": chain, "pointer": observed.to_dict(), "imports": imported,
+                      "event_digests_hex": [hashlib.sha256(canonical(row)).hexdigest() for row in chain],
+                      "reader_elapsed_seconds": time.perf_counter() - started,
+                      "fresh_scorer_calls": 0, "provider_calls": 0,
+                      "mode": "native integrity plus exact original local evidence; no fresh execution theorem"}, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()

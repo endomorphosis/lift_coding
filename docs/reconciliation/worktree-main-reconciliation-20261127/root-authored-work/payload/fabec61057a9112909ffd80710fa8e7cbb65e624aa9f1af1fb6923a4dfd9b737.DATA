@@ -1,0 +1,71 @@
+"""Generic, policy-bound successor to qualified mandatory-first retrieval."""
+import repository_runtime_v2 as R
+
+
+def sources_for(root, paths, policy):
+    if not isinstance(paths, (list, tuple)) or any(not isinstance(path, str) for path in paths):
+        raise ValueError("source paths must be a list of strings")
+    result = []
+    for name in sorted(set(paths)):
+        body = R.text(R.production(root, name, policy))
+        result.append({"path": name, "source": body, "sha256": R.sha(body.encode())})
+    return result
+
+
+def measure(sources, wire_for):
+    wire = wire_for(sources)
+    if not isinstance(wire, bytes):
+        raise TypeError("wire serializer must return exact request bytes")
+    return {"source_count": len(sources), "source_bytes": sum(len(source["source"].encode()) for source in sources),
+            "wire_bytes": len(wire), "wire_sha256": R.sha(wire)}
+
+
+def select(root, objective, mandatory_paths, max_files, max_source_bytes, max_request_bytes, wire_for, policy):
+    if any(type(value) is not int or value < 1 for value in (max_files, max_source_bytes, max_request_bytes)):
+        raise ValueError("positive integer retrieval bounds required")
+    selected = sources_for(root, mandatory_paths, policy)
+    mandatory = [source["path"] for source in selected]
+    omitted = []
+
+    def violations(measured):
+        return [name for name, cap in [("source_count", max_files), ("source_bytes", max_source_bytes), ("wire_bytes", max_request_bytes)] if measured[name] > cap]
+
+    initial = measure(selected, wire_for)
+    rejected = violations(initial)
+    if rejected:
+        return {"admitted": False, "reason": "mandatory source or fixed prompt exceeds frozen bounds",
+                "violated_bounds": rejected, "sources": selected, "mandatory_paths": mandatory,
+                "omitted_optional": [], **initial}
+    for source in R.lexical_sources(root, objective, policy):
+        exact = R.text(R.production(root, source["path"], policy))
+        if exact != source["source"] or R.sha(exact.encode()) != source["sha256"]:
+            raise ValueError("optional public source changed during ranking")
+        if source["path"] in mandatory:
+            continue
+        candidate = selected + [source]
+        measured = measure(candidate, wire_for)
+        rejected = violations(measured)
+        if rejected:
+            omitted.append({"path": source["path"], "violated_bounds": rejected})
+        else:
+            selected = candidate
+    return {"admitted": bool(selected), "reason": None if selected else "no complete public module fits frozen bounds",
+            "violated_bounds": [], "sources": selected, "mandatory_paths": mandatory,
+            "omitted_optional": omitted, **measure(selected, wire_for)}
+
+
+def expand(root, requested_paths, mandatory_paths, max_request_bytes, wire_for, policy):
+    if (not isinstance(requested_paths, list) or not requested_paths or len(requested_paths) > 8
+            or any(not isinstance(path, str) for path in requested_paths) or len(set(requested_paths)) != len(requested_paths)):
+        raise ValueError("invalid expansion")
+    if type(max_request_bytes) is not int or max_request_bytes < 1:
+        raise ValueError("positive integer wire bound required")
+    requested = sources_for(root, requested_paths, policy)
+    required = sources_for(root, mandatory_paths, policy)
+    by_path = {source["path"]: source for source in required + requested}
+    sources = [by_path[name] for name in sorted(by_path)]
+    measured = measure(sources, wire_for)
+    admitted = measured["wire_bytes"] <= max_request_bytes
+    return {"admitted": admitted, "reason": None if admitted else "complete expansion plus mandatory conflicts exceeds frozen wire bound",
+            "sources": sources, "mandatory_paths": [source["path"] for source in required],
+            "requested_paths": requested_paths, **measured}

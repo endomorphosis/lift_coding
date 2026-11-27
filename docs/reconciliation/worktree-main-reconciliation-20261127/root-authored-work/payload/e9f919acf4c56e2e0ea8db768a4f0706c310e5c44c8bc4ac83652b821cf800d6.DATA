@@ -1,0 +1,20 @@
+"""Frozen trusted operations for the development integer-sequence profile."""
+def run(operation, payload, maximum):
+    values = payload['values']
+    if operation == 'RUN_SELECTED_TESTS':
+        try:
+            return sum(values) <= payload['budget']
+        except (TypeError, ValueError):
+            return False
+    if operation == 'RUN_STATIC_ANALYSIS':
+        try:
+            return all(0 <= item <= maximum for item in values)
+        except (TypeError, ValueError):
+            return False
+    if operation == 'RUN_TYPE_CHECK':
+        return all(type(item) is int for item in values)
+    if operation == 'RUN_ADVERSARIAL_ASSURANCE':
+        return isinstance(values, list) and type(payload['budget']) is int
+    if operation == 'CHECK_SCOPE':
+        return set(payload) == {'values', 'budget'}
+    raise ValueError('operation unavailable in bounded operation catalog')

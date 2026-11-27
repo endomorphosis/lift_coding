@@ -1,0 +1,40 @@
+#!/usr/bin/env python3
+"""Actual full-Pyparsing stage timings and periodic Python stacks, no profiler."""
+import json
+import os
+from pathlib import Path
+import runpy
+import signal
+import sys
+import time
+
+HERE = Path(__file__).resolve().parent
+OUT = HERE / "profile_diagnostic_v5_full_stages"
+profile = json.loads((OUT / "runtime_source_manifest.json").read_text())
+sys.path[:0] = profile["pythonpath"]
+os.environ["IPFS_ACCEL_SKIP_CORE"] = "1"
+os.environ["GIT_CEILING_DIRECTORIES"] = str(HERE.parents[5] / "papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache")
+from ipfs_datasets_py.logic.software_contracts.semantic_state import api
+START = time.perf_counter()
+events = OUT / "stages.jsonl"
+
+def record(value):
+    with events.open("a") as stream: stream.write(json.dumps(value) + "\n")
+
+def wrap(name):
+    original = getattr(api, name)
+    def tracked(*args, **kwargs):
+        start = time.perf_counter(); record({"stage": name, "event": "enter", "elapsed": start - START})
+        try: return original(*args, **kwargs)
+        finally: record({"stage": name, "event": "exit", "elapsed": time.perf_counter() - START, "seconds": time.perf_counter() - start})
+    setattr(api, name, tracked)
+
+for name in ("_resolve_producer", "compile_semantic_capsules", "verify_capsule_compile_result", "build_symbol_merkle_dag", "verify_symbol_merkle_dag", "_merge_blocks", "_prefer_previous_bytes"):
+    wrap(name)
+
+def stop(*unused): raise TimeoutError("Retained stage diagnostic reached600 seconds")
+signal.signal(signal.SIGALRM, stop); signal.alarm(600)
+sys.argv = [str(HERE / "native_service.py"), "produce", "--run", str(OUT), "--case", "ns-hist-02-pyparsing"]
+try: runpy.run_path(str(HERE / "native_service.py"), run_name="__main__")
+finally:
+    signal.alarm(0)

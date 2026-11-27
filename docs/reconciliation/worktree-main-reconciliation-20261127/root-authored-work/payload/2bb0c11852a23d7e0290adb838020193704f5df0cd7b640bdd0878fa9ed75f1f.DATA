@@ -1,0 +1,474 @@
+"""Fresh root-released world context/token accounting qualification; inert until main()."""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import importlib.util
+import json
+import os
+from pathlib import Path
+import re
+import stat
+import subprocess
+import sys
+import time
+
+WORKSPACE = Path('/home/barberb/lift_coding')
+CAMPAIGN = WORKSPACE / 'artifacts/supervisor-world-context-token-accounting-20261015-02'
+A = WORKSPACE / 'maintenance/token-world-context-20261015-02/checkout02'
+P = WORKSPACE / 'external/ipfs_datasets'
+K = WORKSPACE / 'external/ipfs_kit'
+HERE = Path(__file__).resolve().parent
+BASELINE = CAMPAIGN / 'baseline02.json'
+INVENTORY = CAMPAIGN / 'input-inventory02.json'
+CURRENT_OVERLAY = CAMPAIGN / 'current-source-overlay02.json'
+SCRATCH_RECORD = CAMPAIGN / 'qualification/external-scratch02.json'
+COORDINATOR = CAMPAIGN / 'coordinator02'
+H = WORKSPACE / '.venvs/terminal-bench-harbor/lib/python3.12/site-packages'
+V = WORKSPACE / '.venv/lib/python3.12/site-packages'
+OWNED_ADDITIONS = (
+    'ipfs_accelerate_py/agent_supervisor/runtime/context_trajectory_comparison.py',
+    'test/api/test_context_trajectory_comparison.py',
+)
+OWNED_CHANGES = (
+    'ipfs_accelerate_py/agent_supervisor/runtime/repository_world_invocation_replay.py',
+    'test/api/test_repository_world_invocation_replay.py',
+    'ipfs_accelerate_py/agent_supervisor/runtime/semantic_selection_comparison.py',
+    'test/api/test_semantic_selection_comparison.py',
+)
+OWNED_PATHS = OWNED_ADDITIONS + OWNED_CHANGES
+SELECTED = (
+    'test/api/test_context_trajectory_comparison.py',
+    'test/api/test_repository_world_invocation_replay.py',
+    'test/api/test_repository_world_packet_replay.py',
+    'test/api/test_repository_world_dispatch.py',
+    'test/api/test_context_projection_comparison.py',
+    'test/api/test_router_automatic_prompt_tokenizer.py',
+    'test/api/test_semantic_selection_comparison.py',
+)
+TEST_FILES = SELECTED
+INITIALIZERS = (P / 'ipfs_datasets_py/__init__.py', K / 'ipfs_kit_py/__init__.py')
+RELEASE_FIELDS = frozenset({
+    'schema', 'released', 'released_by', 'runner_sha256', 'baseline_sha256',
+    'input_inventory_sha256', 'current_overlay_sha256', 'source_rows', 'test_selection',
+    'owned_paths', 'run_name', 'external_basetemp', 'external_scratch_record_sha256',
+    'coordinator_held_sha256', 'coordinator_release_sha256', 'coordinator_runner_sha256',
+})
+INVENTORY_FIELDS = frozenset({'schema', 'created_by', 'checkout', 'head',
+    'git_identity_observation', 'current_overlay_sha256', 'worktree_rows', 'initializers',
+    'owned_changes', 'owned_additions', 'absent_paths'})
+
+def require(condition, message):
+    if not condition:
+        raise ValueError(message)
+
+
+def sha(path):
+    with Path(path).open('rb') as stream:
+        return hashlib.file_digest(stream, 'sha256').hexdigest()
+
+
+def row(path):
+    path = Path(path)
+    descriptor = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
+    with os.fdopen(descriptor, 'rb') as stream:
+        before = os.fstat(stream.fileno())
+        require(stat.S_ISREG(before.st_mode) and before.st_nlink == 1,
+                'Single regular guarded source required: ' + str(path))
+        digest = hashlib.file_digest(stream, 'sha256').hexdigest()
+        after = os.fstat(stream.fileno())
+    identity = lambda value: (value.st_dev, value.st_ino, value.st_size,
+        value.st_mode, value.st_mtime_ns, value.st_ctime_ns)
+    require(identity(before) == identity(after) == identity(path.lstat()),
+            'Source changed during guarded read: ' + str(path))
+    return {'sha256': digest, 'bytes': after.st_size, 'mode': stat.S_IMODE(after.st_mode)}
+
+
+def read(path):
+    with Path(path).open('rb') as stream:
+        raw = stream.read(32 * 1024 * 1024 + 1)
+    require(len(raw) <= 32 * 1024 * 1024, 'Bounded qualification metadata required')
+    return json.loads(raw)
+
+
+def write(path, value):
+    with Path(path).open('x') as stream:
+        stream.write(json.dumps(value, sort_keys=True, indent=2, allow_nan=False) + '\n')
+
+
+def git_identity(baseline):
+    """Verify a genuine detached submodule worktree using bounded Git metadata."""
+    marker = A / '.git'
+    require(A.resolve(strict=True) == A and marker.is_file() and not marker.is_symlink(),
+            'Canonical detached worktree marker required')
+    raw = marker.read_bytes()
+    require(len(raw) <= 4096 and raw.startswith(b'gitdir: ') and raw.count(b'\n') <= 1,
+            'Bounded genuine worktree marker required')
+    directory = Path(raw.decode('utf-8').strip()[8:])
+    if not directory.is_absolute():
+        directory = A / directory
+    directory = directory.resolve(strict=True)
+    common = (directory / (directory / 'commondir').read_text().strip()).resolve(strict=True)
+    observation = baseline['git_identity_observation']
+    require(str(directory) == observation['git_directory']
+        and str(common) == observation['common_directory']
+        and hashlib.sha256(raw).hexdigest() == observation['git_marker_sha256']
+        and sha(directory / 'HEAD') == observation['head_file_sha256']
+        and (directory / 'HEAD').read_text().strip() == baseline['head'],
+        'Held genuine detached Git identity differs')
+    environment = {key: value for key, value in os.environ.items() if key not in (
+        'GIT_DIR', 'GIT_WORK_TREE', 'GIT_COMMON_DIR', 'GIT_NAMESPACE', 'GIT_INDEX_FILE')}
+    environment['GIT_OPTIONAL_LOCKS'] = '0'
+
+    def value(*arguments):
+        result = subprocess.run(['git', '-C', str(A), '-c', 'core.fsmonitor=false',
+            '-c', 'core.hooksPath=/dev/null', 'rev-parse', *arguments],
+            stdin=subprocess.DEVNULL, capture_output=True, env=environment, timeout=10)
+        require(result.returncode == 0 and len(result.stdout) <= 4096
+            and len(result.stderr) <= 4096, 'Bounded worktree metadata refused')
+        answer = result.stdout.decode('utf-8').strip()
+        require(answer and '\n' not in answer and '\r' not in answer,
+                'Single worktree metadata value required')
+        return answer
+
+    require(value('--show-toplevel') == str(A) and value('HEAD') == baseline['head']
+        and value('--is-inside-work-tree') == 'true'
+        and value('--is-bare-repository') == 'false'
+        and Path(value('--absolute-git-dir')).resolve(strict=True) == directory,
+        'Actual Git worktree root, directory or HEAD differs')
+    actual_common = Path(value('--git-common-dir'))
+    if not actual_common.is_absolute():
+        actual_common = A / actual_common
+    require(actual_common.resolve(strict=True) == common, 'Actual Git common directory differs')
+    return {'worktree': str(A), 'head': baseline['head'], 'git_directory': str(directory),
+        'common_directory': str(common), 'git_marker_sha256': hashlib.sha256(raw).hexdigest(),
+        'head_file_sha256': sha(directory / 'HEAD'), 'real_detached_worktree': True}
+
+
+def external_scratch(descriptor, *, fresh):
+    require(type(descriptor) is dict and set(descriptor) == {
+        'root', 'basetemp', 'device', 'inode', 'mode', 'uid', 'outside_git_checked'},
+        'Closed root-owned scratch descriptor required')
+    root, leaf = Path(descriptor['root']), Path(descriptor['basetemp'])
+    require(root.parent == Path('/tmp') and root.name.startswith('world-context-token-accounting-qualification-')
+        and root.is_absolute() and root.resolve(strict=True) == root
+        and root.is_dir() and not root.is_symlink() and leaf == root / 'temporary'
+        and descriptor['outside_git_checked'] is True,
+        'Exact external qualification scratch namespace required')
+    require(all(not os.path.lexists(parent / '.git') for parent in (root, *root.parents)),
+            'Qualification scratch must be outside every Git worktree')
+    info = root.lstat()
+    identity = {'device': info.st_dev, 'inode': info.st_ino,
+                'mode': stat.S_IMODE(info.st_mode), 'uid': info.st_uid}
+    require(all(type(descriptor[key]) is int and descriptor[key] == value
+        for key, value in identity.items()) and identity['mode'] == 0o700
+        and identity['uid'] == os.getuid(), 'Scratch parent identity/owner/mode differs')
+    if fresh:
+        require(not os.path.lexists(leaf) and not any(root.iterdir()),
+                'Fresh empty external scratch parent required')
+    return {**descriptor, **identity}
+
+
+
+def coordinator(release):
+    held_path, authorization_path, runner = (COORDINATOR / 'held.json',
+        COORDINATOR / 'release-root01.json', COORDINATOR / 'coordinator.py')
+    require(sha(held_path) == release['coordinator_held_sha256']
+        and sha(authorization_path) == release['coordinator_release_sha256']
+        and sha(runner) == release['coordinator_runner_sha256'], 'Held lease records changed')
+    held, authorization = read(held_path), read(authorization_path)
+    require(held.get('schema') == 'token-controls-runtime-shared-resource-held@1'
+        and held.get('status') == 'held' and held.get('request_id') == CAMPAIGN.name + '-successor02'
+        and held.get('cpu_slots') == authorization.get('cpu_slots') == 2
+        and held.get('memory_mb') == authorization.get('memory_mb') == 8192
+        and held.get('child_process_slots') == authorization.get('child_process_slots') == 4
+        and type(held.get('hold_seconds')) is int and 1 <= held['hold_seconds'] <= 1800
+        and authorization.get('hold_seconds') == held['hold_seconds']
+        and authorization.get('schema') == 'token-controls-runtime-shared-resource-release@1'
+        and authorization.get('released') is True and authorization.get('released_by') == 'root'
+        and authorization.get('request_id') == CAMPAIGN.name + '-successor02'
+        and authorization.get('runner_sha256') == release['coordinator_runner_sha256']
+        and authorization.get('baseline_sha256') == release['baseline_sha256']
+        and authorization.get('configuration_sha256') == held.get('configuration_sha256')
+        and held.get('release_sha256') == release['coordinator_release_sha256']
+        and authorization.get('release_marker') == str(COORDINATOR / 'release')
+        and not os.path.lexists(COORDINATOR / 'release'), 'Exact active finite campaign lease required')
+    pid, start = held.get('owner_pid'), held.get('owner_starttime_ticks')
+    require(type(pid) is int and pid > 0 and type(start) is int and start > 0,
+        'Exact lease owner identity required')
+    fields = (Path('/proc') / str(pid) / 'stat').read_text().rsplit(')', 1)[1].split()
+    require(fields[0] != 'Z' and int(fields[19]) == start, 'Lease owner PID identity changed')
+    origins = held.get('source_origins')
+    require(type(origins) is dict and origins, 'Held resource implementation origins required')
+    for origin in origins.values():
+        path = Path(origin['path'])
+        require(path.is_absolute() and path.resolve(strict=True) == path
+            and (path.is_relative_to(P) or path.is_relative_to(
+                WORKSPACE / 'artifacts/codebase_ir_terminal_bench')),
+            'Lease origin escaped reviewed public roots')
+        observed = row(path)
+        require(observed['sha256'] == origin['sha256'] and observed['bytes'] == origin['bytes'],
+            'Held resource source changed')
+    return held
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--release', type=Path, required=True)
+    parser.add_argument('--release-sha256', required=True)
+    args = parser.parse_args()
+    release_path = args.release.absolute()
+    require(release_path.resolve(strict=True) == release_path and release_path.parent == HERE
+        and sha(release_path) == args.release_sha256, 'Exact root release required')
+    release = read(release_path)
+    require(type(release) is dict and set(release) == RELEASE_FIELDS
+        and release['schema'] == 'world-context-token-accounting-validation-release@1'
+        and release['released'] is True and release['released_by'] == 'root'
+        and release['runner_sha256'] == sha(__file__)
+        and release['test_selection'] == list(SELECTED)
+        and release['owned_paths'] == list(OWNED_PATHS), 'Closed reviewed release differs')
+    require(sha(BASELINE) == release['baseline_sha256']
+        and sha(INVENTORY) == release['input_inventory_sha256']
+        and sha(CURRENT_OVERLAY) == release['current_overlay_sha256'], 'Root input records changed')
+    campaign, baseline, overlay = read(BASELINE), read(INVENTORY), read(CURRENT_OVERLAY)
+    require(campaign.get('schema') == 'semantic-world-context-token-accounting-baseline@1'
+        and campaign.get('provider_calls_authorized') is False
+        and campaign.get('model_or_tokenizer_downloads_authorized') is False
+        and campaign.get('production_owner_launch_or_working_set_protocol_edits_authorized') is False
+        and campaign.get('owned_additions') == list(OWNED_ADDITIONS)
+        and set(campaign.get('owned_preimages', {})) == set(OWNED_CHANGES), 'Root campaign scope differs')
+    require(type(baseline) is dict and set(baseline) == INVENTORY_FIELDS
+        and baseline['schema'] == 'world-context-token-accounting-input-inventory@1'
+        and baseline['created_by'] == 'root' and baseline['checkout'] == str(A)
+        and re.fullmatch(r'[0-9a-f]{40}', baseline['head'])
+        and baseline['current_overlay_sha256'] == release['current_overlay_sha256']
+        and baseline['owned_additions'] == list(OWNED_ADDITIONS)
+        and type(baseline['owned_changes']) is dict
+        and set(baseline['owned_changes']) == set(OWNED_CHANGES), 'Fresh actual inventory required')
+    held = baseline['worktree_rows']; missing = baseline['absent_paths']
+    require(type(held) is dict and held
+        and overlay.get('schema') == 'world-context-fresh-current-source-overlay@1'
+        and overlay.get('checkout') == str(A) and overlay.get('source_head') == baseline['head']
+        and overlay.get('main_mutated') is False and overlay.get('all_main_rows_stable') is True
+        and overlay.get('peer_missing_dependency_entry_preserved') is True
+        and type(overlay.get('rows')) is dict and type(overlay.get('copied_paths')) is int
+        and overlay['copied_paths'] == len(overlay['rows'])
+        and set(held) == set(overlay['rows']) | set(OWNED_ADDITIONS)
+        and not set(OWNED_ADDITIONS) & set(overlay['rows'])
+        and all(name in held for name in OWNED_PATHS + TEST_FILES)
+        and all(held[name] == value for name, value in overlay['rows'].items() if name not in OWNED_CHANGES)
+        and type(missing) is list and missing == overlay.get('absent_paths')
+        and len(missing) == len(set(missing))
+        and not set(missing) & set(held), 'Exact captured overlay plus declared candidate changes required')
+    for name, value in held.items():
+        path = Path(name)
+        require(not path.is_absolute() and str(path) == name and '..' not in path.parts
+            and (A / path).resolve(strict=True) == A / path
+            and type(value) is dict and set(value) == {'sha256', 'bytes', 'mode'},
+            'Source inventory escaped genuine worktree')
+    for name in missing:
+        path = Path(name)
+        require(not path.is_absolute() and str(path) == name and '..' not in path.parts
+            and not os.path.lexists(A / name), 'Explicit peer deletion is no longer absent')
+    for name in OWNED_CHANGES:
+        change = baseline['owned_changes'][name]
+        require(type(change) is dict and set(change) == {'before', 'after'}
+            and change['before'] == campaign['owned_preimages'][name] == overlay['rows'][name]
+            and change['after'] == held[name] and change['after'] != change['before'],
+            'Exact four existing candidate preimages required')
+    initializers = baseline['initializers']
+    require(type(initializers) is dict and set(initializers) == {str(path) for path in INITIALIZERS},
+        'Genuine canonical dependency initializers required')
+    lease_before = coordinator(release)
+    expected = release['source_rows']
+    paths = {str(A/name) for name in held} | set(initializers) | {
+        origin['path'] for origin in lease_before['source_origins'].values()} | {str(Path(__file__).resolve())}
+    require(type(expected) is dict and set(expected) == paths
+        and all(expected[str(A/name)] == value for name, value in held.items())
+        and all(expected[name] == value for name, value in initializers.items())
+        and expected[str(Path(__file__).resolve())]['sha256'] == release['runner_sha256'],
+        'Exact current source, dependency, resource and runner guards required')
+    before = {name: row(Path(name)) for name in expected}
+    require(before == expected, 'Frozen source changed before qualification')
+    git_before = git_identity(baseline)
+    require(sha(SCRATCH_RECORD) == release['external_scratch_record_sha256'], 'Root scratch record differs')
+    scratch_record = read(SCRATCH_RECORD)
+    require(scratch_record['schema'] == 'root-owned-external-validation-scratch@1'
+        and scratch_record['created_by'] == 'root'
+        and scratch_record['scratch']['qualification'] == release['external_basetemp'],
+        'Root scratch descriptor differs')
+    scratch_before = external_scratch(release['external_basetemp'], fresh=True)
+    run_name = release['run_name']
+    require(type(run_name) is str and re.fullmatch(r'run[0-9]{2}', run_name), 'Fresh bounded attempt required')
+    R = HERE / run_name
+    require(not os.path.lexists(R), 'Qualification attempt already exists')
+    R.mkdir()
+    write(R / 'source-rows-before.json', before)
+    affinity = {18, 19}
+    require(affinity <= os.sched_getaffinity(0), 'Released CPUs unavailable')
+    os.sched_setaffinity(0, affinity)
+    affinity_before = sorted(os.sched_getaffinity(0))
+    settings = {
+        'PYTHONPATH': os.pathsep.join(map(str, (A, P, K, H))),
+        'PYTHONDONTWRITEBYTECODE': '1', 'GIT_OPTIONAL_LOCKS': '0',
+        'IPFS_DATASETS_PY_LAZY_INSTALL_ERGOAI': '0', 'PYTEST_DISABLE_PLUGIN_AUTOLOAD': '1',
+        'HF_HUB_OFFLINE': '1', 'TRANSFORMERS_OFFLINE': '1',
+        'IPFS_ACCELERATE_PYTEST_SEAL_DUCKDB': str(R / 'seal.duckdb'),
+        'IPFS_ACCELERATE_META_INDEX_DUCKDB': str(R / 'meta.duckdb'),
+        'IPFS_TEST_PROOF_REUSE_CACHE_DIR': str(R / 'proof-reuse'),
+        'IPFS_TEST_PROOF_REUSE_MODE': 'off',
+        'IPFS_ACCELERATE_AGENT_ORCHESTRATION_DIR': str(R / 'orchestration'),
+        'ASEH_TASK_ID': 'WORLD-CONTEXT-TOKEN-ACCOUNTING-20261015-V02-' + run_name.upper(),
+    }
+    os.environ.update(settings)
+    os.chdir(A)
+    sys.dont_write_bytecode = True
+    sys.path[:0] = [str(P), str(K), str(A)]
+    sys.path.append(str(H))
+    # Every bootstrap executes the genuine package initializer from its held root.
+    packages = [('benchmarks', A / 'benchmarks'),
+        ('ipfs_datasets_py', P / 'ipfs_datasets_py'),
+        ('ipfs_accelerate_py', A / 'ipfs_accelerate_py'), ('ipfs_kit_py', K / 'ipfs_kit_py')]
+    for name, directory in packages:
+        spec = importlib.util.spec_from_file_location(name, directory / '__init__.py',
+            submodule_search_locations=[str(directory)])
+        require(spec is not None and spec.loader is not None, 'Genuine package loader required')
+        module = importlib.util.module_from_spec(spec)
+        sys.modules[name] = module
+        spec.loader.exec_module(module)
+    from ipfs_accelerate_py.testing import pytest_ast_seal
+    import pytest
+    import harbor
+    import tokenizers
+    import tiktoken
+    require(Path(harbor.__file__).resolve().is_relative_to(H)
+        and Path(tokenizers.__file__).resolve().is_relative_to(H)
+        and Path(tiktoken.__file__).resolve().is_relative_to(V), 'Held existing dependency origins required')
+
+    def project_origins():
+        roots = {'ipfs_accelerate_py': A, 'benchmarks': A, 'test': A,
+                 'ipfs_datasets_py': P, 'ipfs_kit_py': K}
+        origins = {}
+        for name, module in list(sys.modules.items()):
+            prefix = name.split('.', 1)[0]
+            filename = getattr(module, '__file__', None)
+            if prefix in roots and isinstance(filename, str) and filename:
+                actual = Path(filename).resolve()
+                require(actual.is_relative_to(roots[prefix]), 'Project import escaped genuine root: ' + name)
+                if roots[prefix] == A:
+                    require(str(actual) in expected, 'Actual worktree import absent from fresh guards: ' + name)
+                origins[name] = str(actual)
+        return origins
+
+    origins_before = project_origins()
+
+    class Observer:
+        def __init__(self):
+            self.enabled, self.collected, self.paths, self.names = False, [], {}, {}
+            self.calls, self.reports, self.seals, self.deselected, self.presentation = [], [], {}, [], {}
+
+        def pytest_sessionstart(self, session):
+            state = getattr(session.config, pytest_ast_seal._CONFIG_KEY, None)
+            require(isinstance(state, dict) and state.get('enabled') is True, 'Mandatory AST seal disabled')
+            self.enabled = True
+
+        def pytest_deselected(self, items):
+            self.deselected.extend(item.nodeid for item in items)
+
+        def pytest_collection_finish(self, session):
+            self.collected = [item.nodeid for item in session.items]
+            self.paths = {item.nodeid: str(Path(str(item.path)).resolve()) for item in session.items}
+            self.names = {item.nodeid: item.originalname or item.name.split('[', 1)[0] for item in session.items}
+
+        def pytest_runtest_call(self, item):
+            state = getattr(item.config, pytest_ast_seal._CONFIG_KEY)
+            seal = state['seals'][item.nodeid]
+            cache = self.presentation.get(id(seal))
+            if cache is None:
+                admitted = frozenset(Path(entry.path).resolve() for entry in seal.files)
+                cache = (seal, admitted, tuple(str(path) for path in sorted(admitted)))
+                self.presentation[id(seal)] = cache
+            require(cache[0] is seal and seal.complete is True, 'Actual immutable AST seal identity differs')
+            actual = Path(str(item.path)).resolve()
+            require(self.paths.get(item.nodeid) == str(actual) and actual in {A / name for name in TEST_FILES}
+                and actual in cache[1], 'Actual call path absent from reviewed collection/seal')
+            self.seals[item.nodeid] = cache[2]
+
+        def pytest_runtest_logreport(self, report):
+            self.reports.append({'nodeid': report.nodeid, 'phase': report.when, 'outcome': report.outcome})
+            if report.when == 'call':
+                self.calls.append({'nodeid': report.nodeid, 'outcome': report.outcome})
+            if report.failed and not (R / 'first-failure.txt').exists():
+                (R / 'first-failure.txt').write_text(str(report.longrepr))
+
+    observer = Observer()
+    arguments = ['-q', '--proof-reuse-mode=off', '-p', 'ipfs_accelerate_py.testing.pytest_ast_seal',
+        '-o', 'addopts=', '-o', 'cache_dir=' + str(R / 'pytest-cache'),
+        '--basetemp=' + release['external_basetemp']['basetemp'],
+        '--junitxml=' + str(R / 'junit.xml'), *SELECTED]
+    started = time.monotonic()
+    code = pytest.main(arguments, plugins=[observer])
+    origins_after = project_origins()
+    after = {name: row(Path(name)) for name in expected}
+    git_after = git_identity(baseline)
+    scratch_after = external_scratch(release['external_basetemp'], fresh=False)
+    affinity_after = sorted(os.sched_getaffinity(0))
+    phases = {(node, phase) for node in observer.collected for phase in ('setup', 'call', 'teardown')}
+    actual_phases = [(item['nodeid'], item['phase']) for item in observer.reports]
+    phases_ok = (bool(phases) and len(actual_phases) == len(phases) and set(actual_phases) == phases
+        and all(item['outcome'] == 'passed' for item in observer.reports))
+    selection_ok = set(observer.paths.values()) == {str(A/name) for name in TEST_FILES}
+    coverage = (selection_ok and bool(observer.collected) and not observer.deselected
+        and len(observer.collected) == len(set(observer.collected)) == len(observer.calls)
+        and set(observer.collected) == {item['nodeid'] for item in observer.calls}
+        and set(observer.seals) == set(observer.collected) == set(observer.paths) == set(observer.names))
+    lease_after = coordinator(release)
+    stable = (before == after and git_before == git_after and scratch_before == scratch_after
+        and affinity_before == affinity_after and lease_before == lease_after
+        and sha(release_path) == args.release_sha256 and sha(__file__) == release['runner_sha256']
+        and sha(BASELINE) == release['baseline_sha256'] and sha(INVENTORY) == release['input_inventory_sha256']
+        and sha(CURRENT_OVERLAY) == release['current_overlay_sha256']
+        and sha(SCRATCH_RECORD) == release['external_scratch_record_sha256']
+        and all(not os.path.lexists(A/name) for name in missing))
+    qualified = int(code) == 0 and phases_ok and coverage and stable and observer.enabled
+    result = {'schema': 'world-context-token-accounting-sealed-qualification@1', 'qualified': qualified,
+        'exit_code': int(code), 'elapsed_seconds': time.monotonic() - started,
+        'release_sha256': args.release_sha256, 'arguments': arguments, 'settings': settings,
+        'collected_nodeids': observer.collected, 'actual_collection_test_paths': observer.paths,
+        'actual_collection_test_names': observer.names, 'all_reports': observer.reports,
+        'actual_call_reports': observer.calls, 'actual_test_seal_files': observer.seals,
+        'actual_deselected_nodeids': observer.deselected, 'no_deselections': not observer.deselected,
+        'every_actual_setup_call_teardown_recorded_once': phases_ok,
+        'every_collected_test_executed_with_seal': coverage,
+        'mandatory_ast_seal_enabled': observer.enabled, 'every_selected_file_collected': selection_ok,
+        'source_rows_before': before, 'source_rows_after': after, 'source_guard_count': len(before),
+        'all_source_rows_release_git_scratch_lease_unchanged': stable,
+        'git_identity_before': git_before, 'git_identity_after': git_after,
+        'coordinator_before': lease_before, 'coordinator_after': lease_after,
+        'coordinator_held_sha256': release['coordinator_held_sha256'],
+        'coordinator_release_sha256': release['coordinator_release_sha256'],
+        'coordinator_runner_sha256': release['coordinator_runner_sha256'],
+        'external_basetemp_root_before': scratch_before, 'external_basetemp_root_after': scratch_after,
+        'root_external_scratch_record_sha256': release['external_scratch_record_sha256'],
+        'actual_cpu_affinity_before': affinity_before, 'actual_cpu_affinity_after': affinity_after,
+        'project_import_origins_before': origins_before, 'project_import_origins_after': origins_after,
+        'actual_collected_case_count': len(observer.collected), 'whole_selected_suite_count': len(TEST_FILES),
+        'test_selection': list(SELECTED), 'owned_paths': list(OWNED_PATHS),
+        'owned_changes': baseline['owned_changes'], 'owned_additions': list(OWNED_ADDITIONS),
+        'explicit_absent_paths': missing, 'baseline_sha256': release['baseline_sha256'],
+        'input_inventory_sha256': release['input_inventory_sha256'],
+        'current_overlay_sha256': release['current_overlay_sha256'],
+        'actual_current_worktree_source_count': len(held),
+        'normal_conftests_preserved': True, 'proof_reuse_mode': 'off', 'prior_test_results_reused': False,
+        'real_provider_calls': 0, 'downloads': 0, 'installs': 0, 'native_commands_qualified': False,
+        'provider_token_savings_established': False, 'task_acceptance_qualified': False,
+        'current_MAIN_runtime_qualification': False,
+        'scope': 'Fresh isolated seven-full-suite qualification of supplied complete visible-input trajectory accounting and current estimated world invocation replay. Actual current sources, genuine initializers and normal conftests, mandatory complete per-call AST seals, all three phases, no skipped/deselected cases and no proof/result reuse. Authored provider/tokenizer/tool examples do not establish native hidden-history coverage, provider usage, billing, task acceptance, complete model context or provider-token savings.'}
+    write(R / 'verification.json', result)
+    print(json.dumps({'qualified': qualified, 'exit_code': int(code), 'actual_calls': len(observer.calls),
+        'source_guard_count': len(before), 'source_guards_unchanged': stable}, sort_keys=True), flush=True)
+    raise SystemExit(0 if qualified else int(code) or 1)
+
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,24 @@
+def zdecorate(function):
+    return function
+
+@zdecorate
+def alpha(payload):
+    """Exact docstring # café🔒."""
+    return payload.resolve()
+
+def beta(payload):
+    return payload.beta()
+
+def delta(payload):
+    return payload.delta()
+
+def epsilon(payload):
+    return payload.epsilon()
+
+def gamma(payload):
+    return payload.gamma()
+
+def zeta(payload):
+    return payload.zeta()
+
+# changed public source

@@ -1,0 +1,289 @@
+"""Paired complete-input counts, without provider or signed-admission claims.
+
+Native code/semantic/query/capsule/bundle replay and both codecs are real in the
+ordering fixture. Signed public admission and historical catalog relevance are
+explicit stubs. Tokenizer tests use the pinned local table without a download.
+"""
+from copy import deepcopy
+import hashlib
+import json
+from pathlib import Path
+
+import pytest
+
+from benchmarks.agent_supervisor.container_coding import terminal_context_audit as context
+from benchmarks.agent_supervisor.container_coding import terminal_input_token_comparison as paired
+from benchmarks.agent_supervisor.container_coding.test_terminal_context_audit import retrieval_projection_case
+from benchmarks.agent_supervisor.container_coding.test_terminal_nomination_context_audit import (
+    appendix_case, fresh_namespaces,
+)
+from benchmarks.agent_supervisor.container_coding.test_terminal_model_input_observation_audit import observation
+from ipfs_accelerate_py.agent_supervisor.runtime import router_public_instruction as public
+from ipfs_accelerate_py.agent_supervisor.runtime import router_implementation_runner as runner
+from ipfs_accelerate_py.agent_supervisor.runtime import supervisor_meta_index as metadata
+from ipfs_accelerate_py.agent_supervisor.runtime.verified_code_retrieval_projection import (
+    SOURCE_PREFIX, SOURCE_SUFFIX,
+)
+from test.api.test_compact_intent_requirements import representative, bind
+
+
+def sha(value):
+    return hashlib.sha256(value.encode() if type(value) is str else value).hexdigest()
+
+
+@pytest.fixture(scope="module")
+def encoding():
+    # The focused command supplies a preexisting pinned public asset. Absence
+    # must fail rather than skipping or downloading a replacement.
+    return paired._load_tokenizer()
+
+
+@pytest.fixture
+def paired_case(appendix_case, monkeypatch):
+    case = appendix_case
+    with metadata.public_replay_without_metadata():
+        _, requirements = representative()
+        requirements.update(task_cid="cid:task", task_id="FRONTIER-001", source_path="requirements.md",
+            source_sha256=sha(case["query"]), contract_cid="cid:contract", ledger_sha256="d" * 64)
+        unit = {"unit_id": "unit:public-query", "start_char": 0, "end_char": len(case["query"]),
+            "start_byte": 0, "end_byte": len(case["query"].encode()), "text": case["query"],
+            "sha256": sha(case["query"])}
+        for row in requirements["requirements"]:
+            row["source_unit"] = deepcopy(unit)
+            row["binding"].update(task_keys=["FRONTIER-001"], task_cids=["cid:task"])
+        requirements["task_contract"]["scope_paths"][0] = "requirements.md"
+        bind(requirements)
+        requirement_blocks = {mode: public.render_task_intent_requirements(requirements,
+            source_text=case["query"], requirements_transport=mode)
+            for mode in ("expanded", "compact")}
+    artifact = Path(case["public"]["artifact"])
+    artifact.write_text('{"scope":"explicit authored admission stub"}')
+    artifact.chmod(0o444)
+    base = deepcopy(case["public"])
+    base.update(artifact_sha256=sha(artifact.read_bytes()), intent_requirements={
+        **{key: requirements[key] for key in ("requirements_context_cid", "contract_cid", "ledger_sha256",
+            "graph_cid", "coverage_cid", "requirement_ids", "source_semantics_verified", "semantic_alignment_verified")},
+        "dependency_requirement_ids": [], "prohibition_requirement_ids": [],
+        "planning_receipt_cid": "cid:planning", "admission_graph_verified": True,
+        "native_persistence_verified_here": False, "proof_authority": False,
+        "execution_authority": False, "completion_authority": False})
+    blocks, inclusions = {}, {}
+    for mode, (requirement_block, projection) in requirement_blocks.items():
+        blocks[mode] = SOURCE_PREFIX + case["query"] + SOURCE_SUFFIX + requirement_block
+        inclusions[mode] = {**deepcopy(base), "schema": public.COMPACT_INCLUSION_SCHEMA
+            if mode == "compact" else "supervisor-public-instruction-inclusion@2",
+            "block_sha256": sha(blocks[mode]), "block_bytes": len(blocks[mode].encode())}
+        if projection is not None:
+            inclusions[mode]["intent_requirements_projection"] = projection
+    calls = []
+    def literal_loader(**kwargs):
+        assert kwargs["require_current_source"] is False
+        assert kwargs["prompt"] == case["prompt"]
+        mode = kwargs.get("requirements_transport", "expanded")
+        calls.append(mode)
+        return blocks[mode], {**deepcopy(inclusions[mode]),
+            "source_freshness_verified": False, "historical_replay": True}
+    monkeypatch.setattr(public, "load_public_instruction", literal_loader)
+    case["public"], case["block"] = inclusions["compact"], blocks["compact"]
+    value = observation(case, "compact_v2")
+    value["intent_requirements_transport"] = "compact"
+    # The catalog itself is an explicit relevance/order stub; its residual
+    # count is pinned to this fixture's complete native requirement inventory.
+    value["reviewed_source_nomination_context"]["residual_requirement_count"] = len(requirements["requirements"])
+    case.update(observation=value, requirements=requirements, blocks=blocks, inclusions=inclusions,
+        literal_calls=calls)
+    return case
+
+
+def compare(case):
+    return paired.compare_terminal_input_tokens(state=case["state"], observations=[case["observation"]],
+        workspace_root=case["workspace_root"])
+
+
+def replay(case, *, capture=None, facts=None):
+    return context._model_projection(rendered=case["prompt"],
+        receipt=facts if facts is not None else paired._observation_bindings(case["observation"], case["workspace_root"]),
+        repository=case["repository"], prepared=case["prepared"], expected=case["expected"], _capture=capture)
+
+
+def no_provider_claim(result):
+    assert result["provider_invocations_created"] == 0
+    for key in ("provider_usage_measured", "provider_total_session_token_savings_established",
+        "current_freshness_verified", "source_equivalence_proved", "full_task_satisfaction_established",
+        "global_model_convergence_proved", "raw_prompts_exported", "proof_authority",
+        "execution_authority", "completion_authority"):
+        assert result[key] is False
+
+
+def test_real_tokenizer_fingerprint_complete_unicode_special_spellings_and_nonadditivity(encoding):
+    assert paired._tokenizer_digest(encoding) == paired.TOKENIZER_SHA256
+    text = 'λ😀雪 <|endoftext|> {"code":"def f():\\n    return 7"}\r\n'
+    result = paired._measure(text, encoding)
+    assert result == {"sha256": sha(text), "bytes": len(text.encode()),
+        "tokens": len(encoding.encode(text, allowed_special=set(), disallowed_special=()))}
+    whole = paired._measure("hello", encoding)["tokens"]
+    parts = sum(paired._measure(part, encoding)["tokens"] for part in ("hel", "lo"))
+    assert whole < parts
+
+
+def test_pinned_table_constructs_offline_without_lazy_registry_loader(monkeypatch):
+    import tiktoken
+    monkeypatch.setattr(tiktoken, "get_encoding", lambda *_: pytest.fail("lazy tokenizer cache/network fallback"))
+    assert paired._tokenizer_digest(paired._load_tokenizer()) == paired.TOKENIZER_SHA256
+
+
+@pytest.mark.parametrize("text", ["", "x" * 256001, b"bytes", None], ids=["empty", "oversize", "bytes", "null"])
+def test_complete_count_bounds_are_not_silent_truncation(encoding, text):
+    with pytest.raises(ValueError):
+        paired._measure(text, encoding)
+
+
+def test_tokenizer_must_reconstruct_complete_input_without_loss():
+    class Broken:
+        def encode(self, *_a, **_k): return [1]
+        def decode(self, _tokens): return "different"
+    with pytest.raises(ValueError, match="roundtrip"):
+        paired._measure("original", Broken())
+
+
+@pytest.mark.parametrize("invalid", ["version", "no_cache", "missing", "foreign", "symlink", "hardlink"])
+def test_offline_tokenizer_preflight_refuses_before_encoding_loader(tmp_path, monkeypatch, invalid):
+    import os
+    import tiktoken
+    cache = tmp_path / "tokenizer-cache"
+    cache.mkdir()
+    path = cache / hashlib.sha1(paired.BPE_URL.encode()).hexdigest()
+    monkeypatch.setenv("TIKTOKEN_CACHE_DIR", str(cache))
+    monkeypatch.setattr(paired.importlib.metadata, "version", lambda _: "foreign" if invalid == "version" else paired.TOKENIZER_VERSION)
+    if invalid == "no_cache": monkeypatch.delenv("TIKTOKEN_CACHE_DIR")
+    elif invalid == "foreign": path.write_bytes(b"untrusted public table")
+    elif invalid == "symlink":
+        target = tmp_path / "table"; target.write_bytes(b"foreign")
+        path.symlink_to(target)
+    elif invalid == "hardlink":
+        path.write_bytes(b"foreign"); os.link(path, tmp_path / "second-link")
+    monkeypatch.setattr(tiktoken, "get_encoding", lambda *_: pytest.fail("unqualified table reached encoding loader"))
+    with pytest.raises((ValueError, OSError)):
+        paired._load_tokenizer()
+
+
+def test_paired_native_codec_and_real_tokenizer_count_complete_shared_envelopes(paired_case, encoding):
+    case = paired_case
+    before = deepcopy(case["observation"])
+    result = compare(case)
+    captured = {}; replay(case, capture=captured)
+    expanded_router = case["prompt"] + captured["residual"] + captured["catalog"] + case["blocks"]["expanded"]
+    expanded, advisory = runner.render_model_prompt(prompt=expanded_router, purpose="coding",
+        workspace=Path(case["observation"]["workspace"]))
+    assert result["schema"] == paired.SCHEMA and result["qualified"] is True
+    assert result["observed_arm"] == "compact" and result["counterfactual_arm"] == "expanded"
+    assert result["measurements"] == {"expanded": paired._measure(expanded, encoding),
+        "compact": paired._measure(case["model"], encoding)}
+    assert len(advisory.encode()) - case["observation"]["workspace_advisory_bytes"] == 4
+    assert result["tokens_saved"] == result["measurements"]["expanded"]["tokens"] - result["measurements"]["compact"]["tokens"]
+    assert result["bindings"]["requirement_ids"] == case["requirements"]["requirement_ids"]
+    assert result["bindings"]["public_instruction_sha256"] == sha(case["query"])
+    assert all(result["checks"].values()) and case["observation"] == before
+    assert {row["modality"] for row in case["requirements"]["requirements"]} == {"required", "intended"}
+    rendered = json.dumps(result)
+    assert case["query"] not in rendered and case["catalog"] not in rendered
+    assert "invocation_id" not in rendered and "provider_receipt" not in rendered
+    no_provider_claim(result)
+
+
+def test_private_capture_default_is_byte_exact_and_false_checks_leave_capture_empty(paired_case):
+    case = paired_case
+    normal = replay(case)
+    captured = {}
+    assert replay(case, capture=captured) == normal
+    assert captured["model"] == normal[0] and captured["workspace_advisory"] == normal[1]
+    facts = paired._observation_bindings(case["observation"], case["workspace_root"])
+    facts["model_prompt_sha256"] = "f" * 64
+    assert replay(case, facts=facts)[2]["model_prompt_sha256"] is False
+    rejected = {}
+    with pytest.raises(ValueError, match="unverified replay"):
+        replay(case, facts=facts, capture=rejected)
+    assert rejected == {}
+
+
+@pytest.mark.parametrize("capture", [False, [], {"preexisting": True}])
+def test_private_capture_requires_exact_empty_dict_before_native_io(monkeypatch, capture):
+    monkeypatch.setattr(context, "_native_semantic_bindings", lambda **_: pytest.fail("invalid capture reached native replay"))
+    with pytest.raises(ValueError, match="exact empty"):
+        context._model_projection(rendered="not a capsule", receipt={}, repository=None, _capture=capture)
+
+
+@pytest.mark.parametrize("mutation", ["duplicate", "provider", "refused", "native_hash", "model_hash", "missing_catalog", "control"])
+def test_inadmissible_population_or_tampered_input_refuses_before_tokenization(paired_case, monkeypatch, mutation):
+    case = paired_case; value = deepcopy(case["observation"])
+    rows = [value]
+    if mutation == "duplicate": rows.append(deepcopy(value))
+    elif mutation == "provider": value["schema"] = "router-implementation-invocation@1"
+    elif mutation == "refused": value.update(status="refused", error_type="ValueError", final_custody_guard_verified=False)
+    elif mutation == "native_hash": value["native_prompt_sha256"] = "f" * 64
+    elif mutation == "model_hash": value["model_prompt_sha256"] = "f" * 64
+    elif mutation == "missing_catalog": value["reviewed_source_nomination_context"] = None
+    else: value["intent_requirements_transport"] = "expanded"
+    monkeypatch.setattr(paired, "_load_tokenizer", lambda: pytest.fail("refused observation reached tokenizer"))
+    with pytest.raises(ValueError):
+        paired.compare_terminal_input_tokens(state=case["state"], observations=rows, workspace_root=case["workspace_root"])
+
+
+def test_unknown_or_error_audit_does_not_create_counterfactual(paired_case, monkeypatch):
+    monkeypatch.setattr(paired, "audit_terminal_model_input_observations", lambda **_: {"status": "unknown"})
+    monkeypatch.setattr(paired, "_load_tokenizer", lambda: pytest.fail("unverified input reached tokenizer"))
+    with pytest.raises(ValueError, match="independent compact"):
+        compare(paired_case)
+
+
+def test_expanded_loader_cannot_change_shared_requirement_identity(paired_case, monkeypatch):
+    original = public.load_public_instruction
+    def changed(**kwargs):
+        block, receipt = original(**kwargs)
+        if kwargs.get("requirements_transport") == "expanded":
+            receipt["intent_requirements"]["requirement_ids"] = ["foreign:requirement"]
+        return block, receipt
+    monkeypatch.setattr(public, "load_public_instruction", changed)
+    monkeypatch.setattr(paired, "_load_tokenizer", lambda: pytest.fail("foreign bindings reached tokenizer"))
+    with pytest.raises(ValueError, match="public requirement binding"):
+        compare(paired_case)
+
+
+@pytest.mark.parametrize("target", ["state", "capsule", "bundle", "instruction"])
+def test_final_witnesses_cover_tokenizer_write_restore_callbacks(paired_case, encoding, monkeypatch, target):
+    case = paired_case
+    paths = {"state": case["state"] / "context-result.json", "capsule": case["capsule"],
+        "bundle": case["repository"] / case["expected"]["context_bundle"]["artifact"],
+        "instruction": Path(case["public"]["artifact"])}
+    path = paths[target]; original = path.read_bytes(); calls = []
+    class Mutating:
+        name = encoding.name
+        _pat_str = encoding._pat_str
+        _special_tokens = encoding._special_tokens
+        _mergeable_ranks = encoding._mergeable_ranks
+        def encode(self, text, **kwargs):
+            calls.append(1)
+            if len(calls) == 2:
+                mode = path.stat().st_mode & 0o777
+                path.chmod(0o600); path.write_bytes(original + b" "); path.write_bytes(original); path.chmod(mode)
+            return encoding.encode(text, **kwargs)
+        def decode(self, tokens): return encoding.decode(tokens)
+    monkeypatch.setattr(paired, "_load_tokenizer", lambda: Mutating())
+    with pytest.raises(ValueError):
+        compare(case)
+    assert len(calls) == 2 and path.read_bytes() == original
+
+
+def test_whole_operation_never_opens_metadata_owner_and_restores_on_error(paired_case, encoding, monkeypatch):
+    def forbidden(*_a, **_k): pytest.fail("public replay opened configured metadata owner")
+    monkeypatch.setattr(metadata.SupervisorMetaIndex, "from_env", forbidden)
+    assert compare(paired_case)["qualified"] is True
+    monkeypatch.setattr(paired, "_load_tokenizer", lambda: (_ for _ in ()).throw(ValueError("authored tokenizer error")))
+    with pytest.raises(ValueError, match="authored tokenizer error"):
+        compare(paired_case)
+    # The ContextVar suppressor must unwind rather than disable owners globally.
+    calls = []
+    monkeypatch.setattr(metadata.SupervisorMetaIndex, "from_env", lambda **kwargs: calls.append(kwargs))
+    metadata.mirror_work_record(catalog_kind="metadata", record_kind="authored-restoration",
+        record_ref="authored:restoration")
+    assert calls

@@ -1,0 +1,16 @@
+{
+  "recorded_at": "2026-11-10T22:24:05.813601+00:00",
+  "local_test_fixture_commit": "d4cd31e69e36f0845ec062c09df8279e57975ab7",
+  "published_head": "8d5141e6db8c1fb4f01a5bc7c56dfbd5338cb123",
+  "changed_file": "/tmp/lift-sync-pruning-history-main-20261110/benchmarks/agent_supervisor/container_coding/test_grok_pruning_deployment.py",
+  "test_change": "Add -B to the isolated Python fixture child command because -I ignores PYTHONDONTWRITEBYTECODE.",
+  "prepared_request_sha256": "32ef85bea3a180d8e4d460a48a3a99e19c878b22bcad864e3d297612b38b4c24",
+  "expected_complete_cases": 11,
+  "source_control_pins": 54,
+  "previous_current_pin_checks": 2071,
+  "launched": false,
+  "qualified": false,
+  "required_hosted_checks": [
+    "documentation-gates"
+  ]
+}

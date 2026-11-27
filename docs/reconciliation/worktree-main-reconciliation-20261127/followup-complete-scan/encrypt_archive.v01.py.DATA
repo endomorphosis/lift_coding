@@ -1,0 +1,74 @@
+"""Encrypt exact recovery bytes and keep the key outside all Git payloads."""
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+import stat
+import subprocess
+import sys
+
+HERE = Path(__file__).resolve().parent
+
+def digest(path):
+    state = sha256()
+    with path.open('rb') as stream:
+        while chunk := stream.read(1024**2):
+            state.update(chunk)
+    return state.hexdigest()
+
+def main():
+    control = json.loads(Path(sys.argv[1]).read_text())
+    original = Path(control['input'])
+    assert original.is_file() and not original.is_symlink()
+    assert digest(original)==control['sha256']
+    key = Path(json.loads((HERE/'encryption-key-location.json').read_text())['path'])
+    assert not key.is_symlink() and key.stat().st_uid==os.getuid()
+    assert stat.S_IMODE(key.stat().st_mode)==0o600
+    label = control['label']
+    assert label.replace('-','').replace('_','').isalnum()
+    home = HERE/(label+'-gnupg')
+    home.mkdir(mode=0o700)
+    cipher = HERE/(label+'.archive.gpg')
+    proof = HERE/(label+'.decrypted-proof')
+    assert not cipher.exists() and not proof.exists()
+    prefix = ['gpg','--no-options','--homedir',str(home),'--batch','--no-tty','--no-autostart',
+              '--pinentry-mode','loopback','--passphrase-file',str(key),'--no-symkey-cache']
+    environment = dict(os.environ, GNUPGHOME=str(home))
+    previous_umask = os.umask(0o077)
+    try:
+        encrypt = subprocess.run(prefix+['--symmetric','--cipher-algo','AES256','--compress-algo','none','--output',str(cipher),str(original)],capture_output=True,env=environment,timeout=600)
+        (HERE/(label+'-encrypt.stderr')).write_bytes(encrypt.stderr)
+        assert encrypt.returncode==0, encrypt.stderr.decode(errors='replace')
+        decrypt = subprocess.run(prefix+['--output',str(proof),'--decrypt',str(cipher)],capture_output=True,env=environment,timeout=600)
+        (HERE/(label+'-decrypt.stderr')).write_bytes(decrypt.stderr)
+        assert decrypt.returncode==0, decrypt.stderr.decode(errors='replace')
+    finally:
+        os.umask(previous_umask)
+    assert digest(proof)==control['sha256']
+    out = Path(control['publication_directory'])
+    out.mkdir(parents=True,exist_ok=True)
+    parts=[]
+    with cipher.open('rb') as stream:
+        index=0
+        while chunk := stream.read(90_000_000):
+            path=out/(label+'.archive.gpg.part-'+str(index).zfill(3)+'.DATA')
+            assert not path.exists()
+            path.write_bytes(chunk)
+            parts.append({'path':path.name,'bytes':len(chunk),'sha256':sha256(chunk).hexdigest()})
+            index+=1
+    record={'schema':'encrypted-exact-history-retention/v1','artifact_kind':control.get('kind','git-bundle'),
+            'original_archive_sha256':control['sha256'],'original_archive_bytes':original.stat().st_size,
+            'original_commit_tips':control.get('tips',[]),
+            'reason':'Unresolved credential-like text; exact original bytes retained encrypted.',
+            'cipher':'GnuPG AES256 symmetric encryption','ciphertext_sha256':digest(cipher),
+            'ciphertext_bytes':cipher.stat().st_size,'encryption_returncode':encrypt.returncode,
+            'decryption_returncode':decrypt.returncode,'decrypted_bytes_match_exact_original':True,
+            'key_local_path':str(key),'key_is_in_git':False,'key_values_disclosed':False,
+            'parts_in_concatenation_order':parts,
+            'restore_instruction':'Concatenate the listed parts, decrypt with gpg using the local passphrase file, verify the original archive SHA-256, then use the accompanying restore receipt.'}
+    (out/'encrypted-recovery.json').write_text(json.dumps(record,indent=2)+'\n')
+    (HERE/(label+'-encrypted-receipt.json')).write_text(json.dumps(record,indent=2)+'\n')
+    print(json.dumps({k:v for k,v in record.items() if k!='key_local_path'},indent=2))
+
+if __name__ == '__main__':
+    main()

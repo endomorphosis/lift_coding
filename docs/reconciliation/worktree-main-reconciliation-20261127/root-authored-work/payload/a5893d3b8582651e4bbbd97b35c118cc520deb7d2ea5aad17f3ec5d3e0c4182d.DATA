@@ -1,0 +1,80 @@
+"""Native-record citation regression tests for the isolated source fix."""
+import json
+from pathlib import Path
+
+import pytest
+
+import service
+
+T, _, _, _, Compiler, Adapter, AdapterError = service.load_native()
+HERE = Path(__file__).resolve().parent
+seed_dir = HERE / "runs/development-v1/seed_store"
+seed_index = json.loads((seed_dir / "evaluation_index.json").read_text())
+seed = json.loads((seed_dir / seed_index["seed"]["plain_record"]).read_text())
+query = T.ProgramTransitionQuery.from_dict(seed["query"])
+candidate = T.select_and_parameterize_candidate(query, candidate_kind="call_target", selected_cid=seed["result"]["selected_action_cid"])
+observation = T.ProgramTransitionObservation.from_dict(seed["observation"])
+admission = service.admit(T, query, query, observation)
+receipt = T.issue_transition_receipt(query, admission, observation=observation)
+
+# This prediction is a native contract fixture for citation only; no learned
+# model, tokenizer, or prediction execution is claimed by this regression test.
+from ipfs_datasets_py.logic.software_contracts.content import cid_for_bytes
+fixture_profile_cid = cid_for_bytes(b'"citation-only fixture; no model execution"')
+prediction = T.ProgramTransitionPrediction(query_cid=query.query_cid, subject_cid=query.subject_cid, model_profile_cid=fixture_profile_cid, candidate_cids=(candidate.candidate_cid,), environment_binding_cid=query.environment_binding_cid, policy_cid=query.policy_cid)
+records = (query, candidate, prediction, observation, admission, receipt)
+
+
+@pytest.mark.parametrize("record", records, ids=lambda record: type(record).__name__)
+@pytest.mark.parametrize("public_mapping", [False, True])
+def test_cites_own_record_identity(record, public_mapping):
+    # Public citation views contain IDs/schema. Full payload decoding remains
+    # the datasets codec's job; the existing generic rank guard rejects the
+    # full candidate mapping and that behavior is tested separately below.
+    source = {"schema": record.SCHEMA, "query_cid": query.query_cid, record.CID_FIELD: getattr(record, record.CID_FIELD)} if public_mapping else record
+    cited = Adapter().cite_transition(source)
+    assert cited.identity_cid == getattr(record, record.CID_FIELD)
+    if record is not query:
+        assert cited.identity_cid != query.query_cid
+
+
+@pytest.mark.parametrize("record", records, ids=lambda record: type(record).__name__)
+def test_known_record_without_own_identity_is_rejected(record):
+    value = {"schema": record.SCHEMA, "query_cid": query.query_cid, record.CID_FIELD: getattr(record, record.CID_FIELD)}
+    del value[record.CID_FIELD]
+    with pytest.raises(AdapterError, match="missing.*identity CID"):
+        Adapter().cite_transition(value)
+
+
+def test_ambiguous_unschematized_identity_is_rejected():
+    with pytest.raises(AdapterError, match="ambiguous transition identity"):
+        Adapter().cite_transition({"query_cid": query.query_cid, "candidate_cid": candidate.candidate_cid})
+
+
+def test_full_candidate_mapping_remains_rejected_by_existing_rank_guard():
+    with pytest.raises(AdapterError, match="ANN/score identity fields.*rank"):
+        Adapter().cite_transition(candidate.to_dict())
+
+
+def test_single_cid_compatibility_and_raw_cid():
+    adapter = Adapter()
+    assert adapter.cite_transition({"transition_cid": query.query_cid}).identity_cid == query.query_cid
+    assert adapter.cite_transition(query.query_cid).identity_cid == query.query_cid
+
+
+def test_compiler_preserves_all_distinct_record_links():
+    compiled = Compiler().compile(query, candidate=candidate, prediction=prediction, observation=observation)
+    assert compiled.query_cid == query.query_cid
+    assert compiled.candidate_cid == candidate.candidate_cid
+    assert compiled.prediction_cid == prediction.prediction_cid
+    assert compiled.observation_cid == observation.observation_cid
+    assert len({compiled.query_cid, compiled.candidate_cid, compiled.prediction_cid, compiled.observation_cid}) == 4
+    assert compiled.proposal_only and not compiled.admitted
+    assert compiled.prediction_authoritative is False
+
+
+def test_source_hash_profile_is_enforced():
+    profile = json.loads((service.OVERLAY / "profile.json").read_text())
+    assert service.sha(service.IDENTITY_FILE) == profile["patched_sha256"]
+    assert service.sha(profile["original_file"]) == profile["original_sha256"]
+    assert service.runtime_profile()["normal_imports"] is True

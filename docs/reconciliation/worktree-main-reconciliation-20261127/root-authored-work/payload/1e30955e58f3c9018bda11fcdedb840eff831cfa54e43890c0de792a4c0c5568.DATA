@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+"""Recompute all native counts and paired component intervals without inference."""
+import hashlib
+import importlib.util
+import json
+import tempfile
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+
+def main():
+    for item in json.loads((HERE / 'CUSTODY.json').read_text()):
+        path = HERE / item['path']
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == item['published_sha256'], path
+    spec = importlib.util.spec_from_file_location('published_native_aggregator', HERE / 'aggregate_pipeline.py')
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    with tempfile.TemporaryDirectory(prefix='af-native-metrics-') as temporary:
+        work = Path(temporary)
+        for name in ('final.sources.jsonl', 'final_a100.sources.jsonl', 'final_C.jsonl', 'final_T5.jsonl', 'final_B.jsonl'):
+            (work / name).symlink_to(HERE / name)
+        module.HERE = work
+        # The scientific aggregator emits a verbose report; retain it only in the
+        # temporary directory so normal reproduction prints a compact verdict.
+        import contextlib
+        with (work / 'aggregate.log').open('w') as stream, contextlib.redirect_stdout(stream):
+            module.main()
+        observed = json.loads((work / 'summary.json').read_text())
+        expected = json.loads((HERE / 'summary.json').read_text())
+        assert observed == expected, 'Native aggregate differs from published result'
+        assert (work / 'repair_pairs.jsonl').read_bytes() == (HERE / 'repair_pairs.jsonl').read_bytes()
+    print(json.dumps({'native_aggregate_exact_match': True, 'sources': 1913, 'native_arm_attempts': 5739, 'bootstrap_draws': 10000, 'model_calls': 0}))
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,93 @@
+"""Consume actual accepted repository source through frozen native archive admission.
+
+This explicitly uses the archive-only lower-level load, without replay_id. It
+checks original local evidence and restores source, but dispatches no grader.
+"""
+import hashlib
+import importlib.util
+import json
+import os
+from pathlib import Path
+import sys
+import time
+
+
+def canonical(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=True).encode()
+
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def main():
+    started = time.perf_counter()
+    request = json.load(sys.stdin)
+    freeze_path = Path(request["freeze_path"])
+    if sha(freeze_path) != request["freeze_sha256"]:
+        raise ValueError("archive freeze mismatch")
+    frozen = json.loads(freeze_path.read_text())
+    for path, digest in frozen["source_pins"].items():
+        if sha(path) != digest:
+            raise ValueError("source identity mismatch")
+    spec = importlib.util.spec_from_file_location("repository_archive_native", frozen["sealing_service"])
+    service = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(service)
+    profile = service.profile_for({"profile_path": frozen["controller_profile"],
+                                   "profile_sha256": frozen["controller_profile_sha256"]})
+    ledger = Path(profile["output_root"]) / "ledger.sqlite3"
+    if sha(ledger) != frozen["controller_ledger_sha256"]:
+        raise ValueError("original event ledger changed")
+    directory = Path(request["archive_path"])
+    sealer = service.S.IncrementalProofSealer(directory / "store")
+    try:
+        observed = sealer.get_current_seal(frozen["expected_pointer"]["repository_id"])
+        if observed is None or observed.to_dict() != frozen["expected_pointer"]:
+            raise ValueError("archive accepted pointer differs")
+        tip = service.load(profile, sealer, directory, observed.seal_cid, replay_id=None)
+        chain = []
+        accepted_payload = tip["receipts"]["accepted_source"]["source"]
+        while tip is not None:
+            if set(tip["receipts"]) != set(frozen["required_units"]):
+                raise ValueError("complete leaf inventory differs")
+            inventory = tip["receipts"]["accepted_source"]["source"]["inventory"]
+            if inventory["tree_sha256"] != tip["binding"]["source_tree_sha256"]:
+                raise ValueError("source binding differs")
+            chain.append({"schema": "ns-accepted-repository-archive-event/v1",
+                          "seal_cid": tip["seal_cid"], "parent_seal_cid": tip["parent_seal_cid"],
+                          "binding": tip["binding"], "source_inventory": inventory,
+                          "receipt_cids": {u: service.digest(r) for u, r in sorted(tip["receipts"].items())},
+                          "complete_pack_sha256": hashlib.sha256(canonical(tip)).hexdigest()})
+            tip = None if tip["parent_seal_cid"] is None else service.load(
+                profile, sealer, directory, tip["parent_seal_cid"], replay_id=None)
+        chain.reverse()
+        if [row["seal_cid"] for row in chain] != frozen["expected_ordered_seals"]:
+            raise ValueError("archive differs from frozen accepted history")
+        restored = Path(request["restored_source_path"])
+        if restored.exists():
+            raise ValueError("restore must use a fresh directory")
+        service.materialize_payload(accepted_payload, restored)
+        restored_inventory = service.R.inventory(restored)
+        if restored_inventory != accepted_payload["inventory"]:
+            raise ValueError("restored source differs")
+        if service.REPLAYS or sha(ledger) != frozen["controller_ledger_sha256"]:
+            raise ValueError("unexpected replay or original ledger mutation")
+        imported = service.S.loaded_sources()
+        if any(profile["sealing_native_files"].get(path) != row["sha256"] for path, row in imported.items()):
+            raise ValueError("unfrozen native import")
+        for path, digest in frozen["source_pins"].items():
+            if sha(path) != digest:
+                raise ValueError("source changed during read")
+        print(json.dumps({"schema": "ns-native-repository-archive-read/v1", "accepted": True,
+                          "events": chain, "pointer": observed.to_dict(), "imports": imported,
+                          "restored_source_path": str(restored), "restored_inventory": restored_inventory,
+                          "event_digests_hex": [hashlib.sha256(canonical(row)).hexdigest() for row in chain],
+                          "reader_elapsed_seconds": time.perf_counter() - started, "pid": os.getpid(),
+                          "fresh_scorer_calls": 0, "provider_calls": 0,
+                          "mode": "native archive integrity and original local evidence; no fresh execution theorem"}, sort_keys=True))
+    finally:
+        sealer.close()
+
+
+if __name__ == "__main__":
+    main()

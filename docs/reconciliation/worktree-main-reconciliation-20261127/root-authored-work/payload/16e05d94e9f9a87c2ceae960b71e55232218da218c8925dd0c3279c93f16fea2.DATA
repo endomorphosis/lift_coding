@@ -1,0 +1,99 @@
+"""Acquire a pinned public dataset and decode only approved recruitment fields.
+
+Reference/test columns stay in opaque curator custody; no such values are
+decoded, logged, selected on, or emitted to the public candidate registry.
+Metadata discovery is not scorer qualification or confirmatory recruitment.
+"""
+import hashlib
+import json
+from pathlib import Path
+import shutil
+import time
+import urllib.request
+
+import pyarrow.parquet as pq
+
+ROOT = Path(__file__).resolve().parent
+DATASET = 'SWE-bench/SWE-bench_Verified'
+REVISION = '78f471bf655a3137b2e8a75af1501690ec009ec3'
+FILE = 'data/test-00000-of-00001.parquet'
+COLUMNS = ('repo', 'instance_id', 'base_commit', 'created_at',
+           'environment_setup_commit', 'version', 'image', 'eval_type', 'log_parser')
+PROTECTED = ('patch', 'test_patch', 'eval_script', 'FAIL_TO_PASS', 'PASS_TO_PASS')
+MAX_BYTES = 12 * 1024 * 1024
+
+
+def sha(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def dump(path, value):
+    path.write_text(json.dumps(value, indent=2, sort_keys=True) + '\n')
+
+
+def main():
+    output = ROOT / 'verified_metadata_v1'
+    output.mkdir(parents=True)
+    custody = output / 'curator_custody'
+    custody.mkdir(mode=0o700)
+    url = f'https://huggingface.co/datasets/{DATASET}/resolve/{REVISION}/{FILE}'
+    freeze = {'dataset': DATASET, 'revision': REVISION, 'url': url,
+              'projected_columns': list(COLUMNS), 'protected_columns_not_decoded': list(PROTECTED),
+              'runner_sha256':sha(Path(__file__).read_bytes()),
+              'frozen_at_ns':time.time_ns(),
+              'selection': 'All rows; no selection on issue content, reference patches, or outcomes.'}
+    dump(output/'freeze.json', freeze)
+    shutil.copyfile(__file__, output/'project_metadata.py')
+    req=urllib.request.Request(url,headers={'User-Agent':'neurosymbolic-evaluation-metadata/1'})
+    started=time.perf_counter()
+    with urllib.request.urlopen(req,timeout=60) as response:
+        raw=response.read(MAX_BYTES+1)
+        if len(raw)>MAX_BYTES:
+            raise ValueError('Dataset exceeded frozen byte ceiling')
+        receipt={'status':response.status, 'bytes':len(raw), 'sha256':sha(raw),
+                 'elapsed_seconds':time.perf_counter()-started}
+    raw_path=custody/'dataset.parquet'
+    raw_path.write_bytes(raw)
+    raw_path.chmod(0o600)
+    dump(output/'download_receipt.json',receipt)
+    del raw
+    table=pq.read_table(raw_path,columns=list(COLUMNS))
+    if table.column_names != list(COLUMNS):
+        raise ValueError('Projection included unexpected columns')
+    rows=table.to_pylist()
+    if len({row['instance_id'] for row in rows})!=len(rows):
+        raise ValueError('Duplicate task identifiers')
+    historical=json.loads((ROOT.parent/'next_stage_candidate_registry.json').read_text())
+    exposed={r['family_id'].removeprefix('upstream:').casefold() for r in historical['historical_candidates']}
+    groups={}
+    for row in rows:
+        groups.setdefault(row['repo'],[]).append(row)
+    families=[]
+    for repo, members in sorted(groups.items()):
+        ordered=sorted(members,key=lambda x:(x['created_at'],x['instance_id']))
+        families.append({'repo':repo, 'task_count':len(members),
+                         'exact_original_family_overlap':repo.casefold() in exposed,
+                         'earliest_pr_date':ordered[0]['created_at'],
+                         'latest_pr_date':ordered[-1]['created_at'],
+                         'distinct_base_commits':len({r['base_commit'] for r in members}),
+                         'independence_from_other_papers':'not_yet_audited',
+                         'natural_trajectory_ancestry_verified':False,
+                         'reference_and_broken_scoring_qualified':False,
+                         'confirmatory_enrolled':False})
+    dump(output/'public_metadata.json', sorted(rows,key=lambda r:(r['repo'],r['created_at'],r['instance_id'])))
+    summary={'schema':'ns-recruitment-public-metadata/v1','dataset':DATASET,'revision':REVISION,
+             'candidate_tasks':len(rows),'candidate_families':len(families),'families':families,
+             'exact_original_overlap_families':sum(x['exact_original_family_overlap'] for x in families),
+             'confirmatory_enrolled_families':0,'qualified_natural_trajectories':0,
+             'protected_values_decoded_or_emitted':False,
+             'raw_dataset_contains_protected_columns':True,
+             'model_training_contamination_absence_established':False,
+             'model_calls':0,'scorer_calls':0,
+             'public_metadata_sha256':sha((output/'public_metadata.json').read_bytes()),
+             'scope':'External candidate discovery only; source/environment/scorer custody, portfolio overlap, temporal ancestry and prospective selection remain necessary.'}
+    dump(output/'summary.json',summary)
+    print(json.dumps({k:v for k,v in summary.items() if k!='families'},sort_keys=True))
+
+
+if __name__=='__main__':
+    main()

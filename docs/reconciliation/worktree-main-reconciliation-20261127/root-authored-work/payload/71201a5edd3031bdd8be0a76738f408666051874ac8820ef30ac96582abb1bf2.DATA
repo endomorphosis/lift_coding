@@ -1,0 +1,308 @@
+"""Revision-bound, advisory experiment cache using the two native proof keys.
+
+This is not execution admission. An artifact is retained by bytes, not trusted
+because it carries a proof label. Current source is recaptured at every lookup;
+the complete explicitly supplied Python scope is bound conservatively, including
+unresolved dynamic sites. Native scope activity means non-stale, not proved.
+"""
+from __future__ import annotations
+
+import hashlib
+from functools import wraps
+import json
+import os
+from pathlib import Path, PurePosixPath
+import stat
+
+from . import codebase_ir_metadata as storage
+from .terminal_codebase_proof_index import build_terminal_codebase_proof_key_relationship
+from .terminal_revision_metadata import build_revision_metadata
+
+SCHEMA = "terminal-revision-candidate-cache@1"
+CAPTURE_SCHEMA = "terminal-revision-source-capture@1"
+AUTHORITY = {"proof_authority": False, "execution_authority": False,
+    "completion_authority": False, "source_semantics_verified": False,
+    "behavioral_satisfaction": False, "production_activated": False}
+MAX_FILES = 32
+MAX_SOURCE_BYTES = 1_000_000
+MAX_TOTAL_SOURCE_BYTES = 4_000_000
+MAX_ARTIFACT_BYTES = 4_000_000
+
+
+def _without_metadata(function):
+    @wraps(function)
+    def wrapped(*args, **kwargs):
+        from ipfs_accelerate_py.agent_supervisor.runtime.supervisor_meta_index import public_replay_without_metadata
+        with public_replay_without_metadata():
+            return function(*args, **kwargs)
+    return wrapped
+
+
+def _wire(value):
+    return storage._json(value)
+
+
+def identity(value):
+    return "sha256:" + hashlib.sha256(_wire(value)).hexdigest()
+
+
+def _paths(paths):
+    if type(paths) is not list or not 1 <= len(paths) <= MAX_FILES:
+        raise ValueError("bounded explicit source path list required")
+    for name in paths:
+        if (type(name) is not str or not name or "\\" in name
+                or any(ord(char) < 32 for char in name)
+                or PurePosixPath(name).is_absolute()
+                or str(PurePosixPath(name)) != name
+                or any(part in {".", ".."} for part in PurePosixPath(name).parts)
+                or not name.endswith(".py")):
+            raise ValueError("canonical relative Python path required")
+    if len(set(paths)) != len(paths):
+        raise ValueError("duplicate source path refused")
+    return sorted(paths)
+
+
+def _capture(root, paths, repository_id):
+    from ipfs_accelerate_py.agent_supervisor.runtime.code_source_inspection import _PublicCapture
+    from ipfs_accelerate_py.agent_supervisor.runtime.supervisor_meta_index import public_replay_without_metadata
+
+    paths = _paths(paths)
+    if type(repository_id) is not str or not repository_id.strip() or len(repository_id.encode()) > 1024:
+        raise ValueError("bounded explicit repository identity required")
+    try:
+        capture = _PublicCapture(root)
+        sources = {name: capture.read(name, MAX_SOURCE_BYTES) for name in paths}
+    except OSError as exc:
+        raise ValueError("public source cannot be captured") from exc
+    if sum(map(len, sources.values())) > MAX_TOTAL_SOURCE_BYTES:
+        raise ValueError("complete source scope byte bound exceeded")
+    with public_replay_without_metadata():
+        metadata = build_revision_metadata(sources=sources, repository_id=repository_id)
+    snapshot = {"schema": CAPTURE_SCHEMA, "root": str(capture.root), "scope": paths,
+        "repository_id": repository_id, "metadata": metadata,
+        "revision_id": metadata["source_snapshot"]["revision_id"], **AUTHORITY}
+    _wire(snapshot)
+    capture.verify_originals()
+    return snapshot, capture
+
+
+@_without_metadata
+def capture_revision(*, root: Path, paths: list[str], repository_id: str) -> dict:
+    """Read exact original public files without importing or executing them."""
+    return _capture(root, paths, repository_id)[0]
+
+
+def _current(snapshot):
+    required = {"schema", "root", "scope", "repository_id", "metadata", "revision_id", *AUTHORITY}
+    if (type(snapshot) is not dict or set(snapshot) != required
+            or snapshot.get("schema") != CAPTURE_SCHEMA
+            or any(snapshot[key] is not False for key in AUTHORITY)):
+        raise ValueError("native current source capture required")
+    current, guard = _capture(Path(snapshot["root"]), snapshot["scope"], snapshot["repository_id"])
+    if _wire(snapshot) != _wire(current):
+        raise ValueError("source capture is stale or differs from native reconstruction")
+    return current, guard
+
+
+def _key(snapshot, dimensions, artifact=None, *, adapter_pin):
+    # Keep every caller dimension. The source dimension additionally binds all
+    # native metadata/producer hashes, graph edges and explicit unsupported rows.
+    dimensions = json.loads(_wire(dimensions))
+    if set(dimensions) != {"source", "expression", "formalization", "slice", "obligation",
+            "assumptions", "bounds", "translation", "provider", "environment", "policy",
+            "schema", "checker", "network_policy", "evidence_kind", "authority_ceiling",
+            "kernel", "theorem_registry"}:
+        raise ValueError("closed complete native proof dimensions required")
+    dimensions["source"] = {"declared": dimensions["source"],
+        "capture_schema": CAPTURE_SCHEMA, "repository_id": snapshot["repository_id"],
+        "scope": snapshot["scope"], "snapshot": snapshot["metadata"]["source_snapshot"],
+        "dependency_edges": snapshot["metadata"]["dependency_edges"],
+        "cache_adapter_sha256": adapter_pin["sha256"]}
+    if artifact is not None:
+        dimensions["formalization"] = {"declared": dimensions["formalization"],
+            "artifact": {key: artifact[key] for key in ("sha256", "bytes")}}
+    return build_terminal_codebase_proof_key_relationship(dimensions=dimensions)
+
+
+@_without_metadata
+def build_revision_key(*, snapshot: dict, dimensions: dict) -> dict:
+    adapter_pin, _, adapter_guard = _file(Path(__file__), protected_parent=False)
+    current, guard = _current(snapshot)
+    result = _key(current, dimensions, adapter_pin=adapter_pin)
+    guard.verify_originals()
+    adapter_guard()
+    return result
+
+
+def _file(path, maximum=MAX_ARTIFACT_BYTES, *, protected_parent=True):
+    """Bound a local artifact and retain its inode/stat witness for final check."""
+    path = Path(path).absolute()
+    if path.resolve(strict=True) != path:
+        raise ValueError("canonical local artifact required")
+    parent = path.parent.lstat()
+    parent_fields = ("st_dev", "st_ino", "st_mode", "st_uid", "st_gid")
+    parent_witness = tuple(getattr(parent, field) for field in parent_fields)
+    if (not stat.S_ISDIR(parent.st_mode) or parent.st_uid != os.geteuid()
+            or protected_parent and stat.S_IMODE(parent.st_mode) & 0o022):
+        raise ValueError("protected owner artifact directory required")
+    fields = ("st_dev", "st_ino", "st_mode", "st_uid", "st_gid", "st_nlink",
+        "st_size", "st_mtime_ns", "st_ctime_ns")
+    def witness(info):
+        return tuple(getattr(info, field) for field in fields)
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
+    try:
+        before = os.fstat(fd)
+        if (not stat.S_ISREG(before.st_mode) or before.st_nlink != 1
+                or stat.S_IMODE(before.st_mode) & 0o022 or before.st_uid != os.geteuid()
+                or not 0 < before.st_size <= maximum):
+            raise ValueError("bounded protected single-link owner artifact required")
+        with os.fdopen(fd, "rb", closefd=False) as stream:
+            raw = stream.read(maximum + 1)
+        if (len(raw) > maximum or witness(before) != witness(os.fstat(fd))
+                or witness(before) != witness(path.lstat())):
+            raise ValueError("artifact changed during capture")
+    finally:
+        os.close(fd)
+    pin = {"path": str(path), "sha256": hashlib.sha256(raw).hexdigest(), "bytes": len(raw)}
+    def verify():
+        if tuple(getattr(path.parent.lstat(), field) for field in parent_fields) != parent_witness:
+            raise ValueError("artifact parent custody changed")
+        if path.resolve(strict=True) != path or witness(path.lstat()) != witness(before):
+            raise ValueError("artifact custody changed")
+        fresh_pin, _, _ = _file(path, maximum, protected_parent=protected_parent)
+        if fresh_pin != pin or witness(path.lstat()) != witness(before):
+            raise ValueError("artifact bytes or custody changed")
+    return pin, raw, verify
+
+
+def _report(manifest, digest):
+    return {"schema": SCHEMA, "output": manifest["output"], "manifest_sha256": digest,
+        "relationship_id": manifest["relationship"]["relationship_id"],
+        "artifact": manifest["artifact"], "metadata": manifest["metadata"], **AUTHORITY}
+
+
+@_without_metadata
+def persist_revision_candidate(*, output: Path, snapshot: dict, dimensions: dict, artifact: Path) -> dict:
+    """Create an isolated immutable namespace; externally pin the returned report.
+
+    Artifact producer/checker trust is deliberately outside this cache. A hit
+    only preserves its identity and source/dependency bindings for later review.
+    """
+    adapter_pin, _, adapter_guard = _file(Path(__file__), protected_parent=False)
+    current, guard = _current(snapshot)
+    output = Path(output).absolute()
+    if output.exists() or output.parent.resolve(strict=True) != output.parent:
+        raise ValueError("fresh canonical output namespace required")
+    parent = output.parent.lstat()
+    if (not stat.S_ISDIR(parent.st_mode) or parent.st_uid != os.geteuid()
+            or stat.S_IMODE(parent.st_mode) & 0o022):
+        raise ValueError("protected owner output parent required")
+    pin, raw, artifact_guard = _file(artifact)
+    relationship = _key(current, dimensions, pin, adapter_pin=adapter_pin)
+    output.mkdir(mode=0o700)
+    output_identity = tuple(getattr(output.lstat(), key) for key in ("st_dev", "st_ino", "st_mode", "st_uid", "st_gid"))
+    with (output / "artifact.bin").open("xb") as stream:
+        stream.write(raw)
+    (output / "artifact.bin").chmod(0o600)
+    report = storage.hydrate_codebase_ir_metadata(
+        records=current["metadata"]["records"], output=output / "metadata",
+        source_snapshot=current["metadata"]["source_snapshot"])
+    manifest = {"schema": SCHEMA, "output": str(output), "snapshot": current,
+        "relationship": relationship, "artifact": pin, "metadata": report, **AUTHORITY}
+    guard.verify_originals()
+    artifact_guard()
+    adapter_guard()
+    wire = _wire(manifest)
+    with (output / "manifest.json").open("xb") as stream:
+        stream.write(wire)
+    (output / "manifest.json").chmod(0o600)
+    if tuple(getattr(output.lstat(), key) for key in ("st_dev", "st_ino", "st_mode", "st_uid", "st_gid")) != output_identity:
+        raise ValueError("output namespace custody changed")
+    guard.verify_originals()
+    artifact_guard()
+    adapter_guard()
+    return _report(manifest, hashlib.sha256(wire).hexdigest())
+
+
+@_without_metadata
+def lookup_revision_candidate(*, output: Path, expected: dict, root: Path,
+        paths: list[str], repository_id: str, dimensions: dict) -> dict:
+    """Rebuild the current native source view and return an advisory candidate."""
+    adapter_pin, _, adapter_guard = _file(Path(__file__), protected_parent=False)
+    output = Path(output).absolute()
+    pin, raw, manifest_guard = _file(output / "manifest.json", storage.LIMITS["manifest_bytes"])
+    manifest = storage._parse(raw)
+    if (manifest.get("schema") != SCHEMA or manifest.get("output") != str(output)
+            or any(manifest.get(key) is not False for key in AUTHORITY)
+            or type(expected) is not dict or _wire(_report(manifest, pin["sha256"])) != _wire(expected)):
+        raise ValueError("externally pinned cache report differs")
+    current, source_guard = _capture(root, paths, repository_id)
+    artifact_pin, _, artifact_guard = _file(output / "artifact.bin")
+    if any(artifact_pin[key] != manifest["artifact"][key] for key in ("sha256", "bytes")):
+        raise ValueError("retained artifact differs from pinned evidence")
+    storage.validate_codebase_ir_metadata(output=output / "metadata", expected=manifest["metadata"])
+    relationship = _key(current, dimensions, artifact_pin, adapter_pin=adapter_pin)
+    # Recompute the saved native relationship too: SQL/key labels cannot pass
+    # validation merely by claiming to be active or checked.
+    saved_dimensions = json.loads(_wire(manifest["relationship"]["dimensions"]))
+    replayed = build_terminal_codebase_proof_key_relationship(dimensions=saved_dimensions)
+    if replayed != manifest["relationship"]:
+        raise ValueError("saved native proof-key relationship differs")
+    hit = relationship == manifest["relationship"]
+    result = {"schema": "terminal-revision-candidate-lookup@1", "status": "hit" if hit else "miss",
+        "reason": "exact_current_inputs" if hit else "source_changed"
+            if current["revision_id"] != manifest["snapshot"]["revision_id"] else "key_changed",
+        "current_revision_id": current["revision_id"], "relationship": relationship,
+        "retained_artifact_sha256": artifact_pin["sha256"],
+        "unsupported_count": len(current["metadata"]["records"].get("unsupported", [])),
+        "scope": "complete_explicit_source_scope_only", "dependency_semantics_proved": False,
+        "current_source_rechecked": True, **AUTHORITY}
+    manifest_guard()
+    artifact_guard()
+    source_guard.verify_originals()
+    adapter_guard()
+    return result
+
+
+@_without_metadata
+def build_revision_scope_index(*, snapshot: dict, dimensions: dict):
+    """Project the syntactic graph into native invalidation, with no proof receipt.
+
+    Cyclic module graphs reject in the native closed-DAG builder. Unknown edges
+    remain explicit in the metadata; the root claim conservatively uses every
+    supplied file, so no whole-program closure or dynamic dispatch is asserted.
+    """
+    from ipfs_accelerate_py.agent_supervisor.proof.proof_scope_index import build_cross_domain_proof_scope_index
+    from ipfs_accelerate_py.agent_supervisor.runtime.supervisor_meta_index import public_replay_without_metadata
+    adapter_pin, _, adapter_guard = _file(Path(__file__), protected_parent=False)
+    current, guard = _current(snapshot)
+    relation = _key(current, dimensions, adapter_pin=adapter_pin)
+    root_id = "repository:" + current["repository_id"]
+    dependencies = {path: set() for path in current["scope"]}
+    edges = {path: [] for path in current["scope"]}
+    for edge in current["metadata"]["dependency_edges"]:
+        source, target = edge["source_path"], edge["target_path"]
+        edges[source].append({"kind": "ast_edge", "value": edge["edge_id"]})
+        if edge["resolution"] == "static_syntax" and target is not None and source != target:
+            if target not in dependencies:
+                raise ValueError("detached dependency outside explicit source scope")
+            dependencies[source].add(target)
+    contexts = [{"artifact_id": "module:" + path, "root_id": root_id,
+        "scope_keys": [{"kind": "file", "value": path}, *edges[path]],
+        "dependency_ids": ["module:" + dep for dep in sorted(dependencies[path])],
+        "payload": {"source": next(row for row in current["metadata"]["source_snapshot"]["sources"]
+            if row["path"] == path), **AUTHORITY}} for path in current["scope"]]
+    keys = [{"kind": "program_snapshot", "value": current["revision_id"]},
+        *[{"kind": kind, "value": identity(dimensions[field])} for kind, field in (
+            ("template", "translation"), ("assumption", "assumptions"),
+            ("toolchain", "environment"), ("ir_family", "schema"))]]
+    with public_replay_without_metadata():
+        result = build_cross_domain_proof_scope_index(root_id=root_id, contexts=contexts,
+            obligations=[{"artifact_id": "claim:repository", "root_id": root_id,
+                "dependency_ids": ["module:" + path for path in current["scope"]],
+                "scope_keys": keys, "payload": {"relationship_id": relation["relationship_id"], **AUTHORITY}}],
+            caches=[{"artifact_id": "cache:candidate", "root_id": root_id,
+                "dependency_ids": ["claim:repository"], "payload": AUTHORITY}])
+    guard.verify_originals()
+    adapter_guard()
+    return result

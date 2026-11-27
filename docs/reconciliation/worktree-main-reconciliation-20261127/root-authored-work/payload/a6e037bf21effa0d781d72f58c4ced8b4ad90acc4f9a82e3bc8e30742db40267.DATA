@@ -1,0 +1,154 @@
+#!/usr/bin/env python3
+"""Six-call frozen development comparison of raw and verified compact context."""
+import argparse
+import ast
+import copy
+import json
+from pathlib import Path
+import subprocess
+import sys
+import time
+import uuid
+
+sys.dont_write_bytecode = True
+HERE = Path(__file__).resolve().parent
+CONTEXT = HERE.parent
+sys.path.insert(0, str(CONTEXT.parent))
+from metered_provider import call, canonical, digest, write_new
+
+NATIVE = CONTEXT / "native_development/results_v1"
+IMAGE = "sha256:7a8b475003c4fe15a2cd4e55e5cfc2f3560bdc9333d624f24cdd6d4340fd7a17"
+ORDER = ["compact_invoice", "raw_invoice", "raw_polynomial", "compact_polynomial", "compact_units", "raw_units"]
+SYSTEM = "Return only a JSON object with one string field source containing the complete repaired target.py module. Preserve its public interface and dependency imports; only target.py may change. Use the supplied public source, obligations and any verified integer equations. This is one final response with no tools, filesystem access, retries or later expansion round. Any local source-expansion metadata describes evaluator custody only. Imports are restricted to the named dependency module; private names/attributes, decorators, classes, global/nonlocal and asynchronous syntax are excluded."
+CHILD = r'''
+import ast,json,sys,types
+value=json.load(sys.stdin)
+source=value['source']
+tree=ast.parse(source)
+for node in ast.walk(tree):
+    if isinstance(node,(ast.Import,ast.ClassDef,ast.Global,ast.Nonlocal,ast.AsyncFunctionDef,ast.With,ast.AsyncWith)):
+        raise ValueError('candidate outside declared target profile')
+    if isinstance(node,ast.ImportFrom) and (node.module!='dependency' or node.level):
+        raise ValueError('import outside dependency authority')
+    if isinstance(node,ast.Name) and node.id.startswith('_'):
+        raise ValueError('private identifier')
+    if isinstance(node,ast.Attribute) and node.attr.startswith('_'):
+        raise ValueError('private attribute')
+    if isinstance(node,ast.FunctionDef) and node.decorator_list:
+        raise ValueError('decorator')
+module=types.ModuleType('dependency')
+exec(compile(value['dependency'],'dependency.py','exec'),module.__dict__)
+def import_dependency(name,globals=None,locals=None,fromlist=(),level=0):
+    if name!='dependency' or level: raise ValueError('unpermitted import')
+    return module
+builtins={'__import__':import_dependency,'int':int,'abs':abs,'min':min,'max':max,'sum':sum,'range':range,'len':len,'enumerate':enumerate}
+namespace={'__builtins__':builtins}
+exec(compile(tree,'target.py','exec'),namespace)
+validation={'total':namespace['total']}
+exec(compile(value['validation'],'independent_oracle.py','exec'),validation)
+print(json.dumps({'passed':True}))
+'''
+ORACLES = {
+    "invoice": "for quantity in (-5,-1,0,1,3,17):\n    for price in (-5,-1,0,1,3,17):\n        for base in (-5,-1,0,1,3,17):\n            assert total(quantity,price,base) == quantity*(price+2)+base\n",
+    "polynomial": "for left in (-5,-1,0,1,3,17):\n    for right in (-5,-1,0,1,3,17):\n        assert total(left,right) == 2*left*(left+right)\n",
+    "units": "for minutes in (-5,-1,0,1,3,17):\n    for blocks in (-5,-1,0,1,3,17):\n        for spare in (-5,-1,0,1,3,17):\n            assert total(minutes,blocks,spare) == 60*minutes+11*blocks+spare\n",
+}
+
+
+def score(source, dependency, validation):
+    name = "ns-context-oracle-" + uuid.uuid4().hex
+    command = ["docker", "run", "--name", name, "--rm", "-i", "--network", "none", "--read-only", "--cap-drop", "ALL", "--security-opt", "no-new-privileges", "--pids-limit", "32", "--memory", "128m", "--cpus", "1", "--user", "65534:65534", IMAGE, "python", "-I", "-c", CHILD]
+    started = time.monotonic()
+    try:
+        process = subprocess.run(command, input=canonical({"source": source, "dependency": dependency, "validation": validation}), capture_output=True, timeout=15)
+        result = {"passed": process.returncode == 0, "returncode": process.returncode, "stdout": process.stdout.decode(errors="replace")[-2000:], "stderr": process.stderr.decode(errors="replace")[-2000:]}
+    except subprocess.TimeoutExpired:
+        result = {"passed": False, "returncode": None, "reason": "oracle_timeout"}
+    finally:
+        subprocess.run(["docker", "rm", "-f", name], capture_output=True, timeout=10)
+    return {**result, "candidate_sha256": digest(source.encode()), "dependency_sha256": digest(dependency.encode()), "oracle_sha256": digest(validation.encode()), "elapsed_seconds": time.monotonic() - started}
+
+
+def input_files():
+    paths = [Path(__file__), HERE / "provider_profile.json", CONTEXT.parent / "metered_provider.py", CONTEXT / "native_development/run_native_context.py", NATIVE / "summary.json", CONTEXT / "native_development/audit_v1.json"]
+    for family in ORACLES:
+        paths.extend([NATIVE / family / "requests/A_raw.json", NATIVE / family / "requests/D_verified_equations.json", NATIVE / family / "sources/unchanged.json", NATIVE / family / "evidence_manifest.json"])
+    return {str(p.resolve()): digest(p.read_bytes()) for p in paths}
+
+
+def messages(family, arm):
+    path = NATIVE / family / "requests" / ("A_raw.json" if arm == "raw" else "D_verified_equations.json")
+    public = json.loads(path.read_text())
+    public["dependency_identity"]["expansion"] = "Evaluator custody only; this one-response model profile has no expansion tools."
+    return [{"role": "system", "content": SYSTEM}, {"role": "user", "content": canonical(public).decode()}]
+
+
+def freeze():
+    assert json.loads((CONTEXT / "native_development/audit_v1.json").read_text())["all_checks_passed"]
+    (HERE / "frozen_requests").mkdir(exist_ok=True)
+    checks = {}
+    request_hashes = {}
+    for family in ORACLES:
+        source = json.loads((NATIVE / family / "sources/unchanged.json").read_text())
+        seed = score(source["target.py"], source["dependency.py"], ORACLES[family])
+        valid_control = source["target.py"].replace(" - ", " + ", 1)
+        corrected = score(valid_control, source["dependency.py"], ORACLES[family])
+        assert not seed["passed"] and corrected["passed"], (family, "cold oracle preflight")
+        checks[family] = {"seed": seed, "known_correct_control": corrected}
+        for arm in ("raw", "compact"):
+            call_id = arm + "_" + family
+            public_messages = messages(family, arm)
+            request_hashes[call_id] = digest(canonical(public_messages))
+            write_new(HERE / "frozen_requests" / (call_id + ".json"), public_messages)
+    binding = {"schema": "ns-live-context-development-freeze/v1", "files": input_files(), "messages_sha256": request_hashes, "order": ORDER, "image": IMAGE, "oracle_sha256": {family: digest(code.encode()) for family, code in ORACLES.items()}, "preflight": checks, "max_provider_calls": 6, "retries": 0, "auxiliary_model_calls": 0, "model_setup_tokens": 0, "quality": "Same isolated no-network no-mount fresh Docker cold scorer per case and arm; independent held-back grid validation retained outside prompts", "scope": "Three authored trivial repair repositories; development comparison of raw context versus new bounded native integer-equation projection. No representative-system or confirmatory claim.", "source_expansion": "Offline endpoint qualified; this fixed single-response pilot makes no expansion calls and tests no dynamic expansion policy.", "expenditure": "All scheduled failures retained; provider input/output/total plus cached and reasoning fields; no settlement inference; preparation compute reported separately", "created_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
+    write_new(HERE / "freeze.json", binding)
+    print(json.dumps({"freeze": str(HERE / "freeze.json"), "preflight_passed": True, "provider_calls": 0}), flush=True)
+
+
+def run():
+    frozen = json.loads((HERE / "freeze.json").read_text())
+    assert frozen["files"] == input_files(), "frozen source/input drift"
+    output = HERE / "results"
+    output.mkdir(exist_ok=True)
+    for call_id in ORDER:
+        arm, family = call_id.split("_", 1)
+        terminal = output / (call_id + ".json")
+        if terminal.exists():
+            print(json.dumps({"cell": call_id, "state": "already_terminal"}), flush=True)
+            continue
+        public_messages = json.loads((HERE / "frozen_requests" / (call_id + ".json")).read_text())
+        assert digest(canonical(public_messages)) == frozen["messages_sha256"][call_id]
+        provider_result = output / "provider" / call_id / "result.json"
+        if provider_result.exists():
+            transport = json.loads(provider_result.read_text())
+        else:
+            transport = call(HERE / "provider_profile.json", output / "provider", call_id, public_messages)
+        candidate, parse_error = None, None
+        try:
+            proposal = json.loads(transport["text"])
+            assert isinstance(proposal, dict) and set(proposal) == {"source"} and isinstance(proposal["source"], str) and len(proposal["source"].encode()) <= 16384
+            candidate = proposal["source"]
+        except (TypeError, ValueError, AssertionError): parse_error = "missing_or_invalid_source_object"
+        source = json.loads((NATIVE / family / "sources/unchanged.json").read_text())
+        checked = score(candidate, source["dependency.py"], ORACLES[family]) if candidate is not None else None
+        record = {"schema": "ns-live-context-development-cell/v1", "call_id": call_id, "arm": arm, "family": family, "provider_status": transport["status"], "provider_calls": transport["attempted_posts"], "normalized_usage": transport["normalized_usage"], "served_model": transport.get("served_model"), "served_revision": transport.get("served_revision"), "candidate_source": candidate, "parse_error": parse_error, "cold_scorer": checked, "success": bool(checked and checked["passed"]), "provider_result_sha256": digest(provider_result.read_bytes()), "messages_sha256": digest(canonical(public_messages))}
+        write_new(terminal, record)
+        print(json.dumps({"cell": call_id, "status": record["provider_status"], "success": record["success"], "usage": record["normalized_usage"]}), flush=True)
+    rows = [json.loads((output / (name + ".json")).read_text()) for name in ORDER if (output / (name + ".json")).exists()]
+    summary = {"schema": "ns-live-context-development-summary/v1", "freeze_sha256": digest((HERE / "freeze.json").read_bytes()), "scheduled_cells": 6, "observed_cells": len(rows), "complete": len(rows) == 6, "scope": "Constructed three-case development: raw versus bounded native integer-equation projection; no dynamic expansion; no general token-savings claim", "arms": {}}
+    for arm in ("raw", "compact"):
+        group = [row for row in rows if row["arm"] == arm]
+        fields = ("input_tokens", "output_tokens", "total_tokens", "cached_input_tokens", "reasoning_tokens", "api_reported_cost_ticks")
+        totals = {key: sum(r["normalized_usage"][key] for r in group) if all(r["normalized_usage"][key] is not None for r in group) else None for key in fields}
+        summary["arms"][arm] = {"cells": len(group), "successes": sum(r["success"] for r in group), "provider_calls": sum(r["provider_calls"] for r in group), "usage_totals": totals, "tokens_complete": totals["total_tokens"] is not None}
+    baseline, compact = summary["arms"]["raw"]["usage_totals"], summary["arms"]["compact"]["usage_totals"]
+    summary["reduction_vs_raw"] = {key: 1 - compact[key] / baseline[key] if summary["complete"] and baseline[key] and compact[key] is not None else None for key in ("input_tokens", "output_tokens", "total_tokens")}
+    write_new(HERE / "summary.json", summary)
+    print(json.dumps(summary), flush=True)
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--freeze", action="store_true")
+    options = parser.parse_args()
+    freeze() if options.freeze else run()

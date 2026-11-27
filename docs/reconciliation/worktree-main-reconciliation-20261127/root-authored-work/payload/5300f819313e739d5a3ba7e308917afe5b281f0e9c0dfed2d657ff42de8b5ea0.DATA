@@ -1,0 +1,84 @@
+"""Audit retained endpoint qualification without emitting oracle contents."""
+import hashlib
+import json
+from pathlib import Path
+
+H = Path(__file__).resolve().parent
+R = H.parent
+checks = []
+def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
+def check(name, condition):
+    checks.append({'check': name, 'passed': bool(condition)})
+    if not condition:
+        raise AssertionError(name)
+def dump(path, data): path.write_text(json.dumps(data, sort_keys=True, indent=2) + '\n')
+
+registry = json.loads((H / 'registry_v3.json').read_text())
+summary = json.loads((H / 'qualification-v3/summary.json').read_text())
+freeze = json.loads((H / 'qualification-v3/freeze.json').read_text())
+matrix = json.loads((H / 'qualification_matrix_v3.json').read_text())
+check('registry bound by qualification freeze', freeze['service_profile_sha256'] == sha(H / 'registry_v3.json'))
+check('matrix bound by qualification freeze', freeze['matrix_sha256'] == sha(H / 'qualification_matrix_v3.json'))
+check('qualification source bound', freeze['qualifier_sha256'] == sha(H / 'qualify_v3.py'))
+check('qualification source archived exactly', sha(H / 'qualify_v3.py') == sha(H / 'qualification-v3/qualifier_snapshot.py'))
+for name, digest in registry['service_sources'].items():
+    check('service source: ' + name, sha(H / name) == digest)
+check('all native and negative controls pass', summary['qualified'] and len(summary['native_controls']) == 4 and len(summary['negative_controls']) == 10)
+check('no automatic retries', registry['network_readiness_policy']['retries'] == 0)
+check('failed v2 summary retained', matrix['prior_failure']['summary_sha256'] == sha(H / 'qualification-v2/summary.json'))
+control_seconds = 0
+socket_observations = 0
+for index, control in enumerate(summary['native_controls']):
+    receipt_path = Path(control['receipt_path'])
+    receipt = json.loads(receipt_path.read_text())
+    custody = receipt_path.parent / 'curator_custody'
+    cfg = registry['profiles'][control['instance_id']]
+    check('control outcome ' + str(index), receipt['status'] == 'completed' and receipt['passed'] == control['expected_passed'])
+    check('complete designated tests ' + str(index), receipt['designated_completed'] == receipt['designated_total'])
+    check('exact source binding ' + str(index), receipt['candidate_source_tree_sha256'] == receipt['expected_candidate_source_tree_sha256'])
+    check('canonical objective binding ' + str(index), receipt['objective_sha256'] == cfg['objective_sha256'])
+    check('immutable image ' + str(index), receipt['image_id'] == cfg['image_id'])
+    check('source admission ' + str(index), receipt['resulting_tree_admission']['accepted'] and receipt['resulting_tree_admission']['source_matches_expected'])
+    check('environment unchanged ' + str(index), receipt['environment_versions_unchanged'])
+    check('raw log digest ' + str(index), receipt['raw_log_sha256'] == sha(custody / 'evaluation.raw'))
+    check('decoded log digest ' + str(index), receipt['decoded_log_sha256'] == sha(custody / 'evaluation-native.log'))
+    check('native execution completed ' + str(index), not receipt['timed_out'] and not receipt['oom_killed'])
+    check('no provider calls ' + str(index), receipt['provider_calls'] == 0)
+    check('no adversarial execution claim ' + str(index), receipt['adversarial_candidate_oracle_integrity_qualified'] is False)
+    state = json.loads((custody / 'candidate-source-state.json').read_text())
+    encoded = json.dumps(state['entries'], sort_keys=True, separators=(',', ':')).encode()
+    check('complete source inventory digest ' + str(index), hashlib.sha256(encoded).hexdigest() == receipt['candidate_source_tree_sha256'])
+    check('complete source count ' + str(index), len(state['entries']) == receipt['candidate_source_file_count'])
+    control_seconds += receipt['elapsed_seconds']
+    for phase, observation in receipt['network_readiness'].items():
+        check('network readiness ' + str(index) + ' ' + phase, observation['ready'] and len(observation['observations']) == 2 and all(x['outcome'] == 'timeout' for x in observation['observations']))
+        socket_observations += len(observation['observations'])
+    for name, digest in cfg['protected_input_sha256'].items():
+        check('protected input unchanged ' + str(index) + ' ' + name, sha(R / cfg['custody'] / name) == digest)
+for item in summary['negative_controls']:
+    check('negative control: ' + item['case'], item['passed'])
+boundary = summary['proposal_mount_boundary']
+check('actual proposal mount boundary', boundary['process_exit_code'] == 0 and boundary['public_source_present'] and boundary['public_objective_present'] and not boundary['oracle_mount_present'] and not boundary['host_workspace_present'])
+check('actual protected source mutation rejected', summary['resulting_tree_mutation_control']['accepted'] is False and summary['resulting_tree_mutation_control']['changed_path_count'] == 1)
+
+paths = set()
+for name in ['service_v3.py', 'inventory_v3.py', 'network_readiness_v1.py', 'qualify_v3.py',
+             'freeze_v3.py', 'registry_v3.json', 'qualification_matrix_v3.json',
+             'endpoint_v2_network_diagnosis.json', 'audit_v3.py']:
+    paths.add(H / name)
+paths.update(p for p in (H / 'qualification-v3').rglob('*') if p.is_file()
+             and p.name not in ('artifact_manifest.json', 'audit.json'))
+for directory in (H / 'results-v3').glob('qualification-*'):
+    paths.update(p for p in directory.rglob('*') if p.is_file())
+files = {str(path.relative_to(H)): sha(path) for path in sorted(paths)}
+dump(H / 'qualification-v3/artifact_manifest.json', {'schema': 'ns-endpoint-qualification-artifact-manifest/v1', 'files': files})
+report = {'schema': 'ns-endpoint-qualification-audit/v1', 'passed': True, 'check_count': len(checks),
+          'checks': checks, 'native_controls': 4, 'negative_controls': 10,
+          'native_control_wall_seconds_sum': control_seconds,
+          'complete_control_public_socket_observations': socket_observations,
+          'artifact_count': len(files), 'manifest_sha256': sha(H / 'qualification-v3/artifact_manifest.json'),
+          'summary_sha256': sha(H / 'qualification-v3/summary.json'),
+          'service_profile_sha256': sha(H / 'registry_v3.json'), 'provider_calls': 0,
+          'adversarial_candidate_oracle_integrity_qualified': False}
+dump(H / 'qualification-v3/audit.json', report)
+print(json.dumps({k: v for k, v in report.items() if k != 'checks'}, sort_keys=True))

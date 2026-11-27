@@ -1,0 +1,64 @@
+"""Freeze public archive-mode bases and prospective corrected OAuth predicates."""
+import copy, hashlib, importlib.util, json, os, shutil, time
+from pathlib import Path
+
+H=Path(__file__).resolve().parent
+I=H.parents[1]/'integrated_v1'
+A=Path('/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/historical_adapter/adapter.py')
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def canonical(x):return json.dumps(x,sort_keys=True,separators=(',',':')).encode()
+def digest(x):return hashlib.sha256(canonical(x)).hexdigest()
+def dump(p,x):
+ with p.open('x') as f:f.write(json.dumps(x,sort_keys=True,indent=2)+'\n')
+
+def main():
+ spec=importlib.util.spec_from_file_location('original_adapter',A);a=importlib.util.module_from_spec(spec);spec.loader.exec_module(a)
+ public=H/'public_bases_v1';public.mkdir()
+ registry=json.loads((H/'curator_custody/selected_registry_v4.json').read_text())
+ rows=[]
+ for uid,m in registry['units'].items():
+  old=Path('/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache')/uid/'tree'
+  before=a.inventory(old);expected=m['proposal_files'];assert set(before)==set(expected)
+  assert all({k:v for k,v in before[p].items() if k!='mode'}=={k:v for k,v in expected[p].items() if k!='mode'} for p in before)
+  task=public/uid;task.mkdir();target=task/'source';shutil.copytree(old,target,symlinks=True)
+  for p,item in expected.items():
+   if item['kind']=='file':os.chmod(target/p,item['mode'])
+  observed=a.inventory(target);assert observed==expected
+  dump(task/'original_adapter_inventory.json',observed)
+  rows.append({'task_id':uid,'source_root':str(target),'public_input_root':str(old),'public_input_inventory_sha256':digest(before),'original_adapter_inventory_sha256':digest(observed),'inventory_file_sha256':sha(task/'original_adapter_inventory.json'),'source_entry_count':len(observed),'mode_only_changes':sum(before[p]!=observed[p] for p in before),'all_content_and_symlinks_identical':True})
+ # This public helper contains only the original adapter's generic inventory codec.
+ text=A.read_text();start=text.index('def require(');end=text.index('\ndef archive_tree(')
+ helper='"""Exact public original-adapter inventory codec; no registry/oracle access."""\nfrom pathlib import Path,PurePosixPath\nimport hashlib,json,os,stat\nMAX_BYTES=64*1024*1024\n'+text[start:end]+'\n'
+ (public/'inventory_codec_v1.py').write_text(helper)
+ dump(public/'admission.json',{'schema':'ns-original-public-base-materialization/v1','qualified':True,'created_at_ns':time.time_ns(),'builder_sha256':sha(Path(__file__)),'inventory_codec_sha256':sha(public/'inventory_codec_v1.py'),'policy':'Preserve historical archive 0644/0755 modes. Original public source bytes and symlink targets unchanged; prior 0664/0775 checkouts retained. Canonical path-keyed JSON uses sorted keys, compact separators, default ensure_ascii=True, no trailing newline.','tasks':rows,'provider_calls':0,'grader_calls':0})
+ out=H/'public_contract_v3';out.mkdir()
+ prior=I/'public_contracts_v2/objectives-v1.json';obj=json.loads(prior.read_text())
+ oauth=next(x for x in obj['tasks'] if x['task_id']=='ns-hist-03-oauthlib')
+ oauth['new_public_objective']='MetadataEndpoint must construct and return HTTP 200 metadata for actual AuthorizationEndpoint, TokenEndpoint, and combined Server instances. Derive supported response types from the supplied authorization endpoint; honor explicitly caller-supplied metadata claims, including a response_types_supported list. Preserve token-only metadata. For the provided combined Server with an abstract validator, require a nonempty list of nonempty string response types drawn from its configured public keys; do not require every configured routing key to be advertised.'
+ combined=next(x for x in oauth['public_examples'] if x['id']=='combined_server_metadata');combined.pop('expected_response_types');combined.update(response_types_predicate='nonempty_string_list_subset_of_configured_public_keys',configured_public_response_type_keys=['code','token','none'])
+ for case in oauth['public_examples']:case['preserve_explicit_metadata_claims']=True
+ oauth['authority']='Prospective author-specified development contract corrected after independent pristine-source and official specification review. Internal routing keys alone do not establish exact default discovery metadata equality for an abstract validator. Original native acceptance and prior diagnostic results remain unchanged.'
+ oauth.pop('objective_sha256');oauth['objective_sha256']=digest(oauth)
+ obj.update(schema='ns-explicit-public-development-objectives/v3',created_at_ns=time.time_ns(),supersedes_public_contract_file_sha256=sha(prior),semantic_review_sha256=sha(H/'oauth_public_semantics_v1/summary.json'),qualification_status='pending',hidden_or_reference_calls=0,scope='This file freezes public contract bytes, not scorer admission. Unchanged saved references are used only in separately retained curator controls.')
+ dump(out/'objectives.json',obj)
+ original=I/'public_contracts_v2/run-v2/frozen_runner.py';driver=original.read_text()
+ old='''                key = "response_types_supported" if "expected_response_types" in case else "grant_types_supported"
+                expected = case.get("expected_response_types", case.get("expected_grant_types"))
+                passed = status == 200 and set(observed["body"][key]) == set(expected)'''
+ new='''                if case.get("response_types_predicate") == "nonempty_string_list_subset_of_configured_public_keys":
+                    values = observed["body"].get("response_types_supported")
+                    configured = set(endpoint.response_types)
+                    assert configured == set(case["configured_public_response_type_keys"])
+                    passed = status == 200 and isinstance(values,list) and bool(values) and all(isinstance(value,str) and bool(value) for value in values) and set(values) <= configured
+                else:
+                    key = "response_types_supported" if "expected_response_types" in case else "grant_types_supported"
+                    expected = case.get("expected_response_types", case.get("expected_grant_types"))
+                    passed = status == 200 and set(observed["body"][key]) == set(expected)
+                if case.get("preserve_explicit_metadata_claims"):
+                    passed = passed and all(observed["body"].get(key) == value for key,value in claims.items())'''
+ assert driver.count(old)==1;driver=driver.replace(old,new)
+ driver=driver.replace('"hidden_or_reference_calls":0,','"worker_reads_hidden_or_reference_artifacts":False,')
+ (out/'frozen_runner.py').write_text(driver)
+ dump(out/'freeze.json',{'schema':'ns-prospective-oauth-public-predicate-correction/v1','created_at_ns':time.time_ns(),'builder_sha256':sha(Path(__file__)),'previous_objective_sha256':sha(prior),'previous_driver_sha256':sha(original),'objective_file_sha256':sha(out/'objectives.json'),'driver_sha256':sha(out/'frozen_runner.py'),'semantic_review_sha256':sha(H/'oauth_public_semantics_v1/summary.json'),'basis':'Root authorized correction based on independent public-source/spec semantic review, not a hidden predicate accommodation. Exact-key equality remains retained as an unqualified diagnostic.','oauth_objective_record_sha256':oauth['objective_sha256'],'oauth_objective_text_sha256':hashlib.sha256(oauth['new_public_objective'].encode()).hexdigest(),'new_predicate_control_budget':{'tasks':['ns-hist-03-oauthlib'],'controls':['unfixed','unchanged_saved_reference_source_projection'],'public_processes':2,'native_grader_calls':0,'automatic_retries':0,'provider_calls':0},'other_two_objective_rows_unchanged':all(x==y for x,y in zip(obj['tasks'],json.loads(prior.read_text())['tasks']) if x['task_id']!='ns-hist-03-oauthlib')})
+ print(json.dumps({'public_base_admission_sha256':sha(public/'admission.json'),'public_contract_freeze_sha256':sha(out/'freeze.json'),'objective_file_sha256':sha(out/'objectives.json'),'oauth_objective_record_sha256':oauth['objective_sha256'],'oauth_objective_text_sha256':hashlib.sha256(oauth['new_public_objective'].encode()).hexdigest()}))
+if __name__=='__main__':main()

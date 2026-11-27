@@ -1,0 +1,1320 @@
+{
+  "canonical_source_proposals": {
+    "cve": "legal_cve_proposal_v2/cve_candidates.json",
+    "legal": "legal_cve_proposal_v2/legal_candidates.json",
+    "skill": "skill_candidates_v1/paired_case_specifications.json"
+  },
+  "created_at": "2026-09-14T10:40:48.778358+00:00",
+  "file_count": 325,
+  "files": {
+    "LA-032.task.json": {
+      "bytes": 9549,
+      "sha256": "a8e8a4065c26f6c74bbff85a207af70c343ecac9ffefde6c5376489c7ed4bf91"
+    },
+    "README.md": {
+      "bytes": 7331,
+      "sha256": "364fb8ff05e9cfd77f04f558319b22e7a3b91d28d008177cb08c882b56736bf2"
+    },
+    "SOURCE_PREPARATION.md": {
+      "bytes": 8319,
+      "sha256": "5398d23662d4e680a784ed2ab65e1d9a507b945089cfe94de6d439d7fd7d2b08"
+    },
+    "build_legal_cve_proposal.py": {
+      "bytes": 27727,
+      "sha256": "5224561ae2199cd75e3b867c269518777635cd29b059944ed7e90da01b4d2834"
+    },
+    "candidate_cohort_coverage.json": {
+      "bytes": 21051,
+      "sha256": "ee2c72b52a3b4d01c272ed994c78a7b87191765c980b67cec545bd5c6ca30664"
+    },
+    "cve_screening_audit.json": {
+      "bytes": 195717,
+      "sha256": "f4cc76163c20f2486750547c5b948e0373815ceb8026c8ac75874781dbcd1588"
+    },
+    "cve_upstream_recovery_v1/recovery_summary.json": {
+      "bytes": 24677,
+      "sha256": "73c1b868c344d4271747370a0300c3339e4786b515e6aad112275957a0adec8a"
+    },
+    "cve_upstream_recovery_v1/row-0064/commit.body": {
+      "bytes": 5673,
+      "sha256": "cc0a428a82c54d15024e8bcafd44fcddd2de33c68d6f2c0c810d30b7ab5612b4"
+    },
+    "cve_upstream_recovery_v1/row-0064/commit.receipt.json": {
+      "bytes": 434,
+      "sha256": "40ed964eed8ca975bec6438d27c4fab7081a88a9c2c90a7dc94001a4bf2bcfd8"
+    },
+    "cve_upstream_recovery_v1/row-0064/commit.request.json": {
+      "bytes": 205,
+      "sha256": "721d38a7d2bd6d3f68b4a54142585f60e8a03d53063864a2559e62c9ac3ae04c"
+    },
+    "cve_upstream_recovery_v1/row-0064/fixed-0.body": {
+      "bytes": 22488,
+      "sha256": "fab3bc467698973ea6f029e03e1212f3708b7cab2293d646511c299e8351dd4d"
+    },
+    "cve_upstream_recovery_v1/row-0064/fixed-0.receipt.json": {
+      "bytes": 471,
+      "sha256": "629ada1dd3fe40982c7ff88a0ea6fc1f41e8376bb9268bdf69072f876f4d62a5"
+    },
+    "cve_upstream_recovery_v1/row-0064/fixed-0.request.json": {
+      "bytes": 223,
+      "sha256": "c4f3c7c481cceb580442464a49eeaa35c3fdfba02fe99cc25130c1d9ffb777e5"
+    },
+    "cve_upstream_recovery_v1/row-0064/license.body": {
+      "bytes": 6023,
+      "sha256": "6eddef027922c34dfb061df5ea3553a4264ae553ae695e42549fc48159bcf915"
+    },
+    "cve_upstream_recovery_v1/row-0064/license.receipt.json": {
+      "bytes": 446,
+      "sha256": "0d553359dbda89fd854d75514845b40b04e98f73e77f79dbff5c13b9baa5be70"
+    },
+    "cve_upstream_recovery_v1/row-0064/license.request.json": {
+      "bytes": 211,
+      "sha256": "3b506a612ec2e597567053a3bac4a503cecfb68a417a21cc40de1988589cd36d"
+    },
+    "cve_upstream_recovery_v1/row-0064/parent-0.body": {
+      "bytes": 22365,
+      "sha256": "bec29f27b6e15953a4d80a4da9bfcba0fc16d6e1df2f05e4c2c2402b450f2e9a"
+    },
+    "cve_upstream_recovery_v1/row-0064/parent-0.receipt.json": {
+      "bytes": 470,
+      "sha256": "11933b5a7506ac47b44a46d9b506709190fa973bfc2de25daaff27f14fe013f3"
+    },
+    "cve_upstream_recovery_v1/row-0064/parent-0.request.json": {
+      "bytes": 223,
+      "sha256": "8d455114f0ddb472607d2cd3b21dc984e6f8c5d48c1e0511e96d10e17936577b"
+    },
+    "cve_upstream_recovery_v1/row-0064/recovery.json": {
+      "bytes": 1883,
+      "sha256": "d39f1d5096644e86bf2350c08854eeed964f24b493c179c902e4773e6df9b233"
+    },
+    "cve_upstream_recovery_v1/row-0064/root-tree.body": {
+      "bytes": 5940,
+      "sha256": "6ed05e4ec06f1bd48419bcf24f2efdfb7f32810e7a7df965d0b14863db8b01cf"
+    },
+    "cve_upstream_recovery_v1/row-0064/root-tree.receipt.json": {
+      "bytes": 440,
+      "sha256": "4a669f1cad52c249eb498d02c606fceedf98efc441cbf969d4dbafd550328e69"
+    },
+    "cve_upstream_recovery_v1/row-0064/root-tree.request.json": {
+      "bytes": 208,
+      "sha256": "535aee97d4f5ed269ad52955278c67bc155e0fc186b291e8a65571f312bc2381"
+    },
+    "cve_upstream_recovery_v1/row-0072/commit.body": {
+      "bytes": 5405,
+      "sha256": "107a5980abd7a054f737b7a0bcfb0f10952d3574e70c38cc7d7325b28c48744e"
+    },
+    "cve_upstream_recovery_v1/row-0072/commit.receipt.json": {
+      "bytes": 438,
+      "sha256": "3c806d7a74018d88fb09cd44dbfdeb1b2330b286a5cb0b7623ca535911272d9d"
+    },
+    "cve_upstream_recovery_v1/row-0072/commit.request.json": {
+      "bytes": 207,
+      "sha256": "7be255f34a5bc5a40c765639571b618b472435fc9dfcea756ed1bc02b39ca0a2"
+    },
+    "cve_upstream_recovery_v1/row-0072/fixed-0.body": {
+      "bytes": 108276,
+      "sha256": "552487958c5d47b7be4f5e26ba97d3ffaa588f36c4349671bc14444dcaa53844"
+    },
+    "cve_upstream_recovery_v1/row-0072/fixed-0.receipt.json": {
+      "bytes": 469,
+      "sha256": "b13574e4936ffefbdf7ca554c8f079044e7676e4b2b01416a6383dd9aeecefe3"
+    },
+    "cve_upstream_recovery_v1/row-0072/fixed-0.request.json": {
+      "bytes": 222,
+      "sha256": "d56d25b30db81cd049bad4de10c9894b228e4b6a2fab6d7f62b8f416e2323848"
+    },
+    "cve_upstream_recovery_v1/row-0072/license.body": {
+      "bytes": 17987,
+      "sha256": "ab15fd526bd8dd18a9e77ebc139656bf4d33e97fc7238cd11bf60e2b9b8666c6"
+    },
+    "cve_upstream_recovery_v1/row-0072/license.receipt.json": {
+      "bytes": 451,
+      "sha256": "751413312fc01bde91a8313db429002550bbbf9c3ee45bed530ebe0c17129f1d"
+    },
+    "cve_upstream_recovery_v1/row-0072/license.request.json": {
+      "bytes": 213,
+      "sha256": "5129ea1cfa629c7c40b3201232e4df8b2bf39ee8475a597ab1f251ed7e1d3a5e"
+    },
+    "cve_upstream_recovery_v1/row-0072/parent-0.body": {
+      "bytes": 107779,
+      "sha256": "6bf271808f3b5183343d89db382bab07d565d9783dd81f3407b74c3f12528a19"
+    },
+    "cve_upstream_recovery_v1/row-0072/parent-0.receipt.json": {
+      "bytes": 470,
+      "sha256": "eef8a4dac5b819b70ba1cf26130dd7249c43e1c284ace624b86771f577017bb0"
+    },
+    "cve_upstream_recovery_v1/row-0072/parent-0.request.json": {
+      "bytes": 222,
+      "sha256": "c2afbe01522cc8567df4f6e24b91acbcd7a0b055df86c9f16f27201bb233da99"
+    },
+    "cve_upstream_recovery_v1/row-0072/recovery.json": {
+      "bytes": 1869,
+      "sha256": "30e6b8e8c8771be3718f45909db800b1e637fc432cf855ab90624ee0a12d4287"
+    },
+    "cve_upstream_recovery_v1/row-0072/root-tree.body": {
+      "bytes": 4379,
+      "sha256": "a5b1ed29938f491789592761c7a669edb2a8340d2a717ee1f2791cabb82f21d5"
+    },
+    "cve_upstream_recovery_v1/row-0072/root-tree.receipt.json": {
+      "bytes": 444,
+      "sha256": "023f2b2cc9fe6353db720a9a873601c5c56f5ac7792512858d127f5fc53dcde6"
+    },
+    "cve_upstream_recovery_v1/row-0072/root-tree.request.json": {
+      "bytes": 210,
+      "sha256": "031636c456eb73899aca69113d9ffef1647688c9306bdf4ee258719c5b35b4a8"
+    },
+    "cve_upstream_recovery_v1/row-0088/commit.body": {
+      "bytes": 16428,
+      "sha256": "bdbe8fef950ad5d5617a240f85a5e892a1fa5d3628d5bcceedfb0f919965c308"
+    },
+    "cve_upstream_recovery_v1/row-0088/commit.receipt.json": {
+      "bytes": 437,
+      "sha256": "c0f6c04852266f04181b1164f55b5b1350a95deea752547fd2cebab96976b59f"
+    },
+    "cve_upstream_recovery_v1/row-0088/commit.request.json": {
+      "bytes": 204,
+      "sha256": "1a498e758843657022e11f1e7c95f937aba6f17b97957140436169d38bb3e5d4"
+    },
+    "cve_upstream_recovery_v1/row-0088/fixed-0.body": {
+      "bytes": 7082,
+      "sha256": "416e69088b127decc8b4d71ca6688536a3cf666c40518b9296ff3f32b786bdd4"
+    },
+    "cve_upstream_recovery_v1/row-0088/fixed-0.receipt.json": {
+      "bytes": 447,
+      "sha256": "0556dc8fd8d05102a9c03e514c2fe521b4961803566fe255b66fd517279cb1f0"
+    },
+    "cve_upstream_recovery_v1/row-0088/fixed-0.request.json": {
+      "bytes": 212,
+      "sha256": "02c1363abc8505e5eb271bb46f9861aa20e298be4e67af44312534ffff685463"
+    },
+    "cve_upstream_recovery_v1/row-0088/parent-0.body": {
+      "bytes": 6952,
+      "sha256": "a3e1e93db0d1dc83da8b14f05e8808d695d9196177130978a802f63f9eefd628"
+    },
+    "cve_upstream_recovery_v1/row-0088/parent-0.receipt.json": {
+      "bytes": 447,
+      "sha256": "0864403a9a333971e788d003d4136524916c49761dc4babd68352f67b5002619"
+    },
+    "cve_upstream_recovery_v1/row-0088/parent-0.request.json": {
+      "bytes": 212,
+      "sha256": "64093875823ef5e427158aad2127a94696526541969a171a42ee9652810846df"
+    },
+    "cve_upstream_recovery_v1/row-0088/recovery.json": {
+      "bytes": 1512,
+      "sha256": "719a8af5f25d3737bf805b3ff24a70fca2c67c751013bafc07f650648c664611"
+    },
+    "cve_upstream_recovery_v1/row-0088/root-tree.body": {
+      "bytes": 1629,
+      "sha256": "f75c496e83cc4e0ffa4c030763f74602d5ce780bf9ab63d698e9d27394b44664"
+    },
+    "cve_upstream_recovery_v1/row-0088/root-tree.receipt.json": {
+      "bytes": 441,
+      "sha256": "f729df207b1815f2569e0c951c6534bf6175b85c088c9f92885bcbf743272cb0"
+    },
+    "cve_upstream_recovery_v1/row-0088/root-tree.request.json": {
+      "bytes": 206,
+      "sha256": "3de02a2a9fe97c1200139c4adf2e92f43486aa2169ab9b78021d0e4cfda1aa4d"
+    },
+    "cve_upstream_recovery_v1/row-0090/commit.body": {
+      "bytes": 8359,
+      "sha256": "373a0fba0f5ba8a450fa3a8c6ac73e8447dd48ca001ec204a0fe6b20260fde42"
+    },
+    "cve_upstream_recovery_v1/row-0090/commit.receipt.json": {
+      "bytes": 440,
+      "sha256": "969f7ca0191997ad15ab1ef5d75db0d775a6b69d5183fcaf1bf06e28fd006a8a"
+    },
+    "cve_upstream_recovery_v1/row-0090/commit.request.json": {
+      "bytes": 208,
+      "sha256": "8cc4656ee388a11a6095bd8b30072cdd7926dc175ff29045c9014319f90a3609"
+    },
+    "cve_upstream_recovery_v1/row-0090/fixed-0.body": {
+      "bytes": 995,
+      "sha256": "422c2737e3a4f9ed3cc8ef06cb93b702be6285dd9ed12b322656e534fc6b860c"
+    },
+    "cve_upstream_recovery_v1/row-0090/fixed-0.receipt.json": {
+      "bytes": 472,
+      "sha256": "dcd1826d6e7efe719819328208182b4a47d4cdac24e6ca015c360edd359573b1"
+    },
+    "cve_upstream_recovery_v1/row-0090/fixed-0.request.json": {
+      "bytes": 225,
+      "sha256": "e646aa89237c748be766a8bd499aee502d27a47846b8f332a3106270e9cea86e"
+    },
+    "cve_upstream_recovery_v1/row-0090/fixed-1.body": {
+      "bytes": 25141,
+      "sha256": "02ac44d7a92194179d094ec182af28b2828b33e657c9474948f0701ef7cdf004"
+    },
+    "cve_upstream_recovery_v1/row-0090/fixed-1.receipt.json": {
+      "bytes": 481,
+      "sha256": "b5e3e540f373743b7f8556abae673f882a6dc48cb85531297c9b5a3b92485e81"
+    },
+    "cve_upstream_recovery_v1/row-0090/fixed-1.request.json": {
+      "bytes": 228,
+      "sha256": "63fde570cb16bb0ee4d8c2a9debf0ef0a44c6e9a703563b21509d30490c6068a"
+    },
+    "cve_upstream_recovery_v1/row-0090/license.body": {
+      "bytes": 16725,
+      "sha256": "1f256ecad192880510e84ad60474eab7589218784b9a50bc7ceee34c2b91f1d5"
+    },
+    "cve_upstream_recovery_v1/row-0090/license.receipt.json": {
+      "bytes": 459,
+      "sha256": "6b9667fd684df58d00ada4a91633fd83056f91ac8e7e8b35f98fca45879216ea"
+    },
+    "cve_upstream_recovery_v1/row-0090/license.request.json": {
+      "bytes": 217,
+      "sha256": "c44bf8433bdfc750afb3801ec0087a4acf404ab559d8911043929e7881445798"
+    },
+    "cve_upstream_recovery_v1/row-0090/parent-0.receipt.json": {
+      "bytes": 286,
+      "sha256": "05b24c73efff8d0fceeb3208f9bc81a5baeda57369d93e41f085a4d340fdb933"
+    },
+    "cve_upstream_recovery_v1/row-0090/parent-0.request.json": {
+      "bytes": 225,
+      "sha256": "1c2f6ce2c0bae738f2a34796fd5aff76f225a1b32239f51490f9ea23d59c8e19"
+    },
+    "cve_upstream_recovery_v1/row-0090/parent-1.body": {
+      "bytes": 24463,
+      "sha256": "c5e1aa295636663e465469e2024832413c181c6369a5e1918fabab663fc3ebde"
+    },
+    "cve_upstream_recovery_v1/row-0090/parent-1.receipt.json": {
+      "bytes": 480,
+      "sha256": "2cf2b4287c71f194e48009ec83e32cd8fb60e5e838a9f28b41e888aaedfcf62a"
+    },
+    "cve_upstream_recovery_v1/row-0090/parent-1.request.json": {
+      "bytes": 228,
+      "sha256": "b0f5b63627c5360b98b65012ec8334bd837a1380b9a7de9d1d375f3914b4dc28"
+    },
+    "cve_upstream_recovery_v1/row-0090/parent-caller.body": {
+      "bytes": 29284,
+      "sha256": "0372f919eee2ea596fe853fcaa3bc2e52e9a204ba8134aa4f80fc3da28159a6c"
+    },
+    "cve_upstream_recovery_v1/row-0090/parent-caller.receipt.json": {
+      "bytes": 497,
+      "sha256": "791985b925567a72383964fa8e6024858210f1524f9d71f531ad972514e25dce"
+    },
+    "cve_upstream_recovery_v1/row-0090/parent-caller.request.json": {
+      "bytes": 236,
+      "sha256": "801c4d10cae0939f384aa6e379c2581bc541b9b02ae973d87c4063d6ed03de71"
+    },
+    "cve_upstream_recovery_v1/row-0090/recovery.json": {
+      "bytes": 2427,
+      "sha256": "3b73f3da9b3a270f362836d720d737e782655ce5e9b4c7f10d289c2fd5dba0e4"
+    },
+    "cve_upstream_recovery_v1/row-0090/root-tree.body": {
+      "bytes": 4841,
+      "sha256": "db8df415935330ddb4a7d1bac17b2da89c1ebe973c24f700739d42168b1172d5"
+    },
+    "cve_upstream_recovery_v1/row-0090/root-tree.receipt.json": {
+      "bytes": 444,
+      "sha256": "95578a453de2cd98231231ed4314edbd9d5dd783788fb24cad0f44dc70bd534a"
+    },
+    "cve_upstream_recovery_v1/row-0090/root-tree.request.json": {
+      "bytes": 210,
+      "sha256": "4b0f0a635f86ac3752f52c6068f0cf90a1639891aafed5cc4069f285f525ca28"
+    },
+    "cve_upstream_recovery_v1/row-0091/commit.body": {
+      "bytes": 5029,
+      "sha256": "39eedd68a582771b1ef0e6b385f23b9e6bcdc183a086fdb5e45e8016e5a08999"
+    },
+    "cve_upstream_recovery_v1/row-0091/commit.receipt.json": {
+      "bytes": 467,
+      "sha256": "b15ab47e53be7990d275cf63471246e75a1600f8ac1e6da6869548cf4466ab41"
+    },
+    "cve_upstream_recovery_v1/row-0091/commit.request.json": {
+      "bytes": 222,
+      "sha256": "2bcbd212d01281399e3a5c0dba5b2b383a1264446fabf11e4bbe23ddc7168c39"
+    },
+    "cve_upstream_recovery_v1/row-0091/fixed-0.body": {
+      "bytes": 4561,
+      "sha256": "47514f44340fbce391992c66d02e70445af5fdf7e9ea60296d902385cb4252c2"
+    },
+    "cve_upstream_recovery_v1/row-0091/fixed-0.receipt.json": {
+      "bytes": 519,
+      "sha256": "c33be4d0ba623be48d21eae9fbf12582b751f0178b541aa7ded650f35d94805a"
+    },
+    "cve_upstream_recovery_v1/row-0091/fixed-0.request.json": {
+      "bytes": 248,
+      "sha256": "6e3b5cf980c202dff126f11c66c1e74453eeeb6ed98d11a058e40c55552b4f45"
+    },
+    "cve_upstream_recovery_v1/row-0091/parent-0.body": {
+      "bytes": 4216,
+      "sha256": "45d3bfa926c7c461b91b00f5317a4488f1590f839df41a5a86b256ed8026638b"
+    },
+    "cve_upstream_recovery_v1/row-0091/parent-0.receipt.json": {
+      "bytes": 520,
+      "sha256": "89d62ef632ca5e6b93a20548a66165259cff37b246f4dec5d6e5a4c4ff63284a"
+    },
+    "cve_upstream_recovery_v1/row-0091/parent-0.request.json": {
+      "bytes": 248,
+      "sha256": "c88a5f8bbdfbe9dc82c9e8ca44d765a6b818bea5455a2686e0d72b383fd15b70"
+    },
+    "cve_upstream_recovery_v1/row-0091/recovery.json": {
+      "bytes": 1485,
+      "sha256": "d720c8db9db27dc570b0bcb9296b4f8754f4b23a8c6ac271c0a4d45d98899851"
+    },
+    "cve_upstream_recovery_v1/row-0091/root-tree.body": {
+      "bytes": 1071,
+      "sha256": "25a5f32843fa189f3ec133cfbfd3c9a17267dbfbd42c10cd2fe4b31293a49477"
+    },
+    "cve_upstream_recovery_v1/row-0091/root-tree.receipt.json": {
+      "bytes": 471,
+      "sha256": "edb509a7444b9d57fb20d32f7725c170b732db19eb2676ee8221b4319e908f97"
+    },
+    "cve_upstream_recovery_v1/row-0091/root-tree.request.json": {
+      "bytes": 224,
+      "sha256": "c081b4788f42a3cf8ae3e1dec89a94b1954f5e3862fb5182365c604f07e760b9"
+    },
+    "cve_upstream_recovery_v1/row-0124/commit.body": {
+      "bytes": 5414,
+      "sha256": "aceea2a80fe493fc46684b5affacac859553bd406eab8c14233b6c24a9e0e22b"
+    },
+    "cve_upstream_recovery_v1/row-0124/commit.receipt.json": {
+      "bytes": 440,
+      "sha256": "9671acdb3177065b8880d8c890733ed0c539bfee646861682ac09d076fd5bc59"
+    },
+    "cve_upstream_recovery_v1/row-0124/commit.request.json": {
+      "bytes": 208,
+      "sha256": "2bdf5dda1c4ec14028ced9ed8bad7a463abca16431dd5fb9af189cff5b4dd615"
+    },
+    "cve_upstream_recovery_v1/row-0124/fixed-0.body": {
+      "bytes": 67767,
+      "sha256": "7d664c820bd0aff02be4d62f94d236785e42e1d42947654554fa19c897e61ff6"
+    },
+    "cve_upstream_recovery_v1/row-0124/fixed-0.receipt.json": {
+      "bytes": 512,
+      "sha256": "28f2ecf6368a831ca87f8dc68c1824c10f2f5579299a4afd1060d7b2eeb56670"
+    },
+    "cve_upstream_recovery_v1/row-0124/fixed-0.request.json": {
+      "bytes": 244,
+      "sha256": "ee1307611f54d9aee0d90532e2b8c8aa03304c66a95c7b2d9d0147ca6e3f9a44"
+    },
+    "cve_upstream_recovery_v1/row-0124/license.body": {
+      "bytes": 1496,
+      "sha256": "a86d75ead6df0886dcbc04230ffcd971c66a4a6746ca559ddf768865370637f5"
+    },
+    "cve_upstream_recovery_v1/row-0124/license.receipt.json": {
+      "bytes": 458,
+      "sha256": "29c8694f7c40b4f95f3c1d91d6f8645c054396bdfa2f3815c9b073c92700a2d2"
+    },
+    "cve_upstream_recovery_v1/row-0124/license.request.json": {
+      "bytes": 217,
+      "sha256": "86f1f4de2da7653360cc1f95b84789c475efc79981570d5e2dbd00a4d84525bc"
+    },
+    "cve_upstream_recovery_v1/row-0124/parent-0.body": {
+      "bytes": 67230,
+      "sha256": "36d0da89fd7fcba13154762f7f0de1365686b9deb2ae4369616c6f61c8b741a6"
+    },
+    "cve_upstream_recovery_v1/row-0124/parent-0.receipt.json": {
+      "bytes": 513,
+      "sha256": "79617269744361f7d185b3a91a47ea6af156c2530e6f738e949d4431a33b3618"
+    },
+    "cve_upstream_recovery_v1/row-0124/parent-0.request.json": {
+      "bytes": 244,
+      "sha256": "7b5c012d9579aec767fd899ae50b93c9666fce4f9222b72557029e374d8beac4"
+    },
+    "cve_upstream_recovery_v1/row-0124/recovery.json": {
+      "bytes": 1643,
+      "sha256": "7e957b45a0dbbe28cedccdb233a8e54c1e06ea716920783841a5b82730913107"
+    },
+    "cve_upstream_recovery_v1/row-0124/root-tree.body": {
+      "bytes": 6614,
+      "sha256": "82ccb1c32fe1a53e31da47eebb31fd5d5b22880b26b92a3cf48d2403fc6bb2df"
+    },
+    "cve_upstream_recovery_v1/row-0124/root-tree.receipt.json": {
+      "bytes": 442,
+      "sha256": "36e7398ee73ebe1dfac60f75cd144b02d684bbaf6f8a381c2067098c720c07b1"
+    },
+    "cve_upstream_recovery_v1/row-0124/root-tree.request.json": {
+      "bytes": 210,
+      "sha256": "5add8708c01ae4e6460fdd4085edcb48a2de2378b903f35d1cf8b0b2129bfe76"
+    },
+    "cve_upstream_recovery_v1/row-0143/commit.body": {
+      "bytes": 15413,
+      "sha256": "e36607b6202a1cb768461d37c0bb4a364b7678ec78faced5da00cf5c98b4707a"
+    },
+    "cve_upstream_recovery_v1/row-0143/commit.receipt.json": {
+      "bytes": 449,
+      "sha256": "83a900a42b1b780e09b8a92014d83bb02644aa67cce376a5a4f52817d4e9e813"
+    },
+    "cve_upstream_recovery_v1/row-0143/commit.request.json": {
+      "bytes": 213,
+      "sha256": "4c8cca52f4910d09cea549e62b860888867ea1e0c64d4f87658f6e8868312613"
+    },
+    "cve_upstream_recovery_v1/row-0143/fixed-0.body": {
+      "bytes": 43447,
+      "sha256": "cd468feb4c63d4e385646be233e3b35a160ebeef8da298b04a3553839e3f451b"
+    },
+    "cve_upstream_recovery_v1/row-0143/fixed-0.receipt.json": {
+      "bytes": 484,
+      "sha256": "b84ebccf7583a6cd2b0d8bc90040355ad5274fc80f597134e617eef5e8c8911e"
+    },
+    "cve_upstream_recovery_v1/row-0143/fixed-0.request.json": {
+      "bytes": 230,
+      "sha256": "dd1f42535849716859d904bfe7cf9211f356c4a6df414c48109c657c2bba566f"
+    },
+    "cve_upstream_recovery_v1/row-0143/license.body": {
+      "bytes": 1072,
+      "sha256": "097575fbe7561222e4d4ec80dd896e56a51f9c4ff0204f5574946376cc0b2adc"
+    },
+    "cve_upstream_recovery_v1/row-0143/license.receipt.json": {
+      "bytes": 460,
+      "sha256": "cc46583d98ed5c99aac51bf732f73239f1f0fb934a7359cf964af9e7efca57d6"
+    },
+    "cve_upstream_recovery_v1/row-0143/license.request.json": {
+      "bytes": 218,
+      "sha256": "1a1defa5575260595bbbcf2c9c85a6e1ece1e8173fe04c15c01f8df22607533c"
+    },
+    "cve_upstream_recovery_v1/row-0143/parent-0.body": {
+      "bytes": 43084,
+      "sha256": "6054434ee19879ac63331586fad287323a52744dd417ecb61156e189cb839899"
+    },
+    "cve_upstream_recovery_v1/row-0143/parent-0.receipt.json": {
+      "bytes": 485,
+      "sha256": "55ae306850db130a94ebd4c89822b507353bea90c98ca1e89bcdfef52dbbb1a2"
+    },
+    "cve_upstream_recovery_v1/row-0143/parent-0.request.json": {
+      "bytes": 230,
+      "sha256": "8b3f2cd01afbaa62a59fdd04769072473d3eff01f6d469302b49cc5f670059ac"
+    },
+    "cve_upstream_recovery_v1/row-0143/recovery.json": {
+      "bytes": 1583,
+      "sha256": "ca0b748798bd16445e7ffdb0c75546b75eda988a882cc9d22e8c459f2ac7ee25"
+    },
+    "cve_upstream_recovery_v1/row-0143/root-tree.body": {
+      "bytes": 5039,
+      "sha256": "d293f3c938b82bc0687ecc4a1883de7d35fe61b4f7416aa2ff1a3c1523ef3ae7"
+    },
+    "cve_upstream_recovery_v1/row-0143/root-tree.receipt.json": {
+      "bytes": 454,
+      "sha256": "0cccebbdcaccbba249b7c7d1f23508c1ce11a7ceb110afdbe9c759a67b3ce509"
+    },
+    "cve_upstream_recovery_v1/row-0143/root-tree.request.json": {
+      "bytes": 215,
+      "sha256": "3a62eea532dd48f1bfdf64b8a9b2dd7904f1ab1055d6981d90c0ef82a748deb5"
+    },
+    "cve_upstream_recovery_v1/row-0171/commit.body": {
+      "bytes": 5779,
+      "sha256": "c992a3f366d97369ed03f6dc994128636c2581a593e4d29c6e70622d8ad2af1e"
+    },
+    "cve_upstream_recovery_v1/row-0171/commit.receipt.json": {
+      "bytes": 455,
+      "sha256": "3c05a47015ef819d8a37bd3d392fa481bf8a90e2a1e69c5c0a752ae8d8a9ab73"
+    },
+    "cve_upstream_recovery_v1/row-0171/commit.request.json": {
+      "bytes": 217,
+      "sha256": "2b9ebaaa0a59adeb5f08476944bba5f509420260b9656365de5dae3bb8751aa8"
+    },
+    "cve_upstream_recovery_v1/row-0171/fixed-0.body": {
+      "bytes": 144047,
+      "sha256": "be766d347e89bbad33f6f8d7b932fe7c6d4ec3c39b528b9a45e4b402102cc12f"
+    },
+    "cve_upstream_recovery_v1/row-0171/fixed-0.receipt.json": {
+      "bytes": 515,
+      "sha256": "376447426f9d53dbe5978f8a1b48cc7cffaefbf643ccfa351b966670c064f447"
+    },
+    "cve_upstream_recovery_v1/row-0171/fixed-0.request.json": {
+      "bytes": 245,
+      "sha256": "b65a2746d8da1ae5ebaa7bfca45fd7cc6af569b2dd98d7f187cfcdd38492ba70"
+    },
+    "cve_upstream_recovery_v1/row-0171/license.body": {
+      "bytes": 1069,
+      "sha256": "c479fb11a66a85fed2004a17dd1b3e44a1858c564b167aecb20ff66cb422ed75"
+    },
+    "cve_upstream_recovery_v1/row-0171/license.receipt.json": {
+      "bytes": 473,
+      "sha256": "faecddba8f073e9b7484cf4680f56e0549ff6079ed2d6a6d1a87d44e87315a97"
+    },
+    "cve_upstream_recovery_v1/row-0171/license.request.json": {
+      "bytes": 225,
+      "sha256": "cce58708bef3f670e1926b8890039064000320a622e64aedaacca260771acffb"
+    },
+    "cve_upstream_recovery_v1/row-0171/parent-0.body": {
+      "bytes": 143979,
+      "sha256": "dda985b6ab461fbf508eab8835e2efbebbd4db25ea40f46305b667fa4636d2bd"
+    },
+    "cve_upstream_recovery_v1/row-0171/parent-0.receipt.json": {
+      "bytes": 516,
+      "sha256": "541b7f0eb43e3cc8585e3233a9b6f1cc9d47e8dba0e68d35f3903d314a40a1ee"
+    },
+    "cve_upstream_recovery_v1/row-0171/parent-0.request.json": {
+      "bytes": 245,
+      "sha256": "79b64ed09937ffbc17b9b09eaf56e35725afdad4f1e233067705da18bfaa11e6"
+    },
+    "cve_upstream_recovery_v1/row-0171/recovery.json": {
+      "bytes": 1628,
+      "sha256": "b5715e088514b8c3cf9694430378bbb96a877782ea57e165339a652f79fce80d"
+    },
+    "cve_upstream_recovery_v1/row-0171/root-tree.body": {
+      "bytes": 4378,
+      "sha256": "b9392198422de067c2056a6695636e3d8bc784ac2fda125bb847879c4b98f566"
+    },
+    "cve_upstream_recovery_v1/row-0171/root-tree.receipt.json": {
+      "bytes": 462,
+      "sha256": "a785f5d8e5ccba7bbed69ab915e6e697075db78227ca38cc2fe2e17571e66dbf"
+    },
+    "cve_upstream_recovery_v1/row-0171/root-tree.request.json": {
+      "bytes": 219,
+      "sha256": "c9124bc11b64ccc2227cc1c113ae2b66c0b921ba3350cd4ec93942de91f3db86"
+    },
+    "cve_upstream_recovery_v1/row-0194/commit.body": {
+      "bytes": 8220,
+      "sha256": "a9f2ca3af4b9359d0f256963828db4812ec9074d30c3f5bcf18da95c2dfb8d55"
+    },
+    "cve_upstream_recovery_v1/row-0194/commit.receipt.json": {
+      "bytes": 458,
+      "sha256": "5e4184df20a082b77d65398d60662b0986d40c61599383d6dbd9afc2930c5da7"
+    },
+    "cve_upstream_recovery_v1/row-0194/commit.request.json": {
+      "bytes": 217,
+      "sha256": "2c3ddd7582b921c10e8adb11323849abbeeb43ce98f9b75647adbaeb6cb1adea"
+    },
+    "cve_upstream_recovery_v1/row-0194/fixed-0.body": {
+      "bytes": 33491,
+      "sha256": "24da9d557c8a780c35bb0e068a164b60ea858dfabe1f462763d15ee15e199808"
+    },
+    "cve_upstream_recovery_v1/row-0194/fixed-0.receipt.json": {
+      "bytes": 511,
+      "sha256": "51ebf2cdb5ca6d397ac15d7b936ee894ef459e70f8fe2c2cfed8269c7bbc9ef2"
+    },
+    "cve_upstream_recovery_v1/row-0194/fixed-0.request.json": {
+      "bytes": 243,
+      "sha256": "e5edabac9393a7b82fbff6a3cba43a10c3be3e30ad161c705c21a4afacf5fe2a"
+    },
+    "cve_upstream_recovery_v1/row-0194/license.body": {
+      "bytes": 34523,
+      "sha256": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef"
+    },
+    "cve_upstream_recovery_v1/row-0194/license.receipt.json": {
+      "bytes": 468,
+      "sha256": "079a82425e7f8b3332070a8e1cee2c35a0a398182858a493d6c633ab4238780f"
+    },
+    "cve_upstream_recovery_v1/row-0194/license.request.json": {
+      "bytes": 222,
+      "sha256": "dd24c7cf6c06dbc0d5d96efb36964718d4788529dd4ac16582a3d368a3cda39e"
+    },
+    "cve_upstream_recovery_v1/row-0194/parent-0.body": {
+      "bytes": 31681,
+      "sha256": "a3205cf81432dd60b63852bbc1d2c1d4fceaccb1a45d76f665ba55cb03bcfd9e"
+    },
+    "cve_upstream_recovery_v1/row-0194/parent-0.receipt.json": {
+      "bytes": 511,
+      "sha256": "6e7059a002d80ecc8c89a5a7ff262bb5fcf3184e6db5b6617dc94efff53fbec7"
+    },
+    "cve_upstream_recovery_v1/row-0194/parent-0.request.json": {
+      "bytes": 243,
+      "sha256": "81e73cd7da1a64c87730a616bb112cb420a3e1d50edae9cebd0de5cf5f161657"
+    },
+    "cve_upstream_recovery_v1/row-0194/recovery.json": {
+      "bytes": 1614,
+      "sha256": "519d28b3ef26bad21137f0311e92a7a785b7c4215c3653605dc6f6bd96afca87"
+    },
+    "cve_upstream_recovery_v1/row-0194/root-tree.body": {
+      "bytes": 6792,
+      "sha256": "0a99ecd0b46a1de7de8a2bd2e6d024e5cee375105d76f1009051df25427d5966"
+    },
+    "cve_upstream_recovery_v1/row-0194/root-tree.receipt.json": {
+      "bytes": 462,
+      "sha256": "db678449c46e60249bd764e919a4d45f47571346227e9c64b9b6e6cc2fae1631"
+    },
+    "cve_upstream_recovery_v1/row-0194/root-tree.request.json": {
+      "bytes": 219,
+      "sha256": "e751a41786688e730411568c8b51df0b2050ce4b8de76c5b5dbf160afeff63af"
+    },
+    "cve_upstream_recovery_v1/row-0201/commit.body": {
+      "bytes": 14056,
+      "sha256": "c249b175a1469c3643bf011ee85d0df9b04c8b37436aa67595eb8d20844cdcec"
+    },
+    "cve_upstream_recovery_v1/row-0201/commit.receipt.json": {
+      "bytes": 456,
+      "sha256": "df1540b5eecdc077c8a69826bda94d3725f7ec7873f2ad1a7cd9496192c1f82e"
+    },
+    "cve_upstream_recovery_v1/row-0201/commit.request.json": {
+      "bytes": 223,
+      "sha256": "1f47f5ce5300784e9174018ff677e47009035cfc95fc47c41beac0758935c38f"
+    },
+    "cve_upstream_recovery_v1/row-0201/fixed-0.body": {
+      "bytes": 656,
+      "sha256": "7f1f3acee43942fbcb6cccea45825f710afa9522c7eb72c257c70fc82e0f07a6"
+    },
+    "cve_upstream_recovery_v1/row-0201/fixed-0.receipt.json": {
+      "bytes": 525,
+      "sha256": "4290acbd4325d5b099aa8cf5d46fa2a38b54effadcbdccfd61697f12020f34fb"
+    },
+    "cve_upstream_recovery_v1/row-0201/fixed-0.request.json": {
+      "bytes": 251,
+      "sha256": "21e040bb33b4a8030210698f456a4c172d21a075f7120a2e43bd68d9d0d3c3a9"
+    },
+    "cve_upstream_recovery_v1/row-0201/fixed-1.body": {
+      "bytes": 24618,
+      "sha256": "6afa2f37efc8c85543d0696c08185f0b5322c90aee0a3402da0e8221492a729e"
+    },
+    "cve_upstream_recovery_v1/row-0201/fixed-1.receipt.json": {
+      "bytes": 511,
+      "sha256": "4c890febad70798f33e84ecab557abe38d57f32a63fcc53c777d21a5b4555972"
+    },
+    "cve_upstream_recovery_v1/row-0201/fixed-1.request.json": {
+      "bytes": 243,
+      "sha256": "5f8b97c761c6d10240433ead8f5a3d41004d0e36939ccb49d78623df881a1bd9"
+    },
+    "cve_upstream_recovery_v1/row-0201/fixed-2.body": {
+      "bytes": 415,
+      "sha256": "28e2061c74661b7856d7485be317f3b2275d24aacb236954206243144229e876"
+    },
+    "cve_upstream_recovery_v1/row-0201/fixed-2.receipt.json": {
+      "bytes": 529,
+      "sha256": "ff155b2b3a75087f7a8f7229c5176730e4bd74c1035831a4e8b35f13bcf0deaa"
+    },
+    "cve_upstream_recovery_v1/row-0201/fixed-2.request.json": {
+      "bytes": 253,
+      "sha256": "2cf17ad2ca14080f557832b453858bc4e00a394af2fb031a6f4305df59f50064"
+    },
+    "cve_upstream_recovery_v1/row-0201/license.body": {
+      "bytes": 1075,
+      "sha256": "e1da71418a98d030776936ae46ba9846ebba05536c3d225d61e513dec1faa506"
+    },
+    "cve_upstream_recovery_v1/row-0201/license.receipt.json": {
+      "bytes": 479,
+      "sha256": "11a6628301b109f9df9590aa3af82a497379e7f6423df90bf63ce0d51a20304e"
+    },
+    "cve_upstream_recovery_v1/row-0201/license.request.json": {
+      "bytes": 227,
+      "sha256": "86a3097f60ef6a8c6d39deea003af888e7558ebf0e9d839bb338df23b5e9b199"
+    },
+    "cve_upstream_recovery_v1/row-0201/parent-0.body": {
+      "bytes": 464,
+      "sha256": "41f1164e35f8ac5dd712ed00f6a964fa56f73126ebf6c8bbba0164598d82f8ce"
+    },
+    "cve_upstream_recovery_v1/row-0201/parent-0.receipt.json": {
+      "bytes": 525,
+      "sha256": "15a633d801bbe4371311de6deaf4c920c86527fa3b32dd64618cb9567c6bf879"
+    },
+    "cve_upstream_recovery_v1/row-0201/parent-0.request.json": {
+      "bytes": 251,
+      "sha256": "1d57c718fc9c124ad7f64656670341d19a16a3ee2df0016a49e65d42008add5e"
+    },
+    "cve_upstream_recovery_v1/row-0201/parent-1.body": {
+      "bytes": 24658,
+      "sha256": "e81f5bd637b520ad9571cd11e1164c7c83fe9c82c25cf88b4595339f4ca94a87"
+    },
+    "cve_upstream_recovery_v1/row-0201/parent-1.receipt.json": {
+      "bytes": 510,
+      "sha256": "9e352f665c167ab3c6b79a5aa229f43ba7a94a18a6a200e94698d21573ab7c50"
+    },
+    "cve_upstream_recovery_v1/row-0201/parent-1.request.json": {
+      "bytes": 242,
+      "sha256": "ae2f38cc921f82460f22afc839795360e75ad86fd71e65097416564dc135dee9"
+    },
+    "cve_upstream_recovery_v1/row-0201/parent-2.body": {
+      "bytes": 417,
+      "sha256": "63b219f4d1cc91360dbc1341901babe19e607b15291eef521f643a5febf24bf8"
+    },
+    "cve_upstream_recovery_v1/row-0201/parent-2.receipt.json": {
+      "bytes": 529,
+      "sha256": "65729476e8f251a9527d4278a44bdd3ff853971f83e4576db0afbce8b818edf2"
+    },
+    "cve_upstream_recovery_v1/row-0201/parent-2.request.json": {
+      "bytes": 253,
+      "sha256": "88db109a71d3a9c8585c974a159f45ab1a9bde1640d7817452ca0457e6024e03"
+    },
+    "cve_upstream_recovery_v1/row-0201/recovery.json": {
+      "bytes": 3022,
+      "sha256": "ecd0491bfc0d3db6523a40f6973051e957791070ebacd3f6a9e70495d4b8685c"
+    },
+    "cve_upstream_recovery_v1/row-0201/root-tree.body": {
+      "bytes": 4985,
+      "sha256": "54b8289460c0bf166dd0cf5e03eb37a925e5d025e1585f5f0d5d442ec141b3b0"
+    },
+    "cve_upstream_recovery_v1/row-0201/root-tree.receipt.json": {
+      "bytes": 459,
+      "sha256": "9399035c341e2a46c4fc59ee93e48911f12e48ff2d629a318bd88cab9ebfbaa3"
+    },
+    "cve_upstream_recovery_v1/row-0201/root-tree.request.json": {
+      "bytes": 225,
+      "sha256": "b68a2ce288d4fdfa28cab1dfad511672f2f2202eea671e6a78288306ce616db6"
+    },
+    "cve_upstream_recovery_v1/row-0242/commit.body": {
+      "bytes": 4876,
+      "sha256": "0fed262d7f050567813a57d2802318e01cf321912802821a2851aa1e403bdbb3"
+    },
+    "cve_upstream_recovery_v1/row-0242/commit.receipt.json": {
+      "bytes": 446,
+      "sha256": "a4e2a3b177c6b4261815af2fe2bcd03967250bf27e33f98d2964f7f63b66f029"
+    },
+    "cve_upstream_recovery_v1/row-0242/commit.request.json": {
+      "bytes": 212,
+      "sha256": "b25be8afd782a1eab77e7fb6720fd2e5b9f9e3a792cec72a684d4c7df3882b88"
+    },
+    "cve_upstream_recovery_v1/row-0242/fixed-0.body": {
+      "bytes": 59986,
+      "sha256": "8f1c4572adbcdbe521456a2179115c52b4edc812199dd4a7eaeadf4f3a19c73e"
+    },
+    "cve_upstream_recovery_v1/row-0242/fixed-0.receipt.json": {
+      "bytes": 503,
+      "sha256": "cf59df744e6ef1f76ed0c70047a8a0de34e8dcea1657adb29ed01830bcb3a0e8"
+    },
+    "cve_upstream_recovery_v1/row-0242/fixed-0.request.json": {
+      "bytes": 239,
+      "sha256": "92ac1051f752b8027ddb8a41b7623628bab7e4a98db263cab2eeee0b315aab53"
+    },
+    "cve_upstream_recovery_v1/row-0242/license.body": {
+      "bytes": 34520,
+      "sha256": "57c8ff33c9c0cfc3ef00e650a1cc910d7ee479a8bc509f6c9209a7c2a11399d6"
+    },
+    "cve_upstream_recovery_v1/row-0242/license.receipt.json": {
+      "bytes": 467,
+      "sha256": "9f58b2be715b9dca138ab429241d6b9c518946234b4504c3003d49e5abae65da"
+    },
+    "cve_upstream_recovery_v1/row-0242/license.request.json": {
+      "bytes": 221,
+      "sha256": "cbc909b2482f0dd1aafa9a8b6e099bce1b0b40bbfcc3429f2fa5660341689510"
+    },
+    "cve_upstream_recovery_v1/row-0242/parent-0.body": {
+      "bytes": 59584,
+      "sha256": "d7e3663e10a0bdec4b7b8e39660ec2fb71d14e3e7e06b94ba47ff5f6af85002a"
+    },
+    "cve_upstream_recovery_v1/row-0242/parent-0.receipt.json": {
+      "bytes": 503,
+      "sha256": "fa3271d5005aca51b029f06e26dc54bc73977b101a33d8fac7fc26687a42c568"
+    },
+    "cve_upstream_recovery_v1/row-0242/parent-0.request.json": {
+      "bytes": 239,
+      "sha256": "46267af9c684cb7668aacabbaf6d7844e8c7cbc8dbb2444de1e50f3d8d8576ea"
+    },
+    "cve_upstream_recovery_v1/row-0242/recovery.json": {
+      "bytes": 1619,
+      "sha256": "ea04241c8223c1d2789b3503fd3b91b64be4de5a9c6951f0c048e25110fad832"
+    },
+    "cve_upstream_recovery_v1/row-0242/root-tree.body": {
+      "bytes": 7660,
+      "sha256": "86db411c27edc0c92a596805e56f5a4cbdcc708c9b9e5f23e373a15bd48fb970"
+    },
+    "cve_upstream_recovery_v1/row-0242/root-tree.receipt.json": {
+      "bytes": 451,
+      "sha256": "9affed62183bbc6e199f0a61475bcf43ecf08d9d6e1837df7b21a11522d49857"
+    },
+    "cve_upstream_recovery_v1/row-0242/root-tree.request.json": {
+      "bytes": 214,
+      "sha256": "651ac6cb5e39093ba4609fbe4cf4acd3756dfda021f394f82dad42a6f14fd737"
+    },
+    "cve_upstream_recovery_v1/row-0261/commit.body": {
+      "bytes": 7776,
+      "sha256": "b7cc051db5a3cf08f45368cc0456ec17c5c31deb06be4700ecf5c1dc30ae3eb4"
+    },
+    "cve_upstream_recovery_v1/row-0261/commit.receipt.json": {
+      "bytes": 460,
+      "sha256": "83d1842f1130c38ed10a7ac3d5880337d9703fd39fa7a6141721cc50d9d7180c"
+    },
+    "cve_upstream_recovery_v1/row-0261/commit.request.json": {
+      "bytes": 218,
+      "sha256": "4e54511660a17f63edd7eeca0ab1ce0e78d23e4a736c2229f05744382f6669de"
+    },
+    "cve_upstream_recovery_v1/row-0261/fixed-0.body": {
+      "bytes": 5786,
+      "sha256": "49dfa29938d3e2984c97e98a66c77743134a94d816feed759925a193b4b233dd"
+    },
+    "cve_upstream_recovery_v1/row-0261/fixed-0.receipt.json": {
+      "bytes": 468,
+      "sha256": "57adeeb726f823ad8dd7cf97626794d34dc0d1af24d86bc78937f8cba6d9fefc"
+    },
+    "cve_upstream_recovery_v1/row-0261/fixed-0.request.json": {
+      "bytes": 222,
+      "sha256": "f55fd55b5c4c6beffc0760723d5c88e15a26e0fdfbc04b6ab354d08118514416"
+    },
+    "cve_upstream_recovery_v1/row-0261/license.body": {
+      "bytes": 35147,
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+    },
+    "cve_upstream_recovery_v1/row-0261/license.receipt.json": {
+      "bytes": 470,
+      "sha256": "55cb667ea0863bad88f621f255f233bee550f1bccc1d9d0b342f5e69fdfe8de9"
+    },
+    "cve_upstream_recovery_v1/row-0261/license.request.json": {
+      "bytes": 222,
+      "sha256": "d9645b12b6ce86b5943ae3a2859cf448d4a7296ca3b8ef6e854c0ec4dbbf7569"
+    },
+    "cve_upstream_recovery_v1/row-0261/parent-0.body": {
+      "bytes": 6185,
+      "sha256": "850490fdaa4cfd9f97fd791611a8b2237eec8654dbf5c2165b77fc0c93687291"
+    },
+    "cve_upstream_recovery_v1/row-0261/parent-0.receipt.json": {
+      "bytes": 468,
+      "sha256": "aac72409ab4f859be010305c4fca71042f79a63eb10524ff87732d824a5e2445"
+    },
+    "cve_upstream_recovery_v1/row-0261/parent-0.request.json": {
+      "bytes": 222,
+      "sha256": "edd90656b560d8091030dd507725f5d967c70fab43914d691c0c21a9ca063986"
+    },
+    "cve_upstream_recovery_v1/row-0261/recovery.json": {
+      "bytes": 1547,
+      "sha256": "cd22e13fd937b2e1c6683ca4bbb7ba469d1569a875c8bc8487da4baf2b4c0156"
+    },
+    "cve_upstream_recovery_v1/row-0261/root-tree.body": {
+      "bytes": 1986,
+      "sha256": "7e17faa72dff07c0db2af9b66fccbf5365af9f6bafcb4b297cb2c66adae247e1"
+    },
+    "cve_upstream_recovery_v1/row-0261/root-tree.receipt.json": {
+      "bytes": 464,
+      "sha256": "a314a3dddc0721df8c9f37bd49c8008be995aee006f4c642d5466b0d45ea6c8e"
+    },
+    "cve_upstream_recovery_v1/row-0261/root-tree.request.json": {
+      "bytes": 220,
+      "sha256": "f05bbcd3d92d9e2546b3b57c8d066c4820f35f270f0f1488297c38b09b168523"
+    },
+    "discover_local_sources.py": {
+      "bytes": 8475,
+      "sha256": "2ba8c4c1addb73a65560055f89aea02ef6dd1eec36a973e9de14a70bc7873161"
+    },
+    "legal_cve_proposal_v1/builder_snapshot.py": {
+      "bytes": 26224,
+      "sha256": "e7917a88c77930f32cb79fe7d1ed49ad343cf89847a412131dc523efc57f8f1d"
+    },
+    "legal_cve_proposal_v1/cve_candidates.json": {
+      "bytes": 57717,
+      "sha256": "deda14a8fb940527b407348d0ff8b12e59e0e585150aa602ac72fbd79143b170"
+    },
+    "legal_cve_proposal_v1/inspection_exclusions.json": {
+      "bytes": 1296,
+      "sha256": "a0c6eee39237440c8dfb05eda48713d54d27bf574299a932b1422dd6dc0a80b8"
+    },
+    "legal_cve_proposal_v1/legal_candidates.json": {
+      "bytes": 33259,
+      "sha256": "be980b05a751bfb1361d6a74e1548f6aace92e5bcaceaf496ae9054f6efe3186"
+    },
+    "legal_cve_proposal_v2/cve-row-0064/diff.txt": {
+      "bytes": 2493,
+      "sha256": "079e6b7fdb2242bfa092d31105c6fc0547840411ff898b8b5479f6f4888033dd"
+    },
+    "legal_cve_proposal_v2/cve-row-0064/row.json": {
+      "bytes": 4321,
+      "sha256": "77cb6bdc50383ca4ba2346c09a3dffaa9b7ec7c0da9d2fb60a7c5ee5bd48fe73"
+    },
+    "legal_cve_proposal_v2/cve-row-0072/diff.txt": {
+      "bytes": 2065,
+      "sha256": "3a728bf7e3cbf671876e76ac114ee80dd6722e0aff4d7618dbe15d3e8f881a5d"
+    },
+    "legal_cve_proposal_v2/cve-row-0072/row.json": {
+      "bytes": 3912,
+      "sha256": "58d1b9685b3f7beef28d4a0c2d7d00ff5dc50c7206b77daf103980e43973d7a2"
+    },
+    "legal_cve_proposal_v2/cve-row-0088/diff.txt": {
+      "bytes": 12002,
+      "sha256": "f25c07eb95f9b8d44cf906a6eb92d63103a4ae15b38db29b3531c6ece4b20907"
+    },
+    "legal_cve_proposal_v2/cve-row-0088/row.json": {
+      "bytes": 23713,
+      "sha256": "ff6a4e58829f9dbe5a2cd84d7c1937713f95e161afe99a0d76129123e97e9a31"
+    },
+    "legal_cve_proposal_v2/cve-row-0090/diff.txt": {
+      "bytes": 3872,
+      "sha256": "8bcf0d612b21e7079427104f883bcff6912225f1378d76bf04c078d65dd813e6"
+    },
+    "legal_cve_proposal_v2/cve-row-0090/row.json": {
+      "bytes": 7882,
+      "sha256": "ffd9a817857b90ab5769649769b8661750a1a5dc2d84ce3a2ec7a10119513628"
+    },
+    "legal_cve_proposal_v2/cve-row-0091/diff.txt": {
+      "bytes": 1286,
+      "sha256": "0d22a270965f2b65afcb522104af22c9ac82dbd74929a70f7db75ffdb5ca40ed"
+    },
+    "legal_cve_proposal_v2/cve-row-0091/row.json": {
+      "bytes": 3381,
+      "sha256": "ab8cdf607606170efc2a27cdfe05440c196d4df91bf0f073e3275cdccfba2f54"
+    },
+    "legal_cve_proposal_v2/cve-row-0124/diff.txt": {
+      "bytes": 2201,
+      "sha256": "d3a150584122db32d1523adab8d182476cae179d974b9be80cb656fed90b299c"
+    },
+    "legal_cve_proposal_v2/cve-row-0124/row.json": {
+      "bytes": 4592,
+      "sha256": "ab35df940496ba9bc953e5a4f99a48f98b10bb7ac2dc54e27e7c3fa2ea93194c"
+    },
+    "legal_cve_proposal_v2/cve-row-0143/diff.txt": {
+      "bytes": 11176,
+      "sha256": "772b3f0ee25c4c1c00ab4bbfdca79a0bce433faccb179a73f44b10a6923dc6a0"
+    },
+    "legal_cve_proposal_v2/cve-row-0143/row.json": {
+      "bytes": 16284,
+      "sha256": "ccfec82de2b1dd63f961bc7823e5e1a619ddf6d0a66a26e2394cb2c0bd8c749b"
+    },
+    "legal_cve_proposal_v2/cve-row-0171/diff.txt": {
+      "bytes": 1047,
+      "sha256": "cd5d04f550ca60e35f11e28c49086a79840f9ce40cd0d6adadb662ff365ed4f2"
+    },
+    "legal_cve_proposal_v2/cve-row-0171/row.json": {
+      "bytes": 3232,
+      "sha256": "d6fbdb757e64a3a52ba3b49a9a46ef4408f1d8a40bd06870f6fcf57051a5366f"
+    },
+    "legal_cve_proposal_v2/cve-row-0194/diff.txt": {
+      "bytes": 4263,
+      "sha256": "5a91cc88fb6c6d1d3475233b2c9d0e5c4b0429c139c08f4bfb42a571cce14383"
+    },
+    "legal_cve_proposal_v2/cve-row-0194/row.json": {
+      "bytes": 8576,
+      "sha256": "a86e94b3678e199066bc2506c34c47781ef3bf34825ee3af916736104e4c0e8e"
+    },
+    "legal_cve_proposal_v2/cve-row-0201/diff.txt": {
+      "bytes": 6849,
+      "sha256": "d862372cc8af976d2480131595bf74fee602424d4a8fe81b656914375a8d729d"
+    },
+    "legal_cve_proposal_v2/cve-row-0201/row.json": {
+      "bytes": 11624,
+      "sha256": "5e1705afaa85c05d069ca6f99cf02bc41fdaa732a4efebd55e4871af997e15c9"
+    },
+    "legal_cve_proposal_v2/cve-row-0242/diff.txt": {
+      "bytes": 1311,
+      "sha256": "f20f4513f802689f65517b883e0cc05eff5c84f1ead21d0c3c100ce23355a977"
+    },
+    "legal_cve_proposal_v2/cve-row-0242/row.json": {
+      "bytes": 3290,
+      "sha256": "fd3a6ec92235ac33fc4966c559130fb37b8ae42f3010c7c6b6fd123d7ee6ccc9"
+    },
+    "legal_cve_proposal_v2/cve-row-0261/diff.txt": {
+      "bytes": 3738,
+      "sha256": "b19f82f1864331f82f83b493befe8bcbef05d5600d6945238705ddb2fac4f109"
+    },
+    "legal_cve_proposal_v2/cve-row-0261/row.json": {
+      "bytes": 8855,
+      "sha256": "3641d0253c6ca309bd89e348014ab1c6bd54dea5b78a20b1ee0cf05be275f305"
+    },
+    "legal_cve_proposal_v2/cve_candidates.json": {
+      "bytes": 62061,
+      "sha256": "7e998e8820e2c7bf330638f753f63aeaa959805e2c88da1b88efa7475f4c14b0"
+    },
+    "legal_cve_proposal_v2/inspection_exclusions.json": {
+      "bytes": 1296,
+      "sha256": "a0c6eee39237440c8dfb05eda48713d54d27bf574299a932b1422dd6dc0a80b8"
+    },
+    "legal_cve_proposal_v2/legal-1-01-035/context-1-01-040.json": {
+      "bytes": 72550,
+      "sha256": "35e307241d233e0fce3dc93c96fc9df87faf00775a9bef4db09c01a3992e987f"
+    },
+    "legal_cve_proposal_v2/legal-1-01-035/row.json": {
+      "bytes": 70308,
+      "sha256": "d69db42fbc523c5e05d19ef1eef18d71dfc07ee5f72c87bf4242a2536cef6023"
+    },
+    "legal_cve_proposal_v2/legal-1-01-035/source.html": {
+      "bytes": 63897,
+      "sha256": "fea36ebb2f7cdf020060417e1c4c43478180c56bc085ae0e6d14198d59e50037"
+    },
+    "legal_cve_proposal_v2/legal-1-01-035/source.txt": {
+      "bytes": 1126,
+      "sha256": "3b254cb0be9952c88cac0eb25f3ef872ef4b5dc2c33bfb086897326b68e0999c"
+    },
+    "legal_cve_proposal_v2/legal-2-02-020/row.json": {
+      "bytes": 69965,
+      "sha256": "4a063e681ac14fff2a3ac015c2afdb556b7eefe0fe910ae2c323ccbcec884268"
+    },
+    "legal_cve_proposal_v2/legal-2-02-020/source.html": {
+      "bytes": 63762,
+      "sha256": "6e1233fbd5b1e6714927803b6034fad2e20e2f6ffffb2cbdaf5ee632b011799c"
+    },
+    "legal_cve_proposal_v2/legal-2-02-020/source.txt": {
+      "bytes": 978,
+      "sha256": "dbc7786ae92ab0c4813ad69411545fe0a1f34aa1abfc8630cbf195b4f32357d0"
+    },
+    "legal_cve_proposal_v2/legal-3-02-010/context-1-01-040.json": {
+      "bytes": 72550,
+      "sha256": "35e307241d233e0fce3dc93c96fc9df87faf00775a9bef4db09c01a3992e987f"
+    },
+    "legal_cve_proposal_v2/legal-3-02-010/row.json": {
+      "bytes": 77982,
+      "sha256": "4f281f3d58ad1c8b0d6e3d2535a57f238b96c90e65d09be3d5d8dcbcebb5fbc7"
+    },
+    "legal_cve_proposal_v2/legal-3-02-010/source.html": {
+      "bytes": 68161,
+      "sha256": "ea8aacf5d2e1aac6bed78d6c6a9c2525f3dde3cde3a5edbbe4878bc76b64ce58"
+    },
+    "legal_cve_proposal_v2/legal-3-02-010/source.txt": {
+      "bytes": 4602,
+      "sha256": "8aa31c3d5a3340699b085d6e35d5c540e1a22aa7315fdee24cd54a7308e0789e"
+    },
+    "legal_cve_proposal_v2/legal-4-20-010/context-4-12-020.json": {
+      "bytes": 78007,
+      "sha256": "dd32f34382ba6b0585c4c5f63938f3924c243a56c0c914643afc8d971f53a6fe"
+    },
+    "legal_cve_proposal_v2/legal-4-20-010/context-4-20-020.json": {
+      "bytes": 70004,
+      "sha256": "c64c2f275775889ab6a9815a131c010b3318e1f54aec4ff2f0b67d311b0878c7"
+    },
+    "legal_cve_proposal_v2/legal-4-20-010/row.json": {
+      "bytes": 70796,
+      "sha256": "f6ba2d9737c76fe6b455e612659d36f2b5cea58523690a2eae1eb056a3e4c6e9"
+    },
+    "legal_cve_proposal_v2/legal-4-20-010/source.html": {
+      "bytes": 64262,
+      "sha256": "f6ec8b722e226ac2857943f934023e52ab21ca66ea6362c01ed126edd655a02d"
+    },
+    "legal_cve_proposal_v2/legal-4-20-010/source.txt": {
+      "bytes": 1301,
+      "sha256": "1f94ede06e49492be25bfb55538e31883e65030d14b7c9354c5c4a3d1526cfff"
+    },
+    "legal_cve_proposal_v2/legal-5-10-030/row.json": {
+      "bytes": 68990,
+      "sha256": "3e0ca940822021f50e72907de674ab7b7dc41e19c816ff33f8d502f25a0e7d08"
+    },
+    "legal_cve_proposal_v2/legal-5-10-030/source.html": {
+      "bytes": 63117,
+      "sha256": "1e4e052373e34e582046ae061946d831c5867c49565d8bec9f692cffc9ae8cf1"
+    },
+    "legal_cve_proposal_v2/legal-5-10-030/source.txt": {
+      "bytes": 624,
+      "sha256": "f0e844f6be9a9b24ab7f15f777c5190b2f588a6e46400589a3bf2957f9888231"
+    },
+    "legal_cve_proposal_v2/legal-6-04-020/context-6-04-010.json": {
+      "bytes": 85993,
+      "sha256": "f4921d61298667f6b9fbe2d68d26583eb9af81a94db996897469139a9d5f054e"
+    },
+    "legal_cve_proposal_v2/legal-6-04-020/context-6-04-050.json": {
+      "bytes": 70488,
+      "sha256": "e3080fb70fac77ef155ecee9d88fb5799d467b9d32b1b50dece2c49d433b5785"
+    },
+    "legal_cve_proposal_v2/legal-6-04-020/row.json": {
+      "bytes": 69890,
+      "sha256": "8349abcf858fdfb256c77ac759d6dfa360d4ce309a83f86ea405f299a858c989"
+    },
+    "legal_cve_proposal_v2/legal-6-04-020/source.html": {
+      "bytes": 63617,
+      "sha256": "4035ecfc44e3ecef1ff36d57a7db487c449da14bc9ef90e06a9c0c3cbbd2d1f2"
+    },
+    "legal_cve_proposal_v2/legal-6-04-020/source.txt": {
+      "bytes": 1076,
+      "sha256": "a349f6f8fee9abf2725e1b41a3b8e0714874717a910123a83e41832352830dec"
+    },
+    "legal_cve_proposal_v2/legal_candidates.json": {
+      "bytes": 37062,
+      "sha256": "73e4a94d52df09e2c323fa6236ffe7b5c52b4362d13cee442a8b4abd10a8748c"
+    },
+    "legal_cve_proposal_v2/legal_selection_audit.json": {
+      "bytes": 3116,
+      "sha256": "7dd4acf3b0b3fba73d7d039bcee5f0e445131a5add0df7cb44cfb8d1510bb982"
+    },
+    "legal_selection_v2.json": {
+      "bytes": 16817,
+      "sha256": "a40003be0675692b3e3ab737b6700b2dcdc79c5a5c35d13a995f41cea1dc69da"
+    },
+    "local_source_discovery.json": {
+      "bytes": 528247,
+      "sha256": "dd324ba0c6423b1bfac73911ebf5ce92d17a8df596110970b1d48b6a07ca58ab"
+    },
+    "native_stage_plan.json": {
+      "bytes": 54734,
+      "sha256": "95b5879e3c3337e36c91cf7cff7ac218f3c245ece4a42384dc42bdc742f62dde"
+    },
+    "plan_validation.json": {
+      "bytes": 1180,
+      "sha256": "2de85e58e3e12e2705d575f1eeff54873ce9f0655be29bb12676e99e2fcd76a5"
+    },
+    "prepare_skill_candidates.py": {
+      "bytes": 13121,
+      "sha256": "f83430729667d3ca11bb50195d0bb294146a75705d1ad18a877da23eae59d275"
+    },
+    "prepare_skill_cases.py": {
+      "bytes": 16102,
+      "sha256": "29a14d1a658db62372763c047671ad6eb612e2f1cd22c1c32aae763b7d8320ba"
+    },
+    "prior_study_exclusion_check.json": {
+      "bytes": 797,
+      "sha256": "a76405e0a69deeae7b0c43afc2610260e0380359294289e35ba3a5fd0c5e57da"
+    },
+    "prospective_eligibility_rule.json": {
+      "bytes": 4971,
+      "sha256": "7976a8b20eae08911bd35be0852bd233e86bca793d3672b8401611e7cd750796"
+    },
+    "recover_cve_sources.py": {
+      "bytes": 6542,
+      "sha256": "d781eb4c52f205dcfcf81435d50e3a618867071740d965957e6fd2be14209a93"
+    },
+    "skill_candidates_v1/README.md": {
+      "bytes": 5163,
+      "sha256": "99aaa85626e2ed74ab2bba53888a0b00db68cf27f3888ecc4f1fddf4b0368513"
+    },
+    "skill_candidates_v1/contract_validation.json": {
+      "bytes": 23729,
+      "sha256": "5b5232c7694a87d08d9895a3f640b300a5f823a7e4a1169b368c65521b706d3d"
+    },
+    "skill_candidates_v1/inspection_audit.json": {
+      "bytes": 32213,
+      "sha256": "604e3e5bd67004a4cf044c5b7ac8283996867fc1b1e1734fed5b9c1efd78c9be"
+    },
+    "skill_candidates_v1/paired_case_specifications.json": {
+      "bytes": 61899,
+      "sha256": "7f3e57f4209324f0822a1e951ce036296152eeaadd08b1a9e802f755b5214991"
+    },
+    "skill_candidates_v1/preparation_inventory.json": {
+      "bytes": 9756,
+      "sha256": "0f1d27de58334d49db0dc8f24c586e42a356962cefd3b83a15d65833045e8b1f"
+    },
+    "skill_candidates_v1/procedures/02dc482edfed9db13c20e71711871d550b9f16b58665826a994de810ccee176f.md": {
+      "bytes": 3058,
+      "sha256": "5a2bc8005064cf007d896476bcf6616fb4232201ee8c34c7b29efae26d339b86"
+    },
+    "skill_candidates_v1/procedures/02dc482edfed9db13c20e71711871d550b9f16b58665826a994de810ccee176f.metadata.yaml": {
+      "bytes": 1381,
+      "sha256": "4356b7147a3ceb68a134c744fd7bc7e091d94bf6c8bb82992cd85ed0161c6e28"
+    },
+    "skill_candidates_v1/procedures/03c1fadaa9018abfba09be64c1a9fbbcb54b891d2a77037d0ba78e5d3716a3c2.md": {
+      "bytes": 5227,
+      "sha256": "87e2d510ac3510a4202337a003559d3fdafbdcd140bc299af5e6af22644fe71e"
+    },
+    "skill_candidates_v1/procedures/03c1fadaa9018abfba09be64c1a9fbbcb54b891d2a77037d0ba78e5d3716a3c2.metadata.yaml": {
+      "bytes": 1393,
+      "sha256": "17e088211e2708d687db6ca0221b12039a35ce7067b419d5da6e56c700c2fa6c"
+    },
+    "skill_candidates_v1/procedures/03f699303b6eaebbf95a53071d46223981b564ecf9c1592bed96c70f7ab3bb34.md": {
+      "bytes": 4438,
+      "sha256": "eb5d44bd4259b62f2121a2c574e8422878a395439c8cc75a9b69830d880c561e"
+    },
+    "skill_candidates_v1/procedures/03f699303b6eaebbf95a53071d46223981b564ecf9c1592bed96c70f7ab3bb34.metadata.yaml": {
+      "bytes": 1424,
+      "sha256": "ffe5686c220106f8e0f2a7b88481ab6a7e65018ff0b6531cdb5c095907c4cb05"
+    },
+    "skill_candidates_v1/procedures/041c29b895bdfce58f0f9a1656169d898ed2b7c9a995b33bd79caf3d6a3f8a02.md": {
+      "bytes": 2446,
+      "sha256": "c4ef062f930d93305c91ce74e98954a1eb5c80f6fd740759249dbefde0ac4c8c"
+    },
+    "skill_candidates_v1/procedures/041c29b895bdfce58f0f9a1656169d898ed2b7c9a995b33bd79caf3d6a3f8a02.metadata.yaml": {
+      "bytes": 1370,
+      "sha256": "b88dd98e8715d13e71ffec1c48d8be38c1d7a84dcd88df63ed26c4acb5f802ed"
+    },
+    "skill_candidates_v1/procedures/0505908bc61005292484e021628afc9f83f778e50c993a9e27e2e6ea26eca783.md": {
+      "bytes": 3475,
+      "sha256": "94c7b96920267c4c3941e0869f28f683127b1711af5e4f95e28eb0ac5845f6bc"
+    },
+    "skill_candidates_v1/procedures/0505908bc61005292484e021628afc9f83f778e50c993a9e27e2e6ea26eca783.metadata.yaml": {
+      "bytes": 1392,
+      "sha256": "0b3abc2fff3c048d81c0806111295291fdb96fb7482af88cf4978e40565a1bee"
+    },
+    "skill_candidates_v1/procedures/05f1ec76dc871ef860da3bd0bfb3bc5d5fbd56a0acc37640502221cd22191550.md": {
+      "bytes": 4052,
+      "sha256": "dbdd78556fd9aaa3d8ad92185741fa8d1591af7cd95cac8773c62a176638cab5"
+    },
+    "skill_candidates_v1/procedures/05f1ec76dc871ef860da3bd0bfb3bc5d5fbd56a0acc37640502221cd22191550.metadata.yaml": {
+      "bytes": 1423,
+      "sha256": "7199f9bd2a771f038264d9cae05aacdd81135750b26479d8c7dae702681e1762"
+    },
+    "skill_candidates_v1/procedures/062b6005ebd08f91dd63ad63b7fb94083f1a82584d7a8ecdb1c089fba3d132d2.md": {
+      "bytes": 4505,
+      "sha256": "6c1a473a91cf90b17f04cd3d893b75934b87759539c461e407c013133a7ab561"
+    },
+    "skill_candidates_v1/procedures/062b6005ebd08f91dd63ad63b7fb94083f1a82584d7a8ecdb1c089fba3d132d2.metadata.yaml": {
+      "bytes": 1421,
+      "sha256": "5bd514856854b82694bebd323eae6483d7aba26dcba12e130a0c5bfc4c92af1d"
+    },
+    "skill_candidates_v1/procedures/0631aa7cba85730cccd04af4d887002f82b7db655b41fe46f4f107dcd980a275.md": {
+      "bytes": 3806,
+      "sha256": "b4cf0e09b23728cbeb40748516e64b0ac59032ffd5bd5167f5f8877f8752aeae"
+    },
+    "skill_candidates_v1/procedures/0631aa7cba85730cccd04af4d887002f82b7db655b41fe46f4f107dcd980a275.metadata.yaml": {
+      "bytes": 1392,
+      "sha256": "676770a5f465cfd4b29a1e21cff559460a6f636ed3ce2f2378bff1587d34ec60"
+    },
+    "skill_candidates_v1/procedures/06f2c6d82f0f4a5218f8dcc746871f9fb51bed76c6d2ffc4e77251a0b8db871e.md": {
+      "bytes": 4536,
+      "sha256": "6f32eb4be71f8cbc1862f46520b4b40c12fa3ca865b5de958d15c47b5866a635"
+    },
+    "skill_candidates_v1/procedures/06f2c6d82f0f4a5218f8dcc746871f9fb51bed76c6d2ffc4e77251a0b8db871e.metadata.yaml": {
+      "bytes": 1360,
+      "sha256": "b971acee72c3a86419b13533e3c47474e196678085a7365b20f35226d19a490a"
+    },
+    "skill_candidates_v1/procedures/075223420c40e25eb150a5315af78ba2ec143435b285e8690db8fe4db582adde.md": {
+      "bytes": 4802,
+      "sha256": "9df261babc1e9ed5b9f5582d41117f535cc10cfbb18850890b7cde5680148297"
+    },
+    "skill_candidates_v1/procedures/075223420c40e25eb150a5315af78ba2ec143435b285e8690db8fe4db582adde.metadata.yaml": {
+      "bytes": 1387,
+      "sha256": "39c82a4df2783ae8f408dce2fcf9922bc434914e4f6a0a738cff75857358b5ef"
+    },
+    "skill_candidates_v1/procedures/07663fa3791b39ca919277b30ebff035545c04548cdd973fae78a0b8bd0e3d22.md": {
+      "bytes": 4456,
+      "sha256": "e42a230018165c9ef75e99a35b6c0933465a34004083c6b3e07da66275b76d30"
+    },
+    "skill_candidates_v1/procedures/07663fa3791b39ca919277b30ebff035545c04548cdd973fae78a0b8bd0e3d22.metadata.yaml": {
+      "bytes": 1412,
+      "sha256": "20221d3dd7f3b77bd4f1b7343b369d243189feff5c894ad5374a294a37d6e726"
+    },
+    "skill_candidates_v1/procedures/085b46719494303d1c5a40955b3e75d8a31f80abda8d1536573882efb3d02f0e.md": {
+      "bytes": 4265,
+      "sha256": "3632adf7529f6a0bdbdd1e4b0e51f10381afe1b1639beb082d761359ed0d06f3"
+    },
+    "skill_candidates_v1/procedures/085b46719494303d1c5a40955b3e75d8a31f80abda8d1536573882efb3d02f0e.metadata.yaml": {
+      "bytes": 1392,
+      "sha256": "95bf58f1b7719ae60fc16f099c2f7b0899c68ce0a7cf85821ec92e112e4aad35"
+    },
+    "skill_candidates_v1/source_manifest.json": {
+      "bytes": 33489,
+      "sha256": "2043615515b424d168057e68b079dd07bbfa0bc9efbbe5b26b5c9d76d3a7465f"
+    },
+    "skill_candidates_v1/source_rows/02dc482edfed9db13c20e71711871d550b9f16b58665826a994de810ccee176f.json": {
+      "bytes": 5209,
+      "sha256": "6b1d5a1f2fd6fbba8f8b6ccab31244acec06deb98d0f579848b81bd63be2c8d3"
+    },
+    "skill_candidates_v1/source_rows/03c1fadaa9018abfba09be64c1a9fbbcb54b891d2a77037d0ba78e5d3716a3c2.json": {
+      "bytes": 7562,
+      "sha256": "88bfabd035a67133da8935ff25ee0de0dc12833a965f6a46c7d437de250d09f8"
+    },
+    "skill_candidates_v1/source_rows/03f699303b6eaebbf95a53071d46223981b564ecf9c1592bed96c70f7ab3bb34.json": {
+      "bytes": 6668,
+      "sha256": "fc6e2aa9410c1555e2e6078a389928f65ad9d21d049bef1a06687db848cafc3e"
+    },
+    "skill_candidates_v1/source_rows/041c29b895bdfce58f0f9a1656169d898ed2b7c9a995b33bd79caf3d6a3f8a02.json": {
+      "bytes": 4585,
+      "sha256": "178148dff2e8e70313a230e72fea771a030fb205f6f046bb32ccbe60f210a658"
+    },
+    "skill_candidates_v1/source_rows/0505908bc61005292484e021628afc9f83f778e50c993a9e27e2e6ea26eca783.json": {
+      "bytes": 5684,
+      "sha256": "7cf105353aac4ebfdfa88b95d6a2ed5f51ea48299d0db181a31c7e2830e3d1bf"
+    },
+    "skill_candidates_v1/source_rows/05f1ec76dc871ef860da3bd0bfb3bc5d5fbd56a0acc37640502221cd22191550.json": {
+      "bytes": 6287,
+      "sha256": "cf2425582ffb72276caf35df87ece25ab514d97a6f8c3ad0ebee20782ffab2ff"
+    },
+    "skill_candidates_v1/source_rows/062b6005ebd08f91dd63ad63b7fb94083f1a82584d7a8ecdb1c089fba3d132d2.json": {
+      "bytes": 6738,
+      "sha256": "fff78120dc3f7a291b7cc332527d492149d1ac36d6db1509da905357c973531c"
+    },
+    "skill_candidates_v1/source_rows/0631aa7cba85730cccd04af4d887002f82b7db655b41fe46f4f107dcd980a275.json": {
+      "bytes": 5968,
+      "sha256": "77adad304d94ce9facce95b6680c276de920c0d06b9da79d6d200fb6569b7219"
+    },
+    "skill_candidates_v1/source_rows/06f2c6d82f0f4a5218f8dcc746871f9fb51bed76c6d2ffc4e77251a0b8db871e.json": {
+      "bytes": 6672,
+      "sha256": "ca6223375b28835542a8be7cd68b4f968a6b66567aab15daec4e8629ecc031f7"
+    },
+    "skill_candidates_v1/source_rows/075223420c40e25eb150a5315af78ba2ec143435b285e8690db8fe4db582adde.json": {
+      "bytes": 7051,
+      "sha256": "40ab83f1a19abaa04f69ec72d56e355557118e7e22bb0b9ddf3e7beaf9cb4fed"
+    },
+    "skill_candidates_v1/source_rows/07663fa3791b39ca919277b30ebff035545c04548cdd973fae78a0b8bd0e3d22.json": {
+      "bytes": 6679,
+      "sha256": "5785337aeb0b447384d2e1296a2d99dcec71e3b721d1683a6e4816402f32261d"
+    },
+    "skill_candidates_v1/source_rows/085b46719494303d1c5a40955b3e75d8a31f80abda8d1536573882efb3d02f0e.json": {
+      "bytes": 6482,
+      "sha256": "f59a0d1979f517c2fcb2abe08e0c37fb87952611d182568ca5c9b1f680de3c15"
+    },
+    "skill_oracles.py": {
+      "bytes": 9391,
+      "sha256": "889eba4156e7891e210da7b77bc3b415191c514d76012760d5da0d2074e3e4a3"
+    },
+    "source_recovery_policy.json": {
+      "bytes": 1793,
+      "sha256": "cd751c1f3c10bc0b116a3c50351053c57d797e7a158d2baa53dc30135eb76cf8"
+    },
+    "verify_candidate_preparation.py": {
+      "bytes": 12147,
+      "sha256": "0b04b297ca735fbde934d4e393f260cbdc76a5bfc87327ad6ce1e534776d4181"
+    },
+    "verify_skill_preparation.py": {
+      "bytes": 9557,
+      "sha256": "5593726f7bb504dfc3a55e09083fc4dd7e92a88ec6f0d305dabcb68f24f724ed"
+    }
+  },
+  "final_cohort_released": false,
+  "full_scientific_admission": false,
+  "model_calls": 0,
+  "schema": "la-source-preparation-inventory/v1",
+  "scientific_attempts_executed": 0,
+  "self_excluded": true,
+  "status": "FROZEN_CANDIDATE_PREPARATION_ONLY",
+  "total_bytes": 4429452,
+  "validation_report": "candidate_cohort_coverage.json"
+}

@@ -1,0 +1,42 @@
+{
+  "time": "2026-11-10T02:33:07.080179+00:00",
+  "input_tree": "ed3b9f0e2ccb153549771ce27bba003fec8e1d66",
+  "resolved_source_preparations": [
+    {
+      "path": "ipfs_accelerate_py/cli_runtime/cli_metadata.py",
+      "conflict_blocks_prepared": 2,
+      "candidate_sha256": "14084a5355a7276da65ad82acd52671ee08779be2fdf1e9d1d23dc545785364b",
+      "syntax_parsed": true
+    },
+    {
+      "path": "ipfs_accelerate_py/cli_runtime/grok_stream_capture.py",
+      "conflict_blocks_prepared": 2,
+      "candidate_sha256": "6283928deef129181338ea11ba1c841c22f128a9ec10899ff3dc7363f0a4b359",
+      "syntax_parsed": true
+    },
+    {
+      "path": "test/api/test_native_provider_rescue_boundary.py",
+      "conflict_blocks_prepared": 3,
+      "candidate_sha256": "6a268d8cefe6760c734b2d5b87d265a7d21a5e5ca6cbcf764297e936b3da9f04",
+      "syntax_parsed": true
+    },
+    {
+      "path": "test/api/test_provider_failure_retry_context.py",
+      "conflict_blocks_prepared": 2,
+      "candidate_sha256": "9c88a81850d9b7a8d63d600b0c76c6193abb7a14ebaefba78671a30ed2ce7b54",
+      "syntax_parsed": true
+    },
+    {
+      "path": "test/api/test_grok_prompt_accounting.py",
+      "conflict_blocks_prepared": 0,
+      "candidate_sha256": "6d84b30e1ef6d5e59e86ba5d4294ad66e2233f845ccf43b6d3baf258bedb6d2a",
+      "syntax_parsed": true
+    }
+  ],
+  "current_regression_ast_changes": [],
+  "new_metadata_regression_cases_prepared": 2,
+  "source_refs_updated": false,
+  "canonical_tree_updated": false,
+  "runtime_qualified": false,
+  "reason": "External source preparation while the coordinated validation-owner regression holds the next execution window."
+}

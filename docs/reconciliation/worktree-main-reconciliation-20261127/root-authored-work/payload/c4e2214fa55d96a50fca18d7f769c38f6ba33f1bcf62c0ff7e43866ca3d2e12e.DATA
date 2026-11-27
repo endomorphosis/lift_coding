@@ -1,0 +1,105 @@
+import OriginalPrefixRecordEvaluation
+
+set_option backward.isDefEq.respectTransparency false
+
+/-!
+SOURCE-ONLY, UNCOMPILED, UNQUALIFIED CANDIDATE.
+
+Typed projections of the actually evaluated numeric-prefix record into the
+independently defined mathematical objective and coordinate gradient. Desired
+objective/gradient equations are conclusions, never premises. Fixed source L2
+retains its exact binary64 Rat; arbitrary exact-real fixed-shape inputs only.
+
+Preparation, Python arithmetic, omitted guard/return/sqrt, source update/finite
+epochs/infinite extension and convergence remain separately open obligations.
+-/
+
+namespace RankerObjectiveOriginalModelProjection
+
+noncomputable section
+
+open RankerObjectiveIR (SliceError mapOne)
+open RankerObjectivePrefixIR (Ty Denote Schema Slot RecordValues namesFromScope)
+open RankerObjectiveContainerLanguage (evalSourcePrefix)
+open RankerObjectiveOriginalMarginsEvaluation (exactDot exactMargins actualEnvironment)
+open RankerObjectiveOriginalLossRegularizerEvaluation (sourceL2Rat exactData exactRegularizer)
+open RankerObjectiveOriginalFactorsEvaluation (exactFactors)
+open RankerObjectiveOriginalGradientEvaluation (exactGradient)
+open RankerObjectiveOriginalRecordEvaluation (orderedResult actual_prefix_eval_success)
+
+def readRecord : {schema : Schema} → {τ : Ty} → Slot schema τ → RecordValues schema → Denote τ
+  | _, _, .here, .cons value _ => value
+  | _, _, .there slot, .cons _ rest => readRecord slot rest
+
+def dataSlot : Slot RankerObjectiveOriginalPrefixParts.resultSchema .scalar := .there .here
+def regularizerSlot : Slot RankerObjectiveOriginalPrefixParts.resultSchema .scalar := .there (.there .here)
+def gradientSlot : Slot RankerObjectiveOriginalPrefixParts.resultSchema (.vector 80) :=
+  .there (.there (.there (.there .here)))
+
+def numericObjectiveResult (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) :
+    Except SliceError ℝ :=
+  mapOne (fun record => readRecord dataSlot record + readRecord regularizerSlot record)
+    (evalSourcePrefix (namesFromScope (actualEnvironment weights differences))
+      GeneratedOriginalObjectiveContainerPrefix.emittedPrefix)
+
+def computedGradientResult (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) :
+    Except SliceError (Fin 80 → ℝ) :=
+  mapOne (readRecord gradientSlot)
+    (evalSourcePrefix (namesFromScope (actualEnvironment weights differences))
+      GeneratedOriginalObjectiveContainerPrefix.emittedPrefix)
+
+theorem source_L2_eq_originalRealMu : (sourceL2Rat : ℝ) = RankerRealCurvature.originalRealMu := by
+  rfl
+
+theorem exact_numeric_objective_eq_model (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) :
+    exactData (exactMargins weights differences) + exactRegularizer weights =
+      RankerRealCurvature.realObjective (sourceL2Rat : ℝ) differences weights := by
+  simp only [exactData, exactRegularizer, exactMargins, exactDot,
+    RankerRealCurvature.realObjective, RankerRealCurvature.squaredEuclideanNorm,
+    RankerRealCurvature.dot, RankerRealCurvature.realStablePairLoss_eq, pow_two, Nat.cast_ofNat]
+  ring
+
+theorem exact_computed_gradient_eq_model (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) :
+    exactGradient weights differences (exactFactors (exactMargins weights differences)) =
+      RankerRealCurvature.realCoordinateGradient (sourceL2Rat : ℝ) differences weights := by
+  funext coordinate
+  simp only [exactGradient, exactFactors, exactMargins, exactDot,
+    RankerRealCurvature.realCoordinateGradient, RankerRealCurvature.dot,
+    RankerRealCurvature.realStableLogisticP_eq, Nat.cast_ofNat]
+  ring
+
+/-- Objective is projected from actual source record evaluation, then related
+to the mathematical model. No desired objective equality is an input. -/
+theorem actual_numeric_objective_projection_eq (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) :
+    numericObjectiveResult weights differences =
+      .ok (RankerRealCurvature.realObjective (sourceL2Rat : ℝ) differences weights) := by
+  unfold numericObjectiveResult
+  rw [actual_prefix_eval_success]
+  change Except.ok (exactData (exactMargins weights differences) + exactRegularizer weights) = _
+  rw [exact_numeric_objective_eq_model]
+
+/-- Computed gradient is extracted from the actual source result; it is never
+supplied by the caller as the known mathematical gradient. -/
+theorem actual_computed_gradient_projection_eq (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) :
+    computedGradientResult weights differences =
+      .ok (RankerRealCurvature.realCoordinateGradient (sourceL2Rat : ℝ) differences weights) := by
+  unfold computedGradientResult
+  rw [actual_prefix_eval_success]
+  change Except.ok (exactGradient weights differences (exactFactors (exactMargins weights differences))) = _
+  rw [exact_computed_gradient_eq_model]
+
+#print axioms source_L2_eq_originalRealMu
+#print axioms exact_numeric_objective_eq_model
+#print axioms exact_computed_gradient_eq_model
+#print axioms actual_numeric_objective_projection_eq
+#print axioms actual_computed_gradient_projection_eq
+
+end
+
+end RankerObjectiveOriginalModelProjection
+
+#print axioms _root_.RankerObjectiveOriginalModelProjection.source_L2_eq_originalRealMu
+#print axioms _root_.RankerObjectiveOriginalModelProjection.exact_numeric_objective_eq_model
+#print axioms _root_.RankerObjectiveOriginalModelProjection.exact_computed_gradient_eq_model
+#print axioms _root_.RankerObjectiveOriginalModelProjection.actual_numeric_objective_projection_eq
+#print axioms _root_.RankerObjectiveOriginalModelProjection.actual_computed_gradient_projection_eq

@@ -1,0 +1,21 @@
+"""Actual caller source carry/admission with provider disabled and grader forbidden."""
+import argparse,copy,importlib.util,json,sys
+from pathlib import Path
+H=Path(__file__).resolve().parent
+spec=importlib.util.spec_from_file_location('retrieval_caller_control',H/'repository_controller_v3.py');M=importlib.util.module_from_spec(spec);spec.loader.exec_module(M);C=M.C;R=M.R
+def save(path,value):path.write_text(json.dumps(value,indent=2,sort_keys=True)+'\n')
+def main():
+    parser=argparse.ArgumentParser();parser.add_argument('--profile',type=Path,required=True);parser.add_argument('--output',type=Path,required=True);args=parser.parse_args();base=json.loads(args.profile.read_text());out=args.output.resolve();out.mkdir(exist_ok=False)
+    if base['provider']['enabled']:raise ValueError('provider-disabled control profile required')
+    first,second=[event for event in base['events'] if event['arm']=='A'];profile={**base,'output_root':str(out/'state'),'events':[first,second]};path=out/'profile.json';save(path,profile);ph=R.sha(path.read_bytes())
+    original=json.loads((H/'requests-cold-v1/state/events/requests-cold-v1-a-5414/result.json').read_text());source_hash=R.inventory(original['accepted_tree_path'])['tree_sha256'];assert source_hash==original['accepted_tree_sha256']
+    parent=copy.deepcopy(original);parent.update(event_id=first['event_id'],trajectory=first['trajectory'],profile_sha256=ph,accepted_pointer_event_id=first['event_id']);parent.pop('local_generation',None)
+    ledger=C.Ledger(profile['output_root']);ledger.db.execute('INSERT INTO events VALUES(?,?,?,?)',(first['event_id'],R.sha(C.canonical(first)),'started',None));ledger.append('declared_public_parent_fixture',{'event':first,'scope':'Previously observed public accepted production source; not a new accepted task or hidden/reference patch.'});ledger.commit_event(first,parent,Path(original['accepted_patch_path']));ledger.db.close()
+    attempts=[]
+    def forbidden(*args,**kwargs):attempts.append(True);raise AssertionError('control cannot invoke a grader/native service')
+    C.subprocess_json=forbidden
+    result=M.execute(path,second['event_id']);retrieval=json.loads((out/'state/events'/second['event_id']/'retrieval.json').read_text());pending=list((out/'state/pending_residuals').glob('*.json'))
+    checks={'actual_git_conflict_preserved':result['source_transition']['kind']=='actual_git_three_way_merge' and result['source_transition']['conflicts']==['requests/models.py'],'mandatory_source_admitted':retrieval['admitted'] and retrieval['mandatory_paths']==['requests/models.py'],'all_bounds_preserved':retrieval['source_count']<=3 and retrieval['source_bytes']<=48000 and retrieval['wire_bytes']<=65536,'reaches_existing_disabled_boundary':result['status']=='residual_pending' and len(pending)==1,'no_native_grader_or_transport_dispatch':not attempts and result['provider_calls']==0 and not (out/'state/provider').exists(),'accepted_predecessor_not_dropped':result['accepted_pointer_event_id']==first['event_id'],'prior_public_source_unchanged':R.inventory(original['accepted_tree_path'])['tree_sha256']==source_hash}
+    if not all(checks.values()):raise AssertionError(checks)
+    summary={'schema':'ns-repository-public-retrieval-caller-control@1','passed':True,'checks':checks,'source_profile_sha256':R.sha(args.profile.read_bytes()),'controller_sha256':R.sha((H/'repository_controller_v3.py').read_bytes()),'retrieval_helper_sha256':R.sha((H/'repository_retrieval_v1.py').read_bytes()),'actual_git_transition':result['source_transition']['kind'],'raw_source_bytes':retrieval['source_bytes'],'wire_bytes':retrieval['wire_bytes'],'status':result['status'],'provider_calls':0,'native_grader_calls':0,'scope':'Actual new caller with a declared prior public model-produced source fixture; zero new repair outcomes. No reference patch/test/log payload is read.'};save(out/'summary.json',summary);print(json.dumps(summary))
+if __name__=='__main__':main()

@@ -1,0 +1,374 @@
+"""A bounded retrieval packet must replay real, fresh native nominations.
+
+These are serialization/custody checks over deterministic local vectors. They
+do not measure embedding relevance, source behavior, or benchmark success.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+from pathlib import Path
+import subprocess
+
+import pytest
+
+from ipfs_accelerate_py.agent_supervisor.analysis.program_ast_adapters import build_program_evidence_index
+from ipfs_accelerate_py.agent_supervisor.analysis.code_symbol_vector_index import build_code_symbol_vector_index
+from ipfs_accelerate_py.agent_supervisor.runtime.code_retrieval_context import (
+    load_code_retrieval_context, prepare_code_retrieval_context,
+)
+
+
+def canonical(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False).encode()
+
+
+def sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def heavy_source(count=20):
+    """Real AST facts, rather than forged extra payload, exercise projection."""
+    sections = []
+    for number in range(count):
+        symbol = f"operation_{number:02d}_qualified_public_lookup_and_validation"
+        lines = [f"def {symbol}(service, payload):"]
+        for call in range(8):
+            lines.append(f"    value_{call} = service.resolve_public_namespace_{call:02d}_for_request(payload)")
+        lines.append("    return (" + ", ".join(f"value_{call}" for call in range(8)) + ")")
+        sections.append("\n".join(lines))
+    return "\n\n".join(sections) + "\n"
+
+
+def build_native_fixture(directory, *, source=None, max_results=20, source_name="worker.py",
+                         query_text="public lookup and validation"):
+    """Prepare a fresh repository and complete AST/vector/query fixture."""
+    repo = Path(directory) / "repository"
+    repo.mkdir(parents=True, exist_ok=False)
+    source = heavy_source() if source is None else source
+    (repo / source_name).write_text(source, encoding="utf-8")
+    for args in [("init", "-q"), ("add", "."),
+                 ("-c", "user.name=Offline Qualification", "-c", "user.email=local@example.invalid", "commit", "-qm", "public source fixture")]:
+        subprocess.run(["git", "-C", str(repo), *args], check=True, capture_output=True)
+    ast = build_program_evidence_index({source_name: source}).ast_index
+    index = build_code_symbol_vector_index(
+        ast, forest_id="forest:offline-public-fixture", tree_id="tree:offline-public-fixture",
+        coverage_id=ast.index_id, dimensions=2, model_id="deterministic-local-fixture",
+        model_revision="1", configuration_id="offline-fixture:2d",
+        vectors=lambda row: (1.0, 0.0),
+    )
+    hits = index.search((1.0, 0.0), max_results=max_results)
+    prepared = prepare_code_retrieval_context(
+        repository=repo, task_id="FRONTIER-001", query_text=query_text,
+        snapshot=index, result=hits, output=repo / "retrieval.json",
+    )
+    source_args = {"repository": repo, "task_id": "FRONTIER-001", "artifact": "retrieval.json",
+                   "expected_sha256": prepared["sha256"]}
+    full_text = load_code_retrieval_context(**source_args)
+    frontier_args = dict(repository=repo, task_cid="task:offline-frontier-001", task_id="FRONTIER-001",
+                         task_revision="sha256:" + "1" * 64, repository_id="repo:offline-public-fixture",
+                         tree_id=index.tree_id, source_artifact="retrieval.json",
+                         source_sha256=prepared["sha256"], output=repo / "frontier.json")
+    return {"repository": repo, "index": index, "result": hits, "source_prepared": prepared,
+            "source_args": source_args, "full_text": full_text, "full": json.loads(full_text),
+            "frontier_args": frontier_args}
+
+
+@pytest.fixture(autouse=True)
+def fresh_metadata_indexes(tmp_path, monkeypatch):
+    monkeypatch.setenv("IPFS_ACCELERATE_META_INDEX_DUCKDB", str(tmp_path / "fresh-meta.duckdb"))
+    monkeypatch.setenv("IPFS_ACCELERATE_PYTEST_SEAL_DUCKDB", str(tmp_path / "fresh-seal.duckdb"))
+
+
+@pytest.fixture
+def native(tmp_path):
+    return build_native_fixture(tmp_path)
+
+
+def prepare_frontier(native, **overrides):
+    from ipfs_accelerate_py.agent_supervisor.runtime.code_retrieval_frontier import prepare_code_retrieval_frontier
+    return prepare_code_retrieval_frontier(**{**native["frontier_args"], **overrides})
+
+
+def reader_args(native, prepared):
+    return dict(repository=native["repository"], task_id="FRONTIER-001",
+                artifact=prepared["metadata"]["Code retrieval frontier artifact"],
+                expected_sha256=prepared["metadata"]["Code retrieval frontier sha256"])
+
+
+def load_frontier(native, prepared):
+    from ipfs_accelerate_py.agent_supervisor.runtime.code_retrieval_frontier import load_code_retrieval_frontier
+    return load_code_retrieval_frontier(**reader_args(native, prepared))
+
+
+def file_inventory(directory):
+    result = {}
+    for path in sorted(Path(directory).rglob("*")):
+        if path.is_file():
+            stat = path.stat()
+            result[path.relative_to(directory).as_posix()] = {
+                "bytes": stat.st_size, "sha256": sha(path.read_bytes()),
+                "inode": stat.st_ino, "mtime_ns": stat.st_mtime_ns, "ctime_ns": stat.st_ctime_ns,
+            }
+    return result
+
+
+def read_stored_manifest(native, prepared):
+    import duckdb
+    artifact = native["repository"] / reader_args(native, prepared)["artifact"]
+    spec = json.loads(artifact.read_bytes())
+    database = native["repository"] / spec["store_path"]
+    with duckdb.connect(str(database), read_only=True, config={"threads": 1}) as connection:
+        body = connection.execute("SELECT body_json FROM context_manifests WHERE manifest_cid=?",
+                                  [spec["manifest_cid"]]).fetchone()[0]
+    return artifact, spec, database, json.loads(body)
+
+
+def replace_stored_body(database, manifest_cid, body):
+    import duckdb
+    with duckdb.connect(str(database), config={"threads": 1}) as connection:
+        connection.execute("UPDATE context_manifests SET body_json=? WHERE manifest_cid=?",
+                           [canonical(body).decode(), manifest_cid])
+
+
+def test_small_native_fixture_keeps_exact_full_context(tmp_path):
+    native = build_native_fixture(tmp_path, source="def calculate(value):\n    return value + 1\n", max_results=1)
+    prepared = prepare_frontier(native)
+    assert load_frontier(native, prepared) == native["full_text"]
+    assert prepared["selected_transport"] == "full"
+
+
+def test_heavy_native_candidates_preserve_exact_header_and_selected_hit_dicts(native):
+    prepared = prepare_frontier(native)
+    text = load_frontier(native, prepared)
+    packet = json.loads(text)
+    assert prepared["selected_transport"] == "frontier"
+    assert prepared["source_bytes"] == len(native["full_text"].encode())
+    assert prepared["selected_bytes"] == len(text.encode()) < prepared["source_bytes"]
+    assert len(text.encode()) <= 32768
+    assert packet["retrieval"] == {**native["full"], "hits": native["full"]["hits"][:2]}
+    assert packet["retrieval"]["nomination_only"] is True
+    assert packet["retrieval"]["semantic_authority"] is False
+    assert prepared["complete_hit_count"] == 20
+    assert prepared["included_hit_count"] == 2
+    assert prepared["omitted_hit_count"] == 18
+    frontier = packet["frontier"]
+    assert len(frontier["omitted_member_ids"]) == len(frontier["expansion_handles"]) == 18
+    assert frontier["has_more"] is True
+    assert packet["manifest_cid"] == prepared["manifest_cid"]
+    for key in ("proof_authority", "execution_authority", "completion_authority"):
+        assert packet[key] is prepared[key] is False
+    assert "--expected-sha256" in packet["expansion"]["command_prefix"]
+    assert prepared["metadata"]["Code retrieval frontier sha256"] in packet["expansion"]["command_prefix"]
+
+
+def test_expansion_reads_exact_native_hit_and_changes_no_repository_or_database_bytes(native):
+    from ipfs_accelerate_py.agent_supervisor.runtime.code_retrieval_frontier import expand_code_retrieval_frontier
+    prepared = prepare_frontier(native)
+    packet = json.loads(load_frontier(native, prepared))
+    before = file_inventory(native["repository"])
+    recovered = []
+    for handle in packet["frontier"]["expansion_handles"]:
+        response = expand_code_retrieval_frontier(**reader_args(native, prepared), handle=handle,
+                                                 question="Which exact native candidate follows the selected pair?")
+        assert response["manifest_cid"] == prepared["manifest_cid"]
+        assert response["nomination_only"] is True
+        assert all(response[key] is False for key in ("proof_authority", "execution_authority", "completion_authority"))
+        recovered.append(response["hit"])
+    assert recovered == native["full"]["hits"][2:]
+    assert file_inventory(native["repository"]) == before
+
+
+@pytest.mark.parametrize("question", ["", "   ", "x" * 1025, "雪" * 342, True, 5, None])
+def test_expansion_requires_a_bounded_nonempty_question(native, question):
+    from ipfs_accelerate_py.agent_supervisor.runtime.code_retrieval_frontier import expand_code_retrieval_frontier
+    prepared = prepare_frontier(native)
+    packet = json.loads(load_frontier(native, prepared))
+    before = file_inventory(native["repository"])
+    with pytest.raises((ValueError, TypeError)):
+        expand_code_retrieval_frontier(**reader_args(native, prepared),
+                                      handle=packet["frontier"]["expansion_handles"][0], question=question)
+    assert file_inventory(native["repository"]) == before
+
+
+def test_unknown_handle_and_stale_expansion_are_refused(native):
+    from ipfs_accelerate_py.agent_supervisor.runtime.code_retrieval_frontier import expand_code_retrieval_frontier
+    prepared = prepare_frontier(native)
+    packet = json.loads(load_frontier(native, prepared))
+    with pytest.raises(ValueError, match="handle"):
+        expand_code_retrieval_frontier(**reader_args(native, prepared), handle="expand:unknown", question="Read candidate")
+    (native["repository"] / "worker.py").unlink()
+    with pytest.raises(ValueError, match="stale"):
+        expand_code_retrieval_frontier(**reader_args(native, prepared),
+                                      handle=packet["frontier"]["expansion_handles"][0], question="Read candidate")
+
+
+@pytest.mark.parametrize("target", ["artifact", "store", "parent"])
+def test_reader_refuses_symlink_artifact_store_or_parent(native, target):
+    from ipfs_accelerate_py.agent_supervisor.runtime.code_retrieval_frontier import load_code_retrieval_frontier
+    prepared = prepare_frontier(native)
+    args = reader_args(native, prepared)
+    artifact = native["repository"] / args["artifact"]
+    if target == "parent":
+        parent = artifact.parent
+        renamed = parent.with_name(parent.name + "-real")
+        parent.rename(renamed)
+        parent.symlink_to(renamed, target_is_directory=True)
+    else:
+        path = artifact if target == "artifact" else artifact.with_name("manifest.duckdb")
+        renamed = path.with_name(path.name + ".real")
+        path.rename(renamed)
+        path.symlink_to(renamed)
+    with pytest.raises((ValueError, OSError)):
+        load_code_retrieval_frontier(**args)
+
+
+@pytest.mark.parametrize("target", ["artifact", "store"])
+def test_reader_refuses_directory_in_place_of_regular_file(native, target):
+    prepared = prepare_frontier(native)
+    artifact = native["repository"] / reader_args(native, prepared)["artifact"]
+    path = artifact if target == "artifact" else artifact.with_name("manifest.duckdb")
+    path.unlink()
+    path.mkdir()
+    with pytest.raises((ValueError, OSError)):
+        load_frontier(native, prepared)
+
+
+@pytest.mark.parametrize("mutation", ["hit", "included", "rows", "bytes", "tokens", "frontier", "authority", "unknown"])
+def test_reader_refuses_corrupted_persisted_manifest_claims(native, mutation):
+    prepared = prepare_frontier(native)
+    _, spec, database, body = read_stored_manifest(native, prepared)
+    if mutation == "hit":
+        member = next(item for item in body["members"] if "hit_json" in item["payload"])
+        hit = json.loads(member["payload"]["hit_json"])
+        hit["symbol"] = "worker.forged_recommendation"
+        member["payload"]["hit_json"] = canonical(hit).decode()
+    elif mutation == "included":
+        body["members"][-1]["included"] = True
+    elif mutation in {"rows", "bytes", "tokens"}:
+        body["total_" + mutation] += 1
+    elif mutation == "frontier":
+        body["frontier"]["omitted_member_ids"] = []
+    elif mutation == "authority":
+        body["authority"] = "execution"
+    else:
+        body["unknown"] = "unexpected"
+    replace_stored_body(database, spec["manifest_cid"], body)
+    with pytest.raises(ValueError):
+        load_frontier(native, prepared)
+
+
+def test_fully_selfconsistent_forged_manifest_and_artifact_cannot_replace_native_hit(native):
+    from ipfs_accelerate_py.agent_supervisor.runtime import code_retrieval_frontier as runtime
+    from ipfs_accelerate_py.agent_supervisor.context.database_context import open_database_context_store
+    prepared = prepare_frontier(native)
+    artifact, spec, database, _ = read_stored_manifest(native, prepared)
+    fake_context = json.loads(native["full_text"])
+    fake_context["hits"][0]["symbol"] = "worker.forged_recommendation"
+    fake = runtime._manifest(spec, fake_context)
+    with open_database_context_store(database, policy_id=runtime.POLICY) as store:
+        store.persist_manifest(fake)
+    spec["manifest_cid"] = fake.manifest_cid
+    artifact.write_bytes(canonical(spec))
+    args = reader_args(native, prepared)
+    args["expected_sha256"] = sha(artifact.read_bytes())
+    with pytest.raises(ValueError, match="independently replayed"):
+        runtime.load_code_retrieval_frontier(**args)
+
+
+def test_foreign_or_missing_database_manifest_is_refused(native):
+    import duckdb
+    prepared = prepare_frontier(native)
+    _, _, database, _ = read_stored_manifest(native, prepared)
+    with duckdb.connect(str(database), config={"threads": 1}) as connection:
+        connection.execute("DELETE FROM context_manifests")
+    with pytest.raises(ValueError, match="missing"):
+        load_frontier(native, prepared)
+
+
+def test_database_view_cannot_substitute_a_local_manifest_base_table(native):
+    import duckdb
+    prepared = prepare_frontier(native)
+    _, _, database, _ = read_stored_manifest(native, prepared)
+    with duckdb.connect(str(database), config={"threads": 1}) as connection:
+        connection.execute("ALTER TABLE context_manifests RENAME TO substituted_manifests")
+        connection.execute("CREATE VIEW context_manifests AS SELECT * FROM substituted_manifests")
+    with pytest.raises(ValueError, match="base table"):
+        load_frontier(native, prepared)
+
+
+@pytest.mark.parametrize("mutation", ["schema", "task", "source", "count", "duplicate_key", "unknown"])
+def test_rehashed_malformed_frontier_artifact_is_refused(native, mutation):
+    from ipfs_accelerate_py.agent_supervisor.runtime.code_retrieval_frontier import load_code_retrieval_frontier
+    prepared = prepare_frontier(native)
+    artifact, spec, _, _ = read_stored_manifest(native, prepared)
+    if mutation == "schema":
+        spec["schema"] = "unrecognized"
+    elif mutation == "task":
+        spec["task_id"] = "FOREIGN"
+    elif mutation == "source":
+        spec["source_sha256"] = "0" * 64
+    elif mutation == "count":
+        spec["max_hits"] = True
+    elif mutation == "unknown":
+        spec["unknown"] = True
+    raw = canonical(spec)
+    if mutation == "duplicate_key":
+        raw = b'{"task_id":"FOREIGN",' + raw[1:]
+    artifact.write_bytes(raw)
+    with pytest.raises(ValueError):
+        load_code_retrieval_frontier(**{**reader_args(native, prepared), "expected_sha256": sha(raw)})
+
+
+def test_preparation_refuses_stale_or_forged_native_source_before_output(native):
+    (native["repository"] / "worker.py").write_text("def changed():\n    return 0\n")
+    before = file_inventory(native["repository"])
+    with pytest.raises(ValueError, match="current"):
+        prepare_frontier(native)
+    assert file_inventory(native["repository"]) == before
+
+
+@pytest.mark.parametrize("key,value", [
+    ("max_hits", True), ("max_hits", -1), ("max_hits", 21), ("max_hits", 1.5),
+    ("max_bytes", True), ("max_bytes", -1), ("max_bytes", 100_000_000),
+    ("max_tokens", True), ("max_tokens", -1), ("max_tokens", 100_000_000),
+])
+def test_preparation_rejects_unbounded_or_boolean_limits_without_writes(native, key, value):
+    before = file_inventory(native["repository"])
+    with pytest.raises((ValueError, TypeError)):
+        prepare_frontier(native, **{key: value})
+    assert file_inventory(native["repository"]) == before
+
+
+@pytest.mark.parametrize("change", ["task", "digest", "bytes"])
+def test_reader_rejects_wrong_task_or_digest(native, change):
+    from ipfs_accelerate_py.agent_supervisor.runtime.code_retrieval_frontier import load_code_retrieval_frontier
+    prepared = prepare_frontier(native)
+    args = reader_args(native, prepared)
+    if change == "task":
+        args["task_id"] = "FOREIGN"
+    elif change == "digest":
+        args["expected_sha256"] = "0" * 64
+    else:
+        (native["repository"] / args["artifact"]).write_bytes(b"{}")
+    with pytest.raises((ValueError, TypeError)):
+        load_code_retrieval_frontier(**args)
+
+
+def test_changed_source_returns_native_stale_header_with_no_old_hits(native):
+    prepared = prepare_frontier(native)
+    (native["repository"] / "worker.py").write_text("def replacement():\n    return 0\n")
+    stale = load_frontier(native, prepared)
+    assert stale == load_code_retrieval_context(**native["source_args"])
+    payload = json.loads(stale)
+    assert payload["status"] == "stale" and payload["hits"] == []
+    assert payload["stale_paths"] == ["worker.py"]
+    assert "operation_00_" not in stale
+
+
+@pytest.mark.parametrize("path", ["../frontier.json", "/tmp/frontier.json", "./frontier.json", "missing.json"])
+def test_reader_refuses_noncanonical_or_missing_artifact_paths(native, path):
+    from ipfs_accelerate_py.agent_supervisor.runtime.code_retrieval_frontier import load_code_retrieval_frontier
+    prepared = prepare_frontier(native)
+    with pytest.raises((ValueError, TypeError, OSError)):
+        load_code_retrieval_frontier(**{**reader_args(native, prepared), "artifact": path})

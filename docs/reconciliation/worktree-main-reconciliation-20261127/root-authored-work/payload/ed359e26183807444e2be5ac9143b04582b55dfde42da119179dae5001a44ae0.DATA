@@ -1,0 +1,36 @@
+"""Public network calibration; no candidate code or hidden tests are imported.
+
+The existing public Requests test suite uses this address as a connect-timeout
+target. This checks that the environment supplies that behavior; it does not
+replace, modify, omit, or grade any native test.
+"""
+import json
+import socket
+import sys
+import time
+from pathlib import Path
+
+started = time.monotonic()
+observations = []
+for ordinal in range(2):
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.settimeout(0.1)
+    tick = time.monotonic()
+    try:
+        sock.connect(('10.255.255.1', 80))
+        outcome = 'connected'
+    except socket.timeout:
+        outcome = 'timeout'
+    except OSError as exc:
+        outcome = 'os_error_' + str(exc.errno)
+    finally:
+        sock.close()
+    observations.append({'ordinal': ordinal, 'outcome': outcome,
+                         'elapsed_seconds': time.monotonic() - tick})
+ready = all(item['outcome'] == 'timeout' for item in observations)
+print(json.dumps({'schema': 'ns-public-network-readiness/v1', 'phase': sys.argv[1],
+                  'ready': ready, 'observations': observations,
+                  'elapsed_seconds': time.monotonic() - started,
+                  'route': Path('/proc/net/route').read_text(),
+                  'hidden_tests_read': False}, sort_keys=True))
+raise SystemExit(0 if ready else 43)

@@ -1,0 +1,298 @@
+"""Bounded delivery of a verified public representation to the coding worker.
+
+This file is owned by the same Unix identity as the model. Its mode prevents
+accidental writes, not deliberate changes by that identity. Independent pins
+and witnesses detect changes; neither the descriptor nor the file grants any
+source, execution, proof, publication, or completion authority.
+"""
+from __future__ import annotations
+
+from dataclasses import dataclass
+import hashlib
+import os
+from pathlib import Path
+import re
+import stat
+
+PRODUCTION_DELIVERY_ROOT = Path("/opt/ipfs-supervisor/worker-home/context-wires")
+DEFAULT_DELIVERY_ROOT = PRODUCTION_DELIVERY_ROOT
+SCHEMA = "supervisor-code-retrieval-wire-delivery@1"
+AUTHORITY = ("proof_authority", "execution_authority", "completion_authority", "publication_authority")
+FIELDS = {"schema", "mode", "path", "wire_sha256", "wire_bytes", "source_sha256",
+          "native_prompt_sha256", "owner_custody", "materialized", *AUTHORITY}
+MAX_PATH_BYTES = 4096
+
+
+class WireDeliveryError(ValueError):
+    pass
+
+
+def _fail(message):
+    raise WireDeliveryError(message)
+
+
+def _codec():
+    from . import compact_code_retrieval
+    return compact_code_retrieval
+
+
+def _digest(value):
+    if type(value) is not str or re.fullmatch(r"[0-9a-f]{64}", value) is None:
+        _fail("independent canonical SHA256 pin required")
+    return value
+
+
+def _invocation(value):
+    if type(value) is not str or re.fullmatch(r"[0-9a-f]{32}", value) is None:
+        _fail("exact bounded invocation identity required")
+    return value
+
+
+def _path(value):
+    if not isinstance(value, (str, Path)):
+        _fail("canonical absolute wire path required")
+    text = str(value)
+    try:
+        raw = text.encode("utf-8")
+    except UnicodeError as error:
+        raise WireDeliveryError("UTF-8 wire path required") from error
+    path = Path(text)
+    if (not 0 < len(raw) <= MAX_PATH_BYTES or not path.is_absolute() or text.startswith("//")
+            or str(path) != text or any(part in (".", "..") for part in path.parts)
+            or text == "/" or "\x00" in text):
+        _fail("canonical bounded absolute wire path required")
+    return path
+
+
+def canonical_wire_bytes(packet: dict) -> bytes:
+    """Return the exact bounded wire, without a trailing newline."""
+    return _codec()._bounded(packet, _codec().MAX_WIRE_BYTES)
+
+
+def planned_wire_path(packet: dict, invocation_id: str, *,
+                      delivery_root: Path = DEFAULT_DELIVERY_ROOT) -> Path:
+    root = _path(delivery_root)
+    wire = canonical_wire_bytes(packet)
+    return _path(root / _invocation(invocation_id) / (hashlib.sha256(wire).hexdigest() + ".json"))
+
+
+def validate_wire_delivery_descriptor(descriptor: dict, *,
+        delivery_root: Path = DEFAULT_DELIVERY_ROOT) -> dict:
+    """Validate a closed nomination without opening a historical live file."""
+    root = _path(delivery_root)
+    if (type(descriptor) is not dict or set(descriptor) != FIELDS or descriptor["schema"] != SCHEMA
+            or descriptor["mode"] != "materialized" or descriptor["owner_custody"] is not False
+            or type(descriptor["materialized"]) is not bool
+            or any(descriptor[key] is not False for key in AUTHORITY)):
+        _fail("exact nonauthoritative wire delivery descriptor required")
+    for key in ("wire_sha256", "source_sha256", "native_prompt_sha256"):
+        _digest(descriptor[key])
+    if type(descriptor["wire_bytes"]) is not int or not 0 < descriptor["wire_bytes"] <= _codec().MAX_WIRE_BYTES:
+        _fail("exact bounded wire byte count required")
+    if type(descriptor["path"]) is not str:
+        _fail("literal delivery path required")
+    path = _path(descriptor["path"])
+    if path.parent.parent != root or path.name != descriptor["wire_sha256"] + ".json":
+        _fail("wire path differs from fixed root and wire identity")
+    _invocation(path.parent.name)
+    return dict(descriptor)
+
+
+def build_wire_delivery_descriptor(packet: dict, *, delivered_wire_path: str | Path,
+        delivery_root: Path = DEFAULT_DELIVERY_ROOT) -> dict:
+    wire = canonical_wire_bytes(packet)
+    if type(packet) is not dict:
+        _fail("wire packet required")
+    descriptor = {"schema": SCHEMA, "mode": "materialized", "path": str(_path(delivered_wire_path)),
+        "wire_sha256": hashlib.sha256(wire).hexdigest(), "wire_bytes": len(wire),
+        "source_sha256": _digest(packet.get("source_sha256")),
+        "native_prompt_sha256": _digest(packet.get("native_prompt_sha256")),
+        "owner_custody": False, "materialized": False, **{key: False for key in AUTHORITY}}
+    return validate_wire_delivery_descriptor(descriptor, delivery_root=delivery_root)
+
+
+def _directory_identity(info):
+    return (info.st_dev, info.st_ino, info.st_mode, info.st_uid, info.st_gid)
+
+
+def _file_identity(info):
+    return (*_directory_identity(info), info.st_nlink, info.st_size, info.st_mtime_ns, info.st_ctime_ns)
+
+
+def _open_root(root: Path):
+    """Walk exact directories through no-follow descriptors, pinning custody."""
+    root = _path(root)
+    fd = os.open("/", os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+    witnesses = []
+    current = Path("/")
+    try:
+        for part in (None, *root.parts[1:]):
+            if part is not None:
+                child = os.open(part, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=fd)
+                os.close(fd)
+                fd = child
+                current /= part
+            info = os.fstat(fd)
+            # Explicit host-test roots may live beneath the root-owned sticky
+            # /tmp directory. The production path never uses this exception.
+            sticky_host = (root != PRODUCTION_DELIVERY_ROOT and info.st_uid == 0
+                           and bool(info.st_mode & stat.S_ISVTX))
+            allowed = {0, os.geteuid()} | ({1000} if root == PRODUCTION_DELIVERY_ROOT else set())
+            if (not stat.S_ISDIR(info.st_mode) or info.st_uid not in allowed
+                    or info.st_mode & 0o022 and not sticky_host):
+                _fail("wire directory ancestry is not protected")
+            if current == root and (info.st_uid != os.geteuid() or stat.S_IMODE(info.st_mode) != 0o700):
+                _fail("wire delivery root must be current-worker-owned mode0700")
+            if _directory_identity(current.lstat()) != _directory_identity(info):
+                _fail("wire directory ancestry changed")
+            witnesses.append((current, _directory_identity(info)))
+        return fd, tuple(witnesses)
+    except BaseException:
+        os.close(fd)
+        raise
+
+
+def _check_directories(witnesses):
+    for path, identity in witnesses:
+        if _directory_identity(path.lstat()) != identity:
+            _fail("wire directory witness changed")
+
+
+def _read_wire(directory_fd, name, maximum):
+    fd = os.open(name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=directory_fd)
+    with os.fdopen(fd, "rb") as stream:
+        before = os.fstat(stream.fileno())
+        if (not stat.S_ISREG(before.st_mode) or before.st_nlink != 1 or before.st_uid != os.geteuid()
+                or stat.S_IMODE(before.st_mode) != 0o400 or not 0 < before.st_size <= maximum):
+            _fail("wire is not the bounded current-worker-owned regular file")
+        raw = stream.read(maximum + 1)
+        after = os.fstat(stream.fileno())
+    observed = os.stat(name, dir_fd=directory_fd, follow_symlinks=False)
+    if len(raw) > maximum or _file_identity(before) != _file_identity(after) or _file_identity(after) != _file_identity(observed):
+        _fail("wire changed during bounded read")
+    return raw, _file_identity(after)
+
+
+@dataclass
+class WireDeliveryHandle:
+    receipt: dict
+    _root: Path
+    _invocation: str
+    _witnesses: tuple
+    _file_witness: tuple
+    _descriptor_witness: tuple
+
+    def verify(self) -> bool:
+        """Check exact original custody/content; same-UID changes fail closed."""
+        descriptor = validate_wire_delivery_descriptor(self.receipt, delivery_root=self._root)
+        if descriptor["materialized"] is not True or tuple(sorted(descriptor.items())) != self._descriptor_witness:
+            _fail("materialized descriptor differs from original verified pins")
+        root_fd = directory_fd = None
+        try:
+            root_fd, _ = _open_root(self._root)
+            _check_directories(self._witnesses)
+            directory_fd = os.open(self._invocation, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=root_fd)
+            raw, witness = _read_wire(directory_fd, Path(descriptor["path"]).name, _codec().MAX_WIRE_BYTES)
+            if (witness != self._file_witness or len(raw) != descriptor["wire_bytes"]
+                    or hashlib.sha256(raw).hexdigest() != descriptor["wire_sha256"]):
+                _fail("materialized wire differs from original pins or witness")
+            _check_directories(self._witnesses)
+            return True
+        except OSError as error:
+            raise WireDeliveryError("materialized wire is no longer verifiable") from error
+        finally:
+            if directory_fd is not None: os.close(directory_fd)
+            if root_fd is not None: os.close(root_fd)
+
+    def cleanup(self) -> str:
+        """Remove only exact original targets; preserve forensic drift/errors."""
+        root_fd = directory_fd = None
+        try:
+            self.verify()
+            root_fd, _ = _open_root(self._root)
+            _check_directories(self._witnesses)
+            directory_fd = os.open(self._invocation, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=root_fd)
+            name = Path(self.receipt["path"]).name
+            raw, witness = _read_wire(directory_fd, name, _codec().MAX_WIRE_BYTES)
+            if witness != self._file_witness or hashlib.sha256(raw).hexdigest() != self.receipt["wire_sha256"]:
+                _fail("cleanup target differs from original wire")
+            _check_directories(self._witnesses)
+            os.unlink(name, dir_fd=directory_fd)
+            os.rmdir(self._invocation, dir_fd=root_fd)
+            return "removed"
+        except (OSError, ValueError):
+            return "failed"
+        finally:
+            if directory_fd is not None: os.close(directory_fd)
+            if root_fd is not None: os.close(root_fd)
+
+
+def materialize_verified_code_retrieval_wire(packet: dict, *, source_text: str,
+        expected_wire_sha256: str, expected_wire_bytes: int, expected_source_sha256: str,
+        expected_native_sha256: str, invocation_id: str,
+        delivery_root: Path = DEFAULT_DELIVERY_ROOT) -> WireDeliveryHandle:
+    """Write a fresh wire only after independent pins and exact reconstruction.
+
+    The caller owns signed source/native admission. Failure leaves only the
+    exact newly allocated invocation, if allocation happened, for inspection;
+    no cleanup scan or source/owner database access occurs here.
+    """
+    root = _path(delivery_root)
+    invocation_id = _invocation(invocation_id)
+    wire = canonical_wire_bytes(packet)
+    _digest(expected_wire_sha256); _digest(expected_source_sha256); _digest(expected_native_sha256)
+    if (type(expected_wire_bytes) is not int or not 0 < expected_wire_bytes <= _codec().MAX_WIRE_BYTES
+            or len(wire) != expected_wire_bytes or hashlib.sha256(wire).hexdigest() != expected_wire_sha256):
+        _fail("independent wire bytes or SHA256 differ")
+    source = _codec()._text(source_text, _codec().MAX_SOURCE_BYTES, "source")
+    if hashlib.sha256(source).hexdigest() != expected_source_sha256:
+        _fail("independent literal source pin differs")
+    prompt = _codec().decode_code_retrieval_prompt(packet, source_text)
+    if hashlib.sha256(prompt.encode()).hexdigest() != expected_native_sha256:
+        _fail("independent native prompt pin differs")
+    path = planned_wire_path(packet, invocation_id, delivery_root=root)
+    receipt = build_wire_delivery_descriptor(packet, delivered_wire_path=path, delivery_root=root)
+    if receipt["source_sha256"] != expected_source_sha256 or receipt["native_prompt_sha256"] != expected_native_sha256:
+        _fail("independent source/native descriptor joins differ")
+    root_fd = directory_fd = file_fd = None
+    try:
+        root_fd, witnesses = _open_root(root)
+        os.mkdir(invocation_id, mode=0o700, dir_fd=root_fd)
+        directory_fd = os.open(invocation_id, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=root_fd)
+        os.fchmod(directory_fd, 0o700)
+        directory_info = os.fstat(directory_fd)
+        if directory_info.st_uid != os.geteuid() or stat.S_IMODE(directory_info.st_mode) != 0o700:
+            _fail("fresh wire invocation ownership differs")
+        witnesses += ((path.parent, _directory_identity(directory_info)),)
+        _check_directories(witnesses)
+        file_fd = os.open(path.name, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW,
+                          0o600, dir_fd=directory_fd)
+        written = 0
+        while written < len(wire):
+            count = os.write(file_fd, wire[written:])
+            if count <= 0: _fail("bounded wire write did not progress")
+            written += count
+        os.fchmod(file_fd, 0o400)
+        os.fsync(file_fd)
+        os.close(file_fd); file_fd = None
+        captured, file_witness = _read_wire(directory_fd, path.name, _codec().MAX_WIRE_BYTES)
+        if captured != wire:
+            _fail("materialized wire reread differs")
+        _check_directories(witnesses)
+        receipt["materialized"] = True
+        handle = WireDeliveryHandle(receipt, root, invocation_id, witnesses, file_witness,
+                                    tuple(sorted(receipt.items())))
+        handle.verify()
+        return handle
+    except OSError as error:
+        raise WireDeliveryError("fresh bounded wire delivery failed") from error
+    finally:
+        if file_fd is not None: os.close(file_fd)
+        if directory_fd is not None: os.close(directory_fd)
+        if root_fd is not None: os.close(root_fd)
+
+
+__all__ = ["DEFAULT_DELIVERY_ROOT", "SCHEMA", "FIELDS", "AUTHORITY", "WireDeliveryError",
+           "WireDeliveryHandle", "canonical_wire_bytes", "planned_wire_path",
+           "build_wire_delivery_descriptor", "validate_wire_delivery_descriptor",
+           "materialize_verified_code_retrieval_wire"]

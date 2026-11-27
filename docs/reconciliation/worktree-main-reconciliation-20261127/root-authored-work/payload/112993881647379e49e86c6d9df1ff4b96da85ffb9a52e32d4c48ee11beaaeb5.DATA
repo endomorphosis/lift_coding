@@ -1,0 +1,45 @@
+# Original repository validation procedure and lifecycle integration
+
+This is a new repository-validation integration over the exact frozen
+`controller_qualification/original-corpus-v3/corpus.json`. It does not reuse the
+arithmetic task family, its certificate, its source enrollment, or its evidence.
+
+The controller calls a fresh-process `plan_validation` service through its effect
+ledger. The request commits trajectory, arm, cache profile/namespace, caller
+operation ID, complete current source inventory, objective record/text, API
+configuration, environment, scorer profile and endpoint contract. The ledger
+joins the caller operation ID to its effect ID externally; the request cannot
+contain a circular self-hashed ledger effect ID. An optional exact publication
+parent is freshness input only and grants no publication authority.
+
+The repository procedure verifies those public bindings and nominates only the
+byte-exact `execute_current_scorer` request. A successfully computed nomination
+is not a passing scorer result. Original visible tests, hidden tests, complete
+public objectives and configured API controls remain required. Native procedure
+body/certificate reuse requires exact current bindings and independently checked
+evidence; missing or stale evidence takes an explicit measured cold path.
+
+The curator alone executes the original scorer and owns protected test payloads,
+reference patches, per-test node IDs, fixture details and private logs. The public
+service receives only a sanitized endpoint contract, opaque test-selection and
+environment identities, aggregate lifecycle outcomes and receipt hashes.
+
+The optional pytest adapter runs in the curator's original scorer process. It
+calls the actual native setup-bound execution-key and post-setup CALL-reuse
+modules. Current setup and teardown still execute. It does not replace pytest's
+whole-item protocol or cache the whole grader. Unqualified fixture/dependency,
+environment, toolchain, trust, execution-key or signed-call evidence forces RUN.
+No arithmetic enrollment or mere source-hash equality admits a skipped call.
+
+Before any original endpoint qualification run, freeze the exact adapter/native
+sources, public corpus, endpoint/environment/test-selection declarations, source
+population, namespaces, request order, cache setup and finite process bounds.
+Retain every cold fallback, failure, timeout, stale/tampered/current-binding
+control and actual enclosing cost. Failed repair continuations retain the
+outstanding obligation; failed candidate source never becomes an accepted input.
+
+Initial endpoint admission is owned by the curator and may remain pending while
+public binding and native lifecycle controls are developed. Pending endpoint
+status cannot be upgraded by the planning service. No provider calls are allowed
+in this qualification. The integration does not claim execution correctness from
+receipt identity, native registry promotion, whole-grader reuse or token savings.

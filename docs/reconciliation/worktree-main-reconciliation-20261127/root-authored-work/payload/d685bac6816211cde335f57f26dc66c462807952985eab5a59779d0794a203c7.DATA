@@ -1,0 +1,158 @@
+{
+  "MAIN_modification_requested": false,
+  "build_or_project_runtime_executed": false,
+  "cpu_wheel": {
+    "bytes": 155005253,
+    "current_sha256_not_recomputed_by_static_author": true,
+    "observed_current_mode": 436,
+    "observed_current_size_matches": true,
+    "observed_regular_single_link": true,
+    "path": "/home/barberb/lift_coding/artifacts/source384-torch-wheel-20261003/torch-2.13.0+cpu-cp312-cp312-manylinux_2_28_aarch64.whl",
+    "pin_authority": "/home/barberb/lift_coding/artifacts/supervisor-canonical-harbor-lifecycle-20261015-01/build03/cpu-torch-wheel-verification.json",
+    "root_fresh_sha256_and_identity_check_required": true,
+    "sha256": "6f307c2c32d764ffc6ff6893b801fad6d4752f3e67966cb8abf1843427c02604"
+  },
+  "dataset": {
+    "default_task": "fix-code-vulnerability",
+    "root": "/home/barberb/lift_coding/.benchmarks/terminal-bench-2",
+    "task_root": "/home/barberb/lift_coding/.benchmarks/terminal-bench-2/fix-code-vulnerability",
+    "task_toml_sha256": "9aa2bd14ce9408289d199d0608bc3fa65b8b5e23374c9641020de62197dbf1e2"
+  },
+  "extensions": [
+    {
+      "bytes": 32143862,
+      "current_sha256_not_recomputed_by_static_author": true,
+      "observed_current_mode": 436,
+      "observed_current_size_matches": true,
+      "observed_regular_single_link": true,
+      "path": "/home/barberb/.duckdb/extensions/v1.5.5/linux_arm64/ducklake.duckdb_extension",
+      "pin_authority": "/home/barberb/lift_coding/artifacts/supervisor-canonical-harbor-lifecycle-20261015-01/build03/build-result.json",
+      "root_fresh_sha256_and_identity_check_required": true,
+      "sha256": "d0b57c8e261b89a1ae367c7224f0857cfde72ab6cf2609f188e0de9b897b1088"
+    },
+    {
+      "bytes": 19861758,
+      "current_sha256_not_recomputed_by_static_author": true,
+      "observed_current_mode": 436,
+      "observed_current_size_matches": true,
+      "observed_regular_single_link": true,
+      "path": "/home/barberb/.duckdb/extensions/v1.5.5/linux_arm64/httpfs.duckdb_extension",
+      "pin_authority": "/home/barberb/lift_coding/artifacts/supervisor-canonical-harbor-lifecycle-20261015-01/build03/build-result.json",
+      "root_fresh_sha256_and_identity_check_required": true,
+      "sha256": "eba6e263e395a83966090f1f11ade63630b1b21422f0f2813858d179d42ea1e9"
+    },
+    {
+      "bytes": 29708110,
+      "current_sha256_not_recomputed_by_static_author": true,
+      "observed_current_mode": 436,
+      "observed_current_size_matches": true,
+      "observed_regular_single_link": true,
+      "path": "/home/barberb/.duckdb/extensions/v1.5.5/linux_arm64/quack.duckdb_extension",
+      "pin_authority": "/home/barberb/lift_coding/artifacts/supervisor-canonical-harbor-lifecycle-20261015-01/build03/build-result.json",
+      "root_fresh_sha256_and_identity_check_required": true,
+      "sha256": "41b2b9292bfb860c5ca8c5f818f9dd7a2c6bc24f9c750cffbc3169286fe59f08"
+    }
+  ],
+  "genuine_builder": {
+    "api": "build_runtime_archive",
+    "bytes": 94511,
+    "current_source_path": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/terminal_deployment.py",
+    "module": "benchmarks.agent_supervisor.container_coding.terminal_deployment",
+    "new_frozen_source_must_match_builder_pin": true,
+    "sha256": "740cedb9db485343e8c6e6ce6bf5c9ff6f321fc355050ccf91d97b4561ef129d"
+  },
+  "grok_binary": {
+    "bytes": 142867512,
+    "current_sha256_not_recomputed_by_static_author": true,
+    "observed_current_mode": 365,
+    "observed_current_size_matches": true,
+    "observed_regular_single_link": true,
+    "path": "/home/barberb/lift_coding/artifacts/source-context-substitution-20261013/live-preparation/grok-1.0.46/grok",
+    "pin_authority": "artifacts/supervisor-token-controls-runtime-20261015-01/native-grok/run08/fixture-verification.json",
+    "root_fresh_sha256_and_identity_check_required": true,
+    "sha256": "45b0943e736f00a249b9cf02af2be9e0749d97c09a6f55cfcf3029a1a836f23e"
+  },
+  "kwargs": {
+    "canonical_cve_export": null,
+    "canonical_cve_manifest_sha256": null,
+    "datasets": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "extension_dir": "/home/barberb/.duckdb/extensions/v1.5.5/linux_arm64",
+    "formula_decoder": null,
+    "grok_binary": "/home/barberb/lift_coding/artifacts/source-context-substitution-20261013/live-preparation/grok-1.0.46/grok",
+    "header_protocol": null,
+    "intent_action_384_config": null,
+    "intent_checkpoint": null,
+    "intent_projection_request": null,
+    "kit": "/home/barberb/lift_coding/external/ipfs_kit",
+    "lean_toolchain": null,
+    "model_snapshot": null,
+    "numerical_selection_config": null,
+    "output": null,
+    "security_checkpoint": null,
+    "security_checkpoint_cache": null,
+    "security_checkpoint_hub_descriptor": null,
+    "security_checkpoint_manifest_sha256": null,
+    "security_initializer": null,
+    "setup_cache_policy": null,
+    "source": null,
+    "source384_config": null,
+    "torch_cpu_wheel": "/home/barberb/lift_coding/artifacts/source384-torch-wheel-20261003/torch-2.13.0+cpu-cp312-cp312-manylinux_2_28_aarch64.whl",
+    "torch_cpu_wheel_sha256": "6f307c2c32d764ffc6ff6893b801fad6d4752f3e67966cb8abf1843427c02604"
+  },
+  "latest_prior_archive": {
+    "archive_sha256": "a1c861b33a5cdc2ba26c19f484bca1f7387c5554383e1cefc79bb586d6c3cbf1",
+    "current_MAIN_source_qualification_transferred": false,
+    "directory": "/home/barberb/lift_coding/artifacts/supervisor-token-controls-runtime-20261015-01/runtime-build/version01/runtime",
+    "grok_binding_present": false,
+    "manifest_sha256": "3c16c7d57a940de16fe72c4ac53ee716bd6979279f1d7493a39ca886cf1f0c52"
+  },
+  "lean_candidate_metadata": {
+    "bin_lean_metadata": {
+      "bytes": 13824,
+      "mode": 493,
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.29.0/bin/lean",
+      "symlink": false
+    },
+    "directory_sha256": null,
+    "observed_directory": true,
+    "observed_mode": 493,
+    "observed_uid": 1000,
+    "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.29.0",
+    "selected": false,
+    "selection_basis": "canonical build03 and lifecycle05 succeeded without Lean; selected scalar/formalization profile must justify and pin it separately if required",
+    "version_command_executed": false,
+    "version_label": "v4.29.0"
+  },
+  "prepared_by": "archive_rebuild_review",
+  "released": false,
+  "root_must_fill_source_and_output_from_frozen_campaign": true,
+  "root_release_requirements": [
+    "fresh qualifying source result and complete eligible input inventory; observed MAIN source currentness scope labelled honestly",
+    "current canonical datasets/kit source identities and genuine initializer origins before/after",
+    "root lease/request/PID/start-time and persisted resource-policy identity before/after; no global-idle/reset requirement",
+    "fresh owned output/staging paths and exact builder/script/release/asset pins before/after",
+    "genuine builder produces Grok binding and one providers/grok/grok member with exact SHA/bytes/mode755",
+    "native CPU wheel metadata/platform and all tar member digests/modes/unique paths verified",
+    "all source/support/asset/root-release rows unchanged; no installs/downloads/provider calls/build-time model training",
+    "fresh runtime deployment/native/acceptance qualification separate from historical lifecycle and build receipts"
+  ],
+  "schema": "matched-evaluation-cached-runtime-build-recipe@1",
+  "scope_notes": [
+    "default named-task full route currently requests local code autoencoder training; cached CPU wheel supports that later without pretrained weights",
+    "configuration-only matrix need not import Torch, but a no-Torch archive cannot inherit the default full-route training qualification",
+    "genuine repository index AST operations do not by themselves imply Torch or Lean selection",
+    "Grok native backend supports real models, but an authless local protocol fixture supplies no current credential/model readiness",
+    "registered controlled provider attempt population and matching official acceptance remain separate promotion gates"
+  ],
+  "source_authority": "fresh genuine root detached checkout after current six-suite qualification; no pack-tree host imports",
+  "template_candidates": [
+    {
+      "path": "/home/barberb/lift_coding/artifacts/supervisor-decision-launch-integration-20261015-01/runtime-build/version02/run.py",
+      "use": "genuine package bootstrap, fresh eligible source inventory, effect fence and real builder/tar verification; replace historical campaign/release authority explicitly"
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/supervisor-token-controls-runtime-20261015-01/runtime-build/version01/run.py",
+      "use": "proven held-input copier/asset staging/real builder/full manifest-tar joins; remove historical four-delta assumptions for a fresh current-source build"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+root_value='/opt/ipfs-supervisor'
+expected_version='0.160.0'
+
+import hashlib,json,os,pathlib,shutil,stat,subprocess
+if os.geteuid()!=0:raise ValueError('native Codex deployment requires container root')
+root=pathlib.Path(root_value)
+matches=list((root/'home/.nvm').glob('versions/node/*/lib/node_modules/@openai/codex/node_modules/@openai/codex-*/vendor/*/bin/codex'))
+if len(matches)!=1:raise ValueError('one pinned native Codex executable required')
+vendor=matches[0].parent
+members=sorted(vendor.iterdir())
+if not 2<=len(members)<=32 or not {'codex','codex-code-mode-host'} <= {p.name for p in members}:
+ raise ValueError('pinned native Codex runtime is missing required executables')
+for p in members:
+ if p.is_symlink() or not p.is_file() or not p.stat().st_mode&0o111:
+  raise ValueError('native Codex runtime must contain regular executable files')
+target=root/'provider-bin'
+if target.is_symlink():raise ValueError('native Codex runtime target cannot be a symlink')
+target.mkdir(mode=0o755,exist_ok=True)
+os.chown(target,0,0);target.chmod(0o755)
+for p in members:
+ destination=target/p.name
+ if destination.is_symlink():raise ValueError('native Codex executable target cannot be a symlink')
+ shutil.copyfile(p,destination);os.chown(destination,0,0);destination.chmod(0o755)
+checks={}
+for name,args in (('codex',['--version']),('codex-code-mode-host',['--help'])):
+ completed=subprocess.run([str(target/name),*args],capture_output=True,text=True,timeout=10)
+ if completed.returncode or (name=='codex' and completed.stdout.strip()!='codex-cli '+expected_version):
+  raise ValueError('pinned native Codex executable check failed: '+name)
+ checks[name]={'returncode':completed.returncode,'stdout_sha256':hashlib.sha256(completed.stdout.encode()).hexdigest()}
+files=[{'name':p.name,'source_sha256':hashlib.sha256(p.read_bytes()).hexdigest(),
+        'sha256':hashlib.sha256((target/p.name).read_bytes()).hexdigest(),
+        'uid':(target/p.name).stat().st_uid,'mode':(target/p.name).stat().st_mode&0o777} for p in members]
+if any(x['uid']!=0 or x['mode']!=0o755 or x['sha256']!=x['source_sha256'] for x in files):
+ raise ValueError('native Codex executable protection or vendor bytes differ')
+print(json.dumps({'schema':'native-codex-runtime-bundle@1','codex_version':expected_version,
+                  'files':files,'executable_checks':checks,'provider_calls':0},sort_keys=True))

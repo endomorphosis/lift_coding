@@ -1,0 +1,42 @@
+{
+  "time": "2026-11-10T02:43:42.492299+00:00",
+  "input_tree": "6676213a9b6f406cb945a7e15654601f203e5d6f",
+  "resolutions": [
+    {
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/owner_candidate_round_context.py",
+      "external_source": "/tmp/lift-sync-pruning-candidate-prepared-source-20261110-v01/owner_candidate_round_context.py.txt",
+      "sha256": "c48da0e61535138e7fd01d3744c05a375573b0c61be9d0a446f84e178cfab2b3",
+      "conflict_blocks_prepared": 9,
+      "syntax_parsed": true
+    },
+    {
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/owner_candidate_round_prompt.py",
+      "external_source": "/tmp/lift-sync-pruning-candidate-prepared-source-20261110-v01/owner_candidate_round_prompt.py.txt",
+      "sha256": "b20b7175a9b3f36f3ccaadc5d88f86b27479b173405f4bd8279011ab25484bb5",
+      "conflict_blocks_prepared": 13,
+      "syntax_parsed": true
+    },
+    {
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/worker_source_broker.py",
+      "external_source": "/tmp/lift-sync-pruning-candidate-prepared-source-20261110-v01/worker_source_broker.py.txt",
+      "sha256": "df33136d3ad0b51783ffd466beecfe72492eea953b92c984d59d441e8ad7cb4d",
+      "conflict_blocks_prepared": 4,
+      "syntax_parsed": true
+    },
+    {
+      "path": "test/api/test_candidate_round_native_pipeline.py",
+      "external_source": "/tmp/lift-sync-pruning-candidate-prepared-source-20261110-v01/test_candidate_round_native_pipeline.py.txt",
+      "sha256": "4c4bb9bf6548696f46624b3d2a237cae26e498f6d0a7e5b69274bb5ef5fd1c87",
+      "conflict_blocks_prepared": 1,
+      "syntax_parsed": true
+    }
+  ],
+  "current_candidate_pipeline_test_asts_unchanged": true,
+  "new_partial_doctor_declaration_cases_prepared": 3,
+  "typed_chain_static_review": "A zero native return code requires exact captured launch and retired-worker handles, registered native retirement, and revalidated conclusive failed public obligations. No extra coding call or deadline reset is admitted by these context factories.",
+  "doctor_failure_scope": "Only the explicitly wrapped Doctor capture failure may retain an unqualified ordinary broker. Other capture failures still close and raise; a continuation cannot omit the selected Doctor constraints.",
+  "source_refs_updated": false,
+  "canonical_tree_updated": false,
+  "runtime_qualified": false,
+  "main_merged": false
+}

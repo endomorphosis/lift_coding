@@ -1,0 +1,81 @@
+"""Retain a fresh run of existing native publication/recovery qualifications.
+
+This is a baseline of source-shipped tests, not a new held-out experiment or
+verification of the proofs represented by those tests' fixture records.
+"""
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+import time
+import xml.etree.ElementTree as ET
+
+ROOT = Path(__file__).resolve().parent
+SOURCE = Path('/home/barberb/lift_coding/.worktrees/agent-supervisor-efficiency-and-state-hardening-v1')
+TESTS = [
+    'ipfs_kit_py/tests/test_semantic_state_root_cas.py',
+    'ipfs_kit_py/tests/test_semantic_state_root_recovery.py',
+    'ipfs_kit_py/tests/proof_context/test_incremental_seal_store.py',
+    'ipfs_kit_py/tests/proof_seal_store/test_incremental_sealer_recovery_integration.py',
+]
+
+
+def main():
+    output = ROOT / 'run-v1'
+    output.mkdir()
+    inputs = output / 'test_sources'
+    inputs.mkdir()
+    hashes = {}
+    for relative in TESTS:
+        p = SOURCE / relative
+        hashes[relative] = hashlib.sha256(p.read_bytes()).hexdigest()
+        shutil.copyfile(p, inputs / p.name)
+    shutil.copyfile(__file__, output / 'runner_snapshot.py')
+    child = output / 'child.py'
+    child.write_text('''import hashlib,json,sys
+from pathlib import Path
+import pytest
+result=pytest.main(sys.argv[1:])
+modules={}
+for name,module in sorted(sys.modules.copy().items()):
+    if name.startswith(('ipfs_accelerate_py.','ipfs_datasets_py.','ipfs_kit_py.')):
+        p=Path(getattr(module,'__file__','') or '')
+        if p.is_file():
+            modules[name]={'path':str(p.resolve()),'sha256':hashlib.sha256(p.read_bytes()).hexdigest()}
+Path(__file__).with_name('loaded_sources.json').write_text(json.dumps(modules,indent=2)+'\\n')
+raise SystemExit(result)
+''')
+    argv = [sys.executable, str(child), '-c', '/dev/null', '--noconftest',
+            '-p', 'no:cacheprovider', '-q', '--junitxml=' + str(output / 'results.xml')]
+    argv.extend(str(SOURCE / p) for p in TESTS)
+    freeze = {'schema': 'ns-existing-publication-qualification/v1',
+              'tests': hashes, 'argv': argv, 'source_roots': [str(SOURCE), str(SOURCE/'ipfs_datasets_py'), str(SOURCE/'ipfs_kit_py')],
+              'runner_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+              'scope': 'Existing constructed tests; ordinary injected exceptions are not process kills. Proof fixtures do not establish theorem or test-execution soundness.',
+              'frozen_at_ns': time.time_ns()}
+    (output / 'freeze.json').write_text(json.dumps(freeze, indent=2)+'\n')
+    env = {k: v for k,v in os.environ.items() if k in ('PATH','LANG','LC_ALL','TMPDIR')}
+    env.update(PYTHONPATH=os.pathsep.join(freeze['source_roots']), PYTEST_DISABLE_PLUGIN_AUTOLOAD='1', PYTHONHASHSEED='0')
+    started = time.perf_counter()
+    with (output/'stdout.log').open('w') as stdout, (output/'stderr.log').open('w') as stderr:
+        try:
+            result = subprocess.run(argv, cwd=output, env=env, stdout=stdout, stderr=stderr, timeout=180)
+            returncode, timeout = result.returncode, False
+        except subprocess.TimeoutExpired:
+            returncode, timeout = None, True
+    summary = {'returncode':returncode, 'timeout':timeout, 'host_elapsed_seconds':time.perf_counter()-started,
+               'scope':freeze['scope'], 'provider_requests_scheduled':0, 'cases':[]}
+    if (output/'results.xml').is_file():
+        for case in ET.parse(output/'results.xml').iter('testcase'):
+            status = 'failed' if case.find('failure') is not None else 'error' if case.find('error') is not None else 'skipped' if case.find('skipped') is not None else 'passed'
+            summary['cases'].append({'name':case.get('name'),'class':case.get('classname'), 'seconds':float(case.get('time')), 'status':status})
+    summary['counts'] = {status:sum(c['status']==status for c in summary['cases']) for status in ('passed','failed','error','skipped')}
+    (output/'summary.json').write_text(json.dumps(summary,indent=2)+'\n')
+    print(json.dumps({k:v for k,v in summary.items() if k!='cases'},sort_keys=True))
+
+
+if __name__ == '__main__':
+    main()

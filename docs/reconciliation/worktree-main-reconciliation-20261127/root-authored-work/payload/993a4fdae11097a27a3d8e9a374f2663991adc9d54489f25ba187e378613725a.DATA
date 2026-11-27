@@ -1,0 +1,48 @@
+"""Recover public issue-report candidates for the original development tasks.
+
+Never queries patch, diff, pull-request files, hidden-test or reference endpoints.
+Pull-request bodies are not admitted as problem statements by this helper.
+"""
+import hashlib
+import json
+from pathlib import Path
+import time
+import urllib.request
+
+ROOT=Path(__file__).resolve().parent
+
+
+def main():
+    output=ROOT/'public_task_authority_v1'
+    output.mkdir()
+    cases=[('ns-hist-02-pyparsing','pyparsing/pyparsing',633),
+           ('ns-hist-04-click','pallets/click',2365)]
+    freeze={'cases':cases,'rule':'Recover only the explicitly referenced issue numbers. Exclude PR bodies and comments; do not infer a complete objective from a hidden oracle.',
+            'script_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+            'frozen_at_ns':time.time_ns(),'provider_calls':0}
+    (output/'freeze.json').write_text(json.dumps(freeze,indent=2)+'\n')
+    (output/'public_task_authority.py').write_bytes(Path(__file__).read_bytes())
+    rows=[]
+    for task,repo,number in cases:
+        url=f'https://api.github.com/repos/{repo}/issues/{number}'
+        req=urllib.request.Request(url,headers={'User-Agent':'ns-public-task-authority/1','Accept':'application/vnd.github+json'})
+        started=time.perf_counter()
+        with urllib.request.urlopen(req,timeout=30) as response:
+            data=json.load(response)
+        pr='pull_request' in data
+        body=None if pr else data.get('body')
+        row={'task_id':task,'url':data['html_url'],'title':data['title'],
+             'created_at':data['created_at'],'updated_at':data['updated_at'],
+             'is_pull_request':pr,'public_issue_body':body,
+             'body_sha256':hashlib.sha256(body.encode()).hexdigest() if body is not None else None,
+             'elapsed_seconds':time.perf_counter()-started,
+             'public_body_at_original_prefix_verified':False,
+             'status':'public_issue_candidate_pending_temporal_review' if body else 'not_admitted_as_issue_objective',
+             'scope':'Current public issue observation; original-at-prefix text and self-contained repair authority are not established solely by this fetch.'}
+        (output/(task+'.json')).write_text(json.dumps(row,indent=2)+'\n')
+        rows.append({k:v for k,v in row.items() if k!='public_issue_body'})
+    (output/'summary.json').write_text(json.dumps({'rows':rows,'provider_calls':0,'hidden_test_or_reference_queries':0},indent=2)+'\n')
+    print(json.dumps({'fetched_references':len(rows),'issue_body_candidates':sum(not r['is_pull_request'] for r in rows),'provider_calls':0}))
+
+
+if __name__=='__main__':main()

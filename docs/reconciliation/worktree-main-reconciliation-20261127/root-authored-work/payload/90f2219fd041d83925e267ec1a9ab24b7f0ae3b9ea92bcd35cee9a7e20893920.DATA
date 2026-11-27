@@ -1,0 +1,34 @@
+# Original XML cold D six-event caller, providers disabled
+
+This is the first original-family execution of the combined D services:
+native context, signed TEST nomination, symbolic routing, and world memory,
+plus the qualified original scorer. Providers were disabled. Native
+publication and CALL reuse were not enrolled. It is not a token-savings
+result.
+
+`profile.json` SHA-256
+`4996011e6784d153b300b27b8d8d1d7ae187b1f5fa32dbd81eed89e23da2439c`.
+Context runtime files from the live ASEH worktree were copied into
+`context_runtime/` at freeze time after `original-xml-d-cold-offline-v1`
+failed a later context read when four worktree files changed mid-run.
+Driver wall time **92.090 seconds**. Five original scorer calls, five
+signed nominations, zero provider receipts, zero unknown effects.
+
+| Horizon | Status | D services | Independent original grade |
+|---|---|---|---|
+| 0 setup | `setup_complete` | none | not scored |
+| 1 plan | `plan_projected` | context prepare+read | plan coverage remains null |
+| 2 repair | `residual_pending` | context, nomination, symbolic, world | fail: 34/34 visible, 0/1 hidden, 2/4 public |
+| 3 revisit | `residual_pending` | same; context read reused | identical fail; failed repair not adopted |
+| 4 comment | `residual_pending` | context re-prepared | identical fail on commented tree |
+| 5 configuration | `residual_pending` | context re-prepared | fail; API configuration probe **true** |
+| 6 recovery | `recovery_obligations_unresolved` | context read reused | fail; interrupt/stale/continuation unreached |
+
+Symbolic routing selected `medium_model` and `requires_provider=true`, so
+the residual stopped at the disabled provider rather than a native-only
+closure. World memory proposed with empty-store fallback and did not
+dispatch an unenrolled action. Nomination admitted the exact current
+scorer request and did not score.
+
+Publication never ran: no independently accepted candidate existed to
+seal. That remains a separate original-caller qualification.

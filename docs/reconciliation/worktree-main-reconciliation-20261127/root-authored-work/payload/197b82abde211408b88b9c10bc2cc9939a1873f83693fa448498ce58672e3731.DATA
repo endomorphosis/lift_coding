@@ -1,0 +1,3 @@
+from pathlib import Path
+Path('/home/barberb/lift_coding/maintenance/terminal-nomination-lifecycle-20261012-01/model-input-audit-attempt-01/tmp/test_actual_negative_child_ign0/untrusted-task/unsafe-import').touch()
+raise RuntimeError('task import')

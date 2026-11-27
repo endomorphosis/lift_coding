@@ -1,0 +1,55 @@
+"""Project disjoint phase intervals from retained curator receipts; no execution."""
+import hashlib
+import json
+from pathlib import Path
+
+H = Path(__file__).resolve().parent / 'repository_sealing_qualification_v1'
+C = H / 'curator_custody'
+def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
+def dump(path, value): path.write_text(json.dumps(value, sort_keys=True, indent=2) + '\n')
+summary = json.loads((H / 'summary.json').read_text())
+freeze = json.loads((H / 'freeze.json').read_text())
+phase_rows = []
+for path in sorted((C / 'state/effects').glob('*/completion.json')):
+    row = json.loads(path.read_text())
+    phase_rows.append({'stage': row['stage'], 'elapsed_seconds': row['elapsed_seconds'],
+                       'receipt_sha256': sha(path), 'receipt_location': 'retained curator custody'})
+groups = {}
+for row in phase_rows:
+    groups.setdefault(row['stage'], []).append(row['elapsed_seconds'])
+operations = [{'operation': row['operation'], 'elapsed_seconds': row['elapsed_seconds'],
+               'returncode': row['returncode']} for row in summary['operations']]
+native_outer = sum(row['elapsed_seconds'] for row in operations)
+effect_outer = sum(row['elapsed_seconds'] for row in phase_rows)
+artifact_span = ((H / 'summary.json').stat().st_mtime_ns - freeze['frozen_at_ns']) / 1e9
+grade_container = json.loads((H / 'audit.json').read_text())['native_scorer_container_seconds_sum']
+replays = []
+for name in ['first-publish', 'second-recover', 'third-read']:
+    response = json.loads((C / 'operations' / name / 'response.json').read_text())
+    replays.extend(response['independent_replays'])
+replays.extend(json.loads((C / 'state/native_repository_sealing/crashes/curator-seal6028-v1-1.json').read_text())['replays'])
+result = {'schema': 'ns-curator-repository-seal-timing-projection/v1', 'instance_id': 'psf__requests-6028',
+          'projection_runner_sha256': sha(Path(__file__)), 'qualification_summary_sha256': sha(H / 'summary.json'),
+          'source': 'Existing monotonic effect/operation receipts; no scorer or context re-execution',
+          'measured_sequential_phase_interval_sum_seconds': effect_outer + native_outer,
+          'effect_phases': {stage: {'count': len(values), 'seconds': sum(values), 'individual_seconds': values}
+                            for stage, values in sorted(groups.items())},
+          'native_service_process_intervals': operations, 'native_service_process_seconds_sum': native_outer,
+          'interval_relationship': 'All listed effect and native-service process intervals ran sequentially and do not overlap. Native grading is nested within the accepted_check effects and publication/recovery/read processes.',
+          'nested_native_grading': {'actual_invocations': 6, 'container_seconds_sum': grade_container,
+                                    'four_replay_service_process_seconds_sum': sum(row['elapsed_seconds'] for row in replays),
+                                    'add_to_phase_total': False, 'initial_scores_nested_in': 'accepted_check',
+                                    'replays_nested_in': 'first-publish, second-pre-cas-crash, second-recover, third-read'},
+          'artifact_timestamp_span': {'seconds': artifact_span, 'start_ns': freeze['frozen_at_ns'],
+                                      'end_result_file_mtime_ns': (H / 'summary.json').stat().st_mtime_ns,
+                                      'span_minus_measured_phase_intervals_seconds': artifact_span - effect_outer - native_outer,
+                                      'interpretation': 'Frozen-start timestamp to unchanged result artifact mtime; an enclosing artifact span, not a separately instrumented whole-process wall timer. Interpreter imports and private profile creation before freeze are excluded.'},
+          'post_result_code_archival_and_audit': {'combined_exec_command_observed_wall_seconds': 0.274583693,
+                                                'measurement_source': 'exec_command completion receipt chunk a30024 for audit_repository_sealing_v1.py',
+                                                'separate_archival_and_audit_timers_recorded': False,
+                                                'included_in_fixture_phase_total': False,
+                                                'scope': '33 public code snapshots,1136 private artifact digests,275 evidence checks. Context/native storage persistence during evaluation is already inside its phase intervals.'},
+          'effect_receipt_bindings': phase_rows, 'provider_calls': 0,
+          'reference_or_hidden_payloads_emitted': False}
+dump(H / 'timing_projection_v1.json', result)
+print(json.dumps({k: result[k] for k in ['measured_sequential_phase_interval_sum_seconds', 'effect_phases', 'native_service_process_seconds_sum', 'nested_native_grading', 'provider_calls']}, sort_keys=True))

@@ -1,0 +1,337 @@
+"""Reserve complete coding input before a data-only worker observation join.
+
+This pure adapter neither launches a worker nor authenticates a child process.
+The caller supplies the launch operation and independently qualifies its origin.
+All callbacks occur after reservation; failed attempts remain charged. A valid
+serialized receipt establishes byte joins, never current owner or proof authority.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+from pathlib import Path, PurePosixPath
+import re
+
+from ipfs_datasets_py.logic.software_contracts.content import cid_for_structured, validate_cid
+from ipfs_accelerate_py.agent_supervisor.runtime import model_input_observation_receipt as observations
+from ipfs_accelerate_py.agent_supervisor.runtime import router_implementation_runner as native_runner
+
+from . import terminal_semantic_context_budget as budgets
+
+PREPARATION_SCHEMA = "terminal-checked-worker-budget-preparation@1"
+RESULT_SCHEMA = "terminal-checked-worker-budget-observation@1"
+MAX_NATIVE_INPUT_BYTES = 256000
+MAX_RECEIPT_BYTES = 65536
+MAX_STDERR_BYTES = 65536
+AUTHORITY = {
+    "worker_origin_independently_verified": False,
+    "current_owner_verified": False, "proof_authority": False,
+    "execution_authority": False, "completion_authority": False,
+    "provider_usage_measured": False, "provider_output_measured": False,
+    "provider_savings_measured": False, "full_supervisor_entrypoint_used": False,
+    "global_task_budget_enforced": False, "durable_budget_resume_supported": False,
+    "runtime_behavior_verified": False, "convergence_proved": False,
+    "full_task_satisfaction": False,
+}
+
+
+class CheckedWorkerBudgetError(ValueError):
+    """Malformed preparation or unmatched, unqualified observation data."""
+
+
+def _need(condition, message):
+    if not condition:
+        raise CheckedWorkerBudgetError(message)
+
+
+def _wire(value):
+    return budgets._wire(value)
+
+
+def _sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def _text(value, maximum, *, empty=False):
+    _need(type(value) is str, "exact UTF-8 input text required")
+    try:
+        raw = value.encode("utf-8")
+    except UnicodeError as exc:
+        raise CheckedWorkerBudgetError("exact UTF-8 input text required") from exc
+    _need((empty or bool(raw)) and len(raw) <= maximum, "complete input text exceeds byte bound")
+    return raw
+
+
+def _identity(text):
+    raw = _text(text, MAX_NATIVE_INPUT_BYTES, empty=True)
+    return {"sha256": _sha(raw), "bytes": len(raw)}
+
+
+def _workspace(value):
+    _need(type(value) is type(Path()), "exact allocated workspace Path required")
+    text = str(value)
+    pure = PurePosixPath(text)
+    _need(pure.is_absolute() and ".." not in pure.parts and str(pure) == text,
+          "canonical absolute allocated workspace required")
+    _text(text, 4096)
+    return value
+
+
+def _owner(value):
+    _need(type(value) is budgets.ContextBudgetOwner, "original live context budget owner required")
+    value._check()
+    snapshot = value.snapshot()
+    _need(not any(row["status"] == "reserved" for row in snapshot["records"]),
+          "unfinished reservation cannot prepare another observation")
+    return snapshot
+
+
+def _public_basis_shape(instruction, boundary):
+    _need(type(instruction) is dict and instruction.get("schema") in {
+        "supervisor-public-instruction-inclusion@1", "supervisor-public-instruction-inclusion@2",
+        "supervisor-public-instruction-inclusion@6"}, "native public instruction inclusion required")
+    for name in ("manifest_signature_verified", "verbatim_utf8", "source_freshness_verified"):
+        _need(instruction.get(name) is True, "public instruction verification data differs")
+    for name in ("semantic_minification_applied", "historical_replay", "completion_authority", "scope_expansion_authority"):
+        _need(instruction.get(name) is False, "public instruction cannot grant authority")
+    for name in ("artifact_sha256", "source_sha256", "block_sha256"):
+        _need(type(instruction.get(name)) is str and re.fullmatch(r"[0-9a-f]{64}", instruction[name]) is not None,
+              "public instruction exact SHA-256 required")
+    _need(type(boundary) is dict and set(boundary) == {"schema", "container_id", "image_id",
+        "namespaces", "owner_uid", "worker_uid", "purpose", "manifest_sha256", "completion_authority"}
+        and boundary["schema"] == "supervisor-container-worker-boundary@1"
+        and boundary["purpose"] == "coding" and boundary["completion_authority"] is False,
+        "closed external coding boundary data required")
+    for name in ("owner_uid", "worker_uid"):
+        _need(type(boundary[name]) is int and 1 <= boundary[name] <= 2**31 - 1,
+              "exact separate nonroot identity required")
+    _need(boundary["owner_uid"] != boundary["worker_uid"], "separate worker identity required")
+    for name in ("container_id", "image_id"):
+        _text(boundary[name], 512)
+    _need(type(boundary["namespaces"]) is dict and boundary["namespaces"], "namespace data required")
+    for name, value in boundary["namespaces"].items():
+        _text(name, 32)
+        _text(value, 256)
+
+
+def _basis(*, native_prompt, worker_workspace, router_prompt, checked_suffix,
+           task_cid, instruction_receipt, boundary, boundary_sha256):
+    _text(native_prompt, MAX_NATIVE_INPUT_BYTES)
+    _text(router_prompt, MAX_NATIVE_INPUT_BYTES)
+    _text(checked_suffix, MAX_NATIVE_INPUT_BYTES, empty=True)
+    workspace = _workspace(worker_workspace)
+    validate_cid(task_cid, codecs={"dag-json"})
+    _public_basis_shape(instruction_receipt, boundary)
+    _need(type(instruction_receipt) is dict and instruction_receipt.get("task_cid") == task_cid,
+          "public instruction must match exact task CID")
+    _need(type(boundary) is dict and boundary.get("manifest_sha256") == boundary_sha256
+          and type(boundary_sha256) is str and re.fullmatch(r"[0-9a-f]{64}", boundary_sha256) is not None,
+          "external boundary must match exact manifest SHA-256")
+    _need(router_prompt.startswith(native_prompt), "native route must preserve the complete original prompt prefix")
+    return json.loads(_wire({"native_prompt": native_prompt, "worker_workspace": str(workspace),
+        "router_prompt": router_prompt, "checked_suffix": checked_suffix, "task_cid": task_cid,
+        "instruction_receipt": instruction_receipt, "boundary": boundary,
+        "boundary_sha256": boundary_sha256}))
+
+
+def prepare_checked_worker_budget_event(*, budget_owner, event_id, native_prompt,
+        worker_workspace, router_prompt, checked_suffix, task_cid, instruction_receipt,
+        boundary, boundary_sha256, kind="initial", retry_of=None):
+    """Pure deterministic coding render; does not verify current files or origin.
+
+    New-content cost is the entire router packet plus checked suffix. Rendered
+    cost also includes native coding scaffolding. Every retry pays both again;
+    this single-input profile makes no claim about replaying model conversations.
+    """
+    snapshot = _owner(budget_owner)
+    _need(type(kind) is str and kind in {"initial", "retry"}, "single coding observation or explicit retry required")
+    basis = _basis(native_prompt=native_prompt, worker_workspace=worker_workspace,
+        router_prompt=router_prompt, checked_suffix=checked_suffix, task_cid=task_cid,
+        instruction_receipt=instruction_receipt, boundary=boundary, boundary_sha256=boundary_sha256)
+    complete = basis["router_prompt"] + basis["checked_suffix"]
+    _text(complete, MAX_NATIVE_INPUT_BYTES)
+    rendered = native_runner.render_model_prompt(prompt=complete, purpose="coding",
+        workspace=Path(basis["worker_workspace"]), semantic_transport=False,
+        code_retrieval_projected=False)
+    _need(type(rendered) is tuple and len(rendered) == 2 and all(type(item) is str for item in rendered)
+          and rendered[1] and rendered[0] == rendered[1] + complete,
+          "complete native coding renderer result required")
+    _text(rendered[0], MAX_NATIVE_INPUT_BYTES)
+    _text(rendered[1], 8192)
+    _need(_wire(budget_owner.snapshot()) == _wire(snapshot), "budget changed during native coding render")
+    event = budget_owner.prepare_event(event_id=event_id, kind=kind, new_content=complete,
+        rendered_input=rendered[0], retry_of=retry_of)
+    _need(_wire(budget_owner.snapshot()) == _wire(snapshot)
+          and event["sequence"] == len(snapshot["records"]) + 1
+          and event["history_event_ids"] == [row["event"]["event_id"] for row in snapshot["records"]]
+          and event["previous_event_cid"] == (snapshot["records"][-1]["event"]["event_cid"] if snapshot["records"] else None),
+          "budget history changed during coding event preparation")
+    value = {"schema": PREPARATION_SCHEMA, "basis": basis, "event": event,
+        "owner_snapshot_cid": snapshot["snapshot_cid"],
+        "materialization": {"purpose": "coding", "native_coding_renderer_used": True,
+            "native_prompt": _identity(native_prompt), "router_prompt": _identity(complete),
+            "model_prompt": _identity(rendered[0]), "workspace_advisory": _identity(rendered[1]),
+            "new_content_scope": "complete_router_prompt_plus_checked_suffix_each_attempt",
+            "rendered_input_scope": "complete_single_coding_input_including_native_workspace_advisory",
+            "conversation_history_inclusion_claimed": False, "native_input_byte_bound": MAX_NATIVE_INPUT_BYTES,
+            "semantic_transport": "native", "intent_requirements_transport": "expanded",
+            "code_retrieval_codec": "expanded", "code_retrieval_wire_delivery": "inline",
+            "provider_calls": 0, "provider_output_tokens": None, **AUTHORITY}}
+    value["preparation_cid"] = cid_for_structured(value)
+    return value
+
+
+def _rebuild(budget_owner, preparation):
+    _need(type(preparation) is dict and set(preparation) == {"schema", "basis", "event",
+          "owner_snapshot_cid", "materialization", "preparation_cid"}
+          and preparation["schema"] == PREPARATION_SCHEMA, "closed complete coding preparation required")
+    original = _wire(preparation)
+    basis, event = preparation["basis"], preparation["event"]
+    _need(type(basis) is dict and set(basis) == {"native_prompt", "worker_workspace", "router_prompt",
+          "checked_suffix", "task_cid", "instruction_receipt", "boundary", "boundary_sha256"}
+          and type(event) is dict, "closed preparation basis and event required")
+    rebuilt = prepare_checked_worker_budget_event(budget_owner=budget_owner,
+        event_id=event["event_id"], kind=event["kind"], retry_of=event["retry_of"],
+        **{key: item for key, item in basis.items() if key != "worker_workspace"},
+        worker_workspace=Path(basis["worker_workspace"]))
+    _need(_wire(rebuilt) == original == _wire(preparation), "exact coding preparation replay changed")
+    return rebuilt, original
+
+
+def _pairs(pairs):
+    value = {}
+    for key, item in pairs:
+        _need(key not in value, "duplicate observation JSON field")
+        value[key] = item
+    return value
+
+
+def _constant(_value):
+    raise CheckedWorkerBudgetError("finite observation JSON required")
+
+
+def _launch_receipt(result):
+    _need(type(result) is dict and set(result) == {"returncode", "stdout", "stderr"},
+          "closed data-only observer launch result required")
+    _need(type(result["returncode"]) is int and result["returncode"] == 75,
+          "native observation stop exit status 75 required")
+    _text(result["stderr"], MAX_STDERR_BYTES, empty=True)
+    raw = _text(result["stdout"], MAX_RECEIPT_BYTES)
+    try:
+        value = json.loads(raw, object_pairs_hook=_pairs, parse_constant=_constant)
+    except (ValueError, TypeError, RecursionError) as exc:
+        raise CheckedWorkerBudgetError("one complete duplicate-free observation JSON receipt required") from exc
+    # Dynamic native validation permits only schemas explicitly implemented by
+    # this pinned producer, including its versioned checked-context extension.
+    receipt = observations.validate_model_input_observation(value)
+    _need(receipt["status"] == "observed", "refused worker observation cannot commit a matched input")
+    return receipt
+
+
+def _join(receipt, preparation, *, binding, policy):
+    basis, material = preparation["basis"], preparation["materialization"]
+    for prefix in ("native_prompt", "router_prompt", "model_prompt", "workspace_advisory"):
+        for metric in ("sha256", "bytes"):
+            _need(receipt[prefix + "_" + metric] == material[prefix][metric],
+                  "observed " + prefix + " " + metric + " differs from complete reservation")
+    _need(receipt["workspace"] == basis["worker_workspace"], "observed allocated workspace differs")
+    _need(_wire(receipt["public_instruction"]) == _wire(basis["instruction_receipt"])
+          and receipt["public_instruction"]["task_cid"] == basis["task_cid"],
+          "observed public instruction or task binding differs")
+    _need(_wire(receipt["external_container_boundary"]) == _wire(basis["boundary"]),
+          "observed external container boundary differs")
+    for field in ("semantic_transport", "intent_requirements_transport", "code_retrieval_codec",
+                  "code_retrieval_wire_delivery"):
+        _need(receipt[field] == material[field], "observed coding route differs")
+    for field in ("semantic_translation", "code_retrieval_projection", "doctor_residual_context",
+                  "reviewed_source_nomination_context", "wire_delivery_post_observation_verified",
+                  "wire_delivery_cleanup_status"):
+        _need(receipt[field] is None, "unsupported extra observation context or wire route")
+    _join_checked_context(receipt, basis, binding=binding, policy=policy)
+
+
+def _join_checked_context(receipt, basis, *, binding, policy):
+    # Native validation checks the entire closed inclusion, including its
+    # source/scope/instruction joins; these joins add this original live budget
+    # and the exact suffix/allocated boundary expected by the controller.
+    if not basis["checked_suffix"]:
+        _need(receipt.get("checked_context") is None, "unexpected checked-context inclusion")
+        return
+    _need(receipt.get("schema") == "supervisor-model-input-observation@2"
+          and type(receipt.get("checked_context")) is dict,
+          "checked suffix requires the native versioned checked-context inclusion")
+    checked = receipt["checked_context"]
+    suffix = _identity(basis["checked_suffix"])
+    _need(type(checked.get("suffix_bytes")) is int and checked["suffix_bytes"] == suffix["bytes"]
+          and checked.get("suffix_sha256") == suffix["sha256"], "observed checked suffix differs")
+    from ipfs_accelerate_py.agent_supervisor.runtime import checked_audit_context
+    text = basis["checked_suffix"]
+    _need(text.startswith(checked_audit_context.PREFIX) and text.endswith(checked_audit_context.SUFFIX),
+          "exact native checked context framing required")
+    context = text[len(checked_audit_context.PREFIX):-len(checked_audit_context.SUFFIX)]
+    identity = _identity(context)
+    _need(type(checked.get("context_bytes")) is int and checked["context_bytes"] == identity["bytes"]
+          and checked.get("context_sha256") == identity["sha256"], "observed checked context packet differs")
+    _need(_wire(checked.get("native_semantic")) == _wire(receipt["semantic_context_verification"]),
+          "observed checked context native semantic projection differs")
+    _need(checked.get("task_cid") == basis["task_cid"]
+          and _wire(checked.get("checked_binding")) == _wire(binding)
+          and _wire(checked.get("budget_policy")) == _wire(policy),
+          "observed checked context differs from original live budget binding or policy")
+    _need(type(checked.get("worker_binding")) is dict
+          and _wire(checked["worker_binding"]) == _wire({"workspace": basis["worker_workspace"],
+              "boundary": basis["boundary"]}), "observed checked context allocated worker binding differs")
+
+
+def transact_checked_worker_observation(*, budget_owner, preparation, launch_observer,
+        cancel_event=None, current_guard=None):
+    """Reserve before any callback; return a byte join, never child authority.
+
+    ``launch_observer()`` supplies only launch result data. ``current_guard()``
+    may reject changing originals but does not confer authority on this helper.
+    Exceptions, cancellation and malformed/mismatched results abort with spend
+    retained. Only admission refusal before reservation leaves spend unchanged.
+    """
+    _need(callable(launch_observer) and (current_guard is None or callable(current_guard)),
+          "explicit launch callback and optional current guard required")
+    rebuilt, original = _rebuild(budget_owner, preparation)
+    event = rebuilt["event"]
+    with budget_owner.reserve(event, cancel_event=cancel_event) as reservation:
+        budgets._cancel(cancel_event)
+        _need(_wire(preparation) == original, "coding preparation changed before callback")
+        if current_guard is not None:
+            _need(current_guard() is None, "current guard must reject by raising")
+        budgets._cancel(cancel_event)
+        _need(_wire(preparation) == original, "coding preparation changed before observer launch")
+        receipt = _launch_receipt(launch_observer())
+        _join(receipt, rebuilt, binding=budget_owner.binding, policy=budget_owner.policy.to_dict())
+        if current_guard is not None:
+            _need(current_guard() is None, "current guard must reject by raising")
+        budgets._cancel(cancel_event)
+        _need(_wire(preparation) == original, "coding preparation changed during observation")
+        # Native seconds may be float. Preserve every exact field in a JSON
+        # string; no float is rounded, dropped or inserted into a native CID.
+        raw = json.dumps(receipt, sort_keys=True, ensure_ascii=False,
+            separators=(",", ":"), allow_nan=False).encode("utf-8")
+        _need(len(raw) <= MAX_RECEIPT_BYTES, "complete observation exceeds byte bound")
+        envelope = {"schema": "terminal-checked-worker-observation-json@1",
+            "canonical_json": raw.decode("utf-8"), "sha256": _sha(raw), "bytes": len(raw)}
+        envelope["receipt_cid"] = cid_for_structured(envelope)
+        snapshot = reservation.commit(observed_event=event)
+        result = {"schema": RESULT_SCHEMA, "preparation_cid": rebuilt["preparation_cid"],
+            "event_cid": event["event_cid"], "budget_snapshot": snapshot, "observation": envelope,
+            "complete_rendered_input_join_verified": True, "local_budget_reservation_committed": True,
+            "worker_receipt_data_validated": True, "launch_origin_scope": "caller_must_qualify_independently",
+            "provider_adapter_calls": 0, "provider_usage": None, "provider_output_tokens": None, **AUTHORITY}
+        result["result_cid"] = cid_for_structured(result)
+        return result
+
+
+def checked_worker_budget_producer_paths():
+    """Explicit direct producers; current producer custody is caller-owned."""
+    paths = {Path(__file__).resolve(), Path(budgets.__file__).resolve(),
+        Path(native_runner.__file__).resolve(), Path(observations.__file__).resolve()}
+    if hasattr(observations, "CHECKED_SCHEMA"):
+        from ipfs_accelerate_py.agent_supervisor.runtime import checked_audit_context
+        paths.add(Path(checked_audit_context.__file__).resolve())
+    return tuple(sorted(paths))

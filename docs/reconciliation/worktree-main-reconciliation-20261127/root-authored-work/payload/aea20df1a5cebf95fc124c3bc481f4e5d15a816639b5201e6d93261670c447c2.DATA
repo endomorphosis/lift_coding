@@ -1,0 +1,23 @@
+{
+  "base_origin_main_commit": "776a737744049f59bad3101268529af9c6db13f5",
+  "hf_writes": 0,
+  "private_checkout": "/home/barberb/lift_coding/maintenance/ranker-trace-private-git-preparation-20261005-01/child",
+  "remote_pushes": 0,
+  "schema": "ranker-trace-child-git-selection@1",
+  "selected_file_count": 2,
+  "selected_files": [
+    {
+      "bytes": 18891,
+      "captured_sha256": "d89e83376367b3114cca967797677e0982a27cab78797ebfca0d7a1c1807c364",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_ranker_trace_authentication.py",
+      "source_sha256": "d89e83376367b3114cca967797677e0982a27cab78797ebfca0d7a1c1807c364"
+    },
+    {
+      "bytes": 18828,
+      "captured_sha256": "5e5d1791233b279654b2e616866e7b73d5028c6cf64d5b0f805b29a07e56092d",
+      "path": "test/api/test_terminal_codebase_ranker_trace_authentication.py",
+      "source_sha256": "5e5d1791233b279654b2e616866e7b73d5028c6cf64d5b0f805b29a07e56092d"
+    }
+  ],
+  "source_scope": "finite native consistency only; no convergence, historical origin or task satisfaction qualification"
+}

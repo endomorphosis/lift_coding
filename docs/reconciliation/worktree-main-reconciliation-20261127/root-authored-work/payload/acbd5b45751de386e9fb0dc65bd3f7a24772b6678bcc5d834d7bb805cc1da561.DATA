@@ -1,0 +1,210 @@
+"""Evaluation-only dispatcher around unmodified native transition/store APIs.
+
+This is not a deployed world model. Every selected action still runs and receives
+an independent output check. Native observation status denotes a local producer
+declaration, not a signature or proof of execution.
+"""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import platform
+import subprocess
+import sys
+import time
+
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parents[4]
+SOURCE = ROOT / ".worktrees/semantic-addressed-world-model-r2"
+
+
+def digest(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def write_json(path, value):
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
+    Path(path).write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+
+
+def native_imports():
+    before = time.perf_counter()
+    sys.path[:0] = [str(SOURCE), str(SOURCE / "ipfs_datasets_py"), str(SOURCE / "ipfs_kit_py")]
+    os.environ["IPFS_DATASETS_PY_MINIMAL_IMPORTS"] = "1"
+    os.environ["IPFS_DATASETS_AUTO_INSTALL"] = "0"
+    os.environ["IPFS_KIT_AUTO_INSTALL_DEPS"] = "0"
+    from ipfs_datasets_py.logic.software_contracts.semantic_state import program_transition as transitions
+    from ipfs_kit_py.semantic_world_store.graph_history import ProgramTransitionLog, HistoryRecordKind
+    from ipfs_kit_py.mcp_server.mcplusplus.coordination_storage import DurableCoordinationStore
+    from ipfs_accelerate_py.agent_supervisor.semantic_state.program_world_adapters import ExecutionTransitionCompiler
+    return transitions, ProgramTransitionLog, HistoryRecordKind, DurableCoordinationStore, ExecutionTransitionCompiler, time.perf_counter() - before
+
+
+def runtime_profile():
+    modules = []
+    for name, module in sorted(sys.modules.items()):
+        filename = getattr(module, "__file__", None)
+        if filename and Path(filename).is_file() and str(Path(filename).resolve()).startswith(str(SOURCE) + "/"):
+            modules.append({"module": name, "path": str(Path(filename).resolve()), "sha256": digest(filename)})
+    return {"python": sys.version, "executable": sys.executable, "executable_sha256": digest(sys.executable), "platform": platform.platform(), "source": str(SOURCE), "modules": modules, "normal_imports": True, "module_stubs": False, "provider_calls": 0}
+
+
+def native_put(store, kind, payload):
+    return store.put({"schema": "world-memory-development/" + kind + "@1", **payload}, replicate=False)["cid"]
+
+
+def make_query(T, store, case, catalog):
+    source = HERE / "sources" / case["source"]
+    source_cid = native_put(store, "source", {"text": source.read_text(), "sha256": digest(source)})
+    environment = {"WORLD_MEMORY_EVAL_SIGN": case["environment_sign"], "python_sha256": digest(sys.executable), "platform": platform.platform()}
+    environment_cid = native_put(store, "environment", environment)
+    state = {"value": case["value"], "target": case["target"]}
+    state_cid = native_put(store, "state", state)
+    subject_cid = native_put(store, "subject", {"name": "frozen_three_action_integer_service"})
+    policy_cid = native_put(store, "policy", {"catalog_order": catalog, "validation": "actual integer output equals current target", "observation_authority": "isolated evaluation producer only; no signature", "always_execute_selected_action": True})
+    action_cids = {action: native_put(store, "action", {"symbol": action}) for action in catalog}
+    query = T.ProgramTransitionQuery(query_family="next_call", language="python", subject_cid=subject_cid, current_source_cid=source_cid, environment_binding_cid=environment_cid, policy_cid=policy_cid, current_state_cid=state_cid, allowed_symbol_cids=tuple(action_cids.values()))
+    conditions = {"source_text": source.read_text(), "environment": environment, "state": state, "catalog": catalog, "policy_cid": policy_cid}
+    return query, action_cids, conditions
+
+
+def admission(T, old_query, current_query, observation):
+    return T.admit_program_transition(old_query, current_subject_cid=current_query.subject_cid, current_source_cid=current_query.current_source_cid, current_environment_binding_cid=current_query.environment_binding_cid, current_state_cid=current_query.current_state_cid, current_graph_cid=current_query.current_graph_cid, current_trace_cid=current_query.current_trace_cid, observation=observation)
+
+
+def execute(case, action, output_dir, number):
+    """No expected label is supplied to the action process."""
+    command = [sys.executable, str(HERE / "sources" / case["source"]), action, str(case["value"])]
+    environment = {"PATH": os.environ.get("PATH", ""), "LANG": "C.UTF-8", "WORLD_MEMORY_EVAL_SIGN": str(case["environment_sign"])}
+    started = time.perf_counter()
+    completed = subprocess.run(command, env=environment, cwd=output_dir, capture_output=True, text=True, timeout=15)
+    elapsed = time.perf_counter() - started
+    stdout = output_dir / f"action-{number:02d}.stdout"
+    stderr = output_dir / f"action-{number:02d}.stderr"
+    stdout.write_text(completed.stdout)
+    stderr.write_text(completed.stderr)
+    try:
+        observed = json.loads(completed.stdout)
+    except json.JSONDecodeError:
+        observed = None
+    valid = (completed.returncode == 0 and isinstance(observed, dict) and type(observed.get("value")) is int and observed["value"] == case["target"] and observed.get("action") == action)
+    return {"action": action, "command": command, "returncode": completed.returncode, "elapsed_seconds": elapsed, "stdout": str(stdout), "stdout_sha256": digest(stdout), "stderr": str(stderr), "stderr_sha256": digest(stderr), "observed": observed, "independent_output_check": valid}
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--arm", required=True, choices=["producer", "native_memory", "no_memory", "exact_json", "condition_template"])
+    parser.add_argument("--case", required=True)
+    parser.add_argument("--store", required=True, type=Path)
+    parser.add_argument("--output", required=True, type=Path)
+    args = parser.parse_args()
+    started = time.perf_counter()
+    args.output.mkdir(parents=True, exist_ok=True)
+    T, Log, Kind, Store, Compiler, import_elapsed = native_imports()
+    protocol = json.loads((HERE / "protocol.json").read_text())
+    case = {"id": "seed", **protocol["seed"]} if args.case == "seed" else next(c for c in protocol["cases"] if c["id"] == args.case)
+    open_started = time.perf_counter()
+    store = Store(storage_dir=args.store / "native")
+    log = Log(store)
+    open_elapsed = time.perf_counter() - open_started
+    query, actions, conditions = make_query(T, store, case, protocol["action_catalog_order"])
+    query_path = args.output / "current_query.json"
+    write_json(query_path, query.to_dict())
+    index_path = args.store / "evaluation_index.json"
+    index = json.loads(index_path.read_text()) if index_path.exists() else {"entries": {}, "seed": None}
+    selected = None
+    gate = {"decision": "history_not_consulted", "candidate_bound": None}
+    old = None
+    load_started = time.perf_counter()
+    if args.arm not in {"producer", "no_memory"}:
+        old = index["entries"].get(query.query_cid, index["seed"])
+        gate["lookup_exact_hit"] = query.query_cid in index["entries"]
+        if old is None:
+            gate["decision"] = "empty"
+        elif args.arm == "native_memory":
+            old_query = log.get_verified_query(old["query_cid"])
+            old_candidate = T.ProgramTransitionCandidate.from_dict(dict(log.blocks.get_verified_record(old["candidate_cid"], expected_kind=Kind.TRANSITION_CANDIDATE)["payload"]))
+            old_observation = log.get_verified_observation(old["observation_cid"])
+            observed_result = store.get(old_observation.observed_cid)
+            gate["retrieved_query_cid"] = old_query.query_cid
+            gate["retrieved_observation_cid"] = old_observation.observation_cid
+            gate["retrieved_execution_evidence_cids"] = list(old_observation.evidence_cids)
+            gate["producer_execution_pid"] = observed_result["producer_pid"]
+            gate["consumer_pid"] = os.getpid()
+            if case.get("observation_control"):
+                old_observation = T.observe_program_transition(old_query, observed_cid=old_observation.observed_cid, observation_status=case["observation_control"], evidence_cids=old_observation.evidence_cids)
+                log.put_observation(old_observation)
+                write_json(args.output / "untrusted_control_observation.json", old_observation.to_dict())
+            verdict = admission(T, old_query, query, old_observation)
+            gate["decision"] = verdict.verdict
+            gate["admission"] = verdict.to_dict()
+            try:
+                T.bind_candidate_to_query(query, old_candidate)
+                gate["candidate_bound"] = True
+            except T.ProgramTransitionError as error:
+                gate["candidate_bound"] = False
+                gate["candidate_binding_error"] = str(error)
+            gate["recorded_outcome_matches_candidate"] = observed_result["selected_action_cid"] == old_candidate.selected_cid and observed_result["passed"] is True
+            if T.may_influence_planning(verdict) and gate["candidate_bound"] and gate["recorded_outcome_matches_candidate"]:
+                selected = next(name for name, cid in actions.items() if cid == old_candidate.selected_cid)
+            compilation = Compiler().compile(old_query, candidate=old_candidate, observation=old_observation)
+            gate["native_compilation"] = compilation.to_dict()
+            assert compilation.proposal_only and not compilation.admitted
+        else:
+            # Both ordinary controls start from the same native-observed evidence.
+            # Exact JSON compares the complete typed query. Templates compare the
+            # entire explicit condition tuple; they contain no generalized rule.
+            evidence = json.loads((args.store / old["plain_record"]).read_text())
+            full_match = evidence["query"] == query.to_dict() if args.arm == "exact_json" else evidence["conditions"] == conditions
+            status = case.get("observation_control", evidence["observation_status"])
+            gate["candidate_bound"] = full_match
+            gate["decision"] = "stale" if not full_match else ("admitted" if status == "observed" else "abstain")
+            gate["retrieved_query_cid"] = evidence["query"]["query_cid"]
+            gate["producer_execution_pid"] = evidence["producer_pid"]
+            gate["consumer_pid"] = os.getpid()
+            if full_match and status == "observed" and evidence["passed"]:
+                selected = evidence["selected_action"]
+    load_elapsed = time.perf_counter() - load_started
+    proposed_action = selected
+    attempted = []
+    # Execution and the independent current-output check remain mandatory.
+    order = ([selected] if selected else []) + [action for action in protocol["action_catalog_order"] if action != selected]
+    for number, action in enumerate(order):
+        record = execute(case, action, args.output, number)
+        attempted.append(record)
+        if record["independent_output_check"]:
+            selected = action
+            break
+    passed = bool(attempted and attempted[-1]["independent_output_check"])
+    if not passed:
+        raise RuntimeError("No action passed independent current-output check")
+    publication_started = time.perf_counter()
+    evidence_cids = []
+    for number, record in enumerate(attempted):
+        evidence_cids.append(native_put(store, "execution", {"case_id": case["id"], "attempt": number, "query_cid": query.query_cid, "action": record["action"], "returncode": record["returncode"], "stdout": Path(record["stdout"]).read_text(), "stderr": Path(record["stderr"]).read_text(), "passed": record["independent_output_check"], "producer_pid": os.getpid()}))
+    result_cid = native_put(store, "observed-result", {"query_cid": query.query_cid, "selected_action_cid": actions[selected], "value": attempted[-1]["observed"]["value"], "passed": passed, "producer_pid": os.getpid()})
+    candidate = T.select_and_parameterize_candidate(query, candidate_kind="call_target", selected_cid=actions[selected])
+    observation = T.observe_program_transition(query, observed_cid=result_cid, evidence_cids=evidence_cids)
+    observed_admission = admission(T, query, query, observation)
+    receipt = log.append_transition_receipt(query=query, candidates=(candidate,), observation=observation, admission=observed_admission)
+    plain_name = "plain/" + observation.observation_cid + ".json"
+    plain_record = {"query": query.to_dict(), "conditions": conditions, "selected_action": selected, "observation_status": observation.observation_status, "passed": passed, "producer_pid": os.getpid(), "observation": observation.to_dict(), "result": store.get(result_cid), "evidence": [store.get(cid) for cid in evidence_cids]}
+    write_json(args.store / plain_name, plain_record)
+    entry = {"query_cid": query.query_cid, "candidate_cid": candidate.candidate_cid, "observation_cid": observation.observation_cid, "receipt_cid": receipt.cid, "log_entry_cid": receipt.log_entry_cid, "plain_record": plain_name}
+    index["entries"][query.query_cid] = entry
+    if index["seed"] is None:
+        index["seed"] = entry
+    write_json(index_path, index)
+    publish_elapsed = time.perf_counter() - publication_started
+    # Flush/close before the next independently launched process reopens.
+    log.close()
+    result = {"schema": "world-memory-development-result@1", "case": case, "arm": args.arm, "pid": os.getpid(), "parent_pid": os.getppid(), "passed": passed, "query_cid": query.query_cid, "query_path": str(query_path), "gate": gate, "proposed_action": proposed_action, "executed_successful_action": selected, "action_process_count": len(attempted), "attempts": attempted, "publication": entry, "elapsed_seconds": {"native_import": import_elapsed, "open_persistent_store": open_elapsed, "retrieval_and_gate": load_elapsed, "actions": sum(item["elapsed_seconds"] for item in attempted), "publication": publish_elapsed, "consumer_body": time.perf_counter() - started}, "provider_calls": 0, "tokens": 0, "native_observation_trust": "local evaluation producer declaration; no execution signature or proof", "runtime_profile": runtime_profile()}
+    write_json(args.output / "result.json", result)
+    print(json.dumps({key: result[key] for key in ("case", "arm", "passed", "action_process_count", "proposed_action")}))
+
+
+if __name__ == "__main__":
+    main()

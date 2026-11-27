@@ -1,0 +1,160 @@
+#!/usr/bin/env python3
+"""Frozen constructed development comparison with an actual native symbolic caller.
+
+This is a new evaluation integration, not the production daemon. Internal CEGIS
+marker gates are not theorem proofs: execution checks remain separate.
+"""
+from __future__ import annotations
+import argparse
+import hashlib
+import importlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import time
+import uuid
+
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parents[4]
+for path in reversed([ROOT/'external/ipfs_accelerate', ROOT/'external/ipfs_datasets', ROOT/'external/ipfs_kit', HERE.parent]):
+    sys.path.insert(0, str(path))
+from metered_provider import call, canonical, digest, write_new
+from ipfs_accelerate_py.agent_supervisor.analysis.formal_assurance.ipa import analyze_python_source
+from ipfs_accelerate_py.agent_supervisor.autonomous_repair.formal_assurance_cegis import CegisRepairRequest, CounterexampleRecord, RepairFamily, CegisBudget, run_bounded_cegis
+from ipfs_accelerate_py.agent_supervisor.semantic_state.routing import RoutingInputs, route_model
+
+IMAGE = 'sha256:7a8b475003c4fe15a2cd4e55e5cfc2f3560bdc9333d624f24cdd6d4340fd7a17'
+ORDER = [('system','unobserved_status'),('baseline','unobserved_status'),('baseline','swallowed_backend_error'),('system','swallowed_backend_error'),('system','clamp_interval'),('baseline','clamp_interval'),('baseline','stable_deduplication'),('system','stable_deduplication')]
+CHILD = r'''
+import ast,json,sys
+request=json.load(sys.stdin)
+source=request['source']
+tree=ast.parse(source)
+for node in ast.walk(tree):
+    if isinstance(node,(ast.Import,ast.ImportFrom,ast.ClassDef,ast.Global,ast.Nonlocal,ast.AsyncFunctionDef,ast.With,ast.AsyncWith)):
+        raise ValueError('source outside frozen basic Python profile')
+    if isinstance(node,ast.Name) and node.id.startswith('_'):
+        raise ValueError('private names excluded')
+    if isinstance(node,ast.Attribute) and node.attr.startswith('_'):
+        raise ValueError('private attributes excluded')
+    if isinstance(node,ast.FunctionDef) and node.decorator_list:
+        raise ValueError('decorators excluded')
+allowed={name: getattr(__import__('builtins'),name) for name in ['RuntimeError','ValueError','TypeError','Exception','AssertionError','dict','list','set','tuple','str','int','bool','len','range','enumerate','min','max','sorted','isinstance','abs','sum','zip']}
+namespace={'__builtins__':allowed}
+exec(compile(tree,'candidate.py','exec'),namespace)
+exec(compile(request['validation'],'oracle.py','exec'),namespace.copy())
+print(json.dumps({'passed':True}))
+'''
+
+def check(source, validation):
+    started=time.monotonic()
+    name='ns-routing-oracle-'+uuid.uuid4().hex
+    command=['docker','run','--name',name,'--rm','-i','--network','none','--read-only','--cap-drop','ALL','--security-opt','no-new-privileges','--pids-limit','32','--memory','128m','--cpus','1','--user','65534:65534',IMAGE,'python','-I','-c',CHILD]
+    try:
+        completed=subprocess.run(command,input=canonical({'source':source,'validation':validation}),capture_output=True,timeout=15)
+        result={'passed':completed.returncode==0,'returncode':completed.returncode,'stdout':completed.stdout.decode(errors='replace')[-2000:],'stderr':completed.stderr.decode(errors='replace')[-2000:]}
+    except subprocess.TimeoutExpired:
+        result={'passed':False,'returncode':None,'error':'oracle timeout'}
+    finally:
+        subprocess.run(['docker','rm','-f',name],capture_output=True,timeout=10)
+    return {**result,'elapsed_seconds':time.monotonic()-started,'candidate_sha256':digest(source.encode()),'oracle_sha256':digest(validation.encode())}
+
+def bindings():
+    paths=[HERE/'cases.json', HERE/'provider_profile.json', Path(__file__), HERE.parent/'metered_provider.py']
+    for directory in ['analysis/formal_assurance','autonomous_repair','semantic_state']:
+        paths.extend(sorted((ROOT/'external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor'/directory).glob('*.py')))
+    return {str(path.relative_to(ROOT)):digest(path.read_bytes()) for path in paths}
+
+def freeze():
+    value={'schema':'ns-routing-development-freeze/v1','files':bindings(),'image':IMAGE,'order':ORDER,'arms':['model_first','native_ipa_cegis_routing_residual'],
+           'endpoint':'independent audit pass and total workflow provider tokens; all eight cells retained',
+           'interpretation':'constructed development, four chosen families, no confidence interval or general-system benefit claim',
+           'model_call_ceiling':6,'no_retries':True,'auxiliary_model_calls':0,
+           'routing_evidence':'visible execution acceptance discharges this bounded behavioral obligation; CEGIS synthetic proof gate is not counted as an available proof',
+           'budget_failure_rule':'if a designated supported case cannot close deterministically, retain it as unsuccessful/budget unavailable; profile does not authorize an extra system call',
+           'setup_tokens':0,'setup_scope':'no model-assisted procedure learning or objective formalization in this constructed development caller; authoring/implementation effort excluded',
+           'quality_gate':'same frozen independent oracle per arm; caller uses visible validation only',
+           'candidate_runtime':{'image':IMAGE,'network':False,'mounts':[],'read_only':True,'user':'65534:65534','max_seconds':15},
+           'historical_campaign_modified':False,'created_at':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime())}
+    write_new(HERE/'freeze.json',value)
+    return value
+
+def symbolic(case):
+    started=time.monotonic()
+    findings=analyze_python_source(case['source'],path='seeded/'+case['id']+'.py')
+    matched=[f for f in findings if f.rule_id==case['rule_id']]
+    evidence={'analyzer_findings':[f.to_dict() for f in findings],'candidate_source':None,'cegis':None,'visible_validation':None}
+    if case['family'] and matched:
+        preferred=[f for f in matched if 'hermetic datalog' not in f.message]
+        finding=(preferred or matched)[0]
+        request=CegisRepairRequest(source=case['source'],counterexample=CounterexampleRecord(counterexample_id='cx:'+case['id'],family=RepairFamily(case['family']),path='seeded/'+case['id']+'.py',witness=case['objective'],rule_id=finding.rule_id),finding=finding,admitted_paths=['seeded/'],budget=CegisBudget(max_iterations=2))
+        repaired=run_bounded_cegis(request)
+        evidence['cegis']=repaired.to_dict()
+        if repaired.certificate and repaired.candidates_tried:
+            evidence['candidate_source']=repaired.candidates_tried[-1].after_source
+            evidence['visible_validation']=check(evidence['candidate_source'],case['visible_validation'])
+    closed=bool(evidence['visible_validation'] and evidence['visible_validation']['passed'])
+    routing=route_model(RoutingInputs(context_tokens=0,lowest_confidence='exact' if closed else 'conservative',risk='low',dependency_cone_size=1,unresolved_obligations=0 if closed else 1,prior_repair_failures=0,available_proofs=0))
+    evidence['routing']=routing.to_dict()
+    evidence['bounded_obligation_discharged']=closed
+    evidence['elapsed_seconds']=time.monotonic()-started
+    evidence['next_action']='accept_deterministic_candidate' if closed and not routing.requires_provider else 'dispatch_neural_residual' if routing.requires_provider else 'halt'
+    return evidence
+
+def messages(case):
+    return [{'role':'system','content':'Return only a JSON object with a single string field source, containing the complete repaired Python module. Use no tools or imports. Keep all public functions. Work within ordinary deterministic Python; private names/attributes, imports, classes, decorators, and global/nonlocal declarations are not admitted.'},
+            {'role':'user','content':json.dumps({'objective':case['objective'],'source':case['source'],'public_validation':case['visible_validation']},sort_keys=True)}]
+
+def run(local_only=False):
+    frozen=json.loads((HERE/'freeze.json').read_bytes())
+    assert frozen['files']==bindings(), 'source or frozen cases changed'
+    output=HERE/'results'; output.mkdir(exist_ok=True)
+    cases={c['id']:c for c in json.loads((HERE/'cases.json').read_bytes())['cases']}
+    for arm,case_id in ORDER:
+        case=cases[case_id]; cell_id=arm+'-'+case_id; result_path=output/(cell_id+'.json')
+        if result_path.exists():
+            print(json.dumps({'cell':cell_id,'state':'already_terminal'}),flush=True);continue
+        if local_only and arm=='baseline':continue
+        record={'schema':'ns-routing-development-cell/v1','cell_id':cell_id,'arm':arm,'case_id':case_id,'source_sha256':digest(case['source'].encode()),'provider_calls':0,'normalized_usage':{'input_tokens':0,'output_tokens':0,'total_tokens':0,'cached_input_tokens':0,'reasoning_tokens':0},'status':'started'}
+        source=None
+        if arm=='system':
+            stage=symbolic(case);record['symbolic']=stage
+            if stage['next_action']=='accept_deterministic_candidate':
+                source=stage['candidate_source'];record['status']='deterministic_closed'
+            elif local_only:
+                write_new(output/(cell_id+'.local.json'),record)
+                print(json.dumps({'cell':cell_id,'state':'residual_requires_provider'}),flush=True);continue
+        if source is None:
+            profile=json.loads((HERE/'provider_profile.json').read_bytes())
+            if cell_id not in profile['call_ids']:
+                record['status']='residual_budget_unavailable'
+            else:
+                transport=call(HERE/'provider_profile.json',output/'provider',cell_id,messages(case))
+                record['provider_calls']=transport['attempted_posts'];record['normalized_usage']=transport['normalized_usage'];record['provider_status']=transport['status'];record['provider_record']=str((output/'provider'/cell_id/'result.json').relative_to(ROOT))
+                try:
+                    proposal=json.loads(transport['text']);assert set(proposal)=={'source'} and isinstance(proposal['source'],str) and len(proposal['source'].encode())<=65536
+                    source=proposal['source'];record['status']='neural_proposal'
+                except (TypeError,ValueError,AssertionError):record['status']='invalid_or_missing_proposal'
+        record['candidate_source']=source
+        record['independent_oracle']=check(source,case['audit_validation']) if source is not None else None
+        record['success']=bool(record['independent_oracle'] and record['independent_oracle']['passed'])
+        write_new(result_path,record)
+        print(json.dumps({'cell':cell_id,'status':record['status'],'success':record['success'],'provider_calls':record['provider_calls'],'total_tokens':record['normalized_usage']['total_tokens']}),flush=True)
+    rows=[json.loads(p.read_bytes()) for p in output.glob('*.json') if not p.name.endswith('.local.json')]
+    summary={'schema':'ns-routing-development-summary/v1','scheduled_cells':8,'observed_cells':len(rows),'complete':len(rows)==8,'arms':{}}
+    for arm in ['baseline','system']:
+        group=[r for r in rows if r['arm']==arm]
+        usage=[r['normalized_usage'].get('total_tokens') for r in group]
+        summary['arms'][arm]={'cells':len(group),'successes':sum(r['success'] for r in group),'provider_calls':sum(r['provider_calls'] for r in group),'tokens_complete':all(t is not None for t in usage),'total_tokens':sum(usage) if all(t is not None for t in usage) else None}
+    baseline=summary['arms']['baseline'];system=summary['arms']['system']
+    summary['token_reduction']=1-system['total_tokens']/baseline['total_tokens'] if summary['complete'] and system['total_tokens'] is not None and baseline['total_tokens'] else None
+    summary['scope']='constructed development routing comparison; not native full-system or confirmatory generalization'
+    (HERE/'summary.json').write_text(json.dumps(summary,indent=2)+'\n')
+    print(json.dumps(summary),flush=True)
+
+if __name__=='__main__':
+    parser=argparse.ArgumentParser();parser.add_argument('--freeze',action='store_true');parser.add_argument('--local-only',action='store_true');args=parser.parse_args()
+    if args.freeze:print(json.dumps(freeze()))
+    else:run(args.local_only)

@@ -1,0 +1,85 @@
+#!/usr/bin/env python3
+"""Literal predicate equivalence controls, optionally on actual full native DAG."""
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import random
+import re
+import sys
+import time
+
+HERE = Path(__file__).resolve().parent
+def sha(body): return hashlib.sha256(body).hexdigest()
+def pattern(nodes): return re.compile(b"|".join(re.escape(cid.encode("ascii")) for cid in sorted(nodes))) if nodes else None
+def legacy(nodes, body):
+    for cid in nodes:
+        if cid.encode("ascii") in body: return True
+    return False
+def union(compiled, body): return compiled is not None and compiled.search(body) is not None
+def write(path, value): path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+
+def controls():
+    rng = random.Random(41024); count = 0
+    alph = "abcdefg0123456789.*+?[](){}|^$\\"
+    for nodes in (set(), {""}, {"abc"}, {"abc", "bc", "bca"}, {"a.*b", "x|y", "[abc]", "\\"}):
+        compiled = pattern(nodes)
+        for body in (b"", b"abcabc", b"prea.*bpost", b"[abc]", b"x|y", b"prefix\\suffix", b"no match"):
+            assert legacy(nodes, body) == union(compiled, body); count += 1
+    for _ in range(400):
+        nodes = {"".join(rng.choice(alph) for _ in range(rng.randrange(1, 50))) for _ in range(rng.randrange(1, 20))}
+        compiled = pattern(nodes)
+        payloads = [bytes(rng.randrange(256) for _ in range(rng.randrange(120))), b"prefix" + sorted(nodes)[0].encode() + b"suffix", b"\x00" + b" ".join(s.encode() for s in nodes) + b"\xff"]
+        for body in payloads:
+            assert legacy(nodes, body) == union(compiled, body); count += 1
+    return {"constructed_predicate_equalities": count, "embedded_literals_escaped_metacharacters_empty_set_overlap_checked": True}
+
+def full(out):
+    profile = json.loads((HERE / "results_v9_full_syntax_cache/runtime_source_manifest.json").read_text())
+    sys.path[:0] = [str(HERE / "runtime_literal_union_v4")] + profile["pythonpath"][1:]
+    os.environ["IPFS_ACCEL_SKIP_CORE"] = "1"
+    os.environ["GIT_CEILING_DIRECTORIES"] = str(HERE.parents[5] / "papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache")
+    from ipfs_datasets_py.logic.software_contracts.semantic_index.snapshot import snapshot_repository
+    from ipfs_datasets_py.logic.software_contracts.semantic_index.scanner import RepositoryScanner
+    from ipfs_datasets_py.logic.software_contracts.semantic_state import build_semantic_state, verify_semantic_state_bundle
+    from ipfs_datasets_py.logic.software_contracts.semantic_state import merkle
+    from ipfs_datasets_py.logic.software_contracts.content import canonical_dag_json_bytes
+    source_file = HERE / "results_v9_full_syntax_cache/ns-hist-02-pyparsing/public_source_manifest.json"
+    source = json.loads(source_file.read_text())
+    case = json.loads((source_file.parent / "case.json").read_text())
+    raw = {p: (Path(source["tree"]) / p).read_bytes() for p in source["files"]}
+    assert all(sha(body) == source["files"][p]["sha256"] for p, body in raw.items())
+    snapshot = snapshot_repository(source["tree"], repository_id=case["family_id"], exclusions=())
+    state = RepositoryScanner(repository_id=case["family_id"]).scan_snapshot(snapshot, raw)
+    write(out / "scan.json", {"state_cid": state.state_cid, "symbols": len(state.symbols), "edges": len(state.edges), "source_manifest_sha256": sha(source_file.read_bytes())})
+    original = merkle.SymbolMerkleDag.__post_init__
+    def verify_predicate(dag):
+        started = time.perf_counter()
+        nodes = {node.node_cid for node in dag.symbol_nodes}; compiled = pattern(nodes)
+        write(out / "actual_node_cids.json", sorted(nodes))
+        digest = hashlib.sha256(); count = 0; legacy_seconds = 0.; union_seconds = 0.
+        for link in dag.links:
+            body = canonical_dag_json_bytes(link.identity_payload())
+            digest.update(len(body).to_bytes(8, "big")); digest.update(body)
+            tick = time.perf_counter(); old = legacy(nodes, body); legacy_seconds += time.perf_counter() - tick
+            tick = time.perf_counter(); new = union(compiled, body); union_seconds += time.perf_counter() - tick
+            assert old == new; count += 1
+            if count % 5000 == 0: write(out / "predicate_progress.json", {"actual_link_payloads_compared": count, "node_cids": len(nodes), "seconds": time.perf_counter() - started})
+        embedded = b"prefix" + sorted(nodes)[0].encode() + b"suffix"
+        assert legacy(nodes, embedded) and union(compiled, embedded)
+        result = {"actual_link_payloads_compared": count, "actual_node_cids": len(nodes), "full_ordered_payload_fingerprint": digest.hexdigest(), "legacy_predicate_seconds": legacy_seconds, "union_predicate_seconds": union_seconds, "all_equal": True, "embedded_actual_cid_rejected": True, "total_predicate_audit_seconds": time.perf_counter() - started}
+        write(out / "actual_predicate.json", result)
+        return original(dag)
+    merkle.SymbolMerkleDag.__post_init__ = verify_predicate
+    started = time.perf_counter(); bundle = build_semantic_state(state); verify_semantic_state_bundle(bundle)
+    write(out / "full_result.json", {"native_state_cid": state.state_cid, "native_semantic_root_cid": bundle.root.root_cid, "blocks": len(bundle.blocks), "build_verify_wall_seconds_including_legacy_predicate_audit": time.perf_counter() - started, "all_checks_passed": True, "provider_calls": 0})
+
+def main():
+    parser = argparse.ArgumentParser(); parser.add_argument("--output", type=Path, required=True); parser.add_argument("--full", action="store_true"); args = parser.parse_args()
+    args.output.mkdir()
+    result = {"schema": "ns-literal-union-controls/v4", **controls(), "source_sha256": sha(Path(__file__).read_bytes()), "variant_manifest_sha256": sha((HERE / "runtime_literal_union_v4_manifest.json").read_bytes()), "all_checks_passed": True, "provider_calls": 0}
+    write(args.output / "controls.json", result); print(json.dumps(result), flush=True)
+    if args.full: full(args.output)
+
+if __name__ == "__main__": main()

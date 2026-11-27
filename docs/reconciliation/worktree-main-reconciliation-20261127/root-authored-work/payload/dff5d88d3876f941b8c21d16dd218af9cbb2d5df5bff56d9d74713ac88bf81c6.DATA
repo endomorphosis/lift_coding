@@ -1,0 +1,107 @@
+"""Post-run root join of independently retained public accounting projections.
+
+No model, scorer, candidate or protected payload execution/inspection.
+The separate aggregate analysis implementation was fixed before outcomes.
+"""
+import hashlib
+import json
+import math
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+REVISION = HERE.parents[3]
+SCORER = REVISION / "evals/recruitment/candidate_scoring_v1/requests_runtime_accounting_v2/final_admission_v3.json"
+
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def read(path):
+    return json.loads(path.read_text())
+
+
+def main():
+    checks = 0
+
+    def check(value):
+        nonlocal checks
+        assert value
+        checks += 1
+
+    aggregate = read(HERE/"root_fixed_cohort_analysis_v2.json")
+    detailed = read(HERE/"final_ledger_audit_v3.json")
+    components = read(HERE/"final_runtime_components_v1.json")
+    source_freeze = read(HERE/"frozen_source_manifest.json")
+    scorer = read(SCORER)
+    check(aggregate["all_checks_passed"] and detailed["all_checks_passed"])
+    check(detailed["cohort_terminal"] and components["all_events_terminal"])
+    check(all(row["passed"] for row in detailed["checks"]))
+    check(detailed["scorer_accounting"] == scorer)
+    check(sha(SCORER) == detailed["scorer_admission_sha256"])
+    check(sha(HERE/"profile.json") == detailed["profile_sha256"] == components["profile_sha256"] == scorer["cohort_profile_sha256"])
+    check(detailed["journal_tip_sha256"] == components["journal_tip_sha256"])
+    check(sha(HERE/"root_frozen_analysis_v2.py") == aggregate["analysis_source_sha256"])
+    check(sha(HERE/"frozen_audit_repository_run_v3.py") == detailed["auditor_sha256"])
+    check(sha(HERE/"frozen_audit_repository_costs_v1.py") == components["analysis_source_sha256"])
+    for relative, digest in aggregate["inputs_sha256"].items():
+        check(sha(HERE/relative) == digest)
+    for row in source_freeze["sources"]:
+        check(sha(HERE/row["snapshot_path"]) == row["sha256"])
+        check(sha(Path(row["original_path"])) == row["sha256"])
+    by_arm = {row["arm"]: row for row in aggregate["arms"]}
+    for arm in detailed["arms"]:
+        reference = by_arm[arm["arm"]]
+        check(reference["usage"] == arm["usage"])
+        check(reference["accepted_nodes"] == arm["accepted_nodes"])
+        check(reference["complete_trajectory"] == arm["all_nodes_accepted"])
+        check(reference["provider_posts_known"] == arm["provider_posts"])
+        check(reference["invocation_seconds"] == arm["invocation_wall_seconds"])
+        check(reference["tokens_per_complete_trajectory"] == arm["tokens_per_complete_trajectory"])
+    check(sum(a["usage"]["total_tokens"] for a in by_arm.values()) == aggregate["provider_total_tokens"])
+    check(sum(a["provider_posts_known"] for a in by_arm.values()) == detailed["known_provider_posts"] == aggregate["actual_provider_posts_known"])
+    check(not aggregate["unknown_dispatch_intents"] and aggregate["unknown_provider_slots"] == 0)
+    check(not detailed["nonterminal_effects"] and not scorer["pending_or_unknown_ids"])
+    effects = {row["effect_id"]: row for row in components["effects"]}
+    check(len(effects) == len(components["effects"]))
+    check(set(effects) == {row["effect_id"] for row in detailed["effects"]})
+    for row in detailed["effects"]:
+        other = effects[row["effect_id"]]
+        check(all(row[k] == other[k] for k in ("event_id", "stage", "state", "elapsed_seconds")))
+        check(row["state"] == "terminal")
+    for component in components["components"]:
+        rows = [r for r in effects.values() if r["category"] == component["category"] and r["event_id"].split("-")[-2].upper() == component["arm"]]
+        check(len(rows) == component["unique_effects"])
+        check(math.isclose(sum(r["elapsed_seconds"] for r in rows), component["elapsed_seconds"], abs_tol=1e-8))
+        check(component["nested_in_invocation_wall"] and not component["missing_elapsed_effect_ids"])
+    service = {row["evaluation_id"]: row for row in scorer["rows"]}
+    check(len(service) == scorer["unique_request_count"] == len(detailed["scorer_receipts"]))
+    for receipt in detailed["scorer_receipts"]:
+        other = service[receipt["evaluation_id"]]
+        check(receipt["receipt_sha256"] == other["receipt_canonical_sha256"])
+        check(receipt["passed"] == other["grade"])
+        check(receipt["status"] == other["receipt_status"] == "completed")
+    check(math.isclose(sum(r["container_elapsed_seconds"] for r in service.values()), scorer["container_elapsed_seconds_sum_observed"], abs_tol=1e-8))
+    modes = read(HERE/"all_mode_transport_failures_v1.json")
+    check(modes["actual_local_failures"] == len(modes["rows"]) == 3)
+    for row in modes["rows"]:
+        check(row["all_pristine_content_bytes_restored"] and not row["actual_grader_invocation_for_this_candidate"])
+        check(row["counterfactual_grade"] is None)
+    inputs = ["root_fixed_cohort_analysis_v2.json", "final_ledger_audit_v3.json", "final_runtime_components_v1.json",
+              "frozen_source_manifest.json", "root_analysis_source_freeze_v1.json", "root_analysis_contract_v1.json",
+              "detailed_analysis_freeze_v1.json", "all_mode_transport_failures_v1.json", "REPORT.md", "profile.json"]
+    result = {"schema": "ns-root-final-public-accounting-join/v1", "passed": True, "checks": checks,
+              "provider_calls": aggregate["actual_provider_posts_known"], "provider_total_tokens": aggregate["provider_total_tokens"],
+              "unique_scorer_calls": len(service), "unique_outer_effects": len(effects),
+              "frozen_archived_sources": len(source_freeze["sources"]),
+              "scorer_admission_sha256": sha(SCORER), "input_sha256": {p: sha(HERE/p) for p in inputs},
+              "auditor_sha256": sha(Path(__file__)), "new_effects": 0,
+              "scope": "Post-outcome cross-check of independent public projections and exact source archive. No protected payload reads, added grades, new quality inference, general import-closure claim or counterfactual grades."}
+    with (HERE/"root_final_join_v1.json").open("x") as stream:
+        json.dump(result, stream, indent=2, sort_keys=True)
+        stream.write("\n")
+    print(json.dumps({k: v for k, v in result.items() if k != "input_sha256"}))
+
+
+if __name__ == "__main__":
+    main()

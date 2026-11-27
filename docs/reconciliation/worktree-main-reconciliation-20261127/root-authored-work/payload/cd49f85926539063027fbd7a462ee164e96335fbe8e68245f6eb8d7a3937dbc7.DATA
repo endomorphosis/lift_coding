@@ -1,0 +1,19 @@
+# Native compositional reasoning qualification
+
+The actual existing vertical slice completed in **19.309 seconds** using `.worktrees/agent-supervisor-efficiency-and-state-hardening-v1` and that tree's nested `ipfs_datasets_py`. `protocol.json` binds source heads, entrypoint and runner hashes; `loaded_sources.json` binds imported implementation bytes.
+
+The run discharged the baseline component contract, refuted an injected fault, localized it using a Z3 UNSAT core and cvc5 interpolant independently checked by Z3, performed deterministic repair, and passed selected and full tests. The final artifact verifier rescanned source, rebuilt semantic state, redischarged the composition graph and replayed selected tests. `native_result.json` retains these observations.
+
+This is one existing constructed fixture with prescribed fault value 30 and expected repair value 10. It is **not** new held-out program synthesis, general correctness, or an end-to-end token-savings comparison. The module's internal benchmark estimates are retained as original output but not promoted to measured token or compute savings. Solver diversity is not kernel reconstruction.
+
+The first attempt in `../compositional_v1/` failed because its source tree's nested datasets package lacked `software_contracts.compositional`. The compatible complete source profile above was then located and run without import shims or production changes.
+
+Two additional original trust tests passed: a self-consistent forged semantic-root artifact is rejected by independent replay, and the public API preserves lazy provider imports. A first repository pytest invocation timed out during collection after 240 seconds; its empty log and timeout remain. The bounded second invocation used `--noconftest` and selected these two tests, passing in 12.40 seconds. The pytest cache warning concerns `/dev/.pytest_cache`, not the scientific route or its outcomes. See `trust_test_isolated_command.json`, `trust_tests_isolated.xml` and `trust_test_isolated_outcome.json`.
+
+Reproduce the actual vertical slice from the repository root into a **fresh** directory:
+
+```sh
+python3 papers/revisions/neurosymbolic_system_scope_20260914/evals/run_compositional_eval.py --source .worktrees/agent-supervisor-efficiency-and-state-hardening-v1 --output /tmp/ns-compositional-new-run
+```
+
+The named source profile and solver dependencies must be available. The runner retains command logs and terminal failures, including timeouts. This source profile is distinct from the root-external routing pilot; the two runs do not establish one combined deployment.

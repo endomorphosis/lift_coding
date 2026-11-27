@@ -1,0 +1,152 @@
+"""Read-only audit of controller effects, real receipts and accepted state."""
+import argparse
+import hashlib
+import json
+from pathlib import Path
+import sqlite3
+
+HERE = Path(__file__).resolve().parent.parent
+
+
+def canon(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()
+
+
+def sha(path):
+    archive = Path(__file__).resolve().parent
+    manifest = json.loads((archive / 'frozen_source_manifest.json').read_text())
+    source = next((row for row in manifest['sources'] if row['original_path'] == str(Path(path).resolve())), None)
+    actual = archive / source['snapshot_path'] if source else Path(path)
+    return hashlib.sha256(actual.read_bytes()).hexdigest()
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("run_id")
+    args = parser.parse_args()
+    run = HERE / args.run_id
+    profile = json.loads((run / "profile.json").read_text())
+    db = sqlite3.connect("file:" + str(run / "state/ledger.sqlite3") + "?mode=ro", uri=True)
+    checks = []
+    def check(name, passed):
+        checks.append({"name": name, "passed": bool(passed)})
+    for path, expected in profile["evaluation_files"].items():
+        check("frozen evaluation source " + path, sha(path) == expected)
+    # Pin every actually imported source against the pre-effect full inventory.
+    loaded = {}
+    events = {}
+    effects = {}
+    totals = {"native_semantic_preparations": 0, "native_symbolic_attempts": 0, "native_candidate_sources": 0, "native_routes": 0, "context_reads": 0, "context_expansions": 0, "world_operations": 0, "world_compiled_actions_executed": 0, "scorer_attempts": 0, "scorer_terminal_receipts": 0, "scorer_recorded_function_calls": 0, "provider_effect_intents": 0}
+    for effect_id, event_id, stage, request_hash, state, result_path, result_hash in db.execute("SELECT * FROM effects"):
+        directory = run / "state/effects" / effect_id
+        request = json.loads((directory / "request.json").read_text())
+        check(effect_id + " request identity", hashlib.sha256(canon(request)).hexdigest() == request_hash)
+        expected_id = hashlib.sha256(canon({"event_id": event_id, "stage": stage, "request_hash": request_hash})).hexdigest()
+        check(effect_id + " event/stage binding", expected_id == effect_id)
+        key = (event_id, stage)
+        effects[key] = {"id": effect_id, "state": state, "request": request, "directory": directory}
+        if stage in {"current_visible", "candidate_visible", "candidate_audit", "residual_visible"}:
+            totals["scorer_attempts"] += 1
+        if stage.startswith("provider_"):
+            totals["provider_effect_intents"] += 1
+        if state != "terminal":
+            check(effect_id + " unknown has no durable completion", not (directory / "completion.json").exists())
+            continue
+        check(effect_id + " terminal receipt identity", sha(result_path) == result_hash)
+        completed = json.loads(Path(result_path).read_text())
+        check(effect_id + " terminal request binding", completed["effect_id"] == effect_id and completed["request_hash"] == request_hash)
+        process = json.loads((directory / "process.json").read_text())
+        response = completed["response"]
+        effects[key]["response"] = response
+        check(effect_id + " actual subprocess JSON matches receipt", process["returncode"] == 0 and json.loads(process["stdout"]) == response)
+        for path, record in response.get("imports", {}).items():
+            check(record["module"] + " source enrolled before dispatch", profile["native_files"].get(path) == record["sha256"])
+            loaded[path] = record["sha256"]
+        for record in response.get("runtime_profile", {}).get("imports", []):
+            check(record["module"] + " separate world profile enrolled", profile["world_memory_files"].get(record["path"]) == record["sha256"])
+            loaded[record["path"]] = record["sha256"]
+        if stage == "prepare":
+            totals["native_semantic_preparations"] += 1
+            check(event_id + " complete bounded source scope", response["snapshot"]["mode"] == "filesystem" and [entry["path"] for entry in response["snapshot"]["entries"]] == ["target.py"])
+            check(event_id + " exact source preserved in semantic preparation", response["source_preserved"] == request["source"] and response["source_sha256"] == hashlib.sha256(request["source"].encode()).hexdigest())
+            check(event_id + " explicit pending behavioral obligation", response["obligation"]["status"] == "pending_actual_execution" and response["omission_permission"] is False)
+        elif stage == "symbolic":
+            totals["native_symbolic_attempts"] += 1
+            totals["native_candidate_sources"] += response["candidate_source"] is not None
+            if response["candidate_source"] is not None:
+                final = response["cegis"]["candidates_tried"][-1]
+                check(event_id + " real native candidate bytes", final["after_source_hash"] == "sha256:" + hashlib.sha256(response["candidate_source"].encode()).hexdigest() and final["ipa_receipt"]["after_source"] == response["candidate_source"])
+                check(event_id + " CEGIS does not grant write authority", response["cegis"]["grants_write_authority"] is False)
+        elif stage == "route":
+            totals["native_routes"] += 1
+            check(event_id + " no synthetic theorem coverage", response["proofs_available"] == 0)
+        elif stage == "context_read":
+            totals["context_reads"] += 1
+            totals["context_expansions"] += response["native_expansion_calls"]
+            check(event_id + " context source/objective exact expected input", response["source_sha256"] == request["source_sha256"] and response["objective_sha256"] == request["objective_sha256"])
+            check(event_id + " raw preserved without oracle projection/reuse authority", response["raw_source_retained"] and not response["heldback_fields_projected_to_producer"] and not response["execution_reuse_authorized"])
+        elif stage.startswith("world_"):
+            totals["world_operations"] += 1
+            if response["status"] == "proposal":
+                compilation = response["compilation"]
+                check(event_id + " compiler candidate/observation own IDs used", compilation["candidate_cid"] == response["resolved_candidate_cid"] != compilation["query_cid"] and compilation["observation_cid"] == response["resolved_observation_cid"] != compilation["query_cid"])
+                check(event_id + " compiler proposal remains unadmitted", compilation["proposal_only"] and not compilation["admitted"])
+        if stage in {"current_visible", "candidate_visible", "candidate_audit", "residual_visible"}:
+            totals["scorer_terminal_receipts"] += 1
+            score = response["result"]
+            check(event_id + "/" + stage + " candidate bytes bound to real scorer", score["candidate_sha256"] == hashlib.sha256(request["source"].encode()).hexdigest() and response["image"] == profile["scorer_image"])
+            if score["passed"]:
+                observation = json.loads(score["stdout"])
+                check(event_id + "/" + stage + " independent passing execution", score["returncode"] == 0 and observation["passed"] and observation["observed_calls"] > 0 and observation["worker_returncode"] == 0)
+                totals["scorer_recorded_function_calls"] += observation["observed_calls"]
+    for path, expected in loaded.items():
+        check("loaded source unchanged " + path, sha(path) == expected)
+    for event in profile["events"]:
+        row = db.execute("SELECT status,result_path FROM events WHERE event_id=?", (event["event_id"],)).fetchone()
+        check(event["event_id"] + " retained expected terminal state", row is not None and row[0] == event["expected_status"])
+        result = json.loads(Path(row[1]).read_text())
+        events[event["event_id"]] = result
+        if result["accepted"]:
+            check(event["event_id"] + " accepted bytes persisted", sha(result["accepted_source_path"]) == result["accepted_source_sha256"])
+            check(event["event_id"] + " acceptance has independent audit", result["evidence"]["candidate_audit"]["result"]["passed"])
+            check(event["event_id"] + " no uncalled integration inflated", not result["publication"]["native_sealing_called"] and not result["reusable_execution_proof_claimed"])
+        if result["status"] == "residual_pending":
+            check(event["event_id"] + " actual native provider-needed route", result["evidence"]["route"]["routing"]["requires_provider"])
+            check(event["event_id"] + " pending is not success", not result["accepted"] and result["residual"]["attempted_posts"] == 0)
+        if event["source"] != "fixture":
+            input_value = json.loads((run / "state/events" / event["event_id"] / "input.json").read_text())
+            parent = events[event["parent_event"]]
+            expected_source = Path(parent["accepted_source_path"]).read_text()
+            if event["source"] == "parent_comment":
+                expected_source += "\n# Frozen development source identity change.\n"
+            check(event["event_id"] + " actual accepted-parent byte consumption", input_value["source"] == expected_source)
+    previous = None
+    journal = []
+    for seq, previous_hash, body, digest in db.execute("SELECT * FROM journal ORDER BY seq"):
+        value = json.loads(body)
+        check("journal link " + str(seq), previous_hash == previous and value["previous_hash"] == previous and hashlib.sha256(body.encode()).hexdigest() == digest)
+        previous = digest
+        journal.append(value)
+        if value["kind"] == "world_action_consumed":
+            totals["world_compiled_actions_executed"] += 1
+            data = value["data"]
+            visible = effects[(data["event_id"], data["execution_stage"])]["response"]["result"]
+            check(data["event_id"] + " world action has actual execution", data["actual_passed"] == visible["passed"])
+    check("successful state survives stale branch", db.execute("SELECT event_id,generation FROM roots WHERE trajectory='status'").fetchone() == ("status-comment", 2))
+    check("residuals have no accepted roots", db.execute("SELECT COUNT(*) FROM roots WHERE trajectory IN ('clamp','dedup')").fetchone()[0] == 0)
+    check("interrupted validated candidate resumed with terminal reuse", any(row["kind"] == "terminal_effect_reused" and row["data"]["event_id"] == "recover-validation" for row in journal))
+    check("durable terminal receipt reconciled", any(row["kind"] == "effect_completion_reconciled" and row["data"]["event_id"] == "recover-receipt" for row in journal))
+    check("unknown execution not repeated", sum(row["kind"] == "effect_dispatch_intent" and row["data"]["event_id"] == "recover-unknown" and row["data"]["stage"] == "candidate_audit" for row in journal) == 1 and effects[("recover-unknown", "candidate_audit")]["state"] == "dispatching")
+    check("comment invalidates world candidate", effects[("status-comment", "world_propose")]["response"]["reason"] == "stale")
+    check("ordinary no-op receives equal cheap current check", events["ordinary-revisit"]["decision"] == "ordinary_current_validation" and ("ordinary-revisit", "symbolic") not in effects)
+    check("native memory revisit still executes current check", events["status-revisit"]["decision"] == "world_suggested_current_validation" and ("status-revisit", "current_visible") in effects)
+    check("no providers or native sealing claimed", totals["provider_effect_intents"] == 0 and profile["provider"]["enabled"] is False and profile["native_sealing_enrolled"] is False)
+    db.close()
+    value = {"schema": "ns-controller-qualification-audit@1", "run_id": args.run_id, "passed": all(row["passed"] for row in checks), "check_count": len(checks), "failed": [row for row in checks if not row["passed"]], "operation_counts": totals, "actually_loaded_source_count": len(loaded), "checks": checks}
+    (run / "archived_audit.json").write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+    print(json.dumps({key: value[key] for key in ("run_id", "passed", "check_count", "failed", "operation_counts", "actually_loaded_source_count")}))
+    raise SystemExit(0 if value["passed"] else 1)
+
+
+if __name__ == "__main__":
+    main()

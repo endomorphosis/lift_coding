@@ -1,0 +1,187 @@
+{
+ "actual_new_qualified_queries": 0,
+ "authority": {
+  "completion_authority": false,
+  "execution_authority": false,
+  "formalization_authority": false,
+  "mutation_authority": false
+ },
+ "boundaries": {
+  "OPEN": [
+   "CPython parser/lexical globals/purity",
+   "Numeric tags/protocols/generator element-type errors/effects/timing",
+   "Float/libm/math.fsum rounding",
+   "zip/tuple minimum, range origin/index/row shape",
+   "dot/L2/whole five assignments",
+   "Original guard/return/preparation/finite Python loop",
+   "Full task/all32/global autoencoder convergence",
+   "DuckDB/DuckLake metadata/proof cache/IntentIR planner admission"
+  ],
+  "source_evidence": "Hash/AST/token joins are occurrence evidence, not parser/global-purity proofs. Raw data/factors need no dot/L2 normalization."
+ },
+ "completion_authority": false,
+ "execution_authority": false,
+ "input_pins": {
+  "actual_scalar_formulas": {
+   "bytes": 5988,
+   "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-original-scalar-bodies-candidate-20261007-01/math/PyAstOriginalScalarFormulas.lean",
+   "sha256": "121d848e1fd29282e7f95a6333079d8417156f4cb1ec29f737538fbeded6e8ed"
+  },
+  "bindings": {
+   "bytes": 7654,
+   "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-finite-bindings-candidate-20261007-02/math/PyFiniteBindings.lean",
+   "sha256": "406348597e2683201aeb35ec5735fec1b9c9d9bca56a0188221d16525d752409"
+  },
+  "bindings_actual_check": {
+   "bytes": 16722,
+   "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-finite-bindings-qualification-20261007-02/evidence/lean-python-finite-bindings-01/check-result.json",
+   "sha256": "f3d3dee822a12b3a1c5b25f9b2cf3600b86e8abd7bfb43642faaa117407e1531"
+  },
+  "container_semantics": {
+   "bytes": 11695,
+   "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-language-candidate-20261006-02/math/ObjectiveContainerSemantics.lean",
+   "sha256": "23bf7349c698832ad088adc68b41913a88affafff235008b38ef6688079b5ec8"
+  },
+  "own_comprehensions": {
+   "bytes": 14677,
+   "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-own-numeric-comprehensions-candidate-20261007-02/math/PyOwnNumericComprehensions.lean",
+   "sha256": "bfde097a3fedeedcd3d3f071cb53ef5018dd6a2551b79619a1d0b530dcc059bb"
+  },
+  "own_comprehensions_gate": {
+   "bytes": 15281,
+   "path": "/home/barberb/lift_coding/maintenance/ranker-supported-python-own-numeric-comprehensions-math-source-review-20261007-02/review-receipt-01.json",
+   "sha256": "9231b6730539674637bc63504eb211932cfae37466f02062ebc30b084663af7a"
+  },
+  "scalar_lowering": {
+   "bytes": 5287,
+   "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-candidate-20261006-01/math/PyAstNumericLowering.lean",
+   "sha256": "9694b40446f7c8661e183b9d137bf936642940f879227c8373d2a3bdf627b881"
+  },
+  "scalar_preservation": {
+   "bytes": 21942,
+   "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-candidate-20261006-05/math/PyAstNumericPreservation.lean",
+   "sha256": "5c6c65dc530540030fe3edf82be868ede8fd675236078dd0714ddb6bfb159b2a"
+  },
+  "scalar_semantics": {
+   "bytes": 6314,
+   "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-candidate-20261006-01/math/PyAstNumericSemantics.lean",
+   "sha256": "3ce628f904f57b800f67b7a739f04e3adf72e0888b1689e23f7cef3e1ac2a2b8"
+  }
+ },
+ "jobs": {
+  "executions": 0,
+  "helper_imports": 0,
+  "metadata": 0,
+  "native": 0,
+  "target_imports": 0,
+  "tests": 0,
+  "training": 0
+ },
+ "modules": [
+  {
+   "conclusion": "Derive projected env existence and complete own-to-old Except equality retaining PyNumber integer/real tags.",
+   "errors": "Binding unknownName forgets scope to spelling explicitly. Scalar errors retain old tags. WrongKind/reboundCallee/setup refusals excluded structurally, never silently identified with old errors.",
+   "imports": [
+    "PyOwnNumericComprehensions"
+   ],
+   "name": "PyFiniteScalarCompatibility",
+   "proof": "Derive actual projection and requested lookup/error transport from accepted BindingC02. Induct structural admissibility for projected binding membership. Mutually induct expressions/arguments/tests, retaining parent case equations with targeted constructor-size arithmetic. Use own numericBinary/invokePrimitive; div/log domain splits and conditionals preserve source order and selected errors.",
+   "queries": [
+    "scalar_projection_local_bindings",
+    "own_scalar_compatibility"
+   ]
+  },
+  {
+   "conclusion": "Exist program/projected env, actual lowering success and own numeric/error observation = evalSourceExpr. Inputs structural only; missing-name/div/log errors remain possible.",
+   "imports": [
+    "PyFiniteScalarCompatibility",
+    "PyAstNumericPreservation"
+   ],
+   "name": "PyFiniteScalarLoweringPreservation",
+   "proof": "Derive lowerSupportedAst .ok program recursively from TypedScalar/scope validity. Build scalar named bindings from derived projection using toReal. Scoped lookup/spelling injectivity prove StructuralEnvRel.lookup; projection-membership proves localBindings. Compose genuine lower_supported_ast_observation_preserved with own compatibility.",
+   "queries": [
+    "typed_scalar_lowering_exists",
+    "own_scalar_lowered_observation"
+   ]
+  },
+  {
+   "contract": "Own typed finite declarations distinguish scalar/numeric-vector names and actual dimensions. Resolve outer iterable before fresh full-scoped binder; reject spelling collisions until proved renaming. Actual numeric input lists are ordinary data.",
+   "imports": [
+    "PyFiniteScalarLoweringPreservation",
+    "ObjectiveContainerSource"
+   ],
+   "name": "PyNumericMapLowering",
+   "queries": [
+    "numeric_map_lowering_exists",
+    "invalid_binder_or_shape_refused"
+   ],
+   "rules": "One synchronous unfiltered Name-target/Name-iterable ListComp -> mapVector; immediate scope0 math.fsum(GeneratorExp) -> fsumExact(mapVector); len(Name vector) -> natToScalar(lengthVector). Divide keeps operand order; fixed callees unbound locally."
+  },
+  {
+   "imports": [
+    "PyNumericMapLowering",
+    "ObjectiveContainerSemantics"
+   ],
+   "name": "PyNumericMapPreservation",
+   "projection": "Observe own lists via map toReal and target vectors via List.ofFn. Derive actual successful output length BEFORE vectorOfList/Fin conversion, then coordinate/order recovery. Setup errors separate; numericElements up-front validation limits the fragment, not general Python type-error timing.",
+   "proof": "Extend own bindings with each actual input and target using extendNames (\u03c4 := .scalar); derive admissibility/global absence/lookup transport structurally. Instantiate scalar proof internally. Ordered input induction derives first-error propagation and list equality; no public callback-equality certificate.",
+   "queries": [
+    "numeric_map_observation_preserved",
+    "numeric_map_success_length_and_order",
+    "immediate_fsum_observation_preserved"
+   ],
+   "sum": "Use genuinely accepted pure_immediate_fsum_materialization. Prove own exact left fold = List.sum of observed outputs = target orderedFsum. Private own fold/map helpers may need exported generic length/fold lemmas in a fresh same-semantics successor qualified first. No mangled private names or assumed fold equation."
+  },
+  {
+   "imports": [
+    "PyNumericMapPreservation",
+    "PyAstOriginalScalarFormulas",
+    "GeneratedActualPyDataFactorsSource"
+   ],
+   "inputs": "Ordinary numeric margins, arbitrary length n. Derive body env/successes from genuine scalar formulas. Do not claim margins came from weights/rows/dot.",
+   "name": "ActualPyDataFactors",
+   "queries": [
+    "actual_factors_rhs_observation",
+    "actual_data_rhs_observation",
+    "empty_data_mean_is_division_error"
+   ],
+   "results": "Ordered stableFactor(margin) list. Data sum stableLoss(margin)/(n:Real) for n>0; n=0 derives divisionByZero after empty fsum/len. Empty factors succeed; cohort4 only an instantiation.",
+   "source": "Last import absent. Root must produce raw enclosing RHSs with assignment/AST/token/subtree/full-binder joins; prove structural links to actualLossBody/actualFactorBody. No hand-certified normalization."
+  }
+ ],
+ "ordinary_contract": {
+  "bindings": "ScalarBindingsAdmissible(scope,finiteEnv): full PyName first-binding identity and requested visible numeric kinds. Missing names allowed; unrequested sequences and shadowed older values permitted.",
+  "forbidden": "No pointwise evaluator/body/model equality, successful evaluation, desired output/gradient or semantic certificate as a caller premise.",
+  "globals": "No finite binding identity scope0 abs/max/math. This ordinary membership condition derives own callee-check success. Old scalar eval resolves fixed registry directly, ignoring rebinding; omitting the condition is unsound.",
+  "laziness": "All-name numeric admissibility covers both branches and is stricter than general lazy wrong-type Python behavior. Projection is proof-side transport; own runtime still reads selected Names only.",
+  "runtime_shape": "Inductive ScalarCompatible covers scalar constructors/name membership/canonical callee syntax and expressions/arguments/tests. Include matching unsupported scalar terminals; exclude subscript/ListComp/GeneratorExp whose own/old refusal tags differ. Check both branches, evaluate selected branch only.",
+  "static_shape": "TypedScalar further restricts primitive arity, supported subtrees and IfExp(compare ge condition (integer0),then,else). scalarScopeValid gives injective spellings/no reserved globals. Derive compiler success; do not store compiler/evaluation equations."
+ },
+ "planned_checks_not_executed": [
+  "First sequence over older scalar refuses; missing name preserves scoped-to-spelling unknownName.",
+  "Dead-branch wrong kind keeps own laziness but fails all-name admission.",
+  "Rebound scope0 math and same-spelling/different-scope capture must refuse.",
+  "Inputs0,-1 with distinct errors detect reversal; empty mean errors and empty factors succeed."
+ ],
+ "planner_activation": false,
+ "proof_authority": false,
+ "qualification": {
+  "native_cpu_seconds": 20,
+  "native_wall_seconds": 20,
+  "options_caps_or_default_heartbeats_changed": false,
+  "order": "Compatibility2, scalar-lowering2, separate map/actual-source batches; genuine parents before children.",
+  "raw_chunk_limit": 61,
+  "root_sole_executor": true,
+  "stdout_bytes": 65536,
+  "tactics": "Inherited frozen core/Common/Omega only; no Mathlib.Tactic or simp_all over evaluator/compiler hypotheses.",
+  "whole_module_bytes_must_be_less_than": 3997696,
+  "workspace_bytes": 16777216
+ },
+ "schema": "ranker-supported-python-finite-scalar-compatibility-design@1",
+ "snapshot": {
+  "BindingC02": "Root accepted two queries with completed readback/seal; peer review separate. Failed C01 never imported.",
+  "ComprehensionC02": "Source-reviewed/sealed; native three-query acceptance pending at this cut.",
+  "admission": "Future imports require genuine exact source/owned check/Std2/object/chunks/profile/physical closure; no future evidence invented."
+ },
+ "status": "SOURCE_DATA_ONLY_DESIGN_NO_NEW_CANDIDATE"
+}

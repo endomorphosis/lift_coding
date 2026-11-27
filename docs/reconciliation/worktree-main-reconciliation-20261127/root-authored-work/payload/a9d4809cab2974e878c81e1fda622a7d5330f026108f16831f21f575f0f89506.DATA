@@ -1,0 +1,17 @@
+{
+  "time": "2026-11-10T05:54:34.132271+00:00",
+  "path": "test/api/test_candidate_round_monitor.py",
+  "prepared_source": "/tmp/lift-sync-candidate-monitor-harness-fixed-20261110-v01.py.txt",
+  "original_sha256": "5f55a001638f9410fee1942ac4ce7a62088762bab0c9ac832a9dd3e6c0d83075",
+  "source_sha256": "d099e0996c3a71be534bfd840eac6aad5f9a13ddd069c50ce16c1c6e867597db",
+  "test_functions_before": 13,
+  "test_functions_after": 13,
+  "all_parameter_decorators_exact": true,
+  "unrelated_functions_exact": true,
+  "all_other_original_assertions_retained": true,
+  "replaced_assertion": "obsolete literal argv=owner_initial_argv assertion replaced by ordered removal/rebinding/captured-handoff checks",
+  "production_source_sha256": "8350e31769391e092c4582fcb16a254fe85bd3bd41e45a45f1b1022b97d5283a",
+  "production_source_changed": false,
+  "qualified": false,
+  "applied": false
+}

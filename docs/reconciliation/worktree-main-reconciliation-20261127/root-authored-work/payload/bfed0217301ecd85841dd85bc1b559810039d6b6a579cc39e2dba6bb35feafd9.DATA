@@ -1,0 +1,13 @@
+# Native session restart continuity
+
+Three actual Python processes exercised the current `SemanticStateSession` event log and cursor checkpoint. Its configured scan callback executed real IPA analysis, bounded CEGIS, native routing and the separate Docker behavioral oracle from the routing evaluation. No fake journal, in-memory durable port, canned successful scan, or provider was substituted.
+
+The first process queued two different source snapshots plus one duplicate notification. The duplicate coalesced. After completing one snapshot, the process exited abruptly with code 73, without shutdown or finalizers. A fresh process replayed the native journal and executed the one unfinished snapshot. A third process replayed with nothing pending. No original attempt executed twice, and all actual computed candidates passed their independent oracles.
+
+The third process then notified the session about an already completed snapshot. **The native session scheduled and executed it again.** This distinguishes recovery of pending work from persistence of solved reasoning results: this interface does not itself memoize completed snapshot work across new notifications. Three executions occurred in total, with zero model calls.
+
+`freeze.json` binds the exact source files and scenario before execution. `results/native-events.jsonl` and `native-checkpoint.json` are native runtime artifacts, not reconstructed receipts. Per-process exit codes, process IDs, actual scan outputs and audit records are retained. `summary.json` records the observations.
+
+This experiment establishes one bounded fresh-process continuity case. It does not establish retention of accepted canonical repository state: no root was published and scan records deliberately carried `verified=False`. It measures no token saving, interrupted provider dispatch, multi-task replanning, world-model consumption or procedure reuse. Those remain separate evaluation requirements.
+
+The runner creates its output directory exclusively to preserve the interruption record. A new repetition needs a fresh copied directory/freeze. Do not rerun into these artifacts or reinterpret this scheduling result as whole-system persistence efficacy.

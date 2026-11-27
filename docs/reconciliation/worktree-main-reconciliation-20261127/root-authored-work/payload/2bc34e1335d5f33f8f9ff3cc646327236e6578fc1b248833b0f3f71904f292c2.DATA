@@ -1,0 +1,347 @@
+"""Pure telemetry/capture controls plus explicit stubbed daemon integration.
+
+No native owner admission, provider, target code, training, solver or original
+index qualification. The callback controls invoke real daemon methods on an
+uninitialized object with all owner/callback operations explicitly stubbed.
+"""
+from copy import deepcopy
+import hashlib
+import json
+import os
+from pathlib import Path
+from types import SimpleNamespace
+
+import pytest
+
+from ipfs_accelerate_py.agent_supervisor.runtime import native_dispatch_diagnostics as diag
+
+
+def wire(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False).encode()
+
+
+@pytest.fixture
+def scope():
+    return {"schema": diag.SCOPE_SCHEMA, "run_id": "admitted-" + "a" * 32, "task_cid": "cid:authored-task",
+        "command_sha256": "b" * 64, "producer_source_sha256": "c" * 64}
+
+
+@pytest.fixture
+def result(scope):
+    return {"active_task_id": "AUTHORED-TASK", "claimed_task_cid": scope["task_cid"], "attempt_id": "execution:unit001",
+        "write_count": 1, "implementation_result": {"status": "running", "reason": "provider_callback_outcome_unknown",
+            "deferred": True, "attempt_id": "execution:unit001"}}
+
+
+def build(scope, result, sequence=1):
+    return diag.build_first_claimed_pass_diagnostic(scope=scope, sequence=sequence, result=result,
+        process_instance_id="process:unit001", owner_session_id="database-session:unit001")
+
+
+@pytest.fixture
+def record(scope, result):
+    return build(scope, result)
+
+
+@pytest.fixture
+def run_root(tmp_path):
+    root = tmp_path / "private-run"
+    root.mkdir(mode=0o700)
+    return root
+
+
+def test_projection_is_closed_independent_and_not_provider_authority(scope, result):
+    result.update(prompt="MUST NEVER EXPORT", command="PRIVATE ARGV", usage={"tokens": 7})
+    record = build(scope, result)
+    assert set(record) == diag.FIELDS and record["scope"] == scope
+    assert all(record[key] is False for key in diag.FALSE_FIELDS)
+    assert "PRIVATE" not in wire(record).decode() and "MUST NEVER" not in wire(record).decode()
+    result["implementation_result"]["reason"] = "changed"
+    scope["command_sha256"] = "f" * 64
+    assert record["implementation"]["reason"] == "provider_callback_outcome_unknown"
+    assert record["scope"]["command_sha256"] == "b" * 64
+
+
+def test_unknown_reason_and_status_are_digest_and_size_only(scope, result):
+    source = "private/path prompt α雪 token=DO_NOT_EXPORT"
+    result["implementation_result"].update(reason=source, status=source)
+    record = build(scope, result)
+    assert record["implementation"]["reason"] == "unclassified_native_reason"
+    assert record["implementation"]["status"] == "unclassified_native_status"
+    assert record["implementation"]["reason_sha256"] == hashlib.sha256(source.encode()).hexdigest()
+    assert record["implementation"]["reason_bytes"] == len(source.encode())
+    assert source not in wire(record).decode() and "DO_NOT_EXPORT" not in wire(record).decode()
+
+
+def test_scope_exact_canonical_roundtrip(scope):
+    assert diag.parse_diagnostic_scope(wire(scope).decode()) == scope
+    assert diag.parse_diagnostic_scope(None) is None and diag.parse_diagnostic_scope("") is None
+    with pytest.raises(ValueError): diag.parse_diagnostic_scope(json.dumps(scope))
+
+
+@pytest.mark.parametrize("mutation", ["extra", "authority", "bad_run", "foreign_schema", "bool_task", "bad_command", "bad_source"])
+def test_scope_is_closed_and_exact(scope, mutation):
+    if mutation == "extra": scope["extra"] = False
+    elif mutation == "authority": scope["execution_authority"] = False
+    elif mutation == "bad_run": scope["run_id"] = "admitted-" + "A" * 32
+    elif mutation == "foreign_schema": scope["schema"] += "x"
+    elif mutation == "bool_task": scope["task_cid"] = False
+    elif mutation == "bad_command": scope["command_sha256"] = "b" * 63
+    else: scope["producer_source_sha256"] = True
+    with pytest.raises(ValueError): diag.validate_diagnostic_scope(scope)
+
+
+@pytest.mark.parametrize("raw", ["1", "true", "{}", "[]", "x" * 1025, '{"schema":1,"schema":2}', '"' + "雪" * 400 + '"'])
+def test_scope_parser_rejects_noncanonical_or_unbounded_enable(raw):
+    with pytest.raises(ValueError): diag.parse_diagnostic_scope(raw)
+
+
+@pytest.mark.parametrize("key", ["claimed_task_cid", "attempt_id"])
+@pytest.mark.parametrize("invalid", [False, 0, [], {}, ""])
+def test_malformed_outer_ids_never_fall_back_to_inner(scope, result, key, invalid):
+    result["implementation_result"].update(task_cid=scope["task_cid"], attempt_id="execution:unit001")
+    result[key] = invalid
+    with pytest.raises(ValueError): build(scope, result)
+
+
+@pytest.mark.parametrize("mutation", ["foreign_task", "inner_task", "inner_attempt", "sequence_bool", "write_bool", "deferred_zero", "status_bool", "reason_large", "owner_path"])
+def test_completed_pass_join_and_nonboolean_limits(scope, result, mutation):
+    if mutation == "foreign_task": result["claimed_task_cid"] = "cid:foreign"
+    elif mutation == "inner_task": result["implementation_result"]["task_cid"] = "cid:foreign"
+    elif mutation == "inner_attempt": result["implementation_result"]["attempt_id"] = "execution:foreign"
+    elif mutation == "write_bool": result["write_count"] = True
+    elif mutation == "deferred_zero": result["implementation_result"]["deferred"] = 0
+    elif mutation == "status_bool": result["implementation_result"]["status"] = False
+    elif mutation == "reason_large": result["implementation_result"]["reason"] = "雪" * 4096
+    if mutation == "owner_path":
+        with pytest.raises(ValueError):
+            diag.build_first_claimed_pass_diagnostic(scope=scope, sequence=1, result=result,
+                process_instance_id="process:test", owner_session_id="/private/owner")
+    else:
+        with pytest.raises(ValueError): build(scope, result, True if mutation == "sequence_bool" else 1)
+
+
+def test_idle_pass_does_not_create_first_claimed_record(scope):
+    assert build(scope, {"unchanged": True, "write_count": 0, "active_task_id": "", "implementation_result": None}) is None
+
+
+def test_resumed_pass_without_same_pass_cid_refuses_instead_of_stitching(scope, result):
+    result.pop("claimed_task_cid")
+    with pytest.raises(ValueError): build(scope, result)
+    result["implementation_result"]["task_cid"] = scope["task_cid"]
+    assert build(scope, result)["claimed_task_cid"] == scope["task_cid"]
+
+
+def test_exception_chain_exports_no_messages_paths_or_source_lines(monkeypatch):
+    import linecache
+    monkeypatch.setattr(linecache, "getline", lambda *_, **__: pytest.fail("diagnostics read source lines"))
+    try:
+        try:
+            raise ValueError("do not export private key body /credential α雪")
+        except ValueError as cause:
+            raise RuntimeError("do not export provider prompt") from cause
+    except RuntimeError as error:
+        result = diag.safe_exception_diagnostic(error)
+    assert [x["exception_type"] for x in result["exceptions"]] == ["RuntimeError", "ValueError"]
+    assert all(len(x["frames"]) <= 8 and all("/" not in frame["file"] for frame in x["frames"]) for x in result["exceptions"])
+    assert "private key" not in wire(result).decode() and "provider prompt" not in wire(result).decode()
+    assert result["settlement_authority"] is False
+
+
+@pytest.fixture
+def exception_diagnostic():
+    return {"schema": diag.BRIDGE_SCHEMA, "settlement_authority": False, "exceptions": [{"exception_type": "ValueError",
+        "message_sha256": "d" * 64, "frames": [{"file": "module.py", "line": 7, "function": "_native_guard"}]}]}
+
+
+@pytest.mark.parametrize("mutation", ["unknown", "authority_zero", "many_exceptions", "unknown_exception", "raw_message",
+    "many_frames", "absolute_file", "relative_file", "bool_line", "bad_function"])
+def test_existing_exception_diagnostic_closed_bounds(exception_diagnostic, mutation):
+    value = exception_diagnostic; row = value["exceptions"][0]; frame = row["frames"][0]
+    if mutation == "unknown": value["extra"] = False
+    elif mutation == "authority_zero": value["settlement_authority"] = 0
+    elif mutation == "many_exceptions": value["exceptions"] *= 5
+    elif mutation == "unknown_exception": row["extra"] = False
+    elif mutation == "raw_message": row["message"] = "secret"
+    elif mutation == "many_frames": row["frames"] *= 9
+    elif mutation == "absolute_file": frame["file"] = "/private/module.py"
+    elif mutation == "relative_file": frame["file"] = "../module.py"
+    elif mutation == "bool_line": frame["line"] = True
+    else: frame["function"] = "source text with spaces"
+    with pytest.raises(ValueError): diag.validate_bridge_unknown_diagnostic(value)
+
+
+def test_optional_bridge_diagnostic_is_same_pass_not_latest(scope, result, exception_diagnostic):
+    result["implementation_result"]["bridge_unknown_diagnostic"] = exception_diagnostic
+    record = build(scope, result)
+    assert record["bridge_unknown_diagnostic"] == exception_diagnostic
+    exception_diagnostic["exceptions"][0]["frames"][0]["line"] = 8
+    assert record["bridge_unknown_diagnostic"]["exceptions"][0]["frames"][0]["line"] == 7
+
+
+@pytest.mark.parametrize("mutation", ["unknown", "authority_alias", "foreign_task", "bool_sequence", "bool_count", "unknown_impl", "reason_identity", "missing_impl"])
+def test_public_record_is_a_closed_non_authority(record, mutation):
+    if mutation == "unknown": record["hidden"] = False
+    elif mutation == "authority_alias": record["execution_authority"] = 0
+    elif mutation == "foreign_task": record["claimed_task_cid"] = "cid:foreign"
+    elif mutation == "bool_sequence": record["sequence"] = True
+    elif mutation == "bool_count": record["write_count"] = False
+    elif mutation == "unknown_impl": record["implementation"]["prompt"] = "private"
+    elif mutation == "reason_identity": record["implementation"]["reason_sha256"] = "f" * 64
+    else: record.pop("implementation")
+    with pytest.raises(ValueError): diag.validate_first_claimed_pass_diagnostic(record)
+
+
+def test_exclusive_retention_keeps_first_outcome_and_stat_identity(run_root, scope, result):
+    first = build(scope, result, 4)
+    assert diag.publish_first_claimed_pass_diagnostic(run_root=run_root, record=first) is True
+    path = run_root / diag.FIRST_PASS_NAME; before = path.stat(); before_bytes = path.read_bytes()
+    result["implementation_result"]["reason"] = "portal_provider_failed"
+    later = build(scope, result, 99)
+    assert diag.publish_first_claimed_pass_diagnostic(run_root=run_root, record=later) is False
+    assert path.read_bytes() == before_bytes and path.stat().st_ino == before.st_ino
+    assert path.stat().st_mtime_ns == before.st_mtime_ns and path.stat().st_ctime_ns == before.st_ctime_ns
+    retained = diag.read_first_claimed_pass_diagnostic(run_root=run_root, expected_scope=scope)
+    assert retained == first and retained["sequence"] == 4
+
+
+def test_missing_protected_record_returns_none(run_root, scope):
+    assert diag.read_first_claimed_pass_diagnostic(run_root=run_root, expected_scope=scope) is None
+
+
+@pytest.mark.parametrize("kind", ["symlink", "fifo", "hardlink", "mode", "oversized", "bad_json", "duplicate_json", "foreign_scope"])
+def test_reader_refuses_unsafe_or_forged_sidecar(run_root, tmp_path, record, scope, kind):
+    path = run_root / diag.FIRST_PASS_NAME
+    raw = wire(record)
+    if kind == "symlink":
+        other = tmp_path / "foreign"; other.write_bytes(raw); path.symlink_to(other)
+    elif kind == "fifo": os.mkfifo(path, 0o600)
+    else:
+        if kind == "oversized": raw = b"x" * (diag.MAX_RECORD_BYTES + 1)
+        elif kind == "bad_json": raw = b"{"
+        elif kind == "duplicate_json": raw = raw[:-1] + b',"schema":"native-dispatch-first-claimed-pass@1"}'
+        elif kind == "foreign_scope": record["scope"]["command_sha256"] = "e" * 64; raw = wire(record)
+        path.write_bytes(raw); path.chmod(0o600)
+        if kind == "hardlink": os.link(path, tmp_path / "linked")
+        elif kind == "mode": path.chmod(0o644)
+    with pytest.raises((ValueError, OSError)):
+        diag.read_first_claimed_pass_diagnostic(run_root=run_root, expected_scope=scope)
+
+
+@pytest.mark.parametrize("kind", ["linked_root", "public_root", "noncanonical"])
+def test_publication_root_is_nofollow_private_canonical(run_root, tmp_path, record, kind):
+    if kind == "linked_root":
+        linked = tmp_path / "link"; linked.symlink_to(run_root, target_is_directory=True); selected = linked
+    elif kind == "public_root": run_root.chmod(0o755); selected = run_root
+    else: selected = str(run_root.parent) + "/../" + run_root.parent.name + "/" + run_root.name
+    with pytest.raises((ValueError, OSError)):
+        diag.publish_first_claimed_pass_diagnostic(run_root=selected, record=record)
+    assert not (run_root / diag.FIRST_PASS_NAME).exists()
+
+
+def test_existing_foreign_first_record_is_never_replaced(run_root, scope, record):
+    diag.publish_first_claimed_pass_diagnostic(run_root=run_root, record=record)
+    before = (run_root / diag.FIRST_PASS_NAME).read_bytes()
+    foreign = deepcopy(record); foreign["scope"]["command_sha256"] = "e" * 64
+    with pytest.raises(ValueError): diag.publish_first_claimed_pass_diagnostic(run_root=run_root, record=foreign)
+    assert (run_root / diag.FIRST_PASS_NAME).read_bytes() == before
+
+
+@pytest.mark.parametrize("mutation", ["inode", "write_restore"])
+def test_mid_read_mutation_refuses(run_root, scope, record, monkeypatch, mutation):
+    diag.publish_first_claimed_pass_diagnostic(run_root=run_root, record=record)
+    path = run_root / diag.FIRST_PASS_NAME; original = os.read; acted = []
+    def changed(fd, size):
+        block = original(fd, size)
+        if block and not acted:
+            acted.append(True); raw = path.read_bytes()
+            if mutation == "inode":
+                replacement = run_root / "replacement"; replacement.write_bytes(raw); replacement.chmod(0o600); replacement.replace(path)
+            else: path.write_bytes(b"changed"); path.write_bytes(raw)
+        return block
+    monkeypatch.setattr(diag.os, "read", changed)
+    with pytest.raises(ValueError): diag.read_first_claimed_pass_diagnostic(run_root=run_root, expected_scope=scope)
+
+
+def test_run_root_substitution_after_capture_refuses(run_root, scope, record, monkeypatch):
+    diag.publish_first_claimed_pass_diagnostic(run_root=run_root, record=record)
+    original = diag._read
+    def substituted(fd):
+        value = original(fd)
+        run_root.rename(run_root.with_name("retired-root")); run_root.mkdir(mode=0o700)
+        return value
+    monkeypatch.setattr(diag, "_read", substituted)
+    with pytest.raises(ValueError): diag.read_first_claimed_pass_diagnostic(run_root=run_root, expected_scope=scope)
+
+
+def _native_stub(scope, monkeypatch, failure):
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon import implementation_daemon as module
+    obj = object.__new__(module.DatabaseImplementationDaemon)
+    obj._shutdown_boundary = lambda: None
+    obj._renew_attempt_lease = lambda _: None
+    obj.provider_invocation_recorded = lambda *_, **__: {"callback_state": "started_outcome_unknown"}
+    obj._record_event = lambda *_, **__: None
+    def callback(_):
+        raise failure
+    obj.resume_attempt = callback
+    attempt = SimpleNamespace(attempt_id="execution:unit001", task_cid=scope["task_cid"], task_alias="AUTHORED-TASK")
+    return module, obj, attempt
+
+
+@pytest.mark.parametrize("enabled", [False, True])
+@pytest.mark.parametrize("kind", ["early_deferral", "unknown_error"])
+def test_real_resume_method_retains_same_outcome_and_optin_safe_diagnostic(scope, monkeypatch, enabled, kind):
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.database_portal_bridge import DatabasePortalBridgeDeferred, DatabasePortalBridgeError
+    failure = (DatabasePortalBridgeDeferred("do not export raw prompt /private/path")
+        if kind == "early_deferral" else DatabasePortalBridgeError("do not export raw prompt /private/path"))
+    _, native, attempt = _native_stub(scope, monkeypatch, failure)
+    if enabled: monkeypatch.setenv(diag.ENV, wire(scope).decode())
+    else: monkeypatch.delenv(diag.ENV, raising=False)
+    result = native._resume_attempt_without_process_crash(attempt)
+    assert result["status"] == "running" and result["deferred"] is True and result["attempt_id"] == attempt.attempt_id
+    assert ("bridge_unknown_diagnostic" in result) is enabled
+    if enabled:
+        safe = diag.validate_bridge_unknown_diagnostic(result["bridge_unknown_diagnostic"])
+        assert safe["exceptions"][0]["exception_type"] == type(failure).__name__
+        record = build(scope, {"claimed_task_cid": scope["task_cid"], "attempt_id": attempt.attempt_id,
+            "active_task_id": "AUTHORED-TASK", "write_count": 1, "implementation_result": result})
+        assert "do not export" not in wire(record).decode() and "private/path" not in wire(record).decode()
+
+
+def test_default_exception_helper_does_not_import_new_module(scope, monkeypatch):
+    import builtins
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon import implementation_daemon as native
+    monkeypatch.delenv(diag.ENV, raising=False)
+    original = builtins.__import__
+    def forbid(name, *args, **kwargs):
+        if "native_dispatch_diagnostics" in name:
+            pytest.fail("default path imported telemetry helper")
+        return original(name, *args, **kwargs)
+    monkeypatch.setattr(builtins, "__import__", forbid)
+    assert native._scoped_native_dispatch_exception_diagnostic(ValueError("unused")) == {}
+
+
+@pytest.mark.parametrize("enabled", [False, True])
+def test_running_pass_uses_already_held_attempt_ids_without_stitched_read(scope, monkeypatch, enabled):
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon import implementation_daemon as native
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon import unresolved_interruption
+    obj = object.__new__(native.DatabaseImplementationDaemon)
+    obj._native_dispatch_control = None
+    obj.reconcile_prepared_task_completions = lambda: []
+    obj.reconcile_terminal_portal_failures = lambda: []
+    obj.reconcile_expired_running_attempts = lambda **_: []
+    obj.reconcile_recoverable_portal_failure_rearms = lambda: []
+    monkeypatch.setattr(unresolved_interruption, "reconcile_declared", lambda _: [])
+    obj._retained_attempt_fairness = SimpleNamespace(require_current=lambda: None, excluded_task_cids=set(), attempt=None)
+    attempt = SimpleNamespace(task_cid=scope["task_cid"], task_alias="AUTHORED-TASK", attempt_id="execution:unit001")
+    obj.list_running_attempts = lambda: [attempt]
+    obj._task_recovery_lease = lambda _: None
+    obj._resume_attempt_without_process_crash = lambda _: {"attempt_id": attempt.attempt_id, "status": "running", "reason": "provider_callback_outcome_unknown"}
+    obj.authority_mode = "quack"; obj.task_source_kind = "duckdb"; obj._markdown_status_writes = 0; obj._control_schema_verification = {}
+    obj.state_schema_revision = "authored-unit-profile"
+    if enabled: monkeypatch.setenv(diag.ENV, wire(scope).decode())
+    else: monkeypatch.delenv(diag.ENV, raising=False)
+    result = obj._run_once_impl()
+    assert ("claimed_task_cid" in result) is enabled and ("attempt_id" in result) is enabled
+    if enabled:
+        assert build(scope, result)["claimed_task_cid"] == attempt.task_cid

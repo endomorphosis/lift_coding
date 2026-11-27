@@ -1,0 +1,45 @@
+#!/usr/bin/env python3
+"""Diagnostic only: profile the full public Pyparsing bundle for 120 seconds."""
+import cProfile
+import hashlib
+import json
+import os
+from pathlib import Path
+import pstats
+import runpy
+import signal
+import sys
+import time
+
+HERE = Path(__file__).resolve().parent
+OUT = HERE / "profile_diagnostic_v3_full_py"
+profile = json.loads((OUT / "runtime_source_manifest.json").read_text())
+sys.path[:0] = profile["pythonpath"]
+os.environ["IPFS_ACCEL_SKIP_CORE"] = "1"
+os.environ["GIT_CEILING_DIRECTORIES"] = str(HERE.parents[5] / "papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache")
+from ipfs_datasets_py.logic.software_contracts import semantic_state
+original = semantic_state.build_semantic_state
+profiler = cProfile.Profile()
+
+def interrupted(*unused):
+    raise TimeoutError("Diagnostic bundle profiling window reached 120 seconds")
+
+def profiled(*args, **kwargs):
+    started = time.perf_counter()
+    signal.signal(signal.SIGALRM, interrupted)
+    signal.alarm(120)
+    profiler.enable()
+    try:
+        return original(*args, **kwargs)
+    finally:
+        profiler.disable()
+        signal.alarm(0)
+        profiler.dump_stats(str(OUT / "bundle.prof"))
+        stats = pstats.Stats(profiler)
+        rows = [{"file": key[0], "line": key[1], "function": key[2], "calls": values[1], "own_seconds": values[2], "cumulative_seconds": values[3]} for key, values in stats.stats.items()]
+        result = {"schema": "ns-full-pyparsing-bundle-profile/v3", "diagnostic_only": True, "profile_window_seconds": 120, "wall_seconds": time.perf_counter() - started, "wrapper_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(), "functions": sorted(rows, key=lambda r: -r["cumulative_seconds"])[:120], "provider_calls": 0}
+        (OUT / "profile_functions.json").write_text(json.dumps(result, indent=2) + "\n")
+
+semantic_state.build_semantic_state = profiled
+sys.argv = [str(HERE / "native_service.py"), "produce", "--run", str(OUT), "--case", "ns-hist-02-pyparsing"]
+runpy.run_path(str(HERE / "native_service.py"), run_name="__main__")

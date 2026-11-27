@@ -1,0 +1,5 @@
+def invoice(quantity: int, price: int) -> int:
+    subtotal = quantity * price
+    credit = quantity * 2
+    amount = subtotal - credit
+    return amount

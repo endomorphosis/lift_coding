@@ -1,0 +1,79 @@
+# Requests candidate scoring endpoint v3
+
+The endpoint qualified four actual native controls: Requests 5414 unfixed passed
+130/131 designated checks and its curator reference passed 131/131; Requests 6028
+unfixed passed 185/187 and its reference passed 187/187. Ten negative controls,
+an actual source-tree mutation control, and an actual proposer mount-boundary
+process also passed. The four native control containers consumed 87.429894439s
+in total, including source checks and network readiness probes. This is
+environment and service qualification, not a model result or a token saving.
+
+Invoke `arm64_qualification/grader_venv/bin/python candidate_scoring_v1/service_v3.py`
+from `evals/recruitment`, supplying one JSON request on stdin. The process emits
+one sanitized JSON response. Frozen service profile `registry_v3.json` has SHA256
+`430c0ec1b9761d1aa3f46b3dec83250ac5937f15ac0b102dfa2a23aedcabf107`.
+The service loads ordinary SWE-bench 5.0.2 through its normal initializer.
+
+Required request fields:
+
+- `schema`: `ns-curator-candidate-score/v1`; `operation`: `score`.
+- `evaluation_id`: unique alphanumeric, period, underscore or hyphen identifier,
+  starting alphanumeric, at most 96 characters. Duplicate IDs are rejected without
+  modifying the original receipt. Use a new ID for every prospectively authorized
+  attempt, including attempts following a failed environment gate.
+- `instance_id`, `base_commit`, `image_id`, `qualification_profile_sha256`:
+  exactly the corresponding values in the frozen registry.
+- `service_profile_sha256`: SHA256 of the exact registry bytes above.
+- `objective_sha256`: exact SHA256 of the public objective bytes in
+  `public_inputs/<instance>/objective.md`; equality with the registry is required.
+- `sealed_candidate_patch_path`: absolute path to an existing regular file,
+  containing a UTF-8 unified diff of at most 1 MiB, or empty bytes for no change.
+- `candidate_patch_sha256`: SHA256 of the exact sealed patch bytes.
+- `expected_candidate_source_tree_sha256`: SHA256 of the canonical JSON encoding
+  of the complete resulting source inventory's `entries` array, with sorted
+  object keys and separators `(',', ':')`. Sort entries by path. Each entry has
+  `path`, `kind`, integer `mode`, and file-content `sha256`, using the same format
+  as `public_inputs/<instance>/source_inventory.json`.
+
+The patch must represent the entire current production change against that node's
+pristine base, including all changes carried from a previous accepted state.
+Only `requests/**/*.py` regular-file changes are supported; changing tests or
+other paths, binary content, symlinks, and rename/copy metadata is rejected.
+The scorer applies the cumulative patch to its own pristine immutable image,
+then inventories all base files plus every patch-declared path, including any
+new path ignored by Git. It verifies scope and the exact expected source hash
+before the hidden evaluation starts. Untouched source modes are 0664 in these
+frozen images; Git rewrites changed regular files as 0644 under image umask 0022.
+Callers must preserve those exact modes when calculating the expected inventory.
+
+The source-tree hash in the response is the exact pre-oracle candidate state.
+Hidden test patches and evaluation instructions stay in scorer custody. The
+response exposes only grade/counts, source and profile hashes, execution status,
+timings, and readiness diagnostics. Original native evaluation commands and test
+criteria are unchanged. Candidate code and tests still run in the original shared
+test process; this qualification does not establish adversarial oracle integrity.
+
+Requests 5414 uses the qualified bridge-network profile. V2's reference control
+failed four existing public network-timeout checks with `Network is unreachable`;
+that run and diagnosis remain unchanged. V3 checks the existing public timeout
+target twice before and twice after each 5414 evaluation, without changing any
+test. A failed precheck prevents native evaluation; a failed postcheck preserves
+the actual grade and costs but leaves the receipt `incomplete`. These probes
+detect some network failures; a successful probe does not establish network
+stability throughout the test run. V3's single frozen qualification attempt
+passed. This does not identify or prove a repair to the earlier network failure.
+The endpoint never retries automatically. Record every attempted call and cost.
+
+Requests 6028 retains its offline network profile and eight pre-existing fixture
+errors outside the 187 designated checks in both control runs. Neither issue's
+original evaluation script emits the optional test-exit marker; container exit
+zero alone is not success. A completed service grade requires all designated
+checks to execute, exact source admission, unchanged distributions, no timeout
+or out-of-memory termination, and required network readiness. `passed` also
+requires the ordinary native grader to resolve the issue and all designated
+checks to pass.
+
+Evidence: `qualification-v3/summary.json`, `qualification-v3/audit.json`, and
+`qualification-v3/artifact_manifest.json`. Rerun the read-only evidence audit with
+`python candidate_scoring_v1/audit_v3.py`. Earlier endpoint versions and failed
+attempts remain retained. No provider calls were made for this qualification.

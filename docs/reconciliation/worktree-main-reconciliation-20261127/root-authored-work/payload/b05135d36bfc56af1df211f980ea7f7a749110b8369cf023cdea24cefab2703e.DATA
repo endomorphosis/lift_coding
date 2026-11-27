@@ -1,0 +1,53 @@
+"""Read-only final curator audit and additive immutable artifact inventory."""
+from pathlib import Path
+import hashlib,json
+H=Path(__file__).resolve().parent
+def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
+def main():
+    prior=json.loads((H/'artifact_checksums.json').read_text())
+    assert all((H/n).is_file() and sha(H/n)==v for n,v in prior['sha256'].items())
+    audit_counts=[]
+    for v in [1,2,3,4]:
+        p=H/'requests5414'/('run-v'+str(v))
+        a=json.loads((p/'artifact_audit.json').read_text())
+        assert a['auditor_sha256']==sha(H/'requests5414/audit.py')
+        assert a['qualified']==(v==4)
+        audit_counts.append(a['checks_passed'])
+    # Scan public summaries and code, never export protected text or test IDs.
+    protected=[]
+    for p in [H/'run-v1',H/'requests5414/run-v1']:
+        row=json.loads((p/'curator_custody/row.json').read_text())
+        protected += [row['patch'],row['test_patch'],row['eval_script']]
+        tests=json.loads((p/'curator_custody/tests.json').read_text())
+        protected += tests['FAIL_TO_PASS']+tests['PASS_TO_PASS']
+    public=[]
+    for p in H.rglob('*'):
+        rel=p.relative_to(H)
+        if any(x in rel.parts for x in ['curator_custody','grader_venv','__pycache__','build_context','.git']): continue
+        if p.is_file() and p.suffix in ['.json','.py','.md','.diff','.txt']:
+            t=p.read_text()
+            assert all(x not in t for x in protected)
+            public.append(p)
+    continuity=json.loads((H/'requests5414/run-v4/distribution_continuity.json').read_text())
+    assert all(not x for x in continuity['version_changes'].values())
+    encoding=json.loads((H/'encoding_audit_v3.json').read_text())
+    assert len(encoding['controls'])==8 and all(x['git_show_reproduction_exact_match'] and x['test_region_valid_utf8'] for x in encoding['controls'])
+    result={'schema':'ns-arm64-final-integrity/v2','prior_immutable_files_preserved':len(prior['sha256']),
+        'requests5414_profile_audit_counts':audit_counts,'public_artifacts_scanned_for_hidden_payloads':len(public),
+        'encoding_control_records_verified':8,'final_distribution_changes':0,'provider_calls':0,
+        'protected_values_emitted':False,'auditor_sha256':sha(Path(__file__))}
+    assert not (H/'final_integrity_v2.json').exists()
+    (H/'final_integrity_v2.json').write_text(json.dumps(result,indent=2)+'\n')
+    entries={}
+    for p in H.rglob('*'):
+        rel=p.relative_to(H)
+        if any(x in rel.parts for x in ['grader_venv','__pycache__']): continue
+        if str(rel)=='artifact_checksums_v2.json': continue
+        if p.is_file(): entries[str(rel)]=sha(p)
+    manifest={'schema':'ns-arm64-artifact-inventory/v2','file_count':len(entries),
+        'excludes':['grader_venv','__pycache__','artifact_checksums_v2.json'],
+        'prior_inventory_sha256':sha(H/'artifact_checksums.json'),'sha256':entries}
+    assert not (H/'artifact_checksums_v2.json').exists()
+    (H/'artifact_checksums_v2.json').write_text(json.dumps(manifest,indent=2,sort_keys=True)+'\n')
+    print(json.dumps(dict(result,artifact_files=len(entries))))
+if __name__=='__main__': main()

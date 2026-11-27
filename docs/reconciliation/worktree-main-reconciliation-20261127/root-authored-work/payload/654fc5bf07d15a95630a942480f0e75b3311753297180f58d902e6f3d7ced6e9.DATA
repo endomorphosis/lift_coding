@@ -1,0 +1,665 @@
+"""Bounded formal caller composition using a checked native callee module.
+
+The separate caller grammar models calls under an explicit captured lexical
+binding. Native CALL nodes remain opaque. Python imports, parsing and runtime
+dispatch are not given executable semantics by this adapter.
+"""
+from __future__ import annotations
+
+from contextlib import ExitStack
+from contextvars import ContextVar
+from functools import wraps
+import hashlib
+import json
+import os
+from pathlib import Path, PurePosixPath
+import re
+import stat
+import sys
+from types import SimpleNamespace
+
+from . import codebase_ir_metadata as storage
+from . import terminal_call_ir_projection as projections
+from . import terminal_revision_proof_cache as revisions
+from . import terminal_revision_metadata as custody
+from . import terminal_source_ir_lowering as callee_owner
+
+SCHEMA = "terminal-closed-call-composition@1"
+SCOPE = "closed_caller_AST_composition_under_captured_callee_binding"
+AUTHORITY = {name: False for name in ("proof_authority", "execution_authority", "completion_authority",
+    "source_semantics_verified", "runtime_behavior_verified", "cpython_equivalence_proved",
+    "source_parser_correctness_proved", "python_import_resolution_proved", "source_origin_proved",
+    "whole_program_semantics_verified", "training_convergence_proved", "full_task_satisfaction",
+    "production_activated", "original_task_budget_qualified", "network_isolation_enforced",
+    "loaded_module_code_attested", "transitive_dependency_closure_attested")}
+_PRODUCERS = ContextVar("terminal_call_composition_producer_custody", default=None)
+
+
+def _with_producer_custody(function):
+    @wraps(function)
+    def wrapped(*args, **kwargs):
+        # Source-module custody uses the existing producer witness protocol.
+        # Legacy module permissions are retained. Generated evidence continues
+        # to require the protected-artifact protocol in revisions._file.
+        with ExitStack() as stack:
+            producer, unchanged = stack.enter_context(custody._producer(
+                (sys.modules[__name__], projections, callee_owner, revisions, storage)))
+            context = {"stack": stack, "initial": producer, "guards": [unchanged]}
+            token = _PRODUCERS.set(context)
+            try:
+                result = function(*args, **kwargs)
+                for guard in context["guards"]:
+                    guard()
+                return result
+            finally:
+                _PRODUCERS.reset(token)
+    return wrapped
+
+
+def _adapter_pins():
+    context = _PRODUCERS.get()
+    _need(context is not None, "retained source producer context required")
+    pins = {row["path"]: row for row in context["initial"]["files"]}
+    result = {label: pins[str(Path(module.__file__).resolve())] for label, module in (
+        ("integration", sys.modules[__name__]), ("projection", projections), ("callee_owner", callee_owner),
+        ("revision_cache", revisions), ("metadata_storage", storage))}
+    return result, context["guards"]
+
+
+def _retain_producers(declarations):
+    context = _PRODUCERS.get()
+    _need(context is not None, "retained source producer context required")
+    selected = {}
+    for row in declarations:
+        _need(row["path"] not in selected or _same(selected[row["path"]], row), "producer declarations disagree")
+        selected[row["path"]] = row
+    producer, unchanged = context["stack"].enter_context(custody._producer(
+        tuple(SimpleNamespace(__file__=path) for path in sorted(selected))))
+    pins = {row["path"]: row for row in producer["files"]}
+    _need(all(_same(pins[path], row) for path, row in selected.items()), "selected direct producer differs")
+    context["guards"].append(unchanged)
+    return unchanged
+
+
+def _need(value, message):
+    if not value:
+        raise ValueError(message)
+
+
+def _wire(value):
+    return storage._json(value)
+
+
+def _same(left, right):
+    return _wire(left) == _wire(right)
+
+
+def _selected_sources(sources, callee_contract, caller_contract):
+    names = (callee_contract["path"], caller_contract["path"])
+    _need(all(name in sources for name in names), "selected call closure missing from complete source scope")
+    modules = {PurePosixPath(name).stem for name in names}
+    for name in sources:
+        if name not in names:
+            _need(PurePosixPath(name).parts[0] not in modules,
+                "another captured package path shadows a selected root module")
+    return {name: sources[name] for name in names}
+
+
+def _lean(projection, callee_result_cid):
+    """Generate formal source; callers must validate its exact projection."""
+    def tree(value, grammar):
+        if value["kind"] == "parameter":
+            return grammar + ".parameter"
+        return "(" + grammar + ".invoke " + tree(value["argument"], grammar) + ")"
+    actual, desired = projection["actual_offset"], projection["requested_offset"]
+    evidence = json.dumps(_wire({"projection_id": projection["projection_id"],
+        "callee_result_cid": callee_result_cid, "scope": SCOPE}).decode())
+    definitions = '''inductive SourceExpr where
+  | parameter
+  | invoke (argument : SourceExpr)
+
+inductive TargetExpr where
+  | parameter
+  | invoke (argument : TargetExpr)
+
+def sourceEval : SourceExpr → Int → Int
+  | .parameter, input => input
+  | .invoke argument, input => CodebaseIntegerLowering.sourceEval
+      CodebaseIntegerLowering.capturedSourceBody (sourceEval argument input)
+
+def targetEval : TargetExpr → Int → Int
+  | .parameter, input => input
+  | .invoke argument, input => CodebaseIntegerLowering.run (targetEval argument input)
+
+def lower : SourceExpr → TargetExpr
+  | .parameter => .parameter
+  | .invoke argument => .invoke (lower argument)
+
+theorem callee_step_equivalence (input : Int) :
+    CodebaseIntegerLowering.run input = CodebaseIntegerLowering.sourceEval
+      CodebaseIntegerLowering.capturedSourceBody input :=
+  CodebaseIntegerLowering.captured_ast_target_equivalence input
+
+theorem caller_lowering_correct (body : SourceExpr) (input : Int) :
+    targetEval (lower body) input = sourceEval body input := by
+  induction body with
+  | parameter => rfl
+  | invoke argument ih =>
+    change CodebaseIntegerLowering.run (targetEval (lower argument) input) =
+      CodebaseIntegerLowering.sourceEval CodebaseIntegerLowering.capturedSourceBody (sourceEval argument input)
+    rw [ih]
+    exact callee_step_equivalence (sourceEval argument input)
+'''
+    names = ["callee_step_equivalence", "caller_lowering_correct", "native_call_correspondence",
+        "captured_caller_equivalence", "caller_offset_identity"]
+    lines = ["import IntegerLowering", "namespace CallerComposition", "set_option autoImplicit false",
+        "-- Formal call model only. Native CALL remains opaque; Python imports and runtime dispatch are unproved.",
+        "def compositionEvidence : String := " + evidence, definitions,
+        "def capturedSource : SourceExpr := " + tree(projection["source_call_syntax"], "SourceExpr"),
+        "def nativeTarget : TargetExpr := " + tree(projection["native_call_syntax"], "TargetExpr"),
+        "theorem native_call_correspondence : nativeTarget = lower capturedSource := by rfl",
+        "theorem captured_caller_equivalence (input : Int) : targetEval nativeTarget input = sourceEval capturedSource input := by\n  rw [native_call_correspondence]\n  exact caller_lowering_correct capturedSource input",
+        "def run (input : Int) : Int := targetEval nativeTarget input",
+        "theorem caller_offset_identity (input : Int) : run input = input + (" + str(actual) + " : Int) := by\n  simp only [run, nativeTarget, targetEval, CodebaseIntegerLowering.source_offset_identity]\n  <;> omega"]
+    if actual == desired:
+        lines.append("theorem requested_offset_identity (input : Int) : run input = input + (" + str(desired) + " : Int) := caller_offset_identity input")
+        names.append("requested_offset_identity")
+    else:
+        lines.extend(["theorem requested_offset_counterexample : run (0 : Int) ≠ (0 : Int) + (" + str(desired) + " : Int) := by\n  have checked := caller_offset_identity 0\n  omega",
+            "theorem requested_goal_refuted : ¬ (∀ input : Int, run input = input + (" + str(desired) + " : Int)) := by\n  intro claimed\n  exact requested_offset_counterexample (claimed 0)"])
+        names.extend(["requested_offset_counterexample", "requested_goal_refuted"])
+    return "\n\n".join(lines + ["end CallerComposition", ""]), names
+
+
+@revisions._without_metadata
+def build_call_composition_source(*, projection: dict, callee_proof: dict) -> dict:
+    """Replay source/IR data and generate Lean; authenticate no caller record."""
+    from ipfs_datasets_py.logic.software_contracts.content import cid_for_structured
+    _need(type(projection) is dict and type(callee_proof) is dict, "exact projection and callee record required")
+    _need({"source_texts", "head", "callee_contract", "caller_contract", "projection_id"} <= set(projection),
+        "complete retained caller projection required")
+    _need(projection.get("projection_id") == cid_for_structured({key: value for key, value in projection.items()
+        if key != "projection_id"}), "caller projection identity differs")
+    texts = projection.get("source_texts")
+    _need(type(texts) is dict and len(texts) == 2 and all(type(text) is str for text in texts.values()),
+        "two exact retained source texts required")
+    replay = projections.build_call_ir_projection(sources={path: text.encode("ascii") for path, text in texts.items()},
+        callee_contract=projection["callee_contract"], caller_contract=projection["caller_contract"], head=projection["head"])
+    _need(_same(replay, projection), "caller source/native IR projection differs from replay")
+    callee_owner.join_source_ir_lowering(projection=projection["callee_projection"], proof=callee_proof)
+    _need(_same(callee_proof["head"], projection["head"]), "callee proof belongs to another owner head")
+    _need(callee_proof["status"] == "model_proved" and callee_proof["requested_model_theorem_proved"] is True,
+        "proved requested callee contract required")
+    _need(type(callee_proof.get("artifacts")) is dict, "native callee artifact inventory required")
+    artifact = callee_proof["artifacts"].get("lean_olean")
+    _need(type(artifact) is dict and set(artifact) == {"path", "cid", "sha256", "size_bytes"},
+        "native callee object descriptor required")
+    path = artifact["path"]
+    _need(type(path) is str and len(path) <= 4096 and "\0" not in path and PurePosixPath(path).is_absolute()
+        and str(PurePosixPath(path)) == path and ".." not in PurePosixPath(path).parts,
+        "canonical callee object descriptor path required")
+    _need(type(artifact["size_bytes"]) is int and 0 < artifact["size_bytes"] <= 4 * 1024**2
+        and type(artifact["sha256"]) is str and re.fullmatch(r"[0-9a-f]{64}", artifact["sha256"])
+        and type(artifact["cid"]) is str and artifact["cid"] == callee_proof["lean_certificate"].get("olean_cid"),
+        "callee compiled object/certificate binding differs")
+    source, names = _lean(projection, callee_proof["result_cid"])
+    matches = projection["actual_offset"] == projection["requested_offset"]
+    result = {"schema": "terminal-call-composition-source@1", "scope": SCOPE,
+        "projection_id": projection["projection_id"], "callee_result_cid": callee_proof["result_cid"],
+        "callee_olean": artifact, "lean_source": source, "theorems": names,
+        "model_status": "model_proved" if matches else "model_refuted",
+        "model_counterexample": None if matches else {"input": 0, "model_output": projection["actual_offset"],
+            "required_output": projection["requested_offset"]},
+        "source_callee_proof_origin_verified": False, "formal_proof_independently_validated": False,
+        "native_call_opacity_preserved": True, "training_steps": 0, "checker_invocations": 0, **AUTHORITY}
+    result["source_id"] = cid_for_structured(result)
+    return result
+
+
+_ARGS = ["-j", "1", "-o", "CallerComposition.olean", "CallerComposition.lean"]
+_RESULT_FIELDS = {"schema", "qualified", "scope", "output", "head", "repository_id", "paths", "revision_id",
+    "projection", "generated", "source", "callee_object", "caller_object", "process", "cache_dimensions",
+    "callee", "native_callee_result_cid", "theorems", "model_status", "model_counterexample",
+    "formal_caller_AST_lowering_proved", "formal_dependency_composition_proved",
+    "native_caller_target_correspondence_proved", "actual_caller_compiler_returned", "native_call_opacity_preserved",
+    "coverage", "metadata", "advisory_cache", "cache_status", "tool_policy", "adapter_pins", "training_steps",
+    "provider_calls", "source_body_executed", "result_cid", *AUTHORITY}
+
+
+def _check_header(value):
+    _need(type(value) is dict and set(value) == _RESULT_FIELDS and value.get("schema") == SCHEMA
+        and value.get("scope") == SCOPE and value.get("qualified") is True
+        and all(value.get(key) is False for key in AUTHORITY)
+        and type(value.get("training_steps")) is int and value["training_steps"] == 0
+        and type(value.get("provider_calls")) is int and value["provider_calls"] == 0
+        and value.get("source_body_executed") is False, "closed caller result and exact zero execution counters required")
+
+
+def _callee_residuals(snapshot, sources, callee_path):
+    return [{"path": name, "source_sha256": hashlib.sha256(sources[name]).hexdigest(),
+        "reason": "source_not_covered_by_selected_closed_offset_AST_proof", **callee_owner.AUTHORITY}
+        for name in snapshot["scope"] if name != callee_path]
+
+
+def _check_metadata_population(records, source_snapshot, report):
+    """Bind native storage receipts to regenerated semantic rows, not labels."""
+    source_digest = storage._digest(_wire(source_snapshot))
+    rows = storage._families(records, source_digest)
+    expected = {"source_snapshot_sha256": source_digest, "row_count": sum(map(len, rows.values())),
+        "row_root_sha256": storage._row_root(rows), "family_counts": {key: len(value) for key, value in rows.items()},
+        "family_digests": {key: storage._digest(storage._row_array(value)) for key, value in rows.items()},
+        "exports": {key: {"relative_path": "exports/" + key + ".jsonl",
+            "bytes": len(raw := b"".join(storage._wire(row) + b"\n" for row in value)),
+            "sha256": storage._digest(raw)} for key, value in rows.items()}}
+    _need(type(report) is dict and all(_same(report.get(key), value) for key, value in expected.items()),
+        "stored metadata population differs from regenerated current semantic rows")
+
+
+def _call_population(snapshot, projection, generated, proof, coverage, source_pin, caller_object_pin,
+        process_pin, callee_object_pin, caller_object_cid):
+    records = json.loads(_wire(snapshot["metadata"]["records"]))
+    records.update(call_ir_projections=[projection], formal_call_sources=[generated], formal_call_coverage=[coverage],
+        caller_native_programs=[projection["caller_native_program"]], native_callee_lowering_records=[proof],
+        call_model_residuals=coverage["residuals"], static_callee_bindings=[projection["lexical_bindings"]])
+    records["formal_call_checked_records"] = [{"schema": "terminal-call-model-kernel-record@1", "scope": SCOPE,
+        "projection_id": projection["projection_id"], "source_id": generated["source_id"],
+        "source": source_pin, "caller_object": caller_object_pin, "caller_object_cid": caller_object_cid,
+        "process": process_pin, "callee_result_cid": proof["result_cid"], "callee_object": callee_object_pin,
+        "theorems": generated["theorems"], "actual_caller_compiler_returned": True, **AUTHORITY}]
+    source_snapshot = {"revision": snapshot["metadata"]["source_snapshot"], "head": projection["head"],
+        "projection_id": projection["projection_id"], "callee_result_cid": proof["result_cid"], **AUTHORITY}
+    return records, source_snapshot
+
+
+def _check_callee_integration(callee, projection, proof, snapshot, sources):
+    _need(callee.get("schema") == callee_owner.SCHEMA and callee.get("qualified") is True
+        and all(callee.get(key) is False for key in callee_owner.AUTHORITY)
+        and _same(callee["head"], projection["head"]) and callee["revision_id"] == snapshot["revision_id"]
+        and callee.get("source_body_executed") is False and type(callee.get("training_steps")) is int
+        and callee["training_steps"] == 0 and type(callee.get("provider_calls")) is int and callee["provider_calls"] == 0
+        and callee.get("behavioral_satisfaction") is False and callee.get("network_isolation_enforced") is False
+        and callee.get("loaded_module_code_attested") is False and callee.get("original_task_budget_qualified") is False
+        and type(callee.get("unsupported_count")) is int
+        and callee["unsupported_count"] == len(snapshot["metadata"]["records"]["unsupported"]),
+        "native callee integration header differs")
+    _need(all(callee.get(key) is True for key in ("actual_native_prover_returned", "native_cold_validation_passed",
+        "source_ast_lowering_proved", "native_target_correspondence_proved", "requested_model_theorem_proved"))
+        and callee["formal_scope"] == proof["scope"] and callee["model_status"] == proof["status"] == "model_proved"
+        and callee["model_counterexample"] is None and callee["cache_status"] == "hit",
+        "native callee integration formal claims differ")
+    _need(_same(callee["join"], callee_owner.join_source_ir_lowering(projection=projection["callee_projection"], proof=proof))
+        and _same(callee["uncovered_source_obligations"], _callee_residuals(snapshot, sources, projection["callee_contract"]["path"])),
+        "native callee joins or residuals differ")
+
+
+def _check_callee_storage(callee, projection, proof, snapshot, repository, scheduler=None):
+    """Validate the retained child stores as advisory data, never proof origin."""
+    guards = []
+    def read(path, declared=None):
+        pin, raw, guard = revisions._file(path)
+        _need(declared is None or _same(pin, declared), "child callee public artifact pin differs")
+        guards.append(guard)
+        return raw
+    _need(read(Path(callee["output"]) / "result.json") == _wire(callee), "child callee result differs")
+    _need(read(Path(callee["projection"]["path"]), callee["projection"]) == _wire(projection["callee_projection"]),
+        "child callee projection differs")
+    _need(read(Path(callee["native_proof"]["path"]), callee["native_proof"]) == _wire(proof), "child callee proof differs")
+    for label, module in (("integration", callee_owner), ("projection", callee_owner.projections)):
+        pin, _, guard = revisions._file(Path(module.__file__), protected_parent=False)
+        _need(_same(pin, callee["integration_adapters"][label]), "child callee adapter differs")
+        guards.append(guard)
+    dimensions = callee_owner._dimensions(snapshot, projection["callee_projection"], proof, callee["integration_adapters"])
+    _need(read(Path(callee["output"]) / "cache-dimensions.json") == _wire(dimensions)
+        and read(Path(callee["output"]) / "cache-report.json") == _wire(callee["advisory_cache"]),
+        "child callee cache documents differ")
+    child_projection = projection["callee_projection"]
+    records = json.loads(_wire(snapshot["metadata"]["records"]))
+    records.update(native_program_ir=[child_projection["native_program"]], source_ir_projections=[child_projection],
+        formal_ast_lowering_records=[proof], formal_lowering_joins=[callee["join"]],
+        uncovered_source_obligations=callee["uncovered_source_obligations"],
+        logic_family_inventory=child_projection.get("family_statuses", []))
+    child_snapshot = {"revision": snapshot["metadata"]["source_snapshot"], "head": projection["head"],
+        "projection_id": child_projection["projection_id"], "native_result_cid": proof["result_cid"], **callee_owner.AUTHORITY}
+    _check_metadata_population(records, child_snapshot, callee["metadata"])
+    _check_metadata_population(snapshot["metadata"]["records"], snapshot["metadata"]["source_snapshot"],
+        callee["advisory_cache"]["metadata"])
+    storage.validate_codebase_ir_metadata(output=Path(callee["output"]) / "metadata", expected=callee["metadata"])
+    hit = revisions.lookup_revision_candidate(output=Path(callee["output"]) / "candidate-cache",
+        expected=callee["advisory_cache"], root=repository, paths=snapshot["scope"],
+        repository_id=snapshot["repository_id"], dimensions=dimensions)
+    _need(hit["status"] == "hit", "child current callee candidate did not replay")
+    for guard in guards:
+        guard()
+    return guards
+
+
+def _limits(policy):
+    return {"timeout_ms": 30000, "cpu_seconds": 30,
+        "address_space_bytes": policy["process_limits"]["lean"]["address_space_bytes"],
+        "resident_memory_bytes": policy["process_limits"]["lean"]["resident_memory_bytes"],
+        "max_input_bytes": 4 * 1024**2, "max_output_bytes": 1024**2,
+        "max_workspace_bytes": 16 * 1024**2, "max_output_files": 8}
+
+
+def _check_process(process, policy):
+    fields = {"interface_version", "command", "returncode", "stdout", "stderr", "elapsed_ms", "error",
+        "cancelled", "timed_out", "unavailable", "output_truncated", "workspace_limit_exceeded",
+        "process_tree_terminated", "resource_exhausted", "workspace_cleaned", "termination_reason", "limits"}
+    _need(type(process) is dict and set(process) == fields, "closed bounded caller process required")
+    _need(process["interface_version"] == "bounded-tool-runner/v1"
+        and process["command"] == [policy["lean"]["path"], *_ARGS]
+        and type(process["returncode"]) is int and process["returncode"] == 0
+        and all(process[key] is False for key in ("cancelled", "timed_out", "unavailable", "output_truncated",
+            "workspace_limit_exceeded", "resource_exhausted", "process_tree_terminated"))
+        and process["workspace_cleaned"] is True and process["termination_reason"] == "completed"
+        and process["stdout"] == process["stderr"] == process["error"] == ""
+        and type(process["elapsed_ms"]) is int and 0 <= process["elapsed_ms"] <= 30000
+        and _same(process["limits"], _limits(policy)), "successful exact caller compiler process required")
+
+
+def _compile_call(*, generated, callee_object: bytes, policy, scheduler, checkpoint, failure_output=None):
+    """One actual bounded caller compiler invocation, no target execution."""
+    from ipfs_datasets_py.logic.backends.process import BoundedToolRunner, ToolRunLimits
+    from ipfs_datasets_py.logic.software_contracts import codebase_integer_lowering_lean as native
+    from ipfs_datasets_py.logic.software_contracts.codebase_resources import acquire_codebase_resources
+    from ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler import ResourceLane
+    limits = _limits(policy)
+    checkpoint()
+    native.native._policy(policy, checkpoint)
+    runner = BoundedToolRunner(base_environment={**native.native._ENV, "LEAN_PATH": "."})
+    with acquire_codebase_resources(scheduler=scheduler, timeout_seconds=30, memory_mb=1024) as lease:
+        signal = lease.combined_cancellation_signal(None)
+        with lease.acquire_child(lane=ResourceLane.VALIDATION, cpu_slots=1, memory_mb=512,
+                child_process_slots=1, timeout=30, cancel_event=signal,
+                request_id="closed-call-composition:lean") as child:
+            checked = runner.run([policy["lean"]["path"], *_ARGS],
+                input_files={"IntegerLowering.olean": callee_object,
+                    "CallerComposition.lean": generated["lean_source"].encode("utf-8")},
+                output_paths=("CallerComposition.olean",),
+                limits=ToolRunLimits(timeout_seconds=30, cpu_seconds=30,
+                    memory_bytes=limits["address_space_bytes"], resident_memory_bytes=limits["resident_memory_bytes"],
+                    max_input_bytes=limits["max_input_bytes"], max_output_bytes=limits["max_output_bytes"],
+                    max_workspace_bytes=limits["max_workspace_bytes"], max_output_files=limits["max_output_files"]),
+                cancellation=child.combined_cancellation_signal(signal))
+    checkpoint()
+    native.native._policy(policy, checkpoint)
+    process = native.native._process(checked, limits)
+    try:
+        _check_process(process, policy)
+    except ValueError as error:
+        if failure_output is not None:
+            callee_owner._write(failure_output / "caller-failure.json", {"scope": SCOPE,
+                "source_id": generated["source_id"], "process": process, **AUTHORITY})
+        raise ValueError("native caller compile failed: " + process["stdout"][:2048]
+            + process["stderr"][:2048]) from error
+    _need(set(checked.output_files) == {"CallerComposition.olean"}, "one checked caller object required")
+    return process, checked.output_files["CallerComposition.olean"]
+
+
+def _dimensions(snapshot, projection, generated, proof, callee_object_pin, caller_object_pin, process_pin, adapter_pins, policy):
+    return {"source": {"head": projection["head"], "revision": snapshot["revision_id"],
+            "closure": projection["sources"]},
+        "expression": {"source": projection["source_call_syntax"], "native": projection["native_call_syntax"]},
+        "formalization": {"source_id": generated["source_id"], "callee_result_cid": proof["result_cid"],
+            "callee_object": callee_object_pin, "caller_object": caller_object_pin, "caller_process": process_pin},
+        "slice": {"closed_callee": projection["callee_contract"], "closed_caller": projection["caller_contract"],
+            "scope": SCOPE}, "obligation": projection["caller_contract"], "assumptions": projection["assumptions"],
+        "bounds": _limits(policy), "translation": {"adapters": adapter_pins,
+            "producer": projection["producer"], "callee_translation_cid": proof["translation_cid"]},
+        "provider": "local-formal-closed-caller-model", "checker": "native-Lean4",
+        "environment": {"tool_policy": policy, "compiled_import": generated["callee_olean"],
+            "network_isolation": "not_enforced"},
+        "policy": {"advisory_candidate_only": True, "native_CALL_opaque": True, **AUTHORITY},
+        "schema": {"composition": SCHEMA, "projection": projection["schema"], "source": generated["schema"]},
+        "network_policy": {"checker_network_isolation": "not_enforced", "provider_calls": 0},
+        "evidence_kind": "kernel_checked_proof", "authority_ceiling": "bounded",
+        "kernel": policy["lean"], "theorem_registry": {"scope": SCOPE, "theorems": generated["theorems"]}}
+
+
+@revisions._without_metadata
+@_with_producer_custody
+def qualify_current_call_composition(*, index, repository: Path, expected_head, paths: list[str],
+        repository_id: str, callee_contract: dict, caller_contract: dict, tool_policy: dict,
+        output: Path, scheduler) -> dict:
+    """Qualify a fresh callee proof plus exact caller model at one current head."""
+    from ipfs_datasets_py.logic.software_contracts import codebase_integer_lowering_lean as native
+    from ipfs_datasets_py.logic.software_contracts.content import cid_for_bytes, cid_for_structured
+    adapter_pins, guards = _adapter_pins()
+    snapshot, source_guard = revisions._capture(repository, paths, repository_id)
+    _need(expected_head.repository_id == repository_id, "owner head belongs to another repository")
+    current = index.observe_current(repository, expected_head=expected_head, scheduler=scheduler)
+    sources = source_guard.repository_values()
+    leaves = {entry.path: entry for entry in current.manifest.snapshot.entries}
+    _need(set(leaves) == set(sources) and all(leaves[path].source_cid == cid_for_bytes(raw)
+        for path, raw in sources.items()), "complete native source scope differs from original capture")
+    selected = _selected_sources(sources, callee_contract, caller_contract)
+    inventory = projections.build_call_ir_projection(sources=selected, callee_contract=callee_contract,
+        caller_contract=caller_contract, head=expected_head.to_dict())
+    # The first pass selects direct producer files only. Qualified projection
+    # generation starts after these retained witnesses have been established.
+    _retain_producers([*inventory["producer"]["files"], *inventory["callee_projection"]["producer"]["files"]])
+    projection = projections.build_call_ir_projection(sources=selected, callee_contract=callee_contract,
+        caller_contract=caller_contract, head=expected_head.to_dict())
+    _need(_same(projection, inventory), "qualified projection differs from producer selection")
+    output = Path(output).absolute()
+    _need(not output.exists() and output.parent.resolve(strict=True) == output.parent
+        and not output.is_relative_to(Path(repository)), "fresh external composition output required")
+    parent = output.parent.lstat()
+    _need(stat.S_ISDIR(parent.st_mode) and parent.st_uid == os.geteuid() and not parent.st_mode & 0o022,
+        "protected owner composition parent required")
+    output.mkdir(mode=0o700)
+    fields = ("st_dev", "st_ino", "st_mode", "st_uid", "st_gid")
+    directory = lambda path: tuple(getattr(path.lstat(), field) for field in fields)
+    output_identity, parent_identity = directory(output), directory(output.parent)
+    emitted_guards = []
+    def fence():
+        _need(output.resolve(strict=True) == output and directory(output) == output_identity
+            and directory(output.parent) == parent_identity, "composition output custody changed")
+        source_guard.verify_originals()
+        for guard in [*guards, *emitted_guards]:
+            guard()
+    def save(name, raw):
+        path = output / name
+        with path.open("xb") as stream:
+            path.chmod(0o600)
+            stream.write(raw)
+        pin, saved, guard = revisions._file(path)
+        _need(saved == raw, "emitted caller artifact differs")
+        emitted_guards.append(guard)
+        return pin
+    callee = callee_owner.qualify_current_source_ir_lowering(index=index, repository=repository,
+        expected_head=expected_head, paths=paths, repository_id=repository_id, contract=callee_contract,
+        tool_policy=tool_policy, output=output / "callee", scheduler=scheduler)
+    proof_path = Path(callee["native_proof"]["path"])
+    proof_pin, proof_raw, proof_guard = revisions._file(proof_path)
+    _need(_same(proof_pin, callee["native_proof"]), "actual native callee result changed")
+    emitted_guards.append(proof_guard)
+    proof = json.loads(proof_raw)
+    _check_callee_integration(callee, projection, proof, snapshot, sources)
+    # Preserve the child integration artifacts embedded in the returned record,
+    # including its own result and native artifact inventory, across callbacks.
+    child_paths = {Path(callee["output"]) / name for name in ("result.json", "cache-dimensions.json",
+        "cache-report.json", "checked-object.olean")}
+    child_paths.update(Path(callee[key]["path"]) for key in ("projection", "native_proof"))
+    child_paths.update(Path(value["path"]) for value in proof["artifacts"].values())
+    child_paths.add(Path(proof["output"]) / "result.json")
+    child_paths.add(Path(callee["output"]) / "candidate-cache/manifest.json")
+    child_paths.add(Path(callee["output"]) / "candidate-cache/artifact.bin")
+    for child_path in sorted(child_paths):
+        _, _, guard = revisions._file(child_path)
+        emitted_guards.append(guard)
+    emitted_guards.extend(_check_callee_storage(callee, projection, proof, snapshot, repository))
+    native_record = native.IntegerOffsetLoweringProof.from_dict(proof)
+    generated = build_call_composition_source(projection=projection, callee_proof=proof)
+    object_descriptor = generated["callee_olean"]
+    object_raw = native._read_bytes(Path(object_descriptor["path"]), native.native.MAX_WORKSPACE_BYTES, fence)
+    _need(cid_for_bytes(object_raw) == object_descriptor["cid"]
+        and hashlib.sha256(object_raw).hexdigest() == object_descriptor["sha256"]
+        and len(object_raw) == object_descriptor["size_bytes"], "actual imported native object differs")
+    callee_object_pin = save("IntegerLowering.olean", object_raw)
+    projection_pin = save("projection.json", _wire(projection))
+    generated_pin = save("generated.json", _wire(generated))
+    source_pin = save("CallerComposition.lean", generated["lean_source"].encode("utf-8"))
+    process, compiled_object = _compile_call(generated=generated, callee_object=object_raw,
+        policy=tool_policy, scheduler=scheduler, checkpoint=fence, failure_output=output)
+    caller_object_pin = save("CallerComposition.olean", compiled_object)
+    process_pin = save("process.json", _wire(process))
+    from ipfs_datasets_py.logic.software_contracts.codebase_integer_profile import IntegerOffsetContract
+    native.validate_current_integer_offset_lowering(native_record, index, repository, expected_head=expected_head,
+        contract=IntegerOffsetContract.from_dict(callee_contract), tool_policy=tool_policy,
+        scheduler=scheduler, timeout_seconds=90, memory_mb=1024)
+    _need(_same(projections.build_call_ir_projection(sources=selected, callee_contract=callee_contract,
+        caller_contract=caller_contract, head=expected_head.to_dict()), projection), "caller projection changed after compile")
+    residuals = [{"path": name, "source_sha256": hashlib.sha256(sources[name]).hexdigest(),
+        "reason": "outside_selected_closed_call_model", **AUTHORITY}
+        for name in snapshot["scope"] if name not in selected]
+    coverage = {"scope": SCOPE, "formal_caller_AST_composed": True,
+        "callee_owner_residuals_retained": callee["uncovered_source_obligations"],
+        "closed_call_model_paths": sorted(selected), "residuals": residuals, **AUTHORITY}
+    records, metadata_snapshot = _call_population(snapshot, projection, generated, proof, coverage,
+        source_pin, caller_object_pin, process_pin, callee_object_pin, cid_for_bytes(compiled_object))
+    metadata = storage.hydrate_codebase_ir_metadata(records=records, output=output / "metadata",
+        source_snapshot=metadata_snapshot)
+    _check_metadata_population(records, metadata_snapshot, metadata)
+    dimensions = _dimensions(snapshot, projection, generated, proof, callee_object_pin, caller_object_pin, process_pin,
+        adapter_pins, tool_policy)
+    dimensions_pin = save("cache-dimensions.json", _wire(dimensions))
+    cache = revisions.persist_revision_candidate(output=output / "candidate-cache", snapshot=snapshot,
+        dimensions=dimensions, artifact=output / "CallerComposition.olean")
+    save("cache-report.json", _wire(cache))
+    hit = revisions.lookup_revision_candidate(output=output / "candidate-cache", expected=cache,
+        root=repository, paths=paths, repository_id=repository_id, dimensions=dimensions)
+    _need(hit["status"] == "hit", "current caller cache did not replay")
+    storage.validate_codebase_ir_metadata(output=output / "metadata", expected=metadata)
+    emitted_guards.extend(_check_callee_storage(callee, projection, proof, snapshot, repository))
+    native.validate_current_integer_offset_lowering(native_record, index, repository, expected_head=expected_head,
+        contract=IntegerOffsetContract.from_dict(callee_contract), tool_policy=tool_policy,
+        scheduler=scheduler, timeout_seconds=90, memory_mb=1024)
+    result = {"schema": SCHEMA, "qualified": True, "scope": SCOPE, "output": str(output),
+        "head": expected_head.to_dict(), "repository_id": repository_id, "paths": sorted(paths),
+        "revision_id": snapshot["revision_id"], "projection": projection_pin, "generated": generated_pin,
+        "source": source_pin, "callee_object": callee_object_pin, "caller_object": caller_object_pin,
+        "process": process_pin, "cache_dimensions": dimensions_pin, "callee": callee,
+        "native_callee_result_cid": proof["result_cid"], "theorems": generated["theorems"],
+        "model_status": generated["model_status"], "model_counterexample": generated["model_counterexample"],
+        "formal_caller_AST_lowering_proved": True, "formal_dependency_composition_proved": True,
+        "native_caller_target_correspondence_proved": True, "actual_caller_compiler_returned": True,
+        "native_call_opacity_preserved": True, "coverage": coverage, "metadata": metadata,
+        "advisory_cache": cache, "cache_status": hit["status"], "tool_policy": tool_policy,
+        "adapter_pins": adapter_pins, "training_steps": 0, "provider_calls": 0,
+        "source_body_executed": False, **AUTHORITY}
+    result["result_cid"] = cid_for_structured(result)
+    _check_header(result)
+    save("result.json", _wire(result))
+    index.observe_current(repository, expected_head=expected_head, scheduler=scheduler)
+    fence()
+    return result
+
+
+@revisions._without_metadata
+@_with_producer_custody
+def validate_current_call_composition(*, expected: dict, index, repository: Path, expected_head,
+        tool_policy: dict, scheduler) -> dict:
+    """Cold-read current bindings and native artifacts without invoking Lean.
+
+    This validates data consistency, not the origin of a caller-supplied process
+    receipt. The live qualifier separately retains its actual compiler result.
+    """
+    from ipfs_datasets_py.logic.software_contracts import codebase_integer_lowering_lean as native
+    from ipfs_datasets_py.logic.software_contracts.codebase_integer_profile import IntegerOffsetContract
+    from ipfs_datasets_py.logic.software_contracts.content import cid_for_bytes, cid_for_structured
+    _check_header(expected)
+    _need(expected.get("result_cid") == cid_for_structured({key: value for key, value in expected.items()
+        if key != "result_cid"}), "caller result identity differs")
+    _need(_same(expected["head"], expected_head.to_dict())
+        and expected["repository_id"] == expected_head.repository_id
+        and _same(expected["tool_policy"], tool_policy), "caller owner head or tool policy differs")
+    output = Path(expected["output"])
+    _need(output.is_absolute() and output.resolve(strict=True) == output, "canonical retained output required")
+    current_adapters, producer_guards = _adapter_pins()
+    _need(_same(current_adapters, expected["adapter_pins"]), "current caller adapter differs")
+    guards = list(producer_guards)
+    def read(path, declared=None):
+        pin, raw, guard = revisions._file(path)
+        _need(declared is None or _same(pin, declared), "retained artifact pin differs")
+        guards.append(guard)
+        return pin, raw
+    _, raw = read(output / "result.json")
+    _need(raw == _wire(expected), "retained caller result differs")
+    snapshot, source_guard = revisions._capture(repository, expected["paths"], expected["repository_id"])
+    _need(snapshot["revision_id"] == expected["revision_id"], "caller source revision is stale")
+    current = index.observe_current(repository, expected_head=expected_head, scheduler=scheduler)
+    sources = source_guard.repository_values()
+    leaves = {entry.path: entry for entry in current.manifest.snapshot.entries}
+    _need(set(leaves) == set(sources) and all(leaves[path].source_cid == cid_for_bytes(raw)
+        for path, raw in sources.items()), "current complete source scope differs")
+    _, raw = read(output / "projection.json", expected["projection"])
+    projection = json.loads(raw)
+    selected = _selected_sources(sources, projection["callee_contract"], projection["caller_contract"])
+    _need(_same(projection, projections.build_call_ir_projection(sources=selected,
+        callee_contract=projection["callee_contract"], caller_contract=projection["caller_contract"],
+        head=expected_head.to_dict())), "current source/call projection differs")
+    guards.append(_retain_producers([*projection["producer"]["files"],
+        *projection["callee_projection"]["producer"]["files"]]))
+    callee = expected["callee"]
+    _, raw = read(Path(callee["output"]) / "result.json")
+    _need(raw == _wire(callee) and callee["result_cid"] == cid_for_structured({key: value for key, value in callee.items()
+        if key != "result_cid"}), "retained native callee integration differs")
+    _, raw = read(Path(callee["native_proof"]["path"]), callee["native_proof"])
+    proof = json.loads(raw)
+    _check_callee_integration(callee, projection, proof, snapshot, sources)
+    guards.extend(_check_callee_storage(callee, projection, proof, snapshot, repository))
+    record = native.IntegerOffsetLoweringProof.from_dict(proof)
+    native.validate_current_integer_offset_lowering(record, index, repository, expected_head=expected_head,
+        contract=IntegerOffsetContract.from_dict(projection["callee_contract"]), tool_policy=tool_policy,
+        scheduler=scheduler, timeout_seconds=90, memory_mb=1024)
+    generated = build_call_composition_source(projection=projection, callee_proof=proof)
+    _, raw = read(output / "generated.json", expected["generated"])
+    _need(raw == _wire(generated), "regenerated caller theorem source differs")
+    _, raw = read(output / "CallerComposition.lean", expected["source"])
+    _need(raw == generated["lean_source"].encode("utf-8"), "retained caller Lean source differs")
+    callee_pin, raw = read(output / "IntegerLowering.olean", expected["callee_object"])
+    descriptor = generated["callee_olean"]
+    _need(cid_for_bytes(raw) == descriptor["cid"] and hashlib.sha256(raw).hexdigest() == descriptor["sha256"]
+        and len(raw) == descriptor["size_bytes"], "imported native callee object differs")
+    caller_pin, caller_raw = read(output / "CallerComposition.olean", expected["caller_object"])
+    _, raw = read(output / "process.json", expected["process"])
+    _check_process(json.loads(raw), tool_policy)
+    for key in ("formal_caller_AST_lowering_proved", "formal_dependency_composition_proved",
+            "native_caller_target_correspondence_proved", "actual_caller_compiler_returned", "native_call_opacity_preserved"):
+        _need(expected.get(key) is True, "formal caller claim differs")
+    _need(_same(expected["theorems"], generated["theorems"])
+        and expected["native_callee_result_cid"] == proof["result_cid"]
+        and expected["model_status"] == generated["model_status"]
+        and _same(expected["model_counterexample"], generated["model_counterexample"]), "caller goal/callee joins differ")
+    residuals = [{"path": name, "source_sha256": hashlib.sha256(sources[name]).hexdigest(),
+        "reason": "outside_selected_closed_call_model", **AUTHORITY}
+        for name in snapshot["scope"] if name not in selected]
+    callee_residuals = _callee_residuals(snapshot, sources, projection["callee_contract"]["path"])
+    coverage = {"scope": SCOPE, "formal_caller_AST_composed": True,
+        "callee_owner_residuals_retained": callee_residuals, "closed_call_model_paths": sorted(selected),
+        "residuals": residuals, **AUTHORITY}
+    _need(_same(coverage, expected["coverage"]), "formal caller coverage or residuals differ")
+    records, metadata_snapshot = _call_population(snapshot, projection, generated, proof, coverage,
+        expected["source"], caller_pin, expected["process"], callee_pin, cid_for_bytes(caller_raw))
+    _check_metadata_population(records, metadata_snapshot, expected["metadata"])
+    _check_metadata_population(snapshot["metadata"]["records"], snapshot["metadata"]["source_snapshot"],
+        expected["advisory_cache"]["metadata"])
+    dimensions = _dimensions(snapshot, projection, generated, proof, callee_pin, caller_pin, expected["process"],
+        expected["adapter_pins"], tool_policy)
+    _, raw = read(output / "cache-dimensions.json", expected["cache_dimensions"])
+    _need(raw == _wire(dimensions), "current caller proof dimensions differ")
+    storage.validate_codebase_ir_metadata(output=output / "metadata", expected=expected["metadata"])
+    hit = revisions.lookup_revision_candidate(output=output / "candidate-cache", expected=expected["advisory_cache"],
+        root=repository, paths=expected["paths"], repository_id=expected["repository_id"], dimensions=dimensions)
+    _need(hit["status"] == "hit" and expected["cache_status"] == "hit", "cold caller cache did not replay")
+    native.native._policy(tool_policy, lambda: None)
+    index.observe_current(repository, expected_head=expected_head, scheduler=scheduler)
+    for guard in guards:
+        guard()
+    source_guard.verify_originals()
+    return {"schema": "terminal-closed-call-cold-readback@1", "data_validated": True,
+        "head": expected_head.to_dict(), "scope": SCOPE, "model_status": generated["model_status"],
+        "cache_status": "hit", "native_callee_cold_validation_passed": True,
+        "native_callee_integration_readback_passed": True,
+        "caller_record_origin_verified": False, "checker_reinvoked": False, "training_steps": 0, **AUTHORITY}

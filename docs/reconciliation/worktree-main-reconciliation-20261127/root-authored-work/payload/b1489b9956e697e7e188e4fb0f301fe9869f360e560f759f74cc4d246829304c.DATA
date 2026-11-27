@@ -1,0 +1,15 @@
+-- Generated candidate embedding. No semantic axioms or program proofs are asserted.
+namespace IntentProjection
+
+structure Interpretation where
+  atom : String → List String → Prop
+  intended : Prop → Prop
+  required : Prop → Prop
+  prohibited : Prop → Prop
+  permitted : Prop → Prop
+  recommended : Prop → Prop
+
+def statement_0526292183e20680c5e35ee721049ed023039fa050ad01c281dd3143e61dfbbc (i : Interpretation) : Prop :=
+  i.required (i.atom "create_output_file" ["agent", "/app/out.html"])
+
+end IntentProjection

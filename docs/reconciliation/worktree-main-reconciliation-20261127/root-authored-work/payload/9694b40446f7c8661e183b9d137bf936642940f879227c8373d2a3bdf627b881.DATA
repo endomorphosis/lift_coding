@@ -1,0 +1,115 @@
+import PyAstNumericSubset
+import ObjectiveContainerSource
+
+/-!
+SOURCE-ONLY, UNCOMPILED, UNQUALIFIED.
+
+Scalar-fragment structural lowering. This file executes neither interpreter.
+Each accepted node is recomputed from the independent untyped syntax; every
+conditional branch is checked. Runtime errors are not static refusal errors.
+No dot/loss/gradient/model opcode or desired-output certificate is accepted.
+Comprehensions, indexing, length, fsum, dot normalization and assignments are
+retained in raw syntax but explicitly refused by this first phase.
+-/
+
+namespace RankerSupportedPythonAstReal
+
+open RankerObjectivePrefixIR (SourceTerm BinaryOp)
+open RankerObjectiveContainerLanguage (SourceExpr)
+
+inductive PyLowerError where
+  | invalidScope
+  | unknownName (identifier : PyName)
+  | unsupported (tag : String)
+  deriving DecidableEq
+
+def lowerOne {α β : Type} (f : α → β) : Except PyLowerError α → Except PyLowerError β
+  | .error problem => .error problem
+  | .ok value => .ok (f value)
+
+def lowerTwo {α β γ : Type} (f : α → β → γ) :
+    Except PyLowerError α → Except PyLowerError β → Except PyLowerError γ
+  | .error problem, _ => .error problem
+  | .ok _, .error problem => .error problem
+  | .ok left, .ok right => .ok (f left right)
+
+def lowerThree {α β γ δ : Type} (f : α → β → γ → δ) :
+    Except PyLowerError α → Except PyLowerError β → Except PyLowerError γ → Except PyLowerError δ
+  | .error problem, _, _ => .error problem
+  | .ok _, .error problem, _ => .error problem
+  | .ok _, .ok _, .error problem => .error problem
+  | .ok first, .ok second, .ok third => .ok (f first second third)
+
+def lowerBinaryOpcode : PyBinary → BinaryOp
+  | .add => .add
+  | .sub => .sub
+  | .mul => .mul
+  | .div => .div
+
+def lowerPrimitive : PyPrimitive → List (SourceExpr .scalar) →
+    Except PyLowerError (SourceExpr .scalar)
+  | .abs, [value] => .ok (.scalarUnary .abs value)
+  | .max, [left, right] => .ok (.scalarBinary .max left right)
+  | .exp, [value] => .ok (.scalarUnary .exp value)
+  | .log1p, [value] => .ok (.scalarUnary .log1p value)
+  | _, _ => .error (.unsupported "primitiveArity")
+
+mutual
+  def lowerSupportedAstAux (scope : List PyName) : PyExpr →
+      Except PyLowerError (SourceExpr .scalar)
+    | .name identifier => if identifier ∈ scope
+        then .ok (.leaf (.var identifier.spelling)) else .error (.unknownName identifier)
+    | .integer value => .ok (.leaf (.scalarLiteral (value : ℚ)))
+    | .floatLiteral _ ratio => .ok (.leaf (.scalarLiteral ratio))
+    | .unary .usub operand =>
+        lowerOne (.scalarUnary .neg) (lowerSupportedAstAux scope operand)
+    | .unary (.unsupported tag) _ => .error (.unsupported ("unary:" ++ tag))
+    | .binary op left right => lowerTwo (.scalarBinary (lowerBinaryOpcode op))
+        (lowerSupportedAstAux scope left) (lowerSupportedAstAux scope right)
+    | .call callee arguments =>
+        match resolveFixedCallee callee with
+        | none => .error (.unsupported "calleeBinding")
+        | some primitive =>
+            match lowerSupportedArguments scope arguments with
+            | .error problem => .error problem
+            | .ok values => lowerPrimitive primitive values
+    | .ifExp (.compare .ge condition (.integer 0)) thenBranch elseBranch =>
+        lowerThree SourceExpr.ifNonneg (lowerSupportedAstAux scope condition)
+          (lowerSupportedAstAux scope thenBranch) (lowerSupportedAstAux scope elseBranch)
+    | .ifExp _ _ _ => .error (.unsupported "ifTestMustBeGeIntegerZero")
+    | .compare _ _ _ => .error (.unsupported "nonNumericComparison")
+    | .subscript _ _ => .error (.unsupported "subscriptNotInScalarPhase")
+    | .listComp _ _ => .error (.unsupported "listCompNotInScalarPhase")
+    | .generatorExp _ _ => .error (.unsupported "generatorNotInScalarPhase")
+    | .unsupported tag => .error (.unsupported tag)
+  def lowerSupportedArguments (scope : List PyName) : PyArgs →
+      Except PyLowerError (List (SourceExpr .scalar))
+    | .nil => .ok []
+    | .cons first rest => lowerTwo List.cons
+        (lowerSupportedAstAux scope first) (lowerSupportedArguments scope rest)
+end
+
+/-- Public acceptance requires injective spelling and immutable pure globals.
+These are syntactic scope facts, with no runtime result or semantic equation. -/
+def lowerSupportedAst (scope : List PyName) (expression : PyExpr) :
+    Except PyLowerError (SourceExpr .scalar) :=
+  if scalarScopeValid scope then lowerSupportedAstAux scope expression
+  else .error .invalidScope
+
+theorem unbound_name_refused (scope : List PyName) (identifier : PyName)
+    (absent : identifier ∉ scope) :
+    lowerSupportedAstAux scope (.name identifier) = .error (.unknownName identifier) := by
+  simp only [lowerSupportedAstAux, if_neg absent]
+
+/-- The source interpreter can ignore this dead branch, but the structural
+lowerer still rejects its unsupported syntax. No evaluation premise is used. -/
+theorem unsupported_dead_branch_refused (scope : List PyName) (tag : String) :
+    lowerSupportedAstAux scope
+      (.ifExp (.compare .ge (.integer 1) (.integer 0)) (.integer 2) (.unsupported tag)) =
+      .error (.unsupported tag) := by
+  rfl
+
+#print axioms unbound_name_refused
+#print axioms unsupported_dead_branch_refused
+
+end RankerSupportedPythonAstReal

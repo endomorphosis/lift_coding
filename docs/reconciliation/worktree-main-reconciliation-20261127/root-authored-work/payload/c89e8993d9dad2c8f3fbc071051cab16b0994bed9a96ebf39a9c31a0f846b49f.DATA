@@ -1,0 +1,131 @@
+"""Historical rendered-input replay for distinct no-provider worker observations.
+
+Uses the existing source/capsule/projection replay kernel. The internal lookup
+identity is an observation ID; no router invocation schema or provider record is
+manufactured, and exact rendering does not imply transmission or task success.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import time
+
+from . import terminal_context_audit as context
+from ipfs_accelerate_py.agent_supervisor.runtime.model_input_observation_receipt import (
+    SCHEMA as OBSERVATION_SCHEMA, validate_model_input_observation,
+)
+
+SCHEMA = "terminal-model-input-observation-audit@1"
+
+
+def _base(reason):
+    return {"schema": SCHEMA, "status": "unknown", "reason": reason,
+        "all_rendered_model_inputs_verified": None, "observations": [], "capsules": [],
+        "provider_invocations_created": 0, "provider_calls": 0, "provider_transmission_verified": False,
+        "provider_usage_measured": False, "current_freshness_verified": False,
+        "task_correctness_established": False, "proof_authority": False,
+        "execution_authority": False, "completion_authority": False, "raw_prompts_exported": False}
+
+
+def _observation_bindings(item, workspace_root):
+    value = validate_model_input_observation(item)
+    if value["status"] != "observed":
+        raise ValueError("refused rendering cannot be verified as an observed packet")
+    # This is only the replay kernel's common fact table. Its schema stays the
+    # distinct observation schema, and its lookup ID never becomes a provider ID.
+    facts = {"schema": value["schema"], "phase": "coding", "invocation_id": value["observation_id"]}
+    for key in (*context.RECEIPT_FIELDS, *context.TRANSLATION_FIELDS):
+        if key in value and key not in {"schema", "wire_delivery_cleanup_status"}:
+            if key == "reviewed_source_nomination_context" and value[key] is None:
+                continue
+            facts[key] = value[key]
+    if value["wire_delivery_post_observation_verified"] is not None:
+        facts["wire_delivery_post_observation_verified"] = value["wire_delivery_post_observation_verified"]
+        facts["wire_delivery_cleanup_status"] = value["wire_delivery_cleanup_status"]
+    return context._input_bindings(facts, workspace_root)
+
+
+def audit_terminal_model_input_observations(*, state: Path, observations: list[dict], workspace_root: Path):
+    if type(observations) is not list or len(observations) > context.MAX_RECEIPTS:
+        raise ValueError("bounded explicit observation population required")
+    if not observations:
+        return _base("no_model_input_observation")
+    from ipfs_accelerate_py.agent_supervisor.runtime.supervisor_meta_index import public_replay_without_metadata
+    with public_replay_without_metadata():
+        replay = context._audit_terminal_context(state=state, receipts=observations,
+            workspace_root=workspace_root, input_parser=_observation_bindings)
+    verified = replay["all_observed_coding_inputs_verified"]
+    result = _base(replay["reason"])
+    result.update(status="verified_all_rendered_model_inputs" if verified is True else "unverified",
+        all_rendered_model_inputs_verified=verified, capsules=replay["capsules"],
+        observed_records_seen=replay["coding_receipts_seen"], usable_observation_records=replay["usable_coding_receipts"],
+        read_errors=replay["read_errors"], world_scope=replay["world_scope"],
+        input_scope="rendered router task input only; no provider transmission or provider harness/system context")
+    for key in ("context_result_sha256", "prepared_state_sha256"):
+        if key in replay:
+            result[key] = replay[key]
+    for item in replay["invocations"]:
+        row = {key: value for key, value in item.items() if key not in {"invocation_id", "model_input_verified", "status"}}
+        row.update(observation_id=item["invocation_id"], rendered_model_input_verified=item["model_input_verified"],
+            status="verified_exact_rendered_input" if item["model_input_verified"] is True else "unverified")
+        result["observations"].append(row)
+    result["matches"] = [{("observation_id" if key == "invocation_id" else key): value
+        for key, value in row.items()} for row in replay["matches"]]
+    return result
+
+
+def collect_terminal_model_input_observation_audit(*, state: Path, observations: list[dict],
+        workspace_root: Path, timeout_seconds: float = 3.0):
+    started = time.monotonic()
+    if timeout_seconds < .1:
+        return _base("audit_budget_unavailable")
+    try:
+        if type(observations) is not list or len(observations) > context.MAX_RECEIPTS:
+            return _base("audit_request_exceeds_bound")
+        raw = json.dumps(observations, allow_nan=False).encode()
+        if len(raw) > context.MAX_REQUEST_BYTES:
+            return _base("audit_request_exceeds_bound")
+        if not observations:
+            return _base("no_model_input_observation")
+        process = subprocess.run([sys.executable, "-B", "-P", "-m", __name__,
+            "--state", str(state), "--workspace-root", str(workspace_root)], input=raw,
+            capture_output=True, timeout=min(30., timeout_seconds), check=False,
+            env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"})
+        if process.returncode or len(process.stdout) > context.MAX_RESULT_BYTES:
+            return _base("audit_process_unavailable")
+        result = context._json(process.stdout)
+        if type(result) is not dict or result.get("schema") != SCHEMA:
+            return _base("audit_result_invalid")
+        result["seconds"] = time.monotonic() - started
+        return result
+    except subprocess.TimeoutExpired:
+        return _base("audit_timeout")
+    except (ValueError, TypeError, OSError):
+        return _base("audit_unavailable")
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--state", type=Path, required=True)
+    parser.add_argument("--workspace-root", type=Path, required=True)
+    args = parser.parse_args()
+    try:
+        raw = sys.stdin.buffer.read(context.MAX_REQUEST_BYTES + 1)
+        if len(raw) > context.MAX_REQUEST_BYTES:
+            raise ValueError("observation request exceeds bound")
+        result = audit_terminal_model_input_observations(state=args.state, observations=context._json(raw),
+            workspace_root=args.workspace_root)
+    except (ValueError, TypeError, OSError):
+        result = _base("audit_unavailable")
+    body = json.dumps(result, sort_keys=True, allow_nan=False)
+    if len(body.encode()) > context.MAX_RESULT_BYTES:
+        body = json.dumps(_base("audit_result_exceeds_bound"), sort_keys=True)
+    print(body)
+
+
+if __name__ == "__main__":
+    main()

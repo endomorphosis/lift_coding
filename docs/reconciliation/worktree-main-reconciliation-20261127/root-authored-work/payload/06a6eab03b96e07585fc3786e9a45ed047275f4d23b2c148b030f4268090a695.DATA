@@ -1,0 +1,151 @@
+import ObjectiveScalarIR
+
+set_option backward.isDefEq.respectTransparency false
+
+/-!
+UNCOMPILED, UNQUALIFIED SOURCE-ONLY CANDIDATE.
+
+Generic ordered container operations for a partial exact-real backend. The
+finite-index aliases provide kernel-side bounds; they are not evidence that a
+host compiler admitted the original Python inputs. List zip retains its
+shorter-input truncation. Empty means fail explicitly. The ordered real fold
+does not model CPython math.fsum, binary64, libm, or exception timing.
+
+The four query theorem bodies below have not been checked by Lean. They are
+prospective primitive bridges, not a source objective/gradient compiler or a
+proof of whole-source equivalence, training, convergence, or task satisfaction.
+-/
+
+namespace RankerObjectiveContainerIR
+
+noncomputable section
+
+open scoped BigOperators
+open RankerObjectiveIR (SliceError)
+
+/-- A generic finite-index environment, independent of the original 80 width. -/
+abbrev ExactVector (n : ℕ) := Fin n → ℝ
+
+/-- Generic row/coordinate indices, independent of the original four rows. -/
+abbrev ExactMatrix (rows columns : ℕ) := Fin rows → ExactVector columns
+
+/-- Kernel-side access is bounded by the index type. No Python indexing claim. -/
+def indexVector {n : ℕ} (values : ExactVector n) (index : Fin n) : ℝ :=
+  values index
+
+def indexRow {rows columns : ℕ} (values : ExactMatrix rows columns)
+    (row : Fin rows) (column : Fin columns) : ℝ :=
+  indexVector (values row) column
+
+/-- Apply bodies in list order; the first body error stops later evaluation. -/
+def mapExact {α β : Type} (body : α → Except SliceError β) :
+    List α → Except SliceError (List β)
+  | [] => .ok []
+  | first :: rest =>
+    match body first with
+    | .error problem => .error problem
+    | .ok value =>
+      match mapExact body rest with
+      | .error problem => .error problem
+      | .ok values => .ok (value :: values)
+
+/-- Pure generic zip; unequal inputs retain minimum-length truncation. -/
+def zipMap {α β γ : Type} (body : α → β → γ) (left : List α) (right : List β) : List γ :=
+  List.zipWith body left right
+
+theorem zipMap_length {α β γ : Type} (body : α → β → γ) (left : List α) (right : List β) :
+    (zipMap body left right).length = min left.length right.length := by
+  exact List.length_zipWith
+
+/-- Partial generic zip checks only pairs that exist, in ascending list order. -/
+def zipMapExact {α β γ : Type} (body : α → β → Except SliceError γ) :
+    List α → List β → Except SliceError (List γ)
+  | [], _ => .ok []
+  | _, [] => .ok []
+  | firstLeft :: restLeft, firstRight :: restRight =>
+    match body firstLeft firstRight with
+    | .error problem => .error problem
+    | .ok value =>
+      match zipMapExact body restLeft restRight with
+      | .error problem => .error problem
+      | .ok values => .ok (value :: values)
+
+/-- Typed finite inputs are projected to ascending lists, not silently resized. -/
+def mapVectorExact {α β : Type} {n : ℕ} (body : α → Except SliceError β)
+    (values : Fin n → α) : Except SliceError (List β) :=
+  mapExact body (List.ofFn values)
+
+def mapRowsExact {rows columns : ℕ} (body : ExactVector columns → Except SliceError ℝ)
+    (values : ExactMatrix rows columns) : Except SliceError (List ℝ) :=
+  mapVectorExact body values
+
+/-- All coordinates of Fin n, in ascending order; no host range parser yet. -/
+def rangeMapExact {n : ℕ} (body : Fin n → Except SliceError ℝ) : Except SliceError (List ℝ) :=
+  mapExact body (List.ofFn (fun index : Fin n => index))
+
+/-- Reuse the already captured exact-real ordered addition backend. -/
+def orderedFsum (values : List ℝ) : ℝ :=
+  RankerSourceSemantics.orderedFsum values
+
+/-- Scalar syntax calls this ordered backend; no CPython fsum equivalence. -/
+abbrev fsumExact := orderedFsum
+
+theorem orderedFsum_eq_sum (values : List ℝ) : orderedFsum values = values.sum := by
+  exact RankerSourceSemantics.orderedFsum_eq_sum values
+
+/-- Empty input refuses before Real division; this is a partial backend. -/
+def meanExact (values : List ℝ) : Except SliceError ℝ :=
+  if values.length = 0 then .error .divisionByZero
+  else .ok (orderedFsum values / (values.length : ℝ))
+
+/-- A generic body-success premise; no desired objective/gradient identity. -/
+theorem map_exact_ofFn_success {α β : Type} {n : ℕ}
+    (body : α → Except SliceError β) (inputs : Fin n → α) (outputs : Fin n → β)
+    (success : ∀ index, body (inputs index) = .ok (outputs index)) :
+    mapExact body (List.ofFn inputs) = .ok (List.ofFn outputs) := by
+  induction n with
+  | zero => simp [mapExact]
+  | succ n ih =>
+    rw [List.ofFn_succ, List.ofFn_succ]
+    simp only [mapExact, success 0]
+    rw [ih (fun index => inputs index.succ) (fun index => outputs index.succ)
+      (fun index => success index.succ)]
+
+/-- Generic positive row count is an explicit domain condition for the mean. -/
+theorem mean_exact_ofFn_success {n : ℕ} (positive : 0 < n) (values : Fin n → ℝ) :
+    meanExact (List.ofFn values) = .ok ((1 / (n : ℝ)) * ∑ index, values index) := by
+  have nonempty : n ≠ 0 := Nat.ne_of_gt positive
+  simp only [meanExact, List.length_ofFn, nonempty, if_false,
+    orderedFsum_eq_sum, List.sum_ofFn, div_eq_mul_inv, one_mul]
+  congr 1
+  exact mul_comm _ _
+
+theorem mean_exact_empty_refuses : meanExact [] = .error .divisionByZero := by
+  rfl
+
+/-- Equal factor/row lengths come from a shared Fin n domain. Generic zip
+still truncates; this theorem does not assume equality for arbitrary lists. -/
+theorem indexed_zip_fsum_ofFn_eq {n columns : ℕ}
+    (factors : Fin n → ℝ) (rows : ExactMatrix n columns) (column : Fin columns) :
+    orderedFsum (zipMap (fun factor row => factor * indexVector row column)
+      (List.ofFn factors) (List.ofFn rows)) =
+      ∑ index, factors index * rows index column := by
+  change RankerSourceSemantics.orderedFsum
+    (List.zipWith (fun factor row => factor * row column)
+      (List.ofFn factors) (List.ofFn rows)) = _
+  rw [RankerSourceSemantics.zipWith_ofFn_same_length,
+    RankerSourceSemantics.orderedFsum_eq_sum, List.sum_ofFn]
+
+#print axioms map_exact_ofFn_success
+#print axioms mean_exact_ofFn_success
+#print axioms mean_exact_empty_refuses
+#print axioms indexed_zip_fsum_ofFn_eq
+
+end
+
+end RankerObjectiveContainerIR
+
+#print axioms _root_.RankerObjectiveContainerIR.map_exact_ofFn_success
+#print axioms _root_.RankerObjectiveContainerIR.mean_exact_ofFn_success
+#print axioms _root_.RankerObjectiveContainerIR.mean_exact_empty_refuses
+#print axioms _root_.RankerObjectiveContainerIR.indexed_zip_fsum_ofFn_eq

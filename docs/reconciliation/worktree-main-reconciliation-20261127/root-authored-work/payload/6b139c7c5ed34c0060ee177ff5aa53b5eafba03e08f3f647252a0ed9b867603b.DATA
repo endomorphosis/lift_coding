@@ -1,0 +1,18 @@
+-- Generated candidate embedding. No semantic axioms or program proofs are asserted.
+namespace IntentProjection
+
+structure Interpretation where
+  atom : String → List String → Prop
+  intended : Prop → Prop
+  required : Prop → Prop
+  prohibited : Prop → Prop
+  permitted : Prop → Prop
+  recommended : Prop → Prop
+
+def statement_68cbbf66f0faeb8350f0f18ef2dbefa2521e0c49870c768c77112ceae35632ba (i : Interpretation) : Prop :=
+  i.required (i.atom "create_output_file" ["agent", "/app/task_file/output_data/plan_b1.jsonl"])
+
+def statement_3a7d364902da284fcad018748d55aa51b3b3343f2a677de4be54a29493916e15 (i : Interpretation) : Prop :=
+  i.required (i.atom "create_output_file" ["agent", "/app/task_file/output_data/plan_b2.jsonl"])
+
+end IntentProjection

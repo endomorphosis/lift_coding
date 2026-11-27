@@ -1,0 +1,57 @@
+#!/usr/bin/env python3
+"""Retain the v6 unresolved-confidence boundary and v7 original-cache control."""
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+import time
+HERE = Path(__file__).resolve().parent
+OUT = HERE / "unresolved_import_reuse_v6_v7"
+def sha(body): return hashlib.sha256(body).hexdigest()
+def read(path): return json.loads(path.read_text())
+def write(path, value): path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+def worker(name):
+    from ipfs_datasets_py.logic.software_contracts.content import cid_for_bytes
+    from ipfs_datasets_py.logic.software_contracts.semantic_index.scanner import RepositoryScanner
+    from ipfs_datasets_py.logic.software_contracts.semantic_index.snapshot import snapshot_repository
+    from ipfs_datasets_py.logic.software_contracts.semantic_state import build_semantic_state, verify_semantic_state_bundle
+    profile = read(OUT / (name + ".runtime.json")); profile_id = sha((OUT / (name + ".runtime.json")).read_bytes())
+    assert all(sha(Path(p).read_bytes()) == d for p, d in profile["files"].items())
+    with tempfile.TemporaryDirectory(prefix="ns-unresolved-import-") as tmp:
+        tree = Path(tmp); (tree / "importer.py").write_bytes(b"import target\n")
+        enabled = name.endswith("v7")
+        def scan(previous=None, observations=None):
+            scanner = RepositoryScanner(repository_id="repo:unresolved-import", **({"frontend_profile_sha256": profile_id} if enabled else {}))
+            kwargs = {} if observations is None else {"previous_frontend_observations": observations, "expected_previous_frontend_observations_cid": cid_for_bytes(observations)}
+            state = scanner.scan_snapshot(snapshot_repository(tree, repository_id="repo:unresolved-import", exclusions=()), {p.name: p.read_bytes() for p in tree.glob("*.py")}, previous_state=previous, **kwargs)
+            return state, getattr(scanner, "last_frontend_observations", None), scanner.last_reuse_diagnostics.to_dict()
+        baseline, observations, _ = scan(); (tree / "target.py").write_bytes(b"def go(): return 1\n")
+        cold, _, _ = scan(); inc, _, diag = scan(baseline, observations)
+        bundles = [build_semantic_state(s) for s in (cold, inc)]
+        for bundle in bundles: verify_semantic_state_bundle(bundle)
+        def imports(state): return [{"confidence": e.confidence, "resolution": e.metadata.get("resolution"), "target": e.target_id} for e in state.edges if e.relation == "imports"]
+        assert imports(baseline)[0]["confidence"] == "conservative" and imports(cold)[0]["confidence"] == "exact"
+        equal = cold.to_dict() == inc.to_dict() and bundles[0].root == bundles[1].root and dict(bundles[0].blocks) == dict(bundles[1].blocks)
+        assert equal == enabled and "importer.py" in diag["reused_paths"]
+        write(OUT / (name + ".result.json"), {"profile": name, "cold_incremental_state_root_all_blocks_equal": equal, "baseline_imports": imports(baseline), "cold_imports": imports(cold), "incremental_imports": imports(inc), "reuse": diag, "expected_behavior_observed": True})
+def main():
+    p=argparse.ArgumentParser();p.add_argument("--worker");a=p.parse_args()
+    if a.worker:return worker(a.worker)
+    OUT.mkdir(); results=[]
+    write(OUT / "freeze.json", {"driver_sha256": sha(Path(__file__).read_bytes()), "source_case": {"baseline": {"importer.py": "import target\\n"}, "added": {"target.py": "def go(): return 1\\n"}}, "bound_per_worker_seconds": 60})
+    for name, source in (("runtime_resolution_reuse_v6", HERE / "results_v14_full_pyparsing_resolution_guard/runtime_source_manifest.json"), ("runtime_frontend_observations_v7", HERE / "frontend_observations_validation_v7/runtime_source_manifest.json")):
+        profile=read(source);write(OUT / (name + ".runtime.json"), profile)
+        env=dict(os.environ, PYTHONPATH=":".join(profile["pythonpath"]),IPFS_ACCEL_SKIP_CORE="1",PYTHONDONTWRITEBYTECODE="1")
+        command=[sys.executable,"-B",str(Path(__file__)),"--worker",name];tick=time.perf_counter()
+        proc=subprocess.run(command,cwd="/tmp",env=env,capture_output=True,timeout=60)
+        (OUT/(name+'.stdout')).write_bytes(proc.stdout);(OUT/(name+'.stderr')).write_bytes(proc.stderr)
+        write(OUT/(name+'.process.json'),{"returncode":proc.returncode,"bound_seconds":60,"wall_seconds":time.perf_counter()-tick,"command":command})
+        if proc.returncode:raise SystemExit(1)
+        results.append(read(OUT/(name+'.result.json')))
+    write(OUT/'summary.json',{"schema":"ns-unresolved-import-reuse-boundary/v1","v6_cold_incremental_equivalence_passed":False,"v7_cold_incremental_equivalence_passed":True,"results":results,"limit":"Does not alter v14 exact comment-only qualification; v6 projection guard is not general lossless incremental reuse. No execution soundness consequence inferred.","provider_calls":0})
+    print(json.dumps({"v6_equivalence":False,"v7_equivalence":True}))
+if __name__=='__main__':main()

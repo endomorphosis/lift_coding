@@ -1,0 +1,1131 @@
+metricCalculation29ace DecoderKernel
+set_option autoImplicit false
+set_option maxRecDepth 65536
+set_option maxHeartbeats 4000000
+
+abbrev Scalars := List Nat
+structure Request where
+  id : Scalars
+  prompt : Nat
+  generated : Nat
+  deriving DecidableEq, BEq, ReflBEq, LawfulBEq
+structure Shape where
+  seq : Nat
+  heads : Nat
+  hidden : Nat
+  deriving DecidableEq, BEq, ReflBEq, LawfulBEq
+structure Row where
+  id : Scalars
+  batch : Scalars
+  shape : Shape
+  deriving DecidableEq, BEq, ReflBEq, LawfulBEq
+
+inductive Value where
+  | str : Scalars → Value
+  | nat : Nat → Value
+  | obj : List (Scalars × Value) → Value
+
+def maxNatural : Nat := 1000000000000000000
+def scalarValid (n : Nat) : Bool :=
+  decide (n ≤ 1114111 ∧ ¬ (55296 ≤ n ∧ n ≤ 57343))
+def continuation (n : Nat) : Bool := decide (128 ≤ n ∧ n ≤ 191)
+
+def utf8Scalar (raw : List Nat) : Option (Nat × List Nat) := do
+  match raw with
+  | [] => none
+  | a :: rest =>
+    if a < 128 then some (a, rest)
+    else if 194 ≤ a && a ≤ 223 then
+      match rest with
+      | b :: tail => if continuation b then some ((a - 192) * 64 + b - 128, tail) else none
+      | _ => none
+    else if 224 ≤ a && a ≤ 239 then
+      match rest with
+      | b :: c :: tail =>
+        let n := (a - 224) * 4096 + (b - 128) * 64 + c - 128
+        if continuation b && continuation c && 2048 ≤ n && scalarValid n then some (n, tail) else none
+      | _ => none
+    else if 240 ≤ a && a ≤ 244 then
+      match rest with
+      | b :: c :: d :: tail =>
+        let n := (a - 240) * 262144 + (b - 128) * 4096 + (c - 128) * 64 + d - 128
+        if continuation b && continuation c && continuation d && 65536 ≤ n && scalarValid n then some (n, tail) else none
+      | _ => none
+    else none
+
+def hexDigit (b : Nat) : Option Nat :=
+  if 48 ≤ b && b ≤ 57 then some (b - 48)
+  else if 65 ≤ b && b ≤ 70 then some (b - 55)
+  else if 97 ≤ b && b ≤ 102 then some (b - 87)
+  else none
+
+def hex4 (raw : List Nat) : Option (Nat × List Nat) := do
+  match raw with
+  | a :: b :: c :: d :: tail =>
+    let aa ← hexDigit a
+    let bb ← hexDigit b
+    let cc ← hexDigit c
+    let dd ← hexDigit d
+    some (aa * 4096 + bb * 256 + cc * 16 + dd, tail)
+  | _ => none
+
+def escapeScalar (raw : List Nat) : Option (Nat × List Nat) := do
+  match raw with
+  | 34 :: tail => some (34, tail)
+  | 92 :: tail => some (92, tail)
+  | 47 :: tail => some (47, tail)
+  | 98 :: tail => some (8, tail)
+  | 102 :: tail => some (12, tail)
+  | 110 :: tail => some (10, tail)
+  | 114 :: tail => some (13, tail)
+  | 116 :: tail => some (9, tail)
+  | 117 :: tail =>
+    let (n, tail) ← hex4 tail
+    if 55296 ≤ n && n ≤ 56319 then
+      match tail with
+      | 92 :: 117 :: tail =>
+        let (low, tail) ← hex4 tail
+        if 56320 ≤ low && low ≤ 57343 then
+          some (65536 + (n - 55296) * 1024 + low - 56320, tail)
+        else none
+      | _ => none
+    else if scalarValid n then some (n, tail) else none
+  | _ => none
+
+def parseString : Nat → List Nat → Scalars → Option (Scalars × List Nat)
+  | 0, _, _ => none
+  | _ + 1, [], _ => none
+  | fuel + 1, b :: tail, acc => do
+    if b == 34 then some (acc.reverse, tail)
+    else if b == 92 then
+      let (n, tail) ← escapeScalar tail
+      if n == 0 then none else parseString fuel tail (n :: acc)
+    else
+      let (n, tail) ← utf8Scalar (b :: tail)
+      if n < 32 then none else parseString fuel tail (n :: acc)
+
+def digit (b : Nat) : Bool := decide (48 ≤ b ∧ b ≤ 57)
+def parseDigits : Nat → List Nat → Nat → Option (Nat × List Nat)
+  | 0, _, _ => none
+  | fuel + 1, raw, acc =>
+    match raw with
+    | [] => some (acc, [])
+    | b :: tail =>
+      if digit b then
+        let next := acc * 10 + b - 48
+        if next ≤ maxNatural then parseDigits fuel tail next else none
+      else some (acc, raw)
+
+def parseNatural (raw : List Nat) : Option (Nat × List Nat) :=
+  match raw with
+  | [] => none
+  | 48 :: tail =>
+    match tail with
+    | b :: _ => if digit b then none else some (0, tail)
+    | [] => some (0, [])
+  | b :: _ => if 49 ≤ b && b ≤ 57 then parseDigits (raw.length + 1) raw 0 else none
+
+def whitespace (raw : List Nat) : List Nat := raw.dropWhile (fun b => b == 32 || b == 9)
+
+mutual
+  def parseValue : Nat → Nat → List Nat → Option (Value × List Nat)
+    | 0, _, _ => none
+    | fuel + 1, depth, raw => do
+      match whitespace raw with
+      | [] => none
+      | 34 :: tail =>
+        let (text, tail) ← parseString (tail.length + 1) tail []
+        some (.str text, tail)
+      | 123 :: tail =>
+        if depth < 8 then parseObject fuel (depth + 1) (whitespace tail) [] else none
+      | tail =>
+        let (n, tail) ← parseNatural tail
+        some (.nat n, tail)
+
+  def parseObject : Nat → Nat → List Nat → List (Scalars × Value) → Option (Value × List Nat)
+    | 0, _, _, _ => none
+    | fuel + 1, depth, raw, acc => do
+      match raw with
+      | 125 :: tail => if acc.isEmpty then some (.obj [], tail) else none
+      | 34 :: tail =>
+        let (key, tail) ← parseString (tail.length + 1) tail []
+        if (acc.map Prod.fst).contains key then none else
+          match whitespace tail with
+          | 58 :: tail =>
+            let (value, tail) ← parseValue fuel depth tail
+            let fields := (key, value) :: acc
+            match whitespace tail with
+            | 125 :: tail => some (.obj fields.reverse, tail)
+            | 44 :: tail => parseObject fuel depth (whitespace tail) fields
+            | _ => none
+          | _ => none
+      | _ => none
+end
+
+def physicalLinesAux : List Nat → List Nat → List (List Nat) → List (List Nat)
+  | [], current, acc => if current.isEmpty then acc.reverse else (current.reverse :: acc).reverse
+  | b :: tail, current, acc =>
+    if b == 10 then physicalLinesAux tail [] ((b :: current).reverse :: acc)
+    else physicalLinesAux tail (b :: current) acc
+
+def physicalLines (raw : List Nat) : List (List Nat) := physicalLinesAux raw [] []
+def recordBytes (physical : List Nat) : List Nat :=
+  match physical.reverse with
+  | 10 :: 13 :: tail => tail.reverse
+  | 10 :: tail => tail.reverse
+  | _ => physical
+
+def parseLine (physical : List Nat) : Option Value := do
+  if physical.length > 8192 then none else
+    let raw := recordBytes physical
+    if raw.contains 13 then none else
+      let (value, tail) ← parseValue (raw.length + 1) 0 raw
+      if (whitespace tail).isEmpty then some value else none
+
+def field (fields : List (Scalars × Value)) (key : Scalars) : Option Value :=
+  (fields.find? (fun pair => pair.1 == key)).map Prod.snd
+def exactKeys (fields : List (Scalars × Value)) (keys : List Scalars) : Bool :=
+  fields.length == keys.length && keys.all (fun key => (fields.map Prod.fst).contains key)
+
+def scalarBytes (n : Nat) : Nat :=
+  if n < 128 then 1 else if n < 2048 then 2 else if n < 65536 then 3 else 4
+def identifier (v : Value) : Option Scalars :=
+  match v with
+  | .str s =>
+    if s.contains 0 || (s.map scalarBytes).sum > 512 then none else some s
+  | _ => none
+def natural (v : Value) : Option Nat :=
+  match v with
+  | .nat n => if n ≤ maxNatural then some n else none
+  | _ => none
+
+def requestIDKey : Scalars := [114,101,113,117,101,115,116,95,105,100]
+def promptKey : Scalars := [112,114,111,109,112,116,95,108,101,110]
+def generatedKey : Scalars := [103,101,110,95,108,101,110]
+def batchKey : Scalars := [98,97,116,99,104,95,105,100]
+def shapeKey : Scalars := [115,104,97,112,101]
+def seqKey : Scalars := [115,101,113,95,97,108,105,103,110]
+def headsKey : Scalars := [104,101,97,100,115,95,97,108,105,103,110]
+def hiddenKey : Scalars := [104,105,100,100,101,110,95,97,108,105,103,110]
+
+def request (v : Value) : Option Request := do
+  match v with
+  | .obj fields =>
+    if exactKeys fields [requestIDKey, promptKey, generatedKey] then
+      let id ← identifier (← field fields requestIDKey)
+      let prompt ← natural (← field fields promptKey)
+      let generated ← natural (← field fields generatedKey)
+      some { id, prompt, generated }
+    else none
+  | _ => none
+
+def shape (v : Value) : Option Shape := do
+  match v with
+  | .obj fields =>
+    if exactKeys fields [seqKey, headsKey, hiddenKey] then
+      let seq ← natural (← field fields seqKey)
+      let heads ← natural (← field fields headsKey)
+      let hidden ← natural (← field fields hiddenKey)
+      some { seq, heads, hidden }
+    else none
+  | _ => none
+
+def row (v : Value) : Option Row := do
+  match v with
+  | .obj fields =>
+    if exactKeys fields [requestIDKey, batchKey, shapeKey] then
+      let id ← identifier (← field fields requestIDKey)
+      let batch ← identifier (← field fields batchKey)
+      let shape ← shape (← field fields shapeKey)
+      some { id, batch, shape }
+    else none
+  | _ => none
+
+def fileValues (raw : List Nat) : Option (List Value) := do
+  if raw.length > 65536 || raw.any (fun b => b > 255 || b == 0) then none else
+    let lines := physicalLines raw
+    if lines.length > 256 then none else lines.mapM parseLine
+
+def decodeRequests (raw : List Nat) : Option (List Request) := do
+  let values ← fileValues raw
+  let requests ← values.mapM request
+  if decide (requests.map Request.id).Nodup then some requests else none
+
+def decodePlans (raw : List Nat) : Option (List Row) := do
+  let values ← fileValues raw
+  let rows ← values.mapM row
+  if decide (rows.map Row.id).Nodup then some rows else none
+
+def inputIDs (requests : List Request) : List Scalars := requests.map Request.id
+def outputIDs (rows : List Row) : List Scalars := rows.map Row.id
+def coverageCheck (requests : List Request) (rows : List Row) : Bool :=
+  (outputIDs rows).isPerm (inputIDs requests)
+def ceil64 (prompt : Nat) : Nat := ((prompt + 63) / 64) * 64
+def shapeCheck (request : Request) (row : Row) : Bool :=
+  decide (row.shape.heads = 32 ∧ row.shape.hidden = 4096 ∧
+    row.shape.seq % 64 = 0 ∧ ceil64 request.prompt ≤ row.shape.seq)
+def allShapeCheck (requests : List Request) (rows : List Row) : Bool :=
+  rows.all (fun row => requests.any (fun request => request.id == row.id && shapeCheck request row))
+def batchCheck (rows : List Row) : Bool :=
+  rows.all (fun a => rows.all (fun b => a.batch != b.batch || a.shape == b.shape))
+def usedShapes (a b : List Row) : List Shape := ((a ++ b).map Row.shape).eraseDups
+def globalCapCheck (a b : List Row) : Bool := decide ((usedShapes a b).length ≤ 8)
+def fractionBelowCheck (value : Fraction) (numerator denominator : Nat) : Bool :=
+  decide (0 < value.denominator ∧ 0 < denominator ∧
+    value.numerator * denominator < numerator * value.denominator)
+def thresholdCheck (metrics : Metrics) (bucket : Nat) : Bool :=
+  if bucket = 1 then
+    fractionBelowCheck metrics.cost 300000000000 1 &&
+    fractionBelowCheck metrics.padding 55 1000 &&
+    fractionBelowCheck metrics.latency 2100000 1 &&
+    fractionBelowCheck metrics.sequential 270000000 1
+  else
+    fractionBelowCheck metrics.cost 48000000000 1 &&
+    fractionBelowCheck metrics.padding 15 100 &&
+    fractionBelowCheck metrics.latency 210000 1 &&
+    fractionBelowCheck metrics.sequential 32000000 1
+def bucketCheck (bucket : Bucket) (bucketID : Nat) : Bool :=
+  coverageCheck bucket.requests bucket.rows &&
+  decide (inputIDs bucket.requests).Nodup &&
+  allShapeCheck bucket.requests bucket.rows && batchCheck bucket.rows &&
+  thresholdCheck bucket.metrics bucketID && decide (bucket.before = bucket.after)
+def modelAccept (a b : Bucket) : Bool :=
+  bucketCheck a 1 && bucketCheck b 2 && globalCapCheck a.rows b.rows
+end DecoderKernel
+namespace DecoderKernel
+set_option autoImplicit false
+
+-- A decimal-rational mathematical projection of the retained source profile.
+-- These definitions do not model Python binary64 rounding or source execution.
+def scalarLE : Scalars → Scalars → Bool
+  | [], _ => true
+  | _ :: _, [] => false
+  | a :: aa, b :: bb => if a < b then true else if b < a then false else scalarLE aa bb
+
+def metricInsert {α : Type} (le : α → α → Bool) (x : α) : List α → List α
+  | [] => [x]
+  | y :: ys => if le x y then x :: y :: ys else y :: metricInsert le x ys
+def metricSort {α : Type} (le : α → α → Bool) : List α → List α
+  | [] => []
+  | x :: xs => metricInsert le x (metricSort le xs)
+
+def sumNats (xs : List Nat) : Nat := xs.foldl (· + ·) 0
+def maxNats (xs : List Nat) : Nat := xs.foldl max 0
+def sumSquares (a n : Nat) : Nat :=
+  n * (a * a) + a * n * (n - 1) + (n * (n - 1) * (2 * n - 1)) / 6
+def sumLinear (a n : Nat) : Nat := n * a + (n * (n - 1)) / 2
+def prefillCost (s : Nat) : Nat := 2 * s * s + 4096 * s
+def prefillLatencyUnits (s : Nat) : Nat := 5 * s * s + 15360 * s
+def decodeCost (s g : Nat) : Nat := sumSquares s g + 2048 * sumLinear s g
+def decodeLatencyUnits (s g : Nat) : Nat := 3 * sumSquares s g + 6144 * sumLinear s g
+
+structure MetricBatch where
+  id : Scalars
+  shape : Shape
+  cost : Nat
+  padding : Nat
+  real : Nat
+  latencyUnits : List Nat
+  deriving DecidableEq
+
+def lastShape (rows : List Row) (bid : Scalars) : Shape :=
+  rows.foldl (fun shape row => if row.batch == bid then row.shape else shape)
+    { seq := 0, heads := 32, hidden := 4096 }
+
+def batchFromRequests (bid : Scalars) (shape : Shape) (requests : List Request) : MetricBatch :=
+  let s := maxNats (requests.map (fun request => ceil64 request.prompt))
+  let g := maxNats (requests.map Request.generated)
+  { id := bid, shape := shape,
+    cost := sumNats (requests.map (fun request => prefillCost (ceil64 request.prompt))) +
+      requests.length * decodeCost s g,
+    padding := sumNats (requests.map (fun request => ceil64 request.prompt - request.prompt)) +
+      sumNats (requests.map (fun request => g - request.generated)),
+    real := sumNats (requests.map (fun request => request.prompt + request.generated)),
+    latencyUnits := requests.map (fun request =>
+      prefillLatencyUnits (ceil64 request.prompt) + decodeLatencyUnits s g + 20000) }
+
+def metricBatches (requests : List Request) (rows : List Row) : Option (List MetricBatch) :=
+  (metricSort scalarLE ((rows.map Row.batch).eraseDups)).mapM (fun bid => do
+    let selected := rows.filter (fun row => row.batch == bid)
+    let rs ← selected.mapM (fun row => requests.find? (fun request => request.id == row.id))
+    some (batchFromRequests bid (lastShape rows bid) rs))
+
+def compileCost (shape : Shape) : Nat :=
+  if shape.seq = 0 then 0 else 500 * shape.seq * shape.seq + 8192 * shape.seq
+
+def chargeCompilation (batches : List MetricBatch) : List MetricBatch :=
+  (batches.foldl (fun (state : List Shape × List MetricBatch) batch =>
+    let already := state.1.contains batch.shape
+    let charged := if already then batch else
+      { batch with latencyUnits := match batch.latencyUnits with
+        | [] => []
+        | x :: xs => (x + 3750000) :: xs }
+    (batch.shape :: state.1, state.2 ++ [charged])) ([], [])).2
+
+def p95Units (latencies : List Nat) : Nat :=
+  let sorted := metricSort (fun a b => decide (a ≤ b)) latencies
+  let index := min (latencies.length - 1) (((19 * latencies.length + 19) / 20) - 1)
+  sorted[index]?.getD 0
+
+def metricProfile (requests : List Request) (rows : List Row) : Bool :=
+  decide (requests.length ≤ 256 ∧ rows.length ≤ 256) &&
+  requests.all (fun request => decide (request.prompt ≤ 4096 ∧ request.generated ≤ 1024)) &&
+  rows.all (fun row => decide (row.shape.seq ≤ 8192))
+
+def derivedMetrics (requests : List Request) (rows : List Row) : Option Metrics := do
+  if !metricProfile requests rows then none else do
+    let raw ← metricBatches requests rows
+    let charged := chargeCompilation raw
+    let shapes := (raw.map MetricBatch.shape).eraseDups
+    let cost := sumNats (raw.map MetricBatch.cost) +
+      sumNats (shapes.map compileCost) + 10000000 * raw.length
+    let padding := sumNats (raw.map MetricBatch.padding)
+    let real := max 1 (sumNats (raw.map MetricBatch.real))
+    let latencies := charged.flatMap MetricBatch.latencyUnits
+    let sequential := sumNats (charged.map (fun batch => maxNats batch.latencyUnits))
+    some {
+      cost := { numerator := cost, denominator := 1 },
+      padding := { numerator := padding, denominator := real },
+      latency := { numerator := p95Units latencies, denominator := 2500 },
+      sequential := { numerator := sequential, denominator := 2500 } }
+
+def derivedModelAccept (a b : Bucket) : Option Bool := do
+  let ma ← derivedMetrics a.requests a.rows
+  let mb ← derivedMetrics b.requests b.rows
+  some (modelAccept { a with metrics := ma } { b with metrics := mb })
+
+def fractionEquivalent (a b : Fraction) : Bool :=
+  decide (0 < a.denominator ∧ 0 < b.denominator ∧
+    a.numerator * b.denominator = b.numerator * a.denominator)
+def metricsEquivalent (a b : Metrics) : Bool :=
+  fractionEquivalent a.cost b.cost && fractionEquivalent a.padding b.padding &&
+  fractionEquivalent a.latency b.latency && fractionEquivalent a.sequential b.sequential
+def metricsMatch (actual : Option Metrics) (expected : Metrics) : Bool :=
+  match actual with
+  | none => false
+  | some value => metricsEquivalent value expected
+
+end DecoderKernel
+
+namespace DecoderKernel
+set_option maxRecDepth 65536
+set_option maxHeartbeats 4000000
+theorem sum_square_zero : sumSquares 64 0 = 0 := by decide
+#print axioms sum_square_zero
+theorem sum_square_one : sumSquares 64 1 = 4096 := by decide
+#print axioms sum_square_one
+theorem sum_square_two : sumSquares 64 2 = 4096 + 4225 := by decide
+#print axioms sum_square_two
+theorem sum_square_seven : sumSquares 64 7 = sumNats ((List.range 7).map (fun k => (64+k)*(64+k))) := by decide
+#print axioms sum_square_seven
+theorem sum_linear_seven : sumLinear 64 7 = sumNats ((List.range 7).map (fun k => 64+k)) := by decide
+#print axioms sum_linear_seven
+theorem nearest_rank_empty : p95Units [] = 0 := by decide
+#print axioms nearest_rank_empty
+theorem nearest_rank_twenty : p95Units (List.range 20) = 18 := by decide
+#print axioms nearest_rank_twenty
+theorem nearest_rank_twenty_one : p95Units (List.range 21) = 19 := by decide
+#print axioms nearest_rank_twenty_one
+def metricRaw0 : List Nat := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10]
+def metricRows0 : List Request := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], prompt := 64, generated := 1 }]
+theorem exact_metric_file_0 : decodeRequests metricRaw0 = some metricRows0 := by decide
+#print axioms exact_metric_file_0
+def metricRaw1 : List Nat := [123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,48,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,54,52,125,125,10]
+def metricRows1 : List Row := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 64, heads := 32, hidden := 4096 } }]
+theorem exact_metric_file_1 : decodePlans metricRaw1 = some metricRows1 := by decide
+#print axioms exact_metric_file_1
+def metricRaw2 : List Nat := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10]
+def metricRows2 : List Request := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 128, generated := 1 }]
+theorem exact_metric_file_2 : decodeRequests metricRaw2 = some metricRows2 := by decide
+#print axioms exact_metric_file_2
+def metricRaw3 : List Nat := [123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,48,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,49,50,56,125,125,10]
+def metricRows3 : List Row := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 128, heads := 32, hidden := 4096 } }]
+theorem exact_metric_file_3 : decodePlans metricRaw3 = some metricRows3 := by decide
+#print axioms exact_metric_file_3
+def metricCase0Bucket1 : Bucket := { requests := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], prompt := 64, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 64, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 12977792, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1294756, denominator := 625 }, sequential := { numerator := 1294756, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10] }
+def metricCalculation0Requests : List Request := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], prompt := 64, generated := 1 }]
+def metricCalculation0Rows : List Row := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 64, heads := 32, hidden := 4096 } }]
+def metricCalculation0Expected : Metrics := { cost := { numerator := 12977792, denominator := 1 }, padding := { numerator := 0, denominator := 65 }, latency := { numerator := 5179024, denominator := 2500 }, sequential := { numerator := 5179024, denominator := 2500 } }
+theorem exact_metric_calculation_0 : derivedMetrics metricCalculation0Requests metricCalculation0Rows = some metricCalculation0Expected := by decide
+#print axioms exact_metric_calculation_0
+theorem exact_metrics_0_1 : metricsMatch (derivedMetrics metricCase0Bucket1.requests metricCase0Bucket1.rows) { cost := { numerator := 12977792, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1294756, denominator := 625 }, sequential := { numerator := 1294756, denominator := 625 } } = true := by
+  change metricsMatch (derivedMetrics metricCalculation0Requests metricCalculation0Rows) { cost := { numerator := 12977792, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1294756, denominator := 625 }, sequential := { numerator := 1294756, denominator := 625 } } = true
+  rw [exact_metric_calculation_0]
+  decide
+#print axioms exact_metrics_0_1
+def metricCase0Bucket2 : Bucket := { requests := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 128, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10] }
+def metricCalculation1Requests : List Request := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 128, generated := 1 }]
+def metricCalculation1Rows : List Row := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 128, heads := 32, hidden := 4096 } }]
+def metricCalculation1Expected : Metrics := { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 129 }, latency := { numerator := 6653584, denominator := 2500 }, sequential := { numerator := 6653584, denominator := 2500 } }
+theorem exact_metric_calculation_1 : derivedMetrics metricCalculation1Requests metricCalculation1Rows = some metricCalculation1Expected := by decide
+#print axioms exact_metric_calculation_1
+theorem exact_metrics_0_2 : metricsMatch (derivedMetrics metricCase0Bucket2.requests metricCase0Bucket2.rows) { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } } = true := by
+  change metricsMatch (derivedMetrics metricCalculation1Requests metricCalculation1Rows) { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } } = true
+  rw [exact_metric_calculation_1]
+  decide
+#print axioms exact_metrics_0_2
+theorem exact_derived_outcome_0 : derivedModelAccept metricCase0Bucket1 metricCase0Bucket2 = some true := by
+  unfold derivedModelAccept
+  rw [show derivedMetrics metricCase0Bucket1.requests metricCase0Bucket1.rows = some metricCalculation0Expected from exact_metric_calculation_0]
+  rw [show derivedMetrics metricCase0Bucket2.requests metricCase0Bucket2.rows = some metricCalculation1Expected from exact_metric_calculation_1]
+  decide
+#print axioms exact_derived_outcome_0
+def decodedDerivedOutcome0 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw0
+  let rows1 ← decodePlans metricRaw1
+  let requests2 ← decodeRequests metricRaw2
+  let rows2 ← decodePlans metricRaw3
+  derivedModelAccept { metricCase0Bucket1 with requests := requests1, rows := rows1 } { metricCase0Bucket2 with requests := requests2, rows := rows2 }
+theorem exact_decoded_derived_outcome_0 : decodedDerivedOutcome0 = some true := by
+  simpa only [decodedDerivedOutcome0, exact_metric_file_0, metricRows0, exact_metric_file_1, metricRows1, exact_metric_file_2, metricRows2, exact_metric_file_3, metricRows3, Option.bind_eq_bind, Option.bind_some, metricCase0Bucket1, metricCase0Bucket2] using exact_derived_outcome_0
+#print axioms exact_decoded_derived_outcome_0
+def metricRaw4 : List Nat := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,49,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,57,50,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,50,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,50,53,54,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,51,34,125,10]
+def metricRows4 : List Request := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], prompt := 64, generated := 1 },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,49], prompt := 128, generated := 1 },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,50], prompt := 192, generated := 1 },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,51], prompt := 256, generated := 1 }]
+theorem exact_metric_file_4 : decodeRequests metricRaw4 = some metricRows4 := by decide
+#print axioms exact_metric_file_4
+def metricRaw5 : List Nat := [123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,48,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,54,52,125,125,10,123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,49,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,49,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,49,50,56,125,125,10,123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,50,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,50,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,49,57,50,125,125,10,123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,51,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,51,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,50,53,54,125,125,10]
+def metricRows5 : List Row := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 64, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,49], batch := [98,97,116,99,104,49], shape := { seq := 128, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,50], batch := [98,97,116,99,104,50], shape := { seq := 192, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,51], batch := [98,97,116,99,104,51], shape := { seq := 256, heads := 32, hidden := 4096 } }]
+theorem exact_metric_file_5 : decodePlans metricRaw5 = some metricRows5 := by decide
+#print axioms exact_metric_file_5
+def metricRaw6 : List Nat := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,51,50,48,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,51,56,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,49,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,52,52,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,50,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,53,49,50,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,51,34,125,10]
+def metricRows6 : List Request := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 320, generated := 1 },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,49], prompt := 384, generated := 1 },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,50], prompt := 448, generated := 1 },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,51], prompt := 512, generated := 1 }]
+theorem exact_metric_file_6 : decodeRequests metricRaw6 = some metricRows6 := by decide
+#print axioms exact_metric_file_6
+def metricRaw7 : List Nat := [123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,48,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,51,50,48,125,125,10,123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,49,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,49,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,51,56,52,125,125,10,123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,50,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,50,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,52,52,56,125,125,10,123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,51,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,51,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,53,49,50,125,125,10]
+def metricRows7 : List Row := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 320, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,49], batch := [98,97,116,99,104,49], shape := { seq := 384, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,50], batch := [98,97,116,99,104,50], shape := { seq := 448, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,51], batch := [98,97,116,99,104,51], shape := { seq := 512, heads := 32, hidden := 4096 } }]
+theorem exact_metric_file_7 : decodePlans metricRaw7 = some metricRows7 := by decide
+#print axioms exact_metric_file_7
+def metricCase1Bucket1 : Bucket := { requests := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], prompt := 64, generated := 1 },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,49], prompt := 128, generated := 1 },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,50], prompt := 192, generated := 1 },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,51], prompt := 256, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 64, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,49], batch := [98,97,116,99,104,49], shape := { seq := 128, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,50], batch := [98,97,116,99,104,50], shape := { seq := 192, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,51], batch := [98,97,116,99,104,51], shape := { seq := 256, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 110983680, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 2449828, denominator := 625 }, sequential := { numerator := 298256, denominator := 25 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,49,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,57,50,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,50,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,50,53,54,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,51,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,49,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,57,50,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,50,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,50,53,54,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,51,34,125,10] }
+def metricCalculation2Requests : List Request := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], prompt := 64, generated := 1 },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,49], prompt := 128, generated := 1 },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,50], prompt := 192, generated := 1 },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,51], prompt := 256, generated := 1 }]
+def metricCalculation2Rows : List Row := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 64, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,49], batch := [98,97,116,99,104,49], shape := { seq := 128, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,50], batch := [98,97,116,99,104,50], shape := { seq := 192, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,51], batch := [98,97,116,99,104,51], shape := { seq := 256, heads := 32, hidden := 4096 } }]
+def metricCalculation2Expected : Metrics := { cost := { numerator := 110983680, denominator := 1 }, padding := { numerator := 0, denominator := 644 }, latency := { numerator := 9799312, denominator := 2500 }, sequential := { numerator := 29825600, denominator := 2500 } }
+theorem exact_metric_calculation_2 : derivedMetrics metricCalculation2Requests metricCalculation2Rows = some metricCalculation2Expected := by decide
+#print axioms exact_metric_calculation_2
+theorem exact_metrics_1_1 : metricsMatch (derivedMetrics metricCase1Bucket1.requests metricCase1Bucket1.rows) { cost := { numerator := 110983680, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 2449828, denominator := 625 }, sequential := { numerator := 298256, denominator := 25 } } = true := by
+  change metricsMatch (derivedMetrics metricCalculation2Requests metricCalculation2Rows) { cost := { numerator := 110983680, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 2449828, denominator := 625 }, sequential := { numerator := 298256, denominator := 25 } } = true
+  rw [exact_metric_calculation_2]
+  decide
+#print axioms exact_metrics_1_1
+def metricCase1Bucket2 : Bucket := { requests := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 320, generated := 1 },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,49], prompt := 384, generated := 1 },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,50], prompt := 448, generated := 1 },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,51], prompt := 512, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 320, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,49], batch := [98,97,116,99,104,49], shape := { seq := 384, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,50], batch := [98,97,116,99,104,50], shape := { seq := 448, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,51], batch := [98,97,116,99,104,51], shape := { seq := 512, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 422345216, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 168772, denominator := 25 }, sequential := { numerator := 14141072, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,51,50,48,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,51,56,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,49,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,52,52,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,50,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,53,49,50,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,51,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,51,50,48,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,51,56,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,49,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,52,52,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,50,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,53,49,50,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,51,34,125,10] }
+def metricCalculation3Requests : List Request := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 320, generated := 1 },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,49], prompt := 384, generated := 1 },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,50], prompt := 448, generated := 1 },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,51], prompt := 512, generated := 1 }]
+def metricCalculation3Rows : List Row := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 320, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,49], batch := [98,97,116,99,104,49], shape := { seq := 384, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,50], batch := [98,97,116,99,104,50], shape := { seq := 448, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,51], batch := [98,97,116,99,104,51], shape := { seq := 512, heads := 32, hidden := 4096 } }]
+def metricCalculation3Expected : Metrics := { cost := { numerator := 422345216, denominator := 1 }, padding := { numerator := 0, denominator := 1668 }, latency := { numerator := 16877200, denominator := 2500 }, sequential := { numerator := 56564288, denominator := 2500 } }
+theorem exact_metric_calculation_3 : derivedMetrics metricCalculation3Requests metricCalculation3Rows = some metricCalculation3Expected := by decide
+#print axioms exact_metric_calculation_3
+theorem exact_metrics_1_2 : metricsMatch (derivedMetrics metricCase1Bucket2.requests metricCase1Bucket2.rows) { cost := { numerator := 422345216, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 168772, denominator := 25 }, sequential := { numerator := 14141072, denominator := 625 } } = true := by
+  change metricsMatch (derivedMetrics metricCalculation3Requests metricCalculation3Rows) { cost := { numerator := 422345216, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 168772, denominator := 25 }, sequential := { numerator := 14141072, denominator := 625 } } = true
+  rw [exact_metric_calculation_3]
+  decide
+#print axioms exact_metrics_1_2
+theorem exact_derived_outcome_1 : derivedModelAccept metricCase1Bucket1 metricCase1Bucket2 = some true := by
+  unfold derivedModelAccept
+  rw [show derivedMetrics metricCase1Bucket1.requests metricCase1Bucket1.rows = some metricCalculation2Expected from exact_metric_calculation_2]
+  rw [show derivedMetrics metricCase1Bucket2.requests metricCase1Bucket2.rows = some metricCalculation3Expected from exact_metric_calculation_3]
+  decide
+#print axioms exact_derived_outcome_1
+def decodedDerivedOutcome1 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw4
+  let rows1 ← decodePlans metricRaw5
+  let requests2 ← decodeRequests metricRaw6
+  let rows2 ← decodePlans metricRaw7
+  derivedModelAccept { metricCase1Bucket1 with requests := requests1, rows := rows1 } { metricCase1Bucket2 with requests := requests2, rows := rows2 }
+theorem exact_decoded_derived_outcome_1 : decodedDerivedOutcome1 = some true := by
+  simpa only [decodedDerivedOutcome1, exact_metric_file_4, metricRows4, exact_metric_file_5, metricRows5, exact_metric_file_6, metricRows6, exact_metric_file_7, metricRows7, Option.bind_eq_bind, Option.bind_some, metricCase1Bucket1, metricCase1Bucket2] using exact_derived_outcome_1
+#print axioms exact_decoded_derived_outcome_1
+def metricRaw8 : List Nat := []
+def metricRows8 : List Request := []
+theorem exact_metric_file_8 : decodeRequests metricRaw8 = some metricRows8 := by decide
+#print axioms exact_metric_file_8
+def metricRaw9 : List Nat := []
+def metricRows9 : List Row := []
+theorem exact_metric_file_9 : decodePlans metricRaw9 = some metricRows9 := by decide
+#print axioms exact_metric_file_9
+def metricCase2Bucket1 : Bucket := { requests := [], rows := [], metrics := { cost := { numerator := 0, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 0, denominator := 1 }, sequential := { numerator := 0, denominator := 1 } }, before := [], after := [] }
+def metricCalculation4Requests : List Request := []
+def metricCalculation4Rows : List Row := []
+def metricCalculation4Expected : Metrics := { cost := { numerator := 0, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 0, denominator := 2500 }, sequential := { numerator := 0, denominator := 2500 } }
+theorem exact_metric_calculation_4 : derivedMetrics metricCalculation4Requests metricCalculation4Rows = some metricCalculation4Expected := by decide
+#print axioms exact_metric_calculation_4
+theorem exact_metrics_2_1 : metricsMatch (derivedMetrics metricCase2Bucket1.requests metricCase2Bucket1.rows) { cost := { numerator := 0, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 0, denominator := 1 }, sequential := { numerator := 0, denominator := 1 } } = true := by
+  change metricsMatch (derivedMetrics metricCalculation4Requests metricCalculation4Rows) { cost := { numerator := 0, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 0, denominator := 1 }, sequential := { numerator := 0, denominator := 1 } } = true
+  rw [exact_metric_calculation_4]
+  decide
+#print axioms exact_metrics_2_1
+def metricCase2Bucket2 : Bucket := { requests := [], rows := [], metrics := { cost := { numerator := 0, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 0, denominator := 1 }, sequential := { numerator := 0, denominator := 1 } }, before := [], after := [] }
+theorem exact_metrics_2_2 : metricsMatch (derivedMetrics metricCase2Bucket2.requests metricCase2Bucket2.rows) { cost := { numerator := 0, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 0, denominator := 1 }, sequential := { numerator := 0, denominator := 1 } } = true := by
+  change metricsMatch (derivedMetrics metricCalculation4Requests metricCalculation4Rows) { cost := { numerator := 0, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 0, denominator := 1 }, sequential := { numerator := 0, denominator := 1 } } = true
+  rw [exact_metric_calculation_4]
+  decide
+#print axioms exact_metrics_2_2
+theorem exact_derived_outcome_2 : derivedModelAccept metricCase2Bucket1 metricCase2Bucket2 = some true := by
+  unfold derivedModelAccept
+  rw [show derivedMetrics metricCase2Bucket1.requests metricCase2Bucket1.rows = some metricCalculation4Expected from exact_metric_calculation_4]
+  rw [show derivedMetrics metricCase2Bucket2.requests metricCase2Bucket2.rows = some metricCalculation4Expected from exact_metric_calculation_4]
+  decide
+#print axioms exact_derived_outcome_2
+def decodedDerivedOutcome2 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw8
+  let rows1 ← decodePlans metricRaw9
+  let requests2 ← decodeRequests metricRaw8
+  let rows2 ← decodePlans metricRaw9
+  derivedModelAccept { metricCase2Bucket1 with requests := requests1, rows := rows1 } { metricCase2Bucket2 with requests := requests2, rows := rows2 }
+theorem exact_decoded_derived_outcome_2 : decodedDerivedOutcome2 = some true := by
+  simpa only [decodedDerivedOutcome2, exact_metric_file_8, metricRows8, exact_metric_file_9, metricRows9, Option.bind_eq_bind, Option.bind_some, metricCase2Bucket1, metricCase2Bucket2] using exact_derived_outcome_2
+#print axioms exact_decoded_derived_outcome_2
+def metricRaw10 : List Nat := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,206,177,240,159,141,139,195,169,45,98,117,99,107,101,116,49,34,125,13,10]
+def metricRows10 : List Request := [{ id := [945,127819,233,45,98,117,99,107,101,116,49], prompt := 64, generated := 1 }]
+theorem exact_metric_file_10 : decodeRequests metricRaw10 = some metricRows10 := by decide
+#print axioms exact_metric_file_10
+def metricRaw11 : List Nat := [123,34,98,97,116,99,104,95,105,100,34,58,34,206,178,226,130,130,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,206,177,240,159,141,139,195,169,45,98,117,99,107,101,116,49,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,54,52,125,125,13,10]
+def metricRows11 : List Row := [{ id := [945,127819,233,45,98,117,99,107,101,116,49], batch := [946,8322], shape := { seq := 64, heads := 32, hidden := 4096 } }]
+theorem exact_metric_file_11 : decodePlans metricRaw11 = some metricRows11 := by decide
+#print axioms exact_metric_file_11
+def metricRaw12 : List Nat := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,206,177,240,159,141,139,195,169,45,98,117,99,107,101,116,50,34,125,13,10]
+def metricRows12 : List Request := [{ id := [945,127819,233,45,98,117,99,107,101,116,50], prompt := 128, generated := 1 }]
+theorem exact_metric_file_12 : decodeRequests metricRaw12 = some metricRows12 := by decide
+#print axioms exact_metric_file_12
+def metricRaw13 : List Nat := [123,34,98,97,116,99,104,95,105,100,34,58,34,206,178,226,130,130,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,206,177,240,159,141,139,195,169,45,98,117,99,107,101,116,50,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,49,50,56,125,125,13,10]
+def metricRows13 : List Row := [{ id := [945,127819,233,45,98,117,99,107,101,116,50], batch := [946,8322], shape := { seq := 128, heads := 32, hidden := 4096 } }]
+theorem exact_metric_file_13 : decodePlans metricRaw13 = some metricRows13 := by decide
+#print axioms exact_metric_file_13
+def metricCase3Bucket1 : Bucket := { requests := [{ id := [945,127819,233,45,98,117,99,107,101,116,49], prompt := 64, generated := 1 }], rows := [{ id := [945,127819,233,45,98,117,99,107,101,116,49], batch := [946,8322], shape := { seq := 64, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 12977792, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1294756, denominator := 625 }, sequential := { numerator := 1294756, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,206,177,240,159,141,139,195,169,45,98,117,99,107,101,116,49,34,125,13,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,206,177,240,159,141,139,195,169,45,98,117,99,107,101,116,49,34,125,13,10] }
+def metricCalculation5Requests : List Request := [{ id := [945,127819,233,45,98,117,99,107,101,116,49], prompt := 64, generated := 1 }]
+def metricCalculation5Rows : List Row := [{ id := [945,127819,233,45,98,117,99,107,101,116,49], batch := [946,8322], shape := { seq := 64, heads := 32, hidden := 4096 } }]
+def metricCalculation5Expected : Metrics := { cost := { numerator := 12977792, denominator := 1 }, padding := { numerator := 0, denominator := 65 }, latency := { numerator := 5179024, denominator := 2500 }, sequential := { numerator := 5179024, denominator := 2500 } }
+theorem exact_metric_calculation_5 : derivedMetrics metricCalculation5Requests metricCalculation5Rows = some metricCalculation5Expected := by decide
+#print axioms exact_metric_calculation_5
+theorem exact_metrics_3_1 : metricsMatch (derivedMetrics metricCase3Bucket1.requests metricCase3Bucket1.rows) { cost := { numerator := 12977792, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1294756, denominator := 625 }, sequential := { numerator := 1294756, denominator := 625 } } = true := by
+  change metricsMatch (derivedMetrics metricCalculation5Requests metricCalculation5Rows) { cost := { numerator := 12977792, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1294756, denominator := 625 }, sequential := { numerator := 1294756, denominator := 625 } } = true
+  rw [exact_metric_calculation_5]
+  decide
+#print axioms exact_metrics_3_1
+def metricCase3Bucket2 : Bucket := { requests := [{ id := [945,127819,233,45,98,117,99,107,101,116,50], prompt := 128, generated := 1 }], rows := [{ id := [945,127819,233,45,98,117,99,107,101,116,50], batch := [946,8322], shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,206,177,240,159,141,139,195,169,45,98,117,99,107,101,116,50,34,125,13,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,206,177,240,159,141,139,195,169,45,98,117,99,107,101,116,50,34,125,13,10] }
+def metricCalculation6Requests : List Request := [{ id := [945,127819,233,45,98,117,99,107,101,116,50], prompt := 128, generated := 1 }]
+def metricCalculation6Rows : List Row := [{ id := [945,127819,233,45,98,117,99,107,101,116,50], batch := [946,8322], shape := { seq := 128, heads := 32, hidden := 4096 } }]
+def metricCalculation6Expected : Metrics := { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 129 }, latency := { numerator := 6653584, denominator := 2500 }, sequential := { numerator := 6653584, denominator := 2500 } }
+theorem exact_metric_calculation_6 : derivedMetrics metricCalculation6Requests metricCalculation6Rows = some metricCalculation6Expected := by decide
+#print axioms exact_metric_calculation_6
+theorem exact_metrics_3_2 : metricsMatch (derivedMetrics metricCase3Bucket2.requests metricCase3Bucket2.rows) { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } } = true := by
+  change metricsMatch (derivedMetrics metricCalculation6Requests metricCalculation6Rows) { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } } = true
+  rw [exact_metric_calculation_6]
+  decide
+#print axioms exact_metrics_3_2
+theorem exact_derived_outcome_3 : derivedModelAccept metricCase3Bucket1 metricCase3Bucket2 = some true := by
+  unfold derivedModelAccept
+  rw [show derivedMetrics metricCase3Bucket1.requests metricCase3Bucket1.rows = some metricCalculation5Expected from exact_metric_calculation_5]
+  rw [show derivedMetrics metricCase3Bucket2.requests metricCase3Bucket2.rows = some metricCalculation6Expected from exact_metric_calculation_6]
+  decide
+#print axioms exact_derived_outcome_3
+def decodedDerivedOutcome3 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw10
+  let rows1 ← decodePlans metricRaw11
+  let requests2 ← decodeRequests metricRaw12
+  let rows2 ← decodePlans metricRaw13
+  derivedModelAccept { metricCase3Bucket1 with requests := requests1, rows := rows1 } { metricCase3Bucket2 with requests := requests2, rows := rows2 }
+theorem exact_decoded_derived_outcome_3 : decodedDerivedOutcome3 = some true := by
+  simpa only [decodedDerivedOutcome3, exact_metric_file_10, metricRows10, exact_metric_file_11, metricRows11, exact_metric_file_12, metricRows12, exact_metric_file_13, metricRows13, Option.bind_eq_bind, Option.bind_some, metricCase3Bucket1, metricCase3Bucket2] using exact_derived_outcome_3
+#print axioms exact_decoded_derived_outcome_3
+def metricRaw14 : List Nat := [9,32,123,34,114,101,113,117,101,115,116,95,105,100,34,58,32,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,44,32,34,112,114,111,109,112,116,95,108,101,110,34,58,32,54,52,44,32,34,103,101,110,95,108,101,110,34,58,32,49,125,32,32]
+def metricRows14 : List Request := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], prompt := 64, generated := 1 }]
+theorem exact_metric_file_14 : decodeRequests metricRaw14 = some metricRows14 := by decide
+#print axioms exact_metric_file_14
+def metricRaw15 : List Nat := [9,32,123,34,114,101,113,117,101,115,116,95,105,100,34,58,32,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,44,32,34,98,97,116,99,104,95,105,100,34,58,32,34,98,97,116,99,104,48,34,44,32,34,115,104,97,112,101,34,58,32,123,34,115,101,113,95,97,108,105,103,110,34,58,32,54,52,44,32,34,104,101,97,100,115,95,97,108,105,103,110,34,58,32,51,50,44,32,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,32,52,48,57,54,125,125,32,32]
+def metricRows15 : List Row := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 64, heads := 32, hidden := 4096 } }]
+theorem exact_metric_file_15 : decodePlans metricRaw15 = some metricRows15 := by decide
+#print axioms exact_metric_file_15
+def metricRaw16 : List Nat := [9,32,123,34,114,101,113,117,101,115,116,95,105,100,34,58,32,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,44,32,34,112,114,111,109,112,116,95,108,101,110,34,58,32,49,50,56,44,32,34,103,101,110,95,108,101,110,34,58,32,49,125,32,32]
+def metricRows16 : List Request := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 128, generated := 1 }]
+theorem exact_metric_file_16 : decodeRequests metricRaw16 = some metricRows16 := by decide
+#print axioms exact_metric_file_16
+def metricRaw17 : List Nat := [9,32,123,34,114,101,113,117,101,115,116,95,105,100,34,58,32,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,44,32,34,98,97,116,99,104,95,105,100,34,58,32,34,98,97,116,99,104,48,34,44,32,34,115,104,97,112,101,34,58,32,123,34,115,101,113,95,97,108,105,103,110,34,58,32,49,50,56,44,32,34,104,101,97,100,115,95,97,108,105,103,110,34,58,32,51,50,44,32,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,32,52,48,57,54,125,125,32,32]
+def metricRows17 : List Row := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 128, heads := 32, hidden := 4096 } }]
+theorem exact_metric_file_17 : decodePlans metricRaw17 = some metricRows17 := by decide
+#print axioms exact_metric_file_17
+def metricCase4Bucket1 : Bucket := { requests := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], prompt := 64, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 64, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 12977792, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1294756, denominator := 625 }, sequential := { numerator := 1294756, denominator := 625 } }, before := [9,32,123,34,114,101,113,117,101,115,116,95,105,100,34,58,32,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,44,32,34,112,114,111,109,112,116,95,108,101,110,34,58,32,54,52,44,32,34,103,101,110,95,108,101,110,34,58,32,49,125,32,32], after := [9,32,123,34,114,101,113,117,101,115,116,95,105,100,34,58,32,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,44,32,34,112,114,111,109,112,116,95,108,101,110,34,58,32,54,52,44,32,34,103,101,110,95,108,101,110,34,58,32,49,125,32,32] }
+theorem exact_metrics_4_1 : metricsMatch (derivedMetrics metricCase4Bucket1.requests metricCase4Bucket1.rows) { cost := { numerator := 12977792, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1294756, denominator := 625 }, sequential := { numerator := 1294756, denominator := 625 } } = true := by
+  change metricsMatch (derivedMetrics metricCalculation0Requests metricCalculation0Rows) { cost := { numerator := 12977792, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1294756, denominator := 625 }, sequential := { numerator := 1294756, denominator := 625 } } = true
+  rw [exact_metric_calculation_0]
+  decide
+#print axioms exact_metrics_4_1
+def metricCase4Bucket2 : Bucket := { requests := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 128, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } }, before := [9,32,123,34,114,101,113,117,101,115,116,95,105,100,34,58,32,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,44,32,34,112,114,111,109,112,116,95,108,101,110,34,58,32,49,50,56,44,32,34,103,101,110,95,108,101,110,34,58,32,49,125,32,32], after := [9,32,123,34,114,101,113,117,101,115,116,95,105,100,34,58,32,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,44,32,34,112,114,111,109,112,116,95,108,101,110,34,58,32,49,50,56,44,32,34,103,101,110,95,108,101,110,34,58,32,49,125,32,32] }
+theorem exact_metrics_4_2 : metricsMatch (derivedMetrics metricCase4Bucket2.requests metricCase4Bucket2.rows) { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } } = true := by
+  change metricsMatch (derivedMetrics metricCalculation1Requests metricCalculation1Rows) { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } } = true
+  rw [exact_metric_calculation_1]
+  decide
+#print axioms exact_metrics_4_2
+theorem exact_derived_outcome_4 : derivedModelAccept metricCase4Bucket1 metricCase4Bucket2 = some true := by
+  unfold derivedModelAccept
+  rw [show derivedMetrics metricCase4Bucket1.requests metricCase4Bucket1.rows = some metricCalculation0Expected from exact_metric_calculation_0]
+  rw [show derivedMetrics metricCase4Bucket2.requests metricCase4Bucket2.rows = some metricCalculation1Expected from exact_metric_calculation_1]
+  decide
+#print axioms exact_derived_outcome_4
+def decodedDerivedOutcome4 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw14
+  let rows1 ← decodePlans metricRaw15
+  let requests2 ← decodeRequests metricRaw16
+  let rows2 ← decodePlans metricRaw17
+  derivedModelAccept { metricCase4Bucket1 with requests := requests1, rows := rows1 } { metricCase4Bucket2 with requests := requests2, rows := rows2 }
+theorem exact_decoded_derived_outcome_4 : decodedDerivedOutcome4 = some true := by
+  simpa only [decodedDerivedOutcome4, exact_metric_file_14, metricRows14, exact_metric_file_15, metricRows15, exact_metric_file_16, metricRows16, exact_metric_file_17, metricRows17, Option.bind_eq_bind, Option.bind_some, metricCase4Bucket1, metricCase4Bucket2] using exact_derived_outcome_4
+#print axioms exact_decoded_derived_outcome_4
+def metricRaw18 : List Nat := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,92,117,48,51,98,49,92,117,100,56,51,99,92,117,100,102,52,98,92,117,48,48,101,57,45,98,117,99,107,101,116,49,34,125,10]
+def metricRows18 : List Request := [{ id := [945,127819,233,45,98,117,99,107,101,116,49], prompt := 64, generated := 1 }]
+theorem exact_metric_file_18 : decodeRequests metricRaw18 = some metricRows18 := by decide
+#print axioms exact_metric_file_18
+def metricRaw19 : List Nat := [123,34,98,97,116,99,104,95,105,100,34,58,34,206,178,226,130,130,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,206,177,240,159,141,139,195,169,45,98,117,99,107,101,116,49,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,54,52,125,125,10]
+def metricRows19 : List Row := [{ id := [945,127819,233,45,98,117,99,107,101,116,49], batch := [946,8322], shape := { seq := 64, heads := 32, hidden := 4096 } }]
+theorem exact_metric_file_19 : decodePlans metricRaw19 = some metricRows19 := by decide
+#print axioms exact_metric_file_19
+def metricRaw20 : List Nat := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,92,117,48,51,98,49,92,117,100,56,51,99,92,117,100,102,52,98,92,117,48,48,101,57,45,98,117,99,107,101,116,50,34,125,10]
+def metricRows20 : List Request := [{ id := [945,127819,233,45,98,117,99,107,101,116,50], prompt := 128, generated := 1 }]
+theorem exact_metric_file_20 : decodeRequests metricRaw20 = some metricRows20 := by decide
+#print axioms exact_metric_file_20
+def metricRaw21 : List Nat := [123,34,98,97,116,99,104,95,105,100,34,58,34,206,178,226,130,130,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,206,177,240,159,141,139,195,169,45,98,117,99,107,101,116,50,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,49,50,56,125,125,10]
+def metricRows21 : List Row := [{ id := [945,127819,233,45,98,117,99,107,101,116,50], batch := [946,8322], shape := { seq := 128, heads := 32, hidden := 4096 } }]
+theorem exact_metric_file_21 : decodePlans metricRaw21 = some metricRows21 := by decide
+#print axioms exact_metric_file_21
+def metricCase5Bucket1 : Bucket := { requests := [{ id := [945,127819,233,45,98,117,99,107,101,116,49], prompt := 64, generated := 1 }], rows := [{ id := [945,127819,233,45,98,117,99,107,101,116,49], batch := [946,8322], shape := { seq := 64, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 12977792, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1294756, denominator := 625 }, sequential := { numerator := 1294756, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,92,117,48,51,98,49,92,117,100,56,51,99,92,117,100,102,52,98,92,117,48,48,101,57,45,98,117,99,107,101,116,49,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,92,117,48,51,98,49,92,117,100,56,51,99,92,117,100,102,52,98,92,117,48,48,101,57,45,98,117,99,107,101,116,49,34,125,10] }
+theorem exact_metrics_5_1 : metricsMatch (derivedMetrics metricCase5Bucket1.requests metricCase5Bucket1.rows) { cost := { numerator := 12977792, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1294756, denominator := 625 }, sequential := { numerator := 1294756, denominator := 625 } } = true := by
+  change metricsMatch (derivedMetrics metricCalculation5Requests metricCalculation5Rows) { cost := { numerator := 12977792, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1294756, denominator := 625 }, sequential := { numerator := 1294756, denominator := 625 } } = true
+  rw [exact_metric_calculation_5]
+  decide
+#print axioms exact_metrics_5_1
+def metricCase5Bucket2 : Bucket := { requests := [{ id := [945,127819,233,45,98,117,99,107,101,116,50], prompt := 128, generated := 1 }], rows := [{ id := [945,127819,233,45,98,117,99,107,101,116,50], batch := [946,8322], shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,92,117,48,51,98,49,92,117,100,56,51,99,92,117,100,102,52,98,92,117,48,48,101,57,45,98,117,99,107,101,116,50,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,92,117,48,51,98,49,92,117,100,56,51,99,92,117,100,102,52,98,92,117,48,48,101,57,45,98,117,99,107,101,116,50,34,125,10] }
+theorem exact_metrics_5_2 : metricsMatch (derivedMetrics metricCase5Bucket2.requests metricCase5Bucket2.rows) { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } } = true := by
+  change metricsMatch (derivedMetrics metricCalculation6Requests metricCalculation6Rows) { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } } = true
+  rw [exact_metric_calculation_6]
+  decide
+#print axioms exact_metrics_5_2
+theorem exact_derived_outcome_5 : derivedModelAccept metricCase5Bucket1 metricCase5Bucket2 = some true := by
+  unfold derivedModelAccept
+  rw [show derivedMetrics metricCase5Bucket1.requests metricCase5Bucket1.rows = some metricCalculation5Expected from exact_metric_calculation_5]
+  rw [show derivedMetrics metricCase5Bucket2.requests metricCase5Bucket2.rows = some metricCalculation6Expected from exact_metric_calculation_6]
+  decide
+#print axioms exact_derived_outcome_5
+def decodedDerivedOutcome5 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw18
+  let rows1 ← decodePlans metricRaw19
+  let requests2 ← decodeRequests metricRaw20
+  let rows2 ← decodePlans metricRaw21
+  derivedModelAccept { metricCase5Bucket1 with requests := requests1, rows := rows1 } { metricCase5Bucket2 with requests := requests2, rows := rows2 }
+theorem exact_decoded_derived_outcome_5 : decodedDerivedOutcome5 = some true := by
+  simpa only [decodedDerivedOutcome5, exact_metric_file_18, metricRows18, exact_metric_file_19, metricRows19, exact_metric_file_20, metricRows20, exact_metric_file_21, metricRows21, Option.bind_eq_bind, Option.bind_some, metricCase5Bucket1, metricCase5Bucket2] using exact_derived_outcome_5
+#print axioms exact_decoded_derived_outcome_5
+def metricRaw22 : List Nat := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,51,50,48,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,51,56,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,49,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,52,52,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,50,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,53,49,50,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,51,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,53,55,54,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,52,34,125,10]
+def metricRows22 : List Request := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 320, generated := 1 },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,49], prompt := 384, generated := 1 },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,50], prompt := 448, generated := 1 },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,51], prompt := 512, generated := 1 },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,52], prompt := 576, generated := 1 }]
+theorem exact_metric_file_22 : decodeRequests metricRaw22 = some metricRows22 := by decide
+#print axioms exact_metric_file_22
+def metricRaw23 : List Nat := [123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,48,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,51,50,48,125,125,10,123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,49,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,49,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,51,56,52,125,125,10,123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,50,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,50,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,52,52,56,125,125,10,123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,51,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,51,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,53,49,50,125,125,10,123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,52,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,52,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,53,55,54,125,125,10]
+def metricRows23 : List Row := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 320, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,49], batch := [98,97,116,99,104,49], shape := { seq := 384, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,50], batch := [98,97,116,99,104,50], shape := { seq := 448, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,51], batch := [98,97,116,99,104,51], shape := { seq := 512, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,52], batch := [98,97,116,99,104,52], shape := { seq := 576, heads := 32, hidden := 4096 } }]
+theorem exact_metric_file_23 : decodePlans metricRaw23 = some metricRows23 := by decide
+#print axioms exact_metric_file_23
+def metricCase6Bucket1 : Bucket := { requests := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], prompt := 64, generated := 1 },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,49], prompt := 128, generated := 1 },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,50], prompt := 192, generated := 1 },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,51], prompt := 256, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 64, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,49], batch := [98,97,116,99,104,49], shape := { seq := 128, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,50], batch := [98,97,116,99,104,50], shape := { seq := 192, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,51], batch := [98,97,116,99,104,51], shape := { seq := 256, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 110983680, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 2449828, denominator := 625 }, sequential := { numerator := 298256, denominator := 25 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,49,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,57,50,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,50,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,50,53,54,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,51,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,49,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,57,50,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,50,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,50,53,54,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,51,34,125,10] }
+theorem exact_metrics_6_1 : metricsMatch (derivedMetrics metricCase6Bucket1.requests metricCase6Bucket1.rows) { cost := { numerator := 110983680, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 2449828, denominator := 625 }, sequential := { numerator := 298256, denominator := 25 } } = true := by
+  change metricsMatch (derivedMetrics metricCalculation2Requests metricCalculation2Rows) { cost := { numerator := 110983680, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 2449828, denominator := 625 }, sequential := { numerator := 298256, denominator := 25 } } = true
+  rw [exact_metric_calculation_2]
+  decide
+#print axioms exact_metrics_6_1
+def metricCase6Bucket2 : Bucket := { requests := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 320, generated := 1 },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,49], prompt := 384, generated := 1 },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,50], prompt := 448, generated := 1 },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,51], prompt := 512, generated := 1 },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,52], prompt := 576, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 320, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,49], batch := [98,97,116,99,104,49], shape := { seq := 384, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,50], batch := [98,97,116,99,104,50], shape := { seq := 448, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,51], batch := [98,97,116,99,104,51], shape := { seq := 512, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,52], batch := [98,97,116,99,104,52], shape := { seq := 576, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 607486080, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 4702628, denominator := 625 }, sequential := { numerator := 753748, denominator := 25 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,51,50,48,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,51,56,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,49,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,52,52,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,50,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,53,49,50,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,51,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,53,55,54,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,52,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,51,50,48,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,51,56,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,49,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,52,52,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,50,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,53,49,50,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,51,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,53,55,54,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,52,34,125,10] }
+def metricCalculation7Requests : List Request := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 320, generated := 1 },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,49], prompt := 384, generated := 1 },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,50], prompt := 448, generated := 1 },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,51], prompt := 512, generated := 1 },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,52], prompt := 576, generated := 1 }]
+def metricCalculation7Rows : List Row := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 320, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,49], batch := [98,97,116,99,104,49], shape := { seq := 384, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,50], batch := [98,97,116,99,104,50], shape := { seq := 448, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,51], batch := [98,97,116,99,104,51], shape := { seq := 512, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,52], batch := [98,97,116,99,104,52], shape := { seq := 576, heads := 32, hidden := 4096 } }]
+def metricCalculation7Expected : Metrics := { cost := { numerator := 607486080, denominator := 1 }, padding := { numerator := 0, denominator := 2245 }, latency := { numerator := 18810512, denominator := 2500 }, sequential := { numerator := 75374800, denominator := 2500 } }
+theorem exact_metric_calculation_7 : derivedMetrics metricCalculation7Requests metricCalculation7Rows = some metricCalculation7Expected := by decide
+#print axioms exact_metric_calculation_7
+theorem exact_metrics_6_2 : metricsMatch (derivedMetrics metricCase6Bucket2.requests metricCase6Bucket2.rows) { cost := { numerator := 607486080, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 4702628, denominator := 625 }, sequential := { numerator := 753748, denominator := 25 } } = true := by
+  change metricsMatch (derivedMetrics metricCalculation7Requests metricCalculation7Rows) { cost := { numerator := 607486080, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 4702628, denominator := 625 }, sequential := { numerator := 753748, denominator := 25 } } = true
+  rw [exact_metric_calculation_7]
+  decide
+#print axioms exact_metrics_6_2
+theorem exact_derived_outcome_6 : derivedModelAccept metricCase6Bucket1 metricCase6Bucket2 = some false := by
+  unfold derivedModelAccept
+  rw [show derivedMetrics metricCase6Bucket1.requests metricCase6Bucket1.rows = some metricCalculation2Expected from exact_metric_calculation_2]
+  rw [show derivedMetrics metricCase6Bucket2.requests metricCase6Bucket2.rows = some metricCalculation7Expected from exact_metric_calculation_7]
+  decide
+#print axioms exact_derived_outcome_6
+def decodedDerivedOutcome6 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw4
+  let rows1 ← decodePlans metricRaw5
+  let requests2 ← decodeRequests metricRaw22
+  let rows2 ← decodePlans metricRaw23
+  derivedModelAccept { metricCase6Bucket1 with requests := requests1, rows := rows1 } { metricCase6Bucket2 with requests := requests2, rows := rows2 }
+theorem exact_decoded_derived_outcome_6 : decodedDerivedOutcome6 = some false := by
+  simpa only [decodedDerivedOutcome6, exact_metric_file_4, metricRows4, exact_metric_file_5, metricRows5, exact_metric_file_22, metricRows22, exact_metric_file_23, metricRows23, Option.bind_eq_bind, Option.bind_some, metricCase6Bucket1, metricCase6Bucket2] using exact_derived_outcome_6
+#print axioms exact_decoded_derived_outcome_6
+def metricCase7Bucket1 : Bucket := { requests := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], prompt := 64, generated := 1 }], rows := [], metrics := { cost := { numerator := 0, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 0, denominator := 1 }, sequential := { numerator := 0, denominator := 1 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10] }
+def metricCalculation8Requests : List Request := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], prompt := 64, generated := 1 }]
+def metricCalculation8Rows : List Row := []
+def metricCalculation8Expected : Metrics := { cost := { numerator := 0, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 0, denominator := 2500 }, sequential := { numerator := 0, denominator := 2500 } }
+theorem exact_metric_calculation_8 : derivedMetrics metricCalculation8Requests metricCalculation8Rows = some metricCalculation8Expected := by decide
+#print axioms exact_metric_calculation_8
+theorem exact_metrics_7_1 : metricsMatch (derivedMetrics metricCase7Bucket1.requests metricCase7Bucket1.rows) { cost := { numerator := 0, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 0, denominator := 1 }, sequential := { numerator := 0, denominator := 1 } } = true := by
+  change metricsMatch (derivedMetrics metricCalculation8Requests metricCalculation8Rows) { cost := { numerator := 0, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 0, denominator := 1 }, sequential := { numerator := 0, denominator := 1 } } = true
+  rw [exact_metric_calculation_8]
+  decide
+#print axioms exact_metrics_7_1
+def metricCase7Bucket2 : Bucket := { requests := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 128, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10] }
+theorem exact_metrics_7_2 : metricsMatch (derivedMetrics metricCase7Bucket2.requests metricCase7Bucket2.rows) { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } } = true := by
+  change metricsMatch (derivedMetrics metricCalculation1Requests metricCalculation1Rows) { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } } = true
+  rw [exact_metric_calculation_1]
+  decide
+#print axioms exact_metrics_7_2
+theorem exact_derived_outcome_7 : derivedModelAccept metricCase7Bucket1 metricCase7Bucket2 = some false := by
+  unfold derivedModelAccept
+  rw [show derivedMetrics metricCase7Bucket1.requests metricCase7Bucket1.rows = some metricCalculation8Expected from exact_metric_calculation_8]
+  rw [show derivedMetrics metricCase7Bucket2.requests metricCase7Bucket2.rows = some metricCalculation1Expected from exact_metric_calculation_1]
+  decide
+#print axioms exact_derived_outcome_7
+def decodedDerivedOutcome7 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw0
+  let rows1 ← decodePlans metricRaw9
+  let requests2 ← decodeRequests metricRaw2
+  let rows2 ← decodePlans metricRaw3
+  derivedModelAccept { metricCase7Bucket1 with requests := requests1, rows := rows1 } { metricCase7Bucket2 with requests := requests2, rows := rows2 }
+theorem exact_decoded_derived_outcome_7 : decodedDerivedOutcome7 = some false := by
+  simpa only [decodedDerivedOutcome7, exact_metric_file_0, metricRows0, exact_metric_file_9, metricRows9, exact_metric_file_2, metricRows2, exact_metric_file_3, metricRows3, Option.bind_eq_bind, Option.bind_some, metricCase7Bucket1, metricCase7Bucket2] using exact_derived_outcome_7
+#print axioms exact_decoded_derived_outcome_7
+def metricRaw24 : List Nat := [123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,48,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,105,110,118,101,110,116,101,100,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,54,52,125,125,10]
+def metricRows24 : List Row := [{ id := [105,110,118,101,110,116,101,100], batch := [98,97,116,99,104,48], shape := { seq := 64, heads := 32, hidden := 4096 } }]
+theorem exact_metric_file_24 : decodePlans metricRaw24 = some metricRows24 := by decide
+#print axioms exact_metric_file_24
+def metricCase8Bucket1 : Bucket := { requests := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], prompt := 64, generated := 1 }], rows := [{ id := [105,110,118,101,110,116,101,100], batch := [98,97,116,99,104,48], shape := { seq := 64, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 0, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 0, denominator := 1 }, sequential := { numerator := 0, denominator := 1 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10] }
+def metricCase8Bucket2 : Bucket := { requests := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 128, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 0, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 0, denominator := 1 }, sequential := { numerator := 0, denominator := 1 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10] }
+theorem exact_derived_outcome_8 : derivedModelAccept metricCase8Bucket1 metricCase8Bucket2 = none := by
+  decide
+#print axioms exact_derived_outcome_8
+def decodedDerivedOutcome8 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw0
+  let rows1 ← decodePlans metricRaw24
+  let requests2 ← decodeRequests metricRaw2
+  let rows2 ← decodePlans metricRaw3
+  derivedModelAccept { metricCase8Bucket1 with requests := requests1, rows := rows1 } { metricCase8Bucket2 with requests := requests2, rows := rows2 }
+theorem exact_decoded_derived_outcome_8 : decodedDerivedOutcome8 = none := by
+  simpa only [decodedDerivedOutcome8, exact_metric_file_0, metricRows0, exact_metric_file_24, metricRows24, exact_metric_file_2, metricRows2, exact_metric_file_3, metricRows3, Option.bind_eq_bind, Option.bind_some, metricCase8Bucket1, metricCase8Bucket2] using exact_derived_outcome_8
+#print axioms exact_decoded_derived_outcome_8
+def metricRaw25 : List Nat := [123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,48,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,54,53,125,125,10]
+def metricRows25 : List Row := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 65, heads := 32, hidden := 4096 } }]
+def metricCase9Bucket1 : Bucket := { requests := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], prompt := 64, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 65, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 13050484, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1294756, denominator := 625 }, sequential := { numerator := 1294756, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10] }
+def metricCalculation9Requests : List Request := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], prompt := 64, generated := 1 }]
+def metricCalculation9Rows : List Row := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 65, heads := 32, hidden := 4096 } }]
+def metricCalculation9Expected : Metrics := { cost := { numerator := 13050484, denominator := 1 }, padding := { numerator := 0, denominator := 65 }, latency := { numerator := 5179024, denominator := 2500 }, sequential := { numerator := 5179024, denominator := 2500 } }
+def metricCase9Bucket2 : Bucket := { requests := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 128, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10] }
+def decodedDerivedOutcome9 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw0
+  let rows1 ← decodePlans metricRaw25
+  let requests2 ← decodeRequests metricRaw2
+  let rows2 ← decodePlans metricRaw3
+  derivedModelAccept { metricCase9Bucket1 with requests := requests1, rows := rows1 } { metricCase9Bucket2 with requests := requests2, rows := rows2 }
+def metricRaw26 : List Nat := [123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,48,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,49,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,54,52,125,125,10]
+def metricRows26 : List Row := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 64, heads := 31, hidden := 4096 } }]
+def metricCase10Bucket1 : Bucket := { requests := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], prompt := 64, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 64, heads := 31, hidden := 4096 } }], metrics := { cost := { numerator := 12977792, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1294756, denominator := 625 }, sequential := { numerator := 1294756, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10] }
+def metricCalculation10Requests : List Request := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], prompt := 64, generated := 1 }]
+def metricCalculation10Rows : List Row := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 64, heads := 31, hidden := 4096 } }]
+def metricCalculation10Expected : Metrics := { cost := { numerator := 12977792, denominator := 1 }, padding := { numerator := 0, denominator := 65 }, latency := { numerator := 5179024, denominator := 2500 }, sequential := { numerator := 5179024, denominator := 2500 } }
+def metricCase10Bucket2 : Bucket := { requests := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 128, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10] }
+def decodedDerivedOutcome10 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw0
+  let rows1 ← decodePlans metricRaw26
+  let requests2 ← decodeRequests metricRaw2
+  let rows2 ← decodePlans metricRaw3
+  derivedModelAccept { metricCase10Bucket1 with requests := requests1, rows := rows1 } { metricCase10Bucket2 with requests := requests2, rows := rows2 }
+def metricRaw27 : List Nat := [123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,48,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,53,44,34,115,101,113,95,97,108,105,103,110,34,58,54,52,125,125,10]
+def metricRows27 : List Row := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 64, heads := 32, hidden := 4095 } }]
+def metricCase11Bucket1 : Bucket := { requests := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], prompt := 64, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 64, heads := 32, hidden := 4095 } }], metrics := { cost := { numerator := 12977792, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1294756, denominator := 625 }, sequential := { numerator := 1294756, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10] }
+def metricCalculation11Requests : List Request := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], prompt := 64, generated := 1 }]
+def metricCalculation11Rows : List Row := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 64, heads := 32, hidden := 4095 } }]
+def metricCalculation11Expected : Metrics := { cost := { numerator := 12977792, denominator := 1 }, padding := { numerator := 0, denominator := 65 }, latency := { numerator := 5179024, denominator := 2500 }, sequential := { numerator := 5179024, denominator := 2500 } }
+def metricCase11Bucket2 : Bucket := { requests := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 128, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10] }
+def decodedDerivedOutcome11 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw0
+  let rows1 ← decodePlans metricRaw27
+  let requests2 ← decodeRequests metricRaw2
+  let rows2 ← decodePlans metricRaw3
+  derivedModelAccept { metricCase11Bucket1 with requests := requests1, rows := rows1 } { metricCase11Bucket2 with requests := requests2, rows := rows2 }
+def metricRaw28 : List Nat := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,49,34,125,10]
+def metricRows28 : List Request := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], prompt := 64, generated := 1 },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,49], prompt := 128, generated := 1 }]
+def metricRaw29 : List Nat := [123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,48,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,54,52,125,125,10,123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,48,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,49,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,49,50,56,125,125,10]
+def metricRows29 : List Row := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 64, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,49], batch := [98,97,116,99,104,48], shape := { seq := 128, heads := 32, hidden := 4096 } }]
+def metricCase12Bucket1 : Bucket := { requests := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], prompt := 64, generated := 1 },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,49], prompt := 128, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 64, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,49], batch := [98,97,116,99,104,48], shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 20625024, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1402276, denominator := 625 }, sequential := { numerator := 1402276, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,49,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,49,34,125,10] }
+def metricCalculation12Requests : List Request := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], prompt := 64, generated := 1 },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,49], prompt := 128, generated := 1 }]
+def metricCalculation12Rows : List Row := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 64, heads := 32, hidden := 4096 } },{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,49], batch := [98,97,116,99,104,48], shape := { seq := 128, heads := 32, hidden := 4096 } }]
+def metricCalculation12Expected : Metrics := { cost := { numerator := 20625024, denominator := 1 }, padding := { numerator := 0, denominator := 194 }, latency := { numerator := 5609104, denominator := 2500 }, sequential := { numerator := 5609104, denominator := 2500 } }
+def metricCase12Bucket2 : Bucket := { requests := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 128, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10] }
+def decodedDerivedOutcome12 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw28
+  let rows1 ← decodePlans metricRaw29
+  let requests2 ← decodeRequests metricRaw2
+  let rows2 ← decodePlans metricRaw3
+  derivedModelAccept { metricCase12Bucket1 with requests := requests1, rows := rows1 } { metricCase12Bucket2 with requests := requests2, rows := rows2 }
+def metricRaw30 : List Nat := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,57,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10]
+def metricRows30 : List Request := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 129, generated := 1 }]
+def metricCase13Bucket1 : Bucket := { requests := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], prompt := 64, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 64, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 12977792, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1294756, denominator := 625 }, sequential := { numerator := 1294756, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10] }
+def metricCase13Bucket2 : Bucket := { requests := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 129, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 20530816, denominator := 1 }, padding := { numerator := 63, denominator := 130 }, latency := { numerator := 409684, denominator := 125 }, sequential := { numerator := 409684, denominator := 125 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,57,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,57,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10] }
+def metricCalculation13Requests : List Request := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 129, generated := 1 }]
+def metricCalculation13Rows : List Row := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 128, heads := 32, hidden := 4096 } }]
+def metricCalculation13Expected : Metrics := { cost := { numerator := 20530816, denominator := 1 }, padding := { numerator := 63, denominator := 130 }, latency := { numerator := 8193680, denominator := 2500 }, sequential := { numerator := 8193680, denominator := 2500 } }
+def decodedDerivedOutcome13 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw0
+  let rows1 ← decodePlans metricRaw1
+  let requests2 ← decodeRequests metricRaw30
+  let rows2 ← decodePlans metricRaw3
+  derivedModelAccept { metricCase13Bucket1 with requests := requests1, rows := rows1 } { metricCase13Bucket2 with requests := requests2, rows := rows2 }
+def metricRaw31 : List Nat := [123,34,103,101,110,95,108,101,110,34,58,49,52,55,44,34,112,114,111,109,112,116,95,108,101,110,34,58,53,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,112,34,125,10]
+def metricRows31 : List Request := [{ id := [112], prompt := 54, generated := 147 }]
+def metricRaw32 : List Nat := [123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,112,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,54,52,125,125,10]
+def metricRows32 : List Row := [{ id := [112], batch := [98,97,116,99,104], shape := { seq := 64, heads := 32, hidden := 4096 } }]
+def metricCase14Bucket1 : Bucket := { requests := [{ id := [112], prompt := 54, generated := 147 }], rows := [{ id := [112], batch := [98,97,116,99,104], shape := { seq := 64, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 57111037, denominator := 1 }, padding := { numerator := 10, denominator := 201 }, latency := { numerator := 137578759, denominator := 2500 }, sequential := { numerator := 137578759, denominator := 2500 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,52,55,44,34,112,114,111,109,112,116,95,108,101,110,34,58,53,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,112,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,52,55,44,34,112,114,111,109,112,116,95,108,101,110,34,58,53,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,112,34,125,10] }
+def metricCalculation14Requests : List Request := [{ id := [112], prompt := 54, generated := 147 }]
+def metricCalculation14Rows : List Row := [{ id := [112], batch := [98,97,116,99,104], shape := { seq := 64, heads := 32, hidden := 4096 } }]
+def metricCalculation14Expected : Metrics := { cost := { numerator := 57111037, denominator := 1 }, padding := { numerator := 10, denominator := 201 }, latency := { numerator := 137578759, denominator := 2500 }, sequential := { numerator := 137578759, denominator := 2500 } }
+def metricCase14Bucket2 : Bucket := { requests := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 128, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10] }
+def decodedDerivedOutcome14 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw31
+  let rows1 ← decodePlans metricRaw32
+  let requests2 ← decodeRequests metricRaw2
+  let rows2 ← decodePlans metricRaw3
+  derivedModelAccept { metricCase14Bucket1 with requests := requests1, rows := rows1 } { metricCase14Bucket2 with requests := requests2, rows := rows2 }
+def metricRaw33 : List Nat := [123,34,103,101,110,95,108,101,110,34,58,49,52,55,44,34,112,114,111,109,112,116,95,108,101,110,34,58,53,51,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,112,34,125,10]
+def metricRows33 : List Request := [{ id := [112], prompt := 53, generated := 147 }]
+def metricCase15Bucket1 : Bucket := { requests := [{ id := [112], prompt := 53, generated := 147 }], rows := [{ id := [112], batch := [98,97,116,99,104], shape := { seq := 64, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 57111037, denominator := 1 }, padding := { numerator := 11, denominator := 200 }, latency := { numerator := 137578759, denominator := 2500 }, sequential := { numerator := 137578759, denominator := 2500 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,52,55,44,34,112,114,111,109,112,116,95,108,101,110,34,58,53,51,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,112,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,52,55,44,34,112,114,111,109,112,116,95,108,101,110,34,58,53,51,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,112,34,125,10] }
+def metricCalculation15Requests : List Request := [{ id := [112], prompt := 53, generated := 147 }]
+def metricCalculation15Rows : List Row := [{ id := [112], batch := [98,97,116,99,104], shape := { seq := 64, heads := 32, hidden := 4096 } }]
+def metricCalculation15Expected : Metrics := { cost := { numerator := 57111037, denominator := 1 }, padding := { numerator := 11, denominator := 200 }, latency := { numerator := 137578759, denominator := 2500 }, sequential := { numerator := 137578759, denominator := 2500 } }
+def metricCase15Bucket2 : Bucket := { requests := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 128, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10] }
+def decodedDerivedOutcome15 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw33
+  let rows1 ← decodePlans metricRaw32
+  let requests2 ← decodeRequests metricRaw2
+  let rows2 ← decodePlans metricRaw3
+  derivedModelAccept { metricCase15Bucket1 with requests := requests1, rows := rows1 } { metricCase15Bucket2 with requests := requests2, rows := rows2 }
+def metricRaw34 : List Nat := [123,34,103,101,110,95,108,101,110,34,58,49,52,55,44,34,112,114,111,109,112,116,95,108,101,110,34,58,53,50,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,112,34,125,10]
+def metricRows34 : List Request := [{ id := [112], prompt := 52, generated := 147 }]
+def metricCase16Bucket1 : Bucket := { requests := [{ id := [112], prompt := 52, generated := 147 }], rows := [{ id := [112], batch := [98,97,116,99,104], shape := { seq := 64, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 57111037, denominator := 1 }, padding := { numerator := 12, denominator := 199 }, latency := { numerator := 137578759, denominator := 2500 }, sequential := { numerator := 137578759, denominator := 2500 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,52,55,44,34,112,114,111,109,112,116,95,108,101,110,34,58,53,50,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,112,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,52,55,44,34,112,114,111,109,112,116,95,108,101,110,34,58,53,50,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,112,34,125,10] }
+def metricCalculation16Requests : List Request := [{ id := [112], prompt := 52, generated := 147 }]
+def metricCalculation16Rows : List Row := [{ id := [112], batch := [98,97,116,99,104], shape := { seq := 64, heads := 32, hidden := 4096 } }]
+def metricCalculation16Expected : Metrics := { cost := { numerator := 57111037, denominator := 1 }, padding := { numerator := 12, denominator := 199 }, latency := { numerator := 137578759, denominator := 2500 }, sequential := { numerator := 137578759, denominator := 2500 } }
+def metricCase16Bucket2 : Bucket := { requests := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 128, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10] }
+def decodedDerivedOutcome16 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw34
+  let rows1 ← decodePlans metricRaw32
+  let requests2 ← decodeRequests metricRaw2
+  let rows2 ← decodePlans metricRaw3
+  derivedModelAccept { metricCase16Bucket1 with requests := requests1, rows := rows1 } { metricCase16Bucket2 with requests := requests2, rows := rows2 }
+def metricRaw35 : List Nat := [123,34,103,101,110,95,108,101,110,34,58,50,56,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,97,34,125,10,123,34,103,101,110,95,108,101,110,34,58,53,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,34,125,10]
+def metricRows35 : List Request := [{ id := [97], prompt := 64, generated := 28 },{ id := [98], prompt := 64, generated := 5 }]
+def metricRaw36 : List Nat := [123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,97,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,54,52,125,125,10,123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,54,52,125,125,10]
+def metricRows36 : List Row := [{ id := [97], batch := [98,97,116,99,104], shape := { seq := 64, heads := 32, hidden := 4096 } },{ id := [98], batch := [98,97,116,99,104], shape := { seq := 64, heads := 32, hidden := 4096 } }]
+def metricCase17Bucket1 : Bucket := { requests := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], prompt := 64, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 64, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 12977792, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1294756, denominator := 625 }, sequential := { numerator := 1294756, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10] }
+def metricCase17Bucket2 : Bucket := { requests := [{ id := [97], prompt := 64, generated := 28 },{ id := [98], prompt := 64, generated := 5 }], rows := [{ id := [97], batch := [98,97,116,99,104], shape := { seq := 64, heads := 32, hidden := 4096 } },{ id := [98], batch := [98,97,116,99,104], shape := { seq := 64, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 22341284, denominator := 1 }, padding := { numerator := 1, denominator := 7 }, latency := { numerator := 9308003, denominator := 1250 }, sequential := { numerator := 9308003, denominator := 1250 } }, before := [123,34,103,101,110,95,108,101,110,34,58,50,56,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,97,34,125,10,123,34,103,101,110,95,108,101,110,34,58,53,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,50,56,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,97,34,125,10,123,34,103,101,110,95,108,101,110,34,58,53,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,34,125,10] }
+def metricCalculation17Requests : List Request := [{ id := [97], prompt := 64, generated := 28 },{ id := [98], prompt := 64, generated := 5 }]
+def metricCalculation17Rows : List Row := [{ id := [97], batch := [98,97,116,99,104], shape := { seq := 64, heads := 32, hidden := 4096 } },{ id := [98], batch := [98,97,116,99,104], shape := { seq := 64, heads := 32, hidden := 4096 } }]
+def metricCalculation17Expected : Metrics := { cost := { numerator := 22341284, denominator := 1 }, padding := { numerator := 23, denominator := 161 }, latency := { numerator := 18616006, denominator := 2500 }, sequential := { numerator := 18616006, denominator := 2500 } }
+def decodedDerivedOutcome17 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw0
+  let rows1 ← decodePlans metricRaw1
+  let requests2 ← decodeRequests metricRaw35
+  let rows2 ← decodePlans metricRaw36
+  derivedModelAccept { metricCase17Bucket1 with requests := requests1, rows := rows1 } { metricCase17Bucket2 with requests := requests2, rows := rows2 }
+def metricRaw37 : List Nat := [123,34,103,101,110,95,108,101,110,34,58,50,56,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,97,34,125,10,123,34,103,101,110,95,108,101,110,34,58,53,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,51,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,34,125,10]
+def metricRows37 : List Request := [{ id := [97], prompt := 64, generated := 28 },{ id := [98], prompt := 63, generated := 5 }]
+def metricCase18Bucket1 : Bucket := { requests := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], prompt := 64, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 64, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 12977792, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1294756, denominator := 625 }, sequential := { numerator := 1294756, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10] }
+def metricCase18Bucket2 : Bucket := { requests := [{ id := [97], prompt := 64, generated := 28 },{ id := [98], prompt := 63, generated := 5 }], rows := [{ id := [97], batch := [98,97,116,99,104], shape := { seq := 64, heads := 32, hidden := 4096 } },{ id := [98], batch := [98,97,116,99,104], shape := { seq := 64, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 22341284, denominator := 1 }, padding := { numerator := 3, denominator := 20 }, latency := { numerator := 9308003, denominator := 1250 }, sequential := { numerator := 9308003, denominator := 1250 } }, before := [123,34,103,101,110,95,108,101,110,34,58,50,56,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,97,34,125,10,123,34,103,101,110,95,108,101,110,34,58,53,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,51,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,50,56,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,97,34,125,10,123,34,103,101,110,95,108,101,110,34,58,53,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,51,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,34,125,10] }
+def metricCalculation18Requests : List Request := [{ id := [97], prompt := 64, generated := 28 },{ id := [98], prompt := 63, generated := 5 }]
+def metricCalculation18Rows : List Row := [{ id := [97], batch := [98,97,116,99,104], shape := { seq := 64, heads := 32, hidden := 4096 } },{ id := [98], batch := [98,97,116,99,104], shape := { seq := 64, heads := 32, hidden := 4096 } }]
+def metricCalculation18Expected : Metrics := { cost := { numerator := 22341284, denominator := 1 }, padding := { numerator := 24, denominator := 160 }, latency := { numerator := 18616006, denominator := 2500 }, sequential := { numerator := 18616006, denominator := 2500 } }
+def decodedDerivedOutcome18 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw0
+  let rows1 ← decodePlans metricRaw1
+  let requests2 ← decodeRequests metricRaw37
+  let rows2 ← decodePlans metricRaw36
+  derivedModelAccept { metricCase18Bucket1 with requests := requests1, rows := rows1 } { metricCase18Bucket2 with requests := requests2, rows := rows2 }
+def metricRaw38 : List Nat := [123,34,103,101,110,95,108,101,110,34,58,50,56,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,97,34,125,10,123,34,103,101,110,95,108,101,110,34,58,53,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,50,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,34,125,10]
+def metricRows38 : List Request := [{ id := [97], prompt := 64, generated := 28 },{ id := [98], prompt := 62, generated := 5 }]
+def metricCase19Bucket1 : Bucket := { requests := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], prompt := 64, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 64, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 12977792, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1294756, denominator := 625 }, sequential := { numerator := 1294756, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10] }
+def metricCase19Bucket2 : Bucket := { requests := [{ id := [97], prompt := 64, generated := 28 },{ id := [98], prompt := 62, generated := 5 }], rows := [{ id := [97], batch := [98,97,116,99,104], shape := { seq := 64, heads := 32, hidden := 4096 } },{ id := [98], batch := [98,97,116,99,104], shape := { seq := 64, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 22341284, denominator := 1 }, padding := { numerator := 25, denominator := 159 }, latency := { numerator := 9308003, denominator := 1250 }, sequential := { numerator := 9308003, denominator := 1250 } }, before := [123,34,103,101,110,95,108,101,110,34,58,50,56,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,97,34,125,10,123,34,103,101,110,95,108,101,110,34,58,53,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,50,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,50,56,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,97,34,125,10,123,34,103,101,110,95,108,101,110,34,58,53,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,50,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,34,125,10] }
+def metricCalculation19Requests : List Request := [{ id := [97], prompt := 64, generated := 28 },{ id := [98], prompt := 62, generated := 5 }]
+def metricCalculation19Rows : List Row := [{ id := [97], batch := [98,97,116,99,104], shape := { seq := 64, heads := 32, hidden := 4096 } },{ id := [98], batch := [98,97,116,99,104], shape := { seq := 64, heads := 32, hidden := 4096 } }]
+def metricCalculation19Expected : Metrics := { cost := { numerator := 22341284, denominator := 1 }, padding := { numerator := 25, denominator := 159 }, latency := { numerator := 18616006, denominator := 2500 }, sequential := { numerator := 18616006, denominator := 2500 } }
+def decodedDerivedOutcome19 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw0
+  let rows1 ← decodePlans metricRaw1
+  let requests2 ← decodeRequests metricRaw38
+  let rows2 ← decodePlans metricRaw36
+  derivedModelAccept { metricCase19Bucket1 with requests := requests1, rows := rows1 } { metricCase19Bucket2 with requests := requests2, rows := rows2 }
+def metricRaw39 : List Nat := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,114,34,125,10]
+def metricRows39 : List Request := [{ id := [114], prompt := 64, generated := 1 }]
+def metricRaw40 : List Nat := [123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,114,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,56,49,57,50,125,125,10]
+def metricRows40 : List Row := [{ id := [114], batch := [98,97,116,99,104], shape := { seq := 8192, heads := 32, hidden := 4096 } }]
+def metricCase20Bucket1 : Bucket := { requests := [{ id := [114], prompt := 64, generated := 1 }], rows := [{ id := [114], batch := [98,97,116,99,104], shape := { seq := 8192, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 33631946368, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1294756, denominator := 625 }, sequential := { numerator := 1294756, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,114,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,114,34,125,10] }
+def metricCalculation20Requests : List Request := [{ id := [114], prompt := 64, generated := 1 }]
+def metricCalculation20Rows : List Row := [{ id := [114], batch := [98,97,116,99,104], shape := { seq := 8192, heads := 32, hidden := 4096 } }]
+def metricCalculation20Expected : Metrics := { cost := { numerator := 33631946368, denominator := 1 }, padding := { numerator := 0, denominator := 65 }, latency := { numerator := 5179024, denominator := 2500 }, sequential := { numerator := 5179024, denominator := 2500 } }
+def metricCase20Bucket2 : Bucket := { requests := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 128, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10] }
+def decodedDerivedOutcome20 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw39
+  let rows1 ← decodePlans metricRaw40
+  let requests2 ← decodeRequests metricRaw2
+  let rows2 ← decodePlans metricRaw3
+  derivedModelAccept { metricCase20Bucket1 with requests := requests1, rows := rows1 } { metricCase20Bucket2 with requests := requests2, rows := rows2 }
+def metricRaw41 : List Nat := [123,34,103,101,110,95,108,101,110,34,58,48,44,34,112,114,111,109,112,116,95,108,101,110,34,58,48,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,122,34,125,10]
+def metricRows41 : List Request := [{ id := [122], prompt := 0, generated := 0 }]
+def metricRaw42 : List Nat := [123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,122,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,48,125,125,10]
+def metricRows42 : List Row := [{ id := [122], batch := [98,97,116,99,104], shape := { seq := 0, heads := 32, hidden := 4096 } }]
+def metricCase21Bucket1 : Bucket := { requests := [{ id := [122], prompt := 0, generated := 0 }], rows := [{ id := [122], batch := [98,97,116,99,104], shape := { seq := 0, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 10000000, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1508, denominator := 1 }, sequential := { numerator := 1508, denominator := 1 } }, before := [123,34,103,101,110,95,108,101,110,34,58,48,44,34,112,114,111,109,112,116,95,108,101,110,34,58,48,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,122,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,48,44,34,112,114,111,109,112,116,95,108,101,110,34,58,48,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,122,34,125,10] }
+def metricCalculation21Requests : List Request := [{ id := [122], prompt := 0, generated := 0 }]
+def metricCalculation21Rows : List Row := [{ id := [122], batch := [98,97,116,99,104], shape := { seq := 0, heads := 32, hidden := 4096 } }]
+def metricCalculation21Expected : Metrics := { cost := { numerator := 10000000, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 3770000, denominator := 2500 }, sequential := { numerator := 3770000, denominator := 2500 } }
+def metricCase21Bucket2 : Bucket := { requests := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 128, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10] }
+def decodedDerivedOutcome21 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw41
+  let rows1 ← decodePlans metricRaw42
+  let requests2 ← decodeRequests metricRaw2
+  let rows2 ← decodePlans metricRaw3
+  derivedModelAccept { metricCase21Bucket1 with requests := requests1, rows := rows1 } { metricCase21Bucket2 with requests := requests2, rows := rows2 }
+def metricRaw43 : List Nat := [123,34,103,101,110,95,108,101,110,34,58,48,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,122,34,125,10]
+def metricRows43 : List Request := [{ id := [122], prompt := 64, generated := 0 }]
+def metricRaw44 : List Nat := [123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,122,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,54,52,125,125,10]
+def metricRows44 : List Row := [{ id := [122], batch := [98,97,116,99,104], shape := { seq := 64, heads := 32, hidden := 4096 } }]
+def metricCase22Bucket1 : Bucket := { requests := [{ id := [122], prompt := 64, generated := 0 }], rows := [{ id := [122], batch := [98,97,116,99,104], shape := { seq := 64, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 12842624, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 238676, denominator := 125 }, sequential := { numerator := 238676, denominator := 125 } }, before := [123,34,103,101,110,95,108,101,110,34,58,48,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,122,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,48,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,122,34,125,10] }
+def metricCalculation22Requests : List Request := [{ id := [122], prompt := 64, generated := 0 }]
+def metricCalculation22Rows : List Row := [{ id := [122], batch := [98,97,116,99,104], shape := { seq := 64, heads := 32, hidden := 4096 } }]
+def metricCalculation22Expected : Metrics := { cost := { numerator := 12842624, denominator := 1 }, padding := { numerator := 0, denominator := 64 }, latency := { numerator := 4773520, denominator := 2500 }, sequential := { numerator := 4773520, denominator := 2500 } }
+def metricCase22Bucket2 : Bucket := { requests := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 128, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10] }
+def decodedDerivedOutcome22 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw43
+  let rows1 ← decodePlans metricRaw44
+  let requests2 ← decodeRequests metricRaw2
+  let rows2 ← decodePlans metricRaw3
+  derivedModelAccept { metricCase22Bucket1 with requests := requests1, rows := rows1 } { metricCase22Bucket2 with requests := requests2, rows := rows2 }
+def metricRaw45 : List Nat := [123,34,103,101,110,95,108,101,110,34,58,55,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,114,34,125,10]
+def metricRows45 : List Request := [{ id := [114], prompt := 64, generated := 7 }]
+def metricRaw46 : List Nat := [123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,114,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,54,52,125,125,10]
+def metricRows46 : List Row := [{ id := [114], batch := [98,97,116,99,104], shape := { seq := 64, heads := 32, hidden := 4096 } }]
+def metricCase23Bucket1 : Bucket := { requests := [{ id := [114], prompt := 64, generated := 7 }], rows := [{ id := [114], batch := [98,97,116,99,104], shape := { seq := 64, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 13834587, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 7749409, denominator := 2500 }, sequential := { numerator := 7749409, denominator := 2500 } }, before := [123,34,103,101,110,95,108,101,110,34,58,55,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,114,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,55,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,114,34,125,10] }
+def metricCalculation23Requests : List Request := [{ id := [114], prompt := 64, generated := 7 }]
+def metricCalculation23Rows : List Row := [{ id := [114], batch := [98,97,116,99,104], shape := { seq := 64, heads := 32, hidden := 4096 } }]
+def metricCalculation23Expected : Metrics := { cost := { numerator := 13834587, denominator := 1 }, padding := { numerator := 0, denominator := 71 }, latency := { numerator := 7749409, denominator := 2500 }, sequential := { numerator := 7749409, denominator := 2500 } }
+def metricCase23Bucket2 : Bucket := { requests := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 128, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10] }
+def decodedDerivedOutcome23 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw45
+  let rows1 ← decodePlans metricRaw46
+  let requests2 ← decodeRequests metricRaw2
+  let rows2 ← decodePlans metricRaw3
+  derivedModelAccept { metricCase23Bucket1 with requests := requests1, rows := rows1 } { metricCase23Bucket2 with requests := requests2, rows := rows2 }
+def metricRaw47 : List Nat := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,115,109,97,108,108,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,108,97,114,103,101,34,125,10]
+def metricRows47 : List Request := [{ id := [115,109,97,108,108], prompt := 64, generated := 1 },{ id := [108,97,114,103,101], prompt := 128, generated := 1 }]
+def metricRaw48 : List Nat := [123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,115,109,97,108,108,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,49,50,56,125,125,10,123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,108,97,114,103,101,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,49,50,56,125,125,10]
+def metricRows48 : List Row := [{ id := [115,109,97,108,108], batch := [98,97,116,99,104], shape := { seq := 128, heads := 32, hidden := 4096 } },{ id := [108,97,114,103,101], batch := [98,97,116,99,104], shape := { seq := 128, heads := 32, hidden := 4096 } }]
+def metricCase24Bucket1 : Bucket := { requests := [{ id := [115,109,97,108,108], prompt := 64, generated := 1 },{ id := [108,97,114,103,101], prompt := 128, generated := 1 }], rows := [{ id := [115,109,97,108,108], batch := [98,97,116,99,104], shape := { seq := 128, heads := 32, hidden := 4096 } },{ id := [108,97,114,103,101], batch := [98,97,116,99,104], shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 20625024, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1402276, denominator := 625 }, sequential := { numerator := 1402276, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,115,109,97,108,108,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,108,97,114,103,101,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,115,109,97,108,108,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,108,97,114,103,101,34,125,10] }
+def metricCalculation24Requests : List Request := [{ id := [115,109,97,108,108], prompt := 64, generated := 1 },{ id := [108,97,114,103,101], prompt := 128, generated := 1 }]
+def metricCalculation24Rows : List Row := [{ id := [115,109,97,108,108], batch := [98,97,116,99,104], shape := { seq := 128, heads := 32, hidden := 4096 } },{ id := [108,97,114,103,101], batch := [98,97,116,99,104], shape := { seq := 128, heads := 32, hidden := 4096 } }]
+def metricCalculation24Expected : Metrics := { cost := { numerator := 20625024, denominator := 1 }, padding := { numerator := 0, denominator := 194 }, latency := { numerator := 5609104, denominator := 2500 }, sequential := { numerator := 5609104, denominator := 2500 } }
+def metricCase24Bucket2 : Bucket := { requests := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 128, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10] }
+def decodedDerivedOutcome24 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw47
+  let rows1 ← decodePlans metricRaw48
+  let requests2 ← decodeRequests metricRaw2
+  let rows2 ← decodePlans metricRaw3
+  derivedModelAccept { metricCase24Bucket1 with requests := requests1, rows := rows1 } { metricCase24Bucket2 with requests := requests2, rows := rows2 }
+def metricRaw49 : List Nat := [123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,108,97,114,103,101,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,49,50,56,125,125,10,123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,115,109,97,108,108,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,49,50,56,125,125,10]
+def metricRows49 : List Row := [{ id := [108,97,114,103,101], batch := [98,97,116,99,104], shape := { seq := 128, heads := 32, hidden := 4096 } },{ id := [115,109,97,108,108], batch := [98,97,116,99,104], shape := { seq := 128, heads := 32, hidden := 4096 } }]
+def metricCase25Bucket1 : Bucket := { requests := [{ id := [115,109,97,108,108], prompt := 64, generated := 1 },{ id := [108,97,114,103,101], prompt := 128, generated := 1 }], rows := [{ id := [108,97,114,103,101], batch := [98,97,116,99,104], shape := { seq := 128, heads := 32, hidden := 4096 } },{ id := [115,109,97,108,108], batch := [98,97,116,99,104], shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 20625024, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,115,109,97,108,108,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,108,97,114,103,101,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,115,109,97,108,108,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,108,97,114,103,101,34,125,10] }
+def metricCalculation25Requests : List Request := [{ id := [115,109,97,108,108], prompt := 64, generated := 1 },{ id := [108,97,114,103,101], prompt := 128, generated := 1 }]
+def metricCalculation25Rows : List Row := [{ id := [108,97,114,103,101], batch := [98,97,116,99,104], shape := { seq := 128, heads := 32, hidden := 4096 } },{ id := [115,109,97,108,108], batch := [98,97,116,99,104], shape := { seq := 128, heads := 32, hidden := 4096 } }]
+def metricCalculation25Expected : Metrics := { cost := { numerator := 20625024, denominator := 1 }, padding := { numerator := 0, denominator := 194 }, latency := { numerator := 6653584, denominator := 2500 }, sequential := { numerator := 6653584, denominator := 2500 } }
+def metricCase25Bucket2 : Bucket := { requests := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 128, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10] }
+def decodedDerivedOutcome25 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw47
+  let rows1 ← decodePlans metricRaw49
+  let requests2 ← decodeRequests metricRaw2
+  let rows2 ← decodePlans metricRaw3
+  derivedModelAccept { metricCase25Bucket1 with requests := requests1, rows := rows1 } { metricCase25Bucket2 with requests := requests2, rows := rows2 }
+def metricRaw50 : List Nat := [123,34,98,97,116,99,104,95,105,100,34,58,34,50,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,115,109,97,108,108,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,49,50,56,125,125,10,123,34,98,97,116,99,104,95,105,100,34,58,34,49,48,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,108,97,114,103,101,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,49,50,56,125,125,10]
+def metricRows50 : List Row := [{ id := [115,109,97,108,108], batch := [50], shape := { seq := 128, heads := 32, hidden := 4096 } },{ id := [108,97,114,103,101], batch := [49,48], shape := { seq := 128, heads := 32, hidden := 4096 } }]
+def metricCase26Bucket1 : Bucket := { requests := [{ id := [115,109,97,108,108], prompt := 64, generated := 1 },{ id := [108,97,114,103,101], prompt := 128, generated := 1 }], rows := [{ id := [115,109,97,108,108], batch := [50], shape := { seq := 128, heads := 32, hidden := 4096 } },{ id := [108,97,114,103,101], batch := [49,48], shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 30481664, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 2020652, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,115,109,97,108,108,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,108,97,114,103,101,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,115,109,97,108,108,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,108,97,114,103,101,34,125,10] }
+def metricCalculation26Requests : List Request := [{ id := [115,109,97,108,108], prompt := 64, generated := 1 },{ id := [108,97,114,103,101], prompt := 128, generated := 1 }]
+def metricCalculation26Rows : List Row := [{ id := [115,109,97,108,108], batch := [50], shape := { seq := 128, heads := 32, hidden := 4096 } },{ id := [108,97,114,103,101], batch := [49,48], shape := { seq := 128, heads := 32, hidden := 4096 } }]
+def metricCalculation26Expected : Metrics := { cost := { numerator := 30481664, denominator := 1 }, padding := { numerator := 0, denominator := 194 }, latency := { numerator := 6653584, denominator := 2500 }, sequential := { numerator := 8082608, denominator := 2500 } }
+def metricCase26Bucket2 : Bucket := { requests := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 128, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 20076160, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1663396, denominator := 625 }, sequential := { numerator := 1663396, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10] }
+def decodedDerivedOutcome26 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw47
+  let rows1 ← decodePlans metricRaw50
+  let requests2 ← decodeRequests metricRaw2
+  let rows2 ← decodePlans metricRaw3
+  derivedModelAccept { metricCase26Bucket1 with requests := requests1, rows := rows1 } { metricCase26Bucket2 with requests := requests2, rows := rows2 }
+def metricRaw51 : List Nat := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,115,97,109,101,34,125,10]
+def metricRows51 : List Request := [{ id := [115,97,109,101], prompt := 64, generated := 1 }]
+def metricRaw52 : List Nat := [123,34,98,97,116,99,104,95,105,100,34,58,34,115,97,109,101,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,115,97,109,101,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,54,52,125,125,10]
+def metricRows52 : List Row := [{ id := [115,97,109,101], batch := [115,97,109,101], shape := { seq := 64, heads := 32, hidden := 4096 } }]
+def metricCase27Bucket1 : Bucket := { requests := [{ id := [115,97,109,101], prompt := 64, generated := 1 }], rows := [{ id := [115,97,109,101], batch := [115,97,109,101], shape := { seq := 64, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 12977792, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1294756, denominator := 625 }, sequential := { numerator := 1294756, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,115,97,109,101,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,115,97,109,101,34,125,10] }
+def metricCalculation27Requests : List Request := [{ id := [115,97,109,101], prompt := 64, generated := 1 }]
+def metricCalculation27Rows : List Row := [{ id := [115,97,109,101], batch := [115,97,109,101], shape := { seq := 64, heads := 32, hidden := 4096 } }]
+def metricCalculation27Expected : Metrics := { cost := { numerator := 12977792, denominator := 1 }, padding := { numerator := 0, denominator := 65 }, latency := { numerator := 5179024, denominator := 2500 }, sequential := { numerator := 5179024, denominator := 2500 } }
+def metricCase27Bucket2 : Bucket := { requests := [{ id := [115,97,109,101], prompt := 64, generated := 1 }], rows := [{ id := [115,97,109,101], batch := [115,97,109,101], shape := { seq := 64, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 12977792, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1294756, denominator := 625 }, sequential := { numerator := 1294756, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,115,97,109,101,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,115,97,109,101,34,125,10] }
+def decodedDerivedOutcome27 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw51
+  let rows1 ← decodePlans metricRaw52
+  let requests2 ← decodeRequests metricRaw51
+  let rows2 ← decodePlans metricRaw52
+  derivedModelAccept { metricCase27Bucket1 with requests := requests1, rows := rows1 } { metricCase27Bucket2 with requests := requests2, rows := rows2 }
+def metricRaw53 : List Nat := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,52,48,57,55,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,114,34,125,10]
+def metricRows53 : List Request := [{ id := [114], prompt := 4097, generated := 1 }]
+def metricRaw54 : List Nat := [123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,114,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,52,49,54,48,125,125,10]
+def metricRows54 : List Row := [{ id := [114], batch := [98,97,116,99,104], shape := { seq := 4160, heads := 32, hidden := 4096 } }]
+def metricCase28Bucket1 : Bucket := { requests := [{ id := [114], prompt := 4097, generated := 1 }], rows := [{ id := [114], batch := [98,97,116,99,104], shape := { seq := 4160, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 0, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 0, denominator := 1 }, sequential := { numerator := 0, denominator := 1 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,52,48,57,55,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,114,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,52,48,57,55,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,114,34,125,10] }
+def metricCase28Bucket2 : Bucket := { requests := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 128, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 0, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 0, denominator := 1 }, sequential := { numerator := 0, denominator := 1 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10] }
+def decodedDerivedOutcome28 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw53
+  let rows1 ← decodePlans metricRaw54
+  let requests2 ← decodeRequests metricRaw2
+  let rows2 ← decodePlans metricRaw3
+  derivedModelAccept { metricCase28Bucket1 with requests := requests1, rows := rows1 } { metricCase28Bucket2 with requests := requests2, rows := rows2 }
+def metricRaw55 : List Nat := [123,34,103,101,110,95,108,101,110,34,58,49,48,50,53,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,114,34,125,10]
+def metricRows55 : List Request := [{ id := [114], prompt := 64, generated := 1025 }]
+def metricCase29Bucket1 : Bucket := { requests := [{ id := [114], prompt := 64, generated := 1025 }], rows := [{ id := [114], batch := [98,97,116,99,104], shape := { seq := 64, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 0, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 0, denominator := 1 }, sequential := { numerator := 0, denominator := 1 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,48,50,53,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,114,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,48,50,53,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,114,34,125,10] }
+def metricCase29Bucket2 : Bucket := { requests := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 128, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 0, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 0, denominator := 1 }, sequential := { numerator := 0, denominator := 1 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10] }
+def decodedDerivedOutcome29 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw55
+  let rows1 ← decodePlans metricRaw46
+  let requests2 ← decodeRequests metricRaw2
+  let rows2 ← decodePlans metricRaw3
+  derivedModelAccept { metricCase29Bucket1 with requests := requests1, rows := rows1 } { metricCase29Bucket2 with requests := requests2, rows := rows2 }
+def metricRaw56 : List Nat := [123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,114,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,56,49,57,51,125,125,10]
+def metricRows56 : List Row := [{ id := [114], batch := [98,97,116,99,104], shape := { seq := 8193, heads := 32, hidden := 4096 } }]
+def metricCase30Bucket1 : Bucket := { requests := [{ id := [114], prompt := 64, generated := 1 }], rows := [{ id := [114], batch := [98,97,116,99,104], shape := { seq := 8193, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 0, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 0, denominator := 1 }, sequential := { numerator := 0, denominator := 1 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,114,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,114,34,125,10] }
+def metricCase30Bucket2 : Bucket := { requests := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], prompt := 128, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 0, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 0, denominator := 1 }, sequential := { numerator := 0, denominator := 1 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,49,50,56,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,50,45,114,101,113,117,101,115,116,48,34,125,10] }
+def decodedDerivedOutcome30 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw39
+  let rows1 ← decodePlans metricRaw56
+  let requests2 ← decodeRequests metricRaw2
+  let rows2 ← decodePlans metricRaw3
+  derivedModelAccept { metricCase30Bucket1 with requests := requests1, rows := rows1 } { metricCase30Bucket2 with requests := requests2, rows := rows2 }
+def metricRaw57 : List Nat := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,97,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,34,125,10]
+def metricRows57 : List Request := [{ id := [97], prompt := 64, generated := 1 },{ id := [98], prompt := 64, generated := 1 }]
+def metricRaw58 : List Nat := [123,34,98,97,116,99,104,95,105,100,34,58,34,97,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,97,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,56,49,57,50,125,125,10,123,34,98,97,116,99,104,95,105,100,34,58,34,98,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,56,49,50,56,125,125,10]
+def metricRows58 : List Row := [{ id := [97], batch := [97], shape := { seq := 8192, heads := 32, hidden := 4096 } },{ id := [98], batch := [98], shape := { seq := 8128, heads := 32, hidden := 4096 } }]
+def metricCase31Bucket1 : Bucket := { requests := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], prompt := 64, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 64, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 12977792, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1294756, denominator := 625 }, sequential := { numerator := 1294756, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10] }
+def metricCase31Bucket2 : Bucket := { requests := [{ id := [97], prompt := 64, generated := 1 },{ id := [98], prompt := 64, generated := 1 }], rows := [{ id := [97], batch := [97], shape := { seq := 8192, heads := 32, hidden := 4096 } },{ id := [98], batch := [98], shape := { seq := 8128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 66741128448, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1294756, denominator := 625 }, sequential := { numerator := 2589512, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,97,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,97,34,125,10,123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,34,125,10] }
+def metricCalculation28Requests : List Request := [{ id := [97], prompt := 64, generated := 1 },{ id := [98], prompt := 64, generated := 1 }]
+def metricCalculation28Rows : List Row := [{ id := [97], batch := [97], shape := { seq := 8192, heads := 32, hidden := 4096 } },{ id := [98], batch := [98], shape := { seq := 8128, heads := 32, hidden := 4096 } }]
+def metricCalculation28Expected : Metrics := { cost := { numerator := 66741128448, denominator := 1 }, padding := { numerator := 0, denominator := 130 }, latency := { numerator := 5179024, denominator := 2500 }, sequential := { numerator := 10358048, denominator := 2500 } }
+def decodedDerivedOutcome31 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw0
+  let rows1 ← decodePlans metricRaw1
+  let requests2 ← decodeRequests metricRaw57
+  let rows2 ← decodePlans metricRaw58
+  derivedModelAccept { metricCase31Bucket1 with requests := requests1, rows := rows1 } { metricCase31Bucket2 with requests := requests2, rows := rows2 }
+def metricRaw59 : List Nat := [123,34,103,101,110,95,108,101,110,34,58,49,48,50,52,44,34,112,114,111,109,112,116,95,108,101,110,34,58,52,48,57,54,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,114,34,125,10]
+def metricRows59 : List Request := [{ id := [114], prompt := 4096, generated := 1024 }]
+def metricRaw60 : List Nat := [123,34,98,97,116,99,104,95,105,100,34,58,34,98,97,116,99,104,34,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,114,34,44,34,115,104,97,112,101,34,58,123,34,104,101,97,100,115,95,97,108,105,103,110,34,58,51,50,44,34,104,105,100,100,101,110,95,97,108,105,103,110,34,58,52,48,57,54,44,34,115,101,113,95,97,108,105,103,110,34,58,52,48,57,54,125,125,10]
+def metricRows60 : List Row := [{ id := [114], batch := [98,97,116,99,104], shape := { seq := 4096, heads := 32, hidden := 4096 } }]
+def metricCase32Bucket1 : Bucket := { requests := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], prompt := 64, generated := 1 }], rows := [{ id := [98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48], batch := [98,97,116,99,104,48], shape := { seq := 64, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 12977792, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 1294756, denominator := 625 }, sequential := { numerator := 1294756, denominator := 625 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,44,34,112,114,111,109,112,116,95,108,101,110,34,58,54,52,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,98,117,99,107,101,116,49,45,114,101,113,117,101,115,116,48,34,125,10] }
+def metricCase32Bucket2 : Bucket := { requests := [{ id := [114], prompt := 4096, generated := 1024 }], rows := [{ id := [114], batch := [98,97,116,99,104], shape := { seq := 4096, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 39973153920, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 4731127508, denominator := 125 }, sequential := { numerator := 4731127508, denominator := 125 } }, before := [123,34,103,101,110,95,108,101,110,34,58,49,48,50,52,44,34,112,114,111,109,112,116,95,108,101,110,34,58,52,48,57,54,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,114,34,125,10], after := [123,34,103,101,110,95,108,101,110,34,58,49,48,50,52,44,34,112,114,111,109,112,116,95,108,101,110,34,58,52,48,57,54,44,34,114,101,113,117,101,115,116,95,105,100,34,58,34,114,34,125,10] }
+def metricCalculation29Requests : List Request := [{ id := [114], prompt := 4096, generated := 1024 }]
+def metricCalculation29Rows : List Row := [{ id := [114], batch := [98,97,116,99,104], shape := { seq := 4096, heads := 32, hidden := 4096 } }]
+def metricCalculation29Expected : Metrics := { cost := { numerator := 39973153920, denominator := 1 }, padding := { numerator := 0, denominator := 5120 }, latency := { numerator := 94622550160, denominator := 2500 }, sequential := { numerator := 94622550160, denominator := 2500 } }
+def decodedDerivedOutcome32 : Option Bool := do
+  let requests1 ← decodeRequests metricRaw0
+  let rows1 ← decodePlans metricRaw1
+  let requests2 ← decodeRequests metricRaw59
+  let rows2 ← decodePlans metricRaw60
+  derivedModelAccept { metricCase32Bucket1 with requests := requests1, rows := rows1 } { metricCase32Bucket2 with requests := requests2, rows := rows2 }
+end DecoderKernel

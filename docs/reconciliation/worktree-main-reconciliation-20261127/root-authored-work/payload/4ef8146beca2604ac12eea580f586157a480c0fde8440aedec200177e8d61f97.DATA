@@ -1,0 +1,368 @@
+"""Distinct rendered-input audit tests; no provider or admission qualification.
+
+The reused appendix fixture really compiles native code/semantic capsules and
+replays codecs. Its public admission and historical catalog replay are explicit
+ordering stubs. Scalar validator and child-collector controls are authored units.
+No original repository, owner database, target module or provider is used.
+"""
+from copy import deepcopy
+import hashlib
+import json
+from pathlib import Path
+import subprocess
+import sys
+from types import SimpleNamespace
+
+import pytest
+
+from benchmarks.agent_supervisor.container_coding import terminal_context_audit as legacy
+from benchmarks.agent_supervisor.container_coding import terminal_model_input_observation_audit as audit
+from benchmarks.agent_supervisor.container_coding.test_terminal_context_audit import (
+    captured_nomination, compiled, retrieval_projection_case, _materialized_projection_receipt,
+)
+from benchmarks.agent_supervisor.container_coding.test_terminal_nomination_context_audit import (
+    appendix_case, fresh_namespaces,
+)
+from ipfs_accelerate_py.agent_supervisor.runtime.model_input_observation_receipt import (
+    OBSERVATION_FIELDS, SCHEMA, validate_model_input_observation,
+)
+from ipfs_accelerate_py.agent_supervisor.runtime import reviewed_source_nomination_audit as historical
+
+
+def wire(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False,
+        allow_nan=False).encode("utf-8")
+
+
+def observation(case, mode="expanded", *, identity="a" * 32):
+    """Adapt common authored rendering facts, never a provider receipt schema."""
+    if "write_receipt" in case:
+        case["write_receipt"](mode)
+    common = case["receipts"][0]
+    value = {key: deepcopy(common[key]) for key in OBSERVATION_FIELDS if key in common}
+    value.update(schema=SCHEMA, observation_id=identity, status="observed", error_type=None,
+        requested_provider="codex_cli", requested_model="authored-unit-model", reasoning_effort="high",
+        intent_requirements_transport="expanded", code_retrieval_wire_delivery=common.get("code_retrieval_wire_delivery", "inline"),
+        code_retrieval_projection=deepcopy(common.get("code_retrieval_projection")),
+        reviewed_source_nomination_context=deepcopy(common.get("reviewed_source_nomination_context")),
+        doctor_residual_context=None, timeout_seconds=90, requested_output_tokens=4096,
+        provider_attempted=False, router_calls=0, usage=None, native_rollout_usage=None,
+        execution_authority=False, proof_authority=False, completion_authority=False,
+        external_container_boundary={"schema": "supervisor-container-worker-boundary@1",
+            "container_id": "authored-fixture-container", "image_id": "authored-fixture-image",
+            "namespaces": {"pid": "authored-pid", "mnt": "authored-mnt", "net": "authored-net"},
+            "owner_uid": 1000, "worker_uid": 1001, "purpose": "coding",
+            "manifest_sha256": "b" * 64, "completion_authority": False},
+        final_custody_guard_verified=True,
+        wire_delivery_post_observation_verified=True if common.get("code_retrieval_wire_delivery") == "materialized" else None,
+        wire_delivery_cleanup_status="removed" if common.get("code_retrieval_wire_delivery") == "materialized" else None,
+        seconds=0.125)
+    assert set(value) == OBSERVATION_FIELDS and len(value) == 43
+    return validate_model_input_observation(value)
+
+
+@pytest.fixture
+def scalar_observation():
+    """Pure valid shape with declared identities, not genuine native admission."""
+    source_sha = "d" * 64
+    value = {"schema": SCHEMA, "observation_id": "a" * 32, "status": "observed", "error_type": None,
+        "requested_provider": "codex_cli", "requested_model": "authored-unit-model", "reasoning_effort": "high",
+        "purpose": "coding", "workspace": "/opt/ipfs-supervisor/worktrees/fixture",
+        "semantic_transport": "native", "intent_requirements_transport": "expanded",
+        "code_retrieval_codec": "expanded", "code_retrieval_wire_delivery": "inline",
+        "code_retrieval_projection": None, "semantic_translation": None, "doctor_residual_context": None,
+        "reviewed_source_nomination_context": None, "timeout_seconds": 90, "requested_output_tokens": 4096,
+        "provider_attempted": False, "router_calls": 0, "usage": None, "native_rollout_usage": None,
+        "execution_authority": False, "proof_authority": False, "completion_authority": False,
+        "external_container_boundary": {"schema": "supervisor-container-worker-boundary@1",
+            "container_id": "authored-container", "image_id": "authored-image", "namespaces": {"pid": "authored"},
+            "owner_uid": 1000, "worker_uid": 1001, "purpose": "coding", "manifest_sha256": "b" * 64,
+            "completion_authority": False}, "final_custody_guard_verified": True,
+        "wire_delivery_post_observation_verified": None, "wire_delivery_cleanup_status": None, "seconds": 1.0,
+        "semantic_context_verification": {"schema": "semantic-router-source-verification@1",
+            "freshness_checked": True, "task_id": "authored-task", "scope_cid": "cid:scope",
+            "semantic_root_cid": "cid:semantic", "semantic_sha256": "e" * 64,
+            "native_prompt_sha256": "a" * 64, "native_prompt_bytes": 100},
+        "public_instruction": {"schema": "supervisor-public-instruction-inclusion@1",
+            "manifest_signature_verified": True, "verbatim_utf8": True, "source_freshness_verified": True,
+            "semantic_minification_applied": False, "historical_replay": False, "completion_authority": False,
+            "scope_expansion_authority": False, "artifact_sha256": "c" * 64,
+            "source_sha256": source_sha, "block_sha256": "f" * 64, "task_cid": "cid:task"}}
+    for prefix, count in (("prompt", 100), ("native_prompt", 100), ("router_prompt", 100),
+            ("workspace_advisory", 20), ("model_prompt", 120)):
+        value[prefix + "_sha256"] = "a" * 64
+        value[prefix + "_bytes"] = count
+    return validate_model_input_observation(value)
+
+
+def run(case, rows):
+    return audit.audit_terminal_model_input_observations(state=case["state"], observations=rows,
+        workspace_root=case["workspace_root"])
+
+
+def no_provider_claim(result):
+    assert result["provider_invocations_created"] == result["provider_calls"] == 0
+    for key in ("provider_transmission_verified", "provider_usage_measured", "current_freshness_verified",
+            "task_correctness_established", "proof_authority", "execution_authority", "completion_authority",
+            "raw_prompts_exported"):
+        assert result[key] is False
+
+
+@pytest.mark.parametrize("mode", ["expanded", "compact_v2", "legacy_v1", "identifiers"])
+@pytest.mark.parametrize("published", [False, True])
+def test_four_transports_replay_exact_retired_workspace_render(appendix_case, mode, published):
+    case = appendix_case
+    value = observation(case, mode)
+    if published:
+        (case["repository"] / "bottle.py").write_text("def controlled_publication():\n    return None\n")
+    case["guard_calls"].clear()
+    result = run(case, [value])
+    assert result["status"] == "verified_all_rendered_model_inputs", result
+    assert result["all_rendered_model_inputs_verified"] is True
+    assert result["observations"][0]["observation_id"] == value["observation_id"]
+    assert result["observations"][0]["rendered_model_input_verified"] is True
+    assert result["matches"][0]["model_prompt_sha256"] == hashlib.sha256(case["model"].encode()).hexdigest()
+    assert all(result["matches"][0]["model_input_checks"].values())
+    assert case["guard_calls"] == [True] and not case["workspace_root"].exists()
+    assert result["world_scope"].startswith("sealed historical capture")
+    exported = json.dumps(result)
+    assert case["query"] not in exported and case["catalog"] not in exported
+    assert '"invocation_id"' not in exported and '"invocations"' not in exported
+    no_provider_claim(result)
+
+
+@pytest.mark.parametrize("field", ["model_prompt_sha256", "router_prompt_sha256", "workspace_advisory_sha256"])
+def test_digest_tamper_keeps_native_match_but_refuses_exact_render(appendix_case, field):
+    case = appendix_case; value = observation(case)
+    value[field] = "f" * 64
+    validate_model_input_observation(value)
+    result = run(case, [value])
+    assert result["all_rendered_model_inputs_verified"] is False
+    assert result["observations"][0]["native_input_verified"] is True
+    assert result["observations"][0]["rendered_model_input_verified"] is False
+    no_provider_claim(result)
+
+
+def test_refused_render_is_not_an_observed_input(appendix_case):
+    case = appendix_case; value = observation(case)
+    value.update(status="refused", error_type="ValueError", final_custody_guard_verified=False)
+    validate_model_input_observation(value)
+    result = run(case, [value])
+    assert result["all_rendered_model_inputs_verified"] is not True
+    assert result["usable_observation_records"] == 0 and result["observations"] == []
+    assert result["read_errors"]
+    assert "world_scope" in result
+    no_provider_claim(result)
+
+
+@pytest.mark.parametrize("conflicting", [False, True])
+def test_duplicate_identity_prevents_population_verification(appendix_case, conflicting):
+    case = appendix_case; value = observation(case); second = deepcopy(value)
+    if conflicting: second["model_prompt_sha256"] = "f" * 64
+    result = run(case, [value, second])
+    assert result["observed_records_seen"] == 2 and result["usable_observation_records"] == 1
+    assert result["all_rendered_model_inputs_verified"] is False and result["read_errors"]
+    no_provider_claim(result)
+
+
+def test_two_distinct_observations_remain_two_renderings_not_provider_invocations(appendix_case):
+    case = appendix_case; first = observation(case); second = deepcopy(first)
+    second["observation_id"] = "b" * 32
+    result = run(case, [first, second])
+    assert result["all_rendered_model_inputs_verified"] is True
+    assert {row["observation_id"] for row in result["observations"]} == {"a" * 32, "b" * 32}
+    no_provider_claim(result)
+
+
+def test_missing_catalog_scalar_cannot_downgrade_required_native_pointer(appendix_case):
+    case = appendix_case; value = observation(case)
+    value["reviewed_source_nomination_context"] = None
+    validate_model_input_observation(value)
+    result = run(case, [value])
+    assert result["all_rendered_model_inputs_verified"] is False and not result["matches"]
+    assert not case["catalog_calls"]
+
+
+def test_final_catalog_witness_runs_after_whole_model_render(appendix_case, monkeypatch):
+    case = appendix_case; value = observation(case)
+    original = historical.replay_reviewed_source_nomination_context
+    def guarded(**kwargs):
+        block, receipt, _ = original(**kwargs)
+        def refuse():
+            raise ValueError("authored final witness mutation")
+        return block, receipt, refuse
+    monkeypatch.setattr(historical, "replay_reviewed_source_nomination_context", guarded)
+    result = run(case, [value])
+    assert result["all_rendered_model_inputs_verified"] is False and not result["matches"]
+    assert {row["error_type"] for row in result["read_errors"]} == {"ValueError"}
+
+
+def test_materialized_observation_replays_without_live_wire_or_metadata_factory(
+        retrieval_projection_case, monkeypatch, tmp_path):
+    import builtins
+    import io
+    import os
+    from ipfs_accelerate_py.agent_supervisor.runtime import supervisor_meta_index as meta
+    case = retrieval_projection_case
+    packet, path = _materialized_projection_receipt(case)
+    value = observation(case)
+    archived = tmp_path / "retired-public-wire.json"
+    archived.write_bytes(packet); archived.unlink()
+    (case["repository"] / "bottle.py").write_text("def controlled_publication():\n    return None\n")
+    def guard(original):
+        def protected(file, *args, **kwargs):
+            if isinstance(file, (str, Path)) and str(file).startswith("/opt/ipfs-supervisor/worker-home/context-wires/"):
+                raise AssertionError("historical observer opened a live wire")
+            return original(file, *args, **kwargs)
+        return protected
+    monkeypatch.setattr(builtins, "open", guard(builtins.open))
+    monkeypatch.setattr(io, "open", guard(io.open))
+    monkeypatch.setattr(os, "open", guard(os.open))
+    def forbidden(*_, **__):
+        raise AssertionError("historical observer contacted configured owner metadata")
+    monkeypatch.setattr(meta.SupervisorMetaIndex, "from_env", forbidden)
+    result = run(case, [value])
+    assert result["status"] == "verified_all_rendered_model_inputs", result
+    assert result["all_rendered_model_inputs_verified"] is True
+    assert value["code_retrieval_projection"]["wire_delivery"]["path"] == path
+    assert value["code_retrieval_projection"]["wire_delivery"]["owner_custody"] is False
+    assert not archived.exists() and not case["workspace_root"].exists()
+    no_provider_claim(result)
+
+
+def test_metadata_replay_guard_restores_after_success_and_failure(appendix_case, monkeypatch):
+    from ipfs_accelerate_py.agent_supervisor.runtime import supervisor_meta_index as meta
+    case = appendix_case; value = observation(case); calls = []
+    def configured(*_, **__):
+        calls.append(True)
+        return None
+    monkeypatch.setattr(meta.SupervisorMetaIndex, "from_env", configured)
+    assert run(case, [value])["all_rendered_model_inputs_verified"] is True and calls == []
+    broken = deepcopy(value); broken["model_prompt_sha256"] = "f" * 64
+    assert run(case, [broken])["all_rendered_model_inputs_verified"] is False and calls == []
+    meta.SupervisorMetaIndex.from_env()
+    assert calls == [True]
+
+
+def test_real_materialized_observer_requires_post_render_lifecycle_evidence(retrieval_projection_case):
+    case = retrieval_projection_case
+    _materialized_projection_receipt(case)
+    value = observation(case)
+    assert value["code_retrieval_projection"]["wire_delivery"]["materialized"] is True
+    assert value["wire_delivery_post_observation_verified"] is True and value["wire_delivery_cleanup_status"] == "removed"
+    value.update(wire_delivery_post_observation_verified=None, wire_delivery_cleanup_status=None)
+    with pytest.raises(ValueError): validate_model_input_observation(value)
+    result = run(case, [value])
+    assert result["all_rendered_model_inputs_verified"] is not True and result["usable_observation_records"] == 0
+    no_provider_claim(result)
+
+
+def test_observer_schema_does_not_enter_legacy_provider_receipt_path(appendix_case):
+    case = appendix_case; value = observation(case)
+    legacy_result = legacy.audit_terminal_context(state=case["state"], receipts=[value], workspace_root=case["workspace_root"])
+    assert legacy_result["all_observed_coding_inputs_verified"] is not True
+    assert legacy_result["usable_coding_receipts"] == 0
+    unchanged = legacy.audit_terminal_context(state=case["state"], receipts=case["receipts"], workspace_root=case["workspace_root"])
+    assert unchanged["status"] == "verified_all_observed_model_inputs"
+    assert unchanged["invocations"][0]["invocation_id"] == "unit-catalog-expanded"
+
+
+@pytest.mark.parametrize("invalid", ["provider_schema", "provider_identity", "provider_attempt", "provider_usage",
+    "false_alias", "zero_alias", "error_on_success", "custody_alias", "foreign_task", "oversized_model", "wire_lifecycle"])
+def test_closed_observation_cannot_masquerade_or_promote_authority(scalar_observation, invalid):
+    value = scalar_observation
+    if invalid == "provider_schema": value["schema"] = "router-implementation-invocation@1"
+    elif invalid == "provider_identity": value["invocation_id"] = "a" * 32
+    elif invalid == "provider_attempt": value["provider_attempted"] = True
+    elif invalid == "provider_usage": value["usage"] = {"total_tokens": 1}
+    elif invalid == "false_alias": value["completion_authority"] = 0
+    elif invalid == "zero_alias": value["router_calls"] = False
+    elif invalid == "error_on_success": value["error_type"] = "ValueError"
+    elif invalid == "custody_alias": value["final_custody_guard_verified"] = 1
+    elif invalid == "foreign_task": value["semantic_context_verification"]["native_prompt_sha256"] = "f" * 64
+    elif invalid == "oversized_model": value["requested_model"] = "x" * 257
+    elif invalid == "wire_lifecycle": value["wire_delivery_cleanup_status"] = "removed"
+    with pytest.raises(ValueError): validate_model_input_observation(value)
+
+
+def test_pure_validator_returns_independent_closed_copy(scalar_observation):
+    value = scalar_observation; result = validate_model_input_observation(value)
+    assert result == value and result is not value and len(result) == 43
+    value["external_container_boundary"]["owner_uid"] = 2000
+    assert result["external_container_boundary"]["owner_uid"] == 1000
+
+
+@pytest.mark.parametrize("population", [(), {}, [None] * 17])
+def test_direct_audit_requires_bounded_explicit_list(tmp_path, population):
+    with pytest.raises(ValueError):
+        audit.audit_terminal_model_input_observations(state=tmp_path, observations=population, workspace_root=tmp_path)
+
+
+def test_empty_population_is_unknown_without_historical_io(tmp_path, monkeypatch):
+    monkeypatch.setattr(legacy, "_audit_terminal_context", lambda **_: pytest.fail("empty observation read historical state"))
+    result = audit.audit_terminal_model_input_observations(state=tmp_path, observations=[], workspace_root=tmp_path)
+    assert result["status"] == "unknown" and result["reason"] == "no_model_input_observation"
+    assert result["all_rendered_model_inputs_verified"] is None
+    no_provider_claim(result)
+
+
+@pytest.mark.parametrize("population,reason", [(None, "audit_request_exceeds_bound"), ([{}] * 17, "audit_request_exceeds_bound"),
+    ([{"oversized": "x" * 65536}], "audit_request_exceeds_bound"), ([], "no_model_input_observation")])
+def test_collector_refuses_before_child_for_bad_request(tmp_path, monkeypatch, population, reason):
+    monkeypatch.setattr(audit.subprocess, "run", lambda *_, **__: pytest.fail("bounded refusal launched child"))
+    result = audit.collect_terminal_model_input_observation_audit(state=tmp_path, observations=population, workspace_root=tmp_path)
+    assert result["reason"] == reason and result["all_rendered_model_inputs_verified"] is None
+
+
+def test_collector_budget_unavailable_does_not_start_child(tmp_path, monkeypatch, scalar_observation):
+    monkeypatch.setattr(audit.subprocess, "run", lambda *_, **__: pytest.fail("exhausted budget launched child"))
+    result = audit.collect_terminal_model_input_observation_audit(state=tmp_path, observations=[scalar_observation],
+        workspace_root=tmp_path, timeout_seconds=.01)
+    assert result["reason"] == "audit_budget_unavailable"
+
+
+@pytest.mark.parametrize("fault,reason", [("timeout", "audit_timeout"), ("exit", "audit_process_unavailable"),
+    ("large_result", "audit_process_unavailable"), ("bad_json", "audit_unavailable"),
+    ("foreign_schema", "audit_result_invalid")])
+def test_collector_failures_are_unknown_and_preserve_no_usage_claim(tmp_path, monkeypatch, scalar_observation, fault, reason):
+    def child(argv, **kwargs):
+        assert argv[:3] == [sys.executable, "-B", "-P"] and kwargs["timeout"] == 30.0
+        assert json.loads(kwargs["input"]) == [scalar_observation]
+        if fault == "timeout": raise subprocess.TimeoutExpired(argv, kwargs["timeout"])
+        body = wire(audit._base("authored-child"))
+        if fault == "large_result": body = b"x" * (legacy.MAX_RESULT_BYTES + 1)
+        elif fault == "bad_json": body = b"{"
+        elif fault == "foreign_schema": body = wire({"schema": legacy.SCHEMA})
+        return SimpleNamespace(returncode=1 if fault == "exit" else 0, stdout=body, stderr=b"not exported")
+    monkeypatch.setattr(audit.subprocess, "run", child)
+    result = audit.collect_terminal_model_input_observation_audit(state=tmp_path, observations=[scalar_observation],
+        workspace_root=tmp_path, timeout_seconds=200)
+    assert result["reason"] == reason and result["all_rendered_model_inputs_verified"] is None
+    assert "stderr" not in result
+    no_provider_claim(result)
+
+
+def test_collector_preserves_distinct_record_without_provider_adaptation(tmp_path, monkeypatch, scalar_observation):
+    sent = []
+    def child(argv, **kwargs):
+        sent.append(json.loads(kwargs["input"]))
+        assert argv[4] == audit.__name__ and kwargs["timeout"] == 9
+        assert kwargs["env"]["PYTHONDONTWRITEBYTECODE"] == "1"
+        return SimpleNamespace(returncode=0, stdout=wire(audit._base("authored-child")), stderr=b"")
+    monkeypatch.setattr(audit.subprocess, "run", child)
+    result = audit.collect_terminal_model_input_observation_audit(state=tmp_path, observations=[scalar_observation],
+        workspace_root=tmp_path, timeout_seconds=9)
+    assert sent == [[scalar_observation]] and sent[0][0]["schema"] == SCHEMA
+    assert "invocation_id" not in sent[0][0] and result["seconds"] >= 0
+
+
+def test_actual_negative_child_ignores_untrusted_cwd_imports(tmp_path, monkeypatch, scalar_observation):
+    untrusted = tmp_path / "untrusted-task"; untrusted.mkdir()
+    marker = untrusted / "unsafe-import"
+    (untrusted / "json.py").write_text(f"from pathlib import Path\nPath({str(marker)!r}).touch()\nraise RuntimeError('task import')\n")
+    monkeypatch.chdir(untrusted)
+    result = audit.collect_terminal_model_input_observation_audit(state=tmp_path / "missing-fresh-state",
+        observations=[scalar_observation], workspace_root=Path("/opt/ipfs-supervisor/worktrees"), timeout_seconds=10)
+    assert result["schema"] == audit.SCHEMA and result["all_rendered_model_inputs_verified"] is not True
+    assert not marker.exists()
+    no_provider_claim(result)

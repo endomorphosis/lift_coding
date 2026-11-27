@@ -1,0 +1,18 @@
+from pathlib import Path
+import subprocess,sys,os,json,hashlib,time
+E=Path(__file__).parent
+C=Path('/home/barberb/lift_coding/maintenance/terminal-token-reduction-20261007-01/checkout')
+A=E/'focused-01';A.mkdir(exist_ok=False)
+paths=[C/'benchmarks/agent_supervisor/container_coding/terminal_context_audit.py',C/'benchmarks/agent_supervisor/container_coding/test_terminal_context_audit.py',C/'ipfs_accelerate_py/agent_supervisor/runtime/compact_code_retrieval.py',C/'ipfs_accelerate_py/agent_supervisor/runtime/task_context_bundle.py',C/'benchmarks/agent_supervisor/container_coding/terminal_indexed_preparation.py']
+def pins():return {str(p):{'bytes':len(p.read_bytes()),'sha256':hashlib.sha256(p.read_bytes()).hexdigest()} for p in paths}
+before=pins()
+for p in paths:(A/('before-'+p.name)).write_bytes(p.read_bytes())
+env=dict(os.environ,PYTHONPATH=str(C)+':'+str(E.parent/'pinned-dependencies-v10/datasets')+':'+str(E.parent/'pinned-dependencies-v10/kit'),PYTHONDONTWRITEBYTECODE='1',IPFS_ACCELERATE_PYTEST_SEAL_DUCKDB=str(A/'fresh-seal.duckdb'),IPFS_ACCELERATE_META_INDEX_DUCKDB=str(A/'fresh-meta.duckdb'),IPFS_ACCELERATE_META_INDEX_DUCKLAKE=str(A/'fresh-lake.ducklake'))
+cmd=[sys.executable,'-B','-m','pytest','-p','no:cacheprovider','-c','/dev/null',str(C/'benchmarks/agent_supervisor/container_coding/test_terminal_context_audit.py'),'-k','captured_native_nomination or captured_nomination or independently_recorded_historical or projection_cannot_supply or actual_context_producer','--junitxml='+str(A/'tests.xml'),'--basetemp='+str(A/'pytest-tmp'),'-q']
+start=time.monotonic()
+with (A/'stdout.txt').open('wb') as out,(A/'stderr.txt').open('wb') as err:result=subprocess.run(cmd,cwd=C,env=env,stdout=out,stderr=err)
+after=pins()
+receipt={'schema':'terminal-genuine-preparation-audit-focused-tests@1','returncode':result.returncode,'seconds':time.monotonic()-start,'command':cmd,'before':before,'after':after,'all_source_pins_unchanged':before==after,'provider_calls':0,'existing_indexes_used':False}
+(A/'result.json').write_text(json.dumps(receipt,sort_keys=True,indent=2)+'\n')
+print(json.dumps({'path':str(A),'returncode':result.returncode,'seconds':receipt['seconds'],'all_source_pins_unchanged':before==after}))
+print((A/'stdout.txt').read_text()[-12000:])

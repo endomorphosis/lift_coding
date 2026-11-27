@@ -1,0 +1,70 @@
+[
+  {
+    "name": "pruning-decision-policy-census-edit-requal-v01",
+    "prior_frozen_request": "pruning-decision-policy-v03",
+    "controls": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/federal-corpus-audits/legal-ir-peer-revision-reconciliation-20261109-v01/pruning-decision-policy-census-edit-requal-v01",
+    "request_sha256": "8d839c5aac3b5ab831b3c454ef74e7fc5201e257194bb4fc862cd14890487f2d",
+    "source_pins": 70,
+    "source_capture_bytes": 647536,
+    "forecast_total_bytes": 4907376,
+    "storage_bytes": 16777216,
+    "candidate": "90713c31663b7fdc68e22c97b737b276edec7718",
+    "selected_checks": [
+      "/tmp/lift-sync-pruning-history-main-20261110/test/api/test_current_decision_policy.py"
+    ],
+    "full_original_files_and_cases_preserved": true,
+    "executed": false
+  },
+  {
+    "name": "pruning-controls-comparison-census-edit-requal-v01",
+    "prior_frozen_request": "pruning-controls-comparison-fixed-v01",
+    "controls": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/federal-corpus-audits/legal-ir-peer-revision-reconciliation-20261109-v01/pruning-controls-comparison-census-edit-requal-v01",
+    "request_sha256": "316d4b7f90285ca2b055c54be2023e10a89fdc0e882982d296937877b96277e7",
+    "source_pins": 242,
+    "source_capture_bytes": 1871928,
+    "forecast_total_bytes": 6131768,
+    "storage_bytes": 16777216,
+    "candidate": "90713c31663b7fdc68e22c97b737b276edec7718",
+    "selected_checks": [
+      "/tmp/lift-sync-pruning-history-main-20261110/benchmarks/agent_supervisor/container_coding/test_benchmark_controls.py",
+      "/tmp/lift-sync-pruning-history-main-20261110/benchmarks/agent_supervisor/container_coding/test_grok_pruning_comparison.py"
+    ],
+    "full_original_files_and_cases_preserved": true,
+    "executed": false
+  },
+  {
+    "name": "pruning-comparison-history-census-edit-requal-v01",
+    "prior_frozen_request": "pruning-comparison-history-v02",
+    "controls": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/federal-corpus-audits/legal-ir-peer-revision-reconciliation-20261109-v01/pruning-comparison-history-census-edit-requal-v01",
+    "request_sha256": "6c71e1b353815e16e7338614844381f93bcf9e4028bfa339c4a0c4fb60b74c4b",
+    "source_pins": 246,
+    "source_capture_bytes": 1888723,
+    "forecast_total_bytes": 6148563,
+    "storage_bytes": 16777216,
+    "candidate": "90713c31663b7fdc68e22c97b737b276edec7718",
+    "selected_checks": [
+      "/tmp/lift-sync-pruning-history-main-20261110/benchmarks/agent_supervisor/container_coding/test_benchmark_comparison.py",
+      "/tmp/lift-sync-pruning-history-main-20261110/test/api/test_grok_tool_event_history_compatibility.py"
+    ],
+    "full_original_files_and_cases_preserved": true,
+    "executed": false
+  },
+  {
+    "name": "pruning-candidate-monitor-projection-census-edit-requal-v01",
+    "prior_frozen_request": "pruning-candidate-monitor-projection-v03",
+    "controls": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/federal-corpus-audits/legal-ir-peer-revision-reconciliation-20261109-v01/pruning-candidate-monitor-projection-census-edit-requal-v01",
+    "request_sha256": "0a02fb53ec075c7e77ec2ebbf327076e6cd34b3748fefd504d1d3146adfac655",
+    "source_pins": 166,
+    "source_capture_bytes": 1228104,
+    "forecast_total_bytes": 5487944,
+    "storage_bytes": 16777216,
+    "candidate": "90713c31663b7fdc68e22c97b737b276edec7718",
+    "selected_checks": [
+      "/tmp/lift-sync-pruning-history-main-20261110/test/api/test_candidate_round_monitor.py",
+      "/tmp/lift-sync-pruning-history-main-20261110/test/api/test_candidate_reply_contract.py",
+      "/tmp/lift-sync-pruning-history-main-20261110/test/api/test_candidate_prompt_projection.py"
+    ],
+    "full_original_files_and_cases_preserved": true,
+    "executed": false
+  }
+]

@@ -1,0 +1,36 @@
+{
+  "schema": "terminal-source-view-pilot-plan@1",
+  "requested_axis": "source_view_policy",
+  "source": "/home/barberb/lift_coding_worktrees/terminal-source-view-cycle-20261012",
+  "base_commit": "221fa7bf3a7022342c0ffc2afdaa602e80e6c5c9",
+  "tasks": [
+    "llm-inference-batching-scheduler",
+    "tune-mjcf"
+  ],
+  "policies": [
+    "source-view-raw@1",
+    "source-view-compact@1"
+  ],
+  "order": [
+    "batching-raw-01",
+    "batching-compact-01",
+    "mjcf-compact-01",
+    "mjcf-raw-01"
+  ],
+  "max_concurrent_trials": 1,
+  "max_automatic_retries": 0,
+  "semantic_context_profile": "indexed-default@1",
+  "semantic_metadata_view": "legacy",
+  "tool_output_policy": "legacy",
+  "resource_profile": "source384-5cpu-16gib-extended@1",
+  "comparison": "Paired exploratory pilot on two public-input tasks. One trial per arm/task; no statistical claim.",
+  "provider_admission": "Shared host default cooldown; stop batch on provider stop or unknown accounting; no model/provider fallback.",
+  "source_view_scope": "Python selected module/symbol views and version-checked replacement; exact original checkout executes; no aggressive identifier renaming.",
+  "public_probe_edits": "Isolated copies only; do not solve or change official tasks.",
+  "source_view_adoption": "Measured separately from declared guidance, worker observations do not prove universal interception.",
+  "primary_measurement": "All provider input/output across attempts per officially solved task, success rate reported separately; unknown usage remains unknown.",
+  "recovery_of": "/home/barberb/lift_coding/maintenance/terminal-source-view-cycle-20261012-01",
+  "failure_retained": "/home/barberb/lift_coding/maintenance/terminal-source-view-cycle-20261012-01/live-comparison.json",
+  "change": "Increase finite Codex system Node/npm dependency setup allowance from120 to300 seconds under same container limits; native CLI install keeps180 seconds.",
+  "source_worktree": "/home/barberb/lift_coding_worktrees/terminal-source-view-recovery-20261012"
+}

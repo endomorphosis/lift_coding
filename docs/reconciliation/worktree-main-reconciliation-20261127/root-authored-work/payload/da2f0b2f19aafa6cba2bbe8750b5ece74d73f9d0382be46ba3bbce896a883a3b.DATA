@@ -1,0 +1,16 @@
+"""Sequential bounded caller qualification with providers disabled."""
+import argparse,json,subprocess,time
+from pathlib import Path
+H=Path(__file__).resolve().parent
+p=argparse.ArgumentParser();p.add_argument('--run-id',required=True);a=p.parse_args();run=H/a.run_id;profile=json.loads((run/'profile.json').read_text());assert not profile['provider']['enabled'];root=run/'offline_invocations';root.mkdir(exist_ok=False);rows=[]
+selected=[e for e in profile['events'] if (e['arm'] in ('D','C') and e['parent_event'] is None) or e['arm']=='A']
+for event in selected:
+    start=time.perf_counter();command=['/usr/bin/python3','-B',str(H/'repository_controller_v1.py'),'--profile',str(run/'profile.json'),'--event',event['event_id']]
+    try:
+        process=subprocess.run(command,capture_output=True,timeout=1100);code=process.returncode;stdout=process.stdout;stderr=process.stderr;timed_out=False
+    except subprocess.TimeoutExpired as exc: code=None;stdout=exc.stdout or b'';stderr=exc.stderr or b'';timed_out=True
+    folder=root/event['event_id'];folder.mkdir();(folder/'stdout').write_bytes(stdout);(folder/'stderr').write_bytes(stderr);row={'event_id':event['event_id'],'arm':event['arm'],'command':command,'returncode':code,'timed_out':timed_out,'elapsed_seconds':time.perf_counter()-start}
+    if code==0:
+        result=json.loads(stdout);row.update(status=result['status'],provider_calls=result['provider_calls'],local_failures=result['local_failures'])
+    rows.append(row);(folder/'process.json').write_text(json.dumps(row,indent=2)+'\n');(run/'offline_summary.json').write_text(json.dumps({'provider_enabled':False,'sequential':True,'results':rows},indent=2)+'\n');print(json.dumps(row),flush=True)
+    if code!=0 or row.get('status')!='residual_pending' or row['provider_calls']!=0: raise SystemExit('retained offline caller failure; do not proceed')

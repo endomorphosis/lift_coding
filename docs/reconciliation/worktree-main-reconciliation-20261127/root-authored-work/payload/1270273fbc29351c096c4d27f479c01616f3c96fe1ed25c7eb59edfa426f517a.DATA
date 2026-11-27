@@ -1,0 +1,119 @@
+"""Actual public request checks and bounded nomination evidence, never grading."""
+from __future__ import annotations
+from copy import deepcopy
+from itertools import product
+import json
+from pathlib import Path
+import time
+from request_contract import canonical, plain, sha, validate_request, require
+from procedure import C, OPERATIONS, cid, expected_action
+from ipfs_accelerate_py.agent_supervisor.procedure_compiler.verifier import VerificationPolicy
+
+KINDS=('proof','test','adversarial','held_out','shadow','specification','source_episode','counterexample_set')
+PLAN={'schema':'ns-original-nomination-evidence-plan/v1',
+      'positive_namespaces':{'test':['test-current','test-separated'],
+          'held_out':['fresh-heldout-orbit17','fresh-heldout-orbit29'],
+          'shadow':['shadow-replay41','shadow-replay53']},
+      'negative_fields':['source_inventory_sha256','generic_source_tree_sha256','environment_profile_sha256','endpoint_contract_sha256'],
+      'proof_domain':'All 256 Boolean combinations of eight independently required bindings; accepted nomination requires all bindings and cannot assert grading pass, publication authority or whole-grader reuse.',
+      'scope':'Prospectively fixed authored request transport checks. Held-out namespaces are unused by the author before this versioned run; same current repository input, no unseen-repository, repair, test-pass or population-generalization claim.'}
+
+def independent_action_check(action,request):
+    """Independent field projection; does not call the operation producer."""
+    require(type(action)is dict and action.get('schema')=='ns-original-validation-action/v1','unknown action schema')
+    require(action.get('action')=='execute_current_scorer','only current scoring can be nominated')
+    require(canonical(action.get('scorer_request'))==canonical(request['scorer_request']),'nominated scorer bytes differ')
+    require(action.get('scorer_request_sha256')==sha(canonical(request['scorer_request'])),'nominated scorer hash differs')
+    require(action.get('validation_request_sha256')==sha(canonical(request)),'action request binding differs')
+    for name in ('trajectory_id','arm','cache_profile','cache_namespace','operation_id','expected_publication_parent'):
+        require(action.get(name)==request[name],'action namespace/parent changed: '+name)
+    for name in ('scoring_passed','publication_authority','whole_grader_reused'):
+        require(action.get(name)is False,'nomination improperly grants '+name)
+    require(action.get('call_reuse_disposition')=='requires_current_native_lifecycle_admission_inside_scorer','CALL reuse requires separate native admission')
+    require(set(action)=={'schema','action','validation_request_sha256','scorer_request','scorer_request_sha256',
+        'trajectory_id','arm','cache_profile','cache_namespace','operation_id','expected_publication_parent',
+        'scoring_passed','publication_authority','whole_grader_reused','call_reuse_disposition'},'action has undeclared fields')
+    return True
+
+def make_corpus(request):
+    rows={}
+    for kind,names in PLAN['positive_namespaces'].items():
+        rows[kind]=[]
+        for name in names:
+            item=deepcopy(request);item['operation_id']=request['operation_id']+':'+name
+            # Bound identifiers are deliberately short, without overriding any
+            # original source/configuration/scorer/effect authority.
+            if len(item['operation_id'])>191:item['operation_id']='nomination-'+sha(item['operation_id'].encode())
+            rows[kind].append(item)
+    rows['adversarial']=[]
+    for name in PLAN['negative_fields']:
+        item=deepcopy(request);item[name]='0'*64 if item[name]!='0'*64 else '1'*64
+        rows['adversarial'].append({'changed_field':name,'request':item})
+    return rows
+
+def bounded_proof(procedure):
+    actual=[(s.step_id,s.operation.value,s.operation_contract) for s in procedure.steps]
+    require(actual==list(OPERATIONS),'nomination graph outside exact operation vocabulary')
+    require(all(s.next_step_id==(OPERATIONS[i+1][0] if i+1<len(OPERATIONS) else '') for i,s in enumerate(procedure.steps)),'changed graph successor')
+    require(procedure.resources.model_call_limit==procedure.resources.subprocess_limit==procedure.resources.network_request_limit==procedure.resources.disk_bytes==0,'nomination authorizes external effects')
+    require(procedure.authority.risk_ceiling==C.RiskClass.OBSERVATION_ONLY,'nomination risk exceeds observation')
+    truth=[]
+    for bits in product((False,True),repeat=8):
+        nominated=all(bits)
+        independent=not any(value is False for value in bits)
+        require(nominated==independent,'bounded binding conjunction counterexample')
+        truth.append({'binding_bits':list(bits),'nominated':nominated,'scoring_passed':False,'publication_authority':False})
+    return {'domain':PLAN['proof_domain'],'graph':actual,'truth_rows':truth,
+        'scope':'Exhaustive finite logical authority-boundary model plus exact graph/resource checks; concrete request/action bridge is separate. No theorem about arbitrary Python or repository test results.'}
+
+def expected_artifacts(request,validated,procedure,endpoint,profile_sha,corpus):
+    common={'procedure_cid':procedure.content_id,'bindings':procedure.bindings.to_dict(),
+        'adapter_profile_sha256':profile_sha,'validation_request_sha256':sha(canonical(request)),
+        'evidence_plan_sha256':sha(canonical(PLAN)),'corpus_sha256':sha(canonical(corpus))}
+    output={};counterexamples=[]
+    for kind in ('test','adversarial','held_out','shadow'):
+        rows=[]
+        for member in corpus[kind]:
+            sample=member['request'] if kind=='adversarial' else member
+            if kind=='adversarial':
+                try:validate_request(sample,endpoint)
+                except (ValueError,KeyError,TypeError) as exc:rows.append({'request_sha256':sha(canonical(sample)),'rejected':True,'exception_type':type(exc).__name__,'changed_field':member['changed_field']})
+                else:raise ValueError('changed public binding admitted')
+            else:
+                observed=validate_request(sample,endpoint)
+                require(observed['source_inventory_sha256']==validated['source_inventory_sha256'],'evidence source drift')
+                action=expected_action(sample);independent_action_check(action,sample)
+                rows.append({'request_sha256':sha(canonical(sample)),'action':action,'independent_projection_passed':True})
+        output[kind]={'schema':'ns-original-nomination-checks/v1','kind':kind,**common,'rows':rows,
+            'contract_id':'original-nomination-input-output@1' if kind=='test' else 'original-nomination-'+kind+'@1','scope':PLAN['scope']}
+        if kind=='adversarial':counterexamples=rows
+    output['proof']={'schema':'ns-original-nomination-proof/v1','kind':'proof',**common,
+        'contract_id':'original-nomination-authority-boundary@1','proof':bounded_proof(procedure)}
+    output['specification']={'schema':'ns-original-nomination-specification/v1','kind':'specification',**common,
+        'allowed_action':'execute_current_scorer','negative_authorities':['scoring_passed','publication_authority','whole_grader_reused'],
+        'test_selection_sha256':validated['endpoint_task']['original_test_selection_sha256']}
+    output['source_episode']={'schema':'ns-original-nomination-current-observation/v1','kind':'source_episode',**common,
+        'public_source_inventory_sha256':validated['source_inventory_sha256'],'generic_source_tree_sha256':validated['generic_source_tree_sha256'],
+        'endpoint_contract_sha256':validated['endpoint_contract_sha256'],'origin':'actual current public inventory observer, not a model synthesis episode'}
+    output['counterexample_set']={'schema':'ns-original-nomination-guard-counterexamples/v1','kind':'counterexample_set',**common,'members':counterexamples}
+    return plain(output)
+
+def candidate_for(procedure,artifacts):
+    return C.ProcedureCandidate(bindings=procedure.bindings,procedure=procedure,
+        synthesis_plan_cid=cid({'schema':'ns-original-authored-nomination-plan/v1','plan':PLAN,'authored':True,'model_synthesis':False}),
+        source_episode_cids=(cid(artifacts['source_episode']),),counterexample_set_cid=cid(artifacts['counterexample_set']))
+
+def policy_family(candidate,profile_sha,artifacts):
+    b=candidate.bindings;effects=(C.EffectClass.VALIDATION,C.EffectClass.RECEIPT_EMIT)
+    positive=artifacts['test']['rows'][0];negative=artifacts['adversarial']['rows'][0];boundary=artifacts['shadow']['rows'][0]
+    family=C.TaskFamily(bindings=b,name=candidate.procedure.task_family_id,goal_semantics=('nominate-current-original-scorer',),
+        precondition_shape=('exact-public-source-objective-config-endpoint',),affected_artifact_classes=('immutable-request-descriptor',),effect_classes=effects,
+        required_operation_contracts=tuple(s.operation_contract for s in candidate.procedure.steps),validation_structure=('independent-exact-scorer-projection',),
+        failure_signatures=('binding-or-authority-drift',),postcondition_shape=('nomination-is-not-scoring',),rollback_structure=('read-only',),
+        boundary=C.TaskFamilyBoundary((cid(positive),),(cid(negative),),(cid(boundary),),(),C.RiskClass.OBSERVATION_ONLY,(b.repository_id,),('python',),('original-scorer-json',),effects))
+    policy=VerificationPolicy(revision=cid({'profile':profile_sha,'family':family.to_dict()}),bindings=b,
+        operation_catalog_revision=cid({'profile':profile_sha,'operations':OPERATIONS}),effect_policy_revision=cid({'effects':[e.value for e in effects]}),
+        authority_policy_revision=b.policy_revision,required_test_contracts=('original-nomination-input-output@1',),
+        required_proof_contracts=('original-nomination-authority-boundary@1',),require_adversarial=True,require_held_out=True,require_shadow=True,
+        max_risk_ceiling=C.RiskClass.OBSERVATION_ONLY,review_horizon_ms=3600000)
+    return policy,family

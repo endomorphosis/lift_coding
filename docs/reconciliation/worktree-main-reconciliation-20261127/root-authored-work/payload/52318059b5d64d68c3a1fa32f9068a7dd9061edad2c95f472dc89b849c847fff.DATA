@@ -1,0 +1,100 @@
+"""Run a frozen provider-disabled original caller; retain every terminal event."""
+import argparse
+import json
+import os
+from pathlib import Path
+import resource
+import subprocess
+import time
+
+HERE = Path(__file__).resolve().parent
+
+
+def sha(path):
+    import hashlib
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def save_new(path, value):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    data = json.dumps(value, sort_keys=True, indent=2).encode() + b"\n"
+    with path.open("xb") as stream:
+        stream.write(data)
+        stream.flush()
+        os.fsync(stream.fileno())
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--run-id", required=True)
+    parser.add_argument("--expected-profile-sha256", required=True)
+    args = parser.parse_args()
+    run = (HERE / args.run_id).resolve()
+    profile_path = run / "profile.json"
+    freeze = json.loads((run / "freeze.json").read_bytes())
+    if sha(profile_path) != args.expected_profile_sha256 or sha(profile_path) != freeze["profile_sha256"]:
+        raise ValueError("frozen original-caller profile changed")
+    profile = json.loads(profile_path.read_bytes())
+    if profile["provider"]["enabled"] or freeze["provider_enabled"]:
+        raise ValueError("offline original caller requires providers disabled")
+    invocations = run / "invocations"
+    invocations.mkdir(exist_ok=False)
+    rows = []
+    expected = freeze["expected_statuses"]
+    for event in profile["events"]:
+        if sha(profile_path) != args.expected_profile_sha256:
+            raise ValueError("frozen profile changed during the run")
+        event_id = event["event_id"]
+        horizon = "h" + str(event["horizon"]).zfill(2)
+        command = ["/usr/bin/python3", "-B", str(HERE / "original_controller_v1.py"),
+                   "--profile", str(profile_path), "--event", event_id]
+        before = resource.getrusage(resource.RUSAGE_CHILDREN)
+        started = time.perf_counter()
+        directory = invocations / event_id
+        directory.mkdir()
+        save_new(directory / "started.json", {"event_id": event_id, "command": command, "started_at_ns": time.time_ns(),
+                                             "profile_sha256": sha(profile_path), "driver_pid": os.getpid()})
+        with (directory / "stdout").open("wb") as stdout, (directory / "stderr").open("wb") as stderr:
+            try:
+                process = subprocess.run(command, stdout=stdout, stderr=stderr, timeout=600)
+                code = process.returncode
+                timed_out = False
+            except subprocess.TimeoutExpired:
+                code = None
+                timed_out = True
+        after = resource.getrusage(resource.RUSAGE_CHILDREN)
+        row = {"event_id": event_id, "horizon": event["horizon"], "command": command, "returncode": code,
+               "timed_out": timed_out, "elapsed_seconds": time.perf_counter() - started,
+               "host_waited_cpu_seconds": (after.ru_utime + after.ru_stime) - (before.ru_utime + before.ru_stime),
+               "container_cpu_seconds": None, "expected_status": expected[horizon]}
+        if code == 0:
+            result = json.loads((directory / "stdout").read_bytes())
+            row.update(status=result["status"], accepted_for_next_state=result["accepted_for_next_state"],
+                       candidate_grading_passed=result["candidate_grading_passed"],
+                       event_obligations_passed=result["event_obligations_passed"],
+                       provider_attempts=len(result.get("provider_attempts") or []),
+                       scorer_attempts=len(result.get("scorer_attempts") or []),
+                       unknown_effect_ids=result.get("unknown_effect_ids"),
+                       infrastructure_unresolved=result.get("infrastructure_unresolved"))
+        save_new(directory / "process.json", row)
+        rows.append(row)
+        print(json.dumps({k: row[k] for k in ("event_id", "horizon", "returncode", "timed_out", "elapsed_seconds",
+                                               "status", "expected_status", "scorer_attempts", "provider_attempts")
+                          if k in row}, sort_keys=True), flush=True)
+        if timed_out or code != 0:
+            raise SystemExit("retained nonterminal original-caller invocation; inspect " + str(directory))
+        if row.get("status") != expected[horizon] or row.get("provider_attempts") != 0:
+            raise SystemExit("original-caller event status or provider count differed from the frozen expectation")
+    provider_receipts = list((Path(profile["output_root"]) / "provider").glob("*/result.json")) if (Path(profile["output_root"]) / "provider").exists() else []
+    summary = {"schema": "ns-original-caller-offline-invocations/v1", "profile_sha256": sha(profile_path),
+               "provider_enabled": False, "provider_receipts": len(provider_receipts),
+               "invocations": rows, "elapsed_seconds": sum(row["elapsed_seconds"] for row in rows),
+               "scorer_attempts": sum(row.get("scorer_attempts") or 0 for row in rows),
+               "scope": profile["scope"]}
+    save_new(run / "invocation_summary.json", summary)
+    print(json.dumps({"passed": True, "events": len(rows), "scorer_attempts": summary["scorer_attempts"],
+                      "elapsed_seconds": summary["elapsed_seconds"], "provider_receipts": 0}, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()

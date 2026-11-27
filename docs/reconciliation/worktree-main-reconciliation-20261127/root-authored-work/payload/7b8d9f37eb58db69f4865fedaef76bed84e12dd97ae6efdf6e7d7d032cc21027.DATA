@@ -1,0 +1,181 @@
+{
+  "time": "2026-11-10T00:53:47.796966+00:00",
+  "candidate": "701e286af4a41817395800699e935d3ccbfd8c07",
+  "source_sha256": "889c9f24679ff30b023d75dfc07095c9eed60135062a5a88ed6817ff655b5d69",
+  "owning_file": "/tmp/lift-sync-primary-gate-main-20261110/test/api/test_repository_world_packet.py",
+  "all_test_functions": 19,
+  "all_expected_cases": 36,
+  "groups": [
+    {
+      "group": 1,
+      "checks": [
+        {
+          "function": "test_current_native_context_and_exact_task_are_delivered_once",
+          "selected_check": "/tmp/lift-sync-primary-gate-main-20261110/test/api/test_repository_world_packet.py::test_current_native_context_and_exact_task_are_delivered_once",
+          "expected_cases": 1
+        },
+        {
+          "function": "test_large_exact_task_retains_whitespace_and_unicode",
+          "selected_check": "/tmp/lift-sync-primary-gate-main-20261110/test/api/test_repository_world_packet.py::test_large_exact_task_retains_whitespace_and_unicode",
+          "expected_cases": 1
+        },
+        {
+          "function": "test_prepared_prompt_and_receipt_are_immutable",
+          "selected_check": "/tmp/lift-sync-primary-gate-main-20261110/test/api/test_repository_world_packet.py::test_prepared_prompt_and_receipt_are_immutable",
+          "expected_cases": 1
+        },
+        {
+          "function": "test_consumer_boundary_refuses_different_task_or_workspace",
+          "selected_check": "/tmp/lift-sync-primary-gate-main-20261110/test/api/test_repository_world_packet.py::test_consumer_boundary_refuses_different_task_or_workspace",
+          "expected_cases": 3
+        },
+        {
+          "function": "test_direct_source_edit_invalidates_prepared_dispatch",
+          "selected_check": "/tmp/lift-sync-primary-gate-main-20261110/test/api/test_repository_world_packet.py::test_direct_source_edit_invalidates_prepared_dispatch",
+          "expected_cases": 1
+        },
+        {
+          "function": "test_generation_refresh_invalidates_prepared_dispatch",
+          "selected_check": "/tmp/lift-sync-primary-gate-main-20261110/test/api/test_repository_world_packet.py::test_generation_refresh_invalidates_prepared_dispatch",
+          "expected_cases": 1
+        }
+      ],
+      "expected_cases": 8,
+      "forecast_database_bytes": 67108864,
+      "margin_bytes": 8388608,
+      "storage_bytes": 134217728
+    },
+    {
+      "group": 2,
+      "checks": [
+        {
+          "function": "test_context_must_be_issued_by_exact_adapter",
+          "selected_check": "/tmp/lift-sync-primary-gate-main-20261110/test/api/test_repository_world_packet.py::test_context_must_be_issued_by_exact_adapter",
+          "expected_cases": 1
+        }
+      ],
+      "expected_cases": 1,
+      "forecast_database_bytes": 8388608,
+      "margin_bytes": 8388608,
+      "storage_bytes": 134217728
+    },
+    {
+      "group": 3,
+      "checks": [
+        {
+          "function": "test_missing_or_malformed_task_requirements_refuse",
+          "selected_check": "/tmp/lift-sync-primary-gate-main-20261110/test/api/test_repository_world_packet.py::test_missing_or_malformed_task_requirements_refuse",
+          "expected_cases": 8
+        }
+      ],
+      "expected_cases": 8,
+      "forecast_database_bytes": 67108864,
+      "margin_bytes": 8388608,
+      "storage_bytes": 134217728
+    },
+    {
+      "group": 4,
+      "checks": [
+        {
+          "function": "test_packet_budget_cannot_drop_selected_evidence",
+          "selected_check": "/tmp/lift-sync-primary-gate-main-20261110/test/api/test_repository_world_packet.py::test_packet_budget_cannot_drop_selected_evidence",
+          "expected_cases": 1
+        },
+        {
+          "function": "test_optional_delta_item_omission_refuses_instead_of_delivering_a_frontier",
+          "selected_check": "/tmp/lift-sync-primary-gate-main-20261110/test/api/test_repository_world_packet.py::test_optional_delta_item_omission_refuses_instead_of_delivering_a_frontier",
+          "expected_cases": 1
+        },
+        {
+          "function": "test_final_wire_envelope_is_independently_bounded",
+          "selected_check": "/tmp/lift-sync-primary-gate-main-20261110/test/api/test_repository_world_packet.py::test_final_wire_envelope_is_independently_bounded",
+          "expected_cases": 1
+        },
+        {
+          "function": "test_scope_change_cannot_silently_broaden_or_change_input",
+          "selected_check": "/tmp/lift-sync-primary-gate-main-20261110/test/api/test_repository_world_packet.py::test_scope_change_cannot_silently_broaden_or_change_input",
+          "expected_cases": 1
+        },
+        {
+          "function": "test_existing_compiler_omissions_stay_supervisor_side",
+          "selected_check": "/tmp/lift-sync-primary-gate-main-20261110/test/api/test_repository_world_packet.py::test_existing_compiler_omissions_stay_supervisor_side",
+          "expected_cases": 1
+        },
+        {
+          "function": "test_supplied_world_preserves_unknowns_without_authority_claims",
+          "selected_check": "/tmp/lift-sync-primary-gate-main-20261110/test/api/test_repository_world_packet.py::test_supplied_world_preserves_unknowns_without_authority_claims",
+          "expected_cases": 1
+        }
+      ],
+      "expected_cases": 6,
+      "forecast_database_bytes": 50331648,
+      "margin_bytes": 8388608,
+      "storage_bytes": 134217728
+    },
+    {
+      "group": 5,
+      "checks": [
+        {
+          "function": "test_foreign_world_binding_is_refused",
+          "selected_check": "/tmp/lift-sync-primary-gate-main-20261110/test/api/test_repository_world_packet.py::test_foreign_world_binding_is_refused",
+          "expected_cases": 5
+        },
+        {
+          "function": "test_stale_or_incompatible_world_is_refused",
+          "selected_check": "/tmp/lift-sync-primary-gate-main-20261110/test/api/test_repository_world_packet.py::test_stale_or_incompatible_world_is_refused",
+          "expected_cases": 2
+        },
+        {
+          "function": "test_packet_noise_normalization_cannot_drop_compiled_required_values",
+          "selected_check": "/tmp/lift-sync-primary-gate-main-20261110/test/api/test_repository_world_packet.py::test_packet_noise_normalization_cannot_drop_compiled_required_values",
+          "expected_cases": 1
+        }
+      ],
+      "expected_cases": 8,
+      "forecast_database_bytes": 67108864,
+      "margin_bytes": 8388608,
+      "storage_bytes": 134217728
+    },
+    {
+      "group": 6,
+      "checks": [
+        {
+          "function": "test_preparation_requires_exact_task_and_scope_bound_before_compilation",
+          "selected_check": "/tmp/lift-sync-primary-gate-main-20261110/test/api/test_repository_world_packet.py::test_preparation_requires_exact_task_and_scope_bound_before_compilation",
+          "expected_cases": 4
+        },
+        {
+          "function": "test_older_unbound_context_cannot_be_implicitly_upgraded",
+          "selected_check": "/tmp/lift-sync-primary-gate-main-20261110/test/api/test_repository_world_packet.py::test_older_unbound_context_cannot_be_implicitly_upgraded",
+          "expected_cases": 1
+        }
+      ],
+      "expected_cases": 5,
+      "forecast_database_bytes": 41943040,
+      "margin_bytes": 8388608,
+      "storage_bytes": 134217728
+    }
+  ],
+  "full_function_and_parametrization_coverage_required": true,
+  "no_test_functions_removed_or_rewritten": true,
+  "previous_failed_claims_retained": true,
+  "cap_and_timeout_per_attempt_unchanged": true,
+  "qualified": false,
+  "executed": false,
+  "qualification_rule": "Every frozen function and all its parameter cases must complete exactly once across distinct groups; compare actual JUnit populations and fatal source observations for each. No full-suite claim until every group passes and no source generation changes.",
+  "completed_groups": [
+    {
+      "group": 1,
+      "passed": 8,
+      "result": "gate-world-packet-group-01-v01-result.json"
+    }
+  ],
+  "remaining_groups": [
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "remaining_cases": 28
+}

@@ -1,0 +1,103 @@
+# Live raw versus verified-equation context pilot
+
+The six authorized model calls completed with **3/3 correct repairs in each
+arm**, measured by the same fresh isolated cold scorer per case. On this exact
+constructed cohort, the compact arm used **4.91% fewer provider-reported input
+tokens** and **4.71% fewer provider-reported total tokens**. These are actual
+usage receipts, distinct from the preceding local tokenizer measurements.
+
+The scope is narrow: three deliberately simple, authored arithmetic repository
+repairs, one sample per arm/case, and an explicitly new bounded native-capsule
+integer-equation projection. This does not establish whole-system savings,
+representative repair parity, or a statistically stable benefit. The public
+objectives make the required repairs easy. More difficult dependency reasoning
+and independent task lineages remain necessary.
+
+## Measured provider usage
+
+All responses report `grok-4.6`. The profile requests low reasoning effort, one
+response with `max_tokens=2048`, and a 240-second request deadline. The parameter
+is not asserted to cap total workflow or input-plus-reasoning tokens. Every
+request, response result, usage field, candidate and cold validation receipt is
+retained; there were no retries, missing usage records or auxiliary model calls.
+
+| Case / arm | Input | Visible completion | Reasoning | Provider total | Cached input | Cold pass |
+|---|---:|---:|---:|---:|---:|---|
+| invoice / raw | 1,322 | 53 | 232 | 1,607 | 512 | yes |
+| invoice / compact | 1,258 | 53 | 216 | 1,527 | 512 | yes |
+| polynomial / raw | 1,338 | 53 | 223 | 1,614 | 512 | yes |
+| polynomial / compact | 1,274 | 53 | 234 | 1,561 | 512 | yes |
+| units / raw | 1,354 | 59 | 232 | 1,645 | 0 | yes |
+| units / compact | 1,285 | 59 | 205 | 1,549 | 512 | yes |
+| **Raw total** | **4,014** | **165** | **687** | **4,866** | **1,024** | **3/3** |
+| **Compact total** | **3,817** | **165** | **655** | **4,637** | **1,536** | **3/3** |
+
+Provider `total_tokens` is authoritative and counted once. In these receipts it
+equals input plus visible completion plus reasoning; cached-input fields are
+reported separately and are not subtracted or added again. The compact arm's
+32 fewer reasoning tokens are a single sampled observation, not evidence of a
+stable reasoning reduction. The input reduction is 197 tokens and the total
+reduction is 229 tokens across the fixed three-task workload.
+
+API-reported charges sum to $0.00394536 raw and $0.00348500 compact, separately
+from account settlement. Remote cached input differs between arms, so charge
+differences cannot be attributed solely to compaction. Cache state was observed,
+not experimentally forced equal. No cost-saving claim is inferred from those
+charges.
+
+## Frozen conditions and validation
+
+`freeze.json` binds all provider messages, source/preparation artifacts, evaluator
+and transport source, provider profile, cell order, image digest, and held-back
+oracle before any model call. The two arms share exact target source, public
+test bytes, interface, explicit authored obligations and permitted edit path.
+The raw arm receives dependency source; the compact arm receives source-bound
+integer equations already checked against the real native capsule and source.
+The underlying native development preparation is reused identically across the
+matched pair, with its measured compute reported separately.
+
+The held-back scorer checks 216 input combinations each for invoice and units,
+and 36 for polynomial. It runs the returned target with the unchanged dependency
+source. It uses a fresh Docker container with no network or host mounts, a read
+only filesystem, unprivileged UID, one CPU, 128 MiB memory, 32 PIDs and a 15-second
+deadline. Candidate imports are limited to the supplied dependency module.
+Before effects, three buggy source controls failed and three known-correct
+controls passed. These controls are distinct from model responses and were not
+placed in prompts.
+
+`audit.json` checks the current frozen input hashes, all six exact provider
+requests against prefrozen messages, freeze-before-dispatch order, complete
+usage, reported model identity, target/test retention and absence of the
+held-back oracle in the public messages. All six retained model candidates also
+pass an independent repeat cold scoring run. The audit launches no provider
+calls; repeat scoring is experimental audit overhead, not hidden runtime work.
+
+The local dependency-expansion endpoint was qualified in the preceding study.
+This single-response model pilot has no tools and invokes no expansion rounds;
+it cannot establish expansion costs or fallback effectiveness under a model.
+Initial native scan, capsule preparation, equation verification and packing
+took 1.250 seconds wall / 1.231 seconds CPU across these three fixtures, with
+0.791 seconds additional initial imports. Those are separate observed local
+compute costs, not provider token expenditure or representative runtime timing.
+There was no model-assisted setup; authoring/implementation effort is excluded.
+
+## Artifacts and replay
+
+- `summary.json`: complete fixed-cohort results and actual provider totals.
+- `freeze.json`, `provider_profile.json`, `frozen_requests/`: prospective inputs
+  and explicit six-call ceiling.
+- `results/provider/*/`: exact request, durable dispatch intent and terminal
+  provider result, including all usage metadata.
+- `results/{raw,compact}_*.json`: parsed candidate and independent cold scorer.
+- `audit.json`: independent frozen-artifact and repeat validation audit.
+
+The six call identities have been consumed. The runner refuses to repeat an
+existing provider identity and no further calls are part of this increment.
+Use a new frozen study directory/profile for any future model experiment;
+existing terminal effects must not be overwritten or presented as fresh data.
+
+The next study should include held-out repositories where the edit actually
+requires understanding unchanged dependencies, qualified difficult/unknown
+frontiers, equal source expansion access, and the same complete workflow usage
+ledger. The current result establishes a small viable integration; it does not
+close the broader context-substitution or integrated-system evaluation gaps.

@@ -1,0 +1,49 @@
+# Full-source context completion under immutable-state profile v5
+
+The v12 run completes both full native producer/consumer roundtrips within the
+unchanged 600-second per-process bound. `full_state_identity_v12_audit.json`
+independently verifies the terminal process receipts, every declared Python path,
+raw-file counts/bytes, prior state/root equality and the unchanged runtime source
+inventory of 7,255 files. Its retained runner is `audit_full_state_identity_v12.py`.
+
+| Repository | Regular files / Python files | Symbols / edges | Preparation wall / CPU, seconds | Producer process / consumer process, seconds |
+| --- | ---: | ---: | ---: | ---: |
+| XML | 16 / 6 | 162 / 1,487 | 9.103 / 8.634 | 10.753 / 0.874 |
+| Pyparsing | 286 / 154 | 3,957 / 55,859 | 566.254 / 553.516 | 569.609 / 1.740 |
+
+Pyparsing also retains one opaque symlink without following it. Together the
+independent consumers materialize all 302 regular files, totaling 11,781,935 bytes,
+from the native Kit store. They pass eleven source/objective/policy/interface/
+toolchain/environment/tampering controls each. Four descriptive Pyparsing capsules
+are retained (two native exact and two conservative admissions), but no source
+file is omitted. The unresolved frontier remains explicit: 1,281 XML and 46,384
+Pyparsing unknown edge occurrences. No context sufficiency flag authorizes execution.
+
+The source profile combines the earlier isolated optimizations with process-local
+memoization of the canonical identity of one exact immutable native repository
+state. `state_identity_cache_design_v5.md` states its boundary and assumptions.
+All 159 existing relevant native regressions pass. Fresh-process parent/profile
+comparisons preserve the exact serialized state, semantic root and all 1,992 XML
+blocks for baseline, changed-source cold and changed-source incremental states.
+The source change produces a new identity; cold and incremental results agree.
+Each profile also completes twenty actual source materializations, performs forty
+source fetches, and rejects twenty corrupt-source attempts. Tampered restoration,
+frozen-state and dynamic-subclass controls pass.
+
+The full Pyparsing state and root equal the preceding full-profile producer and
+the independently verified 67,872-block literal-predicate audit. Full Pyparsing
+cold/incremental block equality has not been measured in this v12 run; the
+cross-profile cold/incremental controls above are explicitly the full XML case.
+
+The earlier five full Pyparsing process deadlines remain retained failures of
+those profiles. This is a distinct implementation profile and one shared-host run
+per repository, so completion within the deadline is established without a
+replicated end-to-end speedup claim. Preparation/import and consumer costs remain
+chargeable. There are zero provider calls, zero signed execution receipts, zero
+authorized execution/proof reuses, and no repair-quality or token-savings result.
+
+The generic repository-context API accepts this explicit runtime inventory via
+`results_v12_full_state_identity/runtime_source_manifest.json`. Existing Requests
+enrollments retain their original literal-union profile and hashes. A controller
+may only adopt a successor profile through a new frozen request/preparation; these
+results do not silently change any earlier evaluation's implementation.

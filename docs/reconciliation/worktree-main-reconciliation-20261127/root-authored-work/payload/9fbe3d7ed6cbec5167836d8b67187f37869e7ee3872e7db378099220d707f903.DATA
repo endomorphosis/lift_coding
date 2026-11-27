@@ -1,0 +1,241 @@
+"""Root-invoked fixed repository read-set experiment; no model or target execution.
+
+This authored three-file recipe is fixed before measurement. Private original
+source and complete prompts stay under the caller's fresh external /tmp parent.
+Only the existing compiler's metadata and declared local count differences are
+exported. Native lexical nominations do not prove the omitted file irrelevant.
+"""
+from __future__ import annotations
+
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+import stat
+
+
+TASK_ID = "AUTHORED-REPOSITORY-READ-SET-INVOICE"
+QUERY = "invoice_total"
+MAX_INPUT_TOKENS = 32768
+REQUIRED_PATHS = ("display.py",)
+SOURCES = {
+    "ledger.py": (
+        "# Authored invoice inspection fixture; never executed by this experiment.\n"
+        "def invoice_total(subtotal, tax):\n"
+        "    '''Return the original subtotal-plus-tax arithmetic.'''\n"
+        "    return subtotal + tax\n"
+    ).encode(),
+    "display.py": (
+        "# Authored public display interface; its original bytes are mandatory.\n"
+        "def invoice_label(value):\n"
+        "    '''Preserve the public label prefix and callable name.'''\n"
+        "    return 'Invoice: ' + str(value)\n"
+    ).encode(),
+    "storage.py": (
+        "# Authored storage interface, included in the all-files control.\n"
+        "def invoice_storage(value):\n"
+        "    '''Return a local serialization candidate without writing files.'''\n"
+        "    return {'invoice': str(value), 'persisted': False}\n"
+    ).encode(),
+}
+REQUIRED_TEXTS = (
+    "Task: inspect the original invoice_total arithmetic and retain the exact "
+    "display.py public interface. Do not edit or execute any target source. "
+    "This read-set is an investigation input, not a completed task or a proof "
+    "that omitted storage behavior is irrelevant.",
+    "Security: use only the three declared local source files. Do not read "
+    "credentials, contact external services, execute target code or invoke a "
+    "model. Security compliance and independent validation remain unresolved.",
+    "UI/UX: preserve invoice_label and its literal 'Invoice: ' prefix. Its "
+    "original source is mandatory; no rendered interface, accessibility test "
+    "or interaction result exists. UI/UX and acceptance remain unresolved.",
+)
+
+
+def _json(value):
+    return json.dumps(value, sort_keys=True, ensure_ascii=False,
+                      separators=(",", ":"), allow_nan=False).encode("utf-8")
+
+
+def _sha(raw):
+    return sha256(raw).hexdigest()
+
+
+def _directory(path):
+    """Open every absolute directory component without following links."""
+    path = Path(path)
+    if (not path.is_absolute() or str(path) != os.path.abspath(path)
+            or ".." in path.parts or path == Path("/")):
+        raise ValueError("exact absolute experiment directory required")
+    descriptor = os.open("/", os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+    try:
+        for part in path.parts[1:]:
+            following = os.open(part, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW,
+                                dir_fd=descriptor)
+            os.close(descriptor)
+            descriptor = following
+        return descriptor
+    except BaseException:
+        os.close(descriptor)
+        raise
+
+
+def _private_parent(path):
+    descriptor = _directory(path)
+    try:
+        info = os.fstat(descriptor)
+        if info.st_uid != os.getuid() or stat.S_IMODE(info.st_mode) != 0o700:
+            raise ValueError("root-created owner-only experiment parent required")
+        return info.st_dev, info.st_ino
+    finally:
+        os.close(descriptor)
+
+
+def _fresh_directory(path, *, external=False):
+    path = Path(path)
+    if external and (not path.is_relative_to(Path("/tmp")) or path == Path("/tmp")
+            or any(os.path.lexists(parent / ".git") for parent in (path, *path.parents))):
+        raise ValueError("private experiment case must be outside Git under /tmp")
+    _private_parent(path.parent)
+    parent = _directory(path.parent)
+    try:
+        os.mkdir(path.name, 0o700, dir_fd=parent)
+    finally:
+        os.close(parent)
+    return path
+
+
+def _write_private(path, raw):
+    parent = _directory(path.parent)
+    try:
+        descriptor = os.open(path.name,
+            os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600, dir_fd=parent)
+        try:
+            remaining = memoryview(raw)
+            while remaining:
+                count = os.write(descriptor, remaining)
+                if count < 1:
+                    raise ValueError("private experiment write refused")
+                remaining = remaining[count:]
+            os.fsync(descriptor)
+            info = os.fstat(descriptor)
+            if info.st_nlink != 1 or info.st_uid != os.getuid() or stat.S_IMODE(info.st_mode) != 0o600:
+                raise ValueError("private experiment file identity refused")
+        finally:
+            os.close(descriptor)
+    finally:
+        os.close(parent)
+
+
+def _count(receipt):
+    status = receipt["measurement_status"]
+    if status == "measured":
+        return receipt["selected_input_tokens"]
+    if status == "estimated":
+        return receipt["selected_estimated_input_tokens"]
+    return None
+
+
+def run_experiment(*, output_dir, case_root, routes, scheduler=None):
+    """Compile selected and all-file inputs over one genuine native generation.
+
+    The caller owns project bootstrap, source guards, resource admission and
+    cleanup. Output/case leaves must be absent under existing owner-0700 parents.
+    The same fixed recipe is measured for every explicitly supplied route.
+    A supplied scheduler is an already opened, independently pinned native
+    scheduler; this driver never creates, resets or reconfigures its policy.
+    """
+    from ipfs_accelerate_py.agent_supervisor.runtime.automatic_prompt_tokenizer import resolve_prompt_tokenizer
+    from ipfs_accelerate_py.agent_supervisor.runtime.repository_context_read_set import compile_repository_read_set
+    from ipfs_accelerate_py.agent_supervisor.runtime.repository_source_session import RepositorySourceSession
+    from ipfs_accelerate_py.agent_supervisor.runtime.supervisor_meta_index import public_replay_without_metadata
+
+    if type(routes) is not list or not 1 <= len(routes) <= 2:
+        raise ValueError("one or two explicit experiment routes required")
+    labels = set()
+    for route in routes:
+        if type(route) is not dict or set(route) != {"label", "provider", "model"}:
+            raise ValueError("closed experiment route required")
+        for value in route.values():
+            if (type(value) is not str or not value or value != value.strip()
+                    or len(value.encode()) > 256 or any(ord(char) < 32 for char in value)):
+                raise ValueError("bounded experiment route identity required")
+        if route["label"] in labels:
+            raise ValueError("unique experiment route labels required")
+        labels.add(route["label"])
+    case_root = _fresh_directory(Path(case_root), external=True)
+    output = _fresh_directory(Path(output_dir))
+    workspace = _fresh_directory(case_root / "source")
+    prompts = _fresh_directory(case_root / "private-prompts")
+    for name, raw in SOURCES.items():
+        _write_private(workspace / name, raw)
+    cases = []
+    session_options = {}
+    if scheduler is not None:
+        from ipfs_accelerate_py.agent_supervisor.runtime.repository_source_index import NativeRepositoryIndex
+        session_options["index_factory"] = lambda path: NativeRepositoryIndex(path, scheduler=scheduler)
+    with public_replay_without_metadata():
+        with RepositorySourceSession(workspace, case_root / "state", representation="original",
+                **session_options) as session:
+            initial = session.status_summary()
+            generation = initial["generation"]
+            for ordinal, route in enumerate(routes):
+                counter, provenance = resolve_prompt_tokenizer(provider=route["provider"], model=route["model"])
+                common = dict(session=session, generation=generation, query=QUERY,
+                    required_texts=list(REQUIRED_TEXTS), task_id=TASK_ID,
+                    provider=route["provider"], model=route["model"], workspace=workspace,
+                    token_counter=counter, max_input_tokens=MAX_INPUT_TOKENS, limit=8)
+                selected = compile_repository_read_set(**common, required_paths=list(REQUIRED_PATHS))
+                control = compile_repository_read_set(**common, required_paths=sorted(SOURCES))
+                for mode, result in (("selected", selected), ("all-files-control", control)):
+                    raw = result.selected_prompt.encode("utf-8")
+                    _write_private(prompts / (str(ordinal) + "-" + mode + ".txt"), raw)
+                    if any(text not in result.selected_prompt for text in REQUIRED_TEXTS):
+                        raise ValueError("authored mandatory requirement text changed")
+                    if result.receipt["model_prompt_sha256"] != _sha(raw):
+                        raise ValueError("compiler prompt digest differs")
+                left, right = control.receipt, selected.receipt
+                if left["required_text_bindings"] != right["required_text_bindings"]:
+                    raise ValueError("control and selected task obligations differ")
+                if (left["tokenizer_binding"], left["token_count_kind"], left["tokenizer_compatibility_basis"]) != (
+                        right["tokenizer_binding"], right["token_count_kind"], right["tokenizer_compatibility_basis"]):
+                    raise ValueError("control and selected counter provenance differs")
+                before, after = _count(left), _count(right)
+                cases.append(dict(route=dict(route), tokenizer_provenance=provenance,
+                    selected_receipt=right, all_files_control_receipt=left,
+                    local_input_difference=None if before is None or after is None else before - after,
+                    local_input_difference_kind=left["token_count_kind"],
+                    lower_selected_local_input=None if before is None or after is None else after < before,
+                    same_literal_task_security_UI_requirements=True,
+                    same_required_source_population=False,
+                    acceptance_or_behavioral_equivalence_verified=False))
+            closing = session.status_summary()
+            if closing != initial:
+                raise ValueError("native experiment generation or status changed")
+            for name, raw in SOURCES.items():
+                current = session.read(generation=generation, path=name, representation="original")
+                if (current["encoding"] != "utf-8" or current["content"].encode() != raw
+                        or current["original_sha256"] != _sha(raw)):
+                    raise ValueError("closing original source identity differs")
+    report = dict(schema="authored-repository-read-set-experiment@1", task_id=TASK_ID,
+        query_sha256=_sha(QUERY.encode()), source_recipe_fixed_before_measurement=True,
+        source_inventory={name:dict(sha256=_sha(raw), bytes=len(raw)) for name, raw in SOURCES.items()},
+        selected_required_paths=list(REQUIRED_PATHS), control_required_paths=sorted(SOURCES),
+        required_text_bindings=[dict(sha256=_sha(text.encode()), bytes=len(text.encode())) for text in REQUIRED_TEXTS],
+        cases=cases, genuine_native_query_and_original_reads=True,
+        existing_native_scheduler_supplied=scheduler is not None,
+        scheduler_policy_created_reset_or_reconfigured_by_driver=False,
+        source_and_prompt_bodies_exported=False, source_mutated_after_fixture_authorship=False,
+        target_code_executed=False, provider_invoked=False, actual_MCP_delivery=False,
+        native_conversation_history=False, task_acceptance=False,
+        provider_token_usage_verified=False, whole_session_token_savings=None,
+        token_budget_guaranteed=False, execution_authority=False, completion_authority=False,
+        limitation="A fixed authored selected-source input compared with an all-files control. "
+            "Equal literal task obligations do not prove omitted source irrelevant, matching behavior "
+            "or task acceptance; no favorable cases are searched.")
+    raw = _json(report) + b"\n"
+    _write_private(output / "report.json", raw)
+    return dict(schema="authored-repository-read-set-experiment-run@1",
+        report_sha256=_sha(raw), report_bytes=len(raw), routes=len(cases),
+        private_source_and_prompt_storage_retained=True, provider_invoked=False,
+        task_acceptance=False, whole_session_token_savings=None)

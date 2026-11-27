@@ -1,0 +1,131 @@
+"""Read-only independent artifact replay; imports no native/evaluation runner."""
+import hashlib
+import itertools
+import json
+from pathlib import Path
+import sys
+
+HERE=Path(__file__).resolve().parent
+
+
+def canonical(v):
+    return json.dumps(v,sort_keys=True,separators=(',',':'),ensure_ascii=True).encode()
+
+
+def cid(v):
+    return 'sha256:'+hashlib.sha256(v if isinstance(v,bytes) else canonical(v)).hexdigest()
+
+
+def main():
+    output=HERE/(sys.argv[1] if len(sys.argv)>1 else 'run-v1')
+    freeze=json.loads((output/'freeze.json').read_text())
+    protocol=freeze['protocol']
+    checks=[]
+    def check(name,condition):
+        checks.append({'check':name,'passed':bool(condition)})
+        assert condition,name
+    for name,expected in freeze['local_files'].items():
+        p=HERE/name
+        if name in ('run.py','lifecycle.py','computation_worker.py','protocol.json'):
+            check('frozen runner snapshot '+name,hashlib.sha256((output/'frozen_runner'/name).read_bytes()).hexdigest()==expected)
+        check('frozen input '+name,hashlib.sha256(p.read_bytes()).hexdigest()==expected)
+    for path,expected in freeze['native_files'].items():
+        check('native source '+path,hashlib.sha256(Path(path).read_bytes()).hexdigest()==expected)
+    loaded=json.loads((output/'loaded_sources.json').read_text())
+    check('all runtime modules under complete ASEH',all(v['path'].startswith(freeze['source_roots'][0]+'/') for v in loaded.values()))
+    for name,v in loaded.items():
+        check('loaded source '+name,hashlib.sha256(Path(v['path']).read_bytes()).hexdigest()==v['sha256'])
+    packs={p.stem:json.loads(p.read_text()) for p in (output/'packs').glob('*.json')}
+    total_outputs=0
+    for revision,pack in packs.items():
+        s=pack['seal']
+        full='repository_proof_root' in s
+        domain='ips.full_checkpoint' if full else 'ips.delta_seal'
+        check(revision+' exact required manifest',s['required_unit_ids']==['clamp','energy']==sorted(pack['receipts']))
+        mapping={u:cid((output/'snapshots'/revision/(u+'.py')).read_bytes()) for u in ('clamp','energy')}
+        check(revision+' source root',cid(mapping)==s['source_root_cid'])
+        for unit,receipt in pack['receipts'].items():
+            values=list(range(-9,10)) if unit=='clamp' else [list(t) for n in range(4) for t in itertools.product(range(-2,3),repeat=n)]
+            lower=protocol['revisions'][revision]
+            expected=[(lower if v<lower else 3 if v>3 else v) for v in values] if unit=='clamp' else [sum(x**2 for x in v) for v in values]
+            check(revision+'/'+unit+' finite replay',receipt['inputs']==values and receipt['outputs']==expected and receipt['calls']==len(values))
+            check(revision+'/'+unit+' source and input binding',receipt['binding']['source_cid']==mapping[unit] and receipt['binding']['inputs_cid']==cid(values))
+            check(revision+'/'+unit+' actual receipt producer binding',receipt['binding']['worker_cid']==cid((output/'frozen_runner/computation_worker.py').read_bytes()))
+            total_outputs+=len(values)
+        # Independently recompute every category and the manifest/forest roots
+        # from committed receipt bytes; no native hash helpers are imported.
+        categories={}
+        for category in s['category_roots']:
+            members=['clamp','energy'] if category=='unit_test' else []
+            leaves=[cid({'domain':domain+'.leaf.v1','unit_id':u,'proof_object_cid':cid(pack['receipts'][u]),
+                'category':category,'terminal_status':'integrity_verified','position':i}) for i,u in enumerate(members)]
+            if not leaves:
+                categories[category]=cid({'domain':domain+'.empty.v1','category':category})
+            else:
+                level=leaves
+                while len(level)>1:
+                    level=[cid({'domain':domain+'.binary.v1','left':level[i],'right':level[i+1]})
+                        if i+1<len(level) else cid({'domain':domain+'.unary.v1','child':level[i]})
+                        for i in range(0,len(level),2)]
+                categories[category]=cid({'domain':domain+'.category.v1','category':category,
+                    'leaf_count':len(members),'leaf_ids':members,'merkle_root':level[0]})
+        check(revision+' receipt-to-category roots',categories==s['category_roots'])
+        manifest=cid({'domain':domain+'.manifest.v1','required_unit_ids':['clamp','energy'],'policy_cid':s['policy_cid']})
+        check(revision+' manifest root',manifest==s.get('manifest_root_cid',s.get('new_manifest_root_cid')))
+        common=['repository_id','revision','source_root_cid','repository_state_cid','environment_cid','policy_cid',
+            'proof_schema_version','canonicalization_version','dependency_graph_schema_version','circuit_id',
+            'verification_key_id','parent_seal_cid','parent_revision_ids']
+        forest={k:s[k] for k in common}
+        forest.update(domain=domain+('.repository.v1' if full else '.forest.v1'),manifest_root_cid=manifest,category_roots=categories)
+        if not full:
+            forest.update(branch_id='main',logical_epoch=s['logical_epoch'])
+        check(revision+' forest root',cid(forest)==s.get('repository_proof_root',s.get('new_forest_root_cid')))
+        aggregate={'domain':domain+'.aggregation.v1','label':'manifest_aggregation',
+                   'required_unit_ids':['clamp','energy'],'category_roots':categories}
+        check(revision+' aggregate root',cid(aggregate)==s.get('aggregation_root',s.get('new_aggregation_root')))
+        envelope={'domain':domain+'.seal.v1','payload':s}
+        check(revision+' seal CID',cid(envelope)==pack['seal_cid'])
+        check(revision+' primary admission accepted',pack['admission']['accepted'])
+        if pack['parent_pack']:
+            parent=packs[pack['parent_pack']]
+            check(revision+' actual parent seal',s['parent_seal_cid']==parent['seal_cid'])
+            check(revision+' reused unit exact receipt',pack['receipts']['energy']==parent['receipts']['energy'])
+            check(revision+' replacement actual change',pack['receipts']['clamp']!=parent['receipts']['clamp'])
+    sequence=json.loads((output/'results/sequence.json').read_text())
+    check('three main publications',sum(x['publication']['published'] for x in sequence)==3)
+    check('actual stale CAS after persistence',sequence[-1]['publication']['reason']=='stale_parent' and sequence[-1]['publication']['phase_reached']=='seal_persistence')
+    check('stale CAS preserved winning pointer',sequence[-1]['pointer']==sequence[-2]['pointer'])
+    controls=json.loads((output/'results/controls.json').read_text())
+    check('five frozen controls',sorted(c['id'] for c in controls)==sorted(protocol['controls']))
+    check('native digest mutation rejects',controls[0]['native']['accepted'] is False)
+    check('invalid rehashed and stale receipts rejected by caller',all(c['caller']['accepted'] is False for c in controls if 'caller' in c))
+    check('native integrity accepts three self-consistent invalid receipts',sum(c.get('caller',{}).get('native',{}).get('accepted',False) for c in controls)==3)
+    missing=next(c for c in controls if c['id']=='missing_manifest_unit')
+    check('native missing manifest rejects without changing pointer',not missing['publication']['published'] and missing['before']==missing['after'])
+    for boundary in protocol['crashes']:
+        event=json.loads((output/'events'/(boundary+'.json')).read_text())
+        process=json.loads((output/'logs'/('crash-'+boundary+'.json')).read_text())
+        check(boundary+' abrupt process termination',event['exit_code']==91==process['returncode'])
+        expected=packs['r1']['seal_cid'] if boundary=='after_seal_persistence' else packs['r2a']['seal_cid']
+        pids=[]
+        for i in range(3):
+            r=json.loads((output/'results'/(boundary+'-recover-'+str(i)+'.json')).read_text())
+            pids.append(r['pid'])
+            check(boundary+f' recovery{i} retained accepted root',r['before']['seal_cid']==r['after']['seal_cid']==expected and r['persisted_chain']['accepted'])
+            target=next(d for d in r['recovery']['decisions'] if d['transition_id']=='e08:delta-r2a')
+            if boundary=='after_seal_persistence':
+                check(boundary+f' recovery{i} does not silently publish',target['state']=='in_progress' and target['disposition']=='verify-existing' and not target['applied'])
+            else:
+                check(boundary+f' recovery{i} recognizes commit',target['state']=='committed' and target['pointer_recognized'] and target['applied']==(i==0))
+        check(boundary+' three distinct fresh processes',len(set(pids))==3 and event['pid'] not in pids)
+    summary={'schema':'ns-seal-independent-artifact-audit/v1','checks_passed':len(checks),'checks':checks,
+        'independent_finite_outputs_replayed':total_outputs,'unique_states':4,
+        'loaded_native_modules':len(loaded),'native_source_files_frozen':len(freeze['native_files']),
+        'validator_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        'provider_calls':0,'native_publication_or_recovery_calls':0,'operation_execution_calls':0}
+    (output/'artifact_audit.json').write_text(json.dumps(summary,indent=2)+'\n')
+    print(json.dumps({k:v for k,v in summary.items() if k!='checks'},sort_keys=True))
+
+
+if __name__=='__main__':
+    main()

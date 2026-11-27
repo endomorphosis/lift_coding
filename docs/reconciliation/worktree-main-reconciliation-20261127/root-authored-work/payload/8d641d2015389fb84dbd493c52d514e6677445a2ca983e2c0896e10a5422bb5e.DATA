@@ -1,0 +1,79 @@
+{
+  "docker_endpoint": "unix:///var/run/docker.sock",
+  "grader_calls": 0,
+  "image_id": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+  "original_reference_projection_explicit": true,
+  "prepared": true,
+  "private_registry_sha256": "397b2aa901b8b06a9c8c6b779e8047825e5c3377355d64ad912cf176af025393",
+  "provider_calls": 0,
+  "public_objective_input_sha256": {
+    "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/public_contracts_v2/objectives-v1.json": "072fa95465ddb62a29e6b89fb44198eb50cfa1f4f035264b388d595614cb8dff",
+    "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/public_issue_reproduction_v1/objective.json": "750efc657a75ae00bd905fb8101d9405ea61220620f095c0b70596ce641abba5"
+  },
+  "runner_sha256": "ef48af9fd58dd6e6e4820079107742d9f282f09139a37d4d28ebdc19e357393c",
+  "schema": "ns-original-acceptance-preparation/v1",
+  "source_bindings": {
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/historical_adapter/adapter.py": "40ceaba2d4c6307bbcb71028660552ba730ce496f505cf30821445d030a5d89b",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/historical_adapter/cold_scorer.py": "2929f15dbdc0d95d14d5e85f6b74a5200d7652cb0440ad10f29d09609348b1be",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/candidate/papers/completion/neurosymbolic_supervision/benchmark/baseline_capture.py": "c4102f57762d148e99a14fd405245b199781e931f5251a8b281475c46acc4aaf",
+    "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/dependency_wheels/railroad_diagrams-3.0.1-py3-none-any.whl": "d414ff2439ed53345950e197938097548721b5d097926fafeaabc2bb069b44f9"
+  },
+  "tasks": [
+    {
+      "authorized_changed_file_count": 1,
+      "base_commit": "75a17701db20d5d3ec2ea1f6c901cf2211011eb5",
+      "base_source_tree_sha256": "ac3dcdc721ce1e9b322d3e686e20ebdb372c231635a76dcef70542624f399e5f",
+      "hidden_count": 1,
+      "manifest_sha256": "a44ca9f8307f0012824ce458f4310b83345cd74b4b416ffc54d108410fc4c404",
+      "objective_record_sha256": "cfb00c785b3e787893de8699c23c95dbb5f8eeffc50f97b386e25fd867431a0c",
+      "objective_text_sha256": "4ea0159f020c92102f3f11c202d24ebc467082bf30e6cda174b0c3048346d9a5",
+      "public_tree_entries": 16,
+      "reference_projection_matches_full_reference_on_entire_authorized_source": true,
+      "reference_source_tree_sha256": "7ee774e8e4aaf364ef832b26ee7eb1fbc20a21bb7cf83a417e6f26bdad62e47c",
+      "task_id": "ns-hist-01-xmltodict",
+      "visible_count": 34
+    },
+    {
+      "authorized_changed_file_count": 1,
+      "base_commit": "77c50a89cd0b91005b570a1c926900f484ca4421",
+      "base_source_tree_sha256": "5ab214fe64c2d220e17be2917be296f6347676ccfe3eb480cf8ff43ed09440c9",
+      "hidden_count": 3,
+      "manifest_sha256": "15c167476f04a931a7a22244a17a5eeaf9cafca8db1e227d3cbbc6da8fa7a8c1",
+      "objective_record_sha256": "31d2c426f771463e9ff35ad55a4fde0581b38d167259f8614035e149af509b6c",
+      "objective_text_sha256": "3dccd16bceca02d69a48067e36c198b10f21911e44ad9f12cea2959d0e6b469f",
+      "public_tree_entries": 287,
+      "reference_projection_matches_full_reference_on_entire_authorized_source": true,
+      "reference_source_tree_sha256": "4c039df8e765da49a8c36e60b03dcd7391173b339d836425c955669752aa6f3a",
+      "task_id": "ns-hist-02-pyparsing",
+      "visible_count": 2044
+    },
+    {
+      "authorized_changed_file_count": 1,
+      "base_commit": "cf3cf407be774405f66188219eb1653c723e294b",
+      "base_source_tree_sha256": "9ab7096e8256adf841601341cc46a3077da74a736a6c966c5efcf96d459dff2e",
+      "hidden_count": 1,
+      "manifest_sha256": "4a905dd666115f111f5ee7099d512f228e15b21ceb8df214d85c50da7b0e1789",
+      "objective_record_sha256": "4e951334e579164d4c6e9bb48efe8ac236bf1ee5d5d999f44312c46a00b6c1d1",
+      "objective_text_sha256": "35081abb6d3999fd0418e527fc5ab8b0e6f6ce4234e9528dd00ae32b572f5f2a",
+      "public_tree_entries": 199,
+      "reference_projection_matches_full_reference_on_entire_authorized_source": true,
+      "reference_source_tree_sha256": "e3a6c634d671abb8ed292482fb9b9845e0552eab117ba036a2b04f2843162152",
+      "task_id": "ns-hist-03-oauthlib",
+      "visible_count": 3
+    },
+    {
+      "authorized_changed_file_count": 1,
+      "base_commit": "02046e7a19480f85fff7e4577486518abe47e401",
+      "base_source_tree_sha256": "d9fee40ba46daedb37b96a2360a24a798249ca89b24b7c79315ec5d9de57e9d0",
+      "hidden_count": 5,
+      "manifest_sha256": "c768ea8c42f555295f01c8a6490115c243cfe09c21ddfe3dda4a54d504ebfc11",
+      "objective_record_sha256": "26c3c50d0a001009a5b4c09b05654d4893b9c4a815f3e78eb5268aa6abb102cf",
+      "objective_text_sha256": "21b57ebf245b5a9c13fdb4d59670d931f68def393ff1ab140bc3d2b377882a43",
+      "public_tree_entries": 145,
+      "reference_projection_matches_full_reference_on_entire_authorized_source": true,
+      "reference_source_tree_sha256": "f53d53c38bb1518a0fadc36d33d4a6ef498bbc11e653159fadb97f2bea134c44",
+      "task_id": "ns-hist-04-click",
+      "visible_count": 113
+    }
+  ]
+}

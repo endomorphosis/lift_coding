@@ -1,0 +1,211 @@
+"""Bounded worker catalog from separately pinned, freshly replayed nominations.
+
+This is an advisory appendage to the original native coding capsule. It never
+changes a task contract or turns a source selector into requirement satisfaction.
+"""
+from __future__ import annotations
+
+import hashlib
+import importlib.util
+import os
+from pathlib import Path
+import shlex
+import sys
+
+from . import code_source_inspection as source
+
+KIND = "code-source-nomination"
+SCHEMA = "supervisor-reviewed-source-nomination-context@1"
+RECEIPT_SCHEMA = "supervisor-reviewed-source-nomination-inclusion@1"
+HEADER = "\nReviewed source nominations (descriptive only; behavioral requirements remain pending):\n"
+MAX_BYTES = 16384
+
+
+def build_nomination_reference(*, artifact, sha256, repository_id, tree_id):
+    """Transport only the complete pair in one required typed reference."""
+    if not artifact and not sha256:
+        return ()
+    if not artifact or not sha256:
+        raise source.CodeSourceInspectionError("source nomination requires both artifact and digest")
+    source._relative(artifact)
+    source._digest(sha256)
+    from ..context.context_contracts import ContextReference
+    text = source._json({"artifact": artifact, "sha256": sha256})
+    return (ContextReference(reference_id="reviewed-source-nomination", kind=KIND,
+        repository_id=repository_id, tree_id=tree_id, path=artifact, summary=text,
+        referenced_content_id="sha256:" + source._sha(text.encode()), byte_count=len(text.encode()),
+        metadata={"required": True}),)
+
+
+@source._without_metadata
+def nomination_pointer(prompt):
+    """Absent default prompts need no parsing or filesystem access."""
+    if '"kind":"' + KIND + '"' not in prompt:
+        return None
+    from . import compact_code_retrieval as codec
+    from ..context.context_contracts import ContextReference
+    capsule, _ = codec._native(prompt)
+    rows = [row for row in capsule["evidence"] if type(row) is dict and row.get("kind") == KIND]
+    if len(rows) != 1:
+        raise source.CodeSourceInspectionError("unique required nomination pointer required")
+    row = rows[0]
+    ref = ContextReference.from_dict(row)
+    pointer = source._parse(ref.summary)
+    if (source._json(ref.to_record()) != source._json(row)
+            or type(pointer) is not dict or set(pointer) != {"artifact", "sha256"}
+            or source._json(pointer) != ref.summary or ref.path != pointer["artifact"]
+            or source._json(dict(ref.metadata)) != source._json({"required": True})
+            or ref.reference_id != "reviewed-source-nomination"
+            or ref.repository_id != capsule["repository_id"] or ref.tree_id != capsule["tree_id"]
+            or ref.byte_count != len(ref.summary.encode())
+            or ref.referenced_content_id != "sha256:" + source._sha(ref.summary.encode())):
+        raise source.CodeSourceInspectionError("typed nomination pointer bindings differ")
+    source._relative(pointer["artifact"])
+    source._digest(pointer["sha256"])
+    return pointer
+
+
+def _command_prefix(repository, pins):
+    roots = []
+    for package in ("ipfs_accelerate_py", "ipfs_datasets_py", "ipfs_kit_py"):
+        located = importlib.util.find_spec(package)
+        if located is not None and located.origin:
+            path = str(Path(located.origin).parent.parent)
+            if path not in roots:
+                roots.append(path)
+    argv = ["/usr/bin/env", "PYTHONPATH=" + os.pathsep.join(roots), "PYTHONDONTWRITEBYTECODE=1",
+        sys.executable, "-P", "-m", "ipfs_accelerate_py.agent_supervisor.runtime.intent_source_inspection",
+        "--repository", str(repository)]
+    for key in ("artifact", "expected_sha256", "task_id", "task_cid", "frontier_artifact", "frontier_sha256",
+                "source_artifact", "source_sha256", "contract_sha256", "instruction_sha256", "review_sha256"):
+        argv.extend(("--" + key.replace("_", "-"), pins[key]))
+    command = shlex.join(argv)
+    if len(command.encode()) > 8192:
+        raise source.CodeSourceInspectionBoundsError("complete inspector command prefix exceeds bound")
+    return command
+
+
+def render_reviewed_source_nomination_block(*, nomination, command_prefix, max_bytes=8192):
+    """Pure K@1 rendering; caller separately validates every evidence binding."""
+    if type(max_bytes) is not int or not 1024 <= max_bytes <= MAX_BYTES:
+        raise source.CodeSourceInspectionBoundsError("bounded exact integer catalog cap required")
+    source._text(command_prefix, 8192)
+    rows = [{key: entry[key] for key in ("row_id", "path", "qualified_symbol", "requirement_ids")}
+            for entry in nomination["nominations"]]
+    residual = [{"requirement_id": row["native_requirement"]["requirement_id"],
+        "modality": row["native_requirement"]["modality"], "mandatory": row["mandatory"], "residual": True}
+        for row in nomination["requirements"]]
+    catalog = {"schema": SCHEMA, "rows": rows, "residual_requirements": residual,
+        "unknown_census": nomination["unknown_census"],
+        "inspector": {"command_prefix": command_prefix,
+            "arguments": "Append --row-id with one catalog row_id, --question with the unresolved question, --mode source or facts, and --max-bytes 8192. Quote each value for your shell. Repeat the same command with --continuation and the exact returned handle; concatenate content_text in order. complete marks final page, not whole content in that page."},
+        "review_ref": nomination["review"]["review_ref"],
+        "source_authentication_claimed": False, "review_authentication_claimed": False,
+        "behavioral_requirements_satisfied": False, "signed_planning_inputs_modified": False,
+        "planner_current_facts_supplied": False, "proof_authority": False,
+        "execution_authority": False, "completion_authority": False}
+    block = HEADER + source._json(catalog) + "\n"
+    if len(block.encode()) > max_bytes:
+        raise source.CodeSourceInspectionBoundsError("complete nomination catalog exceeds its byte bound")
+    return block
+
+
+@source._without_metadata
+def load_reviewed_source_nomination_context(*, prompt, repository, source_text,
+        instruction_receipt, semantic_verification, max_bytes=8192):
+    """Join the catalog to already verified native semantic and signed inputs.
+
+    Returns ``(block, receipt, verify_originals)``. With no pointer the exact
+    result is ``('', None, None)``. The caller invokes the private witness guard
+    again immediately before provider dispatch, after all prompt preparation.
+    """
+    pointer = nomination_pointer(prompt)
+    if pointer is None:
+        return "", None, None
+    if type(max_bytes) is not int or not 1024 <= max_bytes <= MAX_BYTES:
+        raise source.CodeSourceInspectionBoundsError("bounded exact integer catalog cap required")
+    from . import compact_code_retrieval as codec
+    from . import verified_code_retrieval_projection as verified
+    from .intent_source_inspection import load_intent_source_nomination_catalog
+    from ..semantic_state.wire import cid_for_payload
+    capsule, _ = codec._native(prompt)
+    root = source._root(repository)
+    receipt = instruction_receipt
+    semantic = semantic_verification
+    if (type(receipt) is not dict or receipt.get("manifest_signature_verified") is not True
+            or receipt.get("verbatim_utf8") is not True or receipt.get("completion_authority") is not False
+            or receipt.get("task_id") != capsule["objective_id"]
+            or type(receipt.get("task_cid")) is not str or not receipt["task_cid"]
+            or receipt.get("source_sha256") != source._sha(source_text.encode())
+            or type(receipt.get("source_bytes")) is not int or receipt["source_bytes"] != len(source_text.encode())
+            or type(receipt.get("intent_requirements")) is not dict):
+        raise source.CodeSourceInspectionError("verified source-bound IntentIR coding instruction required")
+    if (type(semantic) is not dict or semantic.get("freshness_checked") is not True
+            or semantic.get("task_id") != capsule["objective_id"]
+            or semantic.get("native_prompt_sha256") != source._sha(prompt.encode())
+            or type(semantic.get("native_prompt_bytes")) is not int
+            or semantic["native_prompt_bytes"] != len(prompt.encode())):
+        raise source.CodeSourceInspectionError("verified native semantic coding prompt required")
+    selected, _, code_text = codec._chunks(capsule)
+    context = source._parse(code_text)
+    if source._json(context) != code_text:
+        raise source.CodeSourceInspectionError("canonical native code context required")
+    native = codec._retrieval(context, source_text)
+    if native.get("status") != "current" or native.get("task_id") != capsule["objective_id"]:
+        raise source.CodeSourceInspectionError("current native code objective required")
+    scope = verified._semantic_scope(capsule)
+    # Native chunks identify the actual original retrieval path independently
+    # of the nomination wrapper. Capture its protected bytes before loading it.
+    source_artifact = selected[0][1]["path"]
+    capture = source._PublicCapture(root)
+    from .code_retrieval_context import MAX_ARTIFACT_BYTES
+    original_raw = capture.read(source_artifact, MAX_ARTIFACT_BYTES)
+    original_sha = source._sha(original_raw)
+    loaded = load_intent_source_nomination_catalog(repository=root, artifact=pointer["artifact"],
+        expected_sha256=pointer["sha256"], task_id=capsule["objective_id"], task_cid=receipt["task_cid"],
+        source_text=source_text, source_artifact=source_artifact, source_sha256=original_sha)
+    nomination, pins, evidence = loaded["nomination"], loaded["pins"], loaded["evidence"]
+    bindings = nomination["bindings"]
+    requirements = receipt["intent_requirements"]
+    # The task CID and its context revision are different identities. The
+    # independently pinned catalog/frontier binds each in its own namespace.
+    if (bindings["task_cid"] != receipt["task_cid"]
+            or bindings["task_revision"] != capsule["objective_revision"]
+            or evidence["spec"]["task_revision"] != capsule["objective_revision"]
+            or bindings["contract_cid"] != requirements.get("contract_cid")
+            or bindings["ledger_sha256"] != requirements.get("ledger_sha256")
+            or bindings["instruction_source_sha256"] != receipt["source_sha256"]
+            or bindings["repository_id"] != cid_for_payload({"repository": str(root)})
+            or bindings["tree_id"] != semantic.get("scope_cid")
+            or any(scope.get(row["path"]) != row["sha256"] for row in nomination["sources"])
+            or set(evidence["sources"]) != {row["path"] for row in nomination["sources"]}):
+        raise source.CodeSourceInspectionError("catalog differs from verified semantic and requirement bindings")
+    replayed = source._json(evidence["context"])
+    if context.get("schema") == codec.FRONTIER_SCHEMA:
+        from . import code_retrieval_frontier as frontier
+        manifest = frontier._manifest(evidence["spec"], evidence["context"])
+        replayed = frontier._packet(evidence["spec"], evidence["context"], manifest,
+            pins["frontier_artifact"], pins["frontier_sha256"], root)
+        if len(replayed.encode()) >= len(source._json(evidence["context"]).encode()):
+            raise source.CodeSourceInspectionError("native frontier projection gain differs")
+    if replayed != code_text:
+        raise source.CodeSourceInspectionError("complete native code chunks differ from captured replay")
+    block = render_reviewed_source_nomination_block(nomination=nomination,
+        command_prefix=_command_prefix(root, pins), max_bytes=max_bytes)
+    rows, residual = nomination["nominations"], nomination["requirements"]
+    def verify_originals():
+        capture.verify_originals()
+        loaded["verify_originals"]()
+    verify_originals()
+    inclusion = {"schema": RECEIPT_SCHEMA, "artifact": pointer["artifact"], "artifact_sha256": pointer["sha256"],
+        "native_prompt_sha256": source._sha(prompt.encode()), "native_prompt_bytes": len(prompt.encode()),
+        "block_sha256": source._sha(block.encode()), "block_bytes": len(block.encode()),
+        "task_id": capsule["objective_id"], "task_cid": receipt["task_cid"],
+        "contract_cid": bindings["contract_cid"], "ledger_sha256": bindings["ledger_sha256"],
+        "source_sha256": receipt["source_sha256"], "row_count": len(rows), "residual_requirement_count": len(residual),
+        "captured_native_query_and_ast_replayed": True, "metadata_owner_suppressed": True,
+        "original_inputs_rechecked": True, "review_authentication_claimed": False,
+        "source_authentication_claimed": False, "current_owner_revision_authenticated": False,
+        "behavioral_requirements_satisfied": False, "proof_authority": False,
+        "execution_authority": False, "completion_authority": False}
+    return block, inclusion, verify_originals

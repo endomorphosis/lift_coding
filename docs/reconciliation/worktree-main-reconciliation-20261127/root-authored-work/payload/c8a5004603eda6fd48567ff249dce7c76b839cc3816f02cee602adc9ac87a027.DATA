@@ -1,0 +1,62 @@
+# Constructed proof study: anonymous audit bundle
+
+This bundle covers the 64 prospectively fixed constructed goals: eight families with four valid and four invalid instances each. It provides the declarations, explicit label justifications, original model requests and responses, per-goal outcomes, and actual Lean proof sources. These are tests of proof assistance on fixed formal statements, not annotations of natural-language legal meaning.
+
+| Arm | Accepted valid goals | Accepted invalid goals |
+|---|---:|---:|
+| Fixed Lean tactic baseline | 32/32 | 0/32 |
+| SMT-guided Lean reconstruction | 24/32 | 0/32 |
+| Leanstral, primary admission policy | 12/32 | 0/32 |
+
+All model observations remain in the denominator: 64 requests and responses, including abstentions, policy rejections, native rejections, and incomplete responses. The five older serving-qualification goals remain identifiable in `frozen_protocol.json` but do not appear in the 64-row `comparison.json` and do not contribute to these estimates.
+
+The evaluated weights are **Leanstral 1.5 119B A6B**, using [Frosty40's NVFP4 GGUF package](https://huggingface.co/Frosty40/Leanstral-1.5-119B-A6B-GGUF-NVFP4/tree/abcc5ce2528c6375148d41dac6dce20f06c339f4). `MODEL_IDENTITY.json` identifies the exact file hash, upstream model revision, and local cache content identifier. The `Leanstral 2603` name in the raw GGUF metadata describes the ancestor; it is not the complete identity of the evaluated fine-tuned and quantized asset.
+
+## Reproduce recorded counts
+
+Run `python verify_counts.py` with Python 3.9 or later to verify all bundle hashes, bind the 64 comparison rows to the fixed goals and original per-goal receipts, and reproduce every primary count, inference cost, token total, and the exact 2,000-draw family bootstrap. This command uses only the Python standard library and makes no model or Lean calls. `verification_counts.json` records the initial successful reproduction. It keeps all post-hoc acceptances outside the primary result.
+
+The five historical serving-qualification requests, responses, and outcomes are retained separately under `qualification/`. Their recorded request intervals sum to 11.2176171831 seconds; `qualification/summary.json` and the counts verifier reproduce that cost separately. They remain excluded from the 64-goal primary denominator, primary acceptance counts, and family bootstrap.
+
+## Replay accepted proofs
+
+Requirements: Python 3.9 or later and **Lean 4.33.1 on `PATH`**. No Mathlib, solver, model weights, network access, or repository checkout is required for replaying these Lean proofs.
+
+From this folder:
+
+```sh
+python verify_proofs.py --output replay-primary.json
+```
+
+The default command replays the 12 primary accepted model proofs. It verifies the bundle hashes, exact fixed declarations, proof-body correspondence to the original complete model responses, original syntax policy, and original checker source hashes. Every invocation uses `lean -j1 -M1024` with a ten-second wall limit. A replay succeeds only if Lean exits successfully and `#print axioms empirical_goal` reports a subset of `propext`, `Classical.choice`, and `Quot.sound`; admitted proofs and unknown axiom reports fail. Existing output reports are never overwritten.
+
+Optional independent replays:
+
+```sh
+python verify_proofs.py --include-native --output replay-primary-and-native.json
+python verify_proofs.py --include-posthoc --output replay-with-separate-posthoc.json
+```
+
+The first additionally checks the 32 accepted baseline proofs and 24 accepted hammer reconstructions. It does not rerun Z3/CVC5; their original dispositions and SMT inputs are included under `native/`. The second also checks the three additional post-hoc model acceptances, keeping their arm labels separate. Fresh replay timings describe the replay machine and are not the paper's original inference costs.
+
+`verification_primary.json` records the bundle's initial portable replay, which accepted all 12 primary proofs under Lean 4.33.1. This is verification of the original recorded proofs, with **zero new model calls**.
+
+## Contents and evidence identity
+
+- `frozen_protocol.json`: original frozen declarations, paired construction, budgets, and admission policy. Its 64-element `goals` list defines the study population; `qualification_goals` is excluded.
+- `comparison.json`: one observation per study goal, preserving baseline, hammer, and model outcomes, including failures.
+- `model/<goal_id>/`: byte-identical request/response JSON, extracted model text when available, actual candidate Lean sources when admitted to checking, and per-goal receipts.
+- `native/<goal_id>/`: native control, baseline and hammer Lean sources, SMT inputs when supported, and original checker/solver receipts.
+- `negative_type_witnesses.lean` and its receipt: explicit counterexample proofs for the dependent and higher-order invalid families.
+- `policy_friction_posthoc/`: all six retained outputs selected for the separately identified admission-policy sensitivity analysis, with sources and outcomes.
+- `leanstral_v15.jinja`, `local_model_metadata.json`: serving-template and local model identity evidence.
+- `MODEL_IDENTITY.json`: evaluated fine-tuned model and quantization identity, distinct from the raw metadata's ancestor name.
+- `summary.json`: the original 64-goal aggregate. `MANIFEST.json` inventories both original and bundled hashes.
+
+Local absolute host paths have been replaced only in receipts. Model request/response bytes, extracted proof text, Lean/SMT source files, and the tokenizer template are unchanged. The manifest records each original artifact's SHA-256 separately from its bundled SHA-256 and labels any path redaction. Original host locations are unnecessary for this replay.
+
+## Post-hoc sensitivity is separate from the primary result
+
+The primary parser rejected six complete model outputs because they used `rw` or a local identifier `safe_x`. A later diagnostic extended the admission vocabulary by those two forms and checked the same proof bodies, without editing them or making model calls. Three additional valid proofs passed, producing 15/32 only in that diagnostic. The primary result remains **12/32**, and the default portable replay applies the original policy. Neither policy admitted an invalid control.
+
+Failure Lean files may contain incomplete or rejected proofs and are retained as observations. Their existence does not count as acceptance. The study's name and arithmetic variants share eight constructed families; they are not 64 independent real-world mathematical problems.

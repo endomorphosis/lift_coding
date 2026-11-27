@@ -1,0 +1,81 @@
+"""Archive exact evaluation implementations and actual native import closure."""
+import argparse
+import hashlib
+import json
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parents[5]
+
+
+def sha(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("run_id")
+    args = parser.parse_args()
+    run = HERE / args.run_id
+    profile = json.loads((run / "profile.json").read_text())
+    rows = {}
+
+    def enroll(path, expected=None, role="evaluation"):
+        path = Path(path).resolve()
+        raw = path.read_bytes()
+        digest = sha(raw)
+        if expected is not None and digest != expected:
+            raise ValueError("cannot archive changed source: " + str(path))
+        relative = path.relative_to(ROOT)
+        target = run / "frozen_sources" / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        if target.exists() and target.read_bytes() != raw:
+            raise ValueError("existing source snapshot differs")
+        target.write_bytes(raw)
+        record = rows.setdefault(str(path), {"original_path": str(path), "snapshot_path": str(target.relative_to(run)), "sha256": digest, "bytes": len(raw), "roles": []})
+        if role not in record["roles"]:
+            record["roles"].append(role)
+
+    for path, digest in profile["evaluation_files"].items():
+        enroll(path, digest)
+    for name in ("validate.py", "freeze_sources.py"):
+        enroll(HERE / name)
+    for completion in sorted((run / "state/effects").glob("*/completion.json")):
+        response = json.loads(completion.read_text())["response"]
+        for path, record in response.get("imports", {}).items():
+            enroll(path, record["sha256"], "native_semantic_symbolic_route")
+        for record in response.get("runtime_profile", {}).get("imports", []):
+            enroll(record["path"], record["sha256"], "native_world_memory")
+    context_run = Path(profile["context_service"]["run"])
+    context_freeze = json.loads((context_run / "freeze.json").read_text())
+    for name, digest in context_freeze["evaluation_sources"].items():
+        enroll(context_run.parent / name, digest, "context_adapter")
+    enroll(context_run / "runtime_source_manifest.json", role="context_manifest")
+    enroll(context_run / "public_projection.json", context_freeze["public_projection_sha256"], "context_authority")
+    for imports in sorted(context_run.glob("*/*imports.json")):
+        values = json.loads(imports.read_text())
+        for record in values.values():
+            if isinstance(record, dict) and "path" in record and "sha256" in record:
+                enroll(record["path"], record["sha256"], "native_context")
+    world_operation = json.loads(Path(next(path for path in profile["evaluation_files"] if path.endswith("world_memory_development/service_operation.json"))).read_text())
+    enroll(world_operation["source_profile"], world_operation["source_profile_sha256"], "world_manifest")
+    enroll(world_operation["source_diff"], world_operation["source_diff_sha256"], "world_manifest")
+    manifest = {"schema": "ns-controller-frozen-source-closure@1", "run_id": args.run_id, "original_profile_sha256": sha((run / "profile.json").read_bytes()), "strategy": "Exact executable source copies in mirrored repository-relative paths. Source profiles stay separate; no namespace mixing. Re-execution uses a newly enrolled profile rather than overwriting this run.", "sources": sorted(rows.values(), key=lambda row: row["original_path"]), "external_assets": {"docker_image": profile["scorer_image"], "docker_image_exported": False, "python_runtime": "recorded per native/service receipts; environment must be reconstructed separately"}}
+    (run / "frozen_source_manifest.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
+    loaded = [row for row in manifest["sources"] if any(role.startswith("native_") for role in row["roles"])]
+    (run / "loaded_source_manifest.json").write_text(json.dumps({"schema": "ns-controller-independent-loaded-source-manifest@1", "sources": loaded}, indent=2, sort_keys=True) + "\n")
+    # Retain the original validator byte for byte. This separate archived audit
+    # resolves source paths to their exact saved copies while reading the actual
+    # immutable effect/ledger artifacts in this run.
+    original_validator = (HERE / "validate.py").read_text()
+    (run / "frozen_validate.py").write_text(original_validator)
+    (run / "frozen_run.py").write_bytes((HERE / "run.py").read_bytes())
+    adapted = original_validator.replace("HERE = Path(__file__).resolve().parent", "HERE = Path(__file__).resolve().parent.parent", 1)
+    adapted = adapted.replace("def sha(path):\n    return hashlib.sha256(Path(path).read_bytes()).hexdigest()", "def sha(path):\n    archive = Path(__file__).resolve().parent\n    manifest = json.loads((archive / 'frozen_source_manifest.json').read_text())\n    source = next((row for row in manifest['sources'] if row['original_path'] == str(Path(path).resolve())), None)\n    actual = archive / source['snapshot_path'] if source else Path(path)\n    return hashlib.sha256(actual.read_bytes()).hexdigest()", 1)
+    adapted = adapted.replace('(run / "audit.json").write_text', '(run / "archived_audit.json").write_text', 1)
+    (run / "audit_archived.py").write_text(adapted)
+    print(json.dumps({"copied_files": len(rows), "loaded_source_files": len(loaded), "source_bytes": sum(row["bytes"] for row in rows.values())}))
+
+
+if __name__ == "__main__":
+    main()

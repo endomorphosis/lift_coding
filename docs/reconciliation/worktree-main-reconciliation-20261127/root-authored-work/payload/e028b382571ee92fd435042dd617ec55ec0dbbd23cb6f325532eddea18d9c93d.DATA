@@ -1,0 +1,60 @@
+import ObjectivePrefixIR
+
+/-!
+SOURCE-ONLY, UNCOMPILED, UNQUALIFIED CANDIDATE.
+
+Compositional exact-real source syntax. Constructor indices are checked by
+Lean; they do not validate external JSON annotations or Python runtime shapes.
+The independent named interpretation is defined in ObjectiveContainerSemantics.
+There are no objective, gradient, convergence, or task-satisfaction opcodes.
+-/
+
+namespace RankerObjectiveContainerLanguage
+
+open RankerObjectivePrefixIR (Ty SourceTerm UnaryOp BinaryOp Schema)
+
+inductive SourceExpr : Ty → Type where
+  | leaf {τ : Ty} (value : SourceTerm τ) : SourceExpr τ
+  | scalarUnary (op : UnaryOp) (value : SourceExpr .scalar) : SourceExpr .scalar
+  | scalarBinary (op : BinaryOp) (left right : SourceExpr .scalar) : SourceExpr .scalar
+  | ifNonneg (condition thenBranch elseBranch : SourceExpr .scalar) : SourceExpr .scalar
+  | lengthVector {length : ℕ} (values : SourceExpr (.vector length)) : SourceExpr .nat
+  | lengthMatrix {rows columns : ℕ} (values : SourceExpr (.matrix rows columns)) : SourceExpr .nat
+  | natToScalar (value : SourceExpr .nat) : SourceExpr .scalar
+  | indexVector {length : ℕ} (values : SourceExpr (.vector length))
+      (index : SourceExpr (.index length)) : SourceExpr .scalar
+  | fsumExact {length : ℕ} (values : SourceExpr (.vector length)) : SourceExpr .scalar
+  | mapRows {rows columns : ℕ} (binder : String)
+      (values : SourceExpr (.matrix rows columns)) (body : SourceExpr .scalar) :
+      SourceExpr (.vector rows)
+  | mapVector {length : ℕ} (binder : String)
+      (values : SourceExpr (.vector length)) (body : SourceExpr .scalar) :
+      SourceExpr (.vector length)
+  | zipMap {leftLength rightLength : ℕ} (leftName rightName : String)
+      (left : SourceExpr (.vector leftLength)) (right : SourceExpr (.vector rightLength))
+      (body : SourceExpr .scalar) : SourceExpr (.vector (min leftLength rightLength))
+  | zipRowsMap {leftLength rows columns : ℕ} (scalarName rowName : String)
+      (left : SourceExpr (.vector leftLength)) (right : SourceExpr (.matrix rows columns))
+      (body : SourceExpr .scalar) : SourceExpr (.vector (min leftLength rows))
+  | rangeMap {length : ℕ} (binder : String) (boundVector : SourceExpr (.vector length))
+      (body : SourceExpr .scalar) : SourceExpr (.vector length)
+
+inductive SourceFields : Schema → Type where
+  | nil : SourceFields []
+  | cons {name : String} {τ : Ty} {rest : Schema} :
+      SourceExpr τ → SourceFields rest → SourceFields ((name, τ) :: rest)
+
+inductive SourcePrefix (schema : Schema) where
+  | record (fields : SourceFields schema)
+  | letBind {τ : Ty} (name : String) (rhs : SourceExpr τ) (body : SourcePrefix schema)
+
+/-- Supporting dimension fact only; not a compiler-preservation theorem. -/
+theorem source_zip_left_index_bound {leftLength rightLength : ℕ}
+    (index : Fin (min leftLength rightLength)) : index.val < leftLength := by
+  exact Nat.lt_of_lt_of_le index.isLt (Nat.min_le_left _ _)
+
+#print axioms source_zip_left_index_bound
+
+end RankerObjectiveContainerLanguage
+
+#print axioms _root_.RankerObjectiveContainerLanguage.source_zip_left_index_bound

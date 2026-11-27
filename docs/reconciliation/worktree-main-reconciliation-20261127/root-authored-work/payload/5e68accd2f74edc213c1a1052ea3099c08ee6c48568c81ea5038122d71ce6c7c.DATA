@@ -1,0 +1,7 @@
+set_option maxHeartbeats 200000
+set_option maxRecDepth 512
+theorem empirical_goal (U : Type) (P : U → Prop) : ∀ x, P x → P x := by
+  intro x
+  intro h
+  exact h
+#print axioms empirical_goal

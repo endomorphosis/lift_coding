@@ -1,0 +1,147 @@
+"""Recompute the retained metadata screen and identity checks without network.
+
+Reads projected public metadata and recorded Git/API evidence only. It neither
+opens protected Parquet columns nor runs experiments or changes enrollment.
+"""
+import argparse
+from collections import Counter, defaultdict
+import hashlib
+import json
+from pathlib import Path
+import re
+
+ROOT = Path(__file__).resolve().parent
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--output", required=True)
+    args = parser.parse_args()
+    output = ROOT / args.output
+    if output.exists():
+        raise FileExistsError(output)
+    checks, inputs = [], {}
+
+    def read(path):
+        path = Path(path)
+        data = path.read_bytes()
+        inputs[str(path)] = hashlib.sha256(data).hexdigest()
+        return json.loads(data)
+
+    def check(name, condition):
+        checks.append({"name": name, "passed": bool(condition)})
+        if not condition:
+            raise AssertionError(name)
+
+    freeze = read(ROOT / "rebench_screen_v1/freeze.json")
+    queue = read(ROOT / "rebench_screen_v1/queue.json")
+    for path, digest in freeze["inputs"].items():
+        read(path)
+        check("frozen input " + path, inputs[path] == digest)
+    rows = read(ROOT / "additional_metadata_v1/nebius__SWE-rebench.public_metadata.json")
+    rule = freeze["rule"]
+    groups, excluded = defaultdict(list), Counter()
+    for row in rows:
+        repo = row["repo"]
+        reason = None
+        if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repo):
+            reason = "invalid_repository_identity"
+        elif (repo.casefold() in rule["exclude_repository_names"] or
+              repo.split("/")[0].casefold() in rule["exclude_owner_names"]):
+            reason = "prior_repository_or_owner_exclusion"
+        elif row["created_at"] < rule["cutoff"]:
+            reason = "metadata_date_before_cutoff"
+        elif not all(row.get(key) for key in rule["required_fields"]):
+            reason = "no_published_environment_metadata"
+        elif not re.fullmatch(r"[0-9a-f]{40}", row["base_commit"]):
+            reason = "invalid_base_commit"
+        if reason:
+            excluded[reason] += 1
+        else:
+            groups[repo].append(row)
+    eligible = []
+    for repo, members in groups.items():
+        ordered = sorted(members, key=lambda r: (r["created_at"], r["instance_id"]))
+        newest = {row["base_commit"]: row for row in ordered}
+        chosen = sorted(newest.values(), key=lambda r: (r["created_at"], r["instance_id"]))[-2:]
+        if len(chosen) == 2:
+            digest = hashlib.sha256((rule["family_seed"] + "\n" + repo.casefold()).encode()).hexdigest()
+            eligible.append({"repo": repo, "tasks": chosen, "metadata_eligible_rows": len(members),
+                             "ranking_sha256": digest, "confirmatory_enrolled": False,
+                             "source_scorer_qualified": False})
+    kept, suppressed, owners = [], [], set()
+    for row in sorted(eligible, key=lambda r: (r["ranking_sha256"], r["repo"])):
+        owner = row["repo"].split("/")[0].casefold()
+        if owner in owners:
+            suppressed.append(row["repo"])
+        else:
+            owners.add(owner)
+            kept.append({"rank": len(kept) + 1, **row})
+    check("all input rows accounted", len(rows) == queue["input_row_count"])
+    check("excluded row counts recomputed", dict(excluded) == queue["excluded_row_counts"])
+    check("all eligible pairs recomputed", len(eligible) == queue["metadata_pair_candidates"] == 53)
+    check("complete ordered queue recomputed", kept == queue["ranked_candidates"])
+    check("owner suppression recomputed", suppressed == queue["owner_suppressed"])
+    primary = kept[:queue["primary_count"]]
+    check("sixteen primary families", len(primary) == 16)
+    ancestry = read(ROOT / "rebench_ancestry_v1/summary.json")
+    observations = {row["repo"]: row for row in ancestry["results"]}
+    for row in primary:
+        repo = row["repo"]
+        pair = [task["base_commit"] for task in row["tasks"]]
+        observed = observations[repo]
+        check(repo + " exact ancestry pair", pair == observed["base_commits"] and len(set(pair)) == 2)
+        folder = ROOT / "rebench_ancestry_v1" / repo.replace("/", "__")
+        commands = read(folder / "commands.json")
+        check(repo + " native ancestry success", any(
+            cmd["argv"][-4:] == ["merge-base", "--is-ancestor", *pair] and cmd["returncode"] == 0
+            for cmd in commands))
+        check(repo + " only filtered fetch", all(
+            "--filter=blob:none" in cmd["argv"] for cmd in commands if "fetch" in cmd["argv"]))
+        check(repo + " no payload-reading commands", all(
+            not set(cmd["argv"]) & {"show", "diff", "checkout", "cat-file"} for cmd in commands))
+        check(repo + " x86 image metadata", all("x86_64" in task["image_name"] for task in row["tasks"]))
+
+    identity_root = ROOT / "rebench_identity_v1"
+    identity_freeze = read(identity_root / "freeze.json")
+    prior_names = identity_freeze["original_repositories"]
+    names = {row["repo"] for row in primary}
+    check("identity candidates equal primary screen", names == set(identity_freeze["candidate_repositories"]))
+    identities = {}
+    for name in sorted(names | set(prior_names)):
+        row = read(identity_root / (name.replace("/", "__") + ".json"))
+        response_path = identity_root / "responses" / (name.replace("/", "__") + ".json")
+        response = read(response_path)
+        check(name + " exact captured response", row["status"] == "observed" and
+              inputs[str(response_path)] == row["response_sha256"])
+        check(name + " identity projection", row["id"] == response["id"] and
+              row["owner_id"] == response["owner"]["id"])
+        identities[name] = row
+
+    def family_ids(row):
+        return {row["id"]} | {row[key]["id"] for key in ("parent", "source") if row[key]}
+
+    comparisons = 0
+    for name in sorted(names):
+        for old in prior_names:
+            check(name + " independent current identity from " + old,
+                  not family_ids(identities[name]) & family_ids(identities[old]) and
+                  identities[name]["owner_id"] != identities[old]["owner_id"])
+            comparisons += 1
+    check("448 recorded candidate/prior comparisons", comparisons == 448)
+    check("distinct current candidate repository identities", len({identities[n]["id"] for n in names}) == 16)
+    check("distinct current candidate owner identities", len({identities[n]["owner_id"] for n in names}) == 16)
+    result = {"schema": "ns-rebench-screen-replay-audit/v2", "all_checks_passed": True,
+              "check_count": len(checks), "checks": checks, "input_sha256": inputs,
+              "runner_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+              "recomputed_candidate_pairs": len(eligible), "primary_families": len(primary),
+              "current_identity_comparisons": comparisons, "provider_calls": 0,
+              "network_calls": 0, "protected_columns_decoded": False,
+              "confirmatory_enrolled_families": 0,
+              "scope": "Replays captured metadata, command and current identity evidence; does not establish historical independence, source/scorer qualification or training novelty."}
+    output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
+    print(json.dumps({key: value for key, value in result.items() if key not in {"checks", "input_sha256"}}))
+
+
+if __name__ == "__main__":
+    main()

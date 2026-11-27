@@ -1,0 +1,113 @@
+"""Create a new corpus for an explicit corrected public objective manifest."""
+import argparse
+import copy
+import json
+from pathlib import Path
+import shutil
+import sys
+import time
+
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+import repository_runtime_v2 as R
+
+
+def save(path, value):
+    with Path(path).open("xb") as stream:
+        stream.write(R.canonical(value) + b"\n")
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--prior-corpus", type=Path, required=True)
+    parser.add_argument("--expected-prior-sha256", required=True)
+    parser.add_argument("--objectives", type=Path, required=True)
+    parser.add_argument("--expected-objectives-sha256", required=True)
+    parser.add_argument("--public-bases", type=Path, required=True)
+    parser.add_argument("--expected-public-bases-sha256", required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    if R.sha(args.prior_corpus.read_bytes()) != args.expected_prior_sha256:
+        raise ValueError("prior corpus identity changed")
+    if R.sha(args.objectives.read_bytes()) != args.expected_objectives_sha256:
+        raise ValueError("corrected objective manifest identity changed")
+    if R.sha(args.public_bases.read_bytes()) != args.expected_public_bases_sha256:
+        raise ValueError("admitted original public bases changed")
+    previous = json.loads(args.prior_corpus.read_bytes())
+    updated = json.loads(args.objectives.read_bytes())
+    objectives = {task["task_id"]: task for task in updated["tasks"]}
+    base_admission = json.loads(args.public_bases.read_bytes())
+    if base_admission["qualified"] is not True:
+        raise ValueError("public mode materialization is not admitted")
+    bases = {task["task_id"]: task for task in base_admission["tasks"]}
+    corpus = copy.deepcopy(previous)
+    if set(objectives) != {task["task_id"] for task in previous["tasks"] if not task["task_id"].endswith("pyparsing")}:
+        raise ValueError("corrected objective manifest must contain exactly XML/OAuth/Click")
+    output = args.output.resolve()
+    output.mkdir(parents=True, exist_ok=False)
+    changed = []
+    for task in corpus["tasks"]:
+        prior = args.prior_corpus.parent / task["task_id"]
+        directory = output / task["task_id"]
+        directory.mkdir()
+        if R.inventory(task["source_root"])["tree_sha256"] != task["source_tree_sha256"]:
+            raise ValueError("original public source changed")
+        base = bases[task["task_id"]]
+        old_inventory = R.inventory(task["source_root"])
+        new_inventory = R.inventory(base["source_root"])
+        without_modes = lambda inv: [{key: value for key, value in row.items() if key != "mode"} for row in inv["entries"]]
+        if without_modes(old_inventory) != without_modes(new_inventory):
+            raise ValueError("public base rebind changes source content or population")
+        adapter = R.original_adapter_inventory(base["source_root"])
+        adapter_hash = R.sha(json.dumps(adapter, sort_keys=True, separators=(",", ":")).encode())
+        if adapter_hash != base["original_adapter_inventory_sha256"]:
+            raise ValueError("new original adapter inventory identity differs")
+        task.update(source_root=base["source_root"], source_tree_sha256=new_inventory["tree_sha256"],
+                    source_policy=R.policy_for(base["source_root"], task["source_policy"]["read_paths"],
+                                              task["source_policy"]["edit_paths"], mode_policy="preserve_base_modes"),
+                    original_adapter_inventory_sha256=adapter_hash,
+                    public_base_materialization_sha256=args.expected_public_bases_sha256,
+                    prior_public_source_root=task["source_root"], prior_public_source_tree_sha256=old_inventory["tree_sha256"])
+        save(directory / "source_inventory.json", new_inventory)
+        save(directory / "source_policy.json", task["source_policy"])
+        save(directory / "original_adapter_inventory.json", adapter)
+        for name in ["configuration_0.json", "configuration_1.json"]:
+            shutil.copy2(prior / name, directory / name)
+        objective = objectives.get(task["task_id"], json.loads((prior / "objective_record.json").read_bytes()))
+        record = {key: value for key, value in objective.items() if key != "objective_sha256"}
+        record_hash = R.sha(R.canonical(record))
+        if "objective_sha256" in objective and objective["objective_sha256"] != record_hash:
+            raise ValueError("corrected objective record hash is not canonical")
+        statement = objective.get("new_public_objective", objective.get("statement"))
+        if not isinstance(statement, str) or not statement:
+            raise ValueError("explicit objective text required")
+        if record_hash != task["objective_record_sha256"]:
+            changed.append({"task_id": task["task_id"], "previous_objective_record_sha256": task["objective_record_sha256"],
+                            "new_objective_record_sha256": record_hash,
+                            "previous_objective_text_sha256": task["objective_text_sha256"],
+                            "new_objective_text_sha256": R.sha(statement.encode())})
+        save(directory / "objective_record.json", objective)
+        with (directory / "objective.txt").open("xb") as stream:
+            stream.write(statement.encode())
+        task.update(objective_record_sha256=record_hash, objective_text_sha256=R.sha(statement.encode()),
+                    objective_record_file_sha256=R.sha((directory / "objective_record.json").read_bytes()),
+                    objective_authority=objective.get("authority", objective.get("authority_scope")))
+    if not changed:
+        raise ValueError("new corpus must represent an explicit changed objective")
+    corpus.update(schema="ns-original-four-family-operational-corpus/v2", created_at_ns=time.time_ns(),
+                  prior_corpus={"path": str(args.prior_corpus.resolve()), "sha256": args.expected_prior_sha256},
+                  corrected_public_objectives={"path": str(args.objectives.resolve()), "sha256": args.expected_objectives_sha256},
+                  authoritative_public_bases={"path": str(args.public_bases.resolve()), "sha256": args.expected_public_bases_sha256},
+                  objective_changes=changed, ready_for_provider_dispatch=False,
+                  rebind_scope="Explicit public authority correction and authoritative archive modes; original scorer criteria, source bytes, configuration, event, cache and arm policy remain unchanged.")
+    corpus["input_sha256"].update({str(Path(__file__).resolve()): R.sha(Path(__file__).read_bytes()),
+                                   str(args.objectives.resolve()): args.expected_objectives_sha256,
+                                   str(args.public_bases.resolve()): args.expected_public_bases_sha256,
+                                   str(args.prior_corpus.resolve()): args.expected_prior_sha256})
+    save(output / "corpus.json", corpus)
+    save(output / "artifact_manifest.json", {str(path.relative_to(output)): R.sha(path.read_bytes()) for path in sorted(output.rglob("*")) if path.is_file()})
+    print(json.dumps({"corpus_sha256": R.sha((output / "corpus.json").read_bytes()), "changed_tasks": [row["task_id"] for row in changed], "provider_calls": 0}))
+
+
+if __name__ == "__main__":
+    main()

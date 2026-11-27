@@ -1,0 +1,6 @@
+set_option maxHeartbeats 200000
+set_option maxRecDepth 512
+theorem empirical_goal (U3 : Type) (step3 : U3 → U3) (safe3 : U3 → Prop) (x3 : U3) : (safe3 x3 → safe3 (step3 x3)) → safe3 x3 → safe3 (step3 x3) := by
+  intro h safe_x
+  exact h safe_x
+#print axioms empirical_goal

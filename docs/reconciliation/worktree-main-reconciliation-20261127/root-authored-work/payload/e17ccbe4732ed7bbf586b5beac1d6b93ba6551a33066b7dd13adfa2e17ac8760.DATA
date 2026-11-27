@@ -1,0 +1,5 @@
+import Std
+set_option autoImplicit false
+def increment (n : Int) : Int := n + 1
+def twice (n : Int) : Int := increment (increment n)
+theorem incorrect_model : twice 0 = 3 := by decide

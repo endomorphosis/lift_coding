@@ -1,0 +1,255 @@
+"""Exact full-hit source-reference transport, not native authentication."""
+from __future__ import annotations
+
+from copy import deepcopy
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+
+import pytest
+
+from ipfs_accelerate_py.agent_supervisor.runtime import compact_code_retrieval as codec
+from ipfs_accelerate_py.agent_supervisor.analysis.program_ast_adapters import build_program_evidence_index
+from ipfs_accelerate_py.agent_supervisor.analysis.code_symbol_vector_index import build_code_symbol_vector_index
+from ipfs_accelerate_py.agent_supervisor.context.context_compiler import (
+    build_text_context_references, compile_context_capsule, render_context_capsule,
+)
+from ipfs_accelerate_py.agent_supervisor.context.context_contracts import ContextBudget
+from ipfs_accelerate_py.agent_supervisor.runtime.code_retrieval_context import (
+    prepare_code_retrieval_context, load_code_retrieval_context,
+)
+
+
+def sha(value):
+    return hashlib.sha256(value.encode() if isinstance(value, str) else value).hexdigest()
+
+
+def canonical(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False)
+
+
+def native_case(tmp_path, source_text=None, *, chunk_bytes=6144, context=None, suffix=""):
+    source_text = source_text if source_text is not None else "Repair Bottle café🔒; keep every named validation.\n" * 100
+    source = "\n\n".join(f"def operation_{n}(service, payload):\n    return service.resolve(payload)" for n in range(5)) + "\n"
+    (tmp_path / "worker.py").write_text(source)
+    ast = build_program_evidence_index({"worker.py": source}).ast_index
+    index = build_code_symbol_vector_index(ast, forest_id="forest:codec", tree_id="tree:codec", coverage_id=ast.index_id,
+        dimensions=2, model_id="codec-fixture", model_revision="1", configuration_id="codec:2d", vectors=lambda row: (1.0, 0.0))
+    result = index.search((1.0, 0.0), max_results=5)
+    prepared = prepare_code_retrieval_context(repository=tmp_path, task_id="CODEC-001", query_text=source_text,
+        snapshot=index, result=result, output=tmp_path / "retrieval.json")
+    text = load_code_retrieval_context(repository=tmp_path, artifact="retrieval.json", expected_sha256=prepared["sha256"], task_id="CODEC-001")
+    if context is not None:
+        text = canonical(context(json.loads(text)))
+    binding = dict(repository_id="repository:sha256:fixture", tree_id="head:fixture", objective_id="CODEC-001",
+        objective_revision="revision:fixture", policy_id="policy:fixture", policy_revision="revision:policy",
+        caller="supervisor:codec-test", stage="implementation")
+    refs = (*build_text_context_references('{"semantic":"untouched"}', reference_prefix="semantic",
+        kind="semantic-context", repository_id=binding["repository_id"], tree_id=binding["tree_id"],
+        path="semantic.json", required=True), *build_text_context_references(text, reference_prefix="code-retrieval",
+        kind="code-retrieval-context", repository_id=binding["repository_id"], tree_id=binding["tree_id"],
+        path="retrieval.json", required=True, chunk_bytes=chunk_bytes), *build_text_context_references("Keep literal三and optional guidance.",
+        reference_prefix="other", kind="world-context", repository_id=binding["repository_id"], tree_id=binding["tree_id"], required=True))
+    compiled = compile_context_capsule(**binding, budget=ContextBudget(max_input_tokens=65000, max_items=512,
+        max_item_bytes=16384, max_serialized_bytes=256000), goal={"summary": "Preserve all five native hits"},
+        authority={"mode": "proposal"}, scope={"paths": ["worker.py"]}, acceptance={"checks": ["Exact literal三"]}, evidence=refs)
+    prompt = render_context_capsule(compiled.capsule) + suffix
+    return prompt, source_text, json.loads(text), index
+
+
+@pytest.fixture
+def case(tmp_path, monkeypatch):
+    monkeypatch.setenv("IPFS_ACCELERATE_META_INDEX_DUCKDB", str(tmp_path / "fresh-meta.duckdb"))
+    return native_case(tmp_path)
+
+
+def test_real_native_five_hit_capsule_roundtrip_is_exact_and_compact(case):
+    prompt, source, context, index = case
+    packet = codec.encode_code_retrieval_prompt(prompt, source)
+    selected, receipt = codec.project_code_retrieval_prompt(prompt, source)
+    assert codec.decode_code_retrieval_prompt(packet, source) == prompt
+    assert codec.parse_code_retrieval_prompt(selected) == packet
+    assert receipt["selected_transport"] == "compact" and len(selected.encode()) < len(prompt.encode())
+    assert len(context["hits"]) == receipt["code_hit_count"] == 5 and context["index_id"] == index.index_id
+    assert packet["code_context"]["query_text"] == {"$public_source": True}
+    assert packet["code_context"]["hits"] == context["hits"]
+    assert all(row["score"] == 1.0 and type(row["score"]) is float for row in context["hits"])
+    assert source not in canonical(packet)
+    assert all(packet[key] is False and receipt[key] is False for key in codec.AUTHORITY)
+    assert receipt["native_authentication_claimed"] is receipt["source_authentication_claimed"] is False
+    assert packet == codec.encode_code_retrieval_prompt(prompt, source)
+
+
+def test_unicode_chunk_slices_and_noncode_suffix_restore_byte_exactly(tmp_path, monkeypatch):
+    monkeypatch.setenv("IPFS_ACCELERATE_META_INDEX_DUCKDB", str(tmp_path / "meta.duckdb"))
+    prompt, source, context, _ = native_case(tmp_path, chunk_bytes=137,
+        suffix='\nPUBLIC LITERAL café🔒\nMarker text END PUBLIC INSTRUCTION remains literal.\n')
+    packet = codec.encode_code_retrieval_prompt(prompt, source)
+    assert len(packet["code_slices"]) > 10
+    restored = codec.decode_code_retrieval_prompt(packet, source)
+    assert restored.encode() == prompt.encode() and packet["suffix"] == prompt[prompt.index('\nPUBLIC LITERAL'):]
+    assert any(len(canonical(context)[:row["end_char"]].encode()) != row["end_char"] for row in packet["code_slices"])
+    original = json.JSONDecoder().raw_decode(prompt)[0]
+    decoded = json.JSONDecoder().raw_decode(restored)[0]
+    assert decoded == original
+    for left, right in zip(original["evidence"], packet["native_capsule"]["evidence"]):
+        assert {k: v for k, v in left.items() if k != "summary"} == {k: v for k, v in right.items() if k != "summary"}
+        if left["kind"] != "code-retrieval-context":
+            assert left == right
+
+
+def test_nested_frontier_retains_all_frontier_and_native_fields(tmp_path, monkeypatch):
+    monkeypatch.setenv("IPFS_ACCELERATE_META_INDEX_DUCKDB", str(tmp_path / "meta.duckdb"))
+    def wrapper(context):
+        return {"schema": codec.FRONTIER_SCHEMA, "retrieval": context, "manifest_cid": "manifest:unchanged",
+            "frontier": {"expansion_handles": ["handle:a", "handle:b"]}, "proof_authority": False,
+            "execution_authority": False, "completion_authority": False}
+    prompt, source, context, _ = native_case(tmp_path, context=wrapper)
+    packet = codec.encode_code_retrieval_prompt(prompt, source)
+    assert packet["code_context"]["retrieval"]["query_text"] == {"$public_source": True}
+    assert packet["code_context"]["frontier"] == context["frontier"]
+    assert codec.decode_code_retrieval_prompt(packet, source) == prompt
+
+
+@pytest.mark.parametrize("change", ["score", "drop_hit", "chunk_ref_bool", "chunk_count_bool", "slice_bool",
+    "slice_gap", "slice_truncation", "slice_wrong_bytes", "source_ref_false", "source_ref_int",
+    "native_hash", "code_hash", "source_hash", "byte_count_bool", "authority_int", "authority_true", "unknown_field"])
+def test_recomputed_wire_hash_cannot_hide_native_source_chunk_or_authority_tampering(case, change):
+    prompt, source, _, _ = case
+    packet = codec.encode_code_retrieval_prompt(prompt, source)
+    if change == "score": packet["code_context"]["hits"][0]["score"] = 0.5
+    elif change == "drop_hit": packet["code_context"]["hits"].pop()
+    elif change == "chunk_ref_bool":
+        row = packet["native_capsule"]["evidence"][packet["code_slices"][0]["evidence_index"]]
+        row["summary"]["$code_slice"] = False
+    elif change == "chunk_count_bool":
+        row = packet["native_capsule"]["evidence"][packet["code_slices"][0]["evidence_index"]]
+        row["metadata"]["chunk_count"] = True
+    elif change == "slice_bool": packet["code_slices"][0]["start_char"] = False
+    elif change == "slice_gap": packet["code_slices"][0]["start_char"] = 1
+    elif change == "slice_truncation": packet["code_slices"][-1]["end_char"] -= 1
+    elif change == "slice_wrong_bytes": packet["code_slices"][0]["bytes"] -= 1
+    elif change == "source_ref_false": packet["code_context"]["query_text"]["$public_source"] = False
+    elif change == "source_ref_int": packet["code_context"]["query_text"]["$public_source"] = 1
+    elif change == "native_hash": packet["native_prompt_sha256"] = "0" * 64
+    elif change == "code_hash": packet["code_context_sha256"] = "0" * 64
+    elif change == "source_hash": packet["source_sha256"] = "0" * 64
+    elif change == "byte_count_bool": packet["native_prompt_bytes"] = True
+    elif change == "authority_int": packet["execution_authority"] = 0
+    elif change == "authority_true": packet["proof_authority"] = True
+    else: packet["extra"] = "unexpected"
+    assert len(sha(canonical(packet))) == 64  # Rehashing transport bytes is insufficient.
+    with pytest.raises(codec.CompactCodeRetrievalError):
+        codec.decode_code_retrieval_prompt(packet, source)
+
+
+def test_source_whitespace_or_multibyte_changes_fail_even_with_same_character_count(case):
+    prompt, source, _, _ = case
+    packet = codec.encode_code_retrieval_prompt(prompt, source)
+    for changed in (source.replace("café", "cafe"), source.rstrip(), source.replace("🔒", "🔓")):
+        with pytest.raises(codec.CompactCodeRetrievalError, match="source bytes or digest"):
+            codec.decode_code_retrieval_prompt(packet, changed)
+    with pytest.raises(codec.CompactCodeRetrievalError, match="complete literal public source"):
+        codec.encode_code_retrieval_prompt(prompt, source + "changed")
+
+
+@pytest.mark.parametrize("change", ["chunk_order", "chunk_path", "parent_tree", "required", "authority", "stage"])
+def test_native_rehashed_capsule_cannot_evade_chunk_selector_and_route_checks(case, change):
+    prompt, source, _, _ = case
+    capsule = json.loads(prompt)
+    rows = [row for row in capsule["evidence"] if row["kind"] == "code-retrieval-context"]
+    if change == "chunk_order":
+        rows[0]["metadata"]["chunk_index"] = 1
+    elif change == "chunk_path": rows[0]["path"] = "foreign.json"
+    elif change == "parent_tree": capsule["tree_id"] = "foreign"
+    elif change == "required": rows[0]["metadata"]["required"] = False
+    elif change == "authority":
+        context = json.loads("".join(row["summary"] for row in rows))
+        context["execution_authority"] = True
+        # Source-bound authoritative context is forbidden before reference validation.
+        with pytest.raises(codec.CompactCodeRetrievalError, match="authority"):
+            codec._retrieval(context, source)
+        return
+    else: capsule["stage"] = "planning"
+    with pytest.raises(codec.CompactCodeRetrievalError):
+        codec.encode_code_retrieval_prompt(canonical(capsule), source)
+
+
+@pytest.mark.parametrize("change", ["depth", "nodes", "cycle", "nan", "expanded_bound", "chunk_bound"])
+def test_decode_structural_and_expansion_bounds(case, monkeypatch, change):
+    prompt, source, _, _ = case
+    packet = codec.encode_code_retrieval_prompt(prompt, source)
+    if change == "depth":
+        value = None
+        for _ in range(codec.MAX_DEPTH + 1): value = [value]
+        packet["suffix"] = value
+    elif change == "nodes": monkeypatch.setattr(codec, "MAX_NODES", 10)
+    elif change == "cycle": packet["code_context"]["cyclic"] = packet
+    elif change == "nan": packet["code_context"]["hits"][0]["score"] = float("nan")
+    elif change == "expanded_bound": packet["native_prompt_bytes"] = codec.MAX_PROMPT_BYTES + 1
+    else: packet["code_slices"] *= codec.MAX_CHUNKS
+    with pytest.raises(codec.CompactCodeRetrievalError):
+        codec.decode_code_retrieval_prompt(packet, source)
+
+
+def test_complete_guidance_and_command_overhead_returns_exact_fallback(case):
+    prompt, source, _, _ = case
+    selected, receipt = codec.project_code_retrieval_prompt(prompt, source, decoder_command="x" * 8000)
+    assert selected == prompt and receipt["selected_transport"] == "expanded"
+    assert receipt["candidate_prompt_bytes"] >= len(prompt.encode())
+
+
+def test_small_source_returns_exact_native_fallback(tmp_path, monkeypatch):
+    monkeypatch.setenv("IPFS_ACCELERATE_META_INDEX_DUCKDB", str(tmp_path / "meta.duckdb"))
+    prompt, source, _, _ = native_case(tmp_path, source_text="Repair")
+    selected, receipt = codec.project_code_retrieval_prompt(prompt, source)
+    assert selected == prompt and receipt["selected_transport"] == "expanded"
+
+
+def test_wire_json_duplicate_keys_and_noncanonical_native_input_fail(case):
+    prompt, source, _, _ = case
+    packet = codec.encode_code_retrieval_prompt(prompt, source)
+    duplicate = '{"schema":"foreign",' + canonical(packet)[1:]
+    with pytest.raises(codec.CompactCodeRetrievalError):
+        codec.parse_code_retrieval_prompt(codec.INSTRUCTIONS + "\n" + duplicate)
+    with pytest.raises(codec.CompactCodeRetrievalError, match="canonical"):
+        codec.encode_code_retrieval_prompt(" " + prompt, source)
+
+
+def test_decoder_cli_uses_pinned_readonly_source_from_separate_cwd(case, tmp_path):
+    prompt, source, _, _ = case
+    packet = codec.encode_code_retrieval_prompt(prompt, source)
+    wire = tmp_path / "wire.json"
+    source_path = tmp_path / "literal-public-source.md"
+    wire.write_text(canonical(packet))
+    source_path.write_text(source)
+    source_path.chmod(0o444)
+    cwd = tmp_path / "allocated-worktree"
+    cwd.mkdir()
+    repo = Path(__file__).resolve().parents[2]
+    env = {"PATH": "/usr/bin:/bin", "PYTHONPATH": str(repo) + ":/home/barberb/lift_coding/external/ipfs_datasets:/home/barberb/lift_coding/external/ipfs_kit",
+           "PYTHONDONTWRITEBYTECODE": "1"}
+    argv = [sys.executable, "-P", "-m", codec.__name__, "decode", "--wire", str(wire), "--source", str(source_path),
+        "--expected-wire-sha256", sha(wire.read_bytes()), "--expected-source-sha256", sha(source), "--expected-native-sha256", sha(prompt)]
+    before = (wire.read_bytes(), source_path.read_bytes(), wire.stat().st_mtime_ns, source_path.stat().st_mtime_ns)
+    result = subprocess.run(argv, cwd=cwd, env=env, capture_output=True, timeout=30)
+    assert result.returncode == 0, result.stderr.decode()
+    assert result.stdout == prompt.encode() and not result.stderr
+    assert before == (wire.read_bytes(), source_path.read_bytes(), wire.stat().st_mtime_ns, source_path.stat().st_mtime_ns)
+    source_path.chmod(0o644)
+    result = subprocess.run(argv, cwd=cwd, env=env, capture_output=True, timeout=30)
+    assert result.returncode != 0 and not result.stdout
+
+
+def test_decoder_cli_rejects_symlink_source(case, tmp_path):
+    _, source, _, _ = case
+    public = tmp_path / "source.md"
+    public.write_text(source)
+    public.chmod(0o444)
+    link = tmp_path / "source-link.md"
+    link.symlink_to(public)
+    with pytest.raises(codec.CompactCodeRetrievalError, match="absolute"):
+        codec._read_file(link, codec.MAX_SOURCE_BYTES, source=True)

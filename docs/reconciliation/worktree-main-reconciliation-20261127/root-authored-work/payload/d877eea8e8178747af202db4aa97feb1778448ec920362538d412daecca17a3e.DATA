@@ -1,0 +1,29 @@
+import PyAstNumericSubset
+
+open RankerSupportedPythonAstReal
+
+/- Actual held raw scalar syntax only. Parser/global binding/Float/model preservation remains unproved. -/
+namespace GeneratedPythonAstScalarSource
+
+def lossBinder : PyName := ⟨3, "z"⟩
+def factorBinder : PyName := ⟨4, "z"⟩
+def lossScope : List PyName := [lossBinder]
+def factorScope : List PyName := [factorBinder]
+
+def actualLossBody : PyExpr := (PyExpr.binary PyBinary.add (PyExpr.call (PyCalleeRef.name ⟨0, "max"⟩) (PyArgs.cons (PyExpr.floatLiteral "0.0" ((0 : ℚ) / 1)) (PyArgs.cons (PyExpr.unary PyUnary.usub (PyExpr.name ⟨3, "z"⟩)) PyArgs.nil))) (PyExpr.call (PyCalleeRef.attribute ⟨0, "math"⟩ "log1p") (PyArgs.cons (PyExpr.call (PyCalleeRef.attribute ⟨0, "math"⟩ "exp") (PyArgs.cons (PyExpr.unary PyUnary.usub (PyExpr.call (PyCalleeRef.name ⟨0, "abs"⟩) (PyArgs.cons (PyExpr.name ⟨3, "z"⟩) PyArgs.nil))) PyArgs.nil)) PyArgs.nil)))
+
+def actualFactorBody : PyExpr := (PyExpr.ifExp (PyExpr.compare PyCompare.ge (PyExpr.name ⟨4, "z"⟩) (PyExpr.integer (0 : ℤ))) (PyExpr.binary PyBinary.div (PyExpr.call (PyCalleeRef.attribute ⟨0, "math"⟩ "exp") (PyArgs.cons (PyExpr.unary PyUnary.usub (PyExpr.name ⟨4, "z"⟩)) PyArgs.nil)) (PyExpr.binary PyBinary.add (PyExpr.integer (1 : ℤ)) (PyExpr.call (PyCalleeRef.attribute ⟨0, "math"⟩ "exp") (PyArgs.cons (PyExpr.unary PyUnary.usub (PyExpr.name ⟨4, "z"⟩)) PyArgs.nil)))) (PyExpr.binary PyBinary.div (PyExpr.integer (1 : ℤ)) (PyExpr.binary PyBinary.add (PyExpr.integer (1 : ℤ)) (PyExpr.call (PyCalleeRef.attribute ⟨0, "math"⟩ "exp") (PyArgs.cons (PyExpr.name ⟨4, "z"⟩) PyArgs.nil)))))
+
+theorem loss_binder_spelling : lossBinder.spelling = "z" := by rfl
+theorem factor_binder_spelling : factorBinder.spelling = "z" := by rfl
+theorem scalar_binders_distinct : lossBinder.scope ≠ factorBinder.scope := by decide
+
+#print axioms loss_binder_spelling
+#print axioms factor_binder_spelling
+#print axioms scalar_binders_distinct
+
+end GeneratedPythonAstScalarSource
+
+#print axioms _root_.GeneratedPythonAstScalarSource.loss_binder_spelling
+#print axioms _root_.GeneratedPythonAstScalarSource.factor_binder_spelling
+#print axioms _root_.GeneratedPythonAstScalarSource.scalar_binders_distinct

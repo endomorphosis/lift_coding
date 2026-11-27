@@ -1,0 +1,310 @@
+"""Actual native full/delta publication for phase-bound original repositories.
+
+Complete source includes unchanged in-tree links. Four integrity leaves bind
+source, native preparation, immutable phase effects and independent scoring.
+Fresh scorer replays are normal metered runtime work, never cache aliases.
+"""
+import json
+import os
+from pathlib import Path
+import sqlite3
+import subprocess
+import sys
+import time
+
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+import repository_runtime_v2 as R
+import original_services_v1 as O
+import sealing_service_v1 as S
+
+UNITS = {"accepted_source": "source_integrity", "semantic_preparation": "static_analysis",
+         "effect_inventory": "release_invariant", "behavior_native": "integration_test"}
+IDS = tuple(sorted(UNITS))
+REPLAYS = []
+
+
+def profile_for(request):
+    profile, _ = O.verify_profile(request["profile_path"], request["profile_sha256"])
+    if profile["sealing_required_units"] != list(IDS):
+        raise ValueError("externally frozen complete leaf inventory differs")
+    for path, row in S.loaded_sources().items():
+        if profile["sealing_native_files"].get(path) != row["sha256"]:
+            raise ValueError("unfrozen native sealing import")
+    event = O.event_for(profile, request["event_id"])
+    if request["phase"] not in event["publication_phases"]:
+        raise ValueError("unfrozen publication phase")
+    return profile
+
+
+def phase_effects(profile, event_id, scope_id):
+    db = sqlite3.connect("file:" + str(Path(profile["output_root"]) / "ledger.sqlite3") + "?mode=ro", uri=True)
+    rows = db.execute("SELECT effect_id,event_id,stage,state,result_path,result_hash FROM effects WHERE event_id=? ORDER BY stage", (scope_id,)).fetchall()
+    db.close()
+    result = {}
+    for effect_id, actual_scope, stage, status, path, digest in rows:
+        if stage.startswith("seal_"):
+            continue
+        if status != "terminal" or R.sha(Path(path).read_bytes()) != digest:
+            raise ValueError("incomplete or changed non-sealing phase effect")
+        request = json.loads((Path(path).parent / "request.json").read_bytes())
+        completion = json.loads(Path(path).read_bytes())
+        if (request.get("owner_event_id") != event_id or request.get("effect_scope_id") != scope_id
+                or completion["effect_id"] != effect_id or completion["event_id"] != actual_scope
+                or completion["stage"] != stage or completion["request_hash"] != R.sha(R.canonical(request))):
+            raise ValueError("phase effect ownership/binding differs")
+        result[stage] = {"effect_id": effect_id, "result_sha256": digest, "request": request, "completion": completion}
+    return result
+
+
+def produce(profile, request):
+    event = O.event_for(profile, request["event_id"])
+    task = O.task_for(profile, event["task_id"])
+    scope = event["event_id"] + "--" + request["phase"]
+    effects = phase_effects(profile, event["event_id"], scope)
+    source = O.source_payload(profile, request["accepted_tree_path"])
+    # Canonical transport also rejects changed paths/kinds beyond repair scope.
+    patch = R.content_patch(task["source_root"], request["accepted_tree_path"], task["source_policy"])
+    receipt_path = Path(request["scorer_response_path"])
+    receipt = json.loads(receipt_path.read_bytes())
+    matched = [row for row in effects.values() if row["completion"]["response"] == receipt
+               and row["request"].get("service_kind") == "scorer"]
+    if len(matched) != 1:
+        raise ValueError("exact independently scored phase response is absent or ambiguous")
+    score_request = matched[0]["request"]["service_request"]
+    if not O.validate_score_response(profile, score_request, receipt) or not receipt["passed"]:
+        raise ValueError("candidate lacks complete passing independent scoring")
+    if receipt["candidate_sha256"] != source["original_inventory"]["sha256"]:
+        raise ValueError("scored source differs from accepted source")
+    if score_request["configuration_sha256"] != request["configuration_sha256"]:
+        raise ValueError("accepted configuration differs")
+    if any(score_request[key] != task[key] for key in ("base_commit", "objective_record_sha256", "objective_text_sha256")):
+        raise ValueError("accepted public objective differs")
+    context = request["context"]
+    run = Path(context["run"])
+    prepared_request = json.loads((run / "request.json").read_bytes())
+    summary = json.loads((run / "summary.json").read_bytes())
+    if R.sha((run / "request.json").read_bytes()) != context["request_sha256"] or R.sha((run / "freeze.json").read_bytes()) != context["freeze_sha256"]:
+        raise ValueError("native context request/freeze changed")
+    if (not summary["complete"] or not summary["consumer"]["all_checks_passed"]
+            or summary["producer"]["native_semantic_root_cid"] != context["semantic_root_cid"]
+            or R.inventory(prepared_request["repository_root"])["tree_sha256"] != source["generic_inventory"]["tree_sha256"]
+            or context["source_tree_sha256"] != source["generic_inventory"]["tree_sha256"]
+            or context["objective_text_sha256"] != task["objective_text_sha256"]
+            or context["configuration_sha256"] != request["configuration_sha256"]
+            or R.sha(prepared_request["objective"]["text"].encode()) != context["native_objective_sha256"]):
+        raise ValueError("current accepted native preparation binding differs")
+    if not any(stage.endswith("_context_read") and row["request"]["service_request"].get("source_tree_sha256") == context["source_tree_sha256"] for stage, row in effects.items()):
+        raise ValueError("phase did not consume current native context")
+    trajectory = next(row for row in profile["trajectories"] if row["trajectory_id"] == event["trajectory_id"])
+    if trajectory["features"]["world_memory"] and not {"world_propose", "world_record"} <= set(effects):
+        raise ValueError("required actual world-memory effects absent")
+    if trajectory["features"]["procedures"] and not any(stage.startswith("procedure_") for stage in effects):
+        raise ValueError("required actual procedure nomination absent")
+    binding = {"repository_id": "ns-original-development/" + event["trajectory_id"], "event_id": event["event_id"],
+               "revision": request["publication_id"], "phase": request["phase"], "effect_scope_id": scope,
+               "task_id": event["task_id"], "profile_sha256": request["profile_sha256"],
+               "source_tree_sha256": source["generic_inventory"]["tree_sha256"],
+               "original_inventory_sha256": source["original_inventory"]["sha256"],
+               "objective_record_sha256": task["objective_record_sha256"], "objective_text_sha256": task["objective_text_sha256"],
+               "configuration_sha256": request["configuration_sha256"], "parent_revision": request.get("parent_revision"),
+               "environment": {"scorer_profile_sha256": score_request["scorer_profile_sha256"], "base_commit": task["base_commit"]}}
+    inputs = {key: request[key] for key in ("event_id", "phase", "publication_id", "profile_sha256", "accepted_tree_path",
+                                           "scorer_response_path", "configuration_sha256", "context", "parent_seal_cid", "parent_revision")}
+    return {"binding": binding, "inputs": inputs, "parent_seal_cid": request.get("parent_seal_cid"),
+            "transition_id": "ns-original:" + request["publication_id"],
+            "receipts": {"accepted_source": {"binding": binding, "source": source, "cumulative_patch_sha256": R.sha(patch)},
+                         "semantic_preparation": {"binding": binding, "context": context, "summary": summary},
+                         "effect_inventory": {"binding": binding, "coverage": "complete observed non-sealing effects of this immutable publication phase", "effects": effects},
+                         "behavior_native": {"binding": binding, "request": score_request, "receipt": receipt, "effect": matched[0]}}}
+
+
+def state(pack):
+    binding = pack["binding"]
+    return S.RepositoryStateView(repository_id=binding["repository_id"], revision=binding["revision"],
+                                  source_root_cid=S.digest(pack["receipts"]["accepted_source"]["source"]["original_inventory"]),
+                                  repository_state_cid=S.digest(binding), environment_cid=S.digest(binding["environment"]),
+                                  parent_revision_ids=() if binding["parent_revision"] is None else (binding["parent_revision"],))
+
+
+def policy(pack):
+    return S.VerificationPolicyView(policy_cid=S.digest({"profile_sha256": pack["binding"]["profile_sha256"],
+                                                        "required_unit_ids": IDS, "admission": "complete-original-source-phase-effects-and-fresh-grader/v1", "mode": "integrity_only"}))
+
+
+def build(pack, parent):
+    units = []
+    for unit, receipt in sorted(pack["receipts"].items()):
+        args = {"unit_id": unit, "proof_object_cid": S.digest(receipt), "category": UNITS[unit], "freshly_verified": True}
+        units.append(S.RequiredUnitEvidence(**args) if parent is None else S.DeltaUnitEvidence(**args, disposition="replace", parent_proof_object_cid=S.digest(parent["receipts"][unit]), newly_admitted=True, cache_key_unchanged=False))
+    if parent is None:
+        return S.create_full_checkpoint(state(pack), policy(pack), units=units, expected_unit_ids=IDS), units, None
+    previous = S.parent_view(parent)
+    current = state(pack)
+    old = parent["receipts"]["accepted_source"]["source"]["original_inventory"]["entries"]
+    new = pack["receipts"]["accepted_source"]["source"]["original_inventory"]["entries"]
+    changes = {name: {"old": old.get(name), "new": new.get(name)} for name in sorted(set(old) | set(new)) if old.get(name) != new.get(name)}
+    statement = S.DeltaTransitionStatement(schema=S.TRANSITION_SCHEMA, parent_seal_cid=previous.seal_cid, branch_id="main",
+        old_source_root_cid=previous.source_root_cid, old_repository_state_cid=previous.repository_state_cid,
+        old_manifest_root_cid=previous.manifest_root_cid, old_forest_root_cid=previous.forest_root_cid, old_aggregation_root=previous.aggregation_root,
+        new_source_root_cid=current.source_root_cid, new_repository_state_cid=current.repository_state_cid, new_revision=current.revision,
+        parent_revision_ids=(previous.revision,), diff=S.DiffCommitmentView(diff_algorithm="ns-original-complete-inventory/v1",
+            changed_artifact_commitment=S.digest(changes), complete=True, changed_paths=tuple(changes)), expected_manifest_unit_ids=IDS,
+        expected_surviving_leaf_ids=IDS, forest_rebuilt=True, aggregation_rebuilt=True, logical_epoch=previous.logical_epoch + 1, transition_id=pack["transition_id"])
+    return S.build_delta_seal(previous, current, policy(pack), statement, units=units), units, statement
+
+
+def replay(profile, pack, operation_id):
+    original = pack["receipts"]["behavior_native"]["request"]
+    request = {**original, "evaluation_id": "nsorigseal-" + R.sha(S.encoded({"operation_id": operation_id, "revision": pack["binding"]["revision"], "source": original["expected_candidate_source_tree_sha256"]}))[:40]}
+    event = O.event_for(profile, pack["binding"]["event_id"])
+    trajectory = next(row for row in profile["trajectories"] if row["trajectory_id"] == event["trajectory_id"])
+    service = O.scorer_binding(profile, trajectory)
+    directory = Path(profile["output_root"]) / "native_original_sealing" / trajectory["trajectory_id"] / "replays" / request["evaluation_id"]
+    directory.mkdir(parents=True, exist_ok=True)
+    S.save_new(directory / "request.json", request)
+    saved = directory / "completion.json"
+    reused = saved.exists()
+    if reused:
+        row = json.loads(saved.read_bytes())
+    else:
+        if (directory / "dispatch_intent.json").exists():
+            raise ValueError("unknown earlier replay; no automatic re-dispatch")
+        S.save_new(directory / "dispatch_intent.json", {"evaluation_id": request["evaluation_id"], "request_sha256": R.sha(S.encoded(request)), "started_at_ns": time.time_ns()})
+        started = time.perf_counter()
+        process = subprocess.run([service["python"], service["entrypoint"]], input=S.encoded(request), capture_output=True, timeout=service["timeout_seconds"])
+        (directory / "stdout").write_bytes(process.stdout)
+        (directory / "stderr").write_bytes(process.stderr)
+        response = json.loads(process.stdout) if process.returncode == 0 else None
+        row = {"evaluation_id": request["evaluation_id"], "request_sha256": R.sha(S.encoded(request)), "returncode": process.returncode,
+               "elapsed_seconds": time.perf_counter() - started, "response": response}
+        S.save_new(saved, row)
+    REPLAYS.append({**row, "request_path": str(directory / "request.json"), "completion_path": str(saved), "completion_sha256": R.sha(saved.read_bytes()), "reconciled_alias": reused})
+    if row["request_sha256"] != R.sha(S.encoded(request)) or not row["response"] or not O.validate_score_response(profile, request, row["response"]) or not row["response"]["passed"]:
+        raise ValueError("fresh complete original scorer replay did not accept exact source")
+
+
+def check(profile, pack, parent, replay_id=None):
+    if set(pack["receipts"]) != set(IDS):
+        raise ValueError("complete required unit set differs")
+    rebuilt = produce(profile, pack["inputs"])
+    if any(pack[key] != rebuilt[key] for key in ("binding", "inputs", "receipts", "parent_seal_cid", "transition_id")):
+        raise ValueError("stored current source/effect/context admission differs")
+    if parent is None:
+        if pack["parent_seal_cid"] or pack["binding"]["parent_revision"]:
+            raise ValueError("unexpected parent")
+    elif parent["seal_cid"] != pack["parent_seal_cid"] or parent["binding"]["revision"] != pack["binding"]["parent_revision"]:
+        raise ValueError("parent revision/seal differs")
+    if replay_id is not None:
+        replay(profile, pack, replay_id)
+    seal, units, statement = build(pack, parent)
+    if "seal" in pack and (seal.to_canonical() != pack["seal"] or seal.seal_cid() != pack["seal_cid"]):
+        raise ValueError("native seal reconstruction differs")
+    if not seal.sealed:
+        raise ValueError("native seal not sealed")
+    raw = seal.to_canonical()
+    proofs = [S.UnitProofView(unit_id=unit, proof_object_cid=S.digest(receipt), proof_bytes=S.encoded(receipt),
+        public_input_cid=S.digest(pack["binding"]), observed_public_input_cid=S.digest(pack["binding"]), proof_system_id="integrity", freshly_verified=True)
+        for unit, receipt in pack["receipts"].items()]
+    verdict = S.verify_seal(raw, trusted_keys=["n/a"], verification_policy=policy(pack), parent_seal=None if parent is None else S.parent_view(parent),
+        parent_chain=() if parent is None else (parent["seal_cid"],), unit_proofs=proofs, expected_source_root_cid=state(pack).source_root_cid,
+        expected_repository_state_cid=state(pack).repository_state_cid,
+        expected_manifest_root_cid=raw.get("manifest_root_cid", raw.get("new_manifest_root_cid")),
+        expected_forest_root_cid=raw.get("repository_proof_root", raw.get("new_forest_root_cid")))
+    if not verdict.accepted:
+        raise ValueError("native integrity verifier rejected")
+    return seal, units, statement, verdict.to_canonical()
+
+
+def load(profile, sealer, directory, cid, replay_id=None, seen=()):
+    if cid in seen or len(seen) >= 32:
+        raise ValueError("cyclic or excessive chain")
+    meta = json.loads((directory / "packs" / (cid.split(":")[1] + ".json")).read_bytes())
+    kind = S.ArtifactKind.CHECKPOINT_SEAL if meta["parent_seal_cid"] is None else S.ArtifactKind.DELTA_SEAL
+    raw = sealer.store.get_verified_bytes(S.ArtifactReference(cid=cid, kind=kind))
+    if S.digest(raw) != cid:
+        raise ValueError("native stored seal differs")
+    pack = {**meta, "seal": json.loads(raw)["payload"], "seal_cid": cid, "receipts": {}}
+    for unit, receipt_cid in meta["receipt_cids"].items():
+        pack["receipts"][unit] = json.loads(sealer.store.get_verified_bytes(S.ArtifactReference(cid=receipt_cid, kind=S.ArtifactKind.PROOF_OBJECT)))
+    parent = None if meta["parent_seal_cid"] is None else load(profile, sealer, directory, meta["parent_seal_cid"], seen=seen + (cid,))
+    check(profile, pack, parent, replay_id)
+    return pack
+
+
+def execute(request):
+    started = time.perf_counter()
+    profile = profile_for(request)
+    event = O.event_for(profile, request["event_id"])
+    directory = Path(profile["output_root"]) / "native_original_sealing" / event["trajectory_id"]
+    repository = "ns-original-development/" + event["trajectory_id"]
+
+    def crash_at(name, *args):
+        if request.get("crash_at") == name:
+            S.save_new(directory / "crashes" / (request["publication_id"] + ".json"),
+                       {"boundary": name, "replays": REPLAYS, "elapsed_seconds": time.perf_counter() - started})
+            os._exit(94)
+
+    sealer = S.IncrementalProofSealer(directory / "store", crash_injector=crash_at if request.get("crash_at") else None)
+    try:
+        current = sealer.get_current_seal(repository)
+        operation = request["operation"]
+        if operation == "read":
+            if current is None or current.seal_cid != request["expected_seal_cid"]:
+                raise ValueError("native current parent differs")
+            pack = load(profile, sealer, directory, current.seal_cid, replay_id=request["operation_id"])
+            if pack["binding"]["revision"] != request["expected_revision"]:
+                raise ValueError("native accepted revision differs")
+            restored = directory / "reads" / request["operation_id"]
+            O.materialize_payload(profile, pack["receipts"]["accepted_source"]["source"], restored)
+            result = {"operation": operation, "seal_cid": pack["seal_cid"], "pointer": current.to_dict(),
+                      "source_tree_sha256": R.inventory(restored)["tree_sha256"], "restored_source_path": str(restored),
+                      "original_inventory_sha256": O.original_inventory(profile, restored)["sha256"], "recursive_native_chain_verified": True}
+        elif operation in ("publish", "recover"):
+            parent_cid = request.get("parent_seal_cid")
+            parent = None if parent_cid is None else load(profile, sealer, directory, parent_cid)
+            expected = None if parent is None else S.CurrentSealPointer(repository_id=repository, branch_id="main", seal_cid=parent_cid,
+                seal_kind=S.ArtifactKind.CHECKPOINT_SEAL if parent["parent_seal_cid"] is None else S.ArtifactKind.DELTA_SEAL,
+                generation=parent["seal"].get("logical_epoch", 0), parent_seal_cid=parent["parent_seal_cid"] or "")
+            if operation == "publish":
+                pack = produce(profile, request)
+                seal, units, statement, verdict = check(profile, pack, parent, replay_id=request["operation_id"])
+                pack.update(seal=seal.to_canonical(), seal_cid=seal.seal_cid())
+                refs = S.persist(sealer, pack)
+                S.save_new(directory / "packs" / (pack["seal_cid"].split(":")[1] + ".json"),
+                           {key: pack[key] for key in ("binding", "inputs", "parent_seal_cid", "transition_id")} | {"receipt_cids": {unit: S.digest(receipt) for unit, receipt in pack["receipts"].items()}})
+                args = {"units": units, "transition_id": pack["transition_id"], "expected_current": expected}
+                publication = sealer.publish_full_checkpoint(state(pack), policy(pack), expected_unit_ids=IDS, **args) if parent is None else sealer.publish_delta_seal(S.parent_view(parent), state(pack), policy(pack), statement, **args)
+                result = {"operation": operation, "published": publication.published, "publication": publication.to_canonical(),
+                          "seal_cid": pack["seal_cid"], "admission": verdict, "persisted_artifacts": refs}
+            else:
+                pending = sealer.wal.get_transition("ns-original:" + request["publication_id"])
+                if pending is None or pending.state is not S.SealTransitionState.IN_PROGRESS or pending.phase is not S.SealTransitionPhase.SEAL_PERSISTENCE:
+                    raise ValueError("no qualified pre-CAS pending boundary")
+                if current != expected or pending.generation != (0 if current is None else current.generation + 1):
+                    raise ValueError("pending/current parent mismatch")
+                pack = load(profile, sealer, directory, pending.new_seal_cid, replay_id=request["operation_id"])
+                if pack["binding"]["revision"] != request["publication_id"] or pack["parent_seal_cid"] != parent_cid:
+                    raise ValueError("pending source/revision differs")
+                pointer = S.CurrentSealPointer(repository_id=repository, branch_id="main", seal_cid=pending.new_seal_cid,
+                    seal_kind=pending.new_seal_kind, generation=pending.generation, parent_seal_cid="" if current is None else current.seal_cid)
+                cas = sealer.pointers.compare_and_swap_current_seal_result(current, pointer)
+                if not cas.swapped:
+                    raise ValueError("recovery CAS lost")
+                args = {"new_seal_cid": pending.new_seal_cid, "new_seal_kind": pending.new_seal_kind, "generation": pending.generation}
+                S.record_phase(sealer.wal, pending.transition_id, S.SealTransitionPhase.CURRENT_ROOT_CAS, **args)
+                committed = S.commit_transition(sealer.wal, pending.transition_id, phase=S.SealTransitionPhase.CLEANUP, **args)
+                result = {"operation": operation, "published": True, "seal_cid": pending.new_seal_cid, "cas_swapped": cas.swapped, "committed": committed.to_dict()}
+            pointer = sealer.get_current_seal(repository)
+            result["pointer"] = None if pointer is None else pointer.to_dict()
+        else:
+            raise ValueError("unsupported native operation")
+        result.update(schema="ns-original-native-sealing/v1", imports=S.loaded_sources(), independent_replays=REPLAYS,
+                      provider_calls=0, proof_mode="integrity_only", signed_receipts=False, elapsed_seconds=time.perf_counter() - started)
+        return result
+    finally:
+        sealer.close()
+
+
+if __name__ == "__main__":
+    print(json.dumps(execute(json.load(sys.stdin)), sort_keys=True))

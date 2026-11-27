@@ -1,0 +1,114 @@
+import Mathlib.Data.Rat.Defs
+
+/-!
+SOURCE-ONLY, UNCOMPILED, UNQUALIFIED.
+
+Independent Python-shaped syntax. No constructor contains SourceTerm,
+SourceExpr, a model operation, an evaluator equation or a semantic certificate.
+Scope identities are retained independently from identifier spelling. The
+scalar phase below refuses containers and statements explicitly; retaining
+their syntax does not claim that their lowering or interpretation is complete.
+Token spelling and projected rational literals do not prove CPython parsing,
+binary64 arithmetic, global binding provenance or lexical name resolution.
+-/
+
+namespace RankerSupportedPythonAstReal
+
+structure PyName where
+  scope : ℕ
+  spelling : String
+  deriving DecidableEq
+
+inductive PyCalleeRef where
+  | name (identifier : PyName)
+  | attribute (base : PyName) (member : String)
+  | unsupported (tag : String)
+  deriving DecidableEq
+
+inductive PyUnary where
+  | usub
+  | unsupported (tag : String)
+  deriving DecidableEq
+
+inductive PyBinary where
+  | add | sub | mul | div
+  deriving DecidableEq
+
+inductive PyCompare where
+  | ge
+  | unsupported (tag : String)
+  deriving DecidableEq
+
+inductive PyTarget where
+  | name (identifier : PyName)
+  | tuple (elements : List PyTarget)
+  | unsupported (tag : String)
+
+mutual
+  inductive PyExpr where
+    | name (identifier : PyName)
+    | integer (value : ℤ)
+    | floatLiteral (token : String) (projection : ℚ)
+    | unary (op : PyUnary) (operand : PyExpr)
+    | binary (op : PyBinary) (left right : PyExpr)
+    | call (callee : PyCalleeRef) (arguments : PyArgs)
+    | compare (op : PyCompare) (left right : PyExpr)
+    | ifExp (test thenBranch elseBranch : PyExpr)
+    | subscript (value index : PyExpr)
+    | listComp (body : PyExpr) (generators : List PyComprehension)
+    | generatorExp (body : PyExpr) (generators : List PyComprehension)
+    | unsupported (tag : String)
+  inductive PyArgs where
+    | nil
+    | cons (first : PyExpr) (rest : PyArgs)
+  inductive PyComprehension where
+    | forIn (target : PyTarget) (iterable : PyExpr)
+        (filters : PyArgs) (asynchronous : Bool)
+end
+
+inductive PyStmt where
+  | assign (targets : List PyTarget) (rhs : PyExpr)
+  | unsupported (tag : String)
+
+inductive PyPrimitive where
+  | abs | max | exp | log1p
+  deriving DecidableEq
+
+/-- Explicit fixed pure binding model, rather than arbitrary callable values.
+The host must separately join scope0 to the source's unchanged globals/builtins.
+In particular `_dot`, `math.fsum`, `len`, `zip` and `range` are not admitted by
+this first scalar phase. No unknown function is assigned a model meaning. -/
+def resolveFixedCallee : PyCalleeRef → Option PyPrimitive
+  | .name ⟨0, "abs"⟩ => some .abs
+  | .name ⟨0, "max"⟩ => some .max
+  | .attribute ⟨0, "math"⟩ "exp" => some .exp
+  | .attribute ⟨0, "math"⟩ "log1p" => some .log1p
+  | _ => none
+
+def scopeSpellings (scope : List PyName) : List String :=
+  scope.map PyName.spelling
+
+def reservedGlobal (name : PyName) : Prop :=
+  name = ⟨0, "abs"⟩ ∨ name = ⟨0, "max"⟩ ∨ name = ⟨0, "math"⟩
+
+instance (name : PyName) : Decidable (reservedGlobal name) := by
+  unfold reservedGlobal
+  infer_instance
+
+/-- Collisions require a future proved renaming stage; this phase refuses them.
+Fixed pure global identities also cannot be rebound in the admitted scope. -/
+def scalarScopeValid (scope : List PyName) : Prop :=
+  (scopeSpellings scope).Nodup ∧ ∀ name ∈ scope, ¬ reservedGlobal name
+
+instance (scope : List PyName) : Decidable (scalarScopeValid scope) :=
+  inferInstanceAs (Decidable ((scopeSpellings scope).Nodup ∧
+    ∀ name ∈ scope, ¬ reservedGlobal name))
+
+theorem integer_and_float_syntax_distinct (integer : ℤ) (token : String) (ratio : ℚ) :
+    PyExpr.integer integer ≠ PyExpr.floatLiteral token ratio := by
+  intro same
+  cases same
+
+#print axioms integer_and_float_syntax_distinct
+
+end RankerSupportedPythonAstReal

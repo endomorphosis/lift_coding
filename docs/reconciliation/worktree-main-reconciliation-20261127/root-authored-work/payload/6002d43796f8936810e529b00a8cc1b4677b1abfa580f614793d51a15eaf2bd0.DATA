@@ -1,0 +1,349 @@
+{
+  "audited_source": {
+    "commit": "6e7dc7392a62e09dcbad951e3a6aff7fa923f2c8",
+    "source_modified": false,
+    "worktree": "/home/barberb/lift_coding_worktrees/terminal-source-view-recovery-20261012"
+  },
+  "concrete_changes": [
+    {
+      "change": "Share pure rendering across CLI and retained-block replay. Keep expected source hashes, lock/recheck, compiler validation, untouched-byte preservation, unsupported-scope rejection and refresh receipts. Add optional source-scope/CID bindings when used through an admitted input view.",
+      "file": "ipfs_accelerate_py/agent_supervisor/runtime/code_source_view.py",
+      "functions": [
+        "CodeSourceView._view",
+        "CodeSourceView.replace",
+        "new render_source_bytes"
+      ]
+    },
+    {
+      "change": "Create and insert source-read block only after existing verification. Preserve original stdin/native capsule identity. Bind the final selected input including all suffixes and wrappers. Keep rendering present across tokenizer/native fallback and fail an explicitly qualified experiment before dispatch when treatment cannot be included.",
+      "file": "ipfs_accelerate_py/agent_supervisor/runtime/router_implementation_runner.py",
+      "functions": [
+        "run",
+        "render_model_prompt",
+        "select_model_prompt"
+      ]
+    },
+    {
+      "change": "Accept a strictly validated new projection receipt and rebuild the block from immutable retained source blocks. Verify ordered selection, renderer identity, all content hashes, final prompt hash and size without exporting source or prompts. Extend existing byte-equation checks rather than disabling them.",
+      "file": "benchmarks/agent_supervisor/container_coding/terminal_context_audit.py",
+      "functions": [
+        "TRANSLATION_FIELDS",
+        "_receipt",
+        "_model_projection"
+      ]
+    },
+    {
+      "change": "Expose a narrow verified retained-source reader if needed; preserve all native schemas, exact restoration and operational-versus-historical separation. Do not broaden alias slots to source text.",
+      "file": "ipfs_accelerate_py/agent_supervisor/runtime/semantic_router_translation.py",
+      "functions": [
+        "_verified_semantic",
+        "replay_semantic_router_prompt_for_audit"
+      ]
+    },
+    {
+      "change": "Explain that inline views are read aids and that required exact source, uncertainty expansion and edit guards still apply. Record input inclusion separately from actual CLI use; keep matched raw/compact instructions.",
+      "file": "ipfs_accelerate_py/agent_supervisor/runtime/source_view_policy.py",
+      "functions": [
+        "_instruction",
+        "create_binding",
+        "validate_binding"
+      ]
+    },
+    {
+      "change": "Retain all existing full-manifest freshness checks and mandatory raw-source policy. Reuse source bindings for explicit raw expansion rather than letting a compact source view grant capsule, proof or edit authority.",
+      "file": "ipfs_accelerate_py/agent_supervisor/runtime/semantic_capsule_expansion.py",
+      "functions": [
+        "expand_semantic_capsules"
+      ]
+    },
+    {
+      "change": "Freeze explicit source-input arm and ordered selection with existing source/provider/resource controls. Require positive source-input inclusion for a qualified rendering comparison. Keep shared provider backoff and no automatic replay.",
+      "file": "benchmarks/agent_supervisor/container_coding/full_supervisor_benchmark.py",
+      "functions": [
+        "prepare",
+        "execute",
+        "collect"
+      ]
+    }
+  ],
+  "current_indexed_default_payload": {
+    "capsule_ast_details": "PythonAnalyzer puts normalized _projection(node) in symbol.metadata.facets[].version_evidence. The capsule compiler preserves this field through _authoritative_metadata. It can contain the selected function implementation AST. _ChildProjection removes separately addressable nested definitions; class member functions become interface records, so it is not a complete file/class AST or literal source excerpt.",
+    "capsule_ast_source_files": [
+      "ipfs_datasets_py/logic/software_contracts/semantic_index/python_analysis.py:_ChildProjection,_projection,PythonAnalyzer",
+      "ipfs_datasets_py/logic/software_contracts/semantic_state/capsules.py:_authoritative_metadata,compile_capsule",
+      "ipfs_datasets_py/logic/software_contracts/semantic_state/models.py:SemanticCapsule.identity_payload"
+    ],
+    "capsule_limit": 8,
+    "capsules": "Only selected capsule dictionaries are embedded (at most 8 for indexed-default@1 and possibly fewer after byte-budget repacking), with parallel admission dictionaries. Capsule first-class fields include signature, annotations, defaults, decorators, contracts, effects, exceptions, references, docstring hint, source path/CID and metadata; there is no dedicated raw source-text excerpt field.",
+    "correction": "Presence of raw_sources, capsules and pack does not establish that the whole repository or all source bodies are repeatedly sent. Some structured facts/identifiers can overlap, but their actual serialized/provider-token costs require a content-free census.",
+    "duplication_measured": false,
+    "pack": "ContextPackResult.to_dict embeds pack identity, references with short summaries/metadata, token estimate, coverage status, budget flag and decisions. It repeats some source/capsule identities and admission metadata; it does not blindly embed a second copy of every complete raw source or every complete capsule AST.",
+    "provider_transport": "The runner sends verified semantic transport: native_context retains other evidence, translated_semantic contains this bounded worker payload with approved identifier aliases, and native_suffix remains literal. Doctor/public instruction, workspace/helper guidance and reply contract are composed afterward; metadata projection/tokenizer selection can choose another exactly reconstructible representation. Optional source-view guidance currently adds no code text.",
+    "raw_sources_rule": "With nonempty worker_query, start with required_raw_paths; for explicit program_paths add captured non-program support except deferred task data. Optional program source bytes are omitted and identified in worker_projection.raw_source_fetch_required. This is a scoped selection, not the entire repository.",
+    "selector": "duckdb-query-symbol-name@1",
+    "source_files_inspected": [
+      "benchmarks/agent_supervisor/container_coding/terminal_semantic_context_policy.py:semantic_context_options",
+      "benchmarks/agent_supervisor/container_coding/terminal_initial_context.py:prepare_semantic_context call",
+      "ipfs_accelerate_py/agent_supervisor/runtime/semantic_context_runtime.py:_worker_payload",
+      "ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py:ContextPackResult.to_dict"
+    ],
+    "terminal_required_paths": "Current Terminal Bench preparation nominates the public instruction and structural smoke source as required; additional role-partition support can also be inline. Actual per-trial path populations were not inspected in this audit.",
+    "worker_payload_max_bytes": 32768
+  },
+  "decision": "Measure actual indexed payload costs first, especially normalized per-facet AST presentation. Then supply a versioned bound provider view that visibly renders selected source while retaining canonical evidence locally and exact replay. Optional CLI guidance alone is not a source-rendering experiment; rendering and deduplication remain distinct changes.",
+  "deduplication_is_a_separate_change": {
+    "authority_boundary": "Keep signed/content-addressed canonical evidence in storage; any projected reference points back to exact original identity and must reconstruct it for audit. Removing an actual required evidence item requires a new admitted context policy, not a renderer exception.",
+    "census_fields": [
+      "source_count_in_manifest",
+      "required_raw_path_count",
+      "inline_raw_program_bytes",
+      "inline_raw_support_bytes",
+      "deferred_raw_source_count",
+      "selected_capsule_count",
+      "facet_ast_serialized_bytes",
+      "capsule_other_bytes",
+      "admission_bytes",
+      "pack_bytes",
+      "native_context_other_evidence_bytes",
+      "final_input_bytes",
+      "strictly_identical_subtree_overlap_bytes",
+      "provider_tokens_when_available"
+    ],
+    "comparison_arms": [
+      "existing optional-guidance baseline",
+      "same selected inline raw views",
+      "same selected inline compact views",
+      "later separate deduplicated presentation ablation"
+    ],
+    "deduplication_experiment": "Later count duplicate semantic values/records structurally and move eligible repetitions behind host-retained, exactly reconstructible references under a new versioned provider presentation schema. Do not regex-delete repeated strings or remove raw source merely because a capsule exists.",
+    "rendering_experiment": "Inline raw versus inline compact forms of the same selected code, with all other retrieval/capsule/proof/constraint material unchanged. Hydration may increase context relative to the current capsule-only projection.",
+    "specific_candidate": "After a structural byte census, consider a new capsule-presentation schema that replaces only allowlisted metadata.facets[].version_evidence slots in the PROVIDER VIEW with bound references and supplies raw/compact code views for the same selected symbols. Retain exact original capsule blocks/CIDs and reconstruct the unchanged canonical semantic transport before native validation. Never mutate canonical capsule metadata, remove selected contracts/assumptions, or pass the projected object off as an original SemanticCapsule."
+  },
+  "evidence_scope": {
+    "audit_basis": "Public runtime and benchmark source only.",
+    "containers_started": 0,
+    "hidden_task_material_read": false,
+    "live_observation_supplied_by_parent": "Both batching trials passed; both observed zero helper operations.",
+    "models_invoked": 0,
+    "provider_logs_or_prompts_read": false
+  },
+  "execution_order": [
+    {
+      "action": "Run a bounded content-free projection census on a fresh authored public fixture. Measure actual serialized facet AST, other capsule, admission, pack, inline raw support/program and wrapper bytes before choosing a reduction target. Do not inspect model logs or infer full-source duplication from field names.",
+      "containers": 0,
+      "models": 0,
+      "phase": 0,
+      "required": true
+    },
+    {
+      "action": "If normalized facet AST presentation is a material measured cost, implement a separately versioned provider presentation with those exact canonical slots retained locally and bound by original capsule/source identities. Compare equal selections rendered as raw and compact code; retain contracts, admissions, assumptions and required raw input. Exact native restoration and historical dispatched-input replay must pass before use. The additive source-read block is the smallest ingestion proof and an optional capped baseline, not an assumed optimization.",
+      "phase": 1,
+      "required": true
+    },
+    {
+      "action": "Qualify authored public-fixture exact-input inclusion, restoration, scope, tamper, stale expansion and guarded-edit tests. Cap bytes and resource use. Refuse zero-treatment qualification.",
+      "phase": 2,
+      "required": true
+    },
+    {
+      "action": "Only after preceding gates, run a separate capped paired public Terminal Bench experiment with provider backoff. Keep legacy indexed baseline distinct from matched inline raw/compact controls and from any AST deduplication ablation. Measure provider tokens per successful task and success rate.",
+      "phase": 3,
+      "required": false
+    }
+  ],
+  "findings": [
+    {
+      "file": "ipfs_accelerate_py/agent_supervisor/runtime/source_view_policy.py",
+      "finding": "Current policy only advertises an optional CLI. A bound helper digest and successful task cannot establish source-view ingestion or helper use.",
+      "functions": [
+        "_instruction",
+        "create_binding"
+      ]
+    },
+    {
+      "file": "ipfs_accelerate_py/agent_supervisor/runtime/semantic_context_runtime.py",
+      "finding": "Canonical worker payload contains manifest, required_raw_paths, capsules, admissions, raw_sources, pack, and optional worker_projection. Indexed projection already omits optional program raw bytes; original source blocks remain retained under source_cid.",
+      "functions": [
+        "_worker_payload",
+        "prepare_semantic_context"
+      ]
+    },
+    {
+      "file": "ipfs_accelerate_py/agent_supervisor/runtime/semantic_context_runtime.py",
+      "finding": "raw_sources bytes must hash to the source manifest. Explicit program replay reconstructs capsules, admissions and pack and requires byte-identical canonical payload. In-place source minification would violate these contracts.",
+      "functions": [
+        "_validate_program_payload"
+      ]
+    },
+    {
+      "file": "ipfs_datasets_py/logic/software_contracts/semantic_index/python_analysis.py",
+      "finding": "Selected Python capsule metadata retains normalized per-facet AST projection; selected function implementation structure may be present, while nested definitions are elided and class methods become interfaces. This is not literal raw source text and is not a complete repository AST. Actual duplication has not been measured.",
+      "functions": [
+        "_ChildProjection",
+        "_projection",
+        "PythonAnalyzer"
+      ]
+    },
+    {
+      "file": "ipfs_accelerate_py/agent_supervisor/runtime/semantic_router_translation.py",
+      "finding": "Required context chunks bind original summaries and artifact identity; retained source bytes and source CIDs are checked; authoritative capsules must equal producer capsules. The existing transport round-trips the complete native prompt exactly and only aliases approved identifier slots.",
+      "functions": [
+        "_prompt_parts",
+        "_verified_semantic",
+        "_encode",
+        "_restore"
+      ]
+    },
+    {
+      "file": "ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py",
+      "finding": "Target, surrounding and test source categories are never-compress categories. CapsuleAdmission.requires_raw_source and required_raw_paths remain hard constraints, not optimization hints.",
+      "functions": [
+        "ContextCoveragePolicy"
+      ]
+    },
+    {
+      "file": "benchmarks/agent_supervisor/container_coding/terminal_context_audit.py",
+      "finding": "Historical replay reconstructs native chunks and then semantic transport, residual advice, public instruction, workspace guidance, reply contract and metadata selection. It must reproduce any new source-read block from retained originals after the live worktree has changed.",
+      "functions": [
+        "_capsule",
+        "_model_projection"
+      ]
+    }
+  ],
+  "guards": [
+    "Canonical worker-context.json, source blocks, manifest, native context chunks, capsule CIDs, admissions, proof references, signatures, assumptions and constraints are never changed by the presentation layer.",
+    "All required_raw_paths and every raw_source_required admission remain literal current-source requirements. Compact views never satisfy or erase those obligations.",
+    "Unknown symbols, ambiguous mappings, missing retained blocks, stale selected files or dependencies, foreign scopes and hash mismatches fail before provider dispatch.",
+    "Initial source views create no proof, execution, admission or task-completion authority. AST equality is only a rendering check, not proof of behavior or preserved comment semantics.",
+    "When editing a previously optional source, require exact raw-source expansion against the current hash before the guarded edit; retain expansion and edit receipts. Ordinary provider terminal tools are not intercepted, so bypassed helper edits cannot qualify as a guarded edit cycle merely because the final task passes.",
+    "After a canonical edit, invalidate affected source/view and dependent proof-cache bindings; refresh through the existing semantic context lineage before reusing them.",
+    "Historical replay reconstructs original source-read inputs even after canonical edits; it never supplies current operational edit permission."
+  ],
+  "open_limitations": [
+    "Appending read views can improve source availability while increasing initial tokens; net savings remain empirical.",
+    "Comment removal can hide useful explanatory information despite equal ASTs; preserve exact raw expansion and report its cost.",
+    "Current terminal provider tools allow arbitrary edits; mandatory guarded editing requires a separate native tool boundary or acceptance protocol, not stronger prompt wording.",
+    "Whole-repository reversible minification and multi-language edit translation remain out of scope."
+  ],
+  "proposed_limits": {
+    "aggregate_source_bytes": 4194304,
+    "automatic_provider_retry": false,
+    "complete_model_prompt_bytes": 256000,
+    "identifier_renaming": false,
+    "recursive_hidden_scan": false,
+    "selected_source_files": 8,
+    "selected_symbols": 8,
+    "source_bytes_per_file": 1048576,
+    "source_read_block_bytes": 32768,
+    "source_scope_expansion": false,
+    "whole_repository_mutation": false
+  },
+  "qualification_gate": "Do not start another expensive paired rendering trial until authored exact-input replay demonstrates at least one compact source view in the real coding input. Zero optional helper calls are acceptable for input-inclusion measurement but insufficient for an edit-cycle adoption claim.",
+  "schema": "terminal-source-view-next-phase-plan@1",
+  "smallest_correct_integration": {
+    "eligibility": "Visible supported Python symbols only, inside the original program_paths and complete manifest. Skip paths already supplied as required exact raw source. Preserve every existing raw-source obligation and literal instruction. If there is no eligible compact view, mark the experiment ineligible before a provider call rather than relabeling an unchanged input as a treatment.",
+    "extra_context_risk": "The additive read block can overlap implementation information already present in selected capsule metadata.facets[].version_evidence. This first change proves actual presentation and matched rendering; it does not remove existing AST evidence or guarantee lower tokens than the current indexed baseline.",
+    "measurement": "Source-view inclusion is established by exact reconstructed dispatched bytes containing at least one treatment view. It is separate from optional helper-operation receipts and cannot prove that the model reasoned from that view.",
+    "new_module": "ipfs_accelerate_py/agent_supervisor/runtime/source_input_view.py",
+    "placement": "Append one deterministic source-read block to router_prompt and required_suffix after canonical semantic verification and public instruction inclusion, before render_model_prompt and coding reply contract. Include the identical block in native/tokenizer fallback. No rewrite of canonical native prompt or translated_semantic.raw_sources.",
+    "proposed_functions": [
+      "build_source_input_view",
+      "replay_source_input_view_for_audit",
+      "validate_source_input_view_receipt"
+    ],
+    "receipt_fields": [
+      "schema",
+      "policy",
+      "renderer_sha256",
+      "renderer_version",
+      "python_toolchain_identity",
+      "task_id",
+      "scope_cid",
+      "semantic_root_cid",
+      "native_capsule_id",
+      "native_prompt_sha256",
+      "source_manifest_sha256",
+      "ordered_selection_sha256",
+      "source_bindings",
+      "per_view_requested_and_actual_format",
+      "per_view_source_and_content_sha256",
+      "per_view_bytes",
+      "source_read_block_sha256",
+      "source_read_block_bytes",
+      "views_included",
+      "compact_views_included",
+      "fallback_reasons",
+      "complete_model_prompt_sha256",
+      "complete_model_prompt_bytes",
+      "semantic_equivalence_claimed=false",
+      "proof_authority=false",
+      "completion_authority=false"
+    ],
+    "rendering": "Extract a pure bounded bytes-to-view renderer from code_source_view so online construction and historical audit share exact rendering without reading the mutable worktree. Preserve names, literals and docstrings; compile without executing and require AST equality. For unsupported scopes, directives or layout use a recorded raw fallback or declare ineligible. Do not change producer capsule/proof content or reissue their identities.",
+    "selection": "Use one frozen ordered list derived from verified worker_projection.selected_symbols and the same selected capsule population in both arms. Map producer stable_symbol_id to path and qualified_name explicitly; helper path::qualified_name is a separate identifier namespace. Never discover additional repository paths. Producer qualified names include the module prefix; map to the helper local qualified name only through verified path/module identity and symbol facts, never by arbitrary suffix matching.",
+    "source_reader": "Read retained blocks through the already verified semantic source CID mapping; match SHA256 and CID. At dispatch also verify corresponding allocated coding-worktree bytes and canonical semantic repository bytes against the same manifest, then recheck before dispatch. Historical replay uses retained blocks only and grants no current-source freshness.",
+    "wire_schema": "supervisor-source-read-input@1"
+  },
+  "status": "proposed_after_live_zero_adoption",
+  "tests": [
+    {
+      "assertions": [
+        "Construct authored native semantic payload and compiled capsule using real producer.",
+        "Raw and compact arms select identical source/symbol bindings.",
+        "Required raw bytes, native hashes, capsule/proof/admission records and instructions stay byte-identical.",
+        "Real runner-captured coding input includes compact source content even if provider performs no helper calls."
+      ],
+      "name": "real_producer_input_projection_roundtrip"
+    },
+    {
+      "assertions": [
+        "Edit allocated worktree then remove it.",
+        "Replay uses retained original CID blocks and reproduces full dispatched input hash and byte count.",
+        "Historical replay cannot authorize a fresh edit or operational decode."
+      ],
+      "name": "historical_exact_input_after_edits"
+    },
+    {
+      "assertions": [
+        "Reject altered original block, SHA/CID mismatch, changed source/dependency, foreign producer root, changed ordered selection, mismatched renderer and mutated required constraints.",
+        "Reject swapped helper symbol and producer stable_symbol_id namespaces.",
+        "Missing or zero eligible source views cannot qualify a compact-treatment trial."
+      ],
+      "name": "tamper_staleness_and_scope"
+    },
+    {
+      "assertions": [
+        "Verify placement and exact replay with metadata view, native tokenizer fallback, Doctor residual, public instruction, coding reply contract and tool-output guidance.",
+        "Bound full rendered input, including duplicate wrappers and new instructions.",
+        "Unsupported or unprofitable rendering records raw fallback, never a false compact-inclusion claim."
+      ],
+      "name": "projection_composition"
+    },
+    {
+      "assertions": [
+        "Require current raw expansion receipt and source bindings for optional-source edit.",
+        "Retain no-op exact roundtrip, intentional edit, stale hash, concurrent writers, syntax/layout refusals, untouched bytes, source refresh and dependent proof invalidation checks.",
+        "Provider edits through unrestricted shell remain observable as unguarded; do not claim enforcement through optional instructions."
+      ],
+      "name": "guarded_edit_cycle"
+    },
+    {
+      "assertions": [
+        "Run authored offline preflight then fresh public-example trials with identical retrieved symbols, model settings, task acceptance and resource/rate-limit controls.",
+        "Verify actual source-input inclusion before claiming rendering treatment; count helper expansion/edit operations separately.",
+        "Report total provider tokens across all attempts per successful task and success rate; include caches, expansions, instructions, repair calls and failed attempts.",
+        "Unknown usage remains null; prompt bytes and tokenizer proxies never stand in for provider token savings."
+      ],
+      "name": "paired_public_terminal_bench"
+    },
+    {
+      "assertions": [
+        "Use authored real-producer indexed-default@1 inputs to prove optional program raw is omitted while required public/support raw remains.",
+        "Demonstrate per-facet AST presence for an ordinary function and nested-body elision for class/method cases.",
+        "Count pack reference/accounting bytes separately from code/AST bytes; do not infer duplicate complete bodies from field names.",
+        "Verify public instruction remains literal and exact even when indexed objective is a short hash-bound label."
+      ],
+      "name": "indexed_default_shape_and_census"
+    }
+  ]
+}

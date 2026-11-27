@@ -1,0 +1,179 @@
+#!/usr/bin/env python3
+"""Replay recorded Lean proofs; no inference, network, or theorem editing."""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import shutil
+import signal
+import subprocess
+import time
+
+HERE = Path(__file__).resolve().parent
+ALLOWED_AXIOMS = {'propext', 'Classical.choice', 'Quot.sound'}
+PREAMBLE = 'set_option maxHeartbeats 200000\nset_option maxRecDepth 512\n'
+SUFFIX = '\n#print axioms empirical_goal\n'
+FORBIDDEN = re.compile(r'\b(sorry|admit|sorryAx|axiom|constant|opaque|unsafe|import|open|set_option|theorem|lemma|def|instance|macro|syntax|elab|run_tac|run_elab|native_decide|unsafeCast|IO|System|Lean|eval|include|attribute|initialize|local|section|namespace|end|ofReduceBool)\b')
+TACTICS = set('by intro intros exact assumption rfl trivial constructor apply cases case have show from fun let in with first all_goals focus repeat skip done contradiction False True And Or Not Eq Iff Nat Int Type Prop id left right simp simpa simp_all only at rename_i fail_if_success decide omega rcases obtain subst specialize refine revert generalize induction change classical exists clear congr ext intro1 exacts rintro match'.split())
+SAFE_PREFIXES = {'Nat', 'Int', 'Eq', 'And', 'Or', 'Not', 'False', 'True', 'Iff', 'Exists'}
+
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def read(path):
+    return json.loads(Path(path).read_text())
+
+
+def check_policy(goal, body, posthoc=False):
+    """The original body policy, with only the declared post-hoc extension."""
+    if not isinstance(body, str) or len(body) > 16000:
+        return 'missing_or_oversized_body'
+    if not re.match(r'^by\b', body.strip()):
+        return 'proof_body_must_start_by'
+    if any(s in body for s in ['--', '/-', '-/', '"', '`', '#', '\\', '\x00', '@']):
+        return 'forbidden_syntax'
+    if FORBIDDEN.search(body):
+        return 'forbidden_identifier'
+    declnames = set(re.findall(r'[^\W\d]\w*', goal['declaration']))
+    allowed = TACTICS | ({'rw', 'safe_x'} if posthoc else set())
+    for word in re.findall(r'[^\W\d]\w*(?:\.[^\W\d]\w*)*', body):
+        if word in allowed or word in declnames or word.split('.')[0] in SAFE_PREFIXES:
+            continue
+        if re.fullmatch(r'(?:h\w*|[a-z]|this|ih|ih\w*|α|β|x\w*|y\w*)', word):
+            continue
+        return 'unknown_identifier:' + word
+    if re.search(r'[^\w\s(){}\[\]:=,;.|<>+*\-/→↔∀∃¬∧∨⟨⟩≤≥≠▸·!?]', body):
+        return 'unsupported_character'
+    return None
+
+
+def model_body(goal_id):
+    folder = HERE / 'model' / goal_id
+    body = (folder / 'extracted.txt').read_text()
+    response = read(folder / 'response.json')
+    choice = response['choices'][0]
+    if choice.get('finish_reason') != 'stop':
+        raise ValueError('Incomplete model response: ' + goal_id)
+    content = choice['message']['content'].strip()
+    if any(t in content for t in ['<|im_start|>', '<|im_end|>', '[INST]', '[/INST]', '[THINK]', '[/THINK]', '<think>', '</think>', '</s>']):
+        raise ValueError('Unexpected transport/reasoning tokens: ' + goal_id)
+    match = re.fullmatch(r'```(?:lean4?)?\s*\n(.*?)\n```', content, re.S)
+    extracted = match.group(1).strip() if match else content
+    if body.strip() != extracted:
+        raise ValueError('Proof body differs from original model response: ' + goal_id)
+    return body
+
+
+def bounded_lean(executable, path):
+    started = time.monotonic()
+    env = dict(os.environ)
+    env.pop('LEAN_PATH', None)
+    process = subprocess.Popen([executable, '-j1', '-M1024', str(path.relative_to(HERE))],
+                               cwd=HERE, env=env, stdout=subprocess.PIPE,
+                               stderr=subprocess.PIPE, text=True, start_new_session=True)
+    timed_out = False
+    try:
+        stdout, stderr = process.communicate(timeout=10)
+    except subprocess.TimeoutExpired:
+        timed_out = True
+        os.killpg(process.pid, signal.SIGKILL)
+        stdout, stderr = process.communicate()
+    match = re.search(r"'empirical_goal' depends on axioms: \[(.*?)\]", stdout, re.S)
+    axioms = ([] if "'empirical_goal' does not depend on any axioms" in stdout
+              else re.findall(r'[\w.]+', match.group(1)) if match else None)
+    accepted = (not timed_out and process.returncode == 0 and axioms is not None
+                and set(axioms) <= ALLOWED_AXIOMS and 'sorry' not in stdout.lower())
+    return {'returncode': process.returncode, 'timeout': timed_out, 'stdout': stdout,
+            'stderr': stderr, 'axioms': axioms, 'accepted': accepted,
+            'wall_seconds': time.monotonic() - started}
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--include-native', action='store_true',
+                        help='Also replay accepted fixed-baseline and hammer proofs.')
+    parser.add_argument('--include-posthoc', action='store_true',
+                        help='Separately replay the three additional post-hoc acceptances.')
+    parser.add_argument('--output', type=Path, default=Path('proof_replay.json'))
+    args = parser.parse_args()
+    manifest = read(HERE / 'MANIFEST.json')
+    for item in manifest['files']:
+        path = (HERE / item['bundle_path']).resolve()
+        if not path.is_relative_to(HERE) or sha(path) != item['bundle_sha256']:
+            raise ValueError('Bundle hash mismatch: ' + item['bundle_path'])
+    goals = {g['goal_id']: g for g in read(HERE / 'frozen_protocol.json')['goals']}
+    observations = read(HERE / 'comparison.json')
+    if len(goals) != 64 or len(observations) != 64 or {r['goal_id'] for r in observations} != set(goals):
+        raise ValueError('Incomplete 64-goal population')
+    if sum(g['expected_provable'] for g in goals.values()) != 32:
+        raise ValueError('Expected 32 valid and 32 invalid goals')
+    selected = [(r['goal_id'], 'primary_model', r['model']['checker'])
+                for r in observations if r['model']['checker'].get('accepted')]
+    if len(selected) != 12 or any(not goals[gid]['expected_provable'] for gid, _, _ in selected):
+        raise ValueError('Primary model observations differ from 12 valid acceptances')
+    if args.include_native:
+        for arm, expected in [('baseline', 32), ('hammer', 24)]:
+            entries = [(r['goal_id'], arm, r[arm]) for r in observations if r[arm].get('accepted')]
+            if len(entries) != expected:
+                raise ValueError('Unexpected native acceptance denominator')
+            selected.extend(entries)
+    if args.include_posthoc:
+        additional = []
+        for path in sorted((HERE / 'policy_friction_posthoc').glob('*/result.json')):
+            row = read(path)
+            if row['checker']['accepted']:
+                if row['proof_body_edited'] or not row['expected_provable']:
+                    raise ValueError('Unexpected post-hoc record')
+                additional.append((row['goal_id'], 'posthoc_model', row['checker']))
+        if len(additional) != 3:
+            raise ValueError('Expected exactly three additional post-hoc acceptances')
+        selected.extend(additional)
+    executable = shutil.which('lean')
+    if not executable:
+        raise RuntimeError('Place Lean 4.33.1 on PATH; no automatic installation is performed.')
+    version = subprocess.run([executable, '--version'], capture_output=True, text=True, timeout=10)
+    if version.returncode or not re.search(r'\bversion 4\.33\.1\b', version.stdout):
+        raise RuntimeError('This replay requires Lean 4.33.1: ' + version.stdout)
+    reports = []
+    for gid, arm, original in selected:
+        if arm in {'primary_model', 'posthoc_model'}:
+            body = model_body(gid)
+            rejection = check_policy(goals[gid], body, posthoc=arm == 'posthoc_model')
+            if rejection:
+                raise ValueError(arm + ' admission failed: ' + gid + ': ' + rejection)
+            folder = HERE / ('model' if arm == 'primary_model' else 'policy_friction_posthoc') / gid
+            candidate = folder / 'candidate.lean'
+            expected = PREAMBLE + goals[gid]['declaration'] + ' := ' + body.strip() + SUFFIX
+            if candidate.read_text() != expected:
+                raise ValueError('Candidate changed the fixed theorem or proof: ' + gid)
+        else:
+            candidate = HERE / 'native' / gid / arm / 'candidate.lean'
+            if PREAMBLE + goals[gid]['declaration'] + ' := ' not in candidate.read_text():
+                raise ValueError('Native fixed declaration mismatch: ' + gid)
+        if sha(candidate) != original['source_sha256']:
+            raise ValueError('Original checker source identity mismatch: ' + gid)
+        result = {'goal_id': gid, 'arm': arm, 'source_sha256': sha(candidate),
+                  **bounded_lean(executable, candidate)}
+        reports.append(result)
+        print(json.dumps({'goal_id': gid, 'arm': arm, 'accepted': result['accepted']}), flush=True)
+    output = {'schema': 'portable-constructed-proof-replay/v1', 'lean_version': version.stdout.strip(),
+              'parameters': {'seconds_per_file': 10, 'lean_threads': 1, 'lean_memory_mib': 1024,
+                             'allowed_axioms': sorted(ALLOWED_AXIOMS)},
+              'primary_model_acceptances': 12, 'primary_valid_denominator': 32,
+              'primary_invalid_acceptances': 0, 'primary_invalid_denominator': 32,
+              'posthoc_changes_primary_estimate': False, 'model_calls': 0,
+              'replayed': len(reports), 'all_replays_accepted': all(r['accepted'] for r in reports),
+              'reports': reports}
+    with args.output.open('x') as stream:
+        stream.write(json.dumps(output, ensure_ascii=False, indent=2) + '\n')
+    return 0 if output['all_replays_accepted'] else 1
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

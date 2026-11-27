@@ -1,0 +1,79 @@
+"""Independent receipt/source/selection audit. Never dispatches a grader."""
+import hashlib,importlib.util,json,os,time
+from pathlib import Path
+H=Path(__file__).resolve().parent;E=H/'candidate_endpoint_v1';Q=E/'qualification_v2';C=H/'curator_custody'
+def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+def read(path):return json.loads(Path(path).read_text())
+def canonical(x):return json.dumps(x,sort_keys=True,separators=(',',':')).encode()
+def digest(x):return hashlib.sha256(canonical(x)).hexdigest()
+def dump(path,x):
+ with Path(path).open('x') as f:f.write(json.dumps(x,sort_keys=True,indent=2)+'\n')
+def main():
+ output=H/'audit_v1';output.mkdir();private=output/'curator_custody';private.mkdir(mode=0o700);started=time.monotonic();checks=[]
+ def check(value,label):checks.append({'label':label,'passed':bool(value)});assert value,label
+ prep=read(H/'preparation-summary-v4.json');native=read(H/'native_controls_v1/summary.json');profile=read(E/'profile.json');endpoint=read(Q/'summary.json');old=read(C/'selected_registry_v4.json');new=read(E/'curator_custody/registry.private.json')
+ spec=importlib.util.spec_from_file_location('original_acceptance_audit_codec',H/'public_bases_v1/inventory_codec_v1.py');codec=importlib.util.module_from_spec(spec);spec.loader.exec_module(codec)
+ check(native['qualified'] and native['actual_control_attempts']==8,'eight standalone native controls qualified');check(endpoint['qualified'] and endpoint['actual_native_controls']==16 and endpoint['actual_negative_controls']==14,'endpoint all sixteen source/config controls and fourteen negative controls')
+ for path,expected in profile['source_bindings'].items():check(sha(path)==expected,'bound public/native code or authority file identity')
+ check(sha(E/'curator_custody/registry.private.json')==profile['private_registry_sha256'],'private registry identity')
+ selected=[]
+ for uid,m in old['units'].items():
+  newer=new['units'][uid];allowed={'prompt','public_objective_record_sha256','public_objective_text_sha256'}
+  check({k:v for k,v in m.items() if k not in allowed}=={k:v for k,v in newer.items() if k not in allowed},'all original criteria/environment/source fields unchanged')
+  check(codec.inventory(Path(profile['tasks'][uid]['base_source_root']))==m['proposal_files'],'public base exact native inventory')
+  for key,obj in m['custody_objects'].items():check(key==obj['sha256']==sha(obj['path']),'original opaque object byte identity')
+  selected.append({'task_id':uid,'base_entries':len(m['proposal_files']),'visible_cases':m['expected_visible_collected_count'],'hidden_cases':m['expected_hidden_count'],'configurations':len(profile['tasks'][uid]['configurations'])})
+ def audit_native(path,request=None,response=None):
+  receipt=read(path/'historical_scorer/host_result.json');recipe=read(path/'historical_scorer/recipe.json');uid=receipt['unit_id'];m=old['units'][uid]
+  check(recipe['source_files']==m['full_source_files'] and recipe['proposal_files']==m['proposal_files'],'native immutable source authority unchanged')
+  for key in ['visible_nodes','oracle_metadata_sha256','hidden_test_sha256','expected_hidden_nodes_sha256','expected_hidden_count','expected_visible_collected_count']:
+   check(recipe[key]==m[key],'native criterion/selection field unchanged')
+  boundary=read(path/'historical_scorer/boundary.private.json');resources=boundary['resources'];check(boundary['checked_before_start'] and boundary['image']==profile['image_id'],'native prestart image boundary')
+  check(resources['NetworkMode']=='none' and resources['ReadonlyRootfs'] and resources['NanoCpus']==1000000000 and resources['Memory']==2147483648 and resources['PidsLimit']==32,'native actual resource boundary')
+  check(read(path/'historical_scorer/cleanup.json')['returncode']==0,'native cleanup completed')
+  oracle=read(m['custody_objects'][m['oracle_metadata_sha256']]['path']);expected=set(oracle['fail_to_pass']);hidden=read(path/'historical_scorer/results/hidden.observation.json');visible=read(path/'historical_scorer/results/visible.observation.json')
+  calls=[r for r in hidden['reports'] if r['when']=='call'];check(set(hidden['collected'])==expected and {r['nodeid'] for r in calls}==expected and len(calls)==len(expected),'complete exact designated hidden selection')
+  check(all(r['outcome'] in ['passed','failed'] for r in calls) and not any(r['outcome']=='failed' for r in hidden['reports'] if r['when']!='call'),'all hidden phases complete without infrastructure failure')
+  visible_calls=[r for r in visible['reports'] if r['when']=='call'];check(len(visible['collected'])==m['expected_visible_collected_count'] and len(visible_calls)==m['expected_visible_collected_count'] and all(r['outcome']=='passed' for r in visible_calls),'complete unchanged visible suite')
+  check(receipt['container_exit_code']==0 and not receipt['timed_out'],'native complete process')
+  if response:
+   check(sha(path/'historical_scorer/host_result.json')==response['native_host_receipt_sha256'],'endpoint exact native receipt identity')
+   check(response['hidden_passed']==sum(r['outcome']=='passed' for r in calls) and response['hidden_failed']==sum(r['outcome']=='failed' for r in calls),'endpoint hidden aggregates replay')
+   check(response['original_native_passed']==receipt['success'],'endpoint native grade equality')
+ for row in native['receipts']:
+  path=H/'native_controls_v1/curator_custody'/(row['task_id']+'-'+row['control']);audit_native(path)
+  check(sha(path/'historical_scorer/host_result.json')==row['native_host_receipt_sha256'],'standalone native receipt hash')
+  check(read(path/'receipt.json')==row,'standalone exact wrapper receipt')
+  check(row['success']==(row['control']=='reference_source_projection'),'standalone expected source control grade')
+ for row in endpoint['rows']:
+  path=Q/'curator_custody'/row['name'];request=read(path/'request.json');response=json.loads((path/'stdout.private').read_text());check(digest(request)==row['request_sha256'],'qualification exact request digest');check(digest(response)==row['response_sha256'] and response==row['response'],'qualification exact response digest')
+  run=E/'curator_custody/runtime'/request['evaluation_id']
+  if row['name']=='duplicate-evaluation-id':
+   check(response['status']=='rejected' and response['rejection_code']=='duplicate_evaluation_id','duplicate rejected without overwriting first request/receipt');continue
+  check(read(run/'request.json')==request and read(run/'response.json')==response,'service request and receipt joins')
+  if row['kind']=='negative':check(not (run/'native_dispatch_intent.json').exists() and not (run/'public_probe/dispatch_intent.json').exists(),'guard rejected before any native/public dispatch');continue
+  audit_native(run,request,response);binding=read(run/'candidate_binding.private.json');check(codec.digest(codec.inventory(run/'sealed_source'))==binding['sha256']==request['expected_candidate_source_tree_sha256']==response['candidate_sha256'],'entire accepted source inventory equality')
+  bound=read(run/'source_bound_before_hidden.json');intent=read(run/'native_dispatch_intent.json');check(bound['bound_at_ns']<intent['started_at_ns'] and bound['hidden_loaded'] is False and bound['request_sha256']==digest(request),'source/request bound before native dispatch')
+  public=read(run/'public_probe/receipt.json');public_result=read(run/'public_probe/results/public_result.json');config=read(run/'public_probe/results/configuration.private.json');task=profile['tasks'][request['task_id']]
+  check(sha(run/'public_probe/receipt.json')==response['public_receipt_sha256'] and public['completed'] and public_result==public['result'],'public receipt/process equality')
+  check(read(run/'public_probe/cleanup.json')['container_absent_after_cleanup'],'public container cleanup')
+  check(public_result['configuration_sha256']==request['configuration_sha256'] and public_result['candidate_sha256']==binding['sha256'],'actual public configuration/source binding')
+  check(config['executed'] and config['passed']==response['public_configuration_passed'],'configuration actual call result equality')
+  check(response['public_objective_cases']==task['public_example_count'],'all exposed objective examples executed')
+  expected_pass=read(run/'historical_scorer/host_result.json')['success'] and public_result['objective_passed']==task['public_example_count'] and config['passed']
+  check(response['passed']==expected_pass and response['passed']==row['expected'],'joint original/exposed/configuration conjunction')
+  check(response['native_score_elapsed_seconds']+response['public_probe_elapsed_seconds']<=response['service_outer_elapsed_seconds']<=row['outer_elapsed_seconds'],'phase durations nested inside service then wrapper duration')
+  check(response['whole_grader_reuse'] is False and response['validation_call_reuse'] is False,'cold lifecycle actual no reuse')
+ for dirname,expected in [('public_contract_controls_v2',False),('oauth_public_controls_v3',True)]:check(read(H/dirname/'summary.json')['qualified']==expected,'retained public version qualification result')
+ supplement=read(H/'oauth_supplement_v1/retained_attempt_v1.json')
+ check(supplement['actual_native_grader_calls']==1 and supplement['native_executed'] and not supplement['native_success'] and supplement['native_outer_elapsed_seconds'] is None,'supplement actual failed native call and missing-duration limitation retained')
+ check(sha(H/'oauth_supplement_v1/curator_custody/native/historical_scorer/host_result.json')==supplement['native_receipt_sha256'],'supplement exact retained native receipt')
+ public_bases=read(H/'public_bases_v1/admission.json');check(public_bases['qualified'] and all(x['all_content_and_symlinks_identical'] for x in public_bases['tasks']),'mode materialization changes no source bytes')
+ evidence={}
+ for root in [H/'native_controls_v1/curator_custody',H/'public_contract_controls_v1/curator_custody',H/'public_contract_controls_v2/curator_custody',H/'oauth_public_controls_v3/curator_custody',E/'curator_custody',Q/'curator_custody']:
+  for path in root.rglob('*'):
+   if path.is_file() and not path.is_symlink():evidence[str(path.relative_to(H))]=sha(path)
+ dump(private/'evidence_manifest.private.json',evidence);dump(private/'checks.private.json',checks)
+ native_rows=[x for x in endpoint['rows'] if x['kind']=='native'];summary={'schema':'ns-original-acceptance-independent-audit/v1','qualified':all(x['passed'] for x in checks),'checks':len(checks),'auditor_sha256':sha(Path(__file__)),'private_evidence_files':len(evidence),'private_evidence_manifest_sha256':sha(private/'evidence_manifest.private.json'),'private_checks_sha256':sha(private/'checks.private.json'),'standalone_native_controls':8,'endpoint_native_controls':16,'endpoint_negative_controls':14,'retained_wrapper_v1_negative_calls':9,'standalone_native_summary_sha256':sha(H/'native_controls_v1/summary.json'),'endpoint_summary_sha256':sha(Q/'summary.json'),'endpoint_profile_sha256':sha(E/'profile.json'),'original_native_criteria_unchanged':True,'public_objective_v3_sha256':sha(H/'public_contract_v3/objectives.json'),'source_mode_admission_sha256':sha(H/'public_bases_v1/admission.json'),'tasks':selected,'timing':{'standalone_eight_native_outer_seconds':sum(x['outer_score_seconds'] for x in native['receipts']),'endpoint_sixteen_native_inner_seconds':sum(x['response']['native_score_elapsed_seconds'] for x in native_rows),'endpoint_sixteen_public_inner_seconds':sum(x['response']['public_probe_elapsed_seconds'] for x in native_rows),'endpoint_sixteen_service_outer_seconds':sum(x['response']['service_outer_elapsed_seconds'] for x in native_rows),'endpoint_thirty_invocation_outer_seconds':sum(x['outer_elapsed_seconds'] for x in endpoint['rows']),'audit_elapsed_seconds':time.monotonic()-started,'nesting':'Native/public phases are disjoint within each service; both are nested inside service and invocation intervals. Do not sum across nested fields. Audit/archive overhead separate.'},'new_grader_calls':0,'new_provider_calls':0,'model_or_trajectory_qualification':False,'optional_validation_reuse_qualified':False}
+ dump(output/'summary.json',summary);print(json.dumps(summary,sort_keys=True))
+if __name__=='__main__':main()

@@ -1,0 +1,118 @@
+"""Use the existing tree publisher with small pushes and a normal final merge."""
+from hashlib import sha256
+import importlib.util
+import json
+from pathlib import Path
+import subprocess
+
+HERE=Path(__file__).resolve().parent
+PAYLOAD=HERE/'publication'
+REPO=Path('/tmp/lift-origin-main-reconcile-private-A8hmZDEd/root')
+BRANCH='refs/heads/reconciliation/worktree-recovery-20261127-zYjieLmd'
+spec=importlib.util.spec_from_file_location('existing_publisher','/tmp/lift-origin-main-reconcile-private-A8hmZDEd/publish_archive.py')
+owner=importlib.util.module_from_spec(spec)
+spec.loader.exec_module(owner)
+
+def git(*args,data=None):
+    return owner.git(*args,data=data)
+
+def ref(name):
+    raw=git('ls-remote','origin',name).decode().split()
+    return raw[0] if raw else None
+
+def changes(rows):
+    result={}
+    for row in rows:
+        cursor=result
+        parts=row['path'].split('/')
+        for part in parts[:-1]:
+            cursor=cursor.setdefault(part,{})
+        cursor[parts[-1]]=row['blob']
+    return result
+
+def save(report):
+    (HERE/'batch-publication-progress.json').write_text(json.dumps(report,indent=2)+'\n')
+
+def push(commit,target):
+    result=subprocess.run(['git','-c','core.hooksPath=/dev/null','-c','http.version=HTTP/1.1','-c','http.postBuffer=268435456','-C',str(REPO),'push','origin',commit+':'+target],capture_output=True)
+    actual=ref(target)
+    return {'returncode':result.returncode,'stdout':result.stdout.decode(errors='replace'),'stderr':result.stderr.decode(errors='replace'),'remote_ref':actual,'accepted':actual==commit}
+
+def tree_paths(commit):
+    result={}
+    for raw in git('ls-tree','-r','-z',commit,'--','docs/reconciliation/worktree-main-reconciliation-20261127').split(b'\0'):
+        if raw:
+            meta,path=raw.split(b'\t',1)
+            result[path.decode()]=meta.decode().split()[-1]
+    return result
+
+def main():
+    assert ref(BRANCH) is None,'Dedicated recovery branch already exists; inspect saved progress before resuming.'
+    git('fetch','--no-tags','origin','main')
+    initial=git('rev-parse','origin/main').decode().strip()
+    baseline_paths=tree_paths(initial)
+    rows=[]
+    for path in sorted(PAYLOAD.rglob('*')):
+        if not path.is_file():
+            continue
+        assert not path.is_symlink()
+        raw=path.read_bytes()
+        relative=path.relative_to(PAYLOAD).as_posix()
+        assert relative.startswith(owner.PREFIXES) and len(raw)<95*1024**2
+        oid=git('hash-object','-w','--stdin',data=raw).decode().strip()
+        rows.append({'path':relative,'bytes':len(raw),'sha256':sha256(raw).hexdigest(),'blob':oid})
+    # Each encrypted part is at most 90MB. Other files share batches up to 75MB.
+    groups=[]
+    group=[]
+    total=0
+    for row in sorted(rows,key=lambda r:(r['bytes']<50_000_000,r['path'])):
+        if group and total+row['bytes']>75_000_000:
+            groups.append(group);group=[];total=0
+        group.append(row);total+=row['bytes']
+        if total>=75_000_000:
+            groups.append(group);group=[];total=0
+    if group:
+        groups.append(group)
+    report={'schema':'normal-batched-recovery-publication/v1','initial_main':initial,'recovery_ref':BRANCH,'payload_files':len(rows),'payload_bytes':sum(r['bytes'] for r in rows),'batch_count':len(groups),'batches':[],'main_attempts':[],'forced_push':False,'hosted_ci_dispatched':False}
+    parent=initial
+    tree=git('rev-parse',initial+'^{tree}').decode().strip()
+    for index,group in enumerate(groups):
+        tree=owner.merge_tree(tree,changes(group))
+        commit=git('commit-tree',tree,'-p',parent,'-m',f'Retain recovery payload batch {index+1}/{len(groups)} [skip ci]').decode().strip()
+        outcome=push(commit,BRANCH)
+        item={'index':index+1,'commit':commit,'parent':parent,'paths':len(group),'raw_bytes':sum(r['bytes'] for r in group),'push':outcome}
+        report['batches'].append(item);save(report)
+        print(json.dumps({'batch':index+1,'total_batches':len(groups),'raw_bytes':item['raw_bytes'],'commit':commit,'accepted':outcome['accepted'],'returncode':outcome['returncode']}),flush=True)
+        assert outcome['accepted'],outcome['stderr']
+        parent=commit
+    for row in rows:
+        raw=git('show',parent+':'+row['path'])
+        assert len(raw)==row['bytes'] and sha256(raw).hexdigest()==row['sha256']
+    report['all_staged_artifact_hashes_verified']=True
+    for attempt in range(4):
+        git('fetch','--no-tags','origin','main')
+        current=git('rev-parse','origin/main').decode().strip()
+        current_paths=tree_paths(current)
+        for row in rows:
+            actual=current_paths.get(row['path'])
+            assert actual in [baseline_paths.get(row['path']),row['blob']], 'Concurrent change within owned archive path: '+row['path']
+        merged=owner.merge_tree(git('rev-parse',current+'^{tree}').decode().strip(),changes(rows))
+        commit=git('commit-tree',merged,'-p',current,'-p',parent,'-m','Merge verified worktree and submodule recovery archives [skip ci]').decode().strip()
+        changed=git('diff-tree','--no-commit-id','--name-only','-r',current,commit).decode().splitlines()
+        assert set(changed)<={row['path'] for row in rows}
+        outcome=push(commit,'refs/heads/main')
+        report['main_attempts'].append({'commit':commit,'parent_main':current,'recovery_parent':parent,'changed_paths':len(changed),'push':outcome});save(report)
+        if outcome['accepted']:
+            report['published_main']=commit
+            report['recovery_branch_merged_as_parent']=True
+            report['all_payload_paths_verified']=True
+            save(report)
+            print(json.dumps({'published_main':commit,'paths':len(changed),'normal_merge':True,'remote_verified':True}),flush=True)
+            return
+        # A competing normal main publication can be reconciled without a force push.
+        if 'non-fast-forward' not in outcome['stderr'] and 'fetch first' not in outcome['stderr'] and 'cannot lock ref' not in outcome['stderr']:
+            raise RuntimeError(outcome['stderr'])
+    raise RuntimeError('Main continued advancing; all payload batches remain safely published on the recovery branch.')
+
+if __name__=='__main__':
+    main()

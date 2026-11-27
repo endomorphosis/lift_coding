@@ -1,0 +1,172 @@
+"""Freeze public-only six-event original-development sequences, without effects."""
+import argparse
+import json
+from pathlib import Path
+import sys
+import time
+
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+import repository_runtime_v2 as R
+
+INTEGRATED = HERE.parent
+EVALS = INTEGRATED.parent
+WORKSPACE = EVALS.parents[3]
+
+
+def save(path, value):
+    with Path(path).open("xb") as stream:
+        stream.write(R.canonical(value) + b"\n")
+
+
+def configurations(task_id):
+    common = {"schema": "ns-public-api-configuration/v1", "task_id": task_id}
+    if task_id.endswith("xmltodict"):
+        body = {"api": "xmltodict.parse", "xml": '<root xmlns:x="urn:x"><x:child id="1"/></root>'}
+        return [{**common, **body, "process_namespaces": True,
+                 "expected": {"root": {"@xmlns": {"x": "urn:x"}, "urn:x:child": {"@id": "1"}}}},
+                {**common, **body, "process_namespaces": False,
+                 "expected": {"root": {"@xmlns:x": "urn:x", "x:child": {"@id": "1"}}}}]
+    if task_id.endswith("pyparsing"):
+        body = {"api": "pyparsing.ParserElement.leave_whitespace", "leave_whitespace": True,
+                "matcher": "first=Char(nums); second=match_previous_expr(first); expression=first+':'+second",
+                "inputs": ["1:1", "1:2", "1:a"], "expected_matches": [True, False, False]}
+        return [{**common, **body, "recursive": True}, {**common, **body, "recursive": False}]
+    if task_id.endswith("oauthlib"):
+        body = {"api": "oauthlib.oauth2.rfc6749.endpoints.metadata.MetadataEndpoint", "endpoint": "authorization",
+                "endpoint_response_types": ["code"], "expected_response_types": ["code"],
+                "metadata_url": "https://example.invalid/.well-known/oauth-authorization-server"}
+        claims = {"issuer": "https://example.invalid", "authorization_endpoint": "https://example.invalid/authorize",
+                  "token_endpoint": "https://example.invalid/token", "revocation_endpoint": "https://example.invalid/revoke",
+                  "introspection_endpoint": "https://example.invalid/introspect"}
+        return [{**common, **body, "claims": claims},
+                {**common, **body, "claims": {**claims, "response_types_supported": ["code"]}}]
+    if task_id.endswith("click"):
+        body = {"api": "click.Option.show_choices", "choices": ["alpha-value", "beta-value"],
+                "case_sensitive": True, "metavar": None, "argv": ["--help"]}
+        return [{**common, **body, "show_choices": False, "expect_choices_visible": False},
+                {**common, **body, "show_choices": True, "expect_choices_visible": True}]
+    raise ValueError("unknown enrolled family")
+
+
+def event_templates(task_id, configs, comment):
+    initial, changed = [R.sha(R.canonical(value)) for value in configs]
+    names = ["objective_plan", "repair", "unchanged_revisit", "public_comment", "api_configuration", "publication_recovery"]
+    rows = []
+    for index, name in enumerate(names):
+        rows.append({"event_index": index + 1, "event_name": name, "task_id": task_id,
+                     "previous_event_index": index or None,
+                     "configuration_sha256": changed if index >= 4 else initial,
+                     "source_input": "public_base" if index < 2 else "previous_event_accepted_source_else_previous_public_input",
+                     "outstanding_repair_obligation_retained": True,
+                     "failed_candidate_may_become_input": False,
+                     "reference_source_injection": False,
+                     "provider_policy": "shared finite trajectory budget; no forced baseline call",
+                     "required_original_acceptance": index > 0})
+    rows[0].update(action="acquire_and_compile_public_objective",
+                   plan_authority="explicit public obligation projection; inferred additions require separate validation",
+                   publication_required=False, independent_plan_coverage_qualified=False)
+    rows[1].update(action="bounded_repair_with_independent_scoring", publication_required=True)
+    rows[2].update(action="ordinary_current_source_check_available_to_every_arm", source_mutation=None,
+                   successful_parent_branch="check exact accepted bytes",
+                   failed_parent_branch="check unchanged original input and retain repair failure",
+                   publication_required=True)
+    rows[3].update(action="append_public_comment_and_revalidate", public_source_transform=comment,
+                   public_input_advance_even_if_repair_failed=True, publication_required=True)
+    rows[4].update(action="apply_exact_api_configuration_and_revalidate", source_mutation=None,
+                   previous_configuration_sha256=initial, public_input_advance_even_if_repair_failed=True,
+                   original_criteria_and_complete_objective_unchanged=True, publication_required=True)
+    rows[5].update(action="validate_interrupt_publish_recover_and_stale_continuation", publication_required=True,
+                   subinvocations=[
+                       {"id": "capture_parent_and_validate", "source": "current accepted else previous public input",
+                        "freeze_expected_parent_before_first_effect": True},
+                       {"id": "publish_interrupt", "fault": "after durable validated seal before parent CAS",
+                        "precondition": "complete passing current acceptance and admitted publication evidence",
+                        "unreached": "retain fault_boundary_unreached; never synthesize a passing candidate"},
+                       {"id": "fresh_recovery", "source": "same retained operation identities and pending seal",
+                        "policy": "reconcile known completions; unknown effects stay unknown and are not repeated"},
+                       {"id": "stale_parent_branch", "source": "captured pre-publication parent source",
+                        "expected_parent": "captured pre-publication parent", "actual_parent": "freshly read recovered root",
+                        "precondition": "recovery advanced root and branch independently validates",
+                        "expected_if_reached": "native and local stale-parent rejection",
+                        "unreached": "retain stale_boundary_unreached with failed dependency"},
+                       {"id": "fresh_parent_continuation", "source": "actual recovered accepted root",
+                        "precondition": "a recovered accepted root exists",
+                        "unreached": "retain downstream_unresolved; preserve all source and failure receipts"}],
+                   subinvocations_are_not_independent_events=True)
+    return rows
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    output = args.output.resolve()
+    output.mkdir(parents=True, exist_ok=False)
+    objective_path = INTEGRATED / "public_contracts_v2/objectives-v1.json"
+    py_path = INTEGRATED / "public_issue_reproduction_v1/objective.json"
+    registry_path = EVALS / "next_stage_candidate_registry.json"
+    explicit = json.loads(objective_path.read_bytes())
+    assert R.sha(objective_path.read_bytes()) == "072fa95465ddb62a29e6b89fb44198eb50cfa1f4f035264b388d595614cb8dff"
+    py = json.loads(py_path.read_bytes())
+    objectives = {row["task_id"]: row for row in explicit["tasks"]}
+    objectives[py["task_id"]] = py
+    tasks = []
+    for original in json.loads(registry_path.read_bytes())["historical_candidates"][:4]:
+        task_id = original["task_id"]
+        objective = objectives[task_id]
+        statement = objective.get("new_public_objective", objective.get("statement"))
+        tree = WORKSPACE / original["public_tree"]["path"]
+        assert tree.is_dir(), str(tree)
+        inventory = R.inventory(tree)
+        package = {"ns-hist-01-xmltodict": "xmltodict.py", "ns-hist-02-pyparsing": "pyparsing/",
+                   "ns-hist-03-oauthlib": "oauthlib/", "ns-hist-04-click": "src/click/"}[task_id]
+        read_paths = [row["path"] for row in inventory["entries"] if row["kind"] == "file"
+                      and row["path"].endswith(".py") and (row["path"] == package or row["path"].startswith(package))]
+        policy = R.policy_for(tree, read_paths, original["admitted_paths"], mode_policy="preserve_base_modes")
+        configs = configurations(task_id)
+        directory = output / task_id
+        directory.mkdir()
+        for index, config in enumerate(configs):
+            save(directory / ("configuration_" + str(index) + ".json"), config)
+        save(directory / "source_inventory.json", inventory)
+        save(directory / "source_policy.json", policy)
+        save(directory / "objective_record.json", objective)
+        with (directory / "objective.txt").open("xb") as stream:
+            stream.write(statement.encode())
+        comment = {"kind": "append_exact_utf8", "path": original["admitted_paths"][0],
+                   "bytes_utf8": "\n# Public development continuation: source identity must be revalidated.\n",
+                   "authority": "new author-specified comment on admitted repair surface; not an upstream bug fix",
+                   "application_count": 1, "preserve_prior_bytes": True}
+        full_record = {key: value for key, value in objective.items() if key != "objective_sha256"}
+        if "objective_sha256" in objective:
+            assert R.sha(R.canonical(full_record)) == objective["objective_sha256"]
+        task = {"task_id": task_id, "base_commit": original["pre_fix_commit"], "source_root": str(tree),
+                "source_policy": policy, "source_tree_sha256": inventory["tree_sha256"],
+                "objective_record_sha256": R.sha(R.canonical(full_record)),
+                "objective_text_sha256": R.sha(statement.encode()), "objective_record_file_sha256": R.sha((directory / "objective_record.json").read_bytes()),
+                "objective_authority": objective.get("authority", objective.get("authority_scope")),
+                "configurations": configs, "events": event_templates(task_id, configs, comment)}
+        tasks.append(task)
+    corpus = {"schema": "ns-original-four-family-operational-corpus/v1", "created_at_ns": time.time_ns(),
+              "development_only": True, "ready_for_provider_dispatch": False,
+              "input_sha256": {str(path): R.sha(path.read_bytes()) for path in
+                               (Path(__file__), HERE / "repository_runtime_v2.py", objective_path, py_path, registry_path, EVALS / "next_stage_protocol.md")},
+              "tasks": tasks, "arms": ["A", "B", "C", "D"], "cache_profiles": ["cold", "warm"],
+              "primary_matrix": {"families": 4, "trajectories": 32, "events_per_trajectory": 6, "event_observations": 192},
+              "first_tranche": {"task_ids": [task["task_id"] for task in tasks[:2]], "arms": ["A", "B", "C", "D"], "cache_profiles": ["cold"], "trajectories": 8},
+              "one_factor_warm_controls": ["B_additive_context", "D_without_symbolic_routing", "D_without_reuse", "D_without_persistent_semantic_state", "D_without_procedures", "D_fixed_complete_template", "D_without_world_memory"],
+              "provisional_provider_ceiling": {"per_trajectory": 4, "first_tranche": 32, "entire_primary_and_one_factor_matrix": 240,
+                                                "not_a_dispatch_freeze": True, "includes_prime_and_all_purposes": True},
+              "acceptance": "Original visible and private criteria plus complete public objective contracts and exact current API configuration; configured control success alone cannot satisfy the original repair.",
+              "failure_branch": "Never adopt an unaccepted candidate. Use the immediately preceding event's accepted source if that event accepted, otherwise its exact public input (which already carries earlier accepted edits and public transformations). Keep the accepted publication pointer separate; it must not roll back a later public comment/config advance after a failed event. Keep original failed repair and outstanding obligations in every downstream record.",
+              "priming": "Separate empty namespaces per arm/cache trajectory; warm prime is frozen and metered before restoration, including all provider calls and runtime work.",
+              "open_gates": ["generic transport offline qualification", "configuration-aware private scorer qualification", "generic caller integration", "qualified lifecycle reuse and actual procedure consumption", "applicable native publication and recovery qualification", "complete exact source/call/order freeze and root review"],
+              "provider_calls": 0, "scorer_calls": 0, "source_mutations": 0}
+    save(output / "corpus.json", corpus)
+    save(output / "artifact_manifest.json", {str(path.relative_to(output)): R.sha(path.read_bytes()) for path in sorted(output.rglob("*")) if path.is_file()})
+    print(json.dumps({"output": str(output), "corpus_sha256": R.sha((output / "corpus.json").read_bytes()), "families": len(tasks), "events": sum(len(t["events"]) for t in tasks), "provider_calls": 0}))
+
+
+if __name__ == "__main__":
+    main()

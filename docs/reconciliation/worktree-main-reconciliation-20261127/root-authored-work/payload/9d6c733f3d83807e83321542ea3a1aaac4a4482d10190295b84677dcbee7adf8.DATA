@@ -1,0 +1,28 @@
+"""Read-only declared-response controls for transport attribution in the auditor."""
+import argparse,copy,hashlib,importlib.util,json,sys
+from pathlib import Path
+from unittest.mock import patch
+
+def main():
+    parser=argparse.ArgumentParser();parser.add_argument('--profile',type=Path,required=True);parser.add_argument('--output',type=Path,required=True);args=parser.parse_args()
+    script=Path(__file__).with_name('audit_repository_run_v2.py');spec=importlib.util.spec_from_file_location('audit_under_test',script);audit=importlib.util.module_from_spec(spec);spec.loader.exec_module(audit)
+    profile=json.loads(args.profile.read_text());state=Path(profile['output_root']);target=state/'events'/next(e['event_id'] for e in profile['events'] if e['arm']=='D' and e['parent_event'] is None)/'result.json'
+    original=json.loads(target.read_text());assert len(original['provider_receipts'])==1
+    args.output.mkdir(exist_ok=False);rows=[];actual_read=Path.read_text
+    def run_case(name,change,expected):
+        substituted=copy.deepcopy(original);change(substituted)
+        def read(path,*a,**kw):
+            return json.dumps(substituted) if path.resolve()==target.resolve() else actual_read(path,*a,**kw)
+        with patch.object(Path,'read_text',read),patch.object(sys,'argv',[str(script),'--profile',str(args.profile),'--output',str(args.output/(name+'.json')),'--partial']):
+            try: audit.main()
+            except AssertionError as error:
+                assert str(error).startswith(expected),(name,str(error));rows.append({'name':name,'passed':True,'rejection':str(error)})
+            else: raise AssertionError(name+' was not rejected')
+    run_case('changed_embedded_usage',lambda value:value['provider_receipts'][0]['normalized_usage'].update(total_tokens=1),'embedded_transport_digest_join:')
+    run_case('duplicate_embedded_call',lambda value:value['provider_receipts'].append(copy.deepcopy(value['provider_receipts'][0])),'embedded_receipt_unique:')
+    run_case('omitted_embedded_call',lambda value:value.update(provider_receipts=[]),'event_receipt_full_coverage:')
+    run_case('misreported_slots',lambda value:value.update(provider_slots_used=0),'reported_event_slots:')
+    run_case('misreported_known_posts',lambda value:value.update(provider_calls=0),'reported_event_posts:')
+    result={'schema':'ns-repository-auditor-declared-response-controls@1','passed':True,'checks':rows,'auditor_sha256':hashlib.sha256(script.read_bytes()).hexdigest(),'profile_sha256':hashlib.sha256(args.profile.read_bytes()).hexdigest(),'declared_parsed_artifact_substitution':True,'actual_artifact_mutations':0,'provider_calls':0,'scorer_calls':0,'scope':'Inner audit join controls use an in-process read interceptor; original retained artifacts and their durable digests are unchanged. This is not native execution or adversarial integrity evidence.'}
+    (args.output/'summary.json').write_text(json.dumps(result,indent=2,sort_keys=True)+'\n');print(json.dumps({'passed':True,'checks':len(rows),'provider_calls':0,'scorer_calls':0}))
+if __name__=='__main__':main()

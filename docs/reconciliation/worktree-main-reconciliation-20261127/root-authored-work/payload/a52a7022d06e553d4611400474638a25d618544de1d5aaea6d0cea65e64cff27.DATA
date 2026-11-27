@@ -1,0 +1,28 @@
+"""Two single-attempt checks of prospective public semantic correction."""
+import hashlib,importlib.util,json,os,subprocess,time
+from pathlib import Path
+H=Path(__file__).resolve().parent;O=H/'oauth_public_controls_v3';D=H/'public_contract_v3';UID='ns-hist-03-oauthlib'
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def dump(p,x):
+ with p.open('x') as f:f.write(json.dumps(x,sort_keys=True,indent=2)+'\n')
+def main():
+ spec=importlib.util.spec_from_file_location('controls',H/'run_public_contract_controls_v2.py');c=importlib.util.module_from_spec(spec);spec.loader.exec_module(c)
+ O.mkdir();private=O/'curator_custody';private.mkdir(mode=0o700)
+ driver=D/'frozen_runner.py';freeze=json.loads((D/'freeze.json').read_text());assert sha(driver)==freeze['driver_sha256'];assert sha(D/'objectives.json')==freeze['objective_file_sha256']
+ obj=json.loads((D/'objectives.json').read_text());cases=next(x for x in obj['tasks'] if x['task_id']==UID)['public_examples'];prep=json.loads((H/'preparation-summary-v4.json').read_text())
+ dump(O/'freeze.json',{'schema':'ns-oauth-public-v3-control-execution/v1','frozen_at_ns':time.time_ns(),'runner_sha256':sha(Path(__file__)),'contract_freeze_sha256':sha(D/'freeze.json'),'public_driver_sha256':sha(driver),'max_public_processes':2,'max_native_calls':0,'max_provider_calls':0,'automatic_retries':0,'controls':[{'control':'unfixed','expected_passed':1},{'control':'unchanged_reference_source_projection','expected_passed':4}],'image_id':prep['image_id'],'timeout_seconds':60})
+ rows=[]
+ for control,sub,expected in [('unfixed','unfixed_source',1),('unchanged_reference_source_projection','reference_source',4)]:
+  out=private/control;out.mkdir(mode=0o700);source=H/'curator_custody'/UID/'materialization_v4'/sub;before=c.inventory(source)
+  dump(out/'freeze.json',{'driver_sha256':sha(driver),'tasks':{UID:{'tree':'/candidate','inventory':before}},'cases':{UID:cases}})
+  argv=['docker','--host=unix:///var/run/docker.sock','run','--rm','--network=none','--read-only','--cap-drop=ALL','--security-opt=no-new-privileges','--cpus=1','--memory=2g','--pids-limit=32','--user',str(os.getuid())+':'+str(os.getgid()),'--tmpfs','/tmp:rw,nosuid,nodev,size=268435456','--mount','type=bind,src='+str(source)+',dst=/candidate,readonly','--mount','type=bind,src='+str(driver)+',dst=/driver/a/b/c/d/e/driver.py,readonly','--mount','type=bind,src='+str(out)+',dst=/results','--workdir=/candidate','--entrypoint=/usr/bin/env',prep['image_id'],'-i','HOME=/tmp','PATH=/usr/local/bin:/usr/bin:/bin','PYTHONDONTWRITEBYTECODE=1','python3','-I','-B','/driver/a/b/c/d/e/driver.py','--run','/results','--worker',UID]
+  dump(out/'dispatch_intent.json',{'control':control,'started_at_ns':time.time_ns(),'freeze_sha256':sha(O/'freeze.json')});t=time.monotonic()
+  with (out/'stdout.private').open('xb') as stdout,(out/'stderr.private').open('xb') as stderr:
+   try:r=subprocess.run(argv,stdout=stdout,stderr=stderr,timeout=60);rc=r.returncode;timed=False
+   except subprocess.TimeoutExpired:rc=None;timed=True
+  result=json.loads((out/(UID+'.json')).read_text()) if rc==0 else None
+  receipt={'control':control,'returncode':rc,'timed_out':timed,'elapsed_seconds':time.monotonic()-t,'cases':result['cases'] if result else 0,'passed':result['passed'] if result else 0,'expected_passed':expected,'source_unchanged':c.inventory(source)==before,'stdout_sha256':sha(out/'stdout.private'),'stderr_sha256':sha(out/'stderr.private'),'result_sha256':sha(out/(UID+'.json')) if result else None}
+  receipt['matched_expectation']=rc==0 and not timed and receipt['source_unchanged'] and receipt['cases']==4 and receipt['passed']==expected
+  dump(out/'receipt.json',receipt);rows.append(receipt);print(json.dumps(receipt),flush=True)
+ dump(O/'summary.json',{'schema':'ns-oauth-prospective-public-v3-qualification/v1','qualified':all(x['matched_expectation'] for x in rows),'receipts':rows,'freeze_sha256':sha(O/'freeze.json'),'objective_file_sha256':sha(D/'objectives.json'),'oauth_objective_record_sha256':freeze['oauth_objective_record_sha256'],'oauth_objective_text_sha256':freeze['oauth_objective_text_sha256'],'public_processes':len(rows),'native_grader_calls':0,'provider_calls':0,'prior_v2_reference_passed':3,'prior_v2_reference_cases':4,'prior_exact_key_diagnostic_retained':True,'original_acceptance_unchanged':True,'prior_supplement_original_hidden_failure_retained':True})
+if __name__=='__main__':main()

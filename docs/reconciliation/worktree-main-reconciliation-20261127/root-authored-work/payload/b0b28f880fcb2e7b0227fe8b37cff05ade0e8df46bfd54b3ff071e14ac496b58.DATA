@@ -1,0 +1,366 @@
+"""Twenty source-only control groups; root alone may run these in isolation.
+
+Fixtures are immutable caller buffers.  The tests never import the ranker.
+"""
+import copy
+import json
+import os
+from pathlib import Path
+
+import pytest
+
+import objective_prefix_decoder as d
+
+
+def wire(value):
+    return json.dumps(value, sort_keys=True, separators=(',', ':')).encode('utf-8')
+
+
+def scalar(n=0, den=1):
+    return {'kind': 'scalarLiteral', 'ratio': {'numerator': str(n), 'denominator': str(den)},
+            'type': {'kind': 'scalar'}}
+
+
+def var(name, kind='scalar', **dimensions):
+    return {'kind': 'var', 'name': name, 'type': {'kind': kind, **dimensions}}
+
+
+def op(operator, *arguments):
+    node = {'kind': 'scalarOp', 'operator': operator, 'arguments': list(arguments), 'type': {'kind': 'scalar'}}
+    if operator == 'ifNonneg':
+        node.update(syntax_policy='both_branches_checked', evaluation_policy='only_selected_branch')
+    return node
+
+
+def reject(reason, node, scope=None, **keywords):
+    with pytest.raises(d.DecodeRefusal) as error:
+        d.decode_generic_tree(wire(node), {} if scope is None else scope, **keywords)
+    assert error.value.reason_code == reason
+
+
+def walk(value):
+    if type(value) is dict:
+        if 'kind' in value:
+            yield value
+        for child in value.values():
+            yield from walk(child)
+    elif type(value) is list:
+        for child in value:
+            yield from walk(child)
+
+
+@pytest.fixture(scope='module')
+def buffers():
+    # The root runner supplies exact immutable held copies, not project config.
+    keys = ('RANKER_PREFIX_DRAFT', 'RANKER_AST_SOURCE', 'RANKER_PREFIX_BINDINGS',
+            'RANKER_PREFIX_RECEIPT', 'RANKER_PREFIX_COMPILER')
+    return tuple(Path(os.environ[key]).read_bytes() for key in keys)
+
+
+@pytest.fixture(scope='module')
+def actual(buffers):
+    return d.decode_source_bound_prefix(*buffers)
+
+
+@pytest.fixture(scope='module')
+def draft(buffers):
+    return d.parse_bounded_json(buffers[0])
+
+
+def test_01_actual_complete_source_join(actual):
+    assert actual['original_source_rejoined'] is True
+    assert actual['same_buffer_compiler_receipt_rejoined'] is True
+    assert actual['source_binding_records_rejoined'] == 17
+    assert actual['numeric_assignments_decoded'] == 5
+    assert actual['source_context_statements_rejoined'] == 7
+    assert actual['actual_numeric_coordinates_supplied'] == 0
+    assert actual['operation_counts'] == {'letBind': 5, 'var': 31, 'scalarLiteral': 7,
+        'scalarOp': 26, 'mapRows': 1, 'mapVector': 2, 'zipMap': 2, 'zipRowsMap': 1,
+        'rangeMap': 1, 'indexVector': 2, 'length': 2, 'natToScalar': 2,
+        'fsumExact': 4, 'prefixRecord': 1}
+
+
+def test_02_all_exact_buffers_refuse_substitution(buffers):
+    for i, raw in enumerate(buffers):
+        altered = list(buffers)
+        altered[i] = raw[:-1] + bytes((raw[-1] ^ 1,))
+        with pytest.raises(d.DecodeRefusal) as error:
+            d.decode_source_bound_prefix(*altered)
+        assert error.value.reason_code == 'inputPinMismatch'
+
+
+def test_03_duplicate_keys_and_non_json_numbers():
+    for raw, reason in ((b'{"kind":"var","kind":"scalarLiteral"}', 'duplicateKey'),
+                        (b'{"x":NaN}', 'schema'), (b'{"x":Infinity}', 'schema'),
+                        (b'{"x":1.0}', 'schema')):
+        with pytest.raises(d.DecodeRefusal) as error:
+            d.parse_bounded_json(raw)
+        assert error.value.reason_code == reason
+
+
+def test_04_resource_bounds_before_recursive_decode():
+    for raw in (b' ' * (d.MAX_JSON_BYTES + 1), b'[' * 97 + b'0' + b']' * 97,
+                wire(['x'] * (d.MAX_JSON_NODES + 1)), wire('x' * (d.MAX_STRING_BYTES + 1)),
+                b'{"huge":' + b'9' * 80 + b'}'):
+        with pytest.raises(d.DecodeRefusal) as error:
+            d.parse_bounded_json(raw)
+        assert error.value.reason_code == 'budget'
+    cycle = []
+    cycle.append(cycle)
+    with pytest.raises(d.DecodeRefusal) as error:
+        d.canonical_bytes(cycle)
+    assert error.value.reason_code == 'budget'
+
+
+def test_05_canonical_ratios_and_binary64_l2():
+    result = d.decode_generic_tree(wire(scalar(5764607523034235, 576460752303423488)), {})
+    assert result['tree']['ratio'] == (5764607523034235, 576460752303423488)
+    for n, den in (('01', '1'), ('-0', '1'), ('1', '0'), ('2', '4'), ('0', '2'),
+                   ('1', '-1'), ('+1', '1'), ('1', '01')):
+        node = scalar()
+        node['ratio'] = {'numerator': n, 'denominator': den}
+        reject('ratioShape', node)
+    huge = scalar()
+    huge['ratio']['numerator'] = str(1 << 256)
+    reject('budget', huge)
+
+
+def test_06_unknown_and_wrong_type_variable():
+    reject('unknownName', var('missing'))
+    reject('unknownName', var('math'))
+    reject('typeMismatch', var('x', 'nat'), {'x': {'kind': 'scalar'}})
+    reject('nameShape', var('x"; sorry'))
+    for dimension in (True, -1, 4097):
+        reject('dimensionShape', var('v', 'vector', length=dimension),
+               {'v': {'kind': 'vector', 'length': dimension}})
+
+
+def test_07_all_scalar_operator_arities_and_eager_syntax():
+    for operator, arity in d.OPERATORS.items():
+        d.decode_generic_tree(wire(op(operator, *[scalar(1)] * arity)), {})
+        reject('wrongArity', op(operator, *[scalar(1)] * (arity - 1)))
+    reject('unknownName', op('ifNonneg', scalar(1), scalar(2), var('invalid_dead_branch')))
+    # Domain errors are evaluator work; a syntactically valid division by zero
+    # in a dead branch must remain representable, not executed by this decoder.
+    d.decode_generic_tree(wire(op('ifNonneg', scalar(1), scalar(2), op('div', scalar(1), scalar(0)))), {})
+
+
+def test_08_let_rhs_scope_and_active_binder_roles():
+    node = {'kind': 'letBind', 'binder': 'a', 'value': scalar(3), 'body': var('a'),
+            'evaluation_order': 'rhs_then_body', 'type': {'kind': 'scalar'}}
+    d.decode_generic_tree(wire(node), {})
+    bad = copy.deepcopy(node)
+    bad['value'] = var('a')
+    reject('unknownName', bad)
+    reject('binderRole', node, {'a': {'kind': 'scalar'}})
+    bad = copy.deepcopy(node)
+    bad['binder'] = 'L2'
+    reject('binderRole', bad)
+
+
+def test_09_map_vector_and_rows_recompute_binder_types():
+    scope = {'v': {'kind': 'vector', 'length': 3}, 'm': {'kind': 'matrix', 'rows': 2, 'columns': 3}}
+    node = {'kind': 'mapVector', 'source': var('v', 'vector', length=3), 'binder': 'x',
+            'body': var('x'), 'order': 'ascending', 'type': {'kind': 'vector', 'length': 3}}
+    d.decode_generic_tree(wire(node), scope)
+    bad = copy.deepcopy(node)
+    bad['body'] = var('x', 'vector', length=3)
+    reject('typeMismatch', bad, scope)
+    rows = {'kind': 'mapRows', 'source': var('m', 'matrix', rows=2, columns=3), 'binder': 'row',
+            'body': {'kind': 'fsumExact', 'values': var('row', 'vector', length=3),
+                     'order': 'ascending_exact_real_addition', 'type': {'kind': 'scalar'}},
+            'order': 'ascending', 'type': {'kind': 'vector', 'length': 2}}
+    d.decode_generic_tree(wire(rows), scope)
+    rows['type']['length'] = 3
+    reject('typeMismatch', rows, scope)
+
+
+def test_10_shorter_zip_and_row_zip_dimensions():
+    scope = {'a': {'kind': 'vector', 'length': 2}, 'b': {'kind': 'vector', 'length': 5},
+             'm': {'kind': 'matrix', 'rows': 5, 'columns': 7}}
+    node = {'kind': 'zipMap', 'left': var('a', 'vector', length=2), 'right': var('b', 'vector', length=5),
+            'binders': ['x', 'y'], 'body': op('mul', var('x'), var('y')),
+            'truncation': 'minimum_length', 'type': {'kind': 'vector', 'length': 2}}
+    assert d.decode_generic_tree(wire(node), scope)['tree']['inferred_type'] == ('vector', 2)
+    node['type']['length'] = 5
+    reject('typeMismatch', node, scope)
+    node.update(kind='zipRowsMap', right=var('m', 'matrix', rows=5, columns=7),
+                body={'kind': 'fsumExact', 'values': var('y', 'vector', length=7),
+                      'order': 'ascending_exact_real_addition', 'type': {'kind': 'scalar'}},
+                type={'kind': 'vector', 'length': 2})
+    d.decode_generic_tree(wire(node), scope)
+    node['binders'] = ['x', 'x']
+    reject('binderRole', node, scope)
+
+
+def test_11_range_requires_rejoined_vector_and_exact_bounds():
+    scope = {'w': {'kind': 'vector', 'length': 3}}
+    node = {'kind': 'rangeMap', 'length': 3, 'index_bound': 3, 'binder': 'i',
+            'body': {'kind': 'indexVector', 'vector': var('w', 'vector', length=3),
+                     'index': var('i', 'index', bound=3), 'type': {'kind': 'scalar'}},
+            'order': 'ascending_zero_to_bound_exclusive', 'type': {'kind': 'vector', 'length': 3}}
+    reject('rangeProvenance', node, scope)
+    result = d.decode_generic_tree(wire(node), scope, range_sources={'$': 'w'})
+    assert result['tree']['range_source'] == 'w'
+    assert result['original_source_rejoined'] is False
+    bad = copy.deepcopy(node)
+    bad['length'] = 4
+    reject('dimensionMismatch', bad, scope, range_sources={'$': 'w'})
+    reject('rangeProvenance', node, scope, range_sources={'$': 'missing'})
+    reject('rangeProvenance', scalar(), {}, range_sources={'$': 'w'})
+
+
+def test_12_fin_index_bound_and_nat_index_refusal():
+    scope = {'w': {'kind': 'vector', 'length': 3}, 'i': {'kind': 'index', 'bound': 3},
+             'j': {'kind': 'index', 'bound': 4}, 'n': {'kind': 'nat'}}
+    node = {'kind': 'indexVector', 'vector': var('w', 'vector', length=3),
+            'index': var('i', 'index', bound=3), 'type': {'kind': 'scalar'}}
+    d.decode_generic_tree(wire(node), scope)
+    for bad_index in (var('j', 'index', bound=4), var('n', 'nat')):
+        bad = copy.deepcopy(node)
+        bad['index'] = bad_index
+        reject('indexBound', bad, scope)
+
+
+def test_13_lengths_natural_casts_and_empty_vectors():
+    scope = {'v': {'kind': 'vector', 'length': 0}, 'm': {'kind': 'matrix', 'rows': 2, 'columns': 5}}
+    for source, dimension in ((var('v', 'vector', length=0), 0), (var('m', 'matrix', rows=2, columns=5), 2)):
+        node = {'kind': 'length', 'source': source, 'type': {'kind': 'nat'}}
+        assert d.decode_generic_tree(wire(node), scope)['tree']['dimension'] == dimension
+        cast = {'kind': 'natToScalar', 'value': node, 'type': {'kind': 'scalar'}}
+        d.decode_generic_tree(wire(cast), scope)
+    reject('typeMismatch', {'kind': 'natToScalar', 'value': scalar(), 'type': {'kind': 'scalar'}})
+    reject('typeMismatch', {'kind': 'length', 'source': scalar(), 'type': {'kind': 'nat'}})
+
+
+def test_14_exact_sum_preserves_empty_and_order_contract():
+    node = {'kind': 'fsumExact', 'values': var('v', 'vector', length=0),
+            'order': 'ascending_exact_real_addition', 'type': {'kind': 'scalar'}}
+    d.decode_generic_tree(wire(node), {'v': {'kind': 'vector', 'length': 0}})
+    node['order'] = 'math.fsum'
+    reject('evaluationPolicy', node, {'v': {'kind': 'vector', 'length': 0}})
+
+
+def test_15_generic_ordered_record_names_are_data():
+    fields = [{'name': 'arbitrary', 'value': scalar(2)}, {'name': 'other', 'value': scalar(3)}]
+    annotation = {'kind': 'record', 'fields': [{'name': f['name'], 'type': {'kind': 'scalar'}} for f in fields]}
+    node = {'kind': 'prefixRecord', 'fields': fields, 'type': annotation}
+    assert d.decode_generic_tree(wire(node), {})['tree']['inferred_type'] == (
+        'record', (('arbitrary', ('scalar',)), ('other', ('scalar',))))
+    bad = copy.deepcopy(node)
+    bad['fields'][1]['name'] = 'arbitrary'
+    reject('recordShape', bad)
+    bad = copy.deepcopy(node)
+    bad['type']['fields'].reverse()
+    reject('typeMismatch', bad)
+
+
+def test_16_closed_unknown_fields_and_forbidden_semantic_opcodes():
+    for opcode in ('objective', 'gradient', 'loss', 'dot', 'convergence', 'meanExact'):
+        reject('unsupportedOpcode', {'kind': opcode, 'type': {'kind': 'scalar'}})
+    bad = scalar()
+    bad['proof'] = 'assumed'
+    reject('schema', bad)
+    bad = scalar()
+    bad['type']['cached'] = True
+    reject('schema', bad)
+
+
+def test_17_policy_and_record_marker_cannot_grant_authority():
+    node = op('ifNonneg', scalar(1), scalar(2), scalar(3))
+    node['evaluation_policy'] = 'evaluate_both'
+    reject('evaluationPolicy', node)
+    record = {'kind': 'prefixRecord', 'fields': [],
+              'type': {'kind': 'numericPrefixRecord', 'rows': 4, 'columns': 80}}
+    reject('typeMismatch', record)
+    result = d.decode_generic_tree(wire(record), {}, record_shape=(4, 80))
+    assert result['original_source_rejoined'] is False
+    assert result['kernel_checked'] is False
+
+
+def test_18_foundation_emits_mixed_types_and_ordered_prefix(draft):
+    check_every_actual_type_annotation_recomputed(draft)
+    length = {'kind': 'length', 'source': var('m', 'matrix', rows=2, columns=3), 'type': {'kind': 'nat'}}
+    cast = {'kind': 'natToScalar', 'value': length, 'type': {'kind': 'scalar'}}
+    literal = d.emit_generic_foundation(wire(cast), {'m': {'kind': 'matrix', 'rows': 2, 'columns': 3}})
+    assert 'SourceTerm.lengthMatrix' in literal['text']
+    assert '(.matrix 2 3)' in literal['text']
+    assert literal['kernel_checked'] is False
+    field = {'name': 'result', 'value': var('x')}
+    record_type = {'kind': 'record', 'fields': [{'name': 'result', 'type': {'kind': 'scalar'}}]}
+    prefix = {'kind': 'letBind', 'binder': 'x', 'value': scalar(7), 'evaluation_order': 'rhs_then_body',
+              'body': {'kind': 'prefixRecord', 'fields': [field], 'type': record_type}, 'type': record_type}
+    literal = d.emit_generic_foundation(wire(prefix), {})
+    assert literal['source_prefix_literal'] is True
+    assert 'SourcePrefix.letBind "x"' in literal['text']
+    assert 'SourceFields.cons (name := "result")' in literal['text']
+
+
+def test_19_full_receipt_comparison_and_actual_supported_projections(buffers, draft):
+    check_forged_whole_draft_and_receipt_refuse_before_adapter(buffers)
+    forged = copy.deepcopy(draft)
+    forged['checked_bindings']['coordinate_range']['AST_sha256'] = '0' * 64
+    with pytest.raises(d.DecodeRefusal) as error:
+        d._recompile_same_buffers(buffers[4], buffers[1], buffers[2], forged)
+    assert error.value.reason_code == 'receiptForgery'
+    emitted = d.emit_source_bound_supported_projections(*buffers)
+    assert emitted['projection_count'] == 4
+    assert [x['name'] for x in emitted['projections']] == [
+        'loss_denominator', 'gradient_denominator', 'weight_coordinate', 'source_L2']
+    assert '(5764607523034235 : ℚ) / 576460752303423488' in emitted['text']
+    assert 'SourceTerm.lengthMatrix' in emitted['text'] and 'SourceTerm.indexVector' in emitted['text']
+    assert emitted['complete_original_prefix_emitted'] is False
+    assert emitted['kernel_checked'] is False
+
+
+def test_20_whole_prefix_refuses_and_mutable_authority_stamps_are_not_inputs(actual, draft):
+    check_bounded_host_success_keeps_all_broad_claims_false(actual)
+    scope = {'weights': {'kind': 'vector', 'length': 80},
+             'differences': {'kind': 'matrix', 'rows': 4, 'columns': 80}}
+    with pytest.raises(d.DecodeRefusal) as error:
+        d.emit_generic_foundation(wire(draft['tree']), scope, record_shape=(4, 80),
+                                 range_sources={'$.body.body.body.body.value': 'weights'})
+    assert error.value.reason_code == 'kernelUnsupported'
+    forged = copy.deepcopy(actual)
+    forged.update(kernel_checked=True, proof_authority=True, planner_activation=True)
+    with pytest.raises(d.DecodeRefusal):
+        d.emit_generic_foundation(forged, scope)
+    assert all(actual[k] is False for k in d.AUTHORITY)
+
+
+def check_forged_whole_draft_and_receipt_refuse_before_adapter(buffers):
+    for i in (0, 3):
+        changed = list(buffers)
+        forged = d.parse_bounded_json(changed[i])
+        forged['proof_authority'] = True
+        forged['kernel_checked'] = True
+        changed[i] = wire(forged) + b'\n'
+        with pytest.raises(d.DecodeRefusal) as error:
+            d.decode_source_bound_prefix(*changed)
+        assert error.value.reason_code == 'inputPinMismatch'
+
+
+def check_every_actual_type_annotation_recomputed(draft):
+    scope = {'weights': {'kind': 'vector', 'length': 80}, 'differences': {'kind': 'matrix', 'rows': 4, 'columns': 80}}
+    paths = {'$.body.body.body.body.value': 'weights'}
+    for kind in ('scalar', 'vector', 'matrix', 'index', 'nat'):
+        changed = copy.deepcopy(draft['tree'])
+        target = next(node for node in walk(changed) if node.get('type', {}).get('kind') == kind)
+        if kind == 'scalar':
+            target['type'] = {'kind': 'nat'}
+        elif kind == 'nat':
+            target['type'] = {'kind': 'scalar'}
+        else:
+            key = {'vector': 'length', 'matrix': 'columns', 'index': 'bound'}[kind]
+            target['type'][key] += 1
+        reject('typeMismatch', changed, scope, range_sources=paths, record_shape=(4, 80))
+
+
+def check_bounded_host_success_keeps_all_broad_claims_false(actual):
+    for field in ('proof_authority', 'execution_authority', 'planner_activation', 'completion_authority',
+                  'kernel_checked', 'strict_cache_admission', 'source_semantic_equivalence_proved',
+                  'Python_Float_semantics_proved', 'CPython_math_fsum_semantics_proved',
+                  'Python_libm_semantics_proved', 'optimizer_source_convergence_proved',
+                  'global_autoencoder_convergence_proved'):
+        assert actual[field] is False
+    assert actual['full_task_satisfaction'] == 'unknown'

@@ -1,0 +1,7 @@
+import IntegerLowering
+#print axioms CodebaseIntegerLowering.signed_literal_lowering_correct
+#print axioms CodebaseIntegerLowering.lowering_correct
+#print axioms CodebaseIntegerLowering.native_target_correspondence
+#print axioms CodebaseIntegerLowering.captured_ast_target_equivalence
+#print axioms CodebaseIntegerLowering.source_offset_identity
+#print axioms CodebaseIntegerLowering.requested_offset_identity

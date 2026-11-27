@@ -1,0 +1,53 @@
+# Native proof qualification, 2026-09-14
+
+`runs/source-built-v1/` contains **three actual native Groth16 proofs and pairing verifications** of the implemented `EventDagCompactionCircuitV3` relation. The population is three constructed inputs with one, two, and four active private event digests in a fixed four-slot tree. This is development qualification of a named relation, not a proof of pytest execution, a production backend admission, or a whole-system efficiency result.
+
+## Runtime recovery and provenance
+
+The bundled ARM binary executed but rejected both v3 and v5 setup, reporting support for v1/v2 only. Its actual failures remain in `runs/bundled-v1/`. Current source supports v1/v2/v3, so this was a source/binary capability mismatch; merely having a bundled binary did not establish the intended capability.
+
+The exact copied Rust source and locked dependency manifest were built offline in an isolated target directory, with two build jobs. No backend source changes were needed. Cargo reported 50.11 seconds for the release build. `build_manifest.json`, `build.log`, and `build-rustc-info.json` retain build commands and compiler provenance. The local built binary is `bin/groth16`, SHA-256 `88686a976dac69f4e877b99e1f15c2a3ad39a6cf759c0f2e9614802d3e63e8b4`. Current datasets HEAD was `ac82107e246b30e35a2bbdcf75e01370d22350c6`; exact Rust-file hashes are in each run's `freeze.json`. Source snapshots are retained. No production binary, key, trust policy, or package was replaced.
+
+The source-built binary still rejects **v5**, explicitly reporting only v1/v2/v3. This experiment does not provide the missing pytest-attestation circuit or production key profile.
+
+## Relation and trust boundary
+
+The circuit takes private 32-byte event digests, pads inactive slots to zero, constrains active slots to a prefix, and binds the public count to those active slots. Leaves are `SHA256(event_digest)`; parents are `SHA256(left || right)` in a fixed four-leaf tree. The public root enters the Groth16 relation **reduced modulo the BN254 scalar-field modulus**. The Python harness independently computes full root bytes from the private digest inputs. It does not claim that the circuit proves the semantic truth or authenticity of those event records.
+
+The distinction between full bytes and field elements matters. A deliberately different 32-byte root representing the same scalar was accepted by the raw native verifier. That is consistent with the implemented scalar relation; a raw proof alone does not authenticate a unique 32-byte archive root. The actual evaluation caller checks its externally expected full root/count and pinned binary/verifying-key bytes before dispatch. It rejects the field-equivalent alternate root without issuing a native verify call. This new evaluation-only caller is not an existing production archive integration.
+
+Native setup generated OS-random development parameters in isolated primary and alternate artifact directories. These are single-party development parameters, with no production ceremony, approval, key rollout, or trust certification claimed. Key substitution was tested using a separately generated valid key, and malformed-key handling using a truncated key.
+
+## Measured outcomes
+
+All three valid inputs produced real proof JSON and passed native verification plus exact caller binding. Eight ordinary negative controls were rejected: changed private digest, wrong witness length, changed public root, changed public count, changed EVM scalar input, changed proof point, different valid verifying key, and truncated verifying key. Neither rejected witness produced a proof file. The scalar-alias boundary above is retained separately, not counted as an ordinary invalid-scalar test.
+
+All timings use `perf_counter` around actual native subprocesses, including startup and key loading, with `RAYON_NUM_THREADS=2`. These are three development examples, without population inference or a speedup claim.
+
+| Active events | Prove seconds | Verify milliseconds | Proof JSON bytes |
+|---|---:|---:|---:|
+| 1 | 12.349231 | 3.053140 | 1,484 |
+| 2 | 12.048481 | 5.146902 | 1,484 |
+| 4 | 12.473867 | 3.282244 | 1,484 |
+
+Primary setup took 7.810198 seconds and alternate setup took 7.763998 seconds. Each proving key is 154,403,632 bytes and each intact verifying key is 648 bytes. Private-digest and witness-length rejection each took about eight seconds because this backend loads/deserializes the proving key before those checks; failed attempts are retained in expenditure. This proves capability and exposes overhead. It does not show that Groth16 is cheaper than directly hashing these disclosed leaves, and it yields no measured model-token saving.
+
+Primary verifying-key SHA-256: `50aa99e99d695f074d89728c4a6d52389b374c598f7cbba3d88e944c4acc4211`.
+Primary proving-key SHA-256: `3f11f9eddc885bcad871b29f26bc438ec535d6a780993fe3e841e573368cf5a4`.
+Exact alternate/truncated key identities and sizes are in `key_artifacts.json`.
+
+`validate.py` passed **31 checks**, recomputing the full Merkle roots using an independent Python formulation, checking frozen files and key bytes, checking all mutations, and performing three fresh native pairing verifications. Proof generation and verification use the same native cryptographic implementation; no independent cryptographic verifier is claimed.
+
+## Reproduce and inspect
+
+Run from the workspace root with a fresh run ID:
+
+```sh
+cargo build --locked --offline --release --jobs 2 --manifest-path papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/runs/bundled-v1/source_snapshot/Cargo.toml --target-dir papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/build_target
+.venv/bin/python papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/run.py --run-id source-built-next --binary papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/bin/groth16
+.venv/bin/python papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/validate.py papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/runs/source-built-next
+```
+
+The retained source-built executable is already at `bin/groth16`. A rebuild produces its executable under `build_target/aarch64-unknown-linux-gnu/release/` in this environment; select that path explicitly when evaluating a new build. Build targets and the two large development proving keys are gitignored but retained on the current filesystem. Small verifying keys, proof outputs, binary, invocation logs, full source snapshots, and exact key-hash manifests are retained as reviewable artifacts. Regenerating setup creates new equivalent development keys; it does not reproduce the old random key bytes.
+
+The primary machine-readable evidence is `runs/source-built-v1/{freeze,pins,positives,negatives,key_artifacts,summary,independent_validation}.json`. Each invocation retains its command, environment, raw stdout/stderr, elapsed time, return code, and parsed response. The original paper's bounded Horn derivation relation has now been exercised separately with v2 keys; [horn_report.md](horn_report.md) records the honest native results, observed wire/EVM mismatch, and incomplete deeper textual-binding assurance. General proof performance, full archive-consumer integration, production admission, test-execution proof, and token savings remain open.

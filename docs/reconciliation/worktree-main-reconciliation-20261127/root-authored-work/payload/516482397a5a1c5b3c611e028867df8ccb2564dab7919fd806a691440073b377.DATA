@@ -1,0 +1,72 @@
+#!/usr/bin/env python3
+"""Exercise stale-source rejection and actual new current-source preparations."""
+import base64
+import hashlib
+import json
+from pathlib import Path
+import subprocess
+import time
+
+HERE = Path(__file__).resolve().parent
+OUT = HERE / "repository_service_qualification_v1"
+def sha(body): return hashlib.sha256(body).hexdigest()
+def read(path): return json.loads(path.read_text())
+def write(path, value): path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+events = []
+
+def invoke(run, expect=True, expected_request=None, expected_freeze=None):
+    freeze = read(run / "freeze.json")
+    command = ["/usr/bin/python3", "-B", str(HERE / "repository_context_v1.py"), "read", "--run", str(run), "--expected-request-sha256", expected_request or freeze["request_sha256"], "--expected-freeze-sha256", expected_freeze or sha((run / "freeze.json").read_bytes()), "--path", "xmltodict.py"]
+    started = time.perf_counter(); result = subprocess.run(command, capture_output=True, timeout=60)
+    assert (result.returncode == 0) is expect
+    if not expect: assert not result.stdout
+    events.append({"run": run.name, "passed": expect, "returncode": result.returncode, "seconds": time.perf_counter() - started, "stderr": result.stderr.decode(errors="replace")[-1000:]})
+    return read(run / "request.json") if not expect else json.loads(result.stdout)
+
+def prepare(request, run):
+    command = ["/usr/bin/python3", "-B", str(HERE / "repository_context_v1.py"), "prepare", "--request", str(request), "--profile", str(HERE / "results_v9_full_syntax_cache/runtime_source_manifest.json"), "--run", str(run)]
+    process = subprocess.run(command, capture_output=True, timeout=660)
+    (OUT / (run.name + ".stdout")).write_bytes(process.stdout)
+    (OUT / (run.name + ".stderr")).write_bytes(process.stderr)
+    assert process.returncode == 0, process.stderr.decode(errors="replace")[-2000:]
+
+def main():
+    baseline = OUT / "baseline"; request = read(OUT / "request.json")
+    origin = Path(request["repository_root"]); target = origin / "xmltodict.py"
+    original = target.read_bytes(); original_mode = target.stat().st_mode
+    good = invoke(baseline); assert base64.b64decode(good["sources"][0]["base64"]) == original
+    invoke(baseline, False, expected_request="0" * 64)
+    invoke(baseline, False, expected_freeze="0" * 64)
+    extra = origin / "unlisted_current_file.py"
+    try:
+        extra.write_text("# newly added current file\n"); invoke(baseline, False)
+    finally: extra.unlink()
+    try:
+        target.chmod(original_mode ^ 0o100); invoke(baseline, False)
+    finally: target.chmod(original_mode)
+    changed_body = original + b"\n# authored current-source preparation qualification\n"
+    try:
+        target.write_bytes(changed_body); invoke(baseline, False)
+        changed = OUT / "changed_current"
+        prepare(OUT / "request.json", changed)
+        reread = invoke(changed); assert base64.b64decode(reread["sources"][0]["base64"]) == changed_body
+        new_request = dict(request)
+        new_request["objective"] = dict(request["objective"], text=request["objective"]["text"] + "\nPreserve the current authored comment while preparing context.")
+        write(OUT / "request_revised_objective.json", new_request)
+        objective_changed = OUT / "changed_objective"
+        prepare(OUT / "request_revised_objective.json", objective_changed)
+        revised = invoke(objective_changed)
+        assert revised["objective"] == new_request["objective"]
+        before = read(baseline / "summary.json")["producer"]
+        after = read(changed / "summary.json")["producer"]
+        objective = read(objective_changed / "summary.json")["producer"]
+        checks = {"exact_baseline_bytes": True, "stale_source_rejected": True, "unlisted_added_file_rejected": True, "executable_mode_change_rejected": True, "caller_request_mismatch_rejected": True, "caller_freeze_mismatch_rejected": True, "new_source_state_changes": before["native_state_cid"] != after["native_state_cid"], "new_source_semantic_root_changes": before["native_semantic_root_cid"] != after["native_semantic_root_cid"], "new_source_pack_changes": before["semantic_pack_cid"] != after["semantic_pack_cid"], "objective_only_same_state": after["native_state_cid"] == objective["native_state_cid"], "objective_only_same_semantic_root": after["native_semantic_root_cid"] == objective["native_semantic_root_cid"], "objective_only_new_pack": after["semantic_pack_cid"] != objective["semantic_pack_cid"]}
+        assert all(checks.values())
+    finally:
+        target.write_bytes(original); target.chmod(original_mode)
+    restored = invoke(baseline); assert base64.b64decode(restored["sources"][0]["base64"]) == original
+    summary = {"schema": "ns-current-repository-context-qualification/v1", "driver_sha256": sha(Path(__file__).read_bytes()), "service_sha256": sha((HERE / "repository_context_v1.py").read_bytes()), "checks": checks, "restored_original_current_source": True, "three_real_native_preparations": [read(OUT / name / "summary.json") for name in ("baseline", "changed_current", "changed_objective")], "read_events": events, "all_checks_passed": True, "qualification_scope": "one existing exposed16file XML development prefix with authored comment/objective mutations; genericCLI available, Pyparsing fullscale not yet qualified", "provider_calls": 0, "source_substitutions": 0, "quality_or_token_savings_claim": False}
+    write(OUT / "qualification.json", summary)
+    print(json.dumps({"all_checks_passed": True, "checks": checks, "provider_calls": 0}))
+
+if __name__ == "__main__": main()

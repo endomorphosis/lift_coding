@@ -1,0 +1,50 @@
+"""Curator: freeze service profiles and export only newly authorized public fields."""
+from pathlib import Path
+import hashlib,json,shutil,stat,time
+H=Path(__file__).resolve().parent;R=H.parent;A=R/'arm64_qualification'
+def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
+def dump(p,v): p.write_text(json.dumps(v,indent=2,sort_keys=True)+'\n')
+assert not (H/'registry.json').exists()
+public=H/'public_inputs';public.mkdir()
+profiles={}
+for number,run,scorer in [('6028',A/'run-v1',A/'run-v1/scoring-v2/native_scorer_freeze.json'),('5414',A/'requests5414/run-v4',A/'requests5414/run-v4/native_scorer_freeze.json')]:
+    instance='psf__requests-'+number;custody=run/'curator_custody'
+    profile=json.loads(scorer.read_text());freeze=json.loads((run/'freeze.json').read_text());row=json.loads((custody/'row.json').read_text())
+    qualified=json.loads((scorer.parent/'score_summary.json').read_text());assert qualified['qualified']
+    q=public/instance;q.mkdir();source=q/'source';source.mkdir()
+    for name,h in freeze['source_files'].items():
+        old=run/'build_context/source'/name;assert sha(old)==h
+        new=source/name;new.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(old,new);assert sha(new)==h
+    statement=row['problem_statement'];(q/'objective.md').write_text(statement)
+    reconciliation=json.loads((run/'custody_reconciliation.json').read_text())
+    objective={'schema':'ns-public-benchmark-objective/v1','instance_id':instance,'repository':row['repo'],'base_commit':row['base_commit'],
+        'problem_statement':statement,'objective_sha256':hashlib.sha256(statement.encode()).hexdigest(),
+        'dataset_revision':freeze['protocol']['dataset_revision'],'dataset_sha256':reconciliation['dataset_parquet_sha256'],
+        'source_freeze_sha256':sha(run/'freeze.json'),'allowed_candidate_paths':['requests/**/*.py'],
+        'excluded_fields':['hints','reference patch','test patch','expected checks','evaluation script','hidden logs'],
+        'enrollment_scope':'Public development objective projection; not a held-out method-selection or generalization result.'}
+    dump(q/'objective.json',objective)
+    entries=[{'path':name,'kind':'file','mode':stat.S_IMODE((source/name).stat().st_mode),'sha256':h} for name,h in sorted(freeze['source_files'].items())]
+    tree=hashlib.sha256(json.dumps(entries,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+    dump(q/'source_inventory.json',{'schema':'ns-public-source-inventory/v1','instance_id':instance,'base_commit':row['base_commit'],'file_count':len(entries),
+        'tree_sha256':tree,'entries':entries,'pristine_base_source':True,'hidden_patch_applied':False,'git_metadata_exported':False})
+    metadata=run/'image_package_metadata.json'
+    profiles[instance]={'base_commit':row['base_commit'],'image_id':profile['image_id'],
+        'qualification_profile':str(scorer.relative_to(R)),'qualification_profile_sha256':sha(scorer),
+        'custody':str(custody.relative_to(R)),
+        'protected_input_sha256':{name:sha(custody/name) for name in ['row.json','tests.json','eval-arm.sh']},
+        'image_metadata':str(metadata.relative_to(R)),'image_metadata_sha256':sha(metadata),
+        'network_mode':'none' if number=='6028' else 'bridge','public_projection':str(q.relative_to(H)),
+        'public_base_tree_sha256':tree,'objective_sha256':objective['objective_sha256'],
+        'candidate_scope':'UTF-8 unified diffs affecting only requests/**/*.py; no binary files or symlink modes.'}
+registry={'schema':'ns-curator-candidate-service-profile/v1','frozen_at_ns':time.time_ns(),
+    'service_sources':{name:sha(H/name) for name in ['service.py','inventory.py']},'profiles':profiles,
+    'provider_calls':0,'qualification_scope':'Service transport, source/profile binding, native original grading and proposer mount separation; no adversarial candidate/oracle integrity claim.'}
+dump(H/'registry.json',registry)
+dump(H/'qualification_matrix.json',{'schema':'ns-curator-service-qualification-matrix/v1',
+    'service_profile_sha256':sha(H/'registry.json'),'frozen_at_ns':time.time_ns(),
+    'native_controls':[{'instance_id':instance,'candidate':arm,'expected_passed':arm=='curator_reference'} for instance in profiles for arm in ['empty','curator_reference']],
+    'no_dispatch_controls':['wrong_candidate_hash','wrong_base_commit','wrong_service_profile','path_traversal','test_file_modification','symlink_mode','duplicate_evaluation_id'],
+    'public_projection_rules':'Only statement/repository/base/task ID and hashes; complete pristine source excludes .git and has no hidden patch applied.',
+    'provider_calls':0})
+print(json.dumps({'profiles_frozen':len(profiles),'public_source_files':{k:json.loads((H/v['public_projection']/'source_inventory.json').read_text())['file_count'] for k,v in profiles.items()},'public_projection_paths':[v['public_projection'] for v in profiles.values()],'protected_values_emitted':False}))

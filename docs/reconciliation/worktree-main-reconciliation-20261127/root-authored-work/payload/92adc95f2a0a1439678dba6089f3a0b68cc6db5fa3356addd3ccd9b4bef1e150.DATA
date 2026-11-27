@@ -1,0 +1,62 @@
+#!/usr/bin/env python3
+"""Exercise the qualified context read API on both public Requests enrollments."""
+import base64
+import hashlib
+import json
+from pathlib import Path
+import subprocess
+import sys
+import time
+
+HERE = Path(__file__).resolve().parent
+def sha(body): return hashlib.sha256(body).hexdigest()
+def read(path): return json.loads(path.read_text())
+def write(path, value): path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+
+def main():
+    out = HERE / "requests_public_reads_v1"; out.mkdir()
+    enroll = HERE / "requests_public_enrollment_v1"
+    write(out / "freeze.json", {"driver_sha256": sha(Path(__file__).read_bytes()),
+          "enrollment_summary_sha256": sha((enroll / "summary.json").read_bytes()),
+          "service_sha256": sha((HERE / "repository_context_v1.py").read_bytes()),
+          "provider_calls": 0})
+    rows = []
+    for task in ("psf__requests-5414", "psf__requests-6028"):
+        run = enroll / task; request = read(run / "request.json"); summary = read(run / "summary.json")
+        # Complete package inventory is public; these paths are API/transport
+        # representatives, selected without scorer data or hidden tests.
+        paths = ["requests/__init__.py", "requests/models.py"]
+        assert set(paths) <= set(request["public_source_paths"])
+        command = [sys.executable, "-B", str(HERE / "repository_context_v1.py"), "read",
+                   "--run", str(run), "--expected-request-sha256", summary["request_sha256"],
+                   "--expected-freeze-sha256", summary["context_freeze_sha256"]]
+        for path in paths: command += ["--path", path]
+        tick = time.perf_counter(); proc = subprocess.run(command, capture_output=True, timeout=180)
+        (out / (task + ".stdout.json")).write_bytes(proc.stdout); (out / (task + ".stderr")).write_bytes(proc.stderr)
+        receipt = {"command": command, "returncode": proc.returncode, "wall_seconds": time.perf_counter() - tick}
+        write(out / (task + ".process.json"), receipt)
+        if proc.returncode: raise SystemExit("native read rejected; preserve evidence")
+        response = json.loads(proc.stdout)
+        assert response["objective"] == request["objective"]
+        assert not response["execution_reuse_authorized"] and response["raw_source_retained"]
+        assert response["request_sha256"] == summary["request_sha256"]
+        assert response["context_freeze_sha256"] == summary["context_freeze_sha256"]
+        assert [s["path"] for s in response["sources"]] == paths
+        for item in response["sources"]:
+            expected = (Path(request["repository_root"]) / item["path"]).read_bytes()
+            assert base64.b64decode(item["base64"], validate=True) == expected
+            assert item["sha256"] == sha(expected) and item["bytes"] == len(expected)
+        rows.append({"task": task, "native_source_expansions": len(paths),
+                     "exact_raw_bytes_returned": sum(s["bytes"] for s in response["sources"]),
+                     "objective_sha256": response["objective_sha256"],
+                     "request_sha256": response["request_sha256"],
+                     "context_freeze_sha256": response["context_freeze_sha256"],
+                     "semantic_pack_cid": response["semantic_pack_cid"],
+                     "process": receipt, "all_checks_passed": True})
+    result = {"schema": "ns-public-requests-context-read-audit/v1", "rows": rows,
+              "native_source_expansions": 4, "all_checks_passed": True,
+              "provider_calls": 0, "raw_substitutions": 0,
+              "artifact_sha256": {p.name: sha(p.read_bytes()) for p in out.iterdir() if p.is_file()}}
+    write(out / "summary.json", result); print(json.dumps(result))
+
+if __name__ == "__main__": main()

@@ -1,0 +1,31 @@
+{
+  "credentials_copied_or_recorded": false,
+  "failed_original_receipts_overwritten": false,
+  "initial_policy": {
+    "bytes": 1192,
+    "path": "/home/barberb/lift_coding/papers/revisions/law_skill_upstream_pins_20260914/recovery_policy.json",
+    "sha256": "0cf315e2877d4c5a7a38dd3c91b95e9f647a03fdfe4e12642924caee022969ba"
+  },
+  "initial_recovery": {
+    "bytes": 53033,
+    "path": "/home/barberb/lift_coding/papers/revisions/law_skill_upstream_pins_20260914/recovery_summary.json",
+    "sha256": "fabc5a8de9dc4ba45e0d3c40ce16d012f9b80695475f64b869e00c96630360d7"
+  },
+  "max_parallel_repositories": 3,
+  "pending_task_keys": [
+    "ip_assessment",
+    "current_user",
+    "backup_code",
+    "s3_delete",
+    "modsecurity_config",
+    "graphql_preread",
+    "crudadmin_export",
+    "fastly_config",
+    "django_refresh"
+  ],
+  "reason": "Initial anonymous API quota exhausted; failed receipts preserved. Use the existing authorized gh public API read capability.",
+  "same_cutoff_and_source_selection_policy": true,
+  "schema": "skill-pin-public-api-authenticated-completion/v1",
+  "successful_original_pins_requeried": false,
+  "upstream_code_or_models_executed": false
+}

@@ -1,0 +1,40 @@
+{
+  "time": "2026-11-10T18:57:50.654302+00:00",
+  "files": [
+    {
+      "path": "test/common/native_quack_fixtures.py",
+      "prepared_source": "/tmp/lift-sync-semantic-catalog-retention-native_quack_fixtures.py.txt",
+      "original_sha256": "aa0854caf8540c266054838102de6c36136afe37f6e428811c8582caf16afa9e",
+      "sha256": "08837a4ec8b294e9bf90f147b9e5078829f6d100f238455a70c443a238f156ab"
+    },
+    {
+      "path": "test/api/test_semantic_component_census_v2.py",
+      "prepared_source": "/tmp/lift-sync-semantic-catalog-retention-test_semantic_component_census_v2.py.txt",
+      "original_sha256": "37f8c7ee2e959251fd49266cd3624ce7f9e1b210e52ea151cb23ad59631cbb3f",
+      "sha256": "6c5a10ab6675633e5445b97f5bd8b08e5e321a2f12e255578239b79bc0fa3e6c"
+    },
+    {
+      "path": "test/api/test_semantic_pack_census.py",
+      "prepared_source": "/tmp/lift-sync-semantic-catalog-retention-test_semantic_pack_census.py.txt",
+      "original_sha256": "95c89e8f827874ca4e92c9296cfab10603646dd0cfac4223bd6d0e8159d23a7e",
+      "sha256": "bb476943c1377bd6967054aab26c6db15e7b82d4d2b2ec5011ee7aac076c7cb6"
+    },
+    {
+      "path": "test/api/test_semantic_pack_projection.py",
+      "prepared_source": "/tmp/lift-sync-semantic-catalog-retention-test_semantic_pack_projection.py.txt",
+      "original_sha256": "7d88cc8129497129435c090950c2375ba6392bd77ae45dbea62874e54ce57f48",
+      "sha256": "b9627fcd2b4c2f01e490ac1612d4973011da18cdddfab6d7c793a62d6d74948d"
+    }
+  ],
+  "all_original_semantic_functions_assertions_and_decorators_exact": true,
+  "seed_original_body_statements_exact_after_local_import": true,
+  "new_regression_functions": 3,
+  "new_regression_cases": 8,
+  "profile_opt_in": true,
+  "requires_successful_setup_call_and_teardown": true,
+  "catalog_member_bytes_verified_before_raw_copy_retirement": true,
+  "raw_failed_case_files_retained": true,
+  "production_source_changed": false,
+  "qualified": false,
+  "applied": false
+}

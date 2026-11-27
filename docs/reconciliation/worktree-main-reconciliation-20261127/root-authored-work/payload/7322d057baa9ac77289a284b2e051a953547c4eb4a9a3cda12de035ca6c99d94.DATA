@@ -1,0 +1,126 @@
+#!/usr/bin/env python3
+"""Retain the terminal cold/incremental discrepancy and audit actual persisted data."""
+import base64
+from collections import Counter
+import hashlib
+import json
+from pathlib import Path
+import sqlite3
+
+HERE = Path(__file__).resolve().parent
+OUT = HERE / "results_v13_full_pyparsing_incremental"
+def sha(body): return hashlib.sha256(body).hexdigest()
+def read(path): return json.loads(path.read_text())
+def canonical(value): return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()
+def write(path, value):
+    if path.exists(): raise SystemExit("preserve prior audit")
+    path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+
+def main():
+    frozen = read(OUT / "freeze.json")
+    assert sha((HERE / "full_pyparsing_incremental_v13.py").read_bytes()) == frozen["driver_sha256"]
+    profile = read(OUT / "runtime_source_manifest.json")
+    assert sha((OUT / "runtime_source_manifest.json").read_bytes()) == frozen["runtime_manifest_sha256"]
+    assert all(sha(Path(p).read_bytes()) == value for p, value in profile["files"].items())
+    inputs = {"freeze.json": sha((OUT / "freeze.json").read_bytes())}
+    results = {}; processes = []
+    for role in frozen["roles"]:
+        folder = OUT / role; process = read(folder / "process.json"); result = read(folder / "result.json")
+        assert process["returncode"] == 0 and not process["timed_out"] and process["bound_seconds"] == 900
+        assert process["wall_seconds"] < 900 and result["all_checks_passed"]
+        assert result["regular_files"] == 286 and result["python_files"] == 154 and result["opaque_symlinks"] == 1
+        assert result["symbols"] == 3957 and result["edges"] == 55859 and result["blocks"] == 67872
+        assert result["previous_state_and_bundle_actually_supplied"] == (role == "changed_incremental")
+        for name, expected in result["artifact_sha256"].items():
+            assert sha((folder / name).read_bytes()) == expected
+            inputs[str((folder / name).relative_to(OUT))] = expected
+        for name in ("result.json", "process.json", "stages.jsonl", "stdout.log", "stderr.log"):
+            inputs[str((folder / name).relative_to(OUT))] = sha((folder / name).read_bytes())
+        results[role] = result; processes.append(process)
+    source_base = read(OUT / "baseline_source.json"); source_new = read(OUT / "changed_source.json")
+    for name, digest in frozen["source_manifest_sha256"].items():
+        assert sha((OUT / name).read_bytes()) == digest; inputs[name] = digest
+    assert source_base["opaque_symlinks"] == source_new["opaque_symlinks"]
+    assert set(source_base["files"]) == set(source_new["files"])
+    changed_paths = [p for p in source_base["files"] if source_base["files"][p] != source_new["files"][p]]
+    assert changed_paths == [frozen["mutation"]["path"]]
+    target = changed_paths[0]
+    before = (Path(source_base["tree"]) / target).read_bytes(); after = (Path(source_new["tree"]) / target).read_bytes()
+    assert after == before + base64.b64decode(frozen["mutation"]["appended_comment_base64"], validate=True)
+    base, cold, inc = (results[name] for name in frozen["roles"])
+    assert base["state_cid"] == frozen["expected_baseline_state_cid"] and base["root_cid"] == frozen["expected_baseline_root_cid"]
+    assert cold["snapshot_cid"] == inc["snapshot_cid"]
+    assert cold["state_cid"] != inc["state_cid"] and cold["root_cid"] != inc["root_cid"]
+    parent = read(OUT / "changed_incremental/parent_binding.json")
+    for name, digest in parent["parent_artifact_sha256"].items(): assert sha((OUT / "baseline" / name).read_bytes()) == digest
+    assert parent["state_cid"] == base["state_cid"] and parent["root_cid"] == base["root_cid"]
+    a = read(OUT / "changed_cold/state.json"); b = read(OUT / "changed_incremental/state.json")
+    assert {k: v for k, v in a.items() if k not in ("edges", "state_cid")} == {k: v for k, v in b.items() if k not in ("edges", "state_cid")}
+    def edge_key(value):
+        item = {k: v for k, v in value.items() if k != "edge_id"}
+        item["metadata"] = {k: v for k, v in item["metadata"].items() if k != "resolution"}
+        return canonical(item)
+    aa = {edge_key(e): e for e in a["edges"]}; bb = {edge_key(e): e for e in b["edges"]}
+    assert len(aa) == len(bb) == 55859 and aa.keys() == bb.keys()
+    differences = []; by_file = Counter(); resolutions = Counter(); confidence = Counter()
+    for key in sorted(aa):
+        left, right = aa[key], bb[key]
+        if left == right: continue
+        assert left["metadata"]["resolution"] == "finite_may" and right["metadata"]["resolution"] == "definite"
+        assert left["metadata"]["candidate_count"] > 1
+        assert left["confidence"] == right["confidence"] == "conservative"
+        path = left["span"]["path"] if left["span"] else None
+        by_file[path] += 1; resolutions[(left["metadata"]["resolution"], right["metadata"]["resolution"])] += 1
+        confidence[left["confidence"]] += 1
+        differences.append({"source_id": left["source_id"], "target_id": left["target_id"], "path": path,
+                            "span": left["span"], "cold_edge_id": left["edge_id"], "incremental_edge_id": right["edge_id"],
+                            "cold_resolution": left["metadata"]["resolution"], "incremental_resolution": right["metadata"]["resolution"],
+                            "candidate_count": left["metadata"]["candidate_count"], "confidence": left["confidence"]})
+    assert len(differences) == 1568
+    conns = [sqlite3.connect((OUT / role / "blocks.sqlite").as_uri() + "?mode=ro", uri=True) for role in ("changed_cold", "changed_incremental")]
+    cursors = [c.execute("SELECT cid,body FROM blocks ORDER BY cid") for c in conns]
+    left, right = (c.fetchone() for c in cursors)
+    shared = same_bytes = different_bytes = cold_only = inc_only = cold_bytes = inc_bytes = 0
+    unique_schemas = {"cold": Counter(), "incremental": Counter()}
+    while left is not None or right is not None:
+        if right is None or left is not None and left[0] < right[0]:
+            cold_only += 1; cold_bytes += len(left[1]); unique_schemas["cold"][json.loads(left[1]).get("schema", "no-schema")] += 1
+            left = cursors[0].fetchone()
+        elif left is None or right[0] < left[0]:
+            inc_only += 1; inc_bytes += len(right[1]); unique_schemas["incremental"][json.loads(right[1]).get("schema", "no-schema")] += 1
+            right = cursors[1].fetchone()
+        else:
+            shared += 1; cold_bytes += len(left[1]); inc_bytes += len(right[1])
+            if left[1] == right[1]: same_bytes += 1
+            else: different_bytes += 1
+            left, right = (c.fetchone() for c in cursors)
+    for conn in conns: conn.close()
+    assert shared + cold_only == shared + inc_only == 67872
+    assert cold_bytes == cold["block_bytes"] and inc_bytes == inc["block_bytes"]
+    assert different_bytes == 0 and cold_only > 0
+    outcome = {"schema": "ns-full-pyparsing-incremental-terminal-outcome/v13", "workers_completed": True,
+               "cold_incremental_equivalence_passed": False, "driver_terminal": "exit1 from comparison assertion after all3 worker returncodes0; summary.json was not reached",
+               "failure_kind": "actual_incremental_edge_resolution_metadata_discrepancy", "processes": processes,
+               "changed_snapshot_equal": True, "symbols_and_artifacts_and_other_state_fields_equal": True,
+               "state_and_root_different": True, "changed_edge_records": len(differences),
+               "source_controls_passed": sum(len(r["source_controls"]) for r in results.values()),
+               "provider_calls": 0, "raw_substitutions": 0,
+               "downstream_semantics_limit": "This proves identity/metadata discrepancy; downstream authorization consequences have not yet been traced. No execution soundness failure is inferred."}
+    write(OUT / "terminal_outcome.json", outcome)
+    write(OUT / "edge_resolution_differences.json", differences)
+    audit = {"schema": "ns-full-pyparsing-incremental-failure-audit/v13", "all_audit_checks_passed": True,
+             "qualification_passed": False, "outcome": outcome, "worker_results": results,
+             "runtime_files_rehashed": len(profile["files"]), "affected_source_files": dict(sorted(by_file.items())),
+             "resolution_changes": [{"cold": x, "incremental": y, "count": n} for (x, y), n in sorted(resolutions.items())],
+             "retained_confidence": dict(confidence),
+             "blocks": {"shared_cids": shared, "shared_byte_equal": same_bytes, "shared_byte_different": different_bytes,
+                        "cold_only_cids": cold_only, "incremental_only_cids": inc_only,
+                        "cold_bytes_read": cold_bytes, "incremental_bytes_read": inc_bytes,
+                        "unique_block_schemas": {name: dict(sorted(counts.items())) for name, counts in unique_schemas.items()}},
+             "inputs_sha256": inputs, "audit_source_sha256": sha(Path(__file__).read_bytes()),
+             "provider_calls": 0, "raw_substitutions": 0,
+             "timing_scope": "900-second workers; baseline/cold concurrent on shared host; worker process costs include guards/restoration/persistence/exit; initial driver copy/freeze setup not separately timed; no speedup claim."}
+    write(HERE / "full_pyparsing_failure_v13_audit.json", audit)
+    print(json.dumps({"qualification_passed": False, "changed_edges": len(differences), "affected_files": len(by_file), "blocks": audit["blocks"]}))
+
+if __name__ == "__main__": main()

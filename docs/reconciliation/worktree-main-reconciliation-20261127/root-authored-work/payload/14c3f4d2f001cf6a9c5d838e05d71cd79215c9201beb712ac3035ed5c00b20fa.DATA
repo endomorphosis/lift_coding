@@ -1,0 +1,151 @@
+"""Final qualifier: ordinary native SWE-bench imports in dedicated real venv.
+
+All protected material and raw logs remain behind curator custody. This script
+only emits infrastructure/status/count summaries; it performs no inference.
+"""
+import contextlib
+import hashlib
+import importlib.metadata
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+import time
+import traceback
+
+import curator_v4 as C
+
+
+def main():
+    assert not (C.OUT/'score_summary.json').exists()
+    assert Path(sys.prefix).resolve()==(C.HERE.parent/'grader_venv').resolve()
+    sys.path.insert(0,str(C.HARNESS))
+    # Ordinary imports execute the upstream package initializer unchanged.
+    from swebench.harness import grading
+    from swebench.types import TestSpec
+    import swebench
+    assert swebench.__version__=='5.0.2'
+    built=json.loads((C.OUT/'build_summary.json').read_text())
+    assert built['build_returncode']==0 and built['architecture']=='arm64'
+    row=json.loads((C.CUSTODY/'row.json').read_text())
+    tests=json.loads((C.CUSTODY/'tests.json').read_text())
+    expected=set(tests['FAIL_TO_PASS'])|set(tests['PASS_TO_PASS'])
+    assert expected and tests['FAIL_TO_PASS']
+    spec=TestSpec(instance_id=row['instance_id'],image=built['image_id'],eval_script_list=[],repo=row['repo'],
+        version=row['version'],FAIL_TO_PASS=tests['FAIL_TO_PASS'],PASS_TO_PASS=tests['PASS_TO_PASS'],
+        log_parser=row['log_parser'],eval_type=row['eval_type'])
+    image_metadata=(C.CUSTODY/'logs/image-packages.stdout').read_text()
+    image_packages,end=json.JSONDecoder().raw_decode(image_metadata[image_metadata.index('['):])
+    loaded={name:{'path':str(Path(module.__file__).resolve()),'sha256':C.sha(Path(module.__file__).read_bytes())}
+        for name,module in sys.modules.copy().items() if name.startswith('swebench.') and getattr(module,'__file__',None)}
+    assert all(v['path'].startswith(str(C.HARNESS)+'/') for v in loaded.values())
+    packages={d.metadata['Name']:d.version for d in importlib.metadata.distributions() if d.metadata['Name']}
+    profile={'schema':'ns-arm64-ordinary-native-scorer-freeze/v1','frozen_at_ns':time.time_ns(),
+        'scorer_sha256':C.sha(Path(__file__).read_bytes()),'curator_dependency_sha256':C.sha((C.HERE/'curator_v4.py').read_bytes()),
+        'environment_freeze_sha256':C.sha((C.OUT/'freeze.json').read_bytes()),
+        'image_id':built['image_id'],'python_executable':sys.executable,'python_version':sys.version,
+        'ordinary_package_import':True,'sys_modules_initializer_bypass_used':False,
+        'native_loaded_sources':loaded,'grader_environment_distributions':packages,
+        'image_distributions_before_controls':image_packages,
+        'image_metadata_raw_sha256':C.sha((C.CUSTODY/'logs/image-packages.stdout').read_bytes()),
+        'first_normal_import_profile':True,
+        'control_order':C.PROTOCOL['control_order'],'expected_check_count':len(expected),
+        'stdout_stderr':'Merged raw bytes retained; decoded using exact upstream errors=replace behavior before native grading.',
+        'network_mode':C.PROTOCOL['scoring_network'],'provider_calls':0}
+    C.dump(C.OUT/'native_scorer_freeze.json',profile)
+    shutil.copyfile(__file__,C.OUT/'native_scorer_snapshot.py')
+    C.event({'stage':'ordinary_native_import','succeeded':True,'loaded_source_modules':len(loaded),
+        'environment_distribution_count':len(packages),'initializer_bypass_used':False})
+    results=[]
+    for arm in C.PROTOCOL['control_order']:
+        name='ns-arm64-qual-5414-'+arm+'-native-v4'
+        armroot=C.CUSTODY/('native-'+arm)
+        armroot.mkdir()
+        shutil.copyfile(C.CUSTODY/'eval-arm.sh',armroot/'eval-arm.sh')
+        wrapper='#!/bin/bash\nset -euo pipefail\ncd /testbed\n'
+        if arm=='gold':
+            shutil.copyfile(C.CUSTODY/'gold.patch',armroot/'gold.patch')
+            wrapper+='git apply --check /curator/gold.patch\ngit apply /curator/gold.patch\n'
+        wrapper+='set +e\nbash /curator/eval-arm.sh\ncontrol_status=$?\npython -m pip list --format=json > /tmp/ns-packages-after.json\nexit "$control_status"\n'
+        (armroot/'run.sh').write_text(wrapper)
+        create=C.command(['docker','create','--name',name,'--network',C.PROTOCOL['scoring_network'],
+            '--cpus',str(C.PROTOCOL['container_cpus']),'--memory',C.PROTOCOL['container_memory'],
+            '--pids-limit',str(C.PROTOCOL['container_pids_limit']),'--security-opt','no-new-privileges',
+            '--mount','type=bind,src='+str(armroot)+',dst=/curator,readonly',
+            built['image_id'],'bash','/curator/run.sh'],'native-create-'+arm,timeout=30)
+        assert create['returncode']==0
+        log=armroot/'evaluation.log'
+        started=time.perf_counter()
+        with log.open('w') as stream:
+            try:
+                execution=subprocess.run(['docker','start','--attach',name],stdout=stream,stderr=subprocess.STDOUT,
+                    timeout=C.PROTOCOL['evaluation_timeout_seconds'])
+                code,timed_out=execution.returncode,False
+            except subprocess.TimeoutExpired:
+                code,timed_out=None,True
+        elapsed=time.perf_counter()-started
+        if timed_out:
+            C.command(['docker','kill',name],'native-kill-'+arm,timeout=30)
+        state=json.loads(C.quiet_value(['docker','inspect',name]))[0]['State']
+        C.dump(armroot/'container_state.json',state)
+        metadata_copy=C.command(['docker','cp',name+':/tmp/ns-packages-after.json',str(armroot/'packages-after.json')],'native-copy-packages-'+arm,timeout=30)
+        assert metadata_copy['returncode']==0
+        after_packages=json.loads((armroot/'packages-after.json').read_text())
+        C.dump(C.OUT/('image-distributions-after-'+arm+'.json'),after_packages)
+        C.dump(armroot/'execution.json',{'returncode':code,'timed_out':timed_out,'elapsed_seconds':elapsed})
+        rawlog=log
+        raw_bytes=rawlog.read_bytes()
+        decoded=raw_bytes.decode(errors='replace')
+        log=armroot/'evaluation-native-decoded.log'
+        log.write_text(decoded)
+        C.dump(armroot/'log-decoding.json',{'raw_sha256':C.sha(raw_bytes),
+            'decoded_sha256':C.sha(log.read_bytes()),'replacement_characters':decoded.count(chr(65533)),
+            'matches_upstream_decoder':True})
+        status_map,found=grading.get_logs_eval(spec,str(log))
+        prediction={'instance_id':spec.instance_id,'model_name_or_path':'qualification-'+arm,
+            'model_patch':row['patch'] if arm=='gold' else ''}
+        report=grading.get_eval_report(spec,prediction,str(log),include_tests_status=True)[spec.instance_id]
+        C.dump(armroot/'native_report.json',report)
+        C.dump(armroot/'status_map.json',status_map)
+        statuses=[status_map.get(grading._resolve_case(test,status_map),'MISSING') for test in expected]
+        complete=sum(v in ('PASSED','FAILED','XFAIL') for v in statuses)
+        failed_expected=sum(status_map.get(grading._resolve_case(test,status_map))=='FAILED' for test in tests['FAIL_TO_PASS'])
+        clean=not timed_out and not state['OOMKilled'] and found and complete==len(expected)
+        passed=clean and (report['resolved'] if arm=='gold' else not report['resolved'] and failed_expected==len(tests['FAIL_TO_PASS']))
+        result={'control':arm,'qualification_control_passed':bool(passed),'native_resolved':report['resolved'],
+            'native_logs_found':found,'native_infra_failure':report.get('infra_failure',False),
+            'native_infra_reason':report.get('infra_failure_reason'),
+            'container_exit_code':state['ExitCode'],'test_exit_code':grading.parse_test_exit_code(log.read_text()),
+            'timed_out':timed_out,'oom_killed':state['OOMKilled'],'expected_unique_checks':len(expected),
+            'expected_checks_completed':complete,'expected_missing':statuses.count('MISSING'),
+            'expected_skipped':statuses.count('SKIPPED'),'expected_errors':statuses.count('ERROR'),
+            'expected_fail_to_pass_actual_failures':failed_expected,
+            'parsed_status_counts':{s:sum(v==s for v in status_map.values()) for s in sorted(set(status_map.values()))},
+            'distributions_after_sha256':C.sha((armroot/'packages-after.json').read_bytes()),
+            'elapsed_seconds':elapsed,'raw_log_sha256':C.sha(raw_bytes),
+            'decoded_log_sha256':C.sha(log.read_bytes()),'decoder_replacement_characters':decoded.count(chr(65533))}
+        C.dump(C.OUT/('control-'+arm+'.json'),result)
+        results.append(result)
+        C.command(['docker','rm',name],'native-remove-'+arm,timeout=30)
+        C.event({'stage':'score',**result})
+    summary={'schema':'ns-arm64-native-qualification-results/v1','instance_id':C.PROTOCOL['instance_id'],
+        'qualified':all(r['qualification_control_passed'] for r in results),'controls':results,
+        'native_grader_version':swebench.__version__,'native_algorithms_modified':False,
+        'ordinary_native_imports':True,'initializer_bypass_used':False,
+        'evaluation_script_adaptation':'Only four exact permitted conda activation lines removed. All original test commands and test patch content retained.',
+        'scoring_scope':C.PROTOCOL['scope'],'provider_calls':0,'protected_values_emitted':False}
+    C.dump(C.OUT/'score_summary.json',summary)
+    C.event({'stage':'complete','qualified':summary['qualified'],'controls':len(results),'provider_calls':0})
+
+
+if __name__=='__main__':
+    try:
+        with (C.CUSTODY/'native-scorer-stderr.log').open('w') as errorstream,contextlib.redirect_stderr(errorstream):
+            main()
+    except BaseException as exc:
+        (C.CUSTODY/'native-scorer-exception.txt').write_text(traceback.format_exc())
+        C.event({'stage':'native_scorer','status':'error','exception_type':type(exc).__name__,
+            'details_retained_in_curator_custody':True,'protected_values_emitted':False})
+        raise SystemExit(1)

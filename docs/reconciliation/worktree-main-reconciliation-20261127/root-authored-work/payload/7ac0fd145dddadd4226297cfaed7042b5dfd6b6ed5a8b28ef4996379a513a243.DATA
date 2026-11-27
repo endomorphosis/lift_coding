@@ -1,0 +1,80 @@
+Retained pilot trials. These observations do not establish a benchmark advantage.
+
+Token cells marked ≥ are observed cumulative lower bounds; complete totals remain unknown. Explicit native session completion is required for complete model totals, including for legacy receipts. Verified provider-free symbolic/Doctor execution can establish complete zero totals. Verifier reward and supervisor task completion alone do not establish usage completeness.
+
+| Arm | Trial | Reward | Native completion | Env setup s | Agent setup s | Agent s | Verifier s | Input | Cached | Output | Total | Outcome |
+|---|---|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| Supervisor: full indexed context (native semantic transport); Doctor generic; intent_symbolic planning; compact IntentIR requirements; full code retrieval; expanded code codec | fix-code-vulnerability__UdsCVMn | 1.000 | True | 8.198 | 132.245 | 217.625 | 1.808 | 479009 | 423168 | 2364 | 481373 | official_verifier_passed |
+| Supervisor: full indexed context (native semantic transport); Doctor generic; intent_symbolic planning; compact IntentIR requirements; full code retrieval; compact code codec | fix-code-vulnerability__qrpnVDc | 1.000 | True | 8.189 | 128.951 | 280.198 | 1.689 | 931716 | 836992 | 4934 | 936650 | official_verifier_passed |
+
+Unsuccessful attempt costs are retained separately. Values below are observed subtotals; unknown calls or counters can make the actual total larger.
+
+| Arm | Unsuccessful trials | Known input | Known cached | Known output | Known total | Trials with unknown totals |
+|---|---:|---:|---:|---:|---:|---:|
+
+Cached input is already included in input. Missing values remain unknown. Provider-reported dollar costs are unavailable when shown as null in JSON; estimated Harbor costs are excluded.
+
+No-index retains the same planner and native supervisor, with no context bundle. Setup, agent execution, and verification remain separate timings.
+
+Provider invocation observations retain failure and timeout information independently of the eventual task outcome.
+
+| Trial | Invocation | Phase | Status | Error | Timeout s | Native session complete | Input | Cached | Output | Total |
+|---|---|---|---|---|---:|---|---:|---:|---:|---:|
+| fix-code-vulnerability__UdsCVMn | 5d436e9d25a9490b8eb387892ffa75ea | coding | provider_returned | unknown | 148 | True | 479009 | 423168 | 2364 | 481373 |
+| fix-code-vulnerability__qrpnVDc | 790c557d463a43568bb15005c66dc620 | coding | provider_returned | unknown | 148 | True | 931716 | 836992 | 4934 | 936650 |
+
+Runtime archive provenance is projected from retained agent metadata. The comparison implementation has its own source SHA256 in comparison.json; it may postdate these immutable runtimes.
+
+| Trial | Runtime archive SHA256 |
+|---|---|
+| fix-code-vulnerability__UdsCVMn | c826cd1418a6312f89362db229158e0ab1903a90cd96f95592fced3404e5cb9f |
+| fix-code-vulnerability__qrpnVDc | c826cd1418a6312f89362db229158e0ab1903a90cd96f95592fced3404e5cb9f |
+
+Supervisor phase observations are already inside agent time. Cold initial indexing is included; these values are not added to the total or to nested helper timings. Missing phases remain unknown.
+
+| Trial | Prepare s | Cold initial context s | Planning s | Admitted context s | Doctor s | Post-publication refresh s |
+|---|---:|---:|---:|---:|---:|---:|
+| fix-code-vulnerability__UdsCVMn | 10.665 | 45.682 | 5.554 | 6.204 | 2.876 | 67.140 |
+| fix-code-vulnerability__qrpnVDc | 10.732 | 45.489 | 5.576 | 6.318 | 2.855 | 40.965 |
+
+Indexed preparation is charged to agent time. These counts describe prepared context; they do not by themselves prove worker consumption or repair execution.
+
+| Trial | Initial indexes reused | Vector rows replayed | Full capsules | Worker capsules | Worker semantic bytes | Doctor eligibility status |
+|---|---|---:|---:|---:|---:|---|
+| fix-code-vulnerability__UdsCVMn | True | 426 | 531 | 1 | 27276 | abstained |
+| fix-code-vulnerability__qrpnVDc | True | 426 | 531 | 1 | 27276 | abstained |
+
+Doctor selection, worker materialization and context refresh remain separate from native completion and verifier reward. Embedding subtotals retain measured failed work when complete accounting is unavailable.
+
+| Trial | Implementation route | Doctor status | Worker materializations observed | Refresh status | Local embedding calls | Known local call subtotal |
+|---|---|---|---:|---|---:|---:|
+| fix-code-vulnerability__UdsCVMn | model_router | residual | unknown | refreshed | 0 | 0 |
+| fix-code-vulnerability__qrpnVDc | model_router | residual | unknown | incomplete | unknown | unknown |
+
+Model-input audit reconstructs retained context and exact task-prompt bytes. It does not cover provider system context or establish task correctness.
+
+| Trial | Audit status | Any native input verified | Any model input verified | All observed coding inputs verified |
+|---|---|---|---|---|
+| fix-code-vulnerability__UdsCVMn | verified_all_observed_model_inputs | True | True | True |
+| fix-code-vulnerability__qrpnVDc | verified_all_observed_model_inputs | True | True | True |
+
+Reported task-prompt sizes are bytes, not token savings. Router bytes include semantic translation and any Doctor residual advisory; model bytes also include the workspace instruction.
+
+| Trial | Invocation | Phase | Semantic transport | Native bytes | Router bytes | Model bytes | Identifier mappings | Residual advisory bytes |
+|---|---|---|---|---:|---:|---:|---:|---:|
+| fix-code-vulnerability__UdsCVMn | 5d436e9d25a9490b8eb387892ffa75ea | coding | native | 57358 | 80331 | 81172 | unknown | 2153 |
+| fix-code-vulnerability__qrpnVDc | 790c557d463a43568bb15005c66dc620 | coding | native | 57358 | 78486 | 79323 | unknown | 2153 |
+
+Semantic transport comparisons require identical recorded native prompt, semantic task, scope, root and hash, public instruction and Doctor residual bindings. Independent runs with missing or different context are non-isolated. Matching bytes do not establish a causal effect or token savings.
+
+| Task | Transport context status | Contexts comparable |
+|---|---|---|
+| fix-code-vulnerability | counterpart_transport_unavailable | False |
+| fix-code-vulnerability | counterpart_transport_unavailable | False |
+
+Tokens per official verifier pass include failed attempts in the same treatment. Zero passes, unknown rewards or incomplete usage leave the ratio unknown.
+
+| Treatment | Official passes | All-attempt total tokens | Tokens per official pass |
+|---|---:|---:|---:|
+| Supervisor: full indexed context (native semantic transport); Doctor generic; intent_symbolic planning; compact IntentIR requirements | 1 | 481373 | 481373.000 |
+| Supervisor: full indexed context (native semantic transport); Doctor generic; intent_symbolic planning; compact IntentIR requirements | 1 | 936650 | 936650.000 |

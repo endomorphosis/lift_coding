@@ -1,0 +1,108 @@
+# Joined native publication development qualification
+
+The frozen eight-event sequence completed with six accepted events, one stale
+branch rejected by the actual native publication CAS, and one unresolved clamp
+task retained as `residual_pending`. This adds real accepted-state publication
+and recovery to the constructed controller qualification. It does not complete
+real-repository E06 or estimate system token savings.
+
+The native trajectory published a full checkpoint at generation 0, then a
+delta at generation 1. A real service process exited with code 94 after native
+seal persistence and before CAS. A fresh process loaded the pending native
+seal and receipts, checked the entire parent chain and exact local evidence,
+re-executed visible and audit behavior, then completed native CAS and WAL using
+the explicitly new development recovery adapter. It reached generation 2.
+Another fresh event consumed that native stored accepted source, executed the
+next checks, and published generation 3. A branch based on generation 0 reached
+native publication and lost with `stale_parent` / `generation_mismatch`.
+
+| Actual work in this frozen sequence | Count |
+|---|---:|
+| Events / controller invocations | 8 / 9 |
+| Durable controller effects, all terminal after recovery | 68 |
+| Native context reads / source expansions | 4 / 8 |
+| Native input scans / additional accepted-candidate scans | 8 / 3 |
+| Native symbolic attempts / produced candidate bodies | 4 / 3 |
+| Native routing calls | 8 |
+| Native world-memory service calls / compiled actions consumed | 11 / 2 |
+| Native publication attempts / native reads / recovery calls | 7 / 4 / 1 |
+| Controller behavioral scorer processes | 18 |
+| Additional sealing admission/retrieval scorer processes | 24 |
+| Total actual isolated scorer processes | 42 |
+| Provider dispatches / provider tokens | 0 / 0 |
+
+Total measured controller invocation wall time was **60.906438 seconds**. The
+24 additional behavioral replays consumed **13.759197 seconds** within that
+total. Context enrollment/priming, source inventory freeze, implementation,
+and read-only audit time are excluded. Crash-time replays are counted from the
+durable crash receipt; the recovered publish completion aliases the recovery
+receipt and is not double-counted.
+
+Both memory and ordinary controls perform a cheap current-source check before
+repair. Both accepted no-op revisits without symbolic repair or a provider.
+The world compiler's selected action dispatches that actual check. This
+qualification shows no memory-specific reduction in checks. The unhandled
+clamp task's zero tokens mean no provider was dispatched; its repair remains
+incomplete and cannot be counted as successful token savings.
+
+## What the seal establishes
+
+The complete required set is frozen externally: accepted source, semantic
+preparation, effect inventory, visible behavior, and audit behavior. Candidate
+edits receive a new actual native scan before sealing, so the accepted source
+and behavioral obligation bind the same bytes. Every seal uses genuine native
+forest and aggregation bytes, native immutable storage, native integrity
+verification, and exact independently rebuilt seal equality. All five receipt
+leaves are replaced on each delta; no execution reuse is claimed.
+
+The admission adapter also reads the complete terminal effect set from the
+local durable ledger, checks immutable completion bytes and their source
+bindings, and runs fresh isolated visible/audit checks. Stored parent chains
+are recursively revalidated; each read also replays the requested current
+source. Source for the next event comes from the native stored receipt, with
+the local accepted file used as a checked cache.
+
+This is the `integrity_only` native profile. Local execution receipts are
+unsigned. Native verification checks bytes and digests, not a theorem about
+Python execution. Admission relies on the trusted development controller,
+scorer, local effect ledger, and a separate evaluation-owned CID metadata
+index. It is not a production issuer policy or a self-contained portable
+execution proof. The source profiles remain separate normal-import service
+processes; they are not presented as a single deployed native runtime.
+
+The qualified recovery boundary is a delta seal persisted before native CAS.
+The controller does not blindly retry the same high-level publication ID. The
+new adapter checks pending/current bindings and uses native CAS/WAL primitives
+to finish it. Broader crash phases, concurrent publication, provider effects,
+real repository edits, and reusable execution admission remain separate work.
+
+## Evidence and preservation
+
+`summary.json`, `audit_v3.json`, all `invocations/`, and `state/` retain actual
+requests, subprocess outputs, completion receipts, ledger, native immutable
+objects, pointers, WAL and crash receipt. The read-only audit passes **6,424
+checks** and pins **339** sources actually loaded by controller workers.
+`loaded_source_manifest.json` additionally includes the prior context
+producer/consumer closure, for **483** native source files. `frozen_sources/`
+contains **504** source/metadata files (20,354,387 bytes), including exact
+controller, native service, runner and validator copies. `audit_archived.py`
+passes the same checks using archived source hashes. A new executable replay
+still needs a newly enrolled profile, reconstructed Python/assets and the
+pinned scorer image; the image is not exported here.
+
+The first run, `../development-v3-attempt1/`, is preserved. It stopped before
+publication because the freeze omitted a native root `__init__.py` wrapper.
+The second profile adds that real imported file. The initial read-only audit
+also treated native pointer envelopes as payloads; `audit_attempt1.py` and
+`audit_attempt1_failure.json` preserve that parser failure. No behavioral
+outcomes were rerun to fix the audit.
+
+Pins:
+
+- Profile: `b77ddc3f0fc046d231df0e28ba4c3309ee5ad14a8a7440001e42895f39f716dd`
+- Controller: `69507f9af10e07d7ef064c39a11d6f86132ee146fb71e7d0f58ea17aa4c60de2`
+- Sealing service: `f3a4f60bb4af533ef87f59c256a80be1d050e7b32c1e0292ff783441061d0170`
+- Scorer image: `sha256:7a8b475003c4fe15a2cd4e55e5cfc2f3560bdc9333d624f24cdd6d4340fd7a17`
+
+The archived v2 audit still passes all 9,188 checks after live controller v3
+changes; the previous qualification has not been replaced by these results.

@@ -1,0 +1,25 @@
+{
+  "time": "2026-11-10T02:51:58.655306+00:00",
+  "input_tree": "6a9c300aefc39bc628a8e496f215b551b17f9e44",
+  "resolutions": [
+    {
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_indexed_preparation.py",
+      "syntax_parsed": true,
+      "conflict_blocks_prepared": 1,
+      "sha256": "b55d8f18f43b72a918f3bf2de2cb902e42bd3ef7b87683af2e339ac3a1750f49"
+    },
+    {
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_doctor_dispatch.py",
+      "syntax_parsed": true,
+      "conflict_blocks_prepared": 3,
+      "sha256": "b4c448c44ef4fbf8ac9e171695bc18a1703ca4bf698e41c975ac834b4120e7de"
+    }
+  ],
+  "source_tree_updated": false,
+  "source_refs_updated": false,
+  "write_attempt": "Original three-second write-source admission timed out before source/tree/index mutation.",
+  "observed_live_reader_pid": 2093160,
+  "observed_nested_reader_pid": 2109602,
+  "runtime_qualified": false,
+  "main_merged": false
+}

@@ -1,0 +1,482 @@
+"""First service-separated development controller. No inference on import.
+
+Native semantic/symbolic workers and native world-memory workers have distinct
+normal-import profiles. A local durable effect ledger is not native publication.
+Every candidate still needs actual independent behavioral execution checks.
+"""
+from __future__ import annotations
+
+import argparse
+import ast
+from datetime import datetime, timezone
+import hashlib
+import importlib.util
+import json
+import os
+from pathlib import Path
+import sqlite3
+import subprocess
+import sys
+import time
+
+HERE = Path(__file__).resolve().parent
+EVALS = HERE.parent
+ROOT = HERE.parents[4]
+PURPOSES = {"planning", "formalization", "source_expansion", "proposal", "review", "recovery", "retry"}
+
+
+def canonical(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()
+
+
+def sha(value):
+    return hashlib.sha256(value).hexdigest()
+
+
+def file_hash(path):
+    return sha(Path(path).read_bytes())
+
+
+def utc():
+    return datetime.now(timezone.utc).isoformat()
+
+
+def write_new(path, value):
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    data = canonical(value) + b"\n"
+    try:
+        with path.open("xb") as handle:
+            handle.write(data)
+            handle.flush()
+            os.fsync(handle.fileno())
+    except FileExistsError:
+        if path.read_bytes() != data:
+            raise ValueError("immutable artifact already exists with different bytes: " + str(path))
+    directory = os.open(path.parent, os.O_RDONLY)
+    try:
+        os.fsync(directory)
+    finally:
+        os.close(directory)
+
+
+def load_module(name, path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+class UnknownEffect(RuntimeError):
+    pass
+
+
+class Ledger:
+    def __init__(self, directory):
+        self.directory = Path(directory)
+        self.directory.mkdir(parents=True, exist_ok=True)
+        self.db = sqlite3.connect(self.directory / "ledger.sqlite3", timeout=30, isolation_level=None)
+        self.db.execute("PRAGMA journal_mode=WAL")
+        self.db.execute("PRAGMA synchronous=FULL")
+        self.db.executescript("""
+        CREATE TABLE IF NOT EXISTS journal(seq INTEGER PRIMARY KEY, previous_hash TEXT, record_json TEXT NOT NULL, record_hash TEXT NOT NULL);
+        CREATE TABLE IF NOT EXISTS effects(effect_id TEXT PRIMARY KEY,event_id TEXT NOT NULL,stage TEXT NOT NULL,request_hash TEXT NOT NULL,state TEXT NOT NULL,result_path TEXT,result_hash TEXT);
+        CREATE TABLE IF NOT EXISTS events(event_id TEXT PRIMARY KEY,request_hash TEXT NOT NULL,status TEXT NOT NULL,result_path TEXT);
+        CREATE TABLE IF NOT EXISTS roots(trajectory TEXT PRIMARY KEY,event_id TEXT NOT NULL,generation INTEGER NOT NULL,source_path TEXT NOT NULL,source_hash TEXT NOT NULL);
+        """)
+
+    def append(self, kind, data):
+        previous = self.db.execute("SELECT seq,record_hash FROM journal ORDER BY seq DESC LIMIT 1").fetchone()
+        seq, previous_hash = (previous[0] + 1, previous[1]) if previous else (1, None)
+        record = {"seq": seq, "previous_hash": previous_hash, "kind": kind, "timestamp": utc(), "data": data}
+        body = canonical(record)
+        self.db.execute("INSERT INTO journal VALUES(?,?,?,?)", (seq, previous_hash, body.decode(), sha(body)))
+
+    def root(self, trajectory):
+        row = self.db.execute("SELECT event_id,generation,source_path,source_hash FROM roots WHERE trajectory=?", (trajectory,)).fetchone()
+        return None if row is None else dict(zip(("event_id", "generation", "source_path", "source_hash"), row))
+
+    def effect(self, event_id, stage, request, invoke, *, fault=None):
+        request_hash = sha(canonical(request))
+        effect_id = sha(canonical({"event_id": event_id, "stage": stage, "request_hash": request_hash}))
+        directory = self.directory / "effects" / effect_id
+        completion = directory / "completion.json"
+        existing = self.db.execute("SELECT request_hash,state,result_path,result_hash FROM effects WHERE effect_id=?", (effect_id,)).fetchone()
+        prior_stage = self.db.execute("SELECT request_hash FROM effects WHERE event_id=? AND stage=?", (event_id, stage)).fetchone()
+        if prior_stage and prior_stage[0] != request_hash:
+            raise ValueError("same event/stage cannot silently acquire a new effect request")
+        if existing:
+            if existing[0] != request_hash:
+                raise ValueError("effect request identity changed")
+            if existing[1] == "terminal":
+                if file_hash(existing[2]) != existing[3]:
+                    raise ValueError("terminal effect bytes changed")
+                self.append("terminal_effect_reused", {"event_id": event_id, "stage": stage, "effect_id": effect_id})
+                return json.loads(Path(existing[2]).read_text())["response"]
+            if completion.exists():
+                saved = json.loads(completion.read_text())
+                if saved["effect_id"] != effect_id or saved["request_hash"] != request_hash:
+                    raise ValueError("durable completion binding mismatch")
+                self.db.execute("UPDATE effects SET state='terminal',result_path=?,result_hash=? WHERE effect_id=?", (str(completion), file_hash(completion), effect_id))
+                self.append("effect_completion_reconciled", {"event_id": event_id, "effect_id": effect_id, "stage": stage})
+                return saved["response"]
+            self.append("effect_unknown_retained", {"event_id": event_id, "effect_id": effect_id, "stage": stage})
+            raise UnknownEffect(effect_id)
+        write_new(directory / "request.json", request)
+        self.db.execute("BEGIN IMMEDIATE")
+        try:
+            self.db.execute("INSERT INTO effects VALUES(?,?,?,?,?,?,?)", (effect_id, event_id, stage, request_hash, "dispatching", None, None))
+            self.append("effect_dispatch_intent", {"event_id": event_id, "effect_id": effect_id, "stage": stage, "request_hash": request_hash})
+            self.db.execute("COMMIT")
+        except BaseException:
+            self.db.execute("ROLLBACK")
+            raise
+        started = time.perf_counter()
+        response = invoke(directory)
+        if fault == "after_effect_before_receipt":
+            os._exit(92)
+        saved = {"effect_id": effect_id, "event_id": event_id, "stage": stage, "request_hash": request_hash, "elapsed_seconds": time.perf_counter() - started, "response": response}
+        write_new(completion, saved)
+        if fault == "after_receipt_before_ledger":
+            os._exit(93)
+        self.db.execute("BEGIN IMMEDIATE")
+        try:
+            self.db.execute("UPDATE effects SET state='terminal',result_path=?,result_hash=? WHERE effect_id=?", (str(completion), file_hash(completion), effect_id))
+            self.append("effect_terminal", {"event_id": event_id, "stage": stage, "effect_id": effect_id, "result_hash": file_hash(completion)})
+            self.db.execute("COMMIT")
+        except BaseException:
+            self.db.execute("ROLLBACK")
+            raise
+        return response
+
+    def commit_event(self, event, result, source_path=None):
+        self.db.execute("BEGIN IMMEDIATE")
+        try:
+            current = self.root(event["trajectory"])
+            if result["status"] == "accepted" and (None if current is None else current["event_id"]) != event.get("parent_event"):
+                result["status"] = "stale_parent"
+                result["accepted"] = False
+                result["actual_parent"] = current
+            if result["status"] == "accepted":
+                generation = 0 if current is None else current["generation"] + 1
+                self.db.execute("INSERT OR REPLACE INTO roots VALUES(?,?,?,?,?)", (event["trajectory"], event["event_id"], generation, str(source_path), file_hash(source_path)))
+                result["local_generation"] = generation
+            path = self.directory / "events" / event["event_id"] / "result.json"
+            write_new(path, result)
+            self.db.execute("UPDATE events SET status=?,result_path=? WHERE event_id=?", (result["status"], str(path), event["event_id"]))
+            self.append("event_terminal", {"event_id": event["event_id"], "status": result["status"], "result_path": str(path), "result_hash": file_hash(path)})
+            self.db.execute("COMMIT")
+            return result
+        except BaseException:
+            self.db.execute("ROLLBACK")
+            raise
+
+
+class MeteredResidual:
+    """Only future neural boundary, shared by every named workflow purpose."""
+    def __init__(self, profile, ledger, profile_hash):
+        self.profile, self.ledger, self.profile_hash = profile, ledger, profile_hash
+
+    def request(self, event_id, purpose, messages):
+        if purpose not in PURPOSES:
+            raise ValueError("unregistered model-call purpose")
+        call_id = "integrated-" + sha(canonical({"event_id": event_id, "purpose": purpose}))[:32]
+        request = {"call_id": call_id, "purpose": purpose, "messages": messages, "unified_profile_sha256": self.profile_hash}
+        self.ledger.append("residual_requested", {"event_id": event_id, "call_id": call_id, "purpose": purpose, "request_sha256": sha(canonical(request))})
+        if not self.profile["provider"]["enabled"]:
+            write_new(self.ledger.directory / "pending_residuals" / (call_id + ".json"), request)
+            return {"status": "pending_profile_enrollment", "call_id": call_id, "purpose": purpose, "attempted_posts": 0, "total_tokens": 0, "usage_semantics": "known zero dispatch; task remains incomplete"}
+        provider_path = Path(self.profile["provider"]["profile_path"])
+        if file_hash(provider_path) != self.profile["provider"]["profile_sha256"]:
+            raise ValueError("provider profile changed")
+        provider_profile = json.loads(provider_path.read_text())
+        if call_id not in provider_profile["call_ids"]:
+            raise ValueError("call identity absent from frozen provider profile")
+        wrapper_path = EVALS / "metered_provider.py"
+        wrapper = load_module("integrated_metered_provider", wrapper_path)
+        # Reconcile the transport's own durable terminal receipt if interruption
+        # happened after it was written but before the workflow ledger closed.
+        request_hash = sha(canonical(request))
+        stage = "provider_" + purpose
+        effect_id = sha(canonical({"event_id": event_id, "stage": stage, "request_hash": request_hash}))
+        transport_dir = self.ledger.directory / "provider" / call_id
+        terminal = transport_dir / "result.json"
+        effect_dir = self.ledger.directory / "effects" / effect_id
+        prior = self.ledger.db.execute("SELECT state FROM effects WHERE effect_id=?", (effect_id,)).fetchone()
+        if prior and prior[0] != "terminal" and terminal.exists() and not (effect_dir / "completion.json").exists():
+            receipt = json.loads(terminal.read_text())
+            sent = json.loads((transport_dir / "request.json").read_text())
+            if receipt["call_id"] != call_id or receipt["profile_sha256"] != file_hash(provider_path) or receipt["transport_sha256"] != file_hash(wrapper_path) or sent["messages"] != messages or sha(canonical(sent)) != receipt["request_sha256"]:
+                raise ValueError("provider terminal receipt is not bound to current effect")
+            write_new(effect_dir / "completion.json", {"effect_id": effect_id, "event_id": event_id, "stage": stage, "request_hash": request_hash, "elapsed_seconds": receipt.get("elapsed_seconds"), "response": receipt, "reconciled_from_provider_terminal": True})
+        def invoke(directory):
+            return wrapper.call(provider_path, self.ledger.directory / "provider", call_id, messages)
+        return self.ledger.effect(event_id, stage, request, invoke)
+
+
+def clean_environment():
+    return {"PATH": os.environ.get("PATH", ""), "LANG": "C.UTF-8", "PYTHONDONTWRITEBYTECODE": "1", "IPFS_DATASETS_PY_MINIMAL_IMPORTS": "1", "IPFS_DATASETS_AUTO_INSTALL": "0", "IPFS_KIT_AUTO_INSTALL_DEPS": "0"}
+
+
+def subprocess_json(command, request, directory, timeout=120, fault_after_subprocess=False):
+    completed = subprocess.run(command, input=canonical(request), capture_output=True, cwd=ROOT, env=clean_environment(), timeout=timeout)
+    if fault_after_subprocess:
+        os._exit(92)
+    write_new(directory / "process.json", {"command": command, "returncode": completed.returncode, "stdout": completed.stdout.decode(errors="replace"), "stderr": completed.stderr.decode(errors="replace")})
+    if completed.returncode:
+        raise RuntimeError("service failed; retained raw process receipt at " + str(directory))
+    return json.loads(completed.stdout)
+
+
+def native_imports():
+    roots = [ROOT / "external/ipfs_accelerate", ROOT / "external/ipfs_datasets", ROOT / "external/ipfs_kit"]
+    sys.path[:0] = [str(path) for path in roots]
+    from ipfs_accelerate_py.agent_supervisor.analysis.formal_assurance.ipa import analyze_python_source
+    from ipfs_accelerate_py.agent_supervisor.autonomous_repair import formal_assurance_cegis as cegis
+    from ipfs_accelerate_py.agent_supervisor.semantic_state.routing import RoutingInputs, route_model
+    from ipfs_datasets_py.logic.software_contracts.semantic_index.snapshot import snapshot_repository
+    from ipfs_datasets_py.logic.software_contracts.semantic_index.scanner import RepositoryScanner
+    from ipfs_datasets_py.logic.software_contracts.semantic_state import build_semantic_state, verify_semantic_state_bundle, view_semantic_state_bundle
+    from ipfs_datasets_py.logic.software_contracts.content import cid_for_structured
+    return locals()
+
+
+def import_receipt():
+    result = {}
+    for name, module in sorted(sys.modules.items()):
+        path = getattr(module, "__file__", None)
+        if path and Path(path).is_file() and any(name == prefix or name.startswith(prefix + ".") for prefix in ("ipfs_accelerate_py", "ipfs_datasets_py", "ipfs_kit_py")):
+            actual = Path(path).resolve()
+            result[str(actual)] = {"module": name, "sha256": file_hash(actual)}
+    return result
+
+
+def worker(request):
+    role = request["role"]
+    if role == "score":
+        scorer = load_module("integrated_isolated_scorer", EVALS / "scorer_integrity/isolated_scorer.py")
+        cases = json.loads((EVALS / "routing_v2/cases.json").read_text())["cases"]
+        case = next(case for case in cases if case["id"] == request["case_id"])
+        validation = case[request["validation_kind"]]
+        entrypoints = [node.name for node in ast.parse(case["source"]).body if isinstance(node, ast.FunctionDef)]
+        result = scorer.score(request["source"], validation, profile="routing", entrypoints=entrypoints)
+        return {"role": role, "result": result, "scorer_sha256": file_hash(EVALS / "scorer_integrity/isolated_scorer.py"), "image": scorer.IMAGE, "worker_pid": os.getpid()}
+    api = native_imports()
+    if role == "route":
+        closed = request["bounded_obligation_discharged"]
+        route = api["route_model"](api["RoutingInputs"](context_tokens=request["context_token_estimate"], lowest_confidence="exact" if closed else "conservative", risk="low", dependency_cone_size=request["dependency_cone_size"], unresolved_obligations=0 if closed else 1, prior_repair_failures=0, available_proofs=0))
+        return {"role": role, "routing": route.to_dict(), "imports": import_receipt(), "worker_pid": os.getpid(), "proofs_available": 0, "context_estimate_semantics": "ceil raw UTF-8 bytes / 4 routing heuristic, not provider usage"}
+    source = request["source"]
+    source_path = "seeded/" + request["case_id"] + ".py"
+    findings = api["analyze_python_source"](source, path=source_path)
+    result = {"role": role, "worker_pid": os.getpid(), "source_sha256": sha(source.encode()), "findings": [finding.to_dict() for finding in findings], "candidate_source": None, "cegis": None}
+    if role == "prepare":
+        directory = Path(request["source_directory"])
+        directory.mkdir(parents=True, exist_ok=True)
+        target = directory / "target.py"
+        if target.exists() and target.read_text() != source:
+            raise ValueError("preparation source bytes changed")
+        target.write_text(source)
+        os.environ["GIT_CEILING_DIRECTORIES"] = str(directory.parent)
+        snapshot = api["snapshot_repository"](directory, repository_id=request["case_id"], exclusions=())
+        if snapshot.mode != "filesystem" or {entry.path for entry in snapshot.entries} != {"target.py"}:
+            raise ValueError("declared single-file source snapshot escaped scope")
+        state = api["RepositoryScanner"](repository_id=request["case_id"]).scan_snapshot(snapshot, {"target.py": source.encode()})
+        bundle = api["build_semantic_state"](state)
+        api["verify_semantic_state_bundle"](bundle)
+        view = api["view_semantic_state_bundle"](bundle)
+        known = {symbol.stable_id for symbol in state.symbols}
+        unknowns = [edge.to_dict() for edge in state.edges if edge.target_id not in known]
+        obligation = {"schema": "ns-integrated-development-behavioral-obligation@1", "case_id": request["case_id"], "objective": request["objective"], "source_sha256": sha(source.encode()), "public_validation_sha256": request["public_validation_sha256"], "scope": "frozen constructed behavioral checks; not arbitrary Python correctness", "formalization_origin": "evaluation-authored objective, no model formalization", "status": "pending_actual_execution"}
+        result.update({"snapshot": snapshot.to_dict(), "semantic_state_cid": state.state_cid, "semantic_root_cid": view.root.root_cid, "symbols": [symbol.to_dict() for symbol in state.symbols], "unknown_frontier": unknowns, "source_preserved": source, "obligation": obligation, "obligation_cid": api["cid_for_structured"](obligation), "omission_permission": False})
+    elif role == "symbolic":
+        matches = [finding for finding in findings if finding.rule_id == request["rule_id"]]
+        if request["family"] and matches:
+            preferred = [finding for finding in matches if "hermetic datalog" not in finding.message]
+            finding = (preferred or matches)[0]
+            C = api["cegis"]
+            counterexample = C.CounterexampleRecord(counterexample_id="cx:" + request["case_id"], family=C.RepairFamily(request["family"]), path=source_path, witness=request["objective"], rule_id=finding.rule_id)
+            repaired = C.run_bounded_cegis(C.CegisRepairRequest(source=source, counterexample=counterexample, finding=finding, admitted_paths=["seeded/"], budget=C.CegisBudget(max_iterations=2)))
+            result["cegis"] = repaired.to_dict()
+            if repaired.certificate and repaired.candidates_tried:
+                result["candidate_source"] = repaired.candidates_tried[-1].after_source
+        result["proof_claim"] = "native CEGIS marker gates are not theorem proofs; candidate requires independent execution"
+    else:
+        raise ValueError("unsupported worker role")
+    result["imports"] = import_receipt()
+    return result
+
+
+def validate_profile(profile_path):
+    profile_path = Path(profile_path)
+    profile = json.loads(profile_path.read_text())
+    if profile["schema"] != "ns-unified-development-controller-profile@1":
+        raise ValueError("unsupported unified profile")
+    for filename, digest in profile["evaluation_files"].items():
+        if file_hash(filename) != digest:
+            raise ValueError("frozen evaluation source changed: " + filename)
+    return profile, file_hash(profile_path)
+
+
+def run_event(profile_path, event_id, fault=False):
+    profile, profile_hash = validate_profile(profile_path)
+    event = next(event for event in profile["events"] if event["event_id"] == event_id)
+    run = Path(profile["output_root"])
+    if not run.resolve().is_relative_to(HERE.resolve()):
+        raise ValueError("development output must remain under integrated_v1")
+    ledger = Ledger(run)
+    binding = {"profile_sha256": profile_hash, "controller_sha256": file_hash(__file__)}
+    write_new(run / "profile_binding.json", binding)
+    event_hash = sha(canonical(event))
+    existing = ledger.db.execute("SELECT request_hash,status,result_path FROM events WHERE event_id=?", (event_id,)).fetchone()
+    if existing and existing[0] != event_hash:
+        raise ValueError("event request changed")
+    if existing and existing[1] != "started":
+        return json.loads(Path(existing[2]).read_text())
+    if not existing:
+        ledger.db.execute("INSERT INTO events VALUES(?,?,?,?)", (event_id, event_hash, "started", None))
+        ledger.append("event_started", {"event": event, **binding})
+    case = next(case for case in json.loads((EVALS / "routing_v2/cases.json").read_text())["cases"] if case["id"] == event["case_id"])
+    current = ledger.root(event["trajectory"])
+    if event["source"] == "fixture":
+        source = case["source"]
+    else:
+        # Parent bytes are consumed from the durable accepted state, not supplied
+        # as a success-shaped source by the qualification runner.
+        parent_row = ledger.db.execute("SELECT result_path FROM events WHERE event_id=?", (event["parent_event"],)).fetchone()
+        if parent_row is None:
+            raise ValueError("declared parent event is unavailable")
+        parent_result = json.loads(Path(parent_row[0]).read_text())
+        if not parent_result["accepted"]:
+            raise ValueError("declared parent was not accepted")
+        source_path = Path(parent_result["accepted_source_path"])
+        if file_hash(source_path) != parent_result["accepted_source_sha256"]:
+            raise ValueError("durable parent source changed")
+        source = source_path.read_text()
+        if event["source"] == "parent_comment":
+            source += "\n# Frozen development source identity change.\n"
+    event_dir = run / "events" / event_id
+    write_new(event_dir / "input.json", {"event": event, "source": source, "objective": case["objective"], "source_sha256": sha(source.encode()), "consumed_parent": event.get("parent_event")})
+    base = {"case_id": case["id"], "source": source, "objective": case["objective"], "family": case["family"], "rule_id": case["rule_id"]}
+    evidence = {}
+
+    def effect(stage, request, *, command=None):
+        selected_fault = event.get("fault_point") if fault and event.get("fault_stage") == stage else None
+        def invoke(directory):
+            response = subprocess_json(command or [sys.executable, str(Path(__file__).resolve()), "worker"], request, directory, fault_after_subprocess=selected_fault == "after_effect_before_receipt")
+            for path, record in response.get("imports", {}).items():
+                if profile["native_files"].get(path) != record["sha256"]:
+                    raise ValueError("worker imported an unfrozen native source: " + path)
+            if command:
+                for record in response.get("runtime_profile", {}).get("imports", []):
+                    if profile["world_memory_files"].get(record["path"]) != record["sha256"]:
+                        raise ValueError("world-memory imported an unfrozen native source: " + record["path"])
+            return response
+        response = ledger.effect(event_id, stage, request, invoke, fault=selected_fault)
+        evidence[stage] = response
+        return response
+
+    def score(stage, body, kind):
+        return effect(stage, {"role": "score", "case_id": case["id"], "source": body, "validation_kind": kind})["result"]
+
+    def memory_request(operation, body, execution=None):
+        request = {"schema": "world-memory-service-request@1", "operation": operation, "request_id": event_id + "-" + operation, "store_dir": str(run / "world_memory"), "context": {"subject": {"case_id": case["id"]}, "source": {"text": body, "sha256": sha(body.encode())}, "environment": {"scorer_image": profile["scorer_image"], "scorer_sha256": profile["evaluation_files"][str(EVALS / "scorer_integrity/isolated_scorer.py")], "declared_environment": event.get("environment", "default")}, "state": {"objective": case["objective"], "public_validation_sha256": sha(case["visible_validation"].encode())}, "policy": {"profile_sha256": profile_hash, "requires_current_execution": True, "acceptance": "local evaluation controller only"}}, "actions": [{"name": "validate_current_source"}]}
+        if execution is not None:
+            request["execution"] = execution
+        return request
+
+    try:
+        if profile.get("context_service") and event["source"] == "fixture":
+            context_profile = profile["context_service"]
+            context_request = {"case_id": case["id"], "source_sha256": sha(source.encode()), "objective_sha256": sha(case["objective"].encode())}
+            context_command = [sys.executable, context_profile["entrypoint"], "--run", context_profile["run"], "--case", case["id"], "--expected-source-sha256", context_request["source_sha256"], "--expected-objective-sha256", context_request["objective_sha256"]]
+            materialized = effect("context_read", context_request, command=context_command)
+            if materialized["source_sha256"] != context_request["source_sha256"] or materialized["objective_sha256"] != context_request["objective_sha256"] or sha(materialized["source"].encode()) != materialized["source_sha256"] or sha(materialized["objective"].encode()) != materialized["objective_sha256"] or materialized["visible_validation"] != case["visible_validation"]:
+                raise ValueError("context service returned different current source/objective/visible validation")
+            source = materialized["source"]
+            base = {**base, "source": source, "objective": materialized["objective"]}
+        preparation = effect("prepare", {"role": "prepare", **base, "source_directory": str(event_dir / "source_inventory"), "public_validation_sha256": sha(case["visible_validation"].encode())})
+        if event["memory"] == "native":
+            proposal = effect("world_propose", memory_request("propose", source), command=[sys.executable, profile["world_memory_service"]])
+            if proposal["status"] == "proposal" and proposal["selected_action"] != "validate_current_source":
+                raise ValueError("unexpected world-memory action")
+        else:
+            proposal = {"status": "not_called", "selected_action": None, "reason": "ordinary_current_execution_control"}
+        if proposal["status"] == "proposal":
+            # The compiled selected action chooses the actual executor. The
+            # ordinary control runs the same cheap current-state check; this
+            # integration does not claim a memory-specific savings advantage.
+            executors = {"validate_current_source": lambda: score("current_visible", source, "visible_validation")}
+            visible = executors[proposal["selected_action"]]()
+            ledger.append("world_action_consumed", {"event_id": event_id, "action": proposal["selected_action"], "compilation_cid": proposal["compilation"]["compilation_cid"], "candidate_cid": proposal["resolved_candidate_cid"], "execution_stage": "current_visible", "actual_passed": visible["passed"]})
+        else:
+            visible = score("current_visible", source, "visible_validation")
+        candidate = source if visible["passed"] else None
+        decision = "world_suggested_current_validation" if candidate and proposal["status"] == "proposal" else "ordinary_current_validation" if candidate else "symbolic_attempt"
+        if candidate is None:
+            symbolic = effect("symbolic", {"role": "symbolic", **base})
+            candidate = symbolic["candidate_source"]
+            if candidate is not None:
+                visible = score("candidate_visible", candidate, "visible_validation")
+                if not visible["passed"]:
+                    candidate = None
+        route = effect("route", {"role": "route", "bounded_obligation_discharged": candidate is not None, "dependency_cone_size": max(1, len(preparation["symbols"])), "context_token_estimate": (len(source.encode()) + 3) // 4})
+        residual = None
+        if candidate is None:
+            messages = [{"role": "system", "content": "Return only a JSON object with one string field source containing the repaired complete Python module. Preserve public function names; no imports, classes, decorators or private attributes."}, {"role": "user", "content": json.dumps({"objective": case["objective"], "source": source, "public_validation": case["visible_validation"], "semantic_root_cid": preparation["semantic_root_cid"], "unknown_frontier": preparation["unknown_frontier"]}, sort_keys=True)}]
+            if route["routing"]["requires_provider"]:
+                residual = MeteredResidual(profile, ledger, profile_hash).request(event_id, "proposal", messages)
+                if residual.get("status") == "response":
+                    try:
+                        value = json.loads(residual["text"])
+                        if set(value) == {"source"} and isinstance(value["source"], str) and len(value["source"].encode()) <= 65536:
+                            candidate = value["source"]
+                            visible = score("residual_visible", candidate, "visible_validation")
+                            if not visible["passed"]:
+                                candidate = None
+                    except (ValueError, TypeError):
+                        candidate = None
+            else:
+                residual = {"status": "native_route_halted", "attempted_posts": 0, "total_tokens": 0}
+        audit = score("candidate_audit", candidate, "audit_validation") if candidate is not None else None
+        accepted = bool(audit and audit["passed"] and visible["passed"])
+        if fault and event.get("fault_point") == "after_validation" and accepted:
+            os._exit(91)
+        result = {"schema": "ns-unified-development-controller-event@1", "event_id": event_id, "trajectory": event["trajectory"], "case_id": case["id"], "parent_event": event.get("parent_event"), "status": "accepted" if accepted else "residual_pending" if residual and residual.get("status") == "pending_profile_enrollment" else "not_accepted", "accepted": accepted, "decision": decision, "input_source_sha256": sha(source.encode()), "obligation_cid": preparation["obligation_cid"], "semantic_root_cid": preparation["semantic_root_cid"], "evidence": evidence, "residual": residual, "publication": {"native_sealing_called": False, "scope": "local development ledger continuation only"}, "context_service_called": "context_read" in evidence, "reusable_execution_proof_claimed": False, "provider_calls": 0 if residual is None else residual.get("attempted_posts", 0), "provider_total_tokens": 0 if residual is None else residual.get("normalized_usage", {}).get("total_tokens", residual.get("total_tokens")), "profile_sha256": profile_hash}
+        candidate_path = None
+        if accepted:
+            candidate_path = event_dir / "accepted_source.py"
+            if candidate_path.exists() and candidate_path.read_text() != candidate:
+                raise ValueError("candidate changed during recovery")
+            candidate_path.write_text(candidate)
+            with candidate_path.open("rb") as handle:
+                os.fsync(handle.fileno())
+            result.update({"accepted_source_path": str(candidate_path), "accepted_source_sha256": file_hash(candidate_path)})
+            if event["memory"] == "native":
+                execution = {"selected_action": "validate_current_source", "passed": True, "producer_pid": evidence["candidate_audit"]["worker_pid"], "output": {"candidate_sha256": sha(candidate.encode()), "visible_passed": True, "audit_passed": True}, "evidence": [{"visible": visible, "audit": audit, "source_sha256": sha(candidate.encode())}]}
+                result["evidence"]["world_record"] = effect("world_record", memory_request("record", candidate, execution), command=[sys.executable, profile["world_memory_service"]])
+        return ledger.commit_event(event, result, candidate_path)
+    except UnknownEffect as error:
+        unknown_stage = ledger.db.execute("SELECT stage FROM effects WHERE effect_id=?", (str(error),)).fetchone()[0]
+        provider_unknown = unknown_stage.startswith("provider_")
+        result = {"schema": "ns-unified-development-controller-event@1", "event_id": event_id, "trajectory": event["trajectory"], "case_id": case["id"], "status": "effect_unknown", "accepted": False, "unknown_effect_id": str(error), "provider_calls": None if provider_unknown else 0, "provider_total_tokens": None if provider_unknown else 0, "unknown_scope": "unsettled provider effect; charge/usage unknown" if provider_unknown else "unsettled local effect retained; no provider dispatched", "profile_sha256": profile_hash}
+        return ledger.commit_event(event, result)
+    finally:
+        ledger.db.close()
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    sub = parser.add_subparsers(dest="operation", required=True)
+    sub.add_parser("worker")
+    run = sub.add_parser("run")
+    run.add_argument("--profile", required=True)
+    run.add_argument("--event", required=True)
+    run.add_argument("--fault", action="store_true")
+    args = parser.parse_args()
+    result = worker(json.load(sys.stdin)) if args.operation == "worker" else run_event(args.profile, args.event, args.fault)
+    print(json.dumps(result, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()

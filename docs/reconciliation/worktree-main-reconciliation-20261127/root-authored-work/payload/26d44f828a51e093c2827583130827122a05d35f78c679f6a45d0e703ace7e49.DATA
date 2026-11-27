@@ -1,0 +1,279 @@
+"""Prospective fixed-cohort arithmetic over independently admitted event exports.
+
+This module checks identities, accounting and denominators. It is not a source,
+scorer or journal admission service. A frozen raw-receipt adapter is required
+before applying it to research outcomes. Synthetic controls are not eval results.
+"""
+import hashlib
+import itertools
+import json
+import math
+import re
+
+USAGE_FIELDS = ("total_tokens", "input_tokens", "output_tokens", "reasoning_tokens",
+                "cached_input_tokens", "api_reported_cost_ticks")
+RECOVERY_IDS = ("capture_parent_and_validate", "publish_interrupt", "fresh_recovery",
+                "stale_parent_branch", "fresh_parent_continuation")
+
+
+def require(condition, message):
+    if not condition:
+        raise ValueError(message)
+
+
+def canonical(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()
+
+
+def digest(value):
+    return hashlib.sha256(canonical(value)).hexdigest()
+
+
+def known_sum(values):
+    values = list(values)
+    return None if any(value is None for value in values) else sum(values)
+
+
+def optional_number(value, name, integer=False):
+    require(value is None or type(value) in ((int,) if integer else (int, float))
+            and math.isfinite(value) and value >= 0, "invalid nonnegative measurement: " + name)
+
+
+def optional_bool(value, name):
+    require(value is None or type(value) is bool, "invalid outcome: " + name)
+
+
+def make_schedule(corpus, run_id):
+    require(re.fullmatch(r"[a-zA-Z0-9_-]+", run_id) is not None, "invalid run identity")
+    task_ids = [task["task_id"] for task in corpus["tasks"]]
+    require(len(task_ids) == len(set(task_ids)) == 4, "four original families required")
+    require(corpus["arms"] == ["A", "B", "C", "D"], "original arms changed")
+    require(corpus["cache_profiles"] == ["cold", "warm"], "original cache profiles changed")
+    controls = corpus["one_factor_warm_controls"]
+    require(controls == ["B_additive_context", "D_without_symbolic_routing", "D_without_reuse",
+                        "D_without_persistent_semantic_state", "D_without_procedures",
+                        "D_fixed_complete_template", "D_without_world_memory"], "original component controls changed")
+    rows = []
+    for task in corpus["tasks"]:
+        for cache in corpus["cache_profiles"]:
+            for arm in corpus["arms"]:
+                rows.append({"task_id": task["task_id"], "arm": arm, "cache_profile": cache,
+                             "control": "primary", "family_id": task["task_id"]})
+        for control in controls:
+            rows.append({"task_id": task["task_id"], "arm": control[0], "cache_profile": "warm",
+                         "control": control, "family_id": task["task_id"]})
+    first_tasks = corpus["first_tranche"]["task_ids"]
+    require(first_tasks == task_ids[:2], "first tranche changed")
+    first = [row for row in rows if row["task_id"] in first_tasks and row["cache_profile"] == "cold" and row["control"] == "primary"]
+    rows = first + [row for row in rows if row not in first]
+    tasks = {task["task_id"]: task for task in corpus["tasks"]}
+    for row in rows:
+        row["run_id"] = run_id
+        row["trajectory_id"] = "--".join([run_id, row["task_id"], row["arm"], row["cache_profile"], row["control"]])
+        row["first_tranche"] = row in first
+        row["horizons"] = [{"horizon": 0, "name": "setup_prime", "configuration_sha256": tasks[row["task_id"]]["events"][0]["configuration_sha256"]}] + [
+            {"horizon": event["event_index"], "name": event["event_name"], "configuration_sha256": event["configuration_sha256"]}
+            for event in tasks[row["task_id"]]["events"]]
+        require([h["horizon"] for h in row["horizons"]] == list(range(7)), "six events plus prime required")
+        for horizon in row["horizons"]:
+            horizon["event_id"] = row["trajectory_id"] + "--h" + str(horizon["horizon"]).zfill(2)
+    require(len(rows) == 60 and sum(row["first_tranche"] for row in rows) == 8, "original matrix extent changed")
+    return rows
+
+
+def complete_outcomes(values):
+    values = list(values)
+    return False if False in values else None if None in values else True
+
+
+def exact_bootstrap_interval(pairs):
+    """Whole-family descriptive percentile interval; no population inference."""
+    if not pairs or len(pairs) > 4 or any(a is None or b is None for a, b in pairs):
+        return None
+    values = []
+    for draw in itertools.product(range(len(pairs)), repeat=len(pairs)):
+        baseline = sum(pairs[i][0] for i in draw)
+        if baseline == 0:
+            return None
+        values.append(1 - sum(pairs[i][1] for i in draw) / baseline)
+    values.sort()
+    def quantile(p):
+        rank = p * (len(values) - 1)
+        lo, hi = math.floor(rank), math.ceil(rank)
+        return values[lo] + (values[hi] - values[lo]) * (rank - lo)
+    return {"low": quantile(.025), "high": quantile(.975), "resamples": len(values),
+            "family_blocks": len(pairs), "method": "exact whole-family percentile bootstrap; descriptive development only"}
+
+
+def analyze(schedule, export):
+    require(export["schema"] == "ns-original-analysis-export/v1", "wrong export schema")
+    selection = export["selection"]
+    require(selection in ("first_tranche", "full"), "unfrozen outcome selection")
+    selected = [row for row in schedule if selection == "full" or row["first_tranche"]]
+    trajectories = {row["trajectory_id"]: row for row in selected}
+    expected_events = {h["event_id"]: {**row, **h} for row in selected for h in row["horizons"]}
+    events = {row["event_id"]: row for row in export["events"]}
+    require(len(events) == len(export["events"]) and set(events) == set(expected_events), "missing, extra or duplicate scheduled event")
+    calls = {row["call_id"]: row for row in export["provider_calls"]}
+    require(len(calls) == len(export["provider_calls"]), "duplicate authoritative call")
+    intervals = {row["invocation_id"]: row for row in export["invocations"]}
+    require(len(intervals) == len(export["invocations"]), "duplicate enclosing invocation")
+    require(all(row["event_id"] in events for row in intervals.values()), "orphan enclosing invocation")
+    for row in intervals.values():
+        for name in ("elapsed_seconds", "host_waited_cpu_seconds", "container_cpu_seconds"):
+            optional_number(row[name], name)
+    call_owners, slots, aliases = {}, {}, 0
+    for event_id, event in events.items():
+        frozen = expected_events[event_id]
+        for name in ("run_id", "trajectory_id", "task_id", "arm", "cache_profile", "control", "horizon", "configuration_sha256"):
+            require(event[name] == frozen[name], "event identity mismatch: " + name)
+        require(event["terminal"] is True, "cohort event not terminal")
+        require(type(event["accepted_for_next_state"]) is bool, "invalid accepted-state flag")
+        require(any(row["event_id"] == event_id for row in intervals.values()), "missing enclosing invocation observation")
+        for name in ("event_obligations_passed", "independent_original_repair_passed", "plan_coverage_passed"):
+            optional_bool(event[name], name)
+        require(type(event["plan_coverage_qualified"]) is bool, "plan coverage qualification missing")
+        required_ids = frozen["required_obligation_ids"]
+        outcomes = event["required_obligation_outcomes"]
+        require(required_ids and len(required_ids) == len(set(required_ids)), "frozen obligation inventory missing or duplicated")
+        require(len({row["obligation_id"] for row in outcomes}) == len(outcomes), "duplicate obligation outcome")
+        require({row["obligation_id"] for row in outcomes if row["required"]} == set(required_ids), "required obligation inventory changed")
+        for outcome in outcomes:
+            require(type(outcome["required"]) is bool, "invalid required obligation flag")
+            optional_bool(outcome["passed"], "obligation outcome")
+            require(outcome["passed"] is not True or bool(outcome["evidence_refs"]), "passing obligation lacks evidence reference")
+        require(event["event_obligations_passed"] == complete_outcomes(row["passed"] for row in outcomes if row["required"]),
+                "event quality differs from complete obligation inventory")
+        if event["horizon"] == 1 and not event["plan_coverage_qualified"]:
+            require(event["plan_coverage_passed"] is None and event["event_obligations_passed"] is not True, "unqualified plan counted as complete")
+        if event["horizon"] >= 2 and event["event_obligations_passed"] is True:
+            require(event["independent_original_repair_passed"] is True and event["accepted_for_next_state"] is True,
+                    "event completion lacks accepted original repair")
+        if event["horizon"] == 0:
+            require(event["accepted_for_next_state"] is False and event["independent_original_repair_passed"] is not True,
+                    "prime injected a solved accepted repair")
+        for name in ("false_admissions", "invalidation_misses", "repeated_dispatches"):
+            optional_number(event[name], name, integer=True)
+        for attempt in event["provider_attempts"]:
+            cid, slot = attempt["call_id"], attempt["slot"]
+            require(cid in calls, "attempt lacks authoritative transport/unknown-intent projection")
+            require(type(slot) is int and 0 <= slot < 4, "trajectory slot outside common budget")
+            require(cid == "nsorig-" + digest({"trajectory_id": event["trajectory_id"], "slot": slot})[:40], "call identity mismatch")
+            identity = (event["trajectory_id"], slot)
+            require(identity not in slots or slots[identity] == cid, "slot reused for another call")
+            slots[identity] = cid
+            if cid in call_owners:
+                require(call_owners[cid] == event_id, "call charged to multiple event horizons")
+                aliases += 1
+            call_owners[cid] = event_id
+            call = calls[cid]
+            require(call["event_id"] == event_id and call["trajectory_id"] == event["trajectory_id"] and call["slot"] == slot,
+                    "transport attribution mismatch")
+            require(call["attempted_posts"] is None or type(call["attempted_posts"]) is int and call["attempted_posts"] in (0, 1),
+                    "multiple or invalid provider dispatch count")
+            for name in USAGE_FIELDS:
+                optional_number(call["normalized_usage"][name], name, integer=True)
+            if call["attempted_posts"] is None:
+                require(all(call["normalized_usage"][name] is None for name in USAGE_FIELDS), "unknown possible dispatch assigned known usage")
+        if event["horizon"] == 6:
+            sub = event["recovery_subinvocations"]
+            require(len(sub) == 5 and {r["subinvocation_id"] for r in sub} == set(RECOVERY_IDS), "missing or duplicate recovery branch")
+            for row in sub:
+                optional_bool(row["postcondition_passed"], "recovery postcondition")
+                require(type(row["boundary_reached"]) is bool and type(row["precondition_satisfied"]) is bool, "unqualified recovery coverage")
+                if not row["boundary_reached"] or not row["precondition_satisfied"]:
+                    require(row["postcondition_passed"] is not True, "unreached branch counted as success")
+            if event["event_obligations_passed"] is True:
+                require(all(row["postcondition_passed"] is True for row in sub), "incomplete recovery counted complete")
+    require(set(call_owners) == set(calls), "orphan provider cost or unknown intent")
+    summaries = []
+    for tid, trajectory in trajectories.items():
+        ordered = [events[h["event_id"]] for h in trajectory["horizons"]]
+        horizons = []
+        for end in range(7):
+            prior = ordered[:end + 1]
+            ids = {event["event_id"] for event in prior}
+            selected_calls = [call for call in calls.values() if call["event_id"] in ids]
+            selected_intervals = [row for row in intervals.values() if row["event_id"] in ids]
+            usage = {name: known_sum(0 if call["attempted_posts"] == 0 else call["normalized_usage"][name] for call in selected_calls) for name in USAGE_FIELDS}
+            unknown_posts = sum(call["attempted_posts"] is None for call in selected_calls)
+            horizons.append({"horizon": end, "scheduled_events": end,
+                             "satisfied_events": sum(event["event_obligations_passed"] is True for event in prior[1:]),
+                             "unknown_event_outcomes": sum(event["event_obligations_passed"] is None for event in prior[1:]),
+                             "usage": usage, "provider_slots": len(selected_calls),
+                             "provider_posts_known": sum(call["attempted_posts"] or 0 for call in selected_calls),
+                             "possible_unknown_posts": unknown_posts,
+                             "known_token_subtotal": sum(call["normalized_usage"]["total_tokens"] or 0 for call in selected_calls if call["attempted_posts"] != 0),
+                             "enclosing_invocation_seconds": known_sum(row["elapsed_seconds"] for row in selected_intervals),
+                             "host_waited_cpu_seconds": known_sum(row["host_waited_cpu_seconds"] for row in selected_intervals),
+                             "container_cpu_seconds": known_sum(row["container_cpu_seconds"] for row in selected_intervals)})
+        repair_at_2 = ordered[2]["independent_original_repair_passed"]
+        repairs = [event["independent_original_repair_passed"] for event in ordered[2:]]
+        eventual = True if True in repairs else None if None in repairs else False
+        complete = complete_outcomes(event["event_obligations_passed"] for event in ordered[1:])
+        health = {name: known_sum(event[name] for event in ordered) for name in ("false_admissions", "invalidation_misses", "repeated_dispatches")}
+        if any(value is None or value > 0 for value in health.values()):
+            complete = False if any(value is not None and value > 0 for value in health.values()) else None
+        summaries.append({key: trajectory[key] for key in ("trajectory_id", "family_id", "arm", "cache_profile", "control")}
+                         | {"repair_at_event2": repair_at_2, "eventually_repaired": eventual,
+                            "final_original_repair_passed": repairs[-1], "complete_trajectory": complete,
+                            "satisfied_events": horizons[-1]["satisfied_events"], "health": health,
+                            "horizons": horizons, "recovery_subinvocations": ordered[-1]["recovery_subinvocations"]})
+    groups = {}
+    for row in summaries:
+        key = (row["arm"], row["cache_profile"], row["control"])
+        groups.setdefault(key, []).append(row)
+    group_rows = []
+    for (arm, cache, control), rows in groups.items():
+        final_tokens = known_sum(row["horizons"][-1]["usage"]["total_tokens"] for row in rows)
+        repairs = sum(row["repair_at_event2"] is True for row in rows)
+        completes = sum(row["complete_trajectory"] is True for row in rows)
+        group_rows.append({"arm": arm, "cache_profile": cache, "control": control,
+                           "scheduled_families": len(rows), "scheduled_trajectories": len(rows), "scheduled_events": 6 * len(rows),
+                           "repair_at_event2_successes": repairs, "eventual_repair_successes": sum(row["eventually_repaired"] is True for row in rows),
+                           "complete_trajectories": completes, "total_tokens": final_tokens,
+                           "tokens_per_initial_repair_success": None if not repairs or final_tokens is None else final_tokens / repairs,
+                           "tokens_per_complete_trajectory": None if not completes or final_tokens is None else final_tokens / completes,
+                           "horizons": [{"horizon": h,
+                                         "total_tokens": known_sum(row["horizons"][h]["usage"]["total_tokens"] for row in rows),
+                                         "enclosing_invocation_seconds": known_sum(row["horizons"][h]["enclosing_invocation_seconds"] for row in rows)} for h in range(7)]})
+    comparisons = []
+    for (arm, cache, control), rows in groups.items():
+        if control == "primary" and arm == "A":
+            continue
+        comparator = ("A", cache, "primary") if control == "primary" else (arm, "warm", "primary")
+        baseline = {row["family_id"]: row for row in groups.get(comparator, [])}
+        require(set(baseline) == {row["family_id"] for row in rows}, "unmatched family comparison")
+        family_pairs = [(baseline[row["family_id"]], row) for row in rows]
+        pairs = [(a["horizons"][-1]["usage"]["total_tokens"], b["horizons"][-1]["usage"]["total_tokens"]) for a, b in family_pairs]
+        a_tokens, b_tokens = known_sum(a for a, b in pairs), known_sum(b for a, b in pairs)
+        delta = None if a_tokens in (None, 0) or b_tokens is None else 1 - b_tokens / a_tokens
+        # This strict descriptive gate is not a fitted/noninferiority margin.
+        quality_gate = all(a["repair_at_event2"] is True and b["repair_at_event2"] is True
+                           and a["complete_trajectory"] is True and b["complete_trajectory"] is True
+                           for a, b in family_pairs)
+        horizon_differences = []
+        for h in range(7):
+            a_cost = known_sum(a["horizons"][h]["usage"]["total_tokens"] for a, b in family_pairs)
+            b_cost = known_sum(b["horizons"][h]["usage"]["total_tokens"] for a, b in family_pairs)
+            horizon_differences.append(None if a_cost is None or b_cost is None else b_cost - a_cost)
+        sustained = next((h for h in range(7) if quality_gate and all(d is not None and d <= 0 for d in horizon_differences[h:])), None)
+        comparisons.append({"arm": arm, "cache_profile": cache, "control": control,
+                            "baseline": {"arm": comparator[0], "cache_profile": comparator[1], "control": comparator[2]},
+                            "paired_families": len(rows), "unconditional_token_difference_fraction": delta,
+                            "all_pairs_complete_with_initial_repair": quality_gate,
+                            "conditional_descriptive_token_reduction": delta if quality_gate else None,
+                            "descriptive_family_bootstrap": exact_bootstrap_interval(pairs),
+                            "cumulative_treatment_minus_baseline_tokens": horizon_differences,
+                            "observed_sustained_token_break_even_horizon": sustained,
+                            "population_noninferiority_established": False})
+    return {"schema": "ns-original-fixed-cohort-metrics/v1", "selection": selection,
+            "scheduled_trajectories": len(selected), "scheduled_event_observations": 6 * len(selected),
+            "metered_setup_prime_rows": len(selected), "planned_full_trajectories": len(schedule),
+            "family_clusters": len({row["family_id"] for row in selected}),
+            "trajectories": summaries, "groups": group_rows, "comparisons": comparisons,
+            "unique_provider_slots": len(calls), "repeated_provider_receipt_aliases": aliases,
+            "unique_enclosing_invocations": len(intervals),
+            "complete_total_tokens": known_sum(call["normalized_usage"]["total_tokens"] if call["attempted_posts"] != 0 else 0 for call in calls.values()),
+            "ordinary_component_times_added_to_enclosing_time": False,
+            "scope": "Fixed exposed development families; six operational events and cold/warm/control repeats are dependent. Numerical export projection requires separate original-receipt admission; no population or end-to-end causal savings claim."}

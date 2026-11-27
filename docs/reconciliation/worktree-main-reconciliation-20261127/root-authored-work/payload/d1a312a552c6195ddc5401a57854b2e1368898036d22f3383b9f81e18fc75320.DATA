@@ -1,0 +1,123 @@
+"""Independent fixed-cohort projection of original Requests cold receipts.
+
+No experiment execution. The detailed ledger/source auditor remains separate.
+"""
+import hashlib
+import json
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+RUN = HERE / "requests-cold-v1"
+
+
+def canonical(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()
+
+
+def main():
+    inputs = {}
+
+    def read(path):
+        body = path.read_bytes()
+        inputs[str(path.relative_to(RUN))] = hashlib.sha256(body).hexdigest()
+        return json.loads(body)
+
+    profile = read(RUN / "profile.json")
+    contract = read(RUN / "analysis_contract.json")
+    assert contract["profile_sha256"] == inputs["profile.json"]
+    provider = read(RUN / "provider_profile.json")
+    assert inputs["provider_profile.json"] == profile["provider"]["profile_sha256"]
+    invocations = read(RUN / "invocation_summary.json")
+    process_by_event = {r["event_id"]: r for r in invocations["invocations"]}
+    transports = {}
+    for path in sorted((RUN / "state/provider").glob("*/result.json")):
+        row = read(path)
+        assert row["call_id"] not in transports
+        assert row["status"] == "response" and row["attempted_posts"] == 1
+        assert row["profile_sha256"] == inputs["provider_profile.json"]
+        wire = read(path.parent / "request.json")
+        intent = read(path.parent / "dispatch_intent.json")
+        assert hashlib.sha256(canonical(wire)).hexdigest() == row["request_sha256"] == intent["request_sha256"]
+        assert intent["call_id"] == row["call_id"] == path.parent.name
+        assert len(canonical(wire)) == row["request_bytes"] <= provider["max_request_bytes"]
+        assert isinstance(row["normalized_usage"]["total_tokens"], int)
+        transports[row["call_id"]] = row
+    events = []
+    used = set()
+    first_requests = []
+    for event in profile["events"]:
+        folder = RUN / "state/events" / event["event_id"]
+        result = read(folder / "result.json")
+        assert result["event_id"] == event["event_id"]
+        assert result["profile_sha256"] == inputs["profile.json"]
+        process = process_by_event[event["event_id"]]
+        assert process["status"] == result["status"]
+        calls = result["provider_receipts"]
+        for call in calls:
+            key = call["call_id"]
+            assert key not in used and canonical(call) == canonical(transports[key])
+            used.add(key)
+        assert result["provider_calls"] == sum(c["attempted_posts"] for c in calls)
+        total = sum(c["normalized_usage"]["total_tokens"] for c in calls)
+        assert result["provider_total_tokens"] == total
+        assert result["provider_slots_used"] == len(calls)
+        if event["parent_event"] is None:
+            assert result["accepted_for_next_state"] and len(calls) == 1
+            first_requests.append(calls[0]["request_sha256"])
+        scores = [{"stage": stage, "evaluation_id": score["evaluation_id"],
+                   "passed": score["passed"], "status": score["status"],
+                   "designated_total": score["designated_total"],
+                   "designated_status_counts": score["designated_status_counts"]}
+                  for stage, score in result["evidence"].items()
+                  if score.get("schema") == "ns-curator-candidate-score-receipt/v1"]
+        events.append({"event_id": event["event_id"], "arm": event["arm"],
+                       "instance_id": event["instance_id"], "status": result["status"],
+                       "accepted": result["accepted_for_next_state"],
+                       "candidate_grading_passed": result["candidate_grading_passed"],
+                       "complete_prior_and_current_repairs": result["complete_prior_and_current_repairs"],
+                       "provider_posts": len(calls), "provider_total_tokens": total,
+                       "call_ids": [c["call_id"] for c in calls],
+                       "controller_seconds": result["elapsed_seconds"],
+                       "invocation_seconds": process["elapsed_seconds"],
+                       "host_process_cpu_seconds": process["host_process_cpu_seconds"],
+                       "merge_conflicts": result["source_transition"]["conflicts"],
+                       "source_tree_sha256": result["source_transition"]["source_tree_sha256"],
+                       "failure_reasons": result["local_failures"], "scorer_results": scores})
+    assert len(events) == 8 and used == set(transports)
+    assert len(set(first_requests)) == 1
+    arms = []
+    for arm in "ABCD":
+        rows = [e for e in events if e["arm"] == arm]
+        assert len(rows) == 2
+        calls = [transports[k] for row in rows for k in row["call_ids"]]
+        assert len(calls) <= profile["max_provider_calls_per_trajectory"]
+        fields = ["input_tokens", "output_tokens", "reasoning_tokens", "cached_input_tokens",
+                  "total_tokens", "api_reported_cost_ticks"]
+        usage = {field: sum(c["normalized_usage"][field] for c in calls) for field in fields}
+        wall = [r["invocation_seconds"] for r in rows]
+        arms.append({"arm": arm, "accepted_nodes": sum(r["accepted"] for r in rows),
+                     "scheduled_nodes": 2, "complete_trajectory": all(r["accepted"] for r in rows),
+                     "provider_posts": len(calls), "usage": usage,
+                     "controller_seconds": sum(r["controller_seconds"] for r in rows),
+                     "invocation_seconds": None if any(t is None for t in wall) else sum(wall),
+                     "observed_horizons": [{"issue_nodes": i + 1,
+                       "accepted_nodes": sum(r["accepted"] for r in rows[:i + 1]),
+                       "total_tokens": sum(r["provider_total_tokens"] for r in rows[:i + 1])}
+                       for i in range(2)]})
+    assert all(a["accepted_nodes"] == 1 and not a["complete_trajectory"] for a in arms)
+    output = {"schema": "ns-root-requests-fixed-cohort-projection/v1", "all_checks_passed": True,
+              "events": events, "arms": arms, "actual_provider_posts": len(transports),
+              "provider_total_tokens": sum(a["usage"]["total_tokens"] for a in arms),
+              "first_request_sha256_equal_all_arms": first_requests[0],
+              "all_usage_complete": True, "all_invocation_timing_complete": False,
+              "inputs_sha256": inputs, "analysis_source_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+              "scope": "One fixed development family; first prompts identical, zero qualified context omissions, all second nodes failed. No causal component saving, inference interval or whole-system economy claim.",
+              "accounting": "Provider total used directly; cached/input/output/reasoning and charges kept separate. Invocation wall encloses service work; B first-node outer wall/CPU unavailable after driver interruption. No calls made by analysis."}
+    with (RUN / "root_fixed_cohort_analysis_v1.json").open("x") as handle:
+        handle.write(json.dumps(output, indent=2, sort_keys=True) + "\n")
+    print(json.dumps({"events": len(events), "provider_posts": len(transports),
+                      "provider_total_tokens": output["provider_total_tokens"], "arms": arms}))
+
+
+if __name__ == "__main__":
+    main()

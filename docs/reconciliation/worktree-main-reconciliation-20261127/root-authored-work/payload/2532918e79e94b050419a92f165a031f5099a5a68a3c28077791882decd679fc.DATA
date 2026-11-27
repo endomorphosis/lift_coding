@@ -1,0 +1,91 @@
+{
+  "imports": [
+    {
+      "check_result": {
+        "bytes": 14071,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-language-qualification-20261006-01/evidence/lean-container-source-01/check-result.json",
+        "sha256": "ca7ed3da92fbae947f595bfde1a8eb1025bc9758ebdd58eaf11210b2d125c0bf"
+      },
+      "mode": "lean-container-source-01"
+    },
+    {
+      "check_result": {
+        "bytes": 15524,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-language-qualification-20261006-01/evidence/lean-container-typed-01/check-result.json",
+        "sha256": "cfb690034025ad99470dad89ab537952955ddb4b14b1ed3675bf8181dfcfad63"
+      },
+      "mode": "lean-container-typed-01"
+    },
+    {
+      "check_result": {
+        "bytes": 13707,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-language-qualification-20261006-02/evidence/lean-container-semantics-01/check-result.json",
+        "sha256": "8650075e9f209aa2d61d284d043b51200a866611703ad40739ce29af3f05d62b"
+      },
+      "mode": "lean-container-semantics-01"
+    },
+    {
+      "check_result": {
+        "bytes": 15696,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-qualification-20261006-01/evidence/lean-python-ast-subset-01/check-result.json",
+        "sha256": "e1ecd6db20451ed9da5364e1a509c3d46ae908b0816e5529a8dde91e80e238fc"
+      },
+      "mode": "lean-python-ast-subset-01"
+    },
+    {
+      "check_result": {
+        "bytes": 15178,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-qualification-20261006-01/evidence/lean-python-ast-semantics-01/check-result.json",
+        "sha256": "38b975f475e7f47b135435745e053aca05a807ffb3ccaeca491ba6a360db94a3"
+      },
+      "mode": "lean-python-ast-semantics-01"
+    },
+    {
+      "check_result": {
+        "bytes": 15213,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-qualification-20261006-01/evidence/lean-python-ast-lowering-01/check-result.json",
+        "sha256": "f1414bd0c4450d9c3a78cee4ac39794b33eb2fd5adb17b868978c19c8e4944af"
+      },
+      "mode": "lean-python-ast-lowering-01"
+    },
+    {
+      "check_result": {
+        "bytes": 26127,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-qualification-20261006-05/evidence/lean-python-ast-preservation-01/check-result.json",
+        "sha256": "a89575bd9f2c7c9ac981046a5b7f2fd1b1bf946df7acc067dae268c725ca145d"
+      },
+      "mode": "lean-python-ast-preservation-01"
+    },
+    {
+      "check_result": {
+        "bytes": 12290,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-scalar-source-qualification-20261007-01/evidence/lean-python-ast-actual-source-01/check-result.json",
+        "sha256": "8024a7dbbf09513865761f8ab05e2f02c2d901cfa2b083313898d3d5bf953895"
+      },
+      "mode": "lean-python-ast-actual-source-01"
+    },
+    {
+      "check_result": {
+        "bytes": 15299,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-original-scalar-bodies-qualification-20261007-01/evidence/lean-python-ast-original-bodies-01/check-result.json",
+        "sha256": "991cf96dd2aa921d0d793ef10a2418500a5658e1edca5317b776277f26ddde5c"
+      },
+      "mode": "lean-python-ast-original-bodies-01"
+    },
+    {
+      "check_result": {
+        "bytes": 14797,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-original-scalar-formulas-qualification-20261007-01/evidence/lean-python-ast-original-formulas-01/check-result.json",
+        "sha256": "2fce7391a6eebba840d84d5bd8492a3a3f6ef9c28febb25874f42ef83e7a1e57"
+      },
+      "mode": "lean-python-ast-original-formulas-01"
+    }
+  ],
+  "mode": "lean-python-finite-bindings-01",
+  "schema": "ranker-container-language-batch-plan@1",
+  "tooling_source_review": {
+    "bytes": 8298,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-supported-python-finite-bindings-tooling-source-review-20261007-02/review-receipt-01.json",
+    "sha256": "3ae341597610615bdf15bd3e9d55655ebb1229e780578f6ae420d914bfd36132"
+  }
+}

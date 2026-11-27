@@ -1,0 +1,45 @@
+"""Reconcile the observed orphan's terminal receipt; never restart that event."""
+import argparse,hashlib,importlib.util,json,os,resource,sqlite3,subprocess,time
+from pathlib import Path
+
+def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+def save(path,value):
+    with path.open('x') as stream:json.dump(value,stream,sort_keys=True,indent=2);stream.write('\n');stream.flush();os.fsync(stream.fileno())
+def main():
+    parser=argparse.ArgumentParser();parser.add_argument('--profile',type=Path,required=True);parser.add_argument('--expected-profile-sha256',required=True);parser.add_argument('--execute-remaining',action='store_true');args=parser.parse_args();p=args.profile.resolve();run=p.parent
+    if sha(p)!=args.expected_profile_sha256:raise ValueError('profile drift')
+    profile=json.loads(p.read_text());interruption=json.loads((run/'driver_interruption_v1.json').read_text());pid=interruption['worker_pid'];proc=Path('/proc')/str(pid)
+    if proc.exists():
+        status=(proc/'status').read_text()
+        if not any(row.startswith('State:') and '\tZ ' in row for row in status.splitlines()):raise RuntimeError('original worker remains live; observe without restarting')
+    event_id='requests-cold-v1-b-5414';remaining_id='requests-cold-v1-b-6028';state=Path(profile['output_root']);directory=run/'invocations'/event_id
+    db=sqlite3.connect('file:'+str(state/'ledger.sqlite3')+'?mode=ro',uri=True);db.execute('BEGIN');events=db.execute('SELECT event_id,status,result_path FROM events').fetchall();pending=db.execute("SELECT effect_id,event_id,state FROM effects WHERE state!='terminal'").fetchall();db.close()
+    if pending:raise RuntimeError('nonterminal effects require explicit reconciliation; no further dispatch')
+    rows={key:(status,path) for key,status,path in events}
+    if event_id not in rows or rows[event_id][0]=='started' or remaining_id in rows:raise ValueError('unexpected event frontier')
+    result=json.loads(Path(rows[event_id][1]).read_text());stdout=json.loads((directory/'stdout').read_text())
+    if result!=stdout or result['profile_sha256']!=sha(p):raise ValueError('orphan terminal stdout differs from committed result')
+    if profile['events'][-2]['event_id']!=event_id or profile['events'][-1]['event_id']!=remaining_id:raise ValueError('unexpected frozen order')
+    spec=importlib.util.spec_from_file_location('reconciliation_admission',profile['controller_entrypoint']);controller=importlib.util.module_from_spec(spec);spec.loader.exec_module(controller);controller.qualified_sealing(profile)
+    for path,expected in profile['evaluation_files'].items():
+        if sha(path)!=expected:raise ValueError('frozen source drift')
+    command=['/usr/bin/python3','-B',profile['controller_entrypoint'],'--profile',str(p),'--event',event_id]
+    recovered={'event_id':event_id,'arm':'B','instance_id':'psf__requests-5414','command':command,'returncode':None,'timed_out':None,'elapsed_seconds':None,'host_process_cpu_seconds':None,'container_cpu_seconds':None,'cpu_scope':'Outer driver interrupted; complete invocation wall and waited CPU unavailable. Controller retained its own elapsed time separately.','status':result['status'],'accepted':result['accepted_for_next_state'],'candidate_grading_passed':result['candidate_grading_passed'],'provider_calls':result['provider_calls'],'provider_total_tokens':result['provider_total_tokens'],'reconciled_terminal_without_restart':True,'original_worker_pid':pid,'original_driver_exit_code':143,'controller_elapsed_seconds':result['elapsed_seconds']}
+    process_path=directory/'process.json'
+    if process_path.exists():
+        if json.loads(process_path.read_text())!=recovered:raise ValueError('reconciliation receipt differs')
+    else:save(process_path,recovered)
+    if not args.execute_remaining:print(json.dumps({'reconciled':event_id,'restarted':False,'remaining_event':remaining_id,'effects_dispatched':0}));return
+    freeze={'schema':'ns-repository-driver-reconciliation@1','profile_sha256':sha(p),'reconciliation_source_sha256':sha(__file__),'interruption_sha256':sha(run/'driver_interruption_v1.json'),'reconciled_event_id':event_id,'restarted_event':False,'remaining_event_order':[remaining_id],'original_event_order_unchanged':True,'created_at_ns':time.time_ns()};save(run/'driver_reconciliation_freeze.json',freeze)
+    event=profile['events'][-1];destination=run/'invocations'/remaining_id;destination.mkdir(exist_ok=False);command=['/usr/bin/python3','-B',profile['controller_entrypoint'],'--profile',str(p),'--event',remaining_id]
+    before=resource.getrusage(resource.RUSAGE_CHILDREN);started=time.perf_counter()
+    with (destination/'stdout').open('xb') as stdout,(destination/'stderr').open('xb') as stderr:
+        process=subprocess.Popen(command,stdout=stdout,stderr=stderr,start_new_session=True);code=process.wait(timeout=3600)
+    after=resource.getrusage(resource.RUSAGE_CHILDREN);row={'event_id':remaining_id,'arm':event['arm'],'instance_id':event['instance_id'],'command':command,'returncode':code,'timed_out':False,'elapsed_seconds':time.perf_counter()-started,'host_process_cpu_seconds':after.ru_utime+after.ru_stime-before.ru_utime-before.ru_stime,'container_cpu_seconds':None,'cpu_scope':'controller and waited local descendants; Docker container workload CPU unavailable'}
+    if code==0:
+        value=json.loads((destination/'stdout').read_text());row.update(status=value['status'],accepted=value['accepted_for_next_state'],candidate_grading_passed=value['candidate_grading_passed'],provider_calls=value['provider_calls'],provider_total_tokens=value['provider_total_tokens'])
+    save(destination/'process.json',row)
+    if code!=0:raise RuntimeError('remaining invocation did not complete; no automatic restart')
+    invocations=[json.loads((run/'invocations'/event['event_id']/'process.json').read_text()) for event in profile['events']]
+    save(run/'invocation_summary.json',{'schema':'ns-repository-cold-invocations@1','profile_sha256':sha(p),'invocations':invocations,'provider_receipt_aggregation_required':True,'scope':profile['scope'],'driver_interruption_retained':True,'missing_outer_B5414_timing':True,'reconciliation_freeze_sha256':sha(run/'driver_reconciliation_freeze.json')});print(json.dumps(row))
+if __name__=='__main__':main()

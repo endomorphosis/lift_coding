@@ -1,0 +1,7 @@
+from callee import increment
+
+def twice(value):
+    return increment(increment(value))
+
+def unsupported(expression):
+    return eval(expression)

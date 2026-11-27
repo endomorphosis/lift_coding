@@ -1,0 +1,102 @@
+"""Closed source/profile-bound storage of original scanner frontend inputs.
+
+This is a trusted producer cache, not a proof that arbitrary observations follow
+from source bytes. Consumers must obtain the expected CID from their accepted
+producer receipt and independently validate the declared runtime profile.
+"""
+from __future__ import annotations
+
+import json
+from pathlib import PurePosixPath
+import re
+from typing import Any, Mapping
+
+from ipfs_datasets_py.logic.software_contracts.content import cid_for_bytes
+from ipfs_datasets_py.logic.software_contracts.semantic_index.models import (
+    SEMANTIC_INDEX_SCHEMA, DependencyEdge, RepositoryState, SymbolRecord,
+)
+
+SCHEMA = "ipfs-datasets.software-contracts.original-python-observations@1"
+HEADER_FIELDS = frozenset({"schema", "repository_id", "namespace", "extractor_name", "extractor_version", "semantic_index_schema", "profile_sha256", "parent_state_cid", "paths"})
+PATH_FIELDS = frozenset({"source_cid", "symbols", "edges", "diagnostics"})
+
+class FrontendObservationError(ValueError):
+    """Malformed or incorrectly bound original frontend observations."""
+
+def canonical(value: Any) -> bytes:
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False).encode("utf-8")
+
+def validate_profile(profile_sha256: str) -> None:
+    if not isinstance(profile_sha256, str) or re.fullmatch(r"[0-9a-f]{64}", profile_sha256) is None:
+        raise FrontendObservationError("explicit frozen runtime profile SHA-256 required")
+
+def encode_observations(paths: Mapping[str, Any], state: RepositoryState, *, namespace: str | None, profile_sha256: str) -> bytes:
+    validate_profile(profile_sha256)
+    return canonical({"schema": SCHEMA, "repository_id": state.repository_id,
+                      "namespace": namespace, "extractor_name": state.extractor_name,
+                      "extractor_version": state.extractor_version, "semantic_index_schema": state.schema,
+                      "profile_sha256": profile_sha256, "parent_state_cid": state.state_cid,
+                      "paths": dict(paths)})
+
+def decode_observations(body: bytes, *, expected_cid: str, previous_state: RepositoryState,
+                        namespace: str | None, profile_sha256: str) -> dict[str, Any]:
+    """Verify custody and typed observations before any file can skip analysis."""
+    validate_profile(profile_sha256)
+    if type(body) is not bytes or not isinstance(expected_cid, str) or cid_for_bytes(body) != expected_cid:
+        raise FrontendObservationError("original frontend observation CID mismatch")
+    try:
+        value = json.loads(body)
+        if canonical(value) != body:
+            raise FrontendObservationError("original frontend observations must be canonical exact bytes")
+        if type(value) is not dict or set(value) != HEADER_FIELDS:
+            raise FrontendObservationError("closed original frontend observation envelope required")
+        expected = {"schema": SCHEMA, "repository_id": previous_state.repository_id,
+                    "namespace": namespace, "extractor_name": previous_state.extractor_name,
+                    "extractor_version": previous_state.extractor_version,
+                    "semantic_index_schema": SEMANTIC_INDEX_SCHEMA,
+                    "profile_sha256": profile_sha256, "parent_state_cid": previous_state.state_cid}
+        if any(value[key] != required for key, required in expected.items()):
+            raise FrontendObservationError("original frontend observation parent/profile/identity mismatch")
+        if type(value["paths"]) is not dict:
+            raise FrontendObservationError("original frontend paths must be an object")
+        previous_sources: dict[str, set[str]] = {}
+        for symbol in previous_state.symbols:
+            if symbol.source_cid is not None:
+                previous_sources.setdefault(symbol.module_path, set()).add(symbol.source_cid)
+        for artifact in previous_state.artifacts:
+            if artifact.kind == "python-analysis" and artifact.source_cid is not None:
+                previous_sources.setdefault(artifact.path, set()).add(artifact.source_cid)
+        restored = {}
+        for path, item in value["paths"].items():
+            p = PurePosixPath(path)
+            if not path or p.is_absolute() or ".." in p.parts or "\\" in path or p.as_posix() != path:
+                raise FrontendObservationError("invalid original frontend path")
+            if type(item) is not dict or set(item) != PATH_FIELDS:
+                raise FrontendObservationError("closed original frontend path record required")
+            if previous_sources.get(path) != {item["source_cid"]}:
+                raise FrontendObservationError("original frontend path/source does not match parent")
+            if any(type(item[key]) is not list for key in ("symbols", "edges", "diagnostics")):
+                raise FrontendObservationError("original frontend record lists required")
+            if any(type(d) is not str for d in item["diagnostics"]):
+                raise FrontendObservationError("original frontend diagnostics must be strings")
+            symbols = tuple(SymbolRecord.from_dict(row) for row in item["symbols"])
+            edges = tuple(DependencyEdge.from_dict(row) for row in item["edges"])
+            ids = {symbol.stable_id for symbol in symbols}
+            if len(ids) != len(symbols):
+                raise FrontendObservationError("duplicate original frontend symbols")
+            if any(s.module_path != path or s.source_cid != item["source_cid"] or s.repository_id != previous_state.repository_id for s in symbols):
+                raise FrontendObservationError("original frontend symbol source binding mismatch")
+            if any(e.source_id not in ids for e in edges):
+                raise FrontendObservationError("original frontend edge source outside captured symbols")
+            if bool(item["diagnostics"]) == bool(symbols):
+                raise FrontendObservationError("original frontend diagnostics/symbol disposition mismatch")
+            if item["diagnostics"] and edges:
+                raise FrontendObservationError("fatal frontend record cannot provide edges")
+            if [s.to_dict() for s in symbols] != item["symbols"] or [e.to_dict() for e in edges] != item["edges"]:
+                raise FrontendObservationError("original frontend typed roundtrip changed bytes")
+            restored[path] = {"source_cid": item["source_cid"], "symbols": symbols, "edges": edges,
+                              "diagnostics": tuple(item["diagnostics"]), "serialized": item}
+        return restored
+    except (KeyError, TypeError, UnicodeError, ValueError) as exc:
+        if isinstance(exc, FrontendObservationError): raise
+        raise FrontendObservationError("malformed original frontend observations") from exc

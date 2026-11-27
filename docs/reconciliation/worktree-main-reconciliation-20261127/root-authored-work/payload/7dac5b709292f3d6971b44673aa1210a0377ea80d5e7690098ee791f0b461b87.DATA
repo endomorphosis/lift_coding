@@ -1,0 +1,61 @@
+# First Requests cold development cohort
+
+All eight scheduled events reached terminal outcomes. Each arm accepted 5414 and
+failed to accept 6028, so no two-node trajectory completed. Candidate grading
+success and accepted-for-next-state success both equal 1/2 nodes for every arm.
+
+| Arm | Provider requests | Provider total tokens | Cached input tokens | Controller wall (s) | Outer invocation wall (s) |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| A | 1 | 14,428 | 13,568 | 96.424 | 96.745 |
+| B | 4 | 65,695 | 15,104 | 408.510 | unavailable |
+| C | 1 | 14,589 | 512 | 285.488 | 285.790 |
+| partial D | 1 | 14,269 | 512 | 506.814 | 507.358 |
+
+The total is 7 provider requests and 108,981 provider-reported tokens, including all
+failed attempts. Every request had a durable intent and terminal usage receipt.
+There are 16 unique native grader invocations: 14 direct calls and 2 native sealing
+replays. All 16 completed; 6 passed and 10 failed. Repeated appearances of the same
+replay receipt are counted once. Enclosing runtime includes context, symbolic,
+world, grading and native publication/read work; their component timers are not
+added again. Docker CPU measurements are unavailable.
+
+A/C/D's accepted first edits produced an actual Git conflict in `models.py` when
+carried onto the public 6028 base. The original retrieval selected optional lexical
+modules before appending that complete conflict module: four modules totaling
+80,552 raw bytes produced a 91,202-byte request, above the frozen 65,536-byte cap.
+These three nodes stopped before provider dispatch and retained the conflict and
+earlier accepted source. Their zero additional expenditure is a profile failure,
+not a successfully avoided repair request.
+
+B's first model proposed a different accepted edit, and the actual three-way
+merge completed without conflict. Its 6028 current grade was 185/187 designated
+checks; subsequent candidates scored 184/187, 185/187 and 185/187. All three attempts
+and their 51,503 tokens remain in the fixed-cohort totals. The eight outside-
+designated fixture errors are retained in the native evaluation scope. No native
+timeout, OOM or environment drift caused these four failing B6028 grades.
+
+The outer driver terminated with exit 143 while B5414's original worker remained
+live. That worker completed normally at the controller/event level and was never
+restarted. Reconciliation verified its committed terminal stdout and absence of
+pending effects, then launched only the already scheduled B6028 event. B5414's
+complete outer invocation timer, waited-child CPU and process exit code could not
+be recovered and remain null; its controller timer is retained. The cause of the
+driver signal was unobserved.
+
+All first-node model requests were byte-identical across arms. B used exact raw
+fallback after native context preparation, with zero qualified source omissions.
+C/D's native symbolic candidates were actually graded and failed before model
+repair. D additionally completed real native publication and a later verified
+source read, each with a fresh ordinary grader replay. These observations do not
+identify general or causal token savings: this is one adaptively developed family,
+each arm has one trajectory, failures differ at the second node, and provider
+prompt caching was uncontrolled. Lifecycle reuse, certified procedures and learned
+world utility remain outside partial D's implementation.
+
+The exact ledger/source/provider audit is `root_final_ledger_audit_v2.json`:
+1,769 checks pass, model/effect accounting is complete, and total outer wall
+accounting is explicitly incomplete. Root independently joined all 7 provider
+receipts in `root_fixed_cohort_analysis_v1.json`. Curator scorer joins are in
+`../../../recruitment/candidate_scoring_v1/requests_runtime_accounting_v1/final_admission_v2.json`
+(SHA256 5d4dd8c12671f1e08b4b58063749f69bb08f1e0ffcf8bade80388b542ed69038).
+Qualification and prior engineering costs are separate from this runtime cohort.

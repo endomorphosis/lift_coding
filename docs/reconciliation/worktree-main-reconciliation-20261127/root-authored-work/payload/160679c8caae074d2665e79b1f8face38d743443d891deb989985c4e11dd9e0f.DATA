@@ -1,0 +1,415 @@
+"""Fresh public-input verification before a representation-only retrieval codec.
+
+The native capsule and admission remain unchanged. This wrapper observes a
+protected artifact, replays its captured public files through the existing
+native loader, and verifies original custody again. It does not authenticate
+the artifact's nomination, assess embeddings, or authorize execution.
+"""
+from __future__ import annotations
+
+import hashlib
+import importlib.util
+import json
+import os
+from pathlib import Path, PurePosixPath
+import re
+import shlex
+import stat
+import sys
+import tempfile
+
+from . import compact_code_retrieval as codec
+from . import code_retrieval_context as native
+from .supervisor_meta_index import public_replay_without_metadata
+from ..context.context_contracts import ContextReference
+
+
+SCHEMA = "supervisor-code-retrieval-native-verification@1"
+MAX_TOTAL_BYTES = 128 * 1024 * 1024
+MAX_FILES = 66
+MAX_DIRECTORIES = 256
+MAX_BLOCK_BYTES = 256_000
+SOURCE_PREFIX = (
+    "\n\nOriginal public task requirements (verbatim admitted source):\n"
+    "These requirements supplement the native task objective. The independently admitted output scope, "
+    "execution policy and validation contract remain authoritative. This text grants no additional "
+    "write scope, publication, proof or completion authority. Apply the workspace mapping above to source "
+    "operations and retain requested logical paths in reports.\n"
+    "--- BEGIN ORIGINAL PUBLIC TASK REQUIREMENTS ---\n"
+)
+SOURCE_SUFFIX = "\n--- END ORIGINAL PUBLIC TASK REQUIREMENTS ---\n"
+AUTHORITY = ("proof_authority", "execution_authority", "completion_authority", "publication_authority",
+             "scope_expansion_authority")
+RECEIPT_BASE = frozenset({
+    "schema", "artifact", "artifact_sha256", "context_cid", "task_cid", "task_id", "manifest_cid",
+    "source_path", "source_sha256", "source_bytes", "block_sha256", "block_bytes",
+    "manifest_signature_verified", "verbatim_utf8", "semantic_minification_applied",
+    "source_freshness_verified", "historical_replay", "completion_authority",
+    "scope_expansion_authority", "extra_provider_calls",
+})
+RECEIPT_EXTRA = {
+    1: set(), 2: {"intent_requirements"}, 3: {"codebase_inventory"},
+    4: {"codebase_inventory", "codebase_successor"},
+    5: {"codebase_inventory", "codebase_successor", "codebase_preview_successor"},
+    6: {"intent_requirements", "intent_requirements_projection"},
+}
+STAT_FIELDS = ("st_dev", "st_ino", "st_mode", "st_uid", "st_gid", "st_nlink", "st_size",
+               "st_mtime_ns", "st_ctime_ns")
+PRIVATE_PARTS = frozenset({".git", ".ssh", ".codex", "codex-auth", "credentials", "secrets", "state"})
+PRIVATE_NAMES = frozenset({"auth.json", "id_rsa", "id_ed25519", "token", "owner-token", "private-key"})
+PRIVATE_ROOTS = tuple(Path("/opt/ipfs-supervisor") / role for role in ("state", "home", "codex-auth"))
+
+
+class VerifiedCodeRetrievalError(ValueError):
+    """Public source, native chunk, or protected custody differs."""
+
+
+def _fail(message):
+    raise VerifiedCodeRetrievalError(message)
+
+
+def _sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def _digest(value):
+    if type(value) is not str or re.fullmatch(r"[a-f0-9]{64}", value) is None:
+        _fail("exact SHA256 required")
+    return value
+
+
+def _relative(value):
+    if type(value) is not str or not value or len(value.encode()) > 2048:
+        _fail("bounded public relative path required")
+    path = PurePosixPath(value)
+    if (path.is_absolute() or str(path) != value or value == "." or ".." in path.parts
+            or any(part in PRIVATE_PARTS for part in path.parts)
+            or path.name in PRIVATE_NAMES or path.suffix.lower() in {".duckdb", ".ducklake", ".sqlite", ".db", ".pem", ".key"}
+            or any(character in value for character in "\0\r\n")):
+        _fail("private or noncanonical public input path refused")
+    return value
+
+
+def _authority(value):
+    if type(value) is dict:
+        for key, child in value.items():
+            if key in AUTHORITY and child is not False:
+                _fail("instruction receipt authority must remain false")
+            _authority(child)
+    elif type(value) is list:
+        for child in value:
+            _authority(child)
+
+
+def extract_verified_public_instruction_source(block: str, receipt: dict) -> str:
+    """Extract only a verified loader's literal bytes, never split on a marker.
+
+    This checks an inclusion receipt's consistency; the caller must obtain that
+    receipt from the signed public instruction loader, not untrusted JSON.
+    """
+    if type(block) is not str or type(receipt) is not dict:
+        _fail("verified instruction block and receipt required")
+    codec._bounded(receipt, MAX_BLOCK_BYTES)
+    match = re.fullmatch(r"supervisor-public-instruction-inclusion@([1-6])", str(receipt.get("schema")))
+    if match is None or set(receipt) != RECEIPT_BASE | RECEIPT_EXTRA[int(match[1])]:
+        _fail("known exact public instruction receipt required")
+    for key in ("manifest_signature_verified", "verbatim_utf8", "source_freshness_verified"):
+        if receipt[key] is not True:
+            _fail("current signed verbatim instruction required")
+    for key in ("semantic_minification_applied", "historical_replay", "completion_authority", "scope_expansion_authority"):
+        if receipt[key] is not False:
+            _fail("instruction receipt authority or replay differs")
+    if type(receipt["extra_provider_calls"]) is not int or receipt["extra_provider_calls"] != 0:
+        _fail("instruction extraction cannot add provider calls")
+    for key, maximum in (("source_bytes", codec.MAX_SOURCE_BYTES), ("block_bytes", MAX_BLOCK_BYTES)):
+        if type(receipt[key]) is not int or not 0 < receipt[key] <= maximum:
+            _fail("bounded exact instruction byte counts required")
+    for key in ("source_sha256", "block_sha256", "artifact_sha256"):
+        _digest(receipt[key])
+    _relative(receipt["source_path"])
+    _authority(receipt)
+    raw = codec._text(block, MAX_BLOCK_BYTES, "instruction block")
+    if len(raw) != receipt["block_bytes"] or _sha(raw) != receipt["block_sha256"]:
+        _fail("complete verified instruction block differs")
+    prefix, suffix = SOURCE_PREFIX.encode(), SOURCE_SUFFIX.encode()
+    start, end = len(prefix), len(prefix) + receipt["source_bytes"]
+    if not raw.startswith(prefix) or raw[end:end + len(suffix)] != suffix:
+        _fail("trusted instruction rendering prefix or exact source suffix differs")
+    source = raw[start:end]
+    if _sha(source) != receipt["source_sha256"]:
+        _fail("literal instruction bytes differ from verified source")
+    try:
+        text = source.decode("utf-8")
+    except UnicodeError as error:
+        raise VerifiedCodeRetrievalError("literal instruction is not UTF-8") from error
+    if not text.strip() or "\0" in text:
+        _fail("nonempty literal instruction required")
+    return text
+
+
+def _stat(info):
+    return {key: getattr(info, key) for key in STAT_FIELDS}
+
+
+def _root(repository):
+    root = Path(repository).absolute()
+    if (any(root.is_relative_to(private) for private in PRIVATE_ROOTS)
+            or any(part in PRIVATE_PARTS for part in root.parts) or root.resolve(strict=True) != root):
+        _fail("canonical public repository required")
+    return root
+
+
+def _capture(root, name, maximum, witnesses):
+    """No-follow walks and nonblocking reads bind both files and parents."""
+    _relative(name)
+    fd = os.open("/", os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+    file_fd = None
+    directories = []
+    try:
+        for part in root.parts[1:]:
+            child = os.open(part, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=fd)
+            os.close(fd)
+            fd = child
+        relative_parent = "."
+        directories.append((relative_parent, os.fstat(fd)))
+        for part in PurePosixPath(name).parts[:-1]:
+            child = os.open(part, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=fd)
+            os.close(fd)
+            fd = child
+            relative_parent = part if relative_parent == "." else relative_parent + "/" + part
+            directories.append((relative_parent, os.fstat(fd)))
+        for directory, info in directories:
+            if (not stat.S_ISDIR(info.st_mode) or stat.S_IMODE(info.st_mode) & 0o022
+                    or stat.S_IMODE(info.st_mode) & 0o005 != 0o005):
+                _fail("protected public input directory required")
+            witness = {"kind": "directory", **_stat(info)}
+            key = "directory:" + directory
+            if key in witnesses and witnesses[key] != witness:
+                _fail("public input directory custody changed")
+            witnesses[key] = witness
+        if sum(item["kind"] == "directory" for item in witnesses.values()) > MAX_DIRECTORIES:
+            _fail("public input directory witness bound exceeded")
+        file_fd = os.open(PurePosixPath(name).name,
+                          os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=fd)
+        before = os.fstat(file_fd)
+        if (not stat.S_ISREG(before.st_mode) or before.st_nlink != 1
+                or stat.S_IMODE(before.st_mode) & 0o022 or not stat.S_IMODE(before.st_mode) & 0o004
+                or not 0 < before.st_size <= maximum):
+            _fail("bounded protected single-link regular public input required")
+        with os.fdopen(file_fd, "rb", closefd=False) as stream:
+            raw = stream.read(maximum + 1)
+        after = os.fstat(file_fd)
+        named = os.stat(PurePosixPath(name).name, dir_fd=fd, follow_symlinks=False)
+        if len(raw) > maximum or _stat(before) != _stat(after) or _stat(after) != _stat(named):
+            _fail("public input changed during capture")
+        witness = {"kind": "file", **_stat(after), "bytes": len(raw), "sha256": _sha(raw)}
+        key = "file:" + name
+        if key in witnesses and witnesses[key] != witness:
+            _fail("public input file custody changed")
+        witnesses[key] = witness
+        return raw
+    except OSError as error:
+        raise VerifiedCodeRetrievalError("public input cannot be safely captured") from error
+    finally:
+        if file_fd is not None:
+            os.close(file_fd)
+        os.close(fd)
+
+
+def _parse(raw):
+    def unique(pairs):
+        result = {}
+        for key, value in pairs:
+            if key in result:
+                _fail("duplicate captured JSON key")
+            result[key] = value
+        return result
+    try:
+        return json.loads(raw, object_pairs_hook=unique,
+                          parse_constant=lambda value: _fail("nonfinite captured JSON"))
+    except (ValueError, UnicodeError, RecursionError) as error:
+        raise VerifiedCodeRetrievalError("bounded captured native JSON required") from error
+
+
+def _semantic_scope(capsule):
+    refs = [row for row in capsule["evidence"] if type(row) is dict and row.get("kind") == "semantic-context"]
+    paths, text = set(), []
+    for number, row in enumerate(refs):
+        ref = ContextReference.from_dict(row)
+        meta = row.get("metadata")
+        if (codec._json(ref.to_record()) != codec._json(row) or type(meta) is not dict
+                or type(meta.get("chunk_index")) is not int or meta["chunk_index"] != number
+                or type(meta.get("chunk_count")) is not int or meta["chunk_count"] != len(refs)
+                or meta.get("required") is not True or ref.repository_id != capsule["repository_id"]
+                or ref.tree_id != capsule["tree_id"] or ref.byte_count != len(ref.summary.encode())
+                or ref.referenced_content_id != "sha256:" + _sha(ref.summary.encode())):
+            _fail("semantic scope chunk or parent binding differs")
+        paths.add(ref.path)
+        text.append(ref.summary)
+    joined = "".join(text)
+    artifact_id = "sha256:" + _sha(codec._json({"text": joined}).encode())
+    if len(paths) != 1 or any(row["metadata"].get("artifact_content_id") != artifact_id for row in refs):
+        _fail("complete semantic scope chunk binding differs")
+    context = _parse(joined)
+    manifest = context.get("manifest") if type(context) is dict else None
+    if (type(context) is not dict or context.get("schema") != "supervisor-semantic-worker-context@1"
+            or context.get("task_id") != capsule["objective_id"] or context.get("completion_authority") is not False
+            or type(manifest) is not dict or not 1 <= len(manifest) <= 64):
+        _fail("complete native semantic source scope required")
+    scope = {}
+    for path, binding in manifest.items():
+        _relative(path)
+        if (type(binding) is not dict or set(binding) != {"sha256", "source_cid"}
+                or type(binding["source_cid"]) is not str or not binding["source_cid"]):
+            _fail("exact semantic source binding required")
+        scope[path] = _digest(binding["sha256"])
+    return scope
+
+
+def verify_code_retrieval_prompt(*, prompt: str, repository: Path, source_text: str,
+                                 expected_source_hashes: dict | None = None) -> dict:
+    """Replay a full current native query from stable captured public inputs.
+
+    The observed artifact SHA is not an independently signed nomination. The
+    caller separately verifies the semantic producer and signed instruction.
+    """
+    source_raw = codec._text(source_text, codec.MAX_SOURCE_BYTES, "source")
+    capsule, suffix = codec._native(prompt)
+    if (type(capsule["contract_version"]) is not int or capsule["contract_version"] != 1
+            or any(type(capsule[key]) is not str or not capsule[key] for key in
+                   ("repository_id", "tree_id", "objective_id", "objective_revision", "policy_id", "policy_revision", "caller"))
+            or any(capsule[key] in (None, "", {}, []) for key in ("goal", "authority", "scope", "acceptance"))):
+        _fail("native core bindings differ")
+    selected, _, text = codec._chunks(capsule)
+    context = codec._parse(text, codec.MAX_CONTEXT_BYTES)
+    if (type(context) is not dict or codec._json(context) != text
+            or context.get("schema") != native.SCHEMA or context.get("status") != "current"):
+        _fail("full current native retrieval required; frontier and stale inputs unsupported")
+    codec._retrieval(context, source_text)
+    if context.get("task_id") != capsule["objective_id"]:
+        _fail("native retrieval objective differs")
+    scope = _semantic_scope(capsule)
+    if expected_source_hashes is not None:
+        if type(expected_source_hashes) is not dict or not 1 <= len(expected_source_hashes) <= 64:
+            _fail("bounded expected semantic source hashes required")
+        for path, digest in expected_source_hashes.items():
+            _relative(path)
+            _digest(digest)
+    root = _root(repository)
+    artifact = selected[0][1]["path"]
+    witnesses, captures, limits = {}, {}, {}
+    def capture(name, maximum):
+        if name in captures:
+            return captures[name]
+        raw = _capture(root, name, maximum, witnesses)
+        if len(captures) + 1 > MAX_FILES or sum(map(len, captures.values())) + len(raw) > MAX_TOTAL_BYTES:
+            _fail("captured public replay exceeds total file or byte bound")
+        captures[name], limits[name] = raw, maximum
+        return raw
+    artifact_raw = capture(artifact, native.MAX_ARTIFACT_BYTES)
+    payload = _parse(artifact_raw)
+    if type(payload) is not dict or payload.get("schema") not in {native.SCHEMA, native.REFERENCED_SCHEMA}:
+        _fail("native retrieval artifact required")
+    if payload.get("schema") == native.REFERENCED_SCHEMA:
+        reference = payload.get("snapshot_ref")
+        if (type(reference) is not dict or set(reference) != {"path", "sha256", "bytes", "index_id"}
+                or type(reference["bytes"]) is not int or not 0 < reference["bytes"] <= native.MAX_SNAPSHOT_BYTES):
+            _fail("bounded native snapshot reference required")
+        snapshot_raw = capture(reference["path"], reference["bytes"])
+        if len(snapshot_raw) != reference["bytes"] or _sha(snapshot_raw) != _digest(reference["sha256"]):
+            _fail("captured native snapshot differs")
+        snapshot = _parse(snapshot_raw)
+    else:
+        snapshot = payload.get("snapshot")
+    paths = snapshot.get("included_paths") if type(snapshot) is dict else None
+    if (type(paths) is not list or not 1 <= len(paths) <= 64 or any(type(path) is not str for path in paths)
+            or len(set(paths)) != len(paths) or type(payload.get("source_sha256")) is not dict
+            or set(payload["source_sha256"]) != set(paths) or context.get("source_sha256") != payload["source_sha256"]):
+        _fail("native source capture census differs")
+    for path in paths:
+        _relative(path)
+        raw = capture(path, 2_000_000)
+        digest = _sha(raw)
+        if (digest != _digest(payload["source_sha256"][path]) or scope.get(path) != digest
+                or expected_source_hashes is not None and expected_source_hashes.get(path) != digest):
+            _fail("native source is stale or differs from semantic source scope")
+    if len(codec._json(witnesses).encode()) > MAX_BLOCK_BYTES:
+        _fail("public input custody witness byte bound exceeded")
+    # The unchanged native loader reopens only our captured copy, never raced
+    # canonical input names. No target module is imported or executed.
+    with tempfile.TemporaryDirectory(prefix="supervisor-public-code-replay-") as scratch:
+        replay_root = Path(scratch)
+        for name, raw in captures.items():
+            target = replay_root / name
+            target.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+            with target.open("xb") as stream:
+                stream.write(raw)
+            target.chmod(0o600)
+        with public_replay_without_metadata():
+            replayed = native.load_code_retrieval_context(repository=replay_root, artifact=artifact,
+                expected_sha256=_sha(artifact_raw), task_id=capsule["objective_id"])
+        if replayed != text:
+            _fail("captured native query/AST replay differs from complete original code chunks")
+        for name, raw in captures.items():
+            if (replay_root / name).read_bytes() != raw:
+                _fail("captured native replay input changed")
+    for name in captures:
+        _capture(root, name, limits[name], witnesses)
+    return {"schema": SCHEMA, "task_id": capsule["objective_id"],
+        "repository_id": capsule["repository_id"], "tree_id": capsule["tree_id"],
+        "native_prompt_sha256": _sha(prompt.encode()), "native_prompt_bytes": len(prompt.encode()),
+        "native_suffix_sha256": _sha(suffix.encode()), "code_context_sha256": _sha(text.encode()),
+        "code_context_bytes": len(text.encode()), "source_sha256": _sha(source_raw), "source_bytes": len(source_raw),
+        "artifact": artifact, "observed_artifact_sha256": _sha(artifact_raw),
+        "artifact_nomination_signature_verified": False, "captured_public_native_replay_verified": True,
+        "original_custody_rechecked": True, "native_source_scope_matches_semantic_declarations": True,
+        "expected_source_scope_supplied": expected_source_hashes is not None,
+        "native_query_matches_literal_source": True, "metadata_owner_suppressed": True,
+        "index_id": context["index_id"], "query_id": context["query_id"], "result_id": context["result_id"],
+        "code_chunk_count": len(selected), "code_hit_count": len(context["hits"]),
+        "source_hashes": dict(payload["source_sha256"]), "input_witnesses": witnesses,
+        "source_authentication_claimed": False, "semantic_producer_authentication_claimed": False,
+        **{key: False for key in AUTHORITY}}
+
+
+def decoder_command_prefix(*, repository: Path, source_path: str, source_sha256: str,
+                           native_prompt_sha256: str) -> str:
+    """Pin a public literal source and trusted installed decoder environment."""
+    root = _root(repository)
+    source = _capture(root, source_path, codec.MAX_SOURCE_BYTES, {})
+    if _sha(source) != _digest(source_sha256):
+        _fail("decoder public source differs")
+    _digest(native_prompt_sha256)
+    roots = []
+    for package in ("ipfs_accelerate_py", "ipfs_datasets_py", "ipfs_kit_py"):
+        located = importlib.util.find_spec(package)
+        if located is not None and located.origin:
+            candidate = str(Path(located.origin).parent.parent)
+            if candidate not in roots:
+                roots.append(candidate)
+    argv = ["/usr/bin/env", "PYTHONPATH=" + os.pathsep.join(roots), "PYTHONDONTWRITEBYTECODE=1",
+        sys.executable, "-P", "-m", "ipfs_accelerate_py.agent_supervisor.runtime.compact_code_retrieval", "decode",
+        "--source", str(root / source_path), "--expected-source-sha256", source_sha256,
+        "--expected-native-sha256", native_prompt_sha256]
+    prefix = shlex.join(argv)
+    if len(prefix.encode()) > 8192:
+        _fail("decoder command prefix exceeds its byte bound")
+    return prefix
+
+
+def project_verified_code_retrieval_prompt(*, prompt: str, repository: Path, source_text: str,
+        decoder_command: str | None = None, expected_source_hashes: dict | None = None,
+        guidance_version: int = codec.GUIDANCE_VERSION, delivered_wire_path: str | Path | None = None,
+        delivery_root: Path | None = None) -> tuple[str, dict]:
+    codec._guidance_version(guidance_version)
+    if decoder_command is not None:
+        codec._text(decoder_command, 8192, "decoder command")
+    verification = verify_code_retrieval_prompt(prompt=prompt, repository=repository,
+        source_text=source_text, expected_source_hashes=expected_source_hashes)
+    selected, receipt = codec.project_code_retrieval_prompt(prompt, source_text, decoder_command=decoder_command,
+        guidance_version=guidance_version, delivered_wire_path=delivered_wire_path, delivery_root=delivery_root)
+    return selected, {**receipt, "decoder_command": decoder_command, "native_verification": verification}
+
+
+__all__ = ["SCHEMA", "VerifiedCodeRetrievalError", "extract_verified_public_instruction_source",
+           "verify_code_retrieval_prompt", "project_verified_code_retrieval_prompt", "decoder_command_prefix"]

@@ -1,0 +1,50 @@
+#!/usr/bin/env python3
+"""Independent replay audit and separately frozen post-development template control."""
+import json
+import os
+from pathlib import Path
+import time
+import run_eval as E
+from ipfs_accelerate_py.agent_supervisor.procedure_compiler.cegis import insert_closed_validation_step
+from ipfs_accelerate_py.agent_supervisor.procedure_compiler.contracts import ProcedureSpec, StepOperation, EffectClass
+
+HERE=Path(__file__).resolve().parent
+
+def main():
+    out=HERE/'control_results';out.mkdir()
+    matrix=json.loads((HERE/'matrix.json').read_bytes());queries=json.loads((HERE/'results/fresh_queries.json').read_bytes())
+    frozen=json.loads((HERE/'freeze.json').read_bytes())
+    for path,sha in frozen['files'].items():assert E.digest((E.ROOT/path).read_bytes())==sha
+    plan={'schema':'ns-procedure-postdevelopment-control-freeze/v1','script_sha256':E.digest(Path(__file__).read_bytes()),'main_freeze_sha256':E.digest((HERE/'freeze.json').read_bytes()),'specified_after_initial_development_outcomes':True,'template':'incomplete scaffold with both native RUN_STATIC_ANALYSIS and RUN_TYPE_CHECK inserted, common training validation before acceptance','claims':'simple known closed-grammar template control only; no learned-component or held-out-population superiority'}
+    E.write(HERE/'control_freeze.json',plan)
+    rows=[];verified_cells=0;seed_wrong=0
+    for index,unit in enumerate(matrix['units']):
+        fresh=queries[index::len(matrix['units'])]
+        for arm in matrix['arms']:
+            cell=json.loads((HERE/'results'/(arm+'-'+unit['id']+'.json')).read_bytes())
+            spec=None if cell['procedure'] is None else ProcedureSpec.from_dict(cell['procedure'])
+            rebuilt=[{'expected':E.independent_oracle(q,unit),'observed':None if spec is None else E.replay(spec,q,unit)[0]} for q in fresh]
+            assert rebuilt==cell['decisions'];verified_cells+=1
+        seed=E.scaffold(unit)
+        disagreements=sum(E.replay(seed,q,unit)[0]!=E.independent_oracle(q,unit) for q in fresh)
+        seed_wrong+=disagreements
+        full=insert_closed_validation_step(seed,StepOperation.RUN_STATIC_ANALYSIS,'static-analysis@1',effect_id='effect.validation',effect_class=EffectClass.VALIDATION,step_id='run-static-analysis')
+        full=insert_closed_validation_step(full,StepOperation.RUN_TYPE_CHECK,'type-check@1',effect_id='effect.validation',effect_class=EffectClass.VALIDATION,step_id='run-type-check')
+        training_pass=all(E.replay(full,q,unit)[0]==E.independent_oracle(q,unit) for q in matrix['training'])
+        decisions=[{'expected':E.independent_oracle(q,unit),'observed':E.replay(full,q,unit)[0] if training_pass else None} for q in fresh]
+        row={'unit_id':unit['id'],'arm':'fixed_template','training_pass':training_pass,'synthesis_calls':0,'provider_calls':0,'tokens':0,'fresh_query_count':len(fresh),'agreement':sum(d['observed']==d['expected'] for d in decisions),'false_admissions':sum(d['observed'] is True and not d['expected'] for d in decisions),'abstentions':sum(d['observed'] is None for d in decisions),'seed_disagreements':disagreements,'decisions':decisions,'procedure':full.to_dict()}
+        row['success']=training_pass and row['agreement']==len(fresh)
+        E.write(out/(unit['id']+'.json'),row);rows.append(row)
+    # This script is a new process with no retained synthesis object. Reconstruct
+    # the last eligible candidate from file bytes and execute it on the full pool.
+    eligible_unit=matrix['units'][6];store=E.DevelopmentBodyStore(HERE/'results/body-store')
+    persisted,reason=store.load(eligible_unit)
+    assert persisted is not None and reason=='native_exact_bindings_match'
+    persisted_correct=sum(E.replay(persisted,q,eligible_unit)[0]==E.independent_oracle(q,eligible_unit) for q in queries)
+    assert persisted_correct==len(queries)
+    ids=[ProcedureSpec.from_dict(json.loads((HERE/'results'/('stored_candidate-'+name+'.json')).read_bytes())['procedure']).content_id for name in ['prime','fresh_inputs_1','fresh_inputs_2']]
+    summary={'schema':'ns-procedure-postdevelopment-control-summary/v1','source_freeze_matches':True,'independently_replayed_cells':verified_cells,'scaffold_disagreements':seed_wrong,'persisted_plan_fresh_process':{'pid':os.getpid(),'lookup':reason,'queries':len(queries),'agreement':persisted_correct,'native_synthesis_calls':0},'same_candidate_used_for_prime_and_reuse':len(set(ids))==1,'fixed_template':{'units':len(rows),'successful_units':sum(r['success'] for r in rows),'synthesis_calls':0,'agreement':sum(r['agreement'] for r in rows),'false_admissions':sum(r['false_admissions'] for r in rows),'abstentions':sum(r['abstentions'] for r in rows)},'provider_calls':0,'tokens':0}
+    assert seed_wrong>0 and summary['same_candidate_used_for_prime_and_reuse']
+    E.write(HERE/'control_summary.json',summary);print(json.dumps(summary))
+
+if __name__=='__main__':main()

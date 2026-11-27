@@ -1,0 +1,49 @@
+# Full Pyparsing original frontend comparison v15
+
+This fixed run uses the complete original public Pyparsing inventory and the
+exact authored comment-only `pyparsing/helpers.py` change retained in v13. Scope
+is 286 regular files, 154 Python files and one opaque symlink. It does not change
+the source mutation, graph predicate, source-read guards, proof scope or worker
+deadline. The isolated source profile is v7 and its full source manifest is
+copied from the completed original-observation qualification before dispatch.
+
+Three worker roles each have a prospective 900-second process limit. The
+baseline cache bootstrap and changed cold worker start concurrently on the
+shared host. The incremental worker starts only after the baseline bootstrap
+finishes successfully and its exact parent state, root, all-block storage and
+original-observation sidecar identities are bound into `parent_binding.json`.
+
+The baseline bootstrap performs a new native full scan of the original source
+and produces original observations under v7. It then restores the exact original
+v13 baseline state and every bundle block, verifies the full native bundle and
+requires byte-identical newly scanned state before reusing the baseline bundle.
+This avoids another construction of an already verified identical bundle. The
+original v13 baseline preparation cost of 656.008 seconds remains charged and
+its receipt is retained. The new cache creation, native restore and full
+verification, subsequent full verification and persistence costs are included
+in the bootstrap worker receipt. They are additional work, not free reuse.
+
+The changed cold worker produces a fresh full bundle and original-observation
+sidecar. The incremental worker restores and fully re-verifies the persisted
+baseline state and all blocks, reads the exact bound original-observation bytes,
+and supplies the actual parent state, parent bundle and sidecar to the native
+scanner/builder. Every current file is still captured and verified. Scanner
+diagnostics record original observation reuse, rescans, edges and sidecar bytes.
+
+Both changed outputs must have identical serialized state and root, every
+actual CID-to-block byte pair, full block count/byte count and original-observation
+sidecar bytes. They must also pass native fresh, stale expected-state, stale
+source, changed source, and between-read change controls. Both runtime/source
+inventories are checked before and after the worker. Durable output hashes and
+per-stage process wall/CPU times are retained, including observation encoding and
+decoding within the named scan stage and file persistence within the named
+persistence stage. One-time enrollment copying, source/runtime guards and
+freeze preparation are separately timed. Overlapping process times are not
+summed into an elapsed-time speedup.
+
+Failed, timed-out and partial results remain explicit; no deadline extension or
+unrecorded retry is permitted. The independent final audit reads all actual
+block bytes and compares the public root/state to the retained v13/v14 cold
+output. This is a source-bound operational comparison under honest producer
+custody, not an execution theorem, provider token-saving result or general
+incremental speedup claim.

@@ -1,0 +1,73 @@
+The isolated compiler identity fix now supports a real continuation through the
+compiler output. The seed and all eleven follow-up cases passed: **12/12** tasks,
+**19 actual action executions** including the seed, and **25 fresh JSON service
+processes**. The consumer resolves candidate and observation records by the IDs
+returned from the native compiler before selecting an action. It then executes
+the action and checks actual output independently.
+
+The original `development-v1` matrix, adverse timings and 11/11 compiler identity
+mismatches are preserved byte for byte. Its artifact manifest covers 828 files.
+`compiler-continuation-v1` uses the separately preregistered continuation protocol
+and an explicit normal-import overlay under `source_profiles/compiler_identity_v1`.
+All unchanged package modules resolve to the clean pinned base worktree; the
+overlay copies ancestor package initializers and patches one adapter module.
+There are no module stubs, production source edits or provider/model calls.
+
+`DatasetsProgramWorldAdapter.cite_transition` originally chose `query_cid`
+before candidate/prediction/observation identities. Caller inspection found the
+four corresponding `ExecutionTransitionCompiler.compile` calls and an existing
+test that checked only query identity. The isolated patch selects a record's own
+identity from its closed transition schema. It also rejects ambiguous
+unschematized multi-ID citation views. The exact patch is in
+`source_profiles/compiler_identity_v1/source.diff`.
+
+| Source | SHA-256 |
+| --- | --- |
+| Original adapter | `ac947158c66729fd63333cfebf82886a887ac7683e9a515a1f293357104e7788` |
+| Isolated patched adapter | `a10e7c415228070b5fd6ff8e91a19bf75b6dda4ed95cde692b1e8d81f3759703` |
+
+The service's `record` operation persists actual controller-declared execution
+evidence as native transition records. `propose` retrieves those records,
+applies native current-state admission and candidate binding, compiles an
+unadmitted proposal, then retrieves the compiler-selected records by CID from
+the native store. A wrong query CID in the candidate field would fail the
+native record-kind lookup on this path. All seven admitted follow-up proposals
+preserved distinct candidate/observation IDs and caused the selected action to
+execute first. Changed source, state and environment each produced `stale` and
+actual search fallback. Untrusted observation produced `abstain`; the next
+observed replacement supported later consumption.
+
+This continuation measured 17.801740 seconds across its 25 service subprocesses,
+0.366345 seconds in 19 action subprocesses, and 18.297378 seconds across the
+12 complete cases. These costs include separate service startup for proposing
+and recording and are reported as integration overhead, not as a speedup
+comparison with the differently structured original matrix.
+
+The first identity regression attempt produced 20 passes and two failures:
+full candidate mappings hit the pre-existing `rank` guard before citation.
+The exact failing source and logs are retained in `tests/identity-v1/`; an
+unchanged repeat retained complete output after the first display was truncated.
+The final tests explicitly distinguish typed records/minimal public identity
+views from unsupported full candidate mappings. They check six record types,
+missing own IDs, ambiguous IDs, compiler link preservation and the isolated
+source pins: **23/23 passed**, with logs and test source in `tests/identity-v2/`.
+The prediction in the citation test is a typed contract fixture only; no learned
+prediction was executed. The full candidate mapping restriction and ranks
+beyond zero remain unqualified and are not hidden by the passing continuation.
+
+`validate_continuation.py` independently checked original-artifact immutability,
+prerun code hashes, actual imported module hashes, JSON operation receipts,
+fresh service processes, current-binding changes, compiler-selected record IDs,
+raw action outputs and required current execution: **1183/1183 checks passed**.
+There were no failed service/continuation iterations. The results and all actual
+SQLite/block artifacts remain in `runs/compiler-continuation-v1/`.
+
+The JSON operation is documented in `SERVICE.md` and exported with pins in
+`service_operation.json` for an integrated evaluation controller. Its authority
+remains a local evaluation producer declaration, not signed runner evidence or
+a native execution proof. The exact-query index, search policy, dispatcher and
+task checker remain evaluation integration. This increment fixes a demonstrated
+metadata defect and exercises compiler-mediated consumption; it does not show
+learned world-memory benefits, cross-family transfer, production admission or
+token savings. The original exact-retrieval/template parity and full-scope E05
+gap remain unchanged.

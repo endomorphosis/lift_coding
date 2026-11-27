@@ -1,0 +1,402 @@
+"""Prepare a closed caller tree from exact bytes and genuine native ProgramIR.
+
+Native calls remain opaque. Lexical resolution is a separate, pinned native
+operation; neither operation establishes Python import or runtime semantics.
+No target source is imported or executed and no checker or trainer runs here.
+"""
+from __future__ import annotations
+
+import ast
+from collections import Counter
+import hashlib
+import keyword
+import re
+import sys
+
+from . import terminal_source_ir_projection as source_projection
+
+
+SCHEMA = "terminal-call-ir-projection@1"
+MAX_CALLS = 8
+MAX_SOURCE_BYTES = 65536
+MAX_AST_NODES = 128
+AUTHORITY = {**source_projection.AUTHORITY, **{name: False for name in (
+    "runtime_import_resolution_proved", "import_resolution_proved",
+    "caller_composition_proved", "opaque_call_semantics_proved",
+)}}
+
+
+class CallIRProjectionError(ValueError):
+    """The closed source/native/lexical correspondence is not admitted."""
+
+
+def _require(condition, message):
+    if not condition:
+        raise CallIRProjectionError(message)
+
+
+def _wire(value):
+    return source_projection._wire(value)
+
+
+def _same(left, right, message):
+    _require(_wire(left) == _wire(right), message)
+
+
+def _identifier(value):
+    return (type(value) is str and re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", value)
+            is not None and not keyword.iskeyword(value))
+
+
+def _module(path):
+    _require(type(path) is str and path.endswith(".py") and _identifier(path[:-3])
+             and path != "__init__.py", "distinct root Python module paths required")
+    return path[:-3]
+
+
+def _caller(source, caller, callee):
+    decode = source_projection._source_preflight(source, MAX_SOURCE_BYTES)
+    _require(all(32 <= value <= 126 or value in (9, 10) for value in source),
+             "caller requires printable ASCII with LF/tab whitespace")
+    tree = ast.parse(source, filename=caller.path, type_comments=True)
+    _require(sum(1 for _ in ast.walk(tree)) <= MAX_AST_NODES, "caller AST bound exceeded")
+    _require(len(tree.body) == 2 and not tree.type_ignores, "exact import and caller required")
+    imported, function = tree.body
+    _require(isinstance(imported, ast.ImportFrom) and imported.level == 0
+             and imported.module == _module(callee.path) and len(imported.names) == 1
+             and imported.names[0].name == callee.function_name
+             and imported.names[0].asname is None, "exact unaliased callee import required")
+    _require(isinstance(function, ast.FunctionDef) and function.name == caller.function_name
+             and function.name not in {callee.function_name, caller.parameter} and not function.decorator_list
+             and function.type_comment is None and not getattr(function, "type_params", []),
+             "single synchronous unshadowed caller required")
+    args = function.args
+    _require(len(args.args) == 1 and not args.posonlyargs and not args.kwonlyargs
+             and args.vararg is None and args.kwarg is None and not args.defaults
+             and not args.kw_defaults, "one positional caller parameter required")
+    parameter = args.args[0]
+    _require(parameter.arg == caller.parameter and parameter.arg != callee.function_name
+             and parameter.type_comment is None and isinstance(parameter.annotation, ast.Name)
+             and parameter.annotation.id == "int" and isinstance(function.returns, ast.Name)
+             and function.returns.id == "int", "exact int annotations and unshadowed parameter required")
+    _require(len(function.body) == 1 and isinstance(function.body[0], ast.Return),
+             "one return statement required")
+    statement = function.body[0]
+    calls, node = [], statement.value
+    while isinstance(node, ast.Call):
+        _require(len(calls) < MAX_CALLS and isinstance(node.func, ast.Name)
+                 and node.func.id == callee.function_name and len(node.args) == 1
+                 and not node.keywords and not isinstance(node.args[0], ast.Starred),
+                 "bounded unary positional imported-call chain required")
+        calls.append(node)
+        node = node.args[0]
+    _require(1 <= len(calls) <= MAX_CALLS and isinstance(node, ast.Name)
+             and node.id == caller.parameter, "call chain must end at caller parameter")
+    syntax = {"kind": "parameter"}
+    for _ in calls:
+        syntax = {"kind": "call", "argument": syntax}
+    return tree, imported, function, statement, calls, node, syntax, decode
+
+
+def _position(source, node):
+    offsets = [0]
+    for line in source.splitlines(keepends=True):
+        offsets.append(offsets[-1] + len(line))
+    return {"start_byte": offsets[node.lineno - 1] + node.col_offset,
+        "end_byte": offsets[node.end_lineno - 1] + node.end_col_offset,
+        "start_line": node.lineno, "start_column": node.col_offset + 1,
+        "end_line": node.end_lineno, "end_column": max(1, node.end_col_offset)}
+
+
+def _lexical_position(source, node):
+    result = _position(source, node)
+    result["start_column"] -= 1
+    return result
+
+
+def _native(adapter, source, caller, callee, revision, parsed, program_module):
+    tree, imported, function, statement, calls, leaf, _, _ = parsed
+    _require(adapter.status.value == "success" and adapter.program is not None
+             and adapter.document is not None and not adapter.unsupported_constructs
+             and not adapter.diagnostics and adapter.evidence is None,
+             "complete native caller compilation required")
+    program = adapter.program.to_dict()
+    replayed = program_module.ProgramIR.from_dict(program)
+    _same(replayed.to_dict(), program, "native ProgramIR normalization differs")
+    _require(len(program["sources"]) == 1 and len(program["symbols"]) == 2
+             and len(program["functions"]) == 1 and len(program["commands"]) == 1
+             and len(program["expressions"]) == len(calls) + 1
+             and len(program["spans"]) == len(calls) + 5
+             and not program["global_symbol_ids"], "native caller inventory differs")
+    ref = program["sources"][0]
+    ref_id = "source:" + caller.path
+    _same(ref, {"container_sha256": "", "container_uri": "", "content_cid": "",
+        "content_sha256": hashlib.sha256(source).hexdigest(), "license_expression": "",
+        "metadata": {"byte_length": len(source), "language": "python", "path": caller.path},
+        "ref_id": ref_id, "review_status": "unreviewed", "source_id": caller.path,
+        "source_revision": revision, "source_uri": "file:///" + caller.path},
+        "native caller source identity differs")
+    _same(program["metadata"], {"language": "python", "path": caller.path,
+        "adapter": adapter.interface}, "native caller metadata differs")
+    spans = {row["span_id"]: row for row in program["spans"]}
+    _require(len(spans) == len(program["spans"]), "duplicate native spans")
+    span_positions = []
+    for span in spans.values():
+        _require(span["source_ref_id"] == ref_id, "foreign native span source")
+        span_positions.append(_wire({key: span[key] for key in _position(source, function)}))
+    expected_nodes = [imported, function, function.args.args[0], statement, *calls, leaf]
+    _require(Counter(span_positions) == Counter(_wire(_position(source, node)) for node in expected_nodes),
+             "native span inventory differs from original source")
+
+    def mapped(row, node):
+        _same(row["source_ref_ids"], [ref_id], "native source binding differs")
+        _require(len(row["span_ids"]) == 1 and row["span_ids"][0] in spans,
+                 "native span binding differs")
+        span = spans[row["span_ids"][0]]
+        _same({key: span[key] for key in _position(source, node)}, _position(source, node),
+              "native bound byte span differs")
+
+    fn = program["functions"][0]
+    mapped(fn, function)
+    _require(fn["name"] == caller.function_name and fn["return_type"] == "int"
+             and len(fn["parameter_symbol_ids"]) == 1 and fn["result_symbol_id"]
+             and not fn["local_symbol_ids"] and not fn["exception_symbol_ids"]
+             and not fn["declared_exceptions"] and fn["purity"] == "pure",
+             "native function shape differs")
+    symbols = {row["symbol_id"]: row for row in program["symbols"]}
+    parameter_id, result_id = fn["parameter_symbol_ids"][0], fn["result_symbol_id"]
+    _require(parameter_id != result_id and set(symbols) == {parameter_id, result_id},
+             "native symbol ownership differs")
+    for symbol_id, name, kind, node in ((parameter_id, caller.parameter, "parameter", function.args.args[0]),
+                                      (result_id, "result", "result", function)):
+        symbol = symbols[symbol_id]
+        mapped(symbol, node)
+        _require(symbol["name"] == name and symbol["kind"] == kind
+                 and symbol["type_ref"] == "int" and not symbol["attributes"],
+                 "native parameter/result binding differs")
+    _same(fn["effects"], program_module.EffectSummary(reads=(parameter_id,)).to_dict(),
+          "native function effects differ; no purity proof is inferred")
+    cfg = fn["cfg"]
+    _require(len(cfg["blocks"]) == 1 and not cfg["edges"]
+             and not cfg["exceptional_exit_block_ids"], "native CFG shape differs")
+    block = cfg["blocks"][0]
+    mapped(block, function)
+    _same(cfg["normal_exit_block_ids"], [block["block_id"]], "native CFG exit differs")
+    _require(cfg["entry_block_id"] == block["block_id"], "native CFG entry differs")
+    command = program["commands"][0]
+    mapped(command, statement)
+    _same(block["command_ids"], [command["command_id"]], "native command ownership differs")
+    _require(command["kind"] == "return" and len(command["expression_ids"]) == 1
+             and not command["target_symbol_ids"] and not command["attributes"]
+             and not command["undefined_behavior"], "native RETURN shape differs")
+    _same(command["evaluation_order"], command["expression_ids"], "native RETURN order differs")
+    _same(command["effects"], program_module.EffectSummary().to_dict(), "native RETURN effects differ")
+    expressions = {row["expression_id"]: row for row in program["expressions"]}
+    _require(len(expressions) == len(program["expressions"]), "duplicate native expressions")
+    used = set()
+
+    def walk(expression_id, node, depth=0):
+        _require(expression_id in expressions and expression_id not in used and depth <= MAX_CALLS,
+                 "native expression closure differs")
+        used.add(expression_id)
+        row = expressions[expression_id]
+        mapped(row, node)
+        _require(row["type_ref"] == "any", "native opaque expression type was changed")
+        if isinstance(node, ast.Name):
+            _require(row["kind"] == "symbol" and not row["operand_ids"]
+                     and not row["evaluation_order"] and not row["operator"]
+                     and not row["attributes"], "native parameter expression differs")
+            _same(row["symbol_ids"], [parameter_id], "native leaf parameter differs")
+            return {"kind": "parameter"}
+        _require(row["kind"] == "call" and row["operator"] == callee.function_name
+                 and not row["symbol_ids"] and len(row["operand_ids"]) == 1,
+                 "native opaque CALL differs")
+        _same(row["attributes"], {"opaque": True, "callee": callee.function_name},
+              "native call opacity differs")
+        _same(row["evaluation_order"], row["operand_ids"], "native call argument order differs")
+        return {"kind": "call", "argument": walk(row["operand_ids"][0], node.args[0], depth + 1)}
+
+    syntax = walk(command["expression_ids"][0], statement.value)
+    _require(used == set(expressions), "unused native expressions are not admitted")
+    imports = [row.to_dict() for row in adapter.document.declarations if row.payload.get("import")]
+    _require(len(imports) == 1, "native import declaration inventory differs")
+    declaration = imports[0]
+    mapped(declaration, imported)
+    _require(declaration["kind"] == "module" and declaration["name"] == _module(callee.path)
+             + "." + callee.function_name and not declaration["depends_on"]
+             and not declaration["extensions"], "native import declaration differs")
+    _same(declaration["payload"], {"import": True, "language": "python"},
+          "native import payload differs")
+    return program, syntax
+
+
+def _lexical(sources, caller, callee, head, parsed, frontend, resolver, content):
+    revision = "snapshot:" + head.snapshot_cid
+    extractor = frontend.PythonASTExtractor(max_source_bytes=MAX_SOURCE_BYTES,
+        max_ast_nodes=MAX_AST_NODES, max_ast_depth=32)
+    records = {path: extractor.extract(raw, path=path, repository_id=head.repository_id,
+        revision=revision, repository_tree_cid=head.snapshot_cid, module_name=_module(path))
+        for path, raw in sorted(sources.items())}
+    for path, record in records.items():
+        _same(record.provenance.to_dict(), {"source_cid": content.cid_for_bytes(sources[path]),
+            "path": path, "repository_id": head.repository_id, "revision": revision,
+            "repository_tree_cid": head.snapshot_cid}, "native AST provenance differs")
+        _require(record.module.name == _module(path) and not record.unsupported
+                 and not record.diagnostics, "native AST extraction is incomplete")
+    composition = resolver.RepositoryComposition.from_mapping({head.repository_id: revision},
+        {_module(path): head.repository_id for path in sources})
+    owner = resolver.SymbolResolver(composition, tuple(records.values()), max_reexport_depth=8)
+    target_record, caller_record = records[callee.path], records[caller.path]
+    targets = [symbol for symbol in target_record.symbols if symbol.name == callee.function_name
+               and symbol.scope_id == target_record.module.scope_id and symbol.kind == "function"]
+    _require(len(targets) == 1 and len(caller_record.imports) == 1
+             and len(caller_record.calls) == len(parsed[4]), "native lexical inventory differs")
+    _require(targets[0].qualified_name == _module(callee.path) + "." + callee.function_name,
+             "native lexical callee name differs")
+    _same(targets[0].span.to_dict(), _lexical_position(sources[callee.path],
+        ast.parse(sources[callee.path], type_comments=True).body[0]), "native lexical callee span differs")
+    caller_symbols = [symbol for symbol in caller_record.symbols
+        if symbol.name == caller.function_name and symbol.kind == "function"
+        and symbol.scope_id == caller_record.module.scope_id]
+    _require(len(caller_symbols) == 1, "native lexical caller declaration differs")
+    _same(caller_symbols[0].span.to_dict(), _lexical_position(sources[caller.path], parsed[2]),
+          "native lexical caller span differs")
+    scopes = [scope for scope in caller_record.scopes if scope.kind == "function"
+        and scope.owner_symbol_id == caller_symbols[0].symbol_id
+        and scope.parent_scope_id == caller_record.module.scope_id]
+    _require(len(scopes) == 1, "native lexical caller scope differs")
+    target = {"repository_id": head.repository_id, "revision": revision,
+        "module": _module(callee.path), "record_cid": target_record.cid,
+        "symbol_id": targets[0].symbol_id, "qualified_name": targets[0].qualified_name}
+
+    def definite(result):
+        _require(result.status == resolver.STATUS_DEFINITE and len(result.candidates) == 1
+                 and result.is_optional is False, "unique definite native lexical target required")
+        _same(result.candidates[0].to_dict(), target, "native lexical target differs from exact callee")
+
+    imported = caller_record.imports[0]
+    _require(imported.module == _module(callee.path) and imported.imported_name == callee.function_name
+             and imported.local_name == callee.function_name and imported.kind == "symbol"
+             and imported.scope_id == caller_record.module.scope_id and not imported.is_type_only,
+             "native lexical import binding differs")
+    _same(imported.span.to_dict(), _lexical_position(sources[caller.path], parsed[1]),
+          "native lexical import span differs")
+    import_edge = owner.resolve_import(caller_record, imported)
+    definite(import_edge.resolution)
+    references = {row.reference_id: row for row in caller_record.references}
+    call_bindings = []
+    expected_spans = Counter(_wire(_lexical_position(sources[caller.path], node)) for node in parsed[4])
+    source_calls = {_wire(_lexical_position(sources[caller.path], node)): node for node in parsed[4]}
+    actual_spans = Counter()
+    for call in caller_record.calls:
+        _require(call.kind == "direct" and call.callee_name == callee.function_name
+                 and call.argument_count == 1 and not call.named_argument_names and not call.is_awaited
+                 and call.callee_reference_id in references and call.scope_id == scopes[0].scope_id,
+                 "native lexical call differs")
+        span = _wire(call.span.to_dict())
+        _require(span in source_calls, "native lexical call byte span differs")
+        actual_spans[span] += 1
+        reference = references[call.callee_reference_id]
+        _require(reference.name == callee.function_name and reference.context == "call"
+                 and reference.scope_id == call.scope_id and not reference.is_qualified,
+                 "native lexical call reference differs")
+        _same(reference.span.to_dict(), _lexical_position(sources[caller.path], source_calls[span].func),
+              "native lexical callee-reference span differs")
+        result = owner.resolve_reference(caller_record, reference)
+        definite(result)
+        call_bindings.append({"call": call.to_dict(), "reference": reference.to_dict(),
+            "resolution": result.to_dict(), "target_path": callee.path,
+            "target_source_cid": target_record.provenance.source_cid,
+            "runtime_import_resolution_proved": False})
+    _require(expected_spans == actual_spans, "native lexical call spans differ")
+    bindings = {"schema": "terminal-call-lexical-bindings@1", "composition": composition.to_dict(),
+        "composition_cid": composition.cid, "ast_records": {path: row.to_dict() for path, row in records.items()},
+        "ast_record_cids": {path: row.cid for path, row in records.items()},
+        "import_edge": import_edge.to_dict(), "call_bindings": call_bindings,
+        "target": {**target, "path": callee.path, "source_cid": target_record.provenance.source_cid},
+        "scope": "native_definite_lexical_resolution_over_exact_supplied_two_source_records",
+        "runtime_import_resolution_proved": False, "source_origin_proved": False}
+    edges = [{"kind": "import", "source_path": caller.path, "target_path": callee.path,
+        "witness": import_edge.to_dict(), "runtime_import_resolution_proved": False}]
+    edges.extend({"kind": "call", "source_path": caller.path, "target_path": callee.path,
+                  "witness": row, "runtime_import_resolution_proved": False} for row in call_bindings)
+    return bindings, edges
+
+
+@source_projection._without_metadata
+def build_call_ir_projection(*, sources: dict[str, bytes], callee_contract: dict,
+                             caller_contract: dict, head: dict) -> dict:
+    """Bind 1..8 native opaque unary calls to one closed integer callee model."""
+    from ipfs_datasets_py.duckdb_control import codebase_catalog
+    from ipfs_datasets_py.logic.software_contracts import (
+        ast_ir, codebase_integer_profile as integer, content, python_frontend, resolver,
+    )
+    from ipfs_datasets_py.logic.software_verification import codebase_source_adapters, program
+    from . import terminal_revision_metadata as custody
+
+    _require(type(sources) is dict and len(sources) == 2, "exact two-source mapping required")
+    for path, source in sources.items():
+        _module(path)
+        _require(type(source) is bytes and 0 < len(source) <= MAX_SOURCE_BYTES,
+                 "bounded exact source bytes required")
+    _require(all(type(value) is dict for value in (callee_contract, caller_contract, head)),
+             "exact native declaration dictionaries required")
+    input_wire = _wire({"source_texts": {path: raw.decode("ascii") for path, raw in sorted(sources.items())},
+        "callee_contract": callee_contract, "caller_contract": caller_contract, "head": head})
+    callee = integer.IntegerOffsetContract.from_dict(callee_contract)
+    caller = integer.IntegerOffsetContract.from_dict(caller_contract)
+    bound_head = codebase_catalog.CodebaseHead.from_dict(head)
+    _same(callee.to_dict(), callee_contract, "callee contract normalization differs")
+    _same(caller.to_dict(), caller_contract, "caller contract normalization differs")
+    _same(bound_head.to_dict(), head, "head normalization differs")
+    _require(callee.path != caller.path and set(sources) == {callee.path, caller.path},
+             "contracts must own the exact two distinct source paths")
+    for name in (callee.function_name, callee.parameter, caller.function_name, caller.parameter):
+        _require(_identifier(name), "canonical ASCII Python identifiers required")
+    _require(callee.function_name != "int" and callee.function_name != callee.parameter,
+             "callee function must not shadow int annotations or its own parameter")
+    modules = (sys.modules[__name__], source_projection, codebase_catalog, integer, content,
+               ast_ir, python_frontend, resolver, codebase_source_adapters, program)
+    with custody._producer(modules) as (producer, unchanged):
+        parsed = _caller(sources[caller.path], caller, callee)
+        selected = source_projection.build_source_ir_projection(source=sources[callee.path],
+            contract=callee.to_dict(), head=bound_head.to_dict())
+        revision = "snapshot:" + bound_head.snapshot_cid
+        adapted = codebase_source_adapters.adapt_source_to_software_verification(
+            sources[caller.path].decode("ascii"), path=caller.path, language="python", revision=revision,
+            max_source_bytes=MAX_SOURCE_BYTES, include_supervisor_evidence=False, preserve_type_annotations=True)
+        native_program, native_syntax = _native(adapted, sources[caller.path], caller, callee,
+                                               revision, parsed, program)
+        _same(parsed[6], native_syntax, "native/source call trees differ")
+        lexical_bindings, edges = _lexical(sources, caller, callee, bound_head, parsed,
+                                          python_frontend, resolver, content)
+        body = {"schema": SCHEMA, "head": bound_head.to_dict(), "callee_contract": callee.to_dict(),
+            "caller_contract": caller.to_dict(), "source_texts": {path: raw.decode("ascii") for path, raw in sorted(sources.items())},
+            "sources": [{"path": path, "bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest(),
+                         "cid": content.cid_for_bytes(raw)} for path, raw in sorted(sources.items())],
+            "callee_projection": selected, "caller_native_program": native_program,
+            "caller_compilation": adapted.to_dict(), "source_call_syntax": parsed[6],
+            "native_call_syntax": native_syntax, "caller_source_ast": ast.dump(parsed[0], include_attributes=True),
+            "caller_source_decode_check": parsed[7], "call_count": len(parsed[4]),
+            "actual_offset": selected["compiled"]["body_offset"] * len(parsed[4]),
+            "requested_offset": caller.offset, "lexical_bindings": lexical_bindings,
+            "dependency_edges": edges, "producer": producer,
+            "assumptions": ["mathematical integers; declared annotations do not enforce Python input types",
+                "opaque_call_model_assumption: each selected opaque CALL denotes the selected callee integer model",
+                "definite lexical resolution does not establish Python imports, loaders, rebinding, exceptions, or execution",
+                "int annotations are retained syntax; builtin annotation binding and annotation evaluation are not proved",
+                "caller AST parser and native frontend correctness are not proved"],
+            "opaque_call_model_assumption": True,
+            "scope": "closed_two_source_native_caller_tree_and_definite_lexical_preparation",
+            "current_head_status": "caller_supplied_typed_identity_only;catalog_not_opened",
+            "producer_loaded_code_attested": False, "producer_transitive_dependency_closure_attested": False,
+            "training_steps": 0, "checker_invocations": 0, **AUTHORITY}
+        _require(input_wire == _wire({"source_texts": {path: raw.decode("ascii") for path, raw in sorted(sources.items())},
+            "callee_contract": callee_contract, "caller_contract": caller_contract, "head": head}),
+            "caller input declarations changed during projection")
+        unchanged()
+        result = {**body, "projection_id": content.cid_for_structured(body)}
+        import json
+        result = json.loads(_wire(result))
+        unchanged()
+        return result
