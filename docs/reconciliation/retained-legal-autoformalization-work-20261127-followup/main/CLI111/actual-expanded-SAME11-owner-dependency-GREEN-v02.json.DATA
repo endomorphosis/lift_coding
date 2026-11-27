@@ -1,0 +1,31 @@
+{
+  "error_details": [],
+  "errors": 0,
+  "failure_details": [],
+  "failures": 0,
+  "forbidden_effects": [],
+  "qualification": {
+    "Native": false,
+    "SDK": false,
+    "SQL": false,
+    "Source": false,
+    "legal_admission": false,
+    "live_RPC": false,
+    "model": false,
+    "normal_package": false,
+    "private_engineering": true
+  },
+  "raw_unittest_output": "test_changed_turn_never_adopts_the_new_owner_handle (builtins.OwnerDependencyReadTests.test_changed_turn_never_adopts_the_new_owner_handle) ... ok\ntest_cli_exit_dispositions_and_lost_output_never_mutate_or_replay (builtins.OwnerDependencyReadTests.test_cli_exit_dispositions_and_lost_output_never_mutate_or_replay) ... ok\ntest_exact_observed_inprogress_owner_turn_is_a_local_wait (builtins.OwnerDependencyReadTests.test_exact_observed_inprogress_owner_turn_is_a_local_wait) ... ok\ntest_invalid_owner_bindings_refuse_before_any_probe (builtins.OwnerDependencyReadTests.test_invalid_owner_bindings_refuse_before_any_probe) ... ok\ntest_observation_timeouts_never_prove_owner_stopped_or_retry_safe (builtins.OwnerDependencyReadTests.test_observation_timeouts_never_prove_owner_stopped_or_retry_safe) ... ok\ntest_terminal_turns_require_result_reconciliation_not_completion (builtins.OwnerDependencyReadTests.test_terminal_turns_require_result_reconciliation_not_completion) ... ok\ntest_unhashable_or_nonstr_observation_state_stays_unknown (builtins.OwnerDependencyReadTests.test_unhashable_or_nonstr_observation_state_stays_unknown) ... ok\ntest_inprogress_turn_with_nonactive_thread_snapshot_remains_unknown (builtins.OwnerDependencyAdversarialTests.test_inprogress_turn_with_nonactive_thread_snapshot_remains_unknown) ... ok\ntest_malformed_or_elevated_reader_observation_cannot_become_owner_state (builtins.OwnerDependencyAdversarialTests.test_malformed_or_elevated_reader_observation_cannot_become_owner_state) ... ok\ntest_partial_or_ambiguous_metadata_cannot_prove_an_owner_turn_live_or_stopped (builtins.OwnerDependencyAdversarialTests.test_partial_or_ambiguous_metadata_cannot_prove_an_owner_turn_live_or_stopped) ... ok\ntest_thread_and_snapshot_identity_mismatches_never_rebind_the_owner (builtins.OwnerDependencyAdversarialTests.test_thread_and_snapshot_identity_mismatches_never_rebind_the_owner) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 0.014s\n\nOK\n",
+  "schema": "private-owner-dependency-read-only-RPC-stdlib-fixture/v1",
+  "scope": "Exact owner AST functions and actual existing RPC parser plus fictional transport/explicit malformed metadata; no live socket or validator substitution",
+  "seconds": 0.01366286352276802,
+  "skipped": 0,
+  "source_bytes": 64834,
+  "source_path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/owner-dependency-wait-private-v01/owner.dependency-wait.after-v02.py.DATA",
+  "source_sha256": "c2e0ef8bff41d38396f407c304e4b103304170811837c9b6d130d8ce5013d513",
+  "successful": true,
+  "test_bytes": 102266,
+  "test_path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/owner-dependency-wait-private-v01/owning-test.owner-wait.after-v02.py.DATA",
+  "test_sha256": "815bab014340e41d8bd963d105e4e03d5ae3ef80f54f0322a9cdbc432dd7ec54",
+  "tests_run": 11
+}

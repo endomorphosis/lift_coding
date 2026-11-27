@@ -1,0 +1,31 @@
+{
+  "error_details": [],
+  "errors": 0,
+  "failure_details": [],
+  "failures": 0,
+  "forbidden_effects": [],
+  "qualification": {
+    "Native": false,
+    "SDK": false,
+    "SQL": false,
+    "Source": false,
+    "legal_admission": false,
+    "live_RPC": false,
+    "model": false,
+    "normal_package": false,
+    "private_engineering": true
+  },
+  "raw_unittest_output": "test_cli_failure_and_stdout_loss_never_send (builtins.ManifestHandoffRecoveryTests.test_cli_failure_and_stdout_loss_never_send) ... ok\ntest_cli_routes_to_manifest_reader_without_transport_or_wrapper (builtins.ManifestHandoffRecoveryTests.test_cli_routes_to_manifest_reader_without_transport_or_wrapper) ... ok\ntest_failed_alias_leaves_namespace_and_receipts_unchanged (builtins.ManifestHandoffRecoveryTests.test_failed_alias_leaves_namespace_and_receipts_unchanged) ... ok\ntest_manifest_pin_and_target_pin_changes_refuse (builtins.ManifestHandoffRecoveryTests.test_manifest_pin_and_target_pin_changes_refuse) ... ok\ntest_manifest_shape_utf8_nonfinite_and_row_contract_refuse (builtins.ManifestHandoffRecoveryTests.test_manifest_shape_utf8_nonfinite_and_row_contract_refuse) ... ok\ntest_payload_claims_do_not_become_reader_authority (builtins.ManifestHandoffRecoveryTests.test_payload_claims_do_not_become_reader_authority) ... ok\ntest_pinned_manifest_recovers_exact_missing_leaf_reference (builtins.ManifestHandoffRecoveryTests.test_pinned_manifest_recovers_exact_missing_leaf_reference) ... ok\ntest_request_types_and_budgets_refuse_before_any_file_read (builtins.ManifestHandoffRecoveryTests.test_request_types_and_budgets_refuse_before_any_file_read) ... ok\ntest_symlink_hardlink_and_nonprivate_root_refuse (builtins.ManifestHandoffRecoveryTests.test_symlink_hardlink_and_nonprivate_root_refuse) ... ok\ntest_combined_byte_budget_refuses_before_touching_target (builtins.ManifestAdversarialRecoveryTests.test_combined_byte_budget_refuses_before_touching_target) ... ok\ntest_duplicate_json_keys_at_each_manifest_level_are_refused (builtins.ManifestAdversarialRecoveryTests.test_duplicate_json_keys_at_each_manifest_level_are_refused) ... ok\ntest_missing_or_invalid_selected_alias_never_falls_back_to_other_artifacts (builtins.ManifestAdversarialRecoveryTests.test_missing_or_invalid_selected_alias_never_falls_back_to_other_artifacts) ... ok\ntest_traversal_absolute_and_self_target_never_open_an_outside_artifact (builtins.ManifestAdversarialRecoveryTests.test_traversal_absolute_and_self_target_never_open_an_outside_artifact) ... ok\n\n----------------------------------------------------------------------\nRan 13 tests in 0.015s\n\nOK\n",
+  "schema": "private-real-file-manifest-handoff-stdlib-fixture/v1",
+  "scope": "Exact source AST functions + actual stdlib FD readers and fictional private files; no validator substitute",
+  "seconds": 0.014806062914431095,
+  "skipped": 0,
+  "source_bytes": 58199,
+  "source_path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/openai_codex_cli_integration.manifest-recovery.after.py.DATA",
+  "source_sha256": "b39144457d813e1846362a54a638432b9406803a37fe94ccde4b9b93a33b3134",
+  "successful": true,
+  "test_bytes": 87543,
+  "test_path": "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/test_codex_thread_handoff.manifest-recovery.after.py.DATA",
+  "test_sha256": "eb58b8c570c64c1b6e44bfc46f80174a592e3eb8937dab91626a9c90a3ecf585",
+  "tests_run": 13
+}

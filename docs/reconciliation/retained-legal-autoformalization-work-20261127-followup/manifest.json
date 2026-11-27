@@ -1,8 +1,8 @@
 {
   "archived_candidates_adopted": false,
   "exceptions": {},
-  "new_payload_bytes": 3657348,
-  "new_payload_count": 221,
+  "new_payload_bytes": 3722396,
+  "new_payload_count": 225,
   "pending_title10": {
     "archive": "phase2/P2-official-review-packet-baseline-private-Bp6THc6a/normal-local/title10/title10-official-review-packet.json.DATA",
     "bytes": 196612,
@@ -129,6 +129,20 @@
       "original_mode": "0o400",
       "sha256": "19a92e3adc5591ca4965048ecf3151a94937b104066919315cb73d8f998ef017"
     },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/actual-same13-manifest-recovery-GREEN-v01.json": {
+      "archive": "main/CLI100/actual-same13-manifest-recovery-GREEN-v01.json.DATA",
+      "bytes": 3465,
+      "git_blob": "be3e5d2f9ff2dba0984d9109506a3df3afc65898",
+      "original_mode": "0o400",
+      "sha256": "be37dfe382f6fb98c513114adb366b3ff59c5f010ea83e51901c97232304f4b5"
+    },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/owner-dependency-wait-private-v01/actual-expanded-SAME11-owner-dependency-GREEN-v02.json": {
+      "archive": "main/CLI111/actual-expanded-SAME11-owner-dependency-GREEN-v02.json.DATA",
+      "bytes": 3314,
+      "git_blob": "9cbe443e6506d6244a21a973c5a9eefbba5d941c",
+      "original_mode": "0o400",
+      "sha256": "f6caf33b032c5701bc482257a58a544fc630ac0b0bcd0ab0b5257a1b7866da21"
+    },
     "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/owner-dependency-wait-private-v01/sealed-existing-owner-dependency-task-local-wait-two-file-private-v02.json": {
       "archive": "main/CLI111/sealed-existing-owner-dependency-task-local-wait-two-file-private-v02.json.DATA",
       "bytes": 15577,
@@ -136,12 +150,26 @@
       "original_mode": "0o400",
       "sha256": "5ee7c95e1b688a881c10d1417943f5d6fc4fc9c9db152511e621555b1aa5d8ea"
     },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/owner-dependency-wait-private-v01/static-retention-and-independent111-roster-v01.json": {
+      "archive": "main/CLI111/static-retention-and-independent111-roster-v01.json.DATA",
+      "bytes": 44658,
+      "git_blob": "93a9464ef3b43fe458d127efdb8efc275bff6874",
+      "original_mode": "0o400",
+      "sha256": "effc80b48f608667a109727384402daac6c1d2a4a46695188db4eb56f685da38"
+    },
     "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/sealed-existing-CLI-manifest-handoff-recovery-two-file-private-v01.json": {
       "archive": "main/CLI100/sealed-existing-CLI-manifest-handoff-recovery-two-file-private-v01.json.DATA",
       "bytes": 12805,
       "git_blob": "8c30e1f76233f3aa32c7773b69ea863b0e06a307",
       "original_mode": "0o400",
       "sha256": "a8d0d450e56472944891ed59cf4485f2c84a3c486d040d5d17b1c08fc4d20bdb"
+    },
+    "/tmp/Main-board-stall-evidence-refresh-private-v01/manifest-handoff-recovery-private-v01/static-retention-and-independent100-roster-v01.json": {
+      "archive": "main/CLI100/static-retention-and-independent100-roster-v01.json.DATA",
+      "bytes": 13611,
+      "git_blob": "5e89706b5884c475be89dceb0545b3fef5284ed7",
+      "original_mode": "0o400",
+      "sha256": "89019691ddb07285c58608b0802b3e812234e330d2fec385cc74e548fc9b97cc"
     },
     "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/generic-Lean-current948-report-binding-private-v01/SEALED-private-existing-Lean-JSON-depth-recovery-two-file-v01.json": {
       "archive": "phase1/Main-depth-recovery/SEALED-private-existing-Lean-JSON-depth-recovery-two-file-v01.json.DATA",
