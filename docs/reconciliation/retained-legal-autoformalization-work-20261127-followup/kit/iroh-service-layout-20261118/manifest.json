@@ -1,0 +1,47 @@
+{
+  "comparison": {
+    "exact_historical_blob_found_in_existing_root_archive": false,
+    "exact_historical_blob_found_in_kit_main_history_for_path": false,
+    "published_test_difference": "Only the _config function signature wraps across three lines in the historical copy. The six-byte difference leaves the complete Python AST and token types/spellings unchanged when ignoring non-significant newline tokens.",
+    "root_archive_checked_at": "f928b0599b16dc7f783a8a9572b422e87edf617d",
+    "test_behavior_present_on_main": true
+  },
+  "exclusions": [
+    "Runtime state",
+    "logs",
+    "workspace files",
+    "credential material",
+    "duplicate workflow"
+  ],
+  "historical_file_mtime_utc": "2026-11-18T11:26:41.993220+00:00",
+  "historical_test": {
+    "archive_relative_path": "tests/test_iroh_service.py.DATA",
+    "bytes": 6268,
+    "git_blob": "c0ac8ec11e5e74cc650916676b083da643c47313",
+    "sha256": "3896ed8e1d3442ce5cbea0be567218e41aca8c64436a114f87deaf66b16824c1"
+  },
+  "historical_worktree_head": "f5de9ad4a52b37cc771a0d904b91da746e825553",
+  "kit_test_path": "tests/test_iroh_service.py",
+  "publication_intent": "Inert historical copy in the root reconciliation archive.",
+  "published_test": {
+    "bytes": 6262,
+    "git_blob": "bb6540e53ee855dc073fdb9cf5ffbf45db3ab902",
+    "sha256": "1443d1c16537acea28d8da01217d6635d02214673aa122cb64886cfe707a6d39"
+  },
+  "published_workflow": {
+    "bytes": 6882,
+    "git_blob": "d4ea72a86e7ec34a67226e745143ff82afd444c2",
+    "matches_working_copy": true,
+    "path": ".github/workflows/webrtc_benchmark.yml",
+    "sha256": "efaeca2c90ef317092c05f182be5bf54ecf41e0b0d36212793945567b11e799c"
+  },
+  "purpose": "Preserve the exact retained November 18 Kit working-copy layout as historical test text.",
+  "qualification": "Static identity and provenance check. No test replay or new runtime qualification.",
+  "retained_comparison_evidence": {
+    "bytes": 5791,
+    "filename": "sealed-complete-root86-kit2-no-composition-v02.json",
+    "historical_raw_capture_name": "0658-test_iroh_service.py.DATA",
+    "sha256": "dce14fd121d6dccd6834c8c6aa7b945fd2b7cfc63e1aa258cb183331e2cd5cb7"
+  },
+  "upstream_kit_main_observed": "b15442e490dc39d046a911ea663c73c99ed3c755"
+}

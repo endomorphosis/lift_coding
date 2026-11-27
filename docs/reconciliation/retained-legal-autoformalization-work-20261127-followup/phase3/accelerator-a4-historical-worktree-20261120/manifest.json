@@ -1,0 +1,128 @@
+{
+  "creator_descriptor_reference": {
+    "bytes": 10618,
+    "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/A4-trusted-system-pytest-role-proposal-v02/descriptor-v03.json",
+    "sha256": "4c013e271978afec3220eacf44ce6373e79b5ebaaf0523c0868695857c719871"
+  },
+  "creator_descriptor_status": "PRIVATE_UNINSTALLED_UNRUN pending Root/reviewer; actual Source/CAS/tests remain soleReader.",
+  "current_accelerator_main_observed_for_comparison": "219ba3da0f62f772801d71715e22c506faa21126",
+  "exact_historical_comparison_reference": {
+    "bytes": 4614,
+    "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/qualified-A3-main-private-post-definition-comparison-v01.json",
+    "sha256": "1f421a3055fcc6b8e07b8559ea8bb640062c560364eb27175612b2844a0798d2"
+  },
+  "excluded": [
+    "Local workspace control-plane state, including lock and runtime files",
+    "Environment or personal files",
+    "Other proposals and unrelated source trees"
+  ],
+  "historical_commit": "534a5362996fa4bf4fb453fbc09fe896fea35c7c",
+  "payload_total_bytes": 1180379,
+  "qualification_scope": {
+    "current_Native_or_model_claim": false,
+    "current_source_installation": false,
+    "current_tests_run": false,
+    "execution_authority": false,
+    "existing_creator_descriptor_selected_cases": 30
+  },
+  "role_count": 3,
+  "roles": [
+    {
+      "archived_file_path": "docs/reconciliation/retained-legal-autoformalization-work-20261127-followup/phase3/accelerator-a4-historical-worktree-20261120/ipfs_accelerate_py/agent_supervisor/rescue/repair_candidate_owners.py.DATA",
+      "current_accelerator_tip_blob": "591f5c512f27a74f7009144f59aedc7af8f538bd",
+      "descriptor_exact_duplicate": {
+        "bytes": 499848,
+        "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/A4-trusted-system-pytest-role-proposal-v02/repair_candidate_owners.py.DATA",
+        "sha256": "4cf551d60d620d41d63cd3dca3bf9ab366a340780e2facc980725b5388e08e3e"
+      },
+      "existing_synthetic_contact_literals": 0,
+      "historical_committed_preimage_git_blob": "2e80e48eca79e522c6dbb7ae1de8db7423a473a1",
+      "historical_worktree_bytes": 499848,
+      "historical_worktree_delta": {
+        "lines_added": 599,
+        "lines_removed": 30
+      },
+      "historical_worktree_full9": {
+        "st_ctime_ns": "1795163787916853525",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "68730463",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795163787904115556",
+        "st_nlink": "1",
+        "st_size": "499848",
+        "st_uid": "1000"
+      },
+      "historical_worktree_git_blob": "86a2f3fc591f88b55ad3375fe1d62b535a6fc632",
+      "historical_worktree_sha256": "4cf551d60d620d41d63cd3dca3bf9ab366a340780e2facc980725b5388e08e3e",
+      "source_repo_relative_path": "ipfs_accelerate_py/agent_supervisor/rescue/repair_candidate_owners.py",
+      "strong_secret_pattern_matches": 0
+    },
+    {
+      "archived_file_path": "docs/reconciliation/retained-legal-autoformalization-work-20261127-followup/phase3/accelerator-a4-historical-worktree-20261120/ipfs_accelerate_py/agent_supervisor/rescue/repair_validation_worker.py.DATA",
+      "current_accelerator_tip_blob": "3abdeb18b47216703c14f645710dcf99f02c1aca",
+      "descriptor_exact_duplicate": {
+        "bytes": 193595,
+        "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/A4-trusted-system-pytest-role-proposal-v02/repair_validation_worker.py.DATA",
+        "sha256": "d19c7fa791ce500dab9393da6248da6868477bf6b42bf4d02682c2747834ace9"
+      },
+      "existing_synthetic_contact_literals": 1,
+      "historical_committed_preimage_git_blob": "d98d627e10167b7ba9ac5ef4285014bfd174dd7d",
+      "historical_worktree_bytes": 193595,
+      "historical_worktree_delta": {
+        "lines_added": 327,
+        "lines_removed": 34
+      },
+      "historical_worktree_full9": {
+        "st_ctime_ns": "1795163787924853666",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "68731874",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795163787921562184",
+        "st_nlink": "1",
+        "st_size": "193595",
+        "st_uid": "1000"
+      },
+      "historical_worktree_git_blob": "93a973eba0fc410f1df232ba87b20a715f60c095",
+      "historical_worktree_sha256": "d19c7fa791ce500dab9393da6248da6868477bf6b42bf4d02682c2747834ace9",
+      "source_repo_relative_path": "ipfs_accelerate_py/agent_supervisor/rescue/repair_validation_worker.py",
+      "strong_secret_pattern_matches": 0
+    },
+    {
+      "archived_file_path": "docs/reconciliation/retained-legal-autoformalization-work-20261127-followup/phase3/accelerator-a4-historical-worktree-20261120/test/api/test_agent_supervisor_productive_owner_v3.py.DATA",
+      "current_accelerator_tip_blob": "89907c9bba510ee36f1174178e10753cb33646e4",
+      "descriptor_exact_duplicate": {
+        "bytes": 486936,
+        "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/A4-trusted-system-pytest-role-proposal-v02/test_agent_supervisor_productive_owner_v3.public-policy-v03.py.DATA",
+        "sha256": "c9af5e630b7c89bb47aca8f13be3f91dbdd302673e696a9c30c4ab86d66895df"
+      },
+      "existing_synthetic_contact_literals": 1,
+      "historical_committed_preimage_git_blob": "08156c25d6490a5875be3f29e857994acdf5577c",
+      "historical_worktree_bytes": 486936,
+      "historical_worktree_delta": {
+        "lines_added": 688,
+        "lines_removed": 13
+      },
+      "historical_worktree_full9": {
+        "st_ctime_ns": "1795163787931853790",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "68731723",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795163787928751431",
+        "st_nlink": "1",
+        "st_size": "486936",
+        "st_uid": "1000"
+      },
+      "historical_worktree_git_blob": "835cf493b476cd2e965782d275d63904316a8eb4",
+      "historical_worktree_sha256": "c9af5e630b7c89bb47aca8f13be3f91dbdd302673e696a9c30c4ab86d66895df",
+      "source_repo_relative_path": "test/api/test_agent_supervisor_productive_owner_v3.py",
+      "strong_secret_pattern_matches": 0
+    }
+  ],
+  "schema": "retained-accelerator-a4-historical-worktree-three-source-payloads/v1",
+  "scope": "Inert archival data for exact authored historical Accelerator A4 physical definition realization and trusted system Python/pytest descriptor controls.",
+  "source_worktree": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/ipfs_accelerate",
+  "source_worktree_branch": "qualified-main-epoch"
+}

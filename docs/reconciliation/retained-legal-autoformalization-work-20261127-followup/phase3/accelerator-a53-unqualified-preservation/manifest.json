@@ -1,0 +1,68 @@
+{
+  "candidate": {
+    "commit": "a53b173781999cdde0faaccf245ea5b4d404f730",
+    "parent": "9df264ec1c624c11e747eacf4e3bdd53e1d51846",
+    "public_preservation_origin": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+    "public_preservation_ref": "refs/heads/preserve/unqualified-capacity-a53b-20261109",
+    "subject": "Unqualified source-only LegalIR capacity candidate",
+    "tree": "3ca94ad899e7b4be2738deaca886787326e7a4ac"
+  },
+  "current_qualification": false,
+  "exact_role_rows": [
+    {
+      "candidate_blob": "5d9380a4fb4a41a2242a5fe02f776a8406350c0d",
+      "logical_path": "ipfs_accelerate_py/agent_supervisor/rescue/original_embedded_observation_owner.py",
+      "old_blob": "8c5def6d8e834f8e2d93ab310cbf0a92dfd0cc7b",
+      "original_git_mode": "100644",
+      "payload": {
+        "bytes": 78748,
+        "path": "/tmp/legal-ir-a53-public-main-inert-preservation-XLY7jIii/original_embedded_observation_owner.py.DATA",
+        "sha256": "a13d1ec67c1e0dc3b5fe41aefd6e97101940709b059782c23a9e282dadb3e78f"
+      },
+      "proposed_archive_mode": "100644",
+      "reachability": "Live public preservation branch, absent from observed Accelerator and root main Git objects and published Accelerator retained-object indexes"
+    },
+    {
+      "candidate_blob": "08b8eed71b496885d851d45de5975d36d16e5df9",
+      "logical_path": "ipfs_accelerate_py/agent_supervisor/rescue/scientific_executor.py",
+      "old_blob": "a7487f172a0a3e14d76e2cac9ba973725c3dc108",
+      "original_git_mode": "100644",
+      "payload": {
+        "bytes": 226377,
+        "path": "/tmp/legal-ir-a53-public-main-inert-preservation-XLY7jIii/scientific_executor.py.DATA",
+        "sha256": "69871091da4794891283a9be04d92ccfb33e218bcabfba5f4a52ffb3628120ec"
+      },
+      "proposed_archive_mode": "100644",
+      "reachability": "Live public preservation branch, absent from observed Accelerator and root main Git objects and published Accelerator retained-object indexes"
+    }
+  ],
+  "git_mutation": false,
+  "local_static_screen": {
+    "bytes": 3698,
+    "path": "/tmp/legal-ir-a53-public-main-inert-preservation-XLY7jIii/source-only-secret-personal-screen-reviewed.json",
+    "sha256": "95c91123d2dad1665c196c3fe146bf0f9c360d0f506c3a6efaf23bddb6e9d48a"
+  },
+  "mode_only_initializer": {
+    "blob": "fc20f12860e9845251dadfeef798d0400e08bf2f",
+    "existing_root_archive": "docs/reconciliation/retained-legal-autoformalization-work-20261127/tmp-work/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/ipfs_accelerate_py/__init__.py.DATA",
+    "logical_path": "ipfs_accelerate_py/__init__.py",
+    "original_git_mode": "100644",
+    "public_A_main_git_mode": "100755"
+  },
+  "observed_main": {
+    "accelerate": "e55316f48847b17a8b4041a2da30bcaa0ba6eb90",
+    "root": "f928b0599b16dc7f783a8a9572b422e87edf617d"
+  },
+  "preserved_disposition": "Historical unqualified source-only LegalIR capacity candidate retained as inert .py.DATA",
+  "proof": {
+    "A_main_missing_objects": 0,
+    "A_main_object_reachability": 185663,
+    "published_A_tip_and_object_indexes_verified": true,
+    "root_local_blob_bodies_missing": 229,
+    "root_main_object_reachability": 255834,
+    "root_missing_commit_trees": 0
+  },
+  "published": false,
+  "schema": "historical-unqualified-a53-missing-main-evidence-files/v1",
+  "tests_executed": false
+}
